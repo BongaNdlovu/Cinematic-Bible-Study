@@ -1,0 +1,20 @@
+# Accidental browser profiles from verification runs
+.chrome_verify_tmp/
+
+# Manual backup copies
+*.bak
+
+# Source-of-truth uncompressed GLBs (not shipped)
+models/originals/
+models/*.prev.glb
+
+# npm install tree — runtime Three.js is vendored under vendor/three/
+node_modules/
+
+# Pipeline working state
+.img2threejs/
+__pycache__/
+*.pyc
+*.pyo
+.DS_Store
+Thumbs.db

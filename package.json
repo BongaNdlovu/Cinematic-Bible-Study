@@ -1,0 +1,14 @@
+{
+  "name": "nebuchadnezzar-golden-head",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Daniel 2 colossus museum exhibit — local Three.js viewer",
+  "type": "module",
+  "scripts": {
+    "start": "python server.py",
+    "compress": "node tools/compress_models.mjs"
+  },
+  "dependencies": {
+    "three": "0.181.2"
+  }
+}
