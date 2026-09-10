@@ -8,7 +8,7 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
-const ROOT = process.argv[2] || path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+const ROOT = process.argv[2] || path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const MODELS = path.join(ROOT, 'models');
 const ORIGINALS = path.join(MODELS, 'originals');
 const COMPRESSED = path.join(MODELS, 'compressed');
@@ -108,4 +108,5 @@ for (const row of report) {
     row.after && row.before ? `(${((1 - row.after / row.before) * 100).toFixed(1)}% smaller)` : ''
   );
 }
-fs.writeFileSync(path.join(ROOT, 'compression_report.json'), JSON.stringify(report, null, 2));
+fs.mkdirSync(path.join(ROOT, 'qa', 'reports'), { recursive: true });
+fs.writeFileSync(path.join(ROOT, 'qa', 'reports', 'compression_report.json'), JSON.stringify(report, null, 2));

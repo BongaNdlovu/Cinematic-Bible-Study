@@ -27,10 +27,10 @@ Verified in code:
 - **11 sheets** live in `const sheetsData` (study.html:1919), each with `content`, 2 MCQs, full `studyGuide` (trace/christ/now/help/value/ask), and guide intro/end cards.
 - **The gate is only MCQs**: `sheetQuizComplete()` (study.html:5100) → `canAdvancePath()` (study.html:5106) → `updateNextGate()` (study.html:5113). `completeAndAdvance()` (study.html:5218) also persists `daniel_historicist_mastery` and triggers the access panel after sheet 2 (study.html:5231).
 - **"How to study" is display-only**: `renderStudyGuide()` (study.html:4826) renders `studyGuide.trace` as text. Notes are saved to `baNote-<sheetId>` (study.html:5081) but never checked.
-- **Access gate**: `FREE_THROUGH = 2` (journey.js:40), `canAccessSheet()` (journey.js:133), panel DOM study.html:1386–1396 with checkout disabled ("Payments are not live yet"), tester preview via `enableTesterPreview()` (study.html:5010) and `?preview=full` (study.html:5337). Offer copy also on index.html:158–168.
-- **Instruments already instrumented**: Scripture dock (`bible/scripture.js`, KJV + Strong's + `bible/sheet-passages.json`), map (10 epochs / 11 cities / 10 events / 6 routes in `map-data.js`), 3D gallery (23 artifacts in `app.js`), horizon timeline, glossary panel — all embedded in study.html.
+- **Access gate**: `FREE_THROUGH = 2` (`js/shared/journey.js`:40), `canAccessSheet()` (`js/shared/journey.js`:133), panel DOM study.html:1386–1396 with checkout disabled ("Payments are not live yet"), tester preview via `enableTesterPreview()` (study.html:5010) and `?preview=full` (study.html:5337). Offer copy also on index.html:158–168.
+- **Instruments already instrumented**: Scripture dock (`js/study/scripture.js`, KJV + Strong's + `bible/sheet-passages.json`), map (10 epochs / 11 cities / 10 events / 6 routes in `js/map/map-data.js`), 3D gallery (23 artifacts in `js/gallery/app.js`), horizon timeline, glossary panel — all embedded in study.html.
 - **Chrome**: pomodoro dock + weather presets + WeatherAudio + flashlight cursor + zen mode + 3 themes, all default-on surfaces in study.html.
-- **Legacy duplication**: `study-data.js` + `study.js` + `study.css` are an older 8-section study desk, still shipped.
+- **Legacy study desk**: `study-data.js` + `study.js` + `study.css` were an unused 8-section desk and have been deleted.
 - **11 localStorage keys** already exist (journey, mastery, theme, font, notes, bookmarks, scripture story mode, map basemap/key).
 - **server.py** is static-only. No contact channel, no metrics, no email anywhere.
 
@@ -57,7 +57,7 @@ Verified in code:
 | III | 12 | Daniel 10–12 — Michael Stands Up | exists |
 | IV — The Chain | 13 | **NEW — Capstone: Build the Chain** | new sitting |
 
-**Free-sample boundary.** Free = indices 0–3 (method → Wars-over-Daniel → Daniel 1 → Daniel 2 statue). This preserves today's semantic promise ("method, table, statue" free) after inserting sheet 1 — set `FREE_THROUGH = 3` in journey.js:40 and update the offer copy ("the first act is free; the court, visions, and capstone unlock as one connected curriculum").
+**Free-sample boundary.** Free = indices 0–3 (method → Wars-over-Daniel → Daniel 1 → Daniel 2 statue). This preserves today's semantic promise ("method, table, statue" free) after inserting sheet 1 — set `FREE_THROUGH = 3` in `js/shared/journey.js`:40 and update the offer copy ("the first act is free; the court, visions, and capstone unlock as one connected curriculum").
 
 ---
 
@@ -69,7 +69,7 @@ Five checked artifact types, all client-side, all fail-open-with-help (never a d
 1. **`typed-line`** — a sentence the learner writes, validated against accepted model patterns (synonym/regex sets, e.g. the year-day line must express day→year). After 2 failed attempts: show a hint; after 3: reveal a model answer, mark the artifact "assisted," and allow Continue. Attempts and reveals are logged, never hidden.
 2. **`calculation`** — the learner performs the arithmetic in input fields (457 + 483 → A.D. 27; 538 → +1260 → 1798; 2300 − 490 = 1810 → 1844). Integer/date checking with the no-year-zero convention explained inline.
 3. **`ordering`** — click-to-order tiles (metals to kingdoms; the three uprooted horns with dates; the three schools onto their timelines).
-4. **`verse-lookup`** — verified interaction with the Scripture dock: the sheet's load-bearing verses must actually be opened (hook the existing dock events in `bible/scripture.js`), plus one one-line typed observation.
+4. **`verse-lookup`** — verified interaction with the Scripture dock: the sheet's load-bearing verses must actually be opened (hook the existing dock events in `js/study/scripture.js`), plus one one-line typed observation.
 5. **`chain`** (capstone/timeline) — multi-tile assembly + free text, ≥40 words for the chain, ≥25 for the headline task.
 
 ### 5.2 Evidence store: `daniel_historicist_evidence` (new localStorage key)
@@ -82,7 +82,7 @@ Per sheet, one object: active seconds (heartbeat-paused when hidden), scripture 
 - MCQs become **confirmation**; artifacts are **the gate**. Mastery % in the TOC becomes proof-based (proof + first-try quiz, not click-through).
 
 ### 5.4 File architecture (do before content lands)
-`study.html` is 347 KB and holds the sheets inline. Extract once, before adding 5 sheets of content: `sheets-data.js` (all sheet objects), `assessment.js`, `evidence.js`. study.html remains the shell. Decide the fate of legacy `study-data.js` / `study.js` / `study.css` (recommend: retire from the course path in Phase 6).
+`study.html` still holds the sheets inline. Extract once, before adding 5 sheets of content: `js/study/sheets-data.js` (all sheet objects), `assessment.js`, `evidence.js`. study.html remains the shell. Legacy `study-data.js` / `study.js` / `study.css` are already retired.
 
 ## 6. Phase 1 — Hard-gate rollout: proof of work per sheet
 
@@ -186,10 +186,10 @@ Auto-glossary: wrap first-use technical terms (`chathak`, `nitsdaq`, `tamid`, `z
 
 ## 11. Phase 6 — Hygiene, docs, verification
 
-1. Retire legacy study desk files from the course path (`study-data.js`, `study.js`, `study.css`) once the new content lands; update `LEGACY_ID_MAP` (study.html:5292) and gallery cross-links to the new sheet numbering.
+1. Legacy study desk files (`study-data.js`, `study.js`, `study.css`) are already retired; update `LEGACY_ID_MAP` (study.html:5292) and gallery cross-links to the new sheet numbering.
 2. README rewrite: site map, the 4-act course, assessment behavior, receipts/export, updated controls.
 3. **Content QA checklist** (run before shipping): every date cross-checked (605, 539, 457, 27, 31, 34, 538, 1798, 1844; 2,300/490/1,810; 1,260); every Strong's ref verified against `bible/strongs-daniel.json`; every quotation source-verified; weigh-blocks present on all five contested claims; alts present (scripted check); keyboard path tested.
-4. Verification scripts + screenshot proofs for each new sheet, like the existing `tools/verify_*.mjs` pattern.
+4. Verification scripts + screenshot proofs for each new sheet, like the existing `tools/verify/verify_*.mjs` pattern.
 
 ## 12. Sequencing & effort
 

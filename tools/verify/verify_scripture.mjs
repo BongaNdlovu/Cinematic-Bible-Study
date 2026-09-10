@@ -3,7 +3,7 @@ import path from 'path';
 import vm from 'vm';
 import { fileURLToPath } from 'url';
 
-const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 
 function readJson(rel) {
   return JSON.parse(fs.readFileSync(path.join(root, rel), 'utf8'));
@@ -79,7 +79,7 @@ const sandbox = {
   localStorage: { getItem() { return null; }, setItem() {} }
 };
 vm.createContext(sandbox);
-vm.runInContext(fs.readFileSync(path.join(root, 'bible/scripture.js'), 'utf8'), sandbox);
+vm.runInContext(fs.readFileSync(path.join(root, 'js/study/scripture.js'), 'utf8'), sandbox);
 const api = sandbox.window.BAScripture;
 if (!api) fail('BAScripture did not attach');
 
@@ -105,7 +105,7 @@ if (api.findPhrase("the king\u2019s matter", "the king's matter") < 0) fail('fin
 
 const html = fs.readFileSync(path.join(root, 'study.html'), 'utf8');
 if (!html.includes('data-instrument="scripture"')) fail('study.html is missing the Scripture instrument tab');
-if (!html.includes('bible/scripture.js')) fail('study.html does not load bible/scripture.js');
+if (!html.includes('js/study/scripture.js')) fail('study.html does not load js/study/scripture.js');
 if (!html.includes('BAScripture.showSheet')) fail('loadSheet does not ask Scripture to follow the sheet');
 if (html.includes('para-hitch')) fail('sitting copy still has paragraph hitches');
 if (!html.includes('load-bearing')) fail('study.html is missing load-bearing styles');
@@ -183,7 +183,7 @@ if (!/Begin the sitting|hero-primary/.test(home)) fail('homepage is missing the 
 if (!/The Scroll of Daniel/.test(home)) fail('homepage must be titled as The Scroll of Daniel');
 if (!/full-scroll/.test(home)) fail('homepage is missing the full-scroll offer');
 
-const journey = fs.readFileSync(path.join(root, 'journey.js'), 'utf8');
+const journey = fs.readFileSync(path.join(root, 'js/shared/journey.js'), 'utf8');
 if (!journey.includes('canAccessSheet') || !journey.includes('FREE_THROUGH')) {
   fail('journey.js is missing the free-sheet access policy');
 }

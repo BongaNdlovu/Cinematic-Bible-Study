@@ -2,6 +2,8 @@ import { spawn } from 'child_process';
 import fs from 'fs';
 import path from 'path';
 
+fs.mkdirSync(path.join('qa', 'proofs'), { recursive: true });
+
 const CHROME_PATH = [
   process.env.CHROME_PATH,
   'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe',
@@ -116,7 +118,7 @@ try {
   })()`);
   console.log(tileInfo);
   if (tileInfo.count !== 4) throw new Error('expected 4 beast tiles');
-  await client.shot('index_beasts.png');
+  await client.shot('qa/proofs/index_beasts.png');
 
   await client.send('Page.navigate', { url: `${BASE}/gallery.html?asset=lion` });
   await waitForGallery(client, 'Winged Lion');
@@ -130,7 +132,7 @@ try {
     return { cards, visible, active: document.querySelector('.artifact-card-item.active')?.dataset.asset };
   })()`);
   console.log('rail', rail);
-  await client.shot('gallery_lion.png');
+  await client.shot('qa/proofs/gallery_lion.png');
 
   await client.send('Emulation.setDeviceMetricsOverride', {
     width: 390, height: 844, deviceScaleFactor: 1, mobile: true
@@ -149,13 +151,13 @@ try {
     };
   })()`);
   console.log('mobile cam', camInfo);
-  await client.shot('gallery_leopard_mobile.png');
+  await client.shot('qa/proofs/gallery_leopard_mobile.png');
 
   await client.send('Page.navigate', { url: `${BASE}/index.html` });
   await sleep(1200);
   await client.eval(`document.querySelector('.artifact-grid.four')?.scrollIntoView({block:'center'})`);
   await sleep(400);
-  await client.shot('index_beasts_mobile.png');
+  await client.shot('qa/proofs/index_beasts_mobile.png');
 
   client.close();
   console.log('DONE');

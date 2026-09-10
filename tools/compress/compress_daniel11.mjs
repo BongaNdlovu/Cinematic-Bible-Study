@@ -1,33 +1,37 @@
 #!/usr/bin/env node
 /**
- * Compress the four Daniel 8 Meshy GLBs (ram and goat sequence) for the gallery.
+ * Compress Daniel 4 / 11–12 Meshy GLBs: ox-king, Michael, sealed scroll, kings.
  */
 import { spawnSync } from 'child_process';
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
-const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const MODELS = path.join(ROOT, 'models');
 const ORIGINALS = path.join(MODELS, 'originals');
 const DOWNLOADS = path.join(ROOT, '..');
 
 const FILES = [
   {
-    name: 'ram.glb',
-    src: path.join(DOWNLOADS, 'Meshy_AI_Majestic_Mountain_Ram_0909184108_texture.glb'),
+    name: 'ox_king.glb',
+    src: path.join(DOWNLOADS, 'Meshy_AI_Feathered_Hermit_0910120153_texture.glb'),
   },
   {
-    name: 'goat.glb',
-    src: path.join(DOWNLOADS, 'Meshy_AI_Stormhorn_0909184152_texture.glb'),
+    name: 'michael.glb',
+    src: path.join(DOWNLOADS, 'Meshy_AI_Golden_Sovereign_0910123503_texture.glb'),
   },
   {
-    name: 'goat_broken.glb',
-    src: path.join(DOWNLOADS, 'Meshy_AI_Charging_Horned_Goat_0909185001_texture.glb'),
+    name: 'sealed.glb',
+    src: path.join(DOWNLOADS, 'Meshy_AI_Sealed_Ancient_Scroll_0910132546_texture.glb'),
   },
   {
-    name: 'goat_horn.glb',
-    src: path.join(DOWNLOADS, 'Meshy_AI_Horned_Mountain_Fury_0909185022_texture.glb'),
+    name: 'kings.glb',
+    src: path.join(DOWNLOADS, 'Meshy_AI_Daniel_11_Kings_of_N_0910132620_texture.glb'),
+  },
+  {
+    name: 'decree.glb',
+    src: path.join(DOWNLOADS, 'Meshy_AI_The_Royal_Decree_0910161953_texture.glb'),
   },
 ];
 
@@ -98,7 +102,7 @@ for (const item of FILES) {
   report.push({ name: item.name, before, after, ok: true });
 }
 
-console.log('\n=== DANIEL 8 COMPRESSION REPORT ===');
+console.log('\n=== DANIEL 11 COMPRESSION REPORT ===');
 for (const row of report) {
   console.log(
     row.name,
@@ -109,7 +113,7 @@ for (const row of report) {
   );
 }
 
-const failed = report.filter((r) => !r.ok);
-if (failed.length) process.exit(1);
-fs.writeFileSync(path.join(ROOT, 'daniel8_compression_report.json'), JSON.stringify(report, null, 2));
+if (report.some((r) => !r.ok)) process.exit(1);
+fs.mkdirSync(path.join(ROOT, 'qa', 'reports'), { recursive: true });
+fs.writeFileSync(path.join(ROOT, 'qa', 'reports', 'daniel11_compression_report.json'), JSON.stringify(report, null, 2));
 console.log('DONE');

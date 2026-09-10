@@ -22,7 +22,10 @@ __pycache__/
 .DS_Store
 Thumbs.db
 
-# Local verification screenshots and compression logs
+# Regenerable QA artifacts (screenshots, compression reports)
+qa/
+
+# Accidental root leftovers from older tool paths
 gallery_*.png
 horizon_proof*.png
 index_beasts.png

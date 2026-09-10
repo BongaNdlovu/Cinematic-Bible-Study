@@ -2,6 +2,8 @@ import { spawn } from 'child_process';
 import fs from 'fs';
 import path from 'path';
 
+fs.mkdirSync(path.join('qa', 'proofs'), { recursive: true });
+
 const CHROME_PATH = [
   process.env.CHROME_PATH,
   'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe',
@@ -91,27 +93,27 @@ try {
   const title = await client.eval('document.getElementById("sheet-title")?.textContent');
   const units = await client.eval('typeof sheetsData !== "undefined" ? sheetsData.length : 0');
   console.log({ title, units });
-  await client.shot('study_proof.png');
+  await client.shot('qa/proofs/study_proof.png');
 
   await client.eval('showInstrument("map")');
   await sleep(400);
-  await client.shot('study_proof_map.png');
+  await client.shot('qa/proofs/study_proof_map.png');
   await client.eval('showInstrument("context"); loadSheet(2);');
   await sleep(500);
-  await client.shot('study_proof_context.png');
+  await client.shot('qa/proofs/study_proof_context.png');
   await client.eval('togglePomodoroDrawer()');
   await sleep(400);
   await client.eval("setWeatherPreset('storm')");
   await sleep(800);
-  await client.shot('study_proof_storm.png');
+  await client.shot('qa/proofs/study_proof_storm.png');
   await client.eval('showInstrument("timeline"); loadSheet(7);');
   await sleep(500);
-  await client.shot('study_proof_dream.png');
+  await client.shot('qa/proofs/study_proof_dream.png');
 
   await client.send('Emulation.setDeviceMetricsOverride', { width: 390, height: 844, deviceScaleFactor: 2, mobile: true });
   await client.send('Page.navigate', { url: `${BASE}/study.html` });
   await sleep(1800);
-  await client.shot('study_proof_mobile.png');
+  await client.shot('qa/proofs/study_proof_mobile.png');
 
   client.close();
   chrome.kill();

@@ -25,27 +25,26 @@ The server binds `127.0.0.1` (port 8000, with fallback), opens a browser, and se
 
 ## Layout
 
+See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) for page-to-JS mapping and data flow.
+
 | Path | Purpose |
 |---|---|
-| `index.html` | Museum landing cover / entrance |
-| `gallery.html` | Interactive 3D museum gallery |
-| `study.html` | Scroll of Daniel cinematic study desk |
-| `bible/` | Local KJV Daniel, Strong’s subset, and the Scripture instrument |
-| `map.html` | Full-screen cinematic map of the four kingdoms |
-| `map.js` / `map.css` / `map-data.js` | Geographic map engine, HUD, chronicle data |
-| `assets/maps/` | Parchment atlas plates, Natural Earth land, Cliopatria empire polygons |
-| `app.css` / `app.js` | 3D Gallery UI and Three.js runtime |
-| `study.css` / `study.js` / `study-data.js` | Cinematic study desk, atmosphere, curriculum |
-| `assets/study/` | Hero statue, Babylon sunset, storm sky, lions’ den |
-| `models/*.glb` | Shipped Meshopt-compressed 3D artifacts (colossus, beasts, ram and goat, Dura, court, stump) |
-| `vendor/three/` | Three.js r0.181.2 (offline import map) |
-| `assets/` | High-resolution plates, artwork, and thumbnails |
-| `tools/` | Optional model-pipeline helpers |
+| `index.html` `study.html` `map.html` `gallery.html` | URL entry points (stay at repo root) |
+| `css/` | `site.css` (cover), `app.css` (gallery), `map.css` (map + study embed) |
+| `js/shared/journey.js` | Cross-page resume and access gate (localStorage) |
+| `js/gallery/app.js` | 3D gallery engine and artifact registry |
+| `js/map/` | Map engine (`map.js`) and chronicle data (`map-data.js`) |
+| `js/study/` | Stage, Scripture dock, workbench, competency |
+| `bible/` | KJV Daniel, Strong’s subset, sheet passages (data corpus) |
+| `assets/` `models/` `vendor/` | Plates, GLBs, vendored Three.js + Leaflet |
+| `docs/` | Architecture, audit, course-improvement plan |
+| `tools/compress/` `tools/verify/` `tools/audit/` | Optional pipeline and QA |
+| `qa/` | Regenerable proofs and reports (gitignored) |
 
 ## Controls
 
 - Map of History (`map.html`): drag to pan, scroll to zoom, click a kingdom or city, `←` `→` to change year, space to play, search box, Then/Now slider, Routes layer
-- Shared journey state (`journey.js`) remembers the last epoch, study sheet, and artifact across pages
+- Shared journey state (`js/shared/journey.js`) remembers the last epoch, study sheet, and artifact across pages
 - Drag to orbit, scroll to zoom, click floating nodes to focus
 - Left rail / header arrows switch artifacts
 - Study Lab: render modes, torches, dust, brightness, camera presets

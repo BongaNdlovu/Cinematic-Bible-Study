@@ -3,8 +3,8 @@ import re
 import hashlib
 from collections import defaultdict
 
-root = Path(__file__).resolve().parents[1]
-text = (root / "map-data.js").read_text(encoding="utf-8")
+root = Path(__file__).resolve().parents[2]
+text = (root / "js" / "map" / "map-data.js").read_text(encoding="utf-8")
 arts = []
 section = None
 for i, line in enumerate(text.splitlines(), 1):

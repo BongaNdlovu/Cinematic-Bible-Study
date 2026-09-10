@@ -2,6 +2,8 @@ import { spawn } from "child_process";
 import fs from "fs";
 import path from "path";
 
+fs.mkdirSync(path.join("qa", "proofs"), { recursive: true });
+
 const CHROME_PATH = [
   process.env.CHROME_PATH,
   "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
@@ -172,7 +174,7 @@ try {
     console.log(s.id, hit.hallUrl, hit.title);
     seen.push({ id: s.id, url: hit.hallUrl, title: hit.title });
     await sleep(s.shot ? 800 : 700);
-    if (s.shot) await client.shot(`hall_all_${s.id}.png`);
+    if (s.shot) await client.shot(`qa/proofs/hall_all_${s.id}.png`);
   }
 
   const urls = seen.map((x) => x.url);
@@ -185,7 +187,7 @@ try {
   });
   await client.eval(`document.querySelector('.artifact-card-item[data-asset="head"]').click()`);
   await sleep(1400);
-  await client.shot("hall_all_head_mobile.png");
+  await client.shot("qa/proofs/hall_all_head_mobile.png");
   client.close();
 } finally {
   if (chrome) chrome.kill();

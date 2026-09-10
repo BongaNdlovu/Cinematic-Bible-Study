@@ -2,6 +2,8 @@ import { spawn } from "child_process";
 import fs from "fs";
 import path from "path";
 
+fs.mkdirSync(path.join("qa", "proofs"), { recursive: true });
+
 const CHROME_PATH = [
   process.env.CHROME_PATH,
   "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
@@ -132,23 +134,23 @@ try {
     loadGone: document.querySelector('.cmap-load')?.classList.contains('is-done')
   })`);
   console.log("map stats", stats);
-  await client.shot("map_proof.png");
+  await client.shot("qa/proofs/map_proof.png");
 
   await client.eval(`document.querySelector('.cmap-year[data-year="y331"]').click()`);
   await sleep(1800);
   const greece = await client.eval(`document.querySelector('.cmap-cartouche strong')?.textContent`);
   console.log("after 331", greece);
-  await client.shot("map_proof_331.png");
+  await client.shot("qa/proofs/map_proof_331.png");
 
   await client.eval(`document.querySelector('.cmap-year[data-year="y1798"]').click()`);
   await sleep(1800);
-  await client.shot("map_proof_1798.png");
+  await client.shot("qa/proofs/map_proof_1798.png");
 
   await client.eval(`document.querySelector('.cmap-marker[data-id="jerusalem"]')?.click()`);
   await sleep(400);
   const jer = await client.eval(`document.querySelector('.cmap-dossier.open h2')?.textContent`);
   console.log("jerusalem dossier", jer);
-  await client.shot("map_proof_city.png");
+  await client.shot("qa/proofs/map_proof_city.png");
 
   await client.send("Page.navigate", { url: `${BASE}/study.html` });
   await sleep(2200);
@@ -161,7 +163,7 @@ try {
     name: document.getElementById('map-name')?.textContent
   })`);
   console.log("study map", studyStats);
-  await client.shot("study_proof_map.png");
+  await client.shot("qa/proofs/study_proof_map.png");
 
   await client.send("Emulation.setDeviceMetricsOverride", {
     width: 390,
@@ -171,7 +173,7 @@ try {
   });
   await client.send("Page.navigate", { url: `${BASE}/map.html?skip=1&year=y538` });
   await sleep(2600);
-  await client.shot("map_proof_mobile.png");
+  await client.shot("qa/proofs/map_proof_mobile.png");
 
   console.log("console errors", client.errors);
   if (!stats.leaflet) throw new Error("leaflet failed to mount");

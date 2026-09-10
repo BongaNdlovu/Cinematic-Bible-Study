@@ -2,6 +2,8 @@ import { spawn } from 'child_process';
 import fs from 'fs';
 import path from 'path';
 
+fs.mkdirSync(path.join('qa', 'proofs'), { recursive: true });
+
 const CHROME_PATH = [
   process.env.CHROME_PATH,
   'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe',
@@ -124,7 +126,7 @@ try {
   if (bg !== 'rgb(255,255,255)' && bg !== '#ffffff' && bg !== 'white') {
     throw new Error('white theme is not actual white: ' + white.bodyBg);
   }
-  await client.shot('theme_proof_white.png');
+  await client.shot('qa/proofs/theme_proof_white.png');
 
   await client.eval(`applyTheme(1, true)`);
   await sleep(300);
@@ -134,7 +136,7 @@ try {
     bg: getComputedStyle(document.body).backgroundColor
   })`);
   console.log('paper theme', paper);
-  await client.shot('theme_proof_paper.png');
+  await client.shot('qa/proofs/theme_proof_paper.png');
 
   await client.eval(`applyTheme(0, true)`);
   await sleep(300);
@@ -167,12 +169,12 @@ try {
   if (!audio.on || !audio.started) throw new Error('weather audio did not start');
   if (audio.rain < 0.5) throw new Error('storm mix has no rain');
   if (!audio.hasWhite || !audio.hasBrown) throw new Error('noise buffers missing');
-  await client.shot('theme_proof_white_storm.png');
+  await client.shot('qa/proofs/theme_proof_white_storm.png');
 
   await client.send('Emulation.setDeviceMetricsOverride', { width: 390, height: 844, deviceScaleFactor: 2, mobile: true });
   await client.eval(`applyTheme(2, true)`);
   await sleep(500);
-  await client.shot('theme_proof_white_mobile.png');
+  await client.shot('qa/proofs/theme_proof_white_mobile.png');
 
   if (client.errors.length) console.log('page errors', client.errors.slice(0, 6));
   client.close();

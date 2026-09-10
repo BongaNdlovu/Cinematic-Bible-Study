@@ -2,6 +2,8 @@ import { spawn } from "child_process";
 import fs from "fs";
 import path from "path";
 
+fs.mkdirSync(path.join("qa", "proofs"), { recursive: true });
+
 const CHROME_PATH = [
   process.env.CHROME_PATH,
   "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
@@ -148,7 +150,7 @@ try {
       if ((check.shots || []).includes(name)) {
         const slug = name.toLowerCase().replace(/\s+/g, "_");
         await sleep(250);
-        await client.shot(`medal_proof_${check.year}_${slug}.png`);
+        await client.shot(`qa/proofs/medal_proof_${check.year}_${slug}.png`);
       }
     }
   }
@@ -167,7 +169,7 @@ try {
     return true;
   })()`);
   await sleep(400);
-  await client.shot("medal_proof_persepolis_mobile.png");
+  await client.shot("qa/proofs/medal_proof_persepolis_mobile.png");
 
   console.log("collisions", collisions);
   console.log("console errors", client.errors);

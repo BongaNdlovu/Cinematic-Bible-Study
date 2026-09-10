@@ -1,34 +1,33 @@
 #!/usr/bin/env node
 /**
- * Compress the four Daniel 7 Meshy GLBs for the gallery.
- * Sources stay in Downloads; shipped files are meshopt + webp in models/.
+ * Compress the four Daniel 8 Meshy GLBs (ram and goat sequence) for the gallery.
  */
 import { spawnSync } from 'child_process';
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
-const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const MODELS = path.join(ROOT, 'models');
 const ORIGINALS = path.join(MODELS, 'originals');
 const DOWNLOADS = path.join(ROOT, '..');
 
-const BEASTS = [
+const FILES = [
   {
-    name: 'lion.glb',
-    src: path.join(DOWNLOADS, 'Meshy_AI_Celestial_Lion_0909170239_texture.glb'),
+    name: 'ram.glb',
+    src: path.join(DOWNLOADS, 'Meshy_AI_Majestic_Mountain_Ram_0909184108_texture.glb'),
   },
   {
-    name: 'bear.glb',
-    src: path.join(DOWNLOADS, 'Meshy_AI_Roaring_Cave_Bear_0909170615_texture.glb'),
+    name: 'goat.glb',
+    src: path.join(DOWNLOADS, 'Meshy_AI_Stormhorn_0909184152_texture.glb'),
   },
   {
-    name: 'leopard.glb',
-    src: path.join(DOWNLOADS, 'Meshy_AI_Four_Headed_Winged_Le_0909171053_texture.glb'),
+    name: 'goat_broken.glb',
+    src: path.join(DOWNLOADS, 'Meshy_AI_Charging_Horned_Goat_0909185001_texture.glb'),
   },
   {
-    name: 'beast.glb',
-    src: path.join(DOWNLOADS, 'Meshy_AI_Obsidian_Maw_0909172040_texture.glb'),
+    name: 'goat_horn.glb',
+    src: path.join(DOWNLOADS, 'Meshy_AI_Horned_Mountain_Fury_0909185022_texture.glb'),
   },
 ];
 
@@ -56,23 +55,23 @@ fs.mkdirSync(MODELS, { recursive: true });
 
 const report = [];
 
-for (const beast of BEASTS) {
-  if (!fs.existsSync(beast.src)) {
-    console.error('MISSING source', beast.src);
-    report.push({ name: beast.name, ok: false, reason: 'missing-source' });
+for (const item of FILES) {
+  if (!fs.existsSync(item.src)) {
+    console.error('MISSING source', item.src);
+    report.push({ name: item.name, ok: false, reason: 'missing-source' });
     continue;
   }
 
-  const origDest = path.join(ORIGINALS, beast.name);
+  const origDest = path.join(ORIGINALS, item.name);
   if (!fs.existsSync(origDest)) {
-    console.log('\nCopying original', beast.name, mb(fs.statSync(beast.src).size) + 'MB');
-    fs.copyFileSync(beast.src, origDest);
+    console.log('\nCopying original', item.name, mb(fs.statSync(item.src).size) + 'MB');
+    fs.copyFileSync(item.src, origDest);
   }
 
   const src = origDest;
-  const out = path.join(MODELS, beast.name);
+  const out = path.join(MODELS, item.name);
   const before = fs.statSync(src).size;
-  console.log('\n=== Optimizing', beast.name, mb(before) + 'MB ===');
+  console.log('\n=== Optimizing', item.name, mb(before) + 'MB ===');
 
   run([
     '--yes',
@@ -90,16 +89,16 @@ for (const beast of BEASTS) {
   ]);
 
   if (!fs.existsSync(out)) {
-    console.error('FAILED', beast.name);
-    report.push({ name: beast.name, before, after: null, ok: false });
+    console.error('FAILED', item.name);
+    report.push({ name: item.name, before, after: null, ok: false });
     continue;
   }
   const after = fs.statSync(out).size;
-  console.log(`wrote models/${beast.name}: ${mb(before)} -> ${mb(after)} MB`);
-  report.push({ name: beast.name, before, after, ok: true });
+  console.log(`wrote models/${item.name}: ${mb(before)} -> ${mb(after)} MB`);
+  report.push({ name: item.name, before, after, ok: true });
 }
 
-console.log('\n=== BEAST COMPRESSION REPORT ===');
+console.log('\n=== DANIEL 8 COMPRESSION REPORT ===');
 for (const row of report) {
   console.log(
     row.name,
@@ -111,8 +110,7 @@ for (const row of report) {
 }
 
 const failed = report.filter((r) => !r.ok);
-if (failed.length) {
-  process.exit(1);
-}
-fs.writeFileSync(path.join(ROOT, 'beast_compression_report.json'), JSON.stringify(report, null, 2));
+if (failed.length) process.exit(1);
+fs.mkdirSync(path.join(ROOT, 'qa', 'reports'), { recursive: true });
+fs.writeFileSync(path.join(ROOT, 'qa', 'reports', 'daniel8_compression_report.json'), JSON.stringify(report, null, 2));
 console.log('DONE');

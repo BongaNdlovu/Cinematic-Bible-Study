@@ -1,4 +1,5 @@
-﻿import fs from 'fs';
+﻿// Retired: generated the unused study-data.js desk. Kept as an audit helper only.
+import fs from 'fs';
 import vm from 'vm';
 
 const html = fs.readFileSync('study.html', 'utf8');

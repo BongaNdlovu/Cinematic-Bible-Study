@@ -2,6 +2,8 @@ import { spawn } from 'child_process';
 import fs from 'fs';
 import path from 'path';
 
+fs.mkdirSync(path.join('qa', 'proofs'), { recursive: true });
+
 const CHROME_PATH = [
   process.env.CHROME_PATH,
   'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe',
@@ -108,15 +110,15 @@ try {
   });
 
   const shots = [
-    { id: 'dura', title: 'Golden Image of Dura', out: 'gallery_dura.png' },
-    { id: 'stump', title: 'Ironbound Stump', out: 'gallery_stump.png' },
-    { id: 'ancient', title: 'Ancient of Days', out: 'gallery_ancient.png' },
-    { id: 'son', title: 'Son of Man', out: 'gallery_son.png' },
-    { id: 'ox_king', title: 'Nebuchadnezzar the Ox-King', out: 'gallery_ox_king.png' },
-    { id: 'michael', title: 'Michael Standing Up', out: 'gallery_michael.png' },
-    { id: 'sealed', title: 'The Sealed Scroll', out: 'gallery_sealed.png' },
-    { id: 'kings', title: 'Kings of the North and South', out: 'gallery_kings.png' },
-    { id: 'decree', title: 'Royal Decree of Artaxerxes', out: 'gallery_decree.png' },
+    { id: 'dura', title: 'Golden Image of Dura', out: 'qa/proofs/gallery_dura.png' },
+    { id: 'stump', title: 'Ironbound Stump', out: 'qa/proofs/gallery_stump.png' },
+    { id: 'ancient', title: 'Ancient of Days', out: 'qa/proofs/gallery_ancient.png' },
+    { id: 'son', title: 'Son of Man', out: 'qa/proofs/gallery_son.png' },
+    { id: 'ox_king', title: 'Nebuchadnezzar the Ox-King', out: 'qa/proofs/gallery_ox_king.png' },
+    { id: 'michael', title: 'Michael Standing Up', out: 'qa/proofs/gallery_michael.png' },
+    { id: 'sealed', title: 'The Sealed Scroll', out: 'qa/proofs/gallery_sealed.png' },
+    { id: 'kings', title: 'Kings of the North and South', out: 'qa/proofs/gallery_kings.png' },
+    { id: 'decree', title: 'Royal Decree of Artaxerxes', out: 'qa/proofs/gallery_decree.png' },
   ];
 
   for (const b of shots) {
@@ -148,7 +150,7 @@ try {
   const n = await client.eval(`document.querySelectorAll('a[href="gallery.html?asset=dura"]').length`);
   console.log('dura tiles on cover', n);
   if (!n) throw new Error('Dura tile missing on cover');
-  await client.shot('index_visions.png');
+  await client.shot('qa/proofs/index_visions.png');
 
   client.close();
   console.log('DONE');

@@ -6,11 +6,11 @@
   "type": "module",
   "scripts": {
     "start": "python server.py",
-    "compress": "node tools/compress_models.mjs",
-    "compress:beasts": "node tools/compress_beasts.mjs",
-    "compress:daniel8": "node tools/compress_daniel8.mjs",
-    "compress:visions": "node tools/compress_visions.mjs",
-    "compress:daniel11": "node tools/compress_daniel11.mjs"
+    "compress": "node tools/compress/compress_models.mjs",
+    "compress:beasts": "node tools/compress/compress_beasts.mjs",
+    "compress:daniel8": "node tools/compress/compress_daniel8.mjs",
+    "compress:visions": "node tools/compress/compress_visions.mjs",
+    "compress:daniel11": "node tools/compress/compress_daniel11.mjs"
   },
   "dependencies": {
     "three": "0.181.2"

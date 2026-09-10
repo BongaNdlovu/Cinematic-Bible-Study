@@ -39,7 +39,7 @@ button { font: inherit; }
 .cover {
   background:
     linear-gradient(180deg, rgba(8,7,5,.22) 0%, rgba(8,7,5,.58) 48%, #080705 100%),
-    url("assets/site/hall-bg.jpg") center top / cover no-repeat fixed;
+    url("../assets/site/hall-bg.jpg") center top / cover no-repeat fixed;
 }
 
 .vignette, .grain, .glow-drift, .shafts, .motes {

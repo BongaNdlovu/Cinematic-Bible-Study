@@ -7,7 +7,7 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
-const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const MODELS = path.join(ROOT, 'models');
 const ORIGINALS = path.join(MODELS, 'originals');
 const DOWNLOADS = path.join(ROOT, '..');
@@ -110,5 +110,6 @@ for (const row of report) {
 }
 
 if (report.some((r) => !r.ok)) process.exit(1);
-fs.writeFileSync(path.join(ROOT, 'visions_compression_report.json'), JSON.stringify(report, null, 2));
+fs.mkdirSync(path.join(ROOT, 'qa', 'reports'), { recursive: true });
+fs.writeFileSync(path.join(ROOT, 'qa', 'reports', 'visions_compression_report.json'), JSON.stringify(report, null, 2));
 console.log('DONE');

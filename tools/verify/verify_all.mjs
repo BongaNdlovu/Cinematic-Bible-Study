@@ -2,6 +2,8 @@ import { spawn } from 'child_process';
 import fs from 'fs';
 import path from 'path';
 
+fs.mkdirSync(path.join('qa', 'proofs'), { recursive: true });
+
 const CHROME_PATH = [
   process.env.CHROME_PATH,
   'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe',
@@ -97,13 +99,18 @@ async function run() {
     'bible/kjv.json',
     'bible/strongs-daniel.json',
     'bible/sheet-passages.json',
-    'bible/scripture.js',
+    'js/study/scripture.js',
     'gallery.html',
-    'study-data.js',
-    'study.css',
-    'site.css',
-    'app.js',
-    'app.css',
+    'css/site.css',
+    'js/gallery/app.js',
+    'css/app.css',
+    'js/shared/journey.js',
+    'js/map/map.js',
+    'js/map/map-data.js',
+    'js/study/stage.js',
+    'js/study/workbench.js',
+    'js/study/competency.js',
+    'css/map.css',
     'models/stone.glb',
     'models/full_body.glb',
     'models/golden_head.glb',
@@ -167,8 +174,7 @@ async function run() {
     'assets/study/statue-nebuchadnezzar.jpg',
     'assets/study/babylon-sunset.jpg',
     'assets/study/daniel-lions-den.jpg',
-    'assets/study/storm-sky.jpg',
-    'study.js'
+    'assets/study/storm-sky.jpg'
   ];
 
   for (const f of requiredFiles) {
@@ -217,8 +223,12 @@ async function run() {
     { url: `${SERVER_BASE}/study.html`, mime: 'text/html' },
     { url: `${SERVER_BASE}/bible/kjv.json`, mime: 'application/json' },
     { url: `${SERVER_BASE}/gallery.html`, mime: 'text/html' },
-    { url: `${SERVER_BASE}/study-data.js`, mime: 'application/javascript' },
-    { url: `${SERVER_BASE}/study.css`, mime: 'text/css' },
+    { url: `${SERVER_BASE}/js/shared/journey.js`, mime: 'application/javascript' },
+    { url: `${SERVER_BASE}/css/site.css`, mime: 'text/css' },
+    { url: `${SERVER_BASE}/js/gallery/app.js`, mime: 'application/javascript' },
+    { url: `${SERVER_BASE}/css/app.css`, mime: 'text/css' },
+    { url: `${SERVER_BASE}/js/map/map.js`, mime: 'application/javascript' },
+    { url: `${SERVER_BASE}/js/study/scripture.js`, mime: 'application/javascript' },
     { url: `${SERVER_BASE}/models/stone.glb`, mime: 'model/gltf-binary' },
     { url: `${SERVER_BASE}/models/lion.glb`, mime: 'model/gltf-binary' },
     { url: `${SERVER_BASE}/models/bear.glb`, mime: 'model/gltf-binary' },
@@ -363,17 +373,17 @@ async function run() {
   await sleep(1800);
   await client.send('Emulation.setDeviceMetricsOverride', { width: 1440, height: 900, deviceScaleFactor: 1, mobile: false });
   await sleep(400);
-  await client.captureScreenshot('study_proof.png');
+  await client.captureScreenshot('qa/proofs/study_proof.png');
   console.log('  [study.html] Captured study_proof.png');
 
   await client.eval('togglePomodoroDrawer()');
   await sleep(400);
-  await client.captureScreenshot('study_proof_focus.png');
+  await client.captureScreenshot('qa/proofs/study_proof_focus.png');
   console.log('  [study.html] Captured study_proof_focus.png');
 
   await client.send('Emulation.setDeviceMetricsOverride', { width: 390, height: 844, deviceScaleFactor: 2, mobile: true });
   await sleep(500);
-  await client.captureScreenshot('study_proof_mobile.png');
+  await client.captureScreenshot('qa/proofs/study_proof_mobile.png');
   console.log('  [study.html] Captured study_proof_mobile.png');
   await client.send('Emulation.setDeviceMetricsOverride', { width: 1440, height: 900, deviceScaleFactor: 1, mobile: false });
 
@@ -431,7 +441,7 @@ async function run() {
     await sleep(300);
   }
   await sleep(1200); // Give Three.js time to finish rendering the 3D stone model
-  await client.captureScreenshot('gallery_stone_proof.png');
+  await client.captureScreenshot('qa/proofs/gallery_stone_proof.png');
   console.log('  [gallery.html] Captured gallery_stone_proof.png');
 
   // Check console errors

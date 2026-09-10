@@ -2,6 +2,8 @@ import { spawn } from 'child_process';
 import fs from 'fs';
 import path from 'path';
 
+fs.mkdirSync(path.join('qa', 'proofs'), { recursive: true });
+
 const CHROME_PATH = [
   process.env.CHROME_PATH,
   'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe',
@@ -111,7 +113,7 @@ try {
   if (horizon.count !== 8) throw new Error('expected 8 horizon cards');
   if (horizon.unique !== 8) throw new Error('horizon cards reuse images: ' + JSON.stringify(horizon.srcs));
   if (horizon.prevDisabled !== true) throw new Error('prev should be disabled on first epoch');
-  await client.shot('horizon_proof.png');
+  await client.shot('qa/proofs/horizon_proof.png');
 
   await client.eval(`document.getElementById('horizon-next').click()`);
   await sleep(600);
@@ -124,7 +126,7 @@ try {
   console.log('after next', afterNext);
   if (afterNext.active !== '539 B.C.') throw new Error('arrow did not advance to 539');
   if (!afterNext.plate.includes('y539')) throw new Error('plate did not follow arrow');
-  await client.shot('horizon_proof_arrow.png');
+  await client.shot('qa/proofs/horizon_proof_arrow.png');
 
   await client.eval(`(() => {
     const card = document.getElementById('t-node-2');
@@ -141,7 +143,7 @@ try {
   console.log('hover', hover);
   if (!hover.on) throw new Error('hover float did not open');
   if (hover.year !== '457 B.C.') throw new Error('hover showed wrong year');
-  await client.shot('horizon_proof_hover.png');
+  await client.shot('qa/proofs/horizon_proof_hover.png');
 
   await client.eval(`setEpochInfo(2)`);
   await sleep(400);
@@ -178,7 +180,7 @@ try {
   })`);
   console.log('mobile', mobile);
   if (mobile.cardW < 200) throw new Error('mobile cards should be large snap cards');
-  await client.shot('horizon_proof_mobile.png');
+  await client.shot('qa/proofs/horizon_proof_mobile.png');
 
   await client.send('Emulation.setDeviceMetricsOverride', { width: 1440, height: 900, deviceScaleFactor: 1, mobile: false });
   await client.send('Page.navigate', { url: `${BASE}/gallery.html?asset=goat` });
@@ -200,7 +202,7 @@ try {
   console.log('greek plates in UI', greek);
   if ([goatPlate, leopardPlate, brokenPlate, thighsSrc].some((s) => !s)) throw new Error('missing greek plate src ' + JSON.stringify(greek));
   if (new Set([goatPlate, leopardPlate, brokenPlate, thighsSrc]).size !== 4) throw new Error('Greek factors still share a plate in the gallery UI');
-  await client.shot('horizon_proof_gallery_goat_broken.png');
+  await client.shot('qa/proofs/horizon_proof_gallery_goat_broken.png');
 
   await client.send('Page.navigate', { url: `${BASE}/map.html?skip=1&year=y331` });
   await sleep(2800);
@@ -222,7 +224,7 @@ try {
     art: document.querySelector('.cmap-dossier img')?.getAttribute('src')
   })`);
   console.log('first route stop', firstStop);
-  await client.shot('horizon_proof_map_pella.png');
+  await client.shot('qa/proofs/horizon_proof_map_pella.png');
   if (firstStop.art && !firstStop.art.includes('pella') && !firstStop.art.includes('stops/')) {
     console.warn('first stop art may not be Pella yet', firstStop);
   }
