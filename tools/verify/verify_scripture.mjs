@@ -104,19 +104,25 @@ if (api.findPhrase("Thou art this head of gold.", "head of gold") < 0) fail('fin
 if (api.findPhrase("the king\u2019s matter", "the king's matter") < 0) fail('findPhrase must treat curly apostrophes as straight');
 
 const html = fs.readFileSync(path.join(root, 'study.html'), 'utf8');
+const studyApp = fs.readFileSync(path.join(root, 'js/study/study-app.js'), 'utf8');
+const sheetsSrc = fs.readFileSync(path.join(root, 'js/study/sheets-data.js'), 'utf8');
+const studySources = html + studyApp + sheetsSrc;
 if (!html.includes('data-instrument="scripture"')) fail('study.html is missing the Scripture instrument tab');
 if (!html.includes('js/study/scripture.js')) fail('study.html does not load js/study/scripture.js');
-if (!html.includes('BAScripture.showSheet')) fail('loadSheet does not ask Scripture to follow the sheet');
-if (html.includes('para-hitch')) fail('sitting copy still has paragraph hitches');
+if (!html.includes('js/study/sheets-data.js') || !html.includes('js/study/study-app.js')) {
+  fail('study.html does not load extracted study scripts');
+}
+if (!studyApp.includes('BAScripture.showSheet')) fail('loadSheet does not ask Scripture to follow the sheet');
+if (studySources.includes('para-hitch')) fail('sitting copy still has paragraph hitches');
 if (!html.includes('load-bearing')) fail('study.html is missing load-bearing styles');
-if (!html.includes('id="sheet-study-path"') || !html.includes('renderStudyGuide')) {
+if (!html.includes('id="sheet-study-path"') || !studyApp.includes('renderStudyGuide')) {
   fail('study.html is missing the how-to-study path');
 }
-if (!html.includes('study-why') || !html.includes('renderTrace') || !html.includes('renderClaim')) {
+if (!html.includes('study-why') || !studyApp.includes('renderTrace') || !studyApp.includes('renderClaim')) {
   fail('study.html is missing how-to-study explainers');
 }
 
-const sitting = html.slice(html.indexOf('const sheetsData'), html.indexOf('const timelineEpochs'));
+const sitting = sheetsSrc.slice(sheetsSrc.indexOf('const sheetsData'), sheetsSrc.indexOf('const timelineEpochs'));
 const guideCtx = {};
 vm.createContext(guideCtx);
 vm.runInContext(sitting + '\nthis.guides = sheetsData.map((sheet) => sheet.studyGuide);\nthis.sittingGuides = sheetsData.map((sheet) => sheet.guide);', guideCtx);
@@ -191,7 +197,7 @@ if (!journey.includes('resumeLabel') || !journey.includes('seenIntro')) {
   fail('journey.js is missing resume or intro-seen helpers');
 }
 
-const brand = html.match(/Adventist|Ellen G\.|Uriah Smith|Investigative Judgment|Great Controversy|Early Writings|The Sanctified Life/i);
-if (brand) fail('study.html still carries a forbidden label: ' + brand[0]);
+const brand = studySources.match(/Adventist|Ellen G\.|Uriah Smith|Investigative Judgment|Great Controversy|Early Writings|The Sanctified Life/i);
+if (brand) fail('study sources still carry a forbidden label: ' + brand[0]);
 
 console.log('PASS: KJV Daniel, load-bearing dock, Strong’s teaching entries, and destigmatized sitting hold.');

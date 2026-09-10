@@ -7,7 +7,7 @@ The Scroll of Daniel is four static pages at the repo root. Python `server.py` i
 | Page | URL stays at | CSS | Scripts (load order) | Owns |
 |---|---|---|---|---|
 | Cover | `index.html` | `css/site.css` | `js/shared/journey.js` | Entrance, resume CTA, three-act offer |
-| Study desk | `study.html` | `css/map.css` (embedded map) + inline study styles | Tailwind CDN → Tone.js → import map → `js/study/stage.js` (module) → Leaflet → `js/shared/journey.js` → `js/study/scripture.js` → `js/map/map-data.js` → `js/map/map.js` → `js/study/workbench.js` → `js/study/competency.js` → **inline curriculum + desk** | 11-sheet sitting, quiz gate, weather, pomodoro, horizon |
+| Study desk | `study.html` | `css/map.css` (embedded map) + inline study styles | Tailwind CDN → `js/study/tailwind-config.js` → Tone.js → import map → `js/study/stage.js` (module) → Leaflet → `js/shared/journey.js` → `js/study/scripture.js` → `js/map/map-data.js` → `js/map/map.js` → `js/study/workbench.js` → `js/study/competency.js` → `js/study/sheets-data.js` → `js/study/study-app.js` | 11-sheet sitting, quiz gate, weather, pomodoro, horizon |
 | Map | `map.html` | `vendor/leaflet/leaflet.css`, `css/map.css` | Leaflet → `js/shared/journey.js` → `js/map/map-data.js` → `js/map/map.js` | Chronicle fly, cities, events, routes |
 | 3D gallery | `gallery.html` | `css/app.css` | `js/shared/journey.js` → import map → `js/gallery/app.js` (module) | Artifact registry, orbit, hall |
 
@@ -20,8 +20,8 @@ Deep links that must keep working: `study.html?sheet=N` / `?id=…`, `gallery.ht
 | Access gate (`FREE_THROUGH`, `canAccessSheet`, `previewFull`) | `js/shared/journey.js` |
 | Artifact database (`ASSET_REGISTRY`, hall, `yearForAsset`) | `js/gallery/app.js` |
 | Three.js study stage / idle models | `js/study/stage.js` |
-| Curriculum (`sheetsData`) + horizon epochs (`timelineEpochs`) | inline `<script>` in `study.html` (extract to `js/study/sheets-data.js` next) |
-| Quiz, weather, pomodoro, chrome, `LEGACY_ID_MAP` | same inline `study.html` script |
+| Curriculum (`sheetsData`) + horizon epochs (`timelineEpochs`) | `js/study/sheets-data.js` |
+| Quiz, weather, pomodoro, chrome, `LEGACY_ID_MAP` | `js/study/study-app.js` |
 | Scripture dock (KJV + Strong’s + sheet passages) | `js/study/scripture.js` + `bible/*.json` |
 | Map chronicle (epochs, cities, events, routes) | `js/map/map-data.js` |
 | Map engine / overlays | `js/map/map.js` |
@@ -67,7 +67,7 @@ Fetch paths are **document-relative** (pages stay at repo root): `bible/*.json`,
 
 | If you are adding… | Put it here |
 |---|---|
-| A sitting / quiz / studyGuide | The `sheetsData` array in `study.html` (then `js/study/sheets-data.js` after extraction) |
+| A sitting / quiz / studyGuide | `js/study/sheets-data.js` (`sheetsData`) |
 | A Strong’s teaching line | `bible/strongs-daniel.json` |
 | Sheet verse highlights | `bible/sheet-passages.json` |
 | A map city / event / year | `js/map/map-data.js` |
