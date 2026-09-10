@@ -82,7 +82,7 @@ Per sheet, one object: active seconds (heartbeat-paused when hidden), scripture 
 - MCQs become **confirmation**; artifacts are **the gate**. Mastery % in the TOC becomes proof-based (proof + first-try quiz, not click-through).
 
 ### 5.4 File architecture (do before content lands)
-`study.html` still holds the sheets inline. Extract once, before adding 5 sheets of content: `js/study/sheets-data.js` (all sheet objects), `assessment.js`, `evidence.js`. study.html remains the shell. Legacy `study-data.js` / `study.js` / `study.css` are already retired.
+`sheetsData` and horizon epochs now live in `js/study/sheets-data.js`; desk logic is `js/study/study-app.js`. study.html remains the shell. Next content splits: `assessment.js`, `evidence.js`. Legacy `study-data.js` / `study.js` / `study.css` are already retired.
 
 ## 6. Phase 1 — Hard-gate rollout: proof of work per sheet
 
