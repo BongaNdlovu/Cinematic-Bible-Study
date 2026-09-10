@@ -1,0 +1,21 @@
+{
+  "categories": {
+    "correctness": "off",
+    "suspicious": "off",
+    "pedantic": "off",
+    "perf": "off",
+    "style": "off",
+    "restriction": "off",
+    "nursery": "off"
+  },
+  "ignorePatterns": [
+    "vendor/**",
+    "node_modules/**",
+    "qa/**",
+    "models/**",
+    "assets/**"
+  ],
+  "rules": {
+    "complexity": ["error", 55]
+  }
+}
