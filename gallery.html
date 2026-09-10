@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nebuchadnezzar — The Golden Head &amp; Prophetic Colossus | Bible Artifacts Museum</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👑</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800;900&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="app.css">
+  <link rel="preload" href="models/full_body.glb" as="fetch" crossorigin>
+  <script src="journey.js"></script>
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "./vendor/three/build/three.module.js",
+      "three/addons/": "./vendor/three/examples/jsm/"
+    }
+  }
+  </script>
+</head>
+<body>
+
+  <div id="webgl-container" role="img" aria-label="Interactive 3D view of the Daniel 2 colossus"></div>
+  <div class="vignette" aria-hidden="true"></div>
+  <div class="film-grain" aria-hidden="true"></div>
+  <div id="still-stage" hidden>
+    <img id="still-stage-img" alt="">
+  </div>
+  <div id="compare-badge" hidden>Museum plaster study</div>
+
+  <div id="loading-overlay">
+    <div class="load-crest" aria-hidden="true">
+      <svg viewBox="0 0 32 32" width="42" height="42" fill="none">
+        <path d="M16 2.5L5 7.5v9.5c0 7.8 4.7 15.1 11 16.5 6.3-1.4 11-8.7 11-16.5V7.5L16 2.5z" stroke="#e5a742" stroke-width="1.6"/>
+        <path d="M11 15.5l3.5 3.5 6.5-6.5" stroke="#ffd678" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    <div class="load-title">Bible Artifacts Museum</div>
+    <div class="load-sub" id="loading-status">Opening the gallery of Daniel 2…</div>
+    <div id="loading-bar-track"><div id="loading-bar-fill"></div></div>
+    <div id="loading-pct">0%</div>
+    <div id="loading-error">Could not load the exhibit model.</div>
+    <button class="lab-btn" id="btn-load-continue" type="button">Enter gallery anyway</button>
+  </div>
+
+  <div id="museum-nodes-layer">
+    <svg id="museum-nodes-svg" xmlns="http://www.w3.org/2000/svg"></svg>
+    <div id="museum-nodes-container"></div>
+  </div>
+  <div id="museum-nodes-sheet" class="museum-nodes-sheet">
+    <button type="button" id="btn-nodes-sheet-toggle" class="museum-nodes-sheet-toggle">Notes</button>
+    <div id="museum-nodes-sheet-body" class="museum-nodes-sheet-body"></div>
+  </div>
+
+  <button class="scrim" id="scrim" type="button" aria-label="Close panels"></button>
+
+  <header class="top-chrome">
+    <a class="brand-crest" href="index.html" id="btn-brand-home" aria-label="Bible Artifacts home" style="text-decoration:none;color:inherit">
+      <div class="crest-icon">
+        <svg viewBox="0 0 32 32" width="28" height="28" fill="none" aria-hidden="true">
+          <path d="M16 2.5L5 7.5v9.5c0 7.8 4.7 15.1 11 16.5 6.3-1.4 11-8.7 11-16.5V7.5L16 2.5z" stroke="#e5a742" stroke-width="1.8"/>
+          <path d="M11 15.5l3.5 3.5 6.5-6.5" stroke="#ffd678" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="brand-title">BIBLE ARTIFACTS</div>
+    </a>
+
+    <div class="header-utilities">
+      <a class="util-btn" href="index.html" style="text-decoration:none">Home</a>
+      <a class="util-btn" href="study.html" style="text-decoration:none">Study</a>
+      <a class="util-btn" href="map.html" style="text-decoration:none">Map</a>
+      <div class="search-box">
+        <span class="search-icon" aria-hidden="true">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.2-3.2"/></svg>
+        </span>
+        <input type="search" id="search-input" placeholder="Search artifacts, scriptures…" autocomplete="off">
+      </div>
+      <button class="util-btn icon-only" id="btn-theme-toggle" type="button" title="Toggle lighting tone" aria-label="Toggle lighting tone">☀️</button>
+      <button class="util-btn icon-only" id="btn-scripture-modal" type="button" title="Scripture" aria-label="Open scripture">📖</button>
+      <button class="util-btn icon-only active" id="btn-nodes-master" type="button" title="Toggle annotation nodes" aria-label="Toggle nodes">◎</button>
+      <button class="util-btn icon-only" id="btn-mute" type="button" title="Mute gallery sound" aria-label="Mute sound">♪</button>
+      <button class="util-btn icon-only" id="btn-open-lab" type="button" title="Study lab" aria-label="Open study lab">⚙</button>
+      <button class="util-btn icon-only" id="btn-menu" type="button" title="Collection" aria-label="Open collection">☰</button>
+    </div>
+  </header>
+
+  <div class="hero-stage-title">
+    <button class="nav-arrow-btn" id="btn-prev-artifact" type="button">← PREVIOUS</button>
+    <div class="hero-title-group">
+      <div class="hero-eyebrow" id="hero-eyebrow">PROPHETIC SUCCESSION OF EMPIRES</div>
+      <h1 class="hero-main-title" id="hero-main-title">COMPLETE COLOSSUS</h1>
+      <div class="hero-scripture-pill" id="hero-scripture-pill">DANIEL 2:31-45</div>
+      <div class="exhibit-index" id="exhibit-index">1 / 19</div>
+    </div>
+    <button class="nav-arrow-btn" id="btn-next-artifact" type="button">NEXT →</button>
+  </div>
+
+  <aside class="left-rail" id="left-rail">
+    <nav class="nav-rail" aria-label="Museum sections">
+      <button class="nav-item" type="button" data-nav="discover"><span class="nav-icon">🧭</span><span>DISCOVER</span></button>
+      <button class="nav-item active" type="button" data-nav="artifacts"><span class="nav-icon">🏛</span><span>ARTIFACTS</span></button>
+      <button class="nav-item" type="button" data-nav="timeline"><span class="nav-icon">📅</span><span>TIMELINE</span></button>
+      <button class="nav-item" type="button" data-nav="kingdoms"><span class="nav-icon">👑</span><span>KINGDOMS</span></button>
+      <button class="nav-item" type="button" data-nav="about"><span class="nav-icon">ℹ</span><span>ABOUT</span></button>
+    </nav>
+
+    <div class="rail-divider"></div>
+    <div class="rail-section-header">ALL ARTIFACTS</div>
+
+    <div class="artifact-cards-list" id="artifact-cards-list">
+      <button class="artifact-card-item active" type="button" data-asset="assembled">
+        <div class="artifact-thumb"><img src="assets/thumbs/head.jpg" alt=""></div>
+        <div class="artifact-meta">
+          <div class="artifact-name">Complete Daniel 2 Colossus</div>
+          <div class="artifact-scripture">Daniel 2:31–45</div>
+        </div>
+      </button>
+      <button class="artifact-card-item" type="button" data-asset="head">
+        <div class="artifact-thumb"><img src="assets/thumbs/head.jpg" alt=""></div>
+        <div class="artifact-meta">
+          <div class="artifact-name">Nebuchadnezzar’s Golden Head</div>
+          <div class="artifact-scripture">Daniel 2:32, 38</div>
+        </div>
+      </button>
+      <button class="artifact-card-item" type="button" data-asset="chest">
+        <div class="artifact-thumb"><img src="assets/thumbs/chest.jpg" alt=""></div>
+        <div class="artifact-meta">
+          <div class="artifact-name">The Silver Chest and Arms</div>
+          <div class="artifact-scripture">Daniel 2:32, 39</div>
+        </div>
+      </button>
+      <button class="artifact-card-item" type="button" data-asset="thighs">
+        <div class="artifact-thumb"><img src="assets/thumbs/thighs.jpg" alt=""></div>
+        <div class="artifact-meta">
+          <div class="artifact-name">The Bronze Belly and Thighs</div>
+          <div class="artifact-scripture">Daniel 2:32, 39</div>
+        </div>
+      </button>
+      <button class="artifact-card-item" type="button" data-asset="legs">
+        <div class="artifact-thumb"><img src="assets/thumbs/legs.jpg" alt=""></div>
+        <div class="artifact-meta">
+          <div class="artifact-name">The Iron Legs</div>
+          <div class="artifact-scripture">Daniel 2:33</div>
+        </div>
+      </button>
+      <button class="artifact-card-item" type="button" data-asset="feet">
+        <div class="artifact-thumb"><img src="assets/thumbs/feet.jpg" alt=""></div>
+        <div class="artifact-meta">
+          <div class="artifact-name">The Feet of Iron and Clay</div>
+          <div class="artifact-scripture">Daniel 2:33</div>
+        </div>
+      </button>
+      <button class="artifact-card-item" type="button" data-asset="stone">
+        <div class="artifact-thumb"><img src="assets/thumbs/stone.jpg" alt=""></div>
+        <div class="artifact-meta">
+          <div class="artifact-name">The Stone Cut Without Hands</div>
+          <div class="artifact-scripture">Daniel 2:34</div>
+        </div>
+      </button>
+      <div class="rail-section-header">DANIEL 7 BEASTS</div>
+      <button class="artifact-card-item" type="button" data-asset="lion">
+        <div class="artifact-thumb"><img src="assets/thumbs/lion.jpg" alt=""></div>
+        <div class="artifact-meta">
+          <div class="artifact-name">Winged Lion of Babylon</div>
+          <div class="artifact-scripture">Daniel 7:4</div>
+        </div>
+      </button>
+      <button class="artifact-card-item" type="button" data-asset="bear">
+        <div class="artifact-thumb"><img src="assets/thumbs/bear.jpg" alt=""></div>
+        <div class="artifact-meta">
+          <div class="artifact-name">The Bear with Three Ribs</div>
+          <div class="artifact-scripture">Daniel 7:5</div>
+        </div>
+      </button>
+      <button class="artifact-card-item" type="button" data-asset="leopard">
+        <div class="artifact-thumb"><img src="assets/thumbs/leopard.jpg" alt=""></div>
+        <div class="artifact-meta">
+          <div class="artifact-name">Four-Winged Leopard</div>
+          <div class="artifact-scripture">Daniel 7:6</div>
+        </div>
+      </button>
+      <button class="artifact-card-item" type="button" data-asset="beast">
+        <div class="artifact-thumb"><img src="assets/thumbs/beast.jpg" alt=""></div>
+        <div class="artifact-meta">
+          <div class="artifact-name">Dreadful Beast &amp; Little Horn</div>
+          <div class="artifact-scripture">Daniel 7:7–8</div>
+        </div>
+      </button>
+      <div class="rail-section-header">DANIEL 8 · RAM &amp; GOAT</div>
+      <button class="artifact-card-item" type="button" data-asset="ram">
+        <div class="artifact-thumb"><img src="assets/thumbs/ram.jpg" alt=""></div>
+        <div class="artifact-meta">
+          <div class="artifact-name">Ram of Medo-Persia</div>
+          <div class="artifact-scripture">Daniel 8:3–4, 20</div>
+        </div>
+      </button>
+      <button class="artifact-card-item" type="button" data-asset="goat">
+        <div class="artifact-thumb"><img src="assets/thumbs/goat.jpg" alt=""></div>
+        <div class="artifact-meta">
+          <div class="artifact-name">Charging Goat of Greece</div>
+          <div class="artifact-scripture">Daniel 8:5–7</div>
+        </div>
+      </button>
+      <button class="artifact-card-item" type="button" data-asset="goat_broken">
+        <div class="artifact-thumb"><img src="assets/thumbs/goat_broken.jpg" alt=""></div>
+        <div class="artifact-meta">
+          <div class="artifact-name">Goat with the Broken Horn</div>
+          <div class="artifact-scripture">Daniel 8:8</div>
+        </div>
+      </button>
+      <button class="artifact-card-item" type="button" data-asset="goat_horn">
+        <div class="artifact-thumb"><img src="assets/thumbs/goat_horn.jpg" alt=""></div>
+        <div class="artifact-meta">
+          <div class="artifact-name">Little Horn of the Goat</div>
+          <div class="artifact-scripture">Daniel 8:9–12</div>
+        </div>
+      </button>
+      <div class="rail-section-header">COURT, DURA &amp; THE TREE</div>
+      <button class="artifact-card-item" type="button" data-asset="dura">
+        <div class="artifact-thumb"><img src="assets/thumbs/dura.jpg" alt=""></div>
+        <div class="artifact-meta">
+          <div class="artifact-name">Golden Image of Dura</div>
+          <div class="artifact-scripture">Daniel 3:1</div>
+        </div>
+      </button>
+      <button class="artifact-card-item" type="button" data-asset="stump">
+        <div class="artifact-thumb"><img src="assets/thumbs/stump.jpg" alt=""></div>
+        <div class="artifact-meta">
+          <div class="artifact-name">Ironbound Stump</div>
+          <div class="artifact-scripture">Daniel 4:15</div>
+        </div>
+      </button>
+      <button class="artifact-card-item" type="button" data-asset="ox_king">
+        <div class="artifact-thumb"><img src="assets/thumbs/ox_king.jpg" alt=""></div>
+        <div class="artifact-meta">
+          <div class="artifact-name">Nebuchadnezzar the Ox-King</div>
+          <div class="artifact-scripture">Daniel 4:33</div>
+        </div>
+      </button>
+      <button class="artifact-card-item" type="button" data-asset="ancient">
+        <div class="artifact-thumb"><img src="assets/thumbs/ancient.jpg" alt=""></div>
+        <div class="artifact-meta">
+          <div class="artifact-name">The Ancient of Days</div>
+          <div class="artifact-scripture">Daniel 7:9–10</div>
+        </div>
+      </button>
+      <button class="artifact-card-item" type="button" data-asset="son">
+        <div class="artifact-thumb"><img src="assets/thumbs/son.jpg" alt=""></div>
+        <div class="artifact-meta">
+          <div class="artifact-name">One Like the Son of Man</div>
+          <div class="artifact-scripture">Daniel 7:13–14</div>
+        </div>
+      </button>
+      <div class="rail-section-header">DANIEL 9 · THE DECREE</div>
+      <button class="artifact-card-item" type="button" data-asset="decree">
+        <div class="artifact-thumb"><img src="assets/thumbs/decree.jpg" alt=""></div>
+        <div class="artifact-meta">
+          <div class="artifact-name">Royal Decree of Artaxerxes</div>
+          <div class="artifact-scripture">Ezra 7:13 · Daniel 9:25</div>
+        </div>
+      </button>
+      <div class="rail-section-header">DANIEL 11–12</div>
+      <button class="artifact-card-item" type="button" data-asset="kings">
+        <div class="artifact-thumb"><img src="assets/thumbs/kings.jpg" alt=""></div>
+        <div class="artifact-meta">
+          <div class="artifact-name">Kings of the North and South</div>
+          <div class="artifact-scripture">Daniel 11:5, 40</div>
+        </div>
+      </button>
+      <button class="artifact-card-item" type="button" data-asset="michael">
+        <div class="artifact-thumb"><img src="assets/thumbs/michael.jpg" alt=""></div>
+        <div class="artifact-meta">
+          <div class="artifact-name">Michael Standing Up</div>
+          <div class="artifact-scripture">Daniel 12:1</div>
+        </div>
+      </button>
+      <button class="artifact-card-item" type="button" data-asset="sealed">
+        <div class="artifact-thumb"><img src="assets/thumbs/sealed.jpg" alt=""></div>
+        <div class="artifact-meta">
+          <div class="artifact-name">The Sealed Scroll</div>
+          <div class="artifact-scripture">Daniel 12:4</div>
+        </div>
+      </button>
+    </div>
+
+    <div class="rail-footer">
+      <button class="btn-back-collection" id="btn-back-collection" type="button">← BACK TO COLLECTION</button>
+    </div>
+  </aside>
+
+  <aside class="right-narrative" id="right-narrative">
+    <div class="narrative-dossier">
+      <section class="dossier-block scripture-card">
+        <div class="narrative-header">
+          <span class="narrative-icon">📖</span>
+          <span class="narrative-title">SCRIPTURE</span>
+        </div>
+        <div class="scripture-quote" id="nar-scripture-quote">“Thou art this head of gold.”</div>
+        <div class="scripture-ref" id="nar-scripture-ref">Daniel 2:38 (KJV)</div>
+      </section>
+
+      <section class="dossier-block">
+        <div class="narrative-header">
+          <span class="narrative-title">DETAILED EXPLANATION</span>
+        </div>
+        <p class="narrative-body" id="nar-explanation">
+          The golden head represents the Babylonian Empire, the first in a series of world empires foretold by God. Babylon was known for its wealth, wisdom, and splendor, which is why gold is used to depict its rule.
+        </p>
+      </section>
+
+      <section class="dossier-block">
+        <div class="narrative-header">
+          <span class="narrative-title">HISTORICAL BACKGROUND</span>
+        </div>
+        <p class="narrative-body" id="nar-historical">
+          Under Nebuchadnezzar II, Babylon became the greatest city of its time. He expanded his empire, rebuilt the city with magnificent structures, and made Babylon the center of world power.
+        </p>
+        <div class="historical-plate-box">
+          <img src="assets/plates/babylon.jpg" alt="The Ishtar Gate and Processional Way, Babylon" class="historical-plate-img" id="nar-plate-img">
+          <div class="plate-caption" id="nar-plate-caption">The Ishtar Gate &amp; Processional Way · Babylon</div>
+        </div>
+      </section>
+
+      <section class="dossier-block">
+        <div class="narrative-header">
+          <span class="narrative-title">KEY TAKEAWAY</span>
+        </div>
+        <p class="takeaway-body" id="nar-takeaway">Empires rise and fall, but God’s kingdom stands forever.</p>
+      </section>
+
+      <section class="dossier-block" style="padding-top:12px;padding-bottom:12px;">
+        <a class="lab-btn active" id="nar-study-link" href="study.html?id=assembled" style="text-decoration:none;display:flex;align-items:center;justify-content:center;gap:8px;font-size:12px;padding:12px 14px;border-radius:2px;background:#1a1918;border:1px solid #d4af37;color:#d4af37;text-align:center;width:100%;">
+          <span>📖</span> Open Full Study Desk &amp; Quiz →
+        </a>
+        <a class="lab-btn" id="nar-map-link" href="map.html" style="text-decoration:none;display:flex;align-items:center;justify-content:center;gap:8px;font-size:12px;padding:10px 14px;margin-top:8px;border-radius:2px;border:1px solid #d4af37;color:#d4af37;text-align:center;width:100%;">Show on the map of history →</a>
+      </section>
+
+      <section class="dossier-block">
+        <div class="narrative-header">
+          <span class="narrative-title">RELATED ARTIFACTS</span>
+        </div>
+        <div class="related-avatars-row" id="related-avatars-row">
+          <button class="related-avatar" type="button" data-rel="chest" title="Silver Chest"><img src="assets/thumbs/chest.jpg" alt="Silver Chest"></button>
+          <button class="related-avatar" type="button" data-rel="thighs" title="Bronze Thighs"><img src="assets/thumbs/thighs.jpg" alt="Bronze Thighs"></button>
+          <button class="related-avatar" type="button" data-rel="legs" title="Iron Legs"><img src="assets/thumbs/legs.jpg" alt="Iron Legs"></button>
+          <button class="related-avatar" type="button" data-rel="stone" title="The Stone"><img src="assets/thumbs/stone.jpg" alt="Stone"></button>
+        </div>
+        <div class="related-dots" id="related-dots">
+          <span class="dot active"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+        </div>
+      </section>
+    </div>
+  </aside>
+
+  <footer class="bottom-chrome">
+    <div class="museum-action-pill">
+      <button class="museum-action-btn active" id="btn-museum-360" type="button">
+        <span class="action-icon">↻</span> 360° VIEW
+      </button>
+      <button class="museum-action-btn" id="btn-museum-compare" type="button">
+        <span class="action-icon">⚖</span> COMPARE
+      </button>
+      <button class="museum-action-btn" id="btn-museum-ai" type="button">
+        <span class="action-icon">✦</span> AI ANALYSIS
+      </button>
+      <button class="museum-action-btn" id="btn-museum-download" type="button">
+        <span class="action-icon">↓</span> DOWNLOAD
+      </button>
+      <button class="museum-action-btn" id="btn-museum-share" type="button">
+        <span class="action-icon">↗</span> SHARE
+      </button>
+    </div>
+    <div class="stage-interaction-hint">
+      Drag to rotate &nbsp;•&nbsp; Scroll to zoom &nbsp;•&nbsp; Click nodes to explore
+    </div>
+  </footer>
+
+  <div class="mobile-fabs">
+    <button class="util-btn" id="btn-menu-fab" type="button">☰ Collection</button>
+    <button class="util-btn" id="btn-toggle-narrative" type="button">📖 Dossier</button>
+  </div>
+
+  <aside class="study-lab-drawer" id="study-lab-drawer">
+    <div class="drawer-header">
+      <div class="drawer-title">Study Lab</div>
+      <button class="drawer-close-btn" id="btn-close-lab" type="button" aria-label="Close study lab">✕</button>
+    </div>
+    <div class="drawer-body">
+      <div class="drawer-section">
+        <div class="section-heading">Deconstruct</div>
+        <div class="slider-container">
+          <div class="slider-meta"><span>Lift from Altar</span><b id="explode-val">0% (Assembled)</b></div>
+          <input type="range" id="explode-slider" min="0" max="100" value="0" aria-label="Lift colossus from altar">
+        </div>
+        <div class="button-row" style="margin-top:4px">
+          <button class="lab-btn" id="btn-explode-toggle" type="button">Lift from Altar</button>
+          <button class="lab-btn active" id="btn-altar-toggle" type="button">Altar Dais: ON</button>
+          <button class="lab-btn" id="btn-pedestal-toggle" type="button">Old Pedestal: OFF</button>
+        </div>
+      </div>
+      <div class="drawer-section">
+        <div class="section-heading">Study Render Mode</div>
+        <div class="button-grid-2">
+          <button class="lab-btn active" id="mode-gold" data-mode="gold" type="button">Burnished Gold</button>
+          <button class="lab-btn" id="mode-clay" data-mode="clay" type="button">Museum Plaster</button>
+          <button class="lab-btn" id="mode-wireframe" data-mode="wireframe" type="button">Wireframe Scan</button>
+          <button class="lab-btn" id="mode-lighting" data-mode="lighting" type="button">Chiaroscuro</button>
+        </div>
+      </div>
+      <div class="drawer-section">
+        <div class="section-heading">Palace Atmosphere</div>
+        <div class="slider-container">
+          <div class="slider-meta"><span>Scene Brightness</span><b id="brightness-val">100%</b></div>
+          <input type="range" id="brightness-slider" min="50" max="220" value="100" aria-label="Scene brightness">
+        </div>
+        <div class="button-row" style="margin-top:4px">
+          <button class="lab-btn active" id="btn-torch" type="button">Palace Torches: ON</button>
+          <button class="lab-btn active" id="btn-dust" type="button">Golden Dust: ON</button>
+          <button class="lab-btn active" id="btn-spin" type="button">Auto Orbit: ON</button>
+        </div>
+      </div>
+      <div class="drawer-section">
+        <div class="section-heading">Camera View Presets</div>
+        <div class="button-grid-2">
+          <button class="lab-btn" data-cam="front" type="button">Front View</button>
+          <button class="lab-btn" data-cam="threeq" type="button">3/4 Perspective</button>
+          <button class="lab-btn" data-cam="profile" type="button">Side Profile</button>
+          <button class="lab-btn" data-cam="back" type="button">Rear Elevation</button>
+          <button class="lab-btn" data-cam="focus" type="button">Focus Feature</button>
+          <button class="lab-btn" data-cam="colossus" type="button">Full Colossus</button>
+          <button class="lab-btn" data-cam="altar" type="button">Altar Base</button>
+        </div>
+      </div>
+      <div class="drawer-section">
+        <div class="section-heading">Live Scene Diagnostics</div>
+        <div class="diag-grid">
+          <div class="diag-cell"><span>Azimuth</span><b id="diag-azimuth">0.0°</b></div>
+          <div class="diag-cell"><span>Elevation</span><b id="diag-elevation">12.5°</b></div>
+          <div class="diag-cell"><span>Performance</span><b id="diag-fps">60 FPS</b></div>
+          <div class="diag-cell"><span>Active Model</span><b id="diag-view">Head</b></div>
+          <div class="diag-cell" style="grid-column: span 2"><span>Geometry</span><b id="dossier-geometry">—</b></div>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <div class="exhibit-modal cinematic" id="scripture-modal" role="dialog" aria-labelledby="scripture-modal-heading">
+    <button class="modal-close" type="button" data-close-modal aria-label="Close">✕</button>
+    <h2 id="scripture-modal-heading">Scripture</h2>
+    <p class="scripture-quote" id="scripture-modal-body">“Thou art this head of gold.”</p>
+    <p class="scripture-ref" id="scripture-modal-ref">Daniel 2:38 (KJV)</p>
+  </div>
+
+  <div class="exhibit-modal cinematic dossier-modal" id="insight-modal" role="dialog" aria-labelledby="insight-modal-title">
+    <button class="modal-close" type="button" data-close-modal aria-label="Close">✕</button>
+    <p class="modal-kicker">AI analysis · exhibit dossier</p>
+    <h2 id="insight-modal-title">Exhibit insight</h2>
+    <p id="insight-modal-body"></p>
+    <p class="takeaway-body" id="insight-modal-takeaway"></p>
+  </div>
+
+  <div class="exhibit-modal cinematic" id="about-modal" role="dialog" aria-labelledby="about-modal-heading">
+    <button class="modal-close" type="button" data-close-modal aria-label="Close">✕</button>
+    <h2 id="about-modal-heading">About this gallery</h2>
+    <p>A cinematic reconstruction of the image in Nebuchadnezzar’s dream (Daniel 2): gold, silver, bronze, iron, and iron mixed with clay — and the Stone that shatters them. Beside the colossus stand the four beasts of Daniel 7 and the ram and goat of Daniel 8, named by Gabriel as Medo-Persia and Greece.</p>
+    <p style="margin-top:12px">Orbit the sculpture, open annotation nodes, or walk the timeline. Keyboard: ← → to change artifacts, 1–9 and 0 to jump, N nodes, L lab, Esc to close. First click enables gallery sound.</p>
+  </div>
+
+  <div class="exhibit-modal cinematic wide" id="timeline-modal" role="dialog" aria-labelledby="timeline-modal-heading">
+    <button class="modal-close" type="button" data-close-modal aria-label="Close">✕</button>
+    <h2 id="timeline-modal-heading">Prophetic succession</h2>
+    <div class="timeline-list">
+      <button class="timeline-item" type="button" data-asset="head"><b>c. 605–539 BC · Gold</b><p>Babylon under Nebuchadnezzar II — the head of gold.</p></button>
+      <button class="timeline-item" type="button" data-asset="chest"><b>c. 539–331 BC · Silver</b><p>Medo-Persia under Cyrus and Darius — chest and arms of silver.</p></button>
+      <button class="timeline-item" type="button" data-asset="thighs"><b>c. 331–168 BC · Bronze</b><p>Greece under Alexander — belly and thighs of bronze.</p></button>
+      <button class="timeline-item" type="button" data-asset="legs"><b>c. 168 BC – 476 AD · Iron</b><p>Rome, later split east and west — legs of iron.</p></button>
+      <button class="timeline-item" type="button" data-asset="feet"><b>Post-Roman · Iron &amp; clay</b><p>Divided kingdoms, partly strong and partly brittle.</p></button>
+      <button class="timeline-item" type="button" data-asset="stone"><b>The Stone · Daniel 2:34</b><p>Cut without hands, it strikes the image and fills the earth.</p></button>
+      <button class="timeline-item" type="button" data-asset="lion"><b>c. 605–539 BC · Winged lion</b><p>Babylon in Daniel 7: eagle’s wings, then a man’s heart.</p></button>
+      <button class="timeline-item" type="button" data-asset="bear"><b>c. 539–331 BC · Bear</b><p>Medo-Persia raised on one side, three ribs in its mouth.</p></button>
+      <button class="timeline-item" type="button" data-asset="leopard"><b>c. 331–168 BC · Leopard</b><p>Greece: four wings of speed, then four heads of the Diadochi.</p></button>
+      <button class="timeline-item" type="button" data-asset="beast"><b>Rome &amp; the little horn · Dan 7:7–8</b><p>Iron teeth, ten horns, and the horn that speaks great words.</p></button>
+      <button class="timeline-item" type="button" data-asset="ram"><b>Daniel 8 · The ram</b><p>Medo-Persia named: two horns, one higher, the higher last.</p></button>
+      <button class="timeline-item" type="button" data-asset="goat"><b>Daniel 8 · Charging goat</b><p>Greece named: a notable horn from the west, touching not the ground.</p></button>
+      <button class="timeline-item" type="button" data-asset="goat_broken"><b>323 BC · Great horn broken</b><p>Alexander dies. Four horns toward the four winds.</p></button>
+      <button class="timeline-item" type="button" data-asset="goat_horn"><b>Daniel 8:9 · Little horn</b><p>Waxing great toward the pleasant land; the sanctuary war.</p></button>
+      <button class="timeline-item" type="button" data-asset="dura"><b>Daniel 3 · Plain of Dura</b><p>An all-gold image. Forced worship, or the furnace.</p></button>
+      <button class="timeline-item" type="button" data-asset="stump"><b>Daniel 4 · The stump</b><p>Hew the tree; leave the stump bound with iron and brass.</p></button>
+      <button class="timeline-item" type="button" data-asset="ox_king"><b>Daniel 4:33 · The ox-king</b><p>Hair like eagles’ feathers, nails like birds’ claws, among the beasts.</p></button>
+      <button class="timeline-item" type="button" data-asset="ancient"><b>Daniel 7:9 · Ancient of Days</b><p>Thrones set, books opened, the court sits in heaven.</p></button>
+      <button class="timeline-item" type="button" data-asset="son"><b>Daniel 7:13 · Son of Man</b><p>With the clouds of heaven, dominion is given to Him.</p></button>
+      <button class="timeline-item" type="button" data-asset="decree"><b>457 BC · Artaxerxes’ decree</b><p>The commandment to restore and to build Jerusalem. Seventy weeks begin.</p></button>
+      <button class="timeline-item" type="button" data-asset="kings"><b>Daniel 11 · North and south</b><p>After the broken horn, two kings war until the time of the end.</p></button>
+      <button class="timeline-item" type="button" data-asset="michael"><b>Daniel 12:1 · Michael stands</b><p>The great prince stands up; trouble, then deliverance.</p></button>
+      <button class="timeline-item" type="button" data-asset="sealed"><b>Daniel 12:4 · Sealed book</b><p>Shut up the words until the time of the end.</p></button>
+    </div>
+  </div>
+
+  <div id="stage-transition" aria-hidden="true">
+    <div class="stage-fade"></div>
+    <div class="stage-glitch"></div>
+  </div>
+
+  <div id="era-timeline" class="era-timeline" aria-label="Prophetic timeline">
+    <div class="era-track" id="era-track"></div>
+  </div>
+
+  <div id="museum-toast"></div>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

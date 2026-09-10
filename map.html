@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" class="cmap-html">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Map of History — Daniel’s Kingdoms | Bible Artifacts</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👑</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;1,500;1,600&family=Inter:wght@400;500;600&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="vendor/leaflet/leaflet.css">
+  <link rel="stylesheet" href="map.css">
+</head>
+<body class="cmap-page">
+  <div id="map-root" class="cmap-root"></div>
+  <script src="vendor/leaflet/leaflet.js"></script>
+  <script src="journey.js"></script>
+  <script src="map-data.js"></script>
+  <script src="map.js"></script>
+  <script>
+    (function () {
+      if (window.BAJourney) window.BAJourney.load();
+      const params = new URLSearchParams(location.search);
+      const year = params.get("year") || params.get("epoch") || params.get("id");
+      ChronicleMap.mount(document.getElementById("map-root"), {
+        mode: "cinematic",
+        year: year,
+        skipOverture: params.get("skip") === "1"
+      });
+    })();
+  </script>
+</body>
+</html>

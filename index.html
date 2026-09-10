@@ -3,346 +3,218 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Nebuchadnezzar — The Golden Head &amp; Prophetic Colossus | Bible Artifacts Museum</title>
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👑</text></svg>">
+  <title>The Scroll of Daniel — A cinematic sitting through the book</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📜</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="app.css">
-  <link rel="preload" href="models/full_body.glb" as="fetch" crossorigin>
-  <script type="importmap">
-  {
-    "imports": {
-      "three": "./vendor/three/build/three.module.js",
-      "three/addons/": "./vendor/three/examples/jsm/"
-    }
-  }
-  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;1,500;1,600&family=Inter:wght@400;500;600&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="site.css">
+  <script src="journey.js"></script>
+  <script>if (window.BAJourney) window.BAJourney.load();</script>
 </head>
-<body>
-
-  <div id="webgl-container" role="img" aria-label="Interactive 3D view of the Daniel 2 colossus"></div>
-
-  <div id="loading-overlay">
-    <div class="load-title">Bible Artifacts Museum</div>
-    <div class="load-sub" id="loading-status">Assembling Daniel 2 Colossus on Azure Altar…</div>
-    <div id="loading-bar-track"><div id="loading-bar-fill"></div></div>
-    <div id="loading-pct">0%</div>
-    <div id="loading-error">Could not load the colossus model.</div>
-    <button class="lab-btn" id="btn-load-continue" type="button">Continue anyway</button>
+<body class="site cover cinematic-bg">
+  <div class="unveil" aria-hidden="true"></div>
+  <div class="glow-drift" aria-hidden="true"></div>
+  <div class="shafts" aria-hidden="true"></div>
+  <div class="motes" aria-hidden="true">
+    <span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span>
   </div>
+  <div class="vignette" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
 
-  <div id="museum-nodes-layer">
-    <svg id="museum-nodes-svg" xmlns="http://www.w3.org/2000/svg"></svg>
-    <div id="museum-nodes-container"></div>
-  </div>
+  <nav class="site-nav">
+    <a class="site-brand" href="index.html">
+      <svg class="crest" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+        <path d="M16 2.5L5 7.5v9.5c0 7.8 4.7 15.1 11 16.5 6.3-1.4 11-8.7 11-16.5V7.5L16 2.5z" stroke="currentColor" stroke-width="1.6"/>
+        <path d="M11 15.5l3.5 3.5 6.5-6.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      THE SCROLL OF DANIEL
+    </a>
+    <div class="site-links">
+      <a class="active" href="index.html">Home</a>
+      <a href="study.html">The Sitting</a>
+      <a href="map.html">Map of History</a>
+      <a href="gallery.html">3D Symbols</a>
+    </div>
+  </nav>
 
-  <button class="scrim" id="scrim" type="button" aria-label="Close panels"></button>
-
-  <header class="top-chrome">
-    <button class="brand-crest" id="btn-brand-home" type="button" aria-label="Return to complete colossus">
-      <div class="crest-icon">
-        <svg viewBox="0 0 32 32" width="26" height="26" fill="none" aria-hidden="true">
-          <path d="M16 2.5L5 7.5v9.5c0 7.8 4.7 15.1 11 16.5 6.3-1.4 11-8.7 11-16.5V7.5L16 2.5z" stroke="#e5a742" stroke-width="1.8"/>
-          <path d="M11 15.5l3.5 3.5 6.5-6.5" stroke="#ffd678" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <header class="hero">
+    <div class="hero-statue rise">
+      <img class="figure" src="assets/site/hero-colossus.jpg" alt="The prophetic image of Daniel 2: gold, silver, bronze, and iron">
+      <img class="reflection" src="assets/site/hero-colossus.jpg" alt="">
+    </div>
+    <div class="hero-copy rise rise-2">
+      <p class="hero-kicker">A cinematic sitting through the book of Daniel</p>
+      <h1 class="shimmer">THE SCROLL<br>OF DANIEL</h1>
+      <div class="flourish" aria-hidden="true">
+        <svg viewBox="0 0 300 30" xmlns="http://www.w3.org/2000/svg">
+          <path d="M120 15C100 10 80 5 50 15C30 22 15 15 5 5C12 11 25 12 35 7C45 2 60 2 75 8C90 14 105 16 120 15Z"/>
+          <path d="M180 15C200 10 220 5 250 15C270 22 285 15 295 5C288 11 275 12 265 7C255 2 240 2 225 8C210 14 195 16 180 15Z"/>
+          <path d="M150 5L155 12L165 15L155 18L150 25L145 18L135 15L145 12Z"/>
+          <circle cx="150" cy="15" r="3"/>
         </svg>
       </div>
-      <div class="brand-title">BIBLE ARTIFACTS</div>
-    </button>
-
-    <div class="hero-center-nav">
-      <button class="nav-arrow-btn" id="btn-prev-artifact" type="button">← PREVIOUS</button>
-      <div class="hero-title-group">
-        <div class="hero-eyebrow" id="hero-eyebrow">NEBUCHADNEZZAR’S</div>
-        <h1 class="hero-main-title" id="hero-main-title">GOLDEN HEAD</h1>
-        <div class="hero-scripture-pill" id="hero-scripture-pill">DANIEL 2:32, 38</div>
+      <p class="hero-lead">Walk Daniel chapter by chapter. Read the text, stand on the year, then hold the symbol. The sitting is guided: you are told what to expect, you prove the checkpoint, and a highlighted control shows you where to go next.</p>
+      <p class="hero-progress" id="hero-progress" hidden></p>
+      <div class="hero-pills">
+        <span>
+          <svg viewBox="0 0 24 24"><path d="M4 5h7v16H6a2 2 0 0 1-2-2V5z"/><path d="M13 5h7v14a2 2 0 0 1-2 2h-5V5z"/></svg>
+          Scripture
+        </span>
+        <span>
+          <svg viewBox="0 0 24 24"><path d="M3 4h18v4H3z"/><path d="M7 8v12"/><path d="M12 8v12"/><path d="M17 8v12"/></svg>
+          Prophetic timeline
+        </span>
+        <span>
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3a14 14 0 0 1 0 18"/><path d="M12 3a14 14 0 0 0 0 18"/></svg>
+          Interactive map
+        </span>
+        <span>
+          <svg viewBox="0 0 24 24"><path d="M5 16l7-12 7 12"/><path d="M8 16h8"/><circle cx="12" cy="19" r="1.4"/></svg>
+          3D symbols
+        </span>
       </div>
-      <button class="nav-arrow-btn" id="btn-next-artifact" type="button">NEXT →</button>
-    </div>
-
-    <div class="header-utilities">
-      <div class="search-box">
-        <span class="search-icon" aria-hidden="true">🔍</span>
-        <input type="search" id="search-input" placeholder="Search artifacts, scriptures..." autocomplete="off">
+      <div class="hero-actions">
+        <a class="btn solid" id="hero-primary" href="study.html?sheet=0">Begin the sitting</a>
+        <a class="btn" href="gallery.html?asset=assembled">See the image</a>
+        <a class="btn" href="map.html">Open the map</a>
       </div>
-      <button class="util-btn" id="btn-theme-toggle" type="button" title="Toggle lighting tone">☀️</button>
-      <button class="util-btn" id="btn-scripture-modal" type="button" title="Scripture reference">📖</button>
-      <button class="util-btn active" id="btn-nodes-master" type="button" title="Toggle floating nodes">👁 Nodes: ON</button>
-      <button class="util-btn" id="btn-open-lab" type="button" title="Open technical study lab">⚙ Study Lab</button>
-      <button class="util-btn" id="btn-menu" type="button" title="Open artifact list">☰</button>
     </div>
+    <aside class="verse-card corners rise rise-3">
+      <span class="c-bl"></span><span class="c-br"></span>
+      <h3>— Verse of the page —</h3>
+      <blockquote>“Thou, O king, sawest, and behold a great image. This great image, whose brightness was excellent, stood before thee; and the form thereof was terrible.”</blockquote>
+      <cite>Daniel 2:31 (KJV)</cite>
+      <h3 style="margin-top:22px">How a sitting works</h3>
+      <ul class="themes">
+        <li>An intro card tells you what this chapter will do</li>
+        <li>You read, then walk How to study</li>
+        <li>Two checkpoint questions unlock the path</li>
+        <li>An end card highlights the real next button</li>
+      </ul>
+    </aside>
   </header>
 
-  <aside class="left-rail" id="left-rail">
-    <nav class="nav-rail" aria-label="Museum sections">
-      <button class="nav-item" type="button" data-nav="discover"><span class="nav-icon">🧭</span><span>DISCOVER</span></button>
-      <button class="nav-item active" type="button" data-nav="artifacts"><span class="nav-icon">🏛</span><span>ARTIFACTS</span></button>
-      <button class="nav-item" type="button" data-nav="timeline"><span class="nav-icon">📅</span><span>TIMELINE</span></button>
-      <button class="nav-item" type="button" data-nav="kingdoms"><span class="nav-icon">👑</span><span>KINGDOMS</span></button>
-      <button class="nav-item" type="button" data-nav="about"><span class="nav-icon">ℹ</span><span>ABOUT</span></button>
-    </nav>
+  <section class="section">
+    <div class="section-head rise rise-4">
+      <span>One study, three instruments</span>
+      <span>Text · Year · Symbol</span>
+    </div>
+    <div class="instrument-row">
+      <article>
+        <h3>The text</h3>
+        <p>Each sitting opens Daniel in the study desk: the excerpt, How to study, the Scripture dock, and a quiz that must be answered before you continue.</p>
+      </article>
+      <article>
+        <h3>The year</h3>
+        <p>The horizon timeline keeps you on the year the chapter belongs to — 605, 539, 457, A.D. 31, 538, 1798, 1844, Daniel 12 — so the map and the sitting stay on the same night.</p>
+      </article>
+      <article>
+        <h3>The symbol</h3>
+        <p>When the chapter names a metal, a beast, or a court, you can hold that symbol in the 3D gallery. The statue illustrates the sitting; it does not replace it.</p>
+      </article>
+    </div>
 
-    <div class="rail-divider"></div>
-    <div class="rail-section-header">ALL ARTIFACTS</div>
-
-    <div class="artifact-cards-list" id="artifact-cards-list">
-      <button class="artifact-card-item active" type="button" data-asset="assembled">
-        <div class="artifact-thumb"><img src="golden-head-front.png" alt=""></div>
-        <div class="artifact-meta">
-          <div class="artifact-name">Complete Daniel 2 Colossus</div>
-          <div class="artifact-scripture">Daniel 2:31-45</div>
+    <div class="section-head" style="margin-top:42px">
+      <span>The three acts</span>
+      <span>Eleven guided sittings</span>
+    </div>
+    <div class="act-grid">
+      <article class="act-card corners">
+        <span class="c-bl"></span><span class="c-br"></span>
+        <small>Act I · Free sample through Daniel 2</small>
+        <h3>Exile and the metals</h3>
+        <p>Sheets 0–6. Learn how to read the book, stand at the king’s table, then watch the colossus, Dura, the tree, the wall, and the den.</p>
+        <a class="btn solid" href="study.html?sheet=0">Enter the prologue</a>
+        <div class="act-tools">
+          <a href="map.html?year=y605">Map · 605 B.C.</a>
+          <a href="gallery.html?asset=head">Symbol · golden head</a>
         </div>
-      </button>
-      <button class="artifact-card-item" type="button" data-asset="head">
-        <div class="artifact-thumb"><img src="golden-head-front.png" alt=""></div>
-        <div class="artifact-meta">
-          <div class="artifact-name">Nebuchadnezzar’s Golden Head</div>
-          <div class="artifact-scripture">Daniel 2:32, 38</div>
+      </article>
+      <article class="act-card corners">
+        <span class="c-bl"></span><span class="c-br"></span>
+        <small>Act II · After the free sample</small>
+        <h3>Beasts and the court</h3>
+        <p>Sheet 7. Four beasts from the sea, the little horn among the ten, and the court that sits in heaven before the stone strikes.</p>
+        <a class="btn" href="study.html?sheet=7">Open Daniel 7</a>
+        <div class="act-tools">
+          <a href="map.html?year=y538">Map · A.D. 538</a>
+          <a href="gallery.html?asset=beast">Symbol · fourth beast</a>
         </div>
-      </button>
-      <button class="artifact-card-item" type="button" data-asset="chest">
-        <div class="artifact-thumb"><img src="plates/persia.jpg" alt=""></div>
-        <div class="artifact-meta">
-          <div class="artifact-name">The Silver Chest and Arms</div>
-          <div class="artifact-scripture">Daniel 2:32</div>
+      </article>
+      <article class="act-card corners">
+        <span class="c-bl"></span><span class="c-br"></span>
+        <small>Act III · After the free sample</small>
+        <h3>The numbered line</h3>
+        <p>Sheets 8–10. The ram and goat, seventy weeks cut from 2,300 days, and Michael standing when the book is sealed until the end.</p>
+        <a class="btn" href="study.html?sheet=8">Open Daniel 8</a>
+        <div class="act-tools">
+          <a href="map.html?year=y457">Map · 457 B.C.</a>
+          <a href="gallery.html?asset=ram">Symbol · ram of Persia</a>
         </div>
-      </button>
-      <button class="artifact-card-item" type="button" data-asset="thighs">
-        <div class="artifact-thumb"><img src="plates/greece.jpg" alt=""></div>
-        <div class="artifact-meta">
-          <div class="artifact-name">The Bronze Belly and Thighs</div>
-          <div class="artifact-scripture">Daniel 2:32</div>
-        </div>
-      </button>
-      <button class="artifact-card-item" type="button" data-asset="legs">
-        <div class="artifact-thumb"><img src="plates/rome.jpg" alt=""></div>
-        <div class="artifact-meta">
-          <div class="artifact-name">The Iron Legs</div>
-          <div class="artifact-scripture">Daniel 2:33</div>
-        </div>
-      </button>
-      <button class="artifact-card-item" type="button" data-asset="feet">
-        <div class="artifact-thumb"><img src="plates/divided.jpg" alt=""></div>
-        <div class="artifact-meta">
-          <div class="artifact-name">The Feet of Iron and Clay</div>
-          <div class="artifact-scripture">Daniel 2:33</div>
-        </div>
-      </button>
-      <button class="artifact-card-item" type="button" data-asset="altar">
-        <div class="artifact-thumb"><img src="ishtar_gate_babylon.jpg" alt=""></div>
-        <div class="artifact-meta">
-          <div class="artifact-name">Ancient Azure Altar</div>
-          <div class="artifact-scripture">Sacred Dais Platform</div>
-        </div>
-      </button>
+      </article>
     </div>
 
-    <div class="rail-footer">
-      <button class="btn-back-collection" id="btn-back-collection" type="button">← BACK TO COLLECTION</button>
+    <div class="offer-card corners" id="full-scroll">
+      <span class="c-bl"></span><span class="c-br"></span>
+      <small>The full scroll</small>
+      <h2>Finish Daniel after the free sample</h2>
+      <p>The prologue, Daniel 1, and Daniel 2 are open to every visitor. After the dream of the metals, the rest of the sitting — Dura through Michael standing — will unlock as one connected curriculum: remaining sheets, How to study, quizzes, synchronized years and map stops, and the chapter-linked 3D scenes.</p>
+      <p>A church or classroom license is planned beside the personal sitting, so a teacher can walk a class through the scroll without each student hitting a wall. Payments are not live yet. This page is the offer, not a checkout.</p>
+      <div class="hero-actions">
+        <a class="btn solid" href="study.html?sheet=0">Start the free sittings</a>
+        <a class="btn" href="study.html?sheet=2">Jump to the dream</a>
+      </div>
     </div>
-  </aside>
+  </section>
 
-  <aside class="right-narrative" id="right-narrative">
-    <div class="narrative-card scripture-card">
-      <div class="narrative-header">
-        <span class="narrative-icon">📖</span>
-        <span class="narrative-title">SCRIPTURE</span>
-      </div>
-      <div class="scripture-quote" id="nar-scripture-quote">
-        “Thou art this head of gold.”
-      </div>
-      <div class="scripture-ref" id="nar-scripture-ref">
-        Daniel 2:32, 38 (NKJV)
-      </div>
+  <footer class="site-footer">
+    <div class="flourish" aria-hidden="true">
+      <svg viewBox="0 0 300 30" xmlns="http://www.w3.org/2000/svg">
+        <path d="M120 15C100 10 80 5 50 15C30 22 15 15 5 5C12 11 25 12 35 7C45 2 60 2 75 8C90 14 105 16 120 15Z"/>
+        <path d="M180 15C200 10 220 5 250 15C270 22 285 15 295 5C288 11 275 12 265 7C255 2 240 2 225 8C210 14 195 16 180 15Z"/>
+        <path d="M150 5L155 12L165 15L155 18L150 25L145 18L135 15L145 12Z"/>
+      </svg>
     </div>
-
-    <div class="narrative-card">
-      <div class="narrative-header">
-        <span class="narrative-title">DETAILED EXPLANATION</span>
-      </div>
-      <p class="narrative-body" id="nar-explanation">
-        The golden head represents the Babylonian Empire, the first in a series of world empires foretold by God. Babylon was known for its wealth, wisdom, and splendor, which is why gold is used to depict its rule.
-      </p>
-    </div>
-
-    <div class="narrative-card">
-      <div class="narrative-header">
-        <span class="narrative-title">HISTORICAL BACKGROUND</span>
-      </div>
-      <p class="narrative-body" id="nar-historical">
-        Under Nebuchadnezzar II, Babylon became the greatest city of its time. He expanded his empire, rebuilt the city with magnificent structures, and made Babylon the center of world power.
-      </p>
-      <div class="historical-plate-box">
-        <img src="ishtar_gate_babylon.jpg" alt="The Ishtar Gate and Processional Way, Babylon" class="historical-plate-img" id="nar-plate-img">
-        <div class="plate-caption" id="nar-plate-caption">The Ishtar Gate &amp; Processional Way · Babylon</div>
-      </div>
-    </div>
-
-    <div class="narrative-card">
-      <div class="narrative-header">
-        <span class="narrative-title">KEY TAKEAWAY</span>
-      </div>
-      <p class="takeaway-body" id="nar-takeaway">
-        Empires rise and fall, but God’s kingdom stands forever.
-      </p>
-    </div>
-
-    <div class="narrative-card">
-      <div class="narrative-header">
-        <span class="narrative-title">RELATED ARTIFACTS</span>
-      </div>
-      <div class="related-avatars-row">
-        <button class="related-avatar" type="button" data-rel="chest" title="The Silver Chest and Arms"><img src="plates/persia.jpg" alt="Silver Chest"></button>
-        <button class="related-avatar" type="button" data-rel="thighs" title="The Bronze Belly and Thighs"><img src="plates/greece.jpg" alt="Bronze Thighs"></button>
-        <button class="related-avatar" type="button" data-rel="legs" title="The Iron Legs"><img src="plates/rome.jpg" alt="Iron Legs"></button>
-        <button class="related-avatar" type="button" data-rel="altar" title="Sacred Azure Altar Dais"><img src="ishtar_gate_babylon.jpg" alt="Azure Altar"></button>
-      </div>
-      <div class="related-dots">
-        <span class="dot active"></span>
-        <span class="dot"></span>
-        <span class="dot"></span>
-        <span class="dot"></span>
-      </div>
-    </div>
-  </aside>
-
-  <footer class="bottom-chrome">
-    <div class="museum-action-pill">
-      <button class="museum-action-btn active" id="btn-museum-360" type="button">
-        <span class="action-icon">🔄</span> 360° VIEW
-      </button>
-      <button class="museum-action-btn" id="btn-museum-compare" type="button">
-        <span class="action-icon">⚖</span> COMPARE
-      </button>
-      <button class="museum-action-btn" id="btn-museum-ai" type="button">
-        <span class="action-icon">🧠</span> INSIGHT
-      </button>
-      <button class="museum-action-btn" id="btn-museum-download" type="button">
-        <span class="action-icon">⬇</span> DOWNLOAD
-      </button>
-      <button class="museum-action-btn" id="btn-museum-share" type="button">
-        <span class="action-icon">🔗</span> SHARE
-      </button>
-    </div>
-    <div class="stage-interaction-hint">
-      <span class="hint-hand">👆</span> Drag to rotate &nbsp;•&nbsp; Scroll to zoom &nbsp;•&nbsp; Click nodes to explore
-    </div>
+    “Surely the Lord God will do nothing, but he revealeth his secret unto his servants the prophets.”
+    <span>Amos 3:7 (KJV)</span>
   </footer>
 
-  <div class="mobile-fabs">
-    <button class="util-btn" id="btn-menu-fab" type="button">☰ Artifacts</button>
-    <button class="util-btn" id="btn-toggle-narrative" type="button">📖 Info</button>
-  </div>
+  <script>
+    (function () {
+      const J = window.BAJourney;
+      if (!J) return;
+      const primary = document.getElementById('hero-primary');
+      const progress = document.getElementById('hero-progress');
+      if (primary) {
+        primary.href = J.resumeHref();
+        primary.textContent = J.resumeLabel();
+      }
+      if (progress && J.hasProgress()) {
+        const sheet = J.resumeSheet();
+        progress.hidden = false;
+        progress.textContent = 'You are in ' + J.sheetLabel(sheet) + ' · sitting ' + (sheet + 1) + ' of 11. The free sample runs through Daniel 2.';
+      }
 
-  <aside class="study-lab-drawer" id="study-lab-drawer">
-    <div class="drawer-header">
-      <div class="drawer-title">⚙ Study Lab &amp; Diagnostics</div>
-      <button class="drawer-close-btn" id="btn-close-lab" type="button" aria-label="Close study lab">✕</button>
-    </div>
-    <div class="drawer-body">
-      <div class="drawer-section">
-        <div class="section-heading">3D Anatomical Deconstruct</div>
-        <div class="slider-container">
-          <div class="slider-meta">
-            <span>Lift from Altar</span>
-            <b id="explode-val">0% (Assembled)</b>
-          </div>
-          <input type="range" id="explode-slider" min="0" max="100" value="0" aria-label="Lift colossus from altar">
-        </div>
-        <div class="button-row" style="margin-top:4px">
-          <button class="lab-btn" id="btn-explode-toggle" type="button">Lift from Altar</button>
-          <button class="lab-btn active" id="btn-altar-toggle" type="button">Altar Dais: ON</button>
-          <button class="lab-btn" id="btn-pedestal-toggle" type="button">Old Pedestal: OFF</button>
-        </div>
-      </div>
-
-      <div class="drawer-section">
-        <div class="section-heading">Study Render Mode</div>
-        <div class="button-grid-2">
-          <button class="lab-btn active" id="mode-gold" data-mode="gold" type="button">Burnished Gold</button>
-          <button class="lab-btn" id="mode-clay" data-mode="clay" type="button">Museum Plaster</button>
-          <button class="lab-btn" id="mode-wireframe" data-mode="wireframe" type="button">Wireframe Scan</button>
-          <button class="lab-btn" id="mode-lighting" data-mode="lighting" type="button">Chiaroscuro</button>
-        </div>
-      </div>
-
-      <div class="drawer-section">
-        <div class="section-heading">Palace Atmosphere</div>
-        <div class="slider-container">
-          <div class="slider-meta">
-            <span>Scene Brightness</span>
-            <b id="brightness-val">100%</b>
-          </div>
-          <input type="range" id="brightness-slider" min="50" max="220" value="100" aria-label="Scene brightness">
-        </div>
-        <div class="button-row" style="margin-top:4px">
-          <button class="lab-btn active" id="btn-torch" type="button">Palace Torches: ON</button>
-          <button class="lab-btn active" id="btn-dust" type="button">Golden Dust: ON</button>
-          <button class="lab-btn active" id="btn-spin" type="button">Auto Orbit: ON</button>
-        </div>
-      </div>
-
-      <div class="drawer-section">
-        <div class="section-heading">Camera View Presets</div>
-        <div class="button-grid-2">
-          <button class="lab-btn" data-cam="front" type="button">Front View</button>
-          <button class="lab-btn" data-cam="threeq" type="button">3/4 Perspective</button>
-          <button class="lab-btn" data-cam="profile" type="button">Side Profile</button>
-          <button class="lab-btn" data-cam="back" type="button">Rear Elevation</button>
-          <button class="lab-btn" data-cam="focus" type="button">Focus Feature</button>
-          <button class="lab-btn" data-cam="colossus" type="button">Full Colossus</button>
-          <button class="lab-btn" data-cam="altar" type="button">Altar Base</button>
-        </div>
-      </div>
-
-      <div class="drawer-section">
-        <div class="section-heading">Live Scene Diagnostics</div>
-        <div class="diag-grid">
-          <div class="diag-cell"><span>Azimuth</span><b id="diag-azimuth">0.0°</b></div>
-          <div class="diag-cell"><span>Elevation</span><b id="diag-elevation">12.5°</b></div>
-          <div class="diag-cell"><span>Performance</span><b id="diag-fps">60 FPS</b></div>
-          <div class="diag-cell"><span>Active Model</span><b id="diag-view">Assembled</b></div>
-          <div class="diag-cell" style="grid-column: span 2"><span>Geometry</span><b id="dossier-geometry">—</b></div>
-        </div>
-      </div>
-    </div>
-  </aside>
-
-  <div class="exhibit-modal" id="scripture-modal" role="dialog" aria-labelledby="scripture-modal-heading">
-    <button class="modal-close" type="button" data-close-modal aria-label="Close">✕</button>
-    <h2 id="scripture-modal-heading">Scripture</h2>
-    <p class="scripture-quote" id="scripture-modal-body">“Thou art this head of gold.”</p>
-    <p class="scripture-ref" id="scripture-modal-ref">Daniel 2:32, 38 (NKJV)</p>
-  </div>
-
-  <div class="exhibit-modal" id="insight-modal" role="dialog" aria-labelledby="insight-modal-title">
-    <button class="modal-close" type="button" data-close-modal aria-label="Close">✕</button>
-    <h2 id="insight-modal-title">Exhibit insight</h2>
-    <p id="insight-modal-body"></p>
-    <p class="takeaway-body" id="insight-modal-takeaway"></p>
-  </div>
-
-  <div class="exhibit-modal" id="about-modal" role="dialog" aria-labelledby="about-modal-heading">
-    <button class="modal-close" type="button" data-close-modal aria-label="Close">✕</button>
-    <h2 id="about-modal-heading">About this exhibit</h2>
-    <p>A local Three.js reconstruction of the image in Nebuchadnezzar’s dream (Daniel 2): gold, silver, bronze, iron, and iron mixed with clay, standing on a glazed Mesopotamian altar.</p>
-    <p style="margin-top:10px">Drag to orbit, scroll to zoom, and use the artifact list or keyboard 1–7 to study each kingdom in isolation. No account, and no network, is required once the page is served locally.</p>
-  </div>
-
-  <div class="exhibit-modal" id="timeline-modal" role="dialog" aria-labelledby="timeline-modal-heading">
-    <button class="modal-close" type="button" data-close-modal aria-label="Close">✕</button>
-    <h2 id="timeline-modal-heading">Prophetic timeline</h2>
-    <div class="timeline-list">
-      <button class="timeline-item" type="button" data-asset="head"><b>c. 605–539 BC · Gold</b><p>Babylon under Nebuchadnezzar II — the head of gold.</p></button>
-      <button class="timeline-item" type="button" data-asset="chest"><b>c. 539–331 BC · Silver</b><p>Medo-Persia under Cyrus and Darius — chest and arms of silver.</p></button>
-      <button class="timeline-item" type="button" data-asset="thighs"><b>c. 331–168 BC · Bronze</b><p>Greece under Alexander — belly and thighs of bronze.</p></button>
-      <button class="timeline-item" type="button" data-asset="legs"><b>c. 168 BC – 476 AD · Iron</b><p>Rome, later split east and west — legs of iron.</p></button>
-      <button class="timeline-item" type="button" data-asset="feet"><b>Post-Roman · Iron &amp; clay</b><p>Divided kingdoms, partly strong and partly brittle.</p></button>
-    </div>
-  </div>
-
-  <div id="museum-toast"></div>
-
-  <script type="module" src="app.js"></script>
+      const heroStatue = document.querySelector('.hero-statue');
+      if (heroStatue) {
+        const spotlight = document.createElement('div');
+        spotlight.className = 'spotlight-overlay';
+        spotlight.style.cssText = 'position:absolute;inset:0;z-index:2;pointer-events:none;background:radial-gradient(circle 260px at var(--spotlight-x,50%) var(--spotlight-y,40%),rgba(255,214,130,0.22),transparent 72%);mix-blend-mode:color-dodge;opacity:0.6;transition:opacity 0.3s ease;';
+        heroStatue.appendChild(spotlight);
+        heroStatue.addEventListener('mousemove', (e) => {
+          const rect = heroStatue.getBoundingClientRect();
+          const x = ((e.clientX - rect.left) / rect.width) * 100;
+          const y = ((e.clientY - rect.top) / rect.height) * 100;
+          spotlight.style.setProperty('--spotlight-x', x + '%');
+          spotlight.style.setProperty('--spotlight-y', y + '%');
+          spotlight.style.opacity = '0.9';
+        });
+        heroStatue.addEventListener('mouseleave', () => {
+          spotlight.style.opacity = '0.4';
+        });
+      }
+    })();
+  </script>
 </body>
 </html>

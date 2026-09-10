@@ -1,0 +1,914 @@
+{
+  "H1840": {
+    "lemma": "דָּנִיֵּאל",
+    "translit": "Daniyye'l",
+    "lang": "Hebrew",
+    "derivation": "From H1835 (Dan, “judge”) + H410 (El, God): “God is my judge.”",
+    "gloss": "Daniel — God is my judge (1890: the prophet’s own name, not a title he takes).",
+    "danielHits": [
+      { "ref": "1:6-7", "gloss": "renamed Belteshazzar; the Hebrew name is not erased" },
+      { "ref": "2:26", "gloss": "the king still knows both names" },
+      { "ref": "12:13", "gloss": "the last word of the book is spoken to this name" }
+    ],
+    "otherKjv": [
+      { "ref": "Ezekiel 14:14", "gloss": "listed with Noah and Job as a righteous man" },
+      { "ref": "Matthew 24:15", "gloss": "Jesus cites “Daniel the prophet” as a reader of last things" }
+    ],
+    "why": "The book’s name is already an argument: history is a courtroom. Empires are weighed, not merely described. When the court of 7:9–10 sits, the prophet’s own name has been waiting for that scene."
+  },
+  "H2235": {
+    "lemma": "זֵרֹעִים",
+    "translit": "zero'im",
+    "lang": "Hebrew",
+    "derivation": "Plural of H2221 / H2232 (zera, seed); vegetables, grains, seeds, or pulse.",
+    "gloss": "vegetables / pulse (1890: things sown, seeds, grains, vegetables).",
+    "danielHits": [
+      { "ref": "1:12", "gloss": "give us pulse to eat, and water to drink" },
+      { "ref": "1:16", "gloss": "took away the portion of their meat… and gave them pulse" }
+    ],
+    "otherKjv": [
+      { "ref": "Genesis 1:29", "gloss": "every herb bearing seed… to you it shall be for meat" },
+      { "ref": "Isaiah 61:11", "gloss": "as the garden causeth the things that are sown in it to spring forth" }
+    ],
+    "why": "Zeroim echoes Genesis 1:29: the original Creator's diet before sin and empire. Daniel's refusal of the royal delicacies was not an ascetic whim; it was covenant loyalty to the Creator's design and Leviticus 11. Consecration at the table preceded revelation in the night."
+  },
+  "H3068": {
+    "lemma": "יהוה",
+    "translit": "YHWH",
+    "lang": "Hebrew",
+    "derivation": "The covenant Name; KJV prints LORD in small capitals. Not a generic “god.”",
+    "gloss": "the LORD — Israel’s covenant God (1890: the personal Name, not a title of Marduk).",
+    "danielHits": [
+      { "ref": "1:2", "gloss": "the Lord gave Jehoiakim into Nebuchadnezzar’s hand" },
+      { "ref": "9:2-4", "gloss": "Daniel prays the Name while reading Jeremiah’s seventy years" }
+    ],
+    "otherKjv": [
+      { "ref": "Exodus 3:14-15", "gloss": "I AM THAT I AM; this is my name for ever" },
+      { "ref": "Jeremiah 25:12", "gloss": "the LORD names the end of Babylon’s seventy years" },
+      { "ref": "Isaiah 45:1", "gloss": "the LORD names Cyrus before the city falls" }
+    ],
+    "why": "Daniel 1:2 will not let Babylon write the first sentence. The Name hands the king over. That is why 2:37 can say the God of heaven gave Nebuchadnezzar the kingdom, and why 5:23 can charge Belshazzar with lifting himself against the Lord of heaven."
+  },
+  "H894": {
+    "lemma": "בָּבֶל",
+    "translit": "Babel",
+    "lang": "Hebrew",
+    "derivation": "From H1101 balal, “to mix / confound” — the city of Genesis 11 remembered as confusion.",
+    "gloss": "Babylon / Babel (1890: the city and the kingdom, not a later church slogan).",
+    "danielHits": [
+      { "ref": "1:1", "gloss": "Nebuchadnezzar king of Babylon besieges Jerusalem" },
+      { "ref": "1:2", "gloss": "vessels carried to Shinar, to the house of his god" }
+    ],
+    "otherKjv": [
+      { "ref": "Genesis 11:9", "gloss": "therefore is the name of it called Babel" },
+      { "ref": "Jeremiah 51:7", "gloss": "Babylon hath been a golden cup in the LORD’s hand" },
+      { "ref": "Isaiah 13:19", "gloss": "Babylon, the glory of kingdoms, shall be as Sodom" }
+    ],
+    "why": "The gold head has a city with a genealogy: mixing and pride. Every later metal is measured from this fall. When chapter 5 drinks from the temple vessels, the Hebrew name of 1:1 has already told you whose house is being mocked."
+  },
+  "H895": {
+    "lemma": "בָּבֶל",
+    "translit": "Babel",
+    "lang": "Aramaic",
+    "derivation": "Aramaic twin of Hebrew H894. Same city, court language of chapters 2–7.",
+    "gloss": "Babylon (1890: the Aramaic spelling used when the king speaks).",
+    "danielHits": [
+      { "ref": "4:30", "gloss": "Is not this great Babylon that I have built" },
+      { "ref": "5:7", "gloss": "third ruler in the kingdom of Babylon" }
+    ],
+    "otherKjv": [
+      { "ref": "Ezra 5:13", "gloss": "Cyrus king of Babylon — the name survives the transfer" },
+      { "ref": "Jeremiah 51:64", "gloss": "thus shall Babylon sink" }
+    ],
+    "why": "The king names the city at the height of pride. Chapter 4’s boast and chapter 5’s feast use the same Aramaic word. The stump is left; the gold is not eternal."
+  },
+  "H1351": {
+    "lemma": "גָּאַל",
+    "translit": "ga'al",
+    "lang": "Hebrew",
+    "derivation": "Primitive root: to soil, desecrate, or pollute — the opposite of holy use.",
+    "gloss": "to defile (1890: ceremonial and moral stain, not mere bad taste).",
+    "danielHits": [
+      { "ref": "1:8", "gloss": "Daniel would not defile himself with the king’s meat and wine" }
+    ],
+    "otherKjv": [
+      { "ref": "Malachi 1:7", "gloss": "ye offer polluted bread upon mine altar" },
+      { "ref": "Isaiah 59:3", "gloss": "your hands are defiled with blood" },
+      { "ref": "Zephaniah 3:1", "gloss": "her that is filthy and polluted" }
+    ],
+    "why": "The first stand is at the table, before any dream is read. Leviticus 11 already sorted clean from unclean; the king’s portion had been poured to Marduk. Daniel can take a new name and a new language. He cannot take a polluted cup and still read sealed books."
+  },
+  "H3117": {
+    "lemma": "יוֹם",
+    "translit": "yom",
+    "lang": "Hebrew",
+    "derivation": "From an unused root meaning to be hot; the daylight period, then a measured day.",
+    "gloss": "day (1890: ordinary solar day; in appointed signs it can stand for a year).",
+    "danielHits": [
+      { "ref": "8:14", "gloss": "two thousand and three hundred days — then the sanctuary is cleansed" },
+      { "ref": "12:13", "gloss": "stand in thy lot at the end of the days" }
+    ],
+    "otherKjv": [
+      { "ref": "Numbers 14:34", "gloss": "each day for a year shall ye bear your iniquities" },
+      { "ref": "Ezekiel 4:6", "gloss": "I have appointed thee each day for a year" },
+      { "ref": "Genesis 1:5", "gloss": "the evening and the morning were the first day" }
+    ],
+    "why": "Numbers 14:34 and Ezekiel 4:6 do not invent a code; they show God already counting a day as a year when He appoints a sign. Daniel 9 then runs seventy weeks to a dated Messiah. That is why 8:14’s 2,300 days are not three years of Antiochus but a longer measured line."
+  },
+  "H8141": {
+    "lemma": "שָׁנָה",
+    "translit": "shanah",
+    "lang": "Hebrew",
+    "derivation": "From H8138, to fold / repeat — a year as a completed turn of seasons.",
+    "gloss": "year (1890: a literal solar year, the other half of the year-day pair).",
+    "danielHits": [
+      { "ref": "1:1", "gloss": "third year of Jehoiakim" },
+      { "ref": "9:2", "gloss": "seventy years in the desolations of Jerusalem" }
+    ],
+    "otherKjv": [
+      { "ref": "Numbers 14:34", "gloss": "forty days become forty years" },
+      { "ref": "Ezekiel 4:6", "gloss": "each day for a year" },
+      { "ref": "Jeremiah 25:11", "gloss": "these nations shall serve the king of Babylon seventy years" }
+    ],
+    "why": "The year is the unit the day becomes. Jeremiah’s seventy years are ordinary years Daniel can count on a calendar. The seventy weeks of 9:24 use the appointed day-for-year scale so 490 days become 490 years. Two clocks, one God."
+  },
+  "H7328": {
+    "lemma": "רָז",
+    "translit": "raz",
+    "lang": "Aramaic",
+    "derivation": "Corresponding to a hidden thing; a secret not available to court guilds.",
+    "gloss": "secret (1890: a concealed matter Heaven must disclose).",
+    "danielHits": [
+      { "ref": "2:18-19", "gloss": "mercies concerning this secret; then the secret is revealed" },
+      { "ref": "2:28-30", "gloss": "God in heaven revealeth secrets" },
+      { "ref": "2:47", "gloss": "a revealer of secrets" }
+    ],
+    "otherKjv": [
+      { "ref": "Daniel 4:9", "gloss": "no secret troubleth thee — the same word in the tree dream" }
+    ],
+    "why": "Daniel 2:28 is a method statement. Magicians ask for the dream first because they cannot fetch a raz. Historicism starts here: the image is given, not guessed, and it runs from the prophet’s night to the latter days."
+  },
+  "H1541": {
+    "lemma": "גְּלָא",
+    "translit": "gela",
+    "lang": "Aramaic",
+    "derivation": "Corresponding to H1540 galah: to denude, disclose, make naked.",
+    "gloss": "to reveal (1890: to uncover what was covered).",
+    "danielHits": [
+      { "ref": "2:19", "gloss": "the secret was revealed unto Daniel" },
+      { "ref": "2:28", "gloss": "there is a God in heaven that revealeth secrets" },
+      { "ref": "2:47", "gloss": "a revealer of secrets" }
+    ],
+    "otherKjv": [
+      { "ref": "Amos 3:7", "gloss": "he revealeth his secret unto his servants the prophets" },
+      { "ref": "Deuteronomy 29:29", "gloss": "the secret things belong unto the LORD; the revealed things to us" }
+    ],
+    "why": "The verb under “revealeth secrets” is the opposite of occult theft. Court science fails in 2:10–11. Prayer succeeds in 2:18–19. The sitting can name metals because Heaven uncovered them."
+  },
+  "H6755": {
+    "lemma": "צְלֵם",
+    "translit": "tselem",
+    "lang": "Aramaic",
+    "derivation": "Corresponding to H6754: an image, idol, or representational form.",
+    "gloss": "image / statue (1890: a figure that stands for something else).",
+    "danielHits": [
+      { "ref": "2:31-35", "gloss": "the great image of successive metals" },
+      { "ref": "3:1-5", "gloss": "the all-gold image on the plain of Dura" }
+    ],
+    "otherKjv": [
+      { "ref": "Genesis 1:26", "gloss": "Hebrew tselem — man made in God’s image" },
+      { "ref": "Revelation 13:15", "gloss": "the image of the beast that must be worshipped" }
+    ],
+    "why": "Chapter 2’s tselem is history in metals — successive kingdoms, not concurrent local powers. Chapter 3’s tselem is a counter-creed: all gold, no silver. Revelation 13 later commands worship of another image. Dura is the rehearsal."
+  },
+  "H1722": {
+    "lemma": "דְּהַב",
+    "translit": "dehab",
+    "lang": "Aramaic",
+    "derivation": "Corresponding to Hebrew H2091 zahab, gold. From a root of shimmering yellow; the metal of royalty and of the sanctuary.",
+    "gloss": "gold (1890: the precious metal, then the first kingdom by Daniel’s own sentence).",
+    "danielHits": [
+      { "ref": "2:32", "gloss": "this image’s head was of fine gold" },
+      { "ref": "2:38", "gloss": "thou art this head of gold" },
+      { "ref": "3:1", "gloss": "an image of gold sixty by six cubits" },
+      { "ref": "5:2-4", "gloss": "golden vessels from Jerusalem used to praise gods of gold" }
+    ],
+    "otherKjv": [
+      { "ref": "Ezra 7:15", "gloss": "silver and gold freely offered for the house of God in Jerusalem" },
+      { "ref": "Exodus 25:11", "gloss": "the ark overlaid with pure gold — holy furniture, not a throne-boast" },
+      { "ref": "Isaiah 60:6", "gloss": "they shall bring gold and incense" }
+    ],
+    "why": "Dehab can name a cup, a statue, or a kingdom. Daniel 2:38 is the only metal the prophet pins to a living man: thou art this head of gold. That sentence is what lets the sitting watch silver replace him. Ezra 7:15 then uses the same metal for the house of God — gold returned to worship — while Daniel 3 and 5 use it to defy the dream and to toast idols. The word does not mean “Babylon” by itself; 2:38 is the identification that makes the rest of the statue a timeline."
+  },
+  "H3702": {
+    "lemma": "כְּסַף",
+    "translit": "kesaph",
+    "lang": "Aramaic",
+    "derivation": "Corresponding to H3701: silver, money, the pale metal under gold.",
+    "gloss": "silver (1890: the second metal; inferior in glory, legal in reach).",
+    "danielHits": [
+      { "ref": "2:32", "gloss": "breast and arms of silver" },
+      { "ref": "2:39", "gloss": "another kingdom inferior to thee" },
+      { "ref": "5:2", "gloss": "golden and silver vessels from the temple" }
+    ],
+    "otherKjv": [
+      { "ref": "Isaiah 13:17", "gloss": "the Medes, which shall not regard silver" },
+      { "ref": "Daniel 5:28", "gloss": "given to the Medes and Persians" },
+      { "ref": "Ezra 7:15", "gloss": "silver freely offered for the house of God" }
+    ],
+    "why": "Silver is named before it arrives. 2:39 promises an inferior kingdom; 5:28 names the Medes and Persians on the plaster. The two arms of 2:32 match the bear raised on one side in 7:5 and the ram’s uneven horns in 8:3, 20."
+  },
+  "H5174": {
+    "lemma": "נְחָשׁ",
+    "translit": "nechash",
+    "lang": "Aramaic",
+    "derivation": "Corresponding to H5154: copper / bronze — harder than gold, cheaper than silver.",
+    "gloss": "brass / bronze (1890: the third metal; arms and culture that travel).",
+    "danielHits": [
+      { "ref": "2:32", "gloss": "belly and thighs of brass" },
+      { "ref": "2:39", "gloss": "a third kingdom of brass, which shall bear rule over all the earth" }
+    ],
+    "otherKjv": [
+      { "ref": "Daniel 8:21", "gloss": "the rough goat is the king of Grecia" },
+      { "ref": "Daniel 7:6", "gloss": "a leopard with four wings and four heads" },
+      { "ref": "Zechariah 6:1", "gloss": "mountains of brass — bronze as imperial hardness" }
+    ],
+    "why": "Bronze is not named “Greece” in chapter 2. Chapter 8 supplies the name after the goat breaks the ram. The sitting reads backward: once 8:21 is on the table, the third metal has a people and a speed."
+  },
+  "H6523": {
+    "lemma": "פַּרְזֶל",
+    "translit": "parzel",
+    "lang": "Aramaic",
+    "derivation": "Corresponding to H1270 barzel, iron — the metal that breaks.",
+    "gloss": "iron (1890: strength that bruises; the fourth kingdom).",
+    "danielHits": [
+      { "ref": "2:33", "gloss": "legs of iron; feet part of iron and clay" },
+      { "ref": "2:40", "gloss": "the fourth kingdom shall be strong as iron" },
+      { "ref": "7:7", "gloss": "great iron teeth" }
+    ],
+    "otherKjv": [
+      { "ref": "Deuteronomy 28:48", "gloss": "a yoke of iron upon thy neck" },
+      { "ref": "Psalm 2:9", "gloss": "thou shalt break them with a rod of iron" },
+      { "ref": "Revelation 2:27", "gloss": "rule them with a rod of iron" }
+    ],
+    "why": "Iron is the only metal that keeps going after the legs: it reappears in the feet mixed with clay, and in the fourth beast’s teeth. The fourth kingdom is one career — imperial, then divided — not a jump to a Seleucid footnote."
+  },
+  "H2635": {
+    "lemma": "חֲסַף",
+    "translit": "chasaph",
+    "lang": "Aramaic",
+    "derivation": "A clod or potsherd; baked clay, brittle beside iron.",
+    "gloss": "clay (1890: potter’s ware; strength that cannot fuse).",
+    "danielHits": [
+      { "ref": "2:33", "gloss": "feet part of iron and part of clay" },
+      { "ref": "2:41-43", "gloss": "they shall mingle… but they shall not cleave" }
+    ],
+    "otherKjv": [
+      { "ref": "Isaiah 64:8", "gloss": "we are the clay, and thou our potter" },
+      { "ref": "Jeremiah 18:6", "gloss": "as the clay is in the potter’s hand" },
+      { "ref": "Daniel 7:24", "gloss": "ten kings out of the fourth kingdom" }
+    ],
+    "why": "Clay is not a fifth world empire. It is the fracture inside the fourth. 2:43 is the physics: dynastic mingling and forced unions do not make one metal again. The stone strikes here, not in Babylon."
+  },
+  "H69": {
+    "lemma": "אֶבֶן",
+    "translit": "eben",
+    "lang": "Aramaic",
+    "derivation": "Corresponding to H68: a stone, a built or cut piece of rock — not a mountain already standing.",
+    "gloss": "stone (1890: a cut stone; here, cut without hands).",
+    "danielHits": [
+      { "ref": "2:34-35", "gloss": "a stone cut out without hands smote the image" },
+      { "ref": "2:44-45", "gloss": "the God of heaven sets up a kingdom that shall never be destroyed" }
+    ],
+    "otherKjv": [
+      { "ref": "Psalm 118:22", "gloss": "the stone which the builders refused" },
+      { "ref": "Isaiah 28:16", "gloss": "a stone, a tried stone, a precious corner stone" },
+      { "ref": "Luke 20:17-18", "gloss": "whosoever shall fall on that stone" }
+    ],
+    "why": "Daniel 2 uses eben, a stone that arrives, not tsur, a cliff already there. It does not reform the metals. It grinds them. 2:44 times it “in the days of these kings” — the divided feet — so the sitting will not place the kingdom in Constantine or in 539."
+  },
+  "H6697": {
+    "lemma": "צוּר",
+    "translit": "tsur",
+    "lang": "Hebrew",
+    "derivation": "A cliff or sharp rock; God as the already-standing Rock.",
+    "gloss": "rock / cliff (1890: a massif, not a cut building-stone).",
+    "danielHits": [
+      { "ref": "—", "gloss": "not the word Daniel 2 uses for the kingdom-stone" }
+    ],
+    "otherKjv": [
+      { "ref": "Deuteronomy 32:4", "gloss": "He is the Rock, his work is perfect" },
+      { "ref": "Psalm 18:2", "gloss": "the LORD is my rock" },
+      { "ref": "Isaiah 26:4", "gloss": "in the LORD JEHOVAH is everlasting strength (tsur)" }
+    ],
+    "why": "The contrast teaches method. If Daniel had wanted a mountain already on the map, Hebrew had tsur. He uses eben: something cut and thrown. The kingdom arrives; it is not a reform of Rome or a church already standing."
+  },
+  "H4437": {
+    "lemma": "מַלְכוּ",
+    "translit": "malku",
+    "lang": "Aramaic",
+    "derivation": "From H4430 melek, king — the realm and the reign, not only a crown.",
+    "gloss": "kingdom (1890: dominion transferred from metal to metal, then taken by the stone).",
+    "danielHits": [
+      { "ref": "2:37-44", "gloss": "kingdom given, then inferior, then brass, then iron, then God’s" },
+      { "ref": "4:17", "gloss": "the most High ruleth in the kingdom of men" },
+      { "ref": "7:14", "gloss": "there was given him a kingdom" }
+    ],
+    "otherKjv": [
+      { "ref": "Psalm 145:13", "gloss": "thy kingdom is an everlasting kingdom" },
+      { "ref": "Matthew 6:10", "gloss": "thy kingdom come" },
+      { "ref": "Revelation 11:15", "gloss": "the kingdoms of this world are become the kingdoms of our Lord" }
+    ],
+    "why": "Malku is the thing that moves. Gold does not fade into silver; the kingdom is given to another people (2:39; 5:28). The stone’s kingdom is not left to other people (2:44). That transfer-language is why the sitting reads successive empires, not overlapping local dynasties."
+  },
+  "H1855": {
+    "lemma": "דְּקַק",
+    "translit": "deqaq",
+    "lang": "Aramaic",
+    "derivation": "To crush to powder; corresponding to H1854 daqaq.",
+    "gloss": "to break in pieces (1890: grind, not merely defeat).",
+    "danielHits": [
+      { "ref": "2:34-35", "gloss": "brake them to pieces; became like the chaff" },
+      { "ref": "2:44-45", "gloss": "it shall break in pieces and consume all these kingdoms" },
+      { "ref": "7:7", "gloss": "the fourth beast brake in pieces" }
+    ],
+    "otherKjv": [
+      { "ref": "Isaiah 41:15", "gloss": "thou shalt thresh the mountains, and beat them small" },
+      { "ref": "Matthew 21:44", "gloss": "on whomsoever it shall fall, it will grind him to powder" }
+    ],
+    "why": "Iron bruises; the stone grinds. Empires do not evolve into the mountain. They become chaff that the wind carries away. That verb keeps the Second Coming sudden and terminal."
+  },
+  "H2423": {
+    "lemma": "חֵיוָא",
+    "translit": "cheyva",
+    "lang": "Aramaic",
+    "derivation": "From a root of life / living thing; here a predatory beast.",
+    "gloss": "beast (1890: a living creature; in chapter 7, a kingdom as predator).",
+    "danielHits": [
+      { "ref": "7:3", "gloss": "four great beasts came up from the sea" },
+      { "ref": "7:17", "gloss": "these great beasts… are four kings" },
+      { "ref": "7:23", "gloss": "the fourth beast shall be the fourth kingdom" }
+    ],
+    "otherKjv": [
+      { "ref": "Daniel 4:16", "gloss": "let a beast’s heart be given unto him" },
+      { "ref": "Revelation 13:1", "gloss": "a beast rise up out of the sea" }
+    ],
+    "why": "Daniel 7 restages the metals as predators. 7:17 and 7:23 will not let you spiritualize them into moods: they are kings / a kingdom. Same four, new sermon — and a horn the metals did not yet show."
+  },
+  "H744": {
+    "lemma": "אַרְיֵה",
+    "translit": "aryeh",
+    "lang": "Aramaic",
+    "derivation": "Corresponding to H738: lion, the royal predator.",
+    "gloss": "lion (1890: Babylon again, now as a winged lion).",
+    "danielHits": [
+      { "ref": "7:4", "gloss": "the first was like a lion, and had eagle’s wings" }
+    ],
+    "otherKjv": [
+      { "ref": "Jeremiah 4:7", "gloss": "the lion is come up from his thicket — against Judah" },
+      { "ref": "Jeremiah 50:17", "gloss": "Israel is a scattered sheep; the king of Assyria and Babylon as lions" },
+      { "ref": "Revelation 13:2", "gloss": "the beast was like a leopard, feet as a bear, mouth as a lion" }
+    ],
+    "why": "Once 2:38 has named the head, the lion cannot be a different first kingdom. Wings plucked and a man’s heart are chapter 4 in beast-language: the gold king is humbled, then restored."
+  },
+  "H1678": {
+    "lemma": "דֹּב",
+    "translit": "dob",
+    "lang": "Aramaic",
+    "derivation": "Corresponding to H1677: a bear, heavy and devouring.",
+    "gloss": "bear (1890: Medo-Persia raised on one side).",
+    "danielHits": [
+      { "ref": "7:5", "gloss": "a bear… raised up itself on one side, three ribs in the mouth" }
+    ],
+    "otherKjv": [
+      { "ref": "Isaiah 13:17-18", "gloss": "I will stir up the Medes; they shall dash young men" },
+      { "ref": "Daniel 8:3", "gloss": "a ram with two horns, one higher, the higher last" },
+      { "ref": "Daniel 8:20", "gloss": "the ram’s horns are the kings of Media and Persia" }
+    ],
+    "why": "Raised on one side is the later horn of the ram: Persia overtakes Media. The three ribs are the sitting’s historical match for Lydia, Babylon, and Egypt — the bear’s commanded meal, not a fourth metal."
+  },
+  "H524": {
+    "lemma": "נְמַר",
+    "translit": "nemar",
+    "lang": "Aramaic",
+    "derivation": "Corresponding to H5246: leopard, spotted and swift.",
+    "gloss": "leopard (1890: Greece; four wings, then four heads).",
+    "danielHits": [
+      { "ref": "7:6", "gloss": "a leopard… four wings… four heads; dominion was given to it" }
+    ],
+    "otherKjv": [
+      { "ref": "Daniel 8:5-8", "gloss": "the he-goat touches not the ground; the great horn breaks; four stand up" },
+      { "ref": "Daniel 8:21-22", "gloss": "the goat is Grecia; four kingdoms out of the nation" },
+      { "ref": "Habakkuk 1:8", "gloss": "their horses shall be swifter than the leopards" }
+    ],
+    "why": "Four wings are Alexander’s speed; four heads are the Diadochi. Chapter 8 names the people. The sitting will not stop the third kingdom at one man’s life."
+  },
+  "H7162": {
+    "lemma": "קֶרֶן",
+    "translit": "qeren",
+    "lang": "Aramaic",
+    "derivation": "Corresponding to H7161: a horn — strength, a king, or a power growing from a beast.",
+    "gloss": "horn (1890: a king or kingdom growing out of a prior beast).",
+    "danielHits": [
+      { "ref": "7:7-8", "gloss": "ten horns; another little horn before whom three are plucked up" },
+      { "ref": "7:20-21", "gloss": "that horn made war with the saints and prevailed" },
+      { "ref": "7:24-25", "gloss": "ten kings; another shall subdue three and think to change times and laws" }
+    ],
+    "otherKjv": [
+      { "ref": "Daniel 8:3", "gloss": "Hebrew qeren — the ram’s two horns named Media and Persia" },
+      { "ref": "Revelation 13:1", "gloss": "ten horns, and upon his horns ten crowns" },
+      { "ref": "Revelation 17:12", "gloss": "the ten horns are ten kings" }
+    ],
+    "why": "A horn is never a mood. 7:24 says the ten horns are ten kings, and another rises after them, diverse, and subdues three. That is a church-state power among the fragments of the fourth beast — after 476, not a Greek tyrant inside the leopard. The little horn of chapter 8 uses the Hebrew twin (H7161) on a sanctuary line; chapter 7’s Aramaic qeren is the political-religious career that wears out the saints and is judged when the court sits."
+  },
+  "H2192": {
+    "lemma": "זְעֵיר",
+    "translit": "ze'eyr",
+    "lang": "Aramaic",
+    "derivation": "Corresponding to H2191: small in first appearance.",
+    "gloss": "little / small (1890: diminutive at the start, not in reach).",
+    "danielHits": [
+      { "ref": "7:8", "gloss": "another little horn" }
+    ],
+    "otherKjv": [
+      { "ref": "Daniel 8:9", "gloss": "a little horn which waxed exceeding great" },
+      { "ref": "Micah 5:2", "gloss": "though thou be little among the thousands of Judah" }
+    ],
+    "why": "Little is the opening size, not the verdict. The same horn speaks great words, wears out saints, and lasts a measured time. Do not confuse first appearance with final scale."
+  },
+  "H6268": {
+    "lemma": "עַתִּיק",
+    "translit": "attiq",
+    "lang": "Aramaic",
+    "derivation": "From a root of advancing in age; the Ancient, the one already there.",
+    "gloss": "Ancient (of days) (1890: the presiding Judge, not a later emperor).",
+    "danielHits": [
+      { "ref": "7:9", "gloss": "the Ancient of days did sit" },
+      { "ref": "7:13", "gloss": "one like the Son of man came to the Ancient of days" },
+      { "ref": "7:22", "gloss": "until the Ancient of days came" }
+    ],
+    "otherKjv": [
+      { "ref": "Psalm 90:2", "gloss": "from everlasting to everlasting, thou art God" },
+      { "ref": "Revelation 1:14", "gloss": "his head and his hairs were white like wool" }
+    ],
+    "why": "The court sits in heaven before the stone strikes the earth. 7:9–10 is not the Second Coming scene of 2:34. Thrones are placed, books are opened, then the Son of man is brought near. Sequence is the sitting’s argument."
+  },
+  "H1247": {
+    "lemma": "בַּר",
+    "translit": "bar",
+    "lang": "Aramaic",
+    "derivation": "A son; paired with H606 enash, “man,” in 7:13.",
+    "gloss": "son (1890: offspring; here the one like a son of man).",
+    "danielHits": [
+      { "ref": "7:13", "gloss": "one like the Son of man came with the clouds of heaven" }
+    ],
+    "otherKjv": [
+      { "ref": "Matthew 26:64", "gloss": "the Son of man sitting on the right hand of power, coming in the clouds" },
+      { "ref": "Mark 14:62", "gloss": "ye shall see the Son of man coming in the clouds of heaven" },
+      { "ref": "Revelation 14:14", "gloss": "one sat like unto the Son of man" }
+    ],
+    "why": "Dominion is given, not seized (7:14). The clouds go to the Ancient of days first. That heavenly approach is why the sitting will not collapse 7:13 into only the last trumpet, and why 12:1 can still wait for Michael to stand."
+  },
+  "H606": {
+    "lemma": "אֱנָשׁ",
+    "translit": "enash",
+    "lang": "Aramaic",
+    "derivation": "Corresponding to H582: a mortal, a human being.",
+    "gloss": "man / human (1890: frail humanity, contrasted with beasts).",
+    "danielHits": [
+      { "ref": "7:13", "gloss": "son of man — bar enash" },
+      { "ref": "4:16", "gloss": "let his heart be changed from man’s" },
+      { "ref": "7:8", "gloss": "eyes like the eyes of man" }
+    ],
+    "otherKjv": [
+      { "ref": "Psalm 8:4", "gloss": "what is man, that thou art mindful of him" },
+      { "ref": "Hebrews 2:6", "gloss": "what is man… or the son of man" }
+    ],
+    "why": "The one like a son of man is human and more than a beast-king. The little horn also has eyes of a man — intelligence without the given kingdom of 7:14. Two uses of “man,” two destinies."
+  },
+  "H1780": {
+    "lemma": "דִּין",
+    "translit": "din",
+    "lang": "Aramaic",
+    "derivation": "Judgment, a legal decision; corresponding to H1779.",
+    "gloss": "judgment (1890: a court session with books, not a mood).",
+    "danielHits": [
+      { "ref": "7:10", "gloss": "the judgment was set, and the books were opened" },
+      { "ref": "7:22", "gloss": "judgment was given to the saints" },
+      { "ref": "7:26", "gloss": "the judgment shall sit, and they shall take away his dominion" }
+    ],
+    "otherKjv": [
+      { "ref": "Ecclesiastes 12:14", "gloss": "God shall bring every work into judgment" },
+      { "ref": "Revelation 20:12", "gloss": "the books were opened" },
+      { "ref": "Acts 17:31", "gloss": "he hath appointed a day, in the which he will judge the world" }
+    ],
+    "why": "7:10 is a sitting court with opened books before 7:11 destroys the beast. That order is the sitting’s claim: Heaven reviews, then executes. Do not wait for the stone of chapter 2 to be the only judgment scene. The Ancient of days already convenes."
+  },
+  "H5732": {
+    "lemma": "עִדָּן",
+    "translit": "iddan",
+    "lang": "Aramaic",
+    "derivation": "An appointed time; a set season, not a vague “era.”",
+    "gloss": "time / appointed time (1890: a measured period).",
+    "danielHits": [
+      { "ref": "4:16", "gloss": "let seven times pass over him" },
+      { "ref": "7:25", "gloss": "a time and times and the dividing of time" }
+    ],
+    "otherKjv": [
+      { "ref": "Daniel 12:7", "gloss": "a time, times, and an half" },
+      { "ref": "Revelation 12:14", "gloss": "a time, and times, and half a time" },
+      { "ref": "Revelation 13:5", "gloss": "power… to continue forty and two months" }
+    ],
+    "why": "One time, two times, and half a time is 3½ years of appointed days — 1,260 days. On the year-day scale already shown in Numbers 14 and Ezekiel 4, that is 1,260 years. The sitting places that span on the little horn’s career (538 to 1798), not on Antiochus’s three-year altar. Chapter 4’s seven times over one man stay ordinary years; chapter 7’s formula is the apocalyptic twin of 12:7 and Revelation 12–13."
+  },
+  "H1882": {
+    "lemma": "דָּת",
+    "translit": "dath",
+    "lang": "Aramaic",
+    "derivation": "A royal edict or a religious law; what a king or God binds.",
+    "gloss": "law / decree (1890: statute — civil or sacred).",
+    "danielHits": [
+      { "ref": "6:5", "gloss": "except we find it against him concerning the law of his God" },
+      { "ref": "6:8", "gloss": "the law of the Medes and Persians, which altereth not" },
+      { "ref": "7:25", "gloss": "think to change times and laws" }
+    ],
+    "otherKjv": [
+      { "ref": "Esther 1:19", "gloss": "the laws of the Persians and the Medes, that it be not altered" },
+      { "ref": "Ezra 7:26", "gloss": "whosoever will not do the law of thy God, and the law of the king" },
+      { "ref": "Daniel 2:13", "gloss": "the decree went forth that the wise men should be slain" }
+    ],
+    "why": "Chapter 6 collides two daths: the law of Daniel’s God and an unchangeable civil decree. Chapter 7:25 then says the horn thinks to change times and laws. Worship-law is the target, not a tax code. That is why Dura (commanded worship) and the den (banned prayer) belong on the same rail as 7:25."
+  },
+  "H8133": {
+    "lemma": "שְׁנָא",
+    "translit": "shena",
+    "lang": "Aramaic",
+    "derivation": "To alter, change, or be different; corresponding to H8132.",
+    "gloss": "to change (1890: to revise what was given).",
+    "danielHits": [
+      { "ref": "7:25", "gloss": "think to change times and laws" },
+      { "ref": "3:28", "gloss": "who… have changed the king’s word" },
+      { "ref": "2:21", "gloss": "he changeth the times and the seasons" }
+    ],
+    "otherKjv": [
+      { "ref": "Daniel 6:8", "gloss": "that it be not changed" },
+      { "ref": "Malachi 3:6", "gloss": "I am the LORD, I change not" }
+    ],
+    "why": "2:21 says God changes times and seasons. 7:25 says the horn thinks to. The verb is a usurpation of the prerogative already claimed for Heaven. Calendar and commandment are not small edits; they are the claim to sit in God’s seat."
+  },
+  "H4483": {
+    "lemma": "מְנָא",
+    "translit": "mena",
+    "lang": "Aramaic",
+    "derivation": "To count, number, appoint; a mina as a weight.",
+    "gloss": "to number (1890: to finish a counted sum).",
+    "danielHits": [
+      { "ref": "5:25-26", "gloss": "MENE; God hath numbered thy kingdom, and finished it" }
+    ],
+    "otherKjv": [
+      { "ref": "Psalm 90:12", "gloss": "teach us to number our days" },
+      { "ref": "Isaiah 40:26", "gloss": "he calleth them all by names… for that he is strong in power; not one faileth" },
+      { "ref": "Daniel 2:21", "gloss": "he removeth kings, and setteth up kings" }
+    ],
+    "why": "The gold kingdom is finished on a counted night. Numbering is not a threat; it is an audit already closed. Isaiah 45 has already named the man who opens the gates."
+  },
+  "H8625": {
+    "lemma": "תְּקַל",
+    "translit": "teqal",
+    "lang": "Aramaic",
+    "derivation": "To weigh; a shekel as the standard weight.",
+    "gloss": "to weigh (1890: to put in the balances).",
+    "danielHits": [
+      { "ref": "5:25-27", "gloss": "TEKEL; thou art weighed in the balances, and art found wanting" }
+    ],
+    "otherKjv": [
+      { "ref": "1 Samuel 2:3", "gloss": "by him actions are weighed" },
+      { "ref": "Job 31:6", "gloss": "let me be weighed in an even balance" },
+      { "ref": "Proverbs 16:11", "gloss": "a just weight and balance are the LORD’s" }
+    ],
+    "why": "Weighed and found wanting is the sanctuary’s language, not a banker’s joke. Chapter 4 left a stump; chapter 5 finds no repentance in the grandson. The balances were already in the room."
+  },
+  "H6537": {
+    "lemma": "פְּרַס",
+    "translit": "peras",
+    "lang": "Aramaic",
+    "derivation": "To split, divide; also a play on Paras, Persia.",
+    "gloss": "to divide (1890: to break in two and to name Persia).",
+    "danielHits": [
+      { "ref": "5:25", "gloss": "UPHARSIN — and they divide" },
+      { "ref": "5:28", "gloss": "PERES; thy kingdom is divided, and given to the Medes and Persians" }
+    ],
+    "otherKjv": [
+      { "ref": "Daniel 2:39", "gloss": "another kingdom inferior to thee" },
+      { "ref": "Isaiah 45:1", "gloss": "to Cyrus… to open before him the two leaved gates" }
+    ],
+    "why": "The word does double work: divide, and Persia. The sitting does not need a later historian to invent the transfer. The plaster already puns the conqueror’s name."
+  },
+  "H5894": {
+    "lemma": "עִיר",
+    "translit": "ir",
+    "lang": "Aramaic",
+    "derivation": "A watcher, a waking one; a heavenly sentinel.",
+    "gloss": "watcher (1890: a holy sentinel from heaven, not a court magician).",
+    "danielHits": [
+      { "ref": "4:13", "gloss": "a watcher and an holy one came down from heaven" },
+      { "ref": "4:17", "gloss": "this matter is by the decree of the watchers" },
+      { "ref": "4:23", "gloss": "the king saw a watcher and an holy one" }
+    ],
+    "otherKjv": [
+      { "ref": "Daniel 2:28", "gloss": "God in heaven revealeth secrets — same court, earlier night" },
+      { "ref": "Psalm 103:20", "gloss": "bless the LORD, ye his angels, that excel in strength" }
+    ],
+    "why": "Heaven, not court magic, sentences the gold king. The stump-and-band is a decree from above. Pride is diagnosed as beastliness by a watcher, not by a physician of Babylon."
+  },
+  "H352": {
+    "lemma": "אַיִל",
+    "translit": "ayil",
+    "lang": "Hebrew",
+    "derivation": "A ram; also a projecting pillar or a chief — strength that butts.",
+    "gloss": "ram (1890: the two-horned ram named in 8:20).",
+    "danielHits": [
+      { "ref": "8:3-7", "gloss": "a ram with two horns, one higher, the higher last" },
+      { "ref": "8:20", "gloss": "the ram… are the kings of Media and Persia" }
+    ],
+    "otherKjv": [
+      { "ref": "Daniel 7:5", "gloss": "the bear raised on one side — same uneven pair" },
+      { "ref": "Isaiah 21:2", "gloss": "go up, O Elam; besiege, O Media" },
+      { "ref": "Ezra 1:1-2", "gloss": "Cyrus king of Persia — the higher horn in history" }
+    ],
+    "why": "Chapter 8 does the sitting’s work for you: the ram is named. Two horns, one higher and later, is Persia overtaking Media. You do not need a later school to invent that identification."
+  },
+  "H6842": {
+    "lemma": "צָפִיר",
+    "translit": "tsaphiyr",
+    "lang": "Hebrew",
+    "derivation": "A he-goat; from a root of leaping or departing.",
+    "gloss": "he-goat (1890: the western goat named Grecia in 8:21).",
+    "danielHits": [
+      { "ref": "8:5-8", "gloss": "an he goat… touched not the ground; notable horn broken; four notable ones" },
+      { "ref": "8:21", "gloss": "the rough goat is the king of Grecia" }
+    ],
+    "otherKjv": [
+      { "ref": "Daniel 7:6", "gloss": "leopard with four wings and four heads" },
+      { "ref": "Daniel 11:3-4", "gloss": "a mighty king… his kingdom shall be broken toward the four winds" }
+    ],
+    "why": "Named: Grecia. Touches not the ground: Alexander’s speed. The great horn breaks; four stand up. The little horn of 8:9 comes after that partition, so it cannot be the first Greek king, and it cannot stop at a three-year altar if 8:17 aims at the time of the end."
+  },
+  "H7161": {
+    "lemma": "קֶרֶן",
+    "translit": "qeren",
+    "lang": "Hebrew",
+    "derivation": "A horn; power, a king, or the horn of the altar.",
+    "gloss": "horn (1890: the notable horn, then four, then the little horn of chapter 8).",
+    "danielHits": [
+      { "ref": "8:5", "gloss": "a notable horn between his eyes" },
+      { "ref": "8:8", "gloss": "the great horn was broken; four notable ones" },
+      { "ref": "8:9", "gloss": "a little horn which waxed exceeding great" }
+    ],
+    "otherKjv": [
+      { "ref": "Daniel 7:8", "gloss": "Aramaic qeren — the little horn among the ten" },
+      { "ref": "1 Samuel 2:10", "gloss": "he shall exalt the horn of his anointed" },
+      { "ref": "Luke 1:69", "gloss": "an horn of salvation" }
+    ],
+    "why": "Chapter 8’s first horn is Alexander; the four are his successors; the little horn grows exceeding great toward the pleasant land and against the tamid. Scale (exceeding great) and horizon (time of the end) are why a tribute-paying Seleucid cannot exhaust the line. The Aramaic horn of chapter 7 is the western church-state career; this Hebrew horn tracks the same fourth-kingdom afterlife onto the sanctuary."
+  },
+  "H8548": {
+    "lemma": "תָּמִיד",
+    "translit": "tamid",
+    "lang": "Hebrew",
+    "derivation": "From H8548’s root of stretching / continuity: the continual, the daily.",
+    "gloss": "continual / daily (1890: the standing ministry, not a one-off rite).",
+    "danielHits": [
+      { "ref": "8:11-13", "gloss": "the daily sacrifice was taken away; how long the vision concerning the daily" },
+      { "ref": "11:31", "gloss": "they shall take away the daily sacrifice" },
+      { "ref": "12:11", "gloss": "from the time that the daily sacrifice shall be taken away" }
+    ],
+    "otherKjv": [
+      { "ref": "Exodus 29:38-42", "gloss": "the continual burnt offering, morning and evening" },
+      { "ref": "Numbers 28:3-4", "gloss": "two lambs day by day, for a continual burnt offering" },
+      { "ref": "Hebrews 7:25", "gloss": "he ever liveth to make intercession" }
+    ],
+    "why": "Tamid is the standing work, not a three-year pause on an earthly altar in 167 B.C. The horn of chapter 8 magnifies itself to the prince of the host and casts down the place of his sanctuary. The sitting reads a counterfeit priesthood against Heaven’s continual ministry — a career that reaches the time of the end (8:17), not a Maccabean winter."
+  },
+  "H6944": {
+    "lemma": "קֹדֶשׁ",
+    "translit": "qodesh",
+    "lang": "Hebrew",
+    "derivation": "From H6942: apartness, holiness; the sanctuary or holy things.",
+    "gloss": "holy / sanctuary (1890: what is set apart; in 8:14 the holy place put right).",
+    "danielHits": [
+      { "ref": "8:13-14", "gloss": "the sanctuary and the host trodden; then shall the sanctuary be cleansed" },
+      { "ref": "9:24", "gloss": "to anoint the most Holy" },
+      { "ref": "11:31", "gloss": "they shall pollute the sanctuary of strength" }
+    ],
+    "otherKjv": [
+      { "ref": "Leviticus 16:33", "gloss": "he shall make an atonement for the holy sanctuary" },
+      { "ref": "Exodus 25:8", "gloss": "let them make me a sanctuary; that I may dwell among them" },
+      { "ref": "Hebrews 8:1-2", "gloss": "a minister of the sanctuary, and of the true tabernacle" }
+    ],
+    "why": "The thing cleansed in 8:14 is qodesh. Leviticus 16 is the older grammar: the holy place is put right on the Day of Atonement. The sitting will not reduce that to Antiochus’s altar when 8:17 dates the vision to the time of the end and 9:24 still has a most Holy to anoint."
+  },
+  "H6663": {
+    "lemma": "צָדַק",
+    "translit": "tsadaq",
+    "lang": "Hebrew",
+    "derivation": "Primitive root: to be right in a moral or forensic sense; Niphal in 8:14, וְנִצְדַּק — “shall be put right.” Brown-Driver-Briggs: the holy place shall be put right, in a right condition; or be justified, its cause vindicated.",
+    "gloss": "to justify / make right (1890: cleanse, clear, be just, justify — forensic, not a mop).",
+    "danielHits": [
+      { "ref": "8:14", "gloss": "then shall the sanctuary be cleansed (nitsdaq)" },
+      { "ref": "12:3", "gloss": "they that turn many to righteousness" }
+    ],
+    "otherKjv": [
+      { "ref": "Deuteronomy 25:1", "gloss": "the judges… shall justify the righteous, and condemn the wicked" },
+      { "ref": "Isaiah 53:11", "gloss": "shall my righteous servant justify many" },
+      { "ref": "Job 9:2", "gloss": "how should man be just with God?" }
+    ],
+    "why": "Nitsdaq is a court verb. Deuteronomy 25:1 uses the same root for a judge who justifies the righteous. Isaiah 53:11 uses it for the Servant who justifies many. Daniel 8:14 therefore does not mean “wash the stones in 164 B.C.” It means the holy place is vindicated — put back in the right, its cause cleared — after 2,300 appointed days. The sitting joins that verse to Leviticus 16’s Day of Atonement and to the opened books of 7:10. 457 + 2300 is arithmetic on a forensic word, not a slogan."
+  },
+  "H2852": {
+    "lemma": "חָתַךְ",
+    "translit": "chathak",
+    "lang": "Hebrew",
+    "derivation": "Primitive root: to cut off; figuratively to decree or determine. Hapax — this verb occurs only here in the Hebrew Bible. BDB: divide, determine.",
+    "gloss": "to cut off / determine (1890: KJV “determined”; the root is a cut, not a stretch).",
+    "danielHits": [
+      { "ref": "9:24", "gloss": "seventy weeks are determined upon thy people and upon thy holy city" }
+    ],
+    "otherKjv": [
+      { "ref": "Daniel 8:14", "gloss": "the only longer uncut line still on the table when Gabriel returns" },
+      { "ref": "Daniel 8:27", "gloss": "none understood the 2,300 — chapter 9 is the explanation" },
+      { "ref": "Daniel 9:23", "gloss": "understand the matter, and consider the vision — the vision just given" }
+    ],
+    "why": "A hapax cannot hide. If seventy weeks are cut off, they are cut from a longer piece. The only longer piece Daniel has just been given is the 2,300 days (8:14, 26–27). Gabriel says “consider the vision” (9:23) while Daniel is still sick from that vision. That is why 457 B.C. (Ezra 7) starts both clocks, why A.D. 31 in the midst of the seventieth week seals the line, and why the remaining 1,810 years are not a second, disconnected puzzle."
+  },
+  "H4899": {
+    "lemma": "מָשִׁיחַ",
+    "translit": "mashiach",
+    "lang": "Hebrew",
+    "derivation": "From H4886 mashach, to smear / anoint — the anointed one.",
+    "gloss": "Messiah / anointed (1890: the consecrated prince of 9:25-26).",
+    "danielHits": [
+      { "ref": "9:25", "gloss": "unto the Messiah the Prince" },
+      { "ref": "9:26", "gloss": "shall Messiah be cut off, but not for himself" }
+    ],
+    "otherKjv": [
+      { "ref": "Psalm 2:2", "gloss": "the rulers take counsel against the LORD, and against his anointed" },
+      { "ref": "Isaiah 61:1", "gloss": "the LORD hath anointed me to preach good tidings" },
+      { "ref": "John 1:41", "gloss": "we have found the Messias, which is, being interpreted, the Christ" }
+    ],
+    "why": "Cut off in the midst of the seventieth week. A.D. 31 is not a church tradition pasted on; it is the week’s midpoint once 457 + 483 lands on the baptism. That hit is what keeps the rest of the 2,300 honest."
+  },
+  "H3772": {
+    "lemma": "כָּרַת",
+    "translit": "karath",
+    "lang": "Hebrew",
+    "derivation": "To cut; used of cutting a covenant and of cutting off a life.",
+    "gloss": "to cut off (1890: to kill, or to cut a covenant).",
+    "danielHits": [
+      { "ref": "9:26", "gloss": "shall Messiah be cut off, but not for himself" }
+    ],
+    "otherKjv": [
+      { "ref": "Isaiah 53:8", "gloss": "he was cut off out of the land of the living" },
+      { "ref": "Genesis 15:18", "gloss": "the LORD made (cut) a covenant with Abram" },
+      { "ref": "Jeremiah 31:31", "gloss": "I will make a new covenant" }
+    ],
+    "why": "Messiah is cut off, but not for himself. The cross, not a Roman prince, is the midst of the week (9:27). Futurism’s gap after week 69 has to ignore this cut and invent a later confirmer. The sitting will not."
+  },
+  "H4317": {
+    "lemma": "מִיכָאֵל",
+    "translit": "Mika'el",
+    "lang": "Hebrew",
+    "derivation": "Who is like God? From H4310 mi + H3588 ki + H410 El.",
+    "gloss": "Michael — who is like God?",
+    "danielHits": [
+      { "ref": "10:13", "gloss": "Michael, one of the chief princes, came to help" },
+      { "ref": "10:21", "gloss": "Michael your prince" },
+      { "ref": "12:1", "gloss": "at that time shall Michael stand up, the great prince" }
+    ],
+    "otherKjv": [
+      { "ref": "Jude 9", "gloss": "Michael the archangel… disputed about the body of Moses" },
+      { "ref": "Revelation 12:7", "gloss": "Michael and his angels fought against the dragon" },
+      { "ref": "Joshua 5:14", "gloss": "as captain of the host of the LORD am I now come" }
+    ],
+    "why": "The great prince who stands up. Intercession has a posture: a priest sits to minister and stands when the work is finished. 12:1 is that stand — then trouble, then names in a book, then dust that wakes. The sitting describes the scene; it does not need a later title for the court."
+  },
+  "H5975": {
+    "lemma": "עָמַד",
+    "translit": "amad",
+    "lang": "Hebrew",
+    "derivation": "To stand, remain, or take a station; the opposite of sitting to serve.",
+    "gloss": "to stand (1890: to arise to a finished office or a new act).",
+    "danielHits": [
+      { "ref": "12:1", "gloss": "Michael shall stand up" },
+      { "ref": "11:2-3", "gloss": "there shall stand up yet three kings… a mighty king shall stand up" },
+      { "ref": "8:25", "gloss": "he shall also stand up against the Prince of princes" }
+    ],
+    "otherKjv": [
+      { "ref": "Hebrews 10:11-12", "gloss": "every priest standeth daily… but this man, after he had offered one sacrifice, sat down" },
+      { "ref": "Acts 7:55-56", "gloss": "the Son of man standing on the right hand of God" },
+      { "ref": "Psalm 106:30", "gloss": "then stood up Phinehas, and executed judgment" }
+    ],
+    "why": "A priest sits to minister and stands when the work is finished. Michael stands up. The sitting reads 12:1 as the end of that heavenly work, then the trouble, then the waking — not as a military footnote in Persia."
+  },
+  "H6869": {
+    "lemma": "צָרָה",
+    "translit": "tsarah",
+    "lang": "Hebrew",
+    "derivation": "Tightness, distress; a strait that closes in.",
+    "gloss": "trouble / distress (1890: a time of straitness, not ordinary war).",
+    "danielHits": [
+      { "ref": "12:1", "gloss": "a time of trouble, such as never was since there was a nation" }
+    ],
+    "otherKjv": [
+      { "ref": "Jeremiah 30:7", "gloss": "it is even the time of Jacob’s trouble; but he shall be saved out of it" },
+      { "ref": "Matthew 24:21", "gloss": "then shall be great tribulation, such as was not" },
+      { "ref": "Zephaniah 1:15", "gloss": "a day of wrath, a day of trouble and distress" }
+    ],
+    "why": "The trouble comes after Michael stands, not before. Sequence again: finished advocacy, then the strait, then deliverance for those written in the book. The sitting will not relocate 12:1 into 605 or 167."
+  },
+  "H6083": {
+    "lemma": "עָפָר",
+    "translit": "aphar",
+    "lang": "Hebrew",
+    "derivation": "Dust, dry earth; the stuff of Genesis 2:7 and of graves.",
+    "gloss": "dust (1890: the soil the dead sleep in).",
+    "danielHits": [
+      { "ref": "12:2", "gloss": "them that sleep in the dust of the earth shall awake" }
+    ],
+    "otherKjv": [
+      { "ref": "Genesis 3:19", "gloss": "dust thou art, and unto dust shalt thou return" },
+      { "ref": "Isaiah 26:19", "gloss": "thy dead men shall live… awake and sing, ye that dwell in dust" },
+      { "ref": "Job 19:25-26", "gloss": "though after my skin worms destroy this body, yet in my flesh shall I see God" }
+    ],
+    "why": "The dead sleep in the dust. The hope is bodily rising, not a chart and not a disembodied slogan. 12:2 is the book’s last doctrine: two awakenings, two destinies."
+  },
+  "H6974": {
+    "lemma": "קוּץ",
+    "translit": "quts",
+    "lang": "Hebrew",
+    "derivation": "To awake from sleep; used of the dead in 12:2.",
+    "gloss": "to awake (1890: to rise from sleep — here, from death).",
+    "danielHits": [
+      { "ref": "12:2", "gloss": "many… shall awake, some to everlasting life, some to shame" }
+    ],
+    "otherKjv": [
+      { "ref": "Isaiah 26:19", "gloss": "awake and sing, ye that dwell in dust" },
+      { "ref": "John 5:28-29", "gloss": "all that are in the graves shall hear his voice, and shall come forth" },
+      { "ref": "1 Thessalonians 4:16", "gloss": "the dead in Christ shall rise first" }
+    ],
+    "why": "Daniel 12:2 is resurrection, not metaphor. The sitting ends on bodies, not on a party name. That is why Michael’s stand is not the last word — the lot of 12:13 is."
+  },
+  "H1486": {
+    "lemma": "גּוֹרָל",
+    "translit": "goral",
+    "lang": "Hebrew",
+    "derivation": "A pebble used for lots; then the allotted portion itself.",
+    "gloss": "lot / allotted portion (1890: the share assigned, not chance).",
+    "danielHits": [
+      { "ref": "12:13", "gloss": "thou shalt rest, and stand in thy lot at the end of the days" }
+    ],
+    "otherKjv": [
+      { "ref": "Joshua 18:10", "gloss": "Joshua cast lots for them in Shiloh" },
+      { "ref": "Psalm 16:5-6", "gloss": "the LORD is the portion of mine inheritance… the lines are fallen unto me in pleasant places" },
+      { "ref": "Colossians 1:12", "gloss": "the inheritance of the saints in light" }
+    ],
+    "why": "Daniel’s last word is rest, then stand in thy lot. The sealed book does not end in fear. It ends in an assigned place at the end of the days — the same days 8:14 and 12:13 have been counting."
+  },
+  "H2377": {
+    "lemma": "חָזוֹן",
+    "translit": "chazon",
+    "lang": "Hebrew",
+    "derivation": "From H2372: a sight, a revelation, a prophetic vision.",
+    "gloss": "vision (1890: a disclosed sight, not a private mood).",
+    "danielHits": [
+      { "ref": "1:17", "gloss": "Daniel had understanding in all visions and dreams" },
+      { "ref": "8:17", "gloss": "at the time of the end shall be the vision" },
+      { "ref": "8:26", "gloss": "shut thou up the vision; for it shall be for many days" }
+    ],
+    "otherKjv": [
+      { "ref": "Habakkuk 2:3", "gloss": "the vision is yet for an appointed time… though it tarry, wait for it" },
+      { "ref": "Proverbs 29:18", "gloss": "where there is no vision, the people perish" },
+      { "ref": "Daniel 9:23", "gloss": "consider the vision" }
+    ],
+    "why": "The vision is for the time of the end (8:17, 19) and for many days (8:26). That pair rules out a fulfillment that dies in 164 B.C. Gabriel’s “consider the vision” in 9:23 ties the seventy weeks to this same chazon."
+  },
+  "H8269": {
+    "lemma": "שַׂר",
+    "translit": "sar",
+    "lang": "Hebrew",
+    "derivation": "A head person, captain, or prince — civil or heavenly.",
+    "gloss": "prince (1890: a ruler; in chapter 10, also a heavenly counterpart).",
+    "danielHits": [
+      { "ref": "8:11", "gloss": "the prince of the host" },
+      { "ref": "8:25", "gloss": "the Prince of princes" },
+      { "ref": "10:13", "gloss": "the prince of the kingdom of Persia" },
+      { "ref": "10:21", "gloss": "Michael your prince" }
+    ],
+    "otherKjv": [
+      { "ref": "Isaiah 9:6", "gloss": "the Prince of Peace" },
+      { "ref": "Joshua 5:14", "gloss": "captain of the host of the LORD" },
+      { "ref": "Daniel 9:25", "gloss": "Messiah the Prince" }
+    ],
+    "why": "Prince of Persia, prince of Grecia, Michael your prince. Behind the metals is a war of princes. The sitting will not read chapter 11 as only newspapers. The same word binds 8:11, 9:25, and 12:1 into one office argued against a counterfeit."
+  }
+}

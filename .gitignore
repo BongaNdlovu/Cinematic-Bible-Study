@@ -6,6 +6,9 @@
 
 # Source-of-truth uncompressed GLBs (not shipped)
 models/originals/
+
+# UV albedo extracts used only while generating plates
+assets/_glb_preview/
 models/*.prev.glb
 
 # npm install tree — runtime Three.js is vendored under vendor/three/
@@ -18,3 +21,16 @@ __pycache__/
 *.pyo
 .DS_Store
 Thumbs.db
+
+# Local verification screenshots and compression logs
+gallery_*.png
+horizon_proof*.png
+index_beasts.png
+index_beasts_mobile.png
+index_daniel8.png
+index_visions.png
+map_proof*.png
+study_proof*.png
+theme_proof*.png
+*_compression_report.json
+*_gallery_report.json

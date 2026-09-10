@@ -10,11 +10,11 @@ import mimetypes
 import webbrowser
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 
-PORT = 8000
+PORT = int(os.environ.get("PORT", "8000"))
 HOST = "127.0.0.1"
 
 ALLOWED_EXTENSIONS = {
-    ".html", ".css", ".js", ".mjs", ".json", ".map",
+    ".html", ".css", ".js", ".mjs", ".json", ".geojson", ".map",
     ".wasm", ".glb", ".gltf", ".bin",
     ".png", ".jpg", ".jpeg", ".webp", ".svg", ".ico", ".gif",
     ".woff", ".woff2", ".ttf", ".txt", ".md",
@@ -27,6 +27,7 @@ MIME_TYPES = {
     ".js": "application/javascript",
     ".mjs": "application/javascript",
     ".json": "application/json",
+    ".geojson": "application/geo+json",
     ".bin": "application/octet-stream",
     ".png": "image/png",
     ".jpg": "image/jpeg",

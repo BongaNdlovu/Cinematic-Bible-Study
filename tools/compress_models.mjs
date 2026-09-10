@@ -21,6 +21,18 @@ const FILES = [
   'iron_legs.glb',
   'feet_iron_clay.glb',
   'full_body.glb',
+  'lion.glb',
+  'bear.glb',
+  'leopard.glb',
+  'beast.glb',
+  'ram.glb',
+  'goat.glb',
+  'goat_broken.glb',
+  'goat_horn.glb',
+  'dura.glb',
+  'ancient.glb',
+  'son.glb',
+  'stump.glb',
 ];
 
 fs.mkdirSync(ORIGINALS, { recursive: true });
