@@ -157,8 +157,9 @@ try {
   await client.eval(`showInstrument("map")`);
   await sleep(2200);
   const studyStats = await client.eval(`({
-    embed: !!document.querySelector('#study-chronicle-map .leaflet-container'),
-    polities: document.querySelectorAll('#study-chronicle-map .leaflet-interactive').length,
+    mapBtn: document.getElementById('btn-lesson-map')?.href || null,
+    galleryBtn: document.getElementById('btn-lesson-gallery')?.href || null,
+    dockRemoved: !document.getElementById('sitting-dock'),
     enter: document.getElementById('map-enter-full')?.href || null,
     name: document.getElementById('map-name')?.textContent
   })`);
@@ -178,7 +179,7 @@ try {
   console.log("console errors", client.errors);
   if (!stats.leaflet) throw new Error("leaflet failed to mount");
   if (stats.polities < 1) throw new Error("no polities rendered");
-  if (!studyStats.embed) throw new Error("study embed failed");
+  if (!studyStats.mapBtn || !studyStats.dockRemoved) throw new Error("study lesson connect or dock check failed");
 
   client.close();
 } finally {

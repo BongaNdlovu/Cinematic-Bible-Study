@@ -8,7 +8,7 @@
   const REDUCE = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const KEY_STORE = "baGoogleMapsKey";
   const BASE_STORE = "baMapBasemap";
-  const MAX_BOUNDS = [[8, -18], [60, 82]];
+  const MAX_BOUNDS = [[8, -100], [60, 82]];
 
   function epochById(id) {
     return DATA.epochs.find((e) => e.id === id) || DATA.epochs[0];
@@ -147,8 +147,30 @@
       layers: { borders: true, cities: true, events: true, labels: true, routes: true },
       overlayOpacity: 1,
       routeLayer: null,
-      compareEl: null
+      compareEl: null,
+      sheetIndex: opts.sheetIndex != null ? opts.sheetIndex : null
     };
+    let mapReady = false;
+    let queuedSheet = null;
+
+    function sheetPack() {
+      if (state.sheetIndex == null || !window.SHEET_MAP) return null;
+      return window.SHEET_MAP[state.sheetIndex] || null;
+    }
+    function lessonOverlay(id) {
+      const pack = sheetPack();
+      if (!pack) return null;
+      return (pack.nodes || []).find((n) => n.id === id) || null;
+    }
+    function isLessonId(id) {
+      return !!lessonOverlay(id);
+    }
+    function dossierBodyHtml(text) {
+      if (!text) return "";
+      const t = String(text);
+      if (/<[a-z][\s\S]*>/i.test(t)) return t;
+      return t.split(/\n\n+/).map((p) => "<p>" + p.replace(/\n/g, "<br>") + "</p>").join("");
+    }
 
     root.classList.add(cinematic ? "cmap-root" : "cmap-embed");
     root.innerHTML = "";
@@ -175,7 +197,7 @@
       "<div class='cmap-legend-row'><img src='assets/maps/icons/metal-bronze.jpg' alt=''>Bronze · Greece</div>" +
       "<div class='cmap-legend-row'><img src='assets/maps/icons/metal-iron.jpg' alt=''>Iron · Rome</div>" +
       "<div class='cmap-legend-row'><img src='assets/maps/icons/metal-clay.jpg' alt=''>Iron &amp; clay</div>" +
-      "<div class='cmap-legend-row'><img src='assets/maps/icons/metal-stone.jpg' alt=''>Stone kingdom</div>" +
+      "<div class='cmap-legend-row'><img src='assets/maps/icons/metal-stone.jpg' alt=''>Stone — whole earth (map rim)</div>" +
       "<div class='cmap-legend-rule'></div>" +
       "<div class='cmap-legend-row'><img src='assets/maps/icons/key-city.jpg' alt=''>City</div>" +
       "<div class='cmap-legend-row'><img src='assets/maps/icons/key-battle.jpg' alt=''>Battle</div>" +
@@ -229,6 +251,14 @@
 
     let chrome = null;
     if (cinematic) {
+      const urlParams = (typeof location !== "undefined" && location.search) ? new URLSearchParams(location.search) : new URLSearchParams();
+      const fromLesson = (opts && opts.from === "lesson") || urlParams.get("from") === "lesson";
+      const sheetParam = (opts && opts.sheet !== undefined && opts.sheet !== null) ? opts.sheet : urlParams.get("sheet");
+      const isValidSheet = (s) => s !== null && s !== undefined && /^\d+$/.test(String(s).trim()) && Number(s) >= 0 && Number(s) <= 10;
+      const backHref = (fromLesson && isValidSheet(sheetParam)) ? `study.html?sheet=${encodeURIComponent(String(sheetParam).trim())}#sheet-article` : "study.html";
+      const backLabel = (fromLesson && isValidSheet(sheetParam)) ? "← Back to this lesson" : "← Study desk";
+      const galleryHref = (fromLesson && isValidSheet(sheetParam)) ? `gallery.html?from=lesson&sheet=${encodeURIComponent(String(sheetParam).trim())}` : "gallery.html";
+
       chrome = el("header", { class: "cmap-chrome" });
       chrome.innerHTML = `
         <a class="cmap-brand" href="index.html">
@@ -239,10 +269,10 @@
           BIBLE ARTIFACTS
         </a>
         <nav class="cmap-links">
-          <a class="cmap-back" href="study.html">← Study desk</a>
+          <a class="cmap-back" href="${backHref}">${backLabel}</a>
           <a href="index.html">Home</a>
           <a href="study.html">Study</a>
-          <a href="gallery.html">3D Gallery</a>
+          <a href="${galleryHref}">3D Gallery</a>
           <a class="active" href="map.html">Map</a>
         </nav>`;
     }
@@ -279,8 +309,9 @@
 
     function flyToEpoch(ep, animate) {
       const focus = DATA.events.find((e) => e.id === ep.event);
-      const lat = focus ? focus.lat : ep.camera.lat;
-      const lon = focus ? focus.lon : ep.camera.lon;
+      const useCam = ep.camera && ep.camera.useCamera;
+      const lat = useCam ? ep.camera.lat : (focus ? focus.lat : ep.camera.lat);
+      const lon = useCam ? ep.camera.lon : (focus ? focus.lon : ep.camera.lon);
       const z = tileZoom(ep);
       flyBadge.querySelector("img").src = iconSrc(ep.metal);
       flyBadge.querySelector("span").textContent = ep.label;
@@ -351,7 +382,7 @@
         <button class="cmap-close" type="button" aria-label="Close">✕</button>
         <div class="kicker">${d.kicker || ep.kicker}</div>
         <h2>${d.title}</h2>
-        <p>${d.body}</p>
+        ${dossierBodyHtml(d.body)}
         <div class="cite">${d.cite || ep.scripture}</div>
         ${ep.approximateYear ? '<p class="cmap-approx">Boundaries for this year are an approximate historicist overlay, not a surveyed frontier.</p>' : ""}
         ${styleSource(d, ep)}
@@ -418,6 +449,7 @@
         }
         if (state.layers.cities) DATA.cities.forEach((c) => addGoogleMarker(c, false, ep));
         if (state.layers.events) DATA.events.forEach((evn) => addGoogleMarker(evn, true, ep));
+        lessonExtraItems(ep).forEach((item) => addGoogleMarker(item, item.kind !== "city", ep));
         return;
       }
 
@@ -464,6 +496,7 @@
       state.markerLayer = L.layerGroup().addTo(state.lmap);
       if (state.layers.cities) DATA.cities.forEach((c) => addLeafletMarker(c, false, ep));
       if (state.layers.events) DATA.events.forEach((evn) => addLeafletMarker(evn, true, ep));
+      lessonExtraItems(ep).forEach((item) => addLeafletMarker(item, item.kind !== "city", ep));
       if (state.layers.routes) drawRoutes(ep);
       applyLabelLayer();
       applyOverlayOpacity();
@@ -532,8 +565,63 @@
       });
     }
 
+    function lessonExtraItems(ep) {
+      const pack = sheetPack();
+      if (!pack) return [];
+      return (pack.nodes || []).filter((n) => {
+        const known = DATA.events.some((e) => e.id === n.id) || DATA.cities.some((c) => c.id === n.id);
+        return !known && n.lat != null && n.lon != null;
+      }).map((n) => ({
+        id: n.id,
+        name: n.title,
+        lat: n.lat,
+        lon: n.lon,
+        yearId: n.yearId || ep.id,
+        kind: n.kind || "event",
+        kicker: n.kicker,
+        text: n.body,
+        scripture: n.scripture,
+        art: n.art
+      }));
+    }
+
+    function findMapItem(id) {
+      const event = DATA.events.find((e) => e.id === id);
+      if (event) return { item: event, isEvent: true };
+      const city = DATA.cities.find((c) => c.id === id);
+      if (city) return { item: city, isEvent: false };
+      const extras = lessonExtraItems(currentEpoch());
+      const extra = extras.find((e) => e.id === id);
+      if (extra) return { item: extra, isEvent: extra.kind !== "city" };
+      return null;
+    }
+
+    function openItemById(id) {
+      const found = findMapItem(id);
+      if (!found) return;
+      openDossier(markerCopy(found.item, found.isEvent));
+      if (found.item.lat != null && state.lmap) {
+        const z = Math.max(state.lmap.getZoom ? state.lmap.getZoom() : 5, 6);
+        state.lmap.flyTo([found.item.lat, found.item.lon], z, { duration: REDUCE ? 0 : 0.75 });
+      }
+    }
+
+    function markerCopy(item, isEvent) {
+      const overlay = lessonOverlay(item.id);
+      return {
+        kicker: (overlay && overlay.kicker) || item.kicker,
+        title: (overlay && overlay.title) || item.name,
+        body: (overlay && overlay.body) || item.text,
+        cite: (overlay && overlay.scripture) || item.scripture,
+        art: (overlay && overlay.art) || item.art || epochById(isEvent ? item.yearId : state.yearId).art,
+        kind: isEvent ? "event" : "city",
+        id: item.id
+      };
+    }
+
     function addLeafletMarker(item, isEvent, ep) {
-      const hot = isEvent ? item.yearId === ep.id : (item.pulse || []).includes(ep.id);
+      const lesson = isLessonId(item.id);
+      const hot = lesson || (isEvent ? item.yearId === ep.id : (item.pulse || []).includes(ep.id));
       if (isEvent && !hot && !cinematic) return;
       const kind = isEvent ? (item.kind || "battle") : "city";
       const src = iconSrc(kind);
@@ -544,24 +632,17 @@
         title: item.name
       });
       mk.on("click", () => {
-        if (isEvent && item.yearId !== state.yearId) {
+        if (isEvent && item.yearId !== state.yearId && !lesson) {
           setYear(item.yearId, { animate: true, chapter: cinematic });
         }
-        openDossier({
-          kicker: item.kicker,
-          title: item.name,
-          body: item.text,
-          cite: item.scripture,
-          art: item.art || epochById(isEvent ? item.yearId : state.yearId).art,
-          kind: isEvent ? "event" : "city",
-          id: item.id
-        });
+        openDossier(markerCopy(item, isEvent));
       });
       mk.addTo(state.markerLayer);
     }
 
     function addGoogleMarker(item, isEvent, ep) {
-      const hot = isEvent ? item.yearId === ep.id : (item.pulse || []).includes(ep.id);
+      const lesson = isLessonId(item.id);
+      const hot = lesson || (isEvent ? item.yearId === ep.id : (item.pulse || []).includes(ep.id));
       if (isEvent && !hot && !cinematic) return;
       const kind = isEvent ? (item.kind || "battle") : "city";
       const mk = new google.maps.Marker({
@@ -577,18 +658,10 @@
         }
       });
       mk.addListener("click", () => {
-        if (isEvent && item.yearId !== state.yearId) {
+        if (isEvent && item.yearId !== state.yearId && !lesson) {
           setYear(item.yearId, { animate: true, chapter: cinematic });
         }
-        openDossier({
-          kicker: item.kicker,
-          title: item.name,
-          body: item.text,
-          cite: item.scripture,
-          art: item.art || epochById(isEvent ? item.yearId : state.yearId).art,
-          kind: isEvent ? "event" : "city",
-          id: item.id
-        });
+        openDossier(markerCopy(item, isEvent));
       });
       state.gMarkers.push(mk);
     }
@@ -695,7 +768,7 @@
         gestureHandling: "greedy",
         backgroundColor: "#0a1218",
         restriction: {
-          latLngBounds: { north: 60, south: 8, west: -18, east: 82 },
+          latLngBounds: { north: 60, south: 8, west: -100, east: 82 },
           strictBounds: false
         }
       });
@@ -763,6 +836,7 @@
         b.classList.toggle("active", b.dataset.year === ep.id);
       });
       stone.style.opacity = String(ep.stone || 0);
+      root.classList.toggle("is-stone-world", Number(ep.stone || 0) > 0.05);
       const enter = root.querySelector(".cmap-enter-overlay");
       if (enter) enter.href = "map.html?year=" + ep.id;
       if (cinematic && history.replaceState) {
@@ -783,12 +857,37 @@
       state.yearId = ep.id;
       updateChrome(ep);
       drawOverlays(ep);
-      if (f.open !== false) openEpochDossier(ep);
+      if (f.open !== false && !f.focusId) openEpochDossier(ep);
       if (f.chapter !== false && cinematic && f.animate !== false) {
         await showChapter(ep);
         if (gen !== state.yearGen) return;
       }
       await flyToEpoch(ep, f.animate !== false);
+      if (gen !== state.yearGen) return;
+      if (f.focusId) openItemById(f.focusId);
+    }
+
+    function applySheet(index, flags) {
+      const f = flags || {};
+      state.sheetIndex = index;
+      const pack = sheetPack();
+      const year = f.year || (pack && pack.year) || state.yearId;
+      const focus = f.focusId === null ? undefined : (f.focusId || (pack && pack.focusId));
+      return setYear(year, {
+        animate: f.animate !== false,
+        chapter: false,
+        open: false,
+        focusId: focus
+      });
+    }
+
+    function setSheet(index, flags) {
+      state.sheetIndex = index;
+      if (!mapReady) {
+        queuedSheet = { index: index, flags: flags || {} };
+        return Promise.resolve();
+      }
+      return applySheet(index, flags);
     }
 
     function yearIndex() {
@@ -915,13 +1014,26 @@
         await new Promise((r) => setTimeout(r, 900));
         overture.classList.remove("show");
       }
-      await setYear(state.yearId, { animate: true, chapter: cinematic && !opts.skipOverture, open: true });
+      await setYear(state.yearId, {
+        animate: true,
+        chapter: cinematic && !opts.skipOverture,
+        open: cinematic
+      });
+      mapReady = true;
+      if (queuedSheet) {
+        await applySheet(queuedSheet.index, queuedSheet.flags);
+        queuedSheet = null;
+      } else if (!cinematic && state.sheetIndex != null) {
+        drawOverlays(currentEpoch());
+      }
     }
 
     start();
 
     return {
       setYear: (id, flags) => setYear(id, flags || { animate: true, chapter: false, open: false }),
+      setSheet: setSheet,
+      openNode: openItemById,
       resize: resize,
       getYear: () => state.yearId,
       el: root

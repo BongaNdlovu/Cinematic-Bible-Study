@@ -15,6 +15,14 @@ import * as THREE from 'three';
     const coarsePointer = window.matchMedia('(pointer: coarse)').matches;
     const lowPower = window.innerWidth < 768 || coarsePointer || (navigator.hardwareConcurrency || 8) <= 4;
 
+    const urlParams = new URLSearchParams(window.location.search);
+    const fromLesson = urlParams.get('from') === 'lesson';
+    const lessonSheetRaw = urlParams.get('sheet');
+    const isValidSheet = (s) => s !== null && s !== undefined && /^\d+$/.test(String(s).trim()) && Number(s) >= 0 && Number(s) <= 10;
+    const lessonReturnHref = (fromLesson && isValidSheet(lessonSheetRaw))
+      ? `study.html?sheet=${encodeURIComponent(String(lessonSheetRaw).trim())}#sheet-article`
+      : null;
+
     const AudioBus = {
       ctx: null,
       muted: false,
@@ -253,6 +261,7 @@ import * as THREE from 'three';
       bear: 'assets/site/bear-painting.jpg',
       leopard: 'assets/plates/leopard-diadochi.jpg',
       beast: 'assets/study/epochs/papal-rome.jpg',
+      years1260: 'assets/plates/years1260.jpg',
       ram: 'assets/plates/ram-ulai.jpg',
       goat: 'assets/plates/goat-charge.jpg',
       goat_broken: 'assets/plates/goat-broken.jpg',
@@ -393,6 +402,7 @@ import * as THREE from 'three';
       { img: 'assets/thumbs/bear.jpg', asset: 'bear', angle: 1.35, y: 2.15 },
       { img: 'assets/thumbs/leopard.jpg', asset: 'leopard', angle: 1.65, y: 2.05 },
       { img: 'assets/thumbs/beast.jpg', asset: 'beast', angle: 1.95, y: 1.95 },
+      { img: 'assets/thumbs/years1260.jpg', asset: 'years1260', angle: 2.05, y: 1.88 },
       { img: 'assets/thumbs/ram.jpg', asset: 'ram', angle: -1.7, y: 2.0 },
       { img: 'assets/thumbs/goat.jpg', asset: 'goat', angle: 2.2, y: 1.9 },
       { img: 'assets/thumbs/dura.jpg', asset: 'dura', angle: -1.95, y: 1.9 },
@@ -948,7 +958,7 @@ import * as THREE from 'three';
         plateImg: 'assets/study/epochs/papal-rome.jpg',
         plateCaption: 'Iron teeth and the little horn among the ten · Rome',
         thumb: 'assets/thumbs/beast.jpg',
-        related: ['legs', 'goat_horn', 'ancient', 'son'],
+        related: ['legs', 'years1260', 'ancient', 'son'],
         takeaway: 'The fourth beast with iron teeth represents Imperial Rome, while its little horn portrays the persecuting church-state power that arose among the divided nations and reigned for 1,260 years until 1798.',
         filename: 'beast.glb',
         organic: true,
@@ -958,6 +968,30 @@ import * as THREE from 'three';
         lookAt: [0, 1.1, 0],
         haloY: 1.4,
         haloScale: 1.12
+      },
+      years1260: {
+        id: 'years1260',
+        eyebrow: 'DANIEL 7 · THE MEASURED SPAN',
+        title: 'A Time, Times, and Dividing of Time',
+        pill: 'DANIEL 7:25 · 1,260 YEARS',
+        dates: 'AD 538 – AD 1798',
+        quote: '“And he shall speak great words against the most High, and shall wear out the saints of the most High, and think to change times and laws: and they shall be given into his hand until a time and times and the dividing of time.”',
+        quoteRef: 'Daniel 7:25 (KJV)',
+        explanation: 'Do not memorize 1,260 years first. Build the number. In this style of prophecy a “time” is a year, “times” is two years, and “the dividing of time” is a half year: 1 + 2 + ½ = 3½ years. Revelation writes the same span three ways: a thousand two hundred and threescore days (Revelation 12:6), a time and times and half a time (Revelation 12:14), and forty and two months (Revelation 13:5). Forty-two months of thirty days are 1,260 days. On the year-day scale God appointed in Numbers 14:34 and Ezekiel 4:6, those 1,260 days are 1,260 years. This exhibit is that measured reign — not a fifth metal, and not a three-and-a-half-year man at the end of time.',
+        historical: 'The marks in Daniel 7:24–25 sit among the ten fragments of western Rome: a power diverse from the others, speaking great words, wearing out the saints, intending to change times and laws. Historicist readers date the opening when the Ostrogothic grip on Rome broke in AD 538, so Justinian’s grant to the Roman see could operate in the city, and the close when General Berthier took Pius VI in 1798. You may argue the start-year. You may not skip the marks in 7:24–25 and still claim any favorite villain. The court of 7:9–14 sits while this span is still a historical fact; the stone of chapter 2 is later.',
+        plateImg: 'assets/plates/years1260.jpg',
+        plateCaption: 'Time, times, and the dividing of time · 538 to 1798',
+        thumb: 'assets/thumbs/years1260.jpg',
+        related: ['beast', 'ancient', 'sealed', 'feet'],
+        takeaway: 'Daniel 7:25’s riddle is 3½ years; Revelation equates it with 1,260 days; the year-day scale makes those 1,260 years, from the little horn’s measured supremacy in 538 to the deadly wound in 1798.',
+        filename: 'years1260.glb',
+        organic: true,
+        autoFrame: true,
+        targetHeight: 2.15,
+        camPos: [1.6, 1.55, 5.6],
+        lookAt: [0, 1.08, 0],
+        haloY: 1.35,
+        haloScale: 1.08
       },
       ram: {
         id: 'ram',
@@ -1092,7 +1126,7 @@ import * as THREE from 'three';
         plateImg: 'assets/plates/ancient-throne.jpg',
         plateCaption: 'Thrones were set, and the books were opened',
         thumb: 'assets/thumbs/ancient.jpg',
-        related: ['son', 'beast', 'goat_horn', 'stone'],
+        related: ['son', 'beast', 'years1260', 'stone'],
         takeaway: 'The vision of the Ancient of Days reveals God convening a heavenly courtroom where the books of record are opened and earthly persecuting powers are judged before Christ receives His eternal kingdom.',
         filename: 'ancient.glb',
         organic: true,
@@ -1743,6 +1777,44 @@ import * as THREE from 'three';
           anchor: new THREE.Vector3(0.45, 0.55, 0.42), enabled: true
         }
       ],
+      years1260: [
+        {
+          id: 'y1260-riddle', col: 'left', row: 0,
+          icon: '⏳', label: 'TIME + TIMES + HALF',
+          body: 'A time is a year, times is two, the dividing of time is a half. 1 + 2 + ½ = 3½ years. (Daniel 7:25)',
+          anchor: new THREE.Vector3(-0.48, 1.5, 0.4), enabled: true
+        },
+        {
+          id: 'y1260-days', col: 'left', row: 1,
+          icon: '📖', label: '1,260 DAYS',
+          body: 'Revelation writes the same span as 1,260 days, a time and times and half a time, and forty-two months. (Revelation 12:6, 14; 13:5)',
+          anchor: new THREE.Vector3(-0.45, 1.05, 0.42), enabled: true
+        },
+        {
+          id: 'y1260-years', col: 'left', row: 2,
+          icon: '📅', label: 'YEAR-DAY SCALE',
+          body: 'On the scale God appointed in Numbers 14:34 and Ezekiel 4:6, those 1,260 days are 1,260 years — not a 3½-year future man.',
+          anchor: new THREE.Vector3(-0.42, 0.55, 0.4), enabled: true
+        },
+        {
+          id: 'y1260-open', col: 'right', row: 0,
+          icon: '⛪', label: 'AD 538',
+          body: 'Ostrogoths driven from Rome. Justinian’s grant to the Roman see can operate in the city. Candidate start of the measured reign.',
+          anchor: new THREE.Vector3(0.5, 1.5, 0.38), enabled: true
+        },
+        {
+          id: 'y1260-close', col: 'right', row: 1,
+          icon: '⚔️', label: 'AD 1798',
+          body: 'Berthier takes Pius VI. The 1,260 years close. Revelation 13:3 calls this a deadly wound. The time of the end opens.',
+          anchor: new THREE.Vector3(0.48, 1.05, 0.4), enabled: true
+        },
+        {
+          id: 'y1260-tak', col: 'right', row: 2,
+          icon: '✨', label: 'KEY TAKEAWAY',
+          body: 'The riddle is 3½ years; Scripture equates it with 1,260 days; the year-day scale makes those 1,260 years, 538 to 1798.',
+          anchor: new THREE.Vector3(0.45, 0.55, 0.42), enabled: true
+        }
+      ],
       ram: [
         {
           id: 'ram-horns', col: 'left', row: 0,
@@ -2303,6 +2375,7 @@ import * as THREE from 'three';
         { asset: 'bear', label: 'THE BEAR', date: 'Dan 7:5', img: 'assets/thumbs/bear.jpg' },
         { asset: 'leopard', label: 'LEOPARD', date: 'Dan 7:6', img: 'assets/thumbs/leopard.jpg' },
         { asset: 'beast', label: 'FOURTH BEAST', date: 'Dan 7:7', img: 'assets/thumbs/beast.jpg' },
+        { asset: 'years1260', label: '1,260 YEARS', date: 'Dan 7:25', img: 'assets/thumbs/years1260.jpg' },
         { asset: 'ram', label: 'THE RAM', date: 'Dan 8:3', img: 'assets/thumbs/ram.jpg' },
         { asset: 'goat', label: 'THE GOAT', date: 'Dan 8:5', img: 'assets/thumbs/goat.jpg' },
         { asset: 'goat_broken', label: 'BROKEN HORN', date: 'Dan 8:8', img: 'assets/thumbs/goat_broken.jpg' },
@@ -2674,6 +2747,39 @@ import * as THREE from 'three';
     let pedestalVisible = false;
     let baseExposure = 1.12;
 
+    function syncDossierStudyLink(key) {
+      const narStudyLink = document.getElementById('nar-study-link');
+      if (!narStudyLink) return;
+      if (lessonReturnHref) {
+        narStudyLink.href = lessonReturnHref;
+        narStudyLink.innerHTML = '<span>📖</span> ← Back to this lesson';
+      } else {
+        narStudyLink.href = `study.html?id=${key}`;
+        narStudyLink.innerHTML = '<span>📖</span> Open Full Study Desk &amp; Quiz →';
+      }
+    }
+
+    const MAP_YEAR_FOR_ASSET = {
+      head: 'y605', chest: 'y539', thighs: 'y331', legs: 'y168', feet: 'y538',
+      stone: 'y1844', assembled: 'y605',
+      lion: 'y605', bear: 'y539', leopard: 'y331', beast: 'y538', years1260: 'y538',
+      ram: 'y539', goat: 'y331', goat_broken: 'y331', goat_horn: 'y168',
+      dura: 'y605', stump: 'y605', ox_king: 'y605',
+      ancient: 'y1844', son: 'y1844',
+      decree: 'y457', kings: 'y331', michael: 'y12', sealed: 'y12'
+    };
+
+    function syncDossierMapLink(key) {
+      const narMapLink = document.getElementById('nar-map-link');
+      if (!narMapLink) return;
+      const y = MAP_YEAR_FOR_ASSET[key] || 'y605';
+      const lessonQuery = (fromLesson && isValidSheet(lessonSheetRaw))
+        ? `&from=lesson&sheet=${encodeURIComponent(String(lessonSheetRaw).trim())}`
+        : '';
+      narMapLink.href = `map.html?year=${y}${lessonQuery}`;
+      if (window.BAJourney) window.BAJourney.save({ artifact: key, year: y });
+    }
+
     function selectAsset(key, opts = {}) {
       if (key === 'altar') key = 'assembled';
       if (!ASSET_REGISTRY[key]) return;
@@ -2749,22 +2855,8 @@ import * as THREE from 'three';
       if (plateCap) plateCap.textContent = data.plateCaption || '';
       if (take) take.textContent = data.takeaway;
 
-      const narStudyLink = document.getElementById('nar-study-link');
-      if (narStudyLink) {
-        narStudyLink.href = `study.html?id=${key}`;
-      }
-      const narMapLink = document.getElementById('nar-map-link');
-      const yearForAsset = {
-        head: 'y605', chest: 'y539', thighs: 'y331', legs: 'y168', feet: 'y538',
-        stone: 'y1844', assembled: 'y605',
-        lion: 'y605', bear: 'y539', leopard: 'y331', beast: 'y538',
-        ram: 'y539', goat: 'y331', goat_broken: 'y331', goat_horn: 'y168',
-        dura: 'y605', stump: 'y605', ox_king: 'y605',
-        ancient: 'y1844', son: 'y1844',
-        decree: 'y457', kings: 'y331', michael: 'y12', sealed: 'y12'
-      };
-      if (narMapLink) narMapLink.href = 'map.html?year=' + (yearForAsset[key] || 'y605');
-      if (window.BAJourney) window.BAJourney.save({ artifact: key, year: yearForAsset[key] || 'y605' });
+      syncDossierStudyLink(key);
+      syncDossierMapLink(key);
 
       const idxEl = document.getElementById('exhibit-index');
       if (idxEl) {
@@ -2805,6 +2897,16 @@ import * as THREE from 'three';
       syncNodes();
 
       // Smooth camera transition to optimal angle
+      if (key === 'years1260') {
+        autoSpin = false;
+        const spinBtnPlaque = document.getElementById('btn-spin');
+        if (spinBtnPlaque) {
+          spinBtnPlaque.classList.remove('active');
+          spinBtnPlaque.textContent = 'Auto Orbit: OFF';
+        }
+        const b360Plaque = document.getElementById('btn-museum-360');
+        if (b360Plaque) b360Plaque.classList.remove('active');
+      }
       if (data.camPos && data.lookAt && !opts.skipCamera && !data.autoFrame) {
         autoSpin = false;
         const spinBtn = document.getElementById('btn-spin');
@@ -3268,7 +3370,7 @@ import * as THREE from 'three';
     });
 
     // Previous / Next artifact arrows
-    const artifactOrder = ['assembled', 'head', 'chest', 'thighs', 'legs', 'feet', 'stone', 'lion', 'bear', 'leopard', 'beast', 'ram', 'goat', 'goat_broken', 'goat_horn', 'dura', 'stump', 'ox_king', 'ancient', 'son', 'decree', 'kings', 'michael', 'sealed'];
+    const artifactOrder = ['assembled', 'head', 'chest', 'thighs', 'legs', 'feet', 'stone', 'lion', 'bear', 'leopard', 'beast', 'years1260', 'ram', 'goat', 'goat_broken', 'goat_horn', 'dura', 'stump', 'ox_king', 'ancient', 'son', 'decree', 'kings', 'michael', 'sealed'];
     document.getElementById('btn-prev-artifact').addEventListener('click', () => {
       let idx = artifactOrder.indexOf(activeAssetKey);
       idx = (idx - 1 + artifactOrder.length) % artifactOrder.length;
@@ -3753,9 +3855,24 @@ import * as THREE from 'three';
     }
 
     // Initialize State: Check URL parameter (?asset=... or ?id=...) or default to 'assembled'
-    const urlParams = new URLSearchParams(window.location.search);
     const initialAssetKey = urlParams.get('asset') || urlParams.get('id');
     const startAsset = (initialAssetKey && ASSET_REGISTRY[initialAssetKey]) ? initialAssetKey : 'assembled';
+
+    if (lessonReturnHref) {
+      const backBtn = document.getElementById('gallery-back-lesson');
+      if (backBtn) {
+        backBtn.href = lessonReturnHref;
+        backBtn.style.display = 'inline-flex';
+      }
+      const genericStudy = document.getElementById('gallery-study-link');
+      if (genericStudy) {
+        genericStudy.style.display = 'none';
+      }
+      const mapTopLink = document.getElementById('gallery-map-link');
+      if (mapTopLink && isValidSheet(lessonSheetRaw)) {
+        mapTopLink.href = `map.html?from=lesson&sheet=${encodeURIComponent(String(lessonSheetRaw).trim())}`;
+      }
+    }
 
     rebuildNodeElements();
     buildEraTimeline();

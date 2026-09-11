@@ -29,6 +29,7 @@
     leopard: "bronze",
     legs: "iron",
     beast: "iron",
+    years1260: "iron",
     feet: "stone",
     stone: "stone",
     ox_king: "gold",
@@ -39,6 +40,8 @@
   };
 
   const FREE_THROUGH = 2;
+  // TEMPORARY REVIEW UNLOCK — set false with study-app.js to restore the free/paid cut.
+  const TEMP_REVIEW_UNLOCK = true;
   const SHEET_LABELS = [
     "Prologue",
     "Daniel 1",
@@ -142,6 +145,7 @@
   }
 
   function canAccessSheet(index) {
+    if (TEMP_REVIEW_UNLOCK) return true;
     const i = Number(index);
     if (Number.isNaN(i) || i < 0) return true;
     if (i <= FREE_THROUGH) return true;

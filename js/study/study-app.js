@@ -1,3 +1,6 @@
+    // TEMPORARY REVIEW UNLOCK — set false to restore free/paid and task gates.
+    const TEMP_REVIEW_UNLOCK = true;
+
     // Sheet to Timeline mapping
     const sheetToTimelineMap = {
       0: 0, // Prologue -> 605 B.C.
@@ -246,6 +249,7 @@
       if (id === 'map') {
         ensureStudyMap();
         expandSittingMap(false);
+        renderSheetMapPanel(currentSheetIndex);
       }
       if (id === 'scripture') {
         const box = document.querySelector('#scripture-root .scripture-scroll');
@@ -278,7 +282,8 @@
       { id: 'bear', kind: 'idle', show: 'bear', year: 'y539', empire: 'silver', label: 'Lopsided bear' },
       { id: 'leopard', kind: 'idle', show: 'leopard', year: 'y331', empire: 'bronze', label: 'Four-headed leopard' },
       { id: 'beast', kind: 'idle', show: 'beast', year: 'y168', empire: 'iron', label: 'Dreadful beast' },
-      { id: 'horn', kind: 'horn', show: 'beast', year: 'y538', empire: 'iron', label: 'Little horn grows' }
+      { id: 'horn', kind: 'horn', show: 'beast', year: 'y538', empire: 'iron', label: 'Little horn grows' },
+      { id: 'years1260', kind: 'idle', show: 'years1260', year: 'y538', empire: 'iron', label: '1,260 years' }
     ];
 
     let sittingBusy = false;
@@ -305,7 +310,7 @@
 
     function idleKeyForSheet(index, unlocked) {
       if (index === 2) return 'head';
-      if (index === 7) return 'leopard';
+      if (index === 7) return 'years1260';
       if ([0, 1, 3].indexOf(index) !== -1) return (unlocked || []).indexOf('gold') !== -1 ? 'lion' : 'head';
       if (index === 4) return 'ox_king';
       if (index === 5 || index === 6) return 'bear';
@@ -343,9 +348,13 @@
 
       const compText = SHEET_COMPETENCIES[index] || "Historicist Exegesis";
       const headerPill = document.getElementById('header-competency-pill');
-      if (headerPill) {
-        headerPill.textContent = "Competency: " + compText;
-        headerPill.title = "Current Learning Competency: " + compText;
+      const headerCompText = document.getElementById('header-competency-text');
+      if (headerCompText) {
+        headerCompText.textContent = compText;
+        if (headerPill) headerPill.title = "Current learning competency: " + compText;
+      } else if (headerPill) {
+        headerPill.textContent = compText;
+        headerPill.title = "Current learning competency: " + compText;
       }
       const spineComp = document.getElementById('spine-competency');
       if (spineComp) {
@@ -356,7 +365,17 @@
     function pulseMapYear(yearId, opts) {
       sittingYearOverride = yearId;
       ensureStudyMap();
-      if (studyMap && yearId) studyMap.setYear(yearId, Object.assign({ animate: true, chapter: false, open: false }, opts || {}));
+      if (studyMap && yearId) {
+        if (studyMap.setSheet) {
+          studyMap.setSheet(currentSheetIndex, Object.assign({
+            animate: true,
+            focusId: null,
+            year: yearId
+          }, opts || {}));
+        } else {
+          studyMap.setYear(yearId, Object.assign({ animate: true, chapter: false, open: false }, opts || {}));
+        }
+      }
       if (window.BAJourney) window.BAJourney.save({ year: yearId });
     }
 
@@ -366,61 +385,99 @@
     }
 
     function mountSittingStage() {
-      whenStageReady((stage) => {
-        const host = document.getElementById('study-stage');
-        if (!host) return;
-        stage.setReducedMotion(window.BAJourney ? window.BAJourney.prefersReducedMotion() : false);
-        stage.mount(host, { onStatus: setStageCaption });
+      // Chronicle stage is no longer mounted in the study desk sitting
+    }
+
+    let sittingPhase = 'study';
+    const sittingVisited = { study: true, tasks: false };
+    const SITTING_PATH_HINTS = {
+      study: 'Read the excerpt, sources, and Christology plaque. Open the Map and 3D Gallery, then answer the questions.',
+      tasks: 'Answer the questions, then continue to the next lesson.',
+      next: 'Advance when you are ready. The same path repeats on the next sheet.'
+    };
+
+    function lessonMapPack(index) {
+      return (window.SHEET_MAP && window.SHEET_MAP[index]) || null;
+    }
+    function mapBodyPlain(text) {
+      return String(text || '').replace(/\n+/g, ' ').trim();
+    }
+    function mapBodyHtml(text) {
+      if (!text) return '';
+      const t = String(text);
+      if (/<[a-z][\s\S]*>/i.test(t)) return t;
+      return t.split(/\n\n+/).map((p) => '<p>' + p.replace(/\n/g, '<br>') + '</p>').join('');
+    }
+    function renderSittingPath() {
+      const hint = document.getElementById('sitting-path-hint');
+      if (hint) hint.textContent = SITTING_PATH_HINTS[sittingPhase] || SITTING_PATH_HINTS.study;
+      document.querySelectorAll('#sitting-path-steps [data-path]').forEach((btn) => {
+        const key = btn.dataset.path;
+        btn.classList.toggle('is-current', key === sittingPhase);
+        btn.classList.toggle('is-done', !!(sittingVisited[key] && key !== sittingPhase));
       });
     }
-
-    function expandSittingStage() {
-      const wrap = document.getElementById('sitting-stage-wrap');
-      const mapWrap = document.getElementById('sitting-map-wrap');
-      if (mapWrap) mapWrap.classList.remove('is-expanded');
-      if (wrap) wrap.classList.add('is-expanded');
-      document.body.classList.add('is-sitting-expanded');
-      const backdrop = document.getElementById('sitting-backdrop');
-      if (backdrop) backdrop.hidden = false;
-      whenStageReady((stage) => { stage.expand(); stage.resize(); });
-      const btn = document.getElementById('btn-stage-expand');
-      if (btn) btn.textContent = 'Close stage';
+    function resetSittingPath() {
+      sittingPhase = 'study';
+      sittingVisited.study = true;
+      sittingVisited.tasks = false;
+      renderSittingPath();
     }
-
-    function expandSittingMap(full) {
-      const wrap = document.getElementById('sitting-map-wrap');
-      const stageWrap = document.getElementById('sitting-stage-wrap');
-      if (stageWrap) stageWrap.classList.remove('is-expanded');
-      if (wrap) {
-        wrap.classList.add('is-open');
-        if (full !== false) wrap.classList.add('is-expanded');
+    function renderSheetMapPanel(index) {
+      const host = document.getElementById('sheet-map-list');
+      const pack = lessonMapPack(index);
+      if (!host) return;
+      if (!pack) {
+        host.innerHTML = '<p class="text-sm opacity-70">No lesson nodes for this sheet.</p>';
+        return;
       }
-      if (full !== false) {
-        document.body.classList.add('is-sitting-expanded');
-        const backdrop = document.getElementById('sitting-backdrop');
-        if (backdrop) backdrop.hidden = false;
+      host.innerHTML = (pack.nodes || []).map((n, i) => {
+        return '<details' + (i === 0 ? ' open' : '') + '>' +
+          '<summary><small>' + (n.kicker || '') + '</small>' + (n.title || n.id) + '</summary>' +
+          '<div class="sheet-map-body">' + mapBodyHtml(n.body) + '</div>' +
+          (n.scripture ? '<div class="cite">' + n.scripture + '</div>' : '') +
+          '<button type="button" data-node-id="' + n.id + '">Show on map</button>' +
+          '</details>';
+      }).join('');
+      host.querySelectorAll('[data-node-id]').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const pack = lessonMapPack(currentSheetIndex);
+          const y = (pack && pack.year) || 'y605';
+          window.location.href = `map.html?year=${encodeURIComponent(y)}&from=lesson&sheet=${currentSheetIndex}`;
+        });
+      });
+    }
+    function applySittingMap(index) {
+      const pack = lessonMapPack(index);
+      if (pack) {
+        const art = (pack.nodes && pack.nodes[0] && pack.nodes[0].art) || '';
+        fillMapFacts(pack.title, '', pack.kicker, pack.summary, art, pack.year);
       }
-      ensureStudyMap();
-      if (studyMap) requestAnimationFrame(() => studyMap.resize());
-      const btn = document.getElementById('btn-map-expand');
-      if (btn) btn.textContent = full === false ? 'Expand map' : 'Close map';
+      renderSheetMapPanel(index);
+    }
+    function enterSittingPhase(phase) {
+      if (phase === 'next') {
+        sittingPhase = 'next';
+        renderSittingPath();
+        completeAndAdvance();
+        return;
+      }
+      sittingPhase = phase;
+      if (sittingVisited[phase] !== undefined) sittingVisited[phase] = true;
+      if (phase === 'study') {
+        const article = document.getElementById('sheet-article');
+        if (article) article.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      } else if (phase === 'tasks') {
+        sittingVisited.tasks = true;
+        const rev = document.getElementById('workbench-section') || document.getElementById('revision-section');
+        if (rev) rev.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+      renderSittingPath();
     }
 
-    function collapseSittingInsets() {
-      const stageWrap = document.getElementById('sitting-stage-wrap');
-      const mapWrap = document.getElementById('sitting-map-wrap');
-      if (stageWrap) stageWrap.classList.remove('is-expanded');
-      if (mapWrap) mapWrap.classList.remove('is-expanded');
-      document.body.classList.remove('is-sitting-expanded');
-      const backdrop = document.getElementById('sitting-backdrop');
-      if (backdrop) backdrop.hidden = true;
-      whenStageReady((stage) => { stage.collapse(); stage.resize(); });
-      if (studyMap) requestAnimationFrame(() => studyMap.resize());
-      const stageBtn = document.getElementById('btn-stage-expand');
-      const mapBtn = document.getElementById('btn-map-expand');
-      if (stageBtn) stageBtn.textContent = 'Expand stage';
-      if (mapBtn) mapBtn.textContent = 'Expand map';
-    }
+    function expandSittingStage() {}
+    function expandSittingMap() {}
+    function collapseSittingInsets() {}
 
     function stationEndKey(st) {
       if (!st) return null;
@@ -438,13 +495,13 @@
       pulseMapYear(st.year, { animate: true });
       setStageCaption(st.label);
       try {
-        await new Promise((resolve) => whenStageReady(resolve));
         const stage = window.StudyStage;
-        if (!stage) return;
-        if (st.kind === 'dissolve') await stage.playDissolve(st.from, st.to);
-        else if (st.kind === 'smash') await stage.playSmash();
-        else if (st.kind === 'horn') await stage.playHornGrow();
-        else await stage.show(st.show);
+        if (stage && typeof stage.isMounted === 'function' && stage.isMounted()) {
+          if (st.kind === 'dissolve') await stage.playDissolve(st.from, st.to);
+          else if (st.kind === 'smash') await stage.playSmash();
+          else if (st.kind === 'horn') await stage.playHornGrow();
+          else await stage.show(st.show);
+        }
         if (st.unlock && window.BAJourney) window.BAJourney.unlock(st.unlock);
         if (window.BAJourney) {
           const artifact = stationEndKey(st);
@@ -540,17 +597,9 @@
         if (st) {
           sittingEmpireOverride = st.empire;
           sittingYearOverride = st.year;
-          whenStageReady((stage) => {
-            const key = stationEndKey(st);
-            stage.show(key).then(() => {
-              if (st.kind === 'horn') stage.playHornGrow();
-            });
-          });
           pulseMapYear(st.year, { animate: false });
           highlightStation(st.id);
           markDoneStations('s2', st.id);
-        } else {
-          whenStageReady((stage) => stage.show('head'));
         }
         wireArticleStations('s2', S2_STATIONS);
         updateSpine(index, sittingYearOverride, sittingEmpireOverride);
@@ -559,14 +608,9 @@
       if (index === 7) {
         const id = j.station && j.station.s7;
         const st = S7_STATIONS.find((s) => s.id === id);
-        const start = st || S7_STATIONS.find((s) => s.id === 'leopard');
+        const start = st || S7_STATIONS.find((s) => s.id === 'years1260');
         sittingEmpireOverride = start.empire;
         sittingYearOverride = start.year;
-        whenStageReady((stage) => {
-          stage.show(start.show).then(() => {
-            if (st && st.kind === 'horn') stage.playHornGrow();
-          });
-        });
         pulseMapYear(start.year, { animate: false });
         wireArticleStations('s7', S7_STATIONS);
         highlightStation(start.id);
@@ -574,12 +618,9 @@
         updateSpine(index, sittingYearOverride, sittingEmpireOverride);
         return;
       }
-      const idle = idleKeyForSheet(index, j.unlocked);
-      whenStageReady((stage) => stage.show(idle));
       const yearId = STUDY_EPOCH_TO_YEAR[sheetToTimelineMap[index] !== undefined ? sheetToTimelineMap[index] : 0] || 'y605';
       pulseMapYear(yearId, { animate: true });
       updateSpine(index, sittingYearOverride || yearId, sittingEmpireOverride || spineEmpireForSheet(index, j.unlocked));
-      return;
     }
 
     function fillMapFacts(title, beast, span, insight, art, yearId) {
@@ -594,36 +635,13 @@
       if (s) s.textContent = span || '';
       if (i) i.textContent = insight || '';
       if (p && art) p.src = art;
-      if (enter && yearId) enter.href = 'map.html?year=' + yearId;
+      if (enter && yearId) {
+        enter.href = 'map.html?year=' + encodeURIComponent(yearId) + '&from=lesson&sheet=' + currentSheetIndex;
+      }
     }
 
     function ensureStudyMap() {
-      if (studyMap || typeof ChronicleMap === 'undefined') {
-        if (studyMap) requestAnimationFrame(() => studyMap.resize());
-        return;
-      }
-      const host = document.getElementById('study-chronicle-map');
-      if (!host) return;
-      const idx = typeof currentEpochIndex === 'number' ? currentEpochIndex : 0;
-      const startId = STUDY_EPOCH_TO_YEAR[idx] || 'y605';
-      studyMap = ChronicleMap.mount(host, {
-        mode: 'embed',
-        year: startId,
-        skipOverture: true,
-        onYear: function (ep) {
-          fillMapFacts(ep.title, ep.beast, ep.label, ep.insight, ep.art, ep.id);
-          sittingYearOverride = ep.id;
-          updateSpine(currentSheetIndex, ep.id, sittingEmpireOverride);
-        },
-        onSelect: function (d, ep) {
-          fillMapFacts(d.title, ep.beast, ep.label, d.body, d.art || ep.art, ep.id);
-        }
-      });
-      window.__studyMap = studyMap;
-      requestAnimationFrame(() => {
-        studyMap.resize();
-        window.setTimeout(() => studyMap.resize(), 120);
-      });
+      // ChronicleMap is no longer embedded in the study desk sitting
     }
 
     function selectEmpire(id) {
@@ -673,7 +691,7 @@
     let currentWeatherType = 'quiet';
     let weatherAnimId = null;
     let particles = [];
-    let isZenMode = false;
+    let isFlashlightEnabled = false;
     let isAmbientAudioOn = false;
     let focusAtmosphere = 0;
     let lightning = 0;
@@ -1219,27 +1237,6 @@
       }
     }
 
-    function toggleZenFocus() {
-      isZenMode = !isZenMode;
-      const backdrop = document.getElementById('zen-focus-backdrop');
-      const btn = document.getElementById('zen-btn');
-      const dock = document.getElementById('pomo-dock');
-
-      if (backdrop) {
-        if (isZenMode) {
-          backdrop.classList.remove('opacity-0', 'pointer-events-none');
-          if (btn) btn.classList.add('bg-amber-500/20', 'border-amber-500');
-          if (dock) dock.classList.add('z-50');
-          showToast("Zen Focus Mode Active");
-        } else {
-          backdrop.classList.add('opacity-0', 'pointer-events-none');
-          if (btn) btn.classList.remove('bg-amber-500/20', 'border-amber-500');
-          if (dock) dock.classList.remove('z-50');
-          showToast("Zen Mode Exited");
-        }
-      }
-    }
-
     function updateTimerDisplay() {
       const mins = Math.floor(timeRemaining / 60);
       const secs = timeRemaining % 60;
@@ -1391,25 +1388,33 @@
       const theme = themes[currentThemeIdx];
       const html = document.documentElement;
       const themeIcon = document.getElementById('theme-icon');
-      const base = "font-sans transition-colors duration-200 min-h-screen flex flex-col justify-between relative overflow-x-hidden";
+      const isDark = theme === 'charcoal' || theme === 'night';
 
-      if (theme === 'charcoal') {
-        html.classList.add('dark');
-        document.body.className = "charcoal-mode bg-paper-950 text-paper-100 selection:bg-amber-900 " + base;
-        if (themeIcon) themeIcon.innerText = "🔦 Charcoal";
-      } else if (theme === 'night') {
-        html.classList.add('dark');
-        document.body.className = "bg-paper-950 text-paper-100 selection:bg-amber-900 " + base;
-        if (themeIcon) themeIcon.innerText = "🌙 Night";
-      } else if (theme === 'white') {
-        html.classList.remove('dark');
-        document.body.className = "white-mode bg-white text-ink-900 selection:bg-amber-200 " + base;
-        if (themeIcon) themeIcon.innerText = "⚪ White";
-      } else {
-        html.classList.remove('dark');
-        document.body.className = "paper-mode bg-paper-50 text-ink-900 selection:bg-amber-200 " + base;
-        if (themeIcon) themeIcon.innerText = "☀️ Paper";
+      html.classList.toggle('dark', isDark);
+      html.dataset.theme = theme;
+      document.body.dataset.theme = theme;
+
+      document.body.classList.remove('charcoal-mode', 'paper-mode', 'white-mode', 'night-mode', 'bg-paper-950', 'bg-paper-50', 'bg-white', 'text-paper-100', 'text-ink-900', 'selection:bg-amber-900', 'selection:bg-amber-200');
+      document.body.classList.add(theme + '-mode');
+      document.body.classList.toggle('bg-paper-950', isDark);
+      document.body.classList.toggle('text-paper-100', isDark);
+      document.body.classList.toggle('selection:bg-amber-900', isDark);
+      document.body.classList.toggle('bg-paper-50', theme === 'paper');
+      document.body.classList.toggle('bg-white', theme === 'white');
+      document.body.classList.toggle('text-ink-900', !isDark);
+      document.body.classList.toggle('selection:bg-amber-200', !isDark);
+
+      if (themeIcon) {
+        themeIcon.innerText = theme === 'charcoal' ? '🌑 Charcoal'
+          : theme === 'night' ? '🌙 Night'
+          : theme === 'white' ? '⚪ White'
+          : '☀️ Paper';
       }
+      if (theme !== 'charcoal' && isFlashlightEnabled) {
+        isFlashlightEnabled = false;
+        document.body.classList.remove('flashlight-active', 'beam-ready');
+      }
+      syncReadingControls();
       try { localStorage.setItem('daniel_theme_v1', String(currentThemeIdx)); } catch (e) {}
       if (!silent && themeIcon) showToast(`Theme: ${themeIcon.innerText}`);
     }
@@ -1466,6 +1471,9 @@
             openAccessPanel();
             toggleTocDrawer();
             return;
+          }
+          if (location.hash && history.replaceState) {
+            history.replaceState(null, '', location.pathname + '?sheet=' + idx);
           }
           loadSheet(idx);
           toggleTocDrawer();
@@ -1540,6 +1548,61 @@
       return "<p" + cls + ">" + escapeStudy(claim) + "</p>" + renderWhy(why);
     }
 
+    function escapeVerify(text) {
+      return String(text || '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+
+    function verifyKindLabel(kind) {
+      if (kind === 'history') return 'Historical source';
+      if (kind === 'inscription') return 'Inscription / chronicle';
+      if (kind === 'commentary') return 'Dated reader';
+      return 'Scripture';
+    }
+    function verifyOpenHref(href) {
+      const s = String(href || '');
+      return /^https:\/\//i.test(s) ? s : '';
+    }
+    function autoScriptureHref(it) {
+      if (it.kind !== 'scripture') return '';
+      const head = String(it.source || '').split(',')[0].trim();
+      if (!/\d/.test(head)) return '';
+      return 'https://www.biblegateway.com/passage/?search=' + encodeURIComponent(head) + '&version=KJV';
+    }
+    function renderSheetVerify(index) {
+      const box = document.getElementById('sheet-verify');
+      const pack = window.SHEET_VERIFY && window.SHEET_VERIFY[index];
+      if (!box) return;
+      if (!pack || !pack.items || !pack.items.length) {
+        box.hidden = true;
+        box.innerHTML = '';
+        return;
+      }
+      box.hidden = false;
+      const cards = pack.items.map((it) => {
+        const open = verifyOpenHref(it.href) || verifyOpenHref(autoScriptureHref(it));
+        const openHtml = open
+          ? ' <a class="sheet-verify-open" href="' + escapeVerify(open) + '" target="_blank" rel="noopener noreferrer">Open source</a>'
+          : '';
+        return '<article class="sheet-verify-card">' +
+          '<p class="sheet-verify-kind">' + escapeVerify(verifyKindLabel(it.kind)) + '</p>' +
+          '<h4>' + escapeVerify(it.lesson) + '</h4>' +
+          '<blockquote>' + escapeVerify(it.quote) + '</blockquote>' +
+          '<p class="sheet-verify-source"><b>Source</b> ' + escapeVerify(it.source) + openHtml + '</p>' +
+          '<p class="sheet-verify-check"><b>Check</b> ' + escapeVerify(it.check) + '</p>' +
+          '</article>';
+      }).join('');
+      box.innerHTML =
+        '<p class="sheet-verify-kicker">Verify this sitting</p>' +
+        '<h3>Lessons, sources, and quotations</h3>' +
+        '<p class="sheet-verify-claim">' + escapeVerify(pack.claim) + '</p>' +
+        '<p class="sheet-verify-count">' + pack.items.length + ' direct references. Open the source; do not take the card’s word alone.</p>' +
+        '<div class="sheet-verify-list">' + cards + '</div>';
+    }
+
     function renderStudyGuide(guide) {
       const box = document.getElementById("sheet-study-path");
       if (!box) return;
@@ -1551,6 +1614,7 @@
       box.hidden = false;
       box.innerHTML =
         '<p class="study-path-kicker">How to study this sheet</p>' +
+        '<p class="sitting-path-hint">Path for this sitting: study the excerpt, sources, and Christology plaque → open the Map page → open the 3D Gallery → return for the questions → next lesson.</p>' +
         "<h3>Trace it yourself</h3>" +
         renderTrace(guide.trace) +
         "<h4>Christ at the center</h4>" +
@@ -1566,6 +1630,7 @@
     }
 
     function canAccessSheet(index) {
+      if (TEMP_REVIEW_UNLOCK) return true;
       if (window.BAJourney && typeof window.BAJourney.canAccessSheet === 'function') {
         return window.BAJourney.canAccessSheet(index);
       }
@@ -1683,6 +1748,7 @@
     }
 
     function maybeShowEndGuide() {
+      if (TEMP_REVIEW_UNLOCK) return;
       if (!sheetQuizComplete()) return;
       if (endCardShownForSheet === currentSheetIndex) return;
       if (sittingGuideMode === 'intro') return;
@@ -1703,6 +1769,7 @@
     }
 
     function openAccessPanel() {
+      if (TEMP_REVIEW_UNLOCK) return;
       hideSittingGuide();
       const panel = document.getElementById('access-panel');
       if (panel) {
@@ -1826,14 +1893,83 @@
     };
 
     document.addEventListener('click', (e) => {
-      if (!e.target.closest('.strongs-popover') && !e.target.closest('.strongs-gloss')) {
-        document.querySelectorAll('.strongs-popover').forEach(p => p.remove());
+      const termBtn = e.target.closest('.term-gloss');
+      if (e.target.closest('[data-term-close]')) {
+        const pop = e.target.closest('.term-popover');
+        if (pop) pop.remove();
+        return;
+      }
+      if (e.target.closest('[data-term-index]')) {
+        const id = e.target.closest('[data-term-index]').getAttribute('data-term-index');
+        document.querySelectorAll('.term-popover, .strongs-popover').forEach(p => p.remove());
+        if (window.GlossaryIndex) window.GlossaryIndex.openIndex(id);
+        return;
+      }
+      if (termBtn && window.GlossaryIndex) {
+        e.stopPropagation();
+        window.GlossaryIndex.showPopover(termBtn);
+        return;
+      }
+      if (!e.target.closest('.strongs-popover') && !e.target.closest('.strongs-gloss') && !e.target.closest('.term-popover') && !e.target.closest('.term-gloss')) {
+        document.querySelectorAll('.strongs-popover, .term-popover').forEach(p => p.remove());
       }
     });
 
+    const LESSON_CONNECT_TABLE = [
+      { mapYear: 'y605', galleryAsset: 'assembled' },  // 0 Prologue
+      { mapYear: 'y605', galleryAsset: 'lion' },       // 1 Daniel 1
+      { mapYear: 'y605', galleryAsset: 'head' },       // 2 Daniel 2
+      { mapYear: 'y605', galleryAsset: 'dura' },       // 3 Dura
+      { mapYear: 'y605', galleryAsset: 'ox_king' },    // 4 Tree
+      { mapYear: 'y539', galleryAsset: 'chest' },      // 5 Handwriting
+      { mapYear: 'y539', galleryAsset: 'bear' },       // 6 Lions
+      { mapYear: 'y538', galleryAsset: 'years1260' },  // 7 Little horn / 1260
+      { mapYear: 'y1844', galleryAsset: 'ram' },       // 8 Ram, goat, 1844
+      { mapYear: 'y457', galleryAsset: 'decree' },     // 9 Seventy weeks
+      { mapYear: 'y12', galleryAsset: 'michael' }      // 10 Michael
+    ];
+
+    function renderLessonConnectBar(index) {
+      const bar = document.getElementById('lesson-connect');
+      if (!bar) return;
+      const cfg = LESSON_CONNECT_TABLE[index] || { mapYear: 'y605', galleryAsset: 'assembled' };
+      const mapBtn = document.getElementById('btn-lesson-map');
+      const galleryBtn = document.getElementById('btn-lesson-gallery');
+      if (mapBtn) {
+        mapBtn.href = `map.html?year=${encodeURIComponent(cfg.mapYear)}&from=lesson&sheet=${index}`;
+      }
+      if (galleryBtn) {
+        galleryBtn.href = `gallery.html?asset=${encodeURIComponent(cfg.galleryAsset)}&from=lesson&sheet=${index}`;
+      }
+    }
+
+    function renderChristologyPlaque(c) {
+      const section = document.getElementById('sheet-christology');
+      if (!section) return;
+      if (!c) {
+        section.hidden = true;
+        return;
+      }
+      section.hidden = false;
+      const scriptEl = document.getElementById('christology-scripture');
+      const titleEl = document.getElementById('christology-title');
+      const bodyEl = document.getElementById('christology-body');
+      if (scriptEl) scriptEl.textContent = c.scripture || '';
+      if (titleEl) titleEl.textContent = c.title || '';
+      if (bodyEl) {
+        if (Array.isArray(c.body)) {
+          bodyEl.innerHTML = c.body.map((p) => `<p>${p.trim()}</p>`).join('');
+        } else if (typeof c.body === 'string') {
+          bodyEl.innerHTML = c.body.split(/\n\n+/).map((p) => `<p>${p.trim()}</p>`).join('');
+        } else {
+          bodyEl.innerHTML = '';
+        }
+      }
+    }
+
     function loadSheet(index, opts) {
       if (index < 0 || index >= sheetsData.length) return;
-      if (!canAccessSheet(index)) {
+      if (!TEMP_REVIEW_UNLOCK && !canAccessSheet(index)) {
         openAccessPanel();
         return;
       }
@@ -1867,7 +2003,13 @@
 
       // Render Article Content
       document.getElementById('sheet-article').innerHTML = data.content;
+      renderLessonConnectBar(index);
       renderStudyGuide(data.studyGuide);
+      renderSheetVerify(index);
+      renderChristologyPlaque(data.christology);
+      if (window.GlossaryIndex) {
+        window.GlossaryIndex.linkArticle(document.getElementById('sheet-article'));
+      }
       document.querySelectorAll('#sheet-article img, #epoch-plate-img, #context-img').forEach((img) => {
         img.loading = 'lazy';
         if (!img.alt) img.alt = data.title || 'Study illustration';
@@ -1889,7 +2031,7 @@
       }
 
       // Inject Student Beta Curriculum Preview Banner for Sheets 3–10
-      if (index >= 3) {
+      if (!TEMP_REVIEW_UNLOCK && index >= 3) {
         const article = document.getElementById('sheet-article');
         if (article && !article.querySelector('.beta-preview-banner')) {
           const banner = document.createElement('div');
@@ -1917,17 +2059,30 @@
       renderSheetInstruments(index);
       updateSpine(index, yearId, spineEmpireForSheet(index, journeyState().unlocked));
       restoreSheetStage(index);
+      applySittingMap(index, { animate: false, focusId: null });
+      resetSittingPath();
 
       // Render Quizzes
       renderQuiz(data.quizzes);
       syncAdvanceButtons(index);
 
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      if (location.hash) {
+        const hashTarget = document.querySelector(location.hash);
+        if (hashTarget) {
+          setTimeout(() => {
+            hashTarget.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }, 80);
+        } else {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+      } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
       const skipIntro = opts && opts.skipIntro;
       const seen = window.BAJourney && window.BAJourney.hasSeenIntro(index);
       let hasChosenTrack = false;
       try { hasChosenTrack = !!localStorage.getItem('daniel_placement_track_v1'); } catch (e) { hasChosenTrack = true; }
-      if (!skipIntro && !seen && hasChosenTrack) {
+      if (!TEMP_REVIEW_UNLOCK && !skipIntro && !seen && hasChosenTrack) {
         showIntroGuide(index);
       }
     }
@@ -1939,6 +2094,7 @@
     }
 
     function canAdvancePath() {
+      if (TEMP_REVIEW_UNLOCK) return true;
       if (window.StudyWorkbench && !window.StudyWorkbench.isSheetComplete(currentSheetIndex)) {
         return false;
       }
@@ -1951,6 +2107,15 @@
     function updateNextGate() {
       const btn = document.getElementById('next-sheet-btn');
       const accessBtn = document.getElementById('access-open-btn');
+      if (TEMP_REVIEW_UNLOCK) {
+        if (btn) {
+          btn.disabled = false;
+          btn.hidden = false;
+          btn.title = 'Review unlock: task gates are off';
+        }
+        if (accessBtn) accessBtn.hidden = true;
+        return;
+      }
       const wbOk = !window.StudyWorkbench || window.StudyWorkbench.isSheetComplete(currentSheetIndex);
       const qOk = sheetQuizComplete();
       const ok = canAdvancePath();
@@ -1966,11 +2131,14 @@
     }
 
     function navigateSheet(delta) {
-      if (delta > 0 && !canAdvancePath()) {
+      if (!TEMP_REVIEW_UNLOCK && delta > 0 && !canAdvancePath()) {
         showToast('Complete the workbench and checkpoint questions to continue.');
         const rev = document.getElementById('workbench-section') || document.getElementById('revision-section');
         if (rev) rev.scrollIntoView({ behavior: 'smooth' });
         return;
+      }
+      if (location.hash && history.replaceState) {
+        history.replaceState(null, '', location.pathname + '?sheet=' + (currentSheetIndex + delta));
       }
       loadSheet(currentSheetIndex + delta);
     }
@@ -2067,6 +2235,10 @@
         showToast("Review the historicist explanation and try again.");
       }
       updateNextGate();
+      if (sheetQuizComplete()) {
+        sittingVisited.tasks = true;
+        renderSittingPath();
+      }
       maybeShowEndGuide();
     }
 
@@ -2087,7 +2259,7 @@
     }
 
     function completeAndAdvance() {
-      if (!canAdvancePath()) {
+      if (!TEMP_REVIEW_UNLOCK && !canAdvancePath()) {
         showToast('Complete the workbench and checkpoint questions to continue.');
         const rev = document.getElementById('workbench-section') || document.getElementById('revision-section');
         if (rev) rev.scrollIntoView({ behavior: 'smooth' });
@@ -2099,7 +2271,7 @@
       } catch (e) {}
       if (window.BAJourney) window.BAJourney.save({ pathSheet: currentSheetIndex });
 
-      if (currentSheetIndex === 2) {
+      if (!TEMP_REVIEW_UNLOCK && currentSheetIndex === 2) {
         if (window.StudyWorkbench && !window.StudyWorkbench.isCapstoneComplete()) {
           window.StudyWorkbench.renderCapstoneModal(() => {
             if (window.BAJourney && window.BAJourney.enableBetaPreview) {
@@ -2112,12 +2284,15 @@
         }
       }
 
-      if (currentSheetIndex === 2 && !canAccessSheet(3)) {
+      if (!TEMP_REVIEW_UNLOCK && currentSheetIndex === 2 && !canAccessSheet(3)) {
         openAccessPanel();
         return;
       }
 
       if (currentSheetIndex < sheetsData.length - 1) {
+        if (location.hash && history.replaceState) {
+          history.replaceState(null, '', location.pathname + '?sheet=' + (currentSheetIndex + 1));
+        }
         loadSheet(currentSheetIndex + 1);
         showToast(`Unit mastered! Advancing to Unit ${currentSheetIndex}.`);
       } else {
@@ -2129,13 +2304,27 @@
     /* =========================================================================
        7. KEYBOARD SHORTCUTS & INITIALIZATION
        ========================================================================= */
-    let isFlashlightEnabled = false;
-    function toggleFlashlightBeam() {
-      isFlashlightEnabled = !isFlashlightEnabled;
-      document.body.classList.toggle('flashlight-active', isFlashlightEnabled);
+    function syncReadingControls() {
+      const torchBtn = document.getElementById('btn-header-torch');
       const statusText = document.getElementById('flashlight-status-text');
+      if (torchBtn) {
+        torchBtn.classList.toggle('is-on', isFlashlightEnabled);
+        torchBtn.setAttribute('aria-pressed', isFlashlightEnabled ? 'true' : 'false');
+        torchBtn.textContent = isFlashlightEnabled ? '🔦 Torch on' : '🔦 Torch';
+      }
       if (statusText) statusText.textContent = isFlashlightEnabled ? 'On' : 'Off';
-      showToast(`Flashlight Beam: ${isFlashlightEnabled ? 'Active' : 'Off'}`);
+    }
+
+    function toggleFlashlightBeam() {
+      const next = !isFlashlightEnabled;
+      if (next && themes[currentThemeIdx] !== 'charcoal') {
+        applyTheme(themes.indexOf('charcoal'), true);
+      }
+      isFlashlightEnabled = next;
+      document.body.classList.toggle('flashlight-active', isFlashlightEnabled);
+      if (!isFlashlightEnabled) document.body.classList.remove('beam-ready');
+      syncReadingControls();
+      showToast(isFlashlightEnabled ? 'Torch on — move the pointer to aim the beam' : 'Torch off');
     }
 
     // Flashlight cursor: an opt-in physical beam over the darkened charcoal surface.
@@ -2172,7 +2361,6 @@
           else hideSittingGuide();
           return;
         }
-        if (isZenMode) toggleZenFocus();
         const drawer = document.getElementById('toc-drawer');
         if (!drawer.classList.contains('-translate-x-full')) toggleTocDrawer();
         const dock = document.getElementById('pomo-dock');
@@ -2185,7 +2373,7 @@
 
     const LEGACY_ID_MAP = {
       assembled: 2, head: 2, chest: 5, thighs: 8, legs: 7, feet: 7, stone: 10,
-      lion: 7, bear: 7, leopard: 7, beast: 7, horn: 7,
+      lion: 7, bear: 7, leopard: 7, beast: 7, horn: 7, years1260: 7,
       ram: 8, goat: 8, goat_broken: 8, goat_horn: 8,
       dura: 3, stump: 4, ox_king: 4, ancient: 7, son: 7,
       decree: 9, kings: 10, michael: 10, sealed: 10
@@ -2194,7 +2382,7 @@
     let startFromGate = false;
 
     function clampStartSheet(index) {
-      if (canAccessSheet(index)) return index;
+      if (TEMP_REVIEW_UNLOCK || canAccessSheet(index)) return index;
       startFromGate = true;
       return 2;
     }
@@ -2228,8 +2416,11 @@
     window.addEventListener('DOMContentLoaded', () => {
       try {
         const params = new URLSearchParams(location.search);
-        if (params.get('preview') === 'full' || params.get('preview') === '1') {
+        if (TEMP_REVIEW_UNLOCK || params.get('preview') === 'full' || params.get('preview') === '1') {
           if (window.BAJourney) window.BAJourney.enablePreview();
+        }
+        if (TEMP_REVIEW_UNLOCK && !localStorage.getItem('daniel_placement_track_v1')) {
+          localStorage.setItem('daniel_placement_track_v1', 'foundations');
         }
       } catch (e) {}
       const guidePrimary = document.getElementById('sitting-guide-primary');
@@ -2247,6 +2438,9 @@
       if (accessPreview) accessPreview.addEventListener('click', enableTesterPreview);
       applyFontSize();
       applyTheme(currentThemeIdx, true);
+      if (TEMP_REVIEW_UNLOCK) {
+        showToast('Review unlock on: every sheet and Continue are open.');
+      }
       resizeWeatherCanvas();
       updateAutoWeather();
       setWeatherPreset('auto', true);
@@ -2277,35 +2471,17 @@
       });
       selectEmpire('babylon');
       buildHorizonCards();
-      mountSittingStage();
-      ensureStudyMap();
-      const btnShowMap = document.getElementById('btn-show-on-map');
-      const btnViewArt = document.getElementById('btn-view-artifact');
-      const btnStage = document.getElementById('btn-stage-expand');
-      const btnMap = document.getElementById('btn-map-expand');
-      const btnChip = document.getElementById('btn-map-chip');
+      document.querySelectorAll('#sitting-path-steps [data-path]').forEach((btn) => {
+        btn.addEventListener('click', () => enterSittingPhase(btn.dataset.path));
+      });
       const btnFocusMap = document.getElementById('btn-focus-live-map');
-      const backdrop = document.getElementById('sitting-backdrop');
-      if (btnShowMap) btnShowMap.addEventListener('click', () => expandSittingMap(true));
-      if (btnViewArt) btnViewArt.addEventListener('click', () => expandSittingStage());
-      if (btnStage) btnStage.addEventListener('click', () => {
-        const wrap = document.getElementById('sitting-stage-wrap');
-        if (wrap && wrap.classList.contains('is-expanded')) collapseSittingInsets();
-        else expandSittingStage();
-      });
-      if (btnMap) btnMap.addEventListener('click', () => {
-        const wrap = document.getElementById('sitting-map-wrap');
-        if (wrap && wrap.classList.contains('is-expanded')) collapseSittingInsets();
-        else expandSittingMap(true);
-      });
-      if (btnChip) btnChip.addEventListener('click', () => {
-        const wrap = document.getElementById('sitting-map-wrap');
-        wrap.classList.toggle('is-open');
-        ensureStudyMap();
-        if (studyMap) requestAnimationFrame(() => studyMap.resize());
-      });
-      if (btnFocusMap) btnFocusMap.addEventListener('click', () => expandSittingMap(true));
-      if (backdrop) backdrop.addEventListener('click', () => collapseSittingInsets());
+      if (btnFocusMap) {
+        btnFocusMap.addEventListener('click', () => {
+          const pack = lessonMapPack(currentSheetIndex);
+          const y = (pack && pack.year) || 'y605';
+          window.location.href = `map.html?year=${encodeURIComponent(y)}&from=lesson&sheet=${currentSheetIndex}`;
+        });
+      }
       loadSheet(resolveStartSheet(), startFromGate ? { skipIntro: true } : undefined);
       if (startFromGate) openAccessPanel();
       const notes = document.getElementById('sheet-notes');
@@ -2330,8 +2506,9 @@
       if (btnGloss && gloss) {
         btnGloss.addEventListener('click', () => {
           gloss.hidden = !gloss.hidden;
-          if (!gloss.hidden) {
-            gloss.innerHTML = '<b>Glossary</b><p><b>Historicism</b> reads Daniel as an unbroken chain from the prophet’s day to the Advent.</p><p><b>Year-day</b> counts a prophetic day as a literal year.</p><p><b>Little horn</b> is the church-state power among the ten, not a merely Greek tyrant.</p><p><b>Nitsdaq</b> (Dan 8:14) — the sanctuary justified, restored, cleansed.</p>';
+          btnGloss.setAttribute('aria-expanded', gloss.hidden ? 'false' : 'true');
+          if (!gloss.hidden && window.GlossaryIndex) {
+            window.GlossaryIndex.renderIndex(gloss, { kind: 'all', q: '' });
           }
         });
       }
@@ -2342,6 +2519,13 @@
           if (path && !path.hidden) path.scrollIntoView({ behavior: 'smooth', block: 'start' });
         });
       }
+      const btnVerify = document.getElementById('btn-jump-verify');
+      if (btnVerify) {
+        btnVerify.addEventListener('click', () => {
+          const box = document.getElementById('sheet-verify');
+          if (box && !box.hidden) box.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+      }
       document.addEventListener('visibilitychange', () => {
         if (document.hidden) stopWeatherAnimation();
         else if (weatherPreset !== 'off') startWeatherAnimation();
@@ -2349,4 +2533,24 @@
       if (window.StudyCompetency) {
         window.StudyCompetency.initPlacementModal();
       }
+    });
+
+    Object.assign(window, {
+      applyTheme,
+      cycleTheme,
+      adjustFontSize,
+      toggleTocDrawer,
+      togglePomodoroDrawer,
+      toggleFlashlightBeam,
+      setWeatherPreset,
+      startPomodoro,
+      pausePomodoro,
+      resetPomodoro,
+      toggleAmbientAudio,
+      setPomodoroDuration,
+      openArtifactModal,
+      closeArtifactModal,
+      navigateSheet,
+      completeAndAdvance,
+      openAccessPanel
     });

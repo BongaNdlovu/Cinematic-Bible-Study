@@ -16,6 +16,7 @@ const MODELS = {
   bear: 'bear.glb',
   leopard: 'leopard.glb',
   beast: 'beast.glb',
+  years1260: 'years1260.glb',
   ox_king: 'ox_king.glb',
   michael: 'michael.glb',
   sealed: 'sealed.glb',
@@ -24,6 +25,8 @@ const MODELS = {
 };
 
 const TARGET_HEIGHT = 1.72;
+const NO_SPIN = { years1260: true };
+const MODEL_YAW = { years1260: 0.28 };
 const DISSOLVE_VERT = `
 varying vec3 vWorldP;
 void main() {
@@ -226,6 +229,11 @@ function createStage() {
   function place(obj) {
     clearRoot();
     normalize(obj);
+    const yaw = MODEL_YAW[state.currentKey];
+    if (typeof yaw === 'number') {
+      obj.rotation.y = yaw;
+      obj.updateMatrixWorld(true);
+    }
     state.root.add(obj);
     frameObject(state.root);
     return obj;
@@ -239,7 +247,7 @@ function createStage() {
     if (state.anim && state.anim.update) {
       const done = state.anim.update(dt);
       if (done) state.anim = null;
-    } else if (!state.expanded && !prefersReduce()) {
+    } else if (!state.expanded && !prefersReduce() && !NO_SPIN[state.currentKey]) {
       state.spin += dt * 0.22;
       if (state.root) state.root.rotation.y = state.spin;
     }
@@ -297,8 +305,9 @@ function createStage() {
   }
 
   async function show(key) {
+    if (!state.root) return null;
+    status(key || 'idle');
     state.currentKey = key;
-    status('Loading ' + key + '…');
     try {
       const obj = await loadKey(key);
       place(obj);

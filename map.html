@@ -24,7 +24,9 @@
       ChronicleMap.mount(document.getElementById("map-root"), {
         mode: "cinematic",
         year: year,
-        skipOverture: params.get("skip") === "1"
+        skipOverture: params.get("skip") === "1",
+        from: params.get("from"),
+        sheet: params.get("sheet")
       });
     })();
   </script>

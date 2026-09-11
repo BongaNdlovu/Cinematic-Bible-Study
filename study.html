@@ -36,6 +36,109 @@
       transition: font-size 0.15s ease-out;
     }
 
+    .sheet-verify {
+      margin: 2.75rem 0 0;
+      padding: 1.35rem 1.4rem 1.5rem;
+      border: 1px solid rgba(197, 155, 39, 0.38);
+      border-radius: 14px;
+      background: rgba(15, 14, 13, 0.55);
+    }
+    .sheet-verify-kicker {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #c9a227;
+      margin: 0 0 0.4rem;
+    }
+    .sheet-verify h3 {
+      font-family: Newsreader, Georgia, serif;
+      font-size: 1.45rem;
+      color: #f4ead4;
+      margin: 0 0 0.65rem;
+    }
+    .sheet-verify-claim {
+      font-size: 0.95rem;
+      line-height: 1.5;
+      margin: 0 0 1rem;
+    }
+    .sheet-verify-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+    }
+    .sheet-verify-card {
+      border: 1px solid rgba(197, 155, 39, 0.28);
+      border-radius: 10px;
+      padding: 0.85rem 1rem;
+      background: rgba(12, 10, 8, 0.28);
+    }
+    .sheet-verify-kind {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #c9a227;
+    }
+    .sheet-verify-card h4 {
+      font-family: Newsreader, Georgia, serif;
+      font-size: 1.05rem;
+      margin: 0.25rem 0 0.55rem;
+      color: inherit;
+    }
+    .sheet-verify-card blockquote {
+      margin: 0;
+      padding: 0.55rem 0.75rem;
+      border-left: 3px solid #c59b27;
+      font-family: Newsreader, Georgia, serif;
+      font-style: italic;
+      font-size: 0.98rem;
+      line-height: 1.5;
+    }
+    .sheet-verify-source,
+    .sheet-verify-check {
+      font-family: Inter, sans-serif;
+      font-size: 0.82rem;
+      line-height: 1.5;
+      margin: 0.5rem 0 0;
+      opacity: 0.82;
+    }
+    .sheet-verify-count {
+      font-family: Inter, sans-serif;
+      font-size: 0.82rem;
+      opacity: 0.78;
+      margin: -0.35rem 0 1rem;
+    }
+    .sheet-verify-source b {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #c9a227;
+      font-weight: 600;
+    }
+    .sheet-verify-open {
+      margin-left: 0.45rem;
+      color: #d4af37;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+    .sheet-verify-open:hover { color: #f3e0a0; }
+    body.charcoal-mode .sheet-verify,
+    body.paper-mode .sheet-verify,
+    body.white-mode .sheet-verify {
+      border-color: inherit;
+    }
+    body.paper-mode .sheet-verify,
+    body.white-mode .sheet-verify {
+      background: rgba(247, 241, 228, 0.86);
+    }
+    body.white-mode .sheet-verify { background: #ffffff; border-color: #e5e5e5; }
+    body.paper-mode .sheet-verify-card,
+    body.white-mode .sheet-verify-card {
+      background: rgba(255, 250, 236, 0.7);
+    }
+    body.white-mode .sheet-verify-card { background: #fafafa; }
     .study-path {
       margin: 2.75rem 0 0;
       padding: 1.35rem 1.4rem 1.5rem;
@@ -164,7 +267,7 @@
       position: fixed;
       inset: 0;
       pointer-events: none;
-      z-index: 25;
+      z-index: 1;
       transition: opacity 0.8s ease-in-out;
     }
     .timer-ring-bg {
@@ -202,14 +305,44 @@
       position: fixed;
       inset: 0;
       pointer-events: none;
-      z-index: 1;
-      opacity: 0.22;
-      mix-blend-mode: screen;
+      z-index: 0;
+      opacity: 0.34;
       background-image:
         radial-gradient(rgba(255,255,255,0.11) 0.6px, transparent 0.8px),
         radial-gradient(rgba(0,0,0,0.26) 0.65px, transparent 0.9px);
       background-size: 7px 7px, 11px 11px;
       background-position: 0 0, 3px 5px;
+    }
+    body.night-mode {
+      background: #0a0a0c !important;
+      color: #eee9df !important;
+    }
+    body.night-mode::before { display: none; }
+    body.charcoal-mode header,
+    body.charcoal-mode .study-topbar,
+    body.charcoal-mode #pomo-dock,
+    body.charcoal-mode #toc-drawer,
+    body.charcoal-mode footer {
+      background: rgba(21, 20, 18, 0.96) !important;
+      border-color: rgba(201, 162, 39, 0.28) !important;
+      color: #eee9df;
+    }
+    body.charcoal-mode .sitting-spine {
+      background: rgba(21, 20, 18, 0.96);
+      border-color: rgba(201, 162, 39, 0.38);
+      color: #fbbf24;
+    }
+    body.charcoal-mode .horizon-panel,
+    body.charcoal-mode .study-instruments,
+    body.charcoal-mode .study-path,
+    body.charcoal-mode .sheet-verify,
+    body.charcoal-mode .sitting-path {
+      background: rgba(18, 16, 14, 0.78);
+      border-color: rgba(201, 162, 39, 0.28);
+    }
+    body.charcoal-mode .weather-canvas:not(.opacity-0) {
+      mix-blend-mode: soft-light;
+      opacity: 0.45;
     }
 
     #flashlight-overlay {
@@ -244,6 +377,217 @@
     body.charcoal-mode.flashlight-active.beam-ready #flashlight-cursor { opacity: 1; }
 
     /* Strong's Hebrew Tooltip Styles */
+    .first-principles {
+      margin: 1.6rem 0 1.85rem;
+      padding: 1.05rem 1.15rem 1.15rem;
+      border: 1px solid rgba(197, 155, 39, 0.42);
+      border-radius: 12px;
+      background: rgba(28, 22, 14, 0.38);
+      word-break: break-word;
+      overflow-wrap: break-word;
+    }
+    .first-principles-kicker {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #c9a227;
+      margin: 0 0 0.55rem;
+    }
+    .first-principles h4 {
+      font-family: Newsreader, Georgia, serif;
+      font-size: 1.15rem;
+      margin: 0.85rem 0 0.4rem;
+      color: inherit;
+    }
+    .first-principles h4:first-of-type { margin-top: 0.15rem; }
+    .first-principles ol,
+    .first-principles ul {
+      margin: 0.4rem 0 0.2rem 1.15rem;
+      padding: 0;
+    }
+    .first-principles li { margin: 0.45rem 0; }
+    body.paper-mode .first-principles,
+    body.white-mode .first-principles {
+      background: rgba(247, 241, 228, 0.9);
+    }
+    body.white-mode .first-principles { background: #fafafa; border-color: #e5e5e5; }
+
+    .from-last-sitting {
+      margin: 0 0 1.5rem;
+      padding: 0.85rem 1.1rem;
+      border-left: 3px solid #c9a227;
+      background: rgba(197, 155, 39, 0.08);
+      border-radius: 0 10px 10px 0;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      word-break: break-word;
+      overflow-wrap: break-word;
+    }
+    .from-last-sitting p {
+      margin: 0;
+    }
+    .from-last-sitting-kicker {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 9.5px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #c9a227;
+      margin: 0 0 0.35rem;
+      display: block;
+      font-weight: 600;
+    }
+    body.paper-mode .from-last-sitting {
+      background: rgba(197, 155, 39, 0.12);
+      border-left-color: #9a7217;
+    }
+    body.paper-mode .from-last-sitting-kicker { color: #8a6414; }
+    body.white-mode .from-last-sitting {
+      background: #fbf8f0;
+      border: 1px solid #eee5d5;
+      border-left: 3px solid #c9a227;
+    }
+    body.white-mode .from-last-sitting-kicker { color: #8a6414; }
+    .glossary-plate {
+      margin: 1.4rem 0 1.6rem;
+    }
+    .glossary-plate img {
+      width: 100%;
+      max-width: 520px;
+      height: auto;
+      border-radius: 10px;
+      border: 1px solid rgba(197, 155, 39, 0.35);
+      display: block;
+    }
+    .glossary-plate figcaption {
+      font-family: Inter, sans-serif;
+      font-size: 0.78rem;
+      line-height: 1.45;
+      margin-top: 0.45rem;
+      opacity: 0.8;
+    }
+    .term-gloss {
+      border-bottom: 1.5px dotted #d97706;
+      cursor: pointer;
+      color: inherit;
+      position: relative;
+      background: none;
+      padding: 0 1px;
+      font: inherit;
+      border-top: 0;
+      border-left: 0;
+      border-right: 0;
+      border-radius: 2px;
+    }
+    .term-gloss:hover, .term-gloss:focus {
+      border-bottom-style: solid;
+      background-color: rgba(245, 158, 11, 0.15);
+      outline: none;
+    }
+    .term-popover-body {
+      display: flex;
+      gap: 0.7rem;
+      align-items: flex-start;
+    }
+    .term-popover-img {
+      width: 72px;
+      height: 96px;
+      object-fit: cover;
+      border-radius: 6px;
+      flex-shrink: 0;
+      border: 1px solid rgba(217, 119, 6, 0.4);
+    }
+    .term-open-index {
+      background: none;
+      border: 0;
+      padding: 0;
+      cursor: pointer;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+    #glossary-panel:not([hidden]) {
+      max-height: min(70vh, 820px);
+      overflow: auto;
+    }
+    .glossary-index h3 {
+      font-family: Newsreader, Georgia, serif;
+      font-size: 1.45rem;
+      margin: 0 0 0.4rem;
+    }
+    .glossary-kicker {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #c9a227;
+      margin: 0 0 0.25rem;
+    }
+    .glossary-lead { margin: 0 0 0.9rem; line-height: 1.5; }
+    .glossary-tools { display: flex; flex-direction: column; gap: 0.55rem; margin-bottom: 0.9rem; }
+    .glossary-tools input[type="search"] {
+      width: 100%;
+      border: 1px solid rgba(197, 155, 39, 0.35);
+      border-radius: 8px;
+      padding: 0.45rem 0.65rem;
+      background: rgba(12, 10, 8, 0.25);
+      color: inherit;
+    }
+    body.paper-mode .glossary-tools input,
+    body.white-mode .glossary-tools input {
+      background: #fff;
+    }
+    .glossary-filters { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+    .glossary-filters button {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 10px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      border: 1px solid rgba(197, 155, 39, 0.35);
+      border-radius: 999px;
+      padding: 0.3rem 0.65rem;
+      background: transparent;
+      color: inherit;
+      cursor: pointer;
+    }
+    .glossary-filters button.is-on {
+      background: #b45309;
+      color: #fff7ed;
+      border-color: #b45309;
+    }
+    .glossary-grid { display: flex; flex-direction: column; gap: 0.75rem; }
+    .glossary-card {
+      display: flex;
+      gap: 0.75rem;
+      border: 1px solid rgba(197, 155, 39, 0.28);
+      border-radius: 10px;
+      padding: 0.7rem 0.8rem;
+      background: rgba(12, 10, 8, 0.22);
+    }
+    .glossary-card.is-focus { border-color: #d97706; box-shadow: 0 0 0 2px rgba(217, 119, 6, 0.25); }
+    .glossary-card h4 {
+      font-family: Newsreader, Georgia, serif;
+      font-size: 1.05rem;
+      margin: 0.15rem 0 0.35rem;
+    }
+    .glossary-card-kind {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #c9a227;
+      margin: 0;
+    }
+    .glossary-card-hist { opacity: 0.86; margin-top: 0.4rem; }
+    .glossary-card-plate img {
+      width: 72px;
+      height: 96px;
+      object-fit: cover;
+      border-radius: 6px;
+      display: block;
+    }
+    body.paper-mode .glossary-card,
+    body.white-mode .glossary-card { background: rgba(255, 250, 236, 0.7); }
+    body.white-mode .glossary-card { background: #fafafa; }
     .strongs-gloss {
       border-bottom: 1.5px dotted #d97706;
       cursor: pointer;
@@ -417,6 +761,8 @@
     body.paper-mode .strong-other,
     body.paper-mode .load-bearing-connects,
     body.paper-mode .load-bearing-sitting,
+    body.paper-mode .load-bearing-plain,
+    body.paper-mode .load-bearing-links li,
     body.white-mode .scripture-empty,
     body.white-mode .strong-hint,
     body.white-mode .strong-gloss,
@@ -425,7 +771,9 @@
     body.white-mode .strong-hits,
     body.white-mode .strong-other,
     body.white-mode .load-bearing-connects,
-    body.white-mode .load-bearing-sitting { color: #525252; }
+    body.white-mode .load-bearing-sitting,
+    body.white-mode .load-bearing-plain,
+    body.white-mode .load-bearing-links li { color: #525252; }
     body.paper-mode .study-path-kicker,
     body.paper-mode .study-path h4,
     body.white-mode .study-path-kicker,
@@ -474,7 +822,9 @@
     }
     body.paper-mode .sitting-spine,
     body.paper-mode .study-instruments,
-    body.paper-mode .study-path {
+    body.paper-mode .study-path,
+    body.paper-mode .sheet-verify,
+    body.paper-mode .sitting-path {
       background: rgba(247, 241, 228, 0.86);
       border-color: rgba(160, 122, 42, 0.38);
     }
@@ -497,6 +847,11 @@
       border-color: rgba(160, 122, 42, 0.42);
     }
     body.paper-mode .map-enter-full { background: rgba(201, 162, 39, 0.1); }
+    body.paper-mode .sheet-map-list details,
+    body.white-mode .sheet-map-list details {
+      background: rgba(255, 250, 236, 0.7);
+    }
+    body.white-mode .sheet-map-list details { background: #fafafa; }
 
     body.white-mode {
       background: #ffffff !important;
@@ -514,7 +869,9 @@
     }
     body.white-mode .sitting-spine,
     body.white-mode .study-instruments,
-    body.white-mode .study-path {
+    body.white-mode .study-path,
+    body.white-mode .sheet-verify,
+    body.white-mode .sitting-path {
       background: #ffffff;
       border-color: #e5e5e5;
     }
@@ -1049,28 +1406,162 @@
       padding-left: 0.75rem;
       border-left: 2px solid #c59b27;
     }
-    .load-bearing-connects, .load-bearing-sitting {
-      font-size: 12px;
-      line-height: 1.5;
+    .load-bearing-connects, .load-bearing-sitting, .load-bearing-plain {
+      font-size: 13px;
+      line-height: 1.55;
       color: #ddd3bc;
-      margin-bottom: 6px;
+      margin: 0 0 8px;
     }
-    .load-bearing-connects span {
+    .load-bearing-plain { color: #efe6d0; }
+    .load-bearing-connects span,
+    .load-bearing-sitting span,
+    .load-bearing-plain span {
+      display: block;
       font-family: Inter, sans-serif;
       font-size: 10px;
       letter-spacing: 0.12em;
       text-transform: uppercase;
       color: #c9a227;
-      margin-right: 6px;
+      margin: 0 0 4px;
+    }
+    .load-bearing-links ul {
+      margin: 0 0 10px;
+      padding-left: 1.15rem;
+    }
+    .load-bearing-links li {
+      font-size: 13px;
+      line-height: 1.5;
+      color: #ddd3bc;
+      margin: 0 0 0.45rem;
+    }
+    .load-bearing-links b {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 11px;
+      font-weight: 600;
+      color: #f4ead4;
+    }
+
+    .study-topbar-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px 18px;
+      width: 100%;
+      padding: 10px 18px 10px 16px;
+      min-height: 64px;
+    }
+    .study-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+      flex: 1 1 auto;
+    }
+    .study-brand-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      min-width: 0;
+      white-space: nowrap;
+    }
+    .study-brand-title > span:first-child {
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .study-tools {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex: 1 1 auto;
+      justify-content: flex-end;
+      min-width: 0;
+    }
+    .header-competency-pill {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+      min-width: 0;
+      max-width: min(420px, 42vw);
+      padding: 0.28rem 0.7rem 0.34rem;
+      border-radius: 10px;
+      background: rgba(245, 158, 11, 0.12);
+      border: 1px solid rgba(217, 119, 6, 0.35);
+      color: #fde68a;
+      line-height: 1.25;
+      white-space: normal;
+    }
+    .header-competency-pill small {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 9px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #c9a227;
+    }
+    .header-competency-pill span {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 11px;
+      font-weight: 600;
+      color: inherit;
+    }
+    body.paper-mode .header-competency-pill,
+    body.white-mode .header-competency-pill {
+      color: #7c4a0f;
+      background: rgba(245, 158, 11, 0.1);
+    }
+    .header-read-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      padding: 0.28rem 0.6rem;
+      border-radius: 8px;
+      border: 1px solid rgba(197, 155, 39, 0.38);
+      background: transparent;
+      color: inherit;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 11px;
+      line-height: 1.2;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    .header-read-btn:hover { border-color: #d97706; }
+    .header-read-btn.is-on {
+      background: rgba(245, 158, 11, 0.18);
+      border-color: #d97706;
+      color: #fde68a;
+    }
+    body:not(.charcoal-mode) .header-read-btn[data-need="charcoal"] {
+      opacity: 0.72;
+    }
+    @media (max-width: 1100px) {
+      .header-competency-pill { max-width: 100%; flex: 1 1 220px; }
+    }
+    @media (max-width: 820px) {
+      .study-topbar-inner {
+        flex-wrap: wrap;
+        align-items: flex-start;
+      }
+      .study-tools {
+        width: 100%;
+        justify-content: flex-end;
+        flex-wrap: wrap;
+      }
+      .header-competency-pill {
+        flex: 1 1 100%;
+        max-width: none;
+        order: -1;
+      }
     }
 
     .sitting-shell {
-      width: min(1180px, calc(100% - 1.5rem));
+      position: relative;
+      z-index: 10;
+      width: min(1440px, calc(100% - 1.5rem));
       margin: 0 auto 2rem;
     }
     .sitting-spine {
       position: sticky;
-      top: 4rem;
+      top: var(--study-sticky-top, 4.5rem);
       z-index: 32;
       display: flex;
       flex-wrap: wrap;
@@ -1088,88 +1579,120 @@
     }
     .sitting-spine b { color: #f8e7b0; font-weight: 600; }
     .sitting-layout {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(280px, 340px);
-      grid-template-areas: "main dock";
-      gap: 1.35rem;
-      align-items: start;
+      display: block;
+      max-width: 52rem;
+      margin: 0 auto;
     }
-    .sitting-main { min-width: 0; grid-area: main; }
-    .sitting-dock {
-      grid-area: dock;
-      position: sticky;
-      top: 7.15rem;
+    .sitting-main { min-width: 0; width: 100%; }
+    .sheet-christology {
+      position: relative;
+      margin-top: 2.5rem;
+      border: 1px solid rgba(197, 155, 39, 0.45);
+      border-radius: 14px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25), inset 0 0 0 1px rgba(255, 215, 0, 0.12);
+    }
+    .sheet-christology h3 {
+      font-family: 'Playfair Display', 'Source Serif 4', Georgia, serif;
+    }
+    .lesson-connect {
+      border: 1px solid rgba(197, 155, 39, 0.35);
+      border-radius: 14px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+    }
+    .lesson-connect-btn {
+      transition: all 0.2s ease;
+    }
+    .sitting-path {
+      margin: 1.25rem 0 0;
+      padding: 0.9rem 1rem;
+      border-radius: 12px;
+      border: 1px solid rgba(197, 155, 39, 0.28);
+      background: rgba(18, 16, 14, 0.35);
+    }
+    .sitting-path-kicker {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #d4a017;
+      margin: 0 0 0.45rem;
+    }
+    .sitting-path .step-rail { margin: 0; }
+    .sitting-path .step-rail button.is-current {
+      background: rgba(217, 119, 6, 0.22);
+      border-color: #d97706;
+      color: #fff7d6;
+    }
+    .sitting-path .step-rail button.is-done {
+      box-shadow: inset 3px 0 0 #c59b27;
+    }
+    .sitting-path-hint {
+      margin: 0.55rem 0 0;
+      font-size: 0.82rem;
+      line-height: 1.45;
+      color: inherit;
+      opacity: 0.78;
+    }
+    .sheet-map-list {
       display: flex;
       flex-direction: column;
       gap: 0.65rem;
+      margin-top: 0.75rem;
     }
-    .sitting-stage-wrap,
-    .sitting-map-wrap {
-      position: relative;
-      border-radius: 12px;
-      overflow: hidden;
-      border: 1px solid rgba(197, 155, 39, 0.32);
-      background: #0b0a09;
+    .sheet-map-list details {
+      border: 1px solid rgba(197, 155, 39, 0.28);
+      border-radius: 10px;
+      padding: 0.55rem 0.7rem;
+      background: rgba(12, 10, 8, 0.28);
     }
-    .sitting-stage-wrap { height: 360px; }
-    .sitting-map-wrap { height: 220px; }
-    #study-stage,
-    #study-stage canvas {
-      width: 100%;
-      height: 100%;
+    .sheet-map-list summary {
+      cursor: pointer;
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-weight: 700;
+      color: inherit;
+    }
+    .sheet-map-list summary small {
       display: block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      opacity: 0.7;
+      margin-bottom: 0.15rem;
     }
-    .sitting-map-wrap .cmap-embed,
-    .sitting-map-wrap #study-chronicle-map {
-      position: absolute;
-      inset: 0;
-      height: 100% !important;
-      min-height: 0 !important;
+    .sheet-map-list .sheet-map-body {
+      margin-top: 0.55rem;
+      font-size: 0.82rem;
+      line-height: 1.5;
     }
-    .sitting-hud {
-      position: absolute;
-      left: 8px;
-      right: 8px;
-      bottom: 8px;
-      z-index: 6;
-      display: flex;
-      justify-content: space-between;
-      gap: 8px;
-      pointer-events: none;
+    .sheet-map-list .sheet-map-body p + p { margin-top: 0.55rem; }
+    .sheet-map-list .cite {
+      margin-top: 0.45rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.06em;
+      color: #d4a017;
     }
-    .sitting-stage-wrap.is-expanded .sitting-hud,
-    .sitting-map-wrap.is-expanded .sitting-hud {
-      z-index: 48;
-    }
-    .sitting-hud span,
-    .sitting-hud button,
-    .sitting-map-chip {
-      pointer-events: auto;
+    .sheet-map-list button {
+      margin-top: 0.5rem;
       font-family: 'JetBrains Mono', monospace;
       font-size: 10px;
       letter-spacing: 0.08em;
       text-transform: uppercase;
       border: 1px solid rgba(197, 155, 39, 0.4);
-      background: rgba(12, 10, 8, 0.78);
-      color: #f3d48a;
+      background: transparent;
+      color: inherit;
       border-radius: 999px;
-      padding: 4px 9px;
+      padding: 4px 10px;
     }
-    .sitting-stage-wrap.is-expanded,
-    .sitting-map-wrap.is-expanded {
-      position: fixed;
-      inset: 4.6rem 0.75rem 0.75rem;
-      z-index: 46;
-      height: auto;
+    .sitting-map-wrap.is-expanded .cmap-embed .cmap-dossier {
+      display: block;
+      left: 16px;
+      width: min(440px, 46vw);
+      bottom: 72px;
+      max-height: 58%;
+      z-index: 40;
     }
-    .sitting-backdrop {
-      display: none;
-      position: fixed;
-      inset: 0;
-      z-index: 45;
-      background: rgba(0, 0, 0, 0.55);
-    }
-    body.is-sitting-expanded .sitting-backdrop { display: block; }
     .step-rail {
       display: flex;
       flex-wrap: wrap;
@@ -1334,25 +1857,7 @@
       .sitting-guide.is-end .sitting-guide-card { margin-top: 0; }
     }
     @media (max-width: 960px) {
-      .sitting-layout {
-        grid-template-columns: 1fr;
-        grid-template-areas: "dock" "main";
-      }
-      .sitting-dock { position: static; }
-      .sitting-stage-wrap {
-        position: sticky;
-        top: 7.15rem;
-        z-index: 28;
-        height: 36vh;
-        min-height: 220px;
-      }
-      .sitting-map-wrap { height: 48px; }
-      .sitting-map-wrap.is-open,
-      .sitting-map-wrap.is-expanded { height: 52vh; min-height: 240px; }
-      .sitting-map-chip { display: inline-flex; }
-    }
-    @media (min-width: 961px) {
-      .sitting-map-chip { display: none; }
+      :root { --study-sticky-top: 7.25rem; }
     }
   </style>
   <link rel="stylesheet" href="vendor/leaflet/leaflet.css">
@@ -1408,51 +1913,50 @@
     </div>
   </div>
 
-  <!-- Zen Reading Mode Backdrop -->
-  <div id="zen-focus-backdrop" onclick="toggleZenFocus()" class="fixed inset-0 bg-paper-950/60 dark:bg-black/70 backdrop-blur-xs z-30 opacity-0 pointer-events-none transition-opacity duration-500"></div>
-
   <!-- Top Progress Bar -->
   <div class="fixed top-0 left-0 right-0 z-50 h-1 bg-paper-200 dark:bg-paper-900">
     <div id="progress-bar" class="h-full bg-ink-900 dark:bg-paper-100 w-0 transition-all duration-300"></div>
   </div>
 
   <!-- Primary Sticky Navigation Header -->
-  <header class="sticky top-0 z-40 bg-paper-50/95 dark:bg-paper-950/95 backdrop-blur-md border-b border-paper-200 dark:border-paper-900">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+  <header class="study-topbar sticky top-0 z-40 bg-paper-50/95 dark:bg-paper-950/95 backdrop-blur-md border-b border-paper-200 dark:border-paper-900">
+    <div class="study-topbar-inner">
       
       <!-- Brand & Table of Contents Toggle -->
-      <div class="flex items-center space-x-3">
-        <button onclick="toggleTocDrawer()" class="p-2 -ml-2 rounded hover:bg-paper-200/70 dark:hover:bg-paper-900 text-ink-800 dark:text-paper-200 transition-colors flex items-center space-x-2 text-sm font-medium" aria-label="Open Syllabus">
+      <div class="study-brand">
+        <button onclick="toggleTocDrawer()" class="p-2 -ml-2 rounded hover:bg-paper-200/70 dark:hover:bg-paper-900 text-ink-800 dark:text-paper-200 transition-colors flex items-center space-x-2 text-sm font-medium shrink-0" aria-label="Open Syllabus">
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7"></path>
           </svg>
           <span class="font-mono text-xs uppercase tracking-wider hidden sm:inline">Codex</span>
         </button>
 
-        <div class="h-4 w-px bg-paper-300 dark:border-paper-800"></div>
+        <div class="h-4 w-px bg-paper-300 dark:bg-paper-800 shrink-0"></div>
 
-        <div>
-          <span class="font-serif text-base sm:text-lg font-bold tracking-tight text-ink-900 dark:text-paper-100 flex items-center gap-1.5">
-            The Scroll of Daniel
-            <span class="font-mono text-[10px] px-1.5 py-0.5 rounded bg-advent-gold/20 text-amber-800 dark:text-amber-300 font-semibold border border-advent-gold/30">HISTORICIST</span>
-          </span>
+        <div class="study-brand-title min-w-0">
+          <span class="font-serif text-base sm:text-lg font-bold tracking-tight text-ink-900 dark:text-paper-100">The Scroll of Daniel</span>
+          <span class="font-mono text-[10px] px-1.5 py-0.5 rounded bg-advent-gold/20 text-amber-800 dark:text-amber-300 font-semibold border border-advent-gold/30 shrink-0">HISTORICIST</span>
         </div>
-        <div class="hidden md:flex museum-links items-center gap-3 ml-2 pl-3 border-l border-paper-300 dark:border-paper-800">
+        <div class="hidden lg:flex museum-links items-center gap-3 ml-2 pl-3 border-l border-paper-300 dark:border-paper-800 shrink-0">
           <a href="index.html" class="text-ink-500 dark:text-paper-400 hover:text-amber-700 dark:hover:text-amber-300">Home</a>
           <a href="map.html" class="text-ink-500 dark:text-paper-400 hover:text-amber-700 dark:hover:text-amber-300">Map</a>
           <a href="gallery.html" class="text-ink-500 dark:text-paper-400 hover:text-amber-700 dark:hover:text-amber-300">3D Gallery</a>
         </div>
       </div>
 
-      <!-- Controls: Competency Pill, Atmosphere, Font Scale, Theme -->
-      <div class="flex items-center space-x-2 sm:space-x-3">
-        <!-- Persistent You Are Here Competency Pill -->
-        <span id="header-competency-pill" class="hidden xl:inline-flex items-center text-xs font-mono px-3 py-1 rounded-full bg-amber-500/15 border border-amber-500/30 text-amber-900 dark:text-amber-200 truncate max-w-[280px]" title="Current Learning Competency">
-          Competency: Verifying the Prophetic Year-Day Metric
+      <!-- Controls: Competency, charcoal torch, atmosphere, type, theme -->
+      <div class="study-tools">
+        <span id="header-competency-pill" class="header-competency-pill" title="Current learning competency">
+          <small>Competency</small>
+          <span id="header-competency-text">Verifying the Prophetic Year-Day Metric</span>
         </span>
 
+        <button type="button" id="btn-header-torch" class="header-read-btn" data-need="charcoal" onclick="toggleFlashlightBeam()" title="Charcoal torch: dim the desk and light a moving beam">
+          🔦 Torch
+        </button>
+
         <!-- Consolidated Desk Atmosphere Drawer Trigger -->
-        <button onclick="togglePomodoroDrawer()" id="btn-atmosphere-toggle" class="flex items-center space-x-1.5 px-2.5 py-1 rounded-md border border-amber-600/40 bg-amber-500/10 text-amber-900 dark:text-amber-300 font-mono text-xs hover:bg-amber-500/20 transition-colors" title="Desk Atmosphere: Weather, Timer, Sounds, & Flashlight">
+        <button onclick="togglePomodoroDrawer()" id="btn-atmosphere-toggle" class="flex items-center space-x-1.5 px-2.5 py-1 rounded-md border border-amber-600/40 bg-amber-500/10 text-amber-900 dark:text-amber-300 font-mono text-xs hover:bg-amber-500/20 transition-colors" title="Desk Atmosphere: Weather, Timer, Sounds">
           <span class="relative flex h-2 w-2">
             <span id="pomo-ping" class="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-500 opacity-75 hidden"></span>
             <span id="pomo-dot" class="relative inline-flex rounded-full h-2 w-2 bg-amber-600"></span>
@@ -1471,7 +1975,7 @@
 
         <!-- Theme Mode Cycler -->
         <button onclick="cycleTheme()" id="theme-btn" class="p-1.5 rounded hover:bg-paper-200/60 dark:hover:bg-paper-900 text-xs font-mono text-ink-700 dark:text-paper-300" title="Toggle Theme">
-          <span id="theme-icon">🔦 Charcoal</span>
+          <span id="theme-icon">🌑 Charcoal</span>
         </button>
       </div>
     </div>
@@ -1485,7 +1989,6 @@
         <h3 class="font-mono text-xs font-bold uppercase tracking-wider text-ink-900 dark:text-paper-100">Desk Atmosphere & Focus Engine</h3>
       </div>
       <div class="flex items-center space-x-1.5">
-        <button onclick="toggleZenFocus()" id="zen-btn" class="text-[10px] font-mono px-2 py-0.5 rounded border border-paper-300 dark:border-paper-700 hover:border-amber-500 text-ink-600 dark:text-paper-300 transition-colors" title="Dim background codex for focus">Zen Mode</button>
         <button onclick="togglePomodoroDrawer()" class="text-ink-500 hover:text-ink-900 dark:text-paper-400 text-xs font-mono p-1">✕</button>
       </div>
     </div>
@@ -1643,7 +2146,6 @@
   </aside>
 
 
-  <div class="sitting-backdrop" id="sitting-backdrop" hidden></div>
   <div class="sitting-shell">
     <div id="sitting-spine" class="sitting-spine" role="status">
       <b id="spine-empire">Gold kingdom</b>
@@ -1725,10 +2227,14 @@
             <div class="fact"><b>Kingdom</b><p id="map-name">Babylon — Head of Gold</p></div>
             <div class="fact"><b>Companion vision</b><p id="map-beast">Daniel 7: winged lion</p></div>
             <div class="fact"><b>Span</b><p id="map-span">605–539 B.C.</p></div>
-            <div class="fact"><b>Insight</b><p id="map-insight"></p></div>
+            <div class="fact"><b>This sitting</b><p id="map-insight"></p></div>
             <img id="map-plate" src="assets/study/babylon-sunset.jpg" alt="Selected kingdom plate" style="width:100%;height:110px;object-fit:cover;border-radius:10px;" loading="lazy">
-            <button type="button" id="btn-focus-live-map" class="px-3 py-1.5 rounded border border-amber-600/40 text-amber-800 dark:text-amber-300">Focus the live map</button>
+            <button type="button" id="btn-focus-live-map" class="px-3 py-1.5 rounded border border-amber-600/40 text-amber-800 dark:text-amber-300">Open the live map for this lesson</button>
             <a id="map-enter-full" class="map-enter-full" href="map.html?year=y605">Open cinematic map →</a>
+        </div>
+        <div class="mt-4">
+          <p class="font-mono text-[10px] uppercase tracking-widest text-amber-800 dark:text-amber-400 mb-2">Lesson nodes</p>
+          <div class="sheet-map-list" id="sheet-map-list"></div>
         </div>
       </div>
 
@@ -1786,13 +2292,21 @@
       <p id="sheet-subtitle" class="font-serif italic text-lg sm:text-xl text-ink-600 dark:text-paper-300 leading-relaxed">
         Why how you interpret prophecy determines whether you identify the Antichrist or fall into spiritual amnesia.
       </p>
+      <nav class="sitting-path" id="sitting-path" aria-label="Sitting path">
+        <p class="sitting-path-kicker">This sitting</p>
+        <ol class="step-rail" id="sitting-path-steps">
+          <li><button type="button" data-path="study">1 · Study</button></li>
+          <li><button type="button" data-path="tasks">2 · Questions</button></li>
+          <li><button type="button" data-path="next">3 · Next lesson</button></li>
+        </ol>
+        <p class="sitting-path-hint" id="sitting-path-hint">Read the excerpt, sources, and Christology plaque. Open the Map and 3D Gallery, then answer the questions.</p>
+      </nav>
       <div class="mt-5 flex flex-wrap gap-2 text-xs font-mono">
         <button type="button" id="btn-bookmark-sheet" class="px-3 py-1.5 rounded border border-amber-600/40 text-amber-800 dark:text-amber-300">Bookmark</button>
         <button type="button" id="btn-toggle-notes" class="px-3 py-1.5 rounded border border-paper-300 dark:border-paper-700 text-ink-700 dark:text-paper-300">Notes</button>
         <button type="button" id="btn-toggle-glossary" class="px-3 py-1.5 rounded border border-paper-300 dark:border-paper-700 text-ink-700 dark:text-paper-300">Glossary</button>
-        <button type="button" id="btn-show-on-map" class="px-3 py-1.5 rounded border border-amber-600/40 text-amber-800 dark:text-amber-300">Show on map</button>
-        <button type="button" id="btn-view-artifact" class="px-3 py-1.5 rounded border border-amber-600/40 text-amber-800 dark:text-amber-300">View artifact</button>
         <button type="button" id="btn-jump-study-path" class="px-3 py-1.5 rounded border border-amber-600/40 text-amber-800 dark:text-amber-300">How to study</button>
+        <button type="button" id="btn-jump-verify" class="px-3 py-1.5 rounded border border-amber-600/40 text-amber-800 dark:text-amber-300">Sources</button>
       </div>
       <textarea id="sheet-notes" hidden class="mt-3 w-full min-h-[90px] rounded-lg bg-paper-50 dark:bg-paper-950 border border-paper-300 dark:border-paper-800 p-3 text-sm text-ink-800 dark:text-paper-200" placeholder="Private notes for this sheet (saved on this device)"></textarea>
       <aside id="glossary-panel" hidden class="mt-3 p-4 rounded-lg border border-amber-600/30 bg-paper-100/90 dark:bg-paper-950/80 text-sm text-ink-700 dark:text-paper-300"></aside>
@@ -1802,7 +2316,44 @@
     <article id="sheet-article" class="article-body font-bodySerif text-ink-800 dark:text-paper-200 transition-all duration-150">
       <!-- Injected by JavaScript loadSheet() -->
     </article>
+
+    <!-- Connective Lesson Bar (Map and 3D Gallery) -->
+    <section id="lesson-connect" class="lesson-connect my-8 p-4 sm:p-5 rounded-xl border border-amber-600/40 bg-paper-100/80 dark:bg-paper-900/60 backdrop-blur-xs flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4">
+      <div class="flex flex-col gap-1">
+        <span class="font-mono text-[10px] uppercase tracking-widest text-amber-800 dark:text-amber-400 font-semibold flex items-center gap-1.5">
+          <span class="w-2 h-2 rounded-full bg-amber-600 dark:bg-amber-400"></span>
+          Prophetic Instruments
+        </span>
+        <span class="font-serif italic text-sm text-ink-700 dark:text-paper-300">
+          Explore this chapter in space and 3D form
+        </span>
+      </div>
+      <div class="flex flex-wrap sm:flex-nowrap items-center gap-3">
+        <a id="btn-lesson-map" href="map.html" class="lesson-connect-btn inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg border border-amber-600/50 text-amber-800 dark:text-amber-300 hover:bg-amber-500/10 hover:border-amber-500 transition-colors font-mono text-xs font-semibold text-center w-full sm:w-auto">
+          <span>🗺️</span> <span>Open the map of history</span> &rarr;
+        </a>
+        <a id="btn-lesson-gallery" href="gallery.html" class="lesson-connect-btn inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg border border-amber-600/50 text-amber-800 dark:text-amber-300 hover:bg-amber-500/10 hover:border-amber-500 transition-colors font-mono text-xs font-semibold text-center w-full sm:w-auto">
+          <span>🏛️</span> <span>View this sitting’s 3D artifact</span> &rarr;
+        </a>
+      </div>
+    </section>
+
+    <aside id="sheet-verify" class="sheet-verify" hidden></aside>
     <aside id="sheet-study-path" class="study-path" hidden></aside>
+
+    <!-- Gold Christology Plaque -->
+    <section id="sheet-christology" class="sheet-christology mt-10 p-6 sm:p-8 rounded-xl border-2 border-amber-600/50 dark:border-amber-500/50 bg-paper-100/90 dark:bg-paper-950/80 shadow-md" hidden>
+      <div class="flex flex-wrap items-center justify-between gap-2 mb-3 pb-3 border-b border-amber-600/20 dark:border-amber-500/20">
+        <span class="font-mono text-xs uppercase tracking-widest text-amber-800 dark:text-amber-400 font-bold flex items-center gap-2">
+          <span class="inline-block w-2 h-2 rounded-full bg-amber-600 dark:bg-amber-400"></span>
+          Christology
+        </span>
+        <span class="font-mono text-xs text-ink-600 dark:text-paper-400 italic" id="christology-scripture"></span>
+      </div>
+      <h3 class="font-serif text-2xl sm:text-3xl font-bold text-ink-900 dark:text-paper-50 tracking-tight mb-4" id="christology-title"></h3>
+      <div class="christology-body space-y-4 font-serif text-base sm:text-lg leading-relaxed text-ink-800 dark:text-paper-200" id="christology-body"></div>
+    </section>
+
     <aside id="sheet-recap" class="mt-10 p-5 rounded-xl border border-amber-600/30 bg-paper-100/80 dark:bg-paper-950/50">
       <p class="font-mono text-[10px] uppercase tracking-widest text-amber-800 dark:text-amber-400 mb-2">End of sheet recap</p>
       <h3 class="font-serif text-xl text-ink-900 dark:text-paper-100 mb-2" id="recap-title"></h3>
@@ -1860,22 +2411,6 @@
     </section>
 
   </main>
-    <aside class="sitting-dock" id="sitting-dock">
-      <div class="sitting-stage-wrap" id="sitting-stage-wrap">
-        <div id="study-stage" aria-label="Live prophetic stage"></div>
-        <div class="sitting-hud">
-          <span id="sitting-stage-caption">Stage</span>
-          <button type="button" id="btn-stage-expand">Expand stage</button>
-        </div>
-      </div>
-      <div class="sitting-map-wrap" id="sitting-map-wrap">
-        <div id="study-chronicle-map" class="cmap-embed" aria-label="Interactive map of Daniel’s kingdoms"></div>
-        <div class="sitting-hud">
-          <button type="button" id="btn-map-chip" class="sitting-map-chip">Map year</button>
-          <button type="button" id="btn-map-expand">Expand map</button>
-        </div>
-      </div>
-    </aside>
     </div>
   </div>
 
@@ -1955,6 +2490,9 @@
   <script src="js/study/workbench.js"></script>
   <script src="js/study/competency.js"></script>
   <script src="js/study/sheets-data.js"></script>
+  <script src="js/study/sheet-map.js"></script>
+  <script src="js/study/sheet-verify.js"></script>
+  <script src="js/study/sheet-glossary.js"></script>
   <script src="js/study/study-app.js"></script>
 </body>
 </html>
