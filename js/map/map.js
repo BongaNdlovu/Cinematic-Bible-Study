@@ -8,7 +8,6 @@
   const REDUCE = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const KEY_STORE = "baGoogleMapsKey";
   const BASE_STORE = "baMapBasemap";
-  const MAX_BOUNDS = [[8, -100], [60, 82]];
 
   function epochById(id) {
     return DATA.epochs.find((e) => e.id === id) || DATA.epochs[0];
@@ -694,11 +693,9 @@
       state.lmap = L.map(tiles, {
         zoomControl: false,
         attributionControl: true,
-        minZoom: 3,
+        minZoom: 2,
         maxZoom: 12,
-        worldCopyJump: false,
-        maxBounds: MAX_BOUNDS,
-        maxBoundsViscosity: 0.8
+        worldCopyJump: true
       });
       const sat = L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}", {
         attribution: "Tiles © Esri",
@@ -768,11 +765,7 @@
         disableDefaultUI: true,
         zoomControl: cinematic,
         gestureHandling: "greedy",
-        backgroundColor: "#0a1218",
-        restriction: {
-          latLngBounds: { north: 60, south: 8, west: -100, east: 82 },
-          strictBounds: false
-        }
+        backgroundColor: "#0a1218"
       });
       credit.textContent = "Google Maps · Borders: Cliopatria / Seshat";
       state.gmap.addListener("mousemove", (e) => {
