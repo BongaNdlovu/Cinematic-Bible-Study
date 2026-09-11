@@ -2266,3 +2266,7 @@
         today: "The scroll does not end in fear. It ends in a name written in a book, a rest, and a rising."
       }
     ];
+
+    // Global by contract: study-app.js reads these across the classic-script boundary.
+    window.sheetsData = sheetsData;
+    window.timelineEpochs = timelineEpochs;

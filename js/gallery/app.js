@@ -97,7 +97,7 @@ import * as THREE from 'three';
     scene.fog = new THREE.FogExp2(0x050301, 0.018);
     scene.background = new THREE.Color(0x050301);
 
-    const camera = new THREE.PerspectiveCamera(34, window.innerWidth / window.innerHeight, 0.1, 140);
+    const camera = new THREE.PerspectiveCamera(34, window.innerWidth / window.innerHeight, 0.02, 200);
     camera.position.set(7.2, 5.4, 21.5);
     window.__galleryCamera = camera;
 
@@ -120,11 +120,37 @@ import * as THREE from 'three';
 
     const controls = new OrbitControls(camera, renderer.domElement);
     controls.enableDamping = true;
-    controls.dampingFactor = 0.05;
+    controls.dampingFactor = 0.07;
     controls.target.set(0, 1.35, 0);
-    controls.minDistance = 2.0;
-    controls.maxDistance = 36.0;
-    controls.maxPolarAngle = Math.PI / 2 + 0.22;
+    controls.minDistance = 0.08;
+    controls.maxDistance = 48.0;
+    controls.minPolarAngle = 0.04;
+    controls.maxPolarAngle = Math.PI - 0.04;
+    controls.zoomToCursor = false;
+    controls.zoomSpeed = 1.45;
+    controls.rotateSpeed = 0.92;
+    controls.panSpeed = 0.7;
+    controls.enablePan = true;
+    controls.screenSpacePanning = true;
+    let userHasAimed = false;
+    let cameraTween = null;
+    let autoSpin = false;
+    function pauseAutoOrbit() {
+      userHasAimed = true;
+      if (!autoSpin) return;
+      autoSpin = false;
+      const spinBtn = document.getElementById('btn-spin');
+      if (spinBtn) {
+        spinBtn.classList.remove('active');
+        spinBtn.textContent = 'Auto Orbit: OFF';
+      }
+      const b360 = document.getElementById('btn-museum-360');
+      if (b360) b360.classList.remove('active');
+    }
+    controls.addEventListener('start', () => {
+      cameraTween = null;
+      pauseAutoOrbit();
+    });
 
     // --- PROCEDURAL SOFT-FOCUS STONE RELIEF HALL BACKDROP ---
     function createStoneReliefCanvas() {
@@ -413,7 +439,6 @@ import * as THREE from 'three';
       { img: 'assets/thumbs/kings.jpg', asset: 'kings', angle: 2.9, y: 1.72 },
       { img: 'assets/thumbs/decree.jpg', asset: 'decree', angle: -2.7, y: 1.68 }
     ];
-    const frameRadius = 13.35;
     WALL_FRAMES.forEach((spec) => {
       const frame = new THREE.Group();
       const wood = new THREE.Mesh(
@@ -443,15 +468,34 @@ import * as THREE from 'three';
     const frameRaycaster = new THREE.Raycaster();
     const framePointer = new THREE.Vector2();
     let ptrDown = null;
+    let lastTap = { t: 0, x: 0, y: 0 };
     renderer.domElement.addEventListener('pointerdown', (ev) => {
       if (ev.button !== 0) return;
       ptrDown = { x: ev.clientX, y: ev.clientY };
+    });
+    renderer.domElement.addEventListener('wheel', (ev) => {
+      ev.preventDefault();
+      ev.stopImmediatePropagation();
+      const steps = Math.max(1, Math.min(6, Math.abs(ev.deltaY) / 80));
+      const factor = ev.deltaY > 0 ? Math.pow(1.12, steps) : Math.pow(0.88, steps);
+      dollyByFactor(factor, ev.clientX, ev.clientY);
+    }, { passive: false, capture: true });
+    renderer.domElement.addEventListener('dblclick', (ev) => {
+      ev.preventDefault();
+      inspectAtPointer(ev.clientX, ev.clientY);
     });
     renderer.domElement.addEventListener('pointerup', (ev) => {
       if (!ptrDown) return;
       const moved = Math.abs(ev.clientX - ptrDown.x) + Math.abs(ev.clientY - ptrDown.y);
       ptrDown = null;
       if (moved > 8) return;
+      const now = performance.now();
+      const dbl = now - lastTap.t < 320 && Math.abs(ev.clientX - lastTap.x) + Math.abs(ev.clientY - lastTap.y) < 18;
+      lastTap = { t: now, x: ev.clientX, y: ev.clientY };
+      if (dbl && ev.pointerType !== 'mouse') {
+        inspectAtPointer(ev.clientX, ev.clientY);
+        return;
+      }
       const rect = renderer.domElement.getBoundingClientRect();
       framePointer.x = ((ev.clientX - rect.left) / rect.width) * 2 - 1;
       framePointer.y = -((ev.clientY - rect.top) / rect.height) * 2 + 1;
@@ -472,7 +516,7 @@ import * as THREE from 'three';
           const part = pickAssembledPart(bodyHits[0].point);
           if (part) {
             AudioBus.play('select');
-            selectAsset(part);
+            selectAsset(part, { keepAngle: true });
           }
         }
       }
@@ -2452,10 +2496,6 @@ import * as THREE from 'three';
       openModal('about-modal');
     }
 
-    function openTimelineModal() {
-      openModal('timeline-modal');
-    }
-
     function setNavActive(name) {
       document.querySelectorAll('.nav-item').forEach((el) => {
         el.classList.toggle('active', el.dataset.nav === name);
@@ -2559,6 +2599,19 @@ import * as THREE from 'three';
       });
     }
 
+    // Mobile notes sheet toggle shares the master-nodes state
+    const btnNodesSheetToggle = document.getElementById('btn-nodes-sheet-toggle');
+    if (btnNodesSheetToggle) {
+      btnNodesSheetToggle.addEventListener('click', () => {
+        masterNodesVisible = !masterNodesVisible;
+        if (btnNodesMaster) {
+          btnNodesMaster.classList.toggle('active', masterNodesVisible);
+          btnNodesMaster.title = masterNodesVisible ? 'Hide annotation nodes' : 'Show annotation nodes';
+        }
+        syncNodes();
+      });
+    }
+
     const _tempVec = new THREE.Vector3();
     function syncNodes() {
       if (!nodesSvg || !camera) return;
@@ -2572,7 +2625,7 @@ import * as THREE from 'three';
       const sheetBody = document.getElementById('museum-nodes-sheet-body');
       if (sheet) sheet.style.display = compact && masterNodesVisible ? 'block' : 'none';
       if (compact && sheetBody) {
-        sheetBody.innerHTML = (currentNodes || []).map((n) => '<button type="button" data-node="' + n.id + '">' + (n.title || n.id) + '</button>').join('');
+        sheetBody.innerHTML = (currentNodes || []).map((n) => '<button type="button" data-node="' + n.id + '">' + (n.label || n.id) + '</button>').join('');
       }
       if (hideAll || compact) {
         document.querySelectorAll('.museum-node-card').forEach(c => c.classList.add('hidden'));
@@ -2665,9 +2718,105 @@ import * as THREE from 'three';
       return window.innerHeight > window.innerWidth * 1.05;
     }
 
+    function getLiveArtifact() {
+      if (assembledContainer.visible) return assembledContainer;
+      if (singleModelContainer.visible) return singleModelContainer;
+      return artifactRoot;
+    }
+
+    function fitOrbitLimits(object) {
+      const subject = object || getLiveArtifact();
+      if (!subject) return;
+      const box = getWorldBox(subject);
+      if (!Number.isFinite(box.min.x) || !Number.isFinite(box.max.x)) return;
+      const size = new THREE.Vector3();
+      box.getSize(size);
+      const radius = Math.max(0.35, size.length() * 0.5);
+      controls.minDistance = Math.max(0.08, radius * 0.045);
+      controls.maxDistance = Math.max(28, Math.min(56, radius * 14));
+    }
+
+    function applyKeepAngleCamera(object, instant) {
+      if (!object) return;
+      const framed = frameFromCurrentAngle(object);
+      if (instant) {
+        camera.position.copy(framed.pos);
+        controls.target.copy(framed.look);
+        controls.update();
+        cameraTween = null;
+      } else {
+        tweenCamera(framed.pos, framed.look, 700);
+      }
+    }
+
+    function dollyByFactor(factor, clientX, clientY) {
+      pauseAutoOrbit();
+      cameraTween = null;
+      const live = getLiveArtifact();
+      if (live) fitOrbitLimits(live);
+      if (clientX != null && clientY != null && live) {
+        const rect = renderer.domElement.getBoundingClientRect();
+        framePointer.x = ((clientX - rect.left) / rect.width) * 2 - 1;
+        framePointer.y = -((clientY - rect.top) / rect.height) * 2 + 1;
+        frameRaycaster.setFromCamera(framePointer, camera);
+        const hits = frameRaycaster.intersectObject(live, true);
+        if (hits[0] && factor < 1) {
+          controls.target.lerp(hits[0].point, 0.26);
+        }
+      }
+      const offset = camera.position.clone().sub(controls.target);
+      const len = offset.length();
+      if (len < 1e-6) return;
+      offset.setLength(THREE.MathUtils.clamp(len * factor, controls.minDistance, controls.maxDistance));
+      camera.position.copy(controls.target).add(offset);
+      controls.update();
+    }
+
+    function frameFromCurrentAngle(object) {
+      const subject = object || getLiveArtifact();
+      if (!subject) return { pos: camera.position.clone(), look: controls.target.clone() };
+      subject.updateMatrixWorld(true);
+      const box = getWorldBox(subject);
+      if (!Number.isFinite(box.min.x) || !Number.isFinite(box.max.x)) {
+        return { pos: camera.position.clone(), look: controls.target.clone() };
+      }
+      const size = new THREE.Vector3();
+      const center = new THREE.Vector3();
+      box.getSize(size);
+      box.getCenter(center);
+      fitOrbitLimits(subject);
+      const dir = camera.position.clone().sub(controls.target);
+      if (dir.lengthSq() < 1e-8) dir.set(0.36, 0.18, 1);
+      dir.normalize();
+      const fov = THREE.MathUtils.degToRad(camera.fov * 0.9);
+      const portrait = isPortraitStage() || camera.aspect < 0.9;
+      const frameDim = portrait
+        ? Math.max(size.y * 1.35, size.x * 0.45, size.z * 0.45)
+        : Math.max(size.x, size.y, size.z);
+      const distScale = portrait ? 2.05 : 1.28;
+      const dist = THREE.MathUtils.clamp(
+        (frameDim / (2 * Math.tan(fov * 0.5))) * distScale,
+        controls.minDistance * 1.4,
+        controls.maxDistance * 0.92
+      );
+      return {
+        pos: center.clone().addScaledVector(dir, dist),
+        look: center.clone().add(new THREE.Vector3(0, size.y * 0.04, 0))
+      };
+    }
+
     function frameLoadedModel(object) {
       if (!object) return;
       object.updateMatrixWorld(true);
+      fitOrbitLimits(object);
+      if (userHasAimed) {
+        const framed = frameFromCurrentAngle(object);
+        camera.position.copy(framed.pos);
+        controls.target.copy(framed.look);
+        controls.update();
+        cameraTween = null;
+        return;
+      }
       const box = getWorldBox(object);
       const size = new THREE.Vector3();
       const center = new THREE.Vector3();
@@ -2687,6 +2836,35 @@ import * as THREE from 'three';
       controls.target.set(center.x, center.y + size.y * 0.04, center.z);
       controls.update();
       cameraTween = null;
+    }
+
+    function nudgeZoom(direction) {
+      const live = getLiveArtifact();
+      if (live) fitOrbitLimits(live);
+      if (direction > 0 && live) {
+        frameRaycaster.setFromCamera(new THREE.Vector2(0, 0), camera);
+        const hits = frameRaycaster.intersectObject(live, true);
+        if (hits[0]) controls.target.lerp(hits[0].point, 0.22);
+      }
+      dollyByFactor(direction > 0 ? 0.72 : 1.38);
+    }
+
+    function inspectAtPointer(clientX, clientY) {
+      pauseAutoOrbit();
+      cameraTween = null;
+      const rect = renderer.domElement.getBoundingClientRect();
+      framePointer.x = ((clientX - rect.left) / rect.width) * 2 - 1;
+      framePointer.y = -((clientY - rect.top) / rect.height) * 2 + 1;
+      frameRaycaster.setFromCamera(framePointer, camera);
+      const hits = frameRaycaster.intersectObject(getLiveArtifact(), true);
+      const look = hits[0] ? hits[0].point.clone() : controls.target.clone();
+      const view = new THREE.Vector3();
+      camera.getWorldDirection(view);
+      const current = camera.position.distanceTo(look);
+      const closer = hits[0]
+        ? Math.max(controls.minDistance * 1.6, hits[0].distance * 0.38)
+        : Math.max(controls.minDistance * 1.6, current * 0.52);
+      tweenCamera(look.clone().addScaledVector(view, -closer), look, 720);
     }
 
     function pickAssembledPart(point) {
@@ -2777,12 +2955,37 @@ import * as THREE from 'three';
         ? `&from=lesson&sheet=${encodeURIComponent(String(lessonSheetRaw).trim())}`
         : '';
       narMapLink.href = `map.html?year=${y}${lessonQuery}`;
+      const mapTopLink = document.getElementById('gallery-map-link');
+      if (mapTopLink && fromLesson && isValidSheet(lessonSheetRaw)) {
+        mapTopLink.href = `map.html?year=${y}&from=lesson&sheet=${encodeURIComponent(String(lessonSheetRaw).trim())}`;
+      }
       if (window.BAJourney) window.BAJourney.save({ artifact: key, year: y });
+    }
+
+    function syncDossierNarrative(data) {
+      // Update Right Narrative Column
+      const quote = document.getElementById('nar-scripture-quote');
+      const ref = document.getElementById('nar-scripture-ref');
+      const exp = document.getElementById('nar-explanation');
+      const hist = document.getElementById('nar-historical');
+      const plate = document.getElementById('nar-plate-img');
+      const take = document.getElementById('nar-takeaway');
+      if (quote) quote.textContent = data.quote;
+      if (ref) ref.textContent = data.quoteRef;
+      if (exp) exp.textContent = data.explanation;
+      if (hist) hist.textContent = data.historical;
+      if (plate && data.plateImg) {
+        plate.src = data.plateImg;
+        plate.alt = data.plateCaption || data.title;
+      }
+      const plateCap = document.getElementById('nar-plate-caption');
+      if (plateCap) plateCap.textContent = data.plateCaption || '';
+      if (take) take.textContent = data.takeaway;
     }
 
     function selectAsset(key, opts = {}) {
       if (key === 'altar') key = 'assembled';
-      if (!ASSET_REGISTRY[key]) return;
+      if (!Object.prototype.hasOwnProperty.call(ASSET_REGISTRY, key)) return;
       if (!opts.instant && key !== activeAssetKey) {
         if (selectAsset._busy) return;
         selectAsset._busy = true;
@@ -2796,7 +2999,7 @@ import * as THREE from 'three';
           }
         }
         setTimeout(() => {
-          selectAsset(key, { instant: true });
+          selectAsset(key, { instant: true, keepAngle: opts.keepAngle || userHasAimed });
           if (trans) {
             trans.classList.remove('glitch', 'out');
             trans.classList.add('in');
@@ -2836,24 +3039,7 @@ import * as THREE from 'three';
       if (title) title.textContent = data.title;
       if (pill) pill.textContent = data.pill;
 
-      // Update Right Narrative Column
-      const quote = document.getElementById('nar-scripture-quote');
-      const ref = document.getElementById('nar-scripture-ref');
-      const exp = document.getElementById('nar-explanation');
-      const hist = document.getElementById('nar-historical');
-      const plate = document.getElementById('nar-plate-img');
-      const take = document.getElementById('nar-takeaway');
-      if (quote) quote.textContent = data.quote;
-      if (ref) ref.textContent = data.quoteRef;
-      if (exp) exp.textContent = data.explanation;
-      if (hist) hist.textContent = data.historical;
-      if (plate && data.plateImg) {
-        plate.src = data.plateImg;
-        plate.alt = data.plateCaption || data.title;
-      }
-      const plateCap = document.getElementById('nar-plate-caption');
-      if (plateCap) plateCap.textContent = data.plateCaption || '';
-      if (take) take.textContent = data.takeaway;
+      syncDossierNarrative(data);
 
       syncDossierStudyLink(key);
       syncDossierMapLink(key);
@@ -2896,6 +3082,8 @@ import * as THREE from 'three';
       rebuildNodeElements();
       syncNodes();
 
+      const keepAngle = !!(opts.keepAngle || userHasAimed);
+
       // Smooth camera transition to optimal angle
       if (key === 'years1260') {
         autoSpin = false;
@@ -2907,7 +3095,7 @@ import * as THREE from 'three';
         const b360Plaque = document.getElementById('btn-museum-360');
         if (b360Plaque) b360Plaque.classList.remove('active');
       }
-      if (data.camPos && data.lookAt && !opts.skipCamera && !data.autoFrame) {
+      if (data.camPos && data.lookAt && !opts.skipCamera && !data.autoFrame && !keepAngle) {
         autoSpin = false;
         const spinBtn = document.getElementById('btn-spin');
         if (spinBtn) {
@@ -2954,6 +3142,10 @@ import * as THREE from 'three';
         assembledContainer.visible = true;
         altarPlatformGroup.visible = altarVisible;
         setupAssembledColossus();
+        if (assembledBuilt) {
+          fitOrbitLimits(assembledContainer);
+          if (keepAngle && !opts.skipCamera) applyKeepAngleCamera(assembledContainer, opts.instant);
+        }
         return;
       }
 
@@ -2963,6 +3155,7 @@ import * as THREE from 'three';
       altarPlatformGroup.visible = false;
 
       loadGLBAsset(key, (sceneObj) => {
+        if (key !== activeAssetKey) return;
         singleModelContainer.clear();
         currentSingleModel = sceneObj;
         normalizePart(currentSingleModel, data.targetHeight || 2.35);
@@ -2994,7 +3187,9 @@ import * as THREE from 'three';
         if (key === 'head') {
           celestialHalo.position.set(0, 1.28, -1.05);
         }
-        if (data.autoFrame) frameLoadedModel(currentSingleModel);
+        fitOrbitLimits(currentSingleModel);
+        if (keepAngle) applyKeepAngleCamera(currentSingleModel, opts.instant);
+        else if (data.autoFrame) frameLoadedModel(currentSingleModel);
       });
     }
 
@@ -3170,6 +3365,10 @@ import * as THREE from 'three';
       assembledBuilt = true;
       applyStudyModeToMeshes(assembledContainer);
       updateTriangleReadout();
+      fitOrbitLimits(assembledContainer);
+      if (activeAssetKey === 'assembled' && userHasAimed) {
+        applyKeepAngleCamera(assembledContainer, true);
+      }
 
       if (!loadProgress.heroAssetCounted) {
         loadProgress.heroAssetCounted = true;
@@ -3320,7 +3519,6 @@ import * as THREE from 'three';
     });
 
     // --- CAMERA TWEEN ---
-    let cameraTween = null;
     function tweenCamera(targetPos, targetLook, duration = 1000) {
       const startPos = camera.position.clone();
       const startLook = controls.target.clone();
@@ -3337,7 +3535,7 @@ import * as THREE from 'three';
     }
 
     // --- CONTROLS & WIRING ---
-    let autoSpin = !reducedMotion;
+    autoSpin = !reducedMotion;
 
     // Artifact items click
     document.querySelectorAll('.artifact-card-item').forEach(item => {
@@ -3383,6 +3581,31 @@ import * as THREE from 'three';
     });
 
     // Bottom action bar
+    const btnZoomIn = document.getElementById('btn-zoom-in');
+    const btnZoomOut = document.getElementById('btn-zoom-out');
+    const btnZoomFit = document.getElementById('btn-zoom-fit');
+    if (btnZoomIn) {
+      btnZoomIn.addEventListener('click', () => {
+        nudgeZoom(1);
+        AudioBus.play('click');
+      });
+    }
+    if (btnZoomOut) {
+      btnZoomOut.addEventListener('click', () => {
+        nudgeZoom(-1);
+        AudioBus.play('click');
+      });
+    }
+    if (btnZoomFit) {
+      btnZoomFit.addEventListener('click', () => {
+        pauseAutoOrbit();
+        const live = getLiveArtifact();
+        if (live) applyKeepAngleCamera(live, false);
+        AudioBus.play('click');
+        museumToast('Fit artifact from this angle');
+      });
+    }
+
     const btn360 = document.getElementById('btn-museum-360');
     if (btn360) {
       btn360.addEventListener('click', () => {
@@ -3575,6 +3798,7 @@ import * as THREE from 'three';
         if (btnSpin) { btnSpin.classList.remove('active'); btnSpin.textContent = 'Auto Orbit: OFF'; }
         if (btn360) btn360.classList.remove('active');
 
+        userHasAimed = true;
         const cur = ASSET_REGISTRY[activeAssetKey] || ASSET_REGISTRY.assembled;
         const fy = cur.lookAt ? cur.lookAt[1] : 1.2;
         const fz = (activeAssetKey === 'assembled') ? 9.2 : 5.2;
@@ -3761,6 +3985,22 @@ import * as THREE from 'three';
         if (searchInput) searchInput.focus();
         return;
       }
+      if (e.key === '+' || e.key === '=') {
+        e.preventDefault();
+        nudgeZoom(1);
+        return;
+      }
+      if (e.key === '-' || e.key === '_') {
+        e.preventDefault();
+        nudgeZoom(-1);
+        return;
+      }
+      if (e.key === 'f' || e.key === 'F') {
+        e.preventDefault();
+        const live = getLiveArtifact();
+        if (live) applyKeepAngleCamera(live, false);
+        return;
+      }
       if (e.key === 'ArrowRight') document.getElementById('btn-next-artifact')?.click();
       if (e.key === 'ArrowLeft') document.getElementById('btn-prev-artifact')?.click();
       if (e.key === 'n' || e.key === 'N') btnNodesMaster?.click();
@@ -3819,6 +4059,14 @@ import * as THREE from 'three';
       }
 
       controls.update();
+      const focusDist = camera.position.distanceTo(controls.target);
+      const nextNear = THREE.MathUtils.clamp(focusDist * 0.025, 0.012, 0.35);
+      const nextFar = Math.max(140, focusDist * 24);
+      if (Math.abs(camera.near - nextNear) > 0.004 || Math.abs(camera.far - nextFar) > 2) {
+        camera.near = nextNear;
+        camera.far = nextFar;
+        camera.updateProjectionMatrix();
+      }
 
       // Live scene diagnostics
       const relCam = camera.position.clone().sub(controls.target);
@@ -3856,7 +4104,7 @@ import * as THREE from 'three';
 
     // Initialize State: Check URL parameter (?asset=... or ?id=...) or default to 'assembled'
     const initialAssetKey = urlParams.get('asset') || urlParams.get('id');
-    const startAsset = (initialAssetKey && ASSET_REGISTRY[initialAssetKey]) ? initialAssetKey : 'assembled';
+    const startAsset = (initialAssetKey && Object.prototype.hasOwnProperty.call(ASSET_REGISTRY, initialAssetKey)) ? initialAssetKey : 'assembled';
 
     if (lessonReturnHref) {
       const backBtn = document.getElementById('gallery-back-lesson');
@@ -3868,10 +4116,7 @@ import * as THREE from 'three';
       if (genericStudy) {
         genericStudy.style.display = 'none';
       }
-      const mapTopLink = document.getElementById('gallery-map-link');
-      if (mapTopLink && isValidSheet(lessonSheetRaw)) {
-        mapTopLink.href = `map.html?from=lesson&sheet=${encodeURIComponent(String(lessonSheetRaw).trim())}`;
-      }
+      // gallery-map-link gets its year from syncDossierMapLink when the first asset is selected
     }
 
     rebuildNodeElements();

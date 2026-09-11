@@ -114,8 +114,8 @@
       const s = document.createElement("script");
       s.src = src;
       s.async = true;
-      s.onload = resolve;
-      s.onerror = () => reject(new Error("Failed to load " + src));
+      s.addEventListener("load", resolve);
+      s.addEventListener("error", () => reject(new Error("Failed to load " + src)));
       document.head.appendChild(s);
     });
   }
@@ -148,7 +148,9 @@
       overlayOpacity: 1,
       routeLayer: null,
       compareEl: null,
-      sheetIndex: opts.sheetIndex != null ? opts.sheetIndex : null
+      sheetIndex: opts.sheetIndex != null
+        ? opts.sheetIndex
+        : (opts.sheet != null && /^\d+$/.test(String(opts.sheet).trim()) ? Number(String(opts.sheet).trim()) : null)
     };
     let mapReady = false;
     let queuedSheet = null;
@@ -329,7 +331,7 @@
         state.lmap.flyTo([lat, lon], z, { duration: 1.55, easeLinearity: 0.2 });
         return new Promise((resolve) => state.lmap.once("moveend", () => { hideBadge(); resolve(); }));
       }
-      state.lmap.setView([lat, lon], z);
+      state.lmap.setView([lat, lon], z, { animate: false });
       hideBadge();
       return Promise.resolve();
     }
@@ -964,13 +966,17 @@
 
     if (cinematic) {
       window.addEventListener("keydown", (ev) => {
+        const t = ev.target;
+        const typing = t && (t.tagName === "INPUT" || t.tagName === "TEXTAREA" || t.tagName === "SELECT" || t.isContentEditable);
+        if (ev.key === "Escape") {
+          if (!keyPanel.hidden) keyPanel.hidden = true;
+          else dossier.classList.remove("open");
+          return;
+        }
+        if (typing) return;
         if (ev.key === "ArrowRight") { ev.preventDefault(); state.playing = false; playBtn.textContent = "▶"; stepYear(1); }
         else if (ev.key === "ArrowLeft") { ev.preventDefault(); state.playing = false; playBtn.textContent = "▶"; stepYear(-1); }
         else if (ev.key === " ") { ev.preventDefault(); playChronicle(); }
-        else if (ev.key === "Escape") {
-          if (!keyPanel.hidden) keyPanel.hidden = true;
-          else dossier.classList.remove("open");
-        }
       });
       window.setTimeout(() => hint.classList.add("is-gone"), 5200);
     }
@@ -995,7 +1001,9 @@
         return;
       }
       const params = new URLSearchParams(location.search);
-      const startId = parseYearParam(opts.year || params.get("year") || params.get("event")) || state.yearId;
+      const eventId = params.get("event");
+      const eventItem = eventId ? DATA.events.find((e) => e.id === eventId) : null;
+      const startId = parseYearParam(opts.year || params.get("year") || (eventItem ? eventItem.yearId : null)) || state.yearId;
       state.yearId = epochById(startId).id;
       let base = savedBase();
       const qBase = new URLSearchParams(location.search).get("basemap");
@@ -1015,10 +1023,11 @@
         overture.classList.remove("show");
       }
       await setYear(state.yearId, {
-        animate: true,
+        animate: !eventItem,
         chapter: cinematic && !opts.skipOverture,
-        open: cinematic
+        open: cinematic && !eventItem
       });
+      if (eventItem) openItemById(eventItem.id);
       mapReady = true;
       if (queuedSheet) {
         await applySheet(queuedSheet.index, queuedSheet.flags);

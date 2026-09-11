@@ -290,11 +290,6 @@
     let sittingYearOverride = null;
     let sittingEmpireOverride = null;
 
-    function whenStageReady(fn) {
-      if (window.StudyStage) fn(window.StudyStage);
-      else window.addEventListener('study-stage-ready', () => fn(window.StudyStage), { once: true });
-    }
-
     function journeyState() {
       return window.BAJourney ? window.BAJourney.load() : { unlocked: [], station: {}, pathSheet: -1, sheet: 0, year: 'y605' };
     }
@@ -308,29 +303,17 @@
       return 'stone';
     }
 
-    function idleKeyForSheet(index, unlocked) {
-      if (index === 2) return 'head';
-      if (index === 7) return 'years1260';
-      if ([0, 1, 3].indexOf(index) !== -1) return (unlocked || []).indexOf('gold') !== -1 ? 'lion' : 'head';
-      if (index === 4) return 'ox_king';
-      if (index === 5 || index === 6) return 'bear';
-      if (index === 8) return 'leopard';
-      if (index === 9) return 'decree';
-      if (index === 10) return 'michael';
-      return 'head';
-    }
-
     const SHEET_COMPETENCIES = [
       "Verifying the Prophetic Year-Day Metric",
       "Distinguishing Civic Service from Covenant Defilement",
       "Defending the Contiguous Chain of Four Empires",
-      "Refuting Modern Colossus Reinterpretation",
-      "Verifying the 1,260-Year Ecclesiastical Supremacy",
+      "Discerning Forced Worship on the Plain of Dura",
+      "Reading the Seven Times of Nebuchadnezzar’s Humiliation",
       "Weighing Imperial Pride at the Belshazzar Court",
       "Demonstrating Uncompromising Prayer in the Den",
+      "Verifying the 1,260-Year Ecclesiastical Supremacy",
       "Contrasting the Ram and Goat with Antiochus Hypotheses",
       "Calculating the 70 Weeks Severed from the 2,300 Days",
-      "Anchoring the Sanctuary Restored to 1844",
       "Standing Prepared as the Sealed Book Unlocks"
     ];
 
@@ -384,10 +367,6 @@
       if (el) el.textContent = text || 'Stage';
     }
 
-    function mountSittingStage() {
-      // Chronicle stage is no longer mounted in the study desk sitting
-    }
-
     let sittingPhase = 'study';
     const sittingVisited = { study: true, tasks: false };
     const SITTING_PATH_HINTS = {
@@ -398,9 +377,6 @@
 
     function lessonMapPack(index) {
       return (window.SHEET_MAP && window.SHEET_MAP[index]) || null;
-    }
-    function mapBodyPlain(text) {
-      return String(text || '').replace(/\n+/g, ' ').trim();
     }
     function mapBodyHtml(text) {
       if (!text) return '';
@@ -441,8 +417,8 @@
       }).join('');
       host.querySelectorAll('[data-node-id]').forEach((btn) => {
         btn.addEventListener('click', () => {
-          const pack = lessonMapPack(currentSheetIndex);
-          const y = (pack && pack.year) || 'y605';
+          const currentPack = lessonMapPack(currentSheetIndex);
+          const y = (currentPack && currentPack.year) || 'y605';
           window.location.href = `map.html?year=${encodeURIComponent(y)}&from=lesson&sheet=${currentSheetIndex}`;
         });
       });
@@ -475,7 +451,6 @@
       renderSittingPath();
     }
 
-    function expandSittingStage() {}
     function expandSittingMap() {}
     function collapseSittingInsets() {}
 
@@ -1466,7 +1441,7 @@
         const isDone = completedSheets.has(idx);
 
         const btn = document.createElement('button');
-        btn.onclick = () => {
+        btn.addEventListener('click', () => {
           if (!canAccessSheet(idx)) {
             openAccessPanel();
             toggleTocDrawer();
@@ -1477,7 +1452,7 @@
           }
           loadSheet(idx);
           toggleTocDrawer();
-        };
+        });
         btn.className = `w-full text-left p-3 rounded-lg flex items-start space-x-3 transition-colors ${
           isCurrent 
             ? 'bg-amber-100/70 dark:bg-amber-950/60 border border-amber-300 dark:border-amber-800' 
@@ -2174,7 +2149,7 @@
             <span class="font-mono font-bold text-xs text-ink-500 dark:text-paper-500 mt-0.5 shrink-0">${String.fromCharCode(65 + optIdx)}.</span>
             <span class="flex-1">${optText}</span>
           `;
-          btn.onclick = () => handleQuizAnswer(qIdx, optIdx, q);
+          btn.addEventListener('click', () => handleQuizAnswer(qIdx, optIdx, q));
           optionsGrid.appendChild(btn);
         });
 
@@ -2294,7 +2269,7 @@
           history.replaceState(null, '', location.pathname + '?sheet=' + (currentSheetIndex + 1));
         }
         loadSheet(currentSheetIndex + 1);
-        showToast(`Unit mastered! Advancing to Unit ${currentSheetIndex}.`);
+        showToast('Unit mastered! Advancing to ' + (window.BAJourney ? window.BAJourney.sheetLabel(currentSheetIndex) : ('sheet ' + (currentSheetIndex + 1))) + '.');
       } else {
         showToast("Congratulations! You have mastered the entire Historicist Scroll of Daniel!");
         toggleTocDrawer();
@@ -2392,7 +2367,7 @@
         const params = new URLSearchParams(location.search);
         const raw = params.get('id') || params.get('section') || params.get('sheet');
         if (raw != null && raw !== '') {
-          if (LEGACY_ID_MAP[raw] !== undefined) return clampStartSheet(LEGACY_ID_MAP[raw]);
+          if (Object.prototype.hasOwnProperty.call(LEGACY_ID_MAP, raw)) return clampStartSheet(LEGACY_ID_MAP[raw]);
           const asNum = parseInt(raw, 10);
           if (!Number.isNaN(asNum) && asNum >= 0 && asNum < sheetsData.length) return clampStartSheet(asNum);
         }
@@ -2552,5 +2527,6 @@
       closeArtifactModal,
       navigateSheet,
       completeAndAdvance,
-      openAccessPanel
+      openAccessPanel,
+      resetQuizQuestion
     });
