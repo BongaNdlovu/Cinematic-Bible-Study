@@ -1,0 +1,48 @@
+# Sitting 0 — The Battle of Hermeneutics: The Historicist Blueprint
+
+**Scripture span:** prologue (method, not a chapter) · Sources reviewed: `sheets-data.js` id 0 (content, christology, quizzes ×2, studyGuide, guide), `SHEET_VERIFY[0]` (2 claim packs), workbench 0, glossary cards used: hermeneutics, historicism, preterism, futurism, dispensationalism, year-day, apocalyptic, colossus, little horn, church-state, counter-reformation, Trent, Jesuit, sola scriptura, sola fide, Antichrist, papacy, typology, evening-morning, and the person/place cards named below.
+
+> **Fix pass applied 2026-09-13.** All must-fix items below are resolved in `sheets-data.js` and `sheet-glossary.js`; rows marked **FIXED** show what changed. Verdicts describe the text as originally found.
+
+## Findings
+
+| # | Location | Sentence or claim | Scripture proof | SDA/BRI proof (work + page or URL) | Verdict | Required fix |
+|---|----------|-------------------|-----------------|-------------------------------------|---------|--------------|
+| 1 | article, intro ¶1 | "Daniel was a young Hebrew noble taken… as a captive teenager in 605 B.C." | Dan 1:1–4; 1:2 "the Lord gave" | SDA Bible Commentary, vol. 4, on Dan 1:1 (605, third year of Jehoiakim); Jeremiah 46:2 for Carchemish | Confirmed | None |
+| 2 | first principles, "Establishing the chronology" | 605 ≠ 597 (BM 21946) ≠ 586 (2 Kings 25); accession-year reckoning from 609 | Dan 1:1; 2 Kings 24:12; 2 Kings 25 | SDA BC, vol. 4, on Dan 1:1; BM 21946 labeled as Babylonian Chronicle (history) | Confirmed | None — the box already labels BM 21946 as history |
+| 3 | article, ¶3 | "the Lord gave Jehoiakim king of Judah into his hand… every kingdom… arrives and departs only by God's permission" | Dan 1:2 (KJV wording matches verify card) | SDA BC, vol. 4, on Dan 1:2 | Confirmed | None |
+| 4 | article, Reformers ¶ | "the **unanimous** historicist identification of the prophetic Little Horn and Antichrist" | (no verse carries "unanimous") | Froom, *Prophetic Faith of Our Fathers*, vol. 2, documents the mainstream but not unanimity | **Overclaim** | **FIXED** — article now reads "the mainstream historicist identification" |
+| 5 | article, Reformers ¶ | "From John Wycliffe (1384) to Charles Spurgeon, the prophetic timeline was recognized as an unbroken chain… and the 1,260-year ecclesiastical supremacy" | Dan 7:25 (for the 1,260) | Froom, PFOF vol. 1–2 for Wycliffe and the Reformers; no source existed for Spurgeon | **Needs citation** | **FIXED** — Spurgeon dropped; the sentence now runs "From John Wycliffe (1384) through the Reformers," which the sitting's dated verify cards (Luther, Hippolytus, Newton) and Froom carry |
+| 6 | article, Trent ¶ | "hierarchy **recognized**… **To dismantle** this continuous chain, two Spanish Jesuit scholars published radical alternative systems" | (no verse) | Motive asserted, not cited | **Tone risk** | **FIXED** — paragraph rewritten to "Rome faced an urgent hermeneutical crisis… Two Spanish Jesuit scholars answered with alternative systems," converging on the Novel-schools box framing |
+| 7 | first principles, "Novel schools after Trent" | "an exercise in institutional preservation rather than deliberate conspiracy… it functions merely as an exegetical exit" | Dan 2:38; 9:24–27 as the test | Consistent with Froom's documentation | Confirmed | None — this was the model; the surrounding prose now matches it |
+| 8 | three-school card, title 2 | "Preterism (Counter-Reformation **invention** by Jesuit Luis de Alcázar, 1614)… **inventing** Preterism" | (no verse) | Froom, PFOF vol. 2 names Alcázar's *Vestigatio* (1614) as the first full preterist commentary | **Overclaim** + tone | **FIXED** — card title and body now read "first full preterist commentary"; same fix applied in quiz Q1 option 1 and diagnostic 1 |
+| 9 | three-school card, title 3 | "Futurism (Counter-Reformation **invention** by Jesuit Francisco Ribera, 1590)" | (no verse) | Froom, PFOF vol. 2, on Ribera's 1590 commentary | **Overclaim** + tone | **FIXED** — card title and body now read "first full futurist commentary" |
+| 10 | dossier panes (Preterism/Futurism) | "Counter-Reformation **Purpose:** Published to answer Protestant charges"; "Invented by… Ribera **to absolve** the historical papacy" | (no verse) | Motive was asserted, not cited | **Tone risk** | **FIXED** — panes now say "Counter-Reformation context" and state the effect (removed the medieval church from prophetic scrutiny / moved the papacy out of Dan 9:27) |
+| 11 | three-school card | "leaving **zero** prophetic chain across medieval and modern history" | (no verse) | — | **Overclaim** | **FIXED** — now "removing the medieval and modern church from the prophetic chain" |
+| 12 | article, Great Shift ¶ | "higher criticism **adopted Alcázar's Preterism** (reviving Porphyry's thesis)" | (no verse) | Critics revived **Porphyry's** late-date thesis; the Alcázar equation was unsourced | **Needs citation** | **FIXED** — sentence now reads "revived Porphyry's 3rd-century thesis — preserved and answered by Jerome" (Jerome already sourced on the verify card) |
+| 13 | article + workbench t1 | Year-day: Num 14:34 and Ezek 4:6 state the scale; "each day for a year" | Num 14:34; Ezek 4:6 (KJV quotes match verify card) | SDA BC, vol. 1, on Num 14:34; vol. 4 on Dan 9:24; W. H. Shea, *Selected Studies on Prophetic Interpretation* (DARCOM 1) | Confirmed | None |
+| 14 | first principles, "Why a day may be a year," point 2 | "490 literal days is about sixteen months — not enough time to rebuild a city and reach the cross" | Dan 9:24–25 | SDA BC, vol. 4, on Dan 9:24 | Confirmed (arithmetic checks: 490 d ≈ 16.4 months) | None |
+| 15 | first principles, point 3 | "Genesis 1 calls a full day 'evening and morning'; Daniel 8:14 uses that same pair" | Gen 1:5; Dan 8:14, 26 | SDA BC, vol. 4, on Dan 8:14 | Confirmed | None |
+| 16 | first principles, point 3 | "2 Peter 3:8… is about God's patience, not this ruler" | 2 Pet 3:8 | SDA BC, vol. 7, on 2 Pet 3:8 | Confirmed | None |
+| 17 | dossier, Historicism pane | Luther quote: "the Pope is the very Antichrist…" — *Smalcald Articles* II.IV (1537) | (dated witness, not Scripture) | Book of Concord, Smalcald Articles, Part II Art. IV (verify card links bookofconcord.org); quote matches the standard translation | History, not canon — correctly labeled | None |
+| 18 | dossier, Historicism pane | Newton quote: "Daniel is most distinct in order of time…" (1733, Part I ch. 1) | (dated witness) | *Observations upon the Prophecies of Daniel* (Gutenberg #16878); verified verbatim against the Gutenberg text in the fix pass (the work's sentence continues from "and amongst the old Prophets…" — the card's capitalization is a standard fragment start) | History, not canon — correctly labeled | None |
+| 19 | quiz Q2 + sitting 8 preview | "2,300 years reach from 457 B.C. to 1844" | Dan 8:14; 9:24–27 | SDA BC, vol. 4, on Dan 8:14; Shea (DARCOM 1) | Confirmed (arithmetic: 457 + 2300, no year 0 → 1844) | None — depends on sitting 9's 457 anchor; the forward reference is honest |
+| 20 | christology ¶1 | "born under Caesar Augustus, crucified under Pontius Pilate" | Luke 2:1; Luke 3:1; Acts 4:27 | SDA BC on Luke 3:1 | Confirmed | None |
+| 21 | glossary, "Council of Trent" card (used on this sitting) | "new schools of reading were **funded** to break the chain" | (no verse) | Funding claim was uncited | **Tone risk** | **FIXED** — card now says "new readings were published that removed the medieval church from the chain" |
+| 22 | glossary, "Jesuit" card | "It does not treat the Society of Jesus, or every Jesuit, as the author of that work" | — | — | Confirmed | None — model house-rule-4 language |
+| 23 | verify pack 0 (all items) | Quotes: Dan 1:2; Jer 25:1; Jer 46:2; Num 14:34; Ezek 4:6; Dan 9:24–25 (KJV); Newton ch. 1; Jerome on Porphyry; Hippolytus §28 | quotes match KJV and the linked sources | All four `commentary` items carry working URLs (Gutenberg, tertullian.org, ccel.org); the Newton ch. 1 quote verified verbatim in the fix pass | Confirmed | None — this pack is the model: every quote checked matches its cited source |
+
+## Must-fix
+
+All resolved in the 2026-09-13 fix pass:
+
+1. ✅ **"Unanimous"** → "mainstream historicist identification" (row 4).
+2. ✅ **Jesuit-motive language** → converged on the Novel-schools box: "first full preterist/futurist commentary," effects instead of purposes, "Counter-Reformation context" panes, Trent-card "published" (rows 6, 8, 9, 10, 21).
+3. ✅ **Spurgeon** → dropped; Wycliffe-through-Reformers retained with the dated-card support (row 5).
+4. ✅ **Alcázar/Porphyry conflation** → sentence re-anchored on Porphyry via Jerome (row 12).
+
+## Alignment note
+
+- **Matches BRI:** year-day established from Num 14:34 and Ezek 4:6 (SDA BC; DARCOM 1); 490-days-cannot-work self-check inside Dan 9; 2 Pet 3:8 excluded as a proof text; 1844 arithmetic consistent with the church's published line.
+- **Goes beyond BRI:** the Reformation-genealogy layer (Luther, Wycliffe, Trent, Alcázar, Ribera, Darby, Scofield) is **history, not canon**, and after the fix pass the motive phrasings are gone and the facts carry the argument. Froom, PFOF vol. 2, remains the natural named source for the genealogy; the verify cards (Luther, Hippolytus, Newton, Jerome) are the sitting's named witnesses.
+- **Translation labeling:** after the fix pass the load-bearing quotations in the verify cards are all KJV; the article's devotional paraphrases remain modern renderings, which is acceptable course style now that no pull-quote on the sitting presents a modern rendering as the KJV text.

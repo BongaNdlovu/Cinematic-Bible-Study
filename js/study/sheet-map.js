@@ -513,7 +513,7 @@
           "Michael stands up; sleepers awake",
           "Daniel 12:1–4, 13",
           "assets/study/epochs/resurrection-dawn.jpg",
-          "A high priest sits while he ministers and stands when the work is finished. When Michael stands, advocacy in heaven is complete and a time of trouble such as never was begins. Those written in the book are delivered. Many who sleep in the dust awake — the Old Testament’s clearest bodily resurrection.\n\nThe 1,290 and 1,335 days, read from A.D. 508, confirm the same sanctuary line to 1798 and 1843/44. The book that was sealed till the time of the end can now be understood because those spans have landed.\n\nDaniel is told to rest and to stand in his lot at the end of the days. The metals, beasts, horns, and numbers were always walking toward a man rising from the dust, not toward a twelfth empire."
+          "Daniel’s own “stand up” is the verb for kings assuming power (11:2–4, 7, 20–21). When Michael — the great Prince — stands, advocacy in heaven is complete and a time of trouble such as never was begins. Those written in the book are delivered. Many who sleep in the dust awake — the Old Testament’s clearest bodily resurrection.\n\nThe 1,290 and 1,335 days, read from A.D. 508, confirm the same sanctuary line to 1798 and 1843/44. The book that was sealed till the time of the end can now be understood because those spans have landed.\n\nDaniel is told to rest and to stand in his lot at the end of the days. The metals, beasts, horns, and numbers were always walking toward a man rising from the dust, not toward a twelfth empire."
         )
       ]
     }

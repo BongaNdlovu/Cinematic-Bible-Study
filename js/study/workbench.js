@@ -278,7 +278,7 @@
                   <option value="">Select Babylonian renaming...</option>
                   <option value="belteshazzar_bel" ${t1Done && item.correct === 'belteshazzar_bel' ? 'selected' : ''}>Belteshazzar (Honors Bel / Marduk)</option>
                   <option value="shadrach_aku" ${t1Done && item.correct === 'shadrach_aku' ? 'selected' : ''}>Shadrach (Honors Aku / Moon god)</option>
-                  <option value="meshach_aku" ${t1Done && item.correct === 'meshach_aku' ? 'selected' : ''}>Meshach (Honors Aku / Who-is-like-Aku?)</option>
+                  <option value="meshach_aku" ${t1Done && item.correct === 'meshach_aku' ? 'selected' : ''}>Meshach (Honors Aku / “Who is what Aku is?” — traditional reading)</option>
                   <option value="abednego_nabu" ${t1Done && item.correct === 'abednego_nabu' ? 'selected' : ''}>Abednego (Honors Nabu / Nebo)</option>
                 </select>
               </div>
