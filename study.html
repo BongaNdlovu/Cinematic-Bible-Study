@@ -139,6 +139,150 @@
       background: rgba(255, 250, 236, 0.7);
     }
     body.white-mode .sheet-verify-card { background: #fafafa; }
+
+    /* Linear flow map — one vertical path through the sitting's argument */
+    .sheet-flow {
+      margin: 2.5rem 0 0;
+      padding: 1.35rem 1.4rem 1.5rem;
+      border: 1px solid rgba(197, 155, 39, 0.38);
+      border-radius: 14px;
+      background: rgba(15, 14, 13, 0.55);
+    }
+    .flow-kicker {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #c9a227;
+      margin: 0 0 0.4rem;
+    }
+    .flow-heading {
+      font-family: Newsreader, Georgia, serif;
+      font-size: 1.45rem;
+      color: #f4ead4;
+      margin: 0 0 1rem;
+    }
+    .flow-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      position: relative;
+    }
+    .flow-list::before {
+      content: "";
+      position: absolute;
+      left: 16px;
+      top: 12px;
+      bottom: 14px;
+      width: 2px;
+      background: linear-gradient(180deg, #c59b27 0%, rgba(197, 155, 39, 0.18) 100%);
+    }
+    .flow-step {
+      position: relative;
+      display: flex;
+      gap: 0.95rem;
+      padding: 0 0 1.05rem;
+    }
+    .flow-step:last-child { padding-bottom: 0; }
+    .flow-marker {
+      flex: none;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: #f4ead4;
+      background: #2a2318;
+      border: 2px solid #c59b27;
+      position: relative;
+      z-index: 1;
+    }
+    .flow-step-anchor .flow-marker {
+      background: #c59b27;
+      color: #1c1610;
+    }
+    .flow-body {
+      flex: 1;
+      min-width: 0;
+      border: 1px solid rgba(197, 155, 39, 0.24);
+      border-radius: 10px;
+      padding: 0.7rem 0.95rem 0.8rem;
+      background: rgba(12, 10, 8, 0.28);
+      word-break: break-word;
+      overflow-wrap: break-word;
+    }
+    .flow-step-anchor .flow-body { border-color: rgba(197, 155, 39, 0.55); }
+    .flow-head {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 0.35rem;
+    }
+    .flow-title {
+      font-family: Newsreader, Georgia, serif;
+      font-size: 1.08rem;
+      font-weight: 600;
+    }
+    .flow-kind {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 9.5px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    .flow-kind-scripture { color: #c9a227; }
+    .flow-kind-history { color: #9aa7b0; }
+    .flow-kind-guard { color: #93b98a; }
+    .flow-kind-anchor { color: #f4ead4; }
+    .flow-text {
+      font-size: 0.93rem;
+      line-height: 1.55;
+      margin: 0.3rem 0 0.5rem;
+      opacity: 0.92;
+    }
+    .flow-tag {
+      display: inline-block;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 10px;
+      letter-spacing: 0.04em;
+      color: #c9a227;
+      padding: 2px 9px;
+      border: 1px solid rgba(197, 155, 39, 0.35);
+      border-radius: 999px;
+      opacity: 0.9;
+    }
+    body.paper-mode .sheet-flow,
+    body.white-mode .sheet-flow {
+      background: rgba(247, 241, 228, 0.86);
+    }
+    body.white-mode .sheet-flow { background: #ffffff; border-color: #e5e5e5; }
+    body.paper-mode .flow-heading,
+    body.white-mode .flow-heading { color: #3d3421; }
+    body.paper-mode .flow-body,
+    body.white-mode .flow-body { background: rgba(255, 250, 236, 0.7); }
+    body.white-mode .flow-body { background: #fafafa; }
+    body.paper-mode .flow-marker,
+    body.white-mode .flow-marker { background: #f3ead2; color: #6b5310; }
+    body.paper-mode .flow-step-anchor .flow-marker,
+    body.white-mode .flow-step-anchor .flow-marker { background: #c59b27; color: #fffdf6; }
+    body.paper-mode .flow-kind-history,
+    body.white-mode .flow-kind-history { color: #5c6b73; }
+    body.paper-mode .flow-kind-guard,
+    body.white-mode .flow-kind-guard { color: #4d7a44; }
+    body.paper-mode .flow-kicker,
+    body.white-mode .flow-kicker { color: #8a6414; }
+    body.paper-mode .flow-kind-scripture,
+    body.white-mode .flow-kind-scripture { color: #8a6414; }
+    body.paper-mode .flow-kind-anchor,
+    body.white-mode .flow-kind-anchor { color: #6b5310; }
+    body.paper-mode .flow-tag,
+    body.white-mode .flow-tag { color: #8a6414; border-color: rgba(138, 100, 20, 0.4); }
+
     .study-path {
       margin: 2.75rem 0 0;
       padding: 1.35rem 1.4rem 1.5rem;
@@ -2374,6 +2518,9 @@
     <article id="sheet-article" class="article-body font-bodySerif text-ink-800 dark:text-paper-200 transition-all duration-150">
       <!-- Injected by JavaScript loadSheet() -->
     </article>
+
+    <!-- Linear flow map of this sitting (one path, first verse to last claim) -->
+    <section id="sheet-flow" class="sheet-flow" hidden></section>
 
     <!-- Connective Lesson Bar (Map and 3D Gallery) -->
     <section id="lesson-connect" class="lesson-connect my-8 p-4 sm:p-5 rounded-xl border border-amber-600/40 bg-paper-100/80 dark:bg-paper-900/60 backdrop-blur-xs flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4">

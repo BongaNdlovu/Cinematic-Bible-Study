@@ -10,6 +10,15 @@
         scripture: "How the book teaches you to read it",
         title: "The Battle of Hermeneutics: The Historicist Blueprint",
         subtitle: "Why how you interpret prophecy decides whether the four kingdoms stay a chain or dissolve into a riddle.",
+        flow: [
+          { kind: "scripture", title: "Heaven hands over the king", text: "The Lord gave Jehoiakim into Nebuchadnezzar’s hand — empires arrive and depart only by God’s permission.", tag: "Daniel 1:2" },
+          { kind: "scripture", title: "God states the scale, twice", text: "One prophetic day is appointed as one literal year before Daniel ever uses it.", tag: "Numbers 14:34; Ezekiel 4:6" },
+          { kind: "guard", title: "Daniel checks the ruler on itself", text: "490 literal days cannot hold a rebuilt city, Messiah, and the cross — 490 years can. The week that lands on Messiah proves the day was a year.", tag: "Daniel 9:24–27" },
+          { kind: "scripture", title: "Three ways to read the book", text: "Historicism keeps the metals one chain; preterism parks the book in the past; futurism jumps it forward.", tag: "Method — tested against Daniel 2:38–44" },
+          { kind: "anchor", title: "The head is named", text: "Babylon is the head of gold; every later kingdom must come “after” the one before it.", tag: "Daniel 2:38–40" },
+          { kind: "history", title: "The later schools are dated exits", text: "Post-Trent preterism (Alcázar, 1614) and futurism (Ribera, 1590) are institutional exits that remove the medieval church from the chain — not conspiracy, not canon.", tag: "History — dated commentaries" },
+          { kind: "scripture", title: "So the long numbers run as years", text: "1,260 days become 1,260 years (538–1798) and 2,300 evenings-mornings become 2,300 years (to 1844) on the same ruler.", tag: "Daniel 7:25; 8:14 — worked in sittings 7–9" }
+        ],
         content: `
           <p>
             Before opening a single prophecy or chart, start with the person and the setting. Daniel was a young Hebrew noble taken from Jerusalem to Babylon as a captive teenager in 605 B.C. He lived through the rise and fall of world empires, serving in royal courts while remaining faithful to the God of heaven. This course is divided into eleven self-contained “sittings” — guided study sessions designed so anyone can sit down and read the book from first principles. You do not need any prior prophecy class, secret decoder, or theological degree. Every identification, date, and Hebrew term will be proved directly from the open biblical text and public historical records.
@@ -326,6 +335,15 @@
         scripture: "Daniel 1:1-21 &bull; Babylon, 605 B.C.",
         title: "The Exilic Crucible: Identity, Food, & Consecration",
         subtitle: "How Daniel drew the line between secular service and covenant defilement.",
+        flow: [
+          { kind: "scripture", title: "Exile by sentence, not accident", text: "The Lord gave Judah’s king to Babylon; the captivity is judgment and mission.", tag: "Daniel 1:1–2" },
+          { kind: "history", title: "Three levies, three dates", text: "605 (Daniel’s opening), 597 (Jehoiachin, BM 21946), 586 (temple burned) stay distinct events.", tag: "2 Kings 24–25 + Babylonian Chronicle" },
+          { kind: "scripture", title: "Babylon renames the four", text: "Names that proclaimed Yahweh become names that proclaim Bel, Aku, and Nebo — the roll changes, the allegiance does not.", tag: "Daniel 1:7" },
+          { kind: "anchor", title: "The line falls at the table", text: "Daniel purposes in his heart not to defile himself — before any dream is given.", tag: "Daniel 1:8" },
+          { kind: "history", title: "Why the table defiles", text: "Royal-table food went to the god first (the custom Xenophon documents) and broke the clean/unclean line.", tag: "Leviticus 11 + Cyropaedia 1.3.10" },
+          { kind: "scripture", title: "A ten-day test", text: "Pulse and water; their appearance answers for them.", tag: "Daniel 1:12–15" },
+          { kind: "scripture", title: "Gift follows loyalty", text: "God gives knowledge and skill; the king finds them ten times better — chapter 2’s dream sits on this.", tag: "Daniel 1:17–20" }
+        ],
         content: `
           <div class="from-last-sitting">
             <span class="from-last-sitting-kicker">From the last sitting &bull; Sheet 0</span>
@@ -516,6 +534,15 @@
         scripture: "Daniel 2:1-49 &bull; Babylon, 603 B.C.",
         title: "The Metallic Colossus: The Historicist Sequence of Empires",
         subtitle: "The panoramic blueprint of world history from Babylon to the Second Advent.",
+        flow: [
+          { kind: "scripture", title: "A dream the wise men cannot hold", text: "Babylon’s occult fails; “there is a God in heaven that revealeth secrets.”", tag: "Daniel 2:1–13, 28" },
+          { kind: "scripture", title: "Four metals and divided feet", text: "Gold, silver, bronze, iron, then iron mixed with clay — no fifth metal.", tag: "Daniel 2:31–33" },
+          { kind: "anchor", title: "The head is named", text: "“Thou art this head of gold” — Babylon, fixed and non-repeatable.", tag: "Daniel 2:38" },
+          { kind: "scripture", title: "Succession fills the statue", text: "Later chapters name the next two: Medo-Persia, then Greece.", tag: "Daniel 5:28, 31; 8:20–21" },
+          { kind: "scripture", title: "Iron, then feet that will not cleave", text: "A fourth kingdom strong as iron, then division “as iron is not mixed with clay.”", tag: "Daniel 2:40–43" },
+          { kind: "anchor", title: "The stone strikes the feet", text: "“In the days of these kings” — during the division, cut without hands.", tag: "Daniel 2:44–45" },
+          { kind: "scripture", title: "The mountain fills the earth", text: "The stone ends every metal at once and fills the whole earth — the literal Second Coming.", tag: "Daniel 2:35, 44" }
+        ],
         content: `
           <div class="from-last-sitting">
             <span class="from-last-sitting-kicker">From the last sitting &bull; Sheet 1</span>
@@ -737,6 +764,15 @@
         scripture: "Daniel 3:1-30 &bull; Plain of Dura, c. 594 B.C.",
         title: "The Plain of Dura: Forced Worship & The 'But If Not' Faith",
         subtitle: "The prototype of the final crisis: State-enforced universal worship and the Mark of the Beast.",
+        flow: [
+          { kind: "scripture", title: "An all-gold answer", text: "Nebuchadnezzar raises 60-by-6 of solid gold — a public veto of the multi-metal dream.", tag: "Daniel 3:1" },
+          { kind: "scripture", title: "The statute: bow or burn", text: "State worship commanded of every official, enforced “the same hour” by the furnace.", tag: "Daniel 3:2–6" },
+          { kind: "scripture", title: "The boundary is older than the king", text: "The second commandment forbids the bow itself — the outward act, whatever the heart claims.", tag: "Exodus 20:4–5" },
+          { kind: "scripture", title: "Civil service has a ceiling", text: "Rulers are ordained for order, never for worship; when law contradicts God, God stands.", tag: "Romans 13:1–7; Acts 5:29" },
+          { kind: "anchor", title: "“But if not”", text: "God is able to deliver; whether or not He does, they will not bow. Obedience priced before rescue.", tag: "Daniel 3:17–18" },
+          { kind: "scripture", title: "A fourth form in the fire", text: "“The form of the fourth is like the Son of God” — ropes burn, bodies and garments do not.", tag: "Daniel 3:25, 27" },
+          { kind: "scripture", title: "The pattern scales to Revelation", text: "Decree, image, death penalty, commandment-keepers — Dura is the type; Revelation 13 the global antitype.", tag: "Daniel 3 ↔ Revelation 13:14–17; 14:12" }
+        ],
         content: `
           <div class="from-last-sitting">
             <span class="from-last-sitting-kicker">From the last sitting &bull; Sheet 2</span>
@@ -923,6 +959,15 @@
         scripture: "Daniel 4:1-37 &bull; Babylon, c. 570 B.C.",
         title: "The Emperor in the Dust: Pride & Divine Sanity",
         subtitle: "The divine diagnosis of hubris: When humanity exalts itself above God, it descends into the beastly realm.",
+        flow: [
+          { kind: "scripture", title: "A pagan king publishes the lesson", text: "Daniel 4 is a rare first-person royal document in the canon — Nebuchadnezzar’s own decree.", tag: "Daniel 4:1" },
+          { kind: "anchor", title: "The thesis of thrones", text: "“The most High ruleth in the kingdom of men, and giveth it to whomsoever he will” — repeated three times.", tag: "Daniel 4:17, 25, 32" },
+          { kind: "scripture", title: "Mercy runs first", text: "“Break off thy sins… shew mercy to the poor”; twelve months pass between warning and judgment.", tag: "Daniel 4:27, 29" },
+          { kind: "scripture", title: "The boast on the roof", text: "“Is not this great Babylon, that I have built…?” — the exact pride the dream warned against.", tag: "Daniel 4:30" },
+          { kind: "guard", title: "Seven times, literal years", text: "Beast-heart, grass, feathers and claws — years of one man’s life; year-day is not used here (this is not 2,520 years).", tag: "Daniel 4:16, 33" },
+          { kind: "scripture", title: "Eyes up, mind back", text: "Understanding returns when he lifts his eyes and blesses the Most High.", tag: "Daniel 4:34" },
+          { kind: "scripture", title: "The decree stands as warning", text: "“Those that walk in pride he is able to abase” — the family lesson Belshazzar will ignore.", tag: "Daniel 4:37" }
+        ],
         content: `
           <div class="from-last-sitting">
             <span class="from-last-sitting-kicker">From the last sitting &bull; Sheet 3</span>
@@ -1095,6 +1140,15 @@
         scripture: "Daniel 5:1-31 &bull; Babylon, October 11/12, 539 B.C.",
         title: "The Handwriting on the Plaster: The Fall of Babylon",
         subtitle: "Sacrilege, the divine balance sheet, and the sudden overthrow of the gold kingdom.",
+        flow: [
+          { kind: "history", title: "A co-regent hosts the feast", text: "Belshazzar reigns in the city while Nabonidus is away in Tema — why “third ruler” is a precise offer.", tag: "History + Daniel 5:16" },
+          { kind: "scripture", title: "The vessels become toasting cups", text: "What Daniel 1:2 recorded as handed over is now lifted to idols of gold, silver, bronze, iron, wood, and stone.", tag: "Daniel 5:2–4" },
+          { kind: "scripture", title: "The hand writes", text: "Fingers write on the plaster beside the lampstand; the king’s knees knock and none can read.", tag: "Daniel 5:5–9" },
+          { kind: "anchor", title: "The audit is read", text: "MENE, TEKEL, PERES — numbered, weighed, divided. Market weights become Heaven’s balance sheet.", tag: "Daniel 5:25–28" },
+          { kind: "scripture", title: "Judgment against known light", text: "“Thou knewest all this” — the sin is refusing the family lesson of chapter 4.", tag: "Daniel 5:22–23" },
+          { kind: "scripture", title: "The conqueror was named", text: "Isaiah named Cyrus and his open gates about 140 years before the night.", tag: "Isaiah 44:28; 45:1–2" },
+          { kind: "history", title: "The city falls in one night", text: "October 539 B.C. — the chronicle says “without battle”; the Greek historians add the river stratagem.", tag: "Daniel 5:30–31 + Nabonidus Chronicle" }
+        ],
         content: `
           <div class="from-last-sitting">
             <p class="from-last-sitting-kicker">From the last sitting &bull; What you already know</p>
@@ -1279,6 +1333,15 @@
         scripture: "Daniel 6:1-28 &bull; Babylon, c. 538 B.C.",
         title: "The Pit of Hunger: The Law of the Medes and Persians",
         subtitle: "Civil disobedience when human law contradicts the First Commandment.",
+        flow: [
+          { kind: "history", title: "A new empire, an old servant", text: "Daniel, in his eighties, is first of three presidents under Darius the Mede — whose identity the sitting keeps as an honest gap.", tag: "Daniel 6:1–3" },
+          { kind: "scripture", title: "No fraud to find", text: "His rivals admit the only charge possible is “concerning the law of his God.”", tag: "Daniel 6:4–5" },
+          { kind: "scripture", title: "The trap uses the empire’s own law", text: "A thirty-day prayer ban signed and sealed — “the law of the Medes and Persians, which altereth not.”", tag: "Daniel 6:8" },
+          { kind: "scripture", title: "A second biblical witness", text: "Esther shows the same sealed writing “may no man reverse” — the rigidity is Persian proverb, not Daniel’s invention.", tag: "Esther 8:8; 1:19" },
+          { kind: "anchor", title: "The window stays open", text: "Knowing the writing is signed, he prays toward Jerusalem three times a day, “as he did aforetime.”", tag: "Daniel 6:10" },
+          { kind: "scripture", title: "God shuts the mouths", text: "The angel closes the lions’ mouths; the statute stands and the saint survives it.", tag: "Daniel 6:22" },
+          { kind: "scripture", title: "The persecutor publishes praise", text: "Darius decrees trembling before “the living God… whose kingdom shall not be destroyed” — the book’s second pagan decree.", tag: "Daniel 6:25–27" }
+        ],
         content: `
           <div class="from-last-sitting">
             <p class="from-last-sitting-kicker">From the last sitting &bull; What you already know</p>
@@ -1441,6 +1504,15 @@
         scripture: "Daniel 7:1-28 &bull; Babylon, c. 553 B.C.",
         title: "The Churning Sea & The Little Horn: The 1,260 Years to Judgment",
         subtitle: "The parallel vision of the four beasts, the church-state horn, and the heavenly court of Daniel 7:9–14.",
+        flow: [
+          { kind: "scripture", title: "Same chain, new symbols", text: "Four beasts rise from the sea — the angel says they are four kingdoms, the metals of chapter 2 as predators.", tag: "Daniel 7:3, 17, 23" },
+          { kind: "scripture", title: "Scripture defines its own vocabulary", text: "Waters are peoples and nations; winds are war.", tag: "Revelation 17:15; Jeremiah 49:36–37" },
+          { kind: "anchor", title: "An eleventh horn with a job description", text: "Diverse from the ten, three uprooted, mouth against the Most High, wears out the saints, thinks to change times and laws.", tag: "Daniel 7:8, 24–25" },
+          { kind: "history", title: "Three blocking kingdoms fall", text: "Heruli (493), Vandals (534), Ostrogoths (538) — the Arian powers that barred a church-state in the west.", tag: "History — dated falls" },
+          { kind: "scripture", title: "The span is built, not asserted", text: "A time + times + half = 3½ years = 42 months = 1,260 days; on the year-day ruler, 1,260 years.", tag: "Revelation 12:6, 14; 13:5" },
+          { kind: "history", title: "A candidate start and end", text: "538 (Justinian’s grant can operate; Ostrogoths leave Rome) to 1798 (Berthier takes Pius VI) — a candidate to test, not a verse.", tag: "History — dated books" },
+          { kind: "scripture", title: "A court sits before the stone", text: "Thrones, books opened, the Son of man brought to the Ancient of Days — judgment in heaven while the horn still speaks; the verdict executes at 7:26–27.", tag: "Daniel 7:9–14, 26–27" }
+        ],
         content: `
           <div class="from-last-sitting">
             <p class="from-last-sitting-kicker">From the last sitting &bull; What you already know</p>
@@ -1625,6 +1697,15 @@
         scripture: "Daniel 8:1-27 &bull; Susa, c. 551 B.C.",
         title: "The Ram, The Goat, & 2,300 Days: The Cleansing of the Sanctuary",
         subtitle: "Why Antiochus Epiphanes fails the biblical criteria, and how Daniel 8:14 unlocks 1844.",
+        flow: [
+          { kind: "anchor", title: "The angel names the animals", text: "The ram is Media-Persia and the goat is Greece — nothing here is left to guesswork.", tag: "Daniel 8:20–21" },
+          { kind: "scripture", title: "Four horns, then a little horn", text: "Alexander breaks; four kingdoms rise “but not with his power”; from one direction a horn grows exceedingly great.", tag: "Daniel 8:8–9, 22" },
+          { kind: "guard", title: "Three tests Antiochus fails", text: "Not “exceedingly great,” not the time of the end (8:17, 19), and roughly three years against a 2,300-day span.", tag: "Daniel 8:9, 17, 19" },
+          { kind: "scripture", title: "The attack is on the daily", text: "The horn takes away the tamid — the continual ministry, Christ’s standing priesthood replaced by a counterfeit.", tag: "Daniel 8:11–12" },
+          { kind: "anchor", title: "The verb is courtroom, not mop", text: "Nitsdaq — justified, put right, vindicated: the Day of Atonement grammar of Leviticus 16, in heaven.", tag: "Daniel 8:14; Leviticus 16" },
+          { kind: "scripture", title: "The sanctuary is in heaven", text: "“A minister of the sanctuary, and of the true tabernacle” — the Millerites made the earth the sanctuary; Hebrews will not.", tag: "Hebrews 8:1–2; 9:11–12, 24" },
+          { kind: "history", title: "2,300 years land in 1844", text: "From the 457 B.C. anchor; October 22 by Karaite reckoning — lived first in America, mistaken event, kept number.", tag: "Daniel 8:14 + 9:24–27; Froom vol. 4" }
+        ],
         content: `
           <div class="from-last-sitting">
             <p class="from-last-sitting-kicker">From the last sitting &bull; What you already know</p>
@@ -1816,6 +1897,15 @@
         scripture: "Daniel 9:1-27 &bull; Babylon, 538 B.C.",
         title: "The 70 Weeks (Chathak) & The Cross: The Mathematical Anchor of 1844",
         subtitle: "How the crucifixion of Christ in A.D. 31 establishes the start date for the 2,300-day prophecy.",
+        flow: [
+          { kind: "scripture", title: "Gabriel returns to the sick man", text: "“Consider the vision” — the unexplained 2,300 of chapter 8 that made Daniel faint.", tag: "Daniel 9:21–23; 8:27" },
+          { kind: "anchor", title: "Cut off, not restarted", text: "Chathak — a hapax: seventy weeks are severed from the longer line, so both prophecies share one starting point.", tag: "Daniel 9:24" },
+          { kind: "scripture", title: "Four decrees, one “restore”", text: "Only Artaxerxes’ seventh-year decree (457 B.C., Ezra 7) restores magistrates and judges — the civil “restore” of 9:25.", tag: "Ezra 7:11–26" },
+          { kind: "scripture", title: "The walk to Messiah", text: "457 + 483 years (no year zero) = autumn A.D. 27 — baptism and anointing: “The time is fulfilled.”", tag: "Daniel 9:25; Luke 3:1, 21–23; Mark 1:15" },
+          { kind: "anchor", title: "The cross in the midst", text: "Messiah cut off “but not for himself,” spring A.D. 31; the veil tears from top to bottom (Matthew 27:51).", tag: "Daniel 9:26–27" },
+          { kind: "guard", title: "No gap after week 69", text: "The “he” of 9:27 is the Messiah of 9:26 — the seventieth week is Christ’s, not a future tyrant’s.", tag: "Daniel 9:26–27 grammar" },
+          { kind: "scripture", title: "The remainder runs on", text: "2,300 − 490 = 1,810 years; A.D. 34 + 1,810 = autumn 1844 — the line ends where chapter 8 said it would.", tag: "Daniel 9:27 → 8:14" }
+        ],
         content: `
           <div class="from-last-sitting">
             <p class="from-last-sitting-kicker">From the last sitting &bull; What you already know</p>
@@ -2018,6 +2108,15 @@
         scripture: "Daniel 10:1 - 12:13 &bull; Tigris River, 536 B.C.",
         title: "Michael Stands Up: The Time of Trouble & Bodily Resurrection",
         subtitle: "The close of probation, deliverance of the saints, and the eternal covenant reward.",
+        flow: [
+          { kind: "scripture", title: "One vision, three chapters", text: "Cyrus’s third year by the Tigris — chapters 10–12 are a single continuous revelation.", tag: "Daniel 10:1 – 12:13" },
+          { kind: "scripture", title: "The man in linen", text: "Body like beryl, face like lightning — the same inventory as the glorified Christ of Revelation 1.", tag: "Daniel 10:5–6 ↔ Revelation 1:13–15" },
+          { kind: "scripture", title: "The war behind the empires", text: "The prince of Persia withholds Gabriel twenty-one days; Michael comes to help.", tag: "Daniel 10:13, 20" },
+          { kind: "scripture", title: "The named march", text: "Persia’s kings, Alexander’s break into four, the north-south wars, Rome — and “the prince of the covenant” cut off.", tag: "Daniel 11:2–22" },
+          { kind: "scripture", title: "The daily removed again", text: "The papal phase takes the tamid and sets up the abomination — the attack of chapters 7 and 8 under a new face.", tag: "Daniel 11:31, 36–39" },
+          { kind: "anchor", title: "Michael stands up", text: "“Stand up” is Daniel’s verb for kings assuming power; the great Prince assumes His stance — the plea ends and trouble begins.", tag: "Daniel 12:1; Hebrews 7:25" },
+          { kind: "scripture", title: "Dust wakes", text: "Bodily resurrection, two destinies — confirmed by Jesus in John 5 — and Daniel is told to rest and arise.", tag: "Daniel 12:2, 13; John 5:28–29" }
+        ],
         content: `
           <div class="from-last-sitting">
             <p class="from-last-sitting-kicker">From the last sitting &bull; What you already know</p>
