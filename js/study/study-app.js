@@ -1967,19 +1967,19 @@
         box.innerHTML = '';
         return;
       }
-      const kindLabels = { anchor: 'Anchor text', scripture: 'Scripture', history: 'History', guard: 'Guard rail' };
+      const kindLabels = { anchor: 'Anchor', scripture: '', history: 'History', guard: 'Guard rail' };
       const items = steps.map((step, i) => {
-        const kind = kindLabels[step.kind] ? step.kind : 'scripture';
+        const kind = kindLabels[step.kind] !== undefined ? step.kind : 'scripture';
+        const kindLabel = kindLabels[kind];
         return `
           <li class="flow-step flow-step-${kind}">
             <span class="flow-marker" aria-hidden="true">${i + 1}</span>
             <div class="flow-body">
               <div class="flow-head">
                 <span class="flow-title">${step.title}</span>
-                <span class="flow-kind flow-kind-${kind}">${kindLabels[kind]}</span>
+                <span class="flow-ref">${kindLabel ? `<span class="flow-kind flow-kind-${kind}">${kindLabel} · </span>` : ''}<span class="flow-tag">${step.tag}</span></span>
               </div>
               <p class="flow-text">${step.text}</p>
-              <span class="flow-tag">${step.tag}</span>
             </div>
           </li>`;
       }).join('');
@@ -2180,7 +2180,7 @@
 
       quizzes.forEach((q, qIdx) => {
         const qBox = document.createElement('div');
-        qBox.className = "p-5 sm:p-6 rounded-xl bg-paper-50 dark:bg-paper-950 border border-paper-300 dark:border-paper-800 transition-all";
+        qBox.className = "p-5 sm:p-6 rounded-xl bg-transparent border border-paper-300/60 dark:border-paper-800/60 transition-all";
         qBox.id = `q-card-${qIdx}`;
 
         const qTitle = document.createElement('h4');

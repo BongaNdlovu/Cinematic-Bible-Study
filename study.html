@@ -37,11 +37,12 @@
     }
 
     .sheet-verify {
-      margin: 2.75rem 0 0;
-      padding: 1.35rem 1.4rem 1.5rem;
-      border: 1px solid rgba(197, 155, 39, 0.38);
-      border-radius: 14px;
-      background: rgba(15, 14, 13, 0.55);
+      margin: 2.6rem 0 0;
+      padding: 1.15rem 0 0.35rem;
+      border: 0;
+      border-top: 1px solid rgba(197, 155, 39, 0.4);
+      border-radius: 0;
+      background: transparent;
     }
     .sheet-verify-kicker {
       font-family: "JetBrains Mono", monospace;
@@ -54,7 +55,7 @@
     .sheet-verify h3 {
       font-family: Newsreader, Georgia, serif;
       font-size: 1.45rem;
-      color: #f4ead4;
+      color: inherit;
       margin: 0 0 0.65rem;
     }
     .sheet-verify-claim {
@@ -68,11 +69,13 @@
       gap: 0.85rem;
     }
     .sheet-verify-card {
-      border: 1px solid rgba(197, 155, 39, 0.28);
-      border-radius: 10px;
-      padding: 0.85rem 1rem;
-      background: rgba(12, 10, 8, 0.28);
+      border: 0;
+      border-bottom: 1px solid rgba(197, 155, 39, 0.14);
+      border-radius: 0;
+      padding: 0.2rem 0 1rem;
+      background: transparent;
     }
+    .sheet-verify-list .sheet-verify-card:last-child { border-bottom: 0; }
     .sheet-verify-kind {
       font-family: "JetBrains Mono", monospace;
       font-size: 10px;
@@ -127,26 +130,29 @@
     body.charcoal-mode .sheet-verify,
     body.paper-mode .sheet-verify,
     body.white-mode .sheet-verify {
+      background: transparent;
       border-color: inherit;
     }
     body.paper-mode .sheet-verify,
     body.white-mode .sheet-verify {
-      background: rgba(247, 241, 228, 0.86);
+      background: transparent;
     }
-    body.white-mode .sheet-verify { background: #ffffff; border-color: #e5e5e5; }
+    body.white-mode .sheet-verify { background: transparent; }
     body.paper-mode .sheet-verify-card,
     body.white-mode .sheet-verify-card {
-      background: rgba(255, 250, 236, 0.7);
+      background: transparent;
+      border-bottom-color: rgba(138, 100, 20, 0.18);
     }
-    body.white-mode .sheet-verify-card { background: #fafafa; }
+    body.white-mode .sheet-verify-card { background: transparent; border-bottom-color: rgba(0, 0, 0, 0.08); }
 
-    /* Linear flow map — one vertical path through the sitting's argument */
+    /* Linear flow map — slim numbered lines in the reading river */
     .sheet-flow {
-      margin: 2.5rem 0 0;
-      padding: 1.35rem 1.4rem 1.5rem;
-      border: 1px solid rgba(197, 155, 39, 0.38);
-      border-radius: 14px;
-      background: rgba(15, 14, 13, 0.55);
+      margin: 2.6rem 0 0;
+      padding: 1.15rem 0 0.3rem;
+      border: 0;
+      border-top: 1px solid rgba(197, 155, 39, 0.4);
+      border-radius: 0;
+      background: transparent;
     }
     .flow-kicker {
       font-family: "JetBrains Mono", monospace;
@@ -158,64 +164,38 @@
     }
     .flow-heading {
       font-family: Newsreader, Georgia, serif;
-      font-size: 1.45rem;
-      color: #f4ead4;
-      margin: 0 0 1rem;
+      font-size: 1.3rem;
+      color: inherit;
+      margin: 0 0 0.85rem;
     }
     .flow-list {
       list-style: none;
       margin: 0;
       padding: 0;
-      position: relative;
-    }
-    .flow-list::before {
-      content: "";
-      position: absolute;
-      left: 16px;
-      top: 12px;
-      bottom: 14px;
-      width: 2px;
-      background: linear-gradient(180deg, #c59b27 0%, rgba(197, 155, 39, 0.18) 100%);
     }
     .flow-step {
-      position: relative;
       display: flex;
-      gap: 0.95rem;
-      padding: 0 0 1.05rem;
+      gap: 0.9rem;
+      padding: 0 0 0.9rem;
     }
-    .flow-step:last-child { padding-bottom: 0; }
+    .flow-step:last-child { padding-bottom: 0.1rem; }
     .flow-marker {
       flex: none;
-      width: 34px;
-      height: 34px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      min-width: 1.5rem;
+      text-align: right;
       font-family: "JetBrains Mono", monospace;
-      font-size: 0.82rem;
+      font-size: 0.85rem;
       font-weight: 700;
-      color: #f4ead4;
-      background: #2a2318;
-      border: 2px solid #c59b27;
-      position: relative;
-      z-index: 1;
+      color: #c9a227;
+      padding-top: 0.2rem;
     }
-    .flow-step-anchor .flow-marker {
-      background: #c59b27;
-      color: #1c1610;
-    }
+    .flow-step-anchor .flow-marker { color: #f4ead4; }
     .flow-body {
       flex: 1;
       min-width: 0;
-      border: 1px solid rgba(197, 155, 39, 0.24);
-      border-radius: 10px;
-      padding: 0.7rem 0.95rem 0.8rem;
-      background: rgba(12, 10, 8, 0.28);
       word-break: break-word;
       overflow-wrap: break-word;
     }
-    .flow-step-anchor .flow-body { border-color: rgba(197, 155, 39, 0.55); }
     .flow-head {
       display: flex;
       flex-wrap: wrap;
@@ -225,63 +205,49 @@
     }
     .flow-title {
       font-family: Newsreader, Georgia, serif;
-      font-size: 1.08rem;
+      font-size: 1.12rem;
       font-weight: 600;
     }
+    .flow-step-anchor .flow-title { color: #c9a227; }
+    .flow-ref { white-space: nowrap; }
     .flow-kind {
       font-family: "JetBrains Mono", monospace;
       font-size: 9.5px;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      white-space: nowrap;
     }
-    .flow-kind-scripture { color: #c9a227; }
     .flow-kind-history { color: #9aa7b0; }
     .flow-kind-guard { color: #93b98a; }
     .flow-kind-anchor { color: #f4ead4; }
     .flow-text {
-      font-size: 0.93rem;
-      line-height: 1.55;
-      margin: 0.3rem 0 0.5rem;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin: 0.15rem 0 0;
       opacity: 0.92;
     }
     .flow-tag {
-      display: inline-block;
       font-family: "JetBrains Mono", monospace;
       font-size: 10px;
       letter-spacing: 0.04em;
       color: #c9a227;
-      padding: 2px 9px;
-      border: 1px solid rgba(197, 155, 39, 0.35);
-      border-radius: 999px;
       opacity: 0.9;
     }
-    body.paper-mode .sheet-flow,
-    body.white-mode .sheet-flow {
-      background: rgba(247, 241, 228, 0.86);
-    }
-    body.white-mode .sheet-flow { background: #ffffff; border-color: #e5e5e5; }
-    body.paper-mode .flow-heading,
-    body.white-mode .flow-heading { color: #3d3421; }
-    body.paper-mode .flow-body,
-    body.white-mode .flow-body { background: rgba(255, 250, 236, 0.7); }
-    body.white-mode .flow-body { background: #fafafa; }
+    body.paper-mode .flow-kicker,
+    body.white-mode .flow-kicker { color: #8a6414; }
     body.paper-mode .flow-marker,
-    body.white-mode .flow-marker { background: #f3ead2; color: #6b5310; }
+    body.white-mode .flow-marker { color: #8a6414; }
     body.paper-mode .flow-step-anchor .flow-marker,
-    body.white-mode .flow-step-anchor .flow-marker { background: #c59b27; color: #fffdf6; }
+    body.white-mode .flow-step-anchor .flow-marker { color: #3f3421; }
+    body.paper-mode .flow-step-anchor .flow-title,
+    body.white-mode .flow-step-anchor .flow-title { color: #8a6414; }
+    body.paper-mode .flow-kind-anchor,
+    body.white-mode .flow-kind-anchor { color: #3f3421; }
     body.paper-mode .flow-kind-history,
     body.white-mode .flow-kind-history { color: #5c6b73; }
     body.paper-mode .flow-kind-guard,
     body.white-mode .flow-kind-guard { color: #4d7a44; }
-    body.paper-mode .flow-kicker,
-    body.white-mode .flow-kicker { color: #8a6414; }
-    body.paper-mode .flow-kind-scripture,
-    body.white-mode .flow-kind-scripture { color: #8a6414; }
-    body.paper-mode .flow-kind-anchor,
-    body.white-mode .flow-kind-anchor { color: #6b5310; }
     body.paper-mode .flow-tag,
-    body.white-mode .flow-tag { color: #8a6414; border-color: rgba(138, 100, 20, 0.4); }
+    body.white-mode .flow-tag { color: #8a6414; }
 
     .study-path {
       margin: 2.75rem 0 0;
@@ -522,11 +488,12 @@
 
     /* Strong's Hebrew Tooltip Styles */
     .first-principles {
-      margin: 1.6rem 0 1.85rem;
-      padding: 1.05rem 1.15rem 1.15rem;
-      border: 1px solid rgba(197, 155, 39, 0.42);
-      border-radius: 12px;
-      background: rgba(28, 22, 14, 0.38);
+      margin: 2.1rem 0 2rem;
+      padding: 1.05rem 0 0;
+      border: 0;
+      border-top: 1px solid rgba(197, 155, 39, 0.45);
+      border-radius: 0;
+      background: transparent;
       word-break: break-word;
       overflow-wrap: break-word;
     }
@@ -553,9 +520,10 @@
     .first-principles li { margin: 0.45rem 0; }
     body.paper-mode .first-principles,
     body.white-mode .first-principles {
-      background: rgba(247, 241, 228, 0.9);
+      background: transparent;
+      border-top-color: rgba(138, 100, 20, 0.5);
     }
-    body.white-mode .first-principles { background: #fafafa; border-color: #e5e5e5; }
+    body.white-mode .first-principles { border-top-color: rgba(0, 0, 0, 0.12); }
 
     .from-last-sitting {
       margin: 0 0 1.5rem;
@@ -2523,7 +2491,7 @@
     <section id="sheet-flow" class="sheet-flow" hidden></section>
 
     <!-- Connective Lesson Bar (Map and 3D Gallery) -->
-    <section id="lesson-connect" class="lesson-connect my-8 p-4 sm:p-5 rounded-xl border border-amber-600/40 bg-paper-100/80 dark:bg-paper-900/60 backdrop-blur-xs flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4">
+    <section id="lesson-connect" class="lesson-connect my-8 py-4 border-y border-amber-600/25 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4">
       <div class="flex flex-col gap-1">
         <span class="font-mono text-[10px] uppercase tracking-widest text-amber-800 dark:text-amber-400 font-semibold flex items-center gap-1.5">
           <span class="w-2 h-2 rounded-full bg-amber-600 dark:bg-amber-400"></span>
@@ -2547,7 +2515,7 @@
     <aside id="sheet-study-path" class="study-path" hidden></aside>
 
     <!-- Gold Christology Plaque -->
-    <section id="sheet-christology" class="sheet-christology mt-10 p-6 sm:p-8 rounded-xl border-2 border-amber-600/50 dark:border-amber-500/50 bg-paper-100/90 dark:bg-paper-950/80 shadow-md" hidden>
+    <section id="sheet-christology" class="sheet-christology mt-12 pt-7 border-t border-amber-600/40" hidden>
       <div class="flex flex-wrap items-center justify-between gap-2 mb-3 pb-3 border-b border-amber-600/20 dark:border-amber-500/20">
         <span class="font-mono text-xs uppercase tracking-widest text-amber-800 dark:text-amber-400 font-bold flex items-center gap-2">
           <span class="inline-block w-2 h-2 rounded-full bg-amber-600 dark:bg-amber-400"></span>
@@ -2559,7 +2527,7 @@
       <div class="christology-body space-y-4 font-serif text-base sm:text-lg leading-relaxed text-ink-800 dark:text-paper-200" id="christology-body"></div>
     </section>
 
-    <aside id="sheet-recap" class="mt-10 p-5 rounded-xl border border-amber-600/30 bg-paper-100/80 dark:bg-paper-950/50">
+    <aside id="sheet-recap" class="mt-12 pt-7 border-t border-amber-600/40">
       <p class="font-mono text-[10px] uppercase tracking-widest text-amber-800 dark:text-amber-400 mb-2">End of sheet recap</p>
       <h3 class="font-serif text-xl text-ink-900 dark:text-paper-100 mb-2" id="recap-title"></h3>
       <p class="text-sm text-ink-700 dark:text-paper-300" id="recap-body"></p>

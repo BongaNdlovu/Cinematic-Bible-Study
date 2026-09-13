@@ -52,7 +52,7 @@
     const t2Done = isTaskComplete(0, 'task2');
 
     container.innerHTML = `
-      <div class="workbench-card p-6 rounded-2xl bg-paper-100/90 dark:bg-paper-900/80 border-2 border-amber-600/40 shadow-lg mb-8 font-sans">
+      <div class="workbench-card p-6 rounded-xl bg-transparent border border-amber-600/25 mb-8 font-sans">
         <div class="flex items-center justify-between border-b border-paper-300 dark:border-paper-800 pb-4 mb-6">
           <div class="flex items-center gap-3">
             <span class="px-2.5 py-1 rounded bg-amber-600 text-paper-50 font-mono text-xs font-bold uppercase tracking-wider">Active Proof Gate</span>
@@ -239,7 +239,7 @@
     const t2Done = isTaskComplete(1, 'task2');
 
     container.innerHTML = `
-      <div class="workbench-card p-6 rounded-2xl bg-paper-100/90 dark:bg-paper-900/80 border-2 border-amber-600/40 shadow-lg mb-8 font-sans">
+      <div class="workbench-card p-6 rounded-xl bg-transparent border border-amber-600/25 mb-8 font-sans">
         <div class="flex items-center justify-between border-b border-paper-300 dark:border-paper-800 pb-4 mb-6">
           <div class="flex items-center gap-3">
             <span class="px-2.5 py-1 rounded bg-amber-600 text-paper-50 font-mono text-xs font-bold uppercase tracking-wider">Active Proof Gate</span>
@@ -409,7 +409,7 @@
     const t2Done = isTaskComplete(2, 'task2');
 
     container.innerHTML = `
-      <div class="workbench-card p-6 rounded-2xl bg-paper-100/90 dark:bg-paper-900/80 border-2 border-amber-600/40 shadow-lg mb-8 font-sans">
+      <div class="workbench-card p-6 rounded-xl bg-transparent border border-amber-600/25 mb-8 font-sans">
         <div class="flex items-center justify-between border-b border-paper-300 dark:border-paper-800 pb-4 mb-6">
           <div class="flex items-center gap-3">
             <span class="px-2.5 py-1 rounded bg-amber-600 text-paper-50 font-mono text-xs font-bold uppercase tracking-wider">Active Proof Gate</span>
