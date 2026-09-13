@@ -18,9 +18,9 @@
             The year is 605 B.C. Jerusalem is not yet a ruin — the Temple still stands — but Judah has already lost a first round of young nobles and sacred vessels to Babylon. Those captives walk hundreds of miles toward the Ishtar Gate, its cobalt bricks gleaming in the sun, while cups from Yahweh’s house sit in the treasury of Marduk. To anyone watching with human eyes alone, Babylon appears to have defeated the God of Israel, and the future of Judah looks closed.
           </p>
           <div class="first-principles">
-            <p class="first-principles-kicker">First principles &bull; 605, not 586</p>
+            <p class="first-principles-kicker">First principles &bull; Establishing the chronology</p>
             <p>
-              Daniel 1:1 dates this first deportation to “the third year of Jehoiakim.” Jehoiakim began to reign about 609 B.C.; his third year is 605, the year Nebuchadnezzar beat Egypt at Carchemish and then pressed Judah. The Temple itself is burned in 586 B.C. (2 Kings 25). A Babylonian tablet (BM 21946) records a later capture of “the city of Judah” in 597 — Jehoiachin, not this first levy. This sitting starts at 605 because that is Daniel’s own opening date, not because every siege is being collapsed into one night.
+              Establishing the chronology requires distinguishing the 605 BC campaign from the catastrophe of 586 BC. Daniel 1:1 dates this initial levy to ‘the third year of Jehoiakim.’ Under Babylonian accession-year reckoning from his enthronement in 609 BC, this points directly to 605 BC—the year Nebuchadnezzar prevailed at Carchemish and asserted dominion over Judah. This event must not be conflated with the subsequent capitulation of Jerusalem under Jehoiachin in 597 BC (attested in BM 21946) or the burning of the Temple in 586 BC (2 Kings 25). The narrative begins in 605 BC to honor Daniel’s opening chronological datum, rather than conflating multiple sieges into one.
             </p>
           </div>
           <p>

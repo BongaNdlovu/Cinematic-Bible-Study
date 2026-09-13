@@ -1432,6 +1432,21 @@
       }
     }
 
+    function hasCompletedCourse() {
+      return sheetsData.every((_, i) => completedSheets.has(i));
+    }
+
+    function syncCertificateCta() {
+      const btn = document.getElementById('btn-download-certificate');
+      if (!btn) return;
+      btn.hidden = !hasCompletedCourse();
+    }
+
+    function openCertificateIfReady() {
+      if (!hasCompletedCourse() || !window.StudyCertificate) return;
+      window.StudyCertificate.open();
+    }
+
     function renderToc() {
       const list = document.getElementById('toc-unit-list');
       list.innerHTML = '';
@@ -1485,6 +1500,7 @@
       const pct = Math.round((completedSheets.size / sheetsData.length) * 100);
       document.getElementById('toc-mastery-percent').innerText = `${pct}%`;
       document.getElementById('toc-mastery-bar').style.width = `${pct}%`;
+      syncCertificateCta();
     }
 
     /* =========================================================================
@@ -2272,7 +2288,8 @@
         showToast('Unit mastered! Advancing to ' + (window.BAJourney ? window.BAJourney.sheetLabel(currentSheetIndex) : ('sheet ' + (currentSheetIndex + 1))) + '.');
       } else {
         showToast("Congratulations! You have mastered the entire Historicist Scroll of Daniel!");
-        toggleTocDrawer();
+        syncCertificateCta();
+        openCertificateIfReady();
       }
     }
 
@@ -2411,6 +2428,9 @@
       const accessPreview = document.getElementById('access-preview-btn');
       if (accessReturn) accessReturn.addEventListener('click', returnToFreeStudy);
       if (accessPreview) accessPreview.addEventListener('click', enableTesterPreview);
+      const certBtn = document.getElementById('btn-download-certificate');
+      if (certBtn) certBtn.addEventListener('click', openCertificateIfReady);
+      syncCertificateCta();
       applyFontSize();
       applyTheme(currentThemeIdx, true);
       if (TEMP_REVIEW_UNLOCK) {
