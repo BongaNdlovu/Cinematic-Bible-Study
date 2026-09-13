@@ -44,9 +44,9 @@
             During the 25 sessions of the Council of Trent (1545–1563), the Roman Catholic hierarchy recognized that the Protestant prophetic charge was unanswerable under historicist hermeneutics. To dismantle this continuous chain, two Spanish Jesuit scholars published radical alternative systems that removed the medieval and modern church from prophetic scrutiny:
           </p>
           <div class="first-principles">
-            <p class="first-principles-kicker">First principles &bull; Why new “schools” appear after Trent</p>
+            <p class="first-principles-kicker">First principles &bull; Novel schools after Trent</p>
             <p>
-              If Daniel’s horn is a church-state in Rome, then the living medieval church sits inside the prophecy. A council cannot delete Daniel 7. It can fund other ways to <em>place</em> the horn: all in the past (Alcázar), or all in a future man (Ribera). That is not a conspiracy cartoon. It is pastoral self-defense with a commentary. You still have to test those placements against Daniel 2:38 and 9:24–27. If they break the named head or the week that lands on Messiah, they are not safer readings. They are exits.
+              The emergence of novel prophetic schools after Trent was an exercise in institutional preservation rather than deliberate conspiracy. Because the Reformation's historicist reading situated the papal-monarchical system directly within Daniel 7, Rome faced an urgent hermeneutical crisis. Unable to alter the canon, Jesuit scholarship developed rival trajectories: Luis de Alcázar localized fulfillment in classical antiquity, while Francisco Ribera deferred it to an eschatological future. However, both systems must be evaluated against the internal anchors of Daniel 2:38 and 9:24–27. When an interpretive model fractures the explicit succession of empires or dislocates the 70th week from Messiah, it ceases to be a viable reading; it functions merely as an exegetical exit.
             </p>
           </div>
           <div class="my-6 p-5 rounded-lg bg-paper-200/60 dark:bg-paper-900 border border-paper-300 dark:border-paper-800 font-sans text-sm space-y-4">
