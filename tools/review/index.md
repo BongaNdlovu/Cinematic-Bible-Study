@@ -7,6 +7,20 @@ reports is resolved in the lesson data (`js/study/sheets-data.js`, `js/study/she
 verification, including the two Newton quotations that were checked verbatim against the Gutenberg
 text. Reports are one file per sitting; rows marked **FIXED** record what changed.
 
+**Quarterly citation pass (2026-09-14).** After analyzing the BRI-authored Adult Bible Study Guide,
+*Daniel* (1st Quarter 2020) — see [`2020-q1-sabbath-school.md`](2020-q1-sabbath-school.md) — four
+open findings were closed with it as the named source and five enrichments were added to the course
+data, all in the course's own words:
+
+- **Citations added:** sitting 7 bear-ribs (= Lydia, Babylon, Egypt — ABSG week 8); sitting 8
+  two-phase Rome (now quotes SDABC 4:841 and cites ABSG week 9); sitting 9 A.D. 34 (ABSG week 10
+  prints the same dating); sitting 10 A.D. 508 (ABSG week 13 reads both spans from 508).
+- **Enrichments added:** sitting 1 — Shinar/Babel (Gen 11:2) and the 1:21 Cyrus homecoming hint;
+  sitting 2 — Isa 14:4 "golden city" + Herodotus for gold=Babylon; sitting 3 — the 1 Cor 15
+  deliverance guard rail (the final rescue is the resurrection); sitting 6 — Diodorus Siculus on
+  Darius III as a second extra-biblical witness for Medo-Persian irrevocability; sitting 8 — the
+  ram and goat as the two Day-of-Atonement animals (Lev 16), pointing at nitsdaq.
+
 ## Coverage
 
 ```
