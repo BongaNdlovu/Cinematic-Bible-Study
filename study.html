@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth dark">
+<html lang="en" class="scroll-smooth">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -1240,6 +1240,11 @@
       transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
       z-index: 1;
     }
+    .horizon-card.is-locked {
+      opacity: 0.42;
+      cursor: not-allowed;
+      filter: grayscale(0.35);
+    }
     .horizon-card img {
       width: 100%;
       height: 100%;
@@ -2044,7 +2049,7 @@
   <script type="module" src="js/study/stage.js"></script>
 </head>
 
-<body class="charcoal-mode bg-paper-950 text-paper-100 font-sans transition-colors duration-200 selection:bg-amber-900 min-h-screen flex flex-col justify-between relative overflow-x-hidden">
+<body class="paper-mode bg-paper-50 text-ink-900 font-sans transition-colors duration-200 selection:bg-amber-200 min-h-screen flex flex-col justify-between relative overflow-x-hidden">
 
   <div class="cinematic-atmosphere" aria-hidden="true">
     <img class="atm-hero" src="assets/study/hero-cinematic.jpg" alt="Atmospheric background - Daniel study hero" aria-hidden="true">
@@ -2052,10 +2057,8 @@
     <img class="atm-statue" src="assets/study/statue-nebuchadnezzar.jpg" alt="Atmospheric background - Statue of Nebuchadnezzar" aria-hidden="true">
   </div>
 
-  <!-- Atmospheric Focus Layers: charcoal texture, moving weather and flashlight cursor -->
+  <!-- Atmospheric Focus Layer: moving weather canvas -->
   <canvas id="weather-canvas" class="weather-canvas opacity-0"></canvas>
-  <div id="flashlight-overlay" aria-hidden="true"></div>
-  <div id="flashlight-cursor" aria-hidden="true"></div>
 
   <div id="sitting-guide" class="sitting-guide" hidden role="dialog" aria-modal="true" aria-labelledby="sitting-guide-title">
     <div class="sitting-guide-card">
@@ -2066,22 +2069,6 @@
       <div class="sitting-guide-actions">
         <button type="button" id="sitting-guide-primary" class="px-5 py-2.5 rounded bg-amber-600 text-paper-50 font-sans text-sm font-semibold">Begin this sitting</button>
         <button type="button" id="sitting-guide-skip" class="px-4 py-2.5 rounded border border-amber-600/40 text-amber-200 font-sans text-sm">Don't show again this sitting</button>
-      </div>
-    </div>
-  </div>
-
-  <div id="access-panel" class="access-panel" hidden role="dialog" aria-modal="true" aria-labelledby="access-title">
-    <div class="sitting-guide-card">
-      <small>Student Beta Access</small>
-      <h2 id="access-title">Student Beta Curriculum: Units 3–10 Unlocked</h2>
-      <p>You have finished the foundational sitting: the battle of hermeneutics, the exilic covenant boundary, and the contiguous chain of four metals. The rest of the prophetic scroll—Dura, the four beasts, the little horn, the seventy weeks, the 2,300 days, and Michael standing—is now accessible in active Student Beta Preview.</p>
-      <p>All study guides, quizzes, historical timeline epochs, interactive map coordinates, and 3D scenes are completely functional across Units 3 through 10.</p>
-      <p>Continue with Google to remember who you are. Sittings stay open during review.</p>
-      <div class="sitting-guide-actions">
-        <span class="auth-slot" data-auth-slot data-auth-variant="access"></span>
-        <button type="button" id="access-preview-btn" class="px-5 py-2.5 rounded bg-amber-600 text-paper-50 font-sans text-sm font-semibold">Enter Student Beta Preview (Units 3–10)</button>
-        <button type="button" id="access-return-btn" class="px-4 py-2.5 rounded border border-amber-600/40 text-amber-200 font-sans text-sm">Review Foundations (Units 0–2)</button>
-        <button type="button" id="access-unlock-btn" class="hidden px-5 py-2.5 rounded border border-amber-600/40 text-amber-200 font-sans text-sm btn-disabled" disabled title="Checkout is not live yet">Unlock the full scroll</button>
       </div>
     </div>
   </div>
@@ -2132,7 +2119,7 @@
         </div>
       </div>
 
-      <!-- Controls: Competency, charcoal torch, atmosphere, type, theme -->
+      <!-- Controls: Competency, atmosphere, type, theme -->
       <div class="study-tools">
         <span class="auth-slot" data-auth-slot data-auth-variant="study"></span>
         <span id="header-competency-pill" class="header-competency-pill" title="Current learning competency">
@@ -2140,12 +2127,8 @@
           <span id="header-competency-text">Verifying the Prophetic Year-Day Metric</span>
         </span>
 
-        <button type="button" id="btn-header-torch" class="header-read-btn" data-need="charcoal" onclick="toggleFlashlightBeam()" title="Charcoal torch: dim the desk and light a moving beam">
-          🔦 Torch
-        </button>
-
         <!-- Consolidated Desk Atmosphere Drawer Trigger -->
-        <button onclick="togglePomodoroDrawer()" id="btn-atmosphere-toggle" class="flex items-center space-x-1.5 px-2.5 py-1 rounded-md border border-amber-600/40 bg-amber-500/10 text-amber-900 dark:text-amber-300 font-mono text-xs hover:bg-amber-500/20 transition-colors" title="Desk Atmosphere: Weather, Timer, Sounds">
+        <button onclick="togglePomodoroDrawer()" id="btn-atmosphere-toggle" class="flex items-center space-x-1.5 px-2.5 py-1 rounded-md border border-amber-600/40 bg-amber-500/10 text-amber-900 dark:text-amber-300 font-mono text-xs hover:bg-amber-500/20 transition-colors" title="Desk Atmosphere: Weather and Timer">
           <span class="relative flex h-2 w-2">
             <span id="pomo-ping" class="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-500 opacity-75 hidden"></span>
             <span id="pomo-dot" class="relative inline-flex rounded-full h-2 w-2 bg-amber-600"></span>
@@ -2164,7 +2147,7 @@
 
         <!-- Theme Mode Cycler -->
         <button onclick="cycleTheme()" id="theme-btn" class="p-1.5 rounded hover:bg-paper-200/60 dark:hover:bg-paper-900 text-xs font-mono text-ink-700 dark:text-paper-300" title="Toggle Theme">
-          <span id="theme-icon">🌑 Charcoal</span>
+          <span id="theme-icon">☀️ Paper</span>
         </button>
       </div>
     </div>
@@ -2182,14 +2165,6 @@
       </div>
     </div>
 
-    <!-- Reading Surface Beam Opt-In -->
-    <div class="mb-3 p-2 rounded-xl bg-paper-100/60 dark:bg-paper-950/60 border border-paper-200 dark:border-paper-800 flex items-center justify-between text-xs font-mono">
-      <span class="text-ink-600 dark:text-paper-300 text-[11px]">Flashlight Focus Beam</span>
-      <button type="button" onclick="toggleFlashlightBeam()" id="flashlight-toggle-btn" class="px-2.5 py-1 rounded border border-paper-300 dark:border-paper-700 hover:border-amber-500 text-[10px] text-ink-700 dark:text-paper-300 transition-colors">
-        Beam: <span id="flashlight-status-text" class="font-bold text-amber-700 dark:text-amber-400">Off</span>
-      </button>
-    </div>
-
     <!-- Focus Atmosphere Selector -->
     <div class="mb-3 p-2 rounded-xl bg-paper-100/60 dark:bg-paper-950/60 border border-paper-200 dark:border-paper-800">
       <div class="flex items-center justify-between text-[10px] font-mono mb-1.5">
@@ -2197,7 +2172,7 @@
         <span id="pomo-weather-status" class="font-bold text-amber-700 dark:text-amber-400">Quiet • Charcoal</span>
       </div>
       <div class="grid grid-cols-5 gap-1 text-[10px] font-mono text-center">
-        <button onclick="setWeatherPreset('quiet')" id="weather-btn-quiet" class="weather-pill py-1 rounded bg-paper-200/60 dark:bg-paper-800 text-ink-700 dark:text-paper-300 hover:bg-amber-500/10 transition-all" title="Still air, charcoal dusk">Quiet</button>
+        <button onclick="setWeatherPreset('quiet')" id="weather-btn-quiet" class="weather-pill py-1 rounded bg-paper-200/60 dark:bg-paper-800 text-ink-700 dark:text-paper-300 hover:bg-amber-500/10 transition-all" title="Still air">Quiet</button>
         <button onclick="setWeatherPreset('building')" id="weather-btn-building" class="weather-pill py-1 rounded bg-paper-200/60 dark:bg-paper-800 text-ink-700 dark:text-paper-300 hover:bg-amber-500/10 transition-all" title="Rising wind, gathering cloud">Building</button>
         <button onclick="setWeatherPreset('storm')" id="weather-btn-storm" class="weather-pill py-1 rounded bg-paper-200/60 dark:bg-paper-800 text-ink-700 dark:text-paper-300 hover:bg-amber-500/10 transition-all" title="Rain, wind, and lightning">Storm</button>
         <button onclick="setWeatherPreset('sunshine')" id="weather-btn-sunshine" class="weather-pill py-1 rounded bg-paper-200/60 dark:bg-paper-800 text-ink-700 dark:text-paper-300 hover:bg-amber-500/10 transition-all" title="Clearing skies and warm sun">Sun</button>
@@ -2239,9 +2214,6 @@
         </button>
         <button onclick="resetPomodoro()" class="px-3 py-2 rounded-lg border border-paper-300 dark:border-paper-700 hover:bg-paper-200 dark:hover:bg-paper-800 text-ink-600 dark:text-paper-400 transition-all">
           ↺
-        </button>
-        <button onclick="toggleAmbientAudio()" id="ambient-audio-btn" class="px-2.5 py-2 rounded-lg border border-paper-300 dark:border-paper-700 hover:bg-paper-200 dark:hover:bg-paper-800 text-ink-600 dark:text-paper-400 transition-all text-xs" title="Toggle rain, wind, and thunder">
-          🔇
         </button>
       </div>
 
@@ -2530,6 +2502,9 @@
         <a id="btn-lesson-gallery" href="gallery.html" class="lesson-connect-btn inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg border border-amber-600/50 text-amber-800 dark:text-amber-300 hover:bg-amber-500/10 hover:border-amber-500 transition-colors font-mono text-xs font-semibold text-center w-full sm:w-auto">
           <span>🏛️</span> <span>View this sitting’s 3D artifact</span> &rarr;
         </a>
+        <button type="button" id="btn-lesson-share" class="lesson-connect-btn inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg border border-amber-600/50 text-amber-800 dark:text-amber-300 hover:bg-amber-500/10 hover:border-amber-500 transition-colors font-mono text-xs font-semibold text-center w-full sm:w-auto">
+          <span>↗</span> <span>Share this sitting</span>
+        </button>
       </div>
     </section>
 
@@ -2596,9 +2571,6 @@
 
           <button onclick="completeAndAdvance()" id="next-sheet-btn" class="w-full sm:w-auto px-7 py-3.5 rounded-lg bg-ink-900 dark:bg-paper-100 hover:bg-black dark:hover:bg-white text-paper-50 dark:text-ink-900 font-sans font-semibold text-sm shadow-md transition-all flex items-center justify-center space-x-2">
             <span id="next-btn-text">Continue to Sheet 1 &rarr;</span>
-          </button>
-          <button type="button" onclick="openAccessPanel()" id="access-open-btn" hidden class="w-full sm:w-auto px-7 py-3.5 rounded-lg bg-ink-900 dark:bg-paper-100 text-paper-50 dark:text-ink-900 font-sans font-semibold text-sm shadow-md">
-            See what comes after Daniel 2
           </button>
         </div>
 

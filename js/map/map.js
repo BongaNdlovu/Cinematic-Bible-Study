@@ -128,6 +128,27 @@
   function mount(root, options) {
     const opts = options || {};
     const cinematic = opts.mode !== "embed";
+    function yearOpen(id) {
+      if (!cinematic || !id) return true;
+      if (!window.BAJourney || typeof window.BAJourney.canAccessYear !== "function") return true;
+      return window.BAJourney.canAccessYear(id);
+    }
+    function nodeOpen(id) {
+      if (!cinematic || !id) return true;
+      if (!window.BAJourney || typeof window.BAJourney.canAccessMapNode !== "function") return true;
+      return window.BAJourney.canAccessMapNode(id);
+    }
+    function firstOpenYear() {
+      const hit = DATA.epochs.find((e) => yearOpen(e.id));
+      return hit ? hit.id : DATA.epochs[0].id;
+    }
+    function clampSheetIndex(n) {
+      if (n == null || Number.isNaN(Number(n))) return n;
+      if (window.BAJourney && typeof window.BAJourney.clampToAccessible === "function") {
+        return window.BAJourney.clampToAccessible(Number(n));
+      }
+      return Number(n);
+    }
     const state = {
       yearId: opts.year || DATA.epochs[0].id,
       polities: null,
@@ -147,9 +168,9 @@
       overlayOpacity: 1,
       routeLayer: null,
       compareEl: null,
-      sheetIndex: opts.sheetIndex != null
+      sheetIndex: clampSheetIndex(opts.sheetIndex != null
         ? opts.sheetIndex
-        : (opts.sheet != null && /^\d+$/.test(String(opts.sheet).trim()) ? Number(String(opts.sheet).trim()) : null)
+        : (opts.sheet != null && /^\d+$/.test(String(opts.sheet).trim()) ? Number(String(opts.sheet).trim()) : null))
     };
     let mapReady = false;
     let queuedSheet = null;
@@ -221,7 +242,10 @@
       const src = iconSrc(ep.metal);
       const b = el("button", { class: "cmap-year", type: "button", role: "tab", "data-year": ep.id, title: ep.title },
         "<img src='" + src + "' alt=''><span>" + ep.label + "</span>");
-      b.addEventListener("click", () => setYear(ep.id, { animate: true, chapter: cinematic }));
+      b.addEventListener("click", () => {
+        if (!yearOpen(ep.id)) return;
+        setYear(ep.id, { animate: true, chapter: cinematic });
+      });
       track.appendChild(b);
     });
     const playBtn = el("button", { class: "cmap-play", type: "button", title: "Play the chronicle", "aria-label": "Play the chronicle" }, "▶");
@@ -256,9 +280,10 @@
       const fromLesson = (opts && opts.from === "lesson") || urlParams.get("from") === "lesson";
       const sheetParam = (opts && opts.sheet !== undefined && opts.sheet !== null) ? opts.sheet : urlParams.get("sheet");
       const isValidSheet = (s) => s !== null && s !== undefined && /^\d+$/.test(String(s).trim()) && Number(s) >= 0 && Number(s) <= 10;
-      const backHref = (fromLesson && isValidSheet(sheetParam)) ? `study.html?sheet=${encodeURIComponent(String(sheetParam).trim())}#sheet-article` : "study.html";
-      const backLabel = (fromLesson && isValidSheet(sheetParam)) ? "← Back to this lesson" : "← Study desk";
-      const galleryHref = (fromLesson && isValidSheet(sheetParam)) ? `gallery.html?from=lesson&sheet=${encodeURIComponent(String(sheetParam).trim())}` : "gallery.html";
+      const sheetSafe = (fromLesson && isValidSheet(sheetParam)) ? String(clampSheetIndex(sheetParam)) : null;
+      const backHref = sheetSafe ? `study.html?sheet=${encodeURIComponent(sheetSafe)}#sheet-article` : "study.html";
+      const backLabel = sheetSafe ? "← Back to this lesson" : "← Study desk";
+      const galleryHref = sheetSafe ? `gallery.html?from=lesson&sheet=${encodeURIComponent(sheetSafe)}` : "gallery.html";
 
       chrome = el("header", { class: "cmap-chrome" });
       chrome.innerHTML = `
@@ -598,6 +623,7 @@
     }
 
     function openItemById(id) {
+      if (!nodeOpen(id)) return;
       const found = findMapItem(id);
       if (!found) return;
       openDossier(markerCopy(found.item, found.isEvent));
@@ -621,6 +647,7 @@
     }
 
     function addLeafletMarker(item, isEvent, ep) {
+      if (!nodeOpen(item.id)) return;
       const lesson = isLessonId(item.id);
       const hot = lesson || (isEvent ? item.yearId === ep.id : (item.pulse || []).includes(ep.id));
       if (isEvent && !hot && !cinematic) return;
@@ -642,6 +669,7 @@
     }
 
     function addGoogleMarker(item, isEvent, ep) {
+      if (!nodeOpen(item.id)) return;
       const lesson = isLessonId(item.id);
       const hot = lesson || (isEvent ? item.yearId === ep.id : (item.pulse || []).includes(ep.id));
       if (isEvent && !hot && !cinematic) return;
@@ -828,7 +856,11 @@
       cartouche.querySelector("strong").textContent = ep.label;
       cartouche.querySelector("span").textContent = ep.kicker;
       track.querySelectorAll(".cmap-year").forEach((b) => {
+        const open = yearOpen(b.dataset.year);
         b.classList.toggle("active", b.dataset.year === ep.id);
+        b.classList.toggle("is-locked", !open);
+        b.disabled = !open;
+        b.setAttribute("aria-disabled", open ? "false" : "true");
       });
       stone.style.opacity = String(ep.stone || 0);
       root.classList.toggle("is-stone-world", Number(ep.stone || 0) > 0.05);
@@ -838,6 +870,7 @@
         try {
           const u = new URL(location.href);
           u.searchParams.set("year", ep.id);
+          if (state.sheetIndex != null) u.searchParams.set("sheet", String(state.sheetIndex));
           history.replaceState(null, "", u.pathname + u.search);
         } catch (e) {}
       }
@@ -846,6 +879,7 @@
     }
 
     async function setYear(id, flags) {
+      if (!yearOpen(id)) id = firstOpenYear();
       const ep = epochById(id);
       const f = flags || {};
       const gen = ++state.yearGen;
@@ -864,7 +898,7 @@
 
     function applySheet(index, flags) {
       const f = flags || {};
-      state.sheetIndex = index;
+      state.sheetIndex = clampSheetIndex(index);
       const pack = sheetPack();
       const year = f.year || (pack && pack.year) || state.yearId;
       const focus = f.focusId === null ? undefined : (f.focusId || (pack && pack.focusId));
@@ -877,9 +911,9 @@
     }
 
     function setSheet(index, flags) {
-      state.sheetIndex = index;
+      state.sheetIndex = clampSheetIndex(index);
       if (!mapReady) {
-        queuedSheet = { index: index, flags: flags || {} };
+        queuedSheet = { index: state.sheetIndex, flags: flags || {} };
         return Promise.resolve();
       }
       return applySheet(index, flags);
@@ -889,8 +923,15 @@
       return DATA.epochs.findIndex((e) => e.id === state.yearId);
     }
     function stepYear(dir) {
-      const i = clamp(yearIndex() + dir, 0, DATA.epochs.length - 1);
-      setYear(DATA.epochs[i].id, { animate: true, chapter: cinematic });
+      let i = yearIndex();
+      for (let n = 0; n < DATA.epochs.length; n++) {
+        i = clamp(i + dir, 0, DATA.epochs.length - 1);
+        if (yearOpen(DATA.epochs[i].id)) {
+          setYear(DATA.epochs[i].id, { animate: true, chapter: cinematic });
+          return;
+        }
+        if (i === 0 || i === DATA.epochs.length - 1) break;
+      }
     }
     prevBtn.addEventListener("click", () => { state.playing = false; playBtn.textContent = "▶"; stepYear(-1); });
     nextBtn.addEventListener("click", () => { state.playing = false; playBtn.textContent = "▶"; stepYear(1); });
@@ -907,6 +948,7 @@
       if (i >= DATA.epochs.length - 1) i = 0;
       for (; i < DATA.epochs.length; i++) {
         if (!state.playing) break;
+        if (!yearOpen(DATA.epochs[i].id)) continue;
         await setYear(DATA.epochs[i].id, { animate: true, chapter: cinematic });
         if (!state.playing) break;
         await new Promise((r) => setTimeout(r, REDUCE ? 200 : 2600));
@@ -936,12 +978,15 @@
       if (q.length < 2) { searchHits.hidden = true; return; }
       const hits = [];
       DATA.epochs.forEach((ep) => {
+        if (!yearOpen(ep.id)) return;
         if ((ep.title + ep.label + ep.kicker).toLowerCase().indexOf(q) !== -1) hits.push({ kind: "year", id: ep.id, label: ep.label + " — " + ep.title });
       });
       DATA.cities.forEach((c) => {
+        if (!nodeOpen(c.id)) return;
         if (c.name.toLowerCase().indexOf(q) !== -1) hits.push({ kind: "city", id: c.id, year: (c.pulse && c.pulse[0]) || state.yearId, label: c.name, lat: c.lat, lon: c.lon });
       });
       DATA.events.forEach((evn) => {
+        if (!nodeOpen(evn.id)) return;
         if (evn.name.toLowerCase().indexOf(q) !== -1) hits.push({ kind: "event", id: evn.id, year: evn.yearId, label: evn.name, lat: evn.lat, lon: evn.lon });
       });
       searchHits.innerHTML = hits.slice(0, 8).map((h) => "<button type='button' data-kind='" + h.kind + "' data-id='" + h.id + "' data-year='" + (h.year || h.id) + "' data-lat='" + (h.lat || "") + "' data-lon='" + (h.lon || "") + "'>" + h.label + "</button>").join("") || "<p>No matches</p>";
@@ -994,9 +1039,14 @@
         return;
       }
       const params = new URLSearchParams(location.search);
+      if (cinematic && state.sheetIndex == null && /^\d+$/.test(String(params.get("sheet") || ""))) {
+        state.sheetIndex = clampSheetIndex(Number(params.get("sheet")));
+      }
       const eventId = params.get("event");
-      const eventItem = eventId ? DATA.events.find((e) => e.id === eventId) : null;
-      const startId = parseYearParam(opts.year || params.get("year") || (eventItem ? eventItem.yearId : null)) || state.yearId;
+      const eventRaw = eventId ? DATA.events.find((e) => e.id === eventId) : null;
+      const eventItem = (eventRaw && nodeOpen(eventRaw.id)) ? eventRaw : null;
+      let startId = parseYearParam(opts.year || params.get("year") || (eventItem ? eventItem.yearId : null)) || state.yearId;
+      if (!yearOpen(startId)) startId = firstOpenYear();
       state.yearId = epochById(startId).id;
       let base = savedBase();
       const qBase = new URLSearchParams(location.search).get("basemap");

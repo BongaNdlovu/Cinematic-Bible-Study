@@ -1340,7 +1340,7 @@
       inset: 0;
       background: radial-gradient(ellipse at 50% 40%, rgba(40, 24, 8, 0.55), rgba(0, 0, 0, 0.88));
       opacity: 0;
-      transition: opacity 0.28s ease;
+      transition: opacity 0.18s ease;
     }
     #stage-transition.out .stage-fade,
     #stage-transition.in .stage-fade { opacity: 1; }
@@ -1575,6 +1575,8 @@
     }
     .artifact-card-item.is-locked {
       opacity: 0.46;
+      pointer-events: none;
+      cursor: not-allowed;
     }
     .artifact-card-item.is-locked .artifact-name::after {
       content: "Locked path";

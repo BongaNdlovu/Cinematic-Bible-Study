@@ -19,8 +19,13 @@ import * as THREE from 'three';
     const fromLesson = urlParams.get('from') === 'lesson';
     const lessonSheetRaw = urlParams.get('sheet');
     const isValidSheet = (s) => s !== null && s !== undefined && /^\d+$/.test(String(s).trim()) && Number(s) >= 0 && Number(s) <= 10;
-    const lessonReturnHref = (fromLesson && isValidSheet(lessonSheetRaw))
-      ? `study.html?sheet=${encodeURIComponent(String(lessonSheetRaw).trim())}#sheet-article`
+    const lessonSheetSafe = (fromLesson && isValidSheet(lessonSheetRaw))
+      ? (window.BAJourney && typeof window.BAJourney.clampToAccessible === 'function'
+        ? String(window.BAJourney.clampToAccessible(Number(lessonSheetRaw)))
+        : String(lessonSheetRaw).trim())
+      : null;
+    const lessonReturnHref = lessonSheetSafe
+      ? `study.html?sheet=${encodeURIComponent(lessonSheetSafe)}#sheet-article`
       : null;
 
     const AudioBus = {
@@ -70,20 +75,17 @@ import * as THREE from 'three';
       },
       play(kind) {
         if (!this.unlocked || this.muted) return;
-        if (kind === 'tick') this.tone(880, 0.06, 'triangle', 0.03);
+        if (kind === 'tick') this.tone(880, 0.05, 'sine', 0.02);
         else if (kind === 'select') {
-          this.tone(196, 0.22, 'sine', 0.06);
-          this.tone(523, 0.18, 'triangle', 0.04, 0.04);
+          this.tone(220, 0.16, 'sine', 0.035);
+          this.tone(392, 0.12, 'sine', 0.02, 0.04);
         } else if (kind === 'whoosh') {
-          this.noise(0.22, 0.05);
-          this.tone(140, 0.28, 'sine', 0.05);
-        } else if (kind === 'glitch') {
-          this.noise(0.12, 0.07);
-          this.tone(740, 0.08, 'square', 0.025);
+          this.noise(0.18, 0.03);
+          this.tone(160, 0.22, 'sine', 0.03);
         } else if (kind === 'panel') {
-          this.tone(220, 0.12, 'triangle', 0.04);
+          this.tone(240, 0.1, 'sine', 0.025);
         } else if (kind === 'click') {
-          this.tone(420, 0.05, 'square', 0.02);
+          this.tone(520, 0.045, 'sine', 0.016);
         }
       }
     };
@@ -2481,17 +2483,6 @@ import * as THREE from 'three';
       openModal('scripture-modal');
     }
 
-    function openInsightModal() {
-      const data = ASSET_REGISTRY[activeAssetKey] || ASSET_REGISTRY.assembled;
-      const title = document.getElementById('insight-modal-title');
-      const body = document.getElementById('insight-modal-body');
-      const take = document.getElementById('insight-modal-takeaway');
-      if (title) title.textContent = `Exhibit insight · ${data.title}`;
-      if (body) body.textContent = `${data.explanation} ${data.historical}`;
-      if (take) take.textContent = data.takeaway;
-      openModal('insight-modal');
-    }
-
     function openAboutModal() {
       openModal('about-modal');
     }
@@ -2978,13 +2969,13 @@ import * as THREE from 'three';
       const narMapLink = document.getElementById('nar-map-link');
       if (!narMapLink) return;
       const y = MAP_YEAR_FOR_ASSET[key] || 'y605';
-      const lessonQuery = (fromLesson && isValidSheet(lessonSheetRaw))
-        ? `&from=lesson&sheet=${encodeURIComponent(String(lessonSheetRaw).trim())}`
+      const lessonQuery = lessonSheetSafe
+        ? `&from=lesson&sheet=${encodeURIComponent(lessonSheetSafe)}`
         : '';
       narMapLink.href = `map.html?year=${y}${lessonQuery}`;
       const mapTopLink = document.getElementById('gallery-map-link');
-      if (mapTopLink && fromLesson && isValidSheet(lessonSheetRaw)) {
-        mapTopLink.href = `map.html?year=${y}&from=lesson&sheet=${encodeURIComponent(String(lessonSheetRaw).trim())}`;
+      if (mapTopLink && lessonSheetSafe) {
+        mapTopLink.href = `map.html?year=${y}&from=lesson&sheet=${encodeURIComponent(lessonSheetSafe)}`;
       }
       if (window.BAJourney) window.BAJourney.save({ artifact: key, year: y });
     }
@@ -3010,34 +3001,45 @@ import * as THREE from 'three';
       if (take) take.textContent = data.takeaway;
     }
 
+    function assetOpen(key) {
+      const k = key === 'altar' ? 'assembled' : key;
+      if (window.BAJourney && typeof window.BAJourney.canAccessAsset === 'function') {
+        return window.BAJourney.canAccessAsset(k);
+      }
+      return k === 'assembled';
+    }
+
     function selectAsset(key, opts = {}) {
       if (key === 'altar') key = 'assembled';
       if (!Object.prototype.hasOwnProperty.call(ASSET_REGISTRY, key)) return;
+      if (!assetOpen(key)) {
+        museumToast('Finish the open sitting to view this artifact.');
+        return;
+      }
       if (!opts.instant && key !== activeAssetKey) {
         if (selectAsset._busy) return;
         selectAsset._busy = true;
         AudioBus.play('whoosh');
         const trans = document.getElementById('stage-transition');
-        if (trans) {
+        const fadeMs = reducedMotion ? 0 : 180;
+        if (trans && !reducedMotion) {
+          trans.classList.remove('glitch');
           trans.classList.add('active', 'out');
-          if (!reducedMotion) {
-            trans.classList.add('glitch');
-            AudioBus.play('glitch');
-          }
         }
         setTimeout(() => {
           selectAsset(key, { instant: true, keepAngle: opts.keepAngle || userHasAimed });
-          if (trans) {
+          if (trans && !reducedMotion) {
             trans.classList.remove('glitch', 'out');
             trans.classList.add('in');
             setTimeout(() => {
               trans.classList.remove('active', 'in');
               selectAsset._busy = false;
-            }, 300);
+            }, fadeMs);
           } else {
+            if (trans) trans.classList.remove('active', 'out', 'in', 'glitch');
             selectAsset._busy = false;
           }
-        }, reducedMotion ? 120 : 260);
+        }, fadeMs);
         return;
       }
 
@@ -3532,13 +3534,6 @@ import * as THREE from 'three';
       document.querySelectorAll('[data-mode]').forEach(b => b.classList.toggle('active', b.dataset.mode === mode));
       if (assembledContainer.visible) applyStudyModeToMeshes(assembledContainer);
       if (singleModelContainer.visible) applyStudyModeToMeshes(singleModelContainer);
-      const badge = document.getElementById('compare-badge');
-      if (badge) {
-        badge.hidden = mode === 'gold';
-        badge.textContent = mode === 'clay' ? 'Museum plaster study' : mode === 'wireframe' ? 'Wireframe scan' : mode === 'lighting' ? 'Chiaroscuro study' : '';
-      }
-      const cmp = document.getElementById('btn-museum-compare');
-      if (cmp) cmp.classList.toggle('active', mode === 'clay');
       museumToast(`Render Mode: ${mode.toUpperCase()}`);
     }
     document.querySelectorAll('[data-mode]').forEach(b => {
@@ -3566,22 +3561,37 @@ import * as THREE from 'three';
 
     // Artifact items click
     document.querySelectorAll('.artifact-card-item').forEach(item => {
-      item.addEventListener('mouseenter', () => AudioBus.play('tick'));
-      item.addEventListener('click', () => selectAsset(item.dataset.asset));
+      item.addEventListener('mouseenter', () => {
+        if (!item.classList.contains('is-locked')) AudioBus.play('tick');
+      });
+      item.addEventListener('click', () => {
+        if (item.classList.contains('is-locked')) {
+          museumToast('Finish the open sitting to view this artifact.');
+          return;
+        }
+        selectAsset(item.dataset.asset);
+      });
     });
 
     function applyJourneyUnlocks() {
-      const journey = window.BAJourney ? window.BAJourney.load() : { unlocked: [] };
-      const unlocked = journey.unlocked || [];
       document.querySelectorAll('.artifact-card-item').forEach((card) => {
-        const emp = window.BAJourney ? window.BAJourney.empireForAsset(card.dataset.asset) : null;
-        if (!emp) {
-          card.classList.remove('is-locked', 'has-sermon');
-          return;
-        }
-        const open = unlocked.indexOf(emp) !== -1;
+        const open = assetOpen(card.dataset.asset);
         card.classList.toggle('is-locked', !open);
-        card.classList.toggle('has-sermon', open);
+        card.classList.remove('has-sermon');
+        card.setAttribute('aria-disabled', open ? 'false' : 'true');
+        card.tabIndex = open ? 0 : -1;
+      });
+      document.querySelectorAll('.related-avatar').forEach((el) => {
+        const open = assetOpen(el.dataset.rel);
+        el.hidden = !open;
+        el.disabled = !open;
+      });
+      document.querySelectorAll('.era-cell, .timeline-item').forEach((el) => {
+        const key = el.dataset.asset;
+        if (!key) return;
+        const open = assetOpen(key);
+        el.classList.toggle('is-locked', !open);
+        el.setAttribute('aria-disabled', open ? 'false' : 'true');
       });
     }
     applyJourneyUnlocks();
@@ -3591,21 +3601,30 @@ import * as THREE from 'three';
 
     // Related avatar circles click
     document.querySelectorAll('.related-avatar').forEach(item => {
-      item.addEventListener('click', () => selectAsset(item.dataset.rel));
+      item.addEventListener('click', () => {
+        if (!assetOpen(item.dataset.rel)) {
+          museumToast('Finish the open sitting to view this artifact.');
+          return;
+        }
+        selectAsset(item.dataset.rel);
+      });
     });
 
     // Previous / Next artifact arrows
     const artifactOrder = ['assembled', 'head', 'chest', 'thighs', 'legs', 'feet', 'stone', 'lion', 'bear', 'leopard', 'beast', 'years1260', 'ram', 'goat', 'goat_broken', 'goat_horn', 'dura', 'stump', 'ox_king', 'ancient', 'son', 'decree', 'kings', 'michael', 'sealed'];
-    document.getElementById('btn-prev-artifact').addEventListener('click', () => {
-      let idx = artifactOrder.indexOf(activeAssetKey);
-      idx = (idx - 1 + artifactOrder.length) % artifactOrder.length;
-      selectAsset(artifactOrder[idx]);
-    });
-    document.getElementById('btn-next-artifact').addEventListener('click', () => {
-      let idx = artifactOrder.indexOf(activeAssetKey);
-      idx = (idx + 1) % artifactOrder.length;
-      selectAsset(artifactOrder[idx]);
-    });
+    function openArtifactKeys() {
+      return artifactOrder.filter(assetOpen);
+    }
+    function stepArtifact(dir) {
+      const open = openArtifactKeys();
+      if (!open.length) return;
+      let idx = open.indexOf(activeAssetKey);
+      if (idx < 0) idx = 0;
+      idx = (idx + dir + open.length) % open.length;
+      selectAsset(open[idx]);
+    }
+    document.getElementById('btn-prev-artifact').addEventListener('click', () => stepArtifact(-1));
+    document.getElementById('btn-next-artifact').addEventListener('click', () => stepArtifact(1));
 
     // Bottom action bar
     const btnZoomIn = document.getElementById('btn-zoom-in');
@@ -3648,21 +3667,6 @@ import * as THREE from 'three';
       });
     }
 
-    const btnCompare = document.getElementById('btn-museum-compare');
-    if (btnCompare) {
-      btnCompare.addEventListener('click', () => {
-        const nextMode = activeStudyMode === 'clay' ? 'gold' : 'clay';
-        setStudyMode(nextMode);
-      });
-    }
-
-    const btnAi = document.getElementById('btn-museum-ai');
-    if (btnAi) {
-      btnAi.addEventListener('click', () => {
-        openInsightModal();
-      });
-    }
-
     const sheetBodyEl = document.getElementById('museum-nodes-sheet-body');
     if (sheetBodyEl) {
       sheetBodyEl.addEventListener('click', (e) => {
@@ -3672,7 +3676,7 @@ import * as THREE from 'three';
     }
     function startArtifactTour() {
       let i = 0;
-      const order = artifactOrder.filter((k) => k !== 'altar');
+      const order = openArtifactKeys().filter((k) => k !== 'altar');
       const step = () => {
         if (i >= order.length) { museumToast('Tour complete'); return; }
         selectAsset(order[i]);
@@ -3685,40 +3689,6 @@ import * as THREE from 'three';
     window.addEventListener('keydown', (e) => {
       if (e.key === 't' || e.key === 'T') startArtifactTour();
     });
-
-    const btnDownload = document.getElementById('btn-museum-download');
-    if (btnDownload) {
-      btnDownload.addEventListener('click', () => {
-        renderer.render(scene, camera);
-        const dataURL = renderer.domElement.toDataURL('image/png');
-        const a = document.createElement('a');
-        a.download = `bible-artifacts-${activeAssetKey}.png`;
-        a.href = dataURL;
-        a.click();
-        museumToast('High-Res Exhibit Screenshot Saved!');
-      });
-    }
-
-    const btnShare = document.getElementById('btn-museum-share');
-    if (btnShare) {
-      btnShare.addEventListener('click', async () => {
-        const url = window.location.href;
-        try {
-          if (navigator.share) {
-            await navigator.share({ title: 'Daniel 2 Colossus', url });
-            return;
-          }
-          if (navigator.clipboard && navigator.clipboard.writeText) {
-            await navigator.clipboard.writeText(url);
-            museumToast('Exhibit link copied');
-            return;
-          }
-        } catch (err) {
-          if (err && err.name === 'AbortError') return;
-        }
-        museumToast('Copy the address bar to share this exhibit');
-      });
-    }
 
     // Study Lab Drawer toggle
     const labDrawer = document.getElementById('study-lab-drawer');
@@ -4035,11 +4005,11 @@ import * as THREE from 'three';
         labDrawer?.classList.toggle('open');
       }
       if (e.key >= '1' && e.key <= '9') {
-        const pick = artifactOrder[Number(e.key) - 1];
+        const pick = openArtifactKeys()[Number(e.key) - 1];
         if (pick) selectAsset(pick);
       }
       if (e.key === '0') {
-        const pick = artifactOrder[9];
+        const pick = openArtifactKeys()[9];
         if (pick) selectAsset(pick);
       }
     });
@@ -4131,7 +4101,15 @@ import * as THREE from 'three';
 
     // Initialize State: Check URL parameter (?asset=... or ?id=...) or default to 'assembled'
     const initialAssetKey = urlParams.get('asset') || urlParams.get('id');
-    const startAsset = (initialAssetKey && Object.prototype.hasOwnProperty.call(ASSET_REGISTRY, initialAssetKey)) ? initialAssetKey : 'assembled';
+    const requestedAsset = (initialAssetKey && Object.prototype.hasOwnProperty.call(ASSET_REGISTRY, initialAssetKey)) ? initialAssetKey : 'assembled';
+    const startAsset = assetOpen(requestedAsset) ? requestedAsset : (openArtifactKeys()[0] || 'assembled');
+    if (requestedAsset !== startAsset && history.replaceState) {
+      try {
+        const u = new URL(location.href);
+        u.searchParams.set('asset', startAsset);
+        history.replaceState(null, '', u.pathname + u.search);
+      } catch (e) {}
+    }
 
     if (lessonReturnHref) {
       const backBtn = document.getElementById('gallery-back-lesson');

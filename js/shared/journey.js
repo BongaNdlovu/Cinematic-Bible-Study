@@ -39,10 +39,48 @@
     sealed: "stone"
   };
 
-  const FREE_THROUGH = 2;
+  const SHEET_COUNT = 11;
   const TERMS_VERSION = 1;
-  // TEMPORARY REVIEW UNLOCK — set false with study-app.js to restore the free/paid cut.
-  const TEMP_REVIEW_UNLOCK = true;
+  const TEMP_REVIEW_UNLOCK = false;
+  const SITTING_ASSETS = [
+    ["assembled"],
+    ["lion"],
+    ["head", "chest", "thighs", "legs", "feet", "stone"],
+    ["dura"],
+    ["stump", "ox_king"],
+    [],
+    ["bear"],
+    ["leopard", "beast", "years1260", "ancient", "son"],
+    ["ram", "goat", "goat_broken", "goat_horn"],
+    ["decree"],
+    ["kings", "michael", "sealed"]
+  ];
+  const SITTING_YEARS = [
+    ["y605"],
+    ["y605"],
+    ["y605"],
+    ["y605"],
+    ["y605"],
+    ["y539"],
+    ["y539"],
+    ["y538", "y1798", "y1844"],
+    ["y1844", "y331", "y457"],
+    ["y457", "y31", "y1844"],
+    ["y12"]
+  ];
+  const SITTING_NODES = [
+    ["siege-jerusalem", "babylon", "rome"],
+    ["siege-jerusalem", "babylon", "jerusalem"],
+    ["babylon", "rome", "jerusalem"],
+    ["dura-image", "babylon", "jerusalem"],
+    ["watcher-stump", "babylon", "jerusalem"],
+    ["fall-babylon", "babylon", "jerusalem"],
+    ["lions-den", "babylon", "jerusalem"],
+    ["ostrogoths-out", "berthier", "rome", "sanctuary-1844"],
+    ["ulai-vision", "gaugamela", "sanctuary-1844", "jerusalem", "miller-lowhampton", "himes-boston", "exeter-seventh-month", "disappointment-1844", "edson-port-gibson", "washington-nh", "morse-telegraph"],
+    ["artaxerxes-decree", "calvary", "jerusalem", "sanctuary-1844", "miller-lowhampton", "disappointment-1844"],
+    ["hiddekel-theophany", "alexandria", "rome", "michael-stands"]
+  ];
   const SHEET_LABELS = [
     "Prologue",
     "Daniel 1",
@@ -57,13 +95,9 @@
     "Daniel 10–12"
   ];
 
-  // ARCHITECTURAL SEAM: Student Beta Preview vs Future Commercial Paywall
-  // Sheets 3 through 10 are currently accessible in an unlocked Student Beta Preview mode.
-  // When a production payment/licensing gateway is connected in the future:
-  // 1. Set ENABLE_BETA_PREVIEW_DEFAULT = false
-  // 2. Add license/token verification inside canAccessSheet (e.g. cur.licenseToken or verified entitlement)
-  // Curriculum data, quizzes, and workbenches require zero modifications.
-  const ENABLE_BETA_PREVIEW_DEFAULT = true;
+  // Sequential sittings: only sitting 0 starts open. Completing N opens N+1
+  // for study sheets, gallery assets, and map pins. Client-side only.
+  const ENABLE_BETA_PREVIEW_DEFAULT = false;
 
   const defaults = {
     year: "y605",
@@ -79,7 +113,8 @@
     identity: null,
     termsAccepted: null,
     termsByUser: {},
-    pendingTerms: null
+    pendingTerms: null,
+    completedSheets: []
   };
 
   function normalize(raw) {
@@ -124,6 +159,13 @@
       byUser[tid] = { version: Number(next.termsAccepted.version), at: Number(next.termsAccepted.at) || 0 };
     }
     next.termsByUser = byUser;
+    const done = [];
+    const rawDone = raw && Array.isArray(raw.completedSheets) ? raw.completedSheets : [];
+    rawDone.forEach(function (n) {
+      const i = Number(n);
+      if (!Number.isNaN(i) && i >= 0 && i < SHEET_COUNT && done.indexOf(i) === -1) done.push(i);
+    });
+    next.completedSheets = done;
     const pending = raw && raw.pendingTerms;
     if (pending && typeof pending === "object" && Number(pending.version) > 0) {
       next.pendingTerms = { version: Number(pending.version), at: Number(pending.at) || 0 };
@@ -133,11 +175,23 @@
     return next;
   }
 
+  function migrateMastery(raw) {
+    if (raw && Array.isArray(raw.completedSheets) && raw.completedSheets.length) return raw;
+    try {
+      const legacy = JSON.parse(localStorage.getItem("daniel_historicist_mastery") || "[]");
+      if (Array.isArray(legacy) && legacy.length) {
+        raw = raw || {};
+        raw.completedSheets = legacy;
+      }
+    } catch (e) {}
+    return raw;
+  }
+
   function load() {
     try {
-      return normalize(JSON.parse(localStorage.getItem(KEY) || "{}"));
+      return normalize(migrateMastery(JSON.parse(localStorage.getItem(KEY) || "{}")));
     } catch (e) {
-      return normalize({});
+      return normalize(migrateMastery({}));
     }
   }
 
@@ -149,6 +203,11 @@
     if (patch.unlocked) next.unlocked = Array.from(new Set(patch.unlocked));
     if (patch.seenIntro) next.seenIntro = Object.assign({}, cur.seenIntro, patch.seenIntro);
     if (patch.termsByUser) next.termsByUser = Object.assign({}, cur.termsByUser, patch.termsByUser);
+    if (patch.completedSheets) {
+      next.completedSheets = Array.from(new Set(patch.completedSheets.map(Number).filter(function (n) {
+        return n >= 0 && n < SHEET_COUNT;
+      })));
+    }
     try { localStorage.setItem(KEY, JSON.stringify(next)); } catch (e) {}
     return next;
   }
@@ -188,19 +247,85 @@
     return SHEET_LABELS[i] || SHEET_LABELS[0];
   }
 
+  function completedSet() {
+    return new Set((load().completedSheets || []).map(Number));
+  }
+
+  function maxOpenSheet() {
+    if (TEMP_REVIEW_UNLOCK) return SHEET_COUNT - 1;
+    const done = completedSet();
+    let open = 0;
+    for (let i = 0; i < SHEET_COUNT - 1; i++) {
+      if (done.has(i)) open = i + 1;
+      else break;
+    }
+    return open;
+  }
+
   function canAccessSheet(index) {
-    if (TEMP_REVIEW_UNLOCK) return true;
     const i = Number(index);
     if (Number.isNaN(i) || i < 0) return true;
-    if (i <= FREE_THROUGH) return true;
-    const cur = load();
-    return !!(cur.previewFull || cur.betaPreview);
+    return i <= maxOpenSheet();
   }
 
   function clampToAccessible(index) {
     const i = Number(index);
     if (Number.isNaN(i) || i < 0) return 0;
-    return canAccessSheet(i) ? i : FREE_THROUGH;
+    const cap = maxOpenSheet();
+    return i > cap ? cap : i;
+  }
+
+  function sittingForAsset(key) {
+    const k = key === "altar" ? "assembled" : key;
+    for (let i = 0; i < SITTING_ASSETS.length; i++) {
+      if (SITTING_ASSETS[i].indexOf(k) >= 0) return i;
+    }
+    return -1;
+  }
+
+  function canAccessAsset(key) {
+    const sitting = sittingForAsset(key);
+    if (sitting < 0) return false;
+    return canAccessSheet(sitting);
+  }
+
+  function openNodeIds() {
+    const open = maxOpenSheet();
+    const ids = {};
+    for (let i = 0; i <= open; i++) {
+      (SITTING_NODES[i] || []).forEach(function (id) { ids[id] = true; });
+      const pack = window.SHEET_MAP && window.SHEET_MAP[i];
+      if (pack && pack.nodes) {
+        pack.nodes.forEach(function (n) { if (n && n.id) ids[n.id] = true; });
+      }
+    }
+    return ids;
+  }
+
+  function canAccessMapNode(id) {
+    if (!id) return false;
+    return !!openNodeIds()[id];
+  }
+
+  function canAccessYear(yearId) {
+    if (!yearId) return false;
+    const open = maxOpenSheet();
+    for (let i = 0; i <= open; i++) {
+      if ((SITTING_YEARS[i] || []).indexOf(yearId) >= 0) return true;
+    }
+    return false;
+  }
+
+  function markSheetComplete(index) {
+    const i = Number(index);
+    if (Number.isNaN(i) || i < 0 || i >= SHEET_COUNT) return load();
+    const cur = load();
+    const next = (cur.completedSheets || []).concat([i]);
+    const saved = save({ completedSheets: next, pathSheet: i, sheet: clampToAccessible(i + 1) });
+    try {
+      localStorage.setItem("daniel_historicist_mastery", JSON.stringify(saved.completedSheets));
+    } catch (e) {}
+    return saved;
   }
 
   function hasSeenIntro(index) {
@@ -228,7 +353,9 @@
 
   function hasProgress() {
     const cur = load();
-    return cur.sheet > 0 || (typeof cur.pathSheet === "number" && cur.pathSheet >= 0);
+    return cur.sheet > 0
+      || (typeof cur.pathSheet === "number" && cur.pathSheet >= 0)
+      || (cur.completedSheets && cur.completedSheets.length > 0);
   }
 
   function resumeSheet() {
@@ -317,12 +444,15 @@
     const map = window.MAP_CHRONICLE;
     if (map) {
       (map.epochs || []).forEach((ep) => {
+        if (!canAccessYear(ep.id)) return;
         out.push({ kind: "epoch", id: ep.id, label: ep.label + " — " + ep.title, href: "map.html?year=" + ep.id });
       });
       (map.cities || []).forEach((c) => {
+        if (!canAccessMapNode(c.id)) return;
         out.push({ kind: "city", id: c.id, label: c.name, href: "map.html?year=" + ((c.pulse && c.pulse[0]) || "y605") + "&event=" + c.id });
       });
       (map.events || []).forEach((ev) => {
+        if (!canAccessMapNode(ev.id)) return;
         out.push({ kind: "event", id: ev.id, label: ev.name, href: "map.html?year=" + ev.yearId + "&event=" + ev.id });
       });
     }
@@ -347,6 +477,13 @@
     sheetLabel: sheetLabel,
     canAccessSheet: canAccessSheet,
     clampToAccessible: clampToAccessible,
+    canAccessAsset: canAccessAsset,
+    canAccessMapNode: canAccessMapNode,
+    canAccessYear: canAccessYear,
+    maxOpenSheet: maxOpenSheet,
+    markSheetComplete: markSheetComplete,
+    sittingForAsset: sittingForAsset,
+    SITTING_ASSETS: SITTING_ASSETS,
     hasSeenIntro: hasSeenIntro,
     markIntroSeen: markIntroSeen,
     enablePreview: enablePreview,
@@ -360,7 +497,6 @@
     acceptTerms: acceptTerms,
     commitPendingTerms: commitPendingTerms,
     TERMS_VERSION: TERMS_VERSION,
-    FREE_THROUGH: FREE_THROUGH,
     SHEET_LABELS: SHEET_LABELS,
     EMPIRE_LABELS: EMPIRE_LABELS,
     YEAR_LABELS: YEAR_LABELS,

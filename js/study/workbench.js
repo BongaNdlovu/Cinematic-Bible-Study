@@ -590,7 +590,7 @@
         </div>
 
         <p class="text-xs text-ink-600 dark:text-paper-400 leading-relaxed mb-6">
-          To receive your verified <strong>Historicist Foundations Mastery Dossier</strong> and advance into the Student Beta Preview for Units 3–10, you must synthesize the principles of Sheets 0, 1, and 2.
+          To receive your verified <strong>Historicist Foundations Mastery Dossier</strong> and continue to Daniel 3, you must synthesize the principles of Sheets 0, 1, and 2.
         </p>
 
         <!-- Part 1 -->
@@ -710,9 +710,6 @@
     if (window.StudyCompetency) {
       window.StudyCompetency.recordCapstone(evaluation.score, evaluation);
     }
-    if (window.BAJourney) {
-      window.BAJourney.enableBetaPreview();
-    }
   }
 
   function showDossierModal(evaluation, onProceed) {
@@ -776,7 +773,7 @@
             <span>🖨️ Print / Save Dossier PDF</span>
           </button>
           <button type="button" id="dossier-proceed-btn" class="w-full sm:w-auto px-6 py-2.5 rounded-lg bg-ink-900 dark:bg-paper-100 text-paper-50 dark:text-ink-900 font-sans font-bold text-xs shadow hover:bg-black dark:hover:bg-white transition-colors">
-            Enter Student Beta Preview (Units 3–10) &rarr;
+            Continue to the next sitting &rarr;
           </button>
         </div>
       </div>

@@ -1,5 +1,4 @@
-    // TEMPORARY REVIEW UNLOCK — set false to restore free/paid and task gates.
-    const TEMP_REVIEW_UNLOCK = true;
+    // Sequential sittings: access is owned by BAJourney.canAccessSheet.
 
     // Sheet to Timeline mapping
     const sheetToTimelineMap = {
@@ -34,13 +33,34 @@
       return timelineToSheetMap[epochIdx] === sheetIdx;
     }
 
+    function epochAccessible(epochIdx) {
+      const target = timelineToSheetMap[epochIdx];
+      if (typeof target !== 'number') return true;
+      return canAccessSheet(target);
+    }
+
+    function syncHorizonLocks() {
+      document.querySelectorAll('.horizon-card').forEach((card) => {
+        const idx = Number(card.dataset.epoch);
+        const open = epochAccessible(idx);
+        card.classList.toggle('is-locked', !open);
+        if (open) card.removeAttribute('aria-disabled');
+        else card.setAttribute('aria-disabled', 'true');
+      });
+    }
+
     function setEpochInfo(epochIdx, opts) {
       if (epochIdx < 0 || epochIdx >= timelineEpochs.length) return;
+      const fromSheet = opts && opts.fromSheet;
+      if (!fromSheet && !epochAccessible(epochIdx)) {
+        denyLockedSitting();
+        return;
+      }
       currentEpochIndex = epochIdx;
       const epoch = timelineEpochs[epochIdx];
-      const fromSheet = opts && opts.fromSheet;
 
       hideHorizonFloat();
+      syncHorizonLocks();
       document.querySelectorAll('.horizon-card').forEach((card, i) => {
         const on = i === epochIdx;
         card.classList.toggle('is-active', on);
@@ -90,7 +110,7 @@
       if (!fromSheet && !sheetBelongsToEpoch(currentSheetIndex, epochIdx)) {
         const target = timelineToSheetMap[epochIdx];
         if (typeof target === 'number') {
-          if (!canAccessSheet(target)) openAccessPanel();
+          if (!canAccessSheet(target)) denyLockedSitting();
           else loadSheet(target, { fromEpoch: true });
         }
       }
@@ -136,7 +156,9 @@
       if (!track) return;
       track.innerHTML = timelineEpochs.map((ep, i) =>
         '<button type="button" class="horizon-card' + (i === 0 ? ' is-active' : '') +
-        '" id="t-node-' + i + '" data-epoch="' + i + '" aria-pressed="' + (i === 0 ? 'true' : 'false') + '">' +
+        (epochAccessible(i) ? '' : ' is-locked') +
+        '" id="t-node-' + i + '" data-epoch="' + i + '" aria-pressed="' + (i === 0 ? 'true' : 'false') + '"' +
+        (epochAccessible(i) ? '' : ' aria-disabled="true"') + '>' +
         '<img src="' + ep.image + '" alt="' + ep.year + '">' +
         '<span class="horizon-card-veil"></span>' +
         '<span class="horizon-card-year">' + ep.year + '</span>' +
@@ -666,14 +688,12 @@
     let currentWeatherType = 'quiet';
     let weatherAnimId = null;
     let particles = [];
-    let isFlashlightEnabled = false;
-    let isAmbientAudioOn = false;
     let focusAtmosphere = 0;
     let lightning = 0;
     let lastLightningAt = 0;
 
     const weatherMeta = {
-      quiet: { name: "Still • Charcoal Dusk", icon: "◌", level: "Quiet" },
+      quiet: { name: "Still • Quiet Dusk", icon: "◌", level: "Quiet" },
       building: { name: "Building • Rising Wind", icon: "☁", level: "Building" },
       storm: { name: "Storm • Rain & Thunder", icon: "⛈", level: "Storm" },
       sunshine: { name: "Sunshine • Warm Light", icon: "☀", level: "Sunshine" },
@@ -737,227 +757,6 @@
         }
       }
       return { segs, life: 1, x0 };
-    }
-
-    const WeatherAudio = {
-      ctx: null,
-      master: null,
-      rainGain: null,
-      sprayGain: null,
-      windGain: null,
-      windFilter: null,
-      rumbleGain: null,
-      airGain: null,
-      whiteBuf: null,
-      brownBuf: null,
-      pinkBuf: null,
-      started: false,
-      enabled: false,
-      target: { rain: 0, wind: 0, rumble: 0, air: 0 },
-
-      fillNoise(buf, kind) {
-        for (let ch = 0; ch < buf.numberOfChannels; ch++) {
-          const d = buf.getChannelData(ch);
-          let b0 = 0, b1 = 0, b2 = 0, b3 = 0, b4 = 0, b5 = 0, b6 = 0, brown = 0;
-          for (let i = 0; i < d.length; i++) {
-            const w = Math.random() * 2 - 1;
-            if (kind === 'brown') {
-              brown = (brown + 0.02 * w) / 1.02;
-              d[i] = Math.max(-1, Math.min(1, brown * 3.5));
-            } else if (kind === 'pink') {
-              b0 = 0.99886 * b0 + w * 0.0555179;
-              b1 = 0.99332 * b1 + w * 0.0750759;
-              b2 = 0.96900 * b2 + w * 0.1538520;
-              b3 = 0.86650 * b3 + w * 0.3104856;
-              b4 = 0.55000 * b4 + w * 0.5329522;
-              b5 = -0.7616 * b5 - w * 0.0168980;
-              const pink = b0 + b1 + b2 + b3 + b4 + b5 + b6 + w * 0.5362;
-              b6 = w * 0.115926;
-              d[i] = pink * 0.11;
-            } else {
-              d[i] = w;
-            }
-          }
-        }
-      },
-
-      makeBuf(seconds, kind) {
-        const rate = this.ctx.sampleRate;
-        const buf = this.ctx.createBuffer(2, Math.floor(rate * seconds), rate);
-        this.fillNoise(buf, kind);
-        return buf;
-      },
-
-      loop(buf) {
-        const src = this.ctx.createBufferSource();
-        src.buffer = buf;
-        src.loop = true;
-        src.start();
-        return src;
-      },
-
-      chain(nodes) {
-        for (let i = 0; i < nodes.length - 1; i++) nodes[i].connect(nodes[i + 1]);
-      },
-
-      async unlock() {
-        if (!this.ctx) {
-          const AC = window.AudioContext || window.webkitAudioContext;
-          if (!AC) throw new Error('no audio');
-          this.ctx = new AC();
-        }
-        if (this.ctx.state === 'suspended') await this.ctx.resume();
-      },
-
-      start() {
-        if (this.started) {
-          this.enabled = true;
-          this.applyMix(true);
-          return;
-        }
-        const ctx = this.ctx;
-        this.master = ctx.createGain();
-        this.master.gain.value = 0.7;
-        const comp = ctx.createDynamicsCompressor();
-        comp.threshold.value = -18;
-        comp.knee.value = 12;
-        comp.ratio.value = 3;
-        comp.attack.value = 0.01;
-        comp.release.value = 0.25;
-        this.master.connect(comp);
-        comp.connect(ctx.destination);
-
-        this.whiteBuf = this.makeBuf(2.4, 'white');
-        this.pinkBuf = this.makeBuf(2.8, 'pink');
-        this.brownBuf = this.makeBuf(3.2, 'brown');
-
-        this.rainGain = ctx.createGain(); this.rainGain.gain.value = 0;
-        const rainBp = ctx.createBiquadFilter();
-        rainBp.type = 'bandpass'; rainBp.frequency.value = 1800; rainBp.Q.value = 0.55;
-        const rainHp = ctx.createBiquadFilter();
-        rainHp.type = 'highpass'; rainHp.frequency.value = 420;
-        this.chain([this.loop(this.whiteBuf), rainHp, rainBp, this.rainGain, this.master]);
-
-        this.sprayGain = ctx.createGain(); this.sprayGain.gain.value = 0;
-        const sprayHp = ctx.createBiquadFilter();
-        sprayHp.type = 'highpass'; sprayHp.frequency.value = 5200;
-        const sprayBp = ctx.createBiquadFilter();
-        sprayBp.type = 'bandpass'; sprayBp.frequency.value = 6400; sprayBp.Q.value = 1.2;
-        this.chain([this.loop(this.whiteBuf), sprayHp, sprayBp, this.sprayGain, this.master]);
-
-        this.windGain = ctx.createGain(); this.windGain.gain.value = 0;
-        this.windFilter = ctx.createBiquadFilter();
-        this.windFilter.type = 'lowpass'; this.windFilter.frequency.value = 280; this.windFilter.Q.value = 0.7;
-        this.chain([this.loop(this.brownBuf), this.windFilter, this.windGain, this.master]);
-
-        this.rumbleGain = ctx.createGain(); this.rumbleGain.gain.value = 0;
-        const rumbleLp = ctx.createBiquadFilter();
-        rumbleLp.type = 'lowpass'; rumbleLp.frequency.value = 72;
-        this.chain([this.loop(this.brownBuf), rumbleLp, this.rumbleGain, this.master]);
-
-        this.airGain = ctx.createGain(); this.airGain.gain.value = 0;
-        const airLp = ctx.createBiquadFilter();
-        airLp.type = 'lowpass'; airLp.frequency.value = 220;
-        this.chain([this.loop(this.pinkBuf), airLp, this.airGain, this.master]);
-
-        this.started = true;
-        this.enabled = true;
-        this.applyMix(true);
-      },
-
-      stop() {
-        this.enabled = false;
-        this.target = { rain: 0, wind: 0, rumble: 0, air: 0 };
-        this.applyMix(true);
-      },
-
-      setScene(type) {
-        if (type === 'quiet') this.target = { rain: 0, wind: 0.1, rumble: 0, air: 0.28 };
-        else if (type === 'building') this.target = { rain: 0.22, wind: 0.48, rumble: 0.07, air: 0.1 };
-        else if (type === 'storm') this.target = { rain: 0.92, wind: 0.72, rumble: 0.24, air: 0 };
-        else if (type === 'sunshine') this.target = { rain: 0, wind: 0.14, rumble: 0, air: 0.38 };
-        else this.target = { rain: 0, wind: 0, rumble: 0, air: 0 };
-        this.applyMix();
-      },
-
-      gust(amount) {
-        if (!this.enabled || !this.windFilter || !this.ctx) return;
-        const t = this.ctx.currentTime;
-        this.windFilter.frequency.setTargetAtTime(160 + amount * 620, t, 0.35);
-      },
-
-      applyMix(instant) {
-        if (!this.ctx) return;
-        const t = this.ctx.currentTime;
-        const dur = instant ? 0.06 : 1.15;
-        const mute = this.enabled ? 1 : 0;
-        const set = (g, v) => {
-          if (!g) return;
-          const now = Math.max(g.gain.value, 0.0001);
-          g.gain.cancelScheduledValues(t);
-          g.gain.setValueAtTime(now, t);
-          g.gain.linearRampToValueAtTime(Math.max(0.0001, v * mute), t + dur);
-        };
-        set(this.rainGain, this.target.rain * 0.2);
-        set(this.sprayGain, this.target.rain * 0.07);
-        set(this.windGain, this.target.wind * 0.11);
-        set(this.rumbleGain, this.target.rumble * 0.18);
-        set(this.airGain, this.target.air * 0.055);
-      },
-
-      thunder() {
-        if (!this.enabled || !this.ctx || !this.master) return;
-        const ctx = this.ctx;
-        const t = ctx.currentTime;
-        const dist = 0.15 + Math.random() * 0.8;
-        const delay = 0.08 + dist * 1.05;
-
-        const crack = ctx.createBufferSource();
-        crack.buffer = this.whiteBuf;
-        crack.loop = true;
-        const crackHp = ctx.createBiquadFilter();
-        crackHp.type = 'highpass';
-        crackHp.frequency.value = 700 + (1 - dist) * 2200;
-        const crackBp = ctx.createBiquadFilter();
-        crackBp.type = 'bandpass';
-        crackBp.frequency.value = 1100 + (1 - dist) * 900;
-        crackBp.Q.value = 0.7;
-        const crackG = ctx.createGain();
-        crackG.gain.setValueAtTime(0.0001, t);
-        crackG.gain.exponentialRampToValueAtTime(0.32 * (1 - dist * 0.55), t + 0.006);
-        crackG.gain.exponentialRampToValueAtTime(0.0001, t + 0.07 + (1 - dist) * 0.09);
-        this.chain([crack, crackHp, crackBp, crackG, this.master]);
-        crack.start(t);
-        crack.stop(t + 0.28);
-
-        const boomT = t + delay;
-        const boom = ctx.createBufferSource();
-        boom.buffer = this.brownBuf;
-        boom.loop = true;
-        const boomLp = ctx.createBiquadFilter();
-        boomLp.type = 'lowpass';
-        boomLp.frequency.value = 55 + dist * 50;
-        const boomG = ctx.createGain();
-        boomG.gain.setValueAtTime(0.0001, boomT);
-        boomG.gain.exponentialRampToValueAtTime(0.3 * (0.45 + dist * 0.55), boomT + 0.14);
-        boomG.gain.exponentialRampToValueAtTime(0.09, boomT + 0.9);
-        boomG.gain.exponentialRampToValueAtTime(0.0001, boomT + 2.6 + dist * 2.8);
-        const echo = ctx.createDelay();
-        echo.delayTime.value = 0.11 + dist * 0.16;
-        const echoG = ctx.createGain();
-        echoG.gain.value = 0.28;
-        const echoLp = ctx.createBiquadFilter();
-        echoLp.type = 'lowpass';
-        echoLp.frequency.value = 240;
-        this.chain([boom, boomLp, boomG, this.master]);
-        boomG.connect(echo); echo.connect(echoLp); echoLp.connect(echoG); echoG.connect(this.master);
-        boom.start(boomT);
-        boom.stop(boomT + 6.2);
-      }
-    };
-
-    function rumbleThunder() {
-      WeatherAudio.thunder();
     }
 
     function drawWeather() {
@@ -1037,7 +836,6 @@
         bolts.push(makeBolt(w, h));
         lastLightningAt = now;
         lightning = 1;
-        setTimeout(rumbleThunder, 180 + Math.random() * 420);
       }
       if (lightning > 0.02) {
         ctx.fillStyle = `rgba(220,232,255,${0.08 * lightning})`;
@@ -1101,7 +899,6 @@
         }
       }
 
-      if (isAmbientAudioOn) WeatherAudio.gust(gust);
       weatherAnimId = requestAnimationFrame(drawWeather);
     }
 
@@ -1160,7 +957,6 @@
       const active = document.getElementById(activeId);
       if (active) active.classList.add('bg-amber-500/20','text-amber-900','dark:text-amber-200','ring-1','ring-amber-400');
 
-      if (isAmbientAudioOn) WeatherAudio.setScene(currentWeatherType);
     }
 
     function setWeatherPreset(preset, silent) {
@@ -1183,33 +979,6 @@
       if (preset === 'off') stopWeatherAnimation();
       else startWeatherAnimation();
       if (!silent) showToast(`Focus atmosphere: ${weatherMeta[currentWeatherType]?.name || preset}`);
-    }
-
-    async function toggleAmbientAudio() {
-      const btn = document.getElementById('ambient-audio-btn');
-      try {
-        await WeatherAudio.unlock();
-        isAmbientAudioOn = !isAmbientAudioOn;
-        if (isAmbientAudioOn) {
-          WeatherAudio.start();
-          WeatherAudio.setScene(currentWeatherType);
-          startWeatherAnimation();
-          if (btn) {
-            btn.innerText = "🔊";
-            btn.classList.add('bg-amber-500/20', 'border-amber-500');
-          }
-          showToast("Weather sound: On");
-        } else {
-          WeatherAudio.stop();
-          if (btn) {
-            btn.innerText = "🔇";
-            btn.classList.remove('bg-amber-500/20', 'border-amber-500');
-          }
-          showToast("Weather sound: Muted");
-        }
-      } catch (e) {
-        showToast("Audio unavailable in this environment");
-      }
     }
 
     function updateTimerDisplay() {
@@ -1248,10 +1017,6 @@
       if (sub) sub.innerText = "Focus Session Active • Contemplating Divine Sovereignty...";
 
       startWeatherAnimation();
-      if (isAmbientAudioOn) {
-        WeatherAudio.start();
-        WeatherAudio.setScene(currentWeatherType);
-      }
 
       timerInterval = setInterval(() => {
         if (timeRemaining > 0) {
@@ -1326,7 +1091,7 @@
        ========================================================================= */
     let currentSheetIndex = 0;
     let completedSheets = new Set();
-    const themes = ['charcoal', 'paper', 'white', 'night'];
+    const themes = ['paper', 'white', 'night'];
     let currentThemeIdx = 0;
 
     const fontSizes = [
@@ -1339,14 +1104,28 @@
     let currentFontIdx = 1;
 
     try {
-      const savedCompleted = localStorage.getItem('daniel_historicist_mastery');
-      if (savedCompleted) completedSheets = new Set(JSON.parse(savedCompleted));
+      if (window.BAJourney) {
+        completedSheets = new Set((window.BAJourney.load().completedSheets || []).map(Number));
+      } else {
+        const savedCompleted = localStorage.getItem('daniel_historicist_mastery');
+        if (savedCompleted) completedSheets = new Set(JSON.parse(savedCompleted));
+      }
       const savedSheet = localStorage.getItem('daniel_historicist_sheet');
       if (savedSheet !== null) currentSheetIndex = parseInt(savedSheet, 10) || 0;
       const savedFont = localStorage.getItem('daniel_font_size_idx_v4');
       if (savedFont !== null) currentFontIdx = Math.max(0, Math.min(fontSizes.length - 1, parseInt(savedFont, 10) || 1));
-      const savedTheme = localStorage.getItem('daniel_theme_v1');
-      if (savedTheme !== null) currentThemeIdx = Math.max(0, Math.min(themes.length - 1, parseInt(savedTheme, 10) || 0));
+      const savedThemeName = localStorage.getItem('daniel_theme_name_v1');
+      if (savedThemeName && themes.indexOf(savedThemeName) >= 0) {
+        currentThemeIdx = themes.indexOf(savedThemeName);
+      } else {
+        const savedTheme = localStorage.getItem('daniel_theme_v1');
+        if (savedTheme !== null) {
+          const n = parseInt(savedTheme, 10);
+          const legacy = ['charcoal', 'paper', 'white', 'night'];
+          const name = legacy[n] || 'paper';
+          currentThemeIdx = Math.max(0, themes.indexOf(name === 'charcoal' ? 'paper' : name));
+        }
+      }
     } catch (e) {}
 
     function showToast(msg) {
@@ -1363,7 +1142,7 @@
       const theme = themes[currentThemeIdx];
       const html = document.documentElement;
       const themeIcon = document.getElementById('theme-icon');
-      const isDark = theme === 'charcoal' || theme === 'night';
+      const isDark = theme === 'night';
 
       html.classList.toggle('dark', isDark);
       html.dataset.theme = theme;
@@ -1380,17 +1159,15 @@
       document.body.classList.toggle('selection:bg-amber-200', !isDark);
 
       if (themeIcon) {
-        themeIcon.innerText = theme === 'charcoal' ? '🌑 Charcoal'
-          : theme === 'night' ? '🌙 Night'
+        themeIcon.innerText = theme === 'night' ? '🌙 Night'
           : theme === 'white' ? '⚪ White'
           : '☀️ Paper';
       }
-      if (theme !== 'charcoal' && isFlashlightEnabled) {
-        isFlashlightEnabled = false;
-        document.body.classList.remove('flashlight-active', 'beam-ready');
-      }
-      syncReadingControls();
-      try { localStorage.setItem('daniel_theme_v1', String(currentThemeIdx)); } catch (e) {}
+      document.body.classList.remove('flashlight-active', 'beam-ready');
+      try {
+        localStorage.setItem('daniel_theme_v1', String(currentThemeIdx));
+        localStorage.setItem('daniel_theme_name_v1', theme);
+      } catch (e) {}
       if (!silent && themeIcon) showToast(`Theme: ${themeIcon.innerText}`);
     }
 
@@ -1458,7 +1235,7 @@
         const btn = document.createElement('button');
         btn.addEventListener('click', () => {
           if (!canAccessSheet(idx)) {
-            openAccessPanel();
+            denyLockedSitting();
             toggleTocDrawer();
             return;
           }
@@ -1468,11 +1245,15 @@
           loadSheet(idx);
           toggleTocDrawer();
         });
+        const locked = !canAccessSheet(idx);
         btn.className = `w-full text-left p-3 rounded-lg flex items-start space-x-3 transition-colors ${
-          isCurrent 
+          locked
+            ? 'opacity-45 cursor-not-allowed'
+            : isCurrent 
             ? 'bg-amber-100/70 dark:bg-amber-950/60 border border-amber-300 dark:border-amber-800' 
             : 'hover:bg-paper-200/60 dark:hover:bg-paper-900'
         }`;
+        if (locked) btn.setAttribute('aria-disabled', 'true');
 
         btn.innerHTML = `
           <div class="mt-0.5 w-5 h-5 rounded-full flex items-center justify-center text-xs font-mono font-bold shrink-0 ${
@@ -1621,11 +1402,18 @@
     }
 
     function canAccessSheet(index) {
-      if (TEMP_REVIEW_UNLOCK) return true;
       if (window.BAJourney && typeof window.BAJourney.canAccessSheet === 'function') {
         return window.BAJourney.canAccessSheet(index);
       }
-      return index <= 2;
+      return Number(index) === 0;
+    }
+
+    function denyLockedSitting() {
+      const open = window.BAJourney && typeof window.BAJourney.maxOpenSheet === 'function'
+        ? window.BAJourney.maxOpenSheet()
+        : 0;
+      const label = window.BAJourney ? window.BAJourney.sheetLabel(open) : 'the open sitting';
+      showToast('Finish ' + label + ' to open the next sitting.');
     }
 
     let sittingGuideMode = null;
@@ -1637,8 +1425,7 @@
 
     function syncSittingOverlay() {
       const guide = document.getElementById('sitting-guide');
-      const panel = document.getElementById('access-panel');
-      const open = (guide && !guide.hidden) || (panel && !panel.hidden);
+      const open = guide && !guide.hidden;
       document.body.classList.toggle('is-sitting-overlay', !!open);
     }
 
@@ -1739,7 +1526,6 @@
     }
 
     function maybeShowEndGuide() {
-      if (TEMP_REVIEW_UNLOCK) return;
       if (!sheetQuizComplete()) return;
       if (endCardShownForSheet === currentSheetIndex) return;
       if (sittingGuideMode === 'intro') return;
@@ -1759,45 +1545,12 @@
       if (target && !target.hidden && !target.disabled) target.click();
     }
 
-    function openAccessPanel() {
-      if (TEMP_REVIEW_UNLOCK) return;
-      hideSittingGuide();
-      const panel = document.getElementById('access-panel');
-      if (panel) {
-        panel.hidden = false;
-        syncSittingOverlay();
-        const ret = document.getElementById('access-return-btn');
-        if (ret) ret.focus();
-      }
-    }
-
-    function closeAccessPanel() {
-      const panel = document.getElementById('access-panel');
-      if (panel) panel.hidden = true;
-      syncSittingOverlay();
-    }
-
-    function returnToFreeStudy() {
-      closeAccessPanel();
-      loadSheet(2, { skipIntro: true });
-    }
-
-    function enableTesterPreview() {
-      if (window.BAJourney) window.BAJourney.enablePreview();
-      closeAccessPanel();
-      showToast('Tester preview on. Remaining sheets are open on this device only.');
-      if (currentSheetIndex === 2) loadSheet(3);
-    }
-
     function syncAdvanceButtons(index) {
       const prevBtn = document.getElementById('prev-sheet-btn');
       const nextBtn = document.getElementById('next-sheet-btn');
-      const accessBtn = document.getElementById('access-open-btn');
       const nextBtnText = document.getElementById('next-btn-text');
       if (prevBtn) prevBtn.style.visibility = index === 0 ? 'hidden' : 'visible';
-      const gatedNext = index === 2 && !canAccessSheet(3);
-      if (nextBtn) nextBtn.hidden = gatedNext;
-      if (accessBtn) accessBtn.hidden = !gatedNext;
+      if (nextBtn) nextBtn.hidden = false;
       if (nextBtnText) {
         if (index === sheetsData.length - 1) nextBtnText.innerText = 'Complete Codex & Review Mastery';
         else nextBtnText.innerText = 'Continue to Sheet ' + (index + 1) + ' →';
@@ -1907,30 +1660,74 @@
     });
 
     const LESSON_CONNECT_TABLE = [
-      { mapYear: 'y605', galleryAsset: 'assembled' },  // 0 Prologue
-      { mapYear: 'y605', galleryAsset: 'lion' },       // 1 Daniel 1
-      { mapYear: 'y605', galleryAsset: 'head' },       // 2 Daniel 2
-      { mapYear: 'y605', galleryAsset: 'dura' },       // 3 Dura
-      { mapYear: 'y605', galleryAsset: 'ox_king' },    // 4 Tree
-      { mapYear: 'y539', galleryAsset: 'chest' },      // 5 Handwriting
-      { mapYear: 'y539', galleryAsset: 'bear' },       // 6 Lions
-      { mapYear: 'y538', galleryAsset: 'years1260' },  // 7 Little horn / 1260
-      { mapYear: 'y1844', galleryAsset: 'ram' },       // 8 Ram, goat, 1844
-      { mapYear: 'y457', galleryAsset: 'decree' },     // 9 Seventy weeks
-      { mapYear: 'y12', galleryAsset: 'michael' }      // 10 Michael
+      { mapYear: 'y605', galleryAssets: ['assembled'] },
+      { mapYear: 'y605', galleryAssets: ['lion'] },
+      { mapYear: 'y605', galleryAssets: ['head', 'chest', 'thighs', 'legs', 'feet', 'stone'] },
+      { mapYear: 'y605', galleryAssets: ['dura'] },
+      { mapYear: 'y605', galleryAssets: ['stump', 'ox_king'] },
+      { mapYear: 'y539', galleryAssets: [] },
+      { mapYear: 'y539', galleryAssets: ['bear'] },
+      { mapYear: 'y538', galleryAssets: ['leopard', 'beast', 'years1260', 'ancient', 'son'] },
+      { mapYear: 'y1844', galleryAssets: ['ram', 'goat', 'goat_broken', 'goat_horn'] },
+      { mapYear: 'y457', galleryAssets: ['decree'] },
+      { mapYear: 'y12', galleryAssets: ['kings', 'michael', 'sealed'] }
     ];
+
+    function sittingConnectConfig(index) {
+      const fromJourney = window.BAJourney && window.BAJourney.SITTING_ASSETS;
+      const assets = fromJourney && fromJourney[index]
+        ? fromJourney[index].slice()
+        : ((LESSON_CONNECT_TABLE[index] && LESSON_CONNECT_TABLE[index].galleryAssets) || ['assembled']);
+      const mapYear = (LESSON_CONNECT_TABLE[index] && LESSON_CONNECT_TABLE[index].mapYear) || 'y605';
+      return { mapYear: mapYear, galleryAssets: assets, galleryAsset: assets[0] || 'assembled' };
+    }
+
+    function enrollmentUrl() {
+      try {
+        return new URL('index.html', window.location.href).href;
+      } catch (e) {
+        return (window.location.origin || '') + '/index.html';
+      }
+    }
+
+    async function shareSitting() {
+      const url = enrollmentUrl();
+      const title = 'The Scroll of Daniel';
+      const text = 'Join this sitting of the Scroll of Daniel. Open the cover, agree to the terms, and sign in to begin.';
+      try {
+        if (navigator.share) {
+          await navigator.share({ title: title, text: text, url: url });
+          showToast('Invitation ready to send.');
+          return;
+        }
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          await navigator.clipboard.writeText(url);
+          showToast('Enrollment link copied. Recipients sign in on the cover.');
+          return;
+        }
+      } catch (err) {
+        if (err && err.name === 'AbortError') return;
+      }
+      showToast('Share the home page so they can sign in: ' + url);
+    }
 
     function renderLessonConnectBar(index) {
       const bar = document.getElementById('lesson-connect');
       if (!bar) return;
-      const cfg = LESSON_CONNECT_TABLE[index] || { mapYear: 'y605', galleryAsset: 'assembled' };
+      const cfg = sittingConnectConfig(index);
       const mapBtn = document.getElementById('btn-lesson-map');
       const galleryBtn = document.getElementById('btn-lesson-gallery');
+      const shareBtn = document.getElementById('btn-lesson-share');
       if (mapBtn) {
         mapBtn.href = `map.html?year=${encodeURIComponent(cfg.mapYear)}&from=lesson&sheet=${index}`;
       }
       if (galleryBtn) {
         galleryBtn.href = `gallery.html?asset=${encodeURIComponent(cfg.galleryAsset)}&from=lesson&sheet=${index}`;
+        galleryBtn.hidden = !(cfg.galleryAssets && cfg.galleryAssets.length);
+      }
+      if (shareBtn && !shareBtn.dataset.wired) {
+        shareBtn.dataset.wired = 'true';
+        shareBtn.addEventListener('click', shareSitting);
       }
     }
 
@@ -1993,8 +1790,8 @@
 
     function loadSheet(index, opts) {
       if (index < 0 || index >= sheetsData.length) return;
-      if (!TEMP_REVIEW_UNLOCK && !canAccessSheet(index)) {
-        openAccessPanel();
+      if (!canAccessSheet(index)) {
+        denyLockedSitting();
         return;
       }
       currentSheetIndex = index;
@@ -2055,20 +1852,6 @@
         });
       }
 
-      // Inject Student Beta Curriculum Preview Banner for Sheets 3–10
-      if (!TEMP_REVIEW_UNLOCK && index >= 3) {
-        const article = document.getElementById('sheet-article');
-        if (article && !article.querySelector('.beta-preview-banner')) {
-          const banner = document.createElement('div');
-          banner.className = "beta-preview-banner mb-6 p-4 rounded-xl border border-amber-500/40 bg-amber-500/10 text-amber-900 dark:text-amber-200 flex items-center justify-between text-xs font-mono";
-          banner.innerHTML = `
-            <span>🔓 Student Beta Preview Mode — Full curriculum unlocked for testing and review.</span>
-            <span class="px-2 py-0.5 rounded bg-amber-600 text-white font-bold uppercase text-[10px]">Beta Access</span>
-          `;
-          article.prepend(banner);
-        }
-      }
-
       wireStrongsTooltips();
 
       const recapTitle = document.getElementById('recap-title');
@@ -2086,6 +1869,7 @@
       restoreSheetStage(index);
       applySittingMap(index, { animate: false, focusId: null });
       resetSittingPath();
+      syncHorizonLocks();
 
       // Render Quizzes
       renderQuiz(data.quizzes);
@@ -2107,7 +1891,7 @@
       const seen = window.BAJourney && window.BAJourney.hasSeenIntro(index);
       let hasChosenTrack = false;
       try { hasChosenTrack = !!localStorage.getItem('daniel_placement_track_v1'); } catch (e) { hasChosenTrack = true; }
-      if (!TEMP_REVIEW_UNLOCK && !skipIntro && !seen && hasChosenTrack) {
+      if (!skipIntro && !seen && hasChosenTrack) {
         showIntroGuide(index);
       }
     }
@@ -2119,7 +1903,6 @@
     }
 
     function canAdvancePath() {
-      if (TEMP_REVIEW_UNLOCK) return true;
       if (window.StudyWorkbench && !window.StudyWorkbench.isSheetComplete(currentSheetIndex)) {
         return false;
       }
@@ -2131,32 +1914,19 @@
 
     function updateNextGate() {
       const btn = document.getElementById('next-sheet-btn');
-      const accessBtn = document.getElementById('access-open-btn');
-      if (TEMP_REVIEW_UNLOCK) {
-        if (btn) {
-          btn.disabled = false;
-          btn.hidden = false;
-          btn.title = 'Review unlock: task gates are off';
-        }
-        if (accessBtn) accessBtn.hidden = true;
-        return;
-      }
       const wbOk = !window.StudyWorkbench || window.StudyWorkbench.isSheetComplete(currentSheetIndex);
       const qOk = sheetQuizComplete();
       const ok = canAdvancePath();
       const hint = !wbOk ? 'Complete the active proof workbench above to continue' : (!qOk ? 'Answer the checkpoint questions to continue the path' : '');
       if (btn) {
         btn.disabled = !ok;
+        btn.hidden = false;
         btn.title = hint;
-      }
-      if (accessBtn) {
-        accessBtn.disabled = !ok;
-        accessBtn.title = hint;
       }
     }
 
     function navigateSheet(delta) {
-      if (!TEMP_REVIEW_UNLOCK && delta > 0 && !canAdvancePath()) {
+      if (delta > 0 && !canAdvancePath()) {
         showToast('Complete the workbench and checkpoint questions to continue.');
         const rev = document.getElementById('workbench-section') || document.getElementById('revision-section');
         if (rev) rev.scrollIntoView({ behavior: 'smooth' });
@@ -2284,34 +2054,20 @@
     }
 
     function completeAndAdvance() {
-      if (!TEMP_REVIEW_UNLOCK && !canAdvancePath()) {
+      if (!canAdvancePath()) {
         showToast('Complete the workbench and checkpoint questions to continue.');
         const rev = document.getElementById('workbench-section') || document.getElementById('revision-section');
         if (rev) rev.scrollIntoView({ behavior: 'smooth' });
         return;
       }
-      completedSheets.add(currentSheetIndex);
-      try {
-        localStorage.setItem('daniel_historicist_mastery', JSON.stringify(Array.from(completedSheets)));
-      } catch (e) {}
-      if (window.BAJourney) window.BAJourney.save({ pathSheet: currentSheetIndex });
-
-      if (!TEMP_REVIEW_UNLOCK && currentSheetIndex === 2) {
-        if (window.StudyWorkbench && !window.StudyWorkbench.isCapstoneComplete()) {
-          window.StudyWorkbench.renderCapstoneModal(() => {
-            if (window.BAJourney && window.BAJourney.enableBetaPreview) {
-              window.BAJourney.enableBetaPreview();
-            }
-            showToast("Capstone mastered! Student Beta Curriculum unlocked.");
-            loadSheet(3);
-          });
-          return;
-        }
-      }
-
-      if (!TEMP_REVIEW_UNLOCK && currentSheetIndex === 2 && !canAccessSheet(3)) {
-        openAccessPanel();
-        return;
+      if (window.BAJourney && typeof window.BAJourney.markSheetComplete === 'function') {
+        window.BAJourney.markSheetComplete(currentSheetIndex);
+        completedSheets = new Set((window.BAJourney.load().completedSheets || []).map(Number));
+      } else {
+        completedSheets.add(currentSheetIndex);
+        try {
+          localStorage.setItem('daniel_historicist_mastery', JSON.stringify(Array.from(completedSheets)));
+        } catch (e) {}
       }
 
       if (currentSheetIndex < sheetsData.length - 1) {
@@ -2330,40 +2086,6 @@
     /* =========================================================================
        7. KEYBOARD SHORTCUTS & INITIALIZATION
        ========================================================================= */
-    function syncReadingControls() {
-      const torchBtn = document.getElementById('btn-header-torch');
-      const statusText = document.getElementById('flashlight-status-text');
-      if (torchBtn) {
-        torchBtn.classList.toggle('is-on', isFlashlightEnabled);
-        torchBtn.setAttribute('aria-pressed', isFlashlightEnabled ? 'true' : 'false');
-        torchBtn.textContent = isFlashlightEnabled ? '🔦 Torch on' : '🔦 Torch';
-      }
-      if (statusText) statusText.textContent = isFlashlightEnabled ? 'On' : 'Off';
-    }
-
-    function toggleFlashlightBeam() {
-      const next = !isFlashlightEnabled;
-      if (next && themes[currentThemeIdx] !== 'charcoal') {
-        applyTheme(themes.indexOf('charcoal'), true);
-      }
-      isFlashlightEnabled = next;
-      document.body.classList.toggle('flashlight-active', isFlashlightEnabled);
-      if (!isFlashlightEnabled) document.body.classList.remove('beam-ready');
-      syncReadingControls();
-      showToast(isFlashlightEnabled ? 'Torch on — move the pointer to aim the beam' : 'Torch off');
-    }
-
-    // Flashlight cursor: an opt-in physical beam over the darkened charcoal surface.
-    window.addEventListener('pointermove', (e) => {
-      if (!isFlashlightEnabled && !document.body.classList.contains('flashlight-active')) return;
-      document.body.classList.add('beam-ready');
-      const root = document.documentElement;
-      root.style.setProperty('--mx', `${e.clientX}px`);
-      root.style.setProperty('--my', `${e.clientY}px`);
-      const cursor = document.getElementById('flashlight-cursor');
-      if (cursor) cursor.style.transform = `translate3d(${e.clientX - 8}px,${e.clientY - 8}px,0) rotate(-18deg)`;
-    }, { passive: true });
-
     document.addEventListener('scroll', () => {
       if (sittingGuideMode !== 'end') return;
       const data = sheetsData[currentSheetIndex];
@@ -2378,11 +2100,8 @@
       } else if (e.key === 'ArrowLeft' && (e.metaKey || e.ctrlKey)) {
         if (currentSheetIndex > 0) navigateSheet(-1);
       } else if (e.key === 'Escape') {
-        if (!document.getElementById('access-panel').hidden) {
-          closeAccessPanel();
-          return;
-        }
-        if (!document.getElementById('sitting-guide').hidden) {
+        const guide = document.getElementById('sitting-guide');
+        if (guide && !guide.hidden) {
           if (sittingGuideMode === 'intro') finishIntroGuide();
           else hideSittingGuide();
           return;
@@ -2405,12 +2124,11 @@
       decree: 9, kings: 10, michael: 10, sealed: 10
     };
 
-    let startFromGate = false;
-
     function clampStartSheet(index) {
-      if (TEMP_REVIEW_UNLOCK || canAccessSheet(index)) return index;
-      startFromGate = true;
-      return 2;
+      if (window.BAJourney && typeof window.BAJourney.clampToAccessible === 'function') {
+        return window.BAJourney.clampToAccessible(index);
+      }
+      return canAccessSheet(index) ? index : 0;
     }
 
     function resolveStartSheet() {
@@ -2440,15 +2158,6 @@
     });
 
     window.addEventListener('DOMContentLoaded', () => {
-      try {
-        const params = new URLSearchParams(location.search);
-        if (TEMP_REVIEW_UNLOCK || params.get('preview') === 'full' || params.get('preview') === '1') {
-          if (window.BAJourney) window.BAJourney.enablePreview();
-        }
-        if (TEMP_REVIEW_UNLOCK && !localStorage.getItem('daniel_placement_track_v1')) {
-          localStorage.setItem('daniel_placement_track_v1', 'foundations');
-        }
-      } catch (e) {}
       const guidePrimary = document.getElementById('sitting-guide-primary');
       const guideSkip = document.getElementById('sitting-guide-skip');
       if (guidePrimary) {
@@ -2458,18 +2167,11 @@
         });
       }
       if (guideSkip) guideSkip.addEventListener('click', finishIntroGuide);
-      const accessReturn = document.getElementById('access-return-btn');
-      const accessPreview = document.getElementById('access-preview-btn');
-      if (accessReturn) accessReturn.addEventListener('click', returnToFreeStudy);
-      if (accessPreview) accessPreview.addEventListener('click', enableTesterPreview);
       const certBtn = document.getElementById('btn-download-certificate');
       if (certBtn) certBtn.addEventListener('click', openCertificateIfReady);
       syncCertificateCta();
       applyFontSize();
       applyTheme(currentThemeIdx, true);
-      if (TEMP_REVIEW_UNLOCK) {
-        showToast('Review unlock on: every sheet and Continue are open.');
-      }
       resizeWeatherCanvas();
       updateAutoWeather();
       setWeatherPreset('auto', true);
@@ -2511,8 +2213,7 @@
           window.location.href = `map.html?year=${encodeURIComponent(y)}&from=lesson&sheet=${currentSheetIndex}`;
         });
       }
-      loadSheet(resolveStartSheet(), startFromGate ? { skipIntro: true } : undefined);
-      if (startFromGate) openAccessPanel();
+      loadSheet(resolveStartSheet());
       const notes = document.getElementById('sheet-notes');
       if (notes) {
         notes.addEventListener('input', () => {
@@ -2570,17 +2271,15 @@
       adjustFontSize,
       toggleTocDrawer,
       togglePomodoroDrawer,
-      toggleFlashlightBeam,
       setWeatherPreset,
       startPomodoro,
       pausePomodoro,
       resetPomodoro,
-      toggleAmbientAudio,
       setPomodoroDuration,
       openArtifactModal,
       closeArtifactModal,
       navigateSheet,
       completeAndAdvance,
-      openAccessPanel,
+      shareSitting,
       resetQuizQuestion
     });

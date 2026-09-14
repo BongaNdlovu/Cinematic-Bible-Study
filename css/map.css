@@ -525,6 +525,12 @@ html.cmap-html, body.cmap-page {
   object-fit: cover;
 }
 .cmap-year:hover { color: var(--cmap-gold-soft); }
+.cmap-year.is-locked,
+.cmap-year:disabled {
+  opacity: 0.38;
+  cursor: not-allowed;
+  pointer-events: none;
+}
 .cmap-year.active {
   color: #1a140c;
   background: linear-gradient(180deg, #f0d78c, #c9a227);

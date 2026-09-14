@@ -742,7 +742,7 @@
         guide: {
           intro: {
             title: "The dream, the metals, and the stone",
-            expect: "Daniel 2 names Babylon as the head of gold and walks the chain to a stone that fills the earth. This is the last free sitting.",
+            expect: "Daniel 2 names Babylon as the head of gold and walks the chain to a stone that fills the earth. Completing this sitting opens Dura.",
             do: [
               "Read the excerpt and the metal table. Keep 2:38, 2:43, and 2:44 in view. Then check the sources and quotations.",
               "Open Map and walk Babylon, Rome, and the stone’s mountain. Then view the assembled colossus.",
@@ -750,9 +750,9 @@
             ]
           },
           end: {
-            title: "The free sample ends here",
-            nextWhy: "Dura is the first sitting of the full scroll: an all-gold image and a furnace. Payments are not live; the next control opens the access preview.",
-            spotlight: "access-open-btn"
+            title: "Daniel 3 is next",
+            nextWhy: "Completing this sitting opens Dura: an all-gold image and a furnace.",
+            spotlight: "next-sheet-btn"
           }
         }
       },
