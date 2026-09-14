@@ -1,9 +1,15 @@
 (function () {
+  const NEXT_KEY = "baTermsNext";
   let busy = false;
   let lastFocus = null;
+  let overlayRequested = false;
 
   function journey() {
     return window.BAJourney;
+  }
+
+  function isCoverPage() {
+    return !!(document.body && document.body.classList.contains("cover"));
   }
 
   function hasAgreed() {
@@ -46,6 +52,66 @@
 
   function continueBtn() {
     return document.getElementById("terms-continue");
+  }
+
+  function dismissBtn() {
+    return document.getElementById("terms-dismiss");
+  }
+
+  function isExhibitHref(href) {
+    if (!href || href.charAt(0) === "#") return false;
+    try {
+      const u = new URL(href, location.href);
+      if (u.origin !== location.origin) return false;
+      const file = (u.pathname.split("/").pop() || "").split("?")[0];
+      return file === "study.html" || file === "gallery.html" || file === "map.html";
+    } catch (e) {
+      return false;
+    }
+  }
+
+  function rememberNext(href) {
+    try { sessionStorage.setItem(NEXT_KEY, href); } catch (e) {}
+  }
+
+  function takeNext() {
+    try {
+      const href = sessionStorage.getItem(NEXT_KEY);
+      sessionStorage.removeItem(NEXT_KEY);
+      return href;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  function clearNext() {
+    try { sessionStorage.removeItem(NEXT_KEY); } catch (e) {}
+  }
+
+  function hasAuthCode() {
+    try { return !!new URLSearchParams(location.search || "").get("code"); } catch (e) { return false; }
+  }
+
+  function dismissCoverGate() {
+    overlayRequested = false;
+    clearNext();
+    unlock();
+  }
+
+  function continueIfReady() {
+    if (!canEnter()) return false;
+    overlayRequested = false;
+    const next = takeNext();
+    unlock();
+    if (!next) return true;
+    try {
+      const dest = new URL(next, location.href);
+      if (dest.origin !== location.origin) return true;
+      const here = location.pathname + location.search + location.hash;
+      const there = dest.pathname + dest.search + dest.hash;
+      if (there !== here) location.assign(dest.href);
+    } catch (e) {}
+    return true;
   }
 
   function messages() {
@@ -144,6 +210,7 @@
         '</label>' +
         '<div class="terms-actions">' +
           '<button type="submit" id="terms-continue" class="terms-btn solid terms-btn-block">Sign in</button>' +
+          '<button type="button" id="terms-dismiss" class="terms-btn terms-btn-block" hidden>Back to the cover</button>' +
         '</div>' +
       '</form>';
     document.body.appendChild(root);
@@ -154,6 +221,7 @@
   function bindOverlay(root) {
     const form = root.querySelector("#terms-form");
     const input = agreeBox();
+    const back = dismissBtn();
     if (form) {
       form.addEventListener("submit", function (e) {
         e.preventDefault();
@@ -171,6 +239,30 @@
         }
       });
     }
+    if (back) {
+      back.addEventListener("click", function () {
+        dismissCoverGate();
+      });
+    }
+    root.addEventListener("click", function (e) {
+      if (e.target !== root || !isCoverPage()) return;
+      dismissCoverGate();
+    });
+  }
+
+  function bindCoverGates() {
+    if (!isCoverPage()) return;
+    document.addEventListener("click", function (e) {
+      if (canEnter()) return;
+      const a = e.target.closest("a[href]");
+      if (!a || a.getAttribute("target") === "_blank") return;
+      const href = a.getAttribute("href");
+      if (!isExhibitHref(href)) return;
+      e.preventDefault();
+      rememberNext(a.href);
+      overlayRequested = true;
+      lock();
+    }, true);
   }
 
   function lock() {
@@ -178,6 +270,8 @@
     const alreadyOpen = node && !node.hidden;
     node.hidden = false;
     document.body.classList.add("terms-locked", "site-locked");
+    const back = dismissBtn();
+    if (back) back.hidden = !isCoverPage();
     syncButton();
     const siteErr = window.SiteErrors && window.SiteErrors.current && window.SiteErrors.current();
     if (siteErr) setError("auth", siteErr);
@@ -209,8 +303,15 @@
   function syncLock() {
     ensureOverlay();
     syncButton();
-    if (canEnter()) unlock();
-    else lock();
+    if (canEnter()) {
+      continueIfReady();
+      return;
+    }
+    if (isCoverPage() && !overlayRequested) {
+      unlock();
+      return;
+    }
+    lock();
   }
 
   function submitGate() {
@@ -233,7 +334,7 @@
       return;
     }
     if (signedIn()) {
-      unlock();
+      continueIfReady();
       return;
     }
     if (!window.ScrollAuth || typeof window.ScrollAuth.signIn !== "function") {
@@ -250,7 +351,7 @@
       }
       if (res && res.data && res.data.url) return;
       setBusy(false);
-      if (canEnter()) unlock();
+      if (canEnter()) continueIfReady();
       else setError("unsigned", copy.unsigned);
     });
   }
@@ -260,6 +361,10 @@
     if (!node || node.hidden) return;
     if (e.key === "Escape") {
       e.preventDefault();
+      if (isCoverPage()) {
+        dismissCoverGate();
+        return;
+      }
       const copy = messages();
       setError("unsigned", signedIn() ? copy.agree : copy.unsigned);
     }
@@ -267,6 +372,8 @@
 
   function boot() {
     ensureOverlay();
+    bindCoverGates();
+    if (isCoverPage() && !hasAuthCode()) clearNext();
     document.addEventListener("keydown", onKey);
     if (window.ScrollAuth && typeof window.ScrollAuth.onChange === "function") {
       window.ScrollAuth.onChange(function () { syncLock(); });
