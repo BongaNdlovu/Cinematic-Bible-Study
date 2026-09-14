@@ -2599,6 +2599,33 @@ import * as THREE from 'three';
       });
     }
 
+    const TITLES_HIDE_KEY = 'gallery_hide_titles';
+    const btnTitlesToggle = document.getElementById('btn-titles-toggle');
+    function titlesHiddenStored() {
+      try { return localStorage.getItem(TITLES_HIDE_KEY) === '1'; } catch (e) { return false; }
+    }
+    function applyTitlesHidden(hidden, persist) {
+      document.body.classList.toggle('titles-hidden', hidden);
+      if (persist) {
+        try { localStorage.setItem(TITLES_HIDE_KEY, hidden ? '1' : '0'); } catch (e) {}
+      }
+      if (btnTitlesToggle) {
+        btnTitlesToggle.classList.toggle('active', !hidden);
+        btnTitlesToggle.setAttribute('aria-pressed', hidden ? 'true' : 'false');
+        const label = hidden ? 'Show artifact title' : 'Hide artifact title';
+        btnTitlesToggle.title = label;
+        btnTitlesToggle.setAttribute('aria-label', label);
+      }
+    }
+    applyTitlesHidden(titlesHiddenStored() || document.body.classList.contains('titles-hidden'), false);
+    if (btnTitlesToggle) {
+      btnTitlesToggle.addEventListener('click', () => {
+        const nextHidden = !document.body.classList.contains('titles-hidden');
+        applyTitlesHidden(nextHidden, true);
+        museumToast(nextHidden ? 'Artifact title hidden' : 'Artifact title shown');
+      });
+    }
+
     // Mobile notes sheet toggle shares the master-nodes state
     const btnNodesSheetToggle = document.getElementById('btn-nodes-sheet-toggle');
     if (btnNodesSheetToggle) {

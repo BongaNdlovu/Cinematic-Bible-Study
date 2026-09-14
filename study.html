@@ -1637,6 +1637,24 @@
       white-space: nowrap;
     }
     .header-read-btn:hover { border-color: #d97706; }
+    .auth-slot:empty { display: none; }
+    .study-tools .auth-signed-in,
+    .access-panel .auth-signed-in {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      min-width: 0;
+    }
+    .study-tools .auth-name,
+    .access-panel .auth-name {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 10px;
+      max-width: 120px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .access-panel .auth-slot { flex: 1 1 100%; }
     .header-read-btn.is-on {
       background: rgba(245, 158, 11, 0.18);
       border-color: #d97706;
@@ -2057,7 +2075,9 @@
       <h2 id="access-title">Student Beta Curriculum: Units 3–10 Unlocked</h2>
       <p>You have finished the foundational sitting: the battle of hermeneutics, the exilic covenant boundary, and the contiguous chain of four metals. The rest of the prophetic scroll—Dura, the four beasts, the little horn, the seventy weeks, the 2,300 days, and Michael standing—is now accessible in active Student Beta Preview.</p>
       <p>All study guides, quizzes, historical timeline epochs, interactive map coordinates, and 3D scenes are completely functional across Units 3 through 10.</p>
+      <p>Continue with Google to remember who you are. Sittings stay open during review.</p>
       <div class="sitting-guide-actions">
+        <span class="auth-slot" data-auth-slot data-auth-variant="access"></span>
         <button type="button" id="access-preview-btn" class="px-5 py-2.5 rounded bg-amber-600 text-paper-50 font-sans text-sm font-semibold">Enter Student Beta Preview (Units 3–10)</button>
         <button type="button" id="access-return-btn" class="px-4 py-2.5 rounded border border-amber-600/40 text-amber-200 font-sans text-sm">Review Foundations (Units 0–2)</button>
         <button type="button" id="access-unlock-btn" class="hidden px-5 py-2.5 rounded border border-amber-600/40 text-amber-200 font-sans text-sm btn-disabled" disabled title="Checkout is not live yet">Unlock the full scroll</button>
@@ -2113,6 +2133,7 @@
 
       <!-- Controls: Competency, charcoal torch, atmosphere, type, theme -->
       <div class="study-tools">
+        <span class="auth-slot" data-auth-slot data-auth-variant="study"></span>
         <span id="header-competency-pill" class="header-competency-pill" title="Current learning competency">
           <small>Competency</small>
           <span id="header-competency-text">Verifying the Prophetic Year-Day Metric</span>
@@ -2656,6 +2677,9 @@
   </div>
 
   <script src="js/shared/journey.js"></script>
+  <script src="js/shared/auth-config.js"></script>
+  <script src="vendor/supabase/supabase.js"></script>
+  <script src="js/shared/auth.js"></script>
   <script src="js/study/scripture.js"></script>
   <script src="js/map/map-data.js"></script>
   <script src="js/study/workbench.js"></script>

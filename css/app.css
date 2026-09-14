@@ -262,6 +262,7 @@
       gap: 3px;
       text-align: center;
     }
+    body.titles-hidden .hero-title-group { display: none; }
     .hero-eyebrow {
       font-family: var(--font-serif);
       font-size: 11px;
@@ -1529,7 +1530,7 @@
       .hero-main-title { font-size: 16px; letter-spacing: 0.08em; }
       .hero-eyebrow { font-size: 9px; }
       .header-utilities .util-btn { padding: 6px 8px; }
-      #btn-open-lab span, #btn-nodes-master { font-size: 11px; }
+      #btn-open-lab span, #btn-nodes-master, #btn-titles-toggle { font-size: 11px; }
       .stage-interaction-hint { display: none; }
       .study-lab-drawer { width: min(360px, 100vw); right: -100vw; }
     }

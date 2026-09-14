@@ -11,6 +11,9 @@
   <link rel="stylesheet" href="css/app.css">
   <link rel="preload" href="models/full_body.glb" as="fetch" crossorigin>
   <script src="js/shared/journey.js"></script>
+  <script src="js/shared/auth-config.js"></script>
+  <script src="vendor/supabase/supabase.js"></script>
+  <script src="js/shared/auth.js"></script>
   <script type="importmap">
   {
     "imports": {
@@ -21,6 +24,15 @@
   </script>
 </head>
 <body>
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem('gallery_hide_titles') === '1') {
+          document.body.classList.add('titles-hidden');
+        }
+      } catch (e) {}
+    })();
+  </script>
 
   <div id="webgl-container" role="img" aria-label="Interactive 3D view of the Daniel 2 colossus"></div>
   <div class="vignette" aria-hidden="true"></div>
@@ -81,6 +93,7 @@
       <button class="util-btn icon-only" id="btn-theme-toggle" type="button" title="Toggle lighting tone" aria-label="Toggle lighting tone">☀️</button>
       <button class="util-btn icon-only" id="btn-scripture-modal" type="button" title="Scripture" aria-label="Open scripture">📖</button>
       <button class="util-btn icon-only active" id="btn-nodes-master" type="button" title="Toggle annotation nodes" aria-label="Toggle nodes">◎</button>
+      <button class="util-btn icon-only active" id="btn-titles-toggle" type="button" title="Hide artifact title" aria-label="Hide artifact title" aria-pressed="false">Aa</button>
       <button class="util-btn icon-only" id="btn-mute" type="button" title="Mute gallery sound" aria-label="Mute sound">♪</button>
       <button class="util-btn icon-only" id="btn-open-lab" type="button" title="Study lab" aria-label="Open study lab">⚙</button>
       <button class="util-btn icon-only" id="btn-menu" type="button" title="Collection" aria-label="Open collection">☰</button>

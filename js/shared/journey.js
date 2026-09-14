@@ -74,7 +74,8 @@
     pathSheet: -1,
     seenIntro: {},
     previewFull: false,
-    betaPreview: ENABLE_BETA_PREVIEW_DEFAULT
+    betaPreview: ENABLE_BETA_PREVIEW_DEFAULT,
+    identity: null
   };
 
   function normalize(raw) {
@@ -87,6 +88,16 @@
     next.reducedMotion = !!next.reducedMotion;
     next.previewFull = !!next.previewFull;
     next.betaPreview = (raw && typeof raw.betaPreview === "boolean") ? raw.betaPreview : ENABLE_BETA_PREVIEW_DEFAULT;
+    const ident = raw && raw.identity;
+    if (ident && typeof ident === "object") {
+      next.identity = {
+        id: String(ident.id || ""),
+        email: String(ident.email || ""),
+        name: String(ident.name || "")
+      };
+    } else {
+      next.identity = null;
+    }
     return next;
   }
 
