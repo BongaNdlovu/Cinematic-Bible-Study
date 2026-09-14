@@ -77,7 +77,9 @@
     previewFull: false,
     betaPreview: ENABLE_BETA_PREVIEW_DEFAULT,
     identity: null,
-    termsAccepted: null
+    termsAccepted: null,
+    termsByUser: {},
+    pendingTerms: null
   };
 
   function normalize(raw) {
@@ -104,10 +106,29 @@
     if (terms && typeof terms === "object" && Number(terms.version) > 0) {
       next.termsAccepted = {
         version: Number(terms.version),
-        at: Number(terms.at) || 0
+        at: Number(terms.at) || 0,
+        userId: String(terms.userId || "")
       };
     } else {
       next.termsAccepted = null;
+    }
+    const byUser = {};
+    const rawMap = raw && raw.termsByUser && typeof raw.termsByUser === "object" ? raw.termsByUser : {};
+    Object.keys(rawMap).forEach(function (id) {
+      const rec = rawMap[id];
+      if (!id || !rec || typeof rec !== "object" || Number(rec.version) <= 0) return;
+      byUser[id] = { version: Number(rec.version), at: Number(rec.at) || 0 };
+    });
+    const tid = next.termsAccepted && next.termsAccepted.userId ? next.termsAccepted.userId : "";
+    if (tid && Number(next.termsAccepted.version) > 0 && !byUser[tid]) {
+      byUser[tid] = { version: Number(next.termsAccepted.version), at: Number(next.termsAccepted.at) || 0 };
+    }
+    next.termsByUser = byUser;
+    const pending = raw && raw.pendingTerms;
+    if (pending && typeof pending === "object" && Number(pending.version) > 0) {
+      next.pendingTerms = { version: Number(pending.version), at: Number(pending.at) || 0 };
+    } else {
+      next.pendingTerms = null;
     }
     return next;
   }
@@ -127,6 +148,7 @@
     if (patch.station) next.station = Object.assign({}, cur.station, patch.station);
     if (patch.unlocked) next.unlocked = Array.from(new Set(patch.unlocked));
     if (patch.seenIntro) next.seenIntro = Object.assign({}, cur.seenIntro, patch.seenIntro);
+    if (patch.termsByUser) next.termsByUser = Object.assign({}, cur.termsByUser, patch.termsByUser);
     try { localStorage.setItem(KEY, JSON.stringify(next)); } catch (e) {}
     return next;
   }
@@ -222,19 +244,72 @@
     return "Continue " + sheetLabel(resumeSheet());
   }
 
+  function currentUserId() {
+    try {
+      const u = window.ScrollAuth && window.ScrollAuth.getUser && window.ScrollAuth.getUser();
+      return (u && u.id) ? String(u.id) : "";
+    } catch (e) {
+      return "";
+    }
+  }
+
+  function termsRecordOk(rec) {
+    return !!(rec && Number(rec.version) === TERMS_VERSION);
+  }
+
   function hasAcceptedTerms() {
-    const cur = load().termsAccepted;
-    return !!(cur && cur.version === TERMS_VERSION);
+    const id = currentUserId();
+    if (!id) return false;
+    const cur = load();
+    if (termsRecordOk(cur.termsByUser[id])) return true;
+    return !!(cur.termsAccepted && cur.termsAccepted.userId === id && termsRecordOk(cur.termsAccepted));
   }
 
   function acceptTerms() {
-    save({ termsAccepted: { version: TERMS_VERSION, at: Date.now() } });
+    const at = Date.now();
+    const id = currentUserId();
+    if (id) {
+      const cur = load();
+      const termsByUser = Object.assign({}, cur.termsByUser);
+      termsByUser[id] = { version: TERMS_VERSION, at: at };
+      save({
+        termsByUser: termsByUser,
+        termsAccepted: { version: TERMS_VERSION, at: at, userId: id },
+        pendingTerms: null
+      });
+      try {
+        const stored = JSON.parse(localStorage.getItem(KEY) || "{}");
+        return !!(stored.termsByUser && stored.termsByUser[id] && Number(stored.termsByUser[id].version) === TERMS_VERSION);
+      } catch (e) {
+        return false;
+      }
+    }
+    save({ pendingTerms: { version: TERMS_VERSION, at: at } });
     try {
       const stored = JSON.parse(localStorage.getItem(KEY) || "{}");
-      return !!(stored.termsAccepted && stored.termsAccepted.version === TERMS_VERSION);
+      return !!(stored.pendingTerms && Number(stored.pendingTerms.version) === TERMS_VERSION);
     } catch (e) {
       return false;
     }
+  }
+
+  function commitPendingTerms(userId) {
+    const id = String(userId || "");
+    if (!id) return load();
+    const cur = load();
+    const termsByUser = Object.assign({}, cur.termsByUser);
+    const pending = cur.pendingTerms;
+    if (pending && Number(pending.version) === TERMS_VERSION) {
+      termsByUser[id] = { version: TERMS_VERSION, at: Number(pending.at) || Date.now() };
+    }
+    const rec = termsByUser[id];
+    return save({
+      termsByUser: termsByUser,
+      termsAccepted: rec
+        ? { version: rec.version, at: rec.at, userId: id }
+        : (cur.termsAccepted && cur.termsAccepted.userId === id ? cur.termsAccepted : null),
+      pendingTerms: null
+    });
   }
 
   function searchIndex() {
@@ -283,6 +358,7 @@
     resumeLabel: resumeLabel,
     hasAcceptedTerms: hasAcceptedTerms,
     acceptTerms: acceptTerms,
+    commitPendingTerms: commitPendingTerms,
     TERMS_VERSION: TERMS_VERSION,
     FREE_THROUGH: FREE_THROUGH,
     SHEET_LABELS: SHEET_LABELS,

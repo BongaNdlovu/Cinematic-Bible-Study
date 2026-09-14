@@ -53,9 +53,6 @@
     if (code === "session" || /session/i.test(raw)) {
       return "Your session ended. Sign in again to continue.";
     }
-    if (raw && !/supabase|oauth|pkce|token/i.test(raw)) {
-      return raw.charAt(0).toUpperCase() + raw.slice(1);
-    }
     return "Sign-in failed. Agree to the terms, then try again.";
   }
 
@@ -78,6 +75,9 @@
 
   function setUser(next) {
     user = next || null;
+    if (user && window.BAJourney && typeof window.BAJourney.commitPendingTerms === "function") {
+      window.BAJourney.commitPendingTerms(user.id);
+    }
     persistIdentity(user);
     if (user) clearError();
     listeners.forEach(function (fn) {

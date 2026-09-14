@@ -161,11 +161,11 @@
     syncButton();
     const siteErr = window.SiteErrors && window.SiteErrors.current && window.SiteErrors.current();
     if (siteErr) setError("auth", siteErr);
+    const input = agreeBox();
+    if (input) input.checked = hasAgreed();
     if (alreadyOpen) return;
     lastFocus = document.activeElement;
-    const input = agreeBox();
     if (input) {
-      input.checked = hasAgreed();
       if (!input.checked) input.focus();
       else {
         const btn = continueBtn();
