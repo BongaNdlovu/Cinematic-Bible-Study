@@ -384,12 +384,24 @@
     return !!(rec && Number(rec.version) === TERMS_VERSION);
   }
 
+  function hasPendingTerms() {
+    const cur = load();
+    return !!(cur.pendingTerms && Number(cur.pendingTerms.version) === TERMS_VERSION);
+  }
+
   function hasAcceptedTerms() {
     const id = currentUserId();
     if (!id) return false;
     const cur = load();
     if (termsRecordOk(cur.termsByUser[id])) return true;
     return !!(cur.termsAccepted && cur.termsAccepted.userId === id && termsRecordOk(cur.termsAccepted));
+  }
+
+  function storedOk(stored, id) {
+    if (id) {
+      return !!(stored.termsByUser && stored.termsByUser[id] && Number(stored.termsByUser[id].version) === TERMS_VERSION);
+    }
+    return !!(stored.pendingTerms && Number(stored.pendingTerms.version) === TERMS_VERSION);
   }
 
   function acceptTerms() {
@@ -405,19 +417,22 @@
         pendingTerms: null
       });
       try {
-        const stored = JSON.parse(localStorage.getItem(KEY) || "{}");
-        return !!(stored.termsByUser && stored.termsByUser[id] && Number(stored.termsByUser[id].version) === TERMS_VERSION);
+        return storedOk(JSON.parse(localStorage.getItem(KEY) || "{}"), id);
       } catch (e) {
         return false;
       }
     }
     save({ pendingTerms: { version: TERMS_VERSION, at: at } });
     try {
-      const stored = JSON.parse(localStorage.getItem(KEY) || "{}");
-      return !!(stored.pendingTerms && Number(stored.pendingTerms.version) === TERMS_VERSION);
+      return storedOk(JSON.parse(localStorage.getItem(KEY) || "{}"), "");
     } catch (e) {
       return false;
     }
+  }
+
+  function clearPendingTerms() {
+    if (currentUserId()) return load();
+    return save({ pendingTerms: null });
   }
 
   function commitPendingTerms(userId) {
@@ -428,6 +443,10 @@
     const pending = cur.pendingTerms;
     if (pending && Number(pending.version) === TERMS_VERSION) {
       termsByUser[id] = { version: TERMS_VERSION, at: Number(pending.at) || Date.now() };
+    }
+    const legacy = cur.termsAccepted;
+    if (!termsByUser[id] && legacy && termsRecordOk(legacy) && !legacy.userId) {
+      termsByUser[id] = { version: Number(legacy.version), at: Number(legacy.at) || Date.now() };
     }
     const rec = termsByUser[id];
     return save({
@@ -494,7 +513,9 @@
     resumeHref: resumeHref,
     resumeLabel: resumeLabel,
     hasAcceptedTerms: hasAcceptedTerms,
+    hasPendingTerms: hasPendingTerms,
     acceptTerms: acceptTerms,
+    clearPendingTerms: clearPendingTerms,
     commitPendingTerms: commitPendingTerms,
     TERMS_VERSION: TERMS_VERSION,
     SHEET_LABELS: SHEET_LABELS,

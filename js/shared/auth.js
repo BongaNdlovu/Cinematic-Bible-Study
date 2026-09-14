@@ -115,7 +115,8 @@
       signingIn = false;
       if (res && res.error) reportError(friendlyAuthError(res.error), "auth");
       renderAll();
-      if (window.ScrollTerms && typeof window.ScrollTerms.setBusy === "function") {
+      const redirected = !!(res && res.data && res.data.url && !(res && res.error));
+      if (!redirected && window.ScrollTerms && typeof window.ScrollTerms.setBusy === "function") {
         window.ScrollTerms.setBusy(false);
       }
       return res;

@@ -1,10 +1,23 @@
 (function () {
-  const J = window.BAJourney;
   let busy = false;
   let lastFocus = null;
 
+  function journey() {
+    return window.BAJourney;
+  }
+
   function hasAgreed() {
+    const J = journey();
     return !!(J && typeof J.hasAcceptedTerms === "function" && J.hasAcceptedTerms());
+  }
+
+  function hasPending() {
+    const J = journey();
+    return !!(J && typeof J.hasPendingTerms === "function" && J.hasPendingTerms());
+  }
+
+  function formConsented() {
+    return hasAgreed() || hasPending();
   }
 
   function signedIn() {
@@ -126,6 +139,7 @@
         '<div id="terms-error" class="terms-error" role="alert" hidden></div>' +
         '<label class="terms-check" id="terms-check-wrap" for="terms-agree">' +
           '<input id="terms-agree" name="terms-agree" type="checkbox" value="1">' +
+          '<span class="terms-box" aria-hidden="true"></span>' +
           '<span>I have read and agree to these terms.</span>' +
         '</label>' +
         '<div class="terms-actions">' +
@@ -148,7 +162,13 @@
     }
     if (input) {
       input.addEventListener("change", function () {
-        if (input.checked) setError("", "");
+        const J = journey();
+        if (input.checked) {
+          setError("", "");
+          if (J && typeof J.acceptTerms === "function") J.acceptTerms();
+        } else if (J && typeof J.clearPendingTerms === "function") {
+          J.clearPendingTerms();
+        }
       });
     }
   }
@@ -162,7 +182,9 @@
     const siteErr = window.SiteErrors && window.SiteErrors.current && window.SiteErrors.current();
     if (siteErr) setError("auth", siteErr);
     const input = agreeBox();
-    if (input) input.checked = hasAgreed();
+    if (input) {
+      if (!alreadyOpen || hasAgreed() || hasPending()) input.checked = formConsented();
+    }
     if (alreadyOpen) return;
     lastFocus = document.activeElement;
     if (input) {
@@ -194,6 +216,8 @@
   function submitGate() {
     const input = agreeBox();
     const copy = messages();
+    const J = journey();
+    if (input && !input.checked && formConsented()) input.checked = true;
     if (!input || !input.checked) {
       setError("agree", copy.agree);
       if (input) input.focus();
@@ -218,12 +242,14 @@
     }
     setBusy(true);
     window.ScrollAuth.signIn().then(function (res) {
-      setBusy(false);
       if (res && res.error) {
+        setBusy(false);
         const siteErr = window.SiteErrors && window.SiteErrors.current && window.SiteErrors.current();
         setError("auth", siteErr || copy.unsigned);
         return;
       }
+      if (res && res.data && res.data.url) return;
+      setBusy(false);
       if (canEnter()) unlock();
       else setError("unsigned", copy.unsigned);
     });
