@@ -85,6 +85,18 @@ Fetch paths are **document-relative** (pages stay at repo root): `bible/*.json`,
 
 Run verify scripts from the repo root so `server.py` and document-relative paths resolve.
 
+## Complexity ceiling
+
+`npm run lint` (`oxlint`) fails any function above **55**. That is an initial regression ceiling (max observed + 2), not the long-term target. Ratchet it down as hotspots are split. No `complexity` suppressions.
+
+| Score | Function | File:line |
+|---:|---|---|
+| 53 | `selectAsset` | `js/gallery/app.js:2677` |
+| 45 | `run` | `tools/verify/verify_all.mjs:94` |
+| 33 | `loadSheet` | `js/study/study-app.js:1834` |
+| 32 | `renderCompetencyRecordModal` | `js/study/competency.js:215` |
+| 28 | `setEpochInfo` | `js/study/study-app.js:34` |
+
 ## Offline runtime
 
 ```bash

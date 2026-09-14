@@ -8,7 +8,6 @@
   const REDUCE = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const KEY_STORE = "baGoogleMapsKey";
   const BASE_STORE = "baMapBasemap";
-  const MAX_BOUNDS = [[8, -18], [60, 82]];
 
   function epochById(id) {
     return DATA.epochs.find((e) => e.id === id) || DATA.epochs[0];
@@ -114,8 +113,8 @@
       const s = document.createElement("script");
       s.src = src;
       s.async = true;
-      s.onload = resolve;
-      s.onerror = () => reject(new Error("Failed to load " + src));
+      s.addEventListener("load", resolve);
+      s.addEventListener("error", () => reject(new Error("Failed to load " + src)));
       document.head.appendChild(s);
     });
   }
@@ -129,6 +128,27 @@
   function mount(root, options) {
     const opts = options || {};
     const cinematic = opts.mode !== "embed";
+    function yearOpen(id) {
+      if (!cinematic || !id) return true;
+      if (!window.BAJourney || typeof window.BAJourney.canAccessYear !== "function") return true;
+      return window.BAJourney.canAccessYear(id);
+    }
+    function nodeOpen(id) {
+      if (!cinematic || !id) return true;
+      if (!window.BAJourney || typeof window.BAJourney.canAccessMapNode !== "function") return true;
+      return window.BAJourney.canAccessMapNode(id);
+    }
+    function firstOpenYear() {
+      const hit = DATA.epochs.find((e) => yearOpen(e.id));
+      return hit ? hit.id : DATA.epochs[0].id;
+    }
+    function clampSheetIndex(n) {
+      if (n == null || Number.isNaN(Number(n))) return n;
+      if (window.BAJourney && typeof window.BAJourney.clampToAccessible === "function") {
+        return window.BAJourney.clampToAccessible(Number(n));
+      }
+      return Number(n);
+    }
     const state = {
       yearId: opts.year || DATA.epochs[0].id,
       polities: null,
@@ -147,8 +167,32 @@
       layers: { borders: true, cities: true, events: true, labels: true, routes: true },
       overlayOpacity: 1,
       routeLayer: null,
-      compareEl: null
+      compareEl: null,
+      sheetIndex: clampSheetIndex(opts.sheetIndex != null
+        ? opts.sheetIndex
+        : (opts.sheet != null && /^\d+$/.test(String(opts.sheet).trim()) ? Number(String(opts.sheet).trim()) : null))
     };
+    let mapReady = false;
+    let queuedSheet = null;
+
+    function sheetPack() {
+      if (state.sheetIndex == null || !window.SHEET_MAP) return null;
+      return window.SHEET_MAP[state.sheetIndex] || null;
+    }
+    function lessonOverlay(id) {
+      const pack = sheetPack();
+      if (!pack) return null;
+      return (pack.nodes || []).find((n) => n.id === id) || null;
+    }
+    function isLessonId(id) {
+      return !!lessonOverlay(id);
+    }
+    function dossierBodyHtml(text) {
+      if (!text) return "";
+      const t = String(text);
+      if (/<[a-z][\s\S]*>/i.test(t)) return t;
+      return t.split(/\n\n+/).map((p) => "<p>" + p.replace(/\n/g, "<br>") + "</p>").join("");
+    }
 
     root.classList.add(cinematic ? "cmap-root" : "cmap-embed");
     root.innerHTML = "";
@@ -175,7 +219,7 @@
       "<div class='cmap-legend-row'><img src='assets/maps/icons/metal-bronze.jpg' alt=''>Bronze · Greece</div>" +
       "<div class='cmap-legend-row'><img src='assets/maps/icons/metal-iron.jpg' alt=''>Iron · Rome</div>" +
       "<div class='cmap-legend-row'><img src='assets/maps/icons/metal-clay.jpg' alt=''>Iron &amp; clay</div>" +
-      "<div class='cmap-legend-row'><img src='assets/maps/icons/metal-stone.jpg' alt=''>Stone kingdom</div>" +
+      "<div class='cmap-legend-row'><img src='assets/maps/icons/metal-stone.jpg' alt=''>Stone — whole earth (map rim)</div>" +
       "<div class='cmap-legend-rule'></div>" +
       "<div class='cmap-legend-row'><img src='assets/maps/icons/key-city.jpg' alt=''>City</div>" +
       "<div class='cmap-legend-row'><img src='assets/maps/icons/key-battle.jpg' alt=''>Battle</div>" +
@@ -198,7 +242,10 @@
       const src = iconSrc(ep.metal);
       const b = el("button", { class: "cmap-year", type: "button", role: "tab", "data-year": ep.id, title: ep.title },
         "<img src='" + src + "' alt=''><span>" + ep.label + "</span>");
-      b.addEventListener("click", () => setYear(ep.id, { animate: true, chapter: cinematic }));
+      b.addEventListener("click", () => {
+        if (!yearOpen(ep.id)) return;
+        setYear(ep.id, { animate: true, chapter: cinematic });
+      });
       track.appendChild(b);
     });
     const playBtn = el("button", { class: "cmap-play", type: "button", title: "Play the chronicle", "aria-label": "Play the chronicle" }, "▶");
@@ -229,6 +276,15 @@
 
     let chrome = null;
     if (cinematic) {
+      const urlParams = (typeof location !== "undefined" && location.search) ? new URLSearchParams(location.search) : new URLSearchParams();
+      const fromLesson = (opts && opts.from === "lesson") || urlParams.get("from") === "lesson";
+      const sheetParam = (opts && opts.sheet !== undefined && opts.sheet !== null) ? opts.sheet : urlParams.get("sheet");
+      const isValidSheet = (s) => s !== null && s !== undefined && /^\d+$/.test(String(s).trim()) && Number(s) >= 0 && Number(s) <= 10;
+      const sheetSafe = (fromLesson && isValidSheet(sheetParam)) ? String(clampSheetIndex(sheetParam)) : null;
+      const backHref = sheetSafe ? `study.html?sheet=${encodeURIComponent(sheetSafe)}#sheet-article` : "study.html";
+      const backLabel = sheetSafe ? "← Back to this lesson" : "← Study desk";
+      const galleryHref = sheetSafe ? `gallery.html?from=lesson&sheet=${encodeURIComponent(sheetSafe)}` : "gallery.html";
+
       chrome = el("header", { class: "cmap-chrome" });
       chrome.innerHTML = `
         <a class="cmap-brand" href="index.html">
@@ -239,10 +295,10 @@
           BIBLE ARTIFACTS
         </a>
         <nav class="cmap-links">
-          <a class="cmap-back" href="study.html">← Study desk</a>
+          <a class="cmap-back" href="${backHref}">${backLabel}</a>
           <a href="index.html">Home</a>
           <a href="study.html">Study</a>
-          <a href="gallery.html">3D Gallery</a>
+          <a href="${galleryHref}">3D Gallery</a>
           <a class="active" href="map.html">Map</a>
         </nav>`;
     }
@@ -279,8 +335,9 @@
 
     function flyToEpoch(ep, animate) {
       const focus = DATA.events.find((e) => e.id === ep.event);
-      const lat = focus ? focus.lat : ep.camera.lat;
-      const lon = focus ? focus.lon : ep.camera.lon;
+      const useCam = ep.camera && ep.camera.useCamera;
+      const lat = useCam ? ep.camera.lat : (focus ? focus.lat : ep.camera.lat);
+      const lon = useCam ? ep.camera.lon : (focus ? focus.lon : ep.camera.lon);
       const z = tileZoom(ep);
       flyBadge.querySelector("img").src = iconSrc(ep.metal);
       flyBadge.querySelector("span").textContent = ep.label;
@@ -298,7 +355,7 @@
         state.lmap.flyTo([lat, lon], z, { duration: 1.55, easeLinearity: 0.2 });
         return new Promise((resolve) => state.lmap.once("moveend", () => { hideBadge(); resolve(); }));
       }
-      state.lmap.setView([lat, lon], z);
+      state.lmap.setView([lat, lon], z, { animate: false });
       hideBadge();
       return Promise.resolve();
     }
@@ -351,7 +408,7 @@
         <button class="cmap-close" type="button" aria-label="Close">✕</button>
         <div class="kicker">${d.kicker || ep.kicker}</div>
         <h2>${d.title}</h2>
-        <p>${d.body}</p>
+        ${dossierBodyHtml(d.body)}
         <div class="cite">${d.cite || ep.scripture}</div>
         ${ep.approximateYear ? '<p class="cmap-approx">Boundaries for this year are an approximate historicist overlay, not a surveyed frontier.</p>' : ""}
         ${styleSource(d, ep)}
@@ -418,6 +475,7 @@
         }
         if (state.layers.cities) DATA.cities.forEach((c) => addGoogleMarker(c, false, ep));
         if (state.layers.events) DATA.events.forEach((evn) => addGoogleMarker(evn, true, ep));
+        lessonExtraItems(ep).forEach((item) => addGoogleMarker(item, item.kind !== "city", ep));
         return;
       }
 
@@ -464,6 +522,7 @@
       state.markerLayer = L.layerGroup().addTo(state.lmap);
       if (state.layers.cities) DATA.cities.forEach((c) => addLeafletMarker(c, false, ep));
       if (state.layers.events) DATA.events.forEach((evn) => addLeafletMarker(evn, true, ep));
+      lessonExtraItems(ep).forEach((item) => addLeafletMarker(item, item.kind !== "city", ep));
       if (state.layers.routes) drawRoutes(ep);
       applyLabelLayer();
       applyOverlayOpacity();
@@ -532,8 +591,65 @@
       });
     }
 
+    function lessonExtraItems(ep) {
+      const pack = sheetPack();
+      if (!pack) return [];
+      return (pack.nodes || []).filter((n) => {
+        const known = DATA.events.some((e) => e.id === n.id) || DATA.cities.some((c) => c.id === n.id);
+        return !known && n.lat != null && n.lon != null;
+      }).map((n) => ({
+        id: n.id,
+        name: n.title,
+        lat: n.lat,
+        lon: n.lon,
+        yearId: n.yearId || ep.id,
+        kind: n.kind || "event",
+        kicker: n.kicker,
+        text: n.body,
+        scripture: n.scripture,
+        art: n.art
+      }));
+    }
+
+    function findMapItem(id) {
+      const event = DATA.events.find((e) => e.id === id);
+      if (event) return { item: event, isEvent: true };
+      const city = DATA.cities.find((c) => c.id === id);
+      if (city) return { item: city, isEvent: false };
+      const extras = lessonExtraItems(currentEpoch());
+      const extra = extras.find((e) => e.id === id);
+      if (extra) return { item: extra, isEvent: extra.kind !== "city" };
+      return null;
+    }
+
+    function openItemById(id) {
+      if (!nodeOpen(id)) return;
+      const found = findMapItem(id);
+      if (!found) return;
+      openDossier(markerCopy(found.item, found.isEvent));
+      if (found.item.lat != null && state.lmap) {
+        const z = Math.max(state.lmap.getZoom ? state.lmap.getZoom() : 5, 6);
+        state.lmap.flyTo([found.item.lat, found.item.lon], z, { duration: REDUCE ? 0 : 0.75 });
+      }
+    }
+
+    function markerCopy(item, isEvent) {
+      const overlay = lessonOverlay(item.id);
+      return {
+        kicker: (overlay && overlay.kicker) || item.kicker,
+        title: (overlay && overlay.title) || item.name,
+        body: (overlay && overlay.body) || item.text,
+        cite: (overlay && overlay.scripture) || item.scripture,
+        art: (overlay && overlay.art) || item.art || epochById(isEvent ? item.yearId : state.yearId).art,
+        kind: isEvent ? "event" : "city",
+        id: item.id
+      };
+    }
+
     function addLeafletMarker(item, isEvent, ep) {
-      const hot = isEvent ? item.yearId === ep.id : (item.pulse || []).includes(ep.id);
+      if (!nodeOpen(item.id)) return;
+      const lesson = isLessonId(item.id);
+      const hot = lesson || (isEvent ? item.yearId === ep.id : (item.pulse || []).includes(ep.id));
       if (isEvent && !hot && !cinematic) return;
       const kind = isEvent ? (item.kind || "battle") : "city";
       const src = iconSrc(kind);
@@ -544,24 +660,18 @@
         title: item.name
       });
       mk.on("click", () => {
-        if (isEvent && item.yearId !== state.yearId) {
+        if (isEvent && item.yearId !== state.yearId && !lesson) {
           setYear(item.yearId, { animate: true, chapter: cinematic });
         }
-        openDossier({
-          kicker: item.kicker,
-          title: item.name,
-          body: item.text,
-          cite: item.scripture,
-          art: item.art || epochById(isEvent ? item.yearId : state.yearId).art,
-          kind: isEvent ? "event" : "city",
-          id: item.id
-        });
+        openDossier(markerCopy(item, isEvent));
       });
       mk.addTo(state.markerLayer);
     }
 
     function addGoogleMarker(item, isEvent, ep) {
-      const hot = isEvent ? item.yearId === ep.id : (item.pulse || []).includes(ep.id);
+      if (!nodeOpen(item.id)) return;
+      const lesson = isLessonId(item.id);
+      const hot = lesson || (isEvent ? item.yearId === ep.id : (item.pulse || []).includes(ep.id));
       if (isEvent && !hot && !cinematic) return;
       const kind = isEvent ? (item.kind || "battle") : "city";
       const mk = new google.maps.Marker({
@@ -577,18 +687,10 @@
         }
       });
       mk.addListener("click", () => {
-        if (isEvent && item.yearId !== state.yearId) {
+        if (isEvent && item.yearId !== state.yearId && !lesson) {
           setYear(item.yearId, { animate: true, chapter: cinematic });
         }
-        openDossier({
-          kicker: item.kicker,
-          title: item.name,
-          body: item.text,
-          cite: item.scripture,
-          art: item.art || epochById(isEvent ? item.yearId : state.yearId).art,
-          kind: isEvent ? "event" : "city",
-          id: item.id
-        });
+        openDossier(markerCopy(item, isEvent));
       });
       state.gMarkers.push(mk);
     }
@@ -619,11 +721,9 @@
       state.lmap = L.map(tiles, {
         zoomControl: false,
         attributionControl: true,
-        minZoom: 3,
+        minZoom: 2,
         maxZoom: 12,
-        worldCopyJump: false,
-        maxBounds: MAX_BOUNDS,
-        maxBoundsViscosity: 0.8
+        worldCopyJump: true
       });
       const sat = L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}", {
         attribution: "Tiles © Esri",
@@ -693,11 +793,7 @@
         disableDefaultUI: true,
         zoomControl: cinematic,
         gestureHandling: "greedy",
-        backgroundColor: "#0a1218",
-        restriction: {
-          latLngBounds: { north: 60, south: 8, west: -18, east: 82 },
-          strictBounds: false
-        }
+        backgroundColor: "#0a1218"
       });
       credit.textContent = "Google Maps · Borders: Cliopatria / Seshat";
       state.gmap.addListener("mousemove", (e) => {
@@ -760,15 +856,21 @@
       cartouche.querySelector("strong").textContent = ep.label;
       cartouche.querySelector("span").textContent = ep.kicker;
       track.querySelectorAll(".cmap-year").forEach((b) => {
+        const open = yearOpen(b.dataset.year);
         b.classList.toggle("active", b.dataset.year === ep.id);
+        b.classList.toggle("is-locked", !open);
+        b.disabled = !open;
+        b.setAttribute("aria-disabled", open ? "false" : "true");
       });
       stone.style.opacity = String(ep.stone || 0);
+      root.classList.toggle("is-stone-world", Number(ep.stone || 0) > 0.05);
       const enter = root.querySelector(".cmap-enter-overlay");
       if (enter) enter.href = "map.html?year=" + ep.id;
       if (cinematic && history.replaceState) {
         try {
           const u = new URL(location.href);
           u.searchParams.set("year", ep.id);
+          if (state.sheetIndex != null) u.searchParams.set("sheet", String(state.sheetIndex));
           history.replaceState(null, "", u.pathname + u.search);
         } catch (e) {}
       }
@@ -777,26 +879,59 @@
     }
 
     async function setYear(id, flags) {
+      if (!yearOpen(id)) id = firstOpenYear();
       const ep = epochById(id);
       const f = flags || {};
       const gen = ++state.yearGen;
       state.yearId = ep.id;
       updateChrome(ep);
       drawOverlays(ep);
-      if (f.open !== false) openEpochDossier(ep);
+      if (f.open !== false && !f.focusId) openEpochDossier(ep);
       if (f.chapter !== false && cinematic && f.animate !== false) {
         await showChapter(ep);
         if (gen !== state.yearGen) return;
       }
       await flyToEpoch(ep, f.animate !== false);
+      if (gen !== state.yearGen) return;
+      if (f.focusId) openItemById(f.focusId);
+    }
+
+    function applySheet(index, flags) {
+      const f = flags || {};
+      state.sheetIndex = clampSheetIndex(index);
+      const pack = sheetPack();
+      const year = f.year || (pack && pack.year) || state.yearId;
+      const focus = f.focusId === null ? undefined : (f.focusId || (pack && pack.focusId));
+      return setYear(year, {
+        animate: f.animate !== false,
+        chapter: false,
+        open: false,
+        focusId: focus
+      });
+    }
+
+    function setSheet(index, flags) {
+      state.sheetIndex = clampSheetIndex(index);
+      if (!mapReady) {
+        queuedSheet = { index: state.sheetIndex, flags: flags || {} };
+        return Promise.resolve();
+      }
+      return applySheet(index, flags);
     }
 
     function yearIndex() {
       return DATA.epochs.findIndex((e) => e.id === state.yearId);
     }
     function stepYear(dir) {
-      const i = clamp(yearIndex() + dir, 0, DATA.epochs.length - 1);
-      setYear(DATA.epochs[i].id, { animate: true, chapter: cinematic });
+      let i = yearIndex();
+      for (let n = 0; n < DATA.epochs.length; n++) {
+        i = clamp(i + dir, 0, DATA.epochs.length - 1);
+        if (yearOpen(DATA.epochs[i].id)) {
+          setYear(DATA.epochs[i].id, { animate: true, chapter: cinematic });
+          return;
+        }
+        if (i === 0 || i === DATA.epochs.length - 1) break;
+      }
     }
     prevBtn.addEventListener("click", () => { state.playing = false; playBtn.textContent = "▶"; stepYear(-1); });
     nextBtn.addEventListener("click", () => { state.playing = false; playBtn.textContent = "▶"; stepYear(1); });
@@ -813,6 +948,7 @@
       if (i >= DATA.epochs.length - 1) i = 0;
       for (; i < DATA.epochs.length; i++) {
         if (!state.playing) break;
+        if (!yearOpen(DATA.epochs[i].id)) continue;
         await setYear(DATA.epochs[i].id, { animate: true, chapter: cinematic });
         if (!state.playing) break;
         await new Promise((r) => setTimeout(r, REDUCE ? 200 : 2600));
@@ -842,12 +978,15 @@
       if (q.length < 2) { searchHits.hidden = true; return; }
       const hits = [];
       DATA.epochs.forEach((ep) => {
+        if (!yearOpen(ep.id)) return;
         if ((ep.title + ep.label + ep.kicker).toLowerCase().indexOf(q) !== -1) hits.push({ kind: "year", id: ep.id, label: ep.label + " — " + ep.title });
       });
       DATA.cities.forEach((c) => {
+        if (!nodeOpen(c.id)) return;
         if (c.name.toLowerCase().indexOf(q) !== -1) hits.push({ kind: "city", id: c.id, year: (c.pulse && c.pulse[0]) || state.yearId, label: c.name, lat: c.lat, lon: c.lon });
       });
       DATA.events.forEach((evn) => {
+        if (!nodeOpen(evn.id)) return;
         if (evn.name.toLowerCase().indexOf(q) !== -1) hits.push({ kind: "event", id: evn.id, year: evn.yearId, label: evn.name, lat: evn.lat, lon: evn.lon });
       });
       searchHits.innerHTML = hits.slice(0, 8).map((h) => "<button type='button' data-kind='" + h.kind + "' data-id='" + h.id + "' data-year='" + (h.year || h.id) + "' data-lat='" + (h.lat || "") + "' data-lon='" + (h.lon || "") + "'>" + h.label + "</button>").join("") || "<p>No matches</p>";
@@ -865,13 +1004,17 @@
 
     if (cinematic) {
       window.addEventListener("keydown", (ev) => {
+        const t = ev.target;
+        const typing = t && (t.tagName === "INPUT" || t.tagName === "TEXTAREA" || t.tagName === "SELECT" || t.isContentEditable);
+        if (ev.key === "Escape") {
+          if (!keyPanel.hidden) keyPanel.hidden = true;
+          else dossier.classList.remove("open");
+          return;
+        }
+        if (typing) return;
         if (ev.key === "ArrowRight") { ev.preventDefault(); state.playing = false; playBtn.textContent = "▶"; stepYear(1); }
         else if (ev.key === "ArrowLeft") { ev.preventDefault(); state.playing = false; playBtn.textContent = "▶"; stepYear(-1); }
         else if (ev.key === " ") { ev.preventDefault(); playChronicle(); }
-        else if (ev.key === "Escape") {
-          if (!keyPanel.hidden) keyPanel.hidden = true;
-          else dossier.classList.remove("open");
-        }
       });
       window.setTimeout(() => hint.classList.add("is-gone"), 5200);
     }
@@ -896,7 +1039,14 @@
         return;
       }
       const params = new URLSearchParams(location.search);
-      const startId = parseYearParam(opts.year || params.get("year") || params.get("event")) || state.yearId;
+      if (cinematic && state.sheetIndex == null && /^\d+$/.test(String(params.get("sheet") || ""))) {
+        state.sheetIndex = clampSheetIndex(Number(params.get("sheet")));
+      }
+      const eventId = params.get("event");
+      const eventRaw = eventId ? DATA.events.find((e) => e.id === eventId) : null;
+      const eventItem = (eventRaw && nodeOpen(eventRaw.id)) ? eventRaw : null;
+      let startId = parseYearParam(opts.year || params.get("year") || (eventItem ? eventItem.yearId : null)) || state.yearId;
+      if (!yearOpen(startId)) startId = firstOpenYear();
       state.yearId = epochById(startId).id;
       let base = savedBase();
       const qBase = new URLSearchParams(location.search).get("basemap");
@@ -915,13 +1065,27 @@
         await new Promise((r) => setTimeout(r, 900));
         overture.classList.remove("show");
       }
-      await setYear(state.yearId, { animate: true, chapter: cinematic && !opts.skipOverture, open: true });
+      await setYear(state.yearId, {
+        animate: !eventItem,
+        chapter: cinematic && !opts.skipOverture,
+        open: cinematic && !eventItem
+      });
+      if (eventItem) openItemById(eventItem.id);
+      mapReady = true;
+      if (queuedSheet) {
+        await applySheet(queuedSheet.index, queuedSheet.flags);
+        queuedSheet = null;
+      } else if (!cinematic && state.sheetIndex != null) {
+        drawOverlays(currentEpoch());
+      }
     }
 
     start();
 
     return {
       setYear: (id, flags) => setYear(id, flags || { animate: true, chapter: false, open: false }),
+      setSheet: setSheet,
+      openNode: openItemById,
       resize: resize,
       getYear: () => state.yearId,
       el: root

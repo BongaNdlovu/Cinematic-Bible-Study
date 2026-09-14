@@ -9,41 +9,112 @@
         "book": "Daniel",
         "chapter": 1,
         "verses": "all",
-        "highlights": [1, 2]
+        "highlights": [
+          1,
+          2
+        ]
       }
     ],
     "marks": [
-      { "book": "Daniel", "chapter": 1, "verse": 1, "phrase": "Babylon", "strong": "H894" },
-      { "book": "Daniel", "chapter": 1, "verse": 2, "phrase": "the Lord", "strong": "H3068" }
+      {
+        "book": "Daniel",
+        "chapter": 1,
+        "verse": 1,
+        "phrase": "Babylon",
+        "strong": "H894"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 1,
+        "verse": 2,
+        "phrase": "the Lord",
+        "strong": "H3068"
+      }
     ],
     "loadBearing": [
       {
         "book": "Daniel",
         "chapter": 1,
         "verse": 1,
-        "connects": ["Jeremiah 25:11-12", "2 Kings 24:1"],
-        "sitting": "Jehoiakim’s third year is the first classroom. The gold kingdom is already on stage before any dream is given."
+        "connects": [
+          "Jeremiah 25:11-12",
+          "2 Kings 24:1"
+        ],
+        "plain": "This is a date, not a dream. In Jehoiakim’s third year (about 605 B.C.), Nebuchadnezzar of Babylon attacked Jerusalem and took the first captives.",
+        "links": [
+          {
+            "ref": "Jeremiah 25:11-12",
+            "because": "Jeremiah had already said Judah would serve Babylon seventy years. Daniel 1:1 is the start of that exile, not a one-off raid."
+          },
+          {
+            "ref": "2 Kings 24:1",
+            "because": "The history book records the same first submission of Jehoiakim to Babylon. Two witnesses, one year."
+          }
+        ],
+        "sitting": "The book opens on a real siege. Later kingdoms must sit on this dated world, not on a floating riddle."
       },
       {
         "book": "Daniel",
         "chapter": 1,
         "verse": 2,
-        "connects": ["Daniel 2:37-38", "Jeremiah 27:6"],
-        "sitting": "The Lord gave the king. Babylon did not seize the tape of history; Heaven handed it over."
+        "connects": [
+          "Daniel 2:37-38",
+          "Jeremiah 27:6"
+        ],
+        "plain": "The key verb is gave. Babylon’s army marched, but the Lord handed Jehoiakim and the temple vessels over. Heaven is writing the story.",
+        "links": [
+          {
+            "ref": "Daniel 2:37-38",
+            "because": "The same God later tells Nebuchadnezzar, “the God of heaven hath given thee a kingdom,” and names him the head of gold."
+          },
+          {
+            "ref": "Jeremiah 27:6",
+            "because": "Jeremiah already called Nebuchadnezzar God’s servant over the nations. Daniel 1:2 is that claim in one word: gave."
+          }
+        ],
+        "sitting": "If Heaven gave the first king away, Heaven also times every kingdom that follows."
       },
       {
         "book": "Numbers",
         "chapter": 14,
         "verse": 34,
-        "connects": ["Ezekiel 4:6", "Daniel 9:24-27"],
-        "sitting": "Forty days of search become forty years. That scale is how later apocalyptic days are read as years."
+        "connects": [
+          "Ezekiel 4:6",
+          "Daniel 9:24-27"
+        ],
+        "plain": "Israel’s spies searched Canaan for forty ordinary days. God then sentenced the nation to forty ordinary years: “each day for a year.” He is mapping counted days onto counted years.",
+        "links": [
+          {
+            "ref": "Ezekiel 4:6",
+            "because": "God says the same sentence again to Ezekiel in exile: “I have appointed thee each day for a year.” Two stories, one scale."
+          },
+          {
+            "ref": "Daniel 9:24-27",
+            "because": "Gabriel’s seventy weeks are 490 units. That cannot be 490 ordinary days and still hold a rebuilt city and the cross. Those weeks use this day-for-year scale."
+          }
+        ],
+        "sitting": "God taught the scale himself, long before Daniel. Later vision-days can stand for years because this appointment already exists."
       },
       {
         "book": "Ezekiel",
         "chapter": 4,
         "verse": 6,
-        "connects": ["Numbers 14:34", "Daniel 8:14"],
-        "sitting": "The same appointment — each day for a year — is spoken again to the exile. Daniel 9 then shows the scale working on a dated line."
+        "connects": [
+          "Numbers 14:34",
+          "Daniel 8:14"
+        ],
+        "plain": "God has Ezekiel lie on his side forty days for Judah, then explains the theatre: each of those body-days stands for a year of the nation’s sin.",
+        "links": [
+          {
+            "ref": "Numbers 14:34",
+            "because": "Same words, earlier story — the wilderness. Ezekiel is not inventing a secret code."
+          },
+          {
+            "ref": "Daniel 8:14",
+            "because": "The 2,300 evenings-mornings sit on this same ruler: a numbered day-unit that may mean a year."
+          }
+        ],
+        "sitting": "Ezekiel is already in exile, in Daniel’s world. The same Lord who numbered Ezekiel’s body-days later numbers Daniel’s visions."
       }
     ]
   },
@@ -53,49 +124,148 @@
     "language": "Hebrew",
     "jumpLabel": "The Lord gave the king · the purpose of heart",
     "sections": [
-      { "book": "Daniel", "chapter": 1, "verses": "all", "highlights": [2, 8, 17, 21] }
+      {
+        "book": "Daniel",
+        "chapter": 1,
+        "verses": "all",
+        "highlights": [
+          2,
+          8,
+          17,
+          21
+        ]
+      }
     ],
     "marks": [
-      { "book": "Daniel", "chapter": 1, "verse": 2, "phrase": "the Lord", "strong": "H3068" },
-      { "book": "Daniel", "chapter": 1, "verse": 6, "phrase": "Daniel", "strong": "H1840" },
-      { "book": "Daniel", "chapter": 1, "verse": 8, "phrase": "defile", "strong": "H1351" },
-      { "book": "Daniel", "chapter": 1, "verse": 17, "phrase": "visions", "strong": "H2377" }
+      {
+        "book": "Daniel",
+        "chapter": 1,
+        "verse": 2,
+        "phrase": "the Lord",
+        "strong": "H3068"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 1,
+        "verse": 6,
+        "phrase": "Daniel",
+        "strong": "H1840"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 1,
+        "verse": 8,
+        "phrase": "defile",
+        "strong": "H1351"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 1,
+        "verse": 17,
+        "phrase": "visions",
+        "strong": "H2377"
+      }
     ],
     "loadBearing": [
       {
         "book": "Daniel",
         "chapter": 1,
         "verse": 2,
-        "connects": ["Daniel 5:2-3"],
-        "sitting": "The vessels go into Marduk’s house. Chapter 5 will drink from them on the night gold falls."
+        "connects": [
+          "Daniel 5:2-3"
+        ],
+        "plain": "Temple cups from Jerusalem are carried into the house of a Babylonian god. They are still holy things, now sitting in the wrong house.",
+        "links": [
+          {
+            "ref": "Daniel 5:2-3",
+            "because": "Chapter 5 will bring those same cups to Belshazzar’s feast. The night gold falls begins with this first theft."
+          }
+        ],
+        "sitting": "Watch the vessels. The book will bring them back on the night the gold kingdom ends."
       },
       {
         "book": "Daniel",
         "chapter": 1,
         "verse": 8,
-        "connects": ["Leviticus 11:47", "Genesis 1:29"],
-        "sitting": "The first stand is at the table. Civic names can be worn; idol meat cannot."
+        "connects": [
+          "Leviticus 11:47",
+          "Genesis 1:29"
+        ],
+        "plain": "Daniel decides in his heart not to eat the king’s rich food or drink his wine. The line is worship, not a modern diet fad.",
+        "links": [
+          {
+            "ref": "Leviticus 11:47",
+            "because": "Israel already had a law that separated clean animals from unclean. The royal table mixed that line."
+          },
+          {
+            "ref": "Genesis 1:29",
+            "because": "Daniel asks for zeroim — seeds, plants, water. That is the older food of Genesis, not the meat offered to Marduk."
+          }
+        ],
+        "sitting": "He will wear a Babylonian name and learn the language. He will not join the king’s table as worship."
       },
       {
         "book": "Leviticus",
         "chapter": 11,
         "verse": 47,
-        "connects": ["Daniel 1:8", "Daniel 1:12"],
-        "sitting": "The difference between clean and unclean is already law. Daniel is not inventing a diet; he is refusing the king’s libation table."
+        "connects": [
+          "Daniel 1:8",
+          "Daniel 1:12"
+        ],
+        "plain": "Moses already told Israel how to tell clean food from unclean food. Daniel is using that law, not inventing a new rule.",
+        "links": [
+          {
+            "ref": "Daniel 1:8",
+            "because": "That is why “defile” is the right word. The king’s meat had crossed a line God had already drawn."
+          },
+          {
+            "ref": "Daniel 1:12",
+            "because": "The ten-day test on vegetables and water is how Daniel keeps that old line without quitting his job."
+          }
+        ],
+        "sitting": "The first stand is at a plate. Identity is tested before any vision is given."
       },
       {
         "book": "Daniel",
         "chapter": 1,
         "verse": 17,
-        "connects": ["Daniel 2:19", "Daniel 7:1"],
-        "sitting": "Wisdom is given before the first dream. The later visions rest on this gift."
+        "connects": [
+          "Daniel 2:19",
+          "Daniel 7:1"
+        ],
+        "plain": "God gives these four youths learning and skill, and to Daniel he gives understanding in visions. The gift comes before the first dream.",
+        "links": [
+          {
+            "ref": "Daniel 2:19",
+            "because": "The secret of Nebuchadnezzar’s dream is revealed in a night vision — the gift of 1:17 going to work."
+          },
+          {
+            "ref": "Daniel 7:1",
+            "because": "Later beasts come in a dream as well. Chapter 1 already told you Daniel can receive what Heaven shows."
+          }
+        ],
+        "sitting": "Wisdom is given first. The later visions rest on this gift, not on Babylonian magic."
       },
       {
         "book": "Daniel",
         "chapter": 1,
         "verse": 21,
-        "connects": ["Daniel 5:31", "Daniel 6:28"],
-        "sitting": "Daniel outlasts the gold head. The book’s first chapter already reaches the silver."
+        "connects": [
+          "Daniel 5:31",
+          "Daniel 6:28"
+        ],
+        "plain": "Daniel is still there when Cyrus the Persian comes. He outlives the gold kingdom.",
+        "links": [
+          {
+            "ref": "Daniel 5:31",
+            "because": "Babylon falls in a night; Darius the Mede receives the kingdom. Daniel is still on the payroll."
+          },
+          {
+            "ref": "Daniel 6:28",
+            "because": "Daniel prospers in the reign of Darius and in the reign of Cyrus. The first chapter already reached the silver."
+          }
+        ],
+        "sitting": "The book’s first page already looks past Babylon. The chain will not stop at gold."
       }
     ]
   },
@@ -105,67 +275,271 @@
     "language": "Aramaic from 2:4b",
     "jumpLabel": "The image and the stone",
     "sections": [
-      { "book": "Daniel", "chapter": 2, "verses": "all", "highlights": [[28, 28], [31, 45]] }
+      {
+        "book": "Daniel",
+        "chapter": 2,
+        "verses": "all",
+        "highlights": [
+          [
+            28,
+            28
+          ],
+          [
+            31,
+            45
+          ]
+        ]
+      }
     ],
     "stations": [
-      { "book": "Daniel", "chapter": 2, "verse": 32, "station": "gold" },
-      { "book": "Daniel", "chapter": 2, "verse": 33, "station": "iron" },
-      { "book": "Daniel", "chapter": 2, "verse": 34, "station": "stone" },
-      { "book": "Daniel", "chapter": 2, "verse": 38, "station": "gold" },
-      { "book": "Daniel", "chapter": 2, "verse": 39, "station": "silver" },
-      { "book": "Daniel", "chapter": 2, "verse": 40, "station": "iron" },
-      { "book": "Daniel", "chapter": 2, "verse": 41, "station": "feet" },
-      { "book": "Daniel", "chapter": 2, "verse": 44, "station": "stone" },
-      { "book": "Daniel", "chapter": 2, "verse": 45, "station": "stone" }
+      {
+        "book": "Daniel",
+        "chapter": 2,
+        "verse": 32,
+        "station": "gold"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 2,
+        "verse": 33,
+        "station": "iron"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 2,
+        "verse": 34,
+        "station": "stone"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 2,
+        "verse": 38,
+        "station": "gold"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 2,
+        "verse": 39,
+        "station": "silver"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 2,
+        "verse": 40,
+        "station": "iron"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 2,
+        "verse": 41,
+        "station": "feet"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 2,
+        "verse": 44,
+        "station": "stone"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 2,
+        "verse": 45,
+        "station": "stone"
+      }
     ],
     "marks": [
-      { "book": "Daniel", "chapter": 2, "verse": 28, "phrase": "revealeth secrets", "strong": "H7328" },
-      { "book": "Daniel", "chapter": 2, "verse": 31, "phrase": "great image", "strong": "H6755" },
-      { "book": "Daniel", "chapter": 2, "verse": 32, "phrase": "gold", "strong": "H1722", "station": "gold" },
-      { "book": "Daniel", "chapter": 2, "verse": 32, "phrase": "silver", "strong": "H3702", "station": "silver" },
-      { "book": "Daniel", "chapter": 2, "verse": 32, "phrase": "brass", "strong": "H5174", "station": "bronze" },
-      { "book": "Daniel", "chapter": 2, "verse": 33, "phrase": "iron", "strong": "H6523", "station": "iron" },
-      { "book": "Daniel", "chapter": 2, "verse": 33, "phrase": "clay", "strong": "H2635", "station": "feet" },
-      { "book": "Daniel", "chapter": 2, "verse": 34, "phrase": "stone", "strong": "H69", "station": "stone" },
-      { "book": "Daniel", "chapter": 2, "verse": 38, "phrase": "head of gold", "strong": "H1722", "station": "gold" },
-      { "book": "Daniel", "chapter": 2, "verse": 44, "phrase": "kingdom", "strong": "H4437", "station": "stone" },
-      { "book": "Daniel", "chapter": 2, "verse": 45, "phrase": "brake in pieces", "strong": "H1855", "station": "stone" }
+      {
+        "book": "Daniel",
+        "chapter": 2,
+        "verse": 28,
+        "phrase": "revealeth secrets",
+        "strong": "H7328"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 2,
+        "verse": 31,
+        "phrase": "great image",
+        "strong": "H6755"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 2,
+        "verse": 32,
+        "phrase": "gold",
+        "strong": "H1722",
+        "station": "gold"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 2,
+        "verse": 32,
+        "phrase": "silver",
+        "strong": "H3702",
+        "station": "silver"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 2,
+        "verse": 32,
+        "phrase": "brass",
+        "strong": "H5174",
+        "station": "bronze"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 2,
+        "verse": 33,
+        "phrase": "iron",
+        "strong": "H6523",
+        "station": "iron"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 2,
+        "verse": 33,
+        "phrase": "clay",
+        "strong": "H2635",
+        "station": "feet"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 2,
+        "verse": 34,
+        "phrase": "stone",
+        "strong": "H69",
+        "station": "stone"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 2,
+        "verse": 38,
+        "phrase": "head of gold",
+        "strong": "H1722",
+        "station": "gold"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 2,
+        "verse": 44,
+        "phrase": "kingdom",
+        "strong": "H4437",
+        "station": "stone"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 2,
+        "verse": 45,
+        "phrase": "brake in pieces",
+        "strong": "H1855",
+        "station": "stone"
+      }
     ],
     "loadBearing": [
       {
         "book": "Daniel",
         "chapter": 2,
         "verse": 28,
-        "connects": ["Daniel 2:19", "Daniel 2:47"],
-        "sitting": "Court occultism cannot steal what Heaven reveals. The dream is history, not flattery."
+        "connects": [
+          "Daniel 2:19",
+          "Daniel 2:47"
+        ],
+        "plain": "Daniel tells the king there is a God in heaven who reveals secrets, and this dream is about what will happen in the latter days — real future history.",
+        "links": [
+          {
+            "ref": "Daniel 2:19",
+            "because": "The secret was given to Daniel in a night vision after prayer, not by the court magicians."
+          },
+          {
+            "ref": "Daniel 2:47",
+            "because": "Even Nebuchadnezzar admits Daniel’s God is a God of gods who reveals secrets. The dream is not flattery."
+          }
+        ],
+        "sitting": "Court magic cannot steal what Heaven shows. The statue is a map of kingdoms, not a compliment."
       },
       {
         "book": "Daniel",
         "chapter": 2,
         "verse": 38,
-        "connects": ["Jeremiah 27:6", "Daniel 7:4"],
-        "sitting": "The head is named: thou art this head of gold. Every later metal is measured from this identification."
+        "connects": [
+          "Jeremiah 27:6",
+          "Daniel 7:4"
+        ],
+        "plain": "God names the first metal for you: “Thou art this head of gold.” Babylon is the starting point. Later metals cannot restart the statue in another century.",
+        "links": [
+          {
+            "ref": "Jeremiah 27:6",
+            "because": "Jeremiah already said God gave the beasts of the field into Nebuchadnezzar’s hand — the same grant Daniel reads onto the golden head."
+          },
+          {
+            "ref": "Daniel 7:4",
+            "because": "Chapter 7 will draw the same first kingdom as a lion. Gold and lion are one empire, two pictures."
+          }
+        ],
+        "sitting": "Only the head is named here. Walk “after… after… after” from this verse. Do not invent a new head of gold."
       },
       {
         "book": "Jeremiah",
         "chapter": 27,
         "verse": 6,
-        "connects": ["Daniel 2:37-38", "Daniel 1:2"],
-        "sitting": "Jeremiah already called Nebuchadnezzar God’s servant over the beasts of the field — the same grant Daniel reads onto the golden head."
+        "connects": [
+          "Daniel 2:37-38",
+          "Daniel 1:2"
+        ],
+        "plain": "Long before the dream, Jeremiah said God had given Nebuchadnezzar the nations and even the beasts of the field.",
+        "links": [
+          {
+            "ref": "Daniel 2:37-38",
+            "because": "Daniel uses that same grant: the God of heaven gave the king a kingdom, and that is why he is the head of gold."
+          },
+          {
+            "ref": "Daniel 1:2",
+            "because": "The first page already said the Lord gave Jehoiakim into this king’s hand. Jeremiah and Daniel agree: Heaven handed power over."
+          }
+        ],
+        "sitting": "Daniel is not guessing. He is reading Babylon the way Jeremiah already named it."
       },
       {
         "book": "Daniel",
         "chapter": 2,
         "verse": 43,
-        "connects": ["Daniel 2:41-42", "Daniel 7:24"],
-        "sitting": "They mingle and do not cleave. The last metal is a mixture, not a fifth world empire."
+        "connects": [
+          "Daniel 2:41-42",
+          "Daniel 7:24"
+        ],
+        "plain": "The last part of the statue is iron mixed with clay. Rulers will try to glue the pieces together (even by marriage), but they will not stick.",
+        "links": [
+          {
+            "ref": "Daniel 2:41-42",
+            "because": "The feet and toes are that mixture: partly strong, partly broken. This is divided Europe after Rome, not a fifth world-empire of one metal."
+          },
+          {
+            "ref": "Daniel 7:24",
+            "because": "Chapter 7 will show the same stage as ten horns — many kings where one iron beast used to be."
+          }
+        ],
+        "sitting": "The last metal is a mixture. Do not look for one more gold head. Look for kingdoms that will not cleave."
       },
       {
         "book": "Daniel",
         "chapter": 2,
         "verse": 44,
-        "connects": ["Daniel 7:13-14", "Daniel 2:34-35"],
-        "sitting": "The stone does not patch the statue. It breaks the kingdoms and stands forever."
+        "connects": [
+          "Daniel 7:13-14",
+          "Daniel 2:34-35"
+        ],
+        "plain": "In the days of those divided kings, God sets up a kingdom that never ends. It does not join the statue. It breaks it.",
+        "links": [
+          {
+            "ref": "Daniel 7:13-14",
+            "because": "The same forever-kingdom is given to one like a son of man. Chapter 2’s stone and chapter 7’s son of man are one hope."
+          },
+          {
+            "ref": "Daniel 2:34-35",
+            "because": "The stone cut without hands strikes the feet, then fills the earth. That is arrival, not a repair kit."
+          }
+        ],
+        "sitting": "The stone does not patch Babylon or Rome. It ends the metals and stands forever."
       }
     ]
   },
@@ -175,47 +549,145 @@
     "language": "Aramaic",
     "jumpLabel": "The counterfeit image and the fourth figure",
     "sections": [
-      { "book": "Daniel", "chapter": 3, "verses": "all", "highlights": [1, [5, 6], [17, 18], 25] }
+      {
+        "book": "Daniel",
+        "chapter": 3,
+        "verses": "all",
+        "highlights": [
+          1,
+          [
+            5,
+            6
+          ],
+          [
+            17,
+            18
+          ],
+          25
+        ]
+      }
     ],
     "marks": [
-      { "book": "Daniel", "chapter": 3, "verse": 1, "phrase": "image of gold", "strong": "H6755" },
-      { "book": "Daniel", "chapter": 3, "verse": 18, "phrase": "we will not serve", "strong": "H4437" }
+      {
+        "book": "Daniel",
+        "chapter": 3,
+        "verse": 1,
+        "phrase": "image of gold",
+        "strong": "H6755"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 3,
+        "verse": 18,
+        "phrase": "we will not serve",
+        "strong": "H4437"
+      }
     ],
     "loadBearing": [
       {
         "book": "Daniel",
         "chapter": 3,
         "verse": 1,
-        "connects": ["Daniel 2:32", "Daniel 2:38"],
-        "sitting": "An all-gold image answers the dream with a counter-creed: Babylon will not be replaced."
+        "connects": [
+          "Daniel 2:32",
+          "Daniel 2:38"
+        ],
+        "plain": "Nebuchadnezzar builds a huge image made entirely of gold — no silver, bronze, or iron. He is answering last night’s dream with a public “no.”",
+        "links": [
+          {
+            "ref": "Daniel 2:32",
+            "because": "The dream-statue had four metals. An all-gold image erases the other three."
+          },
+          {
+            "ref": "Daniel 2:38",
+            "because": "God said only the head is gold. This statue claims the whole body will stay Babylon forever."
+          }
+        ],
+        "sitting": "Dura is not interior design. It is a counter-creed: Babylon will not be replaced."
       },
       {
         "book": "Daniel",
         "chapter": 3,
         "verse": 6,
-        "connects": ["Revelation 13:15", "Daniel 3:5"],
-        "sitting": "Worship or burn. The later image that must be worshipped already has its rehearsal."
+        "connects": [
+          "Revelation 13:15",
+          "Daniel 3:5"
+        ],
+        "plain": "The rule is simple and cruel: when the music plays, bow, or be thrown into the furnace.",
+        "links": [
+          {
+            "ref": "Daniel 3:5",
+            "because": "The signal is civic music. Worship is being made into a two-second public habit."
+          },
+          {
+            "ref": "Revelation 13:15",
+            "because": "A later image also kills those who will not worship. Dura is the rehearsal of that pattern."
+          }
+        ],
+        "sitting": "Forced worship always arrives as a small civic bow before it arrives as a furnace."
       },
       {
         "book": "Revelation",
         "chapter": 13,
         "verse": 15,
-        "connects": ["Daniel 3:5-6", "Daniel 7:25"],
-        "sitting": "The image of the beast also kills those who will not worship. Dura is the pattern, not a closed antique."
+        "connects": [
+          "Daniel 3:5-6",
+          "Daniel 7:25"
+        ],
+        "plain": "John sees an image that is given power to kill whoever will not worship it. That is Dura written on a larger stage.",
+        "links": [
+          {
+            "ref": "Daniel 3:5-6",
+            "because": "Same structure: an image, a command to worship, death for refusal."
+          },
+          {
+            "ref": "Daniel 7:25",
+            "because": "The little horn also presses saints and changes times and laws. The pattern is religious force, not only a Babylonian night."
+          }
+        ],
+        "sitting": "Dura is the pattern, not a closed antique. Learn the bow here so you can name it later."
       },
       {
         "book": "Daniel",
         "chapter": 3,
         "verse": 18,
-        "connects": ["Acts 5:29", "Exodus 20:4-5"],
-        "sitting": "But if not: allegiance is not a bargain for rescue. The second commandment stands when the furnace is lit."
+        "connects": [
+          "Acts 5:29",
+          "Exodus 20:4-5"
+        ],
+        "plain": "The three men say God can save them — and if he does not, they still will not serve the image. Loyalty is not a bargain for rescue.",
+        "links": [
+          {
+            "ref": "Exodus 20:4-5",
+            "because": "The second commandment already forbade making an image and bowing to it. They are keeping that word."
+          },
+          {
+            "ref": "Acts 5:29",
+            "because": "The apostles later say the same limit: we ought to obey God rather than men."
+          }
+        ],
+        "sitting": "“But if not” is the sitting’s sentence. Allegiance does not wait to see whether the fire is cooled."
       },
       {
         "book": "Daniel",
         "chapter": 3,
         "verse": 25,
-        "connects": ["Daniel 3:28", "Isaiah 43:2"],
-        "sitting": "The fourth figure walks in the fire. Deliverance is presence, not always prevention."
+        "connects": [
+          "Daniel 3:28",
+          "Isaiah 43:2"
+        ],
+        "plain": "The king sees four men walking in the fire, unbound, and the fourth looks like a son of the gods. God is in the furnace with them.",
+        "links": [
+          {
+            "ref": "Daniel 3:28",
+            "because": "Nebuchadnezzar himself admits God sent his angel and delivered his servants who trusted him."
+          },
+          {
+            "ref": "Isaiah 43:2",
+            "because": "Isaiah already promised: when you walk through the fire, you shall not be burned. Presence, not always prevention."
+          }
+        ],
+        "sitting": "Deliverance here is God walking in the heat, not a promise that the heat will never be lit."
       }
     ]
   },
@@ -225,34 +697,109 @@
     "language": "Aramaic",
     "jumpLabel": "The watcher, the stump, and the Most High",
     "sections": [
-      { "book": "Daniel", "chapter": 4, "verses": "all", "highlights": [[13, 17], 30, [34, 37]] }
+      {
+        "book": "Daniel",
+        "chapter": 4,
+        "verses": "all",
+        "highlights": [
+          [
+            13,
+            17
+          ],
+          30,
+          [
+            34,
+            37
+          ]
+        ]
+      }
     ],
     "marks": [
-      { "book": "Daniel", "chapter": 4, "verse": 13, "phrase": "watcher", "strong": "H5894" },
-      { "book": "Daniel", "chapter": 4, "verse": 17, "phrase": "kingdom of men", "strong": "H4437" },
-      { "book": "Daniel", "chapter": 4, "verse": 30, "phrase": "great Babylon", "strong": "H895" }
+      {
+        "book": "Daniel",
+        "chapter": 4,
+        "verse": 13,
+        "phrase": "watcher",
+        "strong": "H5894"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 4,
+        "verse": 17,
+        "phrase": "kingdom of men",
+        "strong": "H4437"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 4,
+        "verse": 30,
+        "phrase": "great Babylon",
+        "strong": "H895"
+      }
     ],
     "loadBearing": [
       {
         "book": "Daniel",
         "chapter": 4,
         "verse": 17,
-        "connects": ["Daniel 2:21", "Daniel 4:25"],
-        "sitting": "The Most High rules the kingdom of men. The gold head is a trustee, not an owner."
+        "connects": [
+          "Daniel 2:21",
+          "Daniel 4:25"
+        ],
+        "plain": "Heaven states the lesson of the chapter: the Most High rules in the kingdom of men and gives it to whom he will. Kings are trustees, not owners.",
+        "links": [
+          {
+            "ref": "Daniel 2:21",
+            "because": "Chapter 2 already said God removes kings and sets up kings. Chapter 4 makes one king live that sentence."
+          },
+          {
+            "ref": "Daniel 4:25",
+            "because": "The same words are repeated when the sentence falls. The chapter exists to teach this one truth about thrones."
+          }
+        ],
+        "sitting": "The gold head is on loan. Write 4:17 before you watch the boast on the roof."
       },
       {
         "book": "Daniel",
         "chapter": 4,
         "verse": 30,
-        "connects": ["Daniel 5:22-23", "Isaiah 14:13-14"],
-        "sitting": "I have built. The sentence falls while the boast is still in the mouth."
+        "connects": [
+          "Daniel 5:22-23",
+          "Isaiah 14:13-14"
+        ],
+        "plain": "On the palace roof the king says, “Is not this great Babylon that I have built?” He credits himself for what Heaven gave.",
+        "links": [
+          {
+            "ref": "Daniel 5:22-23",
+            "because": "Belshazzar will know this story and still lift himself up. Chapter 5 is what happens when a grandson ignores 4:30."
+          },
+          {
+            "ref": "Isaiah 14:13-14",
+            "because": "The older boast is “I will ascend.” Nebuchadnezzar’s “I have built” is the same pride in civic clothes."
+          }
+        ],
+        "sitting": "The sentence falls while the boast is still in the mouth. Pride is the charge; the field is the sentence."
       },
       {
         "book": "Daniel",
         "chapter": 4,
         "verse": 34,
-        "connects": ["Daniel 4:37", "Daniel 7:4"],
-        "sitting": "Eyes lifted, reason returns. The lion is given a man’s heart after the wings are plucked."
+        "connects": [
+          "Daniel 4:37",
+          "Daniel 7:4"
+        ],
+        "plain": "After seven ordinary years as a beast, the king lifts his eyes to heaven and his mind comes back. Sanity returns with worship.",
+        "links": [
+          {
+            "ref": "Daniel 4:37",
+            "because": "He publishes the lesson: those who walk in pride God is able to abase. The chapter ends as a decree of praise."
+          },
+          {
+            "ref": "Daniel 7:4",
+            "because": "The lion is given a man’s heart after its wings are plucked — chapter 4 restaged as a beast. These “seven times” are a man’s years, not 2,520 prophetic years."
+          }
+        ],
+        "sitting": "A mind that can praise again is the prize. The stump was banded so Babylon could still stand while the king learned."
       }
     ]
   },
@@ -262,44 +809,151 @@
     "language": "Aramaic",
     "jumpLabel": "Numbered, weighed, divided",
     "sections": [
-      { "book": "Daniel", "chapter": 5, "verses": "all", "highlights": [5, [25, 28], [30, 31]] }
+      {
+        "book": "Daniel",
+        "chapter": 5,
+        "verses": "all",
+        "highlights": [
+          5,
+          [
+            25,
+            28
+          ],
+          [
+            30,
+            31
+          ]
+        ]
+      }
     ],
     "marks": [
-      { "book": "Daniel", "chapter": 5, "verse": 25, "phrase": "MENE", "strong": "H4483" },
-      { "book": "Daniel", "chapter": 5, "verse": 25, "phrase": "TEKEL", "strong": "H8625" },
-      { "book": "Daniel", "chapter": 5, "verse": 25, "phrase": "UPHARSIN", "strong": "H6537" },
-      { "book": "Daniel", "chapter": 5, "verse": 26, "phrase": "numbered", "strong": "H4483" },
-      { "book": "Daniel", "chapter": 5, "verse": 27, "phrase": "weighed", "strong": "H8625" },
-      { "book": "Daniel", "chapter": 5, "verse": 28, "phrase": "divided", "strong": "H6537" }
+      {
+        "book": "Daniel",
+        "chapter": 5,
+        "verse": 25,
+        "phrase": "MENE",
+        "strong": "H4483"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 5,
+        "verse": 25,
+        "phrase": "TEKEL",
+        "strong": "H8625"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 5,
+        "verse": 25,
+        "phrase": "UPHARSIN",
+        "strong": "H6537"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 5,
+        "verse": 26,
+        "phrase": "numbered",
+        "strong": "H4483"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 5,
+        "verse": 27,
+        "phrase": "weighed",
+        "strong": "H8625"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 5,
+        "verse": 28,
+        "phrase": "divided",
+        "strong": "H6537"
+      }
     ],
     "loadBearing": [
       {
         "book": "Daniel",
         "chapter": 5,
         "verse": 5,
-        "connects": ["Daniel 1:2", "Daniel 5:2-4"],
-        "sitting": "The vessels from chapter 1 return as cups. Sacrilege is dated to a counted night."
+        "connects": [
+          "Daniel 1:2",
+          "Daniel 5:2-4"
+        ],
+        "plain": "Fingers write on the plaster while the feast is still loud. The king’s knees fail because he knows this is judgment, not a trick of the wine.",
+        "links": [
+          {
+            "ref": "Daniel 1:2",
+            "because": "Those cups left Jerusalem in the first chapter. The feast is drinking from what belongs to Israel’s God."
+          },
+          {
+            "ref": "Daniel 5:2-4",
+            "because": "They praised gods of gold, silver, bronze, iron, wood, and stone with Yahweh’s vessels. That is the charge the hand answers."
+          }
+        ],
+        "sitting": "Sacrilege is dated to a counted night. The vessels from chapter 1 have come home as evidence."
       },
       {
         "book": "Daniel",
         "chapter": 5,
         "verse": 25,
-        "connects": ["Daniel 5:26-28", "Isaiah 45:1"],
-        "sitting": "Numbered, weighed, divided. The gold kingdom is finished on a written audit."
+        "connects": [
+          "Daniel 5:26-28",
+          "Isaiah 45:1"
+        ],
+        "plain": "Three market-words on the wall: MENE, TEKEL, UPHARSIN — numbered, weighed, divided. This is an audit, not a ghost story.",
+        "links": [
+          {
+            "ref": "Daniel 5:26-28",
+            "because": "Daniel reads the three verbs: the kingdom is finished, the king is too light, the realm is split to Medes and Persians."
+          },
+          {
+            "ref": "Isaiah 45:1",
+            "because": "Isaiah already named Cyrus and spoke of open gates. The plaster and the older prophet agree on the same night."
+          }
+        ],
+        "sitting": "Gold ends on a written scale. Every later metal can be numbered, weighed, and replaced the same way."
       },
       {
         "book": "Isaiah",
         "chapter": 45,
         "verse": 1,
-        "connects": ["Daniel 5:28", "Daniel 5:30-31"],
-        "sitting": "Cyrus is named before the plaster is written. The two-leaved gates open on schedule."
+        "connects": [
+          "Daniel 5:28",
+          "Daniel 5:30-31"
+        ],
+        "plain": "God calls Cyrus by name long before this feast and says he will open gates before him. The conqueror is already on the page.",
+        "links": [
+          {
+            "ref": "Daniel 5:28",
+            "because": "PERES: the kingdom is given to the Medes and Persians — Cyrus’s people."
+          },
+          {
+            "ref": "Daniel 5:30-31",
+            "because": "That same night Belshazzar is killed and a new ruler receives the city. Isaiah’s open gates meet Daniel’s writing."
+          }
+        ],
+        "sitting": "The fall is not a lucky siege. A named king and a written audit arrive together."
       },
       {
         "book": "Daniel",
         "chapter": 5,
         "verse": 30,
-        "connects": ["Daniel 2:39", "Daniel 7:5"],
-        "sitting": "That night Belshazzar is slain. Silver takes gold exactly when the dream said another kingdom would arise."
+        "connects": [
+          "Daniel 2:39",
+          "Daniel 7:5"
+        ],
+        "plain": "In that night Belshazzar is slain. The gold kingdom does not fade over decades on this page; it ends before morning.",
+        "links": [
+          {
+            "ref": "Daniel 2:39",
+            "because": "The dream already said another kingdom would arise after Babylon. Silver has arrived on schedule."
+          },
+          {
+            "ref": "Daniel 7:5",
+            "because": "Chapter 7 will draw that second kingdom as a bear. One night, two pictures: metal and beast."
+          }
+        ],
+        "sitting": "Silver takes gold exactly when the dream said another kingdom would arise."
       }
     ]
   },
@@ -309,47 +963,141 @@
     "language": "Aramaic",
     "jumpLabel": "The unchangeable decree and the open window",
     "sections": [
-      { "book": "Daniel", "chapter": 6, "verses": "all", "highlights": [5, [8, 10], 22] }
+      {
+        "book": "Daniel",
+        "chapter": 6,
+        "verses": "all",
+        "highlights": [
+          5,
+          [
+            8,
+            10
+          ],
+          22
+        ]
+      }
     ],
     "marks": [
-      { "book": "Daniel", "chapter": 6, "verse": 5, "phrase": "the law of his God", "strong": "H1882" },
-      { "book": "Daniel", "chapter": 6, "verse": 8, "phrase": "the law of the Medes and Persians", "strong": "H1882" }
+      {
+        "book": "Daniel",
+        "chapter": 6,
+        "verse": 5,
+        "phrase": "the law of his God",
+        "strong": "H1882"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 6,
+        "verse": 8,
+        "phrase": "the law of the Medes and Persians",
+        "strong": "H1882"
+      }
     ],
     "loadBearing": [
       {
         "book": "Daniel",
         "chapter": 6,
         "verse": 5,
-        "connects": ["Daniel 1:8", "Daniel 3:18"],
-        "sitting": "The only charge left is the law of his God. Faithfulness has become the indictment."
+        "connects": [
+          "Daniel 1:8",
+          "Daniel 3:18"
+        ],
+        "plain": "The satraps search Daniel’s record and find no corruption. Their only hope is to attack the law of his God.",
+        "links": [
+          {
+            "ref": "Daniel 1:8",
+            "because": "The same man who drew a line at the king’s table now draws it at an open window. Worship is still the test."
+          },
+          {
+            "ref": "Daniel 3:18",
+            "because": "His three friends already said “but if not.” The den is their furnace in Persian clothes."
+          }
+        ],
+        "sitting": "Faithfulness has become the indictment. The charge is not fraud. It is prayer."
       },
       {
         "book": "Daniel",
         "chapter": 6,
         "verse": 8,
-        "connects": ["Esther 1:19", "Daniel 6:15"],
-        "sitting": "A decree that cannot be changed is the silver kingdom’s pride. Heaven will overrule it without rewriting it."
+        "connects": [
+          "Esther 1:19",
+          "Daniel 6:15"
+        ],
+        "plain": "Medo-Persian law, once signed, cannot be repealed — even by the king who signed it. That rigidity is the trap.",
+        "links": [
+          {
+            "ref": "Esther 1:19",
+            "because": "Esther’s book uses the same pride: a royal word that cannot be altered. This is how the silver kingdom likes to sound eternal."
+          },
+          {
+            "ref": "Daniel 6:15",
+            "because": "Darius wants to save Daniel and cannot. Heaven will overrule the statute without rewriting it."
+          }
+        ],
+        "sitting": "An unchangeable human law is still smaller than the first commandment."
       },
       {
         "book": "Daniel",
         "chapter": 6,
         "verse": 10,
-        "connects": ["Acts 5:29", "1 Kings 8:48"],
-        "sitting": "Windows stay open toward Jerusalem. Public prayer is the collision with the first commandment."
+        "connects": [
+          "Acts 5:29",
+          "1 Kings 8:48"
+        ],
+        "plain": "Daniel hears the decree, goes home, and prays toward Jerusalem three times a day as before. He does not close the window.",
+        "links": [
+          {
+            "ref": "1 Kings 8:48",
+            "because": "Solomon already taught exiles to pray toward the city God chose. Daniel is keeping that old habit in public."
+          },
+          {
+            "ref": "Acts 5:29",
+            "because": "When human law criminalizes worship, the apostles name the same duty: obey God rather than men."
+          }
+        ],
+        "sitting": "The sitting’s question is whether that habit exists on an ordinary Tuesday, before any den is opened."
       },
       {
         "book": "Acts",
         "chapter": 5,
         "verse": 29,
-        "connects": ["Daniel 6:10", "Daniel 3:18"],
-        "sitting": "We ought to obey God rather than men. The den and the furnace teach the same civil limit."
+        "connects": [
+          "Daniel 6:10",
+          "Daniel 3:18"
+        ],
+        "plain": "Peter and the apostles say it in one sentence: we ought to obey God rather than men. That is the civil limit Daniel already lived.",
+        "links": [
+          {
+            "ref": "Daniel 6:10",
+            "because": "Open windows toward Jerusalem are that sentence in a daily schedule."
+          },
+          {
+            "ref": "Daniel 3:18",
+            "because": "The furnace said the same limit when the music played. Two empires, one first commandment."
+          }
+        ],
+        "sitting": "The den and the furnace teach one rule: no earthly statute can cancel worship of the Most High."
       },
       {
         "book": "Daniel",
         "chapter": 6,
         "verse": 22,
-        "connects": ["Daniel 3:25", "Daniel 6:26"],
-        "sitting": "An angel shuts mouths. The living God outlasts an unchangeable statute."
+        "connects": [
+          "Daniel 3:25",
+          "Daniel 6:26"
+        ],
+        "plain": "Daniel says God sent his angel and shut the lions’ mouths. He was innocent before God and before the king.",
+        "links": [
+          {
+            "ref": "Daniel 3:25",
+            "because": "The fourth figure in the fire was the same kind of rescue: God present in the danger, not only after it."
+          },
+          {
+            "ref": "Daniel 6:26",
+            "because": "Darius then writes that men must tremble before Daniel’s God — the living God who outlasts an unchangeable statute."
+          }
+        ],
+        "sitting": "The living God outlasts a law that could not be changed. The window was the victory; the dawn only showed it."
       }
     ]
   },
@@ -359,64 +1107,248 @@
     "language": "Aramaic",
     "jumpLabel": "The four beasts and the court",
     "sections": [
-      { "book": "Daniel", "chapter": 7, "verses": "all", "highlights": [[4, 14], 25] }
+      {
+        "book": "Daniel",
+        "chapter": 7,
+        "verses": "all",
+        "highlights": [
+          [
+            4,
+            14
+          ],
+          25
+        ]
+      }
     ],
     "stations": [
-      { "book": "Daniel", "chapter": 7, "verse": 4, "station": "lion" },
-      { "book": "Daniel", "chapter": 7, "verse": 5, "station": "bear" },
-      { "book": "Daniel", "chapter": 7, "verse": 6, "station": "leopard" },
-      { "book": "Daniel", "chapter": 7, "verse": 7, "station": "beast" },
-      { "book": "Daniel", "chapter": 7, "verse": 8, "station": "horn" },
-      { "book": "Daniel", "chapter": 7, "verse": 25, "station": "horn" }
+      {
+        "book": "Daniel",
+        "chapter": 7,
+        "verse": 4,
+        "station": "lion"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 7,
+        "verse": 5,
+        "station": "bear"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 7,
+        "verse": 6,
+        "station": "leopard"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 7,
+        "verse": 7,
+        "station": "beast"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 7,
+        "verse": 8,
+        "station": "horn"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 7,
+        "verse": 25,
+        "station": "horn"
+      }
     ],
     "marks": [
-      { "book": "Daniel", "chapter": 7, "verse": 3, "phrase": "beasts", "strong": "H2423" },
-      { "book": "Daniel", "chapter": 7, "verse": 4, "phrase": "lion", "strong": "H744", "station": "lion" },
-      { "book": "Daniel", "chapter": 7, "verse": 5, "phrase": "bear", "strong": "H1678", "station": "bear" },
-      { "book": "Daniel", "chapter": 7, "verse": 6, "phrase": "leopard", "strong": "H524", "station": "leopard" },
-      { "book": "Daniel", "chapter": 7, "verse": 7, "phrase": "fourth beast", "strong": "H2423", "station": "beast" },
-      { "book": "Daniel", "chapter": 7, "verse": 8, "phrase": "little horn", "strong": "H7162", "station": "horn" },
-      { "book": "Daniel", "chapter": 7, "verse": 9, "phrase": "Ancient of days", "strong": "H6268" },
-      { "book": "Daniel", "chapter": 7, "verse": 10, "phrase": "the judgment", "strong": "H1780" },
-      { "book": "Daniel", "chapter": 7, "verse": 13, "phrase": "Son of man", "strong": "H1247" },
-      { "book": "Daniel", "chapter": 7, "verse": 25, "phrase": "change times and laws", "strong": "H8133", "station": "horn" },
-      { "book": "Daniel", "chapter": 7, "verse": 25, "phrase": "a time and times and the dividing of time", "strong": "H5732", "station": "horn" }
+      {
+        "book": "Daniel",
+        "chapter": 7,
+        "verse": 3,
+        "phrase": "beasts",
+        "strong": "H2423"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 7,
+        "verse": 4,
+        "phrase": "lion",
+        "strong": "H744",
+        "station": "lion"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 7,
+        "verse": 5,
+        "phrase": "bear",
+        "strong": "H1678",
+        "station": "bear"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 7,
+        "verse": 6,
+        "phrase": "leopard",
+        "strong": "H524",
+        "station": "leopard"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 7,
+        "verse": 7,
+        "phrase": "fourth beast",
+        "strong": "H2423",
+        "station": "beast"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 7,
+        "verse": 8,
+        "phrase": "little horn",
+        "strong": "H7162",
+        "station": "horn"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 7,
+        "verse": 9,
+        "phrase": "Ancient of days",
+        "strong": "H6268"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 7,
+        "verse": 10,
+        "phrase": "the judgment",
+        "strong": "H1780"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 7,
+        "verse": 13,
+        "phrase": "Son of man",
+        "strong": "H1247"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 7,
+        "verse": 25,
+        "phrase": "change times and laws",
+        "strong": "H8133",
+        "station": "horn"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 7,
+        "verse": 25,
+        "phrase": "a time and times and the dividing of time",
+        "strong": "H5732",
+        "station": "horn"
+      }
     ],
     "loadBearing": [
       {
         "book": "Daniel",
         "chapter": 7,
         "verse": 4,
-        "connects": ["Daniel 2:38", "Daniel 4:16"],
-        "sitting": "The lion is gold again. Wings plucked and a man’s heart: the sermon of chapter 4 restaged as a beast."
+        "connects": [
+          "Daniel 2:38",
+          "Daniel 4:16"
+        ],
+        "plain": "The first beast is a lion with eagle’s wings. Then the wings are plucked and it is given a man’s heart. This is Babylon again.",
+        "links": [
+          {
+            "ref": "Daniel 2:38",
+            "because": "The head of gold was already named Babylon. The lion is that same first kingdom in beast-language."
+          },
+          {
+            "ref": "Daniel 4:16",
+            "because": "Nebuchadnezzar’s mind was changed to a beast’s, then restored. “A man’s heart” here remembers that sermon."
+          }
+        ],
+        "sitting": "Gold and lion are one empire. Chapter 7 is not a new chain. It is the same chain with teeth."
       },
       {
         "book": "Daniel",
         "chapter": 7,
         "verse": 8,
-        "connects": ["Daniel 7:24-25", "Revelation 13:5"],
-        "sitting": "A little horn uproots three and speaks. Power among the ten, not a fourth metal from outside."
+        "connects": [
+          "Daniel 7:24-25",
+          "Revelation 13:5"
+        ],
+        "plain": "Among ten horns a smaller horn comes up, pulls up three, and has eyes and a mouth speaking great things. This is a different kind of power among Rome’s pieces.",
+        "links": [
+          {
+            "ref": "Daniel 7:24-25",
+            "because": "The angel’s job description: diverse from the ten, wears out saints, changes times and laws, lasts a time, times, and dividing of time."
+          },
+          {
+            "ref": "Revelation 13:5",
+            "because": "John sees a mouth speaking great things given forty-two months — the same measured boast in another book."
+          }
+        ],
+        "sitting": "The horn rises among the ten, not from a fourth metal outside the statue. Use the checklist. Do not pick a favorite villain first."
       },
       {
         "book": "Daniel",
         "chapter": 7,
         "verse": 10,
-        "connects": ["Daniel 7:13-14", "Daniel 7:26"],
-        "sitting": "The court sits and the books are opened in heaven before the stone strikes the earth."
+        "connects": [
+          "Daniel 7:13-14",
+          "Daniel 7:26"
+        ],
+        "plain": "Thrones are set in heaven, the Ancient of Days sits, books are opened. This court meets while the horn is still active on earth.",
+        "links": [
+          {
+            "ref": "Daniel 7:13-14",
+            "because": "One like a son of man is brought to the Ancient of Days to receive the forever kingdom. He comes to heaven first, not yet to earth as in chapter 2’s stone-strike."
+          },
+          {
+            "ref": "Daniel 7:26",
+            "because": "The same court then takes the horn’s dominion away. Judgment sits before the kingdom is given to the saints."
+          }
+        ],
+        "sitting": "The court sits in heaven before the stone strikes the earth. Do not collapse 7:9–14 into the Second Coming scene of 2:44."
       },
       {
         "book": "Daniel",
         "chapter": 7,
         "verse": 25,
-        "connects": ["Revelation 13:5", "Daniel 12:7"],
-        "sitting": "Times and laws are the target. A time, times, and dividing of time is the measured season of that horn."
+        "connects": [
+          "Revelation 13:5",
+          "Daniel 12:7"
+        ],
+        "plain": "The horn thinks to change times and laws and is given a measured season: a time (1) + times (2) + a dividing of time (½) = 3½ years.",
+        "links": [
+          {
+            "ref": "Revelation 13:5",
+            "because": "Forty-two months is the same 3½ years written another way (42 × 30 days = 1,260 days)."
+          },
+          {
+            "ref": "Daniel 12:7",
+            "because": "A time, times, and a half appears again at the book’s end. Same riddle-phrase, same measured span."
+          }
+        ],
+        "sitting": "Build 1,260 days from the riddle first. Then the year-day scale turns those days into years. 538–1798 is a test, not a magic label."
       },
       {
         "book": "Revelation",
         "chapter": 13,
         "verse": 5,
-        "connects": ["Daniel 7:8", "Daniel 7:25"],
-        "sitting": "Forty-two months is the same span in another book: a mouth speaking great things, given a set time."
+        "connects": [
+          "Daniel 7:8",
+          "Daniel 7:25"
+        ],
+        "plain": "John is shown a beast given a mouth speaking great things, and power for forty-two months. Scripture itself equates Daniel’s riddle with 1,260 days.",
+        "links": [
+          {
+            "ref": "Daniel 7:8",
+            "because": "The mouth speaking great things is already in Daniel. John is not inventing a new villain."
+          },
+          {
+            "ref": "Daniel 7:25",
+            "because": "Time, times, and dividing = 3½ = 42 months = 1,260 days. Three writings, one span."
+          }
+        ],
+        "sitting": "You do not need a preacher to invent 1,260. Revelation writes the arithmetic next to Daniel’s mouth."
       }
     ]
   },
@@ -426,54 +1358,192 @@
     "language": "Hebrew",
     "jumpLabel": "The ram, the goat, and the sanctuary",
     "sections": [
-      { "book": "Daniel", "chapter": 8, "verses": "all", "highlights": [[3, 14], [17, 21]] }
+      {
+        "book": "Daniel",
+        "chapter": 8,
+        "verses": "all",
+        "highlights": [
+          [
+            3,
+            14
+          ],
+          [
+            17,
+            21
+          ]
+        ]
+      }
     ],
     "marks": [
-      { "book": "Daniel", "chapter": 8, "verse": 3, "phrase": "ram", "strong": "H352" },
-      { "book": "Daniel", "chapter": 8, "verse": 5, "phrase": "he goat", "strong": "H6842" },
-      { "book": "Daniel", "chapter": 8, "verse": 8, "phrase": "great horn", "strong": "H7161" },
-      { "book": "Daniel", "chapter": 8, "verse": 9, "phrase": "little horn", "strong": "H7161" },
-      { "book": "Daniel", "chapter": 8, "verse": 11, "phrase": "daily sacrifice", "strong": "H8548" },
-      { "book": "Daniel", "chapter": 8, "verse": 14, "phrase": "sanctuary be cleansed", "strong": "H6663" },
-      { "book": "Daniel", "chapter": 8, "verse": 17, "phrase": "time of the end", "strong": "H2377" },
-      { "book": "Daniel", "chapter": 8, "verse": 20, "phrase": "Media and Persia", "strong": "H352" },
-      { "book": "Daniel", "chapter": 8, "verse": 21, "phrase": "Grecia", "strong": "H6842" }
+      {
+        "book": "Daniel",
+        "chapter": 8,
+        "verse": 3,
+        "phrase": "ram",
+        "strong": "H352"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 8,
+        "verse": 5,
+        "phrase": "he goat",
+        "strong": "H6842"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 8,
+        "verse": 8,
+        "phrase": "great horn",
+        "strong": "H7161"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 8,
+        "verse": 9,
+        "phrase": "little horn",
+        "strong": "H7161"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 8,
+        "verse": 11,
+        "phrase": "daily sacrifice",
+        "strong": "H8548"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 8,
+        "verse": 14,
+        "phrase": "sanctuary be cleansed",
+        "strong": "H6663"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 8,
+        "verse": 17,
+        "phrase": "time of the end",
+        "strong": "H2377"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 8,
+        "verse": 20,
+        "phrase": "Media and Persia",
+        "strong": "H352"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 8,
+        "verse": 21,
+        "phrase": "Grecia",
+        "strong": "H6842"
+      }
     ],
     "loadBearing": [
       {
         "book": "Daniel",
         "chapter": 8,
         "verse": 3,
-        "connects": ["Daniel 8:20", "Daniel 7:5"],
-        "sitting": "Two horns, one higher, last to come up. The ram is named Media and Persia before the sitting argues it."
+        "connects": [
+          "Daniel 8:20",
+          "Daniel 7:5"
+        ],
+        "plain": "Daniel sees a ram with two horns; one horn is higher and came up last. You do not have to guess the empire. The angel will name it.",
+        "links": [
+          {
+            "ref": "Daniel 8:20",
+            "because": "Gabriel says it in plain speech: the ram is the kings of Media and Persia."
+          },
+          {
+            "ref": "Daniel 7:5",
+            "because": "The bear raised on one side was already that uneven pair. Ram and bear are the silver kingdom twice."
+          }
+        ],
+        "sitting": "Media and Persia are named before anyone argues. Start here, then watch the goat."
       },
       {
         "book": "Daniel",
         "chapter": 8,
         "verse": 8,
-        "connects": ["Daniel 8:21-22", "Daniel 7:6"],
-        "sitting": "The notable horn breaks; four stand up. Greece is named; the Diadochi are the four winds."
+        "connects": [
+          "Daniel 8:21-22",
+          "Daniel 7:6"
+        ],
+        "plain": "The goat’s great horn is broken at the height of its power, and four horns come up toward the four winds. One empire becomes four.",
+        "links": [
+          {
+            "ref": "Daniel 8:21-22",
+            "because": "The goat is Grecia; the great horn is the first king (Alexander); the four are four kingdoms that stand up after him."
+          },
+          {
+            "ref": "Daniel 7:6",
+            "because": "The leopard’s four heads were already those four. Greece is named; the Diadochi are the four winds."
+          }
+        ],
+        "sitting": "Alexander dies; four generals divide. The next horn must rise from this Greek settlement, not from a guess."
       },
       {
         "book": "Daniel",
         "chapter": 8,
         "verse": 14,
-        "connects": ["Daniel 9:24", "Leviticus 16:30"],
-        "sitting": "Unto 2,300 evenings-mornings, then the sanctuary is nitsdaq — put right, not merely swept."
+        "connects": [
+          "Daniel 9:24",
+          "Leviticus 16:30"
+        ],
+        "plain": "A holy one asks how long the attack on the sanctuary lasts. The answer is 2,300 evenings-mornings; then the sanctuary is nitsdaq — put right, justified — not merely mopped.",
+        "links": [
+          {
+            "ref": "Daniel 9:24",
+            "because": "Gabriel will cut seventy weeks from this longer line so the cross can date it. Chapter 9 is the key that unlocks 8:14."
+          },
+          {
+            "ref": "Leviticus 16:30",
+            "because": "Israel already knew a day when the sanctuary was put right: the Day of Atonement. That is the older grammar for this verse."
+          }
+        ],
+        "sitting": "If these were ordinary days, 2,300 days is about six years — and Antiochus’s crisis lasted about three. The unit is the year-day ruler from sitting 0."
       },
       {
         "book": "Leviticus",
         "chapter": 16,
         "verse": 30,
-        "connects": ["Daniel 8:14", "Daniel 7:9-10"],
-        "sitting": "The Day of Atonement is the older grammar for a sanctuary made clean before the LORD."
+        "connects": [
+          "Daniel 8:14",
+          "Daniel 7:9-10"
+        ],
+        "plain": "On the Day of Atonement the high priest entered the Most Holy Place so Israel could be clean before the Lord. That is what “sanctuary put right” already meant.",
+        "links": [
+          {
+            "ref": "Daniel 8:14",
+            "because": "Nitsdaq points to that day’s work, not to a janitor’s mop in 164 B.C."
+          },
+          {
+            "ref": "Daniel 7:9-10",
+            "because": "The heavenly court that sits and opens books is the same judgment scene this Day of Atonement was picturing."
+          }
+        ],
+        "sitting": "Learn Leviticus 16 here so 1844 is not a slogan. Cleansing has a calendar and a room in Scripture already."
       },
       {
         "book": "Daniel",
         "chapter": 8,
         "verse": 17,
-        "connects": ["Daniel 8:19", "Daniel 8:26"],
-        "sitting": "The vision is for the time of the end. A 164 B.C. death cannot exhaust a line aimed past the prophet’s horizon."
+        "connects": [
+          "Daniel 8:19",
+          "Daniel 8:26"
+        ],
+        "plain": "Gabriel says twice that this vision belongs to the time of the end. A second-century cleanup cannot use up a line aimed past the prophet’s own horizon.",
+        "links": [
+          {
+            "ref": "Daniel 8:19",
+            "because": "He says it again: “at the time of the end shall be the vision.” The sitting is not allowed to park the whole chapter in 164 B.C."
+          },
+          {
+            "ref": "Daniel 8:26",
+            "because": "The vision of evenings-mornings is true, and it is for many days. “Many days” is the hint to keep the long ruler."
+          }
+        ],
+        "sitting": "Antiochus is too small and too early. The angel’s own horizon — the time of the end — is why."
       }
     ]
   },
@@ -483,49 +1553,153 @@
     "language": "Hebrew",
     "jumpLabel": "The seventy weeks",
     "sections": [
-      { "book": "Daniel", "chapter": 9, "verses": "all", "highlights": [[24, 27]] }
+      {
+        "book": "Daniel",
+        "chapter": 9,
+        "verses": "all",
+        "highlights": [
+          [
+            24,
+            27
+          ]
+        ]
+      }
     ],
     "marks": [
-      { "book": "Daniel", "chapter": 9, "verse": 24, "phrase": "determined", "strong": "H2852" },
-      { "book": "Daniel", "chapter": 9, "verse": 24, "phrase": "most Holy", "strong": "H6944" },
-      { "book": "Daniel", "chapter": 9, "verse": 25, "phrase": "Messiah the Prince", "strong": "H4899" },
-      { "book": "Daniel", "chapter": 9, "verse": 26, "phrase": "cut off", "strong": "H3772" }
+      {
+        "book": "Daniel",
+        "chapter": 9,
+        "verse": 24,
+        "phrase": "determined",
+        "strong": "H2852"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 9,
+        "verse": 24,
+        "phrase": "most Holy",
+        "strong": "H6944"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 9,
+        "verse": 25,
+        "phrase": "Messiah the Prince",
+        "strong": "H4899"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 9,
+        "verse": 26,
+        "phrase": "cut off",
+        "strong": "H3772"
+      }
     ],
     "loadBearing": [
       {
         "book": "Daniel",
         "chapter": 9,
         "verse": 24,
-        "connects": ["Daniel 8:14", "Daniel 8:27"],
-        "sitting": "Seventy weeks are chathak — cut off. The only uncut line still on the table is the 2,300 days."
+        "connects": [
+          "Daniel 8:14",
+          "Daniel 8:27"
+        ],
+        "plain": "Gabriel says seventy weeks are determined (chathak — cut off) for Daniel’s people. He is not starting a new clock from zero. He is cutting a piece from a longer line.",
+        "links": [
+          {
+            "ref": "Daniel 8:27",
+            "because": "Daniel had fainted because no one could explain the 2,300-day vision. Gabriel now returns to “the vision.”"
+          },
+          {
+            "ref": "Daniel 8:14",
+            "because": "The only long unexplained span on the table is those 2,300 evenings-mornings. The seventy weeks are cut from that."
+          }
+        ],
+        "sitting": "Ask “cut off from what?” The answer is the 2,300. That is why chapter 9 can date chapter 8."
       },
       {
         "book": "Ezra",
         "chapter": 7,
         "verse": 7,
-        "connects": ["Daniel 9:25", "Ezra 7:13"],
-        "sitting": "Artaxerxes’ seventh year is the going forth that funds the return. The clock of the seventy weeks starts here."
+        "connects": [
+          "Daniel 9:25",
+          "Ezra 7:13"
+        ],
+        "plain": "In the seventh year of Artaxerxes, Ezra goes up from Babylon. This study reads that year as 457 B.C. — the start of the seventy weeks.",
+        "links": [
+          {
+            "ref": "Daniel 9:25",
+            "because": "The clock starts at a word “to restore and to build Jerusalem.” Ezra 7 is the decree that restores magistrates, not only stones."
+          },
+          {
+            "ref": "Ezra 7:13",
+            "because": "The decree itself: whoever will, go up to Jerusalem. Restoration is civic and liturgical."
+          }
+        ],
+        "sitting": "Work 457 + 483 on paper (no year 0). You should see A.D. 27, the anointing of Jesus, with your own arithmetic."
       },
       {
         "book": "Ezra",
         "chapter": 7,
         "verse": 13,
-        "connects": ["Ezra 7:7", "Daniel 9:25"],
-        "sitting": "The decree itself: whoever will, go up to Jerusalem. Restoration is civic and liturgical, not a mere building permit."
+        "connects": [
+          "Ezra 7:7",
+          "Daniel 9:25"
+        ],
+        "plain": "Artaxerxes writes: any of God’s people who wish may go to Jerusalem. This is a royal permit to restore the community, not only to stack bricks.",
+        "links": [
+          {
+            "ref": "Ezra 7:7",
+            "because": "The date stamp is the king’s seventh year. That is why 457 B.C. is on the chart."
+          },
+          {
+            "ref": "Daniel 9:25",
+            "because": "“Restore and build” needs government as well as walls. Ezra 7:25–26 even appoints magistrates and judges."
+          }
+        ],
+        "sitting": "Cyrus rebuilt the temple; Nehemiah later repaired walls. This sitting picks 457 because it is the first decree that matches “restore” as rule."
       },
       {
         "book": "Daniel",
         "chapter": 9,
         "verse": 26,
-        "connects": ["Daniel 9:27", "Isaiah 53:8"],
-        "sitting": "Messiah is cut off, but not for himself. The midst of the week is Calvary, not a later gap."
+        "connects": [
+          "Daniel 9:27",
+          "Isaiah 53:8"
+        ],
+        "plain": "After the sixty-two weeks, Messiah is cut off, but not for himself. That is Jesus dying for others, not a later tyrant inserted after a gap.",
+        "links": [
+          {
+            "ref": "Daniel 9:27",
+            "because": "The “he” who confirms the covenant for one week continues this same Messiah. In the middle of the week sacrifice ends — the cross."
+          },
+          {
+            "ref": "Isaiah 53:8",
+            "because": "Isaiah already said he was cut off from the land of the living for the transgression of the people. Daniel uses the same cut."
+          }
+        ],
+        "sitting": "The seventieth week is not a future seven-year pause. The week that lands on Messiah is the Bible’s proof that the days were years."
       },
       {
         "book": "Daniel",
         "chapter": 8,
         "verse": 14,
-        "connects": ["Daniel 9:24-27", "Leviticus 16:30"],
-        "sitting": "If the seventy weeks land on the cross, the remaining 1,810 years of the 2,300 land on the same line."
+        "connects": [
+          "Daniel 9:24-27",
+          "Leviticus 16:30"
+        ],
+        "plain": "If 490 years are cut from 2,300, 1,810 years remain after A.D. 34. That leftover lands in 1844 on the same line the cross already sealed.",
+        "links": [
+          {
+            "ref": "Daniel 9:24-27",
+            "because": "The cut, the decree, and the midst of the week are why 8:14 is no longer a floating number."
+          },
+          {
+            "ref": "Leviticus 16:30",
+            "because": "Sanctuary putting-right belongs to the Day of Atonement. In 1844 that day fell on 22 October by the Karaite new-moon count."
+          }
+        ],
+        "sitting": "If Messiah died on schedule, the leftover sanctuary years sit on the same cord. That is the sitting’s load-bearing claim."
       }
     ]
   },
@@ -535,56 +1709,213 @@
     "language": "Hebrew",
     "jumpLabel": "Michael stands · the dust awakes",
     "sections": [
-      { "book": "Daniel", "chapter": 10, "verses": "all", "highlights": [[13, 14], 21] },
-      { "book": "Daniel", "chapter": 11, "verses": "all", "highlights": [[31, 35]] },
-      { "book": "Daniel", "chapter": 12, "verses": "all", "highlights": [[1, 4], 7, 13] }
+      {
+        "book": "Daniel",
+        "chapter": 10,
+        "verses": "all",
+        "highlights": [
+          [
+            13,
+            14
+          ],
+          21
+        ]
+      },
+      {
+        "book": "Daniel",
+        "chapter": 11,
+        "verses": "all",
+        "highlights": [
+          [
+            31,
+            35
+          ]
+        ]
+      },
+      {
+        "book": "Daniel",
+        "chapter": 12,
+        "verses": "all",
+        "highlights": [
+          [
+            1,
+            4
+          ],
+          7,
+          13
+        ]
+      }
     ],
     "marks": [
-      { "book": "Daniel", "chapter": 10, "verse": 13, "phrase": "Michael", "strong": "H4317" },
-      { "book": "Daniel", "chapter": 10, "verse": 13, "phrase": "prince of the kingdom of Persia", "strong": "H8269" },
-      { "book": "Daniel", "chapter": 10, "verse": 21, "phrase": "Michael your prince", "strong": "H4317" },
-      { "book": "Daniel", "chapter": 11, "verse": 31, "phrase": "daily sacrifice", "strong": "H8548" },
-      { "book": "Daniel", "chapter": 12, "verse": 1, "phrase": "stand up", "strong": "H5975" },
-      { "book": "Daniel", "chapter": 12, "verse": 1, "phrase": "time of trouble", "strong": "H6869" },
-      { "book": "Daniel", "chapter": 12, "verse": 2, "phrase": "dust of the earth", "strong": "H6083" },
-      { "book": "Daniel", "chapter": 12, "verse": 2, "phrase": "awake", "strong": "H6974" },
-      { "book": "Daniel", "chapter": 12, "verse": 13, "phrase": "lot", "strong": "H1486" }
+      {
+        "book": "Daniel",
+        "chapter": 10,
+        "verse": 13,
+        "phrase": "Michael",
+        "strong": "H4317"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 10,
+        "verse": 13,
+        "phrase": "prince of the kingdom of Persia",
+        "strong": "H8269"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 10,
+        "verse": 21,
+        "phrase": "Michael your prince",
+        "strong": "H4317"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 11,
+        "verse": 31,
+        "phrase": "daily sacrifice",
+        "strong": "H8548"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 12,
+        "verse": 1,
+        "phrase": "stand up",
+        "strong": "H5975"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 12,
+        "verse": 1,
+        "phrase": "time of trouble",
+        "strong": "H6869"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 12,
+        "verse": 2,
+        "phrase": "dust of the earth",
+        "strong": "H6083"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 12,
+        "verse": 2,
+        "phrase": "awake",
+        "strong": "H6974"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 12,
+        "verse": 13,
+        "phrase": "lot",
+        "strong": "H1486"
+      }
     ],
     "loadBearing": [
       {
         "book": "Daniel",
         "chapter": 10,
         "verse": 13,
-        "connects": ["Daniel 10:21", "Daniel 12:1"],
-        "sitting": "Behind Persia is a prince. Michael helps. The metals were never only geology."
+        "connects": [
+          "Daniel 10:21",
+          "Daniel 12:1"
+        ],
+        "plain": "The messenger was delayed twenty-one days by the “prince of Persia” until Michael came to help. Behind the silver kingdom is an unseen war, not only a king’s court.",
+        "links": [
+          {
+            "ref": "Daniel 10:21",
+            "because": "Michael is called “your prince” — the great prince who stands for Daniel’s people."
+          },
+          {
+            "ref": "Daniel 12:1",
+            "because": "That same Michael will stand up at the end. The last sitting begins with a Person, not a new empire."
+          }
+        ],
+        "sitting": "The metals were never only geology. Nations move because princes wrestle, then because kings sign."
       },
       {
         "book": "Daniel",
         "chapter": 11,
         "verse": 31,
-        "connects": ["Daniel 8:11-13", "Daniel 12:11"],
-        "sitting": "The daily is taken away again. Chapter 11 marches the same war onto a longer field."
+        "connects": [
+          "Daniel 8:11-13",
+          "Daniel 12:11"
+        ],
+        "plain": "A power takes away the daily (tamid) and sets up an abomination. Chapter 11 is marching the same sanctuary-attack onto a longer field.",
+        "links": [
+          {
+            "ref": "Daniel 8:11-13",
+            "because": "The little horn already removed the tamid and cast down the sanctuary. This is that war continued, not a new subject."
+          },
+          {
+            "ref": "Daniel 12:11",
+            "because": "The 1,290 days are counted from “the time that the daily shall be taken away.” Chapter 12 uses this same daily."
+          }
+        ],
+        "sitting": "Watch the daily. The last numbers in the book start from this removal, on the same year-day ruler."
       },
       {
         "book": "Daniel",
         "chapter": 12,
         "verse": 1,
-        "connects": ["Daniel 10:21", "Daniel 7:9-10"],
-        "sitting": "Michael stands up. A priest sits to minister and stands when the work is finished."
+        "connects": [
+          "Daniel 10:21",
+          "Daniel 7:9-10"
+        ],
+        "plain": "Michael stands up, and there is a time of trouble such as never was. In sanctuary language a priest sits while he ministers and stands when that work is finished.",
+        "links": [
+          {
+            "ref": "Daniel 10:21",
+            "because": "Michael is already “your prince.” This study reads him as Christ, the great prince of the host."
+          },
+          {
+            "ref": "Daniel 7:9-10",
+            "because": "The court that sat and opened books is the judgment this standing closes. Advocacy ends; verdict and trouble follow."
+          }
+        ],
+        "sitting": "“Stand up” is not a general putting on a helmet. It is the close of priestly plea. You may test the name; do not empty the sanctuary picture."
       },
       {
         "book": "Daniel",
         "chapter": 12,
         "verse": 2,
-        "connects": ["Isaiah 26:19", "John 5:28-29"],
-        "sitting": "Dust-sleepers awake. The book’s last hope is a body, not a chart."
+        "connects": [
+          "Isaiah 26:19",
+          "John 5:28-29"
+        ],
+        "plain": "Many who sleep in the dust of the earth will wake: some to everlasting life, some to shame. This is a body rising, not a mood and not reincarnation.",
+        "links": [
+          {
+            "ref": "Isaiah 26:19",
+            "because": "Isaiah already said the dead shall live and the earth shall cast out the dead. Daniel says it in court-clear words."
+          },
+          {
+            "ref": "John 5:28-29",
+            "because": "Jesus uses the same two-way rising: life and damnation. The New Testament is not adding a new hope; it is naming this one."
+          }
+        ],
+        "sitting": "The book’s last hope is a body, not a chart. Empires end; dust-sleepers wake."
       },
       {
         "book": "Daniel",
         "chapter": 12,
         "verse": 13,
-        "connects": ["Daniel 12:1-2", "Daniel 12:4"],
-        "sitting": "Rest, then stand in thy lot. The sealed book ends on a name and a rising."
+        "connects": [
+          "Daniel 12:1-2",
+          "Daniel 12:4"
+        ],
+        "plain": "God tells aged Daniel to go his way, rest (die), and stand in his lot at the end of the days. The prophet himself is promised a place in that rising.",
+        "links": [
+          {
+            "ref": "Daniel 12:1-2",
+            "because": "The trouble, the book of names, and the dust-waking are the scene he will join."
+          },
+          {
+            "ref": "Daniel 12:4",
+            "because": "The book is sealed till the time of the end. Daniel can rest without having to finish every chart in his own lifetime."
+          }
+        ],
+        "sitting": "The sealed book ends on a name and a rising. The metals, beasts, horns, and numbers were always walking toward this sentence."
       }
     ]
   }

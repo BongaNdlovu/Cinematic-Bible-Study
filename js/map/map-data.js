@@ -1,5 +1,5 @@
 window.MAP_CHRONICLE = {
-  bounds: { west: -12, south: 14, east: 74, north: 52 },
+  bounds: { west: -100, south: 14, east: 74, north: 52 },
   world: { w: 3600, h: 1960 },
   sources: {
     land: "assets/maps/world-land-110m.json",
@@ -142,12 +142,12 @@ window.MAP_CHRONICLE = {
   cities: [
     { id: "babylon", name: "Babylon", lon: 44.421, lat: 32.542, metal: "gold", pulse: ["y605", "y539"], kicker: "Head of gold", text: "The city of Nebuchadnezzar, Ishtar Gate, and the plain of Dura. Daniel serves here while the gold kingdom is weighed.", scripture: "Daniel 2:38; 4:30", art: "assets/study/babylon-sunset.jpg" },
     { id: "jerusalem", name: "Jerusalem", lon: 35.229, lat: 31.778, metal: "gold", pulse: ["y605", "y457", "y31", "y1844", "y12"], kicker: "The holy city", text: "Taken in 605 B.C., restored under the Persian decrees, and the place where Messiah is cut off in the midst of the week.", scripture: "Daniel 1:1; 9:24–27", art: "assets/maps/stops/jerusalem.jpg" },
-    { id: "susa", name: "Susa", lon: 48.258, lat: 32.189, metal: "silver", pulse: ["y457"], kicker: "Persian court", text: "A winter capital of the Achaemenids. From this world the decree of Artaxerxes in Ezra 7 goes forth in 457 B.C.", scripture: "Ezra 7:12–26; Daniel 8:2", art: "assets/maps/stops/susa.jpg" },
+    { id: "susa", name: "Susa", lon: 48.258, lat: 32.189, metal: "silver", pulse: ["y457", "y1844"], kicker: "Persian court", text: "A winter capital of the Achaemenids. From this world the decree of Artaxerxes in Ezra 7 goes forth in 457 B.C.", scripture: "Ezra 7:12–26; Daniel 8:2", art: "assets/maps/stops/susa.jpg" },
     { id: "persepolis", name: "Persepolis", lon: 52.891, lat: 29.935, metal: "silver", pulse: ["y539", "y331"], kicker: "Ceremonial heart of Persia", text: "The ram’s house. Alexander takes it after Gaugamela; the silver gives way to bronze.", scripture: "Daniel 8:3–7, 20", art: "assets/study/epochs/persepolis.jpg" },
     { id: "sardis", name: "Sardis", lon: 28.040, lat: 38.488, metal: "silver", pulse: ["y539"], kicker: "Lydia fallen", text: "Croesus falls to Cyrus in 546 B.C. — one of the three ribs in the bear’s mouth.", scripture: "Daniel 7:5", art: "assets/maps/stops/sardis.jpg" },
     { id: "athens", name: "Athens", lon: 23.727, lat: 37.972, metal: "bronze", pulse: ["y331", "y168"], kicker: "Hellenic mind", text: "Not the first capital of Alexander, but the culture that bronze carries farther than any phalanx.", scripture: "Daniel 8:21", art: "assets/maps/stops/athens.jpg" },
     { id: "pella", name: "Pella", lon: 22.521, lat: 40.762, metal: "bronze", pulse: ["y331", "y168"], kicker: "Alexander’s home", text: "The goat comes from the west on the face of the whole earth and touches not the ground.", scripture: "Daniel 8:5–7", art: "assets/maps/stops/pella.jpg" },
-    { id: "alexandria", name: "Alexandria", lon: 29.919, lat: 31.200, metal: "bronze", pulse: ["y331"], kicker: "Hellenistic Egypt", text: "Founded in the wake of the bronze conquest. Later the King of the South in Daniel 11.", scripture: "Daniel 11:5", art: "assets/maps/stops/alexandria.jpg" },
+    { id: "alexandria", name: "Alexandria", lon: 29.919, lat: 31.200, metal: "bronze", pulse: ["y331", "y12"], kicker: "Hellenistic Egypt", text: "Founded in the wake of the bronze conquest. Later the King of the South in Daniel 11.", scripture: "Daniel 11:5", art: "assets/maps/stops/alexandria.jpg" },
     { id: "rome", name: "Rome", lon: 12.492, lat: 41.890, metal: "iron", pulse: ["y168", "y31", "y538", "y1798"], kicker: "The iron city", text: "Pagan, then papal. The fourth kingdom’s throne, the little horn’s seat, and the place of the 1798 wound.", scripture: "Daniel 2:40; 7:23–25", art: "assets/maps/stops/rome.jpg" },
     { id: "constantinople", name: "Constantinople", lon: 28.978, lat: 41.009, metal: "iron", pulse: ["y538"], kicker: "Eastern iron", text: "The surviving eastern throne while the west is divided among the ten.", scripture: "Daniel 2:41; 7:24", art: "assets/maps/stops/constantinople.jpg" },
     { id: "carthage", name: "Carthage", lon: 10.323, lat: 36.853, metal: "iron", pulse: ["y168"], kicker: "A western rib of iron", text: "Rome’s rival, broken in the Punic Wars as iron begins to devour the Mediterranean.", scripture: "Daniel 7:7, 23", art: "assets/maps/stops/carthage.jpg" }
@@ -164,7 +164,14 @@ window.MAP_CHRONICLE = {
     city: "assets/maps/icons/key-city.jpg",
     battle: "assets/maps/icons/key-battle.jpg",
     decree: "assets/maps/icons/key-decree.jpg",
-    sanctuary: "assets/maps/icons/key-sanctuary.jpg"
+    sanctuary: "assets/maps/icons/key-sanctuary.jpg",
+    miller: "assets/maps/icons/medal-miller.jpg",
+    press: "assets/maps/icons/medal-press.jpg",
+    camp: "assets/maps/icons/medal-camp.jpg",
+    disappointment: "assets/maps/icons/medal-disappointment.jpg",
+    edson: "assets/maps/icons/medal-edson.jpg",
+    america: "assets/maps/icons/medal-america.jpg",
+    telegraph: "assets/maps/icons/medal-telegraph.jpg"
   },
   events: [
     { id: "siege-jerusalem", name: "Siege of Jerusalem", lon: 35.229, lat: 31.778, yearId: "y605", kind: "battle", kicker: "605 B.C.", text: "Jehoiakim’s third year. Temple vessels go to Marduk. Daniel and the Hebrew youths enter Babylon’s court school.", scripture: "Daniel 1:1–6", art: "assets/study/epochs/jerusalem-siege.jpg" },
@@ -175,8 +182,20 @@ window.MAP_CHRONICLE = {
     { id: "calvary", name: "Calvary", lon: 35.229, lat: 31.776, yearId: "y31", kind: "sanctuary", kicker: "A.D. 31", text: "Messiah is cut off in the midst of the week. The veil tears. Sacrifice and oblation cease.", scripture: "Daniel 9:26–27", art: "assets/study/epochs/calvary.jpg" },
     { id: "ostrogoths-out", name: "Ostrogoths driven from Rome", lon: 12.492, lat: 41.890, yearId: "y538", kind: "battle", kicker: "A.D. 538", text: "The third horn is uprooted. Justinian’s decree can take effect. The 1,260 years begin.", scripture: "Daniel 7:8, 24–25", art: "assets/maps/stops/ostrogoths.jpg" },
     { id: "berthier", name: "Pius VI taken captive", lon: 12.492, lat: 41.890, yearId: "y1798", kind: "wound", kicker: "A.D. 1798", text: "Berthier enters Rome. The deadly wound. The time of the end opens, and the sealed book is to be understood.", scripture: "Daniel 7:25; 12:4; Revelation 13:3", art: "assets/study/epochs/deadly-wound.jpg" },
-    { id: "sanctuary-1844", name: "Sanctuary cleansed", lon: 35.229, lat: 31.778, yearId: "y1844", kind: "sanctuary", kicker: "22 Oct 1844", text: "The 2,300 evenings-mornings end. The antitype is not this hill, but the heavenly Most Holy Place.", scripture: "Daniel 8:14; 7:9–14", art: "assets/study/epochs/sanctuary.jpg" },
-    { id: "michael-stands", name: "Michael stands up", lon: 35.229, lat: 31.778, yearId: "y12", kind: "stone", kicker: "Daniel 12", text: "Intercession ends. A time of trouble. Sleepers awake. Daniel rests, and stands in his lot.", scripture: "Daniel 12:1–2, 13", art: "assets/study/epochs/resurrection-dawn.jpg" }
+    { id: "sanctuary-1844", name: "Sanctuary cleansed", lon: 35.229, lat: 31.778, yearId: "y1844", kind: "sanctuary", kicker: "22 Oct 1844", text: "The 2,300 evenings-mornings end. The antitype is not this hill and not a New England field. The sanctuary put right is the heavenly Most Holy Place. The people who lived the date were in America. The mountain of the stone is the whole earth — the map’s rim, not a capital.", scripture: "Daniel 8:14; 2:35, 44; 7:9–14", art: "assets/study/epochs/sanctuary.jpg" },
+    { id: "miller-lowhampton", name: "Miller’s farm", lon: -73.256, lat: 43.549, yearId: "y1844", kind: "miller", kicker: "Low Hampton, N.Y.", text: "William Miller (1782–1849), a Baptist farmer and War of 1812 captain, begins public lectures in 1831 from this Washington County farm. He reads Daniel’s metals as one chain and the 2,300 evenings-mornings as years from the 457 B.C. decree. His printed claim is “about the year 1843,” later stretched through the Jewish year into the spring of 1844. He expects Christ to come to this earth and the earth itself to be the sanctuary cleansed by fire. The date-range is his. The later day — 22 October — is not.", scripture: "Daniel 8:14; 2:44; Numbers 14:34", art: "assets/maps/stops/miller-farm.jpg" },
+    { id: "himes-boston", name: "Signs of the Times", lon: -71.059, lat: 42.360, yearId: "y1844", kind: "press", kicker: "Boston · 20 Mar 1840", text: "Joshua V. Himes, a Boston Christian-Connection minister, launches Signs of the Times on 20 March 1840 and later The Midnight Cry in New York. Camp meetings, charts, and a cheap press turn a farmer’s Bible study into a public American awakening. By 1844 the Second Advent preaching has crossed denominations in the Northeast — Methodists, Baptists, Christians — in the afterglow of the Second Great Awakening. Check the paper. The date is not a whisper.", scripture: "Daniel 12:4; Habakkuk 2:2", art: "assets/maps/stops/himes-boston.jpg" },
+    { id: "exeter-seventh-month", name: "Seventh-month cry", lon: -70.948, lat: 42.981, yearId: "y1844", kind: "camp", kicker: "Exeter, N.H. · Aug 1844", text: "At the mid-August 1844 camp meeting in Exeter, New Hampshire, Samuel S. Snow preaches the “true midnight cry.” Leviticus 16 places sanctuary cleansing on the tenth day of the seventh month. Using the Karaite visible-moon calendar, that Day of Atonement in 1844 falls on 22 October. The movement that had said “about 1843” now has a day. This sitting keeps the year on the 2,300-year line even if you dispute the Karaite day. The Exeter sermon is how America heard the day.", scripture: "Daniel 8:14; Leviticus 16:29–30; Matthew 25:6", art: "assets/maps/stops/exeter-camp.jpg" },
+    { id: "disappointment-1844", name: "22 October 1844", lon: -73.180, lat: 43.480, yearId: "y1844", kind: "disappointment", kicker: "The Great Disappointment", text: "Christ does not appear in the New England sky. Newspapers mock the Millerites. The date the arithmetic named is not withdrawn; the event they expected is. They had made the earth the sanctuary and the Second Coming the cleansing. Daniel 8:14 does not say “the earth.” It says the sanctuary is nitsdaq — put right. The disappointment is a mistaken event, not a failed number. Ordinary clothes, ordinary farms: the later tale of white “ascension robes” is a hostile cartoon, not the record.", scripture: "Daniel 8:14, 26–27; Hebrews 8:1–2", art: "assets/maps/stops/oct22-1844.jpg" },
+    { id: "edson-port-gibson", name: "Edson’s cornfield", lon: -77.053, lat: 42.957, yearId: "y1844", kind: "edson", kicker: "Port Gibson, N.Y. · 23 Oct", text: "The morning after the disappointment, Hiram Edson and friends walk through a cornfield near Port Gibson, New York. The memory of that Advent circle is that the sanctuary to be cleansed is in heaven, not this earth — Christ entering the Most Holy Place, the Day of Atonement antitype, the court of Daniel 7 already sitting. This is not a government gazette. It is the dated account of the people who would not throw the number away with the wrong event.", scripture: "Daniel 8:14; 7:9–14; Hebrews 9:23–24", art: "assets/maps/stops/edson-cornfield.jpg" },
+    { id: "washington-nh", name: "Washington, N.H.", lon: -72.097, lat: 43.176, yearId: "y1844", kind: "america", kicker: "A New England meetinghouse", text: "In this small hill town Rachel Oakes Preston, a Seventh Day Baptist, presses Advent believers on the seventh-day Sabbath in 1844. Frederick Wheeler and the Washington congregation become the first Sabbath-keeping Adventist company. The stone kingdom is not an American sect. The point of the pin is narrower: the same year the 2,300 days close, a New England meetinghouse is already arguing which law the little horn thought to change.", scripture: "Daniel 7:25; Exodus 20:8–11", art: "assets/maps/stops/washington-nh.jpg" },
+    { id: "morse-telegraph", name: "What hath God wrought", lon: -77.009, lat: 38.890, yearId: "y1844", kind: "telegraph", kicker: "Washington · 24 May 1844", text: "On 24 May 1844 Samuel F. B. Morse sends the first official telegraph message from the U.S. Capitol to Baltimore: “What hath God wrought” (Numbers 23:23). The same year Polk is elected, Texas annexation is forced, and the Methodist church splits north and south over slavery. This pin does not prove Daniel 8:14. It keeps 1844 from floating as a church slogan: the republic is wiring itself, expanding west, and tearing over bondage in the same twelve months the numbered line ends.", scripture: "Numbers 23:23; Daniel 12:4", art: "assets/maps/stops/morse-telegraph.jpg" },
+    { id: "michael-stands", name: "Michael stands up", lon: 35.229, lat: 31.778, yearId: "y12", kind: "stone", kicker: "Daniel 12", text: "Intercession ends. A time of trouble. Sleepers awake. Daniel rests, and stands in his lot.", scripture: "Daniel 12:1–2, 13", art: "assets/study/epochs/resurrection-dawn.jpg" },
+    { id: "dura-image", name: "Plain of Dura", lon: 44.55, lat: 32.35, yearId: "y605", kind: "decree", kicker: "c. 594 B.C.", text: "Nebuchadnezzar raises an all-gold image sixty cubits by six and commands the empire to bow. The three refuse. The furnace becomes the pattern of forced worship.", scripture: "Daniel 3:1–18", art: "assets/study/statue-nebuchadnezzar.jpg" },
+    { id: "watcher-stump", name: "The banded stump", lon: 44.433, lat: 32.555, yearId: "y605", kind: "decree", kicker: "Daniel 4", text: "A Watcher fells the cosmic tree and bands the stump with iron and bronze. Seven times pass until the king knows that Heaven rules.", scripture: "Daniel 4:17, 30–37", art: "assets/study/epochs/babylon-fall.jpg" },
+    { id: "lions-den", name: "The lions’ den", lon: 44.410, lat: 32.530, yearId: "y539", kind: "decree", kicker: "Daniel 6", text: "An unchangeable Medo-Persian law forbids prayer except to the king. Daniel opens his windows toward Jerusalem as he did aforetime.", scripture: "Daniel 6:10, 22", art: "assets/study/daniel-lions-den.jpg" },
+    { id: "ulai-vision", name: "Vision at the Ulai", lon: 48.270, lat: 32.195, yearId: "y457", kind: "sanctuary", kicker: "Daniel 8", text: "By the Ulai canal Daniel sees the ram and goat, then a horn that takes away the tamid. Unto 2,300 days; then the sanctuary is put right.", scripture: "Daniel 8:2–14", art: "assets/maps/stops/susa.jpg" },
+    { id: "hiddekel-theophany", name: "Man in linen by the Tigris", lon: 44.40, lat: 33.30, yearId: "y12", kind: "stone", kicker: "536 B.C. · Daniel 10", text: "The man in linen appears above the Hiddekel. Michael helps against the prince of Persia. The last vision of the book begins.", scripture: "Daniel 10:4–13; 12:1", art: "assets/study/epochs/resurrection-dawn.jpg" }
   ],
   epochs: [
     {
@@ -331,7 +350,7 @@ window.MAP_CHRONICLE = {
       focus: "papal",
       event: "ostrogoths-out",
       studySheet: 7,
-      galleryId: "legs",
+      galleryId: "years1260",
       polityOpacity: 1,
       stone: 0
     },
@@ -364,21 +383,21 @@ window.MAP_CHRONICLE = {
       approximateYear: true,
       label: "1844",
       title: "Then shall the sanctuary be cleansed",
-      kicker: "22 October 1844",
+      kicker: "22 October 1844 · America",
       metal: "stone",
-      beast: "The Ancient of Days sits. The Son of Man receives a kingdom.",
-      scripture: "Daniel 8:14; 7:9–14",
-      summary: "The 2,300 years end. The disappointment was a mistaken event, not a failed date. The sanctuary is in heaven.",
-      insight: "Judgment is present high-priestly work. The stone is already cut, and the metals do not recover.",
-      plate: "assets/maps/chronicle-map-1844.jpg",
-      art: "assets/study/epochs/sanctuary.jpg",
-      camera: { lon: 33.5, lat: 33.0, zoom: 2.05 },
-      focus: "stone",
-      event: "sanctuary-1844",
+      beast: "The stone fills the whole earth. It has no capital on this map.",
+      scripture: "Daniel 8:14; 2:35, 44; 7:9–14",
+      summary: "The 2,300 years end. The people who lived that date were in the American Northeast — Miller’s farm, Himes’s Boston press, Snow at Exeter, the disappointment, Edson’s cornfield. The event they expected was wrong. The sanctuary put right is in heaven.",
+      insight: "The stone kingdom is not a shaded province. The map’s borders are the sign: a mountain that fills the whole earth. Judgment is present high-priestly work. The metals do not recover.",
+      plate: "assets/maps/chronicle-map-1844-america.jpg",
+      art: "assets/maps/stops/oct22-1844.jpg",
+      camera: { lon: -73.2, lat: 41.55, zoom: 2.4, tileZoom: 5, useCamera: true },
+      focus: "",
+      event: "miller-lowhampton",
       studySheet: 8,
       galleryId: "stone",
-      polityOpacity: 0.28,
-      stone: 0.72
+      polityOpacity: 0.18,
+      stone: 0.85
     },
     {
       id: "y12",
@@ -396,7 +415,7 @@ window.MAP_CHRONICLE = {
       plate: "assets/maps/chronicle-map-daniel12.jpg",
       art: "assets/study/epochs/resurrection-dawn.jpg",
       camera: { lon: 32.0, lat: 34.0, zoom: 1.55 },
-      focus: "stone",
+      focus: "",
       event: "michael-stands",
       studySheet: 10,
       galleryId: "stone",
@@ -464,6 +483,18 @@ window.MAP_CHRONICLE.routes = [
     stops: [
       { name: "Paris", lat: 48.856, lon: 2.352, art: "assets/maps/stops/paris.jpg" },
       { name: "Rome", lat: 41.89, lon: 12.492, art: "assets/study/horizon/y1798.jpg" }
+    ]
+  },
+  {
+    id: "america-1844",
+    yearIds: ["y1844"],
+    name: "The date in America",
+    stops: [
+      { name: "Low Hampton", lat: 43.549, lon: -73.256, art: "assets/maps/stops/miller-farm.jpg" },
+      { name: "Boston", lat: 42.360, lon: -71.059, art: "assets/maps/stops/himes-boston.jpg" },
+      { name: "Exeter", lat: 42.981, lon: -70.948, art: "assets/maps/stops/exeter-camp.jpg" },
+      { name: "Washington, N.H.", lat: 43.176, lon: -72.097, art: "assets/maps/stops/washington-nh.jpg" },
+      { name: "Port Gibson", lat: 42.957, lon: -77.053, art: "assets/maps/stops/edson-cornfield.jpg" }
     ]
   }
 ];

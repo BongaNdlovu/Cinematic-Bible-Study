@@ -15,6 +15,19 @@ import * as THREE from 'three';
     const coarsePointer = window.matchMedia('(pointer: coarse)').matches;
     const lowPower = window.innerWidth < 768 || coarsePointer || (navigator.hardwareConcurrency || 8) <= 4;
 
+    const urlParams = new URLSearchParams(window.location.search);
+    const fromLesson = urlParams.get('from') === 'lesson';
+    const lessonSheetRaw = urlParams.get('sheet');
+    const isValidSheet = (s) => s !== null && s !== undefined && /^\d+$/.test(String(s).trim()) && Number(s) >= 0 && Number(s) <= 10;
+    const lessonSheetSafe = (fromLesson && isValidSheet(lessonSheetRaw))
+      ? (window.BAJourney && typeof window.BAJourney.clampToAccessible === 'function'
+        ? String(window.BAJourney.clampToAccessible(Number(lessonSheetRaw)))
+        : String(lessonSheetRaw).trim())
+      : null;
+    const lessonReturnHref = lessonSheetSafe
+      ? `study.html?sheet=${encodeURIComponent(lessonSheetSafe)}#sheet-article`
+      : null;
+
     const AudioBus = {
       ctx: null,
       muted: false,
@@ -62,20 +75,17 @@ import * as THREE from 'three';
       },
       play(kind) {
         if (!this.unlocked || this.muted) return;
-        if (kind === 'tick') this.tone(880, 0.06, 'triangle', 0.03);
+        if (kind === 'tick') this.tone(880, 0.05, 'sine', 0.02);
         else if (kind === 'select') {
-          this.tone(196, 0.22, 'sine', 0.06);
-          this.tone(523, 0.18, 'triangle', 0.04, 0.04);
+          this.tone(220, 0.16, 'sine', 0.035);
+          this.tone(392, 0.12, 'sine', 0.02, 0.04);
         } else if (kind === 'whoosh') {
-          this.noise(0.22, 0.05);
-          this.tone(140, 0.28, 'sine', 0.05);
-        } else if (kind === 'glitch') {
-          this.noise(0.12, 0.07);
-          this.tone(740, 0.08, 'square', 0.025);
+          this.noise(0.18, 0.03);
+          this.tone(160, 0.22, 'sine', 0.03);
         } else if (kind === 'panel') {
-          this.tone(220, 0.12, 'triangle', 0.04);
+          this.tone(240, 0.1, 'sine', 0.025);
         } else if (kind === 'click') {
-          this.tone(420, 0.05, 'square', 0.02);
+          this.tone(520, 0.045, 'sine', 0.016);
         }
       }
     };
@@ -89,7 +99,7 @@ import * as THREE from 'three';
     scene.fog = new THREE.FogExp2(0x050301, 0.018);
     scene.background = new THREE.Color(0x050301);
 
-    const camera = new THREE.PerspectiveCamera(34, window.innerWidth / window.innerHeight, 0.1, 140);
+    const camera = new THREE.PerspectiveCamera(34, window.innerWidth / window.innerHeight, 0.02, 200);
     camera.position.set(7.2, 5.4, 21.5);
     window.__galleryCamera = camera;
 
@@ -112,11 +122,37 @@ import * as THREE from 'three';
 
     const controls = new OrbitControls(camera, renderer.domElement);
     controls.enableDamping = true;
-    controls.dampingFactor = 0.05;
+    controls.dampingFactor = 0.07;
     controls.target.set(0, 1.35, 0);
-    controls.minDistance = 2.0;
-    controls.maxDistance = 36.0;
-    controls.maxPolarAngle = Math.PI / 2 + 0.22;
+    controls.minDistance = 0.08;
+    controls.maxDistance = 48.0;
+    controls.minPolarAngle = 0.04;
+    controls.maxPolarAngle = Math.PI - 0.04;
+    controls.zoomToCursor = false;
+    controls.zoomSpeed = 1.45;
+    controls.rotateSpeed = 0.92;
+    controls.panSpeed = 0.7;
+    controls.enablePan = true;
+    controls.screenSpacePanning = true;
+    let userHasAimed = false;
+    let cameraTween = null;
+    let autoSpin = false;
+    function pauseAutoOrbit() {
+      userHasAimed = true;
+      if (!autoSpin) return;
+      autoSpin = false;
+      const spinBtn = document.getElementById('btn-spin');
+      if (spinBtn) {
+        spinBtn.classList.remove('active');
+        spinBtn.textContent = 'Auto Orbit: OFF';
+      }
+      const b360 = document.getElementById('btn-museum-360');
+      if (b360) b360.classList.remove('active');
+    }
+    controls.addEventListener('start', () => {
+      cameraTween = null;
+      pauseAutoOrbit();
+    });
 
     // --- PROCEDURAL SOFT-FOCUS STONE RELIEF HALL BACKDROP ---
     function createStoneReliefCanvas() {
@@ -253,6 +289,7 @@ import * as THREE from 'three';
       bear: 'assets/site/bear-painting.jpg',
       leopard: 'assets/plates/leopard-diadochi.jpg',
       beast: 'assets/study/epochs/papal-rome.jpg',
+      years1260: 'assets/plates/years1260.jpg',
       ram: 'assets/plates/ram-ulai.jpg',
       goat: 'assets/plates/goat-charge.jpg',
       goat_broken: 'assets/plates/goat-broken.jpg',
@@ -393,6 +430,7 @@ import * as THREE from 'three';
       { img: 'assets/thumbs/bear.jpg', asset: 'bear', angle: 1.35, y: 2.15 },
       { img: 'assets/thumbs/leopard.jpg', asset: 'leopard', angle: 1.65, y: 2.05 },
       { img: 'assets/thumbs/beast.jpg', asset: 'beast', angle: 1.95, y: 1.95 },
+      { img: 'assets/thumbs/years1260.jpg', asset: 'years1260', angle: 2.05, y: 1.88 },
       { img: 'assets/thumbs/ram.jpg', asset: 'ram', angle: -1.7, y: 2.0 },
       { img: 'assets/thumbs/goat.jpg', asset: 'goat', angle: 2.2, y: 1.9 },
       { img: 'assets/thumbs/dura.jpg', asset: 'dura', angle: -1.95, y: 1.9 },
@@ -403,7 +441,6 @@ import * as THREE from 'three';
       { img: 'assets/thumbs/kings.jpg', asset: 'kings', angle: 2.9, y: 1.72 },
       { img: 'assets/thumbs/decree.jpg', asset: 'decree', angle: -2.7, y: 1.68 }
     ];
-    const frameRadius = 13.35;
     WALL_FRAMES.forEach((spec) => {
       const frame = new THREE.Group();
       const wood = new THREE.Mesh(
@@ -433,15 +470,34 @@ import * as THREE from 'three';
     const frameRaycaster = new THREE.Raycaster();
     const framePointer = new THREE.Vector2();
     let ptrDown = null;
+    let lastTap = { t: 0, x: 0, y: 0 };
     renderer.domElement.addEventListener('pointerdown', (ev) => {
       if (ev.button !== 0) return;
       ptrDown = { x: ev.clientX, y: ev.clientY };
+    });
+    renderer.domElement.addEventListener('wheel', (ev) => {
+      ev.preventDefault();
+      ev.stopImmediatePropagation();
+      const steps = Math.max(1, Math.min(6, Math.abs(ev.deltaY) / 80));
+      const factor = ev.deltaY > 0 ? Math.pow(1.12, steps) : Math.pow(0.88, steps);
+      dollyByFactor(factor, ev.clientX, ev.clientY);
+    }, { passive: false, capture: true });
+    renderer.domElement.addEventListener('dblclick', (ev) => {
+      ev.preventDefault();
+      inspectAtPointer(ev.clientX, ev.clientY);
     });
     renderer.domElement.addEventListener('pointerup', (ev) => {
       if (!ptrDown) return;
       const moved = Math.abs(ev.clientX - ptrDown.x) + Math.abs(ev.clientY - ptrDown.y);
       ptrDown = null;
       if (moved > 8) return;
+      const now = performance.now();
+      const dbl = now - lastTap.t < 320 && Math.abs(ev.clientX - lastTap.x) + Math.abs(ev.clientY - lastTap.y) < 18;
+      lastTap = { t: now, x: ev.clientX, y: ev.clientY };
+      if (dbl && ev.pointerType !== 'mouse') {
+        inspectAtPointer(ev.clientX, ev.clientY);
+        return;
+      }
       const rect = renderer.domElement.getBoundingClientRect();
       framePointer.x = ((ev.clientX - rect.left) / rect.width) * 2 - 1;
       framePointer.y = -((ev.clientY - rect.top) / rect.height) * 2 + 1;
@@ -462,7 +518,7 @@ import * as THREE from 'three';
           const part = pickAssembledPart(bodyHits[0].point);
           if (part) {
             AudioBus.play('select');
-            selectAsset(part);
+            selectAsset(part, { keepAngle: true });
           }
         }
       }
@@ -948,7 +1004,7 @@ import * as THREE from 'three';
         plateImg: 'assets/study/epochs/papal-rome.jpg',
         plateCaption: 'Iron teeth and the little horn among the ten · Rome',
         thumb: 'assets/thumbs/beast.jpg',
-        related: ['legs', 'goat_horn', 'ancient', 'son'],
+        related: ['legs', 'years1260', 'ancient', 'son'],
         takeaway: 'The fourth beast with iron teeth represents Imperial Rome, while its little horn portrays the persecuting church-state power that arose among the divided nations and reigned for 1,260 years until 1798.',
         filename: 'beast.glb',
         organic: true,
@@ -958,6 +1014,30 @@ import * as THREE from 'three';
         lookAt: [0, 1.1, 0],
         haloY: 1.4,
         haloScale: 1.12
+      },
+      years1260: {
+        id: 'years1260',
+        eyebrow: 'DANIEL 7 · THE MEASURED SPAN',
+        title: 'A Time, Times, and Dividing of Time',
+        pill: 'DANIEL 7:25 · 1,260 YEARS',
+        dates: 'AD 538 – AD 1798',
+        quote: '“And he shall speak great words against the most High, and shall wear out the saints of the most High, and think to change times and laws: and they shall be given into his hand until a time and times and the dividing of time.”',
+        quoteRef: 'Daniel 7:25 (KJV)',
+        explanation: 'Do not memorize 1,260 years first. Build the number. In this style of prophecy a “time” is a year, “times” is two years, and “the dividing of time” is a half year: 1 + 2 + ½ = 3½ years. Revelation writes the same span three ways: a thousand two hundred and threescore days (Revelation 12:6), a time and times and half a time (Revelation 12:14), and forty and two months (Revelation 13:5). Forty-two months of thirty days are 1,260 days. On the year-day scale God appointed in Numbers 14:34 and Ezekiel 4:6, those 1,260 days are 1,260 years. This exhibit is that measured reign — not a fifth metal, and not a three-and-a-half-year man at the end of time.',
+        historical: 'The marks in Daniel 7:24–25 sit among the ten fragments of western Rome: a power diverse from the others, speaking great words, wearing out the saints, intending to change times and laws. Historicist readers date the opening when the Ostrogothic grip on Rome broke in AD 538, so Justinian’s grant to the Roman see could operate in the city, and the close when General Berthier took Pius VI in 1798. You may argue the start-year. You may not skip the marks in 7:24–25 and still claim any favorite villain. The court of 7:9–14 sits while this span is still a historical fact; the stone of chapter 2 is later.',
+        plateImg: 'assets/plates/years1260.jpg',
+        plateCaption: 'Time, times, and the dividing of time · 538 to 1798',
+        thumb: 'assets/thumbs/years1260.jpg',
+        related: ['beast', 'ancient', 'sealed', 'feet'],
+        takeaway: 'Daniel 7:25’s riddle is 3½ years; Revelation equates it with 1,260 days; the year-day scale makes those 1,260 years, from the little horn’s measured supremacy in 538 to the deadly wound in 1798.',
+        filename: 'years1260.glb',
+        organic: true,
+        autoFrame: true,
+        targetHeight: 2.15,
+        camPos: [1.6, 1.55, 5.6],
+        lookAt: [0, 1.08, 0],
+        haloY: 1.35,
+        haloScale: 1.08
       },
       ram: {
         id: 'ram',
@@ -1092,7 +1172,7 @@ import * as THREE from 'three';
         plateImg: 'assets/plates/ancient-throne.jpg',
         plateCaption: 'Thrones were set, and the books were opened',
         thumb: 'assets/thumbs/ancient.jpg',
-        related: ['son', 'beast', 'goat_horn', 'stone'],
+        related: ['son', 'beast', 'years1260', 'stone'],
         takeaway: 'The vision of the Ancient of Days reveals God convening a heavenly courtroom where the books of record are opened and earthly persecuting powers are judged before Christ receives His eternal kingdom.',
         filename: 'ancient.glb',
         organic: true,
@@ -1743,6 +1823,44 @@ import * as THREE from 'three';
           anchor: new THREE.Vector3(0.45, 0.55, 0.42), enabled: true
         }
       ],
+      years1260: [
+        {
+          id: 'y1260-riddle', col: 'left', row: 0,
+          icon: '⏳', label: 'TIME + TIMES + HALF',
+          body: 'A time is a year, times is two, the dividing of time is a half. 1 + 2 + ½ = 3½ years. (Daniel 7:25)',
+          anchor: new THREE.Vector3(-0.48, 1.5, 0.4), enabled: true
+        },
+        {
+          id: 'y1260-days', col: 'left', row: 1,
+          icon: '📖', label: '1,260 DAYS',
+          body: 'Revelation writes the same span as 1,260 days, a time and times and half a time, and forty-two months. (Revelation 12:6, 14; 13:5)',
+          anchor: new THREE.Vector3(-0.45, 1.05, 0.42), enabled: true
+        },
+        {
+          id: 'y1260-years', col: 'left', row: 2,
+          icon: '📅', label: 'YEAR-DAY SCALE',
+          body: 'On the scale God appointed in Numbers 14:34 and Ezekiel 4:6, those 1,260 days are 1,260 years — not a 3½-year future man.',
+          anchor: new THREE.Vector3(-0.42, 0.55, 0.4), enabled: true
+        },
+        {
+          id: 'y1260-open', col: 'right', row: 0,
+          icon: '⛪', label: 'AD 538',
+          body: 'Ostrogoths driven from Rome. Justinian’s grant to the Roman see can operate in the city. Candidate start of the measured reign.',
+          anchor: new THREE.Vector3(0.5, 1.5, 0.38), enabled: true
+        },
+        {
+          id: 'y1260-close', col: 'right', row: 1,
+          icon: '⚔️', label: 'AD 1798',
+          body: 'Berthier takes Pius VI. The 1,260 years close. Revelation 13:3 calls this a deadly wound. The time of the end opens.',
+          anchor: new THREE.Vector3(0.48, 1.05, 0.4), enabled: true
+        },
+        {
+          id: 'y1260-tak', col: 'right', row: 2,
+          icon: '✨', label: 'KEY TAKEAWAY',
+          body: 'The riddle is 3½ years; Scripture equates it with 1,260 days; the year-day scale makes those 1,260 years, 538 to 1798.',
+          anchor: new THREE.Vector3(0.45, 0.55, 0.42), enabled: true
+        }
+      ],
       ram: [
         {
           id: 'ram-horns', col: 'left', row: 0,
@@ -2303,6 +2421,7 @@ import * as THREE from 'three';
         { asset: 'bear', label: 'THE BEAR', date: 'Dan 7:5', img: 'assets/thumbs/bear.jpg' },
         { asset: 'leopard', label: 'LEOPARD', date: 'Dan 7:6', img: 'assets/thumbs/leopard.jpg' },
         { asset: 'beast', label: 'FOURTH BEAST', date: 'Dan 7:7', img: 'assets/thumbs/beast.jpg' },
+        { asset: 'years1260', label: '1,260 YEARS', date: 'Dan 7:25', img: 'assets/thumbs/years1260.jpg' },
         { asset: 'ram', label: 'THE RAM', date: 'Dan 8:3', img: 'assets/thumbs/ram.jpg' },
         { asset: 'goat', label: 'THE GOAT', date: 'Dan 8:5', img: 'assets/thumbs/goat.jpg' },
         { asset: 'goat_broken', label: 'BROKEN HORN', date: 'Dan 8:8', img: 'assets/thumbs/goat_broken.jpg' },
@@ -2364,23 +2483,8 @@ import * as THREE from 'three';
       openModal('scripture-modal');
     }
 
-    function openInsightModal() {
-      const data = ASSET_REGISTRY[activeAssetKey] || ASSET_REGISTRY.assembled;
-      const title = document.getElementById('insight-modal-title');
-      const body = document.getElementById('insight-modal-body');
-      const take = document.getElementById('insight-modal-takeaway');
-      if (title) title.textContent = `Exhibit insight · ${data.title}`;
-      if (body) body.textContent = `${data.explanation} ${data.historical}`;
-      if (take) take.textContent = data.takeaway;
-      openModal('insight-modal');
-    }
-
     function openAboutModal() {
       openModal('about-modal');
-    }
-
-    function openTimelineModal() {
-      openModal('timeline-modal');
     }
 
     function setNavActive(name) {
@@ -2486,6 +2590,46 @@ import * as THREE from 'three';
       });
     }
 
+    const TITLES_HIDE_KEY = 'gallery_hide_titles';
+    const btnTitlesToggle = document.getElementById('btn-titles-toggle');
+    function titlesHiddenStored() {
+      try { return localStorage.getItem(TITLES_HIDE_KEY) === '1'; } catch (e) { return false; }
+    }
+    function applyTitlesHidden(hidden, persist) {
+      document.body.classList.toggle('titles-hidden', hidden);
+      if (persist) {
+        try { localStorage.setItem(TITLES_HIDE_KEY, hidden ? '1' : '0'); } catch (e) {}
+      }
+      if (btnTitlesToggle) {
+        btnTitlesToggle.classList.toggle('active', !hidden);
+        btnTitlesToggle.setAttribute('aria-pressed', hidden ? 'true' : 'false');
+        const label = hidden ? 'Show artifact title' : 'Hide artifact title';
+        btnTitlesToggle.title = label;
+        btnTitlesToggle.setAttribute('aria-label', label);
+      }
+    }
+    applyTitlesHidden(titlesHiddenStored() || document.body.classList.contains('titles-hidden'), false);
+    if (btnTitlesToggle) {
+      btnTitlesToggle.addEventListener('click', () => {
+        const nextHidden = !document.body.classList.contains('titles-hidden');
+        applyTitlesHidden(nextHidden, true);
+        museumToast(nextHidden ? 'Artifact title hidden' : 'Artifact title shown');
+      });
+    }
+
+    // Mobile notes sheet toggle shares the master-nodes state
+    const btnNodesSheetToggle = document.getElementById('btn-nodes-sheet-toggle');
+    if (btnNodesSheetToggle) {
+      btnNodesSheetToggle.addEventListener('click', () => {
+        masterNodesVisible = !masterNodesVisible;
+        if (btnNodesMaster) {
+          btnNodesMaster.classList.toggle('active', masterNodesVisible);
+          btnNodesMaster.title = masterNodesVisible ? 'Hide annotation nodes' : 'Show annotation nodes';
+        }
+        syncNodes();
+      });
+    }
+
     const _tempVec = new THREE.Vector3();
     function syncNodes() {
       if (!nodesSvg || !camera) return;
@@ -2499,7 +2643,7 @@ import * as THREE from 'three';
       const sheetBody = document.getElementById('museum-nodes-sheet-body');
       if (sheet) sheet.style.display = compact && masterNodesVisible ? 'block' : 'none';
       if (compact && sheetBody) {
-        sheetBody.innerHTML = (currentNodes || []).map((n) => '<button type="button" data-node="' + n.id + '">' + (n.title || n.id) + '</button>').join('');
+        sheetBody.innerHTML = (currentNodes || []).map((n) => '<button type="button" data-node="' + n.id + '">' + (n.label || n.id) + '</button>').join('');
       }
       if (hideAll || compact) {
         document.querySelectorAll('.museum-node-card').forEach(c => c.classList.add('hidden'));
@@ -2592,9 +2736,105 @@ import * as THREE from 'three';
       return window.innerHeight > window.innerWidth * 1.05;
     }
 
+    function getLiveArtifact() {
+      if (assembledContainer.visible) return assembledContainer;
+      if (singleModelContainer.visible) return singleModelContainer;
+      return artifactRoot;
+    }
+
+    function fitOrbitLimits(object) {
+      const subject = object || getLiveArtifact();
+      if (!subject) return;
+      const box = getWorldBox(subject);
+      if (!Number.isFinite(box.min.x) || !Number.isFinite(box.max.x)) return;
+      const size = new THREE.Vector3();
+      box.getSize(size);
+      const radius = Math.max(0.35, size.length() * 0.5);
+      controls.minDistance = Math.max(0.08, radius * 0.045);
+      controls.maxDistance = Math.max(28, Math.min(56, radius * 14));
+    }
+
+    function applyKeepAngleCamera(object, instant) {
+      if (!object) return;
+      const framed = frameFromCurrentAngle(object);
+      if (instant) {
+        camera.position.copy(framed.pos);
+        controls.target.copy(framed.look);
+        controls.update();
+        cameraTween = null;
+      } else {
+        tweenCamera(framed.pos, framed.look, 700);
+      }
+    }
+
+    function dollyByFactor(factor, clientX, clientY) {
+      pauseAutoOrbit();
+      cameraTween = null;
+      const live = getLiveArtifact();
+      if (live) fitOrbitLimits(live);
+      if (clientX != null && clientY != null && live) {
+        const rect = renderer.domElement.getBoundingClientRect();
+        framePointer.x = ((clientX - rect.left) / rect.width) * 2 - 1;
+        framePointer.y = -((clientY - rect.top) / rect.height) * 2 + 1;
+        frameRaycaster.setFromCamera(framePointer, camera);
+        const hits = frameRaycaster.intersectObject(live, true);
+        if (hits[0] && factor < 1) {
+          controls.target.lerp(hits[0].point, 0.26);
+        }
+      }
+      const offset = camera.position.clone().sub(controls.target);
+      const len = offset.length();
+      if (len < 1e-6) return;
+      offset.setLength(THREE.MathUtils.clamp(len * factor, controls.minDistance, controls.maxDistance));
+      camera.position.copy(controls.target).add(offset);
+      controls.update();
+    }
+
+    function frameFromCurrentAngle(object) {
+      const subject = object || getLiveArtifact();
+      if (!subject) return { pos: camera.position.clone(), look: controls.target.clone() };
+      subject.updateMatrixWorld(true);
+      const box = getWorldBox(subject);
+      if (!Number.isFinite(box.min.x) || !Number.isFinite(box.max.x)) {
+        return { pos: camera.position.clone(), look: controls.target.clone() };
+      }
+      const size = new THREE.Vector3();
+      const center = new THREE.Vector3();
+      box.getSize(size);
+      box.getCenter(center);
+      fitOrbitLimits(subject);
+      const dir = camera.position.clone().sub(controls.target);
+      if (dir.lengthSq() < 1e-8) dir.set(0.36, 0.18, 1);
+      dir.normalize();
+      const fov = THREE.MathUtils.degToRad(camera.fov * 0.9);
+      const portrait = isPortraitStage() || camera.aspect < 0.9;
+      const frameDim = portrait
+        ? Math.max(size.y * 1.35, size.x * 0.45, size.z * 0.45)
+        : Math.max(size.x, size.y, size.z);
+      const distScale = portrait ? 2.05 : 1.28;
+      const dist = THREE.MathUtils.clamp(
+        (frameDim / (2 * Math.tan(fov * 0.5))) * distScale,
+        controls.minDistance * 1.4,
+        controls.maxDistance * 0.92
+      );
+      return {
+        pos: center.clone().addScaledVector(dir, dist),
+        look: center.clone().add(new THREE.Vector3(0, size.y * 0.04, 0))
+      };
+    }
+
     function frameLoadedModel(object) {
       if (!object) return;
       object.updateMatrixWorld(true);
+      fitOrbitLimits(object);
+      if (userHasAimed) {
+        const framed = frameFromCurrentAngle(object);
+        camera.position.copy(framed.pos);
+        controls.target.copy(framed.look);
+        controls.update();
+        cameraTween = null;
+        return;
+      }
       const box = getWorldBox(object);
       const size = new THREE.Vector3();
       const center = new THREE.Vector3();
@@ -2614,6 +2854,35 @@ import * as THREE from 'three';
       controls.target.set(center.x, center.y + size.y * 0.04, center.z);
       controls.update();
       cameraTween = null;
+    }
+
+    function nudgeZoom(direction) {
+      const live = getLiveArtifact();
+      if (live) fitOrbitLimits(live);
+      if (direction > 0 && live) {
+        frameRaycaster.setFromCamera(new THREE.Vector2(0, 0), camera);
+        const hits = frameRaycaster.intersectObject(live, true);
+        if (hits[0]) controls.target.lerp(hits[0].point, 0.22);
+      }
+      dollyByFactor(direction > 0 ? 0.72 : 1.38);
+    }
+
+    function inspectAtPointer(clientX, clientY) {
+      pauseAutoOrbit();
+      cameraTween = null;
+      const rect = renderer.domElement.getBoundingClientRect();
+      framePointer.x = ((clientX - rect.left) / rect.width) * 2 - 1;
+      framePointer.y = -((clientY - rect.top) / rect.height) * 2 + 1;
+      frameRaycaster.setFromCamera(framePointer, camera);
+      const hits = frameRaycaster.intersectObject(getLiveArtifact(), true);
+      const look = hits[0] ? hits[0].point.clone() : controls.target.clone();
+      const view = new THREE.Vector3();
+      camera.getWorldDirection(view);
+      const current = camera.position.distanceTo(look);
+      const closer = hits[0]
+        ? Math.max(controls.minDistance * 1.6, hits[0].distance * 0.38)
+        : Math.max(controls.minDistance * 1.6, current * 0.52);
+      tweenCamera(look.clone().addScaledVector(view, -closer), look, 720);
     }
 
     function pickAssembledPart(point) {
@@ -2674,34 +2943,103 @@ import * as THREE from 'three';
     let pedestalVisible = false;
     let baseExposure = 1.12;
 
+    function syncDossierStudyLink(key) {
+      const narStudyLink = document.getElementById('nar-study-link');
+      if (!narStudyLink) return;
+      if (lessonReturnHref) {
+        narStudyLink.href = lessonReturnHref;
+        narStudyLink.innerHTML = '<span>📖</span> ← Back to this lesson';
+      } else {
+        narStudyLink.href = `study.html?id=${key}`;
+        narStudyLink.innerHTML = '<span>📖</span> Open Full Study Desk &amp; Quiz →';
+      }
+    }
+
+    const MAP_YEAR_FOR_ASSET = {
+      head: 'y605', chest: 'y539', thighs: 'y331', legs: 'y168', feet: 'y538',
+      stone: 'y1844', assembled: 'y605',
+      lion: 'y605', bear: 'y539', leopard: 'y331', beast: 'y538', years1260: 'y538',
+      ram: 'y539', goat: 'y331', goat_broken: 'y331', goat_horn: 'y168',
+      dura: 'y605', stump: 'y605', ox_king: 'y605',
+      ancient: 'y1844', son: 'y1844',
+      decree: 'y457', kings: 'y331', michael: 'y12', sealed: 'y12'
+    };
+
+    function syncDossierMapLink(key) {
+      const narMapLink = document.getElementById('nar-map-link');
+      if (!narMapLink) return;
+      const y = MAP_YEAR_FOR_ASSET[key] || 'y605';
+      const lessonQuery = lessonSheetSafe
+        ? `&from=lesson&sheet=${encodeURIComponent(lessonSheetSafe)}`
+        : '';
+      narMapLink.href = `map.html?year=${y}${lessonQuery}`;
+      const mapTopLink = document.getElementById('gallery-map-link');
+      if (mapTopLink && lessonSheetSafe) {
+        mapTopLink.href = `map.html?year=${y}&from=lesson&sheet=${encodeURIComponent(lessonSheetSafe)}`;
+      }
+      if (window.BAJourney) window.BAJourney.save({ artifact: key, year: y });
+    }
+
+    function syncDossierNarrative(data) {
+      // Update Right Narrative Column
+      const quote = document.getElementById('nar-scripture-quote');
+      const ref = document.getElementById('nar-scripture-ref');
+      const exp = document.getElementById('nar-explanation');
+      const hist = document.getElementById('nar-historical');
+      const plate = document.getElementById('nar-plate-img');
+      const take = document.getElementById('nar-takeaway');
+      if (quote) quote.textContent = data.quote;
+      if (ref) ref.textContent = data.quoteRef;
+      if (exp) exp.textContent = data.explanation;
+      if (hist) hist.textContent = data.historical;
+      if (plate && data.plateImg) {
+        plate.src = data.plateImg;
+        plate.alt = data.plateCaption || data.title;
+      }
+      const plateCap = document.getElementById('nar-plate-caption');
+      if (plateCap) plateCap.textContent = data.plateCaption || '';
+      if (take) take.textContent = data.takeaway;
+    }
+
+    function assetOpen(key) {
+      const k = key === 'altar' ? 'assembled' : key;
+      if (window.BAJourney && typeof window.BAJourney.canAccessAsset === 'function') {
+        return window.BAJourney.canAccessAsset(k);
+      }
+      return k === 'assembled';
+    }
+
     function selectAsset(key, opts = {}) {
       if (key === 'altar') key = 'assembled';
-      if (!ASSET_REGISTRY[key]) return;
+      if (!Object.prototype.hasOwnProperty.call(ASSET_REGISTRY, key)) return;
+      if (!assetOpen(key)) {
+        museumToast('Finish the open sitting to view this artifact.');
+        return;
+      }
       if (!opts.instant && key !== activeAssetKey) {
         if (selectAsset._busy) return;
         selectAsset._busy = true;
         AudioBus.play('whoosh');
         const trans = document.getElementById('stage-transition');
-        if (trans) {
+        const fadeMs = reducedMotion ? 0 : 180;
+        if (trans && !reducedMotion) {
+          trans.classList.remove('glitch');
           trans.classList.add('active', 'out');
-          if (!reducedMotion) {
-            trans.classList.add('glitch');
-            AudioBus.play('glitch');
-          }
         }
         setTimeout(() => {
-          selectAsset(key, { instant: true });
-          if (trans) {
+          selectAsset(key, { instant: true, keepAngle: opts.keepAngle || userHasAimed });
+          if (trans && !reducedMotion) {
             trans.classList.remove('glitch', 'out');
             trans.classList.add('in');
             setTimeout(() => {
               trans.classList.remove('active', 'in');
               selectAsset._busy = false;
-            }, 300);
+            }, fadeMs);
           } else {
+            if (trans) trans.classList.remove('active', 'out', 'in', 'glitch');
             selectAsset._busy = false;
           }
-        }, reducedMotion ? 120 : 260);
+        }, fadeMs);
         return;
       }
 
@@ -2730,41 +3068,10 @@ import * as THREE from 'three';
       if (title) title.textContent = data.title;
       if (pill) pill.textContent = data.pill;
 
-      // Update Right Narrative Column
-      const quote = document.getElementById('nar-scripture-quote');
-      const ref = document.getElementById('nar-scripture-ref');
-      const exp = document.getElementById('nar-explanation');
-      const hist = document.getElementById('nar-historical');
-      const plate = document.getElementById('nar-plate-img');
-      const take = document.getElementById('nar-takeaway');
-      if (quote) quote.textContent = data.quote;
-      if (ref) ref.textContent = data.quoteRef;
-      if (exp) exp.textContent = data.explanation;
-      if (hist) hist.textContent = data.historical;
-      if (plate && data.plateImg) {
-        plate.src = data.plateImg;
-        plate.alt = data.plateCaption || data.title;
-      }
-      const plateCap = document.getElementById('nar-plate-caption');
-      if (plateCap) plateCap.textContent = data.plateCaption || '';
-      if (take) take.textContent = data.takeaway;
+      syncDossierNarrative(data);
 
-      const narStudyLink = document.getElementById('nar-study-link');
-      if (narStudyLink) {
-        narStudyLink.href = `study.html?id=${key}`;
-      }
-      const narMapLink = document.getElementById('nar-map-link');
-      const yearForAsset = {
-        head: 'y605', chest: 'y539', thighs: 'y331', legs: 'y168', feet: 'y538',
-        stone: 'y1844', assembled: 'y605',
-        lion: 'y605', bear: 'y539', leopard: 'y331', beast: 'y538',
-        ram: 'y539', goat: 'y331', goat_broken: 'y331', goat_horn: 'y168',
-        dura: 'y605', stump: 'y605', ox_king: 'y605',
-        ancient: 'y1844', son: 'y1844',
-        decree: 'y457', kings: 'y331', michael: 'y12', sealed: 'y12'
-      };
-      if (narMapLink) narMapLink.href = 'map.html?year=' + (yearForAsset[key] || 'y605');
-      if (window.BAJourney) window.BAJourney.save({ artifact: key, year: yearForAsset[key] || 'y605' });
+      syncDossierStudyLink(key);
+      syncDossierMapLink(key);
 
       const idxEl = document.getElementById('exhibit-index');
       if (idxEl) {
@@ -2804,8 +3111,20 @@ import * as THREE from 'three';
       rebuildNodeElements();
       syncNodes();
 
+      const keepAngle = !!(opts.keepAngle || userHasAimed);
+
       // Smooth camera transition to optimal angle
-      if (data.camPos && data.lookAt && !opts.skipCamera && !data.autoFrame) {
+      if (key === 'years1260') {
+        autoSpin = false;
+        const spinBtnPlaque = document.getElementById('btn-spin');
+        if (spinBtnPlaque) {
+          spinBtnPlaque.classList.remove('active');
+          spinBtnPlaque.textContent = 'Auto Orbit: OFF';
+        }
+        const b360Plaque = document.getElementById('btn-museum-360');
+        if (b360Plaque) b360Plaque.classList.remove('active');
+      }
+      if (data.camPos && data.lookAt && !opts.skipCamera && !data.autoFrame && !keepAngle) {
         autoSpin = false;
         const spinBtn = document.getElementById('btn-spin');
         if (spinBtn) {
@@ -2852,6 +3171,10 @@ import * as THREE from 'three';
         assembledContainer.visible = true;
         altarPlatformGroup.visible = altarVisible;
         setupAssembledColossus();
+        if (assembledBuilt) {
+          fitOrbitLimits(assembledContainer);
+          if (keepAngle && !opts.skipCamera) applyKeepAngleCamera(assembledContainer, opts.instant);
+        }
         return;
       }
 
@@ -2861,6 +3184,7 @@ import * as THREE from 'three';
       altarPlatformGroup.visible = false;
 
       loadGLBAsset(key, (sceneObj) => {
+        if (key !== activeAssetKey) return;
         singleModelContainer.clear();
         currentSingleModel = sceneObj;
         normalizePart(currentSingleModel, data.targetHeight || 2.35);
@@ -2892,7 +3216,9 @@ import * as THREE from 'three';
         if (key === 'head') {
           celestialHalo.position.set(0, 1.28, -1.05);
         }
-        if (data.autoFrame) frameLoadedModel(currentSingleModel);
+        fitOrbitLimits(currentSingleModel);
+        if (keepAngle) applyKeepAngleCamera(currentSingleModel, opts.instant);
+        else if (data.autoFrame) frameLoadedModel(currentSingleModel);
       });
     }
 
@@ -3068,6 +3394,10 @@ import * as THREE from 'three';
       assembledBuilt = true;
       applyStudyModeToMeshes(assembledContainer);
       updateTriangleReadout();
+      fitOrbitLimits(assembledContainer);
+      if (activeAssetKey === 'assembled' && userHasAimed) {
+        applyKeepAngleCamera(assembledContainer, true);
+      }
 
       if (!loadProgress.heroAssetCounted) {
         loadProgress.heroAssetCounted = true;
@@ -3204,13 +3534,6 @@ import * as THREE from 'three';
       document.querySelectorAll('[data-mode]').forEach(b => b.classList.toggle('active', b.dataset.mode === mode));
       if (assembledContainer.visible) applyStudyModeToMeshes(assembledContainer);
       if (singleModelContainer.visible) applyStudyModeToMeshes(singleModelContainer);
-      const badge = document.getElementById('compare-badge');
-      if (badge) {
-        badge.hidden = mode === 'gold';
-        badge.textContent = mode === 'clay' ? 'Museum plaster study' : mode === 'wireframe' ? 'Wireframe scan' : mode === 'lighting' ? 'Chiaroscuro study' : '';
-      }
-      const cmp = document.getElementById('btn-museum-compare');
-      if (cmp) cmp.classList.toggle('active', mode === 'clay');
       museumToast(`Render Mode: ${mode.toUpperCase()}`);
     }
     document.querySelectorAll('[data-mode]').forEach(b => {
@@ -3218,7 +3541,6 @@ import * as THREE from 'three';
     });
 
     // --- CAMERA TWEEN ---
-    let cameraTween = null;
     function tweenCamera(targetPos, targetLook, duration = 1000) {
       const startPos = camera.position.clone();
       const startLook = controls.target.clone();
@@ -3235,26 +3557,41 @@ import * as THREE from 'three';
     }
 
     // --- CONTROLS & WIRING ---
-    let autoSpin = !reducedMotion;
+    autoSpin = !reducedMotion;
 
     // Artifact items click
     document.querySelectorAll('.artifact-card-item').forEach(item => {
-      item.addEventListener('mouseenter', () => AudioBus.play('tick'));
-      item.addEventListener('click', () => selectAsset(item.dataset.asset));
+      item.addEventListener('mouseenter', () => {
+        if (!item.classList.contains('is-locked')) AudioBus.play('tick');
+      });
+      item.addEventListener('click', () => {
+        if (item.classList.contains('is-locked')) {
+          museumToast('Finish the open sitting to view this artifact.');
+          return;
+        }
+        selectAsset(item.dataset.asset);
+      });
     });
 
     function applyJourneyUnlocks() {
-      const journey = window.BAJourney ? window.BAJourney.load() : { unlocked: [] };
-      const unlocked = journey.unlocked || [];
       document.querySelectorAll('.artifact-card-item').forEach((card) => {
-        const emp = window.BAJourney ? window.BAJourney.empireForAsset(card.dataset.asset) : null;
-        if (!emp) {
-          card.classList.remove('is-locked', 'has-sermon');
-          return;
-        }
-        const open = unlocked.indexOf(emp) !== -1;
+        const open = assetOpen(card.dataset.asset);
         card.classList.toggle('is-locked', !open);
-        card.classList.toggle('has-sermon', open);
+        card.classList.remove('has-sermon');
+        card.setAttribute('aria-disabled', open ? 'false' : 'true');
+        card.tabIndex = open ? 0 : -1;
+      });
+      document.querySelectorAll('.related-avatar').forEach((el) => {
+        const open = assetOpen(el.dataset.rel);
+        el.hidden = !open;
+        el.disabled = !open;
+      });
+      document.querySelectorAll('.era-cell, .timeline-item').forEach((el) => {
+        const key = el.dataset.asset;
+        if (!key) return;
+        const open = assetOpen(key);
+        el.classList.toggle('is-locked', !open);
+        el.setAttribute('aria-disabled', open ? 'false' : 'true');
       });
     }
     applyJourneyUnlocks();
@@ -3264,23 +3601,57 @@ import * as THREE from 'three';
 
     // Related avatar circles click
     document.querySelectorAll('.related-avatar').forEach(item => {
-      item.addEventListener('click', () => selectAsset(item.dataset.rel));
+      item.addEventListener('click', () => {
+        if (!assetOpen(item.dataset.rel)) {
+          museumToast('Finish the open sitting to view this artifact.');
+          return;
+        }
+        selectAsset(item.dataset.rel);
+      });
     });
 
     // Previous / Next artifact arrows
-    const artifactOrder = ['assembled', 'head', 'chest', 'thighs', 'legs', 'feet', 'stone', 'lion', 'bear', 'leopard', 'beast', 'ram', 'goat', 'goat_broken', 'goat_horn', 'dura', 'stump', 'ox_king', 'ancient', 'son', 'decree', 'kings', 'michael', 'sealed'];
-    document.getElementById('btn-prev-artifact').addEventListener('click', () => {
-      let idx = artifactOrder.indexOf(activeAssetKey);
-      idx = (idx - 1 + artifactOrder.length) % artifactOrder.length;
-      selectAsset(artifactOrder[idx]);
-    });
-    document.getElementById('btn-next-artifact').addEventListener('click', () => {
-      let idx = artifactOrder.indexOf(activeAssetKey);
-      idx = (idx + 1) % artifactOrder.length;
-      selectAsset(artifactOrder[idx]);
-    });
+    const artifactOrder = ['assembled', 'head', 'chest', 'thighs', 'legs', 'feet', 'stone', 'lion', 'bear', 'leopard', 'beast', 'years1260', 'ram', 'goat', 'goat_broken', 'goat_horn', 'dura', 'stump', 'ox_king', 'ancient', 'son', 'decree', 'kings', 'michael', 'sealed'];
+    function openArtifactKeys() {
+      return artifactOrder.filter(assetOpen);
+    }
+    function stepArtifact(dir) {
+      const open = openArtifactKeys();
+      if (!open.length) return;
+      let idx = open.indexOf(activeAssetKey);
+      if (idx < 0) idx = 0;
+      idx = (idx + dir + open.length) % open.length;
+      selectAsset(open[idx]);
+    }
+    document.getElementById('btn-prev-artifact').addEventListener('click', () => stepArtifact(-1));
+    document.getElementById('btn-next-artifact').addEventListener('click', () => stepArtifact(1));
 
     // Bottom action bar
+    const btnZoomIn = document.getElementById('btn-zoom-in');
+    const btnZoomOut = document.getElementById('btn-zoom-out');
+    const btnZoomFit = document.getElementById('btn-zoom-fit');
+    if (btnZoomIn) {
+      btnZoomIn.addEventListener('click', () => {
+        nudgeZoom(1);
+        AudioBus.play('click');
+      });
+    }
+    if (btnZoomOut) {
+      btnZoomOut.addEventListener('click', () => {
+        nudgeZoom(-1);
+        AudioBus.play('click');
+      });
+    }
+    if (btnZoomFit) {
+      btnZoomFit.addEventListener('click', () => {
+        pauseAutoOrbit();
+        const live = getLiveArtifact();
+        if (live) applyKeepAngleCamera(live, false);
+        AudioBus.play('click');
+        museumToast('Fit artifact from this angle');
+      });
+    }
+
     const btn360 = document.getElementById('btn-museum-360');
     if (btn360) {
       btn360.addEventListener('click', () => {
@@ -3296,21 +3667,6 @@ import * as THREE from 'three';
       });
     }
 
-    const btnCompare = document.getElementById('btn-museum-compare');
-    if (btnCompare) {
-      btnCompare.addEventListener('click', () => {
-        const nextMode = activeStudyMode === 'clay' ? 'gold' : 'clay';
-        setStudyMode(nextMode);
-      });
-    }
-
-    const btnAi = document.getElementById('btn-museum-ai');
-    if (btnAi) {
-      btnAi.addEventListener('click', () => {
-        openInsightModal();
-      });
-    }
-
     const sheetBodyEl = document.getElementById('museum-nodes-sheet-body');
     if (sheetBodyEl) {
       sheetBodyEl.addEventListener('click', (e) => {
@@ -3320,7 +3676,7 @@ import * as THREE from 'three';
     }
     function startArtifactTour() {
       let i = 0;
-      const order = artifactOrder.filter((k) => k !== 'altar');
+      const order = openArtifactKeys().filter((k) => k !== 'altar');
       const step = () => {
         if (i >= order.length) { museumToast('Tour complete'); return; }
         selectAsset(order[i]);
@@ -3333,40 +3689,6 @@ import * as THREE from 'three';
     window.addEventListener('keydown', (e) => {
       if (e.key === 't' || e.key === 'T') startArtifactTour();
     });
-
-    const btnDownload = document.getElementById('btn-museum-download');
-    if (btnDownload) {
-      btnDownload.addEventListener('click', () => {
-        renderer.render(scene, camera);
-        const dataURL = renderer.domElement.toDataURL('image/png');
-        const a = document.createElement('a');
-        a.download = `bible-artifacts-${activeAssetKey}.png`;
-        a.href = dataURL;
-        a.click();
-        museumToast('High-Res Exhibit Screenshot Saved!');
-      });
-    }
-
-    const btnShare = document.getElementById('btn-museum-share');
-    if (btnShare) {
-      btnShare.addEventListener('click', async () => {
-        const url = window.location.href;
-        try {
-          if (navigator.share) {
-            await navigator.share({ title: 'Daniel 2 Colossus', url });
-            return;
-          }
-          if (navigator.clipboard && navigator.clipboard.writeText) {
-            await navigator.clipboard.writeText(url);
-            museumToast('Exhibit link copied');
-            return;
-          }
-        } catch (err) {
-          if (err && err.name === 'AbortError') return;
-        }
-        museumToast('Copy the address bar to share this exhibit');
-      });
-    }
 
     // Study Lab Drawer toggle
     const labDrawer = document.getElementById('study-lab-drawer');
@@ -3473,6 +3795,7 @@ import * as THREE from 'three';
         if (btnSpin) { btnSpin.classList.remove('active'); btnSpin.textContent = 'Auto Orbit: OFF'; }
         if (btn360) btn360.classList.remove('active');
 
+        userHasAimed = true;
         const cur = ASSET_REGISTRY[activeAssetKey] || ASSET_REGISTRY.assembled;
         const fy = cur.lookAt ? cur.lookAt[1] : 1.2;
         const fz = (activeAssetKey === 'assembled') ? 9.2 : 5.2;
@@ -3659,6 +3982,22 @@ import * as THREE from 'three';
         if (searchInput) searchInput.focus();
         return;
       }
+      if (e.key === '+' || e.key === '=') {
+        e.preventDefault();
+        nudgeZoom(1);
+        return;
+      }
+      if (e.key === '-' || e.key === '_') {
+        e.preventDefault();
+        nudgeZoom(-1);
+        return;
+      }
+      if (e.key === 'f' || e.key === 'F') {
+        e.preventDefault();
+        const live = getLiveArtifact();
+        if (live) applyKeepAngleCamera(live, false);
+        return;
+      }
       if (e.key === 'ArrowRight') document.getElementById('btn-next-artifact')?.click();
       if (e.key === 'ArrowLeft') document.getElementById('btn-prev-artifact')?.click();
       if (e.key === 'n' || e.key === 'N') btnNodesMaster?.click();
@@ -3666,11 +4005,11 @@ import * as THREE from 'three';
         labDrawer?.classList.toggle('open');
       }
       if (e.key >= '1' && e.key <= '9') {
-        const pick = artifactOrder[Number(e.key) - 1];
+        const pick = openArtifactKeys()[Number(e.key) - 1];
         if (pick) selectAsset(pick);
       }
       if (e.key === '0') {
-        const pick = artifactOrder[9];
+        const pick = openArtifactKeys()[9];
         if (pick) selectAsset(pick);
       }
     });
@@ -3717,6 +4056,14 @@ import * as THREE from 'three';
       }
 
       controls.update();
+      const focusDist = camera.position.distanceTo(controls.target);
+      const nextNear = THREE.MathUtils.clamp(focusDist * 0.025, 0.012, 0.35);
+      const nextFar = Math.max(140, focusDist * 24);
+      if (Math.abs(camera.near - nextNear) > 0.004 || Math.abs(camera.far - nextFar) > 2) {
+        camera.near = nextNear;
+        camera.far = nextFar;
+        camera.updateProjectionMatrix();
+      }
 
       // Live scene diagnostics
       const relCam = camera.position.clone().sub(controls.target);
@@ -3753,9 +4100,29 @@ import * as THREE from 'three';
     }
 
     // Initialize State: Check URL parameter (?asset=... or ?id=...) or default to 'assembled'
-    const urlParams = new URLSearchParams(window.location.search);
     const initialAssetKey = urlParams.get('asset') || urlParams.get('id');
-    const startAsset = (initialAssetKey && ASSET_REGISTRY[initialAssetKey]) ? initialAssetKey : 'assembled';
+    const requestedAsset = (initialAssetKey && Object.prototype.hasOwnProperty.call(ASSET_REGISTRY, initialAssetKey)) ? initialAssetKey : 'assembled';
+    const startAsset = assetOpen(requestedAsset) ? requestedAsset : (openArtifactKeys()[0] || 'assembled');
+    if (requestedAsset !== startAsset && history.replaceState) {
+      try {
+        const u = new URL(location.href);
+        u.searchParams.set('asset', startAsset);
+        history.replaceState(null, '', u.pathname + u.search);
+      } catch (e) {}
+    }
+
+    if (lessonReturnHref) {
+      const backBtn = document.getElementById('gallery-back-lesson');
+      if (backBtn) {
+        backBtn.href = lessonReturnHref;
+        backBtn.style.display = 'inline-flex';
+      }
+      const genericStudy = document.getElementById('gallery-study-link');
+      if (genericStudy) {
+        genericStudy.style.display = 'none';
+      }
+      // gallery-map-link gets its year from syncDossierMapLink when the first asset is selected
+    }
 
     rebuildNodeElements();
     buildEraTimeline();

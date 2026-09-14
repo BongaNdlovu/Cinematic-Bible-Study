@@ -9,8 +9,14 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800;900&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/app.css">
+  <link rel="stylesheet" href="css/terms.css">
   <link rel="preload" href="models/full_body.glb" as="fetch" crossorigin>
   <script src="js/shared/journey.js"></script>
+  <script src="js/shared/auth-config.js"></script>
+  <script src="vendor/supabase/supabase.js"></script>
+  <script src="js/shared/errors.js"></script>
+  <script src="js/shared/auth.js"></script>
+  <script src="js/shared/terms.js"></script>
   <script type="importmap">
   {
     "imports": {
@@ -21,6 +27,15 @@
   </script>
 </head>
 <body>
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem('gallery_hide_titles') === '1') {
+          document.body.classList.add('titles-hidden');
+        }
+      } catch (e) {}
+    })();
+  </script>
 
   <div id="webgl-container" role="img" aria-label="Interactive 3D view of the Daniel 2 colossus"></div>
   <div class="vignette" aria-hidden="true"></div>
@@ -28,7 +43,6 @@
   <div id="still-stage" hidden>
     <img id="still-stage-img" alt="">
   </div>
-  <div id="compare-badge" hidden>Museum plaster study</div>
 
   <div id="loading-overlay">
     <div class="load-crest" aria-hidden="true">
@@ -68,9 +82,10 @@
     </a>
 
     <div class="header-utilities">
+      <a class="util-btn back-to-lesson" id="gallery-back-lesson" href="study.html" style="text-decoration:none;display:none;color:#d4af37;border-color:rgba(212,175,55,0.4);">← Back to this lesson</a>
       <a class="util-btn" href="index.html" style="text-decoration:none">Home</a>
-      <a class="util-btn" href="study.html" style="text-decoration:none">Study</a>
-      <a class="util-btn" href="map.html" style="text-decoration:none">Map</a>
+      <a class="util-btn" id="gallery-study-link" href="study.html" style="text-decoration:none">Study</a>
+      <a class="util-btn" id="gallery-map-link" href="map.html" style="text-decoration:none">Map</a>
       <div class="search-box">
         <span class="search-icon" aria-hidden="true">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.2-3.2"/></svg>
@@ -80,6 +95,7 @@
       <button class="util-btn icon-only" id="btn-theme-toggle" type="button" title="Toggle lighting tone" aria-label="Toggle lighting tone">☀️</button>
       <button class="util-btn icon-only" id="btn-scripture-modal" type="button" title="Scripture" aria-label="Open scripture">📖</button>
       <button class="util-btn icon-only active" id="btn-nodes-master" type="button" title="Toggle annotation nodes" aria-label="Toggle nodes">◎</button>
+      <button class="util-btn icon-only active" id="btn-titles-toggle" type="button" title="Hide artifact title" aria-label="Hide artifact title" aria-pressed="false">Aa</button>
       <button class="util-btn icon-only" id="btn-mute" type="button" title="Mute gallery sound" aria-label="Mute sound">♪</button>
       <button class="util-btn icon-only" id="btn-open-lab" type="button" title="Study lab" aria-label="Open study lab">⚙</button>
       <button class="util-btn icon-only" id="btn-menu" type="button" title="Collection" aria-label="Open collection">☰</button>
@@ -186,6 +202,13 @@
         <div class="artifact-meta">
           <div class="artifact-name">Dreadful Beast &amp; Little Horn</div>
           <div class="artifact-scripture">Daniel 7:7–8</div>
+        </div>
+      </button>
+      <button class="artifact-card-item" type="button" data-asset="years1260">
+        <div class="artifact-thumb"><img src="assets/thumbs/years1260.jpg" alt=""></div>
+        <div class="artifact-meta">
+          <div class="artifact-name">1,260 Years</div>
+          <div class="artifact-scripture">Daniel 7:25</div>
         </div>
       </button>
       <div class="rail-section-header">DANIEL 8 · RAM &amp; GOAT</div>
@@ -356,24 +379,21 @@
 
   <footer class="bottom-chrome">
     <div class="museum-action-pill">
+      <button class="museum-action-btn" id="btn-zoom-out" type="button" title="Zoom out (−)">
+        <span class="action-icon">−</span> OUT
+      </button>
+      <button class="museum-action-btn" id="btn-zoom-in" type="button" title="Zoom in (+)">
+        <span class="action-icon">+</span> IN
+      </button>
+      <button class="museum-action-btn" id="btn-zoom-fit" type="button" title="Fit artifact from this angle (F)">
+        <span class="action-icon">⊡</span> FIT
+      </button>
       <button class="museum-action-btn active" id="btn-museum-360" type="button">
         <span class="action-icon">↻</span> 360° VIEW
       </button>
-      <button class="museum-action-btn" id="btn-museum-compare" type="button">
-        <span class="action-icon">⚖</span> COMPARE
-      </button>
-      <button class="museum-action-btn" id="btn-museum-ai" type="button">
-        <span class="action-icon">✦</span> AI ANALYSIS
-      </button>
-      <button class="museum-action-btn" id="btn-museum-download" type="button">
-        <span class="action-icon">↓</span> DOWNLOAD
-      </button>
-      <button class="museum-action-btn" id="btn-museum-share" type="button">
-        <span class="action-icon">↗</span> SHARE
-      </button>
     </div>
     <div class="stage-interaction-hint">
-      Drag to rotate &nbsp;•&nbsp; Scroll to zoom &nbsp;•&nbsp; Click nodes to explore
+      Drag to orbit &nbsp;•&nbsp; Scroll toward a detail to zoom &nbsp;•&nbsp; Double-click to inspect &nbsp;•&nbsp; + / − / F
     </div>
   </footer>
 
@@ -453,14 +473,6 @@
     <p class="scripture-ref" id="scripture-modal-ref">Daniel 2:38 (KJV)</p>
   </div>
 
-  <div class="exhibit-modal cinematic dossier-modal" id="insight-modal" role="dialog" aria-labelledby="insight-modal-title">
-    <button class="modal-close" type="button" data-close-modal aria-label="Close">✕</button>
-    <p class="modal-kicker">AI analysis · exhibit dossier</p>
-    <h2 id="insight-modal-title">Exhibit insight</h2>
-    <p id="insight-modal-body"></p>
-    <p class="takeaway-body" id="insight-modal-takeaway"></p>
-  </div>
-
   <div class="exhibit-modal cinematic" id="about-modal" role="dialog" aria-labelledby="about-modal-heading">
     <button class="modal-close" type="button" data-close-modal aria-label="Close">✕</button>
     <h2 id="about-modal-heading">About this gallery</h2>
@@ -482,6 +494,7 @@
       <button class="timeline-item" type="button" data-asset="bear"><b>c. 539–331 BC · Bear</b><p>Medo-Persia raised on one side, three ribs in its mouth.</p></button>
       <button class="timeline-item" type="button" data-asset="leopard"><b>c. 331–168 BC · Leopard</b><p>Greece: four wings of speed, then four heads of the Diadochi.</p></button>
       <button class="timeline-item" type="button" data-asset="beast"><b>Rome &amp; the little horn · Dan 7:7–8</b><p>Iron teeth, ten horns, and the horn that speaks great words.</p></button>
+      <button class="timeline-item" type="button" data-asset="years1260"><b>AD 538–1798 · 1,260 years</b><p>A time, times, and the dividing of time: the measured reign of the little horn.</p></button>
       <button class="timeline-item" type="button" data-asset="ram"><b>Daniel 8 · The ram</b><p>Medo-Persia named: two horns, one higher, the higher last.</p></button>
       <button class="timeline-item" type="button" data-asset="goat"><b>Daniel 8 · Charging goat</b><p>Greece named: a notable horn from the west, touching not the ground.</p></button>
       <button class="timeline-item" type="button" data-asset="goat_broken"><b>323 BC · Great horn broken</b><p>Alexander dies. Four horns toward the four winds.</p></button>

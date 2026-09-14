@@ -1,0 +1,26 @@
+{
+  "categories": {
+    "correctness": "error",
+    "suspicious": "error",
+    "pedantic": "off",
+    "perf": "off",
+    "style": "off",
+    "restriction": "off",
+    "nursery": "off"
+  },
+  "ignorePatterns": [
+    "vendor/**",
+    "node_modules/**",
+    "qa/**",
+    "tools/**",
+    "models/**",
+    "assets/**"
+  ],
+  "rules": {
+    "complexity": ["error", 55],
+    "no-underscore-dangle": "off",
+    "consistent-function-scoping": "off",
+    "unicorn/no-array-sort": "off",
+    "no-unused-vars": ["error", { "caughtErrors": "none", "args": "none" }]
+  }
+}

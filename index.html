@@ -8,7 +8,13 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;1,500;1,600&family=Inter:wght@400;500;600&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/site.css">
+  <link rel="stylesheet" href="css/terms.css">
   <script src="js/shared/journey.js"></script>
+  <script src="js/shared/auth-config.js"></script>
+  <script src="vendor/supabase/supabase.js"></script>
+  <script src="js/shared/errors.js"></script>
+  <script src="js/shared/auth.js"></script>
+  <script src="js/shared/terms.js"></script>
   <script>if (window.BAJourney) window.BAJourney.load();</script>
 </head>
 <body class="site cover cinematic-bg">
@@ -35,6 +41,7 @@
       <a href="study.html">The Sitting</a>
       <a href="map.html">Map of History</a>
       <a href="gallery.html">3D Symbols</a>
+      <span class="auth-slot" data-auth-slot data-auth-variant="nav"></span>
     </div>
   </nav>
 
@@ -102,16 +109,25 @@
     </div>
     <div class="instrument-row">
       <article>
-        <h3>The text</h3>
-        <p>Each sitting opens Daniel in the study desk: the excerpt, How to study, the Scripture dock, and a quiz that must be answered before you continue.</p>
+        <img class="card-art" src="assets/site/card-text.jpg" alt="A lamplit study desk with an open Bible, a quill, and a rolled parchment">
+        <div class="card-copy">
+          <h3>The text</h3>
+          <p>Each sitting opens Daniel in the study desk: the excerpt, How to study, the Scripture dock, and a quiz that must be answered before you continue.</p>
+        </div>
       </article>
       <article>
-        <h3>The year</h3>
-        <p>The horizon timeline keeps you on the year the chapter belongs to — 605, 539, 457, A.D. 31, 538, 1798, 1844, Daniel 12 — so the map and the sitting stay on the same night.</p>
+        <img class="card-art" src="assets/site/card-year.jpg" alt="An antique parchment map on a stone table beside an hourglass">
+        <div class="card-copy">
+          <h3>The year</h3>
+          <p>The horizon timeline keeps you on the year the chapter belongs to — 605, 539, 457, A.D. 31, 538, 1798, 1844, Daniel 12 — so the map and the sitting stay on the same night.</p>
+        </div>
       </article>
       <article>
-        <h3>The symbol</h3>
-        <p>When the chapter names a metal, a beast, or a court, you can hold that symbol in the 3D gallery. The statue illustrates the sitting; it does not replace it.</p>
+        <img class="card-art" src="assets/site/card-symbol.jpg" alt="The metal colossus of Daniel 2 standing in a vaulted museum hall">
+        <div class="card-copy">
+          <h3>The symbol</h3>
+          <p>When the chapter names a metal, a beast, or a court, you can hold that symbol in the 3D gallery. The statue illustrates the sitting; it does not replace it.</p>
+        </div>
       </article>
     </div>
 
@@ -122,48 +138,60 @@
     <div class="act-grid">
       <article class="act-card corners">
         <span class="c-bl"></span><span class="c-br"></span>
-        <small>Act I · Free sample through Daniel 2</small>
-        <h3>Exile and the metals</h3>
-        <p>Sheets 0–6. Learn how to read the book, stand at the king’s table, then watch the colossus, Dura, the tree, the wall, and the den.</p>
-        <a class="btn solid" href="study.html?sheet=0">Enter the prologue</a>
-        <div class="act-tools">
-          <a href="map.html?year=y605">Map · 605 B.C.</a>
-          <a href="gallery.html?asset=head">Symbol · golden head</a>
+        <img class="card-art" src="assets/site/card-act-i.jpg" alt="Iron legs of the prophetic image standing between the torchlit walls of Babylon">
+        <div class="card-copy">
+          <small>Act I · Sitting 0 is open</small>
+          <h3>Exile and the metals</h3>
+          <p>Sheets 0–6. Learn how to read the book, stand at the king’s table, then watch the colossus, Dura, the tree, the wall, and the den.</p>
+          <a class="btn solid" href="study.html?sheet=0">Enter the prologue</a>
+          <div class="act-tools">
+            <a href="map.html?year=y605">Map · 605 B.C.</a>
+            <a href="gallery.html?asset=head">Symbol · golden head</a>
+          </div>
         </div>
       </article>
       <article class="act-card corners">
         <span class="c-bl"></span><span class="c-br"></span>
-        <small>Act II · After the free sample</small>
-        <h3>Beasts and the court</h3>
-        <p>Sheet 7. Four beasts from the sea, the little horn among the ten, and the court that sits in heaven before the stone strikes.</p>
-        <a class="btn" href="study.html?sheet=7">Open Daniel 7</a>
-        <div class="act-tools">
-          <a href="map.html?year=y538">Map · A.D. 538</a>
-          <a href="gallery.html?asset=beast">Symbol · fourth beast</a>
+        <img class="card-art" src="assets/site/card-act-ii.jpg" alt="Four prophetic beasts rising from a night sea beneath a court of fire-thrones">
+        <div class="card-copy">
+          <small>Act II · Opens after earlier sittings</small>
+          <h3>Beasts and the court</h3>
+          <p>Sheet 7. Four beasts from the sea, the little horn among the ten, and the court that sits in heaven before the stone strikes.</p>
+          <a class="btn" href="study.html">Continue the sittings</a>
+          <div class="act-tools">
+            <a href="map.html?year=y538">Map · A.D. 538</a>
+            <a href="gallery.html?asset=years1260">Symbol · 1,260 years</a>
+          </div>
         </div>
       </article>
       <article class="act-card corners">
         <span class="c-bl"></span><span class="c-br"></span>
-        <small>Act III · After the free sample</small>
-        <h3>The numbered line</h3>
-        <p>Sheets 8–10. The ram and goat, seventy weeks cut from 2,300 days, and Michael standing when the book is sealed until the end.</p>
-        <a class="btn" href="study.html?sheet=8">Open Daniel 8</a>
-        <div class="act-tools">
-          <a href="map.html?year=y457">Map · 457 B.C.</a>
-          <a href="gallery.html?asset=ram">Symbol · ram of Persia</a>
+        <img class="card-art" src="assets/site/card-act-iii.jpg" alt="A two-horned ram and a goat facing each other beside a river, with a distant sanctuary">
+        <div class="card-copy">
+          <small>Act III · Opens after earlier sittings</small>
+          <h3>The numbered line</h3>
+          <p>Sheets 8–10. The ram and goat, seventy weeks cut from 2,300 days, and Michael standing when the book is sealed until the end.</p>
+          <a class="btn" href="study.html">Continue the sittings</a>
+          <div class="act-tools">
+            <a href="map.html?year=y457">Map · 457 B.C.</a>
+            <a href="gallery.html?asset=ram">Symbol · ram of Persia</a>
+          </div>
         </div>
       </article>
     </div>
 
     <div class="offer-card corners" id="full-scroll">
       <span class="c-bl"></span><span class="c-br"></span>
-      <small>The full scroll</small>
-      <h2>Finish Daniel after the free sample</h2>
-      <p>The prologue, Daniel 1, and Daniel 2 are open to every visitor. After the dream of the metals, the rest of the sitting — Dura through Michael standing — will unlock as one connected curriculum: remaining sheets, How to study, quizzes, synchronized years and map stops, and the chapter-linked 3D scenes.</p>
-      <p>A church or classroom license is planned beside the personal sitting, so a teacher can walk a class through the scroll without each student hitting a wall. Payments are not live yet. This page is the offer, not a checkout.</p>
-      <div class="hero-actions">
-        <a class="btn solid" href="study.html?sheet=0">Start the free sittings</a>
-        <a class="btn" href="study.html?sheet=2">Jump to the dream</a>
+      <img class="card-art" src="assets/site/card-scroll.jpg" alt="A sealed ancient scroll glowing on a stone table">
+      <div class="card-copy">
+        <small>The full scroll</small>
+        <h2>Each sitting opens the next</h2>
+        <p>Only the prologue starts open. Finish sitting N — the workbench and checkpoint — to open sitting N+1 in the study desk, the 3D gallery, and the map. Daniel 1 through Michael standing stay closed until you walk them in order.</p>
+        <p>A church or classroom license is planned beside the personal sitting, so a teacher can walk a class through the scroll without each student hitting a wall. Payments are not live yet. This page is the offer, not a checkout.</p>
+        <div class="hero-actions">
+          <a class="btn solid" href="study.html?sheet=0">Start the first sitting</a>
+          <a class="btn" href="study.html">Continue where you left</a>
+        </div>
       </div>
     </div>
   </section>
@@ -193,7 +221,7 @@
       if (progress && J.hasProgress()) {
         const sheet = J.resumeSheet();
         progress.hidden = false;
-        progress.textContent = 'You are in ' + J.sheetLabel(sheet) + ' · sitting ' + (sheet + 1) + ' of 11. The free sample runs through Daniel 2.';
+        progress.textContent = 'You are in ' + J.sheetLabel(sheet) + ' · sitting ' + (sheet + 1) + ' of 11. Finish the open sitting to unlock the next.';
       }
 
       const heroStatue = document.querySelector('.hero-statue');

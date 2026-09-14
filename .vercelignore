@@ -1,0 +1,22 @@
+# Uncompressed Meshy sources — not served at runtime
+models/originals/
+
+# Dev-only
+node_modules/
+qa/
+.git/
+.img2threejs/
+.chrome_verify_tmp/
+__pycache__/
+*.pyc
+*.pyo
+*.bak
+docs/
+tools/
+.github/
+.oxlintrc.json
+package-lock.json
+server.py
+start_website.bat
+.env*
+.vercel

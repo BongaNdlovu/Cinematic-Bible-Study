@@ -37,3 +37,6 @@ study_proof*.png
 theme_proof*.png
 *_compression_report.json
 *_gallery_report.json
+
+.vercel
+.env*

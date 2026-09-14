@@ -10,9 +10,13 @@
     "compress:beasts": "node tools/compress/compress_beasts.mjs",
     "compress:daniel8": "node tools/compress/compress_daniel8.mjs",
     "compress:visions": "node tools/compress/compress_visions.mjs",
-    "compress:daniel11": "node tools/compress/compress_daniel11.mjs"
+    "compress:daniel11": "node tools/compress/compress_daniel11.mjs",
+    "lint": "oxlint"
   },
   "dependencies": {
     "three": "0.181.2"
+  },
+  "devDependencies": {
+    "oxlint": "^1.82.0"
   }
 }

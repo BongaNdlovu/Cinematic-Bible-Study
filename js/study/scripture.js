@@ -207,8 +207,8 @@
     const rows = (passage && passage.loadBearing) || [];
     if (!rows.length) return "";
     let html = '<aside class="load-bearing" id="load-bearing">';
-    html += "<h4>Load-bearing lines</h4>";
-    html += '<p class="strong-hint">The verses the sitting leans on. Companion books appear here as excerpts, not as extra full chapters.</p>';
+    html += "<h4>Verses this lesson stands on</h4>";
+    html += '<p class="strong-hint">Read the verse first. Then the plain words. Then why we open the other passages — they are not extra homework. They show that this line can carry the sitting.</p>';
     rows.forEach((row) => {
       const book = row.book || "";
       const chapter = row.chapter;
@@ -219,10 +219,27 @@
       html += '<p class="load-bearing-ref">' + escapeHtml(ref) + "</p>";
       if (text) html += '<blockquote class="load-bearing-text">' + escapeHtml(text) + "</blockquote>";
       else html += renderEmpty(ref + " is missing from the local KJV file.");
-      if (row.connects && row.connects.length) {
-        html += '<p class="load-bearing-connects"><span>Connects</span> ' + escapeHtml(row.connects.join(" · ")) + "</p>";
+      if (row.plain) {
+        html += '<p class="load-bearing-plain"><span>In plain words</span> ' + escapeHtml(row.plain) + "</p>";
       }
-      if (row.sitting) html += '<p class="load-bearing-sitting">' + escapeHtml(row.sitting) + "</p>";
+      const links = Array.isArray(row.links) && row.links.length
+        ? row.links
+        : (row.connects || []).map(function (item) { return { ref: item }; });
+      if (links.length) {
+        html += '<div class="load-bearing-links">';
+        html += '<p class="load-bearing-connects"><span>Why these other verses</span></p><ul>';
+        links.forEach(function (link) {
+          const label = (link && link.ref) || "";
+          const because = (link && link.because) || "";
+          html += "<li><b>" + escapeHtml(label) + "</b>";
+          if (because) html += " — " + escapeHtml(because);
+          html += "</li>";
+        });
+        html += "</ul></div>";
+      }
+      if (row.sitting) {
+        html += '<p class="load-bearing-sitting"><span>For this sitting</span> ' + escapeHtml(row.sitting) + "</p>";
+      }
       html += "</article>";
     });
     html += "</aside>";

@@ -52,7 +52,7 @@
     const t2Done = isTaskComplete(0, 'task2');
 
     container.innerHTML = `
-      <div class="workbench-card p-6 rounded-2xl bg-paper-100/90 dark:bg-paper-900/80 border-2 border-amber-600/40 shadow-lg mb-8 font-sans">
+      <div class="workbench-card p-6 rounded-xl bg-transparent border border-amber-600/25 mb-8 font-sans">
         <div class="flex items-center justify-between border-b border-paper-300 dark:border-paper-800 pb-4 mb-6">
           <div class="flex items-center gap-3">
             <span class="px-2.5 py-1 rounded bg-amber-600 text-paper-50 font-mono text-xs font-bold uppercase tracking-wider">Active Proof Gate</span>
@@ -239,7 +239,7 @@
     const t2Done = isTaskComplete(1, 'task2');
 
     container.innerHTML = `
-      <div class="workbench-card p-6 rounded-2xl bg-paper-100/90 dark:bg-paper-900/80 border-2 border-amber-600/40 shadow-lg mb-8 font-sans">
+      <div class="workbench-card p-6 rounded-xl bg-transparent border border-amber-600/25 mb-8 font-sans">
         <div class="flex items-center justify-between border-b border-paper-300 dark:border-paper-800 pb-4 mb-6">
           <div class="flex items-center gap-3">
             <span class="px-2.5 py-1 rounded bg-amber-600 text-paper-50 font-mono text-xs font-bold uppercase tracking-wider">Active Proof Gate</span>
@@ -278,7 +278,7 @@
                   <option value="">Select Babylonian renaming...</option>
                   <option value="belteshazzar_bel" ${t1Done && item.correct === 'belteshazzar_bel' ? 'selected' : ''}>Belteshazzar (Honors Bel / Marduk)</option>
                   <option value="shadrach_aku" ${t1Done && item.correct === 'shadrach_aku' ? 'selected' : ''}>Shadrach (Honors Aku / Moon god)</option>
-                  <option value="meshach_aku" ${t1Done && item.correct === 'meshach_aku' ? 'selected' : ''}>Meshach (Honors Aku / Who-is-like-Aku?)</option>
+                  <option value="meshach_aku" ${t1Done && item.correct === 'meshach_aku' ? 'selected' : ''}>Meshach (Honors Aku / “Who is what Aku is?” — traditional reading)</option>
                   <option value="abednego_nabu" ${t1Done && item.correct === 'abednego_nabu' ? 'selected' : ''}>Abednego (Honors Nabu / Nebo)</option>
                 </select>
               </div>
@@ -409,7 +409,7 @@
     const t2Done = isTaskComplete(2, 'task2');
 
     container.innerHTML = `
-      <div class="workbench-card p-6 rounded-2xl bg-paper-100/90 dark:bg-paper-900/80 border-2 border-amber-600/40 shadow-lg mb-8 font-sans">
+      <div class="workbench-card p-6 rounded-xl bg-transparent border border-amber-600/25 mb-8 font-sans">
         <div class="flex items-center justify-between border-b border-paper-300 dark:border-paper-800 pb-4 mb-6">
           <div class="flex items-center gap-3">
             <span class="px-2.5 py-1 rounded bg-amber-600 text-paper-50 font-mono text-xs font-bold uppercase tracking-wider">Active Proof Gate</span>
@@ -590,7 +590,7 @@
         </div>
 
         <p class="text-xs text-ink-600 dark:text-paper-400 leading-relaxed mb-6">
-          To receive your verified <strong>Historicist Foundations Mastery Dossier</strong> and advance into the Student Beta Preview for Units 3–10, you must synthesize the principles of Sheets 0, 1, and 2.
+          To receive your verified <strong>Historicist Foundations Mastery Dossier</strong> and continue to Daniel 3, you must synthesize the principles of Sheets 0, 1, and 2.
         </p>
 
         <!-- Part 1 -->
@@ -710,9 +710,6 @@
     if (window.StudyCompetency) {
       window.StudyCompetency.recordCapstone(evaluation.score, evaluation);
     }
-    if (window.BAJourney) {
-      window.BAJourney.enableBetaPreview();
-    }
   }
 
   function showDossierModal(evaluation, onProceed) {
@@ -776,7 +773,7 @@
             <span>🖨️ Print / Save Dossier PDF</span>
           </button>
           <button type="button" id="dossier-proceed-btn" class="w-full sm:w-auto px-6 py-2.5 rounded-lg bg-ink-900 dark:bg-paper-100 text-paper-50 dark:text-ink-900 font-sans font-bold text-xs shadow hover:bg-black dark:hover:bg-white transition-colors">
-            Enter Student Beta Preview (Units 3–10) &rarr;
+            Continue to the next sitting &rarr;
           </button>
         </div>
       </div>

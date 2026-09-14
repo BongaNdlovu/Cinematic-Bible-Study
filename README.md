@@ -23,6 +23,8 @@ Windows shortcut: double-click `start_website.bat`.
 
 The server binds `127.0.0.1` (port 8000, with fallback), opens a browser, and serves only exhibit file types. It does not require Node.js.
 
+Before committing JS, run `npm run lint`. CI runs the same command on every push and pull request. The cyclomatic-complexity ceiling is 55 (highest current score + 2). Do not add `eslint-disable` / `oxlint-disable` for `complexity`.
+
 ## Layout
 
 See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) for page-to-JS mapping and data flow.

@@ -166,10 +166,20 @@ html.cmap-html, body.cmap-page {
 .cmap-stone-glow {
   z-index: 7;
   pointer-events: none;
-  mix-blend-mode: screen;
+  mix-blend-mode: normal;
   opacity: 0;
   transition: opacity 0.9s ease;
-  background: radial-gradient(ellipse at 48% 55%, rgba(255, 233, 168, 0.4), rgba(212, 175, 55, 0.1) 40%, transparent 70%);
+  /* The stone has no capital. Only the map’s rim shines — the whole earth. */
+  background:
+    linear-gradient(90deg, rgba(255, 228, 150, 0.42) 0%, transparent 7%, transparent 93%, rgba(255, 228, 150, 0.42) 100%),
+    linear-gradient(180deg, rgba(255, 228, 150, 0.38) 0%, transparent 8%, transparent 92%, rgba(255, 228, 150, 0.38) 100%);
+  box-shadow:
+    inset 0 0 0 3px rgba(247, 228, 168, 0.92),
+    inset 0 0 36px rgba(212, 175, 55, 0.45);
+}
+.cmap-root.is-stone-world .cmap-stage,
+.cmap-embed.is-stone-world .cmap-stage {
+  box-shadow: inset 0 0 0 1px rgba(247, 228, 168, 0.45);
 }
 
 .cmap-markers { position: absolute; inset: 0; pointer-events: none; }
@@ -515,6 +525,12 @@ html.cmap-html, body.cmap-page {
   object-fit: cover;
 }
 .cmap-year:hover { color: var(--cmap-gold-soft); }
+.cmap-year.is-locked,
+.cmap-year:disabled {
+  opacity: 0.38;
+  cursor: not-allowed;
+  pointer-events: none;
+}
 .cmap-year.active {
   color: #1a140c;
   background: linear-gradient(180deg, #f0d78c, #c9a227);
@@ -873,14 +889,33 @@ html.cmap-html, body.cmap-page {
 .cmap-embed .cmap-coords,
 .cmap-embed .cmap-play,
 .cmap-embed .cmap-search { display: none; }
-.cmap-embed .cmap-cartouche { top: 12px; left: 12px; padding: 8px 10px; }
-.cmap-embed .cmap-cartouche strong { font-size: 16px; }
+.cmap-embed .cmap-cartouche { top: 12px; left: 12px; min-width: 0; padding: 6px 10px; gap: 0; }
+.cmap-embed .cmap-cartouche-icon,
+.cmap-embed .cmap-cartouche small,
+.cmap-embed .cmap-cartouche span { display: none; }
+.cmap-embed .cmap-cartouche strong { font-size: 13px; }
 .cmap-embed .cmap-timeline {
   bottom: 8px;
   width: calc(100% - 16px);
   padding: 6px 8px;
 }
-.cmap-embed .cmap-year { padding: 6px 8px; font-size: 9px; }
+.cmap-embed .cmap-year { padding: 5px 6px; font-size: 9px; }
+.cmap-embed .cmap-year img { display: none; }
+.cmap-embed .cmap-basemap {
+  top: 40px;
+  bottom: auto;
+  right: 8px;
+  height: auto;
+  width: auto;
+  flex-direction: row;
+  align-items: center;
+  padding: 3px;
+}
+.cmap-embed .cmap-basemap button {
+  padding: 5px 7px;
+  font-size: 9px;
+  letter-spacing: 0.08em;
+}
 .cmap-embed .cmap-chapter { opacity: 0 !important; }
 
 .cmap-enter-full {
@@ -901,13 +936,15 @@ html.cmap-html, body.cmap-page {
   right: 20px;
   z-index: 2200;
   display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: auto;
   gap: 4px;
   padding: 4px;
   border: 1px solid var(--cmap-line);
   background: var(--cmap-panel);
   backdrop-filter: blur(12px);
 }
-.cmap-embed .cmap-basemap { top: 12px; right: 12px; }
 .cmap-basemap button {
   padding: 7px 10px;
   font-size: 10px;

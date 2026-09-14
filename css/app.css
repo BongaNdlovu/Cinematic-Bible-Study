@@ -63,6 +63,10 @@
       inset: 0;
       z-index: 1;
     }
+    #webgl-container canvas {
+      touch-action: none;
+      outline: none;
+    }
     .vignette {
       position: absolute;
       inset: 0;
@@ -258,6 +262,7 @@
       gap: 3px;
       text-align: center;
     }
+    body.titles-hidden .hero-title-group { display: none; }
     .hero-eyebrow {
       font-family: var(--font-serif);
       font-size: 11px;
@@ -766,7 +771,7 @@
       bottom: 22px;
       left: 50%;
       transform: translateX(-50%);
-      z-index: 20;
+      z-index: 38;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -1335,7 +1340,7 @@
       inset: 0;
       background: radial-gradient(ellipse at 50% 40%, rgba(40, 24, 8, 0.55), rgba(0, 0, 0, 0.88));
       opacity: 0;
-      transition: opacity 0.28s ease;
+      transition: opacity 0.18s ease;
     }
     #stage-transition.out .stage-fade,
     #stage-transition.in .stage-fade { opacity: 1; }
@@ -1525,7 +1530,7 @@
       .hero-main-title { font-size: 16px; letter-spacing: 0.08em; }
       .hero-eyebrow { font-size: 9px; }
       .header-utilities .util-btn { padding: 6px 8px; }
-      #btn-open-lab span, #btn-nodes-master { font-size: 11px; }
+      #btn-open-lab span, #btn-nodes-master, #btn-titles-toggle { font-size: 11px; }
       .stage-interaction-hint { display: none; }
       .study-lab-drawer { width: min(360px, 100vw); right: -100vw; }
     }
@@ -1570,6 +1575,8 @@
     }
     .artifact-card-item.is-locked {
       opacity: 0.46;
+      pointer-events: none;
+      cursor: not-allowed;
     }
     .artifact-card-item.is-locked .artifact-name::after {
       content: "Locked path";
