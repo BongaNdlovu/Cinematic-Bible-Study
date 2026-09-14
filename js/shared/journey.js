@@ -40,6 +40,7 @@
   };
 
   const FREE_THROUGH = 2;
+  const TERMS_VERSION = 1;
   // TEMPORARY REVIEW UNLOCK — set false with study-app.js to restore the free/paid cut.
   const TEMP_REVIEW_UNLOCK = true;
   const SHEET_LABELS = [
@@ -75,7 +76,8 @@
     seenIntro: {},
     previewFull: false,
     betaPreview: ENABLE_BETA_PREVIEW_DEFAULT,
-    identity: null
+    identity: null,
+    termsAccepted: null
   };
 
   function normalize(raw) {
@@ -97,6 +99,15 @@
       };
     } else {
       next.identity = null;
+    }
+    const terms = raw && raw.termsAccepted;
+    if (terms && typeof terms === "object" && Number(terms.version) > 0) {
+      next.termsAccepted = {
+        version: Number(terms.version),
+        at: Number(terms.at) || 0
+      };
+    } else {
+      next.termsAccepted = null;
     }
     return next;
   }
@@ -211,6 +222,21 @@
     return "Continue " + sheetLabel(resumeSheet());
   }
 
+  function hasAcceptedTerms() {
+    const cur = load().termsAccepted;
+    return !!(cur && cur.version === TERMS_VERSION);
+  }
+
+  function acceptTerms() {
+    save({ termsAccepted: { version: TERMS_VERSION, at: Date.now() } });
+    try {
+      const stored = JSON.parse(localStorage.getItem(KEY) || "{}");
+      return !!(stored.termsAccepted && stored.termsAccepted.version === TERMS_VERSION);
+    } catch (e) {
+      return false;
+    }
+  }
+
   function searchIndex() {
     const out = [];
     const map = window.MAP_CHRONICLE;
@@ -255,6 +281,9 @@
     resumeSheet: resumeSheet,
     resumeHref: resumeHref,
     resumeLabel: resumeLabel,
+    hasAcceptedTerms: hasAcceptedTerms,
+    acceptTerms: acceptTerms,
+    TERMS_VERSION: TERMS_VERSION,
     FREE_THROUGH: FREE_THROUGH,
     SHEET_LABELS: SHEET_LABELS,
     EMPIRE_LABELS: EMPIRE_LABELS,

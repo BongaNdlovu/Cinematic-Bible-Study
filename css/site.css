@@ -225,6 +225,12 @@ a:focus:not(:focus-visible) { outline: none; }
   box-shadow: 0 0 20px rgba(212,175,55,.08);
 }
 .auth-slot:empty { display: none; }
+.auth-cluster {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+}
 .auth-signed-in {
   display: inline-flex;
   align-items: center;
