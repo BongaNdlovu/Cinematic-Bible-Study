@@ -25,11 +25,13 @@
   }
 
   function sanitizeName(raw) {
-    return String(raw || "")
-      .replace(/[\u0000-\u001f\u007f]/g, "")
-      .replace(/\s+/g, " ")
-      .trim()
-      .slice(0, MAX_NAME);
+    const source = String(raw || "");
+    let cleaned = "";
+    for (let i = 0; i < source.length; i += 1) {
+      const code = source.charCodeAt(i);
+      if (code >= 32 && code !== 127) cleaned += source.charAt(i);
+    }
+    return cleaned.replace(/\s+/g, " ").trim().slice(0, MAX_NAME);
   }
 
   function filenameFromName(name) {
