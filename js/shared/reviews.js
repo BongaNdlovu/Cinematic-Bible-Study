@@ -90,7 +90,7 @@
         if (res && res.error) {
           if (empty) {
             empty.hidden = false;
-            empty.textContent = "No public testimonies yet. Sign in and write one after you have sat with the book.";
+            empty.textContent = "No reviews yet.";
           }
           return;
         }
@@ -173,7 +173,7 @@
 
   function submitReview(raw) {
     if (!signedIn()) {
-      setStatus("Sign in to post a review.", "error");
+      setStatus("Sign in to post.", "error");
       if (window.ScrollTerms && typeof window.ScrollTerms.requestSignIn === "function") {
         window.ScrollTerms.requestSignIn();
       }
@@ -181,17 +181,17 @@
     }
     const text = String(raw || "").replace(/\s+/g, " ").trim();
     if (text.length < MIN) {
-      setStatus("Write at least " + MIN + " characters so the testimony has weight.", "error");
+      setStatus("Write at least " + MIN + " characters.", "error");
       return Promise.resolve(false);
     }
     if (text.length > MAX) {
-      setStatus("Please keep the testimony under " + MAX + " characters.", "error");
+      setStatus("Keep under " + MAX + " characters.", "error");
       return Promise.resolve(false);
     }
     const c = authClient();
     const u = currentUser();
     if (!c || !u) {
-      setStatus("Sign-in is required to post a review.", "error");
+      setStatus("Sign in to post.", "error");
       return Promise.resolve(false);
     }
     return c.from(TABLE).insert({
@@ -202,10 +202,10 @@
       rejected: false
     }).then(function (res) {
       if (res && res.error) {
-        setStatus("The review could not be saved. Try again in a moment.", "error");
+        setStatus("Could not save. Try again.", "error");
         return false;
       }
-      setStatus("Received. It will appear here after it is approved.", "ok");
+      setStatus("Saved. It will appear after approval.", "ok");
       const input = document.getElementById("witness-body");
       if (input) input.value = "";
       loadQueue();
@@ -228,7 +228,7 @@
     const submit = document.getElementById("witness-submit");
     const inSession = signedIn();
     if (hint) hint.hidden = inSession;
-    if (submit) submit.textContent = inSession ? "Submit for review" : "Sign in to testify";
+    if (submit) submit.textContent = inSession ? "Post" : "Sign in";
   }
 
   function start() {

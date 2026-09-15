@@ -566,14 +566,6 @@ a:focus:not(:focus-visible) { outline: none; }
 .witnesses .section-head {
   margin-bottom: 28px;
 }
-.witness-lead {
-  max-width: 46rem;
-  font-family: var(--quote);
-  font-size: 22px;
-  line-height: 1.5;
-  color: var(--gold-soft);
-  margin: 0 0 28px;
-}
 .witness-list {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
