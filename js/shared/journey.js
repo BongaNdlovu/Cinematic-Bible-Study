@@ -40,7 +40,7 @@
   };
 
   const SHEET_COUNT = 11;
-  const TERMS_VERSION = 1;
+  const TERMS_VERSION = 2;
   const TEMP_REVIEW_UNLOCK = false;
   const SITTING_ASSETS = [
     ["assembled"],
@@ -94,6 +94,14 @@
     "Daniel 9",
     "Daniel 10–12"
   ];
+  const ASSEMBLED_NODE_SITTING = {
+    "col-altar": 0,
+    "col-head": 2,
+    "col-chest": 2,
+    "col-thighs": 2,
+    "col-legs": 2,
+    "col-feet": 2
+  };
 
   // Sequential sittings: only sitting 0 starts open. Completing N opens N+1
   // for study sheets, gallery assets, and map pins. Client-side only.
@@ -284,9 +292,39 @@
   }
 
   function canAccessAsset(key) {
+    if (allLessonsComplete()) return true;
     const sitting = sittingForAsset(key);
     if (sitting < 0) return false;
     return canAccessSheet(sitting);
+  }
+
+  function sheetCompleted(index) {
+    const i = Number(index);
+    if (Number.isNaN(i) || i < 0 || i >= SHEET_COUNT) return false;
+    return completedSet().has(i);
+  }
+
+  function allLessonsComplete() {
+    const done = completedSet();
+    if (done.size < SHEET_COUNT) return false;
+    for (let i = 0; i < SHEET_COUNT; i++) {
+      if (!done.has(i)) return false;
+    }
+    return true;
+  }
+
+  function sittingForMuseumNode(id, assetKey) {
+    if (id && Object.prototype.hasOwnProperty.call(ASSEMBLED_NODE_SITTING, id)) {
+      return ASSEMBLED_NODE_SITTING[id];
+    }
+    return sittingForAsset(assetKey);
+  }
+
+  function canAccessMuseumNode(id, assetKey) {
+    if (allLessonsComplete()) return true;
+    const sitting = sittingForMuseumNode(id, assetKey);
+    if (sitting < 0) return false;
+    return sheetCompleted(sitting);
   }
 
   function openNodeIds() {
@@ -304,11 +342,13 @@
 
   function canAccessMapNode(id) {
     if (!id) return false;
+    if (allLessonsComplete()) return true;
     return !!openNodeIds()[id];
   }
 
   function canAccessYear(yearId) {
     if (!yearId) return false;
+    if (allLessonsComplete()) return true;
     const open = maxOpenSheet();
     for (let i = 0; i <= open; i++) {
       if ((SITTING_YEARS[i] || []).indexOf(yearId) >= 0) return true;
@@ -497,6 +537,9 @@
     canAccessSheet: canAccessSheet,
     clampToAccessible: clampToAccessible,
     canAccessAsset: canAccessAsset,
+    canAccessMuseumNode: canAccessMuseumNode,
+    sheetCompleted: sheetCompleted,
+    allLessonsComplete: allLessonsComplete,
     canAccessMapNode: canAccessMapNode,
     canAccessYear: canAccessYear,
     maxOpenSheet: maxOpenSheet,

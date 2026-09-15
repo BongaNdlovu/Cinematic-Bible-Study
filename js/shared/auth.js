@@ -4,6 +4,17 @@
   let client = null;
   let user = null;
   let signingIn = false;
+  let readySettled = false;
+  let readyResolve = function () {};
+  const readyPromise = new Promise(function (resolve) {
+    readyResolve = resolve;
+  });
+
+  function markReady() {
+    if (readySettled) return;
+    readySettled = true;
+    readyResolve();
+  }
 
   function configured() {
     return !!(cfg.url && cfg.publishableKey && window.supabase && typeof window.supabase.createClient === "function");
@@ -150,6 +161,19 @@
     return user;
   }
 
+  function getClient() {
+    return client;
+  }
+
+  function isModerator() {
+    const emails = Array.isArray(cfg.moderatorEmails) ? cfg.moderatorEmails : [];
+    const email = user && user.email ? String(user.email).toLowerCase() : "";
+    if (!email) return false;
+    return emails.some(function (item) {
+      return String(item || "").toLowerCase() === email;
+    });
+  }
+
   function onChange(fn) {
     if (typeof fn === "function") listeners.push(fn);
     return function () {
@@ -192,6 +216,7 @@
     consumeUrlError();
     if (!configured()) {
       reportError("Sign-in is unavailable on this copy of the site.", "auth");
+      markReady();
       return;
     }
     client = window.supabase.createClient(cfg.url, cfg.publishableKey, {
@@ -199,7 +224,8 @@
         persistSession: true,
         autoRefreshToken: true,
         detectSessionInUrl: true,
-        flowType: "pkce"
+        flowType: "pkce",
+        storage: window.localStorage
       }
     });
     client.auth.onAuthStateChange(function (event, session) {
@@ -216,7 +242,10 @@
     }).catch(function (err) {
       reportError(friendlyAuthError(err), "auth");
       setUser(null);
+    }).then(function () {
+      markReady();
     });
+    setTimeout(markReady, 8000);
   }
 
   window.ScrollAuth = {
@@ -224,6 +253,10 @@
     signInGoogle: signIn,
     signOut: signOut,
     getUser: getUser,
+    getClient: getClient,
+    displayName: function () { return displayName(user); },
+    isModerator: isModerator,
+    ready: function () { return readyPromise; },
     onChange: onChange,
     renderAll: renderAll,
     isConfigured: configured,

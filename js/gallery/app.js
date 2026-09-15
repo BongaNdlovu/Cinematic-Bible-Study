@@ -2358,48 +2358,57 @@ import * as THREE from 'three';
     };
 
     // Auto-generate generic feature nodes for other pieces if not explicitly listed
+    function nodeUnlocked(node, assetKey) {
+      if (!window.BAJourney || typeof window.BAJourney.canAccessMuseumNode !== "function") return true;
+      return window.BAJourney.canAccessMuseumNode(node.id, assetKey);
+    }
+
     function getNodeDataForAsset(key) {
-      if (ASSET_REGISTRY[key] && ASSET_REGISTRY[key].still) return [];
-      if (MUSEUM_NODES_DATA[key]) return MUSEUM_NODES_DATA[key];
-      const d = ASSET_REGISTRY[key] || ASSET_REGISTRY.head;
-      return [
-        {
-          id: `${key}-mat`, col: 'left', row: 0,
-          icon: '🟡', label: 'PROPHETIC METAL',
-          body: `${d.title} embodying ${d.eyebrow}. Reflected in Daniel 2 prophecy.`,
-          anchor: new THREE.Vector3(-0.4, 1.4, 0.35), enabled: true
-        },
-        {
-          id: `${key}-era`, col: 'left', row: 1,
-          icon: '📅', label: 'HISTORICAL ERA',
-          body: `${d.dates}. Documented across ancient biblical and secular annals.`,
-          anchor: new THREE.Vector3(-0.45, 1.05, 0.4), enabled: true
-        },
-        {
-          id: `${key}-geo`, col: 'left', row: 2,
-          icon: '🏛️', label: 'GEOMETRY & FORM',
-          body: 'Reconstructed 3D geometry with high-fidelity PBR metallic textures.',
-          anchor: new THREE.Vector3(-0.45, 0.65, 0.45), enabled: true
-        },
-        {
-          id: `${key}-bib`, col: 'right', row: 0,
-          icon: '📖', label: 'SCRIPTURE TEXT',
-          body: d.quote,
-          anchor: new THREE.Vector3(0.4, 1.4, 0.35), enabled: true
-        },
-        {
-          id: `${key}-emp`, col: 'right', row: 1,
-          icon: '👑', label: 'WORLD EMPIRE',
-          body: d.explanation,
-          anchor: new THREE.Vector3(0.45, 1.05, 0.4), enabled: true
-        },
-        {
-          id: `${key}-tak`, col: 'right', row: 2,
-          icon: '✨', label: 'KEY TAKEAWAY',
-          body: d.takeaway,
-          anchor: new THREE.Vector3(0.45, 0.65, 0.45), enabled: true
-        }
-      ];
+      let rows;
+      if (ASSET_REGISTRY[key] && ASSET_REGISTRY[key].still) rows = [];
+      else if (MUSEUM_NODES_DATA[key]) rows = MUSEUM_NODES_DATA[key];
+      else {
+        const d = ASSET_REGISTRY[key] || ASSET_REGISTRY.head;
+        rows = [
+          {
+            id: `${key}-mat`, col: 'left', row: 0,
+            icon: '🟡', label: 'PROPHETIC METAL',
+            body: `${d.title} embodying ${d.eyebrow}. Reflected in Daniel 2 prophecy.`,
+            anchor: new THREE.Vector3(-0.4, 1.4, 0.35), enabled: true
+          },
+          {
+            id: `${key}-era`, col: 'left', row: 1,
+            icon: '📅', label: 'HISTORICAL ERA',
+            body: `${d.dates}. Documented across ancient biblical and secular annals.`,
+            anchor: new THREE.Vector3(-0.45, 1.05, 0.4), enabled: true
+          },
+          {
+            id: `${key}-geo`, col: 'left', row: 2,
+            icon: '🏛️', label: 'GEOMETRY & FORM',
+            body: 'Reconstructed 3D geometry with high-fidelity PBR metallic textures.',
+            anchor: new THREE.Vector3(-0.45, 0.65, 0.45), enabled: true
+          },
+          {
+            id: `${key}-bib`, col: 'right', row: 0,
+            icon: '📖', label: 'SCRIPTURE TEXT',
+            body: d.quote,
+            anchor: new THREE.Vector3(0.4, 1.4, 0.35), enabled: true
+          },
+          {
+            id: `${key}-emp`, col: 'right', row: 1,
+            icon: '👑', label: 'WORLD EMPIRE',
+            body: d.explanation,
+            anchor: new THREE.Vector3(0.45, 1.05, 0.4), enabled: true
+          },
+          {
+            id: `${key}-tak`, col: 'right', row: 2,
+            icon: '✨', label: 'KEY TAKEAWAY',
+            body: d.takeaway,
+            anchor: new THREE.Vector3(0.45, 0.65, 0.45), enabled: true
+          }
+        ];
+      }
+      return rows.filter((node) => nodeUnlocked(node, key));
     }
 
     let currentNodes = getNodeDataForAsset('assembled');
@@ -3593,6 +3602,9 @@ import * as THREE from 'three';
         el.classList.toggle('is-locked', !open);
         el.setAttribute('aria-disabled', open ? 'false' : 'true');
       });
+      currentNodes = getNodeDataForAsset(activeAssetKey);
+      rebuildNodeElements();
+      syncNodes();
     }
     applyJourneyUnlocks();
     window.addEventListener('storage', (ev) => {

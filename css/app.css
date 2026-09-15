@@ -1370,7 +1370,7 @@
       right: calc(var(--rail-right) + 24px);
       bottom: 64px;
       z-index: 18;
-      height: 56px;
+      height: 88px;
       overflow: hidden;
       pointer-events: none;
       mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
@@ -1392,8 +1392,11 @@
       to { transform: translateX(-50%); }
     }
     .era-cell {
-      flex: 0 0 150px;
-      height: 56px;
+      flex: 0 0 auto;
+      min-width: 214px;
+      max-width: 268px;
+      height: auto;
+      min-height: 64px;
       display: flex;
       align-items: stretch;
       gap: 0;
@@ -1406,28 +1409,37 @@
       cursor: pointer;
       text-align: left;
     }
-    body.timeline-mode .era-cell { height: 110px; flex-basis: 200px; }
+    body.timeline-mode .era-cell { min-height: 110px; min-width: 220px; }
     .era-cell img {
-      width: 72px;
-      height: 100%;
+      width: 64px;
+      min-height: 64px;
+      height: auto;
       object-fit: cover;
       flex-shrink: 0;
     }
     .era-cell .era-meta {
-      padding: 8px 10px;
+      min-width: 0;
+      flex: 1 1 auto;
+      padding: 8px 12px;
       display: flex;
       flex-direction: column;
       justify-content: center;
-      gap: 4px;
+      gap: 3px;
     }
     .era-cell b {
       font-family: var(--font-serif);
-      font-size: 10px;
-      letter-spacing: 0.12em;
+      font-size: 11px;
+      letter-spacing: 0.04em;
+      line-height: 1.25;
+      white-space: normal;
+      overflow-wrap: anywhere;
       color: var(--gold-light);
     }
-    .era-cell span {
+    .era-cell .era-meta span {
       font-size: 10px;
+      line-height: 1.25;
+      white-space: normal;
+      overflow-wrap: anywhere;
       color: var(--text-muted);
     }
     .era-cell:hover {
@@ -1435,6 +1447,10 @@
       box-shadow: 0 0 16px rgba(229, 167, 66, 0.28);
     }
     .era-cell.active { border-color: var(--gold-primary); }
+    .era-cell.is-locked {
+      opacity: 0.48;
+      cursor: not-allowed;
+    }
 
     @media (prefers-reduced-motion: reduce) {
       .era-track { animation: none; }
@@ -1521,7 +1537,7 @@
         left: 12px;
         right: 12px;
         bottom: 118px;
-        height: 72px;
+        height: 88px;
       }
     }
     @media (max-width: 768px) {

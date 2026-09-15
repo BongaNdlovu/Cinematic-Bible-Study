@@ -43,12 +43,28 @@
     return "Scroll-of-Daniel-Certificate-" + (slug || "Student") + ".pdf";
   }
 
+  function identityName() {
+    let name = "";
+    try {
+      const J = window.BAJourney && typeof window.BAJourney.load === "function"
+        ? window.BAJourney.load()
+        : null;
+      if (J && J.identity && J.identity.name) name = J.identity.name;
+    } catch (err) {}
+    if (!name && window.ScrollAuth && typeof window.ScrollAuth.displayName === "function") {
+      name = window.ScrollAuth.displayName();
+    }
+    name = sanitizeName(name);
+    if (!name || name.indexOf("@") >= 0 || name === "Signed in") return "";
+    return name;
+  }
+
   function loadSavedName() {
     try {
-      return sanitizeName(localStorage.getItem(NAME_KEY) || "");
-    } catch (err) {
-      return "";
-    }
+      const saved = sanitizeName(localStorage.getItem(NAME_KEY) || "");
+      if (saved) return saved;
+    } catch (err) {}
+    return identityName();
   }
 
   function saveName(name) {
@@ -442,8 +458,7 @@
   function open() {
     const node = els();
     if (!node.panel || !node.input) return;
-    const saved = loadSavedName();
-    if (saved) node.input.value = saved;
+    node.input.value = loadSavedName() || identityName();
     syncDownloadEnabled();
     node.panel.hidden = false;
     node.input.focus();

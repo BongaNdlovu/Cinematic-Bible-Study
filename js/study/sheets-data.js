@@ -1094,8 +1094,8 @@
             }
           ],
           christ: {
-            claim: "The Most High who humbles Nebuchadnezzar and restores his mind is the God whom Christ reveals and obeys. Philippians 2 shows the opposite of Daniel 4:30: the Son did not grasp equality with God but humbled Himself, and God exalted Him.",
-            why: "When Nebuchadnezzar said 'I have built,' he claimed what only Heaven can give. Christ took the opposite path: though He was in the form of God, He did not consider equality with God a thing to be grasped, but emptied Himself and became obedient even to death. The king's sanity returned when he lifted his eyes; the Son's glory returned when the Father raised Him. If you drop Christ from this chapter, Daniel 4 is a moral tale about other emperors. If you keep Him, you see that true greatness looks up in worship rather than down in self-credit."
+            claim: "The Most High who humbles Nebuchadnezzar and restores his mind is the God whom Christ reveals and obeys. Philippians 2 shows the opposite of Daniel 4:30: the Son, being in the form of God, made Himself of no reputation, and became obedient unto death; wherefore God also hath highly exalted Him.",
+            why: "When Nebuchadnezzar said 'I have built,' he claimed what only Heaven can give. Christ took the opposite path: being in the form of God, He made Himself of no reputation, and took upon Him the form of a servant, and became obedient unto death, even the death of the cross (Philippians 2:6-9). The king's understanding returned when he lifted his eyes; the Father highly exalted the Son after that obedience. If you drop Christ from this chapter, Daniel 4 is a moral tale about other emperors. If you keep Him, you see that true greatness looks up in worship rather than down in self-credit."
           },
           now: {
             claim: "Social feeds and career ladders still reward the boast of Daniel 4:30. This chapter is a diagnostic you can run on a headline, a leader's speech, or your own mouth.",
@@ -1287,7 +1287,7 @@
             }
           ],
           christ: {
-            claim: "The hand that weighed Belshazzar belongs to the Judge who weighs every kingdom and every soul. The temple vessels Belshazzar profaned belong to Christ, who is the true Lord of the sanctuary and the One whose cup is holy.",
+            claim: "The hand that weighed Belshazzar belongs to the Judge who weighs every kingdom and every soul. The temple vessels Belshazzar profaned belong to Christ, who is the true Lord of the sanctuary, whose cup is holy, and who holds the key of David that no man shutteth (Revelation 3:7).",
             why: "Belshazzar drank from cups consecrated to Israel's God while praising idols, which is the opposite of coming to Christ's table with reverence. The same God who numbered Babylon's days and found its king wanting on the scale is the God who later numbered the weeks of Messiah in Daniel 9. Jesus holds the key that opens and no one shuts, while Cyrus at the gates only typifies that authority. If you miss Christ here, chapter 5 is a war story with a riddle on the wall. If you keep Him, you see that sacrilege is misusing what belongs to the Judge who will weigh your life as carefully as He weighed Belshazzar's."
           },
           now: {
@@ -1852,7 +1852,7 @@
           ],
           christ: {
             claim: "The Prince of the host whom the horn magnifies itself against is Jesus Christ. The tamid He performs is the true continual ministry of intercession described in Hebrews 7:25, and nitsdaq is His sanctuary put right through the Day of Atonement work He completes as High Priest.",
-            why: "Daniel 8:11 shows the horn rising against the Prince of the host and removing the tamid, which is Christ's standing priesthood rather than a pile of sacrificial ashes on an earthly altar. Hebrews 7:25 declares that Jesus ever lives to make intercession for those who come to God through Him, and that is the daily the horn seeks to replace with a counterfeit. Nitsdaq connects the sanctuary cleansing of 8:14 to Leviticus 16, where the high priest enters the Most Holy Place to put the sanctuary right before God. If you shrink the prophecy to three years under Antiochus, you remove Christ from the center of the book's longest number. If you keep the Prince of the host and the true tamid in view, the two thousand three hundred days point to when His heavenly ministry reaches its Day of Atonement fulfillment."
+            why: "Daniel 8:11 shows the horn rising against the Prince of the host and removing the tamid, which is Christ's standing priesthood rather than a pile of sacrificial ashes on an earthly altar. Hebrews 7:25 declares that He ever liveth to make intercession for them that come unto God by Him, and that is the daily the horn seeks to replace with a counterfeit. Nitsdaq connects the sanctuary cleansing of 8:14 to Leviticus 16, where the high priest enters the Most Holy Place to put the sanctuary right before God. If you shrink the prophecy to three years under Antiochus, you remove Christ from the center of the book's longest number. If you keep the Prince of the host and the true tamid in view, the two thousand three hundred days point to when His heavenly ministry reaches its Day of Atonement fulfillment."
           },
           now: {
             claim: "Gabriel says this vision belongs to the time of the end, which means you are studying prophecy that still speaks to your century rather than a finished museum piece.",

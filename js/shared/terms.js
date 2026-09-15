@@ -188,7 +188,9 @@
           '<h3>Welcome</h3>' +
           '<p>The Scroll of Daniel is a guided study of the book of Daniel, offered for personal reading and classroom teaching. It is not a church membership, a diploma, or a paid course, and no payment is taken here.</p>' +
           '<h3>An account is required</h3>' +
-          '<p>This exhibit is closed until you read these terms, confirm your agreement, and sign in. Signing in lets us recognize you on a later visit. You may sign out at any time; the exhibit will remain closed until you sign in again.</p>' +
+          '<p>This exhibit is closed until you read these terms, confirm your agreement, and sign in. Signing in lets us recognize you on a later visit so you do not have to sign in every time. You may sign out at any time; the exhibit will remain closed until you sign in again.</p>' +
+          '<h3>Certificate of completion</h3>' +
+          '<p>Signing in is required so the certificate of completion can carry your proper details. Your signed-in name is used on the certificate; you may confirm or correct it before you download. Without a signed-in profile the exhibit cannot print a certificate that belongs to you.</p>' +
           '<h3>How your study is kept</h3>' +
           '<p>Your place in the sitting and your progress are saved with your signed-in profile, and also on this device, so you can continue where you left off.</p>' +
           '<h3>Scripture and the exhibit</h3>' +
@@ -370,15 +372,28 @@
     }
   }
 
+  function requestSignIn() {
+    overlayRequested = true;
+    lock();
+  }
+
+  function afterAuthReady() {
+    if (window.ScrollAuth && typeof window.ScrollAuth.onChange === "function") {
+      window.ScrollAuth.onChange(function () { syncLock(); });
+    }
+    syncLock();
+  }
+
   function boot() {
     ensureOverlay();
     bindCoverGates();
     if (isCoverPage() && !hasAuthCode()) clearNext();
     document.addEventListener("keydown", onKey);
-    if (window.ScrollAuth && typeof window.ScrollAuth.onChange === "function") {
-      window.ScrollAuth.onChange(function () { syncLock(); });
+    if (window.ScrollAuth && typeof window.ScrollAuth.ready === "function") {
+      window.ScrollAuth.ready().then(afterAuthReady);
+      return;
     }
-    syncLock();
+    afterAuthReady();
   }
 
   window.ScrollTerms = {
@@ -386,7 +401,8 @@
     syncError: syncError,
     setBusy: setBusy,
     hasAgreed: hasAgreed,
-    canEnter: canEnter
+    canEnter: canEnter,
+    requestSignIn: requestSignIn
   };
 
   if (document.readyState === "loading") {

@@ -23,4 +23,8 @@ This exhibit is static HTML. Do not install `@supabase/ssr` or add `page.tsx` / 
      - `http://127.0.0.1:8003/**`
      - `https://cinematic-bible-study-daniel.vercel.app/**`
 
-The publishable key lives in `js/shared/auth-config.js` (Vercel does not inject `.env.local` into this static host). Sittings stay open while `TEMP_REVIEW_UNLOCK` is true; Google only records who is signed in.
+The publishable key lives in `js/shared/auth-config.js` (Vercel does not inject `.env.local` into this static host). Sessions persist in the browser so a returning student should not have to sign in again.
+
+## Home-page reviews
+
+Run `tools/supabase-reviews.sql` once in the Supabase SQL editor so the Witnesses band can store moderated testimonies. Add your Google email to `is_review_moderator()` in that file and to `moderatorEmails` in `js/shared/auth-config.js`.

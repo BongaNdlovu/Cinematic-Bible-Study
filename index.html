@@ -15,6 +15,7 @@
   <script src="js/shared/errors.js"></script>
   <script src="js/shared/auth.js"></script>
   <script src="js/shared/terms.js"></script>
+  <script src="js/shared/reviews.js"></script>
   <script>if (window.BAJourney) window.BAJourney.load();</script>
 </head>
 <body class="site cover cinematic-bg">
@@ -193,6 +194,33 @@
           <a class="btn" href="study.html">Continue where you left</a>
         </div>
       </div>
+    </div>
+  </section>
+
+  <section class="witnesses" id="witnesses" aria-labelledby="witnesses-title">
+    <div class="section-head">
+      <span id="witnesses-title">Witnesses</span>
+      <span>From those who have sat with the scroll</span>
+    </div>
+    <p class="witness-lead">These are not slogans. They are signed testimonies from students who walked the sittings — held until they are worthy of this hall.</p>
+    <div class="witness-list" id="witness-list"></div>
+    <p class="witness-empty" id="witness-empty">No public testimonies yet. Sign in and write one after you have sat with the book.</p>
+    <div class="witness-form-card">
+      <h3>Leave a testimony</h3>
+      <p>Sign in is required. Your words wait for approval before they appear on this page.</p>
+      <p id="witness-signin-hint">You must be signed in to post.</p>
+      <form id="witness-form">
+        <label class="sr-only" for="witness-body">Your review</label>
+        <textarea id="witness-body" name="body" maxlength="600" minlength="40" required placeholder="What did the sitting do to you? Speak plainly, and name Christ if He met you here."></textarea>
+        <div class="witness-form-actions">
+          <button class="btn solid" type="submit" id="witness-submit">Sign in to testify</button>
+        </div>
+        <p id="witness-status" hidden></p>
+      </form>
+    </div>
+    <div class="witness-queue" id="witness-queue" hidden>
+      <h3>Review queue</h3>
+      <div id="witness-queue-list"></div>
     </div>
   </section>
 
