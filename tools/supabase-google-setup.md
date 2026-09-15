@@ -27,4 +27,4 @@ The publishable key lives in `js/shared/auth-config.js` (Vercel does not inject 
 
 ## Home-page reviews
 
-Run `tools/supabase-reviews.sql` once in the Supabase SQL editor so the Witnesses band can store moderated testimonies. Add your Google email to `is_review_moderator()` in that file and to `moderatorEmails` in `js/shared/auth-config.js`.
+Run `tools/supabase-reviews.sql` once in the Supabase SQL editor so the Witnesses band can store moderated testimonies. Moderator sign-in is `fanelesibonge50@gmail.com` in that file and in `moderatorEmails` in `js/shared/auth-config.js`.

@@ -25,7 +25,7 @@ security definer
 set search_path = public
 as $$
   select lower(coalesce(auth.jwt() ->> 'email', '')) = any (array[
-    'admin@endoftime7.com'
+    'fanelesibonge50@gmail.com'
   ]);
 $$;
 
