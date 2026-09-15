@@ -3,6 +3,7 @@
   const listeners = [];
   let client = null;
   let user = null;
+  let accessToken = "";
   let signingIn = false;
   let readySettled = false;
   let readyResolve = function () {};
@@ -26,16 +27,56 @@
     return meta.full_name || meta.name || u.email || "Signed in";
   }
 
+  function addEmail(out, value) {
+    const email = String(value || "").trim().toLowerCase();
+    if (!email || email.indexOf("@") < 1 || out.indexOf(email) >= 0) return;
+    out.push(email);
+  }
+
+  function emailsFromPayload(token) {
+    const found = [];
+    if (!token || typeof token !== "string") return found;
+    const parts = token.split(".");
+    if (parts.length < 2) return found;
+    try {
+      const json = JSON.parse(atob(parts[1].replace(/-/g, "+").replace(/_/g, "/")));
+      addEmail(found, json && json.email);
+      addEmail(found, json && json.user_metadata && json.user_metadata.email);
+      addEmail(found, json && json.app_metadata && json.app_metadata.email);
+    } catch (err) {}
+    return found;
+  }
+
+  function accountEmails(u, token) {
+    const found = emailsFromPayload(token);
+    if (!u) return found;
+    addEmail(found, u.email);
+    const meta = u.user_metadata || {};
+    addEmail(found, meta.email);
+    const app = u.app_metadata || {};
+    addEmail(found, app.email);
+    const ids = u.identities || [];
+    for (let i = 0; i < ids.length; i++) {
+      const identity = ids[i] || {};
+      addEmail(found, identity.email);
+      const data = identity.identity_data || {};
+      addEmail(found, data.email);
+      addEmail(found, data.email_address);
+    }
+    return found;
+  }
+
   function persistIdentity(nextUser) {
     if (!window.BAJourney || typeof window.BAJourney.save !== "function") return;
     if (!nextUser) {
       window.BAJourney.save({ identity: null });
       return;
     }
+    const emails = accountEmails(nextUser, accessToken);
     window.BAJourney.save({
       identity: {
         id: nextUser.id || "",
-        email: nextUser.email || "",
+        email: emails[0] || nextUser.email || "",
         name: displayName(nextUser)
       }
     });
@@ -84,8 +125,9 @@
     try { history.replaceState({}, "", url); } catch (e) {}
   }
 
-  function setUser(next) {
+  function setUser(next, session) {
     user = next || null;
+    accessToken = session && session.access_token ? session.access_token : "";
     if (user && window.BAJourney && typeof window.BAJourney.commitPendingTerms === "function") {
       window.BAJourney.commitPendingTerms(user.id);
     }
@@ -166,11 +208,13 @@
   }
 
   function isModerator() {
-    const emails = Array.isArray(cfg.moderatorEmails) ? cfg.moderatorEmails : [];
-    const email = user && user.email ? String(user.email).toLowerCase() : "";
-    if (!email) return false;
-    return emails.some(function (item) {
-      return String(item || "").toLowerCase() === email;
+    const allowed = Array.isArray(cfg.moderatorEmails) ? cfg.moderatorEmails : [];
+    const have = accountEmails(user, accessToken);
+    if (!allowed.length || !have.length) return false;
+    return have.some(function (email) {
+      return allowed.some(function (item) {
+        return String(item || "").toLowerCase() === email;
+      });
     });
   }
 
@@ -230,18 +274,18 @@
     });
     client.auth.onAuthStateChange(function (event, session) {
       if (event === "SIGNED_OUT") {
-        setUser(null);
+        setUser(null, null);
         return;
       }
-      setUser(session && session.user ? session.user : null);
+      setUser(session && session.user ? session.user : null, session);
     });
     client.auth.getSession().then(function (res) {
       if (res && res.error) reportError(friendlyAuthError(res.error), "auth");
       const session = res && res.data && res.data.session;
-      setUser(session && session.user ? session.user : null);
+      setUser(session && session.user ? session.user : null, session);
     }).catch(function (err) {
       reportError(friendlyAuthError(err), "auth");
-      setUser(null);
+      setUser(null, null);
     }).then(function () {
       markReady();
     });

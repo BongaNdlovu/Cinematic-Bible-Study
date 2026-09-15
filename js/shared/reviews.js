@@ -140,15 +140,19 @@
     return item;
   }
 
+  function syncAdminUi() {
+    const admin = isModerator();
+    const queue = document.getElementById("witness-queue");
+    const link = document.getElementById("admin-reviews-link");
+    if (queue) queue.hidden = !admin;
+    if (link) link.hidden = !admin;
+    document.body.classList.toggle("is-moderator", admin);
+  }
+
   function loadQueue() {
-    const wrap = document.getElementById("witness-queue");
     const list = document.getElementById("witness-queue-list");
-    if (!wrap || !list) return Promise.resolve();
-    if (!isModerator()) {
-      wrap.hidden = true;
-      return Promise.resolve();
-    }
-    wrap.hidden = false;
+    syncAdminUi();
+    if (!list || !isModerator()) return Promise.resolve();
     const c = authClient();
     if (!c) return Promise.resolve();
     return c.from(TABLE)
@@ -159,6 +163,13 @@
       .limit(40)
       .then(function (res) {
         list.innerHTML = "";
+        if (res && res.error) {
+          const fail = document.createElement("p");
+          fail.className = "witness-queue-empty";
+          fail.textContent = "Could not load.";
+          list.appendChild(fail);
+          return;
+        }
         const rows = (res && res.data) || [];
         if (!rows.length) {
           const p = document.createElement("p");
@@ -233,6 +244,7 @@
 
   function start() {
     syncFormGate();
+    syncAdminUi();
     loadApproved();
     loadQueue();
   }
@@ -248,6 +260,7 @@
     if (window.ScrollAuth && typeof window.ScrollAuth.onChange === "function") {
       window.ScrollAuth.onChange(function () {
         syncFormGate();
+        syncAdminUi();
         loadQueue();
       });
     }

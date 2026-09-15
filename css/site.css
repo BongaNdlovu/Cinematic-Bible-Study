@@ -30,16 +30,30 @@ button { font: inherit; }
 
 /* ---------- cinematic atmosphere ---------- */
 .cinematic-bg {
-  background-color: #080705;
+  background-color: #2a4a72;
   background-image:
-    radial-gradient(ellipse 80% 60% at 50% -10%, rgba(212, 175, 55, 0.11), transparent 60%),
-    radial-gradient(ellipse 60% 50% at 100% 100%, rgba(64, 18, 26, 0.24), transparent 60%),
-    radial-gradient(ellipse 50% 50% at 0% 80%, rgba(27, 61, 47, 0.16), transparent 60%);
+    radial-gradient(ellipse 85% 60% at 50% -10%, rgba(232, 196, 88, 0.32), transparent 58%),
+    radial-gradient(ellipse 65% 50% at 100% 100%, rgba(72, 108, 196, 0.42), transparent 60%),
+    radial-gradient(ellipse 50% 50% at 0% 80%, rgba(48, 140, 156, 0.3), transparent 60%);
 }
 .cover {
+  --bg: #2a4a72;
+  --panel: rgba(22, 30, 48, 0.7);
+  --panel-2: rgba(30, 40, 60, 0.88);
+  --line: rgba(212, 175, 55, 0.28);
+  background-color: #2a4a72;
+  isolation: isolate;
+}
+.cover::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
   background:
-    linear-gradient(180deg, rgba(8,7,5,.22) 0%, rgba(8,7,5,.58) 48%, #080705 100%),
-    url("../assets/site/hall-bg.jpg") center top / cover no-repeat fixed;
+    linear-gradient(180deg, rgba(42, 74, 114, 0.2) 0%, rgba(32, 56, 92, 0.28) 48%, rgba(24, 44, 78, 0.42) 100%),
+    url("../assets/site/hall-bg.jpg") center top / cover no-repeat;
+  filter: brightness(1.55) saturate(1.18) contrast(1.04);
 }
 
 .vignette, .grain, .glow-drift, .shafts, .motes {
@@ -49,7 +63,7 @@ button { font: inherit; }
 }
 .vignette {
   z-index: 30;
-  background: radial-gradient(ellipse at 50% 38%, transparent 40%, rgba(0,0,0,.68) 100%);
+  background: radial-gradient(ellipse at 50% 36%, transparent 52%, rgba(16, 24, 42, 0.38) 100%);
 }
 .grain {
   z-index: 31;
@@ -61,15 +75,15 @@ button { font: inherit; }
 .glow-drift {
   z-index: 0;
   background:
-    radial-gradient(ellipse 70% 50% at 18% 0%, rgba(212,175,55,.14), transparent 55%),
-    radial-gradient(ellipse 50% 40% at 92% 82%, rgba(80,20,10,.22), transparent 55%);
+    radial-gradient(ellipse 70% 50% at 18% 0%, rgba(232,196,88,.28), transparent 55%),
+    radial-gradient(ellipse 50% 40% at 92% 82%, rgba(70,110,190,.32), transparent 55%);
   animation: drift 22s ease-in-out infinite alternate;
 }
 .shafts {
   z-index: 0;
   background:
-    linear-gradient(118deg, transparent 42%, rgba(255,214,140,.05) 50%, transparent 58%),
-    linear-gradient(102deg, transparent 48%, rgba(255,200,110,.04) 54%, transparent 62%);
+    linear-gradient(118deg, transparent 42%, rgba(255,214,140,.12) 50%, transparent 58%),
+    linear-gradient(102deg, transparent 48%, rgba(255,200,110,.09) 54%, transparent 62%);
   mix-blend-mode: screen;
   animation: shaftPulse 9s ease-in-out infinite;
 }
@@ -197,7 +211,7 @@ a:focus:not(:focus-visible) { outline: none; }
   position: sticky; top: 0; z-index: 40;
   display: flex; align-items: center; justify-content: space-between;
   padding: 16px 36px;
-  background: linear-gradient(180deg, rgba(8,7,5,.94), rgba(8,7,5,.28));
+  background: linear-gradient(180deg, rgba(22, 32, 52, .9), rgba(22, 32, 52, .16));
   border-bottom: 1px solid var(--line);
   backdrop-filter: blur(18px);
 }
@@ -223,6 +237,9 @@ a:focus:not(:focus-visible) { outline: none; }
   border-color: var(--line);
   background: rgba(20,16,12,.7);
   box-shadow: 0 0 20px rgba(212,175,55,.08);
+}
+#admin-reviews-link {
+  color: var(--gold-soft);
 }
 .auth-slot:empty { display: none; }
 .auth-cluster {
@@ -675,10 +692,14 @@ a:focus:not(:focus-visible) { outline: none; }
 #witness-status[data-kind="error"] { color: #e8b4a0; }
 #witness-status[data-kind="ok"] { color: var(--gold-soft); }
 .witness-queue {
-  margin-top: 28px;
-  border: 1px solid var(--line);
+  margin: 0 0 28px;
+  border: 1px solid rgba(212, 175, 55, 0.45);
   background: rgba(16, 12, 9, 0.86);
   padding: 22px 24px;
+}
+.witness-queue[hidden],
+#admin-reviews-link[hidden] {
+  display: none !important;
 }
 .witness-queue h3 {
   font-family: var(--serif);

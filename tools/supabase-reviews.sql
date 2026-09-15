@@ -22,11 +22,21 @@ returns boolean
 language sql
 stable
 security definer
-set search_path = public
+set search_path = public, auth
 as $$
-  select lower(coalesce(auth.jwt() ->> 'email', '')) = any (array[
-    'fanelesibonge50@gmail.com'
-  ]);
+  select exists (
+    select 1
+    from auth.users u
+    where u.id = auth.uid()
+      and lower(coalesce(
+        u.email,
+        u.raw_user_meta_data ->> 'email',
+        auth.jwt() ->> 'email',
+        ''
+      )) = any (array[
+        'fanelesibonge50@gmail.com'
+      ])
+  );
 $$;
 
 drop policy if exists read_approved_reviews on public.exhibit_reviews;
@@ -85,3 +95,4 @@ create trigger exhibit_reviews_force_pending
 
 grant select on public.exhibit_reviews to anon, authenticated;
 grant insert, update on public.exhibit_reviews to authenticated;
+grant execute on function public.is_review_moderator() to authenticated;

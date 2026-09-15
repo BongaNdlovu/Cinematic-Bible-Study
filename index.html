@@ -42,6 +42,7 @@
       <a href="study.html">The Sitting</a>
       <a href="map.html">Map of History</a>
       <a href="gallery.html">3D Symbols</a>
+      <a href="#witness-queue" id="admin-reviews-link" hidden>Admin</a>
       <span class="auth-slot" data-auth-slot data-auth-variant="nav"></span>
     </div>
   </nav>
@@ -201,6 +202,10 @@
     <div class="section-head">
       <span id="witnesses-title">Reviews</span>
     </div>
+    <div class="witness-queue" id="witness-queue" hidden>
+      <h3>Admin</h3>
+      <div id="witness-queue-list"></div>
+    </div>
     <div class="witness-list" id="witness-list"></div>
     <p class="witness-empty" id="witness-empty">No reviews yet.</p>
     <div class="witness-form-card">
@@ -214,10 +219,6 @@
         </div>
         <p id="witness-status" hidden></p>
       </form>
-    </div>
-    <div class="witness-queue" id="witness-queue" hidden>
-      <h3>Review queue</h3>
-      <div id="witness-queue-list"></div>
     </div>
   </section>
 
