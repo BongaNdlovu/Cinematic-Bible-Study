@@ -30,18 +30,18 @@ button { font: inherit; }
 
 /* ---------- cinematic atmosphere ---------- */
 .cinematic-bg {
-  background-color: #2a4a72;
+  background-color: #2c1c12;
   background-image:
     radial-gradient(ellipse 85% 60% at 50% -10%, rgba(232, 196, 88, 0.32), transparent 58%),
-    radial-gradient(ellipse 65% 50% at 100% 100%, rgba(72, 108, 196, 0.42), transparent 60%),
-    radial-gradient(ellipse 50% 50% at 0% 80%, rgba(48, 140, 156, 0.3), transparent 60%);
+    radial-gradient(ellipse 65% 50% at 100% 100%, rgba(90, 50, 22, 0.42), transparent 60%),
+    radial-gradient(ellipse 50% 50% at 0% 80%, rgba(72, 42, 24, 0.3), transparent 60%);
 }
 .cover {
-  --bg: #2a4a72;
-  --panel: rgba(22, 30, 48, 0.7);
-  --panel-2: rgba(30, 40, 60, 0.88);
+  --bg: #2c1c12;
+  --panel: rgba(28, 18, 12, 0.7);
+  --panel-2: rgba(36, 24, 16, 0.88);
   --line: rgba(212, 175, 55, 0.28);
-  background-color: #2a4a72;
+  background-color: #2c1c12;
   isolation: isolate;
 }
 .cover::before {
@@ -51,7 +51,7 @@ button { font: inherit; }
   z-index: -1;
   pointer-events: none;
   background:
-    linear-gradient(180deg, rgba(42, 74, 114, 0.2) 0%, rgba(32, 56, 92, 0.28) 48%, rgba(24, 44, 78, 0.42) 100%),
+    linear-gradient(180deg, rgba(58, 38, 22, 0.2) 0%, rgba(42, 28, 16, 0.28) 48%, rgba(32, 20, 12, 0.42) 100%),
     url("../assets/site/hall-bg.jpg") center top / cover no-repeat;
   filter: brightness(1.55) saturate(1.18) contrast(1.04);
 }
@@ -63,7 +63,7 @@ button { font: inherit; }
 }
 .vignette {
   z-index: 30;
-  background: radial-gradient(ellipse at 50% 36%, transparent 52%, rgba(16, 24, 42, 0.38) 100%);
+  background: radial-gradient(ellipse at 50% 36%, transparent 52%, rgba(16, 10, 6, 0.38) 100%);
 }
 .grain {
   z-index: 31;
@@ -76,7 +76,7 @@ button { font: inherit; }
   z-index: 0;
   background:
     radial-gradient(ellipse 70% 50% at 18% 0%, rgba(232,196,88,.28), transparent 55%),
-    radial-gradient(ellipse 50% 40% at 92% 82%, rgba(70,110,190,.32), transparent 55%);
+    radial-gradient(ellipse 50% 40% at 92% 82%, rgba(80,40,16,.32), transparent 55%);
   animation: drift 22s ease-in-out infinite alternate;
 }
 .shafts {
@@ -211,7 +211,7 @@ a:focus:not(:focus-visible) { outline: none; }
   position: sticky; top: 0; z-index: 40;
   display: flex; align-items: center; justify-content: space-between;
   padding: 16px 36px;
-  background: linear-gradient(180deg, rgba(22, 32, 52, .9), rgba(22, 32, 52, .16));
+  background: linear-gradient(180deg, rgba(28, 18, 12, .9), rgba(28, 18, 12, .16));
   border-bottom: 1px solid var(--line);
   backdrop-filter: blur(18px);
 }
