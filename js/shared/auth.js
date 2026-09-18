@@ -254,6 +254,7 @@
 
   function renderAll() {
     document.querySelectorAll("[data-auth-slot]").forEach(renderSlot);
+    if (document.body) document.body.classList.toggle("is-admin", isModerator());
   }
 
   function init() {
@@ -300,6 +301,7 @@
     getClient: getClient,
     displayName: function () { return displayName(user); },
     isModerator: isModerator,
+    isAdmin: isModerator,
     ready: function () { return readyPromise; },
     onChange: onChange,
     renderAll: renderAll,

@@ -1903,6 +1903,9 @@
     }
 
     function canAdvancePath() {
+      if (window.BAJourney && typeof window.BAJourney.isAdmin === "function" && window.BAJourney.isAdmin()) {
+        return true;
+      }
       if (window.StudyWorkbench && !window.StudyWorkbench.isSheetComplete(currentSheetIndex)) {
         return false;
       }
@@ -2261,7 +2264,24 @@
         else if (weatherPreset !== 'off') startWeatherAnimation();
       });
       if (window.StudyCompetency) {
-        window.StudyCompetency.initPlacementModal();
+        if (window.ScrollAuth && typeof window.ScrollAuth.ready === "function") {
+          window.ScrollAuth.ready().then(function () { window.StudyCompetency.initPlacementModal(); });
+        } else {
+          window.StudyCompetency.initPlacementModal();
+        }
+      }
+      function refreshAdminAccess() {
+        renderToc();
+        syncHorizonLocks();
+        updateNextGate();
+        const wanted = resolveStartSheet();
+        if (wanted !== currentSheetIndex && canAccessSheet(wanted)) loadSheet(wanted);
+      }
+      if (window.ScrollAuth && typeof window.ScrollAuth.ready === "function") {
+        window.ScrollAuth.ready().then(refreshAdminAccess);
+      }
+      if (window.ScrollAuth && typeof window.ScrollAuth.onChange === "function") {
+        window.ScrollAuth.onChange(refreshAdminAccess);
       }
     });
 

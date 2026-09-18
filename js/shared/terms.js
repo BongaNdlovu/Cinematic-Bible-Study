@@ -30,7 +30,15 @@
     return !!(window.ScrollAuth && window.ScrollAuth.getUser && window.ScrollAuth.getUser());
   }
 
+  function isAdmin() {
+    const auth = window.ScrollAuth;
+    if (auth && typeof auth.isAdmin === "function") return !!auth.isAdmin();
+    if (auth && typeof auth.isModerator === "function") return !!auth.isModerator();
+    return false;
+  }
+
   function canEnter() {
+    if (isAdmin()) return true;
     return hasAgreed() && signedIn();
   }
 

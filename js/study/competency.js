@@ -125,7 +125,18 @@
 
   // --- Onboarding Placement Diagnostic Modal ---
   function initPlacementModal(forceOpen) {
+    const admin = !!(window.ScrollAuth && (
+      (typeof window.ScrollAuth.isAdmin === "function" && window.ScrollAuth.isAdmin())
+      || (typeof window.ScrollAuth.isModerator === "function" && window.ScrollAuth.isModerator())
+    ));
     const hasChosen = localStorage.getItem(TRACK_KEY);
+    if (admin && !forceOpen) {
+      const existing = document.getElementById("placement-modal");
+      if (existing) existing.remove();
+      if (!hasChosen) setTrack("scholarly");
+      else setTrack(hasChosen);
+      return;
+    }
     if (hasChosen && !forceOpen) {
       setTrack(hasChosen);
       return;

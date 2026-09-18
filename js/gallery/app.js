@@ -3610,6 +3610,12 @@ import * as THREE from 'three';
     window.addEventListener('storage', (ev) => {
       if (ev.key === 'baJourney') applyJourneyUnlocks();
     });
+    if (window.ScrollAuth && typeof window.ScrollAuth.onChange === "function") {
+      window.ScrollAuth.onChange(applyJourneyUnlocks);
+    }
+    if (window.ScrollAuth && typeof window.ScrollAuth.ready === "function") {
+      window.ScrollAuth.ready().then(applyJourneyUnlocks);
+    }
 
     // Related avatar circles click
     document.querySelectorAll('.related-avatar').forEach(item => {

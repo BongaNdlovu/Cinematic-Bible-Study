@@ -227,6 +227,7 @@
   }
 
   function isUnlocked(empire) {
+    if (isAdmin()) return true;
     return load().unlocked.indexOf(empire) !== -1;
   }
 
@@ -259,7 +260,17 @@
     return new Set((load().completedSheets || []).map(Number));
   }
 
+  function isAdmin() {
+    try {
+      const auth = window.ScrollAuth;
+      if (auth && typeof auth.isAdmin === "function") return !!auth.isAdmin();
+      if (auth && typeof auth.isModerator === "function") return !!auth.isModerator();
+    } catch (err) {}
+    return false;
+  }
+
   function maxOpenSheet() {
+    if (isAdmin()) return SHEET_COUNT - 1;
     if (TEMP_REVIEW_UNLOCK) return SHEET_COUNT - 1;
     const done = completedSet();
     let open = 0;
@@ -271,6 +282,7 @@
   }
 
   function canAccessSheet(index) {
+    if (isAdmin()) return true;
     const i = Number(index);
     if (Number.isNaN(i) || i < 0) return true;
     return i <= maxOpenSheet();
@@ -292,7 +304,7 @@
   }
 
   function canAccessAsset(key) {
-    if (allLessonsComplete()) return true;
+    if (isAdmin() || allLessonsComplete()) return true;
     const sitting = sittingForAsset(key);
     if (sitting < 0) return false;
     return canAccessSheet(sitting);
@@ -305,6 +317,7 @@
   }
 
   function allLessonsComplete() {
+    if (isAdmin()) return true;
     const done = completedSet();
     if (done.size < SHEET_COUNT) return false;
     for (let i = 0; i < SHEET_COUNT; i++) {
@@ -321,7 +334,7 @@
   }
 
   function canAccessMuseumNode(id, assetKey) {
-    if (allLessonsComplete()) return true;
+    if (isAdmin() || allLessonsComplete()) return true;
     const sitting = sittingForMuseumNode(id, assetKey);
     if (sitting < 0) return false;
     return sheetCompleted(sitting);
@@ -342,13 +355,13 @@
 
   function canAccessMapNode(id) {
     if (!id) return false;
-    if (allLessonsComplete()) return true;
+    if (isAdmin() || allLessonsComplete()) return true;
     return !!openNodeIds()[id];
   }
 
   function canAccessYear(yearId) {
     if (!yearId) return false;
-    if (allLessonsComplete()) return true;
+    if (isAdmin() || allLessonsComplete()) return true;
     const open = maxOpenSheet();
     for (let i = 0; i <= open; i++) {
       if ((SITTING_YEARS[i] || []).indexOf(yearId) >= 0) return true;
@@ -430,6 +443,7 @@
   }
 
   function hasAcceptedTerms() {
+    if (isAdmin()) return true;
     const id = currentUserId();
     if (!id) return false;
     const cur = load();
@@ -534,6 +548,7 @@
     empireLabel: empireLabel,
     searchIndex: searchIndex,
     sheetLabel: sheetLabel,
+    isAdmin: isAdmin,
     canAccessSheet: canAccessSheet,
     clampToAccessible: clampToAccessible,
     canAccessAsset: canAccessAsset,

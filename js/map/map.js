@@ -1082,6 +1082,20 @@
 
     start();
 
+    function refreshJourneyLocks() {
+      if (!mapReady) return;
+      const params = new URLSearchParams(location.search);
+      let id = parseYearParam(params.get("year")) || state.yearId;
+      if (!yearOpen(id)) id = firstOpenYear();
+      setYear(id, { animate: false, chapter: false, open: false });
+    }
+    if (window.ScrollAuth && typeof window.ScrollAuth.onChange === "function") {
+      window.ScrollAuth.onChange(refreshJourneyLocks);
+    }
+    if (window.ScrollAuth && typeof window.ScrollAuth.ready === "function") {
+      window.ScrollAuth.ready().then(refreshJourneyLocks);
+    }
+
     return {
       setYear: (id, flags) => setYear(id, flags || { animate: true, chapter: false, open: false }),
       setSheet: setSheet,
