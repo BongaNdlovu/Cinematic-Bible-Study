@@ -411,7 +411,7 @@ async function run() {
   console.log('  [index.html] Cards count:', cardsCount);
   if (cardsCount < 3) throw new Error(`Expected at least 3 cards, got ${cardsCount}`);
 
-  const primaryBtn = await client.eval('document.getElementById("hero-primary")?.getAttribute("href") || document.getElementById("hero-cta")?.getAttribute("href")');
+  const primaryBtn = await client.eval('document.getElementById("hero-cta")?.getAttribute("href") || document.getElementById("hero-primary")?.getAttribute("href")');
   console.log('  [index.html] Hero primary CTA:', primaryBtn);
   if (!primaryBtn || !primaryBtn.includes('study.html')) throw new Error('Hero primary CTA link missing or invalid');
 

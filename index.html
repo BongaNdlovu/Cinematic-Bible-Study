@@ -7,7 +7,7 @@
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📜</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;1,500;1,600&family=Inter:wght@400;500;600&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/site.css?v=23">
+  <link rel="stylesheet" href="css/site.css?v=24">
   <link rel="stylesheet" href="css/terms.css">
   <script src="js/shared/journey.js"></script>
   <script src="js/shared/auth-config.js"></script>
@@ -32,6 +32,7 @@
       <a href="study.html">The Sitting</a>
       <a href="map.html">Map of History</a>
       <a href="gallery.html">3D Symbols</a>
+      <a href="#witness-queue" id="admin-reviews-link" hidden>Admin</a>
       <span class="auth-slot" data-auth-slot data-auth-variant="nav"></span>
     </div>
   </nav>
@@ -67,7 +68,7 @@
           <span class="dash-empire-sep" aria-hidden="true"></span>
           <span data-era="6">Now</span>
         </div>
-        <a id="hero-cta" class="dash-hero-cta" href="study.html?sheet=0">
+        <a id="hero-cta" class="dash-hero-cta" href="study.html?sheet=0" data-hero-primary>
           <span class="dash-hero-cta-spin" aria-hidden="true"></span>
           <span class="dash-hero-cta-body">
             <span id="hero-cta-label">Begin the sitting</span>
@@ -83,7 +84,7 @@
     </header>
 
     <div class="dash-grid">
-      <div class="dash-chapters">
+      <div class="dash-chapters" id="full-scroll">
           <a class="dash-card" data-sheet="1" href="study.html?sheet=1">
             <img src="assets/site/home-ch1.jpg" alt="" onerror="this.src='assets/site/card-text.jpg'">
             <div class="dash-card-copy"><small>Chapter 1</small><h3>Faith in a foreign land</h3></div>
@@ -114,54 +115,17 @@
           </a>
       </div>
 
-      <nav class="dash-side" aria-label="Exhibit">
-        <a class="active" href="index.html">
-          <svg viewBox="0 0 24 24"><path d="M4 11l8-7 8 7"/><path d="M6 10v10h12V10"/></svg>
-          Home
-        </a>
-        <a id="hero-primary" href="study.html?sheet=0">
-          <svg viewBox="0 0 24 24"><path d="M5 4h9v16H7a2 2 0 0 1-2-2V4z"/><path d="M14 4h5v14a2 2 0 0 1-2 2h-3"/></svg>
-          The Sitting
-        </a>
-        <a href="map.html">
-          <svg viewBox="0 0 24 24"><path d="M3 6l6-2 6 2 6-2v14l-6 2-6-2-6 2z"/><path d="M9 4v14M15 6v14"/></svg>
-          Map of History
-        </a>
-        <a href="gallery.html">
-          <svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="14" rx="1"/><path d="M8 15l3-3 2 2 3-4 2 5"/></svg>
-          3D Symbols
-        </a>
-        <a href="#witness-queue" id="admin-reviews-link" hidden>Admin</a>
-        <div class="dash-account">
-          <button type="button" class="dash-signin" data-dash-signin>
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8z"/><path d="M6 20v-1a6 6 0 0 1 12 0v1"/></svg>
-            Sign in with Google
-          </button>
-          <span class="auth-slot" data-auth-slot data-auth-variant="dash"></span>
-        </div>
-      </nav>
-
       <div class="dash-main">
         <div class="dash-tiles">
           <a class="dash-tile" id="context" href="map.html?year=y605">
             <img src="assets/site/home-context.jpg" alt="" onerror="this.src='assets/site/card-year.jpg'">
-            <span>Historical context</span>
-            <strong>Babylon, the exile &amp; beyond</strong>
-          </a>
-          <a class="dash-tile" href="map.html">
-            <img src="assets/site/card-year.jpg" alt="">
-            <span>Interactive timeline</span>
-            <strong>Empires of Daniel</strong>
+            <span>Open the map</span>
+            <strong>Babylon, the exile &amp; the empires</strong>
           </a>
           <a class="dash-tile" id="today" href="study.html?sheet=10">
             <img src="assets/site/home-earth.jpg" alt="" onerror="this.src='assets/site/card-act-iii.jpg'">
-            <span>Prophecy in today’s world</span>
+            <span>The last sitting</span>
             <strong>From Daniel to our time</strong>
-          </a>
-          <a class="dash-tile" id="full-scroll" href="gallery.html">
-            <img src="assets/site/card-scroll.jpg" alt="">
-            <span>Study resources</span>
-            <strong>Maps, charts &amp; symbols</strong>
           </a>
         </div>
 
@@ -228,6 +192,6 @@
     </div>
   </section>
 
-  <script src="js/home/dash.js?v=10"></script>
+  <script src="js/home/dash.js?v=11"></script>
 </body>
 </html>

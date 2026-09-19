@@ -68,9 +68,7 @@
     });
     const resumeHref = J.resumeHref();
     const resumeSheet = J.resumeSheet();
-    const primary = document.getElementById("hero-primary");
-    if (primary) primary.href = resumeHref;
-    const heroCta = document.getElementById("hero-cta");
+    const heroCta = document.getElementById("hero-cta") || document.getElementById("hero-primary");
     if (heroCta) heroCta.href = resumeHref;
     const ctaLabel = document.getElementById("hero-cta-label");
     if (ctaLabel) ctaLabel.textContent = J.resumeLabel();
