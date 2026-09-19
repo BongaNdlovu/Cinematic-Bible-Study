@@ -522,8 +522,8 @@ async function run() {
     const testSittings = [
       { index: 0, mapYear: 'y605', galleryAsset: 'assembled' },
       { index: 2, mapYear: 'y605', galleryAsset: 'head' },
-      { index: 7, mapYear: 'y538', galleryAsset: 'years1260' },
-      { index: 10, mapYear: 'y12', galleryAsset: 'michael' }
+      { index: 7, mapYear: 'y538', galleryAsset: 'leopard' },
+      { index: 10, mapYear: 'y12', galleryAsset: 'kings' }
     ];
 
     for (const sitting of testSittings) {

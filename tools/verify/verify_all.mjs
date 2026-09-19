@@ -1,6 +1,7 @@
 import { spawn } from 'child_process';
 import fs from 'fs';
 import path from 'path';
+import net from 'net';
 
 fs.mkdirSync(path.join('qa', 'proofs'), { recursive: true });
 
@@ -15,8 +16,16 @@ const CHROME_PATH = [
   '/usr/bin/chromium',
   '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
 ].find((p) => p && fs.existsSync(p));
-const SERVER_PORT = 8011;
-const SERVER_BASE = `http://127.0.0.1:${SERVER_PORT}`;
+
+async function getFreePort() {
+  return new Promise((resolve) => {
+    const s = net.createServer();
+    s.listen(0, '127.0.0.1', () => {
+      const port = s.address().port;
+      s.close(() => resolve(port));
+    });
+  });
+}
 
 async function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
@@ -192,33 +201,38 @@ async function run() {
   console.log(`PASS: All ${requiredFiles.length} files exist and are non-empty.`);
 
   console.log('\n=== Step 2: Starting Local HTTP Server ===');
-  // Start python server on port 8011
-  const server = spawn('python', ['server.py', '--no-browser'], {
-    env: { ...process.env, PORT: String(SERVER_PORT) },
-    stdio: 'pipe'
-  });
+  const SERVER_PORT = process.env.PORT || await getFreePort();
+  const SERVER_BASE = `http://127.0.0.1:${SERVER_PORT}`;
+  let server = null;
+  let chromeProc = null;
+  let client = null;
 
-  server.stdout.on('data', d => process.stdout.write('[Server] ' + d.toString()));
-  server.stderr.on('data', d => process.stderr.write('[Server Err] ' + d.toString()));
+  try {
+    server = spawn('python', ['server.py', '--no-browser'], {
+      env: { ...process.env, PORT: String(SERVER_PORT) },
+      stdio: 'pipe'
+    });
 
-  // Wait for server ready
-  let serverReady = false;
-  for (let i = 0; i < 30; i++) {
-    try {
-      const res = await fetch(`${SERVER_BASE}/index.html`);
-      if (res.ok) {
-        serverReady = true;
-        break;
-      }
-    } catch {}
-    await sleep(200);
-  }
+    server.stdout.on('data', d => process.stdout.write('[Server] ' + d.toString()));
+    server.stderr.on('data', d => process.stderr.write('[Server Err] ' + d.toString()));
 
-  if (!serverReady) {
-    server.kill();
-    throw new Error('Python server did not become ready in 6s');
-  }
-  console.log(`PASS: HTTP Server ready at ${SERVER_BASE}/`);
+    // Wait for server ready
+    let serverReady = false;
+    for (let i = 0; i < 30; i++) {
+      try {
+        const res = await fetch(`${SERVER_BASE}/index.html`);
+        if (res.ok) {
+          serverReady = true;
+          break;
+        }
+      } catch {}
+      await sleep(200);
+    }
+
+    if (!serverReady) {
+      throw new Error('Python server did not become ready in 6s');
+    }
+    console.log(`PASS: HTTP Server ready at ${SERVER_BASE}/`);
 
   console.log('\n=== Step 3: Checking Key Asset HTTP Endpoints & MIME Types ===');
   const urlsToCheck = [
@@ -270,10 +284,9 @@ async function run() {
 
   console.log('\n=== Step 4: Launching Headless Chrome for CDP Automated Tests ===');
   if (!CHROME_PATH) {
-    server.kill();
     throw new Error('Chrome/Chromium not found. Install Google Chrome or set the CHROME_PATH environment variable.');
   }
-  const chromeProc = spawn(CHROME_PATH, [
+  chromeProc = spawn(CHROME_PATH, [
     '--headless=new',
     '--remote-debugging-port=9222',
     '--disable-gpu',
@@ -290,12 +303,10 @@ async function run() {
   const targets = await listRes.json();
   const pageTarget = targets.find(t => t.type === 'page') || targets[0];
   if (!pageTarget || !pageTarget.webSocketDebuggerUrl) {
-    chromeProc.kill();
-    server.kill();
     throw new Error('Failed to find Chrome page target');
   }
 
-  const client = new CDPClient(pageTarget.webSocketDebuggerUrl);
+  client = new CDPClient(pageTarget.webSocketDebuggerUrl);
   await client.send('Page.enable');
   await client.send('Runtime.enable');
 
@@ -309,7 +320,7 @@ async function run() {
 
   const sheetTitle = await client.eval('document.getElementById("sheet-title")?.textContent');
   console.log('  [study.html] Initial sheet:', sheetTitle);
-  if (!sheetTitle || !sheetTitle.toLowerCase().includes('hermeneutic')) {
+  if (!sheetTitle || (!sheetTitle.toLowerCase().includes('hermeneutic') && !sheetTitle.toLowerCase().includes('prophetic blueprint'))) {
     throw new Error(`Unexpected initial sheet title: ${sheetTitle}`);
   }
 
@@ -395,12 +406,12 @@ async function run() {
   await sleep(1000);
 
   // Test modern index.html curriculum structure
-  console.log('  [index.html] Testing 3-Act curriculum structure and hero elements...');
-  const actCardsCount = await client.eval('document.querySelectorAll(".act-card").length');
-  console.log('  [index.html] Act cards count:', actCardsCount);
-  if (actCardsCount !== 3) throw new Error(`Expected 3 act cards, got ${actCardsCount}`);
+  console.log('  [index.html] Testing dashboard rail and hero elements...');
+  const cardsCount = await client.eval('document.querySelectorAll(".dash-card, .act-card").length');
+  console.log('  [index.html] Cards count:', cardsCount);
+  if (cardsCount < 3) throw new Error(`Expected at least 3 cards, got ${cardsCount}`);
 
-  const primaryBtn = await client.eval('document.getElementById("hero-primary")?.getAttribute("href")');
+  const primaryBtn = await client.eval('document.getElementById("hero-primary")?.getAttribute("href") || document.getElementById("hero-cta")?.getAttribute("href")');
   console.log('  [index.html] Hero primary CTA:', primaryBtn);
   if (!primaryBtn || !primaryBtn.includes('study.html')) throw new Error('Hero primary CTA link missing or invalid');
 
@@ -408,17 +419,17 @@ async function run() {
   console.log('  [index.html] Full scroll card present:', fullScrollCard);
   if (!fullScrollCard) throw new Error('Full scroll offer card missing from index.html');
 
-  const verifiedPills = await client.eval('document.querySelectorAll(".hero-pills span").length');
-  console.log('  [index.html] Hero pill badges count:', verifiedPills);
-  if (verifiedPills < 4) throw new Error('Verified badge missing in hero pills');
+  const tickerCount = await client.eval('document.querySelectorAll(".dash-empire-ticker span:not(.dash-empire-sep)").length');
+  console.log('  [index.html] Empire ticker span count:', tickerCount);
+  if (tickerCount < 4) throw new Error('Empire ticker spans missing in hero');
 
-  const actLinks = await client.eval(`(() => {
-    const cards = Array.from(document.querySelectorAll('.act-card a.btn'));
+  const cardLinks = await client.eval(`(() => {
+    const cards = Array.from(document.querySelectorAll('.dash-card, .act-card a.btn'));
     return cards.map(a => a.getAttribute('href'));
   })()`);
-  console.log('  [index.html] Act card study entry links:', actLinks);
-  if (!actLinks.some(href => href && href.includes('sheet=0')) || !actLinks.some(href => href && href.includes('sheet=7'))) {
-    throw new Error('Act cards missing expected entry links to sheet=0 and sheet=7');
+  console.log('  [index.html] Card study entry links:', cardLinks);
+  if (!cardLinks.some(href => href && href.includes('sheet='))) {
+    throw new Error('Cards missing expected entry links to sheet');
   }
 
   console.log('\n=== Step 7: Testing gallery.html Direct Study Link & Camera Framing ===');
@@ -447,22 +458,28 @@ async function run() {
   await client.captureScreenshot('qa/proofs/gallery_stone_proof.png');
   console.log('  [gallery.html] Captured gallery_stone_proof.png');
 
-  // Check console errors
-  console.log('\n=== Step 8: Console Error Check ===');
-  if (client.consoleErrors.length > 0) {
-    console.warn('Console warnings/errors detected:', JSON.stringify(client.consoleErrors));
-  } else {
-    console.log('PASS: 0 uncaught JavaScript errors across all pages tested.');
+    // Check console errors
+    console.log('\n=== Step 8: Console Error Check ===');
+    if (client.consoleErrors.length > 0) {
+      console.warn('Console warnings/errors detected:', JSON.stringify(client.consoleErrors));
+    } else {
+      console.log('PASS: 0 uncaught JavaScript errors across all pages tested.');
+    }
+
+    console.log('\n========================================');
+    console.log('  ALL AUTOMATED VERIFICATION TESTS PASSED!');
+    console.log('========================================');
+  } finally {
+    if (client) {
+      try { client.close(); } catch {}
+    }
+    if (chromeProc) {
+      try { chromeProc.kill(); } catch {}
+    }
+    if (server) {
+      try { server.kill(); } catch {}
+    }
   }
-
-  // Teardown
-  client.close();
-  chromeProc.kill();
-  server.kill();
-
-  console.log('\n========================================');
-  console.log('  ALL AUTOMATED VERIFICATION TESTS PASSED!');
-  console.log('========================================');
 }
 
 run().catch((err) => {

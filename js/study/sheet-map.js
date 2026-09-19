@@ -36,7 +36,7 @@
           "Rome and the unbroken chain",
           "Daniel 7:8, 24–25; Revelation 13",
           "assets/maps/stops/rome.jpg",
-          "The Protestant consensus — Wycliffe, Luther, Calvin, Knox, Newton — read the little horn and the Antichrist as a church-state power among Rome’s fragments, not as a single future man and not as a finished Maccabean tyrant. That reading only works if the chain that starts at Jerusalem and Babylon is allowed to run through imperial Rome and divided Europe.\n\nJesuit counter-systems at and after Trent (Ribera’s futurism, Alcázar’s preterism) were published to break that continuity so the medieval and modern church would fall out of prophetic scrutiny. The 19th century then imported those breaks into Protestant pulpits.\n\nThis pin is not yet the Daniel 7 sitting. It is here so the method sheet has a place on the map for the question the whole course will keep asking: does your reading keep Rome on the chain, or does it dissolve the chain into a riddle?"
+          "Historicist Protestant readers used Scripture with Scripture to identify a dynastic Antichrist/beast power across history — a reading that requires the chain from Jerusalem and Babylon to run through imperial Rome and divided Europe.\n\nRibera (1590/1591) and Alcázar (1614) systematically relocated fulfillment to escape that historicist identification — history of interpretation, not canon. Part V of this sitting walks that Counter-Reformation context.\n\nThis pin is not yet the Daniel 7 sitting. It is here so the method sheet has a place on the map for the question the whole course will keep asking: does your reading keep Rome on the chain, or dissolve the chain into a riddle?"
         )
       ]
     },

@@ -1,0 +1,230 @@
+"""Generate Sheet 5 article HTML — The Handwriting on the Plaster (Daniel 5)."""
+from pathlib import Path
+
+OUT = Path(__file__).resolve().parent / "sheet5_generated.html"
+
+CONTENT = r'''
+<nav class="lesson-toc" aria-label="Sheet 5 sections">
+  <p class="lesson-toc-kicker">Follow this sitting</p>
+  <ol class="lesson-toc-list">
+    <li><a href="#intro">Introduction · The illusion of invulnerability</a></li>
+    <li><a href="#mp1">I · Belshazzar and the historical accuracy of Scripture</a></li>
+    <li><a href="#mp2">II · Sacrilege and sinning against light</a></li>
+    <li><a href="#mp3">III · The divine audit on the plaster</a></li>
+    <li><a href="#mp4">IV · The fall of Babylon and the precision of prophecy</a></li>
+    <li><a href="#mp5">V · Cyrus as type and Christ as the true Deliverer</a></li>
+    <li><a href="#apply">Practical application · Feasts of modern Babylon</a></li>
+  </ol>
+</nav>
+
+<div class="governing-principle">
+  <p class="governing-principle-kicker">Big idea</p>
+  <p>On the night Babylon fell, Heaven audited a king who sinned against known light. The gold kingdom closed on the scale — and the same Judge offers the only weight that can cover us: <strong>the righteousness of Jesus Christ</strong>.</p>
+</div>
+
+<div class="from-last-sitting">
+  <span class="from-last-sitting-kicker">From the last sitting · Sheet 4</span>
+  <p>In chapter 4, Nebuchadnezzar learned that Heaven rules: seven years of madness stripped his pride until he lifted his eyes and blessed the Most High. That imperial confession was published to every nation. One generation later, Belshazzar sits in the same palace and acts as if the Most High does not exist.</p>
+</div>
+
+<div class="part-header" id="intro">
+  <p class="part-kicker">Introduction</p>
+  <h3>The Illusion of Invulnerability</h3>
+  <p class="part-subtitle">Daniel 5:1–3 · Babylon, October 539 B.C.</p>
+</div>
+
+<p>In October 539 B.C., the combined Medo-Persian army under Cyrus the Great and his general Ugbaru surrounded the city of Babylon. Outside the towering fortifications, an empire was crumbling; inside, King Belshazzar hosted a lavish, drunken banquet for a thousand of his highest nobles, along with his wives and concubines (Daniel 5:1–3).</p>
+
+<p>Babylon was considered impregnable. Its monumental double walls were wide enough for multiple chariots to pass, and the Euphrates River ran directly beneath the water gates, providing an endless water supply and deep moats. Belshazzar was convinced that Babylon was immune to siege. In an act of drunken insolence, he defied both the encircling armies outside and the God of heaven above.</p>
+
+<pre class="prophecy-diagram">THE SIEGE OF BABYLON (OCTOBER 539 B.C.)
+OUTSIDE THE WALLS:                        INSIDE THE PALACE:
+• Medo-Persian army encircling the city   • 1,000 nobles drinking wine
+• Persian engineers diverting Euphrates   • False security behind massive walls
+• Cyrus fulfilling Isaiah 45:1–3          • Belshazzar toasting idols with holy vessels</pre>
+
+<div class="part-header" id="mp1">
+  <p class="part-kicker">Main Point 1</p>
+  <h3>Belshazzar and the Historical Accuracy of Scripture</h3>
+</div>
+
+<p>For centuries, nineteenth-century rationalist critics claimed that the book of Daniel was historical fiction, arguing that Belshazzar never existed because Greek historians (such as Herodotus) listed Nabonidus as Babylon's final monarch.</p>
+
+<p>Archaeology has completely dismantled that skepticism:</p>
+
+<div class="framework-card">
+  <p class="framework-card-kicker">The Nabonidus Cylinders of Ur (British Museum BM 91125)</p>
+  <p>Unearthed in 1854 by J. G. Taylor, these cuneiform cylinders contain Nabonidus's personal prayer for his eldest son, "Bel-shar-usur" (Belshazzar).</p>
+</div>
+<div class="framework-card">
+  <p class="framework-card-kicker">The Verse Account of Nabonidus (British Museum BM 38299)</p>
+  <p>Confirms that Nabonidus established his residence in Tema in Arabia for ten years, entrusting the kingship and imperial defense of Babylon to his eldest son, Belshazzar.</p>
+</div>
+<div class="framework-card">
+  <p class="framework-card-kicker">The "third ruler" precision</p>
+  <p>This historical co-regency explains why Belshazzar offered to make Daniel the "third ruler in the kingdom" (Daniel 5:16, 29). Nabonidus was first, Belshazzar was second, and the highest administrative office available to Daniel was third.</p>
+</div>
+
+<pre class="prophecy-diagram">THE BABYLONIAN CO-REGENCY HIERARCHY
+1st Ruler: NABONIDUS      (King of Babylon, residing in Tema, Arabia)
+2nd Ruler: BELSHAZZAR     (Eldest son, Co-regent ruling inside Babylon)
+3rd Ruler: DANIEL         (Offered the highest vacant post in Dan. 5:16, 29)</pre>
+
+<div class="level-card level-history">
+  <p class="level-kicker">HISTORY</p>
+  <p>"Grandson" in this sitting follows the Bible's wider use of father/son for dynasty (Nebuchadnezzar as the gold-head ancestor), not a modern birth certificate. The chapter hangs on a king who knew the family lesson and still lifted Yahweh's cups to idols.</p>
+</div>
+
+<div class="part-header" id="mp2">
+  <p class="part-kicker">Main Point 2</p>
+  <h3>The Anatomy of Sacrilege and Sinning Against Light</h3>
+  <p class="part-subtitle">Daniel 5:2–4, 18–23</p>
+</div>
+
+<p>As the wine flowed, Belshazzar ordered the sacred gold and silver vessels taken by Nebuchadnezzar from Yahweh's temple in Jerusalem (Daniel 1:2) to be brought into the banquet hall. The king, his princes, his wives, and his concubines drank from those consecrated cups while singing praises to "the gods of gold, and of silver, of brass, of iron, of wood, and of stone" (Daniel 5:4).</p>
+
+<p>This was not merely bad manners; it was deliberate sacrilege:</p>
+
+<div class="framework-card">
+  <p class="framework-card-kicker">Desecrating the consecrated</p>
+  <p>Sacrilege is taking that which has been set apart exclusively for the holy worship of God and dragging it into common, self-serving, or demonic usage.</p>
+</div>
+<div class="framework-card">
+  <p class="framework-card-kicker">Defying the living God</p>
+  <p>By praising idols using the very vessels designed for Yahweh's sanctuary, Belshazzar staged an intentional theological provocation, declaring Babylon's idols superior to the God of Israel. Notice that the materials praised — gold, silver, brass, iron (Daniel 5:4) — mockingly mirrored the metals of Nebuchadnezzar's colossus in Daniel 2.</p>
+</div>
+<div class="framework-card">
+  <p class="framework-card-kicker">Sinning against known revelation</p>
+  <p>When Daniel was summoned to interpret the writing, he delivered a scathing indictment before reading a single word (Daniel 5:18–23). Daniel reminded Belshazzar of how God had humbled his grandfather Nebuchadnezzar into the dust until he repented. Daniel looked the young monarch in the eyes and said: <em>"And thou his son, O Belshazzar, hast not humbled thine heart, though thou knewest all this"</em> (Daniel 5:22). Belshazzar's judgment was swift because he sinned against light he already possessed.</p>
+</div>
+
+<div class="part-header" id="mp3">
+  <p class="part-kicker">Main Point 3</p>
+  <h3>The Handwriting on the Plaster</h3>
+  <p class="part-subtitle">The divine audit</p>
+</div>
+
+<p>The revelry halted abruptly when a mysterious hand appeared, writing four words into the lime plaster of the palace wall, directly opposite the royal lampstand (Daniel 5:5). Belshazzar was terrified: his facial color drained, his hip joints loosened, and his knees knocked together in terror (Daniel 5:6).</p>
+
+<blockquote class="scripture-quote pull-quote">"In the same hour came forth fingers of a man's hand, and wrote over against the candlestick upon the plaister of the wall of the king's palace." — Daniel 5:5 (KJV)</blockquote>
+
+<pre class="prophecy-diagram">THE WALL OF AUDIT (DANIEL 5:25–28)
+INSCRIPTION       MARKETPLACE NOUN     DIVINE VERB INTERPRETATION
+MENE              A Mina (Currency)   ──▶ NUMBERED: God has numbered your days and finished it.
+MENE              (Repeated for emphasis)
+TEKEL             A Shekel (Weight)   ──▶ WEIGHED: You are weighed on the scales and found wanting.
+UPHARSIN / PERES  Half-minas / Division──▶ DIVIDED: Your kingdom is divided and given to the Medo-Persians.</pre>
+
+<p>The words MENE, MENE, TEKEL, UPHARSIN were drawn from the standard weights and measures of the ancient Near Eastern marketplace (minas, shekels, and half-minas). Daniel read them through the lens of God's sovereign justice:</p>
+
+<ul>
+  <li><strong>MENE (Numbered):</strong> God has audited your administration, counted every day of your rule, and closed your account. Your probation has expired.</li>
+  <li><strong>TEKEL (Weighed):</strong> You have been placed upon the moral balances of divine justice and have been found light — utterly lacking in righteousness.</li>
+  <li><strong>PERES (Divided):</strong> A brilliant wordplay in Aramaic: <em>peres</em> means both "divided" and points directly to the <em>Paras</em> (the Persians). The Babylonian Empire was to be dismantled and handed to the Medo-Persians.</li>
+</ul>
+
+<div class="level-card level-text">
+  <p class="level-kicker">TEXT</p>
+  <p>Every throne, institution, and individual life stands before an open ledger in Heaven. God numbers the days of power, weighs moral character, and when probation is exhausted, closes the account.</p>
+</div>
+
+<div class="part-header" id="mp4">
+  <p class="part-kicker">Main Point 4</p>
+  <h3>The Fall of Babylon and the Precision of Prophecy</h3>
+  <p class="part-subtitle">October 11/12, 539 B.C.</p>
+</div>
+
+<p>That very night (October 11/12, 539 B.C.), Babylon fell without a prolonged siege. The Greek historians Herodotus (<em>Histories</em> 1.191) and Xenophon (<em>Cyropaedia</em> 7.5) record that Persian engineers diverted the waters of the Euphrates River into an artificial basin. Persian soldiers marched down the depleted riverbed, passed through the bronze river gates left unlocked during the drunken festivities, and seized the palace.</p>
+
+<p>Belshazzar was slain in the banquet hall, and Babylon passed to Darius the Mede (Daniel 5:30–31). The Nabonidus Chronicle (BM 35382) confirms this historical reality: Ugbaru and the troops of Cyrus entered Babylon "without battle."</p>
+
+<pre class="prophecy-diagram">THE FULFILLMENT OF HISTORICIST PROPHECY
+ISAIAH 45:1–3 (c. 712 B.C.)             DANIEL 5 / SECULAR HISTORY (539 B.C.)
+• Cyrus named by name 150 years prior   • Cyrus the Persian conquers Babylon
+• "To open before him the two-leaved gates" • River gates left unlocked during feast
+• River dried up before him             • Euphrates diverted by Persian engineers
+• The Head of Gold (Babylon)            • Replaced by the Chest of Silver (Medo-Persia)</pre>
+
+<p>The gold kingdom was officially replaced by the silver kingdom in a single evening, precisely validating the metallic sequence of Daniel 2.</p>
+
+<div class="part-header" id="mp5">
+  <p class="part-kicker">Main Point 5</p>
+  <h3>The Redemptive Core</h3>
+  <p class="part-subtitle">Cyrus as type and Christ as the true Deliverer</p>
+</div>
+
+<p>The fall of Babylon is not merely an ancient geopolitical event; it is a profound redemptive type pointing to Jesus Christ.</p>
+
+<pre class="prophecy-diagram">THE REDEMPTIVE TYPOLOGY
+CYRUS THE DELIVERER                       JESUS CHRIST THE REDEEMER
+• Named God's "anointed" (Isa. 45:1)      • The true Anointed One, the Messiah
+• Overthrew literal Babylon               • Overthrows spiritual Babylon (Rev. 18)
+• Dried the waters of the Euphrates       • Conquers the river of sin and death
+• Liberated Jewish captives without price • Liberates sinners from captivity to Satan
+• Commanded the rebuilding of Jerusalem   • Builds the New Jerusalem, the eternal city</pre>
+
+<div class="biblical-case">
+  <p class="biblical-case-kicker">1. Cyrus, the anointed deliverer</p>
+  <p>God called Cyrus His "shepherd" (Isaiah 44:28) and His "anointed" (Hebrew: מָשִׁיחַ, <em>Mashiach</em>, Isaiah 45:1) — the only pagan ruler in Scripture to receive this title. Cyrus prefigured the Messiah by breaking the power of the oppressor, setting God's captive people free, and ordering the restoration of the temple.</p>
+</div>
+
+<div class="biblical-case">
+  <p class="biblical-case-kicker">2. Christ, the ultimate Auditor and King</p>
+  <p>In John 5:22, Jesus declared: <em>"For the Father judgeth no man, but hath committed all judgment unto the Son."</em> The hand that wrote on the plaster at Belshazzar's feast belongs to Jesus Christ, the sovereign Judge of every earthly power and individual human soul. He inspects the hidden chambers of our lives and audits the books of heaven (Revelation 20:11–12).</p>
+</div>
+
+<div class="biblical-case">
+  <p class="biblical-case-kicker">3. Found wanting, yet covered by imputed righteousness</p>
+  <p>When placed upon the balance scale of God's holy law, every human being faces the terrifying verdict of TEKEL: <em>"Thou art weighed in the balances, and art found wanting."</em> All have sinned and fall short of the glory of God (Romans 3:23); on our own merit, our moral weight is zero.</p>
+  <p>Here is the glory of the Gospel:</p>
+  <ul>
+    <li>On the cross of Calvary, Jesus Christ bore the full weight of divine justice for our sins.</li>
+    <li>When a sinner repents and places their faith in Christ, His perfect righteousness is credited to our account (2 Corinthians 5:21; Romans 5:18–19).</li>
+    <li>When God weighs the believer, we are no longer found wanting; we possess the infinite, unassailable moral weight of the Son of God Himself.</li>
+  </ul>
+</div>
+
+<div class="level-card level-christ">
+  <p class="level-kicker">CHRIST</p>
+  <p>If you stand in your own merit, you are found wanting. If you are clothed in the righteousness of Christ, you can stand before the throne with exceeding joy.</p>
+</div>
+
+<div class="part-header" id="apply">
+  <p class="part-kicker">Practical Application</p>
+  <h3>Navigating the Feasts of Modern Babylon</h3>
+</div>
+
+<p>Belshazzar's downfall provides sobering warnings for the modern world:</p>
+
+<div class="framework-card">
+  <p class="framework-card-kicker">Beware of feasting on borrowed holy things</p>
+  <p>The world routinely takes what belongs to God — the human body, sexuality, truth, time, and worship — and treats them as playthings for selfish pleasure. God will not be mocked; whatever a man sows, that shall he also reap (Galatians 6:7).</p>
+</div>
+<div class="framework-card">
+  <p class="framework-card-kicker">Do not presume upon past mercy</p>
+  <p>Belshazzar knew what God had done to Nebuchadnezzar and presumed he could escape judgment. Ignored truth becomes an indictment.</p>
+</div>
+<div class="framework-card">
+  <p class="framework-card-kicker">Anchor your life in Christ's righteousness</p>
+  <p>Worldly security can vanish overnight, just as Babylon fell in a single hour (Revelation 18:10). The only refuge from the divine scale is the righteousness of Jesus Christ.</p>
+</div>
+
+<div class="principle-card">
+  <p class="principle-card-kicker">The principle to remember</p>
+  <ul>
+    <li><strong>TEXT</strong> — Does Daniel 5:22 say Belshazzar knew the family lesson and still lifted himself against Heaven?</li>
+    <li><strong>HISTORY</strong> — Do the cylinders, Verse Account, and Nabonidus Chronicle confirm the co-regency and a fall "without battle"?</li>
+    <li><strong>INTERPRETATION</strong> — Are MENE, TEKEL, PERES marketplace weights read as Heaven's audit — numbered, weighed, divided?</li>
+    <li><strong>CHRIST</strong> — Does the scale find you wanting in yourself, or covered by the righteousness of the Son?</li>
+  </ul>
+</div>
+
+<div class="next-sitting-card">
+  <p class="next-sitting-kicker">Next lesson</p>
+  <h4>Sheet 6 — Daniel 6: The Pit of Hunger</h4>
+  <p>Daniel now must serve under the silver kingdom. Its unchangeable law will test whether he can keep praying to the Most High when civil decree forbids it.</p>
+</div>
+'''
+
+OUT.write_text(CONTENT.strip(), encoding="utf-8")
+print(f"Wrote {len(CONTENT)} chars to {OUT}")

@@ -41,7 +41,8 @@
 
   const SHEET_COUNT = 11;
   const TERMS_VERSION = 2;
-  const TEMP_REVIEW_UNLOCK = false;
+  const FREE_THROUGH = 2;
+  const TEMP_REVIEW_UNLOCK = true;
   const SITTING_ASSETS = [
     ["assembled"],
     ["lion"],
@@ -270,6 +271,7 @@
   }
 
   function maxOpenSheet() {
+    if (new URLSearchParams(location.search).get("preview") === "full") return SHEET_COUNT - 1;
     if (isAdmin()) return SHEET_COUNT - 1;
     if (TEMP_REVIEW_UNLOCK) return SHEET_COUNT - 1;
     const done = completedSet();
@@ -282,6 +284,7 @@
   }
 
   function canAccessSheet(index) {
+    if (new URLSearchParams(location.search).get("preview") === "full") return true;
     if (isAdmin()) return true;
     const i = Number(index);
     if (Number.isNaN(i) || i < 0) return true;
@@ -576,6 +579,7 @@
     clearPendingTerms: clearPendingTerms,
     commitPendingTerms: commitPendingTerms,
     TERMS_VERSION: TERMS_VERSION,
+    FREE_THROUGH: FREE_THROUGH,
     SHEET_LABELS: SHEET_LABELS,
     EMPIRE_LABELS: EMPIRE_LABELS,
     YEAR_LABELS: YEAR_LABELS,

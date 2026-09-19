@@ -63,7 +63,7 @@
           </span>
         </div>
         <p class="text-xs text-ink-600 dark:text-paper-400 mb-6 leading-relaxed">
-          Before taking the checkpoint quiz, you must verify the foundational prophetic metric in Scripture and correctly classify the three historical schools of apocalyptic interpretation.
+          Before taking the checkpoint quiz, verify the day-for-year precedent in Scripture (precedent, not universal rule) and correctly classify the three schools of apocalyptic interpretation.
         </p>
 
         <!-- Task 1: Year-Day Scriptural Formulation -->
@@ -136,7 +136,7 @@
               { id: 'm2', text: "Prophecy is an unbroken, continuous chain of historical fulfillment from 605 B.C. through divided Europe to the Second Advent.", correct: "historicism" },
               { id: 'm3', text: "All apocalyptic prophecies were completed by the destruction of Jerusalem in A.D. 70 and the fall of pagan Rome.", correct: "preterism" },
               { id: 'm4', text: "The Antichrist is a single future individual reigning for 3.5 literal years in a rebuilt temple in Jerusalem.", correct: "futurism" },
-              { id: 'm5', text: "The 1,260 prophetic days represent 1,260 literal solar years of ecclesiastical supremacy in Europe (538–1798).", correct: "historicism" }
+              { id: 'm5', text: "The number 1,260 years is built from Daniel's 'time, times, and half a time' through day-year and calendar conventions — four interpretive layers, not a number Daniel prints outright.", correct: "historicism" }
             ].map((item, idx) => `
               <div class="p-3 rounded-lg bg-paper-100/60 dark:bg-paper-900/60 border border-paper-300/80 dark:border-paper-800 flex flex-col sm:flex-row sm:items-center justify-between gap-3" data-item-id="${item.id}" data-correct="${item.correct}">
                 <span class="text-ink-800 dark:text-paper-200 leading-snug"><strong class="font-mono text-ink-500 dark:text-paper-500 mr-1">${idx + 1}.</strong> ${item.text}</span>
@@ -309,9 +309,9 @@
           <div id="wb1-civic-matrix" class="space-y-2 mb-4 text-xs">
             ${[
               { id: 'c0', text: "Mastering Akkadian cuneiform literature, mathematics, and court administrative law.", correct: "civic" },
-              { id: 'c1', text: "Consuming royal meats offered to Bel-Marduk and unclean foods under Leviticus 11.", correct: "defilement" },
+              { id: 'c1', text: "Consuming royal meats that, by historical reconstruction, were first presented to pagan deities and included unclean foods under Leviticus 11.", correct: "defilement" },
               { id: 'c2', text: "Serving diligently as counselors and state administrators in the government of Babylon.", correct: "civic" },
-              { id: 'c3', text: "Drinking royal palace wine poured out in daily libations to pagan deities.", correct: "defilement" }
+              { id: 'c3', text: "Drinking royal palace wine tied to pagan court liturgy (historical reconstruction from ancient Near Eastern royal custom).", correct: "defilement" }
             ].map((item, idx) => `
               <div class="p-2.5 rounded-lg bg-paper-100/60 dark:bg-paper-900/60 border border-paper-300 dark:border-paper-800 flex items-center justify-between gap-2" data-civic-id="${item.id}" data-correct="${item.correct}">
                 <span class="text-ink-800 dark:text-paper-200 text-xs">${idx + 1}. ${item.text}</span>

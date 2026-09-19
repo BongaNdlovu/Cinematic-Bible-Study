@@ -238,31 +238,31 @@
     };
 
     const SHEET_CONTEXT = [
-      { img: "assets/study/epochs/jerusalem-siege.jpg", title: "How you read decides what you see", body: "Daniel is not a puzzle book for the curious. It is a wartime document written from exile, claiming that God — not Marduk, not Rome, not any later throne — holds the tape of history.", source: "Daniel 1:2; 2:28. “There is a God in heaven who reveals secrets.”", exegesis: "Historicism reads an unbroken chain from the prophet’s day to the Advent. Preterism and futurism were later answers that break that chain." },
-      { img: "assets/study/epochs/exile-court.jpg", title: "The court of the gold kingdom", body: "Ashpenaz’s school was assimilation: language, literature, and new names. Daniel drew the line at the king’s table — food offered to idols and unclean flesh.", source: "Daniel 1:8; Genesis 1:29. The ten-day test of zeroim.", exegesis: "Faithfulness in diet and worship is not a side issue. Clouded minds cannot read sealed books." },
-      { img: "assets/study/statue-nebuchadnezzar.jpg", title: "A dream the magicians could not steal", body: "Nebuchadnezzar demanded the dream itself, not a flattering interpretation. Court occultism failed. Prayer succeeded. The colossus was shown as history in metals.", source: "Daniel 2:1–28. Babylonian Chronicle BM 21946 for the early reign.", exegesis: "Gold, silver, bronze, iron, then clay: successive world kingdoms, not concurrent local powers." },
-      { img: "assets/plates/dura-plain.jpg", title: "The plain of Dura", body: "An all-gold image sixty cubits high answered Daniel 2 with a counter-creed: Babylon will not be replaced. Forced worship is the prototype of the last crisis.", source: "Daniel 3. East India House inscription of Nebuchadnezzar’s building pride.", exegesis: "State-enforced worship of a counterfeit image is the pattern of Revelation 13." },
-      { img: "assets/study/babylon-sunset.jpg", title: "Seven times of madness", body: "The king who built hanging gardens is driven to eat grass. When reason returns, he blesses the Most High. Pride is diagnosed as beastliness.", source: "Daniel 4. The Prayer of Nabonidus is a later echo of royal humiliation.", exegesis: "Heaven rules the kingdom of men and gives it to whomsoever it will." },
-      { img: "assets/study/epochs/babylon-fall.jpg", title: "The night the river dropped", body: "Belshazzar drinks from temple vessels while the Medes are already in the bed of the Euphrates. Numbered, weighed, divided.", source: "Daniel 5. Nabonidus Chronicle; Cyrus Cylinder.", exegesis: "The gold head ends exactly when the silver is due. Sacrilege accelerates the fall; it does not cause the calendar." },
-      { img: "assets/study/daniel-lions-den.jpg", title: "The law that could not be changed", body: "Medo-Persian irrevocability is used against Daniel’s open window. Civil law collides with the first commandment. The den is the answer.", source: "Daniel 6. The law of the Medes and Persians.", exegesis: "Faithfulness is public. The decree that cannot be changed is overruled by a God who can shut mouths." },
-      { img: "assets/study/epochs/papal-rome.jpg", title: "Beasts from a wind-stirred sea", body: "The same four kingdoms return as predators. Among ten horns a little horn uproots three, speaks against the Most High, and wears out the saints 1,260 years.", source: "Daniel 7. Heruli 493, Vandals 534, Ostrogoths 538.", exegesis: "The judgment scene of 7:9–14 is heavenly, not earthly. Thrones are set before the stone strikes." },
-      { img: "assets/study/epochs/sanctuary.jpg", title: "The ram, the goat, and 2,300 days", body: "Daniel 8 names Medo-Persia and Greece, then tracks a little horn against the heavenly tamid. Antiochus is too small and too early.", source: "Daniel 8:14, 17, 19–21. Nitsdaq: to be justified, restored, cleansed.", exegesis: "The vision is for the time of the end. 1844 is the historicist destination of the 2,300 days." },
-      { img: "assets/study/horizon/y457.jpg", title: "Seventy weeks cut off", body: "Gabriel returns to explain the unexplained line of chapter 8. Seventy weeks are severed from the 2,300 for Daniel’s people and the holy city.", source: "Daniel 9:24–27; Ezra 7. 457 B.C. to A.D. 34.", exegesis: "Messiah is cut off in the midst of the 70th week. That date seals the rest of the 2,300." },
-      { img: "assets/study/epochs/resurrection-dawn.jpg", title: "When Michael stands up", body: "Behind Persia and Greece is a war of princes. When the great Prince stands, intercession ends, trouble comes, and the dust-sleepers awake.", source: "Daniel 10–12. “You shall rest, and stand in your lot at the end of the days.”", exegesis: "The book’s last gift is not another chart. It is a name in a book and a bodily resurrection." }
+      { img: "assets/study/epochs/jerusalem-siege.jpg", title: "The prophetic blueprint", body: "Daniel opens in exile, but the Lord gave Jehoiakim into Nebuchadnezzar's hand (Daniel 1:2). Prophecy is God's historical roadmap — an unbroken chain pointing to Jesus Christ.", source: "Daniel 1:2; Daniel 9:26; Daniel 2:44; Luke 24:27.", exegesis: "Historicism keeps Babylon → Persia → Greece → Rome → divided Europe → Christ's kingdom as one chain. Preterism and futurism break that chain. Christ is the redemptive center: sovereignty in exile, sacrifice at the cross, Stone-King at the end." },
+      { img: "assets/study/epochs/exile-court.jpg", title: "The exilic crucible", body: "Ashpenaz's school was assimilation: language, literature, and new names. Daniel drew the line at the king's table — idol table-fellowship, Levitical defilement, and dulled spiritual clarity.", source: "Daniel 1:8; Genesis 1:29; Leviticus 11. The ten-day test of zeroim.", exegesis: "Civic competence is not covenant surrender. Consecration at the table preceded revelation — and foreshadows Christ's faithful obedience in the wilderness." },
+      { img: "assets/study/statue-nebuchadnezzar.jpg", title: "The metallic colossus", body: "Babylon's magicians confessed bankruptcy; Daniel prayed, and God revealed the master-framework of world history — from the head of gold to the stone that fills the earth.", source: "Daniel 2:28, 38–44. Babylonian Chronicle BM 21946.", exegesis: "One unbroken chain: Babylon → Medo-Persia → Greece → Rome → divided Europe → Christ's kingdom. The stone strikes the feet in the days of these kings — supernatural, not evolutionary." },
+      { img: "assets/plates/dura-plain.jpg", title: "The plain of Dura", body: "An all-gold image 60×6 cubits high was Nebuchadnezzar's imperial veto against Daniel 2 — bow or burn. Shadrach, Meshach, and Abednego answered: but if not, we will not bow.", source: "Daniel 3:1, 17–18, 25. Exodus 20:4–5.", exegesis: "Civic duty has a ceiling. Dura is the type; Revelation 13 the antitype. The Fourth in the fire foreshadows Christ at Dura and on Calvary." },
+      { img: "assets/study/babylon-sunset.jpg", title: "The emperor in the dust", body: "Nebuchadnezzar publishes his own humiliation: the threefold boast on the palace roof, seven years of beastly madness, and understanding restored when he lifts his eyes to heaven.", source: "Daniel 4:17, 27, 30, 34–37.", exegesis: "The Most High ruleth in the kingdom of men — three times. Seven times here are literal years, not 2,520. Christ is the humble King opposite Nebuchadnezzar's pride." },
+      { img: "assets/study/epochs/babylon-fall.jpg", title: "The handwriting on the plaster", body: "Belshazzar toasts idols with Yahweh's temple vessels while Medo-Persia diverts the Euphrates. Heaven writes an audit: numbered, weighed, divided.", source: "Daniel 5:22, 25–31; Isaiah 45:1–3. Nabonidus Chronicle BM 35382.", exegesis: "The gold head becomes silver in a single night. Belshazzar sinned against known light. On the scale we are TEKEL unless clothed in Christ's righteousness." },
+      { img: "assets/study/daniel-lions-den.jpg", title: "The pit of hunger", body: "Medo-Persian legal immutability is weaponized against Daniel's open window. The satraps find zero fraud; the pit of lions becomes an unmistakable type of Christ's sealed tomb.", source: "Daniel 6:4–5, 8, 10, 22, 26; Esther 8:8; Matthew 27:62–66.", exegesis: "Civil law has a divine ceiling at the First Commandment. Obedience to God is non-violent and faithful; the Living Deliverer breaks the seal of death." },
+      { img: "assets/study/epochs/papal-rome.jpg", title: "Beasts from a wind-stirred sea", body: "The same four kingdoms return as predators. Among ten horns a little horn uproots three, speaks against the Most High, and wears out the saints 1,260 years until the heavenly court convenes.", source: "Daniel 7:4–7, 8, 9–14, 24–27; Revelation 12:6, 14; 13:5.", exegesis: "The pre-advent judgment scene of 7:9–14 convenes in heaven before the stone strikes. Christ approaches the Ancient of Days as High Priest and King." },
+      { img: "assets/study/epochs/sanctuary.jpg", title: "The ram, the goat, and 2,300 days", body: "Gabriel names Media-Persia and Greece. The little horn attacks Christ's continual heavenly mediation (tamid). After 2,300 prophetic years, the heavenly sanctuary is vindicated (nitsdaq) on the antitypical Day of Atonement.", source: "Daniel 8:14, 17, 19–22; Leviticus 16:30; Hebrews 8:1–2; 9:23–26.", exegesis: "The vision belongs to the time of the end. Antiochus is far too small. In 1844, Christ entered the Most Holy Place of the heavenly sanctuary for the pre-advent judgment." },
+      { img: "assets/study/horizon/y457.jpg", title: "The 70 weeks and the cross", body: "Gabriel returns to explain the unexplained 2,300 days. Seventy weeks (490 years) are severed (chathak) for Daniel's people, anchored in Artaxerxes' 457 B.C. decree. In A.D. 27 Messiah is anointed, in A.D. 31 He is cut off, ending animal sacrifices on Calvary.", source: "Daniel 9:24–27; Ezra 7:11–26; Luke 3:1, 21–23; Matthew 27:51.", exegesis: "Calvary is the mathematical anchor of prophecy. Because the 70 weeks proved true to the exact season, the remaining 1,810 years carry the timeline with certainty to the heavenly sanctuary in 1844." },
+      { img: "assets/study/epochs/resurrection-dawn.jpg", title: "Michael stands in royal majesty", body: "Daniel 10–12 forms one undivided vision by the Tigris. When Michael stands up, high-priestly advocacy concludes, probation closes, the saints are delivered, and those sleeping in the dust awake in bodily resurrection.", source: "Daniel 10:5–6, 13; 11:22, 31; 12:1–3, 13; Hebrews 7:25; John 5:28–29.", exegesis: "Michael's standing up ('amad) marks Christ assuming His kingly reign as intercession ends. Deliverance belongs to all found in the Book; God promises Daniel rest and resurrection in his lot." }
     ];
 
     const SHEET_INSIGHTS = [
-      { genre: "Apocalyptic prophecy with historical narrative — the master key to how the rest of Scripture’s last-day visions are read.", section: "Old Testament Major Prophets; in the Hebrew Bible among the Writings, yet treated by Jesus as prophetic (Matthew 24:15).", theme: "God’s sovereignty over empires; a continuous chain of kingdoms; the year-day principle; a hope that outlasts every metal." },
-      { genre: "Court narrative of consecration. The first stand is dietary and liturgical, not military.", section: "Daniel 1 — the prologue of exile, 605 B.C.", theme: "Identity under renaming; worship at the table; wisdom that is ten times better than the occult guild." },
-      { genre: "Dream report and court confrontation that becomes a panorama of world history.", section: "Daniel 2 — the metallic colossus.", theme: "Successive kingdoms; deteriorating glory; a stone cut without hands." },
-      { genre: "Martyr narrative. The furnace is liturgy under duress.", section: "Daniel 3 — the plain of Dura.", theme: "Forced worship; “but if not”; the fourth figure in the fire." },
-      { genre: "Royal edict and humiliation psalm.", section: "Daniel 4 — seven times of madness.", theme: "Pride; the Most High rules; restoration after repentance." },
-      { genre: "Banquet-night judgment scene.", section: "Daniel 5 — handwriting on plaster.", theme: "Sacrilege; numbered-weighed-divided; the end of gold." },
-      { genre: "Civil-disobedience narrative under an unchangeable law.", section: "Daniel 6 — the lions’ den.", theme: "Open windows; first commandment vs. state; deliverance." },
-      { genre: "Night vision of beasts, horns, and a heavenly court.", section: "Daniel 7 — 553 B.C.", theme: "Little horn; 1,260 years; Ancient of Days; Son of Man receiving the kingdom." },
-      { genre: "Sanctuary apocalypse in ram-and-goat symbols.", section: "Daniel 8 — Ulai canal.", theme: "Tamid taken away; 2,300 days; nitsdaq; time of the end." },
-      { genre: "Penitential prayer answered by a dated messianic timetable.", section: "Daniel 9 — 538 B.C.", theme: "Chathak; 70 weeks; midst of the week; the cross as the seal of 1844." },
-      { genre: "Theophany, cosmic war, and resurrection promise.", section: "Daniel 10–12.", theme: "Michael; close of probation; time of trouble; bodily rising; rest in the lot." }
+      { genre: "Prologue — three hermeneutical roads, year-day scale at the cross, Christ as redemptive center.", section: "Daniel 1:2; Numbers 14:34; Ezekiel 4:6; Daniel 2:38–44; Daniel 9:24–27; Luke 24:27.", theme: "Unbroken historicist chain; Messiah cut off; Stone-King; why historicism matters today." },
+      { genre: "Exilic crucible — sovereign judgment, identity under renaming, consecration at the table, Christ as faithful Son.", section: "Daniel 1 — three sieges, Ashpenaz's school, the royal table, 605 B.C.", theme: "Civic cooperation vs. covenant surrender; zeroim and the ten-day test; redemptive typology of Jesus in the wilderness." },
+      { genre: "Master-framework vision — historicist chain, metallurgic gradient, divided feet, Stone-King.", section: "Daniel 2 — impasse of human wisdom, four empires, iron and clay, stone without hands.", theme: "Thou art this head of gold; they shall not cleave; Christ pulverizes and fills the earth." },
+      { genre: "Imperial veto and furnace crisis — civic duty vs. worship, Dura/Revelation 13 type, Christ in the fire.", section: "Daniel 3 — all-gold image, but if not faith, fourth like the Son of God.", theme: "State-enforced worship; non-transactional loyalty; Christophany and Calvary." },
+      { genre: "Imperial encyclical — cosmic tree, Watcher, threefold boast, boanthropy, restored sanity, Christ's kenosis.", section: "Daniel 4 — seven literal years, eyes lifted, King of heaven praised.", theme: "Heaven rules; pride descends to beastliness; humility exalts; Philippians 2 antidote." },
+      { genre: "Banquet-night audit — co-regency history, sacrilege against light, MENE/TEKEL/PERES, Cyrus as type, imputed righteousness.", section: "Daniel 5 — October 539 B.C.; Isaiah 45:1–3; John 5:22; 2 Corinthians 5:21.", theme: "Known light ignored; gold replaced by silver; found wanting unless covered by Christ." },
+      { genre: "Constitutional conflict and pit deliverance — irrevocable Persian law, forensic audit, open window, and resurrection type.", section: "Daniel 6 — Babylon under Medo-Persian rule, c. 538 B.C.; Acts 5:29; Matthew 27–28.", theme: "The unalterable statute; blameless civic integrity; prayer facing Jerusalem; Christ conquers the roaring lion." },
+      { genre: "Apocalyptic night vision — four predatory beasts, diverse eleventh horn, 1,260-year span (538–1798), and pre-advent heavenly court.", section: "Daniel 7 — Babylon, c. 553 B.C.; Revelation 12–13; Matthew 26:64.", theme: "Unbroken succession; church-state counterfeit; Arian horns uprooted; Son of Man crowned before Ancient of Days." },
+      { genre: "Sanctuary apocalypse — named ram and goat, little horn in two phases, attack on the tamid, refutation of Antiochus, and nitsdaq in 1844.", section: "Daniel 8 — Susa by the Ulai, c. 551 B.C.; Leviticus 16; Hebrews 8–9.", theme: "Sacrificial animals; continual mediation obscured; forensic vindication; Christ in the heavenly Most Holy Place." },
+      { genre: "Messianic prophecy & mathematical anchor — Daniel's penitential prayer, chathak severed from 2,300 days, four Persian decrees, midst of 70th week, and refutation of futurist gap.", section: "Daniel 9 — Babylon, c. 538 B.C.; Ezra 7; Matthew 27:51; Mark 1:15.", theme: "The 457 B.C. decree; A.D. 27 baptism; A.D. 31 cross; veil rent; 1,810-year balance to 1844." },
+      { genre: "Tigris theophany, geopolitical march, and resurrection hope — unseen warfare, Daniel 11 succession, close of probation, time of trouble, and waking from the dust.", section: "Daniel 10:1 – 12:13 — Tigris River, c. 536 B.C.; Hebrews 7:25; John 5:28–29; Revelation 22:11.", theme: "The Man in linen; Michael the Prince; Persian and Greek march; 'amad royal stance; literal bodily resurrection; rest in thy lot." }
     ];
 
     function showInstrument(id) {
@@ -326,15 +326,15 @@
     }
 
     const SHEET_COMPETENCIES = [
-      "Verifying the Prophetic Year-Day Metric",
+      "The Prophetic Blueprint — Christ at the Center of the Chain",
       "Distinguishing Civic Service from Covenant Defilement",
       "Defending the Contiguous Chain of Four Empires",
       "Discerning Forced Worship on the Plain of Dura",
       "Reading the Seven Times of Nebuchadnezzar’s Humiliation",
-      "Weighing Imperial Pride at the Belshazzar Court",
-      "Demonstrating Uncompromising Prayer in the Den",
+      "Reading the Divine Balance Sheet — Numbered, Weighed, Covered",
+      "Uncompromising Prayer and the Resurrected Deliverer",
       "Verifying the 1,260-Year Ecclesiastical Supremacy",
-      "Contrasting the Ram and Goat with Antiochus Hypotheses",
+      "Vindicating the Sanctuary: 2,300 Days and the High Priest",
       "Calculating the 70 Weeks Severed from the 2,300 Days",
       "Standing Prepared as the Sealed Book Unlocks"
     ];
@@ -1402,6 +1402,7 @@
     }
 
     function canAccessSheet(index) {
+      if (new URLSearchParams(location.search).get("preview") === "full") return true;
       if (window.BAJourney && typeof window.BAJourney.canAccessSheet === 'function') {
         return window.BAJourney.canAccessSheet(index);
       }
@@ -1950,6 +1951,11 @@
       const container = document.getElementById('quiz-container');
       container.innerHTML = '';
       answeredQuestions = {};
+      const badge = document.getElementById('quiz-badge');
+      if (badge) {
+        const n = (quizzes && quizzes.length) || 0;
+        badge.textContent = n + ' Question' + (n === 1 ? '' : 's') + ' to Advance';
+      }
 
       quizzes.forEach((q, qIdx) => {
         const qBox = document.createElement('div');
@@ -2128,6 +2134,7 @@
     };
 
     function clampStartSheet(index) {
+      if (new URLSearchParams(location.search).get("preview") === "full") return index;
       if (window.BAJourney && typeof window.BAJourney.clampToAccessible === 'function') {
         return window.BAJourney.clampToAccessible(index);
       }
@@ -2170,6 +2177,24 @@
         });
       }
       if (guideSkip) guideSkip.addEventListener('click', finishIntroGuide);
+      const accessOpen = document.getElementById('access-open-btn');
+      const accessPanel = document.getElementById('access-panel');
+      const accessClose = document.getElementById('access-close');
+      const accessEnable = document.getElementById('access-enable-preview');
+      if (accessOpen && accessPanel) {
+        accessOpen.addEventListener('click', () => { accessPanel.hidden = false; });
+      }
+      if (accessClose && accessPanel) {
+        accessClose.addEventListener('click', () => { accessPanel.hidden = true; });
+      }
+      if (accessEnable && window.BAJourney && typeof window.BAJourney.enablePreview === 'function') {
+        accessEnable.addEventListener('click', () => {
+          window.BAJourney.enablePreview();
+          if (accessPanel) accessPanel.hidden = true;
+          showToast('Full preview enabled.');
+          if (typeof loadSheet === 'function') loadSheet(currentSheetIndex);
+        });
+      }
       const certBtn = document.getElementById('btn-download-certificate');
       if (certBtn) certBtn.addEventListener('click', openCertificateIfReady);
       syncCertificateCta();

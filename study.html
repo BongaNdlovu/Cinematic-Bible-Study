@@ -30,11 +30,46 @@
       text-rendering: optimizeLegibility;
     }
 
+    .article-body {
+      font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
+    }
+
     .article-body p {
-      margin-bottom: 1.65rem;
-      line-height: 1.85;
+      margin-bottom: 1.85rem;
+      line-height: 1.9;
       font-size: var(--reading-font-size, 1.125rem) !important;
+      letter-spacing: -0.003em;
       transition: font-size 0.15s ease-out;
+    }
+
+    .article-body strong {
+      font-weight: 600;
+      color: #fce7b0;
+      letter-spacing: -0.01em;
+    }
+    body.paper-mode .article-body strong,
+    body.white-mode .article-body strong {
+      color: #292524;
+    }
+
+    .article-body em {
+      font-style: italic;
+      color: #f3e5c8;
+    }
+    body.paper-mode .article-body em,
+    body.white-mode .article-body em {
+      color: #44403c;
+    }
+
+    .article-body ul:not(.lesson-toc-list),
+    .article-body ol:not(.lesson-toc-list) {
+      margin: 1.25rem 0 1.75rem 1.5rem;
+      padding: 0;
+    }
+
+    .article-body li {
+      margin-bottom: 0.65rem;
+      line-height: 1.75;
     }
 
     .sheet-verify {
@@ -561,6 +596,595 @@
       border-left: 3px solid #c9a227;
     }
     body.white-mode .from-last-sitting-kicker { color: #8a6414; }
+
+    /* =========================================================================
+       CINEMATIC LESSON CODEX & CARDS ARCHITECTURE
+       ========================================================================= */
+
+    /* Table of Contents: Illuminated Scriptorium Index */
+    .lesson-toc {
+      position: relative;
+      margin: 2rem 0 2.75rem;
+      padding: 1.35rem 1.6rem;
+      border: 1px solid rgba(212, 175, 55, 0.4);
+      border-radius: 14px;
+      background: linear-gradient(145deg, rgba(28, 24, 18, 0.92) 0%, rgba(14, 12, 10, 0.98) 100%);
+      box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.8), 0 0 1px 1px rgba(212, 175, 55, 0.25), inset 0 1px 0 rgba(255, 235, 175, 0.15);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+    .lesson-toc-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 10.5px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: #e5b93b;
+      margin: 0 0 0.95rem;
+      text-shadow: 0 0 12px rgba(229, 185, 59, 0.35);
+    }
+    .lesson-toc-kicker::before {
+      content: "✦";
+      font-size: 10px;
+      color: #fbbf24;
+    }
+    .lesson-toc-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.75rem 1.75rem;
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+    .lesson-toc-list li {
+      position: relative;
+      padding-left: 1.35rem;
+      transition: transform 0.15s ease;
+    }
+    .lesson-toc-list li:hover {
+      transform: translateX(3px);
+    }
+    .lesson-toc-list li::before {
+      content: "›";
+      position: absolute;
+      left: 0;
+      top: -2px;
+      font-size: 1.2rem;
+      color: #d4a017;
+      font-weight: 700;
+    }
+    .lesson-toc-list a {
+      color: #ede5d5;
+      text-decoration: none;
+      border-bottom: 1px dotted rgba(212, 175, 55, 0.4);
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      display: inline;
+    }
+    .lesson-toc-list a:hover {
+      color: #fbbf24;
+      border-bottom: 1px solid #fbbf24;
+      text-shadow: 0 0 12px rgba(251, 191, 36, 0.4);
+    }
+    @media (max-width: 640px) {
+      .lesson-toc-list { grid-template-columns: 1fr; gap: 0.65rem; }
+    }
+    body.paper-mode .lesson-toc {
+      background: rgba(255, 252, 245, 0.92);
+      border-color: rgba(180, 130, 30, 0.45);
+      box-shadow: 0 10px 30px -6px rgba(100, 80, 50, 0.15);
+    }
+    body.paper-mode .lesson-toc-list a { color: #3f3421; }
+    body.white-mode .lesson-toc {
+      background: #ffffff;
+      border-color: #e2d7c0;
+      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.06);
+    }
+    body.white-mode .lesson-toc-list a { color: #1c1917; }
+
+    /* Governing Principle: The Imperial Keystone */
+    .governing-principle {
+      position: relative;
+      margin: 2.25rem 0 2.75rem;
+      padding: 1.35rem 1.75rem;
+      border-left: 4.5px solid #e5b93b;
+      background: linear-gradient(135deg, rgba(34, 28, 20, 0.92) 0%, rgba(18, 15, 12, 0.98) 100%);
+      border-radius: 0 14px 14px 0;
+      box-shadow: 0 14px 36px -10px rgba(0, 0, 0, 0.75), 0 0 1px 1px rgba(212, 175, 55, 0.25), inset 0 1px 0 rgba(255, 235, 175, 0.12);
+    }
+    .governing-principle-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: #fbbf24;
+      margin: 0 0 0.65rem;
+      text-shadow: 0 0 10px rgba(251, 191, 36, 0.3);
+    }
+    .governing-principle-kicker::before {
+      content: "◈";
+      color: #fbbf24;
+    }
+    .governing-principle p {
+      font-family: 'Newsreader', Georgia, serif;
+      font-size: 1.16rem !important;
+      line-height: 1.8;
+      color: #faf6eb;
+      margin: 0 !important;
+    }
+    body.paper-mode .governing-principle {
+      background: rgba(253, 248, 237, 0.95);
+      border-left-color: #9a7217;
+    }
+    body.paper-mode .governing-principle p { color: #2d2618; }
+    body.white-mode .governing-principle {
+      background: #faf8f2;
+      border-left-color: #c9a227;
+      border: 1px solid #ebdcc0;
+      border-left-width: 4.5px;
+    }
+    body.white-mode .governing-principle p { color: #1c1917; }
+
+    /* Exilic Chronicle Bridge: From Last Sitting */
+    .from-last-sitting {
+      position: relative;
+      margin: 1.75rem 0 2.25rem;
+      padding: 1.15rem 1.5rem;
+      border-left: 3.5px solid #d4a017;
+      background: linear-gradient(135deg, rgba(28, 24, 18, 0.8) 0%, rgba(16, 14, 12, 0.9) 100%);
+      border-radius: 0 12px 12px 0;
+      font-size: 1.02rem;
+      line-height: 1.75;
+      color: #e4dacf;
+      box-shadow: 0 8px 24px -6px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 235, 175, 0.08);
+      word-break: break-word;
+      overflow-wrap: break-word;
+    }
+    .from-last-sitting-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #e5b93b;
+      margin: 0 0 0.5rem;
+      font-weight: 700;
+      display: block;
+    }
+    .from-last-sitting-kicker::before {
+      content: "↩";
+      color: #e5b93b;
+      margin-right: 0.35rem;
+    }
+    .from-last-sitting p {
+      margin: 0 !important;
+      font-family: 'Newsreader', Georgia, serif;
+      font-size: 1.05rem !important;
+      line-height: 1.75;
+    }
+
+    /* Cinematic Act Headers: Part Headers */
+    .part-header {
+      position: relative;
+      margin: 4rem 0 2rem;
+      padding-top: 2.25rem;
+      border-top: none;
+    }
+    .part-header::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1.5px;
+      background: linear-gradient(90deg, transparent 0%, rgba(212, 175, 55, 0.25) 15%, rgba(245, 205, 95, 0.85) 50%, rgba(212, 175, 55, 0.25) 85%, transparent 100%);
+      box-shadow: 0 0 10px rgba(245, 205, 95, 0.45);
+    }
+    .part-header:first-of-type {
+      margin-top: 1.75rem;
+      padding-top: 0;
+    }
+    .part-header:first-of-type::before {
+      display: none;
+    }
+    .part-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 10.5px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: #e5b93b;
+      margin: 0 0 0.65rem;
+      padding: 0.2rem 0.75rem;
+      border-radius: 999px;
+      background: rgba(212, 175, 55, 0.1);
+      border: 1px solid rgba(212, 175, 55, 0.35);
+      box-shadow: 0 0 14px rgba(212, 175, 55, 0.18);
+    }
+    .part-kicker::before {
+      content: "";
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: #e5b93b;
+      box-shadow: 0 0 6px #e5b93b;
+    }
+    .part-header h3 {
+      font-family: 'Newsreader', Georgia, serif;
+      font-size: 1.95rem !important;
+      font-weight: 700;
+      line-height: 1.25;
+      letter-spacing: -0.02em;
+      margin: 0 0 0.55rem !important;
+      color: #faf6eb;
+      text-shadow: 0 2px 16px rgba(0, 0, 0, 0.7);
+    }
+    body.paper-mode .part-header h3,
+    body.white-mode .part-header h3 {
+      color: #1c1917;
+      text-shadow: none;
+    }
+    .part-subtitle {
+      font-family: 'Newsreader', Georgia, serif;
+      font-size: 1.05rem;
+      line-height: 1.55;
+      color: #d1c4a5;
+      margin: 0;
+      font-style: italic;
+    }
+    body.paper-mode .part-subtitle,
+    body.white-mode .part-subtitle {
+      color: #57534e;
+    }
+
+    /* Artifact & Framework Cards Ecosystem */
+    .level-card, .historical-note, .caution-card, .framework-card, .source-card, .qa-card, .principle-card, .next-sitting-card, .checkpoint-card, .biblical-case, .layer-stack {
+      position: relative;
+      margin: 2rem 0;
+      padding: 1.35rem 1.6rem;
+      border-radius: 12px;
+      word-break: break-word;
+      overflow-wrap: break-word;
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease;
+      box-shadow: 0 10px 30px -8px rgba(0, 0, 0, 0.7);
+    }
+    .level-card:hover, .historical-note:hover, .caution-card:hover, .framework-card:hover, .source-card:hover, .principle-card:hover, .biblical-case:hover, .layer-stack:hover {
+      box-shadow: 0 14px 38px -8px rgba(0, 0, 0, 0.85);
+    }
+    .level-kicker, .historical-note-kicker, .caution-card-kicker, .framework-card-kicker, .source-card-kicker, .principle-card-kicker, .next-sitting-kicker, .checkpoint-kicker, .biblical-case-kicker, .layer-stack-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-weight: 700;
+      margin: 0 0 0.75rem;
+    }
+
+    /* Framework Card: Analytical Exilic Study Plaque */
+    .framework-card {
+      border: 1px solid rgba(212, 175, 55, 0.38);
+      background: linear-gradient(135deg, rgba(28, 24, 19, 0.88) 0%, rgba(16, 14, 11, 0.96) 100%);
+      box-shadow: 0 12px 32px -8px rgba(0, 0, 0, 0.75), 0 0 1px 1px rgba(212, 175, 55, 0.2), inset 0 1px 0 rgba(255, 235, 175, 0.1);
+    }
+    .framework-card:hover {
+      border-color: rgba(212, 175, 55, 0.55);
+      box-shadow: 0 16px 40px -8px rgba(0, 0, 0, 0.85), 0 0 16px rgba(212, 175, 55, 0.22);
+    }
+    .framework-card-kicker { color: #e5b93b; }
+    .framework-card-kicker::before { content: "▪"; color: #e5b93b; }
+
+    /* Level Cards */
+    .level-text {
+      border-left: 4px solid #3b82f6;
+      border-top: 1px solid rgba(59, 130, 246, 0.2);
+      border-right: 1px solid rgba(59, 130, 246, 0.2);
+      border-bottom: 1px solid rgba(59, 130, 246, 0.2);
+      background: linear-gradient(135deg, rgba(30, 58, 138, 0.2) 0%, rgba(15, 23, 42, 0.9) 100%);
+    }
+    .level-text .level-kicker { color: #60a5fa; }
+    .level-text .level-kicker::before { content: "📜"; font-size: 10px; }
+
+    .level-history {
+      border-left: 4px solid #94a3b8;
+      border-top: 1px solid rgba(148, 163, 184, 0.2);
+      border-right: 1px solid rgba(148, 163, 184, 0.2);
+      border-bottom: 1px solid rgba(148, 163, 184, 0.2);
+      background: linear-gradient(135deg, rgba(51, 65, 85, 0.25) 0%, rgba(15, 23, 42, 0.9) 100%);
+    }
+    .level-history .level-kicker { color: #cbd5e1; }
+    .level-history .level-kicker::before { content: "🏛"; font-size: 10px; }
+
+    .level-interpretation {
+      border-left: 4px solid #f59e0b;
+      border-top: 1px solid rgba(245, 158, 11, 0.25);
+      border-right: 1px solid rgba(245, 158, 11, 0.25);
+      border-bottom: 1px solid rgba(245, 158, 11, 0.25);
+      background: linear-gradient(135deg, rgba(120, 53, 15, 0.25) 0%, rgba(20, 16, 12, 0.9) 100%);
+    }
+    .level-interpretation .level-kicker { color: #fbbf24; }
+    .level-interpretation .level-kicker::before { content: "🧭"; font-size: 10px; }
+
+    /* Christological Sanctuary Plaque */
+    .level-christ {
+      border-left: 4.5px solid #10b981;
+      border-top: 1px solid rgba(16, 185, 129, 0.3);
+      border-right: 1px solid rgba(16, 185, 129, 0.3);
+      border-bottom: 1px solid rgba(16, 185, 129, 0.3);
+      background: linear-gradient(135deg, rgba(6, 78, 59, 0.3) 0%, rgba(10, 26, 20, 0.94) 100%);
+      box-shadow: 0 12px 34px -8px rgba(6, 78, 59, 0.45), 0 0 1px 1px rgba(16, 185, 129, 0.3), inset 0 1px 0 rgba(167, 243, 208, 0.18);
+    }
+    .level-christ .level-kicker { color: #34d399; }
+    .level-christ .level-kicker::before { content: "✝"; font-size: 11px; color: #34d399; }
+
+    /* Historical Note Tablet */
+    .historical-note {
+      border-left: 4px solid #a8a29e;
+      border-top: 1px solid rgba(168, 162, 158, 0.22);
+      border-right: 1px solid rgba(168, 162, 158, 0.22);
+      border-bottom: 1px solid rgba(168, 162, 158, 0.22);
+      background: linear-gradient(135deg, rgba(41, 37, 36, 0.8) 0%, rgba(24, 22, 20, 0.94) 100%);
+      box-shadow: 0 10px 28px -8px rgba(0, 0, 0, 0.65), inset 0 1px 0 rgba(231, 229, 228, 0.08);
+    }
+    .historical-note-kicker { color: #d6d3d1; }
+    .historical-note-kicker::before { content: "📜"; font-size: 10px; }
+
+    /* Caution & Sentinel Card */
+    .caution-card {
+      border-left: 4.5px solid #ef4444;
+      border-top: 1px solid rgba(239, 68, 68, 0.3);
+      border-right: 1px solid rgba(239, 68, 68, 0.3);
+      border-bottom: 1px solid rgba(239, 68, 68, 0.3);
+      background: linear-gradient(135deg, rgba(127, 29, 29, 0.3) 0%, rgba(26, 16, 16, 0.94) 100%);
+      box-shadow: 0 10px 30px -8px rgba(220, 38, 38, 0.35);
+    }
+    .caution-card-kicker { color: #f87171; }
+    .caution-card-kicker::before { content: "⚠"; font-size: 10px; color: #f87171; }
+
+    /* Principle Card: Imperial Gold Decree */
+    .principle-card {
+      border: 2px solid rgba(212, 175, 55, 0.65);
+      background: linear-gradient(135deg, rgba(38, 32, 22, 0.94) 0%, rgba(20, 17, 13, 0.98) 100%);
+      box-shadow: 0 16px 42px -10px rgba(0, 0, 0, 0.85), 0 0 20px rgba(212, 175, 55, 0.22), inset 0 1px 0 rgba(255, 235, 175, 0.16);
+    }
+    .principle-card-kicker { color: #fbbf24; }
+    .principle-card-kicker::before { content: "🏛"; font-size: 10px; }
+
+    /* Next Sitting Card: The Cosmic Horizon Portal */
+    .next-sitting-card {
+      border-left: 5px solid #e5b93b;
+      border-top: 1px solid rgba(212, 175, 55, 0.35);
+      border-right: 1px solid rgba(212, 175, 55, 0.35);
+      border-bottom: 1px solid rgba(212, 175, 55, 0.35);
+      background: linear-gradient(135deg, rgba(38, 31, 20, 0.92) 0%, rgba(18, 15, 12, 0.98) 100%);
+      box-shadow: 0 18px 46px -10px rgba(0, 0, 0, 0.9), 0 0 22px rgba(212, 175, 55, 0.28), inset 0 1px 0 rgba(255, 235, 175, 0.15);
+      border-radius: 0 14px 14px 0;
+    }
+    .next-sitting-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 22px 52px -8px rgba(0, 0, 0, 0.95), 0 0 30px rgba(212, 175, 55, 0.4);
+    }
+    .next-sitting-kicker { color: #fbbf24; }
+    .next-sitting-kicker::before { content: "➔"; color: #fbbf24; font-size: 11px; }
+    .next-sitting-card h4 {
+      font-family: 'Newsreader', Georgia, serif;
+      font-size: 1.4rem !important;
+      font-weight: 700;
+      color: #faf6eb;
+      margin: 0 0 0.55rem !important;
+    }
+
+    /* Biblical Case Card */
+    .biblical-case {
+      border-left: 4px solid #14b8a6;
+      border-top: 1px solid rgba(20, 184, 166, 0.25);
+      border-right: 1px solid rgba(20, 184, 166, 0.25);
+      border-bottom: 1px solid rgba(20, 184, 166, 0.25);
+      background: linear-gradient(135deg, rgba(19, 78, 74, 0.25) 0%, rgba(12, 24, 24, 0.92) 100%);
+      box-shadow: 0 10px 28px -8px rgba(20, 184, 166, 0.25);
+    }
+    .biblical-case-kicker { color: #2dd4bf; }
+    .biblical-case-kicker::before { content: "📖"; font-size: 10px; }
+
+    .layer-stack {
+      border: 1px dashed rgba(245, 158, 11, 0.55);
+      background: linear-gradient(135deg, rgba(120, 53, 15, 0.18) 0%, rgba(20, 16, 12, 0.92) 100%);
+    }
+    .layer-stack-kicker { color: #f59e0b; }
+
+    .source-card {
+      border: 1px dashed rgba(212, 175, 55, 0.45);
+      background: rgba(212, 175, 55, 0.05);
+    }
+    .source-card-kicker { color: #e5b93b; }
+
+    .qa-card {
+      border: 1px solid rgba(212, 175, 55, 0.35);
+      background: linear-gradient(135deg, rgba(26, 23, 19, 0.8) 0%, rgba(16, 14, 12, 0.92) 100%);
+    }
+    .qa-question {
+      margin: 0 0 0.55rem;
+      font-weight: 600;
+      color: #faf6eb;
+    }
+    .qa-answer {
+      margin: 0;
+      font-size: 0.98rem;
+      line-height: 1.65;
+    }
+    .qa-answer-label {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 9.5px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #34d399;
+      margin-right: 0.45rem;
+      font-weight: 700;
+    }
+
+    .checkpoint-card {
+      border-left: 4px solid #e5b93b;
+      background: rgba(212, 175, 55, 0.08);
+    }
+    .checkpoint-kicker { color: #e5b93b; }
+
+    /* Card Interior List Spacing */
+    .framework-card ul, .framework-card ol,
+    .historical-note ul, .historical-note ol,
+    .principle-card ul, .principle-card ol,
+    .level-card ul, .level-card ol {
+      margin: 0.75rem 0 0.5rem 1.4rem;
+      padding: 0;
+    }
+    .framework-card li, .historical-note li, .principle-card li, .level-card li {
+      margin-bottom: 0.75rem;
+      line-height: 1.75;
+    }
+    .framework-card li:last-child, .historical-note li:last-child, .principle-card li:last-child, .level-card li:last-child {
+      margin-bottom: 0;
+    }
+
+    /* Scripture & Pull Quotes: Typographic Sacred Citations */
+    .scripture-quote {
+      position: relative;
+      font-family: 'Newsreader', Georgia, serif;
+      font-style: italic;
+      font-size: 1.15rem;
+      margin: 2.25rem 0;
+      padding: 1.15rem 1.6rem 1.15rem 1.85rem;
+      border-left: 4px solid #d4a017;
+      background: linear-gradient(135deg, rgba(32, 27, 20, 0.7) 0%, rgba(18, 15, 12, 0.88) 100%);
+      border-radius: 0 12px 12px 0;
+      line-height: 1.75;
+      color: #f7f0e1;
+      box-shadow: 0 10px 28px -6px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 235, 175, 0.1);
+    }
+    body.paper-mode .scripture-quote {
+      background: rgba(245, 238, 222, 0.7);
+      border-left-color: #9a7217;
+      color: #292524;
+    }
+    body.white-mode .scripture-quote {
+      background: #faf7f0;
+      border-left-color: #c9a227;
+      color: #1c1917;
+    }
+
+    .pull-quote {
+      position: relative;
+      font-family: 'Newsreader', Georgia, serif;
+      font-style: italic;
+      font-size: calc(var(--reading-font-size, 1.125rem) * 1.35) !important;
+      line-height: 1.65;
+      border-left: 4.5px solid #e5b93b;
+      padding: 1.35rem 1.85rem;
+      margin: 3rem 0;
+      background: linear-gradient(135deg, rgba(36, 30, 22, 0.75) 0%, rgba(18, 15, 12, 0.92) 100%);
+      border-radius: 0 14px 14px 0;
+      color: #faf5e8;
+      box-shadow: 0 14px 36px -8px rgba(0, 0, 0, 0.75), 0 0 18px rgba(212, 175, 55, 0.2);
+      transition: font-size 0.15s ease-out;
+    }
+    body.paper-mode .pull-quote {
+      background: rgba(250, 242, 226, 0.85);
+      border-left-color: #9a7217;
+      color: #1c1917;
+    }
+    body.white-mode .pull-quote {
+      background: #fbf9f4;
+      border-left-color: #c9a227;
+      color: #1c1917;
+    }
+
+    /* Comparison Table Styling */
+    .comparison-table-wrap {
+      overflow-x: auto;
+      margin: 1.75rem 0;
+      border-radius: 10px;
+      border: 1px solid rgba(212, 175, 55, 0.35);
+      box-shadow: 0 10px 28px -6px rgba(0, 0, 0, 0.65);
+    }
+    .comparison-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+      line-height: 1.55;
+    }
+    .comparison-table th, .comparison-table td {
+      border: 1px solid rgba(212, 175, 55, 0.25);
+      padding: 0.75rem 0.95rem;
+      text-align: left;
+      vertical-align: top;
+    }
+    .comparison-table th {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      background: rgba(212, 175, 55, 0.16);
+      color: #fbbf24;
+      font-weight: 700;
+    }
+
+    /* Prophecy Diagrams: The Astronomical Obsidian Matrix */
+    .prophecy-diagram {
+      position: relative;
+      font-family: "JetBrains Mono", "Consolas", monospace;
+      font-size: 0.74rem;
+      line-height: 1.6;
+      overflow-x: auto;
+      margin: 2.5rem 0;
+      padding: 1.5rem 1.6rem;
+      border: 1px solid rgba(212, 175, 55, 0.4);
+      border-radius: 14px;
+      background: linear-gradient(180deg, #0d0c0a 0%, #050504 100%);
+      color: #eee7d7;
+      white-space: pre;
+      word-break: normal;
+      box-shadow: 0 16px 42px -10px rgba(0, 0, 0, 0.95), inset 0 0 40px rgba(0, 0, 0, 0.85), 0 0 1px 1px rgba(212, 175, 55, 0.25);
+    }
+    .prophecy-diagram::-webkit-scrollbar {
+      height: 8px;
+    }
+    .prophecy-diagram::-webkit-scrollbar-track {
+      background: rgba(18, 16, 14, 0.8);
+      border-radius: 4px;
+    }
+    .prophecy-diagram::-webkit-scrollbar-thumb {
+      background: rgba(212, 175, 55, 0.4);
+      border-radius: 4px;
+    }
+    .prophecy-diagram::-webkit-scrollbar-thumb:hover {
+      background: rgba(212, 175, 55, 0.75);
+    }
+    body.paper-mode .prophecy-diagram {
+      background: #f7f2e8;
+      border-color: rgba(180, 130, 30, 0.45);
+      color: #292524;
+      box-shadow: 0 8px 24px rgba(100, 80, 50, 0.12);
+    }
+    body.white-mode .prophecy-diagram {
+      background: #faf8f5;
+      border-color: #e5dec9;
+      color: #1c1917;
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.05);
+    }
+
     .glossary-plate {
       margin: 1.4rem 0 1.6rem;
     }
@@ -1722,18 +2346,23 @@
     .sitting-main { min-width: 0; width: 100%; }
     .sheet-christology {
       position: relative;
-      margin-top: 2.5rem;
-      border: 1px solid rgba(197, 155, 39, 0.45);
-      border-radius: 14px;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25), inset 0 0 0 1px rgba(255, 215, 0, 0.12);
+      margin-top: 3.5rem;
+      padding: 2.25rem 2.25rem;
+      border: 1px solid rgba(212, 175, 55, 0.45);
+      border-radius: 16px;
+      background: radial-gradient(circle at 50% 0%, rgba(42, 34, 22, 0.95) 0%, rgba(16, 14, 11, 0.98) 100%);
+      box-shadow: 0 18px 48px -12px rgba(0, 0, 0, 0.9), 0 0 25px rgba(212, 175, 55, 0.2), inset 0 1px 0 rgba(255, 235, 175, 0.16);
     }
     .sheet-christology h3 {
-      font-family: 'Playfair Display', 'Source Serif 4', Georgia, serif;
+      font-family: 'Newsreader', Georgia, serif;
+      font-weight: 700;
+      letter-spacing: -0.015em;
     }
     .lesson-connect {
-      border: 1px solid rgba(197, 155, 39, 0.35);
+      border: 1px solid rgba(212, 175, 55, 0.35);
       border-radius: 14px;
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+      background: linear-gradient(135deg, rgba(26, 23, 18, 0.85) 0%, rgba(16, 14, 12, 0.95) 100%);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 235, 175, 0.08);
     }
     .lesson-connect-btn {
       transition: all 0.2s ease;
@@ -2069,6 +2698,19 @@
       <div class="sitting-guide-actions">
         <button type="button" id="sitting-guide-primary" class="px-5 py-2.5 rounded bg-amber-600 text-paper-50 font-sans text-sm font-semibold">Begin this sitting</button>
         <button type="button" id="sitting-guide-skip" class="px-4 py-2.5 rounded border border-amber-600/40 text-amber-200 font-sans text-sm">Don't show again this sitting</button>
+      </div>
+    </div>
+  </div>
+
+  <button type="button" id="access-open-btn" hidden>Preview remaining sittings</button>
+  <div id="access-panel" class="access-panel" hidden role="dialog" aria-modal="true" aria-labelledby="access-title">
+    <div class="sitting-guide-card">
+      <small>Access</small>
+      <h2 id="access-title">Continue the scroll</h2>
+      <p>Sheets after the free prologue remain closed until this sitting is complete, or until a full preview is enabled.</p>
+      <div class="sitting-guide-actions">
+        <button type="button" id="access-enable-preview" class="px-5 py-2.5 rounded bg-amber-600 text-paper-50 font-sans text-sm font-semibold">Enable full preview</button>
+        <button type="button" id="access-close" class="px-4 py-2.5 rounded border border-amber-600/40 text-amber-200 font-sans text-sm">Close</button>
       </div>
     </div>
   </div>
@@ -2451,10 +3093,10 @@
         <span id="sheet-scripture-ref">Hermeneutics & Foundations</span>
       </div>
       <h1 id="sheet-title" class="font-serif text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-ink-900 dark:text-paper-50 leading-[1.18] mb-4">
-        The Battle of Hermeneutics: The Historicist Blueprint
+        The Prophetic Blueprint: Why Daniel's Unbroken Chain Centers on Jesus Christ
       </h1>
       <p id="sheet-subtitle" class="font-serif italic text-lg sm:text-xl text-ink-600 dark:text-paper-300 leading-relaxed">
-        Why how you interpret prophecy determines whether you identify the Antichrist or fall into spiritual amnesia.
+        God's historical roadmap from exile to the cross to the everlasting kingdom — and why how you read decides what you see.
       </p>
       <nav class="sitting-path" id="sitting-path" aria-label="Sitting path">
         <p class="sitting-path-kicker">This sitting</p>
@@ -2547,7 +3189,7 @@
             </span>
           </div>
           <span id="quiz-badge" class="font-mono text-xs px-2.5 py-1 rounded bg-paper-200 dark:bg-paper-800 text-ink-700 dark:text-paper-300">
-            2 Questions to Advance
+            5 Questions to Advance
           </span>
         </div>
 

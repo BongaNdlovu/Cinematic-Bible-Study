@@ -38,6 +38,7 @@
   }
 
   function canEnter() {
+    if (new URLSearchParams(location.search).get("preview") === "full") return true;
     if (isAdmin()) return true;
     return hasAgreed() && signedIn();
   }

@@ -5,7 +5,7 @@
 
   window.SHEET_VERIFY = [
     {
-      claim: "You can verify the method of this sitting from the Bible’s own wording, from a dated siege, and from readers who kept one chain.",
+      claim: "You can verify the method of this sitting from Scripture’s own wording, the year-day precedent, Daniel 9’s internal test, and witnesses to the four-kingdom chain.",
       items: [
         item(
           "scripture",
@@ -54,17 +54,17 @@
           "commentary",
           "The charge that Daniel is a Maccabean forgery is itself dated. Jerome names the critic.",
           "Jerome, Commentary on Daniel, Prologue (c. A.D. 407). English at tertullian.org",
-          "Porphyry wrote his twelfth book against the prophecy of Daniel, denying that it was composed by him in whose name it stands… asserting that the book was composed in Greece in the time of Antiochus who was surnamed Epiphanes.",
+          "Porphyry wrote his twelfth book against the prophecy of Daniel, denying that it was composed by the person to whom it is ascribed in its title, but rather by some individual living in Judaea at the time of the Antiochus who was surnamed Epiphanes.",
           "Porphyry (3rd century) is the pagan ancestor of the ‘it all ended under Antiochus’ reading. Jerome reports the charge in order to answer it. Preterism later reused the park-it-in-the-past move.",
-          "https://www.tertullian.org/fathers/jerome_daniel_01_intro.htm"
+          "https://www.tertullian.org/fathers/jerome_daniel_02_text.htm"
         ),
         item(
           "commentary",
           "A second-century Christian already read the four metals as Babylon, Persia, Greece, and Rome — one chain.",
           "Hippolytus of Rome, Treatise on Christ and Antichrist, §28 (c. A.D. 200). Ante-Nicene Fathers, vol. 5",
           "The golden head of the image and the lioness denoted the Babylonians; the shoulders and arms of silver, and the bear, represented the Persians and Medes; the belly and thighs of brass, and the leopard, meant the Greeks… the legs of iron, and the beast dreadful and terrible, expressed the Romans, who hold the sovereignty now.",
-          "This is not a 19th-century invention. Open the ANF paragraph. Historicism is the old Christian reading of the statue. Futurism and Jesuit preterism are the later breaks.",
-          "https://ccel.org/ccel/hippolytus/antichrist/anf05.iii.iv.ii.html"
+          "Hippolytus witnesses the four-kingdom sequence (Babylon through Rome), not a fully formed historicist system — he also expected a future individual antichrist. Open the ANF paragraph and compare with Source 09 in the article.",
+          "https://www.ccel.org/ccel/schaff/anf05.iii.iv.html"
         )
       ]
     },

@@ -1,0 +1,942 @@
+--- PAGE 1 ---
+Sheet	0	•	The	Battle	of	Hermeneutics:	The
+Historicist	Blueprint
+OneVoice27	·	Long	version	(rewritten	with	corrections)
+Why	how	you	interpret	prophecy	determines	whether	Daniel's	kingdoms	form	a	continuous
+historical	sequence	or	are	understood	through	different	interpretive	frameworks.
+Governing	principle	of	this	course:
+	
+Scripture	interprets	Scripture.
+	The	Bible	is	its	own	first
+commentary.	We	compare	line	with	line,	vision	with	vision,	Testament	with	Testament	(Isaiah	28:10;
+1	Corinthians	2:13;	Luke	24:27).	History	helps;	tradition	can	witness;	but	Scripture	remains	the	rule.
+THE	BATTLE	OF	HERMENEUTICS
+Daniel	does	not	begin	with	a	timeline.
+He	begins	with	a	crisis.
+Judah	is	under	imperial	pressure.	Daniel	is	taken	from	his	homeland	to	Babylon	(Daniel	1:3–6).
+Jerusalem	has	been	humbled	by	siege.	And	somewhere	inside	the	machinery	of	Babylon,	God	is
+preparing	to	reveal	something	far	larger	than	the	rise	and	fall	of	one	empire.
+Daniel	will	see	kingdoms	rise.	He	will	see	kingdoms	fall.	He	will	see	rulers	exalt	themselves.	He	will
+see	earthly	powers	attempt	to	control	history.	And	eventually,	he	will	see	a	kingdom	that	does	not
+pass	away.
+But	before	we	trace	the	kingdoms,	we	need	to	answer	a	more	fundamental	question:	How	should
+prophecy	be	interpreted?
+This	is	the	question	of	hermeneutics.	Hermeneutics	is	the	discipline	of	interpreting	texts.	In	prophetic
+study,	it	asks	questions	such	as:
+What	does	the	biblical	text	actually	say?
+What	does	the	historical	setting	tell	us?
+How	should	symbols	be	interpreted?
+How	do	different	passages	illuminate	one	another?
+How	does	
+Scripture	interpret	Scripture
+	—	so	that	clearer	passages	guard	the	harder	ones?
+When	does	an	interpretation	move	beyond	the	explicit	wording	of	Scripture?
+How	should	historical	evidence	be	used?
+And	ultimately,	how	does	prophecy	point	us	toward	Christ?
+This	lesson	establishes	the	interpretive	framework	that	will	guide	our	journey	through	Daniel	—	and
+it	will	show,	from	Bible	study,	
+why	the	historicist	reading	best	accounts	for	Daniel's	own
+evidence
+.	We	still	label	Text,	History,	and	Interpretation	honestly.	Honesty	is	not	neutrality.	The
+point	is	to	prove	the	case,	not	to	leave	the	reader	stranded	between	equal	options.
+
+--- PAGE 2 ---
+PART	I	—	DANIEL	ENTERS	HISTORY
+Jerusalem	Under	Babylonian	Pressure
+Daniel	1:1–2
+"In	the	third	year	of	the	reign	of	Jehoiakim	king	of	Judah	came	Nebuchadnezzar	king	of	Babylon
+unto	Jerusalem,	and	besieged	it."
+Daniel	does	not	begin	in	a	mythical	world.	He	begins	in	a	recognizable	historical	setting.	There	is	a
+king.	There	is	a	city.	There	is	an	invading	empire.	There	is	a	siege.	And	there	is	a	transfer	of	people
+and	sacred	vessels	from	Jerusalem	to	Babylon.
+Daniel	1:2	adds	something	theologically	significant:
+"And	the	Lord	gave	Jehoiakim	king	of	Judah	into	his	hand…"
+The	political	catastrophe	is	presented	within	the	sovereignty	of	God.	The	text	does	not	merely	say
+that	Babylon	was	stronger.	It	says	that	the	Lord	gave	Jehoiakim	into	Nebuchadnezzar's	hand.
+That	becomes	an	important	theme	throughout	Daniel:	Earthly	kingdoms	operate	within	a	history	that
+ultimately	remains	under	God's	sovereignty.
+HISTORICAL	NOTE
+Daniel	identifies	the	beginning	of	his	Babylonian	experience	by	the	third	year	of	Jehoiakim.
+Traditional	chronological	reconstructions	place	the	first	Babylonian	incursion	associated	with	Daniel
+around	605	B.C.,	in	connection	with	the	battle	at	Carchemish,	where	Egyptian	forces	were	decisively
+defeated.	At	the	time	of	that	battle	Nebuchadnezzar	was	still	crown	prince,	commanding	the	army	on
+his	father	Nabopolassar's	behalf;	Nabopolassar	died	shortly	afterward	(mid-August	605	B.C.),	and
+Nebuchadnezzar	took	the	Babylonian	throne	himself	only	a	few	weeks	later,	in	early	September.
+Daniel	1:1	calls	him	"king	of	Babylon"	in	a	way	many	readers	take	
+proleptically
+	—	by	the	title	he
+held	by	the	time	of	writing,	not	necessarily	the	title	he	held	at	the	exact	moment	of	the	siege.	That
+reading	is	a	historical-literary	reconstruction,	not	something	Daniel	1	spells	out	in	those	words.
+The	precise	BCE	date	is	a	reconstruction	based	on	biblical	and	ancient	chronological	evidence	rather
+than	a	date	explicitly	written	in	Daniel	1.
+This	distinction	matters	—	and	so	does	a	related	one.	Jeremiah	dates	the	same	events	to	Jehoiakim's
+fourth	year,	not	the	third	(Jeremiah	25:1;	46:2),	which	will	be	one	of	the	Source	Checkpoints	below.
+A	standard	scholarly	resolution
+	is	that	Daniel	is	using	Babylonian	accession-year	reckoning	—
+where	a	king's	first	full	regnal	year	is	counted	from	the	next	New	Year's	day	after	he	takes	the	throne,
+not	from	his	accession	itself	—	while	Jeremiah	is	using	a	Judean	non-accession-year	system	common
+in	the	west.	Other	calendar	models	also	exist.	Both	writers	can	be	counting	correctly	and	still	land	on
+different	numbers,	because	they	are	using	different	calendars	to	do	the	counting.	This	is	a	good	early
+
+--- PAGE 3 ---
+example	of	why	"History"	and	"Text"	have	to	be	held	apart:	the	apparent	contradiction	dissolves	once
+the	counting	convention	behind	each	text	is	identified,	but	that	identification	is	itself	a	piece	of
+historical	reconstruction,	not	something	either	passage	states	outright.
+TEXT
+Daniel	tells	us:
+Jehoiakim	was	king	of	Judah.
+Nebuchadnezzar	came	against	Jerusalem.
+Jerusalem	was	besieged.
+Some	of	the	vessels	of	God's	house	were	taken.
+Daniel	and	other	young	people	were	brought	into	Babylonian	service	(see	Daniel	1:3–6).
+The	Lord	is	presented	as	sovereign	over	the	event.
+HISTORY
+Ancient	Near	Eastern	chronology	and	Babylonian	records	provide	external	evidence	for	the
+geopolitical	world	surrounding	these	events,	including	Nebuchadnezzar's	campaigns	and	the
+Babylonian	conquest	of	Judah.
+INTERPRETATION
+The	historicist	reading	sees	Daniel's	experience	as	the	opening	scene	of	a	prophetic	narrative	in	which
+God	reveals	a	sequence	of	earthly	kingdoms	leading	toward	His	everlasting	kingdom.
+CHRIST
+The	biblical	story	begins	with	God's	people	apparently	defeated.	But	Daniel's	book	will	repeatedly
+demonstrate	that	apparent	defeat	does	not	mean	divine	absence.	That	theme	ultimately	finds	its	fullest
+expression	in	Christ.
+PART	II	—	WHAT	DOES	"HERMENEUTICS"	MEAN?
+Before	We	Interpret	Daniel,	We	Need	to	Know	How	We	Are	Reading	Daniel
+Imagine	three	people	standing	before	the	same	ancient	map.	All	three	see	the	same	rivers.	All	three
+see	the	same	mountains.	All	three	see	the	same	cities.	But	each	person	has	been	given	a	different	set
+of	assumptions	about	what	the	map	represents.	They	may	reach	different	conclusions	without
+changing	a	single	line	on	the	map.
+Prophetic	interpretation	works	similarly.	The	biblical	text	is	one	thing.	Our	method	of	interpreting
+that	text	is	another.	That	is	why	hermeneutics	matters.
+THE	FOUR	LEVELS	OF	THIS	COURSE
+Throughout	this	study,	we	will	use	four	clearly	distinguished	levels.
+
+--- PAGE 4 ---
+LEVEL	1	—	TEXT
+What	does	Scripture	explicitly	say?	This	is	our	starting	point.	We	will	examine:
+Hebrew	and	Aramaic	terminology
+Grammar
+Literary	context
+Immediate	context
+Parallel	passages
+Biblical	cross-references
+We	will	distinguish	between	what	the	text	states	directly	and	what	must	be	inferred.	Above	all,	we	let
+Scripture	interpret	Scripture
+:	Daniel	explains	Daniel;	the	prophets	illuminate	one	another;	the	New
+Testament	shows	how	Christ	and	the	apostles	read	the	Old.
+LEVEL	2	—	HISTORY
+What	does	historical	evidence	document?	History	can	help	us	understand:
+Kings
+Empires
+Wars
+Political	transitions
+Cultural	practices
+Ancient	geography
+Archaeological	discoveries
+Ancient	documents
+But	historical	evidence	must	not	be	confused	with	the	biblical	text	itself.	A	historical	reconstruction	is
+evidence.	It	is	not	automatically	interpretation.
+LEVEL	3	—	INTERPRETATION
+What	conclusion	follows	from	the	framework	being	used?	This	is	where	hermeneutics	becomes
+visible.
+A	historicist	interpretation	may	connect	a	prophetic	symbol	with	a	sequence	of	historical	events.	A
+preterist	interpretation	may	locate	major	prophetic	fulfillment	primarily	in	the	ancient	world.	A
+futurist	interpretation	may	understand	significant	portions	of	prophecy	as	awaiting	fulfillment	near
+the	end	of	history.
+These	approaches	can	examine	the	same	biblical	passages	while	arriving	at	different	conclusions
+because	they	employ	different	interpretive	frameworks.
+Throughout	this	course,	we	will	identify	the	historicist	reading	clearly	rather	than	presenting	it	as
+though	every	conclusion	were	explicitly	stated	by	the	biblical	text.
+
+--- PAGE 5 ---
+LEVEL	4	—	CHRIST
+How	does	the	wider	biblical	witness	direct	us	toward	Christ?	Prophecy	is	not	merely	a	puzzle	about
+dates.	The	Bible's	prophetic	story	ultimately	concerns	God's	purposes,	His	kingdom,	judgment,
+redemption,	and	the	restoration	of	His	creation.	Jesus	Himself	taught	His	disciples	to	read	the
+Scriptures	in	relation	to	Him.	Therefore,	our	study	of	Daniel	will	continually	return	to	Christ.	And	the
+path	to	Christ	in	prophecy	is	not	speculation:	it	is	
+Scripture	interpreting	Scripture
+	until	the	whole
+witness	agrees.
+PART	III	—	THE	HISTORICIST	FRAMEWORK
+What	Is	Historicism?
+Historicism	is	an	interpretive	framework	that	understands	biblical	prophecy	as	unfolding
+progressively	through	history.	In	prophetic	passages	containing	sequences	of	kingdoms,	powers,
+conflicts,	and	time	periods,	historicist	interpreters	seek	to	trace	those	symbols	through	successive
+historical	developments.
+The	central	idea	is	simple:	Prophecy	can	describe	a	sequence	of	events	extending	across	the	course	of
+history	rather	than	being	confined	entirely	to	the	prophet's	immediate	generation	or	exclusively	to	a
+final	future	crisis.
+This	course	will	use	that	framework	when	interpreting	Daniel.	But	there	is	an	important	distinction:
+Historicism	is	a	framework	of	interpretation.	The	Bible	does	not	use	the	word	historicism	to	describe
+itself.	Therefore,	rather	than	claiming	"Historicism	is	the	biblical	method,"	we	will	ask	"How	does	the
+historicist	framework	understand	the	biblical	evidence?"	That	distinction	allows	us	to	study	the
+subject	honestly.	Later	in	this	sheet	(Part	IX)	we	will	not	stop	at	definition.	We	will	prove	from
+Daniel	and	the	wider	canon	why	historicism	is	the	correct	framework	for	this	course.
+DANIEL	2	—	THE	FIRST	MAJOR	TEST
+Daniel	2	gives	us	a	remarkable	sequence.	Nebuchadnezzar	sees	a	great	image.	Daniel	explains	that
+the	image	represents	kingdoms.	The	first	kingdom	is	explicitly	identified:	"Thou	art	this	head	of
+gold."	Babylon.
+Then	Daniel	describes	what	follows:	"And	after	thee	shall	arise	another	kingdom	inferior	to	thee…"
+Then	another.	Then	another.	And	finally	comes	the	kingdom	represented	by	the	stone.
+Daniel	2	therefore	unquestionably	contains	a	sequence.	The	major	interpretive	question	is	not
+whether	the	sequence	exists.	It	does.	The	question	is:	How	far	does	that	sequence	extend,	and	how
+should	its	symbols	and	historical	fulfillments	be	identified?
+Historicists	see	Daniel	2	as	a	foundational	example	of	prophecy	unfolding	through	successive
+historical	kingdoms.	Other	interpretive	approaches	also	recognize	the	sequence	of	kingdoms.	The
+disagreement	concerns	how	the	sequence	should	be	extended	and	fulfilled	—	and	even	the	identity	of
+
+--- PAGE 6 ---
+the	second	kingdom	is	not	entirely	uncontested:	most	historicist	and	confessional	readings	take	it	as
+Medo-Persia	as	a	single	power,	while	some	critical	scholarship	divides	it	into	separate	Median	and
+Persian	kingdoms,	which	is	part	of	what	is	at	stake	in	the	Maccabean-date	theory	discussed	below.
+PART	IV	—	HISTORICIST	INTERPRETATION	IN	CHRISTIAN
+HISTORY
+Interpreters	Before	and	During	the	Reformation
+Historicist	readings	of	prophecy	did	not	suddenly	appear	in	the	nineteenth	century.	Various	Christian
+interpreters	in	the	medieval	and	Reformation	eras	developed	interpretations	that	understood	prophetic
+passages	as	having	historical	fulfillment	extending	across	long	periods	of	Christian	history.
+Among	interpreters	associated	with	historicist-style	readings	
+before	and	during
+	the	Reformation
+were	figures	such	as:
+John	Wycliffe	(died	1384	—	a	precursor	before	the	Protestant	Reformation)
+Martin	Luther
+Philipp	Melanchthon
+John	Knox
+However,	their	interpretations	were	not	identical.	They	differed	on	chronology,	symbols,	prophetic
+identification,	and	details	of	fulfillment.	Therefore,	it	is	more	accurate	to	speak	of	historicist
+tendencies
+	and	readings	among	major	Christian	interpreters	rather	than	claiming	that	every	Reformer
+held	one	uniform	prophetic	system.
+Some	interpreters	also	connected	prophetic	passages	such	as	Daniel	7	and	Revelation	13	with	the
+long	history	of	ecclesiastical	and	political	power.	These	interpretations	contributed	to	the
+development	of	historicist	Protestant	readings	of	prophecy.
+PRIMARY	SOURCE	CHECKPOINT	—	Martin	Luther
+Luther's	writings	demonstrate	that	prophetic	passages	concerning	antichrist	and	ecclesiastical	power
+were	interpreted	historically	within	portions	of	the	Reformation	tradition.	This	is	important	evidence
+for	the	history	of	interpretation.	But	historical	evidence	about	Luther	does	not	prove	that	every	detail
+of	the	historicist	framework	is	correct.	It	demonstrates	something	narrower:	historicist-style
+interpretations	existed	prominently	within	the	Reformation	era.
+
+--- PAGE 7 ---
+ISAAC	NEWTON	—	A	Later	Historicist
+Isaac	Newton	studied	biblical	prophecy	extensively,	roughly	a	century	after	the	Reformation	era
+proper.	His	writings	demonstrate	that	a	serious	engagement	with	Daniel	and	Revelation	could	involve
+historical	sequence,	symbolism,	chronology,	and	comparison	between	prophetic	passages.	He	is
+grouped	here	not	as	a	Reformer	but	as	evidence	that	the	historicist	approach	continued	to	attract
+serious	minds	well	past	the	sixteenth	century.	Again,	the	purpose	of	these	sources	is	not	to	establish
+Newton	as	an	authority	over	Scripture.	They	show	how	influential	Christian	interpreters	approached
+prophecy	historically.
+HISTORY
+	—	These	sources	belong	to	the	history	of	interpretation.
+INTERPRETATION
+	—	They	demonstrate	that	historical	approaches	to	prophecy	have	a	long
+Christian	history.
+TEXT
+	—	They	do	not	replace	the	biblical	text.
+PART	V	—	THE	COUNTER-REFORMATION	AND	ALTERNATIVE
+INTERPRETIVE	SYSTEMS
+Be	direct	about	the	history.
+The	Reformation	stake:	historicism	and	the	papacy
+Historicist	Protestant	readers	did	not	treat	prophecy	as	a	harmless	hobby.	Using	Scripture	with
+Scripture	—	Daniel's	beasts	and	little	horn,	Paul's	man	of	sin,	and	Revelation's	beast	and	Babylon	—
+they	identified	the	
+papal	system
+	with	the	prophetic	Antichrist	/	beast	power	opposing	Christ	and	His
+truth	across	history.
+That	identification	was	public	and	confessional	in	broad	Reformation	streams	(for	example	in
+Luther's	writings	on	Antichrist	and	in	related	Protestant	testimony).	It	hurt	Rome's	claim	to
+unquestioned	spiritual	authority.	So	the	prophetic	question	became	a	Counter-Reformation	battlefield.
+TEXT	/	SCRIPTURE-WITH-SCRIPTURE	(the	historicist	claim):
+	Daniel	7;	2	Thessalonians	2;
+Revelation	13;	17	—	a	dynastic,	historical	Antichrist	power,	not	merely	one	brief	ancient	tyrant	and
+not	merely	one	future	individual	disconnected	from	the	medieval–modern	story.
+HISTORY:
+	Reformers	preached	and	wrote	that	identification	openly.
+Rome's	two	answers:	shove	prophecy	into	the	past,	or	shove	it	into	a	tiny	future
+The	Counter-Reformation	answer	was	not	"ignore	prophecy."	It	was	
+relocate	the	fulfillment
+	so	the
+finger	no	longer	pointed	at	the	papacy.
+
+--- PAGE 8 ---
+Two	Jesuit	projects	did	that	work	systematically:
+1.	Futurism	—	Francisco	Ribera	(published	1590/1591)
+In	Sacram	Beati	Ioannis	Apostoli	et	Evangelistae	Apocalypsin	Commentarii
+	(roughly	500	pages	in
+secondary	descriptions).	Ribera	kept	early	chapters	near	John's	day,	then	pushed	the	Antichrist	into	a
+future	literal	3½-year
+	career	just	before	the	end	—	the	reverse	of	the	historicist	day-year,	centuries-
+long	reading.	Result:	the	beast	is	
+not
+	the	long	papal	career	in	history;	it	is	a	short	future	figure	still
+ahead.
+2.	Preterism	—	Luis	de	Alcázar	(
+Vestigatio	Arcani	Sensus	in	Apocalypsi
+,	1614,	posthumous)
+Alcázar	locked	major	Apocalypse	fulfillment	mainly	in	the	
+ancient
+	world	(early	church	conflicts	with
+Judaism	and	pagan	Rome).	Result:	the	prophecies	are	
+already	spent
+	long	before	the	medieval
+papacy's	dominance	—	so	they	cannot	identify	the	papacy.
+Direct	conclusion	(HISTORY	of	interpretation):
+These	systems	functioned	as	
+Counter-Reformation	tools	to	counter	Protestant	historicism
+,
+because	historicism	identified	the	papacy	with	the	beast/Antichrist.	Futurism	and	preterism	are
+opposite	to	each	other,	but	they	served	the	same	apologetic	end:	
+get	the	prophetic	spotlight	off
+Rome
+.
+That	is	not	a	cartoon	"every	Catholic	was	in	a	secret	club"	claim.	It	is	the	documented	polemical
+purpose	of	these	Jesuit	counter-interpretations	in	the	Reformation–Counter-Reformation	conflict.
+Later	Protestant	historians	(including	L.	E.	Froom's	documentary	history	of	prophetic	interpretation,
+citing	earlier	Protestant	scholars	such	as	Alford	and	Guiness-type	analyses	of	the	Jesuit	counter-
+systems)	and	modern	summaries	of	the	period	describe	the	same	structure:	two	mutually	conflicting
+Jesuit	alternatives,	one	purpose.
+Earlier	seeds	of	futurist	or	preterist	
+ideas
+	exist	before	Ribera	and	Alcázar.	What	is	new	in	this
+moment	is	their	
+systematic	Counter-Reformation	use
+	against	historicist	papal	identification.
+Proof	trail	students	can	check:
+	1.	Reformation	historicist	identification	of	papal	Antichrist	(Luther
+and	related	Protestant	sources	—	Part	IV	checkpoint).	2.	Ribera	1590/1591:	future	individual
+Antichrist,	literal	3½	years	—	removes	long	historicist	application	to	Rome.	3.	Alcázar	1614:	ancient
+fulfillment	focus	—	removes	application	to	the	papal	era.	4.	Histories	of	interpretation	that	explicitly
+state	both	systems	were	advanced	to	meet	and	overwhelm	Protestant	historicist	readings	(see	Froom,
+Prophetic	Faith	of	Our	Fathers
+,	vol.	2,	on	Ribera/Alcázar;	also	standard	Counter-Reformation
+prophecy	surveys).
+TEXT
+	—	still	rules.	Jesuit	history	does	not	prove	historicism	true	by	itself.
+HISTORY
+	—	explains	why	rival	systems	appeared	with	such	energy.
+INTERPRETATION
+	—	we	already	showed	in	Part	IX	why	historicism	best	fits	Scripture;	this	Part
+shows	why	the	rival	systems	were	weaponised	against	that	reading.
+
+--- PAGE 9 ---
+THREE	MAJOR	FRAMEWORKS
+HISTORICISM
+	—	Prophetic	fulfillment	unfolds	progressively	through	history.	A	symbolic
+sequence	may	correspond	to	successive	historical	kingdoms,	institutions,	conflicts,	and	events.
+PRETERISM
+	—	Preterist	approaches	generally	locate	major	prophetic	fulfillment	primarily	within
+the	ancient	historical	setting.	There	are	different	forms	of	preterism,	and	they	do	not	all	interpret
+every	prophetic	passage	in	exactly	the	same	way.
+FUTURISM
+	—	Futurist	approaches	understand	significant	portions	of	biblical	prophecy	as	awaiting
+fulfillment	in	the	future.	Again,	futurism	contains	different	forms	and	should	not	be	reduced	to	a
+single	system.
+THE	QUESTION	IS	NOT:
+	"Which	system	sounds	most	dramatic?"
+The	real	question	is:
+	Which	interpretation	best	accounts	for	the	biblical	text	when	Scripture
+interprets	Scripture	—	and	which	systems	were	built,	historically,	to	escape	the	historicist
+identification	of	the	papacy	with	the	beast?
+This	course	answers	both:	historicism	fits	Daniel;	and	the	Counter-Reformation	alternatives	were
+forged	as	escapes	from	that	conclusion.
+PART	VI	—	THE	YEAR-DAY	QUESTION
+One	of	the	most	important	interpretive	questions	in	historicist	prophecy	concerns	prophetic	time.
+Why	do	historicist	interpreters	understand	certain	prophetic	"days"	as	representing	years?
+The	answer	begins	with	Scripture	—	though	it's	worth	flagging	up	front	that	neither	of	the	two	texts
+usually	cited	is	itself	predictive	prophecy.	Both	are	retrospective	judgment	declarations	or	symbolic
+sign-acts.	What	they	establish	is	that	God	can	and	does	use	a	day-for-year	relationship	in	His	dealings
+with	His	people;	whether	that	same	relationship	should	be	imported	into	Daniel's	predictive	time
+periods	is	a	separate	question,	answered	by	examining	Daniel's	own	context	—	not	by	these	two	texts
+alone.
+NUMBERS	14:34
+Israel's	spies	explored	Canaan	for	forty	days.	After	Israel	rejected	God's	promise,	God	declared:
+"After	the	number	of	the	days	in	which	ye	searched	the	land,	even	forty	days,	each	day	for	a	year…"
+Here	Scripture	explicitly	establishes	a	relationship	between	40	days	and	40	years.	This	occurs	within
+a	specific	prophetic	judgment,	announced	after	the	fact	rather	than	as	a	forward-looking	prediction
+using	symbolic	time.
+EZEKIEL	4:6
+God	tells	Ezekiel:	"I	have	appointed	thee	each	day	for	a	year."
+Again,	Scripture	explicitly	establishes:	one	day,	one	year.	This	is	a	symbolic	sign-act	Ezekiel	is
+commanded	to	perform,	not	itself	a	prophecy	stated	in	coded	time.
+
+--- PAGE 10 ---
+These	passages	demonstrate	that	God	can	use	a	day-for-year	relationship	in	prophetic	symbolism.	But
+we	must	not	make	an	invalid	leap.	They	do	not	establish	a	universal	rule	that	every	prophetic	day	in
+every	biblical	passage	must	equal	one	year.	Instead,	historicist	interpreters	argue	that	these	passages
+provide	biblical	precedent	for	symbolic	time	and	then	examine	whether	the	context	of	Daniel
+supports	applying	that	principle	there.	That	is	the	proper	methodological	sequence.
+DANIEL'S	LONG	TIME	PERIODS
+Daniel	itself	contains	several	unusually	large	or	unusual	prophetic	time	expressions.	Among	them
+are:
+"a	time,	times,	and	the	dividing	of	time"	(Daniel	7:25;	12:7)
+2,300	evenings	and	mornings	(Daniel	8:14)
+70	weeks	(Daniel	9:24)
+1,290	days	(Daniel	12:11)
+1,335	days	(Daniel	12:12)
+Historicist	interpreters	understand	these	periods	symbolically	and	apply	the	day-year	principle.	Under
+that	framework:
+70	weeks	→	70	×	7	=	490	prophetic	units	→	applied	through	the	historicist	day-year
+interpretation	→	490	years
+2,300	evenings	and	mornings	→	applied	through	the	historicist	framework	→	2,300	years
+"a	time,	times,	and	half	a	time"	→	generally	read	as	3½	prophetic	years	of	360	days	each	→	1,260
+prophetic	days	→	applied	through	the	day-year	framework	→	1,260	years
+That	last	figure	—	1,260	—	is	worth	flagging	carefully,	because	it	does	not	appear	as	a	number	in
+Daniel	itself.	It	is	arrived	at	by	combining	two	further	interpretive	steps	on	top	of	the	day-year
+principle:	reading	"time,	times,	and	half	a	time"	as	3½	years,	and	then	converting	that	to	days	using	a
+360-day	prophetic-calendar	year.	The	number	1,260	appears	explicitly	only	in	Revelation	(11:3;
+12:6),	alongside	"forty-two	months"	(11:2;	13:5),	which	is	the	same	period	stated	a	different	way.	So
+the	reasoning	runs:	Daniel's	phrase	→	3½	years	(interpretation)	→	1,260	days	(calendar	convention)
+→	1,260	years	(day-year	principle)	→	correlated	with	Revelation's	parallel	figure.	Four	layers,	not
+one	—	and	it's	important	that	a	student	can	see	all	four	rather	than	encountering	1,260	as	though
+Daniel	stated	it	outright.
+The	distinction	remains	essential:	the	numbers	490	and	2,300	are	Daniel's	own;	the	day-year
+application	is	an	interpretation;	and	1,260	specifically	is	a	further	downstream	construction	built	on
+that	interpretation	plus	a	chronological	convention.
+
+--- PAGE 11 ---
+DANIEL	9	AS	A	SUPPORTING	TEST
+Historicist	interpreters	see	Daniel	9	as	an	important	internal	test	of	the	prophetic-time	framework.
+Daniel	receives	a	prophecy	of	"seventy	weeks."	The	prophecy	discusses	Jerusalem,	restoration,
+Messiah	(the	anointed	one),	transgression,	reconciliation,	the	end	of	sin,	and	the	destruction	of
+Jerusalem.
+If	the	seventy	weeks	were	interpreted	as	merely	490	literal	days,	the	chronology	would	not
+correspond	naturally	to	the	historical	sequence	described	in	the	passage.	Historicist	interpreters
+therefore	apply	the	day-year	principle	and	understand	the	period	as	490	years.	They	then	compare
+that	interpretation	with	Persian-period	chronology	and	the	New	Testament's	chronology	surrounding
+Jesus.	This	produces	the	familiar	historicist	chronology	associated	with	457	B.C.,	A.D.	27,	A.D.	31,
+and	A.D.	34.
+But	these	dates	must	be	demonstrated	carefully.	They	are	not	simply	written	in	Daniel	as	modern
+calendar	dates.	They	result	from	a	chronological	and	interpretive	argument	that	we	will	examine	in
+later	lessons.
+IMPORTANT	WARNING
+Do	not	use	Daniel	9	to	prove	the	day-year	principle	and	then	use	the	day-year	principle	to	prove
+Daniel	9	without	acknowledging	the	circularity.	Instead:
+1.	
+Establish	that	Scripture	sometimes	uses	day-for-year	symbolism.
+2.	
+Examine	Daniel's	language	and	context.
+3.	
+Apply	the	proposed	interpretation.
+4.	
+Compare	the	resulting	chronology	with	independent	historical	and	biblical	evidence.
+5.	
+Ask	whether	the	interpretation	explains	the	evidence	coherently.
+That	is	how	we	test	an	interpretation.
+PART	VII	—	THE	2,300	EVENINGS	AND	MORNINGS
+Daniel	8:14	says:	"Unto	two	thousand	and	three	hundred	days;	then	shall	the	sanctuary	be	cleansed."
+This	passage	is	central	to	historicist	sanctuary	interpretation.	But	it	requires	careful	handling.	The
+underlying	Hebrew	literally	reads	"evening-morning"	(
+ereb	boqer
+),	an	idiom	most	translations	render
+either	as	"2,300	days"	(following	the	standard	pattern	of	counting	evening-and-morning	as	one	day,
+as	in	Genesis	1)	or	as	"2,300	evenings	and	mornings,"	which	some	read	as	1,150	full	days	if	each
+evening	and	each	morning	is	counted	as	a	separate	half-unit.	The	verb	translated	"cleansed"	in	the
+KJV	—	Hebrew	
+nitsdaq
+	—	comes	from	the	root	for	righteousness	or	justice,	not	from	a	word
+meaning	ritual	cleansing;	other	translations	render	it	"restored	to	its	rightful	state"	or	"properly
+restored."	Both	the	number	and	the	verb	are	genuinely	disputed	points	of	translation,	not	settled	ones.
+
+--- PAGE 12 ---
+Different	interpreters	have	understood	the	period	differently,	including:
+2,300	prophetic	days
+1,150	days,	based	on	understanding	the	expression	as	morning-and-evening	sacrifices	counted
+separately
+other	interpretations	connected	to	the	sanctuary	context
+Historicist	interpreters	generally	understand	the	period	as	2,300	prophetic	days,	applying	the	day-year
+principle	to	arrive	at	2,300	years,	and	generally	follow	the	KJV's	"cleansed"	in	connecting	the
+passage	to	sanctuary	imagery.	That	interpretation	will	be	examined	later	in	the	course.
+For	now,	the	methodological	point	is	enough:	Daniel	gives	the	number	and	the	verb;	historicist
+interpretation	supplies	the	day-year	application,	a	translation	choice	on	the	verb,	and	the	historical
+chronology	built	from	both.
+PART	VIII	—	THREE	WAYS	OF	READING	DANIEL
+Question
+Historicist
+Preterist
+Futurist
+Where	is	major
+fulfillment
+located?
+Progressively	through
+history
+Primarily	in	the	ancient
+historical	setting
+Significantly	in	the	future
+Daniel's
+kingdoms
+Successive	historical
+powers
+Primarily	ancient
+kingdoms/events
+May	include	ancient	kingdoms
+with	later/future	developments
+Daniel's
+prophetic	time
+Often	extended
+symbolically	through
+history
+Generally	interpreted	within
+ancient	horizons
+Often	connected	to	future
+fulfillment
+Daniel	9
+Often	connected	to	a
+continuous	historical
+chronology
+Often	focused	on	ancient
+fulfillment
+Often	places	final	aspects	in
+future
+Revelation
+Often	unfolds	through
+Christian	history
+Often	emphasizes	early
+Christian/Roman	context
+Often	emphasizes	future
+events
+Central	question
+How	does	prophecy	unfold
+through	history?
+How	was	prophecy	fulfilled
+in	its	original	historical
+crisis?
+What	remains	to	be	fulfilled?
+This	table	is	a	high-level	map,	not	a	claim	that	every	historicist,	preterist,	or	futurist	agrees	on	every
+detail.	Each	school	contains	varieties.	The	table	is	designed	to	make	the	differences	visible.	The	next
+part	makes	that	investigation	explicit:	the	biblical	case	that	historicism	is	correct.
+PART	IX	—	THE	BIBLICAL	CASE	FOR	HISTORICISM
+Why	This	Framework	Is	the	Correct	Reading	of	Daniel
+Other	frameworks	exist.	We	named	them	so	you	will	not	be	surprised	when	you	meet	them.	But	this
+course	does	not	treat	them	as	equally	faithful	to	Daniel.
+
+--- PAGE 13 ---
+Historicism	is	not	a	preference.	It	is	the	reading	that	best	fits	what	Daniel	actually	shows	—
+when	Scripture	is	allowed	to	interpret	Scripture.
+We	do	not	begin	with	a	church	slogan	and	then	hunt	for	verses.	We	begin	with	Daniel's	words,	then
+let	Daniel's	parallel	visions,	the	Prophets,	and	the	New	Testament	explain	that	line.	That	is	the
+Reformation	and	biblical	rule:	the	Word	explains	the	Word.
+Here	is	the	biblical	case	—	built	by	Bible	study,	not	by	church	politics.
+1.	Daniel	himself	gives	a	continuous	sequence,	not	a	single	ancient	crisis	and	not
+a	blank	leap	to	the	end
+In	Daniel	2	the	first	kingdom	is	named:	Babylon	—	"Thou	art	this	head	of	gold"	(Daniel	2:38).	Then
+the	text	says:	"And	after	thee	shall	arise	another	kingdom	inferior	to	thee,	and	another	third
+kingdom…	And	the	fourth	kingdom…"	(Daniel	2:39–40).	Then	feet	and	toes.	Then	God's	everlasting
+kingdom	that	"shall	break	in	pieces	and	consume	all	these	kingdoms"	(Daniel	2:44).
+TEXT:
+	The	sequence	is	successive	("after	thee"),	multi-stage,	and	ends	only	when	God's	kingdom
+replaces	the	whole	image.
+INTERPRETATION	that	fits	the	text:
+	Prophecy	here	tracks	a	line	of	empires	through	history	until
+God's	final	kingdom.	That	is	historicism.
+A	reading	that	dumps	almost	all	fulfillment	back	into	the	distant	past	(as	if	the	statue's	story	were
+basically	over	in	antiquity)	struggles	to	honour	the	full	sequence	and	the	still-future	force	of	the
+everlasting	kingdom	crushing	the	whole	image.
+A	reading	that	parks	most	of	the	meaning	only	in	a	short	end-time	parenthesis	struggles	to	honour
+the	plain	"after	thee"	succession	beginning	with	Babylon	in	Daniel's	own	day	and	running	through
+multiple	kingdoms	before	the	end.
+Historicism	takes	Daniel's	grammar	of	succession	seriously	from	start	to	finish.
+2.	The	master	key:	Scripture	interprets	Scripture
+This	is	the	non-negotiable	principle	behind	every	sheet.
+Isaiah	teaches	that	God's	word	is	given	"precept	upon	precept;	line	upon	line"	(Isaiah	28:10).
+Paul	teaches	that	we	compare	"spiritual	things	with	spiritual"	(1	Corinthians	2:13).
+Jesus	Himself	"beginning	at	Moses	and	all	the	prophets…	expounded	unto	them	in	all	the
+scriptures	the	things	concerning	himself"	(Luke	24:27).
+Isaiah	8:20	sets	the	test:	"To	the	law	and	to	the	testimony:	if	they	speak	not	according	to	this
+word,	it	is	because	there	is	no	light	in	them."
+So	when	we	read	Daniel,	we	do	not	invent	a	private	code.	We	ask:	How	does	the	rest	of	Daniel
+explain	this?	How	do	the	Prophets	speak?	How	does	Revelation	echo	Daniel?	How	does	Christ	fulfil
+and	interpret	the	line?
+
+--- PAGE 14 ---
+2b.	Daniel's	visions	reinforce	one	progressive	line
+Daniel	2,	7,	and	8	are	not	random	dreams.	They	rehearse	and	expand	the	same	kind	of	movement:
+kingdoms	rise,	kingdoms	fall,	a	blasphemous	power	opposes	God	and	His	people,	and	God	wins.
+TEXT:
+	Repeated	parallel	structures	inside	one	book.
+INTERPRETATION	that	fits:
+	God	is	teaching	a	historical	line,	not	three	disconnected	puzzles.
+Historicism	reads	the	parallels	as	one	unfolding	story.	That	is	how	careful	Bible	study	works	—
+"comparing	spiritual	things	with	spiritual"	(1	Corinthians	2:13).
+3.	The	everlasting	kingdom	is	God's	answer	inside	history's	arc	—	and	it	centres
+in	Christ
+Daniel	2:44	is	not	a	footnote.	It	is	the	destination	of	the	vision.	God	sets	up	a	kingdom	that	shall
+never	be	destroyed.
+The	New	Testament	identifies	Jesus	as	King	of	kings	(Revelation	17:14;	19:16)	and	teaches	that	the
+Scriptures	concern	Him	(Luke	24:27,	44–47).	So	the	historicist	line	is	not	"history	for	history's	sake."
+It	is	history	moving	toward	redemption	and	restoration	in	Christ.
+If	prophecy	were	only	about	a	finished	ancient	crisis,	the	church	would	be	left	with	little	more	than	a
+museum	tour.	If	prophecy	were	only	about	a	future	chart	disconnected	from	the	centuries	between
+Babylon	and	the	end,	the	stone's	collision	with	the	whole	image	would	lose	the	force	Daniel	gives	it.
+Historicism	keeps	both:	God	has	been	ruling	the	rise	and	fall	of	kingdoms,	and	Christ	is	the	goal.
+4.	Prophetic	time	in	Daniel	is	tested	inside	the	book	—	and	historicism	passes	the
+Daniel	9	test
+Daniel	9	gives	"seventy	weeks"	concerning	Jerusalem,	Messiah,	and	covenant	(Daniel	9:24–27).
+TEXT:
+	Seventy	weeks	tied	to	Messiah	and	Jerusalem's	story.
+INTERPRETATION:
+	Historicist	Bible	study	applies	the	day-for-year	precedent	God	Himself	used
+(Numbers	14:34;	Ezekiel	4:6)	and	then	tests	it	in	Daniel.	Four	hundred	ninety	literal	days	do	not
+naturally	carry	the	Messiah-centred	history	Daniel	9	describes.	Four	hundred	ninety	years	do.	That	is
+not	circular	slogan-shouting.	It	is:	Scripture	precedent	→	Daniel's	context	→	historical	fit	with	the
+Messiah.
+Later	lessons	will	walk	the	dates	carefully.	The	point	in	Sheet	0	is	methodological:	
+Daniel's	own
+time	prophecies	invite	an	extended	historical	reading
+,	which	is	exactly	what	historicism	claims.
+(Remember	the	honesty	rule:	Numbers	14	and	Ezekiel	4	are	precedent,	not	a	magic	wand.	Daniel	9	is
+the	internal	test.	We	will	not	pretend	the	modern	dates	are	printed	in	the	verse.)
+
+--- PAGE 15 ---
+5.	Revelation	confirms	that	Daniel's	conflict	runs	through	Christian	history	to	the
+end
+Revelation	reuses	Daniel's	language	of	times,	beasts,	and	persecution	(for	example,	time	/	times	/	half
+a	time	and	the	1,260	days	—	Revelation	12:6,	14;	13:5).	John	is	not	erasing	Daniel.	He	is	showing	the
+same	war	continuing	until	the	Lamb	conquers.
+INTERPRETATION	that	fits	both	Testaments:
+	Prophecy	unfolds	across	the	age	between	the
+prophets	and	the	final	victory	of	Christ.	That	is	historicism.	A	method	that	locks	Daniel	only	in	the
+past,	or	only	in	a	brief	future	window,	must	explain	away	that	canonical	continuity.
+6.	Jesus	taught	His	disciples	to	read	prophecy	toward	Himself	across	the	sweep
+of	Scripture
+"Beginning	at	Moses	and	all	the	prophets,	he	expounded	unto	them	in	all	the	scriptures	the	things
+concerning	himself"	(Luke	24:27).	He	also	pointed	disciples	to	Daniel	in	the	context	of	coming	crisis
+(Matthew	24:15).
+Bible	study	under	Jesus'	own	method	is	not	allergy	to	history.	It	is	history	and	prophecy	ending	in
+Christ.
+Bottom	line	of	the	case
+Test
+What	Daniel	/	Scripture	shows
+Which	framework	fits	best
+Succession	language	("after
+thee")
+Multi-kingdom	sequence	from	Babylon
+Historicism
+Parallel	visions
+One	progressive	conflict	line
+Historicism
+Everlasting	kingdom
+Consumes	the	whole	image;	Christ	the
+King
+Historicism	toward	Christ
+Seventy	weeks	/	Messiah
+Extended	time	fits	Messiah	history
+Historicism	(day-year
+tested)
+Daniel	↔	Revelation
+Same	war	to	the	end
+Historicism
+Jesus'	hermeneutic
+Scriptures	→	Christ	through	the	prophets
+Historicism	centred	in	Christ
+Therefore	this	course	is	not	"historicism	as	one	interesting	option."
+We	will	use	historicism	because	
+Bible	study	shows	it	best	explains	Daniel
+.
+We	will	still	mark	Text	/	History	/	Interpretation	/	Christ	at	every	step	—	precisely	so	you	can	
+see	the
+proof
+,	not	so	you	can	shrug	and	pick	a	favourite.
+PART	X	—	FOLLOWING	THE	CHAIN
+Daniel	2	provides	the	first	major	sequence.	Daniel	identifies	Babylon.	Then:	"after	thee	shall	arise
+another	kingdom…"	Then	another.	Then	another.	Finally,	God	establishes	a	kingdom	that	will	never
+be	destroyed.	The	sequence	is	therefore	clear.	But	the	interpretation	must	still	be	demonstrated.
+
+--- PAGE 16 ---
+TEXT
+	—	Daniel	explicitly	identifies	Babylon	and	describes	successive	kingdoms.
+HISTORY
+	—	Ancient	history	allows	us	to	investigate	which	empires	followed	Babylon.
+INTERPRETATION
+	—	Historicist	interpreters	identify	the	sequence	as:	Babylon	→	Medo-Persia
+→	Greece	→	Rome	→	divided	political	world	→	God's	everlasting	kingdom.
+The	first	four	kingdom	identifications	are	the	majority	reading	among	both	historicist	interpreters	and
+most	confessional	scholarship	generally,	and	they	correlate	reasonably	well	with	Daniel's	later	visions
+and	with	the	historical	record.	It	is	worth	knowing,	though,	that	not	every	reader	agrees	on	the	second
+kingdom:	some	critical	scholarship	separates	"Media"	and	"Persia"	into	two	distinct	kingdoms	rather
+than	one	combined	Medo-Persian	empire,	which	yields	a	different	four-kingdom	count	and	is	part	of
+the	basis	for	reading	Daniel's	kingdoms	as	ending	with	Greece	rather	than	Rome	(a	position
+associated	with	a	Maccabean	date	for	the	book's	composition,	discussed	further	under	Source
+Checkpoint	08	below).	The	later	identification	of	the	divided	political	world,	and	the	exact	way	the
+final	kingdom	relates	to	Christ's	return,	belong	to	the	interpretive	synthesis	and	will	be	examined
+progressively.
+THE	STONE
+Daniel	describes	a	stone	"cut	out	without	hands."	It	strikes	the	image.	The	image	collapses.	The	stone
+becomes	a	great	mountain.	And	"the	God	of	heaven	[shall]	set	up	a	kingdom,	which	shall	never	be
+destroyed."	Daniel	explicitly	identifies	this	as	God's	everlasting	kingdom.
+Within	the	wider	canonical	witness,	Christian	interpreters	understand	this	kingdom	in	relation	to
+God's	final	reign	and,	ultimately,	to	Christ.	But	Daniel	2	itself	does	not	use	the	sentence	"The	stone	is
+Jesus	Christ."	That	identification	emerges	through	the	wider	biblical	witness.	Therefore,	we	will
+distinguish:
+TEXT
+	—	God	establishes	an	everlasting	kingdom.
+CHRIST
+	—	The	wider	New	Testament	identifies	Jesus	with	the	promised	King	and	everlasting
+kingdom.
+INTERPRETATION
+	—	Christian	interpreters	therefore	understand	the	stone	and	its	kingdom	in
+relation	to	Christ's	ultimate	reign.
+PART	XI	—	HOW	WE	WILL	STUDY	DANIEL
+From	this	point	forward,	every	major	prophetic	claim	will	pass	through	four	checkpoints.
+CHECKPOINT	1	—	TEXT:
+	What	does	Daniel	actually	say?	We	will	examine	Hebrew,	Aramaic,
+grammar,	context,	repeated	terminology,	and	parallel	passages.
+CHECKPOINT	2	—	HISTORY:
+	What	can	history	independently	document?	We	will	examine
+Babylonian	records,	Persian	chronology,	Greek	history,	Roman	history,	archaeological	evidence,
+ancient	inscriptions,	and	historical	writings.
+
+--- PAGE 17 ---
+CHECKPOINT	3	—	INTERPRETATION:
+	What	does	the	historicist	framework	conclude?	We
+will	clearly	label	interpretive	conclusions.	For	example:
+TEXT:	Daniel	describes	four	kingdoms.
+HISTORY:	Babylon,	Persia,	Greece,	and	Rome	can	be	identified	through	historical	and	biblical
+evidence.
+INTERPRETATION:	Historicists	understand	these	kingdoms	as	a	prophetic	sequence	extending
+through	history.
+CHECKPOINT	4	—	CHRIST:
+	What	does	this	reveal	about	God's	kingdom	and	Christ?	Every
+prophetic	sequence	ultimately	brings	us	back	to	the	central	biblical	question:	Who	rules	when	earthly
+kingdoms	fall?	Daniel's	answer	is	clear:	God.	And	the	Christian	confession	is	equally	clear:	Christ	is
+King.
+PART	XII	—	CHRISTOLOGY:	REDEMPTION	AND
+RESTORATION
+The	Main	Narrative	Beneath	the	Kingdoms
+Daniel	is	filled	with	kingdoms.	But	kingdoms	are	not	the	destination.
+Babylon	rises.	Babylon	falls.	Persia	follows.	Greece	follows.	Rome	rises	and	changes.	Political
+structures	come	and	go.	Human	rulers	die.
+Daniel	keeps	pressing	toward	something	that	does	
+not
+	pass	away:	the	kingdom	the	God	of	heaven
+sets	up,	which	shall	never	be	destroyed	(Daniel	2:44).
+That	everlasting	kingdom	is	not	a	decorative	ending.	It	is	the	spine	of	the	book	—	and	it	belongs	to
+the	wider	biblical	story	of	
+redemption	and	restoration
+.
+1.	
+God	rules	history.
+	"He	removeth	kings,	and	setteth	up	kings"	(Daniel	2:21).	Exile	does	not	mean
+God	lost	control.
+2.	
+God	redeems	His	people	in	the	middle	of	empire.
+	Even	when	the	Lord	gave	Jehoiakim	into
+Babylon's	hand	(Daniel	1:2),	He	also	gave	Daniel	favour	and	skill	(Daniel	1:9,	17).	Redemption	is
+not	waiting	for	a	comfortable	century;	it	meets	people	in	captivity.
+3.	
+God	restores	what	sin	and	empire	cannot	restore.
+	The	stone	becomes	a	mountain	filling	the
+whole	earth	(Daniel	2:35).	The	kingdom	"shall	not	be	left	to	other	people"	(Daniel	2:44).
+Restoration	is	God's	work,	not	Babylon's	rebranding.
+4.	
+Jesus	Christ	is	the	centre	of	that	hope.
+	Jesus	taught	that	the	Scriptures	speak	of	Him	(Luke
+24:27,	44–47).	He	is	"King	of	kings"	(Revelation	17:14;	19:16).	In	Him	we	have	"redemption
+through	his	blood,	the	forgiveness	of	sins"	(Ephesians	1:7).	The	apostolic	witness	calls	people	to
+repent	so	that	"times	of	refreshing"	and	the	restoration	promised	by	the	prophets	may	be	received
+(Acts	3:19–21).	The	story	ends	not	in	endless	empire,	but	in	a	new	heaven	and	a	new	earth	where
+God	dwells	with	His	people	(Revelation	21:1–5).
+
+--- PAGE 18 ---
+So	the	main	narrative	is	this:
+	Prophecy	is	not	empire	trivia.	It	is	the	unveiling	of	God's	redeeming
+rule	and	His	restoring	kingdom	in	Christ.	Every	sheet	in	this	course	should	leave	you	nearer	Jesus	—
+crucified,	risen,	and	returning	as	King	—	not	merely	nearer	a	chart.
+In	one	sentence:
+	We	trace	kingdoms	so	we	can	trust	the	Redeemer	who	restores	all	things	under	His
+everlasting	reign.
+PART	XIII	—	A	PERSONAL	NOTE
+For	Your	Life,	Not	Only	for	Ancient	History
+Daniel's	crisis	was	public.	Yours	may	be	private.
+You	may	never	stand	in	Nebuchadnezzar's	court.	But	you	may	live	under	pressure	that	tries	to	rename
+you,	reshape	your	desires,	and	rewrite	your	loyalties.
+Use	the	same	four	questions	on	your	own	life	this	week:
+1.	
+TEXT
+	—	What	has	God	actually	said	in	His	Word	about	who	you	are,	and	about	Jesus?
+2.	
+HISTORY
+	—	What	are	the	real	facts	of	your	situation	—	not	rumours,	not	panic?
+3.	
+INTERPRETATION
+	—	Where	might	you	be	stacking	fear,	pride,	or	someone	else's	theory	on
+top	of	Scripture?
+4.	
+CHRIST
+	—	How	is	Jesus	inviting	you	to	receive	His	redemption	today,	and	to	hope	in	His
+restoration?
+You	do	not	need	a	secret	timeline	to	begin.	You	need	a	clear	Word,	an	honest	heart,	and	a	living
+King.
+Pray:
+	"Lord	Jesus,	redeem	what	is	broken	in	me.	Restore	what	I	cannot	fix.	Teach	me	to	read	Your
+Word	without	adding	to	it,	and	to	trust	You	when	earthly	kingdoms	—	and	my	own	plans	—	shake."
+PART	XIV	—	SOURCE	CHECKPOINTS
+Before	moving	forward,	investigate	these	passages	and	sources	yourself.
+SOURCE	01	—	DANIEL	1:2
+	—	Read	the	wording	carefully.	Ask:	What	does	the	text	explicitly
+attribute	to	God?
+SOURCE	02	—	JEREMIAH	25:1
+	—	Examine	the	chronology	surrounding	Jehoiakim	and
+Nebuchadnezzar.	Ask:	How	does	Jeremiah	help	establish	the	historical	setting	—	and	where	does	it
+appear	to	differ	from	Daniel	1:1	on	the	year?	(See	the	Historical	Note	in	Part	I	for	a	standard
+resolution.)
+SOURCE	03	—	JEREMIAH	46:2
+	—	Read	the	reference	to	Carchemish.	Ask:	What	does	Jeremiah
+reveal	about	the	geopolitical	conflict	surrounding	Judah?
+
+--- PAGE 19 ---
+SOURCE	04	—	NUMBERS	14:34
+	—	Read	the	complete	context.	Ask:	Does	this	passage
+demonstrate	a	day-for-year	relationship?	Yes.	Then	ask	the	more	important	question:	Does	it	say	that
+every	prophetic	day	everywhere	equals	a	year?	No.	Also	ask:	is	this	passage	itself	a	predictive
+prophecy,	or	a	judgment	announced	after	the	fact?	That	distinction	is	essential	too.
+SOURCE	05	—	EZEKIEL	4:6
+	—	Again,	observe	the	explicit	relationship:	day	→	year.	Then	ask:
+How	might	this	precedent	inform	prophetic	interpretation	elsewhere	—	bearing	in	mind	that	this,	too,
+is	a	commanded	sign-act	rather	than	a	predictive	time-prophecy?
+SOURCE	06	—	DANIEL	9:24–27
+	—	Do	not	begin	by	assuming	the	answer.	Read	the	passage.
+Identify:	seventy	weeks,	Jerusalem,	the	anointed	one	(Messiah),	covenant,	sacrifice,	destruction.	Then
+ask:	What	does	the	passage	itself	establish	before	we	introduce	chronology?
+SOURCE	07	—	ISAAC	NEWTON
+	—	Read	Newton	as	a	historical	interpreter,	writing	roughly	a
+century	after	the	Reformation.	Ask:	What	does	his	work	reveal	about	the	history	of	prophetic
+interpretation?
+SOURCE	08	—	JEROME	AND	PORPHYRY
+	—	Jerome	preserves	an	important	ancient	debate
+concerning	Daniel's	interpretation.	Porphyry	argued	that	Daniel's	prophecies	were	composed	in	the
+Maccabean	period	and	primarily	described	events	surrounding	Antiochus	IV.	Jerome	opposed	this
+interpretation.	Porphyry's	original	work	does	not	survive	independently	—	it	is	known	
+chiefly
+through	Jerome's
+	quotations	and	rebuttals,	which	is	itself	worth	noting	when	weighing	how	fully	we
+can	reconstruct	his	argument.	This	is	important	because	it	demonstrates	that	debates	about	the
+historical	location	of	Daniel's	fulfillment	are	ancient.	It	also	shows	why	arguments	about	Daniel's
+date	and	fulfillment	must	be	examined	separately.
+SOURCE	09	—	HIPPOLYTUS
+	—	Hippolytus	provides	early	Christian	evidence	for	identifying	the
+kingdoms	in	Daniel's	visions	with	a	sequence	commonly	understood	as	Babylon	→	Persia	→	Greece
+→	Rome.	This	is	valuable	historical	evidence	concerning	early	Christian	interpretation.	It's	worth
+knowing,	though,	that	Hippolytus	also	expected	a	future	individual	antichrist	figure	and	a	literal,
+future	3½-year	period	—	elements	that	later	interpreters	would	associate	more	with	futurism	than
+with	historicism.	Early	interpreters	did	not	sort	neatly	into	the	later	categories;	Hippolytus	is	evidence
+for	the	antiquity	of	the	four-kingdom	sequence	specifically,	not	for	a	fully	formed	historicist	system.
+That	distinction	matters.
+PART	XV	—	TRACE	IT	YOURSELF
+The	course	will	not	ask	you	to	accept	conclusions	simply	because	they	sound	persuasive.	Instead:
+TRACE	THE	TEXT.
+	Read	the	verse.	
+TRACE	SCRIPTURE	WITH	SCRIPTURE.
+	Let	clearer
+passages	and	parallel	visions	explain	the	harder	ones.
+TRACE	THE	HISTORY.
+	Investigate	the	evidence.
+TRACE	THE	INTERPRETATION.
+	Ask	how	the	framework	connects	the	two.
+TRACE	THE	CHRIST.
+	Ask	what	the	prophetic	message	reveals	about	God's	kingdom,	redemption,
+and	restoration.
+
+--- PAGE 20 ---
+WHY	THIS	MATTERS
+Prophecy	can	become	dangerous	when	interpretation	is	hidden.	A	teacher	can	present	an
+interpretation	as	though	it	were	a	quotation	from	Scripture.	A	historical	reconstruction	can	be
+presented	as	though	it	were	explicitly	stated	by	Daniel.	A	theological	conclusion	can	be	presented	as
+though	there	were	no	alternative	readings.	That	is	not	careful	study.
+A	trustworthy	Bible	study	should	allow	the	student	to	see	the	evidence	trail.	That	is	why	this	course
+will	repeatedly	distinguish	what	Scripture	says,	what	history	documents,	what	the	interpretation
+concludes,	and	what	the	biblical	story	reveals	about	Christ.
+CHRIST	AT	THE	CENTER
+Daniel	is	filled	with	kingdoms.	But	kingdoms	are	not	the	destination.	Babylon	disappears.	Persia
+disappears.	Greece	disappears.	Rome	changes.	Political	structures	rise	and	fall.	Human	rulers	die.
+But	Daniel	ends	with	something	different.	An	everlasting	kingdom.	A	kingdom	that	does	not	pass	to
+another	people.	A	kingdom	established	by	God.
+This	is	where	prophecy	moves	beyond	political	history.	It	moves	toward	hope	—	toward	redemption
+and	restoration.	The	question	is	no	longer	simply	"Who	ruled	Babylon?"	The	deeper	question
+becomes:	Who	will	rule	when	every	earthly	kingdom	has	passed	away?
+Daniel's	answer	is	the	kingdom	of	God.	And	the	New	Testament	presents	Jesus	Christ	as	the	King	at
+the	centre	of	God's	redemptive	kingdom.
+Prophecy	therefore	should	not	merely	make	us	knowledgeable	about	history.	It	should	lead	us	to	trust
+the	God	who	holds	history	in	His	hands	—	and	the	Christ	who	redeems	and	restores.
+QUESTIONS	FOR	THE	STUDENT
+1.	What	is	hermeneutics?
+Hermeneutics	is	the	discipline	of	interpreting	texts.	In	biblical	prophecy,	it	concerns	how	we
+understand	Scripture,	symbols,	context,	chronology,	and	fulfillment.
+2.	What	four	levels	will	this	course	use	when	studying	prophecy?
+TEXT	—	what	Scripture	explicitly	says.	HISTORY	—	what	historical	evidence	documents.
+INTERPRETATION	—	what	conclusion	the	interpretive	framework	draws.	CHRIST	—	how	the
+wider	biblical	witness	directs	us	toward	Christ.
+3.	What	does	Daniel	1:2	explicitly	say	about	Jehoiakim?
+It	says	that	the	Lord	gave	Jehoiakim	king	of	Judah	into	Nebuchadnezzar's	hand.
+4.	What	historical	date	is	traditionally	associated	with	Daniel's	first	Babylonian	captivity,	and
+why	does	Jeremiah	give	a	different	year?
+Traditional	chronological	reconstructions	commonly	place	it	around	605	B.C.	Daniel	dates	it	to
+Jehoiakim's	third	year,	while	Jeremiah	dates	the	same	events	to	his	fourth	year	(Jeremiah	25:1;	46:2).
+A	standard	scholarly	resolution	is	that	the	two	books	use	different	regnal-year	counting	conventions
+
+--- PAGE 21 ---
+(Babylonian	accession-year	reckoning	versus	a	non-accession-year	system);	other	calendar	models
+also	exist.	The	BCE	date	itself	is	reconstructed	from	broader	biblical	and	ancient	chronological
+evidence,	not	stated	as	a	calendar	year	in	the	text.
+5.	What	is	Historicism?
+Historicism	is	an	interpretive	framework	that	understands	biblical	prophecy	as	unfolding
+progressively	through	history,	often	identifying	prophetic	sequences	with	successive	historical
+developments.
+6.	Did	every	Reformer	hold	exactly	the	same	prophetic	interpretation?
+No.	Interpreters	before	and	during	the	Reformation	(including	Wycliffe	as	a	precursor,	and	Reformers
+such	as	Luther,	Melanchthon,	and	Knox)	used	historical	approaches	to	prophecy,	but	their
+interpretations	differed	in	important	details.	Historicist	
+tendencies
+	are	not	the	same	as	one	uniform
+system.
+7.	What	are	Preterism	and	Futurism?
+Preterist	approaches	generally	locate	major	prophetic	fulfillment	primarily	in	the	ancient	historical
+setting,	while	futurist	approaches	understand	significant	portions	of	prophecy	as	awaiting	future
+fulfillment.	Each	school	has	internal	varieties.
+8.	What	do	Numbers	14:34	and	Ezekiel	4:6	demonstrate	—	and	what	don't	they?
+They	demonstrate	that	Scripture	can	explicitly	use	a	day-for-year	relationship	in	symbolic	contexts.
+They	do	not	establish	that	every	prophetic	day	in	every	biblical	passage	must	equal	one	year,	and
+neither	passage	is	itself	a	predictive	time-prophecy	—	Numbers	14:34	is	a	judgment	announced	after
+the	fact,	and	Ezekiel	4:6	is	a	commanded	sign-act.
+9.	How	do	historicist	interpreters	use	Daniel	9:24–27	in	relation	to	prophetic	time?
+They	understand	the	seventy	weeks	as	490	prophetic	units	and,	applying	the	day-year	principle,
+interpret	them	as	490	years.	They	then	compare	that	chronology	with	biblical	and	historical	evidence
+concerning	Jerusalem	and	the	Messiah.
+10.	What	is	the	purpose	of	distinguishing	Text,	History,	and	Interpretation?
+It	prevents	us	from	confusing	what	Scripture	explicitly	states	with	historical	evidence	and	theological
+conclusions	derived	from	an	interpretive	framework	—	including	cases,	like	the	1,260-day	figure,
+where	several	interpretive	steps	are	stacked	on	top	of	one	another	and	can	be	mistaken	for	a	single
+plain	statement	of	Scripture.
+11.	What	is	the	main	narrative	of	Daniel	beyond	the	rise	and	fall	of	empires?
+Redemption	and	restoration	under	God's	everlasting	kingdom,	centred	in	Jesus	Christ	(see	Part	XIII).
+
+--- PAGE 22 ---
+THE	PRINCIPLE	TO	REMEMBER
+Before	you	accept	a	prophetic	conclusion,	remember	first:	
+Scripture	interprets	Scripture.
+	Then	ask
+four	questions:
+TEXT
+	—	Where	does	Scripture	say	this?
+HISTORY
+	—	What	historical	evidence	supports	this?
+INTERPRETATION
+	—	What	part	of	this	conclusion	comes	from	the	interpretive	framework?
+CHRIST
+	—	How	does	this	lead	us	toward	God's	redemptive	and	restoring	purpose	in	Christ?
+This	will	be	our	method	throughout	Daniel.
+NEXT	LESSON
+SHEET	1	—	DANIEL	1:	Faithfulness	in	Babylon
+The	prophetic	story	begins	with	a	young	man	surrounded	by	a	culture	determined	to	reshape	him.
+Daniel	receives	a	new	environment.	A	new	education.	A	new	language.	A	new	name.	A	new	diet.
+And	a	new	position	within	the	Babylonian	court.
+The	biblical	text	tells	us	that	Daniel	and	his	companions	were	trained	for	three	years	before	standing
+before	the	king	(Daniel	1:5).	The	program	was	designed	to	prepare	them	for	royal	service	within
+Babylonian	society.
+But	Daniel	faced	a	deeper	question:	Can	you	serve	in	Babylon	without	allowing	Babylon	to	define
+who	you	are?
+That	question	will	take	us	beyond	prophecy.	It	will	take	us	into	identity.	Decision-making.
+Faithfulness.	And	ultimately,	the	character	of	Christ.
+Long	Sheet	0	rewritten	·	Corrections	applied	·	Christology	+	personal	note	added	·	OneVoice27

@@ -1,0 +1,195 @@
+"""Generate Sheet 4 article HTML — The Emperor in the Dust (Daniel 4)."""
+from pathlib import Path
+
+OUT = Path(__file__).resolve().parent / "sheet4_generated.html"
+
+CONTENT = r'''
+<nav class="lesson-toc" aria-label="Sheet 4 sections">
+  <p class="lesson-toc-kicker">Follow this sitting</p>
+  <ol class="lesson-toc-list">
+    <li><a href="#intro">Introduction · An emperor's open confession</a></li>
+    <li><a href="#mp1">I · The cosmic tree and the thesis of thrones</a></li>
+    <li><a href="#mp2">II · The anatomy of hubris</a></li>
+    <li><a href="#mp3">III · Recovery of sanity</a></li>
+    <li><a href="#mp4">IV · Christ, the true and humble King</a></li>
+  </ol>
+</nav>
+
+<div class="governing-principle">
+  <p class="governing-principle-kicker">Big idea</p>
+  <p>Daniel 4 is a pagan emperor's own decree: when humanity exalts itself above God, it descends into beastly madness — and <strong>true sanity begins when a creature lifts its eyes to the King of heaven</strong>.</p>
+</div>
+
+<div class="from-last-sitting">
+  <span class="from-last-sitting-kicker">From the last sitting · Sheet 3</span>
+  <p>In chapter 3, God delivered His servants from the superheated furnace when Nebuchadnezzar tried to compel worship. Now in chapter 4, that same monarch learns firsthand that the God of heaven alone establishes and overthrows thrones.</p>
+</div>
+
+<div class="part-header" id="intro">
+  <p class="part-kicker">Introduction</p>
+  <h3>An Emperor's Open Confession</h3>
+  <p class="part-subtitle">Daniel 4:1–3 · Babylon, c. 570 B.C.</p>
+</div>
+
+<p>Daniel 4 is unique in the biblical canon: it is an official state document authored not by a Hebrew prophet, but by a pagan emperor writing in his own voice. Nebuchadnezzar addresses <em>"all people, nations, and languages, that dwell in all the earth"</em> (Daniel 4:1).</p>
+
+<p>This is not a victory stele boasting of conquered lands or slaughtered enemies; it is an imperial encyclical publishing the king's descent into madness and his subsequent restoration. Having witnessed God's supremacy in the dream of the colossus (Daniel 2) and in the deliverance of the three Hebrews from the furnace (Daniel 3), Nebuchadnezzar now writes to testify that human sovereignty is strictly an illusion:</p>
+
+<blockquote class="scripture-quote">"The living may know that the most High ruleth in the kingdom of men, and giveth it to whomsoever he will, and setteth up over it the basest of men." — Daniel 4:17 (KJV)</blockquote>
+
+<pre class="prophecy-diagram">NEBUCHADNEZZAR'S PROGRESSIVE ENCOUNTERS WITH GOD
+Daniel 2 ──▶ Acknowledges God as "a revealer of secrets"     (Intellectual awe)
+Daniel 3 ──▶ Acknowledges God as "able to deliver"           (Reluctant toleration)
+Daniel 4 ──▶ Acknowledges God as "the King of heaven"        (Personal submission &amp; worship)</pre>
+
+<div class="part-header" id="mp1">
+  <p class="part-kicker">Main Point 1</p>
+  <h3>The Cosmic Tree and the Thesis of Thrones</h3>
+  <p class="part-subtitle">Daniel 4:10–27</p>
+</div>
+
+<p>The narrative begins with a disturbing dream. The king sees a colossal tree standing at the center of the earth, reaching into the heavens, its foliage sheltering every creature and feeding all living flesh (Daniel 4:10–12).</p>
+
+<p>Suddenly, a <span class="term-gloss" data-term="watcher">Watcher, and an holy one</span> — a commissioned heavenly messenger — descends and commands:</p>
+
+<blockquote class="scripture-quote">"Hew down the tree, and cut off his branches, shake off his leaves, and scatter his fruit... Nevertheless leave the stump of his roots in the earth, even with a band of iron and brass... and let seven times pass over him." — Daniel 4:14–16 (KJV)</blockquote>
+
+<pre class="prophecy-diagram">THE ANATOMY OF THE VISION
+THE TALL COSMIC TREE                    THE BANDED STUMP
+• Reached to heaven                     • Stripped of branches and fruit
+• Sheltered all beasts and birds        • Driven into the dew and grass
+• Symbol of imperial majesty            • Bound with iron and bronze
+• Nebuchadnezzar in his glory           • The king humbled, yet preserved by grace</pre>
+
+<p>Daniel interprets the dream with deep pastoral sorrow: the immense tree is Nebuchadnezzar himself (Daniel 4:20–22). Because the king has grown proud, Heaven has decreed that he will be cut down, driven from human society, and forced to live like a wild animal until he learns the ultimate lesson of biblical history: <strong>Heaven rules</strong>.</p>
+
+<p>Three times in this chapter, God states the central thesis that governs all human power:</p>
+<ul>
+  <li><em>"The most High ruleth in the kingdom of men, and giveth it to whomsoever he will"</em> (Daniel 4:17).</li>
+  <li><em>"Till thou know that the most High ruleth in the kingdom of men"</em> (Daniel 4:25).</li>
+  <li><em>"Until thou know that the most High ruleth in the kingdom of men"</em> (Daniel 4:32).</li>
+</ul>
+
+<div class="historical-note">
+  <p class="historical-note-kicker">Mercy before judgment</p>
+  <p>God did not execute this sentence immediately. Daniel earnestly pleaded with the emperor: <em>"Break off thy sins by righteousness, and thine iniquities by shewing mercy to the poor; if it may be a lengthening of thy tranquillity"</em> (Daniel 4:27). For twelve full months, divine patience waited for the king to repent of his imperial oppression and pride (Daniel 4:29).</p>
+</div>
+
+<div class="level-card level-text">
+  <p class="level-kicker">TEXT</p>
+  <p>The tree is the king. The Watcher hews it down. The banded stump preserves mercy. The thesis repeats three times: the Most High rules.</p>
+</div>
+
+<div class="part-header" id="mp2">
+  <p class="part-kicker">Main Point 2</p>
+  <h3>The Anatomy of Hubris and the Beastly Mind</h3>
+  <p class="part-subtitle">Daniel 4:29–33</p>
+</div>
+
+<p>Exactly one year later, Nebuchadnezzar walked upon the flat roof of his palace, gazing over the gleaming expanse of Babylon. Looking out upon the Ishtar Gate, the Processional Way, and the massive temples of Marduk, the unrepentant boast spilled from his lips:</p>
+
+<blockquote class="scripture-quote pull-quote">"Is not this great Babylon, that I have built for the house of the kingdom by the might of my power, and for the honour of my majesty?" — Daniel 4:30 (KJV)</blockquote>
+
+<pre class="prophecy-diagram">THE THREEFOLD BOAST OF PRIDE
+"I have built"        ──▶ Self-origination  (Denies God as Creator/Giver)
+"By my mighty power"  ──▶ Self-sufficiency  (Denies God's sovereign strength)
+"For my majesty"      ──▶ Self-worship      (Steals the glory due to God alone)</pre>
+
+<p>In Daniel 2:37, Daniel had explicitly reminded him: <em>"The God of heaven hath given thee a kingdom, power, and strength, and glory."</em> Pride is taking credit for what was received purely as a divine gift.</p>
+
+<p>The moment the words left his mouth, a voice from heaven pronounced immediate sentence (Daniel 4:31). The king was instantly struck with <span class="term-gloss" data-term="boanthropy">boanthropy</span> — a rare clinical disorder where a human believes himself to be a bovine animal and adopts its behavior. For "seven times" (seven literal years), the emperor was driven from human companionship, ate dew-soaked grass like an ox, his hair grew coarse like eagle feathers, and his nails curved like the talons of a bird (Daniel 4:33).</p>
+
+<pre class="prophecy-diagram">THE SPIRITUAL LESSON OF BOANTHROPY
+        Self-Exaltation Above God (Hubris)
+                       │
+                       ▼
+        Descent Below Human Dignity (Beast-Heart)</pre>
+
+<p>Scripture reveals an unchanging psychological and spiritual truth: when man refuses to look up to God as Creator, he inevitably descends into the irrational, bestial realm. The ruler who exalted himself as a god was reduced to an animal grazing in the mud.</p>
+
+<div class="caution-card">
+  <p class="caution-card-kicker">Hermeneutical guard rail · Historical narrative vs. apocalyptic time</p>
+  <p>Some modern interpreters have attempted to apply the year-day principle to Daniel 4, turning these "seven times" into 2,520 literal years (7 × 360 = 2,520). This is an exegetical error:</p>
+  <ul>
+    <li>The year-day principle belongs strictly to <strong>symbolic apocalyptic visions</strong> (such as the 1,260 days of Daniel 7:25 or the 2,300 days of Daniel 8:14), where beasts symbolize empires and horns symbolize dynasties.</li>
+    <li>Daniel 4 is a <strong>literal court narrative</strong> concerning the biography of an actual living monarch. If the seven times were 2,520 years, Nebuchadnezzar would still be eating grass today. The narrative concludes with the king personally returning to his throne within his own natural lifespan (Daniel 4:36).</li>
+  </ul>
+</div>
+
+<div class="part-header" id="mp3">
+  <p class="part-kicker">Main Point 3</p>
+  <h3>The Recovery of Sanity and Divine Restoration</h3>
+  <p class="part-subtitle">Daniel 4:34–37</p>
+</div>
+
+<p>Restoration came only when the king looked beyond his own achievements:</p>
+
+<blockquote class="scripture-quote">"And at the end of the days I Nebuchadnezzar lifted up mine eyes unto heaven, and mine understanding returned unto me, and I blessed the most High." — Daniel 4:34 (KJV)</blockquote>
+
+<pre class="prophecy-diagram">THE PATHWAY TO SANITY
+Looking Inward/Down (Self-Glory) ──▶ Madness and Beastliness
+Looking Upward (Worship of God)  ──▶ Sanity, Dignity, and Restoration</pre>
+
+<p><strong>True sanity is fundamentally theological.</strong> A mind that denies God is fundamentally disordered; true human reason begins when a creature acknowledges its Creator.</p>
+
+<p>The banded stump in the dream proved that God's judgment was tempered with mercy: the iron and bronze band preserved the roots, ensuring that Babylon's throne would be kept intact for Nebuchadnezzar until his repentance was complete. Upon his restoration, the emperor published his closing doxology:</p>
+
+<blockquote class="scripture-quote">"Now I Nebuchadnezzar praise and extol and honour the King of heaven, all whose works are truth, and his ways judgment: and those that walk in pride he is able to abase." — Daniel 4:37 (KJV)</blockquote>
+
+<div class="level-card level-christ">
+  <p class="level-kicker">CHRIST</p>
+  <p>Understanding returned when the king lifted his eyes. True sanity begins at the throne of God — the same God whom Christ reveals and perfectly obeys.</p>
+</div>
+
+<div class="part-header" id="mp4">
+  <p class="part-kicker">Main Point 4</p>
+  <h3>The Redemptive Apex</h3>
+  <p class="part-subtitle">Christ, the true and humble King</p>
+</div>
+
+<p>Nebuchadnezzar's humiliating descent exposes the self-destructive madness of human pride. It stands as a profound typological contrast to the redemptive humility of Jesus Christ.</p>
+
+<pre class="prophecy-diagram">THE EMPEROR OF BABYLON                   THE KING OF GLORY
+Nebuchadnezzar (Daniel 4)                Jesus Christ (Philippians 2)
+• A mere man who claimed to be a god    • God incarnate who took the form of man
+• "Is not this great Babylon that I...?"• "Not my will, but Thine be done"
+• Exalted himself on his palace roof     • Humbled Himself to the death of the cross
+• Driven into the dust as a beast       • Laid in a manger; buried in a borrowed tomb
+• Humbled by force under divine wrath   • Emptied Himself willingly in sacrificial love
+• Restored only after crushing judgment • Highly exalted by the Father above every name</pre>
+
+<div class="biblical-case">
+  <p class="biblical-case-kicker">1. The divine self-emptying (kenosis)</p>
+  <p>While Nebuchadnezzar strutted on his palace roof seeking personal glory, Jesus Christ, <em>"being in the form of God, thought it not robbery to be equal with God: but made himself of no reputation, and took upon him the form of a servant, and was made in the likeness of men"</em> (Philippians 2:6–7). Christ did not hoard His divine privileges; He willingly descended into the dust of human weakness to save a rebellious race.</p>
+</div>
+
+<div class="biblical-case">
+  <p class="biblical-case-kicker">2. Restoring the fractured image of God</p>
+  <p>Sin strips humanity of its true dignity, reducing men and women to beast-like appetites and brutal competition. Jesus entered our broken world to reverse that descent. By His sinless life, His substitutionary death on the cross, and His bodily resurrection, Christ redeems us from the bestial madness of pride and restores the true <em>imago Dei</em> — the image of God — within the human soul (Colossians 3:10; 2 Corinthians 3:18).</p>
+</div>
+
+<div class="biblical-case">
+  <p class="biblical-case-kicker">3. True greatness found at the cross</p>
+  <p>Jesus taught His disciples: <em>"Whosoever exalteth himself shall be abased; and he that humbleth himself shall be exalted"</em> (Luke 14:11). The ultimate antidote to human hubris is not higher education or therapeutic self-improvement; it is gazing upon the crucified Son of God.</p>
+  <blockquote class="scripture-quote">"Take my yoke upon you, and learn of me; for I am meek and lowly in heart: and ye shall find rest unto your souls." — Matthew 11:29 (KJV)</blockquote>
+</div>
+
+<div class="principle-card">
+  <p class="principle-card-kicker">The principle to remember</p>
+  <ul>
+    <li><strong>TEXT</strong> — Does Daniel 4:17 state the thesis three times: the Most High rules?</li>
+    <li><strong>HISTORY</strong> — Are seven times literal years of one king's life, not 2,520 apocalyptic years?</li>
+    <li><strong>INTERPRETATION</strong> — Does pride ("I have built") trigger descent; does lifting eyes restore sanity?</li>
+    <li><strong>CHRIST</strong> — Does your reading lead to the humble King who emptied Himself while Nebuchadnezzar exalted himself?</li>
+  </ul>
+</div>
+
+<div class="next-sitting-card">
+  <p class="next-sitting-kicker">Next lesson</p>
+  <h4>Sheet 5 — Daniel 5: The Handwriting on the Wall</h4>
+  <p>Nebuchadnezzar learned to lift his eyes; his grandson Belshazzar did not heed the family lesson — and the gold kingdom fell on the night the river dropped.</p>
+</div>
+'''
+
+OUT.write_text(CONTENT.strip(), encoding="utf-8")
+print(f"Wrote {len(CONTENT)} chars to {OUT}")

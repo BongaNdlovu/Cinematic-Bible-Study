@@ -230,6 +230,7 @@
     const variant = (root && root.getAttribute("data-auth-variant")) || "nav";
     if (variant === "study") return "header-read-btn auth-btn " + extra;
     if (variant === "access") return "px-5 py-2.5 rounded bg-amber-600 text-paper-50 font-sans text-sm font-semibold auth-btn " + extra;
+    if (variant === "dash") return "dash-auth-out auth-btn " + extra;
     return "auth-btn " + extra;
   }
 
@@ -237,6 +238,30 @@
     if (!root) return;
     root.innerHTML = "";
     if (!user) return;
+    const variant = (root && root.getAttribute("data-auth-variant")) || "nav";
+    if (variant === "dash") {
+      const wrap = document.createElement("div");
+      wrap.className = "dash-auth-user";
+      const avatar = document.createElement("span");
+      avatar.className = "dash-auth-avatar";
+      avatar.textContent = (displayName(user)[0] || "?").toUpperCase();
+      const meta = document.createElement("div");
+      meta.className = "dash-auth-meta";
+      const name = document.createElement("span");
+      name.className = "dash-auth-name";
+      name.textContent = displayName(user);
+      const out = document.createElement("button");
+      out.type = "button";
+      out.className = buttonClass(root, "auth-sign-out");
+      out.textContent = "Sign out";
+      out.addEventListener("click", function () { signOut(); });
+      meta.appendChild(name);
+      meta.appendChild(out);
+      wrap.appendChild(avatar);
+      wrap.appendChild(meta);
+      root.appendChild(wrap);
+      return;
+    }
     const wrap = document.createElement("span");
     wrap.className = "auth-signed-in";
     const name = document.createElement("span");

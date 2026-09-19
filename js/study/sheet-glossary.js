@@ -20,7 +20,7 @@
       IMG + "glossary-hermeneutics.png"),
     entry("historicism", "Historicism", ["historicist", "historicist reading"], "word",
       "Read Daniel as an unbroken timeline of real empires from the prophet’s own day until the stone fills the earth.",
-      "This was the ordinary Protestant reading from Wycliffe through Luther, Calvin, Knox, and Newton. It treats Babylon, Medo-Persia, Greece, Rome, and divided Europe as one chain, then reads the little horn among Rome’s fragments. Preterism and futurism were later methods that break that chain.",
+      "This course uses historicism because Daniel’s succession language and parallel visions best fit a continuous historical reading when Scripture interprets Scripture. Reformers such as Wycliffe, Luther, Melanchthon, and Knox showed historicist tendencies — not one uniform system. Preterism and futurism are alternative frameworks with long histories of interpretation.",
       IMG + "glossary-historicism.png"),
     entry("preterism", "Preterism", ["preterist"], "word",
       "The claim that almost all of Daniel (and often Revelation) already finished in the distant past.",

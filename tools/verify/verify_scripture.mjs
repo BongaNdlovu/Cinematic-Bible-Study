@@ -125,11 +125,26 @@ if (!html.includes('study-why') || !studyApp.includes('renderTrace') || !studyAp
 const sitting = sheetsSrc.slice(sheetsSrc.indexOf('const sheetsData'), sheetsSrc.indexOf('const timelineEpochs'));
 const guideCtx = {};
 vm.createContext(guideCtx);
-vm.runInContext(sitting + '\nthis.guides = sheetsData.map((sheet) => sheet.studyGuide);\nthis.sittingGuides = sheetsData.map((sheet) => sheet.guide);', guideCtx);
+vm.runInContext(sitting + '\nthis.guides = sheetsData.map((sheet) => sheet.studyGuide);\nthis.sittingGuides = sheetsData.map((sheet) => sheet.guide);\nthis.quizzes = sheetsData.map((sheet) => sheet.quizzes);', guideCtx);
 const parsedGuides = guideCtx.guides || [];
 const sittingGuides = guideCtx.sittingGuides || [];
 if (parsedGuides.length !== 11) fail('expected 11 studyGuide blocks, found ' + parsedGuides.length);
 if (sittingGuides.length !== 11) fail('expected 11 sitting guide blocks, found ' + sittingGuides.length);
+const parsedQuizzes = guideCtx.quizzes || [];
+if (parsedQuizzes.length !== 11) fail('expected 11 quiz blocks, found ' + parsedQuizzes.length);
+parsedQuizzes.forEach((quizzes, index) => {
+  if (!Array.isArray(quizzes) || quizzes.length !== 5) {
+    fail('sheet ' + index + ' must have exactly 5 questions, found ' + (quizzes ? quizzes.length : 0));
+  }
+  quizzes.forEach((q, qIdx) => {
+    if (!q || !q.question || !Array.isArray(q.options) || q.options.length !== 4) {
+      fail('sheet ' + index + ' question ' + qIdx + ' must have a stem and four options');
+    }
+    if (typeof q.correct !== 'number' || q.correct < 0 || q.correct > 3) {
+      fail('sheet ' + index + ' question ' + qIdx + ' has an invalid correct index');
+    }
+  });
+});
 
 parsedGuides.forEach((guide, index) => {
   if (!guide || !Array.isArray(guide.trace) || guide.trace.length !== 4) {
