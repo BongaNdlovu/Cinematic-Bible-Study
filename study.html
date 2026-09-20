@@ -4,6 +4,16 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>The Scroll of Daniel | Historicist Exilic Study</title>
+  <meta name="description" content="11 classroom-ready Daniel sittings with primary sources, KJV scripture, interactive proof workbenches, facilitator notes, and printable certificate.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://cinematic-bible-study-daniel.vercel.app/study.html">
+  <meta property="og:title" content="The Scroll of Daniel — The Sitting | Historicist Exegesis">
+  <meta property="og:description" content="11 classroom-ready Daniel sittings with primary sources, KJV scripture, interactive proof workbenches, facilitator notes, and printable certificate.">
+  <meta property="og:image" content="https://cinematic-bible-study-daniel.vercel.app/assets/site/hero-main.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="The Scroll of Daniel — The Sitting | Historicist Exegesis">
+  <meta name="twitter:description" content="11 classroom-ready Daniel sittings with primary sources, KJV scripture, interactive proof workbenches, facilitator notes, and printable certificate.">
+  <meta name="twitter:image" content="https://cinematic-bible-study-daniel.vercel.app/assets/site/hero-main.jpg">
 
   <!-- Editorial & Monospace Typography -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -2642,12 +2652,172 @@
     }
     #certificate-preview[hidden] { display: none !important; }
     #btn-download-certificate[hidden] { display: none !important; }
+    /* --- SID Classroom Print Styles --- */
+    @media print {
+      .site-header,
+      .study-topbar,
+      header,
+      .cinematic-atmosphere,
+      #weather-canvas,
+      #pomo-dock,
+      #toc-drawer,
+      #toc-overlay,
+      .study-instruments,
+      .horizon-panel,
+      #lesson-connect,
+      .museum-links,
+      #sitting-spine,
+      #sitting-guide,
+      #capstone-modal,
+      #placement-modal,
+      #competency-record-modal,
+      #dossier-modal,
+      #certificate-review-modal,
+      .pomo-wrap,
+      .unveil,
+      .glow-drift,
+      .shafts,
+      .vignette,
+      footer,
+      button,
+      .auth-slot,
+      .instrument-tabs,
+      #btn-atmosphere-toggle,
+      #theme-btn {
+        display: none !important;
+      }
+
+      body, html {
+        background: #ffffff !important;
+        color: #111111 !important;
+        font-size: 11pt !important;
+        line-height: 1.5 !important;
+      }
+
+      .sitting-shell, .sitting-layout, .sitting-main {
+        max-width: 100% !important;
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+
+      #sheet-article {
+        display: block !important;
+        color: #111 !important;
+      }
+
+      #facilitator-strip:not(:empty):not([hidden]) {
+        display: block !important;
+        border: 2px solid #333 !important;
+        background: #f9f9f9 !important;
+        color: #111 !important;
+        padding: 12pt !important;
+        margin-bottom: 16pt !important;
+        page-break-inside: avoid;
+      }
+      #facilitator-strip:empty,
+      #facilitator-strip[hidden] {
+        display: none !important;
+      }
+
+      #workbench-section, .workbench-card, .task-box {
+        display: block !important;
+        border: 1px solid #666 !important;
+        background: #fafafa !important;
+        color: #111 !important;
+        page-break-inside: avoid;
+        margin-bottom: 16pt !important;
+      }
+
+      #revision-section {
+        display: block !important;
+        border-top: 1px solid #333 !important;
+        page-break-inside: avoid;
+      }
+    }
+
+    /* --- Classroom Projection Mode (?project=1) --- */
+    body.projection-mode {
+      font-size: 18px;
+    }
+    body.projection-mode .article-body {
+      font-size: 22px;
+      line-height: 1.85;
+      max-width: 960px;
+    }
+    body.projection-mode .article-body h2,
+    body.projection-mode .article-body h3 {
+      font-size: 32px;
+    }
+    body.projection-mode #weather-canvas,
+    body.projection-mode .cinematic-atmosphere,
+    body.projection-mode .shafts,
+    body.projection-mode .glow-drift,
+    body.projection-mode .vignette,
+    body.projection-mode #btn-atmosphere-toggle {
+      display: none !important;
+    }
+
+    /* --- Stronger Reduced Motion --- */
     @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+      }
       .sitting-guide, .access-panel { backdrop-filter: none; }
       #next-sheet-btn.is-guide-spot,
       #access-open-btn.is-guide-spot {
-        animation: none;
+        animation: none !important;
         box-shadow: 0 0 0 3px #c59b27;
+      }
+      .guide-spot-pulse {
+        animation: none !important;
+      }
+      #weather-canvas {
+        display: none !important;
+      }
+    }
+
+    /* --- Mobile Study Desk Optimization (~390px) --- */
+    @media (max-width: 480px) {
+      .study-topbar {
+        position: relative !important;
+      }
+      .study-topbar-inner {
+        flex-wrap: wrap;
+        gap: 6px;
+        padding: 6px 10px;
+      }
+      .study-tools {
+        width: 100%;
+        justify-content: space-between;
+        overflow-x: auto;
+      }
+      .header-competency-pill {
+        display: none !important;
+      }
+      .sitting-main {
+        padding-top: 12px !important;
+      }
+      .workbench-card {
+        padding: 12px !important;
+      }
+      .workbench-card > .flex {
+        flex-wrap: wrap;
+        align-items: flex-start;
+        gap: 8px;
+      }
+      .workbench-card .grid {
+        grid-template-columns: 1fr !important;
+      }
+      .workbench-card input,
+      .workbench-card select,
+      .workbench-card textarea {
+        width: 100% !important;
+      }
+      .task-box {
+        padding: 12px !important;
       }
     }
     @media (max-width: 640px) {
@@ -2786,6 +2956,10 @@
           <span id="font-size-indicator" class="px-1.5 py-1 text-[10px] text-ink-500 dark:text-paper-400 border-l border-r border-paper-300 dark:border-paper-800 select-none">100%</span>
           <button onclick="adjustFontSize(1)" class="px-2 py-1 hover:bg-paper-200 dark:hover:bg-paper-800 text-ink-700 dark:text-paper-300" title="Increase font size">A+</button>
         </div>
+
+        <!-- Print & Progress Buttons -->
+        <button onclick="if(window.StudyCompetency)window.StudyCompetency.renderCompetencyRecordModal()" id="btn-progress-header" class="px-2 py-1 rounded border border-paper-300 dark:border-paper-800 hover:border-amber-600 text-xs font-mono text-ink-700 dark:text-paper-300" title="My Progress & Export">📊 Progress</button>
+        <button onclick="window.print()" id="btn-print-header" class="px-2 py-1 rounded border border-paper-300 dark:border-paper-800 hover:border-amber-600 text-xs font-mono text-ink-700 dark:text-paper-300" title="Print Current Sitting">🖨️ Print</button>
 
         <!-- Theme Mode Cycler -->
         <button onclick="cycleTheme()" id="theme-btn" class="p-1.5 rounded hover:bg-paper-200/60 dark:hover:bg-paper-900 text-xs font-mono text-ink-700 dark:text-paper-300" title="Toggle Theme">
@@ -2943,6 +3117,14 @@
       <button type="button" id="btn-download-certificate" hidden class="mt-3 w-full px-4 py-2.5 rounded-lg bg-amber-700 hover:bg-amber-600 text-paper-50 font-sans text-sm font-semibold">
         Download certificate
       </button>
+      <div class="mt-3 flex items-center justify-between gap-2 pt-2 border-t border-paper-200 dark:border-paper-800">
+        <button type="button" id="btn-codex-progress" onclick="if(window.StudyCompetency)window.StudyCompetency.renderCompetencyRecordModal()" class="text-[11px] font-mono px-2.5 py-1.5 rounded border border-amber-600/40 text-amber-800 dark:text-amber-300 hover:bg-amber-500/10 flex-1 text-center">
+          📊 My Progress
+        </button>
+        <button type="button" id="btn-toggle-teach" class="text-[11px] font-mono px-2.5 py-1.5 rounded border border-paper-300 dark:border-paper-700 text-ink-700 dark:text-paper-300 hover:bg-paper-200 dark:hover:bg-paper-800 flex-1 text-center">
+          👨‍🏫 Teacher Notes
+        </button>
+      </div>
       <div class="mt-3 flex gap-3 museum-links">
         <a href="index.html" class="text-ink-500 dark:text-paper-400 hover:text-amber-700 dark:hover:text-amber-300">Home</a>
         <a href="map.html" class="text-ink-500 dark:text-paper-400 hover:text-amber-700 dark:hover:text-amber-300">Map</a>
@@ -3117,6 +3299,9 @@
       <textarea id="sheet-notes" hidden class="mt-3 w-full min-h-[90px] rounded-lg bg-paper-50 dark:bg-paper-950 border border-paper-300 dark:border-paper-800 p-3 text-sm text-ink-800 dark:text-paper-200" placeholder="Private notes for this sheet (saved on this device)"></textarea>
       <aside id="glossary-panel" hidden class="mt-3 p-4 rounded-lg border border-amber-600/30 bg-paper-100/90 dark:bg-paper-950/80 text-sm text-ink-700 dark:text-paper-300"></aside>
     </div>
+
+    <!-- Classroom Facilitator Strip (?teach=1 or Codex toggle) -->
+    <div id="facilitator-strip" class="facilitator-strip" hidden></div>
 
     <!-- Dynamic Story Sheet Content (Medium Editorial Format) -->
     <article id="sheet-article" class="article-body font-bodySerif text-ink-800 dark:text-paper-200 transition-all duration-150">
@@ -3297,6 +3482,8 @@
   <script src="js/shared/errors.js"></script>
   <script src="js/shared/auth.js"></script>
   <script src="js/shared/terms.js"></script>
+  <script src="js/shared/progress-sync.js"></script>
+  <script src="js/shared/reviews.js"></script>
   <script src="js/study/scripture.js"></script>
   <script src="js/map/map-data.js"></script>
   <script src="js/study/workbench.js"></script>

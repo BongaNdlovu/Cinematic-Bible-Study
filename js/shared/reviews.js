@@ -72,10 +72,11 @@
   function loadApproved() {
     const list = document.getElementById("witness-list");
     const empty = document.getElementById("witness-empty");
+    if (list) list.hidden = true;
+    if (empty) empty.hidden = true;
     const c = authClient();
     if (!list) return Promise.resolve();
     if (!c) {
-      if (empty) empty.hidden = false;
       return Promise.resolve();
     }
     return c.from(TABLE)
@@ -87,15 +88,17 @@
       .then(function (res) {
         list.innerHTML = "";
         const rows = (res && res.data) || [];
-        if (res && res.error) {
-          if (empty) {
-            empty.hidden = false;
-            empty.textContent = "No reviews yet.";
-          }
+        if ((res && res.error) || rows.length === 0) {
+          list.hidden = true;
+          if (empty) empty.hidden = true;
           return;
         }
+        list.hidden = false;
+        if (empty) empty.hidden = true;
         rows.forEach(function (row) { list.appendChild(renderQuote(row)); });
-        if (empty) empty.hidden = rows.length > 0;
+      }).catch(function () {
+        list.hidden = true;
+        if (empty) empty.hidden = true;
       });
   }
 
@@ -182,14 +185,8 @@
       });
   }
 
-  function submitReview(raw) {
-    if (!signedIn()) {
-      setStatus("Sign in to post.", "error");
-      if (window.ScrollTerms && typeof window.ScrollTerms.requestSignIn === "function") {
-        window.ScrollTerms.requestSignIn();
-      }
-      return Promise.resolve(false);
-    }
+  function submitReview(raw, opts) {
+    opts = opts || {};
     const text = String(raw || "").replace(/\s+/g, " ").trim();
     if (text.length < MIN) {
       setStatus("Write at least " + MIN + " characters.", "error");
@@ -199,15 +196,45 @@
       setStatus("Keep under " + MAX + " characters.", "error");
       return Promise.resolve(false);
     }
+
     const c = authClient();
     const u = currentUser();
+
+    // Gracefully attempt to insert survey feedback if table exists
+    if (c) {
+      try {
+        const cohortVal = opts.cohort || (window.BAJourney && typeof window.BAJourney.getCohort === 'function' ? window.BAJourney.getCohort() : null);
+        c.from("exhibit_surveys").insert({
+          user_id: u ? u.id : null,
+          cohort: cohortVal || '',
+          role: opts.role || 'Student',
+          rating: opts.rating ? Number(opts.rating) : null,
+          feedback: text,
+          responses: {
+            cohort: cohortVal || '',
+            role: opts.role || 'Student',
+            rating: opts.rating ? Number(opts.rating) : null,
+            classroomUse: opts.classroomUse || ''
+          }
+        }).then(function () {}).catch(function () {});
+      } catch (e) {}
+    }
+
+    if (!signedIn()) {
+      setStatus("Sign in to post.", "error");
+      if (window.ScrollTerms && typeof window.ScrollTerms.requestSignIn === "function") {
+        window.ScrollTerms.requestSignIn();
+      }
+      return Promise.resolve(false);
+    }
     if (!c || !u) {
       setStatus("Sign in to post.", "error");
       return Promise.resolve(false);
     }
+    const displayName = (opts.name ? String(opts.name).trim().slice(0, 80) : reviewerName()) || "Student";
     return c.from(TABLE).insert({
       user_id: u.id,
-      display_name: reviewerName(),
+      display_name: displayName,
       body: text,
       approved: false,
       rejected: false
@@ -221,6 +248,9 @@
       if (input) input.value = "";
       loadQueue();
       return true;
+    }).catch(function () {
+      setStatus("Could not save. Try again.", "error");
+      return false;
     });
   }
 
@@ -265,6 +295,11 @@
       });
     }
   }
+
+  window.ScrollReviews = {
+    submitReview: submitReview,
+    loadApproved: loadApproved
+  };
 
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot);
   else boot();

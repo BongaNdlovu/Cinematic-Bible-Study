@@ -684,7 +684,7 @@
     const RING_CIRCUMFERENCE = 427.26;
 
     // Atmospheric Focus State — a continuous quiet → storm → sunshine continuum
-    let weatherPreset = 'auto'; // 'auto', 'quiet', 'storm', 'sunshine', 'off'
+    let weatherPreset = 'off'; // default off for quiet, distraction-free study
     let currentWeatherType = 'quiet';
     let weatherAnimId = null;
     let particles = [];
@@ -960,7 +960,10 @@
     }
 
     function setWeatherPreset(preset, silent) {
-      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches && preset !== 'off') {
+      const prefersReduced =
+        window.matchMedia('(prefers-reduced-motion: reduce)').matches ||
+        (window.BAJourney && typeof window.BAJourney.prefersReducedMotion === 'function' && window.BAJourney.prefersReducedMotion());
+      if (prefersReduced && preset !== 'off') {
         preset = 'off';
       }
       if (document.hidden && preset !== 'off') {
@@ -1401,6 +1404,46 @@
         renderList(guide.ask, false);
     }
 
+    function renderFacilitatorStrip(fac) {
+      const box = document.getElementById("facilitator-strip");
+      if (!box) return;
+      const urlParams = new URLSearchParams(window.location.search);
+      const isTeach = urlParams.get("teach") === "1" || localStorage.getItem("daniel_teach_mode") === "1";
+      if (!fac || !isTeach) {
+        box.hidden = true;
+        box.innerHTML = "";
+        return;
+      }
+      box.hidden = false;
+      const points = (fac.talkingPoints || []).map(p => `<li>${p}</li>`).join('');
+      const asks = (fac.askClass || []).map(q => `<li>${q}</li>`).join('');
+      box.innerHTML = `
+        <div class="p-4 sm:p-5 rounded-xl border border-amber-600/40 bg-amber-500/10 dark:bg-amber-950/20 mb-8 font-sans">
+          <div class="flex items-center justify-between border-b border-amber-600/20 pb-3 mb-4">
+            <div class="flex items-center gap-2">
+              <span class="px-2 py-0.5 rounded bg-amber-600 text-paper-50 font-mono text-[11px] font-bold uppercase">Classroom Facilitator</span>
+              <span class="font-mono text-xs text-ink-600 dark:text-paper-400">Paced for ${fac.minutes || 40} min class</span>
+            </div>
+            <span class="text-[11px] font-mono text-amber-800 dark:text-amber-400 font-semibold">Teacher Notes (?teach=1)</span>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+            <div>
+              <h5 class="font-mono font-bold text-amber-900 dark:text-amber-300 uppercase text-[11px] mb-2">Key Discussion Points</h5>
+              <ul class="space-y-1.5 text-ink-800 dark:text-paper-200 list-disc list-inside">
+                ${points}
+              </ul>
+            </div>
+            <div>
+              <h5 class="font-mono font-bold text-amber-900 dark:text-amber-300 uppercase text-[11px] mb-2">Ask the Class</h5>
+              <ul class="space-y-1.5 text-ink-800 dark:text-paper-200 list-disc list-inside">
+                ${asks}
+              </ul>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
     function canAccessSheet(index) {
       if (new URLSearchParams(location.search).get("preview") === "full") return true;
       if (window.BAJourney && typeof window.BAJourney.canAccessSheet === 'function') {
@@ -1828,6 +1871,7 @@
       renderSheetFlow(data);
       renderLessonConnectBar(index);
       renderStudyGuide(data.studyGuide);
+      renderFacilitatorStrip(data.facilitator);
       renderSheetVerify(index);
       renderChristologyPlaque(data.christology);
       if (window.GlossaryIndex) {
@@ -2202,7 +2246,7 @@
       applyTheme(currentThemeIdx, true);
       resizeWeatherCanvas();
       updateAutoWeather();
-      setWeatherPreset('auto', true);
+      setWeatherPreset('off', true);
       updateTimerDisplay();
       window.addEventListener('resize', () => {
         resizeWeatherCanvas();
@@ -2284,6 +2328,41 @@
           if (box && !box.hidden) box.scrollIntoView({ behavior: 'smooth', block: 'start' });
         });
       }
+      if (new URLSearchParams(window.location.search).get('project') === '1') {
+        document.body.classList.add('projection-mode');
+      }
+      const btnProgHeader = document.getElementById('btn-progress-header');
+      if (btnProgHeader) {
+        btnProgHeader.addEventListener('click', () => {
+          if (window.StudyCompetency && typeof window.StudyCompetency.renderCompetencyRecordModal === 'function') {
+            window.StudyCompetency.renderCompetencyRecordModal();
+          }
+        });
+      }
+      const btnCodexProg = document.getElementById('btn-codex-progress');
+      if (btnCodexProg) {
+        btnCodexProg.addEventListener('click', () => {
+          if (window.StudyCompetency && typeof window.StudyCompetency.renderCompetencyRecordModal === 'function') {
+            window.StudyCompetency.renderCompetencyRecordModal();
+          }
+        });
+      }
+      const btnPrintHeader = document.getElementById('btn-print-header');
+      if (btnPrintHeader) {
+        btnPrintHeader.addEventListener('click', () => {
+          window.print();
+        });
+      }
+      const btnToggleTeach = document.getElementById('btn-toggle-teach');
+      if (btnToggleTeach) {
+        btnToggleTeach.addEventListener('click', () => {
+          const current = localStorage.getItem('daniel_teach_mode') === '1';
+          localStorage.setItem('daniel_teach_mode', current ? '0' : '1');
+          showToast(current ? 'Facilitator notes hidden' : 'Facilitator notes enabled');
+          const curData = sheetsData[currentSheetIndex];
+          if (curData) renderFacilitatorStrip(curData.facilitator);
+        });
+      }
       document.addEventListener('visibilitychange', () => {
         if (document.hidden) stopWeatherAnimation();
         else if (weatherPreset !== 'off') startWeatherAnimation();
@@ -2308,6 +2387,15 @@
       if (window.ScrollAuth && typeof window.ScrollAuth.onChange === "function") {
         window.ScrollAuth.onChange(refreshAdminAccess);
       }
+      window.addEventListener('ba-progress-synced', () => {
+        if (window.BAJourney && typeof window.BAJourney.load === 'function') {
+          completedSheets = new Set((window.BAJourney.load().completedSheets || []).map(Number));
+        }
+        renderToc();
+        syncHorizonLocks();
+        updateNextGate();
+        syncCertificateCta();
+      });
     });
 
     Object.assign(window, {

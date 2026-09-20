@@ -481,6 +481,188 @@
     const pdf = buildPdf(jpegBytesFromCanvas(canvas));
     downloadPdf(pdf, filenameFromName(name));
     close();
+    setTimeout(() => {
+      openReviewPrompt(name);
+    }, 600);
+  }
+
+  function escapeHtml(str) {
+    return String(str || "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#39;");
+  }
+
+  function openReviewPrompt(studentName) {
+    const existing = document.getElementById("certificate-review-modal");
+    if (existing) existing.remove();
+
+    const cohortName = (window.BAJourney && typeof window.BAJourney.getCohort === "function" && window.BAJourney.getCohort()) || "";
+    const modal = document.createElement("div");
+    modal.id = "certificate-review-modal";
+    modal.className = "fixed inset-0 z-[80] flex items-center justify-center p-4 bg-ink-950/80 backdrop-blur-sm font-sans";
+    modal.setAttribute("role", "dialog");
+    modal.setAttribute("aria-modal", "true");
+    modal.setAttribute("aria-labelledby", "cert-review-title");
+
+    modal.innerHTML = `
+      <div class="relative w-full max-w-lg rounded-2xl border border-amber-600/30 bg-paper-50 dark:bg-paper-900 p-6 shadow-2xl overflow-hidden text-left">
+        <div class="flex items-start justify-between gap-4 mb-4">
+          <div>
+            <span class="inline-block px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold uppercase tracking-wider bg-amber-500/20 text-amber-900 dark:text-amber-300 mb-1.5">Classroom Feedback</span>
+            <h3 id="cert-review-title" class="text-xl font-serif font-bold text-ink-900 dark:text-paper-100">Congratulations on your completion!</h3>
+            <p class="text-xs text-ink-600 dark:text-paper-300 mt-1">Your certificate is downloading. Please take 30 seconds to share your experience to help future students and facilitators.</p>
+          </div>
+          <button type="button" id="cert-review-close" class="p-1 rounded-lg text-ink-400 hover:text-ink-700 dark:hover:text-paper-200 transition-colors" aria-label="Close dialog">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+          </button>
+        </div>
+
+        <form id="cert-review-form" class="space-y-3.5">
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label for="cert-review-name" class="block text-[11px] font-mono font-semibold text-ink-700 dark:text-paper-300 mb-1">Your Name</label>
+              <input type="text" id="cert-review-name" class="w-full px-3 py-1.5 rounded-lg border border-ink-300 dark:border-ink-700 bg-paper-100 dark:bg-paper-800 text-ink-900 dark:text-paper-100 text-xs focus:ring-2 focus:ring-amber-500 outline-none" value="${escapeHtml(studentName || '')}" required maxlength="80">
+            </div>
+            <div>
+              <label for="cert-review-role" class="block text-[11px] font-mono font-semibold text-ink-700 dark:text-paper-300 mb-1">Your Role</label>
+              <select id="cert-review-role" class="w-full px-3 py-1.5 rounded-lg border border-ink-300 dark:border-ink-700 bg-paper-100 dark:bg-paper-800 text-ink-900 dark:text-paper-100 text-xs focus:ring-2 focus:ring-amber-500 outline-none">
+                <option value="Student">Student</option>
+                <option value="Facilitator">Facilitator</option>
+                <option value="Pastor">Pastor / Teacher</option>
+                <option value="Independent">Independent Learner</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label for="cert-review-rating" class="block text-[11px] font-mono font-semibold text-ink-700 dark:text-paper-300 mb-1">Overall Rating</label>
+              <select id="cert-review-rating" class="w-full px-3 py-1.5 rounded-lg border border-ink-300 dark:border-ink-700 bg-paper-100 dark:bg-paper-800 text-ink-900 dark:text-paper-100 text-xs focus:ring-2 focus:ring-amber-500 outline-none">
+                <option value="5">★★★★★ (5/5) Excellent</option>
+                <option value="4">★★★★☆ (4/5) Very Good</option>
+                <option value="3">★★★☆☆ (3/5) Good</option>
+                <option value="2">★★☆☆☆ (2/5) Fair</option>
+                <option value="1">★☆☆☆☆ (1/5) Needs Improvement</option>
+              </select>
+            </div>
+            <div>
+              <label for="cert-review-cohort" class="block text-[11px] font-mono font-semibold text-ink-700 dark:text-paper-300 mb-1">Cohort (Optional)</label>
+              <input type="text" id="cert-review-cohort" class="w-full px-3 py-1.5 rounded-lg border border-ink-300 dark:border-ink-700 bg-paper-100 dark:bg-paper-800 text-ink-900 dark:text-paper-100 text-xs focus:ring-2 focus:ring-amber-500 outline-none" value="${escapeHtml(cohortName)}" placeholder="e.g. Class 2026">
+            </div>
+          </div>
+
+          <div>
+            <label for="cert-review-class" class="block text-[11px] font-mono font-semibold text-ink-700 dark:text-paper-300 mb-1">Would you use this with a class?</label>
+            <select id="cert-review-class" class="w-full px-3 py-1.5 rounded-lg border border-ink-300 dark:border-ink-700 bg-paper-100 dark:bg-paper-800 text-ink-900 dark:text-paper-100 text-xs focus:ring-2 focus:ring-amber-500 outline-none">
+              <option value="yes">Yes</option>
+              <option value="maybe">Maybe</option>
+              <option value="no">No</option>
+            </select>
+          </div>
+
+          <div>
+            <div class="flex items-center justify-between mb-1">
+              <label for="cert-review-body" class="block text-[11px] font-mono font-semibold text-ink-700 dark:text-paper-300">Your Reflection / Review</label>
+              <span id="cert-review-count" class="text-[10px] font-mono text-ink-500 dark:text-paper-400">0 / 40 min chars</span>
+            </div>
+            <textarea id="cert-review-body" rows="3" minlength="40" maxlength="600" required placeholder="What did this study clarify about Daniel's prophecies? Share your feedback (minimum 40 characters)..." class="w-full px-3 py-2 rounded-lg border border-ink-300 dark:border-ink-700 bg-paper-100 dark:bg-paper-800 text-ink-900 dark:text-paper-100 text-xs focus:ring-2 focus:ring-amber-500 outline-none resize-none"></textarea>
+          </div>
+
+          <div id="cert-review-status" class="text-xs font-medium" hidden></div>
+
+          <div class="flex items-center justify-end gap-2.5 pt-2 border-t border-ink-200 dark:border-ink-800">
+            <button type="button" id="cert-review-skip" class="px-4 py-2 rounded-lg border border-ink-300 dark:border-ink-700 text-ink-700 dark:text-paper-300 text-xs font-semibold hover:bg-paper-200 dark:hover:bg-paper-800 transition-colors">Maybe Later</button>
+            <button type="submit" id="cert-review-submit" disabled class="px-5 py-2 rounded-lg bg-amber-600 hover:bg-amber-700 text-paper-50 text-xs font-semibold shadow disabled:opacity-40 disabled:cursor-not-allowed transition-all">Submit Review</button>
+          </div>
+        </form>
+      </div>
+    `;
+
+    document.body.appendChild(modal);
+
+    const closeBtn = document.getElementById("cert-review-close");
+    const skipBtn = document.getElementById("cert-review-skip");
+    const bodyInput = document.getElementById("cert-review-body");
+    const submitBtn = document.getElementById("cert-review-submit");
+    const countEl = document.getElementById("cert-review-count");
+    const statusEl = document.getElementById("cert-review-status");
+    const form = document.getElementById("cert-review-form");
+
+    function closeModal() {
+      modal.remove();
+    }
+    if (closeBtn) closeBtn.addEventListener("click", closeModal);
+    if (skipBtn) skipBtn.addEventListener("click", closeModal);
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) closeModal();
+    });
+
+    if (bodyInput) {
+      bodyInput.addEventListener("input", () => {
+        const len = bodyInput.value.trim().length;
+        if (countEl) countEl.textContent = `${len} / 40 min chars`;
+        if (submitBtn) submitBtn.disabled = len < 40;
+        if (len >= 40) {
+          countEl.classList.remove("text-ink-500", "dark:text-paper-400");
+          countEl.classList.add("text-emerald-600", "dark:text-emerald-400");
+        } else {
+          countEl.classList.remove("text-emerald-600", "dark:text-emerald-400");
+          countEl.classList.add("text-ink-500", "dark:text-paper-400");
+        }
+      });
+    }
+
+    if (form) {
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const text = bodyInput.value.trim();
+        if (text.length < 40) return;
+        const nameVal = (document.getElementById("cert-review-name")?.value || studentName || "").trim();
+        const roleVal = document.getElementById("cert-review-role")?.value || "Student";
+        const ratingVal = Number(document.getElementById("cert-review-rating")?.value || "5");
+        const cohortVal = (document.getElementById("cert-review-cohort")?.value || "").trim();
+        const classUse = document.getElementById("cert-review-class")?.value || "";
+
+        if (submitBtn) {
+          submitBtn.disabled = true;
+          submitBtn.textContent = "Submitting...";
+        }
+
+        if (window.ScrollReviews && typeof window.ScrollReviews.submitReview === "function") {
+          window.ScrollReviews.submitReview(text, {
+            name: nameVal,
+            role: roleVal,
+            rating: ratingVal,
+            cohort: cohortVal,
+            classroomUse: classUse
+          }).then((res) => {
+            if (statusEl) {
+              statusEl.hidden = false;
+              statusEl.className = "text-xs font-semibold text-emerald-600 dark:text-emerald-400";
+              statusEl.textContent = "Thank you for your review! It will appear once approved.";
+            }
+            setTimeout(closeModal, 1800);
+          }).catch(() => {
+            if (statusEl) {
+              statusEl.hidden = false;
+              statusEl.className = "text-xs font-semibold text-amber-600 dark:text-amber-400";
+              statusEl.textContent = "Thank you! Your feedback has been recorded.";
+            }
+            setTimeout(closeModal, 1800);
+          });
+        } else {
+          if (statusEl) {
+            statusEl.hidden = false;
+            statusEl.className = "text-xs font-semibold text-emerald-600 dark:text-emerald-400";
+            statusEl.textContent = "Thank you for completing the course!";
+          }
+          setTimeout(closeModal, 1500);
+        }
+      });
+    }
   }
 
   function bindUi() {

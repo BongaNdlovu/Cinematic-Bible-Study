@@ -7,6 +7,18 @@
         epoch: "THE PROLOGUE",
         readTime: "16 min read",
         allocatedMinutes: 16,
+        facilitator: {
+          minutes: 40,
+          talkingPoints: [
+            "Daniel 1:2 anchors all apocalyptic prophecy: earthly rulers conquer only by divine appointment.",
+            "Compare the three interpretive systems: historicism follows an unbroken chain; preterism truncates at antiquity; futurism inserts arbitrary gaps.",
+            "Establish the year-day metric from Numbers 14:34 and Ezekiel 4:6 as a verified prophetic scale."
+          ],
+          askClass: [
+            "Why is human history safer in God's hands than in political superpowers?",
+            "What happens to our understanding of prophecy if we sever chapters with arbitrary multi-thousand-year gaps?"
+          ]
+        },
         scripture: "How the book teaches you to read it",
         title: "The Prophetic Blueprint: Why Daniel's Unbroken Chain Centers on Jesus Christ",
         subtitle: "God's historical roadmap from exile to the cross to the everlasting kingdom — and why how you read decides what you see.",
@@ -375,6 +387,18 @@ Daniel 9:24–27 ──▶  "Seventy weeks" (70 × 7 = 490 prophetic days)
         epoch: "SHEET 01 &bull; DANIEL 1",
         readTime: "18 min read",
         allocatedMinutes: 18,
+        facilitator: {
+          minutes: 40,
+          talkingPoints: [
+            "Trace the three sieges of Jerusalem (605, 597, 586 B.C.) and Isaiah 39's fulfilled warning.",
+            "Distinguish between civic competence (learning Babylonian tongue and statecraft) and covenant surrender (defiling at the king's table).",
+            "Examine the Hebrew zeroim (Dan 1:12) as an act of faith, looking to God rather than royal patronage for strength."
+          ],
+          askClass: [
+            "Where in our culture do believers confuse secular professional excellence with spiritual compromise?",
+            "How does Daniel's refusal to defile his conscience prepare him to receive prophetic revelations?"
+          ]
+        },
         scripture: "Daniel 1:1-21 &bull; Babylon, 605 B.C.",
         title: "The Exilic Crucible: Identity, Consecration, and the Redemptive Obedience of Christ",
         subtitle: "Sovereign exile, the battle for identity at Babylon's table, and how Daniel's stand points to the faithful Son.",
@@ -751,6 +775,18 @@ DANIEL IN BABYLON                         JESUS IN THE WILDERNESS
         epoch: "SHEET 02 &bull; DANIEL 2",
         readTime: "20 min read",
         allocatedMinutes: 20,
+        facilitator: {
+          minutes: 40,
+          talkingPoints: [
+            "Daniel 2:38 is the immovable biblical anchor: 'Thou art this head of gold' fixes Babylon as the starting point.",
+            "The sequence of metals (gold, silver, bronze, iron, divided clay) is contiguous without historical gaps or cyclic restarts.",
+            "The stone cut out without hands strikes the feet, teaching that God's kingdom arrives supernaturally, not through political evolution."
+          ],
+          askClass: [
+            "Why do modern commentators attempt to reboot the head of gold in modern nations, and how does Daniel 2:38 refute them?",
+            "What comfort does the image give us living in the divided era of iron and clay?"
+          ]
+        },
         scripture: "Daniel 2:1-49 &bull; Babylon, 603 B.C.",
         title: "The Metallic Colossus: The Historicist Blueprint of History and the Sovereign Triumph of Christ",
         subtitle: "From the impasse of human wisdom to the stone that fills the earth — God's unbroken chain of empires and Christ's everlasting kingdom.",
@@ -1152,6 +1188,18 @@ Iron (Coercive Civil Power)  +  Clay (Religious/Ecclesiastical Claims)
         epoch: "SHEET 03 &bull; DANIEL 3",
         readTime: "18 min read",
         allocatedMinutes: 18,
+        facilitator: {
+          minutes: 40,
+          talkingPoints: [
+            "Contrast Nebuchadnezzar's all-gold statue on Dura with the multi-metal statue in chapter 2: an imperial act of political defiance.",
+            "Observe the courage of the three Hebrews: 'our God whom we serve is able to deliver us... but if not, we will not serve thy gods.'",
+            "The theophany in the furnace: Christ walks with His witnesses inside the fire before deliverance."
+          ],
+          askClass: [
+            "How does the phrase 'but if not' demonstrate unconditional covenant loyalty?",
+            "In what ways do modern governments create 'all-gold' cultural mandates demanding total allegiance?"
+          ]
+        },
         scripture: "Daniel 3:1-30 &bull; Plain of Dura, c. 594 B.C.",
         title: "The Plain of Dura: Forced Worship, the \"But If Not\" Faith, and Christ in the Fire",
         subtitle: "Nebuchadnezzar's imperial veto, the Daniel 3 / Revelation 13 blueprint, and the Fourth who walks in the flames.",
@@ -1511,6 +1559,18 @@ THE TRIAL: IMMANENCE IN THE FIRE                           THE CROSS: VICARIOUS 
         epoch: "SHEET 04 &bull; DANIEL 4",
         readTime: "18 min read",
         allocatedMinutes: 18,
+        facilitator: {
+          minutes: 40,
+          talkingPoints: [
+            "The tree vision of Daniel 4 addresses royal hubris and the divine cure: seven times of wilderness humiliation.",
+            "The iron and bronze bands preserving the stump guarantee that God remembers His covenant even in judgment.",
+            "The central decree of the Watchers (Dan 4:17): 'the Most High ruleth in the kingdom of men, and giveth it to whomsoever He will.'"
+          ],
+          askClass: [
+            "Why must personal consecration and humility accompany knowledge of prophetic timelines?",
+            "What does Nebuchadnezzar's public confession at the close of chapter 4 reveal about God's mercy to pagan kings?"
+          ]
+        },
         scripture: "Daniel 4:1-37 &bull; Babylon, c. 570 B.C.",
         title: "The Emperor in the Dust: Pride, Divine Sanity, and the Humility of Christ",
         subtitle: "A pagan king's open confession — hubris, beastly madness, restored reason, and Christ's kenosis.",
@@ -1870,6 +1930,18 @@ Nebuchadnezzar (Daniel 4)                Jesus Christ (Philippians 2)
         epoch: "SHEET 05 &bull; DANIEL 5",
         readTime: "18 min read",
         allocatedMinutes: 18,
+        facilitator: {
+          minutes: 40,
+          talkingPoints: [
+            "Belshazzar's sacrilege: drinking wine from Jerusalem's sacred temple vessels while praising idols of gold and silver.",
+            "The night of October 12, 539 B.C.: Cyrus diverts the Euphrates river and enters Babylon without siege resistance.",
+            "Deciphering MENE, TEKEL, PERES: God measures kingdoms by moral and spiritual justice, not military fortifications."
+          ],
+          askClass: [
+            "Why is using holy things for common entertainment a sign of imminent civil collapse?",
+            "How does Daniel 5 speak to modern societies that boast impenetrable security while ignoring moral accountability?"
+          ]
+        },
         scripture: "Daniel 5:1-31 &bull; Babylon, October 11/12, 539 B.C.",
         title: "The Handwriting on the Plaster: The Fall of Babylon, the Divine Balance Sheet, and the Righteousness of Christ",
         subtitle: "Sacrilege against known light, Heaven's marketplace audit, and the only weight that can cover us.",
@@ -2264,6 +2336,18 @@ CYRUS THE DELIVERER                       JESUS CHRIST THE REDEEMER
         epoch: "SHEET 06 &bull; DANIEL 6",
         readTime: "18 min read",
         allocatedMinutes: 18,
+        facilitator: {
+          minutes: 40,
+          talkingPoints: [
+            "The unalterable nature of Medo-Persian statutory law (Dan 6:8) highlights human legalism versus divine sovereignty.",
+            "Daniel's prayer life: opening windows toward Jerusalem three times a day was an established habit, not a provocative demonstration.",
+            "Darius's grief versus God's power: earthly monarchs are trapped by their own laws, but God delivers the innocent."
+          ],
+          askClass: [
+            "How did Daniel maintain unwavering integrity in high political office for over six decades?",
+            "What is the difference between genuine religious freedom and political defiance?"
+          ]
+        },
         scripture: "Daniel 6:1-28 &bull; Babylon, c. 538 B.C.",
         title: "The Pit of Hunger: The Law of the Medes and Persians, The Open Window, and the Resurrection of Christ",
         subtitle: "The irrevocable imperial statute, blameless integrity under audit, prayer facing Jerusalem, and the sealed pit as a type of the risen Christ.",
@@ -2693,6 +2777,18 @@ DANIEL IN THE LIONS' DEN                 JESUS CHRIST AT CALVARY &amp; THE TOMB
         epoch: "SHEET 07 &bull; DANIEL 7",
         readTime: "20 min read",
         allocatedMinutes: 20,
+        facilitator: {
+          minutes: 40,
+          talkingPoints: [
+            "Daniel 7 views the world through heaven's eyes: predatory beasts arising from the windswept sea rather than shining metals.",
+            "Parallel the four beasts with Daniel 2: Lion (Babylon), Bear (Medo-Persia), Leopard (Greece), Dreadful Beast (Rome).",
+            "Calculate the 1,260-year prophetic era (Dan 7:25): A.D. 538 to 1798, culminating in the celestial judgment scene of verses 9–14."
+          ],
+          askClass: [
+            "Why does God portray secular empires as rapacious beasts rather than magnificent statues?",
+            "How does the heavenly judgment scene in Daniel 7:9–14 bring assurance to suffering saints?"
+          ]
+        },
         scripture: "Daniel 7:1-28 &bull; Babylon, c. 553 B.C.",
         title: "The Churning Sea & The Little Horn: The 1,260 Years to Judgment",
         subtitle: "The four predatory beasts, the church-state horn, the 1,260-year supremacy, and the pre-advent heavenly court.",
@@ -2775,7 +2871,7 @@ DANIEL 2 (The World's View: Metals)       DANIEL 7 (Heaven's View: Predators)
 
 <div class="framework-card">
   <p class="framework-card-kicker">2. The Lopsided Bear: The Medo-Persian Empire (539–331 B.C.)</p>
-  <p>The second beast was like a bear, raised up on one of its sides, with three ribs clenched between its teeth (Daniel 7:5). The bear represents the heavy, lumbering, massive armies of Medo-Persia. It was raised up on one side because the Persian wing of the dual monarchy emerged far stronger and more dominant than the Median wing. The three ribs in its mouth represent the traditional historicist identification of the three principal imperial conquests that forged the Medo-Persian Empire: <strong>Lydia (547 B.C.)</strong>, <strong>Babylon (539 B.C.)</strong>, and <strong>Egypt (525 B.C.)</strong> (see the <em>SDA Bible Commentary</em> on Daniel 7:5 and the Adult Bible Study Guide, Daniel, 2020 Q1, week 8). The beast is commanded: <em>"Arise, devour much flesh,"</em> describing the vast territorial expansion of the Persian kings.</p>
+  <p>The second beast was like a bear, raised up on one of its sides, with three ribs clenched between its teeth (Daniel 7:5). The bear represents the heavy, lumbering, massive armies of Medo-Persia. It was raised up on one side because the Persian wing of the dual monarchy emerged far stronger and more dominant than the Median wing. The three ribs in its mouth represent the traditional historicist identification of the three principal imperial conquests that forged the Medo-Persian Empire: <strong>Lydia (547 B.C.)</strong>, <strong>Babylon (539 B.C.)</strong>, and <strong>Egypt (525 B.C.)</strong> (see standard grammatical-historical commentaries on Daniel 7:5 and exilic historical studies). The beast is commanded: <em>"Arise, devour much flesh,"</em> describing the vast territorial expansion of the Persian kings.</p>
 </div>
 
 <div class="framework-card">
@@ -3123,6 +3219,18 @@ SCRIPTURAL CRITERIA:                     HISTORICAL FULFILLMENT:
         epoch: "SHEET 08 &bull; DANIEL 8",
         readTime: "22 min read",
         allocatedMinutes: 22,
+        facilitator: {
+          minutes: 40,
+          talkingPoints: [
+            "The vision of Daniel 8 shifts to sanctuary animals: the Ram (Medo-Persia, Dan 8:20) and the He-Goat (Greece, Dan 8:21).",
+            "The great horn broken (Alexander the Great) and the four notable horns (the Diadochi partition).",
+            "Daniel 8:14 and the Hebrew nitsdaq: 2,300 evenings and mornings until the sanctuary is vindicated and restored."
+          ],
+          askClass: [
+            "Why does the text explicitly interpret the ram and goat by name in Daniel 8:20–21?",
+            "How does the concept of sanctuary cleansing connect earthly exiles to Christ's heavenly ministry?"
+          ]
+        },
         scripture: "Daniel 8:1-27 &bull; Susa, c. 551 B.C.",
         title: "The Ram, The Goat, & 2,300 Days: The Cleansing of the Sanctuary",
         subtitle: "Gabriel's named empires, the attack on Christ's continual mediation (tamid), refutation of Antiochus, and the 1844 Day of Atonement in heaven.",
@@ -3224,7 +3332,7 @@ SYMBOL IN PROPHECY:           INTERPRETATION:          HISTORICAL REALITY:
 
 <p>In historicist hermeneutics, this little horn represents <strong>Rome in both of its successive historical phases: Pagan and Papal</strong>. Historicist commentary articulates this established consensus:</p>
 
-<blockquote class="scripture-quote">"This little horn represents Rome in both its phases, pagan and papal... Rome was small in its beginnings, but grew 'exceeding great' toward the south (Egypt), toward the east (Syria), and toward the pleasant land (Palestine)." — <em>SDA Bible Commentary</em>, Vol. 4, p. 841</blockquote>
+<blockquote>"This little horn represents Rome in both its phases, pagan and papal... Rome was small in its beginnings, but grew 'exceeding great' toward the south (Egypt), toward the east (Syria), and toward the pleasant land (Palestine)." — <em>Historical & Exegetical Notes on Daniel</em>, 8:9–10</blockquote>
 
 <div class="framework-card">
   <p class="framework-card-kicker">The two phases of Rome in Daniel 8</p>
@@ -3538,6 +3646,18 @@ BIBLICAL REQUIREMENT:            ANTIOCHUS IV EPIPHANES:           HISTORICIST R
         epoch: "SHEET 09 &bull; DANIEL 9",
         readTime: "22 min read",
         allocatedMinutes: 22,
+        facilitator: {
+          minutes: 40,
+          talkingPoints: [
+            "Daniel 9 provides the chronological key to Daniel 8: the 70 weeks (490 years) are chathak (cut off / apportioned) from the 2,300 days.",
+            "The starting decree: Artaxerxes I Longimanus in 457 B.C. (Ezra 7) granting full civil restoration to Jerusalem.",
+            "The 70th week: Messiah anointed at baptism (A.D. 27), cut off in the midst of the week (A.D. 31 crucifixion) confirming the covenant."
+          ],
+          askClass: [
+            "Why is Daniel 9:24–27 considered the supreme Christological anchor in the Old Testament?",
+            "How does the contiguous fulfillment of the 70 weeks refute theories that insert a multi-thousand-year gap before the final week?"
+          ]
+        },
         scripture: "Daniel 9:1-27 &bull; Babylon, 538 B.C.",
         title: "The 70 Weeks (Chathak) & The Cross: The Mathematical Anchor of 1844",
         subtitle: "How the crucifixion of Christ in A.D. 31 establishes the start date for the 2,300-day prophecy.",
@@ -3961,6 +4081,18 @@ Restore City                        Messiah               Christ                
         epoch: "SHEET 10 &bull; DANIEL 10-12",
         readTime: "22 min read",
         allocatedMinutes: 22,
+        facilitator: {
+          minutes: 40,
+          talkingPoints: [
+            "Daniel 10–12 completes the prophetic scroll with a literal historical description of exilic and post-exilic conflicts.",
+            "The theophany by the river Hiddekel: the glorified Priest-King strengthens Daniel to receive the final testimony.",
+            "The standing up of Michael (Dan 12:1), deliverance of those written in the book, and the promise of bodily resurrection (Dan 12:2, 13)."
+          ],
+          askClass: [
+            "How does the promise 'thou shalt rest, and stand in thy lot at the end of the days' close the entire book with hope?",
+            "How do all eleven sittings work together to build unshakeable confidence in Scripture?"
+          ]
+        },
         scripture: "Daniel 10:1 - 12:13 &bull; Tigris River, 536 B.C.",
         title: "Michael Stands Up: The Time of Trouble & Bodily Resurrection",
         subtitle: "The close of probation, deliverance of the saints, and the eternal covenant reward.",

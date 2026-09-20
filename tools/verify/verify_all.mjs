@@ -114,6 +114,7 @@ async function run() {
     'js/gallery/app.js',
     'css/app.css',
     'js/shared/journey.js',
+    'js/shared/progress-sync.js',
     'js/map/map.js',
     'js/map/map-data.js',
     'js/study/stage.js',
@@ -186,7 +187,8 @@ async function run() {
     'assets/study/statue-nebuchadnezzar.jpg',
     'assets/study/babylon-sunset.jpg',
     'assets/study/daniel-lions-den.jpg',
-    'assets/study/storm-sky.jpg'
+    'assets/study/storm-sky.jpg',
+    'tools/verify/verify_workbench.mjs'
   ];
 
   for (const f of requiredFiles) {
@@ -199,6 +201,12 @@ async function run() {
     }
   }
   console.log(`PASS: All ${requiredFiles.length} files exist and are non-empty.`);
+
+  console.log('\n=== Step 1b: Running SID Proof Tests ===');
+  const { execSync } = await import('child_process');
+  execSync('node tools/verify/verify_scripture.mjs', { stdio: 'inherit' });
+  execSync('node tools/verify/verify_workbench.mjs', { stdio: 'inherit' });
+  console.log('PASS: Scripture and Workbench gates validated.');
 
   console.log('\n=== Step 2: Starting Local HTTP Server ===');
   const SERVER_PORT = process.env.PORT || await getFreePort();
@@ -373,9 +381,13 @@ async function run() {
 
   console.log('  [study.html] Testing legacy ?id=head deep link...');
   await client.send('Page.navigate', { url: `${SERVER_BASE}/study.html?id=head` });
-  await sleep(1800);
-  const legacyTitle = await client.eval('document.getElementById("sheet-title")?.textContent');
-  console.log('  [study.html] Legacy head sheet:', legacyTitle);
+  let legacyTitle = '';
+  for (let i = 0; i < 30; i++) {
+    await sleep(200);
+    legacyTitle = await client.eval('document.getElementById("sheet-title")?.textContent || ""');
+    if (legacyTitle && legacyTitle.toLowerCase().includes('colossus')) break;
+  }
+  console.log('  [study.html] Legacy head sheet:', legacyTitle.trim());
   if (!legacyTitle || !legacyTitle.toLowerCase().includes('colossus')) {
     throw new Error(`Legacy id=head mapped wrong: ${legacyTitle}`);
   }
@@ -389,6 +401,12 @@ async function run() {
   await sleep(400);
   await client.captureScreenshot('qa/proofs/study_proof.png');
   console.log('  [study.html] Captured study_proof.png');
+
+  for (let i = 0; i < 30; i++) {
+    const fnReady = await client.eval('typeof togglePomodoroDrawer === "function"');
+    if (fnReady) break;
+    await sleep(200);
+  }
 
   await client.eval('togglePomodoroDrawer()');
   await sleep(400);
@@ -434,9 +452,12 @@ async function run() {
 
   console.log('\n=== Step 7: Testing gallery.html Direct Study Link & Camera Framing ===');
   await client.send('Page.navigate', { url: `${SERVER_BASE}/gallery.html?asset=stone` });
-  await sleep(1500);
-
-  const studyLinkHref = await client.eval('document.getElementById("nar-study-link")?.getAttribute("href")');
+  let studyLinkHref = '';
+  for (let i = 0; i < 30; i++) {
+    await sleep(200);
+    studyLinkHref = await client.eval('document.getElementById("nar-study-link")?.getAttribute("href") || ""');
+    if (studyLinkHref && studyLinkHref.includes('study.html?id=stone')) break;
+  }
   console.log('  [gallery.html] nar-study-link href:', studyLinkHref);
   if (!studyLinkHref || !studyLinkHref.includes('study.html?id=stone')) {
     throw new Error(`Expected nar-study-link to link to study.html?id=stone, got ${studyLinkHref}`);
@@ -470,6 +491,9 @@ async function run() {
     console.log('  ALL AUTOMATED VERIFICATION TESTS PASSED!');
     console.log('========================================');
   } finally {
+    if (client && client.consoleErrors && client.consoleErrors.length > 0) {
+      console.log('CLIENT CONSOLE ERRORS AT EXIT:', JSON.stringify(client.consoleErrors, null, 2));
+    }
     if (client) {
       try { client.close(); } catch {}
     }

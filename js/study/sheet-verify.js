@@ -464,7 +464,7 @@
           "A public-domain Catholic encyclopaedia dates the French taking of Rome and of the pope to February 1798.",
           "Michael Ott, “Pope Pius VI,” Catholic Encyclopedia (New York, 1913). Wikisource",
           "The French took Rome on 10 Feb., 1798, and proclaimed the Roman Republic on 15 Feb. Because the pope refused to submit, he was forcibly taken from Rome on the night of 20 Feb.",
-          "1,260 years from 538 lands in 1798. This card does not ask you to take an Adventist chart’s word for the wound. Open the 1913 article. (The 1911 Britannica “Pius” article tells the same captivity but muddles 10 February with 13 February — another reason to read more than one witness.)",
+          "1,260 years from 538 lands in 1798. This card does not ask you to take a denominational chart’s word for the wound. Open the 1913 article. (The 1911 Britannica “Pius” article tells the same captivity but muddles 10 February with 13 February — another reason to read more than one witness.)",
           "https://en.wikisource.org/wiki/Catholic_Encyclopedia_(1913)/Pope_Pius_VI"
         ),
         item(

@@ -4,6 +4,16 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>The Scroll of Daniel — A cinematic sitting through the book</title>
+  <meta name="description" content="Master the prophetic chain across 11 classroom-ready sittings — from the year-day key in Numbers and Ezekiel and the head of gold in Daniel 2:38 to the 457 B.C. decree and Calvary — verified with active proof workbenches and a printable graduation certificate.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://cinematic-bible-study-daniel.vercel.app/index.html">
+  <meta property="og:title" content="The Scroll of Daniel — Historicist Prophecy Classroom Pilot">
+  <meta property="og:description" content="Master the prophetic chain across 11 classroom-ready sittings — from the year-day key in Numbers and Ezekiel and the head of gold in Daniel 2:38 to the 457 B.C. decree and Calvary — verified with active proof workbenches and a printable graduation certificate.">
+  <meta property="og:image" content="https://cinematic-bible-study-daniel.vercel.app/assets/site/hero-main.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="The Scroll of Daniel — Historicist Prophecy Classroom Pilot">
+  <meta name="twitter:description" content="Master the prophetic chain across 11 classroom-ready sittings with active proof workbenches, interactive maps, and a printable graduation certificate.">
+  <meta name="twitter:image" content="https://cinematic-bible-study-daniel.vercel.app/assets/site/hero-main.jpg">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📜</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;1,500;1,600&family=Inter:wght@400;500;600&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
@@ -16,6 +26,7 @@
   <script src="js/shared/auth.js"></script>
   <script src="js/shared/terms.js"></script>
   <script src="js/shared/reviews.js"></script>
+  <script src="js/shared/progress-sync.js"></script>
   <script>if (window.BAJourney) window.BAJourney.load();</script>
 </head>
 <body class="site dash cover cinematic-bg">
@@ -53,6 +64,7 @@
         <small>History · Prophecy · Our time</small>
         <h1><span class="dash-title-kicker" data-glisten="THE SCROLL OF">THE SCROLL OF</span><span class="dash-title-main" data-glisten="DANIEL">DANIEL</span></h1>
         <p class="dash-hero-hook">One dream. Six empires. Your place in the story.</p>
+        <p class="dash-hero-outcome" style="margin-top: 0.75rem; margin-bottom: 1rem; font-size: 0.95rem; line-height: 1.5; color: rgba(245, 237, 218, 0.88); max-width: 44rem; margin-left: auto; margin-right: auto; font-family: 'Inter', system-ui, sans-serif;">After eleven sittings you can state the year-day rule from two verses, name the head of gold from Daniel 2:38, run 457 to the cross, and download a certificate.</p>
         <div class="dash-empire-ticker" aria-label="Empires of Daniel through time">
           <span data-era="0" class="is-active">The dream</span>
           <span class="dash-empire-sep" aria-hidden="true"></span>
@@ -176,8 +188,8 @@
       <h3>Admin</h3>
       <div id="witness-queue-list"></div>
     </div>
-    <div class="witness-list" id="witness-list"></div>
-    <p class="witness-empty" id="witness-empty">No reviews yet.</p>
+    <div class="witness-list" id="witness-list" hidden></div>
+    <p class="witness-empty" id="witness-empty" hidden>No reviews yet.</p>
     <div class="witness-form-card">
       <h3>Write a review</h3>
       <p id="witness-signin-hint">Sign in to post.</p>

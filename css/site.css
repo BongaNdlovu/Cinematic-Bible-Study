@@ -1917,3 +1917,159 @@ body.dash .witnesses {
   .dash-verse-glass { padding: 22px 18px; min-height: 0; }
   .dash-verse-glass blockquote p { font-size: 16px; }
 }
+
+/* --- SID Classroom Print Styles --- */
+@media print {
+  .site-header,
+  .study-topbar,
+  .cinematic-atmosphere,
+  #weather-canvas,
+  #pomo-dock,
+  #toc-drawer,
+  #toc-overlay,
+  .study-instruments,
+  .horizon-panel,
+  #lesson-connect,
+  .museum-links,
+  #sitting-spine,
+  #sitting-guide,
+  #capstone-modal,
+  #placement-modal,
+  #competency-record-modal,
+  #dossier-modal,
+  .pomo-wrap,
+  .unveil,
+  .glow-drift,
+  .shafts,
+  .vignette,
+  footer,
+  button,
+  .auth-slot,
+  .instrument-tabs,
+  #btn-atmosphere-toggle,
+  #theme-btn {
+    display: none !important;
+  }
+
+  body, html {
+    background: #ffffff !important;
+    color: #111111 !important;
+    font-size: 11pt !important;
+    line-height: 1.5 !important;
+  }
+
+  .sitting-shell, .sitting-layout, .sitting-main {
+    max-width: 100% !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  #sheet-article {
+    display: block !important;
+    color: #111 !important;
+  }
+
+  #facilitator-strip:not(:empty):not([hidden]) {
+    display: block !important;
+    border: 2px solid #333 !important;
+    background: #f9f9f9 !important;
+    color: #111 !important;
+    padding: 12pt !important;
+    margin-bottom: 16pt !important;
+    page-break-inside: avoid;
+  }
+  #facilitator-strip:empty,
+  #facilitator-strip[hidden] {
+    display: none !important;
+  }
+
+  #workbench-section, .workbench-card, .task-box {
+    display: block !important;
+    border: 1px solid #666 !important;
+    background: #fafafa !important;
+    color: #111 !important;
+    page-break-inside: avoid;
+    margin-bottom: 16pt !important;
+  }
+
+  #revision-section {
+    display: block !important;
+    border-top: 1px solid #333 !important;
+    page-break-inside: avoid;
+  }
+}
+
+/* --- Classroom Projection Mode (?project=1) --- */
+body.projection-mode {
+  font-size: 18px;
+}
+body.projection-mode .article-body {
+  font-size: 22px;
+  line-height: 1.85;
+  max-width: 960px;
+}
+body.projection-mode .article-body h2,
+body.projection-mode .article-body h3 {
+  font-size: 32px;
+}
+body.projection-mode #weather-canvas,
+body.projection-mode .cinematic-atmosphere,
+body.projection-mode .shafts,
+body.projection-mode .glow-drift,
+body.projection-mode .vignette,
+body.projection-mode #btn-atmosphere-toggle {
+  display: none !important;
+}
+
+/* --- Stronger Reduced Motion --- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+  .guide-spot-pulse {
+    animation: none !important;
+  }
+  #weather-canvas {
+    display: none !important;
+  }
+}
+
+/* --- Mobile Study Desk Optimization (~390px) --- */
+@media (max-width: 480px) {
+  .study-topbar {
+    position: relative !important;
+  }
+  .study-topbar-inner {
+    flex-wrap: wrap;
+    gap: 6px;
+    padding: 6px 10px;
+  }
+  .study-tools {
+    width: 100%;
+    justify-content: space-between;
+    overflow-x: auto;
+  }
+  .header-competency-pill {
+    display: none !important;
+  }
+  .sitting-main {
+    padding-top: 12px !important;
+  }
+  .workbench-card {
+    padding: 12px !important;
+  }
+  .workbench-card .grid {
+    grid-template-columns: 1fr !important;
+  }
+  .workbench-card input,
+  .workbench-card select {
+    width: 100% !important;
+  }
+  .task-box {
+    padding: 12px !important;
+  }
+}
+

@@ -123,11 +123,13 @@
     termsAccepted: null,
     termsByUser: {},
     pendingTerms: null,
-    completedSheets: []
+    completedSheets: [],
+    cohort: null
   };
 
   function normalize(raw) {
     const next = Object.assign({}, defaults, raw || {});
+    next.cohort = (raw && typeof raw.cohort === "string" && raw.cohort.trim()) ? raw.cohort.trim().slice(0, 64) : null;
     next.unlocked = Array.isArray(next.unlocked) ? next.unlocked.filter(Boolean) : [];
     next.station = Object.assign({ s2: null, s7: null }, next.station || {});
     next.seenIntro = next.seenIntro && typeof next.seenIntro === "object" ? next.seenIntro : {};
@@ -217,7 +219,15 @@
         return n >= 0 && n < SHEET_COUNT;
       })));
     }
+    if (patch.cohort !== undefined) {
+      next.cohort = patch.cohort ? String(patch.cohort).trim().slice(0, 64) : null;
+    }
     try { localStorage.setItem(KEY, JSON.stringify(next)); } catch (e) {}
+    try {
+      if (typeof window !== "undefined" && window.ProgressSync && typeof window.ProgressSync.syncNow === "function") {
+        window.ProgressSync.syncNow();
+      }
+    } catch (e) {}
     return next;
   }
 
@@ -540,6 +550,20 @@
     return out;
   }
 
+  function getCohort() {
+    const cur = load();
+    return cur.cohort || "";
+  }
+
+  try {
+    if (typeof window !== "undefined" && window.location && window.location.search) {
+      const cohortParam = new URLSearchParams(window.location.search).get("cohort");
+      if (cohortParam) {
+        save({ cohort: cohortParam.trim().slice(0, 64) });
+      }
+    }
+  } catch (e) {}
+
   window.BAJourney = {
     load: load,
     save: save,
@@ -578,6 +602,7 @@
     acceptTerms: acceptTerms,
     clearPendingTerms: clearPendingTerms,
     commitPendingTerms: commitPendingTerms,
+    getCohort: getCohort,
     TERMS_VERSION: TERMS_VERSION,
     FREE_THROUGH: FREE_THROUGH,
     SHEET_LABELS: SHEET_LABELS,
