@@ -788,7 +788,7 @@
       ctx.clearRect(0, 0, w, h);
       if (currentWeatherType === 'off') {
         document.body.dataset.weather = 'off';
-        weatherAnimId = requestAnimationFrame(drawWeather);
+        weatherAnimId = null;
         return;
       }
 
@@ -1092,6 +1092,11 @@
         const synth = new Tone.PolySynth(Tone.Synth).toDestination();
         synth.set({ volume: -12 });
         synth.triggerAttackRelease(["C4", "G4", "C5"], "1.8s");
+        setTimeout(() => {
+          try {
+            synth.dispose();
+          } catch (e) {}
+        }, 2200);
       } catch (e) {}
 
       showToast("Study Session Complete! Review the quiz checkpoint.");

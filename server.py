@@ -45,6 +45,8 @@ for ext, mime in MIME_TYPES.items():
 
 
 class NebuchadnezzarHTTPHandler(SimpleHTTPRequestHandler):
+    timeout = 10
+
     def guess_type(self, path):
         ext = os.path.splitext(path)[1].lower()
         if ext in MIME_TYPES:
@@ -61,21 +63,46 @@ class NebuchadnezzarHTTPHandler(SimpleHTTPRequestHandler):
         self.send_response(200)
         self.end_headers()
 
+    def list_directory(self, path):
+        self.send_error(403, "Directory listing is forbidden")
+        return None
+
     def translate_path(self, path):
-        full = super().translate_path(path)
-        root = os.path.abspath(os.getcwd())
-        full_abs = os.path.abspath(full)
-        if not full_abs.startswith(root):
+        root = os.path.realpath(os.getcwd())
+        if "\x00" in path:
             return os.path.join(root, "__forbidden__")
-        rel = os.path.relpath(full_abs, root)
-        parts = rel.replace("\\", "/").split("/")
-        if any(part.startswith(".") for part in parts if part not in (".", "..")):
-            return os.path.join(root, "__forbidden__")
-        if os.path.isfile(full_abs):
-            ext = os.path.splitext(full_abs)[1].lower()
-            if ext and ext not in ALLOWED_EXTENSIONS:
+        try:
+            full = super().translate_path(path)
+            if "\x00" in full:
                 return os.path.join(root, "__forbidden__")
-        return full_abs
+            full_abs = os.path.realpath(full)
+            if "\x00" in full_abs:
+                return os.path.join(root, "__forbidden__")
+            if full_abs != root and not full_abs.startswith(root + os.sep):
+                return os.path.join(root, "__forbidden__")
+            rel = os.path.relpath(full_abs, root)
+            parts = rel.replace("\\", "/").split("/")
+            if any(part.startswith(".") for part in parts if part not in (".", "..")):
+                return os.path.join(root, "__forbidden__")
+            if os.path.isfile(full_abs):
+                ext = os.path.splitext(full_abs)[1].lower()
+                if ext and ext not in ALLOWED_EXTENSIONS:
+                    return os.path.join(root, "__forbidden__")
+            return full_abs
+        except (ValueError, OSError):
+            return os.path.join(root, "__forbidden__")
+
+    def copyfile(self, source, outputfile):
+        try:
+            super().copyfile(source, outputfile)
+        except (ConnectionResetError, ConnectionAbortedError, BrokenPipeError, TimeoutError):
+            self.close_connection = True
+
+    def handle(self):
+        try:
+            super().handle()
+        except (ConnectionResetError, ConnectionAbortedError, BrokenPipeError, TimeoutError):
+            self.close_connection = True
 
     def log_message(self, format, *args):
         msg = format % args
