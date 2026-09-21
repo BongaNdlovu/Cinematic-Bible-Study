@@ -110,42 +110,36 @@
   const SEED_REVIEWS = [
     {
       display_name: "Nokuthula Dlamini",
-      place: "Durban",
       rating: 5,
       created_at: "2026-02-14T18:22:00.000Z",
       body: "My husband and I did sitting 1 after church. I kept my Bible open on the desk like the notice says. The map took a minute on my phone, but once it loaded we stayed up talking about Daniel 2 for another hour."
     },
     {
       display_name: "James Whitfield",
-      place: "Cape Town",
       rating: 4,
       created_at: "2026-04-03T11:08:00.000Z",
       body: "Honest take: the first sitting felt dense. By sitting 2 I understood why they make you work through the year-day verses yourself instead of just telling you the answer. Still working through the rest."
     },
     {
       display_name: "Thandiwe Mthembu",
-      place: "Umlazi",
       rating: 5,
       created_at: "2026-05-19T16:41:00.000Z",
       body: "Three of us went through it in my living room on a Saturday. We paused at the gold head and opened the 3D gallery. None of us are prophecy people. We just wanted Daniel to finally make sense."
     },
     {
       display_name: "Sarah Mitchell",
-      place: "Johannesburg",
       rating: 4,
       created_at: "2026-07-11T07:35:00.000Z",
       body: "I saw the certificate mentioned online and stayed for the content. Print view is clean. Strong's is a bit awkward on iPad, but having the KJV right in the study desk made the cross-references much easier."
     },
     {
       display_name: "Sibusiso Nkosi",
-      place: "Pietermaritzburg",
       rating: 5,
       created_at: "2026-08-27T20:15:00.000Z",
       body: "Ran six weeks with our young adults group. People actually argued about 457 — a good argument, not a fight. One guy said he finally sees why Rome keeps showing up in every vision."
     },
     {
       display_name: "Peter Williams",
-      place: "Howick",
       rating: 3,
       created_at: "2026-09-06T13:52:00.000Z",
       body: "Solid study, but not light reading if prophecy is new to you. Took me three weeks to finish. Worth it if you're willing to sit with the text. I'd tell a friend to start with sitting 0 and not rush."
@@ -166,11 +160,6 @@
     const name = document.createElement("strong");
     name.textContent = row.display_name || "A student";
     cite.appendChild(name);
-    if (row.place) {
-      const place = document.createElement("span");
-      place.textContent = row.place;
-      cite.appendChild(place);
-    }
     const when = formatDate(row.created_at);
     if (when) {
       const date = document.createElement("span");
