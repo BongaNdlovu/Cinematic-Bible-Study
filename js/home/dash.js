@@ -1,12 +1,12 @@
 (function () {
   const HERO_EMPIRES = [
-    { caption: "Faith in a foreign land", name: "Daniel 1" },
     { caption: "The dream of the image", name: "Daniel 2" },
-    { caption: "The fiery furnace", name: "Daniel 3" },
-    { caption: "The tree cut down", name: "Daniel 4" },
-    { caption: "The writing on the wall", name: "Daniel 5" },
-    { caption: "Delivered from the lions", name: "Daniel 6" },
-    { caption: "Visions of the future", name: "Daniel 7–12" }
+    { caption: "Head of gold", name: "Babylon" },
+    { caption: "Chest of silver", name: "Medo-Persia" },
+    { caption: "Belly of brass", name: "Greece" },
+    { caption: "Legs of iron", name: "Rome" },
+    { caption: "Iron mixed with clay", name: "Divided kingdoms" },
+    { caption: "The stone cut without hands", name: "Now" }
   ];
   const REEL_MS = 5200;
 
@@ -64,6 +64,20 @@
       const open = typeof J.canAccessSheet === "function" ? J.canAccessSheet(sheet) : sheet === 0;
       el.classList.toggle("is-locked", !open);
       el.setAttribute("aria-disabled", open ? "false" : "true");
+      if (el.tagName === "A") {
+        if (!open) {
+          if (el.hasAttribute("href")) {
+            el.dataset.savedHref = el.getAttribute("href");
+            el.removeAttribute("href");
+          }
+          el.setAttribute("tabindex", "-1");
+        } else {
+          if (!el.hasAttribute("href") && el.dataset.savedHref) {
+            el.setAttribute("href", el.dataset.savedHref);
+          }
+          el.removeAttribute("tabindex");
+        }
+      }
       if (!open && typeof J.lockExplain === "function") {
         const note = J.lockExplain("sheet", sheet);
         el.title = note.title + " — " + note.body;
@@ -93,15 +107,6 @@
         window.ScrollTerms.requestSignIn();
       }
     });
-  });
-
-  document.addEventListener("click", function (e) {
-    const el = e.target.closest("a[data-sheet]");
-    if (!el || !el.classList.contains("is-locked")) return;
-    e.preventDefault();
-    if (typeof J.announceLock === "function") {
-      J.announceLock("sheet", el.getAttribute("data-sheet"));
-    }
   });
 
   syncLocks();

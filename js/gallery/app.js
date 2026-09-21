@@ -2963,6 +2963,13 @@ import * as THREE from 'three';
     function syncDossierStudyLink(key) {
       const narStudyLink = document.getElementById('nar-study-link');
       if (!narStudyLink) return;
+      const J = window.BAJourney;
+      const sitting = J && typeof J.sittingForAsset === 'function' ? J.sittingForAsset(key) : -1;
+      if (sitting >= 0 && J && typeof J.canAccessSheet === 'function' && !J.canAccessSheet(sitting)) {
+        narStudyLink.hidden = true;
+        return;
+      }
+      narStudyLink.hidden = false;
       if (lessonReturnHref) {
         narStudyLink.href = lessonReturnHref;
         narStudyLink.innerHTML = '<span>📖</span> ← Back to this lesson';

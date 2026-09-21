@@ -6,6 +6,7 @@ create table if not exists public.exhibit_reviews (
   user_id uuid not null references auth.users (id) on delete cascade,
   display_name text not null check (char_length(display_name) between 1 and 80),
   body text not null check (char_length(btrim(body)) between 40 and 600),
+  rating smallint check (rating between 1 and 5),
   created_at timestamptz not null default now(),
   approved boolean not null default false,
   approved_at timestamptz,
@@ -67,6 +68,13 @@ create policy insert_own_reviews
     and rejected = false
   );
 
+drop policy if exists update_own_reviews on public.exhibit_reviews;
+create policy update_own_reviews
+  on public.exhibit_reviews for update
+  to authenticated
+  using (auth.uid() = user_id)
+  with check (auth.uid() = user_id);
+
 drop policy if exists moderator_update_reviews on public.exhibit_reviews;
 create policy moderator_update_reviews
   on public.exhibit_reviews for update
@@ -90,8 +98,12 @@ $$;
 
 drop trigger if exists exhibit_reviews_force_pending on public.exhibit_reviews;
 create trigger exhibit_reviews_force_pending
-  before insert on public.exhibit_reviews
+  before insert or update on public.exhibit_reviews
   for each row execute procedure public.exhibit_reviews_force_pending();
+
+-- Migration for existing projects (safe to re-run)
+alter table public.exhibit_reviews
+  add column if not exists rating smallint check (rating between 1 and 5);
 
 grant select on public.exhibit_reviews to anon, authenticated;
 grant insert, update on public.exhibit_reviews to authenticated;

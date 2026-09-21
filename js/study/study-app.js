@@ -44,6 +44,7 @@
         const idx = Number(card.dataset.epoch);
         const open = epochAccessible(idx);
         card.classList.toggle('is-locked', !open);
+        card.disabled = !open;
         if (open) {
           card.removeAttribute('aria-disabled');
           card.removeAttribute('title');
@@ -57,6 +58,12 @@
           }
         }
       });
+    }
+
+    function stepHorizon(delta) {
+      let idx = currentEpochIndex + delta;
+      while (idx >= 0 && idx < timelineEpochs.length && !epochAccessible(idx)) idx += delta;
+      if (idx >= 0 && idx < timelineEpochs.length && idx !== currentEpochIndex) setEpochInfo(idx);
     }
 
     function setEpochInfo(epochIdx, opts) {
@@ -168,7 +175,7 @@
         '<button type="button" class="horizon-card' + (i === 0 ? ' is-active' : '') +
         (epochAccessible(i) ? '' : ' is-locked') +
         '" id="t-node-' + i + '" data-epoch="' + i + '" aria-pressed="' + (i === 0 ? 'true' : 'false') + '"' +
-        (epochAccessible(i) ? '' : ' aria-disabled="true" title="Locked — finish the open sitting first"') + '>' +
+        (epochAccessible(i) ? '' : ' disabled aria-disabled="true" title="Locked — finish the open sitting first"') + '>' +
         '<img src="' + ep.image + '" alt="' + ep.year + '">' +
         '<span class="horizon-card-veil"></span>' +
         '<span class="horizon-card-year">' + ep.year + '</span>' +
@@ -176,7 +183,10 @@
       ).join('');
       track.querySelectorAll('.horizon-card').forEach((card) => {
         const idx = Number(card.dataset.epoch);
-        card.addEventListener('click', () => setEpochInfo(idx));
+        card.addEventListener('click', () => {
+          if (!epochAccessible(idx)) return;
+          setEpochInfo(idx);
+        });
         card.addEventListener('mouseenter', () => showHorizonFloat(idx, card));
         card.addEventListener('mouseleave', hideHorizonFloat);
         card.addEventListener('focus', () => showHorizonFloat(idx, card));
@@ -184,17 +194,17 @@
       });
       const prev = document.getElementById('horizon-prev');
       const next = document.getElementById('horizon-next');
-      if (prev) prev.addEventListener('click', () => setEpochInfo(currentEpochIndex - 1));
-      if (next) next.addEventListener('click', () => setEpochInfo(currentEpochIndex + 1));
+      if (prev) prev.addEventListener('click', () => stepHorizon(-1));
+      if (next) next.addEventListener('click', () => stepHorizon(1));
       track.addEventListener('keydown', (e) => {
-        if (e.key === 'ArrowLeft') { e.preventDefault(); setEpochInfo(currentEpochIndex - 1); }
-        if (e.key === 'ArrowRight') { e.preventDefault(); setEpochInfo(currentEpochIndex + 1); }
+        if (e.key === 'ArrowLeft') { e.preventDefault(); stepHorizon(-1); }
+        if (e.key === 'ArrowRight') { e.preventDefault(); stepHorizon(1); }
       });
       let startX = 0;
       track.addEventListener('touchstart', (e) => { startX = e.changedTouches[0].clientX; }, { passive: true });
       track.addEventListener('touchend', (e) => {
         const dx = e.changedTouches[0].clientX - startX;
-        if (Math.abs(dx) > 40) setEpochInfo(currentEpochIndex + (dx < 0 ? 1 : -1));
+        if (Math.abs(dx) > 40) stepHorizon(dx < 0 ? 1 : -1);
       }, { passive: true });
     }
 
@@ -1241,23 +1251,20 @@
         const isCurrent = idx === currentSheetIndex;
         const isDone = completedSheets.has(idx);
 
-        const btn = document.createElement('button');
-        btn.addEventListener('click', () => {
-          if (!canAccessSheet(idx)) {
-            denyLockedSitting(idx);
-            toggleTocDrawer();
-            return;
-          }
-          if (location.hash && history.replaceState) {
-            history.replaceState(null, '', location.pathname + '?sheet=' + idx);
-          }
-          loadSheet(idx);
-          toggleTocDrawer();
-        });
         const locked = !canAccessSheet(idx);
+        const btn = document.createElement(locked ? 'div' : 'button');
+        if (!locked) {
+          btn.addEventListener('click', () => {
+            if (location.hash && history.replaceState) {
+              history.replaceState(null, '', location.pathname + '?sheet=' + idx);
+            }
+            loadSheet(idx);
+            toggleTocDrawer();
+          });
+        }
         btn.className = `w-full text-left p-3 rounded-lg flex items-start space-x-3 transition-colors ${
           locked
-            ? 'opacity-45 cursor-not-allowed'
+            ? 'opacity-45 cursor-default pointer-events-none'
             : isCurrent 
             ? 'bg-amber-100/70 dark:bg-amber-950/60 border border-amber-300 dark:border-amber-800' 
             : 'hover:bg-paper-200/60 dark:hover:bg-paper-900'

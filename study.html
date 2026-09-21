@@ -1874,9 +1874,11 @@
       transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
       z-index: 1;
     }
-    .horizon-card.is-locked {
+    .horizon-card.is-locked,
+    .horizon-card:disabled {
       opacity: 0.42;
-      cursor: not-allowed;
+      cursor: default;
+      pointer-events: none;
       filter: grayscale(0.35);
     }
     .horizon-card img {
