@@ -306,6 +306,12 @@
       }
     }
 
+    function openLessonScripture() {
+      showInstrument('scripture');
+      const panel = document.getElementById('panel-scripture');
+      if (panel) panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
     let studyMap = null;
     const STUDY_EPOCH_TO_YEAR = (window.MAP_CHRONICLE && window.MAP_CHRONICLE.studyEpochIds) ||
       ['y605', 'y539', 'y457', 'y31', 'y538', 'y1798', 'y1844', 'y12'];
@@ -670,6 +676,24 @@
       if (studyMap) studyMap.setYear(yearId, { animate: true, chapter: false, open: false });
     }
 
+    function bibleNoticeChapters(index) {
+      const passage = window.BAScripture && window.BAScripture.passageForSheet(index);
+      const sections = (passage && passage.sections) || [];
+      if (!sections.length) return '';
+      const first = sections[0];
+      const last = sections[sections.length - 1];
+      if (first.book !== last.book) return sections.map((s) => s.book + ' ' + s.chapter).join(' · ');
+      if (sections.length === 1) return first.book + ' Chapter ' + first.chapter;
+      return first.book + ' Chapters ' + first.chapter + '–' + last.chapter;
+    }
+
+    function renderBibleNotice(index) {
+      const badge = document.getElementById('bible-notice-chapters');
+      if (!badge) return;
+      const label = bibleNoticeChapters(index);
+      if (label) badge.textContent = label;
+    }
+
     function renderSheetInstruments(index) {
       const ctx = SHEET_CONTEXT[index] || SHEET_CONTEXT[0];
       const ins = SHEET_INSIGHTS[index] || SHEET_INSIGHTS[0];
@@ -681,7 +705,7 @@
       document.getElementById('insight-genre').textContent = ins.genre;
       document.getElementById('insight-section').textContent = ins.section;
       document.getElementById('insight-theme').textContent = ins.theme;
-      if (window.BAScripture) window.BAScripture.showSheet(index);
+      if (window.BAScripture) window.BAScripture.showSheet(index).then(() => renderBibleNotice(index));
     }
 
     /* Archaeological Modal Controller */
@@ -2532,6 +2556,7 @@
       setPomodoroDuration,
       openArtifactModal,
       closeArtifactModal,
+      openLessonScripture,
       navigateSheet,
       completeAndAdvance,
       shareSitting,
