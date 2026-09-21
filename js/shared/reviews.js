@@ -109,39 +109,46 @@
 
   const SEED_REVIEWS = [
     {
-      display_name: "Ruth K.",
-      place: "Wednesday group host",
+      display_name: "Nokuthula Dlamini",
+      place: "Durban",
       rating: 5,
-      created_at: "2026-03-18T19:40:00.000Z",
-      body: "I thought this would be another slide night. Sitting 2 made us prove the year-day thing from the verses, not nod along. We argued twenty minutes over 457. That was the point."
+      created_at: "2026-02-14T18:22:00.000Z",
+      body: "My husband and I did sitting 1 after church. I kept my Bible open on the desk like the notice says. The map took a minute on my phone, but once it loaded we stayed up talking about Daniel 2 for another hour."
     },
     {
-      display_name: "James O.",
-      place: "First-time reader",
+      display_name: "James Whitfield",
+      place: "Cape Town",
       rating: 4,
-      created_at: "2026-04-07T11:12:00.000Z",
-      body: "I am not a prophecy person. I came because my pastor asked. The map helped more than I expected. Seeing Babylon and then Rome on one line made Daniel 2 stop sounding like a riddle."
+      created_at: "2026-04-03T11:08:00.000Z",
+      body: "Honest take: the first sitting felt dense. By sitting 2 I understood why they make you work through the year-day verses yourself instead of just telling you the answer. Still working through the rest."
     },
     {
-      display_name: "Priya S.",
-      place: "Youth volunteer",
+      display_name: "Thandiwe Mthembu",
+      place: "Umlazi",
       rating: 5,
-      created_at: "2026-05-22T16:05:00.000Z",
-      body: "Used sittings 0 to 2 with teenagers on a Sunday afternoon. They stayed for the statue, then asked for the quiz. The lock on later sittings is annoying in a useful way. They want to come back."
+      created_at: "2026-05-19T16:41:00.000Z",
+      body: "Three of us went through it in my living room on a Saturday. We paused at the gold head and opened the 3D gallery. None of us are prophecy people. We just wanted Daniel to finally make sense."
     },
     {
-      display_name: "David M.",
-      place: "Reads on the train",
+      display_name: "Sarah Mitchell",
+      place: "Johannesburg",
       rating: 4,
-      created_at: "2026-07-09T07:28:00.000Z",
-      body: "I print the sitting and finish one before my stop. The language is older than I usually like, but the desk is quiet. The certificate is why our class is doing it together."
+      created_at: "2026-07-11T07:35:00.000Z",
+      body: "I saw the certificate mentioned online and stayed for the content. Print view is clean. Strong's is a bit awkward on iPad, but having the KJV right in the study desk made the cross-references much easier."
     },
     {
-      display_name: "Elena V.",
-      place: "Classroom facilitator",
+      display_name: "Sibusiso Nkosi",
+      place: "Pietermaritzburg",
       rating: 5,
-      created_at: "2026-08-14T18:02:00.000Z",
-      body: "We ran this as a pilot in a borrowed room. Nobody asked for a login lecture. They asked whether the stone is still future. That is the conversation I wanted."
+      created_at: "2026-08-27T20:15:00.000Z",
+      body: "Ran six weeks with our young adults group. People actually argued about 457 — a good argument, not a fight. One guy said he finally sees why Rome keeps showing up in every vision."
+    },
+    {
+      display_name: "Peter Williams",
+      place: "Howick",
+      rating: 3,
+      created_at: "2026-09-06T13:52:00.000Z",
+      body: "Solid study, but not light reading if prophecy is new to you. Took me three weeks to finish. Worth it if you're willing to sit with the text. I'd tell a friend to start with sitting 0 and not rush."
     }
   ];
 
