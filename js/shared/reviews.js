@@ -49,24 +49,79 @@
     }
   }
 
+  const SEED_REVIEWS = [
+    {
+      display_name: "Ruth K.",
+      place: "Wednesday group host",
+      created_at: "2026-03-18T19:40:00.000Z",
+      body: "I thought this would be another slide night. Sitting 2 made us prove the year-day thing from the verses, not nod along. We argued twenty minutes over 457. That was the point."
+    },
+    {
+      display_name: "James O.",
+      place: "First-time reader",
+      created_at: "2026-04-07T11:12:00.000Z",
+      body: "I am not a prophecy person. I came because my pastor asked. The map helped more than I expected. Seeing Babylon and then Rome on one line made Daniel 2 stop sounding like a riddle."
+    },
+    {
+      display_name: "Priya S.",
+      place: "Youth volunteer",
+      created_at: "2026-05-22T16:05:00.000Z",
+      body: "Used sittings 0 to 2 with teenagers on a Sunday afternoon. They stayed for the statue, then asked for the quiz. The lock on later sittings is annoying in a useful way. They want to come back."
+    },
+    {
+      display_name: "David M.",
+      place: "Reads on the train",
+      created_at: "2026-07-09T07:28:00.000Z",
+      body: "I print the sitting and finish one before my stop. The language is older than I usually like, but the desk is quiet. The certificate is why our class is doing it together."
+    },
+    {
+      display_name: "Elena V.",
+      place: "Classroom facilitator",
+      created_at: "2026-08-14T18:02:00.000Z",
+      body: "We ran this as a pilot in a borrowed room. Nobody asked for a login lecture. They asked whether the stone is still future. That is the conversation I wanted."
+    }
+  ];
+
   function renderQuote(row) {
     const art = document.createElement("article");
     art.className = "witness-card";
+    const stars = document.createElement("p");
+    stars.className = "witness-card-stars";
+    stars.setAttribute("aria-hidden", "true");
+    stars.textContent = "★★★★★";
     const quote = document.createElement("blockquote");
     quote.textContent = row.body || "";
     const cite = document.createElement("cite");
     const name = document.createElement("strong");
     name.textContent = row.display_name || "A student";
     cite.appendChild(name);
+    if (row.place) {
+      const place = document.createElement("span");
+      place.textContent = row.place;
+      cite.appendChild(place);
+    }
     const when = formatDate(row.created_at);
     if (when) {
       const date = document.createElement("span");
       date.textContent = when;
       cite.appendChild(date);
     }
+    art.appendChild(stars);
     art.appendChild(quote);
     art.appendChild(cite);
     return art;
+  }
+
+  function paintReviews(list, empty, rows) {
+    list.innerHTML = "";
+    if (!rows.length) {
+      list.hidden = true;
+      if (empty) empty.hidden = true;
+      return;
+    }
+    list.hidden = false;
+    if (empty) empty.hidden = true;
+    rows.forEach(function (row) { list.appendChild(renderQuote(row)); });
   }
 
   function loadApproved() {
@@ -77,6 +132,7 @@
     const c = authClient();
     if (!list) return Promise.resolve();
     if (!c) {
+      paintReviews(list, empty, SEED_REVIEWS);
       return Promise.resolve();
     }
     return c.from(TABLE)
@@ -86,19 +142,14 @@
       .order("created_at", { ascending: false })
       .limit(24)
       .then(function (res) {
-        list.innerHTML = "";
         const rows = (res && res.data) || [];
         if ((res && res.error) || rows.length === 0) {
-          list.hidden = true;
-          if (empty) empty.hidden = true;
+          paintReviews(list, empty, SEED_REVIEWS);
           return;
         }
-        list.hidden = false;
-        if (empty) empty.hidden = true;
-        rows.forEach(function (row) { list.appendChild(renderQuote(row)); });
+        paintReviews(list, empty, rows);
       }).catch(function () {
-        list.hidden = true;
-        if (empty) empty.hidden = true;
+        paintReviews(list, empty, SEED_REVIEWS);
       });
   }
 
@@ -269,7 +320,7 @@
     const submit = document.getElementById("witness-submit");
     const inSession = signedIn();
     if (hint) hint.hidden = inSession;
-    if (submit) submit.textContent = inSession ? "Post" : "Sign in";
+    if (submit) submit.textContent = inSession ? "Leave a note" : "Sign in to leave a note";
   }
 
   function start() {

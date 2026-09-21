@@ -44,8 +44,18 @@
         const idx = Number(card.dataset.epoch);
         const open = epochAccessible(idx);
         card.classList.toggle('is-locked', !open);
-        if (open) card.removeAttribute('aria-disabled');
-        else card.setAttribute('aria-disabled', 'true');
+        if (open) {
+          card.removeAttribute('aria-disabled');
+          card.removeAttribute('title');
+        } else {
+          card.setAttribute('aria-disabled', 'true');
+          if (window.BAJourney && typeof window.BAJourney.lockExplain === 'function') {
+            const note = window.BAJourney.lockExplain('sheet', timelineToSheetMap[idx]);
+            card.title = note.title + ' — ' + note.body;
+          } else {
+            card.title = 'Locked — finish the open sitting first';
+          }
+        }
       });
     }
 
@@ -53,7 +63,7 @@
       if (epochIdx < 0 || epochIdx >= timelineEpochs.length) return;
       const fromSheet = opts && opts.fromSheet;
       if (!fromSheet && !epochAccessible(epochIdx)) {
-        denyLockedSitting();
+        denyLockedSitting(timelineToSheetMap[epochIdx]);
         return;
       }
       currentEpochIndex = epochIdx;
@@ -110,7 +120,7 @@
       if (!fromSheet && !sheetBelongsToEpoch(currentSheetIndex, epochIdx)) {
         const target = timelineToSheetMap[epochIdx];
         if (typeof target === 'number') {
-          if (!canAccessSheet(target)) denyLockedSitting();
+          if (!canAccessSheet(target)) denyLockedSitting(target);
           else loadSheet(target, { fromEpoch: true });
         }
       }
@@ -158,7 +168,7 @@
         '<button type="button" class="horizon-card' + (i === 0 ? ' is-active' : '') +
         (epochAccessible(i) ? '' : ' is-locked') +
         '" id="t-node-' + i + '" data-epoch="' + i + '" aria-pressed="' + (i === 0 ? 'true' : 'false') + '"' +
-        (epochAccessible(i) ? '' : ' aria-disabled="true"') + '>' +
+        (epochAccessible(i) ? '' : ' aria-disabled="true" title="Locked — finish the open sitting first"') + '>' +
         '<img src="' + ep.image + '" alt="' + ep.year + '">' +
         '<span class="horizon-card-veil"></span>' +
         '<span class="horizon-card-year">' + ep.year + '</span>' +
@@ -413,6 +423,7 @@
         const key = btn.dataset.path;
         btn.classList.toggle('is-current', key === sittingPhase);
         btn.classList.toggle('is-done', !!(sittingVisited[key] && key !== sittingPhase));
+        if (key === 'next') btn.disabled = !canAdvancePath();
       });
     }
     function resetSittingPath() {
@@ -1094,7 +1105,7 @@
        ========================================================================= */
     let currentSheetIndex = 0;
     let completedSheets = new Set();
-    const themes = ['paper', 'white', 'night'];
+    const themes = ['charcoal', 'paper', 'white', 'night'];
     let currentThemeIdx = 0;
 
     const fontSizes = [
@@ -1118,16 +1129,10 @@
       const savedFont = localStorage.getItem('daniel_font_size_idx_v4');
       if (savedFont !== null) currentFontIdx = Math.max(0, Math.min(fontSizes.length - 1, parseInt(savedFont, 10) || 1));
       const savedThemeName = localStorage.getItem('daniel_theme_name_v1');
-      if (savedThemeName && themes.indexOf(savedThemeName) >= 0) {
+      if (savedThemeName === 'white' || savedThemeName === 'night') {
         currentThemeIdx = themes.indexOf(savedThemeName);
       } else {
-        const savedTheme = localStorage.getItem('daniel_theme_v1');
-        if (savedTheme !== null) {
-          const n = parseInt(savedTheme, 10);
-          const legacy = ['charcoal', 'paper', 'white', 'night'];
-          const name = legacy[n] || 'paper';
-          currentThemeIdx = Math.max(0, themes.indexOf(name === 'charcoal' ? 'paper' : name));
-        }
+        currentThemeIdx = 0;
       }
     } catch (e) {}
 
@@ -1145,7 +1150,7 @@
       const theme = themes[currentThemeIdx];
       const html = document.documentElement;
       const themeIcon = document.getElementById('theme-icon');
-      const isDark = theme === 'night';
+      const isDark = theme === 'night' || theme === 'charcoal';
 
       html.classList.toggle('dark', isDark);
       html.dataset.theme = theme;
@@ -1162,7 +1167,8 @@
       document.body.classList.toggle('selection:bg-amber-200', !isDark);
 
       if (themeIcon) {
-        themeIcon.innerText = theme === 'night' ? '🌙 Night'
+        themeIcon.innerText = theme === 'charcoal' ? '◑ Chiaroscuro'
+          : theme === 'night' ? '🌙 Night'
           : theme === 'white' ? '⚪ White'
           : '☀️ Paper';
       }
@@ -1238,7 +1244,7 @@
         const btn = document.createElement('button');
         btn.addEventListener('click', () => {
           if (!canAccessSheet(idx)) {
-            denyLockedSitting();
+            denyLockedSitting(idx);
             toggleTocDrawer();
             return;
           }
@@ -1276,6 +1282,7 @@
             <h4 class="font-serif text-sm font-semibold text-ink-900 dark:text-paper-100 truncate mt-0.5">
               ${sheet.title}
             </h4>
+            ${locked ? '<p class="mt-1 font-mono text-[10px] uppercase tracking-wider text-amber-800 dark:text-amber-400">Locked — finish the open sitting</p>' : ''}
           </div>
         `;
         list.appendChild(btn);
@@ -1452,7 +1459,14 @@
       return Number(index) === 0;
     }
 
-    function denyLockedSitting() {
+    function denyLockedSitting(index) {
+      if (window.BAJourney && typeof window.BAJourney.announceLock === 'function') {
+        const target = (index == null || Number.isNaN(Number(index)))
+          ? (window.BAJourney.maxOpenSheet() + 1)
+          : Number(index);
+        window.BAJourney.announceLock('sheet', target);
+        return;
+      }
       const open = window.BAJourney && typeof window.BAJourney.maxOpenSheet === 'function'
         ? window.BAJourney.maxOpenSheet()
         : 0;
@@ -1716,6 +1730,74 @@
       { mapYear: 'y457', galleryAssets: ['decree'] },
       { mapYear: 'y12', galleryAssets: ['kings', 'michael', 'sealed'] }
     ];
+    const LESSON_CONNECT_COPY = [
+      {
+        kicker: 'The siege is the door of the book',
+        lead: 'Daniel opens at 605 B.C. Walk Jerusalem into Babylon on the map, then stand before the whole image — the statue this book will take apart sitting by sitting.',
+        map: 'Walk the siege of 605 B.C.',
+        gallery: 'Stand before the complete statue'
+      },
+      {
+        kicker: 'After the pulse of Daniel 1',
+        lead: 'The young men who kept their food also kept their names. See the city that held them, then the winged lion — the gold kingdom they were trained to serve.',
+        map: 'See Babylon, the city that held them',
+        gallery: 'Turn the winged lion of gold'
+      },
+      {
+        kicker: 'After the metals are named',
+        lead: 'Daniel 2:38 names the head. Keep 605 B.C. on the map, then turn the image itself — gold, silver, brass, iron, and the stone that strikes the feet.',
+        map: 'Keep 605 B.C. on the line of empires',
+        gallery: 'Turn the image metal by metal'
+      },
+      {
+        kicker: 'After the furnace',
+        lead: 'The plain of Dura is not a parable. Find it on the map of Babylon, then stand before the gold image they were told to worship.',
+        map: 'Find the plain of Dura',
+        gallery: 'Stand before the image on the plain'
+      },
+      {
+        kicker: 'After the tree is cut',
+        lead: 'The watchers’ sentence falls on the same city. Stay with Babylon long enough to see the stump, then the ox-king — pride bound with iron and brass.',
+        map: 'Stay with Babylon under the watchers',
+        gallery: 'See the stump and the ox-king'
+      },
+      {
+        kicker: 'After the writing on the wall',
+        lead: 'That night the gold kingdom ends. The map moves to 539 B.C. — the feast, the river, the gates left open.',
+        map: 'Open 539 B.C. — the night Babylon fell',
+        gallery: 'View this sitting’s 3D artifact'
+      },
+      {
+        kicker: 'After the den of lions',
+        lead: 'The silver kingdom keeps a law it cannot change. See Medo-Persia on the map, then the bear — the next metal of the image, now a living court.',
+        map: 'See the silver kingdom on the map',
+        gallery: 'Turn the bear of Medo-Persia'
+      },
+      {
+        kicker: 'After the four beasts',
+        lead: 'The sea of kingdoms is the same line as the metals. Open AD 538 on the map, then the leopard, the fourth beast, and the 1,260.',
+        map: 'Open AD 538 on the map of history',
+        gallery: 'Turn the beasts of the night vision'
+      },
+      {
+        kicker: 'After ram and goat',
+        lead: 'Greece and the broken horn sit on the same line as the sanctuary count. Walk the map, then turn ram, goat, and the little horn.',
+        map: 'Walk the sanctuary line on the map',
+        gallery: 'Turn the ram, the goat, and the horn'
+      },
+      {
+        kicker: 'After the seventy weeks',
+        lead: 'The decree of 457 B.C. starts the weeks. Find it on the map, then the scroll of the commandment — the paper that starts the count.',
+        map: 'Find the decree of 457 B.C.',
+        gallery: 'See the decree that starts the weeks'
+      },
+      {
+        kicker: 'After the last vision',
+        lead: 'The book closes with kings, Michael, and a seal. Open Daniel 12 on the map, then those three figures in form.',
+        map: 'Open the last station — Daniel 12',
+        gallery: 'See the kings, Michael, and the sealed book'
+      }
+    ];
 
     function sittingConnectConfig(index) {
       const fromJourney = window.BAJourney && window.BAJourney.SITTING_ASSETS;
@@ -1759,20 +1841,37 @@
       const bar = document.getElementById('lesson-connect');
       if (!bar) return;
       const cfg = sittingConnectConfig(index);
+      const copy = LESSON_CONNECT_COPY[index] || LESSON_CONNECT_COPY[0];
+      const kicker = document.getElementById('lesson-connect-kicker');
+      const lead = document.getElementById('lesson-connect-lead');
       const mapBtn = document.getElementById('btn-lesson-map');
       const galleryBtn = document.getElementById('btn-lesson-gallery');
+      const mapLabel = document.getElementById('btn-lesson-map-label');
+      const galleryLabel = document.getElementById('btn-lesson-gallery-label');
       const shareBtn = document.getElementById('btn-lesson-share');
+      if (kicker) kicker.textContent = copy.kicker;
+      if (lead) lead.textContent = copy.lead;
       if (mapBtn) {
         mapBtn.href = `map.html?year=${encodeURIComponent(cfg.mapYear)}&from=lesson&sheet=${index}`;
       }
+      if (mapLabel) mapLabel.textContent = copy.map;
       if (galleryBtn) {
         galleryBtn.href = `gallery.html?asset=${encodeURIComponent(cfg.galleryAsset)}&from=lesson&sheet=${index}`;
         galleryBtn.hidden = !(cfg.galleryAssets && cfg.galleryAssets.length);
       }
+      if (galleryLabel) galleryLabel.textContent = copy.gallery;
       if (shareBtn && !shareBtn.dataset.wired) {
         shareBtn.dataset.wired = 'true';
         shareBtn.addEventListener('click', shareSitting);
       }
+    }
+
+    function playSheetEnter() {
+      const main = document.querySelector('.sitting-main');
+      if (!main) return;
+      main.classList.remove('sheet-enter');
+      void main.offsetWidth;
+      main.classList.add('sheet-enter');
     }
 
     function renderChristologyPlaque(c) {
@@ -1835,7 +1934,7 @@
     function loadSheet(index, opts) {
       if (index < 0 || index >= sheetsData.length) return;
       if (!canAccessSheet(index)) {
-        denyLockedSitting();
+        denyLockedSitting(index);
         return;
       }
       currentSheetIndex = index;
@@ -1915,6 +2014,7 @@
       applySittingMap(index, { animate: false, focusId: null });
       resetSittingPath();
       syncHorizonLocks();
+      playSheetEnter();
 
       // Render Quizzes
       renderQuiz(data.quizzes);
@@ -1955,8 +2055,6 @@
         return false;
       }
       if (completedSheets.has(currentSheetIndex)) return true;
-      const j = journeyState();
-      if (typeof j.pathSheet === 'number' && j.pathSheet >= currentSheetIndex) return true;
       return sheetQuizComplete();
     }
 
@@ -1965,17 +2063,19 @@
       const wbOk = !window.StudyWorkbench || window.StudyWorkbench.isSheetComplete(currentSheetIndex);
       const qOk = sheetQuizComplete();
       const ok = canAdvancePath();
-      const hint = !wbOk ? 'Complete the active proof workbench above to continue' : (!qOk ? 'Answer the checkpoint questions to continue the path' : '');
+      const hint = !wbOk ? 'Complete the active proof workbench above to continue' : (!qOk ? 'Answer every checkpoint question correctly to continue' : '');
       if (btn) {
         btn.disabled = !ok;
         btn.hidden = false;
         btn.title = hint;
       }
+      const nextStep = document.querySelector('#sitting-path-steps [data-path="next"]');
+      if (nextStep) nextStep.disabled = !ok;
     }
 
     function navigateSheet(delta) {
       if (delta > 0 && !canAdvancePath()) {
-        showToast('Complete the workbench and checkpoint questions to continue.');
+        showToast('Every checkpoint question must be answered correctly to continue.');
         const rev = document.getElementById('workbench-section') || document.getElementById('revision-section');
         if (rev) rev.scrollIntoView({ behavior: 'smooth' });
         return;
@@ -2108,7 +2208,7 @@
 
     function completeAndAdvance() {
       if (!canAdvancePath()) {
-        showToast('Complete the workbench and checkpoint questions to continue.');
+        showToast('Every checkpoint question must be answered correctly to continue.');
         const rev = document.getElementById('workbench-section') || document.getElementById('revision-section');
         if (rev) rev.scrollIntoView({ behavior: 'smooth' });
         return;
@@ -2190,9 +2290,18 @@
         const params = new URLSearchParams(location.search);
         const raw = params.get('id') || params.get('section') || params.get('sheet');
         if (raw != null && raw !== '') {
-          if (Object.prototype.hasOwnProperty.call(LEGACY_ID_MAP, raw)) return clampStartSheet(LEGACY_ID_MAP[raw]);
+          if (Object.prototype.hasOwnProperty.call(LEGACY_ID_MAP, raw)) {
+            const wanted = LEGACY_ID_MAP[raw];
+            const clamped = clampStartSheet(wanted);
+            if (clamped !== wanted) denyLockedSitting(wanted);
+            return clamped;
+          }
           const asNum = parseInt(raw, 10);
-          if (!Number.isNaN(asNum) && asNum >= 0 && asNum < sheetsData.length) return clampStartSheet(asNum);
+          if (!Number.isNaN(asNum) && asNum >= 0 && asNum < sheetsData.length) {
+            const clamped = clampStartSheet(asNum);
+            if (clamped !== asNum) denyLockedSitting(asNum);
+            return clamped;
+          }
         }
         const journey = journeyState();
         if (typeof journey.sheet === 'number' && journey.sheet >= 0 && journey.sheet < sheetsData.length) {

@@ -736,6 +736,9 @@
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
       transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
     }
+    .related-avatar.is-locked {
+      opacity: 0.42;
+    }
     .related-avatar:hover {
       transform: scale(1.15);
       border-color: var(--gold-light);
@@ -1449,7 +1452,7 @@
     .era-cell.active { border-color: var(--gold-primary); }
     .era-cell.is-locked {
       opacity: 0.48;
-      cursor: not-allowed;
+      cursor: pointer;
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -1552,38 +1555,7 @@
     }
 
     .museum-nodes-sheet {
-      display: none;
-      position: fixed;
-      left: 12px;
-      right: 12px;
-      bottom: 86px;
-      z-index: 36;
-      border: 1px solid var(--border-gold);
-      background: rgba(10, 7, 4, 0.94);
-      border-radius: 12px;
-      max-height: 36vh;
-      overflow: auto;
-    }
-    .museum-nodes-sheet-toggle {
-      width: 100%;
-      padding: 8px 12px;
-      font-size: 11px;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: #ffd678;
-    }
-    .museum-nodes-sheet-body { padding: 0 12px 12px; }
-    .museum-nodes-sheet-body button {
-      display: block;
-      width: 100%;
-      text-align: left;
-      padding: 8px 0;
-      border-top: 1px solid rgba(212,175,55,0.15);
-      color: #f4efe4;
-      font-size: 13px;
-    }
-    @media (max-width: 1024px) {
-      .museum-nodes-sheet { display: block; }
+      display: none !important;
     }
     @media (max-width: 480px) {
       .museum-action-btn { padding: 8px 8px; letter-spacing: 0.08em; font-size: 10px; }
@@ -1591,8 +1563,7 @@
     }
     .artifact-card-item.is-locked {
       opacity: 0.46;
-      pointer-events: none;
-      cursor: not-allowed;
+      cursor: pointer;
     }
     .artifact-card-item.is-locked .artifact-name::after {
       content: "Locked path";

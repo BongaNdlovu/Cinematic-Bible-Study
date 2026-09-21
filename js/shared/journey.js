@@ -42,7 +42,7 @@
   const SHEET_COUNT = 11;
   const TERMS_VERSION = 2;
   const FREE_THROUGH = 2;
-  const TEMP_REVIEW_UNLOCK = true;
+  const TEMP_REVIEW_UNLOCK = false;
   const SITTING_ASSETS = [
     ["assembled"],
     ["lion"],
@@ -285,12 +285,12 @@
     if (isAdmin()) return SHEET_COUNT - 1;
     if (TEMP_REVIEW_UNLOCK) return SHEET_COUNT - 1;
     const done = completedSet();
-    let open = 0;
+    let open = FREE_THROUGH;
     for (let i = 0; i < SHEET_COUNT - 1; i++) {
-      if (done.has(i)) open = i + 1;
+      if (done.has(i)) open = Math.max(open, i + 1);
       else break;
     }
-    return open;
+    return Math.min(open, SHEET_COUNT - 1);
   }
 
   function canAccessSheet(index) {
@@ -318,8 +318,11 @@
 
   function canAccessAsset(key) {
     if (isAdmin() || allLessonsComplete()) return true;
-    const sitting = sittingForAsset(key);
+    const k = key === "altar" ? "assembled" : key;
+    if (k === "assembled") return true;
+    const sitting = sittingForAsset(k);
     if (sitting < 0) return false;
+    if (sitting === 0) return true;
     return canAccessSheet(sitting);
   }
 
@@ -348,9 +351,11 @@
 
   function canAccessMuseumNode(id, assetKey) {
     if (isAdmin() || allLessonsComplete()) return true;
+    if (id === "col-altar" || assetKey === "assembled" || assetKey === "altar") return true;
     const sitting = sittingForMuseumNode(id, assetKey);
     if (sitting < 0) return false;
-    return sheetCompleted(sitting);
+    if (sitting === 0) return true;
+    return canAccessSheet(sitting);
   }
 
   function openNodeIds() {
@@ -555,6 +560,80 @@
     return cur.cohort || "";
   }
 
+  function sittingForYear(yearId) {
+    for (let i = 0; i < SITTING_YEARS.length; i++) {
+      if ((SITTING_YEARS[i] || []).indexOf(yearId) >= 0) return i;
+    }
+    return -1;
+  }
+
+  function sittingForMapNode(id) {
+    for (let i = 0; i < SITTING_NODES.length; i++) {
+      if ((SITTING_NODES[i] || []).indexOf(id) >= 0) return i;
+    }
+    return -1;
+  }
+
+  function lockExplain(kind, key) {
+    const open = maxOpenSheet();
+    const need = sheetLabel(open);
+    const href = resumeHref();
+    const action = resumeLabel();
+    if (kind === "sheet") {
+      const wanted = sheetLabel(key);
+      return {
+        title: wanted + " is still locked",
+        body: "Finish " + need + " first. The sittings open one after another.",
+        href: href,
+        action: action
+      };
+    }
+    if (kind === "asset") {
+      const sitting = sittingForAsset(key);
+      const wanted = sitting >= 0 ? sheetLabel(sitting) : "This artifact";
+      return {
+        title: wanted + " is still locked",
+        body: "This 3D piece opens with " + wanted + ". Finish " + need + " first.",
+        href: href,
+        action: action
+      };
+    }
+    if (kind === "year") {
+      const sitting = sittingForYear(key);
+      const wanted = sitting >= 0 ? sheetLabel(sitting) : yearLabel(key);
+      return {
+        title: yearLabel(key) + " is still locked",
+        body: "That station opens with " + wanted + ". Finish " + need + " first.",
+        href: href,
+        action: action
+      };
+    }
+    if (kind === "node") {
+      const sitting = sittingForMapNode(key);
+      const wanted = sitting >= 0 ? sheetLabel(sitting) : "a later sitting";
+      return {
+        title: "This map stop is still locked",
+        body: "It opens with " + wanted + ". Finish " + need + " first.",
+        href: href,
+        action: action
+      };
+    }
+    return {
+      title: "This is still locked",
+      body: "Finish " + need + " to continue.",
+      href: href,
+      action: action
+    };
+  }
+
+  function announceLock(kind, key) {
+    const detail = lockExplain(kind, key);
+    if (window.SiteErrors && typeof window.SiteErrors.showLock === "function") {
+      window.SiteErrors.showLock(detail);
+    }
+    return detail;
+  }
+
   try {
     if (typeof window !== "undefined" && window.location && window.location.search) {
       const cohortParam = new URLSearchParams(window.location.search).get("cohort");
@@ -603,6 +682,8 @@
     clearPendingTerms: clearPendingTerms,
     commitPendingTerms: commitPendingTerms,
     getCohort: getCohort,
+    lockExplain: lockExplain,
+    announceLock: announceLock,
     TERMS_VERSION: TERMS_VERSION,
     FREE_THROUGH: FREE_THROUGH,
     SHEET_LABELS: SHEET_LABELS,

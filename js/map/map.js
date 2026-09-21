@@ -243,7 +243,12 @@
       const b = el("button", { class: "cmap-year", type: "button", role: "tab", "data-year": ep.id, title: ep.title },
         "<img src='" + src + "' alt=''><span>" + ep.label + "</span>");
       b.addEventListener("click", () => {
-        if (!yearOpen(ep.id)) return;
+        if (!yearOpen(ep.id)) {
+          if (window.BAJourney && typeof window.BAJourney.announceLock === "function") {
+            window.BAJourney.announceLock("year", ep.id);
+          }
+          return;
+        }
         setYear(ep.id, { animate: true, chapter: cinematic });
       });
       track.appendChild(b);
@@ -623,7 +628,12 @@
     }
 
     function openItemById(id) {
-      if (!nodeOpen(id)) return;
+      if (!nodeOpen(id)) {
+        if (window.BAJourney && typeof window.BAJourney.announceLock === "function") {
+          window.BAJourney.announceLock("node", id);
+        }
+        return;
+      }
       const found = findMapItem(id);
       if (!found) return;
       openDossier(markerCopy(found.item, found.isEvent));
@@ -859,8 +869,15 @@
         const open = yearOpen(b.dataset.year);
         b.classList.toggle("active", b.dataset.year === ep.id);
         b.classList.toggle("is-locked", !open);
-        b.disabled = !open;
+        b.disabled = false;
         b.setAttribute("aria-disabled", open ? "false" : "true");
+        if (!open && window.BAJourney && typeof window.BAJourney.lockExplain === "function") {
+          const note = window.BAJourney.lockExplain("year", b.dataset.year);
+          b.title = note.title + " — " + note.body;
+        } else {
+          const src = DATA.epochs.find(function (row) { return row.id === b.dataset.year; });
+          b.title = src ? src.title : "";
+        }
       });
       stone.style.opacity = String(ep.stone || 0);
       root.classList.toggle("is-stone-world", Number(ep.stone || 0) > 0.05);
@@ -931,6 +948,10 @@
           return;
         }
         if (i === 0 || i === DATA.epochs.length - 1) break;
+      }
+      const blocked = DATA.epochs[clamp(yearIndex() + dir, 0, DATA.epochs.length - 1)];
+      if (blocked && !yearOpen(blocked.id) && window.BAJourney && typeof window.BAJourney.announceLock === "function") {
+        window.BAJourney.announceLock("year", blocked.id);
       }
     }
     prevBtn.addEventListener("click", () => { state.playing = false; playBtn.textContent = "▶"; stepYear(-1); });
@@ -1045,8 +1066,16 @@
       const eventId = params.get("event");
       const eventRaw = eventId ? DATA.events.find((e) => e.id === eventId) : null;
       const eventItem = (eventRaw && nodeOpen(eventRaw.id)) ? eventRaw : null;
+      if (eventRaw && !eventItem && window.BAJourney && typeof window.BAJourney.announceLock === "function") {
+        window.BAJourney.announceLock("node", eventRaw.id);
+      }
       let startId = parseYearParam(opts.year || params.get("year") || (eventItem ? eventItem.yearId : null)) || state.yearId;
-      if (!yearOpen(startId)) startId = firstOpenYear();
+      if (!yearOpen(startId)) {
+        if ((params.get("year") || eventRaw) && window.BAJourney && typeof window.BAJourney.announceLock === "function") {
+          window.BAJourney.announceLock("year", startId);
+        }
+        startId = firstOpenYear();
+      }
       state.yearId = epochById(startId).id;
       let base = savedBase();
       const qBase = new URLSearchParams(location.search).get("basemap");

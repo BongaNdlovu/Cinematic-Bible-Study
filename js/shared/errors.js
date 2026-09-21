@@ -1,6 +1,7 @@
 (function () {
   let lastError = "";
   let lastKind = "";
+  let lastLock = null;
 
   function banner() {
     if (!document.body) return null;
@@ -26,10 +27,35 @@
     }
     el.hidden = false;
     el.dataset.error = lastKind || "generic";
+    if (lastKind === "lock" && lastLock) {
+      el.replaceChildren();
+      const title = document.createElement("strong");
+      title.textContent = lastLock.title || "This is still locked";
+      const body = document.createElement("p");
+      body.textContent = lastLock.body || lastError;
+      el.appendChild(title);
+      el.appendChild(body);
+      const row = document.createElement("div");
+      row.className = "site-error-actions";
+      if (lastLock.href) {
+        const link = document.createElement("a");
+        link.href = lastLock.href;
+        link.textContent = lastLock.action || "Continue the open sitting";
+        row.appendChild(link);
+      }
+      const close = document.createElement("button");
+      close.type = "button";
+      close.textContent = "Dismiss";
+      close.addEventListener("click", clear);
+      row.appendChild(close);
+      el.appendChild(row);
+      return;
+    }
     el.textContent = lastError;
   }
 
   function show(message, kind) {
+    lastLock = null;
     lastError = message || "";
     lastKind = kind || "generic";
     paint();
@@ -38,10 +64,18 @@
     }
   }
 
+  function showLock(detail) {
+    lastLock = detail || {};
+    lastError = ((lastLock.title || "") + " " + (lastLock.body || "")).trim() || "This is still locked";
+    lastKind = "lock";
+    paint();
+  }
+
   function clear() {
     if (!lastError) return;
     lastError = "";
     lastKind = "";
+    lastLock = null;
     paint();
     if (window.ScrollTerms && typeof window.ScrollTerms.syncError === "function") {
       window.ScrollTerms.syncError();
@@ -74,6 +108,7 @@
 
   window.SiteErrors = {
     show: show,
+    showLock: showLock,
     clear: clear,
     current: current,
     paint: paint

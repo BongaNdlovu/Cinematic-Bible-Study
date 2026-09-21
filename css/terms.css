@@ -17,6 +17,45 @@
 }
 .site-error-banner[hidden],
 .auth-error-banner[hidden] { display: none !important; }
+.site-error-banner[data-error="lock"] {
+  border-color: rgba(212, 175, 55, 0.5);
+  background: rgba(22, 16, 10, 0.96);
+  color: #f0e0b8;
+}
+.site-error-banner[data-error="lock"] strong {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+.site-error-banner[data-error="lock"] p {
+  margin: 0 0 10px;
+}
+.site-error-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+.site-error-actions a,
+.site-error-actions button {
+  font: inherit;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  border-radius: 999px;
+  padding: 6px 12px;
+}
+.site-error-actions a {
+  background: #7a5c1c;
+  color: #f0e0b8;
+  text-decoration: none;
+  border: 1px solid rgba(212, 175, 55, 0.45);
+}
+.site-error-actions button {
+  background: transparent;
+  color: inherit;
+  border: 1px solid rgba(240, 224, 184, 0.28);
+}
 
 .auth-inline-error {
   display: block;

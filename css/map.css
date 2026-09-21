@@ -528,8 +528,7 @@ html.cmap-html, body.cmap-page {
 .cmap-year.is-locked,
 .cmap-year:disabled {
   opacity: 0.38;
-  cursor: not-allowed;
-  pointer-events: none;
+  cursor: pointer;
 }
 .cmap-year.active {
   color: #1a140c;

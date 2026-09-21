@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en" class="scroll-smooth dark" data-theme="charcoal">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -2354,6 +2354,16 @@
       margin: 0 auto;
     }
     .sitting-main { min-width: 0; width: 100%; }
+    @keyframes sheetEnter {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: none; }
+    }
+    @media (prefers-reduced-motion: no-preference) {
+      html { scroll-behavior: smooth; }
+      .sitting-main.sheet-enter { animation: sheetEnter 0.42s ease; }
+      .lesson-connect { transition: opacity 0.35s ease, transform 0.35s ease; }
+      .lesson-connect-btn { transition: transform 0.22s ease, border-color 0.22s ease, background 0.22s ease; }
+    }
     .sheet-christology {
       position: relative;
       margin-top: 3.5rem;
@@ -2369,13 +2379,41 @@
       letter-spacing: -0.015em;
     }
     .lesson-connect {
+      display: flex;
+      flex-direction: column;
+      gap: 1.1rem;
+      padding: 1.35rem 1.4rem 1.25rem;
       border: 1px solid rgba(212, 175, 55, 0.35);
       border-radius: 14px;
       background: linear-gradient(135deg, rgba(26, 23, 18, 0.85) 0%, rgba(16, 14, 12, 0.95) 100%);
       box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 235, 175, 0.08);
     }
+    .lesson-connect-kicker {
+      display: block;
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #d4a017;
+      margin-bottom: 0.4rem;
+    }
+    .lesson-connect-lead {
+      margin: 0;
+      font-family: 'Newsreader', Georgia, serif;
+      font-size: 1.05rem;
+      line-height: 1.55;
+      color: inherit;
+    }
+    .lesson-connect-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.7rem;
+    }
     .lesson-connect-btn {
-      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.45rem;
     }
     .sitting-path {
       margin: 1.25rem 0 0;
@@ -2820,6 +2858,263 @@
         padding: 12px !important;
       }
     }
+    /* Readable ink for every study theme */
+    body.charcoal-mode,
+    body.night-mode {
+      --read-fg: #eee9df;
+      --read-muted: #d2c7b0;
+      --read-strong: #fff6dd;
+      --read-accent: #fbbf24;
+      --read-panel: rgba(18, 16, 14, 0.92);
+      --read-border: rgba(201, 162, 39, 0.34);
+      --read-input-bg: #161410;
+      --read-input-fg: #eee9df;
+    }
+    body.paper-mode {
+      --read-fg: #1c1917;
+      --read-muted: #44403c;
+      --read-strong: #111111;
+      --read-accent: #7a5610;
+      --read-panel: #fffdf6;
+      --read-border: rgba(120, 90, 40, 0.32);
+      --read-input-bg: #fffdf8;
+      --read-input-fg: #1c1917;
+    }
+    body.white-mode {
+      --read-fg: #171717;
+      --read-muted: #3f3f46;
+      --read-strong: #0a0a0a;
+      --read-accent: #713f12;
+      --read-panel: #ffffff;
+      --read-border: rgba(0, 0, 0, 0.16);
+      --read-input-bg: #ffffff;
+      --read-input-fg: #171717;
+    }
+    body.night-mode header,
+    body.night-mode .study-topbar,
+    body.night-mode #pomo-dock,
+    body.night-mode #toc-drawer,
+    body.night-mode footer {
+      background: rgba(10, 10, 12, 0.96) !important;
+      border-color: rgba(201, 162, 39, 0.28) !important;
+      color: var(--read-fg);
+    }
+    body.night-mode .sitting-spine,
+    body.night-mode .horizon-panel,
+    body.night-mode .study-instruments,
+    body.night-mode .study-path,
+    body.night-mode .sheet-verify,
+    body.night-mode .sitting-path {
+      background: rgba(12, 12, 16, 0.88);
+      border-color: var(--read-border);
+      color: var(--read-fg);
+    }
+    body.charcoal-mode .article-body,
+    body.night-mode .article-body,
+    body.paper-mode .article-body,
+    body.white-mode .article-body,
+    body.charcoal-mode .article-body p,
+    body.night-mode .article-body p,
+    body.paper-mode .article-body p,
+    body.white-mode .article-body p,
+    body.charcoal-mode .article-body li,
+    body.night-mode .article-body li,
+    body.paper-mode .article-body li,
+    body.white-mode .article-body li {
+      color: var(--read-fg) !important;
+    }
+    body.charcoal-mode .article-body h3,
+    body.charcoal-mode .article-body h4,
+    body.night-mode .article-body h3,
+    body.night-mode .article-body h4,
+    body.paper-mode .article-body h3,
+    body.paper-mode .article-body h4,
+    body.white-mode .article-body h3,
+    body.white-mode .article-body h4,
+    body.charcoal-mode .article-body strong,
+    body.night-mode .article-body strong,
+    body.paper-mode .article-body strong,
+    body.white-mode .article-body strong {
+      color: var(--read-strong) !important;
+    }
+    body.charcoal-mode .article-body em,
+    body.night-mode .article-body em,
+    body.paper-mode .article-body em,
+    body.white-mode .article-body em,
+    body.charcoal-mode .part-subtitle,
+    body.night-mode .part-subtitle,
+    body.paper-mode .part-subtitle,
+    body.white-mode .part-subtitle {
+      color: var(--read-muted);
+    }
+    body.paper-mode .part-header h3,
+    body.white-mode .part-header h3 {
+      color: var(--read-strong);
+      text-shadow: none;
+    }
+    body.charcoal-mode .part-header h3,
+    body.night-mode .part-header h3 {
+      color: var(--read-strong);
+    }
+    body.paper-mode .sitting-spine,
+    body.white-mode .sitting-spine,
+    body.paper-mode .sitting-spine b,
+    body.white-mode .sitting-spine b,
+    body.paper-mode .step-rail button,
+    body.white-mode .step-rail button,
+    body.paper-mode .step-rail strong,
+    body.white-mode .step-rail strong {
+      color: var(--read-fg);
+    }
+    body.paper-mode .sitting-spine,
+    body.white-mode .sitting-spine,
+    body.paper-mode .step-rail button,
+    body.white-mode .step-rail button {
+      background: var(--read-panel);
+      border-color: var(--read-border);
+    }
+    body.charcoal-mode input,
+    body.charcoal-mode textarea,
+    body.charcoal-mode select,
+    body.night-mode input,
+    body.night-mode textarea,
+    body.night-mode select,
+    body.paper-mode input,
+    body.paper-mode textarea,
+    body.paper-mode select,
+    body.white-mode input,
+    body.white-mode textarea,
+    body.white-mode select {
+      color: var(--read-input-fg) !important;
+      background-color: var(--read-input-bg) !important;
+      border-color: var(--read-border);
+      caret-color: var(--read-input-fg);
+    }
+    body.charcoal-mode input::placeholder,
+    body.charcoal-mode textarea::placeholder,
+    body.night-mode input::placeholder,
+    body.night-mode textarea::placeholder {
+      color: #b7aa94;
+      opacity: 1;
+    }
+    body.paper-mode input::placeholder,
+    body.paper-mode textarea::placeholder,
+    body.white-mode input::placeholder,
+    body.white-mode textarea::placeholder {
+      color: #78716c;
+      opacity: 1;
+    }
+    body.paper-mode .header-read-btn,
+    body.white-mode .header-read-btn {
+      color: var(--read-fg);
+      border-color: var(--read-border);
+    }
+    body.paper-mode .header-read-btn.is-on,
+    body.white-mode .header-read-btn.is-on {
+      color: var(--read-accent);
+      background: rgba(201, 162, 39, 0.12);
+    }
+    body.charcoal-mode .workbench-card,
+    body.night-mode .workbench-card,
+    body.paper-mode .workbench-card,
+    body.white-mode .workbench-card,
+    body.charcoal-mode .task-box,
+    body.night-mode .task-box,
+    body.paper-mode .task-box,
+    body.white-mode .task-box {
+      color: var(--read-fg);
+    }
+    body.paper-mode .quiz-option,
+    body.white-mode .quiz-option {
+      color: var(--read-fg);
+      background: var(--read-panel);
+      border-color: var(--read-border);
+    }
+    body.paper-mode .sheet-verify-kicker,
+    body.white-mode .sheet-verify-kicker,
+    body.paper-mode .flow-kicker,
+    body.white-mode .flow-kicker,
+    body.paper-mode .flow-marker,
+    body.white-mode .flow-marker {
+      color: var(--read-accent);
+    }
+    body.paper-mode .sitting-guide-card,
+    body.white-mode .sitting-guide-card,
+    body.paper-mode .access-panel,
+    body.white-mode .access-panel {
+      background: var(--read-panel);
+      color: var(--read-fg);
+      border-color: var(--read-border);
+    }
+    body.paper-mode .sitting-guide-card p,
+    body.paper-mode .sitting-guide-card li,
+    body.white-mode .sitting-guide-card p,
+    body.white-mode .sitting-guide-card li {
+      color: var(--read-muted);
+    }
+    body.paper-mode .sitting-guide-card small,
+    body.white-mode .sitting-guide-card small {
+      color: var(--read-accent);
+    }
+    body.charcoal-mode,
+    body.paper-mode,
+    body.white-mode,
+    body.night-mode {
+      transition: none !important;
+    }
+    body.charcoal-mode {
+      background-color: #151412 !important;
+      color: #eee9df !important;
+    }
+    body.paper-mode {
+      background-color: #f3ebda !important;
+      color: #1c1917 !important;
+    }
+    body.white-mode {
+      background-color: #ffffff !important;
+      color: #171717 !important;
+    }
+    body.night-mode {
+      background-color: #0a0a0c !important;
+      color: #eee9df !important;
+    }
+    body.charcoal-mode .lesson-toc-list a,
+    body.night-mode .lesson-toc-list a,
+    body.paper-mode .lesson-toc-list a,
+    body.white-mode .lesson-toc-list a,
+    body.charcoal-mode .article-body a,
+    body.night-mode .article-body a,
+    body.paper-mode .article-body a,
+    body.white-mode .article-body a {
+      color: var(--read-fg) !important;
+    }
+    body.charcoal-mode .lesson-toc-list a:hover,
+    body.night-mode .lesson-toc-list a:hover,
+    body.paper-mode .lesson-toc-list a:hover,
+    body.white-mode .lesson-toc-list a:hover {
+      color: var(--read-accent) !important;
+    }
+    body.paper-mode .governing-principle p,
+    body.white-mode .governing-principle p {
+      color: var(--read-fg) !important;
+    }
+    body.paper-mode .instrument-tabs button,
+    body.white-mode .instrument-tabs button {
+      color: var(--read-fg) !important;
+    }
+    body.paper-mode .instrument-tabs button.active,
+    body.white-mode .instrument-tabs button.active {
+      color: var(--read-accent) !important;
+    }
+    body.charcoal-mode .instrument-tabs button,
+    body.night-mode .instrument-tabs button {
+      color: var(--read-muted) !important;
+    }
+    body.charcoal-mode .instrument-tabs button.active,
+    body.night-mode .instrument-tabs button.active {
+      color: var(--read-accent) !important;
+    }
+
     @media (max-width: 640px) {
       .sitting-guide {
         align-items: stretch;
@@ -2848,7 +3143,7 @@
   <script type="module" src="js/study/stage.js"></script>
 </head>
 
-<body class="paper-mode bg-paper-50 text-ink-900 font-sans transition-colors duration-200 selection:bg-amber-200 min-h-screen flex flex-col justify-between relative overflow-x-hidden">
+<body class="charcoal-mode bg-paper-950 text-paper-100 font-sans transition-colors duration-200 selection:bg-amber-900 min-h-screen flex flex-col justify-between relative overflow-x-hidden">
 
   <div class="cinematic-atmosphere" aria-hidden="true">
     <img class="atm-hero" src="assets/study/hero-cinematic.jpg" alt="Atmospheric background - Daniel study hero" aria-hidden="true">
@@ -2963,7 +3258,7 @@
 
         <!-- Theme Mode Cycler -->
         <button onclick="cycleTheme()" id="theme-btn" class="p-1.5 rounded hover:bg-paper-200/60 dark:hover:bg-paper-900 text-xs font-mono text-ink-700 dark:text-paper-300" title="Toggle Theme">
-          <span id="theme-icon">☀️ Paper</span>
+          <span id="theme-icon">◑ Chiaroscuro</span>
         </button>
       </div>
     </div>
@@ -3312,25 +3607,20 @@
     <section id="sheet-flow" class="sheet-flow" hidden></section>
 
     <!-- Connective Lesson Bar (Map and 3D Gallery) -->
-    <section id="lesson-connect" class="lesson-connect my-8 py-4 border-y border-amber-600/25 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4">
-      <div class="flex flex-col gap-1">
-        <span class="font-mono text-[10px] uppercase tracking-widest text-amber-800 dark:text-amber-400 font-semibold flex items-center gap-1.5">
-          <span class="w-2 h-2 rounded-full bg-amber-600 dark:bg-amber-400"></span>
-          Prophetic Instruments
-        </span>
-        <span class="font-serif italic text-sm text-ink-700 dark:text-paper-300">
-          Explore this chapter in space and 3D form
-        </span>
+    <section id="lesson-connect" class="lesson-connect my-8 text-ink-800 dark:text-paper-200">
+      <div class="lesson-connect-copy">
+        <span id="lesson-connect-kicker" class="lesson-connect-kicker">The siege is the door of the book</span>
+        <p id="lesson-connect-lead" class="lesson-connect-lead">Daniel opens at 605 B.C. Walk Jerusalem into Babylon on the map, then stand before the whole image — the statue this book will take apart sitting by sitting.</p>
       </div>
-      <div class="flex flex-wrap sm:flex-nowrap items-center gap-3">
-        <a id="btn-lesson-map" href="map.html" class="lesson-connect-btn inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg border border-amber-600/50 text-amber-800 dark:text-amber-300 hover:bg-amber-500/10 hover:border-amber-500 transition-colors font-mono text-xs font-semibold text-center w-full sm:w-auto">
-          <span>🗺️</span> <span>Open the map of history</span> &rarr;
+      <div class="lesson-connect-actions">
+        <a id="btn-lesson-map" href="map.html" class="lesson-connect-btn px-4 py-2.5 rounded-lg border border-amber-600/50 text-amber-800 dark:text-amber-300 hover:bg-amber-500/10 hover:border-amber-500 font-mono text-xs font-semibold text-center">
+          <span aria-hidden="true">🗺️</span> <span id="btn-lesson-map-label">Walk the siege of 605 B.C.</span>
         </a>
-        <a id="btn-lesson-gallery" href="gallery.html" class="lesson-connect-btn inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg border border-amber-600/50 text-amber-800 dark:text-amber-300 hover:bg-amber-500/10 hover:border-amber-500 transition-colors font-mono text-xs font-semibold text-center w-full sm:w-auto">
-          <span>🏛️</span> <span>View this sitting’s 3D artifact</span> &rarr;
+        <a id="btn-lesson-gallery" href="gallery.html" class="lesson-connect-btn px-4 py-2.5 rounded-lg border border-amber-600/50 text-amber-800 dark:text-amber-300 hover:bg-amber-500/10 hover:border-amber-500 font-mono text-xs font-semibold text-center">
+          <span aria-hidden="true">🏛️</span> <span id="btn-lesson-gallery-label">Stand before the complete statue</span>
         </a>
-        <button type="button" id="btn-lesson-share" class="lesson-connect-btn inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg border border-amber-600/50 text-amber-800 dark:text-amber-300 hover:bg-amber-500/10 hover:border-amber-500 transition-colors font-mono text-xs font-semibold text-center w-full sm:w-auto">
-          <span>↗</span> <span>Share this sitting</span>
+        <button type="button" id="btn-lesson-share" class="lesson-connect-btn px-4 py-2.5 rounded-lg border border-amber-600/50 text-amber-800 dark:text-amber-300 hover:bg-amber-500/10 hover:border-amber-500 font-mono text-xs font-semibold text-center">
+          <span aria-hidden="true">↗</span> <span>Invite someone into this sitting</span>
         </button>
       </div>
     </section>

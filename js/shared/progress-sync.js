@@ -7,8 +7,72 @@
   'use strict';
 
   const TABLE = 'exhibit_progress';
+  const ACCOUNT_KEY = 'baProgressAccountId';
   let debounceTimer = null;
   let isSyncing = false;
+
+  function accountId(u) {
+    return u && u.id ? String(u.id) : '';
+  }
+
+  function notifyProgressSynced() {
+    try {
+      if (typeof window !== 'undefined') {
+        window.dispatchEvent(new CustomEvent('ba-progress-synced'));
+      }
+    } catch (e) {}
+  }
+
+  function clearLocalLearnerProgress() {
+    try {
+      if (window.BAJourney && typeof window.BAJourney.save === 'function') {
+        window.BAJourney.save({
+          completedSheets: [],
+          pathSheet: -1,
+          sheet: 0,
+          unlocked: []
+        });
+      }
+    } catch (e) {}
+    try { localStorage.setItem('daniel_historicist_mastery', '[]'); } catch (e) {}
+    try { localStorage.setItem('daniel_workbench_v1', '{}'); } catch (e) {}
+    try { localStorage.setItem('daniel_competency_telemetry_v1', '{}'); } catch (e) {}
+    try { localStorage.removeItem('daniel_certificate_name'); } catch (e) {}
+  }
+
+  function applyCloudProgress(remote) {
+    const remoteJourney = (remote && remote.journey) || {};
+    const remoteSheets = Array.isArray(remoteJourney.completedSheets)
+      ? remoteJourney.completedSheets
+      : (remote && Array.isArray(remote.mastery) ? remote.mastery : []);
+    const cleanSheets = Array.from(new Set(remoteSheets.map(Number))).filter(function (n) {
+      return !Number.isNaN(n) && n >= 0 && n <= 10;
+    });
+    try {
+      if (window.BAJourney && typeof window.BAJourney.save === 'function') {
+        window.BAJourney.save({
+          completedSheets: cleanSheets,
+          cohort: remote.cohort || remoteJourney.cohort || null,
+          sheet: typeof remoteJourney.sheet === 'number' ? remoteJourney.sheet : 0,
+          pathSheet: typeof remoteJourney.pathSheet === 'number' ? remoteJourney.pathSheet : -1
+        });
+      }
+      localStorage.setItem('daniel_historicist_mastery', JSON.stringify(cleanSheets));
+    } catch (e) {}
+    try {
+      localStorage.setItem('daniel_workbench_v1', JSON.stringify((remote && remote.workbench) || {}));
+    } catch (e) {}
+    try {
+      localStorage.setItem('daniel_competency_telemetry_v1', JSON.stringify((remote && remote.telemetry) || {}));
+    } catch (e) {}
+    try {
+      if (remote && remote.certificate_name) {
+        localStorage.setItem('daniel_certificate_name', remote.certificate_name);
+      } else {
+        localStorage.removeItem('daniel_certificate_name');
+      }
+    } catch (e) {}
+  }
 
   function authClient() {
     return window.ScrollAuth && typeof window.ScrollAuth.getClient === 'function' && window.ScrollAuth.getClient();
@@ -23,6 +87,14 @@
     const u = currentUser();
     if (!c || !u) return Promise.resolve(null);
 
+    const uid = accountId(u);
+    const prev = (function () {
+      try { return localStorage.getItem(ACCOUNT_KEY) || ''; } catch (e) { return ''; }
+    })();
+    const switched = !!(prev && uid && prev !== uid);
+    if (switched) clearLocalLearnerProgress();
+    try { if (uid) localStorage.setItem(ACCOUNT_KEY, uid); } catch (e) {}
+
     isSyncing = true;
     return c.from(TABLE)
       .select('*')
@@ -32,14 +104,24 @@
         if (res && res.error) {
           // Table may not yet be provisioned by operator - fail silently
           isSyncing = false;
+          if (switched) notifyProgressSynced();
           return null;
         }
         const remote = res && res.data;
         if (!remote) {
-          // No remote record yet, push local state to initialize
+          // New cloud row: do not carry another account's desk onto this login.
+          if (switched) notifyProgressSynced();
           isSyncing = false;
           syncNow();
           return null;
+        }
+
+        if (switched) {
+          applyCloudProgress(remote);
+          notifyProgressSynced();
+          isSyncing = false;
+          syncNow();
+          return remote;
         }
 
         // 1. Merge completedSheets in baJourney
