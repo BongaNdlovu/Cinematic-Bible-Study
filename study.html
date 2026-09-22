@@ -83,8 +83,8 @@
     }
 
     .sheet-verify {
-      margin: 2.6rem 0 0;
-      padding: 1.15rem 0 0.35rem;
+      margin: 2.75rem 0 1.75rem;
+      padding: 1.5rem 0 0.25rem;
       border: 0;
       border-top: 1px solid rgba(197, 155, 39, 0.4);
       border-radius: 0;
@@ -96,67 +96,75 @@
       letter-spacing: 0.16em;
       text-transform: uppercase;
       color: #c9a227;
-      margin: 0 0 0.4rem;
+      margin: 0 0 0.65rem;
     }
     .sheet-verify h3 {
       font-family: Newsreader, Georgia, serif;
       font-size: 1.45rem;
       color: inherit;
-      margin: 0 0 0.65rem;
+      margin: 0 0 0.75rem;
+      line-height: 1.25;
     }
     .sheet-verify-claim {
-      font-size: 0.95rem;
-      line-height: 1.5;
-      margin: 0 0 1rem;
+      font-size: 0.98rem;
+      line-height: 1.65;
+      margin: 0 0 0.55rem;
+      color: var(--read-fg, inherit);
     }
     .sheet-verify-list {
       display: flex;
       flex-direction: column;
-      gap: 0.85rem;
+      gap: 0;
     }
     .sheet-verify-card {
       border: 0;
-      border-bottom: 1px solid rgba(197, 155, 39, 0.14);
+      border-bottom: 1px solid rgba(197, 155, 39, 0.22);
       border-radius: 0;
-      padding: 0.2rem 0 1rem;
+      padding: 1.25rem 0 1.35rem;
       background: transparent;
     }
-    .sheet-verify-list .sheet-verify-card:last-child { border-bottom: 0; }
+    .sheet-verify-list .sheet-verify-card:first-child { padding-top: 0.35rem; }
+    .sheet-verify-list .sheet-verify-card:last-child { border-bottom: 0; padding-bottom: 0.2rem; }
     .sheet-verify-kind {
       font-family: "JetBrains Mono", monospace;
       font-size: 10px;
       letter-spacing: 0.1em;
       text-transform: uppercase;
       color: #c9a227;
+      margin: 0 0 0.45rem;
     }
     .sheet-verify-card h4 {
       font-family: Newsreader, Georgia, serif;
-      font-size: 1.05rem;
-      margin: 0.25rem 0 0.55rem;
+      font-size: 1.08rem;
+      line-height: 1.4;
+      margin: 0 0 0.75rem;
       color: inherit;
     }
     .sheet-verify-card blockquote {
       margin: 0;
-      padding: 0.55rem 0.75rem;
+      padding: 0.15rem 0 0.15rem 0.9rem;
       border-left: 3px solid #c59b27;
       font-family: Newsreader, Georgia, serif;
       font-style: italic;
       font-size: 0.98rem;
-      line-height: 1.5;
+      line-height: 1.6;
+      color: var(--read-fg, inherit);
     }
     .sheet-verify-source,
     .sheet-verify-check {
       font-family: Inter, sans-serif;
-      font-size: 0.82rem;
-      line-height: 1.5;
-      margin: 0.5rem 0 0;
-      opacity: 0.82;
+      font-size: 0.86rem;
+      line-height: 1.6;
+      margin: 0.85rem 0 0;
+      color: var(--read-fg, inherit);
     }
+    .sheet-verify-check { margin-top: 0.45rem; }
     .sheet-verify-count {
       font-family: Inter, sans-serif;
-      font-size: 0.82rem;
-      opacity: 0.78;
-      margin: -0.35rem 0 1rem;
+      font-size: 0.86rem;
+      line-height: 1.55;
+      color: var(--read-muted, inherit);
+      margin: 0 0 1.15rem;
     }
     .sheet-verify-source b {
       font-family: "JetBrains Mono", monospace;
@@ -3433,11 +3441,21 @@
     }
     body.paper-mode .sheet-verify-kicker,
     body.white-mode .sheet-verify-kicker,
+    body.paper-mode .sheet-verify-kind,
+    body.white-mode .sheet-verify-kind,
+    body.paper-mode .sheet-verify-source b,
+    body.white-mode .sheet-verify-source b,
+    body.paper-mode .sheet-verify-open,
+    body.white-mode .sheet-verify-open,
     body.paper-mode .flow-kicker,
     body.white-mode .flow-kicker,
     body.paper-mode .flow-marker,
     body.white-mode .flow-marker {
       color: var(--read-accent);
+    }
+    body.paper-mode .sheet-verify-open:hover,
+    body.white-mode .sheet-verify-open:hover {
+      color: var(--read-strong);
     }
     body.paper-mode .sitting-guide-card,
     body.white-mode .sitting-guide-card,
@@ -3531,6 +3549,72 @@
     }
     @media (max-width: 960px) {
       :root { --study-sticky-top: 7.25rem; }
+    }
+
+    /* Dark themes: ink greys were written for paper. Lift them so they stay readable. */
+    html.dark .text-ink-400,
+    html.dark .text-ink-500,
+    html.dark .text-ink-600,
+    html.dark .text-ink-700 {
+      color: #e7decc !important;
+    }
+
+    /* Print last, so theme colours cannot leave the page in light grey. */
+    @media print {
+      html,
+      body,
+      body.charcoal-mode,
+      body.paper-mode,
+      body.white-mode,
+      body.night-mode {
+        background: #ffffff !important;
+        background-image: none !important;
+        color: #161616 !important;
+      }
+      body.charcoal-mode::before,
+      body.paper-mode::before,
+      body.white-mode::before,
+      body.night-mode::before {
+        display: none !important;
+      }
+      #sheet-article,
+      #sheet-article *,
+      #sheet-flow,
+      #sheet-flow *,
+      #sheet-verify,
+      #sheet-verify *,
+      #sheet-study-path,
+      #sheet-study-path *,
+      #sheet-christology,
+      #sheet-christology *,
+      #facilitator-strip,
+      #facilitator-strip *,
+      #workbench-section,
+      #workbench-section *,
+      #revision-section,
+      #revision-section *,
+      .sitting-main,
+      .sitting-main *:not(img):not(svg):not(canvas) {
+        color: #161616 !important;
+        -webkit-text-fill-color: #161616 !important;
+        background: #ffffff !important;
+        background-image: none !important;
+        text-shadow: none !important;
+        box-shadow: none !important;
+        filter: none !important;
+      }
+      #sheet-article,
+      #sheet-flow,
+      #sheet-verify,
+      #sheet-study-path,
+      #sheet-christology,
+      #facilitator-strip,
+      #workbench-section,
+      .workbench-card,
+      .task-box,
+      .sitting-main {
+        background: #ffffff !important;
+      }
     }
   </style>
   <script type="importmap">
