@@ -21,7 +21,7 @@ Push-Location $root
 try {
   npx wrangler pages deploy .pages-deploy `
     --project-name=cinematic-bible-study-daniel `
-    --branch=master `
+    --branch=main `
     --commit-dirty=true
 } finally {
   Pop-Location
