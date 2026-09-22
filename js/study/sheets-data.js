@@ -22,8 +22,10 @@
         scripture: "How the book teaches you to read it",
         audio: {
           src: "assets/study/audio/sitting-00.mp3",
-          title: "Listen to Sitting 0",
-          duration: "12 min"
+          kind: "overview",
+          title: "Sitting 0 overview — how to read Daniel's prophetic chain",
+          kicker: "3-minute overview",
+          hint: "A quick orientation before you read. This is not a voiceover of the full sitting."
         },
         infographic: {
           src: "assets/study/infographics/sitting-00-roadmap.webp",
@@ -413,6 +415,20 @@ Daniel 9:24–27 ──▶  "Seventy weeks" (70 × 7 = 490 prophetic days)
           ]
         },
         scripture: "Daniel 1:1-21 &bull; Babylon, 605 B.C.",
+        audio: {
+          src: "assets/study/audio/sitting-01.mp3",
+          kind: "overview",
+          title: "Sitting 1 overview — identity, consecration, and the royal table",
+          kicker: "3-minute overview",
+          hint: "A quick orientation before you read. This is not a voiceover of the full sitting."
+        },
+        infographic: {
+          src: "assets/study/infographics/sitting-01-roadmap.webp",
+          download: "assets/study/infographics/sitting-01-roadmap.jpg",
+          filename: "Daniel-1-Exilic-Crucible-Roadmap.jpg",
+          title: "The Exilic Crucible: Excellence Without Compromise",
+          alt: "One-page roadmap of Sitting 1: civic labels vs inward allegiance, the renaming of Daniel and his friends, zeroim at the royal table, ten-times wisdom, and Christ in the wilderness."
+        },
         title: "The Exilic Crucible: Identity, Consecration, and the Redemptive Obedience of Christ",
         subtitle: "Sovereign exile, the battle for identity at Babylon's table, and how Daniel's stand points to the faithful Son.",
         flow: [
@@ -428,6 +444,7 @@ Daniel 9:24–27 ──▶  "Seventy weeks" (70 × 7 = 490 prophetic days)
 <nav class="lesson-toc" aria-label="Sheet 1 sections">
   <p class="lesson-toc-kicker">Follow this sitting</p>
   <ol class="lesson-toc-list">
+    <li><a href="#sitting-roadmap">Roadmap · one-page infographic</a></li>
     <li><a href="#mp1">I · Sovereign judgment and three stages of exile</a></li>
     <li><a href="#mp2">II · Identity: civic cooperation vs. covenant surrender</a></li>
     <li><a href="#mp3">III · The crisis at the royal table</a></li>
@@ -801,6 +818,20 @@ DANIEL IN BABYLON                         JESUS IN THE WILDERNESS
           ]
         },
         scripture: "Daniel 2:1-49 &bull; Babylon, 603 B.C.",
+        audio: {
+          src: "assets/study/audio/sitting-02.mp3",
+          kind: "overview",
+          title: "Sitting 2 overview — the metallic colossus and the stone kingdom",
+          kicker: "3-minute overview",
+          hint: "A quick orientation before you read. This is not a voiceover of the full sitting."
+        },
+        infographic: {
+          src: "assets/study/infographics/sitting-02-roadmap.webp",
+          download: "assets/study/infographics/sitting-02-roadmap.jpg",
+          filename: "Daniel-2-Metallic-Colossus-Roadmap.jpg",
+          title: "The Metallic Colossus: A Historicist Roadmap of Human Empire",
+          alt: "One-page roadmap of Sitting 2: gold through iron-clay feet, the metallurgic gradient, you are in the toenails, and the stone cut without hands."
+        },
         title: "The Metallic Colossus: The Historicist Blueprint of History and the Sovereign Triumph of Christ",
         subtitle: "From the impasse of human wisdom to the stone that fills the earth — God's unbroken chain of empires and Christ's everlasting kingdom.",
         flow: [
@@ -816,6 +847,7 @@ DANIEL IN BABYLON                         JESUS IN THE WILDERNESS
 <nav class="lesson-toc" aria-label="Sheet 2 sections">
   <p class="lesson-toc-kicker">Follow this sitting</p>
   <ol class="lesson-toc-list">
+    <li><a href="#sitting-roadmap">Roadmap · one-page infographic</a></li>
     <li><a href="#intro">Introduction · The impasse of human wisdom</a></li>
     <li><a href="#mp1">I · The historicist chain of world empires</a></li>
     <li><a href="#mp2">II · Divided kingdoms and the mirage of unity</a></li>
@@ -1214,6 +1246,20 @@ Iron (Coercive Civil Power)  +  Clay (Religious/Ecclesiastical Claims)
           ]
         },
         scripture: "Daniel 3:1-30 &bull; Plain of Dura, c. 594 B.C.",
+        audio: {
+          src: "assets/study/audio/sitting-03.mp3",
+          kind: "overview",
+          title: "Sitting 3 overview — defiance and deliverance on the Plain of Dura",
+          kicker: "3-minute overview",
+          hint: "A quick orientation before you read. This is not a voiceover of the full sitting."
+        },
+        infographic: {
+          src: "assets/study/infographics/sitting-03-roadmap.webp",
+          download: "assets/study/infographics/sitting-03-roadmap.jpg",
+          filename: "Daniel-3-Plain-of-Dura-Roadmap.jpg",
+          title: "The Imperial Veto: Defiance and Deliverance on the Plain of Dura",
+          alt: "One-page roadmap of Sitting 3: the all-gold image, civil duty vs divine law, but-if-not faith, the fourth figure in the fire, and Daniel 3 vs Revelation 13."
+        },
         title: "The Plain of Dura: Forced Worship, the \"But If Not\" Faith, and Christ in the Fire",
         subtitle: "Nebuchadnezzar's imperial veto, the Daniel 3 / Revelation 13 blueprint, and the Fourth who walks in the flames.",
         flow: [
@@ -1229,6 +1275,7 @@ Iron (Coercive Civil Power)  +  Clay (Religious/Ecclesiastical Claims)
 <nav class="lesson-toc" aria-label="Sheet 3 sections">
   <p class="lesson-toc-kicker">Follow this sitting</p>
   <ol class="lesson-toc-list">
+    <li><a href="#sitting-roadmap">Roadmap · one-page infographic</a></li>
     <li><a href="#intro">Introduction · The imperial veto</a></li>
     <li><a href="#mp1">I · Civic duty vs. idolatrous worship</a></li>
     <li><a href="#mp2">II · Daniel 3 and Revelation 13</a></li>
@@ -1585,6 +1632,20 @@ THE TRIAL: IMMANENCE IN THE FIRE                           THE CROSS: VICARIOUS 
           ]
         },
         scripture: "Daniel 4:1-37 &bull; Babylon, c. 570 B.C.",
+        audio: {
+          src: "assets/study/audio/sitting-04.mp3",
+          kind: "overview",
+          title: "Sitting 4 overview — pride, divine sanity, and the humility of Christ",
+          kicker: "3-minute overview",
+          hint: "A quick orientation before you read. This is not a voiceover of the full sitting."
+        },
+        infographic: {
+          src: "assets/study/infographics/sitting-04-roadmap.webp",
+          download: "assets/study/infographics/sitting-04-roadmap.jpg",
+          filename: "Daniel-4-Emperor-in-the-Dust-Roadmap.jpg",
+          title: "The Emperor in the Dust: Pride, Divine Sanity, and the Humility of Christ",
+          alt: "One-page roadmap of Sitting 4: Nebuchadnezzar's imperial confession, the cosmic tree, beastly madness, restored reason, and Christ the true and humble King."
+        },
         title: "The Emperor in the Dust: Pride, Divine Sanity, and the Humility of Christ",
         subtitle: "A pagan king's open confession — hubris, beastly madness, restored reason, and Christ's kenosis.",
         flow: [
@@ -1600,6 +1661,7 @@ THE TRIAL: IMMANENCE IN THE FIRE                           THE CROSS: VICARIOUS 
 <nav class="lesson-toc" aria-label="Sheet 4 sections">
   <p class="lesson-toc-kicker">Follow this sitting</p>
   <ol class="lesson-toc-list">
+    <li><a href="#sitting-roadmap">Roadmap · one-page infographic</a></li>
     <li><a href="#intro">Introduction · An emperor's open confession</a></li>
     <li><a href="#mp1">I · The cosmic tree and the thesis of thrones</a></li>
     <li><a href="#mp2">II · The anatomy of hubris</a></li>
@@ -1956,6 +2018,20 @@ Nebuchadnezzar (Daniel 4)                Jesus Christ (Philippians 2)
           ]
         },
         scripture: "Daniel 5:1-31 &bull; Babylon, October 11/12, 539 B.C.",
+        audio: {
+          src: "assets/study/audio/sitting-05.mp3",
+          kind: "overview",
+          title: "Sitting 5 overview — the handwriting on the plaster and the fall of Babylon",
+          kicker: "3-minute overview",
+          hint: "A quick orientation before you read. This is not a voiceover of the full sitting."
+        },
+        infographic: {
+          src: "assets/study/infographics/sitting-05-roadmap.webp",
+          download: "assets/study/infographics/sitting-05-roadmap.jpg",
+          filename: "Daniel-5-Handwriting-on-the-Plaster-Roadmap.jpg",
+          title: "The Handwriting on the Plaster: The Fall of Babylon, the Divine Balance Sheet, and the Righteousness of Christ",
+          alt: "One-page roadmap of Sitting 5: Belshazzar's feast, sacrilege against known light, MENE TEKEL PERES, the fall of Babylon, and Christ's righteousness on the scale."
+        },
         title: "The Handwriting on the Plaster: The Fall of Babylon, the Divine Balance Sheet, and the Righteousness of Christ",
         subtitle: "Sacrilege against known light, Heaven's marketplace audit, and the only weight that can cover us.",
         flow: [
@@ -1971,6 +2047,7 @@ Nebuchadnezzar (Daniel 4)                Jesus Christ (Philippians 2)
 <nav class="lesson-toc" aria-label="Sheet 5 sections">
   <p class="lesson-toc-kicker">Follow this sitting</p>
   <ol class="lesson-toc-list">
+    <li><a href="#sitting-roadmap">Roadmap · one-page infographic</a></li>
     <li><a href="#intro">Introduction · The illusion of invulnerability</a></li>
     <li><a href="#mp1">I · Belshazzar and the historical accuracy of Scripture</a></li>
     <li><a href="#mp2">II · Sacrilege and sinning against light</a></li>
@@ -2362,6 +2439,20 @@ CYRUS THE DELIVERER                       JESUS CHRIST THE REDEEMER
           ]
         },
         scripture: "Daniel 6:1-28 &bull; Babylon, c. 538 B.C.",
+        audio: {
+          src: "assets/study/audio/sitting-06.mp3",
+          kind: "overview",
+          title: "Sitting 6 overview — the pit of hunger, the open window, and the risen Christ",
+          kicker: "3-minute overview",
+          hint: "A quick orientation before you read. This is not a voiceover of the full sitting."
+        },
+        infographic: {
+          src: "assets/study/infographics/sitting-06-roadmap.webp",
+          download: "assets/study/infographics/sitting-06-roadmap.jpg",
+          filename: "Daniel-6-Pit-of-Hunger-Roadmap.jpg",
+          title: "The Pit of Hunger: The Law of the Medes and Persians, The Open Window, and the Resurrection of Christ",
+          alt: "One-page roadmap of Sitting 6: the unalterable statute, Daniel's open window, the lions' den, dawn deliverance, and the pit as a type of Christ's resurrection."
+        },
         title: "The Pit of Hunger: The Law of the Medes and Persians, The Open Window, and the Resurrection of Christ",
         subtitle: "The irrevocable imperial statute, blameless integrity under audit, prayer facing Jerusalem, and the sealed pit as a type of the risen Christ.",
         flow: [
@@ -2377,6 +2468,7 @@ CYRUS THE DELIVERER                       JESUS CHRIST THE REDEEMER
 <nav class="lesson-toc" aria-label="Sheet 6 sections">
   <p class="lesson-toc-kicker">Follow this sitting</p>
   <ol class="lesson-toc-list">
+    <li><a href="#sitting-roadmap">Roadmap · one-page infographic</a></li>
     <li><a href="#intro">Introduction · The new imperial order and the trap of envy</a></li>
     <li><a href="#mp1">I · The irrevocable law: constitutional rigidity vs. imperial whim</a></li>
     <li><a href="#mp2">II · The satraps' forensic audit: blameless in Babylon</a></li>
@@ -2803,6 +2895,20 @@ DANIEL IN THE LIONS' DEN                 JESUS CHRIST AT CALVARY &amp; THE TOMB
           ]
         },
         scripture: "Daniel 7:1-28 &bull; Babylon, c. 553 B.C.",
+        audio: {
+          src: "assets/study/audio/sitting-07.mp3",
+          kind: "overview",
+          title: "Sitting 7 overview — the churning sea, the little horn, and the 1,260 years",
+          kicker: "Overview",
+          hint: "A quick orientation before you read. This is not a voiceover of the full sitting."
+        },
+        infographic: {
+          src: "assets/study/infographics/sitting-07-roadmap.webp",
+          download: "assets/study/infographics/sitting-07-roadmap.jpg",
+          filename: "Daniel-7-Churning-Sea-Little-Horn-Roadmap.jpg",
+          title: "The Churning Sea & The Little Horn: The 1,260 Years to Judgment",
+          alt: "One-page roadmap of Sitting 7: four predatory beasts, the little horn, 1,260 years from 538 to 1798, and the pre-advent heavenly court."
+        },
         title: "The Churning Sea & The Little Horn: The 1,260 Years to Judgment",
         subtitle: "The four predatory beasts, the church-state horn, the 1,260-year supremacy, and the pre-advent heavenly court.",
         flow: [
@@ -2818,6 +2924,7 @@ DANIEL IN THE LIONS' DEN                 JESUS CHRIST AT CALVARY &amp; THE TOMB
 <nav class="lesson-toc" aria-label="Sheet 7 sections">
   <p class="lesson-toc-kicker">Follow this sitting</p>
   <ol class="lesson-toc-list">
+    <li><a href="#sitting-roadmap">Roadmap · one-page infographic</a></li>
     <li><a href="#intro">Introduction · The night vision and the winds of war</a></li>
     <li><a href="#mp1">I · The four predatory beasts: succession of world empires</a></li>
     <li><a href="#mp2">II · The emergence of the little horn: the church-state counterfeit</a></li>
@@ -3245,6 +3352,20 @@ SCRIPTURAL CRITERIA:                     HISTORICAL FULFILLMENT:
           ]
         },
         scripture: "Daniel 8:1-27 &bull; Susa, c. 551 B.C.",
+        audio: {
+          src: "assets/study/audio/sitting-08.mp3",
+          kind: "overview",
+          title: "Sitting 8 overview — the ram, the goat, and 2,300 days to sanctuary cleansing",
+          kicker: "Overview",
+          hint: "A quick orientation before you read. This is not a voiceover of the full sitting."
+        },
+        infographic: {
+          src: "assets/study/infographics/sitting-08-roadmap.webp",
+          download: "assets/study/infographics/sitting-08-roadmap.jpg",
+          filename: "Daniel-8-Ram-Goat-2300-Days-Roadmap.jpg",
+          title: "The Ram, The Goat, & 2,300 Days: The Cleansing of the Sanctuary",
+          alt: "One-page roadmap of Sitting 8: Gabriel's named ram and goat, the little horn's tamid assault, refuting Antiochus, and 2,300 days to sanctuary cleansing."
+        },
         title: "The Ram, The Goat, & 2,300 Days: The Cleansing of the Sanctuary",
         subtitle: "Gabriel's named empires, the attack on Christ's continual mediation (tamid), refutation of Antiochus, and the 1844 Day of Atonement in heaven.",
         flow: [
@@ -3260,6 +3381,7 @@ SCRIPTURAL CRITERIA:                     HISTORICAL FULFILLMENT:
 <nav class="lesson-toc" aria-label="Sheet 8 sections">
   <p class="lesson-toc-kicker">Follow this sitting</p>
   <ol class="lesson-toc-list">
+    <li><a href="#sitting-roadmap">Roadmap · one-page infographic</a></li>
     <li><a href="#intro">Introduction · The vision at the River Ulai in Susa</a></li>
     <li><a href="#mp1">I · The named ram and goat: Media-Persia and Greece</a></li>
     <li><a href="#mp2">II · The little horn: Rome in two successive phases</a></li>
@@ -3672,6 +3794,20 @@ BIBLICAL REQUIREMENT:            ANTIOCHUS IV EPIPHANES:           HISTORICIST R
           ]
         },
         scripture: "Daniel 9:1-27 &bull; Babylon, 538 B.C.",
+        audio: {
+          src: "assets/study/audio/sitting-09.mp3",
+          kind: "overview",
+          title: "Sitting 9 overview — the 70 weeks, the cross, and the anchor of 1844",
+          kicker: "Overview",
+          hint: "A quick orientation before you read. This is not a voiceover of the full sitting."
+        },
+        infographic: {
+          src: "assets/study/infographics/sitting-09-roadmap.webp",
+          download: "assets/study/infographics/sitting-09-roadmap.jpg",
+          filename: "Daniel-9-Seventy-Weeks-Cross-Roadmap.jpg",
+          title: "The 70 Weeks (Chathak) & The Cross: The Mathematical Anchor of 1844",
+          alt: "One-page roadmap of Sitting 9: chathak severed from 2,300 days, the 457 B.C. decree, Messiah at the cross in A.D. 31, and the anchor to 1844."
+        },
         title: "The 70 Weeks (Chathak) & The Cross: The Mathematical Anchor of 1844",
         subtitle: "How the crucifixion of Christ in A.D. 31 establishes the start date for the 2,300-day prophecy.",
         flow: [
@@ -3687,6 +3823,7 @@ BIBLICAL REQUIREMENT:            ANTIOCHUS IV EPIPHANES:           HISTORICIST R
 <nav class="lesson-toc" aria-label="Sheet 9 sections">
   <p class="lesson-toc-kicker">Follow this sitting</p>
   <ol class="lesson-toc-list">
+    <li><a href="#sitting-roadmap">Roadmap · one-page infographic</a></li>
     <li><a href="#intro">Introduction · Daniel's penitential prayer and Gabriel's return</a></li>
     <li><a href="#mp1">I · The Hebrew verb Chathak: severed from the 2,300 days</a></li>
     <li><a href="#mp2">II · Four Persian decrees: identifying the 457 B.C. anchor</a></li>
@@ -4107,6 +4244,20 @@ Restore City                        Messiah               Christ                
           ]
         },
         scripture: "Daniel 10:1 - 12:13 &bull; Tigris River, 536 B.C.",
+        audio: {
+          src: "assets/study/audio/sitting-10.mp3",
+          kind: "overview",
+          title: "Sitting 10 overview — Michael stands up, the time of trouble, and bodily resurrection",
+          kicker: "Overview",
+          hint: "A quick orientation before you read. This is not a voiceover of the full sitting."
+        },
+        infographic: {
+          src: "assets/study/infographics/sitting-10-roadmap.webp",
+          download: "assets/study/infographics/sitting-10-roadmap.jpg",
+          filename: "Daniel-10-12-Michael-Stands-Up-Roadmap.jpg",
+          title: "Michael Stands Up: The Time of Trouble & Bodily Resurrection",
+          alt: "One-page roadmap of Sitting 10: the Tigris theophany, Daniel 11's march of kings, Michael standing up, the time of trouble, and bodily resurrection from the dust."
+        },
         title: "Michael Stands Up: The Time of Trouble & Bodily Resurrection",
         subtitle: "The close of probation, deliverance of the saints, and the eternal covenant reward.",
         flow: [
@@ -4122,6 +4273,7 @@ Restore City                        Messiah               Christ                
 <nav class="lesson-toc" aria-label="Sheet 10 sections">
   <p class="lesson-toc-kicker">Follow this sitting</p>
   <ol class="lesson-toc-list">
+    <li><a href="#sitting-roadmap">Roadmap · one-page infographic</a></li>
     <li><a href="#intro">Introduction · The final vision by the Great River Hiddekel</a></li>
     <li><a href="#mp1">I · The Theophany: The man clothed in linen and cosmic warfare</a></li>
     <li><a href="#mp2">II · The prophetic panorama of Daniel 11: from Persia to the end of time</a></li>

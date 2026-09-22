@@ -1216,11 +1216,22 @@
       color: #fbbf24;
     }
     .lesson-audio-title {
-      margin: 0 0 0.75rem;
+      margin: 0 0 0.45rem;
       font-family: "Newsreader", Georgia, serif;
       font-size: 1.15rem;
       font-weight: 650;
       color: #fff6db;
+    }
+    .lesson-audio-hint {
+      margin: 0 0 0.75rem;
+      font-family: Inter, system-ui, sans-serif;
+      font-size: 0.82rem;
+      line-height: 1.5;
+      color: rgba(243, 229, 200, 0.82);
+    }
+    body.paper-mode .lesson-audio-hint,
+    body.white-mode .lesson-audio-hint {
+      color: #5c4a1f;
     }
     .lesson-audio audio {
       width: 100%;
@@ -4017,8 +4028,9 @@
 
     <aside id="lesson-media" class="lesson-media" hidden>
       <section id="lesson-audio" class="lesson-audio" hidden>
-        <p class="lesson-audio-kicker" id="lesson-audio-kicker">Listen along</p>
-        <h2 class="lesson-audio-title" id="lesson-audio-title">Listen to this sitting</h2>
+        <p class="lesson-audio-kicker" id="lesson-audio-kicker">Overview</p>
+        <h2 class="lesson-audio-title" id="lesson-audio-title">Lesson overview</h2>
+        <p class="lesson-audio-hint" id="lesson-audio-hint" hidden></p>
         <audio id="lesson-audio-player" controls preload="none"></audio>
       </section>
       <figure id="sitting-roadmap" class="lesson-infographic" hidden>

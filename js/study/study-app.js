@@ -728,8 +728,21 @@
           audioBox.hidden = false;
           const title = document.getElementById('lesson-audio-title');
           const kicker = document.getElementById('lesson-audio-kicker');
-          if (title) title.textContent = audio.title || 'Listen to this sitting';
-          if (kicker) kicker.textContent = audio.duration ? ('Listen along · ' + audio.duration) : 'Listen along';
+          const hint = document.getElementById('lesson-audio-hint');
+          const isOverview = audio.kind === 'overview';
+          if (title) title.textContent = audio.title || (isOverview ? 'Lesson overview' : 'Listen to this sitting');
+          if (kicker) {
+            kicker.textContent = audio.kicker || (isOverview
+              ? ('Overview' + (audio.duration ? ' · ' + audio.duration : ''))
+              : (audio.duration ? ('Listen along · ' + audio.duration) : 'Listen along'));
+          }
+          if (hint) {
+            const hintText = audio.hint || (isOverview
+              ? 'A quick orientation before you read — not a voiceover of the full sitting.'
+              : '');
+            hint.textContent = hintText;
+            hint.hidden = !hintText;
+          }
           player.src = audio.src;
         } else {
           audioBox.hidden = true;
