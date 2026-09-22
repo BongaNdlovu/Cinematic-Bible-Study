@@ -30,7 +30,7 @@ import * as THREE from 'three';
 
     const AudioBus = {
       ctx: null,
-      muted: false,
+      muted: true,
       unlocked: false,
       unlock() {
         if (this.unlocked) return;
@@ -3958,6 +3958,10 @@ import * as THREE from 'three';
     });
     const btnMute = document.getElementById('btn-mute');
     if (btnMute) {
+      btnMute.classList.toggle('active', AudioBus.muted);
+      btnMute.textContent = AudioBus.muted ? '🔇' : '♪';
+      btnMute.title = AudioBus.muted ? 'Unmute gallery sound' : 'Mute gallery sound';
+      btnMute.setAttribute('aria-label', AudioBus.muted ? 'Unmute sound' : 'Mute sound');
       btnMute.addEventListener('click', () => {
         AudioBus.unlock();
         AudioBus.muted = !AudioBus.muted;

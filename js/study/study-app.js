@@ -836,7 +836,7 @@
     const RING_CIRCUMFERENCE = 427.26;
 
     // Atmospheric Focus State — a continuous quiet → storm → sunshine continuum
-    let weatherPreset = 'off'; // default off for quiet, distraction-free study
+    let weatherPreset = 'auto'; // visual weather only — no rain/thunder audio
     let currentWeatherType = 'quiet';
     let weatherAnimId = null;
     let particles = [];
@@ -2550,7 +2550,7 @@
       applyTheme(currentThemeIdx, true);
       resizeWeatherCanvas();
       updateAutoWeather();
-      setWeatherPreset('off', true);
+      setWeatherPreset('auto', true);
       updateTimerDisplay();
       window.addEventListener('resize', () => {
         resizeWeatherCanvas();
