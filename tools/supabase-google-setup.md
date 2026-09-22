@@ -8,7 +8,7 @@ This exhibit is static HTML. Do not install `@supabase/ssr` or add `page.tsx` / 
 2. Authorized JavaScript origins:
    - `http://127.0.0.1:8000`
    - `http://127.0.0.1:8003`
-   - `https://cinematic-bible-study-daniel.vercel.app`
+   - `https://cinematic-bible-study-daniel.pages.dev`
 3. Authorized redirect URI:
    - `https://ttlrspnfadmxkoyqvofh.supabase.co/auth/v1/callback`
 4. Copy the Client ID (ends in `.apps.googleusercontent.com`) and Client secret. Do not paste a Gmail address.
@@ -17,11 +17,11 @@ This exhibit is static HTML. Do not install `@supabase/ssr` or add `page.tsx` / 
 
 1. Authentication → Providers → Google: enable, paste Client ID and Client secret.
 2. Authentication → URL Configuration:
-   - Site URL: `https://cinematic-bible-study-daniel.vercel.app`
+   - Site URL: `https://cinematic-bible-study-daniel.pages.dev`
    - Redirect URLs (wildcards cover `/index.html` and `/study.html`):
      - `http://127.0.0.1:8000/**`
      - `http://127.0.0.1:8003/**`
-     - `https://cinematic-bible-study-daniel.vercel.app/**`
+     - `https://cinematic-bible-study-daniel.pages.dev/**`
 
 The publishable key lives in `js/shared/auth-config.js` (Vercel does not inject `.env.local` into this static host). Sessions persist in the browser so a returning student should not have to sign in again.
 

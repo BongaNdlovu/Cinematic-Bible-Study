@@ -319,7 +319,7 @@ if (!indexHtml.includes('dash-hero-outcome') || !indexHtml.includes('year-day') 
   ['og:title', 'og:description', 'og:image', 'og:url', 'name="description"'].forEach((needle) => {
     if (!html.includes(needle)) throw new Error(page + ' is missing ' + needle);
   });
-  if (!html.includes('https://cinematic-bible-study-daniel.vercel.app/assets/site/hero-main.jpg')) {
+  if (!html.includes('https://cinematic-bible-study-daniel.pages.dev/assets/site/hero-main.jpg')) {
     throw new Error(page + ' og:image is not the production hero URL.');
   }
 });

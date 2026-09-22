@@ -39,4 +39,6 @@ theme_proof*.png
 *_gallery_report.json
 
 .vercel
+.pages-deploy/
+.kilo/
 .env*
