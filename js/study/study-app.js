@@ -2520,12 +2520,14 @@
       if (accessClose && accessPanel) {
         accessClose.addEventListener('click', () => { accessPanel.hidden = true; });
       }
-      if (accessEnable && window.BAJourney && typeof window.BAJourney.enablePreview === 'function') {
+      if (accessEnable) {
         accessEnable.addEventListener('click', () => {
-          window.BAJourney.enablePreview();
-          if (accessPanel) accessPanel.hidden = true;
-          showToast('Full preview enabled.');
-          if (typeof loadSheet === 'function') loadSheet(currentSheetIndex);
+          if (window.BAJourney && typeof window.BAJourney.enablePreview === 'function') {
+            window.BAJourney.enablePreview();
+          }
+          const u = new URL(location.href);
+          u.searchParams.set('preview', 'full');
+          location.href = u.toString();
         });
       }
       const certBtn = document.getElementById('btn-download-certificate');

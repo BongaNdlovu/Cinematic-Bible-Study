@@ -529,6 +529,12 @@ html.cmap-html, body.cmap-page {
 .cmap-year:disabled {
   opacity: 0.38;
   cursor: pointer;
+  position: relative;
+}
+.cmap-year.is-locked::after {
+  content: "🔒";
+  margin-left: 4px;
+  font-size: 10px;
 }
 .cmap-year.active {
   color: #1a140c;

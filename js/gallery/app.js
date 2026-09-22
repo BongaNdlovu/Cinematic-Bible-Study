@@ -109,7 +109,7 @@ import * as THREE from 'three';
     renderer.shadowMap.enabled = true;
     renderer.shadowMap.type = THREE.PCFSoftShadowMap;
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 1.12;
+    renderer.toneMappingExposure = 1.0;
     renderer.outputColorSpace = THREE.SRGBColorSpace;
     container.appendChild(renderer.domElement);
     renderer.domElement.setAttribute('tabindex', '0');
@@ -118,7 +118,7 @@ import * as THREE from 'three';
     // Dynamic Room Environment map for rich metallic sheen
     const pmrem = new THREE.PMREMGenerator(renderer);
     scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
-    scene.environmentIntensity = 0.82;
+    scene.environmentIntensity = 0.38;
 
     const controls = new OrbitControls(camera, renderer.domElement);
     controls.enableDamping = true;
@@ -562,7 +562,7 @@ import * as THREE from 'three';
     const hemiLight = new THREE.HemisphereLight(0xffe0b0, 0x080503, 0.28);
     scene.add(hemiLight);
 
-    const galleryKeySpot = new THREE.SpotLight(0xfff3d2, 48, 22, Math.PI / 7.2, 0.38, 1.35);
+    const galleryKeySpot = new THREE.SpotLight(0xfff3d2, 14, 22, Math.PI / 7.2, 0.38, 1.35);
     galleryKeySpot.position.set(2.4, 5.4, 4.2);
     galleryKeySpot.target.position.set(0, 1.2, 0);
     galleryKeySpot.castShadow = true;
@@ -572,36 +572,36 @@ import * as THREE from 'three';
     scene.add(galleryKeySpot.target);
 
     // Warm Amber Rim Spotlight from back-left
-    const rimAmberSpot = new THREE.SpotLight(0xffc056, 28, 24, Math.PI / 4.4, 0.55, 1.05);
+    const rimAmberSpot = new THREE.SpotLight(0xffc056, 8, 24, Math.PI / 4.4, 0.55, 1.05);
     rimAmberSpot.position.set(-4.2, 3.6, -3.4);
     rimAmberSpot.target.position.set(0, 1.25, 0);
     scene.add(rimAmberSpot);
     scene.add(rimAmberSpot.target);
 
     // Cool Lapis Contrast Fill Light
-    const lapisFillLight = new THREE.PointLight(0x3a6cb8, 2.4, 16);
+    const lapisFillLight = new THREE.PointLight(0x3a6cb8, 1.1, 16);
     lapisFillLight.position.set(-3.8, 1.4, 3.2);
     scene.add(lapisFillLight);
 
     // Flickering Palace Torches
-    const torch1 = new THREE.PointLight(0xffaa33, 7.5, 11);
+    const torch1 = new THREE.PointLight(0xffaa33, 2.4, 11);
     torch1.position.set(-3.4, 2.0, 2.2);
     scene.add(torch1);
 
-    const torch2 = new THREE.PointLight(0xff8822, 6.0, 11);
+    const torch2 = new THREE.PointLight(0xff8822, 1.8, 11);
     torch2.position.set(3.4, 2.6, -1.8);
     scene.add(torch2);
 
     let torchesEnabled = true;
 
     function applyChiaroscuroRig(on) {
-      ambientLight.intensity = on ? 0.08 : 0.18;
-      hemiLight.intensity = on ? 0.16 : 0.28;
-      galleryKeySpot.intensity = on ? 72 : 48;
-      rimAmberSpot.intensity = on ? 38 : 28;
-      lapisFillLight.intensity = on ? 1.4 : 2.4;
-      scene.environmentIntensity = on ? 0.32 : 0.82;
-      renderer.toneMappingExposure = on ? 1.05 : 1.12;
+      ambientLight.intensity = on ? 0.14 : 0.22;
+      hemiLight.intensity = on ? 0.22 : 0.32;
+      galleryKeySpot.intensity = on ? 18 : 14;
+      rimAmberSpot.intensity = on ? 10 : 8;
+      lapisFillLight.intensity = on ? 0.9 : 1.1;
+      scene.environmentIntensity = on ? 0.22 : 0.38;
+      renderer.toneMappingExposure = on ? 0.92 : 1.0;
     }
 
     // --- MUSEUM GALLERY FLOOR & CONTACT SHADOW ---
@@ -2958,7 +2958,7 @@ import * as THREE from 'three';
     const loadedGLTFScenes = {};
     let explodeAmount = 0;
     let pedestalVisible = false;
-    let baseExposure = 1.12;
+    let baseExposure = 1.0;
 
     function syncDossierStudyLink(key) {
       const narStudyLink = document.getElementById('nar-study-link');
@@ -3497,8 +3497,8 @@ import * as THREE from 'three';
 
 
     // --- STUDY RENDER MODES ---
-    let activeStudyMode = 'lighting';
-    applyChiaroscuroRig(true);
+    let activeStudyMode = 'gold';
+    applyChiaroscuroRig(false);
     function disposeMaterial(mat) {
       if (!mat) return;
       if (Array.isArray(mat)) {
@@ -3546,10 +3546,7 @@ import * as THREE from 'three';
           if (orig && typeof orig.clone === 'function') {
             const mat = orig.clone();
             mat.wireframe = false;
-            if ('roughness' in mat && typeof mat.roughness === 'number') {
-              mat.roughness = Math.max(0.18, Math.min(mat.roughness, 0.42));
-            }
-            if ('envMapIntensity' in mat) mat.envMapIntensity = 0.55;
+            if ('envMapIntensity' in mat) mat.envMapIntensity = 0.32;
             mat.needsUpdate = true;
             replaceMeshMaterial(child, mat);
           }

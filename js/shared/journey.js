@@ -104,8 +104,10 @@
     "col-feet": 2
   };
 
-  // Sequential sittings: only sitting 0 starts open. Completing N opens N+1
-  // for study sheets, gallery assets, and map pins. Client-side only.
+  // Sequential sittings: sittings 0–FREE_THROUGH start open. Completing N
+  // opens N+1 for study sheets, gallery assets, and map pins. Client-side only.
+  // Teachers can open everything with ?preview=full — signed-in moderators
+  // still follow the same lesson path as students.
   const ENABLE_BETA_PREVIEW_DEFAULT = false;
 
   const defaults = {
@@ -280,10 +282,17 @@
     return false;
   }
 
+  function previewAllContent() {
+    if (TEMP_REVIEW_UNLOCK) return true;
+    try {
+      return new URLSearchParams(location.search).get("preview") === "full";
+    } catch (e) {
+      return false;
+    }
+  }
+
   function maxOpenSheet() {
-    if (new URLSearchParams(location.search).get("preview") === "full") return SHEET_COUNT - 1;
-    if (isAdmin()) return SHEET_COUNT - 1;
-    if (TEMP_REVIEW_UNLOCK) return SHEET_COUNT - 1;
+    if (previewAllContent()) return SHEET_COUNT - 1;
     const done = completedSet();
     let open = FREE_THROUGH;
     for (let i = 0; i < SHEET_COUNT - 1; i++) {
@@ -294,8 +303,7 @@
   }
 
   function canAccessSheet(index) {
-    if (new URLSearchParams(location.search).get("preview") === "full") return true;
-    if (isAdmin()) return true;
+    if (previewAllContent()) return true;
     const i = Number(index);
     if (Number.isNaN(i) || i < 0) return true;
     return i <= maxOpenSheet();
@@ -317,7 +325,7 @@
   }
 
   function canAccessAsset(key) {
-    if (isAdmin() || allLessonsComplete()) return true;
+    if (previewAllContent() || allLessonsComplete()) return true;
     const k = key === "altar" ? "assembled" : key;
     if (k === "assembled") return true;
     const sitting = sittingForAsset(k);
@@ -333,7 +341,6 @@
   }
 
   function allLessonsComplete() {
-    if (isAdmin()) return true;
     const done = completedSet();
     if (done.size < SHEET_COUNT) return false;
     for (let i = 0; i < SHEET_COUNT; i++) {
@@ -350,7 +357,7 @@
   }
 
   function canAccessMuseumNode(id, assetKey) {
-    if (isAdmin() || allLessonsComplete()) return true;
+    if (previewAllContent() || allLessonsComplete()) return true;
     if (id === "col-altar" || assetKey === "assembled" || assetKey === "altar") return true;
     const sitting = sittingForMuseumNode(id, assetKey);
     if (sitting < 0) return false;
@@ -373,13 +380,13 @@
 
   function canAccessMapNode(id) {
     if (!id) return false;
-    if (isAdmin() || allLessonsComplete()) return true;
+    if (previewAllContent() || allLessonsComplete()) return true;
     return !!openNodeIds()[id];
   }
 
   function canAccessYear(yearId) {
     if (!yearId) return false;
-    if (isAdmin() || allLessonsComplete()) return true;
+    if (previewAllContent() || allLessonsComplete()) return true;
     const open = maxOpenSheet();
     for (let i = 0; i <= open; i++) {
       if ((SITTING_YEARS[i] || []).indexOf(yearId) >= 0) return true;
@@ -663,6 +670,7 @@
     allLessonsComplete: allLessonsComplete,
     canAccessMapNode: canAccessMapNode,
     canAccessYear: canAccessYear,
+    previewAllContent: previewAllContent,
     maxOpenSheet: maxOpenSheet,
     markSheetComplete: markSheetComplete,
     sittingForAsset: sittingForAsset,
