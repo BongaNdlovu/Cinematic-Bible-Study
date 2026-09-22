@@ -372,7 +372,7 @@
       const sheetEl = document.getElementById('spine-sheet');
       const yearEl = document.getElementById('spine-year');
       if (empireEl) empireEl.textContent = window.BAJourney ? window.BAJourney.empireLabel(emp) : emp;
-      if (sheetEl) sheetEl.textContent = (index + 1) + ' of 11';
+      if (sheetEl) sheetEl.textContent = index + ' of 11';
       if (yearEl) yearEl.textContent = window.BAJourney ? window.BAJourney.yearLabel(year) : year;
       const chip = document.getElementById('btn-map-chip');
       if (chip) chip.textContent = (window.BAJourney ? window.BAJourney.yearLabel(year) : year);
@@ -1284,9 +1284,6 @@
         const btn = document.createElement(locked ? 'div' : 'button');
         if (!locked) {
           btn.addEventListener('click', () => {
-            if (location.hash && history.replaceState) {
-              history.replaceState(null, '', location.pathname + '?sheet=' + idx);
-            }
             loadSheet(idx);
             toggleTocDrawer();
           });
@@ -1967,6 +1964,61 @@
       `;
     }
 
+    const SCROLL_KEY = 'scroll_section';
+    let scrollHold = false;
+
+    function readScrollPlace() {
+      try {
+        const raw = JSON.parse(localStorage.getItem(SCROLL_KEY) || 'null');
+        const sheet = raw && Number(raw.sheet);
+        const top = raw && Number(raw.top);
+        if (!Number.isFinite(sheet) || !Number.isFinite(top) || top < 0) return null;
+        return { sheet: sheet, top: top };
+      } catch (e) {
+        return null;
+      }
+    }
+
+    function writeScrollPlace(sheet, top) {
+      try {
+        localStorage.setItem(SCROLL_KEY, JSON.stringify({
+          sheet: sheet,
+          top: Math.max(0, Math.round(top))
+        }));
+      } catch (e) {}
+    }
+
+    function rememberSheetUrl(index) {
+      try {
+        const params = new URLSearchParams(location.search);
+        params.delete('id');
+        params.delete('section');
+        params.set('sheet', String(index));
+        const next = location.pathname + '?' + params.toString() + location.hash;
+        if (next !== location.pathname + location.search + location.hash) {
+          history.replaceState(null, '', next);
+        }
+      } catch (e) {}
+    }
+
+    function placeReader(index, restore) {
+      const hashTarget = location.hash ? document.querySelector(location.hash) : null;
+      if (hashTarget) {
+        setTimeout(() => hashTarget.scrollIntoView({ behavior: 'auto', block: 'start' }), 0);
+        return;
+      }
+      let top = 0;
+      if (restore) {
+        const place = readScrollPlace();
+        if (place && place.sheet === index) top = place.top;
+      } else {
+        writeScrollPlace(index, 0);
+      }
+      scrollHold = true;
+      window.scrollTo(0, top);
+      requestAnimationFrame(() => { scrollHold = false; });
+    }
+
     function loadSheet(index, opts) {
       if (index < 0 || index >= sheetsData.length) return;
       if (!canAccessSheet(index)) {
@@ -1976,6 +2028,7 @@
       currentSheetIndex = index;
       endCardShownForSheet = -1;
       hideSittingGuide();
+      rememberSheetUrl(index);
       try {
         localStorage.setItem('daniel_historicist_sheet', index);
       } catch (e) {}
@@ -2056,18 +2109,7 @@
       renderQuiz(data.quizzes);
       syncAdvanceButtons(index);
 
-      if (location.hash) {
-        const hashTarget = document.querySelector(location.hash);
-        if (hashTarget) {
-          setTimeout(() => {
-            hashTarget.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          }, 80);
-        } else {
-          window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-      } else {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      }
+      placeReader(index, !!(opts && opts.restorePlace));
       const skipIntro = opts && opts.skipIntro;
       const seen = window.BAJourney && window.BAJourney.hasSeenIntro(index);
       let hasChosenTrack = false;
@@ -2115,9 +2157,6 @@
         const rev = document.getElementById('workbench-section') || document.getElementById('revision-section');
         if (rev) rev.scrollIntoView({ behavior: 'smooth' });
         return;
-      }
-      if (location.hash && history.replaceState) {
-        history.replaceState(null, '', location.pathname + '?sheet=' + (currentSheetIndex + delta));
       }
       loadSheet(currentSheetIndex + delta);
     }
@@ -2260,9 +2299,6 @@
       }
 
       if (currentSheetIndex < sheetsData.length - 1) {
-        if (location.hash && history.replaceState) {
-          history.replaceState(null, '', location.pathname + '?sheet=' + (currentSheetIndex + 1));
-        }
         loadSheet(currentSheetIndex + 1);
         showToast('Unit mastered! Advancing to ' + (window.BAJourney ? window.BAJourney.sheetLabel(currentSheetIndex) : ('sheet ' + (currentSheetIndex + 1))) + '.');
       } else {
@@ -2430,7 +2466,19 @@
           window.location.href = `map.html?year=${encodeURIComponent(y)}&from=lesson&sheet=${currentSheetIndex}`;
         });
       }
-      loadSheet(resolveStartSheet());
+      loadSheet(resolveStartSheet(), { restorePlace: true });
+      let scrollSaveTimer = null;
+      window.addEventListener('scroll', () => {
+        if (scrollHold) return;
+        if (scrollSaveTimer) clearTimeout(scrollSaveTimer);
+        scrollSaveTimer = setTimeout(() => {
+          writeScrollPlace(currentSheetIndex, window.scrollY || 0);
+        }, 120);
+      }, { passive: true });
+      window.addEventListener('pagehide', () => {
+        if (scrollHold) return;
+        writeScrollPlace(currentSheetIndex, window.scrollY || 0);
+      });
       const notes = document.getElementById('sheet-notes');
       if (notes) {
         notes.addEventListener('input', () => {

@@ -93,7 +93,7 @@
     if (ctaLabel) ctaLabel.textContent = J.resumeLabel();
     const ctaSub = document.getElementById("hero-cta-sub");
     if (ctaSub) {
-      ctaSub.textContent = "25-minute guided sitting · Sitting " + (resumeSheet + 1) + " of 11";
+      ctaSub.textContent = "25-minute guided sitting · Sitting " + resumeSheet + " of 11";
     }
     const signedIn = !!(window.ScrollAuth && window.ScrollAuth.getUser && window.ScrollAuth.getUser());
     document.querySelectorAll(".dash-account").forEach(function (wrap) {
