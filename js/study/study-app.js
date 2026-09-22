@@ -764,10 +764,17 @@
           if (img) {
             img.src = plate.src;
             img.alt = alt;
+            img.width = 1672;
+            img.height = 941;
+            img.decoding = 'async';
+            img.removeAttribute('srcset');
           }
           if (modalImg) {
             modalImg.src = plate.download || plate.src;
             modalImg.alt = alt;
+            modalImg.width = 1672;
+            modalImg.height = 941;
+            modalImg.decoding = 'async';
           }
           const href = plate.download || plate.src;
           const name = plate.filename || 'sitting-infographic';

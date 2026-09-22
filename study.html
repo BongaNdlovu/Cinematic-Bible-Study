@@ -1294,6 +1294,7 @@
       width: 100%;
       height: auto;
       border-radius: 8px;
+      image-rendering: auto;
     }
     .lesson-infographic-actions {
       display: flex;
@@ -1338,7 +1339,7 @@
     .infographic-modal[hidden] { display: none; }
     .infographic-modal-card {
       position: relative;
-      width: min(1200px, 100%);
+      width: min(1760px, calc(100vw - 2rem));
       max-height: calc(100vh - 2.5rem);
       overflow: auto;
       padding: 0.9rem;
@@ -1364,10 +1365,13 @@
     .infographic-modal-card img {
       display: block;
       width: 100%;
+      max-width: 1672px;
       height: auto;
+      margin: 0 auto;
       border-radius: 10px;
       background: #fff8e6;
       box-shadow: 0 0 28px rgba(255, 214, 102, 0.22);
+      image-rendering: auto;
     }
     body.infographic-open { overflow: hidden; }
     @media (prefers-reduced-motion: reduce) {
