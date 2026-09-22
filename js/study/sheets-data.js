@@ -20,6 +20,18 @@
           ]
         },
         scripture: "How the book teaches you to read it",
+        audio: {
+          src: "assets/study/audio/sitting-00.mp3",
+          title: "Listen to Sitting 0",
+          duration: "12 min"
+        },
+        infographic: {
+          src: "assets/study/infographics/sitting-00-roadmap.webp",
+          download: "assets/study/infographics/sitting-00-roadmap.jpg",
+          filename: "Daniel-Prophetic-Interpretation-Roadmap.jpg",
+          title: "The Unbroken Chain: Reading the Roadmap of Daniel",
+          alt: "One-page roadmap of Sitting 0: three hermeneutical roads, the year-day measuring rod, and the Christ-centered core from exile to the stone kingdom."
+        },
         title: "The Prophetic Blueprint: Why Daniel's Unbroken Chain Centers on Jesus Christ",
         subtitle: "God's historical roadmap from exile to the cross to the everlasting kingdom — and why how you read decides what you see.",
         flow: [
@@ -34,6 +46,7 @@
 <nav class="lesson-toc" aria-label="Sheet 0 parts">
   <p class="lesson-toc-kicker">Follow this sitting</p>
   <ol class="lesson-toc-list">
+    <li><a href="#sitting-roadmap">Roadmap · one-page infographic</a></li>
     <li><a href="#intro">Introduction · History is not an accident</a></li>
     <li><a href="#part-i">I · Three hermeneutical roads</a></li>
     <li><a href="#part-ii">II · The year-day scale</a></li>

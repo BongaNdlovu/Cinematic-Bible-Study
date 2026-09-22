@@ -1194,6 +1194,175 @@
       color: #6d4b04;
     }
 
+    .lesson-media {
+      display: grid;
+      gap: 1.25rem;
+      margin: 0 0 2rem;
+    }
+    .lesson-audio {
+      padding: 1rem 1.15rem 1.05rem;
+      border-radius: 14px;
+      border: 1px solid rgba(212, 175, 55, 0.45);
+      background: linear-gradient(135deg, rgba(42, 34, 18, 0.72) 0%, rgba(20, 16, 11, 0.88) 100%);
+      box-shadow: 0 10px 28px -12px rgba(0, 0, 0, 0.55), 0 0 18px rgba(212, 175, 55, 0.16);
+    }
+    .lesson-audio-kicker {
+      margin: 0 0 0.35rem;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 10.5px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: #fbbf24;
+    }
+    .lesson-audio-title {
+      margin: 0 0 0.75rem;
+      font-family: "Newsreader", Georgia, serif;
+      font-size: 1.15rem;
+      font-weight: 650;
+      color: #fff6db;
+    }
+    .lesson-audio audio {
+      width: 100%;
+      height: 40px;
+    }
+    .lesson-infographic {
+      position: relative;
+      padding: 0.85rem;
+      border-radius: 16px;
+      border: 1px solid rgba(212, 175, 55, 0.55);
+      background:
+        radial-gradient(ellipse at 50% 0%, rgba(255, 214, 102, 0.16), transparent 55%),
+        linear-gradient(180deg, rgba(42, 34, 18, 0.55) 0%, rgba(16, 13, 9, 0.88) 100%);
+      box-shadow:
+        0 0 28px rgba(212, 175, 55, 0.22),
+        0 0 56px rgba(212, 175, 55, 0.1),
+        0 18px 40px -16px rgba(0, 0, 0, 0.7);
+    }
+    .lesson-infographic::before {
+      content: "";
+      position: absolute;
+      inset: -10px;
+      border-radius: 22px;
+      background: radial-gradient(ellipse at 50% 40%, rgba(255, 214, 102, 0.18), transparent 68%);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .lesson-infographic-inner {
+      position: relative;
+      z-index: 1;
+    }
+    .lesson-infographic-kicker {
+      margin: 0 0 0.3rem;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 10.5px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: #fbbf24;
+    }
+    .lesson-infographic-title {
+      margin: 0 0 0.75rem;
+      font-family: "Newsreader", Georgia, serif;
+      font-size: 1.2rem;
+      font-weight: 650;
+      color: #fff6db;
+    }
+    .lesson-infographic-frame {
+      display: block;
+      width: 100%;
+      margin: 0;
+      padding: 0.35rem;
+      border-radius: 12px;
+      background: rgba(255, 248, 225, 0.96);
+      box-shadow: 0 0 22px rgba(255, 214, 102, 0.28), inset 0 0 18px rgba(212, 175, 55, 0.12);
+      cursor: zoom-in;
+    }
+    .lesson-infographic-frame img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+    }
+    .lesson-infographic-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-top: 0.85rem;
+    }
+    .lesson-infographic-actions .gold-bible-notice-btn {
+      border: 1px solid rgba(255, 235, 175, 0.4);
+    }
+    body.paper-mode .lesson-audio,
+    body.white-mode .lesson-audio,
+    body.paper-mode .lesson-infographic,
+    body.white-mode .lesson-infographic {
+      background: linear-gradient(180deg, #fffdf6 0%, #f6edd8 100%);
+      border-color: rgba(184, 134, 11, 0.45);
+      box-shadow: 0 0 24px rgba(212, 175, 55, 0.18), 0 12px 28px -16px rgba(120, 85, 25, 0.25);
+    }
+    body.paper-mode .lesson-audio-title,
+    body.white-mode .lesson-audio-title,
+    body.paper-mode .lesson-infographic-title,
+    body.white-mode .lesson-infographic-title {
+      color: #3f2d08;
+    }
+    body.paper-mode .lesson-audio-kicker,
+    body.white-mode .lesson-audio-kicker,
+    body.paper-mode .lesson-infographic-kicker,
+    body.white-mode .lesson-infographic-kicker {
+      color: #9a7217;
+    }
+    .infographic-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.25rem;
+      background: rgba(8, 7, 5, 0.86);
+      backdrop-filter: blur(8px);
+    }
+    .infographic-modal[hidden] { display: none; }
+    .infographic-modal-card {
+      position: relative;
+      width: min(1200px, 100%);
+      max-height: calc(100vh - 2.5rem);
+      overflow: auto;
+      padding: 0.9rem;
+      border-radius: 16px;
+      background: radial-gradient(ellipse at 50% 0%, rgba(255, 214, 102, 0.16), transparent 50%), #14110c;
+      border: 1px solid rgba(212, 175, 55, 0.5);
+      box-shadow: 0 0 40px rgba(212, 175, 55, 0.28), 0 24px 60px rgba(0, 0, 0, 0.55);
+    }
+    .infographic-modal-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.7rem;
+      margin-bottom: 0.7rem;
+    }
+    .infographic-modal-bar p {
+      margin: 0;
+      font-family: "Newsreader", Georgia, serif;
+      color: #fff6db;
+      font-size: 1.05rem;
+    }
+    .infographic-modal-card img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+      background: #fff8e6;
+      box-shadow: 0 0 28px rgba(255, 214, 102, 0.22);
+    }
+    body.infographic-open { overflow: hidden; }
+    @media (prefers-reduced-motion: reduce) {
+      .lesson-infographic::before { display: none; }
+    }
+
     @media (max-width: 640px) {
       .gold-bible-notice-card {
         padding: 1.1rem 1.15rem;
@@ -2920,6 +3089,8 @@
       .study-instruments,
       .horizon-panel,
       #lesson-connect,
+      .lesson-audio,
+      #infographic-modal,
       .museum-links,
       #sitting-spine,
       #sitting-guide,
@@ -3844,6 +4015,27 @@
     <!-- Classroom Facilitator Strip (?teach=1 or Codex toggle) -->
     <div id="facilitator-strip" class="facilitator-strip" hidden></div>
 
+    <aside id="lesson-media" class="lesson-media" hidden>
+      <section id="lesson-audio" class="lesson-audio" hidden>
+        <p class="lesson-audio-kicker" id="lesson-audio-kicker">Listen along</p>
+        <h2 class="lesson-audio-title" id="lesson-audio-title">Listen to this sitting</h2>
+        <audio id="lesson-audio-player" controls preload="none"></audio>
+      </section>
+      <figure id="sitting-roadmap" class="lesson-infographic" hidden>
+        <div class="lesson-infographic-inner">
+          <p class="lesson-infographic-kicker">One-page roadmap</p>
+          <figcaption class="lesson-infographic-title" id="lesson-infographic-title">The Unbroken Chain</figcaption>
+          <button type="button" class="lesson-infographic-frame" id="btn-infographic-open" aria-label="Open infographic full screen">
+            <img id="lesson-infographic-img" alt="">
+          </button>
+          <div class="lesson-infographic-actions">
+            <button type="button" class="gold-bible-notice-btn" id="btn-infographic-fullscreen">View full page</button>
+            <a class="gold-bible-notice-btn" id="lesson-infographic-download" download>Download</a>
+          </div>
+        </div>
+      </figure>
+    </aside>
+
     <!-- Dynamic Story Sheet Content (Medium Editorial Format) -->
     <article id="sheet-article" class="article-body font-bodySerif text-ink-800 dark:text-paper-200 transition-all duration-150">
       <!-- Injected by JavaScript loadSheet() -->
@@ -3959,6 +4151,19 @@
   <!-- Toast Message System -->
   <div id="toast" class="fixed bottom-6 right-6 z-50 px-4 py-3 rounded-lg bg-ink-900 text-paper-50 dark:bg-paper-100 dark:text-ink-900 font-mono text-xs shadow-xl opacity-0 pointer-events-none transition-opacity duration-300">
     Message
+  </div>
+
+  <div id="infographic-modal" class="infographic-modal" hidden>
+    <div class="infographic-modal-card" role="dialog" aria-modal="true" aria-labelledby="infographic-modal-title">
+      <div class="infographic-modal-bar">
+        <p id="infographic-modal-title">The Unbroken Chain</p>
+        <div class="lesson-infographic-actions">
+          <a class="gold-bible-notice-btn" id="infographic-modal-download" download>Download</a>
+          <button type="button" class="gold-bible-notice-btn" id="infographic-modal-close">Close</button>
+        </div>
+      </div>
+      <img id="infographic-modal-img" alt="">
+    </div>
   </div>
 
   <!-- High-Resolution Archaeological Artifact Modal (Babylon Civil Twilight) -->

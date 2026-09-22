@@ -687,6 +687,93 @@
       return first.book + ' Chapters ' + first.chapter + '–' + last.chapter;
     }
 
+    function stopLessonAudio() {
+      const player = document.getElementById('lesson-audio-player');
+      if (!player) return;
+      player.pause();
+      player.removeAttribute('src');
+      player.load();
+    }
+
+    function closeInfographic() {
+      const modal = document.getElementById('infographic-modal');
+      if (!modal) return;
+      modal.hidden = true;
+      document.body.classList.remove('infographic-open');
+    }
+
+    function openInfographic() {
+      const modal = document.getElementById('infographic-modal');
+      const img = document.getElementById('infographic-modal-img');
+      if (!modal || !img || !img.getAttribute('src')) return;
+      modal.hidden = false;
+      document.body.classList.add('infographic-open');
+      const closeBtn = document.getElementById('infographic-modal-close');
+      if (closeBtn) closeBtn.focus();
+    }
+
+    function renderLessonMedia(data) {
+      const box = document.getElementById('lesson-media');
+      const audioBox = document.getElementById('lesson-audio');
+      const figure = document.getElementById('sitting-roadmap');
+      const player = document.getElementById('lesson-audio-player');
+      if (!box) return;
+      stopLessonAudio();
+      closeInfographic();
+
+      const audio = data && data.audio;
+      const plate = data && data.infographic;
+      if (audioBox && player) {
+        if (audio && audio.src) {
+          audioBox.hidden = false;
+          const title = document.getElementById('lesson-audio-title');
+          const kicker = document.getElementById('lesson-audio-kicker');
+          if (title) title.textContent = audio.title || 'Listen to this sitting';
+          if (kicker) kicker.textContent = audio.duration ? ('Listen along · ' + audio.duration) : 'Listen along';
+          player.src = audio.src;
+        } else {
+          audioBox.hidden = true;
+        }
+      }
+
+      if (figure) {
+        if (plate && plate.src) {
+          figure.hidden = false;
+          const title = document.getElementById('lesson-infographic-title');
+          const img = document.getElementById('lesson-infographic-img');
+          const modalImg = document.getElementById('infographic-modal-img');
+          const modalTitle = document.getElementById('infographic-modal-title');
+          const dl = document.getElementById('lesson-infographic-download');
+          const modalDl = document.getElementById('infographic-modal-download');
+          const alt = plate.alt || plate.title || 'Sitting infographic';
+          if (title) title.textContent = plate.title || 'One-page infographic';
+          if (modalTitle) modalTitle.textContent = plate.title || 'One-page infographic';
+          if (img) {
+            img.src = plate.src;
+            img.alt = alt;
+          }
+          if (modalImg) {
+            modalImg.src = plate.download || plate.src;
+            modalImg.alt = alt;
+          }
+          const href = plate.download || plate.src;
+          const name = plate.filename || 'sitting-infographic';
+          if (dl) {
+            dl.href = href;
+            dl.setAttribute('download', name);
+          }
+          if (modalDl) {
+            modalDl.href = href;
+            modalDl.setAttribute('download', name);
+          }
+        } else {
+          figure.hidden = true;
+        }
+      }
+
+      box.hidden = !((audio && audio.src) || (plate && plate.src));
+    }
+
     function renderBibleNotice(index) {
       const badge = document.getElementById('bible-notice-chapters');
       if (!badge) return;
@@ -2056,6 +2143,7 @@
 
       // Render Article Content
       document.getElementById('sheet-article').innerHTML = data.content;
+      renderLessonMedia(data);
       renderSheetFlow(data);
       renderLessonConnectBar(index);
       renderStudyGuide(data.studyGuide);
@@ -2422,6 +2510,21 @@
       }
       const certBtn = document.getElementById('btn-download-certificate');
       if (certBtn) certBtn.addEventListener('click', openCertificateIfReady);
+      const openPlate = document.getElementById('btn-infographic-open');
+      const openFull = document.getElementById('btn-infographic-fullscreen');
+      const closePlate = document.getElementById('infographic-modal-close');
+      const plateModal = document.getElementById('infographic-modal');
+      if (openPlate) openPlate.addEventListener('click', openInfographic);
+      if (openFull) openFull.addEventListener('click', openInfographic);
+      if (closePlate) closePlate.addEventListener('click', closeInfographic);
+      if (plateModal) {
+        plateModal.addEventListener('click', (ev) => {
+          if (ev.target === plateModal) closeInfographic();
+        });
+      }
+      document.addEventListener('keydown', (ev) => {
+        if (ev.key === 'Escape') closeInfographic();
+      });
       syncCertificateCta();
       applyFontSize();
       applyTheme(currentThemeIdx, true);
@@ -2608,5 +2711,7 @@
       navigateSheet,
       completeAndAdvance,
       shareSitting,
-      resetQuizQuestion
+      resetQuizQuestion,
+      openInfographic,
+      closeInfographic
     });

@@ -17,7 +17,7 @@ ALLOWED_EXTENSIONS = {
     ".html", ".css", ".js", ".mjs", ".json", ".geojson", ".map",
     ".wasm", ".glb", ".gltf", ".bin",
     ".png", ".jpg", ".jpeg", ".webp", ".svg", ".ico", ".gif",
-    ".woff", ".woff2", ".ttf", ".txt", ".md",
+    ".mp3", ".m4a", ".ogg", ".woff", ".woff2", ".ttf", ".txt", ".md",
 }
 
 MIME_TYPES = {
@@ -33,6 +33,9 @@ MIME_TYPES = {
     ".jpg": "image/jpeg",
     ".jpeg": "image/jpeg",
     ".webp": "image/webp",
+    ".mp3": "audio/mpeg",
+    ".m4a": "audio/mp4",
+    ".ogg": "audio/ogg",
     ".css": "text/css; charset=utf-8",
     ".html": "text/html; charset=utf-8",
     ".svg": "image/svg+xml",
