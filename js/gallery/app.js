@@ -593,15 +593,32 @@ import * as THREE from 'three';
     scene.add(torch2);
 
     let torchesEnabled = true;
+    const torchBase = { a: 2.4, b: 1.8 };
+    let rigExposure = 1.0;
+    let brightnessScale = 1.0;
 
+    function applyExposure() {
+      renderer.toneMappingExposure = rigExposure * brightnessScale;
+    }
+
+    // Chiaroscuro: one hard key from the side, near-black fill, so half the figure falls into shadow.
     function applyChiaroscuroRig(on) {
-      ambientLight.intensity = on ? 0.14 : 0.22;
-      hemiLight.intensity = on ? 0.22 : 0.32;
-      galleryKeySpot.intensity = on ? 18 : 14;
-      rimAmberSpot.intensity = on ? 10 : 8;
-      lapisFillLight.intensity = on ? 0.9 : 1.1;
-      scene.environmentIntensity = on ? 0.22 : 0.38;
-      renderer.toneMappingExposure = on ? 0.92 : 1.0;
+      ambientLight.intensity = on ? 0.08 : 0.35;
+      hemiLight.intensity = on ? 0.14 : 0.55;
+      galleryKeySpot.intensity = on ? 70 : 30;
+      galleryKeySpot.angle = on ? Math.PI / 8 : Math.PI / 6.5;
+      galleryKeySpot.penumbra = on ? 0.3 : 0.45;
+      if (on) galleryKeySpot.position.set(4.6, 4.8, 1.4);
+      else galleryKeySpot.position.set(2.4, 5.4, 4.2);
+      rimAmberSpot.intensity = on ? 26 : 14;
+      lapisFillLight.intensity = on ? 0.4 : 1.8;
+      torchBase.a = on ? 2.2 : 5.0;
+      torchBase.b = on ? 1.6 : 4.0;
+      torch1.intensity = torchBase.a;
+      torch2.intensity = torchBase.b;
+      scene.environmentIntensity = on ? 0.3 : 0.75;
+      rigExposure = on ? 1.1 : 1.15;
+      applyExposure();
     }
 
     // --- MUSEUM GALLERY FLOOR & CONTACT SHADOW ---
@@ -2958,7 +2975,6 @@ import * as THREE from 'three';
     const loadedGLTFScenes = {};
     let explodeAmount = 0;
     let pedestalVisible = false;
-    let baseExposure = 1.0;
 
     function syncDossierStudyLink(key) {
       const narStudyLink = document.getElementById('nar-study-link');
@@ -3534,8 +3550,8 @@ import * as THREE from 'three';
           }
         } else if (activeStudyMode === 'clay') {
           replaceMeshMaterial(child, new THREE.MeshStandardMaterial({
-            color: 0xd6cfc4, roughness: 0.85, metalness: 0.05,
-            wireframe: false, envMapIntensity: 0.5
+            color: 0xa89c8a, roughness: 0.9, metalness: 0.0,
+            wireframe: false, envMapIntensity: 0.3
           }));
         } else if (activeStudyMode === 'wireframe') {
           replaceMeshMaterial(child, new THREE.MeshStandardMaterial({
@@ -3546,7 +3562,7 @@ import * as THREE from 'three';
           if (orig && typeof orig.clone === 'function') {
             const mat = orig.clone();
             mat.wireframe = false;
-            if ('envMapIntensity' in mat) mat.envMapIntensity = 0.32;
+            if ('envMapIntensity' in mat) mat.envMapIntensity = 0.6;
             mat.needsUpdate = true;
             replaceMeshMaterial(child, mat);
           }
@@ -3794,7 +3810,8 @@ import * as THREE from 'three';
     if (brightnessSlider) {
       brightnessSlider.addEventListener('input', (e) => {
         const pct = Number(e.target.value);
-        renderer.toneMappingExposure = baseExposure * (pct / 100);
+        brightnessScale = pct / 100;
+        applyExposure();
         const label = document.getElementById('brightness-val');
         if (label) label.textContent = `${pct}%`;
       });
@@ -4099,10 +4116,10 @@ import * as THREE from 'three';
       }
 
       if (torchesEnabled && !reducedMotion) {
-        const f1 = 1.0 + 0.18 * Math.sin(elapsed * 12.0) + 0.08 * Math.sin(elapsed * 34.0);
-        const f2 = 1.0 + 0.22 * Math.cos(elapsed * 14.5) + 0.07 * Math.cos(elapsed * 29.0);
-        torch1.intensity = 14.0 * f1;
-        torch2.intensity = 12.0 * f2;
+        const f1 = 1.0 + 0.07 * Math.sin(elapsed * 2.3) + 0.04 * Math.sin(elapsed * 5.9 + 1.3) + 0.02 * Math.sin(elapsed * 13.1);
+        const f2 = 1.0 + 0.07 * Math.cos(elapsed * 2.7 + 0.8) + 0.04 * Math.cos(elapsed * 6.4) + 0.02 * Math.sin(elapsed * 11.7 + 2.1);
+        torch1.intensity = torchBase.a * f1;
+        torch2.intensity = torchBase.b * f2;
       }
 
       if (dustEnabled) {

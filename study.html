@@ -497,8 +497,8 @@
       border-color: rgba(201, 162, 39, 0.28);
     }
     body.charcoal-mode .weather-canvas:not(.opacity-0) {
-      mix-blend-mode: soft-light;
-      opacity: 0.45;
+      mix-blend-mode: normal;
+      opacity: 0.9;
     }
 
     #flashlight-overlay {
@@ -1931,13 +1931,11 @@
       color: #8a6a14;
       background: rgba(201, 162, 39, 0.16);
     }
-    body.paper-mode .weather-canvas,
-    body.white-mode .weather-canvas {
-      mix-blend-mode: multiply;
-      opacity: 0.38;
+    body.paper-mode .weather-canvas:not(.opacity-0),
+    body.white-mode .weather-canvas:not(.opacity-0) {
+      mix-blend-mode: normal;
+      opacity: 0.75;
     }
-    body.paper-mode[data-weather="storm"] .weather-canvas,
-    body.white-mode[data-weather="storm"] .weather-canvas { opacity: 0.5; }
 
     body.paper-mode {
       background:
