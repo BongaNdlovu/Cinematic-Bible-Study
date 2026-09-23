@@ -39,7 +39,7 @@ drop policy if exists insert_events on public.exhibit_events;
 drop policy if exists insert_own_events on public.exhibit_events;
 create policy insert_events
   on public.exhibit_events for insert
-  to anon, authenticated
+  to public
   with check (
     user_id is null
     or (auth.uid() is not null and auth.uid() = user_id)
@@ -51,7 +51,7 @@ create policy moderator_read_events
   to authenticated
   using (public.is_review_moderator());
 
-grant insert on public.exhibit_events to anon, authenticated;
+grant insert on public.exhibit_events to anon, authenticated, public;
 grant select on public.exhibit_events to authenticated;
 
 create table if not exists public.exhibit_profiles (

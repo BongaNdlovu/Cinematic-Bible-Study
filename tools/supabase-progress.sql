@@ -66,7 +66,7 @@ drop policy if exists insert_survey on public.exhibit_surveys;
 drop policy if exists insert_own_survey on public.exhibit_surveys;
 create policy insert_survey
   on public.exhibit_surveys for insert
-  to anon, authenticated
+  to public
   with check (auth.uid() = user_id or user_id is null or auth.uid() is null);
 
 drop policy if exists moderator_read_surveys on public.exhibit_surveys;
@@ -80,4 +80,4 @@ create policy moderator_read_surveys
   );
 
 grant select, insert, update on public.exhibit_progress to authenticated;
-grant select, insert on public.exhibit_surveys to authenticated, anon;
+grant select, insert on public.exhibit_surveys to authenticated, anon, public;
