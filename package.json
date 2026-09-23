@@ -12,7 +12,7 @@
     "compress:visions": "node tools/compress/compress_visions.mjs",
     "compress:daniel11": "node tools/compress/compress_daniel11.mjs",
     "lint": "oxlint",
-    "test": "node tools/verify-headers.mjs && node tools/verify/verify_insights.mjs",
+    "test": "node tools/verify-headers.mjs && node tools/verify/verify_insights.mjs && node tools/verify/verify_ratelimit.mjs",
     "deploy:pages": "powershell -ExecutionPolicy Bypass -File tools/deploy-cloudflare-pages.ps1"
   },
   "dependencies": {

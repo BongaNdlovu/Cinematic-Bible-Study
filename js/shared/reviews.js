@@ -2,6 +2,25 @@
   const TABLE = "exhibit_reviews";
   const MIN = 40;
   const MAX = 600;
+  const REVIEW_DAY = "baReviewDay";
+  const REVIEW_MAX = 3;
+
+  function reviewDayCount() {
+    const day = new Date().toISOString().slice(0, 10);
+    try {
+      const s = JSON.parse(localStorage.getItem(REVIEW_DAY) || "{}");
+      return s.d === day ? (s.n || 0) : 0;
+    } catch (e) {
+      return 0;
+    }
+  }
+
+  function bumpReviewDay() {
+    const day = new Date().toISOString().slice(0, 10);
+    try {
+      localStorage.setItem(REVIEW_DAY, JSON.stringify({ d: day, n: reviewDayCount() + 1 }));
+    } catch (e) {}
+  }
 
   function authClient() {
     return window.ScrollAuth && window.ScrollAuth.getClient && window.ScrollAuth.getClient();
@@ -495,23 +514,27 @@
 
     if (c) {
       try {
-        const cohortVal = opts.cohort || (window.BAJourney && typeof window.BAJourney.getCohort === "function" ? window.BAJourney.getCohort() : null);
-        c.from("exhibit_surveys").insert({
-          user_id: u ? u.id : null,
-          cohort: cohortVal || "",
-          role: opts.role || "Student",
-          rating: rating,
-          feedback: parsed.text,
-          responses: {
-            kind: opts.kind || "exit",
+        const surveyOk = !(window.Insights && window.Insights.takeSurveySlot) || window.Insights.takeSurveySlot();
+        if (surveyOk) {
+          const cohortVal = opts.cohort || (window.BAJourney && typeof window.BAJourney.getCohort === "function" ? window.BAJourney.getCohort() : null);
+          c.from("exhibit_surveys").insert({
+            user_id: u ? u.id : null,
+            anon_id: window.Insights && window.Insights.anonId ? window.Insights.anonId() : "",
             cohort: cohortVal || "",
             role: opts.role || "Student",
             rating: rating,
-            classroomUse: opts.classroomUse || "",
-            nps: typeof opts.nps === "number" ? opts.nps : null,
-            changed: opts.changed || ""
-          }
-        }).then(function () {}).catch(function () {});
+            feedback: parsed.text,
+            responses: {
+              kind: opts.kind || "exit",
+              cohort: cohortVal || "",
+              role: opts.role || "Student",
+              rating: rating,
+              classroomUse: opts.classroomUse || "",
+              nps: typeof opts.nps === "number" ? opts.nps : null,
+              changed: opts.changed || ""
+            }
+          }).then(function () {}).catch(function () {});
+        }
       } catch (e) {}
     }
 
@@ -524,6 +547,10 @@
     }
     if (!c || !u) {
       setStatus("Sign in to post.", "error");
+      return Promise.resolve(false);
+    }
+    if (reviewDayCount() >= REVIEW_MAX) {
+      setStatus("You can post 3 reviews per day.", "error");
       return Promise.resolve(false);
     }
     const displayName = (opts.name ? String(opts.name).trim().slice(0, 80) : reviewerName()) || "Student";
@@ -539,6 +566,7 @@
         setStatus("Could not save. Try again.", "error");
         return false;
       }
+      bumpReviewDay();
       setStatus("Saved. It will appear after approval.", "ok");
       const input = document.getElementById("witness-body");
       if (input) input.value = "";

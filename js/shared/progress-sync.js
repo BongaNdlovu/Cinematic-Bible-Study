@@ -8,8 +8,10 @@
 
   const TABLE = 'exhibit_progress';
   const ACCOUNT_KEY = 'baProgressAccountId';
+  const PUSH_GAP_MS = 6000;
   let debounceTimer = null;
   let isSyncing = false;
+  let lastPushAt = 0;
 
   function accountId(u) {
     return u && u.id ? String(u.id) : '';
@@ -206,6 +208,9 @@
     const c = authClient();
     const u = currentUser();
     if (!c || !u || isSyncing) return Promise.resolve(null);
+    const now = Date.now();
+    if (now - lastPushAt < PUSH_GAP_MS) return Promise.resolve(null);
+    lastPushAt = now;
 
     let journey = {};
     try {
@@ -252,7 +257,7 @@
 
   function syncNow() {
     if (debounceTimer) clearTimeout(debounceTimer);
-    debounceTimer = setTimeout(pushLocalToRemote, 1000);
+    debounceTimer = setTimeout(pushLocalToRemote, PUSH_GAP_MS);
   }
 
   function init() {

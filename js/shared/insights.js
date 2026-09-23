@@ -8,8 +8,13 @@
   const REF_BY = 'baReferredBy';
   const REF_SIT = 'baReferredSitting';
   const MAX_QUEUE = 200;
-  const BATCH = 50;
-  const FLUSH_MS = 5000;
+  const BATCH = 10;
+  const FLUSH_MS = 10000;
+  const POSTS_PER_MIN = 12;
+  const ROWS_PER_MIN = 60;
+  const SURVEY_PER_HOUR = 5;
+  const FLUSH_WIN = 'baFlushWin';
+  const SURVEY_WIN = 'baSurveyTimes';
   let flushing = false;
 
   let timerSitting = null;
@@ -116,13 +121,45 @@
     writeQueue(q);
   }
 
+  function takeFlushSlot(want) {
+    const now = Date.now();
+    let w = { posts: [], rows: [] };
+    try { w = JSON.parse(sessionStorage.getItem(FLUSH_WIN) || '{}'); } catch (e) {}
+    const posts = (w.posts || []).filter(function (t) { return now - t < 60000; });
+    const rows = (w.rows || []).filter(function (t) { return now - t < 60000; });
+    if (posts.length >= POSTS_PER_MIN) return 0;
+    const n = Math.min(want, BATCH, ROWS_PER_MIN - rows.length);
+    if (n <= 0) return 0;
+    posts.push(now);
+    for (let i = 0; i < n; i++) rows.push(now);
+    try { sessionStorage.setItem(FLUSH_WIN, JSON.stringify({ posts: posts, rows: rows })); } catch (e) {}
+    return n;
+  }
+
+  function takeSurveySlot() {
+    const now = Date.now();
+    let times = [];
+    try {
+      times = JSON.parse(localStorage.getItem(SURVEY_WIN) || '[]');
+      if (!Array.isArray(times)) times = [];
+    } catch (e) { times = []; }
+    times = times.filter(function (t) { return now - t < 3600000; });
+    if (times.length >= SURVEY_PER_HOUR) return false;
+    times.push(now);
+    try { localStorage.setItem(SURVEY_WIN, JSON.stringify(times)); } catch (e) {}
+    return true;
+  }
+
   function flush() {
     if (flushing || optedOut()) return Promise.resolve();
     const auth = window.ScrollAuth;
     const client = auth && auth.getClient && auth.getClient();
     const user = auth && auth.getUser && auth.getUser();
-    const batch = readQueue().slice(0, BATCH);
-    if (!client || !batch.length) return Promise.resolve();
+    const queued = readQueue();
+    if (!client || !queued.length) return Promise.resolve();
+    const n = takeFlushSlot(Math.min(BATCH, queued.length));
+    if (!n) return Promise.resolve();
+    const batch = queued.slice(0, n);
     flushing = true;
     return client.from(TABLE).insert(batch.map(function (row) {
       return Object.assign({ user_id: user ? user.id : null }, row);
@@ -242,9 +279,10 @@
 
   function insertSurvey(row) {
     const pair = clientAndUser();
-    if (!pair.client) return;
+    if (!pair.client || !takeSurveySlot()) return;
     pair.client.from('exhibit_surveys').insert(Object.assign({
       user_id: pair.user ? pair.user.id : null,
+      anon_id: anonId(),
       cohort: '',
       role: 'Student',
       feedback: '',
@@ -570,6 +608,8 @@
     inviteUrl: inviteUrl,
     setOptOut: setOptOut,
     optedOut: optedOut,
-    bindOptOuts: bindOptOuts
+    bindOptOuts: bindOptOuts,
+    takeSurveySlot: takeSurveySlot,
+    anonId: anonId
   };
 })();
