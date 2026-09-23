@@ -146,6 +146,23 @@
     return window.location.origin + window.location.pathname;
   }
 
+  const AUTH_PER_HOUR = 5;
+  const AUTH_WIN = "baAuthStarts";
+
+  function takeAuthSlot() {
+    const now = Date.now();
+    let times = [];
+    try {
+      times = JSON.parse(localStorage.getItem(AUTH_WIN) || "[]");
+      if (!Array.isArray(times)) times = [];
+    } catch (e) { times = []; }
+    times = times.filter(function (t) { return now - t < 3600000; });
+    if (times.length >= AUTH_PER_HOUR) return false;
+    times.push(now);
+    try { localStorage.setItem(AUTH_WIN, JSON.stringify(times)); } catch (e) {}
+    return true;
+  }
+
   function signIn() {
     if (!configured() || !client) {
       reportError("Sign-in is unavailable on this copy of the site.", "auth");
@@ -154,6 +171,13 @@
     if (typeof navigator !== "undefined" && navigator.onLine === false) {
       reportError("You appear to be offline. Sign-in needs a connection.", "offline");
       return Promise.resolve({ error: new Error("offline") });
+    }
+    if (signingIn) {
+      return Promise.resolve({ error: new Error("busy") });
+    }
+    if (!takeAuthSlot()) {
+      reportError("Please wait before signing in again.", "auth");
+      return Promise.resolve({ error: new Error("rate_limit") });
     }
     clearError();
     signingIn = true;
@@ -331,7 +355,8 @@
     onChange: onChange,
     renderAll: renderAll,
     isConfigured: configured,
-    isSigningIn: function () { return signingIn; }
+    isSigningIn: function () { return signingIn; },
+    takeAuthSlot: takeAuthSlot
   };
 
   init();

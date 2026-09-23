@@ -1,4 +1,5 @@
--- Server write caps. Test on a copy first. Do not run on production until verified.
+-- Server write caps. Same statements live in the matching setup files
+-- (supabase-insights.sql, supabase-progress.sql, supabase-reviews.sql).
 -- Events: 60 rows/min per anon_id (or per user_id if anon_id is empty).
 -- Surveys: 5/hour per anon_id (or per user_id if anon_id is empty).
 -- Progress: one upsert per 6 seconds per row (10/min).

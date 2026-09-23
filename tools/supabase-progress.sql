@@ -81,3 +81,56 @@ create policy moderator_read_surveys
 
 grant select, insert, update on public.exhibit_progress to authenticated;
 grant select, insert on public.exhibit_surveys to authenticated, anon, public;
+
+alter table public.exhibit_surveys
+  add column if not exists anon_id text not null default '';
+
+create index if not exists exhibit_surveys_anon_created_idx
+  on public.exhibit_surveys (anon_id, created_at desc);
+create index if not exists exhibit_surveys_user_created_idx
+  on public.exhibit_surveys (user_id, created_at desc);
+
+create or replace function public.exhibit_surveys_rate_gate()
+returns trigger
+language plpgsql
+as $$
+begin
+  if coalesce(new.anon_id, '') <> '' then
+    if (select count(*) from public.exhibit_surveys
+        where anon_id = new.anon_id
+          and created_at > now() - interval '1 hour') >= 5 then
+      raise exception 'rate_limit';
+    end if;
+  elsif new.user_id is not null then
+    if (select count(*) from public.exhibit_surveys
+        where user_id = new.user_id
+          and created_at > now() - interval '1 hour') >= 5 then
+      raise exception 'rate_limit';
+    end if;
+  end if;
+  return new;
+end;
+$$;
+
+drop trigger if exists exhibit_surveys_rate_gate on public.exhibit_surveys;
+create trigger exhibit_surveys_rate_gate
+  before insert on public.exhibit_surveys
+  for each row execute procedure public.exhibit_surveys_rate_gate();
+
+create or replace function public.exhibit_progress_rate_gate()
+returns trigger
+language plpgsql
+as $$
+begin
+  if tg_op = 'UPDATE' and old.updated_at is not null
+     and old.updated_at > now() - interval '6 seconds' then
+    raise exception 'rate_limit';
+  end if;
+  return new;
+end;
+$$;
+
+drop trigger if exists exhibit_progress_rate_gate on public.exhibit_progress;
+create trigger exhibit_progress_rate_gate
+  before update on public.exhibit_progress
+  for each row execute procedure public.exhibit_progress_rate_gate();

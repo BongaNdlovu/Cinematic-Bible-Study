@@ -34,6 +34,24 @@ assert(sql.includes("interval '6 seconds'"), 'SQL progress cap 6 seconds');
 assert(sql.includes("interval '1 day') >= 3"), 'SQL reviews cap 3/day');
 assert(sql.includes('add column if not exists anon_id'), 'SQL adds survey anon_id');
 
+const insightsSql = fs.readFileSync(path.join(ROOT, 'tools/supabase-insights.sql'), 'utf8');
+assert(insightsSql.includes('exhibit_events_rate_gate'), 'insights setup must include events write cap');
+assert(insightsSql.includes("interval '1 minute') >= 60"), 'insights setup events cap 60/min');
+
+const progressSql = fs.readFileSync(path.join(ROOT, 'tools/supabase-progress.sql'), 'utf8');
+assert(progressSql.includes('exhibit_surveys_rate_gate'), 'progress setup must include surveys write cap');
+assert(progressSql.includes('exhibit_progress_rate_gate'), 'progress setup must include progress write cap');
+assert(progressSql.includes("interval '1 hour') >= 5"), 'progress setup surveys cap 5/hour');
+
+const reviewsSql = fs.readFileSync(path.join(ROOT, 'tools/supabase-reviews.sql'), 'utf8');
+assert(reviewsSql.includes('exhibit_reviews_rate_gate'), 'reviews setup must include reviews write cap');
+assert(reviewsSql.includes("interval '1 day') >= 3"), 'reviews setup reviews cap 3/day');
+
+const auth = fs.readFileSync(path.join(ROOT, 'js/shared/auth.js'), 'utf8');
+assert(auth.includes('const AUTH_PER_HOUR = 5'), 'auth must cap 5 Google sign-in starts/hour');
+assert(auth.includes('takeAuthSlot'), 'auth must gate signIn');
+assert(auth.includes('rate_limit'), 'auth must return rate_limit when capped');
+
 const cf = fs.readFileSync(path.join(ROOT, 'functions/_middleware.js'), 'utf8');
 assert(cf.includes('status: 429'), 'Cloudflare middleware must return 429');
 assert(cf.includes("take(ip, 'models', 60, 60000)"), 'Cloudflare must cap /models at 60/min');

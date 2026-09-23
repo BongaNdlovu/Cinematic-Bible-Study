@@ -108,3 +108,25 @@ alter table public.exhibit_reviews
 grant select on public.exhibit_reviews to anon, authenticated;
 grant insert, update on public.exhibit_reviews to authenticated;
 grant execute on function public.is_review_moderator() to authenticated;
+
+create index if not exists exhibit_reviews_user_created_idx
+  on public.exhibit_reviews (user_id, created_at desc);
+
+create or replace function public.exhibit_reviews_rate_gate()
+returns trigger
+language plpgsql
+as $$
+begin
+  if (select count(*) from public.exhibit_reviews
+      where user_id = new.user_id
+        and created_at > now() - interval '1 day') >= 3 then
+    raise exception 'rate_limit';
+  end if;
+  return new;
+end;
+$$;
+
+drop trigger if exists exhibit_reviews_rate_gate on public.exhibit_reviews;
+create trigger exhibit_reviews_rate_gate
+  before insert on public.exhibit_reviews
+  for each row execute procedure public.exhibit_reviews_rate_gate();

@@ -54,6 +54,40 @@ create policy moderator_read_events
 grant insert on public.exhibit_events to anon, authenticated, public;
 grant select on public.exhibit_events to authenticated;
 
+create index if not exists exhibit_events_anon_created_idx
+  on public.exhibit_events (anon_id, created_at desc);
+create index if not exists exhibit_events_user_created_idx
+  on public.exhibit_events (user_id, created_at desc);
+
+create or replace function public.exhibit_events_rate_gate()
+returns trigger
+language plpgsql
+as $$
+begin
+  if coalesce(new.anon_id, '') <> '' then
+    if (select count(*) from public.exhibit_events
+        where anon_id = new.anon_id
+          and created_at > now() - interval '1 minute') >= 60 then
+      raise exception 'rate_limit';
+    end if;
+  elsif new.user_id is not null then
+    if (select count(*) from public.exhibit_events
+        where user_id = new.user_id
+          and created_at > now() - interval '1 minute') >= 60 then
+      raise exception 'rate_limit';
+    end if;
+  else
+    raise exception 'rate_limit';
+  end if;
+  return new;
+end;
+$$;
+
+drop trigger if exists exhibit_events_rate_gate on public.exhibit_events;
+create trigger exhibit_events_rate_gate
+  before insert on public.exhibit_events
+  for each row execute procedure public.exhibit_events_rate_gate();
+
 create table if not exists public.exhibit_profiles (
   user_id uuid primary key references auth.users (id) on delete cascade,
   study_mode text not null default '' check (char_length(study_mode) <= 40),
