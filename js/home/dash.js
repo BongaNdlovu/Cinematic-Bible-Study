@@ -103,9 +103,19 @@
 
   document.querySelectorAll("[data-dash-signin]").forEach(function (btn) {
     btn.addEventListener("click", function () {
+      if (window.Insights) window.Insights.track('home_nav', null, { action: 'signin' });
       if (window.ScrollTerms && typeof window.ScrollTerms.requestSignIn === "function") {
         window.ScrollTerms.requestSignIn();
       }
+    });
+  });
+
+  document.addEventListener("click", function (e) {
+    const card = e.target.closest("[data-sheet], #hero-cta, [data-hero-primary]");
+    if (!card || !window.Insights) return;
+    const sheet = card.hasAttribute("data-sheet") ? Number(card.getAttribute("data-sheet")) : null;
+    window.Insights.track('home_nav', Number.isInteger(sheet) ? sheet : null, {
+      action: card.id === "hero-cta" || card.hasAttribute("data-hero-primary") ? "cta" : "card"
     });
   });
 

@@ -1,5 +1,6 @@
 window.BAAuthConfig = {
   url: "https://YOUR_PROJECT.supabase.co",
   publishableKey: "sb_publishable_YOUR_KEY",
-  moderatorEmails: ["fanelesibonge50@gmail.com"]
+  moderatorEmails: ["fanelesibonge50@gmail.com"],
+  cfAnalyticsToken: ""
 };

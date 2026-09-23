@@ -2611,6 +2611,7 @@ import * as THREE from 'three';
       } else {
         soloFocusNodeId = nodeId;
       }
+      if (window.Insights) window.Insights.track('gallery_node', null, { node: nodeId });
       syncNodes();
     }
 
@@ -3088,6 +3089,7 @@ import * as THREE from 'three';
       }
 
       activeAssetKey = key;
+      if (window.Insights) window.Insights.track('gallery_view', null, { asset: key });
       const data = ASSET_REGISTRY[key] || ASSET_REGISTRY.head;
       setHallBackdrop(data.hallImg || HALL_BACKDROPS[key] || data.plateImg);
       AudioBus.play('select');
@@ -3577,6 +3579,7 @@ import * as THREE from 'three';
       if (assembledContainer.visible) applyStudyModeToMeshes(assembledContainer);
       if (singleModelContainer.visible) applyStudyModeToMeshes(singleModelContainer);
       museumToast(`Render Mode: ${mode === 'lighting' ? 'CHIAROSCURO' : mode.toUpperCase()}`);
+      if (window.Insights) window.Insights.track('gallery_mode', null, { mode: mode });
     }
     document.querySelectorAll('[data-mode]').forEach(b => {
       b.addEventListener('click', () => setStudyMode(b.dataset.mode));

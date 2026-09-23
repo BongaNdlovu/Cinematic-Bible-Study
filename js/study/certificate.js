@@ -480,6 +480,7 @@
     const canvas = drawCertificate(name, dated);
     const pdf = buildPdf(jpegBytesFromCanvas(canvas));
     downloadPdf(pdf, filenameFromName(name));
+    if (window.Insights) window.Insights.track('feature_use', 10, { feature: 'cert_download' });
     close();
     setTimeout(() => {
       openReviewPrompt(name);
@@ -564,6 +565,19 @@
           </div>
 
           <div>
+            <label for="cert-review-nps" class="block text-[11px] font-mono font-semibold text-ink-700 dark:text-paper-300 mb-1">How likely are you to recommend this? (0–10)</label>
+            <select id="cert-review-nps" class="w-full px-3 py-1.5 rounded-lg border border-ink-300 dark:border-ink-700 bg-paper-100 dark:bg-paper-800 text-ink-900 dark:text-paper-100 text-xs focus:ring-2 focus:ring-amber-500 outline-none">
+              <option value="" selected>Select</option>
+              ${Array.from({ length: 11 }, (_, i) => `<option value="${i}">${i}</option>`).join("")}
+            </select>
+          </div>
+
+          <div>
+            <label for="cert-review-changed" class="block text-[11px] font-mono font-semibold text-ink-700 dark:text-paper-300 mb-1">What changed in your understanding?</label>
+            <textarea id="cert-review-changed" rows="2" maxlength="400" placeholder="Optional. One sentence is enough." class="w-full px-3 py-2 rounded-lg border border-ink-300 dark:border-ink-700 bg-paper-100 dark:bg-paper-800 text-ink-900 dark:text-paper-100 text-xs focus:ring-2 focus:ring-amber-500 outline-none resize-none"></textarea>
+          </div>
+
+          <div>
             <div class="flex items-center justify-between mb-1">
               <label for="cert-review-body" class="block text-[11px] font-mono font-semibold text-ink-700 dark:text-paper-300">Your Reflection / Review</label>
               <span id="cert-review-count" class="text-[10px] font-mono text-ink-500 dark:text-paper-400">0 / 40 min chars</span>
@@ -625,6 +639,9 @@
         const ratingVal = Number(document.getElementById("cert-review-rating")?.value || "5");
         const cohortVal = (document.getElementById("cert-review-cohort")?.value || "").trim();
         const classUse = document.getElementById("cert-review-class")?.value || "";
+        const npsRaw = (document.getElementById("cert-review-nps")?.value || "").trim();
+        const npsVal = npsRaw === "" ? null : Number(npsRaw);
+        const changedVal = (document.getElementById("cert-review-changed")?.value || "").trim().slice(0, 400);
 
         if (submitBtn) {
           submitBtn.disabled = true;
@@ -637,7 +654,10 @@
             role: roleVal,
             rating: ratingVal,
             cohort: cohortVal,
-            classroomUse: classUse
+            classroomUse: classUse,
+            nps: Number.isFinite(npsVal) ? npsVal : null,
+            changed: changedVal,
+            kind: "exit"
           }).then((res) => {
             if (statusEl) {
               statusEl.hidden = false;

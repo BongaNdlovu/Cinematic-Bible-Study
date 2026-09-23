@@ -489,6 +489,7 @@
       }
       sittingPhase = phase;
       if (sittingVisited[phase] !== undefined) sittingVisited[phase] = true;
+      if (window.Insights) window.Insights.track('path_step', currentSheetIndex, { step: phase });
       if (phase === 'study') {
         const article = document.getElementById('sheet-article');
         if (article) article.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -710,6 +711,7 @@
       document.body.classList.add('infographic-open');
       const closeBtn = document.getElementById('infographic-modal-close');
       if (closeBtn) closeBtn.focus();
+      if (window.Insights) window.Insights.track('feature_use', currentSheetIndex, { feature: 'infographic' });
     }
 
     function renderLessonMedia(data) {
@@ -1230,7 +1232,10 @@
       updateAutoWeather();
       if (preset === 'off') stopWeatherAnimation();
       else startWeatherAnimation();
-      if (!silent) showToast(`Focus atmosphere: ${weatherMeta[currentWeatherType]?.name || preset}`);
+      if (!silent) {
+        showToast(`Focus atmosphere: ${weatherMeta[currentWeatherType]?.name || preset}`);
+        if (window.Insights) window.Insights.track('feature_use', currentSheetIndex, { feature: 'weather', preset: preset });
+      }
     }
 
     function updateTimerDisplay() {
@@ -1420,7 +1425,10 @@
         localStorage.setItem('daniel_theme_v1', String(currentThemeIdx));
         localStorage.setItem('daniel_theme_name_v1', theme);
       } catch (e) {}
-      if (!silent && themeIcon) showToast(`Theme: ${themeIcon.innerText}`);
+      if (!silent && themeIcon) {
+        showToast(`Theme: ${themeIcon.innerText}`);
+        if (window.Insights) window.Insights.track('feature_use', currentSheetIndex, { feature: 'theme', theme: theme });
+      }
     }
 
     function cycleTheme() {
@@ -1485,12 +1493,16 @@
         const isDone = completedSheets.has(idx);
 
         const locked = !canAccessSheet(idx);
-        const btn = document.createElement(locked ? 'div' : 'button');
+        const btn = document.createElement('button');
+        btn.type = 'button';
         if (!locked) {
           btn.addEventListener('click', () => {
             loadSheet(idx);
             toggleTocDrawer();
           });
+        } else {
+          btn.disabled = true;
+          btn.setAttribute('aria-disabled', 'true');
         }
         btn.className = `w-full text-left p-3 rounded-lg flex items-start space-x-3 transition-colors ${
           locked
@@ -1499,7 +1511,6 @@
             ? 'bg-amber-100/70 dark:bg-amber-950/60 border border-amber-300 dark:border-amber-800' 
             : 'hover:bg-paper-200/60 dark:hover:bg-paper-900'
         }`;
-        if (locked) btn.setAttribute('aria-disabled', 'true');
 
         btn.innerHTML = `
           <div class="mt-0.5 w-5 h-5 rounded-full flex items-center justify-center text-xs font-mono font-bold shrink-0 ${
@@ -2046,8 +2057,13 @@
     }
 
     function enrollmentUrl() {
+      if (window.Insights && typeof window.Insights.inviteUrl === 'function') {
+        return window.Insights.inviteUrl(currentSheetIndex);
+      }
       try {
-        return new URL('index.html', window.location.href).href;
+        const u = new URL('index.html', window.location.href);
+        u.searchParams.set('s', String(currentSheetIndex));
+        return u.href;
       } catch (e) {
         return (window.location.origin || '') + '/index.html';
       }
@@ -2057,26 +2073,41 @@
       const url = enrollmentUrl();
       const title = 'The Scroll of Daniel';
       const text = 'Join this sitting of the Scroll of Daniel. Open the cover, agree to the terms, and sign in to begin.';
+      let method = 'fallback';
       try {
         if (navigator.share) {
           await navigator.share({ title: title, text: text, url: url });
+          method = 'share';
+          if (window.Insights) window.Insights.track('invite_shared', currentSheetIndex, { method: method });
           showToast('Invitation ready to send.');
           return;
         }
         if (navigator.clipboard && navigator.clipboard.writeText) {
           await navigator.clipboard.writeText(url);
+          method = 'clipboard';
+          if (window.Insights) window.Insights.track('invite_shared', currentSheetIndex, { method: method });
           showToast('Enrollment link copied. Recipients sign in on the cover.');
           return;
         }
       } catch (err) {
         if (err && err.name === 'AbortError') return;
       }
+      if (window.Insights) window.Insights.track('invite_shared', currentSheetIndex, { method: method });
       showToast('Share the home page so they can sign in: ' + url);
     }
 
     function renderLessonConnectBar(index) {
       const bar = document.getElementById('lesson-connect');
       if (!bar) return;
+      if (!bar.dataset.tracked) {
+        bar.dataset.tracked = 'true';
+        bar.addEventListener('click', (e) => {
+          const link = e.target.closest('#btn-lesson-map, #btn-lesson-gallery');
+          if (link && window.Insights) {
+            window.Insights.track('path_step', currentSheetIndex, { step: link.id === 'btn-lesson-map' ? 'map' : 'gallery' });
+          }
+        });
+      }
       const cfg = sittingConnectConfig(index);
       const copy = LESSON_CONNECT_COPY[index] || LESSON_CONNECT_COPY[0];
       const kicker = document.getElementById('lesson-connect-kicker');
@@ -2236,6 +2267,14 @@
       try {
         localStorage.setItem('daniel_historicist_sheet', index);
       } catch (e) {}
+      if (window.Insights) {
+        window.Insights.resetActive();
+        if (typeof window.Insights.readingTimer === 'function') {
+          window.Insights.readingTimer(index);
+        }
+        window.Insights.track('sitting_start', index, { revisit: completedSheets.has(index) });
+        window.Insights.maybePulse(index);
+      }
 
       const data = sheetsData[index];
       const fromEpoch = opts && opts.fromEpoch;
@@ -2370,11 +2409,13 @@
        6. ACTIVE RECALL REVISION & QUIZ CONTROLLER
        ========================================================================= */
     let answeredQuestions = {};
+    let quizAttemptCounts = {};
 
     function renderQuiz(quizzes) {
       const container = document.getElementById('quiz-container');
       container.innerHTML = '';
       answeredQuestions = {};
+      quizAttemptCounts = {};
       const badge = document.getElementById('quiz-badge');
       if (badge) {
         const n = (quizzes && quizzes.length) || 0;
@@ -2421,11 +2462,21 @@
       if (answeredQuestions[qIdx] !== undefined) return;
       answeredQuestions[qIdx] = selectedOptIdx;
 
+      const attempt = (quizAttemptCounts[qIdx] = (quizAttemptCounts[qIdx] || 0) + 1);
       const isCorrect = selectedOptIdx === questionData.correct;
       const feedback = document.getElementById(`q-${qIdx}-feedback`);
 
       if (window.StudyCompetency) {
         window.StudyCompetency.recordQuizAttempt(currentSheetIndex, qIdx, isCorrect);
+      }
+      if (window.Insights) {
+        window.Insights.track('quiz_answer', currentSheetIndex, {
+          q: qIdx,
+          chosen: selectedOptIdx,
+          choice: selectedOptIdx,
+          correct: isCorrect,
+          attempt: attempt
+        });
       }
 
       questionData.options.forEach((_, optIdx) => {
@@ -2502,6 +2553,14 @@
           localStorage.setItem('daniel_historicist_mastery', JSON.stringify(Array.from(completedSheets)));
         } catch (e) {}
       }
+      if (window.Insights) {
+        window.Insights.track('sitting_complete', currentSheetIndex, { seconds: window.Insights.activeSeconds() });
+        window.Insights.notePulse(currentSheetIndex);
+        if (currentSheetIndex === sheetsData.length - 1) {
+          window.Insights.track('course_complete', currentSheetIndex);
+          window.Insights.maybePulse();
+        }
+      }
 
       if (currentSheetIndex < sheetsData.length - 1) {
         loadSheet(currentSheetIndex + 1);
@@ -2565,7 +2624,16 @@
     function resolveStartSheet() {
       try {
         const params = new URLSearchParams(location.search);
-        const raw = params.get('id') || params.get('section') || params.get('sheet');
+        let raw = params.get('id') || params.get('section') || params.get('sheet') || params.get('s');
+        if (raw == null || raw === '') {
+          try {
+            const refSitting = localStorage.getItem('baReferredSitting');
+            if (refSitting != null && refSitting !== '') {
+              raw = refSitting;
+              localStorage.removeItem('baReferredSitting');
+            }
+          } catch (e) {}
+        }
         if (raw != null && raw !== '') {
           if (Object.prototype.hasOwnProperty.call(LEGACY_ID_MAP, raw)) {
             const wanted = LEGACY_ID_MAP[raw];
@@ -2683,6 +2751,7 @@
       const btnFocusMap = document.getElementById('btn-focus-live-map');
       if (btnFocusMap) {
         btnFocusMap.addEventListener('click', () => {
+          if (window.Insights) window.Insights.track('path_step', currentSheetIndex, { step: 'map' });
           const pack = lessonMapPack(currentSheetIndex);
           const y = (pack && pack.year) || 'y605';
           window.location.href = `map.html?year=${encodeURIComponent(y)}&from=lesson&sheet=${currentSheetIndex}`;
@@ -2765,9 +2834,34 @@
       const btnPrintHeader = document.getElementById('btn-print-header');
       if (btnPrintHeader) {
         btnPrintHeader.addEventListener('click', () => {
+          if (window.Insights) window.Insights.track('feature_use', currentSheetIndex, { feature: 'print' });
           window.print();
         });
       }
+      const verifyHost = document.getElementById('sheet-verify');
+      if (verifyHost && !verifyHost.dataset.tracked) {
+        verifyHost.dataset.tracked = 'true';
+        verifyHost.addEventListener('click', (e) => {
+          const link = e.target.closest('.sheet-verify-open');
+          if (link && window.Insights) window.Insights.track('feature_use', currentSheetIndex, { feature: 'verify' });
+        });
+      }
+      const audioPlayer = document.getElementById('lesson-audio-player');
+      if (audioPlayer && !audioPlayer.dataset.tracked) {
+        audioPlayer.dataset.tracked = 'true';
+        audioPlayer.addEventListener('play', () => {
+          if (window.Insights) window.Insights.track('feature_use', currentSheetIndex, { feature: 'audio' });
+        });
+      }
+      ['lesson-infographic-download', 'infographic-modal-download'].forEach((id) => {
+        const link = document.getElementById(id);
+        if (link && !link.dataset.tracked) {
+          link.dataset.tracked = 'true';
+          link.addEventListener('click', () => {
+            if (window.Insights) window.Insights.track('feature_use', currentSheetIndex, { feature: 'infographic_download' });
+          });
+        }
+      });
       const btnToggleTeach = document.getElementById('btn-toggle-teach');
       if (btnToggleTeach) {
         btnToggleTeach.addEventListener('click', () => {

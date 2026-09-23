@@ -404,6 +404,7 @@
     }
 
     function openDossier(d) {
+      if (window.Insights) window.Insights.track('map_pin', state.sheetIndex, { id: (d && (d.id || d.title)) || '' });
       if (d && d.kind !== "epoch") state.yearGen++;
       const ep = currentEpoch();
       const studyHref = "study.html?id=" + ep.studySheet;
@@ -901,6 +902,7 @@
       const f = flags || {};
       const gen = ++state.yearGen;
       state.yearId = ep.id;
+      if (window.Insights) window.Insights.track('map_year', state.sheetIndex, { year: ep.id });
       updateChrome(ep);
       drawOverlays(ep);
       if (f.open !== false && !f.focusId) openEpochDossier(ep);

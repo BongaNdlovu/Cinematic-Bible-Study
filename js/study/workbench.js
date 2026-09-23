@@ -34,6 +34,7 @@
     if (window.ProgressSync && typeof window.ProgressSync.syncNow === 'function') {
       window.ProgressSync.syncNow();
     }
+    if (window.Insights) window.Insights.track('workbench_task', sheetId, { task: taskId, pass: true });
   }
 
   function isTaskComplete(sheetId, taskId) {
@@ -186,6 +187,7 @@
         container.querySelector('#wb0-t1').className = "task-box p-5 rounded-xl border border-emerald-500/60 bg-emerald-50/40 dark:bg-emerald-950/20 mb-6 transition-all";
         checkAllDone();
       } else {
+        if (window.Insights) window.Insights.track('workbench_task', 0, { task: 'task1', pass: false });
         fb.className = "text-xs text-rose-700 dark:text-rose-400 font-semibold";
         if (!isPassagesCorrect) {
           fb.textContent = "Select Numbers 14:34 and Ezekiel 4:6 for the two biblical anchors.";
@@ -221,6 +223,7 @@
         container.querySelector('#wb0-t2').className = "task-box p-5 rounded-xl border border-emerald-500/60 bg-emerald-50/40 dark:bg-emerald-950/20 transition-all";
         checkAllDone();
       } else {
+        if (window.Insights) window.Insights.track('workbench_task', 0, { task: 'task2', pass: false });
         fb.className = "text-xs font-semibold text-rose-700 dark:text-rose-400";
         fb.textContent = `${correctCount} of 6 correct. Review highlighted items (Futurism = severed future gap; Preterism = ancient Syrian/Roman cutoff).`;
       }
@@ -364,6 +367,7 @@
         container.querySelector('#wb1-t1').className = "task-box p-5 rounded-xl border border-emerald-500/60 bg-emerald-50/40 dark:bg-emerald-950/20 mb-6 transition-all";
         checkAllDone();
       } else {
+        if (window.Insights) window.Insights.track('workbench_task', 1, { task: 'task1', pass: false });
         fb.className = "text-xs font-semibold text-rose-700 dark:text-rose-400";
         fb.textContent = `${ok} of 4 correct. Ensure Daniel matches Belteshazzar (Bel), Hananiah matches Shadrach (Aku), etc.`;
       }
@@ -390,6 +394,7 @@
         container.querySelector('#wb1-t2').className = "task-box p-5 rounded-xl border border-emerald-500/60 bg-emerald-50/40 dark:bg-emerald-950/20 transition-all";
         checkAllDone();
       } else {
+        if (window.Insights) window.Insights.track('workbench_task', 1, { task: 'task2', pass: false });
         fb.className = "text-xs font-semibold text-rose-700 dark:text-rose-400";
         if (!matrixOk) fb.textContent = "Check your classification: learning language/math is civic skill; unclean food/wine is covenant defilement.";
         else fb.textContent = "The Hebrew term for pulse/vegetables is 'zeroim' (Dan 1:12).";
@@ -538,6 +543,7 @@
         container.querySelector('#wb2-t1').className = "task-box p-5 rounded-xl border border-emerald-500/60 bg-emerald-50/40 dark:bg-emerald-950/20 mb-6 transition-all";
         checkAllDone();
       } else {
+        if (window.Insights) window.Insights.track('workbench_task', 2, { task: 'task1', pass: false });
         fb.className = "text-xs font-semibold text-rose-700 dark:text-rose-400";
         fb.textContent = `${ok} of 6 correct. Order must strictly run Gold (Babylon) → Silver (Medo-Persia) → Bronze (Greece) → Iron (Rome) → Iron/Clay (Divided Europe) → Stone.`;
       }
@@ -556,6 +562,7 @@
         container.querySelector('#wb2-t2').className = "task-box p-5 rounded-xl border border-emerald-500/60 bg-emerald-50/40 dark:bg-emerald-950/20 transition-all";
         checkAllDone();
       } else {
+        if (window.Insights) window.Insights.track('workbench_task', 2, { task: 'task2', pass: false });
         fb.className = "text-xs font-semibold text-rose-700 dark:text-rose-400";
         fb.textContent = "Select Daniel 2:38 and the contiguous descent principle.";
       }
@@ -822,6 +829,7 @@
           if (val === spec.targetYear) {
             setSuccess();
           } else {
+            if (window.Insights) window.Insights.track('workbench_task', sheetIndex, { task: 'task1', pass: false });
             fb.className = "text-xs mt-3 font-semibold text-rose-700 dark:text-rose-400";
             fb.textContent = spec.failText || ('Calculate ' + spec.startYear + ' + ' + spec.duration + ' = ' + spec.targetYear + '.');
           }
@@ -830,6 +838,7 @@
           if (sel && sel.value === spec.correct) {
             setSuccess();
           } else {
+            if (window.Insights) window.Insights.track('workbench_task', sheetIndex, { task: 'task1', pass: false });
             fb.className = "text-xs mt-3 font-semibold text-rose-700 dark:text-rose-400";
             fb.textContent = "Incorrect selection. Review the passage and select the verified historicist thesis.";
           }
@@ -842,6 +851,7 @@
           if (allMatch) {
             setSuccess();
           } else {
+            if (window.Insights) window.Insights.track('workbench_task', sheetIndex, { task: 'task1', pass: false });
             fb.className = "text-xs mt-3 font-semibold text-rose-700 dark:text-rose-400";
             fb.textContent = spec.failText || "Match every item to its verified gloss.";
           }
@@ -852,6 +862,7 @@
           if (allChecked) {
             setSuccess();
           } else {
+            if (window.Insights) window.Insights.track('workbench_task', sheetIndex, { task: 'task1', pass: false });
             fb.className = "text-xs mt-3 font-semibold text-rose-700 dark:text-rose-400";
             fb.textContent = spec.failText || "Confirm all three prophetic chains to verify the synthesis.";
           }
@@ -866,6 +877,7 @@
           if (allHit) {
             setSuccess();
           } else {
+            if (window.Insights) window.Insights.track('workbench_task', sheetIndex, { task: 'task1', pass: false });
             fb.className = "text-xs mt-3 font-semibold text-rose-700 dark:text-rose-400";
             fb.textContent = spec.failText || "Name the verse or its load-bearing phrase in each line.";
           }

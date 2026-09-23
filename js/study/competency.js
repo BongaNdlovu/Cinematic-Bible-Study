@@ -452,6 +452,11 @@
           </div>
         </div>
 
+        <label class="flex items-start gap-2.5 p-3.5 mb-6 rounded-xl border border-paper-300 dark:border-paper-800 bg-paper-100/40 dark:bg-paper-900/20 text-xs text-ink-700 dark:text-paper-300">
+          <input type="checkbox" data-insight-optout class="mt-0.5">
+          <span><strong class="block text-ink-900 dark:text-paper-100">Stop usage analytics</strong> Lesson events, quiz answers, and feature use will not be sent from this browser. Progress still saves so you can continue.</span>
+        </label>
+
         <!-- Track Switcher & Dossier Access -->
         <div class="flex flex-col sm:flex-row items-center justify-between gap-3 pt-4 border-t border-paper-300 dark:border-paper-800">
           <div class="flex items-center gap-2 text-xs font-mono">
@@ -470,6 +475,7 @@
     `;
 
     document.body.appendChild(modal);
+    if (window.Insights && typeof window.Insights.bindOptOuts === 'function') window.Insights.bindOptOuts();
 
     modal.querySelector('#record-close-btn').addEventListener('click', () => modal.remove());
 

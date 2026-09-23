@@ -1,7 +1,30 @@
+# Cloudflare Pages headers. /* is the all-paths matcher, not a comment.
 /*
   X-Content-Type-Options: nosniff
   X-Frame-Options: DENY
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: camera=(), microphone=(), geolocation=()
-  Access-Control-Allow-Origin: https://cinematic-bible-study-daniel.pages.dev
-  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval' https://cdn.tailwindcss.com https://cdnjs.cloudflare.com https://maps.googleapis.com https://maps.gstatic.com https://*.googleapis.com https://*.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.tailwindcss.com https://fonts.gstatic.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: https://*.tile.openstreetmap.org https://server.arcgisonline.com https://*.arcgisonline.com https://*.googleapis.com https://*.gstatic.com https://*.google.com https://*.ggpht.com https://*.googleusercontent.com; connect-src 'self' https://ttlrspnfadmxkoyqvofh.supabase.co wss://ttlrspnfadmxkoyqvofh.supabase.co https://*.supabase.co wss://*.supabase.co https://cdn.tailwindcss.com https://fonts.googleapis.com https://fonts.gstatic.com https://maps.googleapis.com https://maps.gstatic.com https://*.googleapis.com https://cdnjs.cloudflare.com https://server.arcgisonline.com https://*.tile.openstreetmap.org; worker-src 'self' blob:; child-src 'self' blob:; media-src 'self' blob:; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests
+  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval' https://cdn.tailwindcss.com https://cdnjs.cloudflare.com https://maps.googleapis.com https://maps.gstatic.com https://*.googleapis.com https://*.gstatic.com https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.tailwindcss.com https://fonts.gstatic.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: https://tile.openstreetmap.org https://*.tile.openstreetmap.org https://server.arcgisonline.com https://*.arcgisonline.com https://*.googleapis.com https://*.gstatic.com https://*.google.com https://*.ggpht.com https://*.googleusercontent.com; connect-src 'self' https://ttlrspnfadmxkoyqvofh.supabase.co wss://ttlrspnfadmxkoyqvofh.supabase.co https://*.supabase.co wss://*.supabase.co https://cdn.tailwindcss.com https://fonts.googleapis.com https://fonts.gstatic.com https://maps.googleapis.com https://maps.gstatic.com https://*.googleapis.com https://cdnjs.cloudflare.com https://server.arcgisonline.com https://*.arcgisonline.com https://tile.openstreetmap.org https://*.tile.openstreetmap.org https://cloudflareinsights.com https://static.cloudflareinsights.com; worker-src 'self' blob:; child-src 'self' blob:; media-src 'self' blob:; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests
+
+/
+  Cache-Control: public, max-age=0, must-revalidate
+
+/*.html
+  Cache-Control: public, max-age=0, must-revalidate
+
+/models/*
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=31536000, immutable
+
+/assets/*
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=31536000, immutable
+
+/vendor/*
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=31536000, immutable
+
+/bible/*
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=86400, stale-while-revalidate=604800

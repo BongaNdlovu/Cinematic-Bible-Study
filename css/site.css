@@ -688,6 +688,17 @@ a:focus:not(:focus-visible) { outline: none; }
   line-height: 1.5;
   margin-bottom: 16px;
 }
+.insight-optout {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin-top: 14px;
+  color: var(--muted);
+  font-family: inherit;
+  font-size: 12px;
+  line-height: 1.4;
+}
+.insight-optout input { margin-top: 2px; }
 .witness-stars-field {
   margin-bottom: 14px;
 }

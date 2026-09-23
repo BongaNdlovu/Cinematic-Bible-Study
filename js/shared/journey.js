@@ -40,7 +40,7 @@
   };
 
   const SHEET_COUNT = 11;
-  const TERMS_VERSION = 2;
+  const TERMS_VERSION = 3;
   const FREE_THROUGH = 2;
   const TEMP_REVIEW_UNLOCK = false;
   const SITTING_ASSETS = [

@@ -202,6 +202,8 @@
           '<p>Signing in is required so the certificate of completion can carry your proper details. Your signed-in name is used on the certificate; you may confirm or correct it before you download. Without a signed-in profile the exhibit cannot print a certificate that belongs to you.</p>' +
           '<h3>How your study is kept</h3>' +
           '<p>Your place in the sitting and your progress are saved with your signed-in profile, and also on this device, so you can continue where you left off.</p>' +
+          '<h3>What we learn from your study</h3>' +
+          '<p>While you study, the exhibit records simple study events: which lessons you open and finish, which steps of a sitting you visit, your answers to checkpoint questions, and the time spent on a lesson. Use is anonymous until sign-in. With your signed-in profile, your study progress and optional answers are collected to improve the lessons. No selling, no advertising. You may stop usage analytics from the Progress panel or the home page. If your browser sends a Do Not Track signal, nothing is recorded. To ask for deletion, email the site operator.</p>' +
           '<h3>Scripture and the exhibit</h3>' +
           '<p>Bible quotations are from the King James Version. The lessons, maps, images, and reconstructions are for study on this site. You may not copy the exhibit to sell, scrape, or republish as your own.</p>' +
           '<h3>What this site is not</h3>' +

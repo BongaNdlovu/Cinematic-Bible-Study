@@ -17,7 +17,7 @@
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📜</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;1,500;1,600&family=Inter:wght@400;500;600&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/site.css?v=28">
+  <link rel="stylesheet" href="css/site.css?v=29">
   <link rel="stylesheet" href="css/terms.css">
   <script src="js/shared/journey.js"></script>
   <script src="js/shared/auth-config.js"></script>
@@ -27,6 +27,7 @@
   <script src="js/shared/terms.js"></script>
   <script src="js/shared/reviews.js"></script>
   <script src="js/shared/progress-sync.js"></script>
+  <script src="js/shared/insights.js"></script>
   <script>if (window.BAJourney) window.BAJourney.load();</script>
 </head>
 <body class="site dash cover cinematic-bg">
@@ -44,6 +45,7 @@
       <a href="map.html">Map of History</a>
       <a href="gallery.html">3D Symbols</a>
       <a href="#witness-queue" id="admin-reviews-link" hidden>Admin</a>
+      <a href="insights.html" id="admin-insights-link" hidden>Insights</a>
       <span class="auth-slot" data-auth-slot data-auth-variant="nav"></span>
     </div>
   </nav>
@@ -226,6 +228,10 @@
         </div>
         <p id="witness-status" hidden></p>
       </form>
+      <label class="insight-optout">
+        <input type="checkbox" data-insight-optout>
+        <span>Stop usage analytics on this browser</span>
+      </label>
     </div>
   </section>
 

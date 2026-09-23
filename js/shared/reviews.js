@@ -384,8 +384,10 @@
     const admin = isModerator();
     const queue = document.getElementById("witness-queue");
     const link = document.getElementById("admin-reviews-link");
+    const insightsLink = document.getElementById("admin-insights-link");
     if (queue) queue.hidden = !admin;
     if (link) link.hidden = !admin;
+    if (insightsLink) insightsLink.hidden = !admin;
     document.body.classList.toggle("is-moderator", admin);
   }
 
@@ -501,10 +503,13 @@
           rating: rating,
           feedback: parsed.text,
           responses: {
+            kind: opts.kind || "exit",
             cohort: cohortVal || "",
             role: opts.role || "Student",
             rating: rating,
-            classroomUse: opts.classroomUse || ""
+            classroomUse: opts.classroomUse || "",
+            nps: typeof opts.nps === "number" ? opts.nps : null,
+            changed: opts.changed || ""
           }
         }).then(function () {}).catch(function () {});
       } catch (e) {}
