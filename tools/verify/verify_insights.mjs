@@ -353,6 +353,10 @@ assert(studyAppJs.includes("track('sitting_start'"), 'study-app missing sitting_
 assert(studyAppJs.includes("track('path_step'"), 'study-app missing path_step track');
 assert(studyAppJs.includes("track('quiz_answer'"), 'study-app missing quiz_answer track');
 assert(studyAppJs.includes("track('sitting_complete'"), 'study-app missing sitting_complete track');
+assert(studyAppJs.includes('The first sitting is yours.'), 'study-app missing first-sitting celebration');
+assert(studyAppJs.includes('Halfway through the scroll.'), 'study-app missing middle-sitting celebration');
+assert(studyAppJs.includes('Well done.'), 'study-app missing final-sitting celebration');
+assert(studyAppJs.includes('burstConfetti'), 'study-app missing confetti burst');
 assert(studyAppJs.includes("track('course_complete'"), 'study-app missing course_complete track');
 assert(studyAppJs.includes("readingTimer("), 'study-app must call readingTimer');
 assert(studyAppJs.includes("baReferredSitting"), 'study-app must support baReferredSitting in resolveStartSheet');

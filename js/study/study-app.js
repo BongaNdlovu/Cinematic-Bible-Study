@@ -2537,6 +2537,146 @@
       updateNextGate();
     }
 
+    function celebrationFor(sheet) {
+      if (sheet === 0) {
+        return {
+          title: 'The first sitting is yours.',
+          body: 'A quiet, good beginning. Continue in the same care.'
+        };
+      }
+      if (sheet === 5) {
+        return {
+          title: 'Halfway through the scroll.',
+          body: 'Keep going. The later visions will reward the same patience.'
+        };
+      }
+      if (sheet === 10) {
+        return {
+          title: 'Well done.',
+          body: 'You have finished the eleven sittings of Daniel.'
+        };
+      }
+      return null;
+    }
+
+    let celebrateTimer = 0;
+
+    function burstConfetti() {
+      if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      const old = document.getElementById('sitting-confetti');
+      if (old) old.remove();
+      const canvas = document.createElement('canvas');
+      canvas.id = 'sitting-confetti';
+      canvas.setAttribute('aria-hidden', 'true');
+      canvas.style.cssText = 'position:fixed;inset:0;z-index:240;pointer-events:none;width:100%;height:100%;';
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      const W = window.innerWidth;
+      const H = window.innerHeight;
+      canvas.width = Math.floor(W * dpr);
+      canvas.height = Math.floor(H * dpr);
+      document.body.appendChild(canvas);
+      const ctx = canvas.getContext('2d');
+      if (!ctx) {
+        canvas.remove();
+        return;
+      }
+      ctx.scale(dpr, dpr);
+      const colors = ['#c9a227', '#e8d5a3', '#8b1e1e', '#f4efe3', '#5c4033', '#d4af37', '#b8860b'];
+      const cannons = [
+        { x: W * 0.18, y: H * 0.28, dir: 1 },
+        { x: W * 0.82, y: H * 0.28, dir: -1 }
+      ];
+      const bits = [];
+      for (let i = 0; i < 148; i++) {
+        const origin = cannons[i % 2];
+        const angle = (-92 + origin.dir * (16 + Math.random() * 54)) * Math.PI / 180;
+        const speed = 6.5 + Math.random() * 10;
+        bits.push({
+          x: origin.x,
+          y: origin.y,
+          w: 4 + Math.random() * 7,
+          h: 8 + Math.random() * 15,
+          vx: Math.cos(angle) * speed,
+          vy: Math.sin(angle) * speed,
+          r: Math.random() * Math.PI,
+          vr: -0.24 + Math.random() * 0.48,
+          color: colors[i % colors.length],
+          kind: i % 5 === 0 ? 'circle' : 'rect',
+          wobble: 0.35 + Math.random() * 0.85
+        });
+      }
+      const started = performance.now();
+      function frame(now) {
+        const t = (now - started) / 1000;
+        ctx.clearRect(0, 0, W, H);
+        for (let i = 0; i < bits.length; i++) {
+          const p = bits[i];
+          p.vy += 0.17;
+          p.vx *= 0.991;
+          p.x += p.vx + Math.sin(t * 9 + i) * p.wobble;
+          p.y += p.vy;
+          p.r += p.vr;
+          const fade = t > 2.5 ? Math.max(0, 1 - (t - 2.5) / 1.0) : 1;
+          ctx.save();
+          ctx.translate(p.x, p.y);
+          ctx.rotate(p.r);
+          ctx.globalAlpha = fade;
+          ctx.fillStyle = p.color;
+          if (p.kind === 'circle') {
+            ctx.beginPath();
+            ctx.arc(0, 0, p.w * 0.48, 0, Math.PI * 2);
+            ctx.fill();
+          } else {
+            ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+          }
+          ctx.restore();
+        }
+        if (t < 3.5) requestAnimationFrame(frame);
+        else canvas.remove();
+      }
+      requestAnimationFrame(frame);
+    }
+
+    function showSittingCelebration(sheet) {
+      const spec = celebrationFor(sheet);
+      if (!spec) return;
+      burstConfetti();
+      const prev = document.getElementById('sitting-celebrate');
+      if (prev) prev.remove();
+      if (celebrateTimer) window.clearTimeout(celebrateTimer);
+      if (!document.getElementById('sitting-celebrate-style')) {
+        const style = document.createElement('style');
+        style.id = 'sitting-celebrate-style';
+        style.textContent =
+          '#sitting-celebrate{position:fixed;left:50%;top:18%;transform:translateX(-50%);z-index:241;width:min(22rem,calc(100vw - 2rem));padding:1.05rem 1.15rem 1rem;border:1px solid rgba(196,162,90,.5);background:#f7f1e4;color:#1c1914;font-family:Inter,system-ui,sans-serif;box-shadow:0 18px 44px rgba(0,0,0,.32);text-align:center}' +
+          'html.dark #sitting-celebrate,body.charcoal-mode #sitting-celebrate,body.night-mode #sitting-celebrate{background:#1c1914;color:#f3ead8;border-color:rgba(212,175,55,.4)}' +
+          '#sitting-celebrate small{display:block;font-size:10px;letter-spacing:.1em;text-transform:uppercase;opacity:.68;margin-bottom:.4rem}' +
+          '#sitting-celebrate h3{margin:0 0 .4rem;font-family:"Cormorant Garamond",Georgia,serif;font-size:1.35rem;font-weight:600}' +
+          '#sitting-celebrate p{margin:0 0 .85rem;font-size:.92rem;line-height:1.45}' +
+          '#sitting-celebrate button{border:1px solid rgba(196,162,90,.45);background:transparent;color:inherit;padding:.35rem .8rem;font-size:.8rem;cursor:pointer}';
+        document.head.appendChild(style);
+      }
+      const label = window.BAJourney && typeof window.BAJourney.sheetLabel === 'function'
+        ? window.BAJourney.sheetLabel(sheet)
+        : ('Sitting ' + sheet);
+      const card = document.createElement('div');
+      card.id = 'sitting-celebrate';
+      card.setAttribute('role', 'status');
+      card.innerHTML =
+        '<small>' + label + '</small>' +
+        '<h3></h3>' +
+        '<p></p>' +
+        '<button type="button">Continue</button>';
+      card.querySelector('h3').textContent = spec.title;
+      card.querySelector('p').textContent = spec.body;
+      document.body.appendChild(card);
+      function close() {
+        if (card.parentNode) card.remove();
+      }
+      card.querySelector('button').addEventListener('click', close);
+      celebrateTimer = window.setTimeout(close, 5600);
+    }
+
     function completeAndAdvance() {
       if (!canAdvancePath()) {
         showToast('Every checkpoint question must be answered correctly to continue.');
@@ -2544,6 +2684,8 @@
         if (rev) rev.scrollIntoView({ behavior: 'smooth' });
         return;
       }
+      const firstTime = !completedSheets.has(currentSheetIndex);
+      const finishedSheet = currentSheetIndex;
       if (window.BAJourney && typeof window.BAJourney.markSheetComplete === 'function') {
         window.BAJourney.markSheetComplete(currentSheetIndex);
         completedSheets = new Set((window.BAJourney.load().completedSheets || []).map(Number));
@@ -2561,12 +2703,17 @@
           window.Insights.maybePulse();
         }
       }
+      if (firstTime) showSittingCelebration(finishedSheet);
 
       if (currentSheetIndex < sheetsData.length - 1) {
         loadSheet(currentSheetIndex + 1);
-        showToast('Unit mastered! Advancing to ' + (window.BAJourney ? window.BAJourney.sheetLabel(currentSheetIndex) : ('sheet ' + (currentSheetIndex + 1))) + '.');
+        if (!celebrationFor(finishedSheet)) {
+          showToast('Unit mastered! Advancing to ' + (window.BAJourney ? window.BAJourney.sheetLabel(currentSheetIndex) : ('sheet ' + (currentSheetIndex + 1))) + '.');
+        }
       } else {
-        showToast("Congratulations! You have mastered the entire Historicist Scroll of Daniel!");
+        if (!celebrationFor(finishedSheet)) {
+          showToast("Congratulations! You have mastered the entire Historicist Scroll of Daniel!");
+        }
         syncCertificateCta();
         openCertificateIfReady();
       }
@@ -2923,6 +3070,7 @@
       openLessonScripture,
       navigateSheet,
       completeAndAdvance,
+      showSittingCelebration,
       shareSitting,
       resetQuizQuestion,
       openInfographic,
