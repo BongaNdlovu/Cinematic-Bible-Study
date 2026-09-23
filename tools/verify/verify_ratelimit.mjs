@@ -63,6 +63,7 @@ assert(vercel.includes('status: 429'), 'Vercel middleware must return 429');
 assert(vercel.includes("take(ip, 'models', 60, 60000)"), 'Vercel must cap /models at 60/min');
 assert(vercel.includes("take(ip, 'bible', 30, 60000)"), 'Vercel must cap /bible at 30/min');
 assert(vercel.includes("take(ip, 'all', 240, 60000)"), 'Vercel must cap other paths at 240/min');
+assert(vercel.includes('x-middleware-next'), 'Vercel middleware must continue with x-middleware-next');
 
 const pkg = fs.readFileSync(path.join(ROOT, 'package.json'), 'utf8');
 assert(pkg.includes('verify_ratelimit.mjs'), 'npm test must run verify_ratelimit.mjs');
