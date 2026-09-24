@@ -1691,7 +1691,7 @@
     }
 
     function canAccessSheet(index) {
-      if (new URLSearchParams(location.search).get("preview") === "full") return true;
+      if (window.BAJourney && typeof window.BAJourney.previewAllContent === 'function' && window.BAJourney.previewAllContent()) return true;
       if (window.BAJourney && typeof window.BAJourney.canAccessSheet === 'function') {
         return window.BAJourney.canAccessSheet(index);
       }
@@ -2752,7 +2752,7 @@
     };
 
     function clampStartSheet(index) {
-      if (new URLSearchParams(location.search).get("preview") === "full") return index;
+      if (window.BAJourney && typeof window.BAJourney.previewAllContent === 'function' && window.BAJourney.previewAllContent()) return index;
       if (window.BAJourney && typeof window.BAJourney.clampToAccessible === 'function') {
         return window.BAJourney.clampToAccessible(index);
       }
@@ -2825,6 +2825,14 @@
       }
       if (accessEnable) {
         accessEnable.addEventListener('click', () => {
+          const local = window.BAJourney && typeof window.BAJourney.isLocalDevHost === 'function' && window.BAJourney.isLocalDevHost();
+          const admin = window.ScrollAuth && typeof window.ScrollAuth.isAdmin === 'function' && window.ScrollAuth.isAdmin();
+          if (!local && !admin) {
+            if (window.BAJourney && typeof window.BAJourney.announceLock === 'function') {
+              window.BAJourney.announceLock('preview', 0);
+            }
+            return;
+          }
           if (window.BAJourney && typeof window.BAJourney.enablePreview === 'function') {
             window.BAJourney.enablePreview();
           }

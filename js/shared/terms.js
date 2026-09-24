@@ -38,8 +38,15 @@
   }
 
   function canEnter() {
-    if (new URLSearchParams(location.search).get("preview") === "full") return true;
+    // Dev-only preview bypass (localhost / loopback). Never on deployed hosts.
+    try {
+      const host = location.hostname;
+      const local = host === "localhost" || host === "127.0.0.1" || host === "[::1]";
+      if (local && new URLSearchParams(location.search).get("preview") === "full") return true;
+    } catch (e) {}
     if (isAdmin()) return true;
+    // Production: terms acceptance AND a live signed-in session are both required.
+    // pendingTerms alone never unlocks content for a signed-out visitor.
     return hasAgreed() && signedIn();
   }
 
@@ -73,7 +80,7 @@
       const u = new URL(href, location.href);
       if (u.origin !== location.origin) return false;
       const file = (u.pathname.split("/").pop() || "").split("?")[0];
-      return file === "study.html" || file === "gallery.html" || file === "map.html";
+      return file === "study.html" || file === "gallery.html" || file === "map.html" || file === "insights.html";
     } catch (e) {
       return false;
     }
@@ -125,11 +132,11 @@
 
   function messages() {
     return {
-      agree: "Confirm that you agree to the terms before you sign in.",
+      agree: "Confirm that you agree to the terms before you enter.",
       storage: "Your agreement could not be saved on this device. Allow site data, then try again.",
-      unsigned: "You must sign in after agreeing. The exhibit stays closed until you do.",
+      unsigned: "Agree to the terms, then sign in with Google to enter. The exhibit stays closed until both are done.",
       generic: "The exhibit could not be opened. Check the form and try again.",
-      unavailable: "Sign-in is unavailable on this copy of the site."
+      unavailable: "Sign-in is unavailable on this copy of the site. The exhibit cannot open without it."
     };
   }
 
@@ -279,6 +286,10 @@
   }
 
   function lock() {
+    // Preserve deep links (sheet, map epoch, artifact) for post-sign-in return.
+    if (!isCoverPage()) {
+      try { rememberNext(location.pathname + location.search + location.hash); } catch (e) {}
+    }
     const node = ensureOverlay();
     const alreadyOpen = node && !node.hidden;
     node.hidden = false;
@@ -346,6 +357,7 @@
       setError("storage", copy.storage);
       return;
     }
+    // Terms first, then Google sign-in. A signed-in user who just accepted enters now.
     if (signedIn()) {
       continueIfReady();
       return;
@@ -362,6 +374,7 @@
         setError("auth", siteErr || copy.unsigned);
         return;
       }
+      // OAuth redirect in progress (res.data.url) — leave the page.
       if (res && res.data && res.data.url) return;
       setBusy(false);
       if (canEnter()) continueIfReady();

@@ -282,13 +282,27 @@
     return false;
   }
 
-  function previewAllContent() {
-    if (TEMP_REVIEW_UNLOCK) return true;
+  function isLocalDevHost() {
     try {
-      return new URLSearchParams(location.search).get("preview") === "full";
+      const h = location.hostname;
+      return h === "localhost" || h === "127.0.0.1" || h === "[::1]";
     } catch (e) {
       return false;
     }
+  }
+
+  function previewAllContent() {
+    // Hard unlock for local emergency review only (never ship with this true).
+    if (TEMP_REVIEW_UNLOCK && isLocalDevHost()) return true;
+    // Signed-in moderators may preview locked sittings.
+    if (isAdmin()) return true;
+    // ?preview=full works ONLY on localhost / loopback — ignored on Pages/Vercel.
+    try {
+      if (new URLSearchParams(location.search).get("preview") === "full") {
+        return isLocalDevHost();
+      }
+    } catch (e) {}
+    return false;
   }
 
   function maxOpenSheet() {
@@ -417,6 +431,7 @@
   }
 
   function enablePreview() {
+    if (!isLocalDevHost() && !isAdmin()) return load();
     return save({ previewFull: true, betaPreview: true });
   }
 
@@ -671,6 +686,7 @@
     canAccessMapNode: canAccessMapNode,
     canAccessYear: canAccessYear,
     previewAllContent: previewAllContent,
+    isLocalDevHost: isLocalDevHost,
     maxOpenSheet: maxOpenSheet,
     markSheetComplete: markSheetComplete,
     sittingForAsset: sittingForAsset,

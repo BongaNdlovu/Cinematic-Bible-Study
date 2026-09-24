@@ -21,6 +21,29 @@
     return !!(cfg.url && cfg.publishableKey && window.supabase && typeof window.supabase.createClient === "function");
   }
 
+  function isLocalDevHost() {
+    try {
+      const h = location.hostname;
+      return h === "localhost" || h === "127.0.0.1" || h === "[::1]";
+    } catch (e) {
+      return false;
+    }
+  }
+
+  /** Playwright QA only: localStorage.baQaMockSession = JSON { user, session? }. Ignored off localhost. */
+  function readQaMock() {
+    if (!isLocalDevHost()) return null;
+    try {
+      const raw = localStorage.getItem("baQaMockSession");
+      if (!raw) return null;
+      const parsed = JSON.parse(raw);
+      if (!parsed || !parsed.user || !parsed.user.id) return null;
+      return parsed;
+    } catch (e) {
+      return null;
+    }
+  }
+
   function displayName(u) {
     if (!u) return "";
     const meta = u.user_metadata || {};
@@ -131,6 +154,9 @@
     if (user && window.BAJourney && typeof window.BAJourney.commitPendingTerms === "function") {
       window.BAJourney.commitPendingTerms(user.id);
     }
+    if (!user && window.BAJourney && typeof window.BAJourney.clearPendingTerms === "function") {
+      try { window.BAJourney.clearPendingTerms(); } catch (e) {}
+    }
     persistIdentity(user);
     if (user) clearError();
     listeners.forEach(function (fn) {
@@ -209,9 +235,11 @@
   }
 
   function signOut() {
+    try { localStorage.removeItem("baQaMockSession"); } catch (e) {}
     if (!client) {
-      reportError("You could not be signed out. Refresh and try again.", "auth");
-      return Promise.resolve({ error: new Error("not configured") });
+      // QA mock path (no Supabase client) — drop the synthetic user and re-gate.
+      setUser(null, null);
+      return Promise.resolve({ data: null, error: null });
     }
     clearError();
     return client.auth.signOut().then(function (res) {
@@ -308,6 +336,14 @@
 
   function init() {
     consumeUrlError();
+    const qaMock = readQaMock();
+    if (qaMock) {
+      // Local Playwright / manual QA: inject a synthetic session without Google OAuth.
+      client = null;
+      setUser(qaMock.user, qaMock.session || { access_token: "qa-mock-token" });
+      markReady();
+      return;
+    }
     if (!configured()) {
       reportError("Sign-in is unavailable on this copy of the site.", "auth");
       markReady();
