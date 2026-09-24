@@ -65,3 +65,16 @@ npm run compress:visions
 ```
 
 Then copy the result into `models/`. `compress:beasts` and `compress:daniel8` simplify the high-poly Meshy sources and write Meshopt + WebP gallery files.
+
+## Production audit (Playwright)
+
+Live access-gate + curriculum walkthrough (see `qa-e2e/README.md`):
+
+```bash
+python server.py &
+npm install
+npx playwright install chromium
+node qa-e2e/production-audit.mjs --base=http://127.0.0.1:8001 --phase=after
+```
+
+Signed-out visitors must be blocked on exhibit pages. Signed-in tests inject a localhost-only mock Supabase session (`localStorage.baQaMockSession`) — real Google OAuth is not used. Evidence JSON defaults to `/workspace/audit-prod/evidence/reports/` when `EVIDENCE_DIR` is set.

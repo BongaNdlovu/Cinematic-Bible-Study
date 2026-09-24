@@ -19,6 +19,8 @@
     "three": "0.181.2"
   },
   "devDependencies": {
-    "oxlint": "^1.82.0"
+    "@playwright/test": "^1.63.0",
+    "oxlint": "^1.82.0",
+    "playwright": "^1.63.0"
   }
 }
