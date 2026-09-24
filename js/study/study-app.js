@@ -706,7 +706,11 @@
     function openInfographic() {
       const modal = document.getElementById('infographic-modal');
       const img = document.getElementById('infographic-modal-img');
-      if (!modal || !img || !img.getAttribute('src')) return;
+      if (!modal || !img) return;
+      if (!img.getAttribute('src') && img.dataset.src) {
+        img.src = img.dataset.src;
+      }
+      if (!img.getAttribute('src')) return;
       modal.hidden = false;
       document.body.classList.add('infographic-open');
       const closeBtn = document.getElementById('infographic-modal-close');
@@ -772,11 +776,12 @@
             img.removeAttribute('srcset');
           }
           if (modalImg) {
-            modalImg.src = plate.download || plate.src;
+            modalImg.dataset.src = plate.download || plate.src;
             modalImg.alt = alt;
             modalImg.width = 1672;
             modalImg.height = 941;
             modalImg.decoding = 'async';
+            modalImg.removeAttribute('src');
           }
           const href = plate.download || plate.src;
           const name = plate.filename || 'sitting-infographic';
@@ -790,6 +795,11 @@
           }
         } else {
           figure.hidden = true;
+          const modalImg = document.getElementById('infographic-modal-img');
+          if (modalImg) {
+            modalImg.removeAttribute('src');
+            delete modalImg.dataset.src;
+          }
         }
       }
 

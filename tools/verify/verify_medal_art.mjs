@@ -122,7 +122,7 @@ try {
   const collisions = [];
 
   for (const check of CHECKS) {
-    await client.send("Page.navigate", { url: `${BASE}/map.html?skip=1&year=${check.year}` });
+    await client.send("Page.navigate", { url: `${BASE}/map.html?skip=1&year=${check.year}&preview=full` });
     await sleep(2800);
     const medals = await client.eval(`[...document.querySelectorAll('.cmap-medal .label')].map(n => n.textContent)`);
     console.log(check.year, "medals", medals);
@@ -161,7 +161,7 @@ try {
     deviceScaleFactor: 2,
     mobile: true,
   });
-  await client.send("Page.navigate", { url: `${BASE}/map.html?skip=1&year=y331` });
+  await client.send("Page.navigate", { url: `${BASE}/map.html?skip=1&year=y331&preview=full` });
   await sleep(2600);
   await client.eval(`(() => {
     const el = [...document.querySelectorAll('.cmap-medal')].find(n => (n.textContent || '').includes('Persepolis'));

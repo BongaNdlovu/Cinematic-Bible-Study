@@ -125,6 +125,14 @@ assert(htmlRule?.headers['cache-control']?.value?.includes('must-revalidate'), '
   assert(rule?.headers['cache-control']?.value?.includes('immutable'), `${pathPattern} has immutable long-term caching`);
 });
 
+// 5. Verify Script & Stylesheet Asset Rules (CORS & Caching)
+['/js/*', '/css/*'].forEach(pathPattern => {
+  const rule = rules.find(r => r.path === pathPattern);
+  assert(rule, `Rule for "${pathPattern}" exists`);
+  assert(rule?.headers['access-control-allow-origin']?.value === '*', `${pathPattern} allows CORS for preview and cross-origin usage`);
+  assert(rule?.headers['cache-control']?.value?.includes('max-age='), `${pathPattern} has long-term max-age caching`);
+});
+
 if (!passed) {
   console.error('\nVerification FAILED: One or more assertions did not pass.');
   process.exit(1);

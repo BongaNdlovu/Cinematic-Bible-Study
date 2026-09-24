@@ -90,7 +90,7 @@ try {
   await client.send('Runtime.enable');
   await client.send('Emulation.setDeviceMetricsOverride', { width: 1440, height: 900, deviceScaleFactor: 1, mobile: false });
 
-  await client.send('Page.navigate', { url: `${BASE}/study.html` });
+  await client.send('Page.navigate', { url: `${BASE}/study.html?preview=full` });
   await sleep(2400);
 
   const horizon = await client.eval(`(() => {
@@ -171,7 +171,7 @@ try {
   if (!d3.includes('dura-plain')) throw new Error('Daniel 3 should use dura-plain');
 
   await client.send('Emulation.setDeviceMetricsOverride', { width: 390, height: 844, deviceScaleFactor: 2, mobile: true });
-  await client.send('Page.navigate', { url: `${BASE}/study.html` });
+  await client.send('Page.navigate', { url: `${BASE}/study.html?preview=full` });
   await sleep(2000);
   const mobile = await client.eval(`({
     count: document.querySelectorAll('.horizon-card').length,
@@ -183,7 +183,7 @@ try {
   await client.shot('qa/proofs/horizon_proof_mobile.png');
 
   await client.send('Emulation.setDeviceMetricsOverride', { width: 1440, height: 900, deviceScaleFactor: 1, mobile: false });
-  await client.send('Page.navigate', { url: `${BASE}/gallery.html?asset=goat` });
+  await client.send('Page.navigate', { url: `${BASE}/gallery.html?asset=goat&preview=full` });
   await sleep(3500);
   const goatPlate = await client.eval(`document.getElementById('nar-plate-img')?.getAttribute('src')`);
   await client.eval(`document.querySelector('.timeline-item[data-asset="leopard"]')?.click()`);
@@ -204,7 +204,7 @@ try {
   if (new Set([goatPlate, leopardPlate, brokenPlate, thighsSrc]).size !== 4) throw new Error('Greek factors still share a plate in the gallery UI');
   await client.shot('qa/proofs/horizon_proof_gallery_goat_broken.png');
 
-  await client.send('Page.navigate', { url: `${BASE}/map.html?skip=1&year=y331` });
+  await client.send('Page.navigate', { url: `${BASE}/map.html?skip=1&year=y331&preview=full` });
   await sleep(2800);
   const routeArts = await client.eval(`(() => {
     const routes = (window.MAP_CHRONICLE || window.DATA || {}).routes || (typeof DATA !== 'undefined' ? DATA.routes : null);

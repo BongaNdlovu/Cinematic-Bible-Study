@@ -124,7 +124,7 @@ try {
     width: 1440, height: 900, deviceScaleFactor: 1, mobile: false,
   });
 
-  await client.send("Page.navigate", { url: `${BASE}/gallery.html?asset=assembled` });
+  await client.send("Page.navigate", { url: `${BASE}/gallery.html?asset=assembled&preview=full` });
   const start = Date.now();
   while (Date.now() - start < 28000) {
     const st = await client.eval(`(() => {

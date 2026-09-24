@@ -92,9 +92,9 @@ try {
   }
   if (!ready) throw new Error("server not ready");
 
-  const geo = await fetch(`${BASE}/assets/maps/world-land-110m.geojson`);
-  const pol = await fetch(`${BASE}/assets/maps/chronicle-polities.geojson`);
-  console.log("geojson", geo.status, geo.headers.get("content-type"), "polities", pol.status);
+  const geo = await fetch(`${BASE}/assets/maps/world-land-110m.json`);
+  const pol = await fetch(`${BASE}/assets/maps/chronicle-polities.json`);
+  console.log("map json", geo.status, geo.headers.get("content-type"), "polities", pol.status);
 
   if (!CHROME_PATH) throw new Error("Chrome not found");
   chrome = spawn(CHROME_PATH, [

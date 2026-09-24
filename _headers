@@ -28,3 +28,11 @@
 /bible/*
   Access-Control-Allow-Origin: *
   Cache-Control: public, max-age=86400, stale-while-revalidate=604800
+
+/js/*
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=86400, stale-while-revalidate=604800
+
+/css/*
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=86400, stale-while-revalidate=604800

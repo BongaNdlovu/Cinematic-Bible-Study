@@ -517,6 +517,15 @@ async function run() {
     client = new CDPClient(pageTarget.webSocketDebuggerUrl);
     await client.send('Page.enable');
     await client.send('Runtime.enable');
+    await client.send('Page.addScriptToEvaluateOnNewDocument', {
+      source: `
+        try {
+          const j = JSON.parse(localStorage.getItem('baJourney') || '{}');
+          j.completedSheets = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+          localStorage.setItem('baJourney', JSON.stringify(j));
+        } catch (e) {}
+      `
+    });
 
     console.log('\n=== Verifying Sittings 0, 2, 7, 10 on study.html ===');
     const testSittings = [

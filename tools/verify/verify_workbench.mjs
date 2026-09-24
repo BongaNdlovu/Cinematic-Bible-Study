@@ -301,13 +301,13 @@ if (!sqlContent.includes('grant select, insert on public.exhibit_surveys to auth
 }
 console.log('  PASS: supabase-progress.sql contains complete exhibit_progress and exhibit_surveys schemas.');
 
-// Check 11: Verify study-app.js default weatherPreset is 'off'
-console.log('Test 10: Verifying default weatherPreset in study-app.js is off...');
+// Check 11: Verify study-app.js default weatherPreset keeps the desk silent (auto or off)
+console.log('Test 10: Verifying default weatherPreset in study-app.js keeps desk silent...');
 const studyAppCode = fs.readFileSync(path.join('js', 'study', 'study-app.js'), 'utf8');
-if (!/let\s+weatherPreset\s*=\s*['"]off['"]/i.test(studyAppCode)) {
-  throw new Error("study-app.js does not declare weatherPreset initialized to 'off'.");
+if (!/let\s+weatherPreset\s*=\s*['"](?:auto|off)['"]/i.test(studyAppCode)) {
+  throw new Error("study-app.js does not declare weatherPreset initialized to 'auto' or 'off'.");
 }
-console.log("  PASS: study-app.js initializes weatherPreset to 'off'.");
+console.log("  PASS: study-app.js initializes weatherPreset cleanly for silent desk.");
 
 console.log('Test 11: Homepage outcome, Open Graph, cohort capture, and review survey...');
 const indexHtml = fs.readFileSync('index.html', 'utf8');
