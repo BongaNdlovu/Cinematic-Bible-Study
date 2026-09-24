@@ -500,11 +500,7 @@
     pop.innerHTML = popoverHtml(item);
     anchor.appendChild(pop);
     if (window.StudyCompetency) {
-      if (typeof window.StudyCompetency.recordGlossaryLookup === 'function') {
-        window.StudyCompetency.recordGlossaryLookup(item.term);
-      } else {
-        window.StudyCompetency.recordScriptureLookup("Glossary: " + item.term);
-      }
+      window.StudyCompetency.recordScriptureLookup("Glossary: " + item.term);
     }
   }
 

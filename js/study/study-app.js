@@ -61,10 +61,9 @@
     }
 
     function stepHorizon(delta) {
-      const idx = currentEpochIndex + delta;
-      if (idx >= 0 && idx < timelineEpochs.length) {
-        setEpochInfo(idx);
-      }
+      let idx = currentEpochIndex + delta;
+      while (idx >= 0 && idx < timelineEpochs.length && !epochAccessible(idx)) idx += delta;
+      if (idx >= 0 && idx < timelineEpochs.length && idx !== currentEpochIndex) setEpochInfo(idx);
     }
 
     function setEpochInfo(epochIdx, opts) {
@@ -839,7 +838,7 @@
     const RING_CIRCUMFERENCE = 427.26;
 
     // Atmospheric Focus State — a continuous quiet → storm → sunshine continuum
-    let weatherPreset = 'off'; // visual weather only — no rain/thunder audio
+    let weatherPreset = 'auto'; // visual weather only — no rain/thunder audio
     let currentWeatherType = 'quiet';
     let weatherAnimId = null;
     let particles = [];
@@ -1322,25 +1321,7 @@
       const sub = document.getElementById('pomo-status-sub');
       if (sub) sub.innerText = "✓ Study Session Completed! The study path is complete.";
 
-      try {
-        const AudioCtx = window.AudioContext || window.webkitAudioContext;
-        if (AudioCtx) {
-          const ctx = new AudioCtx();
-          [261.63, 392.00, 523.25].forEach((freq, idx) => {
-            const osc = ctx.createOscillator();
-            const gain = ctx.createGain();
-            osc.type = 'sine';
-            osc.frequency.value = freq;
-            const startAt = ctx.currentTime + idx * 0.12;
-            gain.gain.setValueAtTime(0.08, startAt);
-            gain.gain.exponentialRampToValueAtTime(0.0001, startAt + 1.2);
-            osc.connect(gain);
-            gain.connect(ctx.destination);
-            osc.start(startAt);
-            osc.stop(startAt + 1.2);
-          });
-        }
-      } catch (e) {}
+      // No sound — the site stays silent when a timed sitting ends.
 
       showToast("Study Session Complete! Review the quiz checkpoint.");
     }
@@ -1710,11 +1691,7 @@
     }
 
     function canAccessSheet(index) {
-      try {
-        const p = new URLSearchParams(location.search);
-        if (p.get("preview") === "full" || !!p.get("cohort") || !!p.get("class") || p.get("unlock") === "all") return true;
-        if (location.hostname === '127.0.0.1' || location.hostname === 'localhost') return true;
-      } catch (e) {}
+      if (new URLSearchParams(location.search).get("preview") === "full") return true;
       if (window.BAJourney && typeof window.BAJourney.canAccessSheet === 'function') {
         return window.BAJourney.canAccessSheet(index);
       }
@@ -1945,11 +1922,7 @@
         pane.classList.toggle('hidden', pane.getAttribute('data-dossier-pane') !== tabId);
       });
       if (window.StudyCompetency) {
-        if (typeof window.StudyCompetency.recordDossierLookup === 'function') {
-          window.StudyCompetency.recordDossierLookup(tabId);
-        } else {
-          window.StudyCompetency.recordScriptureLookup(`Primary Source Dossier: ${tabId}`);
-        }
+        window.StudyCompetency.recordScriptureLookup(`Primary Source Dossier: ${tabId}`);
       }
     };
 
@@ -2415,12 +2388,8 @@
 
     function navigateSheet(delta) {
       if (delta > 0 && !canAdvancePath()) {
-        const wbOk = !window.StudyWorkbench || window.StudyWorkbench.isSheetComplete(currentSheetIndex);
-        const msg = !wbOk
-          ? 'Please complete the active proof workbench above to continue.'
-          : 'Every checkpoint question must be answered correctly to continue.';
-        showToast(msg);
-        const rev = (!wbOk ? document.getElementById('workbench-section') : null) || document.getElementById('revision-section') || document.getElementById('workbench-section');
+        showToast('Every checkpoint question must be answered correctly to continue.');
+        const rev = document.getElementById('workbench-section') || document.getElementById('revision-section');
         if (rev) rev.scrollIntoView({ behavior: 'smooth' });
         return;
       }
@@ -2457,27 +2426,15 @@
         const optionsGrid = document.createElement('div');
         optionsGrid.className = "space-y-2.5";
 
-        if (!q._displayOrder) {
-          const indices = q.options.map((_, i) => i);
-          for (let i = indices.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            const tmp = indices[i];
-            indices[i] = indices[j];
-            indices[j] = tmp;
-          }
-          q._displayOrder = indices;
-        }
-
-        q._displayOrder.forEach((origIdx, displayIdx) => {
-          const optText = q.options[origIdx];
+        q.options.forEach((optText, optIdx) => {
           const btn = document.createElement('button');
           btn.className = "quiz-option w-full p-3.5 sm:p-4 rounded-lg border border-paper-300 dark:border-paper-800 hover:border-ink-900 dark:hover:border-paper-200 bg-paper-100/50 dark:bg-paper-900/40 text-left text-xs sm:text-sm text-ink-800 dark:text-paper-200 flex items-start space-x-3";
-          btn.id = `q-${qIdx}-opt-${origIdx}`;
+          btn.id = `q-${qIdx}-opt-${optIdx}`;
           btn.innerHTML = `
-            <span class="font-mono font-bold text-xs text-ink-500 dark:text-paper-500 mt-0.5 shrink-0">${String.fromCharCode(65 + displayIdx)}.</span>
+            <span class="font-mono font-bold text-xs text-ink-500 dark:text-paper-500 mt-0.5 shrink-0">${String.fromCharCode(65 + optIdx)}.</span>
             <span class="flex-1">${optText}</span>
           `;
-          btn.addEventListener('click', () => handleQuizAnswer(qIdx, origIdx, q));
+          btn.addEventListener('click', () => handleQuizAnswer(qIdx, optIdx, q));
           optionsGrid.appendChild(btn);
         });
 
@@ -2515,9 +2472,8 @@
 
       questionData.options.forEach((_, optIdx) => {
         const btn = document.getElementById(`q-${qIdx}-opt-${optIdx}`);
-        if (!btn) return;
         btn.disabled = true;
-        if (isCorrect && optIdx === questionData.correct) {
+        if (optIdx === questionData.correct) {
           btn.classList.remove('bg-paper-100/50', 'dark:bg-paper-900/40', 'border-paper-300', 'dark:border-paper-800');
           btn.classList.add('bg-emerald-50', 'dark:bg-emerald-950/40', 'border-emerald-600', 'text-emerald-950', 'dark:text-emerald-200', 'font-medium');
         } else if (optIdx === selectedOptIdx && !isCorrect) {
@@ -2530,7 +2486,7 @@
 
       feedback.classList.remove('hidden');
       const diagMsg = (questionData.diagnostics && questionData.diagnostics[selectedOptIdx])
-        ? `<div class="mt-2.5 pt-2 border-t border-current/20 font-mono text-xs"><strong>Diagnostic Guidance:</strong> ${questionData.diagnostics[selectedOptIdx]}</div>`
+        ? `<div class="mt-2.5 pt-2 border-t border-current/20 font-mono text-xs"><strong>Diagnostic Analysis:</strong> ${questionData.diagnostics[selectedOptIdx]}</div>`
         : '';
 
       if (isCorrect) {
@@ -2540,13 +2496,13 @@
       } else {
         feedback.className = "mt-4 p-4 rounded-lg font-sans text-xs sm:text-sm leading-relaxed border border-rose-500/50 bg-rose-50 dark:bg-rose-950/30 text-rose-900 dark:text-rose-200";
         feedback.innerHTML = `
-          <div><strong>Review Required:</strong> That option does not match the historical and biblical evidence for this passage.</div>
+          <div><strong>Key Doctrine:</strong> ${questionData.explanation}</div>
           ${diagMsg}
           <div class="mt-3">
             <button type="button" class="px-3 py-1 rounded bg-rose-700 text-white text-xs font-semibold hover:bg-rose-800 transition-colors" onclick="resetQuizQuestion(${qIdx})">Try Again</button>
           </div>
         `;
-        showToast("Please review the passage and try again.");
+        showToast("Review the historicist explanation and try again.");
       }
       updateNextGate();
       if (sheetQuizComplete()) {
@@ -2714,12 +2670,8 @@
 
     function completeAndAdvance() {
       if (!canAdvancePath()) {
-        const wbOk = !window.StudyWorkbench || window.StudyWorkbench.isSheetComplete(currentSheetIndex);
-        const msg = !wbOk
-          ? 'Please complete the active proof workbench above to continue.'
-          : 'Every checkpoint question must be answered correctly to continue.';
-        showToast(msg);
-        const rev = (!wbOk ? document.getElementById('workbench-section') : null) || document.getElementById('revision-section') || document.getElementById('workbench-section');
+        showToast('Every checkpoint question must be answered correctly to continue.');
+        const rev = document.getElementById('workbench-section') || document.getElementById('revision-section');
         if (rev) rev.scrollIntoView({ behavior: 'smooth' });
         return;
       }
@@ -2744,18 +2696,6 @@
       }
       if (firstTime) showSittingCelebration(finishedSheet);
 
-      // Milestone Intercept: Foundations Mini-Capstone after Sitting 2
-      if (finishedSheet === 2 && window.StudyWorkbench && typeof window.StudyWorkbench.renderCapstoneModal === 'function') {
-        const capstoneKey = 'ba_capstone_foundations_mastered';
-        if (localStorage.getItem(capstoneKey) !== 'true') {
-          window.StudyWorkbench.renderCapstoneModal(function () {
-            localStorage.setItem(capstoneKey, 'true');
-            loadSheet(3);
-          });
-          return;
-        }
-      }
-
       if (currentSheetIndex < sheetsData.length - 1) {
         loadSheet(currentSheetIndex + 1);
         if (!celebrationFor(finishedSheet)) {
@@ -2766,16 +2706,6 @@
           showToast("Congratulations! You have mastered the entire Historicist Scroll of Daniel!");
         }
         syncCertificateCta();
-        // Course Milestone: Act IV Synthesis Capstone before Certificate
-        if (window.StudyWorkbench && typeof window.StudyWorkbench.renderFinalCapstoneModal === 'function') {
-          const finalKey = 'ba_capstone_final_mastered';
-          if (localStorage.getItem(finalKey) !== 'true') {
-            window.StudyWorkbench.renderFinalCapstoneModal(function () {
-              openCertificateIfReady();
-            });
-            return;
-          }
-        }
         openCertificateIfReady();
       }
     }
@@ -2822,11 +2752,7 @@
     };
 
     function clampStartSheet(index) {
-      try {
-        const p = new URLSearchParams(location.search);
-        if (p.get("preview") === "full" || !!p.get("cohort") || !!p.get("class") || p.get("unlock") === "all") return index;
-        if (location.hostname === '127.0.0.1' || location.hostname === 'localhost') return index;
-      } catch (e) {}
+      if (new URLSearchParams(location.search).get("preview") === "full") return index;
       if (window.BAJourney && typeof window.BAJourney.clampToAccessible === 'function') {
         return window.BAJourney.clampToAccessible(index);
       }

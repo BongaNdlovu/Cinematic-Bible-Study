@@ -285,13 +285,10 @@
   function previewAllContent() {
     if (TEMP_REVIEW_UNLOCK) return true;
     try {
-      const p = new URLSearchParams(location.search);
-      if (p.get("preview") === "full" || !!p.get("cohort") || !!p.get("class") || p.get("unlock") === "all") return true;
-      if (location.hostname === '127.0.0.1' || location.hostname === 'localhost') return true;
+      return new URLSearchParams(location.search).get("preview") === "full";
     } catch (e) {
       return false;
     }
-    return false;
   }
 
   function maxOpenSheet() {
