@@ -336,7 +336,7 @@
               Type the transliterated Hebrew term for the plant/pulse diet requested by Daniel (Dan 1:12):
             </label>
             <div class="flex gap-2">
-              <input type="text" id="wb1-zeroim-input" value="${t2Done ? 'zeroim' : ''}" placeholder="Hebrew term (7 letters, starts with z)..." class="flex-1 p-2 rounded-lg border border-paper-300 dark:border-paper-700 bg-paper-50 dark:bg-paper-950 text-xs font-mono text-ink-900 dark:text-paper-100" />
+              <input type="text" id="wb1-zeroim-input" value="${t2Done ? 'zeroim' : ''}" placeholder="Hebrew term (6 letters, starts with z)..." class="flex-1 p-2 rounded-lg border border-paper-300 dark:border-paper-700 bg-paper-50 dark:bg-paper-950 text-xs font-mono text-ink-900 dark:text-paper-100" />
               <button type="button" id="wb1-check-t2" class="px-4 py-2 rounded-lg bg-amber-600 hover:bg-amber-700 text-paper-50 font-mono text-xs font-bold uppercase transition-colors">
                 Verify Line & Term
               </button>
