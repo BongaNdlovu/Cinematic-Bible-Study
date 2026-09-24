@@ -63,8 +63,27 @@
 
   function recordScriptureLookup(passage) {
     const tel = getTelemetry();
+    if (!tel.scriptureLookups) tel.scriptureLookups = [];
     if (!tel.scriptureLookups.includes(passage)) {
       tel.scriptureLookups.push(passage);
+    }
+    saveTelemetry(tel);
+  }
+
+  function recordGlossaryLookup(term) {
+    const tel = getTelemetry();
+    if (!tel.glossaryLookups) tel.glossaryLookups = [];
+    if (!tel.glossaryLookups.includes(term)) {
+      tel.glossaryLookups.push(term);
+    }
+    saveTelemetry(tel);
+  }
+
+  function recordDossierLookup(tabId) {
+    const tel = getTelemetry();
+    if (!tel.dossierLookups) tel.dossierLookups = [];
+    if (!tel.dossierLookups.includes(tabId)) {
+      tel.dossierLookups.push(tabId);
     }
     saveTelemetry(tel);
   }
@@ -306,9 +325,10 @@
     if (existing) existing.remove();
 
     const tel = getTelemetry();
-    const track = getTrack();
     const verifiedCount = (tel.verifiedArtifacts || []).length;
-    const lookupsCount = (tel.scriptureLookups || []).length;
+    const allLookups = tel.scriptureLookups || [];
+    const scriptureOnlyCount = allLookups.filter(s => !s.startsWith("Glossary:") && !s.startsWith("Primary Source Dossier:")).length;
+    const glossaryCount = (tel.glossaryLookups || []).length + allLookups.filter(s => s.startsWith("Glossary:")).length;
 
     // Calculate total time
     let totalSec = 0;
@@ -369,8 +389,9 @@
             <span class="text-[10px] font-mono text-ink-500 dark:text-paper-400 uppercase tracking-wider">Time on Task</span>
           </div>
           <div class="p-3 rounded-xl bg-paper-100/80 dark:bg-paper-900/60 border border-paper-300 dark:border-paper-800 text-center">
-            <span class="block text-xl font-bold font-mono text-ink-900 dark:text-paper-100">${lookupsCount}</span>
+            <span class="block text-xl font-bold font-mono text-ink-900 dark:text-paper-100">${scriptureOnlyCount}</span>
             <span class="text-[10px] font-mono text-ink-500 dark:text-paper-400 uppercase tracking-wider">Passages Checked</span>
+            ${glossaryCount > 0 ? `<span class="block text-[9px] text-ink-400 font-mono mt-0.5">+${glossaryCount} glossary</span>` : ''}
           </div>
           <div class="p-3 rounded-xl bg-paper-100/80 dark:bg-paper-900/60 border border-paper-300 dark:border-paper-800 text-center">
             <span class="block text-xl font-bold font-mono text-ink-900 dark:text-paper-100">${verifiedCount}</span>
@@ -534,6 +555,8 @@
     setTrack: setTrack,
     recordSheetTime: recordSheetTime,
     recordScriptureLookup: recordScriptureLookup,
+    recordGlossaryLookup: recordGlossaryLookup,
+    recordDossierLookup: recordDossierLookup,
     recordQuizAttempt: recordQuizAttempt,
     recordWorkbenchSuccess: recordWorkbenchSuccess,
     recordCapstone: recordCapstone,

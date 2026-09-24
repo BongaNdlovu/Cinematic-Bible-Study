@@ -213,10 +213,11 @@
     const empty = document.getElementById("witness-empty");
     if (marquee) marquee.hidden = true;
     if (empty) empty.hidden = true;
+    if (list) list.hidden = true;
     const c = authClient();
     if (!list) return Promise.resolve();
     if (!c) {
-      paintReviews(list, empty, SEED_REVIEWS);
+      paintReviews(list, empty, []);
       return Promise.resolve();
     }
     return c.from(TABLE)
@@ -228,7 +229,7 @@
       .then(function (res) {
         const rows = (res && res.data) || [];
         if ((res && res.error) || rows.length === 0) {
-          paintReviews(list, empty, SEED_REVIEWS);
+          paintReviews(list, empty, []);
           return;
         }
         paintReviews(list, empty, rows);

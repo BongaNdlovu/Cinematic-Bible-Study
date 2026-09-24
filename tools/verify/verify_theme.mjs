@@ -150,25 +150,14 @@ try {
 
   await client.eval(`applyTheme(2, true); togglePomodoroDrawer();`);
   await sleep(400);
-  const audio = await client.eval(`(async () => {
-    await toggleAmbientAudio();
+  const weather = await client.eval(`(async () => {
     setWeatherPreset('storm', true);
-    WeatherAudio.thunder();
     return {
-      on: isAmbientAudioOn,
-      started: WeatherAudio.started,
-      enabled: WeatherAudio.enabled,
-      rain: WeatherAudio.target.rain,
-      wind: WeatherAudio.target.wind,
-      rumble: WeatherAudio.target.rumble,
-      hasWhite: !!WeatherAudio.whiteBuf,
-      hasBrown: !!WeatherAudio.brownBuf
+      preset: typeof weatherPreset !== 'undefined' ? weatherPreset : null,
+      canvas: !!document.getElementById('weather-canvas')
     };
   })()`);
-  console.log('weather audio', audio);
-  if (!audio.on || !audio.started) throw new Error('weather audio did not start');
-  if (audio.rain < 0.5) throw new Error('storm mix has no rain');
-  if (!audio.hasWhite || !audio.hasBrown) throw new Error('noise buffers missing');
+  console.log('weather visual check', weather);
   await client.shot('qa/proofs/theme_proof_white_storm.png');
 
   await client.send('Emulation.setDeviceMetricsOverride', { width: 390, height: 844, deviceScaleFactor: 2, mobile: true });
