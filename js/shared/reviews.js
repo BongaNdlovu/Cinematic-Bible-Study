@@ -217,7 +217,7 @@
     const c = authClient();
     if (!list) return Promise.resolve();
     if (!c) {
-      paintReviews(list, empty, []);
+      paintReviews(list, empty, SEED_REVIEWS);
       return Promise.resolve();
     }
     return c.from(TABLE)
@@ -229,7 +229,7 @@
       .then(function (res) {
         const rows = (res && res.data) || [];
         if ((res && res.error) || rows.length === 0) {
-          paintReviews(list, empty, []);
+          paintReviews(list, empty, SEED_REVIEWS);
           return;
         }
         paintReviews(list, empty, rows);
