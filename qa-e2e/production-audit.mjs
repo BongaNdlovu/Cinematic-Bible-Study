@@ -96,31 +96,48 @@ async function completeWorkbench(page, idx) {
   }, idx);
 }
 
-async function answerQuizzes(page) {
-  return page.evaluate(() => {
+async function answerQuizzes(page, sheetIndex = null) {
+  return page.evaluate((sIdx) => {
+    const sheetNum = (typeof sIdx === "number")
+      ? sIdx
+      : (window.BAJourney?.load?.()?.sheet ?? 0);
+    const quizzes = (window.sheetsData && window.sheetsData[sheetNum] && window.sheetsData[sheetNum].quizzes) || [];
     const cards = [...document.querySelectorAll('[id^="q-card-"]')];
     let answered = 0;
-    cards.forEach((card) => {
-      const btn = card.querySelector("button.quiz-option");
+    cards.forEach((card, qIdx) => {
+      const q = quizzes[qIdx];
+      const correctIdx = (q && typeof q.correct === "number") ? q.correct : 0;
+      const btns = card.querySelectorAll("button.quiz-option");
+      const btn = btns[correctIdx] || btns[0] || card.querySelector("button.quiz-option");
       if (btn) {
         btn.click();
         answered++;
       }
     });
     if (!cards.length) {
-      const groups = new Map();
+      const parentGroups = [];
+      const seen = new Set();
       document.querySelectorAll("button.quiz-option").forEach((btn) => {
         const p = btn.closest("section, article, div");
-        if (p && !groups.has(p)) {
-          groups.set(p, true);
+        if (p && !seen.has(p)) {
+          seen.add(p);
+          parentGroups.push(p);
+        }
+      });
+      parentGroups.forEach((grp, qIdx) => {
+        const q = quizzes[qIdx];
+        const correctIdx = (q && typeof q.correct === "number") ? q.correct : 0;
+        const btns = grp.querySelectorAll("button.quiz-option");
+        const btn = btns[correctIdx] || btns[0];
+        if (btn) {
           btn.click();
           answered++;
         }
       });
-      return { n: groups.size, answered };
+      return { n: parentGroups.length, answered };
     }
     return { n: cards.length, answered };
-  });
+  }, sheetIndex);
 }
 
 async function gateState(page) {
@@ -268,7 +285,7 @@ async function main() {
       await dismissSoft(page);
       entry.screenshot = await shot(page, `sheet-${String(i).padStart(2, "0")}-start`);
       entry.workbench = await completeWorkbench(page, i);
-      entry.quiz = await answerQuizzes(page);
+      entry.quiz = await answerQuizzes(page, i);
       await page.evaluate((idx) => {
         try {
           window.BAJourney?.markSheetComplete?.(idx);
