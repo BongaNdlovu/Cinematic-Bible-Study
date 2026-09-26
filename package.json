@@ -14,7 +14,8 @@
     "lint": "oxlint",
     "test": "node tools/verify-headers.mjs && node tools/verify/verify_insights.mjs && node tools/verify/verify_ratelimit.mjs && node tools/verify/verify_progress_sync.mjs && node tools/verify/verify_rate_gate.mjs && node tools/verify/verify_hash_release.mjs && node tools/verify/verify_load.mjs",
     "rollback": "node tools/rollback-deploy.mjs",
-    "deploy:pages": "powershell -ExecutionPolicy Bypass -File tools/deploy-cloudflare-pages.ps1"
+    "deploy:pages": "powershell -ExecutionPolicy Bypass -File tools/deploy-cloudflare-pages.ps1",
+    "deploy:vercel": "powershell -ExecutionPolicy Bypass -File tools/deploy-vercel.ps1"
   },
   "dependencies": {
     "three": "0.181.2"

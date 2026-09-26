@@ -19,12 +19,18 @@ export class ExhibitRateGate {
   }
 
   async fetch(request) {
-    await this.load();
     const body = await request.json();
-    const ok = allow(this.store, String(body.ip || "0"), String(body.path || "/"), Date.now());
-    const buckets = {};
-    this.store.forEach((value, key) => { buckets[key] = value; });
-    await this.state.storage.put("buckets", buckets);
+    const ip = String(body.ip || "0");
+    const path = String(body.path || "/");
+    const now = Date.now();
+    const ok = await this.state.blockConcurrencyWhile(async () => {
+      await this.load();
+      const allowed = allow(this.store, ip, path, now);
+      const buckets = {};
+      this.store.forEach((value, key) => { buckets[key] = value; });
+      await this.state.storage.put("buckets", buckets);
+      return allowed;
+    });
     return Response.json({ ok: ok });
   }
 }

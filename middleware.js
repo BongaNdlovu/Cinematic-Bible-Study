@@ -31,7 +31,8 @@ async function askGate(ip, path) {
         authorization: "Bearer " + secret,
         "content-type": "application/json"
       },
-      body: JSON.stringify({ ip: ip, path: path })
+      body: JSON.stringify({ ip: ip, path: path }),
+      signal: AbortSignal.timeout(2000)
     });
     if (res.status === 429) return "deny";
     if (res.status === 204) return "allow";

@@ -11,7 +11,12 @@
   const OUTBOX_KEY = 'baProgressOutbox';
   const PUSH_GAP_MS = 6000;
   const SAVE_MISS = 'Your progress did not save. This device will keep trying.';
+  const RETRY_WAITS = [7000, 12000, 24000];
+  const MAX_RETRIES = 8;
   let debounceTimer = null;
+  let retryTimer = null;
+  let retryAttempt = 0;
+  let applyingMerge = false;
   let isSyncing = false;
   let lastPushAt = 0;
   let knownRevision = null;
@@ -285,23 +290,39 @@
     };
   }
 
-  function reportSaveMiss() {
+  function reportSaveMiss(cause, ms) {
     if (window.SiteErrors && typeof window.SiteErrors.show === 'function') {
       window.SiteErrors.show(SAVE_MISS, 'save');
     }
     if (window.SiteOps && typeof window.SiteOps.report === 'function') {
-      window.SiteOps.report('save_failed', 'push');
+      window.SiteOps.report('save_failed', cause || 'error', { ms: ms, cause: cause || 'error' });
     }
   }
 
-  function rememberOutbox(payload, expectedRevision) {
+  function storeOutbox(payload, expectedRevision) {
     try {
       localStorage.setItem(OUTBOX_KEY, JSON.stringify({
         payload: payload,
         expectedRevision: expectedRevision
       }));
     } catch (e) {}
-    reportSaveMiss();
+  }
+
+  function readOutbox() {
+    try {
+      const raw = localStorage.getItem(OUTBOX_KEY);
+      if (!raw) return null;
+      const parsed = JSON.parse(raw);
+      if (!parsed || !parsed.payload) return null;
+      return parsed;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  function rememberOutbox(payload, expectedRevision, cause, ms) {
+    storeOutbox(payload, expectedRevision);
+    reportSaveMiss(cause, ms);
   }
 
   function clearSaveMiss() {
@@ -337,6 +358,67 @@
     };
   }
 
+  function newSaveId() {
+    if (typeof crypto !== 'undefined' && crypto.randomUUID) return crypto.randomUUID();
+    return 's_' + Date.now().toString(36) + '_' + Math.random().toString(36).slice(2);
+  }
+
+  function errorCause(error) {
+    const message = error && error.message ? String(error.message) : '';
+    if (message.indexOf('payload_too_large') !== -1) return 'payload_too_large';
+    if (message.indexOf('rate_limit') !== -1) return 'rate_limit';
+    if (message.indexOf('AbortError') !== -1 || message.indexOf('TimeoutError') !== -1 || message.indexOf('aborted') !== -1) {
+      return 'timeout';
+    }
+    return 'error';
+  }
+
+  function writeMergedLocal(merged) {
+    applyingMerge = true;
+    try {
+      const journey = (merged && merged.journey) || {};
+      const patch = { completedSheets: journey.completedSheets || [] };
+      if (journey.cohort) patch.cohort = journey.cohort;
+      if (typeof journey.sheet === 'number') patch.sheet = journey.sheet;
+      if (typeof journey.pathSheet === 'number') patch.pathSheet = journey.pathSheet;
+      if (window.BAJourney && typeof window.BAJourney.save === 'function') window.BAJourney.save(patch);
+      localStorage.setItem('daniel_historicist_mastery', JSON.stringify(merged.mastery || []));
+      localStorage.setItem('daniel_workbench_v1', JSON.stringify(merged.workbench || {}));
+      localStorage.setItem('daniel_competency_telemetry_v1', JSON.stringify(merged.telemetry || {}));
+      if (merged.certificate_name) localStorage.setItem('daniel_certificate_name', merged.certificate_name);
+    } catch (e) {}
+    applyingMerge = false;
+  }
+
+  function armRetry(fn, wait) {
+    const handle = setTimeout(fn, wait);
+    if (handle && typeof handle.unref === 'function') handle.unref();
+    return handle;
+  }
+
+  function scheduleRetry() {
+    if (retryTimer) clearTimeout(retryTimer);
+    if (retryAttempt >= MAX_RETRIES) {
+      retryTimer = null;
+      return;
+    }
+    const wait = RETRY_WAITS[Math.min(retryAttempt, RETRY_WAITS.length - 1)];
+    retryTimer = armRetry(function () {
+      retryTimer = null;
+      runScheduledRetry();
+    }, wait);
+  }
+
+  function queueFailure(payload, expectedRevision, cause, ms) {
+    if (cause === 'payload_too_large') {
+      reportSaveMiss(cause, ms);
+      return null;
+    }
+    rememberOutbox(payload, expectedRevision, cause, ms);
+    scheduleRetry();
+    return null;
+  }
+
   function saveCall(client, expectedRevision, payload) {
     return client.rpc('save_exhibit_progress', {
       expected_revision: expectedRevision,
@@ -344,44 +426,77 @@
     });
   }
 
-  function settleSave(client, expectedRevision, payload, triesLeft) {
+  function settleSave(client, expectedRevision, payload) {
+    const started = Date.now();
     return saveCall(client, expectedRevision, payload).then(function (res) {
-      if (!res || res.error || !res.data) {
-        rememberOutbox(payload, expectedRevision);
-        return null;
-      }
-      if (res.data.status === 'conflict' && triesLeft > 0) {
+      const ms = Date.now() - started;
+      if (res && res.error) return queueFailure(payload, expectedRevision, errorCause(res.error), ms);
+      if (!res || !res.data) return queueFailure(payload, expectedRevision, 'error', ms);
+      if (res.data.status === 'conflict') {
         knownRevision = res.data.revision;
-        return settleSave(client, res.data.revision, mergeConflict(payload, res.data.row), triesLeft - 1);
+        const merged = mergeConflict(payload, res.data.row);
+        merged.save_id = payload.save_id;
+        writeMergedLocal(merged);
+        return queueFailure(merged, res.data.revision, 'conflict', ms);
       }
-      if (res.data.status !== 'ok') {
-        rememberOutbox(payload, knownRevision);
-        return null;
-      }
+      if (res.data.status !== 'ok') return queueFailure(payload, knownRevision, 'error', ms);
       knownRevision = res.data.revision;
+      retryAttempt = 0;
+      if (retryTimer) clearTimeout(retryTimer);
+      retryTimer = null;
       clearSaveMiss();
       return res.data;
-    }).catch(function () {
-      rememberOutbox(payload, expectedRevision);
-      return null;
+    }).catch(function (err) {
+      const ms = Date.now() - started;
+      const cause = err && (err.name === 'AbortError' || err.name === 'TimeoutError') ? 'timeout' : 'error';
+      return queueFailure(payload, expectedRevision, cause, ms);
     });
   }
 
-  function pushLocalToRemote() {
+  function pushFresh(client) {
+    const payload = collectPayload();
+    if (!payload) return Promise.resolve(null);
+    payload.save_id = newSaveId();
+    retryAttempt = 0;
+    if (retryTimer) clearTimeout(retryTimer);
+    retryTimer = null;
+    storeOutbox(payload, knownRevision);
+    lastPushAt = Date.now();
+    return settleSave(client, knownRevision, payload);
+  }
+
+  function pushLocalToRemote(fromTimer) {
     const c = authClient();
     const u = currentUser();
     if (!c || !u || isSyncing) return Promise.resolve(null);
-    const now = Date.now();
-    if (now - lastPushAt < PUSH_GAP_MS) return Promise.resolve(null);
-    const payload = collectPayload();
-    if (!payload) return Promise.resolve(null);
-    lastPushAt = now;
-    return settleSave(c, knownRevision, payload, 3);
+    if (fromTimer) {
+      const stored = readOutbox();
+      if (!stored) return Promise.resolve(null);
+      lastPushAt = Date.now();
+      return settleSave(c, stored.expectedRevision, stored.payload);
+    }
+    if (Date.now() - lastPushAt < PUSH_GAP_MS) {
+      const payload = collectPayload();
+      if (!payload) return Promise.resolve(null);
+      payload.save_id = newSaveId();
+      retryAttempt = 0;
+      storeOutbox(payload, knownRevision);
+      scheduleRetry();
+      return Promise.resolve(null);
+    }
+    return pushFresh(c);
+  }
+
+  function runScheduledRetry() {
+    if (retryAttempt >= MAX_RETRIES) return Promise.resolve(null);
+    retryAttempt += 1;
+    return pushLocalToRemote(true);
   }
 
   function syncNow() {
+    if (applyingMerge) return;
     if (debounceTimer) clearTimeout(debounceTimer);
-    debounceTimer = setTimeout(pushLocalToRemote, PUSH_GAP_MS);
+    debounceTimer = setTimeout(function () { pushLocalToRemote(false); }, PUSH_GAP_MS);
   }
 
   function init() {
@@ -411,7 +526,9 @@
     init: init,
     pullAndMerge: pullAndMerge,
     syncNow: syncNow,
-    pushNow: pushLocalToRemote,
+    pushNow: function () { return pushLocalToRemote(false); },
+    retryNow: runScheduledRetry,
+    retryPending: function () { return !!retryTimer; },
     mergeConflict: mergeConflict
   };
 })();

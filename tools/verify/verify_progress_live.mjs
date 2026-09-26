@@ -12,7 +12,8 @@ const headers = {
   "Content-Type": "application/json"
 };
 
-async function rpc(expected, sheets) {
+async function rpc(expected, sheets, extra) {
+  const fields = extra || {};
   const res = await fetch(url + "/rest/v1/rpc/save_exhibit_progress", {
     method: "POST",
     headers: headers,
@@ -23,8 +24,8 @@ async function rpc(expected, sheets) {
         mastery: sheets,
         workbench: {},
         telemetry: {},
-        certificate_name: "Ada",
-        cohort: "live"
+        certificate_name: Object.prototype.hasOwnProperty.call(fields, "certificate_name") ? fields.certificate_name : "Ada",
+        cohort: Object.prototype.hasOwnProperty.call(fields, "cohort") ? fields.cohort : "live"
       }
     })
   });
@@ -44,9 +45,22 @@ const sheets = Array.from(new Set([].concat(
   conflict.row.journey.completedSheets || [],
   [2, 4]
 ))).filter((n) => n === 2 || n === 4);
-const merged = await rpc(conflict.revision, sheets);
-const stored = merged.row.journey.completedSheets;
+await new Promise((resolve) => setTimeout(resolve, 7000));
+const merged = await rpc(conflict.revision, sheets, { certificate_name: "", cohort: "" });
+const stored = merged.row.journey.completedSheets || [];
 if (!stored.includes(2) || !stored.includes(4)) {
   throw new Error("live row missing a finished lesson: " + JSON.stringify(stored));
 }
+if (merged.row.certificate_name !== "Ada") {
+  throw new Error("blank certificate erased a stored name: " + merged.row.certificate_name);
+}
+const anon = await fetch(url + "/rest/v1/rpc/save_exhibit_progress", {
+  method: "POST",
+  headers: { apikey: key, "Content-Type": "application/json" },
+  body: JSON.stringify({
+    expected_revision: merged.revision,
+    payload: { journey: { completedSheets: [9] }, mastery: [9], certificate_name: "Ada", cohort: "live" }
+  })
+});
+if (anon.ok) throw new Error("a request with no user JWT was accepted");
 console.log("live database kept both finished lessons");

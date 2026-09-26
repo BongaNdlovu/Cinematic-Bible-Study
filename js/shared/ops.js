@@ -32,13 +32,16 @@
     try { sessionStorage.setItem(QUEUE_KEY, JSON.stringify(q.slice(-MAX_QUEUE))); } catch (e) {}
   }
 
-  function report(event, reason) {
+  function report(event, reason, extra) {
     if (!event) return;
     const q = readQueue();
+    const info = extra || {};
     q.push({
       event: String(event).slice(0, 40),
       reason: String(reason || "unknown").slice(0, 40),
-      page: (typeof location !== "undefined" && location.pathname) ? location.pathname.slice(0, 60) : ""
+      page: (typeof location !== "undefined" && location.pathname) ? location.pathname.slice(0, 60) : "",
+      ms: typeof info.ms === "number" ? info.ms : null,
+      cause: info.cause ? String(info.cause).slice(0, 40) : ""
     });
     writeQueue(q);
     flush();
@@ -58,7 +61,7 @@
         event: row.event,
         anon_id: anonId(),
         page: row.page,
-        detail: { reason: row.reason },
+        detail: { reason: row.reason, ms: row.ms, cause: row.cause },
         user_id: user ? user.id : null
       };
     })).then(function (res) {

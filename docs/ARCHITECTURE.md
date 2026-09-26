@@ -97,6 +97,23 @@ Run verify scripts from the repo root so `server.py` and document-relative paths
 | 32 | `renderCompetencyRecordModal` | `js/study/competency.js:215` |
 | 28 | `setEpochInfo` | `js/study/study-app.js:34` |
 
+## Progress save and recovery
+
+`save_exhibit_progress(bigint, jsonb)` is the current contract. The save id travels inside the JSON payload. The next breaking change is a new function, shipped with the client in the same release. Do not rename this function.
+
+Google sign-in goes from the browser straight to Supabase. The page's 5-starts-per-hour hint lives in `localStorage` and a script can skip it. On 26 Sep 2026 the Auth rate-limit screen for this project showed these server caps, per IP unless noted:
+
+| Limit | Setting |
+|---|---|
+| Sign-ups and sign-ins | 30 requests / 5 minutes |
+| Token refreshes | 150 requests / 5 minutes |
+| Token verifications | 30 requests / 5 minutes |
+| Anonymous sign-ins | 30 requests / hour |
+| Emails sent | 2 / hour |
+| SMS sent | 30 / hour |
+
+The database backup screen on the same day said this project is on the Free plan, which does not include project backups. Scheduled backups would be daily, around midnight in the project region, and the Pro plan keeps up to 7 days. Point-in-time recovery is a Pro add-on that starts at $100 a month. There is no listed backup, so the recovery point is whatever was last exported by hand, and that export does not exist in this repo. Recovery time for the site is a Cloudflare Pages rollback plus `npx vercel rollback`. Recovery time for progress rows is a Supabase restore once a backup exists, then the SQL files in `tools/`. No production restore is part of the current release.
+
 ## Offline runtime
 
 ```bash

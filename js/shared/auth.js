@@ -354,6 +354,13 @@
       return;
     }
     client = window.supabase.createClient(cfg.url, cfg.publishableKey, {
+      global: {
+        fetch: function (input, requestInit) {
+          const next = requestInit ? Object.assign({}, requestInit) : {};
+          if (!next.signal) next.signal = AbortSignal.timeout(8000);
+          return fetch(input, next);
+        }
+      },
       auth: {
         persistSession: true,
         autoRefreshToken: true,

@@ -15,7 +15,7 @@ function denied() {
   });
 }
 
-function reportEdge(context, path, reason) {
+function reportEdge(context, path, reason, elapsed) {
   const job = fetch(SUPABASE_URL + "/rest/v1/exhibit_events", {
     method: "POST",
     headers: {
@@ -28,7 +28,7 @@ function reportEdge(context, path, reason) {
       event: "rate_limited",
       anon_id: "edge-rate-limit",
       page: String(path || "").slice(0, 60),
-      detail: { reason: reason }
+      detail: { reason: reason, ms: elapsed }
     })
   }).catch(function () {});
   if (context && typeof context.waitUntil === "function") context.waitUntil(job);
@@ -36,20 +36,23 @@ function reportEdge(context, path, reason) {
 
 async function allowed(context, ip, path) {
   const gate = context.env && context.env.RATE_GATE;
+  const caller = String(ip || "0");
   if (!gate || typeof gate.idFromName !== "function") {
     reportEdge(context, path, "limit_unavailable");
     return true;
   }
+  const started = Date.now();
   try {
-    const stub = gate.get(gate.idFromName("exhibit"));
+    const stub = gate.get(gate.idFromName(caller));
     const res = await stub.fetch("https://gate/check", {
       method: "POST",
-      body: JSON.stringify({ ip: ip, path: path })
+      body: JSON.stringify({ ip: caller, path: path }),
+      signal: AbortSignal.timeout(2000)
     });
     const data = await res.json();
     return !!data.ok;
   } catch (e) {
-    reportEdge(context, path, "limit_unavailable");
+    reportEdge(context, path, "limit_unavailable", Date.now() - started);
     return true;
   }
 }
