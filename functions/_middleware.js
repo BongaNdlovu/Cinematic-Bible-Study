@@ -15,6 +15,13 @@ function denied() {
   });
 }
 
+function unavailable() {
+  return new Response("Service Unavailable", {
+    status: 503,
+    headers: { "Retry-After": "5", "Cache-Control": "no-store" }
+  });
+}
+
 function reportEdge(context, path, reason, elapsed) {
   const job = fetch(SUPABASE_URL + "/rest/v1/exhibit_events", {
     method: "POST",
@@ -39,7 +46,7 @@ async function allowed(context, ip, path) {
   const caller = String(ip || "0");
   if (!gate || typeof gate.idFromName !== "function") {
     reportEdge(context, path, "limit_unavailable");
-    return true;
+    return "down";
   }
   const started = Date.now();
   try {
@@ -50,10 +57,10 @@ async function allowed(context, ip, path) {
       signal: AbortSignal.timeout(2000)
     });
     const data = await res.json();
-    return !!data.ok;
+    return data.ok ? "allow" : "deny";
   } catch (e) {
     reportEdge(context, path, "limit_unavailable", Date.now() - started);
-    return true;
+    return "down";
   }
 }
 
@@ -66,8 +73,9 @@ async function rateProxy(context, request) {
   let body = {};
   try { body = await request.json(); } catch (e) { body = {}; }
   const forwardedPath = String(body.path || "/");
-  const ok = await allowed(context, String(body.ip || "0"), forwardedPath);
-  if (!ok) {
+  const decision = await allowed(context, String(body.ip || "0"), forwardedPath);
+  if (decision === "down") return unavailable();
+  if (decision === "deny") {
     reportEdge(context, forwardedPath, "cap");
     return denied();
   }
@@ -80,7 +88,9 @@ export async function onRequest(context) {
   const path = new URL(request.url).pathname;
   if (path === "/__rate" && request.method === "POST") return rateProxy(context, request);
   const ip = ipOf(request);
-  if (!(await allowed(context, ip, path))) {
+  const decision = await allowed(context, ip, path);
+  if (decision === "down") return unavailable();
+  if (decision === "deny") {
     reportEdge(context, path, "cap");
     return denied();
   }

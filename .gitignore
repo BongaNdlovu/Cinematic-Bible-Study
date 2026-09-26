@@ -43,3 +43,6 @@ theme_proof*.png
 .kilo/
 .wrangler/
 .env*
+
+# Progress snapshots and generated restore SQL. Not committed.
+backups/

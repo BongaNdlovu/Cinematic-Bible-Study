@@ -58,6 +58,8 @@ assert(!cf.includes('new Map('), 'Cloudflare middleware must not keep a private 
 assert(cf.includes('idFromName(caller)'), 'Cloudflare must ask the per-IP rate gate');
 assert(cf.includes('AbortSignal.timeout(2000)'), 'Cloudflare must time out the counter');
 assert(cf.includes('limit_unavailable'), 'Cloudflare must record a missing counter');
+assert(cf.includes('status: 503'), 'Cloudflare must refuse the page when the counter does not answer');
+assert(cf.includes('return "down"'), 'Cloudflare must not serve the page when the counter is missing');
 
 const gate = fs.readFileSync(path.join(ROOT, 'workers/exhibit-rate-gate/src/rate-gate.js'), 'utf8');
 assert(gate.includes('models: [60, 60000]'), 'shared gate must cap /models at 60/min');
@@ -70,6 +72,8 @@ assert(!vercel.includes('new Map('), 'Vercel middleware must not keep a private 
 assert(vercel.includes('/__rate'), 'Vercel must ask the Pages rate gate');
 assert(vercel.includes('x-middleware-next'), 'Vercel middleware must continue with x-middleware-next');
 assert(vercel.includes('AbortSignal.timeout(2000)'), 'Vercel must time out the counter');
+assert(vercel.includes('status: 503'), 'Vercel must refuse the page when the counter does not answer');
+assert(vercel.includes('decision === "unavailable"'), 'Vercel must treat a counter miss as unavailable');
 
 const pkg = fs.readFileSync(path.join(ROOT, 'package.json'), 'utf8');
 assert(pkg.includes('verify_ratelimit.mjs'), 'npm test must run verify_ratelimit.mjs');

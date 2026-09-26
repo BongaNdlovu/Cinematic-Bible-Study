@@ -21,6 +21,13 @@ function pass() {
   });
 }
 
+function unavailable() {
+  return new Response("Service Unavailable", {
+    status: 503,
+    headers: { "Retry-After": "5", "Cache-Control": "no-store" }
+  });
+}
+
 async function askGate(ip, path) {
   const secret = typeof process !== "undefined" && process.env && process.env.RATE_GATE_SECRET;
   if (!secret) return "unavailable";
@@ -46,6 +53,7 @@ export async function middleware(request) {
   if (request.method === "OPTIONS" || request.method === "HEAD") return pass();
   const decision = await askGate(ipOf(request), new URL(request.url).pathname);
   if (decision === "deny") return denied();
+  if (decision === "unavailable") return unavailable();
   return pass();
 }
 

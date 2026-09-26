@@ -1,3 +1,39 @@
+import { execFileSync } from "child_process";
+import { mkdtempSync, readFileSync, rmSync, writeFileSync } from "fs";
+import { tmpdir } from "os";
+import { join } from "path";
+import { fileURLToPath } from "url";
+
+const root = join(fileURLToPath(new URL(".", import.meta.url)), "../..");
+const fixtureDir = mkdtempSync(join(tmpdir(), "progress-snapshot-"));
+const fixturePath = join(fixtureDir, "snapshot.json");
+writeFileSync(fixturePath, JSON.stringify({
+  exported_at: "2026-09-27T00:00:00.000Z",
+  table: "public.exhibit_progress",
+  rows: [{
+    user_id: "00000000-0000-0000-0000-000000000001",
+    journey: { completedSheets: [2, 4] },
+    mastery: [2, 4],
+    workbench: {},
+    telemetry: {},
+    certificate_name: "O'Ada",
+    cohort: "live",
+    updated_at: "2026-09-27T00:00:00.000Z",
+    revision: 2,
+    last_save_id: "save-1"
+  }]
+}));
+execFileSync(process.execPath, ["tools/restore-exhibit-progress.mjs", fixturePath], { cwd: root });
+const restoreSql = readFileSync(join(root, "backups", "restore-exhibit-progress.sql"), "utf8");
+if (!restoreSql.trimEnd().endsWith("rollback;")) {
+  throw new Error("restore script must roll back unless someone changes the last line");
+}
+if (!restoreSql.includes("on conflict (user_id) do update")) {
+  throw new Error("restore script must update an existing row only when the snapshot is newer");
+}
+if (!restoreSql.includes("O''Ada")) throw new Error("restore script must escape quotes");
+rmSync(fixtureDir, { recursive: true });
+
 const url = process.env.SUPABASE_URL;
 const key = process.env.SUPABASE_PUBLISHABLE_KEY;
 const token = process.env.SUPABASE_ACCESS_TOKEN;
@@ -36,6 +72,7 @@ async function rpc(expected, sheets, extra) {
 
 const first = await rpc(null, [2]);
 const revision = first.revision;
+await new Promise((resolve) => setTimeout(resolve, 7000));
 const raced = await Promise.all([rpc(revision, [2]), rpc(revision, [4])]);
 const conflict = raced.find((item) => item.status === "conflict");
 const winner = raced.find((item) => item.status === "ok");
