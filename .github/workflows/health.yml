@@ -1,0 +1,22 @@
+name: health
+
+on:
+  schedule:
+    - cron: "*/15 * * * *"
+  workflow_dispatch:
+
+jobs:
+  up:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Site answers
+        run: |
+          code=$(curl -s -o /dev/null -w '%{http_code}' --max-time 20 https://cinematic-bible-study-daniel.pages.dev/ || echo 000)
+          test "$code" = "200"
+      - name: Sign-in service answers
+        run: |
+          code=$(curl -s -o /dev/null -w '%{http_code}' --max-time 20 https://ttlrspnfadmxkoyqvofh.supabase.co/auth/v1/health || echo 000)
+          case "$code" in
+            000|5*) echo "sign-in health returned $code"; exit 1 ;;
+            *) echo "sign-in health returned $code" ;;
+          esac

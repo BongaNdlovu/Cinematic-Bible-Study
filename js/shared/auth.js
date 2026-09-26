@@ -106,7 +106,11 @@
   }
 
   function reportError(message, kind) {
-    if (window.SiteErrors) window.SiteErrors.show(message, kind || "auth");
+    const errorKind = kind || "auth";
+    if (window.SiteErrors) window.SiteErrors.show(message, errorKind);
+    if (errorKind === "auth" && window.SiteOps && typeof window.SiteOps.report === "function") {
+      window.SiteOps.report("auth_failed", "auth");
+    }
   }
 
   function clearError() {

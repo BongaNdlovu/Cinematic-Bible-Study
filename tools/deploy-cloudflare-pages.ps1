@@ -17,6 +17,9 @@ if (Test-Path (Join-Path $stage "models\originals")) {
   Remove-Item (Join-Path $stage "models\originals") -Recurse -Force
 }
 
+node (Join-Path $root "tools\hash-release-assets.mjs") $stage
+if ($LASTEXITCODE -ne 0) { throw "hash-release-assets failed" }
+
 Push-Location $root
 try {
   npx wrangler pages deploy .pages-deploy `

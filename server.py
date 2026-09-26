@@ -122,10 +122,14 @@ def find_open_port(starting_port=8000, max_attempts=10):
     return starting_port
 
 
+class NebuchadnezzarHTTPServer(ThreadingHTTPServer):
+    request_queue_size = 128
+
+
 def run_server():
     os.chdir(os.path.dirname(os.path.abspath(__file__)))
     port = find_open_port(PORT)
-    server = ThreadingHTTPServer((HOST, port), NebuchadnezzarHTTPHandler)
+    server = NebuchadnezzarHTTPServer((HOST, port), NebuchadnezzarHTTPHandler)
     url = f"http://127.0.0.1:{port}/index.html"
 
     print("=" * 66)

@@ -1,0 +1,12 @@
+name = "exhibit-rate-gate"
+main = "src/index.js"
+compatibility_date = "2024-09-23"
+workers_dev = false
+
+[[durable_objects.bindings]]
+name = "RATE_GATE"
+class_name = "ExhibitRateGate"
+
+[[migrations]]
+tag = "v1"
+new_sqlite_classes = ["ExhibitRateGate"]

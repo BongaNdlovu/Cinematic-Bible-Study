@@ -12,7 +12,8 @@
     "compress:visions": "node tools/compress/compress_visions.mjs",
     "compress:daniel11": "node tools/compress/compress_daniel11.mjs",
     "lint": "oxlint",
-    "test": "node tools/verify-headers.mjs && node tools/verify/verify_insights.mjs && node tools/verify/verify_ratelimit.mjs",
+    "test": "node tools/verify-headers.mjs && node tools/verify/verify_insights.mjs && node tools/verify/verify_ratelimit.mjs && node tools/verify/verify_progress_sync.mjs && node tools/verify/verify_rate_gate.mjs && node tools/verify/verify_hash_release.mjs && node tools/verify/verify_load.mjs",
+    "rollback": "node tools/rollback-deploy.mjs",
     "deploy:pages": "powershell -ExecutionPolicy Bypass -File tools/deploy-cloudflare-pages.ps1"
   },
   "dependencies": {

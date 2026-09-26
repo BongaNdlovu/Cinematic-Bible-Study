@@ -54,15 +54,19 @@ assert(auth.includes('rate_limit'), 'auth must return rate_limit when capped');
 
 const cf = fs.readFileSync(path.join(ROOT, 'functions/_middleware.js'), 'utf8');
 assert(cf.includes('status: 429'), 'Cloudflare middleware must return 429');
-assert(cf.includes("take(ip, 'models', 60, 60000)"), 'Cloudflare must cap /models at 60/min');
-assert(cf.includes("take(ip, 'bible', 30, 60000)"), 'Cloudflare must cap /bible at 30/min');
-assert(cf.includes("take(ip, 'all', 240, 60000)"), 'Cloudflare must cap other paths at 240/min');
+assert(!cf.includes('new Map('), 'Cloudflare middleware must not keep a private counter');
+assert(cf.includes('idFromName("exhibit")'), 'Cloudflare must ask the shared rate gate');
+assert(cf.includes('limit_unavailable'), 'Cloudflare must record a missing counter');
+
+const gate = fs.readFileSync(path.join(ROOT, 'workers/exhibit-rate-gate/src/rate-gate.js'), 'utf8');
+assert(gate.includes('models: [60, 60000]'), 'shared gate must cap /models at 60/min');
+assert(gate.includes('bible: [30, 60000]'), 'shared gate must cap /bible at 30/min');
+assert(gate.includes('all: [240, 60000]'), 'shared gate must cap other paths at 240/min');
 
 const vercel = fs.readFileSync(path.join(ROOT, 'middleware.js'), 'utf8');
 assert(vercel.includes('status: 429'), 'Vercel middleware must return 429');
-assert(vercel.includes("take(ip, 'models', 60, 60000)"), 'Vercel must cap /models at 60/min');
-assert(vercel.includes("take(ip, 'bible', 30, 60000)"), 'Vercel must cap /bible at 30/min');
-assert(vercel.includes("take(ip, 'all', 240, 60000)"), 'Vercel must cap other paths at 240/min');
+assert(!vercel.includes('new Map('), 'Vercel middleware must not keep a private counter');
+assert(vercel.includes('/__rate'), 'Vercel must ask the Pages rate gate');
 assert(vercel.includes('x-middleware-next'), 'Vercel middleware must continue with x-middleware-next');
 
 const pkg = fs.readFileSync(path.join(ROOT, 'package.json'), 'utf8');

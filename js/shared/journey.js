@@ -200,15 +200,45 @@
     return raw;
   }
 
+  let journeyDamaged = false;
+  let damageReported = false;
+
+  function noteDamage() {
+    journeyDamaged = true;
+    if (damageReported) return;
+    damageReported = true;
+    if (window.SiteErrors && typeof window.SiteErrors.show === "function") {
+      window.SiteErrors.show("Saved progress on this device could not be read. It was left unchanged.", "storage");
+    }
+  }
+
+  function rawJourney() {
+    try { return localStorage.getItem(KEY); } catch (e) { return null; }
+  }
+
   function load() {
+    const raw = rawJourney();
+    if (raw == null || raw === "") return normalize(migrateMastery({}));
     try {
-      return normalize(migrateMastery(JSON.parse(localStorage.getItem(KEY) || "{}")));
+      return normalize(migrateMastery(JSON.parse(raw)));
     } catch (e) {
-      return normalize(migrateMastery({}));
+      noteDamage();
+      return normalize({});
     }
   }
 
   function save(partial) {
+    const raw = rawJourney();
+    if (raw) {
+      try { JSON.parse(raw); } catch (e) {
+        noteDamage();
+        return normalize({});
+      }
+    }
+    if (journeyDamaged) {
+      noteDamage();
+      return normalize({});
+    }
     const cur = load();
     const patch = partial || {};
     const next = normalize(Object.assign({}, cur, patch, { t: Date.now() }));
@@ -668,6 +698,7 @@
   window.BAJourney = {
     load: load,
     save: save,
+    isDamaged: function () { return journeyDamaged; },
     unlock: unlock,
     isUnlocked: isUnlocked,
     prefersReducedMotion: prefersReducedMotion,

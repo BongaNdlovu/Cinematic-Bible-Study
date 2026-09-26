@@ -1,3 +1,8 @@
 name = "cinematic-bible-study-daniel"
 compatibility_date = "2024-09-23"
 pages_build_output_dir = "."
+
+[[durable_objects.bindings]]
+name = "RATE_GATE"
+class_name = "ExhibitRateGate"
+script_name = "exhibit-rate-gate"
