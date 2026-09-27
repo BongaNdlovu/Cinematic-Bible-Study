@@ -5,6 +5,7 @@
   let user = null;
   let accessToken = "";
   let signingIn = false;
+  let passwordRecovery = false;
   let moderator = false;
   let moderatorGen = 0;
   let readySettled = false;
@@ -131,10 +132,25 @@
     if (/network|fetch|failed to fetch|offline/i.test(raw + " " + code)) {
       return "Sign-in could not start. Check your connection and try again.";
     }
+    if (code === "invalid_credentials" || /invalid login|invalid credentials/i.test(raw)) {
+      return "That email or password is not right.";
+    }
+    if (code === "email_not_confirmed" || /not confirmed/i.test(raw)) {
+      return "Check your email and confirm the address, then sign in.";
+    }
+    if (code === "user_already_exists" || code === "email_exists" || /already registered|already exists/i.test(raw)) {
+      return "That email already has an account. Sign in, or use Google.";
+    }
+    if (code === "weak_password" || (/password/i.test(raw) && /weak|least|characters/i.test(raw))) {
+      return "Use a password with at least 8 characters.";
+    }
     if (code === "session" || /session/i.test(raw)) {
       return "Your session ended. Sign in again to continue.";
     }
-    return "Sign-in failed. Agree to the terms, then try again.";
+    if (/rate limit|over_email|too many/i.test(raw + " " + code)) {
+      return "Please wait before trying again.";
+    }
+    return "Sign-in failed. Accept the terms, then try again.";
   }
 
   function consumeUrlError() {
@@ -197,21 +213,21 @@
     return true;
   }
 
-  function signIn() {
+  function beginAuth() {
     if (!configured() || !client) {
       reportError("Sign-in is unavailable on this copy of the site.", "auth");
-      return Promise.resolve({ error: new Error("not configured") });
+      return { error: new Error("not configured") };
     }
     if (typeof navigator !== "undefined" && navigator.onLine === false) {
       reportError("You appear to be offline. Sign-in needs a connection.", "offline");
-      return Promise.resolve({ error: new Error("offline") });
+      return { error: new Error("offline") };
     }
     if (signingIn) {
-      return Promise.resolve({ error: new Error("busy") });
+      return { error: new Error("busy") };
     }
     if (!takeAuthSlot()) {
       reportError("Please wait before signing in again.", "auth");
-      return Promise.resolve({ error: new Error("rate_limit") });
+      return { error: new Error("rate_limit") };
     }
     clearError();
     signingIn = true;
@@ -219,25 +235,90 @@
     if (window.ScrollTerms && typeof window.ScrollTerms.setBusy === "function") {
       window.ScrollTerms.setBusy(true);
     }
+    return null;
+  }
+
+  function finishAuth(res, err) {
+    signingIn = false;
+    if (err) reportError(friendlyAuthError(err), "auth");
+    else if (res && res.error) reportError(friendlyAuthError(res.error), "auth");
+    renderAll();
+    if (window.ScrollTerms && typeof window.ScrollTerms.setBusy === "function") {
+      window.ScrollTerms.setBusy(false);
+    }
+    return err ? { error: err } : res;
+  }
+
+  function signIn() {
+    const blocked = beginAuth();
+    if (blocked) return Promise.resolve(blocked);
     return client.auth.signInWithOAuth({
       provider: "google",
       options: { redirectTo: redirectTo() }
     }).then(function (res) {
-      signingIn = false;
-      if (res && res.error) reportError(friendlyAuthError(res.error), "auth");
-      renderAll();
       const redirected = !!(res && res.data && res.data.url && !(res && res.error));
-      if (!redirected && window.ScrollTerms && typeof window.ScrollTerms.setBusy === "function") {
-        window.ScrollTerms.setBusy(false);
+      if (redirected) {
+        signingIn = false;
+        if (res && res.error) reportError(friendlyAuthError(res.error), "auth");
+        renderAll();
+        return res;
       }
+      return finishAuth(res);
+    }).catch(function (err) {
+      return finishAuth(null, err);
+    });
+  }
+
+  function signInEmail(email, password) {
+    const blocked = beginAuth();
+    if (blocked) return Promise.resolve(blocked);
+    return client.auth.signInWithPassword({
+      email: String(email || "").trim(),
+      password: String(password || "")
+    }).then(function (res) {
+      return finishAuth(res);
+    }).catch(function (err) {
+      return finishAuth(null, err);
+    });
+  }
+
+  function signUpEmail(email, password) {
+    const blocked = beginAuth();
+    if (blocked) return Promise.resolve(blocked);
+    return client.auth.signUp({
+      email: String(email || "").trim(),
+      password: String(password || ""),
+      options: { emailRedirectTo: redirectTo() }
+    }).then(function (res) {
+      return finishAuth(res);
+    }).catch(function (err) {
+      return finishAuth(null, err);
+    });
+  }
+
+  function resetPassword(email) {
+    const blocked = beginAuth();
+    if (blocked) return Promise.resolve(blocked);
+    return client.auth.resetPasswordForEmail(String(email || "").trim(), {
+      redirectTo: redirectTo()
+    }).then(function (res) {
+      return finishAuth(res);
+    }).catch(function (err) {
+      return finishAuth(null, err);
+    });
+  }
+
+  function updatePassword(password) {
+    if (!configured() || !client) {
+      reportError("Sign-in is unavailable on this copy of the site.", "auth");
+      return Promise.resolve({ error: new Error("not configured") });
+    }
+    return client.auth.updateUser({ password: String(password || "") }).then(function (res) {
+      if (res && !res.error) passwordRecovery = false;
+      if (res && res.error) reportError(friendlyAuthError(res.error), "auth");
       return res;
     }).catch(function (err) {
-      signingIn = false;
       reportError(friendlyAuthError(err), "auth");
-      renderAll();
-      if (window.ScrollTerms && typeof window.ScrollTerms.setBusy === "function") {
-        window.ScrollTerms.setBusy(false);
-      }
       return { error: err };
     });
   }
@@ -352,7 +433,9 @@
       }
     });
     client.auth.onAuthStateChange(function (event, session) {
+      if (event === "PASSWORD_RECOVERY") passwordRecovery = true;
       if (event === "SIGNED_OUT") {
+        passwordRecovery = false;
         setUser(null, null);
         return;
       }
@@ -374,6 +457,11 @@
   window.ScrollAuth = {
     signIn: signIn,
     signInGoogle: signIn,
+    signInEmail: signInEmail,
+    signUpEmail: signUpEmail,
+    resetPassword: resetPassword,
+    updatePassword: updatePassword,
+    isPasswordRecovery: function () { return passwordRecovery; },
     signOut: signOut,
     getUser: getUser,
     getClient: getClient,

@@ -37,7 +37,8 @@ pages.forEach(p => {
   assert(c.includes('js/shared/insights.js'), `${p} must include js/shared/insights.js`);
 });
 const indexHtml = fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8');
-assert(indexHtml.includes('data-insight-optout'), 'index.html must include opt-out toggle');
+assert(!indexHtml.includes('data-insight-optout'), 'index.html must not offer an analytics off switch');
+assert(!indexHtml.includes('Stop usage analytics'), 'index.html must not offer an analytics off switch');
 assert(indexHtml.includes('admin-insights-link'), 'index.html must include admin-insights-link');
 assert(indexHtml.includes('insights.html'), 'index.html must link to insights.html');
 
@@ -45,8 +46,8 @@ const studyHtml = fs.readFileSync(path.join(ROOT, 'study.html'), 'utf8');
 assert(studyHtml.includes('js/shared/insights.js'), 'study.html must include insights.js');
 
 const compJs = fs.readFileSync(path.join(ROOT, 'js/study/competency.js'), 'utf8');
-assert(compJs.includes('data-insight-optout'), 'competency.js must include opt-out toggle in progress modal');
-assert(compJs.includes('bindOptOuts'), 'competency.js must bind opt-outs on modal open');
+assert(!compJs.includes('data-insight-optout'), 'competency.js must not offer an analytics off switch');
+assert(!compJs.includes('Stop usage analytics'), 'competency.js must not offer an analytics off switch');
 
 // CSP checks
 const headers = fs.readFileSync(path.join(ROOT, '_headers'), 'utf8');
@@ -61,17 +62,26 @@ console.log('✓ HTML pages, opt-outs, and CSP headers verified.');
 // 3. Check terms and journey version
 console.log('3. Checking terms and journey TERMS_VERSION...');
 const journeyJs = fs.readFileSync(path.join(ROOT, 'js/shared/journey.js'), 'utf8');
-assert(/TERMS_VERSION\s*=\s*4/.test(journeyJs), 'TERMS_VERSION must be 4 in journey.js');
+assert(/TERMS_VERSION\s*=\s*5/.test(journeyJs), 'TERMS_VERSION must be 5 in journey.js');
 
 const accountHtml = fs.readFileSync(path.join(ROOT, 'account.html'), 'utf8');
 assert(accountHtml.includes('id="account-hub"'), 'account.html must be the Account hub');
 assert(accountHtml.includes('What we learn from your study'), 'account.html missing "What we learn from your study" header');
 assert(accountHtml.includes('anonymous until sign-in'), 'account.html must mention anonymous learning until sign-in');
+assert(!accountHtml.includes('You may stop usage analytics'), 'account.html must not promise an analytics off switch');
+assert(!accountHtml.includes('Do Not Track'), 'account.html must not promise a Do Not Track stop');
 assert(accountHtml.includes('You may browse the study, map, and gallery without an account'), 'account.html must let visitors browse without an account');
 assert(!accountHtml.includes('This exhibit is closed'), 'account.html must not say the exhibit is closed');
 assert(accountHtml.includes('js/shared/account.js'), 'account.html must load the hub script');
 assert(accountHtml.includes('id="account-accept"'), 'account.html must keep Accept on the terms card');
 assert(accountHtml.includes('id="account-signin"'), 'account.html must keep Google sign-in on the hub');
+assert(accountHtml.includes('id="account-error"'), 'account.html must keep a visible hub error box');
+assert(accountHtml.includes('id="account-email"'), 'account.html must offer email sign-in');
+assert(accountHtml.includes('id="account-password"'), 'account.html must offer a password field');
+assert(accountHtml.includes('id="account-settings"'), 'account.html must keep centralized settings');
+assert(accountHtml.includes('id="account-cert-name"'), 'account.html must keep the certificate name in settings');
+assert(!accountHtml.includes('data-insight-optout'), 'account.html must not keep analytics opt-out in settings');
+assert(!accountHtml.includes('id="account-study-mode"'), 'account.html must not keep the study profile in settings');
 assert(accountHtml.includes('id="account-signout"'), 'account.html must keep sign-out on the hub');
 assert(!accountHtml.includes('id="terms-agree"'), 'account.html must not keep a terms checkbox');
 
@@ -94,8 +104,13 @@ assert(!termsJs.includes('This exhibit is closed'), 'terms.js must not say the e
 
 const authJs = fs.readFileSync(path.join(ROOT, 'js/shared/auth.js'), 'utf8');
 assert(authJs.includes('account.html'), 'auth.js must return Google OAuth to the Account hub');
+assert(authJs.includes('signInWithPassword'), 'auth.js must support email-and-password sign-in');
+assert(authJs.includes('signUp'), 'auth.js must support email account creation');
+assert(authJs.includes('resetPasswordForEmail'), 'auth.js must support password reset');
 assert(!authJs.includes('auth-sign-out'), 'auth.js must not draw a Sign out button on other pages');
 assert(!authJs.includes('clearPendingTerms'), 'auth.js must not wipe a once-agreed terms record on sign-out');
+const insightsSrc = fs.readFileSync(path.join(ROOT, 'js/shared/insights.js'), 'utf8');
+assert(insightsSrc.includes('account-hub'), 'insights.js must skip the floating profile card on the Account hub');
 
 const dashJs = fs.readFileSync(path.join(ROOT, 'js/home/dash.js'), 'utf8');
 assert(dashJs.includes('requestSignIn'), 'dash.js must send Home sign-in to the Account hub');
@@ -304,19 +319,13 @@ const qScroll2 = JSON.parse(global.localStorage.getItem('baInsightsQueue') || '[
 const scrollEvents2 = qScroll2.filter(e => e.event === 'scroll_depth');
 assert(scrollEvents2.some(e => e.detail.depth === 100), 'Should record 100% milestone at near-bottom scroll');
 
-// Test opt-out
 Insights.setOptOut(true);
-assert.strictEqual(Insights.optedOut(), true, 'optedOut() must be true after setOptOut(true)');
-const prevInsertedCount = insertedEvents.length;
+assert.strictEqual(Insights.optedOut(), false, 'optedOut() stays off; tracking has no visitor switch');
+const queuedBefore = JSON.parse(global.localStorage.getItem('baInsightsQueue') || '[]').length;
 Insights.track('feature_use', 3, { feature: 'audio' });
-const qOpt = JSON.parse(global.localStorage.getItem('baInsightsQueue') || '[]');
-assert.strictEqual(qOpt.length, 0, 'No events should be queued when opted out');
-Insights.flush();
-assert.strictEqual(insertedEvents.length, prevInsertedCount, 'No events flushed when opted out');
-
-// Test opt-in again
-Insights.setOptOut(false);
-assert.strictEqual(Insights.optedOut(), false, 'optedOut() should be false after setOptOut(false)');
+const qKeep = JSON.parse(global.localStorage.getItem('baInsightsQueue') || '[]');
+assert.ok(qKeep.length > queuedBefore, 'Events must still queue after setOptOut(true)');
+assert.strictEqual(Insights.optedOut(), false, 'optedOut() must stay false');
 
 const surveyOk = await Insights.insertSurvey({ responses: { kind: 'profile' } });
 assert.strictEqual(surveyOk.ok, true, 'insertSurvey must report success');

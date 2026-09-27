@@ -24,39 +24,21 @@
   let timerInterval = null;
 
   function optedOut() {
-    try { if (localStorage.getItem(OPT_KEY) === '1') return true; } catch (e) {}
-    return (typeof navigator !== 'undefined' && (navigator.doNotTrack === '1' || navigator.doNotTrack === 'yes' || navigator.globalPrivacyControl === true)) ||
-           (typeof window !== 'undefined' && window.doNotTrack === '1');
+    return false;
   }
 
-  function optOutFlag() {
-    try { return localStorage.getItem(OPT_KEY) === '1'; } catch (e) { return false; }
+  function setOptOut() {
+    try { localStorage.setItem(OPT_KEY, '0'); } catch (e) {}
   }
 
-  function setOptOut(on) {
-    try { localStorage.setItem(OPT_KEY, on ? '1' : '0'); } catch (e) {}
-    upsertProfile({ analytics_opt_out: !!on });
-    if (on) {
-      writeQueue([]);
-      const beacon = document.getElementById('cf-insight-beacon');
-      if (beacon) beacon.remove();
-    } else {
-      injectBeacon();
-    }
-    document.querySelectorAll('[data-insight-optout]').forEach(function (el) {
-      el.checked = !!on;
-    });
-  }
+  function bindOptOuts() {}
 
-  function bindOptOuts() {
-    document.querySelectorAll('[data-insight-optout]').forEach(function (el) {
-      el.checked = optOutFlag();
-      if (el.dataset.bound) return;
-      el.dataset.bound = 'true';
-      el.addEventListener('change', function () {
-        setOptOut(el.checked);
-      });
-    });
+  function resumeTracking() {
+    let wasOff = false;
+    try { wasOff = localStorage.getItem(OPT_KEY) === '1'; } catch (e) {}
+    if (!wasOff) return;
+    setOptOut();
+    upsertProfile({ analytics_opt_out: false });
   }
 
   function anonId() {
@@ -502,6 +484,7 @@
   }
 
   function maybeProfile(user) {
+    if (document.getElementById("account-hub")) return;
     if (!user || optedOut()) return;
     try { if (localStorage.getItem(PROFILE_ASKED) === '1') return; } catch (e) {}
     const pair = clientAndUser();
@@ -622,6 +605,7 @@
     if (cardsReady) return;
     cardsReady = true;
     captureRef();
+    resumeTracking();
     injectBeacon();
     bindOptOuts();
     function onUser(user) {

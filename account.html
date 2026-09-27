@@ -4,21 +4,21 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Account — The Scroll of Daniel</title>
-  <meta name="description" content="Sign in, sign out, and agree to the terms for The Scroll of Daniel. One Account page for the whole exhibit.">
+  <meta name="description" content="Sign in with email or Google, manage settings, and agree to the terms for The Scroll of Daniel.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://cinematic-bible-study-daniel.pages.dev/account">
   <meta property="og:title" content="Account — The Scroll of Daniel">
-  <meta property="og:description" content="Sign in, sign out, and agree to the terms for The Scroll of Daniel.">
+  <meta property="og:description" content="Sign in with email or Google, manage settings, and agree to the terms.">
   <meta property="og:image" content="https://cinematic-bible-study-daniel.pages.dev/assets/site/hero-main.jpg">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Account — The Scroll of Daniel">
-  <meta name="twitter:description" content="Sign in, sign out, and agree to the terms for The Scroll of Daniel.">
+  <meta name="twitter:description" content="Sign in with email or Google, manage settings, and agree to the terms.">
   <meta name="twitter:image" content="https://cinematic-bible-study-daniel.pages.dev/assets/site/hero-main.jpg">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📜</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;1,500;1,600&family=Inter:wght@400;500;600&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/site.css?v=29">
-  <link rel="stylesheet" href="css/terms.css">
+  <link rel="stylesheet" href="css/site.css?v=31">
+  <link rel="stylesheet" href="css/terms.css?v=2">
   <script src="js/shared/journey.js"></script>
   <script src="js/shared/auth-config.js"></script>
   <script src="vendor/supabase/supabase.js"></script>
@@ -27,6 +27,7 @@
   <script src="js/shared/auth.js"></script>
   <script src="js/shared/terms.js"></script>
   <script src="js/shared/insights.js"></script>
+  <script src="js/shared/progress-sync.js"></script>
   <script src="js/shared/account.js"></script>
   <script>if (window.BAJourney) window.BAJourney.load();</script>
 </head>
@@ -45,8 +46,9 @@
   </nav>
   <main class="account-hub" id="account-hub">
     <p class="account-kicker">Account</p>
-    <h1>Sign in and terms</h1>
+    <h1>Sign in and settings</h1>
     <p class="account-lead" id="account-lead">Accept the terms once, then sign in to begin the sittings.</p>
+    <div id="account-error" class="terms-error" role="alert" hidden></div>
     <div class="account-session" id="account-session" hidden>
       <p>Signed in as <strong id="account-name"></strong></p>
       <button type="button" id="account-signout" class="terms-btn terms-btn-block">Sign out</button>
@@ -64,7 +66,7 @@
         <h3>How your study is kept</h3>
         <p>Your place in the sitting and your progress stay on this device while you browse. After you sign in they are also saved with your profile so you can continue where you left off on another device.</p>
         <h3>What we learn from your study</h3>
-        <p>While you study, the exhibit records simple study events: which lessons you open and finish, which steps of a sitting you visit, your answers to checkpoint questions, and the time spent on a lesson. Use is anonymous until sign-in. With your signed-in profile, your study progress and optional answers are collected to improve the lessons. No selling, no advertising. You may stop usage analytics from the Progress panel or the home page. If your browser sends a Do Not Track signal, nothing is recorded. To ask for deletion, email the site operator.</p>
+        <p>While you study, the exhibit records simple study events: which lessons you open and finish, which steps of a sitting you visit, your answers to checkpoint questions, and the time spent on a lesson. Use is anonymous until sign-in. With your signed-in profile, your study progress and optional answers are collected to improve the lessons. No selling, no advertising. To ask for deletion, email the site operator.</p>
         <h3>Scripture and the exhibit</h3>
         <p>Bible quotations are from the King James Version. The lessons, maps, images, and reconstructions are for study on this site. You may not copy the exhibit to sell, scrape, or republish as your own.</p>
         <h3>What this site is not</h3>
@@ -76,15 +78,49 @@
         <h3>Your agreement</h3>
         <p>By pressing Accept you state that you have read these terms, that you are old enough to use the site, and that you agree before you sign in. If the terms change, you will be asked to agree again.</p>
       </div>
-      <div id="terms-error" class="terms-error" role="alert" hidden></div>
       <div class="terms-actions">
         <button type="submit" id="account-accept" class="terms-btn solid terms-btn-block">Accept</button>
       </div>
     </form>
     <div class="account-signin-box" id="account-signin-box" hidden>
       <p class="account-signin-kicker">Sign in</p>
+      <p class="account-note" id="account-signin-note" hidden></p>
+      <form id="account-email-form" class="account-email-form" novalidate>
+        <label class="account-field">
+          <span>Email</span>
+          <input type="email" id="account-email" autocomplete="username" inputmode="email">
+        </label>
+        <label class="account-field">
+          <span>Password</span>
+          <input type="password" id="account-password" autocomplete="current-password">
+        </label>
+        <button type="submit" id="account-email-go" class="terms-btn solid terms-btn-block">Sign in with email</button>
+      </form>
+      <div class="account-email-actions">
+        <button type="button" id="account-email-create" class="terms-btn terms-btn-block">Create an account</button>
+        <button type="button" id="account-email-reset" class="terms-btn terms-btn-block">Forgot password</button>
+      </div>
+      <p class="account-or">or</p>
       <button type="button" id="account-signin" class="terms-btn solid terms-btn-block">Sign in with Google</button>
     </div>
+    <section class="account-settings" id="account-settings" hidden>
+      <p class="account-signin-kicker">Settings</p>
+      <p class="account-settings-lead">Certificate name and password stay on this page.</p>
+      <p class="account-note" id="account-settings-note" hidden></p>
+      <label class="account-field">
+        <span>Name on the certificate</span>
+        <input type="text" id="account-cert-name" maxlength="80" autocomplete="name">
+      </label>
+      <button type="button" id="account-cert-save" class="terms-btn solid terms-btn-block">Save name</button>
+      <div class="account-password-box" id="account-password-box">
+        <p class="account-signin-kicker">Password</p>
+        <label class="account-field">
+          <span>New password</span>
+          <input type="password" id="account-new-password" autocomplete="new-password" minlength="8">
+        </label>
+        <button type="button" id="account-password-save" class="terms-btn solid terms-btn-block">Update password</button>
+      </div>
+    </section>
   </main>
 </body>
 </html>
