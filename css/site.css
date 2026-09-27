@@ -1189,6 +1189,65 @@ body.dash .site-nav { display: none; }
   border-radius: var(--dash-radius);
   box-shadow: var(--dash-shadow);
 }
+.dash-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-top: 2px;
+}
+.dash-top-auth {
+  position: relative;
+  z-index: 4;
+  display: flex;
+  align-items: center;
+}
+.dash-top-auth.is-signed-in .dash-top-signin { display: none; }
+.dash-top-auth:not(.is-signed-in) .auth-slot { display: none; }
+.dash-top-signin,
+.dash-top-auth .auth-account-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 46px;
+  padding: 10px 16px;
+  border-radius: 999px;
+  border: 1px solid rgba(212, 175, 55, 0.36);
+  background: rgba(10, 8, 6, 0.46);
+  backdrop-filter: blur(10px);
+  color: var(--gold-soft);
+  font-family: inherit;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  text-decoration: none;
+  line-height: 1.2;
+  max-width: 16rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  transition: border-color .2s ease, background .2s ease, box-shadow .2s ease;
+}
+.dash-top-signin.is-lit {
+  border-color: rgba(255, 231, 160, 0.85);
+  background: linear-gradient(180deg, rgba(212, 175, 55, 0.28), rgba(122, 92, 28, 0.55));
+  box-shadow:
+    0 0 14px rgba(212, 175, 55, 0.45),
+    0 0 28px rgba(212, 175, 55, 0.22);
+  animation: empirePulse 2.2s ease-in-out infinite;
+}
+.dash-hero-actions:not(.is-signed-in) .dash-hero-cta {
+  box-shadow:
+    0 0 6px rgba(212, 175, 55, 0.18),
+    0 0 12px rgba(212, 175, 55, 0.08);
+}
+.dash-top-signin:hover,
+.dash-top-auth .auth-account-link:hover {
+  border-color: rgba(212, 175, 55, 0.72);
+  background: rgba(212, 175, 55, 0.2);
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
+}
 .dash-hero-reel {
   position: absolute;
   inset: 0;
@@ -2019,6 +2078,7 @@ body.dash .witnesses {
   }
   body.dash .dash-empire-ticker [data-era].is-active,
   body.dash .dash-hero-cta-spin,
+  body.dash .dash-top-signin.is-lit,
   body.dash .witness-track {
     animation: none !important;
   }
@@ -2040,6 +2100,7 @@ body.dash .witnesses {
   .dash-hero-verse,
   .dash-hero-reel-caption { display: none; }
   .dash-hero-copy { right: 16px; max-width: none; }
+  .dash-hero-actions { gap: 8px; }
   .dash-empire-ticker [data-era] { padding: 4px 8px; font-size: 9px; }
   .dash-empire-sep { width: 10px; }
   .dash-grid { grid-template-columns: 1fr; }
@@ -2079,6 +2140,7 @@ body.dash .witnesses {
   .vignette,
   footer,
   button,
+  .dash-top-auth,
   .auth-slot,
   .instrument-tabs,
   #btn-atmosphere-toggle,

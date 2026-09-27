@@ -195,22 +195,65 @@ async function main() {
       } catch {}
     });
     const page = await ctx.newPage();
-    const targets = [
+    const browseTargets = [
       "study.html",
       "study.html?sheet=3",
       "map.html",
       "gallery.html",
-      "insights.html",
     ];
-    for (const t of targets) {
+    for (const t of browseTargets) {
       const entry = { path: t, pass: false };
       await page.goto(`${BASE}/${t}`, { waitUntil: "domcontentloaded", timeout: 60000 });
       await page.waitForTimeout(900);
       entry.state = await gateState(page);
-      entry.screenshot = await shot(page, `blocked-${t.replace(/[^\w]+/g, "_")}`);
-      entry.pass = entry.state.overlayVisible && entry.state.siteLocked && !entry.state.canEnter && !entry.state.signedIn;
+      entry.screenshot = await shot(page, `browse-${t.replace(/[^\w]+/g, "_")}`);
+      entry.pass = !entry.state.overlayVisible && !entry.state.siteLocked && entry.state.canEnter && !entry.state.signedIn;
       entry.reason = entry.pass
-        ? "overlay+site-locked; canEnter false"
+        ? "unsigned browse; terms overlay stays closed"
+        : JSON.stringify(entry.state);
+      report.access.signedOut.push(entry);
+      report.access.deepLinks.push(entry);
+    }
+    {
+      const entry = { path: "insights.html", pass: false };
+      await page.goto(`${BASE}/insights.html`, { waitUntil: "domcontentloaded", timeout: 60000 });
+      await page.waitForTimeout(900);
+      entry.state = await gateState(page);
+      entry.state.insightsGate = await page.evaluate(() => {
+        const g = document.getElementById("insights-gate");
+        return !!(g && !g.hidden);
+      });
+      entry.screenshot = await shot(page, "browse-insights_html");
+      entry.pass = !entry.state.overlayVisible && !entry.state.siteLocked && entry.state.insightsGate;
+      entry.reason = entry.pass
+        ? "insights uses the moderator page gate, not the terms overlay"
+        : JSON.stringify(entry.state);
+      report.access.signedOut.push(entry);
+      report.access.deepLinks.push(entry);
+    }
+    {
+      const entry = { path: "account.html", pass: false };
+      await page.goto(`${BASE}/account.html`, { waitUntil: "domcontentloaded", timeout: 60000 });
+      await page.waitForTimeout(900);
+      entry.state = await gateState(page);
+      entry.state.hub = await page.evaluate(() => {
+        const hub = document.getElementById("account-hub");
+        const form = document.getElementById("terms-form");
+        const signIn = document.getElementById("account-signin");
+        const accept = document.getElementById("account-accept");
+        const signOut = document.getElementById("account-signout");
+        return {
+          hasHub: !!hub,
+          hasForm: !!(form && !form.hidden),
+          hasAccept: !!(accept && !accept.hidden),
+          hasSignIn: !!(signIn && !signIn.hidden),
+          signOutHidden: !signOut || signOut.hidden,
+        };
+      });
+      entry.screenshot = await shot(page, "browse-account_html");
+      entry.pass = !entry.state.overlayVisible && !entry.state.siteLocked && entry.state.hub.hasHub && entry.state.hub.hasForm && entry.state.hub.hasAccept && !entry.state.hub.hasSignIn && entry.state.hub.signOutHidden;
+      entry.reason = entry.pass
+        ? "account hub shows terms Accept first; no overlay on other pages"
         : JSON.stringify(entry.state);
       report.access.signedOut.push(entry);
       report.access.deepLinks.push(entry);
@@ -253,11 +296,11 @@ async function main() {
       pass: signedInGate.signedIn && signedInGate.canEnter && !signedInGate.siteLocked,
     };
     report.access.notes.push(
-      "Mock session + termsByUser pre-seeded so canEnter is true without Google OAuth."
+      "Mock session + termsByUser pre-seeded so signed-in checks run without Google OAuth. Unsigned visitors may still browse study, map, and gallery."
     );
 
     // Static pages while signed in
-    for (const p of ["index.html", "study.html", "map.html", "gallery.html", "insights.html", "404.html"]) {
+    for (const p of ["index.html", "study.html", "map.html", "gallery.html", "insights.html", "404.html", "account.html"]) {
       const entry = { page: p, status: 0, pass: false };
       const res = await page.goto(`${BASE}/${p}`, { waitUntil: "domcontentloaded", timeout: 60000 });
       entry.status = res?.status() || 0;
@@ -417,8 +460,8 @@ async function main() {
     const afterOut = await gateState(page);
     report.access.session.signOut = {
       ...afterOut,
-      pass: !afterOut.signedIn && afterOut.siteLocked && !afterOut.canEnter,
-      screenshot: await shot(page, "session-after-signout-blocked"),
+      pass: !afterOut.signedIn && !afterOut.siteLocked && afterOut.canEnter,
+      screenshot: await shot(page, "session-after-signout-browse"),
     };
 
     // preview=full on localhost still works for signed-out? Document — it is a local-only bypass.

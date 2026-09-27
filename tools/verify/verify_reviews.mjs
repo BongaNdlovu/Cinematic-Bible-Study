@@ -86,7 +86,7 @@ new Function(fs.readFileSync(path.join(ROOT, "js/shared/reviews.js"), "utf8"))()
 
 await global.window.ScrollReviews.loadApproved();
 assert.strictEqual(els["witness-empty"].hidden, false);
-assert.strictEqual(els["witness-empty"].textContent, "No reviews yet.");
+assert.strictEqual(els["witness-empty"].textContent, "No notes yet. Sign in after a sitting if you want to leave the first one.");
 assert.strictEqual(els["witness-list"].hidden, true);
 assert.strictEqual(els["witness-list"].children.length, 0);
 

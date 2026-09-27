@@ -1,8 +1,23 @@
 const WINDOWS = {
-  models: [60, 60000],
-  bible: [30, 60000],
   all: [240, 60000]
 };
+
+const STATIC_PREFIXES = [
+  "/assets/",
+  "/js/",
+  "/css/",
+  "/vendor/",
+  "/models/",
+  "/bible/"
+];
+
+function isStaticPath(path) {
+  const p = String(path || "");
+  for (let i = 0; i < STATIC_PREFIXES.length; i += 1) {
+    if (p.startsWith(STATIC_PREFIXES[i])) return true;
+  }
+  return false;
+}
 
 function takeBucket(store, ip, name, now) {
   const spec = WINDOWS[name];
@@ -16,7 +31,6 @@ function takeBucket(store, ip, name, now) {
 
 export function allow(store, ip, path, now) {
   const when = now || Date.now();
-  if (path.startsWith("/models/") && !takeBucket(store, ip, "models", when)) return false;
-  if (path.startsWith("/bible/") && !takeBucket(store, ip, "bible", when)) return false;
+  if (isStaticPath(path)) return true;
   return takeBucket(store, ip, "all", when);
 }

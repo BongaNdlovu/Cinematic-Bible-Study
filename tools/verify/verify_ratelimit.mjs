@@ -62,9 +62,16 @@ assert(cf.includes('status: 503'), 'Cloudflare must refuse the page when the cou
 assert(cf.includes('return "down"'), 'Cloudflare must not serve the page when the counter is missing');
 
 const gate = fs.readFileSync(path.join(ROOT, 'workers/exhibit-rate-gate/src/rate-gate.js'), 'utf8');
-assert(gate.includes('models: [60, 60000]'), 'shared gate must cap /models at 60/min');
-assert(gate.includes('bible: [30, 60000]'), 'shared gate must cap /bible at 30/min');
-assert(gate.includes('all: [240, 60000]'), 'shared gate must cap other paths at 240/min');
+assert(gate.includes('all: [240, 60000]'), 'shared gate must cap HTML and other paths at 240/min');
+assert(gate.includes('"/assets/"'), 'shared gate must skip /assets/');
+assert(gate.includes('"/js/"'), 'shared gate must skip /js/');
+assert(gate.includes('"/css/"'), 'shared gate must skip /css/');
+assert(gate.includes('"/vendor/"'), 'shared gate must skip /vendor/');
+assert(gate.includes('"/models/"'), 'shared gate must skip /models/');
+assert(gate.includes('"/bible/"'), 'shared gate must skip /bible/');
+assert(gate.includes('isStaticPath'), 'shared gate must skip static prefixes before the page cap');
+assert(!gate.includes('models: [60, 60000]'), 'shared gate must not cap /models at 60/min');
+assert(!gate.includes('bible: [30, 60000]'), 'shared gate must not cap /bible at 30/min');
 
 const vercel = fs.readFileSync(path.join(ROOT, 'middleware.js'), 'utf8');
 assert(vercel.includes('status: 429'), 'Vercel middleware must return 429');

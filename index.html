@@ -17,7 +17,7 @@
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📜</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;1,500;1,600&family=Inter:wght@400;500;600&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/site.css?v=29">
+  <link rel="stylesheet" href="css/site.css?v=31">
   <link rel="stylesheet" href="css/terms.css">
   <script src="js/shared/journey.js"></script>
   <script src="js/shared/auth-config.js"></script>
@@ -47,6 +47,7 @@
       <a href="gallery.html">3D Symbols</a>
       <a href="#witness-queue" id="admin-reviews-link" hidden>Admin</a>
       <a href="insights.html" id="admin-insights-link" hidden>Insights</a>
+      <a href="account.html">Account</a>
       <span class="auth-slot" data-auth-slot data-auth-variant="nav"></span>
     </div>
   </nav>
@@ -54,11 +55,11 @@
   <div class="dash-shell">
     <header class="dash-hero">
       <div class="dash-hero-reel" aria-hidden="true">
-        <img src="assets/site/hero-main.jpg?v=1" alt="" data-era="0" class="is-active">
-        <img src="assets/site/hero-place-babylon.png?v=1" alt="" data-era="1" loading="lazy">
-        <img src="assets/site/hero-place-persia.png?v=1" alt="" data-era="2" loading="lazy">
-        <img src="assets/site/hero-place-greece.png?v=1" alt="" data-era="3" loading="lazy">
-        <img src="assets/site/hero-place-rome.png?v=1" alt="" data-era="4" loading="lazy">
+        <img src="assets/site/hero-main.jpg?v=3" alt="" data-era="0" class="is-active">
+        <img src="assets/site/hero-place-babylon.jpg?v=3" alt="" data-era="1" loading="lazy">
+        <img src="assets/site/hero-place-persia.jpg?v=3" alt="" data-era="2" loading="lazy">
+        <img src="assets/site/hero-place-greece.jpg?v=3" alt="" data-era="3" loading="lazy">
+        <img src="assets/site/hero-place-rome.jpg?v=3" alt="" data-era="4" loading="lazy">
         <img class="reel-divided" src="assets/site/hero-place-divided.jpg?v=2" alt="" data-era="5" loading="lazy">
         <img class="reel-now" src="assets/site/hero-place-now.jpg?v=2" alt="" data-era="6" loading="lazy">
       </div>
@@ -82,13 +83,19 @@
           <span class="dash-empire-sep" aria-hidden="true"></span>
           <span data-era="6">Now</span>
         </div>
-        <a id="hero-cta" class="dash-hero-cta" href="study.html?sheet=0" data-hero-primary>
-          <span class="dash-hero-cta-spin" aria-hidden="true"></span>
-          <span class="dash-hero-cta-body">
-            <span id="hero-cta-label">Begin the sitting</span>
-            <span id="hero-cta-sub">25-minute guided sitting · Sitting 0 of 11</span>
-          </span>
-        </a>
+        <div class="dash-hero-actions">
+          <a id="hero-cta" class="dash-hero-cta" href="study.html?sheet=0" data-hero-primary>
+            <span class="dash-hero-cta-spin" aria-hidden="true"></span>
+            <span class="dash-hero-cta-body">
+              <span id="hero-cta-label">Begin the sitting</span>
+              <span id="hero-cta-sub">25-minute guided sitting · Sitting 0 of 11</span>
+            </span>
+          </a>
+          <div class="dash-top-auth">
+            <a class="dash-top-signin is-lit" href="account.html?next=index.html" data-dash-signin>Sign in</a>
+            <span class="auth-slot" data-auth-slot data-auth-variant="nav"></span>
+          </div>
+        </div>
       </div>
       <p class="dash-hero-reel-caption" id="hero-reel-caption" aria-live="polite">The dream of the image — Daniel 2</p>
       <p class="dash-hero-verse">
@@ -194,7 +201,7 @@
     <div class="witness-marquee" id="witness-marquee" hidden>
       <div class="witness-track" id="witness-list" hidden></div>
     </div>
-    <p class="witness-empty" id="witness-empty" hidden>No reviews yet.</p>
+    <p class="witness-empty" id="witness-empty" hidden>No notes yet. Sign in after a sitting if you want to leave the first one.</p>
     <div class="witness-form-card witness-own-review" id="witness-own-review" hidden>
       <h3>Your note</h3>
       <p id="witness-own-status" class="witness-own-status"></p>
@@ -215,7 +222,7 @@
     <div class="witness-form-card" id="witness-new-card">
       <h3>Leave a note for the next reader</h3>
       <p class="witness-form-lead">One honest sentence is enough — what held, what confused you, what you would tell a friend before sitting 1.</p>
-      <p id="witness-signin-hint">Sign in when you are ready to post. The box stays open either way.</p>
+      <p id="witness-signin-hint">Sign in on the <a href="account.html?next=index.html">Account</a> page when you are ready to post. The box stays open either way.</p>
       <form id="witness-form">
         <div class="witness-stars-field">
           <span class="witness-stars-label" id="witness-rating-label">Rating</span>
@@ -236,6 +243,6 @@
     </div>
   </section>
 
-  <script src="js/home/dash.js?v=15"></script>
+  <script src="js/home/dash.js?v=17"></script>
 </body>
 </html>

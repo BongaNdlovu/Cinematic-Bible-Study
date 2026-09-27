@@ -126,7 +126,7 @@
     );
   }
 
-  const EMPTY_REVIEWS = "No reviews yet.";
+  const EMPTY_REVIEWS = "No notes yet. Sign in after a sitting if you want to leave the first one.";
   const LOAD_REVIEWS_FAIL = "Could not load reviews.";
   const QUEUE_SAVE_FAIL = "Could not update that review. Try again.";
 

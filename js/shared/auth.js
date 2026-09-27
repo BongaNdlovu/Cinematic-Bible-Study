@@ -5,6 +5,8 @@
   let user = null;
   let accessToken = "";
   let signingIn = false;
+  let moderator = false;
+  let moderatorGen = 0;
   let readySettled = false;
   let readyResolve = function () {};
   const readyPromise = new Promise(function (resolve) {
@@ -158,22 +160,24 @@
     if (user && window.BAJourney && typeof window.BAJourney.commitPendingTerms === "function") {
       window.BAJourney.commitPendingTerms(user.id);
     }
-    if (!user && window.BAJourney && typeof window.BAJourney.clearPendingTerms === "function") {
-      try { window.BAJourney.clearPendingTerms(); } catch (e) {}
-    }
     persistIdentity(user);
     if (user) clearError();
-    listeners.forEach(function (fn) {
-      try { fn(user); } catch (err) {}
+    return refreshModerator().then(function () {
+      listeners.forEach(function (fn) {
+        try { fn(user); } catch (err) {}
+      });
+      renderAll();
+      if (window.ScrollTerms && typeof window.ScrollTerms.syncLock === "function") {
+        window.ScrollTerms.syncLock();
+      }
     });
-    renderAll();
-    if (window.ScrollTerms && typeof window.ScrollTerms.syncLock === "function") {
-      window.ScrollTerms.syncLock();
-    }
   }
 
   function redirectTo() {
-    return window.location.origin + window.location.pathname;
+    if (window.ScrollTerms && typeof window.ScrollTerms.accountUrl === "function") {
+      return window.ScrollTerms.accountUrl();
+    }
+    return new URL("account.html", window.location.href).href.replace(/[?#].*$/, "");
   }
 
   const AUTH_PER_HOUR = 5;
@@ -263,15 +267,26 @@
     return client;
   }
 
-  function isModerator() {
-    const allowed = Array.isArray(cfg.moderatorEmails) ? cfg.moderatorEmails : [];
-    const have = accountEmails(user, accessToken);
-    if (!allowed.length || !have.length) return false;
-    return have.some(function (email) {
-      return allowed.some(function (item) {
-        return String(item || "").toLowerCase() === email;
-      });
+  function refreshModerator() {
+    const gen = moderatorGen + 1;
+    moderatorGen = gen;
+    if (!client || !user) {
+      moderator = false;
+      return Promise.resolve(false);
+    }
+    return client.rpc("is_review_moderator").then(function (res) {
+      if (gen !== moderatorGen) return moderator;
+      moderator = !!(res && !res.error && res.data === true);
+      return moderator;
+    }).catch(function () {
+      if (gen !== moderatorGen) return moderator;
+      moderator = false;
+      return false;
     });
+  }
+
+  function isModerator() {
+    return moderator;
   }
 
   function onChange(fn) {
@@ -294,43 +309,11 @@
     if (!root) return;
     root.innerHTML = "";
     if (!user) return;
-    const variant = (root && root.getAttribute("data-auth-variant")) || "nav";
-    if (variant === "dash") {
-      const wrap = document.createElement("div");
-      wrap.className = "dash-auth-user";
-      const avatar = document.createElement("span");
-      avatar.className = "dash-auth-avatar";
-      avatar.textContent = (displayName(user)[0] || "?").toUpperCase();
-      const meta = document.createElement("div");
-      meta.className = "dash-auth-meta";
-      const name = document.createElement("span");
-      name.className = "dash-auth-name";
-      name.textContent = displayName(user);
-      const out = document.createElement("button");
-      out.type = "button";
-      out.className = buttonClass(root, "auth-sign-out");
-      out.textContent = "Sign out";
-      out.addEventListener("click", function () { signOut(); });
-      meta.appendChild(name);
-      meta.appendChild(out);
-      wrap.appendChild(avatar);
-      wrap.appendChild(meta);
-      root.appendChild(wrap);
-      return;
-    }
-    const wrap = document.createElement("span");
-    wrap.className = "auth-signed-in";
-    const name = document.createElement("span");
-    name.className = "auth-name";
-    name.textContent = displayName(user);
-    const out = document.createElement("button");
-    out.type = "button";
-    out.className = buttonClass(root, "auth-sign-out");
-    out.textContent = "Sign out";
-    out.addEventListener("click", function () { signOut(); });
-    wrap.appendChild(name);
-    wrap.appendChild(out);
-    root.appendChild(wrap);
+    const link = document.createElement("a");
+    link.href = "account.html";
+    link.className = "auth-account-link";
+    link.textContent = displayName(user);
+    root.appendChild(link);
   }
 
   function renderAll() {
@@ -344,8 +327,7 @@
     if (qaMock) {
       // Local Playwright / manual QA: inject a synthetic session without Google OAuth.
       client = null;
-      setUser(qaMock.user, qaMock.session || { access_token: "qa-mock-token" });
-      markReady();
+      setUser(qaMock.user, qaMock.session || { access_token: "qa-mock-token" }).then(markReady);
       return;
     }
     if (!configured()) {
@@ -379,10 +361,10 @@
     client.auth.getSession().then(function (res) {
       if (res && res.error) reportError(friendlyAuthError(res.error), "auth");
       const session = res && res.data && res.data.session;
-      setUser(session && session.user ? session.user : null, session);
+      return setUser(session && session.user ? session.user : null, session);
     }).catch(function (err) {
       reportError(friendlyAuthError(err), "auth");
-      setUser(null, null);
+      return setUser(null, null);
     }).then(function () {
       markReady();
     });

@@ -31,7 +31,7 @@ console.log('✓ SQL schema, columns, indexes, RLS and grants verified.');
 
 // 2. Check HTML files for tracker inclusion & opt-outs
 console.log('2. Checking HTML files & CSP headers...');
-const pages = ['index.html', 'study.html', 'gallery.html', 'map.html', 'insights.html'];
+const pages = ['index.html', 'study.html', 'gallery.html', 'map.html', 'insights.html', 'account.html'];
 pages.forEach(p => {
   const c = fs.readFileSync(path.join(ROOT, p), 'utf8');
   assert(c.includes('js/shared/insights.js'), `${p} must include js/shared/insights.js`);
@@ -61,12 +61,60 @@ console.log('✓ HTML pages, opt-outs, and CSP headers verified.');
 // 3. Check terms and journey version
 console.log('3. Checking terms and journey TERMS_VERSION...');
 const journeyJs = fs.readFileSync(path.join(ROOT, 'js/shared/journey.js'), 'utf8');
-assert(/TERMS_VERSION\s*=\s*3/.test(journeyJs), 'TERMS_VERSION must be 3 in journey.js');
+assert(/TERMS_VERSION\s*=\s*4/.test(journeyJs), 'TERMS_VERSION must be 4 in journey.js');
+
+const accountHtml = fs.readFileSync(path.join(ROOT, 'account.html'), 'utf8');
+assert(accountHtml.includes('id="account-hub"'), 'account.html must be the Account hub');
+assert(accountHtml.includes('What we learn from your study'), 'account.html missing "What we learn from your study" header');
+assert(accountHtml.includes('anonymous until sign-in'), 'account.html must mention anonymous learning until sign-in');
+assert(accountHtml.includes('You may browse the study, map, and gallery without an account'), 'account.html must let visitors browse without an account');
+assert(!accountHtml.includes('This exhibit is closed'), 'account.html must not say the exhibit is closed');
+assert(accountHtml.includes('js/shared/account.js'), 'account.html must load the hub script');
+assert(accountHtml.includes('id="account-accept"'), 'account.html must keep Accept on the terms card');
+assert(accountHtml.includes('id="account-signin"'), 'account.html must keep Google sign-in on the hub');
+assert(accountHtml.includes('id="account-signout"'), 'account.html must keep sign-out on the hub');
+assert(!accountHtml.includes('id="terms-agree"'), 'account.html must not keep a terms checkbox');
 
 const termsJs = fs.readFileSync(path.join(ROOT, 'js/shared/terms.js'), 'utf8');
-assert(termsJs.includes('What we learn from your study'), 'terms.js missing "What we learn from your study" header');
-assert(termsJs.includes('anonymous until sign-in'), 'terms.js must mention anonymous learning until sign-in');
-console.log('✓ TERMS_VERSION and data terms verified.');
+assert(termsJs.includes('goToAccount'), 'terms.js must send visitors to the Account hub');
+assert(termsJs.includes('account.html'), 'terms.js must route through account.html');
+assert(termsJs.includes('baTermsNext'), 'terms.js must keep the baTermsNext return key');
+assert(!termsJs.includes('needsSignInOverlay'), 'terms.js must not keep a sign-in overlay');
+assert(!termsJs.includes('terms-overlay'), 'terms.js must not inject a terms overlay');
+assert(!termsJs.includes('This exhibit is closed'), 'terms.js must not say the exhibit is closed');
+
+['index.html', 'study.html', 'gallery.html', 'map.html', 'insights.html', '404.html'].forEach((p) => {
+  const c = fs.readFileSync(path.join(ROOT, p), 'utf8');
+  const navSrc = p === 'map.html'
+    ? fs.readFileSync(path.join(ROOT, 'js/map/map.js'), 'utf8')
+    : c;
+  assert(navSrc.includes('account.html'), `${p} must link to the Account hub`);
+  assert(!c.includes('id="terms-overlay"'), `${p} must not inject a terms overlay`);
+});
+
+const authJs = fs.readFileSync(path.join(ROOT, 'js/shared/auth.js'), 'utf8');
+assert(authJs.includes('account.html'), 'auth.js must return Google OAuth to the Account hub');
+assert(!authJs.includes('auth-sign-out'), 'auth.js must not draw a Sign out button on other pages');
+assert(!authJs.includes('clearPendingTerms'), 'auth.js must not wipe a once-agreed terms record on sign-out');
+
+const dashJs = fs.readFileSync(path.join(ROOT, 'js/home/dash.js'), 'utf8');
+assert(dashJs.includes('requestSignIn'), 'dash.js must send Home sign-in to the Account hub');
+const reviewsSrc = fs.readFileSync(path.join(ROOT, 'js/shared/reviews.js'), 'utf8');
+assert(reviewsSrc.includes('requestSignIn'), 'reviews.js must send review sign-in to the Account hub');
+console.log('✓ TERMS_VERSION and Account hub terms verified.');
+
+console.log('3b. Checking public config does not ship operator identity or a Maps key paste...');
+const authCfg = fs.readFileSync(path.join(ROOT, 'js/shared/auth-config.js'), 'utf8');
+assert(!authCfg.includes('moderatorEmails'), 'auth-config.js must not ship a moderator email list');
+assert(!/@gmail\.com/i.test(authCfg), 'auth-config.js must not include a Gmail address');
+assert(authJs.includes('is_review_moderator'), 'auth.js must ask the server who is a moderator');
+assert(!authJs.includes('moderatorEmails'), 'auth.js must not compare against a public email list');
+const mapJs = fs.readFileSync(path.join(ROOT, 'js/map/map.js'), 'utf8');
+assert(!mapJs.includes('Paste your Google Maps API key'), 'map.js must not ask visitors to paste a Maps API key');
+assert(!mapJs.includes("data-base='google'"), 'map.js must not show a Google basemap button');
+assert(mapJs.includes("data-base='satellite'"), 'map.js must keep Satellite');
+assert(mapJs.includes("data-base='streets'"), 'map.js must keep Streets');
+console.log('✓ Public config and map chrome stay visitor-safe.');
 
 // 4. Test Insights tracker logic
 console.log('4. Testing js/shared/insights.js tracker logic...');

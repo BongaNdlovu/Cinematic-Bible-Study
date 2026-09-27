@@ -6,7 +6,6 @@
   }
 
   const REDUCE = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const KEY_STORE = "baGoogleMapsKey";
   const BASE_STORE = "baMapBasemap";
 
   function epochById(id) {
@@ -107,19 +106,6 @@
       last = r.status;
     }
     throw new Error(last);
-  }
-  function loadScript(src) {
-    return new Promise((resolve, reject) => {
-      const s = document.createElement("script");
-      s.src = src;
-      s.async = true;
-      s.addEventListener("load", resolve);
-      s.addEventListener("error", () => reject(new Error("Failed to load " + src)));
-      document.head.appendChild(s);
-    });
-  }
-  function googleKey() {
-    try { return localStorage.getItem(KEY_STORE) || ""; } catch (e) { return ""; }
   }
   function savedBase() {
     try { return localStorage.getItem(BASE_STORE) || "satellite"; } catch (e) { return "satellite"; }
@@ -229,11 +215,6 @@
     const dossier = el("aside", { class: "cmap-dossier", "aria-live": "polite" });
     const hint = el("div", { class: "cmap-hint" }, "Drag to pan · scroll to zoom · space to play · click a medal");
     const credit = el("div", { class: "cmap-credit" }, "Satellite: Esri World Imagery · Borders: Cliopatria / Seshat");
-    const keyPanel = el("div", { class: "cmap-key-panel", hidden: true },
-      "<p>Google Maps needs a Maps JavaScript API key from Google Cloud. Satellite Earth works without one.</p>" +
-      "<input type='text' autocomplete='off' spellcheck='false' placeholder='Paste your Google Maps API key'>" +
-      "<div class='cmap-key-actions'><button type='button' class='go'>Use Google Maps</button>" +
-      "<button type='button' class='skip'>Stay on satellite</button></div>");
     const timeline = el("div", { class: "cmap-timeline" });
     const prevBtn = el("button", { class: "cmap-nav-year", type: "button", title: "Previous year", "aria-label": "Previous year" }, "‹");
     const nextBtn = el("button", { class: "cmap-nav-year", type: "button", title: "Next year", "aria-label": "Next year" }, "›");
@@ -261,8 +242,7 @@
 
     const bases = el("div", { class: "cmap-basemap", role: "group", "aria-label": "Basemap" },
       "<button type='button' data-base='satellite'>Satellite</button>" +
-      "<button type='button' data-base='streets'>Streets</button>" +
-      "<button type='button' data-base='google'>Google</button>");
+      "<button type='button' data-base='streets'>Streets</button>");
     const layers = el("div", { class: "cmap-layers" },
       "<div class='cmap-legend-title'>Layers</div>" +
       "<label><input type='checkbox' data-layer='borders' checked> Borders</label>" +
@@ -305,6 +285,7 @@
           <a href="study.html">Study</a>
           <a href="${galleryHref}">3D Gallery</a>
           <a class="active" href="map.html">Map</a>
+          <a href="account.html">Account</a>
         </nav>`;
     }
 
@@ -326,7 +307,6 @@
       root.appendChild(overture);
     }
     root.appendChild(chapter);
-    root.appendChild(keyPanel);
     root.appendChild(loadEl);
     if (!cinematic) {
       root.appendChild(el("a", { class: "cmap-enter cmap-enter-overlay", href: "map.html?year=" + state.yearId }, "Enter cinematic map →"));
@@ -776,74 +756,16 @@
       if (!state.layers.labels && has) state.lmap.removeLayer(state.labelTiles);
     }
 
-    async function initGoogle() {
-      const key = googleKey();
-      if (!key) {
-        keyPanel.hidden = false;
-        return false;
-      }
-      try {
-        if (!(window.google && google.maps)) {
-          await loadScript("https://maps.googleapis.com/maps/api/js?key=" + encodeURIComponent(key) + "&v=weekly");
-        }
-      } catch (err) {
-        console.error(err);
-        keyPanel.hidden = false;
-        return false;
-      }
-      destroyLeaflet();
-      destroyGoogle();
-      tiles.innerHTML = "";
-      state.kind = "google";
-      state.base = "google";
-      const ep = currentEpoch();
-      state.gmap = new google.maps.Map(tiles, {
-        center: { lat: ep.camera.lat, lng: ep.camera.lon },
-        zoom: tileZoom(ep),
-        mapTypeId: "hybrid",
-        disableDefaultUI: true,
-        zoomControl: cinematic,
-        gestureHandling: "greedy",
-        backgroundColor: "#0a1218"
-      });
-      credit.textContent = "Google Maps · Borders: Cliopatria / Seshat";
-      state.gmap.addListener("mousemove", (e) => {
-        coords.textContent = e.latLng.lat().toFixed(2) + "°, " + e.latLng.lng().toFixed(2) + "°";
-      });
-      drawOverlays(ep);
-      try { localStorage.setItem(BASE_STORE, "google"); } catch (e) {}
-      return true;
-    }
-
-    async function setBasemap(name) {
-      markBase(name);
-      if (name === "google") {
-        const ok = await initGoogle();
-        if (!ok) {
-          markBase(state.base === "google" ? "satellite" : state.base);
-        }
-        return;
-      }
-      keyPanel.hidden = true;
-      try { localStorage.setItem(BASE_STORE, name); } catch (e) {}
-      initLeaflet(name);
+    function setBasemap(name) {
+      const next = name === "streets" ? "streets" : "satellite";
+      markBase(next);
+      try { localStorage.setItem(BASE_STORE, next); } catch (e) {}
+      initLeaflet(next);
     }
 
     bases.addEventListener("click", (ev) => {
       const btn = ev.target.closest("button[data-base]");
       if (btn) setBasemap(btn.dataset.base);
-    });
-    keyPanel.querySelector(".go").addEventListener("click", async () => {
-      const val = keyPanel.querySelector("input").value.trim();
-      if (!val) return;
-      try { localStorage.setItem(KEY_STORE, val); } catch (e) {}
-      keyPanel.hidden = true;
-      const ok = await initGoogle();
-      if (ok) markBase("google");
-    });
-    keyPanel.querySelector(".skip").addEventListener("click", () => {
-      keyPanel.hidden = true;
-      setBasemap("satellite");
     });
 
     function showChapter(ep) {
@@ -1030,8 +952,7 @@
         const t = ev.target;
         const typing = t && (t.tagName === "INPUT" || t.tagName === "TEXTAREA" || t.tagName === "SELECT" || t.isContentEditable);
         if (ev.key === "Escape") {
-          if (!keyPanel.hidden) keyPanel.hidden = true;
-          else dossier.classList.remove("open");
+          dossier.classList.remove("open");
           return;
         }
         if (typing) return;
@@ -1082,14 +1003,9 @@
       let base = savedBase();
       const qBase = new URLSearchParams(location.search).get("basemap");
       if (qBase) base = qBase;
-      if (base === "google" && !googleKey()) base = "satellite";
-      markBase(base === "google" ? "google" : base);
-      if (base === "google") {
-        const ok = await initGoogle();
-        if (!ok) initLeaflet("satellite");
-      } else {
-        initLeaflet(base === "streets" ? "streets" : "satellite");
-      }
+      if (base !== "streets") base = "satellite";
+      markBase(base);
+      initLeaflet(base);
       loadEl.classList.add("is-done");
       if (cinematic && !opts.skipOverture && !REDUCE) {
         overture.classList.add("show");

@@ -9,10 +9,10 @@ node qa-e2e/production-audit.mjs --base=http://127.0.0.1:8001 --phase=after
 
 ## What it covers
 
-1. **Signed-out gate** — `study.html`, `study.html?sheet=3`, `map.html`, `gallery.html`, `insights.html` must show the terms overlay and `site-locked` (no guest entry, including free sittings).  
+1. **Signed-out browse** — `study.html`, `study.html?sheet=3`, `map.html`, and `gallery.html` stay open without a terms overlay. Sign-in and terms live on `account.html`. `insights.html` uses the moderator page gate.  
 2. **Mocked signed-in session** — injects Supabase-shaped user into `localStorage.baQaMockSession` (see below), then walks all **11** sittings, map epochs, and gallery artifacts.  
 3. **Session persist** — reload + new tab still signed in / `canEnter`.  
-4. **Sign-out** — clears mock + session; exhibit re-locks.
+4. **Sign-out** — clears mock + session; study, map, and gallery stay browsable.
 
 Writes JSON under `EVIDENCE_DIR` (default `/workspace/audit-prod/evidence/reports`) and JPEG screenshots under `…/screenshots/<phase>/`.
 

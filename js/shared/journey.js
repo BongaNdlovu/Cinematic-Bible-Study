@@ -40,7 +40,7 @@
   };
 
   const SHEET_COUNT = 11;
-  const TERMS_VERSION = 3;
+  const TERMS_VERSION = 4;
   const FREE_THROUGH = 2;
   const TEMP_REVIEW_UNLOCK = false;
   const SITTING_ASSETS = [
@@ -538,7 +538,7 @@
       save({
         termsByUser: termsByUser,
         termsAccepted: { version: TERMS_VERSION, at: at, userId: id },
-        pendingTerms: null
+        pendingTerms: { version: TERMS_VERSION, at: at }
       });
       try {
         return storedOk(JSON.parse(localStorage.getItem(KEY) || "{}"), id);
@@ -573,12 +573,17 @@
       termsByUser[id] = { version: Number(legacy.version), at: Number(legacy.at) || Date.now() };
     }
     const rec = termsByUser[id];
+    const keepPending = (pending && Number(pending.version) === TERMS_VERSION)
+      ? { version: Number(pending.version), at: Number(pending.at) || Date.now() }
+      : (rec && Number(rec.version) === TERMS_VERSION)
+        ? { version: Number(rec.version), at: Number(rec.at) || Date.now() }
+        : cur.pendingTerms;
     return save({
       termsByUser: termsByUser,
       termsAccepted: rec
         ? { version: rec.version, at: rec.at, userId: id }
         : (cur.termsAccepted && cur.termsAccepted.userId === id ? cur.termsAccepted : null),
-      pendingTerms: null
+      pendingTerms: keepPending
     });
   }
 

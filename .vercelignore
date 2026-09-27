@@ -12,6 +12,7 @@ __pycache__/
 *.pyo
 *.bak
 docs/
+README.md
 tools/
 .github/
 .oxlintrc.json

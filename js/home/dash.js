@@ -96,13 +96,26 @@
       ctaSub.textContent = "25-minute guided sitting · Sitting " + resumeSheet + " of 11";
     }
     const signedIn = !!(window.ScrollAuth && window.ScrollAuth.getUser && window.ScrollAuth.getUser());
-    document.querySelectorAll(".dash-account").forEach(function (wrap) {
+    document.querySelectorAll(".dash-account, .dash-top-auth, .dash-hero-actions").forEach(function (wrap) {
       wrap.classList.toggle("is-signed-in", signedIn);
     });
+    if (heroCta) {
+      heroCta.title = signedIn ? "" : "Sign in to begin the sittings";
+    }
+  }
+
+  function goToAccount(next) {
+    if (window.ScrollTerms && typeof window.ScrollTerms.goToAccount === "function") {
+      window.ScrollTerms.goToAccount(next);
+      return;
+    }
+    const dest = next || "index.html";
+    location.assign("account.html?next=" + encodeURIComponent(dest));
   }
 
   document.querySelectorAll("[data-dash-signin]").forEach(function (btn) {
-    btn.addEventListener("click", function () {
+    btn.addEventListener("click", function (e) {
+      e.preventDefault();
       if (window.Insights) window.Insights.track('home_nav', null, { action: 'signin' });
       if (window.ScrollTerms && typeof window.ScrollTerms.requestSignIn === "function") {
         window.ScrollTerms.requestSignIn();
@@ -112,11 +125,19 @@
 
   document.addEventListener("click", function (e) {
     const card = e.target.closest("[data-sheet], #hero-cta, [data-hero-primary]");
-    if (!card || !window.Insights) return;
+    if (!card) return;
+    const signedIn = !!(window.ScrollAuth && window.ScrollAuth.getUser && window.ScrollAuth.getUser());
     const sheet = card.hasAttribute("data-sheet") ? Number(card.getAttribute("data-sheet")) : null;
-    window.Insights.track('home_nav', Number.isInteger(sheet) ? sheet : null, {
-      action: card.id === "hero-cta" || card.hasAttribute("data-hero-primary") ? "cta" : "card"
-    });
+    if (window.Insights) {
+      window.Insights.track('home_nav', Number.isInteger(sheet) ? sheet : null, {
+        action: card.id === "hero-cta" || card.hasAttribute("data-hero-primary") ? "cta" : "card"
+      });
+    }
+    if (signedIn || card.classList.contains("is-locked")) return;
+    const href = card.getAttribute("href") || card.dataset.savedHref || "";
+    if (!href || card.tagName !== "A") return;
+    e.preventDefault();
+    goToAccount(href);
   });
 
   syncLocks();

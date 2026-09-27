@@ -163,6 +163,11 @@
 }
 .terms-error[hidden] { display: none !important; }
 
+.terms-check[hidden],
+.account-session[hidden],
+#terms-form[hidden] {
+  display: none !important;
+}
 .terms-check {
   position: relative;
   display: flex;
@@ -245,6 +250,9 @@
   width: 100%;
   justify-content: center;
 }
+.terms-btn[hidden] {
+  display: none !important;
+}
 .terms-btn:hover { filter: brightness(1.08); }
 .terms-btn:disabled {
   opacity: 0.55;
@@ -270,6 +278,77 @@ body.site-locked > *:not(#terms-overlay):not(#site-error-banner):not(#auth-error
 #terms-overlay,
 #terms-overlay * {
   pointer-events: auto !important;
+}
+
+.account-hub {
+  position: relative;
+  z-index: 40;
+  width: min(640px, calc(100% - 32px));
+  margin: 28px auto 64px;
+}
+.account-kicker {
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-size: 10px;
+  color: #d4af37;
+  margin: 0 0 8px;
+}
+.account-hub h1 {
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 2rem;
+  margin: 0 0 10px;
+}
+.account-lead {
+  color: var(--muted, #c4b8a8);
+  font-size: 15px;
+  line-height: 1.5;
+  margin: 0 0 22px;
+}
+.account-session {
+  margin: 0 0 18px;
+  padding: 16px 16px 14px;
+  border: 1px solid rgba(212, 175, 55, 0.28);
+  background: rgba(16, 12, 9, 0.72);
+}
+.account-session p {
+  margin: 0 0 12px;
+  color: #f0e0b8;
+}
+.account-card {
+  width: 100%;
+  max-height: none;
+}
+.account-hub .terms-scroll {
+  max-height: min(52vh, 480px);
+}
+.account-signin-box {
+  margin-top: 16px;
+  padding: 16px;
+  border: 1px solid rgba(212, 175, 55, 0.28);
+  background: rgba(16, 12, 9, 0.72);
+}
+.account-signin-box[hidden] { display: none !important; }
+.account-signin-kicker {
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-size: 10px;
+  color: #d4af37;
+  margin: 0 0 10px;
+}
+.account-signin-box.is-lit {
+  border-color: rgba(255, 231, 160, 0.8);
+  box-shadow:
+    0 0 16px rgba(212, 175, 55, 0.35),
+    0 0 32px rgba(212, 175, 55, 0.16);
+}
+.account-signin-box.is-lit #account-signin {
+  box-shadow: 0 0 18px rgba(212, 175, 55, 0.28);
+}
+.auth-account-link {
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 11px;
+  color: #d4af37;
 }
 
 @media (max-width: 640px) {
