@@ -11,6 +11,7 @@
   const OUTBOX_KEY = 'baProgressOutbox';
   const PUSH_GAP_MS = 6000;
   const SAVE_MISS = 'Your progress did not save. This device will keep trying.';
+  const PULL_MISS = 'Your saved progress could not be loaded from the cloud. This device still has what it stored here.';
   const RETRY_WAITS = [7000, 12000, 24000];
   const MAX_RETRIES = 8;
   let debounceTimer = null;
@@ -112,8 +113,8 @@
       .maybeSingle()
       .then(function (res) {
         if (res && res.error) {
-          // Table may not yet be provisioned by operator - fail silently
           isSyncing = false;
+          reportPullMiss(errorCause(res.error));
           if (switched) notifyProgressSynced();
           return null;
         }
@@ -213,6 +214,7 @@
       })
       .catch(function (err) {
         isSyncing = false;
+        reportPullMiss(errorCause(err));
         return null;
       });
   }
@@ -296,6 +298,15 @@
     }
     if (window.SiteOps && typeof window.SiteOps.report === 'function') {
       window.SiteOps.report('save_failed', cause || 'error', { ms: ms, cause: cause || 'error' });
+    }
+  }
+
+  function reportPullMiss(cause) {
+    if (window.SiteErrors && typeof window.SiteErrors.show === 'function') {
+      window.SiteErrors.show(PULL_MISS, 'save');
+    }
+    if (window.SiteOps && typeof window.SiteOps.report === 'function') {
+      window.SiteOps.report('progress_pull_failed', cause || 'error', { cause: cause || 'error' });
     }
   }
 

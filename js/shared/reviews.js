@@ -126,44 +126,9 @@
     );
   }
 
-  const SEED_REVIEWS = [
-    {
-      display_name: "Nokuthula Dlamini",
-      rating: 5,
-      created_at: "2026-02-14T18:22:00.000Z",
-      body: "My husband and I did sitting 1 after church. I kept my Bible open on the desk like the notice says. The map took a minute on my phone, but once it loaded we stayed up talking about Daniel 2 for another hour."
-    },
-    {
-      display_name: "James Whitfield",
-      rating: 4,
-      created_at: "2026-04-03T11:08:00.000Z",
-      body: "Honest take: the first sitting felt dense. By sitting 2 I understood why they make you work through the year-day verses yourself instead of just telling you the answer. Still working through the rest."
-    },
-    {
-      display_name: "Thandiwe Mthembu",
-      rating: 5,
-      created_at: "2026-05-19T16:41:00.000Z",
-      body: "Three of us went through it in my living room on a Saturday. We paused at the gold head and opened the 3D gallery. None of us are prophecy people. We just wanted Daniel to finally make sense."
-    },
-    {
-      display_name: "Sarah Mitchell",
-      rating: 4,
-      created_at: "2026-07-11T07:35:00.000Z",
-      body: "I saw the certificate mentioned online and stayed for the content. Print view is clean. Strong's is a bit awkward on iPad, but having the KJV right in the study desk made the cross-references much easier."
-    },
-    {
-      display_name: "Sibusiso Nkosi",
-      rating: 5,
-      created_at: "2026-08-27T20:15:00.000Z",
-      body: "Ran six weeks with our young adults group. People actually argued about 457 — a good argument, not a fight. One guy said he finally sees why Rome keeps showing up in every vision."
-    },
-    {
-      display_name: "Peter Williams",
-      rating: 3,
-      created_at: "2026-09-06T13:52:00.000Z",
-      body: "Solid study, but not light reading if prophecy is new to you. Took me three weeks to finish. Worth it if you're willing to sit with the text. I'd tell a friend to start with sitting 0 and not rush."
-    }
-  ];
+  const EMPTY_REVIEWS = "No reviews yet.";
+  const LOAD_REVIEWS_FAIL = "Could not load reviews.";
+  const QUEUE_SAVE_FAIL = "Could not update that review. Try again.";
 
   function renderQuote(row) {
     const art = document.createElement("article");
@@ -196,7 +161,10 @@
     list.innerHTML = "";
     if (!rows.length) {
       if (marquee) marquee.hidden = true;
-      if (empty) empty.hidden = true;
+      if (empty) {
+        empty.hidden = false;
+        empty.textContent = EMPTY_REVIEWS;
+      }
       list.hidden = true;
       return;
     }
@@ -205,6 +173,19 @@
     list.hidden = false;
     rows.forEach(function (row) { list.appendChild(renderQuote(row)); });
     rows.forEach(function (row) { list.appendChild(renderQuote(row)); });
+  }
+
+  function paintReviewLoadFail(list, empty) {
+    const marquee = document.getElementById("witness-marquee");
+    if (marquee) marquee.hidden = true;
+    if (list) {
+      list.innerHTML = "";
+      list.hidden = true;
+    }
+    if (empty) {
+      empty.hidden = false;
+      empty.textContent = LOAD_REVIEWS_FAIL;
+    }
   }
 
   function loadApproved() {
@@ -217,7 +198,7 @@
     const c = authClient();
     if (!list) return Promise.resolve();
     if (!c) {
-      paintReviews(list, empty, SEED_REVIEWS);
+      paintReviewLoadFail(list, empty);
       return Promise.resolve();
     }
     return c.from(TABLE)
@@ -227,27 +208,54 @@
       .order("created_at", { ascending: false })
       .limit(24)
       .then(function (res) {
-        const rows = (res && res.data) || [];
-        if ((res && res.error) || rows.length === 0) {
-          paintReviews(list, empty, SEED_REVIEWS);
+        if (res && res.error) {
+          paintReviewLoadFail(list, empty);
           return;
         }
-        paintReviews(list, empty, rows);
+        paintReviews(list, empty, (res && res.data) || []);
       }).catch(function () {
-        paintReviews(list, empty, SEED_REVIEWS);
+        paintReviewLoadFail(list, empty);
       });
+  }
+
+  function queueStatus(message) {
+    let el = document.getElementById("witness-queue-status");
+    if (!el) {
+      const queue = document.getElementById("witness-queue");
+      const list = document.getElementById("witness-queue-list");
+      el = document.createElement("p");
+      el.id = "witness-queue-status";
+      el.className = "witness-queue-empty";
+      el.setAttribute("role", "alert");
+      if (queue && list) queue.insertBefore(el, list);
+      else if (queue) queue.appendChild(el);
+    }
+    el.hidden = !message;
+    el.textContent = message || "";
   }
 
   function setReviewFlags(id, approved, rejected) {
     const c = authClient();
-    if (!c || !id) return Promise.resolve();
+    if (!c || !id) {
+      queueStatus(QUEUE_SAVE_FAIL);
+      return Promise.resolve(false);
+    }
+    queueStatus("");
     return c.from(TABLE).update({
       approved: !!approved,
       rejected: !!rejected,
       approved_at: approved ? new Date().toISOString() : null
-    }).eq("id", id).then(function () {
+    }).eq("id", id).then(function (res) {
+      if (res && res.error) {
+        queueStatus(QUEUE_SAVE_FAIL);
+        return false;
+      }
       loadApproved();
       loadQueue();
+      return true;
+    }).catch(function () {
+      queueStatus(QUEUE_SAVE_FAIL);
+      return false;
     });
   }
 
@@ -441,6 +449,12 @@
           return;
         }
         rows.forEach(function (row) { list.appendChild(renderQueueRow(row)); });
+      }).catch(function () {
+        list.innerHTML = "";
+        const fail = document.createElement("p");
+        fail.className = "witness-queue-empty";
+        fail.textContent = "Could not load.";
+        list.appendChild(fail);
       });
   }
 
@@ -513,30 +527,44 @@
     const c = authClient();
     const u = currentUser();
 
-    if (c) {
-      try {
-        const surveyOk = !(window.Insights && window.Insights.takeSurveySlot) || window.Insights.takeSurveySlot();
-        if (surveyOk) {
-          const cohortVal = opts.cohort || (window.BAJourney && typeof window.BAJourney.getCohort === "function" ? window.BAJourney.getCohort() : null);
-          c.from("exhibit_surveys").insert({
-            user_id: u ? u.id : null,
-            anon_id: window.Insights && window.Insights.anonId ? window.Insights.anonId() : "",
-            cohort: cohortVal || "",
-            role: opts.role || "Student",
-            rating: rating,
-            feedback: parsed.text,
-            responses: {
-              kind: opts.kind || "exit",
-              cohort: cohortVal || "",
-              role: opts.role || "Student",
-              rating: rating,
-              classroomUse: opts.classroomUse || "",
-              nps: typeof opts.nps === "number" ? opts.nps : null,
-              changed: opts.changed || ""
-            }
-          }).then(function () {}).catch(function () {});
+    function recordExitSurvey() {
+      if (!c) return Promise.resolve({ ok: false });
+      const cohortVal = opts.cohort || (window.BAJourney && typeof window.BAJourney.getCohort === "function" ? window.BAJourney.getCohort() : null);
+      const row = {
+        rating: rating,
+        feedback: parsed.text,
+        responses: {
+          kind: opts.kind || "exit",
+          cohort: cohortVal || "",
+          role: opts.role || "Student",
+          rating: rating,
+          classroomUse: opts.classroomUse || "",
+          nps: typeof opts.nps === "number" ? opts.nps : null,
+          changed: opts.changed || ""
         }
-      } catch (e) {}
+      };
+      if (window.Insights && typeof window.Insights.insertSurvey === "function") {
+        return window.Insights.insertSurvey(Object.assign({
+          cohort: cohortVal || "",
+          role: opts.role || "Student"
+        }, row));
+      }
+      if (window.Insights && window.Insights.takeSurveySlot && !window.Insights.takeSurveySlot()) {
+        return Promise.resolve({ ok: false });
+      }
+      return c.from("exhibit_surveys").insert({
+        user_id: u ? u.id : null,
+        anon_id: window.Insights && window.Insights.anonId ? window.Insights.anonId() : "",
+        cohort: cohortVal || "",
+        role: opts.role || "Student",
+        rating: rating,
+        feedback: parsed.text,
+        responses: row.responses
+      }).then(function (res) {
+        return { ok: !(res && res.error) };
+      }).catch(function () {
+        return { ok: false };
+      });
     }
 
     if (!signedIn()) {
@@ -567,19 +595,25 @@
         setStatus("Could not save. Try again.", "error");
         return false;
       }
-      bumpReviewDay();
-      setStatus("Saved. It will appear after approval.", "ok");
-      const input = document.getElementById("witness-body");
-      if (input) input.value = "";
-      const ratingInput = document.getElementById("witness-rating");
-      mountStarPicker(
-        document.getElementById("witness-stars"),
-        ratingInput,
-        5
-      );
-      loadQueue();
-      loadOwnReview();
-      return true;
+      return recordExitSurvey().then(function (survey) {
+        bumpReviewDay();
+        if (!survey || !survey.ok) {
+          setStatus("The review saved. The survey did not send. Try again.", "error");
+        } else {
+          setStatus("Saved. It will appear after approval.", "ok");
+        }
+        const input = document.getElementById("witness-body");
+        if (input) input.value = "";
+        const ratingInput = document.getElementById("witness-rating");
+        mountStarPicker(
+          document.getElementById("witness-stars"),
+          ratingInput,
+          5
+        );
+        loadQueue();
+        loadOwnReview();
+        return { ok: true, survey: !!(survey && survey.ok) };
+      });
     }).catch(function () {
       setStatus("Could not save. Try again.", "error");
       return false;
@@ -654,6 +688,7 @@
     submitReview: submitReview,
     updateReview: updateReview,
     loadApproved: loadApproved,
+    setReviewFlags: setReviewFlags,
     canEditReview: canEditReview
   };
 

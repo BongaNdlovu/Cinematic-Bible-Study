@@ -94,15 +94,18 @@ global.sessionStorage = {
 let insertedEvents = [];
 let insertedSurveys = [];
 let upsertedProfiles = [];
+let failWrites = false;
 const mockClient = {
   from: (table) => ({
     insert: (rows) => {
+      if (failWrites) return Promise.resolve({ data: null, error: { message: 'fail' } });
       const arr = Array.isArray(rows) ? rows : [rows];
       if (table === 'exhibit_events') insertedEvents.push(...arr);
       if (table === 'exhibit_surveys') insertedSurveys.push(...arr);
       return Promise.resolve({ data: arr, error: null });
     },
     upsert: (rows) => {
+      if (failWrites) return Promise.resolve({ data: null, error: { message: 'fail' } });
       const arr = Array.isArray(rows) ? rows : [rows];
       if (table === 'exhibit_profiles') upsertedProfiles.push(...arr);
       return Promise.resolve({ data: arr, error: null });
@@ -188,6 +191,8 @@ assert(typeof Insights.readingTimer === 'function', 'Insights.readingTimer must 
 assert(typeof Insights.activeSeconds === 'function', 'Insights.activeSeconds must be a function');
 assert(typeof Insights.setOptOut === 'function', 'Insights.setOptOut must be a function');
 assert(typeof Insights.inviteUrl === 'function', 'Insights.inviteUrl must be a function');
+assert(typeof Insights.insertSurvey === 'function', 'Insights.insertSurvey must be a function');
+assert(typeof Insights.upsertProfile === 'function', 'Insights.upsertProfile must be a function');
 
 // Test referral capture and URL rewriting (should strip ref but keep s)
 assert.strictEqual(global.localStorage.getItem('baReferredBy'), 'ref_xyz123', 'baReferredBy should be stored');
@@ -264,6 +269,18 @@ assert.strictEqual(insertedEvents.length, prevInsertedCount, 'No events flushed 
 // Test opt-in again
 Insights.setOptOut(false);
 assert.strictEqual(Insights.optedOut(), false, 'optedOut() should be false after setOptOut(false)');
+
+const surveyOk = await Insights.insertSurvey({ responses: { kind: 'profile' } });
+assert.strictEqual(surveyOk.ok, true, 'insertSurvey must report success');
+failWrites = true;
+const surveyFail = await Insights.insertSurvey({ responses: { kind: 'profile' } });
+assert.strictEqual(surveyFail.ok, false, 'insertSurvey must report a failed write');
+currentUser = { id: 'usr_abc_123' };
+const profileFail = await Insights.upsertProfile({ study_mode: 'alone' });
+assert.strictEqual(profileFail.ok, false, 'upsertProfile must report a failed write');
+failWrites = false;
+const profileOk = await Insights.upsertProfile({ study_mode: 'alone' });
+assert.strictEqual(profileOk.ok, true, 'upsertProfile must report success');
 
 console.log('✓ Tracker queueing, anonymous/signed-in flushing, readingTimer, scroll depth, and opt-out verified.');
 
@@ -344,6 +361,31 @@ assert.strictEqual(Dashboard.csvEscape('hello, world'), '"hello, world"');
 assert.strictEqual(Dashboard.csvEscape('line1\nline2'), '"line1\nline2"');
 assert.strictEqual(Dashboard.csvEscape('say "hi"'), '"say ""hi"""');
 
+const insightsGrid = { innerHTML: '' };
+const insightsGate = { hidden: true };
+const insightsApp = { hidden: false };
+const previousGetId = global.document.getElementById;
+global.document.getElementById = (id) => {
+  if (id === 'insights-grid') return insightsGrid;
+  if (id === 'insights-gate') return insightsGate;
+  if (id === 'insights-app') return insightsApp;
+  return previousGetId ? previousGetId(id) : null;
+};
+global.window.ScrollAuth.isModerator = () => true;
+global.window.ScrollAuth.getClient = () => ({
+  from: () => ({
+    select: () => ({
+      order: () => ({
+        limit: () => Promise.resolve({ data: null, error: { message: 'down' } })
+      })
+    })
+  })
+});
+Dashboard.setDays(0);
+await Dashboard.load();
+assert(insightsGrid.innerHTML.includes('Could not load insights.'), 'a failed insights query must not render empty charts');
+global.document.getElementById = previousGetId;
+
 console.log('✓ Real dashboard analytics & CSV escaping formulas verified.');
 
 // 6. Test Instrumentation in study-app, workbench, certificate
@@ -371,6 +413,18 @@ const certJs = fs.readFileSync(path.join(ROOT, 'js/study/certificate.js'), 'utf8
 assert(certJs.includes("track('feature_use'"), 'certificate missing feature_use track');
 assert(certJs.includes("cert-review-nps"), 'certificate missing NPS select');
 assert(certJs.includes("cert-review-changed"), 'certificate missing changed textarea');
+assert(certJs.includes('Could not save. Try again.'), 'certificate must show a save failure');
+assert(!certJs.includes('Thank you! Your feedback has been recorded.'), 'certificate must not thank the learner after a failed save');
+assert(certJs.includes('res.ok === false'), 'certificate must treat a false submitReview result as a failure');
+
+const reviewsJs = fs.readFileSync(path.join(ROOT, 'js/shared/reviews.js'), 'utf8');
+assert(!reviewsJs.includes('SEED_REVIEWS'), 'reviews.js must not keep seed witnesses');
+assert(reviewsJs.includes('Could not load reviews.'), 'reviews.js must say when witnesses failed to load');
+assert(reviewsJs.includes('res && res.error'), 'reviews.js must check approve/hide errors');
+
+const liveJs = fs.readFileSync(path.join(ROOT, 'tools/verify/verify_progress_live.mjs'), 'utf8');
+assert(liveJs.includes('process.exit(1)'), 'live progress check must fail when env is missing');
+assert(!liveJs.includes('process.exit(0)'), 'live progress check must not skip with a passing exit');
 
 console.log('✓ All 6 check phases passed successfully!');
 process.exit(0);

@@ -279,21 +279,47 @@
 
   function insertSurvey(row) {
     const pair = clientAndUser();
-    if (!pair.client || !takeSurveySlot()) return;
-    pair.client.from('exhibit_surveys').insert(Object.assign({
+    if (!pair.client) return Promise.resolve({ ok: false, reason: 'no_client' });
+    if (!takeSurveySlot()) return Promise.resolve({ ok: false, reason: 'rate_limit' });
+    return pair.client.from('exhibit_surveys').insert(Object.assign({
       user_id: pair.user ? pair.user.id : null,
       anon_id: anonId(),
       cohort: '',
       role: 'Student',
       feedback: '',
       responses: {}
-    }, row)).then(function () {}).catch(function () {});
+    }, row)).then(function (res) {
+      if (res && res.error) return { ok: false, reason: 'error' };
+      return { ok: true };
+    }).catch(function () {
+      return { ok: false, reason: 'error' };
+    });
   }
 
   function upsertProfile(fields) {
     const pair = clientAndUser();
-    if (!pair.client || !pair.user) return;
-    pair.client.from('exhibit_profiles').upsert(Object.assign({ user_id: pair.user.id }, fields)).then(function () {}).catch(function () {});
+    if (!pair.client || !pair.user) return Promise.resolve({ ok: false, reason: 'no_client' });
+    return pair.client.from('exhibit_profiles').upsert(Object.assign({ user_id: pair.user.id }, fields)).then(function (res) {
+      if (res && res.error) return { ok: false, reason: 'error' };
+      return { ok: true };
+    }).catch(function () {
+      return { ok: false, reason: 'error' };
+    });
+  }
+
+  function showCardError(cardId, message) {
+    const card = document.getElementById(cardId);
+    if (!card) return;
+    let el = card.querySelector('.insight-card-error');
+    if (!el) {
+      el = document.createElement('p');
+      el.className = 'insight-card-error';
+      el.setAttribute('role', 'alert');
+      const actions = card.querySelector('.insight-card-actions');
+      if (actions) card.insertBefore(el, actions);
+      else card.appendChild(el);
+    }
+    el.textContent = message;
   }
 
   function ensureCardStyle() {
@@ -313,7 +339,8 @@
       'html.dark .insight-card-row button.is-on,html.dark .insight-card .insight-save,body.charcoal-mode .insight-card-row button.is-on,body.charcoal-mode .insight-card .insight-save{background:#e7decc;color:#1c1914;border-color:#e7decc}' +
       '.insight-card textarea,.insight-card select{width:100%;margin:0 0 .7rem;padding:.4rem .5rem;border:1px solid rgba(28,25,20,.2);background:transparent;color:inherit}' +
       '.insight-card-actions{display:flex;justify-content:flex-end;gap:.5rem}' +
-      '.insight-card .insight-skip{border:0;background:transparent;color:inherit;opacity:.7;cursor:pointer;padding:.35rem .4rem}';
+      '.insight-card .insight-skip{border:0;background:transparent;color:inherit;opacity:.7;cursor:pointer;padding:.35rem .4rem}' +
+      '.insight-card .insight-card-error{margin:0 0 .7rem;font-size:12px;color:#8a3b12}';
     document.head.appendChild(style);
   }
 
@@ -375,16 +402,26 @@
     }
     document.getElementById('insight-pulse-skip').addEventListener('click', finish);
     document.getElementById('insight-pulse-save').addEventListener('click', function () {
-      if (score) {
-        const note = (document.getElementById('insight-pulse-note').value || '').trim().slice(0, 240);
-        insertSurvey({
-          rating: score,
-          feedback: note,
-          responses: { kind: 'sitting_pulse', sitting: sheet, sheet: sheet, score: score, note: note }
-        });
-        track('sitting_pulse', sheet, { score: score });
+      const saveBtn = document.getElementById('insight-pulse-save');
+      if (!score) {
+        showCardError('insight-pulse', 'Pick a score.');
+        return;
       }
-      finish();
+      if (saveBtn) saveBtn.disabled = true;
+      const note = (document.getElementById('insight-pulse-note').value || '').trim().slice(0, 240);
+      insertSurvey({
+        rating: score,
+        feedback: note,
+        responses: { kind: 'sitting_pulse', sitting: sheet, sheet: sheet, score: score, note: note }
+      }).then(function (res) {
+        if (!res || !res.ok) {
+          showCardError('insight-pulse', 'Could not save. Try again.');
+          if (saveBtn) saveBtn.disabled = false;
+          return;
+        }
+        track('sitting_pulse', sheet, { score: score });
+        finish();
+      });
     });
   }
 
@@ -440,15 +477,27 @@
     }
     document.getElementById('insight-profile-skip').addEventListener('click', finish);
     document.getElementById('insight-profile-save').addEventListener('click', function () {
+      const saveBtn = document.getElementById('insight-profile-save');
       const study_mode = document.getElementById('insight-study-mode').value || '';
       const background = document.getElementById('insight-background').value || '';
       const found_via = document.getElementById('insight-found').value || '';
-      upsertProfile({ study_mode: study_mode, background: background, found_via: found_via });
-      insertSurvey({
-        responses: { kind: 'profile', study_mode: study_mode, background: background, found_via: found_via }
+      if (saveBtn) saveBtn.disabled = true;
+      Promise.all([
+        upsertProfile({ study_mode: study_mode, background: background, found_via: found_via }),
+        insertSurvey({
+          responses: { kind: 'profile', study_mode: study_mode, background: background, found_via: found_via }
+        })
+      ]).then(function (results) {
+        const profileOk = results[0] && results[0].ok;
+        const surveyOk = results[1] && results[1].ok;
+        if (!profileOk || !surveyOk) {
+          showCardError('insight-profile', 'Could not save. Try again.');
+          if (saveBtn) saveBtn.disabled = false;
+          return;
+        }
+        track('profile_card', null, { study_mode: study_mode, found_via: found_via });
+        finish();
       });
-      track('profile_card', null, { study_mode: study_mode, found_via: found_via });
-      finish();
     });
   }
 
@@ -610,6 +659,8 @@
     optedOut: optedOut,
     bindOptOuts: bindOptOuts,
     takeSurveySlot: takeSurveySlot,
+    insertSurvey: insertSurvey,
+    upsertProfile: upsertProfile,
     anonId: anonId
   };
 })();

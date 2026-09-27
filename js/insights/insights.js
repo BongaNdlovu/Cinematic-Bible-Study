@@ -365,13 +365,25 @@
       pfq = pfq.gte('created_at', cut);
     }
 
-    Promise.all([
-      evq.then(function (r) { return (r && r.data) || []; }).catch(function () { return []; }),
-      svq.then(function (r) { return (r && r.data) || []; }).catch(function () { return []; }),
-      pfq.then(function (r) { return (r && r.data) || []; }).catch(function () { return []; })
+    function settleQuery(p) {
+      return p.then(function (r) {
+        if (!r || r.error) throw new Error((r.error && r.error.message) || 'load_failed');
+        return r.data || [];
+      });
+    }
+
+    return Promise.all([
+      settleQuery(evq),
+      settleQuery(svq),
+      settleQuery(pfq)
     ]).then(function (rows) {
       cache = { events: rows[0], surveys: rows[1], profiles: rows[2] };
       render();
+    }).catch(function () {
+      const grid = document.getElementById('insights-grid');
+      if (grid) {
+        grid.innerHTML = '<p class="insights-empty" id="insights-load-error" role="alert">Could not load insights.</p>';
+      }
     });
   }
 

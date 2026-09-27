@@ -648,6 +648,18 @@
           submitBtn.textContent = "Submitting...";
         }
 
+        function reviewFailed() {
+          if (statusEl) {
+            statusEl.hidden = false;
+            statusEl.className = "text-xs font-semibold text-amber-600 dark:text-amber-400";
+            statusEl.textContent = "Could not save. Try again.";
+          }
+          if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.textContent = "Submit Review";
+          }
+        }
+
         if (window.ScrollReviews && typeof window.ScrollReviews.submitReview === "function") {
           window.ScrollReviews.submitReview(text, {
             name: nameVal,
@@ -659,27 +671,31 @@
             changed: changedVal,
             kind: "exit"
           }).then((res) => {
+            if (!res || res.ok === false) {
+              reviewFailed();
+              return;
+            }
+            if (res.survey === false) {
+              if (statusEl) {
+                statusEl.hidden = false;
+                statusEl.className = "text-xs font-semibold text-amber-600 dark:text-amber-400";
+                statusEl.textContent = "The review saved. The survey did not send. Try again.";
+              }
+              if (submitBtn) {
+                submitBtn.disabled = false;
+                submitBtn.textContent = "Submit Review";
+              }
+              return;
+            }
             if (statusEl) {
               statusEl.hidden = false;
               statusEl.className = "text-xs font-semibold text-emerald-600 dark:text-emerald-400";
               statusEl.textContent = "Thank you for your review! It will appear once approved.";
             }
             setTimeout(closeModal, 1800);
-          }).catch(() => {
-            if (statusEl) {
-              statusEl.hidden = false;
-              statusEl.className = "text-xs font-semibold text-amber-600 dark:text-amber-400";
-              statusEl.textContent = "Thank you! Your feedback has been recorded.";
-            }
-            setTimeout(closeModal, 1800);
-          });
+          }).catch(reviewFailed);
         } else {
-          if (statusEl) {
-            statusEl.hidden = false;
-            statusEl.className = "text-xs font-semibold text-emerald-600 dark:text-emerald-400";
-            statusEl.textContent = "Thank you for completing the course!";
-          }
-          setTimeout(closeModal, 1500);
+          reviewFailed();
         }
       });
     }

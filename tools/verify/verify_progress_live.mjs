@@ -38,8 +38,8 @@ const url = process.env.SUPABASE_URL;
 const key = process.env.SUPABASE_PUBLISHABLE_KEY;
 const token = process.env.SUPABASE_ACCESS_TOKEN;
 if (!url || !key || !token) {
-  console.log("Skipped live progress check. Set SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY, and SUPABASE_ACCESS_TOKEN after the revision SQL has been applied.");
-  process.exit(0);
+  console.error("FAIL: live progress check requires SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY, and SUPABASE_ACCESS_TOKEN.");
+  process.exit(1);
 }
 
 const headers = {

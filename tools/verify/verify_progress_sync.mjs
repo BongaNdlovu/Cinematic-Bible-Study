@@ -68,6 +68,8 @@ function ruledSave(args) {
   return { data: { status: "ok", revision: serverRow.revision, row: copyServerRow() }, error: null };
 }
 
+let pullReply = { data: null, error: null };
+let pullReject = null;
 const mockClient = {
   rpc: (_name, args) => {
     calls.push(args);
@@ -83,7 +85,7 @@ const mockClient = {
   from: () => ({
     select: () => ({
       eq: () => ({
-        maybeSingle: () => Promise.resolve({ data: null, error: null })
+        maybeSingle: () => (pullReject ? Promise.reject(pullReject) : Promise.resolve(pullReply))
       })
     })
   })
@@ -258,6 +260,20 @@ const callsBefore = calls.length;
 await global.window.ProgressSync.pushNow();
 assert.strictEqual(store.daniel_historicist_mastery, masteryBefore);
 assert.strictEqual(calls.length, callsBefore, "damaged progress is not uploaded");
+
+store.baJourney = JSON.stringify({ completedSheets: [1], sheet: 1 });
+store.daniel_historicist_mastery = "[1]";
+errors.length = 0;
+pullReply = { data: null, error: { message: "relation does not exist" } };
+await global.window.ProgressSync.pullAndMerge();
+assert.ok(errors.some((message) => message.includes("could not be loaded")), "a failed cloud pull is shown");
+
+errors.length = 0;
+pullReply = { data: null, error: null };
+pullReject = new Error("Failed to fetch");
+await global.window.ProgressSync.pullAndMerge();
+assert.ok(errors.some((message) => message.includes("could not be loaded")), "a thrown cloud pull is shown");
+pullReject = null;
 
 Date.now = realNow;
 console.log("overlap merge, damaged save, and outbox retry hold");
