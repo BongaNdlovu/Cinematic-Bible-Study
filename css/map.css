@@ -280,24 +280,31 @@ html.cmap-html, body.cmap-page {
   color: var(--cmap-gold-soft);
 }
 .cmap-brand svg { width: 22px; height: 22px; color: var(--cmap-gold); }
-.cmap-links { display: flex; gap: 4px; flex-wrap: wrap; }
+.cmap-links { display: flex; gap: 6px; flex-wrap: wrap; }
 .cmap-links a, .cmap-icon-btn {
   font-size: 10px;
+  font-weight: 500;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--cmap-dim);
-  padding: 8px 12px;
-  border: 1px solid transparent;
+  color: #ede2cf;
+  padding: 7px 11px;
+  border: 1px solid rgba(212, 175, 55, 0.32);
   border-radius: 4px;
+  background: rgba(14, 11, 8, 0.78);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+  transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
 }
 .cmap-links a:hover, .cmap-links a.active, .cmap-icon-btn:hover {
-  color: var(--cmap-gold-soft);
-  border-color: var(--cmap-line);
-  background: rgba(20, 16, 12, 0.7);
+  color: #ffffff;
+  border-color: var(--cmap-gold);
+  background: rgba(30, 24, 16, 0.92);
 }
 .cmap-back {
   color: var(--cmap-gold-soft) !important;
-  border-color: var(--cmap-line) !important;
+  border-color: rgba(212, 175, 55, 0.55) !important;
+  background: rgba(24, 18, 12, 0.88) !important;
 }
 
 .cmap-cartouche {
@@ -1036,9 +1043,22 @@ html.cmap-html, body.cmap-page {
     flex-wrap: wrap;
     gap: 8px;
   }
-  .cmap-links { width: 100%; justify-content: flex-start; }
-  .cmap-links a { padding: 7px 8px; }
-  .cmap-links a:not(.cmap-back):not(.active) { display: none; }
+  .cmap-links {
+    width: 100%;
+    justify-content: flex-start;
+    gap: 6px;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding-bottom: 2px;
+  }
+  .cmap-links::-webkit-scrollbar { display: none; }
+  .cmap-links a {
+    padding: 6px 9px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
   .cmap-embed { height: 58vh; min-height: 320px; }
   .cmap-hint { display: none; }
 }

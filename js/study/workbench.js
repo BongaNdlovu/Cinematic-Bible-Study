@@ -85,8 +85,8 @@
           </p>
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-3">
             <div>
-              <label class="block text-[11px] font-mono text-ink-600 dark:text-paper-400 mb-1">Passage 1 (Wilderness Sentence):</label>
-              <select id="wb0-v1" class="w-full p-2.5 rounded-lg border border-paper-300 dark:border-paper-700 bg-paper-100/70 dark:bg-paper-900 text-xs font-mono text-ink-800 dark:text-paper-200">
+              <label for="wb0-v1" class="block text-[11px] font-mono text-ink-600 dark:text-paper-400 mb-1">Passage 1 (Wilderness Sentence):</label>
+              <select id="wb0-v1" aria-label="Passage 1 (Wilderness Sentence)" class="w-full p-2.5 rounded-lg border border-paper-300 dark:border-paper-700 bg-paper-100/70 dark:bg-paper-900 text-xs font-mono text-ink-800 dark:text-paper-200">
                 <option value="">Select Scripture reference...</option>
                 <option value="gen1">Genesis 1:14 (Signs and seasons)</option>
                 <option value="num14" ${t1Done ? 'selected' : ''}>Numbers 14:34 (After the number of the days...)</option>
@@ -95,8 +95,8 @@
               </select>
             </div>
             <div>
-              <label class="block text-[11px] font-mono text-ink-600 dark:text-paper-400 mb-1">Passage 2 (Prophetic Siege Act):</label>
-              <select id="wb0-v2" class="w-full p-2.5 rounded-lg border border-paper-300 dark:border-paper-700 bg-paper-100/70 dark:bg-paper-900 text-xs font-mono text-ink-800 dark:text-paper-200">
+              <label for="wb0-v2" class="block text-[11px] font-mono text-ink-600 dark:text-paper-400 mb-1">Passage 2 (Prophetic Siege Act):</label>
+              <select id="wb0-v2" aria-label="Passage 2 (Prophetic Siege Act)" class="w-full p-2.5 rounded-lg border border-paper-300 dark:border-paper-700 bg-paper-100/70 dark:bg-paper-900 text-xs font-mono text-ink-800 dark:text-paper-200">
                 <option value="">Select Scripture reference...</option>
                 <option value="isa40">Isaiah 40:28 (Creator of the ends of earth)</option>
                 <option value="ezek4" ${t1Done ? 'selected' : ''}>Ezekiel 4:6 (I have appointed thee...)</option>
@@ -146,7 +146,7 @@
               <div class="p-3 rounded-lg bg-paper-100/60 dark:bg-paper-900/60 border border-paper-300/80 dark:border-paper-800 flex flex-col sm:flex-row sm:items-center justify-between gap-3" data-item-id="${item.id}" data-correct="${item.correct}">
                 <span class="text-ink-800 dark:text-paper-200 leading-snug"><strong class="font-mono text-ink-500 dark:text-paper-500 mr-1">${idx + 1}.</strong> ${item.text}</span>
                 <div class="shrink-0 flex gap-1">
-                  <select class="matrix-select p-1.5 rounded border border-paper-300 dark:border-paper-700 bg-paper-50 dark:bg-paper-950 font-mono text-[11px] text-ink-800 dark:text-paper-200">
+                  <select class="matrix-select p-1.5 rounded border border-paper-300 dark:border-paper-700 bg-paper-50 dark:bg-paper-950 font-mono text-[11px] text-ink-800 dark:text-paper-200" aria-label="Select interpretive school for item ${idx + 1}">
                     <option value="">Select school...</option>
                     <option value="historicism" ${t2Done && item.correct === 'historicism' ? 'selected' : ''}>Historicism</option>
                     <option value="preterism" ${t2Done && item.correct === 'preterism' ? 'selected' : ''}>Preterism</option>
@@ -281,7 +281,7 @@
             ].map(item => `
               <div class="p-3 rounded-lg bg-paper-100/60 dark:bg-paper-900/60 border border-paper-300 dark:border-paper-800" data-name-id="${item.id}" data-correct="${item.correct}">
                 <div class="font-bold text-ink-900 dark:text-paper-100 mb-1.5">${item.hebrew}</div>
-                <select class="name-select w-full p-2 rounded border border-paper-300 dark:border-paper-700 bg-paper-50 dark:bg-paper-950 text-xs font-mono text-ink-800 dark:text-paper-200">
+                <select class="name-select w-full p-2 rounded border border-paper-300 dark:border-paper-700 bg-paper-50 dark:bg-paper-950 text-xs font-mono text-ink-800 dark:text-paper-200" aria-label="Select Babylonian renaming">
                   <option value="">Select Babylonian renaming...</option>
                   <option value="belteshazzar_bel" ${t1Done && item.correct === 'belteshazzar_bel' ? 'selected' : ''}>Belteshazzar (Honors Bel / Marduk)</option>
                   <option value="shadrach_aku" ${t1Done && item.correct === 'shadrach_aku' ? 'selected' : ''}>Shadrach (Honors Aku / Moon god)</option>
@@ -322,7 +322,7 @@
             ].map((item, idx) => `
               <div class="p-2.5 rounded-lg bg-paper-100/60 dark:bg-paper-900/60 border border-paper-300 dark:border-paper-800 flex items-center justify-between gap-2" data-civic-id="${item.id}" data-correct="${item.correct}">
                 <span class="text-ink-800 dark:text-paper-200 text-xs">${idx + 1}. ${item.text}</span>
-                <select class="civic-select shrink-0 p-1.5 rounded border border-paper-300 dark:border-paper-700 bg-paper-50 dark:bg-paper-950 font-mono text-[11px] text-ink-800 dark:text-paper-200">
+                <select class="civic-select shrink-0 p-1.5 rounded border border-paper-300 dark:border-paper-700 bg-paper-50 dark:bg-paper-950 font-mono text-[11px] text-ink-800 dark:text-paper-200" aria-label="Classify item ${idx + 1}">
                   <option value="">Classify...</option>
                   <option value="civic" ${t2Done && item.correct === 'civic' ? 'selected' : ''}>Permissible Civic Skill</option>
                   <option value="defilement" ${t2Done && item.correct === 'defilement' ? 'selected' : ''}>Covenant Defilement</option>
@@ -456,7 +456,7 @@
             ].map(item => `
               <div class="p-2.5 rounded-lg bg-paper-100/60 dark:bg-paper-900/60 border border-paper-300 dark:border-paper-800" data-colossus-stage="${item.stage}" data-correct="${item.correct}">
                 <div class="font-bold text-ink-800 dark:text-paper-200 mb-1 text-[11px]">${item.stage}</div>
-                <select class="colossus-select w-full p-2 rounded border border-paper-300 dark:border-paper-700 bg-paper-50 dark:bg-paper-950 text-xs text-ink-800 dark:text-paper-200">
+                <select class="colossus-select w-full p-2 rounded border border-paper-300 dark:border-paper-700 bg-paper-50 dark:bg-paper-950 text-xs text-ink-800 dark:text-paper-200" aria-label="Select identification for ${item.stage}">
                   <option value="">Select identification...</option>
                   <option value="gold_babylon" ${t1Done && item.correct === 'gold_babylon' ? 'selected' : ''}>Gold: Babylon (605–539 B.C.)</option>
                   <option value="silver_persia" ${t1Done && item.correct === 'silver_persia' ? 'selected' : ''}>Silver: Medo-Persia (539–331 B.C.)</option>
@@ -494,8 +494,8 @@
 
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-3">
             <div>
-              <label class="block text-[11px] font-mono text-ink-600 dark:text-paper-400 mb-1">Load-Bearing Anchor Verse:</label>
-              <select id="wb2-verse-ref" class="w-full p-2.5 rounded-lg border border-paper-300 dark:border-paper-700 bg-paper-50 dark:bg-paper-950 text-xs font-mono text-ink-800 dark:text-paper-200">
+              <label for="wb2-verse-ref" class="block text-[11px] font-mono text-ink-600 dark:text-paper-400 mb-1">Load-Bearing Anchor Verse:</label>
+              <select id="wb2-verse-ref" aria-label="Load-Bearing Anchor Verse" class="w-full p-2.5 rounded-lg border border-paper-300 dark:border-paper-700 bg-paper-50 dark:bg-paper-950 text-xs font-mono text-ink-800 dark:text-paper-200">
                 <option value="">Select verse...</option>
                 <option value="dan2_38" ${t2Done ? 'selected' : ''}>Daniel 2:38 (“Thou art this head of gold”)</option>
                 <option value="dan2_1">Daniel 2:1 (Nebuchadnezzar dreamed dreams)</option>
@@ -504,8 +504,8 @@
               </select>
             </div>
             <div>
-              <label class="block text-[11px] font-mono text-ink-600 dark:text-paper-400 mb-1">Core Refutation Principle:</label>
-              <select id="wb2-principle" class="w-full p-2.5 rounded-lg border border-paper-300 dark:border-paper-700 bg-paper-50 dark:bg-paper-950 text-xs font-mono text-ink-800 dark:text-paper-200">
+              <label for="wb2-principle" class="block text-[11px] font-mono text-ink-600 dark:text-paper-400 mb-1">Core Refutation Principle:</label>
+              <select id="wb2-principle" aria-label="Core Refutation Principle" class="w-full p-2.5 rounded-lg border border-paper-300 dark:border-paper-700 bg-paper-50 dark:bg-paper-950 text-xs font-mono text-ink-800 dark:text-paper-200">
                 <option value="">Select principle...</option>
                 <option value="contiguous" ${t2Done ? 'selected' : ''}>Contiguous descent: metals never reset or cycle; we reside in the feet of iron/clay awaiting the stone</option>
                 <option value="cyclical">History cycles every thousand years so each age gets a new gold head</option>
@@ -735,7 +735,7 @@
           ${spec.items.map(item => `
             <div class="p-2.5 rounded-lg bg-paper-100/60 dark:bg-paper-900/60 border border-paper-300 dark:border-paper-800 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
               <span class="font-mono font-bold text-amber-800 dark:text-amber-400">${item.text}</span>
-              <select class="wb${sheetIndex}-match-sel p-1.5 rounded border border-paper-300 dark:border-paper-700 bg-paper-50 dark:bg-paper-950 font-mono text-xs text-ink-800 dark:text-paper-200" data-item="${item.id}" data-correct="${item.correct}">
+              <select class="wb${sheetIndex}-match-sel p-1.5 rounded border border-paper-300 dark:border-paper-700 bg-paper-50 dark:bg-paper-950 font-mono text-xs text-ink-800 dark:text-paper-200" data-item="${item.id}" data-correct="${item.correct}" aria-label="Select match for ${item.id}">
                 ${spec.options.map(opt => `
                   <option value="${opt.value}" ${isDone && opt.value === item.correct ? 'selected' : ''}>${opt.label}</option>
                 `).join('')}

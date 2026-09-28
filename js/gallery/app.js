@@ -727,9 +727,12 @@ import * as THREE from 'three';
       }
       const data = ASSET_REGISTRY.assembled;
       const duration = reducedMotion ? 500 : 3200;
+      const isPortrait = isPortraitStage() || window.innerWidth <= 768;
+      const camPos = isPortrait ? new THREE.Vector3(0, 1.45, 12.0) : new THREE.Vector3(...data.camPos);
+      const lookAt = isPortrait ? new THREE.Vector3(0, 1.05, 0) : new THREE.Vector3(...data.lookAt);
       tweenCamera(
-        new THREE.Vector3(...data.camPos),
-        new THREE.Vector3(...data.lookAt),
+        camPos,
+        lookAt,
         duration
       );
       setTimeout(() => {
@@ -2691,10 +2694,15 @@ import * as THREE from 'three';
         return;
       }
 
-      const cardW = 196;
-      const leftColX = Math.min(Math.max(258, w * 0.198), 280);
-      const rightColX = Math.max(w - 330 - cardW - 18, w * 0.62);
-      const rowYPositions = [
+      const isMobile = w <= 768;
+      const cardW = isMobile ? Math.min(150, Math.floor(w * 0.38)) : 196;
+      const leftColX = isMobile ? 8 : Math.min(Math.max(258, w * 0.198), 280);
+      const rightColX = isMobile ? (w - cardW - 8) : Math.max(w - 330 - cardW - 18, w * 0.62);
+      const rowYPositions = isMobile ? [
+        Math.max(130, h * 0.23),
+        Math.max(230, h * 0.45),
+        Math.max(330, h * 0.67)
+      ] : [
         Math.max(178, h * 0.255),
         Math.max(318, h * 0.49),
         Math.max(458, h * 0.72)
@@ -2883,7 +2891,7 @@ import * as THREE from 'three';
         : maxDim;
       const distScale = portrait ? 2.05 : 1.28;
       const dist = (frameDim / (2 * Math.tan(fov * 0.5))) * distScale;
-      const xOff = portrait ? dist * 0.28 : dist * 0.36;
+      const xOff = portrait ? 0 : dist * 0.36;
       const yOff = portrait ? dist * 0.16 : dist * 0.16;
       camera.position.set(center.x + xOff, center.y + yOff, center.z + dist);
       controls.target.set(center.x, center.y + size.y * 0.04, center.z);
@@ -3179,13 +3187,20 @@ import * as THREE from 'three';
         }
         const b360 = document.getElementById('btn-museum-360');
         if (b360) b360.classList.remove('active');
+        const isPortrait = isPortraitStage() || window.innerWidth <= 768;
+        const targetCam = isPortrait
+          ? new THREE.Vector3(0, data.camPos[1], Math.max(data.camPos[2] * 1.12, 6.2))
+          : new THREE.Vector3(...data.camPos);
+        const targetLook = isPortrait
+          ? new THREE.Vector3(0, data.lookAt[1], data.lookAt[2])
+          : new THREE.Vector3(...data.lookAt);
         if (opts.instant) {
-          camera.position.set(...data.camPos);
-          controls.target.set(...data.lookAt);
+          camera.position.copy(targetCam);
+          controls.target.copy(targetLook);
           controls.update();
           cameraTween = null;
         } else {
-          tweenCamera(new THREE.Vector3(...data.camPos), new THREE.Vector3(...data.lookAt), 1100);
+          tweenCamera(targetCam, targetLook, 1100);
         }
       }
 

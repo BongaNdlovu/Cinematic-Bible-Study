@@ -57,7 +57,7 @@
     return {
       agree: "Accept the terms before you sign in.",
       storage: "Your agreement could not be saved on this device. Allow site data, then try again.",
-      unsigned: "Accept the terms, then sign in with email or Google to begin the sittings.",
+      unsigned: "Browse freely, or accept the terms and sign in to save cloud progress and certificates.",
       generic: "The terms could not be saved. Try again.",
       unavailable: "Sign-in is unavailable on this copy of the site. You can still browse. Cloud save, reviews, and the certificate need sign-in.",
       email: "Enter a valid email address.",
@@ -193,8 +193,8 @@
       if (resetMode) lead.textContent = "Set a new password to finish signing in.";
       else if (inSession && !needsTerms) lead.textContent = "You are signed in. Settings stay on this page.";
       else if (inSession && needsTerms) lead.textContent = "The terms text changed. Accept once here, then you are done.";
-      else if (!needsTerms) lead.textContent = "You accepted the terms. Sign in with email or Google to begin the sittings.";
-      else lead.textContent = "Accept the terms once, then sign in to begin the sittings.";
+      else if (!needsTerms) lead.textContent = "You accepted the terms. Sign in with email or Google to save cloud progress and certificates.";
+      else lead.textContent = "Browse freely, or accept the terms and sign in to save cloud progress and certificates.";
     }
     const err = siteError();
     if (err) setError("auth", err);

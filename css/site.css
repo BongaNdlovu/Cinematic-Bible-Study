@@ -2096,10 +2096,22 @@ body.dash .witnesses {
   .dash-verse-glass { flex: 0 0 auto; }
 }
 @media (max-width: 800px) {
-  .dash-hero { height: min(48vh, 420px); min-height: 320px; }
+  .dash-hero {
+    height: auto;
+    min-height: 440px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
   .dash-hero-verse,
   .dash-hero-reel-caption { display: none; }
-  .dash-hero-copy { right: 16px; max-width: none; }
+  .dash-hero-copy {
+    position: relative;
+    inset: auto;
+    padding: 24px 16px 18px;
+    max-width: none;
+    z-index: 2;
+  }
   .dash-hero-actions { gap: 8px; }
   .dash-empire-ticker [data-era] { padding: 4px 8px; font-size: 9px; }
   .dash-empire-sep { width: 10px; }
@@ -2112,6 +2124,50 @@ body.dash .witnesses {
   .dash-chapters, .dash-tiles, .dash-aside { grid-template-columns: 1fr 1fr; }
   .dash-verse-glass { padding: 22px 18px; min-height: 0; }
   .dash-verse-glass blockquote p { font-size: 16px; }
+}
+@media (max-width: 480px) {
+  .dash-shell { padding: 10px 10px 0; }
+  .dash-hero {
+    min-height: 420px;
+  }
+  .dash-hero-copy {
+    padding: 20px 12px 16px;
+  }
+  .dash-hero-copy h1 {
+    font-size: clamp(24px, 7.5vw, 34px);
+    padding: 6px 12px 8px;
+  }
+  .dash-title-kicker {
+    font-size: 0.54em;
+    line-height: 1.25;
+    margin-bottom: 2px;
+  }
+  .dash-hero-hook {
+    font-size: 13px;
+    margin-top: 6px;
+  }
+  .dash-hero-outcome {
+    font-size: 12.5px !important;
+    line-height: 1.4 !important;
+    margin-top: 6px !important;
+    margin-bottom: 8px !important;
+  }
+  .dash-empire-ticker {
+    gap: 3px;
+    margin: 8px 0 10px;
+  }
+  .dash-hero-actions {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .dash-hero-cta {
+    max-width: 100%;
+  }
+  .dash-top-signin {
+    min-height: 42px;
+    padding: 8px 14px;
+    font-size: 9.5px;
+  }
 }
 
 /* --- SID Classroom Print Styles --- */

@@ -100,7 +100,7 @@
       wrap.classList.toggle("is-signed-in", signedIn);
     });
     if (heroCta) {
-      heroCta.title = signedIn ? "" : "Sign in to begin the sittings";
+      heroCta.title = signedIn ? "" : "Begin the sitting";
     }
   }
 

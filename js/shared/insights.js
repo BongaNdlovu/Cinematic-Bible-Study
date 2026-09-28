@@ -427,13 +427,13 @@
       '<small>Optional</small>' +
       '<h3>How are you studying?</h3>' +
       '<p>Three short questions so we can teach more clearly. Skip any you prefer not to answer.</p>' +
-      '<select id="insight-study-mode">' +
+      '<select id="insight-study-mode" aria-label="How are you studying">' +
         '<option value="">I am studying…</option>' +
         '<option value="alone">Alone</option>' +
         '<option value="group">In a group</option>' +
         '<option value="teaching">Teaching a class</option>' +
       '</select>' +
-      '<select id="insight-background">' +
+      '<select id="insight-background" aria-label="Religious or educational background">' +
         '<option value="">Background</option>' +
         '<option value="adventist">Seventh-day Adventist</option>' +
         '<option value="protestant">Other Protestant</option>' +
@@ -441,7 +441,7 @@
         '<option value="other">Other / none</option>' +
         '<option value="prefer_not">Prefer not to say</option>' +
       '</select>' +
-      '<select id="insight-found">' +
+      '<select id="insight-found" aria-label="How did you find this site">' +
         '<option value="">How did you find this site?</option>' +
         '<option value="teacher">A teacher or pastor</option>' +
         '<option value="friend">A friend or family</option>' +

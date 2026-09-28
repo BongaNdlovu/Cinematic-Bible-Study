@@ -86,6 +86,32 @@ export async function onRequest(context) {
   const request = context.request;
   if (request.method === "OPTIONS" || request.method === "HEAD") return context.next();
   const path = new URL(request.url).pathname;
+  if (
+    path.startsWith("/docs") ||
+    path.startsWith("/tools") ||
+    path.startsWith("/backups") ||
+    path.startsWith("/workers") ||
+    path.startsWith("/qa") ||
+    path.startsWith("/originals") ||
+    path === "/README.md" ||
+    path === "/package.json" ||
+    path === "/package-lock.json" ||
+    path === "/server.py" ||
+    path === "/vercel.json" ||
+    path === "/wrangler.toml" ||
+    path === "/start_website.bat" ||
+    path === "/middleware.js" ||
+    path.includes("auth-config.example") ||
+    /(^|\/)\.[^/]+/.test(path)
+  ) {
+    return new Response("Not Found", {
+      status: 404,
+      headers: {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Cache-Control": "no-store, no-cache, must-revalidate, max-age=0"
+      }
+    });
+  }
   if (path === "/__rate" && request.method === "POST") return rateProxy(context, request);
   const ip = ipOf(request);
   const decision = await allowed(context, ip, path);
