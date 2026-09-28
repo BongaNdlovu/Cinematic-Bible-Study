@@ -84,7 +84,6 @@ async function rateProxy(context, request) {
 
 export async function onRequest(context) {
   const request = context.request;
-  if (request.method === "OPTIONS" || request.method === "HEAD") return context.next();
   const path = new URL(request.url).pathname;
   if (
     path.startsWith("/docs") ||
@@ -102,6 +101,9 @@ export async function onRequest(context) {
     path === "/start_website.bat" ||
     path === "/middleware.js" ||
     path.includes("auth-config.example") ||
+    path.includes("auth-config.be73b1b3b81c") ||
+    path.includes("auth-config.cfc4671cd63c") ||
+    path.includes("auth-config.f495d043ec28") ||
     /(^|\/)\.[^/]+/.test(path)
   ) {
     return new Response("Not Found", {
@@ -112,6 +114,7 @@ export async function onRequest(context) {
       }
     });
   }
+  if (request.method === "OPTIONS" || request.method === "HEAD") return context.next();
   if (path === "/__rate" && request.method === "POST") return rateProxy(context, request);
   const ip = ipOf(request);
   const decision = await allowed(context, ip, path);

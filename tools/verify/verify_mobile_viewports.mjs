@@ -119,6 +119,17 @@ try {
       `Gallery document scrollWidth (${galleryScrollWidth}) must not exceed viewport width (${vp.width})`
     );
 
+    // Verify top-chrome does not vertically collide with hero-stage-title
+    const topChromeBox = await page.locator(".top-chrome").boundingBox();
+    const stageTitleBox = await page.locator(".hero-stage-title").boundingBox();
+    assert(topChromeBox, "top-chrome must exist");
+    assert(stageTitleBox, "hero-stage-title must exist");
+    console.log(`[Gallery] topChrome bottom: ${topChromeBox.y + topChromeBox.height}, stageTitle top: ${stageTitleBox.y}`);
+    assert(
+      stageTitleBox.y >= topChromeBox.y + topChromeBox.height - 2,
+      `hero-stage-title top (${stageTitleBox.y}) must be below top-chrome bottom (${topChromeBox.y + topChromeBox.height})`
+    );
+
     // Account link in gallery header
     const accountLink = page.locator('.header-utilities a[href="account.html"]');
     assert(await accountLink.isVisible(), "Account link must be visible in gallery");

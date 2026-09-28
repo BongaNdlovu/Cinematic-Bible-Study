@@ -2695,7 +2695,7 @@ import * as THREE from 'three';
       }
 
       const isMobile = w <= 768;
-      const cardW = isMobile ? Math.min(150, Math.floor(w * 0.38)) : 196;
+      const cardW = isMobile ? Math.min(138, Math.floor(w * 0.36)) : 196;
       const leftColX = isMobile ? 8 : Math.min(Math.max(258, w * 0.198), 280);
       const rightColX = isMobile ? (w - cardW - 8) : Math.max(w - 330 - cardW - 18, w * 0.62);
       const rowYPositions = isMobile ? [
@@ -2725,6 +2725,13 @@ import * as THREE from 'three';
         const cardY = rowYPositions[node.row] || (150 + node.row * 130);
         cardEl.style.left = `${cardX}px`;
         cardEl.style.top = `${cardY}px`;
+        if (isMobile) {
+          cardEl.style.width = `${cardW}px`;
+          cardEl.style.maxWidth = `${cardW}px`;
+        } else {
+          cardEl.style.width = '';
+          cardEl.style.maxWidth = '';
+        }
 
         _tempVec.copy(node.anchor).applyMatrix4(artifactRoot.matrixWorld);
         _toCam.copy(camera.position).sub(_tempVec).normalize();
@@ -2751,8 +2758,8 @@ import * as THREE from 'three';
         const ax = (_tempVec.x * 0.5 + 0.5) * w;
         const ay = (-_tempVec.y * 0.5 + 0.5) * h;
 
-        pinEl.style.left = `${ax}px`;
-        pinEl.style.top = `${ay}px`;
+        pinEl.style.left = `${Math.max(4, Math.min(w - 24, ax))}px`;
+        pinEl.style.top = `${Math.max(4, Math.min(h - 24, ay))}px`;
         pinEl.classList.toggle('active', isFocused);
 
         const cardH = parts.cardH || cardEl.offsetHeight || 80;
