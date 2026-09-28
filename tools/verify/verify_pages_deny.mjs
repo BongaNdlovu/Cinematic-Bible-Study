@@ -14,6 +14,12 @@ assert(cf.includes("package.json"), "Cloudflare stage must exclude package.json"
 assert(cf.includes("package-lock.json"), "Cloudflare stage must exclude package-lock.json");
 assert(cf.includes("server.py"), "Cloudflare stage must exclude server.py");
 assert(cf.includes(".oxlintrc.json"), "Cloudflare stage must exclude .oxlintrc.json");
+assert(cf.includes("vercel.json"), "Cloudflare stage must exclude vercel.json");
+assert(cf.includes("wrangler.toml"), "Cloudflare stage must exclude wrangler.toml");
+assert(cf.includes(" backups"), "Cloudflare stage must exclude backups folder");
+assert(cf.includes(" workers"), "Cloudflare stage must exclude workers folder");
+assert(cf.includes(" qa-e2e"), "Cloudflare stage must exclude qa-e2e folder");
+assert(cf.includes("start_website.bat"), "Cloudflare stage must exclude start_website.bat");
 
 assert(vercel.includes(" docs"), "Vercel stage must exclude the docs folder");
 assert(vercel.includes("README.md"), "Vercel stage must exclude README.md");

@@ -22,8 +22,18 @@
     return String(iso || '') >= cut;
   }
 
+  function escapeHtml(value) {
+    return String(value || "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#39;");
+  }
+
   function csvEscape(v) {
-    const s = String(v == null ? '' : v);
+    let s = String(v == null ? '' : v);
+    if (/^[=+\-@\t\r]/.test(s)) s = "'" + s;
     if (/[",\n\r]/.test(s)) return '"' + s.replace(/"/g, '""') + '"';
     return s;
   }
@@ -48,7 +58,7 @@
     const u = unit ? ' ' + unit : '';
     return pairs.map(function (p) {
       const pct = max ? Math.round((p[1] / max) * 100) : 0;
-      return '<div class="ibar"><span>' + p[0] + '</span><i style="width:' + pct + '%"></i><b>' + p[1] + u + '</b></div>';
+      return '<div class="ibar"><span>' + escapeHtml(p[0]) + '</span><i style="width:' + pct + '%"></i><b>' + escapeHtml(p[1]) + u + '</b></div>';
     }).join('');
   }
 
@@ -250,8 +260,8 @@
       ) +
       panel('quiz', 'Quiz first try', quiz.length
         ? '<ul>' + quiz.map(function (q) {
-          return '<li>' + q.question + ': <b>' + q.first_try_pct + '%</b> first-try (' + q.attempts + ')' +
-            (q.top_wrong !== '' ? ', common miss option ' + q.top_wrong : '') + '</li>';
+          return '<li>' + escapeHtml(q.question) + ': <b>' + escapeHtml(q.first_try_pct) + '%</b> first-try (' + escapeHtml(q.attempts) + ')' +
+            (q.top_wrong !== '' ? ', common miss option ' + escapeHtml(q.top_wrong) : '') + '</li>';
         }).join('') + '</ul>'
         : '<p class="insights-empty">No quiz answers yet.</p>'
       ) +
@@ -261,18 +271,18 @@
         }), 's') +
         '<div style="margin-top:10px;font-size:11px;opacity:0.85;">' +
         timeData.filter(function (t) { return t.depth_25 || t.depth_50 || t.depth_75 || t.depth_100; }).map(function (t) {
-          return '<div>Sitting ' + t.sitting + ' reach: 25% (' + t.depth_25 + '), 50% (' + t.depth_50 + '), 75% (' + t.depth_75 + '), 100% (' + t.depth_100 + ')</div>';
+          return '<div>Sitting ' + escapeHtml(t.sitting) + ' reach: 25% (' + escapeHtml(t.depth_25) + '), 50% (' + escapeHtml(t.depth_50) + '), 75% (' + escapeHtml(t.depth_75) + '), 100% (' + escapeHtml(t.depth_100) + ')</div>';
         }).join('') +
         '</div>'
       ) +
       panel('features', 'Feature use', barList(features)) +
       panel('pulse', 'Sitting clarity (1–5)',
-        '<p>Average <b>' + pulseAvg + '</b> from ' + pulses.length + ' response' + (pulses.length === 1 ? '' : 's') + '.</p>' +
+        '<p>Average <b>' + escapeHtml(pulseAvg) + '</b> from ' + pulses.length + ' response' + (pulses.length === 1 ? '' : 's') + '.</p>' +
         '<ul>' + pulses.slice(0, 8).map(function (p) {
           const note = (p.responses && p.responses.note) || p.feedback || '';
           const rawS = p.responses && (p.responses.sitting != null ? p.responses.sitting : p.responses.sheet);
           const s = rawS != null ? rawS : '?';
-          return note ? '<li>Sitting ' + s + ': ' + note + '</li>' : '';
+          return note ? '<li>Sitting ' + escapeHtml(s) + ': ' + escapeHtml(note) + '</li>' : '';
         }).join('') + '</ul>'
       ) +
       panel('nps', 'Exit survey & NPS',
@@ -280,7 +290,7 @@
         '<ul>' + exits.slice(0, 8).map(function (s) {
           const changed = (s.responses && s.responses.changed) || '';
           const note = changed || s.feedback || '';
-          return note ? '<li>' + note.slice(0, 180) + '</li>' : '';
+          return note ? '<li>' + escapeHtml(note.slice(0, 180)) + '</li>' : '';
         }).join('') + '</ul>'
       ) +
       panel('profile', 'Learner profile mix',
