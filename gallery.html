@@ -29,6 +29,28 @@
   <script src="js/shared/auth.js"></script>
   <script src="js/shared/terms.js"></script>
   <script src="js/shared/insights.js"></script>
+  <script>
+    // The 3D Symbols gallery is for members. Guests go straight to sign-in and
+    // return here after.
+    (function () {
+      function gate() {
+        var auth = window.ScrollAuth;
+        if (!auth || typeof auth.ready !== "function") { setTimeout(gate, 50); return; }
+        auth.ready().then(function () {
+          if (auth.getUser && auth.getUser()) return;
+          var bypass = window.BAJourney && typeof window.BAJourney.previewAllContent === "function" && window.BAJourney.previewAllContent();
+          if (bypass) return;
+          var next = "gallery.html" + (location.search || "");
+          if (window.ScrollTerms && typeof window.ScrollTerms.goToAccount === "function") {
+            window.ScrollTerms.goToAccount(next);
+          } else {
+            location.assign("account.html?next=" + encodeURIComponent(next));
+          }
+        });
+      }
+      gate();
+    })();
+  </script>
   <script type="importmap">
   {
     "imports": {
@@ -140,49 +162,49 @@
 
     <div class="artifact-cards-list" id="artifact-cards-list">
       <button class="artifact-card-item active" type="button" data-asset="assembled">
-        <div class="artifact-thumb"><img src="assets/site/era-assembled.png" alt=""></div>
+        <div class="artifact-thumb"><img loading="lazy" src="assets/site/era-assembled.webp" alt=""></div>
         <div class="artifact-meta">
           <div class="artifact-name">Complete Daniel 2 Colossus</div>
           <div class="artifact-scripture">Daniel 2:31–45</div>
         </div>
       </button>
       <button class="artifact-card-item" type="button" data-asset="head">
-        <div class="artifact-thumb"><img src="assets/site/era-head.png" alt=""></div>
+        <div class="artifact-thumb"><img loading="lazy" src="assets/site/era-head.webp" alt=""></div>
         <div class="artifact-meta">
           <div class="artifact-name">Nebuchadnezzar’s Golden Head</div>
           <div class="artifact-scripture">Daniel 2:32, 38</div>
         </div>
       </button>
       <button class="artifact-card-item" type="button" data-asset="chest">
-        <div class="artifact-thumb"><img src="assets/site/era-chest.png" alt=""></div>
+        <div class="artifact-thumb"><img loading="lazy" src="assets/site/era-chest.webp" alt=""></div>
         <div class="artifact-meta">
           <div class="artifact-name">The Silver Chest and Arms</div>
           <div class="artifact-scripture">Daniel 2:32, 39</div>
         </div>
       </button>
       <button class="artifact-card-item" type="button" data-asset="thighs">
-        <div class="artifact-thumb"><img src="assets/site/era-thighs.png" alt=""></div>
+        <div class="artifact-thumb"><img loading="lazy" src="assets/site/era-thighs.webp" alt=""></div>
         <div class="artifact-meta">
           <div class="artifact-name">The Bronze Belly and Thighs</div>
           <div class="artifact-scripture">Daniel 2:32, 39</div>
         </div>
       </button>
       <button class="artifact-card-item" type="button" data-asset="legs">
-        <div class="artifact-thumb"><img src="assets/site/era-legs.png" alt=""></div>
+        <div class="artifact-thumb"><img loading="lazy" src="assets/site/era-legs.webp" alt=""></div>
         <div class="artifact-meta">
           <div class="artifact-name">The Iron Legs</div>
           <div class="artifact-scripture">Daniel 2:33</div>
         </div>
       </button>
       <button class="artifact-card-item" type="button" data-asset="feet">
-        <div class="artifact-thumb"><img src="assets/site/era-feet.png" alt=""></div>
+        <div class="artifact-thumb"><img loading="lazy" src="assets/site/era-feet.webp" alt=""></div>
         <div class="artifact-meta">
           <div class="artifact-name">The Feet of Iron and Clay</div>
           <div class="artifact-scripture">Daniel 2:33</div>
         </div>
       </button>
       <button class="artifact-card-item" type="button" data-asset="stone">
-        <div class="artifact-thumb"><img src="assets/site/era-stone.png" alt=""></div>
+        <div class="artifact-thumb"><img loading="lazy" src="assets/site/era-stone.webp" alt=""></div>
         <div class="artifact-meta">
           <div class="artifact-name">The Stone Cut Without Hands</div>
           <div class="artifact-scripture">Daniel 2:34</div>
@@ -190,35 +212,35 @@
       </button>
       <div class="rail-section-header">DANIEL 7 BEASTS</div>
       <button class="artifact-card-item" type="button" data-asset="lion">
-        <div class="artifact-thumb"><img src="assets/site/era-lion.png" alt=""></div>
+        <div class="artifact-thumb"><img loading="lazy" src="assets/site/era-lion.webp" alt=""></div>
         <div class="artifact-meta">
           <div class="artifact-name">Winged Lion of Babylon</div>
           <div class="artifact-scripture">Daniel 7:4</div>
         </div>
       </button>
       <button class="artifact-card-item" type="button" data-asset="bear">
-        <div class="artifact-thumb"><img src="assets/site/era-bear.png" alt=""></div>
+        <div class="artifact-thumb"><img loading="lazy" src="assets/site/era-bear.webp" alt=""></div>
         <div class="artifact-meta">
           <div class="artifact-name">The Bear with Three Ribs</div>
           <div class="artifact-scripture">Daniel 7:5</div>
         </div>
       </button>
       <button class="artifact-card-item" type="button" data-asset="leopard">
-        <div class="artifact-thumb"><img src="assets/site/era-leopard.png" alt=""></div>
+        <div class="artifact-thumb"><img loading="lazy" src="assets/site/era-leopard.webp" alt=""></div>
         <div class="artifact-meta">
           <div class="artifact-name">Four-Winged Leopard</div>
           <div class="artifact-scripture">Daniel 7:6</div>
         </div>
       </button>
       <button class="artifact-card-item" type="button" data-asset="beast">
-        <div class="artifact-thumb"><img src="assets/site/era-beast.png" alt=""></div>
+        <div class="artifact-thumb"><img loading="lazy" src="assets/site/era-beast.webp" alt=""></div>
         <div class="artifact-meta">
           <div class="artifact-name">Dreadful Beast &amp; Little Horn</div>
           <div class="artifact-scripture">Daniel 7:7–8</div>
         </div>
       </button>
       <button class="artifact-card-item" type="button" data-asset="years1260">
-        <div class="artifact-thumb"><img src="assets/site/era-years1260.png" alt=""></div>
+        <div class="artifact-thumb"><img loading="lazy" src="assets/site/era-years1260.webp" alt=""></div>
         <div class="artifact-meta">
           <div class="artifact-name">1,260 Years</div>
           <div class="artifact-scripture">Daniel 7:25</div>
@@ -226,28 +248,28 @@
       </button>
       <div class="rail-section-header">DANIEL 8 · RAM &amp; GOAT</div>
       <button class="artifact-card-item" type="button" data-asset="ram">
-        <div class="artifact-thumb"><img src="assets/site/era-ram.png" alt=""></div>
+        <div class="artifact-thumb"><img loading="lazy" src="assets/site/era-ram.webp" alt=""></div>
         <div class="artifact-meta">
           <div class="artifact-name">Ram of Medo-Persia</div>
           <div class="artifact-scripture">Daniel 8:3–4, 20</div>
         </div>
       </button>
       <button class="artifact-card-item" type="button" data-asset="goat">
-        <div class="artifact-thumb"><img src="assets/site/era-goat.png" alt=""></div>
+        <div class="artifact-thumb"><img loading="lazy" src="assets/site/era-goat.webp" alt=""></div>
         <div class="artifact-meta">
           <div class="artifact-name">Charging Goat of Greece</div>
           <div class="artifact-scripture">Daniel 8:5–7</div>
         </div>
       </button>
       <button class="artifact-card-item" type="button" data-asset="goat_broken">
-        <div class="artifact-thumb"><img src="assets/site/era-goat_broken.png" alt=""></div>
+        <div class="artifact-thumb"><img loading="lazy" src="assets/site/era-goat_broken.webp" alt=""></div>
         <div class="artifact-meta">
           <div class="artifact-name">Goat with the Broken Horn</div>
           <div class="artifact-scripture">Daniel 8:8</div>
         </div>
       </button>
       <button class="artifact-card-item" type="button" data-asset="goat_horn">
-        <div class="artifact-thumb"><img src="assets/site/era-goat_horn.png" alt=""></div>
+        <div class="artifact-thumb"><img loading="lazy" src="assets/site/era-goat_horn.webp" alt=""></div>
         <div class="artifact-meta">
           <div class="artifact-name">Little Horn of the Goat</div>
           <div class="artifact-scripture">Daniel 8:9–12</div>
@@ -255,35 +277,35 @@
       </button>
       <div class="rail-section-header">COURT, DURA &amp; THE TREE</div>
       <button class="artifact-card-item" type="button" data-asset="dura">
-        <div class="artifact-thumb"><img src="assets/site/era-dura.png" alt=""></div>
+        <div class="artifact-thumb"><img loading="lazy" src="assets/site/era-dura.webp" alt=""></div>
         <div class="artifact-meta">
           <div class="artifact-name">Golden Image of Dura</div>
           <div class="artifact-scripture">Daniel 3:1</div>
         </div>
       </button>
       <button class="artifact-card-item" type="button" data-asset="stump">
-        <div class="artifact-thumb"><img src="assets/site/era-stump.png" alt=""></div>
+        <div class="artifact-thumb"><img loading="lazy" src="assets/site/era-stump.webp" alt=""></div>
         <div class="artifact-meta">
           <div class="artifact-name">Ironbound Stump</div>
           <div class="artifact-scripture">Daniel 4:15</div>
         </div>
       </button>
       <button class="artifact-card-item" type="button" data-asset="ox_king">
-        <div class="artifact-thumb"><img src="assets/site/era-ox_king.png" alt=""></div>
+        <div class="artifact-thumb"><img loading="lazy" src="assets/site/era-ox_king.webp" alt=""></div>
         <div class="artifact-meta">
           <div class="artifact-name">Nebuchadnezzar the Ox-King</div>
           <div class="artifact-scripture">Daniel 4:33</div>
         </div>
       </button>
       <button class="artifact-card-item" type="button" data-asset="ancient">
-        <div class="artifact-thumb"><img src="assets/site/era-ancient.png" alt=""></div>
+        <div class="artifact-thumb"><img loading="lazy" src="assets/site/era-ancient.webp" alt=""></div>
         <div class="artifact-meta">
           <div class="artifact-name">The Ancient of Days</div>
           <div class="artifact-scripture">Daniel 7:9–10</div>
         </div>
       </button>
       <button class="artifact-card-item" type="button" data-asset="son">
-        <div class="artifact-thumb"><img src="assets/site/era-son.png" alt=""></div>
+        <div class="artifact-thumb"><img loading="lazy" src="assets/site/era-son.webp" alt=""></div>
         <div class="artifact-meta">
           <div class="artifact-name">One Like the Son of Man</div>
           <div class="artifact-scripture">Daniel 7:13–14</div>
@@ -291,7 +313,7 @@
       </button>
       <div class="rail-section-header">DANIEL 9 · THE DECREE</div>
       <button class="artifact-card-item" type="button" data-asset="decree">
-        <div class="artifact-thumb"><img src="assets/site/era-decree.png" alt=""></div>
+        <div class="artifact-thumb"><img loading="lazy" src="assets/site/era-decree.webp" alt=""></div>
         <div class="artifact-meta">
           <div class="artifact-name">Royal Decree of Artaxerxes</div>
           <div class="artifact-scripture">Ezra 7:13 · Daniel 9:25</div>
@@ -299,21 +321,21 @@
       </button>
       <div class="rail-section-header">DANIEL 11–12</div>
       <button class="artifact-card-item" type="button" data-asset="kings">
-        <div class="artifact-thumb"><img src="assets/site/era-kings.png" alt=""></div>
+        <div class="artifact-thumb"><img loading="lazy" src="assets/site/era-kings.webp" alt=""></div>
         <div class="artifact-meta">
           <div class="artifact-name">Kings of the North and South</div>
           <div class="artifact-scripture">Daniel 11:5, 40</div>
         </div>
       </button>
       <button class="artifact-card-item" type="button" data-asset="michael">
-        <div class="artifact-thumb"><img src="assets/site/era-michael.png" alt=""></div>
+        <div class="artifact-thumb"><img loading="lazy" src="assets/site/era-michael.webp" alt=""></div>
         <div class="artifact-meta">
           <div class="artifact-name">Michael Standing Up</div>
           <div class="artifact-scripture">Daniel 12:1</div>
         </div>
       </button>
       <button class="artifact-card-item" type="button" data-asset="sealed">
-        <div class="artifact-thumb"><img src="assets/site/era-sealed.png" alt=""></div>
+        <div class="artifact-thumb"><img loading="lazy" src="assets/site/era-sealed.webp" alt=""></div>
         <div class="artifact-meta">
           <div class="artifact-name">The Sealed Scroll</div>
           <div class="artifact-scripture">Daniel 12:4</div>
@@ -378,10 +400,10 @@
           <span class="narrative-title">RELATED ARTIFACTS</span>
         </div>
         <div class="related-avatars-row" id="related-avatars-row">
-          <button class="related-avatar" type="button" data-rel="chest" title="Silver Chest"><img src="assets/site/era-chest.png" alt="Silver Chest"></button>
-          <button class="related-avatar" type="button" data-rel="thighs" title="Bronze Thighs"><img src="assets/site/era-thighs.png" alt="Bronze Thighs"></button>
-          <button class="related-avatar" type="button" data-rel="legs" title="Iron Legs"><img src="assets/site/era-legs.png" alt="Iron Legs"></button>
-          <button class="related-avatar" type="button" data-rel="stone" title="The Stone"><img src="assets/site/era-stone.png" alt="Stone"></button>
+          <button class="related-avatar" type="button" data-rel="chest" title="Silver Chest"><img src="assets/site/era-chest.webp" alt="Silver Chest"></button>
+          <button class="related-avatar" type="button" data-rel="thighs" title="Bronze Thighs"><img src="assets/site/era-thighs.webp" alt="Bronze Thighs"></button>
+          <button class="related-avatar" type="button" data-rel="legs" title="Iron Legs"><img src="assets/site/era-legs.webp" alt="Iron Legs"></button>
+          <button class="related-avatar" type="button" data-rel="stone" title="The Stone"><img src="assets/site/era-stone.webp" alt="Stone"></button>
         </div>
         <div class="related-dots" id="related-dots">
           <span class="dot active"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>

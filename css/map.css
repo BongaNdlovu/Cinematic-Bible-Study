@@ -1015,14 +1015,59 @@ html.cmap-html, body.cmap-page {
   border-color: transparent;
 }
 
+/* Panels toggle exists only for the phone layout; desktop shows both panels always.
+   Must stay ABOVE the max-width media query so the mobile display:flex wins. */
+.cmap-panels-toggle { display: none; }
+.cmap-embed .cmap-panels-toggle { display: none; }
+
 @media (max-width: 800px) {
   .cmap-legend { display: none; }
   .cmap-layers { display: none; }
-  .cmap-basemap { top: 96px; right: 10px; }
+  .cmap-legend.is-open {
+    display: flex;
+    top: 96px;
+    right: 10px;
+    max-height: 46vh;
+    z-index: 2300;
+  }
+  .cmap-layers.is-open {
+    display: flex;
+    top: 96px;
+    left: 10px;
+    right: auto;
+    z-index: 2300;
+  }
+  .cmap-panels-toggle {
+    display: flex;
+    position: absolute;
+    top: 196px;
+    right: 10px;
+    z-index: 2200;
+    gap: 4px;
+    padding: 4px;
+    border: 1px solid var(--cmap-line);
+    background: var(--cmap-panel);
+    backdrop-filter: blur(12px);
+  }
+  .cmap-panels-toggle button {
+    padding: 7px 10px;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--cmap-dim);
+    border-radius: 4px;
+  }
+  .cmap-panels-toggle button:hover { color: var(--cmap-gold-soft); }
+  .cmap-panels-toggle button[aria-expanded="true"] {
+    color: #1a140c;
+    background: linear-gradient(180deg, #f0d78c, #c9a227);
+  }
+  .cmap-basemap { top: 148px; right: 10px; }
+  .cmap-search { top: 96px; left: 10px; right: 10px; width: auto; transform: none; }
   .cmap-compass { width: 52px; height: 52px; bottom: 100px; right: 10px; }
   .cmap-compass svg { width: 52px; height: 52px; }
   .cmap-coords { right: 70px; left: auto; bottom: 118px; }
-  .cmap-cartouche { top: 96px; left: 10px; max-width: calc(100% - 20px); }
+  .cmap-cartouche { top: 148px; left: 10px; max-width: calc(100% - 180px); }
   .cmap-dossier {
     left: 10px; right: 10px; width: auto;
     bottom: 88px;
@@ -1046,7 +1091,7 @@ html.cmap-html, body.cmap-page {
   .cmap-links {
     width: 100%;
     justify-content: flex-start;
-    gap: 6px;
+    gap: 5px;
     flex-wrap: nowrap;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
@@ -1055,15 +1100,56 @@ html.cmap-html, body.cmap-page {
   }
   .cmap-links::-webkit-scrollbar { display: none; }
   .cmap-links a {
-    padding: 6px 9px;
+    padding: 5px 6px;
+    letter-spacing: 0.14em;
     white-space: nowrap;
     flex-shrink: 0;
   }
+  .cmap-links .cmap-back-tail { display: none; }
+  /* When the row still must scroll (e.g. entering from a lesson), fade the
+     trailing edge so the swipe is discoverable instead of a hidden Account. */
+  .cmap-links.is-scrollable {
+    -webkit-mask-image: linear-gradient(90deg, #000 0, #000 calc(100% - 22px), transparent);
+    mask-image: linear-gradient(90deg, #000 0, #000 calc(100% - 22px), transparent);
+  }
+  .cmap-links.is-scrollable.is-scrolled {
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 16px, #000 calc(100% - 22px), transparent);
+    mask-image: linear-gradient(90deg, transparent, #000 16px, #000 calc(100% - 22px), transparent);
+  }
   .cmap-embed { height: 58vh; min-height: 320px; }
   .cmap-hint { display: none; }
+}
+
+/* On narrow phones the nav row wraps instead of scrolling, so every pill —
+   including Account — stays on screen even with the long lesson label. */
+@media (max-width: 480px) {
+  .cmap-links {
+    flex-wrap: wrap;
+    row-gap: 5px;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .cmap-chapter img, .cmap-marker.is-pulse .pin { animation: none !important; }
   .cmap-dossier, .cmap-chapter, .cmap-overture { transition: none; }
 }
+
+/* Zoom control styled to match the dark cinematic chrome. */
+.leaflet-control-zoom {
+  border: 1px solid var(--cmap-line);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+}
+.leaflet-control-zoom a {
+  background: rgba(10, 8, 6, 0.78);
+  color: #ede2cf;
+  border-bottom: 1px solid rgba(212, 175, 55, 0.25);
+  width: 34px;
+  height: 34px;
+  line-height: 32px;
+  font-size: 17px;
+}
+.leaflet-control-zoom a:hover { background: rgba(26, 22, 16, 0.92); color: #f0e0b8; }
+.leaflet-control-zoom a:last-child { border-bottom: 0; }
+

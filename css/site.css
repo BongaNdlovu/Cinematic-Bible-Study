@@ -1172,7 +1172,6 @@ body.dash.cover::before {
   opacity: 0.42;
   filter: brightness(1.65) saturate(1.08);
 }
-body.dash .site-nav { display: none; }
 .dash-shell {
   position: relative;
   z-index: 1;
@@ -2325,4 +2324,5 @@ body.projection-mode #btn-atmosphere-toggle {
     padding: 12px !important;
   }
 }
+
 

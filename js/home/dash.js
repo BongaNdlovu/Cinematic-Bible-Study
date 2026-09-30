@@ -18,7 +18,22 @@
     requestAnimationFrame(revealDashboard);
   });
 
+  // Hero slides beyond the first load only when they are about to be shown:
+  // one image ahead keeps transitions smooth without downloading all seven up front.
+  function ensureSlideSource(index, lookahead) {
+    const slides = document.querySelectorAll(".dash-hero-reel img");
+    const targets = [index];
+    if (lookahead) targets.push((index + 1) % slides.length);
+    targets.forEach(function (i) {
+      const slide = slides[i];
+      if (slide && slide.getAttribute("data-src") && !slide.getAttribute("src")) {
+        slide.setAttribute("src", slide.getAttribute("data-src"));
+      }
+    });
+  }
+
   function setHeroEra(index) {
+    ensureSlideSource(index, true);
     const slides = document.querySelectorAll(".dash-hero-reel img");
     const eras = document.querySelectorAll(".dash-empire-ticker [data-era]");
     const caption = document.getElementById("hero-reel-caption");
@@ -80,7 +95,11 @@
       }
       if (!open && typeof J.lockExplain === "function") {
         const note = J.lockExplain("sheet", sheet);
-        el.title = note.title + " — " + note.body;
+        if (el.dataset.lockName) {
+          el.title = el.dataset.lockName + " is still locked — " + note.body;
+        } else {
+          el.title = note.title + " — " + note.body;
+        }
       } else {
         el.removeAttribute("title");
       }
@@ -104,14 +123,6 @@
     }
   }
 
-  function goToAccount(next) {
-    if (window.ScrollTerms && typeof window.ScrollTerms.goToAccount === "function") {
-      window.ScrollTerms.goToAccount(next);
-      return;
-    }
-    const dest = next || "index.html";
-    location.assign("account.html?next=" + encodeURIComponent(dest));
-  }
 
   document.querySelectorAll("[data-dash-signin]").forEach(function (btn) {
     btn.addEventListener("click", function (e) {
@@ -126,18 +137,12 @@
   document.addEventListener("click", function (e) {
     const card = e.target.closest("[data-sheet], #hero-cta, [data-hero-primary]");
     if (!card) return;
-    const signedIn = !!(window.ScrollAuth && window.ScrollAuth.getUser && window.ScrollAuth.getUser());
     const sheet = card.hasAttribute("data-sheet") ? Number(card.getAttribute("data-sheet")) : null;
     if (window.Insights) {
       window.Insights.track('home_nav', Number.isInteger(sheet) ? sheet : null, {
         action: card.id === "hero-cta" || card.hasAttribute("data-hero-primary") ? "cta" : "card"
       });
     }
-    if (signedIn || card.classList.contains("is-locked")) return;
-    const href = card.getAttribute("href") || card.dataset.savedHref || "";
-    if (!href || card.tagName !== "A") return;
-    e.preventDefault();
-    goToAccount(href);
   });
 
   syncLocks();

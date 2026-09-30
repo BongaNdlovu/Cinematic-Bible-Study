@@ -1,5 +1,11 @@
     // Sequential sittings: access is owned by BAJourney.canAccessSheet.
 
+    // Guests get the free sittings only; their lock copy invites them to sign in.
+    function memberLockText(fallback) {
+      const guest = !(window.ScrollAuth && typeof window.ScrollAuth.getUser === 'function' && window.ScrollAuth.getUser());
+      return guest ? 'Members only — sign in to continue' : fallback;
+    }
+
     // Sheet to Timeline mapping
     const sheetToTimelineMap = {
       0: 0, // Prologue -> 605 B.C.
@@ -175,7 +181,7 @@
         '<button type="button" class="horizon-card' + (i === 0 ? ' is-active' : '') +
         (epochAccessible(i) ? '' : ' is-locked') +
         '" id="t-node-' + i + '" data-epoch="' + i + '" aria-pressed="' + (i === 0 ? 'true' : 'false') + '"' +
-        (epochAccessible(i) ? '' : ' disabled aria-disabled="true" title="Locked — finish the open sitting first"') + '>' +
+        (epochAccessible(i) ? '' : ' disabled aria-disabled="true" title="' + memberLockText('Locked — finish the open sitting first') + '"') + '>' +
         '<img src="' + ep.image + '" alt="' + ep.year + '">' +
         '<span class="horizon-card-veil"></span>' +
         '<span class="horizon-card-year">' + ep.year + '</span>' +
@@ -1166,8 +1172,10 @@
     function resizeWeatherCanvas() {
       const canvas = document.getElementById('weather-canvas');
       if (canvas) {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
+        // Half resolution: the drifting motes are soft, and CSS stretches the
+        // canvas back to full size — a large CPU/battery save, no visible change.
+        canvas.width = Math.max(320, Math.round(window.innerWidth / 2));
+        canvas.height = Math.max(240, Math.round(window.innerHeight / 2));
       }
       initWeatherParticles();
     }
@@ -1489,11 +1497,16 @@
       const list = document.getElementById('toc-unit-list');
       list.innerHTML = '';
 
+      const memberViewer = !!(window.ScrollAuth && typeof window.ScrollAuth.getUser === 'function' && window.ScrollAuth.getUser());
+      const maxOpenIdx = (window.BAJourney && typeof window.BAJourney.maxOpenSheet === 'function') ? window.BAJourney.maxOpenSheet() : 0;
+
       sheetsData.forEach((sheet, idx) => {
         const isCurrent = idx === currentSheetIndex;
         const isDone = completedSheets.has(idx);
 
         const locked = !canAccessSheet(idx);
+        // Guests get the free sittings; their locked rows are sign-in doors.
+        const guestWall = locked && !memberViewer;
         const btn = document.createElement('button');
         btn.type = 'button';
         if (!locked) {
@@ -1501,24 +1514,39 @@
             loadSheet(idx);
             toggleTocDrawer();
           });
+        } else if (guestWall) {
+          btn.addEventListener('click', () => {
+            window.location.assign('account.html?next=' + encodeURIComponent('study.html?sheet=' + idx));
+          });
         } else {
           btn.disabled = true;
           btn.setAttribute('aria-disabled', 'true');
         }
+        const statusChip = isDone
+          ? '<p class="mt-1 font-mono text-[10px] uppercase tracking-wider text-emerald-700 dark:text-emerald-400">✓ Completed</p>'
+          : (locked
+            ? `<p class="mt-1 font-mono text-[10px] uppercase tracking-wider text-amber-800 dark:text-amber-400">${memberLockText('Locked — finish the open sitting')}</p>`
+            : (!memberViewer && idx === maxOpenIdx
+              ? '<p class="mt-1 font-mono text-[10px] uppercase tracking-wider text-amber-700 dark:text-amber-400">Free — start here</p>'
+              : (memberViewer && idx === maxOpenIdx
+                ? '<p class="mt-1 font-mono text-[10px] uppercase tracking-wider text-amber-700 dark:text-amber-400">Up next</p>'
+                : '')));
         btn.className = `w-full text-left p-3 rounded-lg flex items-start space-x-3 transition-colors ${
           locked
-            ? 'opacity-45 cursor-default pointer-events-none'
-            : isCurrent 
-            ? 'bg-amber-100/70 dark:bg-amber-950/60 border border-amber-300 dark:border-amber-800' 
+            ? (guestWall
+              ? 'opacity-70 hover:bg-paper-200/60 dark:hover:bg-paper-900'
+              : 'opacity-45 cursor-default pointer-events-none')
+            : isCurrent
+            ? 'bg-amber-100/70 dark:bg-amber-950/60 border border-amber-300 dark:border-amber-800'
             : 'hover:bg-paper-200/60 dark:hover:bg-paper-900'
         }`;
 
         btn.innerHTML = `
           <div class="mt-0.5 w-5 h-5 rounded-full flex items-center justify-center text-xs font-mono font-bold shrink-0 ${
-            isDone 
-              ? 'bg-emerald-600 text-white' 
-              : isCurrent 
-                ? 'bg-amber-600 text-white' 
+            isDone
+              ? 'bg-emerald-600 text-white'
+              : isCurrent
+                ? 'bg-amber-600 text-white'
                 : 'bg-paper-300 dark:bg-paper-800 text-ink-600 dark:text-paper-400'
           }">
             ${isDone ? '✓' : idx}
@@ -1531,9 +1559,10 @@
             <h4 class="font-serif text-sm font-semibold text-ink-900 dark:text-paper-100 truncate mt-0.5">
               ${sheet.title}
             </h4>
-            ${locked ? '<p class="mt-1 font-mono text-[10px] uppercase tracking-wider text-amber-800 dark:text-amber-400">Locked — finish the open sitting</p>' : ''}
+            ${statusChip}
           </div>
         `;
+        if (locked && !guestWall) btn.title = 'Locked — finish the open sitting first';
         list.appendChild(btn);
       });
 

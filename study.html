@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>The Scroll of Daniel | Historicist Exilic Study</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📜</text></svg>">
   <meta name="description" content="11 classroom-ready Daniel sittings with primary sources, KJV scripture, interactive proof workbenches, facilitator notes, and printable certificate.">
   <meta property="og:type" content="article">
   <meta property="og:url" content="https://cinematic-bible-study-daniel.pages.dev/study">
@@ -18,14 +19,13 @@
   <!-- Editorial & Monospace Typography -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=VT323&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 
-  <!-- Tailwind CSS CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Tailwind CSS (precompiled with Tailwind CLI from tailwind.study.config.js — run: npx tailwindcss -c tailwind.study.config.js -i css/study-tailwind-src.css -o css/study-tailwind.css --minify) -->
+  <link rel="stylesheet" href="css/study-tailwind.css">
 
   <!-- Native Web Audio API used for Soft Pomodoro Completion Chime -->
 
-  <script src="js/study/tailwind-config.js"></script>
   <link rel="stylesheet" href="css/terms.css">
 
   <style>
@@ -1349,19 +1349,27 @@
       width: min(1760px, calc(100vw - 2rem));
       max-height: calc(100vh - 2.5rem);
       overflow: auto;
-      padding: 0.9rem;
+      padding: 0;
       border-radius: 16px;
       background: radial-gradient(ellipse at 50% 0%, rgba(255, 214, 102, 0.16), transparent 50%), #14110c;
       border: 1px solid rgba(212, 175, 55, 0.5);
       box-shadow: 0 0 40px rgba(212, 175, 55, 0.28), 0 24px 60px rgba(0, 0, 0, 0.55);
     }
+    /* The Close/Download bar sticks to the top of the scrolling card so the
+       modal can always be left, even after scrolling a tall plate on a phone. */
     .infographic-modal-bar {
+      position: sticky;
+      top: 0;
+      z-index: 2;
       display: flex;
       flex-wrap: wrap;
       align-items: center;
       justify-content: space-between;
       gap: 0.7rem;
-      margin-bottom: 0.7rem;
+      padding: 0.9rem;
+      background: #14110c;
+      border-bottom: 1px solid rgba(212, 175, 55, 0.4);
+      border-radius: 15px 15px 0 0;
     }
     .infographic-modal-bar p {
       margin: 0;
@@ -1371,10 +1379,10 @@
     }
     .infographic-modal-card img {
       display: block;
-      width: 100%;
+      width: calc(100% - 1.8rem);
       max-width: 1672px;
       height: auto;
-      margin: 0 auto;
+      margin: 0.9rem auto;
       border-radius: 10px;
       background: #fff8e6;
       box-shadow: 0 0 28px rgba(255, 214, 102, 0.22);
@@ -2626,6 +2634,15 @@
       overflow: hidden;
       text-overflow: ellipsis;
     }
+    /* Keep the site name fully visible on wide screens: the brand never yields,
+       the competency pill (the widest flexible tool) steps aside below 1540px,
+       and the tools row wraps only under real pressure. */
+    @media (min-width: 1200px) {
+      .study-brand { flex-shrink: 0; }
+    }
+    @media (max-width: 1539px) {
+      .study-tools .header-competency-pill { display: none; }
+    }
     .study-tools {
       display: flex;
       align-items: center;
@@ -2633,6 +2650,7 @@
       flex: 1 1 auto;
       justify-content: flex-end;
       min-width: 0;
+      flex-wrap: wrap;
     }
     .header-competency-pill {
       display: inline-flex;
@@ -3730,7 +3748,7 @@
 
         <!-- Print & Progress Buttons -->
         <button onclick="if(window.StudyCompetency)window.StudyCompetency.renderCompetencyRecordModal()" id="btn-progress-header" class="px-2 py-1 rounded border border-paper-300 dark:border-paper-800 hover:border-amber-600 text-xs font-mono text-ink-700 dark:text-paper-300" title="My Progress & Export">📊 Progress</button>
-        <button onclick="window.print()" id="btn-print-header" class="px-2 py-1 rounded border border-paper-300 dark:border-paper-800 hover:border-amber-600 text-xs font-mono text-ink-700 dark:text-paper-300" title="Print Current Sitting">🖨️ Print</button>
+        <button id="btn-print-header" class="px-2 py-1 rounded border border-paper-300 dark:border-paper-800 hover:border-amber-600 text-xs font-mono text-ink-700 dark:text-paper-300" title="Print Current Sitting">🖨️ Print</button>
 
         <!-- Theme Mode Cycler -->
         <button onclick="cycleTheme()" id="theme-btn" class="p-1.5 rounded hover:bg-paper-200/60 dark:hover:bg-paper-900 text-xs font-mono text-ink-700 dark:text-paper-300" title="Toggle Theme">

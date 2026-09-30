@@ -174,7 +174,7 @@ window.MAP_CHRONICLE = {
     telegraph: "assets/maps/icons/medal-telegraph.jpg"
   },
   events: [
-    { id: "siege-jerusalem", name: "Siege of Jerusalem", lon: 35.229, lat: 31.778, yearId: "y605", kind: "battle", kicker: "605 B.C.", text: "Jehoiakim’s third year. Temple vessels go to Marduk. Daniel and the Hebrew youths enter Babylon’s court school.", scripture: "Daniel 1:1–6", art: "assets/study/epochs/jerusalem-siege.jpg" },
+    { id: "siege-jerusalem", name: "Siege of Jerusalem", lon: 37.25, lat: 31.778, yearId: "y605", kind: "battle", kicker: "605 B.C.", text: "Jehoiakim’s third year. Temple vessels go to Marduk. Daniel and the Hebrew youths enter Babylon’s court school.", scripture: "Daniel 1:1–6", art: "assets/study/epochs/jerusalem-siege.jpg" },
     { id: "fall-babylon", name: "Fall of Babylon", lon: 44.421, lat: 32.542, yearId: "y539", kind: "battle", kicker: "539 B.C.", text: "Cyrus lowers the Euphrates. Belshazzar’s feast ends. Numbered, weighed, divided.", scripture: "Daniel 5; Isaiah 45:1", art: "assets/study/epochs/babylon-fall.jpg" },
     { id: "artaxerxes-decree", name: "Decree of Artaxerxes", lon: 48.258, lat: 32.189, yearId: "y457", kind: "decree", kicker: "457 B.C.", text: "Ezra 7 — the complete decree to restore and rebuild. The 70 weeks and the 2,300 days start here.", scripture: "Ezra 7; Daniel 9:24–25", art: "assets/study/epochs/chronicle-artaxerxes-decree.jpg" },
     { id: "gaugamela", name: "Gaugamela", lon: 43.40, lat: 36.36, yearId: "y331", kind: "battle", kicker: "331 B.C.", text: "Alexander breaks Darius III on the plain near Arbela. The ram has no power to stand before the goat.", scripture: "Daniel 8:6–7, 20–21", art: "assets/study/epochs/chronicle-gaugamela-clean.jpg" },
@@ -212,7 +212,7 @@ window.MAP_CHRONICLE = {
       insight: "Captivity is not accident. The Lord gave Judah into his hand, and the head of gold is already on the stage.",
       plate: "assets/maps/chronicle-map-605.jpg",
       art: "assets/study/epochs/jerusalem-siege.jpg",
-      camera: { lon: 40.8, lat: 32.8, zoom: 2.55 },
+      camera: { lon: 40.8, lat: 32.8, zoom: 2.55, tileZoom: 5 },
       focus: "babylon",
       event: "siege-jerusalem",
       studySheet: 1,

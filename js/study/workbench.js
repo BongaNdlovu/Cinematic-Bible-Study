@@ -106,8 +106,8 @@
             </div>
           </div>
           <div class="mb-3">
-            <label class="block text-[11px] font-mono text-ink-600 dark:text-paper-400 mb-1">
-              Exact Biblical Formula Phrase in KJV (Numbers 14:34 & Ezekiel 4:6):
+            <label for="wb0-phrase" class="block text-[11px] font-mono text-ink-600 dark:text-paper-400 mb-1">
+              Exact Biblical Formula Phrase in KJV (Numbers 14:34 &amp; Ezekiel 4:6):
             </label>
             <div class="flex gap-2">
               <input type="text" id="wb0-phrase" value="${t1Done ? 'each day for a year' : ''}" placeholder="e.g., each day for a year" class="flex-1 p-2.5 rounded-lg border border-paper-300 dark:border-paper-700 bg-paper-100/70 dark:bg-paper-900 text-xs font-mono text-ink-900 dark:text-paper-100" />
@@ -332,7 +332,7 @@
           </div>
 
           <div class="p-3 rounded-lg bg-paper-200/50 dark:bg-paper-900/70 border border-paper-300 dark:border-paper-800 mb-4">
-            <label class="block text-xs font-mono text-ink-700 dark:text-paper-300 mb-1">
+            <label for="wb1-zeroim-input" class="block text-xs font-mono text-ink-700 dark:text-paper-300 mb-1">
               Type the transliterated Hebrew term for the plant/pulse diet requested by Daniel (Dan 1:12):
             </label>
             <div class="flex gap-2">

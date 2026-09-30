@@ -198,7 +198,7 @@
       "<small>Daniel 2 · 7 · 8 · 9</small><h1>Map of History</h1><p>The succession of kingdoms, from gold to the stone.</p>");
     const cartouche = el("div", { class: "cmap-cartouche" },
       "<img class='cmap-cartouche-icon' alt=''><div><small>Chronicle year</small><strong></strong><span></span></div>");
-    const legend = el("div", { class: "cmap-legend" },
+    const legend = el("div", { class: "cmap-legend", id: "cmap-legend-panel" },
       "<div class='cmap-legend-title'>Map key</div>" +
       "<div class='cmap-legend-row'><img src='assets/maps/icons/metal-gold.jpg' alt=''>Gold · Babylon</div>" +
       "<div class='cmap-legend-row'><img src='assets/maps/icons/metal-silver.jpg' alt=''>Silver · Persia</div>" +
@@ -243,7 +243,7 @@
     const bases = el("div", { class: "cmap-basemap", role: "group", "aria-label": "Basemap" },
       "<button type='button' data-base='satellite'>Satellite</button>" +
       "<button type='button' data-base='streets'>Streets</button>");
-    const layers = el("div", { class: "cmap-layers" },
+    const layers = el("div", { class: "cmap-layers", id: "cmap-layers-panel" },
       "<div class='cmap-legend-title'>Layers</div>" +
       "<label><input type='checkbox' data-layer='borders' checked> Borders</label>" +
       "<label><input type='checkbox' data-layer='cities' checked> Cities</label>" +
@@ -254,7 +254,7 @@
     const searchBox = el("div", { class: "cmap-search" },
       "<input type='search' placeholder='Search city, empire, battle…' aria-label='Search the map'>" +
       "<div class='cmap-search-hits' hidden></div>");
-    const compass = el("div", { class: "cmap-compass", "aria-label": "North" },
+    const compass = el("div", { class: "cmap-compass", "aria-hidden": "true" },
       "<svg viewBox='0 0 72 72' aria-hidden='true'><circle cx='36' cy='36' r='33'/><path class='n' d='M36 8 L42 36 L36 32 L30 36 Z'/><text x='36' y='18'>N</text></svg>");
     const coords = el("div", { class: "cmap-coords" }, "—");
     const flyBadge = el("div", { class: "cmap-fly-badge", hidden: true }, "<img alt=''><span></span>");
@@ -267,7 +267,8 @@
       const isValidSheet = (s) => s !== null && s !== undefined && /^\d+$/.test(String(s).trim()) && Number(s) >= 0 && Number(s) <= 10;
       const sheetSafe = (fromLesson && isValidSheet(sheetParam)) ? String(clampSheetIndex(sheetParam)) : null;
       const backHref = sheetSafe ? `study.html?sheet=${encodeURIComponent(sheetSafe)}#sheet-article` : "study.html";
-      const backLabel = sheetSafe ? "← Back to this lesson" : "← Study desk";
+      // The " desk" tail is hidden on narrow screens so every nav pill fits without a swipe.
+      const backLabel = sheetSafe ? "← Back to this lesson" : "← Study<span class=\"cmap-back-tail\"> desk</span>";
       const galleryHref = sheetSafe ? `gallery.html?from=lesson&sheet=${encodeURIComponent(sheetSafe)}` : "gallery.html";
 
       chrome = el("header", { class: "cmap-chrome" });
@@ -282,18 +283,34 @@
         <nav class="cmap-links">
           <a class="cmap-back" href="${backHref}">${backLabel}</a>
           <a href="index.html">Home</a>
-          <a href="study.html">Study</a>
           <a href="${galleryHref}">3D Gallery</a>
           <a class="active" href="map.html">Map</a>
           <a href="account.html">Account</a>
         </nav>`;
     }
 
+    // Small panels shown/hidden from the phone layout (desktop shows both always).
+    const panelsToggle = el("div", { class: "cmap-panels-toggle", role: "group", "aria-label": "Map panels" },
+      "<button type='button' id='cmap-btn-layers' aria-expanded='false' aria-controls='cmap-layers-panel'>Layers</button>" +
+      "<button type='button' id='cmap-btn-legend' aria-expanded='false' aria-controls='cmap-legend-panel'>Key</button>");
+
     root.appendChild(stage);
     if (chrome) root.appendChild(chrome);
+    if (chrome) {
+      // When the nav row must scroll (e.g. entering from a lesson), fade the edge
+      // so the swipe is discoverable instead of hiding Account off-screen.
+      const linksEl = chrome.querySelector(".cmap-links");
+      if (linksEl) {
+        const updateScrollHint = () => linksEl.classList.toggle("is-scrollable", linksEl.scrollWidth > linksEl.clientWidth + 1);
+        updateScrollHint();
+        window.addEventListener("resize", updateScrollHint);
+        linksEl.addEventListener("scroll", () => linksEl.classList.toggle("is-scrolled", linksEl.scrollLeft > 4), { passive: true });
+      }
+    }
     root.appendChild(cartouche);
     if (cinematic) root.appendChild(legend);
     root.appendChild(bases);
+    root.appendChild(panelsToggle);
     root.appendChild(layers);
     root.appendChild(searchBox);
     root.appendChild(compass);
@@ -739,6 +756,7 @@
         credit.textContent = "Satellite: Esri World Imagery · Borders: Cliopatria / Seshat";
       }
       L.control.scale({ position: "bottomleft", imperial: false, maxWidth: 140 }).addTo(state.lmap);
+      L.control.zoom({ position: "bottomright" }).addTo(state.lmap);
       state.lmap.on("mousemove", (ev) => {
         const p = ev.latlng;
         coords.textContent = p.lat.toFixed(2) + "°, " + p.lng.toFixed(2) + "°";
@@ -791,6 +809,7 @@
       track.querySelectorAll(".cmap-year").forEach((b) => {
         const open = yearOpen(b.dataset.year);
         b.classList.toggle("active", b.dataset.year === ep.id);
+        b.setAttribute("aria-selected", b.dataset.year === ep.id ? "true" : "false");
         b.classList.toggle("is-locked", !open);
         b.disabled = false;
         b.setAttribute("aria-disabled", open ? "false" : "true");
@@ -945,7 +964,30 @@
       const year = b.dataset.year;
       if (year) setYear(year, { animate: true, chapter: cinematic });
       if (b.dataset.lat && state.lmap) state.lmap.flyTo([Number(b.dataset.lat), Number(b.dataset.lon)], 7);
+      // A picked hit should open its place panel, not just fly the camera there.
+      const kind = b.dataset.kind;
+      let item = null;
+      if (kind === "city") item = DATA.cities.find((c) => c.id === b.dataset.id);
+      else if (kind === "event") item = DATA.events.find((e) => e.id === b.dataset.id);
+      if (item) openDossier(markerCopy(item, kind === "event"));
     });
+
+    const layersPanel = root.querySelector("#cmap-layers-panel");
+    const legendPanel = root.querySelector("#cmap-legend-panel");
+    const btnLayers = root.querySelector("#cmap-btn-layers");
+    const btnLegend = root.querySelector("#cmap-btn-legend");
+    if (btnLayers && layersPanel) {
+      btnLayers.addEventListener("click", () => {
+        const open = layersPanel.classList.toggle("is-open");
+        btnLayers.setAttribute("aria-expanded", String(open));
+      });
+    }
+    if (btnLegend && legendPanel) {
+      btnLegend.addEventListener("click", () => {
+        const open = legendPanel.classList.toggle("is-open");
+        btnLegend.setAttribute("aria-expanded", String(open));
+      });
+    }
 
     if (cinematic) {
       window.addEventListener("keydown", (ev) => {
@@ -971,6 +1013,22 @@
     if (window.ResizeObserver) new ResizeObserver(resize).observe(stage);
 
     async function start() {
+      // The Map of History is for members. Guests go to sign-in and return here after.
+      if (cinematic && window.ScrollAuth && typeof window.ScrollAuth.ready === "function") {
+        try { await window.ScrollAuth.ready(); } catch (e) {}
+        const auth = window.ScrollAuth;
+        const guest = !(auth && typeof auth.getUser === "function" && auth.getUser());
+        const bypass = window.BAJourney && typeof window.BAJourney.previewAllContent === "function" && window.BAJourney.previewAllContent();
+        if (guest && !bypass) {
+          const next = "map.html" + (location.search || "");
+          if (window.ScrollTerms && typeof window.ScrollTerms.goToAccount === "function") {
+            window.ScrollTerms.goToAccount(next);
+          } else {
+            location.assign("account.html?next=" + encodeURIComponent(next));
+          }
+          return;
+        }
+      }
       if (typeof L === "undefined") {
         loadEl.textContent = "Map library failed to load.";
         return;

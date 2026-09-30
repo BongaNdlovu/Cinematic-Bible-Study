@@ -1,7 +1,7 @@
 (function () {
   const SITTINGS = 11;
   let days = 30;
-  let cache = { events: [], surveys: [], profiles: [] };
+  let cache = { events: [], surveys: [], profiles: [], progress: [] };
 
   function client() {
     return window.ScrollAuth && window.ScrollAuth.getClient && window.ScrollAuth.getClient();
@@ -214,6 +214,28 @@
     });
   }
 
+  function learnerRows() {
+    // exhibit_progress is one row per signed-in learner (moderator-readable).
+    const rows = cache.progress || [];
+    const active = rows.filter(function (p) { return inRange(p.updated_at); });
+    const doneArr = rows.map(function (p) {
+      const j = p.journey || {};
+      return Array.isArray(j.completedSheets) ? j.completedSheets.length : 0;
+    });
+    const avgDone = doneArr.length
+      ? Math.round((doneArr.reduce(function (s, n) { return s + n; }, 0) / doneArr.length) * 10) / 10
+      : 0;
+    const named = rows.filter(function (p) { return String(p.certificate_name || '').trim() !== ''; }).length;
+    const cohorts = countBy(rows, function (p) { return p.cohort; });
+    return {
+      total: rows.length,
+      active: active.length,
+      avg_completed: avgDone,
+      certificates_named: named,
+      cohorts: cohorts
+    };
+  }
+
   function render() {
     const grid = document.getElementById('insights-grid');
     if (!grid) return;
@@ -246,6 +268,7 @@
     const backgrounds = countBy(profs, function (p) { return p.background; });
     const refs = countBy(profs, function (p) { return p.referred_by; });
     const signups = ev.filter(function (e) { return e.event === 'referral_signup'; }).length;
+    const learners = learnerRows();
 
     const pulseAvg = pulses.length
       ? (pulses.reduce(function (s, p) { return s + Number(p.rating || (p.responses && p.responses.score) || 0); }, 0) / pulses.length).toFixed(1)
@@ -301,6 +324,16 @@
         '<small style="font-weight:600;display:block;margin:8px 0 4px;">Background</small>' +
         barList(backgrounds)
       ) +
+      panel('learners', 'Learners',
+        '<ul>' +
+          '<li>Signed-in learners (all time): <b>' + escapeHtml(learners.total) + '</b></li>' +
+          '<li>Active in this range: <b>' + escapeHtml(learners.active) + '</b></li>' +
+          '<li>Average sittings completed: <b>' + escapeHtml(learners.avg_completed) + '</b> of ' + SITTINGS + '</li>' +
+          '<li>Certificate names saved: <b>' + escapeHtml(learners.certificates_named) + '</b></li>' +
+        '</ul>' +
+        '<small style="font-weight:600;display:block;margin:8px 0 4px;">Cohorts</small>' +
+        barList(learners.cohorts)
+      ) +
       panel('referral', 'Referrals & invites',
         '<p><b>' + signups + '</b> referral sign-ups recorded.</p>' +
         '<small style="font-weight:600;display:block;margin-bottom:4px;">Top referral codes</small>' +
@@ -345,7 +378,13 @@
               created_at: p.created_at
             };
           }),
-          referral: refs.map(function (p) { return { ref_code: p[0], signups: p[1] }; })
+          referral: refs.map(function (p) { return { ref_code: p[0], signups: p[1] }; }),
+          learners: {
+            total: learners.total,
+            active_in_range: learners.active,
+            avg_sittings_completed: learners.avg_completed,
+            certificates_named: learners.certificates_named
+          }
         };
         downloadCsv('insights-' + id + '.csv', csvMap[id] || []);
       });
@@ -368,6 +407,9 @@
     let evq = c.from('exhibit_events').select('event,sitting,sheet,detail,user_id,anon_id,session_id,created_at').order('created_at', { ascending: false }).limit(4000);
     let svq = c.from('exhibit_surveys').select('rating,feedback,responses,created_at,role,cohort').order('created_at', { ascending: false }).limit(1000);
     let pfq = c.from('exhibit_profiles').select('study_mode,background,found_via,referred_by,referred_from_sitting,ref_code,created_at').order('created_at', { ascending: false }).limit(1000);
+    // Progress rows are per-learner; fetch them unfiltered so the panel can show
+    // all-time totals next to the in-range actives.
+    let pgq = c.from('exhibit_progress').select('user_id,journey,certificate_name,cohort,updated_at').order('updated_at', { ascending: false }).limit(5000);
 
     if (cut) {
       evq = evq.gte('created_at', cut);
@@ -385,9 +427,10 @@
     return Promise.all([
       settleQuery(evq),
       settleQuery(svq),
-      settleQuery(pfq)
+      settleQuery(pfq),
+      settleQuery(pgq)
     ]).then(function (rows) {
-      cache = { events: rows[0], surveys: rows[1], profiles: rows[2] };
+      cache = { events: rows[0], surveys: rows[1], profiles: rows[2], progress: rows[3] };
       render();
     }).catch(function () {
       const grid = document.getElementById('insights-grid');

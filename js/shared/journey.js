@@ -40,7 +40,7 @@
   };
 
   const SHEET_COUNT = 11;
-  const TERMS_VERSION = 5;
+  const TERMS_VERSION = 6;
   const FREE_THROUGH = 2;
   const TEMP_REVIEW_UNLOCK = false;
   const SITTING_ASSETS = [
@@ -312,6 +312,17 @@
     return false;
   }
 
+  // Members are signed-in visitors. Guests keep the free sittings only;
+  // everything past FREE_THROUGH asks them to sign in.
+  function isMember() {
+    try {
+      const auth = window.ScrollAuth;
+      return !!(auth && typeof auth.getUser === "function" && auth.getUser());
+    } catch (err) {
+      return false;
+    }
+  }
+
   function isLocalDevHost() {
     try {
       const h = location.hostname;
@@ -337,6 +348,8 @@
 
   function maxOpenSheet() {
     if (previewAllContent()) return SHEET_COUNT - 1;
+    // Guests never pass the free sittings, no matter how far they read.
+    if (!isMember()) return FREE_THROUGH;
     const done = completedSet();
     let open = FREE_THROUGH;
     for (let i = 0; i < SHEET_COUNT - 1; i++) {
@@ -638,6 +651,14 @@
     const action = resumeLabel();
     if (kind === "sheet") {
       const wanted = sheetLabel(key);
+      if (!isMember() && Number(key) > FREE_THROUGH) {
+        return {
+          title: wanted + " is for members",
+          body: "The first sittings are free. Sign in to open this one and keep the chain going.",
+          href: "account.html?next=" + encodeURIComponent("study.html?sheet=" + key),
+          action: "Sign in"
+        };
+      }
       return {
         title: wanted + " is still locked",
         body: "Finish " + need + " first. The sittings open one after another.",
@@ -713,6 +734,7 @@
     searchIndex: searchIndex,
     sheetLabel: sheetLabel,
     isAdmin: isAdmin,
+    isMember: isMember,
     canAccessSheet: canAccessSheet,
     clampToAccessible: clampToAccessible,
     canAccessAsset: canAccessAsset,

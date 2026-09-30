@@ -378,7 +378,15 @@ import * as THREE from 'three';
     let hallMixTarget = 0;
     function prepHallTex(tex) {
       tex.colorSpace = THREE.SRGBColorSpace;
-      tex.minFilter = THREE.LINEAR_MIPMAP_LINEAR;
+      // Non-power-of-two images cannot be mipmapped cleanly; switch to a plain
+      // linear filter so WebGL stops logging GL_INVALID_ENUM for these backdrops.
+      const pot = (n) => (n & (n - 1)) === 0;
+      if (!pot(tex.image?.width || 0) || !pot(tex.image?.height || 0)) {
+        tex.minFilter = THREE.LinearFilter;
+        tex.generateMipmaps = false;
+      } else {
+        tex.minFilter = THREE.LINEAR_MIPMAP_LINEAR;
+      }
       tex.anisotropy = Math.min(4, renderer.capabilities.getMaxAnisotropy());
       tex.needsUpdate = true;
       return tex;
@@ -779,7 +787,7 @@ import * as THREE from 'three';
         historical: 'Daniel interpreted the dream before the royal court of Babylon after all the empire’s Chaldean wise men failed to recall or explain it. He announced that a divine stone cut without hands would strike the image at its feet of iron and clay, shattering every earthly kingdom into dust. This divine kingdom would then expand into a mountain that fills the whole earth forever.',
         plateImg: 'assets/site/hero-colossus.jpg',
         plateCaption: 'The complete colossus of Daniel 2',
-        thumb: 'assets/site/era-assembled.png',
+        thumb: 'assets/site/era-assembled.webp',
         related: ['head', 'chest', 'feet', 'stone'],
         takeaway: 'The panoramic statue foretells human history from ancient Babylon to the end of time, showing that every earthly empire will finally give way to God’s everlasting kingdom.',
         filename: 'full_body.glb',
@@ -800,7 +808,7 @@ import * as THREE from 'three';
         historical: 'Under Nebuchadnezzar II, Babylon became the greatest city of its time. He expanded his empire, rebuilt the city with magnificent structures, and made Babylon the center of world power.',
         plateImg: 'assets/plates/babylon.jpg',
         plateCaption: 'The Ishtar Gate & Processional Way · Babylon',
-        thumb: 'assets/site/era-head.png',
+        thumb: 'assets/site/era-head.webp',
         related: ['chest', 'lion', 'dura', 'stump'],
         takeaway: 'The head of fine gold represents the wealth and majesty of the Babylonian Empire under King Nebuchadnezzar, which ruled from 605 to 539 BC.',
         filename: 'golden_head.glb',
@@ -823,7 +831,7 @@ import * as THREE from 'three';
         historical: 'Cyrus took Babylon in 539 BC. Herodotus and Xenophon describe a diversion of the Euphrates. The Cyrus Cylinder records a policy of returning displaced peoples; Ezra 1 attributes the Jewish return and Temple rebuilding to the same king.',
         plateImg: 'assets/plates/persia.jpg',
         plateCaption: 'Apadana stairway reliefs · Persepolis',
-        thumb: 'assets/site/era-chest.png',
+        thumb: 'assets/site/era-chest.webp',
         related: ['head', 'bear', 'ram', 'decree'],
         takeaway: 'The chest and arms of silver represent the Medo-Persian Empire, whose dual arms depict the alliance of Media and Persia that conquered Babylon in 539 BC.',
         filename: 'silver_chest.glb',
@@ -846,7 +854,7 @@ import * as THREE from 'three';
         historical: 'Alexander conquered from Greece to India in barely a decade. Upon his death, the empire fragmented into four Hellenistic dynasties, spreading the Greek language that later became the vehicle for the New Testament.',
         plateImg: 'assets/plates/greece.jpg',
         plateCaption: 'Bronze hoplite armor · Hellenistic gallery plate',
-        thumb: 'assets/site/era-thighs.png',
+        thumb: 'assets/site/era-thighs.webp',
         related: ['chest', 'leopard', 'goat', 'legs'],
         takeaway: 'The bronze belly and thighs represent the Grecian Empire of Alexander the Great, whose rapid conquests united the Mediterranean world under Greek culture and language.',
         filename: 'bronze_thighs.glb',
@@ -869,7 +877,7 @@ import * as THREE from 'three';
         historical: 'The Mediterranean world experienced the Roman peace, known as the Pax Romana, during which Jesus Christ was born and crucified. Rome\'s legal order and highway system subsequently enabled the rapid spread of the Christian gospel.',
         plateImg: 'assets/plates/rome.jpg',
         plateCaption: 'Lorica, gladius, and aquila · Imperial Rome',
-        thumb: 'assets/site/era-legs.png',
+        thumb: 'assets/site/era-legs.webp',
         related: ['thighs', 'beast', 'feet', 'stone'],
         takeaway: 'The two iron legs represent the unyielding military might of Imperial Rome, which crushed opposing realms and ruled during the earthly life of Jesus Christ.',
         filename: 'iron_legs.glb',
@@ -892,7 +900,7 @@ import * as THREE from 'three';
         historical: 'Centuries of royal marriages, diplomatic treaties, and military campaigns by conquerors such as Charlemagne, Charles V, and Napoleon failed to reunify Europe. This enduring division precisely fulfills Daniel\'s prophecy that these nations will remain divided until the supernatural stone strikes.',
         plateImg: 'assets/plates/divided.jpg',
         plateCaption: 'Iron crown and clay shards · divided realms',
-        thumb: 'assets/site/era-feet.png',
+        thumb: 'assets/site/era-feet.webp',
         related: ['legs', 'beast', 'stone', 'assembled'],
         takeaway: 'The feet of iron mixed with clay portray the divided nations of Europe that arose after the collapse of Western Rome, continually forming alliances yet never uniting into a single world empire.',
         filename: 'feet_iron_clay.glb',
@@ -938,7 +946,7 @@ import * as THREE from 'three';
         historical: 'Daniel explained to Nebuchadnezzar that in the days of these divided kingdoms, the God of heaven will set up an everlasting kingdom that will never be destroyed or left to other rulers. This divine realm will completely consume all earthly empires and endure forever.',
         plateImg: 'assets/plates/stone-kingdom.jpg',
         plateCaption: 'A stone cut without hands · Daniel 2:34',
-        thumb: 'assets/site/era-stone.png',
+        thumb: 'assets/site/era-stone.webp',
         related: ['feet', 'assembled', 'son', 'ancient'],
         takeaway: 'The supernatural stone cut without human hands represents God’s eternal kingdom established at the Second Coming of Christ, which obliterates all earthly dominions and fills the whole earth.',
         filename: 'stone.glb',
@@ -961,7 +969,7 @@ import * as THREE from 'three';
         historical: 'The Neo-Babylonian Empire under Nebuchadnezzar II served as the historical foundation for both the head of gold and the winged lion. Babylon adorned its monumental Processional Way and the Ishtar Gate with glazed reliefs of marching lions. The king who witnessed the colossus in Daniel 2 was later driven into the wilderness in Daniel 4 before acknowledging God and regaining his sanity.',
         plateImg: 'assets/plates/lion-procession.jpg',
         plateCaption: 'Winged lions on the Processional Way · Babylon',
-        thumb: 'assets/site/era-lion.png',
+        thumb: 'assets/site/era-lion.webp',
         related: ['head', 'bear', 'stump', 'dura'],
         takeaway: 'The winged lion portrays the swift rise of Babylon, whose plucked wings and human heart reflect King Nebuchadnezzar’s humiliation and subsequent restoration by God.',
         filename: 'lion.glb',
@@ -985,7 +993,7 @@ import * as THREE from 'three';
         historical: 'Daniel received the vision of the four beasts during the first year of King Belshazzar of Babylon. In 539 BC, Cyrus the Great diverted the waters of the Euphrates River and captured Babylon in a single night. Both the dual silver arms of the colossus and the lopsided stance of the bear illustrate the unequal partnership between the Medes and the dominant Persians.',
         plateImg: 'assets/site/bear-painting.jpg',
         plateCaption: 'The Bear with Three Ribs · Daniel 7:5',
-        thumb: 'assets/site/era-bear.png',
+        thumb: 'assets/site/era-bear.webp',
         related: ['chest', 'ram', 'lion', 'leopard'],
         takeaway: 'The lopsided bear represents the Medo-Persian Empire, with its raised side showing Persian dominance and the three ribs in its mouth recalling its three major conquests of Lydia, Babylon, and Egypt.',
         filename: 'bear.glb',
@@ -1009,7 +1017,7 @@ import * as THREE from 'three';
         historical: 'Alexander crushed the Persian forces at the Battle of Gaugamela in 331 BC to secure dominion over the Near East. Following his untimely death in Babylon at age thirty-two, his generals Cassander, Lysimachus, Seleucus, and Ptolemy established separate dynasties that spread Greek language and culture across the ancient world. Grecian political supremacy finally ended when Roman legions triumphed at the Battle of Pydna in 168 BC.',
         plateImg: 'assets/plates/leopard-diadochi.jpg',
         plateCaption: 'Four heads after Alexander · the Diadochi',
-        thumb: 'assets/site/era-leopard.png',
+        thumb: 'assets/site/era-leopard.webp',
         related: ['thighs', 'goat', 'goat_broken', 'beast'],
         takeaway: 'The four-winged leopard represents the rapid conquests of the Grecian Empire under Alexander the Great, while its four heads portray the four Hellenistic realms formed by his generals after his death.',
         filename: 'leopard.glb',
@@ -1033,7 +1041,7 @@ import * as THREE from 'three';
         historical: 'As Imperial Rome collapsed, authority shifted to a Roman church-state power established among the divided western tribes. The Byzantine emperor Justinian issued a decree elevating the Roman bishop, which took practical geopolitical effect in AD 538 after the defeat of the Ostrogoths, the third of three rival Arian tribal kingdoms who held differing theological views on Christ\'s nature. This dominion persisted until French forces arrested the pope in 1798, after which Daniel describes a heavenly courtroom session convening before the final kingdom is given to the saints.',
         plateImg: 'assets/study/epochs/papal-rome.jpg',
         plateCaption: 'Iron teeth and the little horn among the ten · Rome',
-        thumb: 'assets/site/era-beast.png',
+        thumb: 'assets/site/era-beast.webp',
         related: ['legs', 'years1260', 'ancient', 'son'],
         takeaway: 'The fourth beast with iron teeth represents Imperial Rome, while its little horn portrays the persecuting church-state power that arose among the divided nations and reigned for 1,260 years until 1798.',
         filename: 'beast.glb',
@@ -1057,7 +1065,7 @@ import * as THREE from 'three';
         historical: 'The marks in Daniel 7:24–25 sit among the ten fragments of western Rome: a power diverse from the others, speaking great words, wearing out the saints, intending to change times and laws. Historicist readers date the opening when the Ostrogothic grip on Rome broke in AD 538, so Justinian’s grant to the Roman see could operate in the city, and the close when General Berthier took Pius VI in 1798. You may argue the start-year. You may not skip the marks in 7:24–25 and still claim any favorite villain. The court of 7:9–14 sits while this span is still a historical fact; the stone of chapter 2 is later.',
         plateImg: 'assets/plates/years1260.jpg',
         plateCaption: 'Time, times, and the dividing of time · 538 to 1798',
-        thumb: 'assets/site/era-years1260.png',
+        thumb: 'assets/site/era-years1260.webp',
         related: ['beast', 'ancient', 'sealed', 'feet'],
         takeaway: 'Daniel 7:25’s riddle is 3½ years; Revelation equates it with 1,260 days; the year-day scale makes those 1,260 years, from the little horn’s measured supremacy in 538 to the deadly wound in 1798.',
         filename: 'years1260.glb',
@@ -1081,7 +1089,7 @@ import * as THREE from 'three';
         historical: 'Daniel stood beside the Ulai River in the fortress city of Susa, which later became a royal capital of the Persian Empire, when this vision appeared. The ram pushed aggressively toward the west, north, and south, conquering territory without encountering any rival power that could resist its advance. This unchecked expansion continued until the charging Grecian he-goat swept across the earth from the west to confront it.',
         plateImg: 'assets/plates/ram-ulai.jpg',
         plateCaption: 'Two horns beside the Ulai · Medo-Persia',
-        thumb: 'assets/site/era-ram.png',
+        thumb: 'assets/site/era-ram.webp',
         related: ['chest', 'bear', 'goat', 'thighs'],
         takeaway: 'The two-horned ram represents the kings of Media and Persia, with the higher horn that came up last signifying the greater power of the Persian kingdom that arose after Media.',
         filename: 'ram.glb',
@@ -1105,7 +1113,7 @@ import * as THREE from 'three';
         historical: 'Beginning at the Granicus River in 334 BC and culminating at the decisive Battle of Gaugamela in 331 BC, Alexander dismantled the Persian Empire in barely three years. This rapid triumph demonstrates why Daniel 2 depicted Greece as resonant bronze and Daniel 7 portrayed it as a four-winged leopard. The prophecy in Daniel 8 explicitly names the historical empires that were previously represented only by symbolic metals and beasts.',
         plateImg: 'assets/plates/goat-charge.jpg',
         plateCaption: 'The notable horn from the west · Alexander',
-        thumb: 'assets/site/era-goat.png',
+        thumb: 'assets/site/era-goat.webp',
         related: ['thighs', 'leopard', 'ram', 'goat_broken'],
         takeaway: 'The swift he-goat represents the Grecian Empire moving from the west with unmatched speed, whose prominent single horn between his eyes identifies its first great monarch, Alexander the Great.',
         filename: 'goat.glb',
@@ -1129,7 +1137,7 @@ import * as THREE from 'three';
         historical: 'The four horns of the he-goat correspond directly to the four heads of the leopard introduced in Daniel 7. Following decades of internal warfare, the Diadochi established the four Hellenistic realms of Cassander in Macedonia, Lysimachus in Thrace and Asia Minor, Seleucus in Syria and Mesopotamia, and Ptolemy in Egypt. Although Greek language and civilization continued to dominate the Mediterranean basin, the fractured dynasties progressively fell before the rising military power of Rome.',
         plateImg: 'assets/plates/goat-broken.jpg',
         plateCaption: 'When he was strong, the great horn was broken',
-        thumb: 'assets/site/era-goat_broken.png',
+        thumb: 'assets/site/era-goat_broken.webp',
         related: ['goat', 'leopard', 'goat_horn', 'thighs'],
         takeaway: 'The breaking of the goat’s great horn represents Alexander the Great’s sudden death at the height of his power in 323 BC, after which his realm fractured into four separate Hellenistic kingdoms.',
         filename: 'goat_broken.glb',
@@ -1153,7 +1161,7 @@ import * as THREE from 'three';
         historical: 'The angel Gabriel stated twice in Daniel 8 that the vision concerns the time of the end, reaching far beyond the brief second-century BC oppression under the Seleucid king Antiochus IV Epiphanes. While Antiochus desecrated the earthly temple in Jerusalem for three years, this prophetic horn waxes exceeding great and attacks the heavenly priesthood of Christ Himself. The fulfillment spans from Roman imperial authority through the medieval church-state system until the final heavenly cleansing of the sanctuary in 1844.',
         plateImg: 'assets/plates/goat-horn.jpg',
         plateCaption: 'A little horn toward the pleasant land',
-        thumb: 'assets/site/era-goat_horn.png',
+        thumb: 'assets/site/era-goat_horn.webp',
         related: ['beast', 'goat_broken', 'ancient', 'stone'],
         takeaway: 'The little horn of Daniel 8 represents the persecuting power of Imperial and papal Rome that magnified itself against Christ’s heavenly sanctuary ministry across centuries until the 2,300 prophetic days ended in 1844.',
         filename: 'goat_horn.glb',
@@ -1177,7 +1185,7 @@ import * as THREE from 'three';
         historical: 'Three young Hebrew administrators named Shadrach, Meshach, and Abednego refused to violate God\'s commandments by bowing before the golden idol. Even after the furious monarch ordered the furnace heated seven times hotter than normal, God protected them within the flames, where Nebuchadnezzar was astonished to see a divine fourth figure resembling the Son of God walking beside them unhurt. This dramatic trial serves as the biblical prototype for the end-time crisis described in Revelation 13, where civil rulers again enforce religious conformity upon threat of death.',
         plateImg: 'assets/plates/dura-plain.jpg',
         plateCaption: 'An image of gold on the plain of Dura',
-        thumb: 'assets/site/era-dura.png',
+        thumb: 'assets/site/era-dura.webp',
         related: ['assembled', 'head', 'stump', 'son'],
         takeaway: 'Nebuchadnezzar made his ninety-foot statue entirely of gold to defy God’s revelation that Babylon would fall, demanding universal worship on pain of death until God delivered three faithful Hebrew captives from the fiery furnace.',
         filename: 'dura.glb',
@@ -1201,7 +1209,7 @@ import * as THREE from 'three';
         historical: 'Daniel describes millions of heavenly beings attending this celestial proceeding as a river of fire issues from the throne of the Ancient of Days. The arrogant fourth beast is not overthrown by an earthly military rival, but is condemned and destroyed as a direct result of heaven\'s judicial sentence. This verdict vindicates God\'s faithful people and prepares the way for the transfer of eternal dominion to the Son of man.',
         plateImg: 'assets/plates/ancient-throne.jpg',
         plateCaption: 'Thrones were set, and the books were opened',
-        thumb: 'assets/site/era-ancient.png',
+        thumb: 'assets/site/era-ancient.webp',
         related: ['son', 'beast', 'years1260', 'stone'],
         takeaway: 'The vision of the Ancient of Days reveals God convening a heavenly courtroom where the books of record are opened and earthly persecuting powers are judged before Christ receives His eternal kingdom.',
         filename: 'ancient.glb',
@@ -1225,7 +1233,7 @@ import * as THREE from 'three';
         historical: 'Daniel records that all peoples, nations, and languages will ultimately serve and obey the Son of man when His eternal kingdom is inaugurated. After the destructive dominion of the little horn is stripped away and consumed, the kingdom under the whole heaven will be given to the saints of the Most High. This climax marks the complete transition of world authority away from oppressive earthly empires and into the hands of Christ and His redeemed people.',
         plateImg: 'assets/plates/son-clouds.jpg',
         plateCaption: 'With the clouds of heaven, to the Ancient of Days',
-        thumb: 'assets/site/era-son.png',
+        thumb: 'assets/site/era-son.webp',
         related: ['ancient', 'stone', 'michael', 'sealed'],
         takeaway: 'The vision reveals Jesus Christ approaching God’s heavenly throne as the Son of man to receive everlasting dominion over all peoples, nations, and languages before returning to earth.',
         filename: 'son.glb',
@@ -1249,7 +1257,7 @@ import * as THREE from 'three';
         historical: 'Twelve months after Daniel warned him to repent of his sins and show mercy to the oppressed, Nebuchadnezzar boasted of building Babylon by his own sovereign might and was instantly struck with mental illness. For seven literal years he grazed upon grass like an ox until his hair grew like eagles\' feathers and his nails resembled birds\' claws. When his understanding finally returned, the humbled king lifted his eyes to heaven and publicly praised the Most High God, learning by personal experience that earthly sovereignty is granted only by divine decree.',
         plateImg: 'assets/study/babylon-sunset.jpg',
         plateCaption: 'Leave the stump of his roots · banded with iron and brass',
-        thumb: 'assets/site/era-stump.png',
+        thumb: 'assets/site/era-stump.webp',
         related: ['head', 'dura', 'lion', 'ox_king'],
         takeaway: 'The iron and bronze band binding the tree stump showed that God preserved Nebuchadnezzar’s royal throne during seven years of humiliating madness until the proud monarch acknowledged heaven’s supreme sovereignty.',
         filename: 'stump.glb',
@@ -1273,7 +1281,7 @@ import * as THREE from 'three';
         historical: 'Twelve months after the warning, Nebuchadnezzar boasted on the palace roof and was struck the same hour. For seven years he ate grass as oxen until his understanding returned and he praised the King of heaven. Babylon’s throne was kept for him, then passed in the next generation to Belshazzar, who did not learn the family lesson.',
         plateImg: 'assets/plates/ox-king.jpg',
         plateCaption: 'Hair like eagles’ feathers, nails like birds’ claws',
-        thumb: 'assets/site/era-ox_king.png',
+        thumb: 'assets/site/era-ox_king.webp',
         related: ['stump', 'head', 'lion', 'dura'],
         takeaway: 'The ox-king is Nebuchadnezzar under the Watcher’s sentence: driven from men, wet with dew, until a proud monarch lifts his eyes and confesses that heaven assigns every throne.',
         filename: 'ox_king.glb',
@@ -1297,7 +1305,7 @@ import * as THREE from 'three';
         historical: 'Daniel 10 already names Michael as the prince who helps against the prince of Persia. Daniel 12 places his standing at the climax of the long conflict traced through the kings of the north and south. The promise that follows is personal: many who sleep in the dust of the earth shall awake, and Daniel himself shall rest and stand in his lot at the end of the days.',
         plateImg: 'assets/plates/michael.jpg',
         plateCaption: 'Michael shall stand up, the great prince',
-        thumb: 'assets/site/era-michael.png',
+        thumb: 'assets/site/era-michael.webp',
         related: ['son', 'sealed', 'ancient', 'stone'],
         takeaway: 'When Michael stands up, the heavenly work of advocacy is finished, a time of trouble follows, and those written in the book are delivered — then the dust-sleepers awake.',
         filename: 'michael.glb',
@@ -1321,7 +1329,7 @@ import * as THREE from 'three';
         historical: 'Daniel 8 and 9 give numbered days that could not be read as finished history until those spans closed in the era beginning at the close of the 1,260 years. The sealed book is why the sitting treats 1798 and 1844 as dates the text itself teaches the reader to wait for, rather than as ornaments hung on the last page.',
         plateImg: 'assets/plates/sealed.jpg',
         plateCaption: 'Shut up the words, and seal the book',
-        thumb: 'assets/site/era-sealed.png',
+        thumb: 'assets/site/era-sealed.webp',
         related: ['michael', 'son', 'goat_horn', 'ancient'],
         takeaway: 'Daniel is commanded to seal the book until the time of the end, so the numbered visions stay closed until their appointed dates arrive and the wise understand.',
         filename: 'sealed.glb',
@@ -1345,7 +1353,7 @@ import * as THREE from 'three';
         historical: 'Ptolemy I held Egypt; Seleucus I held Syria and the lands toward the north. Daniel 11:6 records a failed marriage-alliance between the houses. Later verses track Rome’s rise over the Hellenistic kings, then a continuing northern power that magnifies itself even to the prince of the covenant. The last movement of the chapter is not another named empire in metal, but the last contest that yields to Michael’s standing.',
         plateImg: 'assets/plates/kings.jpg',
         plateCaption: 'The king of the south shall be strong… the king of the north',
-        thumb: 'assets/site/era-kings.png',
+        thumb: 'assets/site/era-kings.webp',
         related: ['goat_broken', 'michael', 'sealed', 'beast'],
         takeaway: 'After Alexander’s horn is broken, Daniel 11 tracks the kings of the south and north from the Ptolemies and Seleucids to a last whirlwind at the time of the end, just before Michael stands up.',
         filename: 'kings.glb',
@@ -1369,7 +1377,7 @@ import * as THREE from 'three';
         historical: 'Cyrus (Ezra 1) sent the first wave home to rebuild the house. Darius confirmed the temple work. Artaxerxes’ letter in Ezra 7:12–26 adds priests, Levites, silver and gold, and authority to appoint magistrates — the commandment that actually rebuilds Jerusalem as a city under law. Ezra 7:7–8 places the journey in the seventh year of the king. From that date the arithmetic of Daniel 9 can be worked on paper: 457 plus 483 years lands on the anointing of Messiah, and the midst of the seventieth week is Calvary.',
         plateImg: 'assets/plates/decree.jpg',
         plateCaption: 'The commandment to restore and to build Jerusalem',
-        thumb: 'assets/site/era-decree.png',
+        thumb: 'assets/site/era-decree.webp',
         related: ['chest', 'ram', 'goat_horn', 'stone'],
         takeaway: 'Artaxerxes’ decree in 457 BC is the going forth of Daniel 9:25: the clock for Messiah the Prince, and the shared start of the 2,300 days.',
         filename: 'decree.glb',
@@ -2449,31 +2457,31 @@ import * as THREE from 'three';
       const track = document.getElementById('era-track');
       if (!track) return;
       const cells = [
-        { asset: 'assembled', label: 'COLOSSUS', date: 'Dan 2:31–45', img: 'assets/site/era-assembled.png' },
-        { asset: 'head', label: 'GOLD', date: '605–539 BC', img: 'assets/site/era-head.png' },
-        { asset: 'chest', label: 'SILVER', date: '539–331 BC', img: 'assets/site/era-chest.png' },
-        { asset: 'thighs', label: 'BRONZE', date: '331–168 BC', img: 'assets/site/era-thighs.png' },
-        { asset: 'legs', label: 'IRON', date: '168 BC–476 AD', img: 'assets/site/era-legs.png' },
-        { asset: 'feet', label: 'IRON & CLAY', date: 'Divided era', img: 'assets/site/era-feet.png' },
-        { asset: 'stone', label: 'THE STONE', date: 'Dan 2:34', img: 'assets/site/era-stone.png' },
-        { asset: 'lion', label: 'WINGED LION', date: 'Dan 7:4', img: 'assets/site/era-lion.png' },
-        { asset: 'bear', label: 'THE BEAR', date: 'Dan 7:5', img: 'assets/site/era-bear.png' },
-        { asset: 'leopard', label: 'LEOPARD', date: 'Dan 7:6', img: 'assets/site/era-leopard.png' },
-        { asset: 'beast', label: 'FOURTH BEAST', date: 'Dan 7:7', img: 'assets/site/era-beast.png' },
-        { asset: 'years1260', label: '1,260 YEARS', date: 'Dan 7:25', img: 'assets/site/era-years1260.png' },
-        { asset: 'ram', label: 'THE RAM', date: 'Dan 8:3', img: 'assets/site/era-ram.png' },
-        { asset: 'goat', label: 'THE GOAT', date: 'Dan 8:5', img: 'assets/site/era-goat.png' },
-        { asset: 'goat_broken', label: 'BROKEN HORN', date: 'Dan 8:8', img: 'assets/site/era-goat_broken.png' },
-        { asset: 'goat_horn', label: 'LITTLE HORN', date: 'Dan 8:9', img: 'assets/site/era-goat_horn.png' },
-        { asset: 'dura', label: 'DURA', date: 'Dan 3:1', img: 'assets/site/era-dura.png' },
-        { asset: 'stump', label: 'THE STUMP', date: 'Dan 4:15', img: 'assets/site/era-stump.png' },
-        { asset: 'ox_king', label: 'OX-KING', date: 'Dan 4:33', img: 'assets/site/era-ox_king.png' },
-        { asset: 'ancient', label: 'ANCIENT OF DAYS', date: 'Dan 7:9', img: 'assets/site/era-ancient.png' },
-        { asset: 'son', label: 'SON OF MAN', date: 'Dan 7:13', img: 'assets/site/era-son.png' },
-        { asset: 'decree', label: 'THE DECREE', date: '457 BC', img: 'assets/site/era-decree.png' },
-        { asset: 'kings', label: 'NORTH & SOUTH', date: 'Dan 11:5', img: 'assets/site/era-kings.png' },
-        { asset: 'michael', label: 'MICHAEL', date: 'Dan 12:1', img: 'assets/site/era-michael.png' },
-        { asset: 'sealed', label: 'SEALED BOOK', date: 'Dan 12:4', img: 'assets/site/era-sealed.png' }
+        { asset: 'assembled', label: 'COLOSSUS', date: 'Dan 2:31–45', img: 'assets/site/era-assembled.webp' },
+        { asset: 'head', label: 'GOLD', date: '605–539 BC', img: 'assets/site/era-head.webp' },
+        { asset: 'chest', label: 'SILVER', date: '539–331 BC', img: 'assets/site/era-chest.webp' },
+        { asset: 'thighs', label: 'BRONZE', date: '331–168 BC', img: 'assets/site/era-thighs.webp' },
+        { asset: 'legs', label: 'IRON', date: '168 BC–476 AD', img: 'assets/site/era-legs.webp' },
+        { asset: 'feet', label: 'IRON & CLAY', date: 'Divided era', img: 'assets/site/era-feet.webp' },
+        { asset: 'stone', label: 'THE STONE', date: 'Dan 2:34', img: 'assets/site/era-stone.webp' },
+        { asset: 'lion', label: 'WINGED LION', date: 'Dan 7:4', img: 'assets/site/era-lion.webp' },
+        { asset: 'bear', label: 'THE BEAR', date: 'Dan 7:5', img: 'assets/site/era-bear.webp' },
+        { asset: 'leopard', label: 'LEOPARD', date: 'Dan 7:6', img: 'assets/site/era-leopard.webp' },
+        { asset: 'beast', label: 'FOURTH BEAST', date: 'Dan 7:7', img: 'assets/site/era-beast.webp' },
+        { asset: 'years1260', label: '1,260 YEARS', date: 'Dan 7:25', img: 'assets/site/era-years1260.webp' },
+        { asset: 'ram', label: 'THE RAM', date: 'Dan 8:3', img: 'assets/site/era-ram.webp' },
+        { asset: 'goat', label: 'THE GOAT', date: 'Dan 8:5', img: 'assets/site/era-goat.webp' },
+        { asset: 'goat_broken', label: 'BROKEN HORN', date: 'Dan 8:8', img: 'assets/site/era-goat_broken.webp' },
+        { asset: 'goat_horn', label: 'LITTLE HORN', date: 'Dan 8:9', img: 'assets/site/era-goat_horn.webp' },
+        { asset: 'dura', label: 'DURA', date: 'Dan 3:1', img: 'assets/site/era-dura.webp' },
+        { asset: 'stump', label: 'THE STUMP', date: 'Dan 4:15', img: 'assets/site/era-stump.webp' },
+        { asset: 'ox_king', label: 'OX-KING', date: 'Dan 4:33', img: 'assets/site/era-ox_king.webp' },
+        { asset: 'ancient', label: 'ANCIENT OF DAYS', date: 'Dan 7:9', img: 'assets/site/era-ancient.webp' },
+        { asset: 'son', label: 'SON OF MAN', date: 'Dan 7:13', img: 'assets/site/era-son.webp' },
+        { asset: 'decree', label: 'THE DECREE', date: '457 BC', img: 'assets/site/era-decree.webp' },
+        { asset: 'kings', label: 'NORTH & SOUTH', date: 'Dan 11:5', img: 'assets/site/era-kings.webp' },
+        { asset: 'michael', label: 'MICHAEL', date: 'Dan 12:1', img: 'assets/site/era-michael.webp' },
+        { asset: 'sealed', label: 'SEALED BOOK', date: 'Dan 12:4', img: 'assets/site/era-sealed.webp' }
       ];
       const html = cells.map((c) => `
         <button class="era-cell" type="button" data-asset="${c.asset}">
@@ -2534,10 +2542,25 @@ import * as THREE from 'three';
 
     function filterArtifacts(query) {
       const q = (query || '').trim().toLowerCase();
+      let visible = 0;
       document.querySelectorAll('.artifact-card-item').forEach((card) => {
         const hay = `${card.textContent} ${card.dataset.asset}`.toLowerCase();
-        card.style.display = !q || hay.includes(q) ? '' : 'none';
+        const show = !q || hay.includes(q);
+        card.style.display = show ? '' : 'none';
+        if (show) visible += 1;
       });
+      const list = document.getElementById('artifact-cards-list');
+      if (list) {
+        let empty = document.getElementById('artifact-search-empty');
+        if (!empty) {
+          empty = document.createElement('p');
+          empty.id = 'artifact-search-empty';
+          empty.className = 'artifact-search-empty';
+          empty.textContent = 'No artifacts match that search.';
+          list.appendChild(empty);
+        }
+        empty.hidden = !(q && visible === 0);
+      }
     }
 
     // Build DOM elements for museum nodes
@@ -2989,6 +3012,59 @@ import * as THREE from 'three';
     let activeAssetKey = 'assembled';
     let currentSingleModel = null;
     const loadedGLTFScenes = {};
+    // Models are big (4.5-9.5 MB decoded), so only a handful stay cached.
+    // The boot pair (colossus + its 'full_body' alias) is permanent; everything
+    // else is least-recently-used. Evicted models reload from the browser cache.
+    const GLTF_LRU_CAP = 6;
+    const GLTF_PERMANENT = { assembled: true, full_body: true };
+    const gltfLruOrder = [];
+    const gltfRecentlyShown = [];
+    function rememberShownKey(key) {
+      const i = gltfRecentlyShown.indexOf(key);
+      if (i >= 0) gltfRecentlyShown.splice(i, 1);
+      gltfRecentlyShown.push(key);
+      if (gltfRecentlyShown.length > 3) gltfRecentlyShown.shift();
+    }
+    function isGltfEvictable(key) {
+      return !GLTF_PERMANENT[key] && key !== activeAssetKey && gltfRecentlyShown.indexOf(key) === -1;
+    }
+    // QA hook: inspect the model cache (keys + LRU order) without touching internals.
+    window.__gltfCache = {
+      keys: () => Object.keys(loadedGLTFScenes),
+      lru: () => gltfLruOrder.slice(),
+      cap: () => GLTF_LRU_CAP
+    };
+
+    function disposeGltfScene(model) {
+      model.traverse((child) => {
+        if (child.geometry) child.geometry.dispose();
+        if (child.material) {
+          const mats = Array.isArray(child.material) ? child.material : [child.material];
+          mats.forEach((m) => {
+            Object.values(m).forEach((value) => {
+              if (value && value.isTexture) value.dispose();
+            });
+            m.dispose();
+          });
+        }
+      });
+    }
+    function touchGltf(key) {
+      const i = gltfLruOrder.indexOf(key);
+      if (i >= 0) gltfLruOrder.splice(i, 1);
+      gltfLruOrder.push(key);
+    }
+    function evictGltfs() {
+      const cap = Math.max(GLTF_LRU_CAP - Object.keys(GLTF_PERMANENT).length, 2);
+      let oldest = gltfLruOrder.find(isGltfEvictable);
+      while (gltfLruOrder.filter((k) => !GLTF_PERMANENT[k]).length > cap && oldest) {
+        disposeGltfScene(loadedGLTFScenes[oldest]);
+        delete loadedGLTFScenes[oldest];
+        const i = gltfLruOrder.indexOf(oldest);
+        if (i >= 0) gltfLruOrder.splice(i, 1);
+        oldest = gltfLruOrder.find(isGltfEvictable);
+      }
+    }
     let explodeAmount = 0;
     let pedestalVisible = false;
 
@@ -3104,6 +3180,7 @@ import * as THREE from 'three';
       }
 
       activeAssetKey = key;
+      rememberShownKey(key);
       if (window.Insights) window.Insights.track('gallery_view', null, { asset: key });
       const data = ASSET_REGISTRY[key] || ASSET_REGISTRY.head;
       setHallBackdrop(data.hallImg || HALL_BACKDROPS[key] || data.plateImg);
@@ -3341,6 +3418,7 @@ import * as THREE from 'three';
         }
       }
       if (loadedGLTFScenes[key]) {
+        touchGltf(key);
         if (onLoaded) onLoaded(loadedGLTFScenes[key].clone());
         return;
       }
@@ -3389,6 +3467,9 @@ import * as THREE from 'three';
             });
             loadedGLTFScenes[key] = model;
             if (key === 'assembled') loadedGLTFScenes['full_body'] = model;
+            touchGltf(key);
+            if (key === 'assembled') touchGltf('full_body');
+            evictGltfs();
             if (!loadProgress.heroAssetCounted) {
               loadProgress.heroAssetCounted = true;
               loadProgress.loadedCount++;
@@ -4249,3 +4330,4 @@ import * as THREE from 'three';
       controls.update();
     }
     animate(performance.now());
+

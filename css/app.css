@@ -472,6 +472,14 @@
       background: rgba(229, 167, 66, 0.3);
       border-radius: 2px;
     }
+    .artifact-search-empty {
+      padding: 14px 10px;
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      letter-spacing: 0.04em;
+      color: rgba(229, 167, 66, 0.85);
+      text-align: center;
+    }
 
     button.artifact-card-item,
     .artifact-card-item {
@@ -1512,6 +1520,9 @@
         gap: 8px;
         padding: 10px 14px;
       }
+      /* The desktop header menu button overflows small screens; the
+         floating "Collection" button (#btn-menu-fab) takes over. */
+      #btn-menu { display: none; }
       .hero-stage-title {
         left: 16px;
         right: 16px;

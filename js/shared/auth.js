@@ -1,6 +1,10 @@
 (function () {
   const cfg = window.BAAuthConfig || {};
   const listeners = [];
+  // The moderator dashboard is limited to the site operator. This list must match
+  // the SQL is_review_moderator() function (tools/supabase-reviews.sql), which the
+  // database also enforces on every moderator read.
+  const MODERATOR_EMAILS = ["fanelesibonge50@gmail.com"];
   let client = null;
   let user = null;
   let accessToken = "";
@@ -348,22 +352,20 @@
     return client;
   }
 
+  function isModeratorEmail(nextUser) {
+    if (!nextUser) return false;
+    const emails = accountEmails(nextUser, accessToken);
+    for (let i = 0; i < emails.length; i++) {
+      if (MODERATOR_EMAILS.indexOf(emails[i]) >= 0) return true;
+    }
+    return false;
+  }
+
   function refreshModerator() {
     const gen = moderatorGen + 1;
     moderatorGen = gen;
-    if (!client || !user) {
-      moderator = false;
-      return Promise.resolve(false);
-    }
-    return client.rpc("is_review_moderator").then(function (res) {
-      if (gen !== moderatorGen) return moderator;
-      moderator = !!(res && !res.error && res.data === true);
-      return moderator;
-    }).catch(function () {
-      if (gen !== moderatorGen) return moderator;
-      moderator = false;
-      return false;
-    });
+    moderator = isModeratorEmail(user);
+    return Promise.resolve(moderator);
   }
 
   function isModerator() {
@@ -376,14 +378,6 @@
       const i = listeners.indexOf(fn);
       if (i >= 0) listeners.splice(i, 1);
     };
-  }
-
-  function buttonClass(root, extra) {
-    const variant = (root && root.getAttribute("data-auth-variant")) || "nav";
-    if (variant === "study") return "header-read-btn auth-btn " + extra;
-    if (variant === "access") return "px-5 py-2.5 rounded bg-amber-600 text-paper-50 font-sans text-sm font-semibold auth-btn " + extra;
-    if (variant === "dash") return "dash-auth-out auth-btn " + extra;
-    return "auth-btn " + extra;
   }
 
   function renderSlot(root) {
