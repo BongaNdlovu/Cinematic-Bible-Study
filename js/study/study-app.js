@@ -2755,6 +2755,16 @@
             const btn = document.getElementById(`q-${qIdx}-opt-${optIdx}`);
             if (btn) btn.disabled = false;
           });
+          if (cause === 'not_authenticated') {
+            const accountHref = 'account.html?next=' + encodeURIComponent(location.pathname + location.search);
+            if (feedback) {
+              feedback.className = "mt-4 p-4 rounded-lg font-sans text-xs sm:text-sm leading-relaxed border border-amber-600/40 bg-amber-50 dark:bg-amber-950/30 text-ink-800 dark:text-paper-200";
+              feedback.classList.remove('hidden');
+              feedback.innerHTML = `<strong>Answer checking is available to signed-in members.</strong> Sign in to check your answers, save your progress, and work toward your certificate. <a href="${accountHref}" class="font-semibold underline text-amber-800 dark:text-amber-300">Go to Account</a>`;
+            }
+            updateNextGate();
+            return;
+          }
           if (feedback) feedback.classList.add('hidden');
           if (window.SiteOps && typeof window.SiteOps.report === 'function') {
             window.SiteOps.report('quiz_verify_failed', cause, { q: qIdx, cause: cause });

@@ -54,7 +54,9 @@ global.location = global.window.location;
 
 const rpcCalls = [];
 let rpcReply = { data: { correct: true, correct_idx: 2, note: "Correct! Server note." }, error: null };
+let currentUser = { id: "learner-1" };
 global.window.ScrollAuth = {
+  getUser: () => currentUser,
   getClient: () => ({
     rpc: (name, args) => {
       rpcCalls.push({ name, args });
@@ -83,6 +85,25 @@ rpcReply = { reject: new Error("Failed to fetch") };
 res = await QuizGate.verify(0, 0, 1);
 assert.strictEqual(res.ok, false, "network failure fails closed");
 
+rpcReply = { error: { code: "42501", message: "permission denied for function verify_quiz_answer" } };
+res = await QuizGate.verify(0, 0, 1);
+assert.deepStrictEqual(res, { ok: false, error: "error" }, "a permission-denied reply for a signed-in member is reported as a fault");
+
+currentUser = null;
+const callsBefore = rpcCalls.length;
+res = await QuizGate.verify(0, 0, 1);
+assert.deepStrictEqual(res, { ok: false, error: "not_authenticated" }, "a signed-out visitor is told to sign in");
+assert.strictEqual(rpcCalls.length, callsBefore, "a signed-out visitor does not call the RPC");
+
+rpcReply = { data: { correct: true, correct_idx: 2, note: "" }, error: null };
+global.window.ScrollAuth.ready = () => new Promise((resolve) => setTimeout(() => {
+  currentUser = { id: "learner-1" };
+  resolve();
+}, 10));
+res = await QuizGate.verify(0, 0, 2);
+assert.strictEqual(res.ok, true, "an early answer waits for the saved session before checking sign-in");
+delete global.window.ScrollAuth.ready;
+
 /* 4. Without a Supabase client: practice mode under the QA mock, closed otherwise. */
 global.window.ScrollAuth.getClient = () => null;
 global.localStorage.store.baQaMockSession = JSON.stringify({ user: { id: "qa" } });
@@ -97,5 +118,6 @@ assert.deepStrictEqual(res, { ok: false, error: "not_authenticated" }, "signed-o
 assert.strictEqual(/\b(q|quiz|questionData)\.correct\b/.test(read("js/study/study-app.js")), false, "study-app.js never reads q.correct");
 assert.strictEqual(/q\.correct|correctIdx\s*=\s*q\.correct/.test(read("qa-e2e/production-audit.mjs")), false, "the e2e audit no longer reads the key");
 assert.ok(read("js/study/study-app.js").includes("QuizGate.verify"), "study-app.js grades through QuizGate");
+assert.ok(read("js/study/study-app.js").includes("Answer checking is available to signed-in members."), "signed-out answers point to the Account page");
 
 console.log("quiz integrity: key scrubbed, server seed complete, RPC grading, fail-closed paths hold");

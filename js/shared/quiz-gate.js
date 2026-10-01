@@ -26,6 +26,15 @@
     return window.ScrollAuth && typeof window.ScrollAuth.getClient === 'function' && window.ScrollAuth.getClient();
   }
 
+  function authReady() {
+    const auth = window.ScrollAuth;
+    return auth && typeof auth.ready === 'function' ? auth.ready() : Promise.resolve();
+  }
+
+  function signedIn() {
+    return !!(window.ScrollAuth && typeof window.ScrollAuth.getUser === 'function' && window.ScrollAuth.getUser());
+  }
+
   function errorCause(error) {
     if (!error) return 'error';
     const message = error.message ? String(error.message) : (typeof error === 'string' ? error : '');
@@ -50,13 +59,18 @@
    * or { ok: false, error: cause } — callers must fail closed on !ok.
    */
   function verify(sitting, qIdx, chosen) {
+    return authReady().then(function () { return verifyNow(sitting, qIdx, chosen); });
+  }
+
+  function verifyNow(sitting, qIdx, chosen) {
     const client = authClient();
     if (!client) {
       if (hasQaMockSession()) {
-        return Promise.resolve({ ok: true, correct: true, correctIdx: Number(chosen), note: '' });
+        return { ok: true, correct: true, correctIdx: Number(chosen), note: '' };
       }
-      return Promise.resolve({ ok: false, error: 'not_authenticated' });
+      return { ok: false, error: 'not_authenticated' };
     }
+    if (!signedIn()) return { ok: false, error: 'not_authenticated' };
     return client.rpc('verify_quiz_answer', {
       p_sitting: Number(sitting),
       p_q_idx: Number(qIdx),
