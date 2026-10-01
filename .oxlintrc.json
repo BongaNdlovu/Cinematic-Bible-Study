@@ -12,6 +12,7 @@
     "vendor/**",
     "node_modules/**",
     "qa/**",
+    "qa-e2e/**",
     "tools/**",
     "models/**",
     "assets/**"

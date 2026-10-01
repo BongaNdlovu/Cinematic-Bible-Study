@@ -51,7 +51,18 @@
       el.appendChild(row);
       return;
     }
-    el.textContent = lastError;
+    el.replaceChildren();
+    const span = document.createElement("span");
+    span.className = "site-error-text";
+    span.textContent = lastError;
+    el.appendChild(span);
+    const closeBtn = document.createElement("button");
+    closeBtn.type = "button";
+    closeBtn.className = "site-error-close";
+    closeBtn.setAttribute("aria-label", "Dismiss notification");
+    closeBtn.textContent = "×";
+    closeBtn.addEventListener("click", clear);
+    el.appendChild(closeBtn);
   }
 
   function show(message, kind) {

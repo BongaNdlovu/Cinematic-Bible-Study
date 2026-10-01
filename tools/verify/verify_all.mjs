@@ -451,7 +451,7 @@ async function run() {
   }
 
   console.log('\n=== Step 7: Testing gallery.html Direct Study Link & Camera Framing ===');
-  await client.send('Page.navigate', { url: `${SERVER_BASE}/gallery.html?asset=stone` });
+  await client.send('Page.navigate', { url: `${SERVER_BASE}/gallery.html?asset=stone&preview=full` });
   let studyLinkHref = '';
   for (let i = 0; i < 30; i++) {
     await sleep(200);

@@ -40,7 +40,7 @@
   };
 
   const SHEET_COUNT = 11;
-  const TERMS_VERSION = 6;
+  const TERMS_VERSION = 5;
   const FREE_THROUGH = 2;
   const TEMP_REVIEW_UNLOCK = false;
   const SITTING_ASSETS = [
@@ -369,6 +369,7 @@
   function clampToAccessible(index) {
     const i = Number(index);
     if (Number.isNaN(i) || i < 0) return 0;
+    if (previewAllContent()) return Math.min(i, SHEET_COUNT - 1);
     const cap = maxOpenSheet();
     return i > cap ? cap : i;
   }

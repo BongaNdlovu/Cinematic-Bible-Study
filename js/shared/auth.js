@@ -329,6 +329,15 @@
 
   function signOut() {
     try { localStorage.removeItem("baQaMockSession"); } catch (e) {}
+    try { localStorage.removeItem("baProgressOutbox"); } catch (e) {}
+    try { localStorage.removeItem("baLastPushAt"); } catch (e) {}
+    try { sessionStorage.removeItem("baLastPushAt"); } catch (e) {}
+    if (window.SiteErrors && typeof window.SiteErrors.current === "function") {
+      const cur = window.SiteErrors.current();
+      if (cur && (cur.indexOf("progress did not save") !== -1 || cur.indexOf("could not be loaded") !== -1)) {
+        window.SiteErrors.clear();
+      }
+    }
     if (!client) {
       // QA mock path (no Supabase client) — drop the synthetic user and re-gate.
       setUser(null, null);
@@ -430,6 +439,15 @@
       if (event === "PASSWORD_RECOVERY") passwordRecovery = true;
       if (event === "SIGNED_OUT") {
         passwordRecovery = false;
+        try { localStorage.removeItem("baProgressOutbox"); } catch (e) {}
+        try { localStorage.removeItem("baLastPushAt"); } catch (e) {}
+        try { sessionStorage.removeItem("baLastPushAt"); } catch (e) {}
+        if (window.SiteErrors && typeof window.SiteErrors.current === "function") {
+          const cur = window.SiteErrors.current();
+          if (cur && (cur.indexOf("progress did not save") !== -1 || cur.indexOf("could not be loaded") !== -1)) {
+            window.SiteErrors.clear();
+          }
+        }
         setUser(null, null);
         return;
       }

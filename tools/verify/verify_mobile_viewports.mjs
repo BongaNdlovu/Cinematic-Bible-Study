@@ -97,7 +97,7 @@ try {
     console.log(`✓ Home title and buttons fully visible on ${vp.name}`);
 
     // 2. Check gallery.html
-    await page.goto("http://127.0.0.1:8123/gallery.html", { waitUntil: "domcontentloaded" });
+    await page.goto("http://127.0.0.1:8123/gallery.html?preview=full", { waitUntil: "domcontentloaded" });
     await page.waitForTimeout(1000);
 
     // Document horizontal overflow

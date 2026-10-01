@@ -1,7 +1,7 @@
 /**
  * progress-sync.js
  * Supabase signed-in progress synchronization.
- * Merges journey, mastery, workbench verification, and cohort metadata with cloud state.
+ * Merges journey, mastery, workbench verification, and cohort metadata with cloud state (pullAndMerge and atomic upsert).
  */
 (function () {
   'use strict';
@@ -9,6 +9,7 @@
   const TABLE = 'exhibit_progress';
   const ACCOUNT_KEY = 'baProgressAccountId';
   const OUTBOX_KEY = 'baProgressOutbox';
+  const LAST_PUSH_KEY = 'baLastPushAt';
   const PUSH_GAP_MS = 6000;
   const SAVE_MISS = 'Your progress did not save. This device will keep trying.';
   const PULL_MISS = 'Your saved progress could not be loaded from the cloud. This device still has what it stored here.';
@@ -19,8 +20,43 @@
   let retryAttempt = 0;
   let applyingMerge = false;
   let isSyncing = false;
-  let lastPushAt = 0;
   let knownRevision = null;
+
+  function getLastPushAt() {
+    let sessionVal = 0;
+    let localVal = 0;
+    try {
+      const v = typeof sessionStorage !== 'undefined' ? sessionStorage.getItem(LAST_PUSH_KEY) : null;
+      const n = Number(v);
+      if (!Number.isNaN(n) && n > 0) sessionVal = n;
+    } catch (e) {}
+    try {
+      const v = typeof localStorage !== 'undefined' ? localStorage.getItem(LAST_PUSH_KEY) : null;
+      const n = Number(v);
+      if (!Number.isNaN(n) && n > 0) localVal = n;
+    } catch (e) {}
+    return Math.max(sessionVal, localVal);
+  }
+
+  let lastPushAt = getLastPushAt();
+
+  function setLastPushAt(ts) {
+    lastPushAt = ts;
+    try {
+      if (typeof sessionStorage !== 'undefined') {
+        sessionStorage.setItem(LAST_PUSH_KEY, String(ts));
+      }
+    } catch (e) {}
+    try {
+      if (typeof localStorage !== 'undefined') {
+        localStorage.setItem(LAST_PUSH_KEY, String(ts));
+      }
+    } catch (e) {}
+  }
+
+  function timeSinceLastPush() {
+    return Date.now() - Math.max(lastPushAt || 0, getLastPushAt());
+  }
 
   function accountId(u) {
     return u && u.id ? String(u.id) : '';
@@ -93,10 +129,98 @@
     return window.ScrollAuth && typeof window.ScrollAuth.getUser === 'function' && window.ScrollAuth.getUser();
   }
 
+  function mergeCloudWithLocal(remote) {
+    let localHadNew = false;
+
+    // 1. Merge completedSheets in baJourney
+    try {
+      const localJourney = window.BAJourney && typeof window.BAJourney.load === 'function'
+        ? window.BAJourney.load()
+        : JSON.parse(localStorage.getItem('baJourney') || '{}');
+      const localSheets = Array.isArray(localJourney.completedSheets) ? localJourney.completedSheets : [];
+      const remoteJourney = (remote && remote.journey) || {};
+      const remoteSheets = Array.isArray(remoteJourney.completedSheets)
+        ? remoteJourney.completedSheets
+        : (Array.isArray(remote && remote.mastery) ? remote.mastery : []);
+      
+      const unionSheets = Array.from(new Set([...localSheets, ...remoteSheets])).map(Number).filter(n => !Number.isNaN(n) && n >= 0 && n <= 10);
+      
+      if (localSheets.some(function (n) { return !remoteSheets.map(Number).includes(Number(n)); })) {
+        localHadNew = true;
+      }
+
+      const mergedCohort = localJourney.cohort || remote.cohort || remoteJourney.cohort || null;
+
+      if (window.BAJourney && typeof window.BAJourney.save === 'function') {
+        window.BAJourney.save({ completedSheets: unionSheets, cohort: mergedCohort });
+      }
+      localStorage.setItem('daniel_historicist_mastery', JSON.stringify(unionSheets));
+    } catch (e) {}
+
+    // 2. Merge Workbench state
+    try {
+      const localWb = JSON.parse(localStorage.getItem('daniel_workbench_v1') || '{}');
+      const remoteWb = (remote && remote.workbench) || {};
+      const mergedWb = Object.assign({}, remoteWb);
+      Object.keys(localWb).forEach(function (sheetId) {
+        if (!mergedWb[sheetId]) mergedWb[sheetId] = {};
+        Object.keys(localWb[sheetId] || {}).forEach(function (taskId) {
+          if (localWb[sheetId][taskId]) {
+            if (!(remoteWb[sheetId] && remoteWb[sheetId][taskId])) {
+              localHadNew = true;
+            }
+            mergedWb[sheetId][taskId] = true;
+          }
+        });
+      });
+      localStorage.setItem('daniel_workbench_v1', JSON.stringify(mergedWb));
+    } catch (e) {}
+
+    // 3. Merge Telemetry
+    try {
+      const localTel = JSON.parse(localStorage.getItem('daniel_competency_telemetry_v1') || '{}');
+      const remoteTel = (remote && remote.telemetry) || {};
+      const mergedArtifacts = Array.from(new Set([
+        ...(localTel.verifiedArtifacts || []),
+        ...(remoteTel.verifiedArtifacts || [])
+      ]));
+      if ((localTel.verifiedArtifacts || []).some(function (a) { return !(remoteTel.verifiedArtifacts || []).includes(a); })) {
+        localHadNew = true;
+      }
+      const mergedLookups = Array.from(new Set([
+        ...(localTel.scriptureLookups || []),
+        ...(remoteTel.scriptureLookups || [])
+      ]));
+      if ((localTel.scriptureLookups || []).some(function (l) { return !(remoteTel.scriptureLookups || []).includes(l); })) {
+        localHadNew = true;
+      }
+      const mergedTel = Object.assign({}, remoteTel, localTel, {
+        verifiedArtifacts: mergedArtifacts,
+        scriptureLookups: mergedLookups,
+        capstone: localTel.capstone || remoteTel.capstone || null
+      });
+      if (localTel.capstone && !remoteTel.capstone) localHadNew = true;
+      localStorage.setItem('daniel_competency_telemetry_v1', JSON.stringify(mergedTel));
+    } catch (e) {}
+
+    // 4. Merge Certificate Name
+    try {
+      const localCertName = localStorage.getItem('daniel_certificate_name') || '';
+      if (localCertName && remote && !remote.certificate_name) {
+        localHadNew = true;
+      } else if (!localCertName && remote && remote.certificate_name) {
+        localStorage.setItem('daniel_certificate_name', remote.certificate_name);
+      }
+    } catch (e) {}
+
+    return localHadNew;
+  }
+
   function pullAndMerge() {
     const c = authClient();
     const u = currentUser();
     if (!c || !u) return Promise.resolve(null);
+    if (isSyncing) return Promise.resolve(null);
 
     const uid = accountId(u);
     const prev = (function () {
@@ -114,7 +238,10 @@
       .then(function (res) {
         if (res && res.error) {
           isSyncing = false;
-          reportPullMiss(errorCause(res.error));
+          const cause = errorCause(res.error);
+          if (cause !== 'not_authenticated') {
+            reportPullMiss(cause);
+          }
           if (switched) notifyProgressSynced();
           return null;
         }
@@ -123,6 +250,9 @@
         if (localProgressDamaged()) {
           isSyncing = false;
           return null;
+        }
+        if (!readOutbox()) {
+          clearSaveMiss();
         }
         if (!remote) {
           // New cloud row: do not carry another account's desk onto this login.
@@ -136,70 +266,11 @@
           applyCloudProgress(remote);
           notifyProgressSynced();
           isSyncing = false;
-          syncNow();
+          if (readOutbox()) syncNow();
           return remote;
         }
 
-        // 1. Merge completedSheets in baJourney
-        try {
-          const localJourney = window.BAJourney && typeof window.BAJourney.load === 'function'
-            ? window.BAJourney.load()
-            : JSON.parse(localStorage.getItem('baJourney') || '{}');
-          const localSheets = Array.isArray(localJourney.completedSheets) ? localJourney.completedSheets : [];
-          const remoteJourney = remote.journey || {};
-          const remoteSheets = Array.isArray(remoteJourney.completedSheets) ? remoteJourney.completedSheets : (Array.isArray(remote.mastery) ? remote.mastery : []);
-          
-          const unionSheets = Array.from(new Set([...localSheets, ...remoteSheets])).map(Number).filter(n => !Number.isNaN(n) && n >= 0 && n <= 10);
-          
-          const mergedCohort = localJourney.cohort || remote.cohort || remoteJourney.cohort || null;
-
-          if (window.BAJourney && typeof window.BAJourney.save === 'function') {
-            window.BAJourney.save({ completedSheets: unionSheets, cohort: mergedCohort });
-          }
-          localStorage.setItem('daniel_historicist_mastery', JSON.stringify(unionSheets));
-        } catch (e) {}
-
-        // 2. Merge Workbench state
-        try {
-          const localWb = JSON.parse(localStorage.getItem('daniel_workbench_v1') || '{}');
-          const remoteWb = remote.workbench || {};
-          const mergedWb = Object.assign({}, remoteWb);
-          Object.keys(localWb).forEach(function (sheetId) {
-            if (!mergedWb[sheetId]) mergedWb[sheetId] = {};
-            Object.keys(localWb[sheetId] || {}).forEach(function (taskId) {
-              if (localWb[sheetId][taskId]) mergedWb[sheetId][taskId] = true;
-            });
-          });
-          localStorage.setItem('daniel_workbench_v1', JSON.stringify(mergedWb));
-        } catch (e) {}
-
-        // 3. Merge Telemetry
-        try {
-          const localTel = JSON.parse(localStorage.getItem('daniel_competency_telemetry_v1') || '{}');
-          const remoteTel = remote.telemetry || {};
-          const mergedArtifacts = Array.from(new Set([
-            ...(localTel.verifiedArtifacts || []),
-            ...(remoteTel.verifiedArtifacts || [])
-          ]));
-          const mergedLookups = Array.from(new Set([
-            ...(localTel.scriptureLookups || []),
-            ...(remoteTel.scriptureLookups || [])
-          ]));
-          const mergedTel = Object.assign({}, remoteTel, localTel, {
-            verifiedArtifacts: mergedArtifacts,
-            scriptureLookups: mergedLookups,
-            capstone: localTel.capstone || remoteTel.capstone || null
-          });
-          localStorage.setItem('daniel_competency_telemetry_v1', JSON.stringify(mergedTel));
-        } catch (e) {}
-
-        // 4. Merge Certificate Name
-        try {
-          const localCertName = localStorage.getItem('daniel_certificate_name') || '';
-          if (!localCertName && remote.certificate_name) {
-            localStorage.setItem('daniel_certificate_name', remote.certificate_name);
-          }
-        } catch (e) {}
+        const localHadNew = mergeCloudWithLocal(remote);
 
         try {
           if (typeof window !== "undefined") {
@@ -208,13 +279,17 @@
         } catch (e) {}
 
         isSyncing = false;
-        // Push merged state back to ensure both client and cloud match
-        syncNow();
+        if (localHadNew || readOutbox()) {
+          syncNow();
+        }
         return remote;
       })
       .catch(function (err) {
         isSyncing = false;
-        reportPullMiss(errorCause(err));
+        const cause = errorCause(err);
+        if (cause !== 'not_authenticated') {
+          reportPullMiss(cause);
+        }
         return null;
       });
   }
@@ -331,15 +406,14 @@
     }
   }
 
-  function rememberOutbox(payload, expectedRevision, cause, ms) {
-    storeOutbox(payload, expectedRevision);
-    reportSaveMiss(cause, ms);
-  }
-
   function clearSaveMiss() {
     try { localStorage.removeItem(OUTBOX_KEY); } catch (e) {}
-    if (window.SiteErrors && typeof window.SiteErrors.current === 'function' && window.SiteErrors.current() === SAVE_MISS) {
-      window.SiteErrors.clear();
+    if (window.SiteErrors && typeof window.SiteErrors.current === 'function') {
+      const cur = window.SiteErrors.current();
+      if (cur === SAVE_MISS || cur === PULL_MISS ||
+          (typeof cur === 'string' && (cur.indexOf('progress did not save') !== -1 || cur.indexOf('could not be loaded') !== -1))) {
+        window.SiteErrors.clear();
+      }
     }
   }
 
@@ -375,10 +449,20 @@
   }
 
   function errorCause(error) {
-    const message = error && error.message ? String(error.message) : '';
+    if (!error) return 'error';
+    const message = error.message ? String(error.message) : (typeof error === 'string' ? error : '');
+    const code = error.code ? String(error.code) : '';
+    const name = error.name ? String(error.name) : '';
+    if (message.indexOf('not_authenticated') !== -1 ||
+        message.indexOf('JWT') !== -1 ||
+        message.indexOf('unauthorized') !== -1 ||
+        code === '401' ||
+        code === 'PGRST301') {
+      return 'not_authenticated';
+    }
     if (message.indexOf('payload_too_large') !== -1) return 'payload_too_large';
     if (message.indexOf('rate_limit') !== -1) return 'rate_limit';
-    if (message.indexOf('AbortError') !== -1 || message.indexOf('TimeoutError') !== -1 || message.indexOf('aborted') !== -1) {
+    if (message.indexOf('AbortError') !== -1 || message.indexOf('TimeoutError') !== -1 || message.indexOf('aborted') !== -1 || name === 'AbortError' || name === 'TimeoutError') {
       return 'timeout';
     }
     return 'error';
@@ -421,12 +505,31 @@
   }
 
   function queueFailure(payload, expectedRevision, cause, ms) {
+    if (cause === 'not_authenticated') {
+      clearSaveMiss();
+      if (retryTimer) clearTimeout(retryTimer);
+      retryTimer = null;
+      retryAttempt = 0;
+      if (window.SiteOps && typeof window.SiteOps.report === 'function') {
+        window.SiteOps.report('save_failed', 'not_authenticated', { ms: ms, cause: cause });
+      }
+      return null;
+    }
     if (cause === 'payload_too_large') {
       reportSaveMiss(cause, ms);
       return null;
     }
-    rememberOutbox(payload, expectedRevision, cause, ms);
+    storeOutbox(payload, expectedRevision);
     scheduleRetry();
+    if (cause === 'rate_limit' || cause === 'conflict') {
+      if (retryAttempt >= MAX_RETRIES) {
+        reportSaveMiss(cause, ms);
+      } else if (window.SiteOps && typeof window.SiteOps.report === 'function') {
+        window.SiteOps.report('save_pacing', cause, { ms: ms, cause: cause, attempt: retryAttempt });
+      }
+    } else {
+      reportSaveMiss(cause, ms);
+    }
     return null;
   }
 
@@ -459,7 +562,7 @@
       return res.data;
     }).catch(function (err) {
       const ms = Date.now() - started;
-      const cause = err && (err.name === 'AbortError' || err.name === 'TimeoutError') ? 'timeout' : 'error';
+      const cause = errorCause(err);
       return queueFailure(payload, expectedRevision, cause, ms);
     });
   }
@@ -472,21 +575,28 @@
     if (retryTimer) clearTimeout(retryTimer);
     retryTimer = null;
     storeOutbox(payload, knownRevision);
-    lastPushAt = Date.now();
+    setLastPushAt(Date.now());
     return settleSave(client, knownRevision, payload);
   }
 
   function pushLocalToRemote(fromTimer) {
     const c = authClient();
     const u = currentUser();
-    if (!c || !u || isSyncing) return Promise.resolve(null);
+    if (!c || !u) {
+      if (!u) clearSaveMiss();
+      return Promise.resolve(null);
+    }
+    if (isSyncing) return Promise.resolve(null);
     if (fromTimer) {
       const stored = readOutbox();
-      if (!stored) return Promise.resolve(null);
-      lastPushAt = Date.now();
+      if (!stored) {
+        clearSaveMiss();
+        return Promise.resolve(null);
+      }
+      setLastPushAt(Date.now());
       return settleSave(c, stored.expectedRevision, stored.payload);
     }
-    if (Date.now() - lastPushAt < PUSH_GAP_MS) {
+    if (timeSinceLastPush() < PUSH_GAP_MS) {
       const payload = collectPayload();
       if (!payload) return Promise.resolve(null);
       payload.save_id = newSaveId();
@@ -499,7 +609,10 @@
   }
 
   function runScheduledRetry() {
-    if (retryAttempt >= MAX_RETRIES) return Promise.resolve(null);
+    if (retryAttempt >= MAX_RETRIES) {
+      reportSaveMiss('max_retries');
+      return Promise.resolve(null);
+    }
     retryAttempt += 1;
     return pushLocalToRemote(true);
   }

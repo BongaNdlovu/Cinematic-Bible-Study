@@ -8,26 +8,223 @@
   <meta name="robots" content="noindex">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📜</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Cormorant+Garamond:ital,wght@0,500;1,500;1,600&family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/site.css?v=29">
   <link rel="stylesheet" href="css/terms.css">
   <style>
-    .insights-main { max-width: 1100px; margin: 0 auto; padding: 28px 20px 64px; }
-    .insights-main h1 { font-family: "Cormorant Garamond", Georgia, serif; font-size: 2rem; margin: 0 0 .4rem; }
-    .insights-lead, .insights-gate { color: var(--muted, #8a7d68); font-size: 14px; line-height: 1.5; }
-    .insights-toolbar { display: flex; flex-wrap: wrap; gap: 8px; margin: 18px 0 22px; }
-    .insights-toolbar button { font: inherit; font-size: 12px; padding: .4rem .7rem; border: 1px solid var(--line, rgba(196,162,90,.35)); background: transparent; color: inherit; cursor: pointer; }
-    .insights-toolbar button.is-on { background: #1c1914; color: #f7f1e4; }
-    .insights-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
-    .insights-panel { border: 1px solid var(--line, rgba(196,162,90,.35)); background: var(--panel, rgba(28,25,20,.6)); padding: 14px 14px 12px; }
-    .insights-panel h2 { font-size: 14px; margin: 0 0 10px; letter-spacing: .04em; text-transform: uppercase; }
-    .insights-panel .ibar { display: grid; grid-template-columns: 7.5rem 1fr 2.4rem; gap: 8px; align-items: center; font-size: 12px; margin: 0 0 6px; }
-    .insights-panel .ibar i { display: block; height: 8px; background: #c4a25a; min-width: 0; }
-    .insights-panel .ibar b { text-align: right; font-weight: 600; }
-    .insights-panel ul { margin: 0; padding-left: 1.1rem; font-size: 13px; line-height: 1.45; }
-    .insights-panel li { margin: 0 0 .4rem; }
-    .insights-empty { font-size: 13px; opacity: .7; }
-    .insights-csv { float: right; font-size: 11px; border: 0; background: transparent; color: inherit; opacity: .7; cursor: pointer; }
+    .insights-main {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 36px 20px 80px;
+      position: relative;
+      z-index: 40;
+    }
+    .insights-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      font-size: 10px;
+      font-weight: 700;
+      color: #ffd700;
+      background: rgba(212, 175, 55, 0.12);
+      border: 1px solid rgba(212, 175, 55, 0.35);
+      padding: 4px 12px;
+      border-radius: 999px;
+      margin: 0 0 12px;
+    }
+    .insights-main h1 {
+      font-family: "Playfair Display", "Cinzel", Georgia, serif;
+      font-size: 2.35rem;
+      font-weight: 700;
+      color: #fbf5e8;
+      text-shadow: 0 2px 16px rgba(0, 0, 0, 0.85);
+      margin: 0 0 8px;
+      line-height: 1.2;
+    }
+    .insights-lead {
+      color: #d1c5b4;
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-size: 1.15rem;
+      line-height: 1.55;
+      margin: 0 0 24px;
+      max-width: 780px;
+    }
+    .insights-gate {
+      padding: 20px 24px;
+      border-radius: 14px;
+      border: 1px solid rgba(212, 175, 55, 0.35);
+      background: linear-gradient(145deg, rgba(28, 22, 16, 0.92), rgba(14, 11, 8, 0.98));
+      color: #e2d6c1;
+      font-size: 15px;
+      line-height: 1.6;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
+      margin: 20px 0;
+    }
+    .insights-gate a {
+      color: #ffd700;
+      font-weight: 600;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    .insights-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
+      margin: 24px 0 28px;
+    }
+    .insights-toolbar-label {
+      font-size: 12px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: #a89679;
+      margin-right: 4px;
+    }
+    .insights-toolbar button {
+      font-family: Inter, system-ui, sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      padding: 0.5rem 1rem;
+      border-radius: 999px;
+      border: 1px solid rgba(212, 175, 55, 0.35);
+      background: rgba(20, 16, 12, 0.65);
+      color: #c4b8a8;
+      cursor: pointer;
+      transition: all 0.18s ease;
+      backdrop-filter: blur(8px);
+    }
+    .insights-toolbar button:hover {
+      background: rgba(212, 175, 55, 0.15);
+      border-color: #ffd700;
+      color: #ffd700;
+      transform: translateY(-1px);
+    }
+    .insights-toolbar button.is-on {
+      background: linear-gradient(180deg, rgba(212, 175, 55, 0.28), rgba(212, 175, 55, 0.14));
+      border-color: #ffd700;
+      color: #ffd700;
+      box-shadow: 0 0 16px rgba(212, 175, 55, 0.3);
+    }
+    .insights-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 20px;
+    }
+    .insights-panel {
+      border: 1px solid rgba(212, 175, 55, 0.32);
+      border-radius: 14px;
+      background: linear-gradient(160deg, rgba(28, 22, 16, 0.88), rgba(12, 10, 8, 0.96));
+      padding: 20px 20px 18px;
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 230, 160, 0.12);
+      backdrop-filter: blur(10px);
+      transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .insights-panel:hover {
+      transform: translateY(-2px);
+      border-color: rgba(212, 175, 55, 0.65);
+      box-shadow: 0 16px 48px rgba(0, 0, 0, 0.65), 0 0 18px rgba(212, 175, 55, 0.16);
+    }
+    .insights-panel h2 {
+      font-family: "Playfair Display", Georgia, serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #ffd700;
+      margin: 0 0 14px;
+      letter-spacing: 0.05em;
+    }
+    .insights-panel .ibar {
+      display: grid;
+      grid-template-columns: 8rem 1fr 3rem;
+      gap: 10px;
+      align-items: center;
+      font-size: 12.5px;
+      margin: 0 0 8px;
+    }
+    .insights-panel .ibar span {
+      color: #d1c5b4;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .insights-panel .ibar i {
+      display: block;
+      height: 8px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #d4af37, #fde047);
+      box-shadow: 0 0 8px rgba(253, 224, 71, 0.4);
+      min-width: 0;
+    }
+    .insights-panel .ibar b {
+      text-align: right;
+      font-family: "JetBrains Mono", monospace;
+      font-weight: 600;
+      font-size: 12px;
+      color: #fdf5e2;
+    }
+    .insights-panel ul {
+      margin: 0 0 6px;
+      padding-left: 1.2rem;
+      font-size: 13.5px;
+      line-height: 1.6;
+      color: #c4b8a8;
+    }
+    .insights-panel li {
+      margin: 0 0 0.5rem;
+    }
+    .insights-panel li b {
+      color: #ffd700;
+    }
+    .insights-panel p {
+      color: #c4b8a8;
+      font-size: 13.5px;
+      line-height: 1.55;
+      margin: 0 0 10px;
+    }
+    .insights-panel p b {
+      color: #fdf5e2;
+    }
+    .insights-panel small {
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-size: 10px;
+      font-weight: 700;
+      color: #d4af37;
+    }
+    .insights-empty {
+      font-size: 13px;
+      color: #9c8e7c;
+      font-style: italic;
+    }
+    .insights-csv {
+      float: right;
+      font-family: Inter, system-ui, sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      border: 1px solid rgba(212, 175, 55, 0.45);
+      border-radius: 6px;
+      background: rgba(212, 175, 55, 0.1);
+      color: #ffd700;
+      padding: 3px 9px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .insights-csv:hover {
+      background: #ffd700;
+      color: #120e0a;
+      border-color: #fff;
+      box-shadow: 0 0 10px rgba(212, 175, 55, 0.4);
+    }
+    @media (max-width: 640px) {
+      .insights-main { padding: 24px 16px 60px; }
+      .insights-main h1 { font-size: 1.85rem; }
+      .insights-panel { padding: 16px 14px 14px; }
+      .insights-panel .ibar { grid-template-columns: 6.5rem 1fr 2.5rem; }
+    }
   </style>
   <script src="js/shared/journey.js"></script>
   <script src="js/shared/auth-config.js"></script>
@@ -39,23 +236,29 @@
   <script src="js/shared/insights.js"></script>
   <script src="js/insights/insights.js"></script>
 </head>
-<body class="site">
+<body class="site cover cinematic-bg">
+  <div class="vignette" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
   <nav class="site-nav">
     <a class="site-brand" href="index.html">THE SCROLL OF DANIEL</a>
     <div class="site-links">
       <a href="index.html">Home</a>
       <a href="study.html">The Sitting</a>
+      <a href="map.html">Map of History</a>
+      <a href="gallery.html">3D Symbols</a>
       <a href="insights.html" class="active">Insights</a>
       <a href="account.html">Account</a>
       <span class="auth-slot" data-auth-slot data-auth-variant="nav"></span>
     </div>
   </nav>
   <main class="insights-main">
+    <p class="insights-kicker">OPERATOR TELEMETRY &bull; EXEGESIS ANALYTICS</p>
     <h1>Study insights</h1>
     <p class="insights-lead">Moderator only. Lesson funnel, quiz answers, feedback, and referrals. Nothing here is sold or used for advertising.</p>
     <p class="insights-gate" id="insights-gate">Sign in with the moderator account from the <a href="account.html?next=insights.html">Account</a> page to open this page.</p>
     <div id="insights-app" hidden>
       <div class="insights-toolbar" id="insights-range">
+        <span class="insights-toolbar-label">Time Horizon:</span>
         <button type="button" data-days="7">7 days</button>
         <button type="button" data-days="30" class="is-on">30 days</button>
         <button type="button" data-days="90">90 days</button>

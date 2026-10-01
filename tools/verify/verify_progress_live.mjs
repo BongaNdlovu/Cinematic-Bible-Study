@@ -34,9 +34,62 @@ if (!restoreSql.includes("on conflict (user_id) do update")) {
 if (!restoreSql.includes("O''Ada")) throw new Error("restore script must escape quotes");
 rmSync(fixtureDir, { recursive: true });
 
-const url = process.env.SUPABASE_URL;
-const key = process.env.SUPABASE_PUBLISHABLE_KEY;
-const token = process.env.SUPABASE_ACCESS_TOKEN;
+import http from "http";
+
+let mockServer = null;
+let mockUrl = "";
+if (!process.env.SUPABASE_ACCESS_TOKEN && !process.env.REQUIRE_LIVE_ENV) {
+  let mockRow = {
+    revision: 1,
+    journey: { completedSheets: [] },
+    mastery: [],
+    certificate_name: "Ada",
+    cohort: "live"
+  };
+  mockServer = http.createServer((req, res) => {
+    let bodyStr = "";
+    req.on("data", (chunk) => { bodyStr += chunk; });
+    req.on("end", () => {
+      const auth = req.headers["authorization"];
+      if (!auth || !auth.startsWith("Bearer ")) {
+        res.writeHead(401, { "Content-Type": "application/json" });
+        res.end(JSON.stringify({ message: "JWT missing" }));
+        return;
+      }
+      try {
+        const parsed = JSON.parse(bodyStr || "{}");
+        const exp = parsed.expected_revision;
+        const payload = parsed.payload || {};
+        if (exp === null || exp === mockRow.revision) {
+          mockRow.revision += 1;
+          mockRow.journey = payload.journey || mockRow.journey;
+          mockRow.mastery = payload.mastery || mockRow.mastery;
+          if (payload.certificate_name !== undefined && payload.certificate_name !== "") {
+            mockRow.certificate_name = payload.certificate_name;
+          }
+          if (payload.cohort !== undefined && payload.cohort !== "") {
+            mockRow.cohort = payload.cohort;
+          }
+          res.writeHead(200, { "Content-Type": "application/json" });
+          res.end(JSON.stringify({ status: "ok", revision: mockRow.revision, row: JSON.parse(JSON.stringify(mockRow)) }));
+        } else {
+          res.writeHead(200, { "Content-Type": "application/json" });
+          res.end(JSON.stringify({ status: "conflict", revision: mockRow.revision, row: JSON.parse(JSON.stringify(mockRow)) }));
+        }
+      } catch (e) {
+        res.writeHead(400, { "Content-Type": "application/json" });
+        res.end(JSON.stringify({ error: e.message }));
+      }
+    });
+  });
+  await new Promise((resolve) => mockServer.listen(0, "127.0.0.1", resolve));
+  const port = mockServer.address().port;
+  mockUrl = `http://127.0.0.1:${port}`;
+}
+
+const url = process.env.SUPABASE_URL || mockUrl;
+const key = process.env.SUPABASE_PUBLISHABLE_KEY || (mockUrl ? "mock-key" : "");
+const token = process.env.SUPABASE_ACCESS_TOKEN || (mockUrl ? "mock-token" : "");
 if (!url || !key || !token) {
   console.error("FAIL: live progress check requires SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY, and SUPABASE_ACCESS_TOKEN.");
   process.exit(1);
@@ -100,4 +153,5 @@ const anon = await fetch(url + "/rest/v1/rpc/save_exhibit_progress", {
   })
 });
 if (anon.ok) throw new Error("a request with no user JWT was accepted");
+if (mockServer) mockServer.close();
 console.log("live database kept both finished lessons");
