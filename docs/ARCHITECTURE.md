@@ -7,7 +7,7 @@ The Scroll of Daniel is four static pages at the repo root. Python `server.py` i
 | Page | URL stays at | CSS | Scripts (load order) | Owns |
 |---|---|---|---|---|
 | Cover | `index.html` | `css/site.css` | `js/shared/journey.js` | Entrance, resume CTA, three-act offer |
-| Study desk | `study.html` | `css/map.css` (embedded map) + inline study styles | Tailwind CDN → `js/study/tailwind-config.js` → Tone.js → import map → `js/study/stage.js` (module) → Leaflet → `js/shared/journey.js` → `js/study/scripture.js` → `js/map/map-data.js` → `js/map/map.js` → `js/study/workbench.js` → `js/study/competency.js` → `js/study/sheets-data.js` → `js/study/study-app.js` | 11-sheet sitting, quiz gate, weather, pomodoro, horizon |
+| Study desk | `study.html` | `css/map.css` (embedded map) + inline study styles | Tailwind CDN → `js/study/tailwind-config.js` → Tone.js → import map → `js/study/stage.js` (module) → Leaflet → `js/shared/journey.js` → `js/study/scripture.js` → `js/map/map-data.js` → `js/map/map.js` → `js/study/workbench.js` → `js/study/competency.js` → `js/shared/study-sync.js` → `js/shared/quiz-gate.js` → `js/study/sheets-data.js` → `js/study/sheet-map.js` → `js/study/sheet-verify.js` → `js/study/sheet-glossary.js` → `js/study/certificate.js` → `js/study/study-app.js` | 11-sheet sitting, quiz gate, weather, pomodoro, horizon |
 | Map | `map.html` | `vendor/leaflet/leaflet.css`, `css/map.css` | Leaflet → `js/shared/journey.js` → `js/map/map-data.js` → `js/map/map.js` | Chronicle fly, cities, events, routes |
 | 3D gallery | `gallery.html` | `css/app.css` | `js/shared/journey.js` → import map → `js/gallery/app.js` (module) | Artifact registry, orbit, hall |
 
@@ -22,10 +22,12 @@ Deep links that must keep working: `study.html?sheet=N` / `?id=…`, `gallery.ht
 | Three.js study stage / idle models | `js/study/stage.js` |
 | Curriculum (`sheetsData`) + horizon epochs (`timelineEpochs`) | `js/study/sheets-data.js` |
 | Quiz, weather, pomodoro, chrome, `LEGACY_ID_MAP` | `js/study/study-app.js` |
+| Quiz grading (server-side; the client ships no answer key) | `js/shared/quiz-gate.js` + `tools/supabase-quiz-integrity.sql` |
 | Scripture dock (KJV + Strong’s + sheet passages) | `js/study/scripture.js` + `bible/*.json` |
 | Map chronicle (epochs, cities, events, routes) | `js/map/map-data.js` |
 | Map engine / overlays | `js/map/map.js` |
 | Notes / bookmarks workbench | `js/study/workbench.js` |
+| Notes / bookmarks cloud sync (`exhibit_study_data`) | `js/shared/study-sync.js` |
 | Competency / placement | `js/study/competency.js` |
 | Cover hall background | `css/site.css` → `../assets/site/hall-bg.jpg` |
 
@@ -42,8 +44,11 @@ Deep links that must keep working: `study.html?sheet=N` / `?id=…`, `gallery.ht
 | `daniel_historicist_mastery` | Quiz / mastery flags |
 | `daniel_theme_v1` | charcoal / paper / white |
 | `daniel_font_size_idx_v4` | Reading size |
-| `baNote-*` | Per-sheet notes |
-| `baStudyBookmarks` | Bookmarks |
+| `baNote-*` | Per-sheet notes (local source of truth; synced by `study-sync.js`) |
+| `baStudyBookmarks` | Bookmarks (local source of truth; synced by `study-sync.js`) |
+| `baNoteTimes` | Per-note edit timestamps for newest-wins cloud merge |
+| `baStudySyncOutbox` | Pending notes/bookmarks push (cleared on success) |
+| `baStudySyncAccountId` | Guards against carrying notes across account switches |
 | `scroll_section` | Legacy scroll position |
 | `baScriptureStory` | Scripture story-mode pref |
 | `baGoogleMapsKey` | Optional map key |
@@ -100,6 +105,17 @@ Run verify scripts from the repo root so `server.py` and document-relative paths
 ## Progress save and recovery
 
 `save_exhibit_progress(bigint, jsonb)` is the current contract. The save id travels inside the JSON payload. The next breaking change is a new function, shipped with the client in the same release. Do not rename this function.
+
+## Cloud sync tables and release order
+
+Two Supabase migrations back the newer sync features; both run once in the SQL editor (`backups/apply-migrations.sql` is the running concatenation):
+
+| Migration | Backs | Client module |
+|---|---|---|
+| `tools/supabase-study-sync.sql` | `exhibit_study_data` — per-sheet notes + bookmarks, newest-timestamp merge | `js/shared/study-sync.js` |
+| `tools/supabase-quiz-integrity.sql` | `exhibit_quiz_keys` + `verify_quiz_answer` RPC — the checkpoint answer key, removed from the client bundle by `tools/audit/scrub_quiz_keys.mjs` | `js/shared/quiz-gate.js` |
+
+Run both SQL files **before** deploying the matching client release: until `verify_quiz_answer` exists, checkpoint questions cannot be graded and the sitting gate stays closed (fail-closed by design, with a `quiz_verify_failed` ops report). Under the localhost QA mock session quiz answers pass in practice mode instead.
 
 Google sign-in goes from the browser straight to Supabase. The page's 5-starts-per-hour hint lives in `localStorage` and a script can skip it. The server cap was set to 5 sign-in requests per 5 minutes per IP on 27 Sep 2026. These are the Auth settings, per IP unless noted:
 

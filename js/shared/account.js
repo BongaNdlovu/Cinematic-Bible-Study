@@ -574,6 +574,9 @@
       fillSettings();
       refreshHub();
     });
+    window.addEventListener("ba-study-synced", function () {
+      refreshHub();
+    });
   }
 
   function afterAuthReady() {

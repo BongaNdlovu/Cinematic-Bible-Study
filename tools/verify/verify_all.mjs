@@ -368,8 +368,21 @@ async function run() {
   await client.eval('BAScripture.setStoryMode(false)');
 
   console.log('  [study.html] Testing quiz option...');
+  // Quiz answers are graded server-side now (quiz integrity). Inject the
+  // localhost QA mock session so the click resolves through practice mode.
+  await client.eval(`(() => {
+    const j = JSON.parse(localStorage.getItem('baJourney') || '{}');
+    j.termsByUser = j.termsByUser || {};
+    j.termsByUser['qa-mock-user-001'] = { version: 3, at: Date.now() };
+    j.termsAccepted = { version: 3, at: Date.now(), userId: 'qa-mock-user-001' };
+    j.pendingTerms = null;
+    localStorage.setItem('baJourney', JSON.stringify(j));
+    localStorage.setItem('baQaMockSession', JSON.stringify({ user: { id: 'qa-mock-user-001', email: 'qa-mock@example.com' } }));
+  })()`);
+  await client.send('Page.navigate', { url: `${SERVER_BASE}/study.html` });
+  await sleep(2500);
   await client.eval(`document.querySelector("#quiz-container button")?.click()`);
-  await sleep(200);
+  await sleep(600);
   const quizFeedback = await client.eval('document.querySelector("#q-0-feedback")?.className || ""');
   if (!quizFeedback || quizFeedback.includes('hidden')) throw new Error('Quiz feedback did not appear');
 

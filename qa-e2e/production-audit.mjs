@@ -97,46 +97,70 @@ async function completeWorkbench(page, idx) {
 }
 
 async function answerQuizzes(page, sheetIndex = null) {
-  return page.evaluate((sIdx) => {
+  // Black-box: the client no longer ships the answer key (quiz integrity).
+  // Click options until the feedback panel reports the emerald outcome;
+  // the UI reveals the correct option after a wrong pick, so this converges.
+  return page.evaluate(async (sIdx) => {
     const sheetNum = (typeof sIdx === "number")
       ? sIdx
       : (window.BAJourney?.load?.()?.sheet ?? 0);
     const quizzes = (window.sheetsData && window.sheetsData[sheetNum] && window.sheetsData[sheetNum].quizzes) || [];
     const cards = [...document.querySelectorAll('[id^="q-card-"]')];
-    let answered = 0;
-    cards.forEach((card, qIdx) => {
-      const q = quizzes[qIdx];
-      const correctIdx = (q && typeof q.correct === "number") ? q.correct : 0;
-      const btns = card.querySelectorAll("button.quiz-option");
-      const btn = btns[correctIdx] || btns[0] || card.querySelector("button.quiz-option");
-      if (btn) {
-        btn.click();
-        answered++;
+    const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+
+    async function settle(card, qIdx) {
+      const fb = document.getElementById(`q-${qIdx}-feedback`);
+      for (let i = 0; i < 60; i++) {
+        await sleep(50);
+        if (fb && !fb.classList.contains("hidden")) {
+          if (fb.className.includes("border-emerald")) return "correct";
+          if (fb.className.includes("border-rose")) return "wrong";
+        }
       }
-    });
-    if (!cards.length) {
-      const parentGroups = [];
+      return "timeout";
+    }
+
+    async function solveCard(card, qIdx) {
+      for (let attempt = 0; attempt < 10; attempt++) {
+        const free = [...card.querySelectorAll("button.quiz-option:not([disabled])")];
+        if (!free.length) return false;
+        free[0].click();
+        const outcome = await settle(card, qIdx);
+        if (outcome === "correct") return true;
+        if (outcome === "wrong") {
+          const again = card.querySelector(`#q-${qIdx}-feedback button`);
+          if (again) {
+            again.click();
+            await sleep(100);
+          }
+        }
+      }
+      return false;
+    }
+
+    let answered = 0;
+    let n = 0;
+    if (cards.length) {
+      n = cards.length;
+      for (let qIdx = 0; qIdx < cards.length; qIdx++) {
+        if (await solveCard(cards[qIdx], qIdx)) answered++;
+      }
+    } else {
       const seen = new Set();
+      const groups = [];
       document.querySelectorAll("button.quiz-option").forEach((btn) => {
         const p = btn.closest("section, article, div");
         if (p && !seen.has(p)) {
           seen.add(p);
-          parentGroups.push(p);
+          groups.push(p);
         }
       });
-      parentGroups.forEach((grp, qIdx) => {
-        const q = quizzes[qIdx];
-        const correctIdx = (q && typeof q.correct === "number") ? q.correct : 0;
-        const btns = grp.querySelectorAll("button.quiz-option");
-        const btn = btns[correctIdx] || btns[0];
-        if (btn) {
-          btn.click();
-          answered++;
-        }
-      });
-      return { n: parentGroups.length, answered };
+      n = groups.length;
+      for (let qIdx = 0; qIdx < groups.length; qIdx++) {
+        if (await solveCard(groups[qIdx], qIdx)) answered++;
+      }
     }
-    return { n: cards.length, answered };
+    return { n, answered, expected: quizzes.length };
   }, sheetIndex);
 }
 

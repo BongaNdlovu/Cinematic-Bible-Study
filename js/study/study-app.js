@@ -2588,7 +2588,7 @@
     function sheetQuizComplete() {
       const quizzes = (sheetsData[currentSheetIndex] && sheetsData[currentSheetIndex].quizzes) || [];
       if (!quizzes.length) return true;
-      return quizzes.every((q, i) => answeredQuestions[i] === q.correct);
+      return quizzes.every((q, i) => verifiedQuiz[i] === true);
     }
 
     function canAdvancePath() {
@@ -2629,15 +2629,21 @@
 
     /* =========================================================================
        6. ACTIVE RECALL REVISION & QUIZ CONTROLLER
+       Answers are graded server-side by QuizGate (verify_quiz_answer RPC);
+       the client bundle carries no answer key.
        ========================================================================= */
     let answeredQuestions = {};
     let quizAttemptCounts = {};
+    let verifiedQuiz = {};
+    let quizPending = {};
 
     function renderQuiz(quizzes) {
       const container = document.getElementById('quiz-container');
       container.innerHTML = '';
       answeredQuestions = {};
       quizAttemptCounts = {};
+      verifiedQuiz = {};
+      quizPending = {};
       const badge = document.getElementById('quiz-badge');
       if (badge) {
         const n = (quizzes && quizzes.length) || 0;
@@ -2680,31 +2686,13 @@
       });
     }
 
-    function handleQuizAnswer(qIdx, selectedOptIdx, questionData) {
-      if (answeredQuestions[qIdx] !== undefined) return;
-      answeredQuestions[qIdx] = selectedOptIdx;
-
-      const attempt = (quizAttemptCounts[qIdx] = (quizAttemptCounts[qIdx] || 0) + 1);
-      const isCorrect = selectedOptIdx === questionData.correct;
+    function paintQuizOutcome(qIdx, selectedOptIdx, correctIdx, isCorrect, questionData, note) {
       const feedback = document.getElementById(`q-${qIdx}-feedback`);
-
-      if (window.StudyCompetency) {
-        window.StudyCompetency.recordQuizAttempt(currentSheetIndex, qIdx, isCorrect);
-      }
-      if (window.Insights) {
-        window.Insights.track('quiz_answer', currentSheetIndex, {
-          q: qIdx,
-          chosen: selectedOptIdx,
-          choice: selectedOptIdx,
-          correct: isCorrect,
-          attempt: attempt
-        });
-      }
 
       questionData.options.forEach((_, optIdx) => {
         const btn = document.getElementById(`q-${qIdx}-opt-${optIdx}`);
         btn.disabled = true;
-        if (optIdx === questionData.correct) {
+        if (optIdx === correctIdx) {
           btn.classList.remove('bg-paper-100/50', 'dark:bg-paper-900/40', 'border-paper-300', 'dark:border-paper-800');
           btn.classList.add('bg-emerald-50', 'dark:bg-emerald-950/40', 'border-emerald-600', 'text-emerald-950', 'dark:text-emerald-200', 'font-medium');
         } else if (optIdx === selectedOptIdx && !isCorrect) {
@@ -2716,13 +2704,13 @@
       });
 
       feedback.classList.remove('hidden');
-      const diagMsg = (questionData.diagnostics && questionData.diagnostics[selectedOptIdx])
+      const diagMsg = (!isCorrect && questionData.diagnostics && questionData.diagnostics[selectedOptIdx])
         ? `<div class="mt-2.5 pt-2 border-t border-current/20 font-mono text-xs"><strong>Diagnostic Analysis:</strong> ${questionData.diagnostics[selectedOptIdx]}</div>`
         : '';
 
       if (isCorrect) {
         feedback.className = "mt-4 p-4 rounded-lg font-sans text-xs sm:text-sm leading-relaxed border border-emerald-500/50 bg-emerald-50 dark:bg-emerald-950/30 text-emerald-900 dark:text-emerald-200";
-        feedback.innerHTML = `<strong>✓ Historicist Exegesis:</strong> ${questionData.explanation}${diagMsg}`;
+        feedback.innerHTML = `<strong>✓ Historicist Exegesis:</strong> ${questionData.explanation}${note ? `<div class="mt-2.5 pt-2 border-t border-current/20 font-mono text-xs">${note}</div>` : ''}${diagMsg}`;
         showToast("Correct! Understanding verified.");
       } else {
         feedback.className = "mt-4 p-4 rounded-lg font-sans text-xs sm:text-sm leading-relaxed border border-rose-500/50 bg-rose-50 dark:bg-rose-950/30 text-rose-900 dark:text-rose-200";
@@ -2735,16 +2723,77 @@
         `;
         showToast("Review the historicist explanation and try again.");
       }
-      updateNextGate();
-      if (sheetQuizComplete()) {
-        sittingVisited.tasks = true;
-        renderSittingPath();
+    }
+
+    function handleQuizAnswer(qIdx, selectedOptIdx, questionData) {
+      if (verifiedQuiz[qIdx] !== undefined || quizPending[qIdx]) return;
+      answeredQuestions[qIdx] = selectedOptIdx;
+      const attempt = (quizAttemptCounts[qIdx] = (quizAttemptCounts[qIdx] || 0) + 1);
+      const feedback = document.getElementById(`q-${qIdx}-feedback`);
+
+      quizPending[qIdx] = true;
+      questionData.options.forEach((_, optIdx) => {
+        const btn = document.getElementById(`q-${qIdx}-opt-${optIdx}`);
+        if (btn) btn.disabled = true;
+      });
+      if (feedback) {
+        feedback.className = "mt-4 p-4 rounded-lg font-sans text-xs sm:text-sm leading-relaxed border border-paper-300 dark:border-paper-800 bg-paper-50 dark:bg-paper-900/40 text-ink-700 dark:text-paper-300";
+        feedback.classList.remove('hidden');
+        feedback.innerHTML = '<em>Verifying against the record…</em>';
       }
-      maybeShowEndGuide();
+
+      const gate = window.QuizGate && typeof window.QuizGate.verify === 'function' ? window.QuizGate : null;
+      const call = gate
+        ? gate.verify(currentSheetIndex, qIdx, selectedOptIdx)
+        : Promise.resolve({ ok: false, error: 'not_authenticated' });
+
+      call.then(function (res) {
+        quizPending[qIdx] = false;
+        if (!res || !res.ok) {
+          const cause = (res && res.error) || 'error';
+          questionData.options.forEach((_, optIdx) => {
+            const btn = document.getElementById(`q-${qIdx}-opt-${optIdx}`);
+            if (btn) btn.disabled = false;
+          });
+          if (feedback) feedback.classList.add('hidden');
+          if (window.SiteOps && typeof window.SiteOps.report === 'function') {
+            window.SiteOps.report('quiz_verify_failed', cause, { q: qIdx, cause: cause });
+          }
+          showToast('The record could not verify that answer. Check your connection and try again.');
+          updateNextGate();
+          return;
+        }
+
+        const isCorrect = !!res.correct;
+        const correctIdx = typeof res.correctIdx === 'number' ? res.correctIdx : selectedOptIdx;
+        verifiedQuiz[qIdx] = isCorrect;
+
+        if (window.StudyCompetency) {
+          window.StudyCompetency.recordQuizAttempt(currentSheetIndex, qIdx, isCorrect);
+        }
+        if (window.Insights) {
+          window.Insights.track('quiz_answer', currentSheetIndex, {
+            q: qIdx,
+            chosen: selectedOptIdx,
+            choice: selectedOptIdx,
+            correct: isCorrect,
+            attempt: attempt
+          });
+        }
+
+        paintQuizOutcome(qIdx, selectedOptIdx, correctIdx, isCorrect, questionData, res.note);
+        updateNextGate();
+        if (sheetQuizComplete()) {
+          sittingVisited.tasks = true;
+          renderSittingPath();
+        }
+        maybeShowEndGuide();
+      });
     }
 
     function resetQuizQuestion(qIdx) {
       delete answeredQuestions[qIdx];
+      delete verifiedQuiz[qIdx];
       const data = sheetsData[currentSheetIndex];
       const q = data.quizzes[qIdx];
       q.options.forEach((_, optIdx) => {
@@ -3191,15 +3240,23 @@
       if (notes) {
         notes.addEventListener('input', () => {
           try { localStorage.setItem('baNote-' + currentSheetIndex, notes.value); } catch (e) {}
+          if (window.StudySync) window.StudySync.recordNote(currentSheetIndex, notes.value);
         });
       }
+      window.addEventListener('ba-study-synced', () => {
+        const notesEl = document.getElementById('sheet-notes');
+        if (notesEl && document.activeElement !== notesEl) {
+          try { notesEl.value = localStorage.getItem('baNote-' + currentSheetIndex) || ''; } catch (e) {}
+        }
+      });
       const btnBm = document.getElementById('btn-bookmark-sheet');
       if (btnBm) btnBm.addEventListener('click', () => {
         try {
           const list = JSON.parse(localStorage.getItem('baStudyBookmarks') || '[]');
           if (!list.includes(currentSheetIndex)) list.push(currentSheetIndex);
           localStorage.setItem('baStudyBookmarks', JSON.stringify(list));
-          showToast('Sheet bookmarked on this device');
+          if (window.StudySync) window.StudySync.recordBookmarks(list);
+          showToast('Sheet bookmarked' + (window.StudySync ? ' and synced to your account' : ' on this device'));
         } catch (e) {}
       });
       const btnNotes = document.getElementById('btn-toggle-notes');
