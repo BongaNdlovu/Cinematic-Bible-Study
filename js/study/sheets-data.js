@@ -1440,7 +1440,7 @@ THE TRIAL: IMMANENCE IN THE FIRE                           THE CROSS: VICARIOUS 
 
 <div class="next-sitting-card">
   <p class="next-sitting-kicker">Next lesson</p>
-  <h4>Sheet 4 — Daniel 4: Seven Times of Madness</h4>
+  <h4>Sheet 4 — Daniel 4: Seven Times of Humiliation</h4>
   <p>The king who tried to make gold eternal will next be humbled until he learns that the Most High rules over every kingdom on earth.</p>
 </div>
         `,
@@ -1615,7 +1615,7 @@ THE TRIAL: IMMANENCE IN THE FIRE                           THE CROSS: VICARIOUS 
         audio: {
           src: "assets/study/audio/sitting-04.mp3",
           kind: "overview",
-          title: "Sitting 4 overview — pride, divine sanity, and the humility of Christ",
+          title: "Sitting 4 overview — pride, humiliation, and the humility of Christ",
           kicker: "3-minute overview",
           hint: "A quick orientation before you read. This is not a voiceover of the full sitting."
         },
@@ -1623,11 +1623,11 @@ THE TRIAL: IMMANENCE IN THE FIRE                           THE CROSS: VICARIOUS 
           src: "assets/study/infographics/sitting-04-roadmap.webp",
           download: "assets/study/infographics/sitting-04-roadmap.jpg",
           filename: "Daniel-4-Emperor-in-the-Dust-Roadmap.jpg",
-          title: "The Emperor in the Dust: Pride, Divine Sanity, and the Humility of Christ",
-          alt: "One-page roadmap of Sitting 4: Nebuchadnezzar's imperial confession, the cosmic tree, beastly madness, restored reason, and Christ the true and humble King."
+          title: "The Emperor in the Dust: Pride, Humiliation, and the Humility of Christ",
+          alt: "One-page roadmap of Sitting 4: Nebuchadnezzar's imperial confession, the cosmic tree, his animal-like life as Daniel describes it, restored understanding, and Christ the true and humble King."
         },
-        title: "The Emperor in the Dust: Pride, Divine Sanity, and the Humility of Christ",
-        subtitle: "A pagan king's open confession — hubris, beastly madness, restored reason, and Christ's kenosis.",
+        title: "The Emperor in the Dust: Pride, Humiliation, and the Humility of Christ",
+        subtitle: "A pagan king's open confession — pride, the humiliation Daniel describes, restored understanding, and Christ's humility.",
         flow: [
           { kind: "scripture", title: "An imperial encyclical", text: "Nebuchadnezzar publishes his own humiliation to all peoples — a rare first-person royal document.", tag: "Daniel 4:1" },
           { kind: "anchor", title: "The thesis of thrones", text: "The most High ruleth in the kingdom of men — stated three times (4:17, 25, 32).", tag: "Daniel 4:17" },
@@ -1635,7 +1635,7 @@ THE TRIAL: IMMANENCE IN THE FIRE                           THE CROSS: VICARIOUS 
           { kind: "scripture", title: "Mercy before judgment", text: "Break off thy sins, show mercy to the poor — twelve months of divine patience.", tag: "Daniel 4:27, 29" },
           { kind: "scripture", title: "The threefold boast", text: "I have built / my mighty power / my majesty — pride taking credit for a gift.", tag: "Daniel 4:30; 2:37" },
           { kind: "guard", title: "Seven times = literal years", text: "Court narrative, not apocalyptic clock — year-day does not apply here.", tag: "Daniel 4:33, 36" },
-          { kind: "anchor", title: "Eyes lifted, mind restored", text: "Sanity is theological; Christ is the humble King opposite Nebuchadnezzar's pride.", tag: "Daniel 4:34; Phil 2:6–8" }
+          { kind: "anchor", title: "Eyes lifted, understanding restored", text: "Daniel says Nebuchadnezzar's understanding returned after he lifted his eyes to heaven.", tag: "Daniel 4:34; 4:37" }
         ],
         content: `
 <nav class="lesson-toc" aria-label="Sheet 4 sections">
@@ -1645,14 +1645,14 @@ THE TRIAL: IMMANENCE IN THE FIRE                           THE CROSS: VICARIOUS 
     <li><a href="#intro">Introduction · An emperor's open confession</a></li>
     <li><a href="#mp1">I · The cosmic tree and the thesis of thrones</a></li>
     <li><a href="#mp2">II · The anatomy of hubris</a></li>
-    <li><a href="#mp3">III · Recovery of sanity</a></li>
+    <li><a href="#mp3">III · Understanding restored</a></li>
     <li><a href="#mp4">IV · Christ, the true and humble King</a></li>
   </ol>
 </nav>
 
 <div class="governing-principle">
   <p class="governing-principle-kicker">Big idea</p>
-  <p>Daniel 4 is a pagan emperor's own decree: when humanity exalts itself above God, it descends into beastly madness — and <strong>true sanity begins when a creature lifts its eyes to the King of heaven</strong>.</p>
+  <p>Daniel 4 is a pagan emperor's own decree. It records the king's boast, the sentence pronounced from heaven, and his later acknowledgment that the Most High rules over earthly kingdoms (Daniel 4:30–37).</p>
 </div>
 
 <div class="from-last-sitting">
@@ -1668,7 +1668,7 @@ THE TRIAL: IMMANENCE IN THE FIRE                           THE CROSS: VICARIOUS 
 
 <p>Daniel 4 is unique in the biblical canon: it is an official state document authored not by a Hebrew prophet, but by a pagan emperor writing in his own voice. Nebuchadnezzar addresses <em>"all people, nations, and languages, that dwell in all the earth"</em> (Daniel 4:1).</p>
 
-<p>This is not a victory stele boasting of conquered lands or slaughtered enemies; it is an imperial encyclical publishing the king's descent into madness and his subsequent restoration. Having witnessed God's supremacy in the dream of the colossus (Daniel 2) and in the deliverance of the three Hebrews from the furnace (Daniel 3), Nebuchadnezzar now writes to testify that human sovereignty is strictly an illusion:</p>
+<p>This is not a victory stele boasting of conquered lands or slaughtered enemies; it is an imperial encyclical publishing the king's humiliation and subsequent restoration. Having witnessed God's supremacy in the dream of the colossus (Daniel 2) and in the deliverance of the three Hebrews from the furnace (Daniel 3), Nebuchadnezzar now writes to testify that human sovereignty is strictly an illusion:</p>
 
 <blockquote class="scripture-quote">"The living may know that the most High ruleth in the kingdom of men, and giveth it to whomsoever he will, and setteth up over it the basest of men." — Daniel 4:17 (KJV)</blockquote>
 
@@ -1717,7 +1717,7 @@ THE TALL COSMIC TREE                    THE BANDED STUMP
 
 <div class="part-header" id="mp2">
   <p class="part-kicker">Main Point 2</p>
-  <h3>The Anatomy of Hubris and the Beastly Mind</h3>
+  <h3>The King's Boast and Humiliation</h3>
   <p class="part-subtitle">Daniel 4:29–33</p>
 </div>
 
@@ -1732,15 +1732,13 @@ THE TALL COSMIC TREE                    THE BANDED STUMP
 
 <p>In Daniel 2:37, Daniel had explicitly reminded him: <em>"The God of heaven hath given thee a kingdom, power, and strength, and glory."</em> Pride is taking credit for what was received purely as a divine gift.</p>
 
-<p>The moment the words left his mouth, a voice from heaven pronounced immediate sentence (Daniel 4:31). The king was instantly struck with <span class="term-gloss" data-term="boanthropy">boanthropy</span> — a rare clinical disorder where a human believes himself to be a bovine animal and adopts its behavior. For "seven times" (seven literal years), the emperor was driven from human companionship, ate dew-soaked grass like an ox, his hair grew coarse like eagle feathers, and his nails curved like the talons of a bird (Daniel 4:33).</p>
+<p>As the words left the king's mouth, a voice from heaven pronounced sentence (Daniel 4:31). Daniel records that the king was driven from human company and ate grass like an ox while seven times passed over him. His hair grew like eagles' feathers and his nails like birds' claws (Daniel 4:32–33). The account then says that his understanding returned when he lifted his eyes to heaven (Daniel 4:34).</p>
 
-<pre class="prophecy-diagram">THE SPIRITUAL LESSON OF BOANTHROPY
-        Self-Exaltation Above God (Hubris)
-                       │
-                       ▼
-        Descent Below Human Dignity (Beast-Heart)</pre>
+<pre class="prophecy-diagram">DANIEL'S ACCOUNT (DANIEL 4:30–34)
+The king's boast → sentence from heaven → seven times pass
+              → he lifts his eyes → his understanding returns</pre>
 
-<p>Scripture reveals an unchanging psychological and spiritual truth: when man refuses to look up to God as Creator, he inevitably descends into the irrational, bestial realm. The ruler who exalted himself as a god was reduced to an animal grazing in the mud.</p>
+<p>The chapter connects the king's boast with the sentence he receives, then records his understanding returning after he lifts his eyes to heaven (Daniel 4:30–34). It presents this sequence as a lesson in the Most High's rule, not as a diagnosis of a medical condition.</p>
 
 <div class="caution-card">
   <p class="caution-card-kicker">Hermeneutical guard rail · Historical narrative vs. apocalyptic time</p>
@@ -1753,7 +1751,7 @@ THE TALL COSMIC TREE                    THE BANDED STUMP
 
 <div class="part-header" id="mp3">
   <p class="part-kicker">Main Point 3</p>
-  <h3>The Recovery of Sanity and Divine Restoration</h3>
+  <h3>Understanding Restored</h3>
   <p class="part-subtitle">Daniel 4:34–37</p>
 </div>
 
@@ -1761,11 +1759,11 @@ THE TALL COSMIC TREE                    THE BANDED STUMP
 
 <blockquote class="scripture-quote">"And at the end of the days I Nebuchadnezzar lifted up mine eyes unto heaven, and mine understanding returned unto me, and I blessed the most High." — Daniel 4:34 (KJV)</blockquote>
 
-<pre class="prophecy-diagram">THE PATHWAY TO SANITY
-Looking Inward/Down (Self-Glory) ──▶ Madness and Beastliness
-Looking Upward (Worship of God)  ──▶ Sanity, Dignity, and Restoration</pre>
+<pre class="prophecy-diagram">DANIEL 4:34–37
+Nebuchadnezzar lifts his eyes to heaven → his understanding returns
+He blesses the Most High → he acknowledges God's everlasting dominion</pre>
 
-<p><strong>True sanity is fundamentally theological.</strong> A mind that denies God is fundamentally disordered; true human reason begins when a creature acknowledges its Creator.</p>
+<p>Daniel says Nebuchadnezzar's understanding returned when he lifted his eyes to heaven, after which he blessed and honored the Most High (Daniel 4:34–37).</p>
 
 <p>The banded stump in the dream proved that God's judgment was tempered with mercy: the iron and bronze band preserved the roots, ensuring that Babylon's throne would be kept intact for Nebuchadnezzar until his repentance was complete. Upon his restoration, the emperor published his closing doxology:</p>
 
@@ -1773,7 +1771,7 @@ Looking Upward (Worship of God)  ──▶ Sanity, Dignity, and Restoration</pre
 
 <div class="level-card level-christ">
   <p class="level-kicker">CHRIST</p>
-  <p>Understanding returned when the king lifted his eyes. True sanity begins at the throne of God — the same God whom Christ reveals and perfectly obeys.</p>
+  <p>Daniel records that the king's understanding returned when he lifted his eyes to heaven and praised the Most High (Daniel 4:34–37). Philippians 2:6–8 presents Christ's humility as the contrast to the king's boast.</p>
 </div>
 
 <div class="part-header" id="mp4">
@@ -1782,7 +1780,7 @@ Looking Upward (Worship of God)  ──▶ Sanity, Dignity, and Restoration</pre
   <p class="part-subtitle">Christ, the true and humble King</p>
 </div>
 
-<p>Nebuchadnezzar's humiliating descent exposes the self-destructive madness of human pride. It stands as a profound typological contrast to the redemptive humility of Jesus Christ.</p>
+<p>Nebuchadnezzar's humiliation contrasts with the humility of Jesus Christ. Daniel records the king's boast and judgment; Philippians 2:6–8 describes Christ choosing the form of a servant.</p>
 
 <pre class="prophecy-diagram">THE EMPEROR OF BABYLON                   THE KING OF GLORY
 Nebuchadnezzar (Daniel 4)                Jesus Christ (Philippians 2)
@@ -1800,7 +1798,7 @@ Nebuchadnezzar (Daniel 4)                Jesus Christ (Philippians 2)
 
 <div class="biblical-case">
   <p class="biblical-case-kicker">2. Restoring the fractured image of God</p>
-  <p>Sin strips humanity of its true dignity, reducing men and women to beast-like appetites and brutal competition. Jesus entered our broken world to reverse that descent. By His sinless life, His substitutionary death on the cross, and His bodily resurrection, Christ redeems us from the bestial madness of pride and restores the true <em>imago Dei</em> — the image of God — within the human soul (Colossians 3:10; 2 Corinthians 3:18).</p>
+  <p>Daniel's account describes Nebuchadnezzar living like an animal during his humiliation (Daniel 4:32–33). In contrast, Philippians 2:6–8 describes Jesus humbling Himself and taking the form of a servant. Through His life, death, and resurrection, Christ restores those who trust in Him (Colossians 3:10; 2 Corinthians 3:18).</p>
 </div>
 
 <div class="biblical-case">
@@ -1814,7 +1812,7 @@ Nebuchadnezzar (Daniel 4)                Jesus Christ (Philippians 2)
   <ul>
     <li><strong>TEXT</strong> — Does Daniel 4:17 state the thesis three times: the Most High rules?</li>
     <li><strong>HISTORY</strong> — Are seven times literal years of one king's life, not 2,520 apocalyptic years?</li>
-    <li><strong>INTERPRETATION</strong> — Does pride ("I have built") trigger descent; does lifting eyes restore sanity?</li>
+    <li><strong>INTERPRETATION</strong> — How does the chapter connect the king's boast, the sentence, and the return of his understanding (Daniel 4:30–37)?</li>
     <li><strong>CHRIST</strong> — Does your reading lead to the humble King who emptied Himself while Nebuchadnezzar exalted himself?</li>
   </ul>
 </div>
@@ -1837,19 +1835,19 @@ Nebuchadnezzar (Daniel 4)                Jesus Christ (Philippians 2)
         },
         quizzes: [
           {
-            "question": "A political theorist reviewing Nebuchadnezzar's boanthropy (Dan 4:30–33) claims that his mental breakdown was merely an acute organic psychosis with no relation to his boast on the palace roof. What is the biblical and theological reality?",
+            "question": "According to Daniel 4:30–37, how are the king's boast, his humiliation, and his restoration connected?",
             "options": [
-              "The theorist is correct because the narrative in Daniel 4 is an allegorical didactic fable devoid of any historical reality in ancient Babylonian records.",
-              "The text reveals that human sanity is tethered to acknowledging Heaven's sovereignty; when a ruler usurps God's glory, he is degraded to a beastly level until he honors God.",
-              "Higher critics argue the narrative is a legendary Jewish polemic adapted from the Babylonian Prayer of Nabonidus, lacking historical reality.",
-              "Naturalistic critics assert the condition was clinical zoanthropy caused by acute administrative stress, carrying no divine moral accountability."
+              "Daniel records that the king boasts, receives a sentence from heaven, lives like an animal for seven times, and later praises the Most High when his understanding returns.",
+              "The chapter says the king's boast is ignored and his rule continues without interruption.",
+              "The dream's tree represents Babylon alone, and the king is never restored to his throne.",
+              "The seven times are presented as a 2,520-year period affecting later empires, rather than as part of the king's own story."
             ],
-            "explanation": "Daniel 4:17, 25, 32 establish the thesis: the Most High rules in the kingdom of men. Refusing divine accountability strips man of his rational, spiritual dignity, reducing him to animalistic predation.",
+            "explanation": "Daniel 4:30–37 gives the sequence: the king boasts, a sentence is pronounced, his understanding later returns, and he praises the Most High and acknowledges His everlasting dominion.",
             "diagnostics": [
-              "Misconception: Cuneiform fragments (e.g. BM 34113) reflect erratic royal conduct; Scripture presents the event as historical divine discipline.",
+              "Misconception: Daniel 4 presents the king's account as a fable; the chapter presents it as his own public testimony.",
               "",
-              "Misconception: While Dead Sea Scroll fragments preserve Nabonidus traditions, Daniel 4 records an authentic, independent royal decree of Nebuchadnezzar.",
-              "Misconception: While clinical symptoms manifested, Scripture reveals the condition was direct judicial discipline from Heaven for unrepentant royal hubris."
+              "Misconception: The chapter says the king's boast has no consequence; Daniel 4:31–33 records the sentence and humiliation.",
+              "Misconception: Daniel 4:34–37 says the king's understanding returned and records his praise of the Most High."
             ]
           },
           {
@@ -1889,7 +1887,7 @@ Nebuchadnezzar (Daniel 4)                Jesus Christ (Philippians 2)
             "options": [
               "The seven times represent a coded apocalyptic countdown pointing forward to the second-century B.C. guerrilla victories of Judas Maccabeus.",
               "The duration proves the entire narrative was a parabolic fiction created by exilic poets with no historical monarch or actual temporal duration.",
-              "Until he knows that the Most High rules in the kingdom of men and gives it to whomsoever He will—sanity returns when the king lifts his eyes to heaven.",
+              "Until he knows that the Most High rules in the kingdom of men and gives it to whomsoever He will; the account says his understanding returned when he lifted his eyes to heaven.",
               "The seven times represent seven literal solar years of dynastic regency during which court officials administered the empire while the king was secluded."
             ],
             "explanation": "The refrain of Daniel 4 is sovereignty. The times last until the lesson is learned, then understanding returns.",
@@ -1912,7 +1910,7 @@ Nebuchadnezzar (Daniel 4)                Jesus Christ (Philippians 2)
             "diagnostics": [
               "",
               "Misconception: Christ explicitly rejected worldly lordship and Satan's offer of earthly kingdoms, declaring 'My kingdom is not of this world' (John 18:36).",
-              "Misconception: Proverbs 16:18 and Daniel 4 show pride leads to bestial degradation; true sanity begins with the humble fear of the Lord.",
+              "Misconception: Proverbs 16:18 and Daniel 4 connect pride with humiliation before God; Daniel 4:34–37 records the king's acknowledgment of Heaven's rule.",
               "Misconception: Philippians 2 and Daniel 4 stand as stark contrasts: self-exaltation degrades, while Christ's willing humility leads to everlasting glory."
             ]
           }
@@ -1946,7 +1944,7 @@ Nebuchadnezzar (Daniel 4)                Jesus Christ (Philippians 2)
           },
           help: {
             claim: "Pride is spiritual descent, not only a personality flaw. The return is lifting your eyes to heaven.",
-            why: "Boanthropy is what happens when thrones are treated as personal achievements. Practice looking up before judgment has to teach it the hard way. Sit with the verse until the claim is yours, not a slogan: write the text, name the empire or office in view, and refuse any reading that drops Christ from the center of Daniel's chain."
+            why: "Daniel records the king's boast, humiliation, and later acknowledgment that the Most High rules (Daniel 4:30–37). Trace those verses before drawing conclusions about the king's condition. Sit with the verse until the claim is yours, not a slogan: write the text, name the empire or office in view, and refuse any reading that drops Christ from the center of Daniel's chain."
           },
           value: {
             claim: "A mind restored to praise is worth more than an empire left unchallenged.",
@@ -2040,7 +2038,7 @@ Nebuchadnezzar (Daniel 4)                Jesus Christ (Philippians 2)
 
 <div class="from-last-sitting">
   <span class="from-last-sitting-kicker">From the last sitting · Sheet 4</span>
-  <p>In chapter 4, Nebuchadnezzar learned that Heaven rules: seven years of madness stripped his pride until he lifted his eyes and blessed the Most High. That imperial confession was published to every nation. One generation later, Belshazzar sits in the same palace and acts as if the Most High does not exist.</p>
+  <p>In chapter 4, Nebuchadnezzar learned that Heaven rules. After the seven times of his humiliation, he lifted his eyes and blessed the Most High (Daniel 4:32–37). That imperial confession was published to every nation. One generation later, Belshazzar sits in the same palace and acts as if the Most High does not exist.</p>
 </div>
 
 <div class="part-header" id="intro">
@@ -2951,7 +2949,7 @@ DANIEL 2 (The World's View: Metals)       DANIEL 7 (Heaven's View: Predators)
 
 <div class="framework-card">
   <p class="framework-card-kicker">1. The Winged Lion: The Neo-Babylonian Empire (605–539 B.C.)</p>
-  <p>The first beast was like a lion with eagle's wings (Daniel 7:4). The lion—the king of beasts—and the eagle—the king of birds—perfectly depict the imperial majesty and lightning speed with which Nebuchadnezzar conquered the ancient Near East (Jeremiah 4:7; 48:40; Habakkuk 1:6–8). Glazed-brick reliefs of winged lions adorned the Ishtar Gate and the Processional Way in ancient Babylon. Daniel watched until the wings were plucked, the beast was lifted from the earth, made to stand on two feet like a man, and a man's heart was given to it. This vivid symbol recalls Nebuchadnezzar's seven-year humiliation in Daniel 4: his feral pride was broken, his beastly nature was subdued, and he stood as a humbled mortal confessing the true King of heaven.</p>
+  <p>The first beast was like a lion with eagle's wings (Daniel 7:4). The lion—the king of beasts—and the eagle—the king of birds—perfectly depict the imperial majesty and lightning speed with which Nebuchadnezzar conquered the ancient Near East (Jeremiah 4:7; 48:40; Habakkuk 1:6–8). Glazed-brick reliefs of winged lions adorned the Ishtar Gate and the Processional Way in ancient Babylon. Daniel watched until the wings were plucked, the beast was lifted from the earth, made to stand on two feet like a man, and a man's heart was given to it. This vivid symbol recalls Nebuchadnezzar's humiliation in Daniel 4: after living like an animal, he lifted his eyes to heaven, acknowledged the Most High, and was restored (Daniel 4:32–37).</p>
 </div>
 
 <div class="framework-card">
@@ -3000,7 +2998,7 @@ BEAST:                   CHARACTERISTICS:                     HISTORICAL FULFILL
   </ol>
 </div>
 
-<p>Every major Protestant Reformer—including Martin Luther, John Calvin, Thomas Cranmer, John Knox, and later John Wesley and Sir Isaac Newton—unanimously identified this little horn with the historical papacy: the office of the bishop of Rome uniting spiritual supremacy with temporal civil power over the Western Roman world.</p>
+<p>The historicist interpretation used in this lesson identifies Daniel 7's little horn with the historical papacy: the office of the bishop of Rome in its church-state role, where religious and civil authority were joined. This is a claim about an institution and its historical exercise of authority, not a judgment about Roman Catholics as individuals. Many Catholics sincerely follow Christ, and disagreement over this interpretation gives no warrant for prejudice or hostility toward them. The quotation below records Martin Luther's polemical view of the papal office as a historical source; it is not a statement about Catholic believers today.</p>
 
 <blockquote class="scripture-quote">"This teaching [the Papacy] shows forcefully that the Pope is the very Antichrist, who has exalted himself above, and opposed himself against Christ, because he will not permit Christians to be saved without his power, which, nevertheless, is nothing, and is neither ordained nor commanded by God." — Martin Luther, <em>Smalcald Articles</em> (1537), Part II, Art. IV</blockquote>
 

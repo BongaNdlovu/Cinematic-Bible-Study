@@ -262,7 +262,7 @@
           "The ‘seven times’ pass over one man until he knows Heaven rules. They are not 2,520 years.",
           "Daniel 4:16, 25, King James Version",
           "Let his heart be changed from man’s, and let a beast’s heart be given unto him; and let seven times pass over him. … till thou know that the most High ruleth in the kingdom of men, and giveth it to whomsoever he will.",
-          "The chapter ends with the king restored and publishing a decree. A day-for-year reading that turns his madness into 2,520 years of world history has to ignore that ending."
+          "The chapter ends with the king's understanding restored and his decree of praise. A day-for-year reading that turns the king's seven times into a 2,520-year chronology has to account for that ending."
         ),
         item(
           "scripture",
@@ -273,10 +273,10 @@
         ),
         item(
           "scripture",
-          "He looks up. Understanding returns. The lesson is theological, not only medical.",
+          "He looks up. Understanding returns. Daniel gives the account's explanation.",
           "Daniel 4:34–35, King James Version",
           "And at the end of the days I Nebuchadnezzar lifted up mine eyes unto heaven, and mine understanding returned unto me, and I blessed the most High… and he doeth according to his will in the army of heaven, and among the inhabitants of the earth: and none can stay his hand.",
-          "Boanthropy is a modern label for the symptoms. The chapter’s point is the lifted eyes. Do not use the label to erase the boast."
+          "Daniel 4:34–37 records the king's restored understanding, his praise of the Most High, and his acknowledgment of God's dominion."
         ),
         item(
           "scripture",

@@ -171,7 +171,7 @@
           "“Is not this great Babylon, that I have built?”",
           "Daniel 4:29–37",
           "assets/study/babylon-sunset.jpg",
-          "Twelve months later the king walks on the palace roof and speaks the sentence the dream warned against: he has built royal Babylon by his mighty power for the honor of his majesty. While the word is in his mouth, the voice from heaven falls, and he is driven to the grass.\n\nWhen his understanding returns he lifts his eyes, blesses the Most High, and publishes the decree that now stands in Scripture. The man who tried to freeze gold at Dura finally praises the God who lives forever, whose dominion is an everlasting dominion.\n\nBelshazzar will know this family story and ignore it. The next sitting’s feast is already a refusal of this city’s recovered sanity."
+          "Twelve months later the king walks on the palace roof and speaks the sentence the dream warned against: he has built royal Babylon by his mighty power for the honor of his majesty. While the word is in his mouth, the voice from heaven falls, and he is driven to the grass.\n\nWhen his understanding returns he lifts his eyes, blesses the Most High, and publishes the decree that now stands in Scripture. The man who tried to freeze gold at Dura finally praises the God who lives forever, whose dominion is an everlasting dominion.\n\nBelshazzar will know this family story and ignore it. The next sitting’s feast is already a refusal to honor the Most High, whose rule his father had acknowledged."
         ),
         node(
           "jerusalem",
