@@ -2133,7 +2133,9 @@ body.dash .witnesses {
     flex-wrap: wrap;
   }
   .dash-account { width: 100%; margin-top: 8px; padding-top: 10px; }
-  .dash-chapters, .dash-tiles, .dash-aside { grid-template-columns: 1fr 1fr; }
+  /* minmax(0, 1fr): bare 1fr lets the widest word inside a card force the
+     track (and the whole page) wider than small phone screens. */
+  .dash-chapters, .dash-tiles, .dash-aside { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .dash-verse-glass { padding: 22px 18px; min-height: 0; }
   .dash-verse-glass blockquote p { font-size: 16px; }
 }

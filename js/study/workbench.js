@@ -320,9 +320,9 @@
               { id: 'c2', text: "Serving diligently as counselors and state administrators in the government of Babylon.", correct: "civic" },
               { id: 'c3', text: "Drinking royal palace wine tied to pagan court liturgy (historical reconstruction from ancient Near Eastern royal custom).", correct: "defilement" }
             ].map((item, idx) => `
-              <div class="p-2.5 rounded-lg bg-paper-100/60 dark:bg-paper-900/60 border border-paper-300 dark:border-paper-800 flex items-center justify-between gap-2" data-civic-id="${item.id}" data-correct="${item.correct}">
+              <div class="p-2.5 rounded-lg bg-paper-100/60 dark:bg-paper-900/60 border border-paper-300 dark:border-paper-800 flex flex-wrap items-center justify-between gap-2" data-civic-id="${item.id}" data-correct="${item.correct}">
                 <span class="text-ink-800 dark:text-paper-200 text-xs">${idx + 1}. ${item.text}</span>
-                <select class="civic-select shrink-0 p-1.5 rounded border border-paper-300 dark:border-paper-700 bg-paper-50 dark:bg-paper-950 font-mono text-[11px] text-ink-800 dark:text-paper-200" aria-label="Classify item ${idx + 1}">
+                <select class="civic-select max-w-full p-1.5 rounded border border-paper-300 dark:border-paper-700 bg-paper-50 dark:bg-paper-950 font-mono text-[11px] text-ink-800 dark:text-paper-200" aria-label="Classify item ${idx + 1}">
                   <option value="">Classify...</option>
                   <option value="civic" ${t2Done && item.correct === 'civic' ? 'selected' : ''}>Permissible Civic Skill</option>
                   <option value="defilement" ${t2Done && item.correct === 'defilement' ? 'selected' : ''}>Covenant Defilement</option>
