@@ -429,6 +429,11 @@
     .weather-canvas {
       position: fixed;
       inset: 0;
+      /* inset: 0 alone cannot stretch a canvas (a replaced element) — without
+         an explicit size it displays at its half-resolution buffer size,
+         showing the overcast fill as a grey square in the corner. */
+      width: 100%;
+      height: 100%;
       pointer-events: none;
       z-index: 1;
       transition: opacity 0.8s ease-in-out;
