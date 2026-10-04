@@ -1373,6 +1373,16 @@
       { label: "150%", size: "1.65rem" }
     ];
     let currentFontIdx = 1;
+    // Auto mode: the reading size follows the screen until the learner picks
+    // one with A-/A+. Legacy saves that match the old default are treated as
+    // auto; deliberate non-default choices keep working untouched.
+    let fontAuto = true;
+
+    function autoFontIndexFor(width) {
+      if (width >= 1900) return 3; // 130% on large monitors
+      if (width >= 1500) return 2; // 115% on laptops and up
+      return 1;                    // 100% on tablets and phones
+    }
 
     try {
       if (window.BAJourney) {
@@ -1384,7 +1394,13 @@
       const savedSheet = localStorage.getItem('daniel_historicist_sheet');
       if (savedSheet !== null) currentSheetIndex = parseInt(savedSheet, 10) || 0;
       const savedFont = localStorage.getItem('daniel_font_size_idx_v4');
-      if (savedFont !== null) currentFontIdx = Math.max(0, Math.min(fontSizes.length - 1, parseInt(savedFont, 10) || 1));
+      const manualFont = localStorage.getItem('daniel_font_manual_v1') === '1';
+      const legacyChosen = savedFont !== null && parseInt(savedFont, 10) !== 1;
+      if (manualFont || legacyChosen) {
+        fontAuto = false;
+        if (savedFont !== null) currentFontIdx = Math.max(0, Math.min(fontSizes.length - 1, parseInt(savedFont, 10) || 1));
+        if (legacyChosen && !manualFont) localStorage.setItem('daniel_font_manual_v1', '1');
+      }
       const savedThemeName = localStorage.getItem('daniel_theme_name_v1');
       if (savedThemeName === 'white' || savedThemeName === 'night') {
         currentThemeIdx = themes.indexOf(savedThemeName);
@@ -1445,16 +1461,38 @@
     }
 
     function applyFontSize() {
+      if (fontAuto) {
+        currentFontIdx = autoFontIndexFor(window.innerWidth);
+      }
       const current = fontSizes[currentFontIdx];
       document.documentElement.style.setProperty('--reading-font-size', current.size);
       const indicator = document.getElementById('font-size-indicator');
-      if (indicator) indicator.innerText = current.label;
-      try {
-        localStorage.setItem('daniel_font_size_idx_v4', currentFontIdx);
-      } catch (e) {}
+      if (indicator) {
+        // Keep the pill short on phones so the topbar never wraps.
+        indicator.innerText = fontAuto && window.innerWidth >= 700 ? `Auto · ${current.label}` : current.label;
+        indicator.title = fontAuto
+          ? 'Text size follows your screen automatically. Use A- / A+ to set it yourself.'
+          : 'Text size set manually. Delete the A- / A+ choice to return to automatic.';
+      }
+      if (!fontAuto) {
+        try {
+          localStorage.setItem('daniel_font_size_idx_v4', currentFontIdx);
+        } catch (e) {}
+      }
     }
 
+    let fontResizeTimer = null;
+    window.addEventListener('resize', () => {
+      if (!fontAuto) return;
+      clearTimeout(fontResizeTimer);
+      fontResizeTimer = setTimeout(applyFontSize, 180);
+    });
+
     function adjustFontSize(delta) {
+      fontAuto = false;
+      try {
+        localStorage.setItem('daniel_font_manual_v1', '1');
+      } catch (e) {}
       currentFontIdx = Math.max(0, Math.min(fontSizes.length - 1, currentFontIdx + delta));
       applyFontSize();
       showToast(`Text size: ${fontSizes[currentFontIdx].label}`);
