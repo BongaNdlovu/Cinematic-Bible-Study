@@ -461,43 +461,14 @@
     });
   }
 
-  function popoverHtml(item) {
-    var img = item.image
-      ? '<img class="term-popover-img" src="' + escapeHtml(item.image) + '" alt="" width="120" height="160" onerror="this.remove()">'
-      : "";
-    return (
-      '<div class="flex items-center justify-between border-b border-amber-500/30 pb-1 mb-1.5 font-mono text-[10px]">' +
-        '<span class="font-bold text-amber-700 dark:text-amber-400">' + escapeHtml(kindLabel(item.kind)) + '</span>' +
-        '<button type="button" class="text-ink-400 hover:text-ink-800 dark:hover:text-paper-100 px-1 font-bold" data-term-close="1">✕</button>' +
-      "</div>" +
-      '<div class="term-popover-body">' + img +
-        '<div>' +
-          '<p class="font-serif text-sm font-bold text-ink-900 dark:text-paper-100 mb-1">' + escapeHtml(item.term) + "</p>" +
-          '<p class="text-[11px] text-ink-700 dark:text-paper-200 leading-relaxed mb-1.5">' + escapeHtml(item.simple) + "</p>" +
-          '<p class="text-[11px] text-ink-600 dark:text-paper-300 leading-relaxed border-t border-amber-500/20 pt-1">' + escapeHtml(item.history) + "</p>" +
-          '<button type="button" class="term-open-index mt-2 font-mono text-[10px] uppercase tracking-wider text-amber-800 dark:text-amber-300" data-term-index="' + escapeHtml(item.id) + '">Open in index</button>' +
-        "</div>" +
-      "</div>"
-    );
-  }
-
   function showPopover(anchor) {
     var id = anchor.getAttribute("data-term");
     var item = byId(id);
     if (!item) return;
-    var existing = anchor.querySelector(".term-popover");
-    if (existing) {
-      existing.remove();
-      return;
-    }
-    document.querySelectorAll(".term-popover, .strongs-popover").forEach(function (p) { p.remove(); });
-    var pop = document.createElement("div");
-    pop.className = "term-popover strongs-popover";
-    pop.innerHTML = popoverHtml(item);
-    anchor.appendChild(pop);
     if (window.StudyCompetency) {
       window.StudyCompetency.recordScriptureLookup("Glossary: " + item.term);
     }
+    window.TermOverlay.open({ type: "glossary", item: item }, anchor);
   }
 
   function cardHtml(item, highlight) {

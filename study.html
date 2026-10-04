@@ -1645,27 +1645,6 @@
       background-color: rgba(245, 158, 11, 0.15);
       outline: none;
     }
-    .term-popover-body {
-      display: flex;
-      gap: 0.7rem;
-      align-items: flex-start;
-    }
-    .term-popover-img {
-      width: 72px;
-      height: 96px;
-      object-fit: cover;
-      border-radius: 6px;
-      flex-shrink: 0;
-      border: 1px solid rgba(217, 119, 6, 0.4);
-    }
-    .term-open-index {
-      background: none;
-      border: 0;
-      padding: 0;
-      cursor: pointer;
-      text-decoration: underline;
-      text-underline-offset: 2px;
-    }
     #glossary-panel:not([hidden]) {
       max-height: min(70vh, 820px);
       overflow: auto;
@@ -1762,30 +1741,6 @@
       border-bottom-style: solid;
       background-color: rgba(245, 158, 11, 0.15);
       outline: none;
-    }
-    .strongs-popover {
-      position: absolute;
-      bottom: calc(100% + 8px);
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 60;
-      width: min(320px, 90vw);
-      background-color: #fdfbf7;
-      color: #1c1917;
-      border: 1.5px solid #d97706;
-      border-radius: 12px;
-      box-shadow: 0 12px 28px rgba(0,0,0,0.35);
-      padding: 12px 14px;
-      font-family: ui-sans-serif, system-ui, sans-serif;
-      font-size: 11px;
-      line-height: 1.45;
-      text-align: left;
-      pointer-events: auto;
-    }
-    .dark .strongs-popover {
-      background-color: #171512;
-      color: #ede8dc;
-      border-color: #f59e0b;
     }
 
     /* Beta Preview Banner */
@@ -4961,6 +4916,7 @@
   <script src="js/study/sheets-data.js"></script>
   <script src="js/study/sheet-map.js"></script>
   <script src="js/study/sheet-verify.js"></script>
+  <script src="js/study/term-overlay.js"></script>
   <script src="js/study/sheet-glossary.js"></script>
   <script src="js/study/certificate.js"></script>
   <script src="js/study/study-app.js"></script>

@@ -2103,35 +2103,14 @@
           e.stopPropagation();
           const lemmaId = el.getAttribute('data-lemma');
           if (!lemmaId) return;
-          const existing = el.querySelector('.strongs-popover');
-          if (existing) {
-            existing.remove();
-            return;
-          }
-          document.querySelectorAll('.strongs-popover').forEach(p => p.remove());
 
           const data = await getStrongsData();
           const entry = data[lemmaId];
           if (!entry) return;
-
-          const popover = document.createElement('div');
-          popover.className = 'strongs-popover';
-          popover.innerHTML = `
-            <div class="flex items-center justify-between border-b border-amber-500/30 pb-1 mb-1.5 font-mono text-[10px]">
-              <span class="font-bold text-amber-700 dark:text-amber-400">${lemmaId} · ${entry.lang || 'Hebrew'}</span>
-              <button type="button" class="text-ink-400 hover:text-ink-800 dark:hover:text-paper-100 px-1 font-bold" onclick="event.stopPropagation(); this.closest('.strongs-popover').remove();">✕</button>
-            </div>
-            <div class="font-serif text-sm font-bold text-ink-900 dark:text-paper-100 mb-0.5">
-              ${entry.lemma || ''} <span class="italic font-normal text-xs text-ink-600 dark:text-paper-300">(${entry.translit || ''})</span>
-            </div>
-            ${entry.derivation ? `<p class="text-[10px] text-ink-500 dark:text-paper-400 mb-1 font-mono">${entry.derivation}</p>` : ''}
-            <p class="font-semibold text-amber-800 dark:text-amber-300 mb-1 text-xs">${entry.gloss || ''}</p>
-            <p class="text-[11px] text-ink-700 dark:text-paper-200 leading-relaxed border-t border-amber-500/20 pt-1">${entry.why || ''}</p>
-          `;
-          el.appendChild(popover);
           if (window.StudyCompetency) {
             window.StudyCompetency.recordScriptureLookup(`Strong's ${lemmaId} (${entry.translit || entry.lemma || ''})`);
           }
+          window.TermOverlay.open({ type: 'strongs', lemmaId, entry }, el);
         });
       });
     }
