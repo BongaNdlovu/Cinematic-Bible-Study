@@ -308,7 +308,7 @@
     '  html:not(.dark) .term-page-card { border-bottom-color: rgba(146, 106, 22, 0.25); }',
     '  .term-page-plate { margin: 1.2rem 1.2rem 0; aspect-ratio: 16 / 9; }',
     '  .term-page-plate-fallback { font-size: 3rem; }',
-    '  .term-page-info { padding: 1.25rem 1.2rem 1.4rem; overflow-y: visible; }',
+    '  .term-page-info { padding: 1.25rem 1.2rem 5rem; overflow-y: visible; }',
     '  .term-page-back { top: auto; bottom: clamp(0.9rem, 2.4vh, 1.5rem); }',
     '}',
     '@media (prefers-reduced-motion: reduce) {',
