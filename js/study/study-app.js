@@ -1380,7 +1380,7 @@
 
     function autoFontIndexFor(width) {
       if (width >= 1900) return 3; // 130% on large monitors
-      if (width >= 1500) return 2; // 115% on laptops and up
+      if (width >= 1366) return 2; // 115% on laptops and up
       return 1;                    // 100% on tablets and phones
     }
 
