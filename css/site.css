@@ -1181,8 +1181,10 @@ body.dash.cover::before {
 }
 .dash-hero {
   position: relative;
-  height: min(42vh, 400px);
-  min-height: 300px;
+  min-height: min(42vh, 400px);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
   overflow: hidden;
   border: 1px solid var(--dash-border);
   border-radius: var(--dash-radius);
@@ -1296,11 +1298,11 @@ body.dash.dash-loaded .dash-hero-reel img.reel-now.is-active {
   pointer-events: none;
 }
 .dash-hero-copy {
-  position: absolute;
-  left: 28px;
-  bottom: 22px;
+  position: relative;
+  inset: auto;
   z-index: 2;
   max-width: 38rem;
+  padding: 24px 28px 22px;
 }
 .dash-hero-hook {
   margin: 8px 0 0;
@@ -1312,11 +1314,15 @@ body.dash.dash-loaded .dash-hero-reel img.reel-now.is-active {
 }
 .dash-empire-ticker {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   align-items: center;
-  gap: 4px;
+  gap: 3px;
   margin: 12px 0 14px;
+  max-width: 100%;
+  overflow-x: auto;
+  scrollbar-width: none;
 }
+.dash-empire-ticker::-webkit-scrollbar { display: none; }
 .dash-empire-ticker [data-era] {
   padding: 5px 10px;
   border-radius: 999px;
@@ -1325,6 +1331,7 @@ body.dash.dash-loaded .dash-hero-reel img.reel-now.is-active {
   font-weight: 600;
   letter-spacing: .04em;
   text-transform: uppercase;
+  white-space: nowrap;
   color: rgba(196, 184, 168, 0.72);
   cursor: pointer;
   transition: border-color .35s ease, background .35s ease, box-shadow .35s ease;
@@ -1337,7 +1344,7 @@ body.dash.dash-loaded .dash-hero-reel img.reel-now.is-active {
   animation: empirePulse 2.8s ease-in-out infinite;
 }
 .dash-empire-sep {
-  width: 14px;
+  width: 12px;
   height: 1px;
   background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.35), transparent);
   flex-shrink: 0;
@@ -2093,6 +2100,12 @@ body.dash .witnesses {
   .dash-tiles { grid-template-columns: 1fr 1fr; }
   .dash-tile { min-height: 180px; }
   .dash-verse-glass { flex: 0 0 auto; }
+  /* The photo caption would collide with the CTA row once the hero copy
+     occupies the full width. */
+  .dash-hero-reel-caption { display: none; }
+}
+@media (max-width: 1000px) {
+  .dash-hero-verse { display: none; }
 }
 @media (max-width: 800px) {
   .dash-hero {
