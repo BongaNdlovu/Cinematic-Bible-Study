@@ -82,12 +82,17 @@
     }
 
     .sheet-verify {
+      --role-gold: #e4c56a;
+      --role-archive: #9ec4d4;
+      --role-guard: #9dca96;
+      --role-reader: #cbb6e4;
       margin: 2.75rem 0 1.75rem;
-      padding: 1.6rem 1.75rem 0.6rem;
-      border: 0;
-      border-top: 1px solid rgba(197, 155, 39, 0.4);
-      border-radius: 0;
-      background: transparent;
+      padding: 1.45rem 1.35rem 1.35rem;
+      border: 1px solid rgba(197, 155, 39, 0.38);
+      border-radius: 16px;
+      background:
+        radial-gradient(ellipse at 0% 0%, rgba(212, 175, 55, 0.08), transparent 42%),
+        rgba(15, 14, 13, 0.55);
     }
     .sheet-verify-kicker {
       font-family: "JetBrains Mono", monospace;
@@ -113,51 +118,54 @@
     .sheet-verify-list {
       display: flex;
       flex-direction: column;
-      gap: 0;
+      gap: 0.95rem;
     }
     .sheet-verify-card {
-      border: 0;
-      border-bottom: 1px solid rgba(197, 155, 39, 0.22);
-      border-radius: 0;
-      padding: 1.25rem 0.85rem 1.35rem;
-      background: transparent;
+      --card: var(--role-gold);
+      border: 1px solid color-mix(in srgb, var(--card) 32%, transparent);
+      border-left: 3px solid var(--card);
+      border-radius: 12px;
+      padding: 1.15rem 1.15rem 1.2rem;
+      background: rgba(255, 248, 230, 0.035);
     }
-    .sheet-verify-list .sheet-verify-card:first-child { padding-top: 0.35rem; }
-    .sheet-verify-list .sheet-verify-card:last-child { border-bottom: 0; padding-bottom: 0.2rem; }
+    .sheet-verify-scripture { --card: var(--role-gold); }
+    .sheet-verify-history,
+    .sheet-verify-inscription { --card: var(--role-archive); }
+    .sheet-verify-commentary { --card: var(--role-reader); }
     .sheet-verify-kind {
       font-family: "JetBrains Mono", monospace;
       font-size: 10px;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: #c9a227;
-      margin: 0 0 0.45rem;
+      color: var(--card);
+      margin: 0 0 0.7rem;
     }
     .sheet-verify-card h4 {
       font-family: Newsreader, Georgia, serif;
-      font-size: 1.08rem;
-      line-height: 1.4;
-      margin: 0 0 0.75rem;
+      font-size: 1.12rem;
+      line-height: 1.45;
+      margin: 0 0 0.9rem;
       color: inherit;
     }
     .sheet-verify-card blockquote {
       margin: 0;
-      padding: 0.15rem 0 0.15rem 0.9rem;
-      border-left: 3px solid #c59b27;
+      padding: 0.2rem 0 0.2rem 1rem;
+      border-left: 3px solid var(--card);
       font-family: Newsreader, Georgia, serif;
       font-style: italic;
-      font-size: 0.98rem;
-      line-height: 1.6;
+      font-size: 1.02rem;
+      line-height: 1.7;
       color: var(--read-fg, inherit);
     }
     .sheet-verify-source,
     .sheet-verify-check {
       font-family: Inter, sans-serif;
-      font-size: 0.86rem;
-      line-height: 1.6;
-      margin: 0.85rem 0 0;
+      font-size: 0.9rem;
+      line-height: 1.65;
+      margin: 1rem 0 0;
       color: var(--read-fg, inherit);
     }
-    .sheet-verify-check { margin-top: 0.45rem; }
+    .sheet-verify-check { margin-top: 0.75rem; }
     .sheet-verify-count {
       font-family: Inter, sans-serif;
       font-size: 0.86rem;
@@ -165,14 +173,18 @@
       color: var(--read-muted, inherit);
       margin: 0 0 1.15rem;
     }
-    .sheet-verify-source b {
+    .sheet-verify-source b,
+    .sheet-verify-check b {
+      display: inline-block;
+      margin-right: 0.4rem;
       font-family: "JetBrains Mono", monospace;
       font-size: 10px;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      color: #c9a227;
       font-weight: 600;
     }
+    .sheet-verify-source b { color: var(--card); }
+    .sheet-verify-check b { color: var(--role-guard); }
     .sheet-verify-open {
       margin-left: 0.45rem;
       color: #d4af37;
@@ -193,19 +205,23 @@
     body.white-mode .sheet-verify { background: transparent; }
     body.paper-mode .sheet-verify-card,
     body.white-mode .sheet-verify-card {
-      background: transparent;
-      border-bottom-color: rgba(138, 100, 20, 0.18);
+      background: rgba(255, 250, 236, 0.72);
     }
-    body.white-mode .sheet-verify-card { background: transparent; border-bottom-color: rgba(0, 0, 0, 0.08); }
+    body.white-mode .sheet-verify-card { background: #f7f7f7; }
 
-    /* Linear flow map — slim numbered lines in the reading river */
+    /* Linear flow map — one colored step for each claim */
     .sheet-flow {
+      --role-gold: #e4c56a;
+      --role-anchor: #f4e4bc;
+      --role-archive: #9ec4d4;
+      --role-guard: #9dca96;
       margin: 2.6rem 0 0;
-      padding: 1.15rem 0 0.3rem;
-      border: 0;
-      border-top: 1px solid rgba(197, 155, 39, 0.4);
-      border-radius: 0;
-      background: transparent;
+      padding: 1.35rem 1.25rem 1.2rem;
+      border: 1px solid rgba(197, 155, 39, 0.38);
+      border-radius: 16px;
+      background:
+        radial-gradient(ellipse at 100% 0%, rgba(158, 196, 212, 0.07), transparent 40%),
+        rgba(15, 14, 13, 0.55);
     }
     .flow-kicker {
       font-family: "JetBrains Mono", monospace;
@@ -223,15 +239,26 @@
     }
     .flow-list {
       list-style: none;
-      margin: 0;
+      margin: 0.35rem 0 0;
       padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
     }
     .flow-step {
+      --step: var(--role-gold);
       display: flex;
-      gap: 0.9rem;
-      padding: 0 0 0.9rem;
+      gap: 0.95rem;
+      padding: 0.95rem 1rem 1rem 0.9rem;
+      border: 1px solid color-mix(in srgb, var(--step) 28%, transparent);
+      border-left: 3px solid var(--step);
+      border-radius: 12px;
+      background: rgba(255, 248, 230, 0.03);
     }
-    .flow-step:last-child { padding-bottom: 0.1rem; }
+    .flow-step-scripture { --step: var(--role-gold); }
+    .flow-step-anchor { --step: var(--role-anchor); }
+    .flow-step-history { --step: var(--role-archive); }
+    .flow-step-guard { --step: var(--role-guard); }
     .flow-marker {
       flex: none;
       min-width: 1.5rem;
@@ -239,10 +266,9 @@
       font-family: "JetBrains Mono", monospace;
       font-size: 0.85rem;
       font-weight: 700;
-      color: #c9a227;
-      padding-top: 0.2rem;
+      color: var(--step);
+      padding-top: 0.15rem;
     }
-    .flow-step-anchor .flow-marker { color: #f4ead4; }
     .flow-body {
       flex: 1;
       min-width: 0;
@@ -254,29 +280,37 @@
       flex-wrap: wrap;
       align-items: baseline;
       justify-content: space-between;
-      gap: 0.35rem;
+      gap: 0.4rem 1rem;
     }
     .flow-title {
+      flex: 1 1 14rem;
       font-family: Newsreader, Georgia, serif;
-      font-size: 1.12rem;
+      font-size: 1.16rem;
       font-weight: 600;
+      line-height: 1.35;
+      color: var(--step);
     }
-    .flow-step-anchor .flow-title { color: #c9a227; }
-    .flow-ref { white-space: nowrap; }
+    .flow-ref { white-space: normal; line-height: 1.45; }
     .flow-kind {
+      display: inline-block;
+      margin-right: 0.35rem;
+      padding: 0.12rem 0.42rem;
+      border: 1px solid currentColor;
+      border-radius: 999px;
       font-family: "JetBrains Mono", monospace;
       font-size: 9.5px;
       letter-spacing: 0.12em;
       text-transform: uppercase;
     }
-    .flow-kind-history { color: #9aa7b0; }
-    .flow-kind-guard { color: #93b98a; }
-    .flow-kind-anchor { color: #f4ead4; }
+    .flow-kind-scripture,
+    .flow-kind-anchor,
+    .flow-kind-history,
+    .flow-kind-guard { color: var(--step); }
     .flow-text {
-      font-size: 0.95rem;
-      line-height: 1.6;
-      margin: 0.15rem 0 0;
-      opacity: 0.92;
+      font-size: 0.98rem;
+      line-height: 1.7;
+      margin: 0.55rem 0 0;
+      opacity: 0.94;
     }
     .flow-tag {
       font-family: "JetBrains Mono", monospace;
@@ -303,11 +337,18 @@
     body.white-mode .flow-tag { color: #8a6414; }
 
     .study-path {
+      --role-gold: #e4c56a;
+      --role-anchor: #f4e4bc;
+      --role-archive: #9ec4d4;
+      --role-guard: #9dca96;
+      --role-invite: #e0b07a;
       margin: 2.75rem 0 0;
-      padding: 1.35rem 1.4rem 1.5rem;
+      padding: 1.45rem 1.35rem 1.4rem;
       border: 1px solid rgba(197, 155, 39, 0.38);
-      border-radius: 14px;
-      background: rgba(15, 14, 13, 0.55);
+      border-radius: 16px;
+      background:
+        radial-gradient(ellipse at 0% 0%, rgba(212, 175, 55, 0.1), transparent 46%),
+        rgba(15, 14, 13, 0.55);
     }
     .study-path-kicker {
       font-family: "JetBrains Mono", monospace;
@@ -315,49 +356,104 @@
       letter-spacing: 0.16em;
       text-transform: uppercase;
       color: #c9a227;
-      margin-bottom: 0.4rem;
+      margin-bottom: 0.55rem;
+    }
+    .study-path .sitting-path-hint {
+      margin: 0 0 1.2rem;
+      max-width: 68ch;
+      line-height: 1.65;
+      opacity: 0.86;
+    }
+    .study-blocks {
+      display: flex;
+      flex-direction: column;
+      gap: 0.95rem;
+    }
+    .study-block {
+      --block: var(--role-gold);
+      padding: 1.05rem 1.1rem 1.15rem;
+      border: 1px solid color-mix(in srgb, var(--block) 28%, transparent);
+      border-left: 3px solid var(--block);
+      border-radius: 12px;
+      background: rgba(255, 248, 230, 0.03);
+    }
+    .study-block-trace { --block: var(--role-gold); }
+    .study-block-christ {
+      --block: var(--role-anchor);
+      background: rgba(212, 175, 55, 0.08);
+    }
+    .study-block-now { --block: var(--role-invite); }
+    .study-block-help { --block: var(--role-guard); }
+    .study-block-value { --block: var(--role-archive); }
+    .study-block-ask { --block: #d9c7a2; }
+    .study-path h3,
+    .study-path h4 {
+      font-family: Inter, sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--block);
+      margin: 0 0 0.9rem;
     }
     .study-path h3 {
       font-family: Newsreader, Georgia, serif;
       font-size: 1.45rem;
+      letter-spacing: 0;
+      text-transform: none;
       color: #f4ead4;
-      margin: 0 0 0.85rem;
-    }
-    .study-path h4 {
-      font-family: Inter, sans-serif;
-      font-size: 11px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: #c9a227;
-      margin: 1.15rem 0 0.4rem;
     }
     .study-path p, .study-path li {
       font-family: Inter, sans-serif;
-      font-size: 0.92rem;
-      line-height: 1.55;
+      font-size: 0.95rem;
+      line-height: 1.65;
       color: #ddd3bc;
     }
-    .study-path ol, .study-path ul {
-      margin: 0.2rem 0 0;
-      padding-left: 1.2rem;
+    .study-trace {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
     }
-    .study-path li { margin-bottom: 1.05rem; }
+    .study-trace-step {
+      margin: 0;
+      padding: 0.9rem 0.95rem 0.95rem;
+      border-radius: 10px;
+      background: rgba(255, 244, 214, 0.045);
+      border: 1px solid rgba(228, 197, 106, 0.24);
+    }
+    .study-do {
+      margin: 0;
+      font-weight: 600;
+      line-height: 1.6;
+      color: #f6edd8;
+    }
     .study-path .study-christ {
-      border-left: 3px solid #c59b27;
-      padding-left: 0.85rem;
+      margin: 0;
+      border: 0;
+      padding: 0;
+      font-family: Newsreader, Georgia, serif;
+      font-size: 1.08rem;
+      line-height: 1.65;
       color: #f4ead4;
     }
     .study-path .study-why {
       font-family: Inter, sans-serif;
-      font-size: 0.84rem;
-      line-height: 1.58;
+      font-size: 0.9rem;
+      line-height: 1.68;
       color: #c4b89a;
-      margin: 0.4rem 0 0;
+      margin: 0.7rem 0 0;
       font-weight: 400;
     }
-    .study-path li .study-why {
-      margin-top: 0.38rem;
+    .study-block-ask ul {
+      margin: 0;
+      padding-left: 1.15rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
     }
+    .study-block-ask li { margin: 0; }
 
     .article-body h3 {
       font-family: 'Newsreader', Georgia, serif;
@@ -2771,13 +2867,18 @@
       letter-spacing: -0.015em;
     }
     .lesson-connect {
+      --role-gold: #e4c56a;
+      --role-archive: #9ec4d4;
+      --role-invite: #e0b07a;
       display: flex;
       flex-direction: column;
-      gap: 1.1rem;
-      padding: 1.35rem 1.4rem 1.25rem;
+      gap: 1.25rem;
+      padding: 1.5rem 1.45rem 1.4rem;
       border: 1px solid rgba(212, 175, 55, 0.35);
-      border-radius: 14px;
-      background: linear-gradient(135deg, rgba(26, 23, 18, 0.85) 0%, rgba(16, 14, 12, 0.95) 100%);
+      border-radius: 16px;
+      background:
+        radial-gradient(ellipse at 80% 0%, rgba(212, 175, 55, 0.1), transparent 46%),
+        linear-gradient(135deg, rgba(26, 23, 18, 0.88) 0%, rgba(16, 14, 12, 0.96) 100%);
       box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 235, 175, 0.08);
     }
     .lesson-connect-kicker {
@@ -2787,25 +2888,55 @@
       letter-spacing: 0.14em;
       text-transform: uppercase;
       color: #d4a017;
-      margin-bottom: 0.4rem;
+      margin-bottom: 0.65rem;
     }
     .lesson-connect-lead {
       margin: 0;
+      max-width: 68ch;
       font-family: 'Newsreader', Georgia, serif;
-      font-size: 1.05rem;
-      line-height: 1.55;
+      font-size: 1.12rem;
+      line-height: 1.7;
       color: inherit;
     }
     .lesson-connect-actions {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.7rem;
+      gap: 0.75rem;
     }
     .lesson-connect-btn {
       display: inline-flex;
+      flex: 1 1 16rem;
       align-items: center;
       justify-content: center;
-      gap: 0.45rem;
+      gap: 0.5rem;
+      padding: 0.75rem 1rem;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.75rem;
+      font-weight: 600;
+      line-height: 1.45;
+      text-align: center;
+      text-decoration: none;
+    }
+    .lesson-connect-map {
+      color: #d7ebf3;
+      border-color: rgba(158, 196, 212, 0.55);
+      background: rgba(70, 112, 132, 0.22);
+    }
+    .lesson-connect-gallery {
+      color: #f6e7bf;
+      border-color: rgba(228, 197, 106, 0.6);
+      background: rgba(180, 140, 40, 0.18);
+    }
+    .lesson-connect-share {
+      color: #f3d7b4;
+      border-color: rgba(224, 176, 122, 0.55);
+      background: rgba(150, 96, 48, 0.2);
+    }
+    .lesson-connect-btn:hover,
+    .lesson-connect-btn:focus-visible {
+      filter: brightness(1.12);
     }
     .sitting-path {
       margin: 1.25rem 0 0;
@@ -3542,6 +3673,93 @@
     html.dark .text-ink-600,
     html.dark .text-ink-700 {
       color: #e7decc !important;
+    }
+
+    /* Role colors stay readable after the shared light-theme text rules. */
+    body.paper-mode .sheet-flow,
+    body.paper-mode .sheet-verify,
+    body.paper-mode .study-path,
+    body.white-mode .sheet-flow,
+    body.white-mode .sheet-verify,
+    body.white-mode .study-path,
+    body.paper-mode .lesson-connect,
+    body.white-mode .lesson-connect {
+      --role-gold: #8a6414;
+      --role-anchor: #6e5420;
+      --role-archive: #3d6274;
+      --role-guard: #3d6b45;
+      --role-invite: #8a5428;
+      --role-reader: #6a5088;
+    }
+    body.paper-mode .study-block,
+    body.white-mode .study-block,
+    body.paper-mode .flow-step,
+    body.white-mode .flow-step {
+      background: rgba(255, 250, 236, 0.72);
+    }
+    body.white-mode .study-block,
+    body.white-mode .flow-step { background: #f7f7f7; }
+    body.paper-mode .study-trace-step,
+    body.white-mode .study-trace-step {
+      background: rgba(255, 252, 246, 0.9);
+      border-color: rgba(138, 100, 20, 0.18);
+    }
+    body.white-mode .study-trace-step {
+      background: #ffffff;
+      border-color: #e5e5e5;
+    }
+    body.paper-mode .study-path .study-do,
+    body.white-mode .study-path .study-do,
+    body.paper-mode .study-path h3,
+    body.white-mode .study-path h3 {
+      color: #1c1917;
+    }
+    body.paper-mode .study-block-ask,
+    body.white-mode .study-block-ask { --block: #6b5b45; }
+    body.paper-mode .study-path .study-why,
+    body.white-mode .study-path .study-why { color: #57534e; }
+    body.paper-mode .study-block h4,
+    body.white-mode .study-block h4,
+    body.paper-mode .flow-step .flow-marker,
+    body.white-mode .flow-step .flow-marker,
+    body.paper-mode .flow-step .flow-title,
+    body.white-mode .flow-step .flow-title,
+    body.paper-mode .flow-step .flow-kind,
+    body.white-mode .flow-step .flow-kind,
+    body.paper-mode .sheet-verify-card .sheet-verify-kind,
+    body.white-mode .sheet-verify-card .sheet-verify-kind,
+    body.paper-mode .sheet-verify-card .sheet-verify-source b,
+    body.white-mode .sheet-verify-card .sheet-verify-source b {
+      color: var(--block, var(--step, var(--card)));
+    }
+    body.paper-mode .sheet-verify-check b,
+    body.white-mode .sheet-verify-check b { color: var(--role-guard); }
+    body.paper-mode .lesson-connect,
+    body.white-mode .lesson-connect {
+      background: rgba(255, 250, 236, 0.92);
+      box-shadow: none;
+      color: #1c1917;
+    }
+    body.white-mode .lesson-connect { background: #ffffff; }
+    body.paper-mode .lesson-connect-lead,
+    body.white-mode .lesson-connect-lead { color: #1c1917; }
+    body.paper-mode .lesson-connect-map,
+    body.white-mode .lesson-connect-map {
+      color: #245066;
+      border-color: rgba(61, 98, 116, 0.45);
+      background: rgba(61, 98, 116, 0.08);
+    }
+    body.paper-mode .lesson-connect-gallery,
+    body.white-mode .lesson-connect-gallery {
+      color: #6e5420;
+      border-color: rgba(138, 100, 20, 0.45);
+      background: rgba(138, 100, 20, 0.08);
+    }
+    body.paper-mode .lesson-connect-share,
+    body.white-mode .lesson-connect-share {
+      color: #8a5428;
+      border-color: rgba(138, 84, 40, 0.45);
+      background: rgba(138, 84, 40, 0.08);
     }
 
     /* Print last, so theme colours cannot leave the page in light grey. */
@@ -4746,13 +4964,13 @@
         <p id="lesson-connect-lead" class="lesson-connect-lead">Daniel opens at 605 B.C. Walk Jerusalem into Babylon on the map, then stand before the whole image — the statue this book will take apart sitting by sitting.</p>
       </div>
       <div class="lesson-connect-actions">
-        <a id="btn-lesson-map" href="map.html" class="lesson-connect-btn px-4 py-2.5 rounded-lg border border-amber-600/50 text-amber-800 dark:text-amber-300 hover:bg-amber-500/10 hover:border-amber-500 font-mono text-xs font-semibold text-center">
+        <a id="btn-lesson-map" href="map.html" class="lesson-connect-btn lesson-connect-map">
           <span aria-hidden="true">🗺️</span> <span id="btn-lesson-map-label">Walk the siege of 605 B.C.</span>
         </a>
-        <a id="btn-lesson-gallery" href="gallery.html" class="lesson-connect-btn px-4 py-2.5 rounded-lg border border-amber-600/50 text-amber-800 dark:text-amber-300 hover:bg-amber-500/10 hover:border-amber-500 font-mono text-xs font-semibold text-center">
+        <a id="btn-lesson-gallery" href="gallery.html" class="lesson-connect-btn lesson-connect-gallery">
           <span aria-hidden="true">🏛️</span> <span id="btn-lesson-gallery-label">Stand before the complete statue</span>
         </a>
-        <button type="button" id="btn-lesson-share" class="lesson-connect-btn px-4 py-2.5 rounded-lg border border-amber-600/50 text-amber-800 dark:text-amber-300 hover:bg-amber-500/10 hover:border-amber-500 font-mono text-xs font-semibold text-center">
+        <button type="button" id="btn-lesson-share" class="lesson-connect-btn lesson-connect-share">
           <span aria-hidden="true">↗</span> <span>Invite someone into this sitting</span>
         </button>
       </div>

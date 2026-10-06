@@ -1820,11 +1820,19 @@
     }
 
     function renderTrace(items) {
-      return "<ol>" + (items || []).map((item) => {
+      return '<ol class="study-trace">' + (items || []).map((item) => {
         const command = typeof item === "string" ? item : (item && item.do) || "";
         const why = typeof item === "string" ? "" : (item && item.why) || "";
-        return "<li>" + escapeStudy(command) + renderWhy(why) + "</li>";
+        return '<li class="study-trace-step"><p class="study-do">' + escapeStudy(command) + "</p>" + renderWhy(why) + "</li>";
       }).join("") + "</ol>";
+    }
+
+    function studyBlock(role, title, body, heading) {
+      const tag = heading === "h3" ? "h3" : "h4";
+      return '<section class="study-block study-block-' + role + '">' +
+        "<" + tag + ">" + title + "</" + tag + ">" +
+        body +
+        "</section>";
     }
 
     function renderClaim(value, className) {
@@ -1847,6 +1855,10 @@
       if (kind === 'inscription') return 'Inscription / chronicle';
       if (kind === 'commentary') return 'Dated reader';
       return 'Scripture';
+    }
+    function verifyKindClass(kind) {
+      if (kind === 'history' || kind === 'inscription' || kind === 'commentary' || kind === 'scripture') return kind;
+      return 'scripture';
     }
     function verifyOpenHref(href) {
       const s = String(href || '');
@@ -1873,7 +1885,7 @@
         const openHtml = open
           ? ' <a class="sheet-verify-open" href="' + escapeVerify(open) + '" target="_blank" rel="noopener noreferrer">Open source</a>'
           : '';
-        return '<article class="sheet-verify-card">' +
+        return '<article class="sheet-verify-card sheet-verify-' + verifyKindClass(it.kind) + '">' +
           '<p class="sheet-verify-kind">' + escapeVerify(verifyKindLabel(it.kind)) + '</p>' +
           '<h4>' + escapeVerify(it.lesson) + '</h4>' +
           '<blockquote>' + escapeVerify(it.quote) + '</blockquote>' +
@@ -1901,18 +1913,14 @@
       box.innerHTML =
         '<p class="study-path-kicker">How to study this sheet</p>' +
         '<p class="sitting-path-hint">Path for this sitting: study the excerpt, sources, and Christology plaque → open the Map page → open the 3D Gallery → return for the questions → next lesson.</p>' +
-        "<h3>Trace it yourself</h3>" +
-        renderTrace(guide.trace) +
-        "<h4>Christ at the center</h4>" +
-        renderClaim(guide.christ, "study-christ") +
-        "<h4>Why this matters now</h4>" +
-        renderClaim(guide.now) +
-        "<h4>How it helps you</h4>" +
-        renderClaim(guide.help) +
-        "<h4>Why it is valuable</h4>" +
-        renderClaim(guide.value) +
-        "<h4>Questions to sit with</h4>" +
-        renderList(guide.ask, false);
+        '<div class="study-blocks">' +
+        studyBlock("trace", "Trace it yourself", renderTrace(guide.trace), "h3") +
+        studyBlock("christ", "Christ at the center", renderClaim(guide.christ, "study-christ")) +
+        studyBlock("now", "Why this matters now", renderClaim(guide.now)) +
+        studyBlock("help", "How it helps you", renderClaim(guide.help)) +
+        studyBlock("value", "Why it is valuable", renderClaim(guide.value)) +
+        studyBlock("ask", "Questions to sit with", renderList(guide.ask, false)) +
+        "</div>";
     }
 
     function renderFacilitatorStrip(fac) {
@@ -2410,7 +2418,7 @@
         box.innerHTML = '';
         return;
       }
-      const kindLabels = { anchor: 'Anchor', scripture: '', history: 'History', guard: 'Guard rail' };
+      const kindLabels = { anchor: 'Anchor', scripture: 'Scripture', history: 'History', guard: 'Guard rail' };
       const items = steps.map((step, i) => {
         const kind = kindLabels[step.kind] !== undefined ? step.kind : 'scripture';
         const kindLabel = kindLabels[kind];
