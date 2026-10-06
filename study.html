@@ -4558,6 +4558,39 @@
       transform: translateY(-2px);
       box-shadow: 0 8px 28px rgba(212, 175, 55, 0.7);
     }
+
+    /* ---- Per-card minimize toggles (card-min.js) ---- */
+    .cardmin-target { position: relative; }
+    .cardmin-btn {
+      position: absolute;
+      top: 0.4rem;
+      right: 0.4rem;
+      z-index: 6;
+      width: 1.55rem;
+      height: 1.55rem;
+      display: inline-grid;
+      place-items: center;
+      padding: 0;
+      border-radius: 9999px;
+      border: 1px solid currentColor;
+      color: inherit;
+      opacity: 0.55;
+      background: rgba(127, 127, 127, 0.1);
+      cursor: pointer;
+      transition: opacity 0.15s ease, background 0.15s ease;
+    }
+    .cardmin-btn:hover,
+    .cardmin-btn:focus-visible { opacity: 1; background: rgba(127, 127, 127, 0.22); }
+    .cardmin-btn svg { width: 0.62rem; height: 0.62rem; display: block; transition: transform 0.18s ease; }
+    .cardmin-target.is-card-min .cardmin-btn svg { transform: rotate(-180deg); }
+    .cardmin-target [data-cardmin-head] { padding-right: 1.9rem; }
+    .cardmin-target.is-card-min { display: block; padding-bottom: 0.5rem; cursor: pointer; }
+    .cardmin-target [data-cardmin-hidden] { display: none !important; }
+    body.paper-mode .cardmin-btn,
+    body.white-mode .cardmin-btn { opacity: 0.45; }
+    @media print {
+      .cardmin-btn { display: none !important; }
+    }
   </style>
 </head>
 
@@ -4997,7 +5030,7 @@
       </div>
 
       <!-- Active Milestone Description -->
-      <div class="p-3 rounded-lg bg-paper-50 dark:bg-paper-950/70 border border-paper-200 dark:border-paper-800 text-xs">
+      <div class="epoch-banner p-3 rounded-lg bg-paper-50 dark:bg-paper-950/70 border border-paper-200 dark:border-paper-800 text-xs">
         <div id="epoch-banner-title" class="font-serif font-bold text-ink-900 dark:text-paper-100 mb-1">
           605 B.C. — Nebuchadnezzar's First Siege of Jerusalem
         </div>
@@ -5351,6 +5384,7 @@
   <script src="js/study/sheet-map.js"></script>
   <script src="js/study/sheet-verify.js"></script>
   <script src="js/study/term-overlay.js"></script>
+  <script src="js/study/card-min.js"></script>
   <script src="js/study/sheet-glossary.js"></script>
   <script src="js/study/certificate.js"></script>
   <script src="js/study/study-app.js"></script>
