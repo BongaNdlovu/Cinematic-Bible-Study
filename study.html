@@ -3962,6 +3962,144 @@
       background: rgba(138, 84, 40, 0.08);
     }
 
+    /* Light themes: article cards keep dark fills while paragraph ink is forced dark.
+       Instrument type set later in this file is cream, and it sits on the cream
+       panels above. Restate both here so paper and white stay readable. */
+    body.paper-mode .framework-card,
+    body.paper-mode .principle-card,
+    body.paper-mode .next-sitting-card,
+    body.paper-mode .caution-card,
+    body.paper-mode .historical-note,
+    body.paper-mode .level-text,
+    body.paper-mode .level-history,
+    body.paper-mode .level-interpretation,
+    body.paper-mode .level-christ,
+    body.paper-mode .biblical-case,
+    body.paper-mode .layer-stack,
+    body.paper-mode .qa-card,
+    body.paper-mode .source-card,
+    body.paper-mode .checkpoint-card,
+    body.white-mode .framework-card,
+    body.white-mode .principle-card,
+    body.white-mode .next-sitting-card,
+    body.white-mode .caution-card,
+    body.white-mode .historical-note,
+    body.white-mode .level-text,
+    body.white-mode .level-history,
+    body.white-mode .level-interpretation,
+    body.white-mode .level-christ,
+    body.white-mode .biblical-case,
+    body.white-mode .layer-stack,
+    body.white-mode .qa-card,
+    body.white-mode .source-card,
+    body.white-mode .checkpoint-card {
+      background: #fffaf0;
+      color: var(--read-fg);
+      box-shadow: 0 10px 24px -14px rgba(60, 40, 10, 0.22);
+    }
+    body.white-mode .framework-card,
+    body.white-mode .principle-card,
+    body.white-mode .next-sitting-card,
+    body.white-mode .caution-card,
+    body.white-mode .historical-note,
+    body.white-mode .level-text,
+    body.white-mode .level-history,
+    body.white-mode .level-interpretation,
+    body.white-mode .level-christ,
+    body.white-mode .biblical-case,
+    body.white-mode .layer-stack,
+    body.white-mode .qa-card,
+    body.white-mode .source-card,
+    body.white-mode .checkpoint-card {
+      background: #f7f7f7;
+      box-shadow: 0 8px 20px -14px rgba(0, 0, 0, 0.14);
+    }
+    body.paper-mode .sheet-flow,
+    body.white-mode .sheet-flow {
+      background: #fffaf0;
+      color: var(--read-fg);
+    }
+    body.white-mode .sheet-flow { background: #ffffff; }
+    body.paper-mode .scripture-meta strong,
+    body.white-mode .scripture-meta strong,
+    body.paper-mode .sitting-path-kicker,
+    body.white-mode .sitting-path-kicker,
+    body.paper-mode .scripture-chapter h4,
+    body.white-mode .scripture-chapter h4,
+    body.paper-mode .scripture-text,
+    body.white-mode .scripture-text,
+    body.paper-mode .scripture-empty,
+    body.white-mode .scripture-empty,
+    body.paper-mode .scripture-lang,
+    body.white-mode .scripture-lang,
+    body.paper-mode .verse-num,
+    body.white-mode .verse-num,
+    body.paper-mode .strong-hint,
+    body.white-mode .strong-hint,
+    body.paper-mode .strong-id,
+    body.white-mode .strong-id,
+    body.paper-mode .strong-dock h4,
+    body.white-mode .strong-dock h4,
+    body.paper-mode .strong-dock h4 i,
+    body.white-mode .strong-dock h4 i,
+    body.paper-mode .strong-gloss,
+    body.white-mode .strong-gloss,
+    body.paper-mode .strong-why,
+    body.white-mode .strong-why,
+    body.paper-mode .strong-derivation,
+    body.white-mode .strong-derivation,
+    body.paper-mode .strong-hits,
+    body.white-mode .strong-hits,
+    body.paper-mode .strong-other,
+    body.white-mode .strong-other,
+    body.paper-mode .strong-hits strong,
+    body.white-mode .strong-hits strong,
+    body.paper-mode .strong-other strong,
+    body.white-mode .strong-other strong,
+    body.paper-mode .load-bearing h4,
+    body.white-mode .load-bearing h4,
+    body.paper-mode .load-bearing-text,
+    body.white-mode .load-bearing-text,
+    body.paper-mode .load-bearing-connects,
+    body.white-mode .load-bearing-connects,
+    body.paper-mode .load-bearing-sitting,
+    body.white-mode .load-bearing-sitting,
+    body.paper-mode .load-bearing-plain,
+    body.white-mode .load-bearing-plain,
+    body.paper-mode .load-bearing-links li,
+    body.white-mode .load-bearing-links li,
+    body.paper-mode .load-bearing-links b,
+    body.white-mode .load-bearing-links b,
+    body.paper-mode .epoch-facts .fact p,
+    body.white-mode .epoch-facts .fact p,
+    body.paper-mode .epoch-facts .fact span,
+    body.white-mode .epoch-facts .fact span,
+    body.paper-mode .insight-card h4,
+    body.white-mode .insight-card h4,
+    body.paper-mode .insight-card p,
+    body.white-mode .insight-card p,
+    body.paper-mode .comparison-table th,
+    body.white-mode .comparison-table th,
+    body.paper-mode .comparison-table td,
+    body.white-mode .comparison-table td,
+    body.paper-mode .map-enter-full,
+    body.white-mode .map-enter-full,
+    body.paper-mode .sheet-map-list .cite,
+    body.white-mode .sheet-map-list .cite,
+    body.paper-mode .qa-question,
+    body.white-mode .qa-question,
+    body.paper-mode .next-sitting-card h4,
+    body.white-mode .next-sitting-card h4 {
+      color: var(--read-fg);
+    }
+    body.paper-mode .part-kicker,
+    body.white-mode .part-kicker,
+    body.paper-mode .lesson-toc-kicker,
+    body.white-mode .lesson-toc-kicker {
+      color: var(--read-accent);
+      text-shadow: none;
+    }
+
     /* Print last, so theme colours cannot leave the page in light grey. */
     @media print {
       html,
@@ -4572,22 +4710,25 @@
       place-items: center;
       padding: 0;
       border-radius: 9999px;
-      border: 1px solid currentColor;
-      color: inherit;
-      opacity: 0.55;
-      background: rgba(127, 127, 127, 0.1);
+      border: 1px solid rgba(228, 197, 106, 0.75);
+      color: #f6edd8;
+      background: rgba(12, 10, 8, 0.82);
       cursor: pointer;
-      transition: opacity 0.15s ease, background 0.15s ease;
     }
     .cardmin-btn:hover,
-    .cardmin-btn:focus-visible { opacity: 1; background: rgba(127, 127, 127, 0.22); }
+    .cardmin-btn:focus-visible { background: rgba(28, 22, 12, 0.94); }
     .cardmin-btn svg { width: 0.62rem; height: 0.62rem; display: block; transition: transform 0.18s ease; }
     .cardmin-target.is-card-min .cardmin-btn svg { transform: rotate(-180deg); }
     .cardmin-target [data-cardmin-head] { padding-right: 1.9rem; }
     .cardmin-target.is-card-min { display: block; padding-bottom: 0.5rem; cursor: pointer; }
+    .cardmin-clip.is-card-min { max-height: 4.5rem; overflow: hidden; }
     .cardmin-target [data-cardmin-hidden] { display: none !important; }
     body.paper-mode .cardmin-btn,
-    body.white-mode .cardmin-btn { opacity: 0.45; }
+    body.white-mode .cardmin-btn {
+      color: #1c1917;
+      background: rgba(255, 252, 246, 0.96);
+      border-color: rgba(90, 60, 10, 0.5);
+    }
     @media print {
       .cardmin-btn { display: none !important; }
     }

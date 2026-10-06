@@ -10,28 +10,49 @@
     ".framework-card",
     ".caution-card",
     ".principle-card",
+    ".historical-note",
+    ".level-card",
+    ".biblical-case",
+    ".layer-stack",
     ".next-sitting-card",
     ".gold-bible-notice-card",
     ".source-card",
     ".qa-card",
     ".checkpoint-card",
+    ".governing-principle",
+    ".from-last-sitting",
+    ".lesson-toc",
     ".glossary-card",
+    ".scripture-quote",
+    ".prophecy-diagram",
+    ".comparison-table-wrap",
     ".sheet-verify-card",
+    ".study-block",
+    ".study-trace-step",
+    ".flow-step",
     ".insight-card",
     ".epoch-facts .fact",
     ".epoch-banner",
     ".context-plate",
     ".scripture-chapter",
+    ".strong-dock",
     ".load-bearing-line",
     ".workbench-card",
+    "[id^='q-card-']",
     ".sitting-guide-card"
   ].join(",");
 
+  var CLIP_SELECTOR = ".scripture-quote, .prophecy-diagram, .comparison-table-wrap";
+
   var HEAD_SELECTOR = [
     "h1", "h2", "h3", "h4", "h5", "b", "strong",
-    ".framework-card-kicker", ".caution-card-kicker", ".principle-card-kicker",
-    ".source-card-kicker", ".sheet-verify-kind", ".load-bearing-ref",
-    ".glossary-card-kind", ".epoch-cap"
+    "[class*='kicker']",
+    ".flow-title",
+    ".study-do",
+    ".load-bearing-ref",
+    ".sheet-verify-kind",
+    ".glossary-card-kind",
+    ".epoch-cap"
   ].join(",");
 
   var store = readStore();
@@ -70,10 +91,19 @@
     return cls + "|" + index + "|" + headTextOf(head) + "|" + body;
   }
 
+  function ownedBy(card, node) {
+    return node.closest(".cardmin-target") === card;
+  }
+
   function pickHead(card) {
+    var headings = card.querySelectorAll("h1, h2, h3, h4, h5");
+    var i;
+    for (i = 0; i < headings.length; i += 1) {
+      if (ownedBy(card, headings[i])) return headings[i];
+    }
     var kids = card.querySelectorAll(HEAD_SELECTOR);
-    for (var i = 0; i < kids.length; i += 1) {
-      if (kids[i].closest(".cardmin-target") === card) return kids[i];
+    for (i = 0; i < kids.length; i += 1) {
+      if (ownedBy(card, kids[i])) return kids[i];
     }
     return card.firstElementChild;
   }
@@ -92,13 +122,16 @@
     var all = card.querySelectorAll("*");
     var i;
     var node;
-    for (i = 0; i < all.length; i += 1) {
-      node = all[i];
-      if (node === head || node.contains(head) || head.contains(node)) continue;
-      if (minimize) {
-        if (!node.hasAttribute("data-cardmin-hidden")) node.setAttribute("data-cardmin-hidden", "1");
-      } else {
-        node.removeAttribute("data-cardmin-hidden");
+    if (!card.classList.contains("cardmin-clip")) {
+      for (i = 0; i < all.length; i += 1) {
+        node = all[i];
+        if (node.classList.contains("cardmin-btn")) continue;
+        if (node === head || node.contains(head) || head.contains(node)) continue;
+        if (minimize) {
+          if (!node.hasAttribute("data-cardmin-hidden")) node.setAttribute("data-cardmin-hidden", "1");
+        } else {
+          node.removeAttribute("data-cardmin-hidden");
+        }
       }
     }
     card.classList.toggle("is-card-min", !!minimize);
@@ -124,21 +157,29 @@
     var head;
     var btn;
     var list = scoped.length ? scoped : [];
+    var pending = [];
     for (i = 0; i < cards.length; i += 1) list.push(cards[i]);
     for (i = 0; i < list.length; i += 1) {
       card = list[i];
       if (card.dataset.cardminDone) {
         /* App code may re-render a card's inner HTML (epoch banner, context
            plate) and wipe the injected button — re-enhance those. */
-        if (card.querySelector(".cardmin-btn") && card.querySelector("[data-cardmin-head]")) continue;
+        if (card.querySelector(":scope > .cardmin-btn, [data-cardmin-head] .cardmin-btn") &&
+            (card.querySelector("[data-cardmin-head]") || card.classList.contains("cardmin-clip"))) continue;
         delete card.dataset.cardminDone;
         card.classList.remove("is-card-min");
       }
       card.dataset.cardminDone = "1";
       card.classList.add("cardmin-target");
+      if (card.matches(CLIP_SELECTOR)) card.classList.add("cardmin-clip");
+      pending.push(card);
+    }
+    for (i = 0; i < pending.length; i += 1) {
+      card = pending[i];
       head = pickHead(card);
+      if (!head && card.classList.contains("cardmin-clip")) head = card;
       if (!head) continue;
-      head.setAttribute("data-cardmin-head", "1");
+      if (head !== card) head.setAttribute("data-cardmin-head", "1");
       btn = document.createElement("button");
       btn.type = "button";
       btn.className = "cardmin-btn";
@@ -156,8 +197,8 @@
   function expandAllForPrint() {
     var open = document.querySelectorAll(".cardmin-target.is-card-min");
     for (var i = 0; i < open.length; i += 1) {
-      var head = open[i].querySelector("[data-cardmin-head]");
-      if (head) applyMin(open[i], head, false, false);
+      var head = open[i].querySelector("[data-cardmin-head]") || open[i];
+      applyMin(open[i], head, false, false);
     }
   }
 
@@ -166,8 +207,8 @@
     for (var i = 0; i < cards.length; i += 1) {
       var card = cards[i];
       if (!store[card.dataset.cardminKey] || card.classList.contains("is-card-min")) continue;
-      var head = card.querySelector("[data-cardmin-head]");
-      if (head) applyMin(card, head, true, false);
+      var head = card.querySelector("[data-cardmin-head]") || card;
+      applyMin(card, head, true, false);
     }
   }
 
@@ -178,15 +219,15 @@
     if (btn) {
       var owned = btn.closest(".cardmin-target");
       if (owned) {
-        var head = owned.querySelector("[data-cardmin-head]");
-        if (head) applyMin(owned, head, !owned.classList.contains("is-card-min"));
+        var head = owned.querySelector("[data-cardmin-head]") || owned;
+        applyMin(owned, head, !owned.classList.contains("is-card-min"));
       }
       return;
     }
     var minCard = target.closest(".cardmin-target.is-card-min");
     if (minCard && !target.closest("a, button, input, select, textarea, summary")) {
-      var head2 = minCard.querySelector("[data-cardmin-head]");
-      if (head2) applyMin(minCard, head2, false);
+      var head2 = minCard.querySelector("[data-cardmin-head]") || minCard;
+      applyMin(minCard, head2, false);
     }
   });
 
