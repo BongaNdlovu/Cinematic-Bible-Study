@@ -28,7 +28,56 @@
         "chapter": 1,
         "verse": 2,
         "phrase": "the Lord",
-        "strong": "H3068"
+        "strong": "H136"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 1,
+        "verse": 2,
+        "phrase": "Shinar",
+        "strong": "H8152"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 1,
+        "verse": 2,
+        "phrase": "of God",
+        "strong": "H430"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 1,
+        "verse": 12,
+        "phrase": "days",
+        "strong": "H3117"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 1,
+        "verse": 12,
+        "phrase": "Pulse",
+        "strong": "H2235"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 1,
+        "verse": 17,
+        "phrase": "visions",
+        "strong": "H2377"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 1,
+        "verse": 21,
+        "phrase": "year",
+        "strong": "H8141"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 1,
+        "verse": 21,
+        "phrase": "Cyrus",
+        "strong": "H3566"
       }
     ],
     "loadBearing": [
@@ -142,7 +191,7 @@
         "chapter": 1,
         "verse": 2,
         "phrase": "the Lord",
-        "strong": "H3068"
+        "strong": "H136"
       },
       {
         "book": "Daniel",
@@ -164,6 +213,265 @@
         "verse": 17,
         "phrase": "visions",
         "strong": "H2377"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 1,
+        "verse": 1,
+        "phrase": "Judah",
+        "strong": "H3063"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 1,
+        "verse": 1,
+        "phrase": "Jerusalem",
+        "strong": "H3389"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 1,
+        "verse": 1,
+        "phrase": "Nebuchadnezzar",
+        "strong": "H5019"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 1,
+        "verse": 2,
+        "phrase": "of God",
+        "strong": "H430"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 1,
+        "verse": 2,
+        "phrase": "Shinar",
+        "strong": "H8152"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 1,
+        "verse": 3,
+        "phrase": "Israel",
+        "strong": "H3478"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 1,
+        "verse": 3,
+        "phrase": "eunuchs",
+        "strong": "H5631"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 1,
+        "verse": 3,
+        "phrase": "king's seed",
+        "strong": "H2233"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 1,
+        "verse": 4,
+        "phrase": "wisdom",
+        "strong": "H2451"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 1,
+        "verse": 4,
+        "phrase": "knowledge",
+        "strong": "H1847"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 1,
+        "verse": 4,
+        "phrase": "science",
+        "strong": "H4093"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 1,
+        "verse": 4,
+        "phrase": "learning",
+        "strong": "H5612"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 1,
+        "verse": 4,
+        "phrase": "Chaldeans",
+        "strong": "H3778"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 1,
+        "verse": 5,
+        "phrase": "meat",
+        "strong": "H6598"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 1,
+        "verse": 5,
+        "phrase": "wine",
+        "strong": "H3196"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 1,
+        "verse": 7,
+        "phrase": "Belteshazzar",
+        "strong": "H1095"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 1,
+        "verse": 7,
+        "phrase": "Hananiah",
+        "strong": "H2608"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 1,
+        "verse": 7,
+        "phrase": "Shadrach",
+        "strong": "H7714"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 1,
+        "verse": 7,
+        "phrase": "Mishael",
+        "strong": "H4332"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 1,
+        "verse": 7,
+        "phrase": "Meshach",
+        "strong": "H4335"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 1,
+        "verse": 7,
+        "phrase": "Azariah",
+        "strong": "H5838"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 1,
+        "verse": 7,
+        "phrase": "Abednego",
+        "strong": "H5664"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 1,
+        "verse": 8,
+        "phrase": "heart",
+        "strong": "H3820"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 1,
+        "verse": 8,
+        "phrase": "portion",
+        "strong": "H6598"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 1,
+        "verse": 12,
+        "phrase": "Prove",
+        "strong": "H5254"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 1,
+        "verse": 12,
+        "phrase": "days",
+        "strong": "H3117"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 1,
+        "verse": 12,
+        "phrase": "Pulse",
+        "strong": "H2235"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 1,
+        "verse": 16,
+        "phrase": "pulse",
+        "strong": "H2235"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 1,
+        "verse": 17,
+        "phrase": "knowledge",
+        "strong": "H4093"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 1,
+        "verse": 17,
+        "phrase": "skill",
+        "strong": "H7919"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 1,
+        "verse": 17,
+        "phrase": "learning",
+        "strong": "H5612"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 1,
+        "verse": 17,
+        "phrase": "wisdom",
+        "strong": "H2451"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 1,
+        "verse": 17,
+        "phrase": "dreams",
+        "strong": "H2472"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 1,
+        "verse": 20,
+        "phrase": "magicians",
+        "strong": "H2748"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 1,
+        "verse": 20,
+        "phrase": "astrologers",
+        "strong": "H825"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 1,
+        "verse": 21,
+        "phrase": "year",
+        "strong": "H8141"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 1,
+        "verse": 21,
+        "phrase": "Cyrus",
+        "strong": "H3566"
       }
     ],
     "loadBearing": [
@@ -433,6 +741,160 @@
         "phrase": "brake in pieces",
         "strong": "H1855",
         "station": "stone"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 2,
+        "verse": 1,
+        "phrase": "dreams",
+        "strong": "H2472"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 2,
+        "verse": 2,
+        "phrase": "magicians",
+        "strong": "H2748"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 2,
+        "verse": 2,
+        "phrase": "astrologers",
+        "strong": "H825"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 2,
+        "verse": 2,
+        "phrase": "sorcerers",
+        "strong": "H3784"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 2,
+        "verse": 2,
+        "phrase": "Chaldeans",
+        "strong": "H3778"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 2,
+        "verse": 9,
+        "phrase": "the time be changed",
+        "strong": "H5732"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 2,
+        "verse": 19,
+        "phrase": "revealed",
+        "strong": "H1541"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 2,
+        "verse": 19,
+        "phrase": "vision",
+        "strong": "H2376"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 2,
+        "verse": 22,
+        "phrase": "the light",
+        "strong": "H5094"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 2,
+        "verse": 28,
+        "phrase": "God in heaven",
+        "strong": "H426"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 2,
+        "verse": 34,
+        "phrase": "was cut out",
+        "strong": "H1505"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 2,
+        "verse": 34,
+        "phrase": "without hands",
+        "strong": "H3028"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 2,
+        "verse": 37,
+        "phrase": "king of kings",
+        "strong": "H4430"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 2,
+        "verse": 37,
+        "phrase": "God of heaven",
+        "strong": "H426"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 2,
+        "verse": 39,
+        "phrase": "bear rule",
+        "strong": "H7981"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 2,
+        "verse": 39,
+        "phrase": "brass",
+        "strong": "H5174"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 2,
+        "verse": 44,
+        "phrase": "set up",
+        "strong": "H6966"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 2,
+        "verse": 44,
+        "phrase": "never be destroyed",
+        "strong": "H2255"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 2,
+        "verse": 44,
+        "phrase": "for ever",
+        "strong": "H5957"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 2,
+        "verse": 45,
+        "phrase": "cut out",
+        "strong": "H1505"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 2,
+        "verse": 45,
+        "phrase": "mountain",
+        "strong": "H2906"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 2,
+        "verse": 45,
+        "phrase": "without hands",
+        "strong": "H3028"
       }
     ],
     "loadBearing": [
@@ -580,7 +1042,63 @@
         "chapter": 3,
         "verse": 18,
         "phrase": "we will not serve",
-        "strong": "H4437"
+        "strong": "H6399"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 3,
+        "verse": 5,
+        "phrase": "worship",
+        "strong": "H5457"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 3,
+        "verse": 17,
+        "phrase": "serve",
+        "strong": "H6399"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 3,
+        "verse": 17,
+        "phrase": "deliver us",
+        "strong": "H7804"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 3,
+        "verse": 18,
+        "phrase": "worship",
+        "strong": "H5457"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 3,
+        "verse": 25,
+        "phrase": "the Son of God",
+        "strong": "H426"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 3,
+        "verse": 28,
+        "phrase": "angel",
+        "strong": "H4398"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 3,
+        "verse": 28,
+        "phrase": "serve",
+        "strong": "H6399"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 3,
+        "verse": 28,
+        "phrase": "worship",
+        "strong": "H5457"
       }
     ],
     "loadBearing": [
@@ -735,6 +1253,90 @@
         "verse": 30,
         "phrase": "great Babylon",
         "strong": "H895"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 4,
+        "verse": 2,
+        "phrase": "wonders",
+        "strong": "H8540"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 4,
+        "verse": 13,
+        "phrase": "an holy one",
+        "strong": "H6922"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 4,
+        "verse": 15,
+        "phrase": "the stump",
+        "strong": "H6136"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 4,
+        "verse": 15,
+        "phrase": "iron",
+        "strong": "H6523"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 4,
+        "verse": 15,
+        "phrase": "brass",
+        "strong": "H5174"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 4,
+        "verse": 16,
+        "phrase": "heart",
+        "strong": "H3825"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 4,
+        "verse": 16,
+        "phrase": "seven times",
+        "strong": "H5732"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 4,
+        "verse": 17,
+        "phrase": "most High",
+        "strong": "H5943"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 4,
+        "verse": 34,
+        "phrase": "him that liveth for ever",
+        "strong": "H2417"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 4,
+        "verse": 34,
+        "phrase": "everlasting dominion",
+        "strong": "H5957"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 4,
+        "verse": 37,
+        "phrase": "the King of heaven",
+        "strong": "H4430"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 4,
+        "verse": 37,
+        "phrase": "walk in pride",
+        "strong": "H1467"
       }
     ],
     "loadBearing": [
@@ -832,7 +1434,7 @@
         "chapter": 5,
         "verse": 25,
         "phrase": "MENE",
-        "strong": "H4483"
+        "strong": "H4484"
       },
       {
         "book": "Daniel",
@@ -868,6 +1470,111 @@
         "verse": 28,
         "phrase": "divided",
         "strong": "H6537"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 5,
+        "verse": 2,
+        "phrase": "Belshazzar",
+        "strong": "H1113"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 5,
+        "verse": 2,
+        "phrase": "temple",
+        "strong": "H1965"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 5,
+        "verse": 2,
+        "phrase": "golden",
+        "strong": "H1722"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 5,
+        "verse": 4,
+        "phrase": "the gods",
+        "strong": "H426"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 5,
+        "verse": 4,
+        "phrase": "gold",
+        "strong": "H1722"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 5,
+        "verse": 4,
+        "phrase": "silver",
+        "strong": "H3702"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 5,
+        "verse": 4,
+        "phrase": "brass",
+        "strong": "H5174"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 5,
+        "verse": 4,
+        "phrase": "iron",
+        "strong": "H6523"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 5,
+        "verse": 4,
+        "phrase": "wood",
+        "strong": "H636"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 5,
+        "verse": 4,
+        "phrase": "stone",
+        "strong": "H69"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 5,
+        "verse": 23,
+        "phrase": "the Lord of heaven",
+        "strong": "H4756"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 5,
+        "verse": 23,
+        "phrase": "thy breath",
+        "strong": "H5396"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 5,
+        "verse": 31,
+        "phrase": "Darius",
+        "strong": "H1868"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 5,
+        "verse": 31,
+        "phrase": "the Median",
+        "strong": "H4077"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 5,
+        "verse": 31,
+        "phrase": "the kingdom",
+        "strong": "H4437"
       }
     ],
     "loadBearing": [
@@ -991,6 +1698,97 @@
         "verse": 8,
         "phrase": "the law of the Medes and Persians",
         "strong": "H1882"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 6,
+        "verse": 3,
+        "phrase": "excellent spirit",
+        "strong": "H7308"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 6,
+        "verse": 7,
+        "phrase": "the den of lions",
+        "strong": "H1358"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 6,
+        "verse": 10,
+        "phrase": "windows",
+        "strong": "H6606"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 6,
+        "verse": 10,
+        "phrase": "Jerusalem",
+        "strong": "H3390"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 6,
+        "verse": 10,
+        "phrase": "three times a day",
+        "strong": "H2166"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 6,
+        "verse": 10,
+        "phrase": "prayed",
+        "strong": "H6739"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 6,
+        "verse": 16,
+        "phrase": "continually",
+        "strong": "H8411"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 6,
+        "verse": 16,
+        "phrase": "deliver thee",
+        "strong": "H7804"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 6,
+        "verse": 22,
+        "phrase": "angel",
+        "strong": "H4398"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 6,
+        "verse": 22,
+        "phrase": "lions",
+        "strong": "H744"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 6,
+        "verse": 26,
+        "phrase": "the living God",
+        "strong": "H2417"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 6,
+        "verse": 26,
+        "phrase": "his dominion",
+        "strong": "H7985"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 6,
+        "verse": 26,
+        "phrase": "the end",
+        "strong": "H5491"
       }
     ],
     "loadBearing": [
@@ -1187,7 +1985,7 @@
         "chapter": 7,
         "verse": 6,
         "phrase": "leopard",
-        "strong": "H524",
+        "strong": "H5245",
         "station": "leopard"
       },
       {
@@ -1242,6 +2040,125 @@
         "phrase": "a time and times and the dividing of time",
         "strong": "H5732",
         "station": "horn"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 7,
+        "verse": 4,
+        "phrase": "eagle's wings",
+        "strong": "H5403"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 7,
+        "verse": 4,
+        "phrase": "a man's heart",
+        "strong": "H3825"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 7,
+        "verse": 4,
+        "phrase": "made stand",
+        "strong": "H6966"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 7,
+        "verse": 9,
+        "phrase": "thrones",
+        "strong": "H3764"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 7,
+        "verse": 9,
+        "phrase": "fiery flame",
+        "strong": "H5135"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 7,
+        "verse": 10,
+        "phrase": "fiery stream",
+        "strong": "H5135"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 7,
+        "verse": 10,
+        "phrase": "the books",
+        "strong": "H5609"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 7,
+        "verse": 13,
+        "phrase": "clouds",
+        "strong": "H6050"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 7,
+        "verse": 18,
+        "phrase": "saints",
+        "strong": "H6922"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 7,
+        "verse": 18,
+        "phrase": "most High",
+        "strong": "H5946"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 7,
+        "verse": 18,
+        "phrase": "for ever",
+        "strong": "H5957"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 7,
+        "verse": 25,
+        "phrase": "wear out",
+        "strong": "H1080"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 7,
+        "verse": 25,
+        "phrase": "the most High",
+        "strong": "H5946"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 7,
+        "verse": 25,
+        "phrase": "saints",
+        "strong": "H6922"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 7,
+        "verse": 27,
+        "phrase": "saints",
+        "strong": "H6922"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 7,
+        "verse": 27,
+        "phrase": "heaven",
+        "strong": "H8065"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 7,
+        "verse": 27,
+        "phrase": "serve",
+        "strong": "H6399"
       }
     ],
     "loadBearing": [
@@ -1422,7 +2339,7 @@
         "chapter": 8,
         "verse": 17,
         "phrase": "time of the end",
-        "strong": "H2377"
+        "strong": "H7093"
       },
       {
         "book": "Daniel",
@@ -1437,6 +2354,132 @@
         "verse": 21,
         "phrase": "Grecia",
         "strong": "H6842"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 8,
+        "verse": 3,
+        "phrase": "horns",
+        "strong": "H7161"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 8,
+        "verse": 5,
+        "phrase": "notable",
+        "strong": "H2380"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 8,
+        "verse": 9,
+        "phrase": "the pleasant land",
+        "strong": "H6643"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 8,
+        "verse": 11,
+        "phrase": "the host",
+        "strong": "H6635"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 8,
+        "verse": 11,
+        "phrase": "sanctuary",
+        "strong": "H4720"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 8,
+        "verse": 13,
+        "phrase": "saint",
+        "strong": "H6918"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 8,
+        "verse": 13,
+        "phrase": "the vision",
+        "strong": "H2377"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 8,
+        "verse": 13,
+        "phrase": "the daily sacrifice",
+        "strong": "H8548"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 8,
+        "verse": 13,
+        "phrase": "transgression",
+        "strong": "H6588"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 8,
+        "verse": 13,
+        "phrase": "desolation",
+        "strong": "H8074"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 8,
+        "verse": 13,
+        "phrase": "the sanctuary",
+        "strong": "H6944"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 8,
+        "verse": 13,
+        "phrase": "the host",
+        "strong": "H6635"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 8,
+        "verse": 14,
+        "phrase": "days",
+        "strong": "H6153"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 8,
+        "verse": 17,
+        "phrase": "the vision",
+        "strong": "H2377"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 8,
+        "verse": 25,
+        "phrase": "the Prince of princes",
+        "strong": "H8269"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 8,
+        "verse": 25,
+        "phrase": "peace",
+        "strong": "H7962"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 8,
+        "verse": 25,
+        "phrase": "broken",
+        "strong": "H7665"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 8,
+        "verse": 25,
+        "phrase": "without hand",
+        "strong": "H3027"
       }
     ],
     "loadBearing": [
@@ -1593,6 +2636,300 @@
         "verse": 26,
         "phrase": "cut off",
         "strong": "H3772"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 9,
+        "verse": 2,
+        "phrase": "books",
+        "strong": "H5612"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 9,
+        "verse": 2,
+        "phrase": "the LORD",
+        "strong": "H3068"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 9,
+        "verse": 2,
+        "phrase": "Jeremiah",
+        "strong": "H3414"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 9,
+        "verse": 2,
+        "phrase": "prophet",
+        "strong": "H5030"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 9,
+        "verse": 2,
+        "phrase": "years",
+        "strong": "H8141"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 9,
+        "verse": 3,
+        "phrase": "the Lord God",
+        "strong": "H136"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 9,
+        "verse": 3,
+        "phrase": "prayer",
+        "strong": "H8605"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 9,
+        "verse": 3,
+        "phrase": "supplications",
+        "strong": "H8469"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 9,
+        "verse": 3,
+        "phrase": "fasting",
+        "strong": "H6685"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 9,
+        "verse": 3,
+        "phrase": "sackcloth",
+        "strong": "H8242"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 9,
+        "verse": 4,
+        "phrase": "the LORD",
+        "strong": "H3068"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 9,
+        "verse": 4,
+        "phrase": "covenant",
+        "strong": "H1285"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 9,
+        "verse": 4,
+        "phrase": "mercy",
+        "strong": "H2617"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 9,
+        "verse": 17,
+        "phrase": "prayer",
+        "strong": "H8605"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 9,
+        "verse": 17,
+        "phrase": "sanctuary",
+        "strong": "H4720"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 9,
+        "verse": 20,
+        "phrase": "Israel",
+        "strong": "H3478"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 9,
+        "verse": 21,
+        "phrase": "Gabriel",
+        "strong": "H1403"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 9,
+        "verse": 21,
+        "phrase": "evening oblation",
+        "strong": "H4503"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 9,
+        "verse": 24,
+        "phrase": "Seventy weeks",
+        "strong": "H7620"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 9,
+        "verse": 24,
+        "phrase": "transgression",
+        "strong": "H6588"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 9,
+        "verse": 24,
+        "phrase": "righteousness",
+        "strong": "H6664"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 9,
+        "verse": 24,
+        "phrase": "seal up",
+        "strong": "H2856"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 9,
+        "verse": 24,
+        "phrase": "vision",
+        "strong": "H2377"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 9,
+        "verse": 24,
+        "phrase": "prophecy",
+        "strong": "H5030"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 9,
+        "verse": 24,
+        "phrase": "anoint",
+        "strong": "H4886"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 9,
+        "verse": 25,
+        "phrase": "commandment",
+        "strong": "H1697"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 9,
+        "verse": 25,
+        "phrase": "troublous times",
+        "strong": "H6695"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 9,
+        "verse": 26,
+        "phrase": "the prince that shall come",
+        "strong": "H5057"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 9,
+        "verse": 26,
+        "phrase": "the city",
+        "strong": "H5892"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 9,
+        "verse": 26,
+        "phrase": "the sanctuary",
+        "strong": "H6944"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 9,
+        "verse": 26,
+        "phrase": "flood",
+        "strong": "H7858"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 9,
+        "verse": 26,
+        "phrase": "the end",
+        "strong": "H7093"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 9,
+        "verse": 26,
+        "phrase": "determined",
+        "strong": "H2782"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 9,
+        "verse": 27,
+        "phrase": "confirm",
+        "strong": "H1396"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 9,
+        "verse": 27,
+        "phrase": "the covenant",
+        "strong": "H1285"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 9,
+        "verse": 27,
+        "phrase": "the midst of the week",
+        "strong": "H7620"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 9,
+        "verse": 27,
+        "phrase": "sacrifice",
+        "strong": "H2077"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 9,
+        "verse": 27,
+        "phrase": "oblation",
+        "strong": "H4503"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 9,
+        "verse": 27,
+        "phrase": "abominations",
+        "strong": "H8251"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 9,
+        "verse": 27,
+        "phrase": "desolate",
+        "strong": "H8074"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 9,
+        "verse": 4,
+        "phrase": "keep",
+        "strong": "H8104"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 9,
+        "verse": 4,
+        "phrase": "commandments",
+        "strong": "H4687"
       }
     ],
     "loadBearing": [
@@ -1809,6 +3146,356 @@
         "verse": 13,
         "phrase": "lot",
         "strong": "H1486"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 10,
+        "verse": 5,
+        "phrase": "fine gold",
+        "strong": "H3800"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 10,
+        "verse": 6,
+        "phrase": "beryl",
+        "strong": "H8658"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 10,
+        "verse": 6,
+        "phrase": "lightning",
+        "strong": "H1300"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 10,
+        "verse": 6,
+        "phrase": "lamps",
+        "strong": "H3940"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 10,
+        "verse": 6,
+        "phrase": "brass",
+        "strong": "H5178"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 10,
+        "verse": 6,
+        "phrase": "multitude",
+        "strong": "H1995"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 10,
+        "verse": 12,
+        "phrase": "chasten",
+        "strong": "H6031"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 10,
+        "verse": 13,
+        "phrase": "chief princes",
+        "strong": "H7223"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 10,
+        "verse": 14,
+        "phrase": "the latter days",
+        "strong": "H319"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 10,
+        "verse": 21,
+        "phrase": "the scripture of truth",
+        "strong": "H3791"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 11,
+        "verse": 2,
+        "phrase": "Persia",
+        "strong": "H6539"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 11,
+        "verse": 2,
+        "phrase": "Grecia",
+        "strong": "H3120"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 11,
+        "verse": 3,
+        "phrase": "mighty",
+        "strong": "H1368"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 11,
+        "verse": 3,
+        "phrase": "stand up",
+        "strong": "H5975"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 11,
+        "verse": 5,
+        "phrase": "south",
+        "strong": "H5045"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 11,
+        "verse": 6,
+        "phrase": "north",
+        "strong": "H6828"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 11,
+        "verse": 22,
+        "phrase": "flood",
+        "strong": "H7858"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 11,
+        "verse": 22,
+        "phrase": "the prince of the covenant",
+        "strong": "H5057"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 11,
+        "verse": 31,
+        "phrase": "pollute",
+        "strong": "H2490"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 11,
+        "verse": 31,
+        "phrase": "sanctuary",
+        "strong": "H4720"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 11,
+        "verse": 31,
+        "phrase": "abomination",
+        "strong": "H8251"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 11,
+        "verse": 31,
+        "phrase": "desolate",
+        "strong": "H8074"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 11,
+        "verse": 36,
+        "phrase": "according to his will",
+        "strong": "H7522"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 11,
+        "verse": 40,
+        "phrase": "time of the end",
+        "strong": "H7093"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 11,
+        "verse": 40,
+        "phrase": "south",
+        "strong": "H5045"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 11,
+        "verse": 40,
+        "phrase": "north",
+        "strong": "H6828"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 12,
+        "verse": 1,
+        "phrase": "great prince",
+        "strong": "H1419"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 12,
+        "verse": 1,
+        "phrase": "delivered",
+        "strong": "H4422"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 12,
+        "verse": 1,
+        "phrase": "written",
+        "strong": "H3789"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 12,
+        "verse": 1,
+        "phrase": "book",
+        "strong": "H5612"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 12,
+        "verse": 2,
+        "phrase": "everlasting life",
+        "strong": "H5769"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 12,
+        "verse": 3,
+        "phrase": "wise",
+        "strong": "H7919"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 12,
+        "verse": 3,
+        "phrase": "righteousness",
+        "strong": "H6663"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 12,
+        "verse": 3,
+        "phrase": "firmament",
+        "strong": "H7549"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 12,
+        "verse": 3,
+        "phrase": "stars",
+        "strong": "H3556"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 12,
+        "verse": 4,
+        "phrase": "seal",
+        "strong": "H2856"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 12,
+        "verse": 4,
+        "phrase": "book",
+        "strong": "H5612"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 12,
+        "verse": 4,
+        "phrase": "time of the end",
+        "strong": "H7093"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 12,
+        "verse": 4,
+        "phrase": "run to and fro",
+        "strong": "H7751"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 12,
+        "verse": 4,
+        "phrase": "knowledge",
+        "strong": "H1847"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 12,
+        "verse": 7,
+        "phrase": "him that liveth for ever",
+        "strong": "H2416"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 12,
+        "verse": 7,
+        "phrase": "a time, times, and an half",
+        "strong": "H4150"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 12,
+        "verse": 7,
+        "phrase": "scatter",
+        "strong": "H5310"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 12,
+        "verse": 7,
+        "phrase": "holy people",
+        "strong": "H6944"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 12,
+        "verse": 11,
+        "phrase": "daily",
+        "strong": "H8548"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 12,
+        "verse": 11,
+        "phrase": "abomination",
+        "strong": "H8251"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 12,
+        "verse": 11,
+        "phrase": "desolate",
+        "strong": "H8074"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 12,
+        "verse": 11,
+        "phrase": "days",
+        "strong": "H3117"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 12,
+        "verse": 13,
+        "phrase": "rest",
+        "strong": "H5117"
+      },
+      {
+        "book": "Daniel",
+        "chapter": 12,
+        "verse": 13,
+        "phrase": "the end of the days",
+        "strong": "H7093"
       }
     ],
     "loadBearing": [

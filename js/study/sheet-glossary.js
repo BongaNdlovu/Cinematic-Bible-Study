@@ -36,7 +36,7 @@
       IMG + "glossary-dispensationalism.png"),
     entry("year-day", "Year-Day Principle", ["year-day", "year-day principle", "Year-Day", "prophetic day"], "word",
       "When God gives a numbered sign, one prophetic day may stand for one literal solar year.",
-      "God states the scale twice: Numbers 14:34 (forty spy-days become forty wilderness years) and Ezekiel 4:6 (Ezekiel’s body-days appointed “each day for a year”). Daniel’s own 70 weeks cannot be 490 ordinary days and still hold a rebuilt city and the cross — that is the book checking the ruler. 2 Peter 3:8 is about God’s patience, not this scale.",
+      "God states the scale twice: Numbers 14:34 (forty spy-days become forty wilderness years) and Ezekiel 4:6 (Ezekiel’s body-days appointed “each day for a year”). Daniel’s own 70 weeks cannot be 490 ordinary days and still hold a rebuilt city and the cross. That is the book checking its own measuring rod. 2 Peter 3:8 is about God’s patience, not this scale.",
       IMG + "glossary-year-day.png"),
     entry("apocalyptic", "apocalyptic", ["Apocalyptic"], "word",
       "A style of vision that uses symbols (beasts, horns, metals) for real kingdoms and spans of history.",

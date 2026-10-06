@@ -64,6 +64,7 @@
           }
         }
       });
+      syncEpochLine(currentEpochIndex);
     }
 
     function stepHorizon(delta) {
@@ -212,6 +213,53 @@
         const dx = e.changedTouches[0].clientX - startX;
         if (Math.abs(dx) > 40) stepHorizon(dx < 0 ? 1 : -1);
       }, { passive: true });
+      buildEpochLine();
+    }
+
+    function buildEpochLine() {
+      const line = document.getElementById('epoch-line');
+      if (!line || !timelineEpochs.length) return;
+      const n = timelineEpochs.length;
+      const points = timelineEpochs.map((ep, i) => {
+        const at = n <= 1 ? 0 : i / (n - 1);
+        const open = epochAccessible(i);
+        const year = String(ep.year).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        return '<button type="button" class="epoch-dot' + (i === currentEpochIndex ? ' is-active' : '') + (open ? '' : ' is-locked') +
+          '" data-epoch="' + i + '" style="--i:' + at + '" aria-pressed="' + (i === currentEpochIndex ? 'true' : 'false') + '"' +
+          (open ? '' : ' disabled aria-disabled="true" title="' + memberLockText('Locked — finish the open sitting first') + '"') + '>' +
+          '<span class="epoch-dot-mark" aria-hidden="true"></span>' +
+          '<span class="epoch-dot-year">' + year + '</span></button>';
+      }).join('');
+      line.innerHTML =
+        '<div class="epoch-line-track">' +
+          '<div class="epoch-line-rail" aria-hidden="true"><span class="epoch-line-glow"></span></div>' +
+          points +
+        '</div>';
+      line.querySelectorAll('.epoch-dot').forEach((dot) => {
+        dot.addEventListener('click', () => {
+          const idx = Number(dot.dataset.epoch);
+          if (!epochAccessible(idx)) return;
+          setEpochInfo(idx);
+        });
+      });
+      syncEpochLine(currentEpochIndex);
+    }
+
+    function syncEpochLine(epochIdx) {
+      const line = document.getElementById('epoch-line');
+      if (!line || !timelineEpochs.length) return;
+      const n = timelineEpochs.length;
+      const at = n <= 1 ? 0 : epochIdx / (n - 1);
+      line.style.setProperty('--epoch-at', String(at));
+      line.querySelectorAll('.epoch-dot').forEach((dot) => {
+        const i = Number(dot.dataset.epoch);
+        const on = i === epochIdx;
+        const open = epochAccessible(i);
+        dot.classList.toggle('is-active', on);
+        dot.classList.toggle('is-locked', !open);
+        dot.disabled = !open;
+        dot.setAttribute('aria-pressed', on ? 'true' : 'false');
+      });
     }
 
     function updateFocusNote(epoch) {
@@ -266,11 +314,11 @@
     const SHEET_CONTEXT = [
       { img: "assets/study/epochs/jerusalem-siege.jpg", title: "The prophetic blueprint", body: "Daniel opens in exile, but the Lord gave Jehoiakim into Nebuchadnezzar's hand (Daniel 1:2). Prophecy is God's historical roadmap — an unbroken chain pointing to Jesus Christ.", source: "Daniel 1:2; Daniel 9:26; Daniel 2:44; Luke 24:27.", exegesis: "Historicism keeps Babylon → Persia → Greece → Rome → divided Europe → Christ's kingdom as one chain. Preterism and futurism break that chain. Christ is the redemptive center: sovereignty in exile, sacrifice at the cross, Stone-King at the end." },
       { img: "assets/study/epochs/exile-court.jpg", title: "The exilic crucible", body: "Ashpenaz's school was assimilation: language, literature, and new names. Daniel drew the line at the king's table — idol table-fellowship, Levitical defilement, and dulled spiritual clarity.", source: "Daniel 1:8; Genesis 1:29; Leviticus 11. The ten-day test of zeroim.", exegesis: "Civic competence is not covenant surrender. Consecration at the table preceded revelation — and foreshadows Christ's faithful obedience in the wilderness." },
-      { img: "assets/study/statue-nebuchadnezzar.jpg", title: "The metallic colossus", body: "Babylon's magicians confessed bankruptcy; Daniel prayed, and God revealed the master-framework of world history — from the head of gold to the stone that fills the earth.", source: "Daniel 2:28, 38–44. Babylonian Chronicle BM 21946.", exegesis: "One unbroken chain: Babylon → Medo-Persia → Greece → Rome → divided Europe → Christ's kingdom. The stone strikes the feet in the days of these kings — supernatural, not evolutionary." },
+      { img: "assets/study/statue-nebuchadnezzar.jpg", title: "The metallic colossus", body: "Babylon's magicians confessed bankruptcy; Daniel prayed, and God revealed the master-framework of world history — from the head of gold to the stone that fills the earth.", source: "Daniel 2:28, 38–44. Babylonian Chronicle BM 21946.", exegesis: "One unbroken chain: Babylon → Medo-Persia → Greece → Rome → divided Europe → Christ's kingdom. The stone strikes the feet in the days of these kings. The blow comes from God, and no human hand cuts the stone." },
       { img: "assets/plates/dura-plain.jpg", title: "The plain of Dura", body: "An all-gold image 60×6 cubits high was Nebuchadnezzar's imperial veto against Daniel 2 — bow or burn. Shadrach, Meshach, and Abednego answered: but if not, we will not bow.", source: "Daniel 3:1, 17–18, 25. Exodus 20:4–5.", exegesis: "Civic duty has a ceiling. Dura is the type; Revelation 13 the antitype. The Fourth in the fire foreshadows Christ at Dura and on Calvary." },
       { img: "assets/study/babylon-sunset.jpg", title: "The emperor in the dust", body: "Nebuchadnezzar publishes his own humiliation: the threefold boast on the palace roof, the seven times that pass over him, and his restored understanding when he lifts his eyes to heaven.", source: "Daniel 4:17, 27, 30, 32–37.", exegesis: "The Most High ruleth in the kingdom of men — three times. The narrative ends with the king restored and praising Heaven. Christ is the humble King opposite Nebuchadnezzar's pride." },
       { img: "assets/study/epochs/babylon-fall.jpg", title: "The handwriting on the plaster", body: "Belshazzar toasts idols with Yahweh's temple vessels while Medo-Persia diverts the Euphrates. Heaven writes an audit: numbered, weighed, divided.", source: "Daniel 5:22, 25–31; Isaiah 45:1–3. Nabonidus Chronicle BM 35382.", exegesis: "The gold head becomes silver in a single night. Belshazzar sinned against known light. On the scale we are TEKEL unless clothed in Christ's righteousness." },
-      { img: "assets/study/daniel-lions-den.jpg", title: "The pit of hunger", body: "Medo-Persian legal immutability is weaponized against Daniel's open window. The satraps find zero fraud; the pit of lions becomes an unmistakable type of Christ's sealed tomb.", source: "Daniel 6:4–5, 8, 10, 22, 26; Esther 8:8; Matthew 27:62–66.", exegesis: "Civil law has a divine ceiling at the First Commandment. Obedience to God is non-violent and faithful; the Living Deliverer breaks the seal of death." },
+      { img: "assets/study/daniel-lions-den.jpg", title: "The pit of hunger", body: "Medo-Persian legal immutability is weaponized against Daniel's open window. The satraps find no fraud, and the pit of lions becomes a clear type of Christ's sealed tomb.", source: "Daniel 6:4–5, 8, 10, 22, 26; Esther 8:8; Matthew 27:62–66.", exegesis: "Civil law has a divine ceiling at the First Commandment. Obedience to God is non-violent and faithful; the Living Deliverer breaks the seal of death." },
       { img: "assets/study/epochs/papal-rome.jpg", title: "Beasts from a wind-stirred sea", body: "The same four kingdoms return as predators. Among ten horns a little horn uproots three, speaks against the Most High, and wears out the saints 1,260 years until the heavenly court convenes.", source: "Daniel 7:4–7, 8, 9–14, 24–27; Revelation 12:6, 14; 13:5.", exegesis: "The pre-advent judgment scene of 7:9–14 convenes in heaven before the stone strikes. Christ approaches the Ancient of Days as High Priest and King." },
       { img: "assets/study/epochs/sanctuary.jpg", title: "The ram, the goat, and 2,300 days", body: "Gabriel names Media-Persia and Greece. The little horn attacks Christ's continual heavenly mediation (tamid). After 2,300 prophetic years, the heavenly sanctuary is vindicated (nitsdaq) on the antitypical Day of Atonement.", source: "Daniel 8:14, 17, 19–22; Leviticus 16:30; Hebrews 8:1–2; 9:23–26.", exegesis: "The vision belongs to the time of the end. Antiochus is far too small. In 1844, Christ entered the Most Holy Place of the heavenly sanctuary for the pre-advent judgment." },
       { img: "assets/study/horizon/y457.jpg", title: "The 70 weeks and the cross", body: "Gabriel returns to explain the unexplained 2,300 days. Seventy weeks (490 years) are severed (chathak) for Daniel's people, anchored in Artaxerxes' 457 B.C. decree. In A.D. 27 Messiah is anointed, in A.D. 31 He is cut off, ending animal sacrifices on Calvary.", source: "Daniel 9:24–27; Ezra 7:11–26; Luke 3:1, 21–23; Matthew 27:51.", exegesis: "Calvary is the mathematical anchor of prophecy. Because the 70 weeks proved true to the exact season, the remaining 1,810 years carry the timeline with certainty to the heavenly sanctuary in 1844." },

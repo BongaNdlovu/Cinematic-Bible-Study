@@ -293,8 +293,8 @@
       });
       body += "</div></section>";
     });
-    if (!body) return renderToolbar(passage) + renderEmpty("This sheet has no verses to show.") + renderLoadBearing(passage) + renderStrongDock();
-    return renderToolbar(passage) + '<div class="scripture-scroll">' + body + "</div>" + renderLoadBearing(passage) + renderStrongDock();
+    if (!body) return renderToolbar(passage) + renderEmpty("This sheet has no verses to show.") + renderStrongDock() + renderLoadBearing(passage);
+    return renderToolbar(passage) + '<div class="scripture-scroll">' + body + "</div>" + renderStrongDock() + renderLoadBearing(passage);
   }
 
   function scrollFocusIntoPanel() {
