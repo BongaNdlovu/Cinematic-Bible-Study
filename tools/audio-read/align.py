@@ -1,21 +1,25 @@
-"""Align the generated audio overview transcript to Sitting 0's lesson text.
+"""Align a generated lesson audio transcript to that sitting's lesson text.
 
-Produces assets/study/audio/sitting-00-overview.json — a cue list the study app
-uses to stroke a faint highlighter over exactly the text being spoken.
+Usage: python align.py <sitting-NN>
+
+Reads sitting-NN-meta.json, sitting-NN-content.html and
+transcript-sitting-NN.json from this folder and writes
+assets/study/audio/sitting-NN-overview.json — a cue list the study app uses
+to stroke a faint highlighter over exactly the text being spoken.
 
 Block enumeration and text cooking here MUST mirror the runtime code in
 js/study/study-app.js (cook/normalize + block selector), otherwise char offsets
 drift. Keep the two in sync.
 """
-import html
 import json
 import re
+import sys
 import unicodedata
+from difflib import SequenceMatcher
 from html.parser import HTMLParser
 from pathlib import Path
 
 HERE = Path(__file__).parent
-OUT = HERE.parent.parent / "assets" / "study" / "audio" / "sitting-00-overview.json"
 
 WORDMAP = {
     "one": "1", "two": "2", "three": "3", "four": "4", "five": "5", "six": "6",
@@ -133,9 +137,11 @@ class TreeBuilder(HTMLParser):
 
 
 def main():
-    meta = json.loads((HERE / "sitting-00-meta.json").read_text(encoding="utf-8"))
-    content_html = (HERE / "sitting-00-content.html").read_text(encoding="utf-8")
-    transcript = json.loads((HERE / "transcript.json").read_text(encoding="utf-8"))
+    sitting = sys.argv[1] if len(sys.argv) > 1 else "sitting-00"
+    out = HERE.parent.parent / "assets" / "study" / "audio" / f"{sitting}-overview.json"
+    meta = json.loads((HERE / f"{sitting}-meta.json").read_text(encoding="utf-8"))
+    content_html = (HERE / f"{sitting}-content.html").read_text(encoding="utf-8")
+    transcript = json.loads((HERE / f"transcript-{sitting}.json").read_text(encoding="utf-8"))
 
     parser = TreeBuilder()
     parser.feed(content_html)
@@ -163,8 +169,6 @@ def main():
     audio_seq = [a[0] for a in audio_toks]
 
     print(f"blocks={len(blocks)} lesson_tokens={len(lesson_seq)} audio_tokens={len(audio_seq)}")
-
-    from difflib import SequenceMatcher
 
     sm = SequenceMatcher(None, lesson_seq, audio_seq, autojunk=False)
     opcodes = sm.get_opcodes()
@@ -250,13 +254,13 @@ def main():
     cues = stitched
 
     data = {
-        "audio": "sitting-00-overview.m4a",
+        "audio": f"{sitting}-overview.m4a",
         "duration": transcript["duration"],
         "version": 1,
         "cues": cues,
     }
-    OUT.write_text(json.dumps(data, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
-    print(f"cues={len(cues)} -> {OUT}")
+    out.write_text(json.dumps(data, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
+    print(f"cues={len(cues)} -> {out}")
 
     # Quality report: coverage of each block + sample cues
     covered = set()

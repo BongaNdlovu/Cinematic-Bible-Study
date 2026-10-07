@@ -413,11 +413,13 @@ Daniel 9:24–27 ──▶  "Seventy weeks" (70 × 7 = 490 prophetic days)
         },
         scripture: "Daniel 1:1-21 &bull; Babylon, 605 B.C.",
         audio: {
-          src: "assets/study/audio/sitting-01.mp3",
+          src: "assets/study/audio/sitting-01-overview.m4a",
           kind: "overview",
-          title: "Sitting 1 overview — identity, consecration, and the royal table",
-          kicker: "3-minute overview",
-          hint: "A quick orientation before you read. This is not a voiceover of the full sitting."
+          title: "Sitting 1 — listen to the full sitting",
+          kicker: "Read-along · 11 min",
+          hint: "Press play and follow: a soft highlighter strokes the text as it is spoken, from the title to the close of the sitting.",
+          duration: "11 min",
+          cues: "assets/study/audio/sitting-01-overview.json"
         },
         infographic: {
           src: "assets/study/infographics/sitting-01-roadmap.webp",
@@ -811,11 +813,13 @@ DANIEL IN BABYLON                         JESUS IN THE WILDERNESS
         },
         scripture: "Daniel 2:1-49 &bull; Babylon, 603 B.C.",
         audio: {
-          src: "assets/study/audio/sitting-02.mp3",
+          src: "assets/study/audio/sitting-02-overview.m4a",
           kind: "overview",
-          title: "Sitting 2 overview — the metallic colossus and the stone kingdom",
-          kicker: "3-minute overview",
-          hint: "A quick orientation before you read. This is not a voiceover of the full sitting."
+          title: "Sitting 2 — listen to the full sitting",
+          kicker: "Read-along · 11 min",
+          hint: "Press play and follow: a soft highlighter strokes the text as it is spoken, from the title to the close of the sitting.",
+          duration: "11 min",
+          cues: "assets/study/audio/sitting-02-overview.json"
         },
         infographic: {
           src: "assets/study/infographics/sitting-02-roadmap.webp",

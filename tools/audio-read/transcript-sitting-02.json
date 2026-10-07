@@ -1,0 +1,9458 @@
+{
+ "model": "small.en",
+ "duration": 643.89225,
+ "segments": [
+  {
+   "start": 0.0,
+   "end": 5.1,
+   "text": "The metallic colossus, the historicist blueprint of history and the sovereign triumph of Christ.",
+   "words": [
+    {
+     "start": 0.0,
+     "end": 0.36,
+     "word": " The"
+    },
+    {
+     "start": 0.36,
+     "end": 0.78,
+     "word": " metallic"
+    },
+    {
+     "start": 0.78,
+     "end": 1.32,
+     "word": " colossus,"
+    },
+    {
+     "start": 1.88,
+     "end": 1.94,
+     "word": " the"
+    },
+    {
+     "start": 1.94,
+     "end": 2.56,
+     "word": " historicist"
+    },
+    {
+     "start": 2.56,
+     "end": 2.84,
+     "word": " blueprint"
+    },
+    {
+     "start": 2.84,
+     "end": 3.16,
+     "word": " of"
+    },
+    {
+     "start": 3.16,
+     "end": 3.48,
+     "word": " history"
+    },
+    {
+     "start": 3.48,
+     "end": 3.8,
+     "word": " and"
+    },
+    {
+     "start": 3.8,
+     "end": 3.92,
+     "word": " the"
+    },
+    {
+     "start": 3.92,
+     "end": 4.22,
+     "word": " sovereign"
+    },
+    {
+     "start": 4.22,
+     "end": 4.56,
+     "word": " triumph"
+    },
+    {
+     "start": 4.56,
+     "end": 4.86,
+     "word": " of"
+    },
+    {
+     "start": 4.86,
+     "end": 5.1,
+     "word": " Christ."
+    }
+   ]
+  },
+  {
+   "start": 6.1,
+   "end": 9.12,
+   "text": "From the impasse of human wisdom to the stone that fills the earth,",
+   "words": [
+    {
+     "start": 6.1,
+     "end": 6.16,
+     "word": " From"
+    },
+    {
+     "start": 6.16,
+     "end": 6.28,
+     "word": " the"
+    },
+    {
+     "start": 6.28,
+     "end": 6.72,
+     "word": " impasse"
+    },
+    {
+     "start": 6.72,
+     "end": 6.94,
+     "word": " of"
+    },
+    {
+     "start": 6.94,
+     "end": 7.2,
+     "word": " human"
+    },
+    {
+     "start": 7.2,
+     "end": 7.56,
+     "word": " wisdom"
+    },
+    {
+     "start": 7.56,
+     "end": 7.94,
+     "word": " to"
+    },
+    {
+     "start": 7.94,
+     "end": 8.08,
+     "word": " the"
+    },
+    {
+     "start": 8.08,
+     "end": 8.32,
+     "word": " stone"
+    },
+    {
+     "start": 8.32,
+     "end": 8.54,
+     "word": " that"
+    },
+    {
+     "start": 8.54,
+     "end": 8.74,
+     "word": " fills"
+    },
+    {
+     "start": 8.74,
+     "end": 8.94,
+     "word": " the"
+    },
+    {
+     "start": 8.94,
+     "end": 9.12,
+     "word": " earth,"
+    }
+   ]
+  },
+  {
+   "start": 9.9,
+   "end": 13.34,
+   "text": "God's unbroken chain of empires and Christ's everlasting kingdom.",
+   "words": [
+    {
+     "start": 9.9,
+     "end": 10.12,
+     "word": " God's"
+    },
+    {
+     "start": 10.12,
+     "end": 10.5,
+     "word": " unbroken"
+    },
+    {
+     "start": 10.5,
+     "end": 10.82,
+     "word": " chain"
+    },
+    {
+     "start": 10.82,
+     "end": 11.0,
+     "word": " of"
+    },
+    {
+     "start": 11.0,
+     "end": 11.4,
+     "word": " empires"
+    },
+    {
+     "start": 11.4,
+     "end": 11.8,
+     "word": " and"
+    },
+    {
+     "start": 11.8,
+     "end": 12.46,
+     "word": " Christ's"
+    },
+    {
+     "start": 12.46,
+     "end": 12.92,
+     "word": " everlasting"
+    },
+    {
+     "start": 12.92,
+     "end": 13.34,
+     "word": " kingdom."
+    }
+   ]
+  },
+  {
+   "start": 14.51,
+   "end": 14.91,
+   "text": "Big idea.",
+   "words": [
+    {
+     "start": 14.51,
+     "end": 14.55,
+     "word": " Big"
+    },
+    {
+     "start": 14.55,
+     "end": 14.91,
+     "word": " idea."
+    }
+   ]
+  },
+  {
+   "start": 16.19,
+   "end": 19.89,
+   "text": "Nebuchadnezzar's forgotten dream is God's legal decree and historical roadmap.",
+   "words": [
+    {
+     "start": 16.19,
+     "end": 16.75,
+     "word": " Nebuchadnezzar's"
+    },
+    {
+     "start": 16.75,
+     "end": 17.09,
+     "word": " forgotten"
+    },
+    {
+     "start": 17.09,
+     "end": 17.41,
+     "word": " dream"
+    },
+    {
+     "start": 17.41,
+     "end": 17.75,
+     "word": " is"
+    },
+    {
+     "start": 17.75,
+     "end": 18.15,
+     "word": " God's"
+    },
+    {
+     "start": 18.15,
+     "end": 18.33,
+     "word": " legal"
+    },
+    {
+     "start": 18.33,
+     "end": 18.73,
+     "word": " decree"
+    },
+    {
+     "start": 18.73,
+     "end": 19.05,
+     "word": " and"
+    },
+    {
+     "start": 19.05,
+     "end": 19.47,
+     "word": " historical"
+    },
+    {
+     "start": 19.47,
+     "end": 19.89,
+     "word": " roadmap."
+    }
+   ]
+  },
+  {
+   "start": 20.41,
+   "end": 26.71,
+   "text": "All human dominion is bounded, transient, and destined to be replaced by the everlasting kingdom of Jesus Christ.",
+   "words": [
+    {
+     "start": 20.41,
+     "end": 20.63,
+     "word": " All"
+    },
+    {
+     "start": 20.63,
+     "end": 20.97,
+     "word": " human"
+    },
+    {
+     "start": 20.97,
+     "end": 21.27,
+     "word": " dominion"
+    },
+    {
+     "start": 21.27,
+     "end": 21.51,
+     "word": " is"
+    },
+    {
+     "start": 21.51,
+     "end": 21.81,
+     "word": " bounded,"
+    },
+    {
+     "start": 22.27,
+     "end": 22.71,
+     "word": " transient,"
+    },
+    {
+     "start": 23.23,
+     "end": 23.41,
+     "word": " and"
+    },
+    {
+     "start": 23.41,
+     "end": 23.69,
+     "word": " destined"
+    },
+    {
+     "start": 23.69,
+     "end": 23.99,
+     "word": " to"
+    },
+    {
+     "start": 23.99,
+     "end": 24.11,
+     "word": " be"
+    },
+    {
+     "start": 24.11,
+     "end": 24.45,
+     "word": " replaced"
+    },
+    {
+     "start": 24.45,
+     "end": 24.73,
+     "word": " by"
+    },
+    {
+     "start": 24.73,
+     "end": 24.83,
+     "word": " the"
+    },
+    {
+     "start": 24.83,
+     "end": 25.35,
+     "word": " everlasting"
+    },
+    {
+     "start": 25.35,
+     "end": 25.73,
+     "word": " kingdom"
+    },
+    {
+     "start": 25.73,
+     "end": 26.11,
+     "word": " of"
+    },
+    {
+     "start": 26.11,
+     "end": 26.27,
+     "word": " Jesus"
+    },
+    {
+     "start": 26.27,
+     "end": 26.71,
+     "word": " Christ."
+    }
+   ]
+  },
+  {
+   "start": 27.74,
+   "end": 29.4,
+   "text": "From The Last Sitting, sheet 1.",
+   "words": [
+    {
+     "start": 27.74,
+     "end": 27.86,
+     "word": " From"
+    },
+    {
+     "start": 27.86,
+     "end": 27.98,
+     "word": " The"
+    },
+    {
+     "start": 27.98,
+     "end": 28.18,
+     "word": " Last"
+    },
+    {
+     "start": 28.18,
+     "end": 28.48,
+     "word": " Sitting,"
+    },
+    {
+     "start": 29.08,
+     "end": 29.1,
+     "word": " sheet"
+    },
+    {
+     "start": 29.1,
+     "end": 29.4,
+     "word": " 1."
+    }
+   ]
+  },
+  {
+   "start": 30.39,
+   "end": 34.95,
+   "text": "In chapter 1, Daniel and his companions proved that covenant faithfulness at the table",
+   "words": [
+    {
+     "start": 30.39,
+     "end": 30.65,
+     "word": " In"
+    },
+    {
+     "start": 30.65,
+     "end": 30.85,
+     "word": " chapter"
+    },
+    {
+     "start": 30.85,
+     "end": 31.25,
+     "word": " 1,"
+    },
+    {
+     "start": 31.63,
+     "end": 31.75,
+     "word": " Daniel"
+    },
+    {
+     "start": 31.75,
+     "end": 31.95,
+     "word": " and"
+    },
+    {
+     "start": 31.95,
+     "end": 32.11,
+     "word": " his"
+    },
+    {
+     "start": 32.11,
+     "end": 32.47,
+     "word": " companions"
+    },
+    {
+     "start": 32.47,
+     "end": 32.95,
+     "word": " proved"
+    },
+    {
+     "start": 32.95,
+     "end": 33.23,
+     "word": " that"
+    },
+    {
+     "start": 33.23,
+     "end": 33.55,
+     "word": " covenant"
+    },
+    {
+     "start": 33.55,
+     "end": 34.23,
+     "word": " faithfulness"
+    },
+    {
+     "start": 34.23,
+     "end": 34.43,
+     "word": " at"
+    },
+    {
+     "start": 34.43,
+     "end": 34.55,
+     "word": " the"
+    },
+    {
+     "start": 34.55,
+     "end": 34.95,
+     "word": " table"
+    }
+   ]
+  },
+  {
+   "start": 34.95,
+   "end": 36.47,
+   "text": "preceded the gift of wisdom.",
+   "words": [
+    {
+     "start": 34.95,
+     "end": 35.59,
+     "word": " preceded"
+    },
+    {
+     "start": 35.59,
+     "end": 35.81,
+     "word": " the"
+    },
+    {
+     "start": 35.81,
+     "end": 35.95,
+     "word": " gift"
+    },
+    {
+     "start": 35.95,
+     "end": 36.13,
+     "word": " of"
+    },
+    {
+     "start": 36.13,
+     "end": 36.47,
+     "word": " wisdom."
+    }
+   ]
+  },
+  {
+   "start": 37.21,
+   "end": 39.99,
+   "text": "Now in chapter 2, that wisdom is tested on the global stage",
+   "words": [
+    {
+     "start": 37.21,
+     "end": 37.37,
+     "word": " Now"
+    },
+    {
+     "start": 37.37,
+     "end": 37.51,
+     "word": " in"
+    },
+    {
+     "start": 37.51,
+     "end": 37.67,
+     "word": " chapter"
+    },
+    {
+     "start": 37.67,
+     "end": 38.07,
+     "word": " 2,"
+    },
+    {
+     "start": 38.27,
+     "end": 38.33,
+     "word": " that"
+    },
+    {
+     "start": 38.33,
+     "end": 38.59,
+     "word": " wisdom"
+    },
+    {
+     "start": 38.59,
+     "end": 38.79,
+     "word": " is"
+    },
+    {
+     "start": 38.79,
+     "end": 39.07,
+     "word": " tested"
+    },
+    {
+     "start": 39.07,
+     "end": 39.29,
+     "word": " on"
+    },
+    {
+     "start": 39.29,
+     "end": 39.41,
+     "word": " the"
+    },
+    {
+     "start": 39.41,
+     "end": 39.57,
+     "word": " global"
+    },
+    {
+     "start": 39.57,
+     "end": 39.99,
+     "word": " stage"
+    }
+   ]
+  },
+  {
+   "start": 39.99,
+   "end": 43.05,
+   "text": "when the emperor dreams of the fate of all human empires.",
+   "words": [
+    {
+     "start": 39.99,
+     "end": 40.55,
+     "word": " when"
+    },
+    {
+     "start": 40.55,
+     "end": 40.71,
+     "word": " the"
+    },
+    {
+     "start": 40.71,
+     "end": 40.95,
+     "word": " emperor"
+    },
+    {
+     "start": 40.95,
+     "end": 41.37,
+     "word": " dreams"
+    },
+    {
+     "start": 41.37,
+     "end": 41.63,
+     "word": " of"
+    },
+    {
+     "start": 41.63,
+     "end": 41.75,
+     "word": " the"
+    },
+    {
+     "start": 41.75,
+     "end": 41.93,
+     "word": " fate"
+    },
+    {
+     "start": 41.93,
+     "end": 42.11,
+     "word": " of"
+    },
+    {
+     "start": 42.11,
+     "end": 42.29,
+     "word": " all"
+    },
+    {
+     "start": 42.29,
+     "end": 42.61,
+     "word": " human"
+    },
+    {
+     "start": 42.61,
+     "end": 43.05,
+     "word": " empires."
+    }
+   ]
+  },
+  {
+   "start": 43.57,
+   "end": 48.07,
+   "text": "And heaven, not Babylon's magicians, defines what shall be in the latter days.",
+   "words": [
+    {
+     "start": 43.57,
+     "end": 43.71,
+     "word": " And"
+    },
+    {
+     "start": 43.71,
+     "end": 44.07,
+     "word": " heaven,"
+    },
+    {
+     "start": 44.31,
+     "end": 44.53,
+     "word": " not"
+    },
+    {
+     "start": 44.53,
+     "end": 45.11,
+     "word": " Babylon's"
+    },
+    {
+     "start": 45.11,
+     "end": 45.53,
+     "word": " magicians,"
+    },
+    {
+     "start": 46.03,
+     "end": 46.41,
+     "word": " defines"
+    },
+    {
+     "start": 46.41,
+     "end": 46.71,
+     "word": " what"
+    },
+    {
+     "start": 46.71,
+     "end": 46.93,
+     "word": " shall"
+    },
+    {
+     "start": 46.93,
+     "end": 47.15,
+     "word": " be"
+    },
+    {
+     "start": 47.15,
+     "end": 47.33,
+     "word": " in"
+    },
+    {
+     "start": 47.33,
+     "end": 47.45,
+     "word": " the"
+    },
+    {
+     "start": 47.45,
+     "end": 47.63,
+     "word": " latter"
+    },
+    {
+     "start": 47.63,
+     "end": 48.07,
+     "word": " days."
+    }
+   ]
+  },
+  {
+   "start": 50.21,
+   "end": 51.39,
+   "text": "The impasse of human wisdom.",
+   "words": [
+    {
+     "start": 50.21,
+     "end": 50.21,
+     "word": " The"
+    },
+    {
+     "start": 50.21,
+     "end": 50.59,
+     "word": " impasse"
+    },
+    {
+     "start": 50.59,
+     "end": 50.77,
+     "word": " of"
+    },
+    {
+     "start": 50.77,
+     "end": 50.99,
+     "word": " human"
+    },
+    {
+     "start": 50.99,
+     "end": 51.39,
+     "word": " wisdom."
+    }
+   ]
+  },
+  {
+   "start": 52.19,
+   "end": 53.83,
+   "text": "Daniel 2, verses 1 through 28.",
+   "words": [
+    {
+     "start": 52.19,
+     "end": 52.39,
+     "word": " Daniel"
+    },
+    {
+     "start": 52.39,
+     "end": 52.75,
+     "word": " 2,"
+    },
+    {
+     "start": 52.83,
+     "end": 52.95,
+     "word": " verses"
+    },
+    {
+     "start": 52.95,
+     "end": 53.23,
+     "word": " 1"
+    },
+    {
+     "start": 53.23,
+     "end": 53.37,
+     "word": " through"
+    },
+    {
+     "start": 53.37,
+     "end": 53.83,
+     "word": " 28."
+    }
+   ]
+  },
+  {
+   "start": 54.73,
+   "end": 56.27,
+   "text": "Babylon, c. 603 BC.",
+   "words": [
+    {
+     "start": 54.73,
+     "end": 54.99,
+     "word": " Babylon,"
+    },
+    {
+     "start": 55.11,
+     "end": 55.37,
+     "word": " c."
+    },
+    {
+     "start": 55.65,
+     "end": 56.01,
+     "word": " 603"
+    },
+    {
+     "start": 56.01,
+     "end": 56.27,
+     "word": " BC."
+    }
+   ]
+  },
+  {
+   "start": 57.25,
+   "end": 60.83,
+   "text": "In the second year of Nebuchadnezzar's sole reign, around 603 BC,",
+   "words": [
+    {
+     "start": 57.25,
+     "end": 57.59,
+     "word": " In"
+    },
+    {
+     "start": 57.59,
+     "end": 57.69,
+     "word": " the"
+    },
+    {
+     "start": 57.69,
+     "end": 57.87,
+     "word": " second"
+    },
+    {
+     "start": 57.87,
+     "end": 58.15,
+     "word": " year"
+    },
+    {
+     "start": 58.15,
+     "end": 58.31,
+     "word": " of"
+    },
+    {
+     "start": 58.31,
+     "end": 58.97,
+     "word": " Nebuchadnezzar's"
+    },
+    {
+     "start": 58.97,
+     "end": 59.13,
+     "word": " sole"
+    },
+    {
+     "start": 59.13,
+     "end": 59.47,
+     "word": " reign,"
+    },
+    {
+     "start": 59.85,
+     "end": 59.91,
+     "word": " around"
+    },
+    {
+     "start": 59.91,
+     "end": 60.51,
+     "word": " 603"
+    },
+    {
+     "start": 60.51,
+     "end": 60.83,
+     "word": " BC,"
+    }
+   ]
+  },
+  {
+   "start": 61.55,
+   "end": 66.21,
+   "text": "the king of Babylon was awakened by a terrifying nightmare that left his spirit deeply agitated.",
+   "words": [
+    {
+     "start": 61.55,
+     "end": 61.59,
+     "word": " the"
+    },
+    {
+     "start": 61.59,
+     "end": 61.69,
+     "word": " king"
+    },
+    {
+     "start": 61.69,
+     "end": 61.85,
+     "word": " of"
+    },
+    {
+     "start": 61.85,
+     "end": 62.21,
+     "word": " Babylon"
+    },
+    {
+     "start": 62.21,
+     "end": 62.43,
+     "word": " was"
+    },
+    {
+     "start": 62.43,
+     "end": 62.77,
+     "word": " awakened"
+    },
+    {
+     "start": 62.77,
+     "end": 63.05,
+     "word": " by"
+    },
+    {
+     "start": 63.05,
+     "end": 63.21,
+     "word": " a"
+    },
+    {
+     "start": 63.21,
+     "end": 63.67,
+     "word": " terrifying"
+    },
+    {
+     "start": 63.67,
+     "end": 64.09,
+     "word": " nightmare"
+    },
+    {
+     "start": 64.09,
+     "end": 64.51,
+     "word": " that"
+    },
+    {
+     "start": 64.51,
+     "end": 64.69,
+     "word": " left"
+    },
+    {
+     "start": 64.69,
+     "end": 64.89,
+     "word": " his"
+    },
+    {
+     "start": 64.89,
+     "end": 65.21,
+     "word": " spirit"
+    },
+    {
+     "start": 65.21,
+     "end": 65.67,
+     "word": " deeply"
+    },
+    {
+     "start": 65.67,
+     "end": 66.21,
+     "word": " agitated."
+    }
+   ]
+  },
+  {
+   "start": 67.01,
+   "end": 68.41,
+   "text": "Daniel 2, verses 1.",
+   "words": [
+    {
+     "start": 67.01,
+     "end": 67.11,
+     "word": " Daniel"
+    },
+    {
+     "start": 67.11,
+     "end": 67.43,
+     "word": " 2,"
+    },
+    {
+     "start": 67.61,
+     "end": 67.69,
+     "word": " verses"
+    },
+    {
+     "start": 67.69,
+     "end": 68.41,
+     "word": " 1."
+    }
+   ]
+  },
+  {
+   "start": 68.99,
+   "end": 72.49,
+   "text": "Seeking certainty, the king summoned his occult counselors, the magicians,",
+   "words": [
+    {
+     "start": 68.99,
+     "end": 69.11,
+     "word": " Seeking"
+    },
+    {
+     "start": 69.11,
+     "end": 69.67,
+     "word": " certainty,"
+    },
+    {
+     "start": 69.87,
+     "end": 69.91,
+     "word": " the"
+    },
+    {
+     "start": 69.91,
+     "end": 70.09,
+     "word": " king"
+    },
+    {
+     "start": 70.09,
+     "end": 70.49,
+     "word": " summoned"
+    },
+    {
+     "start": 70.49,
+     "end": 70.73,
+     "word": " his"
+    },
+    {
+     "start": 70.73,
+     "end": 71.09,
+     "word": " occult"
+    },
+    {
+     "start": 71.09,
+     "end": 71.61,
+     "word": " counselors,"
+    },
+    {
+     "start": 71.99,
+     "end": 72.05,
+     "word": " the"
+    },
+    {
+     "start": 72.05,
+     "end": 72.49,
+     "word": " magicians,"
+    }
+   ]
+  },
+  {
+   "start": 72.85,
+   "end": 77.57,
+   "text": "enchanters, sorcerers, and Chaldeans, and placed before them an impossible demand.",
+   "words": [
+    {
+     "start": 72.85,
+     "end": 73.39,
+     "word": " enchanters,"
+    },
+    {
+     "start": 73.93,
+     "end": 74.35,
+     "word": " sorcerers,"
+    },
+    {
+     "start": 74.55,
+     "end": 74.79,
+     "word": " and"
+    },
+    {
+     "start": 74.79,
+     "end": 75.21,
+     "word": " Chaldeans,"
+    },
+    {
+     "start": 75.61,
+     "end": 75.81,
+     "word": " and"
+    },
+    {
+     "start": 75.81,
+     "end": 76.05,
+     "word": " placed"
+    },
+    {
+     "start": 76.05,
+     "end": 76.39,
+     "word": " before"
+    },
+    {
+     "start": 76.39,
+     "end": 76.59,
+     "word": " them"
+    },
+    {
+     "start": 76.59,
+     "end": 76.73,
+     "word": " an"
+    },
+    {
+     "start": 76.73,
+     "end": 77.15,
+     "word": " impossible"
+    },
+    {
+     "start": 77.15,
+     "end": 77.57,
+     "word": " demand."
+    }
+   ]
+  },
+  {
+   "start": 78.25,
+   "end": 83.07,
+   "text": "Tell him the dream he had forgotten, along with its interpretation, or face immediate execution.",
+   "words": [
+    {
+     "start": 78.25,
+     "end": 78.39,
+     "word": " Tell"
+    },
+    {
+     "start": 78.39,
+     "end": 78.57,
+     "word": " him"
+    },
+    {
+     "start": 78.57,
+     "end": 78.73,
+     "word": " the"
+    },
+    {
+     "start": 78.73,
+     "end": 78.91,
+     "word": " dream"
+    },
+    {
+     "start": 78.91,
+     "end": 79.09,
+     "word": " he"
+    },
+    {
+     "start": 79.09,
+     "end": 79.17,
+     "word": " had"
+    },
+    {
+     "start": 79.17,
+     "end": 79.55,
+     "word": " forgotten,"
+    },
+    {
+     "start": 79.93,
+     "end": 80.27,
+     "word": " along"
+    },
+    {
+     "start": 80.27,
+     "end": 80.45,
+     "word": " with"
+    },
+    {
+     "start": 80.45,
+     "end": 80.59,
+     "word": " its"
+    },
+    {
+     "start": 80.59,
+     "end": 81.11,
+     "word": " interpretation,"
+    },
+    {
+     "start": 81.53,
+     "end": 81.71,
+     "word": " or"
+    },
+    {
+     "start": 81.71,
+     "end": 81.99,
+     "word": " face"
+    },
+    {
+     "start": 81.99,
+     "end": 82.47,
+     "word": " immediate"
+    },
+    {
+     "start": 82.47,
+     "end": 83.07,
+     "word": " execution."
+    }
+   ]
+  },
+  {
+   "start": 83.69,
+   "end": 85.21,
+   "text": "Daniel 2, verses 5 through 8.",
+   "words": [
+    {
+     "start": 83.69,
+     "end": 84.01,
+     "word": " Daniel"
+    },
+    {
+     "start": 84.01,
+     "end": 84.31,
+     "word": " 2,"
+    },
+    {
+     "start": 84.45,
+     "end": 84.55,
+     "word": " verses"
+    },
+    {
+     "start": 84.55,
+     "end": 84.85,
+     "word": " 5"
+    },
+    {
+     "start": 84.85,
+     "end": 85.01,
+     "word": " through"
+    },
+    {
+     "start": 85.01,
+     "end": 85.21,
+     "word": " 8."
+    }
+   ]
+  },
+  {
+   "start": 86.3,
+   "end": 88.94,
+   "text": "Babylon's intellectual elite confessed their utter bankruptcy.",
+   "words": [
+    {
+     "start": 86.3,
+     "end": 86.82,
+     "word": " Babylon's"
+    },
+    {
+     "start": 86.82,
+     "end": 87.2,
+     "word": " intellectual"
+    },
+    {
+     "start": 87.2,
+     "end": 87.54,
+     "word": " elite"
+    },
+    {
+     "start": 87.54,
+     "end": 87.92,
+     "word": " confessed"
+    },
+    {
+     "start": 87.92,
+     "end": 88.18,
+     "word": " their"
+    },
+    {
+     "start": 88.18,
+     "end": 88.42,
+     "word": " utter"
+    },
+    {
+     "start": 88.42,
+     "end": 88.94,
+     "word": " bankruptcy."
+    }
+   ]
+  },
+  {
+   "start": 89.88,
+   "end": 92.44,
+   "text": "There is not a man upon the earth that can chew the king's matter,",
+   "words": [
+    {
+     "start": 89.88,
+     "end": 89.88,
+     "word": " There"
+    },
+    {
+     "start": 89.88,
+     "end": 90.06,
+     "word": " is"
+    },
+    {
+     "start": 90.06,
+     "end": 90.24,
+     "word": " not"
+    },
+    {
+     "start": 90.24,
+     "end": 90.36,
+     "word": " a"
+    },
+    {
+     "start": 90.36,
+     "end": 90.52,
+     "word": " man"
+    },
+    {
+     "start": 90.52,
+     "end": 90.78,
+     "word": " upon"
+    },
+    {
+     "start": 90.78,
+     "end": 90.94,
+     "word": " the"
+    },
+    {
+     "start": 90.94,
+     "end": 91.12,
+     "word": " earth"
+    },
+    {
+     "start": 91.12,
+     "end": 91.38,
+     "word": " that"
+    },
+    {
+     "start": 91.38,
+     "end": 91.52,
+     "word": " can"
+    },
+    {
+     "start": 91.52,
+     "end": 91.74,
+     "word": " chew"
+    },
+    {
+     "start": 91.74,
+     "end": 91.9,
+     "word": " the"
+    },
+    {
+     "start": 91.9,
+     "end": 92.18,
+     "word": " king's"
+    },
+    {
+     "start": 92.18,
+     "end": 92.44,
+     "word": " matter,"
+    }
+   ]
+  },
+  {
+   "start": 92.9,
+   "end": 95.5,
+   "text": "except the gods, whose dwelling is not with flesh.",
+   "words": [
+    {
+     "start": 92.9,
+     "end": 93.14,
+     "word": " except"
+    },
+    {
+     "start": 93.14,
+     "end": 93.36,
+     "word": " the"
+    },
+    {
+     "start": 93.36,
+     "end": 93.6,
+     "word": " gods,"
+    },
+    {
+     "start": 94.02,
+     "end": 94.18,
+     "word": " whose"
+    },
+    {
+     "start": 94.18,
+     "end": 94.48,
+     "word": " dwelling"
+    },
+    {
+     "start": 94.48,
+     "end": 94.74,
+     "word": " is"
+    },
+    {
+     "start": 94.74,
+     "end": 94.96,
+     "word": " not"
+    },
+    {
+     "start": 94.96,
+     "end": 95.18,
+     "word": " with"
+    },
+    {
+     "start": 95.18,
+     "end": 95.5,
+     "word": " flesh."
+    }
+   ]
+  },
+  {
+   "start": 96.22,
+   "end": 97.6,
+   "text": "Daniel 2, verses 10 through 11.",
+   "words": [
+    {
+     "start": 96.22,
+     "end": 96.4,
+     "word": " Daniel"
+    },
+    {
+     "start": 96.4,
+     "end": 96.64,
+     "word": " 2,"
+    },
+    {
+     "start": 96.72,
+     "end": 96.86,
+     "word": " verses"
+    },
+    {
+     "start": 96.86,
+     "end": 97.14,
+     "word": " 10"
+    },
+    {
+     "start": 97.14,
+     "end": 97.3,
+     "word": " through"
+    },
+    {
+     "start": 97.3,
+     "end": 97.6,
+     "word": " 11."
+    }
+   ]
+  },
+  {
+   "start": 99.27,
+   "end": 103.23,
+   "text": "When the royal execution decree went forth, Daniel and his companions did not panic.",
+   "words": [
+    {
+     "start": 99.27,
+     "end": 99.41,
+     "word": " When"
+    },
+    {
+     "start": 99.41,
+     "end": 99.53,
+     "word": " the"
+    },
+    {
+     "start": 99.53,
+     "end": 99.71,
+     "word": " royal"
+    },
+    {
+     "start": 99.71,
+     "end": 100.27,
+     "word": " execution"
+    },
+    {
+     "start": 100.27,
+     "end": 100.61,
+     "word": " decree"
+    },
+    {
+     "start": 100.61,
+     "end": 100.83,
+     "word": " went"
+    },
+    {
+     "start": 100.83,
+     "end": 101.17,
+     "word": " forth,"
+    },
+    {
+     "start": 101.69,
+     "end": 101.71,
+     "word": " Daniel"
+    },
+    {
+     "start": 101.71,
+     "end": 101.89,
+     "word": " and"
+    },
+    {
+     "start": 101.89,
+     "end": 102.05,
+     "word": " his"
+    },
+    {
+     "start": 102.05,
+     "end": 102.43,
+     "word": " companions"
+    },
+    {
+     "start": 102.43,
+     "end": 102.73,
+     "word": " did"
+    },
+    {
+     "start": 102.73,
+     "end": 102.89,
+     "word": " not"
+    },
+    {
+     "start": 102.89,
+     "end": 103.23,
+     "word": " panic."
+    }
+   ]
+  },
+  {
+   "start": 103.79,
+   "end": 105.41,
+   "text": "They held an emergency prayer session,",
+   "words": [
+    {
+     "start": 103.79,
+     "end": 103.91,
+     "word": " They"
+    },
+    {
+     "start": 103.91,
+     "end": 104.09,
+     "word": " held"
+    },
+    {
+     "start": 104.09,
+     "end": 104.23,
+     "word": " an"
+    },
+    {
+     "start": 104.23,
+     "end": 104.59,
+     "word": " emergency"
+    },
+    {
+     "start": 104.59,
+     "end": 104.97,
+     "word": " prayer"
+    },
+    {
+     "start": 104.97,
+     "end": 105.41,
+     "word": " session,"
+    }
+   ]
+  },
+  {
+   "start": 105.69,
+   "end": 108.27,
+   "text": "petitioning the god of heaven for mercy concerning the secret.",
+   "words": [
+    {
+     "start": 105.69,
+     "end": 106.09,
+     "word": " petitioning"
+    },
+    {
+     "start": 106.09,
+     "end": 106.23,
+     "word": " the"
+    },
+    {
+     "start": 106.23,
+     "end": 106.37,
+     "word": " god"
+    },
+    {
+     "start": 106.37,
+     "end": 106.51,
+     "word": " of"
+    },
+    {
+     "start": 106.51,
+     "end": 106.67,
+     "word": " heaven"
+    },
+    {
+     "start": 106.67,
+     "end": 106.95,
+     "word": " for"
+    },
+    {
+     "start": 106.95,
+     "end": 107.31,
+     "word": " mercy"
+    },
+    {
+     "start": 107.31,
+     "end": 107.71,
+     "word": " concerning"
+    },
+    {
+     "start": 107.71,
+     "end": 107.97,
+     "word": " the"
+    },
+    {
+     "start": 107.97,
+     "end": 108.27,
+     "word": " secret."
+    }
+   ]
+  },
+  {
+   "start": 108.97,
+   "end": 110.43,
+   "text": "Daniel 2, verses 17 through 18.",
+   "words": [
+    {
+     "start": 108.97,
+     "end": 109.05,
+     "word": " Daniel"
+    },
+    {
+     "start": 109.05,
+     "end": 109.33,
+     "word": " 2,"
+    },
+    {
+     "start": 109.45,
+     "end": 109.55,
+     "word": " verses"
+    },
+    {
+     "start": 109.55,
+     "end": 109.95,
+     "word": " 17"
+    },
+    {
+     "start": 109.95,
+     "end": 110.17,
+     "word": " through"
+    },
+    {
+     "start": 110.17,
+     "end": 110.43,
+     "word": " 18."
+    }
+   ]
+  },
+  {
+   "start": 111.31,
+   "end": 114.25,
+   "text": "In a night vision, God revealed both the dream and its meaning.",
+   "words": [
+    {
+     "start": 111.31,
+     "end": 111.59,
+     "word": " In"
+    },
+    {
+     "start": 111.59,
+     "end": 111.71,
+     "word": " a"
+    },
+    {
+     "start": 111.71,
+     "end": 111.85,
+     "word": " night"
+    },
+    {
+     "start": 111.85,
+     "end": 112.17,
+     "word": " vision,"
+    },
+    {
+     "start": 112.37,
+     "end": 112.47,
+     "word": " God"
+    },
+    {
+     "start": 112.47,
+     "end": 112.77,
+     "word": " revealed"
+    },
+    {
+     "start": 112.77,
+     "end": 113.07,
+     "word": " both"
+    },
+    {
+     "start": 113.07,
+     "end": 113.27,
+     "word": " the"
+    },
+    {
+     "start": 113.27,
+     "end": 113.51,
+     "word": " dream"
+    },
+    {
+     "start": 113.51,
+     "end": 113.85,
+     "word": " and"
+    },
+    {
+     "start": 113.85,
+     "end": 113.99,
+     "word": " its"
+    },
+    {
+     "start": 113.99,
+     "end": 114.25,
+     "word": " meaning."
+    }
+   ]
+  },
+  {
+   "start": 114.25,
+   "end": 119.93,
+   "text": "Standing before the emperor, Daniel deflected all praise from human intellect to divine sovereignty.",
+   "words": [
+    {
+     "start": 114.25,
+     "end": 115.13,
+     "word": " Standing"
+    },
+    {
+     "start": 115.13,
+     "end": 115.49,
+     "word": " before"
+    },
+    {
+     "start": 115.49,
+     "end": 115.69,
+     "word": " the"
+    },
+    {
+     "start": 115.69,
+     "end": 115.99,
+     "word": " emperor,"
+    },
+    {
+     "start": 116.37,
+     "end": 116.51,
+     "word": " Daniel"
+    },
+    {
+     "start": 116.51,
+     "end": 116.97,
+     "word": " deflected"
+    },
+    {
+     "start": 116.97,
+     "end": 117.29,
+     "word": " all"
+    },
+    {
+     "start": 117.29,
+     "end": 117.61,
+     "word": " praise"
+    },
+    {
+     "start": 117.61,
+     "end": 117.93,
+     "word": " from"
+    },
+    {
+     "start": 117.93,
+     "end": 118.21,
+     "word": " human"
+    },
+    {
+     "start": 118.21,
+     "end": 118.61,
+     "word": " intellect"
+    },
+    {
+     "start": 118.61,
+     "end": 118.97,
+     "word": " to"
+    },
+    {
+     "start": 118.97,
+     "end": 119.37,
+     "word": " divine"
+    },
+    {
+     "start": 119.37,
+     "end": 119.93,
+     "word": " sovereignty."
+    }
+   ]
+  },
+  {
+   "start": 120.97,
+   "end": 123.13,
+   "text": "There is a god in heaven that revealeth secrets,",
+   "words": [
+    {
+     "start": 120.97,
+     "end": 121.03,
+     "word": " There"
+    },
+    {
+     "start": 121.03,
+     "end": 121.17,
+     "word": " is"
+    },
+    {
+     "start": 121.17,
+     "end": 121.31,
+     "word": " a"
+    },
+    {
+     "start": 121.31,
+     "end": 121.57,
+     "word": " god"
+    },
+    {
+     "start": 121.57,
+     "end": 121.79,
+     "word": " in"
+    },
+    {
+     "start": 121.79,
+     "end": 121.99,
+     "word": " heaven"
+    },
+    {
+     "start": 121.99,
+     "end": 122.29,
+     "word": " that"
+    },
+    {
+     "start": 122.29,
+     "end": 122.77,
+     "word": " revealeth"
+    },
+    {
+     "start": 122.77,
+     "end": 123.13,
+     "word": " secrets,"
+    }
+   ]
+  },
+  {
+   "start": 123.39,
+   "end": 126.81,
+   "text": "and maketh known to the king Nebuchadnezzar what shall be in the latter days.",
+   "words": [
+    {
+     "start": 123.39,
+     "end": 123.63,
+     "word": " and"
+    },
+    {
+     "start": 123.63,
+     "end": 123.91,
+     "word": " maketh"
+    },
+    {
+     "start": 123.91,
+     "end": 124.17,
+     "word": " known"
+    },
+    {
+     "start": 124.17,
+     "end": 124.35,
+     "word": " to"
+    },
+    {
+     "start": 124.35,
+     "end": 124.47,
+     "word": " the"
+    },
+    {
+     "start": 124.47,
+     "end": 124.61,
+     "word": " king"
+    },
+    {
+     "start": 124.61,
+     "end": 125.29,
+     "word": " Nebuchadnezzar"
+    },
+    {
+     "start": 125.29,
+     "end": 125.47,
+     "word": " what"
+    },
+    {
+     "start": 125.47,
+     "end": 125.65,
+     "word": " shall"
+    },
+    {
+     "start": 125.65,
+     "end": 125.89,
+     "word": " be"
+    },
+    {
+     "start": 125.89,
+     "end": 126.09,
+     "word": " in"
+    },
+    {
+     "start": 126.09,
+     "end": 126.21,
+     "word": " the"
+    },
+    {
+     "start": 126.21,
+     "end": 126.41,
+     "word": " latter"
+    },
+    {
+     "start": 126.41,
+     "end": 126.81,
+     "word": " days."
+    }
+   ]
+  },
+  {
+   "start": 127.49,
+   "end": 128.43,
+   "text": "Daniel 2, 28.",
+   "words": [
+    {
+     "start": 127.49,
+     "end": 127.67,
+     "word": " Daniel"
+    },
+    {
+     "start": 127.67,
+     "end": 127.97,
+     "word": " 2,"
+    },
+    {
+     "start": 128.05,
+     "end": 128.43,
+     "word": " 28."
+    }
+   ]
+  },
+  {
+   "start": 129.32,
+   "end": 132.88,
+   "text": "The forgotten dream was not an ancient puzzle designed to satisfy curiosity.",
+   "words": [
+    {
+     "start": 129.32,
+     "end": 129.52,
+     "word": " The"
+    },
+    {
+     "start": 129.52,
+     "end": 129.8,
+     "word": " forgotten"
+    },
+    {
+     "start": 129.8,
+     "end": 130.04,
+     "word": " dream"
+    },
+    {
+     "start": 130.04,
+     "end": 130.22,
+     "word": " was"
+    },
+    {
+     "start": 130.22,
+     "end": 130.42,
+     "word": " not"
+    },
+    {
+     "start": 130.42,
+     "end": 130.64,
+     "word": " an"
+    },
+    {
+     "start": 130.64,
+     "end": 131.0,
+     "word": " ancient"
+    },
+    {
+     "start": 131.0,
+     "end": 131.42,
+     "word": " puzzle"
+    },
+    {
+     "start": 131.42,
+     "end": 131.78,
+     "word": " designed"
+    },
+    {
+     "start": 131.78,
+     "end": 131.96,
+     "word": " to"
+    },
+    {
+     "start": 131.96,
+     "end": 132.36,
+     "word": " satisfy"
+    },
+    {
+     "start": 132.36,
+     "end": 132.88,
+     "word": " curiosity."
+    }
+   ]
+  },
+  {
+   "start": 133.56,
+   "end": 138.44,
+   "text": "It was God's legal decree and historical roadmap, establishing that all human dominion",
+   "words": [
+    {
+     "start": 133.56,
+     "end": 133.78,
+     "word": " It"
+    },
+    {
+     "start": 133.78,
+     "end": 133.98,
+     "word": " was"
+    },
+    {
+     "start": 133.98,
+     "end": 134.38,
+     "word": " God's"
+    },
+    {
+     "start": 134.38,
+     "end": 134.68,
+     "word": " legal"
+    },
+    {
+     "start": 134.68,
+     "end": 135.12,
+     "word": " decree"
+    },
+    {
+     "start": 135.12,
+     "end": 135.38,
+     "word": " and"
+    },
+    {
+     "start": 135.38,
+     "end": 135.82,
+     "word": " historical"
+    },
+    {
+     "start": 135.82,
+     "end": 136.34,
+     "word": " roadmap,"
+    },
+    {
+     "start": 136.8,
+     "end": 137.24,
+     "word": " establishing"
+    },
+    {
+     "start": 137.24,
+     "end": 137.56,
+     "word": " that"
+    },
+    {
+     "start": 137.56,
+     "end": 137.86,
+     "word": " all"
+    },
+    {
+     "start": 137.86,
+     "end": 138.14,
+     "word": " human"
+    },
+    {
+     "start": 138.14,
+     "end": 138.44,
+     "word": " dominion"
+    }
+   ]
+  },
+  {
+   "start": 138.44,
+   "end": 143.58,
+   "text": "is strictly bounded, transient, and destined to be replaced by the everlasting kingdom of Jesus Christ.",
+   "words": [
+    {
+     "start": 138.44,
+     "end": 138.7,
+     "word": " is"
+    },
+    {
+     "start": 138.7,
+     "end": 138.94,
+     "word": " strictly"
+    },
+    {
+     "start": 138.94,
+     "end": 139.4,
+     "word": " bounded,"
+    },
+    {
+     "start": 139.68,
+     "end": 140.08,
+     "word": " transient,"
+    },
+    {
+     "start": 140.4,
+     "end": 140.62,
+     "word": " and"
+    },
+    {
+     "start": 140.62,
+     "end": 140.98,
+     "word": " destined"
+    },
+    {
+     "start": 140.98,
+     "end": 141.2,
+     "word": " to"
+    },
+    {
+     "start": 141.2,
+     "end": 141.32,
+     "word": " be"
+    },
+    {
+     "start": 141.32,
+     "end": 141.64,
+     "word": " replaced"
+    },
+    {
+     "start": 141.64,
+     "end": 141.88,
+     "word": " by"
+    },
+    {
+     "start": 141.88,
+     "end": 141.98,
+     "word": " the"
+    },
+    {
+     "start": 141.98,
+     "end": 142.4,
+     "word": " everlasting"
+    },
+    {
+     "start": 142.4,
+     "end": 142.76,
+     "word": " kingdom"
+    },
+    {
+     "start": 142.76,
+     "end": 143.06,
+     "word": " of"
+    },
+    {
+     "start": 143.06,
+     "end": 143.2,
+     "word": " Jesus"
+    },
+    {
+     "start": 143.2,
+     "end": 143.58,
+     "word": " Christ."
+    }
+   ]
+  },
+  {
+   "start": 144.38,
+   "end": 144.96,
+   "text": "Text 1.",
+   "words": [
+    {
+     "start": 144.38,
+     "end": 144.68,
+     "word": " Text"
+    },
+    {
+     "start": 144.68,
+     "end": 144.96,
+     "word": " 1."
+    }
+   ]
+  },
+  {
+   "start": 145.8,
+   "end": 146.5,
+   "text": "Human wisdom failed.",
+   "words": [
+    {
+     "start": 145.8,
+     "end": 145.8,
+     "word": " Human"
+    },
+    {
+     "start": 145.8,
+     "end": 146.1,
+     "word": " wisdom"
+    },
+    {
+     "start": 146.1,
+     "end": 146.5,
+     "word": " failed."
+    }
+   ]
+  },
+  {
+   "start": 147.2,
+   "end": 147.64,
+   "text": "Daniel prayed.",
+   "words": [
+    {
+     "start": 147.2,
+     "end": 147.36,
+     "word": " Daniel"
+    },
+    {
+     "start": 147.36,
+     "end": 147.64,
+     "word": " prayed."
+    }
+   ]
+  },
+  {
+   "start": 148.2,
+   "end": 149.04,
+   "text": "God revealed secrets.",
+   "words": [
+    {
+     "start": 148.2,
+     "end": 148.34,
+     "word": " God"
+    },
+    {
+     "start": 148.34,
+     "end": 148.64,
+     "word": " revealed"
+    },
+    {
+     "start": 148.64,
+     "end": 149.04,
+     "word": " secrets."
+    }
+   ]
+  },
+  {
+   "start": 149.84,
+   "end": 151.34,
+   "text": "The dream governs the latter days.",
+   "words": [
+    {
+     "start": 149.84,
+     "end": 149.9,
+     "word": " The"
+    },
+    {
+     "start": 149.9,
+     "end": 150.12,
+     "word": " dream"
+    },
+    {
+     "start": 150.12,
+     "end": 150.56,
+     "word": " governs"
+    },
+    {
+     "start": 150.56,
+     "end": 150.84,
+     "word": " the"
+    },
+    {
+     "start": 150.84,
+     "end": 151.04,
+     "word": " latter"
+    },
+    {
+     "start": 151.04,
+     "end": 151.34,
+     "word": " days."
+    }
+   ]
+  },
+  {
+   "start": 151.88,
+   "end": 153.2,
+   "text": "The king's magicians do not.",
+   "words": [
+    {
+     "start": 151.88,
+     "end": 151.98,
+     "word": " The"
+    },
+    {
+     "start": 151.98,
+     "end": 152.28,
+     "word": " king's"
+    },
+    {
+     "start": 152.28,
+     "end": 152.6,
+     "word": " magicians"
+    },
+    {
+     "start": 152.6,
+     "end": 152.88,
+     "word": " do"
+    },
+    {
+     "start": 152.88,
+     "end": 153.2,
+     "word": " not."
+    }
+   ]
+  },
+  {
+   "start": 153.82,
+   "end": 154.46,
+   "text": "Main point 1.",
+   "words": [
+    {
+     "start": 153.82,
+     "end": 153.96,
+     "word": " Main"
+    },
+    {
+     "start": 153.96,
+     "end": 154.16,
+     "word": " point"
+    },
+    {
+     "start": 154.16,
+     "end": 154.46,
+     "word": " 1."
+    }
+   ]
+  },
+  {
+   "start": 155.0,
+   "end": 156.96,
+   "text": "The historicist chain of world empires.",
+   "words": [
+    {
+     "start": 155.0,
+     "end": 155.02,
+     "word": " The"
+    },
+    {
+     "start": 155.02,
+     "end": 155.68,
+     "word": " historicist"
+    },
+    {
+     "start": 155.68,
+     "end": 156.02,
+     "word": " chain"
+    },
+    {
+     "start": 156.02,
+     "end": 156.24,
+     "word": " of"
+    },
+    {
+     "start": 156.24,
+     "end": 156.48,
+     "word": " world"
+    },
+    {
+     "start": 156.48,
+     "end": 156.96,
+     "word": " empires."
+    }
+   ]
+  },
+  {
+   "start": 157.44,
+   "end": 159.12,
+   "text": "Daniel 2, 31 to 40.",
+   "words": [
+    {
+     "start": 157.44,
+     "end": 157.8,
+     "word": " Daniel"
+    },
+    {
+     "start": 157.8,
+     "end": 158.16,
+     "word": " 2,"
+    },
+    {
+     "start": 158.38,
+     "end": 158.6,
+     "word": " 31"
+    },
+    {
+     "start": 158.6,
+     "end": 158.78,
+     "word": " to"
+    },
+    {
+     "start": 158.78,
+     "end": 159.12,
+     "word": " 40."
+    }
+   ]
+  },
+  {
+   "start": 160.16,
+   "end": 163.64,
+   "text": "Nebuchadnezzar saw an immense, dazzling statue standing before him.",
+   "words": [
+    {
+     "start": 160.16,
+     "end": 160.6,
+     "word": " Nebuchadnezzar"
+    },
+    {
+     "start": 160.6,
+     "end": 160.84,
+     "word": " saw"
+    },
+    {
+     "start": 160.84,
+     "end": 161.02,
+     "word": " an"
+    },
+    {
+     "start": 161.02,
+     "end": 161.5,
+     "word": " immense,"
+    },
+    {
+     "start": 161.58,
+     "end": 162.2,
+     "word": " dazzling"
+    },
+    {
+     "start": 162.2,
+     "end": 162.72,
+     "word": " statue"
+    },
+    {
+     "start": 162.72,
+     "end": 163.02,
+     "word": " standing"
+    },
+    {
+     "start": 163.02,
+     "end": 163.38,
+     "word": " before"
+    },
+    {
+     "start": 163.38,
+     "end": 163.64,
+     "word": " him."
+    }
+   ]
+  },
+  {
+   "start": 164.1,
+   "end": 166.52,
+   "text": "Its anatomy was composed of five distinct sections,",
+   "words": [
+    {
+     "start": 164.1,
+     "end": 164.22,
+     "word": " Its"
+    },
+    {
+     "start": 164.22,
+     "end": 164.56,
+     "word": " anatomy"
+    },
+    {
+     "start": 164.56,
+     "end": 164.78,
+     "word": " was"
+    },
+    {
+     "start": 164.78,
+     "end": 165.08,
+     "word": " composed"
+    },
+    {
+     "start": 165.08,
+     "end": 165.4,
+     "word": " of"
+    },
+    {
+     "start": 165.4,
+     "end": 165.64,
+     "word": " five"
+    },
+    {
+     "start": 165.64,
+     "end": 165.98,
+     "word": " distinct"
+    },
+    {
+     "start": 165.98,
+     "end": 166.52,
+     "word": " sections,"
+    }
+   ]
+  },
+  {
+   "start": 166.98,
+   "end": 169.68,
+   "text": "a head of fine gold, a chest and arms of silver,",
+   "words": [
+    {
+     "start": 166.98,
+     "end": 167.12,
+     "word": " a"
+    },
+    {
+     "start": 167.12,
+     "end": 167.26,
+     "word": " head"
+    },
+    {
+     "start": 167.26,
+     "end": 167.38,
+     "word": " of"
+    },
+    {
+     "start": 167.38,
+     "end": 167.56,
+     "word": " fine"
+    },
+    {
+     "start": 167.56,
+     "end": 167.92,
+     "word": " gold,"
+    },
+    {
+     "start": 168.28,
+     "end": 168.4,
+     "word": " a"
+    },
+    {
+     "start": 168.4,
+     "end": 168.68,
+     "word": " chest"
+    },
+    {
+     "start": 168.68,
+     "end": 168.9,
+     "word": " and"
+    },
+    {
+     "start": 168.9,
+     "end": 169.16,
+     "word": " arms"
+    },
+    {
+     "start": 169.16,
+     "end": 169.34,
+     "word": " of"
+    },
+    {
+     "start": 169.34,
+     "end": 169.68,
+     "word": " silver,"
+    }
+   ]
+  },
+  {
+   "start": 170.2,
+   "end": 173.06,
+   "text": "a belly and thighs of bronze, legs of iron,",
+   "words": [
+    {
+     "start": 170.2,
+     "end": 170.4,
+     "word": " a"
+    },
+    {
+     "start": 170.4,
+     "end": 170.62,
+     "word": " belly"
+    },
+    {
+     "start": 170.62,
+     "end": 170.88,
+     "word": " and"
+    },
+    {
+     "start": 170.88,
+     "end": 171.16,
+     "word": " thighs"
+    },
+    {
+     "start": 171.16,
+     "end": 171.38,
+     "word": " of"
+    },
+    {
+     "start": 171.38,
+     "end": 171.72,
+     "word": " bronze,"
+    },
+    {
+     "start": 172.34,
+     "end": 172.5,
+     "word": " legs"
+    },
+    {
+     "start": 172.5,
+     "end": 172.7,
+     "word": " of"
+    },
+    {
+     "start": 172.7,
+     "end": 173.06,
+     "word": " iron,"
+    }
+   ]
+  },
+  {
+   "start": 173.06,
+   "end": 175.84,
+   "text": "and feet made of iron mixed with ceramic clay.",
+   "words": [
+    {
+     "start": 173.06,
+     "end": 173.74,
+     "word": " and"
+    },
+    {
+     "start": 173.74,
+     "end": 173.98,
+     "word": " feet"
+    },
+    {
+     "start": 173.98,
+     "end": 174.2,
+     "word": " made"
+    },
+    {
+     "start": 174.2,
+     "end": 174.36,
+     "word": " of"
+    },
+    {
+     "start": 174.36,
+     "end": 174.66,
+     "word": " iron"
+    },
+    {
+     "start": 174.66,
+     "end": 174.9,
+     "word": " mixed"
+    },
+    {
+     "start": 174.9,
+     "end": 175.14,
+     "word": " with"
+    },
+    {
+     "start": 175.14,
+     "end": 175.5,
+     "word": " ceramic"
+    },
+    {
+     "start": 175.5,
+     "end": 175.84,
+     "word": " clay."
+    }
+   ]
+  },
+  {
+   "start": 176.58,
+   "end": 178.04,
+   "text": "Daniel 2, 32, 33.",
+   "words": [
+    {
+     "start": 176.58,
+     "end": 176.72,
+     "word": " Daniel"
+    },
+    {
+     "start": 176.72,
+     "end": 177.06,
+     "word": " 2,"
+    },
+    {
+     "start": 177.14,
+     "end": 177.52,
+     "word": " 32,"
+    },
+    {
+     "start": 177.6,
+     "end": 178.04,
+     "word": " 33."
+    }
+   ]
+  },
+  {
+   "start": 179.14,
+   "end": 183.96,
+   "text": "This sequence presents an unbroken, continuous chain of empires in historical time.",
+   "words": [
+    {
+     "start": 179.14,
+     "end": 179.22,
+     "word": " This"
+    },
+    {
+     "start": 179.22,
+     "end": 179.54,
+     "word": " sequence"
+    },
+    {
+     "start": 179.54,
+     "end": 179.96,
+     "word": " presents"
+    },
+    {
+     "start": 179.96,
+     "end": 180.22,
+     "word": " an"
+    },
+    {
+     "start": 180.22,
+     "end": 180.78,
+     "word": " unbroken,"
+    },
+    {
+     "start": 180.9,
+     "end": 181.58,
+     "word": " continuous"
+    },
+    {
+     "start": 181.58,
+     "end": 181.9,
+     "word": " chain"
+    },
+    {
+     "start": 181.9,
+     "end": 182.06,
+     "word": " of"
+    },
+    {
+     "start": 182.06,
+     "end": 182.38,
+     "word": " empires"
+    },
+    {
+     "start": 182.38,
+     "end": 182.74,
+     "word": " in"
+    },
+    {
+     "start": 182.74,
+     "end": 183.1,
+     "word": " historical"
+    },
+    {
+     "start": 183.1,
+     "end": 183.96,
+     "word": " time."
+    }
+   ]
+  },
+  {
+   "start": 184.46,
+   "end": 187.62,
+   "text": "Head of gold, Babylon, 605 to 539 BC.",
+   "words": [
+    {
+     "start": 184.46,
+     "end": 184.48,
+     "word": " Head"
+    },
+    {
+     "start": 184.48,
+     "end": 184.6,
+     "word": " of"
+    },
+    {
+     "start": 184.6,
+     "end": 184.88,
+     "word": " gold,"
+    },
+    {
+     "start": 185.36,
+     "end": 185.54,
+     "word": " Babylon,"
+    },
+    {
+     "start": 185.94,
+     "end": 186.52,
+     "word": " 605"
+    },
+    {
+     "start": 186.52,
+     "end": 186.7,
+     "word": " to"
+    },
+    {
+     "start": 186.7,
+     "end": 187.3,
+     "word": " 539"
+    },
+    {
+     "start": 187.3,
+     "end": 187.62,
+     "word": " BC."
+    }
+   ]
+  },
+  {
+   "start": 188.94,
+   "end": 191.1,
+   "text": "Daniel identifies the starting point without ambiguity.",
+   "words": [
+    {
+     "start": 188.94,
+     "end": 188.94,
+     "word": " Daniel"
+    },
+    {
+     "start": 188.94,
+     "end": 189.46,
+     "word": " identifies"
+    },
+    {
+     "start": 189.46,
+     "end": 189.7,
+     "word": " the"
+    },
+    {
+     "start": 189.7,
+     "end": 189.96,
+     "word": " starting"
+    },
+    {
+     "start": 189.96,
+     "end": 190.2,
+     "word": " point"
+    },
+    {
+     "start": 190.2,
+     "end": 190.56,
+     "word": " without"
+    },
+    {
+     "start": 190.56,
+     "end": 191.1,
+     "word": " ambiguity."
+    }
+   ]
+  },
+  {
+   "start": 191.96,
+   "end": 194.14,
+   "text": "Thou art this head of gold, Daniel 38.",
+   "words": [
+    {
+     "start": 191.96,
+     "end": 191.96,
+     "word": " Thou"
+    },
+    {
+     "start": 191.96,
+     "end": 192.28,
+     "word": " art"
+    },
+    {
+     "start": 192.28,
+     "end": 192.5,
+     "word": " this"
+    },
+    {
+     "start": 192.5,
+     "end": 192.68,
+     "word": " head"
+    },
+    {
+     "start": 192.68,
+     "end": 192.84,
+     "word": " of"
+    },
+    {
+     "start": 192.84,
+     "end": 193.1,
+     "word": " gold,"
+    },
+    {
+     "start": 193.46,
+     "end": 193.74,
+     "word": " Daniel"
+    },
+    {
+     "start": 193.74,
+     "end": 194.14,
+     "word": " 38."
+    }
+   ]
+  },
+  {
+   "start": 195.22,
+   "end": 198.46,
+   "text": "Scripture calls Babylon the golden city, Isaiah 14, 4.",
+   "words": [
+    {
+     "start": 195.22,
+     "end": 195.24,
+     "word": " Scripture"
+    },
+    {
+     "start": 195.24,
+     "end": 195.64,
+     "word": " calls"
+    },
+    {
+     "start": 195.64,
+     "end": 196.1,
+     "word": " Babylon"
+    },
+    {
+     "start": 196.1,
+     "end": 196.46,
+     "word": " the"
+    },
+    {
+     "start": 196.46,
+     "end": 196.7,
+     "word": " golden"
+    },
+    {
+     "start": 196.7,
+     "end": 197.06,
+     "word": " city,"
+    },
+    {
+     "start": 197.54,
+     "end": 197.74,
+     "word": " Isaiah"
+    },
+    {
+     "start": 197.74,
+     "end": 198.1,
+     "word": " 14,"
+    },
+    {
+     "start": 198.26,
+     "end": 198.46,
+     "word": " 4."
+    }
+   ]
+  },
+  {
+   "start": 199.35,
+   "end": 203.76,
+   "text": "Chest and arms of silver, Medo-Persia, 539 to 331 BC.",
+   "words": [
+    {
+     "start": 199.35,
+     "end": 199.68,
+     "word": " Chest"
+    },
+    {
+     "start": 199.68,
+     "end": 199.92,
+     "word": " and"
+    },
+    {
+     "start": 199.92,
+     "end": 200.16,
+     "word": " arms"
+    },
+    {
+     "start": 200.16,
+     "end": 200.34,
+     "word": " of"
+    },
+    {
+     "start": 200.34,
+     "end": 200.68,
+     "word": " silver,"
+    },
+    {
+     "start": 201.12,
+     "end": 201.26,
+     "word": " Medo"
+    },
+    {
+     "start": 201.26,
+     "end": 201.64,
+     "word": "-Persia,"
+    },
+    {
+     "start": 202.0,
+     "end": 202.54,
+     "word": " 539"
+    },
+    {
+     "start": 202.54,
+     "end": 202.72,
+     "word": " to"
+    },
+    {
+     "start": 202.72,
+     "end": 203.24,
+     "word": " 331"
+    },
+    {
+     "start": 203.24,
+     "end": 203.76,
+     "word": " BC."
+    }
+   ]
+  },
+  {
+   "start": 205.1,
+   "end": 209.06,
+   "text": "Daniel announces that after thee shall arise another kingdom inferior to thee.",
+   "words": [
+    {
+     "start": 205.1,
+     "end": 205.1,
+     "word": " Daniel"
+    },
+    {
+     "start": 205.1,
+     "end": 205.5,
+     "word": " announces"
+    },
+    {
+     "start": 205.5,
+     "end": 205.9,
+     "word": " that"
+    },
+    {
+     "start": 205.9,
+     "end": 206.32,
+     "word": " after"
+    },
+    {
+     "start": 206.32,
+     "end": 206.58,
+     "word": " thee"
+    },
+    {
+     "start": 206.58,
+     "end": 206.82,
+     "word": " shall"
+    },
+    {
+     "start": 206.82,
+     "end": 207.12,
+     "word": " arise"
+    },
+    {
+     "start": 207.12,
+     "end": 207.52,
+     "word": " another"
+    },
+    {
+     "start": 207.52,
+     "end": 207.92,
+     "word": " kingdom"
+    },
+    {
+     "start": 207.92,
+     "end": 208.48,
+     "word": " inferior"
+    },
+    {
+     "start": 208.48,
+     "end": 208.84,
+     "word": " to"
+    },
+    {
+     "start": 208.84,
+     "end": 209.06,
+     "word": " thee."
+    }
+   ]
+  },
+  {
+   "start": 209.68,
+   "end": 210.54,
+   "text": "Daniel 2, 39.",
+   "words": [
+    {
+     "start": 209.68,
+     "end": 209.76,
+     "word": " Daniel"
+    },
+    {
+     "start": 209.76,
+     "end": 210.06,
+     "word": " 2,"
+    },
+    {
+     "start": 210.1,
+     "end": 210.54,
+     "word": " 39."
+    }
+   ]
+  },
+  {
+   "start": 211.54,
+   "end": 216.1,
+   "text": "Babylon fell to the dual Medo-Persian empire under Cyrus the Great in 539 BC.",
+   "words": [
+    {
+     "start": 211.54,
+     "end": 211.76,
+     "word": " Babylon"
+    },
+    {
+     "start": 211.76,
+     "end": 212.04,
+     "word": " fell"
+    },
+    {
+     "start": 212.04,
+     "end": 212.22,
+     "word": " to"
+    },
+    {
+     "start": 212.22,
+     "end": 212.34,
+     "word": " the"
+    },
+    {
+     "start": 212.34,
+     "end": 212.62,
+     "word": " dual"
+    },
+    {
+     "start": 212.62,
+     "end": 213.02,
+     "word": " Medo"
+    },
+    {
+     "start": 213.02,
+     "end": 213.42,
+     "word": "-Persian"
+    },
+    {
+     "start": 213.42,
+     "end": 213.74,
+     "word": " empire"
+    },
+    {
+     "start": 213.74,
+     "end": 214.16,
+     "word": " under"
+    },
+    {
+     "start": 214.16,
+     "end": 214.52,
+     "word": " Cyrus"
+    },
+    {
+     "start": 214.52,
+     "end": 214.7,
+     "word": " the"
+    },
+    {
+     "start": 214.7,
+     "end": 214.88,
+     "word": " Great"
+    },
+    {
+     "start": 214.88,
+     "end": 215.12,
+     "word": " in"
+    },
+    {
+     "start": 215.12,
+     "end": 215.76,
+     "word": " 539"
+    },
+    {
+     "start": 215.76,
+     "end": 216.1,
+     "word": " BC."
+    }
+   ]
+  },
+  {
+   "start": 217.0,
+   "end": 218.02,
+   "text": "Daniel 5, 30, 31.",
+   "words": [
+    {
+     "start": 217.0,
+     "end": 217.04,
+     "word": " Daniel"
+    },
+    {
+     "start": 217.04,
+     "end": 217.3,
+     "word": " 5,"
+    },
+    {
+     "start": 217.36,
+     "end": 217.64,
+     "word": " 30,"
+    },
+    {
+     "start": 217.66,
+     "end": 218.02,
+     "word": " 31."
+    }
+   ]
+  },
+  {
+   "start": 218.8,
+   "end": 223.72,
+   "text": "Scripture later explicitly identifies Medo-Persia as Babylon's successor, Daniel 8, 20.",
+   "words": [
+    {
+     "start": 218.8,
+     "end": 218.86,
+     "word": " Scripture"
+    },
+    {
+     "start": 218.86,
+     "end": 219.34,
+     "word": " later"
+    },
+    {
+     "start": 219.34,
+     "end": 219.88,
+     "word": " explicitly"
+    },
+    {
+     "start": 219.88,
+     "end": 220.6,
+     "word": " identifies"
+    },
+    {
+     "start": 220.6,
+     "end": 220.94,
+     "word": " Medo"
+    },
+    {
+     "start": 220.94,
+     "end": 221.26,
+     "word": "-Persia"
+    },
+    {
+     "start": 221.26,
+     "end": 221.46,
+     "word": " as"
+    },
+    {
+     "start": 221.46,
+     "end": 222.0,
+     "word": " Babylon's"
+    },
+    {
+     "start": 222.0,
+     "end": 222.3,
+     "word": " successor,"
+    },
+    {
+     "start": 222.98,
+     "end": 223.18,
+     "word": " Daniel"
+    },
+    {
+     "start": 223.18,
+     "end": 223.38,
+     "word": " 8,"
+    },
+    {
+     "start": 223.44,
+     "end": 223.72,
+     "word": " 20."
+    }
+   ]
+  },
+  {
+   "start": 225.05,
+   "end": 229.11,
+   "text": "Belly and thighs of bronze, Greece, 331 to 168 BC.",
+   "words": [
+    {
+     "start": 225.05,
+     "end": 225.19,
+     "word": " Belly"
+    },
+    {
+     "start": 225.19,
+     "end": 225.39,
+     "word": " and"
+    },
+    {
+     "start": 225.39,
+     "end": 225.59,
+     "word": " thighs"
+    },
+    {
+     "start": 225.59,
+     "end": 225.81,
+     "word": " of"
+    },
+    {
+     "start": 225.81,
+     "end": 226.09,
+     "word": " bronze,"
+    },
+    {
+     "start": 226.53,
+     "end": 226.83,
+     "word": " Greece,"
+    },
+    {
+     "start": 227.29,
+     "end": 227.73,
+     "word": " 331"
+    },
+    {
+     "start": 227.73,
+     "end": 228.19,
+     "word": " to"
+    },
+    {
+     "start": 228.19,
+     "end": 228.63,
+     "word": " 168"
+    },
+    {
+     "start": 228.63,
+     "end": 229.11,
+     "word": " BC."
+    }
+   ]
+  },
+  {
+   "start": 229.93,
+   "end": 233.75,
+   "text": "A third kingdom of brass which shall bear rule over all the earth followed.",
+   "words": [
+    {
+     "start": 229.93,
+     "end": 230.23,
+     "word": " A"
+    },
+    {
+     "start": 230.23,
+     "end": 230.57,
+     "word": " third"
+    },
+    {
+     "start": 230.57,
+     "end": 230.83,
+     "word": " kingdom"
+    },
+    {
+     "start": 230.83,
+     "end": 231.09,
+     "word": " of"
+    },
+    {
+     "start": 231.09,
+     "end": 231.33,
+     "word": " brass"
+    },
+    {
+     "start": 231.33,
+     "end": 231.65,
+     "word": " which"
+    },
+    {
+     "start": 231.65,
+     "end": 231.91,
+     "word": " shall"
+    },
+    {
+     "start": 231.91,
+     "end": 232.11,
+     "word": " bear"
+    },
+    {
+     "start": 232.11,
+     "end": 232.45,
+     "word": " rule"
+    },
+    {
+     "start": 232.45,
+     "end": 232.73,
+     "word": " over"
+    },
+    {
+     "start": 232.73,
+     "end": 232.97,
+     "word": " all"
+    },
+    {
+     "start": 232.97,
+     "end": 233.11,
+     "word": " the"
+    },
+    {
+     "start": 233.11,
+     "end": 233.29,
+     "word": " earth"
+    },
+    {
+     "start": 233.29,
+     "end": 233.75,
+     "word": " followed."
+    }
+   ]
+  },
+  {
+   "start": 234.93,
+   "end": 239.63,
+   "text": "Alexander the Great dismantled the Persian empire at Arbela, Gagamela, in 331 BC,",
+   "words": [
+    {
+     "start": 234.93,
+     "end": 234.93,
+     "word": " Alexander"
+    },
+    {
+     "start": 234.93,
+     "end": 235.17,
+     "word": " the"
+    },
+    {
+     "start": 235.17,
+     "end": 235.31,
+     "word": " Great"
+    },
+    {
+     "start": 235.31,
+     "end": 235.67,
+     "word": " dismantled"
+    },
+    {
+     "start": 235.67,
+     "end": 235.95,
+     "word": " the"
+    },
+    {
+     "start": 235.95,
+     "end": 236.23,
+     "word": " Persian"
+    },
+    {
+     "start": 236.23,
+     "end": 236.67,
+     "word": " empire"
+    },
+    {
+     "start": 236.67,
+     "end": 236.91,
+     "word": " at"
+    },
+    {
+     "start": 236.91,
+     "end": 237.45,
+     "word": " Arbela,"
+    },
+    {
+     "start": 237.85,
+     "end": 238.27,
+     "word": " Gagamela,"
+    },
+    {
+     "start": 238.47,
+     "end": 238.53,
+     "word": " in"
+    },
+    {
+     "start": 238.53,
+     "end": 239.05,
+     "word": " 331"
+    },
+    {
+     "start": 239.05,
+     "end": 239.63,
+     "word": " BC,"
+    }
+   ]
+  },
+  {
+   "start": 240.13,
+   "end": 244.13,
+   "text": "clothing his armies in bronze armor and spreading Greek language and culture throughout the ancient",
+   "words": [
+    {
+     "start": 240.13,
+     "end": 240.47,
+     "word": " clothing"
+    },
+    {
+     "start": 240.47,
+     "end": 240.69,
+     "word": " his"
+    },
+    {
+     "start": 240.69,
+     "end": 240.93,
+     "word": " armies"
+    },
+    {
+     "start": 240.93,
+     "end": 241.17,
+     "word": " in"
+    },
+    {
+     "start": 241.17,
+     "end": 241.45,
+     "word": " bronze"
+    },
+    {
+     "start": 241.45,
+     "end": 241.75,
+     "word": " armor"
+    },
+    {
+     "start": 241.75,
+     "end": 241.99,
+     "word": " and"
+    },
+    {
+     "start": 241.99,
+     "end": 242.29,
+     "word": " spreading"
+    },
+    {
+     "start": 242.29,
+     "end": 242.57,
+     "word": " Greek"
+    },
+    {
+     "start": 242.57,
+     "end": 242.93,
+     "word": " language"
+    },
+    {
+     "start": 242.93,
+     "end": 243.13,
+     "word": " and"
+    },
+    {
+     "start": 243.13,
+     "end": 243.45,
+     "word": " culture"
+    },
+    {
+     "start": 243.45,
+     "end": 243.79,
+     "word": " throughout"
+    },
+    {
+     "start": 243.79,
+     "end": 243.95,
+     "word": " the"
+    },
+    {
+     "start": 243.95,
+     "end": 244.13,
+     "word": " ancient"
+    }
+   ]
+  },
+  {
+   "start": 244.13,
+   "end": 250.23,
+   "text": "world. Scripture explicitly names Greece as the power that shatters Medo-Persia, Daniel 8, 21.",
+   "words": [
+    {
+     "start": 244.13,
+     "end": 244.51,
+     "word": " world."
+    },
+    {
+     "start": 245.49,
+     "end": 245.49,
+     "word": " Scripture"
+    },
+    {
+     "start": 245.49,
+     "end": 246.01,
+     "word": " explicitly"
+    },
+    {
+     "start": 246.01,
+     "end": 246.47,
+     "word": " names"
+    },
+    {
+     "start": 246.47,
+     "end": 246.77,
+     "word": " Greece"
+    },
+    {
+     "start": 246.77,
+     "end": 247.11,
+     "word": " as"
+    },
+    {
+     "start": 247.11,
+     "end": 247.27,
+     "word": " the"
+    },
+    {
+     "start": 247.27,
+     "end": 247.51,
+     "word": " power"
+    },
+    {
+     "start": 247.51,
+     "end": 247.75,
+     "word": " that"
+    },
+    {
+     "start": 247.75,
+     "end": 248.27,
+     "word": " shatters"
+    },
+    {
+     "start": 248.27,
+     "end": 248.67,
+     "word": " Medo"
+    },
+    {
+     "start": 248.67,
+     "end": 249.09,
+     "word": "-Persia,"
+    },
+    {
+     "start": 249.39,
+     "end": 249.57,
+     "word": " Daniel"
+    },
+    {
+     "start": 249.57,
+     "end": 249.81,
+     "word": " 8,"
+    },
+    {
+     "start": 249.89,
+     "end": 250.23,
+     "word": " 21."
+    }
+   ]
+  },
+  {
+   "start": 251.53,
+   "end": 255.93,
+   "text": "Legs of iron, Imperial Rome, 168 BC to AD 476.",
+   "words": [
+    {
+     "start": 251.53,
+     "end": 251.63,
+     "word": " Legs"
+    },
+    {
+     "start": 251.63,
+     "end": 251.83,
+     "word": " of"
+    },
+    {
+     "start": 251.83,
+     "end": 252.15,
+     "word": " iron,"
+    },
+    {
+     "start": 252.91,
+     "end": 252.91,
+     "word": " Imperial"
+    },
+    {
+     "start": 252.91,
+     "end": 253.35,
+     "word": " Rome,"
+    },
+    {
+     "start": 253.59,
+     "end": 254.07,
+     "word": " 168"
+    },
+    {
+     "start": 254.07,
+     "end": 254.55,
+     "word": " BC"
+    },
+    {
+     "start": 254.55,
+     "end": 254.91,
+     "word": " to"
+    },
+    {
+     "start": 254.91,
+     "end": 255.23,
+     "word": " AD"
+    },
+    {
+     "start": 255.23,
+     "end": 255.93,
+     "word": " 476."
+    }
+   ]
+  },
+  {
+   "start": 256.65,
+   "end": 258.77,
+   "text": "The fourth kingdom shall be strong as iron.",
+   "words": [
+    {
+     "start": 256.65,
+     "end": 256.95,
+     "word": " The"
+    },
+    {
+     "start": 256.95,
+     "end": 257.19,
+     "word": " fourth"
+    },
+    {
+     "start": 257.19,
+     "end": 257.55,
+     "word": " kingdom"
+    },
+    {
+     "start": 257.55,
+     "end": 257.81,
+     "word": " shall"
+    },
+    {
+     "start": 257.81,
+     "end": 257.95,
+     "word": " be"
+    },
+    {
+     "start": 257.95,
+     "end": 258.33,
+     "word": " strong"
+    },
+    {
+     "start": 258.33,
+     "end": 258.53,
+     "word": " as"
+    },
+    {
+     "start": 258.53,
+     "end": 258.77,
+     "word": " iron."
+    }
+   ]
+  },
+  {
+   "start": 259.23,
+   "end": 262.37,
+   "text": "For as much as iron breaketh in pieces and subdue with all things.",
+   "words": [
+    {
+     "start": 259.23,
+     "end": 259.35,
+     "word": " For"
+    },
+    {
+     "start": 259.35,
+     "end": 259.49,
+     "word": " as"
+    },
+    {
+     "start": 259.49,
+     "end": 259.61,
+     "word": " much"
+    },
+    {
+     "start": 259.61,
+     "end": 259.79,
+     "word": " as"
+    },
+    {
+     "start": 259.79,
+     "end": 260.13,
+     "word": " iron"
+    },
+    {
+     "start": 260.13,
+     "end": 260.57,
+     "word": " breaketh"
+    },
+    {
+     "start": 260.57,
+     "end": 260.73,
+     "word": " in"
+    },
+    {
+     "start": 260.73,
+     "end": 260.99,
+     "word": " pieces"
+    },
+    {
+     "start": 260.99,
+     "end": 261.31,
+     "word": " and"
+    },
+    {
+     "start": 261.31,
+     "end": 261.65,
+     "word": " subdue"
+    },
+    {
+     "start": 261.65,
+     "end": 261.77,
+     "word": " with"
+    },
+    {
+     "start": 261.77,
+     "end": 262.01,
+     "word": " all"
+    },
+    {
+     "start": 262.01,
+     "end": 262.37,
+     "word": " things."
+    }
+   ]
+  },
+  {
+   "start": 262.81,
+   "end": 263.61,
+   "text": "Daniel 2, 40.",
+   "words": [
+    {
+     "start": 262.81,
+     "end": 262.93,
+     "word": " Daniel"
+    },
+    {
+     "start": 262.93,
+     "end": 263.25,
+     "word": " 2,"
+    },
+    {
+     "start": 263.25,
+     "end": 263.61,
+     "word": " 40."
+    }
+   ]
+  },
+  {
+   "start": 264.59,
+   "end": 270.13,
+   "text": "Following the Battle of Padna in 168 BC, Rome emerged as the Mediterranean's supreme power,",
+   "words": [
+    {
+     "start": 264.59,
+     "end": 264.75,
+     "word": " Following"
+    },
+    {
+     "start": 264.75,
+     "end": 264.97,
+     "word": " the"
+    },
+    {
+     "start": 264.97,
+     "end": 265.15,
+     "word": " Battle"
+    },
+    {
+     "start": 265.15,
+     "end": 265.41,
+     "word": " of"
+    },
+    {
+     "start": 265.41,
+     "end": 265.71,
+     "word": " Padna"
+    },
+    {
+     "start": 265.71,
+     "end": 265.93,
+     "word": " in"
+    },
+    {
+     "start": 265.93,
+     "end": 266.53,
+     "word": " 168"
+    },
+    {
+     "start": 266.53,
+     "end": 267.03,
+     "word": " BC,"
+    },
+    {
+     "start": 267.79,
+     "end": 267.81,
+     "word": " Rome"
+    },
+    {
+     "start": 267.81,
+     "end": 268.21,
+     "word": " emerged"
+    },
+    {
+     "start": 268.21,
+     "end": 268.43,
+     "word": " as"
+    },
+    {
+     "start": 268.43,
+     "end": 268.57,
+     "word": " the"
+    },
+    {
+     "start": 268.57,
+     "end": 269.35,
+     "word": " Mediterranean's"
+    },
+    {
+     "start": 269.35,
+     "end": 269.65,
+     "word": " supreme"
+    },
+    {
+     "start": 269.65,
+     "end": 270.13,
+     "word": " power,"
+    }
+   ]
+  },
+  {
+   "start": 270.45,
+   "end": 275.17,
+   "text": "crushing opposition with military discipline, administrative cohesion, and iron weaponry.",
+   "words": [
+    {
+     "start": 270.45,
+     "end": 270.75,
+     "word": " crushing"
+    },
+    {
+     "start": 270.75,
+     "end": 271.21,
+     "word": " opposition"
+    },
+    {
+     "start": 271.21,
+     "end": 271.53,
+     "word": " with"
+    },
+    {
+     "start": 271.53,
+     "end": 271.91,
+     "word": " military"
+    },
+    {
+     "start": 271.91,
+     "end": 272.43,
+     "word": " discipline,"
+    },
+    {
+     "start": 272.93,
+     "end": 273.37,
+     "word": " administrative"
+    },
+    {
+     "start": 273.37,
+     "end": 273.99,
+     "word": " cohesion,"
+    },
+    {
+     "start": 274.29,
+     "end": 274.43,
+     "word": " and"
+    },
+    {
+     "start": 274.43,
+     "end": 274.85,
+     "word": " iron"
+    },
+    {
+     "start": 274.85,
+     "end": 275.17,
+     "word": " weaponry."
+    }
+   ]
+  },
+  {
+   "start": 276.03,
+   "end": 279.19,
+   "text": "Rome ruled for six centuries as a unified pagan empire.",
+   "words": [
+    {
+     "start": 276.03,
+     "end": 276.27,
+     "word": " Rome"
+    },
+    {
+     "start": 276.27,
+     "end": 276.55,
+     "word": " ruled"
+    },
+    {
+     "start": 276.55,
+     "end": 276.83,
+     "word": " for"
+    },
+    {
+     "start": 276.83,
+     "end": 277.07,
+     "word": " six"
+    },
+    {
+     "start": 277.07,
+     "end": 277.51,
+     "word": " centuries"
+    },
+    {
+     "start": 277.51,
+     "end": 277.81,
+     "word": " as"
+    },
+    {
+     "start": 277.81,
+     "end": 277.95,
+     "word": " a"
+    },
+    {
+     "start": 277.95,
+     "end": 278.37,
+     "word": " unified"
+    },
+    {
+     "start": 278.37,
+     "end": 278.75,
+     "word": " pagan"
+    },
+    {
+     "start": 278.75,
+     "end": 279.19,
+     "word": " empire."
+    }
+   ]
+  },
+  {
+   "start": 280.45,
+   "end": 282.53,
+   "text": "The physical and moral gradients of the Colossus.",
+   "words": [
+    {
+     "start": 280.45,
+     "end": 280.57,
+     "word": " The"
+    },
+    {
+     "start": 280.57,
+     "end": 280.85,
+     "word": " physical"
+    },
+    {
+     "start": 280.85,
+     "end": 281.13,
+     "word": " and"
+    },
+    {
+     "start": 281.13,
+     "end": 281.43,
+     "word": " moral"
+    },
+    {
+     "start": 281.43,
+     "end": 281.89,
+     "word": " gradients"
+    },
+    {
+     "start": 281.89,
+     "end": 282.03,
+     "word": " of"
+    },
+    {
+     "start": 282.03,
+     "end": 282.29,
+     "word": " the"
+    },
+    {
+     "start": 282.29,
+     "end": 282.53,
+     "word": " Colossus."
+    }
+   ]
+  },
+  {
+   "start": 283.37,
+   "end": 285.59,
+   "text": "The Colossus is characterized by a dual gradient.",
+   "words": [
+    {
+     "start": 283.37,
+     "end": 283.51,
+     "word": " The"
+    },
+    {
+     "start": 283.51,
+     "end": 283.79,
+     "word": " Colossus"
+    },
+    {
+     "start": 283.79,
+     "end": 284.07,
+     "word": " is"
+    },
+    {
+     "start": 284.07,
+     "end": 284.31,
+     "word": " characterized"
+    },
+    {
+     "start": 284.31,
+     "end": 284.83,
+     "word": " by"
+    },
+    {
+     "start": 284.83,
+     "end": 284.97,
+     "word": " a"
+    },
+    {
+     "start": 284.97,
+     "end": 285.13,
+     "word": " dual"
+    },
+    {
+     "start": 285.13,
+     "end": 285.59,
+     "word": " gradient."
+    }
+   ]
+  },
+  {
+   "start": 285.59,
+   "end": 287.83,
+   "text": "Specific gravity and value decline.",
+   "words": [
+    {
+     "start": 285.59,
+     "end": 286.43,
+     "word": " Specific"
+    },
+    {
+     "start": 286.43,
+     "end": 286.97,
+     "word": " gravity"
+    },
+    {
+     "start": 286.97,
+     "end": 287.19,
+     "word": " and"
+    },
+    {
+     "start": 287.19,
+     "end": 287.49,
+     "word": " value"
+    },
+    {
+     "start": 287.49,
+     "end": 287.83,
+     "word": " decline."
+    }
+   ]
+  },
+  {
+   "start": 288.53,
+   "end": 294.99,
+   "text": "Gold has a specific gravity of 19.3 times the weight of water, silver 10.5, bronze 8.9,",
+   "words": [
+    {
+     "start": 288.53,
+     "end": 288.53,
+     "word": " Gold"
+    },
+    {
+     "start": 288.53,
+     "end": 288.73,
+     "word": " has"
+    },
+    {
+     "start": 288.73,
+     "end": 288.89,
+     "word": " a"
+    },
+    {
+     "start": 288.89,
+     "end": 289.13,
+     "word": " specific"
+    },
+    {
+     "start": 289.13,
+     "end": 289.55,
+     "word": " gravity"
+    },
+    {
+     "start": 289.55,
+     "end": 289.75,
+     "word": " of"
+    },
+    {
+     "start": 289.75,
+     "end": 290.15,
+     "word": " 19"
+    },
+    {
+     "start": 290.15,
+     "end": 290.69,
+     "word": ".3"
+    },
+    {
+     "start": 290.69,
+     "end": 291.19,
+     "word": " times"
+    },
+    {
+     "start": 291.19,
+     "end": 291.33,
+     "word": " the"
+    },
+    {
+     "start": 291.33,
+     "end": 291.43,
+     "word": " weight"
+    },
+    {
+     "start": 291.43,
+     "end": 291.55,
+     "word": " of"
+    },
+    {
+     "start": 291.55,
+     "end": 291.87,
+     "word": " water,"
+    },
+    {
+     "start": 292.45,
+     "end": 292.67,
+     "word": " silver"
+    },
+    {
+     "start": 292.67,
+     "end": 292.93,
+     "word": " 10"
+    },
+    {
+     "start": 292.93,
+     "end": 293.57,
+     "word": ".5,"
+    },
+    {
+     "start": 293.95,
+     "end": 294.11,
+     "word": " bronze"
+    },
+    {
+     "start": 294.11,
+     "end": 294.39,
+     "word": " 8"
+    },
+    {
+     "start": 294.39,
+     "end": 294.99,
+     "word": ".9,"
+    }
+   ]
+  },
+  {
+   "start": 295.31,
+   "end": 296.71,
+   "text": "and iron 7.8.",
+   "words": [
+    {
+     "start": 295.31,
+     "end": 295.51,
+     "word": " and"
+    },
+    {
+     "start": 295.51,
+     "end": 295.83,
+     "word": " iron"
+    },
+    {
+     "start": 295.83,
+     "end": 296.09,
+     "word": " 7"
+    },
+    {
+     "start": 296.09,
+     "end": 296.71,
+     "word": ".8."
+    }
+   ]
+  },
+  {
+   "start": 297.59,
+   "end": 299.77,
+   "text": "Value and density decline steadily from head to feet,",
+   "words": [
+    {
+     "start": 297.59,
+     "end": 297.59,
+     "word": " Value"
+    },
+    {
+     "start": 297.59,
+     "end": 297.79,
+     "word": " and"
+    },
+    {
+     "start": 297.79,
+     "end": 298.13,
+     "word": " density"
+    },
+    {
+     "start": 298.13,
+     "end": 298.47,
+     "word": " decline"
+    },
+    {
+     "start": 298.47,
+     "end": 298.91,
+     "word": " steadily"
+    },
+    {
+     "start": 298.91,
+     "end": 299.21,
+     "word": " from"
+    },
+    {
+     "start": 299.21,
+     "end": 299.39,
+     "word": " head"
+    },
+    {
+     "start": 299.39,
+     "end": 299.51,
+     "word": " to"
+    },
+    {
+     "start": 299.51,
+     "end": 299.77,
+     "word": " feet,"
+    }
+   ]
+  },
+  {
+   "start": 300.23,
+   "end": 303.81,
+   "text": "reflecting a progressive loss of monarchical unity and moral majesty.",
+   "words": [
+    {
+     "start": 300.23,
+     "end": 300.51,
+     "word": " reflecting"
+    },
+    {
+     "start": 300.51,
+     "end": 300.75,
+     "word": " a"
+    },
+    {
+     "start": 300.75,
+     "end": 301.07,
+     "word": " progressive"
+    },
+    {
+     "start": 301.07,
+     "end": 301.45,
+     "word": " loss"
+    },
+    {
+     "start": 301.45,
+     "end": 301.65,
+     "word": " of"
+    },
+    {
+     "start": 301.65,
+     "end": 302.21,
+     "word": " monarchical"
+    },
+    {
+     "start": 302.21,
+     "end": 302.57,
+     "word": " unity"
+    },
+    {
+     "start": 302.57,
+     "end": 303.03,
+     "word": " and"
+    },
+    {
+     "start": 303.03,
+     "end": 303.35,
+     "word": " moral"
+    },
+    {
+     "start": 303.35,
+     "end": 303.81,
+     "word": " majesty."
+    }
+   ]
+  },
+  {
+   "start": 305.11,
+   "end": 306.73,
+   "text": "Hardness and crushing force increase.",
+   "words": [
+    {
+     "start": 305.11,
+     "end": 305.39,
+     "word": " Hardness"
+    },
+    {
+     "start": 305.39,
+     "end": 305.59,
+     "word": " and"
+    },
+    {
+     "start": 305.59,
+     "end": 305.89,
+     "word": " crushing"
+    },
+    {
+     "start": 305.89,
+     "end": 306.25,
+     "word": " force"
+    },
+    {
+     "start": 306.25,
+     "end": 306.73,
+     "word": " increase."
+    }
+   ]
+  },
+  {
+   "start": 307.57,
+   "end": 312.05,
+   "text": "While gold and silver are malleable and soft, iron possesses brutal crushing force.",
+   "words": [
+    {
+     "start": 307.57,
+     "end": 307.75,
+     "word": " While"
+    },
+    {
+     "start": 307.75,
+     "end": 307.99,
+     "word": " gold"
+    },
+    {
+     "start": 307.99,
+     "end": 308.17,
+     "word": " and"
+    },
+    {
+     "start": 308.17,
+     "end": 308.45,
+     "word": " silver"
+    },
+    {
+     "start": 308.45,
+     "end": 308.65,
+     "word": " are"
+    },
+    {
+     "start": 308.65,
+     "end": 309.09,
+     "word": " malleable"
+    },
+    {
+     "start": 309.09,
+     "end": 309.27,
+     "word": " and"
+    },
+    {
+     "start": 309.27,
+     "end": 309.61,
+     "word": " soft,"
+    },
+    {
+     "start": 310.19,
+     "end": 310.37,
+     "word": " iron"
+    },
+    {
+     "start": 310.37,
+     "end": 310.73,
+     "word": " possesses"
+    },
+    {
+     "start": 310.73,
+     "end": 311.23,
+     "word": " brutal"
+    },
+    {
+     "start": 311.23,
+     "end": 311.67,
+     "word": " crushing"
+    },
+    {
+     "start": 311.67,
+     "end": 312.05,
+     "word": " force."
+    }
+   ]
+  },
+  {
+   "start": 312.05,
+   "end": 315.99,
+   "text": "Imperial Rome was far less culturally refined than Babylon or Greece,",
+   "words": [
+    {
+     "start": 312.05,
+     "end": 312.91,
+     "word": " Imperial"
+    },
+    {
+     "start": 312.91,
+     "end": 313.33,
+     "word": " Rome"
+    },
+    {
+     "start": 313.33,
+     "end": 313.49,
+     "word": " was"
+    },
+    {
+     "start": 313.49,
+     "end": 313.75,
+     "word": " far"
+    },
+    {
+     "start": 313.75,
+     "end": 313.97,
+     "word": " less"
+    },
+    {
+     "start": 313.97,
+     "end": 314.43,
+     "word": " culturally"
+    },
+    {
+     "start": 314.43,
+     "end": 314.95,
+     "word": " refined"
+    },
+    {
+     "start": 314.95,
+     "end": 315.25,
+     "word": " than"
+    },
+    {
+     "start": 315.25,
+     "end": 315.57,
+     "word": " Babylon"
+    },
+    {
+     "start": 315.57,
+     "end": 315.79,
+     "word": " or"
+    },
+    {
+     "start": 315.79,
+     "end": 315.99,
+     "word": " Greece,"
+    }
+   ]
+  },
+  {
+   "start": 316.63,
+   "end": 319.09,
+   "text": "but it possessed unrivaled military destructiveness.",
+   "words": [
+    {
+     "start": 316.63,
+     "end": 316.65,
+     "word": " but"
+    },
+    {
+     "start": 316.65,
+     "end": 316.79,
+     "word": " it"
+    },
+    {
+     "start": 316.79,
+     "end": 317.07,
+     "word": " possessed"
+    },
+    {
+     "start": 317.07,
+     "end": 317.93,
+     "word": " unrivaled"
+    },
+    {
+     "start": 317.93,
+     "end": 318.27,
+     "word": " military"
+    },
+    {
+     "start": 318.27,
+     "end": 319.09,
+     "word": " destructiveness."
+    }
+   ]
+  },
+  {
+   "start": 320.67,
+   "end": 321.19,
+   "text": "Interpretation.",
+   "words": [
+    {
+     "start": 320.67,
+     "end": 321.19,
+     "word": " Interpretation."
+    }
+   ]
+  },
+  {
+   "start": 321.55,
+   "end": 323.29,
+   "text": "Only the head is named in Daniel 2, 38.",
+   "words": [
+    {
+     "start": 321.55,
+     "end": 321.55,
+     "word": " Only"
+    },
+    {
+     "start": 321.55,
+     "end": 321.75,
+     "word": " the"
+    },
+    {
+     "start": 321.75,
+     "end": 321.91,
+     "word": " head"
+    },
+    {
+     "start": 321.91,
+     "end": 322.03,
+     "word": " is"
+    },
+    {
+     "start": 322.03,
+     "end": 322.23,
+     "word": " named"
+    },
+    {
+     "start": 322.23,
+     "end": 322.39,
+     "word": " in"
+    },
+    {
+     "start": 322.39,
+     "end": 322.67,
+     "word": " Daniel"
+    },
+    {
+     "start": 322.67,
+     "end": 322.91,
+     "word": " 2,"
+    },
+    {
+     "start": 322.99,
+     "end": 323.29,
+     "word": " 38."
+    }
+   ]
+  },
+  {
+   "start": 323.87,
+   "end": 326.47,
+   "text": "Each later medal follows after thee in succession,",
+   "words": [
+    {
+     "start": 323.87,
+     "end": 323.99,
+     "word": " Each"
+    },
+    {
+     "start": 323.99,
+     "end": 324.33,
+     "word": " later"
+    },
+    {
+     "start": 324.33,
+     "end": 324.55,
+     "word": " medal"
+    },
+    {
+     "start": 324.55,
+     "end": 324.97,
+     "word": " follows"
+    },
+    {
+     "start": 324.97,
+     "end": 325.49,
+     "word": " after"
+    },
+    {
+     "start": 325.49,
+     "end": 325.75,
+     "word": " thee"
+    },
+    {
+     "start": 325.75,
+     "end": 326.07,
+     "word": " in"
+    },
+    {
+     "start": 326.07,
+     "end": 326.47,
+     "word": " succession,"
+    }
+   ]
+  },
+  {
+   "start": 327.03,
+   "end": 329.47,
+   "text": "confirmed when Daniel 8 names Medo-Persia in Greece.",
+   "words": [
+    {
+     "start": 327.03,
+     "end": 327.29,
+     "word": " confirmed"
+    },
+    {
+     "start": 327.29,
+     "end": 327.53,
+     "word": " when"
+    },
+    {
+     "start": 327.53,
+     "end": 327.83,
+     "word": " Daniel"
+    },
+    {
+     "start": 327.83,
+     "end": 328.09,
+     "word": " 8"
+    },
+    {
+     "start": 328.09,
+     "end": 328.43,
+     "word": " names"
+    },
+    {
+     "start": 328.43,
+     "end": 328.71,
+     "word": " Medo"
+    },
+    {
+     "start": 328.71,
+     "end": 329.07,
+     "word": "-Persia"
+    },
+    {
+     "start": 329.07,
+     "end": 329.19,
+     "word": " in"
+    },
+    {
+     "start": 329.19,
+     "end": 329.47,
+     "word": " Greece."
+    }
+   ]
+  },
+  {
+   "start": 330.29,
+   "end": 332.21,
+   "text": "You start at the named head and walk the chain.",
+   "words": [
+    {
+     "start": 330.29,
+     "end": 330.29,
+     "word": " You"
+    },
+    {
+     "start": 330.29,
+     "end": 330.59,
+     "word": " start"
+    },
+    {
+     "start": 330.59,
+     "end": 330.77,
+     "word": " at"
+    },
+    {
+     "start": 330.77,
+     "end": 330.87,
+     "word": " the"
+    },
+    {
+     "start": 330.87,
+     "end": 331.03,
+     "word": " named"
+    },
+    {
+     "start": 331.03,
+     "end": 331.29,
+     "word": " head"
+    },
+    {
+     "start": 331.29,
+     "end": 331.59,
+     "word": " and"
+    },
+    {
+     "start": 331.59,
+     "end": 331.79,
+     "word": " walk"
+    },
+    {
+     "start": 331.79,
+     "end": 331.99,
+     "word": " the"
+    },
+    {
+     "start": 331.99,
+     "end": 332.21,
+     "word": " chain."
+    }
+   ]
+  },
+  {
+   "start": 332.61,
+   "end": 334.39,
+   "text": "You do not restart it in a modern century.",
+   "words": [
+    {
+     "start": 332.61,
+     "end": 332.67,
+     "word": " You"
+    },
+    {
+     "start": 332.67,
+     "end": 332.79,
+     "word": " do"
+    },
+    {
+     "start": 332.79,
+     "end": 332.95,
+     "word": " not"
+    },
+    {
+     "start": 332.95,
+     "end": 333.33,
+     "word": " restart"
+    },
+    {
+     "start": 333.33,
+     "end": 333.55,
+     "word": " it"
+    },
+    {
+     "start": 333.55,
+     "end": 333.67,
+     "word": " in"
+    },
+    {
+     "start": 333.67,
+     "end": 333.79,
+     "word": " a"
+    },
+    {
+     "start": 333.79,
+     "end": 333.93,
+     "word": " modern"
+    },
+    {
+     "start": 333.93,
+     "end": 334.39,
+     "word": " century."
+    }
+   ]
+  },
+  {
+   "start": 335.46,
+   "end": 336.06,
+   "text": "Main point two.",
+   "words": [
+    {
+     "start": 335.46,
+     "end": 335.58,
+     "word": " Main"
+    },
+    {
+     "start": 335.58,
+     "end": 335.78,
+     "word": " point"
+    },
+    {
+     "start": 335.78,
+     "end": 336.06,
+     "word": " two."
+    }
+   ]
+  },
+  {
+   "start": 336.78,
+   "end": 338.74,
+   "text": "The divided kingdoms and the mirage of unity.",
+   "words": [
+    {
+     "start": 336.78,
+     "end": 336.88,
+     "word": " The"
+    },
+    {
+     "start": 336.88,
+     "end": 337.2,
+     "word": " divided"
+    },
+    {
+     "start": 337.2,
+     "end": 337.56,
+     "word": " kingdoms"
+    },
+    {
+     "start": 337.56,
+     "end": 337.88,
+     "word": " and"
+    },
+    {
+     "start": 337.88,
+     "end": 337.98,
+     "word": " the"
+    },
+    {
+     "start": 337.98,
+     "end": 338.34,
+     "word": " mirage"
+    },
+    {
+     "start": 338.34,
+     "end": 338.48,
+     "word": " of"
+    },
+    {
+     "start": 338.48,
+     "end": 338.74,
+     "word": " unity."
+    }
+   ]
+  },
+  {
+   "start": 339.74,
+   "end": 341.56,
+   "text": "The statue does not feature a fifth medal.",
+   "words": [
+    {
+     "start": 339.74,
+     "end": 340.0,
+     "word": " The"
+    },
+    {
+     "start": 340.0,
+     "end": 340.28,
+     "word": " statue"
+    },
+    {
+     "start": 340.28,
+     "end": 340.44,
+     "word": " does"
+    },
+    {
+     "start": 340.44,
+     "end": 340.62,
+     "word": " not"
+    },
+    {
+     "start": 340.62,
+     "end": 340.84,
+     "word": " feature"
+    },
+    {
+     "start": 340.84,
+     "end": 341.06,
+     "word": " a"
+    },
+    {
+     "start": 341.06,
+     "end": 341.26,
+     "word": " fifth"
+    },
+    {
+     "start": 341.26,
+     "end": 341.56,
+     "word": " medal."
+    }
+   ]
+  },
+  {
+   "start": 341.56,
+   "end": 346.22,
+   "text": "The legs of iron transition directly into feet composed of iron mixed with miry clay.",
+   "words": [
+    {
+     "start": 341.56,
+     "end": 342.28,
+     "word": " The"
+    },
+    {
+     "start": 342.28,
+     "end": 342.46,
+     "word": " legs"
+    },
+    {
+     "start": 342.46,
+     "end": 342.62,
+     "word": " of"
+    },
+    {
+     "start": 342.62,
+     "end": 342.86,
+     "word": " iron"
+    },
+    {
+     "start": 342.86,
+     "end": 343.24,
+     "word": " transition"
+    },
+    {
+     "start": 343.24,
+     "end": 343.62,
+     "word": " directly"
+    },
+    {
+     "start": 343.62,
+     "end": 344.0,
+     "word": " into"
+    },
+    {
+     "start": 344.0,
+     "end": 344.32,
+     "word": " feet"
+    },
+    {
+     "start": 344.32,
+     "end": 344.7,
+     "word": " composed"
+    },
+    {
+     "start": 344.7,
+     "end": 344.96,
+     "word": " of"
+    },
+    {
+     "start": 344.96,
+     "end": 345.22,
+     "word": " iron"
+    },
+    {
+     "start": 345.22,
+     "end": 345.48,
+     "word": " mixed"
+    },
+    {
+     "start": 345.48,
+     "end": 345.7,
+     "word": " with"
+    },
+    {
+     "start": 345.7,
+     "end": 346.02,
+     "word": " miry"
+    },
+    {
+     "start": 346.02,
+     "end": 346.22,
+     "word": " clay."
+    }
+   ]
+  },
+  {
+   "start": 346.64,
+   "end": 348.26,
+   "text": "Daniel 2, 41 to 43.",
+   "words": [
+    {
+     "start": 346.64,
+     "end": 346.96,
+     "word": " Daniel"
+    },
+    {
+     "start": 346.96,
+     "end": 347.24,
+     "word": " 2,"
+    },
+    {
+     "start": 347.26,
+     "end": 347.68,
+     "word": " 41"
+    },
+    {
+     "start": 347.68,
+     "end": 347.82,
+     "word": " to"
+    },
+    {
+     "start": 347.82,
+     "end": 348.26,
+     "word": " 43."
+    }
+   ]
+  },
+  {
+   "start": 349.16,
+   "end": 353.54,
+   "text": "This signifies that the fourth world empire would not be conquered by a fifth global empire.",
+   "words": [
+    {
+     "start": 349.16,
+     "end": 349.28,
+     "word": " This"
+    },
+    {
+     "start": 349.28,
+     "end": 349.68,
+     "word": " signifies"
+    },
+    {
+     "start": 349.68,
+     "end": 349.96,
+     "word": " that"
+    },
+    {
+     "start": 349.96,
+     "end": 350.1,
+     "word": " the"
+    },
+    {
+     "start": 350.1,
+     "end": 350.3,
+     "word": " fourth"
+    },
+    {
+     "start": 350.3,
+     "end": 350.6,
+     "word": " world"
+    },
+    {
+     "start": 350.6,
+     "end": 351.02,
+     "word": " empire"
+    },
+    {
+     "start": 351.02,
+     "end": 351.3,
+     "word": " would"
+    },
+    {
+     "start": 351.3,
+     "end": 351.46,
+     "word": " not"
+    },
+    {
+     "start": 351.46,
+     "end": 351.64,
+     "word": " be"
+    },
+    {
+     "start": 351.64,
+     "end": 352.02,
+     "word": " conquered"
+    },
+    {
+     "start": 352.02,
+     "end": 352.28,
+     "word": " by"
+    },
+    {
+     "start": 352.28,
+     "end": 352.44,
+     "word": " a"
+    },
+    {
+     "start": 352.44,
+     "end": 352.64,
+     "word": " fifth"
+    },
+    {
+     "start": 352.64,
+     "end": 353.02,
+     "word": " global"
+    },
+    {
+     "start": 353.02,
+     "end": 353.54,
+     "word": " empire."
+    }
+   ]
+  },
+  {
+   "start": 354.06,
+   "end": 355.56,
+   "text": "Instead, it would fragment from within.",
+   "words": [
+    {
+     "start": 354.06,
+     "end": 354.34,
+     "word": " Instead,"
+    },
+    {
+     "start": 354.42,
+     "end": 354.52,
+     "word": " it"
+    },
+    {
+     "start": 354.52,
+     "end": 354.64,
+     "word": " would"
+    },
+    {
+     "start": 354.64,
+     "end": 354.98,
+     "word": " fragment"
+    },
+    {
+     "start": 354.98,
+     "end": 355.26,
+     "word": " from"
+    },
+    {
+     "start": 355.26,
+     "end": 355.56,
+     "word": " within."
+    }
+   ]
+  },
+  {
+   "start": 356.58,
+   "end": 361.06,
+   "text": "When the Western Roman Empire fractured under Germanic incursions in AD 476,",
+   "words": [
+    {
+     "start": 356.58,
+     "end": 356.66,
+     "word": " When"
+    },
+    {
+     "start": 356.66,
+     "end": 356.78,
+     "word": " the"
+    },
+    {
+     "start": 356.78,
+     "end": 357.1,
+     "word": " Western"
+    },
+    {
+     "start": 357.1,
+     "end": 357.36,
+     "word": " Roman"
+    },
+    {
+     "start": 357.36,
+     "end": 357.78,
+     "word": " Empire"
+    },
+    {
+     "start": 357.78,
+     "end": 358.26,
+     "word": " fractured"
+    },
+    {
+     "start": 358.26,
+     "end": 358.62,
+     "word": " under"
+    },
+    {
+     "start": 358.62,
+     "end": 359.16,
+     "word": " Germanic"
+    },
+    {
+     "start": 359.16,
+     "end": 359.64,
+     "word": " incursions"
+    },
+    {
+     "start": 359.64,
+     "end": 359.96,
+     "word": " in"
+    },
+    {
+     "start": 359.96,
+     "end": 360.3,
+     "word": " AD"
+    },
+    {
+     "start": 360.3,
+     "end": 361.06,
+     "word": " 476,"
+    }
+   ]
+  },
+  {
+   "start": 361.62,
+   "end": 365.28,
+   "text": "it divided into separate kingdoms that became the foundation of modern Europe.",
+   "words": [
+    {
+     "start": 361.62,
+     "end": 361.76,
+     "word": " it"
+    },
+    {
+     "start": 361.76,
+     "end": 362.08,
+     "word": " divided"
+    },
+    {
+     "start": 362.08,
+     "end": 362.42,
+     "word": " into"
+    },
+    {
+     "start": 362.42,
+     "end": 362.88,
+     "word": " separate"
+    },
+    {
+     "start": 362.88,
+     "end": 363.28,
+     "word": " kingdoms"
+    },
+    {
+     "start": 363.28,
+     "end": 363.54,
+     "word": " that"
+    },
+    {
+     "start": 363.54,
+     "end": 363.8,
+     "word": " became"
+    },
+    {
+     "start": 363.8,
+     "end": 363.96,
+     "word": " the"
+    },
+    {
+     "start": 363.96,
+     "end": 364.36,
+     "word": " foundation"
+    },
+    {
+     "start": 364.36,
+     "end": 364.7,
+     "word": " of"
+    },
+    {
+     "start": 364.7,
+     "end": 364.94,
+     "word": " modern"
+    },
+    {
+     "start": 364.94,
+     "end": 365.28,
+     "word": " Europe."
+    }
+   ]
+  },
+  {
+   "start": 366.52,
+   "end": 366.98,
+   "text": "Iron and clay.",
+   "words": [
+    {
+     "start": 366.52,
+     "end": 366.52,
+     "word": " Iron"
+    },
+    {
+     "start": 366.52,
+     "end": 366.74,
+     "word": " and"
+    },
+    {
+     "start": 366.74,
+     "end": 366.98,
+     "word": " clay."
+    }
+   ]
+  },
+  {
+   "start": 367.44,
+   "end": 368.24,
+   "text": "What scripture means?",
+   "words": [
+    {
+     "start": 367.44,
+     "end": 367.64,
+     "word": " What"
+    },
+    {
+     "start": 367.64,
+     "end": 367.9,
+     "word": " scripture"
+    },
+    {
+     "start": 367.9,
+     "end": 368.24,
+     "word": " means?"
+    }
+   ]
+  },
+  {
+   "start": 369.0,
+   "end": 374.44,
+   "text": "Clay in scripture, clay consistently symbolizes God's covenant or religious people in the hands",
+   "words": [
+    {
+     "start": 369.0,
+     "end": 369.38,
+     "word": " Clay"
+    },
+    {
+     "start": 369.38,
+     "end": 369.58,
+     "word": " in"
+    },
+    {
+     "start": 369.58,
+     "end": 369.9,
+     "word": " scripture,"
+    },
+    {
+     "start": 370.3,
+     "end": 370.48,
+     "word": " clay"
+    },
+    {
+     "start": 370.48,
+     "end": 371.08,
+     "word": " consistently"
+    },
+    {
+     "start": 371.08,
+     "end": 371.78,
+     "word": " symbolizes"
+    },
+    {
+     "start": 371.78,
+     "end": 372.74,
+     "word": " God's"
+    },
+    {
+     "start": 372.74,
+     "end": 372.74,
+     "word": " covenant"
+    },
+    {
+     "start": 372.74,
+     "end": 373.1,
+     "word": " or"
+    },
+    {
+     "start": 373.1,
+     "end": 373.48,
+     "word": " religious"
+    },
+    {
+     "start": 373.48,
+     "end": 373.82,
+     "word": " people"
+    },
+    {
+     "start": 373.82,
+     "end": 374.08,
+     "word": " in"
+    },
+    {
+     "start": 374.08,
+     "end": 374.2,
+     "word": " the"
+    },
+    {
+     "start": 374.2,
+     "end": 374.44,
+     "word": " hands"
+    }
+   ]
+  },
+  {
+   "start": 374.44,
+   "end": 378.42,
+   "text": "of the divine potter, Isaiah 64, 8, Jeremiah 18, 6.",
+   "words": [
+    {
+     "start": 374.44,
+     "end": 374.64,
+     "word": " of"
+    },
+    {
+     "start": 374.64,
+     "end": 374.78,
+     "word": " the"
+    },
+    {
+     "start": 374.78,
+     "end": 375.06,
+     "word": " divine"
+    },
+    {
+     "start": 375.06,
+     "end": 375.62,
+     "word": " potter,"
+    },
+    {
+     "start": 376.08,
+     "end": 376.2,
+     "word": " Isaiah"
+    },
+    {
+     "start": 376.2,
+     "end": 376.62,
+     "word": " 64,"
+    },
+    {
+     "start": 376.84,
+     "end": 377.02,
+     "word": " 8,"
+    },
+    {
+     "start": 377.22,
+     "end": 377.48,
+     "word": " Jeremiah"
+    },
+    {
+     "start": 377.48,
+     "end": 377.92,
+     "word": " 18,"
+    },
+    {
+     "start": 377.96,
+     "end": 378.42,
+     "word": " 6."
+    }
+   ]
+  },
+  {
+   "start": 378.84,
+   "end": 382.46,
+   "text": "While iron represents secular, coercive, civil statecraft,",
+   "words": [
+    {
+     "start": 378.84,
+     "end": 379.12,
+     "word": " While"
+    },
+    {
+     "start": 379.12,
+     "end": 379.62,
+     "word": " iron"
+    },
+    {
+     "start": 379.62,
+     "end": 380.12,
+     "word": " represents"
+    },
+    {
+     "start": 380.12,
+     "end": 380.76,
+     "word": " secular,"
+    },
+    {
+     "start": 380.8,
+     "end": 381.38,
+     "word": " coercive,"
+    },
+    {
+     "start": 381.62,
+     "end": 381.86,
+     "word": " civil"
+    },
+    {
+     "start": 381.86,
+     "end": 382.46,
+     "word": " statecraft,"
+    }
+   ]
+  },
+  {
+   "start": 383.22,
+   "end": 384.96,
+   "text": "clay represents religious authority.",
+   "words": [
+    {
+     "start": 383.22,
+     "end": 383.34,
+     "word": " clay"
+    },
+    {
+     "start": 383.34,
+     "end": 383.98,
+     "word": " represents"
+    },
+    {
+     "start": 383.98,
+     "end": 384.44,
+     "word": " religious"
+    },
+    {
+     "start": 384.44,
+     "end": 384.96,
+     "word": " authority."
+    }
+   ]
+  },
+  {
+   "start": 385.92,
+   "end": 387.18,
+   "text": "The church-state fusion.",
+   "words": [
+    {
+     "start": 385.92,
+     "end": 386.0,
+     "word": " The"
+    },
+    {
+     "start": 386.0,
+     "end": 386.3,
+     "word": " church"
+    },
+    {
+     "start": 386.3,
+     "end": 386.7,
+     "word": "-state"
+    },
+    {
+     "start": 386.7,
+     "end": 387.18,
+     "word": " fusion."
+    }
+   ]
+  },
+  {
+   "start": 387.94,
+   "end": 392.2,
+   "text": "Beginning with Emperor Constantine and solidifying in the medieval Holy Roman Empire,",
+   "words": [
+    {
+     "start": 387.94,
+     "end": 388.12,
+     "word": " Beginning"
+    },
+    {
+     "start": 388.12,
+     "end": 388.38,
+     "word": " with"
+    },
+    {
+     "start": 388.38,
+     "end": 388.72,
+     "word": " Emperor"
+    },
+    {
+     "start": 388.72,
+     "end": 389.28,
+     "word": " Constantine"
+    },
+    {
+     "start": 389.28,
+     "end": 389.72,
+     "word": " and"
+    },
+    {
+     "start": 389.72,
+     "end": 390.34,
+     "word": " solidifying"
+    },
+    {
+     "start": 390.34,
+     "end": 390.6,
+     "word": " in"
+    },
+    {
+     "start": 390.6,
+     "end": 390.76,
+     "word": " the"
+    },
+    {
+     "start": 390.76,
+     "end": 391.08,
+     "word": " medieval"
+    },
+    {
+     "start": 391.08,
+     "end": 391.52,
+     "word": " Holy"
+    },
+    {
+     "start": 391.52,
+     "end": 391.8,
+     "word": " Roman"
+    },
+    {
+     "start": 391.8,
+     "end": 392.2,
+     "word": " Empire,"
+    }
+   ]
+  },
+  {
+   "start": 392.88,
+   "end": 397.32,
+   "text": "civil power, iron, was fused with ecclesiastical authority, clay.",
+   "words": [
+    {
+     "start": 392.88,
+     "end": 393.02,
+     "word": " civil"
+    },
+    {
+     "start": 393.02,
+     "end": 393.48,
+     "word": " power,"
+    },
+    {
+     "start": 393.88,
+     "end": 394.14,
+     "word": " iron,"
+    },
+    {
+     "start": 394.36,
+     "end": 394.52,
+     "word": " was"
+    },
+    {
+     "start": 394.52,
+     "end": 394.98,
+     "word": " fused"
+    },
+    {
+     "start": 394.98,
+     "end": 395.3,
+     "word": " with"
+    },
+    {
+     "start": 395.3,
+     "end": 396.04,
+     "word": " ecclesiastical"
+    },
+    {
+     "start": 396.04,
+     "end": 396.62,
+     "word": " authority,"
+    },
+    {
+     "start": 397.08,
+     "end": 397.32,
+     "word": " clay."
+    }
+   ]
+  },
+  {
+   "start": 397.96,
+   "end": 402.76,
+   "text": "Civil swords enforced religious dogmas and religious decrees directed civil armies.",
+   "words": [
+    {
+     "start": 397.96,
+     "end": 398.3,
+     "word": " Civil"
+    },
+    {
+     "start": 398.3,
+     "end": 398.76,
+     "word": " swords"
+    },
+    {
+     "start": 398.76,
+     "end": 399.24,
+     "word": " enforced"
+    },
+    {
+     "start": 399.24,
+     "end": 399.62,
+     "word": " religious"
+    },
+    {
+     "start": 399.62,
+     "end": 400.24,
+     "word": " dogmas"
+    },
+    {
+     "start": 400.24,
+     "end": 400.6,
+     "word": " and"
+    },
+    {
+     "start": 400.6,
+     "end": 400.96,
+     "word": " religious"
+    },
+    {
+     "start": 400.96,
+     "end": 401.58,
+     "word": " decrees"
+    },
+    {
+     "start": 401.58,
+     "end": 401.94,
+     "word": " directed"
+    },
+    {
+     "start": 401.94,
+     "end": 402.36,
+     "word": " civil"
+    },
+    {
+     "start": 402.36,
+     "end": 402.76,
+     "word": " armies."
+    }
+   ]
+  },
+  {
+   "start": 403.86,
+   "end": 408.62,
+   "text": "The prophetic sentence, Daniel predicted that these fragmented powers would attempt to",
+   "words": [
+    {
+     "start": 403.86,
+     "end": 403.88,
+     "word": " The"
+    },
+    {
+     "start": 403.88,
+     "end": 404.2,
+     "word": " prophetic"
+    },
+    {
+     "start": 404.2,
+     "end": 404.86,
+     "word": " sentence,"
+    },
+    {
+     "start": 405.82,
+     "end": 405.82,
+     "word": " Daniel"
+    },
+    {
+     "start": 405.82,
+     "end": 406.16,
+     "word": " predicted"
+    },
+    {
+     "start": 406.16,
+     "end": 406.48,
+     "word": " that"
+    },
+    {
+     "start": 406.48,
+     "end": 406.68,
+     "word": " these"
+    },
+    {
+     "start": 406.68,
+     "end": 407.26,
+     "word": " fragmented"
+    },
+    {
+     "start": 407.26,
+     "end": 407.72,
+     "word": " powers"
+    },
+    {
+     "start": 407.72,
+     "end": 408.0,
+     "word": " would"
+    },
+    {
+     "start": 408.0,
+     "end": 408.36,
+     "word": " attempt"
+    },
+    {
+     "start": 408.36,
+     "end": 408.62,
+     "word": " to"
+    }
+   ]
+  },
+  {
+   "start": 408.62,
+   "end": 412.04,
+   "text": "reunite through political alliances and royal intermarriages.",
+   "words": [
+    {
+     "start": 408.62,
+     "end": 409.34,
+     "word": " reunite"
+    },
+    {
+     "start": 409.34,
+     "end": 409.6,
+     "word": " through"
+    },
+    {
+     "start": 409.6,
+     "end": 410.08,
+     "word": " political"
+    },
+    {
+     "start": 410.08,
+     "end": 410.66,
+     "word": " alliances"
+    },
+    {
+     "start": 410.66,
+     "end": 411.02,
+     "word": " and"
+    },
+    {
+     "start": 411.02,
+     "end": 411.32,
+     "word": " royal"
+    },
+    {
+     "start": 411.32,
+     "end": 412.04,
+     "word": " intermarriages."
+    }
+   ]
+  },
+  {
+   "start": 412.92,
+   "end": 415.1,
+   "text": "They shall mingle themselves with the seed of men,",
+   "words": [
+    {
+     "start": 412.92,
+     "end": 412.94,
+     "word": " They"
+    },
+    {
+     "start": 412.94,
+     "end": 413.2,
+     "word": " shall"
+    },
+    {
+     "start": 413.2,
+     "end": 413.54,
+     "word": " mingle"
+    },
+    {
+     "start": 413.54,
+     "end": 414.02,
+     "word": " themselves"
+    },
+    {
+     "start": 414.02,
+     "end": 414.32,
+     "word": " with"
+    },
+    {
+     "start": 414.32,
+     "end": 414.44,
+     "word": " the"
+    },
+    {
+     "start": 414.44,
+     "end": 414.62,
+     "word": " seed"
+    },
+    {
+     "start": 414.62,
+     "end": 414.78,
+     "word": " of"
+    },
+    {
+     "start": 414.78,
+     "end": 415.1,
+     "word": " men,"
+    }
+   ]
+  },
+  {
+   "start": 415.54,
+   "end": 420.0,
+   "text": "but they shall not cleave one to another, even as iron is not mixed with clay.",
+   "words": [
+    {
+     "start": 415.54,
+     "end": 415.64,
+     "word": " but"
+    },
+    {
+     "start": 415.64,
+     "end": 415.8,
+     "word": " they"
+    },
+    {
+     "start": 415.8,
+     "end": 415.98,
+     "word": " shall"
+    },
+    {
+     "start": 415.98,
+     "end": 416.3,
+     "word": " not"
+    },
+    {
+     "start": 416.3,
+     "end": 416.82,
+     "word": " cleave"
+    },
+    {
+     "start": 416.82,
+     "end": 417.0,
+     "word": " one"
+    },
+    {
+     "start": 417.0,
+     "end": 417.22,
+     "word": " to"
+    },
+    {
+     "start": 417.22,
+     "end": 417.52,
+     "word": " another,"
+    },
+    {
+     "start": 417.96,
+     "end": 418.18,
+     "word": " even"
+    },
+    {
+     "start": 418.18,
+     "end": 418.38,
+     "word": " as"
+    },
+    {
+     "start": 418.38,
+     "end": 418.76,
+     "word": " iron"
+    },
+    {
+     "start": 418.76,
+     "end": 418.98,
+     "word": " is"
+    },
+    {
+     "start": 418.98,
+     "end": 419.18,
+     "word": " not"
+    },
+    {
+     "start": 419.18,
+     "end": 419.46,
+     "word": " mixed"
+    },
+    {
+     "start": 419.46,
+     "end": 419.72,
+     "word": " with"
+    },
+    {
+     "start": 419.72,
+     "end": 420.0,
+     "word": " clay."
+    }
+   ]
+  },
+  {
+   "start": 420.68,
+   "end": 421.54,
+   "text": "Daniel 2, 43.",
+   "words": [
+    {
+     "start": 420.68,
+     "end": 420.86,
+     "word": " Daniel"
+    },
+    {
+     "start": 420.86,
+     "end": 421.12,
+     "word": " 2,"
+    },
+    {
+     "start": 421.16,
+     "end": 421.54,
+     "word": " 43."
+    }
+   ]
+  },
+  {
+   "start": 422.27,
+   "end": 427.56,
+   "text": "For 15 centuries, every conqueror who sought to forge a unified European super state,",
+   "words": [
+    {
+     "start": 422.27,
+     "end": 422.6,
+     "word": " For"
+    },
+    {
+     "start": 422.6,
+     "end": 423.12,
+     "word": " 15"
+    },
+    {
+     "start": 423.12,
+     "end": 423.68,
+     "word": " centuries,"
+    },
+    {
+     "start": 424.22,
+     "end": 424.42,
+     "word": " every"
+    },
+    {
+     "start": 424.42,
+     "end": 424.94,
+     "word": " conqueror"
+    },
+    {
+     "start": 424.94,
+     "end": 425.1,
+     "word": " who"
+    },
+    {
+     "start": 425.1,
+     "end": 425.28,
+     "word": " sought"
+    },
+    {
+     "start": 425.28,
+     "end": 425.48,
+     "word": " to"
+    },
+    {
+     "start": 425.48,
+     "end": 425.7,
+     "word": " forge"
+    },
+    {
+     "start": 425.7,
+     "end": 425.92,
+     "word": " a"
+    },
+    {
+     "start": 425.92,
+     "end": 426.44,
+     "word": " unified"
+    },
+    {
+     "start": 426.44,
+     "end": 426.9,
+     "word": " European"
+    },
+    {
+     "start": 426.9,
+     "end": 427.18,
+     "word": " super"
+    },
+    {
+     "start": 427.18,
+     "end": 427.56,
+     "word": " state,"
+    }
+   ]
+  },
+  {
+   "start": 428.2,
+   "end": 432.52,
+   "text": "including Charlemagne, Charles V, Louis XIV, Napoleon Bonaparte,",
+   "words": [
+    {
+     "start": 428.2,
+     "end": 428.32,
+     "word": " including"
+    },
+    {
+     "start": 428.32,
+     "end": 429.1,
+     "word": " Charlemagne,"
+    },
+    {
+     "start": 429.52,
+     "end": 429.74,
+     "word": " Charles"
+    },
+    {
+     "start": 429.74,
+     "end": 430.04,
+     "word": " V,"
+    },
+    {
+     "start": 430.42,
+     "end": 430.56,
+     "word": " Louis"
+    },
+    {
+     "start": 430.56,
+     "end": 431.04,
+     "word": " XIV,"
+    },
+    {
+     "start": 431.46,
+     "end": 431.96,
+     "word": " Napoleon"
+    },
+    {
+     "start": 431.96,
+     "end": 432.52,
+     "word": " Bonaparte,"
+    }
+   ]
+  },
+  {
+   "start": 433.08,
+   "end": 438.18,
+   "text": "Kaiser Wilhelm II, and Adolf Hitler, struck this divine barrier and failed.",
+   "words": [
+    {
+     "start": 433.08,
+     "end": 433.08,
+     "word": " Kaiser"
+    },
+    {
+     "start": 433.08,
+     "end": 433.48,
+     "word": " Wilhelm"
+    },
+    {
+     "start": 433.48,
+     "end": 433.88,
+     "word": " II,"
+    },
+    {
+     "start": 434.4,
+     "end": 434.64,
+     "word": " and"
+    },
+    {
+     "start": 434.64,
+     "end": 434.92,
+     "word": " Adolf"
+    },
+    {
+     "start": 434.92,
+     "end": 435.32,
+     "word": " Hitler,"
+    },
+    {
+     "start": 435.8,
+     "end": 436.12,
+     "word": " struck"
+    },
+    {
+     "start": 436.12,
+     "end": 436.46,
+     "word": " this"
+    },
+    {
+     "start": 436.46,
+     "end": 436.84,
+     "word": " divine"
+    },
+    {
+     "start": 436.84,
+     "end": 437.34,
+     "word": " barrier"
+    },
+    {
+     "start": 437.34,
+     "end": 437.7,
+     "word": " and"
+    },
+    {
+     "start": 437.7,
+     "end": 438.18,
+     "word": " failed."
+    }
+   ]
+  },
+  {
+   "start": 439.0,
+   "end": 442.52,
+   "text": "The prophecy declared in advance, they shall not hold together.",
+   "words": [
+    {
+     "start": 439.0,
+     "end": 439.12,
+     "word": " The"
+    },
+    {
+     "start": 439.12,
+     "end": 439.48,
+     "word": " prophecy"
+    },
+    {
+     "start": 439.48,
+     "end": 439.92,
+     "word": " declared"
+    },
+    {
+     "start": 439.92,
+     "end": 440.14,
+     "word": " in"
+    },
+    {
+     "start": 440.14,
+     "end": 440.6,
+     "word": " advance,"
+    },
+    {
+     "start": 441.12,
+     "end": 441.3,
+     "word": " they"
+    },
+    {
+     "start": 441.3,
+     "end": 441.52,
+     "word": " shall"
+    },
+    {
+     "start": 441.52,
+     "end": 441.74,
+     "word": " not"
+    },
+    {
+     "start": 441.74,
+     "end": 442.04,
+     "word": " hold"
+    },
+    {
+     "start": 442.04,
+     "end": 442.52,
+     "word": " together."
+    }
+   ]
+  },
+  {
+   "start": 443.58,
+   "end": 445.64,
+   "text": "They shall mingle themselves with the seed of men,",
+   "words": [
+    {
+     "start": 443.58,
+     "end": 443.7,
+     "word": " They"
+    },
+    {
+     "start": 443.7,
+     "end": 443.88,
+     "word": " shall"
+    },
+    {
+     "start": 443.88,
+     "end": 444.22,
+     "word": " mingle"
+    },
+    {
+     "start": 444.22,
+     "end": 444.64,
+     "word": " themselves"
+    },
+    {
+     "start": 444.64,
+     "end": 444.94,
+     "word": " with"
+    },
+    {
+     "start": 444.94,
+     "end": 445.1,
+     "word": " the"
+    },
+    {
+     "start": 445.1,
+     "end": 445.26,
+     "word": " seed"
+    },
+    {
+     "start": 445.26,
+     "end": 445.4,
+     "word": " of"
+    },
+    {
+     "start": 445.4,
+     "end": 445.64,
+     "word": " men,"
+    }
+   ]
+  },
+  {
+   "start": 446.12,
+   "end": 450.42,
+   "text": "but they shall not cleave one to another, even as iron is not mixed with clay.",
+   "words": [
+    {
+     "start": 446.12,
+     "end": 446.3,
+     "word": " but"
+    },
+    {
+     "start": 446.3,
+     "end": 446.44,
+     "word": " they"
+    },
+    {
+     "start": 446.44,
+     "end": 446.6,
+     "word": " shall"
+    },
+    {
+     "start": 446.6,
+     "end": 446.86,
+     "word": " not"
+    },
+    {
+     "start": 446.86,
+     "end": 447.32,
+     "word": " cleave"
+    },
+    {
+     "start": 447.32,
+     "end": 447.5,
+     "word": " one"
+    },
+    {
+     "start": 447.5,
+     "end": 447.7,
+     "word": " to"
+    },
+    {
+     "start": 447.7,
+     "end": 448.02,
+     "word": " another,"
+    },
+    {
+     "start": 448.48,
+     "end": 448.7,
+     "word": " even"
+    },
+    {
+     "start": 448.7,
+     "end": 448.94,
+     "word": " as"
+    },
+    {
+     "start": 448.94,
+     "end": 449.3,
+     "word": " iron"
+    },
+    {
+     "start": 449.3,
+     "end": 449.54,
+     "word": " is"
+    },
+    {
+     "start": 449.54,
+     "end": 449.74,
+     "word": " not"
+    },
+    {
+     "start": 449.74,
+     "end": 449.96,
+     "word": " mixed"
+    },
+    {
+     "start": 449.96,
+     "end": 450.18,
+     "word": " with"
+    },
+    {
+     "start": 450.18,
+     "end": 450.42,
+     "word": " clay."
+    }
+   ]
+  },
+  {
+   "start": 450.98,
+   "end": 452.18,
+   "text": "Daniel 2, 43.",
+   "words": [
+    {
+     "start": 450.98,
+     "end": 451.38,
+     "word": " Daniel"
+    },
+    {
+     "start": 451.38,
+     "end": 451.7,
+     "word": " 2,"
+    },
+    {
+     "start": 452.18,
+     "end": 452.18,
+     "word": " 43."
+    }
+   ]
+  },
+  {
+   "start": 453.56,
+   "end": 455.68,
+   "text": "Main point three, the redemptive climax.",
+   "words": [
+    {
+     "start": 453.56,
+     "end": 453.72,
+     "word": " Main"
+    },
+    {
+     "start": 453.72,
+     "end": 453.9,
+     "word": " point"
+    },
+    {
+     "start": 453.9,
+     "end": 454.22,
+     "word": " three,"
+    },
+    {
+     "start": 454.78,
+     "end": 454.86,
+     "word": " the"
+    },
+    {
+     "start": 454.86,
+     "end": 455.42,
+     "word": " redemptive"
+    },
+    {
+     "start": 455.42,
+     "end": 455.68,
+     "word": " climax."
+    }
+   ]
+  },
+  {
+   "start": 456.58,
+   "end": 457.7,
+   "text": "The supernatural stone.",
+   "words": [
+    {
+     "start": 456.58,
+     "end": 456.7,
+     "word": " The"
+    },
+    {
+     "start": 456.7,
+     "end": 457.14,
+     "word": " supernatural"
+    },
+    {
+     "start": 457.14,
+     "end": 457.7,
+     "word": " stone."
+    }
+   ]
+  },
+  {
+   "start": 458.8,
+   "end": 461.5,
+   "text": "The focal point of the vision is not the metallic colossus,",
+   "words": [
+    {
+     "start": 458.8,
+     "end": 458.8,
+     "word": " The"
+    },
+    {
+     "start": 458.8,
+     "end": 459.06,
+     "word": " focal"
+    },
+    {
+     "start": 459.06,
+     "end": 459.36,
+     "word": " point"
+    },
+    {
+     "start": 459.36,
+     "end": 459.5,
+     "word": " of"
+    },
+    {
+     "start": 459.5,
+     "end": 459.62,
+     "word": " the"
+    },
+    {
+     "start": 459.62,
+     "end": 459.86,
+     "word": " vision"
+    },
+    {
+     "start": 459.86,
+     "end": 460.1,
+     "word": " is"
+    },
+    {
+     "start": 460.1,
+     "end": 460.34,
+     "word": " not"
+    },
+    {
+     "start": 460.34,
+     "end": 460.5,
+     "word": " the"
+    },
+    {
+     "start": 460.5,
+     "end": 460.98,
+     "word": " metallic"
+    },
+    {
+     "start": 460.98,
+     "end": 461.5,
+     "word": " colossus,"
+    }
+   ]
+  },
+  {
+   "start": 461.76,
+   "end": 464.72,
+   "text": "but its total destruction by a supernatural agent.",
+   "words": [
+    {
+     "start": 461.76,
+     "end": 461.92,
+     "word": " but"
+    },
+    {
+     "start": 461.92,
+     "end": 462.1,
+     "word": " its"
+    },
+    {
+     "start": 462.1,
+     "end": 462.5,
+     "word": " total"
+    },
+    {
+     "start": 462.5,
+     "end": 463.1,
+     "word": " destruction"
+    },
+    {
+     "start": 463.1,
+     "end": 463.52,
+     "word": " by"
+    },
+    {
+     "start": 463.52,
+     "end": 463.72,
+     "word": " a"
+    },
+    {
+     "start": 463.72,
+     "end": 464.18,
+     "word": " supernatural"
+    },
+    {
+     "start": 464.18,
+     "end": 464.72,
+     "word": " agent."
+    }
+   ]
+  },
+  {
+   "start": 465.68,
+   "end": 468.56,
+   "text": "Thou sawest till that a stone was cut out without hands,",
+   "words": [
+    {
+     "start": 465.68,
+     "end": 465.7,
+     "word": " Thou"
+    },
+    {
+     "start": 465.7,
+     "end": 466.24,
+     "word": " sawest"
+    },
+    {
+     "start": 466.24,
+     "end": 466.44,
+     "word": " till"
+    },
+    {
+     "start": 466.44,
+     "end": 466.6,
+     "word": " that"
+    },
+    {
+     "start": 466.6,
+     "end": 466.76,
+     "word": " a"
+    },
+    {
+     "start": 466.76,
+     "end": 467.06,
+     "word": " stone"
+    },
+    {
+     "start": 467.06,
+     "end": 467.28,
+     "word": " was"
+    },
+    {
+     "start": 467.28,
+     "end": 467.52,
+     "word": " cut"
+    },
+    {
+     "start": 467.52,
+     "end": 467.72,
+     "word": " out"
+    },
+    {
+     "start": 467.72,
+     "end": 468.0,
+     "word": " without"
+    },
+    {
+     "start": 468.0,
+     "end": 468.56,
+     "word": " hands,"
+    }
+   ]
+  },
+  {
+   "start": 468.6,
+   "end": 471.98,
+   "text": "which smote the image upon his feet that were of iron and clay,",
+   "words": [
+    {
+     "start": 468.6,
+     "end": 468.82,
+     "word": " which"
+    },
+    {
+     "start": 468.82,
+     "end": 469.2,
+     "word": " smote"
+    },
+    {
+     "start": 469.2,
+     "end": 469.38,
+     "word": " the"
+    },
+    {
+     "start": 469.38,
+     "end": 469.64,
+     "word": " image"
+    },
+    {
+     "start": 469.64,
+     "end": 469.92,
+     "word": " upon"
+    },
+    {
+     "start": 469.92,
+     "end": 470.12,
+     "word": " his"
+    },
+    {
+     "start": 470.12,
+     "end": 470.42,
+     "word": " feet"
+    },
+    {
+     "start": 470.42,
+     "end": 470.86,
+     "word": " that"
+    },
+    {
+     "start": 470.86,
+     "end": 471.0,
+     "word": " were"
+    },
+    {
+     "start": 471.0,
+     "end": 471.14,
+     "word": " of"
+    },
+    {
+     "start": 471.14,
+     "end": 471.46,
+     "word": " iron"
+    },
+    {
+     "start": 471.46,
+     "end": 471.7,
+     "word": " and"
+    },
+    {
+     "start": 471.7,
+     "end": 471.98,
+     "word": " clay,"
+    }
+   ]
+  },
+  {
+   "start": 472.38,
+   "end": 473.36,
+   "text": "and break them to pieces.",
+   "words": [
+    {
+     "start": 472.38,
+     "end": 472.6,
+     "word": " and"
+    },
+    {
+     "start": 472.6,
+     "end": 472.78,
+     "word": " break"
+    },
+    {
+     "start": 472.78,
+     "end": 472.98,
+     "word": " them"
+    },
+    {
+     "start": 472.98,
+     "end": 473.14,
+     "word": " to"
+    },
+    {
+     "start": 473.14,
+     "end": 473.36,
+     "word": " pieces."
+    }
+   ]
+  },
+  {
+   "start": 473.98,
+   "end": 476.7,
+   "text": "And the stone that smote the image became a great mountain",
+   "words": [
+    {
+     "start": 473.98,
+     "end": 474.14,
+     "word": " And"
+    },
+    {
+     "start": 474.14,
+     "end": 474.26,
+     "word": " the"
+    },
+    {
+     "start": 474.26,
+     "end": 474.54,
+     "word": " stone"
+    },
+    {
+     "start": 474.54,
+     "end": 474.76,
+     "word": " that"
+    },
+    {
+     "start": 474.76,
+     "end": 475.08,
+     "word": " smote"
+    },
+    {
+     "start": 475.08,
+     "end": 475.24,
+     "word": " the"
+    },
+    {
+     "start": 475.24,
+     "end": 475.52,
+     "word": " image"
+    },
+    {
+     "start": 475.52,
+     "end": 475.84,
+     "word": " became"
+    },
+    {
+     "start": 475.84,
+     "end": 476.04,
+     "word": " a"
+    },
+    {
+     "start": 476.04,
+     "end": 476.34,
+     "word": " great"
+    },
+    {
+     "start": 476.34,
+     "end": 476.7,
+     "word": " mountain"
+    }
+   ]
+  },
+  {
+   "start": 476.7,
+   "end": 478.34,
+   "text": "and filled the whole earth.",
+   "words": [
+    {
+     "start": 476.7,
+     "end": 477.3,
+     "word": " and"
+    },
+    {
+     "start": 477.3,
+     "end": 477.58,
+     "word": " filled"
+    },
+    {
+     "start": 477.58,
+     "end": 477.8,
+     "word": " the"
+    },
+    {
+     "start": 477.8,
+     "end": 478.06,
+     "word": " whole"
+    },
+    {
+     "start": 478.06,
+     "end": 478.34,
+     "word": " earth."
+    }
+   ]
+  },
+  {
+   "start": 478.34,
+   "end": 481.34,
+   "text": "Daniel 2, 34 through 35, KJV.",
+   "words": [
+    {
+     "start": 478.34,
+     "end": 479.14,
+     "word": " Daniel"
+    },
+    {
+     "start": 479.14,
+     "end": 479.52,
+     "word": " 2,"
+    },
+    {
+     "start": 479.62,
+     "end": 480.0,
+     "word": " 34"
+    },
+    {
+     "start": 480.0,
+     "end": 480.22,
+     "word": " through"
+    },
+    {
+     "start": 480.22,
+     "end": 480.72,
+     "word": " 35,"
+    },
+    {
+     "start": 480.84,
+     "end": 481.34,
+     "word": " KJV."
+    }
+   ]
+  },
+  {
+   "start": 482.62,
+   "end": 484.56,
+   "text": "One, the divine identity of the stone.",
+   "words": [
+    {
+     "start": 482.62,
+     "end": 482.64,
+     "word": " One,"
+    },
+    {
+     "start": 483.08,
+     "end": 483.26,
+     "word": " the"
+    },
+    {
+     "start": 483.26,
+     "end": 483.54,
+     "word": " divine"
+    },
+    {
+     "start": 483.54,
+     "end": 483.96,
+     "word": " identity"
+    },
+    {
+     "start": 483.96,
+     "end": 484.22,
+     "word": " of"
+    },
+    {
+     "start": 484.22,
+     "end": 484.36,
+     "word": " the"
+    },
+    {
+     "start": 484.36,
+     "end": 484.56,
+     "word": " stone."
+    }
+   ]
+  },
+  {
+   "start": 485.44,
+   "end": 486.7,
+   "text": "The stone is Jesus Christ.",
+   "words": [
+    {
+     "start": 485.44,
+     "end": 485.52,
+     "word": " The"
+    },
+    {
+     "start": 485.52,
+     "end": 485.84,
+     "word": " stone"
+    },
+    {
+     "start": 485.84,
+     "end": 486.1,
+     "word": " is"
+    },
+    {
+     "start": 486.1,
+     "end": 486.4,
+     "word": " Jesus"
+    },
+    {
+     "start": 486.4,
+     "end": 486.7,
+     "word": " Christ."
+    }
+   ]
+  },
+  {
+   "start": 487.22,
+   "end": 491.26,
+   "text": "The phrase cut out without hands denotes divine origin without human agency,",
+   "words": [
+    {
+     "start": 487.22,
+     "end": 487.3,
+     "word": " The"
+    },
+    {
+     "start": 487.3,
+     "end": 487.6,
+     "word": " phrase"
+    },
+    {
+     "start": 487.6,
+     "end": 488.08,
+     "word": " cut"
+    },
+    {
+     "start": 488.08,
+     "end": 488.26,
+     "word": " out"
+    },
+    {
+     "start": 488.26,
+     "end": 488.52,
+     "word": " without"
+    },
+    {
+     "start": 488.52,
+     "end": 489.0,
+     "word": " hands"
+    },
+    {
+     "start": 489.0,
+     "end": 489.3,
+     "word": " denotes"
+    },
+    {
+     "start": 489.3,
+     "end": 489.72,
+     "word": " divine"
+    },
+    {
+     "start": 489.72,
+     "end": 490.12,
+     "word": " origin"
+    },
+    {
+     "start": 490.12,
+     "end": 490.44,
+     "word": " without"
+    },
+    {
+     "start": 490.44,
+     "end": 490.72,
+     "word": " human"
+    },
+    {
+     "start": 490.72,
+     "end": 491.26,
+     "word": " agency,"
+    }
+   ]
+  },
+  {
+   "start": 491.62,
+   "end": 494.96,
+   "text": "pointing to Christ's miraculous incarnation through the virgin birth,",
+   "words": [
+    {
+     "start": 491.62,
+     "end": 491.9,
+     "word": " pointing"
+    },
+    {
+     "start": 491.9,
+     "end": 492.22,
+     "word": " to"
+    },
+    {
+     "start": 492.22,
+     "end": 492.68,
+     "word": " Christ's"
+    },
+    {
+     "start": 492.68,
+     "end": 493.18,
+     "word": " miraculous"
+    },
+    {
+     "start": 493.18,
+     "end": 493.8,
+     "word": " incarnation"
+    },
+    {
+     "start": 493.8,
+     "end": 494.22,
+     "word": " through"
+    },
+    {
+     "start": 494.22,
+     "end": 494.38,
+     "word": " the"
+    },
+    {
+     "start": 494.38,
+     "end": 494.62,
+     "word": " virgin"
+    },
+    {
+     "start": 494.62,
+     "end": 494.96,
+     "word": " birth,"
+    }
+   ]
+  },
+  {
+   "start": 495.42,
+   "end": 498.34,
+   "text": "his divine resurrection, and his supernatural second coming.",
+   "words": [
+    {
+     "start": 495.42,
+     "end": 495.56,
+     "word": " his"
+    },
+    {
+     "start": 495.56,
+     "end": 495.88,
+     "word": " divine"
+    },
+    {
+     "start": 495.88,
+     "end": 496.44,
+     "word": " resurrection,"
+    },
+    {
+     "start": 496.86,
+     "end": 497.04,
+     "word": " and"
+    },
+    {
+     "start": 497.04,
+     "end": 497.16,
+     "word": " his"
+    },
+    {
+     "start": 497.16,
+     "end": 497.6,
+     "word": " supernatural"
+    },
+    {
+     "start": 497.6,
+     "end": 498.0,
+     "word": " second"
+    },
+    {
+     "start": 498.0,
+     "end": 498.34,
+     "word": " coming."
+    }
+   ]
+  },
+  {
+   "start": 499.36,
+   "end": 501.78,
+   "text": "Scripture repeatedly identifies Jesus as the stone.",
+   "words": [
+    {
+     "start": 499.36,
+     "end": 499.38,
+     "word": " Scripture"
+    },
+    {
+     "start": 499.38,
+     "end": 500.14,
+     "word": " repeatedly"
+    },
+    {
+     "start": 500.14,
+     "end": 500.72,
+     "word": " identifies"
+    },
+    {
+     "start": 500.72,
+     "end": 501.02,
+     "word": " Jesus"
+    },
+    {
+     "start": 501.02,
+     "end": 501.34,
+     "word": " as"
+    },
+    {
+     "start": 501.34,
+     "end": 501.5,
+     "word": " the"
+    },
+    {
+     "start": 501.5,
+     "end": 501.78,
+     "word": " stone."
+    }
+   ]
+  },
+  {
+   "start": 502.24,
+   "end": 505.2,
+   "text": "The stone rejected by the builders that becomes the chief cornerstone,",
+   "words": [
+    {
+     "start": 502.24,
+     "end": 502.52,
+     "word": " The"
+    },
+    {
+     "start": 502.52,
+     "end": 502.8,
+     "word": " stone"
+    },
+    {
+     "start": 502.8,
+     "end": 503.14,
+     "word": " rejected"
+    },
+    {
+     "start": 503.14,
+     "end": 503.36,
+     "word": " by"
+    },
+    {
+     "start": 503.36,
+     "end": 503.5,
+     "word": " the"
+    },
+    {
+     "start": 503.5,
+     "end": 503.76,
+     "word": " builders"
+    },
+    {
+     "start": 503.76,
+     "end": 504.04,
+     "word": " that"
+    },
+    {
+     "start": 504.04,
+     "end": 504.32,
+     "word": " becomes"
+    },
+    {
+     "start": 504.32,
+     "end": 504.52,
+     "word": " the"
+    },
+    {
+     "start": 504.52,
+     "end": 504.7,
+     "word": " chief"
+    },
+    {
+     "start": 504.7,
+     "end": 505.2,
+     "word": " cornerstone,"
+    }
+   ]
+  },
+  {
+   "start": 505.2,
+   "end": 508.78,
+   "text": "Psalm 118, 22, and 1 Peter 2, 6 through 8.",
+   "words": [
+    {
+     "start": 505.2,
+     "end": 505.96,
+     "word": " Psalm"
+    },
+    {
+     "start": 505.96,
+     "end": 506.14,
+     "word": " 118,"
+    },
+    {
+     "start": 506.8,
+     "end": 506.82,
+     "word": " 22,"
+    },
+    {
+     "start": 507.06,
+     "end": 507.14,
+     "word": " and"
+    },
+    {
+     "start": 507.14,
+     "end": 507.34,
+     "word": " 1"
+    },
+    {
+     "start": 507.34,
+     "end": 507.62,
+     "word": " Peter"
+    },
+    {
+     "start": 507.62,
+     "end": 507.94,
+     "word": " 2,"
+    },
+    {
+     "start": 507.94,
+     "end": 508.22,
+     "word": " 6"
+    },
+    {
+     "start": 508.22,
+     "end": 508.36,
+     "word": " through"
+    },
+    {
+     "start": 508.36,
+     "end": 508.78,
+     "word": " 8."
+    }
+   ]
+  },
+  {
+   "start": 509.2,
+   "end": 513.62,
+   "text": "The rock upon which the church is built, 1 Corinthians 10, 4, Matthew 16, 18.",
+   "words": [
+    {
+     "start": 509.2,
+     "end": 509.4,
+     "word": " The"
+    },
+    {
+     "start": 509.4,
+     "end": 509.6,
+     "word": " rock"
+    },
+    {
+     "start": 509.6,
+     "end": 509.96,
+     "word": " upon"
+    },
+    {
+     "start": 509.96,
+     "end": 510.2,
+     "word": " which"
+    },
+    {
+     "start": 510.2,
+     "end": 510.4,
+     "word": " the"
+    },
+    {
+     "start": 510.4,
+     "end": 510.54,
+     "word": " church"
+    },
+    {
+     "start": 510.54,
+     "end": 510.78,
+     "word": " is"
+    },
+    {
+     "start": 510.78,
+     "end": 511.04,
+     "word": " built,"
+    },
+    {
+     "start": 511.42,
+     "end": 511.5,
+     "word": " 1"
+    },
+    {
+     "start": 511.5,
+     "end": 511.9,
+     "word": " Corinthians"
+    },
+    {
+     "start": 511.9,
+     "end": 512.2,
+     "word": " 10,"
+    },
+    {
+     "start": 512.34,
+     "end": 512.58,
+     "word": " 4,"
+    },
+    {
+     "start": 512.7,
+     "end": 512.82,
+     "word": " Matthew"
+    },
+    {
+     "start": 512.82,
+     "end": 513.24,
+     "word": " 16,"
+    },
+    {
+     "start": 513.34,
+     "end": 513.62,
+     "word": " 18."
+    }
+   ]
+  },
+  {
+   "start": 514.44,
+   "end": 518.02,
+   "text": "The stone that shatters all opposition, Luke 20, 17 through 18.",
+   "words": [
+    {
+     "start": 514.44,
+     "end": 514.56,
+     "word": " The"
+    },
+    {
+     "start": 514.56,
+     "end": 514.84,
+     "word": " stone"
+    },
+    {
+     "start": 514.84,
+     "end": 515.04,
+     "word": " that"
+    },
+    {
+     "start": 515.04,
+     "end": 515.34,
+     "word": " shatters"
+    },
+    {
+     "start": 515.34,
+     "end": 515.66,
+     "word": " all"
+    },
+    {
+     "start": 515.66,
+     "end": 516.1,
+     "word": " opposition,"
+    },
+    {
+     "start": 516.62,
+     "end": 516.8,
+     "word": " Luke"
+    },
+    {
+     "start": 516.8,
+     "end": 517.14,
+     "word": " 20,"
+    },
+    {
+     "start": 517.26,
+     "end": 517.48,
+     "word": " 17"
+    },
+    {
+     "start": 517.48,
+     "end": 517.72,
+     "word": " through"
+    },
+    {
+     "start": 517.72,
+     "end": 518.02,
+     "word": " 18."
+    }
+   ]
+  },
+  {
+   "start": 519.56,
+   "end": 521.64,
+   "text": "Two, the timing and nature of the impact.",
+   "words": [
+    {
+     "start": 519.56,
+     "end": 519.62,
+     "word": " Two,"
+    },
+    {
+     "start": 520.14,
+     "end": 520.32,
+     "word": " the"
+    },
+    {
+     "start": 520.32,
+     "end": 520.6,
+     "word": " timing"
+    },
+    {
+     "start": 520.6,
+     "end": 520.82,
+     "word": " and"
+    },
+    {
+     "start": 520.82,
+     "end": 521.06,
+     "word": " nature"
+    },
+    {
+     "start": 521.06,
+     "end": 521.22,
+     "word": " of"
+    },
+    {
+     "start": 521.22,
+     "end": 521.34,
+     "word": " the"
+    },
+    {
+     "start": 521.34,
+     "end": 521.64,
+     "word": " impact."
+    }
+   ]
+  },
+  {
+   "start": 522.49,
+   "end": 523.75,
+   "text": "The location of the strike.",
+   "words": [
+    {
+     "start": 522.49,
+     "end": 522.67,
+     "word": " The"
+    },
+    {
+     "start": 522.67,
+     "end": 523.07,
+     "word": " location"
+    },
+    {
+     "start": 523.07,
+     "end": 523.37,
+     "word": " of"
+    },
+    {
+     "start": 523.37,
+     "end": 523.49,
+     "word": " the"
+    },
+    {
+     "start": 523.49,
+     "end": 523.75,
+     "word": " strike."
+    }
+   ]
+  },
+  {
+   "start": 524.11,
+   "end": 528.99,
+   "text": "The stone strikes the statue exclusively on its feet of iron and clay, Daniel 2, 34.",
+   "words": [
+    {
+     "start": 524.11,
+     "end": 524.27,
+     "word": " The"
+    },
+    {
+     "start": 524.27,
+     "end": 524.59,
+     "word": " stone"
+    },
+    {
+     "start": 524.59,
+     "end": 524.97,
+     "word": " strikes"
+    },
+    {
+     "start": 524.97,
+     "end": 525.19,
+     "word": " the"
+    },
+    {
+     "start": 525.19,
+     "end": 525.57,
+     "word": " statue"
+    },
+    {
+     "start": 525.57,
+     "end": 526.25,
+     "word": " exclusively"
+    },
+    {
+     "start": 526.25,
+     "end": 526.61,
+     "word": " on"
+    },
+    {
+     "start": 526.61,
+     "end": 526.75,
+     "word": " its"
+    },
+    {
+     "start": 526.75,
+     "end": 526.95,
+     "word": " feet"
+    },
+    {
+     "start": 526.95,
+     "end": 527.13,
+     "word": " of"
+    },
+    {
+     "start": 527.13,
+     "end": 527.41,
+     "word": " iron"
+    },
+    {
+     "start": 527.41,
+     "end": 527.65,
+     "word": " and"
+    },
+    {
+     "start": 527.65,
+     "end": 527.97,
+     "word": " clay,"
+    },
+    {
+     "start": 528.31,
+     "end": 528.47,
+     "word": " Daniel"
+    },
+    {
+     "start": 528.47,
+     "end": 528.67,
+     "word": " 2,"
+    },
+    {
+     "start": 528.71,
+     "end": 528.99,
+     "word": " 34."
+    }
+   ]
+  },
+  {
+   "start": 529.79,
+   "end": 534.79,
+   "text": "It did not strike during the Babylonian, Persian, Greek, or unified pagan Roman legs.",
+   "words": [
+    {
+     "start": 529.79,
+     "end": 530.03,
+     "word": " It"
+    },
+    {
+     "start": 530.03,
+     "end": 530.13,
+     "word": " did"
+    },
+    {
+     "start": 530.13,
+     "end": 530.37,
+     "word": " not"
+    },
+    {
+     "start": 530.37,
+     "end": 530.71,
+     "word": " strike"
+    },
+    {
+     "start": 530.71,
+     "end": 530.99,
+     "word": " during"
+    },
+    {
+     "start": 530.99,
+     "end": 531.17,
+     "word": " the"
+    },
+    {
+     "start": 531.17,
+     "end": 531.85,
+     "word": " Babylonian,"
+    },
+    {
+     "start": 532.01,
+     "end": 532.41,
+     "word": " Persian,"
+    },
+    {
+     "start": 532.97,
+     "end": 533.03,
+     "word": " Greek,"
+    },
+    {
+     "start": 533.29,
+     "end": 533.37,
+     "word": " or"
+    },
+    {
+     "start": 533.37,
+     "end": 533.81,
+     "word": " unified"
+    },
+    {
+     "start": 533.81,
+     "end": 534.17,
+     "word": " pagan"
+    },
+    {
+     "start": 534.17,
+     "end": 534.47,
+     "word": " Roman"
+    },
+    {
+     "start": 534.47,
+     "end": 534.79,
+     "word": " legs."
+    }
+   ]
+  },
+  {
+   "start": 535.35,
+   "end": 537.29,
+   "text": "Verse 44 establishes the timeline.",
+   "words": [
+    {
+     "start": 535.35,
+     "end": 535.67,
+     "word": " Verse"
+    },
+    {
+     "start": 535.67,
+     "end": 536.17,
+     "word": " 44"
+    },
+    {
+     "start": 536.17,
+     "end": 536.71,
+     "word": " establishes"
+    },
+    {
+     "start": 536.71,
+     "end": 536.91,
+     "word": " the"
+    },
+    {
+     "start": 536.91,
+     "end": 537.29,
+     "word": " timeline."
+    }
+   ]
+  },
+  {
+   "start": 537.95,
+   "end": 541.55,
+   "text": "And in the days of these kings shall the God of heaven set up a kingdom which shall never be",
+   "words": [
+    {
+     "start": 537.95,
+     "end": 537.95,
+     "word": " And"
+    },
+    {
+     "start": 537.95,
+     "end": 538.09,
+     "word": " in"
+    },
+    {
+     "start": 538.09,
+     "end": 538.21,
+     "word": " the"
+    },
+    {
+     "start": 538.21,
+     "end": 538.39,
+     "word": " days"
+    },
+    {
+     "start": 538.39,
+     "end": 538.59,
+     "word": " of"
+    },
+    {
+     "start": 538.59,
+     "end": 538.79,
+     "word": " these"
+    },
+    {
+     "start": 538.79,
+     "end": 539.05,
+     "word": " kings"
+    },
+    {
+     "start": 539.05,
+     "end": 539.29,
+     "word": " shall"
+    },
+    {
+     "start": 539.29,
+     "end": 539.43,
+     "word": " the"
+    },
+    {
+     "start": 539.43,
+     "end": 539.59,
+     "word": " God"
+    },
+    {
+     "start": 539.59,
+     "end": 539.73,
+     "word": " of"
+    },
+    {
+     "start": 539.73,
+     "end": 539.93,
+     "word": " heaven"
+    },
+    {
+     "start": 539.93,
+     "end": 540.19,
+     "word": " set"
+    },
+    {
+     "start": 540.19,
+     "end": 540.31,
+     "word": " up"
+    },
+    {
+     "start": 540.31,
+     "end": 540.41,
+     "word": " a"
+    },
+    {
+     "start": 540.41,
+     "end": 540.61,
+     "word": " kingdom"
+    },
+    {
+     "start": 540.61,
+     "end": 540.91,
+     "word": " which"
+    },
+    {
+     "start": 540.91,
+     "end": 541.09,
+     "word": " shall"
+    },
+    {
+     "start": 541.09,
+     "end": 541.33,
+     "word": " never"
+    },
+    {
+     "start": 541.33,
+     "end": 541.55,
+     "word": " be"
+    }
+   ]
+  },
+  {
+   "start": 541.55,
+   "end": 541.99,
+   "text": "destroyed.",
+   "words": [
+    {
+     "start": 541.55,
+     "end": 541.99,
+     "word": " destroyed."
+    }
+   ]
+  },
+  {
+   "start": 543.05,
+   "end": 548.31,
+   "text": "Christ's catastrophic universal kingdom arrives during the modern era of divided European nations.",
+   "words": [
+    {
+     "start": 543.05,
+     "end": 543.61,
+     "word": " Christ's"
+    },
+    {
+     "start": 543.61,
+     "end": 544.17,
+     "word": " catastrophic"
+    },
+    {
+     "start": 544.17,
+     "end": 544.77,
+     "word": " universal"
+    },
+    {
+     "start": 544.77,
+     "end": 545.19,
+     "word": " kingdom"
+    },
+    {
+     "start": 545.19,
+     "end": 545.57,
+     "word": " arrives"
+    },
+    {
+     "start": 545.57,
+     "end": 545.85,
+     "word": " during"
+    },
+    {
+     "start": 545.85,
+     "end": 546.05,
+     "word": " the"
+    },
+    {
+     "start": 546.05,
+     "end": 546.31,
+     "word": " modern"
+    },
+    {
+     "start": 546.31,
+     "end": 546.61,
+     "word": " era"
+    },
+    {
+     "start": 546.61,
+     "end": 546.93,
+     "word": " of"
+    },
+    {
+     "start": 546.93,
+     "end": 547.33,
+     "word": " divided"
+    },
+    {
+     "start": 547.33,
+     "end": 547.77,
+     "word": " European"
+    },
+    {
+     "start": 547.77,
+     "end": 548.31,
+     "word": " nations."
+    }
+   ]
+  },
+  {
+   "start": 549.43,
+   "end": 551.37,
+   "text": "Abolition, not political reformation.",
+   "words": [
+    {
+     "start": 549.43,
+     "end": 549.89,
+     "word": " Abolition,"
+    },
+    {
+     "start": 550.21,
+     "end": 550.37,
+     "word": " not"
+    },
+    {
+     "start": 550.37,
+     "end": 550.85,
+     "word": " political"
+    },
+    {
+     "start": 550.85,
+     "end": 551.37,
+     "word": " reformation."
+    }
+   ]
+  },
+  {
+   "start": 552.15,
+   "end": 554.93,
+   "text": "The stone does not merge with the statue, reform its politics,",
+   "words": [
+    {
+     "start": 552.15,
+     "end": 552.35,
+     "word": " The"
+    },
+    {
+     "start": 552.35,
+     "end": 552.59,
+     "word": " stone"
+    },
+    {
+     "start": 552.59,
+     "end": 552.77,
+     "word": " does"
+    },
+    {
+     "start": 552.77,
+     "end": 552.99,
+     "word": " not"
+    },
+    {
+     "start": 552.99,
+     "end": 553.25,
+     "word": " merge"
+    },
+    {
+     "start": 553.25,
+     "end": 553.43,
+     "word": " with"
+    },
+    {
+     "start": 553.43,
+     "end": 553.55,
+     "word": " the"
+    },
+    {
+     "start": 553.55,
+     "end": 553.89,
+     "word": " statue,"
+    },
+    {
+     "start": 554.19,
+     "end": 554.35,
+     "word": " reform"
+    },
+    {
+     "start": 554.35,
+     "end": 554.53,
+     "word": " its"
+    },
+    {
+     "start": 554.53,
+     "end": 554.93,
+     "word": " politics,"
+    }
+   ]
+  },
+  {
+   "start": 555.15,
+   "end": 557.43,
+   "text": "or Christianize its laws through social evolution.",
+   "words": [
+    {
+     "start": 555.15,
+     "end": 555.29,
+     "word": " or"
+    },
+    {
+     "start": 555.29,
+     "end": 555.93,
+     "word": " Christianize"
+    },
+    {
+     "start": 555.93,
+     "end": 556.07,
+     "word": " its"
+    },
+    {
+     "start": 556.07,
+     "end": 556.35,
+     "word": " laws"
+    },
+    {
+     "start": 556.35,
+     "end": 556.65,
+     "word": " through"
+    },
+    {
+     "start": 556.65,
+     "end": 556.99,
+     "word": " social"
+    },
+    {
+     "start": 556.99,
+     "end": 557.43,
+     "word": " evolution."
+    }
+   ]
+  },
+  {
+   "start": 558.07,
+   "end": 562.83,
+   "text": "It strikes the image with cataclysmic force, pulverizing all human empires until they become",
+   "words": [
+    {
+     "start": 558.07,
+     "end": 558.29,
+     "word": " It"
+    },
+    {
+     "start": 558.29,
+     "end": 558.61,
+     "word": " strikes"
+    },
+    {
+     "start": 558.61,
+     "end": 558.85,
+     "word": " the"
+    },
+    {
+     "start": 558.85,
+     "end": 559.03,
+     "word": " image"
+    },
+    {
+     "start": 559.03,
+     "end": 559.23,
+     "word": " with"
+    },
+    {
+     "start": 559.23,
+     "end": 559.93,
+     "word": " cataclysmic"
+    },
+    {
+     "start": 559.93,
+     "end": 560.25,
+     "word": " force,"
+    },
+    {
+     "start": 560.59,
+     "end": 561.03,
+     "word": " pulverizing"
+    },
+    {
+     "start": 561.03,
+     "end": 561.35,
+     "word": " all"
+    },
+    {
+     "start": 561.35,
+     "end": 561.65,
+     "word": " human"
+    },
+    {
+     "start": 561.65,
+     "end": 562.11,
+     "word": " empires"
+    },
+    {
+     "start": 562.11,
+     "end": 562.47,
+     "word": " until"
+    },
+    {
+     "start": 562.47,
+     "end": 562.59,
+     "word": " they"
+    },
+    {
+     "start": 562.59,
+     "end": 562.83,
+     "word": " become"
+    }
+   ]
+  },
+  {
+   "start": 562.83,
+   "end": 564.59,
+   "text": "like dust on a summer threshing floor.",
+   "words": [
+    {
+     "start": 562.83,
+     "end": 563.05,
+     "word": " like"
+    },
+    {
+     "start": 563.05,
+     "end": 563.33,
+     "word": " dust"
+    },
+    {
+     "start": 563.33,
+     "end": 563.57,
+     "word": " on"
+    },
+    {
+     "start": 563.57,
+     "end": 563.71,
+     "word": " a"
+    },
+    {
+     "start": 563.71,
+     "end": 563.93,
+     "word": " summer"
+    },
+    {
+     "start": 563.93,
+     "end": 564.31,
+     "word": " threshing"
+    },
+    {
+     "start": 564.31,
+     "end": 564.59,
+     "word": " floor."
+    }
+   ]
+  },
+  {
+   "start": 564.59,
+   "end": 566.75,
+   "text": "Swept away by the wind, Daniel 2, 35.",
+   "words": [
+    {
+     "start": 564.59,
+     "end": 565.07,
+     "word": " Swept"
+    },
+    {
+     "start": 565.07,
+     "end": 565.19,
+     "word": " away"
+    },
+    {
+     "start": 565.19,
+     "end": 565.39,
+     "word": " by"
+    },
+    {
+     "start": 565.39,
+     "end": 565.47,
+     "word": " the"
+    },
+    {
+     "start": 565.47,
+     "end": 565.69,
+     "word": " wind,"
+    },
+    {
+     "start": 566.07,
+     "end": 566.17,
+     "word": " Daniel"
+    },
+    {
+     "start": 566.17,
+     "end": 566.39,
+     "word": " 2,"
+    },
+    {
+     "start": 566.43,
+     "end": 566.75,
+     "word": " 35."
+    }
+   ]
+  },
+  {
+   "start": 567.93,
+   "end": 569.43,
+   "text": "A universal eternal domain.",
+   "words": [
+    {
+     "start": 567.93,
+     "end": 567.99,
+     "word": " A"
+    },
+    {
+     "start": 567.99,
+     "end": 568.49,
+     "word": " universal"
+    },
+    {
+     "start": 568.49,
+     "end": 569.01,
+     "word": " eternal"
+    },
+    {
+     "start": 569.01,
+     "end": 569.43,
+     "word": " domain."
+    }
+   ]
+  },
+  {
+   "start": 570.33,
+   "end": 574.49,
+   "text": "After obliterating the colossus, the stone expands into a great mountain that fills the entire",
+   "words": [
+    {
+     "start": 570.33,
+     "end": 570.49,
+     "word": " After"
+    },
+    {
+     "start": 570.49,
+     "end": 571.09,
+     "word": " obliterating"
+    },
+    {
+     "start": 571.09,
+     "end": 571.25,
+     "word": " the"
+    },
+    {
+     "start": 571.25,
+     "end": 571.59,
+     "word": " colossus,"
+    },
+    {
+     "start": 571.95,
+     "end": 572.01,
+     "word": " the"
+    },
+    {
+     "start": 572.01,
+     "end": 572.25,
+     "word": " stone"
+    },
+    {
+     "start": 572.25,
+     "end": 572.65,
+     "word": " expands"
+    },
+    {
+     "start": 572.65,
+     "end": 572.89,
+     "word": " into"
+    },
+    {
+     "start": 572.89,
+     "end": 573.03,
+     "word": " a"
+    },
+    {
+     "start": 573.03,
+     "end": 573.23,
+     "word": " great"
+    },
+    {
+     "start": 573.23,
+     "end": 573.49,
+     "word": " mountain"
+    },
+    {
+     "start": 573.49,
+     "end": 573.69,
+     "word": " that"
+    },
+    {
+     "start": 573.69,
+     "end": 573.91,
+     "word": " fills"
+    },
+    {
+     "start": 573.91,
+     "end": 574.13,
+     "word": " the"
+    },
+    {
+     "start": 574.13,
+     "end": 574.49,
+     "word": " entire"
+    }
+   ]
+  },
+  {
+   "start": 574.49,
+   "end": 574.87,
+   "text": "planet.",
+   "words": [
+    {
+     "start": 574.49,
+     "end": 574.87,
+     "word": " planet."
+    }
+   ]
+  },
+  {
+   "start": 575.55,
+   "end": 579.49,
+   "text": "The kingdom of God has no geographical limits, no successor, and no end.",
+   "words": [
+    {
+     "start": 575.55,
+     "end": 575.69,
+     "word": " The"
+    },
+    {
+     "start": 575.69,
+     "end": 575.83,
+     "word": " kingdom"
+    },
+    {
+     "start": 575.83,
+     "end": 576.05,
+     "word": " of"
+    },
+    {
+     "start": 576.05,
+     "end": 576.21,
+     "word": " God"
+    },
+    {
+     "start": 576.21,
+     "end": 576.47,
+     "word": " has"
+    },
+    {
+     "start": 576.47,
+     "end": 576.69,
+     "word": " no"
+    },
+    {
+     "start": 576.69,
+     "end": 577.11,
+     "word": " geographical"
+    },
+    {
+     "start": 577.11,
+     "end": 577.57,
+     "word": " limits,"
+    },
+    {
+     "start": 577.89,
+     "end": 578.09,
+     "word": " no"
+    },
+    {
+     "start": 578.09,
+     "end": 578.45,
+     "word": " successor,"
+    },
+    {
+     "start": 578.87,
+     "end": 579.01,
+     "word": " and"
+    },
+    {
+     "start": 579.01,
+     "end": 579.19,
+     "word": " no"
+    },
+    {
+     "start": 579.19,
+     "end": 579.49,
+     "word": " end."
+    }
+   ]
+  },
+  {
+   "start": 579.97,
+   "end": 580.89,
+   "text": "Revelation 11, 15.",
+   "words": [
+    {
+     "start": 579.97,
+     "end": 580.17,
+     "word": " Revelation"
+    },
+    {
+     "start": 580.17,
+     "end": 580.47,
+     "word": " 11,"
+    },
+    {
+     "start": 580.65,
+     "end": 580.89,
+     "word": " 15."
+    }
+   ]
+  },
+  {
+   "start": 582.4,
+   "end": 583.08,
+   "text": "The redemptive choice.",
+   "words": [
+    {
+     "start": 582.4,
+     "end": 582.44,
+     "word": " The"
+    },
+    {
+     "start": 582.44,
+     "end": 582.86,
+     "word": " redemptive"
+    },
+    {
+     "start": 582.86,
+     "end": 583.08,
+     "word": " choice."
+    }
+   ]
+  },
+  {
+   "start": 583.66,
+   "end": 584.62,
+   "text": "Repentance or ruin.",
+   "words": [
+    {
+     "start": 583.66,
+     "end": 584.08,
+     "word": " Repentance"
+    },
+    {
+     "start": 584.08,
+     "end": 584.36,
+     "word": " or"
+    },
+    {
+     "start": 584.36,
+     "end": 584.62,
+     "word": " ruin."
+    }
+   ]
+  },
+  {
+   "start": 585.58,
+   "end": 588.64,
+   "text": "Jesus applied this very prophecy to himself during his earthly ministry.",
+   "words": [
+    {
+     "start": 585.58,
+     "end": 585.76,
+     "word": " Jesus"
+    },
+    {
+     "start": 585.76,
+     "end": 586.16,
+     "word": " applied"
+    },
+    {
+     "start": 586.16,
+     "end": 586.34,
+     "word": " this"
+    },
+    {
+     "start": 586.34,
+     "end": 586.6,
+     "word": " very"
+    },
+    {
+     "start": 586.6,
+     "end": 586.92,
+     "word": " prophecy"
+    },
+    {
+     "start": 586.92,
+     "end": 587.22,
+     "word": " to"
+    },
+    {
+     "start": 587.22,
+     "end": 587.52,
+     "word": " himself"
+    },
+    {
+     "start": 587.52,
+     "end": 587.78,
+     "word": " during"
+    },
+    {
+     "start": 587.78,
+     "end": 587.98,
+     "word": " his"
+    },
+    {
+     "start": 587.98,
+     "end": 588.22,
+     "word": " earthly"
+    },
+    {
+     "start": 588.22,
+     "end": 588.64,
+     "word": " ministry."
+    }
+   ]
+  },
+  {
+   "start": 589.52,
+   "end": 593.7,
+   "text": "Whosoever shall fall upon that stone shall be broken, but on whosoever it shall fall,",
+   "words": [
+    {
+     "start": 589.52,
+     "end": 589.98,
+     "word": " Whosoever"
+    },
+    {
+     "start": 589.98,
+     "end": 590.2,
+     "word": " shall"
+    },
+    {
+     "start": 590.2,
+     "end": 590.44,
+     "word": " fall"
+    },
+    {
+     "start": 590.44,
+     "end": 590.66,
+     "word": " upon"
+    },
+    {
+     "start": 590.66,
+     "end": 590.84,
+     "word": " that"
+    },
+    {
+     "start": 590.84,
+     "end": 591.12,
+     "word": " stone"
+    },
+    {
+     "start": 591.12,
+     "end": 591.28,
+     "word": " shall"
+    },
+    {
+     "start": 591.28,
+     "end": 591.42,
+     "word": " be"
+    },
+    {
+     "start": 591.42,
+     "end": 591.76,
+     "word": " broken,"
+    },
+    {
+     "start": 592.14,
+     "end": 592.36,
+     "word": " but"
+    },
+    {
+     "start": 592.36,
+     "end": 592.5,
+     "word": " on"
+    },
+    {
+     "start": 592.5,
+     "end": 593.04,
+     "word": " whosoever"
+    },
+    {
+     "start": 593.04,
+     "end": 593.22,
+     "word": " it"
+    },
+    {
+     "start": 593.22,
+     "end": 593.36,
+     "word": " shall"
+    },
+    {
+     "start": 593.36,
+     "end": 593.7,
+     "word": " fall,"
+    }
+   ]
+  },
+  {
+   "start": 593.82,
+   "end": 594.84,
+   "text": "it will grind him to powder.",
+   "words": [
+    {
+     "start": 593.82,
+     "end": 593.94,
+     "word": " it"
+    },
+    {
+     "start": 593.94,
+     "end": 594.08,
+     "word": " will"
+    },
+    {
+     "start": 594.08,
+     "end": 594.3,
+     "word": " grind"
+    },
+    {
+     "start": 594.3,
+     "end": 594.48,
+     "word": " him"
+    },
+    {
+     "start": 594.48,
+     "end": 594.64,
+     "word": " to"
+    },
+    {
+     "start": 594.64,
+     "end": 594.84,
+     "word": " powder."
+    }
+   ]
+  },
+  {
+   "start": 595.14,
+   "end": 596.86,
+   "text": "Luke 2018, KGV.",
+   "words": [
+    {
+     "start": 595.14,
+     "end": 595.6,
+     "word": " Luke"
+    },
+    {
+     "start": 595.6,
+     "end": 596.34,
+     "word": " 2018,"
+    },
+    {
+     "start": 596.58,
+     "end": 596.86,
+     "word": " KGV."
+    }
+   ]
+  },
+  {
+   "start": 598.12,
+   "end": 600.8,
+   "text": "Here is the gospel offer embedded in the metallic colossus.",
+   "words": [
+    {
+     "start": 598.12,
+     "end": 598.12,
+     "word": " Here"
+    },
+    {
+     "start": 598.12,
+     "end": 598.3,
+     "word": " is"
+    },
+    {
+     "start": 598.3,
+     "end": 598.46,
+     "word": " the"
+    },
+    {
+     "start": 598.46,
+     "end": 598.68,
+     "word": " gospel"
+    },
+    {
+     "start": 598.68,
+     "end": 599.12,
+     "word": " offer"
+    },
+    {
+     "start": 599.12,
+     "end": 599.6,
+     "word": " embedded"
+    },
+    {
+     "start": 599.6,
+     "end": 599.9,
+     "word": " in"
+    },
+    {
+     "start": 599.9,
+     "end": 599.98,
+     "word": " the"
+    },
+    {
+     "start": 599.98,
+     "end": 600.36,
+     "word": " metallic"
+    },
+    {
+     "start": 600.36,
+     "end": 600.8,
+     "word": " colossus."
+    }
+   ]
+  },
+  {
+   "start": 601.86,
+   "end": 606.5,
+   "text": "If you fall upon Christ today in repentance, your pride is broken, your sins are forgiven",
+   "words": [
+    {
+     "start": 601.86,
+     "end": 601.86,
+     "word": " If"
+    },
+    {
+     "start": 601.86,
+     "end": 602.02,
+     "word": " you"
+    },
+    {
+     "start": 602.02,
+     "end": 602.26,
+     "word": " fall"
+    },
+    {
+     "start": 602.26,
+     "end": 602.56,
+     "word": " upon"
+    },
+    {
+     "start": 602.56,
+     "end": 602.88,
+     "word": " Christ"
+    },
+    {
+     "start": 602.88,
+     "end": 603.22,
+     "word": " today"
+    },
+    {
+     "start": 603.22,
+     "end": 603.46,
+     "word": " in"
+    },
+    {
+     "start": 603.46,
+     "end": 603.9,
+     "word": " repentance,"
+    },
+    {
+     "start": 604.42,
+     "end": 604.5,
+     "word": " your"
+    },
+    {
+     "start": 604.5,
+     "end": 604.76,
+     "word": " pride"
+    },
+    {
+     "start": 604.76,
+     "end": 604.92,
+     "word": " is"
+    },
+    {
+     "start": 604.92,
+     "end": 605.26,
+     "word": " broken,"
+    },
+    {
+     "start": 605.76,
+     "end": 605.86,
+     "word": " your"
+    },
+    {
+     "start": 605.86,
+     "end": 606.1,
+     "word": " sins"
+    },
+    {
+     "start": 606.1,
+     "end": 606.22,
+     "word": " are"
+    },
+    {
+     "start": 606.22,
+     "end": 606.5,
+     "word": " forgiven"
+    }
+   ]
+  },
+  {
+   "start": 606.5,
+   "end": 608.26,
+   "text": "through his blood, and you are saved.",
+   "words": [
+    {
+     "start": 606.5,
+     "end": 606.76,
+     "word": " through"
+    },
+    {
+     "start": 606.76,
+     "end": 606.94,
+     "word": " his"
+    },
+    {
+     "start": 606.94,
+     "end": 607.18,
+     "word": " blood,"
+    },
+    {
+     "start": 607.56,
+     "end": 607.7,
+     "word": " and"
+    },
+    {
+     "start": 607.7,
+     "end": 607.84,
+     "word": " you"
+    },
+    {
+     "start": 607.84,
+     "end": 607.96,
+     "word": " are"
+    },
+    {
+     "start": 607.96,
+     "end": 608.26,
+     "word": " saved."
+    }
+   ]
+  },
+  {
+   "start": 609.18,
+   "end": 614.24,
+   "text": "If you resist him, the stone will fall upon you in final judgment, sweeping away all earthly",
+   "words": [
+    {
+     "start": 609.18,
+     "end": 609.32,
+     "word": " If"
+    },
+    {
+     "start": 609.32,
+     "end": 609.44,
+     "word": " you"
+    },
+    {
+     "start": 609.44,
+     "end": 609.76,
+     "word": " resist"
+    },
+    {
+     "start": 609.76,
+     "end": 610.08,
+     "word": " him,"
+    },
+    {
+     "start": 610.44,
+     "end": 610.56,
+     "word": " the"
+    },
+    {
+     "start": 610.56,
+     "end": 610.8,
+     "word": " stone"
+    },
+    {
+     "start": 610.8,
+     "end": 610.98,
+     "word": " will"
+    },
+    {
+     "start": 610.98,
+     "end": 611.2,
+     "word": " fall"
+    },
+    {
+     "start": 611.2,
+     "end": 611.46,
+     "word": " upon"
+    },
+    {
+     "start": 611.46,
+     "end": 611.68,
+     "word": " you"
+    },
+    {
+     "start": 611.68,
+     "end": 611.86,
+     "word": " in"
+    },
+    {
+     "start": 611.86,
+     "end": 612.18,
+     "word": " final"
+    },
+    {
+     "start": 612.18,
+     "end": 612.58,
+     "word": " judgment,"
+    },
+    {
+     "start": 612.92,
+     "end": 613.22,
+     "word": " sweeping"
+    },
+    {
+     "start": 613.22,
+     "end": 613.54,
+     "word": " away"
+    },
+    {
+     "start": 613.54,
+     "end": 613.92,
+     "word": " all"
+    },
+    {
+     "start": 613.92,
+     "end": 614.24,
+     "word": " earthly"
+    }
+   ]
+  },
+  {
+   "start": 614.24,
+   "end": 614.76,
+   "text": "security.",
+   "words": [
+    {
+     "start": 614.24,
+     "end": 614.76,
+     "word": " security."
+    }
+   ]
+  },
+  {
+   "start": 617.11,
+   "end": 619.83,
+   "text": "The stone is not a policy program or a better emperor.",
+   "words": [
+    {
+     "start": 617.11,
+     "end": 617.25,
+     "word": " The"
+    },
+    {
+     "start": 617.25,
+     "end": 617.49,
+     "word": " stone"
+    },
+    {
+     "start": 617.49,
+     "end": 617.69,
+     "word": " is"
+    },
+    {
+     "start": 617.69,
+     "end": 617.87,
+     "word": " not"
+    },
+    {
+     "start": 617.87,
+     "end": 617.99,
+     "word": " a"
+    },
+    {
+     "start": 617.99,
+     "end": 618.37,
+     "word": " policy"
+    },
+    {
+     "start": 618.37,
+     "end": 618.77,
+     "word": " program"
+    },
+    {
+     "start": 618.77,
+     "end": 619.17,
+     "word": " or"
+    },
+    {
+     "start": 619.17,
+     "end": 619.29,
+     "word": " a"
+    },
+    {
+     "start": 619.29,
+     "end": 619.47,
+     "word": " better"
+    },
+    {
+     "start": 619.47,
+     "end": 619.83,
+     "word": " emperor."
+    }
+   ]
+  },
+  {
+   "start": 620.29,
+   "end": 624.61,
+   "text": "It is Jesus Christ, cut without hands, striking the feet, filling the earth.",
+   "words": [
+    {
+     "start": 620.29,
+     "end": 620.49,
+     "word": " It"
+    },
+    {
+     "start": 620.49,
+     "end": 620.65,
+     "word": " is"
+    },
+    {
+     "start": 620.65,
+     "end": 620.91,
+     "word": " Jesus"
+    },
+    {
+     "start": 620.91,
+     "end": 621.31,
+     "word": " Christ,"
+    },
+    {
+     "start": 621.49,
+     "end": 621.83,
+     "word": " cut"
+    },
+    {
+     "start": 621.83,
+     "end": 622.09,
+     "word": " without"
+    },
+    {
+     "start": 622.09,
+     "end": 622.53,
+     "word": " hands,"
+    },
+    {
+     "start": 622.83,
+     "end": 623.09,
+     "word": " striking"
+    },
+    {
+     "start": 623.09,
+     "end": 623.31,
+     "word": " the"
+    },
+    {
+     "start": 623.31,
+     "end": 623.55,
+     "word": " feet,"
+    },
+    {
+     "start": 623.93,
+     "end": 624.15,
+     "word": " filling"
+    },
+    {
+     "start": 624.15,
+     "end": 624.41,
+     "word": " the"
+    },
+    {
+     "start": 624.41,
+     "end": 624.61,
+     "word": " earth."
+    }
+   ]
+  },
+  {
+   "start": 625.17,
+   "end": 626.91,
+   "text": "Build on the living stone today.",
+   "words": [
+    {
+     "start": 625.17,
+     "end": 625.49,
+     "word": " Build"
+    },
+    {
+     "start": 625.49,
+     "end": 625.73,
+     "word": " on"
+    },
+    {
+     "start": 625.73,
+     "end": 625.83,
+     "word": " the"
+    },
+    {
+     "start": 625.83,
+     "end": 626.03,
+     "word": " living"
+    },
+    {
+     "start": 626.03,
+     "end": 626.31,
+     "word": " stone"
+    },
+    {
+     "start": 626.31,
+     "end": 626.91,
+     "word": " today."
+    }
+   ]
+  },
+  {
+   "start": 627.76,
+   "end": 631.64,
+   "text": "Next lesson, sheet 3, Daniel 3, the plane of Dura.",
+   "words": [
+    {
+     "start": 627.76,
+     "end": 627.76,
+     "word": " Next"
+    },
+    {
+     "start": 627.76,
+     "end": 628.08,
+     "word": " lesson,"
+    },
+    {
+     "start": 628.58,
+     "end": 628.64,
+     "word": " sheet"
+    },
+    {
+     "start": 628.64,
+     "end": 628.96,
+     "word": " 3,"
+    },
+    {
+     "start": 629.54,
+     "end": 629.68,
+     "word": " Daniel"
+    },
+    {
+     "start": 629.68,
+     "end": 629.98,
+     "word": " 3,"
+    },
+    {
+     "start": 630.48,
+     "end": 630.8,
+     "word": " the"
+    },
+    {
+     "start": 630.8,
+     "end": 631.08,
+     "word": " plane"
+    },
+    {
+     "start": 631.08,
+     "end": 631.34,
+     "word": " of"
+    },
+    {
+     "start": 631.34,
+     "end": 631.64,
+     "word": " Dura."
+    }
+   ]
+  },
+  {
+   "start": 632.75,
+   "end": 637.11,
+   "text": "Because Babylon was shown only the head of gold, Nebuchadnezzar's next move will be",
+   "words": [
+    {
+     "start": 632.75,
+     "end": 632.97,
+     "word": " Because"
+    },
+    {
+     "start": 632.97,
+     "end": 633.31,
+     "word": " Babylon"
+    },
+    {
+     "start": 633.31,
+     "end": 633.55,
+     "word": " was"
+    },
+    {
+     "start": 633.55,
+     "end": 633.81,
+     "word": " shown"
+    },
+    {
+     "start": 633.81,
+     "end": 634.23,
+     "word": " only"
+    },
+    {
+     "start": 634.23,
+     "end": 634.49,
+     "word": " the"
+    },
+    {
+     "start": 634.49,
+     "end": 634.61,
+     "word": " head"
+    },
+    {
+     "start": 634.61,
+     "end": 634.73,
+     "word": " of"
+    },
+    {
+     "start": 634.73,
+     "end": 635.01,
+     "word": " gold,"
+    },
+    {
+     "start": 635.47,
+     "end": 636.07,
+     "word": " Nebuchadnezzar's"
+    },
+    {
+     "start": 636.07,
+     "end": 636.35,
+     "word": " next"
+    },
+    {
+     "start": 636.35,
+     "end": 636.67,
+     "word": " move"
+    },
+    {
+     "start": 636.67,
+     "end": 636.93,
+     "word": " will"
+    },
+    {
+     "start": 636.93,
+     "end": 637.11,
+     "word": " be"
+    }
+   ]
+  },
+  {
+   "start": 637.11,
+   "end": 642.43,
+   "text": "to build an image made entirely of gold and force the empire to worship it, the prototype",
+   "words": [
+    {
+     "start": 637.11,
+     "end": 637.33,
+     "word": " to"
+    },
+    {
+     "start": 637.33,
+     "end": 637.57,
+     "word": " build"
+    },
+    {
+     "start": 637.57,
+     "end": 637.79,
+     "word": " an"
+    },
+    {
+     "start": 637.79,
+     "end": 638.21,
+     "word": " image"
+    },
+    {
+     "start": 638.21,
+     "end": 638.49,
+     "word": " made"
+    },
+    {
+     "start": 638.49,
+     "end": 639.05,
+     "word": " entirely"
+    },
+    {
+     "start": 639.05,
+     "end": 639.41,
+     "word": " of"
+    },
+    {
+     "start": 639.41,
+     "end": 639.67,
+     "word": " gold"
+    },
+    {
+     "start": 639.67,
+     "end": 640.15,
+     "word": " and"
+    },
+    {
+     "start": 640.15,
+     "end": 640.49,
+     "word": " force"
+    },
+    {
+     "start": 640.49,
+     "end": 640.71,
+     "word": " the"
+    },
+    {
+     "start": 640.71,
+     "end": 640.95,
+     "word": " empire"
+    },
+    {
+     "start": 640.95,
+     "end": 641.19,
+     "word": " to"
+    },
+    {
+     "start": 641.19,
+     "end": 641.35,
+     "word": " worship"
+    },
+    {
+     "start": 641.35,
+     "end": 641.63,
+     "word": " it,"
+    },
+    {
+     "start": 641.91,
+     "end": 642.09,
+     "word": " the"
+    },
+    {
+     "start": 642.09,
+     "end": 642.43,
+     "word": " prototype"
+    }
+   ]
+  },
+  {
+   "start": 642.43,
+   "end": 643.37,
+   "text": "of the final crisis.",
+   "words": [
+    {
+     "start": 642.43,
+     "end": 642.69,
+     "word": " of"
+    },
+    {
+     "start": 642.69,
+     "end": 642.81,
+     "word": " the"
+    },
+    {
+     "start": 642.81,
+     "end": 643.03,
+     "word": " final"
+    },
+    {
+     "start": 643.03,
+     "end": 643.37,
+     "word": " crisis."
+    }
+   ]
+  }
+ ]
+}
