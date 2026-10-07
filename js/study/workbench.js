@@ -68,7 +68,7 @@
           </span>
         </div>
         <p class="text-xs text-ink-600 dark:text-paper-400 mb-6 leading-relaxed">
-          Before taking the checkpoint quiz, verify the day-for-year precedent in Scripture (precedent, not universal rule) and correctly classify the three schools of apocalyptic interpretation.
+          Before taking the checkpoint quiz, verify the day-for-year scale Scripture sets in Numbers 14:34 and Ezekiel 4:6 and correctly classify the three schools of apocalyptic interpretation.
         </p>
 
         <!-- Task 1: Year-Day Scriptural Formulation -->
@@ -141,7 +141,7 @@
               { id: 'm2', text: "Prophecy is an unbroken, continuous chain of historical fulfillment from 605 B.C. through divided Europe to the Second Advent.", correct: "historicism" },
               { id: 'm3', text: "All apocalyptic prophecies were completed by the destruction of Jerusalem in A.D. 70 and the fall of pagan Rome.", correct: "preterism" },
               { id: 'm4', text: "The Antichrist is a single future individual reigning for 3.5 literal years in a rebuilt temple in Jerusalem.", correct: "futurism" },
-              { id: 'm5', text: "The number 1,260 years is built from Daniel's 'time, times, and half a time' through day-year and calendar conventions — four interpretive layers, not a number Daniel prints outright.", correct: "historicism" }
+              { id: 'm5', text: "The number 1,260 is the year-day reading of Daniel 7:25's 'time, times, and the dividing of time'; Revelation 12:6 and 13:5 give the same span as 1,260 days and 42 months.", correct: "historicism" }
             ].map((item, idx) => `
               <div class="p-3 rounded-lg bg-paper-100/60 dark:bg-paper-900/60 border border-paper-300/80 dark:border-paper-800 flex flex-col sm:flex-row sm:items-center justify-between gap-3" data-item-id="${item.id}" data-correct="${item.correct}">
                 <span class="text-ink-800 dark:text-paper-200 leading-snug"><strong class="font-mono text-ink-500 dark:text-paper-500 mr-1">${idx + 1}.</strong> ${item.text}</span>
@@ -284,7 +284,7 @@
                 <select class="name-select w-full p-2 rounded border border-paper-300 dark:border-paper-700 bg-paper-50 dark:bg-paper-950 text-xs font-mono text-ink-800 dark:text-paper-200" aria-label="Select Babylonian renaming">
                   <option value="">Select Babylonian renaming...</option>
                   <option value="belteshazzar_bel" ${t1Done && item.correct === 'belteshazzar_bel' ? 'selected' : ''}>Belteshazzar (Honors Bel / Marduk)</option>
-                  <option value="shadrach_aku" ${t1Done && item.correct === 'shadrach_aku' ? 'selected' : ''}>Shadrach (Honors Aku / Moon god)</option>
+                  <option value="shadrach_aku" ${t1Done && item.correct === 'shadrach_aku' ? 'selected' : ''}>Shadrach (traditional Aku reading, debated)</option>
                   <option value="meshach_aku" ${t1Done && item.correct === 'meshach_aku' ? 'selected' : ''}>Meshach (Honors Aku / “Who is what Aku is?” — traditional reading)</option>
                   <option value="abednego_nabu" ${t1Done && item.correct === 'abednego_nabu' ? 'selected' : ''}>Abednego (Honors Nabu / Nebo)</option>
                 </select>
@@ -369,7 +369,7 @@
       } else {
         if (window.Insights) window.Insights.track('workbench_task', 1, { task: 'task1', pass: false });
         fb.className = "text-xs font-semibold text-rose-700 dark:text-rose-400";
-        fb.textContent = `${ok} of 4 correct. Ensure Daniel matches Belteshazzar (Bel), Hananiah matches Shadrach (Aku), etc.`;
+        fb.textContent = `${ok} of 4 correct. Ensure Daniel matches Belteshazzar (Bel), Hananiah matches Shadrach (traditional Aku rendering), etc.`;
       }
     });
 
@@ -666,7 +666,7 @@
       type: 'match',
       title: 'Daniel 9: The Arithmetic of the Weeks',
       passage: 'Daniel 9:24–27 & Daniel 8:14',
-      question: "These landings are historicist layers, not calendar years printed in the verse. Match each sum to its landing.",
+      question: "Match each sum to its landing on the timeline.",
       items: [
         { id: 'a27', text: '457 B.C. + 483 years (69 weeks)', correct: 'ad27' },
         { id: 'a1844', text: '2,300 years − 490 years (70 weeks cut off)', correct: 'y1844' }

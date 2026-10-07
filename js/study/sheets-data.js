@@ -41,7 +41,7 @@
         flow: [
           { kind: "scripture", title: "The Lord gave the king", text: "Nebuchadnezzar did not conquer by independent might — God handed Judah over according to His purpose.", tag: "Daniel 1:2" },
           { kind: "anchor", title: "Three hermeneutical roads", text: "Historicism keeps one chain; preterism locks it in antiquity; futurism severs it with a gap Daniel never names.", tag: "Daniel 2:38–44" },
-          { kind: "history", title: "Counter-Reformation catalyst", text: "Alcázar (1614) and Ribera (1590) relocated fulfillment to escape the historicist identification of the papacy.", tag: "Council of Trent" },
+          { kind: "history", title: "Counter-Reformation catalyst", text: "Alcázar (1614) and Ribera (1590) published systematic readings that moved fulfillment off the medieval church — dated commentaries, not a cartoon motive.", tag: "Council of Trent" },
           { kind: "scripture", title: "The year-day scale", text: "Numbers 14:34 and Ezekiel 4:6 set the precedent. Daniel 9 tests that scale in the prophecy of the Messiah and at the cross.", tag: "Num 14:34; Ezek 4:6; Dan 9:24–27" },
           { kind: "anchor", title: "Christ is the redemptive center", text: "Christ is sovereign in the exile (Daniel 1:2), cut off as Messiah (Daniel 9:26), and the Stone-King (Daniel 2:44). Luke 24:27 holds these together.", tag: "Luke 24:27" },
           { kind: "guard", title: "You live before the Stone", text: "Historicism places you in the divided feet. You are freed from fear, resting in Christ's first and second advent.", tag: "Daniel 2:41–44" }
@@ -67,7 +67,7 @@
 <p>When the book of Daniel opens, the world appears broken. In 605 B.C., Nebuchadnezzar sweeps down the Mediterranean coast, subdues Jerusalem, and marches Hebrew royal youth — including a teenage Daniel — hundreds of miles away into exile. Sacred vessels from the temple of Yahweh are deposited into the treasure house of the god Marduk in Babylon. To the casual observer, the God of Israel has been defeated by imperial might.</p>
 
 <p>Yet Daniel 1:2 immediately upends that view:</p>
-<blockquote class="scripture-quote">"And the Lord gave Jehoiakim king of Judah into his hand."</blockquote>
+<blockquote class="scripture-quote">"And the Lord gave Jehoiakim king of Judah into his hand..." — Daniel 1:2 (KJV)</blockquote>
 
 <p>Human tyrants do not direct history independently. Nebuchadnezzar did not conquer Jerusalem by his own strength; God handed it over according to His prophetic purpose. This single realization establishes the foundation for biblical prophecy: earthly empires rise, fall, and transition only by divine permission.</p>
 
@@ -83,7 +83,7 @@
 
 <pre class="prophecy-diagram">THE THREE INTERPRETIVE SCHOOLS
 
-1. HISTORICISM (The Biblical &amp; Protestant Model)
+1. HISTORICISM (the continuous historical reading this course defends)
    Babylon ──▶ Medo-Persia ──▶ Greece ──▶ Rome ──▶ Divided Europe ──▶ Christ's Kingdom
    [────────────────── Unbroken, Continuous Chain in Real Time ──────────────────]
 
@@ -98,7 +98,7 @@
 <div class="framework-card">
   <p class="framework-card-kicker">1. Historicism — the continuous historical model</p>
   <p><span class="term-gloss" data-term="historicism">Historicism</span> reads Daniel and Revelation as an unbroken, contiguous chain of fulfillment extending from the prophet's day through the rise and fall of world empires, across the Christian era, and straight to the Second Coming.</p>
-  <p><strong>Who held it?</strong> Early church fathers (such as Hippolytus), the Waldenses, John Wycliffe, and the mainstream Protestant Reformers (Martin Luther, John Calvin, Philip Melanchthon, John Knox), as well as scientists like Sir Isaac Newton.</p>
+  <p><strong>Who held it?</strong> Hippolytus of Rome (c. A.D. 200) names Babylon, Persia, Greece, and Rome as one sequence of four kingdoms. He also expected a future individual antichrist. The Waldenses, John Wycliffe, and the mainstream Protestant Reformers (Martin Luther, John Calvin, Philip Melanchthon, John Knox), as well as Sir Isaac Newton, later read the chain through the Christian era.</p>
   <p><strong>Why it works:</strong> It obeys the explicit text of Daniel 2:38–44. Daniel names Babylon as the head of gold, and tells the king that after him will arise second, third, and fourth empires, culminating in the eternal kingdom of God.</p>
 </div>
 
@@ -112,13 +112,13 @@
 <div class="framework-card">
   <p class="framework-card-kicker">3. Futurism — postponed to the end of time</p>
   <p><span class="term-gloss" data-term="futurism">Futurism</span> argues that Daniel's final prophetic timeline — specifically the 70th week of Daniel 9 — has been paused, inserting an unstated gap of many centuries before an individual antichrist appears in a final, literal seven-year crisis.</p>
-  <p><strong>Origins:</strong> It was first formulated by the Spanish Jesuit scholar Francisco Ribera in his 1590 commentary on Revelation. In the 1830s, this theory was imported into Protestant circles by Edward Irving and John Nelson Darby, giving rise to modern <span class="term-gloss" data-term="dispensationalism">Dispensationalism</span> and later popularized by the <em>Scofield Reference Bible</em> (1909).</p>
+  <p><strong>Origins:</strong> Patristic readers already expected a future individual antichrist; Hippolytus of Rome (c. A.D. 200) is the witness. Francisco Ribera’s 1590 commentary on Revelation made that reading systematic: a gap before a future crisis. In Protestant circles S. R. Maitland (1826) took it up; Edward Irving and John Nelson Darby then popularized it in the 1830s, giving rise to modern <span class="term-gloss" data-term="dispensationalism">Dispensationalism</span>, later spread by the <em>Scofield Reference Bible</em> (1909).</p>
   <p><strong>The structural flaw:</strong> It shatters the historical continuity of the text, creating an arbitrary 2,000-year parenthetical gap found nowhere in the biblical passage.</p>
 </div>
 
 <div class="historical-note">
   <p class="historical-note-kicker">The historical catalyst · Council of Trent (1545–1563)</p>
-  <p>Neither Preterism nor Futurism emerged in a vacuum. During the Counter-Reformation, Protestant Reformers used the historicist method to identify the medieval papal-monarchical system with the "Little Horn" of Daniel 7 and the beast of Revelation 13. To deflect this institutional critique, Jesuit scholarship introduced two opposing escape routes: Alcázar pushed the antichrist back into the remote pagan past, while Ribera propelled the antichrist forward into a distant, hypothetical future. Both models effectively removed the medieval and modern church from prophetic accountability.</p>
+  <p>Neither Preterism nor Futurism emerged in a vacuum. During the Counter-Reformation, Protestant Reformers used the historicist method to identify the medieval papal-monarchical system with the "Little Horn" of Daniel 7 and the beast of Revelation 13. Jesuit scholars then published two systematic alternatives: Alcázar (1614) placed fulfillment in the pagan past; Ribera (1590) placed it in a distant future. The dated effect of both commentaries is that the medieval and modern church fall off the chain. The titles and dates are the argument.</p>
 </div>
 
 <div class="level-card level-interpretation">
@@ -161,7 +161,7 @@ Daniel 9:24–27 ──▶  "Seventy weeks" (70 × 7 = 490 prophetic days)
 
 <div class="caution-card">
   <p class="caution-card-kicker">An honest reading</p>
-  <p>Numbers 14:34 and Ezekiel 4:6 set the biblical precedent that a prophetic day can stand for a year. Daniel 9 tests that scale in the prophecy of the Messiah. The dates 457 B.C. and A.D. 27–34 are conclusions drawn from that framework. They are not calendar years printed in the verse. Later sittings will walk through each step.</p>
+  <p>Numbers 14:34 and Ezekiel 4:6 set the scale: one prophetic day for one year. Daniel 9 applies it: the seventy weeks (490 years) run from Artaxerxes' seventh-year decree (457 B.C., Ezra 7) to Messiah's anointing in A.D. 27 and His cross in A.D. 31, with the week closing in A.D. 34.</p>
 </div>
 
 <div class="part-header" id="part-iii">
@@ -433,8 +433,8 @@ Daniel 9:24–27 ──▶  "Seventy weeks" (70 × 7 = 490 prophetic days)
         flow: [
           { kind: "scripture", title: "Shinar and sovereign judgment", text: "Exile to Babel's plain is not Marduk's victory — the Lord gave Jehoiakim into Nebuchadnezzar's hand.", tag: "Daniel 1:1–2; Jer 25:9–12" },
           { kind: "history", title: "Three sieges, three dates", text: "The dates are 605 (Daniel's levy), 597 (Jehoiachin, BM 21946), and 586 (the temple burned). Isaiah 39:7 is fulfilled.", tag: "2 Kings 24–25" },
-          { kind: "scripture", title: "The conflict of names", text: "Their Yahweh-confessing names become honors to Bel, Aku, and Nebo. A name on the civic roll is not an act of worship.", tag: "Daniel 1:7" },
-          { kind: "anchor", title: "The line at the royal table", text: "Daniel purposed in his heart not to defile himself. The king's table meant idol fellowship, a breach of Leviticus, and a dulled mind.", tag: "Daniel 1:8" },
+          { kind: "scripture", title: "The conflict of names", text: "Their Yahweh-confessing names become names honoring Babylonian gods. The Aku reading of Shadrach and Meshach is the traditional grid, not settled Akkadian. A name on the civic roll is not an act of worship.", tag: "Daniel 1:7" },
+          { kind: "anchor", title: "The line at the royal table", text: "Daniel purposed in his heart not to defile himself. The king's table meant idol fellowship and, under Leviticus 11, food defiled by the pagan table. Daniel 1:8 names defilement, not any effect on the mind.", tag: "Daniel 1:8" },
           { kind: "history", title: "Zeroim and the ten-day test", text: "Seed-grown foods echo Genesis 1:29. God gave wisdom ten times better, and the vegetables did not produce it.", tag: "Daniel 1:12–20" },
           { kind: "anchor", title: "Typology of the faithful Son", text: "Daniel in exile foreshadows Christ in the wilderness. The test is bread, kingdoms, and covenant fidelity.", tag: "Matt 4:4; Heb 4:15" },
           { kind: "guard", title: "Civic competence, covenant boundaries", text: "Excel in Babylon's court; draw the line when conscience, worship, or God's Word is demanded.", tag: "Daniel 1:3–8" }
@@ -457,7 +457,7 @@ Daniel 9:24–27 ──▶  "Seventy weeks" (70 × 7 = 490 prophetic days)
   <p>When Babylon sought to erase covenant identity through re-education, renaming, and pagan table fellowship, Daniel and his companions proved that <strong>covenant consecration precedes spiritual wisdom</strong> — and that their stand prophetically points to the redemptive obedience of Jesus Christ.</p>
 </div>
 
-<blockquote class="scripture-quote pull-quote">"But Daniel purposed in his heart that he would not defile himself with the portion of the king's meat, nor with the wine which he drank." — Daniel 1:8 (KJV)</blockquote>
+<blockquote class="scripture-quote pull-quote">"But Daniel purposed in his heart that he would not defile himself with the portion of the king's meat, nor with the wine which he drank:..." — Daniel 1:8 (KJV)</blockquote>
 
 <div class="from-last-sitting">
   <span class="from-last-sitting-kicker">From the last sitting · Sheet 0</span>
@@ -511,11 +511,11 @@ Daniel 9:24–27 ──▶  "Seventy weeks" (70 × 7 = 490 prophetic days)
 <pre class="prophecy-diagram">THE CONFLICT OF NAMES
 HEBREW NAME (CONFESSING YAHWEH)          BABYLONIAN NAME (HONORING IDOLS)
 Daniel      ("God is my Judge")     ──▶  Belteshazzar ("Bel protect his life")
-Hananiah    ("Yahweh is Gracious")  ──▶  Shadrach     ("Command of Aku")
-Mishael     ("Who is like God?")    ──▶  Meshach      ("Who is what Aku is?")
+Hananiah    ("Yahweh is Gracious")  ──▶  Shadrach     (trad.: "Command of Aku" — debated)
+Mishael     ("Who is like God?")    ──▶  Meshach      (trad.: "Who is what Aku is?" — debated)
 Azariah     ("Yahweh has Helped")   ──▶  Abednego     ("Servant of Nebo")</pre>
 
-<p>In the ancient Semitic world, a name defined a person's identity and allegiance. By erasing names bearing the divine titles El and Yah, the court attempted to submerge the captives into the Babylonian pantheon (Bel/Marduk, Aku the moon-god, and Nebo the god of wisdom).</p>
+<p>In the ancient Semitic world, a name defined a person's identity and allegiance. By erasing names bearing the divine titles El and Yah, the court attempted to submerge the captives into the Babylonian pantheon (Bel/Marduk, and Nebo the god of wisdom). The Aku renderings of Shadrach and Meshach are the traditional grid; the exact Akkadian is debated. The load-bearing point is the theophoric contrast, not a settled lexicon.</p>
 
 <p>Remarkably, Daniel and his companions did not stage a political revolt over their names or their education:</p>
 
@@ -542,25 +542,23 @@ Azariah     ("Yahweh has Helped")   ──▶  Abednego     ("Servant of Nebo")<
 </div>
 
 <p>The line was crossed when the state demanded participation at the king's table:</p>
-<blockquote class="scripture-quote">"But Daniel purposed in his heart that he would not defile himself with the portion of the king's meat, nor with the wine which he drank." — Daniel 1:8 (KJV)</blockquote>
+<blockquote class="scripture-quote">"But Daniel purposed in his heart that he would not defile himself with the portion of the king's meat, nor with the wine which he drank:..." — Daniel 1:8 (KJV)</blockquote>
 
-<p>This was not a matter of culinary preference or a modern wellness fad. Eating from the king's royal menu presented a three-fold covenant crisis:</p>
+<p>This was not a matter of culinary preference or a modern wellness fad. Eating from the king's royal menu presented a covenant crisis on two fronts Daniel 1:8 actually names — meat and wine that would <em>defile</em>:</p>
 
 <ol>
-  <li><strong>Sacrificial idolatry:</strong> Ancient Near Eastern royal food was ritually dedicated to the patron gods before being served. The Greek historian Xenophon records this standard imperial practice: the king routinely offered the first portion of court food and wine to the gods before dining (<em>Cyropaedia</em> 1.3.10). To eat this food meant entering into table-fellowship with idols and crediting Marduk for one's life and sustenance.</li>
-  <li><strong>Levitical defilement:</strong> The royal menu routinely included meats prohibited by the Torah (Leviticus 11; Deuteronomy 14), such as pork, alongside meat that had not been properly drained of blood (Leviticus 17:10–14).</li>
-  <li><strong>Moral and spiritual clarity:</strong> Indulging in intoxicating palace wine and heavy food dulls spiritual perception. Daniel sought a clear mind to hear and discern the voice of God.</li>
+  <li><strong>Sacrificial idolatry (reconstruction):</strong> Ancient Near Eastern royal food was typically dedicated to the patron gods before being served. Daniel 1:8 does not print a liturgy. Xenophon’s <em>Cyropaedia</em> 7.1.1 records a Persian custom of offering a first portion to the gods — an analogy, not a Babylonian court document. To eat such food would mean table-fellowship with idols.</li>
+  <li><strong>Levitical defilement:</strong> The royal menu included meats prohibited by the Torah (Leviticus 11; Deuteronomy 14) and meat not drained of blood (Leviticus 17:10–14). Daniel 1:8 names defilement at that table.</li>
 </ol>
 
 <pre class="prophecy-diagram">THE DIETARY CRISIS
 Royal Table (The World's Offer)           Zeroim &amp; Water (The Covenant Stand)
-• Dedicated to Marduk/Bel                 • Dedicated entirely to Yahweh
-• Violated Levitical dietary laws         • Pure, undefiled nourishment
-• Dulls spiritual and moral senses        • Preserves mental clarity for revelation</pre>
+• Typically dedicated to Marduk/Bel       • Dedicated entirely to Yahweh
+• May have violated Levitical food laws   • Undefiled nourishment (Dan 1:12)</pre>
 
 <p>Daniel requested a ten-day trial on <span class="strongs-gloss" data-lemma="H2235" tabindex="0">zeroim</span> (זֵרֹעִים) — a Hebrew term denoting plant foods grown from seeds, including vegetables, grains, and legumes — accompanied by pure water to drink (Daniel 1:12; echoing God's original diet in Genesis 1:29).</p>
 
-<p>At the end of ten days, the countenances of the four captives appeared "fairer and fatter in flesh" (Daniel 1:15), reflecting superior physical vitality compared to those who ate the king's fare. Furthermore, at the conclusion of their three-year education, God granted them wisdom and understanding ten times superior to all the astrologers and magicians in Babylon (Daniel 1:17–20).</p>
+<p>At the end of ten days, the countenances of the four captives appeared "fairer and fatter in flesh" (Daniel 1:15). The verse reports that appearance and names no mechanism. At the conclusion of their three-year education, God granted them wisdom and understanding ten times superior to all the astrologers and magicians in Babylon (Daniel 1:17–20).</p>
 
 <div class="caution-card">
   <p class="caution-card-kicker">What we are not claiming</p>
@@ -583,7 +581,7 @@ Royal Table (The World's Offer)           Zeroim &amp; Water (The Covenant Stand
   <p class="part-subtitle">Christ as the faithful Son</p>
 </div>
 
-<p>Daniel's quiet courage at the royal table is not merely a moral example; it is a prophetic type pointing directly to the redemptive obedience of Jesus Christ.</p>
+<p>Daniel's quiet courage at the royal table is not merely a moral example. In a limited way it stands beside the obedience of Jesus Christ — analogue, not a second inspired caption on Daniel 1.</p>
 
 <pre class="prophecy-diagram">THE REDEMPTIVE TYPOLOGY
 DANIEL IN BABYLON                         JESUS IN THE WILDERNESS
@@ -649,7 +647,7 @@ DANIEL IN BABYLON                         JESUS IN THE WILDERNESS
                 "title": "The Redemptive Obedience of the Faithful Son",
                 "scripture": "Daniel 1:8; Matthew 4:1–10; John 4:34; Hebrews 4:15",
                 "body": [
-                        "Daniel's quiet courage at the royal table is a prophetic type of Jesus Christ. Like Daniel in exile, the Son entered an alienated world and was tempted at the point of appetite — yet refused every illicit compromise (Matthew 4:1–4).",
+                        "Daniel's quiet courage at the royal table is a limited analogue of Jesus Christ. Like Daniel in exile, the Son entered an alienated world and was tempted at the point of appetite — yet refused every illicit compromise (Matthew 4:1–4).",
                         "Where Adam fell at a table and Israel failed through appetite, Jesus answered: 'Man shall not live by bread alone.' His meat was to do the Father's will (John 4:34), culminating in the cross.",
                         "Daniel inspires us, but cannot save us when we fail. We have a High Priest tempted in all points like as we are, yet without sin (Hebrews 4:15). Stand in His imputed righteousness — not willpower alone."
                 ]
@@ -748,7 +746,7 @@ DANIEL IN BABYLON                         JESUS IN THE WILDERNESS
             },
             {
               do: "Compare the names diagram with Daniel 1:7. What did Babylon take (the roll) and what did Daniel keep (worship)?",
-              why: "Zeroim, things sown, echoes Genesis 1:29. The ten-day test is not a fad; it is a public confession that the Creator, not the palace kitchen, keeps the mind clear and the body undefiled. Sit with the verse until the claim is yours, not a slogan: write the text, name the empire or office in view, and refuse any reading that drops Christ from the center of Daniel's chain."
+              why: "Zeroim, things sown, echoes Genesis 1:29. The ten-day test is not a fad; it is a public confession that the Creator, not the palace kitchen, decides what is clean. Sit with the verse until the claim is yours, not a slogan: write the text, name the empire or office in view, and refuse any reading that drops Christ from the center of Daniel's chain."
             },
             {
               do: "Read Daniel 1:8, 12–17 beside Leviticus 11 and Genesis 1:29. Note: purpose → obedience → wisdom.",
@@ -811,7 +809,7 @@ DANIEL IN BABYLON                         JESUS IN THE WILDERNESS
             "What comfort does the image give us living in the divided era of iron and clay?"
           ]
         },
-        scripture: "Daniel 2:1-49 &bull; Babylon, 603 B.C.",
+        scripture: "Daniel 2:1-49 &bull; Babylon, second year of Nebuchadnezzar (Daniel 2:1; commonly dated c. 603)",
         audio: {
           src: "assets/study/audio/sitting-02-overview.m4a",
           kind: "overview",
@@ -835,7 +833,7 @@ DANIEL IN BABYLON                         JESUS IN THE WILDERNESS
           { kind: "anchor", title: "The master-framework", text: "The chain runs from gold to silver, to bronze, to iron, to feet of iron and clay, and then to the Stone. It is one contiguous chain.", tag: "Daniel 2:31–35" },
           { kind: "scripture", title: "Thou art this head of gold", text: "Babylon is fixed as the head and cannot be repeated. Each metal follows the one before it.", tag: "Daniel 2:38–40" },
           { kind: "history", title: "Metallurgic gradient", text: "Value declines from the head to the feet, and crushing force increases. Rome is harder than Babylon.", tag: "Daniel 2:39–40" },
-          { kind: "scripture", title: "They shall not cleave", text: "Iron mixed with clay is civil power fused with religious claims. Every European attempt at unity fractures.", tag: "Daniel 2:41–43" },
+          { kind: "scripture", title: "They shall not cleave", text: "The fourth kingdom divides; they mingle with the seed of men and do not cleave (Daniel 2:41–43). Every European attempt at one empire fractures.", tag: "Daniel 2:41–43" },
           { kind: "anchor", title: "Stone strikes the feet", text: "The stone is cut without hands in the days of these kings. The blow comes from God.", tag: "Daniel 2:34–35, 44" },
           { kind: "guard", title: "You live in the toenails", text: "Historicism places you before the Stone, not waiting for a fifth metal or a restarted head of gold.", tag: "Daniel 2:43–44" }
         ],
@@ -868,7 +866,7 @@ DANIEL IN BABYLON                         JESUS IN THE WILDERNESS
   <p class="part-subtitle">Daniel 2:1–28 · Babylon, c. 603 B.C.</p>
 </div>
 
-<p>In the second year of Nebuchadnezzar's sole reign (around 603 B.C.), the king of Babylon was awakened by a terrifying nightmare that left his spirit deeply agitated (Daniel 2:1). Seeking certainty, the king summoned his occult counselors — the magicians, enchanters, sorcerers, and Chaldeans — and placed before them an impossible demand: tell him the dream he had forgotten, along with its interpretation, or face immediate execution (Daniel 2:2–5).</p>
+<p>In the second year of Nebuchadnezzar's reign (Daniel 2:1; commonly dated around 603 B.C. after accession reckoning — the verse does not say “sole reign”), the king of Babylon was awakened by a terrifying nightmare that left his spirit deeply agitated. Seeking certainty, the king summoned his occult counselors — the magicians, enchanters, sorcerers, and Chaldeans — and placed before them an impossible demand: tell him the dream he had forgotten, along with its interpretation, or face immediate execution (Daniel 2:2–5).</p>
 
 <p>Babylon's intellectual elite confessed their utter bankruptcy:</p>
 <blockquote class="scripture-quote">"There is not a man upon the earth that can shew the king's matter... except the gods, whose dwelling is not with flesh." — Daniel 2:10–11 (KJV)</blockquote>
@@ -923,7 +921,7 @@ The Striking Stone  ──▶  CHRIST'S KINGDOM (Supernatural, Universal, Eterna
 <h4>The physical and moral gradients of the colossus</h4>
 <p>The colossus is characterized by a dual gradient:</p>
 <ul>
-  <li><strong>Specific gravity and value decline:</strong> Gold has a specific gravity of 19.3 (times the weight of water), silver 10.5, bronze 8.9, and iron 7.8. Value and density decline steadily from head to feet, reflecting a progressive loss of monarchical unity and moral majesty.</li>
+  <li><strong>Value declines; iron is stronger:</strong> Daniel 2:39 says the next kingdom is “inferior”; 2:40 says the fourth is “strong as iron.” Modern specific-gravity numbers (gold 19.3, silver 10.5, bronze 8.9, iron 7.8) are a classroom illustration of that gradient, not a code encoded in the dream.</li>
   <li><strong>Hardness and crushing force increase:</strong> While gold and silver are malleable and soft, iron possesses brutal crushing force. Imperial Rome was far less culturally refined than Babylon or Greece, but it possessed unrivaled military destructiveness.</li>
 </ul>
 
@@ -950,16 +948,16 @@ Iron        7.8 (Lowest)        Base                Crushing, Destructive</pre>
 <p>When the Western Roman Empire fractured under Germanic incursions in A.D. 476, it divided into separate kingdoms that became the foundation of modern Europe:</p>
 
 <div class="historical-note">
-  <p class="historical-note-kicker">Iron and clay — what Scripture means</p>
+  <p class="historical-note-kicker">Iron and clay — what Daniel 2:41–43 says</p>
   <ul>
-    <li><strong>Clay in Scripture:</strong> Clay consistently symbolizes God's covenant or religious people in the hands of the divine Potter (Isaiah 64:8; Jeremiah 18:6). While iron represents secular, coercive civil statecraft, clay represents religious authority.</li>
-    <li><strong>The church-state fusion:</strong> Beginning with Emperor Constantine and solidifying in the medieval Holy Roman Empire, civil power (iron) was fused with ecclesiastical authority (clay). Civil swords enforced religious dogmas, and religious decrees directed civil armies.</li>
-    <li><strong>The prophetic sentence:</strong> Daniel predicted that these fragmented powers would attempt to reunite through political alliances and royal intermarriages: <em>"they shall mingle themselves with the seed of men: but they shall not cleave one to another, even as iron is not mixed with clay"</em> (Daniel 2:43).</li>
+    <li><strong>The verse:</strong> The fourth kingdom is divided; iron mixed with miry clay; they mingle with the seed of men and do not cleave (Daniel 2:41–43). That is divided Europe after Rome — not a fifth metal.</li>
+    <li><strong>This sitting’s historicist reading:</strong> The mixture is civil power that will not hold with religious claims (Daniel 2:41–43). Isaiah 64:8 and Jeremiah 18:6 are potter-and-clay for Israel; they are not a dictionary entry for Daniel 2’s feet. Constantine is later history, not printed in the dream.</li>
+    <li><strong>The prophetic sentence:</strong> Fragmented powers attempt to reunite through alliances and royal intermarriages: <em>"they shall mingle themselves with the seed of men: but they shall not cleave one to another, even as iron is not mixed with clay"</em> (Daniel 2:43).</li>
   </ul>
 </div>
 
 <pre class="prophecy-diagram">THE POST-ROMAN DILEMMA (DANIEL 2:43)
-Iron (Coercive Civil Power)  +  Clay (Religious/Ecclesiastical Claims)
+Iron (strength that remains)  +  Clay (the mixture that will not hold)
              │                                   │
              └─── Mechanical Mixture, Not Union ─┘
                                  │
@@ -970,7 +968,7 @@ Iron (Coercive Civil Power)  +  Clay (Religious/Ecclesiastical Claims)
 
 <p>For fifteen centuries, every conqueror who sought to forge a unified European superstate — including Charlemagne, Charles V, Louis XIV, Napoleon Bonaparte, Kaiser Wilhelm II, and Adolf Hitler — struck this divine barrier and failed. The prophecy declared in advance: <strong>they shall not hold together</strong>.</p>
 
-<blockquote class="scripture-quote pull-quote">"They shall mingle themselves with the seed of men: but they shall not cleave one to another, even as iron is not mixed with clay." — Daniel 2:43 (KJV)</blockquote>
+<blockquote class="scripture-quote pull-quote">"...they shall mingle themselves with the seed of men: but they shall not cleave one to another, even as iron is not mixed with clay." — Daniel 2:43 (KJV)</blockquote>
 
 <div class="part-header" id="mp3">
   <p class="part-kicker">Main Point 3</p>
@@ -990,7 +988,7 @@ Iron (Coercive Civil Power)  +  Clay (Religious/Ecclesiastical Claims)
                                ▼
         Strikes the Statue at the FEET (Dan. 2:34)
       [Not during Babylon, Persia, Greece, or Pagan Rome,
-       but during the divided church-state era of Europe]
+       but during the divided kingdoms after Rome (the feet)]
                                │
                                ▼
         Pulverizes Gold, Silver, Bronze, Iron, &amp; Clay
@@ -1002,7 +1000,7 @@ Iron (Coercive Civil Power)  +  Clay (Religious/Ecclesiastical Claims)
 
 <div class="biblical-case">
   <p class="biblical-case-kicker">1. The divine identity of the Stone</p>
-  <p>The Stone is <strong>Jesus Christ</strong>. The phrase "cut out without hands" denotes divine origin without human agency, pointing to Christ's miraculous incarnation through the virgin birth, His divine resurrection, and His supernatural Second Coming. Scripture repeatedly identifies Jesus as the Stone:</p>
+  <p>The Stone is <strong>Jesus Christ</strong>. “Cut out without hands” means the kingdom is of God, not of human empire-building (Daniel 2:34, 44–45). The strike falls on the feet, “in the days of these kings” — the divided era after Rome — so the climax is the Second Coming, not the incarnation. Jesus’ earthly ministry took place during the iron legs; the stone does not strike the legs. Scripture still identifies Jesus as the Stone:</p>
   <ul>
     <li>The Stone rejected by the builders that becomes the chief cornerstone (Psalm 118:22; 1 Peter 2:6–8).</li>
     <li>The Rock upon which the Church is built (1 Corinthians 10:4; Matthew 16:18).</li>
@@ -1038,7 +1036,7 @@ Iron (Coercive Civil Power)  +  Clay (Religious/Ecclesiastical Claims)
   <h3>Why Historicism Protects Christian Hope</h3>
 </div>
 
-<p>Historicism alone preserves the integrity of Daniel 2:</p>
+<p>Historicism is the reading that keeps Daniel 2’s named head and unbroken “after thee” succession:</p>
 
 <div class="framework-card">
   <p class="framework-card-kicker">The chain remains unbroken</p>
@@ -1074,7 +1072,7 @@ Iron (Coercive Civil Power)  +  Clay (Religious/Ecclesiastical Claims)
                 "title": "The Supernatural Stone and the Sovereign Triumph of Christ",
                 "scripture": "Daniel 2:34–35, 44–45; Luke 20:17–18; 1 Peter 2:6–8; Revelation 11:15",
                 "body": [
-                        "The Stone cut out without hands is Jesus Christ — divine origin through the virgin birth, resurrection, and Second Coming. He is the chief cornerstone the builders rejected, the Rock upon which the Church is built, and the Stone that shatters all opposition (Psalm 118:22; Luke 20:17–18).",
+                        "The Stone cut out without hands is Jesus Christ — a kingdom of divine origin, not human agency. The strike is at the feet, in the days of these kings: the Second Coming, not the incarnation (Daniel 2:34, 44–45). He is the chief cornerstone the builders rejected, the Rock upon which the Church is built, and the Stone that shatters all opposition (Psalm 118:22; Luke 20:17–18).",
                         "The Stone strikes the feet in the days of these kings — during divided Europe — not through human treaties or moral evolution. It pulverizes every metal kingdom at once and becomes a mountain filling the whole earth. Christ does not reform empires; He abolishes them and establishes an everlasting kingdom (Daniel 2:44–45; Rev 11:15).",
                         "Whosoever falls upon that stone in repentance shall be broken and saved; on whomsoever it shall fall in judgment, it will grind him to powder (Luke 20:18). Build your hope on the Living Stone — not on the crumbling feet of iron and clay."
                 ]
@@ -1113,7 +1111,7 @@ Iron (Coercive Civil Power)  +  Clay (Religious/Ecclesiastical Claims)
             ]
           },
           {
-            "question": "Match the metals of Daniel 2 to the historicist sequence. Which pairing is the text-anchored reading?",
+            "question": "Match the metals of Daniel 2 to the historicist sequence. Which pairing starts from the head Daniel 2:38 names and then walks the succession later chapters confirm?",
             "options": [
               "Gold = Babylon, silver = Medo-Persia, brass = Greece, iron = Rome, iron-and-clay feet = divided kingdoms after Rome, stone = Christ's everlasting kingdom.",
               "Gold = Rome, silver = Greece, brass = Medo-Persia, iron = Babylon, iron-and-clay feet = ancient Seleucid satrapies, stone = the Maccabean kingdom.",
@@ -1236,7 +1234,7 @@ Iron (Coercive Civil Power)  +  Clay (Religious/Ecclesiastical Claims)
             "In what ways do modern governments create 'all-gold' cultural mandates demanding total allegiance?"
           ]
         },
-        scripture: "Daniel 3:1-30 &bull; Plain of Dura, c. 594 B.C.",
+        scripture: "Daniel 3:1-30 &bull; Plain of Dura (Daniel 3 prints no year; c. 594 B.C. is reconstructed)",
         audio: {
           src: "assets/study/audio/sitting-03.mp3",
           kind: "overview",
@@ -1351,8 +1349,8 @@ The Penal Threat      Burning fiery furnace                Boycott and death dec
 The Faithful Remnant  Three Hebrews obey Decalogue         Saints keep God's commandments (Rev. 14:12)</pre>
 
 <div class="historical-note">
-  <p class="historical-note-kicker">The Typological Parallel &amp; The Number of Man</p>
-  <p>The image on the Plain of Dura measured sixty cubits in height and six cubits in breadth (Daniel 3:1). While patristic writers like Irenaeus drew an allegorical comparison with Revelation 13:18, official BRI exegesis clarifies that Revelation 13:18 explicitly designates 666 as "the number of a man"—symbolizing fallen humanity and the counterfeit trinity perpetually falling short of divine perfection (777), rather than an inspired mathematical echo of Babylonian units. The true biblical link between Daniel 3 and Revelation 13 is typological: state-enforced universal worship, an imperial image, a death decree, and a faithful remnant upholding God's commandments (Revelation 14:12).</p>
+  <p class="historical-note-kicker">Six and sixty as illustration</p>
+  <p>The image on the Plain of Dura measured sixty cubits in height and six cubits in breadth (Daniel 3:1). Revelation 13:18 names six hundred threescore and six as the number of a man. Daniel 3:1's six-and-sixty measurements illustrate the later crisis; they do not decode the number by Babylonian arithmetic. Revelation 13 lists six classes of people pressed to worship the image of the beast, and 666 likewise emphasizes six. The load-bearing link is the worship pattern: a universal decree, an image, a death penalty, and commandment-keepers who refuse (Daniel 3:1–6, 18; Revelation 13:15–16; 14:12).</p>
 </div>
 
 <ul>
@@ -1383,7 +1381,7 @@ The Faithful Remnant  Three Hebrews obey Decalogue         Saints keep God's com
 <ul>
   <li>Shadrach, Meshach, and Abednego did not say, "God must save our physical bodies, or He is not worthy of our obedience."</li>
   <li>They affirmed two distinct truths: first, God possesses the power to deliver them from the flames; second, even if He permits them to burn, their allegiance remains unchanged.</li>
-  <li>Their obedience was not a commercial contract with heaven for an earthly rescue. They priced their obedience before any deliverance was promised, resting in the eternal reality of the resurrection (Hebrews 11:35; 1 Corinthians 15:54–57).</li>
+  <li>Their obedience was not a commercial contract with heaven for an earthly rescue. They priced their obedience before any deliverance was promised, resting in the resurrection that is the deliverance every faithful one finally has (Hebrews 11:35; 1 Corinthians 15:12–26, 54–57).</li>
 </ul>
 
 <div class="part-header" id="mp4">
@@ -1415,18 +1413,18 @@ THE TRIAL: IMMANENCE IN THE FIRE                           THE CROSS: VICARIOUS 
 </div>
 
 <div class="biblical-case">
-  <p class="biblical-case-kicker">2. The redemptive substance: Calvary</p>
-  <p>The deliverance at Dura points to the supreme redemptive work of the Gospel:</p>
+  <p class="biblical-case-kicker">2. Presence in the fire — atonement in its own verses</p>
+  <p>Daniel 3’s load-bearing claim is presence: the fourth is like the Son of God (3:25). The gospel of atonement is taught in its own texts, not as what the furnace “means”:</p>
   <ul>
-    <li>Shadrach, Meshach, and Abednego were spared physical death in the fire because a divine Protector stood with them.</li>
-    <li>At Calvary, Jesus Christ walked into the consuming fire of God's holy judgment against sin (Isaiah 53:4–6, 10; 2 Corinthians 5:21). On the cross, the Son of God was not delivered; He was consumed under the weight of human guilt so that those who trust in Him will never face the second death (Revelation 20:6, 14).</li>
-    <li>He took our condemnation upon Himself, fulfilling Isaiah 43:2: <em>"When thou walkest through the fire, thou shalt not be burned; neither shall the flame kindle upon thee."</em></li>
+    <li>Shadrach, Meshach, and Abednego were spared physical death in the fire because a divine Protector stood with them (Daniel 3:25–27).</li>
+    <li>Isaiah 53:4–6, 10 and 2 Corinthians 5:21 teach that Christ bore our guilt at Calvary. That is the cross’s own witness, not a required decoding of the furnace.</li>
+    <li>Isaiah 43:2 promises presence in fire and flood. Many faithful are not rescued from earthly flames; the deliverance all the saints finally have is the resurrection (1 Corinthians 15:12–26).</li>
   </ul>
 </div>
 
 <div class="biblical-case">
   <p class="biblical-case-kicker">3. Living in hope</p>
-  <p>Christ does not promise that His followers will avoid persecution, social ostracization, or earthly death. Millions of Christian martyrs have perished in physical flames. But because Jesus conquered the furnace of death and walked out of the tomb, the believer's ultimate life is secure in Him. Earthly tyrants can destroy the body, but they cannot extinguish the eternal life given by Christ (Matthew 10:28; John 11:25–26).</p>
+  <p>Christ does not promise that His followers will avoid persecution, social ostracization, or earthly death. Millions of Christian martyrs have perished in physical flames. Earthly tyrants can destroy the body, but they cannot extinguish the life God gives (Matthew 10:28; John 11:25–26). The deliverance held out to every faithful one is the resurrection (1 Corinthians 15:12–26).</p>
 </div>
 
 <div class="level-card level-christ">
@@ -1456,8 +1454,8 @@ THE TRIAL: IMMANENCE IN THE FIRE                           THE CROSS: VICARIOUS 
                 "scripture": "Daniel 3:25; Isaiah 43:2; Isaiah 53:4–10; 2 Corinthians 5:21; Luke 20:18",
                 "body": [
                         "The fourth figure walking in the flames was a pre-incarnate appearance of the Son of God. Jesus did not keep His servants out of the furnace; He stepped into it to walk beside them. The ropes burned away; their bodies, garments, and hair were untouched (Daniel 3:25, 27).",
-                        "At Calvary, Christ entered the consuming fire of God's judgment against sin alone — not delivered, but consumed for our guilt so we will never face the second death (Isaiah 53:10; 2 Corinthians 5:21). Dura's deliverance points to the cross's expiation.",
-                        "Cultivate non-transactional 'but if not' faith. Christ does not promise escape from every earthly furnace, but He promises presence in the fire and resurrection beyond it (John 11:25–26)."
+                        "Isaiah 53:10 and 2 Corinthians 5:21 teach the cross in their own words: Christ bore our guilt. Daniel 3 does not make the furnace that atonement; it shows the Son present with His servants (3:25).",
+                        "Cultivate non-transactional 'but if not' faith. Christ does not promise escape from every earthly furnace, but He promises presence in the fire and resurrection beyond it (John 11:25–26; 1 Corinthians 15:12–26)."
                 ]
         },
         quizzes: [
@@ -1485,7 +1483,7 @@ THE TRIAL: IMMANENCE IN THE FIRE                           THE CROSS: VICARIOUS 
               "It was an act of open theological defiance against Daniel 2, proclaiming that Babylon's golden dominion would endure forever without being succeeded by another empire.",
               "The monument was an architectural obelisk dedicated to the future Roman pantheon to commemorate the administrative pacification of the province."
             ],
-            "explanation": "By casting an entire colossus in gold (60x6 cubits, sexagesimal system), Nebuchadnezzar rejected the divine declaration of succession, asserting perpetual Babylonian supremacy.",
+            "explanation": "By casting the entire image in gold — sixty cubits by six (Daniel 3:1) — Nebuchadnezzar rejected Daniel 2's succession and declared that Babylon's gold would never yield to silver, bronze, or iron.",
             "diagnostics": [
               "Misconception: The Daniel 2 colossus consisted of four distinct metals and divided feet; casting an image entirely of gold openly contradicted God's revelation.",
               "Misconception: Babylon maintained vast reserves of silver and bronze; the all-gold composition was a deliberate political-theological declaration, not a material shortage.",
@@ -1526,14 +1524,14 @@ THE TRIAL: IMMANENCE IN THE FIRE                           THE CROSS: VICARIOUS 
             ]
           },
           {
-            "question": "Why does this sitting refuse to leave Daniel 3 as a mere hero tale and insist it leads to the cross?",
+            "question": "Why does this sitting refuse to leave Daniel 3 as a mere hero tale?",
             "options": [
-              "The passage functions solely as an inspirational moral fable regarding human bravery, bearing no redemptive connection to the gospel of atonement.",
+              "The passage functions solely as an inspirational moral fable regarding human bravery, bearing no further claim on later readers.",
               "The furnace replaces Calvary as the ultimate demonstration of divine justice, rendering the historical crucifixion of Jesus Christ unnecessary.",
-              "The innocent sufferer in the fire points to Christ who bore wrath for us (Isaiah 53:4–10; 2 Corinthians 5:21); we are delivered because He entered a hotter furnace.",
-              "The deliverance was unique to the three exiles, offering no theological assurance or gospel promise of salvation for believers in subsequent ages."
+              "Christ is present in the fire (Daniel 3:25), and the deliverance all the faithful finally have is the resurrection (1 Corinthians 15:12–26); Calvary is taught in Isaiah 53 and 2 Corinthians 5:21, not as what the furnace must mean.",
+              "The deliverance was unique to the three exiles, offering no hope for believers in later ages."
             ],
-            "explanation": "Typology runs through the fire to the Substitute. Courage is real; atonement is greater.",
+            "explanation": "Daniel 3:25 is presence. 1 Corinthians 15:12–26 is the resurrection that remains when earthly flames are not quenched. Isaiah 53 and 2 Corinthians 5:21 carry the atonement in their own words.",
             "diagnostics": [
               "Misconception: Daniel 3 is rich with gospel typology; reducing it to human moralism strips the narrative of its Christological core and redemptive power.",
               "Misconception: The furnace is a type, not a substitute, for the cross; Christ's sacrifice on Calvary remains the singular atonement for human redemption.",
@@ -1580,7 +1578,7 @@ THE TRIAL: IMMANENCE IN THE FIRE                           THE CROSS: VICARIOUS 
           ask: [
             "What bow is being asked of me that Daniel 3:18 would refuse?",
             "Am I bargaining with God for rescue before I will obey?",
-            "Do I see Dura's Fourth Figure in Calvary's cross?",
+            "Do I trust the Fourth in the fire (Daniel 3:25) and the resurrection that remains when earthly flames are not quenched (1 Corinthians 15:12–26)?",
           ]
         },
         guide: {
@@ -1609,7 +1607,7 @@ THE TRIAL: IMMANENCE IN THE FIRE                           THE CROSS: VICARIOUS 
           minutes: 40,
           talkingPoints: [
             "The tree vision of Daniel 4 addresses royal hubris and the divine cure: seven times of wilderness humiliation.",
-            "The iron and bronze bands preserving the stump guarantee that God remembers His covenant even in judgment.",
+            "The iron and bronze bands leave the stump in the earth so the kingdom can be sure to the king after he learns that Heaven rules (Daniel 4:15, 26) — mercy in judgment, not a covenant-band metaphor the verse never names.",
             "The central decree of the Watchers (Dan 4:17): 'the Most High ruleth in the kingdom of men, and giveth it to whomsoever He will.'"
           ],
           askClass: [
@@ -1676,7 +1674,7 @@ THE TRIAL: IMMANENCE IN THE FIRE                           THE CROSS: VICARIOUS 
 
 <p>This is not a victory stele boasting of conquered lands or slaughtered enemies; it is an imperial encyclical publishing the king's humiliation and subsequent restoration. Having witnessed God's supremacy in the dream of the colossus (Daniel 2) and in the deliverance of the three Hebrews from the furnace (Daniel 3), Nebuchadnezzar now writes to testify that human sovereignty is strictly an illusion:</p>
 
-<blockquote class="scripture-quote">"The living may know that the most High ruleth in the kingdom of men, and giveth it to whomsoever he will, and setteth up over it the basest of men." — Daniel 4:17 (KJV)</blockquote>
+<blockquote class="scripture-quote">"...to the intent that the living may know that the most High ruleth in the kingdom of men, and giveth it to whomsoever he will, and setteth up over it the basest of men." — Daniel 4:17 (KJV)</blockquote>
 
 <pre class="prophecy-diagram">NEBUCHADNEZZAR'S PROGRESSIVE ENCOUNTERS WITH GOD
 Daniel 2 ──▶ Acknowledges God as "a revealer of secrets"     (Intellectual awe)
@@ -1727,9 +1725,9 @@ THE TALL COSMIC TREE                    THE BANDED STUMP
   <p class="part-subtitle">Daniel 4:29–33</p>
 </div>
 
-<p>Exactly one year later, Nebuchadnezzar walked upon the flat roof of his palace, gazing over the gleaming expanse of Babylon. Looking out upon the Ishtar Gate, the Processional Way, and the massive temples of Marduk, the unrepentant boast spilled from his lips:</p>
+<p>Exactly one year later, Nebuchadnezzar walked upon the flat roof of his palace, gazing over the gleaming expanse of Babylon. Daniel 4:30 names only “great Babylon”; later archaeology names monuments such as the Ishtar Gate and the Processional Way among the city’s works. The unrepentant boast spilled from his lips:</p>
 
-<blockquote class="scripture-quote pull-quote">"Is not this great Babylon, that I have built for the house of the kingdom by the might of my power, and for the honour of my majesty?" — Daniel 4:30 (KJV)</blockquote>
+<blockquote class="scripture-quote pull-quote">"...Is not this great Babylon, that I have built for the house of the kingdom by the might of my power, and for the honour of my majesty?" — Daniel 4:30 (KJV)</blockquote>
 
 <pre class="prophecy-diagram">THE THREEFOLD BOAST OF PRIDE
 "I have built"        ──▶ Self-origination  (Denies God as Creator/Giver)
@@ -1763,7 +1761,7 @@ The king's boast → sentence from heaven → seven times pass
 
 <p>Restoration came only when the king looked beyond his own achievements:</p>
 
-<blockquote class="scripture-quote">"And at the end of the days I Nebuchadnezzar lifted up mine eyes unto heaven, and mine understanding returned unto me, and I blessed the most High." — Daniel 4:34 (KJV)</blockquote>
+<blockquote class="scripture-quote">"And at the end of the days I Nebuchadnezzar lifted up mine eyes unto heaven, and mine understanding returned unto me, and I blessed the most High, and I praised and honoured him that liveth for ever, whose dominion is an everlasting dominion, and his kingdom is from generation to generation." — Daniel 4:34 (KJV)</blockquote>
 
 <pre class="prophecy-diagram">DANIEL 4:34–37
 Nebuchadnezzar lifts his eyes to heaven → his understanding returns
@@ -1883,7 +1881,7 @@ Nebuchadnezzar (Daniel 4)                Jesus Christ (Philippians 2)
             "explanation": "Daniel 4:26 says, \"Thy kingdom shall be sure unto thee, after that thou shalt have known that the heavens do rule.\"",
             "diagnostics": [
               "Misconception: Babylon remained the head of gold; the king was personally humbled for an appointed season, and he was not immediately removed from the prophetic map.",
-              "Misconception: The bands of iron and brass signify divine restraint and covenant mercy, guaranteeing that the humbled king's throne was sovereignly preserved.",
+              "Misconception: The bands of iron and brass mark mercy in the sentence (Daniel 4:15, 26): the stump remains so the throne can be restored after the king knows that Heaven rules — not a covenant-band the verse never names.",
               "Misconception: Daniel 2 and Daniel 4 harmonize: the Most High rules in the kingdom of men, and the prophetic timeline proceeds without interruption.",
               ""
             ]
@@ -1988,7 +1986,7 @@ Nebuchadnezzar (Daniel 4)                Jesus Christ (Philippians 2)
           minutes: 40,
           talkingPoints: [
             "Belshazzar's sacrilege: drinking wine from Jerusalem's sacred temple vessels while praising idols of gold and silver.",
-            "The night of October 12, 539 B.C.: Cyrus diverts the Euphrates river and enters Babylon without siege resistance.",
+            "The night Babylon fell (Daniel 5:30). The Nabonidus Chronicle dates Ugbaru’s entry to 16 Tashritu, commonly reconstructed as 12 October 539 B.C. (Julian) — a civil date, not a verse.",
             "Deciphering MENE, TEKEL, PERES: God measures kingdoms by moral and spiritual justice, not military fortifications."
           ],
           askClass: [
@@ -1996,7 +1994,7 @@ Nebuchadnezzar (Daniel 4)                Jesus Christ (Philippians 2)
             "How does Daniel 5 speak to modern societies that boast impenetrable security while ignoring moral accountability?"
           ]
         },
-        scripture: "Daniel 5:1-31 &bull; Babylon, October 11/12, 539 B.C.",
+        scripture: "Daniel 5:1-31 &bull; Babylon, the night the city fell (Daniel 5:30; 12 Oct 539 B.C. reconstructed from the Nabonidus Chronicle)",
         audio: {
           src: "assets/study/audio/sitting-05.mp3",
           kind: "overview",
@@ -2014,11 +2012,11 @@ Nebuchadnezzar (Daniel 4)                Jesus Christ (Philippians 2)
         title: "The Handwriting on the Plaster: The Fall of Babylon, the Divine Balance Sheet, and the Righteousness of Christ",
         subtitle: "Sacrilege against known light, Heaven's marketplace audit, and the only weight that can cover us.",
         flow: [
-          { kind: "history", title: "The siege and the feast", text: "Medo-Persia encircles impregnable walls while Belshazzar toasts idols with holy vessels.", tag: "Daniel 5:1–3; October 539 B.C." },
+          { kind: "history", title: "The siege and the feast", text: "Medo-Persia encircles impregnable walls while Belshazzar toasts idols with holy vessels.", tag: "Daniel 5:1–3; the night of the fall" },
           { kind: "history", title: "Belshazzar was real", text: "The Nabonidus Cylinders and the Verse Account confirm the co-regency, which is why the offer of \"third ruler\" is precise.", tag: "BM 91125; BM 38299; Dan 5:16" },
           { kind: "scripture", title: "Sacrilege against known light", text: "The temple vessels become toasting cups. Daniel 5:22 says, \"Thou knewest all this.\"", tag: "Daniel 5:2–4, 22" },
           { kind: "anchor", title: "The wall of audit", text: "MENE, TEKEL, and PERES mean numbered, weighed, and divided. Marketplace weights become Heaven's ledger.", tag: "Daniel 5:25–28" },
-          { kind: "scripture", title: "The conqueror was named", text: "Isaiah named Cyrus and the open gates about 150 years before the night.", tag: "Isaiah 44:28; 45:1–3" },
+          { kind: "scripture", title: "The conqueror was named", text: "Isaiah named Cyrus and the open gates more than a century before the night (Isaiah 45:1 prints the name; the year-gap is reconstructed, not a verse).", tag: "Isaiah 44:28; 45:1–3" },
           { kind: "history", title: "The city falls in one night", text: "The river was diverted. The chronicle says the city fell without a battle, and the head of gold was replaced by silver.", tag: "Daniel 5:30–31; BM 35382" },
           { kind: "guard", title: "Found wanting, yet covered", text: "Cyrus types the Anointed Deliverer; only Christ's righteousness weighs enough on the scale.", tag: "Isa 45:1; 2 Cor 5:21" }
         ],
@@ -2050,14 +2048,14 @@ Nebuchadnezzar (Daniel 4)                Jesus Christ (Philippians 2)
 <div class="part-header" id="intro">
   <p class="part-kicker">Introduction</p>
   <h3>The Illusion of Invulnerability</h3>
-  <p class="part-subtitle">Daniel 5:1–3 · Babylon, October 539 B.C.</p>
+  <p class="part-subtitle">Daniel 5:1–3 · Babylon, the night of the fall</p>
 </div>
 
-<p>In October 539 B.C., the combined Medo-Persian army under Cyrus the Great and his general Ugbaru surrounded the city of Babylon. Outside the towering fortifications, an empire was crumbling; inside, King Belshazzar hosted a lavish, drunken banquet for a thousand of his highest nobles, along with his wives and concubines (Daniel 5:1–3).</p>
+<p>In 539 B.C., the combined Medo-Persian army under Cyrus the Great and his general Ugbaru surrounded the city of Babylon. Outside the towering fortifications, an empire was crumbling; inside, King Belshazzar hosted a lavish, drunken banquet for a thousand of his highest nobles, along with his wives and concubines (Daniel 5:1–3).</p>
 
 <p>Babylon was considered impregnable. Its monumental double walls were wide enough for multiple chariots to pass, and the Euphrates River ran directly beneath the water gates, providing an endless water supply and deep moats. Belshazzar was convinced that Babylon was immune to siege. In an act of drunken insolence, he defied both the encircling armies outside and the God of heaven above.</p>
 
-<pre class="prophecy-diagram">THE SIEGE OF BABYLON (OCTOBER 539 B.C.)
+<pre class="prophecy-diagram">THE SIEGE OF BABYLON (539 B.C.)
 OUTSIDE THE WALLS:                        INSIDE THE PALACE:
 • Medo-Persian army encircling the city   • 1,000 nobles drinking wine
 • Persian engineers diverting Euphrates   • False security behind massive walls
@@ -2103,7 +2101,7 @@ OUTSIDE THE WALLS:                        INSIDE THE PALACE:
 
 <p>As the wine flowed, Belshazzar ordered the sacred gold and silver vessels taken by Nebuchadnezzar from Yahweh's temple in Jerusalem (Daniel 1:2) to be brought into the banquet hall. The king, his princes, his wives, and his concubines drank from those consecrated cups while singing praises to "the gods of gold, and of silver, of brass, of iron, of wood, and of stone" (Daniel 5:4).</p>
 
-<p>This was not merely bad manners; it was deliberate sacrilege:</p>
+<p>This was not merely bad manners; it was deliberate sacrilege. Revelation later pictures eschatological Babylon as a woman arrayed in gold and precious stones, drunk with the blood of saints (Revelation 17:4–6) — a comparison of pattern, not a claim that Daniel 5 prints that later chapter:</p>
 
 <div class="framework-card">
   <p class="framework-card-kicker">Desecrating the consecrated</p>
@@ -2126,11 +2124,11 @@ OUTSIDE THE WALLS:                        INSIDE THE PALACE:
 
 <p>The revelry halted abruptly when a mysterious hand appeared, writing four words into the lime plaster of the palace wall, directly opposite the royal lampstand (Daniel 5:5). Belshazzar was terrified: his facial color drained, his hip joints loosened, and his knees knocked together in terror (Daniel 5:6).</p>
 
-<blockquote class="scripture-quote pull-quote">"In the same hour came forth fingers of a man's hand, and wrote over against the candlestick upon the plaister of the wall of the king's palace." — Daniel 5:5 (KJV)</blockquote>
+<blockquote class="scripture-quote pull-quote">"In the same hour came forth fingers of a man's hand, and wrote over against the candlestick upon the plaister of the wall of the king's palace: and the king saw the part of the hand that wrote." — Daniel 5:5 (KJV)</blockquote>
 
 <pre class="prophecy-diagram">THE WALL OF AUDIT (DANIEL 5:25–28)
 INSCRIPTION       MARKETPLACE NOUN     DIVINE VERB INTERPRETATION
-MENE              A Mina (Currency)   ──▶ NUMBERED: God has numbered your days and finished it.
+MENE              A Mina (Currency)   ──▶ NUMBERED: God has numbered your kingdom and finished it.
 MENE              (Repeated for emphasis)
 TEKEL             A Shekel (Weight)   ──▶ WEIGHED: You are weighed on the scales and found wanting.
 UPHARSIN / PERES  Half-minas / Division──▶ DIVIDED: Your kingdom is divided and given to the Medo-Persians.</pre>
@@ -2138,31 +2136,31 @@ UPHARSIN / PERES  Half-minas / Division──▶ DIVIDED: Your kingdom is divide
 <p>The words MENE, MENE, TEKEL, UPHARSIN were drawn from the standard weights and measures of the ancient Near Eastern marketplace (minas, shekels, and half-minas). Daniel read them through the lens of God's sovereign justice:</p>
 
 <ul>
-  <li><strong>MENE (Numbered):</strong> God has audited your administration, counted every day of your rule, and closed your account. Your probation has expired.</li>
+  <li><strong>MENE (Numbered):</strong> God has numbered the kingdom and finished it (Daniel 5:26). This throne’s account is closed in a night.</li>
   <li><strong>TEKEL (Weighed):</strong> You have been placed upon the moral balances of divine justice and have been found light — utterly lacking in righteousness.</li>
   <li><strong>PERES (Divided):</strong> A brilliant wordplay in Aramaic: <em>peres</em> means both "divided" and points directly to the <em>Paras</em> (the Persians). The Babylonian Empire was to be dismantled and handed to the Medo-Persians.</li>
 </ul>
 
 <div class="level-card level-text">
   <p class="level-kicker">TEXT</p>
-  <p>Every throne, institution, and individual life stands before an open ledger in Heaven. God numbers the days of power, weighs moral character, and when probation is exhausted, closes the account.</p>
+  <p>Every throne, institution, and individual life stands before an open ledger in Heaven. God numbers the days of power, weighs moral character, and — as at Belshazzar’s feast — can finish a kingdom in a night (Daniel 5:26–30).</p>
 </div>
 
 <div class="part-header" id="mp4">
   <p class="part-kicker">Main Point 4</p>
   <h3>The Fall of Babylon and the Precision of Prophecy</h3>
-  <p class="part-subtitle">October 11/12, 539 B.C.</p>
+  <p class="part-subtitle">Daniel 5:30 — “in that night”; 12 Oct 539 B.C. reconstructed from the Nabonidus Chronicle</p>
 </div>
 
-<p>That very night (October 11/12, 539 B.C.), Babylon fell without a prolonged siege. The Greek historians Herodotus (<em>Histories</em> 1.191) and Xenophon (<em>Cyropaedia</em> 7.5) record that Persian engineers diverted the waters of the Euphrates River into an artificial basin. Persian soldiers marched down the depleted riverbed, passed through the bronze river gates left unlocked during the drunken festivities, and seized the palace.</p>
+<p>That very night (Daniel 5:30), Babylon fell without a prolonged siege. The Nabonidus Chronicle (BM 35382) dates Ugbaru’s entry to 16 Tashritu, commonly reconstructed as 12 October 539 B.C. (Julian) — a civil calendar date, not printed in Daniel. The Greek historians Herodotus (<em>Histories</em> 1.191) and Xenophon (<em>Cyropaedia</em> 7.5) record that Persian engineers diverted the waters of the Euphrates River into an artificial basin. Persian soldiers marched down the depleted riverbed, passed through the bronze river gates left unlocked during the drunken festivities, and seized the palace.</p>
 
 <p>That very night Belshazzar was slain, and Babylon passed to Darius the Mede (Daniel 5:30–31). The Nabonidus Chronicle (BM 35382) confirms this sudden fall: Ugbaru and the troops of Cyrus entered Babylon "without battle."</p>
 
 <pre class="prophecy-diagram">THE FULFILLMENT OF HISTORICIST PROPHECY
-ISAIAH 45:1–3 (c. 712 B.C.)             DANIEL 5 / SECULAR HISTORY (539 B.C.)
-• Cyrus named by name 150 years prior   • Cyrus the Persian conquers Babylon
-• "To open before him the two-leaved gates" • River gates left unlocked during feast
-• River dried up before him             • Euphrates diverted by Persian engineers
+ISAIAH 44:27; 45:1–3                     DANIEL 5 / SECULAR HISTORY (539 B.C.)
+• Cyrus named by name more than a century prior  • Cyrus the Persian conquers Babylon
+• "To open before him the two leaved gates" (45:1) • Gates left open during the feast
+• "That saith to the deep, Be dry" (44:27)       • Euphrates diverted by Persian engineers
 • The Head of Gold (Babylon)            • Replaced by the Chest of Silver (Medo-Persia)</pre>
 
 <p>The gold kingdom was officially replaced by the silver kingdom in a single evening, precisely validating the metallic sequence of Daniel 2.</p>
@@ -2190,7 +2188,7 @@ CYRUS THE DELIVERER                       JESUS CHRIST THE REDEEMER
 
 <div class="biblical-case">
   <p class="biblical-case-kicker">2. Christ, the ultimate Auditor and King</p>
-  <p>In John 5:22, Jesus declared: <em>"For the Father judgeth no man, but hath committed all judgment unto the Son."</em> The hand that wrote on the plaster at Belshazzar's feast belongs to Jesus Christ, the sovereign Judge of every earthly power and individual human soul. He inspects the hidden chambers of our lives and audits the books of heaven (Revelation 20:11–12).</p>
+  <p>In John 5:22, Jesus declared: <em>"For the Father judgeth no man, but hath committed all judgment unto the Son."</em> Daniel 5:5 names fingers of a man’s hand; it does not name Jesus. The same Christ to whom the Father has committed all judgment will weigh every life (Revelation 20:11–12). Belshazzar’s night shows that Heaven already audits thrones.</p>
 </div>
 
 <div class="biblical-case">
@@ -2250,8 +2248,8 @@ CYRUS THE DELIVERER                       JESUS CHRIST THE REDEEMER
                 "title": "The Auditor Who Weighs — and the Righteousness That Covers",
                 "scripture": "Daniel 5:25–28; Isaiah 45:1–3; John 5:22; 2 Corinthians 5:21; Romans 5:18–19",
                 "body": [
-                        "The hand that wrote on the plaster belongs to Jesus Christ, the Judge to whom the Father has committed all judgment (John 5:22). He numbers days, weighs souls, and closes accounts. Belshazzar was found wanting because he sinned against light he already possessed.",
-                        "Cyrus, named God's anointed more than a century before he took Babylon (Isaiah 45:1), is a type of the true Messiah: he dried the river, opened the gates, and set captives free. Christ overthrows spiritual Babylon, conquers sin and death, and builds the New Jerusalem.",
+                        "Daniel 5:5 names fingers of a man's hand, not Jesus. John 5:22 still holds: the Father has committed all judgment unto the Son. Belshazzar was found wanting because he sinned against light he already possessed (Daniel 5:22).",
+                        "Cyrus, named God's anointed more than a century before he took Babylon (Isaiah 45:1), is a type of the true Messiah: Isaiah 44:27 says the deep would be dry; 45:1 names the two leaved gates. Christ overthrows spiritual Babylon, conquers sin and death, and builds the New Jerusalem.",
                         "On our own merit the verdict is TEKEL — found wanting. On the cross Christ bore the full weight of justice; His righteousness is credited to the believer (2 Corinthians 5:21). When God weighs those who trust the Son, they possess the moral weight of Christ Himself."
                 ]
         },
@@ -2261,7 +2259,7 @@ CYRUS THE DELIVERER                       JESUS CHRIST THE REDEEMER
             "options": [
               "He violated traditional Babylonian royal protocol by allowing provincial concubines to attend an official state military banquet.",
               "He failed to disburse the customary seasonal agricultural tithes owed to the powerful resident priesthood of the temple of Marduk.",
-              "He deliberately conflated the holy with the profane, weaponizing sacred artifacts of true worship to exalt idols in an act of open defiance, exhausting probation.",
+              "He deliberately conflated the holy with the profane, weaponizing sacred artifacts of true worship to exalt idols in an act of open defiance, and Daniel 5:22 says he knew the family lesson.",
               "His transgression consisted entirely in consuming fermented vintage wine rather than fresh unfermented fruit juice at the royal table."
             ],
             "explanation": "Daniel 5:22–23 records Daniel's indictment: Belshazzar knew his grandfather's humbling yet lifted himself up against the Lord of heaven, bringing the holy vessels into idol revelry.",
@@ -2273,14 +2271,14 @@ CYRUS THE DELIVERER                       JESUS CHRIST THE REDEEMER
             ]
           },
           {
-            "question": "A historian claims that the fall of Babylon on October 12, 539 B.C. was an unexpected coincidence unrelated to prophetic foresight. How does the inscription MENE, MENE, TEKEL, UPHARSIN together with Isaiah 45:1 refute this?",
+            "question": "A historian claims that the fall of Babylon (Daniel 5:30; the Nabonidus Chronicle’s 16 Tashritu, commonly reconstructed as 12 October 539 B.C.) was an unexpected coincidence unrelated to prophetic foresight. How does the inscription MENE, MENE, TEKEL, UPHARSIN together with Isaiah 45:1 refute this?",
             "options": [
               "Medo-Persian siege armies utilized advanced ballistic catapults and gunpowder artillery to breach the massive outer fortifications of the city.",
               "The city of Babylon voluntarily surrendered its civic independence to become a peaceful administrative province under Hellenistic Greek authority.",
               "Higher critics argue the inscription was a post-exilic folkloric legend invented by Hellenistic scribes to celebrate Babylon's downfall.",
-              "The inscription accurately computed the sovereign audit (Numbered, Weighed, Divided), while Isaiah 45:1 had named Cyrus more than a century earlier, predicting open river gates."
+              "The inscription accurately computed the sovereign audit (Numbered, Weighed, Divided), while Isaiah 45:1 had named Cyrus more than a century earlier, and Isaiah 44:27 had said the deep would be dry."
             ],
-            "explanation": "God's word authenticated both the moral judgment (MENE, TEKEL, PERES) and the military mechanism: Cyrus diverted the Euphrates, entering through unlocked river gates foretold in Isaiah 45:1.",
+            "explanation": "God's word authenticated both the moral judgment (MENE, TEKEL, PERES) and the military mechanism: Isaiah 44:27 says the deep would be dry; Isaiah 45:1 names Cyrus and the two leaved gates.",
             "diagnostics": [
               "Misconception: Ancient warfare relied on conventional siegecraft; Cyrus diverted the Euphrates river, marching troops through the drained riverbed into the city.",
               "Misconception: Greece was the third empire (bronze, 331 B.C.); in 539 B.C., Babylon fell to the Medes and Persians (the silver chest of Daniel 2).",
@@ -2301,13 +2299,13 @@ CYRUS THE DELIVERER                       JESUS CHRIST THE REDEEMER
               "Misconception: The vessels were sacred instruments of sanctuary worship; TEKEL constituted a forensic moral judgment against the king himself.",
               "",
               "Misconception: While tekel corresponds to a shekel weight, the inspired interpretation is forensic: Belshazzar's moral character failed God's balance.",
-              "Misconception: Daniel 5:22–23 explicitly charges Belshazzar with arrogant defiance and moral bankruptcy: 'thou art weighed... and art found wanting.'"
+              "Misconception: Daniel 5:27 explicitly charges Belshazzar with arrogant defiance and moral bankruptcy: 'thou art weighed... and art found wanting.'"
             ]
           },
           {
             "question": "Daniel's indictment in 5:22 begins, 'thou knewest all this.' Why is knowledge the aggravating factor in Belshazzar's fall?",
             "options": [
-              "He knew Nebuchadnezzar's humbling yet repeated the pride, profaning the holy vessels; judgment is instantaneous because probation was already instructed.",
+              "He knew Nebuchadnezzar's humbling yet repeated the pride, profaning the holy vessels; judgment falls at once because the light had already been given and known.",
               "He was completely unaware of his grandfather's historical illness and lived in total isolation from the archives of the Babylonian royal court.",
               "The biblical narrative exonerates the young monarch, attributing his sacrilegious banquet entirely to bad advice from incompetent palace advisors.",
               "His actions were classified as an unintentional ceremonial mistake for which simple priestly cleansing rituals were available under Mesopotamian law."
@@ -2352,12 +2350,12 @@ CYRUS THE DELIVERER                       JESUS CHRIST THE REDEEMER
               why: "MENE, TEKEL, PERES are marketplace weights read as Heaven's ledger. Every kingdom in the book is numbered, weighed, and eventually replaced. Sit with the verse until the claim is yours, not a slogan: write the text, name the empire or office in view, and refuse any reading that drops Christ from the center of Daniel's chain."
             },
             {
-              do: "Read Daniel 5:30–31 beside Isaiah 45:1–3. Note who was named, and what happened to the river gates.",
+              do: "Read Daniel 5:30–31 beside Isaiah 44:27 and 45:1–3. Note who was named, the dried deep, and the two leaved gates.",
               why: "October 539 was not improvisation. Cyrus was named; the gates stood open; gold became silver in a single night. Sit with the verse until the claim is yours, not a slogan: write the text, name the empire or office in view, and refuse any reading that drops Christ from the center of Daniel's chain."
             },
           ],
           christ: {
-            claim: "The hand that weighed Belshazzar belongs to the Judge who weighs every soul. On our own we are TEKEL; in Christ we possess His righteousness.",
+            claim: "The audit of Belshazzar is committed to the Son (John 5:22); on our own we are TEKEL; in Christ we are clothed in His righteousness.",
             why: "Cyrus types the Anointed Deliverer. Christ is the true Messiah who overthrows spiritual Babylon and covers those found wanting (2 Corinthians 5:21). Sit with the verse until the claim is yours, not a slogan: write the text, name the empire or office in view, and refuse any reading that drops Christ from the center of Daniel's chain."
           },
           now: {
@@ -2425,18 +2423,18 @@ CYRUS THE DELIVERER                       JESUS CHRIST THE REDEEMER
           download: "assets/study/infographics/sitting-06-roadmap.jpg",
           filename: "Daniel-6-Pit-of-Hunger-Roadmap.jpg",
           title: "The Pit of Hunger: The Law of the Medes and Persians, The Open Window, and the Resurrection of Christ",
-          alt: "One-page roadmap of Sitting 6: the unalterable statute, Daniel's open window, the lions' den, dawn deliverance, and the pit as a type of Christ's resurrection."
+          alt: "One-page roadmap of Sitting 6: the unalterable statute, Daniel's open window, the lions' den, dawn deliverance, and comparison with the sealed tomb."
         },
         title: "The Pit of Hunger: The Law of the Medes and Persians, The Open Window, and the Resurrection of Christ",
-        subtitle: "The irrevocable imperial statute, blameless integrity under audit, prayer facing Jerusalem, and the sealed pit as a type of the risen Christ.",
+        subtitle: "The irrevocable imperial statute, blameless integrity under audit, prayer facing Jerusalem, and the sealed pit set beside the empty tomb.",
         flow: [
           { kind: "history", title: "Transition from gold to silver", text: "Babylon falls; Darius the Mede establishes 120 satrapies under 3 presidents, with Daniel chief.", tag: "Daniel 5:31; 6:1–3" },
-          { kind: "history", title: "The unalterable statute", text: "Under the Medo-Persian code, royal decrees cannot be repealed (Esther 8:8; Diodorus XVII.30).", tag: "Daniel 6:8, 12, 15" },
+          { kind: "history", title: "The unalterable statute", text: "Under the Medo-Persian code, royal decrees cannot be repealed (Daniel 6:8, 12, 15; Esther 8:8). Classical writers illustrate irreversible royal action; they do not quote a statute.", tag: "Daniel 6:8, 12, 15" },
           { kind: "scripture", title: "The forensic audit", text: "The satraps find no error or fault. The only charge they can bring concerns the law of his God.", tag: "Daniel 6:4–5" },
           { kind: "anchor", title: "The window stays open", text: "Daniel prays toward Jerusalem three times daily as he did aforetime; civil duty yields to the First Commandment.", tag: "Daniel 6:10; Acts 5:29" },
           { kind: "scripture", title: "The sealed pit of hunger", text: "Daniel is cast into the den of lions. A stone is sealed with the royal signet, and the king fasts through the night.", tag: "Daniel 6:16–18" },
           { kind: "scripture", title: "Dawn inquiry and deliverance", text: "God sent His angel and shut the lions' mouths, and Darius decreed worship of the living God.", tag: "Daniel 6:20–27" },
-          { kind: "guard", title: "The pit and the empty tomb", text: "Daniel, sealed in the pit, foreshadows Christ, who was sealed in the tomb and rose at dawn over the roaring lion.", tag: "Matt 27:62–66; 1 Pet 5:8" }
+          { kind: "guard", title: "The pit and the empty tomb", text: "The sealed pit and dawn deliverance invite comparison with the sealed tomb; the resurrection is taught in its own verses (Matthew 28:1–6).", tag: "Matt 27:62–66; 1 Pet 5:8" }
         ],
         content: `
 <nav class="lesson-toc" aria-label="Sheet 6 sections">
@@ -2455,7 +2453,7 @@ CYRUS THE DELIVERER                       JESUS CHRIST THE REDEEMER
 
 <div class="governing-principle">
   <p class="governing-principle-kicker">Big idea</p>
-  <p>When Medo-Persia's unchangeable law criminalized prayer to the living God, Daniel's open window proved that <strong>covenant loyalty to the First Commandment transcends all civil statutes</strong> — and his morning deliverance from the sealed pit foreshadows the glorious resurrection of Jesus Christ.</p>
+  <p>When Medo-Persia's unchangeable law criminalized prayer to the living God, Daniel's open window proved that <strong>loyalty to the First Commandment transcends all civil statutes</strong> — and his morning deliverance from the sealed pit stands beside the empty tomb of Jesus Christ (Matthew 28:1–6).</p>
 </div>
 
 <div class="from-last-sitting">
@@ -2471,13 +2469,13 @@ CYRUS THE DELIVERER                       JESUS CHRIST THE REDEEMER
 
 <p>Following the sudden collapse of Babylon in October 539 B.C., the second world empire of Daniel 2—the chest and arms of silver—assumed global dominion. The transitional governance was placed under Darius the Mede, who "took the kingdom, being about threescore and two years old" (Daniel 5:31).</p>
 
-<p>To administer this vast multicultural empire, Darius established an efficient administrative bureaucracy consisting of 120 satraps overseen by three presidents (Daniel 6:1–2). At the apex of this triumvirate stood Daniel. Now in his eighties—having served with unblemished fidelity through sixty-seven years of Babylonian exile—Daniel immediately distinguished himself above all other administrators because "an excellent spirit was in him; and the king thought to set him over the whole realm" (Daniel 6:3).</p>
+<p>To administer this vast multicultural empire, Darius established an efficient administrative bureaucracy consisting of 120 satraps overseen by three presidents (Daniel 6:1–2). At the apex of this triumvirate stood Daniel. Having served with unblemished fidelity through more than six decades of exile (from the first levy of 605 B.C. to the Medo-Persian transition of 539/538), Daniel immediately distinguished himself above all other administrators because "an excellent spirit was in him; and the king thought to set him over the whole realm" (Daniel 6:3). The chapter prints no age.</p>
 
 <p>This impending promotion ignited bitter political jealousy among the native Medo-Persian ruling class. The satraps and princes could not tolerate an elderly Jewish exile, a captive of a defunct empire, occupying the highest post under the crown. What followed was a cold, calculated political conspiracy designed to eliminate Daniel through the machinery of imperial legislation.</p>
 
 <pre class="prophecy-diagram">THE IMPERIAL TRANSITION: BABYLON TO MEDO-PERSIA (538 B.C.)
 GOLD HEAD (Babylon)            ──▶  SILVER CHEST &amp; ARMS (Medo-Persia)
-• Autocratic Imperial Whim          • Constitutional Oligarchy
+• Autocratic Imperial Whim          • Unalterable royal law
 • King's word makes and breaks law  • "Law of Medes &amp; Persians, which altereth not"
 • Overthrown October 539 B.C.       • 120 Satrapies; 3 Presidents (Daniel Chief)
 • Nebuchadnezzar / Belshazzar       • Darius the Mede / Cyrus the Great</pre>
@@ -2496,13 +2494,13 @@ GOLD HEAD (Babylon)            ──▶  SILVER CHEST &amp; ARMS (Medo-Persia)
   <p class="historical-note-kicker">Independent witnesses to Persian legal immutability</p>
   <ul>
     <li><strong>Biblical witness (Esther 1:19; 8:8):</strong> When King Ahasuerus (Xerxes) was persuaded to sign Haman's genocidal decree against the Jews, he could not cancel the sealed decree even after discovering Haman's treachery. Scripture explicitly records the constitutional rule: <em>"for the writing which is written in the king's name, and sealed with the king's ring, may no man reverse"</em> (Esther 8:8). The crown had to issue an offsetting counter-decree permitting the Jews to arm and defend themselves.</li>
-    <li><strong>Classical historical witness (Diodorus Siculus XVII.30):</strong> The Greek historian Diodorus Siculus records that King Darius III condemned a man named Charidemus to death. Immediately afterward, the king realized he had made a disastrous error and deeply repented, but acknowledged that under Persian law it was impossible to undo or reverse what had been decreed by royal authority.</li>
+    <li><strong>Classical historical witness (Diodorus Siculus XVII.30):</strong> The Greek historian Diodorus Siculus records that King Darius III condemned Charidemus and immediately regretted the execution once it was carried out. That is a story of irreversible action after the fact, not a quotation of a Persian statute matching Esther 8:8. Scripture, not Diodorus, carries the “altereth not” claim (Daniel 6:8, 12, 15).</li>
     <li><strong>The historical question of Darius the Mede (Daniel 5:31; 6:1):</strong> While Greek historians record Cyrus the Great as the sole supreme conqueror and omit a Median monarch named "Darius" on the Persian throne, historicist scholarship presents three transparent possibilities: (1) Ugbaru/Gubaru, the Median governor of Gutium who led the troops of Cyrus into Babylon and appointed subordinate governors; (2) Cyaxares II (preserved in Xenophon's <em>Cyropaedia</em>), the Median uncle and royal colleague of Cyrus; or (3) an administrative Median throne-title used by Cyrus the Great himself (as indicated by the appositional translation of Daniel 6:28: <em>"in the reign of Darius, even in the reign of Cyrus the Persian"</em>). This study honestly acknowledges secular silence while upholding the flawless accuracy of the text: imperial law was weaponized against prayer.</li>
   </ul>
 </div>
 
 <pre class="prophecy-diagram">THE CONSTITUTIONAL PARADIGM SHIFT
-BABYLONIAN AUTOCRACY                    MEDO-PERSIAN CONSTITUTIONALISM
+BABYLONIAN AUTOCRACY                    MEDO-PERSIAN UNALTERABLE LAW
 • Law is the monarch's personal whim    • Law is supreme over the monarch
 • Can execute or spare on impulse       • Royal signet creates immutable decree
 • Nebuchadnezzar: absolute dictator     • Darius: trapped by his own legislation
@@ -2535,8 +2533,8 @@ Financial Records         ──▶  Zero embezzlement or fraud
 Executive Governance      ──▶  Zero administrative negligence or error
 Moral &amp; Civic Character   ──▶  "Faithful in all things"
 ─────────────────────────────────────────────────────────────────────────────
-THE ADVERSARIES' CONCLUSION:
-"We shall find no occasion... except concerning the law of his God."</pre>
+THE ADVERSARIES' CONCLUSION (Dan 6:5, KJV):
+"We shall not find any occasion against this Daniel, except we find it against him concerning the law of his God."</pre>
 
 <p>Because Daniel could not be faulted under civil law, his enemies manufactured a conflict between civil statute and divine commandment. Approaching King Darius with elaborate court flattery, they proposed a thirty-day patriotic festival to solidify the new administration: an imperial decree forbidding any person to ask a petition of any god or man for thirty days, save of the king, under penalty of being cast into the den of lions (Daniel 6:7–8). Flattered by the proposal and unaware of the lethal conspiracy behind it, Darius signed the document, making it an unchangeable law of the empire.</p>
 
@@ -2591,7 +2589,7 @@ THE IMPERIAL COMMAND                     DANIEL'S COVENANT POSTURE
 
 <p>At the first glimmer of dawn, Darius rushed to the den and cried out with a voice strained with agony:</p>
 
-<blockquote class="scripture-quote">"O Daniel, servant of the living God, is thy God, whom thou servest continually, able to deliver thee from the lions?" — Daniel 6:20 (KJV)</blockquote>
+<blockquote class="scripture-quote">"...O Daniel, servant of the living God, is thy God, whom thou servest continually, able to deliver thee from the lions?" — Daniel 6:20 (KJV)</blockquote>
 
 <p>From the depths of the pit came the calm, majestic reply:</p>
 
@@ -2605,7 +2603,7 @@ THE EARTHLY CONSPIRACY                   THE HEAVENLY VINDICATION
 • Daniel consigned to violent death     • Conspirators face swift retributive justice
 • Darius's helplessness under human law • Darius publishes God's eternal dominion (Dan. 6:26)</pre>
 
-<p>Darius was exceedingly glad. Daniel was lifted out of the pit, <em>"and no manner of hurt was found upon him, because he believed in his God"</em> (Daniel 6:23). By royal command, the corrupt conspirators who had plotted Daniel's death were cast into the den, where the ravenous beasts overpowered them before they reached the bottom of the pit (Daniel 6:24).</p>
+<p>Darius was exceedingly glad. Daniel was lifted out of the pit, <em>"and no manner of hurt was found upon him, because he believed in his God"</em> (Daniel 6:23). By royal command, the men who had accused Daniel were cast into the den, <em>"them, their children, and their wives"</em>, and the lions overpowered them before they reached the bottom of the pit (Daniel 6:24).</p>
 
 <p>King Darius then published a universal imperial encyclical to all nations, peoples, and languages throughout the civilized world (Daniel 6:25–27). This was the second pagan decree in Daniel (following Nebuchadnezzar's doxology in chapter 4) proclaiming that the God of Israel is the true and everlasting Sovereign:</p>
 
@@ -2617,7 +2615,7 @@ THE EARTHLY CONSPIRACY                   THE HEAVENLY VINDICATION
   <p class="part-subtitle">Typological fulfillment in Jesus Christ</p>
 </div>
 
-<p>Daniel's deliverance from the pit of hunger is far more than an inspiring moral lesson on personal integrity; it is an unmistakable, divinely authored <strong>prophetic type</strong> pointing directly to the condemnation, burial, and resurrection of Jesus Christ.</p>
+<p>Daniel's deliverance from the pit of hunger is more than an inspiring moral lesson on personal integrity. The sealed stone, the dawn inquiry, and the living man lifted out (Daniel 6:17–23) invite comparison with the sealed tomb and the risen Christ (Matthew 27:62–66; 28:1–6). That correspondence is a reading of the pattern; Daniel 6 does not print a second inspired caption that the den “is” Calvary.</p>
 
 <pre class="prophecy-diagram">THE REDEMPTIVE TYPOLOGY: DANIEL AND JESUS CHRIST
 DANIEL IN THE LIONS' DEN                 JESUS CHRIST AT CALVARY &amp; THE TOMB
@@ -2640,7 +2638,7 @@ DANIEL IN THE LIONS' DEN                 JESUS CHRIST AT CALVARY &amp; THE TOMB
 
 <div class="biblical-case">
   <p class="biblical-case-kicker">2. The sealed stone and the morning triumph</p>
-  <p>Daniel cast into the subterranean pit covered by a stone and sealed with the imperial signet is an exact prophetic picture of Christ buried in Joseph of Arimathea's garden tomb. The Roman governor sealed the sepulcher and set a military guard to ensure no rescue could take place (Matthew 27:62–66). Yet early in the morning, at the break of day, divine power broke the imperial seal. An angel descended from heaven, the stone was rolled away, and Jesus Christ emerged victorious from the dead, having conquered sin, death, and the grave forever (Matthew 28:1–6; Hebrews 13:20).</p>
+  <p>Daniel was cast into a pit covered by a stone and sealed with the imperial signet (Daniel 6:17). The Roman governor sealed Joseph of Arimathea's garden tomb and set a military guard (Matthew 27:62–66). Early in the morning, an angel descended, the stone was rolled away, and Jesus Christ emerged from the dead (Matthew 28:1–6; Hebrews 13:20). Read the two scenes together; do not treat Daniel 6 as a second inspired caption on the tomb.</p>
 </div>
 
 <div class="biblical-case">
@@ -2650,7 +2648,7 @@ DANIEL IN THE LIONS' DEN                 JESUS CHRIST AT CALVARY &amp; THE TOMB
 
 <div class="level-card level-christ">
   <p class="level-kicker">CHRIST</p>
-  <p>Daniel emerging alive from the sealed pit of lions is a profound type of Christ emerging from the sealed tomb. Earthly decrees and Roman seals cannot hold the Prince of Life. Build your hope on the resurrected Deliverer.</p>
+  <p>Daniel emerging alive from the sealed pit of lions stands beside Christ emerging from the sealed tomb. Earthly decrees and Roman seals cannot hold the Prince of Life. Build your hope on the resurrected Deliverer (Matthew 28:1–6; Hebrews 13:20).</p>
 </div>
 
 <div class="part-header" id="apply">
@@ -2686,7 +2684,7 @@ DANIEL IN THE LIONS' DEN                 JESUS CHRIST AT CALVARY &amp; THE TOMB
     <li><strong>TEXT</strong> — Does Daniel 6:10 record that he prayed "as he did aforetime" — an unbroken habit?</li>
     <li><strong>HISTORY</strong> — Is Medo-Persian legal immutability verified across Scripture (Esther 8:8) and classical history (Diodorus Siculus)?</li>
     <li><strong>INTERPRETATION</strong> — Does civil authority have a ceiling at the First Commandment (Acts 5:29)?</li>
-    <li><strong>CHRIST</strong> — Does Daniel in the sealed pit point you to Christ rising from the sealed tomb, having conquered the roaring lion?</li>
+    <li><strong>CHRIST</strong> — Do the sealed pit and dawn deliverance send you to the sealed tomb and the risen Christ in their own verses?</li>
   </ul>
 </div>
 
@@ -2701,7 +2699,7 @@ DANIEL IN THE LIONS' DEN                 JESUS CHRIST AT CALVARY &amp; THE TOMB
                 "title": "The Living Deliverer Who Conquered the Sealed Tomb",
                 "scripture": "Daniel 6:16–23; Matthew 27:62–66; 28:1–6; Hebrews 13:20; 1 Peter 5:8",
                 "body": [
-                        "Daniel's steadfast habit of praying toward Jerusalem three times a day, in the face of an unalterable imperial death decree, mirrors the unwavering prayer life and obedience of our Lord Jesus Christ in Gethsemane. When Daniel was cast into the pit of ravenous beasts and a stone was sealed over its mouth with the king's signet, he became an unmistakable prophetic picture of Christ entombed in Joseph of Arimathea’s garden under the Roman seal.",
+                        "Daniel's steadfast habit of praying toward Jerusalem three times a day, in the face of an unalterable imperial death decree, stands beside the prayer and obedience of our Lord Jesus Christ in Gethsemane. When Daniel was cast into the pit and a stone was sealed over its mouth with the king's signet (Daniel 6:17), the pattern invites comparison with Christ entombed in Joseph of Arimathea’s garden under the Roman seal (Matthew 27:62–66) — a comparison of scenes, not a second caption printed on Daniel 6.",
                         "The tomb of Jesus could not hold the Prince of Life. Through the blood of the everlasting covenant, the God of peace brought again from the dead our Lord Jesus (Hebrews 13:20). Darius the Mede was compelled to issue an imperial decree honoring 'the living God, and stedfast for ever, and his kingdom that which shall not be destroyed' (Daniel 6:26). The enemies who plotted Daniel's destruction were destroyed by the very trap they laid, just as Satan's power was crushed at the cross when he thought he had swallowed up the Son of God.",
                         "Face intimidation, workplace pressure, and spiritual warfare with the confident peace of a resurrected Lord. Satan walks about as a roaring lion seeking whom he may devour (1 Peter 5:8), but Jesus Christ has broken his teeth and silenced his accusations. Keep your windows open toward the heavenly Jerusalem in daily prayer; do not let worldly decrees or secular scoffing compromise your communion with Christ. The God who delivered Daniel from the pit of hunger will preserve you through every dark trial."
                 ]
@@ -2728,15 +2726,15 @@ DANIEL IN THE LIONS' DEN                 JESUS CHRIST AT CALVARY &amp; THE TOMB
             "options": [
               "Skeptical rationalists argue that the lions were heavily satiated with fresh carcass meat by the keepers before Daniel was lowered into the pit.",
               "The narrative promises that covenant believers will never experience physical persecution, bodily danger, or judicial trials during earthly life.",
-              "Like Christ, Daniel was condemned by envious leaders, placed in a stone-sealed pit, and emerged unharmed at dawn because God's servant cannot be held by death.",
+              "Daniel was condemned by envious leaders, placed in a stone-sealed pit, and emerged unharmed at dawn (Daniel 6:17–23); Matthew 27–28 records the same pattern of seal, stone, and dawn at the tomb of Christ.",
               "Historical critics claim the pit narrative is an allegorical legend borrowed from Persian court tales, lacking any physical reality of deliverance."
             ],
-            "explanation": "Daniel's deliverance is a vivid prophetic type of the resurrection: an innocent servant delivered to death through corrupt rulers, a stone placed and sealed with imperial signets, and morning deliverance through divine intervention.",
+            "explanation": "Daniel's deliverance shares a pattern with the resurrection accounts: an innocent servant delivered through corrupt rulers, a stone placed and sealed with imperial signets, and morning deliverance. Matthew 28:1–6 teaches the empty tomb in its own words.",
             "diagnostics": [
               "Misconception: Daniel 6:24 refutes the satiation hypothesis: the ravenous lions broke all the conspirators' bones before they reached the bottom.",
-              "Misconception: Scripture nowhere promises exemption from persecution; Daniel was cast into the pit, typifying divine presence through death unto deliverance.",
+              "Misconception: Scripture nowhere promises exemption from persecution; Daniel was cast into the pit, and God delivered him (Daniel 6:22–23).",
               "",
-              "Misconception: Daniel 6 is authentic exilic history; the miraculous preservation of the innocent servant provides an inspired prophetic type of Christ's resurrection."
+              "Misconception: Daniel 6 is a late legend with no historical core; the preservation of the innocent servant stands beside Christ's resurrection, which Matthew 28 records in its own words."
             ]
           },
           {
@@ -2782,7 +2780,7 @@ DANIEL IN THE LIONS' DEN                 JESUS CHRIST AT CALVARY &amp; THE TOMB
             "explanation": "Hebrews 13:20 names the God of peace who brought again from the dead our Lord Jesus. Daniel 6 is the type; Easter is the antitype.",
             "diagnostics": [
               "Misconception: An imperial royal decree acknowledging God's power is not identical to personal spiritual regeneration of all citizens across the empire.",
-              "Misconception: Deliverance from the pit is a prophetic type pointing forward to the ultimate reality of Christ's resurrection and the final resurrection.",
+              "Misconception: Deliverance from the pit stands beside Christ's resurrection, which Matthew 28 records in its own words.",
               "Misconception: The decree contains profound theological declarations regarding the living God whose kingdom shall not be destroyed, echoing Daniel 2 and 7.",
               ""
             ]
@@ -2911,7 +2909,7 @@ DANIEL IN THE LIONS' DEN                 JESUS CHRIST AT CALVARY &amp; THE TOMB
 
 <div class="from-last-sitting">
   <span class="from-last-sitting-kicker">From the last sitting · Sheet 6</span>
-  <p>In Sitting 6, Daniel faced the lions' den rather than surrender his daily prayer toward Jerusalem to an unchangeable Medo-Persian decree. God dispatched His angel to shut the lions' mouths, demonstrating that human statutes have an absolute ceiling at the First Commandment, and providing an indelible prophetic type of Christ's resurrection from the sealed Roman tomb. Now in chapter 7, the book of Daniel pivots dramatically from exilic historical court narratives to apocalyptic night visions, retracing the four-kingdom prophecy of Daniel 2 through the fierce, predatory symbols of apocalyptic prophecy.</p>
+  <p>In Sitting 6, Daniel faced the lions' den rather than surrender his daily prayer toward Jerusalem to an unchangeable Medo-Persian decree. God dispatched His angel to shut the lions' mouths, demonstrating that human statutes have an absolute ceiling at the First Commandment. The sealed pit and dawn deliverance stand beside the sealed tomb (Matthew 27:62–66; 28:1–6). Now in chapter 7, the book of Daniel pivots dramatically from exilic historical court narratives to apocalyptic night visions, retracing the four-kingdom prophecy of Daniel 2 through the fierce, predatory symbols of apocalyptic prophecy.</p>
 </div>
 
 <div class="part-header" id="intro">
@@ -2929,7 +2927,7 @@ DANIEL IN THE LIONS' DEN                 JESUS CHRIST AT CALVARY &amp; THE TOMB
   <ul>
     <li><strong>The Sea / Waters:</strong> Represent densely populated human civilizations, multitudes, and nations. Revelation 17:15 explicitly confirms: <em>"The waters which thou sawest... are peoples, and multitudes, and nations, and tongues"</em> (see also Isaiah 17:12–13).</li>
     <li><strong>The Winds:</strong> Represent military warfare, political strife, and violent upheaval. Jeremiah 49:36–37 records: <em>"And upon Elam will I bring the four winds from the four quarters of heaven, and will scatter them... for I will cause Elam to be dismayed before their enemies"</em> (see also Zechariah 7:14).</li>
-    <li><strong>The Beasts:</strong> Represent world-ruling geopolitical empires arising out of human conflict. The interpreting angel explicitly declares: <em>"These great beasts, which are four, are four kings [kingdoms], which shall arise out of the earth"</em> (Daniel 7:17, 23).</li>
+    <li><strong>The Beasts:</strong> Represent world-ruling geopolitical empires arising out of human conflict. The interpreting angel declares: <em>"These great beasts, which are four, are four kings, which shall arise out of the earth"</em> (Daniel 7:17). Verse 23 then names the fourth beast <em>"the fourth kingdom upon earth."</em> Kings and kingdoms are the same chain; the brackets are not in the KJV of 7:17.</li>
     <li><strong>The Horns:</strong> Represent individual rulers, dynasties, or kingdoms subdividing an empire: <em>"And the ten horns out of this kingdom are ten kings that shall arise"</em> (Daniel 7:24; Revelation 17:12).</li>
   </ul>
 </div>
@@ -2960,7 +2958,7 @@ DANIEL 2 (The World's View: Metals)       DANIEL 7 (Heaven's View: Predators)
 
 <div class="framework-card">
   <p class="framework-card-kicker">2. The Lopsided Bear: The Medo-Persian Empire (539–331 B.C.)</p>
-  <p>The second beast was like a bear, raised up on one of its sides, with three ribs clenched between its teeth (Daniel 7:5). The bear represents the heavy, lumbering, massive armies of Medo-Persia. It was raised up on one side because the Persian wing of the dual monarchy emerged far stronger and more dominant than the Median wing. The three ribs in its mouth represent the traditional historicist identification of the three principal imperial conquests that forged the Medo-Persian Empire: <strong>Lydia (547 B.C.)</strong>, <strong>Babylon (539 B.C.)</strong>, and <strong>Egypt (525 B.C.)</strong> (see standard grammatical-historical commentaries on Daniel 7:5 and exilic historical studies). The beast is commanded: <em>"Arise, devour much flesh,"</em> describing the vast territorial expansion of the Persian kings.</p>
+  <p>The second beast was like a bear, raised up on one of its sides, with three ribs clenched between its teeth (Daniel 7:5). The bear represents the heavy, lumbering, massive armies of Medo-Persia. It was raised up on one side because the Persian wing of the dual monarchy emerged far stronger and more dominant than the Median wing. The three ribs in its mouth are this course’s historicist identification of the three principal imperial conquests that forged the Medo-Persian Empire: <strong>Lydia (547 B.C.)</strong>, <strong>Babylon (539 B.C.)</strong>, and <strong>Egypt (525 B.C.)</strong> — dated history, not a fourth verse in Daniel 7:5. The beast is commanded: <em>"Arise, devour much flesh,"</em> describing the vast territorial expansion of the Persian kings.</p>
 </div>
 
 <div class="framework-card">
@@ -2997,16 +2995,16 @@ BEAST:                   CHARACTERISTICS:                     HISTORICAL FULFILL
     <li><strong>Diverse from the Ten (7:24):</strong> Unlike the purely political or barbarian kingdoms around it, this power is <em>"diverse"</em>—a religio-political entity, a church-state amalgam combining ecclesiastical authority with civil sovereignty.</li>
     <li><strong>Uproots Three Horns (7:8, 24):</strong> Three of the ten original barbarian kingdoms were completely uprooted before it: the <strong>Heruli (493 A.D.)</strong>, the <strong>Vandals (534 A.D.)</strong>, and the <strong>Ostrogoths (538 A.D.)</strong>. These three Germanic nations adhered to Arianism (which denied the orthodoxy of the Roman Church) and militarily opposed the civil ambitions of the Roman papacy.</li>
     <li><strong>Eyes Like the Eyes of a Man (7:8):</strong> Eyes in Scripture denote wisdom, vision, and discernment (Ephesians 1:18). Human eyes signify a system guided by human wisdom, human tradition, and a supreme human head rather than the Holy Spirit.</li>
-    <li><strong>A Mouth Speaking Pompous Words Against the Most High (7:8, 25):</strong> It utters blasphemies against God, arrogating to an earthly office divine titles (such as <em>Vicarius Filii Dei</em>, "Vicar of the Son of God", or "Holy Father") and claiming prerogatives that belong exclusively to the Godhead, such as the power to forgive sins (Mark 2:7) and infallibility.</li>
+    <li><strong>A Mouth Speaking Pompous Words Against the Most High (7:8, 25):</strong> It utters blasphemies against God, arrogating to an earthly office titles that belong to Christ (such as Vicar of Christ) and claiming prerogatives that belong to God alone, such as the power to forgive sins (Mark 2:7).</li>
     <li><strong>Persecutes and Wears Out the Saints (7:21, 25):</strong> It wages institutional warfare against faithful believers who adhere to Scripture, utilizing civil power, inquisitions, and crusades to suppress dissent through centuries of persecution.</li>
-    <li><strong>Thinks to Change Times and Laws (7:25):</strong> The Aramaic words <em>zimnin</em> (sacred calendar/times) and <em>dath</em> (divine moral law) signify an attempt to alter God's immutable Ten Commandments—specifically removing the second commandment against images, dividing the tenth to maintain the number ten, and substituting the pagan Sunday for the seventh-day Sabbath sanctified at Creation.</li>
+    <li><strong>Thinks to Change Times and Laws (7:25):</strong> The Aramaic words <em>zimnin</em> (times) and <em>dath</em> (law) name an intent to change appointed times and law. This course’s historicist reading applies that intent to the Sabbath among the Ten Commandments. Later catechism numbering that omits the second commandment and splits the tenth is a historical illustration of that change.</li>
     <li><strong>Reigns for a Measured Prophetic Span (7:25):</strong> It exercises civil supremacy for <em>"a time and times and the dividing of time"</em>—a span systematically demonstrated below to equal 1,260 solar years.</li>
   </ol>
 </div>
 
-<p>The historicist interpretation used in this lesson identifies Daniel 7's little horn with the historical papacy: the office of the bishop of Rome in its church-state role, where religious and civil authority were joined. This is a claim about an institution and its historical exercise of authority, not a judgment about Roman Catholics as individuals. Many Catholics sincerely follow Christ, and disagreement over this interpretation gives no warrant for prejudice or hostility toward them. The quotation below records Martin Luther's polemical view of the papal office as a historical source; it is not a statement about Catholic believers today.</p>
+<p>Daniel 7's little horn is the historical papacy: the office of the bishop of Rome in its church-state role, where religious and civil authority were joined. This is a claim about an institution and its historical exercise of authority, not a judgment about Roman Catholics as individuals. Many Catholics sincerely follow Christ, and disagreement over this interpretation gives no warrant for prejudice or hostility toward them. The quotation below records Martin Luther's polemical view of the papal office as a historical source; it is not a statement about Catholic believers today.</p>
 
-<blockquote class="scripture-quote">"This teaching [the Papacy] shows forcefully that the Pope is the very Antichrist, who has exalted himself above, and opposed himself against Christ, because he will not permit Christians to be saved without his power, which, nevertheless, is nothing, and is neither ordained nor commanded by God." — Martin Luther, <em>Smalcald Articles</em> (1537), Part II, Art. IV</blockquote>
+<blockquote class="scripture-quote">"This teaching shows forcefully that the Pope is the very Antichrist, who has exalted himself above, and opposed himself against Christ, because he will not permit Christians to be saved without his power, which, nevertheless, is nothing, and is neither ordained nor commanded by God." — Martin Luther, <em>Smalcald Articles</em> (1537), Part II, Art. IV</blockquote>
 
 <pre class="prophecy-diagram">THE FORENSIC PROFILE OF THE ELEVENTH HORN (DANIEL 7:8, 24–25)
 SCRIPTURAL CRITERIA:                     HISTORICAL FULFILLMENT:
@@ -3047,8 +3045,8 @@ SCRIPTURAL CRITERIA:                     HISTORICAL FULFILLMENT:
 <div class="historical-note">
   <p class="historical-note-kicker">The historical boundaries: A.D. 538 to A.D. 1798</p>
   <ul>
-    <li><strong>The Starting Anchor (A.D. 538):</strong> In 533 A.D., Eastern Roman Emperor Justinian issued an imperial letter recognizing the Bishop of Rome as the <em>"head of all the holy churches"</em> and the <em>"corrector of heretics."</em> However, this legal grant could not be implemented in Rome because the Arian Ostrogoths held military control over Italy. In March 538 A.D., Byzantine General Belisarius shattered the year-long Ostrogothic siege of Rome. With the Ostrogoths driven from the city—the third Arian kingdom to be uprooted—Justinian's decree became effective, establishing the temporal civil hegemony of the Roman papacy.</li>
-    <li><strong>The Concluding Anchor (A.D. 1798):</strong> Exactly 1,260 years later (538 + 1,260 = 1798), the French Revolution struck at papal power. On February 15, 1798, French General Louis-Alexandre Berthier marched into Rome under orders from the Revolutionary Directory, abolished the papal government, proclaimed the Roman Republic, and took Pope Pius VI captive into exile in France, where he died. This inflicted the prophetic <em>"deadly wound"</em> (Revelation 13:3), terminating the 1,260-year epoch of papal political supremacy.</li>
+    <li><strong>The Starting Anchor (A.D. 538):</strong> In A.D. 533, Eastern Roman Emperor Justinian wrote to Pope John II recognizing the Bishop of Rome as head of the churches (Codex Justinianus I.1.8). That letter is history, not a verse. It could not be implemented in Rome while the Arian Ostrogoths held Italy. In March 538, Byzantine General Belisarius shattered the Ostrogothic siege of Rome. With the Ostrogoths driven from the city—the third Arian kingdom uprooted—the 1,260-year papal supremacy begins.</li>
+    <li><strong>The Concluding Anchor (A.D. 1798):</strong> Exactly 1,260 years later (538 + 1,260 = 1798), the French Revolution struck at papal power. French General Louis-Alexandre Berthier entered Rome on 10 February 1798; the Roman Republic was proclaimed on 15 February; Pope Pius VI was taken captive on the night of 20 February and later died in exile in France. This inflicted the prophetic <em>"deadly wound"</em> (Revelation 13:3), terminating the 1,260-year epoch of papal political supremacy.</li>
   </ul>
 </div>
 
@@ -3154,7 +3152,7 @@ SCRIPTURAL CRITERIA:                     HISTORICAL FULFILLMENT:
                 "scripture": "Daniel 7:9–14, 21–22, 26–27; Matthew 26:64; Revelation 1:7; 1 Timothy 2:5; Hebrews 7:25",
                 "body": [
                         "In Daniel 7, the terrifying panorama of predatory beasts and the 1,260-year blasphemous reign of the little horn culminates in a celestial courtroom of blinding glory. The Ancient of Days sits upon a flaming throne, the books are opened, and 'one like the Son of man came with the clouds of heaven, and came to the Ancient of days' (Dan 7:13). This Son of Man is Jesus Christ, who repeatedly applied this very title to Himself during His earthly ministry, even declaring to the high priest that he would see the Son of man coming in the clouds of heaven (Matt 26:64).",
-                        "The scene of Daniel 7:13 is not Christ coming to earth at His Second Advent; it is Christ moving into the presence of the Father in the heavenly sanctuary to receive the kingdom, glory, and dominion. While the papal little horn spoke great words against the Most High, wore out the saints for a time, times, and the dividing of time (538–1798), and usurped Christ's unique priesthood, the heavenly court convenes to execute judgment in favor of the saints (Dan 7:22). Christ is our heavenly High Priest and Advocate, standing before the universe to vindicate His covenant people and establish an everlasting kingdom.",
+                        "The scene of Daniel 7:13 is not Christ coming to earth at His Second Advent; it is Christ moving into the presence of the Father in the heavenly sanctuary to receive the kingdom, glory, and dominion. While the papal little horn spoke great words against the Most High, wore out the saints for a time, times, and the dividing of time (538–1798), and usurped Christ's unique priesthood, the heavenly court sits. The KJV of Daniel 7:22 reads, 'judgment was given to the saints of the most High' — the saints receive the verdict and the kingdom, not a modern paraphrase smuggled into the verse as if it were the KJV wording.",
                         "Anchor your confidence in Christ's advocacy rather than earthly religious hierarchies or human mediators. There is one God, and one mediator between God and men, the man Christ Jesus (1 Tim 2:5). When you face spiritual persecution or feel worn out by the moral darkness of this age, remember that the judgment has been seated, the horn's dominion is taken away, and Christ will soon share His kingdom with those who remain faithful to His name."
                 ]
         },
@@ -3228,7 +3226,7 @@ SCRIPTURAL CRITERIA:                     HISTORICAL FULFILLMENT:
             "options": [
               "The passage records Jesus' historical earthly walking journey from Galilee down to Jerusalem during His public ministry before the crucifixion.",
               "The text dramatizes theological debates between early church bishops during the fourth-century trinitarian controversies in Byzantine Constantinople.",
-              "The text says they brought Him near before the Ancient of Days in heaven; it is investiture and judgment in favor of the saints before the final return.",
+              "The text says they brought Him near before the Ancient of Days in heaven; it is investiture. Daniel 7:22 KJV then says judgment was given to the saints — they receive the verdict and the kingdom before the final return.",
               "The clouds represent local atmospheric weather patterns observed over the Tigris river during Daniel's visionary trance in ancient Babylonia."
             ],
             "explanation": "Matthew 26:64 later joins the heavenly session to the visible return. First the court; then the appearing.",
@@ -3265,7 +3263,7 @@ SCRIPTURAL CRITERIA:                     HISTORICAL FULFILLMENT:
           },
           now: {
             claim: "Church-state power that changes times and laws is not only a medieval story. You still live among the fragments of the fourth beast, and claims on the calendar of worship remain a live issue.",
-            why: "Daniel 7:25 describes a power diverse from ethnic kingdoms because it merges religious authority with civil enforcement, changes times and laws, and wears out the saints for a measured span. The years 538 and 1798 mark mainstream historical boundaries for that supremacy, but the pattern of revising worship and pressing conscience did not vanish when the span closed. If you archive the horn as costume drama, you will miss modern fights over holy time and commandment as side issues. If you see the pattern, you recognize why calendar and law remain central rather than decorative in biblical prophecy."
+            why: "Daniel 7:25 describes a power diverse from ethnic kingdoms because it merges religious authority with civil enforcement, changes times and laws, and wears out the saints for a measured span. 538 and 1798 are the boundaries of that papal supremacy (1,260 years), but the pattern of revising worship and pressing conscience did not vanish when the span closed. If you archive the horn as costume drama, you will miss modern fights over holy time and commandment as side issues. If you see the pattern, you recognize why calendar and law remain central rather than decorative in biblical prophecy."
           },
           help: {
             claim: "This sheet keeps the four kingdoms on a fixed chain and gives you a checklist for the little horn so it does not become a vague mood or a cartoon villain.",
@@ -3335,11 +3333,11 @@ SCRIPTURAL CRITERIA:                     HISTORICAL FULFILLMENT:
         flow: [
           { kind: "anchor", title: "The angel names the animals", text: "The two-horned ram is Media and Persia, and the rough goat is Grecia. Gabriel leaves no room for human guesswork.", tag: "Daniel 8:20–21" },
           { kind: "scripture", title: "Alexander and the four horns", text: "Alexander dies at 32; four Diadochi realms arise toward the four winds of heaven (Cassander, Lysimachus, Seleucus, Ptolemy).", tag: "Daniel 8:8, 21–22" },
-          { kind: "anchor", title: "Rome in two phases", text: "The horn grows exceedingly great. Pagan Rome reaches Egypt, Syria, and Judea and crucifies the Prince, and papal Rome reaches upward against the host of heaven.", tag: "Daniel 8:9–10; SDABC 4:841" },
+          { kind: "anchor", title: "Rome in two phases", text: "The horn grows exceedingly great. Pagan Rome reaches Egypt, Syria, and Judea and crucifies the Prince, and papal Rome reaches upward against the host of heaven.", tag: "Daniel 8:9–12" },
           { kind: "scripture", title: "The attack on the Tamid", text: "The horn removes the tamid, Christ's continual heavenly intercession, and a counterfeit earthly priesthood obscures it.", tag: "Daniel 8:11–12; Hebrews 7:25" },
           { kind: "guard", title: "Three tests Antiochus fails", text: "Antiochus is not exceedingly great, because he paid tribute to Rome. He does not reach the time of the end (Daniel 8:17, 19). Three years cannot cover 2,300 prophetic days.", tag: "Daniel 8:9, 14, 17, 19" },
           { kind: "anchor", title: "Nitsdaq: courtroom vindication", text: "Nitsdaq means justified, vindicated, and restored to its rightful state. That is Day of Atonement language for the heavenly sanctuary (Leviticus 16; Hebrews 8–9).", tag: "Daniel 8:14; Leviticus 16:30" },
-          { kind: "history", title: "2,300 years land in 1844", text: "The span runs from Artaxerxes' decree in 457 B.C. to October 22, 1844, when Christ enters the Most Holy Place for the pre-advent judgment.", tag: "Daniel 8:14; 9:24–27; Froom Vol. 4" }
+          { kind: "history", title: "2,300 years land in 1844", text: "The 2,300 years end on 22 October 1844 (tenth day of the seventh month, Karaite visible-moon reckoning). That day Jesus entered the Most Holy Place of the heavenly sanctuary to begin the final judgment work.", tag: "Daniel 8:14; 9:24–27; Leviticus 16" }
         ],
         content: `
 <nav class="lesson-toc" aria-label="Sheet 8 sections">
@@ -3363,13 +3361,13 @@ SCRIPTURAL CRITERIA:                     HISTORICAL FULFILLMENT:
 
 <div class="from-last-sitting">
   <span class="from-last-sitting-kicker">From the last sitting · Sheet 7</span>
-  <p>In Sitting 7, Daniel saw four predatory beasts rise from a storm-tossed sea, tracing the succession of world empires from Babylon to Rome, followed by the 1,260-year supremacy of the little horn (538–1798 A.D.) and the convening of the celestial court before the Ancient of Days. Now in chapter 8, approximately two years later (c. 551 B.C.), the prophetic camera narrows from the geopolitical turmoil of nations to focus upon God's sanctuary itself, unveiling the cosmic conflict between an earthly counterfeit priesthood and Christ's high-priestly ministry in the heavenly tabernacle.</p>
+  <p>In Sitting 7, Daniel saw four predatory beasts rise from a storm-tossed sea, tracing the succession of world empires from Babylon to Rome, followed by the 1,260-year supremacy of the little horn (538–1798 A.D.) and the convening of the celestial court before the Ancient of Days. Now in chapter 8, in the third year of Belshazzar (Daniel 8:1; this course’s reconstruction is c. 551 B.C.; other historicist tables print 548/547), the prophetic camera narrows from the geopolitical turmoil of nations to focus upon God's sanctuary itself, unveiling the cosmic conflict between an earthly counterfeit priesthood and Christ's high-priestly ministry in the heavenly tabernacle.</p>
 </div>
 
 <div class="part-header" id="intro">
   <p class="part-kicker">Introduction</p>
   <h3>The Vision at the River Ulai in Susa</h3>
-  <p class="part-subtitle">Daniel 8:1–3 · Susa, c. 551 B.C.</p>
+  <p class="part-subtitle">Daniel 8:1–3 · Susa, third year of Belshazzar (year reconstructed)</p>
 </div>
 
 <p>In the third year of King Belshazzar's reign, Daniel was transported in vision to Shushan (Susa), the fortress capital of the province of Elam, standing beside the banks of the river or canal Ulai (Daniel 8:1–2). Susa would later become the winter palace and administrative heart of the Persian Empire (Esther 1:2; Nehemiah 1:1). There, Daniel witnessed a striking prophetic drama involving a two-horned ram, a swift rough goat, and a little horn that magnified itself even to the Prince of the host.</p>
@@ -3429,9 +3427,7 @@ SYMBOL IN PROPHECY:           INTERPRETATION:          HISTORICAL REALITY:
   <li>The little horn became <strong>exceedingly great</strong> (<em>yigdal-me'od</em>, 8:9).</li>
 </ul>
 
-<p>In historicist hermeneutics, this little horn represents <strong>Rome in both of its successive historical phases: Pagan and Papal</strong>. Historicist commentary articulates this established consensus:</p>
-
-<blockquote>"This little horn represents Rome in both its phases, pagan and papal... Rome was small in its beginnings, but grew 'exceeding great' toward the south (Egypt), toward the east (Syria), and toward the pleasant land (Palestine)." — <em>Historical & Exegetical Notes on Daniel</em>, 8:9–10</blockquote>
+<p>In historicist hermeneutics, this little horn represents <strong>Rome in both of its successive historical phases: Pagan and Papal</strong>. The verse names the directions; dated conquests fill them. Rome was small in its beginnings, then grew exceeding great toward the south (Egypt, 30 B.C.), toward the east (Syria, 64 B.C.), and toward the pleasant land (Judea, 63 B.C.).</p>
 
 <div class="framework-card">
   <p class="framework-card-kicker">The two phases of Rome in Daniel 8</p>
@@ -3449,9 +3445,9 @@ SYMBOL IN PROPHECY:           INTERPRETATION:          HISTORICAL REALITY:
 
 <p>The core spiritual crime of the little horn is described in Daniel 8:11–12 with surgical precision:</p>
 
-<blockquote class="scripture-quote">"Yea, he magnified himself even to the prince of the host, and by him the daily sacrifice [tamid] was taken away, and the place of his sanctuary was cast down. And an host was given him against the daily sacrifice by reason of transgression, and it cast down the truth to the ground; and it practised, and prospered." — Daniel 8:11–12 (KJV)</blockquote>
+<blockquote class="scripture-quote">"Yea, he magnified himself even to the prince of the host, and by him the daily sacrifice was taken away, and the place of his sanctuary was cast down. And an host was given him against the daily sacrifice by reason of transgression, and it cast down the truth to the ground; and it practised, and prospered." — Daniel 8:11–12 (KJV)</blockquote>
 
-<p>The English translators supplied the word <em>"sacrifice"</em> in italics, because it is entirely absent from the original Hebrew text. The inspired word is simply the substantive adjective <strong><em>ha-tamid</em></strong> (הַתָּמִיד), meaning <strong>"the continual," "the perpetual," or "the daily."</strong></p>
+<p>The English translators supplied the word <em>"sacrifice"</em> in italics; it is not in the Hebrew. The word is <strong><em>ha-tamid</em></strong> (הַתָּמִיד), “the continual.” That note sits beside the verse; it is not inside the KJV wording.</p>
 
 <div class="framework-card">
   <p class="framework-card-kicker">What is the Tamid?</p>
@@ -3510,14 +3506,15 @@ BIBLICAL REQUIREMENT:            ANTIOCHUS IV EPIPHANES:           HISTORICIST R
   <p class="part-subtitle">Daniel 8:13–14; Leviticus 16:30; Hebrews 8:1–2; 9:23–26</p>
 </div>
 
-<p>In his vision, Daniel heard a holy angel asking: <em>"How long shall be the vision concerning the daily sacrifice [tamid], and the transgression of desolation, to give both the sanctuary and the host to be trodden under foot?"</em> (Daniel 8:13). The divine answer echoed through heaven:</p>
+<p>In his vision, Daniel heard a holy angel asking: <em>"How long shall be the vision concerning the daily sacrifice, and the transgression of desolation, to give both the sanctuary and the host to be trodden under foot?"</em> (Daniel 8:13). The divine answer echoed through heaven:</p>
 
-<blockquote class="scripture-quote pull-quote">"And he said unto me, Unto two thousand and three hundred days; then shall the sanctuary be cleansed [Hebrew: nitsdaq]." — Daniel 8:14 (KJV)</blockquote>
+<blockquote class="scripture-quote pull-quote">"And he said unto me, Unto two thousand and three hundred days; then shall the sanctuary be cleansed." — Daniel 8:14 (KJV)</blockquote>
+<p>The Hebrew verb under “cleansed” is <em>nitsdaq</em>. That lexical note sits beside the verse; it is not inside the KJV wording.</p>
 
 <div class="framework-card">
   <p class="framework-card-kicker">Linguistic Precision: Nitsdaq vs. Taher</p>
   <p>The English King James Version translates the Hebrew verb <strong><em>nitsdaq</em></strong> (נִצְדַּק) as <em>"cleansed."</em> However, the standard Hebrew verb for physical washing or ceremonial cleansing is <strong><em>taher</em></strong> (טָהֵר). Daniel was inspired to use <em>nitsdaq</em>, a passive form of the root <em>tsadaq</em>, meaning <strong>"to be justified," "to be vindicated," "to be declared righteous," or "to be restored to its rightful state."</strong></p>
-  <p>In biblical usage, <em>nitsdaq</em> is a legal, forensic courtroom word (Deuteronomy 25:1; Job 4:17). Daniel 8:14 does not speak of scrubbing stone floors with water; it announces the <strong>forensic vindication of the heavenly sanctuary, God's character, and His covenant people</strong> against the blasphemous usurpations of the little horn. It represents the antitypical fulfillment of the Day of Atonement (Leviticus 16:30: <em>"on that day shall the priest make an atonement for you, to cleanse you, that ye may be clean from all your sins before the Lord"</em>).</p>
+  <p>In biblical usage, <em>nitsdaq</em> is a legal, forensic courtroom word (Deuteronomy 25:1; Job 4:17). Daniel 8:14 does not speak of scrubbing stone floors with water; it announces the <strong>forensic vindication of the heavenly sanctuary, God's character, and His covenant people</strong> against the blasphemous usurpations of the little horn. It represents the antitypical fulfillment of the Day of Atonement (Leviticus 16:30: <em>"For on that day shall the priest make an atonement for you, to cleanse you, that ye may be clean from all your sins before the LORD"</em>).</p>
 </div>
 
 <div class="framework-card">
@@ -3534,7 +3531,7 @@ BIBLICAL REQUIREMENT:            ANTIOCHUS IV EPIPHANES:           HISTORICIST R
     <li><strong>The Mistaken Event (The Great Disappointment):</strong> The Millerites assumed that "the sanctuary" was the earth, and that its "cleansing" meant the purification of the earth by fire at the Second Coming of Jesus. When Christ did not appear on October 22, 1844, believers endured bitter disappointment.</li>
     <li><strong>The Biblical Resolution:</strong> Prayerful restudy of the Bible (by Hiram Edson, O. R. L. Crosier, and others) revealed that the earth is never called the sanctuary in Scripture. The sanctuary of Daniel 8:14 is the <strong>heavenly sanctuary</strong> (Hebrews 8:1–2; 9:23–24). On October 22, 1844, Jesus Christ entered the Most Holy Place of the heavenly temple to inaugurate the final phase of His high-priestly ministry: the heavenly judgment (Daniel 7:9–14) and the cleansing of the heavenly sanctuary prior to His return.</li>
   </ul>
-  <p class="text-xs text-muted-foreground mt-2">(Sources: William Miller, <em>Apology and Defence</em>, 1845; Joshua V. Himes, <em>Signs of the Times</em>; Samuel S. Snow, <em>The True Midnight Cry</em>; Le Roy Edwin Froom, <em>The Prophetic Faith of Our Fathers</em>, Vol. 4.)</p>
+  <p class="text-xs text-muted-foreground mt-2">(Sources: William Miller, <em>Apology and Defence</em>, 1845; Joshua V. Himes, <em>Signs of the Times</em>; Samuel S. Snow, <em>The True Midnight Cry</em>.)</p>
 </div>
 
 <div class="level-card level-christ">
@@ -3590,7 +3587,7 @@ BIBLICAL REQUIREMENT:            ANTIOCHUS IV EPIPHANES:           HISTORICIST R
                 "title": "The Great High Priest in the Heavenly Sanctuary",
                 "scripture": "Daniel 8:11–14; Hebrews 7:25; 8:1–2; 9:23–26; Leviticus 16:16, 30",
                 "body": [
-                        "Daniel 8 unveils the assault of the little horn power upon 'the Prince of the host'—casting down the place of His sanctuary, taking away the daily intercession, and casting truth to the ground (Daniel 8:11–12). The Prince of the host is Jesus Christ. In response to this counterfeit earthly priesthood, Heaven proclaims the divine remedy: 'Unto two thousand and three hundred days; then shall the sanctuary be cleansed [nitsdaq]' (Daniel 8:14). This points not to an earthly building in Jerusalem, but to the true tabernacle which the Lord pitched, and not man (Hebrews 8:1–2).",
+                        "Daniel 8 unveils the assault of the little horn power upon 'the Prince of the host'—casting down the place of His sanctuary, taking away the daily intercession, and casting truth to the ground (Daniel 8:11–12). The Prince of the host is Jesus Christ. In response to this counterfeit earthly priesthood, Heaven proclaims the divine remedy: 'Unto two thousand and three hundred days; then shall the sanctuary be cleansed' (Daniel 8:14). The Hebrew nitsdaq means put right. This points not to an earthly building in Jerusalem, but to the true tabernacle which the Lord pitched, and not man (Hebrews 8:1–2).",
                         "The Day of Atonement cleansing of the sanctuary in 1844 is Christ's final priestly work, not a repetition of the cross. On Calvary, Jesus offered the once-for-all, all-sufficient sacrifice for human sin, paying our penalty in full (Hebrews 9:26). But an atonement requires both sacrifice and priestly ministry. In the heavenly sanctuary, our Great High Priest applies His shed blood, blotting out the recorded sins of His people and cleansing the sanctuary before the universe prior to His glorious return.",
                         "Enter boldly by faith into the Most Holy Place where Jesus ministers on your behalf. Do not allow human traditions, confessional booths, or earthly intermediaries to obscure Christ's direct and living mediation. Confess your sins honestly to Him today; He is faithful and just to forgive and cleanse you from all unrighteousness. Live with reverent joy, knowing that our High Priest is finishing His work of reconciliation and will soon step out of the sanctuary to receive His waiting people."
                 ]
@@ -3800,7 +3797,7 @@ BIBLICAL REQUIREMENT:            ANTIOCHUS IV EPIPHANES:           HISTORICIST R
 
 <div class="from-last-sitting">
   <span class="from-last-sitting-kicker">From the last sitting · Sheet 8</span>
-  <p>In Sitting 8, Daniel received the longest time prophecy in the Bible: <em>“Unto two thousand and three hundred days; then shall the sanctuary be cleansed [nitsdaq]”</em> (Daniel 8:14). But Gabriel's explanation was cut short: Daniel fainted and was sick for days because no starting point was given, leaving the 2,300-year span unanchored in calendar history (Daniel 8:27). Chapter 9 opens over a decade later in 538 B.C.: the Babylonian empire has fallen to Medo-Persia, Daniel is studying Jeremiah's seventy-year prophecy of the exile, and while he pours out his heart in sackcloth and ashes, Gabriel suddenly reappears to complete the explanation he began at the River Ulai.</p>
+  <p>In Sitting 8, Daniel received the longest time prophecy in the Bible: <em>“Unto two thousand and three hundred days; then shall the sanctuary be cleansed”</em> (Daniel 8:14) — the Hebrew <em>nitsdaq</em> means put right. But Gabriel's explanation was cut short: Daniel fainted and was sick for days because no starting point was given, leaving the 2,300-year span unanchored in calendar history (Daniel 8:27). Chapter 9 opens over a decade later in 538 B.C.: the Babylonian empire has fallen to Medo-Persia, Daniel is studying Jeremiah's seventy-year prophecy of the exile, and while he pours out his heart in sackcloth and ashes, Gabriel suddenly reappears to complete the explanation he began at the River Ulai.</p>
 </div>
 
 <div class="part-header" id="intro">
@@ -3841,7 +3838,7 @@ DANIEL 8 (The Unexplained Vision)          DANIEL 9 (The Inspired Explanation)
 <div class="framework-card">
   <p class="framework-card-kicker">Linguistic Precision: The Hapax Legomenon Chathak</p>
   <p>The English King James Version translates the Hebrew verb as <em>"determined"</em> (Daniel 9:24). However, the inspired word is <strong><em>chathak</em></strong> (חָתַךְ), a biblical <em>hapax legomenon</em>—a word occurring only once in the entire Hebrew Old Testament.</p>
-  <p>In Mishnaic Hebrew, the Talmud, and cognate Semitic languages (such as Aramaic and Syriac), the literal, invariable meaning of <em>chathak</em> is <strong>"to cut off," "to sever," or "to amputate"</strong> a smaller portion from a larger whole. Biblical scholars across centuries confirm this definition:</p>
+  <p>Later Hebrew and related languages often use <em>chathak</em> for cutting or dividing. Gesenius’s lexicon gives both <em>"to cut, to divide"</em> and <em>"to determine, to decree."</em> <em>Chathak</em> means cut off: the 490 years are cut from the 2,300-year line of Daniel 8:14, joining the two chapters on one start:</p>
   <ul class="list-disc pl-5 my-2 space-y-1">
     <li>Gesenius's Hebrew Lexicon defines <em>chathak</em>: <em>"Properly, to cut, to divide; to determine, to decree."</em></li>
     <li>Rabbinic usage: The Talmud uses <em>chathak</em> for cutting off a piece of flesh or trimming a vine.</li>
@@ -3878,7 +3875,7 @@ Decree to Restore &amp; Build   Gospel to Gentiles               Cleansing of Sa
   </ol>
 </div>
 
-<p>Mainstream historical, astronomical, and chronological documentation—including Ptolemy's Royal Canon, the Babylonian Saros Tablets, and the Elephantine Aramaic papyri—conclusively establishes that the seventh regnal year of Artaxerxes I Longimanus began in the spring of 458 B.C. (Persian civil reckoning) and that his decree went into effect in Judea in the <strong>autumn of 457 B.C.</strong> (Ezra 7:7–9). This fixes the unshakeable starting anchor for the 70-week and 2,300-year prophecies.</p>
+<p>Ptolemy's Royal Canon, the Babylonian astronomical tablets, and the Elephantine Aramaic papyri fix Artaxerxes I Longimanus's seventh year so that Ezra's journey lands in the <strong>autumn of 457 B.C.</strong> (Ezra 7:7–9). This sitting starts both the 70-week and 2,300-year lines there.</p>
 
 <pre class="prophecy-diagram">THE FOUR PERSIAN DECREES COMPARED
 DECREE:            DATE:       BIBLICAL TEXT:   SCOPE:                RESTORES CITY &amp; STATE?
@@ -3943,12 +3940,12 @@ Ezra 7:11–26                                Troublous times               "The
 
 <div class="framework-card">
   <p class="framework-card-kicker">3. Causing Sacrifices to Cease: The Rent Veil</p>
-  <p>At the exact moment Jesus died on the cross crying <em>"It is finished"</em> (John 19:30), <em>"the veil of the temple was rent in twain from the top to the bottom"</em> (Matthew 27:51). The sacrificial lamb escaped from the priest's hands. Type had met Antitype. By offering His own precious blood once for all, Jesus brought a permanent end to the divine necessity and efficacy of earthly animal sacrifices (Hebrews 9:11–12; 10:1–14).</p>
+  <p>At the exact moment Jesus died on the cross crying <em>"It is finished"</em> (John 19:30), <em>"the veil of the temple was rent in twain from the top to the bottom"</em> (Matthew 27:51). The earthly type met its fulfillment. By offering His own precious blood once for all, Jesus brought a permanent end to the divine necessity and efficacy of earthly animal sacrifices (Hebrews 9:11–12; 10:1–14).</p>
 </div>
 
 <div class="framework-card">
   <p class="framework-card-kicker">4. The Close of the 70 Weeks: Autumn A.D. 34</p>
-  <p>The remaining 3.5 years of the 70th week ran from Spring A.D. 31 to <strong>Autumn A.D. 34</strong>. During this period, the disciples ministered exclusively to the Jewish people (Matthew 10:5–6; Acts 1:8). In A.D. 34, the Jewish Sanhedrin formally rejected the gospel by stoning Stephen, the first Christian martyr (Acts 7:54–60). Immediately following Stephen's martyrdom, Saul of Tarsus was converted, and the gospel was officially taken to the Gentile nations (Acts 8:1–4; 13:46). The 490 years allotted exclusively to the Jewish nation had reached their appointed end.</p>
+  <p>The remaining 3.5 years of the 70th week ran from Spring A.D. 31 to <strong>Autumn A.D. 34</strong>. During this period, the disciples ministered first to the Jewish people (Matthew 10:5–6; Acts 1:8). In A.D. 34, Stephen was stoned (Acts 7:54–60). The stoning of Stephen in A.D. 34 closes the seventy weeks allotted to Daniel's people and city (9:24). Acts 7 records the stoning; it does not print a formal council title. After Stephen's death, Saul of Tarsus was converted, and the gospel went out more widely among the nations (Acts 8:1–4; 13:46).</p>
 </div>
 
 <pre class="prophecy-diagram">THE 70TH WEEK OF DANIEL (A.D. 27 TO A.D. 34)
@@ -3969,7 +3966,7 @@ Ministry to Israel                         Veil rent; sacrifices cease          
   <p class="framework-card-kicker">The Grammatical and Theological Refutation of Futurism</p>
   <ul>
     <li><strong>1. The Grammatical Subject:</strong> Daniel 9:26 introduces <em>"Messiah"</em> as the subject who is cut off. Verse 27 continues with the singular pronoun: <em>"And HE shall confirm the covenant with many for one week."</em> In Hebrew syntax, the antecedent of "he" is the Messiah, not the Roman general Titus whose troops destroyed the city in A.D. 70.</li>
-    <li><strong>2. Which Covenant is Confirmed?</strong> Scripture never speaks of the Antichrist making or confirming a covenant with anyone. In biblical theology, <strong>"the covenant"</strong> is always God's covenant of grace confirmed by Jesus Christ! At the Last Supper, Jesus held the cup and said: <em>"This is my blood of the new testament [covenant], which is shed for many for the remission of sins"</em> (Matthew 26:28; Hebrews 8:8–13). Christ confirmed the covenant through His earthly life and atoning death.</li>
+    <li><strong>2. Which Covenant is Confirmed?</strong> Scripture never speaks of the Antichrist making or confirming a covenant with anyone. In biblical theology, <strong>"the covenant"</strong> is always God's covenant of grace confirmed by Jesus Christ! At the Last Supper, Jesus held the cup and said: <em>"This is my blood of the new testament, which is shed for many for the remission of sins"</em> (Matthew 26:28; Hebrews 8:8–13) — “testament” here is the covenant. Christ confirmed the covenant through His earthly life and atoning death.</li>
     <li><strong>3. Slicing the Text:</strong> Scripture nowhere authorizes inserting a 2,000-year parenthetical gap between the 69th and 70th weeks. All seventy weeks are a single, contiguous unit of 490 continuous years (<em>chathak</em>). Slicing off the 70th week robs Jesus Christ of His crowning messianic prophecy and attributes His glorious work on Calvary to the Antichrist!</li>
     <li><strong>4. The Balance to 1844:</strong> Since 490 years of the 2,300-year parent line were completed in A.D. 34, 1,810 years remained (2,300 − 490). Measuring 1,810 years from autumn A.D. 34 brings us directly to <strong>autumn 1844</strong> (34 + 1,810 = 1844). The cross of Christ in A.D. 31 is the immovable anchor that validates the terminal date of the 2,300 days.</li>
   </ul>
@@ -4175,7 +4172,7 @@ Restore City                        Messiah               Christ                
           },
           end: {
             title: "Michael standing is next",
-            nextWhy: "Daniel 10–12 is next: the man in linen, the long march of chapter 11, and the promise of 12:13.",
+            nextWhy: "Daniel 10–12 is next: the man in linen, the long march of chapter 11, the close of human probation when Michael stands, and the promise of 12:13.",
             spotlight: "next-sheet-btn"
           }
         }
@@ -4213,14 +4210,14 @@ Restore City                        Messiah               Christ                
           alt: "One-page roadmap of Sitting 10: the Tigris theophany, Daniel 11's march of kings, Michael standing up, the time of trouble, and bodily resurrection from the dust."
         },
         title: "Michael Stands Up: The Time of Trouble & Bodily Resurrection",
-        subtitle: "The close of probation, deliverance of the saints, and the eternal covenant reward.",
+        subtitle: "Michael stands for his people, the time of trouble, and the waking of the dust.",
         flow: [
           { kind: "scripture", title: "One vision, three chapters", text: "In Cyrus’s third year, by the Tigris, chapters 10–12 come as one continuous revelation.", tag: "Daniel 10:1 – 12:13" },
           { kind: "scripture", title: "The man in linen", text: "His body is like beryl and His face like lightning, the same description as the glorified Christ in Revelation 1.", tag: "Daniel 10:5–6 ↔ Revelation 1:13–15" },
           { kind: "scripture", title: "The war behind the empires", text: "The prince of Persia withholds Gabriel twenty-one days; Michael comes to help.", tag: "Daniel 10:13, 20" },
           { kind: "scripture", title: "The named march", text: "The march runs through Persia’s kings, Alexander’s break into four, the wars of north and south, and Rome, and the prince of the covenant is cut off.", tag: "Daniel 11:2–22" },
           { kind: "scripture", title: "The daily removed again", text: "The papal phase takes the tamid and sets up the abomination. It is the attack of chapters 7 and 8 under a new face.", tag: "Daniel 11:31, 36–39" },
-          { kind: "anchor", title: "Michael stands up", text: "“Stand up” is Daniel’s verb for kings assuming power; the great Prince assumes His stance — the plea ends and trouble begins.", tag: "Daniel 12:1; Hebrews 7:25" },
+          { kind: "anchor", title: "Michael stands up", text: "“Stand up” is Daniel’s verb for kings assuming power; the great Prince stands for His people. Trouble follows; those written in the book are delivered.", tag: "Daniel 12:1; 11:2–4" },
           { kind: "scripture", title: "Dust wakes", text: "There is a bodily resurrection with two destinies, confirmed by Jesus in John 5, and Daniel is told to rest and arise.", tag: "Daniel 12:2, 13; John 5:28–29" }
         ],
         content: `
@@ -4231,7 +4228,7 @@ Restore City                        Messiah               Christ                
     <li><a href="#intro">Introduction · The final vision by the Great River Hiddekel</a></li>
     <li><a href="#mp1">I · The Theophany: The man clothed in linen and cosmic warfare</a></li>
     <li><a href="#mp2">II · The prophetic panorama of Daniel 11: from Persia to the end of time</a></li>
-    <li><a href="#mp3">III · Michael stands up: the royal stance and close of probation</a></li>
+    <li><a href="#mp3">III · Michael stands up: the royal stance and the time of trouble</a></li>
     <li><a href="#mp4">IV · The great time of trouble and deliverance in the Book of Life</a></li>
     <li><a href="#mp5">V · Bodily resurrection: waking from the dust and the 1,290/1,335 days</a></li>
     <li><a href="#apply">Practical application · Standing in your lot at the end of days</a></li>
@@ -4240,7 +4237,7 @@ Restore City                        Messiah               Christ                
 
 <div class="governing-principle">
   <p class="governing-principle-kicker">Big idea</p>
-  <p>The entire Book of Daniel culminates not in an empire or an earthly kingdom, but in a living divine Person: <strong>Michael (Jesus Christ) stands up</strong>, bringing human probation to an end, delivering everyone written in the Book of Life, and waking the sleeping saints from the dust of the earth in literal bodily resurrection to everlasting life.</p>
+  <p>The entire Book of Daniel culminates not in an empire or an earthly kingdom, but in a living divine Person: <strong>Michael (Jesus Christ) stands up</strong> for His people, a time of trouble follows, everyone written in the book is delivered, and the sleeping saints wake from the dust in literal bodily resurrection to everlasting life (Daniel 12:1–2).</p>
 </div>
 
 <div class="from-last-sitting">
@@ -4264,7 +4261,7 @@ Restore City                        Messiah               Christ                
   <ul class="list-disc pl-5 my-2 space-y-1">
     <li><strong>Chapter 10 is the Prologue and Theophany:</strong> Daniel fasts by the Tigris; the glorious Man in linen appears; Gabriel pulls back the veil on the unseen cosmic warfare behind earthly empires.</li>
     <li><strong>Chapter 11 is the Detailed March of History:</strong> Gabriel narrates literal geopolitical history in advance without symbolic beasts: from Persian succession, through Alexander the Great and the Hellenistic Ptolemaic/Seleucid wars, to Pagan Rome, the crucifixion of the Prince of the covenant (11:22), and the blasphemous career of Papal Rome (11:31–39).</li>
-    <li><strong>Chapter 12 is the Eschatological Climax:</strong> Michael stands up, human probation closes, the Great Time of Trouble breaks upon the earth, the saints are delivered, the dead are raised from the dust, and Daniel is given God's personal covenant promise.</li>
+    <li><strong>Chapter 12 is the Eschatological Climax:</strong> Michael stands up, a time of trouble such as never was breaks upon the earth, the saints written in the book are delivered, the dead are raised from the dust, and Daniel is given God's personal promise.</li>
   </ul>
 </div>
 
@@ -4273,8 +4270,8 @@ Restore City                        Messiah               Christ                
 │                                                                                              │
 │  DANIEL 10: PROLOGUE          DANIEL 11: HISTORICAL MARCH      DANIEL 12: ESCHATOLOGY        │
 │  • Fasting by the Tigris      • 4 Persian Kings &amp; Xerxes       • Michael Stands Up           │
-│  • The Man in Linen           • Alexander &amp; 4 Diadochi         • Close of Probation          │
-│  • Unseen Spiritual Warfare   • King of North vs South         • Great Time of Trouble       │
+│  • The Man in Linen           • Alexander &amp; 4 Diadochi         • Time of Trouble             │
+│  • Unseen Spiritual Warfare   • King of North vs South         • Deliverance in the Book     │
 │  • Prince of Persia resisted  • Rome: Prince of Covenant cut   • Deliverance in the Book     │
 │  • Michael comes to help      • Papal phase removes tamid      • Bodily Resurrection (12:2)  │
 │                               • Time of the End (1798)         • Rest and Lot (12:13)        │
@@ -4290,7 +4287,7 @@ Restore City                        Messiah               Christ                
 
 <blockquote class="scripture-quote">"Then I lifted up mine eyes, and looked, and behold a certain man clothed in linen, whose loins were girded with fine gold of Uphaz: His body also was like the beryl, and his face as the appearance of lightning, and his eyes as lamps of fire, and his arms and his feet like in colour to polished brass, and the voice of his words like the voice of a multitude." — Daniel 10:5–6 (KJV)</blockquote>
 
-<p>This inventory matches almost word-for-word the glorified Jesus Christ revealed to the apostle John on the Isle of Patmos in Revelation 1:13–15. The linen garment denotes Christ's heavenly high-priestly office; the golden girdle His royal majesty; the eyes of fire His omniscient discernment; and the voice like many waters His sovereign divine authority.</p>
+<p>This inventory overlaps the glorified Christ revealed to John on Patmos (Revelation 1:13–15): linen and gold, eyes as fire, metal brightness. It is not a word-for-word match — Daniel 10:6 has a voice like a multitude; Revelation 1:15 has many waters; John’s white hair is not in Daniel 10. The overlap still reads priestly, royal, and military Christ.</p>
 
 <div class="framework-card">
   <p class="framework-card-kicker">Unseen Spiritual Warfare: The Princes Behind Earthly Monarchies</p>
@@ -4299,7 +4296,7 @@ Restore City                        Messiah               Christ                
   <p>This remarkable passage pulls back the curtain of the invisible world. The "prince of the kingdom of Persia" was not an earthly king, but Satan's demonic agent working upon the Persian court to influence Cyrus and Cambyses against the Jewish exiles (Ephesians 6:12). For twenty-one days—the exact duration of Daniel's fast—Gabriel wrestled against these dark demonic powers. Finally, <strong>Michael</strong>, the supreme Prince of Heaven, arrived on the battlefield, broke the satanic resistance, and secured favor for God's covenant people.</p>
 </div>
 
-<p>Who is Michael? In Hebrew, the name <strong><em>Miy-ka-El</em></strong> (מִיכָאֵל) asks the ultimate rhetorical question: <strong>"Who is like God?"</strong> Throughout Scripture, Michael appears as the Archangel (the Chief or Ruler of angels, Jude 9; 1 Thessalonians 4:16) and Commander of Heaven's army who casts out the dragon (Revelation 12:7). Historicist Protestant theology recognizes Michael as none other than our Lord Jesus Christ in His warrior-king and archangelic office.</p>
+<p>Who is Michael? In Hebrew, the name <strong><em>Miy-ka-El</em></strong> (מִיכָאֵל) asks the ultimate rhetorical question: <strong>"Who is like God?"</strong> Throughout Scripture, Michael appears as the Archangel (the Chief or Ruler of angels, Jude 9; 1 Thessalonians 4:16) and Commander of Heaven's army who casts out the dragon (Revelation 12:7). Michael is our Lord Jesus Christ in His warrior-king and archangelic office.</p>
 
 <div class="part-header" id="mp2">
   <p class="part-kicker">Main Point 2</p>
@@ -4312,19 +4309,19 @@ Restore City                        Messiah               Christ                
 <div class="framework-card">
   <p class="framework-card-kicker">The Unbroken Historical Chain of Daniel 11</p>
   <ul>
-    <li><strong>1. The Persian Succession (11:2):</strong> <em>"Behold, there shall stand up yet three kings in Persia; and the fourth shall be far richer than they all: and by his strength through his riches he shall stir up all against the realm of Grecia."</em> Following Cyrus, three kings arose: Cambyses (530–522 B.C.), Bardiya/false Smerdis (522 B.C.), and Darius I Hystaspes (522–486 B.C.). The immensely wealthy fourth king was <strong>Xerxes I</strong> (the Ahasuerus of Esther, 486–465 B.C.), who mobilized a massive million-man invasion against Greece in 480 B.C., provoking the Greek retaliation that followed a century later.</li>
+    <li><strong>1. The Persian Succession (11:2):</strong> <em>"Behold, there shall stand up yet three kings in Persia; and the fourth shall be far richer than they all: and by his strength through his riches he shall stir up all against the realm of Grecia."</em> Following Cyrus, three kings arose: Cambyses (530–522 B.C.), Bardiya/false Smerdis (522 B.C.), and Darius I Hystaspes (522–486 B.C.). The immensely wealthy fourth king was <strong>Xerxes I</strong> (the Ahasuerus of Esther, 486–465 B.C.), who stirred up Persia against Greece in 480 B.C. Herodotus gives enormous figures for that host (<em>Histories</em> 7.184–186); Daniel 11:2 names riches and a stirring of all against Grecia, not a head-count.</li>
     <li><strong>2. Alexander the Great and the Diadochi (11:3–4):</strong> <em>"And a mighty king shall stand up... And when he shall stand up, his kingdom shall be broken, and shall be divided toward the four winds of heaven; and not to his posterity."</em> Alexander conquered the Persian empire in lightning campaigns (334–331 B.C.) but died suddenly in Babylon at age 32. His empire was not inherited by his sons, but divided among his four generals (Cassander, Lysimachus, Seleucus, and Ptolemy).</li>
     <li><strong>3. Hellenistic Wars: Kings of the North and South (11:5–15):</strong> Syria/Mesopotamia under the Seleucids became the "King of the North" (geographically north of Judea), while Egypt under the Ptolemies became the "King of the South" (south of Judea). For over two centuries, their dynastic conflicts, treaties, and battles raged back and forth across the land of Israel.</li>
     <li><strong>4. Imperial Pagan Rome (11:16–22):</strong> Rome entered the Levant under Pompey (63 B.C.) and Julius Caesar. Under Tiberius Caesar, <strong>"the prince of the covenant"</strong> was broken (Daniel 11:22). This refers to the crucifixion of Jesus Christ on Calvary in A.D. 31 under Roman civil authority (Pontius Pilate). (While some modern critical scholars propose the high priest Onias III, the historicist consensus maintains that Christ is the true Prince of the Covenant foretold in Daniel 9:25–27.)</li>
-    <li><strong>5. Papal Rome Phase (11:31–39):</strong> Roman power transitions into the ecclesiastical phase: <em>"arms shall stand on his part, and they shall pollute the sanctuary of strength, and shall take away the daily sacrifice [tamid], and they shall place the abomination that maketh desolate"</em> (11:31). Just as in Daniel 7:25 and Daniel 8:11–12, this power usurps Christ's heavenly priesthood, persecutes the faithful saints for a time, times, and half a time, and exalts itself above all gods.</li>
+    <li><strong>5. Papal Rome Phase (11:31–39):</strong> Roman power transitions into the ecclesiastical phase: <em>"arms shall stand on his part, and they shall pollute the sanctuary of strength, and shall take away the daily sacrifice, and they shall place the abomination that maketh desolate"</em> (11:31). The Hebrew behind “daily” is again <em>tamid</em>. Just as in Daniel 7:25 and Daniel 8:11–12, this power usurps Christ's heavenly priesthood, persecutes the faithful saints for a time, times, and half a time, and exalts itself above all gods.</li>
     <li><strong>6. The Time of the End (11:40–45):</strong> <em>"And at the time of the end shall the king of the south push at him..."</em> (11:40). The "time of the end" commenced in <strong>1798</strong> when General Berthier captured Pope Pius VI, ending the 1,260-year temporal supremacy of the papacy. Verses 40 through 45 outline the final geopolitical conflicts leading up to the close of human history.</li>
   </ul>
 </div>
 
 <div class="part-header" id="mp3">
   <p class="part-kicker">Main Point 3</p>
-  <h3>Michael Stands Up: The Royal Stance and Close of Probation</h3>
-  <p class="part-subtitle">Daniel 12:1; Hebrews 7:25; Revelation 22:11</p>
+  <h3>Michael Stands Up: The Royal Stance and the Time of Trouble</h3>
+  <p class="part-subtitle">Daniel 12:1; 11:2–4; Hebrews 7:25</p>
 </div>
 
 <p>The entire prophetic narrative of Daniel 10–11 reaches its supreme climax in the opening words of chapter 12:</p>
@@ -4343,18 +4340,18 @@ Restore City                        Messiah               Christ                
   <p>Therefore, when Daniel 12:1 declares that <strong>Michael shall stand up</strong>, it does not mean an angel stretching his limbs; it signifies <strong>Jesus Christ assuming His royal kingly stance as King of kings and Lord of lords</strong>!</p>
 </div>
 
-<p>What happens in heaven when Michael stands up? Throughout the Christian era, Jesus has ministered as our Great High Priest in the heavenly sanctuary, where He <em>"ever liveth to make intercession"</em> for us (Hebrews 7:25). But high-priestly mediation is not perpetual. When Michael stands up, Christ's judgment in the Most Holy Place concludes. The final decree of the universe is issued:</p>
+<p>When Michael stands up, the time of turning ends: human probation closes, and there follows a time of trouble such as never was. In Daniel’s grammar, <em>"stand up"</em> is a king taking power (11:2–4, 7, 20–21). Michael is <em>"the great prince which standeth for the children of thy people"</em>: He stands as King for those written in the book.</p>
+
+<p>Hebrews 7:25 is the ministry of this age: He <em>"ever liveth to make intercession."</em> Daniel 12:1 is the moment that priestly work is finished and the King stands — then the settled word of Revelation 22:11:</p>
 
 <blockquote class="scripture-quote">"He that is unjust, let him be unjust still: and he which is filthy, let him be filthy still: and he that is righteous, let him be righteous still: and he that is holy, let him be holy still." — Revelation 22:11 (KJV)</blockquote>
 
-<p>Every case has been irrevocably decided. <strong>Human probation permanently closes.</strong> The High Priest lays aside His priestly vestments, puts on His royal robes of vengeance, and prepares to return in glory. With intercession ended, the four winds of human strife are fully unleashed upon a rebellious world (Revelation 7:1–3).</p>
-
-<pre class="prophecy-diagram">THE TRANSITION: FROM HIGH PRIEST TO REIGNING KING
-DURING THE HEAVENLY JUDGMENT (1844 TO PROBATION CLOSE)      WHEN MICHAEL STANDS UP (DANIEL 12:1)
-• Christ ministers as High Priest (Heb 7:25; 8:1–2)         • Intercession ceases; heavenly advocacy ends
-• Investigating records in Most Holy Place (Dan 7:9–14)      • Cases irrevocably fixed (Rev 22:11)
-• Sins blotted out; mercy's door open                       • Human probation permanently closes
-• Saints covered by Christ's blood                          • Christ assumes Kingly throne (Rev 19:11–16)</pre>
+<pre class="prophecy-diagram">DANIEL 12:1–2 IN ITS OWN ORDER
+Michael stands up ('amad: kingly stance, Dan 11:2–4)
+        → close of human probation
+        → a time of trouble such as never was
+        → those written in the book are delivered
+        → many who sleep in the dust awake (12:2)</pre>
 
 <div class="part-header" id="mp4">
   <p class="part-kicker">Main Point 4</p>
@@ -4366,7 +4363,7 @@ DURING THE HEAVENLY JUDGMENT (1844 TO PROBATION CLOSE)      WHEN MICHAEL STANDS 
 
 <p>Because the Holy Spirit is withdrawn from the impenitent and satanic deception controls unregenerate humanity, society plunges into unprecedented conflict, religious coercion, and devastation under the seven last plagues (Revelation 16). Yet in that terrifying hour, God's promise rings out with unshakeable triumph:</p>
 
-<blockquote class="scripture-quote pull-quote">"And at that time thy people shall be delivered, every one that shall be found written in the book." — Daniel 12:1 (KJV)</blockquote>
+<blockquote class="scripture-quote pull-quote">"...and at that time thy people shall be delivered, every one that shall be found written in the book." — Daniel 12:1 (KJV)</blockquote>
 
 <div class="framework-card">
   <p class="framework-card-kicker">Deliverance in the Heavenly Registry: The Book of Life</p>
@@ -4389,7 +4386,7 @@ DURING THE HEAVENLY JUDGMENT (1844 TO PROBATION CLOSE)      WHEN MICHAEL STANDS 
   <ul class="list-disc pl-5 my-2 space-y-1">
     <li><strong>Sleeping in the Dust:</strong> In Genesis 3:19, humanity was formed from dust and returns to dust at death. Throughout Scripture, death is an unconscious sleep (Psalm 146:4; Ecclesiastes 9:5; John 11:11–14). The dead do not hover as disembodied ghosts; they sleep in the grave awaiting the resurrection morning.</li>
     <li><strong>Confirmed by Jesus Christ:</strong> Jesus directly cited Daniel 12:2 in John 5:28–29: <em>"Marvel not at this: for the hour is coming, in the which all that are in the graves shall hear his voice, And shall come forth; they that have done good, unto the resurrection of life; and they that have done evil, unto the resurrection of damnation."</em></li>
-    <li><strong>The Special Resurrection:</strong> Daniel 12:2 speaks of <em>"many"</em> (not all) awaking at Michael's standing up. This refers to the special resurrection immediately prior to the Second Coming, when the faithful who died in the third angel's message awake to see Christ appear, alongside those who pierced Him (Revelation 1:7; Matthew 26:64).</li>
+    <li><strong>Many, not a metaphor:</strong> Daniel 12:2 speaks of <em>"many"</em> who sleep in the dust awaking to two destinies. That is the Old Testament’s clear promise of bodily resurrection. Revelation 1:7 and Matthew 26:64 add that those who pierced Him will see His appearing. Do not flatten 12:2 into a political metaphor, and do not treat later readings of “many” as if they were printed in the verse.</li>
   </ul>
 </div>
 
@@ -4397,10 +4394,10 @@ DURING THE HEAVENLY JUDGMENT (1844 TO PROBATION CLOSE)      WHEN MICHAEL STANDS 
   <p class="framework-card-kicker">The Numbered Spans of Daniel 12: The 1,290 and 1,335 Days</p>
   <p>In Daniel 12:11–12, two final prophetic spans are revealed from the time the <em>tamid</em> is taken away and the abomination of desolation is set up:</p>
   <blockquote class="scripture-quote">"And from the time that the daily sacrifice shall be taken away, and the abomination that maketh desolate set up, there shall be a thousand two hundred and ninety days. Blessed is he that waiteth, and cometh to the thousand three hundred and five and thirty days." — Daniel 12:11–12 (KJV)</blockquote>
-  <p>Historicist scholarship applies the year-day principle to these periods, measuring them from the proposed starting date of <strong>A.D. 508</strong> (when the conversion of Clovis, king of the Franks, and his military defeat of the Arian Visigoths established civil power in support of the Roman church, setting up the abomination):</p>
+  <p>This sitting applies the year-day principle to these periods, measuring them from <strong>A.D. 508</strong>, when Frankish support of the Roman church in the west was in place. Clovis’s baptism is often dated 496; the battle of Vouillé is 507. Those related events lead into 508, the civil start of both numbered spans:</p>
   <ul class="list-disc pl-5 my-2 space-y-1">
-    <li><strong>1,290 prophetic days (solar years):</strong> A.D. 508 + 1,290 years = A.D. 1798, the very year the papacy suffered its deadly wound and the "time of the end" began (Daniel 12:4).</li>
-    <li><strong>1,335 prophetic days (solar years):</strong> A.D. 508 + 1,335 years = A.D. 1843/1844, the year of the great Millerite second-advent awakening and the cleansing of the heavenly sanctuary. The church's Adult Bible Study Guide on Daniel (2020 Q1, week 13) reads both spans from A.D. 508 in the same historicist manner.</li>
+    <li><strong>1,290 prophetic days (solar years):</strong> A.D. 508 + 1,290 years = A.D. 1798, the year Berthier took the pope and the “time of the end” begins (Daniel 12:4).</li>
+    <li><strong>1,335 prophetic days (solar years):</strong> A.D. 508 + 1,335 years = A.D. 1843, the waiting year of the great second-advent awakening, immediately before the 2,300 evenings-mornings land in 1844 (sitting 8).</li>
   </ul>
 </div>
 
@@ -4412,12 +4409,12 @@ DURING THE HEAVENLY JUDGMENT (1844 TO PROBATION CLOSE)      WHEN MICHAEL STANDS 
 
 <pre class="prophecy-diagram">THE TIMELINE OF DANIEL 12:11–12 (MEASURED FROM A.D. 508)
 508 A.D. ──────────────────[ 1,290 YEARS ]──────────────────▶ 1798 A.D.
-Clovis &amp; Franks defeat Arians                                Berthier captures Pope; "Time of the End"
-Papal civil foundation laid                                  Papacy wounded; prophetic unsealing (Dan 12:4)
+Frankish support of the Roman church                         Berthier captures Pope; "Time of the End"
+                                                             Papacy wounded; prophetic unsealing (Dan 12:4)
 
-508 A.D. ──────────────────────────[ 1,335 YEARS ]──────────────────────────▶ 1843/1844 A.D.
-"Blessed is he that waiteth"                                                Great Second Advent Awakening
-Sanctuary Cleansed (Dan 8:14)</pre>
+508 A.D. ──────────────────────────[ 1,335 YEARS ]──────────────────────────▶ 1843 A.D.
+"Blessed is he that waiteth"                                                Great second-advent waiting year
+then 1844: 2,300-year sanctuary landing (sitting 8)</pre>
 
 <div class="level-card level-christ">
   <p class="level-kicker">CHRIST</p>
@@ -4437,8 +4434,8 @@ Sanctuary Cleansed (Dan 8:14)</pre>
 </div>
 
 <div class="framework-card">
-  <p class="framework-card-kicker">2. Live with holy boldness while probation remains open</p>
-  <p>Michael has not yet stood up. Jesus is still ministering as our High Priest in the Most Holy Place, offering His blood for repenting sinners. Use this precious time of grace to share the everlasting gospel with family, friends, and neighbors.</p>
+  <p class="framework-card-kicker">2. Live with holy boldness while grace remains</p>
+  <p>Michael has not yet stood up in the sense of Daniel 12:1. Hebrews 7:25 is His intercession in this age, until that standing, when human probation closes. Use this time of grace to share the gospel with family, friends, and neighbors.</p>
 </div>
 
 <div class="framework-card">
@@ -4454,9 +4451,9 @@ Sanctuary Cleansed (Dan 8:14)</pre>
 <div class="principle-card">
   <p class="principle-card-kicker">The principle to remember</p>
   <ul>
-    <li><strong>TEXT</strong> — Does Daniel 12:1 declare that Michael stands up, triggering the close of probation and deliverance for those in the Book?</li>
+    <li><strong>TEXT</strong> — Does Daniel 12:1 declare that Michael stands up, a time of trouble follows, and those written in the book are delivered?</li>
     <li><strong>HISTORY</strong> — Did Daniel 11 accurately trace Persia, Greece, Rome, the papacy, and the 1798 time of the end?</li>
-    <li><strong>INTERPRETATION</strong> — Does Michael's standing up ('amad) denote Christ assuming His kingly reign as intercession ends?</li>
+    <li><strong>INTERPRETATION</strong> — Does Michael's standing up ('amad) follow Daniel 11’s kingly grammar, as advocate and defender of His people?</li>
     <li><strong>CHRIST</strong> — Is Jesus Christ your King, whose resurrection guarantees that you will awake from the dust and stand in your lot?</li>
   </ul>
 </div>
@@ -4473,20 +4470,20 @@ Sanctuary Cleansed (Dan 8:14)</pre>
                 "scripture": "Daniel 12:1–3; Jude 9; 1 Thessalonians 4:16; John 5:28–29; Revelation 19:11–16",
                 "body": [
                         "The Book of Daniel concludes not with an empire, a philosophical theory, or a cryptic code, but with a living Person standing up in royal majesty: 'And at that time shall Michael stand up, the great prince which standeth for the children of thy people' (Daniel 12:1). Michael—whose Hebrew name asks the glorious question Miy-ka-El, 'Who is like God?'—is none other than our Lord Jesus Christ in His warrior-king and archangelic office. He is the Prince of princes who stood as Commander of the Lord's host, the One who disputed with Satan over Moses' body (Jude 9), and who will descend with the voice of the archangel and the trump of God (1 Thessalonians 4:16).",
-                        "When Michael 'stands up,' His priestly intercession closes, and He goes forth to deliver His people during a time of trouble such as never was. Yet every person whose name is found written in the Book of Life is delivered. Immediately following His intervention, Daniel 12:2 announces the ultimate hope of the covenant: 'And many of them that sleep in the dust of the earth shall awake, some to everlasting life.' Christ's resurrection guarantees the physical, bodily resurrection of all who sleep in Him. Death does not have the final word; Jesus has defeated the grave.",
+                        "When Michael 'stands up,' He stands for the children of Daniel's people, and there follows a time of trouble such as never was. Every person whose name is found written in the book is delivered. Immediately following, Daniel 12:2 announces the hope: 'And many of them that sleep in the dust of the earth shall awake, some to everlasting life.' Christ's resurrection guarantees the physical, bodily resurrection of all who sleep in Him. Death does not have the final word; Jesus has defeated the grave.",
                         "Live with your eyes fixed on the horizon for Michael's glorious standing up. When moral confusion, geopolitical upheaval, and personal trials press upon you, remember that the story of Daniel ends in victory, vindication, and resurrection glory. Walk as wise teachers who turn many to righteousness, shining as the brightness of the firmament and as the stars for ever and ever (Daniel 12:3). Christ is standing for you today in heaven, and soon He will stand to take you home."
                 ]
         },
         quizzes: [
           {
-            "question": "An eschatology group debates what occurs when 'Michael stands up' in Daniel 12:1. One member argues it simply means an earthly military commander mobilizing his army. What is the sanctuary significance of this event?",
+            "question": "An eschatology group debates what occurs when 'Michael stands up' in Daniel 12:1. One member argues it simply means an earthly military commander mobilizing his army. How does this sitting read the verb?",
             "options": [
               "It designates the royal decree of Cyrus the Great in 538 B.C. permitting Judean captives to return from exile and reconstruct the temple.",
               "It refers to the historical coronation of Caesar Augustus in Rome, establishing the Pax Romana across the Mediterranean basin.",
               "It describes a celestial insurrection in which renegade angelic hosts attempt to overthrow the divine government before the judgment.",
-              "In Daniel, 'stand up' (amad) means a king assuming reign; Michael is Christ, so His standing marks the close of probation and cessation of intercession."
+              "In Daniel, 'stand up' (amad) is the verb for a king taking power (11:2–4); Michael is Christ; when He stands, human probation closes, a time of trouble follows, and those written in the book are delivered."
             ],
-            "explanation": "Christ 'ever liveth to make intercession' (Heb 7:25), and Daniel uses 'stand up' for kings assuming power (Dan 11:2–4). When Michael (Christ) stands up (Dan 12:1), heavenly intercession concludes, probation closes, and divine protection is withdrawn, precipitating the time of trouble.",
+            "explanation": "Daniel uses 'stand up' for kings assuming power (Dan 11:2–4). Hebrews 7:25 is His intercession in this age, until Michael stands; Daniel 12:1 is that standing, when human probation closes. Then trouble, deliverance for those in the book, then resurrection (12:2).",
             "diagnostics": [
               "Misconception: Cyrus's decree occurred in 538/536 B.C., whereas Daniel 12:1 stands at the culmination of the prophetic march at the end of human history.",
               "Misconception: Augustus ruled at the rise of the Roman Empire; Daniel 12:1 occurs at the climax of history, followed by the bodily resurrection.",
@@ -4513,15 +4510,15 @@ Sanctuary Cleansed (Dan 8:14)</pre>
           {
             "question": "Daniel 12:1 joins Michael's standing up to a time of trouble such as never was. What order does the sitting teach?",
             "options": [
-              "Priestly intercession closes, the time of trouble breaks out, God's people written in the book are delivered, and the sleepers of the dust awake.",
+              "Michael stands up, human probation closes, the time of trouble breaks out, God's people written in the book are delivered, and the sleepers of the dust awake.",
               "The time of trouble begins first, then Michael begins His heavenly intercession as though the cross and high-priestly ministry had not occurred.",
               "The time of trouble is an allegorical metaphor for inner personal anxieties and psychological doubts that carries no external eschatological climax.",
               "Michael stands up to terminate human history abruptly while permanently cancelling the promised resurrection of sleeping covenant believers."
             ],
-            "explanation": "Daniel 12:1–2 is sequential: standing up, trouble, deliverance, resurrection.",
+            "explanation": "Daniel 12:1–2 is sequential: standing up (human probation closes), trouble, deliverance, resurrection.",
             "diagnostics": [
               "",
-              "Misconception: Christ ever lives to intercede throughout the gospel age; He stands up as King when intercession concludes prior to the time of trouble.",
+              "Misconception: Michael starts His intercession only when trouble begins. Hebrews 7:25 intercession runs in this age until He stands (Dan 12:1); then probation closes and trouble follows.",
               "Misconception: 'A time of trouble such as never was' is the climactic historical crisis of earth's final conflict, not merely a subjective mood.",
               "Misconception: Verse 2 immediately follows with the glorious promise of bodily resurrection to everlasting life, not its cancellation."
             ]
@@ -4579,8 +4576,8 @@ Sanctuary Cleansed (Dan 8:14)</pre>
             }
           ],
           christ: {
-            claim: "Michael who stands up in Daniel 12:1 is the great prince identified with Christ, the same one like a son of man who received the kingdom in 7:14 and the High Priest whose advocacy ends when He assumes His royal stance.",
-            why: "Daniel names one Lord through many titles: Prince of the host, Messiah cut off, Michael your prince, the man in linen by the Tigris. When Michael stands up, the heavenly work of advocacy is finished and the time of trouble begins because no further priestly plea remains between the sinner and judgment. Daniel 12:2 then shows the same Lord as the One who calls dust-sleepers to awake, which John 5:28 through 5:29 confirms in the New Testament. If you leave Christ in a single verse at the edge, chapters ten through twelve become a march of kings with a religious footnote. If you keep Him central, the last word of Daniel is a rising, not another empire."
+            claim: "Michael who stands up in Daniel 12:1 is the great prince identified with Christ, the same one like a son of man who received the kingdom in 7:14 — the prince who stands for His people in the crisis the chapter names.",
+            why: "Daniel names one Lord through many titles: Prince of the host, Messiah cut off, Michael your prince, the man in linen by the Tigris. When Michael stands up, human probation closes, a time of trouble follows, and those written in the book are delivered. Hebrews 7:25 is His intercession in this age, until that standing. Daniel 12:2 then shows the same Lord as the One who calls dust-sleepers to awake, which John 5:28 through 5:29 confirms. If you leave Christ in a single verse at the edge, chapters ten through twelve become a march of kings with a religious footnote. If you keep Him central, the last word of Daniel is a rising, not another empire."
           },
           now: {
             claim: "You will die, or you will see trouble. Either way Daniel 12:2 is the news that matters more than the next empire, and a name written in the book is the only deliverance this chapter offers.",
@@ -4595,7 +4592,7 @@ Sanctuary Cleansed (Dan 8:14)</pre>
             why: "Chapters two through nine traced empires, horns, and numbered days with growing precision, but the book refuses to end on a diagram alone. Daniel 12:13 guarantees bodily resurrection and an allotted inheritance to the same servant who saw the churning sea and fainted over the two thousand three hundred days. That promise is why the book can close with calm rather than with another beast. When someone asks what all the prophecy was for, point past the metals: the sealed book's most valuable gift is not another empire to identify but a body awake at the end of the days."
           },
           ask: [
-            "If Michael has not yet stood up, how then shall I live while the heavenly intercession still continues?",
+            "If Michael has not yet stood up, how then shall I live while He still stands for His people?",
             "Is my hope anchored in a chart I can recite, or in a name written in the book and a body that will awake?",
             "Can I receive Daniel's blessing of rest now, knowing that standing in my lot awaits at the end of the days?"
           ]
@@ -4651,7 +4648,7 @@ Sanctuary Cleansed (Dan 8:14)</pre>
         image: "assets/study/horizon/y457.jpg",
         history: "Artaxerxes I’s seventh-year decree (Ezra 7) funds temple worship and restores civic order in Judah — the third and complete decree after Cyrus and Darius.",
         prophecy: "This is the chathak point: 70 weeks cut from the 2,300 days. 457 B.C. + 483 years = A.D. 27; + 1810 remaining years = 1844.",
-        today: "Prophecy is not fog. It is dated. If the cross landed on time, the sanctuary appointment is on the same line."
+        today: "Prophecy is not fog. It is dated. The cross landed in A.D. 31, and the sanctuary appointment is on the same line."
       },
       {
         year: "A.D. 31",
@@ -4685,9 +4682,9 @@ Sanctuary Cleansed (Dan 8:14)</pre>
       },
       {
         year: "1844 A.D.",
-        title: "October 22, 1844 — Cleansing of the Sanctuary / Yom Kippur",
-        desc: "The 2,300 prophetic years conclude. The sanctuary of Daniel 8:14 is nitsdaq — put right — the Day-of-Atonement work whose court already sat in Daniel 7:9–14.",
-        pioneerNote: "Daniel 8:14 + 9:24–27: 457 B.C. plus 2,300 years lands here. Leviticus 16 is the older grammar for a sanctuary made clean before the LORD.",
+        title: "1844 — Cleansing of the Sanctuary",
+        desc: "22 October 1844: Christ entered the Most Holy Place. The 2,300 prophetic years conclude. The sanctuary of Daniel 8:14 is nitsdaq — put right — the Day-of-Atonement work whose court already sat in Daniel 7:9–14.",
+        pioneerNote: "Daniel 8:14 + 9:24–27: 457 B.C. plus 2,300 years lands in 1844. Leviticus 16 fixes the Day of Atonement; Karaite reckoning dates it to 22 October 1844.",
         image: "assets/study/horizon/y1844.jpg",
         history: "The date was lived in America: Miller’s farm, Himes’s Boston press, Snow at Exeter, then the Great Disappointment. The event was wrong. The sanctuary put right is the heavenly Most Holy Place, not the earth.",
         prophecy: "Daniel 8:14 — unto 2,300 evenings-mornings, then shall the sanctuary be nitsdaq: justified, restored, vindicated.",
@@ -4696,8 +4693,8 @@ Sanctuary Cleansed (Dan 8:14)</pre>
       {
         year: "Dan 12",
         title: "Daniel 12 — Michael Stands Up & The Bodily Resurrection",
-        desc: "Christ's intercession concludes. Human probation closes, followed by the Time of Trouble, the literal Second Coming, and the bodily resurrection of the saints.",
-        pioneerNote: "Daniel 12:1–2, 13: Michael stands up; those written in the book are delivered; dust-sleepers awake; Daniel rests, then stands in his lot.",
+        desc: "When Michael stands up, human probation closes. A time of trouble follows. Those written in the book are delivered. The dead awake from the dust.",
+        pioneerNote: "Daniel 12:1–2, 13: Michael stands up; probation closes; those written in the book are delivered; dust-sleepers awake; Daniel rests, then stands in his lot.",
         image: "assets/study/horizon/y12.jpg",
         history: "Daniel is told to rest. The last scene is not another empire but a standing Prince, a trouble such as never was, and sleepers who awake.",
         prophecy: "Daniel 12:1–2, 13. Michael stands up. The book is sealed until the time of the end. The wise shall understand.",

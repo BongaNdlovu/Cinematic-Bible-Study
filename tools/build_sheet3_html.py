@@ -91,8 +91,8 @@ The Penal Threat      Burning fiery furnace                Boycott and death dec
 The Faithful Remnant  Three Hebrews obey Decalogue         Saints keep God's commandments (Rev. 14:12)</pre>
 
 <div class="historical-note">
-  <p class="historical-note-kicker">The Typological Parallel &amp; The Number of Man</p>
-  <p>The image on the Plain of Dura measured sixty cubits in height and six cubits in breadth (Daniel 3:1). While patristic writers like Irenaeus drew an allegorical comparison with Revelation 13:18, official BRI exegesis clarifies that Revelation 13:18 explicitly designates 666 as "the number of a man"—symbolizing fallen humanity and the counterfeit trinity perpetually falling short of divine perfection (777), rather than an inspired mathematical echo of Babylonian units. The true biblical link between Daniel 3 and Revelation 13 is typological: state-enforced universal worship, an imperial image, a death decree, and a faithful remnant upholding God's commandments (Revelation 14:12).</p>
+  <p class="historical-note-kicker">Six and sixty as illustration</p>
+  <p>The image on the Plain of Dura measured sixty cubits in height and six cubits in breadth (Daniel 3:1). Revelation 13:18 names six hundred threescore and six as the number of a man. Daniel 3:1's six-and-sixty measurements illustrate the later crisis; they do not decode the number by Babylonian arithmetic. Revelation 13 lists six classes of people pressed to worship the image of the beast, and 666 likewise emphasizes six. The load-bearing link is the worship pattern: a universal decree, an image, a death penalty, and commandment-keepers who refuse (Daniel 3:1–6, 18; Revelation 13:15–16; 14:12).</p>
 </div>
 
 <ul>

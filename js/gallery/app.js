@@ -1062,7 +1062,7 @@ import * as THREE from 'three';
         quote: '“And he shall speak great words against the most High, and shall wear out the saints of the most High, and think to change times and laws: and they shall be given into his hand until a time and times and the dividing of time.”',
         quoteRef: 'Daniel 7:25 (KJV)',
         explanation: 'Do not memorize 1,260 years first. Build the number. In this style of prophecy a “time” is a year, “times” is two years, and “the dividing of time” is a half year: 1 + 2 + ½ = 3½ years. Revelation writes the same span three ways: a thousand two hundred and threescore days (Revelation 12:6), a time and times and half a time (Revelation 12:14), and forty and two months (Revelation 13:5). Forty-two months of thirty days are 1,260 days. On the year-day scale God appointed in Numbers 14:34 and Ezekiel 4:6, those 1,260 days are 1,260 years. This exhibit is that measured reign — not a fifth metal, and not a three-and-a-half-year man at the end of time.',
-        historical: 'The marks in Daniel 7:24–25 sit among the ten fragments of western Rome: a power diverse from the others, speaking great words, wearing out the saints, intending to change times and laws. Historicist readers date the opening when the Ostrogothic grip on Rome broke in AD 538, so Justinian’s grant to the Roman see could operate in the city, and the close when General Berthier took Pius VI in 1798. You may argue the start-year. You may not skip the marks in 7:24–25 and still claim any favorite villain. The court of 7:9–14 sits while this span is still a historical fact; the stone of chapter 2 is later.',
+        historical: 'The marks in Daniel 7:24–25 sit among the ten fragments of western Rome: a power diverse from the others, speaking great words, wearing out the saints, intending to change times and laws. The start-year is A.D. 538: the Ostrogoths were driven from Rome and Justinian’s decree took effect. The close is 1798, when General Berthier took Pius VI. You may not skip the marks in 7:24–25 and still claim any favorite villain. The court of 7:9–14 sits while this span is still a historical fact; the stone of chapter 2 is later.',
         plateImg: 'assets/plates/years1260.jpg',
         plateCaption: 'Time, times, and the dividing of time · 538 to 1798',
         thumb: 'assets/site/era-years1260.webp',
@@ -1157,7 +1157,7 @@ import * as THREE from 'three';
         dates: '168 BC to 1844',
         quote: '“And out of one of them came forth a little horn, which waxed exceeding great, toward the south, and toward the east, and toward the pleasant land.”',
         quoteRef: 'Daniel 8:9 (KJV)',
-        explanation: 'The little horn of Daniel 8 represents the persecuting power of Rome in both its pagan imperial and papal ecclesiastical phases. It grows exceeding great toward the south, east, and the pleasant land of Palestine, usurping the daily priestly ministry, or tamid in Hebrew, of Christ and casting down the truth of His heavenly sanctuary. Under the historicist year-day principle of prophetic interpretation, where a symbolic prophetic day represents a literal calendar year, this defiling power continues until the 2,300-day prophecy ends in 1844, when the heavenly sanctuary is cleansed and restored.',
+        explanation: 'The little horn of Daniel 8 represents the persecuting power of Rome in both its pagan imperial and papal ecclesiastical phases. It grows exceeding great toward the south, east, and the pleasant land of Palestine, usurping the daily priestly ministry, or tamid in Hebrew, of Christ and casting down the truth of His heavenly sanctuary. By the year-day principle of prophetic interpretation, where a symbolic prophetic day represents a literal calendar year, this defiling power continues until the 2,300-day prophecy ends in 1844, when the heavenly sanctuary is cleansed and restored.',
         historical: 'The angel Gabriel stated twice in Daniel 8 that the vision concerns the time of the end, reaching far beyond the brief second-century BC oppression under the Seleucid king Antiochus IV Epiphanes. While Antiochus desecrated the earthly temple in Jerusalem for three years, this prophetic horn waxes exceeding great and attacks the heavenly priesthood of Christ Himself. The fulfillment spans from Roman imperial authority through the medieval church-state system until the final heavenly cleansing of the sanctuary in 1844.',
         plateImg: 'assets/plates/goat-horn.jpg',
         plateCaption: 'A little horn toward the pleasant land',
@@ -1205,7 +1205,7 @@ import * as THREE from 'three';
         dates: 'Pre-Advent Judgment from 1844',
         quote: '“I beheld till the thrones were cast down, and the Ancient of days did sit, whose garment was white as snow, and the hair of his head like the pure wool: his throne was like the fiery flame, and his wheels as burning fire.”',
         quoteRef: 'Daniel 7:9 (KJV)',
-        explanation: 'The judgment scene in Daniel 7 portrays a solemn celestial courtroom convened before the Ancient of Days rather than an earthly battlefield. Thrones are placed in order, celestial books of record are opened, and the oppressive deeds of the little horn are thoroughly evaluated before the heavenly court. In the historicist understanding of biblical prophecy, this judicial session represents the pre-advent judgment that commenced at the conclusion of the 2,300 prophetic days in 1844.',
+        explanation: 'The judgment scene in Daniel 7 portrays a solemn celestial courtroom convened before the Ancient of Days rather than an earthly battlefield. Thrones are placed in order, celestial books of record are opened, and the oppressive deeds of the little horn are thoroughly evaluated before the heavenly court. This judicial session is the pre-advent judgment that commenced at the conclusion of the 2,300 prophetic days in 1844.',
         historical: 'Daniel describes millions of heavenly beings attending this celestial proceeding as a river of fire issues from the throne of the Ancient of Days. The arrogant fourth beast is not overthrown by an earthly military rival, but is condemned and destroyed as a direct result of heaven\'s judicial sentence. This verdict vindicates God\'s faithful people and prepares the way for the transfer of eternal dominion to the Son of man.',
         plateImg: 'assets/plates/ancient-throne.jpg',
         plateCaption: 'Thrones were set, and the books were opened',
@@ -1298,16 +1298,16 @@ import * as THREE from 'three';
         eyebrow: 'DANIEL 12 · THE GREAT PRINCE',
         title: 'Michael Standing Up',
         pill: 'DANIEL 12:1',
-        dates: 'Close of the heavenly work',
+        dates: 'Daniel 12:1–2',
         quote: '“And at that time shall Michael stand up, the great prince which standeth for the children of thy people: and there shall be a time of trouble, such as never was since there was a nation even to that same time: and at that time thy people shall be delivered, every one that shall be found written in the book.”',
         quoteRef: 'Daniel 12:1 (KJV)',
-        explanation: 'Michael is named the great prince who stands for Daniel’s people. In the last vision he does not remain seated at advocacy; he stands up. That change of posture marks the close of intercession and the opening of a time of trouble such as never was, after which those written in the book are delivered. The same chapter then promises a bodily resurrection. This standing figure is distinct from the Son of man approaching the Ancient of Days on the clouds in Daniel 7:13.',
+        explanation: 'Michael is named the great prince who stands for Daniel’s people. In Daniel, “stand up” (amad) is the verb for a king taking power (11:2–4, 7, 20–21). When Michael stands up (12:1), Christ assumes His royal stance, human probation closes, a time of trouble follows, and those written in the book are delivered. The same chapter then promises a bodily resurrection. This standing figure is distinct from the Son of man approaching the Ancient of Days on the clouds in Daniel 7:13.',
         historical: 'Daniel 10 already names Michael as the prince who helps against the prince of Persia. Daniel 12 places his standing at the climax of the long conflict traced through the kings of the north and south. The promise that follows is personal: many who sleep in the dust of the earth shall awake, and Daniel himself shall rest and stand in his lot at the end of the days.',
         plateImg: 'assets/plates/michael.jpg',
         plateCaption: 'Michael shall stand up, the great prince',
         thumb: 'assets/site/era-michael.webp',
         related: ['son', 'sealed', 'ancient', 'stone'],
-        takeaway: 'When Michael stands up, the heavenly work of advocacy is finished, a time of trouble follows, and those written in the book are delivered — then the dust-sleepers awake.',
+        takeaway: 'When Michael stands up, human probation closes, a time of trouble follows, those written in the book are delivered, and then the dust-sleepers awake.',
         filename: 'michael.glb',
         organic: true,
         autoFrame: true,
@@ -1883,7 +1883,7 @@ import * as THREE from 'three';
         {
           id: 'y1260-open', col: 'right', row: 0,
           icon: '⛪', label: 'AD 538',
-          body: 'Ostrogoths driven from Rome. Justinian’s grant to the Roman see can operate in the city. Candidate start of the measured reign.',
+          body: 'Ostrogoths driven from Rome. Justinian’s grant to the Roman see took effect in the city; the measured reign begins.',
           anchor: new THREE.Vector3(0.5, 1.5, 0.38), enabled: true
         },
         {
@@ -1959,7 +1959,7 @@ import * as THREE from 'three';
         {
           id: 'goat-named', col: 'right', row: 0,
           icon: '📖', label: 'KING OF GRECIA',
-          body: 'The angel Gabriel explicitly named Greece as the goat, confirming the historicist understanding of biblical prophecy.',
+          body: 'The angel Gabriel explicitly named Greece as the goat.',
           anchor: new THREE.Vector3(0.5, 1.45, 0.38), enabled: true
         },
         {
@@ -2061,7 +2061,7 @@ import * as THREE from 'three';
         {
           id: 'dura-six', col: 'left', row: 1,
           icon: '6️⃣', label: '60 BY 6',
-          body: 'The statue measured sixty cubits high and six cubits wide, reflecting Babylonian sexagesimal mathematics and forced devotion.',
+          body: 'The statue measured sixty cubits high and six cubits wide (Daniel 3:1). The measurements are Scripture; they illustrate the later crisis, they do not decode 666 by Babylonian arithmetic.',
           anchor: new THREE.Vector3(-0.45, 1.15, 0.42), enabled: true
         },
         {
@@ -2117,7 +2117,7 @@ import * as THREE from 'three';
         {
           id: 'anc-1844', col: 'right', row: 1,
           icon: '📅', label: 'PRE-ADVENT',
-          body: 'In the historicist framework, this pre-advent judicial proceeding began in heaven at the close of the 2,300 prophetic days in 1844.',
+          body: 'This pre-advent judicial proceeding began in heaven at the close of the 2,300 prophetic days in 1844.',
           anchor: new THREE.Vector3(0.45, 1.05, 0.4), enabled: true
         },
         {
@@ -2181,7 +2181,7 @@ import * as THREE from 'three';
         {
           id: 'stump-seven', col: 'left', row: 2,
           icon: '7️⃣', label: 'SEVEN TIMES',
-          body: 'Seven prophetic times of madness passed over the king until he acknowledged that the Most High rules over all human realms.',
+          body: 'Seven ordinary years of madness passed over the king until he acknowledged that the Most High rules in the kingdom of men (Daniel 4:16, 25, 32).',
           anchor: new THREE.Vector3(-0.4, 0.5, 0.4), enabled: true
         },
         {
@@ -2251,13 +2251,13 @@ import * as THREE from 'three';
         {
           id: 'mic-stand', col: 'left', row: 1,
           icon: '🕊️', label: 'STANDS UP',
-          body: 'A priest sits to minister and stands when the work is finished. Michael standing marks the close of advocacy.',
+          body: 'In Daniel, “stand up” is the verb for a king taking power (11:2–4, 7, 20–21). Michael standing (12:1) is Christ assuming His royal stance; human probation closes, then a time of trouble follows.',
           anchor: new THREE.Vector3(-0.45, 1.1, 0.42), enabled: true
         },
         {
           id: 'mic-trouble', col: 'left', row: 2,
           icon: '🌩️', label: 'TIME OF TROUBLE',
-          body: 'After He stands, there is a time of trouble such as never was since there was a nation — then deliverance.',
+          body: 'When He stands, probation closes; then a time of trouble such as never was since there was a nation — then deliverance.',
           anchor: new THREE.Vector3(-0.4, 0.55, 0.4), enabled: true
         },
         {
@@ -2275,7 +2275,7 @@ import * as THREE from 'three';
         {
           id: 'mic-tak', col: 'right', row: 2,
           icon: '✨', label: 'KEY TAKEAWAY',
-          body: 'The book ends with a Prince who stands, a people written in a book, and a bodily resurrection.',
+          body: 'The book ends with a Prince who stands, probation closed, a time of trouble, a people written in a book, and a bodily resurrection.',
           anchor: new THREE.Vector3(0.42, 0.5, 0.42), enabled: true
         }
       ],

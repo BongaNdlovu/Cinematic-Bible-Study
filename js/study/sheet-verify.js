@@ -39,7 +39,7 @@
           "scripture",
           "Daniel’s own seventy weeks cannot be 490 ordinary days and still hold a rebuilt city and Messiah.",
           "Daniel 9:24–25, King James Version",
-          "Seventy weeks are determined upon thy people and upon thy holy city… from the going forth of the commandment to restore and to build Jerusalem unto the Messiah the Prince shall be seven weeks, and threescore and two weeks.",
+          "Seventy weeks are determined upon thy people and upon thy holy city… Know therefore and understand, that from the going forth of the commandment to restore and to build Jerusalem unto the Messiah the Prince shall be seven weeks, and threescore and two weeks: the street shall be built again, and the wall, even in troublous times.",
           "490 days is less than a year and a half. The book checks the year-day scale on itself before you borrow it for 1,260 or 2,300."
         ),
         item(
@@ -47,7 +47,7 @@
           "Historicist readers treated Daniel as a dated sequence, not a riddle parked in the past or the far future.",
           "Sir Isaac Newton, Observations upon the Prophecies of Daniel, and the Apocalypse of St. John (London, 1733), Part I, Chapter I",
           "Amongst the old Prophets, Daniel is most distinct in order of time, and easiest to be understood: and therefore in those things which relate to the last times, he must be made the key to the rest.",
-          "Compare Newton’s “order of time” with the three-school table. Only a continuous chain keeps that order. Newton is a dated reader, not a second canon.",
+          "Compare Newton’s “order of time” with the three-school table. Only a continuous chain keeps that order. Newton's 1733 reading is a dated witness that the chain was read this way in the eighteenth century.",
           "https://www.gutenberg.org/files/16878/16878-h/16878-h.htm"
         ),
         item(
@@ -62,20 +62,20 @@
           "commentary",
           "A second-century Christian already read the four metals as Babylon, Persia, Greece, and Rome — one chain.",
           "Hippolytus of Rome, Treatise on Christ and Antichrist, §28 (c. A.D. 200). Ante-Nicene Fathers, vol. 5",
-          "The golden head of the image and the lioness denoted the Babylonians; the shoulders and arms of silver, and the bear, represented the Persians and Medes; the belly and thighs of brass, and the leopard, meant the Greeks… the legs of iron, and the beast dreadful and terrible, expressed the Romans, who hold the sovereignty now.",
-          "Hippolytus witnesses the four-kingdom sequence (Babylon through Rome), not a fully formed historicist system — he also expected a future individual antichrist. Open the ANF paragraph and compare with Source 09 in the article.",
-          "https://www.ccel.org/ccel/schaff/anf05.iii.iv.html"
+          "The golden head of the image and the lioness denoted the Babylonians; the shoulders and arms of silver, and the bear, represented the Persians and Medes; the belly and thighs of brass, and the leopard, meant the Greeks… the legs of iron, and the beast dreadful and terrible, expressed the Romans, who hold the sovereignty at present.",
+          "Hippolytus witnesses the four-kingdom sequence, Babylon through Rome, in one chain (c. A.D. 200). He also expected a future individual antichrist. Open ANF vol. 5, Treatise on Christ and Antichrist, §28.",
+          "https://ccel.org/ccel/schaff/anf05.iii.iv.ii.i.html"
         )
       ]
     },
     {
-      claim: "You can verify that Daniel’s line fell at worship, not at language or a Babylonian job, and that 605 is not 597 or 586.",
+      claim: "You can verify that Daniel’s line fell at worship, not at language or a Babylonian job, and that 605 is not 597.",
       items: [
         item(
           "scripture",
           "The first deportation is dated to Jehoiakim’s third year, with vessels taken to Shinar.",
           "Daniel 1:1–2, King James Version",
-          "In the third year of the reign of Jehoiakim king of Judah came Nebuchadnezzar king of Babylon unto Jerusalem, and besieged it.",
+          "In the third year of the reign of Jehoiakim king of Judah came Nebuchadnezzar king of Babylon unto Jerusalem, and besieged it. … And the Lord gave Jehoiakim king of Judah into his hand, with part of the vessels of the house of God.",
           "Read 1:1–2. The sitting begins with a dated siege, not with a dream."
         ),
         item(
@@ -96,14 +96,14 @@
           "scripture",
           "The table-line is the Law’s food line, not a modern diet.",
           "Leviticus 11:7, 44, King James Version",
-          "And the swine, though he divide the hoof, and be clovenfooted, yet he cheweth not the cud; he is unclean to you. … I am the LORD your God: ye shall therefore sanctify yourselves, and ye shall be holy; for I am holy.",
-          "Royal meat had been offered and mixed. Daniel 1:12 asks for pulse. The issue is holiness at a pagan table."
+          "And the swine, though he divide the hoof, and be clovenfooted, yet he cheweth not the cud; he is unclean to you. … For I am the LORD your God: ye shall therefore sanctify yourselves, and ye shall be holy; for I am holy.",
+          "Royal meat had been offered and mixed (traditional reconstruction; Daniel 1 does not state it). Daniel 1:12 asks for pulse. The issue is holiness at a pagan table."
         ),
         item(
           "scripture",
           "The second commandment forbids both making an image and bowing to it — the later Dura test is already in the Law.",
           "Exodus 20:4–5, King James Version",
-          "Thou shalt not make unto thee any graven image. … Thou shalt not bow down thyself to them, nor serve them.",
+          "Thou shalt not make unto thee any graven image, or any likeness of any thing… Thou shalt not bow down thyself to them, nor serve them.",
           "Keep this wording. Sheet 3 will ask for a two-second civic bow. The verb here is bow down."
         ),
         item(
@@ -166,22 +166,22 @@
           "Babylonian Chronicle BM 21946 (ABC 5), reverse; Grayson, Assyrian and Babylonian Chronicles. British Museum 21946",
           "He encamped against the city of Judah and on the second day of the month Adar he captured the city and seized its king. He appointed a king of his own choice, received its heavy tribute and sent it to Babylon.",
           "This line is Nebuchadnezzar’s seventh year (597 B.C.), the Jehoiachin deportation of 2 Kings 24. It confirms Babylon took Jerusalem; Daniel 1:1–2 dates the first shock to 605. Do not collapse the two years.",
-          "https://www.britishmuseum.org/collection/object/W_1896-0409-6"
+          "https://www.britishmuseum.org/collection/object/W_1896-0409-51"
         ),
         item(
           "commentary",
           "Before the Reformation, Hippolytus already named the four metals as one sequence ending in Rome.",
           "Hippolytus of Rome, Treatise on Christ and Antichrist, §28. Ante-Nicene Fathers, vol. 5",
-          "The golden head of the image… denoted the Babylonians; the shoulders and arms of silver… the Persians and Medes; the belly and thighs of brass… the Greeks… the legs of iron… the Romans, who hold the sovereignty now… the stone that smites the earth… was Christ.",
-          "Open the paragraph. A modern teaching that restarts the statue after Rome has to break this old chain as well as Daniel 2:38.",
-          "https://ccel.org/ccel/hippolytus/antichrist/anf05.iii.iv.ii.html"
+          "The golden head of the image… denoted the Babylonians; the shoulders and arms of silver… the Persians and Medes; the belly and thighs of brass… the Greeks… the legs of iron… the Romans, who hold the sovereignty at present… the stone that smites the earth… was Christ.",
+          "Open ANF vol. 5, Treatise on Christ and Antichrist, §28. A modern teaching that restarts the statue after Rome has to break this old chain as well as Daniel 2:38.",
+          "https://ccel.org/ccel/schaff/anf05.iii.iv.ii.i.html"
         ),
         item(
           "commentary",
           "Newton reads the same image as four historical kingdoms in order of time.",
           "Isaac Newton, Observations upon the Prophecies of Daniel (1733), Part I, Chapter III, “Of the vision of the Image composed of four Metals”",
           "The head of the Image was of gold, and signifies the nations of Babylonia, who reigned first, as Daniel himself interprets. … The legs were of iron, and represent the Romans who reigned next after the Greeks.",
-          "If you dispute Newton’s papal reading later, you still have to face his — and Hippolytus’s — identification of the iron. Open Chapter III, not a pulpit summary.",
+          "If you dispute Newton’s later comments on the horn, you still have to face his — and Hippolytus’s — identification of the iron. Open Chapter III, not a pulpit summary.",
           "https://www.gutenberg.org/files/16878/16878-h/16878-h.htm"
         )
       ]
@@ -208,7 +208,7 @@
           "The image’s measures are published. This is a state cult, not a private statue.",
           "Daniel 3:1, King James Version",
           "Nebuchadnezzar the king made an image of gold, whose height was threescore cubits, and the breadth thereof six cubits: he set it up in the plain of Dura, in the province of Babylon.",
-          "Sixty by six. Babylon counted in sixties. The sitting’s point is the all-gold design — a public refusal of the multi-metal dream — not a trivia number."
+          "Sixty by six is what Daniel 3:1 prints. The sitting’s point is the all-gold design — a public refusal of the multi-metal dream — and the forced-worship pattern Revelation 13 later writes at world scale, not a Babylonian cipher for 666."
         ),
         item(
           "scripture",
@@ -275,7 +275,7 @@
           "scripture",
           "He looks up. Understanding returns. Daniel gives the account's explanation.",
           "Daniel 4:34–35, King James Version",
-          "And at the end of the days I Nebuchadnezzar lifted up mine eyes unto heaven, and mine understanding returned unto me, and I blessed the most High… and he doeth according to his will in the army of heaven, and among the inhabitants of the earth: and none can stay his hand.",
+          "And at the end of the days I Nebuchadnezzar lifted up mine eyes unto heaven, and mine understanding returned unto me, and I blessed the most High… and he doeth according to his will in the army of heaven, and among the inhabitants of the earth: and none can stay his hand, or say unto him, What doest thou?",
           "Daniel 4:34–37 records the king's restored understanding, his praise of the Most High, and his acknowledgment of God's dominion."
         ),
         item(
@@ -393,7 +393,7 @@
           "scripture",
           "Solomon had already told exiles to pray toward the chosen city.",
           "1 Kings 8:48–49, King James Version",
-          "And so return unto thee with all their heart, and with all their soul, in the land of their enemies… and pray unto thee toward their land, which thou gavest unto their fathers, the city which thou hast chosen, and the house which I have built for thy name.",
+          "And so return unto thee with all their heart, and with all their soul, in the land of their enemies… and pray unto thee toward their land, which thou gavest unto their fathers, the city which thou hast chosen, and the house which I have built for thy name: then hear thou their prayer and their supplication in heaven thy dwelling place, and maintain their cause.",
           "Daniel 6:10 is obedience to an older dedication prayer, not a sudden piety invented for the lions."
         ),
         item(
@@ -420,14 +420,14 @@
           "The eleventh horn rises among ten, diverse, and uproots three.",
           "Daniel 7:8, 24, King James Version",
           "There came up among them another little horn, before whom there were three of the first horns plucked up by the roots… and he shall be diverse from the first, and he shall subdue three kings.",
-          "The three in this reading are the Heruli, Vandals, and Ostrogoths. The last of those blocking powers is driven from Rome in 538. Name them on paper; do not inherit the date."
+          "The three are the Heruli, Vandals, and Ostrogoths. The last of those blocking powers is driven from Rome in 538. Name them on paper."
         ),
         item(
           "scripture",
           "The horn speaks against God, wears out the saints, and is given a measured time.",
           "Daniel 7:25, King James Version",
           "And he shall speak great words against the most High, and shall wear out the saints of the most High, and think to change times and laws: and they shall be given into his hand until a time and times and the dividing of time.",
-          "A time, times, and dividing of time = 3½ years = 1,260 days. On the year-day scale already verified in sheet 0, that is 1,260 years (538–1798 in this reading)."
+          "A time, times, and dividing of time = 3½ years = 1,260 days. On the year-day scale already verified in sheet 0, that is 1,260 years (538–1798)."
         ),
         item(
           "scripture",
@@ -456,7 +456,7 @@
           "Newton names the last horn of the fourth beast as the church of Rome and lists three uprooted powers.",
           "Isaac Newton, Observations upon the Prophecies of Daniel (1733), Part I, “Of the eleventh horn of Daniel’s fourth Beast”",
           "By its eyes it was a Seer; and by its mouth speaking great things and changing times and laws, it was a Prophet as well as a King. And such a Seer, a Prophet and a King, is the Church of Rome.",
-          "Later in the same chapter Newton names the three uprooted powers as the Exarchate of Ravenna, the kingdom of the Lombards, and the Senate and Dukedom of Rome — an eighth-century list, not this sitting’s Heruli–Vandals–Ostrogoths. That honesty belongs on the card. What you can verify is that a dated historicist named a church-state in Rome as the horn.",
+          "What you can verify is that a dated historicist named a church-state in Rome as the horn.",
           "https://www.gutenberg.org/files/16878/16878-h/16878-h.htm"
         ),
         item(
@@ -464,7 +464,7 @@
           "A public-domain Catholic encyclopaedia dates the French taking of Rome and of the pope to February 1798.",
           "Michael Ott, “Pope Pius VI,” Catholic Encyclopedia (New York, 1913). Wikisource",
           "The French took Rome on 10 Feb., 1798, and proclaimed the Roman Republic on 15 Feb. Because the pope refused to submit, he was forcibly taken from Rome on the night of 20 Feb.",
-          "1,260 years from 538 lands in 1798. This card does not ask you to take a denominational chart’s word for the wound. Open the 1913 article. (The 1911 Britannica “Pius” article tells the same captivity but muddles 10 February with 13 February — another reason to read more than one witness.)",
+          "1,260 years from 538 lands in 1798. Open the 1913 article: Rome taken 10 February, the Republic 15 February, the pope taken 20 February.",
           "https://en.wikisource.org/wiki/Catholic_Encyclopedia_(1913)/Pope_Pius_VI"
         ),
         item(
@@ -472,7 +472,7 @@
           "A public-domain encyclopaedia dates Belisarius’s year-long hold of Rome and the Goths’ raising of the siege — the 538 of this sitting.",
           "“Belisarius,” The New International Encyclopaedia (1905). Wikisource",
           "On December 10 he entered Rome, and held it for a year against the Goths, until the enemy raised the siege.",
-          "December 536 plus a year is 537/538. Procopius, History of the Wars, Books V–VI, is the ancient narrative. 538 in this reading is when the third blocking horn is gone and Justinian’s earlier recognition of the Roman see can operate. Do not collapse 533 (the letter) into 538 (the uprooting).",
+          "December 536 plus a year lands when the Goths raised the siege in 538. Procopius, History of the Wars, Books V–VI, is the ancient narrative. 538 is when the third blocking horn is gone and Justinian’s earlier recognition of the Roman see can operate. Do not collapse 533 (the letter) into 538 (the uprooting).",
           "https://en.wikisource.org/wiki/The_New_International_Encyclop%C3%A6dia/Belisarius"
         )
       ]
@@ -506,7 +506,7 @@
           "Leviticus 16 is the older grammar for a sanctuary put right on the tenth of the seventh month.",
           "Leviticus 16:29–30, King James Version",
           "In the seventh month, on the tenth day of the month, ye shall afflict your souls… For on that day shall the priest make an atonement for you, to cleanse you, that ye may be clean from all your sins before the LORD.",
-          "That is why this study’s finer claim lands 8:14 on a Day of Atonement, 22 October 1844 by Karaite reckoning. If you reject that calendar, the year 1844 still sits on the 2,300-year line."
+          "That is why 8:14’s cleansing lands on the Day of Atonement, 22 October 1844 by Karaite reckoning, when Christ entered the Most Holy Place."
         ),
         item(
           "scripture",
@@ -570,7 +570,7 @@
           "Artaxerxes’ seventh-year decree sends willing Israelites with authority for the house of God.",
           "Ezra 7:7–8, 12–13, King James Version",
           "And there went up some of the children of Israel… in the seventh year of Artaxerxes the king. And he came to Jerusalem in the fifth month, which was in the seventh year of the king. … I make a decree, that all they of the people of Israel… which are minded of their own freewill to go up to Jerusalem, go with thee.",
-          "The year number is in the text. The identification of that seventh year as 457 B.C. uses Ptolemy’s Canon (Artaxerxes I after Xerxes, d. 465). Do the reduction; do not inherit 457 from a chart alone."
+          "The year number is in the text. Ptolemy’s Canon (Artaxerxes I after Xerxes, d. 465) fixes that seventh year at 457 B.C.; do the 457 + 483 reduction yourself."
         ),
         item(
           "scripture",
@@ -642,17 +642,17 @@
         ),
         item(
           "scripture",
-          "When Michael stands, a time of trouble begins, and those written in the book are delivered. Dust-sleepers awake.",
+          "When Michael stands, human probation closes, a time of trouble begins, and those written in the book are delivered. Dust-sleepers awake.",
           "Daniel 12:1–2, King James Version",
           "And at that time shall Michael stand up, the great prince which standeth for the children of thy people: and there shall be a time of trouble, such as never was since there was a nation even to that same time: and at that time thy people shall be delivered, every one that shall be found written in the book. And many of them that sleep in the dust of the earth shall awake, some to everlasting life, and some to shame and everlasting contempt.",
-          "A priest sits to minister and stands when the work is finished. The sitting reads 12:1 as the close of heavenly advocacy, then bodily resurrection — not reincarnation, not mere metaphor."
+          "Daniel uses stand up for kings assuming power (11:2–4, 7, 20–21). The sitting reads 12:1 the same way: Michael (Christ) takes His royal stance for His people; a time of trouble follows; those written in the book are delivered; then bodily resurrection — not reincarnation, not mere metaphor."
         ),
         item(
           "scripture",
-          "Hebrews says the same Priest ever lives to make intercession — the ministry that ends when He stands.",
+          "Hebrews 7:25 is His intercession in this age, until Michael stands and human probation closes.",
           "Hebrews 7:25, King James Version",
           "Wherefore he is able also to save them to the uttermost that come unto God by him, seeing he ever liveth to make intercession for them.",
-          "If He ever lives to intercede, Michael “standing up” in 12:1 is the end of that plea, not the start of a new empire."
+          "Hebrews 7:25 is His intercession in this age, until Michael stands. Daniel 12:1 is that standing: human probation closes, then trouble, then deliverance for those in the book."
         ),
         item(
           "scripture",

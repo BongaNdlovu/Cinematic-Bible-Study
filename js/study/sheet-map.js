@@ -36,7 +36,7 @@
           "Rome and the unbroken chain",
           "Daniel 7:8, 24–25; Revelation 13",
           "assets/maps/stops/rome.jpg",
-          "Historicist Protestant readers used Scripture with Scripture to identify a dynastic Antichrist/beast power across history — a reading that requires the chain from Jerusalem and Babylon to run through imperial Rome and divided Europe.\n\nRibera (1590/1591) and Alcázar (1614) systematically relocated fulfillment to escape that historicist identification — history of interpretation, not canon. Part V of this sitting walks that Counter-Reformation context.\n\nThis pin is not yet the Daniel 7 sitting. It is here so the method sheet has a place on the map for the question the whole course will keep asking: does your reading keep Rome on the chain, or dissolve the chain into a riddle?"
+          "Historicist Protestant readers used Scripture with Scripture to identify a dynastic Antichrist/beast power across history — a reading that requires the chain from Jerusalem and Babylon to run through imperial Rome and divided Europe.\n\nRibera (1590/1591) and Alcázar (1614) published systematic commentaries that moved fulfillment off the medieval church — history of interpretation, not canon. The titles and dates are the argument.\n\nThis pin is not yet the Daniel 7 sitting. It is here so the method sheet has a place on the map for the question the whole course will keep asking: does your reading keep Rome on the chain, or dissolve the chain into a riddle?"
         )
       ]
     },
@@ -122,11 +122,11 @@
         node(
           "dura-image",
           "event",
-          "c. 594 B.C. · Plain of Dura",
+          "Plain of Dura · year reconstructed, not printed",
           "The sixty-by-six image",
           "Daniel 3:1–18; Exodus 20:4–5",
           "assets/study/statue-nebuchadnezzar.jpg",
-          "The plain of Dura lies by Babylon. Here Nebuchadnezzar casts an image sixty cubits high and six cubits wide, entirely of gold — no silver, bronze, or iron. The design is a public refusal of Daniel 2. If the statue in the dream had later metals and a stone, this image declares that Babylon will not be replaced.\n\nWhen the orchestra sounds, every official must fall down. Refusal is a furnace. The second commandment forbids the bow, so Shadrach, Meshach, and Abednego can serve the king in civil matters and still stand when the music plays. “Our God is able to deliver us… but if not, we will not serve thy gods” (3:17–18).\n\nThe sixes, the imperial decree, and worship enforced by death are the pattern Revelation 13 later writes at world scale. Dura is not a children’s story about courage in general. It is the first sitting of forced worship on this scroll."
+          "The plain of Dura lies by Babylon. Here Nebuchadnezzar casts an image sixty cubits high and six cubits wide, entirely of gold — no silver, bronze, or iron. The design is a public refusal of Daniel 2. If the statue in the dream had later metals and a stone, this image declares that Babylon will not be replaced.\n\nWhen the orchestra sounds, every official must fall down. Refusal is a furnace. The second commandment forbids the bow, so Shadrach, Meshach, and Abednego can serve the king in civil matters and still stand when the music plays. “Our God is able to deliver us… but if not, we will not serve thy gods” (3:17–18).\n\nDaniel 3:1’s six-and-sixty image, the imperial decree, and worship enforced by death are the pattern Revelation 13 later writes at world scale. Dura is not a children’s story about courage in general. It is the first sitting of forced worship on this scroll."
         ),
         node(
           "babylon",
@@ -306,12 +306,12 @@
       focusId: "miller-lowhampton",
       title: "Ulai, the tamid, and 2,300 days",
       kicker: "Sheet 8 · Daniel 8",
-      summary: "At Susa Daniel sees the ram and goat. The horn that becomes exceedingly great attacks the continual and the sanctuary. Antiochus is too small and too early; nitsdaq points to 1844 — a date Americans lived in New England farms, presses, and camp meetings.",
+      summary: "In Belshazzar’s third year (c. 551 B.C.) Daniel sees the ram and goat at the Ulai. The horn that becomes exceedingly great attacks the continual and the sanctuary. Antiochus is too small and too early; nitsdaq lands in 1844 — a date Americans lived in New England farms, presses, and camp meetings.",
       nodes: [
         node(
           "ulai-vision",
           "event",
-          "Susa · Ulai canal",
+          "c. 551 B.C. · Belshazzar’s third year",
           "Ram, goat, and the numbered wait",
           "Daniel 8:2–14, 17–19",
           "assets/maps/stops/susa.jpg",
@@ -329,7 +329,7 @@
         node(
           "sanctuary-1844",
           "event",
-          "22 Oct 1844",
+          "1844 · Karaite tenth day",
           "Then shall the sanctuary be put right",
           "Daniel 8:14; Leviticus 16; 7:9–14",
           "assets/study/epochs/sanctuary.jpg",
@@ -369,12 +369,12 @@
           "The seventh-month cry",
           "Leviticus 16:29–30; Daniel 8:14; Matthew 25:6",
           "assets/maps/stops/exeter-camp.jpg",
-          "At the mid-August 1844 Exeter camp meeting, Samuel S. Snow preaches that Leviticus 16’s tenth day of the seventh month — the Day of Atonement — falls on 22 October 1844 by the Karaite visible-moon calendar. The movement that had said “about 1843” now has a day.\n\nThis study’s load-bearing claim is the year on the 2,300-year line. The exact day is the finer Karaite claim already named on the method sheet. Exeter is where America heard that day preached."
+          "At the mid-August 1844 Exeter camp meeting, Samuel S. Snow preaches that Leviticus 16’s tenth day of the seventh month — the Day of Atonement — falls on 22 October 1844 by the Karaite visible-moon calendar. That is the day Christ entered the Most Holy Place. The movement that had said “about 1843” now has a day. Exeter is where America heard that day preached."
         ),
         node(
           "disappointment-1844",
           "event",
-          "22 Oct 1844",
+          "22 Oct 1844 · the day they waited",
           "The Great Disappointment",
           "Daniel 8:14, 26–27; Hebrews 8:1–2",
           "assets/maps/stops/oct22-1844.jpg",
@@ -387,7 +387,7 @@
           "The sanctuary is in heaven",
           "Daniel 8:14; 7:9–14; Hebrews 9:23–24",
           "assets/maps/stops/edson-cornfield.jpg",
-          "The morning after, Hiram Edson walks a cornfield near Port Gibson. The memory of that Advent circle is that 8:14’s sanctuary is the heavenly Most Holy Place — the court of chapter 7, the Day of Atonement antitype — not this earth and not this hill in Judah.\n\nThis is the dated account of people who would not throw the number away with the wrong event. It is not a state paper. Check it as a claim, then walk it back to Hebrews 8–9 and to the verb nitsdaq."
+          "The morning after, Hiram Edson walks a cornfield near Port Gibson. The memory of that Advent circle is that 8:14’s sanctuary is the heavenly Most Holy Place — the court of chapter 7, the Day of Atonement antitype — not this earth and not this hill in Judah.\n\nThis is the dated account of people who would not throw the number away with the wrong event. It is not a state paper. Trace it back to Hebrews 8–9 and to the verb nitsdaq."
         ),
         node(
           "washington-nh",
@@ -396,7 +396,7 @@
           "Sabbath in the same year",
           "Daniel 7:25; Exodus 20:8–11",
           "assets/maps/stops/washington-nh.jpg",
-          "Rachel Oakes Preston, a Seventh Day Baptist, presses Advent believers in this meetinghouse on the seventh-day Sabbath in 1844. Frederick Wheeler’s congregation becomes the first Sabbath-keeping Adventist company.\n\nThe stone is not an American denomination. The pin is a dated local fact: the same year the 2,300 days close, a New England church is already asking which law the little horn thought to change (7:25)."
+          "Rachel Oakes Preston, a Seventh Day Baptist, presses Advent believers in this meetinghouse on the seventh-day Sabbath in 1844. Frederick Wheeler’s congregation becomes the first Sabbath-keeping company among those Advent believers.\n\nThe stone is not an American denomination. The pin is a dated local fact: the same year the 2,300 days close, a New England church is already asking which law the little horn thought to change (7:25)."
         ),
         node(
           "morse-telegraph",
@@ -432,7 +432,7 @@
           "Messiah cut off in the midst of the week",
           "Daniel 9:26–27; Matthew 27:51",
           "assets/study/epochs/calvary.jpg",
-          "The “he” who confirms the covenant for one week is the Messiah of 9:26, not a later tyrant inserted after a gap. In the midst of the seventieth week He is cut off, the veil tears, and sacrifice and oblation cease. A.D. 27 + 3.5 years = spring A.D. 31.\n\nThe week closes in A.D. 34 as the gospel goes to the Gentiles. Remaining balance: 2,300 − 490 = 1,810 years. A.D. 34 + 1,810 = 1844. Inserting a parenthesis after week sixty-nine breaks Gabriel’s command to consider the vision of chapter 8.\n\nIf Messiah died on schedule, the leftover sanctuary years sit on the same line. That is the sitting’s load-bearing claim."
+          "The “he” who confirms the covenant for one week is the Messiah of 9:26, not a later tyrant inserted after a gap. In the midst of the seventieth week He is cut off, the veil tears, and sacrifice and oblation cease. A.D. 27 + 3.5 years = spring A.D. 31.\n\nThe week closes in A.D. 34 as the gospel goes to the Gentiles. Remaining balance: 2,300 − 490 = 1,810 years. A.D. 34 + 1,810 = 1844. Inserting a parenthesis after week sixty-nine breaks Gabriel’s command to consider the vision of chapter 8.\n\nMessiah died on schedule in A.D. 31; the remaining 1,810 years land in 1844."
         ),
         node(
           "jerusalem",
@@ -450,7 +450,7 @@
           "The Day of Atonement appointment",
           "Daniel 8:14; 9:24; Leviticus 16",
           "assets/study/epochs/sanctuary.jpg",
-          "8:14’s cleansing is Leviticus 16’s day: the tenth of the seventh month. In 1844 that Day of Atonement falls on 22 October by the Karaite reckoning this study uses. The date is not a slogan added to the cross. It is what remains after chathak has cut the seventy weeks from the same cord.\n\nStand here after Calvary so you can see why a gap after week sixty-nine would also unmoor this appointment. The confirming “he” already died on time."
+          "8:14’s cleansing is Leviticus 16’s day: the tenth of the seventh month. In 1844 that Day of Atonement falls on 22 October by Karaite reckoning — the day Christ entered the Most Holy Place. The date is not a slogan added to the cross. It is what remains after chathak has cut the seventy weeks from the same cord.\n\nStand here after Calvary so you can see why a gap after week sixty-nine would also unmoor this appointment. The confirming “he” already died on time."
         ),
         node(
           "miller-lowhampton",
@@ -459,12 +459,12 @@
           "Where the leftover years were preached",
           "Daniel 9:24–27; 8:14",
           "assets/maps/stops/miller-farm.jpg",
-          "If Messiah died on schedule, the leftover 1,810 years land in 1844. That landing was not preached first in Jerusalem. It was preached from a New York farm, printed in Boston, and dated to a day at Exeter.\n\nMiller’s event was wrong. The cord from 457 through the cross is the sitting’s claim. Open the America medals on the 1844 year so the arithmetic has a place on earth."
+          "Messiah died on schedule in A.D. 31; the leftover 1,810 years land in 1844. That landing was not preached first in Jerusalem. It was preached from a New York farm, printed in Boston, and dated to a day at Exeter.\n\nMiller’s event was wrong. The cord from 457 through the cross holds. Open the America medals on the 1844 year so the arithmetic has a place on earth."
         ),
         node(
           "disappointment-1844",
           "event",
-          "22 Oct 1844",
+          "22 Oct 1844 · the day they waited",
           "Wrong event, same cord",
           "Daniel 8:14; 9:24",
           "assets/maps/stops/oct22-1844.jpg",
@@ -513,7 +513,7 @@
           "Michael stands up; sleepers awake",
           "Daniel 12:1–4, 13",
           "assets/study/epochs/resurrection-dawn.jpg",
-          "Daniel’s own “stand up” is the verb for kings assuming power (11:2–4, 7, 20–21). When Michael — the great Prince — stands, advocacy in heaven is complete and a time of trouble such as never was begins. Those written in the book are delivered. Many who sleep in the dust awake — the Old Testament’s clearest bodily resurrection.\n\nThe 1,290 and 1,335 days, read from A.D. 508, confirm the same sanctuary line to 1798 and 1843/44. The book that was sealed till the time of the end can now be understood because those spans have landed.\n\nDaniel is told to rest and to stand in his lot at the end of the days. The metals, beasts, horns, and numbers were always walking toward a man rising from the dust, not toward a twelfth empire."
+          "Daniel’s own “stand up” is the verb for kings assuming power (11:2–4, 7, 20–21). When Michael — the great Prince — stands, human probation closes, advocacy in heaven is complete, and a time of trouble such as never was begins. Those written in the book are delivered. Many who sleep in the dust awake — the Old Testament’s clearest bodily resurrection.\n\nThe 1,290 and 1,335 days, read from A.D. 508, confirm the same sanctuary line to 1798 and 1843. 1844 is the separate 2,300-year landing. The book that was sealed till the time of the end can now be understood because those spans have landed.\n\nDaniel is told to rest and to stand in his lot at the end of the days. The metals, beasts, horns, and numbers were always walking toward a man rising from the dust, not toward a twelfth empire."
         )
       ]
     }

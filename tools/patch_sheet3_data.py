@@ -66,7 +66,7 @@ new_block = f'''      {{
               "It was an obelisk dedicated to the Roman emperor Titus to commemorate the fall of Jerusalem."
             ],
             correct: 0,
-            explanation: "By casting an entire colossus in gold (60x6 cubits, sexagesimal system), Nebuchadnezzar rejected the divine declaration of succession, asserting perpetual Babylonian supremacy.",
+            explanation: "By casting the entire image in gold — sixty cubits by six (Daniel 3:1) — Nebuchadnezzar rejected Daniel 2's succession and declared that Babylon's gold would never yield to silver, bronze, or iron.",
             diagnostics: [
               "Correct! In Daniel 2, Babylon was only the head of gold. Casting the entire statue in gold was an act of open defiance, asserting that Babylon would never give way to silver, bronze, or iron.",
               "Misconception: The Daniel 2 colossus consisted of four distinct metals and divided feet; casting the Dura image entirely in gold explicitly contradicted the vision.",
