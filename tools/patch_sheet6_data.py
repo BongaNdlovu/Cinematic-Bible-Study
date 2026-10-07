@@ -83,7 +83,7 @@ new_block = f'''      {{
             }},
             {{
               do: "Read Daniel 6:10 in Scripture. Mark the phrase 'as he did aforetime' and compare with 1 Kings 8:46–50 and Psalm 55:17.",
-              why: "Daniel's open window was not an emergency stunt or a theatrical protest; it was an eighty-year habit of covenant fidelity rooted in Solomon's dedication prayer. If you skip 'as he did aforetime', Daniel looks like an exhibitionist. If you keep it, you understand that Tuesday's discipline prepared him for Friday's decree."
+              why: "Daniel's open window was not an emergency stunt or a theatrical protest; it was a lifelong habit of covenant fidelity rooted in Solomon's dedication prayer across nearly seven decades in Babylon. If you skip 'as he did aforetime', Daniel looks like an exhibitionist. If you keep it, you understand that Tuesday's discipline prepared him for Friday's decree."
             }},
             {{
               do: "Read Daniel 6:17 and compare with Matthew 27:62–66. Note: innocent servant, pit/tomb, heavy stone, imperial seal, dawn vindication.",
@@ -107,7 +107,7 @@ new_block = f'''      {{
             why: "When human law forbids prayer or commands what God forbids, civil disobedience is a sacred obligation (Acts 5:29). Daniel obeyed God without violence, hatred, or treason: 'before thee, O king, have I done no hurt.'"
           }},
           value: {{
-            claim: "Eighty years of secret prayer is more valuable than an unalterable imperial statute. The stone rolled away from the pit proves that earthly seals cannot defeat God's servants.",
+            claim: "A lifetime of secret prayer is more valuable than an unalterable imperial statute. The stone removed from the pit and Daniel's unhurt deliverance prove that earthly seals cannot defeat God's servants.",
             why: "Constitutional codes and human decrees look permanent until God dispatches an angel. The man who kneels before the King of heaven has nothing to fear from the decrees of earthly monarchs."
           }},
           ask: [

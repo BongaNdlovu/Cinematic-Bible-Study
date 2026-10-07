@@ -98,7 +98,7 @@
 <div class="framework-card">
   <p class="framework-card-kicker">1. Historicism — the continuous historical model</p>
   <p><span class="term-gloss" data-term="historicism">Historicism</span> reads Daniel and Revelation as an unbroken, contiguous chain of fulfillment extending from the prophet's day through the rise and fall of world empires, across the Christian era, and straight to the Second Coming.</p>
-  <p><strong>Who held it?</strong> Early church fathers (such as Hippolytus), the Waldenses, John Wycliffe, and virtually all the Protestant Reformers (Martin Luther, John Calvin, Philip Melanchthon, John Knox), as well as scientists like Sir Isaac Newton.</p>
+  <p><strong>Who held it?</strong> Early church fathers (such as Hippolytus), the Waldenses, John Wycliffe, and the mainstream Protestant Reformers (Martin Luther, John Calvin, Philip Melanchthon, John Knox), as well as scientists like Sir Isaac Newton.</p>
   <p><strong>Why it works:</strong> It obeys the explicit text of Daniel 2:38–44. Daniel names Babylon as the head of gold, and tells the king that after him will arise second, third, and fourth empires, culminating in the eternal kingdom of God.</p>
 </div>
 
@@ -558,9 +558,9 @@ Royal Table (The World's Offer)           Zeroim &amp; Water (The Covenant Stand
 • Violated Levitical dietary laws         • Pure, undefiled nourishment
 • Dulls spiritual and moral senses        • Preserves mental clarity for revelation</pre>
 
-<p>Daniel requested a ten-day trial on <span class="strongs-gloss" data-lemma="H2235" tabindex="0">zeroim</span> (זֵרֹעִים) — a Hebrew term denoting plant foods grown from seeds, including vegetables, grains, legumes, and water (echoing God's original diet in Genesis 1:29).</p>
+<p>Daniel requested a ten-day trial on <span class="strongs-gloss" data-lemma="H2235" tabindex="0">zeroim</span> (זֵרֹעִים) — a Hebrew term denoting plant foods grown from seeds, including vegetables, grains, and legumes — accompanied by pure water to drink (Daniel 1:12; echoing God's original diet in Genesis 1:29).</p>
 
-<p>At the end of ten days, the four captives were physically healthier and more alert than those who ate the king's fare. Furthermore, at the conclusion of their three-year education, God granted them wisdom and understanding ten times superior to all the astrologers and magicians in Babylon (Daniel 1:17–20).</p>
+<p>At the end of ten days, the countenances of the four captives appeared "fairer and fatter in flesh" (Daniel 1:15), reflecting superior physical vitality compared to those who ate the king's fare. Furthermore, at the conclusion of their three-year education, God granted them wisdom and understanding ten times superior to all the astrologers and magicians in Babylon (Daniel 1:17–20).</p>
 
 <div class="caution-card">
   <p class="caution-card-kicker">What we are not claiming</p>
@@ -917,7 +917,7 @@ The Striking Stone  ──▶  CHRIST'S KINGDOM (Supernatural, Universal, Eterna
 </div>
 <div class="framework-card">
   <p class="framework-card-kicker">Legs of iron — Imperial Rome (168 B.C.–A.D. 476)</p>
-  <p>The "fourth kingdom shall be strong as iron: forasmuch as iron breaketh in pieces and subdueth all things" (Daniel 2:40). Following the Battle of Pydna in 168 B.C., Rome emerged as the Mediterranean's supreme power, crushing opposition with military discipline, administrative cohesion, and iron weaponry. Rome ruled for six centuries as a unified pagan empire.</p>
+  <p>The "fourth kingdom shall be strong as iron: forasmuch as iron breaketh in pieces and subdueth all things" (Daniel 2:40). Following the Battle of Pydna in 168 B.C., Rome emerged as the Mediterranean's supreme power, crushing opposition with military discipline, administrative cohesion, and iron weaponry. Rome dominated the Mediterranean basin for over six centuries, crushing regional powers with iron military might until the western empire fractured in A.D. 476.</p>
 </div>
 
 <h4>The physical and moral gradients of the colossus</h4>
@@ -1351,8 +1351,8 @@ The Penal Threat      Burning fiery furnace                Boycott and death dec
 The Faithful Remnant  Three Hebrews obey Decalogue         Saints keep God's commandments (Rev. 14:12)</pre>
 
 <div class="historical-note">
-  <p class="historical-note-kicker">The sexagesimal echo</p>
-  <p>The image on the Plain of Dura measured sixty cubits in height and six cubits in breadth (Daniel 3:1). Ancient Babylon used a base-60 (sexagesimal) mathematical system. In Revelation 13:18, the number characterizing the counterfeit end-time power is explicitly designated as "six hundred threescore and six" (666) — a striking biblical echo of Babylonian units of pride and idolatry. The echo is suggestive; Revelation itself says the number is a man's number.</p>
+  <p class="historical-note-kicker">The Typological Parallel &amp; The Number of Man</p>
+  <p>The image on the Plain of Dura measured sixty cubits in height and six cubits in breadth (Daniel 3:1). While patristic writers like Irenaeus drew an allegorical comparison with Revelation 13:18, official BRI exegesis clarifies that Revelation 13:18 explicitly designates 666 as "the number of a man"—symbolizing fallen humanity and the counterfeit trinity perpetually falling short of divine perfection (777), rather than an inspired mathematical echo of Babylonian units. The true biblical link between Daniel 3 and Revelation 13 is typological: state-enforced universal worship, an imperial image, a death decree, and a faithful remnant upholding God's commandments (Revelation 14:12).</p>
 </div>
 
 <ul>
@@ -1672,7 +1672,7 @@ THE TRIAL: IMMANENCE IN THE FIRE                           THE CROSS: VICARIOUS 
   <p class="part-subtitle">Daniel 4:1–3 · Babylon, c. 570 B.C.</p>
 </div>
 
-<p>Daniel 4 is unique in the biblical canon: it is an official state document authored not by a Hebrew prophet, but by a pagan emperor writing in his own voice. Nebuchadnezzar addresses <em>"all people, nations, and languages, that dwell in all the earth"</em> (Daniel 4:1).</p>
+<p>Daniel 4 is extraordinary in the biblical canon: it preserves an official state document authored in the first person by a Gentile monarch. Nebuchadnezzar addresses <em>"all people, nations, and languages, that dwell in all the earth"</em> (Daniel 4:1; compare Darius's decree in Daniel 6:25–27).</p>
 
 <p>This is not a victory stele boasting of conquered lands or slaughtered enemies; it is an imperial encyclical publishing the king's humiliation and subsequent restoration. Having witnessed God's supremacy in the dream of the colossus (Daniel 2) and in the deliverance of the three Hebrews from the furnace (Daniel 3), Nebuchadnezzar now writes to testify that human sovereignty is strictly an illusion:</p>
 
@@ -2156,7 +2156,7 @@ UPHARSIN / PERES  Half-minas / Division──▶ DIVIDED: Your kingdom is divide
 
 <p>That very night (October 11/12, 539 B.C.), Babylon fell without a prolonged siege. The Greek historians Herodotus (<em>Histories</em> 1.191) and Xenophon (<em>Cyropaedia</em> 7.5) record that Persian engineers diverted the waters of the Euphrates River into an artificial basin. Persian soldiers marched down the depleted riverbed, passed through the bronze river gates left unlocked during the drunken festivities, and seized the palace.</p>
 
-<p>Belshazzar was slain in the banquet hall, and Babylon passed to Darius the Mede (Daniel 5:30–31). The Nabonidus Chronicle (BM 35382) confirms this historical reality: Ugbaru and the troops of Cyrus entered Babylon "without battle."</p>
+<p>That very night Belshazzar was slain, and Babylon passed to Darius the Mede (Daniel 5:30–31). The Nabonidus Chronicle (BM 35382) confirms this sudden fall: Ugbaru and the troops of Cyrus entered Babylon "without battle."</p>
 
 <pre class="prophecy-diagram">THE FULFILLMENT OF HISTORICIST PROPHECY
 ISAIAH 45:1–3 (c. 712 B.C.)             DANIEL 5 / SECULAR HISTORY (539 B.C.)
@@ -2559,7 +2559,7 @@ THE IMPERIAL COMMAND                     DANIEL'S COVENANT POSTURE
 
 <div class="framework-card">
   <p class="framework-card-kicker">1. Habit, not emergency protest: "as he did aforetime"</p>
-  <p>Daniel did not suddenly open his windows as a theatrical stunt of political defiance. The text emphasizes that he prayed <em>"as he did aforetime."</em> His posture under the threat of death was identical to his posture on an ordinary Tuesday. He did not improvise faith under persecution; his public stand was merely the continuation of an eighty-year discipline of secret communion with God.</p>
+  <p>Daniel did not suddenly open his windows as a theatrical stunt of political defiance. The text emphasizes that he prayed <em>"as he did aforetime."</em> His posture under the threat of death was identical to his posture on an ordinary Tuesday. He did not improvise faith under persecution; his public stand was merely the continuation of a lifelong discipline of communion with God across nearly seven decades in Babylon.</p>
 </div>
 
 <div class="framework-card">
@@ -2796,7 +2796,7 @@ DANIEL IN THE LIONS' DEN                 JESUS CHRIST AT CALVARY &amp; THE TOMB
             },
             {
               do: "Read Daniel 6:10 in Scripture. Mark the phrase 'as he did aforetime' and compare with 1 Kings 8:46–50 and Psalm 55:17.",
-              why: "Daniel's open window was not an emergency stunt or a theatrical protest; it was an eighty-year habit of covenant fidelity rooted in Solomon's dedication prayer. If you skip 'as he did aforetime', Daniel looks like an exhibitionist. If you keep it, you understand that Tuesday's discipline prepared him for Friday's decree."
+              why: "Daniel's open window was not an emergency stunt or a theatrical protest; it was a lifelong habit of covenant fidelity rooted in Solomon's dedication prayer across nearly seven decades in Babylon. If you skip 'as he did aforetime', Daniel looks like an exhibitionist. If you keep it, you understand that Tuesday's discipline prepared him for Friday's decree."
             },
             {
               do: "Read Daniel 6:17 and compare with Matthew 27:62–66. Note: innocent servant, pit/tomb, heavy stone, imperial seal, dawn vindication.",
@@ -2820,7 +2820,7 @@ DANIEL IN THE LIONS' DEN                 JESUS CHRIST AT CALVARY &amp; THE TOMB
             why: "When human law forbids prayer or commands what God forbids, civil disobedience is a sacred obligation (Acts 5:29). Daniel obeyed God without violence, hatred, or treason: 'before thee, O king, have I done no hurt.' Sit with the verse until the claim is yours, not a slogan: write the text, name the empire or office in view, and refuse any reading that drops Christ from the center of Daniel's chain."
           },
           value: {
-            claim: "Eighty years of secret prayer is more valuable than an unalterable imperial statute. The stone rolled away from the pit proves that earthly seals cannot defeat God's servants.",
+            claim: "A lifetime of secret prayer is more valuable than an unalterable imperial statute. The stone removed from the pit and Daniel's unhurt deliverance prove that earthly seals cannot defeat God's servants.",
             why: "Constitutional codes and human decrees look permanent until God dispatches an angel. The man who kneels before the King of heaven has nothing to fear from the decrees of earthly monarchs. Sit with the verse until the claim is yours, not a slogan: write the text, name the empire or office in view, and refuse any reading that drops Christ from the center of Daniel's chain."
           },
           ask: [
@@ -3885,7 +3885,7 @@ DECREE:            DATE:       BIBLICAL TEXT:   SCOPE:                RESTORES C
 1. Cyrus           538/537 BC  Ezra 1:1–4       Temple only           NO (Temple only)
 2. Darius I        520 BC      Ezra 6:1–12      Reaffirms Temple      NO (Temple only)
 3. Artaxerxes I    457 BC      Ezra 7:11–26     Civil law &amp; judges    YES (Restores &amp; Builds)
-4. Artaxerxes II   444 BC      Nehemiah 2:1–8   Wall repair permit    NO (Executive permit)</pre>
+4. Artaxerxes I    444 BC      Nehemiah 2:1–8   Wall repair permit    NO (Executive permit)</pre>
 
 <div class="part-header" id="mp3">
   <p class="part-kicker">Main Point 3</p>
@@ -4370,7 +4370,7 @@ DURING THE HEAVENLY JUDGMENT (1844 TO PROBATION CLOSE)      WHEN MICHAEL STANDS 
 
 <div class="framework-card">
   <p class="framework-card-kicker">Deliverance in the Heavenly Registry: The Book of Life</p>
-  <p>Notice the only qualifying criterion for divine deliverance: not political connections, material wealth, or denominational pride, but <strong>having your name written in the Book</strong>! Throughout Scripture, this celestial register is called the <em>Lamb's Book of Life</em> (Exodus 32:32–33; Philippians 4:3; Revelation 3:5; 20:12, 15; 21:27). Those who have surrendered their hearts to Jesus Christ, whose sins have been washed in the blood of the Lamb, and whose names remain blotted into the registry of heaven will be shielded and miraculously preserved through the final crisis.</p>
+  <p>Notice the only qualifying criterion for divine deliverance: not political connections, material wealth, or denominational pride, but <strong>having your name written in the Book</strong>! Throughout Scripture, this celestial register is called the <em>Lamb's Book of Life</em> (Exodus 32:32–33; Philippians 4:3; Revelation 3:5; 20:12, 15; 21:27). Those who have surrendered their hearts to Jesus Christ, whose sins have been washed in the blood of the Lamb, and whose names remain inscribed in the registry of heaven will experience ultimate divine deliverance and resurrection (Daniel 12:1–2).</p>
 </div>
 
 <div class="part-header" id="mp5">

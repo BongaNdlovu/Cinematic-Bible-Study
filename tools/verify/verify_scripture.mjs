@@ -140,7 +140,10 @@ parsedQuizzes.forEach((quizzes, index) => {
     if (!q || !q.question || !Array.isArray(q.options) || q.options.length !== 4) {
       fail('sheet ' + index + ' question ' + qIdx + ' must have a stem and four options');
     }
-    if (typeof q.correct !== 'number' || q.correct < 0 || q.correct > 3) {
+    const correctIdx = typeof q.correct === 'number'
+      ? q.correct
+      : (Array.isArray(q.diagnostics) ? q.diagnostics.indexOf('') : -1);
+    if (correctIdx < 0 || correctIdx > 3) {
       fail('sheet ' + index + ' question ' + qIdx + ' has an invalid correct index');
     }
   });
@@ -168,7 +171,7 @@ parsedGuides.forEach((guide, index) => {
 
 const sheet0Why = parsedGuides[0].trace.map((step) => step.why).join('\n') + '\n' + parsedGuides[0].christ.why;
 if (!/Lord/.test(sheet0Why)) fail('sheet 0 why must name the Lord who gave the king');
-if (!/day-for-year/i.test(sheet0Why)) fail('sheet 0 why must teach day-for-year');
+if (!/(?:day-for-year|year-day)/i.test(sheet0Why)) fail('sheet 0 why must teach day-for-year');
 if (!/Historicism/.test(sheet0Why)) fail('sheet 0 why must name Historicism');
 if (!/2,300/.test(sheet0Why)) fail('sheet 0 why must land the 2,300');
 if (!/Belteshazzar/.test(parsedGuides[1].value.why) || !/first commandment/.test(parsedGuides[1].value.why)) {

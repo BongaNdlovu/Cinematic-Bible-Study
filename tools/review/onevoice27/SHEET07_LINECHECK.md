@@ -2,9 +2,9 @@
 
 **Audit Date:** 2026-09-20  
 **File Audited:** `js/study/sheets-data.js` (Sitting id: 7) with `sheet-verify.js`, `workbench.js`, `sheet-glossary.js`  
-**Audited Content Hash:** `49bbac99409e4381`  
+**Audited Content Hash:** `5e2ead7515e90c41`  
 **Method:** Exhaustive claim-unit audit of finished prose across content, christology, quizzes, studyGuide, guide, verify cards, workbench, and linked glossary entries.  
-**Counts:** ACCURATE: 228 | SOFTEN: 0 | FIX: 0 | N/A: 39 | Total: 267  
+**Counts:** ACCURATE: 219 | SOFTEN: 0 | FIX: 0 | N/A: 39 | Total: 258  
 
 ## 1. Summary of Required Sections & Governing Standards
 
@@ -126,7 +126,6 @@
 | S07-Q0-OPT2 | INTERPRETATION | ACCURATE | Assessment option evaluating historical/biblical positions |
 | S07-Q0-OPT3 | INTERPRETATION | ACCURATE | Assessment option evaluating historical/biblical positions |
 | S07-Q0-EXP | INTERPRETATION | ACCURATE | Grammatical-historical and historicist explanation |
-| S07-Q0-DIA0 | INTERPRETATION | ACCURATE | Pedagogical diagnostic distinguishing true historicism from common errors |
 | S07-Q0-DIA1 | INTERPRETATION | ACCURATE | Pedagogical diagnostic distinguishing true historicism from common errors |
 | S07-Q0-DIA2 | INTERPRETATION | ACCURATE | Pedagogical diagnostic distinguishing true historicism from common errors |
 | S07-Q0-DIA3 | INTERPRETATION | ACCURATE | Pedagogical diagnostic distinguishing true historicism from common errors |
@@ -139,7 +138,6 @@
 | S07-Q1-DIA0 | INTERPRETATION | ACCURATE | Pedagogical diagnostic distinguishing true historicism from common errors |
 | S07-Q1-DIA1 | INTERPRETATION | ACCURATE | Pedagogical diagnostic distinguishing true historicism from common errors |
 | S07-Q1-DIA2 | INTERPRETATION | ACCURATE | Pedagogical diagnostic distinguishing true historicism from common errors |
-| S07-Q1-DIA3 | INTERPRETATION | ACCURATE | Pedagogical diagnostic distinguishing true historicism from common errors |
 | S07-Q2-STEM | INTERPRETATION | ACCURATE | Diagnostic assessment stem evaluating prophetic frameworks |
 | S07-Q2-OPT0 | INTERPRETATION | ACCURATE | Assessment option evaluating historical/biblical positions |
 | S07-Q2-OPT1 | INTERPRETATION | ACCURATE | Assessment option evaluating historical/biblical positions |
@@ -148,7 +146,6 @@
 | S07-Q2-EXP | INTERPRETATION | ACCURATE | Grammatical-historical and historicist explanation |
 | S07-Q2-DIA0 | INTERPRETATION | ACCURATE | Pedagogical diagnostic distinguishing true historicism from common errors |
 | S07-Q2-DIA1 | INTERPRETATION | ACCURATE | Pedagogical diagnostic distinguishing true historicism from common errors |
-| S07-Q2-DIA2 | INTERPRETATION | ACCURATE | Pedagogical diagnostic distinguishing true historicism from common errors |
 | S07-Q2-DIA3 | INTERPRETATION | ACCURATE | Pedagogical diagnostic distinguishing true historicism from common errors |
 | S07-Q3-STEM | INTERPRETATION | ACCURATE | Diagnostic assessment stem evaluating prophetic frameworks |
 | S07-Q3-OPT0 | INTERPRETATION | ACCURATE | Assessment option evaluating historical/biblical positions |
@@ -157,7 +154,6 @@
 | S07-Q3-OPT3 | INTERPRETATION | ACCURATE | Assessment option evaluating historical/biblical positions |
 | S07-Q3-EXP | INTERPRETATION | ACCURATE | Grammatical-historical and historicist explanation |
 | S07-Q3-DIA0 | INTERPRETATION | ACCURATE | Pedagogical diagnostic distinguishing true historicism from common errors |
-| S07-Q3-DIA1 | INTERPRETATION | ACCURATE | Pedagogical diagnostic distinguishing true historicism from common errors |
 | S07-Q3-DIA2 | INTERPRETATION | ACCURATE | Pedagogical diagnostic distinguishing true historicism from common errors |
 | S07-Q3-DIA3 | INTERPRETATION | ACCURATE | Pedagogical diagnostic distinguishing true historicism from common errors |
 | S07-Q4-STEM | INTERPRETATION | ACCURATE | Diagnostic assessment stem evaluating prophetic frameworks |
@@ -168,7 +164,6 @@
 | S07-Q4-EXP | INTERPRETATION | ACCURATE | Grammatical-historical and historicist explanation |
 | S07-Q4-DIA0 | INTERPRETATION | ACCURATE | Pedagogical diagnostic distinguishing true historicism from common errors |
 | S07-Q4-DIA1 | INTERPRETATION | ACCURATE | Pedagogical diagnostic distinguishing true historicism from common errors |
-| S07-Q4-DIA2 | INTERPRETATION | ACCURATE | Pedagogical diagnostic distinguishing true historicism from common errors |
 | S07-Q4-DIA3 | INTERPRETATION | ACCURATE | Pedagogical diagnostic distinguishing true historicism from common errors |
 | S07-SG-TR0-DO | PASTORAL | ACCURATE | Active study verification task |
 | S07-SG-TR0-WHY | INTERPRETATION | ACCURATE | Scripture-interprets-Scripture hermeneutical rationale |
@@ -233,8 +228,6 @@
 | S07-GLS-belshazzar-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
 | S07-GLS-berthier-SMP | INTERPRETATION | ACCURATE | Historicist vocabulary and prophetic hermeneutic definition |
 | S07-GLS-berthier-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
-| S07-GLS-calvin-SMP | INTERPRETATION | ACCURATE | Historicist vocabulary and prophetic hermeneutic definition |
-| S07-GLS-calvin-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
 | S07-GLS-church-state-SMP | INTERPRETATION | ACCURATE | Historicist vocabulary and prophetic hermeneutic definition |
 | S07-GLS-church-state-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
 | S07-GLS-daniel-SMP | INTERPRETATION | ACCURATE | Historicist vocabulary and prophetic hermeneutic definition |
@@ -261,8 +254,6 @@
 | S07-GLS-luther-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
 | S07-GLS-nebuchadnezzar-SMP | INTERPRETATION | ACCURATE | Historicist vocabulary and prophetic hermeneutic definition |
 | S07-GLS-nebuchadnezzar-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
-| S07-GLS-newton-isaac-SMP | INTERPRETATION | ACCURATE | Historicist vocabulary and prophetic hermeneutic definition |
-| S07-GLS-newton-isaac-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
 | S07-GLS-nitsdaq-SMP | INTERPRETATION | ACCURATE | Historicist vocabulary and prophetic hermeneutic definition |
 | S07-GLS-nitsdaq-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
 | S07-GLS-ostrogoths-SMP | INTERPRETATION | ACCURATE | Historicist vocabulary and prophetic hermeneutic definition |

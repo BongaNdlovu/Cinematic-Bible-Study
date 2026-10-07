@@ -405,7 +405,7 @@
           "What hath God wrought",
           "Numbers 23:23; Daniel 12:4",
           "assets/maps/stops/morse-telegraph.jpg",
-          "Samuel Morse’s first official telegraph message leaves the Capitol for Baltimore on 24 May 1844, quoting Numbers 23:23. Daniel 12:4 said knowledge would increase in the time of the end. This pin does not turn a wire into a fulfillment chart. It keeps 1844 on earth: a republic that can speak instantly, annex Texas, elect Polk, and split a church over slavery in the same year the sanctuary line ends."
+          "Samuel Morse’s first official telegraph message leaves the Capitol for Baltimore on 24 May 1844, quoting Numbers 23:23. Daniel 12:4 said knowledge would increase in the time of the end. This pin does not turn a wire into a fulfillment chart. It keeps 1844 on earth: a republic that can speak instantly, elect Polk on an expansionist platform (leading to the 1845 Texas annexation), and split a church over slavery in the same year the sanctuary line ends."
         )
       ]
     },

@@ -123,7 +123,7 @@ THE IMPERIAL COMMAND                     DANIEL'S COVENANT POSTURE
 
 <div class="framework-card">
   <p class="framework-card-kicker">1. Habit, not emergency protest: "as he did aforetime"</p>
-  <p>Daniel did not suddenly open his windows as a theatrical stunt of political defiance. The text emphasizes that he prayed <em>"as he did aforetime."</em> His posture under the threat of death was identical to his posture on an ordinary Tuesday. He did not improvise faith under persecution; his public stand was merely the continuation of an eighty-year discipline of secret communion with God.</p>
+  <p>Daniel did not suddenly open his windows as a theatrical stunt of political defiance. The text emphasizes that he prayed <em>"as he did aforetime."</em> His posture under the threat of death was identical to his posture on an ordinary Tuesday. He did not improvise faith under persecution; his public stand was merely the continuation of a lifelong discipline of communion with God across nearly seven decades in Babylon.</p>
 </div>
 
 <div class="framework-card">

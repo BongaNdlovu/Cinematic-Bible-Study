@@ -91,8 +91,8 @@ The Penal Threat      Burning fiery furnace                Boycott and death dec
 The Faithful Remnant  Three Hebrews obey Decalogue         Saints keep God's commandments (Rev. 14:12)</pre>
 
 <div class="historical-note">
-  <p class="historical-note-kicker">The sexagesimal echo</p>
-  <p>The image on the Plain of Dura measured sixty cubits in height and six cubits in breadth (Daniel 3:1). Ancient Babylon used a base-60 (sexagesimal) mathematical system. In Revelation 13:18, the number characterizing the counterfeit end-time power is explicitly designated as "six hundred threescore and six" (666) — a striking biblical echo of Babylonian units of pride and idolatry. The echo is suggestive; Revelation itself says the number is a man's number.</p>
+  <p class="historical-note-kicker">The Typological Parallel &amp; The Number of Man</p>
+  <p>The image on the Plain of Dura measured sixty cubits in height and six cubits in breadth (Daniel 3:1). While patristic writers like Irenaeus drew an allegorical comparison with Revelation 13:18, official BRI exegesis clarifies that Revelation 13:18 explicitly designates 666 as "the number of a man"—symbolizing fallen humanity and the counterfeit trinity perpetually falling short of divine perfection (777), rather than an inspired mathematical echo of Babylonian units. The true biblical link between Daniel 3 and Revelation 13 is typological: state-enforced universal worship, an imperial image, a death decree, and a faithful remnant upholding God's commandments (Revelation 14:12).</p>
 </div>
 
 <ul>

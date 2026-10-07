@@ -2,9 +2,9 @@
 
 **Audit Date:** 2026-09-20  
 **File Audited:** `js/study/sheets-data.js` (Sitting id: 0) with `sheet-verify.js`, `workbench.js`, `sheet-glossary.js`  
-**Audited Content Hash:** `3a81f7aa76f073de`  
+**Audited Content Hash:** `5b3aa08c20a86ccc`  
 **Method:** Exhaustive claim-unit audit of finished prose across content, christology, quizzes, studyGuide, guide, verify cards, workbench, and linked glossary entries.  
-**Counts:** ACCURATE: 219 | SOFTEN: 1 | FIX: 0 | N/A: 33 | Total: 253  
+**Counts:** ACCURATE: 214 | SOFTEN: 1 | FIX: 0 | N/A: 33 | Total: 248  
 
 ## 1. Summary of Required Sections & Governing Standards
 
@@ -106,7 +106,6 @@
 | S00-Q0-OPT3 | INTERPRETATION | ACCURATE | Assessment option evaluating historical/biblical positions |
 | S00-Q0-EXP | INTERPRETATION | ACCURATE | Grammatical-historical and historicist explanation |
 | S00-Q0-DIA0 | INTERPRETATION | ACCURATE | Pedagogical diagnostic distinguishing true historicism from common errors |
-| S00-Q0-DIA1 | INTERPRETATION | ACCURATE | Pedagogical diagnostic distinguishing true historicism from common errors |
 | S00-Q0-DIA2 | INTERPRETATION | ACCURATE | Pedagogical diagnostic distinguishing true historicism from common errors |
 | S00-Q0-DIA3 | INTERPRETATION | ACCURATE | Pedagogical diagnostic distinguishing true historicism from common errors |
 | S00-Q1-STEM | INTERPRETATION | ACCURATE | Diagnostic assessment stem evaluating prophetic frameworks |
@@ -118,14 +117,12 @@
 | S00-Q1-DIA0 | INTERPRETATION | ACCURATE | Pedagogical diagnostic distinguishing true historicism from common errors |
 | S00-Q1-DIA1 | INTERPRETATION | ACCURATE | Pedagogical diagnostic distinguishing true historicism from common errors |
 | S00-Q1-DIA2 | INTERPRETATION | ACCURATE | Pedagogical diagnostic distinguishing true historicism from common errors |
-| S00-Q1-DIA3 | INTERPRETATION | ACCURATE | Pedagogical diagnostic distinguishing true historicism from common errors |
 | S00-Q2-STEM | INTERPRETATION | ACCURATE | Diagnostic assessment stem evaluating prophetic frameworks |
 | S00-Q2-OPT0 | INTERPRETATION | ACCURATE | Assessment option evaluating historical/biblical positions |
 | S00-Q2-OPT1 | INTERPRETATION | ACCURATE | Assessment option evaluating historical/biblical positions |
 | S00-Q2-OPT2 | INTERPRETATION | ACCURATE | Assessment option evaluating historical/biblical positions |
 | S00-Q2-OPT3 | INTERPRETATION | ACCURATE | Assessment option evaluating historical/biblical positions |
 | S00-Q2-EXP | INTERPRETATION | ACCURATE | Grammatical-historical and historicist explanation |
-| S00-Q2-DIA0 | INTERPRETATION | ACCURATE | Pedagogical diagnostic distinguishing true historicism from common errors |
 | S00-Q2-DIA1 | INTERPRETATION | ACCURATE | Pedagogical diagnostic distinguishing true historicism from common errors |
 | S00-Q2-DIA2 | INTERPRETATION | ACCURATE | Pedagogical diagnostic distinguishing true historicism from common errors |
 | S00-Q2-DIA3 | INTERPRETATION | ACCURATE | Pedagogical diagnostic distinguishing true historicism from common errors |
@@ -137,7 +134,6 @@
 | S00-Q3-EXP | INTERPRETATION | ACCURATE | Grammatical-historical and historicist explanation |
 | S00-Q3-DIA0 | INTERPRETATION | ACCURATE | Pedagogical diagnostic distinguishing true historicism from common errors |
 | S00-Q3-DIA1 | INTERPRETATION | ACCURATE | Pedagogical diagnostic distinguishing true historicism from common errors |
-| S00-Q3-DIA2 | INTERPRETATION | ACCURATE | Pedagogical diagnostic distinguishing true historicism from common errors |
 | S00-Q3-DIA3 | INTERPRETATION | ACCURATE | Pedagogical diagnostic distinguishing true historicism from common errors |
 | S00-Q4-STEM | INTERPRETATION | ACCURATE | Diagnostic assessment stem evaluating prophetic frameworks |
 | S00-Q4-OPT0 | INTERPRETATION | ACCURATE | Assessment option evaluating historical/biblical positions |
@@ -146,7 +142,6 @@
 | S00-Q4-OPT3 | INTERPRETATION | ACCURATE | Assessment option evaluating historical/biblical positions |
 | S00-Q4-EXP | INTERPRETATION | ACCURATE | Grammatical-historical and historicist explanation |
 | S00-Q4-DIA0 | INTERPRETATION | ACCURATE | Pedagogical diagnostic distinguishing true historicism from common errors |
-| S00-Q4-DIA1 | INTERPRETATION | ACCURATE | Pedagogical diagnostic distinguishing true historicism from common errors |
 | S00-Q4-DIA2 | INTERPRETATION | ACCURATE | Pedagogical diagnostic distinguishing true historicism from common errors |
 | S00-Q4-DIA3 | INTERPRETATION | ACCURATE | Pedagogical diagnostic distinguishing true historicism from common errors |
 | S00-SG-TR0-DO | PASTORAL | ACCURATE | Active study verification task |

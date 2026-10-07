@@ -149,7 +149,7 @@ DURING INVESTIGATIVE JUDGMENT (1844 TO PROBATION CLOSE)      WHEN MICHAEL STANDS
 
 <div class="framework-card">
   <p class="framework-card-kicker">Deliverance in the Heavenly Registry: The Book of Life</p>
-  <p>Notice the only qualifying criterion for divine deliverance: not political connections, material wealth, or denominational pride, but <strong>having your name written in the Book</strong>! Throughout Scripture, this celestial register is called the <em>Lamb's Book of Life</em> (Exodus 32:32–33; Philippians 4:3; Revelation 3:5; 20:12, 15; 21:27). Those who have surrendered their hearts to Jesus Christ, whose sins have been washed in the blood of the Lamb, and whose names remain blotted into the registry of heaven will be shielded and miraculously preserved through the final crisis.</p>
+  <p>Notice the only qualifying criterion for divine deliverance: not political connections, material wealth, or denominational pride, but <strong>having your name written in the Book</strong>! Throughout Scripture, this celestial register is called the <em>Lamb's Book of Life</em> (Exodus 32:32–33; Philippians 4:3; Revelation 3:5; 20:12, 15; 21:27). Those who have surrendered their hearts to Jesus Christ, whose sins have been washed in the blood of the Lamb, and whose names remain inscribed in the registry of heaven will experience ultimate divine deliverance and resurrection (Daniel 12:1–2).</p>
 </div>
 
 <div class="part-header" id="mp5">

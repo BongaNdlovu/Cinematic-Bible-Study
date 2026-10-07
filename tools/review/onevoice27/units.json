@@ -1,29 +1,29 @@
 {
   "sheetHashes": {
-    "0": "3a81f7aa76f073de",
-    "1": "41f1f17c28698c88",
-    "2": "6a83578f5f0f52b4",
-    "3": "6bf9f8e37bedf071",
-    "4": "e7733c0b118fa5da",
-    "5": "440f5b9d0474cc32",
-    "6": "45e8c74df8c41043",
-    "7": "49bbac99409e4381",
-    "8": "84fc6368da2c17b0",
-    "9": "0618c37c47f0a443",
-    "10": "85492726335c4649"
+    "0": "5b3aa08c20a86ccc",
+    "1": "b091a598411d862f",
+    "2": "8a86f2d58d4e27f3",
+    "3": "ea43f30acc0c15c2",
+    "4": "f1c00c8953bd7e98",
+    "5": "2701b5de291b1813",
+    "6": "798c6f7d26d303f1",
+    "7": "5e2ead7515e90c41",
+    "8": "85df57aea31745a2",
+    "9": "d22337824eb62fed",
+    "10": "6a4df3b535d80bf2"
   },
   "sheetUnitCounts": {
-    "0": 253,
-    "1": 220,
-    "2": 227,
-    "3": 186,
-    "4": 189,
-    "5": 219,
-    "6": 224,
-    "7": 267,
-    "8": 268,
-    "9": 256,
-    "10": 257
+    "0": 248,
+    "1": 215,
+    "2": 222,
+    "3": 181,
+    "4": 182,
+    "5": 214,
+    "6": 219,
+    "7": 258,
+    "8": 263,
+    "9": 251,
+    "10": 252
   },
   "units": [
     {
@@ -142,8 +142,8 @@
       "id": "S00-P-07",
       "sheet": 0,
       "field": "content",
-      "text": "Who held it? Early church fathers (such as Hippolytus), the Waldenses, John Wycliffe, and virtually all the Protestant Reformers (Martin Luther, John Calvin, Philip Melanchthon, John Knox), as well as scientists like Sir Isaac Newton.",
-      "hash": "628a87d9469504b0"
+      "text": "Who held it? Early church fathers (such as Hippolytus), the Waldenses, John Wycliffe, and the mainstream Protestant Reformers (Martin Luther, John Calvin, Philip Melanchthon, John Knox), as well as scientists like Sir Isaac Newton.",
+      "hash": "5da22997b1b411df"
     },
     {
       "id": "S00-P-08",
@@ -170,8 +170,8 @@
       "id": "S00-P-10",
       "sheet": 0,
       "field": "content",
-      "text": "Origins: First systematically formulated by the Spanish Jesuit scholar Luis de Alcázar in his 1614 work Vestigatio Arcani Sensus in Apocalypsi .",
-      "hash": "19057ee116df55ba"
+      "text": "Origins: It was first systematically formulated by the Spanish Jesuit scholar Luis de Alcázar in his 1614 work Vestigatio Arcani Sensus in Apocalypsi .",
+      "hash": "dea141172ebe92dd"
     },
     {
       "id": "S00-P-11",
@@ -191,15 +191,15 @@
       "id": "S00-P-12",
       "sheet": 0,
       "field": "content",
-      "text": "Futurism argues that Daniel's final prophetic timeline — specifically the 70th week of Daniel 9 — has been paused, inserting an unstated multi-millennial gap before an individual antichrist figures into a final, literal seven-year crisis.",
-      "hash": "e6609220ddcb8ce0"
+      "text": "Futurism argues that Daniel's final prophetic timeline — specifically the 70th week of Daniel 9 — has been paused, inserting an unstated gap of many centuries before an individual antichrist appears in a final, literal seven-year crisis.",
+      "hash": "0abad2507087d1cd"
     },
     {
       "id": "S00-P-13",
       "sheet": 0,
       "field": "content",
-      "text": "Origins: First formulated by the Spanish Jesuit scholar Francisco Ribera in his 1590 commentary on Revelation. In the 1830s, this theory was imported into Protestant circles by Edward Irving and John Nelson Darby, giving rise to modern Dispensationalism and later popularized by the Scofield Reference Bible (1909).",
-      "hash": "5378c97c3b224dd0"
+      "text": "Origins: It was first formulated by the Spanish Jesuit scholar Francisco Ribera in his 1590 commentary on Revelation. In the 1830s, this theory was imported into Protestant circles by Edward Irving and John Nelson Darby, giving rise to modern Dispensationalism and later popularized by the Scofield Reference Bible (1909).",
+      "hash": "caff25539c61145b"
     },
     {
       "id": "S00-P-14",
@@ -317,8 +317,8 @@
       "id": "S00-P-21",
       "sheet": 0,
       "field": "content",
-      "text": "Gabriel assigns \"seventy weeks\" (490 days) to the Jewish nation to finish transgression, make reconciliation for iniquity, and welcome Messiah the Prince. Four hundred ninety literal days is barely sixteen months — an impossible timeframe to rebuild Jerusalem, reestablish the nation, and see Messiah minister and die. Only when calculated as 490 literal years does the prophecy begin with the Persian restoration decrees (457 B.C.) and terminate precisely at the public appearance and cross of Jesus Christ (A.D. 27–31/34).",
-      "hash": "e06537a4d6867d75"
+      "text": "Gabriel assigns \"seventy weeks\" (490 days) to the Jewish nation to finish transgression, make reconciliation for iniquity, and welcome Messiah the Prince. Four hundred ninety literal days amount to barely sixteen months, far too short a span in which to rebuild Jerusalem, reestablish the nation, and see the Messiah minister and die. Only when those seventy weeks are read as 490 years does the prophecy run from the Persian decree to restore Jerusalem (457 B.C.) to the public ministry of Jesus Christ (A.D. 27) and His cross (A.D. 31), with the week closing in A.D. 34.",
+      "hash": "16a7e57fb70294d3"
     },
     {
       "id": "S00-P-22",
@@ -331,15 +331,15 @@
       "id": "S00-H-17",
       "sheet": 0,
       "field": "content",
-      "text": "Honest method",
-      "hash": "4c4dee5eac170cd8"
+      "text": "An honest reading",
+      "hash": "259b374991daf502"
     },
     {
       "id": "S00-P-23",
       "sheet": 0,
       "field": "content",
-      "text": "Numbers 14:34 and Ezekiel 4:6 establish biblical precedent. Daniel 9 tests the scale at Messiah. The dates 457 B.C. and A.D. 27–34 are interpretive conclusions built from that framework — they are not calendar years printed in the verse. Later sittings will walk each step.",
-      "hash": "45f5ea7fe8b7d34a"
+      "text": "Numbers 14:34 and Ezekiel 4:6 set the biblical precedent that a prophetic day can stand for a year. Daniel 9 tests that scale in the prophecy of the Messiah. The dates 457 B.C. and A.D. 27–34 are conclusions drawn from that framework. They are not calendar years printed in the verse. Later sittings will walk through each step.",
+      "hash": "573e33a06424152f"
     },
     {
       "id": "S00-H-18",
@@ -629,13 +629,6 @@
       "hash": "019f82424cae05d7"
     },
     {
-      "id": "S00-Q0-DIA1",
-      "sheet": 0,
-      "field": "quizzes",
-      "text": "Correct! Preterism parks the chain in antiquity; Daniel 2 still requires successive kingdoms culminating in God's eternal kingdom.",
-      "hash": "836ee741b63a4668"
-    },
-    {
       "id": "S00-Q0-DIA2",
       "sheet": 0,
       "field": "quizzes",
@@ -688,8 +681,8 @@
       "id": "S00-Q1-EXP",
       "sheet": 0,
       "field": "quizzes",
-      "text": "Numbers 14:34 and Ezekiel 4:6 establish precedent; Daniel 9 self-checks at Messiah — 490 days fail, 490 years fit.",
-      "hash": "5df5c11846da40a2"
+      "text": "Numbers 14:34 and Ezekiel 4:6 set the day-for-year precedent. Daniel 9 checks that scale in the prophecy of the Messiah: 490 days cannot reach Him, and 490 years can.",
+      "hash": "081d905f19ddf27a"
     },
     {
       "id": "S00-Q1-DIA0",
@@ -709,15 +702,8 @@
       "id": "S00-Q1-DIA2",
       "sheet": 0,
       "field": "quizzes",
-      "text": "Misconception: Daniel 9:24–27 establishes and tests the prophetic year-day scale at Messiah, which then unlocks Daniel 7:25 and Daniel 8:14.",
-      "hash": "2b0d62ebbf7ef680"
-    },
-    {
-      "id": "S00-Q1-DIA3",
-      "sheet": 0,
-      "field": "quizzes",
-      "text": "Correct! Precedent in Torah and exile, then Daniel 9 tests the scale at the cross — 490 literal days fail, but 490 prophetic years fit precisely.",
-      "hash": "1a4d7a10fcee974a"
+      "text": "Misconception: Daniel 9:24–27 establishes the year-day scale and tests it in the prophecy of the Messiah, and that test then opens Daniel 7:25 and Daniel 8:14.",
+      "hash": "e833d0b86f873e44"
     },
     {
       "id": "S00-Q2-STEM",
@@ -760,13 +746,6 @@
       "field": "quizzes",
       "text": "Daniel 2:38–44 names successive kingdoms with no vacant centuries. Futurism's gap is imported, not written.",
       "hash": "25c5a6f7bd318c97"
-    },
-    {
-      "id": "S00-Q2-DIA0",
-      "sheet": 0,
-      "field": "quizzes",
-      "text": "Correct! Futurism inserts a gap the text never prints; Daniel 2 runs gold to stone as one continuous chain.",
-      "hash": "200a80d68adbc4b1"
     },
     {
       "id": "S00-Q2-DIA1",
@@ -846,13 +825,6 @@
       "hash": "0f9e78196498c436"
     },
     {
-      "id": "S00-Q3-DIA2",
-      "sheet": 0,
-      "field": "quizzes",
-      "text": "Correct! The chain begins with the sovereign Lord, not with Babylonian military supremacy or pagan propaganda.",
-      "hash": "ecd2ef4d67491d3f"
-    },
-    {
       "id": "S00-Q3-DIA3",
       "sheet": 0,
       "field": "quizzes",
@@ -909,13 +881,6 @@
       "hash": "e76ad0f28e57d691"
     },
     {
-      "id": "S00-Q4-DIA1",
-      "sheet": 0,
-      "field": "quizzes",
-      "text": "Correct! Sovereignty, the cross of Messiah, and the eternal Stone-King are the three Christological anchors of Daniel's unbroken chain.",
-      "hash": "6b6565e4463c7dfe"
-    },
-    {
       "id": "S00-Q4-DIA2",
       "sheet": 0,
       "field": "quizzes",
@@ -961,15 +926,15 @@
       "id": "S00-SG-TR2-DO",
       "sheet": 0,
       "field": "studyGuide",
-      "text": "Read Numbers 14:34, Ezekiel 4:6, and Daniel 9:24–27 in the Scripture dock. Write: precedent → test at Messiah.",
-      "hash": "adf9a7810e2224ff"
+      "text": "Read Numbers 14:34, Ezekiel 4:6, and Daniel 9:24–27 in the Scripture dock. Write one line: the earlier texts set the precedent, and Daniel 9 tests it in the prophecy of the Messiah.",
+      "hash": "42ab358504bfd3b7"
     },
     {
       "id": "S00-SG-TR2-WHY",
       "sheet": 0,
       "field": "studyGuide",
-      "text": "The year-day, or day-for-year, scale is not human guesswork. Numbers 14:34 and Ezekiel 4:6 state it before Daniel's numbered visions; Daniel 9 then tests the rod at Messiah, so later 1,260 and 2,300 counts share a proven measure.",
-      "hash": "094710bc26580710"
+      "text": "The year-day scale, one prophetic day for one year, is not a human guess. Numbers 14:34 and Ezekiel 4:6 state it before Daniel's numbered visions. Daniel 9 then tests that measure in the prophecy of the Messiah, so the later counts of 1,260 and 2,300 days share a measure that has already been checked.",
+      "hash": "ff8eb01ed0c24665"
     },
     {
       "id": "S00-SG-TR3-DO",
@@ -1059,8 +1024,8 @@
       "id": "S00-SG-ASK-3",
       "sheet": 0,
       "field": "studyGuide",
-      "text": "Does my reading of Daniel lead me to fear of empires — or trust in Christ's triumph?",
-      "hash": "5930edbb0f255df1"
+      "text": "Does my reading of Daniel lead me to fear empires, or to trust Christ's triumph?",
+      "hash": "2d798f77aa054fd0"
     },
     {
       "id": "S00-GD-INTRO-EXP",
@@ -1696,8 +1661,8 @@
       "id": "S00-GLS-papacy-HIS",
       "sheet": 0,
       "field": "glossary",
-      "text": "This study identifies Daniel 7’s little horn with that office in its church-state form, not with every personal piety of every pope. The measured span this sitting uses is A.D. 538 to 1798.",
-      "hash": "5a9706d46f2b345d"
+      "text": "This study applies Daniel 7’s little-horn interpretation to that historical office and its church-state role, not to Roman Catholics as a people. Many Catholics sincerely follow Christ; this interpretation gives no warrant for prejudice or hostility toward them. The measured span this sitting uses is A.D. 538 to 1798.",
+      "hash": "c770cced521e5d5b"
     },
     {
       "id": "S00-GLS-preterism-SMP",
@@ -1794,8 +1759,8 @@
       "id": "S00-GLS-year-day-HIS",
       "sheet": 0,
       "field": "glossary",
-      "text": "God states the scale twice: Numbers 14:34 (forty spy-days become forty wilderness years) and Ezekiel 4:6 (Ezekiel’s body-days appointed “each day for a year”). Daniel’s own 70 weeks cannot be 490 ordinary days and still hold a rebuilt city and the cross — that is the book checking the ruler. 2 Peter 3:8 is about God’s patience, not this scale.",
-      "hash": "4790bf971a58a21d"
+      "text": "God states the scale twice: Numbers 14:34 (forty spy-days become forty wilderness years) and Ezekiel 4:6 (Ezekiel’s body-days appointed “each day for a year”). Daniel’s own 70 weeks cannot be 490 ordinary days and still hold a rebuilt city and the cross. That is the book checking its own measuring rod. 2 Peter 3:8 is about God’s patience, not this scale.",
+      "hash": "53d2cd60f61ea5b4"
     },
     {
       "id": "S01-TOC",
@@ -2123,15 +2088,15 @@
       "id": "S01-P-19",
       "sheet": 1,
       "field": "content",
-      "text": "Daniel requested a ten-day trial on zeroim (זֵרֹעִים) — a Hebrew term denoting plant foods grown from seeds, including vegetables, grains, legumes, and water (echoing God's original diet in Genesis 1:29).",
-      "hash": "2cf7272b4365f05c"
+      "text": "Daniel requested a ten-day trial on zeroim (זֵרֹעִים) — a Hebrew term denoting plant foods grown from seeds, including vegetables, grains, and legumes — accompanied by pure water to drink (Daniel 1:12; echoing God's original diet in Genesis 1:29).",
+      "hash": "366aa23d33557a0e"
     },
     {
       "id": "S01-P-20",
       "sheet": 1,
       "field": "content",
-      "text": "At the end of ten days, the four captives were physically healthier and more alert than those who ate the king's fare. Furthermore, at the conclusion of their three-year education, God granted them wisdom and understanding ten times superior to all the astrologers and magicians in Babylon (Daniel 1:17–20).",
-      "hash": "2eee09617d1d9e8a"
+      "text": "At the end of ten days, the countenances of the four captives appeared \"fairer and fatter in flesh\" (Daniel 1:15), reflecting superior physical vitality compared to those who ate the king's fare. Furthermore, at the conclusion of their three-year education, God granted them wisdom and understanding ten times superior to all the astrologers and magicians in Babylon (Daniel 1:17–20).",
+      "hash": "149c8ada8486dc47"
     },
     {
       "id": "S01-H-16",
@@ -2347,8 +2312,8 @@
       "id": "S01-P-31",
       "sheet": 1,
       "field": "content",
-      "text": "Before any dream, before any empire chart, ask: Where is my worship line? Civic skill you can offer; a table that demands idolatry you cannot share. Consecration precedes revelation.",
-      "hash": "0edd9213e73a2b5a"
+      "text": "Before any dream, before any empire chart, ask: Where is my worship line? You can offer civic skill. You cannot share a table that demands idolatry. Consecration precedes revelation.",
+      "hash": "7002f7b34cc75394"
     },
     {
       "id": "S01-CHR-TITLE",
@@ -2442,13 +2407,6 @@
       "hash": "e1847f97c2c45a38"
     },
     {
-      "id": "S01-Q0-DIA2",
-      "sheet": 1,
-      "field": "quizzes",
-      "text": "Correct! Daniel distinguished secular skill from covenant defilement, mastering civil statecraft while refusing idolatrous worship and dietary compromise.",
-      "hash": "0c19f0c4b5118bc5"
-    },
-    {
       "id": "S01-Q0-DIA3",
       "sheet": 1,
       "field": "quizzes",
@@ -2496,13 +2454,6 @@
       "field": "quizzes",
       "text": "Zeroim (זֵרֹעִים) points back to the seed-bearing diet of Genesis 1:29, affirming God as Creator and guarding the youth from sacrificial defilement.",
       "hash": "586f096c25ffbf40"
-    },
-    {
-      "id": "S01-Q1-DIA0",
-      "sheet": 1,
-      "field": "quizzes",
-      "text": "Correct! Zeroim derives from zera (seed), echoing the original Genesis 1:29 diet to preserve moral, cognitive, and covenant clarity.",
-      "hash": "e09a7bb2bb87e247"
     },
     {
       "id": "S01-Q1-DIA1",
@@ -2589,13 +2540,6 @@
       "hash": "ee64b1f1422320e9"
     },
     {
-      "id": "S01-Q2-DIA3",
-      "sheet": 1,
-      "field": "quizzes",
-      "text": "Correct! Belteshazzar carried a pagan theophoric stamp; Daniel's true name and covenant identity remained anchored in the sovereign Judge.",
-      "hash": "d909ccbb3134079f"
-    },
-    {
       "id": "S01-Q3-STEM",
       "sheet": 1,
       "field": "quizzes",
@@ -2643,13 +2587,6 @@
       "field": "quizzes",
       "text": "Misconception: The text explicitly credits God as the giver of knowledge and wisdom (Dan 1:17), not nutritional determinism or magic.",
       "hash": "99422a498559ad78"
-    },
-    {
-      "id": "S01-Q3-DIA1",
-      "sheet": 1,
-      "field": "quizzes",
-      "text": "Correct! God gave knowledge and skill; the test demonstrated that covenant loyalty to the Creator produces superior clarity without moral compromise.",
-      "hash": "44c4570335c9b48b"
     },
     {
       "id": "S01-Q3-DIA2",
@@ -2706,13 +2643,6 @@
       "field": "quizzes",
       "text": "Daniel inspires, but Hebrews 4:15 points to the sinless High Priest. The type leads to Christ, not to self-salvation.",
       "hash": "d5175d86952ca5c3"
-    },
-    {
-      "id": "S01-Q4-DIA0",
-      "sheet": 1,
-      "field": "quizzes",
-      "text": "Correct! Daniel's purpose is a prophetic shadow; Christ's sinless obedience in the wilderness is the substance that redeems and empowers us.",
-      "hash": "af8eb5f779b80275"
     },
     {
       "id": "S01-Q4-DIA1",
@@ -3320,8 +3250,8 @@
       "id": "S01-GLS-year-day-HIS",
       "sheet": 1,
       "field": "glossary",
-      "text": "God states the scale twice: Numbers 14:34 (forty spy-days become forty wilderness years) and Ezekiel 4:6 (Ezekiel’s body-days appointed “each day for a year”). Daniel’s own 70 weeks cannot be 490 ordinary days and still hold a rebuilt city and the cross — that is the book checking the ruler. 2 Peter 3:8 is about God’s patience, not this scale.",
-      "hash": "4790bf971a58a21d"
+      "text": "God states the scale twice: Numbers 14:34 (forty spy-days become forty wilderness years) and Ezekiel 4:6 (Ezekiel’s body-days appointed “each day for a year”). Daniel’s own 70 weeks cannot be 490 ordinary days and still hold a rebuilt city and the cross. That is the book checking its own measuring rod. 2 Peter 3:8 is about God’s patience, not this scale.",
+      "hash": "53d2cd60f61ea5b4"
     },
     {
       "id": "S01-GLS-zeroim-SMP",
@@ -3460,8 +3390,8 @@
       "id": "S02-P-08",
       "sheet": 2,
       "field": "content",
-      "text": "Human wisdom failed. Daniel prayed. God revealed secrets. The dream governs the latter days — not the king's magicians.",
-      "hash": "65aef22ad8ecb393"
+      "text": "Human wisdom failed. Daniel prayed. God revealed secrets. The dream governs the latter days. The king's magicians do not.",
+      "hash": "8beebafb568cb446"
     },
     {
       "id": "S02-H-06",
@@ -3551,8 +3481,8 @@
       "id": "S02-P-14",
       "sheet": 2,
       "field": "content",
-      "text": "The \"fourth kingdom shall be strong as iron: forasmuch as iron breaketh in pieces and subdueth all things\" (Daniel 2:40). Following the Battle of Pydna in 168 B.C., Rome emerged as the Mediterranean's supreme power, crushing opposition with military discipline, administrative cohesion, and iron weaponry. Rome ruled for six centuries as a unified pagan empire.",
-      "hash": "070445ac4ec8b56e"
+      "text": "The \"fourth kingdom shall be strong as iron: forasmuch as iron breaketh in pieces and subdueth all things\" (Daniel 2:40). Following the Battle of Pydna in 168 B.C., Rome emerged as the Mediterranean's supreme power, crushing opposition with military discipline, administrative cohesion, and iron weaponry. Rome dominated the Mediterranean basin for over six centuries, crushing regional powers with iron military might until the western empire fractured in A.D. 476.",
+      "hash": "becb78706f5fcc10"
     },
     {
       "id": "S02-H-13",
@@ -4045,13 +3975,6 @@
       "hash": "f5eeafabffeeff70"
     },
     {
-      "id": "S02-Q0-DIA3",
-      "sheet": 2,
-      "field": "quizzes",
-      "text": "Correct! Daniel 2:38 uniquely anchors the head of gold to Babylon. Descent is contiguous and terminal; modern history exists in the divided feet of iron and clay.",
-      "hash": "e01b639c9d83ad3f"
-    },
-    {
       "id": "S02-Q1-STEM",
       "sheet": 2,
       "field": "quizzes",
@@ -4099,13 +4022,6 @@
       "field": "quizzes",
       "text": "Misconception: International treaties confederate human governments; the prophetic stone pulverizes and replaces earthly kingdoms entirely.",
       "hash": "b936ac43c1afa0a9"
-    },
-    {
-      "id": "S02-Q1-DIA1",
-      "sheet": 2,
-      "field": "quizzes",
-      "text": "Correct! The stone strikes suddenly 'without hands' (supernatural, divine) and destroys human empires, establishing God's everlasting kingdom.",
-      "hash": "31082461916c9fe4"
     },
     {
       "id": "S02-Q1-DIA2",
@@ -4162,13 +4078,6 @@
       "field": "quizzes",
       "text": "Daniel 2:38 names Babylon as the head. History then supplies Persia, Greece, and Rome; the feet remain divided until the Stone.",
       "hash": "de228e124e88bbdb"
-    },
-    {
-      "id": "S02-Q2-DIA0",
-      "sheet": 2,
-      "field": "quizzes",
-      "text": "Correct! The metals descend once, in chronological order, and culminate in Christ's everlasting Stone kingdom — never in a cyclical reset.",
-      "hash": "6dad48a3c4b6602f"
     },
     {
       "id": "S02-Q2-DIA1",
@@ -4248,13 +4157,6 @@
       "hash": "85cd9087dda81886"
     },
     {
-      "id": "S02-Q3-DIA2",
-      "sheet": 2,
-      "field": "quizzes",
-      "text": "Correct! 'They shall not cleave' locks the fragmentation of post-Roman Europe: Charlemagne, Charles V, Napoleon, and modern treaties fail to reconstitute Rome's unity.",
-      "hash": "50d36afc710c4772"
-    },
-    {
       "id": "S02-Q3-DIA3",
       "sheet": 2,
       "field": "quizzes",
@@ -4323,13 +4225,6 @@
       "field": "quizzes",
       "text": "Misconception: Daniel 2:44 defines the stone as a literal divine kingdom set up by God that breaks and consumes all earthly powers.",
       "hash": "5700023cadd8fe9b"
-    },
-    {
-      "id": "S02-Q4-DIA3",
-      "sheet": 2,
-      "field": "quizzes",
-      "text": "Correct! 'Without hands' designates divine, non-human origin. The strike is catastrophic and supernatural, establishing Christ's eternal reign.",
-      "hash": "611281d6e4343d84"
     },
     {
       "id": "S02-SG-TR0-DO",
@@ -4937,8 +4832,8 @@
       "id": "S03-NEXT",
       "sheet": 3,
       "field": "content",
-      "text": "Next lesson Sheet 4 — Daniel 4: Seven Times of Madness The king who tried to make gold eternal will next be humbled until he learns that the Most High rules over every kingdom on earth.",
-      "hash": "3635cbc757f685e4"
+      "text": "Next lesson Sheet 4 — Daniel 4: Seven Times of Humiliation The king who tried to make gold eternal will next be humbled until he learns that the Most High rules over every kingdom on earth.",
+      "hash": "145d5be72cf438dc"
     },
     {
       "id": "S03-H-01",
@@ -5105,8 +5000,8 @@
       "id": "S03-P-12",
       "sheet": 3,
       "field": "content",
-      "text": "Civil service was total; worship belonged exclusively to Yahweh. The second commandment forbids the bow itself — outward act, not merely private intent.",
-      "hash": "c69df8fa4a147798"
+      "text": "Civil service was total; worship belonged exclusively to Yahweh. The second commandment forbids the bow itself, the outward act as well as the intent behind it.",
+      "hash": "386730c044e03eb6"
     },
     {
       "id": "S03-H-12",
@@ -5147,15 +5042,15 @@
       "id": "S03-H-15",
       "sheet": 3,
       "field": "content",
-      "text": "The sexagesimal echo",
-      "hash": "4ecc2be7ffef39ad"
+      "text": "The Typological Parallel & The Number of Man",
+      "hash": "1291f202172278ad"
     },
     {
       "id": "S03-P-14",
       "sheet": 3,
       "field": "content",
-      "text": "The image on the Plain of Dura measured sixty cubits in height and six cubits in breadth (Daniel 3:1). Ancient Babylon used a base-60 (sexagesimal) mathematical system. In Revelation 13:18, the number characterizing the counterfeit end-time power is explicitly designated as \"six hundred threescore and six\" (666) — a striking biblical echo of Babylonian units of pride and idolatry. The echo is suggestive; Revelation itself says the number is a man's number.",
-      "hash": "bf509fa6c634fe9f"
+      "text": "The image on the Plain of Dura measured sixty cubits in height and six cubits in breadth (Daniel 3:1). While patristic writers like Irenaeus drew an allegorical comparison with Revelation 13:18, official BRI exegesis clarifies that Revelation 13:18 explicitly designates 666 as \"the number of a man\"—symbolizing fallen humanity and the counterfeit trinity perpetually falling short of divine perfection (777), rather than an inspired mathematical echo of Babylonian units. The true biblical link between Daniel 3 and Revelation 13 is typological: state-enforced universal worship, an imperial image, a death decree, and a faithful remnant upholding God's commandments (Revelation 14:12).",
+      "hash": "80afaa9b58668546"
     },
     {
       "id": "S03-LI-01",
@@ -5487,13 +5382,6 @@
       "hash": "9a23bae5599e3b6b"
     },
     {
-      "id": "S03-Q0-DIA0",
-      "sheet": 3,
-      "field": "quizzes",
-      "text": "Correct! The second commandment (Exodus 20:4–5) forbids bowing before images; outward physical compliance cannot be justified by appealing to inward mental reservations.",
-      "hash": "2c8e1a5ca2c98528"
-    },
-    {
       "id": "S03-Q0-DIA1",
       "sheet": 3,
       "field": "quizzes",
@@ -5571,13 +5459,6 @@
       "hash": "1131b28ef336648d"
     },
     {
-      "id": "S03-Q1-DIA2",
-      "sheet": 3,
-      "field": "quizzes",
-      "text": "Correct! In Daniel 2, Babylon was only the head of gold. Casting the whole colossus in gold defiantly proclaimed that Babylon would never yield to silver, brass, or iron.",
-      "hash": "c99fbf28cc86e8be"
-    },
-    {
       "id": "S03-Q1-DIA3",
       "sheet": 3,
       "field": "quizzes",
@@ -5632,13 +5513,6 @@
       "field": "quizzes",
       "text": "Misconception: The furnace burned inside a brick kiln while the statue stood outside; the astonished king personally witnessed four distinct men walking freely.",
       "hash": "66fbfc9a62e41518"
-    },
-    {
-      "id": "S03-Q2-DIA1",
-      "sheet": 3,
-      "field": "quizzes",
-      "text": "Correct! The fiery furnace becomes a sanctuary of divine presence; Christ stands with His faithful witnesses in the hour of trial and persecution.",
-      "hash": "c2d66b480947edc7"
     },
     {
       "id": "S03-Q2-DIA2",
@@ -5718,13 +5592,6 @@
       "hash": "6decd70a7e074c7d"
     },
     {
-      "id": "S03-Q3-DIA3",
-      "sheet": 3,
-      "field": "quizzes",
-      "text": "Correct! Civic peace and refused idolatry stand together: legitimate civil authority is respected, but state-enforced religious worship is steadfastly refused.",
-      "hash": "640a3f51e2add552"
-    },
-    {
       "id": "S03-Q4-STEM",
       "sheet": 3,
       "field": "quizzes",
@@ -5779,13 +5646,6 @@
       "field": "quizzes",
       "text": "Misconception: The furnace is a type, not a substitute, for the cross; Christ's sacrifice on Calvary remains the singular atonement for human redemption.",
       "hash": "b426e3b0ac61aa77"
-    },
-    {
-      "id": "S03-Q4-DIA2",
-      "sheet": 3,
-      "field": "quizzes",
-      "text": "Correct! Typology runs through the furnace to the divine Substitute: Christ walks with us in trial because He took upon Himself the judgment due for sin.",
-      "hash": "6496798bfc996d36"
     },
     {
       "id": "S03-Q4-DIA3",
@@ -5882,8 +5742,8 @@
       "id": "S03-SG-HELP-CLM",
       "sheet": 3,
       "field": "studyGuide",
-      "text": "This sheet trains non-transactional faith — God can deliver, but God must deliver or I will not obey is not faith.",
-      "hash": "62c3252c9f915059"
+      "text": "This sheet trains faith that does not bargain. The sentence \"God must deliver me, or I will not obey\" is not faith.",
+      "hash": "cd8c333150010554"
     },
     {
       "id": "S03-SG-HELP-WHY",
@@ -6232,8 +6092,8 @@
       "id": "S04-TOC",
       "sheet": 4,
       "field": "content",
-      "text": "Follow this sitting Roadmap · one-page infographic Introduction · An emperor's open confession I · The cosmic tree and the thesis of thrones II · The anatomy of hubris III · Recovery of sanity IV · Christ, the true and humble King",
-      "hash": "ea6183aca9685a95"
+      "text": "Follow this sitting Roadmap · one-page infographic Introduction · An emperor's open confession I · The cosmic tree and the thesis of thrones II · The anatomy of hubris III · Understanding restored IV · Christ, the true and humble King",
+      "hash": "bd1fd2692d390b68"
     },
     {
       "id": "S04-NEXT",
@@ -6253,8 +6113,8 @@
       "id": "S04-P-01",
       "sheet": 4,
       "field": "content",
-      "text": "Daniel 4 is a pagan emperor's own decree: when humanity exalts itself above God, it descends into beastly madness — and true sanity begins when a creature lifts its eyes to the King of heaven .",
-      "hash": "5e6b79302f57126d"
+      "text": "Daniel 4 is a pagan emperor's own decree. It records the king's boast, the sentence pronounced from heaven, and his later acknowledgment that the Most High rules over earthly kingdoms (Daniel 4:30–37).",
+      "hash": "63e0b6d378acb4b3"
     },
     {
       "id": "S04-P-02",
@@ -6288,15 +6148,15 @@
       "id": "S04-P-03",
       "sheet": 4,
       "field": "content",
-      "text": "Daniel 4 is unique in the biblical canon: it is an official state document authored not by a Hebrew prophet, but by a pagan emperor writing in his own voice. Nebuchadnezzar addresses \"all people, nations, and languages, that dwell in all the earth\" (Daniel 4:1).",
-      "hash": "27c54f3a731f47ab"
+      "text": "Daniel 4 is extraordinary in the biblical canon: it preserves an official state document authored in the first person by a Gentile monarch. Nebuchadnezzar addresses \"all people, nations, and languages, that dwell in all the earth\" (Daniel 4:1; compare Darius's decree in Daniel 6:25–27).",
+      "hash": "100faccc0b023976"
     },
     {
       "id": "S04-P-04",
       "sheet": 4,
       "field": "content",
-      "text": "This is not a victory stele boasting of conquered lands or slaughtered enemies; it is an imperial encyclical publishing the king's descent into madness and his subsequent restoration. Having witnessed God's supremacy in the dream of the colossus (Daniel 2) and in the deliverance of the three Hebrews from the furnace (Daniel 3), Nebuchadnezzar now writes to testify that human sovereignty is strictly an illusion:",
-      "hash": "5fa9bb0df7252dac"
+      "text": "This is not a victory stele boasting of conquered lands or slaughtered enemies; it is an imperial encyclical publishing the king's humiliation and subsequent restoration. Having witnessed God's supremacy in the dream of the colossus (Daniel 2) and in the deliverance of the three Hebrews from the furnace (Daniel 3), Nebuchadnezzar now writes to testify that human sovereignty is strictly an illusion:",
+      "hash": "9d03632fcc3f023b"
     },
     {
       "id": "S04-BQ-01",
@@ -6344,8 +6204,8 @@
       "id": "S04-P-06",
       "sheet": 4,
       "field": "content",
-      "text": "Suddenly, a Watcher, and an holy one — a commissioned heavenly messenger — descends and commands:",
-      "hash": "e34d474642c18a6b"
+      "text": "Suddenly a watcher, a holy one — a commissioned heavenly messenger — descends and commands:",
+      "hash": "2805a83680baf616"
     },
     {
       "id": "S04-BQ-02",
@@ -6435,8 +6295,8 @@
       "id": "S04-H-11",
       "sheet": 4,
       "field": "content",
-      "text": "The Anatomy of Hubris and the Beastly Mind",
-      "hash": "3498d8ac575d902a"
+      "text": "The King's Boast and Humiliation",
+      "hash": "d263d032a9fd741a"
     },
     {
       "id": "S04-H-12",
@@ -6477,22 +6337,22 @@
       "id": "S04-P-13",
       "sheet": 4,
       "field": "content",
-      "text": "The moment the words left his mouth, a voice from heaven pronounced immediate sentence (Daniel 4:31). The king was instantly struck with boanthropy — a rare clinical disorder where a human believes himself to be a bovine animal and adopts its behavior. For \"seven times\" (seven literal years), the emperor was driven from human companionship, ate dew-soaked grass like an ox, his hair grew coarse like eagle feathers, and his nails curved like the talons of a bird (Daniel 4:33).",
-      "hash": "620875ea253f1124"
+      "text": "As the words left the king's mouth, a voice from heaven pronounced sentence (Daniel 4:31). Daniel records that the king was driven from human company and ate grass like an ox while seven times passed over him. His hair grew like eagles' feathers and his nails like birds' claws (Daniel 4:32–33). The account then says that his understanding returned when he lifted his eyes to heaven (Daniel 4:34).",
+      "hash": "db6789179360762a"
     },
     {
       "id": "S04-DIA-04",
       "sheet": 4,
       "field": "content",
-      "text": "THE SPIRITUAL LESSON OF BOANTHROPY Self-Exaltation Above God (Hubris) │ ▼ Descent Below Human Dignity (Beast-Heart)",
-      "hash": "f49b0bee6f34283f"
+      "text": "DANIEL'S ACCOUNT (DANIEL 4:30–34) The king's boast → sentence from heaven → seven times pass → he lifts his eyes → his understanding returns",
+      "hash": "99d028e811f54181"
     },
     {
       "id": "S04-P-14",
       "sheet": 4,
       "field": "content",
-      "text": "Scripture reveals an unchanging psychological and spiritual truth: when man refuses to look up to God as Creator, he inevitably descends into the irrational, bestial realm. The ruler who exalted himself as a god was reduced to an animal grazing in the mud.",
-      "hash": "438fb09ef71d1bf0"
+      "text": "The chapter connects the king's boast with the sentence he receives, then records his understanding returning after he lifts his eyes to heaven (Daniel 4:30–34). It presents this sequence as a lesson in the Most High's rule, not as a diagnosis of a medical condition.",
+      "hash": "4281a88db837ff6a"
     },
     {
       "id": "S04-H-13",
@@ -6533,8 +6393,8 @@
       "id": "S04-H-15",
       "sheet": 4,
       "field": "content",
-      "text": "The Recovery of Sanity and Divine Restoration",
-      "hash": "b8241262bccb6f83"
+      "text": "Understanding Restored",
+      "hash": "76342b9f700aa9e9"
     },
     {
       "id": "S04-H-16",
@@ -6561,15 +6421,15 @@
       "id": "S04-DIA-05",
       "sheet": 4,
       "field": "content",
-      "text": "THE PATHWAY TO SANITY Looking Inward/Down (Self-Glory) ──▶ Madness and Beastliness Looking Upward (Worship of God) ──▶ Sanity, Dignity, and Restoration",
-      "hash": "f954a4fe2a666bda"
+      "text": "DANIEL 4:34–37 Nebuchadnezzar lifts his eyes to heaven → his understanding returns He blesses the Most High → he acknowledges God's everlasting dominion",
+      "hash": "73e802700f9a1338"
     },
     {
       "id": "S04-P-17",
       "sheet": 4,
       "field": "content",
-      "text": "True sanity is fundamentally theological. A mind that denies God is fundamentally disordered; true human reason begins when a creature acknowledges its Creator.",
-      "hash": "c94cec078b769e55"
+      "text": "Daniel says Nebuchadnezzar's understanding returned when he lifted his eyes to heaven, after which he blessed and honored the Most High (Daniel 4:34–37).",
+      "hash": "dceb42b68a0827cf"
     },
     {
       "id": "S04-P-18",
@@ -6596,8 +6456,8 @@
       "id": "S04-P-19",
       "sheet": 4,
       "field": "content",
-      "text": "Understanding returned when the king lifted his eyes. True sanity begins at the throne of God — the same God whom Christ reveals and perfectly obeys.",
-      "hash": "0d8c22fd044ba26c"
+      "text": "Daniel records that the king's understanding returned when he lifted his eyes to heaven and praised the Most High (Daniel 4:34–37). Philippians 2:6–8 presents Christ's humility as the contrast to the king's boast.",
+      "hash": "03007689359dbf7b"
     },
     {
       "id": "S04-H-18",
@@ -6624,8 +6484,8 @@
       "id": "S04-P-20",
       "sheet": 4,
       "field": "content",
-      "text": "Nebuchadnezzar's humiliating descent exposes the self-destructive madness of human pride. It stands as a profound typological contrast to the redemptive humility of Jesus Christ.",
-      "hash": "fb108dcfd4371cf9"
+      "text": "Nebuchadnezzar's humiliation contrasts with the humility of Jesus Christ. Daniel records the king's boast and judgment; Philippians 2:6–8 describes Christ choosing the form of a servant.",
+      "hash": "bfc9cf11b3f57e9e"
     },
     {
       "id": "S04-DIA-06",
@@ -6659,8 +6519,8 @@
       "id": "S04-P-22",
       "sheet": 4,
       "field": "content",
-      "text": "Sin strips humanity of its true dignity, reducing men and women to beast-like appetites and brutal competition. Jesus entered our broken world to reverse that descent. By His sinless life, His substitutionary death on the cross, and His bodily resurrection, Christ redeems us from the bestial madness of pride and restores the true imago Dei — the image of God — within the human soul (Colossians 3:10; 2 Corinthians 3:18).",
-      "hash": "214e2d755c048dcc"
+      "text": "Daniel's account describes Nebuchadnezzar living like an animal during his humiliation (Daniel 4:32–33). In contrast, Philippians 2:6–8 describes Jesus humbling Himself and taking the form of a servant. Through His life, death, and resurrection, Christ restores those who trust in Him (Colossians 3:10; 2 Corinthians 3:18).",
+      "hash": "17fef5acf065b7ea"
     },
     {
       "id": "S04-H-23",
@@ -6708,8 +6568,8 @@
       "id": "S04-LI-08",
       "sheet": 4,
       "field": "content",
-      "text": "INTERPRETATION — Does pride (\"I have built\") trigger descent; does lifting eyes restore sanity?",
-      "hash": "a4ee78f8c4dcd875"
+      "text": "INTERPRETATION — How does the chapter connect the king's boast, the sentence, and the return of his understanding (Daniel 4:30–37)?",
+      "hash": "d3e53415fa520db7"
     },
     {
       "id": "S04-LI-09",
@@ -6757,71 +6617,64 @@
       "id": "S04-Q0-STEM",
       "sheet": 4,
       "field": "quizzes",
-      "text": "A political theorist reviewing Nebuchadnezzar's boanthropy (Dan 4:30–33) claims that his mental breakdown was merely an acute organic psychosis with no relation to his boast on the palace roof. What is the biblical and theological reality?",
-      "hash": "7d49a7d8d7ac280a"
+      "text": "According to Daniel 4:30–37, how are the king's boast, his humiliation, and his restoration connected?",
+      "hash": "8b5e479fe8f195bc"
     },
     {
       "id": "S04-Q0-OPT0",
       "sheet": 4,
       "field": "quizzes",
-      "text": "The theorist is correct because the narrative in Daniel 4 is an allegorical didactic fable devoid of any historical reality in ancient Babylonian records.",
-      "hash": "c964b23804a429ac"
+      "text": "Daniel records that the king boasts, receives a sentence from heaven, lives like an animal for seven times, and later praises the Most High when his understanding returns.",
+      "hash": "43c35b3e353b0351"
     },
     {
       "id": "S04-Q0-OPT1",
       "sheet": 4,
       "field": "quizzes",
-      "text": "The text reveals that human sanity is tethered to acknowledging Heaven's sovereignty; when a ruler usurps God's glory, he is degraded to a beastly level until he honors God.",
-      "hash": "3ba7e4680af76f72"
+      "text": "The chapter says the king's boast is ignored and his rule continues without interruption.",
+      "hash": "2d1ad505204e4bbd"
     },
     {
       "id": "S04-Q0-OPT2",
       "sheet": 4,
       "field": "quizzes",
-      "text": "Higher critics argue the narrative is a legendary Jewish polemic adapted from the Babylonian Prayer of Nabonidus, lacking historical reality.",
-      "hash": "b9864c9dc5f66ffa"
+      "text": "The dream's tree represents Babylon alone, and the king is never restored to his throne.",
+      "hash": "f0cadebcb12db831"
     },
     {
       "id": "S04-Q0-OPT3",
       "sheet": 4,
       "field": "quizzes",
-      "text": "Naturalistic critics assert the condition was clinical zoanthropy caused by acute administrative stress, carrying no divine moral accountability.",
-      "hash": "24424fc4c694b0fe"
+      "text": "The seven times are presented as a 2,520-year period affecting later empires, rather than as part of the king's own story.",
+      "hash": "4abe42d88a00393e"
     },
     {
       "id": "S04-Q0-EXP",
       "sheet": 4,
       "field": "quizzes",
-      "text": "Daniel 4:17, 25, 32 establish the thesis: the Most High rules in the kingdom of men. Refusing divine accountability strips man of his rational, spiritual dignity, reducing him to animalistic predation.",
-      "hash": "613c3fcd3c4d35c8"
+      "text": "Daniel 4:30–37 gives the sequence: the king boasts, a sentence is pronounced, his understanding later returns, and he praises the Most High and acknowledges His everlasting dominion.",
+      "hash": "cbf3e648ce8a6355"
     },
     {
       "id": "S04-Q0-DIA0",
       "sheet": 4,
       "field": "quizzes",
-      "text": "Misconception: Cuneiform fragments (e.g. BM 34113) reflect erratic royal conduct; Scripture presents the event as historical divine discipline.",
-      "hash": "ffa2df173c214741"
-    },
-    {
-      "id": "S04-Q0-DIA1",
-      "sheet": 4,
-      "field": "quizzes",
-      "text": "Correct! Daniel 4 demonstrates that true human rationality is rooted in acknowledging Heaven's rule; self-deifying pride degrades man to predatory bestiality.",
-      "hash": "c9714b4d09115802"
+      "text": "Misconception: Daniel 4 presents the king's account as a fable; the chapter presents it as his own public testimony.",
+      "hash": "1562f9d9efeeacf7"
     },
     {
       "id": "S04-Q0-DIA2",
       "sheet": 4,
       "field": "quizzes",
-      "text": "Misconception: While Dead Sea Scroll fragments preserve Nabonidus traditions, Daniel 4 records an authentic, independent royal decree of Nebuchadnezzar.",
-      "hash": "fa77402cb12f666b"
+      "text": "Misconception: The chapter says the king's boast has no consequence; Daniel 4:31–33 records the sentence and humiliation.",
+      "hash": "12421350bcb60310"
     },
     {
       "id": "S04-Q0-DIA3",
       "sheet": 4,
       "field": "quizzes",
-      "text": "Misconception: While clinical symptoms manifested, Scripture reveals the condition was direct judicial discipline from Heaven for unrepentant royal hubris.",
-      "hash": "5a4f185e67c87dd7"
+      "text": "Misconception: Daniel 4:34–37 says the king's understanding returned and records his praise of the Most High.",
+      "hash": "4b24179863a5b66f"
     },
     {
       "id": "S04-Q1-STEM",
@@ -6864,13 +6717,6 @@
       "field": "quizzes",
       "text": "Prophecy is pedagogical and moral, not mechanistic fatalism. Daniel 4:27 offered conditional mercy: twelve months passed between the warning and the consequence, showing divine longsuffering.",
       "hash": "bbd000110121aeb1"
-    },
-    {
-      "id": "S04-Q1-DIA0",
-      "sheet": 4,
-      "field": "quizzes",
-      "text": "Correct! Daniel 4:27 exemplifies true prophetic ministry: calling the monarch to active repentance, justice, and mercy, granting a 12-month reprieve.",
-      "hash": "f75480f0b4b295ec"
     },
     {
       "id": "S04-Q1-DIA1",
@@ -6932,15 +6778,15 @@
       "id": "S04-Q2-EXP",
       "sheet": 4,
       "field": "quizzes",
-      "text": "Daniel 4:26: thy kingdom shall be sure unto thee, after that thou shalt have known that the heavens do rule.",
-      "hash": "b03fbb60b6803452"
+      "text": "Daniel 4:26 says, \"Thy kingdom shall be sure unto thee, after that thou shalt have known that the heavens do rule.\"",
+      "hash": "1df5235ec7a8cd66"
     },
     {
       "id": "S04-Q2-DIA0",
       "sheet": 4,
       "field": "quizzes",
-      "text": "Misconception: Babylon remained the head of gold; the king was personally humbled for a appointed season, not immediately eradicated from the prophetic map.",
-      "hash": "c04421a085bfabd2"
+      "text": "Misconception: Babylon remained the head of gold; the king was personally humbled for an appointed season, and he was not immediately removed from the prophetic map.",
+      "hash": "8dbbdbd6c5f58cd5"
     },
     {
       "id": "S04-Q2-DIA1",
@@ -6955,13 +6801,6 @@
       "field": "quizzes",
       "text": "Misconception: Daniel 2 and Daniel 4 harmonize: the Most High rules in the kingdom of men, and the prophetic timeline proceeds without interruption.",
       "hash": "f43415e497ccfb57"
-    },
-    {
-      "id": "S04-Q2-DIA3",
-      "sheet": 4,
-      "field": "quizzes",
-      "text": "Correct! Daniel 4:26 promises 'thy kingdom shall be sure unto thee, after that thou shalt have known that the heavens do rule.' Mercy preserves the stump.",
-      "hash": "bf7f1625c45f8e51"
     },
     {
       "id": "S04-Q3-STEM",
@@ -6988,8 +6827,8 @@
       "id": "S04-Q3-OPT2",
       "sheet": 4,
       "field": "quizzes",
-      "text": "Until he knows that the Most High rules in the kingdom of men and gives it to whomsoever He will—sanity returns when the king lifts his eyes to heaven.",
-      "hash": "8c5aa775677b628a"
+      "text": "Until he knows that the Most High rules in the kingdom of men and gives it to whomsoever He will; the account says his understanding returned when he lifted his eyes to heaven.",
+      "hash": "55f74ffdfe3b92c6"
     },
     {
       "id": "S04-Q3-OPT3",
@@ -7018,13 +6857,6 @@
       "field": "quizzes",
       "text": "Misconception: Scripture and ancient exilic traditions record the king's actual season of illness and his subsequent public confession of the King of heaven.",
       "hash": "ea0c37dd15528ed1"
-    },
-    {
-      "id": "S04-Q3-DIA2",
-      "sheet": 4,
-      "field": "quizzes",
-      "text": "Correct! The numbered season serves the confession: Heaven rules. When the humbled monarch lifts his eyes to heaven, rational understanding is restored.",
-      "hash": "2aa032ebf5b3b0fb"
     },
     {
       "id": "S04-Q3-DIA3",
@@ -7076,13 +6908,6 @@
       "hash": "126da3fd966f30ca"
     },
     {
-      "id": "S04-Q4-DIA0",
-      "sheet": 4,
-      "field": "quizzes",
-      "text": "Correct! The true King descends in humble service; the proud monarch is degraded until he looks upward to acknowledge Heaven's supreme rule.",
-      "hash": "3e2a625f004f7909"
-    },
-    {
       "id": "S04-Q4-DIA1",
       "sheet": 4,
       "field": "quizzes",
@@ -7093,8 +6918,8 @@
       "id": "S04-Q4-DIA2",
       "sheet": 4,
       "field": "quizzes",
-      "text": "Misconception: Proverbs 16:18 and Daniel 4 show pride leads to bestial degradation; true sanity begins with the humble fear of the Lord.",
-      "hash": "aa6fcf8dcf4271ba"
+      "text": "Misconception: Proverbs 16:18 and Daniel 4 connect pride with humiliation before God; Daniel 4:34–37 records the king's acknowledgment of Heaven's rule.",
+      "hash": "b3c8cade4256490a"
     },
     {
       "id": "S04-Q4-DIA3",
@@ -7198,8 +7023,8 @@
       "id": "S04-SG-HELP-WHY",
       "sheet": 4,
       "field": "studyGuide",
-      "text": "Boanthropy is what happens when thrones are treated as personal achievements. Practice looking up before judgment has to teach it the hard way. Sit with the verse until the claim is yours, not a slogan: write the text, name the empire or office in view, and refuse any reading that drops Christ from the center of Daniel's chain.",
-      "hash": "d22cf5355a8ddf39"
+      "text": "Daniel records the king's boast, humiliation, and later acknowledgment that the Most High rules (Daniel 4:30–37). Trace those verses before drawing conclusions about the king's condition. Sit with the verse until the claim is yours, not a slogan: write the text, name the empire or office in view, and refuse any reading that drops Christ from the center of Daniel's chain.",
+      "hash": "345a2402e6672262"
     },
     {
       "id": "S04-SG-VALUE-CLM",
@@ -7338,8 +7163,8 @@
       "id": "S04-VRF-2-CHECK",
       "sheet": 4,
       "field": "verify",
-      "text": "The chapter ends with the king restored and publishing a decree. A day-for-year reading that turns his madness into 2,520 years of world history has to ignore that ending.",
-      "hash": "a6f1d16bf80aba15"
+      "text": "The chapter ends with the king's understanding restored and his decree of praise. A day-for-year reading that turns the king's seven times into a 2,520-year chronology has to account for that ending.",
+      "hash": "f268ddb0e36e1d23"
     },
     {
       "id": "S04-VRF-3-LESSON",
@@ -7366,8 +7191,8 @@
       "id": "S04-VRF-4-LESSON",
       "sheet": 4,
       "field": "verify",
-      "text": "He looks up. Understanding returns. The lesson is theological, not only medical.",
-      "hash": "e8bad6e63afab35f"
+      "text": "He looks up. Understanding returns. Daniel gives the account's explanation.",
+      "hash": "a4c154d35fa95969"
     },
     {
       "id": "S04-VRF-4-QUOTE",
@@ -7380,8 +7205,8 @@
       "id": "S04-VRF-4-CHECK",
       "sheet": 4,
       "field": "verify",
-      "text": "Boanthropy is a modern label for the symptoms. The chapter’s point is the lifted eyes. Do not use the label to erase the boast.",
-      "hash": "5accbb43c9cd5bbb"
+      "text": "Daniel 4:34–37 records the king's restored understanding, his praise of the Most High, and his acknowledgment of God's dominion.",
+      "hash": "c2fecce108f13936"
     },
     {
       "id": "S04-VRF-5-LESSON",
@@ -7468,20 +7293,6 @@
       "hash": "c6d68d6d769a9001"
     },
     {
-      "id": "S04-GLS-boanthropy-SMP",
-      "sheet": 4,
-      "field": "glossary",
-      "text": "boanthropy: A rare condition in which a person believes he is an ox and lives like a beast.",
-      "hash": "a3cef77a93028d2d"
-    },
-    {
-      "id": "S04-GLS-boanthropy-HIS",
-      "sheet": 4,
-      "field": "glossary",
-      "text": "A modern medical label for what Daniel 4 describes. The chapter’s point is theological: a king who says “I have built” is reduced beneath human dignity until he lifts his eyes. Do not use the label to erase the boast.",
-      "hash": "cd0364fa9c24d6e9"
-    },
-    {
       "id": "S04-GLS-colossus-SMP",
       "sheet": 4,
       "field": "glossary",
@@ -7548,8 +7359,8 @@
       "id": "S04-GLS-year-day-HIS",
       "sheet": 4,
       "field": "glossary",
-      "text": "God states the scale twice: Numbers 14:34 (forty spy-days become forty wilderness years) and Ezekiel 4:6 (Ezekiel’s body-days appointed “each day for a year”). Daniel’s own 70 weeks cannot be 490 ordinary days and still hold a rebuilt city and the cross — that is the book checking the ruler. 2 Peter 3:8 is about God’s patience, not this scale.",
-      "hash": "4790bf971a58a21d"
+      "text": "God states the scale twice: Numbers 14:34 (forty spy-days become forty wilderness years) and Ezekiel 4:6 (Ezekiel’s body-days appointed “each day for a year”). Daniel’s own 70 weeks cannot be 490 ordinary days and still hold a rebuilt city and the cross. That is the book checking its own measuring rod. 2 Peter 3:8 is about God’s patience, not this scale.",
+      "hash": "53d2cd60f61ea5b4"
     },
     {
       "id": "S05-TOC",
@@ -7583,8 +7394,8 @@
       "id": "S05-P-02",
       "sheet": 5,
       "field": "content",
-      "text": "In chapter 4, Nebuchadnezzar learned that Heaven rules: seven years of madness stripped his pride until he lifted his eyes and blessed the Most High. That imperial confession was published to every nation. One generation later, Belshazzar sits in the same palace and acts as if the Most High does not exist.",
-      "hash": "8b417d20e3b1e4c0"
+      "text": "In chapter 4, Nebuchadnezzar learned that Heaven rules. After the seven times of his humiliation, he lifted his eyes and blessed the Most High (Daniel 4:32–37). That imperial confession was published to every nation. One generation later, Belshazzar sits in the same palace and acts as if the Most High does not exist.",
+      "hash": "3b611769bfdfe4ad"
     },
     {
       "id": "S05-H-02",
@@ -7681,8 +7492,8 @@
       "id": "S05-P-08",
       "sheet": 5,
       "field": "content",
-      "text": "Confirms that Nabonidus established his residence in Tema in Arabia for ten years, entrusting the kingship and imperial defense of Babylon to his eldest son, Belshazzar.",
-      "hash": "c6ae555fee2506f4"
+      "text": "The Verse Account confirms that Nabonidus established his residence in Tema in Arabia for ten years, entrusting the kingship and imperial defense of Babylon to his eldest son, Belshazzar.",
+      "hash": "23436b60d6dbeeb8"
     },
     {
       "id": "S05-H-09",
@@ -7912,8 +7723,8 @@
       "id": "S05-P-20",
       "sheet": 5,
       "field": "content",
-      "text": "Belshazzar was slain in the banquet hall, and Babylon passed to Darius the Mede (Daniel 5:30–31). The Nabonidus Chronicle (BM 35382) confirms this historical reality: Ugbaru and the troops of Cyrus entered Babylon \"without battle.\"",
-      "hash": "e6859165922f4478"
+      "text": "That very night Belshazzar was slain, and Babylon passed to Darius the Mede (Daniel 5:30–31). The Nabonidus Chronicle (BM 35382) confirms this sudden fall: Ugbaru and the troops of Cyrus entered Babylon \"without battle.\"",
+      "hash": "4bb9162d867d7952"
     },
     {
       "id": "S05-DIA-04",
@@ -8238,13 +8049,6 @@
       "hash": "9cfdb04ea5e7feb3"
     },
     {
-      "id": "S05-Q0-DIA2",
-      "sheet": 5,
-      "field": "quizzes",
-      "text": "Correct! Belshazzar's sin was conscious sacrilege: knowing Nebuchadnezzar's humbling, he deliberately used Yahweh's holy vessels to toast lifeless idols.",
-      "hash": "11acc6930fd29b7c"
-    },
-    {
       "id": "S05-Q0-DIA3",
       "sheet": 5,
       "field": "quizzes",
@@ -8315,13 +8119,6 @@
       "hash": "0df08faa4ffd9c8b"
     },
     {
-      "id": "S05-Q1-DIA3",
-      "sheet": 5,
-      "field": "quizzes",
-      "text": "Correct! Isaiah 45:1 named Cyrus and foretold the open two-leaved river gates; the writing on the plaster announced the exact night the empire was divided.",
-      "hash": "f83f8d38c0573db7"
-    },
-    {
       "id": "S05-Q2-STEM",
       "sheet": 5,
       "field": "quizzes",
@@ -8369,13 +8166,6 @@
       "field": "quizzes",
       "text": "Misconception: The vessels were sacred instruments of sanctuary worship; TEKEL constituted a forensic moral judgment against the king himself.",
       "hash": "7c8e24e4d2a7cde2"
-    },
-    {
-      "id": "S05-Q2-DIA1",
-      "sheet": 5,
-      "field": "quizzes",
-      "text": "Correct! The writing on the plaster is a divine courtroom verdict: God weighs kings and empires not by wealth, but by the righteous scale of Heaven.",
-      "hash": "06e26ca57fa6d9a3"
     },
     {
       "id": "S05-Q2-DIA2",
@@ -8432,13 +8222,6 @@
       "field": "quizzes",
       "text": "Light rejected becomes verdict. Belshazzar sinned against a known history of Heaven's rule.",
       "hash": "87a24d3678109ce3"
-    },
-    {
-      "id": "S05-Q3-DIA0",
-      "sheet": 5,
-      "field": "quizzes",
-      "text": "Correct! Knowing how Heaven humbled Nebuchadnezzar, Belshazzar chose deliberate sacrilege; light rejected brings swift judicial reckoning.",
-      "hash": "beb5d8761f7d30e5"
     },
     {
       "id": "S05-Q3-DIA1",
@@ -8509,13 +8292,6 @@
       "field": "quizzes",
       "text": "Misconception: TEKEL exposes the total insufficiency of human works; human righteousness cannot balance God's holy law without the imputed righteousness of Christ.",
       "hash": "9b62eb993fc149fc"
-    },
-    {
-      "id": "S05-Q4-DIA1",
-      "sheet": 5,
-      "field": "quizzes",
-      "text": "Correct! Christ is both the sovereign Judge to whom all judgment is committed and the sole Redeemer whose perfect righteousness covers our moral deficit.",
-      "hash": "aa8fee04cd976d58"
     },
     {
       "id": "S05-Q4-DIA2",
@@ -9291,8 +9067,8 @@
       "id": "S06-P-10",
       "sheet": 6,
       "field": "content",
-      "text": "Consider the scope of this audit: for decades, Daniel had managed immense public works, state revenues, trade routes, provincial appointments, and imperial treasuries. Yet under intense partisan scrutiny, his adversaries found zero embezzlement, zero administrative negligence, zero cronyism, and zero incompetence. Daniel lived with such radical integrity that his public service was completely unassailable.",
-      "hash": "7593ca23cb7193bb"
+      "text": "Consider the scope of this audit: for decades, Daniel had managed immense public works, state revenues, trade routes, provincial appointments, and imperial treasuries. Yet under intense partisan scrutiny, his adversaries found no embezzlement, no administrative negligence, no cronyism, and no incompetence. Daniel lived with such radical integrity that his public service was completely unassailable.",
+      "hash": "f42f199186957ef8"
     },
     {
       "id": "S06-P-11",
@@ -9375,8 +9151,8 @@
       "id": "S06-P-14",
       "sheet": 6,
       "field": "content",
-      "text": "Daniel did not suddenly open his windows as a theatrical stunt of political defiance. The text emphasizes that he prayed \"as he did aforetime.\" His posture under the threat of death was identical to his posture on an ordinary Tuesday. He did not improvise faith under persecution; his public stand was merely the continuation of an eighty-year discipline of secret communion with God.",
-      "hash": "fe6d6d88be126ec5"
+      "text": "Daniel did not suddenly open his windows as a theatrical stunt of political defiance. The text emphasizes that he prayed \"as he did aforetime.\" His posture under the threat of death was identical to his posture on an ordinary Tuesday. He did not improvise faith under persecution; his public stand was merely the continuation of a lifelong discipline of communion with God across nearly seven decades in Babylon.",
+      "hash": "6b5745f35ef51ab1"
     },
     {
       "id": "S06-H-17",
@@ -9655,8 +9431,8 @@
       "id": "S06-P-32",
       "sheet": 6,
       "field": "content",
-      "text": "The satraps examined Daniel's career and found zero error, fraud, or negligence. Believers in business, medicine, education, and government should execute their civic duties with such excellence that the world is forced to confess: the only charge they can manufacture against us concerns our loyalty to the Word of God.",
-      "hash": "e3a0327d38215edd"
+      "text": "The satraps examined Daniel's career and found no error, fraud, or negligence. Believers in business, medicine, education, and government should do their civic work with such care that the only charge anyone can bring against them concerns their loyalty to the Word of God.",
+      "hash": "076aa9128b7677cb"
     },
     {
       "id": "S06-H-34",
@@ -9820,13 +9596,6 @@
       "hash": "0aaf59eb5e842b8f"
     },
     {
-      "id": "S06-Q0-DIA3",
-      "sheet": 6,
-      "field": "quizzes",
-      "text": "Correct! Daniel knew the decree was signed and altered nothing. Conceding state jurisdiction over prayer to the Creator would constitute covenant betrayal.",
-      "hash": "7f8180f4deeea603"
-    },
-    {
       "id": "S06-Q1-STEM",
       "sheet": 6,
       "field": "quizzes",
@@ -9883,13 +9652,6 @@
       "hash": "7c9c3a460713d8d3"
     },
     {
-      "id": "S06-Q1-DIA2",
-      "sheet": 6,
-      "field": "quizzes",
-      "text": "Correct! Daniel 6 provides an unmistakable type of Christ's resurrection: an innocent servant sealed under death's stone, emerging triumphant at dawn.",
-      "hash": "944779ae957137c6"
-    },
-    {
       "id": "S06-Q1-DIA3",
       "sheet": 6,
       "field": "quizzes",
@@ -9937,13 +9699,6 @@
       "field": "quizzes",
       "text": "The unalterable law forces the king to the pit, then to a better decree honoring the living God.",
       "hash": "4d95e9b0e84cab95"
-    },
-    {
-      "id": "S06-Q2-DIA0",
-      "sheet": 6,
-      "field": "quizzes",
-      "text": "Correct! The irreversible legal seal sets the stage for the resurrection type: human law decrees death, but Heaven's power triumphs over the sealed pit.",
-      "hash": "3b4ecb762970dfc0"
     },
     {
       "id": "S06-Q2-DIA1",
@@ -10014,13 +9769,6 @@
       "field": "quizzes",
       "text": "Misconception: Daniel's practice was reverent prayer to the God of heaven, not military signaling or clandestine political rebellion.",
       "hash": "ed774b2f048887ce"
-    },
-    {
-      "id": "S06-Q3-DIA1",
-      "sheet": 6,
-      "field": "quizzes",
-      "text": "Correct! Solomon's prayer (1 Kings 8) and Daniel's open windows agree: exiles maintain faith by orienting toward the place of God's covenant presence.",
-      "hash": "309d6360a99f0bba"
     },
     {
       "id": "S06-Q3-DIA2",
@@ -10100,13 +9848,6 @@
       "hash": "21842dde35fe823f"
     },
     {
-      "id": "S06-Q4-DIA3",
-      "sheet": 6,
-      "field": "quizzes",
-      "text": "Correct! The unbreakable kingdom and the living God are proclaimed because the sealed pit could not hold the innocent servant—a vivid type of Christ's triumph.",
-      "hash": "4e8ff6f4e575e67b"
-    },
-    {
       "id": "S06-SG-TR0-DO",
       "sheet": 6,
       "field": "studyGuide",
@@ -10131,8 +9872,8 @@
       "id": "S06-SG-TR1-WHY",
       "sheet": 6,
       "field": "studyGuide",
-      "text": "Daniel's open window was not an emergency stunt or a theatrical protest; it was an eighty-year habit of covenant fidelity rooted in Solomon's dedication prayer. If you skip 'as he did aforetime', Daniel looks like an exhibitionist. If you keep it, you understand that Tuesday's discipline prepared him for Friday's decree.",
-      "hash": "300e1cc2a936a46f"
+      "text": "Daniel's open window was not an emergency stunt or a theatrical protest; it was a lifelong habit of covenant fidelity rooted in Solomon's dedication prayer across nearly seven decades in Babylon. If you skip 'as he did aforetime', Daniel looks like an exhibitionist. If you keep it, you understand that Tuesday's discipline prepared him for Friday's decree.",
+      "hash": "06f11701ae3a03a8"
     },
     {
       "id": "S06-SG-TR2-DO",
@@ -10208,8 +9949,8 @@
       "id": "S06-SG-VALUE-CLM",
       "sheet": 6,
       "field": "studyGuide",
-      "text": "Eighty years of secret prayer is more valuable than an unalterable imperial statute. The stone rolled away from the pit proves that earthly seals cannot defeat God's servants.",
-      "hash": "7505722fbc34656f"
+      "text": "A lifetime of secret prayer is more valuable than an unalterable imperial statute. The stone removed from the pit and Daniel's unhurt deliverance prove that earthly seals cannot defeat God's servants.",
+      "hash": "6614a4845ab1828a"
     },
     {
       "id": "S06-SG-VALUE-WHY",
@@ -10810,8 +10551,8 @@
       "id": "S07-P-07",
       "sheet": 7,
       "field": "content",
-      "text": "The first beast was like a lion with eagle's wings (Daniel 7:4). The lion—the king of beasts—and the eagle—the king of birds—perfectly depict the imperial majesty and lightning speed with which Nebuchadnezzar conquered the ancient Near East (Jeremiah 4:7; 48:40; Habakkuk 1:6–8). Glazed-brick reliefs of winged lions adorned the Ishtar Gate and the Processional Way in ancient Babylon. Daniel watched until the wings were plucked, the beast was lifted from the earth, made to stand on two feet like a man, and a man's heart was given to it. This vivid symbol recalls Nebuchadnezzar's seven-year humiliation in Daniel 4: his feral pride was broken, his beastly nature was subdued, and he stood as a humbled mortal confessing the true King of heaven.",
-      "hash": "8ffb116eaf28138b"
+      "text": "The first beast was like a lion with eagle's wings (Daniel 7:4). The lion—the king of beasts—and the eagle—the king of birds—perfectly depict the imperial majesty and lightning speed with which Nebuchadnezzar conquered the ancient Near East (Jeremiah 4:7; 48:40; Habakkuk 1:6–8). Glazed-brick reliefs of winged lions adorned the Ishtar Gate and the Processional Way in ancient Babylon. Daniel watched until the wings were plucked, the beast was lifted from the earth, made to stand on two feet like a man, and a man's heart was given to it. This vivid symbol recalls Nebuchadnezzar's humiliation in Daniel 4: after living like an animal, he lifted his eyes to heaven, acknowledged the Most High, and was restored (Daniel 4:32–37).",
+      "hash": "6be1c2e8103b8347"
     },
     {
       "id": "S07-H-10",
@@ -10838,8 +10579,8 @@
       "id": "S07-P-09",
       "sheet": 7,
       "field": "content",
-      "text": "The third beast was a leopard possessing four wings of a fowl on its back and four heads (Daniel 7:6). A leopard is naturally swift; a leopard with four wings signifies unmatched, supersonic velocity. Between 334 and 331 B.C., young Alexander the Great conquered the entire Persian Empire with breathtaking speed, marching thousands of miles across Asia Minor, Egypt, Mesopotamia, and India before his death at age 32. Following Alexander's sudden demise in 323 B.C., his empire was not bequeathed to his young heirs, but after decades of civil warfare among the Diadochi , it was partitioned among his four leading generals: Cassander (Greece and Macedonia), Lysimachus (Thrace and Asia Minor), Seleucus (Syria and Mesopotamia), and Ptolemy (Egypt and Palestine). These four divisions correspond precisely to the four heads of the leopard.",
-      "hash": "b5529218c44a9c93"
+      "text": "The third beast was a leopard possessing four wings of a fowl on its back and four heads (Daniel 7:6). A leopard is naturally swift; a leopard with four wings signifies unmatched speed. Between 334 and 331 B.C., young Alexander the Great conquered the entire Persian Empire with breathtaking speed, marching thousands of miles across Asia Minor, Egypt, Mesopotamia, and India before his death at age 32. Following Alexander's sudden demise in 323 B.C., his empire was not bequeathed to his young heirs, but after decades of civil warfare among the Diadochi , it was partitioned among his four leading generals: Cassander (Greece and Macedonia), Lysimachus (Thrace and Asia Minor), Seleucus (Syria and Mesopotamia), and Ptolemy (Egypt and Palestine). These four divisions correspond precisely to the four heads of the leopard.",
+      "hash": "c94e3b5d38124278"
     },
     {
       "id": "S07-H-12",
@@ -10964,8 +10705,8 @@
       "id": "S07-P-12",
       "sheet": 7,
       "field": "content",
-      "text": "Every major Protestant Reformer—including Martin Luther, John Calvin, Thomas Cranmer, John Knox, and later John Wesley and Sir Isaac Newton—unanimously identified this little horn with the historical papacy: the office of the bishop of Rome uniting spiritual supremacy with temporal civil power over the Western Roman world.",
-      "hash": "37681780ef95011b"
+      "text": "The historicist interpretation used in this lesson identifies Daniel 7's little horn with the historical papacy: the office of the bishop of Rome in its church-state role, where religious and civil authority were joined. This is a claim about an institution and its historical exercise of authority, not a judgment about Roman Catholics as individuals. Many Catholics sincerely follow Christ, and disagreement over this interpretation gives no warrant for prejudice or hostility toward them. The quotation below records Martin Luther's polemical view of the papal office as a historical source; it is not a statement about Catholic believers today.",
+      "hash": "f397ac53d551298c"
     },
     {
       "id": "S07-BQ-02",
@@ -11020,15 +10761,15 @@
       "id": "S07-LI-13",
       "sheet": 7,
       "field": "content",
-      "text": "Step 1: Calculate the Prophetic Units: In biblical Aramaic and Hebrew, a \"time\" ( iddan ) represents one prophetic year of 360 days (the ancient biblical calendar; see Genesis 7:11, 24; 8:3–4 where 5 months equal 150 days). • \"A time\" = 1 prophetic year = 360 days • \"Times\" = 2 prophetic years = 720 days • \"The dividing of time\" = 1/2 prophetic year = 180 days • Total: $1 + 2 + 0.5 = 3.5$ prophetic years = 1,260 prophetic days .",
-      "hash": "aae749bf6506c84b"
+      "text": "Step 1: Calculate the Prophetic Units: In biblical Aramaic and Hebrew, a \"time\" ( iddan ) represents one prophetic year of 360 days (the ancient biblical calendar; see Genesis 7:11, 24; 8:3–4 where 5 months equal 150 days). • \"A time\" = 1 prophetic year = 360 days • \"Times\" = 2 prophetic years = 720 days • \"The dividing of time\" = 1/2 prophetic year = 180 days • Total: 1 + 2 + 1/2 = 3 1/2 prophetic years, which is 1,260 prophetic days .",
+      "hash": "af86d13c2e33328c"
     },
     {
       "id": "S07-LI-14",
       "sheet": 7,
       "field": "content",
-      "text": "Step 2: Confirming Parallels in Revelation: Revelation uses three interchangeable phrases to describe this identical span of persecution: • \"A thousand two hundred and threescore days\" (Revelation 12:6). • \"A time, and times, and half a time\" (Revelation 12:14). • \"Forty and two months\" ($42 \\times 30 = 1,260$ days; Revelation 11:2; 13:5).",
-      "hash": "e7c7898f350dc871"
+      "text": "Step 2: Confirming Parallels in Revelation: Revelation uses three interchangeable phrases to describe this identical span of persecution: • \"A thousand two hundred and threescore days\" (Revelation 12:6). • \"A time, and times, and half a time\" (Revelation 12:14). • \"Forty and two months\" (42 × 30 = 1,260 days; Revelation 11:2; 13:5).",
+      "hash": "acb84abd9ea0b5a4"
     },
     {
       "id": "S07-LI-15",
@@ -11062,8 +10803,8 @@
       "id": "S07-LI-17",
       "sheet": 7,
       "field": "content",
-      "text": "The Concluding Anchor (A.D. 1798): Exactly 1,260 years later ($538 + 1260 = 1798$), the French Revolution struck at papal power. On February 15, 1798, French General Louis-Alexandre Berthier marched into Rome under orders from the Revolutionary Directory, abolished the papal government, proclaimed the Roman Republic, and took Pope Pius VI captive into exile in France, where he died. This inflicted the prophetic \"deadly wound\" (Revelation 13:3), terminating the 1,260-year epoch of papal political supremacy.",
-      "hash": "67cea80dc7e0182b"
+      "text": "The Concluding Anchor (A.D. 1798): Exactly 1,260 years later (538 + 1,260 = 1798), the French Revolution struck at papal power. On February 15, 1798, French General Louis-Alexandre Berthier marched into Rome under orders from the Revolutionary Directory, abolished the papal government, proclaimed the Roman Republic, and took Pope Pius VI captive into exile in France, where he died. This inflicted the prophetic \"deadly wound\" (Revelation 13:3), terminating the 1,260-year epoch of papal political supremacy.",
+      "hash": "d7344acefb461ffe"
     },
     {
       "id": "S07-DIA-04",
@@ -11395,13 +11136,6 @@
       "hash": "6fcc070f6e6da30d"
     },
     {
-      "id": "S07-Q0-DIA0",
-      "sheet": 7,
-      "field": "quizzes",
-      "text": "Correct! Daniel 7:17, 23 and related biblical texts (Rev 17:15, Jer 49:36) define the symbols: beasts are kingdoms arising from warring human populations.",
-      "hash": "eb91f00802ba0df9"
-    },
-    {
       "id": "S07-Q0-DIA1",
       "sheet": 7,
       "field": "quizzes",
@@ -11486,13 +11220,6 @@
       "hash": "5697afbb91495452"
     },
     {
-      "id": "S07-Q1-DIA3",
-      "sheet": 7,
-      "field": "quizzes",
-      "text": "Correct! Daniel 7:9–14 depicts a pre-advent investigative court in heaven: the Son of Man approaches the Father to receive vindication and the kingdom.",
-      "hash": "55c9fd051ea0e38a"
-    },
-    {
       "id": "S07-Q2-STEM",
       "sheet": 7,
       "field": "quizzes",
@@ -11531,8 +11258,8 @@
       "id": "S07-Q2-EXP",
       "sheet": 7,
       "field": "quizzes",
-      "text": "The same year-day rod proved at the seventy weeks measures the horn's war on the saints.",
-      "hash": "66045f3be360d194"
+      "text": "The same year-day measure, already proved by the seventy weeks, gives the length of the horn's war on the saints.",
+      "hash": "9550a235b2cb8b87"
     },
     {
       "id": "S07-Q2-DIA0",
@@ -11547,13 +11274,6 @@
       "field": "quizzes",
       "text": "Misconception: Revelation 12:6, 14 and 13:5 confirm the exact duration as 42 prophetic months and 1,260 prophetic days, demanding historical measurement.",
       "hash": "97265726c8e804c6"
-    },
-    {
-      "id": "S07-Q2-DIA2",
-      "sheet": 7,
-      "field": "quizzes",
-      "text": "Correct! Using biblical reckoning (360-day prophetic year) and the year-day principle (Ezek 4:6, Num 14:34), the 1,260 days span 1,260 years from A.D. 538 to 1798.",
-      "hash": "ccc1a35172a23b7d"
     },
     {
       "id": "S07-Q2-DIA3",
@@ -11610,13 +11330,6 @@
       "field": "quizzes",
       "text": "Misconception: Daniel 7:17, 23 explicitly state: 'These great beasts, which are four, are four kings... the fourth beast shall be the fourth kingdom upon earth.'",
       "hash": "07b14931155e5e9e"
-    },
-    {
-      "id": "S07-Q3-DIA1",
-      "sheet": 7,
-      "field": "quizzes",
-      "text": "Correct! Daniel 7 recapitulates Daniel 2 using living predatory symbols, adding moral texture and focusing on the little horn arising from Rome's division.",
-      "hash": "900d787f6f70167d"
     },
     {
       "id": "S07-Q3-DIA2",
@@ -11687,13 +11400,6 @@
       "field": "quizzes",
       "text": "Misconception: The multitude of ministering angels before the Ancient of Days is the sovereign heavenly court, not an earthly patristic council.",
       "hash": "ea7a1ba2b946be6b"
-    },
-    {
-      "id": "S07-Q4-DIA2",
-      "sheet": 7,
-      "field": "quizzes",
-      "text": "Correct! The Son of Man moves TO the Father in heaven to receive the everlasting kingdom and vindicate His saints prior to His visible return to earth.",
-      "hash": "8cc7c50365d17dff"
     },
     {
       "id": "S07-Q4-DIA3",
@@ -12144,20 +11850,6 @@
       "hash": "9cfdbc5832ee0bb0"
     },
     {
-      "id": "S07-GLS-calvin-SMP",
-      "sheet": 7,
-      "field": "glossary",
-      "text": "John Calvin: French-Genevan Reformer (1509–1564); wrote commentaries on Daniel in the same historicist chain.",
-      "hash": "962aeb3491ce7ebb"
-    },
-    {
-      "id": "S07-GLS-calvin-HIS",
-      "sheet": 7,
-      "field": "glossary",
-      "text": "He kept the four kingdoms as real empires and refused to treat the book as a finished Maccabean pamphlet. Cited on sheet 0 as part of the Protestant consensus, not as a final authority.",
-      "hash": "2641370e8d934ce6"
-    },
-    {
       "id": "S07-GLS-church-state-SMP",
       "sheet": 7,
       "field": "glossary",
@@ -12340,20 +12032,6 @@
       "hash": "1f070adea6f439a2"
     },
     {
-      "id": "S07-GLS-newton-isaac-SMP",
-      "sheet": 7,
-      "field": "glossary",
-      "text": "Isaac Newton: Natural philosopher (1643–1727) who also wrote Observations upon the Prophecies of Daniel (1733).",
-      "hash": "4a1a5a0a34e385e9"
-    },
-    {
-      "id": "S07-GLS-newton-isaac-HIS",
-      "sheet": 7,
-      "field": "glossary",
-      "text": "He called Daniel “most distinct in order of time.” This study quotes that line because it states Historicism in one sentence: the book is a dated sequence, not a riddle left in the past or the far future.",
-      "hash": "6a106c6d76da3e24"
-    },
-    {
       "id": "S07-GLS-nitsdaq-SMP",
       "sheet": 7,
       "field": "glossary",
@@ -12392,8 +12070,8 @@
       "id": "S07-GLS-papacy-HIS",
       "sheet": 7,
       "field": "glossary",
-      "text": "This study identifies Daniel 7’s little horn with that office in its church-state form, not with every personal piety of every pope. The measured span this sitting uses is A.D. 538 to 1798.",
-      "hash": "5a9706d46f2b345d"
+      "text": "This study applies Daniel 7’s little-horn interpretation to that historical office and its church-state role, not to Roman Catholics as a people. Many Catholics sincerely follow Christ; this interpretation gives no warrant for prejudice or hostility toward them. The measured span this sitting uses is A.D. 538 to 1798.",
+      "hash": "c770cced521e5d5b"
     },
     {
       "id": "S07-GLS-pius-vi-SMP",
@@ -12518,8 +12196,8 @@
       "id": "S07-GLS-year-day-HIS",
       "sheet": 7,
       "field": "glossary",
-      "text": "God states the scale twice: Numbers 14:34 (forty spy-days become forty wilderness years) and Ezekiel 4:6 (Ezekiel’s body-days appointed “each day for a year”). Daniel’s own 70 weeks cannot be 490 ordinary days and still hold a rebuilt city and the cross — that is the book checking the ruler. 2 Peter 3:8 is about God’s patience, not this scale.",
-      "hash": "4790bf971a58a21d"
+      "text": "God states the scale twice: Numbers 14:34 (forty spy-days become forty wilderness years) and Ezekiel 4:6 (Ezekiel’s body-days appointed “each day for a year”). Daniel’s own 70 weeks cannot be 490 ordinary days and still hold a rebuilt city and the cross. That is the book checking its own measuring rod. 2 Peter 3:8 is about God’s patience, not this scale.",
+      "hash": "53d2cd60f61ea5b4"
     },
     {
       "id": "S08-TOC",
@@ -12623,8 +12301,8 @@
       "id": "S08-P-05",
       "sheet": 8,
       "field": "content",
-      "text": "Daniel 8 provides one of the most remarkable demonstrations of divine inspiration in all of Scripture: Gabriel explicitly names the historical empires depicted by the animals, leaving zero room for human guesswork:",
-      "hash": "3956c9baaaa4b7de"
+      "text": "Daniel 8 provides one of the most remarkable demonstrations of divine inspiration in all of Scripture: Gabriel explicitly names the historical empires depicted by the animals, leaving no room for human guesswork:",
+      "hash": "94299318224e5945"
     },
     {
       "id": "S08-BQ-01",
@@ -12658,8 +12336,8 @@
       "id": "S08-P-07",
       "sheet": 8,
       "field": "content",
-      "text": "Suddenly, a male goat came from the west across the face of the whole earth without touching the ground, possessing a notable large horn between its eyes (Daniel 8:5). Coming from the west (Europe) at such speed that its feet did not touch the earth, the goat portrays the breathtaking conquests of Alexander the Great , the \"first king\" of united Grecia (Daniel 8:21). In 334–331 B.C., Alexander's Greco-Macedonian phalanxes crossed the Hellespont, shattered the Persian forces at the Granicus, Issus, and Gaugamela, and obliterated the Persian Empire. The goat attacked the ram with furious fury, broke its two horns, and trampled it underfoot. Alexander \"waxed very great\" (Hebrew: higdil , Daniel 8:8).",
-      "hash": "93c0d3c0bb139fbc"
+      "text": "Suddenly, a male goat came from the west across the face of the whole earth without touching the ground, possessing a notably large horn between its eyes (Daniel 8:5). Coming from the west (Europe) at such speed that its feet did not touch the earth, the goat portrays the breathtaking conquests of Alexander the Great , the \"first king\" of united Grecia (Daniel 8:21). In 334–331 B.C., Alexander's Greco-Macedonian phalanxes crossed the Hellespont, shattered the Persian forces at the Granicus, Issus, and Gaugamela, and obliterated the Persian Empire. The goat attacked the ram in fury, broke its two horns, and trampled it underfoot. Alexander \"waxed very great\" (Hebrew: higdil , Daniel 8:8).",
+      "hash": "fa807b8a091297ea"
     },
     {
       "id": "S08-H-10",
@@ -13183,8 +12861,8 @@
       "id": "S08-LI-15",
       "sheet": 8,
       "field": "content",
-      "text": "INTERPRETATION — Does the Progression of Greatness (great $\\rightarrow$ very great $\\rightarrow$ exceedingly great) prove the horn is Rome rather than Antiochus?",
-      "hash": "92b9186f1056ec36"
+      "text": "INTERPRETATION — Does the progression of greatness (great, then very great, then exceedingly great) prove the horn is Rome rather than Antiochus?",
+      "hash": "485e2d2cd16e5cae"
     },
     {
       "id": "S08-LI-16",
@@ -13278,13 +12956,6 @@
       "hash": "3e5d6a2fb843d560"
     },
     {
-      "id": "S08-Q0-DIA1",
-      "sheet": 8,
-      "field": "quizzes",
-      "text": "Correct! Ereb boqer reflects the creation day formula; Gabriel's declaration that the vision reaches to the 'time of the end' disproves the 3-year Antiochus view.",
-      "hash": "de7081ca3bbcbea0"
-    },
-    {
       "id": "S08-Q0-DIA2",
       "sheet": 8,
       "field": "quizzes",
@@ -13353,13 +13024,6 @@
       "field": "quizzes",
       "text": "Misconception: Daniel 8:14 announces the restoration and vindication of the sanctuary, not its permanent architectural demolition.",
       "hash": "44c2bf33f70a46c0"
-    },
-    {
-      "id": "S08-Q1-DIA2",
-      "sheet": 8,
-      "field": "quizzes",
-      "text": "Correct! Strong's H6663 (nitsdaq) is forensic (justified, vindicated); it points to the cosmic Day of Atonement vindicating God's sanctuary and people.",
-      "hash": "337eae6bbdb880aa"
     },
     {
       "id": "S08-Q1-DIA3",
@@ -13432,13 +13096,6 @@
       "hash": "e4eac52d386a12c1"
     },
     {
-      "id": "S08-Q2-DIA3",
-      "sheet": 8,
-      "field": "quizzes",
-      "text": "Correct! Gabriel interprets the symbols within the chapter itself: Media-Persia is succeeded by Greece, Alexander falls, and four Hellenistic horns arise.",
-      "hash": "a9e62c284f1c4fb9"
-    },
-    {
       "id": "S08-Q3-STEM",
       "sheet": 8,
       "field": "quizzes",
@@ -13479,13 +13136,6 @@
       "field": "quizzes",
       "text": "Antiochus is a preview, not the horizon. The angel ties the vision to the time of the end and to sanctuary truth.",
       "hash": "5a8d9def9ba3bcd5"
-    },
-    {
-      "id": "S08-Q3-DIA0",
-      "sheet": 8,
-      "field": "quizzes",
-      "text": "Correct! The little horn waxes 'exceeding great' (surpassing Persia and Greece), attacks Christ the Prince, and extends to the 'time of the end' (Dan 8:17).",
-      "hash": "0103cfdb8b9a68d5"
     },
     {
       "id": "S08-Q3-DIA1",
@@ -13563,13 +13213,6 @@
       "field": "quizzes",
       "text": "Misconception: The 164 B.C. Maccabean rededication of the earthly altar was a local shadow; Daniel 8:14 extends to the cosmic cleansing of the heavenly sanctuary.",
       "hash": "c5316236d56d22a2"
-    },
-    {
-      "id": "S08-Q4-DIA2",
-      "sheet": 8,
-      "field": "quizzes",
-      "text": "Correct! The earthly tabernacle was a copy; the true heavenly sanctuary where Christ mediates is cleansed and vindicated at the close of the 2,300 prophetic days.",
-      "hash": "8a96d1293662d711"
     },
     {
       "id": "S08-Q4-DIA3",
@@ -14268,8 +13911,8 @@
       "id": "S08-GLS-papacy-HIS",
       "sheet": 8,
       "field": "glossary",
-      "text": "This study identifies Daniel 7’s little horn with that office in its church-state form, not with every personal piety of every pope. The measured span this sitting uses is A.D. 538 to 1798.",
-      "hash": "5a9706d46f2b345d"
+      "text": "This study applies Daniel 7’s little-horn interpretation to that historical office and its church-state role, not to Roman Catholics as a people. Many Catholics sincerely follow Christ; this interpretation gives no warrant for prejudice or hostility toward them. The measured span this sitting uses is A.D. 538 to 1798.",
+      "hash": "c770cced521e5d5b"
     },
     {
       "id": "S08-GLS-preterism-SMP",
@@ -14394,8 +14037,8 @@
       "id": "S08-GLS-year-day-HIS",
       "sheet": 8,
       "field": "glossary",
-      "text": "God states the scale twice: Numbers 14:34 (forty spy-days become forty wilderness years) and Ezekiel 4:6 (Ezekiel’s body-days appointed “each day for a year”). Daniel’s own 70 weeks cannot be 490 ordinary days and still hold a rebuilt city and the cross — that is the book checking the ruler. 2 Peter 3:8 is about God’s patience, not this scale.",
-      "hash": "4790bf971a58a21d"
+      "text": "God states the scale twice: Numbers 14:34 (forty spy-days become forty wilderness years) and Ezekiel 4:6 (Ezekiel’s body-days appointed “each day for a year”). Daniel’s own 70 weeks cannot be 490 ordinary days and still hold a rebuilt city and the cross. That is the book checking its own measuring rod. 2 Peter 3:8 is about God’s patience, not this scale.",
+      "hash": "53d2cd60f61ea5b4"
     },
     {
       "id": "S09-TOC",
@@ -14534,8 +14177,8 @@
       "id": "S09-P-08",
       "sheet": 9,
       "field": "content",
-      "text": "A \"week\" (Hebrew: shabua , שָׁבוּעַ) literally means a unit of seven. Seventy weeks equals $70 \\times 7 = 490$ prophetic days. Applying the biblical year-day principle (Numbers 14:34; Ezekiel 4:6), 490 prophetic days equal 490 literal solar years allotted to the Jewish nation and Jerusalem.",
-      "hash": "08c08392ade506c7"
+      "text": "A \"week\" (Hebrew: shabua , שָׁבוּעַ) literally means a unit of seven. Seventy weeks equals 70 × 7, which is 490 prophetic days. Applying the biblical year-day principle (Numbers 14:34; Ezekiel 4:6), 490 prophetic days equal 490 literal solar years allotted to the Jewish nation and Jerusalem.",
+      "hash": "9458c78812ad413f"
     },
     {
       "id": "S09-H-08",
@@ -14674,8 +14317,8 @@
       "id": "S09-DIA-03",
       "sheet": 9,
       "field": "content",
-      "text": "THE FOUR PERSIAN DECREES COMPARED DECREE: DATE: BIBLICAL TEXT: SCOPE: RESTORES CITY & STATE? 1. Cyrus 538/537 BC Ezra 1:1–4 Temple only NO (Temple only) 2. Darius I 520 BC Ezra 6:1–12 Reaffirms Temple NO (Temple only) 3. Artaxerxes I 457 BC Ezra 7:11–26 Civil law & judges YES (Restores & Builds) 4. Artaxerxes II 444 BC Nehemiah 2:1–8 Wall repair permit NO (Executive permit)",
-      "hash": "ea5ed3d9e13cd6ee"
+      "text": "THE FOUR PERSIAN DECREES COMPARED DECREE: DATE: BIBLICAL TEXT: SCOPE: RESTORES CITY & STATE? 1. Cyrus 538/537 BC Ezra 1:1–4 Temple only NO (Temple only) 2. Darius I 520 BC Ezra 6:1–12 Reaffirms Temple NO (Temple only) 3. Artaxerxes I 457 BC Ezra 7:11–26 Civil law & judges YES (Restores & Builds) 4. Artaxerxes I 444 BC Nehemiah 2:1–8 Wall repair permit NO (Executive permit)",
+      "hash": "e71fcfa0ec8f1e44"
     },
     {
       "id": "S09-H-13",
@@ -14709,22 +14352,22 @@
       "id": "S09-LI-07",
       "sheet": 9,
       "field": "content",
-      "text": "$7\\text{ weeks} = 49\\text{ prophetic days} = 49\\text{ solar years}$ (the duration to clear the debris and rebuild Jerusalem's streets and walls in \"troublous times\", completed under Ezra and Nehemiah by 408 B.C.).",
-      "hash": "c2171e163f283749"
+      "text": "Seven weeks equal 49 prophetic days, which are 49 solar years (the time to clear the debris and rebuild Jerusalem's streets and walls in \"troublous times,\" completed under Ezra and Nehemiah by 408 B.C.).",
+      "hash": "d6a4757e1b0cdc09"
     },
     {
       "id": "S09-LI-08",
       "sheet": 9,
       "field": "content",
-      "text": "$62\\text{ weeks} = 434\\text{ prophetic days} = 434\\text{ solar years}$.",
-      "hash": "48b197eb834b1ca6"
+      "text": "Sixty-two weeks equal 434 prophetic days, which are 434 solar years.",
+      "hash": "a7c01bb65275531b"
     },
     {
       "id": "S09-LI-09",
       "sheet": 9,
       "field": "content",
-      "text": "Total: $69\\text{ weeks} = 7 + 62 = 483\\text{ prophetic days} = \\mathbf{483\\text{ literal solar years}}$.",
-      "hash": "3c1e0a224fefd031"
+      "text": "Total: 69 weeks equal 7 + 62, which is 483 prophetic days, or 483 literal solar years.",
+      "hash": "1c4311729e7ba8dd"
     },
     {
       "id": "S09-H-16",
@@ -14835,8 +14478,8 @@
       "id": "S09-P-23",
       "sheet": 9,
       "field": "content",
-      "text": "Daniel 9:26 declares that Messiah would be \"cut off, but not for himself.\" The Hebrew phrase ve'en lo signifies that He had nothing of His own for which to die: He died as an innocent substitute for the sins of the world. Isaiah 53:5 foretold the same reality: \"He was wounded for our transgressions, he was bruised for our iniquities.\"",
-      "hash": "f77f6637bc7ae729"
+      "text": "Daniel 9:26 declares that Messiah would be \"cut off, but not for himself.\" The Hebrew phrase ve'en lo means that He was not cut off for a crime of His own. He died as an innocent substitute for the sins of the world. Isaiah 53:5 foretold the same reality: \"He was wounded for our transgressions, he was bruised for our iniquities.\"",
+      "hash": "3fce418ba77a61d9"
     },
     {
       "id": "S09-H-21",
@@ -14947,8 +14590,8 @@
       "id": "S09-LI-13",
       "sheet": 9,
       "field": "content",
-      "text": "4. The Balance to 1844: Since 490 years of the 2,300-year parent line were completed in A.D. 34, exactly $2,300 - 490 = \\mathbf{1,810\\text{ years}}$ remained. Measuring 1,810 years from Autumn A.D. 34 brings us directly to Autumn 1844 A.D. ($34 + 1810 = 1844$). The cross of Christ in A.D. 31 is the immovable anchor that validates the terminal date of the 2,300 days.",
-      "hash": "a718608751f4ab74"
+      "text": "4. The Balance to 1844: Since 490 years of the 2,300-year parent line were completed in A.D. 34, 1,810 years remained (2,300 − 490). Measuring 1,810 years from autumn A.D. 34 brings us directly to autumn 1844 (34 + 1,810 = 1844). The cross of Christ in A.D. 31 is the immovable anchor that validates the terminal date of the 2,300 days.",
+      "hash": "0472dd17c7795ce4"
     },
     {
       "id": "S09-DIA-06",
@@ -15175,13 +14818,6 @@
       "hash": "b5d01adf8ade8013"
     },
     {
-      "id": "S09-Q0-DIA2",
-      "sheet": 9,
-      "field": "quizzes",
-      "text": "Correct! Gabriel returns to explain 'the vision' (the unexplained 2,300 days of Daniel 8:14, 27); chathak proves the 70 weeks are cut off from that longer span.",
-      "hash": "f1103241cdadd22c"
-    },
-    {
       "id": "S09-Q0-DIA3",
       "sheet": 9,
       "field": "quizzes",
@@ -15229,13 +14865,6 @@
       "field": "quizzes",
       "text": "In Daniel 9:26-27, Messiah is the antecedent of 'he'. Christ confirmed the covenant (Matt 26:28) and caused sacrifice to cease by dying on the cross in the middle of the 70th week (A.D. 31). Inserting a 2,000-year gap fractures the text.",
       "hash": "cf7f87e25f2f630a"
-    },
-    {
-      "id": "S09-Q1-DIA0",
-      "sheet": 9,
-      "field": "quizzes",
-      "text": "Correct! Messiah is the antecedent: Christ confirmed the covenant and ended animal sacrifices by His sacrificial death in the midst of the 70th week (A.D. 31).",
-      "hash": "a1d92c4509452029"
     },
     {
       "id": "S09-Q1-DIA1",
@@ -15306,13 +14935,6 @@
       "field": "quizzes",
       "text": "Misconception: Historical dates (such as 457 B.C.) are calculated chronological conclusions from biblical and historical synchronisms, not words printed in the verse.",
       "hash": "e6e489f1455f68ff"
-    },
-    {
-      "id": "S09-Q2-DIA1",
-      "sheet": 9,
-      "field": "quizzes",
-      "text": "Correct! The decree of Artaxerxes I in his 7th year (457 B.C., Ezra 7) restored the city, walls, and civil polity, fulfilling Daniel 9:25.",
-      "hash": "f910062d776388a7"
     },
     {
       "id": "S09-Q2-DIA2",
@@ -15392,13 +15014,6 @@
       "hash": "1ac5c4e130c0c339"
     },
     {
-      "id": "S09-Q3-DIA3",
-      "sheet": 9,
-      "field": "quizzes",
-      "text": "Correct! 483 years starting in the autumn of 457 B.C. reach the autumn of A.D. 27 (accounting for no year zero), when Jesus was baptized and began His ministry.",
-      "hash": "bb2cc5684c14f186"
-    },
-    {
       "id": "S09-Q4-STEM",
       "sheet": 9,
       "field": "quizzes",
@@ -15446,13 +15061,6 @@
       "field": "quizzes",
       "text": "Misconception: In Daniel 9:26–27, Messiah is the antecedent who confirms the covenant; inserting a future tyrant robs Christ of His central prophecy.",
       "hash": "177c4dc556e0ae11"
-    },
-    {
-      "id": "S09-Q4-DIA1",
-      "sheet": 9,
-      "field": "quizzes",
-      "text": "Correct! In the midst of the 70th week (3.5 years after A.D. 27), Christ was crucified in Spring A.D. 31, ending the validity of animal sacrifices forever.",
-      "hash": "74fea516ec50707d"
     },
     {
       "id": "S09-Q4-DIA2",
@@ -15577,8 +15185,8 @@
       "id": "S09-SG-VALUE-WHY",
       "sheet": 9,
       "field": "studyGuide",
-      "text": "Chathak appears only once in the Hebrew Bible, and Gabriel uses it while Daniel is still sick from the vision of chapter 8, which forces you to show why the seventy weeks belong on the same line. When you can explain cut off from what and walk the arithmetic from 457 to 27 to 31 to 34 to the remaining balance, 1844 stands or falls with Calvary in an honest way. If someone moves A.D. 31, you can show them exactly what else must move on the same stick. That is ownership of the prophecy rather than inheriting a date you cannot explain when challenged.",
-      "hash": "6d61851118fdf483"
+      "text": "Chathak appears only once in the Hebrew Bible, and Gabriel uses it while Daniel is still sick from the vision of chapter 8, which forces you to show why the seventy weeks belong on the same line. When you can say what the weeks are cut off from, and walk the arithmetic from 457 to 27, then to 31, then to 34, and on to the remaining balance, 1844 stands or falls with Calvary in an honest way. If someone moves A.D. 31, you can show them exactly what else must move on the same stick. That is ownership of the prophecy rather than inheriting a date you cannot explain when challenged.",
+      "hash": "7a9d9244709345b1"
     },
     {
       "id": "S09-SG-ASK-1",
@@ -16186,8 +15794,8 @@
       "id": "S09-GLS-year-day-HIS",
       "sheet": 9,
       "field": "glossary",
-      "text": "God states the scale twice: Numbers 14:34 (forty spy-days become forty wilderness years) and Ezekiel 4:6 (Ezekiel’s body-days appointed “each day for a year”). Daniel’s own 70 weeks cannot be 490 ordinary days and still hold a rebuilt city and the cross — that is the book checking the ruler. 2 Peter 3:8 is about God’s patience, not this scale.",
-      "hash": "4790bf971a58a21d"
+      "text": "God states the scale twice: Numbers 14:34 (forty spy-days become forty wilderness years) and Ezekiel 4:6 (Ezekiel’s body-days appointed “each day for a year”). Daniel’s own 70 weeks cannot be 490 ordinary days and still hold a rebuilt city and the cross. That is the book checking its own measuring rod. 2 Peter 3:8 is about God’s patience, not this scale.",
+      "hash": "53d2cd60f61ea5b4"
     },
     {
       "id": "S10-TOC",
@@ -16620,8 +16228,8 @@
       "id": "S10-P-19",
       "sheet": 10,
       "field": "content",
-      "text": "Notice the only qualifying criterion for divine deliverance: not political connections, material wealth, or denominational pride, but having your name written in the Book ! Throughout Scripture, this celestial register is called the Lamb's Book of Life (Exodus 32:32–33; Philippians 4:3; Revelation 3:5; 20:12, 15; 21:27). Those who have surrendered their hearts to Jesus Christ, whose sins have been washed in the blood of the Lamb, and whose names remain blotted into the registry of heaven will be shielded and miraculously preserved through the final crisis.",
-      "hash": "28a783a5193facb1"
+      "text": "Notice the only qualifying criterion for divine deliverance: not political connections, material wealth, or denominational pride, but having your name written in the Book ! Throughout Scripture, this celestial register is called the Lamb's Book of Life (Exodus 32:32–33; Philippians 4:3; Revelation 3:5; 20:12, 15; 21:27). Those who have surrendered their hearts to Jesus Christ, whose sins have been washed in the blood of the Lamb, and whose names remain inscribed in the registry of heaven will experience ultimate divine deliverance and resurrection (Daniel 12:1–2).",
+      "hash": "cd50a0e8278ce40c"
     },
     {
       "id": "S10-H-22",
@@ -16725,15 +16333,15 @@
       "id": "S10-LI-17",
       "sheet": 10,
       "field": "content",
-      "text": "1,290 prophetic days (solar years): $508\\text{ A.D.} + 1,290\\text{ years} = \\mathbf{1798\\text{ A.D.}}$, the very year the papacy suffered its deadly wound and the \"time of the end\" began (Daniel 12:4).",
-      "hash": "5c5f9e364ebab43e"
+      "text": "1,290 prophetic days (solar years): A.D. 508 + 1,290 years = A.D. 1798, the very year the papacy suffered its deadly wound and the \"time of the end\" began (Daniel 12:4).",
+      "hash": "456dc770f3d405f2"
     },
     {
       "id": "S10-LI-18",
       "sheet": 10,
       "field": "content",
-      "text": "1,335 prophetic days (solar years): $508\\text{ A.D.} + 1,335\\text{ years} = \\mathbf{1843/1844\\text{ A.D.}}$, the exact year of the great Millerite second advent awakening and the cleansing of the heavenly sanctuary! The church's Adult Bible Study Guide on Daniel (2020 Q1, week 13) reads both spans from A.D. 508 in the same historicist manner.",
-      "hash": "ba013d87de999667"
+      "text": "1,335 prophetic days (solar years): A.D. 508 + 1,335 years = A.D. 1843/1844, the year of the great Millerite second-advent awakening and the cleansing of the heavenly sanctuary. The church's Adult Bible Study Guide on Daniel (2020 Q1, week 13) reads both spans from A.D. 508 in the same historicist manner.",
+      "hash": "fd17d2cdc90d556c"
     },
     {
       "id": "S10-P-24",
@@ -16988,13 +16596,6 @@
       "hash": "803f73cfc412ff57"
     },
     {
-      "id": "S10-Q0-DIA3",
-      "sheet": 10,
-      "field": "quizzes",
-      "text": "Correct! 'Stand up' is Daniel's royal verb for assuming kingly power. When Michael stands, high-priestly intercession closes, leading to the time of trouble.",
-      "hash": "5465c5e54a2a02e2"
-    },
-    {
       "id": "S10-Q1-STEM",
       "sheet": 10,
       "field": "quizzes",
@@ -17042,13 +16643,6 @@
       "field": "quizzes",
       "text": "Misconception: Scripture teaches the unconscious sleep of death awaiting a literal resurrection, completely rejecting cyclical reincarnation.",
       "hash": "59d8e8c9b3bf3a52"
-    },
-    {
-      "id": "S10-Q1-DIA1",
-      "sheet": 10,
-      "field": "quizzes",
-      "text": "Correct! Daniel 12:2, 13 provides the clearest Hebrew Bible proof of literal bodily resurrection: waking from the dust of the earth to everlasting life.",
-      "hash": "2608d3f8f4a0d9d4"
     },
     {
       "id": "S10-Q1-DIA2",
@@ -17105,13 +16699,6 @@
       "field": "quizzes",
       "text": "Daniel 12:1–2 is sequential: standing up, trouble, deliverance, resurrection.",
       "hash": "9d776f15e63e8f1e"
-    },
-    {
-      "id": "S10-Q2-DIA0",
-      "sheet": 10,
-      "field": "quizzes",
-      "text": "Correct! Daniel 12:1–2 is sequential: Michael stands up (probation closes), trouble comes, the saints in the book are delivered, and the resurrection occurs.",
-      "hash": "d2ec22ee5333ca28"
     },
     {
       "id": "S10-Q2-DIA1",
@@ -17191,13 +16778,6 @@
       "hash": "3e35529a2cce7918"
     },
     {
-      "id": "S10-Q3-DIA2",
-      "sheet": 10,
-      "field": "quizzes",
-      "text": "Correct! Daniel 12:1 specifies: 'every one that shall be found written in the book.' Covenant citizenship in Heaven decides eternal destiny.",
-      "hash": "ca0efccc4edb863c"
-    },
-    {
       "id": "S10-Q3-DIA3",
       "sheet": 10,
       "field": "quizzes",
@@ -17245,13 +16825,6 @@
       "field": "quizzes",
       "text": "Sealed until the time of the end is a promise of later light, not a ban on faith. The wise run to and fro in the book.",
       "hash": "6a2a998f637644f9"
-    },
-    {
-      "id": "S10-Q4-DIA0",
-      "sheet": 10,
-      "field": "quizzes",
-      "text": "Correct! The last sitting commissions wise teachers: the prophecies unseal at the time of the end to anchor faith and turn many to righteousness.",
-      "hash": "df96e8434e257960"
     },
     {
       "id": "S10-Q4-DIA1",
@@ -17901,8 +17474,8 @@
       "id": "S10-GLS-papacy-HIS",
       "sheet": 10,
       "field": "glossary",
-      "text": "This study identifies Daniel 7’s little horn with that office in its church-state form, not with every personal piety of every pope. The measured span this sitting uses is A.D. 538 to 1798.",
-      "hash": "5a9706d46f2b345d"
+      "text": "This study applies Daniel 7’s little-horn interpretation to that historical office and its church-state role, not to Roman Catholics as a people. Many Catholics sincerely follow Christ; this interpretation gives no warrant for prejudice or hostility toward them. The measured span this sitting uses is A.D. 538 to 1798.",
+      "hash": "c770cced521e5d5b"
     },
     {
       "id": "S10-GLS-pius-vi-SMP",
@@ -17985,8 +17558,8 @@
       "id": "S10-GLS-year-day-HIS",
       "sheet": 10,
       "field": "glossary",
-      "text": "God states the scale twice: Numbers 14:34 (forty spy-days become forty wilderness years) and Ezekiel 4:6 (Ezekiel’s body-days appointed “each day for a year”). Daniel’s own 70 weeks cannot be 490 ordinary days and still hold a rebuilt city and the cross — that is the book checking the ruler. 2 Peter 3:8 is about God’s patience, not this scale.",
-      "hash": "4790bf971a58a21d"
+      "text": "God states the scale twice: Numbers 14:34 (forty spy-days become forty wilderness years) and Ezekiel 4:6 (Ezekiel’s body-days appointed “each day for a year”). Daniel’s own 70 weeks cannot be 490 ordinary days and still hold a rebuilt city and the cross. That is the book checking its own measuring rod. 2 Peter 3:8 is about God’s patience, not this scale.",
+      "hash": "53d2cd60f61ea5b4"
     }
   ]
 }

@@ -2,9 +2,9 @@
 
 **Audit Date:** 2026-09-20  
 **File Audited:** `js/study/sheets-data.js` (Sitting id: 4) with `sheet-verify.js`, `workbench.js`, `sheet-glossary.js`  
-**Audited Content Hash:** `e7733c0b118fa5da`  
+**Audited Content Hash:** `f1c00c8953bd7e98`  
 **Method:** Exhaustive claim-unit audit of finished prose across content, christology, quizzes, studyGuide, guide, verify cards, workbench, and linked glossary entries.  
-**Counts:** ACCURATE: 162 | SOFTEN: 0 | FIX: 0 | N/A: 27 | Total: 189  
+**Counts:** ACCURATE: 155 | SOFTEN: 0 | FIX: 0 | N/A: 27 | Total: 182  
 
 ## 1. Summary of Required Sections & Governing Standards
 
@@ -28,7 +28,7 @@
 | S04-H-02 | N/A | N/A | Section title / kicker header chrome |
 | S04-H-03 | N/A | N/A | Section title / kicker header chrome |
 | S04-H-04 | N/A | N/A | Section title / kicker header chrome |
-| S04-P-03 | TEXT | ACCURATE | Direct passage exposition verified in KJV text |
+| S04-P-03 | INTERPRETATION | ACCURATE | Historicist argument grounded in Scripture interpreting Scripture (Dan 2; 7; 8; 9) |
 | S04-P-04 | INTERPRETATION | ACCURATE | Historicist argument grounded in Scripture interpreting Scripture (Dan 2; 7; 8; 9) |
 | S04-BQ-01 | TEXT | ACCURATE | Direct KJV Scripture quotation verified against bible/kjv.json |
 | S04-DIA-01 | INTERPRETATION | ACCURATE | Prophetic diagram illustrating imperial succession and chronology |
@@ -57,7 +57,7 @@
 | S04-P-12 | INTERPRETATION | ACCURATE | Historicist argument grounded in Scripture interpreting Scripture (Dan 2; 7; 8; 9) |
 | S04-P-13 | TEXT | ACCURATE | Direct passage exposition verified in KJV text |
 | S04-DIA-04 | INTERPRETATION | ACCURATE | Prophetic diagram illustrating imperial succession and chronology |
-| S04-P-14 | INTERPRETATION | ACCURATE | Historicist argument grounded in Scripture interpreting Scripture (Dan 2; 7; 8; 9) |
+| S04-P-14 | PASTORAL | ACCURATE | Personal application tethered to exilic covenant faithfulness |
 | S04-H-13 | N/A | N/A | Section title / kicker header chrome |
 | S04-P-15 | INTERPRETATION | ACCURATE | Historicist argument grounded in Scripture interpreting Scripture (Dan 2; 7; 8; 9) |
 | S04-LI-04 | INTERPRETATION | ACCURATE | Biblical case and historical argument |
@@ -68,7 +68,7 @@
 | S04-P-16 | INTERPRETATION | ACCURATE | Historicist argument grounded in Scripture interpreting Scripture (Dan 2; 7; 8; 9) |
 | S04-BQ-04 | TEXT | ACCURATE | Direct KJV Scripture quotation verified against bible/kjv.json |
 | S04-DIA-05 | INTERPRETATION | ACCURATE | Prophetic diagram illustrating imperial succession and chronology |
-| S04-P-17 | INTERPRETATION | ACCURATE | Historicist argument grounded in Scripture interpreting Scripture (Dan 2; 7; 8; 9) |
+| S04-P-17 | PASTORAL | ACCURATE | Personal application tethered to exilic covenant faithfulness |
 | S04-P-18 | INTERPRETATION | ACCURATE | Historicist argument grounded in Scripture interpreting Scripture (Dan 2; 7; 8; 9) |
 | S04-BQ-05 | TEXT | ACCURATE | Direct KJV Scripture quotation verified against bible/kjv.json |
 | S04-H-17 | N/A | N/A | Section title / kicker header chrome |
@@ -76,12 +76,12 @@
 | S04-H-18 | N/A | N/A | Section title / kicker header chrome |
 | S04-H-19 | N/A | N/A | Section title / kicker header chrome |
 | S04-H-20 | N/A | N/A | Section title / kicker header chrome |
-| S04-P-20 | PASTORAL | ACCURATE | Personal application tethered to exilic covenant faithfulness |
+| S04-P-20 | INTERPRETATION | ACCURATE | Historicist argument grounded in Scripture interpreting Scripture (Dan 2; 7; 8; 9) |
 | S04-DIA-06 | INTERPRETATION | ACCURATE | Prophetic diagram illustrating imperial succession and chronology |
 | S04-H-21 | N/A | N/A | Section title / kicker header chrome |
 | S04-P-21 | INTERPRETATION | ACCURATE | Historicist argument grounded in Scripture interpreting Scripture (Dan 2; 7; 8; 9) |
 | S04-H-22 | N/A | N/A | Section title / kicker header chrome |
-| S04-P-22 | CHRIST | ACCURATE | Canonical Christology: Luke 24:27; Dan 9:26; Dan 2:44; Dan 7:13–14 |
+| S04-P-22 | INTERPRETATION | ACCURATE | Historicist argument grounded in Scripture interpreting Scripture (Dan 2; 7; 8; 9) |
 | S04-H-23 | N/A | N/A | Section title / kicker header chrome |
 | S04-P-23 | INTERPRETATION | ACCURATE | Historicist argument grounded in Scripture interpreting Scripture (Dan 2; 7; 8; 9) |
 | S04-BQ-06 | TEXT | ACCURATE | Direct KJV Scripture quotation verified against bible/kjv.json |
@@ -102,7 +102,6 @@
 | S04-Q0-OPT3 | INTERPRETATION | ACCURATE | Assessment option evaluating historical/biblical positions |
 | S04-Q0-EXP | INTERPRETATION | ACCURATE | Grammatical-historical and historicist explanation |
 | S04-Q0-DIA0 | INTERPRETATION | ACCURATE | Pedagogical diagnostic distinguishing true historicism from common errors |
-| S04-Q0-DIA1 | INTERPRETATION | ACCURATE | Pedagogical diagnostic distinguishing true historicism from common errors |
 | S04-Q0-DIA2 | INTERPRETATION | ACCURATE | Pedagogical diagnostic distinguishing true historicism from common errors |
 | S04-Q0-DIA3 | INTERPRETATION | ACCURATE | Pedagogical diagnostic distinguishing true historicism from common errors |
 | S04-Q1-STEM | INTERPRETATION | ACCURATE | Diagnostic assessment stem evaluating prophetic frameworks |
@@ -111,7 +110,6 @@
 | S04-Q1-OPT2 | INTERPRETATION | ACCURATE | Assessment option evaluating historical/biblical positions |
 | S04-Q1-OPT3 | INTERPRETATION | ACCURATE | Assessment option evaluating historical/biblical positions |
 | S04-Q1-EXP | INTERPRETATION | ACCURATE | Grammatical-historical and historicist explanation |
-| S04-Q1-DIA0 | INTERPRETATION | ACCURATE | Pedagogical diagnostic distinguishing true historicism from common errors |
 | S04-Q1-DIA1 | INTERPRETATION | ACCURATE | Pedagogical diagnostic distinguishing true historicism from common errors |
 | S04-Q1-DIA2 | INTERPRETATION | ACCURATE | Pedagogical diagnostic distinguishing true historicism from common errors |
 | S04-Q1-DIA3 | INTERPRETATION | ACCURATE | Pedagogical diagnostic distinguishing true historicism from common errors |
@@ -124,7 +122,6 @@
 | S04-Q2-DIA0 | INTERPRETATION | ACCURATE | Pedagogical diagnostic distinguishing true historicism from common errors |
 | S04-Q2-DIA1 | INTERPRETATION | ACCURATE | Pedagogical diagnostic distinguishing true historicism from common errors |
 | S04-Q2-DIA2 | INTERPRETATION | ACCURATE | Pedagogical diagnostic distinguishing true historicism from common errors |
-| S04-Q2-DIA3 | INTERPRETATION | ACCURATE | Pedagogical diagnostic distinguishing true historicism from common errors |
 | S04-Q3-STEM | INTERPRETATION | ACCURATE | Diagnostic assessment stem evaluating prophetic frameworks |
 | S04-Q3-OPT0 | INTERPRETATION | ACCURATE | Assessment option evaluating historical/biblical positions |
 | S04-Q3-OPT1 | INTERPRETATION | ACCURATE | Assessment option evaluating historical/biblical positions |
@@ -133,7 +130,6 @@
 | S04-Q3-EXP | INTERPRETATION | ACCURATE | Grammatical-historical and historicist explanation |
 | S04-Q3-DIA0 | INTERPRETATION | ACCURATE | Pedagogical diagnostic distinguishing true historicism from common errors |
 | S04-Q3-DIA1 | INTERPRETATION | ACCURATE | Pedagogical diagnostic distinguishing true historicism from common errors |
-| S04-Q3-DIA2 | INTERPRETATION | ACCURATE | Pedagogical diagnostic distinguishing true historicism from common errors |
 | S04-Q3-DIA3 | INTERPRETATION | ACCURATE | Pedagogical diagnostic distinguishing true historicism from common errors |
 | S04-Q4-STEM | INTERPRETATION | ACCURATE | Diagnostic assessment stem evaluating prophetic frameworks |
 | S04-Q4-OPT0 | INTERPRETATION | ACCURATE | Assessment option evaluating historical/biblical positions |
@@ -141,7 +137,6 @@
 | S04-Q4-OPT2 | INTERPRETATION | ACCURATE | Assessment option evaluating historical/biblical positions |
 | S04-Q4-OPT3 | INTERPRETATION | ACCURATE | Assessment option evaluating historical/biblical positions |
 | S04-Q4-EXP | INTERPRETATION | ACCURATE | Grammatical-historical and historicist explanation |
-| S04-Q4-DIA0 | INTERPRETATION | ACCURATE | Pedagogical diagnostic distinguishing true historicism from common errors |
 | S04-Q4-DIA1 | INTERPRETATION | ACCURATE | Pedagogical diagnostic distinguishing true historicism from common errors |
 | S04-Q4-DIA2 | INTERPRETATION | ACCURATE | Pedagogical diagnostic distinguishing true historicism from common errors |
 | S04-Q4-DIA3 | INTERPRETATION | ACCURATE | Pedagogical diagnostic distinguishing true historicism from common errors |
@@ -197,8 +192,6 @@
 | S04-GLS-babylon-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
 | S04-GLS-belshazzar-SMP | INTERPRETATION | ACCURATE | Historicist vocabulary and prophetic hermeneutic definition |
 | S04-GLS-belshazzar-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
-| S04-GLS-boanthropy-SMP | INTERPRETATION | ACCURATE | Historicist vocabulary and prophetic hermeneutic definition |
-| S04-GLS-boanthropy-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
 | S04-GLS-colossus-SMP | INTERPRETATION | ACCURATE | Historicist vocabulary and prophetic hermeneutic definition |
 | S04-GLS-colossus-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
 | S04-GLS-daniel-SMP | INTERPRETATION | ACCURATE | Historicist vocabulary and prophetic hermeneutic definition |
