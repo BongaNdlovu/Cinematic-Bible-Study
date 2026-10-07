@@ -21,11 +21,13 @@
         },
         scripture: "How the book teaches you to read it",
         audio: {
-          src: "assets/study/audio/sitting-00.mp3",
+          src: "assets/study/audio/sitting-00-overview.m4a",
           kind: "overview",
-          title: "Sitting 0 overview — how to read Daniel's prophetic chain",
-          kicker: "3-minute overview",
-          hint: "A quick orientation before you read. This is not a voiceover of the full sitting."
+          title: "Sitting 0 — listen to the full sitting",
+          kicker: "Read-along · 11 min",
+          hint: "Press play and follow: a soft highlighter strokes the text as it is spoken, from the title to the close of the sitting.",
+          duration: "11 min",
+          cues: "assets/study/audio/sitting-00-overview.json"
         },
         infographic: {
           src: "assets/study/infographics/sitting-00-roadmap.webp",

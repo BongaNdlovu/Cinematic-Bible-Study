@@ -46,3 +46,6 @@ theme_proof*.png
 
 # Progress snapshots and generated restore SQL. Not committed.
 backups/
+
+# audio read-along tooling intermediates
+tools/audio-read/*.wav

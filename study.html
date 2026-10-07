@@ -1341,9 +1341,333 @@
     body.white-mode .lesson-audio-hint {
       color: #5c4a1f;
     }
-    .lesson-audio audio {
-      width: 100%;
-      height: 40px;
+    /* Custom lesson audio player — gold HUD row matching the corner orb */
+    .lesson-audio audio { display: none; }
+    .lesson-audio-player {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      margin-top: 0.15rem;
+    }
+    .lap-btn {
+      flex: none;
+      display: grid;
+      place-items: center;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      border: 1px solid rgba(212, 175, 55, 0.55);
+      background: linear-gradient(150deg, rgba(212, 175, 55, 0.22), rgba(212, 175, 55, 0.08));
+      color: #fbbf24;
+      cursor: pointer;
+      transition: background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, transform 0.1s ease;
+    }
+    .lap-btn:hover {
+      border-color: rgba(251, 191, 36, 0.85);
+      box-shadow: 0 0 14px rgba(251, 191, 36, 0.25);
+    }
+    .lap-btn:active { transform: scale(0.93); }
+    .lap-btn svg { width: 13px; height: 13px; fill: currentColor; }
+    .lap-play.is-playing {
+      background: linear-gradient(150deg, rgba(251, 191, 36, 0.32), rgba(212, 175, 55, 0.14));
+      box-shadow: 0 0 16px rgba(251, 191, 36, 0.3);
+    }
+    .lap-time {
+      flex: none;
+      min-width: 44px;
+      text-align: center;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: rgba(243, 229, 200, 0.85);
+      font-variant-numeric: tabular-nums;
+    }
+    body.paper-mode .lap-time,
+    body.white-mode .lap-time {
+      color: #6d4b04;
+    }
+    .lap-seek {
+      -webkit-appearance: none;
+      appearance: none;
+      flex: 1;
+      min-width: 80px;
+      height: 20px;
+      margin: 0;
+      background: transparent;
+      cursor: pointer;
+      --lap-fill: 0%;
+    }
+    .lap-seek:focus-visible {
+      outline: none;
+    }
+    .lap-seek::-webkit-slider-runnable-track {
+      height: 4px;
+      border-radius: 2px;
+      background: linear-gradient(
+        to right,
+        #f59e0b 0%,
+        #f7c948 var(--lap-fill),
+        rgba(212, 175, 55, 0.28) var(--lap-fill),
+        rgba(212, 175, 55, 0.28) 100%
+      );
+      box-shadow: inset 0 0 0 1px rgba(212, 175, 55, 0.18);
+    }
+    .lap-seek::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 13px;
+      height: 13px;
+      margin-top: -4.5px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 30%, #fff6db, #f7c948 55%, #b45309);
+      border: none;
+      box-shadow: 0 0 10px rgba(251, 191, 36, 0.55);
+      transition: transform 0.15s ease;
+    }
+    .lap-seek:hover::-webkit-slider-thumb { transform: scale(1.2); }
+    .lap-seek::-moz-range-track {
+      height: 4px;
+      border-radius: 2px;
+      background: rgba(212, 175, 55, 0.28);
+    }
+    .lap-seek::-moz-range-progress {
+      height: 4px;
+      border-radius: 2px;
+      background: linear-gradient(to right, #f59e0b, #f7c948);
+    }
+    .lap-seek::-moz-range-thumb {
+      width: 13px;
+      height: 13px;
+      border: none;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 30%, #fff6db, #f7c948 55%, #b45309);
+      box-shadow: 0 0 10px rgba(251, 191, 36, 0.55);
+    }
+    .lap-mute .lap-muted-x { display: none; }
+    .lap-mute.is-muted .lap-wave { display: none; }
+    .lap-mute.is-muted .lap-muted-x { display: block; }
+    .lap-mute.is-muted { color: rgba(243, 229, 200, 0.55); }
+    body.paper-mode .lap-mute.is-muted,
+    body.white-mode .lap-mute.is-muted { color: #8a6414; }
+    /* Spoken read-along highlighter — faint but clear on every theme */
+    body {
+      --read-mark: rgba(251, 191, 36, 0.2);
+      --read-mark-strong: rgba(251, 191, 36, 0.4);
+    }
+    body.night-mode {
+      --read-mark: rgba(251, 191, 36, 0.16);
+      --read-mark-strong: rgba(251, 191, 36, 0.34);
+    }
+    body.paper-mode {
+      --read-mark: rgba(217, 119, 6, 0.2);
+      --read-mark-strong: rgba(217, 119, 6, 0.38);
+    }
+    body.white-mode {
+      --read-mark: rgba(202, 138, 4, 0.26);
+      --read-mark-strong: rgba(202, 138, 4, 0.44);
+    }
+    mark.audio-read {
+      color: inherit;
+      background-color: var(--read-mark);
+      box-shadow: 0 0 0 0.14em var(--read-mark);
+      border-radius: 0.28em;
+      padding: 0.04em 0;
+      -webkit-box-decoration-break: clone;
+      box-decoration-break: clone;
+    }
+    @media (prefers-reduced-motion: no-preference) {
+      mark.audio-read {
+        animation: audio-read-in 0.8s ease;
+      }
+    }
+    @keyframes audio-read-in {
+      from {
+        background-color: var(--read-mark-strong);
+        box-shadow: 0 0 0 0.14em var(--read-mark-strong);
+      }
+      to {
+        background-color: var(--read-mark);
+        box-shadow: 0 0 0 0.14em var(--read-mark);
+      }
+    }
+    /* Floating audio-reactive orb — lower right, rides above the toast slot */
+    .audio-orb {
+      position: fixed;
+      right: 18px;
+      bottom: 92px;
+      z-index: 40;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 7px;
+      padding: 10px 10px 9px;
+      border-radius: 20px;
+      border: 1px solid rgba(212, 175, 55, 0.42);
+      background: linear-gradient(160deg, rgba(26, 21, 12, 0.9) 0%, rgba(10, 8, 5, 0.94) 100%);
+      box-shadow:
+        0 14px 34px -14px rgba(0, 0, 0, 0.75),
+        0 0 26px rgba(212, 175, 55, 0.16),
+        inset 0 1px 0 rgba(255, 246, 219, 0.07);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      transition: opacity 0.32s ease, transform 0.32s ease;
+    }
+    .audio-orb[hidden] { display: none !important; }
+    .audio-orb {
+      animation: orb-in 0.35s ease;
+    }
+    @keyframes orb-in {
+      from {
+        opacity: 0;
+        transform: translateY(10px) scale(0.9);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+    /* Dormant stub — a faint ring where the orb lives, for one-click restore */
+    .audio-orb-stub {
+      position: fixed;
+      right: 22px;
+      bottom: 104px;
+      z-index: 40;
+      width: 30px;
+      height: 30px;
+      padding: 0;
+      border-radius: 50%;
+      border: 1px dashed rgba(212, 175, 55, 0.5);
+      background: rgba(212, 175, 55, 0.05);
+      cursor: pointer;
+      animation: orb-in 0.3s ease;
+      transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+    }
+    .audio-orb-stub::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      margin: auto;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: rgba(251, 191, 36, 0.55);
+      transition: background 0.2s ease, box-shadow 0.2s ease;
+    }
+    .audio-orb-stub:hover {
+      border-color: rgba(251, 191, 36, 0.9);
+      border-style: solid;
+      background: rgba(212, 175, 55, 0.14);
+      box-shadow: 0 0 14px rgba(251, 191, 36, 0.28);
+      transform: scale(1.1);
+    }
+    .audio-orb-stub:hover::after {
+      background: #fbbf24;
+      box-shadow: 0 0 10px rgba(251, 191, 36, 0.7);
+    }
+    .audio-orb-stub[hidden] { display: none !important; }
+    .audio-orb.is-hiding {
+      opacity: 0;
+      transform: translateY(10px) scale(0.9);
+    }
+    .audio-orb.is-playing {
+      border-color: rgba(251, 191, 36, 0.6);
+      box-shadow:
+        0 14px 34px -14px rgba(0, 0, 0, 0.75),
+        0 0 30px rgba(251, 191, 36, 0.24),
+        inset 0 1px 0 rgba(255, 246, 219, 0.09);
+    }
+    .audio-orb-canvas {
+      display: block;
+      width: 76px;
+      height: 76px;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 50% 34%, rgba(48, 38, 20, 0.55) 0%, rgba(8, 6, 4, 0.92) 74%);
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      cursor: pointer;
+      outline: none;
+    }
+    .audio-orb-canvas:focus-visible {
+      border-color: rgba(251, 191, 36, 0.8);
+      box-shadow: 0 0 0 2px rgba(251, 191, 36, 0.3);
+    }
+    .audio-orb-tag {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 8.5px;
+      font-weight: 700;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: rgba(243, 229, 200, 0.55);
+      transition: color 0.3s ease, text-shadow 0.3s ease;
+    }
+    .audio-orb-tag.is-live {
+      color: #fbbf24;
+      text-shadow: 0 0 10px rgba(251, 191, 36, 0.55);
+    }
+    .audio-orb-controls {
+      display: flex;
+      gap: 6px;
+    }
+    .audio-orb-btn {
+      display: grid;
+      place-items: center;
+      width: 32px;
+      height: 26px;
+      border-radius: 8px;
+      border: 1px solid rgba(212, 175, 55, 0.38);
+      background: rgba(212, 175, 55, 0.08);
+      color: #fbbf24;
+      cursor: pointer;
+      transition: background 0.2s ease, border-color 0.2s ease, transform 0.1s ease;
+    }
+    .audio-orb-btn:hover {
+      background: rgba(212, 175, 55, 0.2);
+      border-color: rgba(251, 191, 36, 0.65);
+    }
+    .audio-orb-btn:active { transform: scale(0.93); }
+    .audio-orb-btn svg {
+      width: 11px;
+      height: 11px;
+      fill: currentColor;
+    }
+    .lesson-audio-orb-restore {
+      margin-top: 0.65rem;
+      padding: 5px 10px;
+      border-radius: 8px;
+      border: 1px solid rgba(212, 175, 55, 0.45);
+      background: rgba(212, 175, 55, 0.1);
+      color: #fbd38d;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      cursor: pointer;
+      transition: background 0.2s ease, border-color 0.2s ease;
+    }
+    .lesson-audio-orb-restore:hover {
+      background: rgba(212, 175, 55, 0.22);
+      border-color: rgba(251, 191, 36, 0.7);
+    }
+    body.paper-mode .lesson-audio-orb-restore,
+    body.white-mode .lesson-audio-orb-restore {
+      color: #8a6414;
+    }
+    @media (max-width: 540px) {
+      .audio-orb {
+        right: 12px;
+        bottom: 84px;
+        padding: 8px 8px 7px;
+      }
+      .audio-orb-canvas {
+        width: 62px;
+        height: 62px;
+      }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .audio-orb,
+      .audio-orb-tag {
+        transition: none;
+      }
     }
     .lesson-infographic {
       position: relative;
@@ -4698,14 +5022,14 @@
     }
 
     /* ---- Per-card minimize toggles (card-min.js) ---- */
-    .cardmin-target { position: relative; }
+    .cardmin-target { position: relative; padding-right: 2.85rem; }
     .cardmin-btn {
       position: absolute;
-      top: 0.4rem;
-      right: 0.4rem;
+      top: 0.65rem;
+      right: 0.6rem;
       z-index: 6;
-      width: 1.55rem;
-      height: 1.55rem;
+      width: 1.45rem;
+      height: 1.45rem;
       display: inline-grid;
       place-items: center;
       padding: 0;
@@ -4713,15 +5037,24 @@
       border: 1px solid rgba(228, 197, 106, 0.75);
       color: #f6edd8;
       background: rgba(12, 10, 8, 0.82);
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.28);
       cursor: pointer;
+    }
+    .cardmin-compact { padding-right: 2.15rem; }
+    .cardmin-compact .cardmin-btn {
+      top: 0.3rem;
+      right: 0.3rem;
+      width: 1.25rem;
+      height: 1.25rem;
+      box-shadow: none;
     }
     .cardmin-btn:hover,
     .cardmin-btn:focus-visible { background: rgba(28, 22, 12, 0.94); }
-    .cardmin-btn svg { width: 0.62rem; height: 0.62rem; display: block; transition: transform 0.18s ease; }
+    .cardmin-btn svg { width: 0.55rem; height: 0.55rem; display: block; transition: transform 0.18s ease; }
+    .cardmin-compact .cardmin-btn svg { width: 0.48rem; height: 0.48rem; }
     .cardmin-target.is-card-min .cardmin-btn svg { transform: rotate(-180deg); }
-    .cardmin-target [data-cardmin-head] { padding-right: 1.9rem; }
-    .cardmin-target.is-card-min { display: block; padding-bottom: 0.5rem; cursor: pointer; }
-    .cardmin-clip.is-card-min { max-height: 4.5rem; overflow: hidden; }
+    .cardmin-target.is-card-min { display: block; padding-bottom: 0.45rem; cursor: pointer; }
+    .cardmin-clip.is-card-min { max-height: 3.4rem; overflow: hidden; }
     .cardmin-target [data-cardmin-hidden] { display: none !important; }
     body.paper-mode .cardmin-btn,
     body.white-mode .cardmin-btn {
@@ -5307,7 +5640,23 @@
         <p class="lesson-audio-kicker" id="lesson-audio-kicker">Overview</p>
         <h2 class="lesson-audio-title" id="lesson-audio-title">Lesson overview</h2>
         <p class="lesson-audio-hint" id="lesson-audio-hint" hidden></p>
-        <audio id="lesson-audio-player" controls preload="none"></audio>
+        <div class="lesson-audio-player" data-lap-player>
+          <button type="button" class="lap-btn lap-play" data-lap-play aria-label="Play or pause the lesson audio" title="Play / pause">
+            <svg data-lap-glyph-play viewBox="0 0 12 12" aria-hidden="true"><path d="M2.8 1.3 10.7 6 2.8 10.7z"/></svg>
+            <svg data-lap-glyph-pause viewBox="0 0 12 12" aria-hidden="true" style="display:none"><path d="M2.4 1.4h2.7v9.2H2.4zM6.9 1.4h2.7v9.2H6.9z"/></svg>
+          </button>
+          <span class="lap-time" data-lap-cur>0:00</span>
+          <input class="lap-seek" data-lap-seek type="range" min="0" max="1000" value="0" step="1" aria-label="Seek within the lesson audio">
+          <span class="lap-time" data-lap-dur>0:00</span>
+          <button type="button" class="lap-btn lap-mute" data-lap-mute aria-label="Mute or unmute the lesson audio" aria-pressed="false" title="Mute / unmute">
+            <svg viewBox="0 0 14 12" aria-hidden="true">
+              <path d="M0 3.9h2.9L6.7.6v10.8L2.9 8.1H0z"/>
+              <path class="lap-wave" d="M8.7 3.1c1 .8 1.6 1.8 1.6 2.9s-.6 2.1-1.6 2.9l-.8-1c.7-.5 1.1-1.1 1.1-1.9s-.4-1.4-1.1-1.9z"/>
+              <path class="lap-muted-x" d="M8.9 4.1l3.4 3.4M12.3 4.1L8.9 7.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+            </svg>
+          </button>
+          <audio id="lesson-audio-player" controls preload="none"></audio>
+        </div>
       </section>
       <figure id="sitting-roadmap" class="lesson-infographic" hidden>
         <div class="lesson-infographic-inner">
@@ -5529,5 +5878,7 @@
   <script src="js/study/sheet-glossary.js"></script>
   <script src="js/study/certificate.js"></script>
   <script src="js/study/study-app.js"></script>
+  <script src="js/study/lesson-player.js"></script>
+  <script src="js/study/audio-orb.js"></script>
 </body>
 </html>

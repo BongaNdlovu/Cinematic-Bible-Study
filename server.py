@@ -5,6 +5,7 @@ Serves only exhibit file types; blocks dotfiles and directory traversal.
 """
 
 import os
+import re
 import sys
 import mimetypes
 import webbrowser
@@ -60,7 +61,46 @@ class NebuchadnezzarHTTPHandler(SimpleHTTPRequestHandler):
         self.send_header("Access-Control-Allow-Origin", "http://127.0.0.1:" + str(self.server.server_address[1]))
         self.send_header("Access-Control-Allow-Methods", "GET, HEAD, OPTIONS")
         self.send_header("Cache-Control", "no-cache")
+        self.send_header("Accept-Ranges", "bytes")
         super().end_headers()
+
+    def send_head(self):
+        """Serve byte ranges for large media so <audio>/<video> can seek."""
+        range_header = self.headers.get("Range")
+        if not range_header:
+            return super().send_head()
+        match = re.match(r"^bytes=(\d*)-(\d*)$", range_header.strip())
+        path = self.translate_path(self.path)
+        if not match or not os.path.isfile(path):
+            return super().send_head()
+        size = os.path.getsize(path)
+        start_s, end_s = match.groups()
+        if start_s == "" and end_s == "":
+            return super().send_head()
+        if start_s == "":
+            start = max(0, size - int(end_s))
+            end = size - 1
+        else:
+            start = int(start_s)
+            end = min(int(end_s), size - 1) if end_s else size - 1
+        if start > end or start >= size:
+            self.send_response(416)
+            self.send_header("Content-Range", f"bytes */{size}")
+            self.end_headers()
+            return None
+        try:
+            f = open(path, "rb")
+        except OSError:
+            self.send_error(404, "File not found")
+            return None
+        f.seek(start)
+        self._range_remaining = end - start + 1
+        self.send_response(206)
+        self.send_header("Content-Type", self.guess_type(path))
+        self.send_header("Content-Length", str(self._range_remaining))
+        self.send_header("Content-Range", f"bytes {start}-{end}/{size}")
+        self.end_headers()
+        return f
 
     def do_OPTIONS(self):
         self.send_response(200)
@@ -97,7 +137,17 @@ class NebuchadnezzarHTTPHandler(SimpleHTTPRequestHandler):
 
     def copyfile(self, source, outputfile):
         try:
-            super().copyfile(source, outputfile)
+            remaining = getattr(self, "_range_remaining", None)
+            if remaining is None:
+                super().copyfile(source, outputfile)
+            else:
+                self._range_remaining = None
+                while remaining > 0:
+                    chunk = source.read(min(65536, remaining))
+                    if not chunk:
+                        break
+                    outputfile.write(chunk)
+                    remaining -= len(chunk)
         except (ConnectionResetError, ConnectionAbortedError, BrokenPipeError, TimeoutError):
             self.close_connection = True
 

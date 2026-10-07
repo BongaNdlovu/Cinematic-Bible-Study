@@ -1,8 +1,10 @@
 /* Per-card minimize toggles for the study desk.
    Adds a collapse button to every card in the lesson article and in each
-   instrument tab (timeline facts, map facts, context, insights, scripture,
-   workbench, verify). Minimized cards collapse to their title line; state
-   survives tab/sheet re-renders within the session (sessionStorage). */
+   instrument tab (timeline facts, map facts, context, insights, Strong's,
+   workbench, verify). Quoted verses, the chapter reading, load-bearing
+   verse cards, the opening sitting dialog, the Bible-on-hand notice, the
+   timeline caption, and quiz questions stay open. Other cards collapse to
+   their title line. That state survives re-renders in this session. */
 (function () {
   var STORE_KEY = "baCardMinState";
 
@@ -15,7 +17,6 @@
     ".biblical-case",
     ".layer-stack",
     ".next-sitting-card",
-    ".gold-bible-notice-card",
     ".source-card",
     ".qa-card",
     ".checkpoint-card",
@@ -23,7 +24,6 @@
     ".from-last-sitting",
     ".lesson-toc",
     ".glossary-card",
-    ".scripture-quote",
     ".prophecy-diagram",
     ".comparison-table-wrap",
     ".sheet-verify-card",
@@ -32,17 +32,12 @@
     ".flow-step",
     ".insight-card",
     ".epoch-facts .fact",
-    ".epoch-banner",
     ".context-plate",
-    ".scripture-chapter",
     ".strong-dock",
-    ".load-bearing-line",
-    ".workbench-card",
-    "[id^='q-card-']",
-    ".sitting-guide-card"
+    ".workbench-card"
   ].join(",");
 
-  var CLIP_SELECTOR = ".scripture-quote, .prophecy-diagram, .comparison-table-wrap";
+  var CLIP_SELECTOR = ".prophecy-diagram, .comparison-table-wrap";
 
   var HEAD_SELECTOR = [
     "h1", "h2", "h3", "h4", "h5", "b", "strong",
@@ -164,7 +159,7 @@
       if (card.dataset.cardminDone) {
         /* App code may re-render a card's inner HTML (epoch banner, context
            plate) and wipe the injected button — re-enhance those. */
-        if (card.querySelector(":scope > .cardmin-btn, [data-cardmin-head] .cardmin-btn") &&
+        if (card.querySelector(":scope > .cardmin-btn") &&
             (card.querySelector("[data-cardmin-head]") || card.classList.contains("cardmin-clip"))) continue;
         delete card.dataset.cardminDone;
         card.classList.remove("is-card-min");
@@ -187,8 +182,9 @@
         '<svg viewBox="0 0 10 6" aria-hidden="true" focusable="false">' +
         '<path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" ' +
         'stroke-linecap="round" stroke-linejoin="round"/></svg>';
-      head.appendChild(btn);
+      card.appendChild(btn);
       card.dataset.cardminKey = keyFor(card, head);
+      sizeControl(card);
       setLabel(btn, false, headTextOf(head));
       if (store[card.dataset.cardminKey]) applyMin(card, head, true, false);
     }
@@ -234,11 +230,26 @@
   window.addEventListener("beforeprint", expandAllForPrint);
   window.addEventListener("afterprint", restoreFromStore);
 
+  /* Short cards get a smaller control so a fact or a one-line dock is not
+     half button. Measure the open card; a minimized card keeps that size. */
+  function sizeControl(card) {
+    if (!card || card.classList.contains("is-card-min")) return;
+    var h = card.getBoundingClientRect().height;
+    if (h < 8) return;
+    card.classList.toggle("cardmin-compact", h < 150);
+  }
+
+  function sizeAll() {
+    var cards = document.querySelectorAll(".cardmin-target");
+    for (var i = 0; i < cards.length; i += 1) sizeControl(cards[i]);
+  }
+
   function schedule() {
     if (timer) return;
     timer = setTimeout(function () {
       timer = null;
       enhance(document);
+      requestAnimationFrame(sizeAll);
     }, 120);
   }
 
@@ -248,6 +259,8 @@
       new MutationObserver(schedule).observe(document.body, { childList: true, subtree: true });
     }
   }
+
+  window.addEventListener("resize", schedule);
 
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", start);

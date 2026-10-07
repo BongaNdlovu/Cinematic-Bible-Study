@@ -1,0 +1,8971 @@
+{
+ "model": "small.en",
+ "duration": 663.0,
+ "segments": [
+  {
+   "start": 0.24,
+   "end": 5.04,
+   "text": "the prophetic blueprint, why Daniel's unbroken chain centers on Jesus Christ,",
+   "words": [
+    {
+     "start": 0.24,
+     "end": 0.6,
+     "word": " the"
+    },
+    {
+     "start": 0.6,
+     "end": 0.96,
+     "word": " prophetic"
+    },
+    {
+     "start": 0.96,
+     "end": 1.4,
+     "word": " blueprint,"
+    },
+    {
+     "start": 1.98,
+     "end": 2.18,
+     "word": " why"
+    },
+    {
+     "start": 2.18,
+     "end": 2.74,
+     "word": " Daniel's"
+    },
+    {
+     "start": 2.74,
+     "end": 3.08,
+     "word": " unbroken"
+    },
+    {
+     "start": 3.08,
+     "end": 3.46,
+     "word": " chain"
+    },
+    {
+     "start": 3.46,
+     "end": 3.84,
+     "word": " centers"
+    },
+    {
+     "start": 3.84,
+     "end": 4.3,
+     "word": " on"
+    },
+    {
+     "start": 4.3,
+     "end": 4.62,
+     "word": " Jesus"
+    },
+    {
+     "start": 4.62,
+     "end": 5.04,
+     "word": " Christ,"
+    }
+   ]
+  },
+  {
+   "start": 6.0,
+   "end": 10.16,
+   "text": "God's historical roadmap from exile to the cross to the everlasting kingdom,",
+   "words": [
+    {
+     "start": 6.0,
+     "end": 6.26,
+     "word": " God's"
+    },
+    {
+     "start": 6.26,
+     "end": 6.64,
+     "word": " historical"
+    },
+    {
+     "start": 6.64,
+     "end": 7.12,
+     "word": " roadmap"
+    },
+    {
+     "start": 7.12,
+     "end": 7.56,
+     "word": " from"
+    },
+    {
+     "start": 7.56,
+     "end": 8.04,
+     "word": " exile"
+    },
+    {
+     "start": 8.04,
+     "end": 8.34,
+     "word": " to"
+    },
+    {
+     "start": 8.34,
+     "end": 8.46,
+     "word": " the"
+    },
+    {
+     "start": 8.46,
+     "end": 8.7,
+     "word": " cross"
+    },
+    {
+     "start": 8.7,
+     "end": 9.2,
+     "word": " to"
+    },
+    {
+     "start": 9.2,
+     "end": 9.36,
+     "word": " the"
+    },
+    {
+     "start": 9.36,
+     "end": 9.7,
+     "word": " everlasting"
+    },
+    {
+     "start": 9.7,
+     "end": 10.16,
+     "word": " kingdom,"
+    }
+   ]
+  },
+  {
+   "start": 10.58,
+   "end": 13.14,
+   "text": "and why how you read decides what you see.",
+   "words": [
+    {
+     "start": 10.58,
+     "end": 10.84,
+     "word": " and"
+    },
+    {
+     "start": 10.84,
+     "end": 11.06,
+     "word": " why"
+    },
+    {
+     "start": 11.06,
+     "end": 11.32,
+     "word": " how"
+    },
+    {
+     "start": 11.32,
+     "end": 11.52,
+     "word": " you"
+    },
+    {
+     "start": 11.52,
+     "end": 11.82,
+     "word": " read"
+    },
+    {
+     "start": 11.82,
+     "end": 12.32,
+     "word": " decides"
+    },
+    {
+     "start": 12.32,
+     "end": 12.62,
+     "word": " what"
+    },
+    {
+     "start": 12.62,
+     "end": 12.76,
+     "word": " you"
+    },
+    {
+     "start": 12.76,
+     "end": 13.14,
+     "word": " see."
+    }
+   ]
+  },
+  {
+   "start": 14.35,
+   "end": 16.85,
+   "text": "Introduction. History is not an accident.",
+   "words": [
+    {
+     "start": 14.35,
+     "end": 14.35,
+     "word": " Introduction."
+    },
+    {
+     "start": 15.49,
+     "end": 15.49,
+     "word": " History"
+    },
+    {
+     "start": 15.49,
+     "end": 15.83,
+     "word": " is"
+    },
+    {
+     "start": 15.83,
+     "end": 16.19,
+     "word": " not"
+    },
+    {
+     "start": 16.19,
+     "end": 16.43,
+     "word": " an"
+    },
+    {
+     "start": 16.43,
+     "end": 16.85,
+     "word": " accident."
+    }
+   ]
+  },
+  {
+   "start": 17.77,
+   "end": 24.43,
+   "text": "When the book of Daniel opens, the world appears broken. In 605 BC, Nebuchadnezzar sweeps down",
+   "words": [
+    {
+     "start": 17.77,
+     "end": 17.91,
+     "word": " When"
+    },
+    {
+     "start": 17.91,
+     "end": 18.01,
+     "word": " the"
+    },
+    {
+     "start": 18.01,
+     "end": 18.11,
+     "word": " book"
+    },
+    {
+     "start": 18.11,
+     "end": 18.23,
+     "word": " of"
+    },
+    {
+     "start": 18.23,
+     "end": 18.49,
+     "word": " Daniel"
+    },
+    {
+     "start": 18.49,
+     "end": 18.87,
+     "word": " opens,"
+    },
+    {
+     "start": 19.39,
+     "end": 19.49,
+     "word": " the"
+    },
+    {
+     "start": 19.49,
+     "end": 19.79,
+     "word": " world"
+    },
+    {
+     "start": 19.79,
+     "end": 20.35,
+     "word": " appears"
+    },
+    {
+     "start": 20.35,
+     "end": 20.93,
+     "word": " broken."
+    },
+    {
+     "start": 21.49,
+     "end": 21.71,
+     "word": " In"
+    },
+    {
+     "start": 21.71,
+     "end": 22.21,
+     "word": " 605"
+    },
+    {
+     "start": 22.21,
+     "end": 22.59,
+     "word": " BC,"
+    },
+    {
+     "start": 23.23,
+     "end": 23.75,
+     "word": " Nebuchadnezzar"
+    },
+    {
+     "start": 23.75,
+     "end": 24.11,
+     "word": " sweeps"
+    },
+    {
+     "start": 24.11,
+     "end": 24.43,
+     "word": " down"
+    }
+   ]
+  },
+  {
+   "start": 24.43,
+   "end": 28.77,
+   "text": "the Mediterranean coast, subdues Jerusalem and marches Hebrew royal youth, including",
+   "words": [
+    {
+     "start": 24.43,
+     "end": 24.55,
+     "word": " the"
+    },
+    {
+     "start": 24.55,
+     "end": 24.93,
+     "word": " Mediterranean"
+    },
+    {
+     "start": 24.93,
+     "end": 25.31,
+     "word": " coast,"
+    },
+    {
+     "start": 25.73,
+     "end": 26.09,
+     "word": " subdues"
+    },
+    {
+     "start": 26.09,
+     "end": 26.51,
+     "word": " Jerusalem"
+    },
+    {
+     "start": 26.51,
+     "end": 26.81,
+     "word": " and"
+    },
+    {
+     "start": 26.81,
+     "end": 27.09,
+     "word": " marches"
+    },
+    {
+     "start": 27.09,
+     "end": 27.51,
+     "word": " Hebrew"
+    },
+    {
+     "start": 27.51,
+     "end": 27.83,
+     "word": " royal"
+    },
+    {
+     "start": 27.83,
+     "end": 28.27,
+     "word": " youth,"
+    },
+    {
+     "start": 28.47,
+     "end": 28.77,
+     "word": " including"
+    }
+   ]
+  },
+  {
+   "start": 28.77,
+   "end": 34.13,
+   "text": "a teenage Daniel, hundreds of miles away into exile. Sacred vessels from the temple of Yahweh",
+   "words": [
+    {
+     "start": 28.77,
+     "end": 28.91,
+     "word": " a"
+    },
+    {
+     "start": 28.91,
+     "end": 29.15,
+     "word": " teenage"
+    },
+    {
+     "start": 29.15,
+     "end": 29.59,
+     "word": " Daniel,"
+    },
+    {
+     "start": 30.23,
+     "end": 30.41,
+     "word": " hundreds"
+    },
+    {
+     "start": 30.41,
+     "end": 30.67,
+     "word": " of"
+    },
+    {
+     "start": 30.67,
+     "end": 30.89,
+     "word": " miles"
+    },
+    {
+     "start": 30.89,
+     "end": 31.19,
+     "word": " away"
+    },
+    {
+     "start": 31.19,
+     "end": 31.39,
+     "word": " into"
+    },
+    {
+     "start": 31.39,
+     "end": 31.77,
+     "word": " exile."
+    },
+    {
+     "start": 32.83,
+     "end": 32.83,
+     "word": " Sacred"
+    },
+    {
+     "start": 32.83,
+     "end": 33.05,
+     "word": " vessels"
+    },
+    {
+     "start": 33.05,
+     "end": 33.31,
+     "word": " from"
+    },
+    {
+     "start": 33.31,
+     "end": 33.39,
+     "word": " the"
+    },
+    {
+     "start": 33.39,
+     "end": 33.59,
+     "word": " temple"
+    },
+    {
+     "start": 33.59,
+     "end": 33.75,
+     "word": " of"
+    },
+    {
+     "start": 33.75,
+     "end": 34.13,
+     "word": " Yahweh"
+    }
+   ]
+  },
+  {
+   "start": 34.13,
+   "end": 38.79,
+   "text": "are deposited into the treasure house of the god Marduk in Babylon. To the casual observer,",
+   "words": [
+    {
+     "start": 34.13,
+     "end": 34.27,
+     "word": " are"
+    },
+    {
+     "start": 34.27,
+     "end": 34.61,
+     "word": " deposited"
+    },
+    {
+     "start": 34.61,
+     "end": 34.99,
+     "word": " into"
+    },
+    {
+     "start": 34.99,
+     "end": 35.13,
+     "word": " the"
+    },
+    {
+     "start": 35.13,
+     "end": 35.35,
+     "word": " treasure"
+    },
+    {
+     "start": 35.35,
+     "end": 35.61,
+     "word": " house"
+    },
+    {
+     "start": 35.61,
+     "end": 35.79,
+     "word": " of"
+    },
+    {
+     "start": 35.79,
+     "end": 35.91,
+     "word": " the"
+    },
+    {
+     "start": 35.91,
+     "end": 36.09,
+     "word": " god"
+    },
+    {
+     "start": 36.09,
+     "end": 36.51,
+     "word": " Marduk"
+    },
+    {
+     "start": 36.51,
+     "end": 36.71,
+     "word": " in"
+    },
+    {
+     "start": 36.71,
+     "end": 37.03,
+     "word": " Babylon."
+    },
+    {
+     "start": 37.77,
+     "end": 37.95,
+     "word": " To"
+    },
+    {
+     "start": 37.95,
+     "end": 38.09,
+     "word": " the"
+    },
+    {
+     "start": 38.09,
+     "end": 38.43,
+     "word": " casual"
+    },
+    {
+     "start": 38.43,
+     "end": 38.79,
+     "word": " observer,"
+    }
+   ]
+  },
+  {
+   "start": 39.29,
+   "end": 44.81,
+   "text": "the god of Israel has been defeated by imperial might. Yet Daniel 1-2 immediately upends that",
+   "words": [
+    {
+     "start": 39.29,
+     "end": 39.33,
+     "word": " the"
+    },
+    {
+     "start": 39.33,
+     "end": 39.49,
+     "word": " god"
+    },
+    {
+     "start": 39.49,
+     "end": 39.61,
+     "word": " of"
+    },
+    {
+     "start": 39.61,
+     "end": 39.99,
+     "word": " Israel"
+    },
+    {
+     "start": 39.99,
+     "end": 40.19,
+     "word": " has"
+    },
+    {
+     "start": 40.19,
+     "end": 40.37,
+     "word": " been"
+    },
+    {
+     "start": 40.37,
+     "end": 40.69,
+     "word": " defeated"
+    },
+    {
+     "start": 40.69,
+     "end": 40.99,
+     "word": " by"
+    },
+    {
+     "start": 40.99,
+     "end": 41.51,
+     "word": " imperial"
+    },
+    {
+     "start": 41.51,
+     "end": 41.79,
+     "word": " might."
+    },
+    {
+     "start": 42.67,
+     "end": 42.77,
+     "word": " Yet"
+    },
+    {
+     "start": 42.77,
+     "end": 43.19,
+     "word": " Daniel"
+    },
+    {
+     "start": 43.19,
+     "end": 43.41,
+     "word": " 1"
+    },
+    {
+     "start": 43.41,
+     "end": 43.75,
+     "word": "-2"
+    },
+    {
+     "start": 43.75,
+     "end": 44.05,
+     "word": " immediately"
+    },
+    {
+     "start": 44.05,
+     "end": 44.59,
+     "word": " upends"
+    },
+    {
+     "start": 44.59,
+     "end": 44.81,
+     "word": " that"
+    }
+   ]
+  },
+  {
+   "start": 44.81,
+   "end": 51.72,
+   "text": "view. And the Lord gave Jehoiakim king of Judah into his hand. Human tyrants do not direct history",
+   "words": [
+    {
+     "start": 44.81,
+     "end": 45.05,
+     "word": " view."
+    },
+    {
+     "start": 45.87,
+     "end": 46.01,
+     "word": " And"
+    },
+    {
+     "start": 46.01,
+     "end": 46.15,
+     "word": " the"
+    },
+    {
+     "start": 46.15,
+     "end": 46.39,
+     "word": " Lord"
+    },
+    {
+     "start": 46.39,
+     "end": 46.83,
+     "word": " gave"
+    },
+    {
+     "start": 46.83,
+     "end": 47.61,
+     "word": " Jehoiakim"
+    },
+    {
+     "start": 47.61,
+     "end": 47.81,
+     "word": " king"
+    },
+    {
+     "start": 47.81,
+     "end": 47.95,
+     "word": " of"
+    },
+    {
+     "start": 47.95,
+     "end": 48.17,
+     "word": " Judah"
+    },
+    {
+     "start": 48.17,
+     "end": 48.47,
+     "word": " into"
+    },
+    {
+     "start": 48.47,
+     "end": 48.65,
+     "word": " his"
+    },
+    {
+     "start": 48.65,
+     "end": 48.93,
+     "word": " hand."
+    },
+    {
+     "start": 50.14,
+     "end": 50.4,
+     "word": " Human"
+    },
+    {
+     "start": 50.4,
+     "end": 50.74,
+     "word": " tyrants"
+    },
+    {
+     "start": 50.74,
+     "end": 50.92,
+     "word": " do"
+    },
+    {
+     "start": 50.92,
+     "end": 51.1,
+     "word": " not"
+    },
+    {
+     "start": 51.1,
+     "end": 51.36,
+     "word": " direct"
+    },
+    {
+     "start": 51.36,
+     "end": 51.72,
+     "word": " history"
+    }
+   ]
+  },
+  {
+   "start": 51.72,
+   "end": 56.38,
+   "text": "independently. Nebuchadnezzar did not conquer Jerusalem by his own strength. God handed it",
+   "words": [
+    {
+     "start": 51.72,
+     "end": 52.12,
+     "word": " independently."
+    },
+    {
+     "start": 52.88,
+     "end": 53.3,
+     "word": " Nebuchadnezzar"
+    },
+    {
+     "start": 53.3,
+     "end": 53.42,
+     "word": " did"
+    },
+    {
+     "start": 53.42,
+     "end": 53.6,
+     "word": " not"
+    },
+    {
+     "start": 53.6,
+     "end": 53.86,
+     "word": " conquer"
+    },
+    {
+     "start": 53.86,
+     "end": 54.26,
+     "word": " Jerusalem"
+    },
+    {
+     "start": 54.26,
+     "end": 54.5,
+     "word": " by"
+    },
+    {
+     "start": 54.5,
+     "end": 54.62,
+     "word": " his"
+    },
+    {
+     "start": 54.62,
+     "end": 54.76,
+     "word": " own"
+    },
+    {
+     "start": 54.76,
+     "end": 55.14,
+     "word": " strength."
+    },
+    {
+     "start": 55.82,
+     "end": 55.9,
+     "word": " God"
+    },
+    {
+     "start": 55.9,
+     "end": 56.22,
+     "word": " handed"
+    },
+    {
+     "start": 56.22,
+     "end": 56.38,
+     "word": " it"
+    }
+   ]
+  },
+  {
+   "start": 56.38,
+   "end": 61.54,
+   "text": "over according to his prophetic purpose. This single realization establishes the foundation",
+   "words": [
+    {
+     "start": 56.38,
+     "end": 56.64,
+     "word": " over"
+    },
+    {
+     "start": 56.64,
+     "end": 57.02,
+     "word": " according"
+    },
+    {
+     "start": 57.02,
+     "end": 57.28,
+     "word": " to"
+    },
+    {
+     "start": 57.28,
+     "end": 57.42,
+     "word": " his"
+    },
+    {
+     "start": 57.42,
+     "end": 57.86,
+     "word": " prophetic"
+    },
+    {
+     "start": 57.86,
+     "end": 58.28,
+     "word": " purpose."
+    },
+    {
+     "start": 59.08,
+     "end": 59.26,
+     "word": " This"
+    },
+    {
+     "start": 59.26,
+     "end": 59.68,
+     "word": " single"
+    },
+    {
+     "start": 59.68,
+     "end": 60.16,
+     "word": " realization"
+    },
+    {
+     "start": 60.16,
+     "end": 60.86,
+     "word": " establishes"
+    },
+    {
+     "start": 60.86,
+     "end": 61.16,
+     "word": " the"
+    },
+    {
+     "start": 61.16,
+     "end": 61.54,
+     "word": " foundation"
+    }
+   ]
+  },
+  {
+   "start": 61.54,
+   "end": 67.84,
+   "text": "for biblical prophecy. Earthly empires rise, fall, and transition only by divine permission.",
+   "words": [
+    {
+     "start": 61.54,
+     "end": 61.94,
+     "word": " for"
+    },
+    {
+     "start": 61.94,
+     "end": 62.24,
+     "word": " biblical"
+    },
+    {
+     "start": 62.24,
+     "end": 62.74,
+     "word": " prophecy."
+    },
+    {
+     "start": 63.58,
+     "end": 63.84,
+     "word": " Earthly"
+    },
+    {
+     "start": 63.84,
+     "end": 64.22,
+     "word": " empires"
+    },
+    {
+     "start": 64.22,
+     "end": 64.7,
+     "word": " rise,"
+    },
+    {
+     "start": 64.92,
+     "end": 65.22,
+     "word": " fall,"
+    },
+    {
+     "start": 65.42,
+     "end": 65.56,
+     "word": " and"
+    },
+    {
+     "start": 65.56,
+     "end": 66.06,
+     "word": " transition"
+    },
+    {
+     "start": 66.06,
+     "end": 66.66,
+     "word": " only"
+    },
+    {
+     "start": 66.66,
+     "end": 67.12,
+     "word": " by"
+    },
+    {
+     "start": 67.12,
+     "end": 67.4,
+     "word": " divine"
+    },
+    {
+     "start": 67.4,
+     "end": 67.84,
+     "word": " permission."
+    }
+   ]
+  },
+  {
+   "start": 69.24,
+   "end": 72.44,
+   "text": "Biblical prophecy is not a sensational riddle designed to entertain curiosity.",
+   "words": [
+    {
+     "start": 69.24,
+     "end": 69.24,
+     "word": " Biblical"
+    },
+    {
+     "start": 69.24,
+     "end": 69.58,
+     "word": " prophecy"
+    },
+    {
+     "start": 69.58,
+     "end": 69.86,
+     "word": " is"
+    },
+    {
+     "start": 69.86,
+     "end": 70.08,
+     "word": " not"
+    },
+    {
+     "start": 70.08,
+     "end": 70.24,
+     "word": " a"
+    },
+    {
+     "start": 70.24,
+     "end": 70.64,
+     "word": " sensational"
+    },
+    {
+     "start": 70.64,
+     "end": 71.04,
+     "word": " riddle"
+    },
+    {
+     "start": 71.04,
+     "end": 71.4,
+     "word": " designed"
+    },
+    {
+     "start": 71.4,
+     "end": 71.62,
+     "word": " to"
+    },
+    {
+     "start": 71.62,
+     "end": 72.02,
+     "word": " entertain"
+    },
+    {
+     "start": 72.02,
+     "end": 72.44,
+     "word": " curiosity."
+    }
+   ]
+  },
+  {
+   "start": 72.94,
+   "end": 77.38,
+   "text": "It is God's historical roadmap, demonstrating his sovereignty over every superpower",
+   "words": [
+    {
+     "start": 72.94,
+     "end": 73.34,
+     "word": " It"
+    },
+    {
+     "start": 73.34,
+     "end": 73.5,
+     "word": " is"
+    },
+    {
+     "start": 73.5,
+     "end": 73.82,
+     "word": " God's"
+    },
+    {
+     "start": 73.82,
+     "end": 74.2,
+     "word": " historical"
+    },
+    {
+     "start": 74.2,
+     "end": 74.72,
+     "word": " roadmap,"
+    },
+    {
+     "start": 75.2,
+     "end": 75.58,
+     "word": " demonstrating"
+    },
+    {
+     "start": 75.58,
+     "end": 75.82,
+     "word": " his"
+    },
+    {
+     "start": 75.82,
+     "end": 76.18,
+     "word": " sovereignty"
+    },
+    {
+     "start": 76.18,
+     "end": 76.54,
+     "word": " over"
+    },
+    {
+     "start": 76.54,
+     "end": 76.96,
+     "word": " every"
+    },
+    {
+     "start": 76.96,
+     "end": 77.38,
+     "word": " superpower"
+    }
+   ]
+  },
+  {
+   "start": 77.38,
+   "end": 80.64,
+   "text": "and pointing forward to the redemptive arrival of Jesus Christ.",
+   "words": [
+    {
+     "start": 77.38,
+     "end": 78.06,
+     "word": " and"
+    },
+    {
+     "start": 78.06,
+     "end": 78.36,
+     "word": " pointing"
+    },
+    {
+     "start": 78.36,
+     "end": 78.64,
+     "word": " forward"
+    },
+    {
+     "start": 78.64,
+     "end": 78.9,
+     "word": " to"
+    },
+    {
+     "start": 78.9,
+     "end": 79.0,
+     "word": " the"
+    },
+    {
+     "start": 79.0,
+     "end": 79.42,
+     "word": " redemptive"
+    },
+    {
+     "start": 79.42,
+     "end": 79.68,
+     "word": " arrival"
+    },
+    {
+     "start": 79.68,
+     "end": 80.04,
+     "word": " of"
+    },
+    {
+     "start": 80.04,
+     "end": 80.24,
+     "word": " Jesus"
+    },
+    {
+     "start": 80.24,
+     "end": 80.64,
+     "word": " Christ."
+    }
+   ]
+  },
+  {
+   "start": 81.62,
+   "end": 89.46,
+   "text": "Part one. The three hermeneutical roads. How you read decides what you see. Before you identify a",
+   "words": [
+    {
+     "start": 81.62,
+     "end": 81.96,
+     "word": " Part"
+    },
+    {
+     "start": 81.96,
+     "end": 82.28,
+     "word": " one."
+    },
+    {
+     "start": 82.86,
+     "end": 82.86,
+     "word": " The"
+    },
+    {
+     "start": 82.86,
+     "end": 83.2,
+     "word": " three"
+    },
+    {
+     "start": 83.2,
+     "end": 83.86,
+     "word": " hermeneutical"
+    },
+    {
+     "start": 83.86,
+     "end": 84.34,
+     "word": " roads."
+    },
+    {
+     "start": 85.18,
+     "end": 85.28,
+     "word": " How"
+    },
+    {
+     "start": 85.28,
+     "end": 85.44,
+     "word": " you"
+    },
+    {
+     "start": 85.44,
+     "end": 85.68,
+     "word": " read"
+    },
+    {
+     "start": 85.68,
+     "end": 86.18,
+     "word": " decides"
+    },
+    {
+     "start": 86.18,
+     "end": 86.4,
+     "word": " what"
+    },
+    {
+     "start": 86.4,
+     "end": 86.52,
+     "word": " you"
+    },
+    {
+     "start": 86.52,
+     "end": 86.76,
+     "word": " see."
+    },
+    {
+     "start": 88.24,
+     "end": 88.24,
+     "word": " Before"
+    },
+    {
+     "start": 88.24,
+     "end": 88.62,
+     "word": " you"
+    },
+    {
+     "start": 88.62,
+     "end": 89.1,
+     "word": " identify"
+    },
+    {
+     "start": 89.1,
+     "end": 89.46,
+     "word": " a"
+    }
+   ]
+  },
+  {
+   "start": 89.46,
+   "end": 95.42,
+   "text": "single prophetic animal, horn, or date, you make a hermeneutical choice. Hermeneutics is simply",
+   "words": [
+    {
+     "start": 89.46,
+     "end": 89.76,
+     "word": " single"
+    },
+    {
+     "start": 89.76,
+     "end": 90.16,
+     "word": " prophetic"
+    },
+    {
+     "start": 90.16,
+     "end": 90.7,
+     "word": " animal,"
+    },
+    {
+     "start": 91.3,
+     "end": 91.32,
+     "word": " horn,"
+    },
+    {
+     "start": 91.56,
+     "end": 91.62,
+     "word": " or"
+    },
+    {
+     "start": 91.62,
+     "end": 91.94,
+     "word": " date,"
+    },
+    {
+     "start": 92.46,
+     "end": 92.58,
+     "word": " you"
+    },
+    {
+     "start": 92.58,
+     "end": 92.76,
+     "word": " make"
+    },
+    {
+     "start": 92.76,
+     "end": 92.9,
+     "word": " a"
+    },
+    {
+     "start": 92.9,
+     "end": 93.36,
+     "word": " hermeneutical"
+    },
+    {
+     "start": 93.36,
+     "end": 93.78,
+     "word": " choice."
+    },
+    {
+     "start": 94.56,
+     "end": 94.9,
+     "word": " Hermeneutics"
+    },
+    {
+     "start": 94.9,
+     "end": 95.14,
+     "word": " is"
+    },
+    {
+     "start": 95.14,
+     "end": 95.42,
+     "word": " simply"
+    }
+   ]
+  },
+  {
+   "start": 95.42,
+   "end": 99.88,
+   "text": "the method and rules by which you interpret scripture. For centuries, interpreters have",
+   "words": [
+    {
+     "start": 95.42,
+     "end": 95.58,
+     "word": " the"
+    },
+    {
+     "start": 95.58,
+     "end": 95.88,
+     "word": " method"
+    },
+    {
+     "start": 95.88,
+     "end": 96.12,
+     "word": " and"
+    },
+    {
+     "start": 96.12,
+     "end": 96.44,
+     "word": " rules"
+    },
+    {
+     "start": 96.44,
+     "end": 96.66,
+     "word": " by"
+    },
+    {
+     "start": 96.66,
+     "end": 96.84,
+     "word": " which"
+    },
+    {
+     "start": 96.84,
+     "end": 96.94,
+     "word": " you"
+    },
+    {
+     "start": 96.94,
+     "end": 97.26,
+     "word": " interpret"
+    },
+    {
+     "start": 97.26,
+     "end": 97.6,
+     "word": " scripture."
+    },
+    {
+     "start": 98.3,
+     "end": 98.46,
+     "word": " For"
+    },
+    {
+     "start": 98.46,
+     "end": 98.86,
+     "word": " centuries,"
+    },
+    {
+     "start": 99.26,
+     "end": 99.74,
+     "word": " interpreters"
+    },
+    {
+     "start": 99.74,
+     "end": 99.88,
+     "word": " have"
+    }
+   ]
+  },
+  {
+   "start": 99.88,
+   "end": 105.98,
+   "text": "approached apocalyptic prophecy through three primary systems. One, historicism, the continuous",
+   "words": [
+    {
+     "start": 99.88,
+     "end": 100.22,
+     "word": " approached"
+    },
+    {
+     "start": 100.22,
+     "end": 100.72,
+     "word": " apocalyptic"
+    },
+    {
+     "start": 100.72,
+     "end": 101.12,
+     "word": " prophecy"
+    },
+    {
+     "start": 101.12,
+     "end": 101.46,
+     "word": " through"
+    },
+    {
+     "start": 101.46,
+     "end": 101.88,
+     "word": " three"
+    },
+    {
+     "start": 101.88,
+     "end": 102.32,
+     "word": " primary"
+    },
+    {
+     "start": 102.32,
+     "end": 102.82,
+     "word": " systems."
+    },
+    {
+     "start": 103.9,
+     "end": 104.04,
+     "word": " One,"
+    },
+    {
+     "start": 104.5,
+     "end": 105.16,
+     "word": " historicism,"
+    },
+    {
+     "start": 105.44,
+     "end": 105.6,
+     "word": " the"
+    },
+    {
+     "start": 105.6,
+     "end": 105.98,
+     "word": " continuous"
+    }
+   ]
+  },
+  {
+   "start": 105.98,
+   "end": 111.86,
+   "text": "historical model. Historicism reads Daniel in Revelation as an unbroken, contiguous chain of",
+   "words": [
+    {
+     "start": 105.98,
+     "end": 106.38,
+     "word": " historical"
+    },
+    {
+     "start": 106.38,
+     "end": 107.02,
+     "word": " model."
+    },
+    {
+     "start": 108.14,
+     "end": 108.42,
+     "word": " Historicism"
+    },
+    {
+     "start": 108.42,
+     "end": 108.68,
+     "word": " reads"
+    },
+    {
+     "start": 108.68,
+     "end": 109.0,
+     "word": " Daniel"
+    },
+    {
+     "start": 109.0,
+     "end": 109.16,
+     "word": " in"
+    },
+    {
+     "start": 109.16,
+     "end": 109.5,
+     "word": " Revelation"
+    },
+    {
+     "start": 109.5,
+     "end": 109.92,
+     "word": " as"
+    },
+    {
+     "start": 109.92,
+     "end": 110.06,
+     "word": " an"
+    },
+    {
+     "start": 110.06,
+     "end": 110.74,
+     "word": " unbroken,"
+    },
+    {
+     "start": 110.88,
+     "end": 111.4,
+     "word": " contiguous"
+    },
+    {
+     "start": 111.4,
+     "end": 111.74,
+     "word": " chain"
+    },
+    {
+     "start": 111.74,
+     "end": 111.86,
+     "word": " of"
+    }
+   ]
+  },
+  {
+   "start": 111.86,
+   "end": 115.7,
+   "text": "fulfillment extending from the prophets day through the rise and fall of world empires",
+   "words": [
+    {
+     "start": 111.86,
+     "end": 112.24,
+     "word": " fulfillment"
+    },
+    {
+     "start": 112.24,
+     "end": 112.98,
+     "word": " extending"
+    },
+    {
+     "start": 112.98,
+     "end": 113.3,
+     "word": " from"
+    },
+    {
+     "start": 113.3,
+     "end": 113.44,
+     "word": " the"
+    },
+    {
+     "start": 113.44,
+     "end": 113.68,
+     "word": " prophets"
+    },
+    {
+     "start": 113.68,
+     "end": 113.94,
+     "word": " day"
+    },
+    {
+     "start": 113.94,
+     "end": 114.18,
+     "word": " through"
+    },
+    {
+     "start": 114.18,
+     "end": 114.34,
+     "word": " the"
+    },
+    {
+     "start": 114.34,
+     "end": 114.58,
+     "word": " rise"
+    },
+    {
+     "start": 114.58,
+     "end": 114.78,
+     "word": " and"
+    },
+    {
+     "start": 114.78,
+     "end": 114.98,
+     "word": " fall"
+    },
+    {
+     "start": 114.98,
+     "end": 115.1,
+     "word": " of"
+    },
+    {
+     "start": 115.1,
+     "end": 115.26,
+     "word": " world"
+    },
+    {
+     "start": 115.26,
+     "end": 115.7,
+     "word": " empires"
+    }
+   ]
+  },
+  {
+   "start": 115.7,
+   "end": 121.86,
+   "text": "across the Christian era and straight to the second coming. Who held it? Early church fathers,",
+   "words": [
+    {
+     "start": 115.7,
+     "end": 116.42,
+     "word": " across"
+    },
+    {
+     "start": 116.42,
+     "end": 116.64,
+     "word": " the"
+    },
+    {
+     "start": 116.64,
+     "end": 116.88,
+     "word": " Christian"
+    },
+    {
+     "start": 116.88,
+     "end": 117.14,
+     "word": " era"
+    },
+    {
+     "start": 117.14,
+     "end": 117.72,
+     "word": " and"
+    },
+    {
+     "start": 117.72,
+     "end": 118.04,
+     "word": " straight"
+    },
+    {
+     "start": 118.04,
+     "end": 118.28,
+     "word": " to"
+    },
+    {
+     "start": 118.28,
+     "end": 118.38,
+     "word": " the"
+    },
+    {
+     "start": 118.38,
+     "end": 118.54,
+     "word": " second"
+    },
+    {
+     "start": 118.54,
+     "end": 118.86,
+     "word": " coming."
+    },
+    {
+     "start": 119.7,
+     "end": 120.02,
+     "word": " Who"
+    },
+    {
+     "start": 120.02,
+     "end": 120.2,
+     "word": " held"
+    },
+    {
+     "start": 120.2,
+     "end": 120.46,
+     "word": " it?"
+    },
+    {
+     "start": 120.86,
+     "end": 121.24,
+     "word": " Early"
+    },
+    {
+     "start": 121.24,
+     "end": 121.5,
+     "word": " church"
+    },
+    {
+     "start": 121.5,
+     "end": 121.86,
+     "word": " fathers,"
+    }
+   ]
+  },
+  {
+   "start": 122.22,
+   "end": 127.92,
+   "text": "such as Hippolytus, the Waldenses, John Wycliffe, and virtually all the Protestant reformers,",
+   "words": [
+    {
+     "start": 122.22,
+     "end": 122.34,
+     "word": " such"
+    },
+    {
+     "start": 122.34,
+     "end": 122.62,
+     "word": " as"
+    },
+    {
+     "start": 122.62,
+     "end": 123.26,
+     "word": " Hippolytus,"
+    },
+    {
+     "start": 123.48,
+     "end": 123.54,
+     "word": " the"
+    },
+    {
+     "start": 123.54,
+     "end": 124.04,
+     "word": " Waldenses,"
+    },
+    {
+     "start": 124.86,
+     "end": 124.92,
+     "word": " John"
+    },
+    {
+     "start": 124.92,
+     "end": 125.26,
+     "word": " Wycliffe,"
+    },
+    {
+     "start": 125.94,
+     "end": 126.02,
+     "word": " and"
+    },
+    {
+     "start": 126.02,
+     "end": 126.34,
+     "word": " virtually"
+    },
+    {
+     "start": 126.34,
+     "end": 126.8,
+     "word": " all"
+    },
+    {
+     "start": 126.8,
+     "end": 126.96,
+     "word": " the"
+    },
+    {
+     "start": 126.96,
+     "end": 127.3,
+     "word": " Protestant"
+    },
+    {
+     "start": 127.3,
+     "end": 127.92,
+     "word": " reformers,"
+    }
+   ]
+  },
+  {
+   "start": 128.34,
+   "end": 134.54,
+   "text": "Martin Luther, John Calvin, Philip Melancton, John Knox, as well as scientists like Sir Isaac",
+   "words": [
+    {
+     "start": 128.34,
+     "end": 128.52,
+     "word": " Martin"
+    },
+    {
+     "start": 128.52,
+     "end": 128.72,
+     "word": " Luther,"
+    },
+    {
+     "start": 129.34,
+     "end": 129.56,
+     "word": " John"
+    },
+    {
+     "start": 129.56,
+     "end": 129.9,
+     "word": " Calvin,"
+    },
+    {
+     "start": 130.32,
+     "end": 130.48,
+     "word": " Philip"
+    },
+    {
+     "start": 130.48,
+     "end": 131.0,
+     "word": " Melancton,"
+    },
+    {
+     "start": 131.32,
+     "end": 131.48,
+     "word": " John"
+    },
+    {
+     "start": 131.48,
+     "end": 131.82,
+     "word": " Knox,"
+    },
+    {
+     "start": 132.34,
+     "end": 132.76,
+     "word": " as"
+    },
+    {
+     "start": 132.76,
+     "end": 132.92,
+     "word": " well"
+    },
+    {
+     "start": 132.92,
+     "end": 133.04,
+     "word": " as"
+    },
+    {
+     "start": 133.04,
+     "end": 133.5,
+     "word": " scientists"
+    },
+    {
+     "start": 133.5,
+     "end": 134.06,
+     "word": " like"
+    },
+    {
+     "start": 134.06,
+     "end": 134.28,
+     "word": " Sir"
+    },
+    {
+     "start": 134.28,
+     "end": 134.54,
+     "word": " Isaac"
+    }
+   ]
+  },
+  {
+   "start": 134.54,
+   "end": 141.83,
+   "text": "Newton. Why it works? It obeys the explicit text of Daniel 2.38-44. Daniel names Babylon",
+   "words": [
+    {
+     "start": 134.54,
+     "end": 134.72,
+     "word": " Newton."
+    },
+    {
+     "start": 135.62,
+     "end": 135.96,
+     "word": " Why"
+    },
+    {
+     "start": 135.96,
+     "end": 136.08,
+     "word": " it"
+    },
+    {
+     "start": 136.08,
+     "end": 136.34,
+     "word": " works?"
+    },
+    {
+     "start": 136.92,
+     "end": 137.0,
+     "word": " It"
+    },
+    {
+     "start": 137.0,
+     "end": 137.34,
+     "word": " obeys"
+    },
+    {
+     "start": 137.34,
+     "end": 137.48,
+     "word": " the"
+    },
+    {
+     "start": 137.48,
+     "end": 137.9,
+     "word": " explicit"
+    },
+    {
+     "start": 137.9,
+     "end": 138.32,
+     "word": " text"
+    },
+    {
+     "start": 138.32,
+     "end": 138.5,
+     "word": " of"
+    },
+    {
+     "start": 138.5,
+     "end": 138.76,
+     "word": " Daniel"
+    },
+    {
+     "start": 138.76,
+     "end": 139.04,
+     "word": " 2"
+    },
+    {
+     "start": 139.04,
+     "end": 139.44,
+     "word": ".38"
+    },
+    {
+     "start": 139.44,
+     "end": 140.04,
+     "word": "-44."
+    },
+    {
+     "start": 140.87,
+     "end": 141.13,
+     "word": " Daniel"
+    },
+    {
+     "start": 141.13,
+     "end": 141.47,
+     "word": " names"
+    },
+    {
+     "start": 141.47,
+     "end": 141.83,
+     "word": " Babylon"
+    }
+   ]
+  },
+  {
+   "start": 141.83,
+   "end": 147.17,
+   "text": "as the head of gold and tells the king that after him will arise second, third, and fourth",
+   "words": [
+    {
+     "start": 141.83,
+     "end": 142.27,
+     "word": " as"
+    },
+    {
+     "start": 142.27,
+     "end": 142.41,
+     "word": " the"
+    },
+    {
+     "start": 142.41,
+     "end": 142.49,
+     "word": " head"
+    },
+    {
+     "start": 142.49,
+     "end": 142.63,
+     "word": " of"
+    },
+    {
+     "start": 142.63,
+     "end": 142.85,
+     "word": " gold"
+    },
+    {
+     "start": 142.85,
+     "end": 143.57,
+     "word": " and"
+    },
+    {
+     "start": 143.57,
+     "end": 143.77,
+     "word": " tells"
+    },
+    {
+     "start": 143.77,
+     "end": 143.95,
+     "word": " the"
+    },
+    {
+     "start": 143.95,
+     "end": 144.07,
+     "word": " king"
+    },
+    {
+     "start": 144.07,
+     "end": 144.23,
+     "word": " that"
+    },
+    {
+     "start": 144.23,
+     "end": 144.53,
+     "word": " after"
+    },
+    {
+     "start": 144.53,
+     "end": 144.79,
+     "word": " him"
+    },
+    {
+     "start": 144.79,
+     "end": 144.97,
+     "word": " will"
+    },
+    {
+     "start": 144.97,
+     "end": 145.31,
+     "word": " arise"
+    },
+    {
+     "start": 145.31,
+     "end": 145.89,
+     "word": " second,"
+    },
+    {
+     "start": 146.29,
+     "end": 146.51,
+     "word": " third,"
+    },
+    {
+     "start": 146.71,
+     "end": 146.81,
+     "word": " and"
+    },
+    {
+     "start": 146.81,
+     "end": 147.17,
+     "word": " fourth"
+    }
+   ]
+  },
+  {
+   "start": 147.17,
+   "end": 153.68,
+   "text": "empires, culminating in the eternal kingdom of God. Two, preterism, confined to the past.",
+   "words": [
+    {
+     "start": 147.17,
+     "end": 147.63,
+     "word": " empires,"
+    },
+    {
+     "start": 148.17,
+     "end": 148.51,
+     "word": " culminating"
+    },
+    {
+     "start": 148.51,
+     "end": 148.91,
+     "word": " in"
+    },
+    {
+     "start": 148.91,
+     "end": 149.01,
+     "word": " the"
+    },
+    {
+     "start": 149.01,
+     "end": 149.35,
+     "word": " eternal"
+    },
+    {
+     "start": 149.35,
+     "end": 149.61,
+     "word": " kingdom"
+    },
+    {
+     "start": 149.61,
+     "end": 149.87,
+     "word": " of"
+    },
+    {
+     "start": 149.87,
+     "end": 150.11,
+     "word": " God."
+    },
+    {
+     "start": 151.16,
+     "end": 151.16,
+     "word": " Two,"
+    },
+    {
+     "start": 151.92,
+     "end": 152.34,
+     "word": " preterism,"
+    },
+    {
+     "start": 152.68,
+     "end": 153.1,
+     "word": " confined"
+    },
+    {
+     "start": 153.1,
+     "end": 153.3,
+     "word": " to"
+    },
+    {
+     "start": 153.3,
+     "end": 153.4,
+     "word": " the"
+    },
+    {
+     "start": 153.4,
+     "end": 153.68,
+     "word": " past."
+    }
+   ]
+  },
+  {
+   "start": 154.74,
+   "end": 158.94,
+   "text": "Preterism claims that the prophecies of Daniel were exhausted in the second century BC during",
+   "words": [
+    {
+     "start": 154.74,
+     "end": 155.04,
+     "word": " Preterism"
+    },
+    {
+     "start": 155.04,
+     "end": 155.3,
+     "word": " claims"
+    },
+    {
+     "start": 155.3,
+     "end": 155.54,
+     "word": " that"
+    },
+    {
+     "start": 155.54,
+     "end": 155.64,
+     "word": " the"
+    },
+    {
+     "start": 155.64,
+     "end": 156.06,
+     "word": " prophecies"
+    },
+    {
+     "start": 156.06,
+     "end": 156.18,
+     "word": " of"
+    },
+    {
+     "start": 156.18,
+     "end": 156.46,
+     "word": " Daniel"
+    },
+    {
+     "start": 156.46,
+     "end": 156.68,
+     "word": " were"
+    },
+    {
+     "start": 156.68,
+     "end": 157.12,
+     "word": " exhausted"
+    },
+    {
+     "start": 157.12,
+     "end": 157.42,
+     "word": " in"
+    },
+    {
+     "start": 157.42,
+     "end": 157.54,
+     "word": " the"
+    },
+    {
+     "start": 157.54,
+     "end": 157.8,
+     "word": " second"
+    },
+    {
+     "start": 157.8,
+     "end": 158.18,
+     "word": " century"
+    },
+    {
+     "start": 158.18,
+     "end": 158.54,
+     "word": " BC"
+    },
+    {
+     "start": 158.54,
+     "end": 158.94,
+     "word": " during"
+    }
+   ]
+  },
+  {
+   "start": 158.94,
+   "end": 164.2,
+   "text": "the persecutions of Antiochus IV Epiphanes, and that Revelation was fulfilled by the",
+   "words": [
+    {
+     "start": 158.94,
+     "end": 159.12,
+     "word": " the"
+    },
+    {
+     "start": 159.12,
+     "end": 159.7,
+     "word": " persecutions"
+    },
+    {
+     "start": 159.7,
+     "end": 160.06,
+     "word": " of"
+    },
+    {
+     "start": 160.06,
+     "end": 160.78,
+     "word": " Antiochus"
+    },
+    {
+     "start": 160.78,
+     "end": 161.14,
+     "word": " IV"
+    },
+    {
+     "start": 161.14,
+     "end": 161.74,
+     "word": " Epiphanes,"
+    },
+    {
+     "start": 162.06,
+     "end": 162.64,
+     "word": " and"
+    },
+    {
+     "start": 162.64,
+     "end": 162.74,
+     "word": " that"
+    },
+    {
+     "start": 162.74,
+     "end": 163.08,
+     "word": " Revelation"
+    },
+    {
+     "start": 163.08,
+     "end": 163.44,
+     "word": " was"
+    },
+    {
+     "start": 163.44,
+     "end": 163.78,
+     "word": " fulfilled"
+    },
+    {
+     "start": 163.78,
+     "end": 164.08,
+     "word": " by"
+    },
+    {
+     "start": 164.08,
+     "end": 164.2,
+     "word": " the"
+    }
+   ]
+  },
+  {
+   "start": 164.2,
+   "end": 170.47,
+   "text": "destruction of Jerusalem in AD 70. Origins? It was first systematically formulated by the",
+   "words": [
+    {
+     "start": 164.2,
+     "end": 164.52,
+     "word": " destruction"
+    },
+    {
+     "start": 164.52,
+     "end": 164.84,
+     "word": " of"
+    },
+    {
+     "start": 164.84,
+     "end": 165.26,
+     "word": " Jerusalem"
+    },
+    {
+     "start": 165.26,
+     "end": 165.62,
+     "word": " in"
+    },
+    {
+     "start": 165.62,
+     "end": 165.98,
+     "word": " AD"
+    },
+    {
+     "start": 165.98,
+     "end": 166.46,
+     "word": " 70."
+    },
+    {
+     "start": 167.37,
+     "end": 167.67,
+     "word": " Origins?"
+    },
+    {
+     "start": 168.59,
+     "end": 168.59,
+     "word": " It"
+    },
+    {
+     "start": 168.59,
+     "end": 168.69,
+     "word": " was"
+    },
+    {
+     "start": 168.69,
+     "end": 168.95,
+     "word": " first"
+    },
+    {
+     "start": 168.95,
+     "end": 169.53,
+     "word": " systematically"
+    },
+    {
+     "start": 169.53,
+     "end": 170.09,
+     "word": " formulated"
+    },
+    {
+     "start": 170.09,
+     "end": 170.33,
+     "word": " by"
+    },
+    {
+     "start": 170.33,
+     "end": 170.47,
+     "word": " the"
+    }
+   ]
+  },
+  {
+   "start": 170.47,
+   "end": 177.87,
+   "text": "Spanish Jesuit scholar Luis de Alcazar in his 1614 work, Vistigatio Arcanis census in Apokalupsi.",
+   "words": [
+    {
+     "start": 170.47,
+     "end": 170.81,
+     "word": " Spanish"
+    },
+    {
+     "start": 170.81,
+     "end": 171.25,
+     "word": " Jesuit"
+    },
+    {
+     "start": 171.25,
+     "end": 171.69,
+     "word": " scholar"
+    },
+    {
+     "start": 171.69,
+     "end": 172.13,
+     "word": " Luis"
+    },
+    {
+     "start": 172.13,
+     "end": 172.39,
+     "word": " de"
+    },
+    {
+     "start": 172.39,
+     "end": 172.83,
+     "word": " Alcazar"
+    },
+    {
+     "start": 172.83,
+     "end": 173.13,
+     "word": " in"
+    },
+    {
+     "start": 173.13,
+     "end": 173.29,
+     "word": " his"
+    },
+    {
+     "start": 173.29,
+     "end": 174.05,
+     "word": " 1614"
+    },
+    {
+     "start": 174.05,
+     "end": 174.47,
+     "word": " work,"
+    },
+    {
+     "start": 174.99,
+     "end": 175.65,
+     "word": " Vistigatio"
+    },
+    {
+     "start": 175.65,
+     "end": 176.33,
+     "word": " Arcanis"
+    },
+    {
+     "start": 176.33,
+     "end": 176.65,
+     "word": " census"
+    },
+    {
+     "start": 176.65,
+     "end": 177.09,
+     "word": " in"
+    },
+    {
+     "start": 177.09,
+     "end": 177.87,
+     "word": " Apokalupsi."
+    }
+   ]
+  },
+  {
+   "start": 178.41,
+   "end": 183.65,
+   "text": "The structural flaw? It terminates Daniel's timeline centuries before the cross or the",
+   "words": [
+    {
+     "start": 178.41,
+     "end": 178.77,
+     "word": " The"
+    },
+    {
+     "start": 178.77,
+     "end": 179.11,
+     "word": " structural"
+    },
+    {
+     "start": 179.11,
+     "end": 179.45,
+     "word": " flaw?"
+    },
+    {
+     "start": 180.21,
+     "end": 180.35,
+     "word": " It"
+    },
+    {
+     "start": 180.35,
+     "end": 180.89,
+     "word": " terminates"
+    },
+    {
+     "start": 180.89,
+     "end": 181.33,
+     "word": " Daniel's"
+    },
+    {
+     "start": 181.33,
+     "end": 181.61,
+     "word": " timeline"
+    },
+    {
+     "start": 181.61,
+     "end": 182.27,
+     "word": " centuries"
+    },
+    {
+     "start": 182.27,
+     "end": 182.73,
+     "word": " before"
+    },
+    {
+     "start": 182.73,
+     "end": 182.91,
+     "word": " the"
+    },
+    {
+     "start": 182.91,
+     "end": 183.17,
+     "word": " cross"
+    },
+    {
+     "start": 183.17,
+     "end": 183.51,
+     "word": " or"
+    },
+    {
+     "start": 183.51,
+     "end": 183.65,
+     "word": " the"
+    }
+   ]
+  },
+  {
+   "start": 183.65,
+   "end": 188.63,
+   "text": "Roman Empire's collapse, turning prophetic promises into expired local ancient history.",
+   "words": [
+    {
+     "start": 183.65,
+     "end": 183.87,
+     "word": " Roman"
+    },
+    {
+     "start": 183.87,
+     "end": 184.37,
+     "word": " Empire's"
+    },
+    {
+     "start": 184.37,
+     "end": 184.67,
+     "word": " collapse,"
+    },
+    {
+     "start": 185.27,
+     "end": 185.57,
+     "word": " turning"
+    },
+    {
+     "start": 185.57,
+     "end": 185.97,
+     "word": " prophetic"
+    },
+    {
+     "start": 185.97,
+     "end": 186.45,
+     "word": " promises"
+    },
+    {
+     "start": 186.45,
+     "end": 186.75,
+     "word": " into"
+    },
+    {
+     "start": 186.75,
+     "end": 187.27,
+     "word": " expired"
+    },
+    {
+     "start": 187.27,
+     "end": 187.81,
+     "word": " local"
+    },
+    {
+     "start": 187.81,
+     "end": 188.19,
+     "word": " ancient"
+    },
+    {
+     "start": 188.19,
+     "end": 188.63,
+     "word": " history."
+    }
+   ]
+  },
+  {
+   "start": 189.21,
+   "end": 195.25,
+   "text": "Three, futurism, postponed to the end of time. Futurism argues that Daniel's final prophetic",
+   "words": [
+    {
+     "start": 189.21,
+     "end": 189.53,
+     "word": " Three,"
+    },
+    {
+     "start": 190.23,
+     "end": 190.73,
+     "word": " futurism,"
+    },
+    {
+     "start": 191.13,
+     "end": 191.57,
+     "word": " postponed"
+    },
+    {
+     "start": 191.57,
+     "end": 191.81,
+     "word": " to"
+    },
+    {
+     "start": 191.81,
+     "end": 191.89,
+     "word": " the"
+    },
+    {
+     "start": 191.89,
+     "end": 192.01,
+     "word": " end"
+    },
+    {
+     "start": 192.01,
+     "end": 192.13,
+     "word": " of"
+    },
+    {
+     "start": 192.13,
+     "end": 192.39,
+     "word": " time."
+    },
+    {
+     "start": 193.21,
+     "end": 193.55,
+     "word": " Futurism"
+    },
+    {
+     "start": 193.55,
+     "end": 193.85,
+     "word": " argues"
+    },
+    {
+     "start": 193.85,
+     "end": 194.13,
+     "word": " that"
+    },
+    {
+     "start": 194.13,
+     "end": 194.59,
+     "word": " Daniel's"
+    },
+    {
+     "start": 194.59,
+     "end": 194.89,
+     "word": " final"
+    },
+    {
+     "start": 194.89,
+     "end": 195.25,
+     "word": " prophetic"
+    }
+   ]
+  },
+  {
+   "start": 195.25,
+   "end": 201.83,
+   "text": "timeline, specifically the 70th week of Daniel 9, has been paused, inserting an unstated gap of",
+   "words": [
+    {
+     "start": 195.25,
+     "end": 195.73,
+     "word": " timeline,"
+    },
+    {
+     "start": 196.47,
+     "end": 196.77,
+     "word": " specifically"
+    },
+    {
+     "start": 196.77,
+     "end": 197.07,
+     "word": " the"
+    },
+    {
+     "start": 197.07,
+     "end": 197.63,
+     "word": " 70th"
+    },
+    {
+     "start": 197.63,
+     "end": 197.73,
+     "word": " week"
+    },
+    {
+     "start": 197.73,
+     "end": 197.91,
+     "word": " of"
+    },
+    {
+     "start": 197.91,
+     "end": 198.17,
+     "word": " Daniel"
+    },
+    {
+     "start": 198.17,
+     "end": 198.45,
+     "word": " 9,"
+    },
+    {
+     "start": 199.01,
+     "end": 199.13,
+     "word": " has"
+    },
+    {
+     "start": 199.13,
+     "end": 199.33,
+     "word": " been"
+    },
+    {
+     "start": 199.33,
+     "end": 199.75,
+     "word": " paused,"
+    },
+    {
+     "start": 200.35,
+     "end": 200.67,
+     "word": " inserting"
+    },
+    {
+     "start": 200.67,
+     "end": 200.87,
+     "word": " an"
+    },
+    {
+     "start": 200.87,
+     "end": 201.33,
+     "word": " unstated"
+    },
+    {
+     "start": 201.33,
+     "end": 201.63,
+     "word": " gap"
+    },
+    {
+     "start": 201.63,
+     "end": 201.83,
+     "word": " of"
+    }
+   ]
+  },
+  {
+   "start": 201.83,
+   "end": 206.79,
+   "text": "many centuries before an individual antichrist appears in a final, literal seven-year crisis.",
+   "words": [
+    {
+     "start": 201.83,
+     "end": 202.15,
+     "word": " many"
+    },
+    {
+     "start": 202.15,
+     "end": 202.59,
+     "word": " centuries"
+    },
+    {
+     "start": 202.59,
+     "end": 203.01,
+     "word": " before"
+    },
+    {
+     "start": 203.01,
+     "end": 203.19,
+     "word": " an"
+    },
+    {
+     "start": 203.19,
+     "end": 203.61,
+     "word": " individual"
+    },
+    {
+     "start": 203.61,
+     "end": 204.21,
+     "word": " antichrist"
+    },
+    {
+     "start": 204.21,
+     "end": 204.55,
+     "word": " appears"
+    },
+    {
+     "start": 204.55,
+     "end": 204.85,
+     "word": " in"
+    },
+    {
+     "start": 204.85,
+     "end": 204.99,
+     "word": " a"
+    },
+    {
+     "start": 204.99,
+     "end": 205.39,
+     "word": " final,"
+    },
+    {
+     "start": 205.49,
+     "end": 205.87,
+     "word": " literal"
+    },
+    {
+     "start": 205.87,
+     "end": 206.21,
+     "word": " seven"
+    },
+    {
+     "start": 206.21,
+     "end": 206.39,
+     "word": "-year"
+    },
+    {
+     "start": 206.39,
+     "end": 206.79,
+     "word": " crisis."
+    }
+   ]
+  },
+  {
+   "start": 207.97,
+   "end": 213.25,
+   "text": "Origins? It was first formulated by the Spanish Jesuit scholar Francisco Ribera in his 1590",
+   "words": [
+    {
+     "start": 207.97,
+     "end": 207.97,
+     "word": " Origins?"
+    },
+    {
+     "start": 208.59,
+     "end": 208.83,
+     "word": " It"
+    },
+    {
+     "start": 208.83,
+     "end": 208.95,
+     "word": " was"
+    },
+    {
+     "start": 208.95,
+     "end": 209.19,
+     "word": " first"
+    },
+    {
+     "start": 209.19,
+     "end": 209.61,
+     "word": " formulated"
+    },
+    {
+     "start": 209.61,
+     "end": 209.93,
+     "word": " by"
+    },
+    {
+     "start": 209.93,
+     "end": 210.05,
+     "word": " the"
+    },
+    {
+     "start": 210.05,
+     "end": 210.33,
+     "word": " Spanish"
+    },
+    {
+     "start": 210.33,
+     "end": 210.71,
+     "word": " Jesuit"
+    },
+    {
+     "start": 210.71,
+     "end": 211.05,
+     "word": " scholar"
+    },
+    {
+     "start": 211.05,
+     "end": 211.57,
+     "word": " Francisco"
+    },
+    {
+     "start": 211.57,
+     "end": 212.17,
+     "word": " Ribera"
+    },
+    {
+     "start": 212.17,
+     "end": 212.41,
+     "word": " in"
+    },
+    {
+     "start": 212.41,
+     "end": 212.55,
+     "word": " his"
+    },
+    {
+     "start": 212.55,
+     "end": 213.25,
+     "word": " 1590"
+    }
+   ]
+  },
+  {
+   "start": 213.25,
+   "end": 219.17,
+   "text": "commentary on Revelation. In the 1830s, this theory was imported into Protestant circles by Edward",
+   "words": [
+    {
+     "start": 213.25,
+     "end": 213.61,
+     "word": " commentary"
+    },
+    {
+     "start": 213.61,
+     "end": 213.97,
+     "word": " on"
+    },
+    {
+     "start": 213.97,
+     "end": 214.41,
+     "word": " Revelation."
+    },
+    {
+     "start": 215.07,
+     "end": 215.27,
+     "word": " In"
+    },
+    {
+     "start": 215.27,
+     "end": 215.35,
+     "word": " the"
+    },
+    {
+     "start": 215.35,
+     "end": 216.29,
+     "word": " 1830s,"
+    },
+    {
+     "start": 216.39,
+     "end": 216.59,
+     "word": " this"
+    },
+    {
+     "start": 216.59,
+     "end": 216.83,
+     "word": " theory"
+    },
+    {
+     "start": 216.83,
+     "end": 217.01,
+     "word": " was"
+    },
+    {
+     "start": 217.01,
+     "end": 217.45,
+     "word": " imported"
+    },
+    {
+     "start": 217.45,
+     "end": 217.77,
+     "word": " into"
+    },
+    {
+     "start": 217.77,
+     "end": 218.17,
+     "word": " Protestant"
+    },
+    {
+     "start": 218.17,
+     "end": 218.59,
+     "word": " circles"
+    },
+    {
+     "start": 218.59,
+     "end": 218.87,
+     "word": " by"
+    },
+    {
+     "start": 218.87,
+     "end": 219.17,
+     "word": " Edward"
+    }
+   ]
+  },
+  {
+   "start": 219.17,
+   "end": 224.51,
+   "text": "Irving and John Nelson Darby, giving rise to modern dispensationalism, and later popularized",
+   "words": [
+    {
+     "start": 219.17,
+     "end": 219.55,
+     "word": " Irving"
+    },
+    {
+     "start": 219.55,
+     "end": 219.91,
+     "word": " and"
+    },
+    {
+     "start": 219.91,
+     "end": 220.15,
+     "word": " John"
+    },
+    {
+     "start": 220.15,
+     "end": 220.45,
+     "word": " Nelson"
+    },
+    {
+     "start": 220.45,
+     "end": 220.83,
+     "word": " Darby,"
+    },
+    {
+     "start": 221.13,
+     "end": 221.49,
+     "word": " giving"
+    },
+    {
+     "start": 221.49,
+     "end": 221.71,
+     "word": " rise"
+    },
+    {
+     "start": 221.71,
+     "end": 221.91,
+     "word": " to"
+    },
+    {
+     "start": 221.91,
+     "end": 222.17,
+     "word": " modern"
+    },
+    {
+     "start": 222.17,
+     "end": 223.15,
+     "word": " dispensationalism,"
+    },
+    {
+     "start": 223.49,
+     "end": 223.65,
+     "word": " and"
+    },
+    {
+     "start": 223.65,
+     "end": 223.85,
+     "word": " later"
+    },
+    {
+     "start": 223.85,
+     "end": 224.51,
+     "word": " popularized"
+    }
+   ]
+  },
+  {
+   "start": 224.51,
+   "end": 230.25,
+   "text": "by the Scofield Reference Bible, 1909. The structural flaw? It shatters the historical",
+   "words": [
+    {
+     "start": 224.51,
+     "end": 224.69,
+     "word": " by"
+    },
+    {
+     "start": 224.69,
+     "end": 224.81,
+     "word": " the"
+    },
+    {
+     "start": 224.81,
+     "end": 225.21,
+     "word": " Scofield"
+    },
+    {
+     "start": 225.21,
+     "end": 225.59,
+     "word": " Reference"
+    },
+    {
+     "start": 225.59,
+     "end": 225.91,
+     "word": " Bible,"
+    },
+    {
+     "start": 226.13,
+     "end": 226.59,
+     "word": " 1909."
+    },
+    {
+     "start": 227.71,
+     "end": 227.87,
+     "word": " The"
+    },
+    {
+     "start": 227.87,
+     "end": 228.25,
+     "word": " structural"
+    },
+    {
+     "start": 228.25,
+     "end": 228.59,
+     "word": " flaw?"
+    },
+    {
+     "start": 228.89,
+     "end": 229.19,
+     "word": " It"
+    },
+    {
+     "start": 229.19,
+     "end": 229.59,
+     "word": " shatters"
+    },
+    {
+     "start": 229.59,
+     "end": 229.81,
+     "word": " the"
+    },
+    {
+     "start": 229.81,
+     "end": 230.25,
+     "word": " historical"
+    }
+   ]
+  },
+  {
+   "start": 230.25,
+   "end": 235.69,
+   "text": "continuity of the text, creating an arbitrary 2,000-year parenthetical gap found nowhere in",
+   "words": [
+    {
+     "start": 230.25,
+     "end": 230.69,
+     "word": " continuity"
+    },
+    {
+     "start": 230.69,
+     "end": 230.95,
+     "word": " of"
+    },
+    {
+     "start": 230.95,
+     "end": 231.05,
+     "word": " the"
+    },
+    {
+     "start": 231.05,
+     "end": 231.35,
+     "word": " text,"
+    },
+    {
+     "start": 231.79,
+     "end": 232.09,
+     "word": " creating"
+    },
+    {
+     "start": 232.09,
+     "end": 232.29,
+     "word": " an"
+    },
+    {
+     "start": 232.29,
+     "end": 232.79,
+     "word": " arbitrary"
+    },
+    {
+     "start": 232.79,
+     "end": 233.15,
+     "word": " 2"
+    },
+    {
+     "start": 233.15,
+     "end": 233.53,
+     "word": ",000"
+    },
+    {
+     "start": 233.53,
+     "end": 233.75,
+     "word": "-year"
+    },
+    {
+     "start": 233.75,
+     "end": 234.35,
+     "word": " parenthetical"
+    },
+    {
+     "start": 234.35,
+     "end": 234.63,
+     "word": " gap"
+    },
+    {
+     "start": 234.63,
+     "end": 234.89,
+     "word": " found"
+    },
+    {
+     "start": 234.89,
+     "end": 235.37,
+     "word": " nowhere"
+    },
+    {
+     "start": 235.37,
+     "end": 235.69,
+     "word": " in"
+    }
+   ]
+  },
+  {
+   "start": 235.69,
+   "end": 244.19,
+   "text": "the biblical passage. The historical catalyst? Council of Trent, 1545-1563. Neither preterism",
+   "words": [
+    {
+     "start": 235.69,
+     "end": 235.77,
+     "word": " the"
+    },
+    {
+     "start": 235.77,
+     "end": 235.95,
+     "word": " biblical"
+    },
+    {
+     "start": 235.95,
+     "end": 236.37,
+     "word": " passage."
+    },
+    {
+     "start": 237.95,
+     "end": 238.03,
+     "word": " The"
+    },
+    {
+     "start": 238.03,
+     "end": 238.35,
+     "word": " historical"
+    },
+    {
+     "start": 238.35,
+     "end": 238.81,
+     "word": " catalyst?"
+    },
+    {
+     "start": 239.63,
+     "end": 239.67,
+     "word": " Council"
+    },
+    {
+     "start": 239.67,
+     "end": 239.89,
+     "word": " of"
+    },
+    {
+     "start": 239.89,
+     "end": 240.13,
+     "word": " Trent,"
+    },
+    {
+     "start": 240.45,
+     "end": 241.33,
+     "word": " 1545"
+    },
+    {
+     "start": 241.33,
+     "end": 242.39,
+     "word": "-1563."
+    },
+    {
+     "start": 243.49,
+     "end": 243.53,
+     "word": " Neither"
+    },
+    {
+     "start": 243.53,
+     "end": 244.19,
+     "word": " preterism"
+    }
+   ]
+  },
+  {
+   "start": 244.19,
+   "end": 250.0,
+   "text": "nor futurism emerged in a vacuum. During the Counter-Reformation, Protestant reformers used",
+   "words": [
+    {
+     "start": 244.19,
+     "end": 244.41,
+     "word": " nor"
+    },
+    {
+     "start": 244.41,
+     "end": 245.01,
+     "word": " futurism"
+    },
+    {
+     "start": 245.01,
+     "end": 245.29,
+     "word": " emerged"
+    },
+    {
+     "start": 245.29,
+     "end": 245.51,
+     "word": " in"
+    },
+    {
+     "start": 245.51,
+     "end": 245.61,
+     "word": " a"
+    },
+    {
+     "start": 245.61,
+     "end": 245.89,
+     "word": " vacuum."
+    },
+    {
+     "start": 247.18,
+     "end": 247.34,
+     "word": " During"
+    },
+    {
+     "start": 247.34,
+     "end": 247.56,
+     "word": " the"
+    },
+    {
+     "start": 247.56,
+     "end": 247.86,
+     "word": " Counter"
+    },
+    {
+     "start": 247.86,
+     "end": 248.4,
+     "word": "-Reformation,"
+    },
+    {
+     "start": 248.94,
+     "end": 249.18,
+     "word": " Protestant"
+    },
+    {
+     "start": 249.18,
+     "end": 249.8,
+     "word": " reformers"
+    },
+    {
+     "start": 249.8,
+     "end": 250.0,
+     "word": " used"
+    }
+   ]
+  },
+  {
+   "start": 250.0,
+   "end": 255.36,
+   "text": "the historicist method to identify the medieval papal monarchical system with the little horn",
+   "words": [
+    {
+     "start": 250.0,
+     "end": 250.22,
+     "word": " the"
+    },
+    {
+     "start": 250.22,
+     "end": 250.76,
+     "word": " historicist"
+    },
+    {
+     "start": 250.76,
+     "end": 251.06,
+     "word": " method"
+    },
+    {
+     "start": 251.06,
+     "end": 251.32,
+     "word": " to"
+    },
+    {
+     "start": 251.32,
+     "end": 251.88,
+     "word": " identify"
+    },
+    {
+     "start": 251.88,
+     "end": 252.14,
+     "word": " the"
+    },
+    {
+     "start": 252.14,
+     "end": 252.48,
+     "word": " medieval"
+    },
+    {
+     "start": 252.48,
+     "end": 253.06,
+     "word": " papal"
+    },
+    {
+     "start": 253.06,
+     "end": 253.68,
+     "word": " monarchical"
+    },
+    {
+     "start": 253.68,
+     "end": 254.06,
+     "word": " system"
+    },
+    {
+     "start": 254.06,
+     "end": 254.58,
+     "word": " with"
+    },
+    {
+     "start": 254.58,
+     "end": 254.74,
+     "word": " the"
+    },
+    {
+     "start": 254.74,
+     "end": 255.0,
+     "word": " little"
+    },
+    {
+     "start": 255.0,
+     "end": 255.36,
+     "word": " horn"
+    }
+   ]
+  },
+  {
+   "start": 255.36,
+   "end": 261.7,
+   "text": "of Daniel 7 and the beast of Revelation 13. To deflect this institutional critique, Jesuit",
+   "words": [
+    {
+     "start": 255.36,
+     "end": 255.54,
+     "word": " of"
+    },
+    {
+     "start": 255.54,
+     "end": 255.84,
+     "word": " Daniel"
+    },
+    {
+     "start": 255.84,
+     "end": 256.1,
+     "word": " 7"
+    },
+    {
+     "start": 256.1,
+     "end": 256.82,
+     "word": " and"
+    },
+    {
+     "start": 256.82,
+     "end": 256.94,
+     "word": " the"
+    },
+    {
+     "start": 256.94,
+     "end": 257.22,
+     "word": " beast"
+    },
+    {
+     "start": 257.22,
+     "end": 257.44,
+     "word": " of"
+    },
+    {
+     "start": 257.44,
+     "end": 257.74,
+     "word": " Revelation"
+    },
+    {
+     "start": 257.74,
+     "end": 258.22,
+     "word": " 13."
+    },
+    {
+     "start": 259.02,
+     "end": 259.24,
+     "word": " To"
+    },
+    {
+     "start": 259.24,
+     "end": 259.56,
+     "word": " deflect"
+    },
+    {
+     "start": 259.56,
+     "end": 259.84,
+     "word": " this"
+    },
+    {
+     "start": 259.84,
+     "end": 260.46,
+     "word": " institutional"
+    },
+    {
+     "start": 260.46,
+     "end": 261.04,
+     "word": " critique,"
+    },
+    {
+     "start": 261.5,
+     "end": 261.7,
+     "word": " Jesuit"
+    }
+   ]
+  },
+  {
+   "start": 261.7,
+   "end": 267.92,
+   "text": "scholarship introduced two opposing escape routes. Alcazar pushed the antichrist back into the remote",
+   "words": [
+    {
+     "start": 261.7,
+     "end": 262.14,
+     "word": " scholarship"
+    },
+    {
+     "start": 262.14,
+     "end": 262.8,
+     "word": " introduced"
+    },
+    {
+     "start": 262.8,
+     "end": 263.28,
+     "word": " two"
+    },
+    {
+     "start": 263.28,
+     "end": 263.88,
+     "word": " opposing"
+    },
+    {
+     "start": 263.88,
+     "end": 264.18,
+     "word": " escape"
+    },
+    {
+     "start": 264.18,
+     "end": 264.54,
+     "word": " routes."
+    },
+    {
+     "start": 265.28,
+     "end": 265.66,
+     "word": " Alcazar"
+    },
+    {
+     "start": 265.66,
+     "end": 266.04,
+     "word": " pushed"
+    },
+    {
+     "start": 266.04,
+     "end": 266.28,
+     "word": " the"
+    },
+    {
+     "start": 266.28,
+     "end": 266.76,
+     "word": " antichrist"
+    },
+    {
+     "start": 266.76,
+     "end": 267.14,
+     "word": " back"
+    },
+    {
+     "start": 267.14,
+     "end": 267.4,
+     "word": " into"
+    },
+    {
+     "start": 267.4,
+     "end": 267.54,
+     "word": " the"
+    },
+    {
+     "start": 267.54,
+     "end": 267.92,
+     "word": " remote"
+    }
+   ]
+  },
+  {
+   "start": 267.92,
+   "end": 273.56,
+   "text": "pagan past, while Ribera propelled the antichrist forward into a distant, hypothetical future.",
+   "words": [
+    {
+     "start": 267.92,
+     "end": 268.24,
+     "word": " pagan"
+    },
+    {
+     "start": 268.24,
+     "end": 268.78,
+     "word": " past,"
+    },
+    {
+     "start": 269.2,
+     "end": 269.46,
+     "word": " while"
+    },
+    {
+     "start": 269.46,
+     "end": 270.0,
+     "word": " Ribera"
+    },
+    {
+     "start": 270.0,
+     "end": 270.34,
+     "word": " propelled"
+    },
+    {
+     "start": 270.34,
+     "end": 270.52,
+     "word": " the"
+    },
+    {
+     "start": 270.52,
+     "end": 270.98,
+     "word": " antichrist"
+    },
+    {
+     "start": 270.98,
+     "end": 271.42,
+     "word": " forward"
+    },
+    {
+     "start": 271.42,
+     "end": 271.8,
+     "word": " into"
+    },
+    {
+     "start": 271.8,
+     "end": 271.96,
+     "word": " a"
+    },
+    {
+     "start": 271.96,
+     "end": 272.42,
+     "word": " distant,"
+    },
+    {
+     "start": 272.48,
+     "end": 273.0,
+     "word": " hypothetical"
+    },
+    {
+     "start": 273.0,
+     "end": 273.56,
+     "word": " future."
+    }
+   ]
+  },
+  {
+   "start": 274.56,
+   "end": 279.0,
+   "text": "Both models effectively removed the medieval and modern church from prophetic accountability.",
+   "words": [
+    {
+     "start": 274.56,
+     "end": 274.78,
+     "word": " Both"
+    },
+    {
+     "start": 274.78,
+     "end": 275.18,
+     "word": " models"
+    },
+    {
+     "start": 275.18,
+     "end": 275.7,
+     "word": " effectively"
+    },
+    {
+     "start": 275.7,
+     "end": 276.32,
+     "word": " removed"
+    },
+    {
+     "start": 276.32,
+     "end": 276.52,
+     "word": " the"
+    },
+    {
+     "start": 276.52,
+     "end": 276.8,
+     "word": " medieval"
+    },
+    {
+     "start": 276.8,
+     "end": 277.06,
+     "word": " and"
+    },
+    {
+     "start": 277.06,
+     "end": 277.3,
+     "word": " modern"
+    },
+    {
+     "start": 277.3,
+     "end": 277.58,
+     "word": " church"
+    },
+    {
+     "start": 277.58,
+     "end": 277.88,
+     "word": " from"
+    },
+    {
+     "start": 277.88,
+     "end": 278.34,
+     "word": " prophetic"
+    },
+    {
+     "start": 278.34,
+     "end": 279.0,
+     "word": " accountability."
+    }
+   ]
+  },
+  {
+   "start": 280.16,
+   "end": 285.76,
+   "text": "Interpretation. Historicism keeps Daniel's medals one chain from Babylon to Christ's kingdom.",
+   "words": [
+    {
+     "start": 280.16,
+     "end": 280.92,
+     "word": " Interpretation."
+    },
+    {
+     "start": 282.02,
+     "end": 282.34,
+     "word": " Historicism"
+    },
+    {
+     "start": 282.34,
+     "end": 282.6,
+     "word": " keeps"
+    },
+    {
+     "start": 282.6,
+     "end": 283.1,
+     "word": " Daniel's"
+    },
+    {
+     "start": 283.1,
+     "end": 283.24,
+     "word": " medals"
+    },
+    {
+     "start": 283.24,
+     "end": 283.7,
+     "word": " one"
+    },
+    {
+     "start": 283.7,
+     "end": 284.02,
+     "word": " chain"
+    },
+    {
+     "start": 284.02,
+     "end": 284.34,
+     "word": " from"
+    },
+    {
+     "start": 284.34,
+     "end": 284.66,
+     "word": " Babylon"
+    },
+    {
+     "start": 284.66,
+     "end": 285.08,
+     "word": " to"
+    },
+    {
+     "start": 285.08,
+     "end": 285.52,
+     "word": " Christ's"
+    },
+    {
+     "start": 285.52,
+     "end": 285.76,
+     "word": " kingdom."
+    }
+   ]
+  },
+  {
+   "start": 285.76,
+   "end": 291.88,
+   "text": "Preterism parks the chain in antiquity. Futurism severs the chain with a gap, no verse names.",
+   "words": [
+    {
+     "start": 285.76,
+     "end": 286.92,
+     "word": " Preterism"
+    },
+    {
+     "start": 286.92,
+     "end": 287.2,
+     "word": " parks"
+    },
+    {
+     "start": 287.2,
+     "end": 287.4,
+     "word": " the"
+    },
+    {
+     "start": 287.4,
+     "end": 287.6,
+     "word": " chain"
+    },
+    {
+     "start": 287.6,
+     "end": 287.76,
+     "word": " in"
+    },
+    {
+     "start": 287.76,
+     "end": 288.2,
+     "word": " antiquity."
+    },
+    {
+     "start": 289.0,
+     "end": 289.46,
+     "word": " Futurism"
+    },
+    {
+     "start": 289.46,
+     "end": 289.9,
+     "word": " severs"
+    },
+    {
+     "start": 289.9,
+     "end": 290.14,
+     "word": " the"
+    },
+    {
+     "start": 290.14,
+     "end": 290.34,
+     "word": " chain"
+    },
+    {
+     "start": 290.34,
+     "end": 290.5,
+     "word": " with"
+    },
+    {
+     "start": 290.5,
+     "end": 290.66,
+     "word": " a"
+    },
+    {
+     "start": 290.66,
+     "end": 290.88,
+     "word": " gap,"
+    },
+    {
+     "start": 291.18,
+     "end": 291.3,
+     "word": " no"
+    },
+    {
+     "start": 291.3,
+     "end": 291.52,
+     "word": " verse"
+    },
+    {
+     "start": 291.52,
+     "end": 291.88,
+     "word": " names."
+    }
+   ]
+  },
+  {
+   "start": 293.15,
+   "end": 299.05,
+   "text": "Part two. The master hermeneutical scale. The year-day principle. Apocalyptic visions use",
+   "words": [
+    {
+     "start": 293.15,
+     "end": 293.17,
+     "word": " Part"
+    },
+    {
+     "start": 293.17,
+     "end": 293.45,
+     "word": " two."
+    },
+    {
+     "start": 294.27,
+     "end": 294.29,
+     "word": " The"
+    },
+    {
+     "start": 294.29,
+     "end": 294.63,
+     "word": " master"
+    },
+    {
+     "start": 294.63,
+     "end": 295.11,
+     "word": " hermeneutical"
+    },
+    {
+     "start": 295.11,
+     "end": 295.41,
+     "word": " scale."
+    },
+    {
+     "start": 295.95,
+     "end": 295.99,
+     "word": " The"
+    },
+    {
+     "start": 295.99,
+     "end": 296.17,
+     "word": " year"
+    },
+    {
+     "start": 296.17,
+     "end": 296.35,
+     "word": "-day"
+    },
+    {
+     "start": 296.35,
+     "end": 296.73,
+     "word": " principle."
+    },
+    {
+     "start": 297.87,
+     "end": 298.33,
+     "word": " Apocalyptic"
+    },
+    {
+     "start": 298.33,
+     "end": 298.77,
+     "word": " visions"
+    },
+    {
+     "start": 298.77,
+     "end": 299.05,
+     "word": " use"
+    }
+   ]
+  },
+  {
+   "start": 299.05,
+   "end": 305.03,
+   "text": "symbolic imagery. Beasts symbolize kingdoms, Daniel 723, and horns symbolize kings or",
+   "words": [
+    {
+     "start": 299.05,
+     "end": 299.61,
+     "word": " symbolic"
+    },
+    {
+     "start": 299.61,
+     "end": 300.07,
+     "word": " imagery."
+    },
+    {
+     "start": 300.75,
+     "end": 300.75,
+     "word": " Beasts"
+    },
+    {
+     "start": 300.75,
+     "end": 301.35,
+     "word": " symbolize"
+    },
+    {
+     "start": 301.35,
+     "end": 301.73,
+     "word": " kingdoms,"
+    },
+    {
+     "start": 302.05,
+     "end": 302.19,
+     "word": " Daniel"
+    },
+    {
+     "start": 302.19,
+     "end": 302.85,
+     "word": " 723,"
+    },
+    {
+     "start": 303.33,
+     "end": 303.53,
+     "word": " and"
+    },
+    {
+     "start": 303.53,
+     "end": 303.87,
+     "word": " horns"
+    },
+    {
+     "start": 303.87,
+     "end": 304.51,
+     "word": " symbolize"
+    },
+    {
+     "start": 304.51,
+     "end": 304.77,
+     "word": " kings"
+    },
+    {
+     "start": 304.77,
+     "end": 305.03,
+     "word": " or"
+    }
+   ]
+  },
+  {
+   "start": 305.03,
+   "end": 311.31,
+   "text": "dynasties, Daniel 724. It follows that time units embedded within symbolic visions are symbolic as",
+   "words": [
+    {
+     "start": 305.03,
+     "end": 305.53,
+     "word": " dynasties,"
+    },
+    {
+     "start": 305.75,
+     "end": 305.91,
+     "word": " Daniel"
+    },
+    {
+     "start": 305.91,
+     "end": 306.57,
+     "word": " 724."
+    },
+    {
+     "start": 307.29,
+     "end": 307.47,
+     "word": " It"
+    },
+    {
+     "start": 307.47,
+     "end": 307.75,
+     "word": " follows"
+    },
+    {
+     "start": 307.75,
+     "end": 308.09,
+     "word": " that"
+    },
+    {
+     "start": 308.09,
+     "end": 308.43,
+     "word": " time"
+    },
+    {
+     "start": 308.43,
+     "end": 308.73,
+     "word": " units"
+    },
+    {
+     "start": 308.73,
+     "end": 309.07,
+     "word": " embedded"
+    },
+    {
+     "start": 309.07,
+     "end": 309.51,
+     "word": " within"
+    },
+    {
+     "start": 309.51,
+     "end": 309.99,
+     "word": " symbolic"
+    },
+    {
+     "start": 309.99,
+     "end": 310.33,
+     "word": " visions"
+    },
+    {
+     "start": 310.33,
+     "end": 310.67,
+     "word": " are"
+    },
+    {
+     "start": 310.67,
+     "end": 311.13,
+     "word": " symbolic"
+    },
+    {
+     "start": 311.13,
+     "end": 311.31,
+     "word": " as"
+    }
+   ]
+  },
+  {
+   "start": 311.31,
+   "end": 316.57,
+   "text": "well. Scripture defines its own prophetic timescale rather than leaving it to human conjecture.",
+   "words": [
+    {
+     "start": 311.31,
+     "end": 311.57,
+     "word": " well."
+    },
+    {
+     "start": 312.63,
+     "end": 312.67,
+     "word": " Scripture"
+    },
+    {
+     "start": 312.67,
+     "end": 313.15,
+     "word": " defines"
+    },
+    {
+     "start": 313.15,
+     "end": 313.37,
+     "word": " its"
+    },
+    {
+     "start": 313.37,
+     "end": 313.61,
+     "word": " own"
+    },
+    {
+     "start": 313.61,
+     "end": 314.01,
+     "word": " prophetic"
+    },
+    {
+     "start": 314.01,
+     "end": 314.61,
+     "word": " timescale"
+    },
+    {
+     "start": 314.61,
+     "end": 314.87,
+     "word": " rather"
+    },
+    {
+     "start": 314.87,
+     "end": 315.17,
+     "word": " than"
+    },
+    {
+     "start": 315.17,
+     "end": 315.39,
+     "word": " leaving"
+    },
+    {
+     "start": 315.39,
+     "end": 315.61,
+     "word": " it"
+    },
+    {
+     "start": 315.61,
+     "end": 315.81,
+     "word": " to"
+    },
+    {
+     "start": 315.81,
+     "end": 316.13,
+     "word": " human"
+    },
+    {
+     "start": 316.13,
+     "end": 316.57,
+     "word": " conjecture."
+    }
+   ]
+  },
+  {
+   "start": 317.65,
+   "end": 323.51,
+   "text": "The Torah Foundation, Numbers 1434. When Israel rebelled after 40 days of spying out Canaan,",
+   "words": [
+    {
+     "start": 317.65,
+     "end": 317.75,
+     "word": " The"
+    },
+    {
+     "start": 317.75,
+     "end": 317.95,
+     "word": " Torah"
+    },
+    {
+     "start": 317.95,
+     "end": 318.43,
+     "word": " Foundation,"
+    },
+    {
+     "start": 318.81,
+     "end": 319.11,
+     "word": " Numbers"
+    },
+    {
+     "start": 319.11,
+     "end": 319.91,
+     "word": " 1434."
+    },
+    {
+     "start": 320.75,
+     "end": 320.87,
+     "word": " When"
+    },
+    {
+     "start": 320.87,
+     "end": 321.25,
+     "word": " Israel"
+    },
+    {
+     "start": 321.25,
+     "end": 321.71,
+     "word": " rebelled"
+    },
+    {
+     "start": 321.71,
+     "end": 321.95,
+     "word": " after"
+    },
+    {
+     "start": 321.95,
+     "end": 322.29,
+     "word": " 40"
+    },
+    {
+     "start": 322.29,
+     "end": 322.55,
+     "word": " days"
+    },
+    {
+     "start": 322.55,
+     "end": 322.71,
+     "word": " of"
+    },
+    {
+     "start": 322.71,
+     "end": 322.97,
+     "word": " spying"
+    },
+    {
+     "start": 322.97,
+     "end": 323.21,
+     "word": " out"
+    },
+    {
+     "start": 323.21,
+     "end": 323.51,
+     "word": " Canaan,"
+    }
+   ]
+  },
+  {
+   "start": 323.93,
+   "end": 329.17,
+   "text": "God declared a one-to-one judicial conversion. Each day for a year shall you bear your iniquities,",
+   "words": [
+    {
+     "start": 323.93,
+     "end": 324.13,
+     "word": " God"
+    },
+    {
+     "start": 324.13,
+     "end": 324.49,
+     "word": " declared"
+    },
+    {
+     "start": 324.49,
+     "end": 324.75,
+     "word": " a"
+    },
+    {
+     "start": 324.75,
+     "end": 325.03,
+     "word": " one"
+    },
+    {
+     "start": 325.03,
+     "end": 325.19,
+     "word": "-to"
+    },
+    {
+     "start": 325.19,
+     "end": 325.41,
+     "word": "-one"
+    },
+    {
+     "start": 325.41,
+     "end": 325.75,
+     "word": " judicial"
+    },
+    {
+     "start": 325.75,
+     "end": 326.27,
+     "word": " conversion."
+    },
+    {
+     "start": 327.01,
+     "end": 327.17,
+     "word": " Each"
+    },
+    {
+     "start": 327.17,
+     "end": 327.39,
+     "word": " day"
+    },
+    {
+     "start": 327.39,
+     "end": 327.59,
+     "word": " for"
+    },
+    {
+     "start": 327.59,
+     "end": 327.75,
+     "word": " a"
+    },
+    {
+     "start": 327.75,
+     "end": 327.93,
+     "word": " year"
+    },
+    {
+     "start": 327.93,
+     "end": 328.17,
+     "word": " shall"
+    },
+    {
+     "start": 328.17,
+     "end": 328.35,
+     "word": " you"
+    },
+    {
+     "start": 328.35,
+     "end": 328.51,
+     "word": " bear"
+    },
+    {
+     "start": 328.51,
+     "end": 328.75,
+     "word": " your"
+    },
+    {
+     "start": 328.75,
+     "end": 329.17,
+     "word": " iniquities,"
+    }
+   ]
+  },
+  {
+   "start": 329.51,
+   "end": 336.69,
+   "text": "even 40 years. The exile foundation, Ezekiel 4-6. Ezekiel, Daniel's direct contemporary in Babylon,",
+   "words": [
+    {
+     "start": 329.51,
+     "end": 329.71,
+     "word": " even"
+    },
+    {
+     "start": 329.71,
+     "end": 329.99,
+     "word": " 40"
+    },
+    {
+     "start": 329.99,
+     "end": 330.33,
+     "word": " years."
+    },
+    {
+     "start": 331.21,
+     "end": 331.43,
+     "word": " The"
+    },
+    {
+     "start": 331.43,
+     "end": 331.73,
+     "word": " exile"
+    },
+    {
+     "start": 331.73,
+     "end": 332.25,
+     "word": " foundation,"
+    },
+    {
+     "start": 332.75,
+     "end": 332.93,
+     "word": " Ezekiel"
+    },
+    {
+     "start": 332.93,
+     "end": 333.21,
+     "word": " 4"
+    },
+    {
+     "start": 333.21,
+     "end": 333.45,
+     "word": "-6."
+    },
+    {
+     "start": 334.27,
+     "end": 334.73,
+     "word": " Ezekiel,"
+    },
+    {
+     "start": 335.07,
+     "end": 335.41,
+     "word": " Daniel's"
+    },
+    {
+     "start": 335.41,
+     "end": 335.65,
+     "word": " direct"
+    },
+    {
+     "start": 335.65,
+     "end": 336.13,
+     "word": " contemporary"
+    },
+    {
+     "start": 336.13,
+     "end": 336.47,
+     "word": " in"
+    },
+    {
+     "start": 336.47,
+     "end": 336.69,
+     "word": " Babylon,"
+    }
+   ]
+  },
+  {
+   "start": 336.69,
+   "end": 340.67,
+   "text": "was commanded to perform a symbolic act representing Jerusalem's siege.",
+   "words": [
+    {
+     "start": 336.69,
+     "end": 337.39,
+     "word": " was"
+    },
+    {
+     "start": 337.39,
+     "end": 337.75,
+     "word": " commanded"
+    },
+    {
+     "start": 337.75,
+     "end": 337.95,
+     "word": " to"
+    },
+    {
+     "start": 337.95,
+     "end": 338.27,
+     "word": " perform"
+    },
+    {
+     "start": 338.27,
+     "end": 338.45,
+     "word": " a"
+    },
+    {
+     "start": 338.45,
+     "end": 338.87,
+     "word": " symbolic"
+    },
+    {
+     "start": 338.87,
+     "end": 339.27,
+     "word": " act"
+    },
+    {
+     "start": 339.27,
+     "end": 339.77,
+     "word": " representing"
+    },
+    {
+     "start": 339.77,
+     "end": 340.53,
+     "word": " Jerusalem's"
+    },
+    {
+     "start": 340.53,
+     "end": 340.67,
+     "word": " siege."
+    }
+   ]
+  },
+  {
+   "start": 341.59,
+   "end": 348.04,
+   "text": "I have appointed thee each day for a year. The self-checking anchor, Daniel 924-27.",
+   "words": [
+    {
+     "start": 341.59,
+     "end": 341.59,
+     "word": " I"
+    },
+    {
+     "start": 341.59,
+     "end": 341.71,
+     "word": " have"
+    },
+    {
+     "start": 341.71,
+     "end": 342.03,
+     "word": " appointed"
+    },
+    {
+     "start": 342.03,
+     "end": 342.35,
+     "word": " thee"
+    },
+    {
+     "start": 342.35,
+     "end": 342.69,
+     "word": " each"
+    },
+    {
+     "start": 342.69,
+     "end": 342.95,
+     "word": " day"
+    },
+    {
+     "start": 342.95,
+     "end": 343.17,
+     "word": " for"
+    },
+    {
+     "start": 343.17,
+     "end": 343.35,
+     "word": " a"
+    },
+    {
+     "start": 343.35,
+     "end": 343.57,
+     "word": " year."
+    },
+    {
+     "start": 344.86,
+     "end": 344.94,
+     "word": " The"
+    },
+    {
+     "start": 344.94,
+     "end": 345.12,
+     "word": " self"
+    },
+    {
+     "start": 345.12,
+     "end": 345.38,
+     "word": "-checking"
+    },
+    {
+     "start": 345.38,
+     "end": 345.74,
+     "word": " anchor,"
+    },
+    {
+     "start": 346.34,
+     "end": 346.48,
+     "word": " Daniel"
+    },
+    {
+     "start": 346.48,
+     "end": 347.24,
+     "word": " 924"
+    },
+    {
+     "start": 347.24,
+     "end": 348.04,
+     "word": "-27."
+    }
+   ]
+  },
+  {
+   "start": 348.74,
+   "end": 353.8,
+   "text": "Gabriel assigns 70 weeks, 490 days, to the Jewish nation to finish transgression,",
+   "words": [
+    {
+     "start": 348.74,
+     "end": 349.02,
+     "word": " Gabriel"
+    },
+    {
+     "start": 349.02,
+     "end": 349.36,
+     "word": " assigns"
+    },
+    {
+     "start": 349.36,
+     "end": 349.86,
+     "word": " 70"
+    },
+    {
+     "start": 349.86,
+     "end": 350.16,
+     "word": " weeks,"
+    },
+    {
+     "start": 350.52,
+     "end": 350.82,
+     "word": " 490"
+    },
+    {
+     "start": 350.82,
+     "end": 351.34,
+     "word": " days,"
+    },
+    {
+     "start": 351.74,
+     "end": 351.98,
+     "word": " to"
+    },
+    {
+     "start": 351.98,
+     "end": 352.08,
+     "word": " the"
+    },
+    {
+     "start": 352.08,
+     "end": 352.32,
+     "word": " Jewish"
+    },
+    {
+     "start": 352.32,
+     "end": 352.68,
+     "word": " nation"
+    },
+    {
+     "start": 352.68,
+     "end": 352.92,
+     "word": " to"
+    },
+    {
+     "start": 352.92,
+     "end": 353.18,
+     "word": " finish"
+    },
+    {
+     "start": 353.18,
+     "end": 353.8,
+     "word": " transgression,"
+    }
+   ]
+  },
+  {
+   "start": 354.2,
+   "end": 360.22,
+   "text": "make reconciliation for iniquity, and welcome Messiah the prince. 490 literal days amount to",
+   "words": [
+    {
+     "start": 354.2,
+     "end": 354.36,
+     "word": " make"
+    },
+    {
+     "start": 354.36,
+     "end": 354.92,
+     "word": " reconciliation"
+    },
+    {
+     "start": 354.92,
+     "end": 355.36,
+     "word": " for"
+    },
+    {
+     "start": 355.36,
+     "end": 355.78,
+     "word": " iniquity,"
+    },
+    {
+     "start": 356.18,
+     "end": 356.36,
+     "word": " and"
+    },
+    {
+     "start": 356.36,
+     "end": 356.66,
+     "word": " welcome"
+    },
+    {
+     "start": 356.66,
+     "end": 357.02,
+     "word": " Messiah"
+    },
+    {
+     "start": 357.02,
+     "end": 357.24,
+     "word": " the"
+    },
+    {
+     "start": 357.24,
+     "end": 357.46,
+     "word": " prince."
+    },
+    {
+     "start": 358.3,
+     "end": 358.88,
+     "word": " 490"
+    },
+    {
+     "start": 358.88,
+     "end": 359.32,
+     "word": " literal"
+    },
+    {
+     "start": 359.32,
+     "end": 359.74,
+     "word": " days"
+    },
+    {
+     "start": 359.74,
+     "end": 360.0,
+     "word": " amount"
+    },
+    {
+     "start": 360.0,
+     "end": 360.22,
+     "word": " to"
+    }
+   ]
+  },
+  {
+   "start": 360.22,
+   "end": 365.48,
+   "text": "barely 16 months, far too short a span in which to rebuild Jerusalem, re-establish the nation,",
+   "words": [
+    {
+     "start": 360.22,
+     "end": 360.56,
+     "word": " barely"
+    },
+    {
+     "start": 360.56,
+     "end": 361.04,
+     "word": " 16"
+    },
+    {
+     "start": 361.04,
+     "end": 361.36,
+     "word": " months,"
+    },
+    {
+     "start": 361.9,
+     "end": 362.04,
+     "word": " far"
+    },
+    {
+     "start": 362.04,
+     "end": 362.24,
+     "word": " too"
+    },
+    {
+     "start": 362.24,
+     "end": 362.46,
+     "word": " short"
+    },
+    {
+     "start": 362.46,
+     "end": 362.54,
+     "word": " a"
+    },
+    {
+     "start": 362.54,
+     "end": 362.72,
+     "word": " span"
+    },
+    {
+     "start": 362.72,
+     "end": 362.92,
+     "word": " in"
+    },
+    {
+     "start": 362.92,
+     "end": 363.04,
+     "word": " which"
+    },
+    {
+     "start": 363.04,
+     "end": 363.24,
+     "word": " to"
+    },
+    {
+     "start": 363.24,
+     "end": 363.54,
+     "word": " rebuild"
+    },
+    {
+     "start": 363.54,
+     "end": 364.08,
+     "word": " Jerusalem,"
+    },
+    {
+     "start": 364.52,
+     "end": 364.62,
+     "word": " re"
+    },
+    {
+     "start": 364.62,
+     "end": 364.92,
+     "word": "-establish"
+    },
+    {
+     "start": 364.92,
+     "end": 365.18,
+     "word": " the"
+    },
+    {
+     "start": 365.18,
+     "end": 365.48,
+     "word": " nation,"
+    }
+   ]
+  },
+  {
+   "start": 365.48,
+   "end": 371.86,
+   "text": "and see the Messiah minister and die. Only when those 70 weeks are read as 490 years does the",
+   "words": [
+    {
+     "start": 365.48,
+     "end": 365.9,
+     "word": " and"
+    },
+    {
+     "start": 365.9,
+     "end": 366.16,
+     "word": " see"
+    },
+    {
+     "start": 366.16,
+     "end": 366.3,
+     "word": " the"
+    },
+    {
+     "start": 366.3,
+     "end": 366.56,
+     "word": " Messiah"
+    },
+    {
+     "start": 366.56,
+     "end": 366.96,
+     "word": " minister"
+    },
+    {
+     "start": 366.96,
+     "end": 367.22,
+     "word": " and"
+    },
+    {
+     "start": 367.22,
+     "end": 367.46,
+     "word": " die."
+    },
+    {
+     "start": 368.14,
+     "end": 368.34,
+     "word": " Only"
+    },
+    {
+     "start": 368.34,
+     "end": 368.56,
+     "word": " when"
+    },
+    {
+     "start": 368.56,
+     "end": 368.74,
+     "word": " those"
+    },
+    {
+     "start": 368.74,
+     "end": 369.06,
+     "word": " 70"
+    },
+    {
+     "start": 369.06,
+     "end": 369.32,
+     "word": " weeks"
+    },
+    {
+     "start": 369.32,
+     "end": 369.54,
+     "word": " are"
+    },
+    {
+     "start": 369.54,
+     "end": 369.78,
+     "word": " read"
+    },
+    {
+     "start": 369.78,
+     "end": 370.02,
+     "word": " as"
+    },
+    {
+     "start": 370.02,
+     "end": 370.72,
+     "word": " 490"
+    },
+    {
+     "start": 370.72,
+     "end": 371.2,
+     "word": " years"
+    },
+    {
+     "start": 371.2,
+     "end": 371.66,
+     "word": " does"
+    },
+    {
+     "start": 371.66,
+     "end": 371.86,
+     "word": " the"
+    }
+   ]
+  },
+  {
+   "start": 371.86,
+   "end": 378.56,
+   "text": "prophecy run from the Persian decree to restore Jerusalem, 457 BC, to the public ministry of Jesus",
+   "words": [
+    {
+     "start": 371.86,
+     "end": 372.18,
+     "word": " prophecy"
+    },
+    {
+     "start": 372.18,
+     "end": 372.58,
+     "word": " run"
+    },
+    {
+     "start": 372.58,
+     "end": 372.82,
+     "word": " from"
+    },
+    {
+     "start": 372.82,
+     "end": 373.0,
+     "word": " the"
+    },
+    {
+     "start": 373.0,
+     "end": 373.4,
+     "word": " Persian"
+    },
+    {
+     "start": 373.4,
+     "end": 373.74,
+     "word": " decree"
+    },
+    {
+     "start": 373.74,
+     "end": 374.04,
+     "word": " to"
+    },
+    {
+     "start": 374.04,
+     "end": 374.46,
+     "word": " restore"
+    },
+    {
+     "start": 374.46,
+     "end": 374.98,
+     "word": " Jerusalem,"
+    },
+    {
+     "start": 375.44,
+     "end": 375.88,
+     "word": " 457"
+    },
+    {
+     "start": 375.88,
+     "end": 376.4,
+     "word": " BC,"
+    },
+    {
+     "start": 376.96,
+     "end": 377.14,
+     "word": " to"
+    },
+    {
+     "start": 377.14,
+     "end": 377.3,
+     "word": " the"
+    },
+    {
+     "start": 377.3,
+     "end": 377.66,
+     "word": " public"
+    },
+    {
+     "start": 377.66,
+     "end": 378.06,
+     "word": " ministry"
+    },
+    {
+     "start": 378.06,
+     "end": 378.34,
+     "word": " of"
+    },
+    {
+     "start": 378.34,
+     "end": 378.56,
+     "word": " Jesus"
+    }
+   ]
+  },
+  {
+   "start": 378.56,
+   "end": 386.96,
+   "text": "Christ, AD 27, and his cross, AD 31, with the week closing in AD 34. Once the year-day",
+   "words": [
+    {
+     "start": 378.56,
+     "end": 378.98,
+     "word": " Christ,"
+    },
+    {
+     "start": 379.36,
+     "end": 379.48,
+     "word": " AD"
+    },
+    {
+     "start": 379.48,
+     "end": 379.98,
+     "word": " 27,"
+    },
+    {
+     "start": 380.54,
+     "end": 380.76,
+     "word": " and"
+    },
+    {
+     "start": 380.76,
+     "end": 380.94,
+     "word": " his"
+    },
+    {
+     "start": 380.94,
+     "end": 381.3,
+     "word": " cross,"
+    },
+    {
+     "start": 381.72,
+     "end": 381.88,
+     "word": " AD"
+    },
+    {
+     "start": 381.88,
+     "end": 382.36,
+     "word": " 31,"
+    },
+    {
+     "start": 382.94,
+     "end": 383.1,
+     "word": " with"
+    },
+    {
+     "start": 383.1,
+     "end": 383.24,
+     "word": " the"
+    },
+    {
+     "start": 383.24,
+     "end": 383.44,
+     "word": " week"
+    },
+    {
+     "start": 383.44,
+     "end": 383.92,
+     "word": " closing"
+    },
+    {
+     "start": 383.92,
+     "end": 384.24,
+     "word": " in"
+    },
+    {
+     "start": 384.24,
+     "end": 384.58,
+     "word": " AD"
+    },
+    {
+     "start": 384.58,
+     "end": 385.08,
+     "word": " 34."
+    },
+    {
+     "start": 385.94,
+     "end": 386.22,
+     "word": " Once"
+    },
+    {
+     "start": 386.22,
+     "end": 386.44,
+     "word": " the"
+    },
+    {
+     "start": 386.44,
+     "end": 386.72,
+     "word": " year"
+    },
+    {
+     "start": 386.72,
+     "end": 386.96,
+     "word": "-day"
+    }
+   ]
+  },
+  {
+   "start": 386.96,
+   "end": 392.86,
+   "text": "principle is established at the cross in Daniel 9, the longer prophetic spans, such as the 1260",
+   "words": [
+    {
+     "start": 386.96,
+     "end": 387.2,
+     "word": " principle"
+    },
+    {
+     "start": 387.2,
+     "end": 387.52,
+     "word": " is"
+    },
+    {
+     "start": 387.52,
+     "end": 387.86,
+     "word": " established"
+    },
+    {
+     "start": 387.86,
+     "end": 388.2,
+     "word": " at"
+    },
+    {
+     "start": 388.2,
+     "end": 388.34,
+     "word": " the"
+    },
+    {
+     "start": 388.34,
+     "end": 388.54,
+     "word": " cross"
+    },
+    {
+     "start": 388.54,
+     "end": 388.78,
+     "word": " in"
+    },
+    {
+     "start": 388.78,
+     "end": 389.06,
+     "word": " Daniel"
+    },
+    {
+     "start": 389.06,
+     "end": 389.32,
+     "word": " 9,"
+    },
+    {
+     "start": 389.74,
+     "end": 389.94,
+     "word": " the"
+    },
+    {
+     "start": 389.94,
+     "end": 390.3,
+     "word": " longer"
+    },
+    {
+     "start": 390.3,
+     "end": 390.7,
+     "word": " prophetic"
+    },
+    {
+     "start": 390.7,
+     "end": 391.22,
+     "word": " spans,"
+    },
+    {
+     "start": 391.42,
+     "end": 391.62,
+     "word": " such"
+    },
+    {
+     "start": 391.62,
+     "end": 391.82,
+     "word": " as"
+    },
+    {
+     "start": 391.82,
+     "end": 392.0,
+     "word": " the"
+    },
+    {
+     "start": 392.0,
+     "end": 392.86,
+     "word": " 1260"
+    }
+   ]
+  },
+  {
+   "start": 392.86,
+   "end": 401.18,
+   "text": "days, Daniel 725, and the 2300 evenings and mornings, Daniel 814, rest on the exact same divine",
+   "words": [
+    {
+     "start": 392.86,
+     "end": 393.16,
+     "word": " days,"
+    },
+    {
+     "start": 393.66,
+     "end": 393.66,
+     "word": " Daniel"
+    },
+    {
+     "start": 393.66,
+     "end": 394.44,
+     "word": " 725,"
+    },
+    {
+     "start": 395.12,
+     "end": 395.28,
+     "word": " and"
+    },
+    {
+     "start": 395.28,
+     "end": 395.42,
+     "word": " the"
+    },
+    {
+     "start": 395.42,
+     "end": 396.36,
+     "word": " 2300"
+    },
+    {
+     "start": 396.36,
+     "end": 396.7,
+     "word": " evenings"
+    },
+    {
+     "start": 396.7,
+     "end": 396.94,
+     "word": " and"
+    },
+    {
+     "start": 396.94,
+     "end": 397.32,
+     "word": " mornings,"
+    },
+    {
+     "start": 397.78,
+     "end": 397.98,
+     "word": " Daniel"
+    },
+    {
+     "start": 397.98,
+     "end": 398.74,
+     "word": " 814,"
+    },
+    {
+     "start": 399.26,
+     "end": 399.56,
+     "word": " rest"
+    },
+    {
+     "start": 399.56,
+     "end": 399.82,
+     "word": " on"
+    },
+    {
+     "start": 399.82,
+     "end": 399.96,
+     "word": " the"
+    },
+    {
+     "start": 399.96,
+     "end": 400.34,
+     "word": " exact"
+    },
+    {
+     "start": 400.34,
+     "end": 400.78,
+     "word": " same"
+    },
+    {
+     "start": 400.78,
+     "end": 401.18,
+     "word": " divine"
+    }
+   ]
+  },
+  {
+   "start": 401.18,
+   "end": 408.72,
+   "text": "measuring rod. An honest reading. Numbers 1434 and Ezekiel 4-6 set the biblical precedent that",
+   "words": [
+    {
+     "start": 401.18,
+     "end": 401.6,
+     "word": " measuring"
+    },
+    {
+     "start": 401.6,
+     "end": 401.92,
+     "word": " rod."
+    },
+    {
+     "start": 402.8,
+     "end": 402.9,
+     "word": " An"
+    },
+    {
+     "start": 402.9,
+     "end": 403.18,
+     "word": " honest"
+    },
+    {
+     "start": 403.18,
+     "end": 403.52,
+     "word": " reading."
+    },
+    {
+     "start": 404.62,
+     "end": 404.62,
+     "word": " Numbers"
+    },
+    {
+     "start": 404.62,
+     "end": 405.68,
+     "word": " 1434"
+    },
+    {
+     "start": 405.68,
+     "end": 406.12,
+     "word": " and"
+    },
+    {
+     "start": 406.12,
+     "end": 406.54,
+     "word": " Ezekiel"
+    },
+    {
+     "start": 406.54,
+     "end": 406.88,
+     "word": " 4"
+    },
+    {
+     "start": 406.88,
+     "end": 407.18,
+     "word": "-6"
+    },
+    {
+     "start": 407.18,
+     "end": 407.48,
+     "word": " set"
+    },
+    {
+     "start": 407.48,
+     "end": 407.7,
+     "word": " the"
+    },
+    {
+     "start": 407.7,
+     "end": 408.0,
+     "word": " biblical"
+    },
+    {
+     "start": 408.0,
+     "end": 408.44,
+     "word": " precedent"
+    },
+    {
+     "start": 408.44,
+     "end": 408.72,
+     "word": " that"
+    }
+   ]
+  },
+  {
+   "start": 408.72,
+   "end": 414.52,
+   "text": "a prophetic day can stand for a year. Daniel 9 tests that scale in the prophecy of the Messiah.",
+   "words": [
+    {
+     "start": 408.72,
+     "end": 408.8,
+     "word": " a"
+    },
+    {
+     "start": 408.8,
+     "end": 409.2,
+     "word": " prophetic"
+    },
+    {
+     "start": 409.2,
+     "end": 409.48,
+     "word": " day"
+    },
+    {
+     "start": 409.48,
+     "end": 409.7,
+     "word": " can"
+    },
+    {
+     "start": 409.7,
+     "end": 410.0,
+     "word": " stand"
+    },
+    {
+     "start": 410.0,
+     "end": 410.26,
+     "word": " for"
+    },
+    {
+     "start": 410.26,
+     "end": 410.42,
+     "word": " a"
+    },
+    {
+     "start": 410.42,
+     "end": 410.62,
+     "word": " year."
+    },
+    {
+     "start": 411.38,
+     "end": 411.54,
+     "word": " Daniel"
+    },
+    {
+     "start": 411.54,
+     "end": 411.96,
+     "word": " 9"
+    },
+    {
+     "start": 411.96,
+     "end": 412.54,
+     "word": " tests"
+    },
+    {
+     "start": 412.54,
+     "end": 412.88,
+     "word": " that"
+    },
+    {
+     "start": 412.88,
+     "end": 413.2,
+     "word": " scale"
+    },
+    {
+     "start": 413.2,
+     "end": 413.5,
+     "word": " in"
+    },
+    {
+     "start": 413.5,
+     "end": 413.6,
+     "word": " the"
+    },
+    {
+     "start": 413.6,
+     "end": 413.88,
+     "word": " prophecy"
+    },
+    {
+     "start": 413.88,
+     "end": 414.12,
+     "word": " of"
+    },
+    {
+     "start": 414.12,
+     "end": 414.24,
+     "word": " the"
+    },
+    {
+     "start": 414.24,
+     "end": 414.52,
+     "word": " Messiah."
+    }
+   ]
+  },
+  {
+   "start": 415.34,
+   "end": 421.9,
+   "text": "The dates 457 BC and AD 27-34 are conclusions drawn from that framework.",
+   "words": [
+    {
+     "start": 415.34,
+     "end": 415.5,
+     "word": " The"
+    },
+    {
+     "start": 415.5,
+     "end": 415.76,
+     "word": " dates"
+    },
+    {
+     "start": 415.76,
+     "end": 416.4,
+     "word": " 457"
+    },
+    {
+     "start": 416.4,
+     "end": 417.0,
+     "word": " BC"
+    },
+    {
+     "start": 417.0,
+     "end": 417.52,
+     "word": " and"
+    },
+    {
+     "start": 417.52,
+     "end": 417.92,
+     "word": " AD"
+    },
+    {
+     "start": 417.92,
+     "end": 418.54,
+     "word": " 27"
+    },
+    {
+     "start": 418.54,
+     "end": 419.28,
+     "word": "-34"
+    },
+    {
+     "start": 419.28,
+     "end": 419.9,
+     "word": " are"
+    },
+    {
+     "start": 419.9,
+     "end": 420.54,
+     "word": " conclusions"
+    },
+    {
+     "start": 420.54,
+     "end": 421.04,
+     "word": " drawn"
+    },
+    {
+     "start": 421.04,
+     "end": 421.34,
+     "word": " from"
+    },
+    {
+     "start": 421.34,
+     "end": 421.54,
+     "word": " that"
+    },
+    {
+     "start": 421.54,
+     "end": 421.9,
+     "word": " framework."
+    }
+   ]
+  },
+  {
+   "start": 421.9,
+   "end": 426.98,
+   "text": "They are not calendar years printed in the verse. Later sittings will walk through each step.",
+   "words": [
+    {
+     "start": 421.9,
+     "end": 422.4,
+     "word": " They"
+    },
+    {
+     "start": 422.4,
+     "end": 422.5,
+     "word": " are"
+    },
+    {
+     "start": 422.5,
+     "end": 422.7,
+     "word": " not"
+    },
+    {
+     "start": 422.7,
+     "end": 423.18,
+     "word": " calendar"
+    },
+    {
+     "start": 423.18,
+     "end": 423.56,
+     "word": " years"
+    },
+    {
+     "start": 423.56,
+     "end": 423.84,
+     "word": " printed"
+    },
+    {
+     "start": 423.84,
+     "end": 424.06,
+     "word": " in"
+    },
+    {
+     "start": 424.06,
+     "end": 424.18,
+     "word": " the"
+    },
+    {
+     "start": 424.18,
+     "end": 424.42,
+     "word": " verse."
+    },
+    {
+     "start": 425.14,
+     "end": 425.26,
+     "word": " Later"
+    },
+    {
+     "start": 425.26,
+     "end": 425.64,
+     "word": " sittings"
+    },
+    {
+     "start": 425.64,
+     "end": 425.84,
+     "word": " will"
+    },
+    {
+     "start": 425.84,
+     "end": 426.08,
+     "word": " walk"
+    },
+    {
+     "start": 426.08,
+     "end": 426.26,
+     "word": " through"
+    },
+    {
+     "start": 426.26,
+     "end": 426.44,
+     "word": " each"
+    },
+    {
+     "start": 426.44,
+     "end": 426.98,
+     "word": " step."
+    }
+   ]
+  },
+  {
+   "start": 427.8,
+   "end": 432.82,
+   "text": "Part 3. The Centrality of Jesus Christ. The Redemptive Core of Prophecy.",
+   "words": [
+    {
+     "start": 427.8,
+     "end": 427.8,
+     "word": " Part"
+    },
+    {
+     "start": 427.8,
+     "end": 428.14,
+     "word": " 3."
+    },
+    {
+     "start": 428.7,
+     "end": 428.72,
+     "word": " The"
+    },
+    {
+     "start": 428.72,
+     "end": 429.38,
+     "word": " Centrality"
+    },
+    {
+     "start": 429.38,
+     "end": 429.64,
+     "word": " of"
+    },
+    {
+     "start": 429.64,
+     "end": 429.92,
+     "word": " Jesus"
+    },
+    {
+     "start": 429.92,
+     "end": 430.28,
+     "word": " Christ."
+    },
+    {
+     "start": 430.86,
+     "end": 430.94,
+     "word": " The"
+    },
+    {
+     "start": 430.94,
+     "end": 431.6,
+     "word": " Redemptive"
+    },
+    {
+     "start": 431.6,
+     "end": 431.76,
+     "word": " Core"
+    },
+    {
+     "start": 431.76,
+     "end": 432.04,
+     "word": " of"
+    },
+    {
+     "start": 432.04,
+     "end": 432.82,
+     "word": " Prophecy."
+    }
+   ]
+  },
+  {
+   "start": 433.26,
+   "end": 438.36,
+   "text": "Prophetic interpretation must never become a cold intellectual exercise or a tool for",
+   "words": [
+    {
+     "start": 433.26,
+     "end": 433.64,
+     "word": " Prophetic"
+    },
+    {
+     "start": 433.64,
+     "end": 434.22,
+     "word": " interpretation"
+    },
+    {
+     "start": 434.22,
+     "end": 434.58,
+     "word": " must"
+    },
+    {
+     "start": 434.58,
+     "end": 434.98,
+     "word": " never"
+    },
+    {
+     "start": 434.98,
+     "end": 435.34,
+     "word": " become"
+    },
+    {
+     "start": 435.34,
+     "end": 435.52,
+     "word": " a"
+    },
+    {
+     "start": 435.52,
+     "end": 435.92,
+     "word": " cold"
+    },
+    {
+     "start": 435.92,
+     "end": 436.46,
+     "word": " intellectual"
+    },
+    {
+     "start": 436.46,
+     "end": 437.06,
+     "word": " exercise"
+    },
+    {
+     "start": 437.06,
+     "end": 437.72,
+     "word": " or"
+    },
+    {
+     "start": 437.72,
+     "end": 437.86,
+     "word": " a"
+    },
+    {
+     "start": 437.86,
+     "end": 438.08,
+     "word": " tool"
+    },
+    {
+     "start": 438.08,
+     "end": 438.36,
+     "word": " for"
+    }
+   ]
+  },
+  {
+   "start": 438.36,
+   "end": 445.18,
+   "text": "political fear-mongering. The unbroken historicist chain exists for one primary purpose, to exalt",
+   "words": [
+    {
+     "start": 438.36,
+     "end": 438.72,
+     "word": " political"
+    },
+    {
+     "start": 438.72,
+     "end": 439.0,
+     "word": " fear"
+    },
+    {
+     "start": 439.0,
+     "end": 439.36,
+     "word": "-mongering."
+    },
+    {
+     "start": 439.94,
+     "end": 440.16,
+     "word": " The"
+    },
+    {
+     "start": 440.16,
+     "end": 440.76,
+     "word": " unbroken"
+    },
+    {
+     "start": 440.76,
+     "end": 441.42,
+     "word": " historicist"
+    },
+    {
+     "start": 441.42,
+     "end": 441.76,
+     "word": " chain"
+    },
+    {
+     "start": 441.76,
+     "end": 442.18,
+     "word": " exists"
+    },
+    {
+     "start": 442.18,
+     "end": 442.54,
+     "word": " for"
+    },
+    {
+     "start": 442.54,
+     "end": 442.96,
+     "word": " one"
+    },
+    {
+     "start": 442.96,
+     "end": 443.58,
+     "word": " primary"
+    },
+    {
+     "start": 443.58,
+     "end": 444.04,
+     "word": " purpose,"
+    },
+    {
+     "start": 444.28,
+     "end": 444.74,
+     "word": " to"
+    },
+    {
+     "start": 444.74,
+     "end": 445.18,
+     "word": " exalt"
+    }
+   ]
+  },
+  {
+   "start": 445.18,
+   "end": 451.53,
+   "text": "Jesus Christ as the Lord of human history and our personal redeemer. 1. Jesus in Daniel 1,",
+   "words": [
+    {
+     "start": 445.18,
+     "end": 445.48,
+     "word": " Jesus"
+    },
+    {
+     "start": 445.48,
+     "end": 445.82,
+     "word": " Christ"
+    },
+    {
+     "start": 445.82,
+     "end": 446.1,
+     "word": " as"
+    },
+    {
+     "start": 446.1,
+     "end": 446.26,
+     "word": " the"
+    },
+    {
+     "start": 446.26,
+     "end": 446.56,
+     "word": " Lord"
+    },
+    {
+     "start": 446.56,
+     "end": 446.8,
+     "word": " of"
+    },
+    {
+     "start": 446.8,
+     "end": 447.02,
+     "word": " human"
+    },
+    {
+     "start": 447.02,
+     "end": 447.36,
+     "word": " history"
+    },
+    {
+     "start": 447.36,
+     "end": 447.84,
+     "word": " and"
+    },
+    {
+     "start": 447.84,
+     "end": 448.08,
+     "word": " our"
+    },
+    {
+     "start": 448.08,
+     "end": 448.44,
+     "word": " personal"
+    },
+    {
+     "start": 448.44,
+     "end": 449.1,
+     "word": " redeemer."
+    },
+    {
+     "start": 449.69,
+     "end": 449.99,
+     "word": " 1."
+    },
+    {
+     "start": 450.51,
+     "end": 450.71,
+     "word": " Jesus"
+    },
+    {
+     "start": 450.71,
+     "end": 450.99,
+     "word": " in"
+    },
+    {
+     "start": 450.99,
+     "end": 451.27,
+     "word": " Daniel"
+    },
+    {
+     "start": 451.27,
+     "end": 451.53,
+     "word": " 1,"
+    }
+   ]
+  },
+  {
+   "start": 451.53,
+   "end": 457.51,
+   "text": "the sovereign hand. The exile appeared to be the death of the covenant, but Daniel 1-2 shows",
+   "words": [
+    {
+     "start": 451.53,
+     "end": 451.93,
+     "word": " the"
+    },
+    {
+     "start": 451.93,
+     "end": 452.21,
+     "word": " sovereign"
+    },
+    {
+     "start": 452.21,
+     "end": 452.55,
+     "word": " hand."
+    },
+    {
+     "start": 453.35,
+     "end": 453.49,
+     "word": " The"
+    },
+    {
+     "start": 453.49,
+     "end": 453.89,
+     "word": " exile"
+    },
+    {
+     "start": 453.89,
+     "end": 454.27,
+     "word": " appeared"
+    },
+    {
+     "start": 454.27,
+     "end": 454.49,
+     "word": " to"
+    },
+    {
+     "start": 454.49,
+     "end": 454.63,
+     "word": " be"
+    },
+    {
+     "start": 454.63,
+     "end": 454.79,
+     "word": " the"
+    },
+    {
+     "start": 454.79,
+     "end": 455.03,
+     "word": " death"
+    },
+    {
+     "start": 455.03,
+     "end": 455.21,
+     "word": " of"
+    },
+    {
+     "start": 455.21,
+     "end": 455.35,
+     "word": " the"
+    },
+    {
+     "start": 455.35,
+     "end": 455.63,
+     "word": " covenant,"
+    },
+    {
+     "start": 456.11,
+     "end": 456.33,
+     "word": " but"
+    },
+    {
+     "start": 456.33,
+     "end": 456.65,
+     "word": " Daniel"
+    },
+    {
+     "start": 456.65,
+     "end": 456.91,
+     "word": " 1"
+    },
+    {
+     "start": 456.91,
+     "end": 457.25,
+     "word": "-2"
+    },
+    {
+     "start": 457.25,
+     "end": 457.51,
+     "word": " shows"
+    }
+   ]
+  },
+  {
+   "start": 457.51,
+   "end": 462.65,
+   "text": "that the same God who later gave his son on Calvary was already governing the fall of Judah.",
+   "words": [
+    {
+     "start": 457.51,
+     "end": 457.79,
+     "word": " that"
+    },
+    {
+     "start": 457.79,
+     "end": 457.95,
+     "word": " the"
+    },
+    {
+     "start": 457.95,
+     "end": 458.29,
+     "word": " same"
+    },
+    {
+     "start": 458.29,
+     "end": 458.53,
+     "word": " God"
+    },
+    {
+     "start": 458.53,
+     "end": 458.73,
+     "word": " who"
+    },
+    {
+     "start": 458.73,
+     "end": 459.01,
+     "word": " later"
+    },
+    {
+     "start": 459.01,
+     "end": 459.29,
+     "word": " gave"
+    },
+    {
+     "start": 459.29,
+     "end": 459.45,
+     "word": " his"
+    },
+    {
+     "start": 459.45,
+     "end": 459.65,
+     "word": " son"
+    },
+    {
+     "start": 459.65,
+     "end": 459.83,
+     "word": " on"
+    },
+    {
+     "start": 459.83,
+     "end": 460.27,
+     "word": " Calvary"
+    },
+    {
+     "start": 460.27,
+     "end": 460.85,
+     "word": " was"
+    },
+    {
+     "start": 460.85,
+     "end": 461.43,
+     "word": " already"
+    },
+    {
+     "start": 461.43,
+     "end": 461.83,
+     "word": " governing"
+    },
+    {
+     "start": 461.83,
+     "end": 462.09,
+     "word": " the"
+    },
+    {
+     "start": 462.09,
+     "end": 462.25,
+     "word": " fall"
+    },
+    {
+     "start": 462.25,
+     "end": 462.43,
+     "word": " of"
+    },
+    {
+     "start": 462.43,
+     "end": 462.65,
+     "word": " Judah."
+    }
+   ]
+  },
+  {
+   "start": 463.67,
+   "end": 469.29,
+   "text": "God orchestrates trials not to abandon his people, but to purge them of idolatry and prepare the",
+   "words": [
+    {
+     "start": 463.67,
+     "end": 463.71,
+     "word": " God"
+    },
+    {
+     "start": 463.71,
+     "end": 464.35,
+     "word": " orchestrates"
+    },
+    {
+     "start": 464.35,
+     "end": 464.69,
+     "word": " trials"
+    },
+    {
+     "start": 464.69,
+     "end": 465.05,
+     "word": " not"
+    },
+    {
+     "start": 465.05,
+     "end": 465.33,
+     "word": " to"
+    },
+    {
+     "start": 465.33,
+     "end": 465.73,
+     "word": " abandon"
+    },
+    {
+     "start": 465.73,
+     "end": 465.99,
+     "word": " his"
+    },
+    {
+     "start": 465.99,
+     "end": 466.31,
+     "word": " people,"
+    },
+    {
+     "start": 466.73,
+     "end": 466.91,
+     "word": " but"
+    },
+    {
+     "start": 466.91,
+     "end": 467.07,
+     "word": " to"
+    },
+    {
+     "start": 467.07,
+     "end": 467.41,
+     "word": " purge"
+    },
+    {
+     "start": 467.41,
+     "end": 467.69,
+     "word": " them"
+    },
+    {
+     "start": 467.69,
+     "end": 467.85,
+     "word": " of"
+    },
+    {
+     "start": 467.85,
+     "end": 468.43,
+     "word": " idolatry"
+    },
+    {
+     "start": 468.43,
+     "end": 468.69,
+     "word": " and"
+    },
+    {
+     "start": 468.69,
+     "end": 469.05,
+     "word": " prepare"
+    },
+    {
+     "start": 469.05,
+     "end": 469.29,
+     "word": " the"
+    }
+   ]
+  },
+  {
+   "start": 469.29,
+   "end": 475.19,
+   "text": "global stage for the Messiah's advent. 2. Jesus in Daniel 9, the slain sacrifice.",
+   "words": [
+    {
+     "start": 469.29,
+     "end": 469.57,
+     "word": " global"
+    },
+    {
+     "start": 469.57,
+     "end": 469.95,
+     "word": " stage"
+    },
+    {
+     "start": 469.95,
+     "end": 470.23,
+     "word": " for"
+    },
+    {
+     "start": 470.23,
+     "end": 470.33,
+     "word": " the"
+    },
+    {
+     "start": 470.33,
+     "end": 470.81,
+     "word": " Messiah's"
+    },
+    {
+     "start": 470.81,
+     "end": 471.11,
+     "word": " advent."
+    },
+    {
+     "start": 472.09,
+     "end": 472.17,
+     "word": " 2."
+    },
+    {
+     "start": 473.15,
+     "end": 473.15,
+     "word": " Jesus"
+    },
+    {
+     "start": 473.15,
+     "end": 473.37,
+     "word": " in"
+    },
+    {
+     "start": 473.37,
+     "end": 473.67,
+     "word": " Daniel"
+    },
+    {
+     "start": 473.67,
+     "end": 473.91,
+     "word": " 9,"
+    },
+    {
+     "start": 474.29,
+     "end": 474.41,
+     "word": " the"
+    },
+    {
+     "start": 474.41,
+     "end": 474.67,
+     "word": " slain"
+    },
+    {
+     "start": 474.67,
+     "end": 475.19,
+     "word": " sacrifice."
+    }
+   ]
+  },
+  {
+   "start": 476.21,
+   "end": 480.71,
+   "text": "The pinnacle of Daniel's prophetic timeline is not an earthly empire or a future political",
+   "words": [
+    {
+     "start": 476.21,
+     "end": 476.25,
+     "word": " The"
+    },
+    {
+     "start": 476.25,
+     "end": 476.47,
+     "word": " pinnacle"
+    },
+    {
+     "start": 476.47,
+     "end": 476.73,
+     "word": " of"
+    },
+    {
+     "start": 476.73,
+     "end": 477.09,
+     "word": " Daniel's"
+    },
+    {
+     "start": 477.09,
+     "end": 477.41,
+     "word": " prophetic"
+    },
+    {
+     "start": 477.41,
+     "end": 477.85,
+     "word": " timeline"
+    },
+    {
+     "start": 477.85,
+     "end": 478.13,
+     "word": " is"
+    },
+    {
+     "start": 478.13,
+     "end": 478.43,
+     "word": " not"
+    },
+    {
+     "start": 478.43,
+     "end": 478.65,
+     "word": " an"
+    },
+    {
+     "start": 478.65,
+     "end": 478.97,
+     "word": " earthly"
+    },
+    {
+     "start": 478.97,
+     "end": 479.39,
+     "word": " empire"
+    },
+    {
+     "start": 479.39,
+     "end": 479.79,
+     "word": " or"
+    },
+    {
+     "start": 479.79,
+     "end": 480.03,
+     "word": " a"
+    },
+    {
+     "start": 480.03,
+     "end": 480.25,
+     "word": " future"
+    },
+    {
+     "start": 480.25,
+     "end": 480.71,
+     "word": " political"
+    }
+   ]
+  },
+  {
+   "start": 480.71,
+   "end": 487.49,
+   "text": "tyrant. It is the cross. Daniel 9.26 announces that Messiah will be cut off, but not for himself.",
+   "words": [
+    {
+     "start": 480.71,
+     "end": 481.03,
+     "word": " tyrant."
+    },
+    {
+     "start": 481.49,
+     "end": 481.59,
+     "word": " It"
+    },
+    {
+     "start": 481.59,
+     "end": 481.73,
+     "word": " is"
+    },
+    {
+     "start": 481.73,
+     "end": 481.91,
+     "word": " the"
+    },
+    {
+     "start": 481.91,
+     "end": 482.23,
+     "word": " cross."
+    },
+    {
+     "start": 483.11,
+     "end": 483.27,
+     "word": " Daniel"
+    },
+    {
+     "start": 483.27,
+     "end": 483.55,
+     "word": " 9"
+    },
+    {
+     "start": 483.55,
+     "end": 483.97,
+     "word": ".26"
+    },
+    {
+     "start": 483.97,
+     "end": 484.41,
+     "word": " announces"
+    },
+    {
+     "start": 484.41,
+     "end": 484.75,
+     "word": " that"
+    },
+    {
+     "start": 484.75,
+     "end": 485.15,
+     "word": " Messiah"
+    },
+    {
+     "start": 485.15,
+     "end": 485.49,
+     "word": " will"
+    },
+    {
+     "start": 485.49,
+     "end": 485.69,
+     "word": " be"
+    },
+    {
+     "start": 485.69,
+     "end": 486.03,
+     "word": " cut"
+    },
+    {
+     "start": 486.03,
+     "end": 486.27,
+     "word": " off,"
+    },
+    {
+     "start": 486.63,
+     "end": 486.81,
+     "word": " but"
+    },
+    {
+     "start": 486.81,
+     "end": 486.99,
+     "word": " not"
+    },
+    {
+     "start": 486.99,
+     "end": 487.17,
+     "word": " for"
+    },
+    {
+     "start": 487.17,
+     "end": 487.49,
+     "word": " himself."
+    }
+   ]
+  },
+  {
+   "start": 488.45,
+   "end": 493.11,
+   "text": "Verse 27 tells us that in the middle of the prophetic week, he causes sacrificial offerings",
+   "words": [
+    {
+     "start": 488.45,
+     "end": 488.55,
+     "word": " Verse"
+    },
+    {
+     "start": 488.55,
+     "end": 489.13,
+     "word": " 27"
+    },
+    {
+     "start": 489.13,
+     "end": 489.41,
+     "word": " tells"
+    },
+    {
+     "start": 489.41,
+     "end": 489.71,
+     "word": " us"
+    },
+    {
+     "start": 489.71,
+     "end": 489.83,
+     "word": " that"
+    },
+    {
+     "start": 489.83,
+     "end": 489.97,
+     "word": " in"
+    },
+    {
+     "start": 489.97,
+     "end": 490.11,
+     "word": " the"
+    },
+    {
+     "start": 490.11,
+     "end": 490.31,
+     "word": " middle"
+    },
+    {
+     "start": 490.31,
+     "end": 490.53,
+     "word": " of"
+    },
+    {
+     "start": 490.53,
+     "end": 490.65,
+     "word": " the"
+    },
+    {
+     "start": 490.65,
+     "end": 490.93,
+     "word": " prophetic"
+    },
+    {
+     "start": 490.93,
+     "end": 491.23,
+     "word": " week,"
+    },
+    {
+     "start": 491.71,
+     "end": 491.75,
+     "word": " he"
+    },
+    {
+     "start": 491.75,
+     "end": 492.07,
+     "word": " causes"
+    },
+    {
+     "start": 492.07,
+     "end": 492.67,
+     "word": " sacrificial"
+    },
+    {
+     "start": 492.67,
+     "end": 493.11,
+     "word": " offerings"
+    }
+   ]
+  },
+  {
+   "start": 493.11,
+   "end": 499.17,
+   "text": "to cease. By offering his own sinless blood on Calvary, Jesus fulfilled the entire sacrificial",
+   "words": [
+    {
+     "start": 493.11,
+     "end": 493.37,
+     "word": " to"
+    },
+    {
+     "start": 493.37,
+     "end": 493.63,
+     "word": " cease."
+    },
+    {
+     "start": 494.37,
+     "end": 494.53,
+     "word": " By"
+    },
+    {
+     "start": 494.53,
+     "end": 494.97,
+     "word": " offering"
+    },
+    {
+     "start": 494.97,
+     "end": 495.17,
+     "word": " his"
+    },
+    {
+     "start": 495.17,
+     "end": 495.43,
+     "word": " own"
+    },
+    {
+     "start": 495.43,
+     "end": 495.99,
+     "word": " sinless"
+    },
+    {
+     "start": 495.99,
+     "end": 496.23,
+     "word": " blood"
+    },
+    {
+     "start": 496.23,
+     "end": 496.45,
+     "word": " on"
+    },
+    {
+     "start": 496.45,
+     "end": 496.89,
+     "word": " Calvary,"
+    },
+    {
+     "start": 497.27,
+     "end": 497.47,
+     "word": " Jesus"
+    },
+    {
+     "start": 497.47,
+     "end": 497.87,
+     "word": " fulfilled"
+    },
+    {
+     "start": 497.87,
+     "end": 498.11,
+     "word": " the"
+    },
+    {
+     "start": 498.11,
+     "end": 498.59,
+     "word": " entire"
+    },
+    {
+     "start": 498.59,
+     "end": 499.17,
+     "word": " sacrificial"
+    }
+   ]
+  },
+  {
+   "start": 499.17,
+   "end": 506.48,
+   "text": "system, ending the need for animal offerings forever. 3. Jesus in Daniel 2, the returning king.",
+   "words": [
+    {
+     "start": 499.17,
+     "end": 499.59,
+     "word": " system,"
+    },
+    {
+     "start": 500.11,
+     "end": 500.33,
+     "word": " ending"
+    },
+    {
+     "start": 500.33,
+     "end": 500.55,
+     "word": " the"
+    },
+    {
+     "start": 500.55,
+     "end": 500.71,
+     "word": " need"
+    },
+    {
+     "start": 500.71,
+     "end": 500.91,
+     "word": " for"
+    },
+    {
+     "start": 500.91,
+     "end": 501.21,
+     "word": " animal"
+    },
+    {
+     "start": 501.21,
+     "end": 501.67,
+     "word": " offerings"
+    },
+    {
+     "start": 501.67,
+     "end": 502.27,
+     "word": " forever."
+    },
+    {
+     "start": 503.3,
+     "end": 503.46,
+     "word": " 3."
+    },
+    {
+     "start": 504.54,
+     "end": 504.54,
+     "word": " Jesus"
+    },
+    {
+     "start": 504.54,
+     "end": 504.82,
+     "word": " in"
+    },
+    {
+     "start": 504.82,
+     "end": 505.12,
+     "word": " Daniel"
+    },
+    {
+     "start": 505.12,
+     "end": 505.4,
+     "word": " 2,"
+    },
+    {
+     "start": 505.88,
+     "end": 505.94,
+     "word": " the"
+    },
+    {
+     "start": 505.94,
+     "end": 506.24,
+     "word": " returning"
+    },
+    {
+     "start": 506.24,
+     "end": 506.48,
+     "word": " king."
+    }
+   ]
+  },
+  {
+   "start": 507.6,
+   "end": 510.24,
+   "text": "The historicist sequence does not end with Rome,",
+   "words": [
+    {
+     "start": 507.6,
+     "end": 507.94,
+     "word": " The"
+    },
+    {
+     "start": 507.94,
+     "end": 508.58,
+     "word": " historicist"
+    },
+    {
+     "start": 508.58,
+     "end": 508.94,
+     "word": " sequence"
+    },
+    {
+     "start": 508.94,
+     "end": 509.26,
+     "word": " does"
+    },
+    {
+     "start": 509.26,
+     "end": 509.52,
+     "word": " not"
+    },
+    {
+     "start": 509.52,
+     "end": 509.78,
+     "word": " end"
+    },
+    {
+     "start": 509.78,
+     "end": 509.98,
+     "word": " with"
+    },
+    {
+     "start": 509.98,
+     "end": 510.24,
+     "word": " Rome,"
+    }
+   ]
+  },
+  {
+   "start": 510.64,
+   "end": 514.46,
+   "text": "nor does it stall in the divided kingdoms of Europe, the feet of iron and clay.",
+   "words": [
+    {
+     "start": 510.64,
+     "end": 510.84,
+     "word": " nor"
+    },
+    {
+     "start": 510.84,
+     "end": 511.08,
+     "word": " does"
+    },
+    {
+     "start": 511.08,
+     "end": 511.26,
+     "word": " it"
+    },
+    {
+     "start": 511.26,
+     "end": 511.5,
+     "word": " stall"
+    },
+    {
+     "start": 511.5,
+     "end": 511.78,
+     "word": " in"
+    },
+    {
+     "start": 511.78,
+     "end": 511.88,
+     "word": " the"
+    },
+    {
+     "start": 511.88,
+     "end": 512.18,
+     "word": " divided"
+    },
+    {
+     "start": 512.18,
+     "end": 512.46,
+     "word": " kingdoms"
+    },
+    {
+     "start": 512.46,
+     "end": 512.7,
+     "word": " of"
+    },
+    {
+     "start": 512.7,
+     "end": 512.96,
+     "word": " Europe,"
+    },
+    {
+     "start": 513.4,
+     "end": 513.44,
+     "word": " the"
+    },
+    {
+     "start": 513.44,
+     "end": 513.66,
+     "word": " feet"
+    },
+    {
+     "start": 513.66,
+     "end": 513.82,
+     "word": " of"
+    },
+    {
+     "start": 513.82,
+     "end": 514.08,
+     "word": " iron"
+    },
+    {
+     "start": 514.08,
+     "end": 514.28,
+     "word": " and"
+    },
+    {
+     "start": 514.28,
+     "end": 514.46,
+     "word": " clay."
+    }
+   ]
+  },
+  {
+   "start": 515.28,
+   "end": 521.52,
+   "text": "It culminates in Daniel 2.44, a supernatural stone cut out without hands strikes the statue",
+   "words": [
+    {
+     "start": 515.28,
+     "end": 515.48,
+     "word": " It"
+    },
+    {
+     "start": 515.48,
+     "end": 516.02,
+     "word": " culminates"
+    },
+    {
+     "start": 516.02,
+     "end": 516.18,
+     "word": " in"
+    },
+    {
+     "start": 516.18,
+     "end": 516.46,
+     "word": " Daniel"
+    },
+    {
+     "start": 516.46,
+     "end": 516.72,
+     "word": " 2"
+    },
+    {
+     "start": 516.72,
+     "end": 517.22,
+     "word": ".44,"
+    },
+    {
+     "start": 517.9,
+     "end": 517.96,
+     "word": " a"
+    },
+    {
+     "start": 517.96,
+     "end": 518.4,
+     "word": " supernatural"
+    },
+    {
+     "start": 518.4,
+     "end": 518.94,
+     "word": " stone"
+    },
+    {
+     "start": 518.94,
+     "end": 519.46,
+     "word": " cut"
+    },
+    {
+     "start": 519.46,
+     "end": 519.64,
+     "word": " out"
+    },
+    {
+     "start": 519.64,
+     "end": 519.9,
+     "word": " without"
+    },
+    {
+     "start": 519.9,
+     "end": 520.36,
+     "word": " hands"
+    },
+    {
+     "start": 520.36,
+     "end": 520.86,
+     "word": " strikes"
+    },
+    {
+     "start": 520.86,
+     "end": 521.12,
+     "word": " the"
+    },
+    {
+     "start": 521.12,
+     "end": 521.52,
+     "word": " statue"
+    }
+   ]
+  },
+  {
+   "start": 521.52,
+   "end": 526.28,
+   "text": "and grows into a mountain that fills the earth. This stone is Jesus Christ,",
+   "words": [
+    {
+     "start": 521.52,
+     "end": 522.12,
+     "word": " and"
+    },
+    {
+     "start": 522.12,
+     "end": 522.44,
+     "word": " grows"
+    },
+    {
+     "start": 522.44,
+     "end": 522.72,
+     "word": " into"
+    },
+    {
+     "start": 522.72,
+     "end": 522.86,
+     "word": " a"
+    },
+    {
+     "start": 522.86,
+     "end": 523.04,
+     "word": " mountain"
+    },
+    {
+     "start": 523.04,
+     "end": 523.3,
+     "word": " that"
+    },
+    {
+     "start": 523.3,
+     "end": 523.62,
+     "word": " fills"
+    },
+    {
+     "start": 523.62,
+     "end": 523.84,
+     "word": " the"
+    },
+    {
+     "start": 523.84,
+     "end": 524.02,
+     "word": " earth."
+    },
+    {
+     "start": 524.66,
+     "end": 524.9,
+     "word": " This"
+    },
+    {
+     "start": 524.9,
+     "end": 525.22,
+     "word": " stone"
+    },
+    {
+     "start": 525.22,
+     "end": 525.56,
+     "word": " is"
+    },
+    {
+     "start": 525.56,
+     "end": 525.9,
+     "word": " Jesus"
+    },
+    {
+     "start": 525.9,
+     "end": 526.28,
+     "word": " Christ,"
+    }
+   ]
+  },
+  {
+   "start": 526.76,
+   "end": 531.48,
+   "text": "returning in power and glory to inaugurate an everlasting kingdom that will never pass away.",
+   "words": [
+    {
+     "start": 526.76,
+     "end": 527.1,
+     "word": " returning"
+    },
+    {
+     "start": 527.1,
+     "end": 527.36,
+     "word": " in"
+    },
+    {
+     "start": 527.36,
+     "end": 527.62,
+     "word": " power"
+    },
+    {
+     "start": 527.62,
+     "end": 527.92,
+     "word": " and"
+    },
+    {
+     "start": 527.92,
+     "end": 528.18,
+     "word": " glory"
+    },
+    {
+     "start": 528.18,
+     "end": 528.44,
+     "word": " to"
+    },
+    {
+     "start": 528.44,
+     "end": 528.96,
+     "word": " inaugurate"
+    },
+    {
+     "start": 528.96,
+     "end": 529.14,
+     "word": " an"
+    },
+    {
+     "start": 529.14,
+     "end": 529.68,
+     "word": " everlasting"
+    },
+    {
+     "start": 529.68,
+     "end": 530.14,
+     "word": " kingdom"
+    },
+    {
+     "start": 530.14,
+     "end": 530.42,
+     "word": " that"
+    },
+    {
+     "start": 530.42,
+     "end": 530.58,
+     "word": " will"
+    },
+    {
+     "start": 530.58,
+     "end": 530.86,
+     "word": " never"
+    },
+    {
+     "start": 530.86,
+     "end": 531.12,
+     "word": " pass"
+    },
+    {
+     "start": 531.12,
+     "end": 531.48,
+     "word": " away."
+    }
+   ]
+  },
+  {
+   "start": 532.53,
+   "end": 536.61,
+   "text": "And beginning at Moses and all the prophets, he expounded unto them in all the scriptures",
+   "words": [
+    {
+     "start": 532.53,
+     "end": 532.75,
+     "word": " And"
+    },
+    {
+     "start": 532.75,
+     "end": 532.99,
+     "word": " beginning"
+    },
+    {
+     "start": 532.99,
+     "end": 533.21,
+     "word": " at"
+    },
+    {
+     "start": 533.21,
+     "end": 533.47,
+     "word": " Moses"
+    },
+    {
+     "start": 533.47,
+     "end": 533.71,
+     "word": " and"
+    },
+    {
+     "start": 533.71,
+     "end": 533.83,
+     "word": " all"
+    },
+    {
+     "start": 533.83,
+     "end": 533.97,
+     "word": " the"
+    },
+    {
+     "start": 533.97,
+     "end": 534.25,
+     "word": " prophets,"
+    },
+    {
+     "start": 534.69,
+     "end": 534.79,
+     "word": " he"
+    },
+    {
+     "start": 534.79,
+     "end": 535.21,
+     "word": " expounded"
+    },
+    {
+     "start": 535.21,
+     "end": 535.45,
+     "word": " unto"
+    },
+    {
+     "start": 535.45,
+     "end": 535.71,
+     "word": " them"
+    },
+    {
+     "start": 535.71,
+     "end": 535.87,
+     "word": " in"
+    },
+    {
+     "start": 535.87,
+     "end": 536.13,
+     "word": " all"
+    },
+    {
+     "start": 536.13,
+     "end": 536.31,
+     "word": " the"
+    },
+    {
+     "start": 536.31,
+     "end": 536.61,
+     "word": " scriptures"
+    }
+   ]
+  },
+  {
+   "start": 536.61,
+   "end": 544.83,
+   "text": "the things concerning himself. Luke 24.27, KJV. Christ. Every empire on the chain serves the",
+   "words": [
+    {
+     "start": 536.61,
+     "end": 536.99,
+     "word": " the"
+    },
+    {
+     "start": 536.99,
+     "end": 537.27,
+     "word": " things"
+    },
+    {
+     "start": 537.27,
+     "end": 537.73,
+     "word": " concerning"
+    },
+    {
+     "start": 537.73,
+     "end": 538.19,
+     "word": " himself."
+    },
+    {
+     "start": 538.87,
+     "end": 538.89,
+     "word": " Luke"
+    },
+    {
+     "start": 538.89,
+     "end": 539.41,
+     "word": " 24"
+    },
+    {
+     "start": 539.41,
+     "end": 540.03,
+     "word": ".27,"
+    },
+    {
+     "start": 540.25,
+     "end": 540.59,
+     "word": " KJV."
+    },
+    {
+     "start": 542.13,
+     "end": 542.13,
+     "word": " Christ."
+    },
+    {
+     "start": 543.29,
+     "end": 543.29,
+     "word": " Every"
+    },
+    {
+     "start": 543.29,
+     "end": 543.65,
+     "word": " empire"
+    },
+    {
+     "start": 543.65,
+     "end": 543.89,
+     "word": " on"
+    },
+    {
+     "start": 543.89,
+     "end": 544.03,
+     "word": " the"
+    },
+    {
+     "start": 544.03,
+     "end": 544.23,
+     "word": " chain"
+    },
+    {
+     "start": 544.23,
+     "end": 544.53,
+     "word": " serves"
+    },
+    {
+     "start": 544.53,
+     "end": 544.83,
+     "word": " the"
+    }
+   ]
+  },
+  {
+   "start": 544.83,
+   "end": 551.33,
+   "text": "story of the Messiah cut off for us, Daniel 9, and the king who fills the earth, Daniel 2.44-45.",
+   "words": [
+    {
+     "start": 544.83,
+     "end": 545.07,
+     "word": " story"
+    },
+    {
+     "start": 545.07,
+     "end": 545.27,
+     "word": " of"
+    },
+    {
+     "start": 545.27,
+     "end": 545.39,
+     "word": " the"
+    },
+    {
+     "start": 545.39,
+     "end": 545.73,
+     "word": " Messiah"
+    },
+    {
+     "start": 545.73,
+     "end": 546.03,
+     "word": " cut"
+    },
+    {
+     "start": 546.03,
+     "end": 546.23,
+     "word": " off"
+    },
+    {
+     "start": 546.23,
+     "end": 546.43,
+     "word": " for"
+    },
+    {
+     "start": 546.43,
+     "end": 546.63,
+     "word": " us,"
+    },
+    {
+     "start": 546.95,
+     "end": 547.11,
+     "word": " Daniel"
+    },
+    {
+     "start": 547.11,
+     "end": 547.35,
+     "word": " 9,"
+    },
+    {
+     "start": 547.97,
+     "end": 548.09,
+     "word": " and"
+    },
+    {
+     "start": 548.09,
+     "end": 548.21,
+     "word": " the"
+    },
+    {
+     "start": 548.21,
+     "end": 548.39,
+     "word": " king"
+    },
+    {
+     "start": 548.39,
+     "end": 548.65,
+     "word": " who"
+    },
+    {
+     "start": 548.65,
+     "end": 548.91,
+     "word": " fills"
+    },
+    {
+     "start": 548.91,
+     "end": 549.11,
+     "word": " the"
+    },
+    {
+     "start": 549.11,
+     "end": 549.29,
+     "word": " earth,"
+    },
+    {
+     "start": 549.85,
+     "end": 550.03,
+     "word": " Daniel"
+    },
+    {
+     "start": 550.03,
+     "end": 550.29,
+     "word": " 2"
+    },
+    {
+     "start": 550.29,
+     "end": 550.77,
+     "word": ".44"
+    },
+    {
+     "start": 550.77,
+     "end": 551.33,
+     "word": "-45."
+    }
+   ]
+  },
+  {
+   "start": 552.13,
+   "end": 555.03,
+   "text": "Prophecy without Christ at the center is a map with no destination.",
+   "words": [
+    {
+     "start": 552.13,
+     "end": 552.43,
+     "word": " Prophecy"
+    },
+    {
+     "start": 552.43,
+     "end": 552.71,
+     "word": " without"
+    },
+    {
+     "start": 552.71,
+     "end": 553.01,
+     "word": " Christ"
+    },
+    {
+     "start": 553.01,
+     "end": 553.21,
+     "word": " at"
+    },
+    {
+     "start": 553.21,
+     "end": 553.33,
+     "word": " the"
+    },
+    {
+     "start": 553.33,
+     "end": 553.53,
+     "word": " center"
+    },
+    {
+     "start": 553.53,
+     "end": 553.81,
+     "word": " is"
+    },
+    {
+     "start": 553.81,
+     "end": 553.99,
+     "word": " a"
+    },
+    {
+     "start": 553.99,
+     "end": 554.13,
+     "word": " map"
+    },
+    {
+     "start": 554.13,
+     "end": 554.33,
+     "word": " with"
+    },
+    {
+     "start": 554.33,
+     "end": 554.55,
+     "word": " no"
+    },
+    {
+     "start": 554.55,
+     "end": 555.03,
+     "word": " destination."
+    }
+   ]
+  },
+  {
+   "start": 556.03,
+   "end": 558.63,
+   "text": "Part 4. Why Historicism Matters Today",
+   "words": [
+    {
+     "start": 556.03,
+     "end": 556.09,
+     "word": " Part"
+    },
+    {
+     "start": 556.09,
+     "end": 556.43,
+     "word": " 4."
+    },
+    {
+     "start": 557.15,
+     "end": 557.31,
+     "word": " Why"
+    },
+    {
+     "start": 557.31,
+     "end": 558.03,
+     "word": " Historicism"
+    },
+    {
+     "start": 558.03,
+     "end": 558.25,
+     "word": " Matters"
+    },
+    {
+     "start": 558.25,
+     "end": 558.63,
+     "word": " Today"
+    }
+   ]
+  },
+  {
+   "start": 559.97,
+   "end": 563.07,
+   "text": "If all prophecy ended back in the days of Antiochus IV,",
+   "words": [
+    {
+     "start": 559.97,
+     "end": 560.27,
+     "word": " If"
+    },
+    {
+     "start": 560.27,
+     "end": 560.53,
+     "word": " all"
+    },
+    {
+     "start": 560.53,
+     "end": 560.91,
+     "word": " prophecy"
+    },
+    {
+     "start": 560.91,
+     "end": 561.25,
+     "word": " ended"
+    },
+    {
+     "start": 561.25,
+     "end": 561.55,
+     "word": " back"
+    },
+    {
+     "start": 561.55,
+     "end": 561.71,
+     "word": " in"
+    },
+    {
+     "start": 561.71,
+     "end": 561.79,
+     "word": " the"
+    },
+    {
+     "start": 561.79,
+     "end": 561.95,
+     "word": " days"
+    },
+    {
+     "start": 561.95,
+     "end": 562.15,
+     "word": " of"
+    },
+    {
+     "start": 562.15,
+     "end": 562.75,
+     "word": " Antiochus"
+    },
+    {
+     "start": 562.75,
+     "end": 563.07,
+     "word": " IV,"
+    }
+   ]
+  },
+  {
+   "start": 563.07,
+   "end": 568.47,
+   "text": "Preterism, then scripture offers modern believers no roadmap for their own place in history.",
+   "words": [
+    {
+     "start": 563.07,
+     "end": 564.23,
+     "word": " Preterism,"
+    },
+    {
+     "start": 564.43,
+     "end": 564.73,
+     "word": " then"
+    },
+    {
+     "start": 564.73,
+     "end": 564.95,
+     "word": " scripture"
+    },
+    {
+     "start": 564.95,
+     "end": 565.47,
+     "word": " offers"
+    },
+    {
+     "start": 565.47,
+     "end": 565.87,
+     "word": " modern"
+    },
+    {
+     "start": 565.87,
+     "end": 566.23,
+     "word": " believers"
+    },
+    {
+     "start": 566.23,
+     "end": 566.71,
+     "word": " no"
+    },
+    {
+     "start": 566.71,
+     "end": 567.15,
+     "word": " roadmap"
+    },
+    {
+     "start": 567.15,
+     "end": 567.39,
+     "word": " for"
+    },
+    {
+     "start": 567.39,
+     "end": 567.53,
+     "word": " their"
+    },
+    {
+     "start": 567.53,
+     "end": 567.75,
+     "word": " own"
+    },
+    {
+     "start": 567.75,
+     "end": 567.97,
+     "word": " place"
+    },
+    {
+     "start": 567.97,
+     "end": 568.15,
+     "word": " in"
+    },
+    {
+     "start": 568.15,
+     "end": 568.47,
+     "word": " history."
+    }
+   ]
+  },
+  {
+   "start": 569.29,
+   "end": 572.91,
+   "text": "If prophecy skips over the Christian centuries and drops into an ambiguous",
+   "words": [
+    {
+     "start": 569.29,
+     "end": 569.37,
+     "word": " If"
+    },
+    {
+     "start": 569.37,
+     "end": 569.73,
+     "word": " prophecy"
+    },
+    {
+     "start": 569.73,
+     "end": 570.21,
+     "word": " skips"
+    },
+    {
+     "start": 570.21,
+     "end": 570.51,
+     "word": " over"
+    },
+    {
+     "start": 570.51,
+     "end": 570.71,
+     "word": " the"
+    },
+    {
+     "start": 570.71,
+     "end": 570.97,
+     "word": " Christian"
+    },
+    {
+     "start": 570.97,
+     "end": 571.35,
+     "word": " centuries"
+    },
+    {
+     "start": 571.35,
+     "end": 571.65,
+     "word": " and"
+    },
+    {
+     "start": 571.65,
+     "end": 571.89,
+     "word": " drops"
+    },
+    {
+     "start": 571.89,
+     "end": 572.29,
+     "word": " into"
+    },
+    {
+     "start": 572.29,
+     "end": 572.41,
+     "word": " an"
+    },
+    {
+     "start": 572.41,
+     "end": 572.91,
+     "word": " ambiguous"
+    }
+   ]
+  },
+  {
+   "start": 572.91,
+   "end": 578.35,
+   "text": "future seven-year tribulation, futurism, the churches cut adrift from the guiding hand",
+   "words": [
+    {
+     "start": 572.91,
+     "end": 573.67,
+     "word": " future"
+    },
+    {
+     "start": 573.67,
+     "end": 574.05,
+     "word": " seven"
+    },
+    {
+     "start": 574.05,
+     "end": 574.23,
+     "word": "-year"
+    },
+    {
+     "start": 574.23,
+     "end": 574.79,
+     "word": " tribulation,"
+    },
+    {
+     "start": 575.31,
+     "end": 575.77,
+     "word": " futurism,"
+    },
+    {
+     "start": 576.31,
+     "end": 576.45,
+     "word": " the"
+    },
+    {
+     "start": 576.45,
+     "end": 576.65,
+     "word": " churches"
+    },
+    {
+     "start": 576.65,
+     "end": 577.03,
+     "word": " cut"
+    },
+    {
+     "start": 577.03,
+     "end": 577.41,
+     "word": " adrift"
+    },
+    {
+     "start": 577.41,
+     "end": 577.71,
+     "word": " from"
+    },
+    {
+     "start": 577.71,
+     "end": 577.85,
+     "word": " the"
+    },
+    {
+     "start": 577.85,
+     "end": 578.11,
+     "word": " guiding"
+    },
+    {
+     "start": 578.11,
+     "end": 578.35,
+     "word": " hand"
+    }
+   ]
+  },
+  {
+   "start": 578.35,
+   "end": 583.32,
+   "text": "of God over the last two thousand years. Historicism provides believers with clarity",
+   "words": [
+    {
+     "start": 578.35,
+     "end": 578.49,
+     "word": " of"
+    },
+    {
+     "start": 578.49,
+     "end": 578.69,
+     "word": " God"
+    },
+    {
+     "start": 578.69,
+     "end": 578.91,
+     "word": " over"
+    },
+    {
+     "start": 578.91,
+     "end": 579.03,
+     "word": " the"
+    },
+    {
+     "start": 579.03,
+     "end": 579.25,
+     "word": " last"
+    },
+    {
+     "start": 579.25,
+     "end": 579.41,
+     "word": " two"
+    },
+    {
+     "start": 579.41,
+     "end": 579.67,
+     "word": " thousand"
+    },
+    {
+     "start": 579.67,
+     "end": 580.11,
+     "word": " years."
+    },
+    {
+     "start": 581.24,
+     "end": 581.78,
+     "word": " Historicism"
+    },
+    {
+     "start": 581.78,
+     "end": 582.16,
+     "word": " provides"
+    },
+    {
+     "start": 582.16,
+     "end": 582.58,
+     "word": " believers"
+    },
+    {
+     "start": 582.58,
+     "end": 582.86,
+     "word": " with"
+    },
+    {
+     "start": 582.86,
+     "end": 583.32,
+     "word": " clarity"
+    }
+   ]
+  },
+  {
+   "start": 583.32,
+   "end": 588.76,
+   "text": "and reassurance. You know where you stand. You live in the final segment of human history,",
+   "words": [
+    {
+     "start": 583.32,
+     "end": 583.62,
+     "word": " and"
+    },
+    {
+     "start": 583.62,
+     "end": 584.16,
+     "word": " reassurance."
+    },
+    {
+     "start": 585.1,
+     "end": 585.2,
+     "word": " You"
+    },
+    {
+     "start": 585.2,
+     "end": 585.42,
+     "word": " know"
+    },
+    {
+     "start": 585.42,
+     "end": 585.6,
+     "word": " where"
+    },
+    {
+     "start": 585.6,
+     "end": 585.76,
+     "word": " you"
+    },
+    {
+     "start": 585.76,
+     "end": 586.08,
+     "word": " stand."
+    },
+    {
+     "start": 586.64,
+     "end": 586.86,
+     "word": " You"
+    },
+    {
+     "start": 586.86,
+     "end": 587.04,
+     "word": " live"
+    },
+    {
+     "start": 587.04,
+     "end": 587.2,
+     "word": " in"
+    },
+    {
+     "start": 587.2,
+     "end": 587.32,
+     "word": " the"
+    },
+    {
+     "start": 587.32,
+     "end": 587.6,
+     "word": " final"
+    },
+    {
+     "start": 587.6,
+     "end": 587.92,
+     "word": " segment"
+    },
+    {
+     "start": 587.92,
+     "end": 588.14,
+     "word": " of"
+    },
+    {
+     "start": 588.14,
+     "end": 588.36,
+     "word": " human"
+    },
+    {
+     "start": 588.36,
+     "end": 588.76,
+     "word": " history,"
+    }
+   ]
+  },
+  {
+   "start": 588.76,
+   "end": 593.86,
+   "text": "the divided nations, the feet of iron and clay, right before the striking of the supernatural",
+   "words": [
+    {
+     "start": 588.76,
+     "end": 589.38,
+     "word": " the"
+    },
+    {
+     "start": 589.38,
+     "end": 589.62,
+     "word": " divided"
+    },
+    {
+     "start": 589.62,
+     "end": 590.1,
+     "word": " nations,"
+    },
+    {
+     "start": 590.58,
+     "end": 590.6,
+     "word": " the"
+    },
+    {
+     "start": 590.6,
+     "end": 590.78,
+     "word": " feet"
+    },
+    {
+     "start": 590.78,
+     "end": 590.92,
+     "word": " of"
+    },
+    {
+     "start": 590.92,
+     "end": 591.08,
+     "word": " iron"
+    },
+    {
+     "start": 591.08,
+     "end": 591.24,
+     "word": " and"
+    },
+    {
+     "start": 591.24,
+     "end": 591.42,
+     "word": " clay,"
+    },
+    {
+     "start": 592.08,
+     "end": 592.32,
+     "word": " right"
+    },
+    {
+     "start": 592.32,
+     "end": 592.64,
+     "word": " before"
+    },
+    {
+     "start": 592.64,
+     "end": 592.8,
+     "word": " the"
+    },
+    {
+     "start": 592.8,
+     "end": 593.08,
+     "word": " striking"
+    },
+    {
+     "start": 593.08,
+     "end": 593.38,
+     "word": " of"
+    },
+    {
+     "start": 593.38,
+     "end": 593.5,
+     "word": " the"
+    },
+    {
+     "start": 593.5,
+     "end": 593.86,
+     "word": " supernatural"
+    }
+   ]
+  },
+  {
+   "start": 593.86,
+   "end": 600.01,
+   "text": "stone. You are freed from fear. Present superpowers, global crises, and shifting alliances",
+   "words": [
+    {
+     "start": 593.86,
+     "end": 594.3,
+     "word": " stone."
+    },
+    {
+     "start": 595.29,
+     "end": 595.31,
+     "word": " You"
+    },
+    {
+     "start": 595.31,
+     "end": 595.43,
+     "word": " are"
+    },
+    {
+     "start": 595.43,
+     "end": 595.67,
+     "word": " freed"
+    },
+    {
+     "start": 595.67,
+     "end": 595.91,
+     "word": " from"
+    },
+    {
+     "start": 595.91,
+     "end": 596.17,
+     "word": " fear."
+    },
+    {
+     "start": 597.15,
+     "end": 597.15,
+     "word": " Present"
+    },
+    {
+     "start": 597.15,
+     "end": 597.79,
+     "word": " superpowers,"
+    },
+    {
+     "start": 598.21,
+     "end": 598.39,
+     "word": " global"
+    },
+    {
+     "start": 598.39,
+     "end": 598.87,
+     "word": " crises,"
+    },
+    {
+     "start": 599.15,
+     "end": 599.19,
+     "word": " and"
+    },
+    {
+     "start": 599.19,
+     "end": 599.55,
+     "word": " shifting"
+    },
+    {
+     "start": 599.55,
+     "end": 600.01,
+     "word": " alliances"
+    }
+   ]
+  },
+  {
+   "start": 600.01,
+   "end": 605.81,
+   "text": "do not dictate the future. The same God who governed Babylon, Persia, Greece, and Rome",
+   "words": [
+    {
+     "start": 600.01,
+     "end": 600.69,
+     "word": " do"
+    },
+    {
+     "start": 600.69,
+     "end": 600.87,
+     "word": " not"
+    },
+    {
+     "start": 600.87,
+     "end": 601.21,
+     "word": " dictate"
+    },
+    {
+     "start": 601.21,
+     "end": 601.39,
+     "word": " the"
+    },
+    {
+     "start": 601.39,
+     "end": 601.65,
+     "word": " future."
+    },
+    {
+     "start": 602.39,
+     "end": 602.55,
+     "word": " The"
+    },
+    {
+     "start": 602.55,
+     "end": 602.77,
+     "word": " same"
+    },
+    {
+     "start": 602.77,
+     "end": 602.99,
+     "word": " God"
+    },
+    {
+     "start": 602.99,
+     "end": 603.23,
+     "word": " who"
+    },
+    {
+     "start": 603.23,
+     "end": 603.55,
+     "word": " governed"
+    },
+    {
+     "start": 603.55,
+     "end": 603.95,
+     "word": " Babylon,"
+    },
+    {
+     "start": 604.45,
+     "end": 604.69,
+     "word": " Persia,"
+    },
+    {
+     "start": 605.03,
+     "end": 605.25,
+     "word": " Greece,"
+    },
+    {
+     "start": 605.43,
+     "end": 605.53,
+     "word": " and"
+    },
+    {
+     "start": 605.53,
+     "end": 605.81,
+     "word": " Rome"
+    }
+   ]
+  },
+  {
+   "start": 605.81,
+   "end": 610.08,
+   "text": "holds today's events in his hands. You rest in Christ's triumph.",
+   "words": [
+    {
+     "start": 605.81,
+     "end": 606.49,
+     "word": " holds"
+    },
+    {
+     "start": 606.49,
+     "end": 606.97,
+     "word": " today's"
+    },
+    {
+     "start": 606.97,
+     "end": 607.15,
+     "word": " events"
+    },
+    {
+     "start": 607.15,
+     "end": 607.35,
+     "word": " in"
+    },
+    {
+     "start": 607.35,
+     "end": 607.45,
+     "word": " his"
+    },
+    {
+     "start": 607.45,
+     "end": 607.81,
+     "word": " hands."
+    },
+    {
+     "start": 608.72,
+     "end": 608.88,
+     "word": " You"
+    },
+    {
+     "start": 608.88,
+     "end": 609.12,
+     "word": " rest"
+    },
+    {
+     "start": 609.12,
+     "end": 609.38,
+     "word": " in"
+    },
+    {
+     "start": 609.38,
+     "end": 609.82,
+     "word": " Christ's"
+    },
+    {
+     "start": 609.82,
+     "end": 610.08,
+     "word": " triumph."
+    }
+   ]
+  },
+  {
+   "start": 611.08,
+   "end": 616.38,
+   "text": "Prophecy proves God's absolute reliability. The same prophetic timeline that precisely predicted",
+   "words": [
+    {
+     "start": 611.08,
+     "end": 611.32,
+     "word": " Prophecy"
+    },
+    {
+     "start": 611.32,
+     "end": 611.62,
+     "word": " proves"
+    },
+    {
+     "start": 611.62,
+     "end": 612.04,
+     "word": " God's"
+    },
+    {
+     "start": 612.04,
+     "end": 612.5,
+     "word": " absolute"
+    },
+    {
+     "start": 612.5,
+     "end": 613.06,
+     "word": " reliability."
+    },
+    {
+     "start": 613.84,
+     "end": 614.14,
+     "word": " The"
+    },
+    {
+     "start": 614.14,
+     "end": 614.36,
+     "word": " same"
+    },
+    {
+     "start": 614.36,
+     "end": 614.7,
+     "word": " prophetic"
+    },
+    {
+     "start": 614.7,
+     "end": 615.14,
+     "word": " timeline"
+    },
+    {
+     "start": 615.14,
+     "end": 615.4,
+     "word": " that"
+    },
+    {
+     "start": 615.4,
+     "end": 615.84,
+     "word": " precisely"
+    },
+    {
+     "start": 615.84,
+     "end": 616.38,
+     "word": " predicted"
+    }
+   ]
+  },
+  {
+   "start": 616.38,
+   "end": 620.98,
+   "text": "Christ's first Advent to bear our sins guarantees his second Advent to reign as king.",
+   "words": [
+    {
+     "start": 616.38,
+     "end": 616.86,
+     "word": " Christ's"
+    },
+    {
+     "start": 616.86,
+     "end": 617.1,
+     "word": " first"
+    },
+    {
+     "start": 617.1,
+     "end": 617.44,
+     "word": " Advent"
+    },
+    {
+     "start": 617.44,
+     "end": 617.66,
+     "word": " to"
+    },
+    {
+     "start": 617.66,
+     "end": 617.8,
+     "word": " bear"
+    },
+    {
+     "start": 617.8,
+     "end": 617.96,
+     "word": " our"
+    },
+    {
+     "start": 617.96,
+     "end": 618.22,
+     "word": " sins"
+    },
+    {
+     "start": 618.22,
+     "end": 619.0,
+     "word": " guarantees"
+    },
+    {
+     "start": 619.0,
+     "end": 619.44,
+     "word": " his"
+    },
+    {
+     "start": 619.44,
+     "end": 619.68,
+     "word": " second"
+    },
+    {
+     "start": 619.68,
+     "end": 620.06,
+     "word": " Advent"
+    },
+    {
+     "start": 620.06,
+     "end": 620.38,
+     "word": " to"
+    },
+    {
+     "start": 620.38,
+     "end": 620.54,
+     "word": " reign"
+    },
+    {
+     "start": 620.54,
+     "end": 620.78,
+     "word": " as"
+    },
+    {
+     "start": 620.78,
+     "end": 620.98,
+     "word": " king."
+    }
+   ]
+  },
+  {
+   "start": 622.34,
+   "end": 627.46,
+   "text": "Before you accept a prophetic conclusion, T. Does Daniel's succession language after the",
+   "words": [
+    {
+     "start": 622.34,
+     "end": 622.34,
+     "word": " Before"
+    },
+    {
+     "start": 622.34,
+     "end": 622.52,
+     "word": " you"
+    },
+    {
+     "start": 622.52,
+     "end": 622.8,
+     "word": " accept"
+    },
+    {
+     "start": 622.8,
+     "end": 622.94,
+     "word": " a"
+    },
+    {
+     "start": 622.94,
+     "end": 623.22,
+     "word": " prophetic"
+    },
+    {
+     "start": 623.22,
+     "end": 623.7,
+     "word": " conclusion,"
+    },
+    {
+     "start": 624.76,
+     "end": 624.76,
+     "word": " T."
+    },
+    {
+     "start": 625.4,
+     "end": 625.64,
+     "word": " Does"
+    },
+    {
+     "start": 625.64,
+     "end": 626.04,
+     "word": " Daniel's"
+    },
+    {
+     "start": 626.04,
+     "end": 626.28,
+     "word": " succession"
+    },
+    {
+     "start": 626.28,
+     "end": 626.74,
+     "word": " language"
+    },
+    {
+     "start": 626.74,
+     "end": 627.24,
+     "word": " after"
+    },
+    {
+     "start": 627.24,
+     "end": 627.46,
+     "word": " the"
+    }
+   ]
+  },
+  {
+   "start": 627.46,
+   "end": 633.2,
+   "text": "support it? History. Does the chain stay continuous or does it break into past-only",
+   "words": [
+    {
+     "start": 627.46,
+     "end": 627.92,
+     "word": " support"
+    },
+    {
+     "start": 627.92,
+     "end": 628.22,
+     "word": " it?"
+    },
+    {
+     "start": 629.08,
+     "end": 629.08,
+     "word": " History."
+    },
+    {
+     "start": 629.78,
+     "end": 629.88,
+     "word": " Does"
+    },
+    {
+     "start": 629.88,
+     "end": 630.06,
+     "word": " the"
+    },
+    {
+     "start": 630.06,
+     "end": 630.3,
+     "word": " chain"
+    },
+    {
+     "start": 630.3,
+     "end": 630.6,
+     "word": " stay"
+    },
+    {
+     "start": 630.6,
+     "end": 631.14,
+     "word": " continuous"
+    },
+    {
+     "start": 631.14,
+     "end": 631.58,
+     "word": " or"
+    },
+    {
+     "start": 631.58,
+     "end": 631.8,
+     "word": " does"
+    },
+    {
+     "start": 631.8,
+     "end": 631.96,
+     "word": " it"
+    },
+    {
+     "start": 631.96,
+     "end": 632.16,
+     "word": " break"
+    },
+    {
+     "start": 632.16,
+     "end": 632.42,
+     "word": " into"
+    },
+    {
+     "start": 632.42,
+     "end": 632.78,
+     "word": " past"
+    },
+    {
+     "start": 632.78,
+     "end": 633.2,
+     "word": "-only"
+    }
+   ]
+  },
+  {
+   "start": 633.2,
+   "end": 638.36,
+   "text": "or future-only voids? Interpretation. Is the year-day scale anchored at the cross",
+   "words": [
+    {
+     "start": 633.2,
+     "end": 633.44,
+     "word": " or"
+    },
+    {
+     "start": 633.44,
+     "end": 633.78,
+     "word": " future"
+    },
+    {
+     "start": 633.78,
+     "end": 634.06,
+     "word": "-only"
+    },
+    {
+     "start": 634.06,
+     "end": 634.64,
+     "word": " voids?"
+    },
+    {
+     "start": 635.32,
+     "end": 635.84,
+     "word": " Interpretation."
+    },
+    {
+     "start": 636.36,
+     "end": 636.52,
+     "word": " Is"
+    },
+    {
+     "start": 636.52,
+     "end": 636.74,
+     "word": " the"
+    },
+    {
+     "start": 636.74,
+     "end": 636.98,
+     "word": " year"
+    },
+    {
+     "start": 636.98,
+     "end": 637.22,
+     "word": "-day"
+    },
+    {
+     "start": 637.22,
+     "end": 637.54,
+     "word": " scale"
+    },
+    {
+     "start": 637.54,
+     "end": 637.86,
+     "word": " anchored"
+    },
+    {
+     "start": 637.86,
+     "end": 638.08,
+     "word": " at"
+    },
+    {
+     "start": 638.08,
+     "end": 638.2,
+     "word": " the"
+    },
+    {
+     "start": 638.2,
+     "end": 638.36,
+     "word": " cross"
+    }
+   ]
+  },
+  {
+   "start": 638.36,
+   "end": 644.02,
+   "text": "in Daniel 9? Christ. Does this lead you to the Messiah cut off for us and the stone king",
+   "words": [
+    {
+     "start": 638.36,
+     "end": 638.54,
+     "word": " in"
+    },
+    {
+     "start": 638.54,
+     "end": 638.8,
+     "word": " Daniel"
+    },
+    {
+     "start": 638.8,
+     "end": 639.04,
+     "word": " 9?"
+    },
+    {
+     "start": 639.8,
+     "end": 639.96,
+     "word": " Christ."
+    },
+    {
+     "start": 640.72,
+     "end": 640.86,
+     "word": " Does"
+    },
+    {
+     "start": 640.86,
+     "end": 641.04,
+     "word": " this"
+    },
+    {
+     "start": 641.04,
+     "end": 641.28,
+     "word": " lead"
+    },
+    {
+     "start": 641.28,
+     "end": 641.52,
+     "word": " you"
+    },
+    {
+     "start": 641.52,
+     "end": 641.68,
+     "word": " to"
+    },
+    {
+     "start": 641.68,
+     "end": 641.8,
+     "word": " the"
+    },
+    {
+     "start": 641.8,
+     "end": 642.14,
+     "word": " Messiah"
+    },
+    {
+     "start": 642.14,
+     "end": 642.4,
+     "word": " cut"
+    },
+    {
+     "start": 642.4,
+     "end": 642.58,
+     "word": " off"
+    },
+    {
+     "start": 642.58,
+     "end": 642.76,
+     "word": " for"
+    },
+    {
+     "start": 642.76,
+     "end": 642.96,
+     "word": " us"
+    },
+    {
+     "start": 642.96,
+     "end": 643.26,
+     "word": " and"
+    },
+    {
+     "start": 643.26,
+     "end": 643.38,
+     "word": " the"
+    },
+    {
+     "start": 643.38,
+     "end": 643.7,
+     "word": " stone"
+    },
+    {
+     "start": 643.7,
+     "end": 644.02,
+     "word": " king"
+    }
+   ]
+  },
+  {
+   "start": 644.02,
+   "end": 649.84,
+   "text": "who fills the earth? Next lesson. Sheet 1. Daniel 1. Faithfulness in Babylon.",
+   "words": [
+    {
+     "start": 644.02,
+     "end": 644.24,
+     "word": " who"
+    },
+    {
+     "start": 644.24,
+     "end": 644.5,
+     "word": " fills"
+    },
+    {
+     "start": 644.5,
+     "end": 644.68,
+     "word": " the"
+    },
+    {
+     "start": 644.68,
+     "end": 644.92,
+     "word": " earth?"
+    },
+    {
+     "start": 645.9,
+     "end": 646.04,
+     "word": " Next"
+    },
+    {
+     "start": 646.04,
+     "end": 646.38,
+     "word": " lesson."
+    },
+    {
+     "start": 647.14,
+     "end": 647.14,
+     "word": " Sheet"
+    },
+    {
+     "start": 647.14,
+     "end": 647.48,
+     "word": " 1."
+    },
+    {
+     "start": 647.86,
+     "end": 648.04,
+     "word": " Daniel"
+    },
+    {
+     "start": 648.04,
+     "end": 648.32,
+     "word": " 1."
+    },
+    {
+     "start": 648.82,
+     "end": 649.2,
+     "word": " Faithfulness"
+    },
+    {
+     "start": 649.2,
+     "end": 649.54,
+     "word": " in"
+    },
+    {
+     "start": 649.54,
+     "end": 649.84,
+     "word": " Babylon."
+    }
+   ]
+  },
+  {
+   "start": 650.76,
+   "end": 655.9,
+   "text": "The prophetic blueprint now meets a teenage captive. Daniel will face renaming, reeducation,",
+   "words": [
+    {
+     "start": 650.76,
+     "end": 650.84,
+     "word": " The"
+    },
+    {
+     "start": 650.84,
+     "end": 651.18,
+     "word": " prophetic"
+    },
+    {
+     "start": 651.18,
+     "end": 651.64,
+     "word": " blueprint"
+    },
+    {
+     "start": 651.64,
+     "end": 651.92,
+     "word": " now"
+    },
+    {
+     "start": 651.92,
+     "end": 652.16,
+     "word": " meets"
+    },
+    {
+     "start": 652.16,
+     "end": 652.3,
+     "word": " a"
+    },
+    {
+     "start": 652.3,
+     "end": 652.62,
+     "word": " teenage"
+    },
+    {
+     "start": 652.62,
+     "end": 653.04,
+     "word": " captive."
+    },
+    {
+     "start": 653.9,
+     "end": 653.9,
+     "word": " Daniel"
+    },
+    {
+     "start": 653.9,
+     "end": 654.1,
+     "word": " will"
+    },
+    {
+     "start": 654.1,
+     "end": 654.34,
+     "word": " face"
+    },
+    {
+     "start": 654.34,
+     "end": 655.02,
+     "word": " renaming,"
+    },
+    {
+     "start": 655.44,
+     "end": 655.9,
+     "word": " reeducation,"
+    }
+   ]
+  },
+  {
+   "start": 656.64,
+   "end": 660.9,
+   "text": "and the king's table, and prove that covenant consecration precedes the wisdom",
+   "words": [
+    {
+     "start": 656.64,
+     "end": 656.76,
+     "word": " and"
+    },
+    {
+     "start": 656.76,
+     "end": 656.88,
+     "word": " the"
+    },
+    {
+     "start": 656.88,
+     "end": 657.16,
+     "word": " king's"
+    },
+    {
+     "start": 657.16,
+     "end": 657.44,
+     "word": " table,"
+    },
+    {
+     "start": 657.94,
+     "end": 658.04,
+     "word": " and"
+    },
+    {
+     "start": 658.04,
+     "end": 658.26,
+     "word": " prove"
+    },
+    {
+     "start": 658.26,
+     "end": 658.48,
+     "word": " that"
+    },
+    {
+     "start": 658.48,
+     "end": 658.84,
+     "word": " covenant"
+    },
+    {
+     "start": 658.84,
+     "end": 659.6,
+     "word": " consecration"
+    },
+    {
+     "start": 659.6,
+     "end": 660.38,
+     "word": " precedes"
+    },
+    {
+     "start": 660.38,
+     "end": 660.52,
+     "word": " the"
+    },
+    {
+     "start": 660.52,
+     "end": 660.9,
+     "word": " wisdom"
+    }
+   ]
+  },
+  {
+   "start": 660.9,
+   "end": 662.46,
+   "text": "and visions God is about to give.",
+   "words": [
+    {
+     "start": 660.9,
+     "end": 661.16,
+     "word": " and"
+    },
+    {
+     "start": 661.16,
+     "end": 661.52,
+     "word": " visions"
+    },
+    {
+     "start": 661.52,
+     "end": 661.86,
+     "word": " God"
+    },
+    {
+     "start": 661.86,
+     "end": 661.98,
+     "word": " is"
+    },
+    {
+     "start": 661.98,
+     "end": 662.14,
+     "word": " about"
+    },
+    {
+     "start": 662.14,
+     "end": 662.28,
+     "word": " to"
+    },
+    {
+     "start": 662.28,
+     "end": 662.46,
+     "word": " give."
+    }
+   ]
+  }
+ ]
+}
