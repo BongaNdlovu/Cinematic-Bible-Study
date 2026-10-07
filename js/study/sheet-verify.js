@@ -380,7 +380,7 @@
           "Another Persian book says the same thing about the king’s sealed writing.",
           "Esther 8:8, King James Version",
           "Write ye also for the Jews, as it liketh you, in the king’s name, and seal it with the king’s ring: for the writing which is written in the king’s name, and sealed with the king’s ring, may no man reverse.",
-          "Esther is not Daniel. It is an independent biblical witness that ‘the law of the Medes and Persians’ was proverbially irrevocable. The sitting is not inventing a legal folklore."
+          "Esther is not Daniel. It is an independent biblical witness that ‘the law of the Medes and Persians’ was proverbially irrevocable. The sitting is not inventing legal folklore."
         ),
         item(
           "scripture",
@@ -461,7 +461,7 @@
         ),
         item(
           "history",
-          "A public-domain Catholic encyclopaedia dates the French taking of Rome and of the pope to February 1798.",
+          "A public-domain Catholic encyclopedia dates the French taking of Rome and of the pope to February 1798.",
           "Michael Ott, “Pope Pius VI,” Catholic Encyclopedia (New York, 1913). Wikisource",
           "The French took Rome on 10 Feb., 1798, and proclaimed the Roman Republic on 15 Feb. Because the pope refused to submit, he was forcibly taken from Rome on the night of 20 Feb.",
           "1,260 years from 538 lands in 1798. Open the 1913 article: Rome taken 10 February, the Republic 15 February, the pope taken 20 February.",
@@ -469,7 +469,7 @@
         ),
         item(
           "history",
-          "A public-domain encyclopaedia dates Belisarius’s year-long hold of Rome and the Goths’ raising of the siege — the 538 of this sitting.",
+          "A public-domain encyclopedia dates Belisarius’s year-long hold of Rome and the Goths’ raising of the siege — the 538 of this sitting.",
           "“Belisarius,” The New International Encyclopaedia (1905). Wikisource",
           "On December 10 he entered Rome, and held it for a year against the Goths, until the enemy raised the siege.",
           "December 536 plus a year lands when the Goths raised the siege in 538. Procopius, History of the Wars, Books V–VI, is the ancient narrative. 538 is when the third blocking horn is gone and Justinian’s earlier recognition of the Roman see can operate. Do not collapse 533 (the letter) into 538 (the uprooting).",
@@ -577,7 +577,7 @@
           "Only this decree restores magistrates and judges — the civil “restore” of 9:25.",
           "Ezra 7:25–26, King James Version",
           "And thou, Ezra, after the wisdom of thy God, that is in thine hand, set magistrates and judges, which may judge all the people that are beyond the river… And whosoever will not do the law of thy God, and the law of the king, let judgment be executed speedily upon him.",
-          "Cyrus, Darius, and the earlier Artaxerxes notes rebuild the house. Ezra 7 rebuilds the civic order. That is why this sitting prefers it to 538, 519, or 444."
+          "Cyrus, Darius, and the earlier Artaxerxes decrees rebuild the house. Ezra 7 rebuilds the civic order. That is why this sitting prefers it to 538, 519, or 444."
         ),
         item(
           "scripture",

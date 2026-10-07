@@ -2454,7 +2454,7 @@
       },
       {
         kicker: 'After the metals are named',
-        lead: 'Daniel 2:38 names the head. Keep 605 B.C. on the map, then turn the image itself — gold, silver, brass, iron, and the stone that strikes the feet.',
+        lead: 'Daniel 2:38 names the head. Keep 605 B.C. on the map, then turn the image itself — gold, silver, bronze, iron, and the stone that strikes the feet.',
         map: 'Keep 605 B.C. on the line of empires',
         gallery: 'Turn the image metal by metal'
       },
@@ -2466,7 +2466,7 @@
       },
       {
         kicker: 'After the tree is cut',
-        lead: 'The watchers’ sentence falls on the same city. Stay with Babylon long enough to see the stump, then the ox-king — pride bound with iron and brass.',
+        lead: 'The watchers’ sentence falls on the same city. Stay with Babylon long enough to see the stump, then the ox-king — pride bound with iron and bronze.',
         map: 'Stay with Babylon under the watchers',
         gallery: 'See the stump and the ox-king'
       },

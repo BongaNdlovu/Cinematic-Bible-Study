@@ -18,7 +18,7 @@
           "The Lord gave Jehoiakim",
           "Daniel 1:1–2; Numbers 14:34; Ezekiel 4:6",
           "assets/study/epochs/jerusalem-siege.jpg",
-          "The sitting opens here, not with a dream. Jehoiakim’s third year is the first dated move of the book: temple vessels leave Zion, and Judah’s royal youth walk east. Verse 1:2 will not let you read that as Babylon’s victory alone. The Lord gave the king into Nebuchadnezzar’s hand, which means every later empire in this scroll also arrives and departs by permission.\n\nThat claim is the hermeneutical hinge. Preterism spends the chain under Antiochus or A.D. 70. Futurism parks the Antichrist in a future week that Daniel never severed from the rest of the line. Historicism, the reading of the Reformers, keeps the four kingdoms as one continuous history from this siege to the stone.\n\nThe year-day rule that will later unlock 70 weeks, 1,260 days, and 2,300 evenings-mornings is already granted in Numbers 14:34 and Ezekiel 4:6. If you can replay that scale from this city, later dates will belong to you instead of to a borrowed chart."
+          "The sitting opens here, not with a dream. Jehoiakim’s third year is the first dated move of the book: temple vessels leave Zion, and Judah’s royal youth walk east. Verse 1:2 will not let you read that as Babylon’s victory alone. The Lord gave the king into Nebuchadnezzar’s hand, which means every later empire in this scroll also arrives and departs by permission.\n\nThat claim is the hermeneutical hinge. Preterism parks the chain under Antiochus or A.D. 70. Futurism parks the Antichrist in a future week that Daniel never severed from the rest of the line. Historicism, the reading of the Reformers, keeps the four kingdoms as one continuous history from this siege to the stone.\n\nThe year-day rule that will later unlock 70 weeks, 1,260 days, and 2,300 evenings-mornings is already granted in Numbers 14:34 and Ezekiel 4:6. If you can replay that scale from this city, later dates will belong to you instead of to a borrowed chart."
         ),
         node(
           "babylon",
@@ -63,7 +63,7 @@
           "Ashpenaz’s program and the king’s meat",
           "Daniel 1:7–8, 17–20; Leviticus 11",
           "assets/study/babylon-sunset.jpg",
-          "In the palace school the four receive new names that honor Babylon’s gods: Daniel becomes Belteshazzar, Hananiah Shadrach, Mishael Meshach, Azariah Abednego. Wearing those labels on a roll is not the same act as breaking the first commandment. Daniel’s line falls at the king’s table, where food and wine offered in a pagan cult would join him to another god in practice.\n\nHe purposes in his heart that he will not defile himself (1:8). Civic competence — language, literature, even a Babylonian career — can be rendered without covenant surrender. The pulse that later receives chapter 2’s dream is the man who kept that distinction.\n\nAfter the ten-day test they appear fairer than the youths who ate the royal portion. God gives them knowledge and skill, and Daniel understanding in visions. Identity that survives renaming is worth more than a cup bought with the first commandment."
+          "In the palace school the four receive new names that honor Babylon’s gods: Daniel becomes Belteshazzar, Hananiah Shadrach, Mishael Meshach, Azariah Abednego. Wearing those labels on a roll is not the same act as breaking the first commandment. Daniel’s line falls at the king’s table, where food and wine offered in a pagan cult would join him to another god in practice.\n\nHe purposes in his heart that he will not defile himself (1:8). Civic competence — language, literature, even a Babylonian career — can be rendered without covenant surrender. Daniel, who later receives chapter 2’s dream, is the man who kept that distinction.\n\nAfter the ten-day test they appear fairer than the youths who ate the royal portion. God gives them knowledge and skill, and Daniel understanding in visions. Identity that survives renaming is worth more than a cup bought with the first commandment."
         ),
         node(
           "jerusalem",
@@ -108,7 +108,7 @@
           "A kingdom that fills the whole earth",
           "Daniel 2:34–35, 44–45",
           "assets/maps/stops/jerusalem.jpg",
-          "The stone is cut without hands and becomes a mountain that fills the whole earth. It does not repair the statue; it pulverizes gold through clay together. Verse 2:44 places that arrival in the days of the divided kings.\n\nThis city is not the stone’s province. Daniel never shades a fifth empire on the map. When the stone is on, the chronicle lights the borders of the whole map — the earth itself — not a patch around Zion or any later capital. Jerusalem remains the city whose God claims the latter days, and the place from which the book’s later numbered lines (the cross, the sanctuary) will date that same kingdom. Nebuchadnezzar hears only that he is the head of gold. Chapter 3 will show what he does with that limit: an image made entirely of gold on the plain of Dura."
+          "The stone is cut without hands and becomes a mountain that fills the whole earth. It does not repair the statue; it pulverizes everything from gold through clay together. Verse 2:44 places that arrival in the days of the divided kings.\n\nThis city is not the stone’s province. Daniel never shades a fifth empire on the map. When the stone is on, the chronicle lights the borders of the whole map — the earth itself — not a patch around Zion or any later capital. Jerusalem remains the city whose God claims the latter days, and the place from which the book’s later numbered lines (the cross, the sanctuary) will date that same kingdom. Nebuchadnezzar hears only that he is the head of gold. Chapter 3 will show what he does with that limit: an image made entirely of gold on the plain of Dura."
         )
       ]
     },
@@ -234,7 +234,7 @@
           "The sealed pit",
           "Daniel 6:7–10, 16–22, 25–27",
           "assets/study/daniel-lions-den.jpg",
-          "The presidents and princes cannot find fault in Daniel’s work, so they legislate against his God. An unchangeable law of the Medes and Persians forbids petition to any god or man except the king for thirty days. The penalty is the den.\n\nDaniel does not invent a crisis piety. When he knows the writing is signed he goes into his house, windows open toward Jerusalem, and prays three times a day as he did aforetime (6:10). Habit walks into the pit; panic does not create the habit.\n\nThe king who cannot revoke his own statute spends a sleepless night. At dawn Daniel’s God has sent His angel and shut the lions’ mouths. Darius then writes a new decree: the God of Daniel is the living God, steadfast forever. The silver kingdom, like the gold, is forced to publish Heaven’s name."
+          "The presidents and princes cannot find fault in Daniel’s work, so they legislate against his God. An unchangeable law of the Medes and Persians forbids petition to any god or man except the king for thirty days. The penalty is the den.\n\nDaniel does not invent a crisis piety. When he knows the writing is signed he goes into his house, windows open toward Jerusalem, and prays three times a day as he did aforetime (6:10). Habit walks into the pit; panic does not create the habit.\n\nThe king who cannot revoke his own statute spends a sleepless night. At dawn Daniel’s God sent His angel and shut the lions’ mouths. Darius then writes a new decree: the God of Daniel is the living God, steadfast forever. The silver kingdom, like the gold, is forced to publish Heaven’s name."
         ),
         node(
           "babylon",
@@ -342,7 +342,7 @@
           "Where the horn’s attack is felt",
           "Daniel 8:9–12; 9:24",
           "assets/maps/stops/jerusalem.jpg",
-          "The horn grows toward the Beautiful Land and against the sanctuary and the host. Pagan Rome’s destruction of this city in A.D. 70 is one face of that attack. The deeper claim of the chapter is the heavenly ministry the tamid names.\n\nKeep Zion on the Daniel 8 map so “sanctuary” is not an abstraction. The next sitting will restore and rebuild this city by decree, and will cut Messiah off here in the midst of the week."
+          "The horn grows toward the Glorious Land and against the sanctuary and the host. Pagan Rome’s destruction of this city in A.D. 70 is one face of that attack. The deeper claim of the chapter is the heavenly ministry the tamid names.\n\nKeep Zion on the Daniel 8 map so “sanctuary” is not an abstraction. The next sitting will restore and rebuild this city by decree, and will cut Messiah off here in the midst of the week."
         ),
         node(
           "miller-lowhampton",
@@ -357,7 +357,7 @@
           "himes-boston",
           "event",
           "Boston · 20 Mar 1840",
-          "The date becomes a public press",
+          "The date goes to press",
           "Daniel 12:4; Habakkuk 2:2",
           "assets/maps/stops/himes-boston.jpg",
           "Joshua V. Himes launches Signs of the Times from Boston on 20 March 1840. Charts, camp meetings, and a cheap press take a farm Bible-reading into the Second Great Awakening’s last public wave. Methodists, Baptists, and Christian Connection congregations across the Northeast print and argue the same number.\n\n1844 in America is not only a pulpit year. In May, Morse wires “What hath God wrought” from the Capitol to Baltimore. In November, Polk wins on expansion. The Methodist church is already tearing north from south over slavery. The map shows the civic year so the Advent date cannot pretend it happened in a vacuum."

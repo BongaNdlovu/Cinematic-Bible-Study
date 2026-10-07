@@ -131,7 +131,7 @@
             <span class="text-[11px] font-mono text-ink-500 dark:text-paper-500">Classify 6 Historical Positions</span>
           </div>
           <p class="text-xs text-ink-700 dark:text-paper-300 mb-4 leading-relaxed">
-            Assign each historical interpretation to its proper school: <strong>Historicism</strong> (continuous timeline), <strong>Preterism</strong> (past Antiochus/AD 70 cutoff), or <strong>Futurism</strong> (severed future gap).
+            Assign each historical interpretation to its proper school: <strong>Historicism</strong> (continuous timeline), <strong>Preterism</strong> (past Antiochus/A.D. 70 cutoff), or <strong>Futurism</strong> (severed future gap).
           </p>
 
           <div id="wb0-matrix" class="space-y-2.5 mb-4 text-xs">
@@ -940,7 +940,7 @@
 
         <div class="flex items-center justify-between pt-4 border-t border-paper-300 dark:border-paper-800">
           <div class="text-xs text-ink-500 font-mono">
-            Evaluates criteria: Dan 2:38 citation • contiguous sequence • divided feet • covenant loyalty
+            Evaluation criteria: Dan 2:38 citation • contiguous sequence • divided feet • covenant loyalty
           </div>
           <button type="button" id="capstone-submit-btn" class="px-6 py-3 rounded-lg bg-amber-600 hover:bg-amber-700 text-paper-50 font-sans font-bold text-xs shadow-md transition-colors flex items-center gap-2">
             <span>Evaluate & Issue Dossier</span> &rarr;
@@ -1061,7 +1061,7 @@
             <span class="text-emerald-600 dark:text-emerald-400 font-bold text-base">✓</span>
             <div>
               <strong class="text-xs font-bold text-ink-900 dark:text-paper-100 block">The Prophetic Year-Day Metric (Unit 0)</strong>
-              <span class="text-[11px] text-ink-600 dark:text-paper-400">Verified scriptural formulation under Numbers 14:34 and Ezekiel 4:6; diagnosed structural errors of Preterism (Alcazar 1614) and Futurism (Ribera 1590).</span>
+              <span class="text-[11px] text-ink-600 dark:text-paper-400">Verified scriptural formulation under Numbers 14:34 and Ezekiel 4:6; diagnosed structural errors of Preterism (Alcázar 1614) and Futurism (Ribera 1590).</span>
             </div>
           </div>
           <div class="p-3 rounded-lg bg-paper-100/70 dark:bg-paper-900/60 border border-paper-300 dark:border-paper-800 flex items-start gap-3">
@@ -1075,7 +1075,7 @@
             <span class="text-emerald-600 dark:text-emerald-400 font-bold text-base">✓</span>
             <div>
               <strong class="text-xs font-bold text-ink-900 dark:text-paper-100 block">Colossus Succession & Apologist Refutation (Unit 2)</strong>
-              <span class="text-[11px] text-ink-600 dark:text-paper-400">Enforced contiguous four-empire descent from 605 B.C. to divided Europe; applied Daniel 2:38 to dismantle modern claims to restart the Head of Gold.</span>
+              <span class="text-[11px] text-ink-600 dark:text-paper-400">Traced contiguous four-empire descent from 605 B.C. to divided Europe; applied Daniel 2:38 to dismantle modern claims to restart the Head of Gold.</span>
             </div>
           </div>
         </div>
