@@ -23,6 +23,9 @@
     ".dash-card",
     ".horizon-dot",
     ".era-chip",
+    // Home hero empire ticker: the clickable era labels are bare spans
+    // carrying data-era, wired in js/home/dash.js.
+    "[data-era]",
     ".leaflet-marker-icon",
     ".leaflet-control",
     ".cmap-legend-item",
