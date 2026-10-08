@@ -201,7 +201,7 @@
       IMG + "glossary-daniel.png"),
     entry("nebuchadnezzar", "Nebuchadnezzar", ["Nebuchadrezzar"], "person",
       "Neo-Babylonian king (c. 605–562 B.C.), the head of gold, who took Judah’s first captives and later burned Jerusalem (586).",
-      "He dreamed the statue, built the all-gold image on Dura, and was driven to the field for seven times until he lifted his eyes. Daniel 2:37–38 says the God of heaven gave him the kingdom. Babylonian building inscriptions match the pride of 4:30.",
+      "He dreamed of the statue, built the all-gold image on the plain of Dura, and was driven into the field for seven times (literal years) until he lifted his eyes to heaven. Daniel 2:37–38 says the God of heaven gave him the kingdom. Babylonian building inscriptions match the pride of Daniel 4:30.",
       IMG + "glossary-nebuchadnezzar.png"),
     entry("jehoiakim", "Jehoiakim", [], "person",
       "King of Judah (c. 609–598 B.C.). Daniel 1:1 dates the first deportation to his third year (605).",
