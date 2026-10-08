@@ -2,9 +2,9 @@
 
 **Audit Date:** 2026-09-20  
 **File Audited:** `js/study/sheets-data.js` (Sitting id: 3) with `sheet-verify.js`, `workbench.js`, `sheet-glossary.js`  
-**Audited Content Hash:** `c416bf2238715c66`  
+**Audited Content Hash:** `1d966c003466f810`  
 **Method:** Exhaustive claim-unit audit of finished prose across content, christology, quizzes, studyGuide, guide, verify cards, workbench, and linked glossary entries.  
-**Counts:** ACCURATE: 154 | SOFTEN: 0 | FIX: 0 | N/A: 29 | Total: 183  
+**Counts:** ACCURATE: 155 | SOFTEN: 0 | FIX: 0 | N/A: 29 | Total: 184  
 
 ## 1. Summary of Required Sections & Governing Standards
 
@@ -52,38 +52,39 @@
 | S03-P-13 | INTERPRETATION | ACCURATE | Historicist argument grounded in Scripture interpreting Scripture (Dan 2; 7; 8; 9) |
 | S03-DIA-02 | INTERPRETATION | ACCURATE | Prophetic diagram illustrating imperial succession and chronology |
 | S03-H-15 | N/A | N/A | Section title / kicker header chrome |
-| S03-P-14 | INTERPRETATION | ACCURATE | Historicist argument grounded in Scripture interpreting Scripture (Dan 2; 7; 8; 9) |
+| S03-P-14 | TEXT | ACCURATE | Direct passage exposition verified in KJV text |
+| S03-P-15 | INTERPRETATION | ACCURATE | Historicist argument grounded in Scripture interpreting Scripture (Dan 2; 7; 8; 9) |
 | S03-LI-01 | INTERPRETATION | ACCURATE | Biblical case and historical argument |
 | S03-LI-02 | INTERPRETATION | ACCURATE | Biblical case and historical argument |
 | S03-LI-03 | INTERPRETATION | ACCURATE | Biblical case and historical argument |
 | S03-H-16 | N/A | N/A | Section title / kicker header chrome |
 | S03-H-17 | N/A | N/A | Section title / kicker header chrome |
 | S03-H-18 | N/A | N/A | Section title / kicker header chrome |
-| S03-P-15 | INTERPRETATION | ACCURATE | Historicist argument grounded in Scripture interpreting Scripture (Dan 2; 7; 8; 9) |
+| S03-P-16 | INTERPRETATION | ACCURATE | Historicist argument grounded in Scripture interpreting Scripture (Dan 2; 7; 8; 9) |
 | S03-BQ-01 | TEXT | ACCURATE | Direct KJV Scripture quotation verified against bible/kjv.json |
 | S03-DIA-03 | INTERPRETATION | ACCURATE | Prophetic diagram illustrating imperial succession and chronology |
-| S03-P-16 | INTERPRETATION | ACCURATE | Historicist argument grounded in Scripture interpreting Scripture (Dan 2; 7; 8; 9) |
+| S03-P-17 | INTERPRETATION | ACCURATE | Historicist argument grounded in Scripture interpreting Scripture (Dan 2; 7; 8; 9) |
 | S03-LI-04 | INTERPRETATION | ACCURATE | Biblical case and historical argument |
 | S03-LI-05 | INTERPRETATION | ACCURATE | Biblical case and historical argument |
 | S03-LI-06 | INTERPRETATION | ACCURATE | Biblical case and historical argument |
 | S03-H-19 | N/A | N/A | Section title / kicker header chrome |
 | S03-H-20 | N/A | N/A | Section title / kicker header chrome |
 | S03-H-21 | N/A | N/A | Section title / kicker header chrome |
-| S03-P-17 | INTERPRETATION | ACCURATE | Historicist argument grounded in Scripture interpreting Scripture (Dan 2; 7; 8; 9) |
 | S03-P-18 | INTERPRETATION | ACCURATE | Historicist argument grounded in Scripture interpreting Scripture (Dan 2; 7; 8; 9) |
+| S03-P-19 | INTERPRETATION | ACCURATE | Historicist argument grounded in Scripture interpreting Scripture (Dan 2; 7; 8; 9) |
 | S03-BQ-02 | TEXT | ACCURATE | Direct KJV Scripture quotation verified against bible/kjv.json |
 | S03-DIA-04 | INTERPRETATION | ACCURATE | Prophetic diagram illustrating imperial succession and chronology |
 | S03-H-22 | N/A | N/A | Section title / kicker header chrome |
-| S03-P-19 | INTERPRETATION | ACCURATE | Historicist argument grounded in Scripture interpreting Scripture (Dan 2; 7; 8; 9) |
+| S03-P-20 | INTERPRETATION | ACCURATE | Historicist argument grounded in Scripture interpreting Scripture (Dan 2; 7; 8; 9) |
 | S03-H-23 | N/A | N/A | Section title / kicker header chrome |
-| S03-P-20 | CHRIST | ACCURATE | Canonical Christology: Luke 24:27; Dan 9:26; Dan 2:44; Dan 7:13–14 |
+| S03-P-21 | CHRIST | ACCURATE | Canonical Christology: Luke 24:27; Dan 9:26; Dan 2:44; Dan 7:13–14 |
 | S03-LI-07 | INTERPRETATION | ACCURATE | Biblical case and historical argument |
 | S03-LI-08 | INTERPRETATION | ACCURATE | Four-level interpretive verification criteria |
 | S03-LI-09 | INTERPRETATION | ACCURATE | Biblical case and historical argument |
 | S03-H-24 | N/A | N/A | Section title / kicker header chrome |
-| S03-P-21 | INTERPRETATION | ACCURATE | Historicist argument grounded in Scripture interpreting Scripture (Dan 2; 7; 8; 9) |
-| S03-H-25 | N/A | N/A | Section title / kicker header chrome |
 | S03-P-22 | INTERPRETATION | ACCURATE | Historicist argument grounded in Scripture interpreting Scripture (Dan 2; 7; 8; 9) |
+| S03-H-25 | N/A | N/A | Section title / kicker header chrome |
+| S03-P-23 | INTERPRETATION | ACCURATE | Historicist argument grounded in Scripture interpreting Scripture (Dan 2; 7; 8; 9) |
 | S03-H-26 | N/A | N/A | Section title / kicker header chrome |
 | S03-LI-10 | INTERPRETATION | ACCURATE | Four-level interpretive verification criteria |
 | S03-LI-11 | INTERPRETATION | ACCURATE | Four-level interpretive verification criteria |
