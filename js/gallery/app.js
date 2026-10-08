@@ -2061,7 +2061,7 @@ import * as THREE from 'three';
         {
           id: 'dura-six', col: 'left', row: 1,
           icon: '6️⃣', label: '60 BY 6',
-          body: 'The statue measured sixty cubits high and six cubits wide (Daniel 3:1). The measurements are Scripture; they illustrate the later crisis, they do not decode 666 by Babylonian arithmetic.',
+          body: 'The statue measured sixty cubits high and six cubits wide (Daniel 3:1), prefiguring the human pride and coerced worship test described in Revelation 13:18.',
           anchor: new THREE.Vector3(-0.45, 1.15, 0.42), enabled: true
         },
         {
