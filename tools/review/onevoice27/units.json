@@ -8,7 +8,7 @@
     "5": "a9908294709b80fa",
     "6": "df97e68bd40f8607",
     "7": "0250afc517641eb1",
-    "8": "dac2aff7504bd6b9",
+    "8": "0a454f8f1524757b",
     "9": "f8cfd3d99630a17a",
     "10": "b42c9b19c12d6626"
   },
@@ -12385,29 +12385,29 @@
       "id": "S08-P-09",
       "sheet": 8,
       "field": "content",
-      "text": "Out of one of the four winds of heaven (one of the compass directions), Daniel saw emerge a \"little horn, which waxed exceeding great, toward the south, and toward the east, and toward the pleasant land\" (Daniel 8:9). Notice the deliberate progression of greatness in the Hebrew text:",
-      "hash": "581209b77a753ad2"
+      "text": "Out of one of the four winds of heaven (one of the compass directions), Daniel saw emerge a \"little horn, which waxed exceeding great, toward the south, and toward the east, and toward the pleasant land\" (Daniel 8:9). The KJV's ascending wording — \"great,\" \"very great,\" \"exceedingly great\" — comes from the one Hebrew root gadal (\"to be or become great\"), which the text repeatedly intensifies with a stronger modifier. The escalation is therefore in the text itself, not an artifact of English style:",
+      "hash": "f3b71dc0b70246e6"
     },
     {
       "id": "S08-LI-01",
       "sheet": 8,
       "field": "content",
-      "text": "The Medo-Persian ram became great ( gadol , 8:4).",
-      "hash": "9a7b7a15e50f4fe3"
+      "text": "The Medo-Persian ram became great ( gadal , 8:4).",
+      "hash": "f1d59afe9b0abbd4"
     },
     {
       "id": "S08-LI-02",
       "sheet": 8,
       "field": "content",
-      "text": "The Grecian goat became very great ( higdil , 8:8).",
-      "hash": "7bd445b96d7f3f79"
+      "text": "The Grecian goat became very great ( gadal with me'od , 8:8).",
+      "hash": "85b54916cbe53f4a"
     },
     {
       "id": "S08-LI-03",
       "sheet": 8,
       "field": "content",
-      "text": "The little horn became exceedingly great ( yigdal-me'od , 8:9).",
-      "hash": "e490c9259cefb475"
+      "text": "The little horn became exceedingly great ( gadal with yeter , 8:9).",
+      "hash": "08600d1cc6d20829"
     },
     {
       "id": "S08-P-10",

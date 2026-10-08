@@ -3420,12 +3420,12 @@ SYMBOL IN PROPHECY:           INTERPRETATION:          HISTORICAL REALITY:
   <p class="part-subtitle">Daniel 8:9–12, 23–25</p>
 </div>
 
-<p>Out of one of the four winds of heaven (one of the compass directions), Daniel saw emerge a <em>"little horn, which waxed exceeding great, toward the south, and toward the east, and toward the pleasant land"</em> (Daniel 8:9). Notice the deliberate progression of greatness in the Hebrew text:</p>
+<p>Out of one of the four winds of heaven (one of the compass directions), Daniel saw emerge a <em>"little horn, which waxed exceeding great, toward the south, and toward the east, and toward the pleasant land"</em> (Daniel 8:9). The KJV's ascending wording — "great," "very great," "exceedingly great" — comes from the one Hebrew root <em>gadal</em> ("to be or become great"), which the text repeatedly intensifies with a stronger modifier. The escalation is therefore in the text itself, not an artifact of English style:</p>
 
 <ul class="list-disc pl-5 my-3 space-y-1">
-  <li>The Medo-Persian ram became <strong>great</strong> (<em>gadol</em>, 8:4).</li>
-  <li>The Grecian goat became <strong>very great</strong> (<em>higdil</em>, 8:8).</li>
-  <li>The little horn became <strong>exceedingly great</strong> (<em>yigdal-me'od</em>, 8:9).</li>
+  <li>The Medo-Persian ram became <strong>great</strong> (<em>gadal</em>, 8:4).</li>
+  <li>The Grecian goat became <strong>very great</strong> (<em>gadal</em> with <em>me'od</em>, 8:8).</li>
+  <li>The little horn became <strong>exceedingly great</strong> (<em>gadal</em> with <em>yeter</em>, 8:9).</li>
 </ul>
 
 <p>In historicist hermeneutics, this little horn represents <strong>Rome in both of its successive historical phases: Pagan and Papal</strong>. The verse names the directions; dated conquests fill them. Rome was small in its beginnings, then grew exceeding great toward the south (Egypt, 30 B.C.), toward the east (Syria, 64 B.C.), and toward the pleasant land (Judea, 63 B.C.).</p>
