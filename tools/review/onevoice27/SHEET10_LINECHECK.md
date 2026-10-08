@@ -2,9 +2,9 @@
 
 **Audit Date:** 2026-09-20  
 **File Audited:** `js/study/sheets-data.js` (Sitting id: 10) with `sheet-verify.js`, `workbench.js`, `sheet-glossary.js`  
-**Audited Content Hash:** `6a4df3b535d80bf2`  
+**Audited Content Hash:** `b42c9b19c12d6626`  
 **Method:** Exhaustive claim-unit audit of finished prose across content, christology, quizzes, studyGuide, guide, verify cards, workbench, and linked glossary entries.  
-**Counts:** ACCURATE: 215 | SOFTEN: 0 | FIX: 0 | N/A: 37 | Total: 252  
+**Counts:** ACCURATE: 209 | SOFTEN: 0 | FIX: 0 | N/A: 37 | Total: 246  
 
 ## 1. Summary of Required Sections & Governing Standards
 
@@ -41,7 +41,7 @@
 | S10-H-08 | N/A | N/A | Section title / kicker header chrome |
 | S10-P-06 | INTERPRETATION | ACCURATE | Historicist argument grounded in Scripture interpreting Scripture (Dan 2; 7; 8; 9) |
 | S10-BQ-01 | TEXT | ACCURATE | Direct KJV Scripture quotation verified against bible/kjv.json |
-| S10-P-07 | INTERPRETATION | ACCURATE | Historicist argument grounded in Scripture interpreting Scripture (Dan 2; 7; 8; 9) |
+| S10-P-07 | TEXT | ACCURATE | Direct passage exposition verified in KJV text |
 | S10-H-09 | N/A | N/A | Section title / kicker header chrome |
 | S10-P-08 | INTERPRETATION | ACCURATE | Historicist argument grounded in Scripture interpreting Scripture (Dan 2; 7; 8; 9) |
 | S10-BQ-02 | TEXT | ACCURATE | Direct KJV Scripture quotation verified against bible/kjv.json |
@@ -71,8 +71,8 @@
 | S10-LI-13 | INTERPRETATION | ACCURATE | Biblical case and historical argument |
 | S10-P-14 | TEXT | ACCURATE | Direct passage exposition verified in KJV text |
 | S10-P-15 | PASTORAL | ACCURATE | Personal application tethered to exilic covenant faithfulness |
+| S10-P-16 | TEXT | ACCURATE | Direct passage exposition verified in KJV text |
 | S10-BQ-04 | TEXT | ACCURATE | Direct KJV Scripture quotation verified against bible/kjv.json |
-| S10-P-16 | INTERPRETATION | ACCURATE | Historicist argument grounded in Scripture interpreting Scripture (Dan 2; 7; 8; 9) |
 | S10-DIA-02 | INTERPRETATION | ACCURATE | Prophetic diagram illustrating imperial succession and chronology |
 | S10-H-18 | N/A | N/A | Section title / kicker header chrome |
 | S10-H-19 | N/A | N/A | Section title / kicker header chrome |
@@ -110,7 +110,7 @@
 | S10-H-30 | N/A | N/A | Section title / kicker header chrome |
 | S10-P-28 | PASTORAL | ACCURATE | Personal application tethered to exilic covenant faithfulness |
 | S10-H-31 | N/A | N/A | Section title / kicker header chrome |
-| S10-P-29 | CHRIST | ACCURATE | Canonical Christology: Luke 24:27; Dan 9:26; Dan 2:44; Dan 7:13–14 |
+| S10-P-29 | TEXT | ACCURATE | Direct passage exposition verified in KJV text |
 | S10-H-32 | N/A | N/A | Section title / kicker header chrome |
 | S10-P-30 | INTERPRETATION | ACCURATE | Historicist argument grounded in Scripture interpreting Scripture (Dan 2; 7; 8; 9) |
 | S10-H-33 | N/A | N/A | Section title / kicker header chrome |
@@ -213,7 +213,7 @@
 | S10-VRF-5-LESSON | INTERPRETATION | ACCURATE | Historicist synthesis from Scripture interpreting Scripture |
 | S10-VRF-5-QUOTE | TEXT | ACCURATE | Exact KJV Scripture quotation verified in bible/kjv.json |
 | S10-VRF-5-CHECK | PASTORAL | ACCURATE | Empirical reader checkpoint and source verification instruction |
-| S10-VRF-6-LESSON | CHRIST | ACCURATE | Redemptive and Christological fulfillment of passage |
+| S10-VRF-6-LESSON | INTERPRETATION | ACCURATE | Historicist synthesis from Scripture interpreting Scripture |
 | S10-VRF-6-QUOTE | TEXT | ACCURATE | Exact KJV Scripture quotation verified in bible/kjv.json |
 | S10-VRF-6-CHECK | PASTORAL | ACCURATE | Empirical reader checkpoint and source verification instruction |
 | S10-VRF-7-LESSON | CHRIST | ACCURATE | Redemptive and Christological fulfillment of passage |
@@ -224,8 +224,6 @@
 | S10-VRF-8-CHECK | PASTORAL | ACCURATE | Empirical reader checkpoint and source verification instruction |
 | S10-GLS-alexander-SMP | INTERPRETATION | ACCURATE | Historicist vocabulary and prophetic hermeneutic definition |
 | S10-GLS-alexander-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
-| S10-GLS-arian-SMP | CHRIST | ACCURATE | Christological definition and canonical significance |
-| S10-GLS-arian-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
 | S10-GLS-artaxerxes-SMP | INTERPRETATION | ACCURATE | Historicist vocabulary and prophetic hermeneutic definition |
 | S10-GLS-artaxerxes-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
 | S10-GLS-babylon-SMP | INTERPRETATION | ACCURATE | Historicist vocabulary and prophetic hermeneutic definition |
@@ -252,10 +250,6 @@
 | S10-GLS-jerusalem-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
 | S10-GLS-michael-SMP | CHRIST | ACCURATE | Christological definition and canonical significance |
 | S10-GLS-michael-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
-| S10-GLS-millerite-SMP | INTERPRETATION | ACCURATE | Historicist vocabulary and prophetic hermeneutic definition |
-| S10-GLS-millerite-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
-| S10-GLS-most-holy-SMP | CHRIST | ACCURATE | Christological definition and canonical significance |
-| S10-GLS-most-holy-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
 | S10-GLS-nitsdaq-SMP | INTERPRETATION | ACCURATE | Historicist vocabulary and prophetic hermeneutic definition |
 | S10-GLS-nitsdaq-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
 | S10-GLS-papacy-SMP | INTERPRETATION | ACCURATE | Historicist vocabulary and prophetic hermeneutic definition |

@@ -2,9 +2,9 @@
 
 **Audit Date:** 2026-09-20  
 **File Audited:** `js/study/sheets-data.js` (Sitting id: 5) with `sheet-verify.js`, `workbench.js`, `sheet-glossary.js`  
-**Audited Content Hash:** `2701b5de291b1813`  
+**Audited Content Hash:** `12e0cd4b71ca413f`  
 **Method:** Exhaustive claim-unit audit of finished prose across content, christology, quizzes, studyGuide, guide, verify cards, workbench, and linked glossary entries.  
-**Counts:** ACCURATE: 175 | SOFTEN: 0 | FIX: 0 | N/A: 39 | Total: 214  
+**Counts:** ACCURATE: 173 | SOFTEN: 0 | FIX: 0 | N/A: 39 | Total: 212  
 
 ## 1. Summary of Required Sections & Governing Standards
 
@@ -66,7 +66,7 @@
 | S05-LI-02 | INTERPRETATION | ACCURATE | Biblical case and historical argument |
 | S05-LI-03 | INTERPRETATION | ACCURATE | Biblical case and historical argument |
 | S05-H-20 | N/A | N/A | Section title / kicker header chrome |
-| S05-P-18 | PASTORAL | ACCURATE | Personal application tethered to exilic covenant faithfulness |
+| S05-P-18 | HISTORY | ACCURATE | Documented historical event, dated primary chronicle, or standard history of interpretation |
 | S05-H-21 | N/A | N/A | Section title / kicker header chrome |
 | S05-H-22 | N/A | N/A | Section title / kicker header chrome |
 | S05-H-23 | N/A | N/A | Section title / kicker header chrome |
@@ -228,8 +228,6 @@
 | S05-GLS-nabonidus-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
 | S05-GLS-nebuchadnezzar-SMP | INTERPRETATION | ACCURATE | Historicist vocabulary and prophetic hermeneutic definition |
 | S05-GLS-nebuchadnezzar-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
-| S05-GLS-probation-SMP | INTERPRETATION | ACCURATE | Historicist vocabulary and prophetic hermeneutic definition |
-| S05-GLS-probation-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
 | S05-GLS-sanctuary-SMP | TEXT | ACCURATE | Biblical lexical definition and textual usage |
 | S05-GLS-sanctuary-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
 | S05-GLS-typology-SMP | INTERPRETATION | ACCURATE | Historicist vocabulary and prophetic hermeneutic definition |

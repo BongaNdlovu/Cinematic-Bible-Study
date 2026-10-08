@@ -251,7 +251,7 @@ Daniel 9:24–27 ──▶  "Seventy weeks" (70 × 7 = 490 prophetic days)
                 "body": [
                         "The historicist chain is not a political chart. It exists to exalt Jesus Christ as Lord of history and personal Redeemer. In Daniel 1:2 the same God who gave His Son on Calvary already governed Judah's fall. In Daniel 9:26 Messiah is cut off, but not for Himself — the pinnacle of the timeline is the cross, not an earthly tyrant. In Daniel 2:44 the stone cut without hands is Christ returning to fill the earth with an everlasting kingdom.",
                         "On the road to Emmaus, Jesus expounded in all the Scriptures the things concerning Himself (Luke 24:27). Prophecy that does not lead to Him is a map with no destination.",
-                        "The timeline that predicted Christ's first advent to bear our sins guarantees His second advent to reign as King. Rest in that triumph — not in fear of present superpowers."
+                        "The timeline that predicted Christ's first advent to bear our sins guarantees His second advent to reign as King. Rest in that triumph—not in fear of present superpowers."
                 ]
         },
         quizzes: [
@@ -948,11 +948,11 @@ Iron        7.8 (Lowest)        Base                Crushing, Destructive</pre>
 <p>When the Western Roman Empire fractured under Germanic incursions in A.D. 476, it divided into separate kingdoms that became the foundation of modern Europe:</p>
 
 <div class="historical-note">
-  <p class="historical-note-kicker">Iron and clay — what Daniel 2:41–43 says</p>
+  <p class="historical-note-kicker">Iron and clay — what Daniel 2:41–43 says, and how this sitting reads it</p>
   <ul>
-    <li><strong>The verse:</strong> The fourth kingdom is divided; iron mixed with miry clay; they mingle with the seed of men and do not cleave (Daniel 2:41–43). That is divided Europe after Rome — not a fifth metal.</li>
-    <li><strong>This sitting’s historicist reading:</strong> The mixture is civil power that will not hold with religious claims (Daniel 2:41–43). Isaiah 64:8 and Jeremiah 18:6 are potter-and-clay for Israel; they are not a dictionary entry for Daniel 2’s feet. Constantine is later history, not printed in the dream.</li>
-    <li><strong>The prophetic sentence:</strong> Fragmented powers attempt to reunite through alliances and royal intermarriages: <em>"they shall mingle themselves with the seed of men: but they shall not cleave one to another, even as iron is not mixed with clay"</em> (Daniel 2:43).</li>
+    <li><strong>The text (KJV):</strong> Daniel 2:41: <em>"…the kingdom shall be divided; but there shall be in it of the strength of the iron, forasmuch as thou sawest the iron mixed with miry clay."</em> Daniel 2:42: <em>"…so the kingdom shall be partly strong, and partly broken."</em> Daniel 2:43: <em>"they shall mingle themselves with the seed of men: but they shall not cleave one to another, even as iron is not mixed with clay."</em> No fifth metal appears: the feet are part iron and part potters’ clay (Daniel 2:41).</li>
+    <li><strong>This sitting’s reading (interpretation):</strong> The feet are divided Europe after Rome. The clay stands for the peoples of divided Western Europe, and the iron for the hardness of Rome that still lives on in them. Their mingling is royal intermarriage and political treaties, and it does not hold (Daniel 2:43). Daniel 11 uses the same motif: a royal marriage made to seal an agreement does not stand (Daniel 11:6, 17).</li>
+    <li><strong>Rival reading (interpretation):</strong> Some historicists take the clay as religious power allied with the state. That reading needs Revelation 17 to carry it, where a woman rides a beast with ten horns (17:3, 12–13, 16–17); Revelation 18:4 then calls God’s people out of her. Daniel 2 itself names materials, not institutions.</li>
   </ul>
 </div>
 
@@ -1021,8 +1021,8 @@ Iron (strength that remains)  +  Clay (the mixture that will not hold)
   <blockquote class="scripture-quote">"Whosoever shall fall upon that stone shall be broken; but on whomsoever it shall fall, it will grind him to powder." — Luke 20:18 (KJV)</blockquote>
   <p>Here is the gospel offer embedded in the metallic colossus:</p>
   <ul>
-    <li>If you fall upon Christ today in repentance, your pride is broken, your sins are forgiven through His blood, and you are saved.</li>
-    <li>If you resist Him, the Stone will fall upon you in final judgment, sweeping away all earthly security.</li>
+    <li>If you fall upon Christ today in contrite repentance, your pride is broken, your sins are forgiven through His blood, and you are saved.</li>
+    <li>If you remain hardened and unrepentant, the Stone will fall upon you in final judgment, and it will grind you to powder.</li>
   </ul>
 </div>
 
@@ -1074,7 +1074,7 @@ Iron (strength that remains)  +  Clay (the mixture that will not hold)
                 "body": [
                         "The Stone cut out without hands is Jesus Christ — a kingdom of divine origin, not human agency. The strike is at the feet, in the days of these kings: the Second Coming, not the incarnation (Daniel 2:34, 44–45). He is the chief cornerstone the builders rejected, the Rock upon which the Church is built, and the Stone that shatters all opposition (Psalm 118:22; Luke 20:17–18).",
                         "The Stone strikes the feet in the days of these kings — during divided Europe — not through human treaties or moral evolution. It pulverizes every metal kingdom at once and becomes a mountain filling the whole earth. Christ does not reform empires; He abolishes them and establishes an everlasting kingdom (Daniel 2:44–45; Rev 11:15).",
-                        "Whosoever falls upon that stone in repentance shall be broken and saved; on whomsoever it shall fall in judgment, it will grind him to powder (Luke 20:18). Build your hope on the Living Stone — not on the crumbling feet of iron and clay."
+                        "Whosoever falls upon that stone in contrite repentance shall be broken to be saved; but upon the hardened and unrepentant, on whomsoever it falls in final judgment, it will grind him to powder (Luke 20:18). Build your hope on the Living Stone—not on the crumbling feet of iron and clay."
                 ]
         },
         quizzes: [
@@ -2643,7 +2643,7 @@ DANIEL IN THE LIONS' DEN                 JESUS CHRIST AT CALVARY &amp; THE TOMB
 
 <div class="biblical-case">
   <p class="biblical-case-kicker">3. Christ conquers the roaring lion</p>
-  <p>Scripture warns that our adversary the devil <em>"as a roaring lion, walketh about, seeking whom he may devour"</em> (1 Peter 5:8). Daniel walked out of the pit because an angel shut the mouths of physical predators; at Calvary, Jesus Christ walked directly into the jaws of spiritual death, disarmed principalities and powers, and made a public spectacle of Satan's defeated kingdom (Colossians 2:15; Hebrews 2:14). Because Christ is alive, the believer's final victory over death is eternally guaranteed.</p>
+  <p>Scripture warns that our adversary the devil <em>"as a roaring lion, walketh about, seeking whom he may devour"</em> (1 Peter 5:8). Daniel walked out of the pit because an angel shut the mouths of physical predators; at Calvary, Jesus Christ walked directly into the jaws of spiritual death, disarmed principalities and powers, and made a public spectacle of Satan's defeated kingdom (Colossians 2:15; Hebrews 2:14). Because Christ is alive, the believer's victory over death is secured and will be consummated at the resurrection.</p>
 </div>
 
 <div class="level-card level-christ">
@@ -3100,7 +3100,7 @@ SCRIPTURAL CRITERIA:                     HISTORICAL FULFILLMENT:
 
 <div class="level-card level-christ">
   <p class="level-kicker">CHRIST</p>
-  <p>The Son of Man who approaches the Ancient of Days is Jesus Christ, our High Priest and Advocate. Earthly courts may condemn the saints, but the heavenly Supreme Court vindicates all who trust in His blood and bestows upon them an everlasting kingdom that can never be destroyed.</p>
+  <p>The Son of Man who approaches the Ancient of Days is Jesus Christ, our High Priest and Advocate. Earthly courts may condemn the saints, but the heavenly court vindicates all who trust in His blood, and the Ancient of Days bestows on them an everlasting kingdom that can never be destroyed.</p>
 </div>
 
 <div class="part-header" id="apply">
@@ -4386,7 +4386,7 @@ Michael stands up ('amad: kingly stance, Dan 11:2–4)
   <ul class="list-disc pl-5 my-2 space-y-1">
     <li><strong>Sleeping in the Dust:</strong> In Genesis 3:19, humanity was formed from dust and returns to dust at death. Throughout Scripture, death is an unconscious sleep (Psalm 146:4; Ecclesiastes 9:5; John 11:11–14). The dead do not hover as disembodied ghosts; they sleep in the grave awaiting the resurrection morning.</li>
     <li><strong>Confirmed by Jesus Christ:</strong> Jesus directly cited Daniel 12:2 in John 5:28–29: <em>"Marvel not at this: for the hour is coming, in the which all that are in the graves shall hear his voice, And shall come forth; they that have done good, unto the resurrection of life; and they that have done evil, unto the resurrection of damnation."</em></li>
-    <li><strong>Many, not a metaphor:</strong> Daniel 12:2 speaks of <em>"many"</em> who sleep in the dust awaking to two destinies. That is the Old Testament’s clear promise of bodily resurrection. Revelation 1:7 and Matthew 26:64 add that those who pierced Him will see His appearing. Do not flatten 12:2 into a political metaphor, and do not treat later readings of “many” as if they were printed in the verse.</li>
+    <li><strong>Many, not a metaphor:</strong> Daniel 12:2 speaks of <em>"many"</em> who sleep in the dust awaking to two destinies. That is the Old Testament’s clear promise of bodily resurrection. Revelation 1:7 and Matthew 26:64 add that those who pierced Him will see His appearing. Do not flatten 12:2 into a political metaphor, and do not treat later readings of “many” as if they were stated in the biblical text.</li>
   </ul>
 </div>
 
@@ -4418,7 +4418,7 @@ then 1844: 2,300-year sanctuary landing (sitting 8)</pre>
 
 <div class="level-card level-christ">
   <p class="level-kicker">CHRIST</p>
-  <p>Jesus Christ is the grand Climax of the Book of Daniel. He is the Stone cut without hands (Daniel 2), the Son of God walking in the fiery furnace (Daniel 3), the High Priest in the heavenly court receiving the kingdom (Daniel 7), the Prince of princes vindicating His sanctuary (Daniel 8), the Messiah cut off on Calvary's cross (Daniel 9), and Michael the Archangel standing up in royal triumph (Daniel 12). He holds the keys of death and the grave; soon His voice will awake the sleeping dust of every believer who trusted in His name.</p>
+  <p>Jesus Christ is the grand Climax of the Book of Daniel. He is the Stone cut without hands that strikes the kingdoms and fills the whole earth (Daniel 2), the Son of God walking in the fiery furnace (Daniel 3), the High Priest in the heavenly court receiving the kingdom (Daniel 7), the Prince of princes vindicating His sanctuary (Daniel 8), the Messiah cut off on Calvary's cross (Daniel 9), and Michael the Archangel standing up in royal triumph (Daniel 12). He holds the keys of death and the grave; soon His voice will awake the sleeping dust of every believer who trusted in His name.</p>
 </div>
 
 <div class="part-header" id="apply">

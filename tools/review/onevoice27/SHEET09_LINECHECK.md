@@ -2,7 +2,7 @@
 
 **Audit Date:** 2026-09-20  
 **File Audited:** `js/study/sheets-data.js` (Sitting id: 9) with `sheet-verify.js`, `workbench.js`, `sheet-glossary.js`  
-**Audited Content Hash:** `d22337824eb62fed`  
+**Audited Content Hash:** `f8cfd3d99630a17a`  
 **Method:** Exhaustive claim-unit audit of finished prose across content, christology, quizzes, studyGuide, guide, verify cards, workbench, and linked glossary entries.  
 **Counts:** ACCURATE: 213 | SOFTEN: 0 | FIX: 0 | N/A: 38 | Total: 251  
 
@@ -24,7 +24,7 @@
 | S09-NEXT | N/A | N/A | Next sitting transition banner chrome |
 | S09-H-01 | N/A | N/A | Section title / kicker header chrome |
 | S09-P-01 | HISTORY | ACCURATE | Documented historical event, dated primary chronicle, or standard history of interpretation |
-| S09-P-02 | PASTORAL | ACCURATE | Personal application tethered to exilic covenant faithfulness |
+| S09-P-02 | TEXT | ACCURATE | Direct passage exposition verified in KJV text |
 | S09-H-02 | N/A | N/A | Section title / kicker header chrome |
 | S09-H-03 | N/A | N/A | Section title / kicker header chrome |
 | S09-H-04 | N/A | N/A | Section title / kicker header chrome |
@@ -42,7 +42,7 @@
 | S09-P-08 | TEXT | ACCURATE | Direct passage exposition verified in KJV text |
 | S09-H-08 | N/A | N/A | Section title / kicker header chrome |
 | S09-P-09 | TEXT | ACCURATE | Direct passage exposition verified in KJV text |
-| S09-P-10 | INTERPRETATION | ACCURATE | Historicist argument grounded in Scripture interpreting Scripture (Dan 2; 7; 8; 9) |
+| S09-P-10 | TEXT | ACCURATE | Direct passage exposition verified in KJV text |
 | S09-LI-01 | INTERPRETATION | ACCURATE | Biblical case and historical argument |
 | S09-LI-02 | INTERPRETATION | ACCURATE | Biblical case and historical argument |
 | S09-P-11 | INTERPRETATION | ACCURATE | Historicist argument grounded in Scripture interpreting Scripture (Dan 2; 7; 8; 9) |

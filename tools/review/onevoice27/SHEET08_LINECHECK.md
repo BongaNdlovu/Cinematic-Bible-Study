@@ -2,9 +2,9 @@
 
 **Audit Date:** 2026-09-20  
 **File Audited:** `js/study/sheets-data.js` (Sitting id: 8) with `sheet-verify.js`, `workbench.js`, `sheet-glossary.js`  
-**Audited Content Hash:** `85df57aea31745a2`  
+**Audited Content Hash:** `dac2aff7504bd6b9`  
 **Method:** Exhaustive claim-unit audit of finished prose across content, christology, quizzes, studyGuide, guide, verify cards, workbench, and linked glossary entries.  
-**Counts:** ACCURATE: 222 | SOFTEN: 0 | FIX: 0 | N/A: 41 | Total: 263  
+**Counts:** ACCURATE: 221 | SOFTEN: 1 | FIX: 0 | N/A: 41 | Total: 263  
 
 ## 1. Summary of Required Sections & Governing Standards
 
@@ -24,7 +24,7 @@
 | S08-NEXT | N/A | N/A | Next sitting transition banner chrome |
 | S08-H-01 | N/A | N/A | Section title / kicker header chrome |
 | S08-P-01 | CHRIST | ACCURATE | Canonical Christology: Luke 24:27; Dan 9:26; Dan 2:44; Dan 7:13–14 |
-| S08-P-02 | HISTORY | ACCURATE | Documented historical event, dated primary chronicle, or standard history of interpretation |
+| S08-P-02 | HISTORY | SOFTEN | Hedged in-text: explicitly marked as historical reconstruction rather than bare Scripture |
 | S08-H-02 | N/A | N/A | Section title / kicker header chrome |
 | S08-H-03 | N/A | N/A | Section title / kicker header chrome |
 | S08-H-04 | N/A | N/A | Section title / kicker header chrome |
@@ -51,7 +51,6 @@
 | S08-LI-02 | INTERPRETATION | ACCURATE | Biblical case and historical argument |
 | S08-LI-03 | INTERPRETATION | ACCURATE | Biblical case and historical argument |
 | S08-P-10 | INTERPRETATION | ACCURATE | Historicist argument grounded in Scripture interpreting Scripture (Dan 2; 7; 8; 9) |
-| S08-BQ-02 | TEXT | ACCURATE | Direct KJV Scripture quotation verified against bible/kjv.json |
 | S08-H-14 | N/A | N/A | Section title / kicker header chrome |
 | S08-LI-04 | INTERPRETATION | ACCURATE | Four-level interpretive verification criteria |
 | S08-LI-05 | INTERPRETATION | ACCURATE | Biblical case and historical argument |
@@ -59,7 +58,7 @@
 | S08-H-16 | N/A | N/A | Section title / kicker header chrome |
 | S08-H-17 | N/A | N/A | Section title / kicker header chrome |
 | S08-P-11 | INTERPRETATION | ACCURATE | Historicist argument grounded in Scripture interpreting Scripture (Dan 2; 7; 8; 9) |
-| S08-BQ-03 | TEXT | ACCURATE | Direct KJV Scripture quotation verified against bible/kjv.json |
+| S08-BQ-02 | TEXT | ACCURATE | Direct KJV Scripture quotation verified against bible/kjv.json |
 | S08-P-12 | INTERPRETATION | ACCURATE | Historicist argument grounded in Scripture interpreting Scripture (Dan 2; 7; 8; 9) |
 | S08-H-18 | N/A | N/A | Section title / kicker header chrome |
 | S08-P-13 | INTERPRETATION | ACCURATE | Historicist argument grounded in Scripture interpreting Scripture (Dan 2; 7; 8; 9) |
@@ -85,32 +84,33 @@
 | S08-H-26 | N/A | N/A | Section title / kicker header chrome |
 | S08-H-27 | N/A | N/A | Section title / kicker header chrome |
 | S08-P-21 | INTERPRETATION | ACCURATE | Historicist argument grounded in Scripture interpreting Scripture (Dan 2; 7; 8; 9) |
-| S08-BQ-04 | TEXT | ACCURATE | Direct KJV Scripture quotation verified against bible/kjv.json |
+| S08-BQ-03 | TEXT | ACCURATE | Direct KJV Scripture quotation verified against bible/kjv.json |
+| S08-P-22 | INTERPRETATION | ACCURATE | Historicist argument grounded in Scripture interpreting Scripture (Dan 2; 7; 8; 9) |
 | S08-H-28 | N/A | N/A | Section title / kicker header chrome |
-| S08-P-22 | PASTORAL | ACCURATE | Personal application tethered to exilic covenant faithfulness |
-| S08-P-23 | TEXT | ACCURATE | Direct passage exposition verified in KJV text |
+| S08-P-23 | PASTORAL | ACCURATE | Personal application tethered to exilic covenant faithfulness |
+| S08-P-24 | TEXT | ACCURATE | Direct passage exposition verified in KJV text |
 | S08-H-29 | N/A | N/A | Section title / kicker header chrome |
-| S08-P-24 | INTERPRETATION | ACCURATE | Historicist argument grounded in Scripture interpreting Scripture (Dan 2; 7; 8; 9) |
 | S08-P-25 | INTERPRETATION | ACCURATE | Historicist argument grounded in Scripture interpreting Scripture (Dan 2; 7; 8; 9) |
-| S08-P-26 | HISTORY | ACCURATE | Documented historical event, dated primary chronicle, or standard history of interpretation |
+| S08-P-26 | INTERPRETATION | ACCURATE | Historicist argument grounded in Scripture interpreting Scripture (Dan 2; 7; 8; 9) |
+| S08-P-27 | HISTORY | ACCURATE | Documented historical event, dated primary chronicle, or standard history of interpretation |
 | S08-H-30 | N/A | N/A | Section title / kicker header chrome |
 | S08-LI-10 | INTERPRETATION | ACCURATE | Biblical case and historical argument |
 | S08-LI-11 | INTERPRETATION | ACCURATE | Four-level interpretive verification criteria |
 | S08-LI-12 | INTERPRETATION | ACCURATE | Four-level interpretive verification criteria |
-| S08-P-27 | INTERPRETATION | ACCURATE | Historicist argument grounded in Scripture interpreting Scripture (Dan 2; 7; 8; 9) |
+| S08-P-28 | INTERPRETATION | ACCURATE | Historicist argument grounded in Scripture interpreting Scripture (Dan 2; 7; 8; 9) |
 | S08-H-31 | N/A | N/A | Section title / kicker header chrome |
-| S08-P-28 | CHRIST | ACCURATE | Canonical Christology: Luke 24:27; Dan 9:26; Dan 2:44; Dan 7:13–14 |
+| S08-P-29 | CHRIST | ACCURATE | Canonical Christology: Luke 24:27; Dan 9:26; Dan 2:44; Dan 7:13–14 |
 | S08-H-32 | N/A | N/A | Section title / kicker header chrome |
 | S08-H-33 | N/A | N/A | Section title / kicker header chrome |
-| S08-P-29 | PASTORAL | ACCURATE | Personal application tethered to exilic covenant faithfulness |
+| S08-P-30 | PASTORAL | ACCURATE | Personal application tethered to exilic covenant faithfulness |
 | S08-H-34 | N/A | N/A | Section title / kicker header chrome |
-| S08-P-30 | CHRIST | ACCURATE | Canonical Christology: Luke 24:27; Dan 9:26; Dan 2:44; Dan 7:13–14 |
-| S08-H-35 | N/A | N/A | Section title / kicker header chrome |
 | S08-P-31 | CHRIST | ACCURATE | Canonical Christology: Luke 24:27; Dan 9:26; Dan 2:44; Dan 7:13–14 |
+| S08-H-35 | N/A | N/A | Section title / kicker header chrome |
+| S08-P-32 | CHRIST | ACCURATE | Canonical Christology: Luke 24:27; Dan 9:26; Dan 2:44; Dan 7:13–14 |
 | S08-H-36 | N/A | N/A | Section title / kicker header chrome |
-| S08-P-32 | INTERPRETATION | ACCURATE | Historicist argument grounded in Scripture interpreting Scripture (Dan 2; 7; 8; 9) |
-| S08-H-37 | N/A | N/A | Section title / kicker header chrome |
 | S08-P-33 | INTERPRETATION | ACCURATE | Historicist argument grounded in Scripture interpreting Scripture (Dan 2; 7; 8; 9) |
+| S08-H-37 | N/A | N/A | Section title / kicker header chrome |
+| S08-P-34 | INTERPRETATION | ACCURATE | Historicist argument grounded in Scripture interpreting Scripture (Dan 2; 7; 8; 9) |
 | S08-H-38 | N/A | N/A | Section title / kicker header chrome |
 | S08-LI-13 | INTERPRETATION | ACCURATE | Four-level interpretive verification criteria |
 | S08-LI-14 | INTERPRETATION | ACCURATE | Four-level interpretive verification criteria |

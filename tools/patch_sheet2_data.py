@@ -36,7 +36,7 @@ new_block = f'''      {{
                 "body": [
                         "The Stone cut out without hands is Jesus Christ — divine origin through the virgin birth, resurrection, and Second Coming. He is the chief cornerstone the builders rejected, the Rock upon which the Church is built, and the Stone that shatters all opposition (Psalm 118:22; Luke 20:17–18).",
                         "The Stone strikes the feet in the days of these kings — during divided Europe — not through human treaties or moral evolution. It pulverizes every metal kingdom at once and becomes a mountain filling the whole earth. Christ does not reform empires; He abolishes them and establishes an everlasting kingdom (Daniel 2:44–45; Rev 11:15).",
-                        "Whosoever falls upon that stone in repentance shall be broken and saved; on whomsoever it shall fall in judgment, it will grind him to powder (Luke 20:18). Build your hope on the Living Stone — not on the crumbling feet of iron and clay."
+                        "Whosoever falls upon that stone in contrite repentance shall be broken to be saved; but upon the hardened and unrepentant, on whomsoever it falls in final judgment, it will grind him to powder (Luke 20:18). Build your hope on the Living Stone—not on the crumbling feet of iron and clay."
                 ]
         }},
         quizzes: [

@@ -126,7 +126,7 @@ function assertInWorkbench(phrase, label) {
 // Workbench claim unit definitions for sittings 0, 1, 2
 const WORKBENCH_DATA = {
   0: {
-    intro: "Before taking the checkpoint quiz, verify the day-for-year precedent in Scripture (precedent, not universal rule) and correctly classify the three schools of apocalyptic interpretation.",
+    intro: "Before taking the checkpoint quiz, verify the day-for-year scale Scripture sets in Numbers 14:34 and Ezekiel 4:6 and correctly classify the three schools of apocalyptic interpretation.",
     task1Prompt: "Identify the two Old Testament verses that explicitly formulate the prophetic scale, and enter the exact formulaic biblical phrase: Numbers 14:34 and Ezekiel 4:6 'each day for a year'.",
     task2Prompt: "Assign each historical interpretation to its proper school: Historicism, Preterism, or Futurism.",
     items: [
@@ -135,7 +135,7 @@ const WORKBENCH_DATA = {
       "Prophecy is an unbroken, continuous chain of historical fulfillment from 605 B.C. through divided Europe to the Second Advent.",
       "All apocalyptic prophecies were completed by the destruction of Jerusalem in A.D. 70 and the fall of pagan Rome.",
       "The Antichrist is a single future individual reigning for 3.5 literal years in a rebuilt temple in Jerusalem.",
-      "The number 1,260 years is built from Daniel's 'time, times, and half a time' through day-year and calendar conventions — four interpretive layers, not a number Daniel prints outright."
+      "The number 1,260 is the year-day reading of Daniel 7:25's 'time, times, and the dividing of time'; Revelation 12:6 and 13:5 give the same span as 1,260 days and 42 months."
     ]
   },
   1: {

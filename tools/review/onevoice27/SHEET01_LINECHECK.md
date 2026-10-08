@@ -2,9 +2,9 @@
 
 **Audit Date:** 2026-09-20  
 **File Audited:** `js/study/sheets-data.js` (Sitting id: 1) with `sheet-verify.js`, `workbench.js`, `sheet-glossary.js`  
-**Audited Content Hash:** `b091a598411d862f`  
+**Audited Content Hash:** `b7a58e1e3bcfef4a`  
 **Method:** Exhaustive claim-unit audit of finished prose across content, christology, quizzes, studyGuide, guide, verify cards, workbench, and linked glossary entries.  
-**Counts:** ACCURATE: 180 | SOFTEN: 2 | FIX: 0 | N/A: 33 | Total: 215  
+**Counts:** ACCURATE: 179 | SOFTEN: 2 | FIX: 0 | N/A: 33 | Total: 214  
 
 ## 1. Summary of Required Sections & Governing Standards
 
@@ -64,21 +64,20 @@
 | S01-P-18 | INTERPRETATION | ACCURATE | Historicist argument grounded in Scripture interpreting Scripture (Dan 2; 7; 8; 9) |
 | S01-LI-04 | INTERPRETATION | ACCURATE | Biblical case and historical argument |
 | S01-LI-05 | INTERPRETATION | ACCURATE | Biblical case and historical argument |
-| S01-LI-06 | INTERPRETATION | ACCURATE | Biblical case and historical argument |
 | S01-DIA-03 | INTERPRETATION | ACCURATE | Prophetic diagram illustrating imperial succession and chronology |
 | S01-P-19 | INTERPRETATION | ACCURATE | Historicist argument grounded in Scripture interpreting Scripture (Dan 2; 7; 8; 9) |
 | S01-P-20 | PASTORAL | ACCURATE | Personal application tethered to exilic covenant faithfulness |
 | S01-H-16 | N/A | N/A | Section title / kicker header chrome |
 | S01-P-21 | PASTORAL | ACCURATE | Personal application tethered to exilic covenant faithfulness |
 | S01-H-17 | N/A | N/A | Section title / kicker header chrome |
+| S01-LI-06 | INTERPRETATION | ACCURATE | Biblical case and historical argument |
 | S01-LI-07 | INTERPRETATION | ACCURATE | Biblical case and historical argument |
 | S01-LI-08 | INTERPRETATION | ACCURATE | Biblical case and historical argument |
 | S01-LI-09 | INTERPRETATION | ACCURATE | Biblical case and historical argument |
-| S01-LI-10 | INTERPRETATION | ACCURATE | Biblical case and historical argument |
 | S01-H-18 | N/A | N/A | Section title / kicker header chrome |
 | S01-H-19 | N/A | N/A | Section title / kicker header chrome |
 | S01-H-20 | N/A | N/A | Section title / kicker header chrome |
-| S01-P-22 | INTERPRETATION | ACCURATE | Historicist argument grounded in Scripture interpreting Scripture (Dan 2; 7; 8; 9) |
+| S01-P-22 | PASTORAL | ACCURATE | Personal application tethered to exilic covenant faithfulness |
 | S01-DIA-04 | INTERPRETATION | ACCURATE | Prophetic diagram illustrating imperial succession and chronology |
 | S01-H-21 | N/A | N/A | Section title / kicker header chrome |
 | S01-P-23 | INTERPRETATION | ACCURATE | Historicist argument grounded in Scripture interpreting Scripture (Dan 2; 7; 8; 9) |

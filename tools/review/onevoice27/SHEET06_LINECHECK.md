@@ -2,7 +2,7 @@
 
 **Audit Date:** 2026-09-20  
 **File Audited:** `js/study/sheets-data.js` (Sitting id: 6) with `sheet-verify.js`, `workbench.js`, `sheet-glossary.js`  
-**Audited Content Hash:** `798c6f7d26d303f1`  
+**Audited Content Hash:** `3e122863b00bf0bf`  
 **Method:** Exhaustive claim-unit audit of finished prose across content, christology, quizzes, studyGuide, guide, verify cards, workbench, and linked glossary entries.  
 **Counts:** ACCURATE: 180 | SOFTEN: 0 | FIX: 0 | N/A: 39 | Total: 219  
 
@@ -29,7 +29,7 @@
 | S06-H-03 | N/A | N/A | Section title / kicker header chrome |
 | S06-H-04 | N/A | N/A | Section title / kicker header chrome |
 | S06-P-03 | HISTORY | ACCURATE | Documented historical event, dated primary chronicle, or standard history of interpretation |
-| S06-P-04 | INTERPRETATION | ACCURATE | Historicist argument grounded in Scripture interpreting Scripture (Dan 2; 7; 8; 9) |
+| S06-P-04 | HISTORY | ACCURATE | Documented historical event, dated primary chronicle, or standard history of interpretation |
 | S06-P-05 | INTERPRETATION | ACCURATE | Historicist argument grounded in Scripture interpreting Scripture (Dan 2; 7; 8; 9) |
 | S06-DIA-01 | INTERPRETATION | ACCURATE | Prophetic diagram illustrating imperial succession and chronology |
 | S06-H-05 | N/A | N/A | Section title / kicker header chrome |
@@ -90,11 +90,11 @@
 | S06-H-26 | N/A | N/A | Section title / kicker header chrome |
 | S06-P-26 | INTERPRETATION | ACCURATE | Historicist argument grounded in Scripture interpreting Scripture (Dan 2; 7; 8; 9) |
 | S06-H-27 | N/A | N/A | Section title / kicker header chrome |
-| S06-P-27 | INTERPRETATION | ACCURATE | Historicist argument grounded in Scripture interpreting Scripture (Dan 2; 7; 8; 9) |
+| S06-P-27 | TEXT | ACCURATE | Direct passage exposition verified in KJV text |
 | S06-H-28 | N/A | N/A | Section title / kicker header chrome |
 | S06-P-28 | INTERPRETATION | ACCURATE | Historicist argument grounded in Scripture interpreting Scripture (Dan 2; 7; 8; 9) |
 | S06-H-29 | N/A | N/A | Section title / kicker header chrome |
-| S06-P-29 | INTERPRETATION | ACCURATE | Historicist argument grounded in Scripture interpreting Scripture (Dan 2; 7; 8; 9) |
+| S06-P-29 | PASTORAL | ACCURATE | Personal application tethered to exilic covenant faithfulness |
 | S06-H-30 | N/A | N/A | Section title / kicker header chrome |
 | S06-H-31 | N/A | N/A | Section title / kicker header chrome |
 | S06-P-30 | INTERPRETATION | ACCURATE | Historicist argument grounded in Scripture interpreting Scripture (Dan 2; 7; 8; 9) |

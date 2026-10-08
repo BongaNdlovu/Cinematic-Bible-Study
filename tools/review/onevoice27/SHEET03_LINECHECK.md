@@ -2,9 +2,9 @@
 
 **Audit Date:** 2026-09-20  
 **File Audited:** `js/study/sheets-data.js` (Sitting id: 3) with `sheet-verify.js`, `workbench.js`, `sheet-glossary.js`  
-**Audited Content Hash:** `ea43f30acc0c15c2`  
+**Audited Content Hash:** `428c0566880f64d7`  
 **Method:** Exhaustive claim-unit audit of finished prose across content, christology, quizzes, studyGuide, guide, verify cards, workbench, and linked glossary entries.  
-**Counts:** ACCURATE: 152 | SOFTEN: 0 | FIX: 0 | N/A: 29 | Total: 181  
+**Counts:** ACCURATE: 154 | SOFTEN: 0 | FIX: 0 | N/A: 29 | Total: 183  
 
 ## 1. Summary of Required Sections & Governing Standards
 
@@ -76,7 +76,7 @@
 | S03-H-22 | N/A | N/A | Section title / kicker header chrome |
 | S03-P-19 | INTERPRETATION | ACCURATE | Historicist argument grounded in Scripture interpreting Scripture (Dan 2; 7; 8; 9) |
 | S03-H-23 | N/A | N/A | Section title / kicker header chrome |
-| S03-P-20 | INTERPRETATION | ACCURATE | Historicist argument grounded in Scripture interpreting Scripture (Dan 2; 7; 8; 9) |
+| S03-P-20 | CHRIST | ACCURATE | Canonical Christology: Luke 24:27; Dan 9:26; Dan 2:44; Dan 7:13–14 |
 | S03-LI-07 | INTERPRETATION | ACCURATE | Biblical case and historical argument |
 | S03-LI-08 | INTERPRETATION | ACCURATE | Four-level interpretive verification criteria |
 | S03-LI-09 | INTERPRETATION | ACCURATE | Biblical case and historical argument |
@@ -185,6 +185,8 @@
 | S03-VRF-6-LESSON | TEXT | ACCURATE | Textual observation from passage wording |
 | S03-VRF-6-QUOTE | HISTORY | ACCURATE | Dated historical primary source quote (verified in translation) |
 | S03-VRF-6-CHECK | PASTORAL | ACCURATE | Empirical reader checkpoint and source verification instruction |
+| S03-GLS-atonement-SMP | CHRIST | ACCURATE | Christological definition and canonical significance |
+| S03-GLS-atonement-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
 | S03-GLS-babylon-SMP | INTERPRETATION | ACCURATE | Historicist vocabulary and prophetic hermeneutic definition |
 | S03-GLS-babylon-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
 | S03-GLS-colossus-SMP | INTERPRETATION | ACCURATE | Historicist vocabulary and prophetic hermeneutic definition |

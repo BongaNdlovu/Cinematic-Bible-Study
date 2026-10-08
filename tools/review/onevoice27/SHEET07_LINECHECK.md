@@ -2,9 +2,9 @@
 
 **Audit Date:** 2026-09-20  
 **File Audited:** `js/study/sheets-data.js` (Sitting id: 7) with `sheet-verify.js`, `workbench.js`, `sheet-glossary.js`  
-**Audited Content Hash:** `5e2ead7515e90c41`  
+**Audited Content Hash:** `a90c52811ecd3fcf`  
 **Method:** Exhaustive claim-unit audit of finished prose across content, christology, quizzes, studyGuide, guide, verify cards, workbench, and linked glossary entries.  
-**Counts:** ACCURATE: 219 | SOFTEN: 0 | FIX: 0 | N/A: 39 | Total: 258  
+**Counts:** ACCURATE: 217 | SOFTEN: 0 | FIX: 0 | N/A: 39 | Total: 256  
 
 ## 1. Summary of Required Sections & Governing Standards
 
@@ -60,7 +60,7 @@
 | S07-LI-06 | INTERPRETATION | ACCURATE | Biblical case and historical argument |
 | S07-LI-07 | INTERPRETATION | ACCURATE | Biblical case and historical argument |
 | S07-LI-08 | INTERPRETATION | ACCURATE | Biblical case and historical argument |
-| S07-LI-09 | INTERPRETATION | ACCURATE | Biblical case and historical argument |
+| S07-LI-09 | INTERPRETATION | ACCURATE | Four-level interpretive verification criteria |
 | S07-LI-10 | INTERPRETATION | ACCURATE | Biblical case and historical argument |
 | S07-LI-11 | INTERPRETATION | ACCURATE | Biblical case and historical argument |
 | S07-LI-12 | INTERPRETATION | ACCURATE | Biblical case and historical argument |
@@ -77,7 +77,7 @@
 | S07-LI-15 | INTERPRETATION | ACCURATE | Biblical case and historical argument |
 | S07-P-14 | INTERPRETATION | ACCURATE | Historicist argument grounded in Scripture interpreting Scripture (Dan 2; 7; 8; 9) |
 | S07-H-21 | N/A | N/A | Section title / kicker header chrome |
-| S07-LI-16 | INTERPRETATION | ACCURATE | Biblical case and historical argument |
+| S07-LI-16 | INTERPRETATION | ACCURATE | Four-level interpretive verification criteria |
 | S07-LI-17 | INTERPRETATION | ACCURATE | Biblical case and historical argument |
 | S07-DIA-04 | INTERPRETATION | ACCURATE | Prophetic diagram illustrating imperial succession and chronology |
 | S07-H-22 | N/A | N/A | Section title / kicker header chrome |
@@ -272,8 +272,6 @@
 | S07-GLS-tamid-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
 | S07-GLS-time-times-SMP | INTERPRETATION | ACCURATE | Historicist vocabulary and prophetic hermeneutic definition |
 | S07-GLS-time-times-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
-| S07-GLS-typology-SMP | INTERPRETATION | ACCURATE | Historicist vocabulary and prophetic hermeneutic definition |
-| S07-GLS-typology-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
 | S07-GLS-vandals-SMP | INTERPRETATION | ACCURATE | Historicist vocabulary and prophetic hermeneutic definition |
 | S07-GLS-vandals-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
 | S07-GLS-year-day-SMP | INTERPRETATION | ACCURATE | Historicist vocabulary and prophetic hermeneutic definition |

@@ -2,9 +2,9 @@
 
 **Audit Date:** 2026-09-20  
 **File Audited:** `js/study/sheets-data.js` (Sitting id: 2) with `sheet-verify.js`, `workbench.js`, `sheet-glossary.js`  
-**Audited Content Hash:** `8a86f2d58d4e27f3`  
+**Audited Content Hash:** `7a556b02c282314c`  
 **Method:** Exhaustive claim-unit audit of finished prose across content, christology, quizzes, studyGuide, guide, verify cards, workbench, and linked glossary entries.  
-**Counts:** ACCURATE: 188 | SOFTEN: 0 | FIX: 0 | N/A: 34 | Total: 222  
+**Counts:** ACCURATE: 186 | SOFTEN: 0 | FIX: 0 | N/A: 34 | Total: 220  
 
 ## 1. Summary of Required Sections & Governing Standards
 
@@ -64,9 +64,9 @@
 | S02-P-17 | INTERPRETATION | ACCURATE | Historicist argument grounded in Scripture interpreting Scripture (Dan 2; 7; 8; 9) |
 | S02-P-18 | INTERPRETATION | ACCURATE | Historicist argument grounded in Scripture interpreting Scripture (Dan 2; 7; 8; 9) |
 | S02-H-18 | N/A | N/A | Section title / kicker header chrome |
-| S02-LI-03 | INTERPRETATION | ACCURATE | Biblical case and historical argument |
-| S02-LI-04 | INTERPRETATION | ACCURATE | Biblical case and historical argument |
-| S02-LI-05 | INTERPRETATION | ACCURATE | Biblical case and historical argument |
+| S02-LI-03 | INTERPRETATION | ACCURATE | Four-level interpretive verification criteria |
+| S02-LI-04 | INTERPRETATION | ACCURATE | Four-level interpretive verification criteria |
+| S02-LI-05 | INTERPRETATION | ACCURATE | Four-level interpretive verification criteria |
 | S02-DIA-03 | INTERPRETATION | ACCURATE | Prophetic diagram illustrating imperial succession and chronology |
 | S02-P-19 | INTERPRETATION | ACCURATE | Historicist argument grounded in Scripture interpreting Scripture (Dan 2; 7; 8; 9) |
 | S02-BQ-03 | TEXT | ACCURATE | Direct KJV Scripture quotation verified against bible/kjv.json |
@@ -222,8 +222,6 @@
 | S02-GLS-antiochus-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
 | S02-GLS-babylon-SMP | INTERPRETATION | ACCURATE | Historicist vocabulary and prophetic hermeneutic definition |
 | S02-GLS-babylon-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
-| S02-GLS-church-state-SMP | INTERPRETATION | ACCURATE | Historicist vocabulary and prophetic hermeneutic definition |
-| S02-GLS-church-state-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
 | S02-GLS-colossus-SMP | INTERPRETATION | ACCURATE | Historicist vocabulary and prophetic hermeneutic definition |
 | S02-GLS-colossus-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
 | S02-GLS-cyrus-SMP | INTERPRETATION | ACCURATE | Historicist vocabulary and prophetic hermeneutic definition |

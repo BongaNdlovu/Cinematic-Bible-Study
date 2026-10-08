@@ -2,9 +2,9 @@
 
 **Audit Date:** 2026-09-20  
 **File Audited:** `js/study/sheets-data.js` (Sitting id: 0) with `sheet-verify.js`, `workbench.js`, `sheet-glossary.js`  
-**Audited Content Hash:** `5b3aa08c20a86ccc`  
+**Audited Content Hash:** `2b9bae22444ea315`  
 **Method:** Exhaustive claim-unit audit of finished prose across content, christology, quizzes, studyGuide, guide, verify cards, workbench, and linked glossary entries.  
-**Counts:** ACCURATE: 214 | SOFTEN: 1 | FIX: 0 | N/A: 33 | Total: 248  
+**Counts:** ACCURATE: 219 | SOFTEN: 0 | FIX: 0 | N/A: 33 | Total: 252  
 
 ## 1. Summary of Required Sections & Governing Standards
 
@@ -26,7 +26,7 @@
 | S00-H-02 | N/A | N/A | Section title / kicker header chrome |
 | S00-P-01 | HISTORY | ACCURATE | Documented historical event, dated primary chronicle, or standard history of interpretation |
 | S00-P-02 | INTERPRETATION | ACCURATE | Historicist argument grounded in Scripture interpreting Scripture (Dan 2; 7; 8; 9) |
-| S00-BQ-01 | HISTORY | ACCURATE | Dated primary historical quotation |
+| S00-BQ-01 | TEXT | ACCURATE | Direct KJV Scripture quotation verified against bible/kjv.json |
 | S00-P-03 | INTERPRETATION | ACCURATE | Historicist argument grounded in Scripture interpreting Scripture (Dan 2; 7; 8; 9) |
 | S00-P-04 | INTERPRETATION | ACCURATE | Historicist argument grounded in Scripture interpreting Scripture (Dan 2; 7; 8; 9) |
 | S00-H-03 | N/A | N/A | Section title / kicker header chrome |
@@ -64,7 +64,7 @@
 | S00-P-21 | CHRIST | ACCURATE | Canonical Christology: Luke 24:27; Dan 9:26; Dan 2:44; Dan 7:13–14 |
 | S00-P-22 | INTERPRETATION | ACCURATE | Historicist argument grounded in Scripture interpreting Scripture (Dan 2; 7; 8; 9) |
 | S00-H-17 | N/A | N/A | Section title / kicker header chrome |
-| S00-P-23 | INTERPRETATION | SOFTEN | Hedged in-text: explicitly notes that dates are interpretive conclusions, not words printed in the verse |
+| S00-P-23 | INTERPRETATION | ACCURATE | Historicist argument grounded in Scripture interpreting Scripture (Dan 2; 7; 8; 9) |
 | S00-H-18 | N/A | N/A | Section title / kicker header chrome |
 | S00-H-19 | N/A | N/A | Section title / kicker header chrome |
 | S00-H-20 | N/A | N/A | Section title / kicker header chrome |
@@ -210,6 +210,8 @@
 | S00-GLS-antiochus-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
 | S00-GLS-apocalyptic-SMP | INTERPRETATION | ACCURATE | Historicist vocabulary and prophetic hermeneutic definition |
 | S00-GLS-apocalyptic-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
+| S00-GLS-artaxerxes-SMP | INTERPRETATION | ACCURATE | Historicist vocabulary and prophetic hermeneutic definition |
+| S00-GLS-artaxerxes-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
 | S00-GLS-babylon-SMP | INTERPRETATION | ACCURATE | Historicist vocabulary and prophetic hermeneutic definition |
 | S00-GLS-babylon-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
 | S00-GLS-calvin-SMP | INTERPRETATION | ACCURATE | Historicist vocabulary and prophetic hermeneutic definition |
@@ -248,6 +250,8 @@
 | S00-GLS-little-horn-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
 | S00-GLS-luther-SMP | CHRIST | ACCURATE | Christological definition and canonical significance |
 | S00-GLS-luther-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
+| S00-GLS-most-holy-SMP | CHRIST | ACCURATE | Christological definition and canonical significance |
+| S00-GLS-most-holy-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
 | S00-GLS-nebuchadnezzar-SMP | INTERPRETATION | ACCURATE | Historicist vocabulary and prophetic hermeneutic definition |
 | S00-GLS-nebuchadnezzar-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
 | S00-GLS-newton-isaac-SMP | INTERPRETATION | ACCURATE | Historicist vocabulary and prophetic hermeneutic definition |
