@@ -21,13 +21,12 @@
         },
         scripture: "How the book teaches you to read it",
         audio: {
-          src: "assets/study/audio/sitting-00-overview.m4a",
+          src: "assets/study/audio/sitting-00-overview.mp3",
           kind: "overview",
           title: "Sitting 0 — listen to the full sitting",
-          kicker: "Read-along · 11 min",
-          hint: "Press play and follow: a soft highlighter strokes the text as it is spoken, from the title to the close of the sitting.",
-          duration: "11 min",
-          cues: "assets/study/audio/sitting-00-overview.json"
+          kicker: "Overview · 3 min",
+          hint: "Press play and listen through the sitting.",
+          duration: "3 min"
         },
         infographic: {
           src: "assets/study/infographics/sitting-00-roadmap.webp",
@@ -413,13 +412,12 @@ Daniel 9:24–27 ──▶  "Seventy weeks" (70 × 7 = 490 prophetic days)
         },
         scripture: "Daniel 1:1-21 &bull; Babylon, 605 B.C.",
         audio: {
-          src: "assets/study/audio/sitting-01-overview.m4a",
+          src: "assets/study/audio/sitting-01-overview.mp3",
           kind: "overview",
           title: "Sitting 1 — listen to the full sitting",
-          kicker: "Read-along · 11 min",
-          hint: "Press play and follow: a soft highlighter strokes the text as it is spoken, from the title to the close of the sitting.",
-          duration: "11 min",
-          cues: "assets/study/audio/sitting-01-overview.json"
+          kicker: "Overview · 3 min",
+          hint: "Press play and listen through the sitting.",
+          duration: "3 min"
         },
         infographic: {
           src: "assets/study/infographics/sitting-01-roadmap.webp",
@@ -811,13 +809,12 @@ DANIEL IN BABYLON                         JESUS IN THE WILDERNESS
         },
         scripture: "Daniel 2:1-49 &bull; Babylon, second year of Nebuchadnezzar (Daniel 2:1; commonly dated c. 603)",
         audio: {
-          src: "assets/study/audio/sitting-02-overview.m4a",
+          src: "assets/study/audio/sitting-02-overview.mp3",
           kind: "overview",
           title: "Sitting 2 — listen to the full sitting",
-          kicker: "Read-along · 11 min",
-          hint: "Press play and follow: a soft highlighter strokes the text as it is spoken, from the title to the close of the sitting.",
-          duration: "11 min",
-          cues: "assets/study/audio/sitting-02-overview.json"
+          kicker: "Overview · 3 min",
+          hint: "Press play and listen through the sitting.",
+          duration: "3 min"
         },
         infographic: {
           src: "assets/study/infographics/sitting-02-roadmap.webp",

@@ -973,7 +973,10 @@
             hint.hidden = !hintText;
           }
           player.src = audio.src;
-          if (audio.cues) AudioReader.load(audio.cues, currentSheetIndex);
+          // Spoken read-along highlighter is disabled: the spoken-text marks and
+          // their auto-scroll are off. AudioReader.load() is deliberately not
+          // called, so AudioReader never receives cues and sync()/show() no-op.
+          // The orb, player row, and audio element are unaffected.
         } else {
           audioBox.hidden = true;
         }

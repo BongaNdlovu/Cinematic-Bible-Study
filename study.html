@@ -1450,47 +1450,6 @@
     .lap-mute.is-muted { color: rgba(243, 229, 200, 0.55); }
     body.paper-mode .lap-mute.is-muted,
     body.white-mode .lap-mute.is-muted { color: #8a6414; }
-    /* Spoken read-along highlighter — faint but clear on every theme */
-    body {
-      --read-mark: rgba(251, 191, 36, 0.2);
-      --read-mark-strong: rgba(251, 191, 36, 0.4);
-    }
-    body.night-mode {
-      --read-mark: rgba(251, 191, 36, 0.16);
-      --read-mark-strong: rgba(251, 191, 36, 0.34);
-    }
-    body.paper-mode {
-      --read-mark: rgba(217, 119, 6, 0.2);
-      --read-mark-strong: rgba(217, 119, 6, 0.38);
-    }
-    body.white-mode {
-      --read-mark: rgba(202, 138, 4, 0.26);
-      --read-mark-strong: rgba(202, 138, 4, 0.44);
-    }
-    mark.audio-read {
-      color: inherit;
-      background-color: var(--read-mark);
-      box-shadow: 0 0 0 0.14em var(--read-mark);
-      border-radius: 0.28em;
-      padding: 0.04em 0;
-      -webkit-box-decoration-break: clone;
-      box-decoration-break: clone;
-    }
-    @media (prefers-reduced-motion: no-preference) {
-      mark.audio-read {
-        animation: audio-read-in 0.8s ease;
-      }
-    }
-    @keyframes audio-read-in {
-      from {
-        background-color: var(--read-mark-strong);
-        box-shadow: 0 0 0 0.14em var(--read-mark-strong);
-      }
-      to {
-        background-color: var(--read-mark);
-        box-shadow: 0 0 0 0.14em var(--read-mark);
-      }
-    }
     /* Floating audio-reactive orb — lower right, rides above the toast slot */
     .audio-orb {
       position: fixed;
