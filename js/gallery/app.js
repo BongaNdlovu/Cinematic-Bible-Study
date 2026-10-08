@@ -75,6 +75,13 @@ import * as THREE from 'three';
       },
       play(kind) {
         if (!this.unlocked || this.muted) return;
+        // Sampled arena notification, layered over the synthesized tones. Used
+        // for the meaningful arena moments — staging an artifact, the hall
+        // transition, and opening a panel — while hover ticks and generic
+        // button clicks stay synthesized so rapid interaction is not noisy.
+        if (window.UiSound && (kind === 'select' || kind === 'whoosh' || kind === 'panel')) {
+          window.UiSound.play('notify');
+        }
         if (kind === 'tick') this.tone(880, 0.05, 'sine', 0.02);
         else if (kind === 'select') {
           this.tone(220, 0.16, 'sine', 0.035);
@@ -4085,6 +4092,9 @@ import * as THREE from 'three';
       btnMute.addEventListener('click', () => {
         AudioBus.unlock();
         AudioBus.muted = !AudioBus.muted;
+        // The sampled arena notification lives on its own bus; keep the one
+        // mute control authoritative for both.
+        if (window.UiSound) window.UiSound.enabled = !AudioBus.muted;
         btnMute.classList.toggle('active', AudioBus.muted);
         btnMute.textContent = AudioBus.muted ? '🔇' : '♪';
         btnMute.title = AudioBus.muted ? 'Unmute gallery sound' : 'Mute gallery sound';
