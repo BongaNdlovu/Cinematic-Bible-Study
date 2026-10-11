@@ -1,7 +1,7 @@
 {
   "sheetHashes": {
     "0": "940a97899fd1b4ab",
-    "1": "f9c22f82c81b06d6",
+    "1": "82eaa7a070bd7f3d",
     "2": "5c789d52493010af",
     "3": "1d966c003466f810",
     "4": "ffc8beb1804fd21c",
@@ -2088,15 +2088,15 @@
       "id": "S01-LI-04",
       "sheet": 1,
       "field": "content",
-      "text": "Sacrificial idolatry (reconstruction): Ancient Near Eastern royal food was typically dedicated to the patron gods before being served. Daniel 1:8 does not print a liturgy. Xenophon’s Cyropaedia 7.1.1 records a Persian custom of offering a first portion to the gods — an analogy, not a Babylonian court document. To eat such food would mean table-fellowship with idols.",
-      "hash": "d95dd0c28be72a09"
+      "text": "Sacrificial idolatry (reconstruction): Ancient Near Eastern royal food was typically dedicated to the patron gods before being served. Daniel 1:8 does not print a liturgy. Xenophon’s Cyropaedia 7.1.1 records a Persian custom of offering a first portion to the gods — an analogy, not a Babylonian court document. To eat such food could mean table-fellowship with idols.",
+      "hash": "98d7c9d5a4050a9a"
     },
     {
       "id": "S01-LI-05",
       "sheet": 1,
       "field": "content",
-      "text": "Levitical defilement: The royal menu included meats prohibited by the Torah (Leviticus 11; Deuteronomy 14) and meat not drained of blood (Leviticus 17:10–14). Daniel 1:8 names defilement at that table.",
-      "hash": "645c68fd1b09ebcb"
+      "text": "Levitical defilement (reconstruction): On this reconstruction the royal table served meats outside the Torah’s permitted list and meat not drained of blood (Leviticus 11; Deuteronomy 14; 17:10–14). Daniel 1 does not itemise the table. What the text does state is decisive: Daniel asked for zeroim — seed-food — which sets every meat question aside at once.",
+      "hash": "4f19c6a88f7e9c3a"
     },
     {
       "id": "S01-DIA-03",
@@ -2396,8 +2396,8 @@
       "id": "S01-Q0-OPT2",
       "sheet": 1,
       "field": "quizzes",
-      "text": "Daniel mastered Chaldean statecraft, language, and court administration (civic skill), but drew an absolute line at food tied to pagan worship and unclean flesh under Leviticus 11.",
-      "hash": "a5c62c4fdf6a7cf5"
+      "text": "Daniel mastered Chaldean statecraft, language, and court administration (civic skill), but drew an absolute line at food tied to pagan worship. The verse states the defilement; the unclean-flesh and blood reasons are historical reconstruction.",
+      "hash": "f7dccc942eaedeaa"
     },
     {
       "id": "S01-Q0-OPT3",
@@ -2410,8 +2410,8 @@
       "id": "S01-Q0-EXP",
       "sheet": 1,
       "field": "quizzes",
-      "text": "Daniel 1:8 establishes that secular skill and civil excellence can be rendered to a foreign state, but worship and biblical dietary laws remain inviolable.",
-      "hash": "e92bb6608988e40d"
+      "text": "Daniel 1:8 establishes that secular skill and civil excellence can be rendered to a foreign state, while worship and the covenant line at the table remain inviolable. The verse states the defilement; the dietary reasons are reconstruction.",
+      "hash": "cf7db8b35739abc4"
     },
     {
       "id": "S01-Q0-DIA0",

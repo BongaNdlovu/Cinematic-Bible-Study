@@ -432,7 +432,7 @@ Daniel 9:24–27 ──▶  "Seventy weeks" (70 × 7 = 490 prophetic days)
           { kind: "scripture", title: "Shinar and sovereign judgment", text: "Exile to Babel's plain is not Marduk's victory — the Lord gave Jehoiakim into Nebuchadnezzar's hand.", tag: "Daniel 1:1–2; Jer 25:9–12" },
           { kind: "history", title: "Three sieges, three dates", text: "The dates are 605 (Daniel's levy), 597 (Jehoiachin, BM 21946), and 586 (the temple burned). Isaiah 39:7 is fulfilled.", tag: "2 Kings 24–25" },
           { kind: "scripture", title: "The conflict of names", text: "Their Yahweh-confessing names become names honoring Babylonian gods. The Aku reading of Shadrach and Meshach is the traditional grid, not settled Akkadian. A name on the civic roll is not an act of worship.", tag: "Daniel 1:7" },
-          { kind: "anchor", title: "The line at the royal table", text: "Daniel purposed in his heart not to defile himself. The king's table meant idol fellowship and, under Leviticus 11, food defiled by the pagan table. Daniel 1:8 names defilement, not any effect on the mind.", tag: "Daniel 1:8" },
+          { kind: "anchor", title: "The line at the royal table", text: "Daniel purposed in his heart not to defile himself. Daniel 1:8 names the fact of defilement but does not itemise it; the pagan-table and Levitical reasons are historical reconstruction, not quotation. It names no effect on the mind.", tag: "Daniel 1:8" },
           { kind: "history", title: "Zeroim and the ten-day test", text: "Seed-grown foods echo Genesis 1:29. God gave wisdom ten times better, and the vegetables did not produce it.", tag: "Daniel 1:12–20" },
           { kind: "anchor", title: "Typology of the faithful Son", text: "Daniel in exile foreshadows Christ in the wilderness. The test is bread, kingdoms, and covenant fidelity.", tag: "Matt 4:4; Heb 4:15" },
           { kind: "guard", title: "Civic competence, covenant boundaries", text: "Excel in Babylon's court; draw the line when conscience, worship, or God's Word is demanded.", tag: "Daniel 1:3–8" }
@@ -545,8 +545,8 @@ Azariah     ("Yahweh has Helped")   ──▶  Abednego     ("Servant of Nebo")<
 <p>This was not a matter of culinary preference or a modern wellness fad. Eating from the king's royal menu presented a covenant crisis on two fronts Daniel 1:8 actually names — meat and wine that would <em>defile</em>:</p>
 
 <ol>
-  <li><strong>Sacrificial idolatry (reconstruction):</strong> Ancient Near Eastern royal food was typically dedicated to the patron gods before being served. Daniel 1:8 does not print a liturgy. Xenophon’s <em>Cyropaedia</em> 7.1.1 records a Persian custom of offering a first portion to the gods — an analogy, not a Babylonian court document. To eat such food would mean table-fellowship with idols.</li>
-  <li><strong>Levitical defilement:</strong> The royal menu included meats prohibited by the Torah (Leviticus 11; Deuteronomy 14) and meat not drained of blood (Leviticus 17:10–14). Daniel 1:8 names defilement at that table.</li>
+  <li><strong>Sacrificial idolatry (reconstruction):</strong> Ancient Near Eastern royal food was typically dedicated to the patron gods before being served. Daniel 1:8 does not print a liturgy. Xenophon’s <em>Cyropaedia</em> 7.1.1 records a Persian custom of offering a first portion to the gods — an analogy, not a Babylonian court document. To eat such food could mean table-fellowship with idols.</li>
+  <li><strong>Levitical defilement (reconstruction):</strong> On this reconstruction the royal table served meats outside the Torah’s permitted list and meat not drained of blood (Leviticus 11; Deuteronomy 14; 17:10–14). Daniel 1 does not itemise the table. What the text does state is decisive: Daniel asked for <em>zeroim</em> — seed-food — which sets every meat question aside at once.</li>
 </ol>
 
 <pre class="prophecy-diagram">THE DIETARY CRISIS
@@ -656,10 +656,10 @@ DANIEL IN BABYLON                         JESUS IN THE WILDERNESS
             "options": [
               "Believers must completely withdraw from secular vocations and corporate institutions, because engaging foreign literature and civil administration violates covenant purity.",
               "Believers may freely participate in idolatrous practices and compromise biblical ethics outwardly, provided they maintain private devotional piety in their personal hearts.",
-              "Daniel mastered Chaldean statecraft, language, and court administration (civic skill), but drew an absolute line at food tied to pagan worship and unclean flesh under Leviticus 11.",
+              "Daniel mastered Chaldean statecraft, language, and court administration (civic skill), but drew an absolute line at food tied to pagan worship. The verse states the defilement; the unclean-flesh and blood reasons are historical reconstruction.",
               "Daniel organized an immediate subversive resistance within the Babylonian civil service, refusing all vocational duties until Hebrew worship was formally established."
             ],
-            "explanation": "Daniel 1:8 establishes that secular skill and civil excellence can be rendered to a foreign state, but worship and biblical dietary laws remain inviolable.",
+            "explanation": "Daniel 1:8 establishes that secular skill and civil excellence can be rendered to a foreign state, while worship and the covenant line at the table remain inviolable. The verse states the defilement; the dietary reasons are reconstruction.",
             "diagnostics": [
               "Misconception: Daniel willingly mastered Chaldean learning and served as a high civil counselor, proving professional education and public service are not sinful in themselves.",
               "Misconception: Scripture rejects moral dualism; Daniel 1:8 shows Daniel purposed not to defile himself physically or spiritually through compromising actions.",

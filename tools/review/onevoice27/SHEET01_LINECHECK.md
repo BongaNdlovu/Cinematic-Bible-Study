@@ -2,7 +2,7 @@
 
 **Audit Date:** 2026-09-20  
 **File Audited:** `js/study/sheets-data.js` (Sitting id: 1) with `sheet-verify.js`, `workbench.js`, `sheet-glossary.js`  
-**Audited Content Hash:** `f9c22f82c81b06d6`  
+**Audited Content Hash:** `82eaa7a070bd7f3d`  
 **Method:** Exhaustive claim-unit audit of finished prose across content, christology, quizzes, studyGuide, guide, verify cards, workbench, and linked glossary entries.  
 **Counts:** ACCURATE: 179 | SOFTEN: 2 | FIX: 0 | N/A: 33 | Total: 214  
 
@@ -63,7 +63,7 @@
 | S01-BQ-02 | TEXT | ACCURATE | Direct KJV Scripture quotation verified against bible/kjv.json |
 | S01-P-18 | INTERPRETATION | ACCURATE | Historicist argument grounded in Scripture interpreting Scripture (Dan 2; 7; 8; 9) |
 | S01-LI-04 | INTERPRETATION | ACCURATE | Biblical case and historical argument |
-| S01-LI-05 | INTERPRETATION | ACCURATE | Biblical case and historical argument |
+| S01-LI-05 | INTERPRETATION | ACCURATE | Four-level interpretive verification criteria |
 | S01-DIA-03 | INTERPRETATION | ACCURATE | Prophetic diagram illustrating imperial succession and chronology |
 | S01-P-19 | INTERPRETATION | ACCURATE | Historicist argument grounded in Scripture interpreting Scripture (Dan 2; 7; 8; 9) |
 | S01-P-20 | PASTORAL | ACCURATE | Personal application tethered to exilic covenant faithfulness |
