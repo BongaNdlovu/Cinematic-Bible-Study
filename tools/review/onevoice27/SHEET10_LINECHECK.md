@@ -2,9 +2,9 @@
 
 **Audit Date:** 2026-09-20  
 **File Audited:** `js/study/sheets-data.js` (Sitting id: 10) with `sheet-verify.js`, `workbench.js`, `sheet-glossary.js`  
-**Audited Content Hash:** `b42c9b19c12d6626`  
+**Audited Content Hash:** `bdb166e40dabd991`  
 **Method:** Exhaustive claim-unit audit of finished prose across content, christology, quizzes, studyGuide, guide, verify cards, workbench, and linked glossary entries.  
-**Counts:** ACCURATE: 209 | SOFTEN: 0 | FIX: 0 | N/A: 37 | Total: 246  
+**Counts:** ACCURATE: 212 | SOFTEN: 0 | FIX: 0 | N/A: 37 | Total: 249  
 
 ## 1. Summary of Required Sections & Governing Standards
 
@@ -222,6 +222,9 @@
 | S10-VRF-8-LESSON | INTERPRETATION | ACCURATE | Historicist synthesis from Scripture interpreting Scripture |
 | S10-VRF-8-QUOTE | TEXT | ACCURATE | Exact KJV Scripture quotation verified in bible/kjv.json |
 | S10-VRF-8-CHECK | PASTORAL | ACCURATE | Empirical reader checkpoint and source verification instruction |
+| S10-VRF-9-LESSON | HISTORY | ACCURATE | Historical documentation and exilic archaeological evidence |
+| S10-VRF-9-QUOTE | HISTORY | ACCURATE | Dated historical primary source quote (verified in translation) |
+| S10-VRF-9-CHECK | PASTORAL | ACCURATE | Empirical reader checkpoint and source verification instruction |
 | S10-GLS-alexander-SMP | INTERPRETATION | ACCURATE | Historicist vocabulary and prophetic hermeneutic definition |
 | S10-GLS-alexander-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
 | S10-GLS-artaxerxes-SMP | INTERPRETATION | ACCURATE | Historicist vocabulary and prophetic hermeneutic definition |

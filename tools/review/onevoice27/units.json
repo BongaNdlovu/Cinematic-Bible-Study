@@ -10,7 +10,7 @@
     "7": "0250afc517641eb1",
     "8": "0a454f8f1524757b",
     "9": "f8cfd3d99630a17a",
-    "10": "b42c9b19c12d6626"
+    "10": "bdb166e40dabd991"
   },
   "sheetUnitCounts": {
     "0": 252,
@@ -23,7 +23,7 @@
     "7": 256,
     "8": 263,
     "9": 251,
-    "10": 246
+    "10": 249
   },
   "units": [
     {
@@ -17210,6 +17210,27 @@
       "field": "verify",
       "text": "Quote 12:13. The metals, beasts, horns, and numbers walk toward this promise.",
       "hash": "7c6bd6e95bccbccc"
+    },
+    {
+      "id": "S10-VRF-9-LESSON",
+      "sheet": 10,
+      "field": "verify",
+      "text": "Outside the Bible, the book of Daniel was already read as naming Greece as Persia’s successor before the fact.",
+      "hash": "d81d21b31eabcd30"
+    },
+    {
+      "id": "S10-VRF-9-QUOTE",
+      "sheet": 10,
+      "field": "verify",
+      "text": "Flavius Josephus, Antiquities of the Jews XI.8.5, William Whiston translation (1737).: And when the Book of Daniel was showed him wherein Daniel declared that one of the Greeks should destroy the empire of the Persians, he supposed that himself was the person intended.",
+      "hash": "62ea2bcfa15c1849"
+    },
+    {
+      "id": "S10-VRF-9-CHECK",
+      "sheet": 10,
+      "field": "verify",
+      "text": "Josephus records Alexander the Great being shown Daniel while in Jerusalem, and reading the Greek conquest of Persia there. This is a first-century historian describing the book as a named, dated chain — not the course’s own claim. It is a historical witness, not Scripture: weigh it as Josephus, and note that the episode itself is reported and debated, not narrated in the Bible.",
+      "hash": "c6ee963ebbde8a3d"
     },
     {
       "id": "S10-GLS-alexander-SMP",

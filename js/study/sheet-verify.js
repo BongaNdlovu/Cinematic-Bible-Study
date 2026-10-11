@@ -166,7 +166,7 @@
           "Babylonian Chronicle BM 21946 (ABC 5), reverse; Grayson, Assyrian and Babylonian Chronicles. British Museum 21946",
           "He encamped against the city of Judah and on the second day of the month Adar he captured the city and seized its king. He appointed a king of his own choice, received its heavy tribute and sent it to Babylon.",
           "This line is Nebuchadnezzar’s seventh year (597 B.C.), the Jehoiachin deportation of 2 Kings 24. It confirms Babylon took Jerusalem; Daniel 1:1–2 dates the first shock to 605. Do not collapse the two years.",
-          "https://www.britishmuseum.org/collection/object/W_1896-0409-51"
+          "https://www.livius.org/sources/content/mesopotamian-chronicles-content/abc-5-jerusalem-chronicle/"
         ),
         item(
           "commentary",
@@ -346,7 +346,7 @@
           "Cyrus Cylinder, lines 17 and 20. British Museum 90920; standard English after Finkel / Pritchard",
           "Without battle and fighting he let him enter his city Babylon, sparing Babylon any calamity. … I am Cyrus, king of the world, great king, mighty king, king of Babylon.",
           "Royal propaganda still has to name the fact it boasts of: the city was not stormed. Open the BM object page.",
-          "https://www.britishmuseum.org/collection/object/W_1880-0617-1941"
+          "https://www.livius.org/sources/content/cyrus-cylinder/cyrus-cylinder-translation/"
         ),
         item(
           "history",
@@ -529,7 +529,7 @@
           "William Miller, Wm. Miller’s Apology and Defence (Boston: J. V. Himes, 1845), recounting his 1818 conclusion",
           "I was thus brought, in 1818, at the close of my two years study of the Scriptures, to the solemn conclusion, that in about twenty-five years from that time all the affairs of our present state would be wound up.",
           "1818 + 25 years is “about 1843,” the range on his 1842 title page, Evidence from Scripture and History of the Second Coming of Christ, About the Year 1843. This sitting keeps his year-day arithmetic and refuses his event (the earth as sanctuary).",
-          "https://archive.org/details/wmmillersapology00mill"
+          "https://archive.org/details/WilliamMillerMr.MillersApologyAndDefence1845"
         ),
         item(
           "history",
@@ -537,7 +537,7 @@
           "Joshua V. Himes, Signs of the Times (Boston), first number, 20 March 1840; Samuel S. Snow, The True Midnight Cry (22 August 1844); Matthew 25:6, King James Version",
           "And at midnight there was a cry made, Behold, the bridegroom cometh; go ye out to meet him.",
           "Himes’s paper is in libraries. Snow’s Exeter cry applied Leviticus 16’s tenth day to 22 October 1844. Contemporary newspapers then record that Christ did not appear. A mistaken event is not a vanished imprint.",
-          "https://archive.org/details/SignsOfTheTimes1840"
+          "https://archive.org/details/1868_20250419/1840"
         )
       ]
     },
@@ -667,6 +667,13 @@
           "Daniel 12:13, King James Version",
           "But go thou thy way till the end be: for thou shalt rest, and stand in thy lot at the end of the days.",
           "Quote 12:13. The metals, beasts, horns, and numbers walk toward this promise."
+        ),
+        item(
+          "history",
+          "Outside the Bible, the book of Daniel was already read as naming Greece as Persia’s successor before the fact.",
+          "Flavius Josephus, Antiquities of the Jews XI.8.5, William Whiston translation (1737).",
+          "And when the Book of Daniel was showed him wherein Daniel declared that one of the Greeks should destroy the empire of the Persians, he supposed that himself was the person intended.",
+          "Josephus records Alexander the Great being shown Daniel while in Jerusalem, and reading the Greek conquest of Persia there. This is a first-century historian describing the book as a named, dated chain — not the course’s own claim. It is a historical witness, not Scripture: weigh it as Josephus, and note that the episode itself is reported and debated, not narrated in the Bible."
         )
       ]
     }
