@@ -2,9 +2,9 @@
 
 **Audit Date:** 2026-09-20  
 **File Audited:** `js/study/sheets-data.js` (Sitting id: 9) with `sheet-verify.js`, `workbench.js`, `sheet-glossary.js`  
-**Audited Content Hash:** `f8cfd3d99630a17a`  
+**Audited Content Hash:** `bd18052e1c991bb8`  
 **Method:** Exhaustive claim-unit audit of finished prose across content, christology, quizzes, studyGuide, guide, verify cards, workbench, and linked glossary entries.  
-**Counts:** ACCURATE: 213 | SOFTEN: 0 | FIX: 0 | N/A: 38 | Total: 251  
+**Counts:** ACCURATE: 256 | SOFTEN: 0 | FIX: 0 | N/A: 38 | Total: 294  
 
 ## 1. Summary of Required Sections & Governing Standards
 
@@ -187,6 +187,49 @@
 | S09-SG-ASK-1 | PASTORAL | ACCURATE | Pastoral application tethered to text and exilic faithfulness |
 | S09-SG-ASK-2 | PASTORAL | ACCURATE | Pastoral application tethered to text and exilic faithfulness |
 | S09-SG-ASK-3 | PASTORAL | ACCURATE | Pastoral application tethered to text and exilic faithfulness |
+| S09-DGM-s9-1-TITLE | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S09-DGM-s9-1-1-ROLE | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S09-DGM-s9-1-1-TITLE | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S09-DGM-s9-1-1-P1 | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S09-DGM-s9-1-1-P2 | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S09-DGM-s9-1-1-P3 | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S09-DGM-s9-1-1-P4 | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S09-DGM-s9-1-2-ROLE | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S09-DGM-s9-1-2-TITLE | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S09-DGM-s9-1-2-P1 | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S09-DGM-s9-1-2-P2 | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S09-DGM-s9-1-2-P3 | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S09-DGM-s9-1-2-P4 | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S09-DGM-s9-2-TITLE | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S09-DGM-s9-2-1-ROLE | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S09-DGM-s9-2-1-TITLE | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S09-DGM-s9-2-2-ROLE | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S09-DGM-s9-2-2-TITLE | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S09-DGM-s9-3-TITLE | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S09-DGM-s9-4-TITLE | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S09-DGM-s9-4-1-ROLE | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S09-DGM-s9-4-1-TITLE | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S09-DGM-s9-4-1-TEXT | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S09-DGM-s9-4-2-ROLE | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S09-DGM-s9-4-2-TITLE | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S09-DGM-s9-4-2-TEXT | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S09-DGM-s9-4-3-ROLE | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S09-DGM-s9-4-3-TITLE | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S09-DGM-s9-4-3-TEXT | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S09-DGM-s9-5-TITLE | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S09-DGM-s9-5-1-ROLE | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S09-DGM-s9-5-1-TITLE | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S09-DGM-s9-5-1-TEXT | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S09-DGM-s9-5-2-ROLE | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S09-DGM-s9-5-2-TITLE | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S09-DGM-s9-5-2-TEXT | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S09-DGM-s9-5-3-ROLE | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S09-DGM-s9-5-3-TITLE | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S09-DGM-s9-5-3-TEXT | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S09-DGM-s9-6-TITLE | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S09-DGM-s9-6-1-ROLE | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S09-DGM-s9-6-1-TITLE | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S09-DGM-s9-6-2-TITLE | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
 | S09-GD-INTRO-EXP | INTERPRETATION | ACCURATE | Sitting learning goals and historical outline |
 | S09-GD-INTRO-DO-1 | PASTORAL | ACCURATE | Step-by-step reading and verification guidance |
 | S09-GD-INTRO-DO-2 | PASTORAL | ACCURATE | Step-by-step reading and verification guidance |

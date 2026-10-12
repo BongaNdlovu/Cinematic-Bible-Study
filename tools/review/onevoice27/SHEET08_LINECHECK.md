@@ -2,9 +2,9 @@
 
 **Audit Date:** 2026-09-20  
 **File Audited:** `js/study/sheets-data.js` (Sitting id: 8) with `sheet-verify.js`, `workbench.js`, `sheet-glossary.js`  
-**Audited Content Hash:** `0a454f8f1524757b`  
+**Audited Content Hash:** `eec64599ac40fbef`  
 **Method:** Exhaustive claim-unit audit of finished prose across content, christology, quizzes, studyGuide, guide, verify cards, workbench, and linked glossary entries.  
-**Counts:** ACCURATE: 221 | SOFTEN: 1 | FIX: 0 | N/A: 41 | Total: 263  
+**Counts:** ACCURATE: 236 | SOFTEN: 1 | FIX: 0 | N/A: 41 | Total: 278  
 
 ## 1. Summary of Required Sections & Governing Standards
 
@@ -185,6 +185,21 @@
 | S08-SG-ASK-1 | PASTORAL | ACCURATE | Pastoral application tethered to text and exilic faithfulness |
 | S08-SG-ASK-2 | PASTORAL | ACCURATE | Pastoral application tethered to text and exilic faithfulness |
 | S08-SG-ASK-3 | PASTORAL | ACCURATE | Pastoral application tethered to text and exilic faithfulness |
+| S08-DGM-s8-1-TITLE | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S08-DGM-s8-1-1-ROLE | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S08-DGM-s8-1-1-TITLE | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S08-DGM-s8-1-1-P1 | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S08-DGM-s8-1-1-P2 | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S08-DGM-s8-1-1-P3 | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S08-DGM-s8-1-1-P4 | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S08-DGM-s8-1-2-ROLE | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S08-DGM-s8-1-2-TITLE | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S08-DGM-s8-1-2-P1 | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S08-DGM-s8-1-2-P2 | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S08-DGM-s8-1-2-P3 | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S08-DGM-s8-1-2-P4 | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S08-DGM-s8-2-TITLE | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S08-DGM-s8-3-TITLE | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
 | S08-GD-INTRO-EXP | INTERPRETATION | ACCURATE | Sitting learning goals and historical outline |
 | S08-GD-INTRO-DO-1 | PASTORAL | ACCURATE | Step-by-step reading and verification guidance |
 | S08-GD-INTRO-DO-2 | PASTORAL | ACCURATE | Step-by-step reading and verification guidance |

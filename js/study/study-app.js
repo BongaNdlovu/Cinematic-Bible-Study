@@ -2070,9 +2070,26 @@
        verse list is read from the digits after each colon rather than by
        splitting on commas, which would mistake "24" for a separate reference. */
     function normalBook(name) {
-      return String(name || '').trim().toLowerCase()
-        .replace(/^psalms?$/, 'psalm')
-        .replace(/^canticles$/, 'song of solomon');
+      const s = String(name || '').trim().toLowerCase().replace(/\./g, '');
+      // Diagrams and prose abbreviate book names ("Dan 1:12", "Rev 13:5")
+      // while the reference list spells them out, so both sides normalise
+      // through this table before they are compared.
+      const alias = {
+        'dan': 'daniel', 'jer': 'jeremiah', 'isa': 'isaiah', 'ezek': 'ezekiel',
+        'ex': 'exodus', 'exod': 'exodus', 'lev': 'leviticus', 'num': 'numbers',
+        'deut': 'deuteronomy', 'ps': 'psalm', 'psa': 'psalm', 'prov': 'proverbs',
+        'matt': 'matthew', 'mt': 'matthew', 'mk': 'mark', 'lk': 'luke',
+        'jn': 'john', 'rom': 'romans', 'rev': 'revelation', 'gen': 'genesis',
+        'hab': 'habakkuk', 'zeph': 'zephaniah', 'ezra': 'ezra', 'neh': 'nehemiah',
+        'est': 'esther', 'kgs': 'kings', 'chr': 'chronicles', 'sam': 'samuel',
+        'cor': 'corinthians', 'thess': 'thessalonians', 'tim': 'timothy'
+      };
+      const collapsed = s.replace(/^psalms?$/, 'psalm').replace(/\s+/g, ' ');
+      if (alias[collapsed]) return alias[collapsed];
+      // "1 kgs" / "2 chr" style: number then abbreviation.
+      const parts = collapsed.match(/^([1-3])\s+(.+)$/);
+      if (parts && alias[parts[2]]) return parts[1] + ' ' + alias[parts[2]];
+      return collapsed;
     }
     function parseSourceRefs(source) {
       const body = String(source || '').split(/,\s*King James Version/i)[0];
@@ -2209,27 +2226,60 @@
        site already ships. Entrance plays when the figure scrolls into view and
        can be replayed; it is suppressed under prefers-reduced-motion. */
     /* ---- Diagrams --------------------------------------------------------
-       One figure shell (caption, collapse, scroll-triggered entrance, replay)
-       wraps a body built per variant. The prologue's chain was the first
-       variant; the ASCII `prophecy-diagram` blocks across the sittings are
-       represented by the others:
+       Each sitting's ASCII `prophecy-diagram` artwork is authored as a spec in
+       `sheet.diagrams`, keyed to a `figure[data-diagram]` marker left in the
+       lesson where the artwork used to sit. renderSheetDiagrams() fills those
+       markers in place, so a diagram stays wherever the lesson puts it.
 
-         chain       linear sequence, middle node medalled (the original)
+       Variants:
+         chain       linear sequence, middle node medalled
          steps       linear sequence without a centre
-         comparison  two parallel columns of short points
+         comparison  N parallel columns of points
          table       header row plus data rows, stacking on narrow screens
-         flow        vertical sequence of statements, used for box-art flows
+         timeline    tracks of unequal length, drawn to proportional span
+         flow        vertical sequence of statements
 
-       Every variant is authored from data on the sitting, and each `cite`
-       resolves to a row in that sitting's reference list. */
+       The original artwork stays inside each figure as hidden text so it
+       survives for search and copy. A verse chip resolves to a row in the
+       sitting's reference list; a printed reference the list does not carry is
+       shown as a flat label rather than a dead control. */
 
-    function diagramCite(label) {
+    /* A diagram's printed reference renders as a chip that opens the matching
+       reference row. References the sitting's list does not carry — chapter-only
+       labels like "Daniel 4", or a book this sitting never documents — are
+       printed as plain text instead, so nothing is lost and nothing is a dead
+       control. `canResolve` is supplied by the renderer for the current sitting. */
+    function diagramCite(label, canResolve) {
       const text = String(label || '');
       if (!text) return '';
+      if (canResolve && !canResolve(text)) {
+        return '<span class="chain-cite is-flat">' + escapeStudy(text) + '</span>';
+      }
       return '<button type="button" class="chain-cite" data-cite-src="' + escapeStudy(text) + '">' + escapeStudy(text) + '</button>';
     }
 
-    function nodeHtml(step, isCentre, t) {
+    // Does this printed reference correspond to a reference row for the sitting?
+    function makeCiteResolver(refs) {
+      const bySlot = new Map();
+      const spans = [];
+      refs.forEach((r) => {
+        r.slots.forEach((s) => { if (!bySlot.has(s)) bySlot.set(s, r); });
+        (r.ranges || []).forEach((rg) => spans.push({ book: rg.book, chapter: rg.chapter, lo: rg.lo, hi: rg.hi, ref: r }));
+      });
+      return (label) => {
+        const text = String(label || '');
+        const colon = text.indexOf(':');
+        if (colon < 0) return false;
+        const before = text.slice(0, colon);
+        const book = normalBook(before.replace(/\s*\d+\s*$/, '').trim());
+        const chapter = (before.match(/(\d+)\s*$/) || [])[1];
+        if (!book || !chapter) return false;
+        return spans.some((sp) => sp.book === book && String(sp.chapter) === String(chapter)) ||
+          [...bySlot.keys()].some((k) => k.startsWith(book + ' ' + chapter + ':'));
+      };
+    }
+
+    function nodeHtml(step, isCentre, t, canResolve) {
       return '<article class="chain-node' + (isCentre ? ' is-centre' : '') + '" style="--t:' + t.toFixed(2) + 's">' +
         (isCentre
           ? '<div class="chain-medal" aria-hidden="true">' +
@@ -2241,12 +2291,12 @@
             '</div>'
           : (step.role ? '<p class="chain-role">' + escapeStudy(step.role) + '</p>' : '')) +
         (step.title ? '<h4 class="chain-title">' + escapeStudy(step.title) + '</h4>' : '') +
-        diagramCite(step.cite) +
+        diagramCite(step.cite, canResolve) +
         (step.text ? '<p class="chain-text">' + escapeStudy(step.text) + '</p>' : '') +
       '</article>';
     }
 
-    function bodyChain(spec, steps, withCentre) {
+    function bodyChain(spec, steps, withCentre, canResolve) {
       const mid = withCentre ? steps.findIndex((s) => s.centre) : -1;
       let t = 0.1;
       const parts = [];
@@ -2257,28 +2307,43 @@
             '<span class="chain-link-line"></span><span class="chain-link-head"></span></div>');
           t += 0.5;
         }
-        parts.push(nodeHtml(step, i === mid, t));
+        parts.push(nodeHtml(step, i === mid, t, canResolve));
       });
       return '<div class="chain-flow">' + parts.join('') + '</div>';
     }
 
-    function bodyComparison(spec, steps) {
+    function bodyComparison(spec, steps, canResolve) {
       const cols = steps.map((side, i) => {
         const t = (0.1 + i * 0.25).toFixed(2);
         return '<div class="cmp-col" style="--t:' + t + 's">' +
           '<div class="cmp-head">' +
             (side.role ? '<p class="chain-role">' + escapeStudy(side.role) + '</p>' : '') +
             (side.title ? '<h4 class="chain-title">' + escapeStudy(side.title) + '</h4>' : '') +
-            diagramCite(side.cite) +
+            diagramCite(side.cite, canResolve) +
           '</div>' +
           '<ul class="cmp-list">' +
             (side.points || []).map((p) => '<li>' + escapeStudy(p) + '</li>').join('') +
           '</ul>' +
         '</div>';
       });
+      // Some comparisons branch from one labelled node rather than being a flat
+      // pair of columns. `centre` renders that node above the columns, keeping
+      // its reference a resolvable chip instead of demoting it to a note.
+      const c = spec.centre;
+      const centreHtml = c
+        ? '<div class="cmp-centre" style="--t:0.1s">' +
+            (c.role ? '<p class="chain-role">' + escapeStudy(c.role) + '</p>' : '') +
+            (c.title ? '<h4 class="chain-title">' + escapeStudy(c.title) + '</h4>' : '') +
+            diagramCite(c.cite, canResolve) +
+            (c.text ? '<p class="chain-text">' + escapeStudy(c.text) + '</p>' : '') +
+          '</div>' +
+          '<div class="cmp-stem" aria-hidden="true"></div>'
+        : '';
       // Column count follows the data: some comparisons have two sides, the
       // schools comparison has three.
-      return '<div class="cmp-grid" style="--cmp-cols:' + Math.max(2, cols.length) + '">' + cols.join('') + '</div>';
+      return '<div class="cmp' + (c ? ' has-centre' : '') + '">' + centreHtml +
+        '<div class="cmp-grid" style="--cmp-cols:' + Math.max(2, cols.length) + '">' + cols.join('') + '</div>' +
+      '</div>';
     }
 
     function bodyTable(spec, rows) {
@@ -2296,13 +2361,13 @@
       '</table></div>';
     }
 
-    function bodyFlow(spec, steps) {
+    function bodyFlow(spec, steps, canResolve) {
       let t = 0.1;
       return '<div class="flow-stack">' + steps.map((step) => {
         const html = '<div class="flow-step" style="--t:' + t.toFixed(2) + 's">' +
           (step.role ? '<p class="chain-role">' + escapeStudy(step.role) + '</p>' : '') +
           (step.title ? '<h4 class="chain-title">' + escapeStudy(step.title) + '</h4>' : '') +
-          diagramCite(step.cite) +
+          diagramCite(step.cite, canResolve) +
           (step.text ? '<p class="chain-text">' + escapeStudy(step.text) + '</p>' : '') +
           ((step.points || []).length
             ? '<ul class="flow-points">' + step.points.map((p) => '<li>' + escapeStudy(p) + '</li>').join('') + '</ul>'
@@ -2311,6 +2376,47 @@
         t += 0.35;
         return html;
       }).join('') + '</div>';
+    }
+
+    /* Timeline: tracks of unequal length. Each entry names the ground it
+       covers and how far along the axis that runs, as a percentage pair. The
+       point is the contrast between a chain that runs to the end of the age and
+       one that stops in antiquity, which a row of equal cards cannot show. */
+    function bodyTimeline(spec, steps, canResolve) {
+      const axis = Array.isArray(spec.axis) ? spec.axis : [];
+      let t = 0.1;
+      const tracks = steps.map((step) => {
+        const from = Math.max(0, Math.min(100, Number(step.from) || 0));
+        const to = Math.max(0, Math.min(100, Number(step.to) || 0));
+        const lo = Math.min(from, to);
+        const hi = Math.max(from, to);
+        const span = Math.max(1, hi - lo);
+        const segs = (step.segments || []).map((sg) => {
+          const sFrom = Number(sg.from) || 0;
+          const sTo = Number(sg.to) || 0;
+          const w = Math.max(0.5, Math.abs(sTo - sFrom));
+          return '<span class="tl-seg" style="left:' + Math.min(sFrom, sTo) + '%;width:' + w + '%">' +
+            escapeStudy(sg.label || '') + '</span>';
+        }).join('');
+        const html = '<div class="tl-track" style="--t:' + t.toFixed(2) + 's">' +
+          '<div class="tl-label">' +
+            (step.role ? '<p class="chain-role">' + escapeStudy(step.role) + '</p>' : '') +
+            (step.title ? '<h4 class="chain-title">' + escapeStudy(step.title) + '</h4>' : '') +
+            diagramCite(step.cite, canResolve) +
+          '</div>' +
+          '<div class="tl-rail">' +
+            '<span class="tl-bar" style="left:' + lo + '%;width:' + span + '%"></span>' +
+            segs +
+          '</div>' +
+        '</div>';
+        t += 0.25;
+        return html;
+      }).join('');
+      return '<div class="tl">' + tracks +
+        (axis.length
+          ? '<div class="tl-axis" aria-hidden="true">' + axis.map((a) => '<span>' + escapeStudy(a) + '</span>').join('') + '</div>'
+          : '') +
+      '</div>';
     }
 
     function wireFigure(state) {
@@ -2367,6 +2473,7 @@
       if (!article) return;
       const sheetIndex = Number(article.getAttribute('data-sheet-index'));
       const refs = referenceIndex(isNaN(sheetIndex) ? 0 : sheetIndex);
+      const canResolve = makeCiteResolver(refs);
       article.querySelectorAll('figure[data-diagram]').forEach((figure) => {
         const id = figure.getAttribute('data-diagram');
         const spec = specs[id];
@@ -2378,11 +2485,12 @@
         if (needs.length < 2) return;
 
         let body = '';
-        if (kind === 'comparison') body = bodyComparison(spec, steps);
+        if (kind === 'comparison') body = bodyComparison(spec, steps, canResolve);
         else if (kind === 'table') body = bodyTable(spec, rows);
-        else if (kind === 'flow') body = bodyFlow(spec, steps);
-        else if (kind === 'steps') body = bodyChain(spec, steps, false);
-        else body = bodyChain(spec, steps, true);
+        else if (kind === 'flow') body = bodyFlow(spec, steps, canResolve);
+        else if (kind === 'timeline') body = bodyTimeline(spec, steps, canResolve);
+        else if (kind === 'steps') body = bodyChain(spec, steps, false, canResolve);
+        else body = bodyChain(spec, steps, true, canResolve);
 
         // The plain-text artwork stays in the DOM, hidden, so it survives for
         // search and copy without duplicating what the cards announce.

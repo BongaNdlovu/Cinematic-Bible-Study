@@ -2,9 +2,9 @@
 
 **Audit Date:** 2026-09-20  
 **File Audited:** `js/study/sheets-data.js` (Sitting id: 5) with `sheet-verify.js`, `workbench.js`, `sheet-glossary.js`  
-**Audited Content Hash:** `a9908294709b80fa`  
+**Audited Content Hash:** `aa6738285e67a80e`  
 **Method:** Exhaustive claim-unit audit of finished prose across content, christology, quizzes, studyGuide, guide, verify cards, workbench, and linked glossary entries.  
-**Counts:** ACCURATE: 173 | SOFTEN: 0 | FIX: 0 | N/A: 39 | Total: 212  
+**Counts:** ACCURATE: 223 | SOFTEN: 0 | FIX: 0 | N/A: 39 | Total: 262  
 
 ## 1. Summary of Required Sections & Governing Standards
 
@@ -174,6 +174,56 @@
 | S05-SG-ASK-1 | PASTORAL | ACCURATE | Pastoral application tethered to text and exilic faithfulness |
 | S05-SG-ASK-2 | PASTORAL | ACCURATE | Pastoral application tethered to text and exilic faithfulness |
 | S05-SG-ASK-3 | PASTORAL | ACCURATE | Pastoral application tethered to text and exilic faithfulness |
+| S05-DGM-s5-1-TITLE | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S05-DGM-s5-1-1-ROLE | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S05-DGM-s5-1-1-TITLE | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S05-DGM-s5-1-1-P1 | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S05-DGM-s5-1-1-P2 | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S05-DGM-s5-1-1-P3 | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S05-DGM-s5-1-2-ROLE | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S05-DGM-s5-1-2-TITLE | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S05-DGM-s5-1-2-P1 | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S05-DGM-s5-1-2-P2 | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S05-DGM-s5-1-2-P3 | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S05-DGM-s5-2-TITLE | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S05-DGM-s5-2-1-ROLE | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S05-DGM-s5-2-1-TITLE | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S05-DGM-s5-2-1-TEXT | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S05-DGM-s5-2-2-ROLE | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S05-DGM-s5-2-2-TITLE | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S05-DGM-s5-2-2-TEXT | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S05-DGM-s5-2-3-ROLE | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S05-DGM-s5-2-3-TITLE | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S05-DGM-s5-2-3-TEXT | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S05-DGM-s5-3-TITLE | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S05-DGM-s5-4-TITLE | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S05-DGM-s5-4-1-ROLE | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S05-DGM-s5-4-1-TITLE | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S05-DGM-s5-4-1-P1 | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S05-DGM-s5-4-1-P2 | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S05-DGM-s5-4-1-P3 | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S05-DGM-s5-4-1-P4 | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S05-DGM-s5-4-2-ROLE | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S05-DGM-s5-4-2-TITLE | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S05-DGM-s5-4-2-P1 | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S05-DGM-s5-4-2-P2 | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S05-DGM-s5-4-2-P3 | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S05-DGM-s5-4-2-P4 | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S05-DGM-s5-5-TITLE | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S05-DGM-s5-5-1-ROLE | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S05-DGM-s5-5-1-TITLE | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S05-DGM-s5-5-1-P1 | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S05-DGM-s5-5-1-P2 | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S05-DGM-s5-5-1-P3 | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S05-DGM-s5-5-1-P4 | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S05-DGM-s5-5-1-P5 | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S05-DGM-s5-5-2-ROLE | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S05-DGM-s5-5-2-TITLE | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S05-DGM-s5-5-2-P1 | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S05-DGM-s5-5-2-P2 | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S05-DGM-s5-5-2-P3 | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S05-DGM-s5-5-2-P4 | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S05-DGM-s5-5-2-P5 | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
 | S05-GD-INTRO-EXP | INTERPRETATION | ACCURATE | Sitting learning goals and historical outline |
 | S05-GD-INTRO-DO-1 | PASTORAL | ACCURATE | Step-by-step reading and verification guidance |
 | S05-GD-INTRO-DO-2 | PASTORAL | ACCURATE | Step-by-step reading and verification guidance |

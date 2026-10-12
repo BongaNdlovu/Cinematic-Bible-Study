@@ -2,9 +2,9 @@
 
 **Audit Date:** 2026-09-20  
 **File Audited:** `js/study/sheets-data.js` (Sitting id: 6) with `sheet-verify.js`, `workbench.js`, `sheet-glossary.js`  
-**Audited Content Hash:** `df97e68bd40f8607`  
+**Audited Content Hash:** `87d9c63560ad095d`  
 **Method:** Exhaustive claim-unit audit of finished prose across content, christology, quizzes, studyGuide, guide, verify cards, workbench, and linked glossary entries.  
-**Counts:** ACCURATE: 180 | SOFTEN: 0 | FIX: 0 | N/A: 39 | Total: 219  
+**Counts:** ACCURATE: 255 | SOFTEN: 0 | FIX: 0 | N/A: 39 | Total: 294  
 
 ## 1. Summary of Required Sections & Governing Standards
 
@@ -180,6 +180,81 @@
 | S06-SG-ASK-1 | PASTORAL | ACCURATE | Pastoral application tethered to text and exilic faithfulness |
 | S06-SG-ASK-2 | PASTORAL | ACCURATE | Pastoral application tethered to text and exilic faithfulness |
 | S06-SG-ASK-3 | PASTORAL | ACCURATE | Pastoral application tethered to text and exilic faithfulness |
+| S06-DGM-s6-1-TITLE | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S06-DGM-s6-1-1-ROLE | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S06-DGM-s6-1-1-TITLE | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S06-DGM-s6-1-1-P1 | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S06-DGM-s6-1-1-P2 | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S06-DGM-s6-1-1-P3 | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S06-DGM-s6-1-1-P4 | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S06-DGM-s6-1-2-ROLE | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S06-DGM-s6-1-2-TITLE | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S06-DGM-s6-1-2-P1 | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S06-DGM-s6-1-2-P2 | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S06-DGM-s6-1-2-P3 | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S06-DGM-s6-1-2-P4 | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S06-DGM-s6-2-TITLE | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S06-DGM-s6-2-1-TITLE | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S06-DGM-s6-2-1-P1 | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S06-DGM-s6-2-1-P2 | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S06-DGM-s6-2-1-P3 | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S06-DGM-s6-2-1-P4 | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S06-DGM-s6-2-2-TITLE | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S06-DGM-s6-2-2-P1 | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S06-DGM-s6-2-2-P2 | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S06-DGM-s6-2-2-P3 | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S06-DGM-s6-2-2-P4 | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S06-DGM-s6-3-TITLE | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S06-DGM-s6-3-NOTE | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S06-DGM-s6-4-TITLE | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S06-DGM-s6-4-1-TITLE | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S06-DGM-s6-4-1-P1 | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S06-DGM-s6-4-1-P2 | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S06-DGM-s6-4-1-P3 | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S06-DGM-s6-4-1-P4 | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S06-DGM-s6-4-2-TITLE | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S06-DGM-s6-4-2-P1 | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S06-DGM-s6-4-2-P2 | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S06-DGM-s6-4-2-P3 | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S06-DGM-s6-4-2-P4 | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S06-DGM-s6-5-TITLE | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S06-DGM-s6-5-1-TITLE | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S06-DGM-s6-5-1-P1 | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S06-DGM-s6-5-1-P2 | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S06-DGM-s6-5-1-P3 | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S06-DGM-s6-5-1-P4 | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S06-DGM-s6-5-1-P5 | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S06-DGM-s6-5-2-TITLE | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S06-DGM-s6-5-2-P1 | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S06-DGM-s6-5-2-P2 | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S06-DGM-s6-5-2-P3 | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S06-DGM-s6-5-2-P4 | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S06-DGM-s6-5-2-P5 | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S06-DGM-s6-6-TITLE | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S06-DGM-s6-6-1-TITLE | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S06-DGM-s6-6-1-P1 | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S06-DGM-s6-6-1-P2 | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S06-DGM-s6-6-1-P3 | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S06-DGM-s6-6-1-P4 | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S06-DGM-s6-6-1-P5 | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S06-DGM-s6-6-1-P6 | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S06-DGM-s6-6-1-P7 | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S06-DGM-s6-6-1-P8 | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S06-DGM-s6-6-1-P9 | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S06-DGM-s6-6-1-P10 | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S06-DGM-s6-6-1-P11 | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S06-DGM-s6-6-2-TITLE | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S06-DGM-s6-6-2-P1 | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S06-DGM-s6-6-2-P2 | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S06-DGM-s6-6-2-P3 | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S06-DGM-s6-6-2-P4 | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S06-DGM-s6-6-2-P5 | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S06-DGM-s6-6-2-P6 | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S06-DGM-s6-6-2-P7 | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S06-DGM-s6-6-2-P8 | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S06-DGM-s6-6-2-P9 | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S06-DGM-s6-6-2-P10 | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S06-DGM-s6-6-2-P11 | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
 | S06-GD-INTRO-EXP | INTERPRETATION | ACCURATE | Sitting learning goals and historical outline |
 | S06-GD-INTRO-DO-1 | PASTORAL | ACCURATE | Step-by-step reading and verification guidance |
 | S06-GD-INTRO-DO-2 | PASTORAL | ACCURATE | Step-by-step reading and verification guidance |

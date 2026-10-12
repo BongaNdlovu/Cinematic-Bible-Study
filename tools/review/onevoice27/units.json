@@ -1,29 +1,29 @@
 {
   "sheetHashes": {
     "0": "70f34ad9a6b44d56",
-    "1": "82eaa7a070bd7f3d",
-    "2": "5c789d52493010af",
-    "3": "1d966c003466f810",
-    "4": "ffc8beb1804fd21c",
-    "5": "a9908294709b80fa",
-    "6": "df97e68bd40f8607",
-    "7": "0250afc517641eb1",
-    "8": "0a454f8f1524757b",
-    "9": "f8cfd3d99630a17a",
-    "10": "bdb166e40dabd991"
+    "1": "4a8365638ef175f2",
+    "2": "ea5941aadad618ec",
+    "3": "59c1b914546a4c97",
+    "4": "77a3cefc42b37efb",
+    "5": "aa6738285e67a80e",
+    "6": "87d9c63560ad095d",
+    "7": "490e16d4924db351",
+    "8": "eec64599ac40fbef",
+    "9": "bd18052e1c991bb8",
+    "10": "9d2cbe0d7509f12b"
   },
   "sheetUnitCounts": {
     "0": 290,
-    "1": 214,
-    "2": 220,
-    "3": 184,
-    "4": 182,
-    "5": 212,
-    "6": 219,
-    "7": 256,
-    "8": 263,
-    "9": 251,
-    "10": 249
+    "1": 261,
+    "2": 263,
+    "3": 215,
+    "4": 240,
+    "5": 262,
+    "6": 294,
+    "7": 317,
+    "8": 278,
+    "9": 294,
+    "10": 286
   },
   "units": [
     {
@@ -3086,6 +3086,335 @@
       "hash": "3714242d33fb7a47"
     },
     {
+      "id": "S01-DGM-s1-1-TITLE",
+      "sheet": 1,
+      "field": "diagram",
+      "text": "The Three Sieges of Jerusalem",
+      "hash": "0fb5dca279b6ff7e"
+    },
+    {
+      "id": "S01-DGM-s1-1-1-ROLE",
+      "sheet": 1,
+      "field": "diagram",
+      "text": "605 B.C. - 1st Campaign",
+      "hash": "3e44a74c85411f3f"
+    },
+    {
+      "id": "S01-DGM-s1-1-1-TITLE",
+      "sheet": 1,
+      "field": "diagram",
+      "text": "Jehoiakim vassalized",
+      "hash": "fa402bf88bc9c67b"
+    },
+    {
+      "id": "S01-DGM-s1-1-1-TEXT",
+      "sheet": 1,
+      "field": "diagram",
+      "text": "Daniel and the royal youths deported.",
+      "hash": "fd63ef0635c6369e"
+    },
+    {
+      "id": "S01-DGM-s1-1-2-ROLE",
+      "sheet": 1,
+      "field": "diagram",
+      "text": "597 B.C. - 2nd Campaign",
+      "hash": "a8c122d55993159e"
+    },
+    {
+      "id": "S01-DGM-s1-1-2-TITLE",
+      "sheet": 1,
+      "field": "diagram",
+      "text": "Jehoiachin deposed",
+      "hash": "b6124565511c4b4b"
+    },
+    {
+      "id": "S01-DGM-s1-1-2-TEXT",
+      "sheet": 1,
+      "field": "diagram",
+      "text": "Ezekiel and 10,000 deported (BM 21946).",
+      "hash": "ea7f1b9f622985e3"
+    },
+    {
+      "id": "S01-DGM-s1-1-3-ROLE",
+      "sheet": 1,
+      "field": "diagram",
+      "text": "586 B.C. - 3rd Campaign",
+      "hash": "96cc605288ca7244"
+    },
+    {
+      "id": "S01-DGM-s1-1-3-TITLE",
+      "sheet": 1,
+      "field": "diagram",
+      "text": "Zedekiah blinded",
+      "hash": "d3d69ebee077900f"
+    },
+    {
+      "id": "S01-DGM-s1-1-3-TEXT",
+      "sheet": 1,
+      "field": "diagram",
+      "text": "Temple burned; Jerusalem destroyed.",
+      "hash": "3a827f6dbb7d3fa5"
+    },
+    {
+      "id": "S01-DGM-s1-2-TITLE",
+      "sheet": 1,
+      "field": "diagram",
+      "text": "The Conflict of Names",
+      "hash": "961738f7588b76c7"
+    },
+    {
+      "id": "S01-DGM-s1-2-1-ROLE",
+      "sheet": 1,
+      "field": "diagram",
+      "text": "Hebrew Name (Confessing Yahweh)",
+      "hash": "b4e0e5ff71095248"
+    },
+    {
+      "id": "S01-DGM-s1-2-1-TITLE",
+      "sheet": 1,
+      "field": "diagram",
+      "text": "Hebrew Name",
+      "hash": "f90193b13388b7d1"
+    },
+    {
+      "id": "S01-DGM-s1-2-1-P1",
+      "sheet": 1,
+      "field": "diagram",
+      "text": "Daniel (\"God is my Judge\")",
+      "hash": "d6fb38b1eab367ea"
+    },
+    {
+      "id": "S01-DGM-s1-2-1-P2",
+      "sheet": 1,
+      "field": "diagram",
+      "text": "Hananiah (\"Yahweh is Gracious\")",
+      "hash": "9d38a1acdc5ec63b"
+    },
+    {
+      "id": "S01-DGM-s1-2-1-P3",
+      "sheet": 1,
+      "field": "diagram",
+      "text": "Mishael (\"Who is like God?\")",
+      "hash": "81fd0beda2d68cbf"
+    },
+    {
+      "id": "S01-DGM-s1-2-1-P4",
+      "sheet": 1,
+      "field": "diagram",
+      "text": "Azariah (\"Yahweh has Helped\")",
+      "hash": "5c22bd5615d09589"
+    },
+    {
+      "id": "S01-DGM-s1-2-2-ROLE",
+      "sheet": 1,
+      "field": "diagram",
+      "text": "Babylonian Name (Honoring Idols)",
+      "hash": "172523383d3adb42"
+    },
+    {
+      "id": "S01-DGM-s1-2-2-TITLE",
+      "sheet": 1,
+      "field": "diagram",
+      "text": "Babylonian Name",
+      "hash": "03d01532b812b0b6"
+    },
+    {
+      "id": "S01-DGM-s1-2-2-P1",
+      "sheet": 1,
+      "field": "diagram",
+      "text": "Belteshazzar (\"Bel protect his life\")",
+      "hash": "4dcb3d109b7cdd76"
+    },
+    {
+      "id": "S01-DGM-s1-2-2-P2",
+      "sheet": 1,
+      "field": "diagram",
+      "text": "Shadrach (trad.: \"Command of Aku\" -- debated)",
+      "hash": "25a450c3d8fb31b7"
+    },
+    {
+      "id": "S01-DGM-s1-2-2-P3",
+      "sheet": 1,
+      "field": "diagram",
+      "text": "Meshach (trad.: \"Who is what Aku is?\" -- debated)",
+      "hash": "85928633a11f04f5"
+    },
+    {
+      "id": "S01-DGM-s1-2-2-P4",
+      "sheet": 1,
+      "field": "diagram",
+      "text": "Abednego (\"Servant of Nebo\")",
+      "hash": "42cb6a320ef318ef"
+    },
+    {
+      "id": "S01-DGM-s1-3-TITLE",
+      "sheet": 1,
+      "field": "diagram",
+      "text": "The Dietary Crisis",
+      "hash": "5f451fb5bd76c35a"
+    },
+    {
+      "id": "S01-DGM-s1-3-1-ROLE",
+      "sheet": 1,
+      "field": "diagram",
+      "text": "Royal Table (The World's Offer)",
+      "hash": "4bbc80cf3fe38300"
+    },
+    {
+      "id": "S01-DGM-s1-3-1-TITLE",
+      "sheet": 1,
+      "field": "diagram",
+      "text": "Royal Table",
+      "hash": "242cbeb0fd138be7"
+    },
+    {
+      "id": "S01-DGM-s1-3-1-P1",
+      "sheet": 1,
+      "field": "diagram",
+      "text": "Typically dedicated to Marduk/Bel",
+      "hash": "793d34239a14dd29"
+    },
+    {
+      "id": "S01-DGM-s1-3-1-P2",
+      "sheet": 1,
+      "field": "diagram",
+      "text": "May have violated Levitical food laws",
+      "hash": "c4410f604872b515"
+    },
+    {
+      "id": "S01-DGM-s1-3-2-ROLE",
+      "sheet": 1,
+      "field": "diagram",
+      "text": "Zeroim & Water (The Covenant Stand)",
+      "hash": "9cef917cd846aa8f"
+    },
+    {
+      "id": "S01-DGM-s1-3-2-TITLE",
+      "sheet": 1,
+      "field": "diagram",
+      "text": "Zeroim & Water",
+      "hash": "0121bca98fb5cc29"
+    },
+    {
+      "id": "S01-DGM-s1-3-2-P1",
+      "sheet": 1,
+      "field": "diagram",
+      "text": "Dedicated entirely to Yahweh",
+      "hash": "6eadc6ffe5ecaa04"
+    },
+    {
+      "id": "S01-DGM-s1-3-2-P2",
+      "sheet": 1,
+      "field": "diagram",
+      "text": "Undefiled nourishment",
+      "hash": "d93626262af6b48e"
+    },
+    {
+      "id": "S01-DGM-s1-4-TITLE",
+      "sheet": 1,
+      "field": "diagram",
+      "text": "The Redemptive Typology",
+      "hash": "5bd1cfffc7405338"
+    },
+    {
+      "id": "S01-DGM-s1-4-1-ROLE",
+      "sheet": 1,
+      "field": "diagram",
+      "text": "Daniel in Babylon",
+      "hash": "05ce5c9c5266a47f"
+    },
+    {
+      "id": "S01-DGM-s1-4-1-TITLE",
+      "sheet": 1,
+      "field": "diagram",
+      "text": "Daniel",
+      "hash": "7297db81c2f7916e"
+    },
+    {
+      "id": "S01-DGM-s1-4-1-P1",
+      "sheet": 1,
+      "field": "diagram",
+      "text": "Captive in exile",
+      "hash": "eabc43477d99ff04"
+    },
+    {
+      "id": "S01-DGM-s1-4-1-P2",
+      "sheet": 1,
+      "field": "diagram",
+      "text": "Tempted with royal meat and wine",
+      "hash": "72dcdc4d99370beb"
+    },
+    {
+      "id": "S01-DGM-s1-4-1-P3",
+      "sheet": 1,
+      "field": "diagram",
+      "text": "Refused to defile covenant purity",
+      "hash": "f5fb8c97e52c1612"
+    },
+    {
+      "id": "S01-DGM-s1-4-1-P4",
+      "sheet": 1,
+      "field": "diagram",
+      "text": "Sustained by God's provision",
+      "hash": "df0a96366f5f278b"
+    },
+    {
+      "id": "S01-DGM-s1-4-1-P5",
+      "sheet": 1,
+      "field": "diagram",
+      "text": "Granted wisdom to interpret kingdoms",
+      "hash": "5a14ed71d212fc84"
+    },
+    {
+      "id": "S01-DGM-s1-4-2-ROLE",
+      "sheet": 1,
+      "field": "diagram",
+      "text": "Jesus in the Wilderness",
+      "hash": "95033baf7f839d3e"
+    },
+    {
+      "id": "S01-DGM-s1-4-2-TITLE",
+      "sheet": 1,
+      "field": "diagram",
+      "text": "Jesus",
+      "hash": "62fe4843ff9d2d79"
+    },
+    {
+      "id": "S01-DGM-s1-4-2-P1",
+      "sheet": 1,
+      "field": "diagram",
+      "text": "The Son incarnate in an alienated world",
+      "hash": "1ec4e4dfa973aeee"
+    },
+    {
+      "id": "S01-DGM-s1-4-2-P2",
+      "sheet": 1,
+      "field": "diagram",
+      "text": "Tempted by Satan with bread and kingdoms",
+      "hash": "8a20fea876cc9935"
+    },
+    {
+      "id": "S01-DGM-s1-4-2-P3",
+      "sheet": 1,
+      "field": "diagram",
+      "text": "Refused every illicit compromise",
+      "hash": "10914fb9485afaa4"
+    },
+    {
+      "id": "S01-DGM-s1-4-2-P4",
+      "sheet": 1,
+      "field": "diagram",
+      "text": "\"Man shall not live by bread alone\"",
+      "hash": "2f0b14d82acb18ac"
+    },
+    {
+      "id": "S01-DGM-s1-4-2-P5",
+      "sheet": 1,
+      "field": "diagram",
+      "text": "The King whose kingdom fills the earth",
+      "hash": "6d54243f48df00b6"
+    },
+    {
       "id": "S01-GD-INTRO-EXP",
       "sheet": 1,
       "field": "guide",
@@ -4647,6 +4976,307 @@
       "hash": "b6395618553f90b5"
     },
     {
+      "id": "S02-DGM-s2-1-TITLE",
+      "sheet": 2,
+      "field": "diagram",
+      "text": "The Prophetic Master-Framework (Daniel 2)",
+      "hash": "5a2a27bbff784849"
+    },
+    {
+      "id": "S02-DGM-s2-1-1-ROLE",
+      "sheet": 2,
+      "field": "diagram",
+      "text": "Head of Gold",
+      "hash": "92a20e041e673c1c"
+    },
+    {
+      "id": "S02-DGM-s2-1-1-TITLE",
+      "sheet": 2,
+      "field": "diagram",
+      "text": "Babylon",
+      "hash": "348260ed7e926677"
+    },
+    {
+      "id": "S02-DGM-s2-1-1-TEXT",
+      "sheet": 2,
+      "field": "diagram",
+      "text": "605 - 539 B.C.",
+      "hash": "b32c41c82d9c9d34"
+    },
+    {
+      "id": "S02-DGM-s2-1-2-ROLE",
+      "sheet": 2,
+      "field": "diagram",
+      "text": "Chest & Arms Silver",
+      "hash": "3dc922b93547334e"
+    },
+    {
+      "id": "S02-DGM-s2-1-2-TITLE",
+      "sheet": 2,
+      "field": "diagram",
+      "text": "Medo-Persia",
+      "hash": "3a44b124a272abc2"
+    },
+    {
+      "id": "S02-DGM-s2-1-2-TEXT",
+      "sheet": 2,
+      "field": "diagram",
+      "text": "539 - 331 B.C.",
+      "hash": "a510b70d7c062b9c"
+    },
+    {
+      "id": "S02-DGM-s2-1-3-ROLE",
+      "sheet": 2,
+      "field": "diagram",
+      "text": "Belly & Thighs Bronze",
+      "hash": "e7637cc09a427689"
+    },
+    {
+      "id": "S02-DGM-s2-1-3-TITLE",
+      "sheet": 2,
+      "field": "diagram",
+      "text": "Greece",
+      "hash": "9c93ad439373b4ee"
+    },
+    {
+      "id": "S02-DGM-s2-1-3-TEXT",
+      "sheet": 2,
+      "field": "diagram",
+      "text": "331 - 168 B.C.",
+      "hash": "082730aa24704d7e"
+    },
+    {
+      "id": "S02-DGM-s2-1-4-ROLE",
+      "sheet": 2,
+      "field": "diagram",
+      "text": "Legs of Iron",
+      "hash": "60881c673ffe3719"
+    },
+    {
+      "id": "S02-DGM-s2-1-4-TITLE",
+      "sheet": 2,
+      "field": "diagram",
+      "text": "Rome",
+      "hash": "d0d22019186582c6"
+    },
+    {
+      "id": "S02-DGM-s2-1-4-TEXT",
+      "sheet": 2,
+      "field": "diagram",
+      "text": "168 B.C. - A.D. 476",
+      "hash": "4b9dc6322a322cbb"
+    },
+    {
+      "id": "S02-DGM-s2-1-5-ROLE",
+      "sheet": 2,
+      "field": "diagram",
+      "text": "Feet of Iron & Clay",
+      "hash": "ab8dfd1c6bcc9dc3"
+    },
+    {
+      "id": "S02-DGM-s2-1-5-TITLE",
+      "sheet": 2,
+      "field": "diagram",
+      "text": "Divided Europe",
+      "hash": "8fd58951e3d96d40"
+    },
+    {
+      "id": "S02-DGM-s2-1-5-TEXT",
+      "sheet": 2,
+      "field": "diagram",
+      "text": "A.D. 476 - Second Advent",
+      "hash": "27ea5ebdb2bbca92"
+    },
+    {
+      "id": "S02-DGM-s2-1-6-ROLE",
+      "sheet": 2,
+      "field": "diagram",
+      "text": "The Striking Stone",
+      "hash": "c96005426c7067c2"
+    },
+    {
+      "id": "S02-DGM-s2-1-6-TITLE",
+      "sheet": 2,
+      "field": "diagram",
+      "text": "Christ's Kingdom",
+      "hash": "23b3fee2c46fce38"
+    },
+    {
+      "id": "S02-DGM-s2-1-6-TEXT",
+      "sheet": 2,
+      "field": "diagram",
+      "text": "Supernatural, Universal, Eternal",
+      "hash": "e36a7408aeb12037"
+    },
+    {
+      "id": "S02-DGM-s2-2-TITLE",
+      "sheet": 2,
+      "field": "diagram",
+      "text": "Metallurgic Gradient of Daniel 2",
+      "hash": "d326bf6d34386c13"
+    },
+    {
+      "id": "S02-DGM-s2-3-TITLE",
+      "sheet": 2,
+      "field": "diagram",
+      "text": "The Post-Roman Dilemma (Daniel 2:43)",
+      "hash": "980b53a0f1b40df2"
+    },
+    {
+      "id": "S02-DGM-s2-3-NOTE",
+      "sheet": 2,
+      "field": "diagram",
+      "text": "Every attempt to rebuild a single European empire fractures",
+      "hash": "04be08e8ea3faa4f"
+    },
+    {
+      "id": "S02-DGM-s2-3-1-ROLE",
+      "sheet": 2,
+      "field": "diagram",
+      "text": "Iron + Clay",
+      "hash": "320a010b1b64cef7"
+    },
+    {
+      "id": "S02-DGM-s2-3-1-TITLE",
+      "sheet": 2,
+      "field": "diagram",
+      "text": "Iron (strength that remains) + Clay (the mixture that will not hold)",
+      "hash": "87e0e6d7d170d765"
+    },
+    {
+      "id": "S02-DGM-s2-3-2-ROLE",
+      "sheet": 2,
+      "field": "diagram",
+      "text": "Mechanical Mixture, Not Union",
+      "hash": "40edd7ae52d30507"
+    },
+    {
+      "id": "S02-DGM-s2-3-2-TITLE",
+      "sheet": 2,
+      "field": "diagram",
+      "text": "They Shall Not Cleave",
+      "hash": "6786dd8df775606d"
+    },
+    {
+      "id": "S02-DGM-s2-3-2-P1",
+      "sheet": 2,
+      "field": "diagram",
+      "text": "Charlemagne (800)",
+      "hash": "985f2f160c5cb75e"
+    },
+    {
+      "id": "S02-DGM-s2-3-2-P2",
+      "sheet": 2,
+      "field": "diagram",
+      "text": "Charles V (1519)",
+      "hash": "30901eae4593242c"
+    },
+    {
+      "id": "S02-DGM-s2-3-2-P3",
+      "sheet": 2,
+      "field": "diagram",
+      "text": "Napoleon (1804-1815)",
+      "hash": "16c129a45bedf7b3"
+    },
+    {
+      "id": "S02-DGM-s2-3-2-P4",
+      "sheet": 2,
+      "field": "diagram",
+      "text": "Hitler (1939-1945)",
+      "hash": "cee5d46c585ce82d"
+    },
+    {
+      "id": "S02-DGM-s2-4-TITLE",
+      "sheet": 2,
+      "field": "diagram",
+      "text": "The Smiting Stone",
+      "hash": "fa65aa92bdcda229"
+    },
+    {
+      "id": "S02-DGM-s2-4-1-ROLE",
+      "sheet": 2,
+      "field": "diagram",
+      "text": "Cut Out",
+      "hash": "e4b65fa2c1bb8cc4"
+    },
+    {
+      "id": "S02-DGM-s2-4-1-TITLE",
+      "sheet": 2,
+      "field": "diagram",
+      "text": "Cut out without human hands",
+      "hash": "4e737a3e27b4c881"
+    },
+    {
+      "id": "S02-DGM-s2-4-1-TEXT",
+      "sheet": 2,
+      "field": "diagram",
+      "text": "Divine origin, Supernatural",
+      "hash": "9f725d509d4e2960"
+    },
+    {
+      "id": "S02-DGM-s2-4-2-ROLE",
+      "sheet": 2,
+      "field": "diagram",
+      "text": "Strikes",
+      "hash": "2b70b28d87cd1314"
+    },
+    {
+      "id": "S02-DGM-s2-4-2-TITLE",
+      "sheet": 2,
+      "field": "diagram",
+      "text": "Strikes the Statue at the FEET",
+      "hash": "2b7719c6e5fe581d"
+    },
+    {
+      "id": "S02-DGM-s2-4-2-TEXT",
+      "sheet": 2,
+      "field": "diagram",
+      "text": "Not during Babylon, Persia, Greece, or Pagan Rome, but during the divided kingdoms after Rome (the feet)",
+      "hash": "947f25dacf0cf086"
+    },
+    {
+      "id": "S02-DGM-s2-4-3-ROLE",
+      "sheet": 2,
+      "field": "diagram",
+      "text": "Pulverizes",
+      "hash": "2c784c1fcb14075b"
+    },
+    {
+      "id": "S02-DGM-s2-4-3-TITLE",
+      "sheet": 2,
+      "field": "diagram",
+      "text": "Pulverizes Gold, Silver, Bronze, Iron, & Clay",
+      "hash": "582fe9cb4b1d72b0"
+    },
+    {
+      "id": "S02-DGM-s2-4-3-TEXT",
+      "sheet": 2,
+      "field": "diagram",
+      "text": "Becomes like chaff blown away",
+      "hash": "e857ff3901e98394"
+    },
+    {
+      "id": "S02-DGM-s2-4-4-ROLE",
+      "sheet": 2,
+      "field": "diagram",
+      "text": "Becomes",
+      "hash": "d4843a8137e2676b"
+    },
+    {
+      "id": "S02-DGM-s2-4-4-TITLE",
+      "sheet": 2,
+      "field": "diagram",
+      "text": "Becomes a Mountain Filling the Earth",
+      "hash": "6b1477f34eb12691"
+    },
+    {
+      "id": "S02-DGM-s2-4-4-TEXT",
+      "sheet": 2,
+      "field": "diagram",
+      "text": "The Everlasting Kingdom of God",
+      "hash": "60bda3172f8b5296"
+    },
+    {
       "id": "S02-GD-INTRO-EXP",
       "sheet": 2,
       "field": "guide",
@@ -6068,6 +6698,223 @@
       "hash": "69ddf27cc38a98d6"
     },
     {
+      "id": "S03-DGM-s3-1-TITLE",
+      "sheet": 3,
+      "field": "diagram",
+      "text": "The Theological Collision at Dura",
+      "hash": "0708e62ed555488d"
+    },
+    {
+      "id": "S03-DGM-s3-1-1-ROLE",
+      "sheet": 3,
+      "field": "diagram",
+      "text": "Daniel 2 (Heaven's Revelation)",
+      "hash": "20b98227b70dd5a6"
+    },
+    {
+      "id": "S03-DGM-s3-1-1-TITLE",
+      "sheet": 3,
+      "field": "diagram",
+      "text": "Daniel 2",
+      "hash": "49365a881c4eba67"
+    },
+    {
+      "id": "S03-DGM-s3-1-1-P1",
+      "sheet": 3,
+      "field": "diagram",
+      "text": "Head of Gold: Babylon (temporary)",
+      "hash": "56ba6a8556c3cc36"
+    },
+    {
+      "id": "S03-DGM-s3-1-1-P2",
+      "sheet": 3,
+      "field": "diagram",
+      "text": "Followed by Silver, Bronze, Iron",
+      "hash": "1c601f70eaf91d00"
+    },
+    {
+      "id": "S03-DGM-s3-1-1-P3",
+      "sheet": 3,
+      "field": "diagram",
+      "text": "Crushed by the Supernatural Stone",
+      "hash": "72f59855e338e76a"
+    },
+    {
+      "id": "S03-DGM-s3-1-2-ROLE",
+      "sheet": 3,
+      "field": "diagram",
+      "text": "Daniel 3 (Nebuchadnezzar's Defiance)",
+      "hash": "74cc2bda21763d6b"
+    },
+    {
+      "id": "S03-DGM-s3-1-2-TITLE",
+      "sheet": 3,
+      "field": "diagram",
+      "text": "Daniel 3",
+      "hash": "40c4bb265df842da"
+    },
+    {
+      "id": "S03-DGM-s3-1-2-P1",
+      "sheet": 3,
+      "field": "diagram",
+      "text": "Entire Image of Gold: Babylon (eternal)",
+      "hash": "cde262f4ec8e954d"
+    },
+    {
+      "id": "S03-DGM-s3-1-2-P2",
+      "sheet": 3,
+      "field": "diagram",
+      "text": "Rejection of all succeeding empires",
+      "hash": "6470700c5d495db3"
+    },
+    {
+      "id": "S03-DGM-s3-1-2-P3",
+      "sheet": 3,
+      "field": "diagram",
+      "text": "Imperial assertion of absolute dominion",
+      "hash": "9ee7e98c89ba7610"
+    },
+    {
+      "id": "S03-DGM-s3-2-TITLE",
+      "sheet": 3,
+      "field": "diagram",
+      "text": "The Prophetic Blueprint: Daniel 3 and Revelation 13",
+      "hash": "741ee67c2b4446e4"
+    },
+    {
+      "id": "S03-DGM-s3-3-TITLE",
+      "sheet": 3,
+      "field": "diagram",
+      "text": "The \"But If Not\" Posture",
+      "hash": "a93d0e1a30d0e8c8"
+    },
+    {
+      "id": "S03-DGM-s3-3-1-ROLE",
+      "sheet": 3,
+      "field": "diagram",
+      "text": "God's Omnipotence",
+      "hash": "271bda7d5c185db0"
+    },
+    {
+      "id": "S03-DGM-s3-3-1-TITLE",
+      "sheet": 3,
+      "field": "diagram",
+      "text": "God's Omnipotence",
+      "hash": "271bda7d5c185db0"
+    },
+    {
+      "id": "S03-DGM-s3-3-1-P1",
+      "sheet": 3,
+      "field": "diagram",
+      "text": "\"Our God is able to deliver us...\"",
+      "hash": "de17a73890452903"
+    },
+    {
+      "id": "S03-DGM-s3-3-1-P2",
+      "sheet": 3,
+      "field": "diagram",
+      "text": "(Unwavering faith in divine power)",
+      "hash": "ec0432eb9533cc58"
+    },
+    {
+      "id": "S03-DGM-s3-3-2-ROLE",
+      "sheet": 3,
+      "field": "diagram",
+      "text": "God's Sovereignty",
+      "hash": "b4670184af5c80eb"
+    },
+    {
+      "id": "S03-DGM-s3-3-2-TITLE",
+      "sheet": 3,
+      "field": "diagram",
+      "text": "God's Sovereignty",
+      "hash": "b4670184af5c80eb"
+    },
+    {
+      "id": "S03-DGM-s3-3-2-P1",
+      "sheet": 3,
+      "field": "diagram",
+      "text": "\"But if not...\"",
+      "hash": "ec23aef8df7a27a5"
+    },
+    {
+      "id": "S03-DGM-s3-3-2-P2",
+      "sheet": 3,
+      "field": "diagram",
+      "text": "(Unconditional loyalty without bargains)",
+      "hash": "1fb123017f150690"
+    },
+    {
+      "id": "S03-DGM-s3-4-TITLE",
+      "sheet": 3,
+      "field": "diagram",
+      "text": "The Fourth Figure",
+      "hash": "fad79d4870f18877"
+    },
+    {
+      "id": "S03-DGM-s3-4-1-ROLE",
+      "sheet": 3,
+      "field": "diagram",
+      "text": "The Trial: Immanence in the Fire",
+      "hash": "fcb17d3dfaab7209"
+    },
+    {
+      "id": "S03-DGM-s3-4-1-TITLE",
+      "sheet": 3,
+      "field": "diagram",
+      "text": "The Trial",
+      "hash": "eaaa80ff6c4af4b4"
+    },
+    {
+      "id": "S03-DGM-s3-4-1-P1",
+      "sheet": 3,
+      "field": "diagram",
+      "text": "Ropes burned away; men unbound",
+      "hash": "f426ca5c4cca39b0"
+    },
+    {
+      "id": "S03-DGM-s3-4-1-P2",
+      "sheet": 3,
+      "field": "diagram",
+      "text": "Bodies, clothes, hair unharmed",
+      "hash": "d10af294d13a7415"
+    },
+    {
+      "id": "S03-DGM-s3-4-1-P3",
+      "sheet": 3,
+      "field": "diagram",
+      "text": "The Son of God walks beside them",
+      "hash": "9b26b6f62a5642ce"
+    },
+    {
+      "id": "S03-DGM-s3-4-2-ROLE",
+      "sheet": 3,
+      "field": "diagram",
+      "text": "The Cross: Vicarious Expiation",
+      "hash": "86ab27c6ab49a78e"
+    },
+    {
+      "id": "S03-DGM-s3-4-2-TITLE",
+      "sheet": 3,
+      "field": "diagram",
+      "text": "The Cross",
+      "hash": "72a968ff4b1ba587"
+    },
+    {
+      "id": "S03-DGM-s3-4-2-P1",
+      "sheet": 3,
+      "field": "diagram",
+      "text": "Christ entered the consuming fire of divine wrath for our sins",
+      "hash": "f8eb5caf42eecb13"
+    },
+    {
+      "id": "S03-DGM-s3-4-2-P2",
+      "sheet": 3,
+      "field": "diagram",
+      "text": "Liberates believers from eternal death",
+      "hash": "6ab59833e236a5d8"
+    },
+    {
       "id": "S03-GD-INTRO-EXP",
       "sheet": 3,
       "field": "guide",
@@ -7354,6 +8201,412 @@
       "field": "studyGuide",
       "text": "Can I take Christ's yoke today without waiting to be driven to the grass?",
       "hash": "024c5b950d45dafa"
+    },
+    {
+      "id": "S04-DGM-s4-1-TITLE",
+      "sheet": 4,
+      "field": "diagram",
+      "text": "Nebuchadnezzar's Progressive Encounters with God",
+      "hash": "961c4895992a005d"
+    },
+    {
+      "id": "S04-DGM-s4-1-1-ROLE",
+      "sheet": 4,
+      "field": "diagram",
+      "text": "Intellectual awe",
+      "hash": "13848d259fc45f98"
+    },
+    {
+      "id": "S04-DGM-s4-1-1-TITLE",
+      "sheet": 4,
+      "field": "diagram",
+      "text": "Acknowledges God as \"a revealer of secrets\"",
+      "hash": "30df239d93938421"
+    },
+    {
+      "id": "S04-DGM-s4-1-2-ROLE",
+      "sheet": 4,
+      "field": "diagram",
+      "text": "Reluctant toleration",
+      "hash": "341fb8a7872b4373"
+    },
+    {
+      "id": "S04-DGM-s4-1-2-TITLE",
+      "sheet": 4,
+      "field": "diagram",
+      "text": "Acknowledges God as \"able to deliver\"",
+      "hash": "535a3ac53c356150"
+    },
+    {
+      "id": "S04-DGM-s4-1-3-ROLE",
+      "sheet": 4,
+      "field": "diagram",
+      "text": "Personal submission & worship",
+      "hash": "6110ea22309171fc"
+    },
+    {
+      "id": "S04-DGM-s4-1-3-TITLE",
+      "sheet": 4,
+      "field": "diagram",
+      "text": "Acknowledges God as \"the King of heaven\"",
+      "hash": "f1d5526e966f8234"
+    },
+    {
+      "id": "S04-DGM-s4-2-TITLE",
+      "sheet": 4,
+      "field": "diagram",
+      "text": "The Anatomy of the Vision",
+      "hash": "6210c14103437cb7"
+    },
+    {
+      "id": "S04-DGM-s4-2-1-ROLE",
+      "sheet": 4,
+      "field": "diagram",
+      "text": "THE TALL COSMIC TREE",
+      "hash": "6fa395f6f5311557"
+    },
+    {
+      "id": "S04-DGM-s4-2-1-TITLE",
+      "sheet": 4,
+      "field": "diagram",
+      "text": "The Tall Cosmic Tree",
+      "hash": "634e5df48a9bb119"
+    },
+    {
+      "id": "S04-DGM-s4-2-1-P1",
+      "sheet": 4,
+      "field": "diagram",
+      "text": "Reached to heaven",
+      "hash": "3f498f2c9183d214"
+    },
+    {
+      "id": "S04-DGM-s4-2-1-P2",
+      "sheet": 4,
+      "field": "diagram",
+      "text": "Sheltered all beasts and birds",
+      "hash": "c77d69edac6a2c3f"
+    },
+    {
+      "id": "S04-DGM-s4-2-1-P3",
+      "sheet": 4,
+      "field": "diagram",
+      "text": "Symbol of imperial majesty",
+      "hash": "6e7f47930ce7537f"
+    },
+    {
+      "id": "S04-DGM-s4-2-1-P4",
+      "sheet": 4,
+      "field": "diagram",
+      "text": "Nebuchadnezzar in his glory",
+      "hash": "a8a4d7f6872c9c87"
+    },
+    {
+      "id": "S04-DGM-s4-2-2-ROLE",
+      "sheet": 4,
+      "field": "diagram",
+      "text": "THE BANDED STUMP",
+      "hash": "e83cff71c95fa0d7"
+    },
+    {
+      "id": "S04-DGM-s4-2-2-TITLE",
+      "sheet": 4,
+      "field": "diagram",
+      "text": "The Banded Stump",
+      "hash": "f5687218f7b3d57a"
+    },
+    {
+      "id": "S04-DGM-s4-2-2-P1",
+      "sheet": 4,
+      "field": "diagram",
+      "text": "Stripped of branches and fruit",
+      "hash": "03ee74ed14d2a2d7"
+    },
+    {
+      "id": "S04-DGM-s4-2-2-P2",
+      "sheet": 4,
+      "field": "diagram",
+      "text": "Driven into the dew and grass",
+      "hash": "1989790faefa4abc"
+    },
+    {
+      "id": "S04-DGM-s4-2-2-P3",
+      "sheet": 4,
+      "field": "diagram",
+      "text": "Bound with iron and bronze",
+      "hash": "2b047f68d2649873"
+    },
+    {
+      "id": "S04-DGM-s4-2-2-P4",
+      "sheet": 4,
+      "field": "diagram",
+      "text": "The king humbled, yet preserved by grace",
+      "hash": "b21eb17dc4be81ac"
+    },
+    {
+      "id": "S04-DGM-s4-3-TITLE",
+      "sheet": 4,
+      "field": "diagram",
+      "text": "The Threefold Boast of Pride",
+      "hash": "5df7c8c10ce74e44"
+    },
+    {
+      "id": "S04-DGM-s4-3-1-ROLE",
+      "sheet": 4,
+      "field": "diagram",
+      "text": "Self-origination",
+      "hash": "a0992f6f9b84d4d7"
+    },
+    {
+      "id": "S04-DGM-s4-3-1-TITLE",
+      "sheet": 4,
+      "field": "diagram",
+      "text": "\"I have built\"",
+      "hash": "ca3bff02342fa40b"
+    },
+    {
+      "id": "S04-DGM-s4-3-1-TEXT",
+      "sheet": 4,
+      "field": "diagram",
+      "text": "Denies God as Creator/Giver.",
+      "hash": "d225c4b6fb982d8b"
+    },
+    {
+      "id": "S04-DGM-s4-3-2-ROLE",
+      "sheet": 4,
+      "field": "diagram",
+      "text": "Self-sufficiency",
+      "hash": "1236b0d4c5879540"
+    },
+    {
+      "id": "S04-DGM-s4-3-2-TITLE",
+      "sheet": 4,
+      "field": "diagram",
+      "text": "\"By my mighty power\"",
+      "hash": "0234b2d4ca205ec0"
+    },
+    {
+      "id": "S04-DGM-s4-3-2-TEXT",
+      "sheet": 4,
+      "field": "diagram",
+      "text": "Denies God's sovereign strength.",
+      "hash": "680fa24d101557ba"
+    },
+    {
+      "id": "S04-DGM-s4-3-3-ROLE",
+      "sheet": 4,
+      "field": "diagram",
+      "text": "Self-worship",
+      "hash": "c35ed9939a5ea4dc"
+    },
+    {
+      "id": "S04-DGM-s4-3-3-TITLE",
+      "sheet": 4,
+      "field": "diagram",
+      "text": "\"For my majesty\"",
+      "hash": "d9706be2572b4fc0"
+    },
+    {
+      "id": "S04-DGM-s4-3-3-TEXT",
+      "sheet": 4,
+      "field": "diagram",
+      "text": "Steals the glory due to God alone.",
+      "hash": "36513848e20634e0"
+    },
+    {
+      "id": "S04-DGM-s4-4-TITLE",
+      "sheet": 4,
+      "field": "diagram",
+      "text": "Daniel's Account",
+      "hash": "4f092c0a8bb28630"
+    },
+    {
+      "id": "S04-DGM-s4-4-1-TITLE",
+      "sheet": 4,
+      "field": "diagram",
+      "text": "The king's boast",
+      "hash": "3da2e7cbc470cb70"
+    },
+    {
+      "id": "S04-DGM-s4-4-2-TITLE",
+      "sheet": 4,
+      "field": "diagram",
+      "text": "Sentence from heaven",
+      "hash": "6b86988f43acdeb8"
+    },
+    {
+      "id": "S04-DGM-s4-4-3-TITLE",
+      "sheet": 4,
+      "field": "diagram",
+      "text": "Seven times pass",
+      "hash": "2950461d36ad039a"
+    },
+    {
+      "id": "S04-DGM-s4-4-4-TITLE",
+      "sheet": 4,
+      "field": "diagram",
+      "text": "He lifts his eyes",
+      "hash": "d130b175e724ffcb"
+    },
+    {
+      "id": "S04-DGM-s4-4-5-TITLE",
+      "sheet": 4,
+      "field": "diagram",
+      "text": "His understanding returns",
+      "hash": "91fec7fd83a2460c"
+    },
+    {
+      "id": "S04-DGM-s4-5-TITLE",
+      "sheet": 4,
+      "field": "diagram",
+      "text": "Daniel 4:34–37",
+      "hash": "89aca083e28a6951"
+    },
+    {
+      "id": "S04-DGM-s4-5-1-TITLE",
+      "sheet": 4,
+      "field": "diagram",
+      "text": "Nebuchadnezzar lifts his eyes to heaven",
+      "hash": "3160d70437dce990"
+    },
+    {
+      "id": "S04-DGM-s4-5-2-TITLE",
+      "sheet": 4,
+      "field": "diagram",
+      "text": "His understanding returns",
+      "hash": "91fec7fd83a2460c"
+    },
+    {
+      "id": "S04-DGM-s4-5-3-TITLE",
+      "sheet": 4,
+      "field": "diagram",
+      "text": "He blesses the Most High",
+      "hash": "bf55afa5839530c9"
+    },
+    {
+      "id": "S04-DGM-s4-5-4-TITLE",
+      "sheet": 4,
+      "field": "diagram",
+      "text": "He acknowledges God's everlasting dominion",
+      "hash": "398c8d649609e917"
+    },
+    {
+      "id": "S04-DGM-s4-6-TITLE",
+      "sheet": 4,
+      "field": "diagram",
+      "text": "The Emperor of Babylon / The King of Glory",
+      "hash": "016ad4f0d5adcda9"
+    },
+    {
+      "id": "S04-DGM-s4-6-1-ROLE",
+      "sheet": 4,
+      "field": "diagram",
+      "text": "THE EMPEROR OF BABYLON",
+      "hash": "b0ed675213a14291"
+    },
+    {
+      "id": "S04-DGM-s4-6-1-TITLE",
+      "sheet": 4,
+      "field": "diagram",
+      "text": "Nebuchadnezzar",
+      "hash": "74d0cc690a60518f"
+    },
+    {
+      "id": "S04-DGM-s4-6-1-P1",
+      "sheet": 4,
+      "field": "diagram",
+      "text": "A mere man who claimed to be a god",
+      "hash": "facf3561c4c91edd"
+    },
+    {
+      "id": "S04-DGM-s4-6-1-P2",
+      "sheet": 4,
+      "field": "diagram",
+      "text": "\"Is not this great Babylon that I...?\"",
+      "hash": "0e54dbad983ca5e7"
+    },
+    {
+      "id": "S04-DGM-s4-6-1-P3",
+      "sheet": 4,
+      "field": "diagram",
+      "text": "Exalted himself on his palace roof",
+      "hash": "aaa672f1276e4bed"
+    },
+    {
+      "id": "S04-DGM-s4-6-1-P4",
+      "sheet": 4,
+      "field": "diagram",
+      "text": "Driven into the dust as a beast",
+      "hash": "1279df94acfdf94a"
+    },
+    {
+      "id": "S04-DGM-s4-6-1-P5",
+      "sheet": 4,
+      "field": "diagram",
+      "text": "Humbled by force under divine wrath",
+      "hash": "4647314622725d88"
+    },
+    {
+      "id": "S04-DGM-s4-6-1-P6",
+      "sheet": 4,
+      "field": "diagram",
+      "text": "Restored only after crushing judgment",
+      "hash": "b4ebe895eed66e8f"
+    },
+    {
+      "id": "S04-DGM-s4-6-2-ROLE",
+      "sheet": 4,
+      "field": "diagram",
+      "text": "THE KING OF GLORY",
+      "hash": "a6554825d8f6d436"
+    },
+    {
+      "id": "S04-DGM-s4-6-2-TITLE",
+      "sheet": 4,
+      "field": "diagram",
+      "text": "Jesus Christ",
+      "hash": "9d92edda5e73c7c2"
+    },
+    {
+      "id": "S04-DGM-s4-6-2-P1",
+      "sheet": 4,
+      "field": "diagram",
+      "text": "God incarnate who took the form of man",
+      "hash": "f3866c0767cccbc8"
+    },
+    {
+      "id": "S04-DGM-s4-6-2-P2",
+      "sheet": 4,
+      "field": "diagram",
+      "text": "\"Not my will, but Thine be done\"",
+      "hash": "633d0b19b4a6d76f"
+    },
+    {
+      "id": "S04-DGM-s4-6-2-P3",
+      "sheet": 4,
+      "field": "diagram",
+      "text": "Humbled Himself to the death of the cross",
+      "hash": "914128559458f421"
+    },
+    {
+      "id": "S04-DGM-s4-6-2-P4",
+      "sheet": 4,
+      "field": "diagram",
+      "text": "Laid in a manger; buried in a borrowed tomb",
+      "hash": "e70fc5baf18e1a64"
+    },
+    {
+      "id": "S04-DGM-s4-6-2-P5",
+      "sheet": 4,
+      "field": "diagram",
+      "text": "Emptied Himself willingly in sacrificial love",
+      "hash": "9646e789d19b69d7"
+    },
+    {
+      "id": "S04-DGM-s4-6-2-P6",
+      "sheet": 4,
+      "field": "diagram",
+      "text": "Highly exalted by the Father above every name",
+      "hash": "3b444b7c2e0d0789"
     },
     {
       "id": "S04-GD-INTRO-EXP",
@@ -8733,6 +9986,356 @@
       "field": "studyGuide",
       "text": "When God weighs me, am I standing in my own merit or in the righteousness of Christ?",
       "hash": "d87b1f0f109328f5"
+    },
+    {
+      "id": "S05-DGM-s5-1-TITLE",
+      "sheet": 5,
+      "field": "diagram",
+      "text": "The Siege of Babylon (539 B.C.)",
+      "hash": "2e22c66fec8cc2ce"
+    },
+    {
+      "id": "S05-DGM-s5-1-1-ROLE",
+      "sheet": 5,
+      "field": "diagram",
+      "text": "Outside the Walls",
+      "hash": "5c69e1f028d1ec9c"
+    },
+    {
+      "id": "S05-DGM-s5-1-1-TITLE",
+      "sheet": 5,
+      "field": "diagram",
+      "text": "Outside the Walls",
+      "hash": "5c69e1f028d1ec9c"
+    },
+    {
+      "id": "S05-DGM-s5-1-1-P1",
+      "sheet": 5,
+      "field": "diagram",
+      "text": "Medo-Persian army encircling the city",
+      "hash": "13d0998ca2cd4d79"
+    },
+    {
+      "id": "S05-DGM-s5-1-1-P2",
+      "sheet": 5,
+      "field": "diagram",
+      "text": "Persian engineers diverting Euphrates",
+      "hash": "2b74128990e8e24f"
+    },
+    {
+      "id": "S05-DGM-s5-1-1-P3",
+      "sheet": 5,
+      "field": "diagram",
+      "text": "Cyrus fulfilling Isaiah 45:1-3",
+      "hash": "6f7e4da443532d8c"
+    },
+    {
+      "id": "S05-DGM-s5-1-2-ROLE",
+      "sheet": 5,
+      "field": "diagram",
+      "text": "Inside the Palace",
+      "hash": "80a2230da8b9d132"
+    },
+    {
+      "id": "S05-DGM-s5-1-2-TITLE",
+      "sheet": 5,
+      "field": "diagram",
+      "text": "Inside the Palace",
+      "hash": "80a2230da8b9d132"
+    },
+    {
+      "id": "S05-DGM-s5-1-2-P1",
+      "sheet": 5,
+      "field": "diagram",
+      "text": "1,000 nobles drinking wine",
+      "hash": "87180811c8110670"
+    },
+    {
+      "id": "S05-DGM-s5-1-2-P2",
+      "sheet": 5,
+      "field": "diagram",
+      "text": "False security behind massive walls",
+      "hash": "85301a01e98c50de"
+    },
+    {
+      "id": "S05-DGM-s5-1-2-P3",
+      "sheet": 5,
+      "field": "diagram",
+      "text": "Belshazzar toasting idols with holy vessels",
+      "hash": "d960f76bd62e375c"
+    },
+    {
+      "id": "S05-DGM-s5-2-TITLE",
+      "sheet": 5,
+      "field": "diagram",
+      "text": "The Babylonian Co-Regency Hierarchy",
+      "hash": "db24708ce2adfa70"
+    },
+    {
+      "id": "S05-DGM-s5-2-1-ROLE",
+      "sheet": 5,
+      "field": "diagram",
+      "text": "1st Ruler",
+      "hash": "10f2f4d93b5599b6"
+    },
+    {
+      "id": "S05-DGM-s5-2-1-TITLE",
+      "sheet": 5,
+      "field": "diagram",
+      "text": "Nabonidus",
+      "hash": "dd09d5e8eb0f4488"
+    },
+    {
+      "id": "S05-DGM-s5-2-1-TEXT",
+      "sheet": 5,
+      "field": "diagram",
+      "text": "King of Babylon, residing in Tema, Arabia.",
+      "hash": "c78afc7dafd4824f"
+    },
+    {
+      "id": "S05-DGM-s5-2-2-ROLE",
+      "sheet": 5,
+      "field": "diagram",
+      "text": "2nd Ruler",
+      "hash": "80c1c7a2f13f780a"
+    },
+    {
+      "id": "S05-DGM-s5-2-2-TITLE",
+      "sheet": 5,
+      "field": "diagram",
+      "text": "Belshazzar",
+      "hash": "0cbcbd615939a537"
+    },
+    {
+      "id": "S05-DGM-s5-2-2-TEXT",
+      "sheet": 5,
+      "field": "diagram",
+      "text": "Eldest son, Co-regent ruling inside Babylon.",
+      "hash": "e3b9d2de51e564f9"
+    },
+    {
+      "id": "S05-DGM-s5-2-3-ROLE",
+      "sheet": 5,
+      "field": "diagram",
+      "text": "3rd Ruler",
+      "hash": "7ab1f45f32f1f557"
+    },
+    {
+      "id": "S05-DGM-s5-2-3-TITLE",
+      "sheet": 5,
+      "field": "diagram",
+      "text": "Daniel",
+      "hash": "7297db81c2f7916e"
+    },
+    {
+      "id": "S05-DGM-s5-2-3-TEXT",
+      "sheet": 5,
+      "field": "diagram",
+      "text": "Offered the highest vacant post.",
+      "hash": "d61aae9723788a97"
+    },
+    {
+      "id": "S05-DGM-s5-3-TITLE",
+      "sheet": 5,
+      "field": "diagram",
+      "text": "The Wall of Audit (Daniel 5:25-28)",
+      "hash": "064979a54d38ba28"
+    },
+    {
+      "id": "S05-DGM-s5-4-TITLE",
+      "sheet": 5,
+      "field": "diagram",
+      "text": "The Fulfillment of Historicist Prophecy",
+      "hash": "fb4bbe222b4125b8"
+    },
+    {
+      "id": "S05-DGM-s5-4-1-ROLE",
+      "sheet": 5,
+      "field": "diagram",
+      "text": "Isaiah 44:27; 45:1-3",
+      "hash": "6d8fe06108a69450"
+    },
+    {
+      "id": "S05-DGM-s5-4-1-TITLE",
+      "sheet": 5,
+      "field": "diagram",
+      "text": "Isaiah 44:27; 45:1-3",
+      "hash": "6d8fe06108a69450"
+    },
+    {
+      "id": "S05-DGM-s5-4-1-P1",
+      "sheet": 5,
+      "field": "diagram",
+      "text": "Cyrus named by name more than a century prior",
+      "hash": "fcb0024ef8fb3b71"
+    },
+    {
+      "id": "S05-DGM-s5-4-1-P2",
+      "sheet": 5,
+      "field": "diagram",
+      "text": "\"To open before him the two leaved gates\" (45:1)",
+      "hash": "951359602caf8baa"
+    },
+    {
+      "id": "S05-DGM-s5-4-1-P3",
+      "sheet": 5,
+      "field": "diagram",
+      "text": "\"That saith to the deep, Be dry\" (44:27)",
+      "hash": "7bfe222db05a87b1"
+    },
+    {
+      "id": "S05-DGM-s5-4-1-P4",
+      "sheet": 5,
+      "field": "diagram",
+      "text": "The Head of Gold (Babylon)",
+      "hash": "4d34660fd21e4288"
+    },
+    {
+      "id": "S05-DGM-s5-4-2-ROLE",
+      "sheet": 5,
+      "field": "diagram",
+      "text": "Daniel 5 / Secular History (539 B.C.)",
+      "hash": "181e2afde2bc7dff"
+    },
+    {
+      "id": "S05-DGM-s5-4-2-TITLE",
+      "sheet": 5,
+      "field": "diagram",
+      "text": "Daniel 5 / Secular History (539 B.C.)",
+      "hash": "181e2afde2bc7dff"
+    },
+    {
+      "id": "S05-DGM-s5-4-2-P1",
+      "sheet": 5,
+      "field": "diagram",
+      "text": "Cyrus the Persian conquers Babylon",
+      "hash": "7c6b3684389a5fc6"
+    },
+    {
+      "id": "S05-DGM-s5-4-2-P2",
+      "sheet": 5,
+      "field": "diagram",
+      "text": "Gates left open during the feast",
+      "hash": "5ca4f4128b4f09b9"
+    },
+    {
+      "id": "S05-DGM-s5-4-2-P3",
+      "sheet": 5,
+      "field": "diagram",
+      "text": "Euphrates diverted by Persian engineers",
+      "hash": "b12ecb33e513f5e0"
+    },
+    {
+      "id": "S05-DGM-s5-4-2-P4",
+      "sheet": 5,
+      "field": "diagram",
+      "text": "Replaced by the Chest of Silver (Medo-Persia)",
+      "hash": "87edb0f1adb11f20"
+    },
+    {
+      "id": "S05-DGM-s5-5-TITLE",
+      "sheet": 5,
+      "field": "diagram",
+      "text": "The Redemptive Typology",
+      "hash": "5bd1cfffc7405338"
+    },
+    {
+      "id": "S05-DGM-s5-5-1-ROLE",
+      "sheet": 5,
+      "field": "diagram",
+      "text": "Cyrus the Deliverer",
+      "hash": "f90b085ed5284fde"
+    },
+    {
+      "id": "S05-DGM-s5-5-1-TITLE",
+      "sheet": 5,
+      "field": "diagram",
+      "text": "Cyrus the Deliverer",
+      "hash": "f90b085ed5284fde"
+    },
+    {
+      "id": "S05-DGM-s5-5-1-P1",
+      "sheet": 5,
+      "field": "diagram",
+      "text": "Named God's \"anointed\" (Isa. 45:1)",
+      "hash": "f019df5b5f882cc1"
+    },
+    {
+      "id": "S05-DGM-s5-5-1-P2",
+      "sheet": 5,
+      "field": "diagram",
+      "text": "Overthrew literal Babylon",
+      "hash": "9b2d46787a3a759e"
+    },
+    {
+      "id": "S05-DGM-s5-5-1-P3",
+      "sheet": 5,
+      "field": "diagram",
+      "text": "Dried the waters of the Euphrates",
+      "hash": "ffabdd9e5921fb4c"
+    },
+    {
+      "id": "S05-DGM-s5-5-1-P4",
+      "sheet": 5,
+      "field": "diagram",
+      "text": "Liberated Jewish captives without price",
+      "hash": "130ea5c3d835eef1"
+    },
+    {
+      "id": "S05-DGM-s5-5-1-P5",
+      "sheet": 5,
+      "field": "diagram",
+      "text": "Commanded the rebuilding of Jerusalem",
+      "hash": "268de53970fc2141"
+    },
+    {
+      "id": "S05-DGM-s5-5-2-ROLE",
+      "sheet": 5,
+      "field": "diagram",
+      "text": "Jesus Christ the Redeemer",
+      "hash": "9938ef4411edd700"
+    },
+    {
+      "id": "S05-DGM-s5-5-2-TITLE",
+      "sheet": 5,
+      "field": "diagram",
+      "text": "Jesus Christ the Redeemer",
+      "hash": "9938ef4411edd700"
+    },
+    {
+      "id": "S05-DGM-s5-5-2-P1",
+      "sheet": 5,
+      "field": "diagram",
+      "text": "The true Anointed One, the Messiah",
+      "hash": "e8664f9bc6418264"
+    },
+    {
+      "id": "S05-DGM-s5-5-2-P2",
+      "sheet": 5,
+      "field": "diagram",
+      "text": "Overthrows spiritual Babylon (Rev. 18)",
+      "hash": "f967c51dbafd3322"
+    },
+    {
+      "id": "S05-DGM-s5-5-2-P3",
+      "sheet": 5,
+      "field": "diagram",
+      "text": "Conquers the river of sin and death",
+      "hash": "5cae75b61a8baea6"
+    },
+    {
+      "id": "S05-DGM-s5-5-2-P4",
+      "sheet": 5,
+      "field": "diagram",
+      "text": "Liberates sinners from captivity to Satan",
+      "hash": "b49cc0b343a69980"
+    },
+    {
+      "id": "S05-DGM-s5-5-2-P5",
+      "sheet": 5,
+      "field": "diagram",
+      "text": "Builds the New Jerusalem, the eternal city",
+      "hash": "08265aac2d347691"
     },
     {
       "id": "S05-GD-INTRO-EXP",
@@ -10259,6 +11862,531 @@
       "field": "studyGuide",
       "text": "When pressured to close the window of my testimony, do I seek human approval or the vindication of the living God?",
       "hash": "cbaf2cb8cd67e137"
+    },
+    {
+      "id": "S06-DGM-s6-1-TITLE",
+      "sheet": 6,
+      "field": "diagram",
+      "text": "The Imperial Transition: Babylon to Medo-Persia (538 B.C.)",
+      "hash": "1ed37883ac3e6a3a"
+    },
+    {
+      "id": "S06-DGM-s6-1-1-ROLE",
+      "sheet": 6,
+      "field": "diagram",
+      "text": "Gold Head",
+      "hash": "fb505d391d99c345"
+    },
+    {
+      "id": "S06-DGM-s6-1-1-TITLE",
+      "sheet": 6,
+      "field": "diagram",
+      "text": "Babylon",
+      "hash": "348260ed7e926677"
+    },
+    {
+      "id": "S06-DGM-s6-1-1-P1",
+      "sheet": 6,
+      "field": "diagram",
+      "text": "Autocratic Imperial Whim",
+      "hash": "57d25dc5b8151c57"
+    },
+    {
+      "id": "S06-DGM-s6-1-1-P2",
+      "sheet": 6,
+      "field": "diagram",
+      "text": "King's word makes and breaks law",
+      "hash": "23cb7921b9536f5b"
+    },
+    {
+      "id": "S06-DGM-s6-1-1-P3",
+      "sheet": 6,
+      "field": "diagram",
+      "text": "Overthrown October 539 B.C.",
+      "hash": "14f911756485b29f"
+    },
+    {
+      "id": "S06-DGM-s6-1-1-P4",
+      "sheet": 6,
+      "field": "diagram",
+      "text": "Nebuchadnezzar / Belshazzar",
+      "hash": "18499ac20a1c09f0"
+    },
+    {
+      "id": "S06-DGM-s6-1-2-ROLE",
+      "sheet": 6,
+      "field": "diagram",
+      "text": "Silver Chest & Arms",
+      "hash": "c9d3afb7fcd2fdff"
+    },
+    {
+      "id": "S06-DGM-s6-1-2-TITLE",
+      "sheet": 6,
+      "field": "diagram",
+      "text": "Medo-Persia",
+      "hash": "3a44b124a272abc2"
+    },
+    {
+      "id": "S06-DGM-s6-1-2-P1",
+      "sheet": 6,
+      "field": "diagram",
+      "text": "Unalterable royal law",
+      "hash": "bb44463b9ad6ac27"
+    },
+    {
+      "id": "S06-DGM-s6-1-2-P2",
+      "sheet": 6,
+      "field": "diagram",
+      "text": "\"Law of Medes & Persians, which altereth not\"",
+      "hash": "82bf4e8403334450"
+    },
+    {
+      "id": "S06-DGM-s6-1-2-P3",
+      "sheet": 6,
+      "field": "diagram",
+      "text": "120 Satrapies; 3 Presidents (Daniel Chief)",
+      "hash": "0ef0a3bd441eedf9"
+    },
+    {
+      "id": "S06-DGM-s6-1-2-P4",
+      "sheet": 6,
+      "field": "diagram",
+      "text": "Darius the Mede / Cyrus the Great",
+      "hash": "dada5b6e074ecee1"
+    },
+    {
+      "id": "S06-DGM-s6-2-TITLE",
+      "sheet": 6,
+      "field": "diagram",
+      "text": "The Constitutional Paradigm Shift",
+      "hash": "d4ca215838f1432c"
+    },
+    {
+      "id": "S06-DGM-s6-2-1-TITLE",
+      "sheet": 6,
+      "field": "diagram",
+      "text": "Babylonian Autocracy",
+      "hash": "702c8385c639e6ad"
+    },
+    {
+      "id": "S06-DGM-s6-2-1-P1",
+      "sheet": 6,
+      "field": "diagram",
+      "text": "Law is the monarch's personal whim",
+      "hash": "4f355c96a1d243cf"
+    },
+    {
+      "id": "S06-DGM-s6-2-1-P2",
+      "sheet": 6,
+      "field": "diagram",
+      "text": "Can execute or spare on impulse",
+      "hash": "ecb784c27b9471fe"
+    },
+    {
+      "id": "S06-DGM-s6-2-1-P3",
+      "sheet": 6,
+      "field": "diagram",
+      "text": "Nebuchadnezzar: absolute dictator",
+      "hash": "0cfa748cfc9364cf"
+    },
+    {
+      "id": "S06-DGM-s6-2-1-P4",
+      "sheet": 6,
+      "field": "diagram",
+      "text": "Daniel 2-4",
+      "hash": "e2add893bcdfb3c4"
+    },
+    {
+      "id": "S06-DGM-s6-2-2-TITLE",
+      "sheet": 6,
+      "field": "diagram",
+      "text": "Medo-Persian Unalterable Law",
+      "hash": "ae13aed9fcc1bc10"
+    },
+    {
+      "id": "S06-DGM-s6-2-2-P1",
+      "sheet": 6,
+      "field": "diagram",
+      "text": "Law is supreme over the monarch",
+      "hash": "9e752be3b75dbc20"
+    },
+    {
+      "id": "S06-DGM-s6-2-2-P2",
+      "sheet": 6,
+      "field": "diagram",
+      "text": "Royal signet creates immutable decree",
+      "hash": "2143b2ccafcc9914"
+    },
+    {
+      "id": "S06-DGM-s6-2-2-P3",
+      "sheet": 6,
+      "field": "diagram",
+      "text": "Darius: trapped by his own legislation",
+      "hash": "5f5f7e14b38d9a6d"
+    },
+    {
+      "id": "S06-DGM-s6-2-2-P4",
+      "sheet": 6,
+      "field": "diagram",
+      "text": "Daniel 6; Esther 1:19; 8:8; Diodorus XVII.30",
+      "hash": "54c42d6be0692d8e"
+    },
+    {
+      "id": "S06-DGM-s6-3-TITLE",
+      "sheet": 6,
+      "field": "diagram",
+      "text": "The Satraps' Forensic Audit (Daniel 6:4-5)",
+      "hash": "900944ce41869ef8"
+    },
+    {
+      "id": "S06-DGM-s6-3-NOTE",
+      "sheet": 6,
+      "field": "diagram",
+      "text": "The adversaries' conclusion (Dan 6:5, KJV): \"We shall not find any occasion against this Daniel, except we find it against him concerning the law of his God.\"",
+      "hash": "e4c6724748b40612"
+    },
+    {
+      "id": "S06-DGM-s6-4-TITLE",
+      "sheet": 6,
+      "field": "diagram",
+      "text": "The Covenant Posture at the Window (Daniel 6:10)",
+      "hash": "b8c27b8c42efb286"
+    },
+    {
+      "id": "S06-DGM-s6-4-1-TITLE",
+      "sheet": 6,
+      "field": "diagram",
+      "text": "The Imperial Command",
+      "hash": "1bc6ce25eebda188"
+    },
+    {
+      "id": "S06-DGM-s6-4-1-P1",
+      "sheet": 6,
+      "field": "diagram",
+      "text": "\"Ask no petition of any god\"",
+      "hash": "5898c52b4184c9bc"
+    },
+    {
+      "id": "S06-DGM-s6-4-1-P2",
+      "sheet": 6,
+      "field": "diagram",
+      "text": "30-day suspension of worship",
+      "hash": "7b63cc7cd69eba86"
+    },
+    {
+      "id": "S06-DGM-s6-4-1-P3",
+      "sheet": 6,
+      "field": "diagram",
+      "text": "Enforced by penalty of the lions' den",
+      "hash": "e45d3abd11015664"
+    },
+    {
+      "id": "S06-DGM-s6-4-1-P4",
+      "sheet": 6,
+      "field": "diagram",
+      "text": "Attempted usurpation of heaven's throne",
+      "hash": "21a5128d1acee228"
+    },
+    {
+      "id": "S06-DGM-s6-4-2-TITLE",
+      "sheet": 6,
+      "field": "diagram",
+      "text": "Daniel's Covenant Posture",
+      "hash": "4eb9beb09740914a"
+    },
+    {
+      "id": "S06-DGM-s6-4-2-P1",
+      "sheet": 6,
+      "field": "diagram",
+      "text": "Knelt three times daily in prayer",
+      "hash": "11d13cb2341c9ae7"
+    },
+    {
+      "id": "S06-DGM-s6-4-2-P2",
+      "sheet": 6,
+      "field": "diagram",
+      "text": "Unbroken rhythm: \"as he did aforetime\"",
+      "hash": "01d1a1394d50161c"
+    },
+    {
+      "id": "S06-DGM-s6-4-2-P3",
+      "sheet": 6,
+      "field": "diagram",
+      "text": "Windows open toward Jerusalem (1 Kings 8)",
+      "hash": "f097972768b88d5f"
+    },
+    {
+      "id": "S06-DGM-s6-4-2-P4",
+      "sheet": 6,
+      "field": "diagram",
+      "text": "Sacred duty: \"Obey God rather than men\" (Acts 5:29)",
+      "hash": "f6f5fdc39fd65afe"
+    },
+    {
+      "id": "S06-DGM-s6-5-TITLE",
+      "sheet": 6,
+      "field": "diagram",
+      "text": "The Dual Conflict: The Earthly Pit vs. the Heavenly Court",
+      "hash": "397e2d5ed7c297bd"
+    },
+    {
+      "id": "S06-DGM-s6-5-1-TITLE",
+      "sheet": 6,
+      "field": "diagram",
+      "text": "The Earthly Conspiracy",
+      "hash": "233a904fc4a05c98"
+    },
+    {
+      "id": "S06-DGM-s6-5-1-P1",
+      "sheet": 6,
+      "field": "diagram",
+      "text": "Envious satraps orchestrate trap",
+      "hash": "53719115ae335c99"
+    },
+    {
+      "id": "S06-DGM-s6-5-1-P2",
+      "sheet": 6,
+      "field": "diagram",
+      "text": "Irrevocable statute seals the pit",
+      "hash": "cfe0adc202a6fb7f"
+    },
+    {
+      "id": "S06-DGM-s6-5-1-P3",
+      "sheet": 6,
+      "field": "diagram",
+      "text": "Heavy stone sealed with royal signet",
+      "hash": "51f5356aec358778"
+    },
+    {
+      "id": "S06-DGM-s6-5-1-P4",
+      "sheet": 6,
+      "field": "diagram",
+      "text": "Daniel consigned to violent death",
+      "hash": "0d173e5e37727603"
+    },
+    {
+      "id": "S06-DGM-s6-5-1-P5",
+      "sheet": 6,
+      "field": "diagram",
+      "text": "Darius's helplessness under human law",
+      "hash": "cb986f43ab01393b"
+    },
+    {
+      "id": "S06-DGM-s6-5-2-TITLE",
+      "sheet": 6,
+      "field": "diagram",
+      "text": "The Heavenly Vindication",
+      "hash": "3f1aa8ea4ca60f9a"
+    },
+    {
+      "id": "S06-DGM-s6-5-2-P1",
+      "sheet": 6,
+      "field": "diagram",
+      "text": "Angel dispatched to shut lions' mouths",
+      "hash": "3c5e2f3598653f9f"
+    },
+    {
+      "id": "S06-DGM-s6-5-2-P2",
+      "sheet": 6,
+      "field": "diagram",
+      "text": "King fasts; dawn brings joyful inquiry",
+      "hash": "831e2790c7e6564e"
+    },
+    {
+      "id": "S06-DGM-s6-5-2-P3",
+      "sheet": 6,
+      "field": "diagram",
+      "text": "Daniel lifted out completely unhurt",
+      "hash": "feea4446cef37ea6"
+    },
+    {
+      "id": "S06-DGM-s6-5-2-P4",
+      "sheet": 6,
+      "field": "diagram",
+      "text": "Conspirators face swift retributive justice",
+      "hash": "72b89029c0e57c29"
+    },
+    {
+      "id": "S06-DGM-s6-5-2-P5",
+      "sheet": 6,
+      "field": "diagram",
+      "text": "Darius publishes God's eternal dominion (Dan. 6:26)",
+      "hash": "79b0ac6699432189"
+    },
+    {
+      "id": "S06-DGM-s6-6-TITLE",
+      "sheet": 6,
+      "field": "diagram",
+      "text": "The Redemptive Typology: Daniel and Jesus Christ",
+      "hash": "f6a5778a2c774dfe"
+    },
+    {
+      "id": "S06-DGM-s6-6-1-TITLE",
+      "sheet": 6,
+      "field": "diagram",
+      "text": "Daniel in the Lions' Den",
+      "hash": "fffbe43868e3acd5"
+    },
+    {
+      "id": "S06-DGM-s6-6-1-P1",
+      "sheet": 6,
+      "field": "diagram",
+      "text": "Envious rulers plot his destruction",
+      "hash": "e06ca3057a321340"
+    },
+    {
+      "id": "S06-DGM-s6-6-1-P2",
+      "sheet": 6,
+      "field": "diagram",
+      "text": "Sinned against no law; totally innocent",
+      "hash": "d1bef633440a64db"
+    },
+    {
+      "id": "S06-DGM-s6-6-1-P3",
+      "sheet": 6,
+      "field": "diagram",
+      "text": "Reluctant ruler seeks to deliver him",
+      "hash": "bf1ba711d84d27a5"
+    },
+    {
+      "id": "S06-DGM-s6-6-1-P4",
+      "sheet": 6,
+      "field": "diagram",
+      "text": "Cast into a dark pit of death",
+      "hash": "76dd0f23c5d93ada"
+    },
+    {
+      "id": "S06-DGM-s6-6-1-P5",
+      "sheet": 6,
+      "field": "diagram",
+      "text": "Stone placed over mouth of pit (6:17)",
+      "hash": "c2f9f0dd16345834"
+    },
+    {
+      "id": "S06-DGM-s6-6-1-P6",
+      "sheet": 6,
+      "field": "diagram",
+      "text": "Sealed with king's & lords' signets",
+      "hash": "164d3a21323c1455"
+    },
+    {
+      "id": "S06-DGM-s6-6-1-P7",
+      "sheet": 6,
+      "field": "diagram",
+      "text": "Delivered at the break of dawn (6:19)",
+      "hash": "cae04ca40436d1d9"
+    },
+    {
+      "id": "S06-DGM-s6-6-1-P8",
+      "sheet": 6,
+      "field": "diagram",
+      "text": "Angel sent to close lions' mouths",
+      "hash": "6de360bb296b2fff"
+    },
+    {
+      "id": "S06-DGM-s6-6-1-P9",
+      "sheet": 6,
+      "field": "diagram",
+      "text": "Emerged alive, unhurt, and victorious",
+      "hash": "fa23358959dcd317"
+    },
+    {
+      "id": "S06-DGM-s6-6-1-P10",
+      "sheet": 6,
+      "field": "diagram",
+      "text": "Conquered the roaring lion (1 Pet 5:8)",
+      "hash": "2d8ae7f0883eb840"
+    },
+    {
+      "id": "S06-DGM-s6-6-1-P11",
+      "sheet": 6,
+      "field": "diagram",
+      "text": "Universal decree of eternal kingdom",
+      "hash": "d4b87cf12b7b1a42"
+    },
+    {
+      "id": "S06-DGM-s6-6-2-TITLE",
+      "sheet": 6,
+      "field": "diagram",
+      "text": "Jesus Christ at Calvary & the Tomb",
+      "hash": "a2f98e8545cf5d51"
+    },
+    {
+      "id": "S06-DGM-s6-6-2-P1",
+      "sheet": 6,
+      "field": "diagram",
+      "text": "Envious chief priests deliver Him to Pilate (Matt 27:18)",
+      "hash": "b292ba95332af2c6"
+    },
+    {
+      "id": "S06-DGM-s6-6-2-P2",
+      "sheet": 6,
+      "field": "diagram",
+      "text": "\"I find no fault in this man\" (Luke 23:4; 1 Pet 2:22)",
+      "hash": "fc5d9eb7b1277a56"
+    },
+    {
+      "id": "S06-DGM-s6-6-2-P3",
+      "sheet": 6,
+      "field": "diagram",
+      "text": "Pilate seeks to release Him, but yields to pressure",
+      "hash": "d1842df214999af6"
+    },
+    {
+      "id": "S06-DGM-s6-6-2-P4",
+      "sheet": 6,
+      "field": "diagram",
+      "text": "Crucified and buried in a rock-hewn tomb (Matt 27:60)",
+      "hash": "f33eddd575dee1c0"
+    },
+    {
+      "id": "S06-DGM-s6-6-2-P5",
+      "sheet": 6,
+      "field": "diagram",
+      "text": "Great stone rolled to door of tomb (Matt 27:60)",
+      "hash": "a72fb3f7b2361779"
+    },
+    {
+      "id": "S06-DGM-s6-6-2-P6",
+      "sheet": 6,
+      "field": "diagram",
+      "text": "Tomb sealed by Roman authority with guards (Matt 27:66)",
+      "hash": "b953b50ccb891561"
+    },
+    {
+      "id": "S06-DGM-s6-6-2-P7",
+      "sheet": 6,
+      "field": "diagram",
+      "text": "Risen at dawn on the third day (Matt 28:1; Luke 24:1)",
+      "hash": "1bc0b32881f2cbcd"
+    },
+    {
+      "id": "S06-DGM-s6-6-2-P8",
+      "sheet": 6,
+      "field": "diagram",
+      "text": "Angel descends, rolls stone away (Matt 28:2)",
+      "hash": "4fff315694106fc5"
+    },
+    {
+      "id": "S06-DGM-s6-6-2-P9",
+      "sheet": 6,
+      "field": "diagram",
+      "text": "Broke the bands of death; alive forevermore (Rev 1:18)",
+      "hash": "894a57bb4835c63b"
+    },
+    {
+      "id": "S06-DGM-s6-6-2-P10",
+      "sheet": 6,
+      "field": "diagram",
+      "text": "Crushed the ancient serpent; defeated Satan (Heb 2:14)",
+      "hash": "b0aed362fb42c727"
+    },
+    {
+      "id": "S06-DGM-s6-6-2-P11",
+      "sheet": 6,
+      "field": "diagram",
+      "text": "\"All power is given unto me in heaven and in earth\" (Matt 28:18)",
+      "hash": "d365597b05006bd6"
     },
     {
       "id": "S06-GD-INTRO-EXP",
@@ -11820,6 +13948,433 @@
       "field": "studyGuide",
       "text": "Do I want the Son of man to receive the kingdom, or a horn that speaks pompous words on my behalf?",
       "hash": "122a66f14b54fbb9"
+    },
+    {
+      "id": "S07-DGM-s7-1-TITLE",
+      "sheet": 7,
+      "field": "diagram",
+      "text": "The Contiguous Prophetic Correlation: Daniel 2 & Daniel 7",
+      "hash": "7b4a6fd45cd90597"
+    },
+    {
+      "id": "S07-DGM-s7-1-1-ROLE",
+      "sheet": 7,
+      "field": "diagram",
+      "text": "The World's View: Metals",
+      "hash": "fc8dafdf9951a9f3"
+    },
+    {
+      "id": "S07-DGM-s7-1-1-TITLE",
+      "sheet": 7,
+      "field": "diagram",
+      "text": "Daniel 2",
+      "hash": "49365a881c4eba67"
+    },
+    {
+      "id": "S07-DGM-s7-1-1-P1",
+      "sheet": 7,
+      "field": "diagram",
+      "text": "Gold Head (605-539 B.C.)",
+      "hash": "3eac698beb004094"
+    },
+    {
+      "id": "S07-DGM-s7-1-1-P2",
+      "sheet": 7,
+      "field": "diagram",
+      "text": "Silver Chest & Arms (539-331 B.C.)",
+      "hash": "6c7f56b9e53ec93c"
+    },
+    {
+      "id": "S07-DGM-s7-1-1-P3",
+      "sheet": 7,
+      "field": "diagram",
+      "text": "Bronze Belly & Thighs (331-168 B.C.)",
+      "hash": "0aec893b4b577a91"
+    },
+    {
+      "id": "S07-DGM-s7-1-1-P4",
+      "sheet": 7,
+      "field": "diagram",
+      "text": "Iron Legs (168 B.C.-476)",
+      "hash": "5da1bbf753802866"
+    },
+    {
+      "id": "S07-DGM-s7-1-1-P5",
+      "sheet": 7,
+      "field": "diagram",
+      "text": "Iron & Clay Feet (476-Present)",
+      "hash": "586b552329a6e4f9"
+    },
+    {
+      "id": "S07-DGM-s7-1-1-P6",
+      "sheet": 7,
+      "field": "diagram",
+      "text": "Stone Pulverizes Statue",
+      "hash": "dc9f218ecca30121"
+    },
+    {
+      "id": "S07-DGM-s7-1-2-ROLE",
+      "sheet": 7,
+      "field": "diagram",
+      "text": "Heaven's View: Predators",
+      "hash": "d7007c61b4683fb3"
+    },
+    {
+      "id": "S07-DGM-s7-1-2-TITLE",
+      "sheet": 7,
+      "field": "diagram",
+      "text": "Daniel 7",
+      "hash": "14eafda1711c8706"
+    },
+    {
+      "id": "S07-DGM-s7-1-2-P1",
+      "sheet": 7,
+      "field": "diagram",
+      "text": "Winged Lion (Babylon)",
+      "hash": "3ac906a944df9357"
+    },
+    {
+      "id": "S07-DGM-s7-1-2-P2",
+      "sheet": 7,
+      "field": "diagram",
+      "text": "Lopsided Bear with Ribs (Medo-Persia)",
+      "hash": "3b9078ee9b53c216"
+    },
+    {
+      "id": "S07-DGM-s7-1-2-P3",
+      "sheet": 7,
+      "field": "diagram",
+      "text": "Four-Headed Leopard (Greece)",
+      "hash": "c5da9296c28b3394"
+    },
+    {
+      "id": "S07-DGM-s7-1-2-P4",
+      "sheet": 7,
+      "field": "diagram",
+      "text": "Dreadful Iron Beast (Pagan Rome)",
+      "hash": "80dcf88321989a70"
+    },
+    {
+      "id": "S07-DGM-s7-1-2-P5",
+      "sheet": 7,
+      "field": "diagram",
+      "text": "Ten Horns / Little Horn (Divided Rome & Papacy)",
+      "hash": "926409ad639a66d2"
+    },
+    {
+      "id": "S07-DGM-s7-1-2-P6",
+      "sheet": 7,
+      "field": "diagram",
+      "text": "Celestial Court & Kingdom Given to Saints",
+      "hash": "e4df68efb5beca8a"
+    },
+    {
+      "id": "S07-DGM-s7-2-TITLE",
+      "sheet": 7,
+      "field": "diagram",
+      "text": "The Four Beasts and Their Succession (Daniel 7:4-7)",
+      "hash": "fd6cc0d1b7b11faf"
+    },
+    {
+      "id": "S07-DGM-s7-3-TITLE",
+      "sheet": 7,
+      "field": "diagram",
+      "text": "The Forensic Profile of the Eleventh Horn (Daniel 7:8, 24-25)",
+      "hash": "bf2a51932b23684e"
+    },
+    {
+      "id": "S07-DGM-s7-3-1-TITLE",
+      "sheet": 7,
+      "field": "diagram",
+      "text": "Scriptural Criteria",
+      "hash": "ff42d698739557df"
+    },
+    {
+      "id": "S07-DGM-s7-3-1-P1",
+      "sheet": 7,
+      "field": "diagram",
+      "text": "Rises among the ten horns",
+      "hash": "f616145c987a07e6"
+    },
+    {
+      "id": "S07-DGM-s7-3-1-P2",
+      "sheet": 7,
+      "field": "diagram",
+      "text": "Diverse from the others",
+      "hash": "63f0dfae24baf0f9"
+    },
+    {
+      "id": "S07-DGM-s7-3-1-P3",
+      "sheet": 7,
+      "field": "diagram",
+      "text": "Uproots 3 Arian horns",
+      "hash": "e28e54d9764fdbe1"
+    },
+    {
+      "id": "S07-DGM-s7-3-1-P4",
+      "sheet": 7,
+      "field": "diagram",
+      "text": "Eyes of a man; mouth speaking pomp",
+      "hash": "7513bb14e3543bb4"
+    },
+    {
+      "id": "S07-DGM-s7-3-1-P5",
+      "sheet": 7,
+      "field": "diagram",
+      "text": "Wears out the saints of the Most High",
+      "hash": "b53f8420d175c468"
+    },
+    {
+      "id": "S07-DGM-s7-3-1-P6",
+      "sheet": 7,
+      "field": "diagram",
+      "text": "Thinks to change times and laws",
+      "hash": "f7dc29a192f7f6ea"
+    },
+    {
+      "id": "S07-DGM-s7-3-1-P7",
+      "sheet": 7,
+      "field": "diagram",
+      "text": "Measured reign: 3.5 times",
+      "hash": "555462a304caa3d7"
+    },
+    {
+      "id": "S07-DGM-s7-3-2-TITLE",
+      "sheet": 7,
+      "field": "diagram",
+      "text": "Historical Fulfillment",
+      "hash": "26c748e791f7cf16"
+    },
+    {
+      "id": "S07-DGM-s7-3-2-P1",
+      "sheet": 7,
+      "field": "diagram",
+      "text": "Rises in Rome amid Western imperial collapse",
+      "hash": "8d20ba2867e60cd8"
+    },
+    {
+      "id": "S07-DGM-s7-3-2-P2",
+      "sheet": 7,
+      "field": "diagram",
+      "text": "Church-State power (spiritual + temporal crown)",
+      "hash": "7e15058a342255d5"
+    },
+    {
+      "id": "S07-DGM-s7-3-2-P3",
+      "sheet": 7,
+      "field": "diagram",
+      "text": "Heruli (493), Vandals (534), Ostrogoths (538)",
+      "hash": "7bfb6048be527fdd"
+    },
+    {
+      "id": "S07-DGM-s7-3-2-P4",
+      "sheet": 7,
+      "field": "diagram",
+      "text": "Papal claims: Vicar of Christ, universal bishop",
+      "hash": "1b1d69b8bf5e4569"
+    },
+    {
+      "id": "S07-DGM-s7-3-2-P5",
+      "sheet": 7,
+      "field": "diagram",
+      "text": "Medieval inquisitions, suppression of dissent",
+      "hash": "ec51f4c4d6c1aced"
+    },
+    {
+      "id": "S07-DGM-s7-3-2-P6",
+      "sheet": 7,
+      "field": "diagram",
+      "text": "Altered Decalogue: Sabbath changed to Sunday",
+      "hash": "175e41d5a476a91e"
+    },
+    {
+      "id": "S07-DGM-s7-3-2-P7",
+      "sheet": 7,
+      "field": "diagram",
+      "text": "1,260 years of civil supremacy (538-1798 A.D.)",
+      "hash": "23fb0b23045cca27"
+    },
+    {
+      "id": "S07-DGM-s7-4-TITLE",
+      "sheet": 7,
+      "field": "diagram",
+      "text": "The 1,260-Year Prophetic Timeline (538-1798 A.D.)",
+      "hash": "023073a010d302dc"
+    },
+    {
+      "id": "S07-DGM-s7-4-1-ROLE",
+      "sheet": 7,
+      "field": "diagram",
+      "text": "538 A.D.",
+      "hash": "9fed7dc3bccb8d8e"
+    },
+    {
+      "id": "S07-DGM-s7-4-1-TITLE",
+      "sheet": 7,
+      "field": "diagram",
+      "text": "Temporal power begins",
+      "hash": "76f0658d14752278"
+    },
+    {
+      "id": "S07-DGM-s7-4-1-P1",
+      "sheet": 7,
+      "field": "diagram",
+      "text": "Ostrogoths driven from Rome",
+      "hash": "1bb352c3f8d89228"
+    },
+    {
+      "id": "S07-DGM-s7-4-1-P2",
+      "sheet": 7,
+      "field": "diagram",
+      "text": "Justinian's decree takes active effect",
+      "hash": "b3508cf6ae2dd48a"
+    },
+    {
+      "id": "S07-DGM-s7-4-1-P3",
+      "sheet": 7,
+      "field": "diagram",
+      "text": "3rd Arian horn uprooted (Heruli/Vandal/Ostro)",
+      "hash": "16b4b56b0a3b90dd"
+    },
+    {
+      "id": "S07-DGM-s7-4-1-P4",
+      "sheet": 7,
+      "field": "diagram",
+      "text": "Church-state temporal power begins",
+      "hash": "fbb7afd8eb2be3e9"
+    },
+    {
+      "id": "S07-DGM-s7-4-2-ROLE",
+      "sheet": 7,
+      "field": "diagram",
+      "text": "1798 A.D.",
+      "hash": "47f0e09955d4f11d"
+    },
+    {
+      "id": "S07-DGM-s7-4-2-TITLE",
+      "sheet": 7,
+      "field": "diagram",
+      "text": "Temporal civil supremacy ends",
+      "hash": "302020b796c69157"
+    },
+    {
+      "id": "S07-DGM-s7-4-2-P1",
+      "sheet": 7,
+      "field": "diagram",
+      "text": "General Berthier captures Pope Pius VI",
+      "hash": "6f77965727e9846b"
+    },
+    {
+      "id": "S07-DGM-s7-4-2-P2",
+      "sheet": 7,
+      "field": "diagram",
+      "text": "Papal civil government abolished",
+      "hash": "6d722c0c3ed1f80c"
+    },
+    {
+      "id": "S07-DGM-s7-4-2-P3",
+      "sheet": 7,
+      "field": "diagram",
+      "text": "\"Deadly wound\" inflicted (Rev 13:3)",
+      "hash": "74150c9eb1658fc9"
+    },
+    {
+      "id": "S07-DGM-s7-4-2-P4",
+      "sheet": 7,
+      "field": "diagram",
+      "text": "Temporal civil supremacy ends",
+      "hash": "302020b796c69157"
+    },
+    {
+      "id": "S07-DGM-s7-5-TITLE",
+      "sheet": 7,
+      "field": "diagram",
+      "text": "The Two Moments of Divine Reckoning",
+      "hash": "acd164d94fce46a4"
+    },
+    {
+      "id": "S07-DGM-s7-5-1-TITLE",
+      "sheet": 7,
+      "field": "diagram",
+      "text": "1. The Heavenly Forensic Trial",
+      "hash": "92660ed20f4016fc"
+    },
+    {
+      "id": "S07-DGM-s7-5-1-P1",
+      "sheet": 7,
+      "field": "diagram",
+      "text": "Location: Heaven (before Ancient of Days)",
+      "hash": "350af3db646d239c"
+    },
+    {
+      "id": "S07-DGM-s7-5-1-P2",
+      "sheet": 7,
+      "field": "diagram",
+      "text": "Scripture: Daniel 7:9-14",
+      "hash": "f2a29c8c7bfa906e"
+    },
+    {
+      "id": "S07-DGM-s7-5-1-P3",
+      "sheet": 7,
+      "field": "diagram",
+      "text": "Action: Books opened, lives examined",
+      "hash": "4b88e5262f8e6d47"
+    },
+    {
+      "id": "S07-DGM-s7-5-1-P4",
+      "sheet": 7,
+      "field": "diagram",
+      "text": "Status of Horn: Still speaking on earth",
+      "hash": "502b3b93f0d22fde"
+    },
+    {
+      "id": "S07-DGM-s7-5-1-P5",
+      "sheet": 7,
+      "field": "diagram",
+      "text": "Verdict: Kingdom awarded to the saints",
+      "hash": "5b6f0800805b2dbf"
+    },
+    {
+      "id": "S07-DGM-s7-5-2-TITLE",
+      "sheet": 7,
+      "field": "diagram",
+      "text": "2. The Terrestrial Execution",
+      "hash": "4e4f30d389a0ee04"
+    },
+    {
+      "id": "S07-DGM-s7-5-2-P1",
+      "sheet": 7,
+      "field": "diagram",
+      "text": "Location: Earth (Second Advent of Christ)",
+      "hash": "6ec92cd536dc6bae"
+    },
+    {
+      "id": "S07-DGM-s7-5-2-P2",
+      "sheet": 7,
+      "field": "diagram",
+      "text": "Scripture: Daniel 7:26-27; Daniel 2:34-35",
+      "hash": "15880683ab661b69"
+    },
+    {
+      "id": "S07-DGM-s7-5-2-P3",
+      "sheet": 7,
+      "field": "diagram",
+      "text": "Action: Stone strikes image, beast destroyed",
+      "hash": "137b0f3b06fbe84b"
+    },
+    {
+      "id": "S07-DGM-s7-5-2-P4",
+      "sheet": 7,
+      "field": "diagram",
+      "text": "Status of Horn: Dominion consumed to the end",
+      "hash": "4f416abfa778bce2"
+    },
+    {
+      "id": "S07-DGM-s7-5-2-P5",
+      "sheet": 7,
+      "field": "diagram",
+      "text": "Realization: Saints inherit the new earth",
+      "hash": "4c9c29cbfab07389"
     },
     {
       "id": "S07-GD-INTRO-EXP",
@@ -13619,6 +16174,111 @@
       "field": "studyGuide",
       "text": "What does it mean for my own worship that the holy place is being put right through Christ's priesthood rather than an earthly altar?",
       "hash": "57e20380d3eed010"
+    },
+    {
+      "id": "S08-DGM-s8-1-TITLE",
+      "sheet": 8,
+      "field": "diagram",
+      "text": "The Literary & Theological Shift: Daniel 7 to Daniel 8",
+      "hash": "cba21ccbd8abd0fc"
+    },
+    {
+      "id": "S08-DGM-s8-1-1-ROLE",
+      "sheet": 8,
+      "field": "diagram",
+      "text": "DANIEL 7",
+      "hash": "0bea83e37400ab57"
+    },
+    {
+      "id": "S08-DGM-s8-1-1-TITLE",
+      "sheet": 8,
+      "field": "diagram",
+      "text": "Apocalyptic Theater: The World",
+      "hash": "399b8deab31d8049"
+    },
+    {
+      "id": "S08-DGM-s8-1-1-P1",
+      "sheet": 8,
+      "field": "diagram",
+      "text": "Churning Sea & Stormy Winds (Nations)",
+      "hash": "20d21788378d8c85"
+    },
+    {
+      "id": "S08-DGM-s8-1-1-P2",
+      "sheet": 8,
+      "field": "diagram",
+      "text": "Unclean Wild Predators (Lion, Bear, etc)",
+      "hash": "07f235d999be462a"
+    },
+    {
+      "id": "S08-DGM-s8-1-1-P3",
+      "sheet": 8,
+      "field": "diagram",
+      "text": "Focus: Geopolitical Empire & Court",
+      "hash": "b0c85ef973a2211f"
+    },
+    {
+      "id": "S08-DGM-s8-1-1-P4",
+      "sheet": 8,
+      "field": "diagram",
+      "text": "Language: Imperial Aramaic (Dan 2-7)",
+      "hash": "36e7882463c29d28"
+    },
+    {
+      "id": "S08-DGM-s8-1-2-ROLE",
+      "sheet": 8,
+      "field": "diagram",
+      "text": "DANIEL 8",
+      "hash": "04413497e6824975"
+    },
+    {
+      "id": "S08-DGM-s8-1-2-TITLE",
+      "sheet": 8,
+      "field": "diagram",
+      "text": "Sanctuary Theater: The Holy Place",
+      "hash": "180a0a4c537c0e6a"
+    },
+    {
+      "id": "S08-DGM-s8-1-2-P1",
+      "sheet": 8,
+      "field": "diagram",
+      "text": "The Ulai Canal at Susa (Imperial Sanctuary)",
+      "hash": "43ec31ba992abeed"
+    },
+    {
+      "id": "S08-DGM-s8-1-2-P2",
+      "sheet": 8,
+      "field": "diagram",
+      "text": "Clean Sacrificial Animals (Ram, He-Goat)",
+      "hash": "ae45c01143ff293e"
+    },
+    {
+      "id": "S08-DGM-s8-1-2-P3",
+      "sheet": 8,
+      "field": "diagram",
+      "text": "Focus: The Daily (Tamid) & Sanctuary Cleansing",
+      "hash": "5017e4141743561d"
+    },
+    {
+      "id": "S08-DGM-s8-1-2-P4",
+      "sheet": 8,
+      "field": "diagram",
+      "text": "Language: Sacred Hebrew (Dan 8-12)",
+      "hash": "d86f272ff7563b51"
+    },
+    {
+      "id": "S08-DGM-s8-2-TITLE",
+      "sheet": 8,
+      "field": "diagram",
+      "text": "The Animals and Succession in Daniel 8:3-8, 20-22",
+      "hash": "4065798329160d68"
+    },
+    {
+      "id": "S08-DGM-s8-3-TITLE",
+      "sheet": 8,
+      "field": "diagram",
+      "text": "The Three Criteria That Eliminate Antiochus IV Epiphanes",
+      "hash": "751b7c0b5af29077"
     },
     {
       "id": "S08-GD-INTRO-EXP",
@@ -15476,6 +18136,307 @@
       "hash": "594f09c23c82d847"
     },
     {
+      "id": "S09-DGM-s9-1-TITLE",
+      "sheet": 9,
+      "field": "diagram",
+      "text": "The Theological Linkage: Daniel 8 & Daniel 9",
+      "hash": "39741713e51bcca8"
+    },
+    {
+      "id": "S09-DGM-s9-1-1-ROLE",
+      "sheet": 9,
+      "field": "diagram",
+      "text": "Left column",
+      "hash": "90dad07ee54324a6"
+    },
+    {
+      "id": "S09-DGM-s9-1-1-TITLE",
+      "sheet": 9,
+      "field": "diagram",
+      "text": "Daniel 8 (The Unexplained Vision)",
+      "hash": "c929161257e5ebce"
+    },
+    {
+      "id": "S09-DGM-s9-1-1-P1",
+      "sheet": 9,
+      "field": "diagram",
+      "text": "2,300 Evening-Mornings (8:14)",
+      "hash": "fc33335bb6cc5ab5"
+    },
+    {
+      "id": "S09-DGM-s9-1-1-P2",
+      "sheet": 9,
+      "field": "diagram",
+      "text": "Left without a starting date",
+      "hash": "f2ff1ef9768d126a"
+    },
+    {
+      "id": "S09-DGM-s9-1-1-P3",
+      "sheet": 9,
+      "field": "diagram",
+      "text": "Daniel faints sick for days (8:27)",
+      "hash": "74b166e66974c3a5"
+    },
+    {
+      "id": "S09-DGM-s9-1-1-P4",
+      "sheet": 9,
+      "field": "diagram",
+      "text": "Focus: Heavenly Sanctuary & Tamid",
+      "hash": "14d5266a5740a6ae"
+    },
+    {
+      "id": "S09-DGM-s9-1-2-ROLE",
+      "sheet": 9,
+      "field": "diagram",
+      "text": "Right column",
+      "hash": "97ab5ed295bd3bea"
+    },
+    {
+      "id": "S09-DGM-s9-1-2-TITLE",
+      "sheet": 9,
+      "field": "diagram",
+      "text": "Daniel 9 (The Inspired Explanation)",
+      "hash": "570f51e46be75145"
+    },
+    {
+      "id": "S09-DGM-s9-1-2-P1",
+      "sheet": 9,
+      "field": "diagram",
+      "text": "Gabriel returns: \"Consider the vision\" (9:23)",
+      "hash": "e466c7e7f9a4eaed"
+    },
+    {
+      "id": "S09-DGM-s9-1-2-P2",
+      "sheet": 9,
+      "field": "diagram",
+      "text": "70 Weeks \"cut off\" (chathak) to anchor the span (9:24)",
+      "hash": "cfec284a2bff8200"
+    },
+    {
+      "id": "S09-DGM-s9-1-2-P3",
+      "sheet": 9,
+      "field": "diagram",
+      "text": "Gabriel gives the \"going forth of the decree\" (9:25)",
+      "hash": "8c651714d4824429"
+    },
+    {
+      "id": "S09-DGM-s9-1-2-P4",
+      "sheet": 9,
+      "field": "diagram",
+      "text": "Focus: Messiah Cut Off & Covenant Confirmed (9:26-27)",
+      "hash": "00298a24ddb86267"
+    },
+    {
+      "id": "S09-DGM-s9-2-TITLE",
+      "sheet": 9,
+      "field": "diagram",
+      "text": "Chathak: Severing 490 Years from the 2,300-Year Parent Timeline",
+      "hash": "e9cdcd543b21bfb9"
+    },
+    {
+      "id": "S09-DGM-s9-2-1-ROLE",
+      "sheet": 9,
+      "field": "diagram",
+      "text": "Parent timeline",
+      "hash": "4c6c1bbdc9c4f2a9"
+    },
+    {
+      "id": "S09-DGM-s9-2-1-TITLE",
+      "sheet": 9,
+      "field": "diagram",
+      "text": "2,300 Years",
+      "hash": "615259fd6a7a435f"
+    },
+    {
+      "id": "S09-DGM-s9-2-2-ROLE",
+      "sheet": 9,
+      "field": "diagram",
+      "text": "Chathak (Cut Off)",
+      "hash": "7e822382bf75c6c3"
+    },
+    {
+      "id": "S09-DGM-s9-2-2-TITLE",
+      "sheet": 9,
+      "field": "diagram",
+      "text": "490 Years (70 Weeks) & 1,810 Years",
+      "hash": "dc8628160ae5b029"
+    },
+    {
+      "id": "S09-DGM-s9-3-TITLE",
+      "sheet": 9,
+      "field": "diagram",
+      "text": "The Four Persian Decrees Compared",
+      "hash": "9619410acad1ee4d"
+    },
+    {
+      "id": "S09-DGM-s9-4-TITLE",
+      "sheet": 9,
+      "field": "diagram",
+      "text": "The 69 Weeks to Messiah the Prince (457 B.C. to A.D. 27)",
+      "hash": "4c2198aa5a70bf03"
+    },
+    {
+      "id": "S09-DGM-s9-4-1-ROLE",
+      "sheet": 9,
+      "field": "diagram",
+      "text": "457 B.C.",
+      "hash": "8d4dd175fe391b6f"
+    },
+    {
+      "id": "S09-DGM-s9-4-1-TITLE",
+      "sheet": 9,
+      "field": "diagram",
+      "text": "Decree of Artaxerxes I",
+      "hash": "76232bd32d3d04fc"
+    },
+    {
+      "id": "S09-DGM-s9-4-1-TEXT",
+      "sheet": 9,
+      "field": "diagram",
+      "text": "49 years (7 weeks) to 408 B.C.",
+      "hash": "c3956f2d161fa850"
+    },
+    {
+      "id": "S09-DGM-s9-4-2-ROLE",
+      "sheet": 9,
+      "field": "diagram",
+      "text": "408 B.C.",
+      "hash": "13a298b05c039706"
+    },
+    {
+      "id": "S09-DGM-s9-4-2-TITLE",
+      "sheet": 9,
+      "field": "diagram",
+      "text": "Jerusalem Rebuilt",
+      "hash": "9aaebffb6ee86f52"
+    },
+    {
+      "id": "S09-DGM-s9-4-2-TEXT",
+      "sheet": 9,
+      "field": "diagram",
+      "text": "Troublous times. 434 years (62 weeks) to A.D. 27.",
+      "hash": "1a4c6030c2122fe3"
+    },
+    {
+      "id": "S09-DGM-s9-4-3-ROLE",
+      "sheet": 9,
+      "field": "diagram",
+      "text": "A.D. 27",
+      "hash": "960e99014a426b50"
+    },
+    {
+      "id": "S09-DGM-s9-4-3-TITLE",
+      "sheet": 9,
+      "field": "diagram",
+      "text": "Baptism of Jesus",
+      "hash": "501b353f8bc5753a"
+    },
+    {
+      "id": "S09-DGM-s9-4-3-TEXT",
+      "sheet": 9,
+      "field": "diagram",
+      "text": "\"The time is fulfilled\".",
+      "hash": "7d9c49f8fc325c55"
+    },
+    {
+      "id": "S09-DGM-s9-5-TITLE",
+      "sheet": 9,
+      "field": "diagram",
+      "text": "The 70th Week of Daniel (A.D. 27 to A.D. 34)",
+      "hash": "8ef2b2d79832abc9"
+    },
+    {
+      "id": "S09-DGM-s9-5-1-ROLE",
+      "sheet": 9,
+      "field": "diagram",
+      "text": "A.D. 27",
+      "hash": "960e99014a426b50"
+    },
+    {
+      "id": "S09-DGM-s9-5-1-TITLE",
+      "sheet": 9,
+      "field": "diagram",
+      "text": "Baptism of Jesus",
+      "hash": "501b353f8bc5753a"
+    },
+    {
+      "id": "S09-DGM-s9-5-1-TEXT",
+      "sheet": 9,
+      "field": "diagram",
+      "text": "\"Time is fulfilled\". Ministry to Israel. 3.5 years to A.D. 31.",
+      "hash": "8e89b2b130e4bf24"
+    },
+    {
+      "id": "S09-DGM-s9-5-2-ROLE",
+      "sheet": 9,
+      "field": "diagram",
+      "text": "A.D. 31",
+      "hash": "8d9d7cb05c1705da"
+    },
+    {
+      "id": "S09-DGM-s9-5-2-TITLE",
+      "sheet": 9,
+      "field": "diagram",
+      "text": "The Cross (Passover)",
+      "hash": "2915b12edca13959"
+    },
+    {
+      "id": "S09-DGM-s9-5-2-TEXT",
+      "sheet": 9,
+      "field": "diagram",
+      "text": "\"Messiah cut off\". Veil rent; sacrifices cease. 3.5 years to A.D. 34.",
+      "hash": "69e1ab3ba741b019"
+    },
+    {
+      "id": "S09-DGM-s9-5-3-ROLE",
+      "sheet": 9,
+      "field": "diagram",
+      "text": "A.D. 34",
+      "hash": "e186d4d6214f9915"
+    },
+    {
+      "id": "S09-DGM-s9-5-3-TITLE",
+      "sheet": 9,
+      "field": "diagram",
+      "text": "Stoning of Stephen",
+      "hash": "9a4902e18b2f099f"
+    },
+    {
+      "id": "S09-DGM-s9-5-3-TEXT",
+      "sheet": 9,
+      "field": "diagram",
+      "text": "Gospel to Gentiles. 70 Weeks expire.",
+      "hash": "616c0096de5386c7"
+    },
+    {
+      "id": "S09-DGM-s9-6-TITLE",
+      "sheet": 9,
+      "field": "diagram",
+      "text": "The Unbroken Continuity from 457 B.C. to 1844 A.D.",
+      "hash": "55d0699cd7adad76"
+    },
+    {
+      "id": "S09-DGM-s9-6-1-ROLE",
+      "sheet": 9,
+      "field": "diagram",
+      "text": "70 Weeks",
+      "hash": "4ca92367fde0b240"
+    },
+    {
+      "id": "S09-DGM-s9-6-1-TITLE",
+      "sheet": 9,
+      "field": "diagram",
+      "text": "490 Years",
+      "hash": "472ab360a38c392a"
+    },
+    {
+      "id": "S09-DGM-s9-6-2-TITLE",
+      "sheet": 9,
+      "field": "diagram",
+      "text": "2,300 Years",
+      "hash": "615259fd6a7a435f"
+    },
+    {
       "id": "S09-GD-INTRO-EXP",
       "sheet": 9,
       "field": "guide",
@@ -17245,6 +20206,265 @@
       "field": "studyGuide",
       "text": "Can I receive Daniel's blessing of rest now, knowing that standing in my lot awaits at the end of the days?",
       "hash": "6671459721738c83"
+    },
+    {
+      "id": "S10-DGM-s10-1-TITLE",
+      "sheet": 10,
+      "field": "diagram",
+      "text": "The Structure of Daniel's Final Vision (536 B.C.)",
+      "hash": "b0ecf93dca36d7ec"
+    },
+    {
+      "id": "S10-DGM-s10-1-NOTE",
+      "sheet": 10,
+      "field": "diagram",
+      "text": "Daniel 10-12: One Continuous Encounter",
+      "hash": "a81abaf0a8a62747"
+    },
+    {
+      "id": "S10-DGM-s10-1-1-ROLE",
+      "sheet": 10,
+      "field": "diagram",
+      "text": "Daniel 10",
+      "hash": "e453972ec04a94ee"
+    },
+    {
+      "id": "S10-DGM-s10-1-1-TITLE",
+      "sheet": 10,
+      "field": "diagram",
+      "text": "Prologue",
+      "hash": "eb7f661e0d35afaf"
+    },
+    {
+      "id": "S10-DGM-s10-1-1-P1",
+      "sheet": 10,
+      "field": "diagram",
+      "text": "Fasting by the Tigris",
+      "hash": "470b5732d1ed410b"
+    },
+    {
+      "id": "S10-DGM-s10-1-1-P2",
+      "sheet": 10,
+      "field": "diagram",
+      "text": "The Man in Linen",
+      "hash": "0e41ddb6dcee44b1"
+    },
+    {
+      "id": "S10-DGM-s10-1-1-P3",
+      "sheet": 10,
+      "field": "diagram",
+      "text": "Unseen Spiritual Warfare",
+      "hash": "3ba6ece5a863e94d"
+    },
+    {
+      "id": "S10-DGM-s10-1-1-P4",
+      "sheet": 10,
+      "field": "diagram",
+      "text": "Prince of Persia resisted",
+      "hash": "991d98db0f655491"
+    },
+    {
+      "id": "S10-DGM-s10-1-1-P5",
+      "sheet": 10,
+      "field": "diagram",
+      "text": "Michael comes to help",
+      "hash": "17c4b81575d13de3"
+    },
+    {
+      "id": "S10-DGM-s10-1-2-ROLE",
+      "sheet": 10,
+      "field": "diagram",
+      "text": "Daniel 11",
+      "hash": "c0b0a49d096415fd"
+    },
+    {
+      "id": "S10-DGM-s10-1-2-TITLE",
+      "sheet": 10,
+      "field": "diagram",
+      "text": "Historical March",
+      "hash": "34f48fecfa75331e"
+    },
+    {
+      "id": "S10-DGM-s10-1-2-P1",
+      "sheet": 10,
+      "field": "diagram",
+      "text": "4 Persian Kings & Xerxes",
+      "hash": "f2e35ca3251baffe"
+    },
+    {
+      "id": "S10-DGM-s10-1-2-P2",
+      "sheet": 10,
+      "field": "diagram",
+      "text": "Alexander & 4 Diadochi",
+      "hash": "75bcbf71595e3d2e"
+    },
+    {
+      "id": "S10-DGM-s10-1-2-P3",
+      "sheet": 10,
+      "field": "diagram",
+      "text": "King of North vs South",
+      "hash": "548857f3afd36d47"
+    },
+    {
+      "id": "S10-DGM-s10-1-2-P4",
+      "sheet": 10,
+      "field": "diagram",
+      "text": "Rome: Prince of Covenant cut",
+      "hash": "843d580a420cc2e1"
+    },
+    {
+      "id": "S10-DGM-s10-1-2-P5",
+      "sheet": 10,
+      "field": "diagram",
+      "text": "Papal phase removes tamid",
+      "hash": "d4447cf39f757acf"
+    },
+    {
+      "id": "S10-DGM-s10-1-2-P6",
+      "sheet": 10,
+      "field": "diagram",
+      "text": "Time of the End (1798)",
+      "hash": "c9fcf4cd1802903c"
+    },
+    {
+      "id": "S10-DGM-s10-1-3-ROLE",
+      "sheet": 10,
+      "field": "diagram",
+      "text": "Daniel 12",
+      "hash": "854b0783d100d8f4"
+    },
+    {
+      "id": "S10-DGM-s10-1-3-TITLE",
+      "sheet": 10,
+      "field": "diagram",
+      "text": "Eschatology",
+      "hash": "68037d3f8d151dc9"
+    },
+    {
+      "id": "S10-DGM-s10-1-3-P1",
+      "sheet": 10,
+      "field": "diagram",
+      "text": "Michael Stands Up",
+      "hash": "80217179b0a03c18"
+    },
+    {
+      "id": "S10-DGM-s10-1-3-P2",
+      "sheet": 10,
+      "field": "diagram",
+      "text": "Time of Trouble",
+      "hash": "a79af64d0f729a75"
+    },
+    {
+      "id": "S10-DGM-s10-1-3-P3",
+      "sheet": 10,
+      "field": "diagram",
+      "text": "Deliverance in the Book",
+      "hash": "d14ca8bdd6e5b169"
+    },
+    {
+      "id": "S10-DGM-s10-1-3-P4",
+      "sheet": 10,
+      "field": "diagram",
+      "text": "Bodily Resurrection (12:2)",
+      "hash": "c92890dae915719f"
+    },
+    {
+      "id": "S10-DGM-s10-1-3-P5",
+      "sheet": 10,
+      "field": "diagram",
+      "text": "Rest and Lot (12:13)",
+      "hash": "580419e5bce75130"
+    },
+    {
+      "id": "S10-DGM-s10-2-TITLE",
+      "sheet": 10,
+      "field": "diagram",
+      "text": "Daniel 12:1-2 in Its Own Order",
+      "hash": "25fd112e45d3081f"
+    },
+    {
+      "id": "S10-DGM-s10-2-1-TITLE",
+      "sheet": 10,
+      "field": "diagram",
+      "text": "Michael stands up",
+      "hash": "14fef95d8e7f8175"
+    },
+    {
+      "id": "S10-DGM-s10-2-1-TEXT",
+      "sheet": 10,
+      "field": "diagram",
+      "text": "'amad: kingly stance",
+      "hash": "08b71f8958300143"
+    },
+    {
+      "id": "S10-DGM-s10-2-2-TITLE",
+      "sheet": 10,
+      "field": "diagram",
+      "text": "Close of human probation",
+      "hash": "093fa5ac8d88b124"
+    },
+    {
+      "id": "S10-DGM-s10-2-3-TITLE",
+      "sheet": 10,
+      "field": "diagram",
+      "text": "A time of trouble such as never was",
+      "hash": "0af8c1ff97c9cc95"
+    },
+    {
+      "id": "S10-DGM-s10-2-4-TITLE",
+      "sheet": 10,
+      "field": "diagram",
+      "text": "Those written in the book are delivered",
+      "hash": "6e85c8bde3c896dd"
+    },
+    {
+      "id": "S10-DGM-s10-2-5-TITLE",
+      "sheet": 10,
+      "field": "diagram",
+      "text": "Many who sleep in the dust awake (12:2)",
+      "hash": "3cab19c808a4e5af"
+    },
+    {
+      "id": "S10-DGM-s10-3-TITLE",
+      "sheet": 10,
+      "field": "diagram",
+      "text": "The Timeline of Daniel 12:11-12 (Measured from A.D. 508)",
+      "hash": "3c1b8e66795364ca"
+    },
+    {
+      "id": "S10-DGM-s10-3-NOTE",
+      "sheet": 10,
+      "field": "diagram",
+      "text": "Then 1844: 2,300-year sanctuary landing (sitting 8)",
+      "hash": "4be3ed39dc206f02"
+    },
+    {
+      "id": "S10-DGM-s10-3-1-ROLE",
+      "sheet": 10,
+      "field": "diagram",
+      "text": "508 A.D. – 1798 A.D.",
+      "hash": "79a4503450d522f2"
+    },
+    {
+      "id": "S10-DGM-s10-3-1-TITLE",
+      "sheet": 10,
+      "field": "diagram",
+      "text": "1,290 Years",
+      "hash": "20d26e4a90cf5b35"
+    },
+    {
+      "id": "S10-DGM-s10-3-2-ROLE",
+      "sheet": 10,
+      "field": "diagram",
+      "text": "508 A.D. – 1843 A.D.",
+      "hash": "b47d4e260963e3e5"
+    },
+    {
+      "id": "S10-DGM-s10-3-2-TITLE",
+      "sheet": 10,
+      "field": "diagram",
+      "text": "1,335 Years",
+      "hash": "aace6bc720c76a0c"
     },
     {
       "id": "S10-GD-INTRO-EXP",
