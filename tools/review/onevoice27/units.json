@@ -1,6 +1,6 @@
 {
   "sheetHashes": {
-    "0": "cf05f83bbf5a838c",
+    "0": "70f34ad9a6b44d56",
     "1": "82eaa7a070bd7f3d",
     "2": "5c789d52493010af",
     "3": "1d966c003466f810",
@@ -13,7 +13,7 @@
     "10": "bdb166e40dabd991"
   },
   "sheetUnitCounts": {
-    "0": 262,
+    "0": 290,
     "1": 214,
     "2": 220,
     "3": 184,
@@ -373,8 +373,8 @@
       "id": "S00-DIA-03",
       "sheet": 0,
       "field": "content",
-      "text": "THE REDEMPTIVE CENTER ✝ (Daniel 9:24–27) MESSIAH CUT OFF FOR US │ ┌───────────────────────────┴───────────────────────────┐ ▼ ▼ SOVEREIGNTY IN EXILE CONSUMMATION IN GLORY (Daniel 1:2; 2:38) (Daniel 2:44–45) The Lord hands over kings The supernatural Stone and directs history. fills the whole earth.",
-      "hash": "65d812cd88b5e523"
+      "text": "THE REDEMPTIVE CENTER ✝ (Daniel 9:24–27) MESSIAH CUT OFF FOR US │ ┌───────────────────────────┴───────────────────────────┐ ▼ ▼ SOVEREIGNTY IN EXILE CONSUMMATION IN GLORY (Daniel 1:2; 2:38) (Daniel 2:44) The Lord hands over kings The supernatural Stone and directs history. fills the whole earth.",
+      "hash": "53bbcd17b0a166b4"
     },
     {
       "id": "S00-H-21",
@@ -1028,53 +1028,249 @@
       "hash": "2d798f77aa054fd0"
     },
     {
-      "id": "S00-CHAIN-TITLE",
+      "id": "S00-DGM-s0-1-TITLE",
       "sheet": 0,
       "field": "diagram",
-      "text": "The Unbroken Chain",
-      "hash": "cb727d1c65eb8305"
+      "text": "The Three Interpretive Schools",
+      "hash": "a92685076e8fd5b1"
     },
     {
-      "id": "S00-CHAIN-1-TITLE",
+      "id": "S00-DGM-s0-1-1-ROLE",
+      "sheet": 0,
+      "field": "diagram",
+      "text": "Continuous",
+      "hash": "04f13cecbc50590b"
+    },
+    {
+      "id": "S00-DGM-s0-1-1-TITLE",
+      "sheet": 0,
+      "field": "diagram",
+      "text": "Historicism",
+      "hash": "c4c97b6ccdc043df"
+    },
+    {
+      "id": "S00-DGM-s0-1-1-P1",
+      "sheet": 0,
+      "field": "diagram",
+      "text": "The reading this course defends.",
+      "hash": "76be667f0e77441a"
+    },
+    {
+      "id": "S00-DGM-s0-1-1-P2",
+      "sheet": 0,
+      "field": "diagram",
+      "text": "Babylon → Medo-Persia → Greece → Rome → Divided Europe → Christ's kingdom.",
+      "hash": "e829b07dad640864"
+    },
+    {
+      "id": "S00-DGM-s0-1-1-P3",
+      "sheet": 0,
+      "field": "diagram",
+      "text": "One unbroken chain running in real time.",
+      "hash": "50e07d1c156edfc1"
+    },
+    {
+      "id": "S00-DGM-s0-1-2-ROLE",
+      "sheet": 0,
+      "field": "diagram",
+      "text": "Locked in antiquity",
+      "hash": "9680296bd91dc73b"
+    },
+    {
+      "id": "S00-DGM-s0-1-2-TITLE",
+      "sheet": 0,
+      "field": "diagram",
+      "text": "Preterism",
+      "hash": "e66868b45a923f1b"
+    },
+    {
+      "id": "S00-DGM-s0-1-2-P1",
+      "sheet": 0,
+      "field": "diagram",
+      "text": "Counter-Reformation: Luis de Alcázar, 1614.",
+      "hash": "ff3b1060428e1983"
+    },
+    {
+      "id": "S00-DGM-s0-1-2-P2",
+      "sheet": 0,
+      "field": "diagram",
+      "text": "Babylon → Medo-Persia → Greece → Antiochus IV, then A.D. 70.",
+      "hash": "d6bd328b09661a86"
+    },
+    {
+      "id": "S00-DGM-s0-1-2-P3",
+      "sheet": 0,
+      "field": "diagram",
+      "text": "Leaves no medieval or modern chain.",
+      "hash": "829b0afc4f5f0521"
+    },
+    {
+      "id": "S00-DGM-s0-1-3-ROLE",
+      "sheet": 0,
+      "field": "diagram",
+      "text": "Truncated at Rome",
+      "hash": "cf2713b941e343c0"
+    },
+    {
+      "id": "S00-DGM-s0-1-3-TITLE",
+      "sheet": 0,
+      "field": "diagram",
+      "text": "Futurism",
+      "hash": "d1e0463c20d571fd"
+    },
+    {
+      "id": "S00-DGM-s0-1-3-P1",
+      "sheet": 0,
+      "field": "diagram",
+      "text": "Counter-Reformation: Francisco Ribera, 1590.",
+      "hash": "3a453b2e535496db"
+    },
+    {
+      "id": "S00-DGM-s0-1-3-P2",
+      "sheet": 0,
+      "field": "diagram",
+      "text": "Babylon → Medo-Persia → Greece → Imperial Rome, then a 2,000-year gap.",
+      "hash": "106d2359ac15cb32"
+    },
+    {
+      "id": "S00-DGM-s0-1-3-P3",
+      "sheet": 0,
+      "field": "diagram",
+      "text": "Resumes for a final seven years and an end-times antichrist.",
+      "hash": "fb61fc27b8a17846"
+    },
+    {
+      "id": "S00-DGM-s0-2-TITLE",
+      "sheet": 0,
+      "field": "diagram",
+      "text": "The Biblical Year-Day Scale",
+      "hash": "c03b907bf3f274c4"
+    },
+    {
+      "id": "S00-DGM-s0-2-1-ROLE",
+      "sheet": 0,
+      "field": "diagram",
+      "text": "Numbers 14:34",
+      "hash": "ed748b8929fad2c6"
+    },
+    {
+      "id": "S00-DGM-s0-2-1-TITLE",
+      "sheet": 0,
+      "field": "diagram",
+      "text": "Forty days become forty years",
+      "hash": "9943a943390ec230"
+    },
+    {
+      "id": "S00-DGM-s0-2-1-TEXT",
+      "sheet": 0,
+      "field": "diagram",
+      "text": "Forty days spying out Canaan become forty years of wandering: “each day for a year.”",
+      "hash": "01720f3f468bec01"
+    },
+    {
+      "id": "S00-DGM-s0-2-2-TITLE",
+      "sheet": 0,
+      "field": "diagram",
+      "text": "One scale, stated twice",
+      "hash": "f088d1feae31456a"
+    },
+    {
+      "id": "S00-DGM-s0-2-2-TEXT",
+      "sheet": 0,
+      "field": "diagram",
+      "text": "Scripture fixes its own prophetic measure before Daniel uses it. The rule is given once in the wilderness and once to Ezekiel.",
+      "hash": "74bf9734f291b360"
+    },
+    {
+      "id": "S00-DGM-s0-2-3-ROLE",
+      "sheet": 0,
+      "field": "diagram",
+      "text": "Daniel 9:24–27",
+      "hash": "60925f7c4b22845b"
+    },
+    {
+      "id": "S00-DGM-s0-2-3-TITLE",
+      "sheet": 0,
+      "field": "diagram",
+      "text": "Seventy weeks become 490 years",
+      "hash": "8f43176a840b4fe0"
+    },
+    {
+      "id": "S00-DGM-s0-2-3-TEXT",
+      "sheet": 0,
+      "field": "diagram",
+      "text": "Seventy weeks — 70 × 7 = 490 prophetic days — must span the Persian decree to the crucifixion.",
+      "hash": "906809da2ef94646"
+    },
+    {
+      "id": "S00-DGM-s0-3-TITLE",
+      "sheet": 0,
+      "field": "diagram",
+      "text": "The Redemptive Center",
+      "hash": "f1839665d2f22714"
+    },
+    {
+      "id": "S00-DGM-s0-3-NOTE",
+      "sheet": 0,
+      "field": "diagram",
+      "text": "The unbroken chain is not a political chart. It exists to exalt Jesus Christ as Lord of history and personal Redeemer.",
+      "hash": "c70bed651d68e411"
+    },
+    {
+      "id": "S00-DGM-s0-3-1-ROLE",
+      "sheet": 0,
+      "field": "diagram",
+      "text": "Before the cross",
+      "hash": "1542d31fa8720d59"
+    },
+    {
+      "id": "S00-DGM-s0-3-1-TITLE",
       "sheet": 0,
       "field": "diagram",
       "text": "Sovereignty in exile",
       "hash": "b3a9b6cc4400a22f"
     },
     {
-      "id": "S00-CHAIN-1-TEXT",
+      "id": "S00-DGM-s0-3-1-TEXT",
       "sheet": 0,
       "field": "diagram",
-      "text": "The Lord hands the king over. Babylon is the instrument, not the author.",
-      "hash": "1fd80815c926d67c"
+      "text": "The Lord hands over kings and directs history.",
+      "hash": "17b348a3cb19851e"
     },
     {
-      "id": "S00-CHAIN-2-TITLE",
+      "id": "S00-DGM-s0-3-2-TITLE",
       "sheet": 0,
       "field": "diagram",
       "text": "Messiah cut off for us",
       "hash": "bd52011595e383cd"
     },
     {
-      "id": "S00-CHAIN-2-TEXT",
+      "id": "S00-DGM-s0-3-2-TEXT",
       "sheet": 0,
       "field": "diagram",
-      "text": "The seventieth week is cut from the 2,300 days and lands on the cross.",
-      "hash": "8610804bd7f5071d"
+      "text": "The chain is not an end in itself. Both ends meet here, at the cross.",
+      "hash": "c887d8fede98b0dc"
     },
     {
-      "id": "S00-CHAIN-3-TITLE",
+      "id": "S00-DGM-s0-3-3-ROLE",
+      "sheet": 0,
+      "field": "diagram",
+      "text": "After the cross",
+      "hash": "20d359474d55279d"
+    },
+    {
+      "id": "S00-DGM-s0-3-3-TITLE",
       "sheet": 0,
       "field": "diagram",
       "text": "Consummation in glory",
       "hash": "d1cf0de5750ac865"
     },
     {
-      "id": "S00-CHAIN-3-TEXT",
+      "id": "S00-DGM-s0-3-3-TEXT",
       "sheet": 0,
       "field": "diagram",
-      "text": "The Stone that shatters the kingdoms becomes a mountain filling the earth.",
-      "hash": "3032fa7249a006c8"
+      "text": "The supernatural Stone fills the whole earth.",
+      "hash": "4fcd2fdcc2ad8d9e"
     },
     {
       "id": "S00-GD-INTRO-EXP",

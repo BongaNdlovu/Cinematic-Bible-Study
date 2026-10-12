@@ -37,31 +37,92 @@
         },
         title: "The Prophetic Blueprint: Why Daniel's Unbroken Chain Centers on Jesus Christ",
         subtitle: "God's historical roadmap from exile to the cross to the everlasting kingdom — and why how you read decides what you see.",
-        // Three-step chain with the cross as the centre. Rendered by
-        // renderSheetDiagram(); each `cite` is a verse printed in this sitting's
-        // reference list, so a diagram reference resolves to a real entry.
-        diagram: {
-          title: "The Unbroken Chain",
-          steps: [
-            {
-              role: "Exile",
-              title: "Sovereignty in exile",
-              cite: "Daniel 1:2",
-              text: "The Lord hands the king over. Babylon is the instrument, not the author."
-            },
-            {
-              centre: true,
-              title: "Messiah cut off for us",
-              cite: "Daniel 9:24–25",
-              text: "The seventieth week is cut from the 2,300 days and lands on the cross."
-            },
-            {
-              role: "Stone",
-              title: "Consummation in glory",
-              cite: "Daniel 2:44",
-              text: "The Stone that shatters the kingdoms becomes a mountain filling the earth."
-            }
-          ]
+        // Diagrams are rendered in place by renderSheetDiagrams(), keyed to the
+        // <figure data-diagram="..."> markers left in `content` below. Each
+        // `cite` is a verse carried by this sitting's reference list, so a
+        // diagram reference resolves to a real entry.
+        diagrams: {
+          "s0-1": {
+            kind: "comparison",
+            title: "The Three Interpretive Schools",
+            steps: [
+              {
+                title: "Historicism",
+                role: "Continuous",
+                points: [
+                  "The reading this course defends.",
+                  "Babylon → Medo-Persia → Greece → Rome → Divided Europe → Christ's kingdom.",
+                  "One unbroken chain running in real time."
+                ]
+              },
+              {
+                title: "Preterism",
+                role: "Locked in antiquity",
+                points: [
+                  "Counter-Reformation: Luis de Alcázar, 1614.",
+                  "Babylon → Medo-Persia → Greece → Antiochus IV, then A.D. 70.",
+                  "Leaves no medieval or modern chain."
+                ]
+              },
+              {
+                title: "Futurism",
+                role: "Truncated at Rome",
+                points: [
+                  "Counter-Reformation: Francisco Ribera, 1590.",
+                  "Babylon → Medo-Persia → Greece → Imperial Rome, then a 2,000-year gap.",
+                  "Resumes for a final seven years and an end-times antichrist."
+                ]
+              }
+            ]
+          },
+          "s0-2": {
+            kind: "chain",
+            title: "The Biblical Year-Day Scale",
+            steps: [
+              {
+                role: "Numbers 14:34",
+                title: "Forty days become forty years",
+                cite: "Numbers 14:34",
+                text: "Forty days spying out Canaan become forty years of wandering: “each day for a year.”"
+              },
+              {
+                centre: true,
+                title: "One scale, stated twice",
+                text: "Scripture fixes its own prophetic measure before Daniel uses it. The rule is given once in the wilderness and once to Ezekiel."
+              },
+              {
+                role: "Daniel 9:24–27",
+                title: "Seventy weeks become 490 years",
+                cite: "Daniel 9:24–25",
+                text: "Seventy weeks — 70 × 7 = 490 prophetic days — must span the Persian decree to the crucifixion."
+              }
+            ]
+          },
+          "s0-3": {
+            kind: "chain",
+            title: "The Redemptive Center",
+            steps: [
+              {
+                role: "Before the cross",
+                title: "Sovereignty in exile",
+                cite: "Daniel 1:2",
+                text: "The Lord hands over kings and directs history."
+              },
+              {
+                centre: true,
+                title: "Messiah cut off for us",
+                cite: "Daniel 9:24–25",
+                text: "The chain is not an end in itself. Both ends meet here, at the cross."
+              },
+              {
+                role: "After the cross",
+                title: "Consummation in glory",
+                cite: "Daniel 2:44",
+                text: "The supernatural Stone fills the whole earth."
+              }
+            ],
+            note: "The unbroken chain is not a political chart. It exists to exalt Jesus Christ as Lord of history and personal Redeemer."
+          }
         },
         content: `
 <nav class="lesson-toc" aria-label="Sheet 0 parts">
@@ -98,7 +159,8 @@
 
 <p>Before you identify a single prophetic animal, horn, or date, you make a hermeneutical choice. <span class="term-gloss" data-term="hermeneutics">Hermeneutics</span> is simply the method and rules by which you interpret Scripture. For centuries, interpreters have approached apocalyptic prophecy through three primary systems:</p>
 
-<pre class="prophecy-diagram">THE THREE INTERPRETIVE SCHOOLS
+<figure class="sheet-diagram" data-diagram="s0-1">
+<pre class="chain-ascii" aria-hidden="true">THE THREE INTERPRETIVE SCHOOLS
 
 1. HISTORICISM (the continuous historical reading this course defends)
    Babylon ──▶ Medo-Persia ──▶ Greece ──▶ Rome ──▶ Divided Europe ──▶ Christ's Kingdom
@@ -111,6 +173,7 @@
 3. FUTURISM (Counter-Reformation: Francisco Ribera, 1590)
    Babylon ──▶ Medo-Persia ──▶ Greece ──▶ Imperial Rome | ─── 2,000-Year Gap ─── ▶ Final 7 Years
    [──────── Truncated at Rome ───────] ... [Parenthetical Void] ... [End-Times Antichrist]</pre>
+</figure>
 
 <div class="framework-card">
   <p class="framework-card-kicker">1. Historicism — the continuous historical model</p>
@@ -153,7 +216,8 @@
 
 <p>Scripture defines its own prophetic time scale rather than leaving it to human conjecture:</p>
 
-<pre class="prophecy-diagram">THE BIBLICAL YEAR-DAY SCALE
+<figure class="sheet-diagram" data-diagram="s0-2">
+<pre class="chain-ascii" aria-hidden="true">THE BIBLICAL YEAR-DAY SCALE
 -----------------------------------------------------------------------------
 Numbers 14:34  ──▶  40 spy-days in Canaan  = 40 years of wandering
                     "Each day for a year..."
@@ -164,6 +228,7 @@ Ezekiel 4:6    ──▶  Ezekiel lies on his side for 40 prophetic days
 Daniel 9:24–27 ──▶  "Seventy weeks" (70 × 7 = 490 prophetic days)
                     Must equal 490 literal years to span from the Persian
                     restoration decree to the crucifixion of Jesus Christ.</pre>
+</figure>
 
 <h4>The Torah foundation (Numbers 14:34)</h4>
 <p>When Israel rebelled after forty days of spying out Canaan, God declared a one-to-one judicial conversion: <em>"each day for a year, shall ye bear your iniquities, even forty years."</em></p>
@@ -189,7 +254,8 @@ Daniel 9:24–27 ──▶  "Seventy weeks" (70 × 7 = 490 prophetic days)
 
 <p>Prophetic interpretation must never become a cold intellectual exercise or a tool for political fear-mongering. The unbroken historicist chain exists for one primary purpose: to exalt <strong>Jesus Christ</strong> as the Lord of human history and our personal Redeemer.</p>
 
-<pre class="prophecy-diagram">THE REDEMPTIVE CENTER
+<figure class="sheet-diagram" data-diagram="s0-3">
+<pre class="chain-ascii" aria-hidden="true">THE REDEMPTIVE CENTER
                                    ✝
                            (Daniel 9:24–27)
                          MESSIAH CUT OFF FOR US
@@ -197,9 +263,10 @@ Daniel 9:24–27 ──▶  "Seventy weeks" (70 × 7 = 490 prophetic days)
        ┌───────────────────────────┴───────────────────────────┐
        ▼                                                       ▼
   SOVEREIGNTY IN EXILE                                  CONSUMMATION IN GLORY
-   (Daniel 1:2; 2:38)                                     (Daniel 2:44–45)
+   (Daniel 1:2; 2:38)                                     (Daniel 2:44)
  The Lord hands over kings                              The supernatural Stone
     and directs history.                                  fills the whole earth.</pre>
+</figure>
 
 <div class="biblical-case">
   <p class="biblical-case-kicker">1. Jesus in Daniel 1 — the sovereign hand</p>

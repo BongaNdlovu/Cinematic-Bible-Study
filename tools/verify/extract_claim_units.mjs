@@ -300,11 +300,27 @@ export function extractAllUnits() {
     // card sentence must be auditable like any other prose. Verse chips are
     // reference labels for the reference list rather than claims, so only the
     // title and body text become units.
-    if (sheet.diagram) {
-      if (sheet.diagram.title) addUnit(`S${pad}-CHAIN-TITLE`, 'diagram', sheet.diagram.title);
-      (sheet.diagram.steps || []).forEach((step, stIdx) => {
-        if (step.title) addUnit(`S${pad}-CHAIN-${stIdx + 1}-TITLE`, 'diagram', step.title);
-        if (step.text) addUnit(`S${pad}-CHAIN-${stIdx + 1}-TEXT`, 'diagram', step.text);
+    // D2. Diagrams
+    // Diagrams are learner-facing copy on the page, so each caption, card title,
+    // body sentence, and note must be auditable like any other prose. Verse chips
+    // are reference labels for the reference list rather than claims, and the
+    // ASCII artwork is already captured above as S##-DIA-## units, so neither is
+    // repeated here.
+    const diagrams = sheet.diagrams || (sheet.diagram ? { legacy: sheet.diagram } : null);
+    if (diagrams) {
+      Object.keys(diagrams).forEach((key) => {
+        const spec = diagrams[key] || {};
+        const tag = `S${pad}-DGM-${key}`;
+        if (spec.title) addUnit(`${tag}-TITLE`, 'diagram', spec.title);
+        if (spec.note) addUnit(`${tag}-NOTE`, 'diagram', spec.note);
+        (spec.steps || []).forEach((step, stIdx) => {
+          if (step.role) addUnit(`${tag}-${stIdx + 1}-ROLE`, 'diagram', step.role);
+          if (step.title) addUnit(`${tag}-${stIdx + 1}-TITLE`, 'diagram', step.title);
+          if (step.text) addUnit(`${tag}-${stIdx + 1}-TEXT`, 'diagram', step.text);
+          (step.points || []).forEach((p, pIdx) => {
+            addUnit(`${tag}-${stIdx + 1}-P${pIdx + 1}`, 'diagram', p);
+          });
+        });
       });
     }
 

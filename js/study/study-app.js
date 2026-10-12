@@ -2208,65 +2208,119 @@
        component so the artwork, fonts, and colour tokens are the ones this
        site already ships. Entrance plays when the figure scrolls into view and
        can be replayed; it is suppressed under prefers-reduced-motion. */
-    function renderSheetDiagram(data) {
-      const box = document.getElementById('sheet-diagram');
-      if (!box) return;
-      const spec = data && data.diagram;
-      const steps = spec && Array.isArray(spec.steps) ? spec.steps : [];
-      if (steps.length < 2) {
-        box.hidden = true;
-        box.innerHTML = '';
-        return;
-      }
-      const mid = steps.findIndex((s) => s.centre);
+    /* ---- Diagrams --------------------------------------------------------
+       One figure shell (caption, collapse, scroll-triggered entrance, replay)
+       wraps a body built per variant. The prologue's chain was the first
+       variant; the ASCII `prophecy-diagram` blocks across the sittings are
+       represented by the others:
+
+         chain       linear sequence, middle node medalled (the original)
+         steps       linear sequence without a centre
+         comparison  two parallel columns of short points
+         table       header row plus data rows, stacking on narrow screens
+         flow        vertical sequence of statements, used for box-art flows
+
+       Every variant is authored from data on the sitting, and each `cite`
+       resolves to a row in that sitting's reference list. */
+
+    function diagramCite(label) {
+      const text = String(label || '');
+      if (!text) return '';
+      return '<button type="button" class="chain-cite" data-cite-src="' + escapeStudy(text) + '">' + escapeStudy(text) + '</button>';
+    }
+
+    function nodeHtml(step, isCentre, t) {
+      return '<article class="chain-node' + (isCentre ? ' is-centre' : '') + '" style="--t:' + t.toFixed(2) + 's">' +
+        (isCentre
+          ? '<div class="chain-medal" aria-hidden="true">' +
+              '<svg viewBox="0 0 140 140" fill="none" stroke="currentColor">' +
+                '<circle cx="70" cy="70" r="68" stroke-opacity=".35" stroke-width="1"/>' +
+                '<circle cx="70" cy="70" r="58" stroke-opacity=".7" stroke-width="1.2"/>' +
+                '<path d="M70 36V106M51 58H89" stroke-width="3.5" stroke-linecap="round"/>' +
+              '</svg>' +
+            '</div>'
+          : (step.role ? '<p class="chain-role">' + escapeStudy(step.role) + '</p>' : '')) +
+        (step.title ? '<h4 class="chain-title">' + escapeStudy(step.title) + '</h4>' : '') +
+        diagramCite(step.cite) +
+        (step.text ? '<p class="chain-text">' + escapeStudy(step.text) + '</p>' : '') +
+      '</article>';
+    }
+
+    function bodyChain(spec, steps, withCentre) {
+      const mid = withCentre ? steps.findIndex((s) => s.centre) : -1;
       let t = 0.1;
       const parts = [];
       steps.forEach((step, i) => {
         if (i > 0) {
           t += 0.4;
-          parts.push(
-            '<div class="chain-link" style="--t:' + t.toFixed(2) + 's" aria-hidden="true">' +
-              '<span class="chain-link-line"></span><span class="chain-link-head"></span>' +
-            '</div>'
-          );
+          parts.push('<div class="chain-link" style="--t:' + t.toFixed(2) + 's" aria-hidden="true">' +
+            '<span class="chain-link-line"></span><span class="chain-link-head"></span></div>');
           t += 0.5;
         }
-        const isCentre = i === mid;
-        parts.push(
-          '<article class="chain-node' + (isCentre ? ' is-centre' : '') + '" style="--t:' + t.toFixed(2) + 's">' +
-            (isCentre
-              ? '<div class="chain-medal" aria-hidden="true">' +
-                  '<svg viewBox="0 0 140 140" fill="none" stroke="currentColor">' +
-                    '<circle cx="70" cy="70" r="68" stroke-opacity=".35" stroke-width="1"/>' +
-                    '<circle cx="70" cy="70" r="58" stroke-opacity=".7" stroke-width="1.2"/>' +
-                    '<path d="M70 36V106M51 58H89" stroke-width="3.5" stroke-linecap="round"/>' +
-                  '</svg>' +
-                '</div>'
-              : (step.role ? '<p class="chain-role">' + escapeStudy(step.role) + '</p>' : '')) +
-            '<h4 class="chain-title">' + escapeStudy(step.title) + '</h4>' +
-            (step.cite ? '<button type="button" class="chain-cite" data-cite-src="' + escapeStudy(step.cite) + '">' + escapeStudy(step.cite) + '</button>' : '') +
-            (step.text ? '<p class="chain-text">' + escapeStudy(step.text) + '</p>' : '') +
-          '</article>'
-        );
+        parts.push(nodeHtml(step, i === mid, t));
       });
+      return '<div class="chain-flow">' + parts.join('') + '</div>';
+    }
 
-      box.hidden = false;
-      box.innerHTML =
-        '<figure class="chain" data-chain>' +
-          '<button class="chain-toggle" type="button" aria-expanded="true" aria-controls="chain-body" aria-label="Collapse diagram">' +
-            '<svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 5l5 5 5-5"/></svg>' +
-          '</button>' +
-          (spec.title ? '<figcaption class="chain-title-cap">' + escapeStudy(spec.title) + '</figcaption>' : '') +
-          '<div class="chain-body" id="chain-body">' +
-            '<div class="chain-flow">' + parts.join('') + '</div>' +
+    function bodyComparison(spec, steps) {
+      const cols = steps.map((side, i) => {
+        const t = (0.1 + i * 0.25).toFixed(2);
+        return '<div class="cmp-col" style="--t:' + t + 's">' +
+          '<div class="cmp-head">' +
+            (side.role ? '<p class="chain-role">' + escapeStudy(side.role) + '</p>' : '') +
+            (side.title ? '<h4 class="chain-title">' + escapeStudy(side.title) + '</h4>' : '') +
+            diagramCite(side.cite) +
           '</div>' +
-        '</figure>' +
-        '<button class="chain-replay" type="button" data-chain-replay>Replay animation</button>';
+          '<ul class="cmp-list">' +
+            (side.points || []).map((p) => '<li>' + escapeStudy(p) + '</li>').join('') +
+          '</ul>' +
+        '</div>';
+      });
+      // Column count follows the data: some comparisons have two sides, the
+      // schools comparison has three.
+      return '<div class="cmp-grid" style="--cmp-cols:' + Math.max(2, cols.length) + '">' + cols.join('') + '</div>';
+    }
 
-      const figure = box.querySelector('[data-chain]');
-      const panel = box.querySelector('#chain-body');
-      const toggle = box.querySelector('.chain-toggle');
-      const replay = box.querySelector('[data-chain-replay]');
+    function bodyTable(spec, rows) {
+      const head = spec.head || [];
+      const body = rows;
+      return '<div class="tbl-wrap"><table class="tbl">' +
+        (head.length
+          ? '<thead><tr>' + head.map((h) => '<th scope="col">' + escapeStudy(h) + '</th>').join('') + '</tr></thead>'
+          : '') +
+        '<tbody>' + body.map((r) => '<tr>' +
+          (r.cells || []).map((c, ci) => (ci === 0
+            ? '<th scope="row">' + escapeStudy(c) + '</th>'
+            : '<td>' + escapeStudy(c) + '</td>')).join('') +
+        '</tr>').join('') + '</tbody>' +
+      '</table></div>';
+    }
+
+    function bodyFlow(spec, steps) {
+      let t = 0.1;
+      return '<div class="flow-stack">' + steps.map((step) => {
+        const html = '<div class="flow-step" style="--t:' + t.toFixed(2) + 's">' +
+          (step.role ? '<p class="chain-role">' + escapeStudy(step.role) + '</p>' : '') +
+          (step.title ? '<h4 class="chain-title">' + escapeStudy(step.title) + '</h4>' : '') +
+          diagramCite(step.cite) +
+          (step.text ? '<p class="chain-text">' + escapeStudy(step.text) + '</p>' : '') +
+          ((step.points || []).length
+            ? '<ul class="flow-points">' + step.points.map((p) => '<li>' + escapeStudy(p) + '</li>').join('') + '</ul>'
+            : '') +
+        '</div>';
+        t += 0.35;
+        return html;
+      }).join('') + '</div>';
+    }
+
+    function wireFigure(state) {
+      // Shared shell: caption, collapse control, entrance animation, replay.
+      // `figure` carries data-chain itself, so it is passed in rather than
+      // queried for — querySelector only searches descendants.
+      const figure = state.figure;
+      const panel = figure.querySelector('.chain-body');
+      const toggle = figure.querySelector('.chain-toggle');
+      const replay = state.replay || figure.parentNode.querySelector('[data-chain-replay]');
       if (!figure || !panel || !toggle || !replay) return;
 
       const reduce = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : null;
@@ -2283,7 +2337,6 @@
         frame = raf(() => { frame = raf(() => figure.classList.add('is-visible')); });
       };
       const start = () => { if (started) return; started = true; play(); };
-
       const setOpen = (open) => {
         toggle.setAttribute('aria-expanded', String(open));
         toggle.setAttribute('aria-label', open ? 'Collapse diagram' : 'Expand diagram');
@@ -2304,6 +2357,59 @@
         if (!open) { started = true; play(); }
       });
       replay.addEventListener('click', () => { setOpen(true); started = true; play(); });
+    }
+
+    function renderSheetDiagrams(data) {
+      const sheet = data || {};
+      // Sittings mid-migration may still carry the single-diagram field.
+      const specs = sheet.diagrams || (sheet.diagram ? { legacy: sheet.diagram } : {});
+      const article = document.getElementById('sheet-article');
+      if (!article) return;
+      const sheetIndex = Number(article.getAttribute('data-sheet-index'));
+      const refs = referenceIndex(isNaN(sheetIndex) ? 0 : sheetIndex);
+      article.querySelectorAll('figure[data-diagram]').forEach((figure) => {
+        const id = figure.getAttribute('data-diagram');
+        const spec = specs[id];
+        if (!spec) return;
+        const steps = Array.isArray(spec.steps) ? spec.steps : [];
+        const rows = Array.isArray(spec.rows) ? spec.rows : [];
+        const kind = spec.kind || 'chain';
+        const needs = kind === 'table' ? rows : steps;
+        if (needs.length < 2) return;
+
+        let body = '';
+        if (kind === 'comparison') body = bodyComparison(spec, steps);
+        else if (kind === 'table') body = bodyTable(spec, rows);
+        else if (kind === 'flow') body = bodyFlow(spec, steps);
+        else if (kind === 'steps') body = bodyChain(spec, steps, false);
+        else body = bodyChain(spec, steps, true);
+
+        // The plain-text artwork stays in the DOM, hidden, so it survives for
+        // search and copy without duplicating what the cards announce.
+        const asciiEl = figure.querySelector('.chain-ascii');
+        const ascii = asciiEl ? asciiEl.textContent : '';
+
+        figure.classList.add('chain');
+        figure.setAttribute('data-chain', '');
+        figure.innerHTML =
+          '<button class="chain-toggle" type="button" aria-expanded="true" aria-controls="' + id + '-body" aria-label="Collapse diagram">' +
+            '<svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 5l5 5 5-5"/></svg>' +
+          '</button>' +
+          (spec.title ? '<figcaption class="chain-title-cap">' + escapeStudy(spec.title) + '</figcaption>' : '') +
+          (ascii ? '<pre class="chain-ascii" aria-hidden="true">' + escapeStudy(ascii) + '</pre>' : '') +
+          '<div class="chain-body" id="' + id + '-body">' + body + '</div>' +
+          (spec.note ? '<p class="chain-note">' + escapeStudy(spec.note) + '</p>' : '');
+
+        const replay = document.createElement('button');
+        replay.type = 'button';
+        replay.className = 'chain-replay';
+        replay.setAttribute('data-chain-replay', '');
+        replay.textContent = 'Replay animation';
+        figure.parentNode.insertBefore(replay, figure.nextSibling);
+
+        wireFigure({ figure: figure, replay: replay });
+        if (refs.length) decorateCitations(figure, refs);
+      });
     }
 
     // A diagram's citation opens the same reference row the prose markers use.
@@ -3021,9 +3127,11 @@
       document.getElementById('sheet-subtitle').innerText = data.subtitle;
 
       // Render Article Content
-      document.getElementById('sheet-article').innerHTML = data.content;
+      const articleEl = document.getElementById('sheet-article');
+      articleEl.setAttribute('data-sheet-index', String(index));
+      articleEl.innerHTML = data.content;
       renderLessonMedia(data);
-      renderSheetDiagram(data);
+      renderSheetDiagrams(data);
       renderLessonConnectBar(index);
       renderStudyGuide(data.studyGuide);
       renderFacilitatorStrip(data.facilitator);
