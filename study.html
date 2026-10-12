@@ -319,7 +319,7 @@
     .chain-title-cap {
       margin: 0 0 1.5rem;
       font-family: "JetBrains Mono", monospace;
-      font-size: 10px;
+      font-size: 0.7rem;
       letter-spacing: 0.18em;
       text-transform: uppercase;
       color: #c9a227;
@@ -362,7 +362,7 @@
     .chain-role {
       margin: 0 0 0.5rem;
       font-family: "JetBrains Mono", monospace;
-      font-size: 9.5px;
+      font-size: 0.7rem;
       letter-spacing: 0.16em;
       text-transform: uppercase;
       color: var(--chain-gold);
@@ -448,18 +448,29 @@
       flex: 0 0 auto;
       padding: 0 clamp(0.25rem, 1vw, 0.5rem);
     }
-    /* Four or more cards in one row: slightly tighter type so labels stay readable. */
+    /* Four or more cards: a numbered grid read left to right, not one row. Six cards
+       in a single row left each card narrower than its own label. */
+    .chain-flow.is-dense {
+      display: grid;
+      grid-template-columns: repeat(var(--chain-cols, 3), minmax(0, 1fr));
+      gap: 0.85rem;
+      counter-reset: chain-step;
+    }
+    .chain-flow.is-dense .chain-link { display: none; }
     .chain-flow.is-dense .chain-node {
-      padding: 0.85rem 0.75rem 0.95rem;
+      position: relative;
+      counter-increment: chain-step;
     }
-    .chain-flow.is-dense .chain-title {
-      font-size: clamp(0.92rem, 1.5vw, 1.05rem);
-    }
-    .chain-flow.is-dense .chain-text {
-      font-size: clamp(0.88rem, 1.35vw, 0.96rem);
-    }
-    .chain-flow.is-dense .chain-link-line {
-      width: clamp(1.4rem, 3vw, 2.4rem);
+    .chain-flow.is-dense .chain-node::after {
+      content: counter(chain-step, decimal-leading-zero);
+      position: absolute;
+      top: 0.6rem;
+      right: 0.8rem;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      color: var(--chain-gold);
+      opacity: 0.6;
     }
     .chain-link-line {
       width: 3.2rem;
@@ -521,6 +532,12 @@
         flex-direction: column;
         align-items: center;
       }
+      .chain-flow.is-dense {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .chain-flow.is-dense .chain-link { display: flex; }
       .chain-node {
         width: min(100%, 26rem);
         flex: 0 0 auto;
@@ -619,9 +636,10 @@
       background: linear-gradient(180deg, var(--chain-gold, #e4c56a), rgba(212, 175, 55, 0.15));
     }
     .cmp-col {
-      display: flex;
-      flex-direction: column;
-      height: 100%;
+      display: grid;
+      grid-row: span 4;
+      grid-template-rows: subgrid;
+      row-gap: 0;
       min-height: 0;
       padding: 1.05rem 1.15rem 1.15rem;
       border: 1px solid rgba(197, 155, 39, 0.3);
@@ -631,32 +649,14 @@
       transform: translateY(8px);
     }
     .chain.is-visible .cmp-col { animation: chain-rise 0.6s ease-out var(--t) forwards; }
-    .cmp-head {
-      margin-bottom: 0.85rem;
-      flex-shrink: 0;
-    }
-    /* Role pills (CONTINUOUS / LOCKED IN ANTIQUITY / …) share a two-line band so titles line up. */
-    .cmp-head .chain-role {
-      margin-bottom: 0.2rem;
-      line-height: 1.4;
-      min-height: 2.85em;
-      display: flex;
-      align-items: flex-end;
-    }
-    .cmp-head .chain-title {
-      margin-bottom: 0.45rem;
-      line-height: 1.35;
-      min-height: 2.75em;
-      display: flex;
-      align-items: flex-end;
-    }
-    .cmp-grid[style*="--cmp-cols:3"] {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-    .cmp-grid[style*="--cmp-cols:2"] {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
+    /* Each column is a subgrid of .cmp-grid: role, title, citation and list sit on
+       rows shared by every column, so they line up however much each one wraps. */
+    .cmp-head { display: contents; }
+    .cmp-head > .chain-role { grid-row: 1; margin: 0 0 0.45rem; line-height: 1.4; }
+    .cmp-head > .chain-title { grid-row: 2; margin: 0 0 0.5rem; line-height: 1.35; }
+    .cmp-head > .chain-cite { grid-row: 3; justify-self: start; margin-bottom: 0.85rem; }
     .cmp-list {
+      grid-row: 4;
       list-style: none;
       margin: 0;
       padding: 0;
@@ -704,7 +704,7 @@
     }
     .tbl thead th {
       font-family: "JetBrains Mono", monospace;
-      font-size: 9.5px;
+      font-size: 0.7rem;
       letter-spacing: 0.14em;
       text-transform: uppercase;
       color: var(--chain-gold, #e4c56a);
@@ -718,6 +718,32 @@
     .tbl tbody td { color: var(--chain-muted, inherit); }
     .tbl tbody tr:last-child th,
     .tbl tbody tr:last-child td { border-bottom: 0; }
+    /* Phones: each row becomes a block with labelled values, not a sideways scroll. */
+    @media (max-width: 600px) {
+      .tbl thead { display: none; }
+      .tbl,
+      .tbl tbody,
+      .tbl tr,
+      .tbl th,
+      .tbl td { display: block; width: 100%; }
+      .tbl tr {
+        padding: 0.75rem 0;
+        border-bottom: 1px solid rgba(197, 155, 39, 0.22);
+      }
+      .tbl tbody tr:last-child { border-bottom: 0; }
+      .tbl th,
+      .tbl td { padding: 0.15rem 0; border: 0; }
+      .tbl tbody th { font-size: 1rem; margin-bottom: 0.25rem; }
+      .tbl td::before {
+        content: attr(data-label);
+        display: block;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.7rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: #c9a227;
+      }
+    }
     /* ---- vertical flow ---- */
     .flow-stack {
       display: flex;
@@ -766,28 +792,16 @@
       .flow-step { opacity: 1 !important; transform: none !important; animation: none !important; }
     }
     @media (max-width: 820px) {
-      .cmp-grid,
-      .cmp-grid[style*="--cmp-cols:2"],
-      .cmp-grid[style*="--cmp-cols:3"] {
+      .cmp-grid {
         grid-template-columns: minmax(0, 1fr);
-      }
-      .cmp-head .chain-role,
-      .cmp-head .chain-title {
-        min-height: 0;
-        display: block;
       }
       .tbl { font-size: 0.84rem; }
       .tbl th, .tbl td { padding: 0.5rem 0.45rem; }
     }
     /* Narrow desktop: stack three-up comparisons instead of a cramped 2+1 row. */
     @media (min-width: 821px) and (max-width: 940px) {
-      .cmp-grid[style*="--cmp-cols:3"] {
+      .cmp-grid.is-three {
         grid-template-columns: minmax(0, 1fr);
-      }
-      .cmp-head .chain-role,
-      .cmp-head .chain-title {
-        min-height: 0;
-        display: block;
       }
     }
     body.paper-mode .cmp-col,
@@ -822,7 +836,7 @@
     .tl-track {
       display: grid;
       grid-template-columns: minmax(0, var(--tl-label-w)) minmax(0, 1fr);
-      align-items: center;
+      align-items: start;
       gap: var(--tl-gap);
       opacity: 0;
       transform: translateY(8px);
@@ -845,29 +859,52 @@
       background: linear-gradient(90deg, rgba(212, 175, 55, 0.28), rgba(212, 175, 55, 0.5));
       border-left: 2px solid var(--chain-gold, #e4c56a);
     }
+    /* Segments only divide the rail. Their labels are listed beneath it: a segment a
+       few years wide is a sliver of the axis and cannot hold text. */
     .tl-seg {
       position: absolute;
       top: 0;
       bottom: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 0 0.4rem;
-      font-family: "JetBrains Mono", monospace;
-      font-size: 9.5px;
-      letter-spacing: 0.06em;
-      color: #f4ead4;
-      text-align: center;
-      overflow: hidden;
-      white-space: nowrap;
       border-right: 1px solid rgba(15, 14, 13, 0.55);
+    }
+    .tl-body {
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+      min-width: 0;
+    }
+    .tl-notes {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: 0.3rem;
+    }
+    .tl-notes li {
+      position: relative;
+      padding-left: 1.1rem;
+      font-family: Inter, sans-serif;
+      font-size: 0.8rem;
+      line-height: 1.5;
+      color: var(--chain-muted, inherit);
+    }
+    .tl-notes li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.42em;
+      width: 0.55rem;
+      height: 0.55rem;
+      border-radius: 2px;
+      border: 1px solid rgba(228, 197, 106, 0.7);
+      background: rgba(212, 175, 55, 0.35);
     }
     .tl-axis {
       display: flex;
       justify-content: space-between;
       margin-left: calc(var(--tl-label-w) + var(--tl-gap));
       font-family: "JetBrains Mono", monospace;
-      font-size: 9.5px;
+      font-size: 0.7rem;
       letter-spacing: 0.1em;
       text-transform: uppercase;
       color: var(--chain-muted, inherit);
@@ -879,7 +916,6 @@
     @media (max-width: 820px) {
       .tl-track { grid-template-columns: minmax(0, 1fr); gap: 0.5rem; }
       .tl-axis { margin-left: 0; }
-      .tl-seg { font-size: 9px; }
     }
     body.paper-mode .tl-rail,
     body.white-mode .tl-rail { background: rgba(180, 140, 40, 0.08); border-color: rgba(180, 140, 40, 0.3); }

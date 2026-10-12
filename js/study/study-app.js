@@ -2309,8 +2309,12 @@
         }
         parts.push(nodeHtml(step, i === mid, t, canResolve));
       });
-      const flowClass = 'chain-flow' + (steps.length > 3 ? ' is-dense' : '');
-      return '<div class="' + flowClass + '">' + parts.join('') + '</div>';
+      // More than three cards form a grid (see .chain-flow.is-dense in study.html):
+      // two columns for four cards, three columns otherwise, read left to right.
+      const dense = steps.length > 3;
+      const flowClass = 'chain-flow' + (dense ? ' is-dense' : '');
+      const flowStyle = dense ? ' style="--chain-cols:' + (steps.length === 4 ? 2 : 3) + '"' : '';
+      return '<div class="' + flowClass + '"' + flowStyle + '>' + parts.join('') + '</div>';
     }
 
     function bodyComparison(spec, steps, canResolve) {
@@ -2343,7 +2347,7 @@
       // Column count follows the data: some comparisons have two sides, the
       // schools comparison has three.
       return '<div class="cmp' + (c ? ' has-centre' : '') + '">' + centreHtml +
-        '<div class="cmp-grid" style="--cmp-cols:' + Math.max(2, cols.length) + '">' + cols.join('') + '</div>' +
+        '<div class="cmp-grid' + (cols.length >= 3 ? ' is-three' : '') + '" style="--cmp-cols:' + Math.max(2, cols.length) + '">' + cols.join('') + '</div>' +
       '</div>';
     }
 
@@ -2357,7 +2361,7 @@
         '<tbody>' + body.map((r) => '<tr>' +
           (r.cells || []).map((c, ci) => (ci === 0
             ? '<th scope="row">' + escapeStudy(c) + '</th>'
-            : '<td>' + escapeStudy(c) + '</td>')).join('') +
+            : '<td data-label="' + escapeStudy(head[ci] || '') + '">' + escapeStudy(c) + '</td>')).join('') +
         '</tr>').join('') + '</tbody>' +
       '</table></div>';
     }
@@ -2392,22 +2396,28 @@
         const lo = Math.min(from, to);
         const hi = Math.max(from, to);
         const span = Math.max(1, hi - lo);
+        // Segment labels are listed beneath the rail, not set inside it: a segment a
+        // few years wide is a sliver of the axis and cannot hold its label.
         const segs = (step.segments || []).map((sg) => {
           const sFrom = Number(sg.from) || 0;
           const sTo = Number(sg.to) || 0;
           const w = Math.max(0.5, Math.abs(sTo - sFrom));
-          return '<span class="tl-seg" style="left:' + Math.min(sFrom, sTo) + '%;width:' + w + '%">' +
-            escapeStudy(sg.label || '') + '</span>';
+          return '<span class="tl-seg" style="left:' + Math.min(sFrom, sTo) + '%;width:' + w + '%" aria-hidden="true"></span>';
         }).join('');
+        const notes = (step.segments || []).filter((sg) => sg.label)
+          .map((sg) => '<li>' + escapeStudy(sg.label) + '</li>').join('');
         const html = '<div class="tl-track" style="--t:' + t.toFixed(2) + 's">' +
           '<div class="tl-label">' +
             (step.role ? '<p class="chain-role">' + escapeStudy(step.role) + '</p>' : '') +
             (step.title ? '<h4 class="chain-title">' + escapeStudy(step.title) + '</h4>' : '') +
             diagramCite(step.cite, canResolve) +
           '</div>' +
-          '<div class="tl-rail">' +
-            '<span class="tl-bar" style="left:' + lo + '%;width:' + span + '%"></span>' +
-            segs +
+          '<div class="tl-body">' +
+            '<div class="tl-rail">' +
+              '<span class="tl-bar" style="left:' + lo + '%;width:' + span + '%"></span>' +
+              segs +
+            '</div>' +
+            (notes ? '<ul class="tl-notes">' + notes + '</ul>' : '') +
           '</div>' +
         '</div>';
         t += 0.25;
