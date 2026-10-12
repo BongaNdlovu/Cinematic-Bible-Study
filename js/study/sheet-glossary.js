@@ -132,7 +132,7 @@
       IMG + "glossary-jesuit.png"),
     entry("zeroim", "zeroim", [], "word",
       "Hebrew for vegetables, grains, and seeds — the food of Daniel’s ten-day test.",
-      "Daniel 1:12. Echoes Genesis 1:29. The point is not a modern health regimen. The royal table was typically dedicated to the empire’s gods (traditional reconstruction; Daniel 1 does not state it) and mixed unclean meat (Leviticus 11). Xenophon, Cyropaedia 7.1.1, is a Persian analogy, not a Babylonian court proof. Daniel drew the line at worship, not at court rank or language.",
+      "Daniel 1:12. Echoes Genesis 1:29. The point is not a modern health regimen. The likeliest reason for the defilement is that the food had passed through the worship of the empire’s gods and may have broken the Torah’s food laws (Leviticus 11); Daniel 1 states neither, and the principle that makes it defilement is Paul’s, not the court’s (1 Corinthians 10:18-21). Xenophon, Cyropaedia 7.1.1, is a Persian analogy, not a Babylonian court proof. Daniel drew the line at worship, not at court rank or language.",
       IMG + "glossary-zeroim.png"),
     entry("cubit", "cubit", ["cubits"], "word",
       "An ancient length: roughly from elbow to fingertip, about 18 inches / 45 cm.",

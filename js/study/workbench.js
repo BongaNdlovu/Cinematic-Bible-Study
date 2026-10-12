@@ -316,9 +316,9 @@
           <div id="wb1-civic-matrix" class="space-y-2 mb-4 text-xs">
             ${[
               { id: 'c0', text: "Mastering Akkadian cuneiform literature, mathematics, and court administrative law.", correct: "civic" },
-              { id: 'c1', text: "Consuming royal meats that, by historical reconstruction, were first presented to pagan deities and included unclean foods under Leviticus 11.", correct: "defilement" },
+              { id: 'c1', text: "Consuming the king's meat, which the likeliest reading places outside the Torah's permitted list or first presented to the gods (Leviticus 11; 1 Corinthians 10:18-21).", correct: "defilement" },
               { id: 'c2', text: "Serving diligently as counselors and state administrators in the government of Babylon.", correct: "civic" },
-              { id: 'c3', text: "Drinking royal palace wine tied to pagan court liturgy (historical reconstruction from ancient Near Eastern royal custom).", correct: "defilement" }
+              { id: 'c3', text: "Drinking the king's wine, which the likeliest reading ties to the court's libations poured out to the gods.", correct: "defilement" }
             ].map((item, idx) => `
               <div class="p-2.5 rounded-lg bg-paper-100/60 dark:bg-paper-900/60 border border-paper-300 dark:border-paper-800 flex flex-wrap items-center justify-between gap-2" data-civic-id="${item.id}" data-correct="${item.correct}">
                 <span class="text-ink-800 dark:text-paper-200 text-xs">${idx + 1}. ${item.text}</span>

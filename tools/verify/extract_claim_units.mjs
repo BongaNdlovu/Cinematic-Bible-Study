@@ -150,9 +150,9 @@ const WORKBENCH_DATA = {
     task2Prompt: "Distinguish permissible civic education from impermissible covenant defilement:",
     civic: [
       "Mastering Akkadian cuneiform literature, mathematics, and court administrative law (Permissible Civic Skill).",
-      "Consuming royal meats that, by historical reconstruction, were first presented to pagan deities and included unclean foods under Leviticus 11 (Covenant Defilement).",
+      "Consuming the king's meat, which the likeliest reading places outside the Torah's permitted list or first presented to the gods (Leviticus 11; 1 Corinthians 10:18-21).",
       "Serving diligently as counselors and state administrators in the government of Babylon (Permissible Civic Skill).",
-      "Drinking royal palace wine tied to pagan court liturgy (historical reconstruction from ancient Near Eastern royal custom) (Covenant Defilement)."
+      "Drinking the king's wine, which the likeliest reading ties to the court's libations poured out to the gods."
     ],
     dietTerm: "Transliterated Hebrew term for the plant/pulse diet requested by Daniel (Dan 1:12): zeroim (זֵרֹעִים)."
   },

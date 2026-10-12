@@ -569,8 +569,8 @@ Daniel 9:24–27 ──▶  "Seventy weeks" (70 × 7 = 490 prophetic days)
                 "role": "Royal Table (The World's Offer)",
                 "title": "Royal Table",
                 "points": [
-                  "Typically dedicated to Marduk/Bel",
-                  "May have violated Levitical food laws"
+                  "Likeliest reason: offered to the gods first",
+                  "Meat questions set aside at once"
                 ]
               },
               {
@@ -722,18 +722,18 @@ Azariah     ("Yahweh has Helped")   ──▶  Abednego     ("Servant of Nebo")<
 <p>The line was crossed when the state demanded participation at the king's table:</p>
 <blockquote class="scripture-quote">"But Daniel purposed in his heart that he would not defile himself with the portion of the king's meat, nor with the wine which he drank:..." — Daniel 1:8 (KJV)</blockquote>
 
-<p>This was not a matter of culinary preference or a modern wellness fad. Eating from the king's royal menu presented a covenant crisis on two fronts Daniel 1:8 actually names — meat and wine that would <em>defile</em>:</p>
+<p>This was not a matter of culinary preference or a modern wellness fad. The text states what Daniel refused: the king's meat and the king's wine, because they would <em>defile</em> him (Daniel 1:8). Two things in that verse could carry the defilement:</p>
 
 <ol>
-  <li><strong>Sacrificial idolatry (reconstruction):</strong> Ancient Near Eastern royal food was typically dedicated to the patron gods before being served. Daniel 1:8 does not print a liturgy. Xenophon’s <em>Cyropaedia</em> 7.1.1 records a Persian custom of offering a first portion to the gods — an analogy, not a Babylonian court document. To eat such food could mean table-fellowship with idols.</li>
-  <li><strong>Levitical defilement (reconstruction):</strong> On this reconstruction the royal table served meats outside the Torah’s permitted list and meat not drained of blood (Leviticus 11; Deuteronomy 14; 17:10–14). Daniel 1 does not itemise the table. What the text does state is decisive: Daniel asked for <em>zeroim</em> — seed-food — which sets every meat question aside at once.</li>
+  <li><strong>Sacrificial defilement:</strong> The text states the fact — Daniel would not defile himself with the king's meat or wine (1:8). The likeliest reason is that such food had passed through the worship of Babylon's gods. What is documented is narrower than the claim: Xenophon records Cyrus offering a portion of his meal to the gods before eating (<em>Cyropaedia</em> 7.1.1) — a Persian analogy, not a Babylonian court record. The principle that makes it defilement is scriptural, not historical: Paul treats eating what is sacrificed to idols as fellowship with demons, not with God (1 Corinthians 10:18–21). Daniel answered by asking for <em>zeroim</em> and water, removing the question at its root.</li>
+  <li><strong>Levitical defilement:</strong> The reconstruction is that the table offered meats outside the Torah's permitted list, or meat not properly drained of blood (Leviticus 11; 17:10–14). Daniel 1 does not itemise the menu. What the text does state settles the matter anyway: he asked for <em>zeroim</em> — seed-food — which sets every meat question aside at once.</li>
 </ol>
 
 <figure class="sheet-diagram" data-diagram="s1-3">
 <pre class="chain-ascii" aria-hidden="true">THE DIETARY CRISIS
 Royal Table (The World's Offer)           Zeroim &amp; Water (The Covenant Stand)
-• Typically dedicated to Marduk/Bel       • Dedicated entirely to Yahweh
-• May have violated Levitical food laws   • Undefiled nourishment (Dan 1:12)</pre>
+• Likeliest reason: offered to gods      • Dedicated entirely to Yahweh
+• Meat questions set aside at once       • Undefiled nourishment (Dan 1:12)</pre>
 </figure>
 
 <p>Daniel requested a ten-day trial on <span class="strongs-gloss" data-lemma="H2235" tabindex="0">zeroim</span> (זֵרֹעִים) — a Hebrew term denoting plant foods grown from seeds, including vegetables, grains, and legumes — accompanied by pure water to drink (Daniel 1:12; echoing God's original diet in Genesis 1:29).</p>
@@ -840,10 +840,10 @@ DANIEL IN BABYLON                         JESUS IN THE WILDERNESS
             "options": [
               "Believers must completely withdraw from secular vocations and corporate institutions, because engaging foreign literature and civil administration violates covenant purity.",
               "Believers may freely participate in idolatrous practices and compromise biblical ethics outwardly, provided they maintain private devotional piety in their personal hearts.",
-              "Daniel mastered Chaldean statecraft, language, and court administration (civic skill), but drew an absolute line at food tied to pagan worship. The verse states the defilement; the unclean-flesh and blood reasons are historical reconstruction.",
+              "Daniel mastered Chaldean statecraft, language, and court administration (civic skill), but drew an absolute line at food tied to pagan worship. The verse states the defilement; the likeliest dietary reasons are narrower than that claim.",
               "Daniel organized an immediate subversive resistance within the Babylonian civil service, refusing all vocational duties until Hebrew worship was formally established."
             ],
-            "explanation": "Daniel 1:8 establishes that secular skill and civil excellence can be rendered to a foreign state, while worship and the covenant line at the table remain inviolable. The verse states the defilement; the dietary reasons are reconstruction.",
+            "explanation": "Daniel 1:8 establishes that secular skill and civil excellence can be rendered to a foreign state, while worship and the covenant line at the table remain inviolable. The verse states the defilement; the dietary reasons are the likeliest reading, and Scripture (1 Corinthians 10:18-21) carries the principle.",
             "diagnostics": [
               "Misconception: Daniel willingly mastered Chaldean learning and served as a high civil counselor, proving professional education and public service are not sinful in themselves.",
               "Misconception: Scripture rejects moral dualism; Daniel 1:8 shows Daniel purposed not to defile himself physically or spiritually through compromising actions.",
@@ -859,7 +859,7 @@ DANIEL IN BABYLON                         JESUS IN THE WILDERNESS
               "Zeroim refers to elite sacrificial meats blessed in the temple of Bel-Marduk, reserved specifically for the royal academy's most distinguished astrological scholars.",
               "Zeroim designates total caloric fasting punctuated by ceremonial water libations, practiced by ancient desert ascetics to induce visionary ecstatic experiences."
             ],
-            "explanation": "Zeroim (זֵרֹעִים) points back to the seed-bearing diet of Genesis 1:29, affirming God as Creator and guarding the youth from sacrificial defilement.",
+            "explanation": "Zeroim (זֵרֹעִים) points back to the seed-bearing diet of Genesis 1:29, affirming God as Creator and setting aside any question of food offered to idols.",
             "diagnostics": [
               "",
               "Misconception: Daniel explicitly refused royal wine and requested water to drink alongside simple seed-bearing plant food (Dan 1:12).",
