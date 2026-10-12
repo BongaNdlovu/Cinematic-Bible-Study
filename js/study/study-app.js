@@ -2058,6 +2058,150 @@
       if (!/\d/.test(head)) return '';
       return 'https://www.biblegateway.com/passage/?search=' + encodeURIComponent(head) + '&version=KJV';
     }
+
+    /* ---- Reference index -------------------------------------------------
+       Turns SHEET_VERIFY[n] into a reference list the lesson prose can cite.
+       Each item gets a stable id (ref-<sheet>-<i>) and, when it is Scripture,
+       a set of normalised chapter/verse slots so a verse printed anywhere in
+       the prose can be resolved to the reference that documents it.
+
+       Source strings look like "Daniel 7:8, 24, King James Version" (two verses)
+       and "Numbers 14:34; Ezekiel 4:6, King James Version" (two books), so the
+       verse list is read from the digits after each colon rather than by
+       splitting on commas, which would mistake "24" for a separate reference. */
+    function normalBook(name) {
+      return String(name || '').trim().toLowerCase()
+        .replace(/^psalms?$/, 'psalm')
+        .replace(/^canticles$/, 'song of solomon');
+    }
+    function parseSourceRefs(source) {
+      const body = String(source || '').split(/,\s*King James Version/i)[0];
+      const slots = [];
+      const ranges = [];
+      // A semicolon starts a new clause, and a clause may or may not repeat the
+      // book ("Numbers 14:34; Ezekiel 4:6" repeats it, "Revelation 12:6, 12:14;
+      // 13:5" does not). The lookahead keeps a repeated chapter marker such as
+      // the "12:" in "12:14" from being swallowed as the verse 12 of chapter 12.
+      const V = '\\d+(?:\\s*[\\u2013\\u2014\\u2011-]\\s*\\d+)?';
+      const rx = new RegExp(
+        '([1-3]?\\s?[A-Za-z][A-Za-z. ]*?)?\\s*(\\d+):\\s*((?!\\d+\\s*:)' + V + '(?:\\s*,\\s*(?!\\d+\\s*:)' + V + ')*)',
+        'g'
+      );
+      let book = '';
+      body.split(';').forEach((clause) => {
+        let m;
+        rx.lastIndex = 0;
+        while ((m = rx.exec(clause))) {
+          if (m[1] && m[1].trim()) book = normalBook(m[1].replace(/[.\s]+$/, ''));
+          if (!book) continue;
+          const chapter = m[2];
+          // Walk the verse expression so a range ("24–25") is recorded as a
+          // span, letting a prose citation of 9:24–27 resolve to it.
+          const group = /(\d+)(?:\s*[\u2013\u2014\u2011-]\s*(\d+))?/g;
+          let g;
+          while ((g = group.exec(m[3]))) {
+            const from = Number(g[1]);
+            const to = g[2] ? Number(g[2]) : from;
+            const lo = Math.min(from, to);
+            const hi = Math.max(from, to);
+            ranges.push({ book: book, chapter: chapter, lo: lo, hi: hi });
+            for (let v = lo; v <= hi; v++) slots.push(book + ' ' + chapter + ':' + v);
+          }
+        }
+      });
+      return { slots: slots, ranges: ranges };
+    }
+    function referenceIndex(sheetIndex) {
+      const pack = window.SHEET_VERIFY && window.SHEET_VERIFY[sheetIndex];
+      if (!pack || !pack.items) return [];
+      return pack.items.map((it, i) => {
+        const parsed = it.kind === 'scripture' ? parseSourceRefs(it.source) : { slots: [], ranges: [] };
+        return {
+          id: 'ref-' + sheetIndex + '-' + i,
+          n: i + 1,
+          kind: verifyKindClass(it.kind),
+          label: verifyKindLabel(it.kind),
+          claim: String(it.lesson || ''),
+          source: String(it.source || ''),
+          quote: String(it.quote || ''),
+          check: String(it.check || ''),
+          href: verifyOpenHref(it.href) || verifyOpenHref(autoScriptureHref(it)),
+          slots: parsed.slots,
+          ranges: parsed.ranges
+        };
+      });
+    }
+
+    // Resolve a book/chapter/verse printed in the prose to the reference that
+    // documents it. A verse inside a documented span counts, so "9:24–27"
+    // resolves to a reference held for "9:24–25".
+    function findRefForVerse(bySlot, ranges, book, chapter, verse) {
+      const exact = bySlot.get(book + ' ' + chapter + ':' + verse);
+      if (exact) return exact;
+      for (let i = 0; i < ranges.length; i++) {
+        const r = ranges[i];
+        if (r.book === book && String(r.chapter) === String(chapter) && verse >= r.lo && verse <= r.hi) return r.ref;
+      }
+      return null;
+    }
+
+    // Wrap "(Daniel 1:2)" style citations in the prose so they jump to the list.
+    function decorateCitations(root, refs) {
+      if (!root || !refs.length) return 0;
+      const bySlot = new Map();
+      const spans = [];
+      refs.forEach((r) => {
+        r.slots.forEach((s) => { if (!bySlot.has(s)) bySlot.set(s, r); });
+        (r.ranges || []).forEach((rg) => spans.push({ book: rg.book, chapter: rg.chapter, lo: rg.lo, hi: rg.hi, ref: r }));
+      });
+      const resolve = (book, chapter, verse) => findRefForVerse(bySlot, spans, book, chapter, verse);
+
+      const nodes = [];
+      const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+        acceptNode(node) {
+          const el = node.parentElement;
+          if (!el) return NodeFilter.FILTER_REJECT;
+          if (/^(SCRIPT|STYLE)$/.test(el.tagName)) return NodeFilter.FILTER_REJECT;
+          if (el.closest('blockquote, nav.lesson-toc, .cite-ref, a, button')) return NodeFilter.FILTER_REJECT;
+          return /\d:\d/.test(node.nodeValue || '') ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
+        }
+      });
+      while (walker.nextNode()) nodes.push(walker.currentNode);
+
+      let made = 0;
+      const rx = /\(\s*([1-3]?\s?[A-Za-z][A-Za-z. ]*?)\s*(\d+):([\d\s,\u2013\u2014\u2011-]+)\s*\)/g;
+      nodes.forEach((node) => {
+        const text = node.nodeValue;
+        let match;
+        let cursor = 0;
+        const frag = document.createDocumentFragment();
+        rx.lastIndex = 0;
+        let hit = false;
+        while ((match = rx.exec(text))) {
+          const book = normalBook(match[1].replace(/[.\s]+$/, ''));
+          const chapter = match[2];
+          const verses = match[3].match(/\d+/g) || [];
+          let ref = null;
+          for (const v of verses) { ref = resolve(book, chapter, Number(v)); if (ref) break; }
+          if (!ref) continue;
+          hit = true;
+          frag.appendChild(document.createTextNode(text.slice(cursor, match.index)));
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = 'cite-ref';
+          btn.setAttribute('data-cite', ref.id);
+          btn.setAttribute('aria-label', 'Reference ' + ref.n + ': ' + match[0].replace(/[()]/g, '').trim());
+          btn.textContent = match[0];
+          frag.appendChild(btn);
+          cursor = match.index + match[0].length;
+        }
+        if (!hit) return;
+        frag.appendChild(document.createTextNode(text.slice(cursor)));
+        node.parentNode.replaceChild(frag, node);
+        made += 1;
+      });
+      return made;
+    }
     function renderSheetVerify(index) {
       const box = document.getElementById('sheet-verify');
       const pack = window.SHEET_VERIFY && window.SHEET_VERIFY[index];
@@ -2067,27 +2211,67 @@
         box.innerHTML = '';
         return;
       }
-      box.hidden = false;
-      const cards = pack.items.map((it) => {
-        const open = verifyOpenHref(it.href) || verifyOpenHref(autoScriptureHref(it));
-        const openHtml = open
-          ? ' <a class="sheet-verify-open" href="' + escapeVerify(open) + '" target="_blank" rel="noopener noreferrer">Open source</a>'
+      const refs = referenceIndex(index);
+
+      // One row per reference. The claim and source answer "what does this
+      // document?"; the quotation and the check open on demand so the list
+      // stays scannable.
+      const rows = refs.map((r) => {
+        const openHtml = r.href
+          ? '<a class="cite-open" href="' + escapeVerify(r.href) + '" target="_blank" rel="noopener noreferrer">Open source' +
+            '<span aria-hidden="true"> ↗</span></a>'
           : '';
-        return '<article class="sheet-verify-card sheet-verify-' + verifyKindClass(it.kind) + '">' +
-          '<p class="sheet-verify-kind">' + escapeVerify(verifyKindLabel(it.kind)) + '</p>' +
-          '<h4>' + escapeVerify(it.lesson) + '</h4>' +
-          '<blockquote>' + escapeVerify(it.quote) + '</blockquote>' +
-          '<p class="sheet-verify-source"><b>Source</b> ' + escapeVerify(it.source) + openHtml + '</p>' +
-          '<p class="sheet-verify-check"><b>Check</b> ' + escapeVerify(it.check) + '</p>' +
-          '</article>';
+        return '<li class="cite-row cite-row-' + r.kind + '" id="' + r.id + '">' +
+          '<details class="cite-details">' +
+            '<summary class="cite-summary">' +
+              '<span class="cite-num" aria-hidden="true">' + r.n + '</span>' +
+              '<span class="cite-main">' +
+                '<span class="cite-kind">' + escapeVerify(r.label) + '</span>' +
+                '<span class="cite-claim">' + escapeVerify(r.claim) + '</span>' +
+                '<span class="cite-source">' + escapeVerify(r.source) + '</span>' +
+              '</span>' +
+            '</summary>' +
+            '<div class="cite-body">' +
+              '<blockquote class="cite-quote">' + escapeVerify(r.quote) + '</blockquote>' +
+              (r.check ? '<p class="cite-check"><b>Check</b> ' + escapeVerify(r.check) + '</p>' : '') +
+              (openHtml ? '<p class="cite-actions">' + openHtml + '</p>' : '') +
+            '</div>' +
+          '</details>' +
+        '</li>';
       }).join('');
+
+      box.hidden = false;
       box.innerHTML =
-        '<p class="sheet-verify-kicker">Verify this sitting</p>' +
-        '<h3>Lessons, sources, and quotations</h3>' +
-        '<p class="sheet-verify-claim">' + escapeVerify(pack.claim) + '</p>' +
-        '<p class="sheet-verify-count">' + pack.items.length + ' direct references. Open the source; do not take the card’s word alone.</p>' +
-        '<div class="sheet-verify-list">' + cards + '</div>';
+        '<div class="cite-head">' +
+          '<p class="cite-kicker">References</p>' +
+          '<h3 class="cite-title">Lessons, sources, and quotations</h3>' +
+        '</div>' +
+        '<p class="cite-lead">' + escapeVerify(pack.claim) + '</p>' +
+        '<p class="cite-count">' + refs.length + ' references. Tap any reference to read the quotation and its check.</p>' +
+        '<ol class="cite-list">' + rows + '</ol>';
+
+      const article = document.getElementById('sheet-article');
+      if (article) decorateCitations(article, refs);
     }
+
+    // Citation markers jump to the reference list and open that row.
+    function revealReference(id) {
+      const row = document.getElementById(id);
+      if (!row) return;
+      const box = document.getElementById('sheet-verify');
+      if (box) box.hidden = false;
+      row.querySelectorAll('.cite-details').forEach((d) => { d.open = true; });
+      row.classList.add('is-hit');
+      row.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      window.setTimeout(() => row.classList.remove('is-hit'), 1800);
+    }
+
+    document.addEventListener('click', (e) => {
+      const cite = e.target.closest && e.target.closest('.cite-ref');
+      if (!cite) return;
+      e.preventDefault();
+      revealReference(cite.getAttribute('data-cite'));
+    });
 
     // The study-path card carries one thing only: the questions to sit with.
     // The trace / christ / now / help / value blocks were removed by request;

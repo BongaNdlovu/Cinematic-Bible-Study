@@ -94,87 +94,127 @@
         radial-gradient(ellipse at 0% 0%, rgba(212, 175, 55, 0.08), transparent 42%),
         rgba(15, 14, 13, 0.55);
     }
-    .sheet-verify-kicker {
+    .cite-head { margin: 0 0 0.7rem; }
+    .cite-kicker {
+      display: block;
       font-family: "JetBrains Mono", monospace;
       font-size: 10px;
-      letter-spacing: 0.16em;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
       color: #c9a227;
-      margin: 0 0 0.65rem;
+      margin: 0 0 0.5rem;
     }
-    .sheet-verify h3 {
+    .cite-title {
       font-family: Newsreader, Georgia, serif;
       font-size: 1.45rem;
-      color: inherit;
-      margin: 0 0 0.75rem;
       line-height: 1.25;
+      color: inherit;
+      margin: 0;
     }
-    .sheet-verify-claim {
+    .cite-claim {
+      font-family: Newsreader, Georgia, serif;
+      font-size: 1.06rem;
+      line-height: 1.5;
+      color: inherit;
+      margin: 0;
+    }
+    .cite-lead {
       font-size: 0.98rem;
       line-height: 1.65;
       margin: 0 0 0.55rem;
       color: var(--read-fg, inherit);
     }
-    .sheet-verify-list {
+    .cite-count {
+      font-family: Inter, sans-serif;
+      font-size: 0.86rem;
+      line-height: 1.55;
+      color: var(--read-muted, inherit);
+      margin: 0 0 1.2rem;
+    }
+    /* One row per reference: kind, claim, source. Detail opens on demand. */
+    .cite-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      border-top: 1px solid rgba(197, 155, 39, 0.22);
+    }
+    .cite-row {
+      --cite: var(--role-gold);
+      border-bottom: 1px solid rgba(197, 155, 39, 0.22);
+      transition: background 0.25s ease;
+    }
+    .cite-row-scripture { --cite: var(--role-gold); }
+    .cite-row-history,
+    .cite-row-inscription { --cite: var(--role-archive); }
+    .cite-row-commentary { --cite: var(--role-reader); }
+    .cite-details { margin: 0; }
+    .cite-summary {
       display: flex;
-      flex-direction: column;
-      gap: 0.95rem;
+      align-items: flex-start;
+      gap: 0.85rem;
+      padding: 0.9rem 0.35rem 0.9rem 0.15rem;
+      cursor: pointer;
+      list-style: none;
+      transition: background 0.22s ease;
     }
-    .sheet-verify-card {
-      --card: var(--role-gold);
-      border: 1px solid color-mix(in srgb, var(--card) 32%, transparent);
-      border-left: 3px solid var(--card);
-      border-radius: 12px;
-      padding: 1.15rem 1.15rem 1.2rem;
-      background: rgba(255, 248, 230, 0.035);
+    .cite-summary::-webkit-details-marker { display: none; }
+    .cite-summary:hover { background: rgba(255, 240, 200, 0.035); }
+    .cite-summary:focus-visible {
+      outline: 2px solid var(--cite);
+      outline-offset: 2px;
+      border-radius: 8px;
     }
-    .sheet-verify-scripture { --card: var(--role-gold); }
-    .sheet-verify-history,
-    .sheet-verify-inscription { --card: var(--role-archive); }
-    .sheet-verify-commentary { --card: var(--role-reader); }
-    .sheet-verify-kind {
+    .cite-num {
+      flex: none;
+      display: grid;
+      place-items: center;
+      width: 1.6rem;
+      height: 1.6rem;
+      margin-top: 0.1rem;
+      border-radius: 50%;
+      border: 1px solid color-mix(in srgb, var(--cite) 55%, transparent);
+      background: color-mix(in srgb, var(--cite) 12%, transparent);
       font-family: "JetBrains Mono", monospace;
       font-size: 10px;
-      letter-spacing: 0.12em;
+      font-weight: 700;
+      color: var(--cite);
+    }
+    .cite-main { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 0.3rem; }
+    .cite-kind {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 9.5px;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
-      color: var(--card);
-      margin: 0 0 0.7rem;
+      color: var(--cite);
     }
-    .sheet-verify-card h4 {
-      font-family: Newsreader, Georgia, serif;
-      font-size: 1.12rem;
-      line-height: 1.45;
-      margin: 0 0 0.9rem;
-      color: inherit;
+    .cite-source {
+      font-family: Inter, sans-serif;
+      font-size: 0.84rem;
+      line-height: 1.5;
+      color: var(--read-muted, inherit);
+      opacity: 0.9;
     }
-    .sheet-verify-card blockquote {
+    .cite-body {
+      padding: 0.15rem 0.35rem 1.1rem 3.05rem;
+    }
+    .cite-quote {
       margin: 0;
-      padding: 0.2rem 0 0.2rem 1rem;
-      border-left: 3px solid var(--card);
+      padding: 0.15rem 0 0.15rem 1rem;
+      border-left: 3px solid var(--cite);
       font-family: Newsreader, Georgia, serif;
       font-style: italic;
       font-size: 1.02rem;
       line-height: 1.7;
       color: var(--read-fg, inherit);
     }
-    .sheet-verify-source,
-    .sheet-verify-check {
+    .cite-check {
       font-family: Inter, sans-serif;
-      font-size: 0.9rem;
-      line-height: 1.65;
-      margin: 1rem 0 0;
-      color: var(--read-fg, inherit);
-    }
-    .sheet-verify-check { margin-top: 0.75rem; }
-    .sheet-verify-count {
-      font-family: Inter, sans-serif;
-      font-size: 0.86rem;
-      line-height: 1.55;
+      font-size: 0.88rem;
+      line-height: 1.6;
+      margin: 0.85rem 0 0;
       color: var(--read-muted, inherit);
-      margin: 0 0 1.15rem;
     }
-    .sheet-verify-source b,
-    .sheet-verify-check b {
+    .cite-check b {
       display: inline-block;
       margin-right: 0.4rem;
       font-family: "JetBrains Mono", monospace;
@@ -182,16 +222,46 @@
       letter-spacing: 0.08em;
       text-transform: uppercase;
       font-weight: 600;
+      color: var(--role-guard);
     }
-    .sheet-verify-source b { color: var(--card); }
-    .sheet-verify-check b { color: var(--role-guard); }
-    .sheet-verify-open {
-      margin-left: 0.45rem;
+    .cite-actions { margin: 0.85rem 0 0; }
+    .cite-open {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.78rem;
+      letter-spacing: 0.04em;
       color: #d4af37;
       text-decoration: underline;
       text-underline-offset: 2px;
     }
-    .sheet-verify-open:hover { color: #f3e0a0; }
+    .cite-open:hover { color: #f3e0a0; }
+    /* Target feedback when a prose citation jumps here. */
+    .cite-row.is-hit {
+      background: color-mix(in srgb, var(--cite) 14%, transparent);
+      box-shadow: inset 3px 0 0 var(--cite);
+    }
+    /* Inline citation marker in the lesson prose. */
+    .cite-ref {
+      display: inline;
+      margin: 0;
+      padding: 0.05em 0.34em;
+      border: 0;
+      border-radius: 999px;
+      background: rgba(212, 175, 55, 0.14);
+      font: inherit;
+      font-size: 0.94em;
+      color: inherit;
+      cursor: pointer;
+      text-decoration: none;
+      text-underline-offset: 2px;
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+    .cite-ref:hover,
+    .cite-ref:focus-visible {
+      background: rgba(212, 175, 55, 0.3);
+      color: #f7e7b6;
+      outline: none;
+    }
+    .cite-ref:focus-visible { box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.6); }
     body.charcoal-mode .sheet-verify,
     body.paper-mode .sheet-verify,
     body.white-mode .sheet-verify {
@@ -203,11 +273,6 @@
       background: transparent;
     }
     body.white-mode .sheet-verify { background: transparent; }
-    body.paper-mode .sheet-verify-card,
-    body.white-mode .sheet-verify-card {
-      background: rgba(255, 250, 236, 0.72);
-    }
-    body.white-mode .sheet-verify-card { background: #f7f7f7; }
 
     .study-path {
       --role-gold: #e4c56a;
@@ -4055,19 +4120,30 @@
       background: var(--read-panel);
       border-color: var(--read-border);
     }
-    body.paper-mode .sheet-verify-kicker,
-    body.white-mode .sheet-verify-kicker,
-    body.paper-mode .sheet-verify-kind,
-    body.white-mode .sheet-verify-kind,
-    body.paper-mode .sheet-verify-source b,
-    body.white-mode .sheet-verify-source b,
-    body.paper-mode .sheet-verify-open,
-    body.white-mode .sheet-verify-open {
+    body.paper-mode .cite-kicker,
+    body.white-mode .cite-kicker,
+    body.paper-mode .cite-open,
+    body.white-mode .cite-open {
       color: var(--read-accent);
     }
-    body.paper-mode .sheet-verify-open:hover,
-    body.white-mode .sheet-verify-open:hover {
+    body.paper-mode .cite-open:hover,
+    body.white-mode .cite-open:hover {
       color: var(--read-strong);
+    }
+    body.paper-mode .cite-summary:hover,
+    body.white-mode .cite-summary:hover {
+      background: rgba(138, 100, 20, 0.06);
+    }
+    body.paper-mode .cite-ref,
+    body.white-mode .cite-ref {
+      background: rgba(180, 140, 40, 0.16);
+    }
+    body.paper-mode .cite-ref:hover,
+    body.white-mode .cite-ref:hover,
+    body.paper-mode .cite-ref:focus-visible,
+    body.white-mode .cite-ref:focus-visible {
+      background: rgba(180, 140, 40, 0.3);
+      color: #4a3410;
     }
     body.paper-mode .sitting-guide-card,
     body.white-mode .sitting-guide-card,
@@ -4189,14 +4265,8 @@
     body.white-mode .study-path h3 {
       color: #1c1917;
     }
-    body.paper-mode .sheet-verify-card .sheet-verify-kind,
-    body.white-mode .sheet-verify-card .sheet-verify-kind,
-    body.paper-mode .sheet-verify-card .sheet-verify-source b,
-    body.white-mode .sheet-verify-card .sheet-verify-source b {
-      color: var(--block, var(--step, var(--card)));
-    }
-    body.paper-mode .sheet-verify-check b,
-    body.white-mode .sheet-verify-check b { color: var(--role-guard); }
+    body.paper-mode .cite-check b,
+    body.white-mode .cite-check b { color: var(--role-guard); }
     body.paper-mode .lesson-connect,
     body.white-mode .lesson-connect {
       background: rgba(255, 250, 236, 0.92);
