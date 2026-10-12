@@ -295,6 +295,19 @@ export function extractAllUnits() {
       });
     }
 
+    // D2. Chain diagram
+    // The diagram is learner-facing copy on the page, so its caption and every
+    // card sentence must be auditable like any other prose. Verse chips are
+    // reference labels for the reference list rather than claims, so only the
+    // title and body text become units.
+    if (sheet.diagram) {
+      if (sheet.diagram.title) addUnit(`S${pad}-CHAIN-TITLE`, 'diagram', sheet.diagram.title);
+      (sheet.diagram.steps || []).forEach((step, stIdx) => {
+        if (step.title) addUnit(`S${pad}-CHAIN-${stIdx + 1}-TITLE`, 'diagram', step.title);
+        if (step.text) addUnit(`S${pad}-CHAIN-${stIdx + 1}-TEXT`, 'diagram', step.text);
+      });
+    }
+
     // E. Guide
     if (sheet.guide) {
       if (sheet.guide.intro) {

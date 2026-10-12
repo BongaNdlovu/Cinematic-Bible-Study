@@ -2202,6 +2202,133 @@
       });
       return made;
     }
+    /* ---- Chain diagram ---------------------------------------------------
+       A three-step cinematic flow: cards joined by arrows that draw in, with
+       the middle node promoted to a medalled centre. Ported from a standalone
+       component so the artwork, fonts, and colour tokens are the ones this
+       site already ships. Entrance plays when the figure scrolls into view and
+       can be replayed; it is suppressed under prefers-reduced-motion. */
+    function renderSheetDiagram(data) {
+      const box = document.getElementById('sheet-diagram');
+      if (!box) return;
+      const spec = data && data.diagram;
+      const steps = spec && Array.isArray(spec.steps) ? spec.steps : [];
+      if (steps.length < 2) {
+        box.hidden = true;
+        box.innerHTML = '';
+        return;
+      }
+      const mid = steps.findIndex((s) => s.centre);
+      let t = 0.1;
+      const parts = [];
+      steps.forEach((step, i) => {
+        if (i > 0) {
+          t += 0.4;
+          parts.push(
+            '<div class="chain-link" style="--t:' + t.toFixed(2) + 's" aria-hidden="true">' +
+              '<span class="chain-link-line"></span><span class="chain-link-head"></span>' +
+            '</div>'
+          );
+          t += 0.5;
+        }
+        const isCentre = i === mid;
+        parts.push(
+          '<article class="chain-node' + (isCentre ? ' is-centre' : '') + '" style="--t:' + t.toFixed(2) + 's">' +
+            (isCentre
+              ? '<div class="chain-medal" aria-hidden="true">' +
+                  '<svg viewBox="0 0 140 140" fill="none" stroke="currentColor">' +
+                    '<circle cx="70" cy="70" r="68" stroke-opacity=".35" stroke-width="1"/>' +
+                    '<circle cx="70" cy="70" r="58" stroke-opacity=".7" stroke-width="1.2"/>' +
+                    '<path d="M70 36V106M51 58H89" stroke-width="3.5" stroke-linecap="round"/>' +
+                  '</svg>' +
+                '</div>'
+              : (step.role ? '<p class="chain-role">' + escapeStudy(step.role) + '</p>' : '')) +
+            '<h4 class="chain-title">' + escapeStudy(step.title) + '</h4>' +
+            (step.cite ? '<button type="button" class="chain-cite" data-cite-src="' + escapeStudy(step.cite) + '">' + escapeStudy(step.cite) + '</button>' : '') +
+            (step.text ? '<p class="chain-text">' + escapeStudy(step.text) + '</p>' : '') +
+          '</article>'
+        );
+      });
+
+      box.hidden = false;
+      box.innerHTML =
+        '<figure class="chain" data-chain>' +
+          '<button class="chain-toggle" type="button" aria-expanded="true" aria-controls="chain-body" aria-label="Collapse diagram">' +
+            '<svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 5l5 5 5-5"/></svg>' +
+          '</button>' +
+          (spec.title ? '<figcaption class="chain-title-cap">' + escapeStudy(spec.title) + '</figcaption>' : '') +
+          '<div class="chain-body" id="chain-body">' +
+            '<div class="chain-flow">' + parts.join('') + '</div>' +
+          '</div>' +
+        '</figure>' +
+        '<button class="chain-replay" type="button" data-chain-replay>Replay animation</button>';
+
+      const figure = box.querySelector('[data-chain]');
+      const panel = box.querySelector('#chain-body');
+      const toggle = box.querySelector('.chain-toggle');
+      const replay = box.querySelector('[data-chain-replay]');
+      if (!figure || !panel || !toggle || !replay) return;
+
+      const reduce = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : null;
+      const raf = window.requestAnimationFrame ? window.requestAnimationFrame.bind(window) : (cb) => setTimeout(cb, 16);
+      const caf = window.cancelAnimationFrame ? window.cancelAnimationFrame.bind(window) : window.clearTimeout;
+      let frame = 0;
+      let started = false;
+
+      const play = () => {
+        if (reduce && reduce.matches) { figure.classList.add('is-visible'); return; }
+        figure.classList.remove('is-visible');
+        caf(frame);
+        // Double rAF guarantees a style flush without forcing a sync layout.
+        frame = raf(() => { frame = raf(() => figure.classList.add('is-visible')); });
+      };
+      const start = () => { if (started) return; started = true; play(); };
+
+      const setOpen = (open) => {
+        toggle.setAttribute('aria-expanded', String(open));
+        toggle.setAttribute('aria-label', open ? 'Collapse diagram' : 'Expand diagram');
+        panel.hidden = !open;
+      };
+
+      if (figure.getBoundingClientRect().top < window.innerHeight * 0.9) start();
+      else if ('IntersectionObserver' in window) {
+        const io = new IntersectionObserver((entries) => {
+          if (entries[0].isIntersecting) { io.disconnect(); start(); }
+        }, { rootMargin: '0px 0px -15% 0px', threshold: 0 });
+        io.observe(figure);
+      } else start();
+
+      toggle.addEventListener('click', () => {
+        const open = toggle.getAttribute('aria-expanded') !== 'false';
+        setOpen(!open);
+        if (!open) { started = true; play(); }
+      });
+      replay.addEventListener('click', () => { setOpen(true); started = true; play(); });
+    }
+
+    // A diagram's citation opens the same reference row the prose markers use.
+    function resolveCiteLabel(label) {
+      const box = document.getElementById('sheet-verify');
+      if (!box) return;
+      const text = String(label || '');
+      const colon = text.indexOf(':');
+      if (colon < 0) return;
+      // The chapter is the number BEFORE the colon, not after: "Daniel 1:2" is
+      // chapter 1 verse 2. Reading the post-colon digits gives verse 2 as the
+      // chapter and matches nothing.
+      const beforeColon = text.slice(0, colon);
+      const book = normalBook(beforeColon.replace(/\s*\d+\s*$/, '').trim());
+      const chapter = (beforeColon.match(/(\d+)\s*$/) || [])[1];
+      if (!book || !chapter) return;
+      const rows = box.querySelectorAll('.cite-row');
+      for (const row of rows) {
+        const src = row.querySelector('.cite-source');
+        if (!src) continue;
+        const s = src.textContent.toLowerCase();
+        if (s.includes(book) && new RegExp('\\b' + chapter + ':').test(s)) { revealReference(row.id); return; }
+      }
+    }
+
     function renderSheetVerify(index) {
       const box = document.getElementById('sheet-verify');
       const pack = window.SHEET_VERIFY && window.SHEET_VERIFY[index];
@@ -2268,9 +2395,16 @@
 
     document.addEventListener('click', (e) => {
       const cite = e.target.closest && e.target.closest('.cite-ref');
-      if (!cite) return;
-      e.preventDefault();
-      revealReference(cite.getAttribute('data-cite'));
+      if (cite) {
+        e.preventDefault();
+        revealReference(cite.getAttribute('data-cite'));
+        return;
+      }
+      const chainCite = e.target.closest && e.target.closest('.chain-cite');
+      if (chainCite) {
+        e.preventDefault();
+        resolveCiteLabel(chainCite.getAttribute('data-cite-src'));
+      }
     });
 
     // The study-path card carries one thing only: the questions to sit with.
@@ -2889,6 +3023,7 @@
       // Render Article Content
       document.getElementById('sheet-article').innerHTML = data.content;
       renderLessonMedia(data);
+      renderSheetDiagram(data);
       renderLessonConnectBar(index);
       renderStudyGuide(data.studyGuide);
       renderFacilitatorStrip(data.facilitator);

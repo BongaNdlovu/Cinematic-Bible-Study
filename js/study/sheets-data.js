@@ -37,6 +37,32 @@
         },
         title: "The Prophetic Blueprint: Why Daniel's Unbroken Chain Centers on Jesus Christ",
         subtitle: "God's historical roadmap from exile to the cross to the everlasting kingdom — and why how you read decides what you see.",
+        // Three-step chain with the cross as the centre. Rendered by
+        // renderSheetDiagram(); each `cite` is a verse printed in this sitting's
+        // reference list, so a diagram reference resolves to a real entry.
+        diagram: {
+          title: "The Unbroken Chain",
+          steps: [
+            {
+              role: "Exile",
+              title: "Sovereignty in exile",
+              cite: "Daniel 1:2",
+              text: "The Lord hands the king over. Babylon is the instrument, not the author."
+            },
+            {
+              centre: true,
+              title: "Messiah cut off for us",
+              cite: "Daniel 9:24–25",
+              text: "The seventieth week is cut from the 2,300 days and lands on the cross."
+            },
+            {
+              role: "Stone",
+              title: "Consummation in glory",
+              cite: "Daniel 2:44",
+              text: "The Stone that shatters the kingdoms becomes a mountain filling the earth."
+            }
+          ]
+        },
         content: `
 <nav class="lesson-toc" aria-label="Sheet 0 parts">
   <p class="lesson-toc-kicker">Follow this sitting</p>

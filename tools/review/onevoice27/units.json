@@ -1,6 +1,6 @@
 {
   "sheetHashes": {
-    "0": "940a97899fd1b4ab",
+    "0": "6feeccea3ae62978",
     "1": "82eaa7a070bd7f3d",
     "2": "5c789d52493010af",
     "3": "1d966c003466f810",
@@ -13,7 +13,7 @@
     "10": "bdb166e40dabd991"
   },
   "sheetUnitCounts": {
-    "0": 252,
+    "0": 259,
     "1": 214,
     "2": 220,
     "3": 184,
@@ -1026,6 +1026,55 @@
       "field": "studyGuide",
       "text": "Does my reading of Daniel lead me to fear empires, or to trust Christ's triumph?",
       "hash": "2d798f77aa054fd0"
+    },
+    {
+      "id": "S00-CHAIN-TITLE",
+      "sheet": 0,
+      "field": "diagram",
+      "text": "The Unbroken Chain",
+      "hash": "cb727d1c65eb8305"
+    },
+    {
+      "id": "S00-CHAIN-1-TITLE",
+      "sheet": 0,
+      "field": "diagram",
+      "text": "Sovereignty in exile",
+      "hash": "b3a9b6cc4400a22f"
+    },
+    {
+      "id": "S00-CHAIN-1-TEXT",
+      "sheet": 0,
+      "field": "diagram",
+      "text": "The Lord hands the king over. Babylon is the instrument, not the author.",
+      "hash": "1fd80815c926d67c"
+    },
+    {
+      "id": "S00-CHAIN-2-TITLE",
+      "sheet": 0,
+      "field": "diagram",
+      "text": "Messiah cut off for us",
+      "hash": "bd52011595e383cd"
+    },
+    {
+      "id": "S00-CHAIN-2-TEXT",
+      "sheet": 0,
+      "field": "diagram",
+      "text": "The seventieth week is cut from the 2,300 days and lands on the cross.",
+      "hash": "8610804bd7f5071d"
+    },
+    {
+      "id": "S00-CHAIN-3-TITLE",
+      "sheet": 0,
+      "field": "diagram",
+      "text": "Consummation in glory",
+      "hash": "d1cf0de5750ac865"
+    },
+    {
+      "id": "S00-CHAIN-3-TEXT",
+      "sheet": 0,
+      "field": "diagram",
+      "text": "The Stone that shatters the kingdoms becomes a mountain filling the earth.",
+      "hash": "3032fa7249a006c8"
     },
     {
       "id": "S00-GD-INTRO-EXP",
