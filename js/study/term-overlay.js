@@ -371,6 +371,7 @@
         '<p class="term-page-plain">' + esc(item.simple) + '</p>' +
         '<p class="term-page-label">The deeper record</p>' +
         '<p class="term-page-deep">' + esc(item.history) + '</p>' +
+        refList('Proof & sources', item.proof || []) +
         '<div class="term-page-actions">' +
           '<button type="button" class="term-page-btn" data-term-index="' + esc(item.id) + '">Open in the full index</button>' +
         '</div>' +

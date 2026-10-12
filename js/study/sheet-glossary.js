@@ -1,5 +1,5 @@
 (function () {
-  function entry(id, term, aliases, kind, simple, history, image) {
+  function entry(id, term, aliases, kind, simple, history, image, proof) {
     return {
       id: id,
       term: term,
@@ -7,7 +7,8 @@
       kind: kind,
       simple: simple,
       history: history,
-      image: image || ""
+      image: image || "",
+      proof: proof || []
     };
   }
 
@@ -104,11 +105,11 @@
       IMG + "glossary-karaite.png"),
     entry("most-holy", "Most Holy Place", ["Most Holy", "Holy of Holies"], "word",
       "The inner room of the sanctuary, entered only on the Day of Atonement with blood.",
-      "Leviticus 16. This study reads Daniel 8:14’s putting-right as that day’s heavenly counterpart — judgment and vindication — not a local cleaning of the earthly temple.",
+      "Leviticus 16 describes that one-day entry with blood. This course reads Daniel 8:14’s putting-right (nitsdaq) as that day’s heavenly counterpart — judgment and vindication — not a local scrubbing of the earthly temple in Judea.",
       IMG + "glossary-most-holy.png"),
     entry("atonement", "Day of Atonement", ["atonement"], "word",
       "Israel’s yearly day when the high priest entered the Most Holy Place to cleanse the sanctuary from the year’s sins.",
-      "Leviticus 16. It is the Old Testament picture behind “then shall the sanctuary be nitsdaq.” On 22 October 1844 Jesus entered the Most Holy Place of the heavenly sanctuary.",
+      "Leviticus 16 is the Old Testament picture behind “then shall the sanctuary be nitsdaq” (Daniel 8:14). Millerite reckoning tied 22 October 1844 to that calendar day; this course reads the fulfillment as Christ’s entry into the heavenly Most Holy Place, not an earthly temple event.",
       IMG + "glossary-atonement.png"),
     entry("prophetic-year", "prophetic year", ["360-day year"], "word",
       "In apocalyptic counting, a “year” or “time” is often 360 days (12 × 30), matching 42 months = 1,260 days.",
@@ -160,7 +161,7 @@
       IMG + "glossary-papacy.png"),
     entry("mene", "MENE, TEKEL, UPHARSIN", ["MENE", "TEKEL", "UPHARSIN", "PERES"], "word",
       "Aramaic market-weights on the plaster: numbered, weighed, divided.",
-      "Daniel 5. God has numbered Belshazzar’s kingdom and finished it; the king is too light on the scale; the realm is split between Medes and Persians. It is a weighing of the kingdom, not a tale of spirits.",
+      "In Daniel 5 the hand writes MENE, TEKEL, UPHARSIN: God has numbered Belshazzar’s kingdom and finished it; the king is too light on the scales; the realm is divided between Medes and Persians. Daniel treats it as a royal audit, not a ghost story.",
       IMG + "glossary-mene.png"),
     entry("probation", "probation", ["close of probation"], "word",
       "The time during which a person or a kingdom may still turn. Daniel 4 gives twelve months of patience before the king’s sentence falls.",
@@ -168,7 +169,7 @@
       IMG + "glossary-probation.png"),
     entry("exile", "exile", ["Babylonian exile", "Babylonian captivity"], "word",
       "The forced displacement of Judah to Babylon under God's judicial sentence across three deportations: 605, 597, and 586 B.C.",
-      "Exile was not a chosen journey or a mere accident of war. Daniel 1:2 declares that God handed Jehoiakim over. Daniel begins in the first levy (605 B.C.), Ezekiel in the second (597 B.C.), and the city and temple were burned in the third (586 B.C., 2 Kings 25).",
+      "Exile was not a chosen journey or a mere accident of war. Daniel 1:2 declares that the Lord handed Jehoiakim over to Nebuchadnezzar. Daniel and the first temple vessels leave in the 605 B.C. levy under Jehoiakim; Ezekiel and ten thousand more go in the 597 B.C. levy under Jehoiachin; the city and Solomon’s temple fall in the 586 B.C. levy under Zedekiah (2 Kings 24–25).",
       IMG + "glossary-exile.png"),
     entry("typology", "typology", ["type", "antitype", "antitypical", "type-pattern", "prophetic pattern"], "word",
       "An earlier God-designed picture (type) that a later reality (antitype) fills full.",
@@ -204,13 +205,17 @@
       "He dreamed of the statue, built the all-gold image on the plain of Dura, and was driven into the field for seven times (literal years) until he lifted his eyes to heaven. Daniel 2:37–38 says the God of heaven gave him the kingdom. Babylonian building inscriptions match the pride of Daniel 4:30.",
       IMG + "glossary-nebuchadnezzar.png"),
     entry("jehoiakim", "Jehoiakim", [], "person",
-      "King of Judah (c. 609–598 B.C.). Daniel 1:1 dates the first deportation to his third year (605).",
-      "2 Kings 23–24: a son of Josiah who reversed his father’s reforms and served, then rebelled against, Babylon. The Lord “gave” him into Nebuchadnezzar’s hand (Dan 1:2). Do not collapse him with Jehoiachin (597) or Zedekiah (586).",
+      "King of Judah when Daniel opens: Daniel 1:1–2 dates Nebuchadnezzar’s first siege to Jehoiakim’s third year (605 B.C.), when vessels and noble youths were taken.",
+      "Son of Josiah (2 Kings 23:36–24:6). He abandoned his father’s reforms, was first tied to Egypt’s orbit, then became Babylon’s vassal after Carchemish, and later rebelled (2 Kings 24:1). In 605 the Lord gave him into Nebuchadnezzar’s hand (Daniel 1:2): tribute, temple vessels, and deportees—including Daniel—while Jehoiakim himself remained in Jerusalem until his death. He is not Jehoiachin (597 second levy) and not Zedekiah (586 destruction).",
       IMG + "glossary-jehoiakim.png"),
     entry("jehoiachin", "Jehoiachin", [], "person",
-      "King of Judah taken in 597 B.C. when Babylon captured “the city of Judah” (BM 21946).",
-      "Also called Jeconiah. A later siege than Daniel 1:1. This study keeps 605 and 597 as two events so the Babylonian tablet is not forced onto Daniel’s opening year.",
+      "King of Judah for three months in 597 B.C., when Babylon deposed him and took a second wave of captives, including Ezekiel.",
+      "Also called Jeconiah or Coniah (2 Kings 24:8–16). He reigned after his father Jehoiakim; this is the second deportation, not Daniel’s 605 opening (Daniel 1:1). Babylonian Chronicle BM 21946 records Nebuchadnezzar at “the city of Judah” in his seventh year—keep that year separate from Jehoiakim’s third year in Daniel 1:1.",
       IMG + "glossary-jehoiachin.png"),
+    entry("zedekiah", "Zedekiah", [], "person",
+      "Last king of Judah before 586 B.C.; Babylon installed him after Jehoiachin was taken; his revolt brought the final siege and temple burning.",
+      "Mattaniah, renamed Zedekiah by Nebuchadnezzar (2 Kings 24:17–20). His rebellion triggered the third campaign: walls broken, Solomon’s temple burned, survivors deported (2 Kings 25; Jeremiah 52). He is not the king of Daniel 1:1 (Jehoiakim, 605) or the king taken in 597 (Jehoiachin).",
+      ""),
     entry("three-hebrews", "Shadrach, Meshach, and Abednego", ["Hananiah", "Mishael", "Azariah", "three Hebrews"], "person",
       "Daniel’s three companions. Hebrew names praise Yahweh; Babylonian names praise other gods.",
       "Hananiah, Mishael, and Azariah refused the Dura bow (Daniel 3) after already refusing the royal table (Daniel 1). The furnace is the public form of the same line Daniel drew in private.",
@@ -354,7 +359,7 @@
       IMG + "glossary-susa.png"),
     entry("carchemish", "Carchemish", [], "place",
       "Euphrates fortress where Nebuchadnezzar beat Egypt in 605 B.C., opening the road to Judah.",
-      "Jeremiah 46. That victory is why Daniel 1:1’s third year of Jehoiakim is a real first deportation, not a mix-up with 597 or 586.",
+      "Jeremiah 46:2 dates Nebuchadnezzar’s defeat of Pharaoh Necho at Carchemish to Jehoiakim’s fourth year—the same campaign window as Daniel 1:1’s third year of Jehoiakim (605 B.C., accession-year difference). That battle year supports a real first deportation under Jehoiakim, distinct from 597 (Jehoiachin) and 586 (Zedekiah).",
       IMG + "glossary-carchemish.png")
   ];
 
@@ -558,6 +563,17 @@
     if (btn) btn.setAttribute("aria-expanded", "true");
     panel.scrollIntoView({ behavior: "smooth", block: "nearest" });
   }
+
+  (function applyGlossaryEnrichment() {
+    var patch = window.GLOSSARY_ENRICHMENT || {};
+    (window.SHEET_GLOSSARY || []).forEach(function (e) {
+      var p = patch[e.id];
+      if (!p) return;
+      if (p.simple) e.simple = p.simple;
+      if (p.history) e.history = p.history;
+      if (p.proof && p.proof.length) e.proof = p.proof;
+    });
+  })();
 
   window.GlossaryIndex = {
     byId: byId,

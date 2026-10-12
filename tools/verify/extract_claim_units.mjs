@@ -41,10 +41,14 @@ vm.createContext(vCtx);
 vm.runInContext(verifySrc, vCtx);
 const sheetVerify = vCtx.window.SHEET_VERIFY || [];
 
-// 3. Load SHEET_GLOSSARY
+// 3. Load SHEET_GLOSSARY (+ optional enrichment patch)
 const glossSrc = fs.readFileSync(path.join(root, 'js/study/sheet-glossary.js'), 'utf8');
 const gCtx = { window: {} };
 vm.createContext(gCtx);
+const enrichJs = path.join(root, 'js/study/glossary-enrichment.js');
+if (fs.existsSync(enrichJs)) {
+  vm.runInContext(fs.readFileSync(enrichJs, 'utf8'), gCtx);
+}
 vm.runInContext(glossSrc, gCtx);
 const sheetGlossary = gCtx.window.SHEET_GLOSSARY || [];
 
@@ -387,6 +391,9 @@ export function extractAllUnits() {
       if (gItem) {
         addUnit(`S${pad}-GLS-${gId}-SMP`, 'glossary', `${gItem.term}: ${gItem.simple}`);
         addUnit(`S${pad}-GLS-${gId}-HIS`, 'glossary', gItem.history);
+        if (gItem.proof && gItem.proof.length) {
+          addUnit(`S${pad}-GLS-${gId}-PRF`, 'glossary', gItem.proof.join(' '));
+        }
       }
     });
 

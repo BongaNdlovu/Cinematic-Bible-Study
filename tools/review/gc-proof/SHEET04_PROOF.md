@@ -1,6 +1,6 @@
 # Sitting 4 — sentence-level proof
 
-**Units:** 240 · **Content hash:** `77a3cefc42b37efb`
+**Units:** 248 · **Content hash:** `d8300051ac430827`
 
 | Unit ID | Tag | Verdict | Text (excerpt) | Proof |
 |---------|-----|---------|----------------|-------|
@@ -228,19 +228,27 @@
 | S04-VRF-6-LESSON | INTERPRETATION | ACCURATE | His own bricks say ‘I’ the way the roof said ‘I have built.’ | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 4) |
 | S04-VRF-6-QUOTE | HISTORY | ACCURATE | Standard stamped brick of Nebuchadnezzar II. British Museum and Babylon; Langdon, Building Inscriptions of the Neo-Ba… | Primary source quotation in verify dock |
 | S04-VRF-6-CHECK | INTERPRETATION | ACCURATE | Walk any museum’s Babylon brick. The first-person stamp is ordinary royal style. Daniel 4 puts that ‘I’ on trial. | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 4) |
-| S04-GLS-apocalyptic-SMP | TEXT | ACCURATE | apocalyptic: A style of vision that uses symbols (beasts, horns, metals) for real kingdoms and spans of history. | Lexical / textual definition |
-| S04-GLS-apocalyptic-HIS | HISTORY | ACCURATE | Daniel 7–8 is apocalyptic: a lion stands for a kingdom, not a literal beast. Time inside that same symbolic vision is… | Historical context card |
-| S04-GLS-babylon-SMP | HISTORY | ACCURATE | Babylon: Capital of the gold head; Daniel’s first workplace and the city that fell in 539 B.C. | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
-| S04-GLS-babylon-HIS | HISTORY | ACCURATE | Ishtar Gate, Marduk’s temples, double walls and a river. Daniel 1:2 says its first victory over Judah was given, not … | Historical context card |
-| S04-GLS-belshazzar-SMP | HISTORY | ACCURATE | Belshazzar: Last king in the city of Babylon (539 B.C.); son and co-regent of Nabonidus. | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
-| S04-GLS-belshazzar-HIS | HISTORY | ACCURATE | Greek lists once seemed to omit him. Tablets restored him: Nabonidus in Tema, Belshazzar hosting the feast. He drank … | Historical context card |
-| S04-GLS-colossus-SMP | TEXT | ACCURATE | colossus: The huge multi-metal statue of Daniel 2 — gold head to iron-and-clay feet. | Lexical / textual definition |
-| S04-GLS-colossus-HIS | HISTORY | ACCURATE | Only the gold head is named (Babylon, 2:38). Later metals are identified by succession and by later chapters that nam… | Historical context card |
-| S04-GLS-daniel-SMP | HISTORY | ACCURATE | Daniel: A Judahite noble taken to Babylon in 605 B.C.; prophet, court official, and the book’s human author-witness. | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
-| S04-GLS-daniel-HIS | HISTORY | ACCURATE | His Hebrew name means “God is my Judge.” The court renamed him Belteshazzar. He drew the line at the king’s table (wo… | Historical context card |
+| S04-GLS-apocalyptic-SMP | TEXT | ACCURATE | apocalyptic: A style of vision that uses symbols (beasts, horns, metals) for real kingdoms and spans of history. Gold… | Lexical / textual definition |
+| S04-GLS-apocalyptic-HIS | HISTORY | ACCURATE | Daniel 7–8 is apocalyptic: a lion stands for a kingdom, not a literal beast. Time inside that same symbolic vision is… | Historical context card — see GLOSSARY_PROOF.md |
+| S04-GLS-apocalyptic-PRF | TEXT | ACCURATE | Course audit: GLS-apocalyptic-SMP/HIS/PRF in tools/review/gc-proof/ and tools/review/GLOSSARY_PROOF.md for sitting li… | Glossary source line: Course audit: GLS-apocalyptic-SMP/HIS/PRF in tools/review/gc-proof/ and tools/review/GLOSSARY_PROOF.md for sitting linkage. Desk source: js/study/sheet-gloss… |
+| S04-GLS-babylon-SMP | HISTORY | ACCURATE | Babylon: Capital of the gold head; Daniel’s first workplace and the city that fell in 539 B.C. Maps and narrative use… | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S04-GLS-babylon-HIS | HISTORY | ACCURATE | Ishtar Gate, Marduk’s temples, double walls and a river. Daniel 1:2 says its first victory over Judah was given, not … | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S04-GLS-babylon-PRF | TEXT | REVIEW | Scripture (KJV): Daniel 1:2 — verify in bible/kjv.json and the lesson Scripture dock. Daniel 1:2, King James Version:… | Scripture citation — verify ellipsis against KJV if quoted |
+| S04-GLS-belshazzar-SMP | HISTORY | ACCURATE | Belshazzar: Last king in the city of Babylon (539 B.C.); son and co-regent of Nabonidus. This desk indexes Belshazzar… | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S04-GLS-belshazzar-HIS | HISTORY | ACCURATE | Greek lists once seemed to omit him. Tablets restored him: Nabonidus in Tema, Belshazzar hosting the feast. He drank … | Historical context card — see GLOSSARY_PROOF.md |
+| S04-GLS-belshazzar-PRF | INTERPRETATION | ACCURATE | Daniel 4:37, King James Version: “Now I Nebuchadnezzar praise and extol and honour the King of heaven, all whose work… | Explicit hedge or labeled reconstruction (OneVoice27 §2) |
+| S04-GLS-colossus-SMP | TEXT | ACCURATE | colossus: The huge multi-metal statue of Daniel 2 — gold head to iron-and-clay feet. Gold-linked terms open this card… | Lexical / textual definition |
+| S04-GLS-colossus-HIS | HISTORY | ACCURATE | Only the gold head is named (Babylon, 2:38). Later metals are identified by succession and by later chapters that nam… | Historical context card — see GLOSSARY_PROOF.md |
+| S04-GLS-colossus-PRF | TEXT | ACCURATE | Daniel 2:38, King James Version: “And wheresoever the children of men dwell, the beasts of the field and the fowls of… | Glossary source line: Daniel 2:38, King James Version: “And wheresoever the children of men dwell, the beasts of the field and the fowls of the heaven hath he give…” — Sitting ver… |
+| S04-GLS-daniel-SMP | HISTORY | ACCURATE | Daniel: A Judahite noble taken to Babylon in 605 B.C.; prophet, court official, and the book’s human author-witness. … | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S04-GLS-daniel-HIS | HISTORY | ACCURATE | His Hebrew name means “God is my Judge.” The court renamed him Belteshazzar. He drew the line at the king’s table (wo… | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S04-GLS-daniel-PRF | TEXT | ACCURATE | Daniel 1:2, King James Version: “And the Lord gave Jehoiakim king of Judah into his hand, with part of the vessels of… | Glossary source line: Daniel 1:2, King James Version: “And the Lord gave Jehoiakim king of Judah into his hand, with part of the vessels of the house of God: whic…” — Sitting veri… |
 | S04-GLS-nebuchadnezzar-SMP | HISTORY | ACCURATE | Nebuchadnezzar: Neo-Babylonian king (c. 605–562 B.C.), the head of gold, who took Judah’s first captives and later bu… | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
-| S04-GLS-nebuchadnezzar-HIS | HISTORY | ACCURATE | He dreamed of the statue, built the all-gold image on the plain of Dura, and was driven into the field for seven time… | Historical context card |
+| S04-GLS-nebuchadnezzar-HIS | HISTORY | ACCURATE | He dreamed of the statue, built the all-gold image on the plain of Dura, and was driven into the field for seven time… | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S04-GLS-nebuchadnezzar-PRF | TEXT | REVIEW | Scripture (KJV): Daniel 2:37–38 — verify in bible/kjv.json and the lesson Scripture dock. Scripture (KJV): Daniel 4:3… | Scripture citation — verify ellipsis against KJV if quoted |
 | S04-GLS-three-hebrews-SMP | TEXT | ACCURATE | Shadrach, Meshach, and Abednego: Daniel’s three companions. Hebrew names praise Yahweh; Babylonian names praise other… | Lexical / textual definition |
-| S04-GLS-three-hebrews-HIS | HISTORY | ACCURATE | Hananiah, Mishael, and Azariah refused the Dura bow (Daniel 3) after already refusing the royal table (Daniel 1). The… | Historical context card |
-| S04-GLS-year-day-SMP | TEXT | ACCURATE | Year-Day Principle: When God gives a numbered sign, one prophetic day may stand for one literal solar year. | Lexical / textual definition |
-| S04-GLS-year-day-HIS | HISTORY | ACCURATE | God states the scale twice: Numbers 14:34 (forty spy-days become forty wilderness years) and Ezekiel 4:6 (Ezekiel’s b… | Historical context card |
+| S04-GLS-three-hebrews-HIS | HISTORY | ACCURATE | Hananiah, Mishael, and Azariah refused the Dura bow (Daniel 3) after already refusing the royal table (Daniel 1). The… | Historical context card — see GLOSSARY_PROOF.md |
+| S04-GLS-three-hebrews-PRF | TEXT | ACCURATE | Course audit: GLS-three-hebrews-SMP/HIS/PRF in tools/review/gc-proof/ and tools/review/GLOSSARY_PROOF.md for sitting … | Glossary source line: Course audit: GLS-three-hebrews-SMP/HIS/PRF in tools/review/gc-proof/ and tools/review/GLOSSARY_PROOF.md for sitting linkage. Desk source: js/study/sheet-glo… |
+| S04-GLS-year-day-SMP | TEXT | ACCURATE | Year-Day Principle: When God attaches a numbered sign to symbolic prophecy, one prophetic day may stand for one liter… | Lexical / textual definition |
+| S04-GLS-year-day-HIS | HISTORY | ACCURATE | God fixes the rod twice: Numbers 14:34 (forty spy-days become forty wilderness years, “each day for a year”) and Ezek… | Historical context card — see GLOSSARY_PROOF.md |
+| S04-GLS-year-day-PRF | TEXT | REVIEW | Scripture (KJV): Numbers 14:34; Ezekiel 4:6 — explicit day-for-year appointments (Sitting 0 verify dock). Scripture (… | Scripture citation — verify ellipsis against KJV if quoted |

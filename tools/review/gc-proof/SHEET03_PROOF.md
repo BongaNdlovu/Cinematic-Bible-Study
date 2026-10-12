@@ -1,6 +1,6 @@
 # Sitting 3 — sentence-level proof
 
-**Units:** 215 · **Content hash:** `59c1b914546a4c97`
+**Units:** 224 · **Content hash:** `f297d56114a11104`
 
 | Unit ID | Tag | Verdict | Text (excerpt) | Proof |
 |---------|-----|---------|----------------|-------|
@@ -202,20 +202,29 @@
 | S03-VRF-6-QUOTE | HISTORY | ACCURATE | East India House Inscription of Nebuchadnezzar II. British Museum; standard English rendering: I placed wild bulls an… | Primary source quotation in verify dock |
 | S03-VRF-6-CHECK | INTERPRETATION | ACCURATE | The boast is imperial architecture. Daniel 3 answers the same pride with a gold image that denies the later metals of… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 3) |
 | S03-GLS-atonement-SMP | TEXT | ACCURATE | Day of Atonement: Israel’s yearly day when the high priest entered the Most Holy Place to cleanse the sanctuary from … | Lexical / textual definition |
-| S03-GLS-atonement-HIS | HISTORY | ACCURATE | Leviticus 16. It is the Old Testament picture behind “then shall the sanctuary be nitsdaq.” On 22 October 1844 Jesus … | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
-| S03-GLS-babylon-SMP | HISTORY | ACCURATE | Babylon: Capital of the gold head; Daniel’s first workplace and the city that fell in 539 B.C. | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
-| S03-GLS-babylon-HIS | HISTORY | ACCURATE | Ishtar Gate, Marduk’s temples, double walls and a river. Daniel 1:2 says its first victory over Judah was given, not … | Historical context card |
-| S03-GLS-colossus-SMP | TEXT | ACCURATE | colossus: The huge multi-metal statue of Daniel 2 — gold head to iron-and-clay feet. | Lexical / textual definition |
-| S03-GLS-colossus-HIS | HISTORY | ACCURATE | Only the gold head is named (Babylon, 2:38). Later metals are identified by succession and by later chapters that nam… | Historical context card |
-| S03-GLS-cubit-SMP | TEXT | ACCURATE | cubit: An ancient length: roughly from elbow to fingertip, about 18 inches / 45 cm. | Lexical / textual definition |
-| S03-GLS-cubit-HIS | HISTORY | ACCURATE | The Dura image is 60 cubits by 6 cubits (Daniel 3:1). This sitting notes the all-gold design as a public denial of th… | Historical context card |
-| S03-GLS-daniel-SMP | HISTORY | ACCURATE | Daniel: A Judahite noble taken to Babylon in 605 B.C.; prophet, court official, and the book’s human author-witness. | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
-| S03-GLS-daniel-HIS | HISTORY | ACCURATE | His Hebrew name means “God is my Judge.” The court renamed him Belteshazzar. He drew the line at the king’s table (wo… | Historical context card |
-| S03-GLS-dura-SMP | TEXT | ACCURATE | Plain of Dura: The level ground near Babylon where Nebuchadnezzar raised an all-gold image (Daniel 3). | Lexical / textual definition |
-| S03-GLS-dura-HIS | HISTORY | ACCURATE | Sixty cubits by six, gold with no silver or iron — a public “no” to the dream of chapter 2. The furnace stands there … | Historical context card |
+| S03-GLS-atonement-HIS | HISTORY | ACCURATE | Leviticus 16 is the Old Testament picture behind “then shall the sanctuary be nitsdaq” (Daniel 8:14). Millerite recko… | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S03-GLS-atonement-PRF | TEXT | REVIEW | Scripture (KJV): Daniel 8:14 — verify in bible/kjv.json and the lesson Scripture dock. Leviticus 16:29–30, King James… | Scripture citation — verify ellipsis against KJV if quoted |
+| S03-GLS-babylon-SMP | HISTORY | ACCURATE | Babylon: Capital of the gold head; Daniel’s first workplace and the city that fell in 539 B.C. Maps and narrative use… | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S03-GLS-babylon-HIS | HISTORY | ACCURATE | Ishtar Gate, Marduk’s temples, double walls and a river. Daniel 1:2 says its first victory over Judah was given, not … | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S03-GLS-babylon-PRF | TEXT | REVIEW | Scripture (KJV): Daniel 1:2 — verify in bible/kjv.json and the lesson Scripture dock. Daniel 1:2, King James Version:… | Scripture citation — verify ellipsis against KJV if quoted |
+| S03-GLS-colossus-SMP | TEXT | ACCURATE | colossus: The huge multi-metal statue of Daniel 2 — gold head to iron-and-clay feet. Gold-linked terms open this card… | Lexical / textual definition |
+| S03-GLS-colossus-HIS | HISTORY | ACCURATE | Only the gold head is named (Babylon, 2:38). Later metals are identified by succession and by later chapters that nam… | Historical context card — see GLOSSARY_PROOF.md |
+| S03-GLS-colossus-PRF | TEXT | ACCURATE | Daniel 2:38, King James Version: “And wheresoever the children of men dwell, the beasts of the field and the fowls of… | Glossary source line: Daniel 2:38, King James Version: “And wheresoever the children of men dwell, the beasts of the field and the fowls of the heaven hath he give…” — Sitting ver… |
+| S03-GLS-cubit-SMP | TEXT | ACCURATE | cubit: An ancient length: roughly from elbow to fingertip, about 18 inches / 45 cm. Gold-linked terms open this card … | Lexical / textual definition |
+| S03-GLS-cubit-HIS | HISTORY | ACCURATE | The Dura image is 60 cubits by 6 cubits (Daniel 3:1). This sitting notes the all-gold design as a public denial of th… | Historical context card — see GLOSSARY_PROOF.md |
+| S03-GLS-cubit-PRF | TEXT | REVIEW | Scripture (KJV): Daniel 3:1 — verify in bible/kjv.json and the lesson Scripture dock. Daniel 3:1, King James Version:… | Scripture citation — verify ellipsis against KJV if quoted |
+| S03-GLS-daniel-SMP | HISTORY | ACCURATE | Daniel: A Judahite noble taken to Babylon in 605 B.C.; prophet, court official, and the book’s human author-witness. … | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S03-GLS-daniel-HIS | HISTORY | ACCURATE | His Hebrew name means “God is my Judge.” The court renamed him Belteshazzar. He drew the line at the king’s table (wo… | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S03-GLS-daniel-PRF | TEXT | ACCURATE | Daniel 1:2, King James Version: “And the Lord gave Jehoiakim king of Judah into his hand, with part of the vessels of… | Glossary source line: Daniel 1:2, King James Version: “And the Lord gave Jehoiakim king of Judah into his hand, with part of the vessels of the house of God: whic…” — Sitting veri… |
+| S03-GLS-dura-SMP | TEXT | ACCURATE | Plain of Dura: The level ground near Babylon where Nebuchadnezzar raised an all-gold image (Daniel 3). Maps and narra… | Lexical / textual definition |
+| S03-GLS-dura-HIS | HISTORY | ACCURATE | Sixty cubits by six, gold with no silver or iron — a public “no” to the dream of chapter 2. The furnace stands there … | Historical context card — see GLOSSARY_PROOF.md |
+| S03-GLS-dura-PRF | TEXT | ACCURATE | Exodus 20:4–5, King James Version: “Thou shalt not make unto thee any graven image, or any likeness of any thing… Tho… | Glossary source line: Exodus 20:4–5, King James Version: “Thou shalt not make unto thee any graven image, or any likeness of any thing… Thou shalt not bow down thyse…” — Sitting v… |
 | S03-GLS-nebuchadnezzar-SMP | HISTORY | ACCURATE | Nebuchadnezzar: Neo-Babylonian king (c. 605–562 B.C.), the head of gold, who took Judah’s first captives and later bu… | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
-| S03-GLS-nebuchadnezzar-HIS | HISTORY | ACCURATE | He dreamed of the statue, built the all-gold image on the plain of Dura, and was driven into the field for seven time… | Historical context card |
+| S03-GLS-nebuchadnezzar-HIS | HISTORY | ACCURATE | He dreamed of the statue, built the all-gold image on the plain of Dura, and was driven into the field for seven time… | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S03-GLS-nebuchadnezzar-PRF | TEXT | REVIEW | Scripture (KJV): Daniel 2:37–38 — verify in bible/kjv.json and the lesson Scripture dock. Scripture (KJV): Daniel 4:3… | Scripture citation — verify ellipsis against KJV if quoted |
 | S03-GLS-three-hebrews-SMP | TEXT | ACCURATE | Shadrach, Meshach, and Abednego: Daniel’s three companions. Hebrew names praise Yahweh; Babylonian names praise other… | Lexical / textual definition |
-| S03-GLS-three-hebrews-HIS | HISTORY | ACCURATE | Hananiah, Mishael, and Azariah refused the Dura bow (Daniel 3) after already refusing the royal table (Daniel 1). The… | Historical context card |
-| S03-GLS-typology-SMP | TEXT | ACCURATE | typology: An earlier God-designed picture (type) that a later reality (antitype) fills full. | Lexical / textual definition |
-| S03-GLS-typology-HIS | HISTORY | ACCURATE | Dura is the type of forced worship; Revelation 13 is its global antitype. The earthly Day of Atonement is the type; D… | Historical context card |
+| S03-GLS-three-hebrews-HIS | HISTORY | ACCURATE | Hananiah, Mishael, and Azariah refused the Dura bow (Daniel 3) after already refusing the royal table (Daniel 1). The… | Historical context card — see GLOSSARY_PROOF.md |
+| S03-GLS-three-hebrews-PRF | TEXT | ACCURATE | Course audit: GLS-three-hebrews-SMP/HIS/PRF in tools/review/gc-proof/ and tools/review/GLOSSARY_PROOF.md for sitting … | Glossary source line: Course audit: GLS-three-hebrews-SMP/HIS/PRF in tools/review/gc-proof/ and tools/review/GLOSSARY_PROOF.md for sitting linkage. Desk source: js/study/sheet-glo… |
+| S03-GLS-typology-SMP | TEXT | ACCURATE | typology: An earlier God-designed picture (type) that a later reality (antitype) fills full. Gold-linked terms open t… | Lexical / textual definition |
+| S03-GLS-typology-HIS | HISTORY | ACCURATE | Dura is the type of forced worship; Revelation 13 is its global antitype. The earthly Day of Atonement is the type; D… | Historical context card — see GLOSSARY_PROOF.md |
+| S03-GLS-typology-PRF | TEXT | REVIEW | Scripture (KJV): Daniel 8:14 — verify in bible/kjv.json and the lesson Scripture dock. Course audit: GLS-typology-SMP… | Scripture citation — verify ellipsis against KJV if quoted |

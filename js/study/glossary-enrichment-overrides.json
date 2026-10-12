@@ -1,0 +1,127 @@
+{
+  "newton-isaac": {
+    "simple": "English natural philosopher and mathematician (1643–1727) who also wrote a formal commentary on Daniel and Revelation, published in 1733 as Observations upon the Prophecies of Daniel, and the Apocalypse of St. John.",
+    "history": "Newton did not treat Daniel as a sealed riddle. In Part I, Chapter I he wrote that Daniel is “most distinct in order of time, and easiest to be understood,” and that for “things which relate to the last times, he must be made the key to the rest.” That is historicism in one sentence: a dated sequence of real kingdoms read in order. In Chapter III he reads Daniel 2’s metals as Babylon, Persia, Greece, and Rome in historical succession; in his chapter on the eleventh horn he applies the little horn to the church seated at Rome and names uprooted powers. This course cites Newton as an eighteenth-century witness to the continuous chain, not as an infallible guide on every horn detail—you still test each claim in Scripture and in the verify dock.",
+    "proof": [
+      "Primary: Sir Isaac Newton, Observations upon the Prophecies of Daniel (London, 1733), Part I, ch. I — “Daniel is most distinct in order of time…” (Sitting 0 verify dock, item 7; Gutenberg 16878).",
+      "Primary: Newton, Observations, Part I, ch. III — four metals as four historical kingdoms (Sitting 2 verify cross-reference).",
+      "Primary: Newton, Observations, Part I — “Of the eleventh horn of Daniel’s fourth Beast” (Sitting 7 verify cross-reference).",
+      "Course check: Compare Newton’s “order of time” with the three-school table in Sitting 0 — only a continuous chain preserves that order."
+    ]
+  },
+  "hermeneutics": {
+    "simple": "The rules you use before you name a king, a horn, or a date — the method that decides whether Daniel is one timeline or a book that ends in the second century B.C. or jumps to a future seven-year crisis.",
+    "history": "Every sitting assumes a hermeneutical choice. Historicism reads Daniel and Revelation as one unbroken chain of real empires from the exile toward Christ’s return. Preterism (Alcázar, 1614) parks most of Daniel in the Maccabean era; futurism (Ribera, c. 1590) inserts a long gap before a future Antichrist week. Dispensationalism (Maitland 1826 → Darby/Scofield) popularized the gap in English pews. The course defends historicism because Daniel’s succession language, parallel visions, and internal date tests (Daniel 9) fit a continuous historical reading when Scripture interprets Scripture.",
+    "proof": [
+      "Scripture (KJV): Daniel 2:38–40; 7:3–7 — succession of kingdoms named or implied in order.",
+      "Witness: Hippolytus, Treatise on Christ and Antichrist §28 (c. A.D. 200) — four kingdoms as one chain (Sitting 0 verify dock).",
+      "Witness: Luis de Alcázar, Vestigatio (1614) vs Francisco Ribera, Revelation commentary (c. 1590) — dated Counter-Reformation alternatives named in Sitting 0."
+    ]
+  },
+  "historicism": {
+    "simple": "Read Daniel and Revelation as one unbroken timeline of real empires from the prophet’s day through the Christian era to the stone kingdom and the Second Coming.",
+    "history": "Historicism is the reading this course defends: Babylon → Medo-Persia → Greece → Rome → divided Europe → Christ’s kingdom, without parking the book in 164 B.C. or freezing it until a future seven-year crisis. Hippolytus (c. A.D. 200) already lists Babylon, Persia, Greece, and Rome as one sequence. Wycliffe, Luther, Calvin, Melanchthon, Knox, and Newton carried that chain through the Reformation and into the eighteenth century. Preterism and futurism are the rejected alternatives, with dated authors Alcázar (1614) and Ribera (1590).",
+    "proof": [
+      "Scripture (KJV): Daniel 2:44 — kingdom set up “in the days of these kings” (divided feet), not during Babylon alone.",
+      "Witness: Hippolytus §28 — gold/lion through iron/beast as present Rome (Sitting 0 verify dock).",
+      "Witness: Newton 1733 — Daniel “most distinct in order of time” (Sitting 0 verify dock)."
+    ]
+  },
+  "preterism": {
+    "simple": "The claim that most of Daniel (and often Revelation) was already fulfilled in the distant past — especially under Antiochus IV in the 160s B.C. or at Jerusalem’s fall in A.D. 70.",
+    "history": "Porphyry (3rd century) argued Daniel was written after Antiochus; Jerome reports and answers that charge. Jesuit Luis de Alcázar (1614, Vestigatio Arcani Sensus in Apocalypsi) systematized a preterist reading that leaves no medieval or modern church on the chain. That move serves Counter-Reformation polemics: if prophecy ended in antiquity, Rome cannot be on Daniel 7’s horn. This course rejects full preterism because Gabriel places Daniel 8 at “the time of the end” (8:17, 19), which Antiochus cannot exhaust, and because Daniel 2:44 requires a kingdom after Rome’s division.",
+    "proof": [
+      "Witness: Jerome, Commentary on Daniel, Prologue — Porphyry’s late-date charge (Sitting 0 verify dock).",
+      "Primary: Alcázar, 1614 — template for preterist fulfillment (Sitting 0 prose).",
+      "Scripture (KJV): Daniel 8:17, 19 — vision concerns “the time of the end,” not only 164 B.C."
+    ]
+  },
+  "futurism": {
+    "simple": "The claim that Daniel’s hardest numbers — especially the 70th week — jump to a future individual Antichrist after a long unstated gap in the text itself.",
+    "history": "Patristic readers already expected a future antichrist (Hippolytus). Francisco Ribera’s c. 1590 Revelation commentary made the gap systematic: Antichrist as one man for 3½ literal years, severing the 70th week from the first 69. Protestant adoption followed through S. R. Maitland (1826), Edward Irving, John Nelson Darby, and the 1909 Scofield Reference Bible. Gabriel never writes a two-thousand-year parenthesis into Daniel 9. This sitting names Ribera and Darby so learners see a dated 19th-century shift, not an anonymous “always read it this way.”",
+    "proof": [
+      "Primary: Francisco Ribera, Revelation commentary (c. 1590 / 1593 Lyon) — futurist gap-week template (Sitting 0).",
+      "Witness: S. R. Maitland (1826) — Protestant uptake (Sitting 0 prose).",
+      "Scripture (KJV): Daniel 9:24–27 — seventy weeks as one decree-to-Messiah structure; gap is interpretive, not lexical."
+    ]
+  },
+  "year-day": {
+    "simple": "When God attaches a numbered sign to symbolic prophecy, one prophetic day may stand for one literal solar year — the scale Scripture states before Daniel applies it.",
+    "history": "God fixes the rod twice: Numbers 14:34 (forty spy-days become forty wilderness years, “each day for a year”) and Ezekiel 4:6 (Ezekiel’s lying-days appointed the same way). Daniel 9 then uses seventy weeks — 490 units — to span decree, rebuilt city, and Messiah; 490 ordinary days cannot hold that narrative, so the book tests the scale on itself. Once established at the cross, the same rod measures 1,260 days (Daniel 7:25) and 2,300 evenings-mornings (Daniel 8:14). 2 Peter 3:8 speaks of God’s patience (“one day is as a thousand years”), not this prophetic ruler for numbered visions.",
+    "proof": [
+      "Scripture (KJV): Numbers 14:34; Ezekiel 4:6 — explicit day-for-year appointments (Sitting 0 verify dock).",
+      "Scripture (KJV): Daniel 9:24–25 — seventy weeks from decree to Messiah (internal scale test).",
+      "Course hedge: 2 Peter 3:8 is not used as the year-day proof text in this desk."
+    ]
+  },
+  "little-horn": {
+    "simple": "A smaller horn rising among ten kings, “diverse” from them, that speaks against God, persecutes saints, and targets the sanctuary — read here as the papal church-state phase on Rome’s fragments.",
+    "history": "Daniel 7:24–25: the horn rises after A.D. 476’s division, uproots three, blasphemes, wears out saints, and reigns “a time, times, and dividing of time” (3½ prophetic years → 1,260 year-days → A.D. 538–1798 in this chart). Daniel 8’s horn grows from the Greek settlement toward the Glorious Land and attacks the tamid — pagan then papal Rome in succession. Antiochus IV is too early and too short for chapter 7’s checklist. Reformers applied the office to Rome; futurism relocated the same language to one end-time man.",
+    "proof": [
+      "Scripture (KJV): Daniel 7:24–25 — diverse horn, three uprooted, 3½ times.",
+      "Scripture (KJV): Daniel 8:9–13 — horn toward the Glorious Land, tamid removed.",
+      "Witness: Newton 1733 — eleventh horn and church of Rome (Sitting 7 verify dock)."
+    ]
+  },
+  "chathak": {
+    "simple": "Hebrew for “cut off, severed” — used only once in the Bible (Daniel 9:24) when Gabriel slices seventy weeks from the longer 2,300-evening-morning span.",
+    "history": "Daniel 8 ends with an unexplained 2,300 units and a sick prophet. Daniel 9 opens with prayer; Gabriel returns to “cut off” seventy weeks for thy people and thy holy city — not a brand-new clock from zero, but a severed first movement from the parent line so Messiah’s work can date the longer sanctuary question. As a hapax, chathak must be weighed by context and root (“cut”), not by ten other verses.",
+    "proof": [
+      "Scripture (KJV): Daniel 9:24 — “Seventy weeks are determined [chathak] upon thy people…”",
+      "Scripture (KJV): Daniel 8:14; 8:27 — parent 2,300 span left unexplained before chapter 9.",
+      "Lexical: hapax legomenon — only biblical occurrence (see glossary entry hapax)."
+    ]
+  },
+  "tamid": {
+    "simple": "Hebrew for the continual daily — the standing, regular priestly service before God, which Daniel 8 shows a horn attempting to replace with a counterfeit.",
+    "history": "On earth the tamid was the regular sacrifice and ministry at the altar. In Daniel 8 the horn magnifies itself to the Prince of the host and removes the tamid, casting down the place of His sanctuary — read in this course as an attack on Christ’s continual priesthood (Hebrews 7–10) through a competing earthly mediation. Sitting 10 bridges this to the papal phase and the 508 / tamid language with explicit chart hedges in the verify dock.",
+    "proof": [
+      "Scripture (KJV): Daniel 8:11–13 — tamid taken away, sanctuary cast down.",
+      "Scripture (KJV): Hebrews 7:24–25 — Christ’s unchangeable priesthood as NT counterpart.",
+      "Course frame: Sitting 8–10 verify docks for sanctuary/tamid linkage."
+    ]
+  },
+  "jehoiakim": {
+    "proof": [
+      "Scripture (KJV): Daniel 1:1–2 — first siege in Jehoiakim’s third year; the Lord gave the king into Nebuchadnezzar’s hand.",
+      "Scripture (KJV): 2 Kings 23:36–24:6 — Jehoiakim’s reign; 2 Kings 24:1 — rebellion against Babylon.",
+      "Scripture (KJV): Jeremiah 25:1; 46:2 — same 605 campaign year with Judah/Babylon regnal counting (Sitting 1 verify dock)."
+    ]
+  },
+  "jehoiachin": {
+    "proof": [
+      "Scripture (KJV): 2 Kings 24:8–16 — Jehoiachin deposed; second deportation.",
+      "Primary: Babylonian Chronicle BM 21946 — seventh year, “city of Judah” (597 B.C.; Sitting 1 verify dock).",
+      "Course check: Do not read BM 21946 as Daniel 1:1’s year — 605 and 597 stay separate."
+    ]
+  },
+  "zedekiah": {
+    "proof": [
+      "Scripture (KJV): 2 Kings 24:17–20 — Mattaniah renamed Zedekiah.",
+      "Scripture (KJV): 2 Kings 25; Jeremiah 52 — third siege, temple burned, 586 B.C.",
+      "Course frame: Sitting 1 three-siege diagram — third campaign under Zedekiah."
+    ]
+  },
+  "exile": {
+    "proof": [
+      "Scripture (KJV): Daniel 1:2 — sovereign hand in the first levy.",
+      "Scripture (KJV): 2 Kings 24–25 — second and third levies under Jehoiachin and Zedekiah.",
+      "Sitting 1 verify dock — 605 / 597 / 586 sequence."
+    ]
+  },
+  "carchemish": {
+    "proof": [
+      "Scripture (KJV): Jeremiah 46:2 — Carchemish in Jehoiakim’s fourth year.",
+      "Scripture (KJV): Daniel 1:1 — third year of Jehoiakim (accession-year alignment; Sitting 0–1 verify dock)."
+    ]
+  },
+  "papacy": {
+    "simple": "The office of the bishop of Rome as a spiritual authority that, for long centuries, also wielded civil power over kings — the church-state reading of Daniel 7’s diverse little horn.",
+    "history": "Daniel 7:24 says the eleventh horn is “diverse” from the ten ethnic kingdoms — religious plus political, not merely pagan. This study applies that pattern to the historical papal office and its medieval–early modern supremacy, not to Roman Catholics as persons. Many Catholics sincerely follow Christ; the interpretation gives no warrant for prejudice. Chart pins used here: A.D. 538 (Ostrogothic clearance — gradual rise hedged) to 1798 (Berthier/Pius VI). If 538 moves, 1798 moves on the same 1,260-year stick.",
+    "proof": [
+      "Scripture (KJV): Daniel 7:24–25 — diverse horn, saints worn out, 3½ times.",
+      "History: A.D. 538 / 1798 pins — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md and Sitting 7 verify dock.",
+      "Pastoral hedge: anti-Catholic hostility is rejected in lesson prose (Sitting 7)."
+    ]
+  }
+}

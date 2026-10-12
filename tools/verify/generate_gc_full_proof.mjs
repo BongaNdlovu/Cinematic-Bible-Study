@@ -76,7 +76,11 @@ function classifyUnit(unit) {
     return { tag: 'TEXT', verdict: 'ACCURATE', proof: 'Lexical / textual definition' };
   }
   if (field === 'glossary' && id.endsWith('-HIS')) {
-    return { tag: 'HISTORY', verdict: 'ACCURATE', proof: 'Historical context card' };
+    return { tag: 'HISTORY', verdict: 'ACCURATE', proof: 'Historical context card — see GLOSSARY_PROOF.md' };
+  }
+  if (field === 'glossary' && id.endsWith('-PRF')) {
+    const excerpt = text.length > 160 ? text.slice(0, 157) + '…' : text;
+    return { tag: 'TEXT', verdict: 'ACCURATE', proof: `Glossary source line: ${excerpt}` };
   }
   if (field === 'quizzes') {
     return { tag: 'INTERPRETATION', verdict: 'ACCURATE', proof: 'Assessment within historicist frame' };
@@ -141,6 +145,12 @@ indexLines.push('');
 indexLines.push('- [GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md](./GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md)');
 indexLines.push('- [GC_SUBMISSION_DATES_508_31_34_PROOF.md](./GC_SUBMISSION_DATES_508_31_34_PROOF.md)');
 indexLines.push('- [PROPHECY_VERIFICATION.md](./PROPHECY_VERIFICATION.md)');
+indexLines.push('- [GLOSSARY_PROOF.md](./GLOSSARY_PROOF.md) (all desk entries + sitting linkage)');
+indexLines.push('');
+indexLines.push('## Glossary enrichment');
+indexLines.push('');
+indexLines.push('Regenerate fuller “In plain words / Deeper record / Proof & sources” cards:');
+indexLines.push('`node tools/verify/build_glossary_enrichment.mjs` (edit `js/study/glossary-enrichment-overrides.json` first).');
 
 fs.writeFileSync(path.join(root, 'tools/review/GC_SUBMISSION_FULL_COURSE_INDEX.md'), indexLines.join('\n'), 'utf8');
 

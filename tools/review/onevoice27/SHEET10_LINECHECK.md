@@ -2,9 +2,9 @@
 
 **Audit Date:** 2026-09-20  
 **File Audited:** `js/study/sheets-data.js` (Sitting id: 10) with `sheet-verify.js`, `workbench.js`, `sheet-glossary.js`  
-**Audited Content Hash:** `808f3cc2b0e5fffc`  
+**Audited Content Hash:** `ffa12a144e157a5e`  
 **Method:** Exhaustive claim-unit audit of finished prose across content, christology, quizzes, studyGuide, guide, verify cards, workbench, and linked glossary entries.  
-**Counts:** ACCURATE: 255 | SOFTEN: 0 | FIX: 0 | N/A: 37 | Total: 292  
+**Counts:** ACCURATE: 278 | SOFTEN: 0 | FIX: 0 | N/A: 37 | Total: 315  
 
 ## 1. Summary of Required Sections & Governing Standards
 
@@ -268,50 +268,73 @@
 | S10-VRF-10-CHECK | PASTORAL | ACCURATE | Empirical reader checkpoint and source verification instruction |
 | S10-GLS-alexander-SMP | INTERPRETATION | ACCURATE | Historicist vocabulary and prophetic hermeneutic definition |
 | S10-GLS-alexander-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
+| S10-GLS-alexander-PRF | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
 | S10-GLS-artaxerxes-SMP | INTERPRETATION | ACCURATE | Historicist vocabulary and prophetic hermeneutic definition |
 | S10-GLS-artaxerxes-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
+| S10-GLS-artaxerxes-PRF | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
 | S10-GLS-babylon-SMP | INTERPRETATION | ACCURATE | Historicist vocabulary and prophetic hermeneutic definition |
 | S10-GLS-babylon-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
+| S10-GLS-babylon-PRF | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
 | S10-GLS-belshazzar-SMP | INTERPRETATION | ACCURATE | Historicist vocabulary and prophetic hermeneutic definition |
 | S10-GLS-belshazzar-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
+| S10-GLS-belshazzar-PRF | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
 | S10-GLS-berthier-SMP | INTERPRETATION | ACCURATE | Historicist vocabulary and prophetic hermeneutic definition |
 | S10-GLS-berthier-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
+| S10-GLS-berthier-PRF | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
 | S10-GLS-clovis-SMP | INTERPRETATION | ACCURATE | Historicist vocabulary and prophetic hermeneutic definition |
 | S10-GLS-clovis-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
+| S10-GLS-clovis-PRF | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
 | S10-GLS-cyrus-SMP | INTERPRETATION | ACCURATE | Historicist vocabulary and prophetic hermeneutic definition |
 | S10-GLS-cyrus-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
+| S10-GLS-cyrus-PRF | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
 | S10-GLS-daniel-SMP | INTERPRETATION | ACCURATE | Historicist vocabulary and prophetic hermeneutic definition |
 | S10-GLS-daniel-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
+| S10-GLS-daniel-PRF | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
 | S10-GLS-diadochi-SMP | INTERPRETATION | ACCURATE | Historicist vocabulary and prophetic hermeneutic definition |
 | S10-GLS-diadochi-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
+| S10-GLS-diadochi-PRF | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
 | S10-GLS-ezekiel-SMP | INTERPRETATION | ACCURATE | Historicist vocabulary and prophetic hermeneutic definition |
 | S10-GLS-ezekiel-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
+| S10-GLS-ezekiel-PRF | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
 | S10-GLS-gabriel-SMP | INTERPRETATION | ACCURATE | Historicist vocabulary and prophetic hermeneutic definition |
 | S10-GLS-gabriel-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
+| S10-GLS-gabriel-PRF | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
 | S10-GLS-hiddekel-SMP | INTERPRETATION | ACCURATE | Historicist vocabulary and prophetic hermeneutic definition |
 | S10-GLS-hiddekel-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
-| S10-GLS-historicism-SMP | INTERPRETATION | ACCURATE | Historicist vocabulary and prophetic hermeneutic definition |
+| S10-GLS-hiddekel-PRF | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S10-GLS-historicism-SMP | CHRIST | ACCURATE | Christological definition and canonical significance |
 | S10-GLS-historicism-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
+| S10-GLS-historicism-PRF | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
 | S10-GLS-jerusalem-SMP | INTERPRETATION | ACCURATE | Historicist vocabulary and prophetic hermeneutic definition |
 | S10-GLS-jerusalem-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
+| S10-GLS-jerusalem-PRF | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
 | S10-GLS-michael-SMP | CHRIST | ACCURATE | Christological definition and canonical significance |
 | S10-GLS-michael-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
+| S10-GLS-michael-PRF | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
 | S10-GLS-nitsdaq-SMP | INTERPRETATION | ACCURATE | Historicist vocabulary and prophetic hermeneutic definition |
 | S10-GLS-nitsdaq-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
-| S10-GLS-papacy-SMP | INTERPRETATION | ACCURATE | Historicist vocabulary and prophetic hermeneutic definition |
+| S10-GLS-nitsdaq-PRF | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S10-GLS-papacy-SMP | TEXT | ACCURATE | Biblical lexical definition and textual usage |
 | S10-GLS-papacy-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
+| S10-GLS-papacy-PRF | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
 | S10-GLS-pius-vi-SMP | INTERPRETATION | ACCURATE | Historicist vocabulary and prophetic hermeneutic definition |
 | S10-GLS-pius-vi-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
+| S10-GLS-pius-vi-PRF | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
 | S10-GLS-probation-SMP | INTERPRETATION | ACCURATE | Historicist vocabulary and prophetic hermeneutic definition |
 | S10-GLS-probation-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
+| S10-GLS-probation-PRF | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
 | S10-GLS-rome-SMP | INTERPRETATION | ACCURATE | Historicist vocabulary and prophetic hermeneutic definition |
 | S10-GLS-rome-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
+| S10-GLS-rome-PRF | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
 | S10-GLS-sanctuary-SMP | TEXT | ACCURATE | Biblical lexical definition and textual usage |
 | S10-GLS-sanctuary-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
+| S10-GLS-sanctuary-PRF | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
 | S10-GLS-tamid-SMP | TEXT | ACCURATE | Biblical lexical definition and textual usage |
 | S10-GLS-tamid-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
+| S10-GLS-tamid-PRF | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
 | S10-GLS-year-day-SMP | INTERPRETATION | ACCURATE | Historicist vocabulary and prophetic hermeneutic definition |
 | S10-GLS-year-day-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
+| S10-GLS-year-day-PRF | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
 
 ## 3. FIX List & Resolution
 

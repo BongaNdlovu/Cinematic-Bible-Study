@@ -2309,7 +2309,8 @@
         }
         parts.push(nodeHtml(step, i === mid, t, canResolve));
       });
-      return '<div class="chain-flow">' + parts.join('') + '</div>';
+      const flowClass = 'chain-flow' + (steps.length > 3 ? ' is-dense' : '');
+      return '<div class="' + flowClass + '">' + parts.join('') + '</div>';
     }
 
     function bodyComparison(spec, steps, canResolve) {
