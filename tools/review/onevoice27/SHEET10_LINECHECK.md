@@ -2,7 +2,7 @@
 
 **Audit Date:** 2026-09-20  
 **File Audited:** `js/study/sheets-data.js` (Sitting id: 10) with `sheet-verify.js`, `workbench.js`, `sheet-glossary.js`  
-**Audited Content Hash:** `9d2cbe0d7509f12b`  
+**Audited Content Hash:** `938aa5ff39919fb0`  
 **Method:** Exhaustive claim-unit audit of finished prose across content, christology, quizzes, studyGuide, guide, verify cards, workbench, and linked glossary entries.  
 **Counts:** ACCURATE: 249 | SOFTEN: 0 | FIX: 0 | N/A: 37 | Total: 286  
 

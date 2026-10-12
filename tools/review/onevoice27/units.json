@@ -1,16 +1,16 @@
 {
   "sheetHashes": {
-    "0": "70f34ad9a6b44d56",
+    "0": "660cebe5d28f3538",
     "1": "2f7d7738c03a3fa7",
     "2": "ea5941aadad618ec",
     "3": "59c1b914546a4c97",
     "4": "77a3cefc42b37efb",
     "5": "aa6738285e67a80e",
     "6": "87d9c63560ad095d",
-    "7": "490e16d4924db351",
-    "8": "eec64599ac40fbef",
+    "7": "dc50121df814a998",
+    "8": "b187550915f5c8c5",
     "9": "bd18052e1c991bb8",
-    "10": "9d2cbe0d7509f12b"
+    "10": "938aa5ff39919fb0"
   },
   "sheetUnitCounts": {
     "0": 290,
@@ -20,7 +20,7 @@
     "4": 240,
     "5": 262,
     "6": 294,
-    "7": 317,
+    "7": 315,
     "8": 278,
     "9": 294,
     "10": 286
@@ -198,8 +198,8 @@
       "id": "S00-P-13",
       "sheet": 0,
       "field": "content",
-      "text": "Origins: Patristic readers already expected a future individual antichrist; Hippolytus of Rome (c. A.D. 200) is the witness. Francisco Ribera’s 1590 commentary on Revelation made that reading systematic: a gap before a future crisis. In Protestant circles S. R. Maitland (1826) took it up; Edward Irving and John Nelson Darby then popularized it in the 1830s, giving rise to modern Dispensationalism , later spread by the Scofield Reference Bible (1909).",
-      "hash": "c0b8c5ec037a6fec"
+      "text": "Origins: Patristic readers already expected a future individual antichrist; Hippolytus of Rome (c. A.D. 200) is the witness. Francisco Ribera’s commentary on Revelation, published about 1590 (sources give 1590, 1591, or the 1593 Lyon edition), made that reading systematic: a gap before a future crisis. In Protestant circles S. R. Maitland (1826) took it up; Edward Irving and John Nelson Darby then popularized it in the 1830s, giving rise to modern Dispensationalism , later spread by the Scofield Reference Bible (1909).",
+      "hash": "a5aa2321f9e8983d"
     },
     {
       "id": "S00-P-14",
@@ -219,8 +219,8 @@
       "id": "S00-P-15",
       "sheet": 0,
       "field": "content",
-      "text": "Neither Preterism nor Futurism emerged in a vacuum. During the Counter-Reformation, Protestant Reformers used the historicist method to identify the medieval papal-monarchical system with the \"Little Horn\" of Daniel 7 and the beast of Revelation 13. Jesuit scholars then published two systematic alternatives: Alcázar (1614) placed fulfillment in the pagan past; Ribera (1590) placed it in a distant future. The dated effect of both commentaries is that the medieval and modern church fall off the chain. The titles and dates are the argument.",
-      "hash": "730fbcbb560950d0"
+      "text": "Neither Preterism nor Futurism emerged in a vacuum. During the Counter-Reformation, Protestant Reformers used the historicist method to identify the medieval papal-monarchical system with the \"Little Horn\" of Daniel 7 and the beast of Revelation 13. Jesuit scholars then published two systematic alternatives: Alcázar (1614) placed fulfillment in the pagan past; Ribera (c. 1590) placed it in a distant future — neither the first to read prophecy that way, but the first to make each a systematic alternative to historicism. The dated effect of both commentaries is that the medieval and modern church fall off the chain. The titles and dates are the argument.",
+      "hash": "fd0a621d5f5c4d2a"
     },
     {
       "id": "S00-H-10",
@@ -1122,8 +1122,8 @@
       "id": "S00-DGM-s0-1-3-P1",
       "sheet": 0,
       "field": "diagram",
-      "text": "Counter-Reformation: Francisco Ribera, 1590.",
-      "hash": "3a453b2e535496db"
+      "text": "Counter-Reformation: Francisco Ribera, c. 1590.",
+      "hash": "fef23633cd3ff235"
     },
     {
       "id": "S00-DGM-s0-1-3-P2",
@@ -13113,8 +13113,8 @@
       "id": "S07-LI-11",
       "sheet": 7,
       "field": "content",
-      "text": "Thinks to Change Times and Laws (7:25): The Aramaic words zimnin (times) and dath (law) name an intent to change appointed times and law. This course’s historicist reading applies that intent to the Sabbath among the Ten Commandments. Later catechism numbering that omits the second commandment and splits the tenth is a historical illustration of that change.",
-      "hash": "d566f07442a371f7"
+      "text": "Thinks to Change Times and Laws (7:25): The Aramaic words zimnin (times) and dath (law) name an intent to change appointed times and law. This course’s historicist reading applies that intent to the Sabbath among the Ten Commandments. Later catechism numbering that folds the graven-image clause into the first commandment and splits the tenth is a historical illustration of that change.",
+      "hash": "463078e8da1e387a"
     },
     {
       "id": "S07-LI-12",
@@ -13197,8 +13197,8 @@
       "id": "S07-LI-15",
       "sheet": 7,
       "field": "content",
-      "text": "Step 3: The Year-Day Principle: In apocalyptic symbolic prophecy, God explicitly commands that a prophetic day represents a literal solar year: \"each day for a year\" (Numbers 14:34) and \"I have appointed thee each day for a year\" (Ezekiel 4:6). Therefore, the 1,260 prophetic days represent 1,260 literal calendar years of ecclesiastical civil supremacy.",
-      "hash": "0772c76a2b0aa30d"
+      "text": "Step 3: The Year-Day Principle: Scripture supplies the day-for-a-year scale: \"each day for a year\" (Numbers 14:34) and \"I have appointed thee each day for a year\" (Ezekiel 4:6). On its own that scale does not prove the principle; what requires it here is the symbolic character of these visions — beasts stand for kingdoms and horns for dynasties, so the days stand for years. Read that way, the 1,260 prophetic days represent 1,260 literal calendar years of ecclesiastical civil supremacy.",
+      "hash": "23692ff809aaacb0"
     },
     {
       "id": "S07-P-14",
@@ -13225,8 +13225,8 @@
       "id": "S07-LI-17",
       "sheet": 7,
       "field": "content",
-      "text": "The Concluding Anchor (A.D. 1798): Exactly 1,260 years later (538 + 1,260 = 1798), the French Revolution struck at papal power. French General Louis-Alexandre Berthier entered Rome on 10 February 1798; the Roman Republic was proclaimed on 15 February; Pope Pius VI was taken captive on the night of 20 February and later died in exile in France. This inflicted the prophetic \"deadly wound\" (Revelation 13:3), terminating the 1,260-year epoch of papal political supremacy.",
-      "hash": "adaa7f7f8025ab66"
+      "text": "The Concluding Anchor (A.D. 1798): Exactly 1,260 years later (538 + 1,260 = 1798), the French Revolution struck at papal power. French General Louis-Alexandre Berthier entered Rome on 10 February 1798; the Roman Republic was proclaimed on 15 February; Pope Pius VI was taken captive on 20 February and died a prisoner at Valence, in France, on 29 August 1799. This inflicted the prophetic \"deadly wound\" (Revelation 13:3), terminating the 1,260-year epoch of papal political supremacy.",
+      "hash": "537e114e660f7109"
     },
     {
       "id": "S07-DIA-04",
@@ -14741,20 +14741,6 @@
       "hash": "e7db4230f1868194"
     },
     {
-      "id": "S07-GLS-exile-SMP",
-      "sheet": 7,
-      "field": "glossary",
-      "text": "exile: The forced displacement of Judah to Babylon under God's judicial sentence across three deportations: 605, 597, and 586 B.C.",
-      "hash": "177298bab32c5c10"
-    },
-    {
-      "id": "S07-GLS-exile-HIS",
-      "sheet": 7,
-      "field": "glossary",
-      "text": "Exile was not a chosen journey or a mere accident of war. Daniel 1:2 declares that God handed Jehoiakim over. Daniel begins in the first levy (605 B.C.), Ezekiel in the second (597 B.C.), and the city and temple were burned in the third (586 B.C., 2 Kings 25).",
-      "hash": "beb35a1f9156e57a"
-    },
-    {
       "id": "S07-GLS-ezekiel-SMP",
       "sheet": 7,
       "field": "glossary",
@@ -15402,8 +15388,8 @@
       "id": "S08-P-17",
       "sheet": 8,
       "field": "content",
-      "text": "Modern secular scholars and preterist commentators attempt to confine the entire prophecy of Daniel 8 to Antiochus IV Epiphanes, a Seleucid king who reigned from 175 to 164 B.C. and desecrated the Jewish temple by erecting an altar to Zeus and sacrificing swine on it. Historicist scholarship demonstrates that Antiochus Epiphanes fails to fulfill the biblical criteria on three decisive grounds:",
-      "hash": "dadc32c47d2122df"
+      "text": "The majority position in modern scholarship, and the preterist reading, confines the whole of Daniel 8 to Antiochus IV Epiphanes. The historicist reading taken here is a minority conclusion, and this course's own tradition acknowledges it: the study guide for this prophecy says plainly that those who read it this way are almost alone in the Christian world. a Seleucid king who reigned from 175 to 164 B.C. and desecrated the Jewish temple by erecting an altar to Zeus and sacrificing swine on it. Historicist scholarship sets out four tests that Antiochus Epiphanes fails. The first three are the tests the church's own study guide applies; the fourth is this course's:",
+      "hash": "b7d432bbb8f9abf1"
     },
     {
       "id": "S08-H-22",
@@ -15416,8 +15402,8 @@
       "id": "S08-P-18",
       "sheet": 8,
       "field": "content",
-      "text": "The text demands a power far mightier than Medo-Persia and Greece. Medo-Persia was \"great\" (8:4); Greece was \"very great\" (8:8); but the little horn became \"exceedingly great\" (8:9). Antiochus Epiphanes was an obscure, eccentric ruler of a declining Seleucid splinter kingdom. He paid heavy annual tribute to the rising Roman Republic. When Antiochus invaded Egypt, the Roman ambassador Popillius Laenas confronted him, drew a circle in the dirt around him with a cane, and demanded that Antiochus pledge to abandon Egypt before stepping out of the circle. Antiochus humiliated himself and obeyed. He was never greater than Cyrus or Alexander. Rome—both pagan and papal—was the only power that truly grew \"exceedingly great\" across world history.",
-      "hash": "c073001f9db2753d"
+      "text": "The text demands a power far mightier than Medo-Persia and Greece. Medo-Persia was \"great\" (8:4); Greece was \"very great\" (8:8); but the little horn became \"exceedingly great\" (8:9). Antiochus Epiphanes was an obscure, eccentric ruler of a declining Seleucid splinter kingdom. His dynasty fought Rome and lost: the Treaty of Apamea (188 B.C.) imposed a crushing indemnity on his father Antiochus III, and Antiochus IV himself had been a Roman hostage. When Antiochus invaded Egypt, the Roman ambassador Popillius Laenas confronted him, drew a circle in the dirt around him with a cane, and demanded that Antiochus pledge to abandon Egypt before stepping out of the circle. Antiochus humiliated himself and obeyed. He was never greater than Cyrus or Alexander. Rome—both pagan and papal—was the only power that truly grew \"exceedingly great\" across world history.",
+      "hash": "1b57e30210350360"
     },
     {
       "id": "S08-H-23",
@@ -15570,8 +15556,8 @@
       "id": "S08-LI-12",
       "sheet": 8,
       "field": "content",
-      "text": "The Biblical Resolution: Prayerful restudy of the Bible (by Hiram Edson, O. R. L. Crosier, and others) revealed that the earth is never called the sanctuary in Scripture. The sanctuary of Daniel 8:14 is the heavenly sanctuary (Hebrews 8:1–2; 9:23–24). On October 22, 1844, Jesus Christ entered the Most Holy Place of the heavenly temple to inaugurate the final phase of His high-priestly ministry: the heavenly judgment (Daniel 7:9–14) and the cleansing of the heavenly sanctuary prior to His return.",
-      "hash": "daef3cbdf04d9614"
+      "text": "The Biblical Resolution: Prayerful restudy of the Bible by that Advent circle — remembered above all in Hiram Edson's account, set down years afterwards — led them to see that Scripture never calls the earth the sanctuary. The sanctuary of Daniel 8:14 is the heavenly sanctuary (Hebrews 8:1–2; 9:23–24). On October 22, 1844, Jesus Christ entered the Most Holy Place of the heavenly temple to inaugurate the final phase of His high-priestly ministry: the heavenly judgment (Daniel 7:9–14) and the cleansing of the heavenly sanctuary prior to His return.",
+      "hash": "3c0409e1b461bf82"
     },
     {
       "id": "S08-P-28",
@@ -19301,8 +19287,8 @@
       "id": "S10-LI-09",
       "sheet": 10,
       "field": "content",
-      "text": "6. The Time of the End (11:40–45): \"And at the time of the end shall the king of the south push at him...\" (11:40). The \"time of the end\" commenced in 1798 when General Berthier captured Pope Pius VI, ending the 1,260-year temporal supremacy of the papacy. Verses 40 through 45 outline the final geopolitical conflicts leading up to the close of human history.",
-      "hash": "48109e75fa03bc38"
+      "text": "6. The Time of the End (11:40–45): \"And at the time of the end shall the king of the south push at him...\" (11:40). The \"time of the end\" is dated from 1798 , when General Berthier captured Pope Pius VI — the event that closed the 1,260-year period. The rise and fall of the papacy were gradual, as the commentary on Daniel observes, so 1798 marks the end of the prophetic period rather than a single day on which papal power vanished. Verses 40 through 45 outline the final geopolitical conflicts leading up to the close of human history.",
+      "hash": "4c9295722d00922a"
     },
     {
       "id": "S10-H-14",

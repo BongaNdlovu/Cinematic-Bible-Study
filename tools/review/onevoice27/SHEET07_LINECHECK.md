@@ -2,9 +2,9 @@
 
 **Audit Date:** 2026-09-20  
 **File Audited:** `js/study/sheets-data.js` (Sitting id: 7) with `sheet-verify.js`, `workbench.js`, `sheet-glossary.js`  
-**Audited Content Hash:** `490e16d4924db351`  
+**Audited Content Hash:** `dc50121df814a998`  
 **Method:** Exhaustive claim-unit audit of finished prose across content, christology, quizzes, studyGuide, guide, verify cards, workbench, and linked glossary entries.  
-**Counts:** ACCURATE: 278 | SOFTEN: 0 | FIX: 0 | N/A: 39 | Total: 317  
+**Counts:** ACCURATE: 276 | SOFTEN: 0 | FIX: 0 | N/A: 39 | Total: 315  
 
 ## 1. Summary of Required Sections & Governing Standards
 
@@ -295,8 +295,6 @@
 | S07-GLS-daniel-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
 | S07-GLS-diadochi-SMP | INTERPRETATION | ACCURATE | Historicist vocabulary and prophetic hermeneutic definition |
 | S07-GLS-diadochi-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
-| S07-GLS-exile-SMP | INTERPRETATION | ACCURATE | Historicist vocabulary and prophetic hermeneutic definition |
-| S07-GLS-exile-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
 | S07-GLS-ezekiel-SMP | INTERPRETATION | ACCURATE | Historicist vocabulary and prophetic hermeneutic definition |
 | S07-GLS-ezekiel-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
 | S07-GLS-gabriel-SMP | INTERPRETATION | ACCURATE | Historicist vocabulary and prophetic hermeneutic definition |

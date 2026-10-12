@@ -49,3 +49,9 @@ backups/
 
 # audio read-along tooling intermediates
 tools/audio-read/*.wav
+
+# Third-party verification sources (SDA Bible Commentary OCR, BRI articles,
+# Sabbath School guides, Froom, Uriah Smith). Downloaded for the accuracy
+# audit only; copyrighted material, so not committed. See
+# tools/review/PROPHECY_VERIFICATION.md for what was read.
+_factcheck/
