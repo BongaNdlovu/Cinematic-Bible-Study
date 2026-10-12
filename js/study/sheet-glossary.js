@@ -192,7 +192,7 @@
       IMG + "glossary-vandals.png"),
     entry("ostrogoths", "Ostrogoths", ["Ostrogothic"], "word",
       "The Germanic kingdom that held Rome until A.D. 538.",
-      "Arian. When their grip on the city broke, Justinian’s grant to the Roman bishop could operate. 538 is the year the Ostrogoths were driven from Rome and Justinian’s decree took effect; it begins the 1,260 years.",
+      "Arian. When their grip on the city broke, Justinian’s grant to the Roman bishop could operate. This chart uses 538 as the effective civil pin when Rome was cleared; papal power rose gradually. If 538 moves, 1798 moves on the same 1,260-year stick.",
       IMG + "glossary-ostrogoths.png"),
 
     entry("daniel", "Daniel", [], "person",
@@ -269,7 +269,7 @@
       IMG + "glossary-pius-vi.png"),
     entry("clovis", "Clovis", [], "person",
       "Frankish king whose later policy gave the Roman church civil muscle in the west.",
-      "Baptism is often dated 496; Vouillé is 507. A.D. 508 is the civil start of the 1,290 and 1,335 days of Daniel 12:11–12, landing 1798 and 1843, immediately before the 2,300-year sanctuary date in 1844.",
+      "Baptism is often dated 496; Vouillé is 507 — related milestones, not the same pin as 508. A.D. 508 is this chart’s reconstructed civil start for the 1,290 and 1,335 days of Daniel 12:11–12 (year-day scale), landing 1798 and 1843; if the start moves, those landings move. The 2,300-year sanctuary date in 1844 is on a separate line from Sitting 9.",
       IMG + "glossary-clovis.png"),
     entry("luther", "Martin Luther", ["Luther"], "person",
       "German Reformer (1483–1546). Read Daniel as a historicist: the little horn as a church-state Antichrist.",

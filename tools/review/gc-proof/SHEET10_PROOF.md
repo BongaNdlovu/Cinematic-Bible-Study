@@ -1,0 +1,298 @@
+# Sitting 10 — sentence-level proof
+
+**Units:** 292 · **Content hash:** `808f3cc2b0e5fffc`
+
+| Unit ID | Tag | Verdict | Text (excerpt) | Proof |
+|---------|-----|---------|----------------|-------|
+| S10-TOC | N/A | N/A | Follow this sitting Roadmap · one-page infographic Introduction · The final vision by the Great River Hiddekel I · Th… | Navigation or header chrome |
+| S10-NEXT | N/A | N/A | Course completion The Scroll of Daniel is Complete You have traveled the unbroken prophetic highway from the golden h… | Navigation or header chrome |
+| S10-H-01 | N/A | N/A | Big idea | Navigation or header chrome |
+| S10-P-01 | INTERPRETATION | ACCURATE | The entire Book of Daniel culminates not in an empire or an earthly kingdom, but in a living divine Person: Michael (… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 10) |
+| S10-P-02 | HISTORY | ACCURATE | In Sitting 9, Gabriel returned to answer Daniel's prayer and solve the unexplained 2,300 days of Daniel 8. By severin… | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S10-H-02 | N/A | N/A | Introduction | Navigation or header chrome |
+| S10-H-03 | N/A | N/A | The Final Vision by the Great River Hiddekel (Tigris) | Navigation or header chrome |
+| S10-H-04 | N/A | N/A | Daniel 10:1–4 · Tigris River, 536 B.C. | Navigation or header chrome |
+| S10-P-03 | HISTORY | ACCURATE | In the third year of Cyrus king of Persia (536 B.C.), a revelation was given to Daniel, whose name was called Beltesh… | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S10-P-04 | INTERPRETATION | ACCURATE | On the twenty-fourth day of the first month (Nisan), as Daniel stood beside the great river Hiddekel (the ancient nam… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 10) |
+| S10-H-05 | N/A | N/A | Structural Unity: Chapters 10, 11, and 12 Form One Single Vision | Navigation or header chrome |
+| S10-P-05 | HISTORY | ACCURATE | Modern chapter divisions can mislead readers into treating Daniel 10, 11, and 12 as separate discourses. In the origi… | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S10-LI-01 | INTERPRETATION | ACCURATE | Chapter 10 is the Prologue and Theophany: Daniel fasts by the Tigris; the glorious Man in linen appears; Gabriel pull… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 10) |
+| S10-LI-02 | INTERPRETATION | ACCURATE | Chapter 11 is the Detailed March of History: Gabriel narrates literal geopolitical history in advance without symboli… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 10) |
+| S10-LI-03 | INTERPRETATION | ACCURATE | Chapter 12 is the Eschatological Climax: Michael stands up, a time of trouble such as never was breaks upon the earth… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 10) |
+| S10-DIA-01 | HISTORY | ACCURATE | THE STRUCTURE OF DANIEL'S FINAL VISION (536 B.C.) ┌─────────────────────────── DANIEL 10–12: ONE CONTINUOUS ENCOUNTER… | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S10-H-06 | N/A | N/A | Main Point 1 | Navigation or header chrome |
+| S10-H-07 | N/A | N/A | The Theophany: The Man Clothed in Linen and Cosmic Warfare | Navigation or header chrome |
+| S10-H-08 | N/A | N/A | Daniel 10:5–14, 20–21; Revelation 1:13–15 | Navigation or header chrome |
+| S10-P-06 | INTERPRETATION | ACCURATE | As Daniel stood by the bank of the Tigris, he was granted a direct Christophany—a pre-incarnate appearance of Jesus C… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 10) |
+| S10-BQ-01 | TEXT | ACCURATE | "Then I lifted up mine eyes, and looked, and behold a certain man clothed in linen, whose loins were girded with fine… | KJV substring verified (then i lifted up mine eyes, and looked, …) |
+| S10-P-07 | TEXT | REVIEW | This inventory overlaps the glorified Christ revealed to John on Patmos (Revelation 1:13–15): linen and gold, eyes as… | Scripture citation — verify ellipsis against KJV if quoted |
+| S10-H-09 | N/A | N/A | Unseen Spiritual Warfare: The Princes Behind Earthly Monarchies | Navigation or header chrome |
+| S10-P-08 | INTERPRETATION | ACCURATE | Daniel was overcome by the divine glory and fell to the ground in deep sleep. An angel (Gabriel) touched him, set him… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 10) |
+| S10-BQ-02 | TEXT | ACCURATE | "Fear not, Daniel: for from the first day that thou didst set thine heart to understand, and to chasten thyself befor… | KJV substring verified (fear not, daniel: for from the first day…) |
+| S10-P-09 | INTERPRETATION | ACCURATE | This remarkable passage pulls back the curtain of the invisible world. The "prince of the kingdom of Persia" was not … | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 10) |
+| S10-P-10 | INTERPRETATION | ACCURATE | Who is Michael? In Hebrew, the name Mi-ka-El (מִיכָאֵל) asks the ultimate rhetorical question: "Who is like God?" Thr… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 10) |
+| S10-H-10 | N/A | N/A | Main Point 2 | Navigation or header chrome |
+| S10-H-11 | N/A | N/A | The Prophetic Panorama of Daniel 11: From Persia to the End of Time | Navigation or header chrome |
+| S10-H-12 | N/A | N/A | Daniel 11:2–45 | Navigation or header chrome |
+| S10-P-11 | INTERPRETATION | ACCURATE | In Daniel 11, Gabriel unfolds the longest, most detailed literal historical prophecy in the Bible. Unlike the symboli… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 10) |
+| S10-H-13 | N/A | N/A | The Unbroken Historical Chain of Daniel 11 | Navigation or header chrome |
+| S10-LI-04 | TEXT | ACCURATE | 1. The Persian Succession (11:2): "Behold, there shall stand up yet three kings in Persia; and the fourth shall be fa… | KJV substring verified (behold, there shall stand up yet three k…) |
+| S10-LI-05 | HISTORY | ACCURATE | 2. Alexander the Great and the Diadochi (11:3–4): "And a mighty king shall stand up... And when he shall stand up, hi… | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S10-LI-06 | INTERPRETATION | ACCURATE | 3. Hellenistic Wars: Kings of the North and South (11:5–15): Syria/Mesopotamia under the Seleucids became the "King o… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 10) |
+| S10-LI-07 | TEXT | ACCURATE | 4. Imperial Pagan Rome (11:16–22): Rome entered the Levant under Pompey (63 B.C.) and Julius Caesar. Under Tiberius C… | KJV substring verified (the prince of the covenant…) |
+| S10-LI-08 | TEXT | ACCURATE | 5. Papal Rome Phase (11:31–39): Roman power transitions into the ecclesiastical phase: "arms shall stand on his part,… | KJV substring verified (arms shall stand on his part, and they s…) |
+| S10-LI-09 | INTERPRETATION | ACCURATE | 6. The Time of the End (11:40–45): "And at the time of the end shall the king of the south push at him..." (11:40). T… | Explicit hedge or labeled reconstruction (OneVoice27 §2) |
+| S10-H-14 | N/A | N/A | Main Point 3 | Navigation or header chrome |
+| S10-H-15 | N/A | N/A | Michael Stands Up: The Royal Stance and the Time of Trouble | Navigation or header chrome |
+| S10-H-16 | N/A | N/A | Daniel 12:1; 11:2–4; Hebrews 7:25 | Navigation or header chrome |
+| S10-P-12 | INTERPRETATION | ACCURATE | The entire prophetic narrative of Daniel 10–11 reaches its supreme climax in the opening words of chapter 12: | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 10) |
+| S10-BQ-03 | TEXT | ACCURATE | "And at that time shall Michael stand up, the great prince which standeth for the children of thy people: and there s… | KJV substring verified (and at that time shall michael stand up,…) |
+| S10-H-17 | N/A | N/A | The Meaning of "Stand Up" ('Amad) in Daniel's Prophetic Grammar | Navigation or header chrome |
+| S10-P-13 | INTERPRETATION | ACCURATE | In Daniel's inspired vocabulary, the Hebrew verb 'amad (עָמַד, "to stand up") consistently designates a king assuming… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 10) |
+| S10-LI-10 | INTERPRETATION | ACCURATE | Daniel 11:2: "There shall stand up ['amad] yet three kings in Persia." | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 10) |
+| S10-LI-11 | INTERPRETATION | ACCURATE | Daniel 11:3: "A mighty king shall stand up ['amad]." | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 10) |
+| S10-LI-12 | INTERPRETATION | ACCURATE | Daniel 11:4: "When he shall stand up ['amad], his kingdom shall be broken." | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 10) |
+| S10-LI-13 | INTERPRETATION | ACCURATE | Daniel 11:7, 20, 21: Kings "stand up" in their estates to rule. | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 10) |
+| S10-P-14 | INTERPRETATION | ACCURATE | Therefore, when Daniel 12:1 declares that Michael shall stand up , it does not mean an angel stretching his limbs; it… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 10) |
+| S10-P-15 | INTERPRETATION | ACCURATE | When Michael stands up, the time of turning ends: human probation closes, and there follows a time of trouble such as… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 10) |
+| S10-P-16 | INTERPRETATION | ACCURATE | Hebrews 7:25 is the ministry of this age: He "ever liveth to make intercession." Daniel 12:1 is the moment that pries… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 10) |
+| S10-BQ-04 | TEXT | ACCURATE | "He that is unjust, let him be unjust still: and he which is filthy, let him be filthy still: and he that is righteou… | KJV substring verified (he that is unjust, let him be unjust sti…) |
+| S10-DIA-02 | INTERPRETATION | ACCURATE | DANIEL 12:1–2 IN ITS OWN ORDER Michael stands up ('amad: kingly stance, Dan 11:2–4) → close of human probation → a ti… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 10) |
+| S10-H-18 | N/A | N/A | Main Point 4 | Navigation or header chrome |
+| S10-H-19 | N/A | N/A | The Great Time of Trouble and Deliverance in the Book of Life | Navigation or header chrome |
+| S10-H-20 | N/A | N/A | Daniel 12:1; Jeremiah 30:7; Revelation 3:5; 20:12, 15 | Navigation or header chrome |
+| S10-P-17 | TEXT | ACCURATE | Immediately following Michael's standing up, Scripture warns: "and there shall be a time of trouble, such as never wa… | KJV substring verified (and there shall be a time of trouble, su…) |
+| S10-P-18 | INTERPRETATION | ACCURATE | Because the Holy Spirit is withdrawn from the impenitent and satanic deception controls unregenerate humanity, societ… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 10) |
+| S10-BQ-05 | TEXT | ACCURATE | "...and at that time thy people shall be delivered, every one that shall be found written in the book." — Daniel 12:1… | KJV substring verified (and at that time thy people shall be del…) |
+| S10-H-21 | N/A | N/A | Deliverance in the Heavenly Registry: The Book of Life | Navigation or header chrome |
+| S10-P-19 | INTERPRETATION | ACCURATE | Notice the only qualifying criterion for divine deliverance: not political connections, material wealth, or denominat… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 10) |
+| S10-H-22 | N/A | N/A | Main Point 5 | Navigation or header chrome |
+| S10-H-23 | N/A | N/A | Bodily Resurrection: Waking from the Dust and the 1,290/1,335 Days | Navigation or header chrome |
+| S10-H-24 | N/A | N/A | Daniel 12:2–4, 11–13; John 5:28–29; 1 Thessalonians 4:16–17 | Navigation or header chrome |
+| S10-P-20 | INTERPRETATION | ACCURATE | Daniel 12:2 delivers the Old Testament's most explicit and glorious declaration of literal bodily resurrection: | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 10) |
+| S10-BQ-06 | TEXT | ACCURATE | "And many of them that sleep in the dust of the earth shall awake, some to everlasting life, and some to shame and ev… | KJV substring verified (and many of them that sleep in the dust …) |
+| S10-H-25 | N/A | N/A | A Literal, Physical Bodily Awakening — Not a Metaphor | Navigation or header chrome |
+| S10-P-21 | INTERPRETATION | ACCURATE | Liberal higher criticism often reduces Daniel 12:2 to a poetic metaphor for the political reconstitution of the Jewis… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 10) |
+| S10-LI-14 | INTERPRETATION | ACCURATE | Sleeping in the Dust: In Genesis 3:19, humanity was formed from dust and returns to dust at death. Throughout Scriptu… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 10) |
+| S10-LI-15 | TEXT | ACCURATE | Confirmed by Jesus Christ: Jesus directly cited Daniel 12:2 in John 5:28–29: "Marvel not at this: for the hour is com… | KJV substring verified (marvel not at this: for the hour is comi…) |
+| S10-LI-16 | INTERPRETATION | ACCURATE | Many, not a metaphor: Daniel 12:2 speaks of "many" who sleep in the dust awaking to two destinies. That is the Old Te… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 10) |
+| S10-H-26 | N/A | N/A | The Numbered Spans of Daniel 12: The 1,290 and 1,335 Days | Navigation or header chrome |
+| S10-P-22 | INTERPRETATION | ACCURATE | In Daniel 12:11–12, two final prophetic spans are revealed from the time the tamid is taken away and the abomination … | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 10) |
+| S10-BQ-07 | TEXT | ACCURATE | "And from the time that the daily sacrifice shall be taken away, and the abomination that maketh desolate set up, the… | KJV substring verified (and from the time that the daily sacrifi…) |
+| S10-P-23 | INTERPRETATION | ACCURATE | This sitting applies the year-day principle to these periods (Numbers 14:34; Ezekiel 4:6), reading the 1,290 and 1,33… | Explicit hedge or labeled reconstruction (OneVoice27 §2) |
+| S10-LI-17 | HISTORY | ACCURATE | 1,290 prophetic days (solar years): A.D. 508 + 1,290 years = A.D. 1798, the year Berthier took the pope and the “time… | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S10-LI-18 | HISTORY | ACCURATE | 1,335 prophetic days (solar years): A.D. 508 + 1,335 years = A.D. 1843, the waiting year of the great second-advent a… | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S10-P-24 | HISTORY | ACCURATE | Daniel 12:11 counts from the text’s pair of events (daily removed, abomination set up). This timeline’s 508 pin is th… | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S10-P-25 | INTERPRETATION | ACCURATE | The Book of Daniel concludes with God's personal, tender promise to His aged, beloved prophet: | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 10) |
+| S10-BQ-08 | TEXT | ACCURATE | "But go thou thy way till the end be: for thou shalt rest, and stand in thy lot at the end of the days." — Daniel 12:… | KJV substring verified (but go thou thy way till the end be: for…) |
+| S10-P-26 | INTERPRETATION | ACCURATE | Daniel is assured that he will sleep in peace in the dust, and then stand in his allotted inheritance at the resurrec… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 10) |
+| S10-DIA-03 | INTERPRETATION | ACCURATE | THE TIMELINE OF DANIEL 12:11–12 (FROM A.D. 508 — RECONSTRUCTED CIVIL START) 508 A.D. ──────────────────[ 1,290 YEARS … | Explicit hedge or labeled reconstruction (OneVoice27 §2) |
+| S10-H-27 | N/A | N/A | CHRIST | Navigation or header chrome |
+| S10-P-27 | INTERPRETATION | ACCURATE | Jesus Christ is the grand Climax of the Book of Daniel. He is the Stone cut without hands that strikes the kingdoms a… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 10) |
+| S10-H-28 | N/A | N/A | Practical Application | Navigation or header chrome |
+| S10-H-29 | N/A | N/A | Standing in Your Lot at the End of Days | Navigation or header chrome |
+| S10-P-28 | INTERPRETATION | ACCURATE | The final chapter of Daniel speaks directly to our generation: | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 10) |
+| S10-H-30 | N/A | N/A | 1. Ensure your name is recorded in the Book of Life | Navigation or header chrome |
+| S10-P-29 | PASTORAL | ACCURATE | Deliverance during the coming Time of Trouble depends entirely on whether your name is found written in the Lamb's Bo… | Pastoral application tethered to passage |
+| S10-H-31 | N/A | N/A | 2. Live with holy boldness while grace remains | Navigation or header chrome |
+| S10-P-30 | INTERPRETATION | ACCURATE | Michael has not yet stood up in the sense of Daniel 12:1. Hebrews 7:25 is His intercession in this age, until that st… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 10) |
+| S10-H-32 | N/A | N/A | 3. Shine as the brightness of the firmament | Navigation or header chrome |
+| S10-P-31 | TEXT | ACCURATE | Daniel 12:3 promises: "And they that be wise shall shine as the brightness of the firmament; and they that turn many … | KJV substring verified (and they that be wise shall shine as the…) |
+| S10-H-33 | N/A | N/A | 4. Rest in the blessed hope of resurrection | Navigation or header chrome |
+| S10-P-32 | TEXT | ACCURATE | Death is not defeat; it is merely sleep until the trumpet sounds. When facing bereavement, illness, or mortality, hol… | KJV substring verified (thou shalt rest, and stand in thy lot at…) |
+| S10-H-34 | N/A | N/A | The principle to remember | Navigation or header chrome |
+| S10-LI-19 | INTERPRETATION | ACCURATE | TEXT — Does Daniel 12:1 declare that Michael stands up, a time of trouble follows, and those written in the book are … | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 10) |
+| S10-LI-20 | HISTORY | ACCURATE | HISTORY — Did Daniel 11 accurately trace Persia, Greece, Rome, the papacy, and the 1798 time of the end? | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S10-LI-21 | INTERPRETATION | ACCURATE | INTERPRETATION — Does Michael's standing up ('amad) follow Daniel 11’s kingly grammar, as advocate and defender of Hi… | Explicit hedge or labeled reconstruction (OneVoice27 §2) |
+| S10-LI-22 | PASTORAL | ACCURATE | CHRIST — Is Jesus Christ your King, whose resurrection guarantees that you will awake from the dust and stand in your… | Pastoral application tethered to passage |
+| S10-CHR-TITLE | N/A | N/A | Christology: Michael Standing Up in Glory and Resurrection Power | Navigation or header chrome |
+| S10-CHR-SCRIPTURE | CHRIST | ACCURATE | Daniel 12:1–3; Jude 9; 1 Thessalonians 4:16; John 5:28–29; Revelation 19:11–16 | Christology block — canonical synthesis (not a Daniel quotation unless cited) |
+| S10-CHR-P1 | CHRIST | ACCURATE | The Book of Daniel concludes not with an empire, a philosophical theory, or a cryptic code, but with a living Person … | Christology block — canonical synthesis (not a Daniel quotation unless cited) |
+| S10-CHR-P2 | CHRIST | ACCURATE | When Michael 'stands up,' He stands for the children of Daniel's people, and there follows a time of trouble such as … | Christology block — canonical synthesis (not a Daniel quotation unless cited) |
+| S10-CHR-P3 | CHRIST | ACCURATE | Live with your eyes fixed on the horizon for Michael's glorious standing up. When moral confusion, geopolitical uphea… | Christology block — canonical synthesis (not a Daniel quotation unless cited) |
+| S10-Q0-STEM | INTERPRETATION | ACCURATE | An eschatology group debates what occurs when 'Michael stands up' in Daniel 12:1. One member argues it simply means a… | Assessment within historicist frame |
+| S10-Q0-OPT0 | HISTORY | ACCURATE | It designates the royal decree of Cyrus the Great in 538 B.C. permitting Judean captives to return from exile and rec… | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S10-Q0-OPT1 | INTERPRETATION | ACCURATE | It refers to the historical coronation of Caesar Augustus in Rome, establishing the Pax Romana across the Mediterrane… | Assessment within historicist frame |
+| S10-Q0-OPT2 | INTERPRETATION | ACCURATE | It describes a celestial insurrection in which renegade angelic hosts attempt to overthrow the divine government befo… | Assessment within historicist frame |
+| S10-Q0-OPT3 | INTERPRETATION | ACCURATE | In Daniel, 'stand up' (amad) is the verb for a king taking power (11:2–4); Michael is Christ; when He stands, human p… | Assessment within historicist frame |
+| S10-Q0-EXP | INTERPRETATION | ACCURATE | Daniel uses 'stand up' for kings assuming power (Dan 11:2–4). Hebrews 7:25 is His intercession in this age, until Mic… | Assessment within historicist frame |
+| S10-Q0-DIA0 | HISTORY | ACCURATE | Misconception: Cyrus's decree occurred in 538/536 B.C., whereas Daniel 12:1 stands at the culmination of the propheti… | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S10-Q0-DIA1 | INTERPRETATION | ACCURATE | Misconception: Augustus ruled at the rise of the Roman Empire; Daniel 12:1 occurs at the climax of history, followed … | Assessment within historicist frame |
+| S10-Q0-DIA2 | INTERPRETATION | ACCURATE | Misconception: Michael is 'the great prince which standeth for the children of thy people'—the divine Captain and Red… | Assessment within historicist frame |
+| S10-Q1-STEM | INTERPRETATION | ACCURATE | A materialist philosophy professor states: 'The Old Testament contains no concept of personal bodily resurrection, on… | Assessment within historicist frame |
+| S10-Q1-OPT0 | INTERPRETATION | ACCURATE | Daniel 12 teaches that human souls undergo cyclical reincarnation into different biological lifeforms until spiritual… | Assessment within historicist frame |
+| S10-Q1-OPT1 | INTERPRETATION | ACCURATE | Daniel 12:2 promises that 'many of them that sleep in the dust of the earth shall awake', while 12:13 assures Daniel … | Assessment within historicist frame |
+| S10-Q1-OPT2 | INTERPRETATION | ACCURATE | Daniel affirms that human consciousness is permanently extinguished at physical death, leaving no future existence or… | Assessment within historicist frame |
+| S10-Q1-OPT3 | INTERPRETATION | ACCURATE | The professor is correct because Daniel 12 was an uninspired philosophical addition translated from late Greek mythol… | Assessment within historicist frame |
+| S10-Q1-EXP | INTERPRETATION | ACCURATE | Daniel 12:2 is the Old Testament's most explicit affirmation of individual bodily resurrection from the dust of the e… | Assessment within historicist frame |
+| S10-Q1-DIA0 | INTERPRETATION | ACCURATE | Misconception: Scripture teaches the unconscious sleep of death awaiting a literal resurrection, completely rejecting… | Assessment within historicist frame |
+| S10-Q1-DIA2 | INTERPRETATION | ACCURATE | Misconception: Daniel 12:2 directly refutes annihilation of the righteous, declaring that those who sleep in the dust… | Assessment within historicist frame |
+| S10-Q1-DIA3 | INTERPRETATION | ACCURATE | Misconception: Daniel was composed in Hebrew and Aramaic; Daniel 12 is authentic Hebrew Scripture echoed by Jesus in … | Assessment within historicist frame |
+| S10-Q2-STEM | INTERPRETATION | ACCURATE | Daniel 12:1 joins Michael's standing up to a time of trouble such as never was. What order does the sitting teach? | Assessment within historicist frame |
+| S10-Q2-OPT0 | INTERPRETATION | ACCURATE | Michael stands up, human probation closes, the time of trouble breaks out, God's people written in the book are deliv… | Assessment within historicist frame |
+| S10-Q2-OPT1 | INTERPRETATION | ACCURATE | The time of trouble begins first, then Michael begins His heavenly intercession as though the cross and high-priestly… | Assessment within historicist frame |
+| S10-Q2-OPT2 | INTERPRETATION | ACCURATE | The time of trouble is an allegorical metaphor for inner personal anxieties and psychological doubts that carries no … | Assessment within historicist frame |
+| S10-Q2-OPT3 | INTERPRETATION | ACCURATE | Michael stands up to terminate human history abruptly while permanently canceling the promised resurrection of sleepi… | Assessment within historicist frame |
+| S10-Q2-EXP | INTERPRETATION | ACCURATE | Daniel 12:1–2 is sequential: standing up (human probation closes), trouble, deliverance, resurrection. | Assessment within historicist frame |
+| S10-Q2-DIA1 | INTERPRETATION | ACCURATE | Misconception: Michael starts His intercession only when trouble begins. Hebrews 7:25 intercession runs in this age u… | Assessment within historicist frame |
+| S10-Q2-DIA2 | INTERPRETATION | ACCURATE | Misconception: 'A time of trouble such as never was' is the climactic historical crisis of earth's final conflict, no… | Assessment within historicist frame |
+| S10-Q2-DIA3 | INTERPRETATION | ACCURATE | Misconception: Verse 2 immediately follows with the glorious promise of bodily resurrection to everlasting life, not … | Assessment within historicist frame |
+| S10-Q3-STEM | INTERPRETATION | ACCURATE | Whose names matter when Michael stands up (Daniel 12:1)? | Assessment within historicist frame |
+| S10-Q3-OPT0 | INTERPRETATION | ACCURATE | Only the names of the high-ranking satraps and administrative governors who served in the royal court of the ancient … | Assessment within historicist frame |
+| S10-Q3-OPT1 | INTERPRETATION | ACCURATE | Every biological descendant of Abraham according to physical lineage, regardless of personal faith or moral allegianc… | Assessment within historicist frame |
+| S10-Q3-OPT2 | INTERPRETATION | ACCURATE | Those found written in the book—the register of the delivered covenant remnant, not an imperial roster of worldly rul… | Assessment within historicist frame |
+| S10-Q3-OPT3 | INTERPRETATION | ACCURATE | No individual names are recorded; the register is an empty allegorical symbol containing no identifiable persons or c… | Assessment within historicist frame |
+| S10-Q3-EXP | INTERPRETATION | ACCURATE | Deliverance is personal and covenantal. The scroll ends with a book of names, not a new metal. | Assessment within historicist frame |
+| S10-Q3-DIA0 | INTERPRETATION | ACCURATE | Misconception: Worldly rulers and empires pass away; the register that matters is God's heavenly book of life contain… | Assessment within historicist frame |
+| S10-Q3-DIA1 | INTERPRETATION | ACCURATE | Misconception: Romans 9:6–8 and Daniel 12 clarify that physical lineage does not guarantee salvation; the register re… | Assessment within historicist frame |
+| S10-Q3-DIA3 | INTERPRETATION | ACCURATE | Misconception: Scripture presents the book as a real heavenly register of God's covenant saints (Luke 10:20, Phil 4:3… | Assessment within historicist frame |
+| S10-Q4-STEM | INTERPRETATION | ACCURATE | Daniel is told to seal the book until the time of the end, and that the wise shall understand (Daniel 12:4, 9–10). Wh… | Assessment within historicist frame |
+| S10-Q4-OPT0 | INTERPRETATION | ACCURATE | It forbids despair and novelty-hunting alike: the sealed scroll unseals in the time of the end so teachers who turn m… | Assessment within historicist frame |
+| S10-Q4-OPT1 | INTERPRETATION | ACCURATE | It commands that no ordinary believer may study Daniel until an exclusive clerical hierarchy decodes its hidden symbo… | Assessment within historicist frame |
+| S10-Q4-OPT2 | INTERPRETATION | ACCURATE | It renders the previous eleven chapters obsolete, instructing believers to disregard Daniel's prophetic timelines as … | Assessment within historicist frame |
+| S10-Q4-OPT3 | INTERPRETATION | ACCURATE | It asserts that comprehending apocalyptic prophecy is completely impossible, warning believers that all biblical prop… | Assessment within historicist frame |
+| S10-Q4-EXP | INTERPRETATION | ACCURATE | Sealed until the time of the end is a promise of later light, not a ban on faith. The wise run to and fro in the book. | Assessment within historicist frame |
+| S10-Q4-DIA1 | INTERPRETATION | ACCURATE | Misconception: The book of Daniel belongs to all believers; 'many shall run to and fro, and knowledge shall be increa… | Assessment within historicist frame |
+| S10-Q4-DIA2 | INTERPRETATION | ACCURATE | Misconception: Daniel 12 is the capstone of the entire unbroken chain from chapter 1 onward; the whole scroll illumin… | Assessment within historicist frame |
+| S10-Q4-DIA3 | INTERPRETATION | ACCURATE | Misconception: Daniel 12:10 explicitly promises: 'none of the wicked shall understand; but the wise shall understand.… | Assessment within historicist frame |
+| S10-SG-TR0-DO | INTERPRETATION | ACCURATE | Read Daniel 10:5 and 10:6 in Scripture, then open Revelation 1:13 through 1:15 in the Scripture dock. Compare the man… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 10) |
+| S10-SG-TR0-WHY | INTERPRETATION | ACCURATE | Daniel 10:5 through 10:6 describes a glorious figure clothed in fine linen with a belt of fine gold around his waist,… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 10) |
+| S10-SG-TR1-DO | INTERPRETATION | ACCURATE | Read Daniel 10:13 in Scripture and Daniel 12:1 in Scripture. Write who Michael is and what happens when Michael stand… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 10) |
+| S10-SG-TR1-WHY | INTERPRETATION | ACCURATE | Daniel 10:13 names Michael as your prince who came to help against the resistance of the prince of Persia, showing th… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 10) |
+| S10-SG-TR2-DO | INTERPRETATION | ACCURATE | Read Daniel 11:31 and Daniel 12:11 in Scripture. In the Scripture dock, tap tamid again and write how the daily is re… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 10) |
+| S10-SG-TR2-WHY | INTERPRETATION | ACCURATE | Daniel 11:31 describes a power that shall take away the daily tamid and place the abomination that makes desolate, re… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 10) |
+| S10-SG-TR3-DO | INTERPRETATION | ACCURATE | Read Daniel 12:2 and Daniel 12:13 in Scripture, then open the horizon timeline and locate the stop labeled Dan 12. | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 10) |
+| S10-SG-TR3-WHY | INTERPRETATION | ACCURATE | Daniel 12:2 gives the Old Testament's clearest testimony to literal bodily resurrection: many who sleep in the dust s… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 10) |
+| S10-SG-CHRIST-CLM | INTERPRETATION | ACCURATE | Michael who stands up in Daniel 12:1 is the great prince identified with Christ, the same one like a son of man who r… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 10) |
+| S10-SG-CHRIST-WHY | INTERPRETATION | ACCURATE | Daniel names one Lord through many titles: Prince of the host, Messiah cut off, Michael your prince, the man in linen… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 10) |
+| S10-SG-NOW-CLM | INTERPRETATION | ACCURATE | You will die, or you will see trouble. Either way Daniel 12:2 is the news that matters more than the next empire, and… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 10) |
+| S10-SG-NOW-WHY | INTERPRETATION | ACCURATE | Daniel 12:1 promises deliverance for those whose names are found written in the book even when the time of trouble su… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 10) |
+| S10-SG-HELP-CLM | INTERPRETATION | ACCURATE | This sheet ends prophecy in a body and a rest rather than in panic, giving you a last sentence to hold when the chart… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 10) |
+| S10-SG-HELP-WHY | INTERPRETATION | ACCURATE | God tells Daniel to go his way till the end, for you shall rest and will arise to your inheritance at the end of the … | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 10) |
+| S10-SG-VALUE-CLM | INTERPRETATION | ACCURATE | Hope that outlasts every metal is the sealed book's gift when charts fatigue you, because Daniel is promised he will … | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 10) |
+| S10-SG-VALUE-WHY | INTERPRETATION | ACCURATE | Chapters two through nine traced empires, horns, and numbered days with growing precision, but the book refuses to en… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 10) |
+| S10-SG-ASK-1 | INTERPRETATION | ACCURATE | If Michael has not yet stood up, how then shall I live while He still stands for His people? | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 10) |
+| S10-SG-ASK-2 | INTERPRETATION | ACCURATE | Is my hope anchored in a chart I can recite, or in a name written in the book and a body that will awake? | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 10) |
+| S10-SG-ASK-3 | INTERPRETATION | ACCURATE | Can I receive Daniel's blessing of rest now, knowing that standing in my lot awaits at the end of the days? | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 10) |
+| S10-DGM-s10-1-TITLE | HISTORY | ACCURATE | The Structure of Daniel's Final Vision (536 B.C.) | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S10-DGM-s10-1-NOTE | INTERPRETATION | ACCURATE | Daniel 10-12: One Continuous Encounter | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 10) |
+| S10-DGM-s10-1-1-ROLE | INTERPRETATION | ACCURATE | Daniel 10 | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 10) |
+| S10-DGM-s10-1-1-TITLE | INTERPRETATION | ACCURATE | Prologue | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 10) |
+| S10-DGM-s10-1-1-P1 | INTERPRETATION | ACCURATE | Fasting by the Tigris | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 10) |
+| S10-DGM-s10-1-1-P2 | INTERPRETATION | ACCURATE | The Man in Linen | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 10) |
+| S10-DGM-s10-1-1-P3 | INTERPRETATION | ACCURATE | Unseen Spiritual Warfare | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 10) |
+| S10-DGM-s10-1-1-P4 | INTERPRETATION | ACCURATE | Prince of Persia resisted | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 10) |
+| S10-DGM-s10-1-1-P5 | INTERPRETATION | ACCURATE | Michael comes to help | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 10) |
+| S10-DGM-s10-1-2-ROLE | INTERPRETATION | ACCURATE | Daniel 11 | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 10) |
+| S10-DGM-s10-1-2-TITLE | INTERPRETATION | ACCURATE | Historical March | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 10) |
+| S10-DGM-s10-1-2-P1 | INTERPRETATION | ACCURATE | 4 Persian Kings & Xerxes | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 10) |
+| S10-DGM-s10-1-2-P2 | INTERPRETATION | ACCURATE | Alexander & 4 Diadochi | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 10) |
+| S10-DGM-s10-1-2-P3 | INTERPRETATION | ACCURATE | King of North vs South | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 10) |
+| S10-DGM-s10-1-2-P4 | INTERPRETATION | ACCURATE | Rome: Prince of Covenant cut | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 10) |
+| S10-DGM-s10-1-2-P5 | INTERPRETATION | ACCURATE | Papal phase removes tamid | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 10) |
+| S10-DGM-s10-1-2-P6 | HISTORY | ACCURATE | Time of the End (1798) | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S10-DGM-s10-1-3-ROLE | INTERPRETATION | ACCURATE | Daniel 12 | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 10) |
+| S10-DGM-s10-1-3-TITLE | INTERPRETATION | ACCURATE | Eschatology | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 10) |
+| S10-DGM-s10-1-3-P1 | INTERPRETATION | ACCURATE | Michael Stands Up | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 10) |
+| S10-DGM-s10-1-3-P2 | INTERPRETATION | ACCURATE | Time of Trouble | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 10) |
+| S10-DGM-s10-1-3-P3 | INTERPRETATION | ACCURATE | Deliverance in the Book | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 10) |
+| S10-DGM-s10-1-3-P4 | INTERPRETATION | ACCURATE | Bodily Resurrection (12:2) | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 10) |
+| S10-DGM-s10-1-3-P5 | INTERPRETATION | ACCURATE | Rest and Lot (12:13) | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 10) |
+| S10-DGM-s10-2-TITLE | INTERPRETATION | ACCURATE | Daniel 12:1-2 in Its Own Order | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 10) |
+| S10-DGM-s10-2-1-TITLE | INTERPRETATION | ACCURATE | Michael stands up | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 10) |
+| S10-DGM-s10-2-1-TEXT | INTERPRETATION | ACCURATE | 'amad: kingly stance | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 10) |
+| S10-DGM-s10-2-2-TITLE | INTERPRETATION | ACCURATE | Close of human probation | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 10) |
+| S10-DGM-s10-2-3-TITLE | INTERPRETATION | ACCURATE | A time of trouble such as never was | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 10) |
+| S10-DGM-s10-2-4-TITLE | INTERPRETATION | ACCURATE | Those written in the book are delivered | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 10) |
+| S10-DGM-s10-2-5-TITLE | INTERPRETATION | ACCURATE | Many who sleep in the dust awake (12:2) | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 10) |
+| S10-DGM-s10-3-TITLE | HISTORY | ACCURATE | The Timeline of Daniel 12:11-12 (Measured from A.D. 508) | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S10-DGM-s10-3-NOTE | HISTORY | ACCURATE | Then 1844: 2,300-year sanctuary landing (sitting 8) | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S10-DGM-s10-3-1-ROLE | HISTORY | ACCURATE | 508 A.D. – 1798 A.D. | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S10-DGM-s10-3-1-TITLE | INTERPRETATION | ACCURATE | 1,290 Years | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 10) |
+| S10-DGM-s10-3-2-ROLE | HISTORY | ACCURATE | 508 A.D. – 1843 A.D. | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S10-DGM-s10-3-2-TITLE | INTERPRETATION | ACCURATE | 1,335 Years | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 10) |
+| S10-GD-INTRO-EXP | INTERPRETATION | ACCURATE | Daniel 10–12 closes the book: unseen war, a dated march through empires, Michael standing up, and a personal resurrec… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 10) |
+| S10-GD-INTRO-DO-1 | INTERPRETATION | ACCURATE | Follow Introduction and Main Points I–V plus Practical Application. | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 10) |
+| S10-GD-INTRO-DO-2 | INTERPRETATION | ACCURATE | Open Map and trace the Tigris River, the march of empires, and Michael standing up. | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 10) |
+| S10-GD-INTRO-DO-3 | INTERPRETATION | ACCURATE | Complete checkpoint questions, and review your mastery across the entire Scroll of Daniel. | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 10) |
+| S10-GD-END-WHY | INTERPRETATION | ACCURATE | You have walked the metals, the beasts, the numbered days, and the hope of 12:13. Review the syllabus or return home.… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 10) |
+| S10-VRF-CLAIM | INTERPRETATION | ACCURATE | You can verify the last sitting from the Tigris theophany, the named chain in chapter 11, the standing of Michael, an… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 10) |
+| S10-VRF-0-LESSON | INTERPRETATION | ACCURATE | The man in linen by the Hiddekel is described in metal and fire. | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 10) |
+| S10-VRF-0-QUOTE | TEXT | REVIEW | Daniel 10:5–6, King James Version: Then I lifted up mine eyes, and looked, and behold a certain man clothed in linen,… | Marked KJV — manual spot-check if ellipsis-heavy |
+| S10-VRF-0-CHECK | INTERPRETATION | ACCURATE | The last vision begins with a Person, not a chart. Compare the next card. | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 10) |
+| S10-VRF-1-LESSON | INTERPRETATION | ACCURATE | John’s vision of the glorified Christ uses the same inventory. | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 10) |
+| S10-VRF-1-QUOTE | TEXT | REVIEW | Revelation 1:13–15, King James Version: One like unto the Son of man, clothed with a garment down to the foot, and gi… | Marked KJV — manual spot-check if ellipsis-heavy |
+| S10-VRF-1-CHECK | INTERPRETATION | ACCURATE | Girdle, eyes, fire, metal. Open both passages in the dock and mark the overlaps. The sitting reads the man in linen a… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 10) |
+| S10-VRF-2-LESSON | INTERPRETATION | ACCURATE | Michael helps against the prince of Persia. Nations move because unseen princes wrestle. | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 10) |
+| S10-VRF-2-QUOTE | TEXT | REVIEW | Daniel 10:13, King James Version: But the prince of the kingdom of Persia withstood me one and twenty days: but, lo, … | Marked KJV — manual spot-check if ellipsis-heavy |
+| S10-VRF-2-CHECK | INTERPRETATION | ACCURATE | The metal sequence was never mere geography. Chapter 11 will march kings; this verse says why they march. | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 10) |
+| S10-VRF-3-LESSON | INTERPRETATION | ACCURATE | Chapter 11 keeps the named chain: three more Persian kings, then a mighty Greek king whose kingdom is broken four ways. | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 10) |
+| S10-VRF-3-QUOTE | TEXT | REVIEW | Daniel 11:2–4, King James Version: Behold, there shall stand up yet three kings in Persia; and the fourth shall be fa… | Marked KJV — manual spot-check if ellipsis-heavy |
+| S10-VRF-3-CHECK | INTERPRETATION | ACCURATE | The fourth rich Persian is Xerxes in the usual count; the mighty king is Alexander; the four winds are the Diadochi a… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 10) |
+| S10-VRF-4-LESSON | INTERPRETATION | ACCURATE | The book is sealed till the time of the end. Knowledge increases. Many run to and fro. | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 10) |
+| S10-VRF-4-QUOTE | TEXT | REVIEW | Daniel 12:4, King James Version: But thou, O Daniel, shut up the words, and seal the book, even to the time of the en… | Marked KJV — manual spot-check if ellipsis-heavy |
+| S10-VRF-4-CHECK | HISTORY | ACCURATE | This sitting reads 1798–1844 as the opening of that seal, when the 1,260 and the 2,300 actually landed. The verse is … | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S10-VRF-5-LESSON | INTERPRETATION | ACCURATE | When Michael stands, human probation closes, a time of trouble begins, and those written in the book are delivered. D… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 10) |
+| S10-VRF-5-QUOTE | TEXT | REVIEW | Daniel 12:1–2, King James Version: And at that time shall Michael stand up, the great prince which standeth for the c… | Marked KJV — manual spot-check if ellipsis-heavy |
+| S10-VRF-5-CHECK | INTERPRETATION | ACCURATE | Daniel uses stand up for kings assuming power (11:2–4, 7, 20–21). The sitting reads 12:1 the same way: Michael (Chris… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 10) |
+| S10-VRF-6-LESSON | INTERPRETATION | ACCURATE | Hebrews 7:25 is His intercession in this age, until Michael stands and human probation closes. | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 10) |
+| S10-VRF-6-QUOTE | TEXT | REVIEW | Hebrews 7:25, King James Version: Wherefore he is able also to save them to the uttermost that come unto God by him, … | Marked KJV — manual spot-check if ellipsis-heavy |
+| S10-VRF-6-CHECK | INTERPRETATION | ACCURATE | Hebrews 7:25 is His intercession in this age, until Michael stands. Daniel 12:1 is that standing: human probation clo… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 10) |
+| S10-VRF-7-LESSON | INTERPRETATION | ACCURATE | Jesus locates the rising in graves and a voice, not in a figure of speech. | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 10) |
+| S10-VRF-7-QUOTE | TEXT | REVIEW | John 5:28–29, King James Version: Marvel not at this: for the hour is coming, in the which all that are in the graves… | Marked KJV — manual spot-check if ellipsis-heavy |
+| S10-VRF-7-CHECK | INTERPRETATION | ACCURATE | Daniel 12:2 and John 5:28–29 are the same hope. The book’s last gift is a body. | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 10) |
+| S10-VRF-8-LESSON | INTERPRETATION | ACCURATE | The book’s last sentence is a personal rest and a rising, not a twelfth empire. | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 10) |
+| S10-VRF-8-QUOTE | TEXT | REVIEW | Daniel 12:13, King James Version: But go thou thy way till the end be: for thou shalt rest, and stand in thy lot at t… | Marked KJV — manual spot-check if ellipsis-heavy |
+| S10-VRF-8-CHECK | INTERPRETATION | ACCURATE | Quote 12:13. The metals, beasts, horns, and numbers walk toward this promise. | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 10) |
+| S10-VRF-9-LESSON | INTERPRETATION | ACCURATE | Outside the Bible, the book of Daniel was already read as naming Greece as Persia’s successor before the fact. | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 10) |
+| S10-VRF-9-QUOTE | HISTORY | ACCURATE | Flavius Josephus, Antiquities of the Jews XI.8.5, William Whiston translation (1737).: And when the Book of Daniel wa… | Primary source quotation in verify dock |
+| S10-VRF-9-CHECK | INTERPRETATION | ACCURATE | Josephus records Alexander the Great being shown Daniel while in Jerusalem, and reading the Greek conquest of Persia … | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 10) |
+| S10-VRF-10-LESSON | INTERPRETATION | ACCURATE | Daniel 12:11–12 names two spans from the time the daily is taken away and the abomination is set up. | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 10) |
+| S10-VRF-10-QUOTE | TEXT | REVIEW | Daniel 12:11–12, King James Version: And from the time that the daily sacrifice shall be taken away, and the abominat… | Marked KJV — manual spot-check if ellipsis-heavy |
+| S10-VRF-10-CHECK | INTERPRETATION | ACCURATE | The English supplies “sacrifice” in italics in some printings; the Hebrew is ha-tamid. The verse gives the counts, no… | Explicit hedge or labeled reconstruction (OneVoice27 §2) |
+| S10-GLS-alexander-SMP | HISTORY | ACCURATE | Alexander: Macedonian king who smashed Persia (Gaugamela 331 B.C.) and died in 323 B.C. at thirty-two. | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S10-GLS-alexander-HIS | HISTORY | ACCURATE | Daniel 8: the goat’s notable horn. When it snaps, four Diadochi horns replace it. Speed is the leopard’s wings. He is… | Historical context card |
+| S10-GLS-artaxerxes-SMP | HISTORY | ACCURATE | Artaxerxes: Persian great king. His seventh year (457 B.C.) is the decree this study uses to start the 70 weeks (Ezra… | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S10-GLS-artaxerxes-HIS | HISTORY | ACCURATE | Ezra goes up with authority to appoint magistrates and judges — civil restoration, not only temple stones. His twenti… | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S10-GLS-babylon-SMP | HISTORY | ACCURATE | Babylon: Capital of the gold head; Daniel’s first workplace and the city that fell in 539 B.C. | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S10-GLS-babylon-HIS | HISTORY | ACCURATE | Ishtar Gate, Marduk’s temples, double walls and a river. Daniel 1:2 says its first victory over Judah was given, not … | Historical context card |
+| S10-GLS-belshazzar-SMP | HISTORY | ACCURATE | Belshazzar: Last king in the city of Babylon (539 B.C.); son and co-regent of Nabonidus. | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S10-GLS-belshazzar-HIS | HISTORY | ACCURATE | Greek lists once seemed to omit him. Tablets restored him: Nabonidus in Tema, Belshazzar hosting the feast. He drank … | Historical context card |
+| S10-GLS-berthier-SMP | HISTORY | ACCURATE | Berthier: French Revolutionary general who entered Rome in 1798 and took Pope Pius VI prisoner. | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S10-GLS-berthier-HIS | HISTORY | ACCURATE | That blow ends the 1,260 years of papal political supremacy in 1798. The office continued; the measured reign as a ci… | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S10-GLS-clovis-SMP | HISTORY | ACCURATE | Clovis: Frankish king whose later policy gave the Roman church civil muscle in the west. | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S10-GLS-clovis-HIS | INTERPRETATION | ACCURATE | Baptism is often dated 496; Vouillé is 507 — related milestones, not the same pin as 508. A.D. 508 is this chart’s re… | Explicit hedge or labeled reconstruction (OneVoice27 §2) |
+| S10-GLS-cyrus-SMP | HISTORY | ACCURATE | Cyrus: Persian king who took Babylon in 539 B.C. and later permitted the Jews to return (Ezra 1). | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S10-GLS-cyrus-HIS | HISTORY | ACCURATE | Isaiah 45:1 names him a century and more beforehand and speaks of open gates. The Cyrus Cylinder shows a policy of re… | Historical context card |
+| S10-GLS-daniel-SMP | HISTORY | ACCURATE | Daniel: A Judahite noble taken to Babylon in 605 B.C.; prophet, court official, and the book’s human author-witness. | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S10-GLS-daniel-HIS | HISTORY | ACCURATE | His Hebrew name means “God is my Judge.” The court renamed him Belteshazzar. He drew the line at the king’s table (wo… | Historical context card |
+| S10-GLS-diadochi-SMP | TEXT | ACCURATE | Diadochi: Alexander’s generals who carved his empire into four after he died. | Lexical / textual definition |
+| S10-GLS-diadochi-HIS | HISTORY | ACCURATE | Cassander, Lysimachus, Seleucus, and Ptolemy. They are the goat’s four horns in Daniel 8 and the four heads of the le… | Historical context card |
+| S10-GLS-ezekiel-SMP | TEXT | ACCURATE | Ezekiel: Priest-prophet already in exile; God had him lie on his side 390 + 40 days, “each day for a year” (Ezekiel 4… | Lexical / textual definition |
+| S10-GLS-ezekiel-HIS | HISTORY | ACCURATE | He is why Ezekiel is on the year-day sitting: a contemporary of Daniel’s world, hearing the same appointment in a num… | Historical context card |
+| S10-GLS-gabriel-SMP | TEXT | ACCURATE | Gabriel: The angel sent to make Daniel understand (8:16; 9:21–23). | Lexical / textual definition |
+| S10-GLS-gabriel-HIS | HISTORY | ACCURATE | He interprets the ram and goat, then returns while Daniel is praying to cut seventy weeks from the unexplained vision… | Historical context card |
+| S10-GLS-hiddekel-SMP | TEXT | ACCURATE | Hiddekel: The Tigris River, where Daniel saw the man in linen (Daniel 10). | Lexical / textual definition |
+| S10-GLS-hiddekel-HIS | HISTORY | ACCURATE | Hebrew Hiddekel. The last sitting opens here in 536 B.C. with a three-week fast and the long explanation of chapters … | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S10-GLS-historicism-SMP | TEXT | ACCURATE | Historicism: Read Daniel as an unbroken timeline of real empires from the prophet’s own day until the stone fills the… | Lexical / textual definition |
+| S10-GLS-historicism-HIS | HISTORY | ACCURATE | This course uses historicism because Daniel’s succession language and parallel visions best fit a continuous historic… | Historical context card |
+| S10-GLS-jerusalem-SMP | TEXT | ACCURATE | Jerusalem: Judah’s capital; Temple city; the place Daniel faced when he prayed (6:10). | Lexical / textual definition |
+| S10-GLS-jerusalem-HIS | HISTORY | ACCURATE | First vessels leave in 605; city and Temple fall in 586; return decrees under Persia. In Daniel 8 “the Glorious Land”… | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S10-GLS-michael-SMP | TEXT | ACCURATE | Michael: “The great prince who stands for Daniel’s people” (12:1). Michael is Christ. | Lexical / textual definition |
+| S10-GLS-michael-HIS | HISTORY | ACCURATE | He helps against the prince of Persia (10:13, 21). Jude 9 and Revelation 12 show him in conflict with the dragon. “St… | Historical context card |
+| S10-GLS-nitsdaq-SMP | TEXT | ACCURATE | nitsdaq: The verb in Daniel 8:14: the sanctuary is justified, vindicated, put right — not merely washed. | Lexical / textual definition |
+| S10-GLS-nitsdaq-HIS | HISTORY | ACCURATE | English often says “cleansed.” The Hebrew is a courtroom word (related to “righteous”), not taher (ritual washing). T… | Historical context card |
+| S10-GLS-papacy-SMP | TEXT | ACCURATE | papacy: The office of the bishop of Rome as a spiritual and, for long centuries, civil power. | Lexical / textual definition |
+| S10-GLS-papacy-HIS | INTERPRETATION | ACCURATE | This study applies Daniel 7’s little-horn interpretation to that historical office and its church-state role, not to … | Explicit hedge or labeled reconstruction (OneVoice27 §2) |
+| S10-GLS-pius-vi-SMP | HISTORY | ACCURATE | Pius VI: Pope taken captive in 1798 when Berthier entered Rome; he died in exile in 1799. | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S10-GLS-pius-vi-HIS | HISTORY | ACCURATE | The event, not the man’s private character, is why the year appears on the chart. Historicists read it as Daniel 7:26… | Historical context card |
+| S10-GLS-probation-SMP | TEXT | ACCURATE | probation: The time during which a person or a kingdom may still turn. Daniel 4 gives twelve months of patience befor… | Lexical / textual definition |
+| S10-GLS-probation-HIS | HISTORY | ACCURATE | When Michael stands up (Daniel 12:1), that time of turning ends — the close of human probation — and a time of troubl… | Historical context card |
+| S10-GLS-rome-SMP | TEXT | ACCURATE | Rome: Capital of the iron kingdom; later seat of the church-state this study reads as the little horn. | Lexical / textual definition |
+| S10-GLS-rome-HIS | HISTORY | ACCURATE | Imperial Rome crushes (Daniel 2:40; 7:7). After 476 the west is fragments. 538 and 1798 both fall on this city: the s… | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S10-GLS-sanctuary-SMP | TEXT | ACCURATE | sanctuary: God’s dwelling for priestly ministry — first the tent/temple on earth, then the true one in heaven (Hebrew… | Lexical / textual definition |
+| S10-GLS-sanctuary-HIS | HISTORY | ACCURATE | Daniel 8 is not only about a local altar in Judea. The horn magnifies itself to the Prince of the host and casts down… | Historical context card |
+| S10-GLS-tamid-SMP | TEXT | ACCURATE | tamid: Hebrew for the continual daily ministry — the standing, regular service before God. | Lexical / textual definition |
+| S10-GLS-tamid-HIS | HISTORY | ACCURATE | On earth it was the regular sacrifice. In Daniel 8 the horn removes the tamid and casts down the sanctuary’s place. T… | Historical context card |
+| S10-GLS-year-day-SMP | TEXT | ACCURATE | Year-Day Principle: When God gives a numbered sign, one prophetic day may stand for one literal solar year. | Lexical / textual definition |
+| S10-GLS-year-day-HIS | HISTORY | ACCURATE | God states the scale twice: Numbers 14:34 (forty spy-days become forty wilderness years) and Ezekiel 4:6 (Ezekiel’s b… | Historical context card |

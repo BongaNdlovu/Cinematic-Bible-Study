@@ -1,0 +1,296 @@
+# Sitting 0 — sentence-level proof
+
+**Units:** 290 · **Content hash:** `660cebe5d28f3538`
+
+| Unit ID | Tag | Verdict | Text (excerpt) | Proof |
+|---------|-----|---------|----------------|-------|
+| S00-TOC | N/A | N/A | Follow this sitting Roadmap · one-page infographic Introduction · History is not an accident I · Three hermeneutical … | Navigation or header chrome |
+| S00-NEXT | N/A | N/A | Next lesson Sheet 1 — Daniel 1: Faithfulness in Babylon The prophetic blueprint now meets a teenage captive. Daniel w… | Navigation or header chrome |
+| S00-H-01 | N/A | N/A | Introduction | Navigation or header chrome |
+| S00-H-02 | N/A | N/A | History Is Not an Accident | Navigation or header chrome |
+| S00-P-01 | HISTORY | ACCURATE | When the book of Daniel opens, the world appears broken. In 605 B.C., Nebuchadnezzar sweeps down the Mediterranean co… | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S00-P-02 | INTERPRETATION | ACCURATE | Yet Daniel 1:2 immediately upends that view: | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 0) |
+| S00-BQ-01 | TEXT | ACCURATE | "And the Lord gave Jehoiakim king of Judah into his hand..." — Daniel 1:2 (KJV) | KJV substring verified (and the lord gave jehoiakim king of juda…) |
+| S00-P-03 | INTERPRETATION | ACCURATE | Human tyrants do not direct history independently. Nebuchadnezzar did not conquer Jerusalem by his own strength; God … | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 0) |
+| S00-P-04 | INTERPRETATION | ACCURATE | Biblical prophecy is not a sensational riddle designed to entertain curiosity. It is God's historical roadmap, demons… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 0) |
+| S00-H-03 | N/A | N/A | Part I | Navigation or header chrome |
+| S00-H-04 | N/A | N/A | The Three Hermeneutical Roads | Navigation or header chrome |
+| S00-H-05 | N/A | N/A | How you read decides what you see | Navigation or header chrome |
+| S00-P-05 | INTERPRETATION | ACCURATE | Before you identify a single prophetic animal, horn, or date, you make a hermeneutical choice. Hermeneutics is simply… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 0) |
+| S00-DIA-01 | HISTORY | ACCURATE | THE THREE INTERPRETIVE SCHOOLS 1. HISTORICISM (the continuous historical reading this course defends) Babylon ──▶ Med… | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S00-H-06 | N/A | N/A | 1. Historicism — the continuous historical model | Navigation or header chrome |
+| S00-P-06 | INTERPRETATION | ACCURATE | Historicism reads Daniel and Revelation as an unbroken, contiguous chain of fulfillment extending from the prophet's … | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 0) |
+| S00-P-07 | HISTORY | ACCURATE | Who held it? Hippolytus of Rome (c. A.D. 200) names Babylon, Persia, Greece, and Rome as one sequence of four kingdom… | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S00-P-08 | INTERPRETATION | ACCURATE | Why it works: It obeys the explicit text of Daniel 2:38–44. Daniel names Babylon as the head of gold, and tells the k… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 0) |
+| S00-H-07 | N/A | N/A | 2. Preterism — confined to the past | Navigation or header chrome |
+| S00-P-09 | HISTORY | ACCURATE | Preterism claims that the prophecies of Daniel were exhausted in the second century B.C. during the persecutions of A… | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S00-P-10 | INTERPRETATION | ACCURATE | Origins: It was first systematically formulated by the Spanish Jesuit scholar Luis de Alcázar in his 1614 work Vestig… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 0) |
+| S00-P-11 | INTERPRETATION | ACCURATE | The structural flaw: It terminates Daniel's timeline centuries before the cross or the Roman empire's collapse, turni… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 0) |
+| S00-H-08 | N/A | N/A | 3. Futurism — postponed to the end of time | Navigation or header chrome |
+| S00-P-12 | INTERPRETATION | ACCURATE | Futurism argues that Daniel's final prophetic timeline — specifically the 70th week of Daniel 9 — has been paused, in… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 0) |
+| S00-P-13 | HISTORY | ACCURATE | Origins: Patristic readers already expected a future individual antichrist; Hippolytus of Rome (c. A.D. 200) is the w… | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S00-P-14 | INTERPRETATION | ACCURATE | The structural flaw: It shatters the historical continuity of the text, creating an arbitrary 2,000-year parenthetica… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 0) |
+| S00-H-09 | N/A | N/A | The historical catalyst · Council of Trent (1545–1563) | Navigation or header chrome |
+| S00-P-15 | INTERPRETATION | ACCURATE | Neither Preterism nor Futurism emerged in a vacuum. During the Counter-Reformation, Protestant Reformers used the his… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 0) |
+| S00-H-10 | N/A | N/A | INTERPRETATION | Navigation or header chrome |
+| S00-P-16 | INTERPRETATION | ACCURATE | Historicism keeps Daniel's metals one chain from Babylon to Christ's kingdom. Preterism parks the chain in antiquity.… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 0) |
+| S00-H-11 | N/A | N/A | Part II | Navigation or header chrome |
+| S00-H-12 | N/A | N/A | The Master Hermeneutical Scale | Navigation or header chrome |
+| S00-H-13 | N/A | N/A | The year-day principle | Navigation or header chrome |
+| S00-P-17 | INTERPRETATION | ACCURATE | Apocalyptic visions use symbolic imagery: beasts symbolize kingdoms (Daniel 7:23), and horns symbolize kings or dynas… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 0) |
+| S00-P-18 | INTERPRETATION | ACCURATE | Scripture defines its own prophetic time scale rather than leaving it to human conjecture: | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 0) |
+| S00-DIA-02 | TEXT | ACCURATE | THE BIBLICAL YEAR-DAY SCALE ----------------------------------------------------------------------------- Numbers 14:… | KJV substring verified (each day for a year…) |
+| S00-H-14 | N/A | N/A | The Torah foundation (Numbers 14:34) | Navigation or header chrome |
+| S00-P-19 | INTERPRETATION | ACCURATE | When Israel rebelled after forty days of spying out Canaan, God declared a one-to-one judicial conversion: "each day … | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 0) |
+| S00-H-15 | N/A | N/A | The exile foundation (Ezekiel 4:6) | Navigation or header chrome |
+| S00-P-20 | INTERPRETATION | ACCURATE | Ezekiel, Daniel's direct contemporary in Babylon, was commanded to perform a symbolic act representing Jerusalem's si… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 0) |
+| S00-H-16 | N/A | N/A | The self-checking anchor (Daniel 9:24–27) | Navigation or header chrome |
+| S00-P-21 | HISTORY | ACCURATE | Gabriel assigns "seventy weeks" (490 days) to the Jewish nation to finish transgression, make reconciliation for iniq… | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S00-P-22 | INTERPRETATION | ACCURATE | Once the year-day principle is established at the cross in Daniel 9, the longer prophetic spans — such as the 1,260 d… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 0) |
+| S00-H-17 | N/A | N/A | An honest reading | Navigation or header chrome |
+| S00-P-23 | HISTORY | ACCURATE | Numbers 14:34 and Ezekiel 4:6 set the scale: one prophetic day for one year. Daniel 9 applies it: the seventy weeks (… | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S00-H-18 | N/A | N/A | Part III | Navigation or header chrome |
+| S00-H-19 | N/A | N/A | The Centrality of Jesus Christ | Navigation or header chrome |
+| S00-H-20 | N/A | N/A | The redemptive core of prophecy | Navigation or header chrome |
+| S00-P-24 | INTERPRETATION | ACCURATE | Prophetic interpretation must never become a cold intellectual exercise or a tool for political fear-mongering. The u… | Explicit hedge or labeled reconstruction (OneVoice27 §2) |
+| S00-DIA-03 | INTERPRETATION | ACCURATE | THE REDEMPTIVE CENTER ✝ (Daniel 9:24–27) MESSIAH CUT OFF FOR US │ ┌───────────────────────────┴──────────────────────… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 0) |
+| S00-H-21 | N/A | N/A | 1. Jesus in Daniel 1 — the sovereign hand | Navigation or header chrome |
+| S00-P-25 | INTERPRETATION | ACCURATE | The exile appeared to be the death of the covenant. But Daniel 1:2 shows that the same God who later gave His Son on … | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 0) |
+| S00-H-22 | N/A | N/A | 2. Jesus in Daniel 9 — the slain sacrifice | Navigation or header chrome |
+| S00-P-26 | INTERPRETATION | ACCURATE | The pinnacle of Daniel's prophetic timeline is not an earthly empire or a future political tyrant; it is the cross. D… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 0) |
+| S00-H-23 | N/A | N/A | 3. Jesus in Daniel 2 — the returning King | Navigation or header chrome |
+| S00-P-27 | TEXT | ACCURATE | The historicist sequence does not end with Rome, nor does it stall in the divided kingdoms of Europe (the feet of iro… | KJV substring verified (cut out without hands…) |
+| S00-BQ-02 | TEXT | ACCURATE | "And beginning at Moses and all the prophets, he expounded unto them in all the scriptures the things concerning hims… | KJV substring verified (and beginning at moses and all the proph…) |
+| S00-H-24 | N/A | N/A | CHRIST | Navigation or header chrome |
+| S00-P-28 | INTERPRETATION | ACCURATE | Every empire on the chain serves the story of the Messiah cut off for us (Daniel 9) and the King who fills the earth … | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 0) |
+| S00-H-25 | N/A | N/A | Part IV | Navigation or header chrome |
+| S00-H-26 | N/A | N/A | Why Historicism Matters Today | Navigation or header chrome |
+| S00-P-29 | INTERPRETATION | ACCURATE | If all prophecy ended back in the days of Antiochus IV (Preterism), then Scripture offers modern believers no roadmap… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 0) |
+| S00-P-30 | INTERPRETATION | ACCURATE | Historicism provides believers with clarity and reassurance: | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 0) |
+| S00-H-27 | N/A | N/A | You know where you stand | Navigation or header chrome |
+| S00-P-31 | PASTORAL | ACCURATE | You live in the final segment of human history — the divided nations (the feet of iron and clay) — right before the s… | Pastoral application tethered to passage |
+| S00-H-28 | N/A | N/A | You are freed from fear | Navigation or header chrome |
+| S00-P-32 | INTERPRETATION | ACCURATE | Present superpowers, global crises, and shifting alliances do not dictate the future. The same God who governed Babyl… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 0) |
+| S00-H-29 | N/A | N/A | You rest in Christ's triumph | Navigation or header chrome |
+| S00-P-33 | INTERPRETATION | ACCURATE | Prophecy proves God's absolute reliability. The same prophetic timeline that precisely predicted Christ's first adven… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 0) |
+| S00-H-30 | N/A | N/A | Before you accept a prophetic conclusion | Navigation or header chrome |
+| S00-LI-01 | INTERPRETATION | ACCURATE | TEXT — Does Daniel's succession language ("after thee") support it? | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 0) |
+| S00-LI-02 | INTERPRETATION | ACCURATE | HISTORY — Does the chain stay continuous, or does it break into past-only or future-only voids? | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 0) |
+| S00-LI-03 | INTERPRETATION | ACCURATE | INTERPRETATION — Is the year-day scale anchored at the cross in Daniel 9? | Explicit hedge or labeled reconstruction (OneVoice27 §2) |
+| S00-LI-04 | INTERPRETATION | ACCURATE | CHRIST — Does this lead you to the Messiah cut off for us and the Stone-King who fills the earth? | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 0) |
+| S00-CHR-TITLE | N/A | N/A | Christology: The Unbroken Chain Exists to Exalt Jesus Christ | Navigation or header chrome |
+| S00-CHR-SCRIPTURE | CHRIST | ACCURATE | Daniel 1:2; Daniel 9:26; Daniel 2:44; Luke 24:27 | Christology block — canonical synthesis (not a Daniel quotation unless cited) |
+| S00-CHR-P1 | CHRIST | ACCURATE | The historicist chain is not a political chart. It exists to exalt Jesus Christ as Lord of history and personal Redee… | Christology block — canonical synthesis (not a Daniel quotation unless cited) |
+| S00-CHR-P2 | CHRIST | ACCURATE | On the road to Emmaus, Jesus expounded in all the Scriptures the things concerning Himself (Luke 24:27). Prophecy tha… | Christology block — canonical synthesis (not a Daniel quotation unless cited) |
+| S00-CHR-P3 | CHRIST | ACCURATE | The timeline that predicted Christ's first advent to bear our sins guarantees His second advent to reign as King. Res… | Christology block — canonical synthesis (not a Daniel quotation unless cited) |
+| S00-Q0-STEM | HISTORY | ACCURATE | A Bible teacher claims Daniel's kingdom sequence was fulfilled entirely under Antiochus IV and A.D. 70, so nothing in… | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S00-Q0-OPT0 | INTERPRETATION | ACCURATE | Historicism — it interprets apocalyptic symbols as an unbroken, unfolding continuum of history from Neo-Babylon to th… | Assessment within historicist frame |
+| S00-Q0-OPT1 | INTERPRETATION | ACCURATE | Preterism — it terminates Daniel's timeline in antiquity, leaving no continuous chain through Rome, divided Europe, a… | Assessment within historicist frame |
+| S00-Q0-OPT2 | INTERPRETATION | ACCURATE | Futurism — it severs the prophetic sequence by inserting a multi-millennial parenthetical gap before a speculative fi… | Assessment within historicist frame |
+| S00-Q0-OPT3 | INTERPRETATION | ACCURATE | Idealism — it dissolves concrete imperial history into timeless allegorical battles between good and evil, stripping … | Assessment within historicist frame |
+| S00-Q0-EXP | HISTORY | ACCURATE | Confining fulfillment to the second century B.C. or A.D. 70 is preterism's core move — it breaks the contiguous chain… | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S00-Q0-DIA0 | INTERPRETATION | ACCURATE | Misconception: Historicism is the continuous chain model this course defends — tracing history from Babylon through R… | Assessment within historicist frame |
+| S00-Q0-DIA2 | INTERPRETATION | ACCURATE | Misconception: Futurism breaks the chain with an unwritten end-time gap, whereas the teacher in this scenario confine… | Assessment within historicist frame |
+| S00-Q0-DIA3 | HISTORY | ACCURATE | Misconception: The teacher anchors fulfillments to concrete ancient dates (Antiochus IV and A.D. 70) — that is preter… | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S00-Q1-STEM | INTERPRETATION | ACCURATE | Why do historicist interpreters apply the year-day principle to Daniel 9's seventy weeks? | Assessment within historicist frame |
+| S00-Q1-OPT0 | INTERPRETATION | ACCURATE | Literal 490 days are interpreted through 2 Peter 3:8, which demands that every apocalyptic day throughout prophetic s… | Assessment within historicist frame |
+| S00-Q1-OPT1 | INTERPRETATION | ACCURATE | The Hebrew text explicitly commands that the seventy heptads must be read as literal solar days fulfilled during the … | Assessment within historicist frame |
+| S00-Q1-OPT2 | INTERPRETATION | ACCURATE | The principle belongs exclusively to the Apocalypse of John, where symbolic months and days govern church history, an… | Assessment within historicist frame |
+| S00-Q1-OPT3 | INTERPRETATION | ACCURATE | 490 literal days cannot rebuild Jerusalem and reach Messiah; as 490 prophetic years the span reaches Christ's baptism… | Assessment within historicist frame |
+| S00-Q1-EXP | INTERPRETATION | ACCURATE | Numbers 14:34 and Ezekiel 4:6 set the day-for-year precedent. Daniel 9 checks that scale in the prophecy of the Messi… | Assessment within historicist frame |
+| S00-Q1-DIA0 | INTERPRETATION | ACCURATE | Misconception: 2 Peter 3:8 addresses God's timeless patience and eternity, not the exegetical year-day measuring scal… | Assessment within historicist frame |
+| S00-Q1-DIA1 | INTERPRETATION | ACCURATE | Misconception: 490 literal days (scarcely 16 months) are wholly inadequate to rebuild city walls and reach Messiah; t… | Assessment within historicist frame |
+| S00-Q1-DIA2 | INTERPRETATION | ACCURATE | Misconception: Daniel 9:24–27 establishes the year-day scale and tests it in the prophecy of the Messiah, and that te… | Assessment within historicist frame |
+| S00-Q2-STEM | INTERPRETATION | ACCURATE | A popular prophecy chart inserts a multi-century gap after Rome, then restarts Daniel's last week in a future seven-y… | Assessment within historicist frame |
+| S00-Q2-OPT0 | INTERPRETATION | ACCURATE | Futurism — the metals and the stone form one contiguous sequence from Babylon to Christ's everlasting kingdom; an uns… | Assessment within historicist frame |
+| S00-Q2-OPT1 | INTERPRETATION | ACCURATE | Historicism — it insists that Daniel's prophetic calendar paused during the Roman era and only resumes when modern ge… | Assessment within historicist frame |
+| S00-Q2-OPT2 | HISTORY | ACCURATE | Preterism — it insists that all prophetic fulfillment ceased before the fall of Rome, restricting the entire narrativ… | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S00-Q2-OPT3 | INTERPRETATION | ACCURATE | Idealism — it views the colossus as an internal psychological metaphor for human pride, rejecting any literal chronol… | Assessment within historicist frame |
+| S00-Q2-EXP | INTERPRETATION | ACCURATE | Daniel 2:38–44 names successive kingdoms with no vacant centuries. Futurism's gap is imported, not written. | Assessment within historicist frame |
+| S00-Q2-DIA1 | INTERPRETATION | ACCURATE | Misconception: Historicism rejects all chronological gaps, reading continuous succession from Neo-Babylon through div… | Assessment within historicist frame |
+| S00-Q2-DIA2 | INTERPRETATION | ACCURATE | Misconception: Preterism terminates fulfillment in the ancient past rather than positing an unwritten multi-century g… | Assessment within historicist frame |
+| S00-Q2-DIA3 | INTERPRETATION | ACCURATE | Misconception: The proposed chart posits a literal future seven-year crisis, which is dispensational futurism rather … | Assessment within historicist frame |
+| S00-Q3-STEM | INTERPRETATION | ACCURATE | Daniel 1:2 says the Lord gave Jehoiakim into Nebuchadnezzar's hand. Why must the prologue open with that verb rather … | Assessment within historicist frame |
+| S00-Q3-OPT0 | INTERPRETATION | ACCURATE | It demonstrates that Babylon's imperial deities proved militarily superior to Judah's covenant faith until Daniel lat… | Assessment within historicist frame |
+| S00-Q3-OPT1 | INTERPRETATION | ACCURATE | It served as a conventional ancient Near Eastern court formula intended to flatter the conquering monarch while maint… | Assessment within historicist frame |
+| S00-Q3-OPT2 | INTERPRETATION | ACCURATE | The Lord who later gives His Son already governs Judah's fall; exile is covenant judgment under Heaven's sovereignty,… | Assessment within historicist frame |
+| S00-Q3-OPT3 | INTERPRETATION | ACCURATE | It indicates that God withdrew entirely from earthly governance after Jerusalem fell, leaving human empires to direct… | Assessment within historicist frame |
+| S00-Q3-EXP | INTERPRETATION | ACCURATE | Daniel 1:2 is sovereignty first. The same Lord who handed over the king will later cut off Messiah and set up the Sto… | Assessment within historicist frame |
+| S00-Q3-DIA0 | INTERPRETATION | ACCURATE | Misconception: Scripture attributes Judah's captivity directly to Yahweh's disciplinary decree, refuting any notion o… | Assessment within historicist frame |
+| S00-Q3-DIA1 | INTERPRETATION | ACCURATE | Misconception: Daniel 1:2 is theological conviction, not flattering diplomatic protocol; the narrator attributes the … | Assessment within historicist frame |
+| S00-Q3-DIA3 | INTERPRETATION | ACCURATE | Misconception: Daniel 1:2 establishes the book's core premise: the God of heaven actively rules over all kingdoms of … | Assessment within historicist frame |
+| S00-Q4-STEM | INTERPRETATION | ACCURATE | Why does this sitting insist the historicist chain exists to exalt Jesus Christ rather than to produce a fear-chart o… | Assessment within historicist frame |
+| S00-Q4-OPT0 | INTERPRETATION | ACCURATE | Prophetic visions are primarily intended to provide political intelligence regarding modern secular nation-states and… | Assessment within historicist frame |
+| S00-Q4-OPT1 | INTERPRETATION | ACCURATE | Daniel 1:2 shows the Lord ruling over exile; Daniel 9:26 places Messiah cut off for us at the timeline's center; Dani… | Assessment within historicist frame |
+| S00-Q4-OPT2 | INTERPRETATION | ACCURATE | Daniel's visions concern only ethnic national Israel in the Old Testament, leaving the gospel of Jesus Christ to be r… | Assessment within historicist frame |
+| S00-Q4-OPT3 | INTERPRETATION | ACCURATE | The prophetic stone represents human moral evolution and international peace confederations that gradually Christiani… | Explicit hedge or labeled reconstruction (OneVoice27 §2) |
+| S00-Q4-EXP | INTERPRETATION | ACCURATE | Luke 24:27 is the rule: all the Scriptures concern Christ. Daniel's dates serve His cross and His kingdom. | Assessment within historicist frame |
+| S00-Q4-DIA0 | INTERPRETATION | ACCURATE | Misconception: Daniel's prophetic line is not speculative geopolitics; every vision builds toward the cross, the high… | Assessment within historicist frame |
+| S00-Q4-DIA2 | INTERPRETATION | ACCURATE | Misconception: Luke 24:27 teaches that all prophets testified of Christ; Daniel 9:24–27 specifically dates Messiah's … | Assessment within historicist frame |
+| S00-Q4-DIA3 | INTERPRETATION | ACCURATE | Misconception: Daniel 2:44 states that the supernatural stone breaks earthly kingdoms in pieces rather than assimilat… | Assessment within historicist frame |
+| S00-SG-TR0-DO | INTERPRETATION | ACCURATE | Read Daniel 1:2 and write one sentence: who gave Jehoiakim into Nebuchadnezzar's hand? | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 0) |
+| S00-SG-TR0-WHY | INTERPRETATION | ACCURATE | The prologue begins with sovereignty, not sensationalism. If Marduk appears to win, you miss the Lord who gave Jehoia… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 0) |
+| S00-SG-TR1-DO | INTERPRETATION | ACCURATE | Study the three-school diagram in Part I. Trace each line: where does the chain break? | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 0) |
+| S00-SG-TR1-WHY | INTERPRETATION | ACCURATE | Before naming a horn or date, you choose a road. Only Historicism keeps Babylon → Persia → Greece → Rome → divided wo… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 0) |
+| S00-SG-TR2-DO | INTERPRETATION | ACCURATE | Read Numbers 14:34, Ezekiel 4:6, and Daniel 9:24–27 in the Scripture dock. Write one line: the earlier texts set the … | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 0) |
+| S00-SG-TR2-WHY | INTERPRETATION | ACCURATE | The year-day scale, one prophetic day for one year, is not a human guess. Numbers 14:34 and Ezekiel 4:6 state it befo… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 0) |
+| S00-SG-TR3-DO | INTERPRETATION | ACCURATE | List the three Christ anchors from Part III: Daniel 1, 9, and 2 — one phrase each. | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 0) |
+| S00-SG-TR3-WHY | INTERPRETATION | ACCURATE | Prophecy without Christ at the center is fear-mongering or trivia. The unbroken chain exists to exalt the Messiah cut… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 0) |
+| S00-SG-CHRIST-CLM | INTERPRETATION | ACCURATE | Daniel's unbroken chain centers on Jesus: sovereignty in exile (1:2), sacrifice at the cross (9:26), returning King (… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 0) |
+| S00-SG-CHRIST-WHY | INTERPRETATION | ACCURATE | Luke 24:27 is the hermeneutical rule behind every sheet. If your reading of Daniel never arrives at Christ — the Lord… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 0) |
+| S00-SG-NOW-CLM | INTERPRETATION | ACCURATE | Historicism places you in the divided feet — after Rome, before the Stone. You are not adrift between a finished past… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 0) |
+| S00-SG-NOW-WHY | PASTORAL | ACCURATE | Preterism leaves no roadmap for today. Futurism skips two millennia. Historicism says the Lord has been governing the… | Pastoral application tethered to passage |
+| S00-SG-HELP-CLM | INTERPRETATION | ACCURATE | Ask of any prophetic claim: Does it keep the chain unbroken and Christ at the center? | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 0) |
+| S00-SG-HELP-WHY | INTERPRETATION | ACCURATE | A claim that restarts the statue, ends it in antiquity, or severs Daniel 9 with an unstated gap fails the blueprint t… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 0) |
+| S00-SG-VALUE-CLM | INTERPRETATION | ACCURATE | The same timeline that landed Messiah at Calvary guarantees His return as King. | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 0) |
+| S00-SG-VALUE-WHY | INTERPRETATION | ACCURATE | When you see Daniel 9 anchor the day-for-year rod at the cross, later dates are not slogans — they share the rod that… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 0) |
+| S00-SG-ASK-1 | INTERPRETATION | ACCURATE | Which of the three roads was I already using before this sitting? | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 0) |
+| S00-SG-ASK-2 | INTERPRETATION | ACCURATE | Can I explain why Daniel 9 requires years, not days, without circular reasoning? | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 0) |
+| S00-SG-ASK-3 | INTERPRETATION | ACCURATE | Does my reading of Daniel lead me to fear empires, or to trust Christ's triumph? | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 0) |
+| S00-DGM-s0-1-TITLE | INTERPRETATION | ACCURATE | The Three Interpretive Schools | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 0) |
+| S00-DGM-s0-1-1-ROLE | INTERPRETATION | ACCURATE | Continuous | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 0) |
+| S00-DGM-s0-1-1-TITLE | INTERPRETATION | ACCURATE | Historicism | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 0) |
+| S00-DGM-s0-1-1-P1 | INTERPRETATION | ACCURATE | The reading this course defends. | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 0) |
+| S00-DGM-s0-1-1-P2 | INTERPRETATION | ACCURATE | Babylon → Medo-Persia → Greece → Rome → Divided Europe → Christ's kingdom. | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 0) |
+| S00-DGM-s0-1-1-P3 | INTERPRETATION | ACCURATE | One unbroken chain running in real time. | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 0) |
+| S00-DGM-s0-1-2-ROLE | INTERPRETATION | ACCURATE | Locked in antiquity | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 0) |
+| S00-DGM-s0-1-2-TITLE | INTERPRETATION | ACCURATE | Preterism | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 0) |
+| S00-DGM-s0-1-2-P1 | INTERPRETATION | ACCURATE | Counter-Reformation: Luis de Alcázar, 1614. | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 0) |
+| S00-DGM-s0-1-2-P2 | HISTORY | ACCURATE | Babylon → Medo-Persia → Greece → Antiochus IV, then A.D. 70. | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S00-DGM-s0-1-2-P3 | INTERPRETATION | ACCURATE | Leaves no medieval or modern chain. | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 0) |
+| S00-DGM-s0-1-3-ROLE | INTERPRETATION | ACCURATE | Truncated at Rome | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 0) |
+| S00-DGM-s0-1-3-TITLE | INTERPRETATION | ACCURATE | Futurism | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 0) |
+| S00-DGM-s0-1-3-P1 | INTERPRETATION | ACCURATE | Counter-Reformation: Francisco Ribera, c. 1590. | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 0) |
+| S00-DGM-s0-1-3-P2 | INTERPRETATION | ACCURATE | Babylon → Medo-Persia → Greece → Imperial Rome, then a 2,000-year gap. | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 0) |
+| S00-DGM-s0-1-3-P3 | INTERPRETATION | ACCURATE | Resumes for a final seven years and an end-times antichrist. | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 0) |
+| S00-DGM-s0-2-TITLE | INTERPRETATION | ACCURATE | The Biblical Year-Day Scale | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 0) |
+| S00-DGM-s0-2-1-ROLE | INTERPRETATION | ACCURATE | Numbers 14:34 | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 0) |
+| S00-DGM-s0-2-1-TITLE | INTERPRETATION | ACCURATE | Forty days become forty years | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 0) |
+| S00-DGM-s0-2-1-TEXT | INTERPRETATION | ACCURATE | Forty days spying out Canaan become forty years of wandering: “each day for a year.” | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 0) |
+| S00-DGM-s0-2-2-TITLE | INTERPRETATION | ACCURATE | One scale, stated twice | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 0) |
+| S00-DGM-s0-2-2-TEXT | INTERPRETATION | ACCURATE | Scripture fixes its own prophetic measure before Daniel uses it. The rule is given once in the wilderness and once to… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 0) |
+| S00-DGM-s0-2-3-ROLE | INTERPRETATION | ACCURATE | Daniel 9:24–27 | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 0) |
+| S00-DGM-s0-2-3-TITLE | INTERPRETATION | ACCURATE | Seventy weeks become 490 years | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 0) |
+| S00-DGM-s0-2-3-TEXT | INTERPRETATION | ACCURATE | Seventy weeks — 70 × 7 = 490 prophetic days — must span the Persian decree to the crucifixion. | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 0) |
+| S00-DGM-s0-3-TITLE | INTERPRETATION | ACCURATE | The Redemptive Center | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 0) |
+| S00-DGM-s0-3-NOTE | INTERPRETATION | ACCURATE | The unbroken chain is not a political chart. It exists to exalt Jesus Christ as Lord of history and personal Redeemer. | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 0) |
+| S00-DGM-s0-3-1-ROLE | INTERPRETATION | ACCURATE | Before the cross | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 0) |
+| S00-DGM-s0-3-1-TITLE | INTERPRETATION | ACCURATE | Sovereignty in exile | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 0) |
+| S00-DGM-s0-3-1-TEXT | INTERPRETATION | ACCURATE | The Lord hands over kings and directs history. | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 0) |
+| S00-DGM-s0-3-2-TITLE | INTERPRETATION | ACCURATE | Messiah cut off for us | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 0) |
+| S00-DGM-s0-3-2-TEXT | INTERPRETATION | ACCURATE | The chain is not an end in itself. Both ends meet here, at the cross. | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 0) |
+| S00-DGM-s0-3-3-ROLE | INTERPRETATION | ACCURATE | After the cross | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 0) |
+| S00-DGM-s0-3-3-TITLE | INTERPRETATION | ACCURATE | Consummation in glory | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 0) |
+| S00-DGM-s0-3-3-TEXT | INTERPRETATION | ACCURATE | The supernatural Stone fills the whole earth. | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 0) |
+| S00-GD-INTRO-EXP | INTERPRETATION | ACCURATE | Three hermeneutical roads, the year-day scale anchored at the cross, and Christ as the redemptive center of every emp… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 0) |
+| S00-GD-INTRO-DO-1 | INTERPRETATION | ACCURATE | Follow the introduction and Parts I–IV — use the diagrams to see where each school breaks the chain. | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 0) |
+| S00-GD-INTRO-DO-2 | INTERPRETATION | ACCURATE | Complete the workbench, then the checkpoint questions. | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 0) |
+| S00-GD-INTRO-DO-3 | INTERPRETATION | ACCURATE | Continue to Daniel 1: faithfulness in Babylon. | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 0) |
+| S00-GD-END-WHY | PASTORAL | ACCURATE | Daniel 1 is next: a captive youth, the king's table, and consecration before revelation. | Pastoral application tethered to passage |
+| S00-VRF-CLAIM | INTERPRETATION | ACCURATE | You can verify the method of this sitting from Scripture’s own wording, the year-day precedent, Daniel 9’s internal t… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 0) |
+| S00-VRF-0-LESSON | INTERPRETATION | ACCURATE | Judah did not fall by Babylon’s independent power. The Lord handed the king over. | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 0) |
+| S00-VRF-0-QUOTE | TEXT | REVIEW | Daniel 1:2, King James Version: And the Lord gave Jehoiakim king of Judah into his hand, with part of the vessels of … | Marked KJV — manual spot-check if ellipsis-heavy |
+| S00-VRF-0-CHECK | INTERPRETATION | ACCURATE | Open Scripture to Daniel 1:2 and mark the verb gave. The sitting stands or falls on that word. | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 0) |
+| S00-VRF-1-LESSON | INTERPRETATION | ACCURATE | Jeremiah dates the same shock to Jehoiakim’s fourth year, which he calls Nebuchadnezzar’s first. | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 0) |
+| S00-VRF-1-QUOTE | TEXT | REVIEW | Jeremiah 25:1, King James Version: The word that came to Jeremiah concerning all the people of Judah in the fourth ye… | Marked KJV — manual spot-check if ellipsis-heavy |
+| S00-VRF-1-CHECK | HISTORY | ACCURATE | Judah counts accession differently from Babylon. Jehoiakim’s third year in Daniel 1:1 and his fourth in Jeremiah 25:1… | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S00-VRF-2-LESSON | INTERPRETATION | ACCURATE | Carchemish, the battle that opens Babylon’s west, is dated to that same fourth year. | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 0) |
+| S00-VRF-2-QUOTE | TEXT | REVIEW | Jeremiah 46:2, King James Version: Against Egypt, against the army of Pharaohnecho king of Egypt, which was by the ri… | Marked KJV — manual spot-check if ellipsis-heavy |
+| S00-VRF-2-CHECK | INTERPRETATION | ACCURATE | Read Jeremiah 46:2 next to 25:1. 605 is a battle year in a prophet who is not Daniel. 586 is the later burning of the… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 0) |
+| S00-VRF-3-LESSON | INTERPRETATION | ACCURATE | A prophetic day may be appointed as a literal year. The scale is stated twice before Daniel uses it. | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 0) |
+| S00-VRF-3-QUOTE | TEXT | REVIEW | Numbers 14:34; Ezekiel 4:6, King James Version: After the number of the days in which ye searched the land, even fort… | Marked KJV — manual spot-check if ellipsis-heavy |
+| S00-VRF-3-CHECK | INTERPRETATION | ACCURATE | Read both verses in the Scripture dock. Write day → year in your notes before you touch 70 weeks or 2,300 days. 2 Pet… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 0) |
+| S00-VRF-4-LESSON | INTERPRETATION | ACCURATE | Daniel’s own seventy weeks cannot be 490 ordinary days and still hold a rebuilt city and Messiah. | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 0) |
+| S00-VRF-4-QUOTE | TEXT | REVIEW | Daniel 9:24–25, King James Version: Seventy weeks are determined upon thy people and upon thy holy city… Know therefo… | Marked KJV — manual spot-check if ellipsis-heavy |
+| S00-VRF-4-CHECK | INTERPRETATION | ACCURATE | 490 days is less than a year and a half. The book checks the year-day scale on itself before you borrow it for 1,260 … | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 0) |
+| S00-VRF-5-LESSON | INTERPRETATION | ACCURATE | The kingdom is set up in the days of these kings, on the divided feet — not during Babylon, Greece, or Rome at its he… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 0) |
+| S00-VRF-5-QUOTE | TEXT | REVIEW | Daniel 2:44, King James Version: And in the days of these kings shall the God of heaven set up a kingdom, which shall… | Marked KJV — manual spot-check if ellipsis-heavy |
+| S00-VRF-5-CHECK | INTERPRETATION | ACCURATE | The verse places the Stone’s arrival in the divided era, after the legs, so the prologue’s chain ends at the feet and… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 0) |
+| S00-VRF-6-LESSON | INTERPRETATION | ACCURATE | Historicist readers treated Daniel as a dated sequence, not a riddle parked in the past or the far future. | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 0) |
+| S00-VRF-6-QUOTE | HISTORY | ACCURATE | Sir Isaac Newton, Observations upon the Prophecies of Daniel, and the Apocalypse of St. John (London, 1733), Part I, … | Primary source quotation in verify dock |
+| S00-VRF-6-CHECK | INTERPRETATION | ACCURATE | Compare Newton’s “order of time” with the three-school table. Only a continuous chain keeps that order. Newton's 1733… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 0) |
+| S00-VRF-7-LESSON | INTERPRETATION | ACCURATE | The charge that Daniel is a Maccabean forgery is itself dated. Jerome names the critic. | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 0) |
+| S00-VRF-7-QUOTE | HISTORY | ACCURATE | Jerome, Commentary on Daniel, Prologue (c. A.D. 407). English at tertullian.org: Porphyry wrote his twelfth book agai… | Primary source quotation in verify dock |
+| S00-VRF-7-CHECK | INTERPRETATION | ACCURATE | Porphyry (3rd century) is the pagan ancestor of the ‘it all ended under Antiochus’ reading. Jerome reports the charge… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 0) |
+| S00-VRF-8-LESSON | INTERPRETATION | ACCURATE | A second-century Christian already read the four metals as Babylon, Persia, Greece, and Rome — one chain. | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 0) |
+| S00-VRF-8-QUOTE | HISTORY | ACCURATE | Hippolytus of Rome, Treatise on Christ and Antichrist, §28 (c. A.D. 200). Ante-Nicene Fathers, vol. 5: The golden hea… | Primary source quotation in verify dock |
+| S00-VRF-8-CHECK | HISTORY | ACCURATE | Hippolytus witnesses the four-kingdom sequence, Babylon through Rome, in one chain (c. A.D. 200). He also expected a … | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S00-WB-INTRO | INTERPRETATION | ACCURATE | Before taking the checkpoint quiz, verify the day-for-year scale Scripture sets in Numbers 14:34 and Ezekiel 4:6 and … | Explicit hedge or labeled reconstruction (OneVoice27 §2) |
+| S00-WB-T1-PROMPT | PASTORAL | ACCURATE | Identify the two Old Testament verses that explicitly formulate the prophetic scale, and enter the exact formulaic bi… | Workbench verification task |
+| S00-WB-T2-PROMPT | INTERPRETATION | ACCURATE | Assign each historical interpretation to its proper school: Historicism, Preterism, or Futurism. | Explicit hedge or labeled reconstruction (OneVoice27 §2) |
+| S00-WB-T2-M0 | PASTORAL | ACCURATE | The 70th week of Daniel 9 is severed from the first 69 weeks by a 2,000-year parenthetical gap. | Workbench verification task |
+| S00-WB-T2-M1 | HISTORY | ACCURATE | The little horn is Antiochus IV Epiphanes, exhausting all prophetic specifications in the 2nd century B.C. | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S00-WB-T2-M2 | HISTORY | ACCURATE | Prophecy is an unbroken, continuous chain of historical fulfillment from 605 B.C. through divided Europe to the Secon… | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S00-WB-T2-M3 | HISTORY | ACCURATE | All apocalyptic prophecies were completed by the destruction of Jerusalem in A.D. 70 and the fall of pagan Rome. | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S00-WB-T2-M4 | PASTORAL | ACCURATE | The Antichrist is a single future individual reigning for 3.5 literal years in a rebuilt temple in Jerusalem. | Workbench verification task |
+| S00-WB-T2-M5 | PASTORAL | ACCURATE | The number 1,260 is the year-day reading of Daniel 7:25's 'time, times, and the dividing of time'; Revelation 12:6 an… | Workbench verification task |
+| S00-GLS-alcazar-SMP | TEXT | ACCURATE | Luis de Alcázar: Spanish Jesuit of Seville (1554–1613); his 1614 commentary became the template for preterism. | Lexical / textual definition |
+| S00-GLS-alcazar-HIS | HISTORY | ACCURATE | Vestigatio Arcani Sensus in Apocalypsi. He placed Daniel under Antiochus and Revelation in A.D. 70, which takes the m… | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S00-GLS-antichrist-SMP | TEXT | ACCURATE | Antichrist: In historicist reading: the church-state power that takes Christ’s place (anti = in place of) among Rome’… | Lexical / textual definition |
+| S00-GLS-antichrist-HIS | HISTORY | ACCURATE | 1 John already speaks of “many antichrists.” The Reformers applied the office of a persecuting papal supremacy to Dan… | Historical context card |
+| S00-GLS-antiochus-SMP | HISTORY | ACCURATE | Antiochus IV Epiphanes: Seleucid king (175–164 B.C.) who profaned the Jerusalem temple altar; a real tyrant, and far … | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S00-GLS-antiochus-HIS | HISTORY | ACCURATE | Gabriel places Daniel 8’s vision at “the time of the end” (8:17, 19), which an ancient Syrian king dying in 164 B.C. … | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S00-GLS-apocalyptic-SMP | TEXT | ACCURATE | apocalyptic: A style of vision that uses symbols (beasts, horns, metals) for real kingdoms and spans of history. | Lexical / textual definition |
+| S00-GLS-apocalyptic-HIS | HISTORY | ACCURATE | Daniel 7–8 is apocalyptic: a lion stands for a kingdom, not a literal beast. Time inside that same symbolic vision is… | Historical context card |
+| S00-GLS-artaxerxes-SMP | HISTORY | ACCURATE | Artaxerxes: Persian great king. His seventh year (457 B.C.) is the decree this study uses to start the 70 weeks (Ezra… | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S00-GLS-artaxerxes-HIS | HISTORY | ACCURATE | Ezra goes up with authority to appoint magistrates and judges — civil restoration, not only temple stones. His twenti… | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S00-GLS-babylon-SMP | HISTORY | ACCURATE | Babylon: Capital of the gold head; Daniel’s first workplace and the city that fell in 539 B.C. | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S00-GLS-babylon-HIS | HISTORY | ACCURATE | Ishtar Gate, Marduk’s temples, double walls and a river. Daniel 1:2 says its first victory over Judah was given, not … | Historical context card |
+| S00-GLS-calvin-SMP | TEXT | ACCURATE | John Calvin: French-Genevan Reformer (1509–1564); wrote commentaries on Daniel in the same historicist chain. | Lexical / textual definition |
+| S00-GLS-calvin-HIS | HISTORY | ACCURATE | He kept the four kingdoms as real empires and refused to treat the book as a finished Maccabean pamphlet. Cited on sh… | Historical context card |
+| S00-GLS-counter-reformation-SMP | TEXT | ACCURATE | Counter-Reformation: Rome’s 16th–17th century answer to the Protestant Reformation, including new readings of prophecy. | Lexical / textual definition |
+| S00-GLS-counter-reformation-HIS | HISTORY | ACCURATE | The Council of Trent (1545–1563) restated Catholic teaching. Jesuit scholars then published methods (Ribera’s futuris… | Historical context card |
+| S00-GLS-daniel-SMP | HISTORY | ACCURATE | Daniel: A Judahite noble taken to Babylon in 605 B.C.; prophet, court official, and the book’s human author-witness. | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S00-GLS-daniel-HIS | HISTORY | ACCURATE | His Hebrew name means “God is my Judge.” The court renamed him Belteshazzar. He drew the line at the king’s table (wo… | Historical context card |
+| S00-GLS-darby-SMP | TEXT | ACCURATE | John Nelson Darby: Plymouth Brethren teacher (1800–1882) who popularized the gap-week reading in Protestant dispensat… | Lexical / textual definition |
+| S00-GLS-darby-HIS | HISTORY | ACCURATE | Albury / Powerscourt circles and a system of ages. Daniel never prints the gap. This sitting names Darby so you can s… | Historical context card |
+| S00-GLS-dispensationalism-SMP | TEXT | ACCURATE | Dispensationalism: A 19th-century Protestant system that splits history into ages and usually keeps Ribera’s gap befo… | Lexical / textual definition |
+| S00-GLS-dispensationalism-HIS | HISTORY | ACCURATE | S. R. Maitland took the gap-week reading into Protestant print in 1826. Edward Irving and John Nelson Darby populariz… | Historical context card |
+| S00-GLS-evening-morning-SMP | TEXT | ACCURATE | evening and morning: Genesis 1’s name for a full day-unit. Daniel 8:14 uses that pair for 2,300 units. | Lexical / textual definition |
+| S00-GLS-evening-morning-HIS | HISTORY | ACCURATE | Not half-sacrifices added together. Once Daniel 9 proves the numbered day runs as a year, these 2,300 units are 2,300… | Historical context card |
+| S00-GLS-exile-SMP | HISTORY | ACCURATE | exile: The forced displacement of Judah to Babylon under God's judicial sentence across three deportations: 605, 597,… | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S00-GLS-exile-HIS | HISTORY | ACCURATE | Exile was not a chosen journey or a mere accident of war. Daniel 1:2 declares that God handed Jehoiakim over. Daniel … | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S00-GLS-ezekiel-SMP | TEXT | ACCURATE | Ezekiel: Priest-prophet already in exile; God had him lie on his side 390 + 40 days, “each day for a year” (Ezekiel 4… | Lexical / textual definition |
+| S00-GLS-ezekiel-HIS | HISTORY | ACCURATE | He is why Ezekiel is on the year-day sitting: a contemporary of Daniel’s world, hearing the same appointment in a num… | Historical context card |
+| S00-GLS-futurism-SMP | TEXT | ACCURATE | Futurism: The claim that most of the hard numbers in Daniel jump to a future Antichrist after a long gap. | Lexical / textual definition |
+| S00-GLS-futurism-HIS | HISTORY | ACCURATE | Older readers already expected a future individual antichrist. Francisco Ribera’s 1590 commentary made a systematic g… | Historical context card |
+| S00-GLS-gabriel-SMP | TEXT | ACCURATE | Gabriel: The angel sent to make Daniel understand (8:16; 9:21–23). | Lexical / textual definition |
+| S00-GLS-gabriel-HIS | HISTORY | ACCURATE | He interprets the ram and goat, then returns while Daniel is praying to cut seventy weeks from the unexplained vision… | Historical context card |
+| S00-GLS-hermeneutics-SMP | TEXT | ACCURATE | hermeneutics: How you read a text — the rules you use before you name a king or a date. | Lexical / textual definition |
+| S00-GLS-hermeneutics-HIS | HISTORY | ACCURATE | In this course the live question is whether Daniel is a continuous chain of real kingdoms from the exile to Christ’s … | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S00-GLS-historicism-SMP | TEXT | ACCURATE | Historicism: Read Daniel as an unbroken timeline of real empires from the prophet’s own day until the stone fills the… | Lexical / textual definition |
+| S00-GLS-historicism-HIS | HISTORY | ACCURATE | This course uses historicism because Daniel’s succession language and parallel visions best fit a continuous historic… | Historical context card |
+| S00-GLS-irving-SMP | TEXT | ACCURATE | Edward Irving: Scottish preacher (1792–1834); Albury Conferences helped move futurist readings into British Protestan… | Lexical / textual definition |
+| S00-GLS-irving-HIS | HISTORY | ACCURATE | A channel, with Darby, for Ribera’s severed week. Named so sheet 0 shows named teachers, not an anonymous haze: Irvin… | Historical context card |
+| S00-GLS-jehoiakim-SMP | HISTORY | ACCURATE | Jehoiakim: King of Judah (c. 609–598 B.C.). Daniel 1:1 dates the first deportation to his third year (605). | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S00-GLS-jehoiakim-HIS | HISTORY | ACCURATE | 2 Kings 23–24: a son of Josiah who reversed his father’s reforms and served, then rebelled against, Babylon. The Lord… | Historical context card |
+| S00-GLS-jerusalem-SMP | TEXT | ACCURATE | Jerusalem: Judah’s capital; Temple city; the place Daniel faced when he prayed (6:10). | Lexical / textual definition |
+| S00-GLS-jerusalem-HIS | HISTORY | ACCURATE | First vessels leave in 605; city and Temple fall in 586; return decrees under Persia. In Daniel 8 “the Glorious Land”… | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S00-GLS-jesuit-SMP | TEXT | ACCURATE | Jesuit: Members of the Society of Jesus, a Catholic order founded in 1540 to teach, missionize, and defend the Roman … | Lexical / textual definition |
+| S00-GLS-jesuit-HIS | HISTORY | ACCURATE | Alcázar and Ribera, both Jesuits, published the two rejected readings: preterism and futurism. | Historical context card |
+| S00-GLS-little-horn-SMP | TEXT | ACCURATE | little horn: A smaller horn that rises among ten kings, diverse from them, and attacks God’s people and sanctuary. | Lexical / textual definition |
+| S00-GLS-little-horn-HIS | HISTORY | ACCURATE | Daniel 7’s horn rises from the fourth beast (Rome) after A.D. 476, uproots three, speaks against the Most High, and r… | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S00-GLS-luther-SMP | TEXT | ACCURATE | Martin Luther: German Reformer (1483–1546). Read Daniel as a historicist: the little horn as a church-state Antichrist. | Lexical / textual definition |
+| S00-GLS-luther-HIS | HISTORY | ACCURATE | Prefaces to Daniel (1530). He did not invent the year-day scale; he read the empires as one chain and identified Dani… | Historical context card |
+| S00-GLS-most-holy-SMP | TEXT | ACCURATE | Most Holy Place: The inner room of the sanctuary, entered only on the Day of Atonement with blood. | Lexical / textual definition |
+| S00-GLS-most-holy-HIS | HISTORY | ACCURATE | Leviticus 16. This study reads Daniel 8:14’s putting-right as that day’s heavenly counterpart — judgment and vindicat… | Historical context card |
+| S00-GLS-nebuchadnezzar-SMP | HISTORY | ACCURATE | Nebuchadnezzar: Neo-Babylonian king (c. 605–562 B.C.), the head of gold, who took Judah’s first captives and later bu… | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S00-GLS-nebuchadnezzar-HIS | HISTORY | ACCURATE | He dreamed of the statue, built the all-gold image on the plain of Dura, and was driven into the field for seven time… | Historical context card |
+| S00-GLS-newton-isaac-SMP | TEXT | ACCURATE | Isaac Newton: Natural philosopher (1643–1727) who also wrote Observations upon the Prophecies of Daniel (1733). | Lexical / textual definition |
+| S00-GLS-newton-isaac-HIS | HISTORY | ACCURATE | He called Daniel “most distinct in order of time.” This study quotes that line because it states Historicism in one s… | Historical context card |
+| S00-GLS-papacy-SMP | TEXT | ACCURATE | papacy: The office of the bishop of Rome as a spiritual and, for long centuries, civil power. | Lexical / textual definition |
+| S00-GLS-papacy-HIS | INTERPRETATION | ACCURATE | This study applies Daniel 7’s little-horn interpretation to that historical office and its church-state role, not to … | Explicit hedge or labeled reconstruction (OneVoice27 §2) |
+| S00-GLS-preterism-SMP | TEXT | ACCURATE | Preterism: The claim that almost all of Daniel (and often Revelation) already finished in the distant past. | Lexical / textual definition |
+| S00-GLS-preterism-HIS | HISTORY | ACCURATE | In the form this sitting names, Jesuit Luis de Alcázar (1614) placed Daniel under Antiochus IV in the 160s B.C. and R… | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S00-GLS-ribera-SMP | TEXT | ACCURATE | Francisco Ribera: Spanish Jesuit of Salamanca (1537–1591); his 1590 Revelation commentary became the template for fut… | Lexical / textual definition |
+| S00-GLS-ribera-HIS | HISTORY | ACCURATE | His 1590 commentary placed Antichrist as one future man for 3½ literal years and severed the 70th week from the first… | Historical context card |
+| S00-GLS-rome-SMP | TEXT | ACCURATE | Rome: Capital of the iron kingdom; later seat of the church-state this study reads as the little horn. | Lexical / textual definition |
+| S00-GLS-rome-HIS | HISTORY | ACCURATE | Imperial Rome crushes (Daniel 2:40; 7:7). After 476 the west is fragments. 538 and 1798 both fall on this city: the s… | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S00-GLS-scofield-SMP | HISTORY | ACCURATE | C. I. Scofield: American minister and editor (1843–1921) whose annotated 1909 Scofield Reference Bible popularized di… | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S00-GLS-scofield-HIS | HISTORY | ACCURATE | His explanatory study notes placed Ribera’s and Darby’s severed 70th week and secret pretribulation rapture directly … | Historical context card |
+| S00-GLS-trent-SMP | TEXT | ACCURATE | Council of Trent: A long Catholic council (1545–1563) that answered the Reformation. | Lexical / textual definition |
+| S00-GLS-trent-HIS | HISTORY | ACCURATE | Twenty-five sessions. This sitting names it as the historical setting in which Ribera (1590) and Alcázar (1614) publi… | Historical context card |
+| S00-GLS-wycliffe-SMP | TEXT | ACCURATE | John Wycliffe: English Reformer (d. 1384) who already read the papal office into apocalyptic warning. | Lexical / textual definition |
+| S00-GLS-wycliffe-HIS | HISTORY | ACCURATE | Named on sheet 0 as an early witness that Historicism is older than Luther. He translated Scripture into English and … | Historical context card |
+| S00-GLS-year-day-SMP | TEXT | ACCURATE | Year-Day Principle: When God gives a numbered sign, one prophetic day may stand for one literal solar year. | Lexical / textual definition |
+| S00-GLS-year-day-HIS | HISTORY | ACCURATE | God states the scale twice: Numbers 14:34 (forty spy-days become forty wilderness years) and Ezekiel 4:6 (Ezekiel’s b… | Historical context card |

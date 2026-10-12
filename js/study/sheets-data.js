@@ -1215,7 +1215,7 @@ The Striking Stone   ──▶  CHRIST'S KINGDOM (Supernatural, Universal, Etern
 </div>
 <div class="framework-card">
   <p class="framework-card-kicker">Belly and thighs of bronze — Greece (331–168 B.C.)</p>
-  <p>A "third kingdom of brass, which shall bear rule over all the earth" followed (Daniel 2:39). Alexander the Great dismantled the Persian Empire at Arbela/Gaugamela in 331 B.C., clothing his armies in bronze armor and spreading Greek language and culture throughout the ancient world. Scripture explicitly names Greece as the power that shatters Medo-Persia (Daniel 8:21).</p>
+  <p>A "third kingdom of brass, which shall bear rule over all the earth" followed (Daniel 2:39). Alexander the Great dismantled the Persian Empire at Gaugamela in 331 B.C., spreading Greek language and Hellenistic culture across the Near East. Scripture explicitly names Greece as the power that shatters Medo-Persia (Daniel 8:21).</p>
 </div>
 <div class="framework-card">
   <p class="framework-card-kicker">Legs of iron — Imperial Rome (168 B.C.–A.D. 476)</p>
@@ -4091,12 +4091,12 @@ SCRIPTURAL CRITERIA:                     HISTORICAL FULFILLMENT:
   </ul>
 </div>
 
-<p>Historical records verify the exact fulfillment of this 1,260-year envelope in secular European history:</p>
+<p>On the year-day scale, this sitting charts a 1,260-year envelope in European history. The papacy’s civil rise was gradual; commentaries warn that no single headline marks every transition — but the chart needs a testable pin:</p>
 
 <div class="historical-note">
-  <p class="historical-note-kicker">The historical boundaries: A.D. 538 to A.D. 1798</p>
+  <p class="historical-note-kicker">The historical boundaries: A.D. 538 to A.D. 1798 (chart pins)</p>
   <ul>
-    <li><strong>The Starting Anchor (A.D. 538):</strong> In A.D. 533, Eastern Roman Emperor Justinian wrote to Pope John II recognizing the Bishop of Rome as head of the churches (Codex Justinianus I.1.8). That letter is history, not a verse. It could not be implemented in Rome while the Arian Ostrogoths held Italy. In March 538, Byzantine General Belisarius broke the Ostrogothic siege of Rome. With the Ostrogoths driven from the city—the third Arian kingdom uprooted—the 1,260-year papal supremacy begins.</li>
+    <li><strong>The starting pin (A.D. 538):</strong> In A.D. 533, Eastern Roman Emperor Justinian wrote to Pope John II recognizing the Bishop of Rome as head of the churches (Codex Justinianus I.1.8). That letter is history, not a verse. It could not be implemented in Rome while the Arian Ostrogoths held Italy. In March 538, Byzantine General Belisarius broke the Ostrogothic siege of Rome. With the Ostrogoths driven from the city — the third Arian kingdom uprooted — this chart begins the 1,260 years. Some presentations work backward from 1798; if 538 moves, 1798 moves on the same stick.</li>
     <li><strong>The Concluding Anchor (A.D. 1798):</strong> Exactly 1,260 years later (538 + 1,260 = 1798), the French Revolution struck at papal power. French General Louis-Alexandre Berthier entered Rome on 10 February 1798; the Roman Republic was proclaimed on 15 February; Pope Pius VI was taken captive on 20 February and died a prisoner at Valence, in France, on 29 August 1799. This inflicted the prophetic <em>"deadly wound"</em> (Revelation 13:3), terminating the 1,260-year epoch of papal political supremacy.</li>
   </ul>
 </div>
@@ -5231,10 +5231,10 @@ Decree to Restore &amp; Build   Gospel to Gentiles               Cleansing of Sa
 
 <blockquote class="scripture-quote">"Know therefore and understand, that from the going forth of the commandment to restore and to build Jerusalem unto the Messiah the Prince shall be seven weeks, and threescore and two weeks: the street shall be built again, and the wall, even in troublous times." — Daniel 9:25 (KJV)</blockquote>
 
-<p>Persian monarchs issued four distinct royal decrees regarding the Jewish return from exile. A systematic historical analysis demonstrates that only one fulfills the biblical criteria:</p>
+<p>Persian monarchs issued several royal commissions regarding the Jewish return. The official Bible study guide on Daniel often compares <strong>three restoring decrees</strong> (Cyrus, Darius, Artaxerxes). This sitting adds Nehemiah’s wall commission as a fourth line on the chart — a permit under Artaxerxes, not a new charter for Daniel 9:25:</p>
 
 <div class="framework-card">
-  <p class="framework-card-kicker">The Four Persian Decrees Examined</p>
+  <p class="framework-card-kicker">Persian commissions compared (three decrees + Nehemiah permit)</p>
   <ol class="list-decimal pl-5 space-y-2">
     <li><strong>1. The Decree of Cyrus the Great (538/537 B.C. · Ezra 1:1–4):</strong> Cyrus authorized the exiles to return and rebuild the <em>temple</em> in Jerusalem. It contained no authorization to restore municipal self-government, appoint judges, or rebuild the civil city.</li>
     <li><strong>2. The Decree of Darius I Hystaspes (520 B.C. · Ezra 6:1–12):</strong> When Samaritan adversaries halted temple construction, Darius confirmed Cyrus's original edict. This was purely a reaffirmation of temple rebuilding, adding no civil or administrative authority.</li>
@@ -5243,10 +5243,10 @@ Decree to Restore &amp; Build   Gospel to Gentiles               Cleansing of Sa
   </ol>
 </div>
 
-<p>Ptolemy's Royal Canon, the Babylonian astronomical tablets, and the Elephantine Aramaic papyri fix Artaxerxes I Longimanus's seventh year so that Ezra's journey lands in the <strong>autumn of 457 B.C.</strong> (Ezra 7:7–9). This sitting starts both the 70-week and 2,300-year lines there.</p>
+<p>Ptolemy's Royal Canon, the Babylonian astronomical tablets, and the Elephantine Aramaic papyri fix Artaxerxes I Longimanus's seventh year so that Ezra's journey lands in the <strong>autumn of 457 B.C.</strong> (Ezra 7:7–9). Commentaries sometimes write <strong>458/457</strong> when converting regnal years; other historians debate Artaxerxes I versus II. This chart follows the historicist line tied to Ezra's seventh year — not a year printed in Daniel 9. This sitting starts both the 70-week and 2,300-year lines at autumn 457 B.C.</p>
 
 <figure class="sheet-diagram" data-diagram="s9-3">
-<pre class="chain-ascii" aria-hidden="true">THE FOUR PERSIAN DECREES COMPARED
+<pre class="chain-ascii" aria-hidden="true">PERSIAN COMMISSIONS COMPARED (3 DECREES + NEHEMIAH PERMIT)
 DECREE:            DATE:       BIBLICAL TEXT:   SCOPE:                RESTORES CITY &amp; STATE?
 1. Cyrus           538/537 BC  Ezra 1:1–4       Temple only           NO (Temple only)
 2. Darius I        520 BC      Ezra 6:1–12      Reaffirms Temple      NO (Temple only)
@@ -5307,7 +5307,7 @@ Ezra 7:11–26                                Troublous times               "The
 
 <div class="framework-card">
   <p class="framework-card-kicker">2. The Midst of the Week: Spring A.D. 31</p>
-  <p>The final week of seven years ran from Autumn A.D. 27 to Autumn A.D. 34. The "midst of the week" is exactly 3.5 years after Autumn A.D. 27, which lands in <strong>Spring A.D. 31</strong>. In Spring A.D. 31, at the feast of the Passover, Jesus Christ was crucified on Calvary.</p>
+  <p>The final week of seven years ran from Autumn A.D. 27 to Autumn A.D. 34. The "midst of the week" is exactly 3.5 years after Autumn A.D. 27, which lands in <strong>Spring A.D. 31</strong>. In Spring A.D. 31, at the feast of the Passover, Jesus Christ was crucified on Calvary. That date is this chart’s landing from Daniel 9’s midst of the week, not a separately attested astronomical lock on Passover; historians debate A.D. 30 versus A.D. 31 for the crucifixion.</p>
 </div>
 
 <div class="framework-card">
@@ -5317,7 +5317,7 @@ Ezra 7:11–26                                Troublous times               "The
 
 <div class="framework-card">
   <p class="framework-card-kicker">4. The Close of the 70 Weeks: Autumn A.D. 34</p>
-  <p>The remaining 3.5 years of the 70th week ran from Spring A.D. 31 to <strong>Autumn A.D. 34</strong>. During this period, the disciples ministered first to the Jewish people (Matthew 10:5–6; Acts 1:8). In A.D. 34, Stephen was stoned (Acts 7:54–60). The stoning of Stephen in A.D. 34 closes the seventy weeks allotted to Daniel's people and city (9:24). Acts 7 records the stoning; it does not print a formal council title. After Stephen's death, Saul of Tarsus was converted, and the gospel went out more widely among the nations (Acts 8:1–4; 13:46).</p>
+  <p>The remaining 3.5 years of the 70th week ran from Spring A.D. 31 to <strong>Autumn A.D. 34</strong>. During this period, the disciples ministered first to the Jewish people (Matthew 10:5–6; Acts 1:8). In A.D. 34, Stephen was stoned (Acts 7:54–60). Autumn A.D. 34 is this chart’s <strong>working close</strong> of the seventieth week — inferred from the half-week after the cross and from Acts 7–8 (Stephen and the wider Gentile mission), not a year the biblical narrative prints. The stoning of Stephen closes the seventy weeks allotted to Daniel's people and city (9:24). Acts 7 records the stoning; it does not print a formal council title. After Stephen's death, the believers were scattered and bore witness beyond Jerusalem (Acts 8:1–4); Saul of Tarsus was converted on the road to Damascus (Acts 9:1–9).</p>
 </div>
 
 <figure class="sheet-diagram" data-diagram="s9-5">
@@ -5869,11 +5869,12 @@ Michael stands up ('amad: kingly stance, Dan 11:2–4)
   <p class="framework-card-kicker">The Numbered Spans of Daniel 12: The 1,290 and 1,335 Days</p>
   <p>In Daniel 12:11–12, two final prophetic spans are revealed from the time the <em>tamid</em> is taken away and the abomination of desolation is set up:</p>
   <blockquote class="scripture-quote">"And from the time that the daily sacrifice shall be taken away, and the abomination that maketh desolate set up, there shall be a thousand two hundred and ninety days. Blessed is he that waiteth, and cometh to the thousand three hundred and five and thirty days." — Daniel 12:11–12 (KJV)</blockquote>
-  <p>This sitting applies the year-day principle to these periods, measuring them from <strong>A.D. 508</strong>, when Frankish support of the Roman church in the west was in place. Clovis’s baptism is often dated 496; the battle of Vouillé is 507. Those related events lead into 508, the civil start of both numbered spans:</p>
+  <p>This sitting applies the year-day principle to these periods (Numbers 14:34; Ezekiel 4:6), reading the 1,290 and 1,335 days as solar years. The chart uses <strong>A.D. 508</strong> as a <strong>reconstructed civil start</strong> — the year Frankish support for the Roman church in the West was in place in the usual historicist reckoning. Clovis’s baptism is often dated 496; the battle of Vouillé is 507. Those milestones are related but not interchangeable with 508. If the start moves, the landing years below move with it; the year-day method stays visible either way.</p>
   <ul class="list-disc pl-5 my-2 space-y-1">
     <li><strong>1,290 prophetic days (solar years):</strong> A.D. 508 + 1,290 years = A.D. 1798, the year Berthier took the pope and the “time of the end” begins (Daniel 12:4).</li>
     <li><strong>1,335 prophetic days (solar years):</strong> A.D. 508 + 1,335 years = A.D. 1843, the waiting year of the great second-advent awakening, immediately before the 2,300 evenings-mornings land in 1844 (sitting 8).</li>
   </ul>
+  <p class="text-sm mt-2">Daniel 12:11 counts from the text’s pair of events (daily removed, abomination set up). This timeline’s 508 pin is the historicist <strong>civil</strong> reckoning above. Sitting 8’s reading of <em>tamid</em> as Christ’s continual priesthood answers a different question — what the daily is — not the calendar pin on this chart.</p>
 </div>
 
 <p>The Book of Daniel concludes with God's personal, tender promise to His aged, beloved prophet:</p>
@@ -5883,9 +5884,9 @@ Michael stands up ('amad: kingly stance, Dan 11:2–4)
 <p>Daniel is assured that he will sleep in peace in the dust, and then stand in his allotted inheritance at the resurrection! The prophecies of gold, silver, bronze, iron, roaring beasts, little horns, and numbered days were never an academic puzzle; they were the historical highway leading to the waking of sleeping bodies from the dust into everlasting fellowship with God.</p>
 
 <figure class="sheet-diagram" data-diagram="s10-3">
-<pre class="chain-ascii" aria-hidden="true">THE TIMELINE OF DANIEL 12:11–12 (MEASURED FROM A.D. 508)
+<pre class="chain-ascii" aria-hidden="true">THE TIMELINE OF DANIEL 12:11–12 (FROM A.D. 508 — RECONSTRUCTED CIVIL START)
 508 A.D. ──────────────────[ 1,290 YEARS ]──────────────────▶ 1798 A.D.
-Frankish support of the Roman church                         Berthier captures Pope; "Time of the End"
+Frankish support of the Roman church (496 / 507 related, not same pin)   Berthier captures Pope; "Time of the End"
                                                              Papacy wounded; prophetic unsealing (Dan 12:4)
 
 508 A.D. ──────────────────────────[ 1,335 YEARS ]──────────────────────────▶ 1843 A.D.

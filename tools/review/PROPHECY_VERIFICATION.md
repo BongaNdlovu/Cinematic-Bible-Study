@@ -77,21 +77,17 @@ source could not be reached or a claim could not be settled, it says so.
 
 | Item | State |
 |---|---|
-| **A.D. 31** | Standard, but on confessional grounds — the "midst of the 70th week" from autumn 27 — **not** astronomical proof. SDABC says the case "cannot be established by astronomical and calendrical proof" and that A.D. 30 is more popular among scholars generally. The text does not claim otherwise, but a reviewer will raise it. |
-| **A.D. 34 / Stephen** | Standard identification, but SDABC says there is **no direct historical evidence** for the date of Stephen's death; 34 is a "working date". Not yet hedged in the text. |
-| **457 B.C.** | Standard within historicism; outside it, most critical scholarship dates Ezra under Artaxerxes II or Artaxerxes I's 37th year, and SDABC concedes the camps are "about equal in number". Also an internal 458/457 two-reckoning question the text does not address. |
-| **508 / 1,290 / 1,335** | Standard Adventist reading (BRI calls it "the historical position… up to our own days"), and 1843 is the terminus in SDABC, the study guide and Uriah Smith. But it **depends on reading the *tamid* as paganism**, and SDABC says of the rival reading — the one this course takes elsewhere — that it can "find no satisfactory explanation of this text". **This tension is unresolved in the course and is the single most likely thing a well-read reviewer will press.** |
-| **538 as the 1,260 start** | An official church paper concedes it is a backward calculation from 1798 and that the 538 event was "anticlimactic". |
-| **"Four Persian decrees"** | The official study guide uses **three** (Cyrus, Darius, Artaxerxes). The fourth (Nehemiah's 444 commission) is a common but non-standard framing. |
+| **A.D. 31** | Standard, but on confessional grounds — the "midst of the 70th week" from autumn 27 — **not** astronomical proof. SDABC says the case "cannot be established by astronomical and calendrical proof" and that A.D. 30 is more popular among scholars generally. **Hedged in learner copy (2026-10-12):** midst-of-week landing; A.D. 30–31 debate named. |
+| **A.D. 34 / Stephen** | Standard identification, but SDABC says there is **no direct historical evidence** for the date of Stephen's death; 34 is a "working date". **Hedged in learner copy (2026-10-12):** “working close” from Acts 7–8; year not printed in narrative. |
+| **457 B.C.** | Standard within historicism; SDABC 458/457 and Artaxerxes I vs II debates. **Hedged in learner copy (2026-10-12):** autumn 457 as chart start; not a year printed in Daniel 9. See `GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md` §3. |
+| **508 / 1,290 / 1,335** | **Labeled (2026-10-12):** reconstructed civil start; tamid bridge sentence in Sitting 10. See `GC_SUBMISSION_DATES_508_31_34_PROOF.md` and flags doc §6. |
+| **538 as the 1,260 start** | **Labeled (2026-10-12):** effective civil pin; gradual rise; if 538 moves, 1798 moves. See flags doc §5. |
+| **"Four Persian decrees"** | **Resolved (2026-10-12):** three restoring decrees (guide) + Nehemiah permit labeled. See flags doc §4. |
 
 ## Not verified — settle before submission
 
-- **Himes's *Signs of the Times*, first number 20 March 1840.** Only a catalogue
-  title was reachable; the item returned HTTP 403. Needs the ADL item or a
-  library scan.
-- **The Exeter (New Hampshire) camp meeting, mid-August 1844.** Seen only in a
-  search snippet. Needs the SDA Encyclopedia, DARCOM, or Knight.
-- **Crosier's *Day-Star* article (1846).** Not verified at all.
+- **Himes / Exeter (1840 / 1844).** **VERIFIED 2026-10-12** — ESDA; Advent Herald 21 Aug. 1844; Internet Archive Signs of the Times vol. 1. See `GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md` §7–8.
+- **Crosier's *Day-Star* article (1846).** Not used in learner copy; Edson only, hedged. See flags doc §9.
 - **Antiochus's alleged tribute, the Day of Eleusis circle, and the ~1,080-day
   desecration.** The circle episode **is** independently confirmed (Livy
   xlv.12; Polybius xxix.27). The tribute and the desecration span are not.
@@ -99,8 +95,7 @@ source could not be reached or a claim could not be settled, it says so.
   and the DARCOM *Symposium on Daniel*.
 - **The Luther *Smalcald Articles* quotation** and the "Vicar of Christ" claims
   in sitting 7.
-- **"Clothing his armies in bronze armor"** (sitting 2) — an unsourced
-  homiletic detail.
+- **"Clothing his armies in bronze armor"** (sitting 2) — **REMOVED 2026-10-12** from `sheets-data.js`.
 - **The 106 cited-but-unquoted Scripture references.** Every *quotation* is
   verified verbatim against the KJV (44/44). References cited without being
   quoted have not each been checked against the passage.

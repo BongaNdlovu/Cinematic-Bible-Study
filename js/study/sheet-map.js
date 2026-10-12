@@ -432,7 +432,7 @@
           "Messiah cut off in the midst of the week",
           "Daniel 9:26–27; Matthew 27:51",
           "assets/study/epochs/calvary.jpg",
-          "The “he” who confirms the covenant for one week is the Messiah of 9:26, not a later tyrant inserted after a gap. In the midst of the seventieth week He is cut off, the veil tears, and sacrifice and oblation cease. A.D. 27 + 3.5 years = spring A.D. 31.\n\nThe week closes in A.D. 34 as the gospel goes to the Gentiles. Remaining balance: 2,300 − 490 = 1,810 years. A.D. 34 + 1,810 = 1844. Inserting a parenthesis after week sixty-nine breaks Gabriel’s command to consider the vision of chapter 8.\n\nMessiah died on schedule in A.D. 31; the remaining 1,810 years land in 1844."
+          "The “he” who confirms the covenant for one week is the Messiah of 9:26, not a later tyrant inserted after a gap. In the midst of the seventieth week He is cut off, the veil tears, and sacrifice and oblation cease. A.D. 27 + 3.5 years = spring A.D. 31 (midst of the week; not astronomical proof).\n\nThe week closes in A.D. 34 as this chart’s working close from Acts 7–8 (not a year Acts prints). Remaining balance: 2,300 − 490 = 1,810 years. A.D. 34 + 1,810 = 1844. Inserting a parenthesis after week sixty-nine breaks Gabriel’s command to consider the vision of chapter 8.\n\nMessiah died on schedule in A.D. 31; the remaining 1,810 years land in 1844."
         ),
         node(
           "jerusalem",
@@ -513,7 +513,7 @@
           "Michael stands up; sleepers awake",
           "Daniel 12:1–4, 13",
           "assets/study/epochs/resurrection-dawn.jpg",
-          "Daniel’s own “stand up” is the verb for kings assuming power (11:2–4, 7, 20–21). When Michael — the great Prince — stands, human probation closes, advocacy in heaven is complete, and a time of trouble such as never was begins. Those written in the book are delivered. Many who sleep in the dust awake — the Old Testament’s clearest bodily resurrection.\n\nThe 1,290 and 1,335 days, read from A.D. 508, confirm the same sanctuary line to 1798 and 1843. 1844 is the separate 2,300-year landing. The book that was sealed till the time of the end can now be understood because those spans have landed.\n\nDaniel is told to rest and to stand in his lot at the end of the days. The metals, beasts, horns, and numbers were always walking toward a man rising from the dust, not toward a twelfth empire."
+          "Daniel’s own “stand up” is the verb for kings assuming power (11:2–4, 7, 20–21). When Michael — the great Prince — stands, human probation closes, advocacy in heaven is complete, and a time of trouble such as never was begins. Those written in the book are delivered. Many who sleep in the dust awake — the Old Testament’s clearest bodily resurrection.\n\nThe 1,290 and 1,335 days, on the year-day principle, are charted from A.D. 508 as a reconstructed civil start (Clovis’s baptism ~496 and Vouillé ~507 are related but not the same pin). That yields 1798 and 1843; if the start moves, those landings move. 1844 is the separate 2,300-year landing. The book that was sealed till the time of the end can now be understood because those spans have landed.\n\nDaniel is told to rest and to stand in his lot at the end of the days. The metals, beasts, horns, and numbers were always walking toward a man rising from the dust, not toward a twelfth empire."
         )
       ]
     }

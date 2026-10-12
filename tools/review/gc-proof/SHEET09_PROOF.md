@@ -1,0 +1,302 @@
+# Sitting 9 — sentence-level proof
+
+**Units:** 296 · **Content hash:** `d506beaa5fe68fdd`
+
+| Unit ID | Tag | Verdict | Text (excerpt) | Proof |
+|---------|-----|---------|----------------|-------|
+| S09-TOC | N/A | N/A | Follow this sitting Roadmap · one-page infographic Introduction · Daniel's penitential prayer and Gabriel's return I … | Navigation or header chrome |
+| S09-NEXT | N/A | N/A | Next lesson Sheet 10 — Daniel 10–12: Michael Stands Up Daniel's final vision unfolds: the theophany by the River Tigr… | Navigation or header chrome |
+| S09-H-01 | N/A | N/A | Big idea | Navigation or header chrome |
+| S09-P-01 | HISTORY | ACCURATE | The seventy weeks (490 prophetic years) are severed ( chathak ) from the 2,300-day timeline, anchoring the entire pro… | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S09-P-02 | HISTORY | ACCURATE | In Sitting 8, Daniel received the longest time prophecy in the Bible: “Unto two thousand and three hundred days; then… | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S09-H-02 | N/A | N/A | Introduction | Navigation or header chrome |
+| S09-H-03 | N/A | N/A | Daniel's Penitential Prayer and Gabriel's Return | Navigation or header chrome |
+| S09-H-04 | N/A | N/A | Daniel 9:1–4, 20–23 · Babylon, 538 B.C. | Navigation or header chrome |
+| S09-P-03 | HISTORY | ACCURATE | In the first year of Darius the Mede (538 B.C.), Daniel was studying the scrolls of the prophet Jeremiah. He understo… | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S09-P-04 | TEXT | ACCURATE | Yet Daniel did not passively wait. Deeply concerned that the sins of his people might prolong their captivity, he set… | KJV substring verified (we have sinned, and have committed iniqu…) |
+| S09-P-05 | PASTORAL | ACCURATE | While Daniel was still speaking in prayer, presenting his supplication for the holy mountain of God, the angel Gabrie… | Pastoral application tethered to passage |
+| S09-BQ-01 | TEXT | ACCURATE | "O Daniel, I am now come forth to give thee skill and understanding. At the beginning of thy supplications the comman… | KJV substring verified (o daniel, i am now come forth to give th…) |
+| S09-P-06 | TEXT | ACCURATE | Notice Gabriel's command: "consider the vision." What vision? In Daniel 9, no new symbolic beasts or horns appear. Th… | KJV substring verified (consider the vision.…) |
+| S09-DIA-01 | INTERPRETATION | ACCURATE | THE THEOLOGICAL LINKAGE: DANIEL 8 & DANIEL 9 DANIEL 8 (The Unexplained Vision) DANIEL 9 (The Inspired Explanation) • … | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 9) |
+| S09-H-05 | N/A | N/A | Main Point 1 | Navigation or header chrome |
+| S09-H-06 | N/A | N/A | The Hebrew Verb Chathak: Severed from the 2,300 Days | Navigation or header chrome |
+| S09-H-07 | N/A | N/A | Daniel 9:24 | Navigation or header chrome |
+| S09-P-07 | INTERPRETATION | ACCURATE | Gabriel immediately begins his explanation by revealing the first portion of the timeline: | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 9) |
+| S09-BQ-02 | TEXT | ACCURATE | "Seventy weeks are determined upon thy people and upon thy holy city, to finish the transgression, and to make an end… | KJV substring verified (seventy weeks are determined upon thy pe…) |
+| S09-P-08 | INTERPRETATION | ACCURATE | A "week" (Hebrew: shabua , שָׁבוּעַ) literally means a unit of seven. Seventy weeks equal 70 × 7, which is 490 prophe… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 9) |
+| S09-H-08 | N/A | N/A | Linguistic Precision: The Hapax Legomenon Chathak | Navigation or header chrome |
+| S09-P-09 | INTERPRETATION | ACCURATE | The English King James Version translates the Hebrew verb as "determined" (Daniel 9:24). However, the inspired word i… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 9) |
+| S09-P-10 | INTERPRETATION | ACCURATE | Later Hebrew and related languages often use chathak for cutting or dividing. Gesenius’s lexicon gives both "to cut, … | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 9) |
+| S09-LI-01 | INTERPRETATION | ACCURATE | Gesenius's Hebrew Lexicon defines chathak : "Properly, to cut, to divide; to determine, to decree." | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 9) |
+| S09-LI-02 | INTERPRETATION | ACCURATE | Rabbinic usage: The Talmud uses chathak for cutting off a piece of flesh or trimming a vine. | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 9) |
+| S09-P-11 | INTERPRETATION | ACCURATE | From what are the seventy weeks (490 years) cut off? They cannot be severed from empty space. They are severed from t… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 9) |
+| S09-DIA-02 | HISTORY | ACCURATE | CHATHAK: SEVERING 490 YEARS FROM THE 2,300-YEAR PARENT TIMELINE ├──────────────────────── 2,300 YEARS (Daniel 8:14) ─… | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S09-H-09 | N/A | N/A | Main Point 2 | Navigation or header chrome |
+| S09-H-10 | N/A | N/A | Four Persian Decrees: Identifying the 457 B.C. Anchor | Navigation or header chrome |
+| S09-H-11 | N/A | N/A | Daniel 9:25; Ezra 7:11–26 | Navigation or header chrome |
+| S09-P-12 | INTERPRETATION | ACCURATE | Gabriel provides the precise historical event that triggers the countdown: | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 9) |
+| S09-BQ-03 | TEXT | ACCURATE | "Know therefore and understand, that from the going forth of the commandment to restore and to build Jerusalem unto t… | KJV substring verified (know therefore and understand, that from…) |
+| S09-P-13 | INTERPRETATION | ACCURATE | Persian monarchs issued several royal commissions regarding the Jewish return. The official Bible study guide on Dani… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 9) |
+| S09-H-12 | N/A | N/A | Persian commissions compared (three decrees + Nehemiah permit) | Navigation or header chrome |
+| S09-LI-03 | HISTORY | ACCURATE | 1. The Decree of Cyrus the Great (538/537 B.C. · Ezra 1:1–4): Cyrus authorized the exiles to return and rebuild the t… | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S09-LI-04 | HISTORY | ACCURATE | 2. The Decree of Darius I Hystaspes (520 B.C. · Ezra 6:1–12): When Samaritan adversaries halted temple construction, … | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S09-LI-05 | HISTORY | ACCURATE | 3. The Decree of Artaxerxes I Longimanus (Autumn 457 B.C. · Ezra 7:11–26): In his seventh regnal year, Artaxerxes iss… | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S09-LI-06 | HISTORY | ACCURATE | 4. The Commission to Nehemiah (444 B.C. · Nehemiah 2:1–8): In his twentieth year, Artaxerxes granted Nehemiah persona… | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S09-P-14 | INTERPRETATION | ACCURATE | Ptolemy's Royal Canon, the Babylonian astronomical tablets, and the Elephantine Aramaic papyri fix Artaxerxes I Longi… | Explicit hedge or labeled reconstruction (OneVoice27 §2) |
+| S09-DIA-03 | INTERPRETATION | ACCURATE | PERSIAN COMMISSIONS COMPARED (3 DECREES + NEHEMIAH PERMIT) DECREE: DATE: BIBLICAL TEXT: SCOPE: RESTORES CITY & STATE?… | Explicit hedge or labeled reconstruction (OneVoice27 §2) |
+| S09-H-13 | N/A | N/A | Main Point 3 | Navigation or header chrome |
+| S09-H-14 | N/A | N/A | The 69 Weeks to Messiah: The Anointing in A.D. 27 | Navigation or header chrome |
+| S09-H-15 | N/A | N/A | Daniel 9:25; Luke 3:1–3, 21–23; Mark 1:14–15; Acts 10:38 | Navigation or header chrome |
+| S09-P-15 | TEXT | ACCURATE | Daniel 9:25 subdivides the 70 weeks into distinct chronological segments: "seven weeks, and threescore and two weeks"… | KJV substring verified (seven weeks, and threescore and two week…) |
+| S09-LI-07 | HISTORY | ACCURATE | Seven weeks equal 49 prophetic days, which are 49 solar years (the time to clear the debris and rebuild Jerusalem's s… | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S09-LI-08 | INTERPRETATION | ACCURATE | Sixty-two weeks equal 434 prophetic days, which are 434 solar years. | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 9) |
+| S09-LI-09 | INTERPRETATION | ACCURATE | Total: 69 weeks equal 7 + 62, which is 483 prophetic days, or 483 literal solar years. | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 9) |
+| S09-H-16 | N/A | N/A | The Mathematical Walk: 457 B.C. to A.D. 27 (Accounting for No Year Zero) | Navigation or header chrome |
+| S09-P-16 | HISTORY | ACCURATE | In historical and astronomical chronology, there is no year zero between B.C. and A.D. The timeline moves immediately… | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S09-P-17 | HISTORY | ACCURATE | -457 + 483 + 1 = 27 A.D. | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S09-P-18 | HISTORY | ACCURATE | Measuring 483 full solar years from autumn 457 B.C. brings us with mathematical precision to Autumn A.D. 27 . | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S09-P-19 | HISTORY | ACCURATE | What occurred in Autumn A.D. 27? In the fifteenth year of the reign of Tiberius Caesar (Luke 3:1), Jesus of Nazareth … | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S09-P-20 | HISTORY | ACCURATE | The Hebrew word Mashiach (Messiah) and the Greek word Christos both mean "the Anointed One." Jesus was not born the M… | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S09-BQ-04 | TEXT | ACCURATE | "The time is fulfilled, and the kingdom of God is at hand: repent ye, and believe the gospel." — Mark 1:15 (KJV) | KJV substring verified (the time is fulfilled, and the kingdom o…) |
+| S09-P-21 | INTERPRETATION | ACCURATE | What "time" was fulfilled? Not a vague general epoch, but the prophetic timetable of Daniel 9:25: the 69 prophetic we… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 9) |
+| S09-DIA-04 | HISTORY | ACCURATE | THE 69 WEEKS TO MESSIAH THE PRINCE (457 B.C. TO A.D. 27) 457 B.C. ──────[ 49 YEARS (7 WEEKS) ]──────▶ 408 B.C. ──────… | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S09-H-17 | N/A | N/A | Main Point 4 | Navigation or header chrome |
+| S09-H-18 | N/A | N/A | The Midst of the Week: The Cross in A.D. 31 and Sacrifices Ceasing | Navigation or header chrome |
+| S09-H-19 | N/A | N/A | Daniel 9:26–27; Matthew 27:50–51; Hebrews 9:26; 10:12 | Navigation or header chrome |
+| S09-P-22 | HISTORY | ACCURATE | With 69 weeks completed in Autumn A.D. 27, exactly one prophetic week (7 literal years) remained of the 70-week coven… | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S09-BQ-05 | TEXT | ACCURATE | "And after threescore and two weeks shall Messiah be cut off, but not for himself... And he shall confirm the covenan… | KJV substring verified (and after threescore and two weeks shall…) |
+| S09-H-20 | N/A | N/A | 1. Messiah Cut Off: Substitutionary Atonement | Navigation or header chrome |
+| S09-P-23 | INTERPRETATION | ACCURATE | Daniel 9:26 declares that Messiah would be "cut off, but not for himself." The Hebrew phrase ve'en lo means that He w… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 9) |
+| S09-H-21 | N/A | N/A | 2. The Midst of the Week: Spring A.D. 31 | Navigation or header chrome |
+| S09-P-24 | HISTORY | ACCURATE | The final week of seven years ran from Autumn A.D. 27 to Autumn A.D. 34. The "midst of the week" is exactly 3.5 years… | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S09-H-22 | N/A | N/A | 3. Causing Sacrifices to Cease: The Rent Veil | Navigation or header chrome |
+| S09-P-25 | TEXT | ACCURATE | At the exact moment Jesus died on the cross crying "It is finished" (John 19:30), "the veil of the temple was rent in… | KJV substring verified (the veil of the temple was rent in twain…) |
+| S09-H-23 | N/A | N/A | 4. The Close of the 70 Weeks: Autumn A.D. 34 | Navigation or header chrome |
+| S09-P-26 | INTERPRETATION | ACCURATE | The remaining 3.5 years of the 70th week ran from Spring A.D. 31 to Autumn A.D. 34 . During this period, the disciple… | Explicit hedge or labeled reconstruction (OneVoice27 §2) |
+| S09-DIA-05 | HISTORY | ACCURATE | THE 70TH WEEK OF DANIEL (A.D. 27 TO A.D. 34) A.D. 27 ───────────[ 3.5 YEARS ]───────────▶ A.D. 31 ───────────[ 3.5 YE… | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S09-H-24 | N/A | N/A | Main Point 5 | Navigation or header chrome |
+| S09-H-25 | N/A | N/A | Refuting the Dispensationalist Gap: Christ Confirms the Covenant | Navigation or header chrome |
+| S09-H-26 | N/A | N/A | Why the 70th week belongs to Jesus, not a future Antichrist | Navigation or header chrome |
+| S09-P-27 | INTERPRETATION | ACCURATE | In the nineteenth century, John Nelson Darby and later the Scofield Reference Bible popularized dispensational futuri… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 9) |
+| S09-H-27 | N/A | N/A | The Grammatical and Theological Refutation of Futurism | Navigation or header chrome |
+| S09-LI-10 | HISTORY | ACCURATE | 1. The Grammatical Subject: Daniel 9:26 introduces "Messiah" as the subject who is cut off. Verse 27 continues with t… | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S09-LI-11 | INTERPRETATION | ACCURATE | 2. Which Covenant is Confirmed? Scripture never speaks of the Antichrist making or confirming a covenant with anyone.… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 9) |
+| S09-LI-12 | INTERPRETATION | ACCURATE | 3. Slicing the Text: Scripture nowhere authorizes inserting a 2,000-year parenthetical gap between the 69th and 70th … | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 9) |
+| S09-LI-13 | HISTORY | ACCURATE | 4. The Balance to 1844: Since 490 years of the 2,300-year parent line were completed in A.D. 34, 1,810 years remained… | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S09-DIA-06 | HISTORY | ACCURATE | THE UNBROKEN CONTINUITY FROM 457 B.C. TO 1844 A.D. 457 B.C. ──────[ 483 YEARS ]──────▶ A.D. 27 ──[ 3.5y ]──▶ A.D. 31 … | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S09-H-28 | N/A | N/A | CHRIST | Navigation or header chrome |
+| S09-P-28 | HISTORY | ACCURATE | Jesus Christ is the divine Center of Daniel 9. He was anointed at the Jordan in A.D. 27, cut off for our sins at Calv… | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S09-H-29 | N/A | N/A | Practical Application | Navigation or header chrome |
+| S09-H-30 | N/A | N/A | Resting on the Dated Rock of Calvary | Navigation or header chrome |
+| S09-P-29 | INTERPRETATION | ACCURATE | Daniel 9 provides profound assurance for every believer walking in a secularized world: | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 9) |
+| S09-H-31 | N/A | N/A | 1. Trust God's sovereign control over human history | Navigation or header chrome |
+| S09-P-30 | INTERPRETATION | ACCURATE | God orchestrated the decrees of Persian emperors, the movements of armies, and the exact calendar date of Messiah's c… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 9) |
+| S09-H-32 | N/A | N/A | 2. Practice intercessory repentance | Navigation or header chrome |
+| S09-P-31 | PASTORAL | ACCURATE | Daniel's prayer in sackcloth and ashes shows that true revival begins with personal and corporate confession. When th… | Pastoral application tethered to passage |
+| S09-H-33 | N/A | N/A | 3. Cling to the completed atonement of the Cross | Navigation or header chrome |
+| S09-P-32 | INTERPRETATION | ACCURATE | Messiah was cut off, but not for Himself. He bore your guilt, your shame, and your death penalty on Calvary. Earthly … | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 9) |
+| S09-H-34 | N/A | N/A | 4. Stand firm on the prophetic chain | Navigation or header chrome |
+| S09-P-33 | HISTORY | ACCURATE | Do not be tossed about by speculative dispensational theories that invent future seven-year tribulation gaps. Calvary… | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S09-H-35 | N/A | N/A | The principle to remember | Navigation or header chrome |
+| S09-LI-14 | INTERPRETATION | ACCURATE | TEXT — Does Daniel 9:24 use the verb chathak ("cut off") to sever 490 years from the 2,300 days? | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 9) |
+| S09-LI-15 | HISTORY | ACCURATE | HISTORY — Did Artaxerxes' decree in 457 B.C. uniquely restore civil governance and magistrates to Jerusalem? | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S09-LI-16 | INTERPRETATION | ACCURATE | INTERPRETATION — Does the no-year-zero walking sum land exactly on Christ's baptism in A.D. 27 and cross in A.D. 31? | Explicit hedge or labeled reconstruction (OneVoice27 §2) |
+| S09-LI-17 | INTERPRETATION | ACCURATE | CHRIST — Did Jesus confirm the New Covenant in His blood in the midst of the week, ending earthly animal sacrifices? | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 9) |
+| S09-CHR-TITLE | N/A | N/A | Christology: Messiah Cut Off: The Mathematical Anchor of Prophecy | Navigation or header chrome |
+| S09-CHR-SCRIPTURE | CHRIST | ACCURATE | Daniel 9:24–27; Mark 1:15; Matthew 27:50–51; Isaiah 53:5; Hebrews 9:26 | Christology block — canonical synthesis (not a Daniel quotation unless cited) |
+| S09-CHR-P1 | CHRIST | ACCURATE | In Daniel 9, the focal point of the entire prophetic calendar converges upon the Person and work of Jesus Christ. Gab… | Christology block — canonical synthesis (not a Daniel quotation unless cited) |
+| S09-CHR-P2 | CHRIST | ACCURATE | In the midst of the seventieth week—Spring A.D. 31—the divine climax occurred: Messiah was 'cut off, but not for hims… | Christology block — canonical synthesis (not a Daniel quotation unless cited) |
+| S09-CHR-P3 | CHRIST | ACCURATE | Rejoice in the immovable historical certainty of your salvation. Because Jesus Christ was baptized and crucified on e… | Christology block — canonical synthesis (not a Daniel quotation unless cited) |
+| S09-Q0-STEM | INTERPRETATION | ACCURATE | A Bible student asks: 'Why do historicist readers connect the 70 weeks of Daniel 9 with the 2,300 days of Daniel 8, w… | Assessment within historicist frame |
+| S09-Q0-OPT0 | INTERPRETATION | ACCURATE | The connection was devised by 19th-century American revivalist newspapers with no foundation in ancient Hebrew gramma… | Assessment within historicist frame |
+| S09-Q0-OPT1 | INTERPRETATION | ACCURATE | Daniel 9 is an allegorical liturgical poem celebrating the historical architecture of King Solomon's palace, possessi… | Assessment within historicist frame |
+| S09-Q0-OPT2 | HISTORY | ACCURATE | Gabriel commands Daniel to consider 'the vision' (Daniel 8); the Hebrew verb chathak in 9:24 means 'severed or cut of… | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S09-Q0-OPT3 | INTERPRETATION | ACCURATE | Chapters 8 and 9 were composed by opposing theological factions living centuries apart in Ptolemaic Alexandria who he… | Assessment within historicist frame |
+| S09-Q0-EXP | INTERPRETATION | ACCURATE | Gabriel commands Daniel to understand 'the vision' (the only unexplained vision was the 2,300 days of 8:14, 27). The … | Assessment within historicist frame |
+| S09-Q0-DIA0 | INTERPRETATION | ACCURATE | Misconception: Historicist exposition of Daniel 8 and 9 is rooted in the Hebrew text (chathak = cut off) and historic… | Assessment within historicist frame |
+| S09-Q0-DIA1 | INTERPRETATION | ACCURATE | Misconception: Daniel 9:24–27 is an explicit messianic timeline concerning Jerusalem, the sanctuary, and Messiah the … | Assessment within historicist frame |
+| S09-Q0-DIA3 | INTERPRETATION | ACCURATE | Misconception: Daniel was the sole inspired prophet, receiving both revelations from the angel Gabriel within an exil… | Assessment within historicist frame |
+| S09-Q1-STEM | INTERPRETATION | ACCURATE | Dispensational futurism claims the 70th week of Daniel 9:27 was detached and pushed 2,000 years into the future as a … | Assessment within historicist frame |
+| S09-Q1-OPT0 | HISTORY | ACCURATE | In Daniel 9:26–27, 'he' refers to Messiah, who confirmed the covenant in His blood (Matt 26:28; Heb 8:8–13) and cause… | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S09-Q1-OPT1 | INTERPRETATION | ACCURATE | The Hebrew text explicitly prints the Greek loan-word 'Antichristos' as the grammatical subject of verse 27, establis… | Assessment within historicist frame |
+| S09-Q1-OPT2 | INTERPRETATION | ACCURATE | The entire 70-week prophecy was fulfilled and exhausted during the lifetime of King Nebuchadnezzar when he conquered … | Assessment within historicist frame |
+| S09-Q1-OPT3 | INTERPRETATION | ACCURATE | The 70th week represents a symbolic period of 7,000 literal years that cannot be measured against any chronological c… | Assessment within historicist frame |
+| S09-Q1-EXP | HISTORY | ACCURATE | In Daniel 9:26-27, Messiah is the antecedent of 'he'. Christ confirmed the covenant (Matt 26:28) and caused sacrifice… | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S09-Q1-DIA1 | INTERPRETATION | ACCURATE | Misconception: The word 'antichrist' appears nowhere in Daniel; the passage centers upon 'Messiah the Prince' who mak… | Assessment within historicist frame |
+| S09-Q1-DIA2 | HISTORY | ACCURATE | Misconception: Daniel 9:24–27 begins in 457 B.C. and reaches Christ's ministry (A.D. 27–34), long after Nebuchadnezza… | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S09-Q1-DIA3 | INTERPRETATION | ACCURATE | Misconception: Under the biblical year-day scale, a prophetic week is seven literal years; inserting a 2,000-year gap… | Assessment within historicist frame |
+| S09-Q2-STEM | HISTORY | ACCURATE | Why do historicist readers start the seventy weeks in 457 B.C. rather than in a guessed year? | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S09-Q2-OPT0 | HISTORY | ACCURATE | The Hebrew text of Daniel 9 explicitly prints the calendar numerals '457 B.C.' within the inspired manuscript text of… | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S09-Q2-OPT1 | HISTORY | ACCURATE | Ezra 7 records Artaxerxes' seventh-year decree (457 B.C.) to restore and rebuild Jerusalem with full civil and judici… | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S09-Q2-OPT2 | INTERPRETATION | ACCURATE | The timeline commences when King Nebuchadnezzar first dreamed of the metallic colossus in the second year of his reig… | Assessment within historicist frame |
+| S09-Q2-OPT3 | INTERPRETATION | ACCURATE | Any Persian regnal year may be arbitrarily selected since prophetic chronological math can be readjusted to suit diff… | Assessment within historicist frame |
+| S09-Q2-EXP | HISTORY | ACCURATE | The decree that restores the city and its polity is Ezra 7, not a blank calendar. 457 B.C. is the historical date of … | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S09-Q2-DIA0 | HISTORY | ACCURATE | Misconception: Historical dates (such as 457 B.C.) are calculated chronological conclusions from biblical and histori… | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S09-Q2-DIA2 | HISTORY | ACCURATE | Misconception: Daniel 2 occurred decades earlier (603 B.C.) and contained no decree to rebuild Jerusalem's civic and … | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S09-Q2-DIA3 | HISTORY | ACCURATE | Misconception: Prophetic chronology is rigorous and verified at history's checkpoints; the 457 B.C. anchor lands prec… | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S09-Q3-STEM | INTERPRETATION | ACCURATE | Sixty-nine weeks reach unto Messiah the Prince (Daniel 9:25). How does the sitting date that arrival? | Assessment within historicist frame |
+| S09-Q3-OPT0 | INTERPRETATION | ACCURATE | The 69 weeks span into the early 20th century, terminating in 1914 as the political inauguration of an earthly kingdo… | Assessment within historicist frame |
+| S09-Q3-OPT1 | HISTORY | ACCURATE | They culminate in 164 B.C. when Judas Maccabeus cleansed the earthly sanctuary altar following the defilement by Anti… | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S09-Q3-OPT2 | INTERPRETATION | ACCURATE | They possess no calendar measurement, functioning merely as non-chronological poetry intended to express general mess… | Assessment within historicist frame |
+| S09-Q3-OPT3 | HISTORY | ACCURATE | 483 years from 457 B.C. land in A.D. 27, when Jesus is anointed with the Holy Spirit at baptism and proclaims, 'The t… | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S09-Q3-EXP | INTERPRETATION | ACCURATE | Messiah means Anointed. Baptism is the public anointing, and Jesus Himself announces the fulfilled time. | Assessment within historicist frame |
+| S09-Q3-DIA0 | INTERPRETATION | ACCURATE | Misconception: Daniel 9 reaches 'unto Messiah the Prince'; applying the 69 weeks to modern geopolitical events robs t… | Assessment within historicist frame |
+| S09-Q3-DIA1 | HISTORY | ACCURATE | Misconception: 164 B.C. falls centuries before the appearance of Messiah the Prince, falling far short of the 483-yea… | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S09-Q3-DIA2 | INTERPRETATION | ACCURATE | Misconception: Prophetic weeks that reach 'unto Messiah the Prince' are precisely measured time: 69 weeks = 483 proph… | Assessment within historicist frame |
+| S09-Q4-STEM | INTERPRETATION | ACCURATE | In the midst of the week Messiah is cut off and the sacrifice ceases (Daniel 9:26–27). What historical moment is that? | Assessment within historicist frame |
+| S09-Q4-OPT0 | INTERPRETATION | ACCURATE | The mid-week cessation of sacrifice describes a future Antichrist breaking a political peace treaty with modern natio… | Assessment within historicist frame |
+| S09-Q4-OPT1 | HISTORY | ACCURATE | Spring A.D. 31: Christ dies on Calvary, the temple veil is torn from top to bottom, type meets antitype, and the cove… | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S09-Q4-OPT2 | HISTORY | ACCURATE | The cutting off refers exclusively to the historical destruction of Solomon's temple by Nebuchadnezzar's forces in th… | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S09-Q4-OPT3 | HISTORY | ACCURATE | Critical scholars claim the cutting off describes the assassination of the Jewish high priest Onias III in 171 B.C. d… | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S09-Q4-EXP | INTERPRETATION | ACCURATE | Cut off, but not for Himself, is the cross. Matthew 27:50–51 records the torn veil the same afternoon. | Assessment within historicist frame |
+| S09-Q4-DIA0 | INTERPRETATION | ACCURATE | Misconception: In Daniel 9:26–27, Messiah is the antecedent who confirms the covenant; inserting a future tyrant robs… | Assessment within historicist frame |
+| S09-Q4-DIA2 | HISTORY | ACCURATE | Misconception: Daniel 9 looks forward from exile to the future Messiah, not backward to the 586 B.C. destruction of J… | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S09-Q4-DIA3 | INTERPRETATION | ACCURATE | Misconception: Onias III was an earthly priest; Daniel 9 points to Messiah the Prince, who made reconciliation for in… | Assessment within historicist frame |
+| S09-SG-TR0-DO | PASTORAL | ACCURATE | Open Scripture to Daniel 9:3 through 9:19. Read Daniel's prayer of confession in sackcloth and ashes for his people. | Pastoral application tethered to passage |
+| S09-SG-TR0-WHY | PASTORAL | ACCURATE | Daniel was one of the godliest men in history, yet his prayer repeatedly says 'we have sinned' and 'to us belongeth c… | Pastoral application tethered to passage |
+| S09-SG-TR1-DO | INTERPRETATION | ACCURATE | Read Daniel 9:24 in Scripture, noting the six goals and the verb chathak ('cut off'). Open Ezra 7:11–26 in the Script… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 9) |
+| S09-SG-TR1-WHY | HISTORY | ACCURATE | Daniel 9:24 lists six great covenant goals culminating in anointing the most holy and bringing in everlasting righteo… | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S09-SG-TR2-DO | HISTORY | ACCURATE | Walk the arithmetic of Daniel 9:25–27: 457 B.C. + 483 years = A.D. 27; + 3.5 years = Spring A.D. 31; + 3.5 years = Au… | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S09-SG-TR2-WHY | HISTORY | ACCURATE | Walking the arithmetic step-by-step with the no-year-zero rule shows that Christ was baptized on time (A.D. 27) and c… | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S09-SG-TR3-DO | INTERPRETATION | ACCURATE | Read Daniel 9:26–27 and Matthew 27:51. Trace who confirms the covenant and causes sacrifice and oblation to cease. | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 9) |
+| S09-SG-TR3-WHY | INTERPRETATION | ACCURATE | Messiah confirms the covenant with many for one week and causes sacrifice to cease in the midst of the week when He d… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 9) |
+| S09-SG-CHRIST-CLM | HISTORY | ACCURATE | Messiah is cut off, but not for Himself, in Daniel 9:26, which is Jesus at Passover in spring A.D. 31 in the midst of… | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S09-SG-CHRIST-WHY | HISTORY | ACCURATE | Daniel 9:26 through 9:27 place the Person before the arithmetic: Messiah confirms the covenant through His ministry a… | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S09-SG-NOW-CLM | HISTORY | ACCURATE | Dated mercy at the cross means your life is not floating in untimed religion. If Messiah landed on schedule in A.D. 3… | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S09-SG-NOW-WHY | HISTORY | ACCURATE | Gabriel's arithmetic ties baptism, crucifixion, and the remaining balance of the two thousand three hundred days to o… | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S09-SG-HELP-CLM | INTERPRETATION | ACCURATE | This sheet gives you a single test for any chart that postpones the seventieth week: ask who confirms the covenant in… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 9) |
+| S09-SG-HELP-WHY | INTERPRETATION | ACCURATE | If the he of 9:27 is Messiah already named in 9:26, you are not waiting for a seven-year restart that pushes the cros… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 9) |
+| S09-SG-VALUE-CLM | INTERPRETATION | ACCURATE | A hapax verb that forces a cut from the two thousand three hundred days is more valuable than a chart you cannot defe… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 9) |
+| S09-SG-VALUE-WHY | HISTORY | ACCURATE | Chathak appears only once in the Hebrew Bible, and Gabriel uses it while Daniel is still sick from the vision of chap… | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S09-SG-ASK-1 | INTERPRETATION | ACCURATE | Cut off from what — can I answer that question from Scripture without borrowing a teacher's summary? | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 9) |
+| S09-SG-ASK-2 | INTERPRETATION | ACCURATE | Why does inserting a gap after week sixty-nine break Gabriel's command to consider the vision in 9:23? | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 9) |
+| S09-SG-ASK-3 | INTERPRETATION | ACCURATE | If Messiah died on schedule in the midst of the week, what does that do to my willingness to trust the leftover sanct… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 9) |
+| S09-DGM-s9-1-TITLE | INTERPRETATION | ACCURATE | The Theological Linkage: Daniel 8 & Daniel 9 | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 9) |
+| S09-DGM-s9-1-1-ROLE | INTERPRETATION | ACCURATE | Left column | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 9) |
+| S09-DGM-s9-1-1-TITLE | INTERPRETATION | ACCURATE | Daniel 8 (The Unexplained Vision) | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 9) |
+| S09-DGM-s9-1-1-P1 | INTERPRETATION | ACCURATE | 2,300 Evening-Mornings (8:14) | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 9) |
+| S09-DGM-s9-1-1-P2 | INTERPRETATION | ACCURATE | Left without a starting date | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 9) |
+| S09-DGM-s9-1-1-P3 | INTERPRETATION | ACCURATE | Daniel faints sick for days (8:27) | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 9) |
+| S09-DGM-s9-1-1-P4 | INTERPRETATION | ACCURATE | Focus: Heavenly Sanctuary & Tamid | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 9) |
+| S09-DGM-s9-1-2-ROLE | INTERPRETATION | ACCURATE | Right column | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 9) |
+| S09-DGM-s9-1-2-TITLE | INTERPRETATION | ACCURATE | Daniel 9 (The Inspired Explanation) | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 9) |
+| S09-DGM-s9-1-2-P1 | INTERPRETATION | ACCURATE | Gabriel returns: "Consider the vision" (9:23) | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 9) |
+| S09-DGM-s9-1-2-P2 | INTERPRETATION | ACCURATE | 70 Weeks "cut off" (chathak) to anchor the span (9:24) | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 9) |
+| S09-DGM-s9-1-2-P3 | INTERPRETATION | ACCURATE | Gabriel gives the "going forth of the decree" (9:25) | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 9) |
+| S09-DGM-s9-1-2-P4 | INTERPRETATION | ACCURATE | Focus: Messiah Cut Off & Covenant Confirmed (9:26-27) | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 9) |
+| S09-DGM-s9-2-TITLE | INTERPRETATION | ACCURATE | Chathak: Severing 490 Years from the 2,300-Year Parent Timeline | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 9) |
+| S09-DGM-s9-2-1-ROLE | INTERPRETATION | ACCURATE | Parent timeline | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 9) |
+| S09-DGM-s9-2-1-TITLE | INTERPRETATION | ACCURATE | 2,300 Years | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 9) |
+| S09-DGM-s9-2-2-ROLE | INTERPRETATION | ACCURATE | Chathak (Cut Off) | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 9) |
+| S09-DGM-s9-2-2-TITLE | INTERPRETATION | ACCURATE | 490 Years (70 Weeks) & 1,810 Years | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 9) |
+| S09-DGM-s9-3-TITLE | INTERPRETATION | ACCURATE | The Four Persian Decrees Compared | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 9) |
+| S09-DGM-s9-4-TITLE | HISTORY | ACCURATE | The 69 Weeks to Messiah the Prince (457 B.C. to A.D. 27) | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S09-DGM-s9-4-1-ROLE | HISTORY | ACCURATE | 457 B.C. | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S09-DGM-s9-4-1-TITLE | INTERPRETATION | ACCURATE | Decree of Artaxerxes I | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 9) |
+| S09-DGM-s9-4-1-TEXT | HISTORY | ACCURATE | 49 years (7 weeks) to 408 B.C. | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S09-DGM-s9-4-2-ROLE | HISTORY | ACCURATE | 408 B.C. | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S09-DGM-s9-4-2-TITLE | INTERPRETATION | ACCURATE | Jerusalem Rebuilt | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 9) |
+| S09-DGM-s9-4-2-TEXT | HISTORY | ACCURATE | Troublous times. 434 years (62 weeks) to A.D. 27. | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S09-DGM-s9-4-3-ROLE | HISTORY | ACCURATE | A.D. 27 | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S09-DGM-s9-4-3-TITLE | INTERPRETATION | ACCURATE | Baptism of Jesus | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 9) |
+| S09-DGM-s9-4-3-TEXT | INTERPRETATION | ACCURATE | "The time is fulfilled". | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 9) |
+| S09-DGM-s9-5-TITLE | HISTORY | ACCURATE | The 70th Week of Daniel (A.D. 27 to A.D. 34) | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S09-DGM-s9-5-1-ROLE | HISTORY | ACCURATE | A.D. 27 | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S09-DGM-s9-5-1-TITLE | INTERPRETATION | ACCURATE | Baptism of Jesus | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 9) |
+| S09-DGM-s9-5-1-TEXT | HISTORY | ACCURATE | "Time is fulfilled". Ministry to Israel. 3.5 years to A.D. 31. | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S09-DGM-s9-5-2-ROLE | HISTORY | ACCURATE | A.D. 31 | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S09-DGM-s9-5-2-TITLE | INTERPRETATION | ACCURATE | The Cross (Passover) | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 9) |
+| S09-DGM-s9-5-2-TEXT | HISTORY | ACCURATE | "Messiah cut off". Veil rent; sacrifices cease. 3.5 years to A.D. 34. | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S09-DGM-s9-5-3-ROLE | HISTORY | ACCURATE | A.D. 34 | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S09-DGM-s9-5-3-TITLE | INTERPRETATION | ACCURATE | Stoning of Stephen | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 9) |
+| S09-DGM-s9-5-3-TEXT | INTERPRETATION | ACCURATE | Gospel to Gentiles. 70 Weeks expire. | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 9) |
+| S09-DGM-s9-6-TITLE | HISTORY | ACCURATE | The Unbroken Continuity from 457 B.C. to 1844 A.D. | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S09-DGM-s9-6-1-ROLE | INTERPRETATION | ACCURATE | 70 Weeks | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 9) |
+| S09-DGM-s9-6-1-TITLE | INTERPRETATION | ACCURATE | 490 Years | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 9) |
+| S09-DGM-s9-6-2-TITLE | INTERPRETATION | ACCURATE | 2,300 Years | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 9) |
+| S09-GD-INTRO-EXP | INTERPRETATION | ACCURATE | Daniel 9 cuts seventy weeks from the 2,300 days. You will do the arithmetic yourself and see why the confirming 'he' … | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 9) |
+| S09-GD-INTRO-DO-1 | INTERPRETATION | ACCURATE | Follow Introduction and Main Points I–V plus Practical Application. | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 9) |
+| S09-GD-INTRO-DO-2 | HISTORY | ACCURATE | Open Map and trace Artaxerxes' decree (457 B.C.), Calvary (A.D. 31), and the sanctuary (1844). View the royal decree. | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S09-GD-INTRO-DO-3 | INTERPRETATION | ACCURATE | Complete checkpoint questions, then continue to the final vision of Daniel 10–12. | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 9) |
+| S09-GD-END-WHY | INTERPRETATION | ACCURATE | Daniel 10–12 is next: the man in linen, the long march of chapter 11, the close of human probation when Michael stand… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 9) |
+| S09-VRF-CLAIM | INTERPRETATION | ACCURATE | You can verify the 70 weeks from Gabriel’s wording, from Ezra’s decree, from the baptism dating, and from the torn veil. | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 9) |
+| S09-VRF-0-LESSON | INTERPRETATION | ACCURATE | Gabriel tells Daniel to consider the vision — the unexplained 2,300 — before he cuts the weeks. | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 9) |
+| S09-VRF-0-QUOTE | TEXT | REVIEW | Daniel 9:23, King James Version: At the beginning of thy supplications the commandment came forth, and I am come to s… | Marked KJV — manual spot-check if ellipsis-heavy |
+| S09-VRF-0-CHECK | INTERPRETATION | ACCURATE | The vision still sickening Daniel is 8:27. Seventy weeks are not a new clock from zero. | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 9) |
+| S09-VRF-1-LESSON | INTERPRETATION | ACCURATE | Seventy weeks are determined — cut off — upon Daniel’s people and the holy city. | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 9) |
+| S09-VRF-1-QUOTE | TEXT | REVIEW | Daniel 9:24, King James Version: Seventy weeks are determined upon thy people and upon thy holy city, to finish the t… | Marked KJV — manual spot-check if ellipsis-heavy |
+| S09-VRF-1-CHECK | INTERPRETATION | ACCURATE | Chathak, determined, is used only here. The sitting reads it as severed from the longer 2,300. | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 9) |
+| S09-VRF-2-LESSON | INTERPRETATION | ACCURATE | The weeks run from a command to restore and build unto Messiah the Prince. | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 9) |
+| S09-VRF-2-QUOTE | TEXT | REVIEW | Daniel 9:25, King James Version: Know therefore and understand, that from the going forth of the commandment to resto… | Marked KJV — manual spot-check if ellipsis-heavy |
+| S09-VRF-2-CHECK | HISTORY | ACCURATE | 69 × 7 = 483 years. This sitting starts them at Artaxerxes’ seventh year. Work 457 + 483 on paper before you leave th… | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S09-VRF-3-LESSON | INTERPRETATION | ACCURATE | Artaxerxes’ seventh-year decree sends willing Israelites with authority for the house of God. | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 9) |
+| S09-VRF-3-QUOTE | TEXT | REVIEW | Ezra 7:7–8, 12–13, King James Version: And there went up some of the children of Israel… in the seventh year of Artax… | Marked KJV — manual spot-check if ellipsis-heavy |
+| S09-VRF-3-CHECK | HISTORY | ACCURATE | The year number is in the text. Ptolemy’s Canon (Artaxerxes I after Xerxes, d. 465) fixes that seventh year at 457 B.… | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S09-VRF-4-LESSON | INTERPRETATION | ACCURATE | Only this decree restores magistrates and judges — the civil “restore” of 9:25. | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 9) |
+| S09-VRF-4-QUOTE | TEXT | REVIEW | Ezra 7:25–26, King James Version: And thou, Ezra, after the wisdom of thy God, that is in thine hand, set magistrates… | Marked KJV — manual spot-check if ellipsis-heavy |
+| S09-VRF-4-CHECK | HISTORY | ACCURATE | Cyrus, Darius, and the earlier Artaxerxes decrees rebuild the house. Ezra 7 rebuilds the civic order. That is why thi… | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S09-VRF-5-LESSON | INTERPRETATION | ACCURATE | Luke dates the baptism to Tiberius’s fifteenth year, when Jesus is about thirty. | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 9) |
+| S09-VRF-5-QUOTE | TEXT | REVIEW | Luke 3:1, 21, 23, King James Version: Now in the fifteenth year of the reign of Tiberius Caesar… Jesus also being bap… | Marked KJV — manual spot-check if ellipsis-heavy |
+| S09-VRF-5-CHECK | HISTORY | ACCURATE | This sitting reads that fifteenth year as A.D. 27, the anointing that opens the seventieth week. If you move the bapt… | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S09-VRF-6-LESSON | INTERPRETATION | ACCURATE | Messiah is cut off in the midst of the week. Sacrifice ceases. | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 9) |
+| S09-VRF-6-QUOTE | TEXT | REVIEW | Daniel 9:26–27, King James Version: And after threescore and two weeks shall Messiah be cut off, but not for himself.… | Marked KJV — manual spot-check if ellipsis-heavy |
+| S09-VRF-6-CHECK | INTERPRETATION | ACCURATE | The he of 9:27 continues the Messiah of 9:26. A.D. 27 + 3½ years = spring A.D. 31 (midst of the week from Daniel 9; n… | Explicit hedge or labeled reconstruction (OneVoice27 §2) |
+| S09-VRF-7-LESSON | INTERPRETATION | ACCURATE | Matthew records the veil torn from the top — sacrifice’s grammar broken in the midst of the week. | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 9) |
+| S09-VRF-7-QUOTE | TEXT | REVIEW | Matthew 27:51, King James Version: And, behold, the veil of the temple was rent in twain from the top to the bottom; … | Marked KJV — manual spot-check if ellipsis-heavy |
+| S09-VRF-7-CHECK | INTERPRETATION | ACCURATE | Hebrews 10:19–20 will read that tear as a new and living way. The sitting’s claim is that the dated cut of 9:27 happe… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 9) |
+| S09-GLS-antichrist-SMP | TEXT | ACCURATE | Antichrist: In historicist reading: the church-state power that takes Christ’s place (anti = in place of) among Rome’… | Lexical / textual definition |
+| S09-GLS-antichrist-HIS | HISTORY | ACCURATE | 1 John already speaks of “many antichrists.” The Reformers applied the office of a persecuting papal supremacy to Dan… | Historical context card |
+| S09-GLS-artaxerxes-SMP | HISTORY | ACCURATE | Artaxerxes: Persian great king. His seventh year (457 B.C.) is the decree this study uses to start the 70 weeks (Ezra… | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S09-GLS-artaxerxes-HIS | HISTORY | ACCURATE | Ezra goes up with authority to appoint magistrates and judges — civil restoration, not only temple stones. His twenti… | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S09-GLS-atonement-SMP | TEXT | ACCURATE | Day of Atonement: Israel’s yearly day when the high priest entered the Most Holy Place to cleanse the sanctuary from … | Lexical / textual definition |
+| S09-GLS-atonement-HIS | HISTORY | ACCURATE | Leviticus 16. It is the Old Testament picture behind “then shall the sanctuary be nitsdaq.” On 22 October 1844 Jesus … | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S09-GLS-babylon-SMP | HISTORY | ACCURATE | Babylon: Capital of the gold head; Daniel’s first workplace and the city that fell in 539 B.C. | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S09-GLS-babylon-HIS | HISTORY | ACCURATE | Ishtar Gate, Marduk’s temples, double walls and a river. Daniel 1:2 says its first victory over Judah was given, not … | Historical context card |
+| S09-GLS-chathak-SMP | TEXT | ACCURATE | chathak: A Hebrew verb used only once in the Bible (Daniel 9:24): cut off, severed. | Lexical / textual definition |
+| S09-GLS-chathak-HIS | HISTORY | ACCURATE | Gabriel does not start a new clock from zero. He cuts seventy weeks from the only long span Daniel has just received … | Historical context card |
+| S09-GLS-cyrus-SMP | HISTORY | ACCURATE | Cyrus: Persian king who took Babylon in 539 B.C. and later permitted the Jews to return (Ezra 1). | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S09-GLS-cyrus-HIS | HISTORY | ACCURATE | Isaiah 45:1 names him a century and more beforehand and speaks of open gates. The Cyrus Cylinder shows a policy of re… | Historical context card |
+| S09-GLS-daniel-SMP | HISTORY | ACCURATE | Daniel: A Judahite noble taken to Babylon in 605 B.C.; prophet, court official, and the book’s human author-witness. | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S09-GLS-daniel-HIS | HISTORY | ACCURATE | His Hebrew name means “God is my Judge.” The court renamed him Belteshazzar. He drew the line at the king’s table (wo… | Historical context card |
+| S09-GLS-darby-SMP | TEXT | ACCURATE | John Nelson Darby: Plymouth Brethren teacher (1800–1882) who popularized the gap-week reading in Protestant dispensat… | Lexical / textual definition |
+| S09-GLS-darby-HIS | HISTORY | ACCURATE | Albury / Powerscourt circles and a system of ages. Daniel never prints the gap. This sitting names Darby so you can s… | Historical context card |
+| S09-GLS-darius-mede-SMP | TEXT | ACCURATE | Darius the Mede: The ruler who “received the kingdom” at Babylon’s fall in Daniel 5:31–6:1, about sixty-two years old. | Lexical / textual definition |
+| S09-GLS-darius-mede-HIS | HISTORY | ACCURATE | Greek histories name Cyrus as conqueror and do not list this Median Darius. Honest options: a governor (Ugbaru/Gubaru… | Historical context card |
+| S09-GLS-dispensationalism-SMP | TEXT | ACCURATE | Dispensationalism: A 19th-century Protestant system that splits history into ages and usually keeps Ribera’s gap befo… | Lexical / textual definition |
+| S09-GLS-dispensationalism-HIS | HISTORY | ACCURATE | S. R. Maitland took the gap-week reading into Protestant print in 1826. Edward Irving and John Nelson Darby populariz… | Historical context card |
+| S09-GLS-exile-SMP | HISTORY | ACCURATE | exile: The forced displacement of Judah to Babylon under God's judicial sentence across three deportations: 605, 597,… | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S09-GLS-exile-HIS | HISTORY | ACCURATE | Exile was not a chosen journey or a mere accident of war. Daniel 1:2 declares that God handed Jehoiakim over. Daniel … | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S09-GLS-ezekiel-SMP | TEXT | ACCURATE | Ezekiel: Priest-prophet already in exile; God had him lie on his side 390 + 40 days, “each day for a year” (Ezekiel 4… | Lexical / textual definition |
+| S09-GLS-ezekiel-HIS | HISTORY | ACCURATE | He is why Ezekiel is on the year-day sitting: a contemporary of Daniel’s world, hearing the same appointment in a num… | Historical context card |
+| S09-GLS-futurism-SMP | TEXT | ACCURATE | Futurism: The claim that most of the hard numbers in Daniel jump to a future Antichrist after a long gap. | Lexical / textual definition |
+| S09-GLS-futurism-HIS | HISTORY | ACCURATE | Older readers already expected a future individual antichrist. Francisco Ribera’s 1590 commentary made a systematic g… | Historical context card |
+| S09-GLS-gabriel-SMP | TEXT | ACCURATE | Gabriel: The angel sent to make Daniel understand (8:16; 9:21–23). | Lexical / textual definition |
+| S09-GLS-gabriel-HIS | HISTORY | ACCURATE | He interprets the ram and goat, then returns while Daniel is praying to cut seventy weeks from the unexplained vision… | Historical context card |
+| S09-GLS-hapax-SMP | TEXT | ACCURATE | hapax: A word that appears only once in the Bible (or in a given body of text). | Lexical / textual definition |
+| S09-GLS-hapax-HIS | HISTORY | ACCURATE | Chathak in Daniel 9:24 is a hapax. That is why the sitting slows down there: you cannot check the word against ten ot… | Historical context card |
+| S09-GLS-hiddekel-SMP | TEXT | ACCURATE | Hiddekel: The Tigris River, where Daniel saw the man in linen (Daniel 10). | Lexical / textual definition |
+| S09-GLS-hiddekel-HIS | HISTORY | ACCURATE | Hebrew Hiddekel. The last sitting opens here in 536 B.C. with a three-week fast and the long explanation of chapters … | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S09-GLS-historicism-SMP | TEXT | ACCURATE | Historicism: Read Daniel as an unbroken timeline of real empires from the prophet’s own day until the stone fills the… | Lexical / textual definition |
+| S09-GLS-historicism-HIS | HISTORY | ACCURATE | This course uses historicism because Daniel’s succession language and parallel visions best fit a continuous historic… | Historical context card |
+| S09-GLS-jerusalem-SMP | TEXT | ACCURATE | Jerusalem: Judah’s capital; Temple city; the place Daniel faced when he prayed (6:10). | Lexical / textual definition |
+| S09-GLS-jerusalem-HIS | HISTORY | ACCURATE | First vessels leave in 605; city and Temple fall in 586; return decrees under Persia. In Daniel 8 “the Glorious Land”… | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S09-GLS-michael-SMP | TEXT | ACCURATE | Michael: “The great prince who stands for Daniel’s people” (12:1). Michael is Christ. | Lexical / textual definition |
+| S09-GLS-michael-HIS | HISTORY | ACCURATE | He helps against the prince of Persia (10:13, 21). Jude 9 and Revelation 12 show him in conflict with the dragon. “St… | Historical context card |
+| S09-GLS-most-holy-SMP | TEXT | ACCURATE | Most Holy Place: The inner room of the sanctuary, entered only on the Day of Atonement with blood. | Lexical / textual definition |
+| S09-GLS-most-holy-HIS | HISTORY | ACCURATE | Leviticus 16. This study reads Daniel 8:14’s putting-right as that day’s heavenly counterpart — judgment and vindicat… | Historical context card |
+| S09-GLS-nitsdaq-SMP | TEXT | ACCURATE | nitsdaq: The verb in Daniel 8:14: the sanctuary is justified, vindicated, put right — not merely washed. | Lexical / textual definition |
+| S09-GLS-nitsdaq-HIS | HISTORY | ACCURATE | English often says “cleansed.” The Hebrew is a courtroom word (related to “righteous”), not taher (ritual washing). T… | Historical context card |
+| S09-GLS-probation-SMP | TEXT | ACCURATE | probation: The time during which a person or a kingdom may still turn. Daniel 4 gives twelve months of patience befor… | Lexical / textual definition |
+| S09-GLS-probation-HIS | HISTORY | ACCURATE | When Michael stands up (Daniel 12:1), that time of turning ends — the close of human probation — and a time of troubl… | Historical context card |
+| S09-GLS-sanctuary-SMP | TEXT | ACCURATE | sanctuary: God’s dwelling for priestly ministry — first the tent/temple on earth, then the true one in heaven (Hebrew… | Lexical / textual definition |
+| S09-GLS-sanctuary-HIS | HISTORY | ACCURATE | Daniel 8 is not only about a local altar in Judea. The horn magnifies itself to the Prince of the host and casts down… | Historical context card |
+| S09-GLS-scofield-SMP | HISTORY | ACCURATE | C. I. Scofield: American minister and editor (1843–1921) whose annotated 1909 Scofield Reference Bible popularized di… | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S09-GLS-scofield-HIS | HISTORY | ACCURATE | His explanatory study notes placed Ribera’s and Darby’s severed 70th week and secret pretribulation rapture directly … | Historical context card |
+| S09-GLS-tamid-SMP | TEXT | ACCURATE | tamid: Hebrew for the continual daily ministry — the standing, regular service before God. | Lexical / textual definition |
+| S09-GLS-tamid-HIS | HISTORY | ACCURATE | On earth it was the regular sacrifice. In Daniel 8 the horn removes the tamid and casts down the sanctuary’s place. T… | Historical context card |
+| S09-GLS-typology-SMP | TEXT | ACCURATE | typology: An earlier God-designed picture (type) that a later reality (antitype) fills full. | Lexical / textual definition |
+| S09-GLS-typology-HIS | HISTORY | ACCURATE | Dura is the type of forced worship; Revelation 13 is its global antitype. The earthly Day of Atonement is the type; D… | Historical context card |
+| S09-GLS-ulai-SMP | TEXT | ACCURATE | Ulai: A canal or river by Susa (Shushan) where Daniel saw the ram and goat (Daniel 8). | Lexical / textual definition |
+| S09-GLS-ulai-HIS | HISTORY | ACCURATE | The vision that names Medo-Persia and Greece, then asks how long the sanctuary-attack lasts: 2,300 evenings-mornings. | Historical context card |
+| S09-GLS-year-day-SMP | TEXT | ACCURATE | Year-Day Principle: When God gives a numbered sign, one prophetic day may stand for one literal solar year. | Lexical / textual definition |
+| S09-GLS-year-day-HIS | HISTORY | ACCURATE | God states the scale twice: Numbers 14:34 (forty spy-days become forty wilderness years) and Ezekiel 4:6 (Ezekiel’s b… | Historical context card |

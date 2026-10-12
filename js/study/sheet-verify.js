@@ -543,7 +543,7 @@
           "Boston made the preaching a press. Exeter named the day from Matthew 25 and Leviticus 16.",
           "Joshua V. Himes, Signs of the Times (Boston), first number, 20 March 1840; Samuel S. Snow, The True Midnight Cry (22 August 1844); Matthew 25:6, King James Version",
           "And at midnight there was a cry made, Behold, the bridegroom cometh; go ye out to meet him.",
-          "Himes’s paper is in libraries. Snow’s Exeter cry applied Leviticus 16’s tenth day to 22 October 1844. Contemporary newspapers then record that Christ did not appear. A mistaken event is not a vanished imprint.",
+          "Himes’s first number is dated 20 March 1840 (Signs of the Times, vol. 1, no. 1; ESDA “Advent Herald”; Internet Archive digitization). Snow preached the seventh-month message at Exeter, N.H., in August 1844 (Advent Herald, 21 Aug. 1844; ESDA “Snow, Samuel Sheffield”). True Midnight Cry, 22 Aug. 1844, applied Leviticus 16’s tenth day to 22 October 1844. Contemporary papers record the disappointment. A mistaken event is not a vanished imprint.",
           "https://archive.org/details/1868_20250419/1840"
         )
       ]
@@ -598,7 +598,7 @@
           "Messiah is cut off in the midst of the week. Sacrifice ceases.",
           "Daniel 9:26–27, King James Version",
           "And after threescore and two weeks shall Messiah be cut off, but not for himself. … and in the midst of the week he shall cause the sacrifice and the oblation to cease.",
-          "The he of 9:27 continues the Messiah of 9:26. A.D. 27 + 3½ years = spring A.D. 31. Remaining balance: 2,300 − 490 = 1,810. A.D. 34 + 1,810 = 1844."
+          "The he of 9:27 continues the Messiah of 9:26. A.D. 27 + 3½ years = spring A.D. 31 (midst of the week from Daniel 9; not a separately attested astronomical Passover date). A.D. 34 is this chart’s working close of the week from Acts 7–8, not a year the narrative prints. Remaining balance: 2,300 − 490 = 1,810. A.D. 34 + 1,810 = 1844."
         ),
         item(
           "scripture",
@@ -681,6 +681,13 @@
           "Flavius Josephus, Antiquities of the Jews XI.8.5, William Whiston translation (1737).",
           "And when the Book of Daniel was showed him wherein Daniel declared that one of the Greeks should destroy the empire of the Persians, he supposed that himself was the person intended.",
           "Josephus records Alexander the Great being shown Daniel while in Jerusalem, and reading the Greek conquest of Persia there. This is a first-century historian describing the book as a named, dated chain — not the course’s own claim. It is a historical witness, not Scripture: weigh it as Josephus, and note that the episode itself is reported and debated, not narrated in the Bible."
+        ),
+        item(
+          "scripture",
+          "Daniel 12:11–12 names two spans from the time the daily is taken away and the abomination is set up.",
+          "Daniel 12:11–12, King James Version",
+          "And from the time that the daily sacrifice shall be taken away, and the abomination that maketh desolate set up, there shall be a thousand two hundred and ninety days. Blessed is he that waiteth, and cometh to the thousand three hundred and five and thirty days.",
+          "The English supplies “sacrifice” in italics in some printings; the Hebrew is ha-tamid. The verse gives the counts, not A.D. 508. The sitting’s 508 start is a reconstructed civil pin on the year-day scale (Numbers 14:34; Ezekiel 4:6), separable from Clovis ~496 and Vouillé ~507. 508 + 1,290 = 1798; 508 + 1,335 = 1843. If the start moves, the landings move."
         )
       ]
     }

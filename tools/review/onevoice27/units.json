@@ -2,15 +2,15 @@
   "sheetHashes": {
     "0": "660cebe5d28f3538",
     "1": "2f7d7738c03a3fa7",
-    "2": "ea5941aadad618ec",
+    "2": "4186daaeabee6b63",
     "3": "59c1b914546a4c97",
     "4": "77a3cefc42b37efb",
     "5": "aa6738285e67a80e",
     "6": "87d9c63560ad095d",
-    "7": "dc50121df814a998",
-    "8": "b187550915f5c8c5",
-    "9": "bd18052e1c991bb8",
-    "10": "938aa5ff39919fb0"
+    "7": "87d09f51fb837f3d",
+    "8": "94739bc3fa9a2e5e",
+    "9": "d506beaa5fe68fdd",
+    "10": "808f3cc2b0e5fffc"
   },
   "sheetUnitCounts": {
     "0": 290,
@@ -22,8 +22,8 @@
     "6": 294,
     "7": 315,
     "8": 278,
-    "9": 294,
-    "10": 286
+    "9": 296,
+    "10": 292
   },
   "units": [
     {
@@ -4097,8 +4097,8 @@
       "id": "S02-P-13",
       "sheet": 2,
       "field": "content",
-      "text": "A \"third kingdom of brass, which shall bear rule over all the earth\" followed (Daniel 2:39). Alexander the Great dismantled the Persian Empire at Arbela/Gaugamela in 331 B.C., clothing his armies in bronze armor and spreading Greek language and culture throughout the ancient world. Scripture explicitly names Greece as the power that shatters Medo-Persia (Daniel 8:21).",
-      "hash": "857bbd184f584be2"
+      "text": "A \"third kingdom of brass, which shall bear rule over all the earth\" followed (Daniel 2:39). Alexander the Great dismantled the Persian Empire at Gaugamela in 331 B.C., spreading Greek language and Hellenistic culture across the Near East. Scripture explicitly names Greece as the power that shatters Medo-Persia (Daniel 8:21).",
+      "hash": "5cc9fac492df4841"
     },
     {
       "id": "S02-H-12",
@@ -13204,22 +13204,22 @@
       "id": "S07-P-14",
       "sheet": 7,
       "field": "content",
-      "text": "Historical records verify the exact fulfillment of this 1,260-year envelope in secular European history:",
-      "hash": "c8069571f86ba40b"
+      "text": "On the year-day scale, this sitting charts a 1,260-year envelope in European history. The papacy’s civil rise was gradual; commentaries warn that no single headline marks every transition — but the chart needs a testable pin:",
+      "hash": "e4f8377cab5e4ee6"
     },
     {
       "id": "S07-H-21",
       "sheet": 7,
       "field": "content",
-      "text": "The historical boundaries: A.D. 538 to A.D. 1798",
-      "hash": "6ad56ba3e6a6cc81"
+      "text": "The historical boundaries: A.D. 538 to A.D. 1798 (chart pins)",
+      "hash": "de0b693b5969493f"
     },
     {
       "id": "S07-LI-16",
       "sheet": 7,
       "field": "content",
-      "text": "The Starting Anchor (A.D. 538): In A.D. 533, Eastern Roman Emperor Justinian wrote to Pope John II recognizing the Bishop of Rome as head of the churches (Codex Justinianus I.1.8). That letter is history, not a verse. It could not be implemented in Rome while the Arian Ostrogoths held Italy. In March 538, Byzantine General Belisarius broke the Ostrogothic siege of Rome. With the Ostrogoths driven from the city—the third Arian kingdom uprooted—the 1,260-year papal supremacy begins.",
-      "hash": "09a97803291726da"
+      "text": "The starting pin (A.D. 538): In A.D. 533, Eastern Roman Emperor Justinian wrote to Pope John II recognizing the Bishop of Rome as head of the churches (Codex Justinianus I.1.8). That letter is history, not a verse. It could not be implemented in Rome while the Arian Ostrogoths held Italy. In March 538, Byzantine General Belisarius broke the Ostrogothic siege of Rome. With the Ostrogoths driven from the city — the third Arian kingdom uprooted — this chart begins the 1,260 years. Some presentations work backward from 1798; if 538 moves, 1798 moves on the same stick.",
+      "hash": "2632f97b4ff68de9"
     },
     {
       "id": "S07-LI-17",
@@ -14891,8 +14891,8 @@
       "id": "S07-GLS-ostrogoths-HIS",
       "sheet": 7,
       "field": "glossary",
-      "text": "Arian. When their grip on the city broke, Justinian’s grant to the Roman bishop could operate. 538 is the year the Ostrogoths were driven from Rome and Justinian’s decree took effect; it begins the 1,260 years.",
-      "hash": "569ed0f34a1d7dd9"
+      "text": "Arian. When their grip on the city broke, Justinian’s grant to the Roman bishop could operate. This chart uses 538 as the effective civil pin when Rome was cleared; papal power rose gradually. If 538 moves, 1798 moves on the same 1,260-year stick.",
+      "hash": "74899a3e1ff26097"
     },
     {
       "id": "S07-GLS-papacy-SMP",
@@ -16487,8 +16487,8 @@
       "id": "S08-VRF-7-CHECK",
       "sheet": 8,
       "field": "verify",
-      "text": "Himes’s paper is in libraries. Snow’s Exeter cry applied Leviticus 16’s tenth day to 22 October 1844. Contemporary newspapers then record that Christ did not appear. A mistaken event is not a vanished imprint.",
-      "hash": "144f121c0cf97fa8"
+      "text": "Himes’s first number is dated 20 March 1840 (Signs of the Times, vol. 1, no. 1; ESDA “Advent Herald”; Internet Archive digitization). Snow preached the seventh-month message at Exeter, N.H., in August 1844 (Advent Herald, 21 Aug. 1844; ESDA “Snow, Samuel Sheffield”). True Midnight Cry, 22 Aug. 1844, applied Leviticus 16’s tenth day to 22 October 1844. Contemporary papers record the disappointment. A mistaken event is not a vanished imprint.",
+      "hash": "b5f82c41d9916f3c"
     },
     {
       "id": "S08-GLS-alexander-SMP",
@@ -17194,15 +17194,15 @@
       "id": "S09-P-13",
       "sheet": 9,
       "field": "content",
-      "text": "Persian monarchs issued four distinct royal decrees regarding the Jewish return from exile. A systematic historical analysis demonstrates that only one fulfills the biblical criteria:",
-      "hash": "f460753fdb1f0a2b"
+      "text": "Persian monarchs issued several royal commissions regarding the Jewish return. The official Bible study guide on Daniel often compares three restoring decrees (Cyrus, Darius, Artaxerxes). This sitting adds Nehemiah’s wall commission as a fourth line on the chart — a permit under Artaxerxes, not a new charter for Daniel 9:25:",
+      "hash": "21360554f4b14747"
     },
     {
       "id": "S09-H-12",
       "sheet": 9,
       "field": "content",
-      "text": "The Four Persian Decrees Examined",
-      "hash": "b9dffb2fa08e6aaa"
+      "text": "Persian commissions compared (three decrees + Nehemiah permit)",
+      "hash": "a62471aca77b1199"
     },
     {
       "id": "S09-LI-03",
@@ -17236,15 +17236,15 @@
       "id": "S09-P-14",
       "sheet": 9,
       "field": "content",
-      "text": "Ptolemy's Royal Canon, the Babylonian astronomical tablets, and the Elephantine Aramaic papyri fix Artaxerxes I Longimanus's seventh year so that Ezra's journey lands in the autumn of 457 B.C. (Ezra 7:7–9). This sitting starts both the 70-week and 2,300-year lines there.",
-      "hash": "39a769c6c6fd1645"
+      "text": "Ptolemy's Royal Canon, the Babylonian astronomical tablets, and the Elephantine Aramaic papyri fix Artaxerxes I Longimanus's seventh year so that Ezra's journey lands in the autumn of 457 B.C. (Ezra 7:7–9). Commentaries sometimes write 458/457 when converting regnal years; other historians debate Artaxerxes I versus II. This chart follows the historicist line tied to Ezra's seventh year — not a year printed in Daniel 9. This sitting starts both the 70-week and 2,300-year lines at autumn 457 B.C.",
+      "hash": "5a09dada272de79d"
     },
     {
       "id": "S09-DIA-03",
       "sheet": 9,
       "field": "content",
-      "text": "THE FOUR PERSIAN DECREES COMPARED DECREE: DATE: BIBLICAL TEXT: SCOPE: RESTORES CITY & STATE? 1. Cyrus 538/537 BC Ezra 1:1–4 Temple only NO (Temple only) 2. Darius I 520 BC Ezra 6:1–12 Reaffirms Temple NO (Temple only) 3. Artaxerxes I 457 BC Ezra 7:11–26 Civil law & judges YES (Restores & Builds) 4. Artaxerxes I 444 BC Nehemiah 2:1–8 Wall repair permit NO (Executive permit)",
-      "hash": "e71fcfa0ec8f1e44"
+      "text": "PERSIAN COMMISSIONS COMPARED (3 DECREES + NEHEMIAH PERMIT) DECREE: DATE: BIBLICAL TEXT: SCOPE: RESTORES CITY & STATE? 1. Cyrus 538/537 BC Ezra 1:1–4 Temple only NO (Temple only) 2. Darius I 520 BC Ezra 6:1–12 Reaffirms Temple NO (Temple only) 3. Artaxerxes I 457 BC Ezra 7:11–26 Civil law & judges YES (Restores & Builds) 4. Artaxerxes I 444 BC Nehemiah 2:1–8 Wall repair permit NO (Executive permit)",
+      "hash": "2551b01c70034dcd"
     },
     {
       "id": "S09-H-13",
@@ -17418,8 +17418,8 @@
       "id": "S09-P-24",
       "sheet": 9,
       "field": "content",
-      "text": "The final week of seven years ran from Autumn A.D. 27 to Autumn A.D. 34. The \"midst of the week\" is exactly 3.5 years after Autumn A.D. 27, which lands in Spring A.D. 31 . In Spring A.D. 31, at the feast of the Passover, Jesus Christ was crucified on Calvary.",
-      "hash": "1a09684266563e4b"
+      "text": "The final week of seven years ran from Autumn A.D. 27 to Autumn A.D. 34. The \"midst of the week\" is exactly 3.5 years after Autumn A.D. 27, which lands in Spring A.D. 31 . In Spring A.D. 31, at the feast of the Passover, Jesus Christ was crucified on Calvary. That date is this chart’s landing from Daniel 9’s midst of the week, not a separately attested astronomical lock on Passover; historians debate A.D. 30 versus A.D. 31 for the crucifixion.",
+      "hash": "8452212b0c62f1c0"
     },
     {
       "id": "S09-H-22",
@@ -17446,8 +17446,8 @@
       "id": "S09-P-26",
       "sheet": 9,
       "field": "content",
-      "text": "The remaining 3.5 years of the 70th week ran from Spring A.D. 31 to Autumn A.D. 34 . During this period, the disciples ministered first to the Jewish people (Matthew 10:5–6; Acts 1:8). In A.D. 34, Stephen was stoned (Acts 7:54–60). The stoning of Stephen in A.D. 34 closes the seventy weeks allotted to Daniel's people and city (9:24). Acts 7 records the stoning; it does not print a formal council title. After Stephen's death, Saul of Tarsus was converted, and the gospel went out more widely among the nations (Acts 8:1–4; 13:46).",
-      "hash": "7740e90c11f401db"
+      "text": "The remaining 3.5 years of the 70th week ran from Spring A.D. 31 to Autumn A.D. 34 . During this period, the disciples ministered first to the Jewish people (Matthew 10:5–6; Acts 1:8). In A.D. 34, Stephen was stoned (Acts 7:54–60). Autumn A.D. 34 is this chart’s working close of the seventieth week — inferred from the half-week after the cross and from Acts 7–8 (Stephen and the wider Gentile mission), not a year the biblical narrative prints. The stoning of Stephen closes the seventy weeks allotted to Daniel's people and city (9:24). Acts 7 records the stoning; it does not print a formal council title. After Stephen's death, the believers were scattered and bore witness beyond Jerusalem (Acts 8:1–4); Saul of Tarsus was converted on the road to Damascus (Acts 9:1–9).",
+      "hash": "75d5dc9226154fd2"
     },
     {
       "id": "S09-DIA-05",
@@ -18622,8 +18622,8 @@
       "id": "S09-VRF-6-CHECK",
       "sheet": 9,
       "field": "verify",
-      "text": "The he of 9:27 continues the Messiah of 9:26. A.D. 27 + 3½ years = spring A.D. 31. Remaining balance: 2,300 − 490 = 1,810. A.D. 34 + 1,810 = 1844.",
-      "hash": "ad786dfb65277470"
+      "text": "The he of 9:27 continues the Messiah of 9:26. A.D. 27 + 3½ years = spring A.D. 31 (midst of the week from Daniel 9; not a separately attested astronomical Passover date). A.D. 34 is this chart’s working close of the week from Acts 7–8, not a year the narrative prints. Remaining balance: 2,300 − 490 = 1,810. A.D. 34 + 1,810 = 1844.",
+      "hash": "287d0bfff0b1b95f"
     },
     {
       "id": "S09-VRF-7-LESSON",
@@ -18869,6 +18869,20 @@
       "field": "glossary",
       "text": "Hebrew Hiddekel. The last sitting opens here in 536 B.C. with a three-week fast and the long explanation of chapters 10–12.",
       "hash": "39f10d6ba21bea07"
+    },
+    {
+      "id": "S09-GLS-historicism-SMP",
+      "sheet": 9,
+      "field": "glossary",
+      "text": "Historicism: Read Daniel as an unbroken timeline of real empires from the prophet’s own day until the stone fills the earth.",
+      "hash": "dfdefd8672bcbe2d"
+    },
+    {
+      "id": "S09-GLS-historicism-HIS",
+      "sheet": 9,
+      "field": "glossary",
+      "text": "This course uses historicism because Daniel’s succession language and parallel visions best fit a continuous historical reading when Scripture interprets Scripture. Wycliffe, Luther, Melanchthon, and Knox read Daniel as this one chain. Preterism and futurism are the rejected alternatives, with dated authors Alcázar (1614) and Ribera (1590).",
+      "hash": "7a36bee2415389d3"
     },
     {
       "id": "S09-GLS-jerusalem-SMP",
@@ -19553,8 +19567,8 @@
       "id": "S10-P-23",
       "sheet": 10,
       "field": "content",
-      "text": "This sitting applies the year-day principle to these periods, measuring them from A.D. 508 , when Frankish support of the Roman church in the west was in place. Clovis’s baptism is often dated 496; the battle of Vouillé is 507. Those related events lead into 508, the civil start of both numbered spans:",
-      "hash": "a0ec26828ca490f4"
+      "text": "This sitting applies the year-day principle to these periods (Numbers 14:34; Ezekiel 4:6), reading the 1,290 and 1,335 days as solar years. The chart uses A.D. 508 as a reconstructed civil start — the year Frankish support for the Roman church in the West was in place in the usual historicist reckoning. Clovis’s baptism is often dated 496; the battle of Vouillé is 507. Those milestones are related but not interchangeable with 508. If the start moves, the landing years below move with it; the year-day method stays visible either way.",
+      "hash": "87ea114af9392f5e"
     },
     {
       "id": "S10-LI-17",
@@ -19574,6 +19588,13 @@
       "id": "S10-P-24",
       "sheet": 10,
       "field": "content",
+      "text": "Daniel 12:11 counts from the text’s pair of events (daily removed, abomination set up). This timeline’s 508 pin is the historicist civil reckoning above. Sitting 8’s reading of tamid as Christ’s continual priesthood answers a different question — what the daily is — not the calendar pin on this chart.",
+      "hash": "21df0dbb1fc3a059"
+    },
+    {
+      "id": "S10-P-25",
+      "sheet": 10,
+      "field": "content",
       "text": "The Book of Daniel concludes with God's personal, tender promise to His aged, beloved prophet:",
       "hash": "b302754d1f91b1d4"
     },
@@ -19585,7 +19606,7 @@
       "hash": "be0bbb9361fb47ed"
     },
     {
-      "id": "S10-P-25",
+      "id": "S10-P-26",
       "sheet": 10,
       "field": "content",
       "text": "Daniel is assured that he will sleep in peace in the dust, and then stand in his allotted inheritance at the resurrection! The prophecies of gold, silver, bronze, iron, roaring beasts, little horns, and numbered days were never an academic puzzle; they were the historical highway leading to the waking of sleeping bodies from the dust into everlasting fellowship with God.",
@@ -19595,8 +19616,8 @@
       "id": "S10-DIA-03",
       "sheet": 10,
       "field": "content",
-      "text": "THE TIMELINE OF DANIEL 12:11–12 (MEASURED FROM A.D. 508) 508 A.D. ──────────────────[ 1,290 YEARS ]──────────────────▶ 1798 A.D. Frankish support of the Roman church Berthier captures Pope; \"Time of the End\" Papacy wounded; prophetic unsealing (Dan 12:4) 508 A.D. ──────────────────────────[ 1,335 YEARS ]──────────────────────────▶ 1843 A.D. \"Blessed is he that waiteth\" Great second-advent waiting year then 1844: 2,300-year sanctuary landing (sitting 8)",
-      "hash": "e8d07c9a20b3c91a"
+      "text": "THE TIMELINE OF DANIEL 12:11–12 (FROM A.D. 508 — RECONSTRUCTED CIVIL START) 508 A.D. ──────────────────[ 1,290 YEARS ]──────────────────▶ 1798 A.D. Frankish support of the Roman church (496 / 507 related, not same pin) Berthier captures Pope; \"Time of the End\" Papacy wounded; prophetic unsealing (Dan 12:4) 508 A.D. ──────────────────────────[ 1,335 YEARS ]──────────────────────────▶ 1843 A.D. \"Blessed is he that waiteth\" Great second-advent waiting year then 1844: 2,300-year sanctuary landing (sitting 8)",
+      "hash": "5468a278ad2679cb"
     },
     {
       "id": "S10-H-27",
@@ -19606,7 +19627,7 @@
       "hash": "7885518caa7da362"
     },
     {
-      "id": "S10-P-26",
+      "id": "S10-P-27",
       "sheet": 10,
       "field": "content",
       "text": "Jesus Christ is the grand Climax of the Book of Daniel. He is the Stone cut without hands that strikes the kingdoms and fills the whole earth (Daniel 2), the Son of God walking in the fiery furnace (Daniel 3), the High Priest in the heavenly court receiving the kingdom (Daniel 7), the Prince of princes vindicating His sanctuary (Daniel 8), the Messiah cut off on Calvary's cross (Daniel 9), and Michael the Archangel standing up in royal triumph (Daniel 12). He holds the keys of death and the grave; soon His voice will awake the sleeping dust of every believer who trusted in His name.",
@@ -19627,7 +19648,7 @@
       "hash": "9488e8e8ace0a8f1"
     },
     {
-      "id": "S10-P-27",
+      "id": "S10-P-28",
       "sheet": 10,
       "field": "content",
       "text": "The final chapter of Daniel speaks directly to our generation:",
@@ -19641,7 +19662,7 @@
       "hash": "5d1a0873a3d60e90"
     },
     {
-      "id": "S10-P-28",
+      "id": "S10-P-29",
       "sheet": 10,
       "field": "content",
       "text": "Deliverance during the coming Time of Trouble depends entirely on whether your name is found written in the Lamb's Book of Life. Do not delay your consecration. Surrender your life to Jesus Christ today, confess your sins, and receive His perfect righteousness.",
@@ -19655,7 +19676,7 @@
       "hash": "bec81911b6acdad2"
     },
     {
-      "id": "S10-P-29",
+      "id": "S10-P-30",
       "sheet": 10,
       "field": "content",
       "text": "Michael has not yet stood up in the sense of Daniel 12:1. Hebrews 7:25 is His intercession in this age, until that standing, when human probation closes. Use this time of grace to share the gospel with family, friends, and neighbors.",
@@ -19669,7 +19690,7 @@
       "hash": "4f638be0d9dd8d68"
     },
     {
-      "id": "S10-P-30",
+      "id": "S10-P-31",
       "sheet": 10,
       "field": "content",
       "text": "Daniel 12:3 promises: \"And they that be wise shall shine as the brightness of the firmament; and they that turn many to righteousness as the stars for ever and ever.\" In a world darkened by moral chaos and confusion, be a beacon of truth, pointing searching souls to Jesus Christ and His soon return.",
@@ -19683,7 +19704,7 @@
       "hash": "53b10642e017d4f9"
     },
     {
-      "id": "S10-P-31",
+      "id": "S10-P-32",
       "sheet": 10,
       "field": "content",
       "text": "Death is not defeat; it is merely sleep until the trumpet sounds. When facing bereavement, illness, or mortality, hold fast to Daniel 12:13: \"Thou shalt rest, and stand in thy lot at the end of the days.\" Jesus has conquered the grave, and the morning of eternity is about to break.",
@@ -20719,6 +20740,27 @@
       "hash": "c6ee963ebbde8a3d"
     },
     {
+      "id": "S10-VRF-10-LESSON",
+      "sheet": 10,
+      "field": "verify",
+      "text": "Daniel 12:11–12 names two spans from the time the daily is taken away and the abomination is set up.",
+      "hash": "c8de0d294362e87d"
+    },
+    {
+      "id": "S10-VRF-10-QUOTE",
+      "sheet": 10,
+      "field": "verify",
+      "text": "Daniel 12:11–12, King James Version: And from the time that the daily sacrifice shall be taken away, and the abomination that maketh desolate set up, there shall be a thousand two hundred and ninety days. Blessed is he that waiteth, and cometh to the thousand three hundred and five and thirty days.",
+      "hash": "88edc4e84aca9b27"
+    },
+    {
+      "id": "S10-VRF-10-CHECK",
+      "sheet": 10,
+      "field": "verify",
+      "text": "The English supplies “sacrifice” in italics in some printings; the Hebrew is ha-tamid. The verse gives the counts, not A.D. 508. The sitting’s 508 start is a reconstructed civil pin on the year-day scale (Numbers 14:34; Ezekiel 4:6), separable from Clovis ~496 and Vouillé ~507. 508 + 1,290 = 1798; 508 + 1,335 = 1843. If the start moves, the landings move.",
+      "hash": "dbd4bdfdc2f49d51"
+    },
+    {
       "id": "S10-GLS-alexander-SMP",
       "sheet": 10,
       "field": "glossary",
@@ -20799,8 +20841,8 @@
       "id": "S10-GLS-clovis-HIS",
       "sheet": 10,
       "field": "glossary",
-      "text": "Baptism is often dated 496; Vouillé is 507. A.D. 508 is the civil start of the 1,290 and 1,335 days of Daniel 12:11–12, landing 1798 and 1843, immediately before the 2,300-year sanctuary date in 1844.",
-      "hash": "8a07354ba4196961"
+      "text": "Baptism is often dated 496; Vouillé is 507 — related milestones, not the same pin as 508. A.D. 508 is this chart’s reconstructed civil start for the 1,290 and 1,335 days of Daniel 12:11–12 (year-day scale), landing 1798 and 1843; if the start moves, those landings move. The 2,300-year sanctuary date in 1844 is on a separate line from Sitting 9.",
+      "hash": "6d4a0c21676aabee"
     },
     {
       "id": "S10-GLS-cyrus-SMP",
@@ -20843,6 +20885,20 @@
       "field": "glossary",
       "text": "Cassander, Lysimachus, Seleucus, and Ptolemy. They are the goat’s four horns in Daniel 8 and the four heads of the leopard in Daniel 7. From one of those directions the little horn of chapter 8 grows.",
       "hash": "e7db4230f1868194"
+    },
+    {
+      "id": "S10-GLS-ezekiel-SMP",
+      "sheet": 10,
+      "field": "glossary",
+      "text": "Ezekiel: Priest-prophet already in exile; God had him lie on his side 390 + 40 days, “each day for a year” (Ezekiel 4:6).",
+      "hash": "fb07ed7e2a079d7f"
+    },
+    {
+      "id": "S10-GLS-ezekiel-HIS",
+      "sheet": 10,
+      "field": "glossary",
+      "text": "He is why Ezekiel is on the year-day sitting: a contemporary of Daniel’s world, hearing the same appointment in a numbered sign-act. He is not a later church theorist.",
+      "hash": "e99deac39ff55f4e"
     },
     {
       "id": "S10-GLS-gabriel-SMP",

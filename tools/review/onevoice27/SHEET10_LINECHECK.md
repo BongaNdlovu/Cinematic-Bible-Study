@@ -2,9 +2,9 @@
 
 **Audit Date:** 2026-09-20  
 **File Audited:** `js/study/sheets-data.js` (Sitting id: 10) with `sheet-verify.js`, `workbench.js`, `sheet-glossary.js`  
-**Audited Content Hash:** `938aa5ff39919fb0`  
+**Audited Content Hash:** `808f3cc2b0e5fffc`  
 **Method:** Exhaustive claim-unit audit of finished prose across content, christology, quizzes, studyGuide, guide, verify cards, workbench, and linked glossary entries.  
-**Counts:** ACCURATE: 249 | SOFTEN: 0 | FIX: 0 | N/A: 37 | Total: 286  
+**Counts:** ACCURATE: 255 | SOFTEN: 0 | FIX: 0 | N/A: 37 | Total: 292  
 
 ## 1. Summary of Required Sections & Governing Standards
 
@@ -98,23 +98,24 @@
 | S10-P-23 | INTERPRETATION | ACCURATE | Historicist argument grounded in Scripture interpreting Scripture (Dan 2; 7; 8; 9) |
 | S10-LI-17 | INTERPRETATION | ACCURATE | Biblical case and historical argument |
 | S10-LI-18 | INTERPRETATION | ACCURATE | Biblical case and historical argument |
-| S10-P-24 | INTERPRETATION | ACCURATE | Historicist argument grounded in Scripture interpreting Scripture (Dan 2; 7; 8; 9) |
+| S10-P-24 | TEXT | ACCURATE | Direct passage exposition verified in KJV text |
+| S10-P-25 | INTERPRETATION | ACCURATE | Historicist argument grounded in Scripture interpreting Scripture (Dan 2; 7; 8; 9) |
 | S10-BQ-08 | TEXT | ACCURATE | Direct KJV Scripture quotation verified against bible/kjv.json |
-| S10-P-25 | PASTORAL | ACCURATE | Personal application tethered to exilic covenant faithfulness |
+| S10-P-26 | PASTORAL | ACCURATE | Personal application tethered to exilic covenant faithfulness |
 | S10-DIA-03 | INTERPRETATION | ACCURATE | Prophetic diagram illustrating imperial succession and chronology |
 | S10-H-27 | N/A | N/A | Section title / kicker header chrome |
-| S10-P-26 | PASTORAL | ACCURATE | Personal application tethered to exilic covenant faithfulness |
+| S10-P-27 | PASTORAL | ACCURATE | Personal application tethered to exilic covenant faithfulness |
 | S10-H-28 | N/A | N/A | Section title / kicker header chrome |
 | S10-H-29 | N/A | N/A | Section title / kicker header chrome |
-| S10-P-27 | INTERPRETATION | ACCURATE | Historicist argument grounded in Scripture interpreting Scripture (Dan 2; 7; 8; 9) |
+| S10-P-28 | INTERPRETATION | ACCURATE | Historicist argument grounded in Scripture interpreting Scripture (Dan 2; 7; 8; 9) |
 | S10-H-30 | N/A | N/A | Section title / kicker header chrome |
-| S10-P-28 | PASTORAL | ACCURATE | Personal application tethered to exilic covenant faithfulness |
+| S10-P-29 | PASTORAL | ACCURATE | Personal application tethered to exilic covenant faithfulness |
 | S10-H-31 | N/A | N/A | Section title / kicker header chrome |
-| S10-P-29 | TEXT | ACCURATE | Direct passage exposition verified in KJV text |
+| S10-P-30 | TEXT | ACCURATE | Direct passage exposition verified in KJV text |
 | S10-H-32 | N/A | N/A | Section title / kicker header chrome |
-| S10-P-30 | INTERPRETATION | ACCURATE | Historicist argument grounded in Scripture interpreting Scripture (Dan 2; 7; 8; 9) |
+| S10-P-31 | INTERPRETATION | ACCURATE | Historicist argument grounded in Scripture interpreting Scripture (Dan 2; 7; 8; 9) |
 | S10-H-33 | N/A | N/A | Section title / kicker header chrome |
-| S10-P-31 | PASTORAL | ACCURATE | Personal application tethered to exilic covenant faithfulness |
+| S10-P-32 | PASTORAL | ACCURATE | Personal application tethered to exilic covenant faithfulness |
 | S10-H-34 | N/A | N/A | Section title / kicker header chrome |
 | S10-LI-19 | INTERPRETATION | ACCURATE | Four-level interpretive verification criteria |
 | S10-LI-20 | INTERPRETATION | ACCURATE | Four-level interpretive verification criteria |
@@ -262,6 +263,9 @@
 | S10-VRF-9-LESSON | HISTORY | ACCURATE | Historical documentation and exilic archaeological evidence |
 | S10-VRF-9-QUOTE | HISTORY | ACCURATE | Dated historical primary source quote (verified in translation) |
 | S10-VRF-9-CHECK | PASTORAL | ACCURATE | Empirical reader checkpoint and source verification instruction |
+| S10-VRF-10-LESSON | INTERPRETATION | ACCURATE | Historicist synthesis from Scripture interpreting Scripture |
+| S10-VRF-10-QUOTE | TEXT | ACCURATE | Exact KJV Scripture quotation verified in bible/kjv.json |
+| S10-VRF-10-CHECK | PASTORAL | ACCURATE | Empirical reader checkpoint and source verification instruction |
 | S10-GLS-alexander-SMP | INTERPRETATION | ACCURATE | Historicist vocabulary and prophetic hermeneutic definition |
 | S10-GLS-alexander-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
 | S10-GLS-artaxerxes-SMP | INTERPRETATION | ACCURATE | Historicist vocabulary and prophetic hermeneutic definition |
@@ -280,6 +284,8 @@
 | S10-GLS-daniel-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
 | S10-GLS-diadochi-SMP | INTERPRETATION | ACCURATE | Historicist vocabulary and prophetic hermeneutic definition |
 | S10-GLS-diadochi-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
+| S10-GLS-ezekiel-SMP | INTERPRETATION | ACCURATE | Historicist vocabulary and prophetic hermeneutic definition |
+| S10-GLS-ezekiel-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
 | S10-GLS-gabriel-SMP | INTERPRETATION | ACCURATE | Historicist vocabulary and prophetic hermeneutic definition |
 | S10-GLS-gabriel-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
 | S10-GLS-hiddekel-SMP | INTERPRETATION | ACCURATE | Historicist vocabulary and prophetic hermeneutic definition |

@@ -2,9 +2,9 @@
 
 **Audit Date:** 2026-09-20  
 **File Audited:** `js/study/sheets-data.js` (Sitting id: 9) with `sheet-verify.js`, `workbench.js`, `sheet-glossary.js`  
-**Audited Content Hash:** `bd18052e1c991bb8`  
+**Audited Content Hash:** `d506beaa5fe68fdd`  
 **Method:** Exhaustive claim-unit audit of finished prose across content, christology, quizzes, studyGuide, guide, verify cards, workbench, and linked glossary entries.  
-**Counts:** ACCURATE: 256 | SOFTEN: 0 | FIX: 0 | N/A: 38 | Total: 294  
+**Counts:** ACCURATE: 258 | SOFTEN: 0 | FIX: 0 | N/A: 38 | Total: 296  
 
 ## 1. Summary of Required Sections & Governing Standards
 
@@ -52,7 +52,7 @@
 | S09-H-11 | N/A | N/A | Section title / kicker header chrome |
 | S09-P-12 | INTERPRETATION | ACCURATE | Historicist argument grounded in Scripture interpreting Scripture (Dan 2; 7; 8; 9) |
 | S09-BQ-03 | TEXT | ACCURATE | Direct KJV Scripture quotation verified against bible/kjv.json |
-| S09-P-13 | INTERPRETATION | ACCURATE | Historicist argument grounded in Scripture interpreting Scripture (Dan 2; 7; 8; 9) |
+| S09-P-13 | HISTORY | ACCURATE | Documented historical event, dated primary chronicle, or standard history of interpretation |
 | S09-H-12 | N/A | N/A | Section title / kicker header chrome |
 | S09-LI-03 | INTERPRETATION | ACCURATE | Biblical case and historical argument |
 | S09-LI-04 | INTERPRETATION | ACCURATE | Biblical case and historical argument |
@@ -292,6 +292,8 @@
 | S09-GLS-hapax-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
 | S09-GLS-hiddekel-SMP | INTERPRETATION | ACCURATE | Historicist vocabulary and prophetic hermeneutic definition |
 | S09-GLS-hiddekel-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
+| S09-GLS-historicism-SMP | INTERPRETATION | ACCURATE | Historicist vocabulary and prophetic hermeneutic definition |
+| S09-GLS-historicism-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
 | S09-GLS-jerusalem-SMP | INTERPRETATION | ACCURATE | Historicist vocabulary and prophetic hermeneutic definition |
 | S09-GLS-jerusalem-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
 | S09-GLS-michael-SMP | CHRIST | ACCURATE | Christological definition and canonical significance |

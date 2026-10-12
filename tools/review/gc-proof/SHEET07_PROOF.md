@@ -1,0 +1,321 @@
+# Sitting 7 — sentence-level proof
+
+**Units:** 315 · **Content hash:** `87d09f51fb837f3d`
+
+| Unit ID | Tag | Verdict | Text (excerpt) | Proof |
+|---------|-----|---------|----------------|-------|
+| S07-TOC | N/A | N/A | Follow this sitting Roadmap · one-page infographic Introduction · The night vision and the winds of war I · The four … | Navigation or header chrome |
+| S07-NEXT | N/A | N/A | Next lesson Sheet 8 — Daniel 8: The Ram, The Goat, & 2,300 Days The prophetic timeline now narrows to the sanctuary i… | Navigation or header chrome |
+| S07-H-01 | N/A | N/A | Big idea | Navigation or header chrome |
+| S07-P-01 | INTERPRETATION | ACCURATE | While earthly empires rise through violent conquest and an apostate church-state wars against God's law and saints fo… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 7) |
+| S07-P-02 | PASTORAL | ACCURATE | In Sitting 6, Daniel faced the lions' den rather than surrender his daily prayer toward Jerusalem to an unchangeable … | Pastoral application tethered to passage |
+| S07-H-02 | N/A | N/A | Introduction | Navigation or header chrome |
+| S07-H-03 | N/A | N/A | The Night Vision and the Winds of War | Navigation or header chrome |
+| S07-H-04 | N/A | N/A | Daniel 7:1–3 · Babylon, c. 553 B.C. | Navigation or header chrome |
+| S07-P-03 | INTERPRETATION | ACCURATE | In the first year of Belshazzar, king of Babylon—approximately fourteen years prior to the handwriting on the wall an… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 7) |
+| S07-P-04 | INTERPRETATION | ACCURATE | Daniel beheld the "great sea" (the Mediterranean basin, the theater of ancient world empires) churned into foaming fu… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 7) |
+| S07-H-05 | N/A | N/A | Scripture interprets its own symbolic vocabulary | Navigation or header chrome |
+| S07-LI-01 | INTERPRETATION | ACCURATE | The Sea / Waters: Represent densely populated human civilizations, multitudes, and nations. Revelation 17:15 explicit… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 7) |
+| S07-LI-02 | INTERPRETATION | ACCURATE | The Winds: Represent military warfare, political strife, and violent upheaval. Jeremiah 49:36–37 records: "And upon E… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 7) |
+| S07-LI-03 | TEXT | ACCURATE | The Beasts: Represent world-ruling geopolitical empires arising out of human conflict. The interpreting angel declare… | KJV substring verified (these great beasts, which are four, are …) |
+| S07-LI-04 | TEXT | ACCURATE | The Horns: Represent individual rulers, dynasties, or kingdoms subdividing an empire: "And the ten horns out of this … | KJV substring verified (and the ten horns out of this kingdom ar…) |
+| S07-P-05 | INTERPRETATION | ACCURATE | From this storm-tossed sea of warring nations, four massive predatory beasts emerged in succession. This vision retel… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 7) |
+| S07-DIA-01 | HISTORY | ACCURATE | THE CONTIGUOUS PROPHETIC CORRELATION: DANIEL 2 & DANIEL 7 DANIEL 2 (The World's View: Metals) DANIEL 7 (Heaven's View… | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S07-H-06 | N/A | N/A | Main Point 1 | Navigation or header chrome |
+| S07-H-07 | N/A | N/A | The Four Predatory Beasts: Succession of World Empires | Navigation or header chrome |
+| S07-H-08 | N/A | N/A | Daniel 7:4–7 | Navigation or header chrome |
+| S07-P-06 | INTERPRETATION | ACCURATE | The four beasts arise from the sea in strict chronological succession, corresponding precisely to the four world empi… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 7) |
+| S07-H-09 | N/A | N/A | 1. The Winged Lion: The Neo-Babylonian Empire (605–539 B.C.) | Navigation or header chrome |
+| S07-P-07 | INTERPRETATION | ACCURATE | The first beast was like a lion with eagle's wings (Daniel 7:4). The lion—the king of beasts—and the eagle—the king o… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 7) |
+| S07-H-10 | N/A | N/A | 2. The Lopsided Bear: The Medo-Persian Empire (539–331 B.C.) | Navigation or header chrome |
+| S07-P-08 | HISTORY | ACCURATE | The second beast was like a bear, raised up on one of its sides, with three ribs clenched between its teeth (Daniel 7… | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S07-H-11 | N/A | N/A | 3. The Four-Headed, Four-Winged Leopard: The Grecian Empire (331–168 B.C.) | Navigation or header chrome |
+| S07-P-09 | HISTORY | ACCURATE | The third beast was a leopard possessing four wings of a fowl on its back and four heads (Daniel 7:6). A leopard is n… | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S07-H-12 | N/A | N/A | 4. The Dreadful and Terrible Beast: The Roman Empire (168 B.C.–476 A.D.) | Navigation or header chrome |
+| S07-P-10 | TEXT | ACCURATE | The fourth beast was so monstrous and unnatural that no animal in nature could depict it: it was "dreadful and terrib… | KJV substring verified (dreadful and terrible, and strong exceed…) |
+| S07-DIA-02 | HISTORY | ACCURATE | THE FOUR BEASTS AND THEIR SUCCESSION (DANIEL 7:4–7) BEAST: CHARACTERISTICS: HISTORICAL FULFILLMENT: 1. Lion with Wing… | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S07-H-13 | N/A | N/A | Main Point 2 | Navigation or header chrome |
+| S07-H-14 | N/A | N/A | The Emergence of the Little Horn: The Church-State Counterfeit | Navigation or header chrome |
+| S07-H-15 | N/A | N/A | Daniel 7:8, 20–25 | Navigation or header chrome |
+| S07-P-11 | INTERPRETATION | ACCURATE | While Daniel was contemplating the ten horns on the head of the fourth beast, he witnessed an astonishing development… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 7) |
+| S07-BQ-01 | TEXT | ACCURATE | "I considered the horns, and, behold, there came up among them another little horn, before whom there were three of t… | KJV substring verified (i considered the horns, and, behold, the…) |
+| S07-H-16 | N/A | N/A | The eight biblical identifying marks of the Little Horn | Navigation or header chrome |
+| S07-LI-05 | HISTORY | ACCURATE | Geographic and Chronological Origin (7:8): It rises out of the fourth beast (Western Rome) among the ten horns, meani… | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S07-LI-06 | INTERPRETATION | ACCURATE | Diverse from the Ten (7:24): Unlike the purely political or barbarian kingdoms around it, this power is "diverse" —a … | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 7) |
+| S07-LI-07 | HISTORY | ACCURATE | Uproots Three Horns (7:8, 24): Three of the ten original barbarian kingdoms were completely uprooted before it: the H… | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S07-LI-08 | INTERPRETATION | ACCURATE | Eyes Like the Eyes of a Man (7:8): Eyes in Scripture denote wisdom, vision, and discernment (Ephesians 1:18). Human e… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 7) |
+| S07-LI-09 | INTERPRETATION | ACCURATE | A Mouth Speaking Pompous Words Against the Most High (7:8, 25): It utters blasphemies against God, arrogating to an e… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 7) |
+| S07-LI-10 | INTERPRETATION | ACCURATE | Persecutes and Wears Out the Saints (7:21, 25): It wages institutional warfare against faithful believers who adhere … | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 7) |
+| S07-LI-11 | INTERPRETATION | ACCURATE | Thinks to Change Times and Laws (7:25): The Aramaic words zimnin (times) and dath (law) name an intent to change appo… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 7) |
+| S07-LI-12 | INTERPRETATION | ACCURATE | Reigns for a Measured Prophetic Span (7:25): It exercises civil supremacy for "a time and times and the dividing of t… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 7) |
+| S07-P-12 | INTERPRETATION | ACCURATE | Daniel 7's little horn is the historical papacy: the office of the bishop of Rome in its church-state role, where rel… | Explicit hedge or labeled reconstruction (OneVoice27 §2) |
+| S07-BQ-02 | INTERPRETATION | ACCURATE | "This teaching shows forcefully that the Pope is the very Antichrist, who has exalted himself above, and opposed hims… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 7) |
+| S07-DIA-03 | HISTORY | ACCURATE | THE FORENSIC PROFILE OF THE ELEVENTH HORN (DANIEL 7:8, 24–25) SCRIPTURAL CRITERIA: HISTORICAL FULFILLMENT: • Rises am… | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S07-H-17 | N/A | N/A | Main Point 3 | Navigation or header chrome |
+| S07-H-18 | N/A | N/A | The 1,260-Year Prophetic Timeline (538 to 1798 A.D.) | Navigation or header chrome |
+| S07-H-19 | N/A | N/A | Daniel 7:25; Revelation 12:6, 14; 13:5 | Navigation or header chrome |
+| S07-P-13 | TEXT | ACCURATE | Scripture provides an exact prophetic calendar for the political supremacy of the little horn: "they shall be given i… | KJV substring verified (they shall be given into his hand until …) |
+| S07-H-20 | N/A | N/A | Building the 1,260-year prophetic calculation | Navigation or header chrome |
+| S07-LI-13 | INTERPRETATION | ACCURATE | Step 1: Calculate the Prophetic Units: In biblical Aramaic and Hebrew, a "time" ( iddan ) represents one prophetic ye… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 7) |
+| S07-LI-14 | TEXT | ACCURATE | Step 2: Confirming Parallels in Revelation: Revelation uses three interchangeable phrases to describe this identical … | KJV substring verified (a thousand two hundred and threescore da…) |
+| S07-LI-15 | INTERPRETATION | ACCURATE | Step 3: The Year-Day Principle: Scripture supplies the day-for-a-year scale: "each day for a year" (Numbers 14:34) an… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 7) |
+| S07-P-14 | INTERPRETATION | ACCURATE | On the year-day scale, this sitting charts a 1,260-year envelope in European history. The papacy’s civil rise was gra… | Explicit hedge or labeled reconstruction (OneVoice27 §2) |
+| S07-H-21 | N/A | N/A | The historical boundaries: A.D. 538 to A.D. 1798 (chart pins) | Navigation or header chrome |
+| S07-LI-16 | INTERPRETATION | ACCURATE | The starting pin (A.D. 538): In A.D. 533, Eastern Roman Emperor Justinian wrote to Pope John II recognizing the Bisho… | Explicit hedge or labeled reconstruction (OneVoice27 §2) |
+| S07-LI-17 | HISTORY | ACCURATE | The Concluding Anchor (A.D. 1798): Exactly 1,260 years later (538 + 1,260 = 1798), the French Revolution struck at pa… | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S07-DIA-04 | HISTORY | ACCURATE | THE 1,260-YEAR PROPHETIC TIMELINE (538–1798 A.D.) 538 A.D. ───────────────────────[ 1,260 YEARS ]────────────────────… | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S07-H-22 | N/A | N/A | Main Point 4 | Navigation or header chrome |
+| S07-H-23 | N/A | N/A | The Pre-Advent Heavenly Court: Ancient of Days and the Opened Books | Navigation or header chrome |
+| S07-H-24 | N/A | N/A | Daniel 7:9–12, 26 | Navigation or header chrome |
+| S07-P-15 | INTERPRETATION | ACCURATE | While the little horn was boasting and persecuting the saints on earth, Daniel's eyes were suddenly drawn upward from… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 7) |
+| S07-BQ-03 | TEXT | ACCURATE | "I beheld till the thrones were cast down, and the Ancient of days did sit, whose garment was white as snow, and the … | KJV substring verified (i beheld till the thrones were cast down…) |
+| S07-H-25 | N/A | N/A | Court vs. Stone: Two distinct moments of reckoning | Navigation or header chrome |
+| S07-P-16 | INTERPRETATION | ACCURATE | A critical error in prophetic interpretation is to confuse the heavenly courtroom of Daniel 7:9–14 with the Second Co… | Explicit hedge or labeled reconstruction (OneVoice27 §2) |
+| S07-LI-18 | INTERPRETATION | ACCURATE | Phase 1: The Pre-Advent Heavenly Judgment (Daniel 7:9–14): Thrones are placed, the Ancient of Days sits, and the book… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 7) |
+| S07-LI-19 | INTERPRETATION | ACCURATE | Phase 2: The Execution of the Verdict at the Second Advent (Daniel 7:26–27; Daniel 2:44): Only after the forensic rev… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 7) |
+| S07-DIA-05 | INTERPRETATION | ACCURATE | THE TWO MOMENTS OF DIVINE RECKONING 1. THE HEAVENLY FORENSIC TRIAL 2. THE TERRESTRIAL EXECUTION • Location: Heaven (b… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 7) |
+| S07-H-26 | N/A | N/A | Main Point 5 | Navigation or header chrome |
+| S07-H-27 | N/A | N/A | The Redemptive Climax: The Son of Man Crowned Before the Father | Navigation or header chrome |
+| S07-H-28 | N/A | N/A | Daniel 7:13–14, 27; Matthew 26:64; Hebrews 7:25 | Navigation or header chrome |
+| S07-P-17 | INTERPRETATION | ACCURATE | As Daniel watched the heavenly court in session, he witnessed the glorious climax of redemption history: | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 7) |
+| S07-BQ-04 | TEXT | ACCURATE | "I saw in the night visions, and, behold, one like the Son of man came with the clouds of heaven, and came to the Anc… | KJV substring verified (i saw in the night visions, and, behold,…) |
+| S07-P-18 | INTERPRETATION | ACCURATE | Note the direction of Christ's movement with utmost care: the Son of Man does not come down to the earth . He comes w… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 7) |
+| S07-P-19 | INTERPRETATION | ACCURATE | During His earthly trial before the high priest Caiaphas, Jesus explicitly cited Daniel 7:13, identifying Himself as … | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 7) |
+| S07-H-29 | N/A | N/A | CHRIST | Navigation or header chrome |
+| S07-P-20 | INTERPRETATION | ACCURATE | The Son of Man who approaches the Ancient of Days is Jesus Christ, our High Priest and Advocate. Earthly courts may c… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 7) |
+| S07-H-30 | N/A | N/A | Practical Application | Navigation or header chrome |
+| S07-H-31 | N/A | N/A | Living Under the Heavenly Verdict | Navigation or header chrome |
+| S07-P-21 | INTERPRETATION | ACCURATE | Daniel 7 provides foundational anchor-points for every Christian facing ideological, legal, or spiritual pressure in … | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 7) |
+| S07-H-32 | N/A | N/A | 1. Discern the spiritual battle behind political power | Navigation or header chrome |
+| S07-P-22 | INTERPRETATION | ACCURATE | Human empires rise through violent conquest and arrogance, but God's people do not place their ultimate trust in eart… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 7) |
+| S07-H-33 | N/A | N/A | 2. Stand firm on God's holy law and Sabbath | Navigation or header chrome |
+| S07-P-23 | TEXT | ACCURATE | The little horn attempted to change God's times and law. When human religious traditions contradict the plain command… | KJV substring verified (we ought to obey god rather than men…) |
+| S07-H-34 | N/A | N/A | 3. Reject human mediators; cling to Christ alone | Navigation or header chrome |
+| S07-P-24 | INTERPRETATION | ACCURATE | The little horn arrogates divine titles and claims to forgive sins. Scripture declares there is only one Mediator bet… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 7) |
+| S07-H-35 | N/A | N/A | 4. Rest in the assurance of the open books | Navigation or header chrome |
+| S07-P-25 | INTERPRETATION | ACCURATE | The heavenly judgment is good news for the believer. Christ does not enter the court to condemn His people, but to ad… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 7) |
+| S07-H-36 | N/A | N/A | The principle to remember | Navigation or header chrome |
+| S07-LI-20 | INTERPRETATION | ACCURATE | TEXT — Does Daniel 7:13 explicitly state that the Son of Man comes TO the Ancient of Days in heaven? | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 7) |
+| S07-LI-21 | HISTORY | ACCURATE | HISTORY — Are the 1,260 prophetic years verified from the fall of the Ostrogoths in 538 A.D. to Berthier's capture of… | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S07-LI-22 | INTERPRETATION | ACCURATE | INTERPRETATION — Does Scripture interpret its own symbols: waters as peoples, winds as war, beasts as kingdoms, and h… | Explicit hedge or labeled reconstruction (OneVoice27 §2) |
+| S07-LI-23 | INTERPRETATION | ACCURATE | CHRIST — Is Jesus Christ your heavenly Advocate who stands before the Ancient of Days to vindicate you in the judgment? | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 7) |
+| S07-CHR-TITLE | N/A | N/A | Christology: The Son of Man Vindicated Before the Ancient of Days | Navigation or header chrome |
+| S07-CHR-SCRIPTURE | CHRIST | ACCURATE | Daniel 7:9–14, 21–22, 26–27; Matthew 26:64; Revelation 1:7; 1 Timothy 2:5; Hebrews 7:25 | Christology block — canonical synthesis (not a Daniel quotation unless cited) |
+| S07-CHR-P1 | CHRIST | ACCURATE | In Daniel 7, the terrifying panorama of predatory beasts and the 1,260-year blasphemous reign of the little horn culm… | Christology block — canonical synthesis (not a Daniel quotation unless cited) |
+| S07-CHR-P2 | CHRIST | ACCURATE | The scene of Daniel 7:13 is not Christ coming to earth at His Second Advent; it is Christ moving into the presence of… | Christology block — canonical synthesis (not a Daniel quotation unless cited) |
+| S07-CHR-P3 | CHRIST | ACCURATE | Anchor your confidence in Christ's advocacy rather than earthly religious hierarchies or human mediators. There is on… | Christology block — canonical synthesis (not a Daniel quotation unless cited) |
+| S07-Q0-STEM | INTERPRETATION | ACCURATE | A beginner studying Daniel 7 asks: 'Why does the vision use four predatory beasts rising from a stormy sea instead of… | Assessment within historicist frame |
+| S07-Q0-OPT0 | INTERPRETATION | ACCURATE | Scripture interprets its own symbols: sea represents peoples (Rev 17:15), winds represent strife (Jer 49:36–37), and … | Assessment within historicist frame |
+| S07-Q0-OPT1 | INTERPRETATION | ACCURATE | The four beasts represent four mythological deities worshipped in ancient Mesopotamian cults whose colossal statues g… | Assessment within historicist frame |
+| S07-Q0-OPT2 | INTERPRETATION | ACCURATE | The vision presents a psychological allegory depicting four distinct personality temperaments exhibited by earthly mi… | Assessment within historicist frame |
+| S07-Q0-OPT3 | INTERPRETATION | ACCURATE | The prophecy foretells literal predatory biological monsters that will physically emerge from the Mediterranean Sea d… | Assessment within historicist frame |
+| S07-Q0-EXP | INTERPRETATION | ACCURATE | Daniel 7:17 and 7:23 state plainly that the four beasts are four kingdoms arising out of the earth. Connected with Re… | Assessment within historicist frame |
+| S07-Q0-DIA1 | INTERPRETATION | ACCURATE | Misconception: The beasts are prophetic symbols for real geopolitical world empires (Babylon, Medo-Persia, Greece, an… | Assessment within historicist frame |
+| S07-Q0-DIA2 | INTERPRETATION | ACCURATE | Misconception: Apocalyptic prophecy outlines successive world-ruling empires in chronological history, not psychologi… | Assessment within historicist frame |
+| S07-Q0-DIA3 | INTERPRETATION | ACCURATE | Misconception: Apocalyptic prophecy utilizes symbolic zoological imagery to depict geopolitical powers, not literal b… | Assessment within historicist frame |
+| S07-Q1-STEM | INTERPRETATION | ACCURATE | A student asks: 'Does Daniel 7 describe the Second Coming of Christ to earth in verses 9–14?' How does historicist ex… | Assessment within historicist frame |
+| S07-Q1-OPT0 | INTERPRETATION | ACCURATE | Yes; it depicts Christ's visible physical descent to earth on the Mount of Olives in Jerusalem to overthrow modern ge… | Assessment within historicist frame |
+| S07-Q1-OPT1 | INTERPRETATION | ACCURATE | The scene describes the primeval council of God before the creation of the world in Genesis 1, when angelic hosts wer… | Assessment within historicist frame |
+| S07-Q1-OPT2 | HISTORY | ACCURATE | The passage is an allegorical dramatization of the fourth-century Council of Nicaea in A.D. 325, formulating classica… | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S07-Q1-OPT3 | INTERPRETATION | ACCURATE | No; it describes a heavenly pre-advent courtroom scene: thrones are placed, books opened, and the Son of Man comes TO… | Assessment within historicist frame |
+| S07-Q1-EXP | INTERPRETATION | ACCURATE | Daniel 7:13 is explicit: the Son of Man comes with clouds of heaven and comes TO the Ancient of Days—a movement in he… | Assessment within historicist frame |
+| S07-Q1-DIA0 | INTERPRETATION | ACCURATE | Misconception: Daniel 7:13 shows Christ moving TO the Ancient of Days in heaven ('they brought Him near before Him'),… | Assessment within historicist frame |
+| S07-Q1-DIA1 | INTERPRETATION | ACCURATE | Misconception: The scene occurs at the climax of history following the four predatory empires and the 1,260-year litt… | Assessment within historicist frame |
+| S07-Q1-DIA2 | INTERPRETATION | ACCURATE | Misconception: The celestial court of ten thousand times ten thousand angels before the throne of God is a divine hea… | Assessment within historicist frame |
+| S07-Q2-STEM | INTERPRETATION | ACCURATE | Daniel 7:25 gives the little horn a time, times, and the dividing of time. How does historicist arithmetic read that … | Assessment within historicist frame |
+| S07-Q2-OPT0 | HISTORY | ACCURATE | It denotes three and a half literal solar days of local persecution occurring within a single calendar week during th… | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S07-Q2-OPT1 | INTERPRETATION | ACCURATE | It is an unquantifiable poetic expression for divine patience, conveying no measurable chronological duration or hist… | Assessment within historicist frame |
+| S07-Q2-OPT2 | HISTORY | ACCURATE | A time = 360 prophetic days, times = 720, dividing of time = 180: 1,260 prophetic days represent 1,260 calendar years… | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S07-Q2-OPT3 | INTERPRETATION | ACCURATE | It represents 1,260 centuries under an inflated hermeneutic where every prophetic day equals one hundred calendar yea… | Assessment within historicist frame |
+| S07-Q2-EXP | INTERPRETATION | ACCURATE | The same year-day measure, already proved by the seventy weeks, gives the length of the horn's war on the saints. | Assessment within historicist frame |
+| S07-Q2-DIA0 | INTERPRETATION | ACCURATE | Misconception: 'A time, times, and half a time' describes a major historical epoch of institutional supremacy, not a … | Assessment within historicist frame |
+| S07-Q2-DIA1 | INTERPRETATION | ACCURATE | Misconception: Revelation 12:6, 14 and 13:5 confirm the exact duration as 42 prophetic months and 1,260 prophetic day… | Assessment within historicist frame |
+| S07-Q2-DIA3 | INTERPRETATION | ACCURATE | Misconception: The biblical precedent established in Numbers 14:34 and Ezekiel 4:6 is strictly 'each day for a year',… | Assessment within historicist frame |
+| S07-Q3-STEM | INTERPRETATION | ACCURATE | How do the four beasts of Daniel 7 correspond to the four metals of Daniel 2? | Assessment within historicist frame |
+| S07-Q3-OPT0 | INTERPRETATION | ACCURATE | Each beast represents seasonal weather patterns in the Mediterranean basin, having no relationship to the geopolitica… | Assessment within historicist frame |
+| S07-Q3-OPT1 | INTERPRETATION | ACCURATE | Lion = Babylon/gold, bear = Medo-Persia/silver, leopard = Greece/bronze, fourth beast = Rome/iron; the little horn ri… | Assessment within historicist frame |
+| S07-Q3-OPT2 | INTERPRETATION | ACCURATE | The lion represents Imperial Rome, the bear represents modern secular superpowers, and the leopard depicts an eschato… | Assessment within historicist frame |
+| S07-Q3-OPT3 | INTERPRETATION | ACCURATE | Daniel 7 completely replaces and discards the metallic colossus of Daniel 2, presenting an entirely unrelated sequenc… | Assessment within historicist frame |
+| S07-Q3-EXP | INTERPRETATION | ACCURATE | Two visions, one chain. Beasts add moral character and the horn; they do not restart the statue. | Assessment within historicist frame |
+| S07-Q3-DIA0 | INTERPRETATION | ACCURATE | Misconception: Daniel 7:17, 23 explicitly state: 'These great beasts, which are four, are four kings... the fourth be… | Assessment within historicist frame |
+| S07-Q3-DIA2 | INTERPRETATION | ACCURATE | Misconception: The lion is first, corresponding to the golden head of Babylon; Daniel's visions maintain consistent c… | Assessment within historicist frame |
+| S07-Q3-DIA3 | INTERPRETATION | ACCURATE | Misconception: Daniel's visions build upon one another: Daniel 7 repeats and enlarges the four-kingdom outline establ… | Assessment within historicist frame |
+| S07-Q4-STEM | INTERPRETATION | ACCURATE | The Son of Man comes with clouds to the Ancient of Days and is given dominion (Daniel 7:13–14). Why is that movement … | Assessment within historicist frame |
+| S07-Q4-OPT0 | INTERPRETATION | ACCURATE | The passage records Jesus' historical earthly walking journey from Galilee down to Jerusalem during His public minist… | Assessment within historicist frame |
+| S07-Q4-OPT1 | INTERPRETATION | ACCURATE | The text dramatizes theological debates between early church bishops during the fourth-century trinitarian controvers… | Assessment within historicist frame |
+| S07-Q4-OPT2 | TEXT | REVIEW | The text says they brought Him near before the Ancient of Days in heaven; it is investiture. Daniel 7:22 KJV then say… | Scripture citation — verify ellipsis against KJV if quoted |
+| S07-Q4-OPT3 | INTERPRETATION | ACCURATE | The clouds represent local atmospheric weather patterns observed over the Tigris river during Daniel's visionary tran… | Assessment within historicist frame |
+| S07-Q4-EXP | INTERPRETATION | ACCURATE | Matthew 26:64 later joins the heavenly session to the visible return. First the court; then the appearing. | Assessment within historicist frame |
+| S07-Q4-DIA0 | INTERPRETATION | ACCURATE | Misconception: The setting is the supreme heavenly courtroom of verses 9–10, where celestial thrones are placed and b… | Assessment within historicist frame |
+| S07-Q4-DIA1 | INTERPRETATION | ACCURATE | Misconception: The multitude of ministering angels before the Ancient of Days is the sovereign heavenly court, not an… | Assessment within historicist frame |
+| S07-Q4-DIA3 | INTERPRETATION | ACCURATE | Misconception: The clouds are theophanic vehicles of celestial glory accompanying Christ to the heavenly throne, as e… | Assessment within historicist frame |
+| S07-SG-TR0-DO | INTERPRETATION | ACCURATE | Open Scripture to Daniel 7:17 and 7:23. Read both verses and write the definition the angel gives for the four beasts. | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 7) |
+| S07-SG-TR0-WHY | INTERPRETATION | ACCURATE | When you read Daniel 7:17 and 7:23, the angel tells Daniel plainly that the four beasts are four kings and four kingd… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 7) |
+| S07-SG-TR1-DO | HISTORY | ACCURATE | Read Daniel 7:24 and 7:25 in Scripture, then review the little-horn list in the article above. Open the horizon timel… | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S07-SG-TR1-WHY | HISTORY | ACCURATE | When you read Daniel 7:24 and 7:25, you will see ten kings, then an eleventh horn diverse from the others, three horn… | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S07-SG-TR2-DO | INTERPRETATION | ACCURATE | Read Daniel 7:9 through 7:10 and 7:13 through 7:14 in Scripture before you read 7:25 again. Note the order: thrones s… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 7) |
+| S07-SG-TR2-WHY | INTERPRETATION | ACCURATE | When you read Daniel 7:9 through 7:10, thrones are placed, the Ancient of Days sits, thousands minister to Him, and b… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 7) |
+| S07-SG-TR3-DO | INTERPRETATION | ACCURATE | Read Daniel 7:26 and 7:27 in Scripture. Write what happens to the horn's dominion and who receives the everlasting ki… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 7) |
+| S07-SG-TR3-WHY | INTERPRETATION | ACCURATE | When you read Daniel 7:26 and 7:27, the court sits in judgment, the horn's dominion is taken away and consumed, and t… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 7) |
+| S07-SG-CHRIST-CLM | INTERPRETATION | ACCURATE | One like a son of man in Daniel 7:13 through 7:14 is brought before the Ancient of Days to receive an everlasting kin… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 7) |
+| S07-SG-CHRIST-WHY | INTERPRETATION | ACCURATE | Daniel sees not a beast but a person, one like a son of man, receive dominion while the horn still speaks on earth. J… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 7) |
+| S07-SG-NOW-CLM | INTERPRETATION | ACCURATE | Church-state power that changes times and laws is not only a medieval story. You still live among the fragments of th… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 7) |
+| S07-SG-NOW-WHY | HISTORY | ACCURATE | Daniel 7:25 describes a power diverse from ethnic kingdoms because it merges religious authority with civil enforceme… | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S07-SG-HELP-CLM | INTERPRETATION | ACCURATE | This sheet keeps the four kingdoms on a fixed chain and gives you a checklist for the little horn so it does not beco… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 7) |
+| S07-SG-HELP-WHY | INTERPRETATION | ACCURATE | The beast table in the article matches lion, bear, leopard, and dreadful beast to the metals of chapter 2, and the ho… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 7) |
+| S07-SG-VALUE-CLM | INTERPRETATION | ACCURATE | A heavenly court that sits while the horn still rages means judgment is already in session, not only a future explosi… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 7) |
+| S07-SG-VALUE-WHY | HISTORY | ACCURATE | Daniel 7:9 through 7:14 shows books opened and a verdict underway before the horn's dominion is fully consumed in 7:2… | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S07-SG-ASK-1 | INTERPRETATION | ACCURATE | Can I tell the story of chapter 7 without dropping the heavenly court out of the sequence? | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 7) |
+| S07-SG-ASK-2 | INTERPRETATION | ACCURATE | What times and laws are being revised around me, and how does Daniel 7:25 name that kind of pressure? | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 7) |
+| S07-SG-ASK-3 | INTERPRETATION | ACCURATE | Do I want the Son of man to receive the kingdom, or a horn that speaks pompous words on my behalf? | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 7) |
+| S07-DGM-s7-1-TITLE | INTERPRETATION | ACCURATE | The Contiguous Prophetic Correlation: Daniel 2 & Daniel 7 | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 7) |
+| S07-DGM-s7-1-1-ROLE | INTERPRETATION | ACCURATE | The World's View: Metals | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 7) |
+| S07-DGM-s7-1-1-TITLE | INTERPRETATION | ACCURATE | Daniel 2 | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 7) |
+| S07-DGM-s7-1-1-P1 | HISTORY | ACCURATE | Gold Head (605-539 B.C.) | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S07-DGM-s7-1-1-P2 | HISTORY | ACCURATE | Silver Chest & Arms (539-331 B.C.) | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S07-DGM-s7-1-1-P3 | HISTORY | ACCURATE | Bronze Belly & Thighs (331-168 B.C.) | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S07-DGM-s7-1-1-P4 | HISTORY | ACCURATE | Iron Legs (168 B.C.-476) | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S07-DGM-s7-1-1-P5 | INTERPRETATION | ACCURATE | Iron & Clay Feet (476-Present) | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 7) |
+| S07-DGM-s7-1-1-P6 | INTERPRETATION | ACCURATE | Stone Pulverizes Statue | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 7) |
+| S07-DGM-s7-1-2-ROLE | INTERPRETATION | ACCURATE | Heaven's View: Predators | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 7) |
+| S07-DGM-s7-1-2-TITLE | INTERPRETATION | ACCURATE | Daniel 7 | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 7) |
+| S07-DGM-s7-1-2-P1 | INTERPRETATION | ACCURATE | Winged Lion (Babylon) | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 7) |
+| S07-DGM-s7-1-2-P2 | INTERPRETATION | ACCURATE | Lopsided Bear with Ribs (Medo-Persia) | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 7) |
+| S07-DGM-s7-1-2-P3 | INTERPRETATION | ACCURATE | Four-Headed Leopard (Greece) | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 7) |
+| S07-DGM-s7-1-2-P4 | INTERPRETATION | ACCURATE | Dreadful Iron Beast (Pagan Rome) | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 7) |
+| S07-DGM-s7-1-2-P5 | INTERPRETATION | ACCURATE | Ten Horns / Little Horn (Divided Rome & Papacy) | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 7) |
+| S07-DGM-s7-1-2-P6 | INTERPRETATION | ACCURATE | Celestial Court & Kingdom Given to Saints | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 7) |
+| S07-DGM-s7-2-TITLE | INTERPRETATION | ACCURATE | The Four Beasts and Their Succession (Daniel 7:4-7) | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 7) |
+| S07-DGM-s7-3-TITLE | INTERPRETATION | ACCURATE | The Forensic Profile of the Eleventh Horn (Daniel 7:8, 24-25) | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 7) |
+| S07-DGM-s7-3-1-TITLE | INTERPRETATION | ACCURATE | Scriptural Criteria | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 7) |
+| S07-DGM-s7-3-1-P1 | INTERPRETATION | ACCURATE | Rises among the ten horns | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 7) |
+| S07-DGM-s7-3-1-P2 | INTERPRETATION | ACCURATE | Diverse from the others | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 7) |
+| S07-DGM-s7-3-1-P3 | INTERPRETATION | ACCURATE | Uproots 3 Arian horns | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 7) |
+| S07-DGM-s7-3-1-P4 | INTERPRETATION | ACCURATE | Eyes of a man; mouth speaking pomp | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 7) |
+| S07-DGM-s7-3-1-P5 | INTERPRETATION | ACCURATE | Wears out the saints of the Most High | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 7) |
+| S07-DGM-s7-3-1-P6 | INTERPRETATION | ACCURATE | Thinks to change times and laws | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 7) |
+| S07-DGM-s7-3-1-P7 | INTERPRETATION | ACCURATE | Measured reign: 3.5 times | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 7) |
+| S07-DGM-s7-3-2-TITLE | INTERPRETATION | ACCURATE | Historical Fulfillment | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 7) |
+| S07-DGM-s7-3-2-P1 | INTERPRETATION | ACCURATE | Rises in Rome amid Western imperial collapse | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 7) |
+| S07-DGM-s7-3-2-P2 | INTERPRETATION | ACCURATE | Church-State power (spiritual + temporal crown) | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 7) |
+| S07-DGM-s7-3-2-P3 | HISTORY | ACCURATE | Heruli (493), Vandals (534), Ostrogoths (538) | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S07-DGM-s7-3-2-P4 | INTERPRETATION | ACCURATE | Papal claims: Vicar of Christ, universal bishop | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 7) |
+| S07-DGM-s7-3-2-P5 | INTERPRETATION | ACCURATE | Medieval inquisitions, suppression of dissent | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 7) |
+| S07-DGM-s7-3-2-P6 | INTERPRETATION | ACCURATE | Altered Decalogue: Sabbath changed to Sunday | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 7) |
+| S07-DGM-s7-3-2-P7 | HISTORY | ACCURATE | 1,260 years of civil supremacy (538-1798 A.D.) | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S07-DGM-s7-4-TITLE | HISTORY | ACCURATE | The 1,260-Year Prophetic Timeline (538-1798 A.D.) | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S07-DGM-s7-4-1-ROLE | HISTORY | ACCURATE | 538 A.D. | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S07-DGM-s7-4-1-TITLE | INTERPRETATION | ACCURATE | Temporal power begins | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 7) |
+| S07-DGM-s7-4-1-P1 | INTERPRETATION | ACCURATE | Ostrogoths driven from Rome | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 7) |
+| S07-DGM-s7-4-1-P2 | HISTORY | ACCURATE | Justinian's decree takes active effect | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S07-DGM-s7-4-1-P3 | INTERPRETATION | ACCURATE | 3rd Arian horn uprooted (Heruli/Vandal/Ostro) | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 7) |
+| S07-DGM-s7-4-1-P4 | INTERPRETATION | ACCURATE | Church-state temporal power begins | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 7) |
+| S07-DGM-s7-4-2-ROLE | HISTORY | ACCURATE | 1798 A.D. | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S07-DGM-s7-4-2-TITLE | INTERPRETATION | ACCURATE | Temporal civil supremacy ends | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 7) |
+| S07-DGM-s7-4-2-P1 | HISTORY | ACCURATE | General Berthier captures Pope Pius VI | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S07-DGM-s7-4-2-P2 | INTERPRETATION | ACCURATE | Papal civil government abolished | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 7) |
+| S07-DGM-s7-4-2-P3 | INTERPRETATION | ACCURATE | "Deadly wound" inflicted (Rev 13:3) | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 7) |
+| S07-DGM-s7-4-2-P4 | INTERPRETATION | ACCURATE | Temporal civil supremacy ends | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 7) |
+| S07-DGM-s7-5-TITLE | INTERPRETATION | ACCURATE | The Two Moments of Divine Reckoning | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 7) |
+| S07-DGM-s7-5-1-TITLE | INTERPRETATION | ACCURATE | 1. The Heavenly Forensic Trial | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 7) |
+| S07-DGM-s7-5-1-P1 | INTERPRETATION | ACCURATE | Location: Heaven (before Ancient of Days) | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 7) |
+| S07-DGM-s7-5-1-P2 | INTERPRETATION | ACCURATE | Scripture: Daniel 7:9-14 | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 7) |
+| S07-DGM-s7-5-1-P3 | INTERPRETATION | ACCURATE | Action: Books opened, lives examined | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 7) |
+| S07-DGM-s7-5-1-P4 | INTERPRETATION | ACCURATE | Status of Horn: Still speaking on earth | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 7) |
+| S07-DGM-s7-5-1-P5 | INTERPRETATION | ACCURATE | Verdict: Kingdom awarded to the saints | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 7) |
+| S07-DGM-s7-5-2-TITLE | INTERPRETATION | ACCURATE | 2. The Terrestrial Execution | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 7) |
+| S07-DGM-s7-5-2-P1 | INTERPRETATION | ACCURATE | Location: Earth (Second Advent of Christ) | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 7) |
+| S07-DGM-s7-5-2-P2 | INTERPRETATION | ACCURATE | Scripture: Daniel 7:26-27; Daniel 2:34-35 | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 7) |
+| S07-DGM-s7-5-2-P3 | INTERPRETATION | ACCURATE | Action: Stone strikes image, beast destroyed | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 7) |
+| S07-DGM-s7-5-2-P4 | INTERPRETATION | ACCURATE | Status of Horn: Dominion consumed to the end | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 7) |
+| S07-DGM-s7-5-2-P5 | INTERPRETATION | ACCURATE | Realization: Saints inherit the new earth | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 7) |
+| S07-GD-INTRO-EXP | INTERPRETATION | ACCURATE | Daniel 7 retells the metals as predators, then shows a church-state horn and a court that sits before the stone strikes. | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 7) |
+| S07-GD-INTRO-DO-1 | INTERPRETATION | ACCURATE | Follow Introduction and Main Points I–V plus Practical Application. | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 7) |
+| S07-GD-INTRO-DO-2 | HISTORY | ACCURATE | Open Map and trace 538, 1798, Rome, and the celestial court. View the 3D artifact. | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S07-GD-INTRO-DO-3 | INTERPRETATION | ACCURATE | Complete checkpoint questions, then continue to the sanctuary vision of Daniel 8. | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 7) |
+| S07-GD-END-WHY | INTERPRETATION | ACCURATE | Daniel 8 is next: a numbered sanctuary span, the tamid, and why Antiochus is too small and too early. | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 7) |
+| S07-VRF-CLAIM | INTERPRETATION | ACCURATE | You can verify the little horn’s marks from Daniel 7, from Revelation’s matching numbers, and from dated readers and … | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 7) |
+| S07-VRF-0-LESSON | INTERPRETATION | ACCURATE | The eleventh horn rises among ten, diverse, and uproots three. | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 7) |
+| S07-VRF-0-QUOTE | TEXT | REVIEW | Daniel 7:8, 24, King James Version: There came up among them another little horn, before whom there were three of the… | Marked KJV — manual spot-check if ellipsis-heavy |
+| S07-VRF-0-CHECK | HISTORY | ACCURATE | The three are the Heruli, Vandals, and Ostrogoths. The last of those blocking powers is driven from Rome in 538. Name… | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S07-VRF-1-LESSON | INTERPRETATION | ACCURATE | The horn speaks against God, wears out the saints, and is given a measured time. | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 7) |
+| S07-VRF-1-QUOTE | TEXT | REVIEW | Daniel 7:25, King James Version: And he shall speak great words against the most High, and shall wear out the saints … | Marked KJV — manual spot-check if ellipsis-heavy |
+| S07-VRF-1-CHECK | HISTORY | ACCURATE | A time, times, and dividing of time = 3½ years = 1,260 days. On the year-day scale already verified in sheet 0, that … | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S07-VRF-2-LESSON | INTERPRETATION | ACCURATE | Revelation writes the same span three ways: 1,260 days, 3½ times, 42 months. | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 7) |
+| S07-VRF-2-QUOTE | TEXT | REVIEW | Revelation 12:6, 12:14; 13:5, King James Version: A thousand two hundred and threescore days. … a time, and times, an… | Marked KJV — manual spot-check if ellipsis-heavy |
+| S07-VRF-2-CHECK | INTERPRETATION | ACCURATE | Open all three. They lock the arithmetic: 42 × 30 = 1,260. That is how 7:25 becomes 1,260 days before year-day turns … | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 7) |
+| S07-VRF-3-LESSON | INTERPRETATION | ACCURATE | A court sits in heaven, with books opened, before the kingdom is given to the saints. | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 7) |
+| S07-VRF-3-QUOTE | TEXT | REVIEW | Daniel 7:9–10, King James Version: I beheld till the thrones were cast down, and the Ancient of days did sit. … the j… | Marked KJV — manual spot-check if ellipsis-heavy |
+| S07-VRF-3-CHECK | INTERPRETATION | ACCURATE | Do not collapse this scene into the stone of chapter 2. 7:26–27 takes the horn’s dominion away after the court sits. | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 7) |
+| S07-VRF-4-LESSON | INTERPRETATION | ACCURATE | The Protestant historicist consensus named the papacy as the Antichrist of the horn texts. | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 7) |
+| S07-VRF-4-QUOTE | HISTORY | ACCURATE | Martin Luther, Smalcald Articles (1537), Part II, Article IV. Book of Concord / Triglotta English: This teaching show… | Primary source quotation in verify dock |
+| S07-VRF-4-CHECK | INTERPRETATION | ACCURATE | Luther is not a second Bible. He is a dated witness that the Reformers read the horn as a church-state power in Rome,… | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 7) |
+| S07-VRF-5-LESSON | INTERPRETATION | ACCURATE | Newton names the last horn of the fourth beast as the church of Rome and lists three uprooted powers. | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 7) |
+| S07-VRF-5-QUOTE | HISTORY | ACCURATE | Isaac Newton, Observations upon the Prophecies of Daniel (1733), Part I, “Of the eleventh horn of Daniel’s fourth Bea… | Primary source quotation in verify dock |
+| S07-VRF-5-CHECK | INTERPRETATION | ACCURATE | What you can verify is that a dated historicist named a church-state in Rome as the horn. | Historicist teaching prose — Scripture-with-Scripture frame (Sitting 7) |
+| S07-VRF-6-LESSON | HISTORY | ACCURATE | A public-domain Catholic encyclopedia dates the French taking of Rome and of the pope to February 1798. | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S07-VRF-6-QUOTE | HISTORY | ACCURATE | Michael Ott, “Pope Pius VI,” Catholic Encyclopedia (New York, 1913). Wikisource: The French took Rome on 10 Feb., 179… | Primary source quotation in verify dock |
+| S07-VRF-6-CHECK | HISTORY | ACCURATE | 1,260 years from 538 lands in 1798. Open the 1913 article: Rome taken 10 February, the Republic 15 February, the pope… | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S07-VRF-7-LESSON | HISTORY | ACCURATE | A public-domain encyclopedia dates Belisarius’s year-long hold of Rome and the Goths’ raising of the siege — the 538 … | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S07-VRF-7-QUOTE | HISTORY | ACCURATE | “Belisarius,” The New International Encyclopaedia (1905). Wikisource: On December 10 he entered Rome, and held it for… | Primary source quotation in verify dock |
+| S07-VRF-7-CHECK | HISTORY | ACCURATE | December 536 plus a year lands when the Goths raised the siege in 538. Procopius, History of the Wars, Books V–VI, is… | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S07-GLS-alexander-SMP | HISTORY | ACCURATE | Alexander: Macedonian king who smashed Persia (Gaugamela 331 B.C.) and died in 323 B.C. at thirty-two. | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S07-GLS-alexander-HIS | HISTORY | ACCURATE | Daniel 8: the goat’s notable horn. When it snaps, four Diadochi horns replace it. Speed is the leopard’s wings. He is… | Historical context card |
+| S07-GLS-antichrist-SMP | TEXT | ACCURATE | Antichrist: In historicist reading: the church-state power that takes Christ’s place (anti = in place of) among Rome’… | Lexical / textual definition |
+| S07-GLS-antichrist-HIS | HISTORY | ACCURATE | 1 John already speaks of “many antichrists.” The Reformers applied the office of a persecuting papal supremacy to Dan… | Historical context card |
+| S07-GLS-apocalyptic-SMP | TEXT | ACCURATE | apocalyptic: A style of vision that uses symbols (beasts, horns, metals) for real kingdoms and spans of history. | Lexical / textual definition |
+| S07-GLS-apocalyptic-HIS | HISTORY | ACCURATE | Daniel 7–8 is apocalyptic: a lion stands for a kingdom, not a literal beast. Time inside that same symbolic vision is… | Historical context card |
+| S07-GLS-arian-SMP | TEXT | ACCURATE | Arian: Christian kingdoms that denied the Roman church’s teaching that Christ is fully God. | Lexical / textual definition |
+| S07-GLS-arian-HIS | HISTORY | ACCURATE | The Heruli, Vandals, and Ostrogoths were Arian Germanic powers in the west. Historicists read them as the three horns… | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S07-GLS-babylon-SMP | HISTORY | ACCURATE | Babylon: Capital of the gold head; Daniel’s first workplace and the city that fell in 539 B.C. | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S07-GLS-babylon-HIS | HISTORY | ACCURATE | Ishtar Gate, Marduk’s temples, double walls and a river. Daniel 1:2 says its first victory over Judah was given, not … | Historical context card |
+| S07-GLS-belshazzar-SMP | HISTORY | ACCURATE | Belshazzar: Last king in the city of Babylon (539 B.C.); son and co-regent of Nabonidus. | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S07-GLS-belshazzar-HIS | HISTORY | ACCURATE | Greek lists once seemed to omit him. Tablets restored him: Nabonidus in Tema, Belshazzar hosting the feast. He drank … | Historical context card |
+| S07-GLS-berthier-SMP | HISTORY | ACCURATE | Berthier: French Revolutionary general who entered Rome in 1798 and took Pope Pius VI prisoner. | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S07-GLS-berthier-HIS | HISTORY | ACCURATE | That blow ends the 1,260 years of papal political supremacy in 1798. The office continued; the measured reign as a ci… | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S07-GLS-church-state-SMP | TEXT | ACCURATE | church-state: A power that is both a church (it claims to speak for God) and a state (it can punish with civil force). | Lexical / textual definition |
+| S07-GLS-church-state-HIS | HISTORY | ACCURATE | Daniel 7:24 says the eleventh horn is “diverse” from the ten ethnic kingdoms. The Reformers took that diversity to be… | Historical context card |
+| S07-GLS-daniel-SMP | HISTORY | ACCURATE | Daniel: A Judahite noble taken to Babylon in 605 B.C.; prophet, court official, and the book’s human author-witness. | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S07-GLS-daniel-HIS | HISTORY | ACCURATE | His Hebrew name means “God is my Judge.” The court renamed him Belteshazzar. He drew the line at the king’s table (wo… | Historical context card |
+| S07-GLS-diadochi-SMP | TEXT | ACCURATE | Diadochi: Alexander’s generals who carved his empire into four after he died. | Lexical / textual definition |
+| S07-GLS-diadochi-HIS | HISTORY | ACCURATE | Cassander, Lysimachus, Seleucus, and Ptolemy. They are the goat’s four horns in Daniel 8 and the four heads of the le… | Historical context card |
+| S07-GLS-ezekiel-SMP | TEXT | ACCURATE | Ezekiel: Priest-prophet already in exile; God had him lie on his side 390 + 40 days, “each day for a year” (Ezekiel 4… | Lexical / textual definition |
+| S07-GLS-ezekiel-HIS | HISTORY | ACCURATE | He is why Ezekiel is on the year-day sitting: a contemporary of Daniel’s world, hearing the same appointment in a num… | Historical context card |
+| S07-GLS-gabriel-SMP | TEXT | ACCURATE | Gabriel: The angel sent to make Daniel understand (8:16; 9:21–23). | Lexical / textual definition |
+| S07-GLS-gabriel-HIS | HISTORY | ACCURATE | He interprets the ram and goat, then returns while Daniel is praying to cut seventy weeks from the unexplained vision… | Historical context card |
+| S07-GLS-heruli-SMP | HISTORY | ACCURATE | Heruli: A Germanic kingdom in Italy, crushed in A.D. 493 — first of the three horns uprooted. | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S07-GLS-heruli-HIS | HISTORY | ACCURATE | Arian. Their fall cleared space for a church-state in the west. The three uprooted horns are the Heruli (493), Vandal… | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S07-GLS-historicism-SMP | TEXT | ACCURATE | Historicism: Read Daniel as an unbroken timeline of real empires from the prophet’s own day until the stone fills the… | Lexical / textual definition |
+| S07-GLS-historicism-HIS | HISTORY | ACCURATE | This course uses historicism because Daniel’s succession language and parallel visions best fit a continuous historic… | Historical context card |
+| S07-GLS-jerusalem-SMP | TEXT | ACCURATE | Jerusalem: Judah’s capital; Temple city; the place Daniel faced when he prayed (6:10). | Lexical / textual definition |
+| S07-GLS-jerusalem-HIS | HISTORY | ACCURATE | First vessels leave in 605; city and Temple fall in 586; return decrees under Persia. In Daniel 8 “the Glorious Land”… | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S07-GLS-justinian-SMP | HISTORY | ACCURATE | Justinian: Eastern Roman emperor (527–565) whose laws elevated the bishop of Rome and whose wars broke Arian kingdoms… | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S07-GLS-justinian-HIS | HISTORY | ACCURATE | Justinian’s decree is the legal claim that met the city in 538, when the Ostrogoths lost Rome and the 1,260 years beg… | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S07-GLS-little-horn-SMP | TEXT | ACCURATE | little horn: A smaller horn that rises among ten kings, diverse from them, and attacks God’s people and sanctuary. | Lexical / textual definition |
+| S07-GLS-little-horn-HIS | HISTORY | ACCURATE | Daniel 7’s horn rises from the fourth beast (Rome) after A.D. 476, uproots three, speaks against the Most High, and r… | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S07-GLS-luther-SMP | TEXT | ACCURATE | Martin Luther: German Reformer (1483–1546). Read Daniel as a historicist: the little horn as a church-state Antichrist. | Lexical / textual definition |
+| S07-GLS-luther-HIS | HISTORY | ACCURATE | Prefaces to Daniel (1530). He did not invent the year-day scale; he read the empires as one chain and identified Dani… | Historical context card |
+| S07-GLS-nebuchadnezzar-SMP | HISTORY | ACCURATE | Nebuchadnezzar: Neo-Babylonian king (c. 605–562 B.C.), the head of gold, who took Judah’s first captives and later bu… | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S07-GLS-nebuchadnezzar-HIS | HISTORY | ACCURATE | He dreamed of the statue, built the all-gold image on the plain of Dura, and was driven into the field for seven time… | Historical context card |
+| S07-GLS-nitsdaq-SMP | TEXT | ACCURATE | nitsdaq: The verb in Daniel 8:14: the sanctuary is justified, vindicated, put right — not merely washed. | Lexical / textual definition |
+| S07-GLS-nitsdaq-HIS | HISTORY | ACCURATE | English often says “cleansed.” The Hebrew is a courtroom word (related to “righteous”), not taher (ritual washing). T… | Historical context card |
+| S07-GLS-ostrogoths-SMP | HISTORY | ACCURATE | Ostrogoths: The Germanic kingdom that held Rome until A.D. 538. | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S07-GLS-ostrogoths-HIS | INTERPRETATION | ACCURATE | Arian. When their grip on the city broke, Justinian’s grant to the Roman bishop could operate. This chart uses 538 as… | Explicit hedge or labeled reconstruction (OneVoice27 §2) |
+| S07-GLS-papacy-SMP | TEXT | ACCURATE | papacy: The office of the bishop of Rome as a spiritual and, for long centuries, civil power. | Lexical / textual definition |
+| S07-GLS-papacy-HIS | INTERPRETATION | ACCURATE | This study applies Daniel 7’s little-horn interpretation to that historical office and its church-state role, not to … | Explicit hedge or labeled reconstruction (OneVoice27 §2) |
+| S07-GLS-pius-vi-SMP | HISTORY | ACCURATE | Pius VI: Pope taken captive in 1798 when Berthier entered Rome; he died in exile in 1799. | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S07-GLS-pius-vi-HIS | HISTORY | ACCURATE | The event, not the man’s private character, is why the year appears on the chart. Historicists read it as Daniel 7:26… | Historical context card |
+| S07-GLS-prophetic-year-SMP | TEXT | ACCURATE | prophetic year: In apocalyptic counting, a “year” or “time” is often 360 days (12 × 30), matching 42 months = 1,260 d… | Lexical / textual definition |
+| S07-GLS-prophetic-year-HIS | HISTORY | ACCURATE | Revelation 12:6, 12:14, and 13:5 use 1,260 days, 3½ times, and 42 months for the same span. That is how Daniel 7:25 b… | Historical context card |
+| S07-GLS-rome-SMP | TEXT | ACCURATE | Rome: Capital of the iron kingdom; later seat of the church-state this study reads as the little horn. | Lexical / textual definition |
+| S07-GLS-rome-HIS | HISTORY | ACCURATE | Imperial Rome crushes (Daniel 2:40; 7:7). After 476 the west is fragments. 538 and 1798 both fall on this city: the s… | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S07-GLS-sanctuary-SMP | TEXT | ACCURATE | sanctuary: God’s dwelling for priestly ministry — first the tent/temple on earth, then the true one in heaven (Hebrew… | Lexical / textual definition |
+| S07-GLS-sanctuary-HIS | HISTORY | ACCURATE | Daniel 8 is not only about a local altar in Judea. The horn magnifies itself to the Prince of the host and casts down… | Historical context card |
+| S07-GLS-tamid-SMP | TEXT | ACCURATE | tamid: Hebrew for the continual daily ministry — the standing, regular service before God. | Lexical / textual definition |
+| S07-GLS-tamid-HIS | HISTORY | ACCURATE | On earth it was the regular sacrifice. In Daniel 8 the horn removes the tamid and casts down the sanctuary’s place. T… | Historical context card |
+| S07-GLS-time-times-SMP | TEXT | ACCURATE | time, times, and dividing: A riddle-phrase for 3½ years: one year + two years + half a year. | Lexical / textual definition |
+| S07-GLS-time-times-HIS | HISTORY | ACCURATE | Daniel 7:25. Revelation writes the same span as 1,260 days and 42 months. On the year-day scale those days are years … | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S07-GLS-vandals-SMP | HISTORY | ACCURATE | Vandals: A Germanic kingdom in North Africa, broken in A.D. 534 — second of the three horns. | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S07-GLS-vandals-HIS | HISTORY | ACCURATE | Arian sea-power. Justinian’s general Belisarius ended their kingdom. Again: dated history, then the Daniel 7 checklist. | Dated history or prophetic chart pin — see GC_SUBMISSION_PROPHECY_FLAGS_RESOLVED.md for limits |
+| S07-GLS-year-day-SMP | TEXT | ACCURATE | Year-Day Principle: When God gives a numbered sign, one prophetic day may stand for one literal solar year. | Lexical / textual definition |
+| S07-GLS-year-day-HIS | HISTORY | ACCURATE | God states the scale twice: Numbers 14:34 (forty spy-days become forty wilderness years) and Ezekiel 4:6 (Ezekiel’s b… | Historical context card |
