@@ -2,9 +2,9 @@
 
 **Audit Date:** 2026-09-20  
 **File Audited:** `js/study/sheets-data.js` (Sitting id: 0) with `sheet-verify.js`, `workbench.js`, `sheet-glossary.js`  
-**Audited Content Hash:** `6feeccea3ae62978`  
+**Audited Content Hash:** `cf05f83bbf5a838c`  
 **Method:** Exhaustive claim-unit audit of finished prose across content, christology, quizzes, studyGuide, guide, verify cards, workbench, and linked glossary entries.  
-**Counts:** ACCURATE: 226 | SOFTEN: 0 | FIX: 0 | N/A: 33 | Total: 259  
+**Counts:** ACCURATE: 229 | SOFTEN: 0 | FIX: 0 | N/A: 33 | Total: 262  
 
 ## 1. Summary of Required Sections & Governing Standards
 
@@ -191,15 +191,18 @@
 | S00-VRF-4-LESSON | CHRIST | ACCURATE | Redemptive and Christological fulfillment of passage |
 | S00-VRF-4-QUOTE | TEXT | ACCURATE | Exact KJV Scripture quotation verified in bible/kjv.json |
 | S00-VRF-4-CHECK | PASTORAL | ACCURATE | Empirical reader checkpoint and source verification instruction |
-| S00-VRF-5-LESSON | INTERPRETATION | ACCURATE | Historicist synthesis from Scripture interpreting Scripture |
-| S00-VRF-5-QUOTE | HISTORY | ACCURATE | Dated historical primary source quote (verified in translation) |
+| S00-VRF-5-LESSON | HISTORY | ACCURATE | Historical documentation and exilic archaeological evidence |
+| S00-VRF-5-QUOTE | TEXT | ACCURATE | Exact KJV Scripture quotation verified in bible/kjv.json |
 | S00-VRF-5-CHECK | PASTORAL | ACCURATE | Empirical reader checkpoint and source verification instruction |
-| S00-VRF-6-LESSON | HISTORY | ACCURATE | Historical documentation and exilic archaeological evidence |
+| S00-VRF-6-LESSON | INTERPRETATION | ACCURATE | Historicist synthesis from Scripture interpreting Scripture |
 | S00-VRF-6-QUOTE | HISTORY | ACCURATE | Dated historical primary source quote (verified in translation) |
 | S00-VRF-6-CHECK | PASTORAL | ACCURATE | Empirical reader checkpoint and source verification instruction |
-| S00-VRF-7-LESSON | CHRIST | ACCURATE | Redemptive and Christological fulfillment of passage |
+| S00-VRF-7-LESSON | HISTORY | ACCURATE | Historical documentation and exilic archaeological evidence |
 | S00-VRF-7-QUOTE | HISTORY | ACCURATE | Dated historical primary source quote (verified in translation) |
 | S00-VRF-7-CHECK | PASTORAL | ACCURATE | Empirical reader checkpoint and source verification instruction |
+| S00-VRF-8-LESSON | CHRIST | ACCURATE | Redemptive and Christological fulfillment of passage |
+| S00-VRF-8-QUOTE | HISTORY | ACCURATE | Dated historical primary source quote (verified in translation) |
+| S00-VRF-8-CHECK | PASTORAL | ACCURATE | Empirical reader checkpoint and source verification instruction |
 | S00-WB-INTRO | PASTORAL | ACCURATE | Active workbench student verification prompt |
 | S00-WB-T1-PROMPT | PASTORAL | ACCURATE | Active workbench student verification prompt |
 | S00-WB-T2-PROMPT | PASTORAL | ACCURATE | Active workbench student verification prompt |

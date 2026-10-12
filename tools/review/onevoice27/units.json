@@ -1,6 +1,6 @@
 {
   "sheetHashes": {
-    "0": "6feeccea3ae62978",
+    "0": "cf05f83bbf5a838c",
     "1": "82eaa7a070bd7f3d",
     "2": "5c789d52493010af",
     "3": "1d966c003466f810",
@@ -13,7 +13,7 @@
     "10": "bdb166e40dabd991"
   },
   "sheetUnitCounts": {
-    "0": 259,
+    "0": 262,
     "1": 214,
     "2": 220,
     "3": 184,
@@ -1227,60 +1227,81 @@
       "id": "S00-VRF-5-LESSON",
       "sheet": 0,
       "field": "verify",
+      "text": "The kingdom is set up in the days of these kings, on the divided feet — not during Babylon, Greece, or Rome at its height.",
+      "hash": "918ceba5d8a8bfd7"
+    },
+    {
+      "id": "S00-VRF-5-QUOTE",
+      "sheet": 0,
+      "field": "verify",
+      "text": "Daniel 2:44, King James Version: And in the days of these kings shall the God of heaven set up a kingdom, which shall never be destroyed: and the kingdom shall not be left to other people, but it shall break in pieces and consume all these kingdoms, and it shall stand for ever.",
+      "hash": "c4f27d7f3e224594"
+    },
+    {
+      "id": "S00-VRF-5-CHECK",
+      "sheet": 0,
+      "field": "verify",
+      "text": "The verse places the Stone’s arrival in the divided era, after the legs, so the prologue’s chain ends at the feet and not at the incarnation. Read it beside 2:34–35: the Stone crushes at the feet and becomes the mountain.",
+      "hash": "cfed36913f0ffcea"
+    },
+    {
+      "id": "S00-VRF-6-LESSON",
+      "sheet": 0,
+      "field": "verify",
       "text": "Historicist readers treated Daniel as a dated sequence, not a riddle parked in the past or the far future.",
       "hash": "a8962abd646cfd93"
     },
     {
-      "id": "S00-VRF-5-QUOTE",
+      "id": "S00-VRF-6-QUOTE",
       "sheet": 0,
       "field": "verify",
       "text": "Sir Isaac Newton, Observations upon the Prophecies of Daniel, and the Apocalypse of St. John (London, 1733), Part I, Chapter I: Amongst the old Prophets, Daniel is most distinct in order of time, and easiest to be understood: and therefore in those things which relate to the last times, he must be made the key to the rest.",
       "hash": "805ee67054d1ac84"
     },
     {
-      "id": "S00-VRF-5-CHECK",
+      "id": "S00-VRF-6-CHECK",
       "sheet": 0,
       "field": "verify",
       "text": "Compare Newton’s “order of time” with the three-school table. Only a continuous chain keeps that order. Newton's 1733 reading is a dated witness that the chain was read this way in the eighteenth century.",
       "hash": "7ef9f731084e50aa"
     },
     {
-      "id": "S00-VRF-6-LESSON",
+      "id": "S00-VRF-7-LESSON",
       "sheet": 0,
       "field": "verify",
       "text": "The charge that Daniel is a Maccabean forgery is itself dated. Jerome names the critic.",
       "hash": "9665a68539d7c7c6"
     },
     {
-      "id": "S00-VRF-6-QUOTE",
+      "id": "S00-VRF-7-QUOTE",
       "sheet": 0,
       "field": "verify",
       "text": "Jerome, Commentary on Daniel, Prologue (c. A.D. 407). English at tertullian.org: Porphyry wrote his twelfth book against the prophecy of Daniel, denying that it was composed by the person to whom it is ascribed in its title, but rather by some individual living in Judaea at the time of the Antiochus who was surnamed Epiphanes.",
       "hash": "2ff96b558a982c71"
     },
     {
-      "id": "S00-VRF-6-CHECK",
+      "id": "S00-VRF-7-CHECK",
       "sheet": 0,
       "field": "verify",
       "text": "Porphyry (3rd century) is the pagan ancestor of the ‘it all ended under Antiochus’ reading. Jerome reports the charge in order to answer it. Preterism later reused the park-it-in-the-past move.",
       "hash": "4c68fbfb55c89b88"
     },
     {
-      "id": "S00-VRF-7-LESSON",
+      "id": "S00-VRF-8-LESSON",
       "sheet": 0,
       "field": "verify",
       "text": "A second-century Christian already read the four metals as Babylon, Persia, Greece, and Rome — one chain.",
       "hash": "07ab908181379d31"
     },
     {
-      "id": "S00-VRF-7-QUOTE",
+      "id": "S00-VRF-8-QUOTE",
       "sheet": 0,
       "field": "verify",
       "text": "Hippolytus of Rome, Treatise on Christ and Antichrist, §28 (c. A.D. 200). Ante-Nicene Fathers, vol. 5: The golden head of the image and the lioness denoted the Babylonians; the shoulders and arms of silver, and the bear, represented the Persians and Medes; the belly and thighs of brass, and the leopard, meant the Greeks… the legs of iron, and the beast dreadful and terrible, expressed the Romans, who hold the sovereignty at present.",
       "hash": "5c50383dff0dbe0a"
     },
     {
-      "id": "S00-VRF-7-CHECK",
+      "id": "S00-VRF-8-CHECK",
       "sheet": 0,
       "field": "verify",
       "text": "Hippolytus witnesses the four-kingdom sequence, Babylon through Rome, in one chain (c. A.D. 200). He also expected a future individual antichrist. Open ANF vol. 5, Treatise on Christ and Antichrist, §28.",

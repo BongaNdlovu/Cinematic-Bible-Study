@@ -43,6 +43,13 @@
           "490 days is less than a year and a half. The book checks the year-day scale on itself before you borrow it for 1,260 or 2,300."
         ),
         item(
+          "scripture",
+          "The kingdom is set up in the days of these kings, on the divided feet — not during Babylon, Greece, or Rome at its height.",
+          "Daniel 2:44, King James Version",
+          "And in the days of these kings shall the God of heaven set up a kingdom, which shall never be destroyed: and the kingdom shall not be left to other people, but it shall break in pieces and consume all these kingdoms, and it shall stand for ever.",
+          "The verse places the Stone’s arrival in the divided era, after the legs, so the prologue’s chain ends at the feet and not at the incarnation. Read it beside 2:34–35: the Stone crushes at the feet and becomes the mountain."
+        ),
+        item(
           "commentary",
           "Historicist readers treated Daniel as a dated sequence, not a riddle parked in the past or the far future.",
           "Sir Isaac Newton, Observations upon the Prophecies of Daniel, and the Apocalypse of St. John (London, 1733), Part I, Chapter I",
