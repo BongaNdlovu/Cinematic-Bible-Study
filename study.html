@@ -237,35 +237,13 @@
       line-height: 1.65;
       opacity: 0.86;
     }
-    .study-blocks {
-      display: flex;
-      flex-direction: column;
-      gap: 0.95rem;
-    }
-    .study-block {
-      --block: var(--role-gold);
-      padding: 1.05rem 1.1rem 1.15rem;
-      border: 1px solid color-mix(in srgb, var(--block) 28%, transparent);
-      border-left: 3px solid var(--block);
-      border-radius: 12px;
-      background: rgba(255, 248, 230, 0.03);
-    }
-    .study-block-trace { --block: var(--role-gold); }
-    .study-block-christ {
-      --block: var(--role-anchor);
-      background: rgba(212, 175, 55, 0.08);
-    }
-    .study-block-now { --block: var(--role-invite); }
-    .study-block-help { --block: var(--role-guard); }
-    .study-block-value { --block: var(--role-archive); }
-    .study-block-ask { --block: #d9c7a2; }
     .study-path h3,
     .study-path h4 {
       font-family: Inter, sans-serif;
       font-size: 11px;
       letter-spacing: 0.14em;
       text-transform: uppercase;
-      color: var(--block);
+      color: var(--block, var(--role-gold));
       margin: 0 0 0.9rem;
     }
     .study-path h3 {
@@ -281,52 +259,6 @@
       line-height: 1.65;
       color: #ddd3bc;
     }
-    .study-trace {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
-    }
-    .study-trace-step {
-      margin: 0;
-      padding: 0.9rem 0.95rem 0.95rem;
-      border-radius: 10px;
-      background: rgba(255, 244, 214, 0.045);
-      border: 1px solid rgba(228, 197, 106, 0.24);
-    }
-    .study-do {
-      margin: 0;
-      font-weight: 600;
-      line-height: 1.6;
-      color: #f6edd8;
-    }
-    .study-path .study-christ {
-      margin: 0;
-      border: 0;
-      padding: 0;
-      font-family: Newsreader, Georgia, serif;
-      font-size: 1.08rem;
-      line-height: 1.65;
-      color: #f4ead4;
-    }
-    .study-path .study-why {
-      font-family: Inter, sans-serif;
-      font-size: 0.9rem;
-      line-height: 1.68;
-      color: #c4b89a;
-      margin: 0.7rem 0 0;
-      font-weight: 400;
-    }
-    .study-block-ask ul {
-      margin: 0;
-      padding-left: 1.15rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
-    }
-    .study-block-ask li { margin: 0; }
 
     .article-body h3 {
       font-family: 'Newsreader', Georgia, serif;
@@ -2106,9 +2038,7 @@
     body.paper-mode .insight-card h4,
     body.white-mode .insight-card h4,
     body.paper-mode .study-path h3,
-    body.paper-mode .study-path .study-christ,
     body.white-mode .study-path h3,
-    body.white-mode .study-path .study-christ,
     body.paper-mode .scripture-chapter h4,
     body.paper-mode .scripture-text,
     body.paper-mode .load-bearing h4,
@@ -3226,81 +3156,295 @@
       --role-gold: #e4c56a;
       --role-archive: #9ec4d4;
       --role-invite: #e0b07a;
+      position: relative;
       display: flex;
       flex-direction: column;
-      gap: 1.25rem;
-      padding: 1.5rem 1.45rem 1.4rem;
-      border: 1px solid rgba(212, 175, 55, 0.35);
-      border-radius: 16px;
+      gap: 1.6rem;
+      padding: 2.1rem 1.85rem 1.95rem;
+      border: 1px solid rgba(212, 175, 55, 0.5);
+      border-radius: 20px;
       background:
-        radial-gradient(ellipse at 80% 0%, rgba(212, 175, 55, 0.1), transparent 46%),
-        linear-gradient(135deg, rgba(26, 23, 18, 0.88) 0%, rgba(16, 14, 12, 0.96) 100%);
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 235, 175, 0.08);
+        radial-gradient(ellipse at 82% -10%, rgba(212, 175, 55, 0.2), transparent 52%),
+        radial-gradient(ellipse at 6% 110%, rgba(158, 196, 212, 0.1), transparent 48%),
+        linear-gradient(135deg, rgba(28, 24, 18, 0.94) 0%, rgba(14, 12, 10, 0.98) 100%);
+      box-shadow:
+        0 26px 60px -32px rgba(0, 0, 0, 0.95),
+        0 0 44px -26px rgba(212, 175, 55, 0.5),
+        inset 0 1px 0 rgba(255, 235, 175, 0.1);
+      overflow: hidden;
+    }
+    .lesson-connect::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255, 235, 175, 0.5), transparent);
     }
     .lesson-connect-kicker {
       display: block;
       font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 10px;
-      letter-spacing: 0.14em;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.22em;
       text-transform: uppercase;
-      color: #d4a017;
-      margin-bottom: 0.65rem;
+      color: #e4c56a;
+      margin-bottom: 0.8rem;
     }
     .lesson-connect-lead {
       margin: 0;
-      max-width: 68ch;
+      max-width: 62ch;
       font-family: 'Newsreader', Georgia, serif;
-      font-size: 1.12rem;
-      line-height: 1.7;
+      font-size: 1.32rem;
+      line-height: 1.65;
       color: inherit;
     }
     .lesson-connect-actions {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.75rem;
+      align-items: stretch;
+      gap: 1rem;
     }
     .lesson-connect-btn {
+      position: relative;
       display: inline-flex;
-      flex: 1 1 16rem;
+      flex: 1 1 20rem;
       align-items: center;
       justify-content: center;
-      gap: 0.5rem;
-      padding: 0.75rem 1rem;
+      gap: 0.65rem;
+      min-height: 3.6rem;
+      padding: 1.05rem 1.5rem;
       border-radius: 999px;
       border: 1px solid transparent;
       font-family: "JetBrains Mono", monospace;
-      font-size: 0.75rem;
-      font-weight: 600;
-      line-height: 1.45;
+      font-size: 0.92rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      line-height: 1.35;
       text-align: center;
       text-decoration: none;
+      overflow: hidden;
+      isolation: isolate;
+      cursor: pointer;
+      transition: transform 0.28s cubic-bezier(0.2, 0.7, 0.25, 1),
+                  box-shadow 0.28s ease,
+                  border-color 0.28s ease,
+                  background 0.28s ease;
     }
-    .lesson-connect-map {
-      color: #d7ebf3;
-      border-color: rgba(158, 196, 212, 0.55);
-      background: rgba(70, 112, 132, 0.22);
+    /* light sweep across the button face */
+    .lesson-connect-shimmer {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: -60%;
+      width: 45%;
+      z-index: 2;
+      pointer-events: none;
+      transform: skewX(-18deg);
+      background: linear-gradient(90deg, transparent, rgba(255, 248, 224, 0.42), transparent);
+      opacity: 0;
     }
-    .lesson-connect-gallery {
-      color: #f6e7bf;
-      border-color: rgba(228, 197, 106, 0.6);
-      background: rgba(180, 140, 40, 0.18);
+    .lesson-connect-btn:hover .lesson-connect-shimmer,
+    .lesson-connect-btn:focus-visible .lesson-connect-shimmer {
+      animation: connect-sheen 0.85s ease-out;
     }
-    .lesson-connect-share {
-      color: #f3d7b4;
-      border-color: rgba(224, 176, 122, 0.55);
-      background: rgba(150, 96, 48, 0.2);
-    }
+    .lesson-connect-btn > span:not(.lesson-connect-shimmer) { position: relative; z-index: 3; }
     .lesson-connect-btn:hover,
     .lesson-connect-btn:focus-visible {
-      filter: brightness(1.12);
+      transform: translateY(-3px) scale(1.018);
+    }
+    .lesson-connect-btn:active { transform: translateY(-1px) scale(0.995); }
+    .lesson-connect-map {
+      color: #e2f2f8;
+      border-color: rgba(158, 196, 212, 0.65);
+      background: linear-gradient(135deg, rgba(70, 112, 132, 0.36), rgba(40, 70, 86, 0.24));
+    }
+    .lesson-connect-map:hover,
+    .lesson-connect-map:focus-visible {
+      border-color: rgba(158, 196, 212, 0.95);
+      box-shadow: 0 16px 34px -20px rgba(158, 196, 212, 0.85), 0 0 20px -6px rgba(158, 196, 212, 0.4);
+    }
+    .lesson-connect-gallery {
+      color: #fbeecb;
+      border-color: rgba(228, 197, 106, 0.7);
+      background: linear-gradient(135deg, rgba(180, 140, 40, 0.32), rgba(110, 84, 26, 0.22));
+    }
+    .lesson-connect-gallery:hover,
+    .lesson-connect-gallery:focus-visible {
+      border-color: rgba(228, 197, 106, 1);
+      box-shadow: 0 16px 34px -20px rgba(228, 197, 106, 0.85), 0 0 20px -6px rgba(228, 197, 106, 0.45);
+    }
+    /* The invite action is the loudest of the three. */
+    .lesson-connect-share {
+      color: #2a1a08;
+      border-color: rgba(255, 214, 138, 0.9);
+      background: linear-gradient(135deg, #ffdf9e 0%, #e8b455 46%, #cf9433 100%);
+      box-shadow: 0 14px 34px -18px rgba(228, 180, 85, 0.95), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+      animation: invite-breathe 3.6s ease-in-out infinite;
+    }
+    .lesson-connect-share:hover,
+    .lesson-connect-share:focus-visible {
+      background: linear-gradient(135deg, #ffe9b8 0%, #f3c368 46%, #dda03c 100%);
+      box-shadow: 0 20px 44px -18px rgba(255, 214, 138, 1), 0 0 28px -4px rgba(255, 214, 138, 0.6);
+    }
+    .lesson-connect-share .lesson-connect-shimmer {
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.75), transparent);
+    }
+    .lesson-connect-orb {
+      width: 8px;
+      height: 8px;
+      flex: none;
+      border-radius: 50%;
+      background: #c0392b;
+      box-shadow: 0 0 10px rgba(220, 80, 60, 0.95);
+      animation: invite-orb 1.9s ease-in-out infinite;
+    }
+    @keyframes connect-sheen {
+      0% { left: -60%; opacity: 0; }
+      12% { opacity: 1; }
+      100% { left: 118%; opacity: 0; }
+    }
+    @keyframes invite-breathe {
+      0%, 100% {
+        box-shadow: 0 14px 34px -18px rgba(228, 180, 85, 0.95), 0 0 0 0 rgba(255, 214, 138, 0.5);
+      }
+      50% {
+        box-shadow: 0 16px 38px -16px rgba(255, 214, 138, 1), 0 0 0 7px rgba(255, 214, 138, 0);
+      }
+    }
+    @keyframes invite-orb {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.45; transform: scale(0.82); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .lesson-connect-share { animation: none; }
+      .lesson-connect-orb { animation: none; }
+      .lesson-connect-btn:hover,
+      .lesson-connect-btn:focus-visible,
+      .lesson-connect-btn:active { transform: none; }
+      .lesson-connect-btn:hover .lesson-connect-shimmer,
+      .lesson-connect-btn:focus-visible .lesson-connect-shimmer { animation: none; }
     }
     .sitting-path {
       margin: 1.25rem 0 0;
-      padding: 0.9rem 1rem;
-      border-radius: 12px;
-      border: 1px solid rgba(197, 155, 39, 0.28);
-      background: rgba(18, 16, 14, 0.35);
+      padding: 1.5rem 1.45rem 1.55rem;
+      border-radius: 18px;
+      border: 1px solid rgba(197, 155, 39, 0.42);
+      background:
+        radial-gradient(ellipse at 0% 0%, rgba(212, 175, 55, 0.12), transparent 46%),
+        linear-gradient(135deg, rgba(24, 21, 16, 0.86) 0%, rgba(14, 12, 10, 0.95) 100%);
+      box-shadow: 0 16px 40px -22px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 235, 175, 0.07);
     }
+    .study-ask-head {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      margin-bottom: 1.15rem;
+    }
+    .study-ask-orb {
+      position: relative;
+      flex: none;
+      width: 13px;
+      height: 13px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 30%, #ffe9a8, #d4a017 58%, #8a6414);
+      box-shadow: 0 0 12px rgba(228, 197, 106, 0.8);
+    }
+    .study-ask-orb::after {
+      content: "";
+      position: absolute;
+      inset: -5px;
+      border-radius: 50%;
+      border: 1px solid rgba(228, 197, 106, 0.5);
+      animation: ask-orb-pulse 3.4s ease-out infinite;
+    }
+    /* Scoped under .study-path so this outranks the shared pack's
+       ".study-path p { font-family; font-size; line-height; color }" rule. */
+    .study-path .study-ask-kicker {
+      margin: 0;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #e4c56a;
+    }
+    .study-ask-list {
+      list-style: none;
+      counter-reset: ask;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+    }
+    .study-ask-item {
+      display: flex;
+      gap: 0.95rem;
+      align-items: flex-start;
+      padding: 1.05rem 1.2rem;
+      border: 1px solid rgba(197, 155, 39, 0.28);
+      border-left: 3px solid rgba(228, 197, 106, 0.85);
+      border-radius: 14px;
+      background: linear-gradient(120deg, rgba(255, 240, 200, 0.045), rgba(255, 240, 200, 0.012));
+      box-shadow: inset 0 1px 0 rgba(255, 240, 200, 0.05);
+      transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+      animation: ask-item-in 0.5s ease both;
+    }
+    .study-ask-item:nth-child(2) { animation-delay: 0.08s; }
+    .study-ask-item:nth-child(3) { animation-delay: 0.16s; }
+    .study-ask-item:nth-child(4) { animation-delay: 0.24s; }
+    .study-ask-item:hover {
+      transform: translateX(4px);
+      border-color: rgba(228, 197, 106, 0.55);
+      box-shadow: 0 10px 26px -18px rgba(228, 197, 106, 0.7), inset 0 1px 0 rgba(255, 240, 200, 0.08);
+    }
+    .study-ask-num {
+      flex: none;
+      display: grid;
+      place-items: center;
+      width: 1.85rem;
+      height: 1.85rem;
+      border-radius: 50%;
+      border: 1px solid rgba(228, 197, 106, 0.6);
+      background: rgba(212, 175, 55, 0.14);
+      font-family: "JetBrains Mono", monospace;
+      font-size: 11px;
+      font-weight: 700;
+      color: #f0dca6;
+    }
+    .study-ask-text {
+      font-family: 'Newsreader', Georgia, serif;
+      font-size: 1.13rem;
+      line-height: 1.6;
+      color: inherit;
+    }
+    @keyframes ask-orb-pulse {
+      0% { transform: scale(0.7); opacity: 0.7; }
+      70% { transform: scale(1.7); opacity: 0; }
+      100% { transform: scale(1.7); opacity: 0; }
+    }
+    @keyframes ask-item-in {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: none; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .study-ask-item,
+      .study-ask-orb::after { animation: none; }
+      .study-ask-item:hover { transform: none; }
+    }
+    body.paper-mode .study-ask-item,
+    body.white-mode .study-ask-item {
+      background: rgba(255, 250, 236, 0.72);
+      border-color: rgba(180, 140, 40, 0.35);
+    }
+    body.paper-mode .study-ask-num,
+    body.white-mode .study-ask-num { color: #6b4c10; }
+    /* Scoped under .study-path so it outranks the shared pack's
+       "body.<theme> .study-path p { color }" rule, which is more specific. */
+    body.paper-mode .study-path .study-ask-kicker,
+    body.white-mode .study-path .study-ask-kicker { color: #8a6414; }
+    body.paper-mode .study-path .study-ask-text,
+    body.white-mode .study-path .study-ask-text { color: #2f2c28; }
     .sitting-path-kicker {
       font-family: 'JetBrains Mono', monospace;
       font-size: 10px;
@@ -4041,32 +4185,10 @@
       --role-invite: #8a5428;
       --role-reader: #6a5088;
     }
-    body.paper-mode .study-block,
-    body.white-mode .study-block {
-      background: rgba(255, 250, 236, 0.72);
-    }
-    body.white-mode .study-block { background: #f7f7f7; }
-    body.paper-mode .study-trace-step,
-    body.white-mode .study-trace-step {
-      background: rgba(255, 252, 246, 0.9);
-      border-color: rgba(138, 100, 20, 0.18);
-    }
-    body.white-mode .study-trace-step {
-      background: #ffffff;
-      border-color: #e5e5e5;
-    }
-    body.paper-mode .study-path .study-do,
-    body.white-mode .study-path .study-do,
     body.paper-mode .study-path h3,
     body.white-mode .study-path h3 {
       color: #1c1917;
     }
-    body.paper-mode .study-block-ask,
-    body.white-mode .study-block-ask { --block: #6b5b45; }
-    body.paper-mode .study-path .study-why,
-    body.white-mode .study-path .study-why { color: #57534e; }
-    body.paper-mode .study-block h4,
-    body.white-mode .study-block h4,
     body.paper-mode .sheet-verify-card .sheet-verify-kind,
     body.white-mode .sheet-verify-card .sheet-verify-kind,
     body.paper-mode .sheet-verify-card .sheet-verify-source b,
@@ -4086,21 +4208,35 @@
     body.white-mode .lesson-connect-lead { color: #1c1917; }
     body.paper-mode .lesson-connect-map,
     body.white-mode .lesson-connect-map {
-      color: #245066;
-      border-color: rgba(61, 98, 116, 0.45);
-      background: rgba(61, 98, 116, 0.08);
+      color: #1d4557;
+      border-color: rgba(61, 98, 116, 0.55);
+      background: linear-gradient(135deg, rgba(61, 98, 116, 0.18), rgba(61, 98, 116, 0.08));
     }
     body.paper-mode .lesson-connect-gallery,
     body.white-mode .lesson-connect-gallery {
-      color: #6e5420;
-      border-color: rgba(138, 100, 20, 0.45);
-      background: rgba(138, 100, 20, 0.08);
+      color: #63491a;
+      border-color: rgba(138, 100, 20, 0.55);
+      background: linear-gradient(135deg, rgba(196, 152, 46, 0.26), rgba(138, 100, 20, 0.12));
     }
+    /* Keep the invite the loudest button in light themes too. */
     body.paper-mode .lesson-connect-share,
     body.white-mode .lesson-connect-share {
-      color: #8a5428;
-      border-color: rgba(138, 84, 40, 0.45);
-      background: rgba(138, 84, 40, 0.08);
+      color: #3a2408;
+      border-color: rgba(160, 116, 32, 0.75);
+      background: linear-gradient(135deg, #f7d68f 0%, #e0ab4c 48%, #c98d2c 100%);
+      box-shadow: 0 12px 28px -18px rgba(160, 116, 32, 0.9), inset 0 1px 0 rgba(255, 255, 255, 0.55);
+    }
+    body.paper-mode .lesson-connect-share:hover,
+    body.paper-mode .lesson-connect-share:focus-visible,
+    body.white-mode .lesson-connect-share:hover,
+    body.white-mode .lesson-connect-share:focus-visible {
+      background: linear-gradient(135deg, #ffe4ac 0%, #ecba5c 48%, #d2982f 100%);
+      box-shadow: 0 18px 38px -18px rgba(160, 116, 32, 1), 0 0 24px -6px rgba(224, 171, 76, 0.7);
+    }
+    body.paper-mode .lesson-connect-share .lesson-connect-orb,
+    body.white-mode .lesson-connect-share .lesson-connect-orb {
+      background: #a8281a;
+      box-shadow: 0 0 9px rgba(168, 40, 26, 0.85);
     }
 
     /* Light themes: article cards keep dark fills while paragraph ink is forced dark.
@@ -5494,12 +5630,16 @@
       </div>
       <div class="lesson-connect-actions">
         <a id="btn-lesson-map" href="map.html" class="lesson-connect-btn lesson-connect-map">
+          <span class="lesson-connect-shimmer" aria-hidden="true"></span>
           <span aria-hidden="true">🗺️</span> <span id="btn-lesson-map-label">Walk the siege of 605 B.C.</span>
         </a>
         <a id="btn-lesson-gallery" href="gallery.html" class="lesson-connect-btn lesson-connect-gallery">
+          <span class="lesson-connect-shimmer" aria-hidden="true"></span>
           <span aria-hidden="true">🏛️</span> <span id="btn-lesson-gallery-label">Stand before the complete statue</span>
         </a>
         <button type="button" id="btn-lesson-share" class="lesson-connect-btn lesson-connect-share">
+          <span class="lesson-connect-shimmer" aria-hidden="true"></span>
+          <span class="lesson-connect-orb" aria-hidden="true"></span>
           <span aria-hidden="true">↗</span> <span>Invite someone into this sitting</span>
         </button>
       </div>

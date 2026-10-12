@@ -116,10 +116,20 @@ if (!studyApp.includes('BAScripture.showSheet')) fail('loadSheet does not ask Sc
 if (studySources.includes('para-hitch')) fail('sitting copy still has paragraph hitches');
 if (!html.includes('load-bearing')) fail('study.html is missing load-bearing styles');
 if (!html.includes('id="sheet-study-path"') || !studyApp.includes('renderStudyGuide')) {
-  fail('study.html is missing the how-to-study path');
+  fail('study.html is missing the study-path card');
 }
-if (!html.includes('study-why') || !studyApp.includes('renderTrace') || !studyApp.includes('renderClaim')) {
-  fail('study.html is missing how-to-study explainers');
+// The card renders one thing by design: the questions to sit with. The former
+// trace / christ / now / help / value blocks were removed deliberately, so the
+// check below asserts the question renderer is present AND that the block
+// renderer is not reintroduced.
+if (!studyApp.includes('guide.ask') || !studyApp.includes('study-ask-list') || !studyApp.includes('study-ask-item')) {
+  fail('renderStudyGuide no longer renders the questions-to-sit-with list');
+}
+if (!html.includes('study-ask-list') || !html.includes('study-ask-item')) {
+  fail('study.html is missing the questions-to-sit-with styles');
+}
+if (studyApp.includes('study-block study-block-') || studyApp.includes('renderTrace') || studyApp.includes('renderClaim')) {
+  fail('the removed how-to-study blocks are being rendered again');
 }
 
 const sitting = sheetsSrc.slice(sheetsSrc.indexOf('const sheetsData'), sheetsSrc.indexOf('const timelineEpochs'));

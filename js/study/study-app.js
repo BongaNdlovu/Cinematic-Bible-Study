@@ -2030,39 +2030,6 @@
         .replace(/"/g, "&quot;");
     }
 
-    function renderList(items, ordered) {
-      const tag = ordered ? "ol" : "ul";
-      return "<" + tag + ">" + (items || []).map((item) => "<li>" + escapeStudy(item) + "</li>").join("") + "</" + tag + ">";
-    }
-
-    function renderWhy(text) {
-      if (!text) return "";
-      return '<p class="study-why">' + escapeStudy(text) + "</p>";
-    }
-
-    function renderTrace(items) {
-      return '<ol class="study-trace">' + (items || []).map((item) => {
-        const command = typeof item === "string" ? item : (item && item.do) || "";
-        const why = typeof item === "string" ? "" : (item && item.why) || "";
-        return '<li class="study-trace-step"><p class="study-do">' + escapeStudy(command) + "</p>" + renderWhy(why) + "</li>";
-      }).join("") + "</ol>";
-    }
-
-    function studyBlock(role, title, body, heading) {
-      const tag = heading === "h3" ? "h3" : "h4";
-      return '<section class="study-block study-block-' + role + '">' +
-        "<" + tag + ">" + title + "</" + tag + ">" +
-        body +
-        "</section>";
-    }
-
-    function renderClaim(value, className) {
-      const claim = value && typeof value === "object" ? (value.claim || "") : (value || "");
-      const why = value && typeof value === "object" ? (value.why || "") : "";
-      const cls = className ? ' class="' + className + '"' : "";
-      return "<p" + cls + ">" + escapeStudy(claim) + "</p>" + renderWhy(why);
-    }
-
     function escapeVerify(text) {
       return String(text || '')
         .replace(/&/g, '&amp;')
@@ -2122,26 +2089,29 @@
         '<div class="sheet-verify-list">' + cards + '</div>';
     }
 
+    // The study-path card carries one thing only: the questions to sit with.
+    // The trace / christ / now / help / value blocks were removed by request;
+    // their helpers above remain unused rather than deleted, so nothing else
+    // that referenced them can break.
     function renderStudyGuide(guide) {
       const box = document.getElementById("sheet-study-path");
       if (!box) return;
-      if (!guide || !guide.trace || !guide.trace.length) {
+      const asked = guide && Array.isArray(guide.ask) ? guide.ask.filter((q) => q && String(q).trim()) : [];
+      if (!asked.length) {
         box.hidden = true;
         box.innerHTML = "";
         return;
       }
+      const items = asked
+        .map((q, i) => '<li class="study-ask-item"><span class="study-ask-num" aria-hidden="true">' + (i + 1) + '</span><span class="study-ask-text">' + escapeStudy(String(q)) + "</span></li>")
+        .join("");
       box.hidden = false;
       box.innerHTML =
-        '<p class="study-path-kicker">How to study this sheet</p>' +
-        '<p class="sitting-path-hint">Path for this sitting: study the excerpt, sources, and Christology plaque → open the Map page → open the 3D Gallery → return for the questions → next lesson.</p>' +
-        '<div class="study-blocks">' +
-        studyBlock("trace", "Trace it yourself", renderTrace(guide.trace), "h3") +
-        studyBlock("christ", "Christ at the center", renderClaim(guide.christ, "study-christ")) +
-        studyBlock("now", "Why this matters now", renderClaim(guide.now)) +
-        studyBlock("help", "How it helps you", renderClaim(guide.help)) +
-        studyBlock("value", "Why it is valuable", renderClaim(guide.value)) +
-        studyBlock("ask", "Questions to sit with", renderList(guide.ask, false)) +
-        "</div>";
+        '<div class="study-ask-head">' +
+          '<span class="study-ask-orb" aria-hidden="true"></span>' +
+          '<p class="study-ask-kicker">Questions to sit with</p>' +
+        "</div>" +
+        '<ol class="study-ask-list">' + items + "</ol>";
     }
 
     function renderFacilitatorStrip(fac) {
