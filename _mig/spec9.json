@@ -1,0 +1,179 @@
+{
+  "s9-1": {
+    "kind": "comparison",
+    "title": "The Theological Linkage: Daniel 8 & Daniel 9",
+    "steps": [
+      {
+        "role": "Left column",
+        "title": "Daniel 8 (The Unexplained Vision)",
+        "points": [
+          "2,300 Evening-Mornings (8:14)",
+          "Left without a starting date",
+          "Daniel faints sick for days (8:27)",
+          "Focus: Heavenly Sanctuary & Tamid"
+        ]
+      },
+      {
+        "role": "Right column",
+        "title": "Daniel 9 (The Inspired Explanation)",
+        "points": [
+          "Gabriel returns: \"Consider the vision\" (9:23)",
+          "70 Weeks \"cut off\" (chathak) to anchor the span (9:24)",
+          "Gabriel gives the \"going forth of the decree\" (9:25)",
+          "Focus: Messiah Cut Off & Covenant Confirmed (9:26-27)"
+        ]
+      }
+    ]
+  },
+  "s9-2": {
+    "kind": "timeline",
+    "title": "Chathak: Severing 490 Years from the 2,300-Year Parent Timeline",
+    "axis": ["457 B.C.", "1844 A.D."],
+    "steps": [
+      {
+        "role": "Parent timeline",
+        "title": "2,300 Years",
+        "cite": "Daniel 8:14",
+        "from": 0,
+        "to": 100,
+        "segments": [
+          {
+            "from": 0,
+            "to": 100,
+            "label": "2,300 Years (Daniel 8:14)"
+          }
+        ]
+      },
+      {
+        "role": "Chathak (Cut Off)",
+        "title": "490 Years (70 Weeks) & 1,810 Years",
+        "from": 0,
+        "to": 100,
+        "segments": [
+          {
+            "from": 0,
+            "to": 21.3,
+            "label": "490 Years (70 Weeks): 457 B.C. Decree to Restore & Build to A.D. 34 Gospel to Gentiles"
+          },
+          {
+            "from": 21.3,
+            "to": 100,
+            "label": "1,810 Years: A.D. 34 Gospel to Gentiles to 1844 A.D. Cleansing of Sanctuary"
+          }
+        ]
+      }
+    ]
+  },
+  "s9-3": {
+    "kind": "table",
+    "title": "The Four Persian Decrees Compared",
+    "head": ["Decree", "Date", "Biblical Text", "Scope", "Restores City & State?"],
+    "rows": [
+      {
+        "cells": ["1. Cyrus", "538/537 BC", "Ezra 1:1-4", "Temple only", "NO (Temple only)"]
+      },
+      {
+        "cells": ["2. Darius I", "520 BC", "Ezra 6:1-12", "Reaffirms Temple", "NO (Temple only)"]
+      },
+      {
+        "cells": ["3. Artaxerxes I", "457 BC", "Ezra 7:11-26", "Civil law & judges", "YES (Restores & Builds)"]
+      },
+      {
+        "cells": ["4. Artaxerxes I", "444 BC", "Nehemiah 2:1-8", "Wall repair permit", "NO (Executive permit)"]
+      }
+    ]
+  },
+  "s9-4": {
+    "kind": "chain",
+    "title": "The 69 Weeks to Messiah the Prince (457 B.C. to A.D. 27)",
+    "steps": [
+      {
+        "role": "457 B.C.",
+        "title": "Decree of Artaxerxes I",
+        "cite": "Ezra 7:11-26",
+        "text": "49 years (7 weeks) to 408 B.C."
+      },
+      {
+        "role": "408 B.C.",
+        "title": "Jerusalem Rebuilt",
+        "text": "Troublous times. 434 years (62 weeks) to A.D. 27."
+      },
+      {
+        "role": "A.D. 27",
+        "title": "Baptism of Jesus",
+        "cite": "Mark 1:15",
+        "text": "\"The time is fulfilled\"."
+      }
+    ]
+  },
+  "s9-5": {
+    "kind": "chain",
+    "title": "The 70th Week of Daniel (A.D. 27 to A.D. 34)",
+    "steps": [
+      {
+        "role": "A.D. 27",
+        "title": "Baptism of Jesus",
+        "text": "\"Time is fulfilled\". Ministry to Israel. 3.5 years to A.D. 31."
+      },
+      {
+        "role": "A.D. 31",
+        "title": "The Cross (Passover)",
+        "text": "\"Messiah cut off\". Veil rent; sacrifices cease. 3.5 years to A.D. 34.",
+        "centre": true
+      },
+      {
+        "role": "A.D. 34",
+        "title": "Stoning of Stephen",
+        "text": "Gospel to Gentiles. 70 Weeks expire."
+      }
+    ]
+  },
+  "s9-6": {
+    "kind": "timeline",
+    "title": "The Unbroken Continuity from 457 B.C. to 1844 A.D.",
+    "axis": ["457 B.C.", "1844 A.D."],
+    "steps": [
+      {
+        "role": "70 Weeks",
+        "title": "490 Years",
+        "from": 0,
+        "to": 21.3,
+        "segments": [
+          {
+            "from": 0,
+            "to": 21,
+            "label": "483 Years: 457 B.C. Decree to Restore City to A.D. 27 Baptism of Messiah"
+          },
+          {
+            "from": 21,
+            "to": 21.2,
+            "label": "3.5y: A.D. 27 Baptism of Messiah to A.D. 31 Cross of Christ"
+          },
+          {
+            "from": 21.2,
+            "to": 21.3,
+            "label": "3.5y: A.D. 31 Cross of Christ to A.D. 34 Close of 70 Weeks"
+          }
+        ]
+      },
+      {
+        "title": "2,300 Years",
+        "cite": "Daniel 8:14",
+        "from": 0,
+        "to": 100,
+        "segments": [
+          {
+            "from": 0,
+            "to": 21.3,
+            "label": "490 Years (70 Weeks): 457 B.C. Decree to Restore City to A.D. 34 Close of 70 Weeks"
+          },
+          {
+            "from": 21.3,
+            "to": 100,
+            "label": "1,810 Years: A.D. 34 Close of 70 Weeks to 1844 A.D. Cleansing of Sanctuary"
+          }
+        ]
+      }
+    ]
+  }
+}

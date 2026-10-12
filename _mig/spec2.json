@@ -1,0 +1,73 @@
+{
+  "s2-1": {
+    "kind": "steps",
+    "title": "The Prophetic Master-Framework (Daniel 2)",
+    "steps": [
+      { "role": "Head of Gold", "title": "Babylon", "text": "605 - 539 B.C." },
+      { "role": "Chest & Arms Silver", "title": "Medo-Persia", "text": "539 - 331 B.C." },
+      { "role": "Belly & Thighs Bronze", "title": "Greece", "text": "331 - 168 B.C." },
+      { "role": "Legs of Iron", "title": "Rome", "text": "168 B.C. - A.D. 476" },
+      { "role": "Feet of Iron & Clay", "title": "Divided Europe", "text": "A.D. 476 - Second Advent" },
+      { "role": "The Striking Stone", "title": "Christ's Kingdom", "text": "Supernatural, Universal, Eternal" }
+    ]
+  },
+  "s2-2": {
+    "kind": "table",
+    "title": "Metallurgic Gradient of Daniel 2",
+    "head": ["Metal", "Specific Gravity", "Value / Splendor", "Hardness / Destructive Force"],
+    "rows": [
+      { "cells": ["Gold", "19.3 (Highest)", "Pinnacle", "Soft, Malleable"] },
+      { "cells": ["Silver", "10.5", "High", "Pliable"] },
+      { "cells": ["Bronze", "8.9", "Moderate", "Tough"] },
+      { "cells": ["Iron", "7.8 (Lowest)", "Base", "Crushing, Destructive"] }
+    ]
+  },
+  "s2-3": {
+    "kind": "flow",
+    "title": "The Post-Roman Dilemma (Daniel 2:43)",
+    "note": "Every attempt to rebuild a single European empire fractures",
+    "steps": [
+      {
+        "role": "Iron + Clay",
+        "title": "Iron (strength that remains) + Clay (the mixture that will not hold)"
+      },
+      {
+        "role": "Mechanical Mixture, Not Union",
+        "title": "They Shall Not Cleave",
+        "points": [
+          "Charlemagne (800)",
+          "Charles V (1519)",
+          "Napoleon (1804-1815)",
+          "Hitler (1939-1945)"
+        ]
+      }
+    ]
+  },
+  "s2-4": {
+    "kind": "flow",
+    "title": "The Smiting Stone",
+    "steps": [
+      {
+        "role": "Cut Out",
+        "title": "Cut out without human hands",
+        "text": "Divine origin, Supernatural"
+      },
+      {
+        "role": "Strikes",
+        "title": "Strikes the Statue at the FEET",
+        "cite": "Dan. 2:34",
+        "text": "Not during Babylon, Persia, Greece, or Pagan Rome, but during the divided kingdoms after Rome (the feet)"
+      },
+      {
+        "role": "Pulverizes",
+        "title": "Pulverizes Gold, Silver, Bronze, Iron, & Clay",
+        "text": "Becomes like chaff blown away"
+      },
+      {
+        "role": "Becomes",
+        "title": "Becomes a Mountain Filling the Earth",
+        "text": "The Everlasting Kingdom of God"
+      }
+    ]
+  }
+}

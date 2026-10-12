@@ -1,0 +1,177 @@
+{
+  "s6-1": {
+    "kind": "comparison",
+    "title": "The Imperial Transition: Babylon to Medo-Persia (538 B.C.)",
+    "steps": [
+      {
+        "role": "Gold Head (Babylon)",
+        "title": "Babylon",
+        "points": [
+          "Autocratic Imperial Whim",
+          "King's word makes and breaks law",
+          "Overthrown October 539 B.C.",
+          "Nebuchadnezzar / Belshazzar"
+        ]
+      },
+      {
+        "role": "Silver Chest & Arms (Medo-Persia)",
+        "title": "Medo-Persia",
+        "points": [
+          "Unalterable royal law",
+          "\"Law of Medes & Persians, which altereth not\"",
+          "120 Satrapies; 3 Presidents (Daniel Chief)",
+          "Darius the Mede / Cyrus the Great"
+        ]
+      }
+    ]
+  },
+  "s6-2": {
+    "kind": "comparison",
+    "title": "The Constitutional Paradigm Shift",
+    "steps": [
+      {
+        "role": "Babylonian Autocracy",
+        "title": "Babylonian Autocracy",
+        "points": [
+          "Law is the monarch's personal whim",
+          "Can execute or spare on impulse",
+          "Nebuchadnezzar: absolute dictator",
+          "Daniel 2-4"
+        ]
+      },
+      {
+        "role": "Medo-Persian Unalterable Law",
+        "title": "Medo-Persian Unalterable Law",
+        "points": [
+          "Law is supreme over the monarch",
+          "Royal signet creates immutable decree",
+          "Darius: trapped by his own legislation",
+          "Daniel 6; Esther 1:19; 8:8; Diodorus XVII.30"
+        ]
+      }
+    ]
+  },
+  "s6-3": {
+    "kind": "table",
+    "title": "The Satraps' Forensic Audit (Daniel 6:4-5)",
+    "head": [
+      "Examined Sphere",
+      "Audit Verdict"
+    ],
+    "rows": [
+      {
+        "cells": [
+          "Financial Records",
+          "Zero embezzlement or fraud"
+        ]
+      },
+      {
+        "cells": [
+          "Executive Governance",
+          "Zero administrative negligence or error"
+        ]
+      },
+      {
+        "cells": [
+          "Moral & Civic Character",
+          "\"Faithful in all things\""
+        ]
+      }
+    ],
+    "note": "The adversaries' conclusion (Dan 6:5, KJV): \"We shall not find any occasion against this Daniel, except we find it against him concerning the law of his God.\""
+  },
+  "s6-4": {
+    "kind": "comparison",
+    "title": "The Covenant Posture at the Window (Daniel 6:10)",
+    "steps": [
+      {
+        "role": "The Imperial Command",
+        "title": "The Imperial Command",
+        "points": [
+          "\"Ask no petition of any god\"",
+          "30-day suspension of worship",
+          "Enforced by penalty of the lions' den",
+          "Attempted usurpation of heaven's throne"
+        ]
+      },
+      {
+        "role": "Daniel's Covenant Posture",
+        "title": "Daniel's Covenant Posture",
+        "points": [
+          "Knelt three times daily in prayer",
+          "Unbroken rhythm: \"as he did aforetime\"",
+          "Windows open toward Jerusalem (1 Kings 8)",
+          "Sacred duty: \"Obey God rather than men\" (Acts 5:29)"
+        ]
+      }
+    ]
+  },
+  "s6-5": {
+    "kind": "comparison",
+    "title": "The Dual Conflict: The Earthly Pit vs. the Heavenly Court",
+    "steps": [
+      {
+        "role": "The Earthly Conspiracy",
+        "title": "The Earthly Conspiracy",
+        "points": [
+          "Envious satraps orchestrate trap",
+          "Irrevocable statute seals the pit",
+          "Heavy stone sealed with royal signet",
+          "Daniel consigned to violent death",
+          "Darius's helplessness under human law"
+        ]
+      },
+      {
+        "role": "The Heavenly Vindication",
+        "title": "The Heavenly Vindication",
+        "points": [
+          "Angel dispatched to shut lions' mouths",
+          "King fasts; dawn brings joyful inquiry",
+          "Daniel lifted out completely unhurt",
+          "Conspirators face swift retributive justice",
+          "Darius publishes God's eternal dominion (Dan. 6:26)"
+        ]
+      }
+    ]
+  },
+  "s6-6": {
+    "kind": "comparison",
+    "title": "The Redemptive Typology: Daniel and Jesus Christ",
+    "steps": [
+      {
+        "role": "Daniel in the Lions' Den",
+        "title": "Daniel",
+        "points": [
+          "Envious rulers plot his destruction",
+          "Sinned against no law; totally innocent",
+          "Reluctant ruler seeks to deliver him",
+          "Cast into a dark pit of death",
+          "Stone placed over mouth of pit (6:17)",
+          "Sealed with king's & lords' signets",
+          "Delivered at the break of dawn (6:19)",
+          "Angel sent to close lions' mouths",
+          "Emerged alive, unhurt, and victorious",
+          "Conquered the roaring lion (1 Pet 5:8)",
+          "Universal decree of eternal kingdom"
+        ]
+      },
+      {
+        "role": "Jesus Christ at Calvary & the Tomb",
+        "title": "Jesus Christ",
+        "points": [
+          "Envious chief priests deliver Him to Pilate (Matt 27:18)",
+          "\"I find no fault in this man\" (Luke 23:4; 1 Pet 2:22)",
+          "Pilate seeks to release Him, but yields to pressure",
+          "Crucified and buried in a rock-hewn tomb (Matt 27:60)",
+          "Great stone rolled to door of tomb (Matt 27:60)",
+          "Tomb sealed by Roman authority with guards (Matt 27:66)",
+          "Risen at dawn on the third day (Matt 28:1; Luke 24:1)",
+          "Angel descends, rolls stone away (Matt 28:2)",
+          "Broke the bands of death; alive forevermore (Rev 1:18)",
+          "Crushed the ancient serpent; defeated Satan (Heb 2:14)",
+          "\"All power is given unto me in heaven and in earth\" (Matt 28:18)"
+        ]
+      }
+    ]
+  }
+}

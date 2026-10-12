@@ -1,0 +1,104 @@
+{
+  "s10-1": {
+    "kind": "comparison",
+    "title": "The Structure of Daniel's Final Vision (536 B.C.)",
+    "note": "Daniel 10-12: One Continuous Encounter",
+    "steps": [
+      {
+        "role": "DANIEL 10",
+        "title": "Prologue",
+        "points": [
+          "Fasting by the Tigris",
+          "The Man in Linen",
+          "Unseen Spiritual Warfare",
+          "Prince of Persia resisted",
+          "Michael comes to help"
+        ]
+      },
+      {
+        "role": "DANIEL 11",
+        "title": "Historical March",
+        "points": [
+          "4 Persian Kings & Xerxes",
+          "Alexander & 4 Diadochi",
+          "King of North vs South",
+          "Rome: Prince of Covenant cut",
+          "Papal phase removes tamid",
+          "Time of the End (1798)"
+        ]
+      },
+      {
+        "role": "DANIEL 12",
+        "title": "Eschatology",
+        "points": [
+          "Michael Stands Up",
+          "Time of Trouble",
+          "Deliverance in the Book",
+          "Bodily Resurrection (12:2)",
+          "Rest and Lot (12:13)"
+        ]
+      }
+    ]
+  },
+  "s10-2": {
+    "kind": "flow",
+    "title": "Daniel 12:1-2 in Its Own Order",
+    "steps": [
+      {
+        "title": "Michael stands up",
+        "cite": "Dan 11:2-4",
+        "text": "'amad: kingly stance"
+      },
+      {
+        "title": "Close of human probation"
+      },
+      {
+        "title": "A time of trouble such as never was"
+      },
+      {
+        "title": "Those written in the book are delivered"
+      },
+      {
+        "title": "Many who sleep in the dust awake (12:2)"
+      }
+    ]
+  },
+  "s10-3": {
+    "kind": "timeline",
+    "title": "The Timeline of Daniel 12:11-12 (Measured from A.D. 508)",
+    "note": "Then 1844: 2,300-year sanctuary landing (sitting 8)",
+    "axis": [
+      "508 A.D.",
+      "1843 A.D."
+    ],
+    "steps": [
+      {
+        "role": "508 A.D. – 1798 A.D.",
+        "title": "1,290 Years",
+        "cite": "Dan 12:4",
+        "from": 0,
+        "to": 96.6,
+        "segments": [
+          {
+            "from": 0,
+            "to": 96.6,
+            "label": "Frankish support of the Roman church → Berthier captures Pope; \"Time of the End\"; Papacy wounded; prophetic unsealing"
+          }
+        ]
+      },
+      {
+        "role": "508 A.D. – 1843 A.D.",
+        "title": "1,335 Years",
+        "from": 0,
+        "to": 100,
+        "segments": [
+          {
+            "from": 0,
+            "to": 100,
+            "label": "\"Blessed is he that waiteth\" → Great second-advent waiting year"
+          }
+        ]
+      }
+    ]
+  }
+}

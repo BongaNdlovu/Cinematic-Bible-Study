@@ -1,0 +1,150 @@
+{
+  "s4-1": {
+    "kind": "steps",
+    "title": "Nebuchadnezzar's Progressive Encounters with God",
+    "steps": [
+      {
+        "role": "Intellectual awe",
+        "title": "Acknowledges God as \"a revealer of secrets\"",
+        "cite": "Daniel 2"
+      },
+      {
+        "role": "Reluctant toleration",
+        "title": "Acknowledges God as \"able to deliver\"",
+        "cite": "Daniel 3"
+      },
+      {
+        "role": "Personal submission & worship",
+        "title": "Acknowledges God as \"the King of heaven\"",
+        "cite": "Daniel 4"
+      }
+    ]
+  },
+  "s4-2": {
+    "kind": "comparison",
+    "title": "The Anatomy of the Vision",
+    "steps": [
+      {
+        "role": "THE TALL COSMIC TREE",
+        "title": "The Tall Cosmic Tree",
+        "points": [
+          "Reached to heaven",
+          "Sheltered all beasts and birds",
+          "Symbol of imperial majesty",
+          "Nebuchadnezzar in his glory"
+        ]
+      },
+      {
+        "role": "THE BANDED STUMP",
+        "title": "The Banded Stump",
+        "points": [
+          "Stripped of branches and fruit",
+          "Driven into the dew and grass",
+          "Bound with iron and bronze",
+          "The king humbled, yet preserved by grace"
+        ]
+      }
+    ]
+  },
+  "s4-3": {
+    "kind": "steps",
+    "title": "The Threefold Boast of Pride",
+    "steps": [
+      {
+        "role": "Self-origination",
+        "title": "\"I have built\"",
+        "text": "Denies God as Creator/Giver."
+      },
+      {
+        "role": "Self-sufficiency",
+        "title": "\"By my mighty power\"",
+        "text": "Denies God's sovereign strength."
+      },
+      {
+        "role": "Self-worship",
+        "title": "\"For my majesty\"",
+        "text": "Steals the glory due to God alone."
+      }
+    ]
+  },
+  "s4-4": {
+    "kind": "flow",
+    "title": "Daniel's Account",
+    "steps": [
+      {
+        "title": "The king's boast",
+        "cite": "Daniel 4:30–34"
+      },
+      {
+        "title": "Sentence from heaven",
+        "cite": "Daniel 4:30–34"
+      },
+      {
+        "title": "Seven times pass",
+        "cite": "Daniel 4:30–34"
+      },
+      {
+        "title": "He lifts his eyes",
+        "cite": "Daniel 4:30–34"
+      },
+      {
+        "title": "His understanding returns",
+        "cite": "Daniel 4:30–34"
+      }
+    ]
+  },
+  "s4-5": {
+    "kind": "flow",
+    "title": "Daniel 4:34–37",
+    "steps": [
+      {
+        "title": "Nebuchadnezzar lifts his eyes to heaven",
+        "cite": "Daniel 4:34–37"
+      },
+      {
+        "title": "His understanding returns",
+        "cite": "Daniel 4:34–37"
+      },
+      {
+        "title": "He blesses the Most High",
+        "cite": "Daniel 4:34–37"
+      },
+      {
+        "title": "He acknowledges God's everlasting dominion",
+        "cite": "Daniel 4:34–37"
+      }
+    ]
+  },
+  "s4-6": {
+    "kind": "comparison",
+    "title": "The Emperor of Babylon / The King of Glory",
+    "steps": [
+      {
+        "role": "THE EMPEROR OF BABYLON",
+        "title": "Nebuchadnezzar",
+        "cite": "Daniel 4",
+        "points": [
+          "A mere man who claimed to be a god",
+          "\"Is not this great Babylon that I...?\"",
+          "Exalted himself on his palace roof",
+          "Driven into the dust as a beast",
+          "Humbled by force under divine wrath",
+          "Restored only after crushing judgment"
+        ]
+      },
+      {
+        "role": "THE KING OF GLORY",
+        "title": "Jesus Christ",
+        "cite": "Philippians 2",
+        "points": [
+          "God incarnate who took the form of man",
+          "\"Not my will, but Thine be done\"",
+          "Humbled Himself to the death of the cross",
+          "Laid in a manger; buried in a borrowed tomb",
+          "Emptied Himself willingly in sacrificial love",
+          "Highly exalted by the Father above every name"
+        ]
+      }
+    ]
+  }
+}

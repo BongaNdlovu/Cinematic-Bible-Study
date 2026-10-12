@@ -1,0 +1,100 @@
+{
+  "s1-1": {
+    "kind": "steps",
+    "title": "The Three Sieges of Jerusalem",
+    "steps": [
+      {
+        "role": "605 B.C. - 1st Campaign",
+        "title": "Jehoiakim vassalized",
+        "text": "Daniel and the royal youths deported."
+      },
+      {
+        "role": "597 B.C. - 2nd Campaign",
+        "title": "Jehoiachin deposed",
+        "text": "Ezekiel and 10,000 deported (BM 21946)."
+      },
+      {
+        "role": "586 B.C. - 3rd Campaign",
+        "title": "Zedekiah blinded",
+        "text": "Temple burned; Jerusalem destroyed."
+      }
+    ]
+  },
+  "s1-2": {
+    "kind": "comparison",
+    "title": "The Conflict of Names",
+    "steps": [
+      {
+        "role": "Hebrew Name (Confessing Yahweh)",
+        "title": "Hebrew Name",
+        "points": [
+          "Daniel (\"God is my Judge\")",
+          "Hananiah (\"Yahweh is Gracious\")",
+          "Mishael (\"Who is like God?\")",
+          "Azariah (\"Yahweh has Helped\")"
+        ]
+      },
+      {
+        "role": "Babylonian Name (Honoring Idols)",
+        "title": "Babylonian Name",
+        "points": [
+          "Belteshazzar (\"Bel protect his life\")",
+          "Shadrach (trad.: \"Command of Aku\" -- debated)",
+          "Meshach (trad.: \"Who is what Aku is?\" -- debated)",
+          "Abednego (\"Servant of Nebo\")"
+        ]
+      }
+    ]
+  },
+  "s1-3": {
+    "kind": "comparison",
+    "title": "The Dietary Crisis",
+    "steps": [
+      {
+        "role": "Royal Table (The World's Offer)",
+        "title": "Royal Table",
+        "points": [
+          "Typically dedicated to Marduk/Bel",
+          "May have violated Levitical food laws"
+        ]
+      },
+      {
+        "role": "Zeroim & Water (The Covenant Stand)",
+        "title": "Zeroim & Water",
+        "cite": "Dan 1:12",
+        "points": [
+          "Dedicated entirely to Yahweh",
+          "Undefiled nourishment"
+        ]
+      }
+    ]
+  },
+  "s1-4": {
+    "kind": "comparison",
+    "title": "The Redemptive Typology",
+    "steps": [
+      {
+        "role": "Daniel in Babylon",
+        "title": "Daniel",
+        "points": [
+          "Captive in exile",
+          "Tempted with royal meat and wine",
+          "Refused to defile covenant purity",
+          "Sustained by God's provision",
+          "Granted wisdom to interpret kingdoms"
+        ]
+      },
+      {
+        "role": "Jesus in the Wilderness",
+        "title": "Jesus",
+        "points": [
+          "The Son incarnate in an alienated world",
+          "Tempted by Satan with bread and kingdoms",
+          "Refused every illicit compromise",
+          "\"Man shall not live by bread alone\"",
+          "The King whose kingdom fills the earth"
+        ]
+      }
+    ]
+  }
+}

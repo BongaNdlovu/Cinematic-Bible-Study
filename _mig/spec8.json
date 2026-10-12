@@ -1,0 +1,102 @@
+{
+  "s8-1": {
+    "kind": "comparison",
+    "title": "The Literary & Theological Shift: Daniel 7 to Daniel 8",
+    "steps": [
+      {
+        "role": "DANIEL 7",
+        "title": "Apocalyptic Theater: The World",
+        "points": [
+          "Churning Sea & Stormy Winds (Nations)",
+          "Unclean Wild Predators (Lion, Bear, etc)",
+          "Focus: Geopolitical Empire & Court",
+          "Language: Imperial Aramaic (Dan 2-7)"
+        ]
+      },
+      {
+        "role": "DANIEL 8",
+        "title": "Sanctuary Theater: The Holy Place",
+        "points": [
+          "The Ulai Canal at Susa (Imperial Sanctuary)",
+          "Clean Sacrificial Animals (Ram, He-Goat)",
+          "Focus: The Daily (Tamid) & Sanctuary Cleansing",
+          "Language: Sacred Hebrew (Dan 8-12)"
+        ]
+      }
+    ]
+  },
+  "s8-2": {
+    "kind": "table",
+    "title": "The Animals and Succession in Daniel 8:3-8, 20-22",
+    "head": ["Symbol in Prophecy", "Interpretation", "Historical Reality"],
+    "rows": [
+      {
+        "cells": [
+          "Two-Horned Ram (8:3, 20)",
+          "Kings of Media & Persia",
+          "Medo-Persian Empire (539-331 B.C.)"
+        ]
+      },
+      {
+        "cells": [
+          "Rough Male Goat (8:5, 21)",
+          "King of Grecia",
+          "Greco-Macedonian Empire (331 B.C.)"
+        ]
+      },
+      {
+        "cells": [
+          "Notable Large Horn (8:5, 21)",
+          "The First King",
+          "Alexander the Great (d. 323 B.C.)"
+        ]
+      },
+      {
+        "cells": [
+          "Four Successor Horns (8:8)",
+          "Four Diadochi Realms",
+          "Cassander, Lysimachus, Seleucus, Ptolemy"
+        ]
+      }
+    ]
+  },
+  "s8-3": {
+    "kind": "table",
+    "title": "The Three Criteria That Eliminate Antiochus IV Epiphanes",
+    "head": [
+      "Biblical Requirement",
+      "Antiochus IV Epiphanes",
+      "Historicist Rome (Pagan & Papal)"
+    ],
+    "rows": [
+      {
+        "cells": [
+          "1. \"Exceedingly Great\" (8:9)",
+          "Tributary to Rome; minor king",
+          "Crushed the ancient world; ruled millennia"
+        ]
+      },
+      {
+        "cells": [
+          "2. \"Time of the End\" (8:17, 19)",
+          "Died in 164 B.C. (Antiquity)",
+          "Extends to the end of time"
+        ]
+      },
+      {
+        "cells": [
+          "3. 2,300 Evening-Mornings (8:14)",
+          "Desecration lasted ~3 yrs (1080d)",
+          "2,300 prophetic years (457 B.C.-1844 A.D.)"
+        ]
+      },
+      {
+        "cells": [
+          "4. Verb Nitsdaq (Vindicated)",
+          "Physical altar cleansed (Taher)",
+          "Heavenly sanctuary vindicated (Nitsdaq)"
+        ]
+      }
+    ]
+  }
+}
