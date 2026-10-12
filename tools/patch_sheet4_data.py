@@ -17,15 +17,6 @@ new_block = f'''      {{
         scripture: "Daniel 4:1-37 &bull; Babylon, c. 570 B.C.",
         title: "The Emperor in the Dust: Pride, Divine Sanity, and the Humility of Christ",
         subtitle: "A pagan king's open confession — hubris, beastly madness, restored reason, and Christ's kenosis.",
-        flow: [
-          {{ kind: "scripture", title: "An imperial encyclical", text: "Nebuchadnezzar publishes his own humiliation to all peoples — a rare first-person royal document.", tag: "Daniel 4:1" }},
-          {{ kind: "anchor", title: "The thesis of thrones", text: "The most High ruleth in the kingdom of men — stated three times (4:17, 25, 32).", tag: "Daniel 4:17" }},
-          {{ kind: "scripture", title: "Tree and banded stump", text: "Watcher hews the cosmic tree; iron/bronze band preserves mercy for repentance.", tag: "Daniel 4:14–16" }},
-          {{ kind: "scripture", title: "Mercy before judgment", text: "Break off thy sins, show mercy to the poor — twelve months of divine patience.", tag: "Daniel 4:27, 29" }},
-          {{ kind: "scripture", title: "The threefold boast", text: "I have built / my mighty power / my majesty — pride taking credit for a gift.", tag: "Daniel 4:30; 2:37" }},
-          {{ kind: "guard", title: "Seven times = literal years", text: "Court narrative, not apocalyptic clock — year-day does not apply here.", tag: "Daniel 4:33, 36" }},
-          {{ kind: "anchor", title: "Eyes lifted, mind restored", text: "Sanity is theological; Christ is the humble King opposite Nebuchadnezzar's pride.", tag: "Daniel 4:34; Phil 2:6–8" }}
-        ],
         content: `
 {js_content}
         `,

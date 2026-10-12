@@ -17,14 +17,6 @@ new_block = f'''      {{
         scripture: "How the book teaches you to read it",
         title: "The Prophetic Blueprint: Why Daniel's Unbroken Chain Centers on Jesus Christ",
         subtitle: "God's historical roadmap from exile to the cross to the everlasting kingdom — and why how you read decides what you see.",
-        flow: [
-          {{ kind: "scripture", title: "The Lord gave the king", text: "Nebuchadnezzar did not conquer by independent might — God handed Judah over according to His purpose.", tag: "Daniel 1:2" }},
-          {{ kind: "anchor", title: "Three hermeneutical roads", text: "Historicism keeps one chain; preterism locks it in antiquity; futurism severs it with a gap Daniel never names.", tag: "Daniel 2:38–44" }},
-          {{ kind: "history", title: "Counter-Reformation catalyst", text: "Alcázar (1614) and Ribera (1590) relocated fulfillment to escape historicist papal identification — history of interpretation.", tag: "Council of Trent" }},
-          {{ kind: "scripture", title: "The year-day scale", text: "Numbers 14:34 and Ezekiel 4:6 establish precedent; Daniel 9 tests it at Messiah and the cross.", tag: "Num 14:34; Ezek 4:6; Dan 9:24–27" }},
-          {{ kind: "anchor", title: "Christ is the redemptive center", text: "Sovereignty in exile (Dan 1:2), Messiah cut off (Dan 9:26), Stone-King (Dan 2:44) — Luke 24:27.", tag: "Luke 24:27" }},
-          {{ kind: "guard", title: "You live before the Stone", text: "Historicism places you in the divided feet — freed from fear, resting in Christ's first and second advent.", tag: "Daniel 2:41–44" }}
-        ],
         content: `
 {js_content}
         `,

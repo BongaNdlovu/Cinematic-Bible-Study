@@ -2630,39 +2630,6 @@
       }
     }
 
-    function renderSheetFlow(data) {
-      const box = document.getElementById('sheet-flow');
-      if (!box) return;
-      const steps = (data && Array.isArray(data.flow)) ? data.flow : [];
-      if (!steps.length) {
-        box.hidden = true;
-        box.innerHTML = '';
-        return;
-      }
-      const kindLabels = { anchor: 'Anchor', scripture: 'Scripture', history: 'History', guard: 'Guard rail' };
-      const items = steps.map((step, i) => {
-        const kind = kindLabels[step.kind] !== undefined ? step.kind : 'scripture';
-        const kindLabel = kindLabels[kind];
-        return `
-          <li class="flow-step flow-step-${kind}">
-            <span class="flow-marker" aria-hidden="true">${i + 1}</span>
-            <div class="flow-body">
-              <div class="flow-head">
-                <span class="flow-title">${step.title}</span>
-                <span class="flow-ref">${kindLabel ? `<span class="flow-kind flow-kind-${kind}">${kindLabel} · </span>` : ''}<span class="flow-tag">${step.tag}</span></span>
-              </div>
-              <p class="flow-text">${step.text}</p>
-            </div>
-          </li>`;
-      }).join('');
-      box.hidden = false;
-      box.innerHTML = `
-        <p class="flow-kicker">The line of this sitting</p>
-        <h3 class="flow-heading">One path, first verse to last claim</h3>
-        <ol class="flow-list">${items}</ol>
-      `;
-    }
-
     const SCROLL_KEY = 'scroll_section';
     let scrollHold = false;
 
@@ -2768,7 +2735,6 @@
       // Render Article Content
       document.getElementById('sheet-article').innerHTML = data.content;
       renderLessonMedia(data);
-      renderSheetFlow(data);
       renderLessonConnectBar(index);
       renderStudyGuide(data.studyGuide);
       renderFacilitatorStrip(data.facilitator);

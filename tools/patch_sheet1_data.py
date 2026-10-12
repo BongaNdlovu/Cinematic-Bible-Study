@@ -17,15 +17,6 @@ new_block = f'''      {{
         scripture: "Daniel 1:1-21 &bull; Babylon, 605 B.C.",
         title: "The Exilic Crucible: Identity, Consecration, and the Redemptive Obedience of Christ",
         subtitle: "Sovereign exile, the battle for identity at Babylon's table, and how Daniel's stand points to the faithful Son.",
-        flow: [
-          {{ kind: "scripture", title: "Shinar and sovereign judgment", text: "Exile to Babel's plain is not Marduk's victory — the Lord gave Jehoiakim into Nebuchadnezzar's hand.", tag: "Daniel 1:1–2; Jer 25:9–12" }},
-          {{ kind: "history", title: "Three sieges, three dates", text: "605 (Daniel's levy), 597 (Jehoiachin, BM 21946), 586 (temple burned) — Isaiah 39:7 fulfilled.", tag: "2 Kings 24–25" }},
-          {{ kind: "scripture", title: "The conflict of names", text: "Yahweh-confessing names become Bel/Aku/Nebo honors — civic roll ≠ worship.", tag: "Daniel 1:7" }},
-          {{ kind: "anchor", title: "The line at the royal table", text: "Daniel purposed in his heart not to defile himself — idol table-fellowship, Levitical breach, dulled clarity.", tag: "Daniel 1:8" }},
-          {{ kind: "history", title: "Zeroim and the ten-day test", text: "Seed-grown foods echo Genesis 1:29; God gave wisdom ten times better — not the vegetables.", tag: "Daniel 1:12–20" }},
-          {{ kind: "anchor", title: "Typology of the faithful Son", text: "Daniel in exile foreshadows Christ in the wilderness — bread, kingdoms, and covenant fidelity.", tag: "Matt 4:4; Heb 4:15" }},
-          {{ kind: "guard", title: "Civic competence, covenant boundaries", text: "Excel in Babylon's court; draw the line when conscience, worship, or God's Word is demanded.", tag: "Daniel 1:3–8" }}
-        ],
         content: `
 {js_content}
         `,

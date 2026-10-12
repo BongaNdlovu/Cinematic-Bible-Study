@@ -17,15 +17,6 @@ new_block = f'''      {{
         scripture: "Daniel 10:1 - 12:13 &bull; Tigris River, 536 B.C.",
         title: "Michael Stands Up: The Time of Trouble & Bodily Resurrection",
         subtitle: "The close of probation, deliverance of the saints, and the eternal covenant reward.",
-        flow: [
-          {{ kind: "scripture", title: "One vision, three chapters", text: "Cyrus’s third year by the Tigris — chapters 10–12 are a single continuous revelation.", tag: "Daniel 10:1 – 12:13" }},
-          {{ kind: "scripture", title: "The man in linen", text: "Body like beryl, face like lightning — the same inventory as the glorified Christ of Revelation 1.", tag: "Daniel 10:5–6 ↔ Revelation 1:13–15" }},
-          {{ kind: "scripture", title: "The war behind the empires", text: "The prince of Persia withholds Gabriel twenty-one days; Michael comes to help.", tag: "Daniel 10:13, 20" }},
-          {{ kind: "scripture", title: "The named march", text: "Persia’s kings, Alexander’s break into four, the north-south wars, Rome — and “the prince of the covenant” cut off.", tag: "Daniel 11:2–22" }},
-          {{ kind: "scripture", title: "The daily removed again", text: "The papal phase takes the tamid and sets up the abomination — the attack of chapters 7 and 8 under a new face.", tag: "Daniel 11:31, 36–39" }},
-          {{ kind: "anchor", title: "Michael stands up", text: "“Stand up” is Daniel’s verb for kings assuming power; the great Prince assumes His stance — the plea ends and trouble begins.", tag: "Daniel 12:1; Hebrews 7:25" }},
-          {{ kind: "scripture", title: "Dust wakes", text: "Bodily resurrection, two destinies — confirmed by Jesus in John 5 — and Daniel is told to rest and arise.", tag: "Daniel 12:2, 13; John 5:28–29" }}
-        ],
         content: `
 {js_content}
         `,

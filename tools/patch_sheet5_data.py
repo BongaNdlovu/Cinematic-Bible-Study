@@ -17,15 +17,6 @@ new_block = f'''      {{
         scripture: "Daniel 5:1-31 &bull; Babylon, October 11/12, 539 B.C.",
         title: "The Handwriting on the Plaster: The Fall of Babylon, the Divine Balance Sheet, and the Righteousness of Christ",
         subtitle: "Sacrilege against known light, Heaven's marketplace audit, and the only weight that can cover us.",
-        flow: [
-          {{ kind: "history", title: "The siege and the feast", text: "Medo-Persia encircles impregnable walls while Belshazzar toasts idols with holy vessels.", tag: "Daniel 5:1–3; October 539 B.C." }},
-          {{ kind: "history", title: "Belshazzar was real", text: "Nabonidus Cylinders and the Verse Account confirm the co-regency — why 'third ruler' is precise.", tag: "BM 91125; BM 38299; Dan 5:16" }},
-          {{ kind: "scripture", title: "Sacrilege against known light", text: "Temple vessels become toasting cups; Daniel 5:22: thou knewest all this.", tag: "Daniel 5:2–4, 22" }},
-          {{ kind: "anchor", title: "The wall of audit", text: "MENE, TEKEL, PERES — numbered, weighed, divided. Marketplace weights become Heaven's ledger.", tag: "Daniel 5:25–28" }},
-          {{ kind: "scripture", title: "The conqueror was named", text: "Isaiah named Cyrus and the open gates about 150 years before the night.", tag: "Isaiah 44:28; 45:1–3" }},
-          {{ kind: "history", title: "The city falls in one night", text: "River diverted; chronicle says without battle; gold replaced by silver.", tag: "Daniel 5:30–31; BM 35382" }},
-          {{ kind: "guard", title: "Found wanting, yet covered", text: "Cyrus types the Anointed Deliverer; only Christ's righteousness weighs enough on the scale.", tag: "Isa 45:1; 2 Cor 5:21" }}
-        ],
         content: `
 {js_content}
         `,

@@ -37,14 +37,6 @@
         },
         title: "The Prophetic Blueprint: Why Daniel's Unbroken Chain Centers on Jesus Christ",
         subtitle: "God's historical roadmap from exile to the cross to the everlasting kingdom — and why how you read decides what you see.",
-        flow: [
-          { kind: "scripture", title: "The Lord gave the king", text: "Nebuchadnezzar did not conquer by independent might — God handed Judah over according to His purpose.", tag: "Daniel 1:2" },
-          { kind: "anchor", title: "Three hermeneutical roads", text: "Historicism keeps one chain; preterism locks it in antiquity; futurism severs it with a gap Daniel never names.", tag: "Daniel 2:38–44" },
-          { kind: "history", title: "Counter-Reformation catalyst", text: "Alcázar (1614) and Ribera (1590) published systematic readings that moved fulfillment off the medieval church — dated commentaries, not a cartoon motive.", tag: "Council of Trent" },
-          { kind: "scripture", title: "The year-day scale", text: "Numbers 14:34 and Ezekiel 4:6 set the precedent. Daniel 9 tests that scale in the prophecy of the Messiah and at the cross.", tag: "Num 14:34; Ezek 4:6; Dan 9:24–27" },
-          { kind: "anchor", title: "Christ is the redemptive center", text: "Christ is sovereign in the exile (Daniel 1:2), cut off as Messiah (Daniel 9:26), and the Stone-King (Daniel 2:44). Luke 24:27 holds these together.", tag: "Luke 24:27" },
-          { kind: "guard", title: "You live before the Stone", text: "Historicism places you in the divided feet. You are freed from fear, resting in Christ's first and second advent.", tag: "Daniel 2:41–44" }
-        ],
         content: `
 <nav class="lesson-toc" aria-label="Sheet 0 parts">
   <p class="lesson-toc-kicker">Follow this sitting</p>
@@ -428,15 +420,6 @@ Daniel 9:24–27 ──▶  "Seventy weeks" (70 × 7 = 490 prophetic days)
         },
         title: "The Exilic Crucible: Identity, Consecration, and the Redemptive Obedience of Christ",
         subtitle: "Sovereign exile, the battle for identity at Babylon's table, and how Daniel's stand points to the faithful Son.",
-        flow: [
-          { kind: "scripture", title: "Shinar and sovereign judgment", text: "Exile to Babel's plain is not Marduk's victory — the Lord gave Jehoiakim into Nebuchadnezzar's hand.", tag: "Daniel 1:1–2; Jer 25:9–12" },
-          { kind: "history", title: "Three sieges, three dates", text: "The dates are 605 (Daniel's levy), 597 (Jehoiachin, BM 21946), and 586 (the temple burned). Isaiah 39:7 is fulfilled.", tag: "2 Kings 24–25" },
-          { kind: "scripture", title: "The conflict of names", text: "Their Yahweh-confessing names become names honoring Babylonian gods. The Aku reading of Shadrach and Meshach is the traditional grid, not settled Akkadian. A name on the civic roll is not an act of worship.", tag: "Daniel 1:7" },
-          { kind: "anchor", title: "The line at the royal table", text: "Daniel purposed in his heart not to defile himself. Daniel 1:8 names the fact of defilement but does not itemise it; the pagan-table and Levitical reasons are historical reconstruction, not quotation. It names no effect on the mind.", tag: "Daniel 1:8" },
-          { kind: "history", title: "Zeroim and the ten-day test", text: "Seed-grown foods echo Genesis 1:29. God gave wisdom ten times better, and the vegetables did not produce it.", tag: "Daniel 1:12–20" },
-          { kind: "anchor", title: "Typology of the faithful Son", text: "Daniel in exile foreshadows Christ in the wilderness. The test is bread, kingdoms, and covenant fidelity.", tag: "Matt 4:4; Heb 4:15" },
-          { kind: "guard", title: "Civic competence, covenant boundaries", text: "Excel in Babylon's court; draw the line when conscience, worship, or God's Word is demanded.", tag: "Daniel 1:3–8" }
-        ],
         content: `
 <nav class="lesson-toc" aria-label="Sheet 1 sections">
   <p class="lesson-toc-kicker">Follow this sitting</p>
@@ -825,15 +808,6 @@ DANIEL IN BABYLON                         JESUS IN THE WILDERNESS
         },
         title: "The Metallic Colossus: The Historicist Blueprint of History and the Sovereign Triumph of Christ",
         subtitle: "From the impasse of human wisdom to the stone that fills the earth — God's unbroken chain of empires and Christ's everlasting kingdom.",
-        flow: [
-          { kind: "scripture", title: "Human wisdom bankrupt", text: "The magicians confess they cannot tell the dream. Daniel prays, and there is a God in heaven that revealeth secrets.", tag: "Daniel 2:10–11, 28" },
-          { kind: "anchor", title: "The master-framework", text: "The chain runs from gold to silver, to bronze, to iron, to feet of iron and clay, and then to the Stone. It is one contiguous chain.", tag: "Daniel 2:31–35" },
-          { kind: "scripture", title: "Thou art this head of gold", text: "Babylon is fixed as the head and cannot be repeated. Each metal follows the one before it.", tag: "Daniel 2:38–40" },
-          { kind: "history", title: "Metallurgic gradient", text: "Value declines from the head to the feet, and crushing force increases. Rome is harder than Babylon.", tag: "Daniel 2:39–40" },
-          { kind: "scripture", title: "They shall not cleave", text: "The fourth kingdom divides; they mingle with the seed of men and do not cleave (Daniel 2:41–43). Every European attempt at one empire fractures.", tag: "Daniel 2:41–43" },
-          { kind: "anchor", title: "Stone strikes the feet", text: "The stone is cut without hands in the days of these kings. The blow comes from God.", tag: "Daniel 2:34–35, 44" },
-          { kind: "guard", title: "You live in the toenails", text: "Historicism places you before the Stone, not waiting for a fifth metal or a restarted head of gold.", tag: "Daniel 2:43–44" }
-        ],
         content: `
 <nav class="lesson-toc" aria-label="Sheet 2 sections">
   <p class="lesson-toc-kicker">Follow this sitting</p>
@@ -1248,15 +1222,6 @@ Iron (strength that remains)  +  Clay (the mixture that will not hold)
         },
         title: "The Plain of Dura: Forced Worship, the \"But If Not\" Faith, and Christ in the Fire",
         subtitle: "Nebuchadnezzar's imperial veto, the Daniel 3 / Revelation 13 blueprint, and the Fourth who walks in the flames.",
-        flow: [
-          { kind: "scripture", title: "The imperial veto", text: "An all-gold image, sixty cubits by six, rejects the succession in Daniel 2 and declares Babylon eternal.", tag: "Daniel 3:1; 2:38" },
-          { kind: "scripture", title: "Bow or burn", text: "A universal decree is enforced by the furnace. The second commandment forbids the bow.", tag: "Daniel 3:4–6; Exod 20:4–5" },
-          { kind: "anchor", title: "Civil duty has a ceiling", text: "They are exemplary administrators who give Caesar their labor and refuse Caesar their worship.", tag: "Dan 2:49; Matt 22:21; Acts 5:29" },
-          { kind: "scripture", title: "Dura → Revelation 13", text: "Decree, image, death penalty, and commandment-keepers: Daniel 3 is the type, and Revelation 13 is the antitype.", tag: "Daniel 3 ↔ Rev 13:14–17; 14:12" },
-          { kind: "anchor", title: "But if not", text: "God is able to deliver, but if not, we will not bow. Obedience is settled before any rescue is promised.", tag: "Daniel 3:17–18" },
-          { kind: "scripture", title: "Four men in the fire", text: "The form of the fourth is like the Son of God. The ropes burn, and the bodies are unharmed.", tag: "Daniel 3:25, 27" },
-          { kind: "guard", title: "Dura and Calvary", text: "Christ walks beside His servants at Dura; at Calvary He entered the fire alone for our sins.", tag: "Isa 53; 2 Cor 5:21; Rev 20:14" }
-        ],
         content: `
 <nav class="lesson-toc" aria-label="Sheet 3 sections">
   <p class="lesson-toc-kicker">Follow this sitting</p>
@@ -1630,15 +1595,6 @@ THE TRIAL: IMMANENCE IN THE FIRE                           THE CROSS: VICARIOUS 
         },
         title: "The Emperor in the Dust: Pride, Humiliation, and the Humility of Christ",
         subtitle: "A pagan king's open confession — pride, the humiliation Daniel describes, restored understanding, and Christ's humility.",
-        flow: [
-          { kind: "scripture", title: "An imperial encyclical", text: "Nebuchadnezzar publishes his own humiliation to all peoples — a rare first-person royal document.", tag: "Daniel 4:1" },
-          { kind: "anchor", title: "The thesis of thrones", text: "The Most High ruleth in the kingdom of men. The thesis is stated three times (Daniel 4:17, 25, 32).", tag: "Daniel 4:17" },
-          { kind: "scripture", title: "Tree and banded stump", text: "The Watcher hews the cosmic tree. The iron and bronze band preserves mercy so the king can repent.", tag: "Daniel 4:14–16" },
-          { kind: "scripture", title: "Mercy before judgment", text: "Daniel says, \"Break off thy sins\" and \"show mercy to the poor.\" Twelve months of divine patience follow.", tag: "Daniel 4:27, 29" },
-          { kind: "scripture", title: "The threefold boast", text: "The boast is \"I have built,\" \"by my mighty power,\" and \"for the honour of my majesty.\" Pride takes credit for a gift.", tag: "Daniel 4:30; 2:37" },
-          { kind: "guard", title: "Seven times = literal years", text: "This is a court narrative, so the year-day scale does not apply here.", tag: "Daniel 4:33, 36" },
-          { kind: "anchor", title: "Eyes lifted, understanding restored", text: "Daniel says Nebuchadnezzar's understanding returned after he lifted his eyes to heaven.", tag: "Daniel 4:34; 4:37" }
-        ],
         content: `
 <nav class="lesson-toc" aria-label="Sheet 4 sections">
   <p class="lesson-toc-kicker">Follow this sitting</p>
@@ -2009,15 +1965,6 @@ Nebuchadnezzar (Daniel 4)                Jesus Christ (Philippians 2)
         },
         title: "The Handwriting on the Plaster: The Fall of Babylon, the Divine Balance Sheet, and the Righteousness of Christ",
         subtitle: "Sacrilege against known light, Heaven's marketplace audit, and the only weight that can cover us.",
-        flow: [
-          { kind: "history", title: "The siege and the feast", text: "Medo-Persia encircles impregnable walls while Belshazzar toasts idols with holy vessels.", tag: "Daniel 5:1–3; the night of the fall" },
-          { kind: "history", title: "Belshazzar was real", text: "The Nabonidus Cylinders and the Verse Account confirm the co-regency, which is why the offer of \"third ruler\" is precise.", tag: "BM 91125; BM 38299; Dan 5:16" },
-          { kind: "scripture", title: "Sacrilege against known light", text: "The temple vessels become toasting cups. Daniel 5:22 says, \"Thou knewest all this.\"", tag: "Daniel 5:2–4, 22" },
-          { kind: "anchor", title: "The wall of audit", text: "MENE, TEKEL, and PERES mean numbered, weighed, and divided. Marketplace weights become Heaven's ledger.", tag: "Daniel 5:25–28" },
-          { kind: "scripture", title: "The conqueror was named", text: "Isaiah named Cyrus and the open gates more than a century before the night (Isaiah 45:1 prints the name; the year-gap is reconstructed, not a verse).", tag: "Isaiah 44:28; 45:1–3" },
-          { kind: "history", title: "The city falls in one night", text: "The river was diverted. The chronicle says the city fell without a battle, and the head of gold was replaced by silver.", tag: "Daniel 5:30–31; BM 35382" },
-          { kind: "guard", title: "Found wanting, yet covered", text: "Cyrus types the Anointed Deliverer; only Christ's righteousness weighs enough on the scale.", tag: "Isa 45:1; 2 Cor 5:21" }
-        ],
         content: `
 <nav class="lesson-toc" aria-label="Sheet 5 sections">
   <p class="lesson-toc-kicker">Follow this sitting</p>
@@ -2425,15 +2372,6 @@ CYRUS THE DELIVERER                       JESUS CHRIST THE REDEEMER
         },
         title: "The Pit of Hunger: The Law of the Medes and Persians, The Open Window, and the Resurrection of Christ",
         subtitle: "The irrevocable imperial statute, blameless integrity under audit, prayer facing Jerusalem, and the sealed pit set beside the empty tomb.",
-        flow: [
-          { kind: "history", title: "Transition from gold to silver", text: "Babylon falls; Darius the Mede establishes 120 satrapies under 3 presidents, with Daniel chief.", tag: "Daniel 5:31; 6:1–3" },
-          { kind: "history", title: "The unalterable statute", text: "Under the Medo-Persian code, royal decrees cannot be repealed (Daniel 6:8, 12, 15; Esther 8:8). Classical writers illustrate irreversible royal action; they do not quote a statute.", tag: "Daniel 6:8, 12, 15" },
-          { kind: "scripture", title: "The forensic audit", text: "The satraps find no error or fault. The only charge they can bring concerns the law of his God.", tag: "Daniel 6:4–5" },
-          { kind: "anchor", title: "The window stays open", text: "Daniel prays toward Jerusalem three times daily as he did aforetime; civil duty yields to the First Commandment.", tag: "Daniel 6:10; Acts 5:29" },
-          { kind: "scripture", title: "The sealed pit of hunger", text: "Daniel is cast into the den of lions. A stone is sealed with the royal signet, and the king fasts through the night.", tag: "Daniel 6:16–18" },
-          { kind: "scripture", title: "Dawn inquiry and deliverance", text: "God sent His angel and shut the lions' mouths, and Darius decreed worship of the living God.", tag: "Daniel 6:20–27" },
-          { kind: "guard", title: "The pit and the empty tomb", text: "The sealed pit and dawn deliverance invite comparison with the sealed tomb; the resurrection is taught in its own verses (Matthew 28:1–6).", tag: "Matt 27:62–66; 1 Pet 5:8" }
-        ],
         content: `
 <nav class="lesson-toc" aria-label="Sheet 6 sections">
   <p class="lesson-toc-kicker">Follow this sitting</p>
@@ -2876,15 +2814,6 @@ DANIEL IN THE LIONS' DEN                 JESUS CHRIST AT CALVARY &amp; THE TOMB
         },
         title: "The Churning Sea & The Little Horn: The 1,260 Years to Judgment",
         subtitle: "The four predatory beasts, the church-state horn, the 1,260-year supremacy, and the pre-advent heavenly court.",
-        flow: [
-          { kind: "scripture", title: "Same chain, predatory symbols", text: "Four beasts rise from the sea: lion (Babylon), bear (Medo-Persia), leopard (Greece), and dreadful beast (Rome).", tag: "Daniel 7:3–7, 17, 23" },
-          { kind: "scripture", title: "Scripture defines its own vocabulary", text: "Waters represent peoples and nations; winds represent war and geopolitical upheaval.", tag: "Revelation 17:15; Jeremiah 49:36–37" },
-          { kind: "anchor", title: "The eleventh little horn", text: "It is different from the ten. It uproots three, speaks against the Most High, wears out the saints, and thinks to change times and laws.", tag: "Daniel 7:8, 24–25" },
-          { kind: "history", title: "Three blocking kingdoms uprooted", text: "The Heruli (493), the Vandals (534), and the Ostrogoths (538) were the Arian powers that barred a church-state in the west.", tag: "History — dated falls" },
-          { kind: "scripture", title: "The 1,260-year prophetic span", text: "A time, times, and half a time equal three and a half years, forty-two months, and 1,260 prophetic days, which are 1,260 solar years on the year-day scale.", tag: "Daniel 7:25; Revelation 12:6, 14; 13:5" },
-          { kind: "history", title: "Historical boundaries: 538 to 1798", text: "The span runs from A.D. 538, when Belisarius raised the Ostrogothic siege and Justinian's decree was in force, to A.D. 1798, when Berthier captured Pius VI.", tag: "Procopius; Berthier 1798" },
-          { kind: "guard", title: "Pre-advent court before the stone", text: "Thrones are set and books are opened. One like a son of man is brought to the Ancient of Days, a heavenly trial while the horn still speaks on earth.", tag: "Daniel 7:9–14, 26–27" }
-        ],
         content: `
 <nav class="lesson-toc" aria-label="Sheet 7 sections">
   <p class="lesson-toc-kicker">Follow this sitting</p>
@@ -3328,15 +3257,6 @@ SCRIPTURAL CRITERIA:                     HISTORICAL FULFILLMENT:
         },
         title: "The Ram, The Goat, & 2,300 Days: The Cleansing of the Sanctuary",
         subtitle: "Gabriel's named empires, the attack on Christ's continual mediation (tamid), refutation of Antiochus, and the 1844 Day of Atonement in heaven.",
-        flow: [
-          { kind: "anchor", title: "The angel names the animals", text: "The two-horned ram is Media and Persia, and the rough goat is Grecia. Gabriel leaves no room for human guesswork.", tag: "Daniel 8:20–21" },
-          { kind: "scripture", title: "Alexander and the four horns", text: "Alexander dies at 32; four Diadochi realms arise toward the four winds of heaven (Cassander, Lysimachus, Seleucus, Ptolemy).", tag: "Daniel 8:8, 21–22" },
-          { kind: "anchor", title: "Rome in two phases", text: "The horn grows exceedingly great. Pagan Rome reaches Egypt, Syria, and Judea and crucifies the Prince, and papal Rome reaches upward against the host of heaven.", tag: "Daniel 8:9–12" },
-          { kind: "scripture", title: "The attack on the Tamid", text: "The horn removes the tamid, Christ's continual heavenly intercession, and a counterfeit earthly priesthood obscures it.", tag: "Daniel 8:11–12; Hebrews 7:25" },
-          { kind: "guard", title: "Three tests Antiochus fails", text: "Antiochus is not exceedingly great, because he paid tribute to Rome. He does not reach the time of the end (Daniel 8:17, 19). Three years cannot cover 2,300 prophetic days.", tag: "Daniel 8:9, 14, 17, 19" },
-          { kind: "anchor", title: "Nitsdaq: courtroom vindication", text: "Nitsdaq means justified, vindicated, and restored to its rightful state. That is Day of Atonement language for the heavenly sanctuary (Leviticus 16; Hebrews 8–9).", tag: "Daniel 8:14; Leviticus 16:30" },
-          { kind: "history", title: "2,300 years land in 1844", text: "The 2,300 years end on 22 October 1844 (tenth day of the seventh month, Karaite visible-moon reckoning). That day Jesus entered the Most Holy Place of the heavenly sanctuary to begin the final judgment work.", tag: "Daniel 8:14; 9:24–27; Leviticus 16" }
-        ],
         content: `
 <nav class="lesson-toc" aria-label="Sheet 8 sections">
   <p class="lesson-toc-kicker">Follow this sitting</p>
@@ -3764,15 +3684,6 @@ BIBLICAL REQUIREMENT:            ANTIOCHUS IV EPIPHANES:           HISTORICIST R
         },
         title: "The 70 Weeks (Chathak) & The Cross: The Mathematical Anchor of 1844",
         subtitle: "How the crucifixion of Christ in A.D. 31 establishes the start date for the 2,300-day prophecy.",
-        flow: [
-          { kind: "scripture", title: "Gabriel returns to explain", text: "Gabriel says, \"Consider the vision,\" meaning the unexplained 2,300 days of chapter 8 that made Daniel faint.", tag: "Daniel 9:21–23; 8:27" },
-          { kind: "anchor", title: "Chathak: severed from the line", text: "Chathak appears only once in the Hebrew Bible. The seventy weeks are severed from the longer 2,300-day line, so both share one starting point.", tag: "Daniel 9:24" },
-          { kind: "scripture", title: "Four decrees, one 'restore'", text: "Only Artaxerxes’ seventh-year decree (457 B.C., Ezra 7) restores magistrates and judges — the civil “restore” of 9:25.", tag: "Ezra 7:11–26" },
-          { kind: "scripture", title: "The walk to Messiah in A.D. 27", text: "457 B.C. plus 483 years, with no year zero, lands in autumn A.D. 27, the baptism and anointing, when Jesus says, \"The time is fulfilled.\"", tag: "Daniel 9:25; Luke 3:1, 21–23; Mark 1:15" },
-          { kind: "anchor", title: "The cross in the midst (A.D. 31)", text: "Messiah is cut off \"but not for himself\" in the spring of A.D. 31, and the veil tears from top to bottom (Matthew 27:51).", tag: "Daniel 9:26–27" },
-          { kind: "guard", title: "No gap after week 69", text: "The “he” of 9:27 is the Messiah of 9:26 — the seventieth week is Christ's, not a future tyrant's.", tag: "Daniel 9:26–27 grammar" },
-          { kind: "scripture", title: "The remainder lands in 1844", text: "2,300 minus 490 leaves 1,810 years. A.D. 34 plus 1,810 lands in autumn 1844, where chapter 8 said the line would end.", tag: "Daniel 9:27 → 8:14" }
-        ],
         content: `
 <nav class="lesson-toc" aria-label="Sheet 9 sections">
   <p class="lesson-toc-kicker">Follow this sitting</p>
@@ -4209,15 +4120,6 @@ Restore City                        Messiah               Christ                
         },
         title: "Michael Stands Up: The Time of Trouble & Bodily Resurrection",
         subtitle: "Michael stands for his people, the time of trouble, and the waking of the dust.",
-        flow: [
-          { kind: "scripture", title: "One vision, three chapters", text: "In Cyrus’s third year, by the Tigris, chapters 10–12 come as one continuous revelation.", tag: "Daniel 10:1 – 12:13" },
-          { kind: "scripture", title: "The man in linen", text: "His body is like beryl and His face like lightning, the same description as the glorified Christ in Revelation 1.", tag: "Daniel 10:5–6 ↔ Revelation 1:13–15" },
-          { kind: "scripture", title: "The war behind the empires", text: "The prince of Persia withstands Gabriel twenty-one days; Michael comes to help.", tag: "Daniel 10:13, 20" },
-          { kind: "scripture", title: "The named march", text: "The march runs through Persia’s kings, Alexander’s break into four, the wars of north and south, and Rome, and the prince of the covenant is cut off.", tag: "Daniel 11:2–22" },
-          { kind: "scripture", title: "The daily removed again", text: "The papal phase takes the tamid and sets up the abomination. It is the attack of chapters 7 and 8 under a new face.", tag: "Daniel 11:31, 36–39" },
-          { kind: "anchor", title: "Michael stands up", text: "“Stand up” is Daniel’s verb for kings assuming power; the great Prince stands for His people. Trouble follows; those written in the book are delivered.", tag: "Daniel 12:1; 11:2–4" },
-          { kind: "scripture", title: "Dust wakes", text: "There is a bodily resurrection with two destinies, confirmed by Jesus in John 5, and Daniel is told to rest and arise.", tag: "Daniel 12:2, 13; John 5:28–29" }
-        ],
         content: `
 <nav class="lesson-toc" aria-label="Sheet 10 sections">
   <p class="lesson-toc-kicker">Follow this sitting</p>

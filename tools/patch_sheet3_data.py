@@ -17,15 +17,6 @@ new_block = f'''      {{
         scripture: "Daniel 3:1-30 &bull; Plain of Dura, c. 594 B.C.",
         title: "The Plain of Dura: Forced Worship, the \\\"But If Not\\\" Faith, and Christ in the Fire",
         subtitle: "Nebuchadnezzar's imperial veto, the Daniel 3 / Revelation 13 blueprint, and the Fourth who walks in the flames.",
-        flow: [
-          {{ kind: "scripture", title: "The imperial veto", text: "All-gold image (60×6) rejects Daniel 2's succession — Babylon declared eternal.", tag: "Daniel 3:1; 2:38" }},
-          {{ kind: "scripture", title: "Bow or burn", text: "Universal decree enforced by furnace; second commandment forbids the bow.", tag: "Daniel 3:4–6; Exod 20:4–5" }},
-          {{ kind: "anchor", title: "Civil duty has a ceiling", text: "Exemplary administrators who render Caesar labor but refuse Caesar worship.", tag: "Dan 2:49; Matt 22:21; Acts 5:29" }},
-          {{ kind: "scripture", title: "Dura → Revelation 13", text: "Decree, image, death penalty, commandment-keepers — type and antitype.", tag: "Daniel 3 ↔ Rev 13:14–17; 14:12" }},
-          {{ kind: "anchor", title: "But if not", text: "God is able to deliver — but if not, we will not bow. Obedience priced before rescue.", tag: "Daniel 3:17–18" }},
-          {{ kind: "scripture", title: "Four men in the fire", text: "The form of the fourth is like the Son of God — ropes burn, bodies unharmed.", tag: "Daniel 3:25, 27" }},
-          {{ kind: "guard", title: "Dura and Calvary", text: "Christ walks beside His servants at Dura; at Calvary He entered the fire alone for our sins.", tag: "Isa 53; 2 Cor 5:21; Rev 20:14" }}
-        ],
         content: `
 {js_content}
         `,

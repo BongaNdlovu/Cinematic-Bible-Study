@@ -17,15 +17,6 @@ new_block = f'''      {{
         scripture: "Daniel 8:1-27 &bull; Susa, c. 551 B.C.",
         title: "The Ram, The Goat, & 2,300 Days: The Cleansing of the Sanctuary",
         subtitle: "Gabriel's named empires, the attack on Christ's continual mediation (tamid), refutation of Antiochus, and the 1844 Day of Atonement in heaven.",
-        flow: [
-          {{ kind: "anchor", title: "The angel names the animals", text: "The two-horned ram is Media and Persia; the rough goat is Grecia — zero room for human guesswork.", tag: "Daniel 8:20–21" }},
-          {{ kind: "scripture", title: "Alexander and the four horns", text: "Alexander dies at 32; four Diadochi realms arise toward the four winds of heaven (Cassander, Lysimachus, Seleucus, Ptolemy).", tag: "Daniel 8:8, 21–22" }},
-          {{ kind: "anchor", title: "Rome in two phases", text: "Grows 'exceedingly great' (yigdal-me'od): pagan Rome horizontally (Egypt, Syria, Judea; crucifies Prince) and papal Rome vertically.", tag: "Daniel 8:9–10; SDABC 4:841" }},
-          {{ kind: "scripture", title: "The attack on the Tamid", text: "The horn removes the tamid — Christ's continual heavenly intercession obscured by a counterfeit earthly priesthood.", tag: "Daniel 8:11–12; Hebrews 7:25" }},
-          {{ kind: "guard", title: "Three tests Antiochus fails", text: "Not 'exceedingly great' (tributary to Rome), not 'time of the end' (8:17, 19), and 3 years cannot span 2,300 prophetic days.", tag: "Daniel 8:9, 14, 17, 19" }},
-          {{ kind: "anchor", title: "Nitsdaq: courtroom vindication", text: "Nitsdaq — justified, vindicated, restored to rightful state: Day of Atonement grammar in the heavenly sanctuary (Leviticus 16; Hebrews 8–9).", tag: "Daniel 8:14; Leviticus 16:30" }},
-          {{ kind: "history", title: "2,300 years land in 1844", text: "From 457 B.C. decree (Artaxerxes I) to October 22, 1844 — Christ enters the Most Holy Place for the pre-advent judgment.", tag: "Daniel 8:14; 9:24–27; Froom Vol. 4" }}
-        ],
         content: `
 {js_content}
         `,

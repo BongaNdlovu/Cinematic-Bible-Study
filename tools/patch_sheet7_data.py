@@ -17,15 +17,6 @@ new_block = f'''      {{
         scripture: "Daniel 7:1-28 &bull; Babylon, c. 553 B.C.",
         title: "The Churning Sea & The Little Horn: The 1,260 Years to Judgment",
         subtitle: "The four predatory beasts, the church-state horn, the 1,260-year supremacy, and the pre-advent heavenly court.",
-        flow: [
-          {{ kind: "scripture", title: "Same chain, predatory symbols", text: "Four beasts rise from the sea: lion (Babylon), bear (Medo-Persia), leopard (Greece), and dreadful beast (Rome).", tag: "Daniel 7:3–7, 17, 23" }},
-          {{ kind: "scripture", title: "Scripture defines its own vocabulary", text: "Waters represent peoples and nations; winds represent war and geopolitical upheaval.", tag: "Revelation 17:15; Jeremiah 49:36–37" }},
-          {{ kind: "anchor", title: "The eleventh little horn", text: "Diverse from the ten, three uprooted, mouth speaking pompous words against the Most High, wearing out the saints, thinking to change times and laws.", tag: "Daniel 7:8, 24–25" }},
-          {{ kind: "history", title: "Three blocking kingdoms uprooted", text: "Heruli (493), Vandals (534), Ostrogoths (538) — the Arian powers that barred a church-state in the west.", tag: "History — dated falls" }},
-          {{ kind: "scripture", title: "The 1,260-year prophetic span", text: "Time + times + half = 3½ years = 42 months = 1,260 prophetic days = 1,260 solar years on the year-day ruler.", tag: "Daniel 7:25; Revelation 12:6, 14; 13:5" }},
-          {{ kind: "history", title: "Historical boundaries: 538 to 1798", text: "A.D. 538 (Belisarius raises Ostrogothic siege; Justinian's decree active) to A.D. 1798 (Berthier captures Pius VI).", tag: "Procopius; Berthier 1798" }},
-          {{ kind: "guard", title: "Pre-advent court before the stone", text: "Thrones placed, books opened, Son of Man brought TO the Ancient of Days — heavenly trial while the horn speaks on earth.", tag: "Daniel 7:9–14, 26–27" }}
-        ],
         content: `
 {js_content}
         `,

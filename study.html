@@ -209,133 +209,6 @@
     }
     body.white-mode .sheet-verify-card { background: #f7f7f7; }
 
-    /* Linear flow map — one colored step for each claim */
-    .sheet-flow {
-      --role-gold: #e4c56a;
-      --role-anchor: #f4e4bc;
-      --role-archive: #9ec4d4;
-      --role-guard: #9dca96;
-      margin: 2.6rem 0 0;
-      padding: 1.35rem 1.25rem 1.2rem;
-      border: 1px solid rgba(197, 155, 39, 0.38);
-      border-radius: 16px;
-      background:
-        radial-gradient(ellipse at 100% 0%, rgba(158, 196, 212, 0.07), transparent 40%),
-        rgba(15, 14, 13, 0.55);
-    }
-    .flow-kicker {
-      font-family: "JetBrains Mono", monospace;
-      font-size: 10px;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: #c9a227;
-      margin: 0 0 0.4rem;
-    }
-    .flow-heading {
-      font-family: Newsreader, Georgia, serif;
-      font-size: 1.3rem;
-      color: inherit;
-      margin: 0 0 0.85rem;
-    }
-    .flow-list {
-      list-style: none;
-      margin: 0.35rem 0 0;
-      padding: 0;
-      display: flex;
-      flex-direction: column;
-      gap: 0.8rem;
-    }
-    .flow-step {
-      --step: var(--role-gold);
-      display: flex;
-      gap: 0.95rem;
-      padding: 0.95rem 1rem 1rem 0.9rem;
-      border: 1px solid color-mix(in srgb, var(--step) 28%, transparent);
-      border-left: 3px solid var(--step);
-      border-radius: 12px;
-      background: rgba(255, 248, 230, 0.03);
-    }
-    .flow-step-scripture { --step: var(--role-gold); }
-    .flow-step-anchor { --step: var(--role-anchor); }
-    .flow-step-history { --step: var(--role-archive); }
-    .flow-step-guard { --step: var(--role-guard); }
-    .flow-marker {
-      flex: none;
-      min-width: 1.5rem;
-      text-align: right;
-      font-family: "JetBrains Mono", monospace;
-      font-size: 0.85rem;
-      font-weight: 700;
-      color: var(--step);
-      padding-top: 0.15rem;
-    }
-    .flow-body {
-      flex: 1;
-      min-width: 0;
-      word-break: break-word;
-      overflow-wrap: break-word;
-    }
-    .flow-head {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: baseline;
-      justify-content: space-between;
-      gap: 0.4rem 1rem;
-    }
-    .flow-title {
-      flex: 1 1 14rem;
-      font-family: Newsreader, Georgia, serif;
-      font-size: 1.16rem;
-      font-weight: 600;
-      line-height: 1.35;
-      color: var(--step);
-    }
-    .flow-ref { white-space: normal; line-height: 1.45; }
-    .flow-kind {
-      display: inline-block;
-      margin-right: 0.35rem;
-      padding: 0.12rem 0.42rem;
-      border: 1px solid currentColor;
-      border-radius: 999px;
-      font-family: "JetBrains Mono", monospace;
-      font-size: 9.5px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-    }
-    .flow-kind-scripture,
-    .flow-kind-anchor,
-    .flow-kind-history,
-    .flow-kind-guard { color: var(--step); }
-    .flow-text {
-      font-size: 0.98rem;
-      line-height: 1.7;
-      margin: 0.55rem 0 0;
-      opacity: 0.94;
-    }
-    .flow-tag {
-      font-family: "JetBrains Mono", monospace;
-      font-size: 10px;
-      letter-spacing: 0.04em;
-      color: #c9a227;
-      opacity: 0.9;
-    }
-    body.paper-mode .flow-kicker,
-    body.white-mode .flow-kicker { color: #8a6414; }
-    body.paper-mode .flow-marker,
-    body.white-mode .flow-marker { color: #8a6414; }
-    body.paper-mode .flow-step-anchor .flow-marker,
-    body.white-mode .flow-step-anchor .flow-marker { color: #3f3421; }
-    body.paper-mode .flow-step-anchor .flow-title,
-    body.white-mode .flow-step-anchor .flow-title { color: #8a6414; }
-    body.paper-mode .flow-kind-anchor,
-    body.white-mode .flow-kind-anchor { color: #3f3421; }
-    body.paper-mode .flow-kind-history,
-    body.white-mode .flow-kind-history { color: #5c6b73; }
-    body.paper-mode .flow-kind-guard,
-    body.white-mode .flow-kind-guard { color: #4d7a44; }
-    body.paper-mode .flow-tag,
-    body.white-mode .flow-tag { color: #8a6414; }
-
     .study-path {
       --role-gold: #e4c56a;
       --role-anchor: #f4e4bc;
@@ -4045,11 +3918,7 @@
     body.paper-mode .sheet-verify-source b,
     body.white-mode .sheet-verify-source b,
     body.paper-mode .sheet-verify-open,
-    body.white-mode .sheet-verify-open,
-    body.paper-mode .flow-kicker,
-    body.white-mode .flow-kicker,
-    body.paper-mode .flow-marker,
-    body.white-mode .flow-marker {
+    body.white-mode .sheet-verify-open {
       color: var(--read-accent);
     }
     body.paper-mode .sheet-verify-open:hover,
@@ -4159,10 +4028,8 @@
     }
 
     /* Role colors stay readable after the shared light-theme text rules. */
-    body.paper-mode .sheet-flow,
     body.paper-mode .sheet-verify,
     body.paper-mode .study-path,
-    body.white-mode .sheet-flow,
     body.white-mode .sheet-verify,
     body.white-mode .study-path,
     body.paper-mode .lesson-connect,
@@ -4175,13 +4042,10 @@
       --role-reader: #6a5088;
     }
     body.paper-mode .study-block,
-    body.white-mode .study-block,
-    body.paper-mode .flow-step,
-    body.white-mode .flow-step {
+    body.white-mode .study-block {
       background: rgba(255, 250, 236, 0.72);
     }
-    body.white-mode .study-block,
-    body.white-mode .flow-step { background: #f7f7f7; }
+    body.white-mode .study-block { background: #f7f7f7; }
     body.paper-mode .study-trace-step,
     body.white-mode .study-trace-step {
       background: rgba(255, 252, 246, 0.9);
@@ -4203,12 +4067,6 @@
     body.white-mode .study-path .study-why { color: #57534e; }
     body.paper-mode .study-block h4,
     body.white-mode .study-block h4,
-    body.paper-mode .flow-step .flow-marker,
-    body.white-mode .flow-step .flow-marker,
-    body.paper-mode .flow-step .flow-title,
-    body.white-mode .flow-step .flow-title,
-    body.paper-mode .flow-step .flow-kind,
-    body.white-mode .flow-step .flow-kind,
     body.paper-mode .sheet-verify-card .sheet-verify-kind,
     body.white-mode .sheet-verify-card .sheet-verify-kind,
     body.paper-mode .sheet-verify-card .sheet-verify-source b,
@@ -4297,12 +4155,6 @@
       background: #f7f7f7;
       box-shadow: 0 8px 20px -14px rgba(0, 0, 0, 0.14);
     }
-    body.paper-mode .sheet-flow,
-    body.white-mode .sheet-flow {
-      background: #fffaf0;
-      color: var(--read-fg);
-    }
-    body.white-mode .sheet-flow { background: #ffffff; }
     body.paper-mode .scripture-meta strong,
     body.white-mode .scripture-meta strong,
     body.paper-mode .sitting-path-kicker,
@@ -4403,8 +4255,6 @@
       }
       #sheet-article,
       #sheet-article *,
-      #sheet-flow,
-      #sheet-flow *,
       #sheet-verify,
       #sheet-verify *,
       #sheet-study-path,
@@ -4428,7 +4278,6 @@
         filter: none !important;
       }
       #sheet-article,
-      #sheet-flow,
       #sheet-verify,
       #sheet-study-path,
       #sheet-christology,
@@ -5636,9 +5485,6 @@
     <article id="sheet-article" class="article-body font-bodySerif text-ink-800 dark:text-paper-200 transition-all duration-150">
       <!-- Injected by JavaScript loadSheet() -->
     </article>
-
-    <!-- Linear flow map of this sitting (one path, first verse to last claim) -->
-    <section id="sheet-flow" class="sheet-flow" hidden></section>
 
     <!-- Connective Lesson Bar (Map and 3D Gallery) -->
     <section id="lesson-connect" class="lesson-connect my-8 text-ink-800 dark:text-paper-200">

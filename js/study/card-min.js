@@ -29,7 +29,6 @@
     ".sheet-verify-card",
     ".study-block",
     ".study-trace-step",
-    ".flow-step",
     ".insight-card",
     ".epoch-facts .fact",
     ".context-plate",
@@ -42,7 +41,6 @@
   var HEAD_SELECTOR = [
     "h1", "h2", "h3", "h4", "h5", "b", "strong",
     "[class*='kicker']",
-    ".flow-title",
     ".study-do",
     ".load-bearing-ref",
     ".sheet-verify-kind",

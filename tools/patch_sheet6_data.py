@@ -17,15 +17,6 @@ new_block = f'''      {{
         scripture: "Daniel 6:1-28 &bull; Babylon, c. 538 B.C.",
         title: "The Pit of Hunger: The Law of the Medes and Persians, The Open Window, and the Resurrection of Christ",
         subtitle: "The irrevocable imperial statute, blameless integrity under audit, prayer facing Jerusalem, and the sealed pit as a type of the risen Christ.",
-        flow: [
-          {{ kind: "history", title: "Transition from gold to silver", text: "Babylon falls; Darius the Mede establishes 120 satrapies under 3 presidents, with Daniel chief.", tag: "Daniel 5:31; 6:1–3" }},
-          {{ kind: "history", title: "The unalterable statute", text: "Medo-Persian constitutional code: royal decrees cannot be repealed (Esther 8:8; Diodorus XVII.30).", tag: "Daniel 6:8, 12, 15" }},
-          {{ kind: "scripture", title: "The forensic audit", text: "Satraps find zero error or fault — the only charge possible concerns the law of his God.", tag: "Daniel 6:4–5" }},
-          {{ kind: "anchor", title: "The window stays open", text: "Daniel prays toward Jerusalem three times daily as he did aforetime; civil duty yields to the First Commandment.", tag: "Daniel 6:10; Acts 5:29" }},
-          {{ kind: "scripture", title: "The sealed pit of hunger", text: "Cast into the den of lions; stone sealed with royal signet; king fasts through the night.", tag: "Daniel 6:16–18" }},
-          {{ kind: "scripture", title: "Dawn inquiry and deliverance", text: "God sent his angel and shut the lions' mouths; Darius decrees worship of the living God.", tag: "Daniel 6:20–27" }},
-          {{ kind: "guard", title: "The pit and the empty tomb", text: "Daniel sealed in the pit foreshadows Christ sealed in the tomb, rising at dawn over the roaring lion.", tag: "Matt 27:62–66; 1 Pet 5:8" }}
-        ],
         content: `
 {js_content}
         `,

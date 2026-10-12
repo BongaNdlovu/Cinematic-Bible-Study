@@ -17,15 +17,6 @@ new_block = f'''      {{
         scripture: "Daniel 9:1-27 &bull; Babylon, 538 B.C.",
         title: "The 70 Weeks (Chathak) & The Cross: The Mathematical Anchor of 1844",
         subtitle: "How the crucifixion of Christ in A.D. 31 establishes the start date for the 2,300-day prophecy.",
-        flow: [
-          {{ kind: "scripture", title: "Gabriel returns to explain", text: "“Consider the vision” — the unexplained 2,300 of chapter 8 that made Daniel faint.", tag: "Daniel 9:21–23; 8:27" }},
-          {{ kind: "anchor", title: "Chathak: severed from the line", text: "Chathak — a hapax: seventy weeks are severed from the longer 2,300-day line, so both share one starting point.", tag: "Daniel 9:24" }},
-          {{ kind: "scripture", title: "Four decrees, one 'restore'", text: "Only Artaxerxes’ seventh-year decree (457 B.C., Ezra 7) restores magistrates and judges — the civil “restore” of 9:25.", tag: "Ezra 7:11–26" }},
-          {{ kind: "scripture", title: "The walk to Messiah in A.D. 27", text: "457 B.C. + 483 years (no year zero) = autumn A.D. 27 — baptism and anointing: “The time is fulfilled.”", tag: "Daniel 9:25; Luke 3:1, 21–23; Mark 1:15" }},
-          {{ kind: "anchor", title: "The cross in the midst (A.D. 31)", text: "Messiah cut off “but not for himself,” spring A.D. 31; the veil tears from top to bottom (Matthew 27:51).", tag: "Daniel 9:26–27" }},
-          {{ kind: "guard", title: "No gap after week 69", text: "The “he” of 9:27 is the Messiah of 9:26 — the seventieth week is Christ's, not a future tyrant's.", tag: "Daniel 9:26–27 grammar" }},
-          {{ kind: "scripture", title: "The remainder lands in 1844", text: "2,300 − 490 = 1,810 years; A.D. 34 + 1,810 = autumn 1844 — the line ends where chapter 8 said it would.", tag: "Daniel 9:27 → 8:14" }}
-        ],
         content: `
 {js_content}
         `,

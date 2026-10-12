@@ -17,15 +17,6 @@ new_block = f'''      {{
         scripture: "Daniel 2:1-49 &bull; Babylon, 603 B.C.",
         title: "The Metallic Colossus: The Historicist Blueprint of History and the Sovereign Triumph of Christ",
         subtitle: "From the impasse of human wisdom to the stone that fills the earth — God's unbroken chain of empires and Christ's everlasting kingdom.",
-        flow: [
-          {{ kind: "scripture", title: "Human wisdom bankrupt", text: "Magicians confess impotence; Daniel prays — there is a God in heaven that revealeth secrets.", tag: "Daniel 2:10–11, 28" }},
-          {{ kind: "anchor", title: "The master-framework", text: "Gold → silver → bronze → iron → iron/clay feet → Stone. One contiguous chain.", tag: "Daniel 2:31–35" }},
-          {{ kind: "scripture", title: "Thou art this head of gold", text: "Babylon fixed and non-repeatable; each metal follows after thee.", tag: "Daniel 2:38–40" }},
-          {{ kind: "history", title: "Metallurgic gradient", text: "Value declines head to feet; crushing force increases — Rome harder than Babylon.", tag: "Daniel 2:39–40" }},
-          {{ kind: "scripture", title: "They shall not cleave", text: "Iron + clay = civil power fused with religious claims; every European unity attempt fractures.", tag: "Daniel 2:41–43" }},
-          {{ kind: "anchor", title: "Stone strikes the feet", text: "Cut without hands in the days of these kings — supernatural, not evolutionary.", tag: "Daniel 2:34–35, 44" }},
-          {{ kind: "guard", title: "You live in the toenails", text: "Historicism places you before the Stone, not waiting for a fifth metal or a restarted head of gold.", tag: "Daniel 2:43–44" }}
-        ],
         content: `
 {js_content}
         `,
