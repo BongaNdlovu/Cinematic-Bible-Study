@@ -720,15 +720,21 @@
       text-transform: uppercase;
       color: var(--chain-gold);
     }
-    /* Card copy arrives a beat after the card does, so the slide and the words
-       read as one movement rather than as a jump cut. */
-    @keyframes story-copy-rise {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: none; }
+    /* Neighbour cards recede, the active card comes forward. A transition runs
+       in both directions, so leaving a card fades out as the next one fades in.
+       A one-shot animation only played on the way in, and it started from
+       invisible, which left a blank card in the middle of the handoff. */
+    .story-card .story-content > * {
+      opacity: 0.72;
+      transform: translateY(6px);
+      transition:
+        opacity 0.85s cubic-bezier(0.4, 0, 0.2, 1),
+        transform 0.85s cubic-bezier(0.22, 0.61, 0.24, 1);
     }
     .story-card.is-active .story-content > * {
-      animation: story-copy-rise 0.85s cubic-bezier(0.22, 0.61, 0.24, 1) both;
-      animation-delay: calc(0.12s + var(--copy-i, 0) * 0.07s);
+      opacity: 1;
+      transform: none;
+      transition-delay: calc(0.05s + var(--copy-i, 0) * 0.045s);
     }
     .story-content > :nth-child(1) { --copy-i: 0; }
     .story-content > :nth-child(2) { --copy-i: 1; }
@@ -1019,9 +1025,15 @@
       from { opacity: 0; transform: translateY(9px); }
       to { opacity: 1; transform: none; }
     }
-    .story-read-panel.is-shifting > * {
+    .story-read-panel.is-shifting > :not(.story-read-nav):not(.story-read-progress):not(.story-read-hint) {
       animation: read-block-in 0.8s cubic-bezier(0.22, 0.61, 0.24, 1) both;
       animation-delay: calc(var(--read-i, 0) * 0.06s);
+    }
+    /* Held at rest for the frame the copy is swapped, so the new words fade up
+       once instead of appearing, vanishing, and fading in again. */
+    .story-read-panel.is-preparing > :not(.story-read-nav):not(.story-read-progress):not(.story-read-hint) {
+      opacity: 0;
+      animation: none;
     }
     .story-read-panel > :nth-child(1) { --read-i: 0; }
     .story-read-panel > :nth-child(2) { --read-i: 1; }
@@ -1185,10 +1197,11 @@
     @media (prefers-reduced-motion: reduce) {
       .story-card { transition: opacity 0.3s ease; }
       .story-card::after { transition: none; }
-      .story-card.is-active .story-content > * { animation: none; }
+      .story-card .story-content > * { transition: none; transform: none; opacity: 1; }
       .story-read { transition: none; }
       .story-read-panel { transition: none; opacity: 1; transform: none; }
       .story-read-panel.is-shifting > * { animation: none; }
+      .story-read-panel.is-preparing > * { opacity: 1; }
       /* Artwork still changes, it just does not drift or zoom. */
       .story-read-photo { transition: opacity 0.3s ease; transform: none; }
       .story-read-photo.is-current { transform: none; }

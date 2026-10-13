@@ -2607,7 +2607,8 @@
       let returnFocus = null;
       let closeTimer = 0;
       let openFrame = 0;
-      let shiftTimer = 0;
+      let shiftFrame = 0;
+      let retireTimer = 0;
       // Artwork layers are reused round-robin; `photoZ` keeps the newest one on
       // top so an older fade can finish underneath it without a source swap.
       let photoCursor = 0;
@@ -2643,67 +2644,118 @@
         next.disabled = current === cards.length - 1;
         live.textContent = 'Movement ' + (current + 1) + ' of ' + cards.length + ' \u00b7 ' + titleOf(current);
       };
-      // The artwork is the subject of a movement, so a step change is a fade of
-      // one layer over the last rather than a background swap. `prime` places
-      // the first layer without animating, for the moment the reader opens.
+      // The artwork is the subject of a movement, so a step change fades the
+      // next picture up over the one still on screen. `prime` places the first
+      // layer without animating, for the moment the reader opens.
       //
-      // Two rules keep the frame from going dark:
-      //   * the outgoing layer keeps `is-current` until the incoming one has
-      //     actually decoded, so a slow image never leaves a hole;
-      //   * every request carries a token, and a handler whose token is stale
-      //     does nothing — otherwise a slow first request resolves after a
-      //     later one and fades the wrong movement's artwork in on top.
+      // The outgoing layer keeps `is-current` until the incoming fade has
+      // finished. Dropping it in the same turn as the new layer arrives makes
+      // both pictures half-transparent at once, and the ground shows through.
+      // A token throws away a load that resolves after the reader has moved on.
       let photoSeq = 0;
       const refreshHasPhoto = () => {
         const any = readPhotos.some((layer) => !!layer.getAttribute('src'));
         reader.classList.toggle('has-photo', any);
       };
+      const retireOthers = (keep, token) => {
+        if (token !== photoSeq) return;
+        readPhotos.forEach((other) => { if (other !== keep) other.classList.remove('is-current'); });
+      };
       const setPhoto = (src, prime) => {
         if (!readPhotos.length) return;
+        window.clearTimeout(retireTimer);
+        retireTimer = 0;
         if (!src) {
-          readPhotos.forEach((layer) => { layer.classList.remove('is-current'); layer.removeAttribute('src'); });
+          photoSeq += 1;
+          readPhotos.forEach((layer) => {
+            layer.classList.remove('is-current');
+            layer.removeAttribute('src');
+            layer.style.transition = '';
+          });
           readBg.style.backgroundImage = '';
           refreshHasPhoto();
           return;
         }
-        const layer = readPhotos[photoCursor % readPhotos.length];
-        photoCursor += 1;
-        photoZ += 1;
         photoSeq += 1;
         const token = photoSeq;
+        photoZ += 1;
+        let layer = readPhotos[photoCursor % readPhotos.length];
+        photoCursor += 1;
+        // Reusing the picture that is on screen would fade that picture out
+        // before the next one has anything to cover it.
+        if (layer.classList.contains('is-current')) {
+          const idle = readPhotos.find((item) => !item.classList.contains('is-current'));
+          if (idle) layer = idle;
+        }
         layer.style.setProperty('--photo-z', String(photoZ));
-        if (!prime) layer.style.transition = 'none';
-        layer.setAttribute('src', src);
-        refreshHasPhoto();
+        if (!layer.classList.contains('is-current')) {
+          layer.style.transition = 'none';
+          layer.classList.remove('is-current');
+        }
+        let armed = false;
         const reveal = () => {
+          if (armed) return;
+          armed = true;
           if (token !== photoSeq) {
-            // A newer movement took over while this image was in flight.
             layer.style.transition = '';
             refreshHasPhoto();
             return;
           }
-          if (!prime) layer.style.transition = '';
-          layer.classList.add('is-current');
-          readPhotos.forEach((other) => { if (other !== layer) other.classList.remove('is-current'); });
           readBg.style.backgroundImage = 'url("' + src + '")';
           refreshHasPhoto();
-        };
-        if (layer.complete) {
-          // Force the new source to lay out at zero opacity before the fade
-          // runs, so the browser animates the layer instead of a decode.
-          if (prime) reveal();
-          else { void layer.offsetWidth; reveal(); }
-        } else {
-          layer.addEventListener('load', reveal, { once: true });
-          // A movement whose artwork will not decode still has to show its copy,
-          // so the dark ground stays rather than an empty overlay.
-          layer.addEventListener('error', () => {
-            if (token !== photoSeq) return;
-            layer.removeAttribute('src');
+          if (prime) {
+            layer.style.transition = 'none';
+            layer.classList.add('is-current');
+            void layer.offsetWidth;
             layer.style.transition = '';
-            readBg.style.backgroundImage = '';
-            refreshHasPhoto();
-          }, { once: true });
+            retireOthers(layer, token);
+            return;
+          }
+          // Opacity has to be committed at 0 on one frame and raised on a
+          // later one. Clearing the inline transition and adding `is-current`
+          // in the same turn lets the browser skip the fade and cut.
+          layer.style.transition = 'none';
+          layer.classList.remove('is-current');
+          void layer.offsetWidth;
+          window.requestAnimationFrame(() => {
+            if (token !== photoSeq) return;
+            layer.style.transition = '';
+            window.requestAnimationFrame(() => {
+              if (token !== photoSeq) return;
+              layer.classList.add('is-current');
+              const done = (event) => {
+                if (event.target !== layer || event.propertyName !== 'opacity') return;
+                if (token !== photoSeq) return;
+                layer.removeEventListener('transitionend', done);
+                window.clearTimeout(retireTimer);
+                retireTimer = 0;
+                retireOthers(layer, token);
+              };
+              layer.addEventListener('transitionend', done);
+              retireTimer = window.setTimeout(() => {
+                layer.removeEventListener('transitionend', done);
+                retireOthers(layer, token);
+              }, 1400);
+            });
+          });
+        };
+        layer.addEventListener('error', () => {
+          if (token !== photoSeq) return;
+          armed = true;
+          layer.removeAttribute('src');
+          layer.style.transition = '';
+          layer.classList.remove('is-current');
+          refreshHasPhoto();
+        }, { once: true });
+        layer.setAttribute('src', src);
+        refreshHasPhoto();
+        if (layer.complete && layer.naturalWidth) reveal();
+        else {
+          layer.addEventListener('load', reveal, { once: true });
+          // A cached frame can report complete before its pixels are ready, and
+          // a slow one only becomes ready on load. Either path may arm the fade;
+          // the second call is ignored.
+          if (typeof layer.decode === 'function') layer.decode().then(reveal).catch(() => {});
         }
       };
 
@@ -2727,9 +2779,18 @@
 
       const shiftPanel = () => {
         if (!readPanel) return;
+        window.cancelAnimationFrame(shiftFrame);
+        // Hide the new copy before paint, then fade it in on the next frame.
+        // Waiting and re-adding the animation later shows the words, blanks
+        // them, and only then fades them in.
         readPanel.classList.remove('is-shifting');
-        window.clearTimeout(shiftTimer);
-        shiftTimer = window.setTimeout(() => readPanel.classList.add('is-shifting'), 460);
+        readPanel.classList.add('is-preparing');
+        shiftFrame = window.requestAnimationFrame(() => {
+          shiftFrame = 0;
+          if (reader.hidden) return;
+          readPanel.classList.remove('is-preparing');
+          readPanel.classList.add('is-shifting');
+        });
       };
 
       const fillRead = () => {
@@ -2794,9 +2855,10 @@
         go(current + (event.key === 'ArrowRight' ? 1 : -1), true);
       }
       const clearShiftTimer = () => {
-        window.clearTimeout(shiftTimer);
-        shiftTimer = 0;
-        readPanel.classList.remove('is-shifting');
+        window.cancelAnimationFrame(shiftFrame);
+        shiftFrame = 0;
+        if (!readPanel) return;
+        readPanel.classList.remove('is-shifting', 'is-preparing');
       };
       const closeRead = () => {
         if (reader.hidden) return;
@@ -2804,6 +2866,11 @@
         window.cancelAnimationFrame(openFrame);
         document.removeEventListener('keydown', onDocumentKey, true);
         reader.classList.remove('is-open');
+        // A fade still in flight must not finish onto a reader that is closing,
+        // or onto the next one the visitor opens.
+        photoSeq += 1;
+        window.clearTimeout(retireTimer);
+        retireTimer = 0;
         // Stop the panel's entry animation from being re-armed on the way out.
         clearShiftTimer();
         // The overlay is faded, not cut: hide it once the fade has run. A timer
@@ -2876,8 +2943,10 @@
       reader.disarmStoryReader = () => {
         document.removeEventListener('keydown', onDocumentKey, true);
         window.clearTimeout(closeTimer);
-        window.clearTimeout(shiftTimer);
+        window.clearTimeout(retireTimer);
+        window.cancelAnimationFrame(shiftFrame);
         window.cancelAnimationFrame(openFrame);
+        if (readPanel) readPanel.classList.remove('is-shifting', 'is-preparing');
         if (stage.isConnected) stage.appendChild(reader);
       };
       cards.forEach((card, index) => card.addEventListener('click', (event) => {
