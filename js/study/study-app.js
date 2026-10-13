@@ -2476,7 +2476,274 @@
       replay.addEventListener('click', () => { setOpen(true); started = true; play(); });
     }
 
+    function storySrc(step) {
+      const src = String(step && step.image || '');
+      return /^assets\/study\/diagrams\/[a-z0-9-]+\.jpg$/.test(src) ? src : '';
+    }
+
+    function bodyStory(spec, steps, canResolve, start) {
+      const n = steps.length;
+      const cards = steps.map((step, i) => {
+        const src = storySrc(step);
+        const photo = src
+          ? '<img class="story-photo" src="' + escapeStudy(src) + '" alt="' + escapeStudy(step.alt || '') + '">' +
+            '<div class="story-wash" aria-hidden="true"></div>'
+          : '';
+        const medal = (!src && step.centre)
+          ? '<div class="story-medal" aria-hidden="true"><svg viewBox="0 0 140 140" fill="none" stroke="currentColor"><circle cx="70" cy="70" r="58" stroke-width="1.2"/><path d="M70 36V106M51 58H89" stroke-width="3.5" stroke-linecap="round"/></svg></div>'
+          : '';
+        const num = String(i + 1).padStart(2, '0') + ' / ' + String(n).padStart(2, '0');
+        const d = i - start;
+        return '<article class="story-card' + (i === start ? ' is-active' : '') + '" data-index="' + i + '" style="--d:' + d + ';--distance:' + Math.abs(d) + '">' +
+          photo +
+          '<div class="story-topline"><span class="story-index">' + num + '</span></div>' +
+          '<div class="story-content">' +
+            medal +
+            (step.role ? '<p class="story-kicker">' + escapeStudy(step.role) + '</p>' : '') +
+            (step.title ? '<h4 class="story-title">' + escapeStudy(step.title) + '</h4>' : '') +
+            diagramCite(step.cite, canResolve) +
+            (step.text ? '<p class="story-text">' + escapeStudy(step.text) + '</p>' : '') +
+          '</div>' +
+        '</article>';
+      }).join('');
+      const track = steps.map((step, i) => {
+        const label = String(step.role || step.title || ('Step ' + (i + 1)));
+        return '<button class="story-step' + (i === start ? ' is-active' : '') + '" type="button" data-index="' + i + '" aria-label="' + escapeStudy(label) + '">' +
+          '<span class="story-step-dot" aria-hidden="true"></span>' +
+          '<span class="story-step-label">' + escapeStudy(label) + '</span>' +
+        '</button>';
+      }).join('<span class="story-connector" aria-hidden="true"></span>');
+      const openTitle = String((steps[start] && steps[start].title) || '');
+      return '<div class="story-stage" data-start="' + start + '">' +
+        '<div class="story-viewport" tabindex="0" role="region" aria-roledescription="carousel" aria-label="' + escapeStudy(spec.title || 'Diagram') + '">' +
+          cards +
+        '</div>' +
+        '<div class="story-controls">' +
+          '<button class="story-nav" type="button" data-story-prev aria-label="Previous story movement">' +
+            '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M10 3 5 8l5 5"/></svg>' +
+          '</button>' +
+          '<div class="story-track">' + track + '</div>' +
+          '<button class="story-nav" type="button" data-story-next aria-label="Next story movement">' +
+            '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m6 3 5 5-5 5"/></svg>' +
+          '</button>' +
+        '</div>' +
+        '<div class="story-utility">' +
+          '<p class="story-live" aria-live="polite">Movement ' + (start + 1) + ' of ' + n + (openTitle ? ' \u00b7 ' + escapeStudy(openTitle) : '') + '</p>' +
+          '<div class="story-actions">' +
+            '<button class="story-play" type="button" aria-pressed="false">' +
+              '<svg viewBox="0 0 16 16" aria-hidden="true"><path class="story-icon-play" d="M4 2.5 13 8l-9 5.5z"/><path class="story-icon-pause" d="M3 2h3.2v12H3zM9.8 2H13v12H9.8z"/></svg>' +
+              '<span class="story-play-label">Play the story</span>' +
+            '</button>' +
+            '<button class="story-fullscreen" type="button">Full screen</button>' +
+          '</div>' +
+        '</div>' +
+        '<div class="story-read" hidden role="dialog" aria-modal="true" aria-label="' + escapeStudy(spec.title || 'Story') + '">' +
+          '<div class="story-read-bg" aria-hidden="true"></div>' +
+          '<div class="story-read-veil" aria-hidden="true"></div>' +
+          '<button class="story-back" type="button">Back</button>' +
+          '<div class="story-read-panel">' +
+            '<div class="story-read-kicker"></div>' +
+            '<div class="story-read-title"></div>' +
+            '<div class="story-read-rule" aria-hidden="true"></div>' +
+            '<div class="story-read-cite"></div>' +
+            '<div class="story-read-copy"></div>' +
+            '<div class="story-read-note"></div>' +
+            '<div class="story-read-nav">' +
+              '<button type="button" data-read-prev>Previous</button>' +
+              '<p class="story-read-count"></p>' +
+              '<button type="button" data-read-next>Next</button>' +
+            '</div>' +
+          '</div>' +
+        '</div>' +
+      '</div>';
+    }
+
+    function wireStory(figure) {
+      const panel = figure.querySelector('.chain-body');
+      const toggle = figure.querySelector('.chain-toggle');
+      const stage = figure.querySelector('.story-stage');
+      const viewport = figure.querySelector('.story-viewport');
+      const cards = Array.from(figure.querySelectorAll('.story-card'));
+      const steps = Array.from(figure.querySelectorAll('.story-step'));
+      const prev = figure.querySelector('[data-story-prev]');
+      const next = figure.querySelector('[data-story-next]');
+      const play = figure.querySelector('.story-play');
+      const playLabel = figure.querySelector('.story-play-label');
+      const live = figure.querySelector('.story-live');
+      const launch = figure.querySelector('.story-fullscreen');
+      const reader = figure.querySelector('.story-read');
+      const readBg = figure.querySelector('.story-read-bg');
+      const readKicker = figure.querySelector('.story-read-kicker');
+      const readTitle = figure.querySelector('.story-read-title');
+      const readCite = figure.querySelector('.story-read-cite');
+      const readCopy = figure.querySelector('.story-read-copy');
+      const readNote = figure.querySelector('.story-read-note');
+      const readCount = figure.querySelector('.story-read-count');
+      const readPrev = figure.querySelector('[data-read-prev]');
+      const readNext = figure.querySelector('[data-read-next]');
+      const readBack = figure.querySelector('.story-back');
+      if (!panel || !toggle || !stage || !viewport || cards.length < 2 || !prev || !next || !play || !live || !launch || !reader) return;
+
+      let current = Number(stage.getAttribute('data-start')) || 0;
+      if (current < 0 || current >= cards.length) current = 0;
+      let timer = null;
+      let pointerStartX = null;
+      let returnFocus = null;
+
+      const titleOf = (index) => {
+        const card = cards[index];
+        const heading = card && card.querySelector('.story-title');
+        return heading ? heading.textContent : '';
+      };
+      const stopPlayback = () => {
+        if (timer !== null) window.clearInterval(timer);
+        timer = null;
+        play.setAttribute('aria-pressed', 'false');
+        if (playLabel) playLabel.textContent = 'Play the story';
+      };
+      const render = () => {
+        cards.forEach((card, index) => {
+          const distance = Math.abs(index - current);
+          card.style.setProperty('--d', String(index - current));
+          card.style.setProperty('--distance', String(distance));
+          card.classList.toggle('is-active', index === current);
+          card.style.pointerEvents = distance > 1 ? 'none' : 'auto';
+          if (index === current) card.setAttribute('aria-current', 'true');
+          else card.removeAttribute('aria-current');
+        });
+        steps.forEach((step, index) => {
+          step.classList.toggle('is-active', index === current);
+          if (index === current) step.setAttribute('aria-current', 'step');
+          else step.removeAttribute('aria-current');
+        });
+        prev.disabled = current === 0;
+        next.disabled = current === cards.length - 1;
+        live.textContent = 'Movement ' + (current + 1) + ' of ' + cards.length + ' \u00b7 ' + titleOf(current);
+      };
+      const fillRead = () => {
+        const card = cards[current];
+        const kicker = card.querySelector('.story-kicker');
+        const title = card.querySelector('.story-title');
+        const cite = card.querySelector('.chain-cite');
+        const text = card.querySelector('.story-text');
+        const note = figure.querySelector('.chain-note');
+        const img = card.querySelector('.story-photo');
+        readKicker.textContent = kicker ? kicker.textContent : '';
+        readKicker.hidden = !kicker;
+        readTitle.textContent = title ? title.textContent : '';
+        readCopy.textContent = text ? text.textContent : '';
+        readCopy.hidden = !text;
+        readNote.textContent = note ? note.textContent : '';
+        readNote.hidden = !note;
+        readCite.replaceChildren();
+        if (cite) readCite.appendChild(cite.cloneNode(true));
+        if (img && img.getAttribute('src')) {
+          readBg.style.backgroundImage = 'url("' + img.getAttribute('src') + '")';
+          reader.classList.add('has-photo');
+        } else {
+          readBg.style.backgroundImage = '';
+          reader.classList.remove('has-photo');
+        }
+        readCount.textContent = (current + 1) + ' of ' + cards.length;
+        readPrev.disabled = current === 0;
+        readNext.disabled = current === cards.length - 1;
+      };
+      const closeRead = () => {
+        if (reader.hidden) return;
+        reader.hidden = true;
+        document.documentElement.classList.remove('story-read-open');
+        if (stage.isConnected) stage.appendChild(reader);
+        else reader.remove();
+        const backTo = returnFocus;
+        returnFocus = null;
+        if (backTo && typeof backTo.focus === 'function') backTo.focus();
+      };
+      const openRead = () => {
+        stopPlayback();
+        fillRead();
+        returnFocus = document.activeElement;
+        document.body.appendChild(reader);
+        reader.hidden = false;
+        document.documentElement.classList.add('story-read-open');
+        readBack.focus();
+      };
+      const go = (index, manual) => {
+        if (manual) stopPlayback();
+        current = Math.max(0, Math.min(cards.length - 1, index));
+        render();
+        if (!reader.hidden) fillRead();
+      };
+
+      prev.addEventListener('click', () => go(current - 1, true));
+      next.addEventListener('click', () => go(current + 1, true));
+      steps.forEach((step) => step.addEventListener('click', () => go(Number(step.getAttribute('data-index')), true)));
+      cards.forEach((card, index) => card.addEventListener('click', (event) => {
+        if (event.target.closest('.chain-cite')) return;
+        if (index !== current) go(index, true);
+        else openRead();
+      }));
+      launch.addEventListener('click', openRead);
+      readBack.addEventListener('click', closeRead);
+      reader.addEventListener('click', (event) => {
+        if (event.target.closest('.chain-cite')) closeRead();
+      });
+      readPrev.addEventListener('click', () => go(current - 1, true));
+      readNext.addEventListener('click', () => go(current + 1, true));
+      reader.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') { event.preventDefault(); event.stopPropagation(); closeRead(); }
+        if (event.key === 'ArrowRight') { event.preventDefault(); go(current + 1, true); }
+        if (event.key === 'ArrowLeft') { event.preventDefault(); go(current - 1, true); }
+        if (event.key !== 'Tab') return;
+        const focusable = Array.from(reader.querySelectorAll('button')).filter((button) => !button.disabled);
+        if (!focusable.length) return;
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+        else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+      });
+      viewport.addEventListener('keydown', (event) => {
+        if (event.key === 'ArrowRight') { event.preventDefault(); go(current + 1, true); }
+        if (event.key === 'ArrowLeft') { event.preventDefault(); go(current - 1, true); }
+      });
+      viewport.addEventListener('pointerdown', (event) => { pointerStartX = event.clientX; });
+      viewport.addEventListener('pointerup', (event) => {
+        if (pointerStartX === null) return;
+        const delta = event.clientX - pointerStartX;
+        pointerStartX = null;
+        if (Math.abs(delta) > 45) go(current + (delta < 0 ? 1 : -1), true);
+      });
+      viewport.addEventListener('pointercancel', () => { pointerStartX = null; });
+      play.addEventListener('click', () => {
+        if (timer !== null) { stopPlayback(); return; }
+        if (current === cards.length - 1) go(0, false);
+        play.setAttribute('aria-pressed', 'true');
+        if (playLabel) playLabel.textContent = 'Pause story';
+        timer = window.setInterval(() => {
+          if (current >= cards.length - 1) { stopPlayback(); return; }
+          go(current + 1, false);
+        }, 2800);
+      });
+      document.addEventListener('visibilitychange', function onHide() {
+        if (!figure.isConnected) { document.removeEventListener('visibilitychange', onHide); return; }
+        if (document.hidden) stopPlayback();
+      });
+
+      const setOpen = (open) => {
+        toggle.setAttribute('aria-expanded', String(open));
+        toggle.setAttribute('aria-label', open ? 'Collapse diagram' : 'Expand diagram');
+        panel.hidden = !open;
+        if (!open) { stopPlayback(); closeRead(); }
+      };
+      toggle.addEventListener('click', () => {
+        const open = toggle.getAttribute('aria-expanded') !== 'false';
+        setOpen(!open);
+      });
+      render();
+    }
+
     function renderSheetDiagrams(data) {
+      document.querySelectorAll('body > .story-read').forEach((node) => node.remove());
+      document.documentElement.classList.remove('story-read-open');
       const sheet = data || {};
       // Sittings mid-migration may still carry the single-diagram field.
       const specs = sheet.diagrams || (sheet.diagram ? { legacy: sheet.diagram } : {});
@@ -2495,12 +2762,19 @@
         const needs = kind === 'table' ? rows : steps;
         if (needs.length < 2) return;
 
+        const isStory = kind === 'chain' || kind === 'steps';
+        let storyStart = 0;
+        if (isStory && kind === 'chain') {
+          const mid = steps.findIndex((step) => step.centre);
+          if (mid >= 0) storyStart = mid;
+        }
+
         let body = '';
-        if (kind === 'comparison') body = bodyComparison(spec, steps, canResolve);
+        if (isStory) body = bodyStory(spec, steps, canResolve, storyStart);
+        else if (kind === 'comparison') body = bodyComparison(spec, steps, canResolve);
         else if (kind === 'table') body = bodyTable(spec, rows);
         else if (kind === 'flow') body = bodyFlow(spec, steps, canResolve);
         else if (kind === 'timeline') body = bodyTimeline(spec, steps, canResolve);
-        else if (kind === 'steps') body = bodyChain(spec, steps, false, canResolve);
         else body = bodyChain(spec, steps, true, canResolve);
 
         // The plain-text artwork stays in the DOM, hidden, so it survives for
@@ -2519,14 +2793,18 @@
           '<div class="chain-body" id="' + id + '-body">' + body + '</div>' +
           (spec.note ? '<p class="chain-note">' + escapeStudy(spec.note) + '</p>' : '');
 
-        const replay = document.createElement('button');
-        replay.type = 'button';
-        replay.className = 'chain-replay';
-        replay.setAttribute('data-chain-replay', '');
-        replay.textContent = 'Replay animation';
-        figure.parentNode.insertBefore(replay, figure.nextSibling);
-
-        wireFigure({ figure: figure, replay: replay });
+        if (isStory) {
+          figure.classList.add('is-story');
+          wireStory(figure);
+        } else {
+          const replay = document.createElement('button');
+          replay.type = 'button';
+          replay.className = 'chain-replay';
+          replay.setAttribute('data-chain-replay', '');
+          replay.textContent = 'Replay animation';
+          figure.parentNode.insertBefore(replay, figure.nextSibling);
+          wireFigure({ figure: figure, replay: replay });
+        }
         if (refs.length) decorateCitations(figure, refs);
       });
     }

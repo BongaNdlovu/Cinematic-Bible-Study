@@ -106,19 +106,25 @@
                 role: "Before the cross",
                 title: "Sovereignty in exile",
                 cite: "Daniel 1:2",
-                text: "The Lord hands over kings and directs history."
+                text: "The Lord hands over kings and directs history.",
+                image: "assets/study/diagrams/exile.jpg",
+                alt: "Original AI-created cinematic scene of a lone figure looking across a cold, mountainous wilderness."
               },
               {
                 centre: true,
                 title: "Messiah cut off for us (Isaiah 53:5-6)",
                 cite: "Daniel 9:26; Isaiah 53:5–8",
-                text: "The chain is not an end in itself. Both ends meet here, at the cross."
+                text: "The chain is not an end in itself. Both ends meet here, at the cross.",
+                image: "assets/study/diagrams/cross.jpg",
+                alt: "Original AI-created cinematic scene of a wooden cross on a rocky hill at golden dawn."
               },
               {
                 role: "After the cross",
                 title: "Consummation in glory",
                 cite: "Daniel 2:35",
                 text: "The supernatural Stone fills the whole earth.",
+                image: "assets/study/diagrams/glory.jpg",
+                alt: "Original AI-created cinematic scene of a radiant sunrise seen from a stone opening, evoking hope and a coming kingdom."
               }
             ],
             note: "The unbroken chain is not a political chart. It exists to exalt Jesus Christ as Lord of history and personal Redeemer."
