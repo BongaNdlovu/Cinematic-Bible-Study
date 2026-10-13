@@ -16,10 +16,10 @@
         ),
         item(
           "scripture",
-          "Jeremiah dates the same shock to Jehoiakim’s fourth year, which he calls Nebuchadnezzar’s first.",
+          "Jeremiah 25:1 dates the word to Jehoiakim's fourth year, which is Nebuchadnezzar's first; Daniel 1:1 dates the siege to Jehoiakim's third year, Nebuchadnezzar's accession year.",
           "Jeremiah 25:1, King James Version",
           "The word that came to Jeremiah concerning all the people of Judah in the fourth year of Jehoiakim the son of Josiah king of Judah, that was the first year of Nebuchadrezzar king of Babylon.",
-          "Judah counts accession differently from Babylon. Jehoiakim’s third year in Daniel 1:1 and his fourth in Jeremiah 25:1 are the same campaign year, 605 B.C. Do not move the book to 586 to ‘fix’ the verse."
+          "Jehoiakim's third year (Daniel 1:1) is Nebuchadnezzar's accession year, 605 B.C.; his fourth year (Jeremiah 25:1) is Nebuchadnezzar's first. The years are consecutive, not the same. Do not move the book to 586 to 'fix' the verse."
         ),
         item(
           "scripture",
@@ -37,7 +37,7 @@
         ),
         item(
           "scripture",
-          "Daniel’s own seventy weeks cannot be 490 ordinary days and still hold a rebuilt city and Messiah.",
+          "Daniel's own seventy weeks cannot be 490 ordinary days and still reach Messiah the Prince (Daniel 9:25).",
           "Daniel 9:24–25, King James Version",
           "Seventy weeks are determined upon thy people and upon thy holy city… Know therefore and understand, that from the going forth of the commandment to restore and to build Jerusalem unto the Messiah the Prince shall be seven weeks, and threescore and two weeks: the street shall be built again, and the wall, even in troublous times.",
           "490 days is less than a year and a half. The book checks the year-day scale on itself before you borrow it for 1,260 or 2,300."
@@ -172,7 +172,7 @@
           "Babylon’s own chronicle records a campaign against Jerusalem. The 597 capture of “the city of Judah” is independent of Daniel.",
           "Babylonian Chronicle BM 21946 (ABC 5), reverse; Grayson, Assyrian and Babylonian Chronicles. British Museum 21946",
           "He encamped against the city of Judah and on the second day of the month Adar he captured the city and seized its king. He appointed a king of his own choice, received its heavy tribute and sent it to Babylon.",
-          "This line is Nebuchadnezzar’s seventh year (597 B.C.), the Jehoiachin deportation of 2 Kings 24. It confirms Babylon took Jerusalem; Daniel 1:1–2 dates the first shock to 605. Do not collapse the two years.",
+          "This line is Nebuchadnezzar’s seventh year (597 B.C.). 2 Kings 24:12 dates Jehoiachin’s deportation to the eighth year, so the chronicle and the verse are not the same count. It confirms Babylon took Jerusalem; Daniel 1:1–2 dates the first shock to 605, the accession year (BRI reckons Babylon from 606). Do not collapse the two years.",
           "https://www.livius.org/sources/content/mesopotamian-chronicles-content/abc-5-jerusalem-chronicle/"
         ),
         item(
@@ -280,7 +280,7 @@
         ),
         item(
           "scripture",
-          "He looks up. Understanding returns. Daniel gives the account's explanation.",
+          "He looks up. Understanding returns. The king tells it in the first person (Daniel 4:34).",
           "Daniel 4:34–35, King James Version",
           "And at the end of the days I Nebuchadnezzar lifted up mine eyes unto heaven, and mine understanding returned unto me, and I blessed the most High… and he doeth according to his will in the army of heaven, and among the inhabitants of the earth: and none can stay his hand, or say unto him, What doest thou?",
           "Daniel 4:34–37 records the king's restored understanding, his praise of the Most High, and his acknowledgment of God's dominion."
@@ -427,7 +427,7 @@
           "The eleventh horn rises among ten, diverse, and uproots three.",
           "Daniel 7:8, 24, King James Version",
           "There came up among them another little horn, before whom there were three of the first horns plucked up by the roots… and he shall be diverse from the first, and he shall subdue three kings.",
-          "The three are the Heruli, Vandals, and Ostrogoths. The last of those blocking powers is driven from Rome in 538. Name them on paper."
+          "The three are the Heruli, the Vandals, and the Ostrogoths. The Heruli fell in 493 and the Vandals in 534. In 538 the Ostrogoths withdrew from Rome. They were not fully defeated until about 553. Name them on paper."
         ),
         item(
           "scripture",
@@ -479,7 +479,7 @@
           "A public-domain encyclopedia dates Belisarius’s year-long hold of Rome and the Goths’ raising of the siege — the 538 of this sitting.",
           "“Belisarius,” The New International Encyclopaedia (1905). Wikisource",
           "On December 10 he entered Rome, and held it for a year against the Goths, until the enemy raised the siege.",
-          "December 536 plus a year lands when the Goths raised the siege in 538. Procopius, History of the Wars, Books V–VI, is the ancient narrative. 538 is when the third blocking horn is gone and Justinian’s earlier recognition of the Roman see can operate. Do not collapse 533 (the letter) into 538 (the uprooting).",
+          "December 536 plus a year lands when the Goths raised the siege in 538. Procopius was Belisarius's secretary. The Ostrogoths retook Rome in the 540s and were not fully defeated until about 553, so 538 is the lifting of the siege, not the end of the third horn. Do not collapse 533 (the letter) into 538 (the lifting of the siege).",
           "https://en.wikisource.org/wiki/The_New_International_Encyclop%C3%A6dia/Belisarius"
         )
       ]
@@ -492,7 +492,7 @@
           "The ram and goat are named in the text. They are not free symbols.",
           "Daniel 8:20–21, King James Version",
           "The ram which thou sawest having two horns are the kings of Media and Persia. And the rough goat is the king of Grecia: and the great horn that is between his eyes is the first king.",
-          "If the angel names Persia and Greece, a reading that spends the whole vision under Antiochus still has to account for “exceedingly great” and “the time of the end” (8:17, 19)."
+          "If the angel names Persia and Greece, a reading that spends the whole vision under Antiochus still has to account for “exceeding great” and “the time of the end” (8:17, 19)."
         ),
         item(
           "scripture",
@@ -556,7 +556,7 @@
           "Gabriel tells Daniel to consider the vision — the unexplained 2,300 — before he cuts the weeks.",
           "Daniel 9:23, King James Version",
           "At the beginning of thy supplications the commandment came forth, and I am come to shew thee; for thou art greatly beloved: therefore understand the matter, and consider the vision.",
-          "The vision still sickening Daniel is 8:27. Seventy weeks are not a new clock from zero."
+          "The unexplained vision is 8:27. He had already risen and gone back to the king's business. Seventy weeks are not a new clock from zero."
         ),
         item(
           "scripture",
@@ -584,7 +584,7 @@
           "Only this decree restores magistrates and judges — the civil “restore” of 9:25.",
           "Ezra 7:25–26, King James Version",
           "And thou, Ezra, after the wisdom of thy God, that is in thine hand, set magistrates and judges, which may judge all the people that are beyond the river… And whosoever will not do the law of thy God, and the law of the king, let judgment be executed speedily upon him.",
-          "Cyrus, Darius, and the earlier Artaxerxes decrees rebuild the house. Ezra 7 rebuilds the civic order. That is why this sitting prefers it to 538, 519, or 444."
+          "Cyrus and Darius dealt with the temple. Ezra 7 is the city decree, not an earlier Artaxerxes house decree. That is why this sitting prefers it to 538, 520, or 444."
         ),
         item(
           "scripture",
@@ -670,7 +670,7 @@
         ),
         item(
           "scripture",
-          "The book’s last sentence is a personal rest and a rising, not a twelfth empire.",
+          "The book’s last sentence is a personal rest and a lot, not a rising and not a twelfth empire. The rising is Daniel 12:2.",
           "Daniel 12:13, King James Version",
           "But go thou thy way till the end be: for thou shalt rest, and stand in thy lot at the end of the days.",
           "Quote 12:13. The metals, beasts, horns, and numbers walk toward this promise."

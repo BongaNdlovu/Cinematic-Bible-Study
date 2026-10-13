@@ -267,10 +267,10 @@
           "ostrogoths-out",
           "event",
           "A.D. 538",
-          "The third horn uprooted",
+          "The siege of Rome lifted",
           "Daniel 7:8, 24–25",
           "assets/maps/stops/ostrogoths.jpg",
-          "Western Rome has already fractured into ten. Three Arian horns that blocked a church-state settlement in Italy are uprooted: Heruli (493), Vandals (534), and Ostrogoths driven from Rome in 538. Justinian’s decree granting the Roman see supremacy can now take effect.\n\nThe little horn is diverse from the ten (7:24): not another ethnic kingdom but a religious-political power with eyes like a man and a mouth speaking great things. It wears out the saints and intends to change times and laws. A time, times, and dividing of time — 1,260 prophetic days, 1,260 years — begins here.\n\nThis is the historicist identification the Reformers held. The horn rises among Rome’s fragments, not in Antiochus’s century and not as a single future individual detached from that history."
+          "Western Rome has already fractured into ten. The Heruli fell in 493 and the Vandals in 534. In 538 the Ostrogoths withdrew from Rome when Belisarius lifted the siege. They retook the city in the 540s and were not fully defeated until about 553. That lifting is not the uprooting. Justinian’s decree granting the Roman see supremacy can take effect on this chart from 538.\n\nThe little horn is diverse from the ten (7:24): not another ethnic kingdom but a religious-political power with eyes like a man and a mouth speaking great things. It wears out the saints and intends to change times and laws. A time, times, and dividing of time — 1,260 prophetic days, 1,260 years — begins here.\n\nThis is the historicist identification the Reformers held. The horn rises among Rome’s fragments, not in Antiochus’s century and not as a single future individual detached from that history."
         ),
         node(
           "berthier",
@@ -279,7 +279,7 @@
           "The deadly wound",
           "Daniel 7:25–26; 12:4; Revelation 13:3",
           "assets/study/epochs/deadly-wound.jpg",
-          "General Berthier enters Rome and takes Pius VI captive. The measured supremacy that opened in 538 closes. Revelation 13:3 calls this a deadly wound. Daniel 12:4 says the book is sealed till the time of the end — which this date opens.\n\nThe court of 7:9–14 is not the same moment as the stone of chapter 2. Thrones are set, books are opened, and one like a son of man receives the kingdom while the horn is still a historical fact. 7:26–27 then takes the horn’s dominion away. Judgment sits before the stone strikes.\n\nFrom this pin the next sittings can number the sanctuary (8:14) in “the time of the end,” not in 164 B.C."
+          "General Berthier enters Rome and takes Pius VI captive. The measured supremacy that opened in 538 closes. Revelation 13:3 calls this a deadly wound. Daniel 12:4 says the book is sealed till the time of the end — which this date opens.\n\nThe court of 7:9–14 is not the same moment as the stone of chapter 2. The 2020 lesson places that court after the 1,260 years, and Ellen G. White places the coming to the Ancient of Days at the close of the 2,300 days in 1844. Daniel 7:11 still has great words spoken while the court sits. 7:26–27 then takes the horn’s dominion away. Judgment sits before the stone strikes.\n\nFrom this pin the next sittings can number the sanctuary (8:14) in “the time of the end,” not in 164 B.C."
         ),
         node(
           "rome",
@@ -306,7 +306,7 @@
       focusId: "miller-lowhampton",
       title: "Ulai, the tamid, and 2,300 days",
       kicker: "Sheet 8 · Daniel 8",
-      summary: "In Belshazzar’s third year (c. 551 B.C.) Daniel sees the ram and goat at the Ulai. The horn that becomes exceedingly great attacks the continual and the sanctuary. Antiochus is too small and too early; nitsdaq lands in 1844 — a date Americans lived in New England farms, presses, and camp meetings.",
+      summary: "In Belshazzar’s third year (c. 551 B.C.) Daniel sees the ram and goat at the Ulai. The horn that waxes exceeding great attacks the continual and the sanctuary. Antiochus is too small and too early; nitsdaq lands in 1844 — a date Americans lived in New England farms, presses, and camp meetings.",
       nodes: [
         node(
           "ulai-vision",
@@ -315,7 +315,7 @@
           "Ram, goat, and the numbered wait",
           "Daniel 8:2–14, 17–19",
           "assets/maps/stops/susa.jpg",
-          "In the third year of Belshazzar, Daniel is by the Ulai at Susa. A two-horned ram — Medo-Persia named in 8:20 — charges west, north, and south. A goat from the west, not touching the ground, is Greece under Alexander (8:21). The great horn snaps; four appear; from one direction another horn grows exceedingly great toward the south, the east, and the Glorious Land.\n\nThat horn magnifies itself against the Prince of the host, takes away the tamid (the continual), and casts down the place of the sanctuary. In historicist reading this is Rome in two forms: pagan Rome crucifies the Prince and destroys the earthly house in A.D. 70; papal Rome substitutes a human daily for Christ’s heavenly priesthood.\n\nThe question “How long?” receives 2,300 evenings-mornings; then the sanctuary shall be nitsdaq — justified, put right. Gabriel twice says the vision is for the time of the end (8:17, 19)."
+          "In the third year of Belshazzar, Daniel is by the Ulai at Susa. A two-horned ram — Medo-Persia named in 8:20 — charges west, north, and south. A goat from the west, not touching the ground, is Greece under Alexander (8:21). The great horn snaps; four appear; from one direction another horn waxes exceeding great toward the south, the east, and the pleasant land.\n\nThat horn magnifies itself against the Prince of the host, takes away the tamid (the continual), and casts down the place of the sanctuary. In historicist reading this is Rome in two forms: pagan Rome crucifies the Prince and destroys the earthly house in A.D. 70; papal Rome substitutes a human daily for Christ’s heavenly priesthood.\n\nThe question “How long?” receives 2,300 evenings-mornings; then the sanctuary shall be nitsdaq — justified, put right. Gabriel twice says the vision is for the time of the end (8:17, 19)."
         ),
         node(
           "gaugamela",
@@ -324,7 +324,7 @@
           "The ram cannot stand",
           "Daniel 8:5–7, 20–21",
           "assets/study/epochs/chronicle-gaugamela-clean.jpg",
-          "Alexander breaks Darius III on the plain near Arbela. The goat’s speed and the ram’s fall are not decorative. They set the scale of “great” and “very great” against which the next horn must be “exceedingly great.”\n\nA tribute-paying Seleucid who dies in 164 B.C. never reaches that scale, never lasts to the time of the end, and never occupies 2,300 days. Gaugamela is on this sheet so the goat is a real empire on the map, not a cipher for a three-year altar quarrel."
+          "Alexander breaks Darius III on the plain near Arbela. The goat’s speed and the ram’s fall are not decorative. They set the scale of “great” and “very great” against which the next horn must be “exceeding great.”\n\nA tribute-paying Seleucid who dies in 164 B.C. never reaches that scale, never lasts to the time of the end, and never occupies 2,300 days. Gaugamela is on this sheet so the goat is a real empire on the map, not a cipher for a three-year altar quarrel."
         ),
         node(
           "sanctuary-1844",
@@ -338,11 +338,11 @@
         node(
           "jerusalem",
           "city",
-          "The Glorious Land",
+          "The pleasant land",
           "Where the horn’s attack is felt",
           "Daniel 8:9–12; 9:24",
           "assets/maps/stops/jerusalem.jpg",
-          "The horn grows toward the Glorious Land and against the sanctuary and the host. Pagan Rome’s destruction of this city in A.D. 70 is one face of that attack. The deeper claim of the chapter is the heavenly ministry the tamid names.\n\nKeep Zion on the Daniel 8 map so “sanctuary” is not an abstraction. The next sitting will restore and rebuild this city by decree, and will cut Messiah off here in the midst of the week."
+          "The horn grows toward the pleasant land and against the sanctuary and the host. Pagan Rome’s destruction of this city in A.D. 70 is one face of that attack. The deeper claim of the chapter is the heavenly ministry the tamid names.\n\nKeep Zion on the Daniel 8 map so “sanctuary” is not an abstraction. The next sitting will restore and rebuild this city by decree, and will cut Messiah off here in the midst of the week."
         ),
         node(
           "miller-lowhampton",

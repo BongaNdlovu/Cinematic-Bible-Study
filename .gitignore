@@ -55,3 +55,7 @@ tools/audio-read/*.wav
 # audit only; copyrighted material, so not committed. See
 # tools/review/PROPHECY_VERIFICATION.md for what was read.
 _factcheck/
+
+# Final GC sentence-audit working set: generated inventory, agent reports,
+# and the fix inbox. Local review scratch, not part of the course.
+tools/review/final-gc/

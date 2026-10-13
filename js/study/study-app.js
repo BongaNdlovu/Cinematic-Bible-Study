@@ -326,7 +326,7 @@
     ];
 
     const SHEET_INSIGHTS = [
-      { genre: "Prologue — three hermeneutical roads, year-day scale at the cross, Christ as redemptive center.", section: "Daniel 1:2; Numbers 14:34; Ezekiel 4:6; Daniel 2:38–44; Daniel 9:24–27; Luke 24:27.", theme: "Unbroken historicist chain; Messiah cut off; Stone-King; why historicism matters today." },
+      { genre: "Prologue — three of the main hermeneutical roads, idealism left aside; year-day scale tested in Daniel 9; Christ as redemptive center.", section: "Daniel 1:2; Numbers 14:34; Ezekiel 4:6; Daniel 2:38–44; Daniel 9:24–27; Luke 24:27.", theme: "Unbroken historicist chain; Messiah cut off; Stone-King; why historicism matters today." },
       { genre: "Exilic crucible — sovereign judgment, identity under renaming, consecration at the table, Christ as faithful Son.", section: "Daniel 1 — three sieges, Ashpenaz's school, the royal table, 605 B.C.", theme: "Civic cooperation vs. covenant surrender; zeroim and the ten-day test; redemptive typology of Jesus in the wilderness." },
       { genre: "Master-framework vision — historicist chain, metallurgic gradient, divided feet, Stone-King.", section: "Daniel 2 — impasse of human wisdom, four empires, iron and clay, stone without hands.", theme: "Thou art this head of gold; they shall not cleave; Christ pulverizes and fills the earth." },
       { genre: "Imperial veto and furnace crisis — civic duty vs. worship, Dura/Revelation 13 pattern, Christ in the fire.", section: "Daniel 3 — all-gold image, but if not faith, fourth like the Son of God.", theme: "State-enforced worship; non-transactional loyalty; presence in the fire; resurrection hope." },
