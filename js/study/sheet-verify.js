@@ -18,7 +18,7 @@
           "scripture",
           "Jeremiah 25:1 dates the word to Jehoiakim's fourth year, which is Nebuchadnezzar's first; Daniel 1:1 dates the siege to Jehoiakim's third year, Nebuchadnezzar's accession year.",
           "Jeremiah 25:1, King James Version",
-          "The word that came to Jeremiah concerning all the people of Judah in the fourth year of Jehoiakim the son of Josiah king of Judah, that was the first year of Nebuchadrezzar king of Babylon.",
+          "The word that came to Jeremiah concerning all the people of Judah in the fourth year of Jehoiakim the son of Josiah king of Judah, that was the first year of Nebuchadrezzar king of Babylon;",
           "Jehoiakim's third year (Daniel 1:1) is Nebuchadnezzar's accession year, 605 B.C.; his fourth year (Jeremiah 25:1) is Nebuchadnezzar's first. The years are consecutive, not the same. Do not move the book to 586 to 'fix' the verse."
         ),
         item(
@@ -33,7 +33,7 @@
           "A prophetic day may be appointed as a literal year. The scale is stated twice before Daniel uses it.",
           "Numbers 14:34; Ezekiel 4:6, King James Version",
           "After the number of the days in which ye searched the land, even forty days, each day for a year, shall ye bear your iniquities, even forty years. … I have appointed thee each day for a year.",
-          "Read both verses in the Scripture dock. Write day → year in your notes before you touch 70 weeks or 2,300 days. 2 Peter 3:8 is about God’s patience, not this ruler."
+          "Read both verses in the Scripture dock. Write day → year in your notes before you touch 70 weeks or 2,300 days. 2 Peter 3:8 is the thousand-year day and 3:9 is longsuffering. Neither verse is the Numbers 14:34 / Ezekiel 4:6 ruler."
         ),
         item(
           "scripture",
@@ -47,30 +47,30 @@
           "The kingdom is set up in the days of these kings, on the divided feet — not during Babylon, Greece, or Rome at its height.",
           "Daniel 2:44, King James Version",
           "And in the days of these kings shall the God of heaven set up a kingdom, which shall never be destroyed: and the kingdom shall not be left to other people, but it shall break in pieces and consume all these kingdoms, and it shall stand for ever.",
-          "The verse places the Stone’s arrival in the divided era, after the legs, so the prologue’s chain ends at the feet and not at the incarnation. Read it beside 2:34–35: the Stone crushes at the feet and becomes the mountain."
+          "Daniel 2:44 keeps the kingdom in the days of these kings, in the divided era, after the legs, so the prologue’s chain ends at the feet and not at the incarnation. The strike is Daniel 2:34. Daniel 2:45 names the stone again."
         ),
         item(
           "commentary",
-          "Historicist readers treated Daniel as a dated sequence, not a riddle parked in the past or the far future.",
-          "Sir Isaac Newton, Observations upon the Prophecies of Daniel, and the Apocalypse of St. John (London, 1733), Part I, Chapter I",
+          "Historicist readers treated Daniel as a dated sequence.",
+          "Sir Isaac Newton, Observations upon the Prophecies of Daniel, and the Apocalypse of St. John (London), Part I, Chapter I",
           "Amongst the old Prophets, Daniel is most distinct in order of time, and easiest to be understood: and therefore in those things which relate to the last times, he must be made the key to the rest.",
           "Compare Newton’s “order of time” with the three-school table. Only a continuous chain keeps that order. Newton's 1733 reading is a dated witness that the chain was read this way in the eighteenth century.",
           "https://www.gutenberg.org/files/16878/16878-h/16878-h.htm"
         ),
         item(
           "commentary",
-          "The charge that Daniel is a Maccabean forgery is itself dated. Jerome names the critic.",
-          "Jerome, Commentary on Daniel, Prologue (c. A.D. 407). English at tertullian.org",
-          "Porphyry wrote his twelfth book against the prophecy of Daniel, denying that it was composed by the person to whom it is ascribed in its title, but rather by some individual living in Judaea at the time of the Antiochus who was surnamed Epiphanes.",
-          "Porphyry (3rd century) is the pagan ancestor of the ‘it all ended under Antiochus’ reading. Jerome reports the charge in order to answer it. Preterism later reused the park-it-in-the-past move.",
+          "History: The charge that Daniel is a Maccabean forgery is itself dated; Porphyry (3rd century) is the source of the charge (Jerome, Commentary on Daniel, Prologue). History: Jerome names Porphyry as the critic (Jerome, Commentary on Daniel, Prologue).",
+          "Jerome, Commentary on Daniel, Prologue. English at tertullian.org",
+          "Porphyry wrote his twelfth book against the prophecy of Daniel, (A) denying that it was composed by the person to whom it is ascribed in its title, but rather by some individual living in Judaea at the time of the Antiochus who was surnamed Epiphanes.",
+          "Porphyry (3rd century) is the source of the ‘it all ended under Antiochus’ reading. History: Jerome reports the charge in order to answer it (Jerome, Commentary on Daniel, Prologue). Preterism places the events of Daniel in the past.",
           "https://www.tertullian.org/fathers/jerome_daniel_02_text.htm"
         ),
         item(
           "commentary",
           "A second-century Christian already read the four metals as Babylon, Persia, Greece, and Rome — one chain.",
-          "Hippolytus of Rome, Treatise on Christ and Antichrist, §28 (c. A.D. 200). Ante-Nicene Fathers, vol. 5",
-          "The golden head of the image and the lioness denoted the Babylonians; the shoulders and arms of silver, and the bear, represented the Persians and Medes; the belly and thighs of brass, and the leopard, meant the Greeks… the legs of iron, and the beast dreadful and terrible, expressed the Romans, who hold the sovereignty at present.",
-          "Hippolytus witnesses the four-kingdom sequence, Babylon through Rome, in one chain (c. A.D. 200). He also expected a future individual antichrist. Open ANF vol. 5, Treatise on Christ and Antichrist, §28.",
+          "Hippolytus of Rome, Treatise on Christ and Antichrist, §28. Ante-Nicene Fathers, vol. 5",
+          "The golden head of the image and the lioness denoted the Babylonians; the shoulders and arms of silver, and the bear, represented the Persians and Medes; the belly and thighs of brass, and the leopard, meant the Greeks… the legs of iron, and the beast dreadful and terrible, expressed the Romans, who hold the sovereignty at present;",
+          "History: Hippolytus witnesses the four-kingdom sequence, Babylon through Rome, in one chain (Hippolytus, Treatise on Christ and Antichrist 28). History: He also expected a future individual antichrist (Hippolytus, Treatise on Christ and Antichrist 5-6). Open ANF vol. 5, Treatise on Christ and Antichrist, §28.",
           "https://ccel.org/ccel/schaff/anf05.iii.iv.ii.i.html"
         )
       ]
@@ -87,28 +87,28 @@
         ),
         item(
           "scripture",
-          "Isaiah had already said royal sons would stand in Babylon’s palace.",
+          "Isaiah had already said they shall be eunuchs in the palace of the king of Babylon (SDABC, Dan 1:3 note).",
           "Isaiah 39:7, King James Version",
           "And of thy sons that shall issue from thee, which thou shalt beget, shall they take away; and they shall be eunuchs in the palace of the king of Babylon.",
-          "Daniel 1 is not an accident of empire. A century earlier the word already named the court school."
+          "Daniel 1 is not an accident of empire. Isaiah 39:7 names palace service as eunuchs. The court school is Daniel 1:4, the learning and the tongue of the Chaldeans."
         ),
         item(
           "scripture",
           "Daniel refused the king’s meat as defilement, after he had already received a Babylonian name.",
           "Daniel 1:7–8, King James Version",
           "But Daniel purposed in his heart that he would not defile himself with the portion of the king’s meat, nor with the wine which he drank.",
-          "Note that 1:7 (the new name) comes before 1:8 (the refused table). Identity survived the label; the cup was the line."
+          "Note that 1:7 (the new name) comes before 1:8 (the refused table). Identity survived the label; Daniel 1:8 refuses the king's meat and wine."
         ),
         item(
           "scripture",
           "The table-line is the Law’s food line, not a modern diet.",
           "Leviticus 11:7, 44, King James Version",
           "And the swine, though he divide the hoof, and be clovenfooted, yet he cheweth not the cud; he is unclean to you. … For I am the LORD your God: ye shall therefore sanctify yourselves, and ye shall be holy; for I am holy.",
-          "Royal meat had been offered and mixed (traditional reconstruction; Daniel 1 does not state it). Daniel 1:12 asks for pulse. The issue is holiness at a pagan table."
+          "Royal meat had been offered (traditional reconstruction; Daniel 1 does not state it) (ABSG Lesson 2, Tuesday January 7). Daniel 1:12 asks for pulse. One issue was holiness at a pagan table (SDABC, Dan 1:8 note)."
         ),
         item(
           "scripture",
-          "The second commandment forbids both making an image and bowing to it — the later Dura test is already in the Law.",
+          "Thou shalt not make unto thee any graven image. Thou shalt not bow down thyself to them.",
           "Exodus 20:4–5, King James Version",
           "Thou shalt not make unto thee any graven image, or any likeness of any thing… Thou shalt not bow down thyself to them, nor serve them.",
           "Keep this wording. Sheet 3 will ask for a two-second civic bow. The verb here is bow down."
@@ -118,7 +118,7 @@
           "A later, separate capture takes Jehoiachin in Nebuchadnezzar’s eighth year. That is 597, not 605.",
           "2 Kings 24:12, King James Version",
           "And Jehoiachin the king of Judah went out to the king of Babylon, he, and his mother, and his servants, and his princes, and his officers: and the king of Babylon took him in the eighth year of his reign.",
-          "Babylonian Chronicle BM 21946 matches this 597 taking of ‘the city of Judah.’ Daniel 1 is the earlier shock. Do not collapse the two years to ‘solve’ a difficulty."
+          "History: ABC 5 matches this 597 taking of ‘the city of Judah.’ ABC 5 dates the capture to the seventh year against 2 Kings 24:12's eighth (ABC 5 (livius)). Daniel 1 is the earlier shock. Do not collapse the two years to ‘solve’ a difficulty."
         ),
         item(
           "scripture",
@@ -130,7 +130,7 @@
       ]
     },
     {
-      claim: "You can verify the metal chain from Daniel’s own identification, from Babylon’s chronicle, and from readers who named Rome as iron.",
+      claim: "You can verify the metal chain from Daniel’s own identification and from readers who named Rome as iron.",
       items: [
         item(
           "scripture",
@@ -151,44 +151,44 @@
           "The feet are divided. They mingle and do not cleave. That is the last political state of the iron.",
           "Daniel 2:41–43, King James Version",
           "And whereas thou sawest the feet and toes, part of potters’ clay, and part of iron, the kingdom shall be divided… they shall mingle themselves with the seed of men: but they shall not cleave one to another, even as iron is not mixed with clay.",
-          "Charlemagne, Charles V, Napoleon, and later unions already tested the sentence. The sitting does not need a new gold head in your century."
+          "History: Charlemagne and Charles V already tested the sentence. Today the European Union struggles to survive (BRI Mueller, sec. E). The sitting does not need a new gold head in your century."
         ),
         item(
           "scripture",
-          "The stone becomes a mountain that fills the whole earth. It has no capital on the map.",
+          "The stone becomes a mountain that fills the whole earth.",
           "Daniel 2:35, King James Version",
           "Then was the iron, the clay, the brass, the silver, and the gold, broken to pieces together, and became like the chaff of the summer threshingfloors… and the stone that smote the image became a great mountain, and filled the whole earth.",
           "That is why the chronicle lights the borders of the whole map, not a shaded province around Jerusalem."
         ),
         item(
           "scripture",
-          "The stone strikes in the days of the divided kings, not in the days of Babylon alone.",
-          "Daniel 2:44, King James Version",
+          "The stone strikes the feet (Daniel 2:34). The kingdom is set up in the days of these kings (Daniel 2:44), not in the days of Babylon alone.",
+          "Daniel 2:34, 44, King James Version",
           "And in the days of these kings shall the God of heaven set up a kingdom, which shall never be destroyed: and the kingdom shall not be left to other people, but it shall break in pieces and consume all these kingdoms, and it shall stand for ever.",
           "Mark these kings — the iron-and-clay feet. The stone does not repair the statue."
         ),
         item(
           "inscription",
-          "Babylon’s own chronicle records a campaign against Jerusalem. The 597 capture of “the city of Judah” is independent of Daniel.",
-          "Babylonian Chronicle BM 21946 (ABC 5), reverse; Grayson, Assyrian and Babylonian Chronicles. British Museum 21946",
-          "He encamped against the city of Judah and on the second day of the month Adar he captured the city and seized its king. He appointed a king of his own choice, received its heavy tribute and sent it to Babylon.",
+          "History: Babylon’s own chronicle records a campaign against the city of Judah (Livius, ABC 5 (Jerusalem Chronicle)). History: The February/March 597 capture of “the city of Judah” is independent of Daniel (Livius, ABC 5 (Jerusalem Chronicle), note).",
+          "Babylonian Chronicle (ABC 5); Grayson, Assyrian and Babylonian Chronicles",
+          "besieged the city of Judah… he seized the city and captured the king… He appointed there a king of his own choice, received its heavy tribute and sent to Babylon.",
           "This line is Nebuchadnezzar’s seventh year (597 B.C.). 2 Kings 24:12 dates Jehoiachin’s deportation to the eighth year, so the chronicle and the verse are not the same count. It confirms Babylon took Jerusalem; Daniel 1:1–2 dates the first shock to 605, the accession year (BRI reckons Babylon from 606). Do not collapse the two years.",
           "https://www.livius.org/sources/content/mesopotamian-chronicles-content/abc-5-jerusalem-chronicle/"
         ),
         item(
           "commentary",
-          "Before the Reformation, Hippolytus already named the four metals as one sequence ending in Rome.",
+          "History: Hippolytus's reading, not as SDA doctrine: before the Reformation, Hippolytus already named the four metals as one sequence ending in Rome (Hippolytus, Treatise on Christ and Antichrist, sec. 28 (ANF 5)).",
           "Hippolytus of Rome, Treatise on Christ and Antichrist, §28. Ante-Nicene Fathers, vol. 5",
           "The golden head of the image… denoted the Babylonians; the shoulders and arms of silver… the Persians and Medes; the belly and thighs of brass… the Greeks… the legs of iron… the Romans, who hold the sovereignty at present… the stone that smites the earth… was Christ.",
-          "Open ANF vol. 5, Treatise on Christ and Antichrist, §28. A modern teaching that restarts the statue after Rome has to break this old chain as well as Daniel 2:38.",
+          "Open ANF vol. 5, Treatise on Christ and Antichrist, §28. A modern teaching that restarts the statue after Rome has to break this old chain (Hippolytus, Treatise on Christ and Antichrist, sec. 28) as well as Daniel 2:38.",
           "https://ccel.org/ccel/schaff/anf05.iii.iv.ii.i.html"
         ),
         item(
           "commentary",
-          "Newton reads the same image as four historical kingdoms in order of time.",
+          "History: Newton's reading (1733): Newton reads the same image as four historical kingdoms in order of time (Isaac Newton, Observations upon the Prophecies of Daniel (1733), Part I, CHAP. III).",
           "Isaac Newton, Observations upon the Prophecies of Daniel (1733), Part I, Chapter III, “Of the vision of the Image composed of four Metals”",
           "The head of the Image was of gold, and signifies the nations of Babylonia, who reigned first, as Daniel himself interprets. … The legs were of iron, and represent the Romans who reigned next after the Greeks.",
-          "If you dispute Newton’s later comments on the horn, you still have to face his — and Hippolytus’s — identification of the iron. Open Chapter III, not a pulpit summary.",
+          "You still have to face his — and Hippolytus’s — identification of the iron (Isaac Newton, Observations upon the Prophecies of Daniel (1733), Part I, CHAP. III; Hippolytus, Treatise on Christ and Antichrist, sec. 28 (ANF 5)). Open Chapter III, not a pulpit summary.",
           "https://www.gutenberg.org/files/16878/16878-h/16878-h.htm"
         )
       ]
@@ -236,14 +236,14 @@
           "Revelation later writes the same pattern at world scale: worship or death.",
           "Revelation 13:15, King James Version",
           "And he had power to give life unto the image of the beast, that the image of the beast should both speak, and cause that as many as would not worship the image of the beast should be killed.",
-          "Dura is the first sitting of that pattern on this scroll. The later beast does not invent forced worship; it globalizes it."
+          "Daniel 3 is where this book first shows worship under a death statute. The later beast does not invent forced worship; it globalizes it."
         ),
         item(
           "inscription",
-          "Nebuchadnezzar’s own building texts boast of gates meant to stun the world — the pride that later casts an all-gold image.",
+          "Nebuchadnezzar’s own building texts boast of gates — the pride that later casts an all-gold image.",
           "East India House Inscription of Nebuchadnezzar II. British Museum; standard English rendering",
-          "I placed wild bulls and ferocious dragons in the gateways, and thus adorned them with luxurious splendour so that all mankind might gaze on them in wonder.",
-          "The boast is imperial architecture. Daniel 3 answers the same pride with a gold image that denies the later metals of chapter 2. Look up “East India House Inscription Nebuchadnezzar” in any standard corpus (Langdon, or the British Museum collection)."
+          "At their door-jamb(s), I stationed fierce wild bulls of copper and raging mušḫuššu-dragons.",
+          "The boast is imperial architecture. History: “those portals, for the gazings of the multitude of the people, with carven work I caused to be filled.” (Records of the Past, 2nd series, Vol. III, India House Inscription, column VI) Look up “East India House Inscription Nebuchadnezzar” in any standard corpus (Langdon, or the British Museum collection)."
         )
       ]
     },
@@ -255,7 +255,7 @@
           "The chapter exists so the living may know that Heaven assigns thrones.",
           "Daniel 4:17, King James Version",
           "This matter is by the decree of the watchers, and the demand by the word of the holy ones: to the intent that the living may know that the most High ruleth in the kingdom of men, and giveth it to whomsoever he will, and setteth up over it the basest of men.",
-          "This sentence is repeated in 4:25 and 4:32. It is the load-bearing line of the sitting."
+          "The rule clause is repeated in 4:25 and 4:32. “The basest of men” is 4:17 alone. It is the load-bearing line of the sitting."
         ),
         item(
           "scripture",
@@ -273,7 +273,7 @@
         ),
         item(
           "scripture",
-          "The roof boast is the exact claim the dream warned against.",
+          "The palace boast is the claim the dream warned against.",
           "Daniel 4:30, King James Version",
           "The king spake, and said, Is not this great Babylon, that I have built for the house of the kingdom by the might of my power, and for the honour of my majesty?",
           "Mark I have built and my power. The voice from heaven falls while the word is in his mouth (4:31)."
@@ -294,10 +294,11 @@
         ),
         item(
           "inscription",
-          "His own bricks say ‘I’ the way the roof said ‘I have built.’",
-          "Standard stamped brick of Nebuchadnezzar II. British Museum and Babylon; Langdon, Building Inscriptions of the Neo-Babylonian Empire",
+          "His own bricks say ‘I,’ as Daniel 4:30 says ‘I have built.’",
+          "Standard stamped brick of Nebuchadnezzar II, impressed with a purpose made brick stamp. British Museum, brick BM 90124, findspot Babylon",
           "Nebuchadnezzar, king of Babylon, who provides for Esagila and Ezida, the eldest son of Nabopolassar, king of Babylon, am I.",
-          "Walk any museum’s Babylon brick. The first-person stamp is ordinary royal style. Daniel 4 puts that ‘I’ on trial."
+          "Walk any museum’s Babylon brick. History: The first-person stamp is ordinary royal style, Nebuchadnezzar no. 41a bricks (British Museum, brick BM 90124). Daniel 4 puts that ‘I’ on trial.",
+          "https://www.britishmuseum.org/collection/object/W_1825-0503-37"
         )
       ]
     },
@@ -313,14 +314,14 @@
         ),
         item(
           "scripture",
-          "Daniel says Belshazzar knew his grandfather’s story and still lifted himself up.",
+          "Daniel says Belshazzar knew all this, and the verse calls him “his son,” and he still lifted himself up.",
           "Daniel 5:22–23, King James Version",
           "And thou his son, O Belshazzar, hast not humbled thine heart, though thou knewest all this; But hast lifted up thyself against the Lord of heaven… and the God in whose hand thy breath is, and whose are all thy ways, hast thou not glorified.",
           "That is why judgment is instant. The sin is against light already given in chapter 4."
         ),
         item(
           "scripture",
-          "The wall writes a merchant’s audit: numbered, weighed, divided.",
+          "The wall writes an audit: numbered, weighed, divided.",
           "Daniel 5:25–28, King James Version",
           "And this is the writing that was written, MENE, MENE, TEKEL, UPHARSIN. This is the interpretation of the thing: MENE; God hath numbered thy kingdom, and finished it. TEKEL; Thou art weighed in the balances, and art found wanting. PERES; Thy kingdom is divided, and given to the Medes and Persians.",
           "Read 5:30–31 next: that night Belshazzar is slain; Darius the Mede takes the kingdom."
@@ -337,30 +338,30 @@
           "The gates are promised by name.",
           "Isaiah 45:1, King James Version",
           "Thus saith the LORD to his anointed, to Cyrus, whose right hand I have holden, to subdue nations before him; and I will loose the loins of kings, to open before him the two leaved gates; and the gates shall not be shut.",
-          "Keep the gates. The chronicle below says Babylon was entered without battle."
+          "Keep the gates. The chronicle below says: “On the sixteenth day, Ugbaru, governor of Gutium, and the army of Cyrus, without battle they entered Babylon” (Livius, ABC 7, iii.15-16)."
         ),
         item(
           "inscription",
           "The Nabonidus Chronicle says the army entered Babylon without a battle.",
-          "Nabonidus Chronicle (ABC 7), 17th year of Nabonidus. Grayson, Assyrian and Babylonian Chronicles; British Museum 35382",
-          "The 16th day: Ugbaru, governor of Gutium, and the army of Cyrus entered Babylon without battle.",
-          "Opis, earlier in the same chronicle, was not bloodless. The cylinder below is a royal proclamation, not a full war diary. Daniel 5’s feast sits on the night the city is entered.",
+          "Nabonidus Chronicle (ABC 7), The seventeenth year, 539/538 (Livius, ABC 7, iii.5). A.K. Grayson (Livius, ABC 7)",
+          "On the sixteenth day, Ugbaru, governor of Gutium, and the army of Cyrus, without battle they entered Babylon.",
+          "Opis, earlier in the same chronicle, was not bloodless: “He carried off the plunder (and) slaughtered the people” (Livius, ABC 7, iii.14). The cylinder below is a royal proclamation, Cyrus's own presentation, not a full war diary (Livius, Cyrus Cylinder). Daniel 5’s feast sits on the night the city is entered.",
           "https://www.livius.org/sources/content/mesopotamian-chronicles-content/abc-7-nabonidus-chronicle/"
         ),
         item(
           "inscription",
-          "Cyrus’s own cylinder claims the entry and the titles.",
-          "Cyrus Cylinder, lines 17 and 20. British Museum 90920; standard English after Finkel / Pritchard",
-          "Without battle and fighting he let him enter his city Babylon, sparing Babylon any calamity. … I am Cyrus, king of the world, great king, mighty king, king of Babylon.",
-          "Royal propaganda still has to name the fact it boasts of: the city was not stormed. Open the BM object page.",
+          "Cyrus’s own cylinder claims the entry and the titles (Livius, Cyrus Cylinder, lines 17 and 20).",
+          "Cyrus Cylinder, lines 17 and 20 (Livius, Cyrus Cylinder). Mordechai Cogan, The Context of Scripture (Livius, Cyrus Cylinder)",
+          "He made him enter his city Babylon without fighting or battle; he saved Babylon from hardship. … I am Cyrus, king of the world, great king, mighty king, king of Babylon, king of Sumer and Akkad, king of the four quarters.",
+          "Royal propaganda still has to name the fact it boasts of: the city was not stormed (“without fighting or battle”; “saved Babylon from hardship”) (Livius, Cyrus Cylinder, line 17). Open the Livius translation.",
           "https://www.livius.org/sources/content/cyrus-cylinder/cyrus-cylinder-translation/"
         ),
         item(
           "history",
-          "A Greek historian, writing independently of Daniel, records a river stratagem at the taking of Babylon.",
-          "Herodotus, Histories 1.191. George Rawlinson translation (public domain)",
-          "He diverted the river by a canal into the lake… so that the stream sank to such a level that the passage of the channel became practicable. The Persians… entered Babylon.",
-          "Herodotus is not Scripture. He is a second witness that contemporaries told a water-and-gates story of 539. Xenophon, Cyropaedia 7.5, tells a similar night entry. Neither names Belshazzar; the Verse Account of Nabonidus does.",
+          "A Greek historian, writing independently of Daniel, records a river stratagem at the taking of Babylon (Herodotus, Histories 1.191 (Macaulay)).",
+          "Herodotus, Histories 1.191. Macaulay translation (public domain)",
+          "he conducted the river by a channel into the lake… the Persians… entered by the bed of the river Euphrates into Babylon.",
+          "Herodotus is not Scripture. He is a second witness that told a water-and-gates story. Xenophon, Cyropaedia 7.5.15-16, tells a similar night entry: a night festival, then the river-bed used as a highway. Neither names Belshazzar. The Verse Account of Nabonidus entrusts the kingship to the eldest son.",
           "https://www.gutenberg.org/files/2707/2707-h/2707-h.htm"
         )
       ]
@@ -370,8 +371,8 @@
       items: [
         item(
           "scripture",
-          "The satraps cannot find fraud, so they write a law against prayer.",
-          "Daniel 6:4–5, King James Version",
+          "Daniel 6:4–5 is the failed search: the satraps cannot find fraud. The decree against asking a petition of any God or man is Daniel 6:7.",
+          "Daniel 6:4–5, 7, King James Version",
           "The presidents and princes… could find none occasion nor fault; forasmuch as he was faithful… Then said these men, We shall not find any occasion against this Daniel, except we find it against him concerning the law of his God.",
           "The trap is legal, not a charge of bad work. Civic competence is not the issue. Worship is."
         ),
@@ -387,7 +388,7 @@
           "Another Persian book says the same thing about the king’s sealed writing.",
           "Esther 8:8, King James Version",
           "Write ye also for the Jews, as it liketh you, in the king’s name, and seal it with the king’s ring: for the writing which is written in the king’s name, and sealed with the king’s ring, may no man reverse.",
-          "Esther is not Daniel. It is an independent biblical witness that ‘the law of the Medes and Persians’ was proverbially irrevocable. The sitting is not inventing legal folklore."
+          "Esther is not Daniel. It is an independent biblical witness that a writing in the king’s name, sealed with his ring, “may no man reverse.” The sitting is not inventing legal folklore."
         ),
         item(
           "scripture",
@@ -401,7 +402,7 @@
           "Solomon had already told exiles to pray toward the chosen city.",
           "1 Kings 8:48–49, King James Version",
           "And so return unto thee with all their heart, and with all their soul, in the land of their enemies… and pray unto thee toward their land, which thou gavest unto their fathers, the city which thou hast chosen, and the house which I have built for thy name: then hear thou their prayer and their supplication in heaven thy dwelling place, and maintain their cause.",
-          "Daniel 6:10 is obedience to an older dedication prayer, not a sudden piety invented for the lions."
+          "Daniel 6:10, as he did aforetime, is not a sudden piety invented for the lions. 1 Kings 8:48 is the parallel, not Daniel's stated reason."
         ),
         item(
           "scripture",
@@ -452,34 +453,34 @@
         ),
         item(
           "commentary",
-          "The Protestant historicist consensus named the papacy as the Antichrist of the horn texts.",
-          "Martin Luther, Smalcald Articles (1537), Part II, Article IV. Book of Concord / Triglotta English",
-          "This teaching shows forcefully that the Pope is the very Antichrist, who has exalted himself above, and opposed himself against Christ.",
-          "Luther is not a second Bible. He is a dated witness that the Reformers read the horn as a church-state power in Rome, not as Antiochus alone and not as a single future man detached from that history.",
-          "https://bookofconcord.org/smalcald-articles/"
+          "This 1537 article calls the pope the Antichrist from 2 Thessalonians 2:4.",
+          "Martin Luther, Smalcald Articles (1537), Part II, Article IV. Book of Concord (Book of Concord, Smalcald Articles II.IV.10)",
+          "This teaching shows forcefully that the Pope is the very Antichrist, who has exalted himself above, and opposed himself against Christ because he will not permit Christians to be saved without his power",
+          "Luther is not a second Bible. Smalcald Articles II.IV says the pope exalts himself against Christ (2 Thessalonians 2:4).",
+          "https://bookofconcord.org/smalcald-articles/ii/"
         ),
         item(
           "commentary",
-          "Newton names the last horn of the fourth beast as the church of Rome and lists three uprooted powers.",
+          "History: Newton names the last horn of the fourth beast as the Church of Rome. His three are the Exarchate of Ravenna, the kingdom of the Lombards, and the Senate and Dukedom of Rome, not the Heruli, Vandals, and Ostrogoths (Isaac Newton, Observations, Part I, ch. VII).",
           "Isaac Newton, Observations upon the Prophecies of Daniel (1733), Part I, “Of the eleventh horn of Daniel’s fourth Beast”",
           "By its eyes it was a Seer; and by its mouth speaking great things and changing times and laws, it was a Prophet as well as a King. And such a Seer, a Prophet and a King, is the Church of Rome.",
-          "What you can verify is that a dated historicist named a church-state in Rome as the horn.",
-          "https://www.gutenberg.org/files/16878/16878-h/16878-h.htm"
+          "What you can verify is that a dated historicist named a church-state in Rome as the horn. History: his three uprooted powers are Ravenna, the Lombards, and the Roman Senate and Dukedom, not the three tribes named on the scripture card.",
+          "https://www.newtonproject.ox.ac.uk/view/texts/normalized/THEM00201"
         ),
         item(
           "history",
-          "A public-domain Catholic encyclopedia dates the French taking of Rome and of the pope to February 1798.",
+          "A public-domain Catholic encyclopedia dates the French taking of Rome and of the pope to February 1798. The article splits the events: Rome on 10 February, the Republic on 15 February, the pope on the night of 20 February (Michael Ott, Catholic Encyclopedia (1913), Pope Pius VI).",
           "Michael Ott, “Pope Pius VI,” Catholic Encyclopedia (New York, 1913). Wikisource",
           "The French took Rome on 10 Feb., 1798, and proclaimed the Roman Republic on 15 Feb. Because the pope refused to submit, he was forcibly taken from Rome on the night of 20 Feb.",
-          "1,260 years from 538 lands in 1798. Open the 1913 article: Rome taken 10 February, the Republic 15 February, the pope taken 20 February.",
+          "1,260 years from 538 lands in 1798. Open the 1913 article: Rome taken 10 Feb., the Republic 15 Feb., the pope taken on the night of 20 Feb.",
           "https://en.wikisource.org/wiki/Catholic_Encyclopedia_(1913)/Pope_Pius_VI"
         ),
         item(
           "history",
-          "A public-domain encyclopedia dates Belisarius’s year-long hold of Rome and the Goths’ raising of the siege — the 538 of this sitting.",
+          "A public-domain encyclopedia dates a December 10 entry in the 536 campaign and a hold of about a year.",
           "“Belisarius,” The New International Encyclopaedia (1905). Wikisource",
           "On December 10 he entered Rome, and held it for a year against the Goths, until the enemy raised the siege.",
-          "December 536 plus a year lands when the Goths raised the siege in 538. Procopius was Belisarius's secretary. The Ostrogoths retook Rome in the 540s and were not fully defeated until about 553, so 538 is the lifting of the siege, not the end of the third horn. Do not collapse 533 (the letter) into 538 (the lifting of the siege).",
+          "December 10, 536 plus one year is December 537. Do not use this article’s “538” as the raising of the siege. Procopius was Belisarius's secretary. The Ostrogoths retook Rome in the 540s and were not fully defeated until about 553, so the raising of the siege is not the end of the third horn. Do not collapse 533 (the letter) into the raising of the siege.",
           "https://en.wikisource.org/wiki/The_New_International_Encyclop%C3%A6dia/Belisarius"
         )
       ]
@@ -492,14 +493,14 @@
           "The ram and goat are named in the text. They are not free symbols.",
           "Daniel 8:20–21, King James Version",
           "The ram which thou sawest having two horns are the kings of Media and Persia. And the rough goat is the king of Grecia: and the great horn that is between his eyes is the first king.",
-          "If the angel names Persia and Greece, a reading that spends the whole vision under Antiochus still has to account for “exceeding great” and “the time of the end” (8:17, 19)."
+          "If the angel names Persia and Greece, a reading that spends the whole vision under Antiochus still has to account for “exceeding great” (8:9) and “the time of the end” (8:17). Daniel 8:19 names the last end of the indignation and the time appointed."
         ),
         item(
           "scripture",
-          "Gabriel twice aims the vision at the time of the end, not at a second-century cleanup.",
+          "Daniel 8:17 names “the time of the end,” and 8:19 names the last end of the indignation and the appointed end, not a second-century cleanup.",
           "Daniel 8:17, 19, King James Version",
           "Understand, O son of man: for at the time of the end shall be the vision. … Behold, I will make thee know what shall be in the last end of the indignation: for at the time appointed the end shall be.",
-          "A vision sealed for the end cannot be exhausted by 164 B.C. Read both verses before you spend 8:14 under Judas Maccabeus."
+          "A vision shut up for the end cannot be exhausted by 167–164 (Adult Sabbath School Bible Study Guide, 2020 Q1, Lesson 9). Read both verses before you spend 8:14 under Judas Maccabeus."
         ),
         item(
           "scripture",
@@ -510,7 +511,7 @@
         ),
         item(
           "scripture",
-          "Leviticus 16 is the older grammar for a sanctuary put right on the tenth of the seventh month.",
+          "Leviticus 16:29–30 gives the date and the cleansing of the people on the tenth of the seventh month.",
           "Leviticus 16:29–30, King James Version",
           "In the seventh month, on the tenth day of the month, ye shall afflict your souls… For on that day shall the priest make an atonement for you, to cleanse you, that ye may be clean from all your sins before the LORD.",
           "That is why 8:14’s cleansing lands on the Day of Atonement, 22 October 1844 by Karaite reckoning, when Christ entered the Most Holy Place."
@@ -524,27 +525,27 @@
         ),
         item(
           "history",
-          "Josephus records that Alexander was shown Daniel’s book — a Greek destroying Persia.",
-          "Josephus, Antiquities of the Jews 11.8.5. William Whiston translation (public domain)",
-          "And when the Book of Daniel was showed him, wherein Daniel declared that one of the Greeks should destroy the empire of the Persians, he supposed that himself was the person intended.",
-          "This is not a proof that Alexander read 8:21 on a certain morning. It is a first-century Jewish witness that Daniel’s goat-from-the-west was already read as Alexander. Open Whiston 11.8.5.",
+          "Josephus records that Alexander was shown Daniel’s book — a Greek destroying Persia (Josephus, Antiquities (Whiston)).",
+          "Josephus, Antiquities of the Jews [11.337] (Livius, Josephus on Alexander). William Whiston translation (public domain), Gutenberg 2848",
+          "And when the Book of Daniel was showed him wherein Daniel declared that one of the Greeks should destroy the empire of the Persians, he supposed that himself was the person intended.",
+          "This is not a proof that Alexander read 8:21 on a certain morning. Josephus reports a Greek destroying the Persian empire. Open Whiston 11.8.5.",
           "https://www.gutenberg.org/files/2848/2848-h/2848-h.htm"
         ),
         item(
           "history",
-          "The 2,300-year landing was preached as a public American fact. Miller printed the range; he expected the wrong event.",
+          "The 2,300-year landing was preached as a public American fact (William Miller, Apology and Defence (1845)). Miller states the 1818 conclusion. Ellen White ties the 2,300 years to the autumn of 1844. Miller printed the range; he expected Christ's return because they took the earth as the sanctuary (Ellen G. White, The Great Controversy, ch. 23 (GC 409.1)).",
           "William Miller, Wm. Miller’s Apology and Defence (Boston: J. V. Himes, 1845), recounting his 1818 conclusion",
           "I was thus brought, in 1818, at the close of my two years study of the Scriptures, to the solemn conclusion, that in about twenty-five years from that time all the affairs of our present state would be wound up.",
-          "1818 + 25 years is “about 1843,” the range on his 1842 title page, Evidence from Scripture and History of the Second Coming of Christ, About the Year 1843. This sitting keeps his year-day arithmetic and refuses his event (the earth as sanctuary).",
+          "1818 plus about twenty-five years, and 1843–4 (William Miller, Apology and Defence (1845)). This sitting keeps his year-day arithmetic and refuses his event (the earth as sanctuary).",
           "https://archive.org/details/WilliamMillerMr.MillersApologyAndDefence1845"
         ),
         item(
           "history",
-          "Boston made the preaching a press. Exeter named the day from Matthew 25 and Leviticus 16.",
-          "Joshua V. Himes, Signs of the Times (Boston), first number, 20 March 1840; Samuel S. Snow, The True Midnight Cry (22 August 1844); Matthew 25:6, King James Version",
+          "Boston made the preaching a press. Exeter named the tenth day from Matthew 25 and Leviticus 16:29 (Encyclopedia of Seventh-day Adventists, Snow, Samuel Sheffield).",
+          "Joshua V. Himes, Signs of the Times (Boston); Samuel S. Snow, The True Midnight Cry (22 August 1844) (Encyclopedia of Seventh-day Adventists, Snow, Samuel Sheffield); Matthew 25:6, King James Version",
           "And at midnight there was a cry made, Behold, the bridegroom cometh; go ye out to meet him.",
-          "Himes’s first number is dated 20 March 1840 (Signs of the Times, vol. 1, no. 1; ESDA “Advent Herald”; Internet Archive digitization). Snow preached the seventh-month message at Exeter, N.H., in August 1844 (Advent Herald, 21 Aug. 1844; ESDA “Snow, Samuel Sheffield”). True Midnight Cry, 22 Aug. 1844, applied Leviticus 16’s tenth day to 22 October 1844. Contemporary papers record the disappointment. A mistaken event is not a vanished imprint.",
-          "https://archive.org/details/1868_20250419/1840"
+          "Himes’s first number is dated 20 March 1840 (Signs of the Times, vol. 1, no. 1; ESDA “Advent Herald”; Internet Archive digitization). Snow preached the seventh-month message at Exeter, N.H., in August 1844 (The Exeter Camp Meeting, Advent Herald, August 21, 1844; Encyclopedia of Seventh-day Adventists, Snow, Samuel Sheffield). True Midnight Cry, 22 Aug. 1844, names the tenth day of the seventh month in 1844. Ellen G. White, The Great Controversy, ch. 23 (GC 409.1) records the disappointment. A mistaken event is not a vanished imprint.",
+          "https://archive.org/details/SignsOfTheTimesOfTheSecondComingChrist1840V1N1-1296"
         )
       ]
     },
@@ -563,7 +564,7 @@
           "Seventy weeks are determined — cut off — upon Daniel’s people and the holy city.",
           "Daniel 9:24, King James Version",
           "Seventy weeks are determined upon thy people and upon thy holy city, to finish the transgression, and to make an end of sins, and to make reconciliation for iniquity, and to bring in everlasting righteousness, and to seal up the vision and prophecy, and to anoint the most Holy.",
-          "Chathak, determined, is used only here. The sitting reads it as severed from the longer 2,300."
+          "The verb used by Daniel is chathak, and this is its only occurrence in the Hebrew Bible (BRI, The Sanctuary and Its Cleansing). The sitting reads it as severed from the longer 2,300."
         ),
         item(
           "scripture",
@@ -574,10 +575,10 @@
         ),
         item(
           "scripture",
-          "Artaxerxes’ seventh-year decree sends willing Israelites with authority for the house of God.",
+          "Artaxerxes’ seventh-year decree sends willing Israelites.",
           "Ezra 7:7–8, 12–13, King James Version",
           "And there went up some of the children of Israel… in the seventh year of Artaxerxes the king. And he came to Jerusalem in the fifth month, which was in the seventh year of the king. … I make a decree, that all they of the people of Israel… which are minded of their own freewill to go up to Jerusalem, go with thee.",
-          "The year number is in the text. Ptolemy’s Canon (Artaxerxes I after Xerxes, d. 465) fixes that seventh year at 457 B.C.; do the 457 + 483 reduction yourself."
+          "The year number is in the text. History: Xerxes, the father of Artaxerxes, died during the last part of 465 B.C. (BRI, The Sanctuary and Its Cleansing). The seventh year is 457 B.C.; do the 457 + 483 reduction yourself."
         ),
         item(
           "scripture",
@@ -605,7 +606,7 @@
           "Matthew records the veil torn from the top — sacrifice’s grammar broken in the midst of the week.",
           "Matthew 27:51, King James Version",
           "And, behold, the veil of the temple was rent in twain from the top to the bottom; and the earth did quake, and the rocks rent.",
-          "Hebrews 10:19–20 will read that tear as a new and living way. The sitting’s claim is that the dated cut of 9:27 happened in public, not only in a chart."
+          "Hebrews 10:20 says the way is through the veil, that is to say, his flesh. The sitting’s claim is that the dated cut of 9:27 happened in public, not only in a chart."
         )
       ]
     },
@@ -631,11 +632,11 @@
           "Michael helps against the prince of Persia. Nations move because unseen princes wrestle.",
           "Daniel 10:13, King James Version",
           "But the prince of the kingdom of Persia withstood me one and twenty days: but, lo, Michael, one of the chief princes, came to help me; and I remained there with the kings of Persia.",
-          "The metal sequence was never mere geography. Chapter 11 will march kings; this verse says why they march."
+          "The prince of Persia withstood the messenger twenty-one days; Michael, one of the chief princes, came to help."
         ),
         item(
           "scripture",
-          "Chapter 11 keeps the named chain: three more Persian kings, then a mighty Greek king whose kingdom is broken four ways.",
+          "Chapter 11 keeps the named chain: three kings, then a fourth richer Persian, then the mighty king whose realm breaks four ways.",
           "Daniel 11:2–4, King James Version",
           "Behold, there shall stand up yet three kings in Persia; and the fourth shall be far richer than they all… And a mighty king shall stand up, that shall rule with great dominion, and do according to his will. And when he shall stand up, his kingdom shall be broken, and shall be divided toward the four winds of heaven.",
           "The fourth rich Persian is Xerxes in the usual count; the mighty king is Alexander; the four winds are the Diadochi already met in chapter 8. The last sitting does not invent a new statue."
@@ -645,28 +646,28 @@
           "The book is sealed till the time of the end. Knowledge increases. Many run to and fro.",
           "Daniel 12:4, King James Version",
           "But thou, O Daniel, shut up the words, and seal the book, even to the time of the end: many shall run to and fro, and knowledge shall be increased.",
-          "This sitting reads 1798–1844 as the opening of that seal, when the 1,260 and the 2,300 actually landed. The verse is not a gadget verse. It is why the numbers could not be fully owned before their dates."
+          "This sitting reads unsealing since 1798 (The Great Controversy, p. 356; ABSG 2020 Q1, lesson 13), when the 1,260 actually landed, and 1844 on the 2,300, not as the seal's closing year. The verse is not a gadget verse. The lesson says key teachings remained mysterious until the time of the end (ABSG 2020 Q1, lesson 13)."
         ),
         item(
           "scripture",
-          "When Michael stands, human probation closes, a time of trouble begins, and those written in the book are delivered. Dust-sleepers awake.",
+          "When Michael stands, a time of trouble begins, those written in the book are delivered, and dust-sleepers awake.",
           "Daniel 12:1–2, King James Version",
           "And at that time shall Michael stand up, the great prince which standeth for the children of thy people: and there shall be a time of trouble, such as never was since there was a nation even to that same time: and at that time thy people shall be delivered, every one that shall be found written in the book. And many of them that sleep in the dust of the earth shall awake, some to everlasting life, and some to shame and everlasting contempt.",
           "Daniel uses stand up for kings assuming power (11:2–4, 7, 20–21). The sitting reads 12:1 the same way: Michael (Christ) takes His royal stance for His people; a time of trouble follows; those written in the book are delivered; then bodily resurrection — not reincarnation, not mere metaphor."
         ),
         item(
           "scripture",
-          "Hebrews 7:25 is His intercession in this age, until Michael stands and human probation closes.",
+          "Hebrews 7:25 is His everlasting intercession.",
           "Hebrews 7:25, King James Version",
           "Wherefore he is able also to save them to the uttermost that come unto God by him, seeing he ever liveth to make intercession for them.",
-          "Hebrews 7:25 is His intercession in this age, until Michael stands. Daniel 12:1 is that standing: human probation closes, then trouble, then deliverance for those in the book."
+          "Hebrews 7:25 is everlasting intercession: he ever liveth to make intercession for them."
         ),
         item(
           "scripture",
           "Jesus locates the rising in graves and a voice, not in a figure of speech.",
           "John 5:28–29, King James Version",
           "Marvel not at this: for the hour is coming, in the which all that are in the graves shall hear his voice, And shall come forth; they that have done good, unto the resurrection of life; and they that have done evil, unto the resurrection of damnation.",
-          "Daniel 12:2 and John 5:28–29 are the same hope. The book’s last gift is a body."
+          "Daniel 12:2 and John 5:28–29 are the same hope."
         ),
         item(
           "scripture",
@@ -687,7 +688,7 @@
           "Daniel 12:11–12 names two spans from the time the daily is taken away and the abomination is set up.",
           "Daniel 12:11–12, King James Version",
           "And from the time that the daily sacrifice shall be taken away, and the abomination that maketh desolate set up, there shall be a thousand two hundred and ninety days. Blessed is he that waiteth, and cometh to the thousand three hundred and five and thirty days.",
-          "The English supplies “sacrifice” in italics in some printings; the Hebrew is ha-tamid. The verse gives the counts, not A.D. 508. The sitting’s 508 start is a reconstructed civil pin on the year-day scale (Numbers 14:34; Ezekiel 4:6), separable from Clovis ~496 and Vouillé ~507. 508 + 1,290 = 1798; 508 + 1,335 = 1843. If the start moves, the landings move."
+          "The English supplies “sacrifice” in italics in some printings; the Hebrew is ha-tamid. The verse gives the counts, not A.D. 508. The sitting’s 508 start is a reconstructed civil pin on the year-day scale (Numbers 14:34; Ezekiel 4:6). The 2020 lesson's event for 508 is Clovis's conversion (ABSG 2020 Q1, lesson 13), separable from Clovis ~496 and Vouillé ~507. 508 + 1,290 = 1798; 508 + 1,335 = 1843. If the start moves, the landings move."
         )
       ]
     }
