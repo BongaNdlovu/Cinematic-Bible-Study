@@ -87,7 +87,7 @@
         ),
         item(
           "scripture",
-          "Isaiah had already said they shall be eunuchs in the palace of the king of Babylon (SDABC, Dan 1:3 note).",
+          "Isaiah had already said they shall be eunuchs in the palace of the king of Babylon (Bible Commentary, Dan 1:3 note).",
           "Isaiah 39:7, King James Version",
           "And of thy sons that shall issue from thee, which thou shalt beget, shall they take away; and they shall be eunuchs in the palace of the king of Babylon.",
           "Daniel 1 is not an accident of empire. Isaiah 39:7 names palace service as eunuchs. The court school is Daniel 1:4, the learning and the tongue of the Chaldeans."
@@ -104,7 +104,7 @@
           "The table-line is the Law’s food line, not a modern diet.",
           "Leviticus 11:7, 44, King James Version",
           "And the swine, though he divide the hoof, and be clovenfooted, yet he cheweth not the cud; he is unclean to you. … For I am the LORD your God: ye shall therefore sanctify yourselves, and ye shall be holy; for I am holy.",
-          "Royal meat had been offered (traditional reconstruction; Daniel 1 does not state it) (ABSG Lesson 2, Tuesday January 7). Daniel 1:12 asks for pulse. One issue was holiness at a pagan table (SDABC, Dan 1:8 note)."
+          "Royal meat had been offered (traditional reconstruction; Daniel 1 does not state it) (ABSG Lesson 2, Tuesday January 7). Daniel 1:12 asks for pulse. One issue was holiness at a pagan table (Bible Commentary, Dan 1:8 note)."
         ),
         item(
           "scripture",
@@ -177,7 +177,7 @@
         ),
         item(
           "commentary",
-          "History: Hippolytus's reading, not as SDA doctrine: before the Reformation, Hippolytus already named the four metals as one sequence ending in Rome (Hippolytus, Treatise on Christ and Antichrist, sec. 28 (ANF 5)).",
+          "History: Before the Reformation, Hippolytus already named the four metals as one sequence ending in Rome (Hippolytus, Treatise on Christ and Antichrist, sec. 28 (ANF 5)).",
           "Hippolytus of Rome, Treatise on Christ and Antichrist, §28. Ante-Nicene Fathers, vol. 5",
           "The golden head of the image… denoted the Babylonians; the shoulders and arms of silver… the Persians and Medes; the belly and thighs of brass… the Greeks… the legs of iron… the Romans, who hold the sovereignty at present… the stone that smites the earth… was Christ.",
           "Open ANF vol. 5, Treatise on Christ and Antichrist, §28. A modern teaching that restarts the statue after Rome has to break this old chain (Hippolytus, Treatise on Christ and Antichrist, sec. 28) as well as Daniel 2:38.",
@@ -541,10 +541,10 @@
         ),
         item(
           "history",
-          "Boston made the preaching a press. Exeter named the tenth day from Matthew 25 and Leviticus 16:29 (Encyclopedia of Seventh-day Adventists, Snow, Samuel Sheffield).",
-          "Joshua V. Himes, Signs of the Times (Boston); Samuel S. Snow, The True Midnight Cry (22 August 1844) (Encyclopedia of Seventh-day Adventists, Snow, Samuel Sheffield); Matthew 25:6, King James Version",
+          "Boston made the preaching a press. Exeter named the tenth day from Matthew 25 and Leviticus 16:29 (Snow, Samuel Sheffield).",
+          "Joshua V. Himes, Signs of the Times (Boston); Samuel S. Snow, The True Midnight Cry (22 August 1844) (Snow, Samuel Sheffield); Matthew 25:6, King James Version",
           "And at midnight there was a cry made, Behold, the bridegroom cometh; go ye out to meet him.",
-          "Himes’s first number is dated 20 March 1840 (Signs of the Times, vol. 1, no. 1; ESDA “Advent Herald”; Internet Archive digitization). Snow preached the seventh-month message at Exeter, N.H., in August 1844 (The Exeter Camp Meeting, Advent Herald, August 21, 1844; Encyclopedia of Seventh-day Adventists, Snow, Samuel Sheffield). True Midnight Cry, 22 Aug. 1844, names the tenth day of the seventh month in 1844. Ellen G. White, The Great Controversy, ch. 23 (GC 409.1) records the disappointment. A mistaken event is not a vanished imprint.",
+          "Himes’s first number is dated 20 March 1840 (Signs of the Times, vol. 1, no. 1; the Advent Herald; Internet Archive digitization). Snow preached the seventh-month message at Exeter, N.H., in August 1844 (The Exeter Camp Meeting, Advent Herald, August 21, 1844; Snow, Samuel Sheffield). True Midnight Cry, 22 Aug. 1844, names the tenth day of the seventh month in 1844. Ellen G. White, The Great Controversy, ch. 23 (GC 409.1) records the disappointment. A mistaken event is not a vanished imprint.",
           "https://archive.org/details/SignsOfTheTimesOfTheSecondComingChrist1840V1N1-1296"
         )
       ]

@@ -387,7 +387,7 @@
           "The sanctuary is in heaven",
           "Daniel 8:14; 7:9–14; Hebrews 9:23–24",
           "assets/maps/stops/edson-cornfield.jpg",
-          "The morning after, Hiram Edson walks a cornfield near Port Gibson. The memory of that Advent circle is that 8:14’s sanctuary is the heavenly Most Holy Place — the court of chapter 7, the Day of Atonement antitype — not this earth and not this hill in Judah.\n\nThis is the dated account of people who would not throw the number away with the wrong event. It is not a state paper. Trace it back to Hebrews 8–9 and to the verb nitsdaq."
+          "The morning after, Hiram Edson walks a cornfield near Port Gibson. The memory of that company is that 8:14’s sanctuary is the heavenly Most Holy Place — the court of chapter 7, the Day of Atonement antitype — not this earth and not this hill in Judah.\n\nThis is the dated account of people who would not throw the number away with the wrong event. It is not a state paper. Trace it back to Hebrews 8–9 and to the verb nitsdaq."
         ),
         node(
           "washington-nh",
@@ -396,7 +396,7 @@
           "Sabbath in the same year",
           "Daniel 7:25; Exodus 20:8–11",
           "assets/maps/stops/washington-nh.jpg",
-          "Rachel Oakes Preston, a Seventh Day Baptist, presses Advent believers in this meetinghouse on the seventh-day Sabbath in 1844. Frederick Wheeler’s congregation becomes the first Sabbath-keeping company among those Advent believers.\n\nThe stone is not an American denomination. The pin is a dated local fact: the same year the 2,300 days close, a New England church is already asking which law the little horn thought to change (7:25)."
+          "Rachel Oakes Preston, a Seventh Day Baptist, presses the believers in this meetinghouse on the seventh-day Sabbath in 1844. Frederick Wheeler’s congregation becomes the first Sabbath-keeping company among them.\n\nThe stone is not an American denomination. The pin is a dated local fact: the same year the 2,300 days close, a New England church is already asking which law the little horn thought to change (7:25)."
         ),
         node(
           "morse-telegraph",

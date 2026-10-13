@@ -6,7 +6,7 @@
     "history": "Every sitting assumes a hermeneutical choice. Historicism reads Daniel and Revelation as one unbroken chain of real empires from the exile toward Christ’s return. Alcázar’s 1614 book limits the Apocalypse to Constantine’s overthrow of paganism. The Maccabean reading of Daniel is Porphyry’s, which Jerome reports. Ribera’s gap is a future three and a half years. Protestant futurism spread through S. R. Maitland. In 1826 Maitland published a seventy-two-page pamphlet (Prophetic Faith of Our Fathers, vol. 3). The course defends historicism because Daniel’s succession language, parallel visions, and internal date tests (Daniel 9) fit a continuous historical reading when Scripture interprets Scripture.",
     "proof": [
       "Scripture (KJV): Daniel 2:38–40; 7:3–7 — the succession is in the text. Daniel 2:38–40 names the king as gold and then another kingdom, not the later empires. The names are the historicist reading (ABSG 2020 Q1, lesson 1).",
-      "Witness: Hippolytus, Treatise on Christ and Antichrist §28 (c. A.D. 200) — a patristic witness, not SDA doctrine — gold, silver, brass, and iron as Babylon, Persia and Media, Greece, and Rome, one chain.",
+      "Witness: Hippolytus, Treatise on Christ and Antichrist §28 (c. A.D. 200) — a patristic witness — gold, silver, brass, and iron as Babylon, Persia and Media, Greece, and Rome, one chain.",
       "Witness: Luis de Alcázar (1614) and Francisco Ribera, Revelation commentary (about 1590) — dated Counter-Reformation alternatives (PFF2 488)."
     ]
   },
@@ -16,7 +16,7 @@
     "proof": [
       "Scripture (KJV): Daniel 2:44 — kingdom set up “in the days of these kings” (the divided feet), not during Babylon alone.",
       "Witness: Hippolytus, Treatise on Christ and Antichrist §28 — a patristic witness — the golden head through the iron legs as Babylon through Rome.",
-      "Primary: Newton 1733, Part I, Chap. I — an eighteenth-century witness, not SDA doctrine — Daniel “most distinct in order of time” (Gutenberg 16878)."
+      "Primary: Newton 1733, Part I, Chap. I — an eighteenth-century witness — Daniel “most distinct in order of time” (Gutenberg 16878)."
     ]
   },
   "preterism": {
@@ -30,7 +30,7 @@
   },
   "futurism": {
     "simple": "The claim that Daniel’s hardest numbers jump to a future individual Antichrist after the great gap of the spreading centuries, before a future three and a half years (PFF2 488).",
-    "history": "Patristic readers already expected a future antichrist (Hippolytus, Treatise on Christ and Antichrist §28), a patristic witness, not SDA doctrine. Francisco Ribera’s c. 1590 Revelation commentary made the gap systematic: Antichrist as one man for 3½ literal years (PFF2 487). Protestant adoption followed through S. R. Maitland. In 1826 Maitland published the enquiry on 1260 Years (Prophetic Faith of Our Fathers, vol. 3). Gabriel never writes a two-thousand-year parenthesis into Daniel 9. This sitting names a 16th-century commentary (about 1590) and, separately, the later Protestant shift, not an anonymous “always read it this way.” (PFF2 489).",
+    "history": "Patristic readers already expected a future antichrist (Hippolytus, Treatise on Christ and Antichrist §28), a patristic witness. Francisco Ribera’s c. 1590 Revelation commentary made the gap systematic: Antichrist as one man for 3½ literal years (PFF2 487). Protestant adoption followed through S. R. Maitland. In 1826 Maitland published the enquiry on 1260 Years (Prophetic Faith of Our Fathers, vol. 3). Gabriel never writes a two-thousand-year parenthesis into Daniel 9. This sitting names a 16th-century commentary (about 1590) and, separately, the later Protestant shift, not an anonymous “always read it this way.” (PFF2 489).",
     "proof": [
       "Primary: About 1590 Ribera published a 500page commentary on the Apocalypse (PFF2 489).",
       "Witness: In 1826 Maitland published a seventy-two-page pamphlet on the 1,260 years (Prophetic Faith of Our Fathers, vol. 3).",
@@ -57,7 +57,7 @@
   },
   "tamid": {
     "simple": "Hebrew for the continual daily — the standing, regular priestly service before God, which Daniel 8 shows a horn attempting to replace with a counterfeit.",
-    "history": "On earth the tamid was the regular sacrifice and ministry at the altar. In Daniel 8:11 the horn magnifies itself even to the Prince of the host; the daily sacrifice (the tamid) is taken away, and the place of his sanctuary is cast down — read in this course as an attack on Christ’s continual priesthood (Hebrews 7–10) through a competing earthly mediation. Sitting 10 links this to the papal phase; 508 is not a numeral in Daniel 8. It is the date reached by those who subtract 1290 from 1798 under the daily-as-paganism view (SDA Bible Commentary, Daniel 12:11).",
+    "history": "On earth the tamid was the regular sacrifice and ministry at the altar. In Daniel 8:11 the horn magnifies itself even to the Prince of the host; the daily sacrifice (the tamid) is taken away, and the place of his sanctuary is cast down — read in this course as an attack on Christ’s continual priesthood (Hebrews 7–10) through a competing earthly mediation. Sitting 10 links this to the papal phase; 508 is not a numeral in Daniel 8. It is the date reached by those who subtract 1290 from 1798 under the daily-as-paganism view (Bible Commentary, Daniel 12:11).",
     "proof": [
       "Scripture (KJV): Daniel 8:11–13 — the daily sacrifice taken away; the place of his sanctuary cast down.",
       "Scripture (KJV): Hebrews 7:24–25 — Christ’s unchangeable priesthood as the New Testament counterpart.",
@@ -70,7 +70,7 @@
     "proof": [
       "Scripture (KJV): Daniel 9:24 — “Seventy weeks are determined upon thy people…” (Hebrew chathak).",
       "Scripture (KJV): Daniel 8:14 — days; 8:27 — none understood it. The parent 2,300 span is the ABSG reading, not KJV wording (ABSG 2020 Q1, lesson 10).",
-      "Lexical: chathak, a word occurring only here in the Bible, at Daniel 9:24 (SDA Bible Commentary, Daniel 9:24)."
+      "Lexical: chathak, a word occurring only here in the Bible, at Daniel 9:24 (Bible Commentary, Daniel 9:24)."
     ]
   },
   "papacy": {
@@ -88,12 +88,12 @@
     "proof": [
       "Scripture (KJV): Daniel 1:2 — sovereign hand in the first levy.",
       "Scripture (KJV): 2 Kings 24–25 — second and third levies under Jehoiachin and Zedekiah.",
-      "The first captivity in 605 B.C. (SDA Bible Commentary, Daniel 1)."
+      "The first captivity in 605 B.C. (Bible Commentary, Daniel 1)."
     ]
   },
   "jehoiakim": {
     "simple": "King of Judah when Daniel opens: Daniel 1:1–2 dates Nebuchadnezzar’s first siege to Jehoiakim’s third year (605 B.C.), when vessels and noble youths were taken.",
-    "history": "Son of Josiah (2 Kings 23:36–24:6). The battle of Carchemish in 605 (Jeremiah 46:2; SDA Bible Commentary, Daniel 1). In 605 the Lord gave him into Nebuchadnezzar’s hand (Daniel 1:2): tribute, temple vessels, and deportees, including Daniel. He kept the throne until he “slept with his fathers” and Jehoiachin succeeded him (2 Kings 24:6). He is not Jehoiachin (597 second levy) and not Zedekiah (586 destruction).",
+    "history": "Son of Josiah (2 Kings 23:36–24:6). The battle of Carchemish in 605 (Jeremiah 46:2; Bible Commentary, Daniel 1). In 605 the Lord gave him into Nebuchadnezzar’s hand (Daniel 1:2): tribute, temple vessels, and deportees, including Daniel. He kept the throne until he “slept with his fathers” and Jehoiachin succeeded him (2 Kings 24:6). He is not Jehoiachin (597 second levy) and not Zedekiah (586 destruction).",
     "proof": [
       "Scripture (KJV): Daniel 1:1–2 — first siege in Jehoiakim’s third year; the Lord gave the king into Nebuchadnezzar’s hand.",
       "Scripture (KJV): 2 Kings 23:36 — Jehoiakim was twenty and five years old when he began to reign; 24:6 — “So Jehoiakim slept with his fathers.”",
@@ -110,7 +110,7 @@
     ]
   },
   "zedekiah": {
-    "simple": "History: Last king of Judah before 586 B.C.; Babylon installed him after Jehoiachin was taken (2 Kings 24:17; SDA Bible Commentary, Daniel 1); his revolt brought the final siege and temple burning (2 Kings 25:9).",
+    "simple": "History: Last king of Judah before 586 B.C.; Babylon installed him after Jehoiachin was taken (2 Kings 24:17; Bible Commentary, Daniel 1); his revolt brought the final siege and temple burning (2 Kings 25:9).",
     "history": "Mattaniah, renamed Zedekiah by Nebuchadnezzar (2 Kings 24:17–20). His rebellion triggered the third campaign: walls broken, Solomon’s temple burned, survivors deported (2 Kings 25; Jeremiah 52). He is not the king of Daniel 1:1 (Jehoiakim, 605) or the king taken in 597 (Jehoiachin).",
     "proof": [
       "Scripture (KJV): 2 Kings 24:17–20 — Mattaniah renamed Zedekiah.",
@@ -120,7 +120,7 @@
   },
   "newton-isaac": {
     "simple": "History: English natural philosopher and mathematician who also wrote a formal commentary on Daniel and Revelation, published in 1733 as Observations upon the Prophecies of Daniel, and the Apocalypse of St. John.",
-    "history": "Newton’s words, not an SDA verdict: he did not treat Daniel as a sealed riddle, a paraphrase of “easiest to be understood” (Isaac Newton, Observations (1733), Part I, chap. I). In Part I, Chapter I he wrote that Daniel is “most distinct in order of time, and easiest to be understood,” and that “in those things which relate to the last times, he must be made the key to the rest” (Isaac Newton, Observations (1733), Part I, chap. I). That is historicism in one sentence: a dated sequence of real kingdoms read in order. In Part I, Chapter III he reads Daniel 2’s metals as Babylonia, the Persians, the Greeks, and the Romans in historical succession; in Chapter VII, on the eleventh horn, he applies the horn to the Church of Rome and its Bishop, his reading (Isaac Newton, Observations (1733), Part I, chap. VII). This course cites Newton as an eighteenth-century witness to the continuous chain, not as an infallible guide on every horn detail—test each claim against Scripture.",
+    "history": "Newton’s words: he did not treat Daniel as a sealed riddle, a paraphrase of “easiest to be understood” (Isaac Newton, Observations (1733), Part I, chap. I). In Part I, Chapter I he wrote that Daniel is “most distinct in order of time, and easiest to be understood,” and that “in those things which relate to the last times, he must be made the key to the rest” (Isaac Newton, Observations (1733), Part I, chap. I). That is historicism in one sentence: a dated sequence of real kingdoms read in order. In Part I, Chapter III he reads Daniel 2’s metals as Babylonia, the Persians, the Greeks, and the Romans in historical succession; in Chapter VII, on the eleventh horn, he applies the horn to the Church of Rome and its Bishop, his reading (Isaac Newton, Observations (1733), Part I, chap. VII). This course cites Newton as an eighteenth-century witness to the continuous chain, not as an infallible guide on every horn detail—test each claim against Scripture.",
     "proof": [
       "Primary: Sir Isaac Newton, Observations upon the Prophecies of Daniel (London, 1733), Part I, Chap. I — “Daniel is most distinct in order of time, and easiest to be understood” (Gutenberg 16878, the witness copy).",
       "Primary: Newton, Observations, Part I, Chap. III — Newton’s reading — “Of the vision of the Image composed of four Metals”: Babylonia, the Persians, the Greeks, and the Romans.",
@@ -129,7 +129,7 @@
     ]
   },
   "carchemish": {
-    "simple": "History: By the river Euphrates in Carchemish, where Nebuchadnezzar beat Egypt in 605 B.C. (Jeremiah 46:2; SDA Bible Commentary, Daniel 1).",
+    "simple": "History: By the river Euphrates in Carchemish, where Nebuchadnezzar beat Egypt in 605 B.C. (Jeremiah 46:2; Bible Commentary, Daniel 1).",
     "history": "Jeremiah 46:2 dates Nebuchadnezzar’s defeat of Pharaoh Necho at Carchemish to Jehoiakim’s fourth year—the same campaign window as Daniel 1:1’s third year of Jehoiakim (605 B.C., accession-year difference). That battle year supports a real first deportation under Jehoiakim, distinct from 597 (Jehoiachin) and 586 (Zedekiah).",
     "proof": [
       "Scripture (KJV): Jeremiah 46:2 — Carchemish in Jehoiakim’s fourth year.",

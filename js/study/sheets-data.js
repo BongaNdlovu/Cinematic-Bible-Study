@@ -51,7 +51,7 @@
                 role: "Continuous",
                 points: [
                   "The reading this course defends.",
-                  "Babylon → Medo-Persia → Greece → Rome → Divided Europe, the SDA reading → Christ's kingdom.",
+                  "Babylon → Medo-Persia → Greece → Rome → Divided Europe, the historicist reading → Christ's kingdom.",
                   "One unbroken chain running in real time."
                 ]
               },
@@ -142,7 +142,7 @@
   <h3>History Is Not an Accident</h3>
 </div>
 
-<p>When the book of Daniel opens, the world appears broken. History: In 605 B.C. (SDA Bible Commentary vol. 4, Daniel 1; Prophetic Faith of Our Fathers, vol. 1, PFF1 36), Nebuchadnezzar besieges Jerusalem and marches royal youth into exile. Smith gives 606 B.C. The Mediterranean coast, the hundreds of miles, and a teenage Daniel are inference. History: Sacred vessels from the temple of Yahweh are deposited into the house of the god Marduk in Babylon (KJV Daniel 1:2). To the casual observer, the God of Israel has been defeated by imperial might.</p>
+<p>When the book of Daniel opens, the world appears broken. History: In 605 B.C. (Bible Commentary vol. 4, Daniel 1; Prophetic Faith of Our Fathers, vol. 1, PFF1 36), Nebuchadnezzar besieges Jerusalem and marches royal youth into exile. Smith gives 606 B.C. The Mediterranean coast, the hundreds of miles, and a teenage Daniel are inference. History: Sacred vessels from the temple of Yahweh are deposited into the house of the god Marduk in Babylon (KJV Daniel 1:2). To the casual observer, the God of Israel has been defeated by imperial might.</p>
 
 <p>Yet Daniel 1:2 immediately upends that view:</p>
 <blockquote class="scripture-quote">"And the Lord gave Jehoiakim king of Judah into his hand..." — Daniel 1:2 (KJV)</blockquote>
@@ -349,7 +349,7 @@ Daniel 9:24–27 ──▶  "Seventy weeks" (70 × 7 = 490 prophetic years)
             ],
             "explanation": "Confining fulfillment to the second century B.C. or A.D. 70 is preterism — it breaks the contiguous chain Daniel describes (BRI, Ellen G. White and the Interpretation of Daniel and Revelation).",
             "diagnostics": [
-              "Misconception: Historicism is the continuous chain model this course defends — tracing history from Babylon through Rome and the divided kingdom to the Stone (SDABC, Daniel 2:41 note).",
+              "Misconception: Historicism is the continuous chain model this course defends — tracing history from Babylon through Rome and the divided kingdom to the Stone (Bible Commentary, Daniel 2:41 note).",
               "",
               "Misconception: Futurism breaks the chain with an unwritten end-time gap, whereas the teacher in this scenario confines all fulfillment to antiquity.",
               "Misconception: The teacher anchors fulfillments to concrete ancient dates (Antiochus IV and A.D. 70) — that is preterism, not timeless idealism."
@@ -444,8 +444,8 @@ Daniel 9:24–27 ──▶  "Seventy weeks" (70 × 7 = 490 prophetic years)
             why: "Luke 24:27 is Christ's own method for reading the Scriptures (BRI, Reflections On Historicism And Eschatology). If your reading of Daniel never arrives at Christ — the Lord of exile, the cut-off Messiah, the Stone — it has missed the book's redemptive core and become a chart without a destination."
           },
           now: {
-            claim: "Historicism places you in the divided feet — after Rome, before the Stone, as one commentator view (SDABC, Daniel 2:41 note). Hippolytus (28) places the toes in future kingdoms (Hippolytus, On Christ and Antichrist 28). You are not between a finished past and a future tribulation.",
-            why: "Futurism leaves a vast gap (BRI, Reflections On Historicism And Eschatology). Daniel 4:17 teaches that God rules the kingdoms of men. You live in the divided feet, an SDA reading, waiting for the Stone (SDABC, Daniel 2:41 note). Hippolytus 28 puts the toes in future kingdoms."
+            claim: "Historicism places you in the divided feet — after Rome, before the Stone, as one commentator view (Bible Commentary, Daniel 2:41 note). Hippolytus (28) places the toes in future kingdoms (Hippolytus, On Christ and Antichrist 28). You are not between a finished past and a future tribulation.",
+            why: "Futurism leaves a vast gap (BRI, Reflections On Historicism And Eschatology). Daniel 4:17 teaches that God rules the kingdoms of men. You live in the divided feet, the historicist reading, waiting for the Stone (Bible Commentary, Daniel 2:41 note). Hippolytus 28 puts the toes in future kingdoms."
           },
           help: {
             claim: "Ask of any prophetic claim: Does it keep the chain unbroken and Christ at the center?",
@@ -453,7 +453,7 @@ Daniel 9:24–27 ──▶  "Seventy weeks" (70 × 7 = 490 prophetic years)
           },
           value: {
             claim: "The same timeline that landed Messiah at Calvary guarantees His return as King.",
-            why: "When you see Daniel 9 anchor the day-for-year rod at the cross, later dates are not slogans — they share the rod that already proved itself, as SDA argument, at Jesus' first advent (SDABC, Daniel 9:24-27 note). The 2,300 'evenings and mornings' (Hebrew; KJV Daniel 8:14 says 'days') inherit the same measured trust (BRI, Miniature Symbolization and the Year-Day Principle)."
+            why: "When you see Daniel 9 anchor the day-for-year rod at the cross, later dates are not slogans — they share the rod that already proved itself, on the historicist reading, at Jesus' first advent (Bible Commentary, Daniel 9:24-27 note). The 2,300 'evenings and mornings' (Hebrew; KJV Daniel 8:14 says 'days') inherit the same measured trust (BRI, Miniature Symbolization and the Year-Day Principle)."
           },
           ask: [
             "Which of the three roads was I already using before this sitting?",
@@ -845,8 +845,8 @@ DANIEL IN BABYLON                         JESUS IN THE WILDERNESS
             ],
             "explanation": "The verse states the defilement; the dietary reasons are the likeliest reading, and Scripture (1 Corinthians 10:18-21) carries the principle.",
             "diagnostics": [
-              "Misconception: Daniel willingly mastered Chaldean learning and served as a high civil counselor, without adopting the heathen elements. The wisdom of the Chaldeans was allied with idolatry and pagan practices (SDABC, Dan 1:17 note).",
-              "Misconception: Daniel 1:8 shows Daniel purposed not to defile himself physically or spiritually through compromising actions (SDABC, Dan 1:8 note).",
+              "Misconception: Daniel willingly mastered Chaldean learning and served as a high civil counselor, without adopting the heathen elements. The wisdom of the Chaldeans was allied with idolatry and pagan practices (Bible Commentary, Dan 1:17 note).",
+              "Misconception: Daniel 1:8 shows Daniel purposed not to defile himself physically or spiritually through compromising actions (Bible Commentary, Dan 1:8 note).",
               "",
               "Misconception: No violence is recorded. Daniel 6:10 has him praying after the decree was signed, so the chapter is not a picture of civil obedience to that law."
             ]
@@ -928,7 +928,7 @@ DANIEL IN BABYLON                         JESUS IN THE WILDERNESS
             },
             {
               do: "Compare the names diagram with Daniel 1:7. What did Babylon take (the roll) and what did Daniel keep (worship)?",
-              why: "Zeroim points back to Genesis 1:29 (ABSG Lesson 2, Tuesday January 7). The ten-day test is not a fad. One reason given for the defilement is that the beasts had not been properly killed according to Levitical law (SDABC, Dan 1:8 note). Sit with the verse until the claim is yours, not a slogan: write the text, name the empire or office in view, and refuse any reading that drops Christ from the center of Daniel's chain."
+              why: "Zeroim points back to Genesis 1:29 (ABSG Lesson 2, Tuesday January 7). The ten-day test is not a fad. One reason given for the defilement is that the beasts had not been properly killed according to Levitical law (Bible Commentary, Dan 1:8 note). Sit with the verse until the claim is yours, not a slogan: write the text, name the empire or office in view, and refuse any reading that drops Christ from the center of Daniel's chain."
             },
             {
               do: "Read Daniel 1:8, 12–17 beside Leviticus 11 and Genesis 1:29. Note: purpose → obedience → wisdom.",
@@ -960,7 +960,7 @@ DANIEL IN BABYLON                         JESUS IN THE WILDERNESS
         guide: {
           intro: {
             title: "Identity, consecration, and the faithful Son",
-            expect: "Three sieges of Jerusalem (SDABC, Daniel introduction), the conflict of names, the dietary crisis at the royal table, and Christ.",
+            expect: "Three sieges of Jerusalem (Bible Commentary, Daniel introduction), the conflict of names, the dietary crisis at the royal table, and Christ.",
             do: [
               "Follow Main Points 1–4 and the practical application section.",
               "Complete the workbench (names + consecration line), then checkpoint questions.",
@@ -984,7 +984,7 @@ DANIEL IN BABYLON                         JESUS IN THE WILDERNESS
           talkingPoints: [
             "Daniel 2:38 is the immovable biblical anchor: 'Thou art this head of gold' fixes Babylon as the starting point.",
             "The sequence of metals (gold, silver, bronze, iron, divided clay) is contiguous without historical gaps or cyclic restarts.",
-            "The stone cut out without hands strikes the feet, teaching that God's kingdom arrives supernaturally (Hasel, Adventist Review)."
+            "The stone cut out without hands strikes the feet, teaching that God's kingdom arrives supernaturally (Hasel)."
           ],
           askClass: [
             "Why do modern commentators attempt to reboot the head of gold in modern nations, and how does Daniel 2:38 refute them?",
@@ -1207,7 +1207,7 @@ The Striking Stone   ──▶  CHRIST'S KINGDOM (Supernatural, Universal, Etern
 
 <div class="framework-card">
   <p class="framework-card-kicker">Head of gold — Babylon (605–539 B.C., the accession year; BRI reckons 606–539)</p>
-  <p>Daniel identifies the starting point without ambiguity: <em>"Thou art this head of gold"</em> (Daniel 2:38). Scripture calls Babylon "the golden city" (Isaiah 14:4), which had its golden age in the days of King Nebuchadnezzar (605-562 B.C.) (SDABC v.4, comment on Dan 2:37).</p>
+  <p>Daniel identifies the starting point without ambiguity: <em>"Thou art this head of gold"</em> (Daniel 2:38). Scripture calls Babylon "the golden city" (Isaiah 14:4), which had its golden age in the days of King Nebuchadnezzar (605-562 B.C.) (Bible Commentary v.4, comment on Dan 2:37).</p>
 </div>
 <div class="framework-card">
   <p class="framework-card-kicker">Chest and arms of silver — Medo-Persia (539–331 B.C.)</p>
@@ -1215,11 +1215,11 @@ The Striking Stone   ──▶  CHRIST'S KINGDOM (Supernatural, Universal, Etern
 </div>
 <div class="framework-card">
   <p class="framework-card-kicker">Belly and thighs of bronze — Greece (331–168 B.C.)</p>
-  <p>A "third kingdom of brass, which shall bear rule over all the earth" followed (Daniel 2:39). History: the Persian Empire was defeated by Alexander at Arbela, or Gaugamela (331 B.C.) (SDABC v.4, comment on Dan 2:39). Daniel 8:21 names the rough goat as the king of Grecia. Daniel 8:7 says the goat smote the ram and brake his two horns, and Daniel 8:20 names that ram as the kings of Media and Persia.</p>
+  <p>A "third kingdom of brass, which shall bear rule over all the earth" followed (Daniel 2:39). History: the Persian Empire was defeated by Alexander at Arbela, or Gaugamela (331 B.C.) (Bible Commentary v.4, comment on Dan 2:39). Daniel 8:21 names the rough goat as the king of Grecia. Daniel 8:7 says the goat smote the ram and brake his two horns, and Daniel 8:20 names that ram as the kings of Media and Persia.</p>
 </div>
 <div class="framework-card">
   <p class="framework-card-kicker">Legs of iron — Imperial Rome (168 B.C.–A.D. 476)</p>
-  <p>The "fourth kingdom shall be strong as iron: forasmuch as iron breaketh in pieces and subdueth all things" (Daniel 2:40). History: In 168, at the Battle of Pydna, Rome ended the monarchy (SDABC v.4, comment on Dan 7 (fourth beast)). History: The legs of iron aptly represent Rome (168 B.C.-A.D. 476) (ABSG 2020 Q1 L3).</p>
+  <p>The "fourth kingdom shall be strong as iron: forasmuch as iron breaketh in pieces and subdueth all things" (Daniel 2:40). History: In 168, at the Battle of Pydna, Rome ended the monarchy (Bible Commentary v.4, comment on Dan 7 (fourth beast)). History: The legs of iron aptly represent Rome (168 B.C.-A.D. 476) (ABSG 2020 Q1 L3).</p>
 </div>
 
 <h4>The physical and moral gradients of the colossus</h4>
@@ -2624,12 +2624,12 @@ Nebuchadnezzar (Daniel 4)                Jesus Christ (Philippians 2)
               {
                 "role": "1st Ruler",
                 "title": "Nabonidus",
-                "text": "History: King of Babylon, residing in Tema, Arabia (Seventh-day Adventist Bible Commentary, vol. 4, on Daniel 5:1). ABC 7: The king (was) in Tayma."
+                "text": "History: King of Babylon, residing in Tema, Arabia (Bible Commentary, vol. 4, on Daniel 5:1). ABC 7: The king (was) in Tayma."
               },
               {
                 "role": "2nd Ruler",
                 "title": "Belshazzar",
-                "text": "History: Eldest son, Co-regent ruling inside Babylon (Seventh-day Adventist Bible Commentary, vol. 4, on Daniel 5)."
+                "text": "History: Eldest son, Co-regent ruling inside Babylon (Bible Commentary, vol. 4, on Daniel 5)."
               },
               {
                 "role": "3rd Ruler",
@@ -3004,7 +3004,7 @@ CYRUS THE DELIVERER                       JESUS CHRIST THE REDEEMER
             "diagnostics": [
               "Misconception: Ancient warfare relied on conventional siegecraft. History: Cyrus diverted the Euphrates River, marching troops through the drained riverbed into the city (Herodotus, Histories 1.191; Ellen G. White, Prophets and Kings, ch. 43 (PK 531.1)).",
               "Misconception: Greece was the third empire (bronze, 331 B.C.); in 539 B.C., Babylon fell to the Medes and Persians (the silver chest of Daniel 2).",
-              "Misconception: Archaeological discoveries (e.g. the Verse Account of Nabonidus naming Belshazzar as co-regent) corroborate the authentic exilic setting of Daniel 5 (Seventh-day Adventist Bible Commentary, vol. 4, on Daniel 5).",
+              "Misconception: Archaeological discoveries (e.g. the Verse Account of Nabonidus naming Belshazzar as co-regent) corroborate the authentic exilic setting of Daniel 5 (Bible Commentary, vol. 4, on Daniel 5).",
               ""
             ]
           },
@@ -3086,7 +3086,7 @@ CYRUS THE DELIVERER                       JESUS CHRIST THE REDEEMER
           },
           help: {
             claim: "This sheet teaches you to read a collapse as an audit Heaven already wrote, not as random chaos.",
-            why: "A fall that looks sudden to the crowd may be the closing entry on a ledger Heaven opened long ago. Daniel could read the wall because the interpretation was given to him (Seventh-day Adventist Bible Commentary, vol. 4, on Daniel 5:25). Sit with the verse until the claim is yours, not a slogan: write the text, name the empire or office in view, and refuse any reading that drops Christ from the center of Daniel's chain."
+            why: "A fall that looks sudden to the crowd may be the closing entry on a ledger Heaven opened long ago. Daniel could read the wall because the interpretation was given to him (Bible Commentary, vol. 4, on Daniel 5:25). Sit with the verse until the claim is yours, not a slogan: write the text, name the empire or office in view, and refuse any reading that drops Christ from the center of Daniel's chain."
           },
           value: {
             claim: "Knowing that the gold kingdom ended on a dated night in 539 makes every later empire less absolute — including the one you live under now.",
@@ -4420,7 +4420,7 @@ SCRIPTURAL CRITERIA:                     HISTORICAL FULFILLMENT:
                 "cells": [
                   "Two-Horned Ram (8:3, 20)",
                   "Kings of Media & Persia",
-                  "History: Medo-Persian Empire (539-331 B.C.) (Seventh-day Adventist Bible Commentary, vol. 4, on Daniel 8:4)"
+                  "History: Medo-Persian Empire (539-331 B.C.) (Bible Commentary, vol. 4, on Daniel 8:4)"
                 ]
               },
               {
@@ -4508,7 +4508,7 @@ SCRIPTURAL CRITERIA:                     HISTORICAL FULFILLMENT:
 
 <div class="from-last-sitting">
   <span class="from-last-sitting-kicker">From the last sitting · Sheet 7</span>
-  <p>In Sitting 7, Daniel saw four predatory beasts rise from a storm-tossed sea, tracing the succession of world empires from Babylon to Rome, followed by the 1,260-year supremacy of the little horn (538–1798 A.D.) and the convening of the celestial court before the Ancient of Days. Now in chapter 8, in the third year of Belshazzar (Daniel 8:1; this course’s reconstruction is c. 551 B.C.; other historicist tables print 548/547 (ABSG 2020 Q1, lesson 9)), the prophetic camera narrows from the geopolitical turmoil of nations to focus upon God's sanctuary itself, unveiling the cosmic conflict between an earthly counterfeit priesthood (SDA doctrine) and Christ's high-priestly ministry in the heavenly tabernacle.</p>
+  <p>In Sitting 7, Daniel saw four predatory beasts rise from a storm-tossed sea, tracing the succession of world empires from Babylon to Rome, followed by the 1,260-year supremacy of the little horn (538–1798 A.D.) and the convening of the celestial court before the Ancient of Days. Now in chapter 8, in the third year of Belshazzar (Daniel 8:1; this course’s reconstruction is c. 551 B.C.; other historicist tables print 548/547 (ABSG 2020 Q1, lesson 9)), the prophetic camera narrows from the geopolitical turmoil of nations to focus upon God's sanctuary itself, unveiling the cosmic conflict between an earthly counterfeit priesthood and Christ's high-priestly ministry in the heavenly tabernacle.</p>
 </div>
 
 <div class="part-header" id="intro">
@@ -4583,7 +4583,7 @@ SYMBOL IN PROPHECY:           INTERPRETATION:          HISTORICAL REALITY:
 <div class="framework-card">
   <p class="framework-card-kicker">The two phases of Rome in Daniel 8</p>
   <ul>
-    <li><strong>Phase 1: Horizontal Expansion — Imperial/Pagan Rome (Daniel 8:9):</strong> Emerging from the western Mediterranean, Rome expanded horizontally toward the south (absorbing Egypt in 30 B.C.), toward the east (annexing the Seleucid realm of Syria in 64 B.C.), and toward the <em>"pleasant land"</em> (subjugating Judea under Pompey in 63 B.C.). It was pagan Roman authority under Pontius Pilate that delivered Jesus Christ—the Prince of the host (SDA doctrine)—to crucifixion at Calvary (ABSG 2020 Q1, lesson 9). History: Pagan Roman legions under Titus besieged Jerusalem and burned the earthly temple to the ground in 70 A.D.</li>
+    <li><strong>Phase 1: Horizontal Expansion — Imperial/Pagan Rome (Daniel 8:9):</strong> Emerging from the western Mediterranean, Rome expanded horizontally toward the south (absorbing Egypt in 30 B.C.), toward the east (annexing the Seleucid realm of Syria in 64 B.C.), and toward the <em>"pleasant land"</em> (subjugating Judea under Pompey in 63 B.C.). It was pagan Roman authority under Pontius Pilate that delivered Jesus Christ—the Prince of the host—to crucifixion at Calvary (ABSG 2020 Q1, lesson 9). History: Pagan Roman legions under Titus besieged Jerusalem and burned the earthly temple to the ground in 70 A.D.</li>
     <li><strong>Phase 2: Vertical Expansion — Ecclesiastical/Papal Rome (Daniel 8:10–12):</strong> The horn then grew vertically upward toward heaven: it <em>"waxed great, even to the host of heaven; and it cast down some of the host and of the stars to the ground, and stamped upon them"</em> (Daniel 8:10). This represents the religious phase of Rome: persecuting the saints of God (the stars), exalting itself to equal the Prince of the host, removing the continual daily mediation (<em>tamid</em>), casting down the truth to the ground, and establishing an earthly sacerdotal counterfeit.</li>
   </ul>
 </div>
@@ -4612,7 +4612,7 @@ SYMBOL IN PROPHECY:           INTERPRETATION:          HISTORICAL REALITY:
   <li>Substituting an earthly sacrificing priesthood for Christ's sole heavenly priesthood.</li>
   <li>Substituting the intercession of priests for Christ's once-for-all sacrifice on Calvary (Hebrews 9:26; 10:12).</li>
   <li>Substituting the study guide's priestly substitution for direct confession to our High Priest in heaven (1 John 1:9).</li>
-  <li>SDA doctrine: Substituting the intercession of Mary and dead saints for the one Mediator between God and men, Christ Jesus (1 Timothy 2:5).</li>
+  <li>Historicist reading: Substituting the intercession of Mary and dead saints for the one Mediator between God and men, Christ Jesus (1 Timothy 2:5).</li>
 </ul>
 
 <p>By interposing human priests, earthly altars, and dogmatic traditions between the believer and the heavenly sanctuary, the little horn effectively <em>"cast down the place of his sanctuary"</em> in human understanding and <em>"cast down the truth to the ground."</em></p>
@@ -4623,7 +4623,7 @@ SYMBOL IN PROPHECY:           INTERPRETATION:          HISTORICAL REALITY:
   <p class="part-subtitle">Why the preterist hypothesis collapses under biblical scrutiny</p>
 </div>
 
-<p>The majority position in modern scholarship, and the preterist reading, confines the little horn of Daniel 8 to Antiochus IV Epiphanes, a Seleucid king who reigned from 175 to 164 B.C. and desecrated the Jewish temple . History: erecting an altar to Zeus and sacrificing swine. The historicist reading taken here is a minority conclusion, and this course's own tradition acknowledges it: the study guide for this prophecy says plainly that Adventists are almost alone in the Christian world in our position opposed to that interpretation (ABSG Q4 2006, lesson 10). Historicist scholarship sets out three tests that Antiochus Epiphanes fails. The 2006 study guide's three tests are the scale of greatness, the time-of-the-end horizon with his death in 164, and "broken without hand" (Daniel 8:25). This course adds a fourth test, the 2,300 days:</p>
+<p>The majority position in modern scholarship, and the preterist reading, confines the little horn of Daniel 8 to Antiochus IV Epiphanes, a Seleucid king who reigned from 175 to 164 B.C. and desecrated the Jewish temple . History: erecting an altar to Zeus and sacrificing swine. The historicist reading taken here is a minority conclusion, and this course's own tradition acknowledges it: the study guide for this prophecy says plainly that this historicist reading is almost alone in the Christian world in opposing that interpretation (ABSG Q4 2006, lesson 10). Historicist scholarship sets out three tests that Antiochus Epiphanes fails. The 2006 study guide's three tests are the scale of greatness, the time-of-the-end horizon with his death in 164, and "broken without hand" (Daniel 8:25). This course adds a fourth test, the 2,300 days:</p>
 
 <div class="framework-card">
   <p class="framework-card-kicker">Test 1: The Progression of Greatness (The Scale Criterion)</p>
@@ -4682,7 +4682,7 @@ BIBLICAL REQUIREMENT:            ANTIOCHUS IV EPIPHANES:           HISTORICIST R
   <ul>
     <li><strong>The Millerite Awakening:</strong> In the 1830s and early 1840s, a Baptist farmer-preacher named William Miller, alongside Joshua V. Himes and Samuel S. Snow, studied Daniel 8:14. Relying on historicist principles, they correctly calculated that the 2,300 years would terminate in 1844. Snow pointed to <strong>October 22, 1844</strong>—the tenth day of the seventh month by Karaite Jewish reckoning, the biblical Day of Atonement.</li>
     <li><strong>The Mistaken Event (The Great Disappointment):</strong> The Millerites assumed that "the sanctuary" was the earth, and that its "cleansing" meant the purification of the earth by fire at the Second Coming of Jesus. History: When Christ did not appear in the autumn of 1844, believers endured disappointment (Ellen G. White, The Great Controversy, ch. 23 (GC 409.2)).</li>
-    <li><strong>The Biblical Resolution:</strong> Prayerful restudy of the Bible by that Advent circle — remembered above all in Hiram Edson's account, set down years afterwards — led them to see that Scripture never calls the earth the sanctuary. The sanctuary of Daniel 8:14 is the <strong>heavenly sanctuary</strong> (Hebrews 8:1–2; 9:23–24). SDA doctrine: In 1844, Jesus Christ entered the Most Holy Place of the heavenly temple to inaugurate the final phase of His high-priestly ministry: the heavenly judgment (Daniel 7:9–14) and the cleansing of the heavenly sanctuary prior to His return (Fundamental Belief 24).</li>
+    <li><strong>The Biblical Resolution:</strong> Prayerful restudy of the Bible by those believers — remembered above all in Hiram Edson's account, set down years afterwards — led them to see that Scripture never calls the earth the sanctuary. The sanctuary of Daniel 8:14 is the <strong>heavenly sanctuary</strong> (Hebrews 8:1–2; 9:23–24). Historicist reading: In 1844, Jesus Christ entered the Most Holy Place of the heavenly temple to inaugurate the final phase of His high-priestly ministry: the heavenly judgment (Daniel 7:9–14) and the cleansing of the heavenly sanctuary prior to His return (Fundamental Belief 24).</li>
   </ul>
   <p class="text-xs text-muted-foreground mt-2">(Sources: William Miller, <em>Apology and Defence</em>, 1845; Joshua V. Himes, <em>Signs of the Times</em>; Samuel S. Snow, <em>The True Midnight Cry</em>.)</p>
 </div>
@@ -4747,7 +4747,7 @@ BIBLICAL REQUIREMENT:            ANTIOCHUS IV EPIPHANES:           HISTORICIST R
         },
         quizzes: [
           {
-            "question": "A commentator claims: 'The 2,300 evenings and mornings of Daniel 8:14 mean 1,150 morning and evening sacrifices (3.15 literal years) fulfilled in three years, 168–165 or 167–164 B.C. (Seventh-day Adventist Bible Commentary, vol. 4, on Daniel 8:14)' What textual evidence in Daniel 8 refutes this reduction?",
+            "question": "A commentator claims: 'The 2,300 evenings and mornings of Daniel 8:14 mean 1,150 morning and evening sacrifices (3.15 literal years) fulfilled in three years, 168–165 or 167–164 B.C. (Bible Commentary, vol. 4, on Daniel 8:14)' What textual evidence in Daniel 8 refutes this reduction?",
             "options": [
               "The original Hebrew manuscripts read '2,300 lunar months' rather than days, disproving any calculation based on morning and evening daily sacrifices.",
               "The phrase 'evening-morning' (ereb boqer) mirrors Genesis 1:5, defining full days; the angel ties the vision to the 'time of the end' (8:17), demanding 2,300 years.",
@@ -4756,14 +4756,14 @@ BIBLICAL REQUIREMENT:            ANTIOCHUS IV EPIPHANES:           HISTORICIST R
             ],
             "explanation": "Daniel 8:26 calls it 'the vision of the evening and the morning,' using the Genesis 1 creation formula for full day units. Furthermore, the vision spans from Persia and Greece through the Roman little horn to the 'time of the end' (Daniel 8:17). Daniel 8:19 names the time appointed.",
             "diagnostics": [
-              "Misconception: The commentary reads 2300 evening morning (unto evening-morning two thousand three hundred); there is no mention of months (Seventh-day Adventist Bible Commentary, vol. 4, on Daniel 8:14).",
+              "Misconception: The commentary reads 2300 evening morning (unto evening-morning two thousand three hundred); there is no mention of months (Bible Commentary, vol. 4, on Daniel 8:14).",
               "",
               "Misconception: History: Judas Maccabeus was an authentic historical figure who cleansed the earthly altar in three years, 168–165 or 167–164 B.C., but this local event cannot exhaust a cosmic end-time vision.",
               "Misconception: The second temple was restored by Zerubbabel in Ezra. History: later rededicated by the Maccabees; Daniel 8:14 focuses on the celestial sanctuary (Fundamental Belief 24)."
             ]
           },
           {
-            "question": "A Bible student notices that English translations often render Daniel 8:14 as 'then shall the sanctuary be cleansed,' and wonders why the Hebrew verb is nitsdaq (נִצְדַּק) (Seventh-day Adventist Bible Commentary, vol. 4, on Daniel 8:14). What is the theological significance?",
+            "question": "A Bible student notices that English translations often render Daniel 8:14 as 'then shall the sanctuary be cleansed,' and wonders why the Hebrew verb is nitsdaq (נִצְדַּק) (Bible Commentary, vol. 4, on Daniel 8:14). What is the theological significance?",
             "options": [
               "Nitsdaq refers strictly to the domestic physical washing of temple flagstones using water and lye to remove sacrificial bloodstains after festivals.",
               "The verb indicates that the sanctuary structure would be completely demolished and supplanted by a secular administrative government building.",
@@ -4772,7 +4772,7 @@ BIBLICAL REQUIREMENT:            ANTIOCHUS IV EPIPHANES:           HISTORICIST R
             ],
             "explanation": "Strong's H6663 (nitsdaq) is forensic (Deut 25:1, Job 4:17). The cleansing of the heavenly sanctuary is not the removal of physical dirt, but the vindication of God's character and government in judgment.",
             "diagnostics": [
-              "Misconception: nitsdaq: be justified, be vindicated (Seventh-day Adventist Bible Commentary, vol. 4, on Daniel 8:14).",
+              "Misconception: nitsdaq: be justified, be vindicated (Bible Commentary, vol. 4, on Daniel 8:14).",
               "Misconception: Daniel 8:14 announces the restoration and vindication of the sanctuary, not its permanent architectural demolition.",
               "",
               "Misconception: Hebrews 9–10 makes clear that animal sacrifices ceased at the cross; Daniel 8:14 centers on Christ's high-priestly ministry in heaven."
@@ -4839,7 +4839,7 @@ BIBLICAL REQUIREMENT:            ANTIOCHUS IV EPIPHANES:           HISTORICIST R
             },
             {
               do: "Read Daniel 8:14 in Scripture, then open Leviticus 16:30 in the Scripture dock. Tap the load-bearing line for nitsdaq and write how the Hebrew word differs from a simple cleaning.",
-              why: "Daniel 8:14 answers the question with two thousand three hundred days, then shall the sanctuary be cleansed. The Hebrew verb nitsdaq means to be justified, put right, or vindicated, a courtroom word rather than a mop-and-bucket cleaning. Leviticus 16:30 cleanses 'you,' the people. The sanctuary atonement is Leviticus 16:16, and the Most Holy entry is Leviticus 16:15, 'within the vail.' If you hear only physical washing, Antiochus Epiphanes's three-year desecration in a period of three years, 168–165 or 167–164 B.C. might seem sufficient (Seventh-day Adventist Bible Commentary, vol. 4, on Daniel 8:14). If you connect nitsdaq to Leviticus 16, you see that 8:14 belongs with the books opened in Daniel 7:9 through 7:10 and points to a heavenly judgment work rather than a short earthly interruption."
+              why: "Daniel 8:14 answers the question with two thousand three hundred days, then shall the sanctuary be cleansed. The Hebrew verb nitsdaq means to be justified, put right, or vindicated, a courtroom word rather than a mop-and-bucket cleaning. Leviticus 16:30 cleanses 'you,' the people. The sanctuary atonement is Leviticus 16:16, and the Most Holy entry is Leviticus 16:15, 'within the vail.' If you hear only physical washing, Antiochus Epiphanes's three-year desecration in a period of three years, 168–165 or 167–164 B.C. might seem sufficient (Bible Commentary, vol. 4, on Daniel 8:14). If you connect nitsdaq to Leviticus 16, you see that 8:14 belongs with the books opened in Daniel 7:9 through 7:10 and points to a heavenly judgment work rather than a short earthly interruption."
             },
             {
               do: "Read Daniel 8:17 through 8:19 and 8:27 in Scripture. Write what Gabriel says about the time of the end and note Daniel's reaction when no one could explain the vision.",
@@ -5543,7 +5543,7 @@ Restore City                        Messiah               Christ                
           },
           end: {
             title: "Michael standing is next",
-            nextWhy: "Daniel 10–12 is next: the man in linen, the long march of chapter 11, the Adventist reading of the close of human probation when Michael stands, and the promise of 12:13.",
+            nextWhy: "Daniel 10–12 is next: the man in linen, the long march of chapter 11, the historicist reading of the close of human probation when Michael stands, and the promise of 12:13.",
             spotlight: "next-sheet-btn"
           }
         }
@@ -5565,7 +5565,7 @@ Restore City                        Messiah               Christ                
             "How do all eleven sittings work together to build unshakeable confidence in Scripture?"
           ]
         },
-        scripture: "Daniel 10:1 - 12:13 &bull; Hiddekel. History: the Tigris (ABSG 2020 Q1, lesson 13); 536/535 B.C. (Seventh-day Adventist Bible Commentary, vol. 4, on Daniel 10:1)",
+        scripture: "Daniel 10:1 - 12:13 &bull; Hiddekel. History: the Tigris (ABSG 2020 Q1, lesson 13); 536/535 B.C. (Bible Commentary, vol. 4, on Daniel 10:1)",
         audio: {
           src: "assets/study/audio/sitting-10.mp3",
           kind: "overview",
@@ -5708,22 +5708,22 @@ Restore City                        Messiah               Christ                
 
 <div class="from-last-sitting">
   <span class="from-last-sitting-kicker">From the last sitting · Sheet 9</span>
-  <p>In Sitting 9, Gabriel returned to answer Daniel's prayer and solve the unexplained 2,300 days of Daniel 8. By severing seventy weeks (490 prophetic years) from the parent timeline, the prophecy established its starting anchor in Artaxerxes' 457 B.C. decree. That decree nailed the baptism of Messiah to A.D. 27 and His crucifixion to the middle of the seventieth week, A.D. 31, providing the mathematical anchor that carries the full 2,300 years to 1844. Now, in the third year of Cyrus (History: 536/535 B.C., Seventh-day Adventist Bible Commentary, vol. 4, on Daniel 10:1), Daniel receives the final, panoramic revelation of the book: an unbroken prophetic narrative stretching from the Persian court to the resurrection of the dead.</p>
+  <p>In Sitting 9, Gabriel returned to answer Daniel's prayer and solve the unexplained 2,300 days of Daniel 8. By severing seventy weeks (490 prophetic years) from the parent timeline, the prophecy established its starting anchor in Artaxerxes' 457 B.C. decree. That decree nailed the baptism of Messiah to A.D. 27 and His crucifixion to the middle of the seventieth week, A.D. 31, providing the mathematical anchor that carries the full 2,300 years to 1844. Now, in the third year of Cyrus (History: 536/535 B.C., Bible Commentary, vol. 4, on Daniel 10:1), Daniel receives the final, panoramic revelation of the book: an unbroken prophetic narrative stretching from the Persian court to the resurrection of the dead.</p>
 </div>
 
 <div class="part-header" id="intro">
   <p class="part-kicker">Introduction</p>
   <h3>The Final Vision by the Great River Hiddekel (Tigris)</h3>
-  <p class="part-subtitle">Daniel 10:1–4 · Hiddekel. History: the Tigris (ABSG 2020 Q1, lesson 13); 536/535 B.C. (Seventh-day Adventist Bible Commentary, vol. 4, on Daniel 10:1)</p>
+  <p class="part-subtitle">Daniel 10:1–4 · Hiddekel. History: the Tigris (ABSG 2020 Q1, lesson 13); 536/535 B.C. (Bible Commentary, vol. 4, on Daniel 10:1)</p>
 </div>
 
-<p>In the third year of Cyrus king of Persia (History: 536/535 B.C., Seventh-day Adventist Bible Commentary, vol. 4, on Daniel 10:1), a revelation was given to Daniel, whose name was called Belteshazzar (Daniel 10:1). The decree of Cyrus had already permitted the exiles to return to Jerusalem (Ezra 1:1–4), yet only a small remnant had returned, and there was fierce local opposition to the rebuilding of the temple (Ezra 4:1–5). Deeply burdened for the future of his people and the holy city, the aged prophet entered a three-week partial fast, eating no pleasant bread, meat, or wine, nor anointing himself at all for three full weeks (Daniel 10:2–3).</p>
+<p>In the third year of Cyrus king of Persia (History: 536/535 B.C., Bible Commentary, vol. 4, on Daniel 10:1), a revelation was given to Daniel, whose name was called Belteshazzar (Daniel 10:1). The decree of Cyrus had already permitted the exiles to return to Jerusalem (Ezra 1:1–4), yet only a small remnant had returned, and there was fierce local opposition to the rebuilding of the temple (Ezra 4:1–5). Deeply burdened for the future of his people and the holy city, the aged prophet entered a three-week partial fast, eating no pleasant bread, meat, or wine, nor anointing himself at all for three full weeks (Daniel 10:2–3).</p>
 
 <p>On the twenty-fourth day of the first month (Nisan) (Esther 3:7), as Daniel stood beside the great river Hiddekel (the ancient name for the Tigris) (ABSG 2020 Q1, lesson 13), he lifted up his eyes and looked upon an awe-inspiring celestial vision.</p>
 
 <div class="framework-card">
   <p class="framework-card-kicker">Structural Unity: Chapters 10, 11, and 12 Form One Single Vision</p>
-  <p>History: one section, Daniel 10:1-12:4 (ABSG 2020 Q1, lesson 13), in 536/535 B.C. (Seventh-day Adventist Bible Commentary, vol. 4, on Daniel 10:1). Daniel 12:5-13 continues at the river after 12:4:</p>
+  <p>History: one section, Daniel 10:1-12:4 (ABSG 2020 Q1, lesson 13), in 536/535 B.C. (Bible Commentary, vol. 4, on Daniel 10:1). Daniel 12:5-13 continues at the river after 12:4:</p>
   <ul class="list-disc pl-5 my-2 space-y-1">
     <li><strong>Chapter 10 is the Prologue and Theophany:</strong> Daniel fasts by the Tigris; the glorious Man in linen appears; Gabriel pulls back the veil on the unseen cosmic warfare behind earthly empires.</li>
     <li><strong>Chapter 11 is the Detailed March of History:</strong> Gabriel narrates literal geopolitical history in advance without symbolic beasts: from Persian succession, through Alexander the Great and the Hellenistic Ptolemaic/Seleucid wars, to Pagan Rome, the crucifixion of the Prince of the covenant (11:22), and the blasphemous career of Papal Rome (11:31–39).</li>
@@ -5782,7 +5782,7 @@ Restore City                        Messiah               Christ                
     <li><strong>3. Hellenistic Wars: Kings of the North and South (11:5–15):</strong> Syria/Mesopotamia under the Seleucids became the "King of the North" (geographically north of Judea), while Egypt under the Ptolemies became the "King of the South" (south of Judea). History: their dynastic conflicts, treaties, and battles raged back and forth across the land of Israel.</li>
     <li><strong>4. Imperial Pagan Rome (11:16–22):</strong> Rome entered the Levant under Pompey (63 B.C.) and Julius Caesar. Under Tiberius Caesar, <strong>"the prince of the covenant"</strong> was broken (Daniel 11:22). This refers to the crucifixion of Jesus Christ (ABSG 2020 Q1, lesson 12) on Calvary (Luke 23:33) in A.D. 31 under Roman civil authority (Pontius Pilate, Matthew 27:2). (While some modern critical scholars propose the high priest Onias III, the historicist consensus maintains that Christ is the true Prince of the Covenant foretold in Daniel 9:25–27.)</li>
     <li><strong>5. Papal Rome Phase (11:31–39):</strong> Roman power transitions into the ecclesiastical phase: <em>"arms shall stand on his part, and they shall pollute the sanctuary of strength, and shall take away the daily sacrifice, and they shall place the abomination that maketh desolate"</em> (11:31). The Hebrew behind “daily” is again <em>tamid</em>. Just as in Daniel 7:25 and Daniel 8:11–12, this power usurps Christ's heavenly priesthood, persecutes the faithful saints for a time, times, and half a time, and exalts itself above all gods.</li>
-    <li><strong>6. The Time of the End (11:40–45):</strong> <em>"And at the time of the end shall the king of the south push at him..."</em> (11:40). The "time of the end" is dated from <strong>1798</strong>, when General Berthier captured Pope Pius VI — the event that closed the 1,260-year period. The rise of papal power was gradual (Seventh-day Adventist Bible Commentary, vol. 4, on the 1798 note). The same is true of its decline. Though the papacy continued, its power was shorn, so 1798 marks the end of the prophetic period rather than a single day on which papal power vanished. Verses 40 through 45 outline the final geopolitical conflicts leading up to the close of human history.</li>
+    <li><strong>6. The Time of the End (11:40–45):</strong> <em>"And at the time of the end shall the king of the south push at him..."</em> (11:40). The "time of the end" is dated from <strong>1798</strong>, when General Berthier captured Pope Pius VI — the event that closed the 1,260-year period. The rise of papal power was gradual (Bible Commentary, vol. 4, on the 1798 note). The same is true of its decline. Though the papacy continued, its power was shorn, so 1798 marks the end of the prophetic period rather than a single day on which papal power vanished. Verses 40 through 45 outline the final geopolitical conflicts leading up to the close of human history.</li>
   </ul>
 </div>
 

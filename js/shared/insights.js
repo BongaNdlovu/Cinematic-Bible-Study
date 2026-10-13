@@ -435,8 +435,7 @@
       '</select>' +
       '<select id="insight-background" aria-label="Religious or educational background">' +
         '<option value="">Background</option>' +
-        '<option value="adventist">Seventh-day Adventist</option>' +
-        '<option value="protestant">Other Protestant</option>' +
+        '<option value="protestant">Protestant</option>' +
         '<option value="catholic">Catholic</option>' +
         '<option value="other">Other / none</option>' +
         '<option value="prefer_not">Prefer not to say</option>' +
