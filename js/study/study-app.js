@@ -2481,6 +2481,11 @@
       return /^assets\/study\/diagrams\/[a-z0-9-]+\.jpg$/.test(src) ? src : '';
     }
 
+    // How many artwork layers the reader keeps. One behind the other is enough
+    // for a single step change; a third keeps a fast run of steps from snapping
+    // a layer's source out from under a fade that is still running.
+    const STORY_PHOTO_LAYERS = 3;
+
     function bodyStory(spec, steps, canResolve, start) {
       const n = steps.length;
       const cards = steps.map((step, i) => {
@@ -2503,6 +2508,7 @@
             (step.title ? '<h4 class="story-title">' + escapeStudy(step.title) + '</h4>' : '') +
             diagramCite(step.cite, canResolve) +
             (step.text ? '<p class="story-text">' + escapeStudy(step.text) + '</p>' : '') +
+            (step.detail ? '<p class="story-detail">' + escapeStudy(step.detail) + '</p>' : '') +
           '</div>' +
         '</article>';
       }).join('');
@@ -2539,6 +2545,9 @@
         '</div>' +
         '<div class="story-read" hidden role="dialog" aria-modal="true" aria-label="' + escapeStudy(spec.title || 'Story') + '">' +
           '<div class="story-read-bg" aria-hidden="true"></div>' +
+          '<div class="story-read-photos" aria-hidden="true">' +
+            '<img class="story-read-photo" alt="" decoding="async">'.repeat(STORY_PHOTO_LAYERS) +
+          '</div>' +
           '<div class="story-read-veil" aria-hidden="true"></div>' +
           '<button class="story-back" type="button">Back</button>' +
           '<div class="story-read-panel">' +
@@ -2547,12 +2556,15 @@
             '<div class="story-read-rule" aria-hidden="true"></div>' +
             '<div class="story-read-cite"></div>' +
             '<div class="story-read-copy"></div>' +
+            '<div class="story-read-detail"></div>' +
             '<div class="story-read-note"></div>' +
+            '<div class="story-read-progress" role="group" aria-label="Movements in this diagram"></div>' +
             '<div class="story-read-nav">' +
               '<button type="button" data-read-prev>Previous</button>' +
               '<p class="story-read-count"></p>' +
               '<button type="button" data-read-next>Next</button>' +
             '</div>' +
+            '<p class="story-read-hint">Arrow keys move between movements. Escape closes.</p>' +
           '</div>' +
         '</div>' +
       '</div>';
@@ -2573,12 +2585,16 @@
       const launch = figure.querySelector('.story-fullscreen');
       const reader = figure.querySelector('.story-read');
       const readBg = figure.querySelector('.story-read-bg');
+      const readPhotos = Array.from(figure.querySelectorAll('.story-read-photo'));
       const readKicker = figure.querySelector('.story-read-kicker');
       const readTitle = figure.querySelector('.story-read-title');
       const readCite = figure.querySelector('.story-read-cite');
       const readCopy = figure.querySelector('.story-read-copy');
+      const readDetail = figure.querySelector('.story-read-detail');
       const readNote = figure.querySelector('.story-read-note');
+      const readProgress = figure.querySelector('.story-read-progress');
       const readCount = figure.querySelector('.story-read-count');
+      const readPanel = figure.querySelector('.story-read-panel');
       const readPrev = figure.querySelector('[data-read-prev]');
       const readNext = figure.querySelector('[data-read-next]');
       const readBack = figure.querySelector('.story-back');
@@ -2589,6 +2605,13 @@
       let timer = null;
       let pointerStartX = null;
       let returnFocus = null;
+      let closeTimer = 0;
+      let openFrame = 0;
+      let shiftTimer = 0;
+      // Artwork layers are reused round-robin; `photoZ` keeps the newest one on
+      // top so an older fade can finish underneath it without a source swap.
+      let photoCursor = 0;
+      let photoZ = 0;
 
       const titleOf = (index) => {
         const card = cards[index];
@@ -2620,12 +2643,102 @@
         next.disabled = current === cards.length - 1;
         live.textContent = 'Movement ' + (current + 1) + ' of ' + cards.length + ' \u00b7 ' + titleOf(current);
       };
+      // The artwork is the subject of a movement, so a step change is a fade of
+      // one layer over the last rather than a background swap. `prime` places
+      // the first layer without animating, for the moment the reader opens.
+      //
+      // Two rules keep the frame from going dark:
+      //   * the outgoing layer keeps `is-current` until the incoming one has
+      //     actually decoded, so a slow image never leaves a hole;
+      //   * every request carries a token, and a handler whose token is stale
+      //     does nothing — otherwise a slow first request resolves after a
+      //     later one and fades the wrong movement's artwork in on top.
+      let photoSeq = 0;
+      const refreshHasPhoto = () => {
+        const any = readPhotos.some((layer) => !!layer.getAttribute('src'));
+        reader.classList.toggle('has-photo', any);
+      };
+      const setPhoto = (src, prime) => {
+        if (!readPhotos.length) return;
+        if (!src) {
+          readPhotos.forEach((layer) => { layer.classList.remove('is-current'); layer.removeAttribute('src'); });
+          readBg.style.backgroundImage = '';
+          refreshHasPhoto();
+          return;
+        }
+        const layer = readPhotos[photoCursor % readPhotos.length];
+        photoCursor += 1;
+        photoZ += 1;
+        photoSeq += 1;
+        const token = photoSeq;
+        layer.style.setProperty('--photo-z', String(photoZ));
+        if (!prime) layer.style.transition = 'none';
+        layer.setAttribute('src', src);
+        refreshHasPhoto();
+        const reveal = () => {
+          if (token !== photoSeq) {
+            // A newer movement took over while this image was in flight.
+            layer.style.transition = '';
+            refreshHasPhoto();
+            return;
+          }
+          if (!prime) layer.style.transition = '';
+          layer.classList.add('is-current');
+          readPhotos.forEach((other) => { if (other !== layer) other.classList.remove('is-current'); });
+          readBg.style.backgroundImage = 'url("' + src + '")';
+          refreshHasPhoto();
+        };
+        if (layer.complete) {
+          // Force the new source to lay out at zero opacity before the fade
+          // runs, so the browser animates the layer instead of a decode.
+          if (prime) reveal();
+          else { void layer.offsetWidth; reveal(); }
+        } else {
+          layer.addEventListener('load', reveal, { once: true });
+          // A movement whose artwork will not decode still has to show its copy,
+          // so the dark ground stays rather than an empty overlay.
+          layer.addEventListener('error', () => {
+            if (token !== photoSeq) return;
+            layer.removeAttribute('src');
+            layer.style.transition = '';
+            readBg.style.backgroundImage = '';
+            refreshHasPhoto();
+          }, { once: true });
+        }
+      };
+
+      const buildProgress = () => {
+        if (!readProgress) return;
+        readProgress.replaceChildren();
+        if (cards.length < 2) { readProgress.hidden = true; return; }
+        readProgress.hidden = false;
+        cards.forEach((card, index) => {
+          const pip = document.createElement('button');
+          pip.type = 'button';
+          pip.className = 'story-read-pip';
+          pip.setAttribute('data-read-pip', String(index));
+          const heading = card.querySelector('.story-title');
+          const label = (card.querySelector('.story-kicker') || {}).textContent || (heading ? heading.textContent : '');
+          pip.setAttribute('aria-label', 'Movement ' + (index + 1) + (label ? ': ' + label : ''));
+          if (index === current) { pip.classList.add('is-active'); pip.setAttribute('aria-current', 'true'); }
+          readProgress.appendChild(pip);
+        });
+      };
+
+      const shiftPanel = () => {
+        if (!readPanel) return;
+        readPanel.classList.remove('is-shifting');
+        window.clearTimeout(shiftTimer);
+        shiftTimer = window.setTimeout(() => readPanel.classList.add('is-shifting'), 460);
+      };
+
       const fillRead = () => {
         const card = cards[current];
         const kicker = card.querySelector('.story-kicker');
         const title = card.querySelector('.story-title');
         const cite = card.querySelector('.chain-cite');
         const text = card.querySelector('.story-text');
+        const detail = card.querySelector('.story-detail');
         const note = figure.querySelector('.chain-note');
         const img = card.querySelector('.story-photo');
         readKicker.textContent = kicker ? kicker.textContent : '';
@@ -2633,50 +2746,140 @@
         readTitle.textContent = title ? title.textContent : '';
         readCopy.textContent = text ? text.textContent : '';
         readCopy.hidden = !text;
+        // The movement's own line, when it has one. The shared diagram note
+        // repeats on every movement, so a step without its own detail simply
+        // does not print one.
+        readDetail.textContent = detail ? detail.textContent : '';
+        readDetail.hidden = !detail;
         readNote.textContent = note ? note.textContent : '';
         readNote.hidden = !note;
         readCite.replaceChildren();
         if (cite) readCite.appendChild(cite.cloneNode(true));
-        if (img && img.getAttribute('src')) {
-          readBg.style.backgroundImage = 'url("' + img.getAttribute('src') + '")';
-          reader.classList.add('has-photo');
-        } else {
-          readBg.style.backgroundImage = '';
-          reader.classList.remove('has-photo');
-        }
+        const src = img && img.getAttribute('src') ? img.getAttribute('src') : '';
+        setPhoto(src, !reader.classList.contains('has-photo'));
         readCount.textContent = (current + 1) + ' of ' + cards.length;
         readPrev.disabled = current === 0;
         readNext.disabled = current === cards.length - 1;
+        if (readProgress) {
+          Array.from(readProgress.querySelectorAll('.story-read-pip')).forEach((pip, index) => {
+            pip.classList.toggle('is-active', index === current);
+            if (index === current) pip.setAttribute('aria-current', 'true');
+            else pip.removeAttribute('aria-current');
+          });
+        }
+      };
+      // One reader is open at a time, so only the reader that opened last keeps
+      // the global key listener attached. It runs in the capture phase, so
+      // stopping propagation here keeps the page's own Ctrl/Cmd+Arrow sitting
+      // navigation from firing on the same press, and keeps the page's Escape
+      // handling from firing behind the overlay.
+      // Layers the page can stack above the reader. Each runs its own Escape
+      // handler on the document, so the reader has to stand down while one is
+      // open rather than stopping propagation ahead of it.
+      const ABOVE_READER = '#infographic-modal, #certificate-panel, #certificate-review-modal';
+      function anotherLayerOwnsEscape() {
+        return Array.from(document.querySelectorAll(ABOVE_READER)).some((el) => !el.hidden);
+      }
+      function onDocumentKey(event) {
+        if (reader.hidden) return;
+        if (document.body.lastElementChild !== reader) return;
+        const nav = event.key === 'ArrowRight' || event.key === 'ArrowLeft';
+        const close = event.key === 'Escape';
+        if (!nav && !close) return;
+        // A layer stacked above the reader keeps its own Escape.
+        if (close && anotherLayerOwnsEscape()) return;
+        event.preventDefault();
+        event.stopPropagation();
+        if (close) { closeRead(); return; }
+        go(current + (event.key === 'ArrowRight' ? 1 : -1), true);
+      }
+      const clearShiftTimer = () => {
+        window.clearTimeout(shiftTimer);
+        shiftTimer = 0;
+        readPanel.classList.remove('is-shifting');
       };
       const closeRead = () => {
         if (reader.hidden) return;
-        reader.hidden = true;
-        document.documentElement.classList.remove('story-read-open');
-        if (stage.isConnected) stage.appendChild(reader);
-        else reader.remove();
-        const backTo = returnFocus;
-        returnFocus = null;
-        if (backTo && typeof backTo.focus === 'function') backTo.focus();
+        window.clearTimeout(closeTimer);
+        window.cancelAnimationFrame(openFrame);
+        document.removeEventListener('keydown', onDocumentKey, true);
+        reader.classList.remove('is-open');
+        // Stop the panel's entry animation from being re-armed on the way out.
+        clearShiftTimer();
+        // The overlay is faded, not cut: hide it once the fade has run. A timer
+        // backs up the transition event, which a hidden tab will never deliver.
+        // `is-closing` marks the fade-out in flight: a reopen clears it, so a
+        // late transitionend or timer can never hide an overlay the reader has
+        // already opened again.
+        reader.classList.add('is-closing');
+        const finish = () => {
+          if (!reader.classList.contains('is-closing')) return;
+          reader.classList.remove('is-closing');
+          reader.removeEventListener('transitionend', onEnd);
+          reader.hidden = true;
+          reader.classList.remove('is-open', 'has-photo');
+          // Drop the artwork so the next open fades its own movement up from
+          // the dark ground instead of showing the last one's still.
+          readPhotos.forEach((layer) => { layer.classList.remove('is-current'); layer.removeAttribute('src'); });
+          readBg.style.backgroundImage = '';
+          document.documentElement.classList.remove('story-read-open');
+          // The reader is about to leave the body, so focus must not be left
+          // standing on one of its controls.
+          if (document.activeElement && reader.contains(document.activeElement)) document.activeElement.blur();
+          if (stage.isConnected) stage.appendChild(reader);
+          else reader.remove();
+          const backTo = returnFocus;
+          returnFocus = null;
+          if (backTo && typeof backTo.focus === 'function' && backTo.isConnected) backTo.focus();
+        };
+        const onEnd = (event) => { if (event.target === reader && event.propertyName === 'opacity') finish(); };
+        reader.addEventListener('transitionend', onEnd);
+        closeTimer = window.setTimeout(finish, 900);
       };
       const openRead = () => {
         stopPlayback();
-        fillRead();
+        window.clearTimeout(closeTimer);
+        // Cancel any fade-out still in flight: this open wins.
+        reader.classList.remove('is-closing');
         returnFocus = document.activeElement;
         document.body.appendChild(reader);
         reader.hidden = false;
+        reader.classList.remove('is-open');
+        buildProgress();
+        fillRead();
+        clearShiftTimer();
         document.documentElement.classList.add('story-read-open');
+        // Escape and the arrows answer wherever focus sits: a reader that only
+        // closes while its own button holds focus strands a keyboard visitor the
+        // moment the lesson behind it moves focus.
+        document.addEventListener('keydown', onDocumentKey, true);
+        // One frame with the overlay transparent, then fade it and let the panel
+        // rise behind the artwork.
+        openFrame = window.requestAnimationFrame(() => reader.classList.add('is-open'));
         readBack.focus();
       };
       const go = (index, manual) => {
         if (manual) stopPlayback();
         current = Math.max(0, Math.min(cards.length - 1, index));
         render();
-        if (!reader.hidden) fillRead();
+        if (!reader.hidden) {
+          fillRead();
+          shiftPanel();
+        }
       };
 
       prev.addEventListener('click', () => go(current - 1, true));
       next.addEventListener('click', () => go(current + 1, true));
       steps.forEach((step) => step.addEventListener('click', () => go(Number(step.getAttribute('data-index')), true)));
+      // A reader that is torn down with the sheet it belongs to must not keep
+      // answering keys for a lesson that is no longer on the page.
+      reader.disarmStoryReader = () => {
+        document.removeEventListener('keydown', onDocumentKey, true);
+        window.clearTimeout(closeTimer);
+        window.clearTimeout(shiftTimer);
+        window.cancelAnimationFrame(openFrame);
+        if (stage.isConnected) stage.appendChild(reader);
+      };
       cards.forEach((card, index) => card.addEventListener('click', (event) => {
         if (event.target.closest('.chain-cite')) return;
         if (index !== current) go(index, true);
@@ -2684,15 +2887,21 @@
       }));
       launch.addEventListener('click', openRead);
       readBack.addEventListener('click', closeRead);
+      if (readProgress) {
+        readProgress.addEventListener('click', (event) => {
+          const pip = event.target.closest('[data-read-pip]');
+          if (!pip) return;
+          go(Number(pip.getAttribute('data-read-pip')), true);
+        });
+      }
       reader.addEventListener('click', (event) => {
         if (event.target.closest('.chain-cite')) closeRead();
       });
       readPrev.addEventListener('click', () => go(current - 1, true));
       readNext.addEventListener('click', () => go(current + 1, true));
+      // Escape and the arrows are handled once, at the document, so they work
+      // whether or not focus is standing on one of the reader's own controls.
       reader.addEventListener('keydown', (event) => {
-        if (event.key === 'Escape') { event.preventDefault(); event.stopPropagation(); closeRead(); }
-        if (event.key === 'ArrowRight') { event.preventDefault(); go(current + 1, true); }
-        if (event.key === 'ArrowLeft') { event.preventDefault(); go(current - 1, true); }
         if (event.key !== 'Tab') return;
         const focusable = Array.from(reader.querySelectorAll('button')).filter((button) => !button.disabled);
         if (!focusable.length) return;
@@ -2742,7 +2951,12 @@
     }
 
     function renderSheetDiagrams(data) {
-      document.querySelectorAll('body > .story-read').forEach((node) => node.remove());
+      document.querySelectorAll('body > .story-read').forEach((node) => {
+        // Unhook the reader before it leaves the page: its key listener is
+        // attached to the document, not to the node.
+        if (typeof node.disarmStoryReader === 'function') node.disarmStoryReader();
+        node.remove();
+      });
       document.documentElement.classList.remove('story-read-open');
       const sheet = data || {};
       // Sittings mid-migration may still carry the single-diagram field.

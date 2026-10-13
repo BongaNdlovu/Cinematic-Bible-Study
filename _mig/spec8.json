@@ -10,17 +10,17 @@
           "Churning Sea & Stormy Winds (Nations)",
           "Unclean Wild Predators (Lion, Bear, etc)",
           "Focus: Geopolitical Empire & Court",
-          "Language: Imperial Aramaic (Dan 2-7)"
+          "Language: Imperial Aramaic (Daniel 2:4b–7:28)"
         ]
       },
       {
         "role": "DANIEL 8",
         "title": "Sanctuary Theater: The Holy Place",
         "points": [
-          "The Ulai Canal at Susa (Imperial Sanctuary)",
+          "The Ulai Canal at Susa",
           "Clean Sacrificial Animals (Ram, He-Goat)",
           "Focus: The Daily (Tamid) & Sanctuary Cleansing",
-          "Language: Sacred Hebrew (Dan 8-12)"
+          "Language: Hebrew (Dan 8-12)"
         ]
       }
     ]
@@ -28,41 +28,45 @@
   "s8-2": {
     "kind": "table",
     "title": "The Animals and Succession in Daniel 8:3-8, 20-22",
-    "head": ["Symbol in Prophecy", "Interpretation", "Historical Reality"],
+    "head": [
+      "Symbol in Prophecy",
+      "Interpretation",
+      "Historical Reality"
+    ],
     "rows": [
       {
         "cells": [
           "Two-Horned Ram (8:3, 20)",
           "Kings of Media & Persia",
-          "Medo-Persian Empire (539-331 B.C.)"
+          "History: Medo-Persian Empire (539-331 B.C.) (Bible Commentary, vol. 4, on Daniel 8:4)"
         ]
       },
       {
         "cells": [
           "Rough Male Goat (8:5, 21)",
           "King of Grecia",
-          "Greco-Macedonian Empire (331 B.C.)"
+          "History: Greco-Macedonian Empire (331 B.C.)"
         ]
       },
       {
         "cells": [
           "Notable Large Horn (8:5, 21)",
           "The First King",
-          "Alexander the Great (d. 323 B.C.)"
+          "History: Alexander the Great (d. June 323 B.C.) (Adult Sabbath School Bible Study Guide, 2020 Q1, Lesson 9)"
         ]
       },
       {
         "cells": [
           "Four Successor Horns (8:8)",
           "Four Diadochi Realms",
-          "Cassander, Lysimachus, Seleucus, Ptolemy"
+          "History: Cassander, Lysimachus, Seleucus, Ptolemy"
         ]
       }
     ]
   },
   "s8-3": {
     "kind": "table",
-    "title": "The Three Criteria That Eliminate Antiochus IV Epiphanes",
+    "title": "The Four Criteria That Eliminate Antiochus IV Epiphanes",
     "head": [
       "Biblical Requirement",
       "Antiochus IV Epiphanes",
@@ -71,14 +75,14 @@
     "rows": [
       {
         "cells": [
-          "1. \"Exceedingly Great\" (8:9)",
-          "Tributary to Rome; minor king",
-          "Crushed the ancient world; ruled millennia"
+          "1. \"Exceeding great\" (8:9)",
+          "In Rome's hands",
+          "Pagan and papal"
         ]
       },
       {
         "cells": [
-          "2. \"Time of the End\" (8:17, 19)",
+          "2. \"the time of the end\" (8:17); \"the time appointed\" (8:19)",
           "Died in 164 B.C. (Antiquity)",
           "Extends to the end of time"
         ]
@@ -86,14 +90,14 @@
       {
         "cells": [
           "3. 2,300 Evening-Mornings (8:14)",
-          "Desecration lasted ~3 yrs (1080d)",
+          "Desecration lasted ~3 yrs",
           "2,300 prophetic years (457 B.C.-1844 A.D.)"
         ]
       },
       {
         "cells": [
           "4. Verb Nitsdaq (Vindicated)",
-          "Physical altar cleansed (Taher)",
+          "Physical altar cleansed",
           "Heavenly sanctuary vindicated (Nitsdaq)"
         ]
       }

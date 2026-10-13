@@ -6,17 +6,20 @@
       {
         "role": "Intellectual awe",
         "title": "Acknowledges God as \"a revealer of secrets\"",
-        "cite": "Daniel 2"
+        "cite": "Daniel 2:38",
+        "detail": "The confession costs him nothing and does not outlast the chapter. The same court that hears it will be ordered to worship an image in Daniel 3, and the king who said it will be the one giving the order."
       },
       {
         "role": "Reluctant toleration",
         "title": "Acknowledges God as \"able to deliver\"",
-        "cite": "Daniel 3"
+        "cite": "Daniel 3:17–18",
+        "detail": "The words in verse 17 belong to the three Hebrews, not to the king. His own verdict comes at 3:29, and it still leaves the image he set up standing in the plain of Dura."
       },
       {
         "role": "Personal submission & worship",
         "title": "Acknowledges God as \"the King of heaven\"",
-        "cite": "Daniel 4"
+        "cite": "Daniel 4:34–35",
+        "detail": "Only the third confession is spoken by a man with nothing left to defend, and only this one ends in praise rather than policy. The chapter closes with the king restored and the throne still God's to give."
       }
     ]
   },
@@ -53,17 +56,20 @@
       {
         "role": "Self-origination",
         "title": "\"I have built\"",
-        "text": "Denies God as Creator/Giver."
+        "text": "Denies God as Creator/Giver.",
+        "detail": "The boast is the mirror of Daniel 2:37, where the same prophet told him that God had given him a kingdom, power, and strength, and glory. Every clause here takes one of those back."
       },
       {
         "role": "Self-sufficiency",
-        "title": "\"By my mighty power\"",
-        "text": "Denies God's sovereign strength."
+        "title": "\"By the might of my power\"",
+        "text": "Denies God's sovereign strength.",
+        "detail": "The kingdom that verse 17 says the Most High gives to whomsoever he will is claimed here as the work of one man's arm."
       },
       {
         "role": "Self-worship",
-        "title": "\"For my majesty\"",
-        "text": "Steals the glory due to God alone."
+        "title": "\"For the honour of my majesty\"",
+        "text": "Steals the glory due to God alone.",
+        "detail": "The sentence is still in his mouth when the voice falls from heaven, and the seven times begin. The rest of the chapter is written by a king who has learned the first two clauses were borrowed."
       }
     ]
   },
@@ -122,10 +128,10 @@
       {
         "role": "THE EMPEROR OF BABYLON",
         "title": "Nebuchadnezzar",
-        "cite": "Daniel 4",
+        "cite": "Daniel 4:30",
         "points": [
-          "A mere man who claimed to be a god",
-          "\"Is not this great Babylon that I...?\"",
+          "A man who set up an image and commanded worship",
+          "\"Is not this great Babylon, that I have built for the house of the kingdom by the might of my power, and for the honour of my majesty?\"",
           "Exalted himself on his palace roof",
           "Driven into the dust as a beast",
           "Humbled by force under divine wrath",
@@ -135,7 +141,7 @@
       {
         "role": "THE KING OF GLORY",
         "title": "Jesus Christ",
-        "cite": "Philippians 2",
+        "cite": "Philippians 2:5–11",
         "points": [
           "God incarnate who took the form of man",
           "\"Not my will, but Thine be done\"",

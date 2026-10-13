@@ -6,17 +6,20 @@
       {
         "role": "605 B.C. - 1st Campaign",
         "title": "Jehoiakim vassalized",
-        "text": "Daniel and the royal youths deported."
+        "text": "Daniel and the royal youths deported.",
+        "detail": "Carchemish is the year Babylon breaks Egypt's hold on the coast, and Jerusalem changes hands as a vassal. The first group taken is the one the book follows: royal youth chosen for the court school. Daniel's exile begins here, not in 586."
       },
       {
         "role": "597 B.C. - 2nd Campaign",
         "title": "Jehoiachin deposed",
-        "text": "Ezekiel and 10,000 deported (BM 21946)."
+        "text": "Ezekiel and 10,000 deported.",
+        "detail": "Jehoiakim's rebellion brings the army back. The young king is carried off with the craftsmen and smiths, and a prophet of the exile goes with them: Ezekiel dates his own call to the fifth year of that captivity among the captives by the river of Chebar. The city still stands."
       },
       {
         "role": "586 B.C. - 3rd Campaign",
         "title": "Zedekiah blinded",
-        "text": "Temple burned; Jerusalem destroyed."
+        "text": "Temple burned; Jerusalem destroyed.",
+        "detail": "The last siege ends with the house of the LORD burned and the walls broken down. Zedekiah flees toward the Jordan, is taken, and is blinded after watching his sons killed. Three campaigns, three separate dates: the book's first verse sits at the first of them."
       }
     ]
   },
@@ -25,12 +28,12 @@
     "title": "The Conflict of Names",
     "steps": [
       {
-        "role": "Hebrew Name (Confessing Yahweh)",
+        "role": "Hebrew Name (Confessing the true God)",
         "title": "Hebrew Name",
         "points": [
           "Daniel (\"God is my Judge\")",
           "Hananiah (\"Yahweh is Gracious\")",
-          "Mishael (\"Who is like God?\")",
+          "Mishael (\"who belongs to God?\")",
           "Azariah (\"Yahweh has Helped\")"
         ]
       },
@@ -54,8 +57,8 @@
         "role": "Royal Table (The World's Offer)",
         "title": "Royal Table",
         "points": [
-          "Typically dedicated to Marduk/Bel",
-          "May have violated Levitical food laws"
+          "Two likely reasons: offered to the gods first, and unclean meats",
+          "Questions about the king's meat stay open"
         ]
       },
       {
@@ -63,7 +66,7 @@
         "title": "Zeroim & Water",
         "cite": "Dan 1:12",
         "points": [
-          "Dedicated entirely to Yahweh",
+          "Would not defile himself",
           "Undefiled nourishment"
         ]
       }
@@ -90,7 +93,7 @@
         "points": [
           "The Son incarnate in an alienated world",
           "Tempted by Satan with bread and kingdoms",
-          "Refused every illicit compromise",
+          "Refused illicit compromise",
           "\"Man shall not live by bread alone\"",
           "The King whose kingdom fills the earth"
         ]

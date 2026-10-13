@@ -28,12 +28,15 @@
   "s9-2": {
     "kind": "timeline",
     "title": "Chathak: Severing 490 Years from the 2,300-Year Parent Timeline",
-    "axis": ["457 B.C.", "1844 A.D."],
+    "axis": [
+      "457 B.C.",
+      "1844 A.D."
+    ],
     "steps": [
       {
         "role": "Parent timeline",
         "title": "2,300 Years",
-        "cite": "Daniel 8:14",
+        "cite": "Daniel 9:24",
         "from": 0,
         "to": 100,
         "segments": [
@@ -67,19 +70,49 @@
   "s9-3": {
     "kind": "table",
     "title": "The Four Persian Decrees Compared",
-    "head": ["Decree", "Date", "Biblical Text", "Scope", "Restores City & State?"],
+    "head": [
+      "Decree",
+      "Date",
+      "Biblical Text",
+      "Scope",
+      "Restores City & State?"
+    ],
     "rows": [
       {
-        "cells": ["1. Cyrus", "538/537 BC", "Ezra 1:1-4", "Temple only", "NO (Temple only)"]
+        "cells": [
+          "1. Cyrus",
+          "538/537 BC",
+          "Ezra 1:1-4",
+          "Temple only",
+          "NO (Temple only)"
+        ]
       },
       {
-        "cells": ["2. Darius I", "520 BC", "Ezra 6:1-12", "Reaffirms Temple", "NO (Temple only)"]
+        "cells": [
+          "2. Darius I",
+          "520 BC",
+          "Ezra 6:1-12",
+          "Reaffirms Temple",
+          "NO (Temple only)"
+        ]
       },
       {
-        "cells": ["3. Artaxerxes I", "457 BC", "Ezra 7:11-26", "Civil law & judges", "YES (Restores & Builds)"]
+        "cells": [
+          "3. Artaxerxes I",
+          "457 BC",
+          "Ezra 7:11-26",
+          "Civil law & judges",
+          "YES (Restores & Builds)"
+        ]
       },
       {
-        "cells": ["4. Artaxerxes I", "444 BC", "Nehemiah 2:1-8", "Wall repair permit", "NO (Executive permit)"]
+        "cells": [
+          "4. Artaxerxes I",
+          "444 BC",
+          "Nehemiah 2:1-8",
+          "Wall repair permit",
+          "NO (Executive permit)"
+        ]
       }
     ]
   },
@@ -91,18 +124,21 @@
         "role": "457 B.C.",
         "title": "Decree of Artaxerxes I",
         "cite": "Ezra 7:11-26",
-        "text": "49 years (7 weeks) to 408 B.C."
+        "text": "49 years (7 weeks) to 408 B.C.",
+        "detail": "Ezra 7 records the seventh year of Artaxerxes I, and this sitting reads it as 457 B.C. It is the decree that restores a civil polity to Jerusalem, which is what Daniel 9:25 asks for. The four decrees are compared in the table above: only this one restores city and state."
       },
       {
         "role": "408 B.C.",
         "title": "Jerusalem Rebuilt",
-        "text": "Troublous times. 434 years (62 weeks) to A.D. 27."
+        "text": "Troublous times. 434 years (62 weeks) to A.D. 27.",
+        "detail": "The first seven weeks cover the rebuilding, and Daniel 9:25 says it happens in troublous times. The sixty-two weeks then run 434 years from 408 B.C. to A.D. 27; the two spans are consecutive, not overlapping."
       },
       {
         "role": "A.D. 27",
         "title": "Baptism of Jesus",
-        "cite": "Mark 1:15",
-        "text": "\"The time is fulfilled\"."
+        "cite": "Luke 3:21",
+        "text": "Anointed at the Jordan. 69 weeks complete.",
+        "detail": "Luke dates the baptism in the fifteenth year of Tiberius Caesar and has Jesus praying as the heaven opens and the Spirit descends on him. Sixty-nine of the seventy weeks land here, which is the checkpoint the reckoning rests on: a dated decree at one end, a dated baptism at the other."
       }
     ]
   },
@@ -113,25 +149,31 @@
       {
         "role": "A.D. 27",
         "title": "Baptism of Jesus",
-        "text": "\"Time is fulfilled\". Ministry to Israel. 3.5 years to A.D. 31."
+        "text": "\"Time is fulfilled\". Ministry to Israel. 3.5 years to A.D. 31.",
+        "detail": "The seventieth week opens where the sixty-ninth closed. Luke 3:21-22 anoints the Messiah at the Jordan, and the first half of the week is the ministry to Israel."
       },
       {
         "role": "A.D. 31",
         "title": "The Cross (Passover)",
         "text": "\"Messiah cut off\". Veil rent; sacrifices cease. 3.5 years to A.D. 34.",
-        "centre": true
+        "centre": true,
+        "detail": "Daniel 9:26 has Messiah cut off, and 9:27 has the sacrifice and oblation cease in the midst of the week. Matthew 27:51 records the veil of the temple rent in two, which is the sign the sitting points to."
       },
       {
         "role": "A.D. 34",
         "title": "Stoning of Stephen",
-        "text": "Gospel to Gentiles. 70 Weeks expire."
+        "text": "Gospel to Gentiles. 70 Weeks expire.",
+        "detail": "The remaining half-week runs from spring A.D. 31 to autumn A.D. 34, when the disciples bear witness in Jerusalem, Judaea, Samaria, and beyond, and Stephen is stoned. The year is this chart's working close, inferred from the half-week and from Acts rather than printed in the text."
       }
     ]
   },
   "s9-6": {
     "kind": "timeline",
     "title": "The Unbroken Continuity from 457 B.C. to 1844 A.D.",
-    "axis": ["457 B.C.", "1844 A.D."],
+    "axis": [
+      "457 B.C.",
+      "1844 A.D."
+    ],
     "steps": [
       {
         "role": "70 Weeks",
@@ -158,7 +200,7 @@
       },
       {
         "title": "2,300 Years",
-        "cite": "Daniel 8:14",
+        "cite": "Daniel 9:24",
         "from": 0,
         "to": 100,
         "segments": [

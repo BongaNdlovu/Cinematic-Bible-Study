@@ -1,11 +1,11 @@
 {
   "s10-1": {
     "kind": "comparison",
-    "title": "The Structure of Daniel's Final Vision (536 B.C.)",
+    "title": "The Structure of Daniel's Final Vision (the third year of Cyrus; other tables print 535)",
     "note": "Daniel 10-12: One Continuous Encounter",
     "steps": [
       {
-        "role": "DANIEL 10",
+        "role": "Daniel 10",
         "title": "Prologue",
         "points": [
           "Fasting by the Tigris",
@@ -16,10 +16,10 @@
         ]
       },
       {
-        "role": "DANIEL 11",
+        "role": "Daniel 11",
         "title": "Historical March",
         "points": [
-          "4 Persian Kings & Xerxes",
+          "Three kings, then Xerxes",
           "Alexander & 4 Diadochi",
           "King of North vs South",
           "Rome: Prince of Covenant cut",
@@ -28,7 +28,7 @@
         ]
       },
       {
-        "role": "DANIEL 12",
+        "role": "Daniel 12",
         "title": "Eschatology",
         "points": [
           "Michael Stands Up",
@@ -75,13 +75,13 @@
       {
         "role": "508 A.D. – 1798 A.D.",
         "title": "1,290 Years",
-        "cite": "Dan 12:4",
+        "cite": "Daniel 12:11",
         "from": 0,
-        "to": 96.6,
+        "to": 97,
         "segments": [
           {
             "from": 0,
-            "to": 96.6,
+            "to": 97,
             "label": "Frankish support of the Roman church → Berthier captures Pope; \"Time of the End\"; Papacy wounded; prophetic unsealing"
           }
         ]

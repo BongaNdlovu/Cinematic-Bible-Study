@@ -1,14 +1,14 @@
 {
   "s5-1": {
     "kind": "comparison",
-    "title": "The Siege of Babylon (539 B.C.)",
+    "title": "The Siege of Babylon (539 B.C.). History: besieged (Ellen G. White, Prophets and Kings, ch. 43); without a battle (ABSG 2020 Q1, Lesson 6)",
     "steps": [
       {
         "role": "Outside the Walls",
         "title": "Outside the Walls",
         "points": [
-          "Medo-Persian army encircling the city",
-          "Persian engineers diverting Euphrates",
+          "History: Medo-Persian army encircling the city",
+          "History: Herodotus, Persian engineers diverting Euphrates",
           "Cyrus fulfilling Isaiah 45:1-3"
         ]
       },
@@ -17,7 +17,7 @@
         "title": "Inside the Palace",
         "points": [
           "1,000 nobles drinking wine",
-          "False security behind massive walls",
+          "History: False security behind massive walls",
           "Belshazzar toasting idols with holy vessels"
         ]
       }
@@ -25,23 +25,26 @@
   },
   "s5-2": {
     "kind": "steps",
-    "title": "The Babylonian Co-Regency Hierarchy",
+    "title": "History: The Babylonian Co-Regency Hierarchy (Adult Sabbath School Bible Study Guide, 2020 Q1, Lesson 6)",
     "steps": [
       {
         "role": "1st Ruler",
         "title": "Nabonidus",
-        "text": "King of Babylon, residing in Tema, Arabia."
+        "text": "History: King of Babylon, residing in Tema, Arabia (Bible Commentary, vol. 4, on Daniel 5:1). ABC 7: The king (was) in Tayma.",
+        "detail": "The Nabonidus Chronicle places the king in Tayma while the city is governed in his name, and the Verse Account agrees. That absence is the reason a second man can hold the throne room on the night the writing appears."
       },
       {
         "role": "2nd Ruler",
         "title": "Belshazzar",
-        "text": "Eldest son, Co-regent ruling inside Babylon."
+        "text": "History: Eldest son, Co-regent ruling inside Babylon (Bible Commentary, vol. 4, on Daniel 5).",
+        "detail": "He offers the third place in the kingdom, not the second, and that is the detail the co-regency explains. In Daniel 5:7 the reward is to be the third ruler, which is what a son ruling under an absent father could actually grant."
       },
       {
         "role": "3rd Ruler",
         "title": "Daniel",
         "cite": "Dan. 5:16, 29",
-        "text": "Offered the highest vacant post."
+        "text": "Offered the highest vacant post.",
+        "detail": "The reward is proclaimed and Daniel is clothed in scarlet the same night the city falls, and he takes it without asking for it. By morning the empire that offered it has changed hands."
       }
     ]
   },
@@ -50,35 +53,35 @@
     "title": "The Wall of Audit (Daniel 5:25-28)",
     "head": [
       "Inscription",
-      "Marketplace Noun",
+      "Aramaic verb",
       "Divine Verb Interpretation"
     ],
     "rows": [
       {
         "cells": [
           "MENE",
-          "A Mina (Currency)",
+          "Numbered",
           "NUMBERED: God has numbered your kingdom and finished it."
         ]
       },
       {
         "cells": [
           "MENE",
-          "(Repeated for emphasis)",
+          "written twice; interpreted once.",
           ""
         ]
       },
       {
         "cells": [
           "TEKEL",
-          "A Shekel (Weight)",
+          "Weighed",
           "WEIGHED: You are weighed on the scales and found wanting."
         ]
       },
       {
         "cells": [
           "UPHARSIN / PERES",
-          "Half-minas / Division",
+          "Divided",
           "DIVIDED: Your kingdom is divided and given to the Medo-Persians."
         ]
       }
@@ -99,12 +102,12 @@
         ]
       },
       {
-        "role": "Daniel 5 / Secular History (539 B.C.)",
-        "title": "Daniel 5 / Secular History (539 B.C.)",
+        "role": "Daniel 5 / Secular History (539 B.C.) (ABSG 2020 Q1, Lesson 6)",
+        "title": "Daniel 5 / Secular History (539 B.C.) (ABSG 2020 Q1, Lesson 6)",
         "points": [
-          "Cyrus the Persian conquers Babylon",
-          "Gates left open during the feast",
-          "Euphrates diverted by Persian engineers",
+          "History: Cyrus the Persian conquers Babylon; Daniel 5:31 names Darius the Mede",
+          "History: Gates left open during the feast",
+          "History: Euphrates diverted by Persian engineers",
           "Replaced by the Chest of Silver (Medo-Persia)"
         ]
       }
@@ -112,7 +115,7 @@
   },
   "s5-5": {
     "kind": "comparison",
-    "title": "The Redemptive Typology",
+    "title": "A Comparison",
     "steps": [
       {
         "role": "Cyrus the Deliverer",
@@ -131,9 +134,8 @@
         "points": [
           "The true Anointed One, the Messiah",
           "Overthrows spiritual Babylon (Rev. 18)",
-          "Conquers the river of sin and death",
           "Liberates sinners from captivity to Satan",
-          "Builds the New Jerusalem, the eternal city"
+          "Prepares a place; the New Jerusalem comes down"
         ]
       }
     ]

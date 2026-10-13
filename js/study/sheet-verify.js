@@ -266,6 +266,20 @@
         ),
         item(
           "scripture",
+          "The road to Daniel 4 runs through two earlier confessions the same king had already been forced to make.",
+          "Daniel 2:38, King James Version",
+          "And wheresoever the children of men dwell, the beasts of the field and the fowls of the heaven hath he given into thine hand, and hath made thee ruler over them all. Thou art this head of gold.",
+          "Daniel 2:46–47 records the first confession, that the king's God is a revealer of secrets. It is intellectual awe, and it does not outlast the chapter. The gold head is Babylon, given, not seized. These two rows carry the three confessions the Daniel 4 diagram walks: 2:47 in awe, 3:29 under compulsion, 4:37 in his own decree."
+        ),
+        item(
+          "scripture",
+          "A king is compelled by a furnace to bless the God of the men he threw into it. The confession is not repentance.",
+          "Daniel 3:17–18, 28–29, King James Version",
+          "Then Nebuchadnezzar spake, and said, Blessed be the God of Shadrach, Meshach, and Abednego… because there is no other God that can deliver after this sort. … If it be so, our God whom we serve is able to deliver us from the burning fiery furnace, and he will deliver us out of thine hand, O king.",
+          "The words of faith in 3:17–18 are the three Hebrews', not the king's, so 3:28–29 is the confession this row documents and 3:17–18 is the answer they gave before it. Read 2:47, 3:29, and 4:37 in order: the same man, three confessions, and only the last one costs him his glory. The image he set up stays standing."
+        ),
+        item(
+          "scripture",
           "The ‘seven times’ pass over one man until he knows Heaven rules. They are not 2,520 years.",
           "Daniel 4:16, 25, King James Version",
           "Let his heart be changed from man’s, and let a beast’s heart be given unto him; and let seven times pass over him. … till thou know that the most High ruleth in the kingdom of men, and giveth it to whomsoever he will.",
@@ -284,6 +298,13 @@
           "Daniel 4:34–35, King James Version",
           "And at the end of the days I Nebuchadnezzar lifted up mine eyes unto heaven, and mine understanding returned unto me, and I blessed the most High… and he doeth according to his will in the army of heaven, and among the inhabitants of the earth: and none can stay his hand, or say unto him, What doest thou?",
           "Daniel 4:34–37 records the king's restored understanding, his praise of the Most High, and his acknowledgment of God's dominion."
+        ),
+        item(
+          "scripture",
+          "The sitting reads the emperor against the King of Glory, and the contrast is Paul's, not an inference from Daniel.",
+          "Philippians 2:5–11, King James Version",
+          "Let this mind be in you, which was also in Christ Jesus: Who, being in the form of God, thought it not robbery to be equal with God: But made himself of no reputation, and took upon him the form of a servant, and was made in the likeness of men: And being found in fashion as a man, he humbled himself, and became obedient unto death, even the death of the cross. Wherefore God also hath highly exalted him, and given him a name which is above every name.",
+          "Set the two thrones side by side. Daniel 4:30 has a king taking the honour of his majesty; Philippians 2:8 has one who humbled himself, and 2:9 is the Father doing the exalting. Read 4:37 immediately after it: the king of Babylon ends by saying that those who walk in pride God is able to abase."
         ),
         item(
           "scripture",

@@ -83,18 +83,21 @@
                 role: "Numbers 14:34",
                 title: "Forty days become forty years",
                 cite: "Numbers 14:34",
-                text: "Forty days spying out Canaan become forty years of wandering: “each day for a year.”"
+                text: "Forty days spying out Canaan become forty years of wandering: “each day for a year.”",
+                detail: "The scale is fixed before Daniel uses it. Numbers gives a day for a year in the wilderness; Ezekiel 4:6 gives the same measure again, “I have appointed thee each day for a year.” Read Daniel 9:24–27 on literal days instead and the seventy weeks come to 490 days, under eighteen months, ending nowhere near Messiah the Prince."
               },
               {
                 centre: true,
                 title: "One scale, stated twice",
-                text: "Scripture fixes its own prophetic measure before Daniel uses it. The rule is given once in the wilderness and once to Ezekiel."
+                text: "Scripture fixes its own prophetic measure before Daniel uses it. The rule is given once in the wilderness and once to Ezekiel.",
+                detail: "Two witnesses, centuries apart, and neither one is Daniel. That is what lets the longer spans be read on the same ruler: the time, times, and dividing of time of Daniel 7:25, which the historicist reading equates with the 1,260 days of Revelation 12:6, and the 2,300 evenings and mornings of Daniel 8:14. Test the measure here, where the text dates its own fulfilment, before carrying it into spans that history has to confirm."
               },
               {
                 role: "Daniel 9:24–27",
                 title: "Seventy weeks become 490 years",
                 cite: "Daniel 9:24–25",
                 text: "Seventy weeks — 70 × 7 = 490 prophetic years — run from the 457 B.C. decree to A.D. 34; the midweek crucifixion is A.D. 31.",
+                detail: "The sitting carries the arithmetic as an inference from the decree of Ezra 7 and the ordinary sense of a week of days, rather than as a figure printed in the text. Daniel 9:25 dates the going forth of the commandment; the angel then divides the seventy into seven, sixty-two, and one."
               }
             ]
           },
@@ -108,7 +111,8 @@
                 cite: "Daniel 1:2",
                 text: "The Lord hands over kings and directs history.",
                 image: "assets/study/diagrams/exile.jpg",
-                alt: "Original AI-created cinematic scene of a lone figure looking across a cold, mountainous wilderness."
+                alt: "Original AI-created cinematic scene of a lone figure looking across a cold, mountainous wilderness.",
+                detail: "Daniel opens in the year the temple vessels are carried to Shinar, and the verse names the actor: “the Lord gave Jehoiakim king of Judah into his hand.” Babylon did not win by weight of arms. The chain does not begin with an empire; it begins with a hand."
               },
               {
                 centre: true,
@@ -116,7 +120,8 @@
                 cite: "Daniel 9:26; Isaiah 53:5–8",
                 text: "The chain is not an end in itself. Both ends meet here, at the cross.",
                 image: "assets/study/diagrams/cross.jpg",
-                alt: "Original AI-created cinematic scene of a wooden cross on a rocky hill at golden dawn."
+                alt: "Original AI-created cinematic scene of a wooden cross on a rocky hill at golden dawn.",
+                detail: "Gabriel dates the cutting off of Messiah inside the seventieth week, and the historicist reading lands it in A.D. 31. Every metal before this point and every divided kingdom after it is measured against this event, which is why the chain cannot be read as a political forecast."
               },
               {
                 role: "After the cross",
@@ -124,7 +129,8 @@
                 cite: "Daniel 2:35",
                 text: "The supernatural Stone fills the whole earth.",
                 image: "assets/study/diagrams/glory.jpg",
-                alt: "Original AI-created cinematic scene of a radiant sunrise seen from a stone opening, evoking hope and a coming kingdom."
+                alt: "Original AI-created cinematic scene of a radiant sunrise seen from a stone opening, evoking hope and a coming kingdom.",
+                detail: "The stone is cut without hands and it strikes in the days of the divided kings, not during Babylon or Rome at its height. Daniel 2:44 puts the kingdom in the hands of the God of heaven; verse 35 leaves it filling the whole earth. The line that started with a handed-over king ends with a kingdom no one hands over."
               }
             ],
             note: "The unbroken chain is not a political chart. It exists to exalt Jesus Christ as Lord of history and personal Redeemer."
@@ -527,17 +533,20 @@ Daniel 9:24–27 ──▶  "Seventy weeks" (70 × 7 = 490 prophetic years)
               {
                 "role": "605 B.C. - 1st Campaign",
                 "title": "Jehoiakim vassalized",
-                "text": "Daniel and the royal youths deported."
+                "text": "Daniel and the royal youths deported.",
+                "detail": "Carchemish is the year Babylon breaks Egypt's hold on the coast, and Jerusalem changes hands as a vassal. The first group taken is the one the book follows: royal youth chosen for the court school. Daniel's exile begins here, not in 586."
               },
               {
                 "role": "597 B.C. - 2nd Campaign",
                 "title": "Jehoiachin deposed",
-                "text": "Ezekiel and 10,000 deported."
+                "text": "Ezekiel and 10,000 deported.",
+                "detail": "Jehoiakim's rebellion brings the army back. The young king is carried off with the craftsmen and smiths, and a prophet of the exile goes with them: Ezekiel dates his own call to the fifth year of that captivity among the captives by the river of Chebar. The city still stands."
               },
               {
                 "role": "586 B.C. - 3rd Campaign",
                 "title": "Zedekiah blinded",
-                "text": "Temple burned; Jerusalem destroyed."
+                "text": "Temple burned; Jerusalem destroyed.",
+                "detail": "The last siege ends with the house of the LORD burned and the walls broken down. Zedekiah flees toward the Jordan, is taken, and is blinded after watching his sons killed. Three campaigns, three separate dates: the book's first verse sits at the first of them."
               }
             ]
           },
@@ -1023,32 +1032,38 @@ DANIEL IN BABYLON                         JESUS IN THE WILDERNESS
               {
                 "role": "Head of Gold",
                 "title": "Babylon",
-                "text": "605–539 B.C. (accession year; BRI: 606–539)"
+                "text": "605–539 B.C. (accession year; BRI: 606–539)",
+                "detail": "Verse 38 settles the whole framework before a single metal is named: \"Thou art this head of gold.\" If Babylon is the head, the chest, belly, legs, and feet that follow are the next kingdoms in order rather than a set of symbols that can be restarted in any century."
               },
               {
                 "role": "Chest & Arms Silver",
                 "title": "Medo-Persia",
-                "text": "539 - 331 B.C."
+                "text": "539 - 331 B.C.",
+                "detail": "The silver follows the gold the way the record does: Babylon falls to the Medes and Persians, and the two arms answer the two-handed empire that replaced it."
               },
               {
                 "role": "Belly & Thighs Bronze",
                 "title": "Greece",
-                "text": "331 - 168 B.C."
+                "text": "331 - 168 B.C.",
+                "detail": "Bronze is the third kingdom, and the vision gives it a breadth of rule the first two did not have. Gabriel names this one outright in Daniel 8:21, which is how the sequence can be read without guessing."
               },
               {
                 "role": "Legs of Iron",
                 "title": "Rome",
-                "text": "168 B.C. - A.D. 476"
+                "text": "168 B.C. - A.D. 476",
+                "detail": "Iron breaks and subdues, and the fourth kingdom is described by what it does to everything it touches. The legs are two, and the empire they stand for divides in the end into east and west."
               },
               {
                 "role": "Feet of Iron & Clay",
                 "title": "Divided Europe",
-                "text": "A.D. 476 - Second Advent"
+                "text": "A.D. 476 - Second Advent",
+                "detail": "The feet are the only part of the image God's kingdom strikes, and 2:43 says the mixture will not hold. The metals decline in value as they harden: the head is gold and the feet are mud and iron."
               },
               {
                 "role": "The Striking Stone",
                 "title": "Christ's Kingdom",
-                "text": "Supernatural, Universal, Eternal"
+                "text": "Supernatural, Universal, Eternal",
+                "detail": "The stone is cut out without hands, which is the vision's way of saying no human power quarries it. It breaks the whole image at once and then becomes a mountain that fills the earth, so the kingdom it stands for does not arrive by the sword."
               }
             ]
           },
@@ -2078,17 +2093,20 @@ THE TRIAL: IMMANENCE IN THE FIRE                           THE CROSS: VICARIOUS 
               {
                 "role": "Intellectual awe",
                 "title": "Acknowledges God as \"a revealer of secrets\"",
-                "cite": "Daniel 2"
+                "cite": "Daniel 2:38",
+                "detail": "The confession costs him nothing and does not outlast the chapter. The same court that hears it will be ordered to worship an image in Daniel 3, and the king who said it will be the one giving the order."
               },
               {
                 "role": "Reluctant toleration",
-                "title": "Acknowledges no other God that can deliver after this sort",
-                "cite": "Daniel 3"
+                "title": "Acknowledges God as \"able to deliver\"",
+                "cite": "Daniel 3:17–18",
+                "detail": "The words in verse 17 belong to the three Hebrews, not to the king. His own verdict comes at 3:29, and it still leaves the image he set up standing in the plain of Dura."
               },
               {
                 "role": "Personal submission & worship",
                 "title": "Acknowledges God as \"the King of heaven\"",
-                "cite": "Daniel 4"
+                "cite": "Daniel 4:34–35",
+                "detail": "Only the third confession is spoken by a man with nothing left to defend, and only this one ends in praise rather than policy. The chapter closes with the king restored and the throne still God's to give."
               }
             ]
           },
@@ -2112,7 +2130,7 @@ THE TRIAL: IMMANENCE IN THE FIRE                           THE CROSS: VICARIOUS 
                 "points": [
                   "Stripped of branches and fruit",
                   "Driven into the dew and grass",
-                  "Bound with iron and brass",
+                  "Bound with iron and bronze",
                   "The king humbled, yet preserved by grace"
                 ]
               }
@@ -2125,17 +2143,20 @@ THE TRIAL: IMMANENCE IN THE FIRE                           THE CROSS: VICARIOUS 
               {
                 "role": "Self-origination",
                 "title": "\"I have built\"",
-                "text": "Denies God as Creator/Giver."
+                "text": "Denies God as Creator/Giver.",
+                "detail": "The boast is the mirror of Daniel 2:37, where the same prophet told him that God had given him a kingdom, power, and strength, and glory. Every clause here takes one of those back."
               },
               {
                 "role": "Self-sufficiency",
-                "title": "\"by the might of my power\"",
-                "text": "Denies God's sovereign strength."
+                "title": "\"By the might of my power\"",
+                "text": "Denies God's sovereign strength.",
+                "detail": "The kingdom that verse 17 says the Most High gives to whomsoever he will is claimed here as the work of one man's arm."
               },
               {
                 "role": "Self-worship",
-                "title": "\"for the honour of my majesty\"",
-                "text": "Steals the glory due to God alone."
+                "title": "\"For the honour of my majesty\"",
+                "text": "Steals the glory due to God alone.",
+                "detail": "The sentence is still in his mouth when the voice falls from heaven, and the seven times begin. The rest of the chapter is written by a king who has learned the first two clauses were borrowed."
               }
             ]
           },
@@ -2194,22 +2215,25 @@ THE TRIAL: IMMANENCE IN THE FIRE                           THE CROSS: VICARIOUS 
               {
                 "role": "THE EMPEROR OF BABYLON",
                 "title": "Nebuchadnezzar",
-                "cite": "Daniel 4",
+                "cite": "Daniel 4:30",
                 "points": [
-                  "Walked in the palace of the kingdom of Babylon (Daniel 4:29)",
-                  "\"Is not this great Babylon, that I have built\" (Daniel 4:30)",
-                  "Driven from men",
-                  "Humbled by the sentence from heaven",
+                  "A man who set up an image and commanded worship",
+                  "\"Is not this great Babylon, that I have built for the house of the kingdom by the might of my power, and for the honour of my majesty?\"",
+                  "Walked in the palace and spoke the boast",
+                  "Driven into the dust as a beast",
+                  "Humbled by force under divine wrath",
                   "Restored only after crushing judgment"
                 ]
               },
               {
                 "role": "THE KING OF GLORY",
                 "title": "Jesus Christ",
-                "cite": "Philippians 2",
+                "cite": "Philippians 2:5–11",
                 "points": [
                   "God incarnate who took the form of man",
+                  "Took upon him the form of a servant",
                   "Humbled Himself to the death of the cross",
+                  "Was made in the likeness of men",
                   "Emptied Himself willingly in sacrificial love",
                   "Highly exalted by the Father above every name"
                 ]
@@ -2630,18 +2654,21 @@ Nebuchadnezzar (Daniel 4)                Jesus Christ (Philippians 2)
               {
                 "role": "1st Ruler",
                 "title": "Nabonidus",
-                "text": "History: King of Babylon, residing in Tema, Arabia (Bible Commentary, vol. 4, on Daniel 5:1). ABC 7: The king (was) in Tayma."
+                "text": "History: King of Babylon, residing in Tema, Arabia (Bible Commentary, vol. 4, on Daniel 5:1). ABC 7: The king (was) in Tayma.",
+                "detail": "The Nabonidus Chronicle places the king in Tayma while the city is governed in his name, and the Verse Account agrees. That absence is the reason a second man can hold the throne room on the night the writing appears."
               },
               {
                 "role": "2nd Ruler",
                 "title": "Belshazzar",
-                "text": "History: Eldest son, Co-regent ruling inside Babylon (Bible Commentary, vol. 4, on Daniel 5)."
+                "text": "History: Eldest son, Co-regent ruling inside Babylon (Bible Commentary, vol. 4, on Daniel 5).",
+                "detail": "He offers the third place in the kingdom, not the second, and that is the detail the co-regency explains. In Daniel 5:7 the reward is to be the third ruler, which is what a son ruling under an absent father could actually grant."
               },
               {
                 "role": "3rd Ruler",
                 "title": "Daniel",
                 "cite": "Dan. 5:16, 29",
-                "text": "Offered the highest vacant post."
+                "text": "Offered the highest vacant post.",
+                "detail": "The reward is proclaimed and Daniel is clothed in scarlet the same night the city falls, and he takes it without asking for it. By morning the empire that offered it has changed hands."
               }
             ]
           },
@@ -4934,7 +4961,7 @@ BIBLICAL REQUIREMENT:            ANTIOCHUS IV EPIPHANES:           HISTORICIST R
                 "role": "Left column",
                 "title": "Daniel 8 (The Unexplained Vision)",
                 "points": [
-                  "2,300 days (8:14)",
+                  "2,300 Evening-Mornings (8:14)",
                   "Left without a starting date",
                   "Daniel faints sick for days (8:27)",
                   "Focus: Heavenly Sanctuary & Tamid"
@@ -5051,18 +5078,21 @@ BIBLICAL REQUIREMENT:            ANTIOCHUS IV EPIPHANES:           HISTORICIST R
                 "role": "457 B.C.",
                 "title": "Decree of Artaxerxes I",
                 "cite": "Ezra 7:11-26",
-                "text": "7 weeks (49 years), 457 minus 49"
+                "text": "49 years (7 weeks) to 408 B.C.",
+                "detail": "Ezra 7 records the seventh year of Artaxerxes I, and this sitting reads it as 457 B.C. It is the decree that restores a civil polity to Jerusalem, which is what Daniel 9:25 asks for. The four decrees are compared in the table above: only this one restores city and state."
               },
               {
                 "role": "408 B.C.",
-                "title": "Rebuilding Jerusalem",
-                "text": "Troublous times. 434 years (62 weeks) to A.D. 27."
+                "title": "Jerusalem Rebuilt",
+                "text": "Troublous times. 434 years (62 weeks) to A.D. 27.",
+                "detail": "The first seven weeks cover the rebuilding, and Daniel 9:25 says it happens in troublous times. The sixty-two weeks then run 434 years from 408 B.C. to A.D. 27; the two spans are consecutive, not overlapping."
               },
               {
                 "role": "A.D. 27",
                 "title": "Baptism of Jesus",
-                "cite": "Luke 3:21-22",
-                "text": "Jesus also being baptized."
+                "cite": "Luke 3:21",
+                "text": "Anointed at the Jordan. 69 weeks complete.",
+                "detail": "Luke dates the baptism in the fifteenth year of Tiberius Caesar and has Jesus praying as the heaven opens and the Spirit descends on him. Sixty-nine of the seventy weeks land here, which is the checkpoint the reckoning rests on: a dated decree at one end, a dated baptism at the other."
               }
             ]
           },
@@ -5073,18 +5103,21 @@ BIBLICAL REQUIREMENT:            ANTIOCHUS IV EPIPHANES:           HISTORICIST R
               {
                 "role": "A.D. 27",
                 "title": "Baptism of Jesus",
-                "text": "Anointed at the Jordan (Luke 3:21–22). Ministry to Israel. 3.5 years to A.D. 31."
+                "text": "\"Time is fulfilled\". Ministry to Israel. 3.5 years to A.D. 31.",
+                "detail": "The seventieth week opens where the sixty-ninth closed. Luke 3:21-22 anoints the Messiah at the Jordan, and the first half of the week is the ministry to Israel."
               },
               {
                 "role": "A.D. 31",
                 "title": "The Cross (Passover)",
                 "text": "\"Messiah cut off\". Veil rent; sacrifices cease. 3.5 years to A.D. 34.",
-                "centre": true
+                "centre": true,
+                "detail": "Daniel 9:26 has Messiah cut off, and 9:27 has the sacrifice and oblation cease in the midst of the week. Matthew 27:51 records the veil of the temple rent in two, which is the sign the sitting points to."
               },
               {
                 "role": "A.D. 34",
                 "title": "Stoning of Stephen",
-                "text": "Gospel to Gentiles. 70 Weeks expire."
+                "text": "Gospel to Gentiles. 70 Weeks expire.",
+                "detail": "The remaining half-week runs from spring A.D. 31 to autumn A.D. 34, when the disciples bear witness in Jerusalem, Judaea, Samaria, and beyond, and Stephen is stoned. The year is this chart's working close, inferred from the half-week and from Acts rather than printed in the text."
               }
             ]
           },

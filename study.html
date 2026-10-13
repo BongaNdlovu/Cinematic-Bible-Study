@@ -630,10 +630,28 @@
       transform-origin: 50% 50%;
       opacity: calc(1 - var(--distance) * 0.22);
       z-index: calc(10 - var(--distance));
-      transition: transform 0.72s cubic-bezier(0.2, 0.76, 0.2, 1), opacity 0.55s ease, border-color 0.55s ease, box-shadow 0.55s ease;
+      /* Slow enough that the eye can follow a card across the stage instead of
+         finding it already arrived. */
+      transition:
+        transform 1.15s cubic-bezier(0.22, 0.61, 0.24, 1),
+        opacity 0.9s cubic-bezier(0.4, 0, 0.2, 1),
+        border-color 0.9s ease,
+        box-shadow 0.9s ease;
       cursor: pointer;
     }
-    .story-card:not(.is-active) { filter: saturate(0.78); }
+    /* Dimming a neighbour with a wash beats filtering it: a filter forces the
+       whole card — artwork included — to repaint on every frame of the slide. */
+    .story-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      pointer-events: none;
+      background: rgba(4, 4, 6, 0.42);
+      opacity: 1;
+      transition: opacity 0.9s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .story-card.is-active::after { opacity: 0; }
     .story-card.is-active {
       border-color: rgba(242, 215, 151, 0.92);
       box-shadow: 0 30px 76px rgba(0, 0, 0, 0.48), 0 0 32px rgba(213, 177, 106, 0.1), inset 0 0 0 1px rgba(242, 215, 151, 0.2);
@@ -702,6 +720,21 @@
       text-transform: uppercase;
       color: var(--chain-gold);
     }
+    /* Card copy arrives a beat after the card does, so the slide and the words
+       read as one movement rather than as a jump cut. */
+    @keyframes story-copy-rise {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: none; }
+    }
+    .story-card.is-active .story-content > * {
+      animation: story-copy-rise 0.85s cubic-bezier(0.22, 0.61, 0.24, 1) both;
+      animation-delay: calc(0.12s + var(--copy-i, 0) * 0.07s);
+    }
+    .story-content > :nth-child(1) { --copy-i: 0; }
+    .story-content > :nth-child(2) { --copy-i: 1; }
+    .story-content > :nth-child(3) { --copy-i: 2; }
+    .story-content > :nth-child(4) { --copy-i: 3; }
+    .story-content > :nth-child(5) { --copy-i: 4; }
     .story-stage .story-title {
       margin: 0 0 0.55rem !important;
       max-width: 18rem;
@@ -722,6 +755,18 @@
       line-height: 1.42 !important;
       color: #d1c5ad;
     }
+    /* The movement's own line. The stage card is a poster, so the detail there
+       is a caption: small, quiet, and never competing with the title. */
+    .story-stage .story-detail {
+      max-width: 18.5rem;
+      margin: 0.7rem 0 0 !important;
+      font-family: Inter, "Segoe UI", sans-serif;
+      font-size: 0.78rem !important;
+      line-height: 1.5 !important;
+      color: #a89c85;
+      text-wrap: pretty;
+    }
+    .story-card:not(.is-active) .story-detail { opacity: 0.6; }
     .story-controls {
       display: flex;
       align-items: center;
@@ -856,30 +901,77 @@
       place-items: center;
       padding: 4.75rem 1.25rem 1.5rem;
       color: #f6efdf;
+      opacity: 0;
+      transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1);
     }
     .story-read[hidden] { display: none; }
+    /* Opening and closing are fades, not cuts: the class is added a frame after
+       the element is shown, and removed before it is hidden again. While the
+       fade-out runs the overlay is on its way out, so it stops taking clicks
+       at once rather than swallowing taps for the length of the fade. */
+    .story-read:not(.is-open) { pointer-events: none; }
+    .story-read.is-open { opacity: 1; }
+    /* The artwork is the subject here, so it is barely blurred: the blur only
+       softens the plane enough for type to sit on it, and the scrim does the
+       legibility work the old 28px pass was doing. The crossfading photographs
+       are their own layers; this one is the dark ground they settle onto. */
     .story-read-bg {
       position: absolute;
-      inset: -10%;
+      inset: 0;
       background:
-        radial-gradient(ellipse at 50% 18%, rgba(190, 139, 53, 0.34), transparent 26rem),
+        radial-gradient(ellipse at 50% 26%, rgba(190, 139, 53, 0.2), transparent 30rem),
         #080807;
-      background-position: center;
-      background-size: cover;
-      filter: blur(28px) saturate(1.2);
-      transform: scale(1.14);
+      transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1);
     }
+    /* One layer per movement, stacked. The newest movement fades up over the
+       last, so a step change is a crossfade rather than a background swap. */
+    .story-read-photos {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
+    .story-read-photo {
+      position: absolute;
+      /* Over-sized so the blur's soft edge never shows at the frame border. */
+      inset: -6%;
+      object-fit: cover;
+      object-position: center 46%;
+      z-index: var(--photo-z, 0);
+      opacity: 0;
+      filter: blur(9px) saturate(1.1) brightness(0.86);
+      transform: scale(1.08);
+      will-change: opacity, transform;
+      transition:
+        opacity 1.25s cubic-bezier(0.4, 0, 0.2, 1),
+        transform 7s cubic-bezier(0.16, 0.62, 0.28, 1);
+    }
+    .story-read-photo.is-current {
+      opacity: 1;
+      transform: scale(1.005) translate3d(0, -0.6%, 0);
+    }
+    /* Two scrims: a soft vertical wash so the copy sits on its own ground, and
+       a vignette that keeps the eye centred with the corners held down. The
+       artwork stays readable at the edges; the middle is where the type lives. */
     .story-read-veil {
       position: absolute;
       inset: 0;
-      background: rgba(8, 8, 7, 0.58);
-      backdrop-filter: blur(16px);
+      background:
+        radial-gradient(ellipse 74% 56% at 50% 52%, rgba(6, 6, 7, 0.78) 0%, rgba(6, 6, 7, 0.6) 42%, rgba(6, 6, 7, 0.34) 68%, rgba(6, 6, 7, 0.82) 100%),
+        linear-gradient(180deg, rgba(6, 6, 7, 0.6) 0%, rgba(6, 6, 7, 0.02) 20%, rgba(6, 6, 7, 0.06) 56%, rgba(6, 6, 7, 0.7) 100%);
+    }
+    /* No artwork behind a movement: the overlay falls back to a night sky and
+       the panel keeps a darker ground of its own. */
+    .story-read:not(.has-photo) .story-read-veil {
+      background:
+        radial-gradient(ellipse 70% 60% at 50% 34%, rgba(190, 139, 53, 0.12), transparent 60%),
+        radial-gradient(ellipse 90% 80% at 50% 50%, rgba(8, 8, 7, 0.82) 0%, rgba(8, 8, 7, 0.94) 100%);
     }
     .story-back {
       position: absolute;
       top: 1.05rem;
       left: 1.05rem;
-      z-index: 2;
+      z-index: 3;
       display: inline-flex;
       align-items: center;
       gap: 0.4rem;
@@ -897,12 +989,47 @@
     }
     .story-read-panel {
       position: relative;
-      z-index: 1;
+      z-index: 2;
       width: min(40rem, 100%);
       max-height: calc(100vh - 8rem);
       overflow: auto;
       text-align: center;
+      padding: 2.1rem 2.4rem 1.9rem;
+      border-radius: 20px;
+      /* A soft ground under the copy, so the words are legible over artwork of
+         any brightness without a hard card edge cutting into the photograph. */
+      background:
+        radial-gradient(ellipse 90% 70% at 50% 50%, rgba(215, 176, 106, 0.08), transparent 72%),
+        linear-gradient(180deg, rgba(8, 8, 8, 0.74) 0%, rgba(8, 8, 8, 0.66) 46%, rgba(8, 8, 8, 0.78) 100%);
+      box-shadow: 0 26px 80px rgba(0, 0, 0, 0.4);
+      /* A slow rise on open, matching the artwork's own settle. */
+      opacity: 0;
+      transform: translateY(14px);
+      transition:
+        opacity 0.9s cubic-bezier(0.4, 0, 0.2, 1) 0.08s,
+        transform 1.05s cubic-bezier(0.22, 0.61, 0.24, 1) 0.08s;
     }
+    .story-read.is-open .story-read-panel {
+      opacity: 1;
+      transform: none;
+    }
+    /* Every block of the panel re-enters on a step change, staggered, so the
+       reader breathes between movements instead of swapping text in place. */
+    @keyframes read-block-in {
+      from { opacity: 0; transform: translateY(9px); }
+      to { opacity: 1; transform: none; }
+    }
+    .story-read-panel.is-shifting > * {
+      animation: read-block-in 0.8s cubic-bezier(0.22, 0.61, 0.24, 1) both;
+      animation-delay: calc(var(--read-i, 0) * 0.06s);
+    }
+    .story-read-panel > :nth-child(1) { --read-i: 0; }
+    .story-read-panel > :nth-child(2) { --read-i: 1; }
+    .story-read-panel > :nth-child(3) { --read-i: 2; }
+    .story-read-panel > :nth-child(4) { --read-i: 3; }
+    .story-read-panel > :nth-child(5) { --read-i: 4; }
+    .story-read-panel > :nth-child(6) { --read-i: 5; }
+    .story-read-panel > :nth-child(7) { --read-i: 6; }
     .story-read-kicker {
       margin: 0 0 0.85rem;
       color: #d5b16a;
@@ -911,6 +1038,7 @@
       font-weight: 600;
       letter-spacing: 0.22em;
       text-transform: uppercase;
+      text-shadow: 0 1px 14px rgba(0, 0, 0, 0.7);
     }
     .story-read-title {
       margin: 0;
@@ -920,6 +1048,7 @@
       font-weight: 500;
       line-height: 1.05;
       letter-spacing: -0.03em;
+      text-shadow: 0 2px 28px rgba(0, 0, 0, 0.55), 0 1px 3px rgba(0, 0, 0, 0.45);
     }
     .story-read-rule {
       width: 4.5rem;
@@ -937,14 +1066,58 @@
       font-style: italic;
       font-size: clamp(1.28rem, 2.4vw, 1.75rem);
       line-height: 1.5;
+      text-shadow: 0 1px 22px rgba(0, 0, 0, 0.6);
     }
+    /* The movement's own line: what this step shows that the others do not. */
+    .story-read-detail {
+      max-width: 33rem;
+      margin: 1.45rem auto 0;
+      padding-top: 1.25rem;
+      border-top: 1px solid rgba(213, 177, 106, 0.28);
+      color: #e6d9bd;
+      font-family: Inter, "Segoe UI", sans-serif;
+      font-size: 0.98rem;
+      line-height: 1.62;
+      text-align: left;
+      text-wrap: pretty;
+      text-shadow: 0 1px 18px rgba(0, 0, 0, 0.55);
+    }
+    .story-read-detail[hidden] { display: none; }
     .story-read-note {
       max-width: 34rem;
-      margin: 1.35rem auto 0;
-      color: #d8ccb4;
+      margin: 1.6rem auto 0;
+      color: #cfc2a8;
       font-family: Newsreader, Georgia, serif;
       font-size: 1.08rem;
       line-height: 1.6;
+      text-shadow: 0 1px 18px rgba(0, 0, 0, 0.6);
+    }
+    /* Where the reader is, as a rail: a movement count is easier to place than
+       a number in a corner. */
+    .story-read-progress {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.45rem;
+      margin-top: 1.5rem;
+    }
+    .story-read-progress[hidden] { display: none; }
+    .story-read-pip {
+      width: 1.75rem;
+      height: 3px;
+      border: 0;
+      padding: 0;
+      border-radius: 2px;
+      background: rgba(242, 215, 151, 0.34);
+      box-shadow: 0 1px 6px rgba(0, 0, 0, 0.5);
+      cursor: pointer;
+      transition: background 0.55s ease, width 0.55s ease, box-shadow 0.55s ease;
+    }
+    .story-read-pip:hover { background: rgba(242, 215, 151, 0.6); }
+    .story-read-pip.is-active {
+      width: 2.8rem;
+      background: #f6e6bd;
+      box-shadow: 0 0 14px rgba(242, 215, 151, 0.5);
     }
     .story-read-nav {
       display: flex;
@@ -957,7 +1130,7 @@
       padding: 0.5em 0.9em;
       border-radius: 999px;
       border: 1px solid rgba(213, 177, 106, 0.45);
-      background: transparent;
+      background: rgba(8, 8, 7, 0.35);
       color: #d5b16a;
       font-family: Inter, "Segoe UI", sans-serif;
       font-size: 0.68rem;
@@ -965,6 +1138,12 @@
       letter-spacing: 0.12em;
       text-transform: uppercase;
       cursor: pointer;
+      transition: background 0.45s ease, border-color 0.45s ease, color 0.45s ease;
+    }
+    .story-read-nav button:hover:not(:disabled) {
+      background: rgba(213, 177, 106, 0.16);
+      border-color: rgba(242, 215, 151, 0.8);
+      color: #f2d797;
     }
     .story-read-nav button:disabled { opacity: 0.35; cursor: default; }
     .story-read-count {
@@ -975,6 +1154,16 @@
       line-height: 1 !important;
       letter-spacing: 0.08em;
     }
+    .story-read-hint {
+      margin: 0.9rem 0 0 !important;
+      color: #a79d87;
+      font-family: Inter, "Segoe UI", sans-serif !important;
+      font-size: 0.66rem !important;
+      line-height: 1.4 !important;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-shadow: 0 1px 10px rgba(0, 0, 0, 0.8);
+    }
     html.story-read-open,
     html.story-read-open body { overflow: hidden; }
     @media (max-width: 620px) {
@@ -982,15 +1171,27 @@
       .story-step { max-width: 7.5rem; }
       .story-step-label { max-width: 5.6rem; }
       .story-read { padding-top: 4.2rem; }
+      /* The panel padding is a desktop measure; at phone widths it would take a
+         quarter of the screen from the text column. */
+      .story-read-panel { padding: 1.5rem 1.15rem 1.4rem; border-radius: 16px; }
       .story-read-title { font-size: 1.85rem; }
+      .story-read-detail { font-size: 0.92rem; text-align: left; }
+      .story-read-hint { display: none; }
     }
     @media (max-width: 360px) {
       .story-viewport { height: 420px; }
       .story-stage .story-title { font-size: 1.05rem !important; }
     }
     @media (prefers-reduced-motion: reduce) {
-      .story-card { transition: none; }
-      .story-read-bg { filter: blur(18px); }
+      .story-card { transition: opacity 0.3s ease; }
+      .story-card::after { transition: none; }
+      .story-card.is-active .story-content > * { animation: none; }
+      .story-read { transition: none; }
+      .story-read-panel { transition: none; opacity: 1; transform: none; }
+      .story-read-panel.is-shifting > * { animation: none; }
+      /* Artwork still changes, it just does not drift or zoom. */
+      .story-read-photo { transition: opacity 0.3s ease; transform: none; }
+      .story-read-photo.is-current { transform: none; }
     }
 
     /* Kept in the DOM as the original plain-text artwork, visually hidden so it
@@ -1056,9 +1257,18 @@
       padding: 1.05rem 1.15rem 1.15rem;
       border: 1px solid rgba(197, 155, 39, 0.3);
       border-radius: 12px;
-      background: rgba(255, 248, 230, 0.035);
+      background:
+        radial-gradient(ellipse at 50% 0%, rgba(212, 175, 55, 0.1), transparent 60%),
+        rgba(255, 248, 230, 0.035);
+      box-shadow: inset 0 1px 0 rgba(242, 215, 151, 0.08);
       opacity: 0;
       transform: translateY(8px);
+    }
+    /* The column head is the column's own title bar, so a hairline separates it
+       from the points the way the stage separates artwork from copy. */
+    .cmp-head > .chain-title {
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid rgba(197, 155, 39, 0.22);
     }
     .chain.is-visible .cmp-col { animation: chain-rise 0.6s ease-out var(--t) forwards; }
     /* Each column is a subgrid of .cmp-grid: role, title, citation and list sit on
@@ -1099,7 +1309,15 @@
       opacity: 0.75;
     }
     /* ---- table ---- */
-    .tbl-wrap { overflow-x: auto; }
+    /* A table is a comparison read by column, so it gets the same dark gold
+       ground as the comparison columns: scrollable frame outside, table inside. */
+    .tbl-wrap {
+      overflow-x: auto;
+      border: 1px solid rgba(197, 155, 39, 0.3);
+      border-radius: 12px;
+      background: rgba(255, 248, 230, 0.035);
+      box-shadow: inset 0 1px 0 rgba(242, 215, 151, 0.08);
+    }
     .tbl {
       width: 100%;
       border-collapse: collapse;
@@ -1120,6 +1338,7 @@
       letter-spacing: 0.14em;
       text-transform: uppercase;
       color: var(--chain-gold, #e4c56a);
+      background: rgba(212, 175, 55, 0.07);
       border-bottom-color: rgba(212, 175, 55, 0.5);
       white-space: nowrap;
     }
@@ -1130,6 +1349,8 @@
     .tbl tbody td { color: var(--chain-muted, inherit); }
     .tbl tbody tr:last-child th,
     .tbl tbody tr:last-child td { border-bottom: 0; }
+    .tbl tbody tr { transition: background 0.45s ease; }
+    .tbl tbody tr:hover { background: rgba(212, 175, 55, 0.06); }
     /* Phones: each row becomes a block with labelled values, not a sideways scroll. */
     @media (max-width: 600px) {
       .tbl thead { display: none; }
@@ -1168,7 +1389,10 @@
       border: 1px solid rgba(197, 155, 39, 0.28);
       border-left: 3px solid var(--chain-gold, #e4c56a);
       border-radius: 12px;
-      background: rgba(255, 248, 230, 0.035);
+      background:
+        linear-gradient(90deg, rgba(212, 175, 55, 0.09), transparent 40%),
+        rgba(255, 248, 230, 0.035);
+      box-shadow: inset 0 1px 0 rgba(242, 215, 151, 0.07);
       opacity: 0;
       transform: translateY(8px);
     }
@@ -1262,14 +1486,19 @@
       border-radius: 6px;
       background: rgba(255, 248, 230, 0.04);
       border: 1px solid rgba(197, 155, 39, 0.2);
+      box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.35);
     }
+    /* The bar is the point of the diagram, so it is the brightest thing on the
+       row: a lit leading edge and a soft cast, the way the stage lights its
+       active card. */
     .tl-bar {
       position: absolute;
       top: 0;
       bottom: 0;
       border-radius: 5px;
-      background: linear-gradient(90deg, rgba(212, 175, 55, 0.28), rgba(212, 175, 55, 0.5));
+      background: linear-gradient(90deg, rgba(212, 175, 55, 0.34), rgba(212, 175, 55, 0.58));
       border-left: 2px solid var(--chain-gold, #e4c56a);
+      box-shadow: 0 0 18px rgba(213, 177, 106, 0.18);
     }
     /* Segments only divide the rail. Their labels are listed beneath it: a segment a
        few years wide is a sliver of the axis and cannot hold text. */
@@ -1331,6 +1560,13 @@
     }
     body.paper-mode .tl-rail,
     body.white-mode .tl-rail { background: rgba(180, 140, 40, 0.08); border-color: rgba(180, 140, 40, 0.3); }
+    /* The rail loses its inner shadow in light themes, so the bar loses the
+       glow that was balanced against it. */
+    body.paper-mode .tl-bar,
+    body.white-mode .tl-bar {
+      background: linear-gradient(90deg, rgba(180, 140, 40, 0.34), rgba(180, 140, 40, 0.58));
+      box-shadow: none;
+    }
     body.paper-mode .tl-seg,
     body.white-mode .tl-seg { color: #3a2c10; }
 
@@ -5087,12 +5323,19 @@
     body.white-mode .article-body strong {
       color: var(--read-strong) !important;
     }
-    /* The story stage stays a dark gold inset in paper and white themes. */
+    /* The story stage stays a dark gold inset in paper and white themes. The
+       detail line is a <p> inside .article-body, so it needs the restore as
+       much as the title and copy do: without it the body colour wins and the
+       text turns near-black on a fixed #080807 stage. */
     body.paper-mode .story-stage .story-title,
     body.white-mode .story-stage .story-title,
     body.paper-mode .story-stage .story-text,
     body.white-mode .story-stage .story-text {
       color: #f6efdf !important;
+    }
+    body.paper-mode .story-stage .story-detail,
+    body.white-mode .story-stage .story-detail {
+      color: #a89c85 !important;
     }
     body.paper-mode .story-stage .story-kicker,
     body.white-mode .story-stage .story-kicker,
@@ -5124,7 +5367,16 @@
     }
     body.paper-mode .story-read-note,
     body.white-mode .story-read-note {
-      color: #d8ccb4 !important;
+      color: #cfc2a8 !important;
+    }
+    body.paper-mode .story-read-detail,
+    body.white-mode .story-read-detail {
+      color: #e6d9bd !important;
+      border-top-color: rgba(213, 177, 106, 0.28);
+    }
+    body.paper-mode .story-read-hint,
+    body.white-mode .story-read-hint {
+      color: #a79d87 !important;
     }
     body.paper-mode .story-fullscreen,
     body.white-mode .story-fullscreen,

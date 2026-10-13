@@ -3,23 +3,86 @@
     "kind": "steps",
     "title": "The Prophetic Master-Framework (Daniel 2)",
     "steps": [
-      { "role": "Head of Gold", "title": "Babylon", "text": "605 - 539 B.C." },
-      { "role": "Chest & Arms Silver", "title": "Medo-Persia", "text": "539 - 331 B.C." },
-      { "role": "Belly & Thighs Bronze", "title": "Greece", "text": "331 - 168 B.C." },
-      { "role": "Legs of Iron", "title": "Rome", "text": "168 B.C. - A.D. 476" },
-      { "role": "Feet of Iron & Clay", "title": "Divided Europe", "text": "A.D. 476 - Second Advent" },
-      { "role": "The Striking Stone", "title": "Christ's Kingdom", "text": "Supernatural, Universal, Eternal" }
+      {
+        "role": "Head of Gold",
+        "title": "Babylon",
+        "text": "605–539 B.C. (accession year; BRI: 606–539)",
+        "detail": "Verse 38 settles the whole framework before a single metal is named: \"Thou art this head of gold.\" If Babylon is the head, the chest, belly, legs, and feet that follow are the next kingdoms in order rather than a set of symbols that can be restarted in any century."
+      },
+      {
+        "role": "Chest & Arms Silver",
+        "title": "Medo-Persia",
+        "text": "539 - 331 B.C.",
+        "detail": "The silver follows the gold the way the record does: Babylon falls to the Medes and Persians, and the two arms answer the two-handed empire that replaced it."
+      },
+      {
+        "role": "Belly & Thighs Bronze",
+        "title": "Greece",
+        "text": "331 - 168 B.C.",
+        "detail": "Bronze is the third kingdom, and the vision gives it a breadth of rule the first two did not have. Gabriel names this one outright in Daniel 8:21, which is how the sequence can be read without guessing."
+      },
+      {
+        "role": "Legs of Iron",
+        "title": "Rome",
+        "text": "168 B.C. - A.D. 476",
+        "detail": "Iron breaks and subdues, and the fourth kingdom is described by what it does to everything it touches. The legs are two, and the empire they stand for divides in the end into east and west."
+      },
+      {
+        "role": "Feet of Iron & Clay",
+        "title": "Divided Europe",
+        "text": "A.D. 476 - Second Advent",
+        "detail": "The feet are the only part of the image God's kingdom strikes, and 2:43 says the mixture will not hold. The metals decline in value as they harden: the head is gold and the feet are mud and iron."
+      },
+      {
+        "role": "The Striking Stone",
+        "title": "Christ's Kingdom",
+        "text": "Supernatural, Universal, Eternal",
+        "detail": "The stone is cut out without hands, which is the vision's way of saying no human power quarries it. It breaks the whole image at once and then becomes a mountain that fills the earth, so the kingdom it stands for does not arrive by the sword."
+      }
     ]
   },
   "s2-2": {
     "kind": "table",
     "title": "Metallurgic Gradient of Daniel 2",
-    "head": ["Metal", "Specific Gravity", "Value / Splendor", "Hardness / Destructive Force"],
+    "head": [
+      "Metal",
+      "Specific Gravity",
+      "Value / Splendor",
+      "Hardness / Destructive Force"
+    ],
     "rows": [
-      { "cells": ["Gold", "19.3 (Highest)", "Pinnacle", "Soft, Malleable"] },
-      { "cells": ["Silver", "10.5", "High", "Pliable"] },
-      { "cells": ["Bronze", "8.9", "Moderate", "Tough"] },
-      { "cells": ["Iron", "7.8 (Lowest)", "Base", "Crushing, Destructive"] }
+      {
+        "cells": [
+          "Gold",
+          "19.3 (Highest)",
+          "Pinnacle",
+          "Soft, Malleable"
+        ]
+      },
+      {
+        "cells": [
+          "Silver",
+          "10.5",
+          "High",
+          "Pliable"
+        ]
+      },
+      {
+        "cells": [
+          "Bronze",
+          "8.9",
+          "Moderate",
+          "Tough"
+        ]
+      },
+      {
+        "cells": [
+          "Iron",
+          "7.8 (Lowest)",
+          "Base",
+          "Crushing, Destructive"
+        ]
+      }
     ]
   },
   "s2-3": {
@@ -32,7 +95,7 @@
         "title": "Iron (strength that remains) + Clay (the mixture that will not hold)"
       },
       {
-        "role": "Mechanical Mixture, Not Union",
+        "role": "Mixture, Not Union",
         "title": "They Shall Not Cleave",
         "points": [
           "Charlemagne (800)",
