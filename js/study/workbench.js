@@ -276,7 +276,7 @@
             ${[
               { hebrew: "Daniel (“God is my Judge”)", id: "n_dan", correct: "belteshazzar_bel" },
               { hebrew: "Hananiah (“Yahweh is gracious”)", id: "n_han", correct: "shadrach_aku" },
-              { hebrew: "Mishael (“Who is like God?”)", id: "n_mis", correct: "meshach_aku" },
+              { hebrew: "Mishael (“who belongs to God?”)", id: "n_mis", correct: "meshach_aku" },
               { hebrew: "Azariah (“Yahweh has helped”)", id: "n_aza", correct: "abednego_nabu" }
             ].map(item => `
               <div class="p-3 rounded-lg bg-paper-100/60 dark:bg-paper-900/60 border border-paper-300 dark:border-paper-800" data-name-id="${item.id}" data-correct="${item.correct}">

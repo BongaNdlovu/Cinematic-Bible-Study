@@ -1069,7 +1069,7 @@ import * as THREE from 'three';
         quote: '“And he shall speak great words against the most High, and shall wear out the saints of the most High, and think to change times and laws: and they shall be given into his hand until a time and times and the dividing of time.”',
         quoteRef: 'Daniel 7:25 (KJV)',
         explanation: 'Do not memorize 1,260 years first. Build the number. In this style of prophecy a “time” is a year, “times” is two years, and “the dividing of time” is a half year: 1 + 2 + ½ = 3½ years. Revelation writes the same span three ways: a thousand two hundred and threescore days (Revelation 12:6), a time and times and half a time (Revelation 12:14), and forty and two months (Revelation 13:5). Forty-two months of thirty days are 1,260 days. On the year-day scale God appointed in Numbers 14:34 and Ezekiel 4:6, those 1,260 days are 1,260 years. This exhibit is that measured reign — not a fifth metal, and not a three-and-a-half-year man at the end of time.',
-        historical: 'The marks in Daniel 7:24–25 sit among the ten fragments of western Rome: a power diverse from the others, speaking great words, wearing out the saints, intending to change times and laws. The start-year is A.D. 538: the Ostrogoths were driven from Rome and Justinian’s decree took effect. The close is 1798, when General Berthier took Pius VI. You may not skip the marks in 7:24–25 and still claim any favorite villain. The court of 7:9–14 sits while this span is still a historical fact; the stone of chapter 2 is later.',
+        historical: 'The marks in Daniel 7:24–25 sit among the ten fragments of western Rome: a power diverse from the others, speaking great words, wearing out the saints, intending to change times and laws. The start-year on this chart is A.D. 538: Belisarius lifted the Ostrogothic siege of Rome, and Justinian’s decree could take effect in the city. The Ostrogoths retook Rome in the 540s and were not fully defeated until about 553. The close is 1798, when General Berthier took Pius VI. You may not skip the marks in 7:24–25 and still claim any favorite villain. The 2020 lesson places the court of 7:9–14 after that span. Ellen G. White places the coming to the Ancient of Days in 1844. Daniel 7:11 still has great words spoken while the court sits. The stone of chapter 2 is later.',
         plateImg: 'assets/plates/years1260.jpg',
         plateCaption: 'Time, times, and the dividing of time · 538 to 1798',
         thumb: 'assets/site/era-years1260.webp',
@@ -1858,7 +1858,7 @@ import * as THREE from 'three';
         {
           id: 'beast-span', col: 'right', row: 1,
           icon: '📅', label: '538–1798',
-          body: 'The 1,260-year prophetic era began in AD 538 with the fall of the Ostrogoths and concluded in 1798 with the capture of the pope by French forces.',
+          body: 'The 1,260-year prophetic era on this chart begins in AD 538, when the Ostrogothic siege of Rome was lifted, and ends in 1798 with the capture of the pope by French forces. The Ostrogoths were not fully defeated until about 553.',
           anchor: new THREE.Vector3(0.48, 1.05, 0.4), enabled: true
         },
         {
@@ -1890,7 +1890,7 @@ import * as THREE from 'three';
         {
           id: 'y1260-open', col: 'right', row: 0,
           icon: '⛪', label: 'AD 538',
-          body: 'Ostrogoths driven from Rome. Justinian’s grant to the Roman see took effect in the city; the measured reign begins.',
+          body: 'The Ostrogothic siege of Rome is lifted. Justinian’s grant to the Roman see can take effect in the city; the measured reign begins on this chart. The Ostrogoths were not fully defeated until about 553.',
           anchor: new THREE.Vector3(0.5, 1.5, 0.38), enabled: true
         },
         {
