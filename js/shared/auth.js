@@ -1,10 +1,9 @@
 (function () {
   const cfg = window.BAAuthConfig || {};
   const listeners = [];
-  // The moderator dashboard is limited to the site operator. This list must match
-  // the SQL is_review_moderator() function (tools/supabase-reviews.sql), which the
-  // database also enforces on every moderator read.
-  const MODERATOR_EMAILS = ["fanelesibonge50@gmail.com"];
+  // Who is a moderator is decided by the database (is_review_moderator(), see
+  // tools/supabase-reviews.sql), which also enforces it on every moderator read.
+  // The client only asks, so no operator address ships in public JavaScript.
   let client = null;
   let user = null;
   let accessToken = "";
@@ -361,20 +360,28 @@
     return client;
   }
 
-  function isModeratorEmail(nextUser) {
-    if (!nextUser) return false;
-    const emails = accountEmails(nextUser, accessToken);
-    for (let i = 0; i < emails.length; i++) {
-      if (MODERATOR_EMAILS.indexOf(emails[i]) >= 0) return true;
-    }
-    return false;
-  }
-
+  /* Ask the server. This only gates which controls are shown; every moderator
+     read and write is enforced again by row-level security. Fails closed: no
+     session, no client, an error or a slow answer all mean "not a moderator". */
   function refreshModerator() {
     const gen = moderatorGen + 1;
     moderatorGen = gen;
-    moderator = isModeratorEmail(user);
-    return Promise.resolve(moderator);
+    moderator = false;
+    if (!user) return Promise.resolve(false);
+    const mock = readQaMock();
+    if (mock) {
+      moderator = mock.moderator === true;
+      return Promise.resolve(moderator);
+    }
+    if (!client || typeof client.rpc !== "function") return Promise.resolve(false);
+    return Promise.resolve(client.rpc("is_review_moderator")).then(function (res) {
+      const ok = !!(res && !res.error && res.data === true);
+      if (gen === moderatorGen) moderator = ok;
+      return moderator;
+    }, function () {
+      if (gen === moderatorGen) moderator = false;
+      return false;
+    });
   }
 
   function isModerator() {

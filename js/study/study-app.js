@@ -3968,10 +3968,18 @@
           go(current + 1, false);
         }, 3900);
       });
-      document.addEventListener('visibilitychange', function onHide() {
+      function onHide() {
         if (!figure.isConnected) { document.removeEventListener('visibilitychange', onHide); return; }
         if (document.hidden) stopPlayback();
-      });
+      }
+      document.addEventListener('visibilitychange', onHide);
+      // A sitting switch detaches the figure without any visibility event, so the
+      // self-removal above would never run and the listener (and every node the
+      // figure holds) would stay alive. releaseSheetFigures() calls this.
+      figure.__storyRelease = () => {
+        stopPlayback();
+        document.removeEventListener('visibilitychange', onHide);
+      };
 
       const setOpen = (open) => {
         toggle.setAttribute('aria-expanded', String(open));
@@ -4290,6 +4298,21 @@
       figure.__diagramFs = { exit: exit, isFull: () => figure.classList.contains('is-full') };
     }
 
+    /* Tear down what each figure mounted, before its markup is replaced. A
+       sitting switch rewrites #sheet-article, which creates new figures: the old
+       ones are never rendered again, so their mindmap (observers on the body, a
+       frame loop) and story reader (a document listener) would otherwise live on
+       and keep the whole detached article reachable. */
+    function releaseSheetFigures(root) {
+      if (!root) return;
+      root.querySelectorAll('figure').forEach((figure) => {
+        if (figure.__mm && typeof figure.__mm.destroy === 'function') figure.__mm.destroy();
+        figure.__mm = null;
+        if (typeof figure.__storyRelease === 'function') figure.__storyRelease();
+        figure.__storyRelease = null;
+      });
+    }
+
     function renderSheetDiagrams(data) {
       document.querySelectorAll('body > .story-read').forEach((node) => {
         // Unhook the reader before it leaves the page: its key listener is
@@ -4317,6 +4340,8 @@
         // so the previous mount is torn down before the figure is rewritten.
         if (figure.__mm && typeof figure.__mm.destroy === 'function') figure.__mm.destroy();
         figure.__mm = null;
+        if (typeof figure.__storyRelease === 'function') figure.__storyRelease();
+        figure.__storyRelease = null;
         const id = figure.getAttribute('data-diagram');
         const spec = specs[id];
         if (!spec) return;
@@ -5208,6 +5233,7 @@
       // Render Article Content
       const articleEl = document.getElementById('sheet-article');
       articleEl.setAttribute('data-sheet-index', String(index));
+      releaseSheetFigures(articleEl);
       articleEl.innerHTML = data.content;
       renderLessonMedia(data);
       renderSheetDiagrams(data);

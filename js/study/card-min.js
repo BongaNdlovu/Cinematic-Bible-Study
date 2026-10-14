@@ -66,9 +66,13 @@
   }
 
   function headTextOf(head) {
-    var btn = head.querySelector(".cardmin-btn");
     var clone = head.cloneNode(true);
-    if (btn) clone.removeChild(clone.querySelector(".cardmin-btn"));
+    /* A head can wrap a nested card, so a control may sit at any depth, not
+       only as a direct child. Remove every one from the copy. */
+    var btns = clone.querySelectorAll(".cardmin-btn");
+    for (var i = 0; i < btns.length; i += 1) {
+      if (btns[i].parentNode) btns[i].parentNode.removeChild(btns[i]);
+    }
     return (clone.textContent || "").replace(/\s+/g, " ").trim().slice(0, 60);
   }
 
@@ -237,24 +241,108 @@
     card.classList.toggle("cardmin-compact", h < 150);
   }
 
-  function sizeAll() {
-    var cards = document.querySelectorAll(".cardmin-target");
+  function sizeWithin(root) {
+    if (root.matches && root.matches(".cardmin-target")) sizeControl(root);
+    var cards = root.querySelectorAll(".cardmin-target");
     for (var i = 0; i < cards.length; i += 1) sizeControl(cards[i]);
   }
 
-  function schedule() {
+  function sizeAll() {
+    sizeWithin(document);
+  }
+
+  /* Work is queued per changed subtree. A whole-document pass is kept for
+     resize (card heights change everywhere) and for large bursts, so ordinary
+     DOM churn elsewhere on the page does not re-scan every card. */
+  var roots = [];
+  var resize = [];
+  var fullPass = false;
+  var MAX_ROOTS = 40;
+
+  function arm() {
     if (timer) return;
-    timer = setTimeout(function () {
-      timer = null;
+    timer = setTimeout(flush, 120);
+  }
+
+  function flush() {
+    timer = null;
+    var list = roots;
+    var measure = resize;
+    var full = fullPass;
+    roots = [];
+    resize = [];
+    fullPass = false;
+    var i;
+    if (full) {
       enhance(document);
       requestAnimationFrame(sizeAll);
-    }, 120);
+      return;
+    }
+    var live = [];
+    for (i = 0; i < list.length; i += 1) {
+      if (list[i].isConnected) {
+        enhance(list[i]);
+        live.push(list[i]);
+      }
+    }
+    /* Text or children changed inside a card that is already enhanced: its
+       height may have crossed the compact threshold, so it is only re-measured. */
+    for (i = 0; i < measure.length; i += 1) {
+      if (measure[i].isConnected && live.indexOf(measure[i]) < 0) live.push(measure[i]);
+    }
+    if (live.length) {
+      requestAnimationFrame(function () {
+        for (var j = 0; j < live.length; j += 1) {
+          if (live[j].isConnected) sizeWithin(live[j]);
+        }
+      });
+    }
+  }
+
+  function schedule() {
+    fullPass = true;
+    arm();
+  }
+
+  function onMutations(records) {
+    for (var r = 0; r < records.length; r += 1) {
+      var held = records[r].target;
+      var card = held && held.nodeType === 1 && held.closest ? held.closest(".cardmin-target") : null;
+      if (card && !(held.classList && held.classList.contains("cardmin-btn")) &&
+          resize.indexOf(card) < 0 && resize.length < MAX_ROOTS) {
+        resize.push(card);
+      }
+      var added = records[r].addedNodes;
+      for (var n = 0; n < added.length; n += 1) {
+        var node = added[n];
+        if (node.nodeType !== 1) continue;
+        /* The control this script inserts is itself a mutation; ignore it, or
+           every enhancement would queue another pass. */
+        if (node.classList && node.classList.contains("cardmin-btn")) continue;
+        /* App code may rebuild a card's contents, which wipes the control: the
+           owning card is the unit to re-enhance, not the new child. */
+        var owner = node.closest ? node.closest(CARD_SELECTOR) : null;
+        /* Outside every card and holding none: nothing here to enhance. */
+        if (!owner && !(node.querySelector && node.querySelector(CARD_SELECTOR))) continue;
+        var target = owner || node;
+        var covered = false;
+        for (var k = 0; k < roots.length; k += 1) {
+          if (roots[k] === target || roots[k].contains(target)) { covered = true; break; }
+        }
+        if (!covered) roots.push(target);
+      }
+    }
+    if (roots.length > MAX_ROOTS) {
+      roots = [];
+      fullPass = true;
+    }
+    if (roots.length || resize.length || fullPass) arm();
   }
 
   function start() {
     enhance(document);
     if (window.MutationObserver) {
-      new MutationObserver(schedule).observe(document.body, { childList: true, subtree: true });
+      new MutationObserver(onMutations).observe(document.body, { childList: true, subtree: true });
     }
   }
 

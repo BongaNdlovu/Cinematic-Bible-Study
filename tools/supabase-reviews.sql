@@ -1,5 +1,23 @@
 -- Exhibit reviews (home-page Witnesses). Run once in the Supabase SQL editor.
--- Add your Google sign-in email to the moderator array if it is not already listed.
+--
+-- Moderators live in public.exhibit_moderators, not in this file, so no
+-- operator address is committed. After running this file, add yourself ONCE in
+-- the SQL editor (do not save this line into the repo):
+--
+--   insert into public.exhibit_moderators (email) values ('you@example.com')
+--   on conflict do nothing;
+--
+-- Re-running this file on a project that already works is safe, but until the
+-- table holds an address nobody is a moderator (it fails closed).
+
+create table if not exists public.exhibit_moderators (
+  email text primary key check (email = lower(btrim(email)))
+);
+
+-- Locked down: no policies and no grants, so the API cannot read or write it.
+-- is_review_moderator() is SECURITY DEFINER and is the only reader.
+alter table public.exhibit_moderators enable row level security;
+revoke all on public.exhibit_moderators from public, anon, authenticated;
 
 create table if not exists public.exhibit_reviews (
   id uuid primary key default gen_random_uuid(),
@@ -28,15 +46,14 @@ as $$
   select exists (
     select 1
     from auth.users u
-    where u.id = auth.uid()
-      and lower(coalesce(
+    join public.exhibit_moderators m
+      on m.email = lower(btrim(coalesce(
         u.email,
         u.raw_user_meta_data ->> 'email',
         auth.jwt() ->> 'email',
         ''
-      )) = any (array[
-        'fanelesibonge50@gmail.com'
-      ])
+      )))
+    where u.id = auth.uid()
   );
 $$;
 

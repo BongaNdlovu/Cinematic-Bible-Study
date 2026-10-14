@@ -1,47 +1,14 @@
 import { chromium } from 'playwright';
-import { spawn } from 'child_process';
-import http from 'http';
 import fs from 'fs';
 import path from 'path';
+import { ensureServer } from './_server.mjs';
 
 fs.mkdirSync(path.join('qa', 'proofs'), { recursive: true });
 
-async function isServerRunning(port) {
-  return new Promise((resolve) => {
-    const req = http.get(`http://127.0.0.1:${port}/account.html`, (res) => {
-      resolve(res.statusCode === 200);
-    });
-    req.on('error', () => resolve(false));
-    req.setTimeout(1000, () => {
-      req.destroy();
-      resolve(false);
-    });
-  });
-}
-
 async function run() {
-  const PORT = 8000;
-  let serverProcess = null;
-  const running = await isServerRunning(PORT);
-  if (!running) {
-    console.log(`Starting local server on port ${PORT}...`);
-    serverProcess = spawn('python', ['server.py', '--no-browser'], {
-      env: { ...process.env, PORT: String(PORT) },
-      stdio: 'ignore'
-    });
-    let up = false;
-    for (let i = 0; i < 30; i++) {
-      await new Promise(r => setTimeout(r, 200));
-      if (await isServerRunning(PORT)) {
-        up = true;
-        break;
-      }
-    }
-    if (!up) throw new Error('Failed to start python server on port ' + PORT);
-    console.log('Local server started successfully.');
-  } else {
-    console.log(`Using existing server on port ${PORT}.`);
-  }
+  const server = await ensureServer({ preferred: 8000, probe: '/account.html' });
+  const BASE = server.base;
+  console.log(`Using server at ${BASE}.`);
 
   const browser = await chromium.launch({ headless: true });
   const context = await browser.newContext({ viewport: { width: 1440, height: 900 } });
@@ -59,7 +26,7 @@ async function run() {
 
   try {
     console.log('\n=== E2E Step 1: Visiting account.html as guest ===');
-    await page.goto(`http://127.0.0.1:${PORT}/account.html`, { waitUntil: 'networkidle' });
+    await page.goto(`${BASE}/account.html`, { waitUntil: 'networkidle' });
     await page.waitForTimeout(500);
 
     const hubVisible = await page.locator('#account-hub').isVisible();
@@ -187,9 +154,7 @@ async function run() {
       });
     } catch (e) {}
     await browser.close();
-    if (serverProcess) {
-      serverProcess.kill();
-    }
+    server.stop();
   }
 }
 

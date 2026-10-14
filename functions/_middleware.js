@@ -64,10 +64,23 @@ async function allowed(context, ip, path) {
   }
 }
 
+/* Compare without an early exit, so response time does not reveal how many
+   leading characters of the secret a guess got right. */
+function safeEqual(a, b) {
+  const x = String(a);
+  const y = String(b);
+  let diff = x.length ^ y.length;
+  const n = Math.max(x.length, y.length);
+  for (let i = 0; i < n; i += 1) {
+    diff |= (x.charCodeAt(i) || 0) ^ (y.charCodeAt(i) || 0);
+  }
+  return diff === 0;
+}
+
 async function rateProxy(context, request) {
   const secret = context.env && context.env.RATE_GATE_SECRET;
   const header = request.headers.get("authorization") || "";
-  if (!secret || header !== "Bearer " + secret) {
+  if (!secret || !safeEqual(header, "Bearer " + secret)) {
     return new Response("Forbidden", { status: 403 });
   }
   let body = {};

@@ -1,47 +1,14 @@
 import { chromium } from 'playwright';
-import { spawn } from 'child_process';
-import http from 'http';
 import fs from 'fs';
 import path from 'path';
+import { ensureServer } from './_server.mjs';
 
 fs.mkdirSync(path.join('qa', 'proofs'), { recursive: true });
 
-async function isServerRunning(port) {
-  return new Promise((resolve) => {
-    const req = http.get(`http://127.0.0.1:${port}/index.html`, (res) => {
-      resolve(res.statusCode === 200);
-    });
-    req.on('error', () => resolve(false));
-    req.setTimeout(1000, () => {
-      req.destroy();
-      resolve(false);
-    });
-  });
-}
-
 async function run() {
-  const PORT = 8000;
-  let serverProcess = null;
-  const running = await isServerRunning(PORT);
-  if (!running) {
-    console.log(`Starting local server on port ${PORT}...`);
-    serverProcess = spawn('python', ['server.py', '--no-browser'], {
-      env: { ...process.env, PORT: String(PORT) },
-      stdio: 'ignore'
-    });
-    let up = false;
-    for (let i = 0; i < 30; i++) {
-      await new Promise(r => setTimeout(r, 200));
-      if (await isServerRunning(PORT)) {
-        up = true;
-        break;
-      }
-    }
-    if (!up) throw new Error('Failed to start python server on port ' + PORT);
-    console.log('Local server started successfully.');
-  } else {
-    console.log(`Using existing server on port ${PORT}.`);
-  }
+  const server = await ensureServer({ preferred: 8000, probe: '/index.html' });
+  const BASE = server.base;
+  console.log(`Using server at ${BASE}.`);
 
   const browser = await chromium.launch({ headless: true });
   const context = await browser.newContext({ viewport: { width: 1440, height: 900 } });
@@ -60,7 +27,7 @@ async function run() {
 
   try {
     console.log('\n=== Step 1: Verifying study.html initial visit presents Lessons Portal ===');
-    await page.goto(`http://127.0.0.1:${PORT}/study.html`, { waitUntil: 'networkidle' });
+    await page.goto(`${BASE}/study.html`, { waitUntil: 'networkidle' });
     await page.waitForTimeout(600);
 
     const portalVisible = await page.locator('#sitting-portal-view').isVisible();
@@ -151,7 +118,7 @@ async function run() {
     if (!portalReturnedSpine) throw new Error('Failed to return to portal via spine button');
 
     console.log('\n=== Step 6: Verifying Direct Sheet Navigation & Header "All Lessons" ===');
-    await page.goto(`http://127.0.0.1:${PORT}/study.html?sheet=1`, { waitUntil: 'networkidle' });
+    await page.goto(`${BASE}/study.html?sheet=1`, { waitUntil: 'networkidle' });
     await page.waitForTimeout(500);
 
     const directPortalHidden = await page.locator('#sitting-portal-view').isHidden();
@@ -171,7 +138,7 @@ async function run() {
     if (!portalReturnedHeader) throw new Error('Failed to return to portal via header button');
 
     console.log('\n=== Step 7: Verifying Account Hub Visual Rendering ===');
-    await page.goto(`http://127.0.0.1:${PORT}/account.html`, { waitUntil: 'networkidle' });
+    await page.goto(`${BASE}/account.html`, { waitUntil: 'networkidle' });
     await page.waitForTimeout(500);
     const accountHub = await page.locator('#account-hub').isVisible();
     console.log('   Account hub visible:', accountHub);
@@ -180,7 +147,7 @@ async function run() {
     console.log('   Captured qa/proofs/account_hub_proof.png');
 
     console.log('\n=== Step 8: Verifying Insights Hub Visual Rendering ===');
-    await page.goto(`http://127.0.0.1:${PORT}/insights.html`, { waitUntil: 'networkidle' });
+    await page.goto(`${BASE}/insights.html`, { waitUntil: 'networkidle' });
     await page.waitForTimeout(500);
     const insightsMain = await page.locator('.insights-main').isVisible();
     console.log('   Insights main visible:', insightsMain);
@@ -196,9 +163,7 @@ async function run() {
     }
   } finally {
     await browser.close();
-    if (serverProcess) {
-      serverProcess.kill();
-    }
+    server.stop();
   }
 
   console.log('\n============================================================');
