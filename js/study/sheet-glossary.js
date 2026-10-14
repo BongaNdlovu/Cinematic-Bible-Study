@@ -399,7 +399,9 @@
 
   function skipParent(el) {
     if (!el || !el.closest) return true;
-    return !!el.closest("script, style, button, a, .term-gloss, .strongs-gloss, .term-popover, .strongs-popover, .first-principles-kicker, figcaption, .glossary-index");
+    /* `.mm` is the mindmap block: its labels sit inside role=button nodes, and
+       a glossary button injected there would nest a button in a button. */
+    return !!el.closest("script, style, button, a, .mm, .term-gloss, .strongs-gloss, .term-popover, .strongs-popover, .first-principles-kicker, figcaption, .glossary-index");
   }
 
   function wordBoundaryOk(text, start, end, needle) {

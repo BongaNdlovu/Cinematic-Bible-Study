@@ -45,6 +45,14 @@
           "s0-1": {
             kind: "comparison",
             title: "The Three Interpretive Schools",
+            // One label per point, in the columns' own order: this comparison is
+            // a matrix that was flattened into parallel bullets. Labels classify
+            // the author's points; no point text is touched.
+            rows: [
+              "Origin and standing",
+              "Time frame",
+              "After Rome"
+            ],
             steps: [
               {
                 title: "Historicism",
@@ -85,12 +93,18 @@
                 cite: "Numbers 14:34",
                 text: "Forty days spying out Canaan become forty years of wandering: “each day for a year.”",
                 detail: "The scale is fixed before Daniel uses it. Numbers gives a day for a year in the wilderness; Ezekiel 4:6 gives the same measure again, “I have appointed thee each day for a year.” Read Daniel 9:24–27 on literal days instead and the seventy weeks come to 490 days, under eighteen months, ending nowhere near Messiah the Prince."
+,
+                "bridgeShare": "one prophetic measure, fixed before Daniel uses it",
+                "bridgeAhead": "Numbers fixes the measure in the wilderness: forty days of spying, forty years of wandering. The next movement brings the second witness, Ezekiel 4:6, where the same measure is given again centuries later. Neither witness is Daniel, and the rule is on record before he uses it."
               },
               {
                 centre: true,
                 title: "One scale, stated twice",
                 text: "Scripture fixes its own prophetic measure before Daniel uses it. The rule is given once in the wilderness and once to Ezekiel.",
-                detail: "Two witnesses, centuries apart, and neither one is Daniel. That is what lets the longer spans be read on the same ruler: the time, times, and dividing of time of Daniel 7:25, which the historicist reading equates with the 1,260 days of Revelation 12:6, and the 2,300 evenings and mornings of Daniel 8:14. Test the measure here, where the text dates its own fulfilment, before carrying it into spans that history has to confirm."
+                detail: "Two witnesses, centuries apart, and neither one is Daniel. That is what lets the longer spans be read on the same ruler: the time, times, and dividing of time of Daniel 7:25, which the historicist reading equates with the 1,260 days of Revelation 12:6, and the 2,300 evenings and mornings of Daniel 8:14. The measure is tested here, where the reckoning is anchored to a dated decree and a dated ministry, before it is carried into spans that history has to confirm."
+,
+                "bridgeShare": "the same ruler, now carried into Daniel's seventy weeks",
+                "bridgeAhead": "Two witnesses have fixed the measure outside Daniel. The next movement brings it to Daniel's seventy weeks, where read as days they end nowhere near Messiah the Prince, and read as years they run to His cross. Daniel 9 is the test case; there the reckoning is tested, before it is carried into spans that history has to confirm."
               },
               {
                 role: "Daniel 9:24–27",
@@ -113,6 +127,9 @@
                 image: "assets/study/diagrams/exile.jpg",
                 alt: "Original AI-created cinematic scene of a lone figure looking across a cold, mountainous wilderness.",
                 detail: "Daniel opens in the year the temple vessels are carried to Shinar, and the verse names the actor: “the Lord gave Jehoiakim king of Judah into his hand.” Babylon did not win by weight of arms. The chain does not begin with an empire; it begins with a hand."
+,
+                "bridgeShare": "the same God who gave the king over and gave His Son",
+                "bridgeAhead": "The chain does not begin with an empire; it begins with a hand. The next movement is where both ends meet: Messiah cut off inside the seventieth week, and every metal on the chain measured against that event."
               },
               {
                 centre: true,
@@ -122,6 +139,9 @@
                 image: "assets/study/diagrams/cross.jpg",
                 alt: "Original AI-created cinematic scene of a wooden cross on a rocky hill at golden dawn.",
                 detail: "Gabriel dates the cutting off of Messiah inside the seventieth week, and the historicist reading lands it in A.D. 31. Every metal before this point and every divided kingdom after it is measured against this event, which is why the chain cannot be read as a political forecast."
+,
+                "bridgeShare": "the Messiah cut off and the King who fills the earth",
+                "bridgeAhead": "Every metal before the cross and every divided kingdom after it is measured against this event. The next movement follows the divided kingdoms to the Stone cut without hands, which strikes them and becomes a mountain filling the earth. The line that started with a handed-over king ends with a kingdom no one hands over."
               },
               {
                 role: "After the cross",
@@ -535,12 +555,18 @@ Daniel 9:24–27 ──▶  "Seventy weeks" (70 × 7 = 490 prophetic years)
                 "title": "Jehoiakim vassalized",
                 "text": "Daniel and the royal youths deported.",
                 "detail": "Carchemish is the year Babylon breaks Egypt's hold on the coast, and Jerusalem changes hands as a vassal. The first group taken is the one the book follows: royal youth chosen for the court school. Daniel's exile begins here, not in 586."
+,
+                "bridgeShare": "the vassalage of 605 and the rebellion against it",
+                "bridgeAhead": "Jehoiakim's rebellion brings the army back. Jehoiachin is carried off with the craftsmen and smiths, and a prophet of the exile goes with them; the city still stands. The burning comes in the third campaign."
               },
               {
                 "role": "597 B.C. - 2nd Campaign",
                 "title": "Jehoiachin deposed",
                 "text": "Ezekiel and 10,000 deported.",
                 "detail": "Jehoiakim's rebellion brings the army back. The young king is carried off with the craftsmen and smiths, and a prophet of the exile goes with them: Ezekiel dates his own call to the fifth year of that captivity among the captives by the river of Chebar. The city still stands."
+,
+                "bridgeShare": "a king's rebellion, and the army that comes back",
+                "bridgeAhead": "The second campaign leaves the city standing. The third ends it: the house of the LORD burned, the walls broken down, Zedekiah blinded after watching his sons killed. Three campaigns, three separate dates — Daniel's capture is not the temple's destruction."
               },
               {
                 "role": "586 B.C. - 3rd Campaign",
@@ -553,6 +579,13 @@ Daniel 9:24–27 ──▶  "Seventy weeks" (70 × 7 = 490 prophetic years)
           "s1-2": {
             "kind": "comparison",
             "title": "The Conflict of Names",
+            // The ascii artwork already reads these as four rows, one per man.
+            "rows": [
+              "Daniel",
+              "Hananiah",
+              "Mishael",
+              "Azariah"
+            ],
             "steps": [
               {
                 "role": "Hebrew Name (Confessing the true God)",
@@ -602,6 +635,13 @@ Daniel 9:24–27 ──▶  "Seventy weeks" (70 × 7 = 490 prophetic years)
           "s1-4": {
             "kind": "comparison",
             "title": "The Redemptive Typology",
+            "rows": [
+              "The setting",
+              "The temptation",
+              "The refusal",
+              "The provision",
+              "The kingdom"
+            ],
             "steps": [
               {
                 "role": "Daniel in Babylon",
@@ -1024,6 +1064,32 @@ DANIEL IN BABYLON                         JESUS IN THE WILDERNESS
         },
         title: "The Metallic Colossus: The Historicist Blueprint of History and the Sovereign Triumph of Christ",
         subtitle: "From the impasse of human wisdom to the stone that fills the earth — God's unbroken chain of empires and Christ's everlasting kingdom.",
+        /* `kind: "mindmap"` (js/study/mindmap.js) re-projects the same `steps[]`
+           around a centre node. The extra fields are structural only — no new
+           learner-facing prose, so tools/verify/extract_claim_units.mjs keeps
+           harvesting every word from the fields it already reads:
+             steps[].id     slug; the node's data-mm key. Defaults to step-<i>.
+             steps[].side   "L" | "R"; defaults to the first half on the left.
+             steps[].y      world y of the head node. The world is 960x660
+                            (js/study/mindmap.js), so the usable band is
+                            66…594 and its centre — where an omitted `y`
+                            lands — is 330. It was 1600x900 / 90…810 / 450
+                            before the world was shrunk for legibility; s2-4's
+                            four values are that world's own, re-based by
+                            660/900. Keep an authored spine's ends well inside
+                            0…660: a head card is ~150 px tall.
+             steps[].hero   gold breathing ring on the course's own reading.
+             steps[].up     reverses a leaf fan so a top cluster reads outward.
+             steps[].link   connector kind for this step's leaf fan: one of
+                            text | history | interpretation | christ. The four
+                            are the course's own self-check headings, so the map
+                            speaks the sitting's grammar. Omitted = unlabelled.
+             links[]        { from, to, kind, route? } connectors between two
+                            declared steps[].id values. `kind` is the same four
+                            words. `route` is "spine" (solid, the authored
+                            order), "vertical" or "under-centre" (dashed, a
+                            relation across it); it is derived from the two
+                            nodes' own positions when omitted. */
         diagrams: {
           "s2-1": {
             "kind": "steps",
@@ -1033,31 +1099,46 @@ DANIEL IN BABYLON                         JESUS IN THE WILDERNESS
                 "role": "Head of Gold",
                 "title": "Babylon",
                 "text": "605–539 B.C. (accession year; BRI: 606–539)",
-                "detail": "Verse 38 settles the whole framework before a single metal is named: \"Thou art this head of gold.\" If Babylon is the head, the chest, belly, legs, and feet that follow are the next kingdoms in order rather than a set of symbols that can be restarted in any century."
+                "detail": "Verse 38 settles the whole framework by naming the head of the image: \"Thou art this head of gold.\" The dream has already shown the metals and the mixed feet; what verse 38 fixes is which kingdom the head is. If Babylon is the head, the chest, belly, legs, and feet that follow are the next kingdoms in order rather than a set of symbols that can be restarted in any century."
+,
+                "bridgeShare": "one chain: a named head, then the kingdom after it",
+                "bridgeAhead": "Verse 38 names the head of the image, so the chest and arms that follow are the next kingdom in order rather than a symbol that can be restarted in any century. The record matches the metals: Babylon falls to the Medes and Persians, and the two arms answer the two-handed empire that replaced it."
               },
               {
                 "role": "Chest & Arms Silver",
                 "title": "Medo-Persia",
                 "text": "539 - 331 B.C.",
                 "detail": "The silver follows the gold the way the record does: Babylon falls to the Medes and Persians, and the two arms answer the two-handed empire that replaced it."
+,
+                "bridgeShare": "two kingdoms Daniel 8 names outright, the ram and the goat",
+                "bridgeAhead": "The silver is not left to inference: Daniel 8:20 names the ram as the kings of Media and Persia. The next movement takes the third metal, bronze, and the same chapter names it too — the rough goat, the king of Grecia. That is how the sequence is read without guessing."
               },
               {
                 "role": "Belly & Thighs Bronze",
                 "title": "Greece",
                 "text": "331 - 168 B.C.",
                 "detail": "Bronze is the third kingdom, and the vision gives it a breadth of rule the first two did not have. Gabriel names this one outright in Daniel 8:21, which is how the sequence can be read without guessing."
+,
+                "bridgeShare": "Bronze carries a breadth of rule, and iron breaks what it touches",
+                "bridgeAhead": "Bronze carries a breadth of rule the first two kingdoms did not have. The next movement takes the iron that follows it — a kingdom described by what it does to everything it touches, its two legs standing for an empire that divides in the end into east and west. One year closes the bronze and opens the iron: in 168, at Pydna, Rome ended the monarchy."
               },
               {
                 "role": "Legs of Iron",
                 "title": "Rome",
                 "text": "168 B.C. - A.D. 476",
                 "detail": "Iron breaks and subdues, and the fourth kingdom is described by what it does to everything it touches. The legs are two, and the empire they stand for divides in the end into east and west."
+,
+                "bridgeShare": "one kingdom, still iron, now in a divided dress",
+                "bridgeAhead": "The legs are two, and the empire they stand for divides in the end into east and west. The next movement shows that division inside the image: no fifth metal appears, only iron mixed with miry clay, and Daniel 2:43 says the mixture will not hold. This is the last political state of the iron."
               },
               {
                 "role": "Feet of Iron & Clay",
                 "title": "Divided Europe",
                 "text": "A.D. 476 - Second Advent",
                 "detail": "The feet are the only part of the image God's kingdom strikes, and 2:43 says the mixture will not hold. The metals decline in value as they harden: the head is gold and the feet are mud and iron."
+,
+                "bridgeShare": "a strike at the feet that breaks the whole image",
+                "bridgeAhead": "The feet are the only part of the image God's kingdom strikes, and Daniel 2:43 says the mixture will not hold. The next movement is the Stone: cut out without hands, no human power quarrying it, striking the feet in the days of these kings. It breaks the whole image at once and becomes a mountain that fills the earth — the kingdom does not arrive by the sword."
               },
               {
                 "role": "The Striking Stone",
@@ -1112,17 +1193,32 @@ DANIEL IN BABYLON                         JESUS IN THE WILDERNESS
             ]
           },
           "s2-3": {
-            "kind": "flow",
+            "kind": "mindmap",
             "title": "The Post-Roman Dilemma (Daniel 2:43)",
             "note": "Every attempt to rebuild a single European empire fractures",
+            "links": [
+              {
+                "from": "iron-clay",
+                "to": "not-cleave",
+                "kind": "text"
+              },
+              {
+                "from": "iron-clay",
+                "to": "not-cleave",
+                "kind": "interpretation"
+              }
+            ],
             "steps": [
               {
+                "id": "iron-clay",
                 "role": "Iron + Clay",
                 "title": "Iron (strength that remains) + Clay (the mixture that will not hold)"
               },
               {
+                "id": "not-cleave",
                 "role": "Mixture, Not Union",
                 "title": "They Shall Not Cleave",
+                "link": "history",
                 "points": [
                   "Charlemagne (800)",
                   "Charles V (1519)",
@@ -1133,28 +1229,64 @@ DANIEL IN BABYLON                         JESUS IN THE WILDERNESS
             ]
           },
           "s2-4": {
-            "kind": "flow",
+            "kind": "mindmap",
             "title": "The Smiting Stone",
+            "links": [
+              {
+                "from": "cut-out",
+                "to": "strikes",
+                "kind": "text"
+              },
+              {
+                "from": "cut-out",
+                "to": "strikes",
+                "kind": "history"
+              },
+              {
+                "from": "cut-out",
+                "to": "strikes",
+                "kind": "interpretation"
+              },
+              {
+                "from": "strikes",
+                "to": "pulverizes",
+                "kind": "text"
+              },
+              {
+                "from": "pulverizes",
+                "to": "becomes",
+                "kind": "christ"
+              }
+            ],
             "steps": [
               {
+                "id": "cut-out",
                 "role": "Cut Out",
                 "title": "Cut out without human hands",
+                "y": 198,
                 "text": "Divine origin, Supernatural"
               },
               {
+                "id": "strikes",
                 "role": "Strikes",
                 "title": "Strikes the Statue at the FEET",
                 "cite": "Dan. 2:34",
-                "text": "Not during Babylon, Persia, Greece, or Pagan Rome, but during the divided kingdoms after Rome (the feet)"
+                "y": 462,
+                "text": "Not during Babylon, Persia, Greece, or Pagan Rome, but during the divided kingdoms after Rome (the feet)",
+                "link": "interpretation"
               },
               {
+                "id": "pulverizes",
                 "role": "Pulverizes",
                 "title": "Pulverizes Gold, Silver, Bronze, Iron, & Clay",
+                "y": 220,
                 "text": "Becomes like chaff blown away"
               },
               {
+                "id": "becomes",
                 "role": "Becomes",
                 "title": "Becomes a Mountain Filling the Earth",
+                "y": 455,
                 "text": "The Everlasting Kingdom of God"
               }
             ]
@@ -1586,6 +1718,11 @@ Iron (strength that remains)  +  Clay (the mixture that will not hold)
           "s3-1": {
             "kind": "comparison",
             "title": "The Theological Collision at Dura",
+            "rows": [
+              "The image",
+              "The succession",
+              "The dominion"
+            ],
             "steps": [
               {
                 "role": "Daniel 2 (Heaven's Revelation)",
@@ -1656,6 +1793,10 @@ Iron (strength that remains)  +  Clay (the mixture that will not hold)
           "s3-3": {
             "kind": "comparison",
             "title": "The \"But If Not\" Posture",
+            "rows": [
+              "The words",
+              "The faith"
+            ],
             "steps": [
               {
                 "role": "God's Omnipotence",
@@ -2093,19 +2234,25 @@ THE TRIAL: IMMANENCE IN THE FIRE                           THE CROSS: VICARIOUS 
               {
                 "role": "Intellectual awe",
                 "title": "Acknowledges God as \"a revealer of secrets\"",
-                "cite": "Daniel 2:38",
+                "cite": "Daniel 2:47",
                 "detail": "The confession costs him nothing and does not outlast the chapter. The same court that hears it will be ordered to worship an image in Daniel 3, and the king who said it will be the one giving the order."
+,
+                "bridgeShare": "The same man speaks three times, and only the last costs him his glory",
+                "bridgeAhead": "This confession costs him nothing, and it does not outlast the chapter. The same court that hears it will later be ordered to worship an image, and the king who said it will be the one giving the order."
               },
               {
                 "role": "Reluctant toleration",
-                "title": "Acknowledges God as \"able to deliver\"",
-                "cite": "Daniel 3:17–18",
-                "detail": "The words in verse 17 belong to the three Hebrews, not to the king. His own verdict comes at 3:29, and it still leaves the image he set up standing in the plain of Dura."
+                "title": "Acknowledges \"no other God that can deliver after this sort\"",
+                "cite": "Daniel 3:29",
+                "detail": "The decree is the king's own; the words of faith in 3:17–18 belong to the three Hebrews, who said them before he spoke. His decree acknowledges a God able to deliver and still leaves the image he set up standing in the plain of Dura."
+,
+                "bridgeShare": "The three Hebrews speak words of faith, and the king answers with a decree of his own",
+                "bridgeAhead": "The words of faith here belong to the three Hebrews, not to the king; his own verdict is the decree of Daniel 3:29. That decree still leaves the image he set up standing in the plain of Dura, so the movement ends in policy rather than repentance."
               },
               {
                 "role": "Personal submission & worship",
                 "title": "Acknowledges God as \"the King of heaven\"",
-                "cite": "Daniel 4:34–35",
+                "cite": "Daniel 4:37",
                 "detail": "Only the third confession is spoken by a man with nothing left to defend, and only this one ends in praise rather than policy. The chapter closes with the king restored and the throne still God's to give."
               }
             ]
@@ -2113,6 +2260,12 @@ THE TRIAL: IMMANENCE IN THE FIRE                           THE CROSS: VICARIOUS 
           "s4-2": {
             "kind": "comparison",
             "title": "The Anatomy of the Vision",
+            "rows": [
+              "The crown",
+              "The shelter",
+              "The sign",
+              "The king"
+            ],
             "steps": [
               {
                 "role": "THE TALL COSMIC TREE",
@@ -2145,12 +2298,18 @@ THE TRIAL: IMMANENCE IN THE FIRE                           THE CROSS: VICARIOUS 
                 "title": "\"I have built\"",
                 "text": "Denies God as Creator/Giver.",
                 "detail": "The boast is the mirror of Daniel 2:37, where the same prophet told him that God had given him a kingdom, power, and strength, and glory. Every clause here takes one of those back."
+,
+                "bridgeShare": "The same claim is made three times over, growing to take the glory as well",
+                "bridgeAhead": "In Daniel 2:37 the same prophet told this king that God had given him a kingdom, power, and strength, and glory. This clause is the boast's mirror of that gift; the next one turns from what was received to the strength that received it."
               },
               {
                 "role": "Self-sufficiency",
                 "title": "\"By the might of my power\"",
                 "text": "Denies God's sovereign strength.",
                 "detail": "The kingdom that verse 17 says the Most High gives to whomsoever he will is claimed here as the work of one man's arm."
+,
+                "bridgeShare": "One man's arm is claimed first, and one man's majesty last",
+                "bridgeAhead": "The kingdom that Daniel 4:17 says the Most High gives to whomsoever he will is claimed here as the work of one man's arm. The boast goes further by taking the glory too, which is where the third movement arrives."
               },
               {
                 "role": "Self-worship",
@@ -2196,7 +2355,8 @@ THE TRIAL: IMMANENCE IN THE FIRE                           THE CROSS: VICARIOUS 
               },
               {
                 "title": "His understanding returns",
-                "cite": "Daniel 4:34–37"
+                "cite": "Daniel 4:34–37",
+                "centre": true
               },
               {
                 "title": "He blesses the Most High",
@@ -2211,6 +2371,14 @@ THE TRIAL: IMMANENCE IN THE FIRE                           THE CROSS: VICARIOUS 
           "s4-6": {
             "kind": "comparison",
             "title": "The Emperor of Babylon / The King of Glory",
+            "rows": [
+              "The person",
+              "The stance",
+              "The deed",
+              "The likeness",
+              "The humbling",
+              "The end"
+            ],
             "steps": [
               {
                 "role": "THE EMPEROR OF BABYLON",
@@ -2626,6 +2794,11 @@ Nebuchadnezzar (Daniel 4)                Jesus Christ (Philippians 2)
           "s5-1": {
             "kind": "comparison",
             "title": "The Siege of Babylon (539 B.C.). History: besieged (Ellen G. White, Prophets and Kings, ch. 43); without a battle (ABSG 2020 Q1, Lesson 6)",
+            "rows": [
+              "The scene",
+              "The defences",
+              "The kings"
+            ],
             "steps": [
               {
                 "role": "Outside the Walls",
@@ -2656,12 +2829,18 @@ Nebuchadnezzar (Daniel 4)                Jesus Christ (Philippians 2)
                 "title": "Nabonidus",
                 "text": "History: King of Babylon, residing in Tema, Arabia (Bible Commentary, vol. 4, on Daniel 5:1). ABC 7: The king (was) in Tayma.",
                 "detail": "The Nabonidus Chronicle places the king in Tayma while the city is governed in his name, and the Verse Account agrees. That absence is the reason a second man can hold the throne room on the night the writing appears."
+,
+                "bridgeShare": "The co-regency puts two rulers above the post Daniel is offered",
+                "bridgeAhead": "History: the Nabonidus Chronicle places the king in Tayma while the city is governed in his name, and the Verse Account agrees. That absence leaves the throne room to a second man, so the next movement is the son ruling inside Babylon in his father's place."
               },
               {
                 "role": "2nd Ruler",
                 "title": "Belshazzar",
                 "text": "History: Eldest son, Co-regent ruling inside Babylon (Bible Commentary, vol. 4, on Daniel 5).",
                 "detail": "He offers the third place in the kingdom, not the second, and that is the detail the co-regency explains. In Daniel 5:7 the reward is to be the third ruler, which is what a son ruling under an absent father could actually grant."
+,
+                "bridgeShare": "Nabonidus and Belshazzar stand above Daniel, who is offered the third place",
+                "bridgeAhead": "The eldest son, co-regent ruling inside Babylon, offers the third place in the kingdom, not the second (History). In Daniel 5:7 the reward is to be the third ruler, which is what a son ruling under an absent father could actually grant. The man who receives that offer is the exile the queen remembers to the king."
               },
               {
                 "role": "3rd Ruler",
@@ -2714,6 +2893,12 @@ Nebuchadnezzar (Daniel 4)                Jesus Christ (Philippians 2)
           "s5-4": {
             "kind": "comparison",
             "title": "The Fulfillment of Historicist Prophecy",
+            "rows": [
+              "Cyrus",
+              "The gates",
+              "The river",
+              "The kingdom"
+            ],
             "steps": [
               {
                 "role": "Isaiah 44:27; 45:1-3",
@@ -3212,6 +3397,12 @@ CYRUS THE DELIVERER                       JESUS CHRIST THE REDEEMER
           "s6-2": {
             "kind": "comparison",
             "title": "The Constitutional Paradigm Shift",
+            "rows": [
+              "The seat of law",
+              "The instrument",
+              "The test case",
+              "The record"
+            ],
             "steps": [
               {
                 "title": "Babylonian Autocracy",
@@ -3315,6 +3506,19 @@ CYRUS THE DELIVERER                       JESUS CHRIST THE REDEEMER
           "s6-6": {
             "kind": "comparison",
             "title": "Daniel and Jesus Christ",
+            "rows": [
+              "The plot",
+              "The innocence",
+              "The reluctant ruler",
+              "The sentence",
+              "The stone",
+              "The seal",
+              "The dawn",
+              "The angel",
+              "The outcome",
+              "The destroyer overcome",
+              "The kingdom proclaimed"
+            ],
             "steps": [
               {
                 "title": "Daniel in the Lions' Den",
@@ -3809,6 +4013,14 @@ DANIEL IN THE LIONS' DEN                 JESUS CHRIST AT CALVARY &amp; THE TOMB
           "s7-1": {
             "kind": "comparison",
             "title": "The Contiguous Prophetic Correlation: Daniel 2 & Daniel 7",
+            "rows": [
+              "Babylon",
+              "Medo-Persia",
+              "Greece",
+              "Rome",
+              "Divided Rome",
+              "The kingdom"
+            ],
             "steps": [
               {
                 "role": "The World's View: Metals",
@@ -3878,6 +4090,15 @@ DANIEL IN THE LIONS' DEN                 JESUS CHRIST AT CALVARY &amp; THE TOMB
           "s7-3": {
             "kind": "comparison",
             "title": "The Forensic Profile of the Eleventh Horn (Daniel 7:8, 24-25)",
+            "rows": [
+              "The rise",
+              "The distinction",
+              "The three horns",
+              "The claim",
+              "The persecution",
+              "Times and laws",
+              "The duration"
+            ],
             "steps": [
               {
                 "title": "Scriptural Criteria",
@@ -4417,6 +4638,12 @@ SCRIPTURAL CRITERIA:                     HISTORICAL FULFILLMENT:
           "s8-1": {
             "kind": "comparison",
             "title": "The Literary & Theological Shift: Daniel 7 to Daniel 8",
+            "rows": [
+              "The setting",
+              "The creatures",
+              "The focus",
+              "The language"
+            ],
             "steps": [
               {
                 "role": "DANIEL 7",
@@ -4990,7 +5217,7 @@ BIBLICAL REQUIREMENT:            ANTIOCHUS IV EPIPHANES:           HISTORICIST R
               {
                 "role": "Parent timeline",
                 "title": "2,300 Years",
-                "cite": "Daniel 8:14",
+                "cite": "Daniel 9:24",
                 "from": 0,
                 "to": 100,
                 "segments": [
@@ -5080,12 +5307,18 @@ BIBLICAL REQUIREMENT:            ANTIOCHUS IV EPIPHANES:           HISTORICIST R
                 "cite": "Ezra 7:11-26",
                 "text": "49 years (7 weeks) to 408 B.C.",
                 "detail": "Ezra 7 records the seventh year of Artaxerxes I, and this sitting reads it as 457 B.C. It is the decree that restores a civil polity to Jerusalem, which is what Daniel 9:25 asks for. The four decrees are compared in the table above: only this one restores city and state."
+,
+                "bridgeShare": "the seven weeks: 49 years from the decree to the rebuilt city",
+                "bridgeAhead": "Of the four Persian commissions this chart compares, only this one restores city and state — what Daniel 9:25 asks for when it says \"to restore and to build Jerusalem\". Its 49 years are the rebuilding that follows, and 9:25 puts that work \"in troublous times\"."
               },
               {
                 "role": "408 B.C.",
                 "title": "Jerusalem Rebuilt",
                 "text": "Troublous times. 434 years (62 weeks) to A.D. 27.",
                 "detail": "The first seven weeks cover the rebuilding, and Daniel 9:25 says it happens in troublous times. The sixty-two weeks then run 434 years from 408 B.C. to A.D. 27; the two spans are consecutive, not overlapping."
+,
+                "bridgeShare": "the sixty-two weeks: 434 years from the rebuilt city to the baptism",
+                "bridgeAhead": "The two spans are consecutive, not overlapping, so the 434 years run on from the rebuilt city to the Jordan. Sixty-nine of the seventy weeks land there, \"a dated decree at one end, a dated baptism at the other\" — the checkpoint the reckoning rests on. One week of the seventy remains, and it opens at this same baptism."
               },
               {
                 "role": "A.D. 27",
@@ -5105,6 +5338,9 @@ BIBLICAL REQUIREMENT:            ANTIOCHUS IV EPIPHANES:           HISTORICIST R
                 "title": "Baptism of Jesus",
                 "text": "\"Time is fulfilled\". Ministry to Israel. 3.5 years to A.D. 31.",
                 "detail": "The seventieth week opens where the sixty-ninth closed. Luke 3:21-22 anoints the Messiah at the Jordan, and the first half of the week is the ministry to Israel."
+,
+                "bridgeShare": "the one seventieth week, and the cross at its midst",
+                "bridgeAhead": "The seventieth week opens where the sixty-ninth closed — the baptism that completes the sixty-nine weeks is the same event that opens the seventieth. Its first half is the ministry to Israel, 3.5 years running to the Passover. The sitting reads the cross it reaches as \"the immovable anchor that validates the terminal date of the 2,300 days\"."
               },
               {
                 "role": "A.D. 31",
@@ -5112,6 +5348,9 @@ BIBLICAL REQUIREMENT:            ANTIOCHUS IV EPIPHANES:           HISTORICIST R
                 "text": "\"Messiah cut off\". Veil rent; sacrifices cease. 3.5 years to A.D. 34.",
                 "centre": true,
                 "detail": "Daniel 9:26 has Messiah cut off, and 9:27 has the sacrifice and oblation cease in the midst of the week. Matthew 27:51 records the veil of the temple rent in two, which is the sign the sitting points to."
+,
+                "bridgeShare": "the remaining half-week: the cross opens it, the stoning closes it",
+                "bridgeAhead": "Here the week reaches its midst, where Messiah is cut off and the sacrifice and oblation cease. The cross does not end the seventieth week: its remaining 3.5 years run on, and the gospel goes to the Gentiles as the weeks expire. The close comes with the stoning of Stephen, which the sitting reads as closing the seventy weeks allotted to Daniel's people and city — inferred from the half-week and from Acts, not from a year the narrative prints."
               },
               {
                 "role": "A.D. 34",
@@ -5154,7 +5393,7 @@ BIBLICAL REQUIREMENT:            ANTIOCHUS IV EPIPHANES:           HISTORICIST R
               },
               {
                 "title": "2,300 Years",
-                "cite": "Daniel 8:14",
+                "cite": "Daniel 9:24",
                 "from": 0,
                 "to": 100,
                 "segments": [

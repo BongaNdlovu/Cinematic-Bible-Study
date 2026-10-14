@@ -2179,7 +2179,10 @@
           const el = node.parentElement;
           if (!el) return NodeFilter.FILTER_REJECT;
           if (/^(SCRIPT|STYLE)$/.test(el.tagName)) return NodeFilter.FILTER_REJECT;
-          if (el.closest('blockquote, nav.lesson-toc, .cite-ref, a, button')) return NodeFilter.FILTER_REJECT;
+          /* `.mm` is the mindmap block. Its nodes are role=button, which the
+             `button` exclusion below does not catch, and a citation button
+             nested inside a node is not reachable or meaningful. */
+          if (el.closest('blockquote, nav.lesson-toc, .cite-ref, .mm, a, button')) return NodeFilter.FILTER_REJECT;
           return /\d:\d/.test(node.nodeValue || '') ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
         }
       });
@@ -2317,116 +2320,734 @@
       return '<div class="' + flowClass + '"' + flowStyle + '>' + parts.join('') + '</div>';
     }
 
+    /* A comparison is one of two shapes, and which one it is is a property of the
+       data, not of the drawing. Where every side carries the same number of
+       points and point k of each side is about the same thing, the spec is a
+       matrix that was flattened into parallel bullets: it carries `rows`, one
+       authored label per point, and is rendered as a real table — the thing it
+       actually is. Where the points differ in kind the sides are genuinely
+       parallel and keep the bullet layout, with no row labels invented for them.
+
+       Both shapes wear one set of clothes: serif italic column heads, monospace
+       labels, butt-joined bordered panels, a hairline between rows. A change of
+       shape never touches a point's text: the cells are `points[]` verbatim, and
+       the only copy this renderer has ever added is the row label, which
+       classifies the author's own points and asserts nothing. */
     function bodyComparison(spec, steps, canResolve) {
-      const cols = steps.map((side, i) => {
-        const t = (0.1 + i * 0.25).toFixed(2);
-        return '<div class="cmp-col" style="--t:' + t + 's">' +
-          '<div class="cmp-head">' +
-            (side.role ? '<p class="chain-role">' + escapeStudy(side.role) + '</p>' : '') +
-            (side.title ? '<h4 class="chain-title">' + escapeStudy(side.title) + '</h4>' : '') +
-            diagramCite(side.cite, canResolve) +
-          '</div>' +
-          '<ul class="cmp-list">' +
-            (side.points || []).map((p) => '<li>' + escapeStudy(p) + '</li>').join('') +
-          '</ul>' +
-        '</div>';
-      });
+      const rows = Array.isArray(spec.rows) ? spec.rows : [];
+      // A matrix only where the labels cover every side exactly. Anything else is
+      // the parallel shape, which is what the data is when the counts disagree.
+      const isMatrix = rows.length > 0 && steps.every((s) => (s.points || []).length === rows.length);
+
+      // A head is sized by this standard, so its parts are spans: `.article-body
+      // p` and `.article-body h4` both carry `font-size: … !important` for the
+      // reader's text-size control, and either element would overrule the block.
+      const colHead = (side) =>
+        (side.role ? '<span class="chain-role cmp-role">' + escapeStudy(side.role) + '</span>' : '') +
+        (side.title ? '<span class="chain-title cmp-title">' + escapeStudy(side.title) + '</span>' : '') +
+        diagramCite(side.cite, canResolve);
+
       // Some comparisons branch from one labelled node rather than being a flat
       // pair of columns. `centre` renders that node above the columns, keeping
       // its reference a resolvable chip instead of demoting it to a note.
       const c = spec.centre;
       const centreHtml = c
         ? '<div class="cmp-centre" style="--t:0.1s">' +
-            (c.role ? '<p class="chain-role">' + escapeStudy(c.role) + '</p>' : '') +
-            (c.title ? '<h4 class="chain-title">' + escapeStudy(c.title) + '</h4>' : '') +
+            (c.role ? '<span class="chain-role cmp-role">' + escapeStudy(c.role) + '</span>' : '') +
+            (c.title ? '<span class="chain-title cmp-title">' + escapeStudy(c.title) + '</span>' : '') +
             diagramCite(c.cite, canResolve) +
             (c.text ? '<p class="chain-text">' + escapeStudy(c.text) + '</p>' : '') +
           '</div>' +
           '<div class="cmp-stem" aria-hidden="true"></div>'
         : '';
+
+      if (isMatrix) {
+        // `th[scope=col]` for a column's identity and `th[scope=row]` for a row's,
+        // so the matrix stays a table for a screen reader. The stacked phone
+        // layout captions each value from `data-label`, the column it came from.
+        const head = '<tr class="cmp-headrow" style="--t:0.1s">' +
+          '<td class="cmp-corner"></td>' +
+          steps.map((side) => '<th scope="col" class="cmp-colhead">' + colHead(side) + '</th>').join('') +
+        '</tr>';
+        const body = rows.map((label, r) =>
+          // The stagger stops climbing after the eighth row: eleven rows of
+          // narrative should arrive as one movement, not as a queue.
+          '<tr style="--t:' + (0.16 + Math.min(r, 8) * 0.05).toFixed(2) + 's">' +
+            '<th scope="row" class="cmp-rowhead">' + escapeStudy(label) + '</th>' +
+            steps.map((side) => '<td data-label="' + escapeStudy(side.title || side.role || '') + '">' +
+              escapeStudy((side.points || [])[r] || '') + '</td>').join('') +
+          '</tr>').join('');
+        return '<div class="cmp is-matrix' + (c ? ' has-centre' : '') + '">' + centreHtml +
+          '<div class="cmp-matrix-wrap">' +
+            '<table class="cmp-matrix">' +
+              '<thead>' + head + '</thead>' +
+              '<tbody>' + body + '</tbody>' +
+            '</table>' +
+          '</div>' +
+        '</div>';
+      }
+
+      // Parallel columns. The head is a row of its own above the panels, so a
+      // column's identity sits in the same place in both shapes, and `--cmp-i`
+      // is what the stacked layout orders each head with its own panel by.
+      const at = (i) => (0.1 + i * 0.25).toFixed(2) + 's;--cmp-i:' + i;
+      const cols = steps.map((side, i) =>
+        '<div class="cmp-head" style="--t:' + at(i) + '">' + colHead(side) + '</div>').join('') +
+        steps.map((side, i) =>
+          '<div class="cmp-col' + (i === 0 ? ' is-first' : '') + '" style="--t:' + at(i) + '">' +
+            '<ul class="cmp-list">' +
+              (side.points || []).map((p) => '<li>' + escapeStudy(p) + '</li>').join('') +
+            '</ul>' +
+          '</div>').join('');
       // Column count follows the data: some comparisons have two sides, the
       // schools comparison has three.
       return '<div class="cmp' + (c ? ' has-centre' : '') + '">' + centreHtml +
-        '<div class="cmp-grid' + (cols.length >= 3 ? ' is-three' : '') + '" style="--cmp-cols:' + Math.max(2, cols.length) + '">' + cols.join('') + '</div>' +
+        '<div class="cmp-grid' + (steps.length >= 3 ? ' is-three' : '') + '" style="--cmp-cols:' + Math.max(2, steps.length) + '">' + cols + '</div>' +
       '</div>';
     }
 
+    /* A table is a matrix read down its columns, so its anatomy is the
+       reference's rather than a spreadsheet's: the row's identity is a
+       monospace label on the page ground at the left, the column's identity is
+       a serif italic head over the column, and the data columns are drawn as
+       butt-joined bordered panels — one ruled body, no zebra stripes and no
+       band of small-caps over the top.
+
+       Each row is two table cells then: the row's label, and one cell holding
+       that row's data cells as a single grid. The label column is a fixed width
+       and every row's grid is the rest of the row on the same
+       `repeat(N, minmax(0, 1fr))`, so a head over column 3 sits exactly over the
+       cells below it at any wrap and each column reads as one tall panel with
+       1px hairlines between its cells, rather than a tinted box per cell. The
+       label is a cell of the row, not of the grid, which is what puts it outside
+       the ruled body on the page ground with no border of its own.
+
+       (A non-table element cannot be a child of `tr`: the HTML parser
+       foster-parents it out of the table before any CSS sees it. So the grid is
+       a cell — `display: grid` on a `td` — and not a wrapper inside the row.)
+
+       Nothing is removed to achieve that: `thead`/`th[scope=col]` and
+       `th[scope=row]` are still the semantics (the head row's first cell is the
+       empty label cell of the row axis, which is what a matrix with a label
+       column has), `data-label` still carries the stacked-layout contract, and
+       an authored empty cell renders as an empty panel. */
     function bodyTable(spec, rows) {
       const head = spec.head || [];
+      const cols = Math.max(1, head.length - 1);
       const body = rows;
+      /* Written once: the real `<th scope=col>` heads and the stacked layout's
+         `data-label` captions are the same words. */
+      const dataHeads = head.slice(1);
       return '<div class="tbl-wrap"><table class="tbl">' +
         (head.length
-          ? '<thead><tr>' + head.map((h) => '<th scope="col">' + escapeStudy(h) + '</th>').join('') + '</tr></thead>'
+          ? '<thead><tr><th class="tbl-label" scope="col" aria-label="Row"></th>' +
+            '<td class="tbl-grid is-head" style="--tbl-cols:' + cols + '">' +
+              dataHeads.map((h) => '<span class="tbl-head" role="columnheader">' + escapeStudy(h) + '</span>').join('') +
+            '</td></tr></thead>'
           : '') +
-        '<tbody>' + body.map((r) => '<tr>' +
-          (r.cells || []).map((c, ci) => (ci === 0
-            ? '<th scope="row">' + escapeStudy(c) + '</th>'
-            : '<td data-label="' + escapeStudy(head[ci] || '') + '">' + escapeStudy(c) + '</td>')).join('') +
-        '</tr>').join('') + '</tbody>' +
+        '<tbody>' + body.map((r) => {
+          const cells = r.cells || [];
+          return '<tr>' +
+            '<th class="tbl-label" scope="row">' + (cells.length ? escapeStudy(cells[0]) : '') + '</th>' +
+            '<td class="tbl-grid" style="--tbl-cols:' + cols + '">' +
+              cells.slice(1).map((c, ci) => '<span class="tbl-cell" data-label="' + escapeStudy(dataHeads[ci] || '') + '">' + escapeStudy(c) + '</span>').join('') +
+            '</td>' +
+          '</tr>';
+        }).join('') + '</tbody>' +
       '</table></div>';
     }
 
-    function bodyFlow(spec, steps, canResolve) {
-      let t = 0.1;
-      return '<div class="flow-stack">' + steps.map((step) => {
-        const html = '<div class="flow-step" style="--t:' + t.toFixed(2) + 's">' +
-          (step.role ? '<p class="chain-role">' + escapeStudy(step.role) + '</p>' : '') +
-          (step.title ? '<h4 class="chain-title">' + escapeStudy(step.title) + '</h4>' : '') +
-          diagramCite(step.cite, canResolve) +
-          (step.text ? '<p class="chain-text">' + escapeStudy(step.text) + '</p>' : '') +
-          ((step.points || []).length
-            ? '<ul class="flow-points">' + step.points.map((p) => '<li>' + escapeStudy(p) + '</li>').join('') + '</ul>'
-            : '') +
-        '</div>';
-        t += 0.35;
-        return html;
-      }).join('') + '</div>';
+    /* Mindmap: the same steps re-projected around a centre node (C1–C21 of
+       docs/spec-flow-mindmap.md). The body is a host element and nothing else —
+       js/study/mindmap.js renders into it and owns the rAF loop, the observers
+       and every listener, so the block can be destroyed with the figure. */
+    function bodyMindmap(spec) {
+      return '<div class="mm" data-mm-host></div>';
     }
 
-    /* Timeline: tracks of unequal length. Each entry names the ground it
-       covers and how far along the axis that runs, as a percentage pair. The
-       point is the contrast between a chain that runs to the end of the age and
-       one that stops in antiquity, which a row of equal cards cannot show. */
-    function bodyTimeline(spec, steps, canResolve) {
-      const axis = Array.isArray(spec.axis) ? spec.axis : [];
-      let t = 0.1;
-      const tracks = steps.map((step) => {
-        const from = Math.max(0, Math.min(100, Number(step.from) || 0));
-        const to = Math.max(0, Math.min(100, Number(step.to) || 0));
-        const lo = Math.min(from, to);
-        const hi = Math.max(from, to);
-        const span = Math.max(1, hi - lo);
-        // Segment labels are listed beneath the rail, not set inside it: a segment a
-        // few years wide is a sliver of the axis and cannot hold its label.
-        const segs = (step.segments || []).map((sg) => {
-          const sFrom = Number(sg.from) || 0;
-          const sTo = Number(sg.to) || 0;
-          const w = Math.max(0.5, Math.abs(sTo - sFrom));
-          return '<span class="tl-seg" style="left:' + Math.min(sFrom, sTo) + '%;width:' + w + '%" aria-hidden="true"></span>';
-        }).join('');
-        const notes = (step.segments || []).filter((sg) => sg.label)
-          .map((sg) => '<li>' + escapeStudy(sg.label) + '</li>').join('');
-        const html = '<div class="tl-track" style="--t:' + t.toFixed(2) + 's">' +
-          '<div class="tl-label">' +
+    /* A flow is a strict sequence, so its steps stay stacked and visible as a
+       whole: the order is the argument. What the stack was missing is the rail.
+       It draws one continuous line through the steps with a marker on each, runs
+       a travelling highlight down it when the block enters (and again from the
+       figure's own Replay control, which replays the entrance animation), and
+       lets a step open the course's existing full-screen reader as its scene.
+
+       `continuation` is computed by the renderer from the neighbouring diagram of
+       the same kind: the index of every step whose own words already appeared
+       there, and the beat the sweep should enter on. No copy is involved. */
+    const FLOW_ASIDES = {
+      /* The one label a flow prints that is not read off the step it hangs on:
+         the state Daniel 12:1 has not yet reached. It is the sitting's own
+         sentence, quoted verbatim in docs/flow-map-decisions.md §6.5 ("Hebrews
+         7:25 is the ministry of this age"); the side-note beside it is s10-2
+         step 1's own `text`. Nothing here is authored copy. */
+      's10-2': { step: 0, counter: 'Hebrews 7:25 is the ministry of this age' }
+    };
+
+    function bodyFlow(spec, steps, canResolve, diagramId, continuation) {
+      const aside = FLOW_ASIDES[diagramId] || null;
+      const shared = (continuation && continuation.shared) || new Set();
+      const last = steps.length - 1;
+      const enter = Math.max(0, Math.min(last, (continuation && continuation.enter) || 0));
+      // One beat per step: the mark on the rail lights as the highlight reaches
+      // it, and the cards keep the stagger they have always had.
+      const BEAT = 0.35;
+      const lit = (i) => 0.15 + Math.max(0, i - enter) * BEAT;
+      const travel = (lit(last) + 0.9).toFixed(2) + 's';
+      const parts = [];
+      steps.forEach((step, i) => {
+        if (i > 0) {
+          // The segment of rail between two steps, drawn in as the light arrives.
+          parts.push('<div class="flow-connector" style="--t:' + (lit(i - 1) + BEAT / 2).toFixed(2) + 's" aria-hidden="true">' +
+            '<span class="flow-connector-line"></span>' +
+            '<span class="flow-connector-tip"></span>' +
+          '</div>');
+        }
+        const asideHere = !!aside && aside.step === i;
+        // The step's own words name its marker for a screen reader; the card
+        // around the marker is the pointer target for the same scene.
+        const label = String(step.title || step.role || ('Step ' + (i + 1)));
+        parts.push('<div class="flow-step' + (shared.has(i) ? ' is-shared' : '') + (step.centre ? ' is-centre' : '') + (asideHere ? ' has-aside' : '') + '"' +
+          ' data-index="' + i + '" style="--t:' + (0.1 + i * BEAT).toFixed(2) + 's">' +
+          '<button class="flow-node" type="button" aria-label="' + escapeStudy(label) + '">' +
+            '<span class="flow-node-dot" style="--t:' + lit(i).toFixed(2) + 's" aria-hidden="true"></span>' +
+          '</button>' +
+          '<span class="flow-scene-mark" aria-hidden="true">' +
+            '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 2H14v4.5M6.5 14H2V9.5M14 2 9.6 6.4M2 14l4.4-4.4"/></svg>' +
+          '</span>' +
+          '<div class="flow-content">' +
+            // A centre keeps the medal the story carousel gives one, so a centre
+            // movement reads the same in both renderers.
+            (step.centre && !storySrc(step)
+              ? '<div class="story-medal" aria-hidden="true"><svg viewBox="0 0 140 140" fill="none" stroke="currentColor"><circle cx="70" cy="70" r="58" stroke-width="1.2"/><path d="M70 36V106M51 58H89" stroke-width="3.5" stroke-linecap="round"/></svg></div>'
+              : '') +
             (step.role ? '<p class="chain-role">' + escapeStudy(step.role) + '</p>' : '') +
             (step.title ? '<h4 class="chain-title">' + escapeStudy(step.title) + '</h4>' : '') +
             diagramCite(step.cite, canResolve) +
+            // A `text` that hangs beside the step as a side-note is not repeated
+            // inside it.
+            (step.text && !asideHere ? '<p class="chain-text">' + escapeStudy(step.text) + '</p>' : '') +
+            ((step.points || []).length
+              ? '<ul class="flow-points">' + step.points.map((p) => '<li>' + escapeStudy(p) + '</li>').join('') + '</ul>'
+              : '') +
           '</div>' +
-          '<div class="tl-body">' +
-            '<div class="tl-rail">' +
-              '<span class="tl-bar" style="left:' + lo + '%;width:' + span + '%"></span>' +
-              segs +
-            '</div>' +
-            (notes ? '<ul class="tl-notes">' + notes + '</ul>' : '') +
+          (asideHere
+            ? '<aside class="flow-aside">' +
+                (step.text ? '<p class="flow-note">' + escapeStudy(step.text) + '</p>' : '') +
+                (aside.counter ? '<p class="flow-counter">' + escapeStudy(aside.counter) + '</p>' : '') +
+              '</aside>'
+            : '') +
+        '</div>');
+      });
+      // The scene layer: the same steps again as reader cards, so a step can open
+      // the course's existing full-screen reader. The carousel they belong to
+      // stays hidden — a flow's order must remain visible at once — and only its
+      // `.story-read` dialog is ever shown.
+      return '<div class="flow-stack" style="--flow-travel:' + travel + '"' +
+          (enter > 0 ? ' data-flow-enter="' + enter + '"' : '') + '>' +
+          '<div class="flow-rail" aria-hidden="true"><span class="flow-rail-pulse"></span></div>' +
+          parts.join('') +
+        '</div>' +
+        '<div class="flow-scenes" hidden aria-hidden="true">' + bodyStory(spec, steps, canResolve, 0, diagramId) + '</div>';
+    }
+
+    /* ---- Timeline standard ------------------------------------------------
+       Ported from the standalone cinematic timeline the brief names. A spine
+       draws itself in left to right; each segment is a stroke on that beat; each
+       dated milestone is a node — ringed dot, serif year, sans event, mono
+       reference, and a stemmed badge carrying an icon; each spec `segment` is a
+       span bracket captioned with its own leading clause; the longest stretch is
+       ticked by the century; the last milestone is filled, haloed and pings; and
+       one selection keeps the axis, the legend and the panel in step.
+
+       A milestone is a date the spec already prints — an axis endpoint, or a year
+       named in a track's `role` or a segment's `label`. Its place is its own
+       arithmetic: 457 B.C. is -456, so A.D. 34 is 490 years on. It is drawn on an
+       even beat because on a 2,300-year axis A.D. 27, 31 and 34 fall within 0.3%
+       of one another, i.e. on one dot. The reference resolves the same collision
+       the same way, and says so: `.tlx-scale` underneath is the to-scale
+       statement, each part at its true proportion.
+
+       Nothing here is authored copy. The brackets are the spec's `segments`, the
+       panel body is a segment's own `label`, the node's reference line is its
+       track's own `cite` or `role`, the bar's split is `from`/`to` read as years,
+       and the century ticks are multiples of a hundred on the axis. */
+    const TLX_W = 1600;
+    const TLX_EDGE = 150;
+    const TLX_LEVEL = 48;
+    const TLX_BRACKET_Y = 66;
+    const TLX_PALETTE = ['#7db3e8', '#f2c75a', '#e8695d', '#b79af0', '#5fc4b0'];
+    const TLX_FINAL = '#fff1c9';
+    const TLX_GILT = '#dcb257';
+    /* The reference's own icon set, on its 24-unit grid. */
+    const TLX_ICONS = {
+      scroll: 'M6 3h9l4 4v14H6ZM15 3v4h4M9 12h7M9 16h7',
+      drop: 'M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11Z',
+      cross: 'M12 3v18M6.5 9h11',
+      globe: 'M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18ZM3 12h18M12 3c3 2.7 3 15.3 0 18M12 3c-3 2.7-3 15.3 0 18',
+      hourglass: 'M6 3h12M6 21h12M7 3v4l5 5-5 5v4M17 3v4l-5 5 5 5v4',
+      temple: 'M3 20h18M5 20V11M19 20V11M3 11l9-7 9 7M9 20v-5h6v5',
+      ring: 'M12 3.4a8.6 8.6 0 1 0 0 17.2 8.6 8.6 0 0 0 0-17.2ZM12 10.6a1.4 1.4 0 1 0 0 2.8 1.4 1.4 0 0 0 0-2.8Z'
+    };
+    /* Which badge a milestone wears is read off the milestone's own words. */
+    const TLX_ICON_RULES = [
+      [/decree|restore|rebuild|command|edict/i, 'scroll'],
+      [/baptis|anoint|messiah|spirit/i, 'drop'],
+      [/cross|cut off|midst|death/i, 'cross'],
+      [/cleans|sanctuar|atonement|temple|church|pope|papacy|roman|judgment/i, 'temple'],
+      [/wait|centur|remain|long stretch|time of the end/i, 'hourglass'],
+      [/gospel|gentile|nation|world|week|seventy/i, 'globe'],
+      [/prophec|unseal|vision|seal/i, 'scroll']
+    ];
+    const TLX_YEAR_RX = /(\d[\d,]*)\s*(B\.C\.|A\.D\.)|(B\.C\.|A\.D\.)\s*(\d[\d,]*)/g;
+    const TLX_BREAK_RX = /\s*:\s+|\s*(?:→|—|–)\s*|\s*;\s*/;
+    const TLX_JOIN_RX = /^(?:to|and|then|until|til)\b[\s:,]*/i;
+    const TLX_TAIL_RX = /\s+(?:to|and|then|until|til)$/i;
+
+    /* Every dated token in a string, in order. `year` is the astronomical year —
+       457 B.C. is -456 — which is what makes a span between two dates
+       subtractable, so a milestone needs no position table. */
+    function tlxYears(text) {
+      const src = String(text == null ? '' : text);
+      const out = [];
+      TLX_YEAR_RX.lastIndex = 0;
+      let m = TLX_YEAR_RX.exec(src);
+      while (m) {
+        const era = m[2] || m[3];
+        const n = parseInt(String(m[1] || m[4]).replace(/,/g, ''), 10);
+        if (Number.isFinite(n)) {
+          out.push({ at: m.index, end: TLX_YEAR_RX.lastIndex, label: m[0].replace(/\s+/g, ' ').trim(), year: era === 'B.C.' ? 1 - n : n });
+        }
+        m = TLX_YEAR_RX.exec(src);
+      }
+      return out;
+    }
+
+    /* A label's clauses. Only a separator that introduces one splits, so
+       "2,300 Years (Daniel 8:14)" survives whole while "483 Years: 457 B.C. …"
+       reads as "483 Years". */
+    function tlxClauses(label) {
+      return String(label == null ? '' : label).split(TLX_BREAK_RX).map((s) => s.trim()).filter(Boolean);
+    }
+
+    function tlxGroup(n) {
+      return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    }
+
+    function tlxClip(text, max) {
+      const s = String(text == null ? '' : text).trim();
+      if (s.length <= max) return s;
+      const cut = s.slice(0, max);
+      const space = cut.lastIndexOf(' ');
+      return (space > max * 0.55 ? cut.slice(0, space) : cut).replace(/[\s,;:.]+$/, '') + '…';
+    }
+
+    /* A long event name becomes at most `lines` centred rows of about `perLine`
+       characters, so it reads as two rows instead of running under its
+       neighbours. The panel below prints the segment in full, so clipping the
+       last row loses nothing. */
+    const TLX_DANGLE_RX = /\s+(?:&|and|or|to|of|the|in|for|a|an)$/i;
+    function tlxWrap(text, perLine, lines) {
+      const words = String(text == null ? '' : text).split(/\s+/).filter(Boolean);
+      const rows = [];
+      let row = '';
+      words.forEach((w) => {
+        if (rows.length >= lines) return;
+        const next = row ? row + ' ' + w : w;
+        if (next.length <= perLine) { row = next; return; }
+        if (row) { rows.push(row); row = ''; }
+        if (w.length <= perLine) row = w;
+        else rows.push(tlxClip(w, perLine));
+      });
+      if (row && rows.length < lines) rows.push(row);
+      /* A row that ends on a joining word reads as a break in the middle of its
+         phrase, so that word starts the next row instead. */
+      for (let i = 0; i < rows.length - 1; i += 1) {
+        const tail = TLX_DANGLE_RX.exec(rows[i]);
+        if (!tail) continue;
+        rows[i] = rows[i].slice(0, tail.index);
+        rows[i + 1] = tail[0].trim() + ' ' + rows[i + 1];
+      }
+      const shown = rows.join(' ').length;
+      if (rows.length && shown < words.join(' ').length) rows[rows.length - 1] += '…';
+      return rows.length ? rows : [''];
+    }
+
+    /* What the label says happens at a date: the words that follow the year, up
+       to the next date or the next clause, with a joining "to" trimmed off either
+       end — "457 B.C. Decree to Restore City to A.D. 27" reads "Decree to
+       Restore City". */
+    function tlxPhrase(label, year) {
+      const src = String(label == null ? '' : label);
+      const tokens = tlxYears(src);
+      const hit = tokens.find((t) => t.year === year);
+      if (!hit) return '';
+      const next = tokens.find((t) => t.at >= hit.end);
+      const tail = src.slice(hit.end, next ? next.at : src.length).split(TLX_BREAK_RX)[0];
+      return tlxClip(tail.trim().replace(TLX_JOIN_RX, '').replace(TLX_TAIL_RX, '').trim(), 46);
+    }
+
+    /* The badge is read off the milestone's own name first, and only then off the
+       segments it sits between: a label that says "457 B.C. Decree" must not put
+       a scroll on the baptism three beats later. */
+    function tlxIcon(title, labels) {
+      const first = String(title == null ? '' : title);
+      for (const rule of TLX_ICON_RULES) if (rule[0].test(first)) return rule[1];
+      const rest = String(labels == null ? '' : labels);
+      for (const rule of TLX_ICON_RULES) if (rule[0].test(rest)) return rule[1];
+      return 'ring';
+    }
+
+    /* The spec read into the shape an axis needs: the milestones in date order
+       with the slot each is drawn in, the segments with the slots they span, and
+       the intervals between the milestones. */
+    function tlxModel(spec, steps) {
+      const axis = (Array.isArray(spec.axis) ? spec.axis : []).map((a) => String(a == null ? '' : a));
+      const ends = axis.map((a) => tlxYears(a)[0] || null);
+      if (!ends[0] || !ends[1]) return null;
+      const start = Math.min(ends[0].year, ends[1].year);
+      const end = Math.max(ends[0].year, ends[1].year);
+      const span = end - start;
+      if (!(span > 0)) return null;
+
+      const segs = [];
+      steps.forEach((step) => {
+        (step.segments || []).forEach((sg) => {
+          const from = Number(sg.from);
+          const to = Number(sg.to);
+          if (!Number.isFinite(from) || !Number.isFinite(to)) return;
+          const label = String(sg.label == null ? '' : sg.label).trim();
+          segs.push({
+            label: label, lo: Math.min(from, to), hi: Math.max(from, to), step: step,
+            head: tlxClauses(label)[0] || label,
+            colour: TLX_PALETTE[segs.length % TLX_PALETTE.length]
+          });
+        });
+      });
+      if (!segs.length) return null;
+
+      /* A date is a milestone if the spec prints it inside the axis. The axis's
+         own two labels are read first, so an endpoint keeps the authored order
+         ("1844 A.D.", not "A.D. 1844"). */
+      const byYear = new Map();
+      const note = (token) => {
+        if (!token || token.year < start - 0.5 || token.year > end + 0.5) return;
+        const key = Math.round(token.year);
+        if (!byYear.has(key)) byYear.set(key, { year: key, label: token.label });
+      };
+      ends.forEach(note);
+      segs.forEach((sg) => tlxYears(sg.label).forEach(note));
+      steps.forEach((step) => { tlxYears(step.role).forEach(note); tlxYears(step.title).forEach(note); });
+      const miles = Array.from(byYear.values()).sort((a, b) => a.year - b.year);
+      if (miles.length < 2) return null;
+
+      /* The margin at each end is what keeps the first and last milestone's name
+         inside the axis: a centred label needs as much room beside its node as
+         half its own width, so the margin is set from how many milestones there
+         are. Three can afford a wide one and print their names whole; five
+         cannot, and wrap. */
+      const edge = Math.max(TLX_EDGE, Math.min(420, (TLX_W * 0.48) / miles.length));
+      const slotStep = (TLX_W - 2 * edge) / (miles.length - 1);
+      /* How many characters a milestone's name may hold before it wraps: the slot
+         it owns, less a margin, at the sans face's average advance. No name ever
+         reaches into its neighbour's column. */
+      const perLine = Math.max(16, Math.floor((slotStep * 0.92) / 13));
+      const pctOf = (year) => ((year - start) / span) * 100;
+      const yearAt = (pct) => start + (pct / 100) * span;
+      const slotOf = (year) => {
+        let best = 0;
+        let gap = Infinity;
+        miles.forEach((m, i) => {
+          const d = Math.abs(m.year - year);
+          if (d < gap) { gap = d; best = i; }
+        });
+        return best;
+      };
+      miles.forEach((m, i) => {
+        m.slot = i;
+        m.x = edge + i * slotStep;
+        m.colour = i === miles.length - 1 ? TLX_FINAL : TLX_PALETTE[i % TLX_PALETTE.length];
+      });
+      segs.forEach((sg) => {
+        const a = slotOf(yearAt(sg.lo));
+        const b = slotOf(yearAt(sg.hi));
+        sg.a = Math.min(a, b);
+        sg.b = Math.max(a, b);
+      });
+
+      miles.forEach((m) => {
+        m.touch = segs.filter((sg) => sg.a === m.slot || sg.b === m.slot);
+        let title = '';
+        for (const sg of m.touch) {
+          title = tlxPhrase(sg.label, m.year);
+          if (title) break;
+        }
+        const opens = m.touch.find((sg) => sg.a === m.slot) || null;
+        if (!title && m.touch.length) {
+          /* No date in the label to hang a phrase on: the segment that opens
+             here names what begins, the one that closes here names what ends. */
+          const src = opens || m.touch[0];
+          const clauses = tlxClauses(src.label);
+          title = opens ? (clauses[0] || '') : (clauses[clauses.length - 1] || '');
+        }
+        const primary = m.touch[0] || null;
+        m.track = primary ? primary.step : null;
+        if (!title) title = (m.track && (m.track.title || m.track.role)) || '';
+        m.title = tlxClip(title, 46);
+        m.cite = (m.track && m.track.cite) || '';
+        m.ref = tlxClip(m.cite || (m.track && (m.track.role || m.track.title)) || '', 34);
+        m.rows = tlxWrap(m.title, perLine, 2);
+        m.icon = tlxIcon(m.title, m.touch.map((sg) => sg.label).join(' '));
+        m.aria = m.label + (m.title ? ': ' + m.title : '');
+        m.parts = [];
+        const seen = new Set();
+        m.touch.forEach((sg) => {
+          if (seen.has(sg.label)) return;
+          seen.add(sg.label);
+          m.parts.push({ kicker: [sg.step.role, sg.step.title].filter(Boolean).join(' · '), label: sg.label });
+        });
+      });
+
+      /* The interval a stretch of spine is drawn across, and the colour it takes:
+         the narrowest segment that covers it, which is the one that names it. */
+      const intervals = [];
+      for (let i = 0; i < miles.length - 1; i += 1) {
+        const a = miles[i];
+        const b = miles[i + 1];
+        const mid = pctOf((a.year + b.year) / 2);
+        let pick = null;
+        segs.forEach((sg) => {
+          if (mid < sg.lo || mid > sg.hi) return;
+          if (!pick || sg.hi - sg.lo < pick.hi - pick.lo) pick = sg;
+        });
+        const years = b.year - a.year;
+        intervals.push({
+          a: a, b: b, years: years, colour: pick ? pick.colour : TLX_GILT,
+          label: '+' + tlxGroup(years) + (years === 1 ? ' YEAR' : ' YEARS')
+        });
+      }
+
+      /* Brackets nest: the widest span takes the top line, and a span that
+         overlaps one already placed drops a level. */
+      const brackets = segs.filter((sg) => sg.b > sg.a).sort((x, y) => (y.b - y.a) - (x.b - x.a) || x.a - y.a);
+      const levelEnds = [];
+      brackets.forEach((sg) => {
+        let level = 0;
+        while (level < levelEnds.length && levelEnds[level] > sg.a) level += 1;
+        levelEnds[level] = sg.b;
+        sg.level = level;
+      });
+      const levels = Math.max(1, levelEnds.length);
+
+      /* The entrance: one beat per interval, its length set by the years it
+         covers, so the long stretch draws slower than the last week. A milestone
+         arrives when the spine reaches it, and a bracket when its own end has. */
+      const longest = intervals.reduce((best, iv) => (iv.years > best.years ? iv : best), intervals[0]);
+      let clock = 0.15;
+      intervals.forEach((iv) => {
+        iv.t = clock;
+        iv.dur = 0.35 + 0.5 * (iv.years / longest.years);
+        clock += iv.dur;
+        iv.arrive = clock;
+      });
+      miles.forEach((m, i) => { m.t = i === 0 ? 0.1 : intervals[i - 1].arrive; });
+      brackets.forEach((sg) => {
+        sg.t = intervals[sg.b - 1].arrive + 0.25;
+        /* A caption may not run past the span it labels. The budget is that
+           bracket's own width at the caption's type size, and the track's
+           reference is dropped before the segment's own name is clipped — the
+           panel below always prints the reference in full. */
+        const width = Math.abs(miles[sg.b].x - miles[sg.a].x);
+        const budget = Math.max(12, width / 14.4);
+        const named = /[0-9]\s*:\s*[0-9]/.test(sg.head) || !sg.step.cite;
+        const withCite = named ? sg.head : sg.head + ' · ' + sg.step.cite;
+        sg.caption = withCite.length <= budget ? withCite : tlxClip(sg.head, budget);
+      });
+
+      /* Century marks on the longest stretch, at their due share of it. */
+      let tickStep = 100;
+      while (longest.years / tickStep > 22) tickStep *= 2;
+      const ticks = [];
+      for (let y = Math.ceil((longest.a.year + 1) / tickStep) * tickStep; y < longest.b.year; y += tickStep) {
+        const f = (y - longest.a.year) / longest.years;
+        ticks.push({ x: longest.a.x + (longest.b.x - longest.a.x) * f, t: longest.t + f * longest.dur });
+      }
+
+      /* The vertical rhythm is the reference's, tightened: the bracket stack, the
+         badges, the spine and the three lines under each milestone. In column and
+         full screen alike the whole diagram has to fit one plate, so the badge
+         hangs just clear of the last bracket line and the lines under the spine
+         sit at a 30-unit pitch. */
+      const top = TLX_BRACKET_Y + (levels - 1) * TLX_LEVEL;
+      const badgeY = top + 62;
+      const spineY = badgeY + 82;
+      const yearY = spineY + 60;
+      const pitch = 30;
+      miles.forEach((m) => {
+        m.yearY = yearY;
+        m.titleY = yearY + 40;
+        m.refY = m.titleY + m.rows.length * pitch + 8;
+      });
+      const height = miles.reduce((deep, m) => Math.max(deep, m.refY), 0) + 22;
+
+      /* The to-scale bar: the axis is split at the milestone that divides it most
+         evenly, at that milestone's true proportion. The remaining cuts are
+         hairlines, and the sum is the arithmetic the axis already carries. */
+      let cut = null;
+      miles.slice(1, -1).forEach((m) => {
+        const left = m.year - start;
+        const right = end - m.year;
+        const even = Math.min(left, right);
+        if (!cut || even > cut.even) cut = { m: m, even: even, left: left, right: right };
+      });
+      const marks = miles.slice(1, -1).map((m) => ({ m: m, pct: pctOf(m.year), main: !!cut && m === cut.m }));
+      if (cut) marks.sort((a, b) => (b.main ? 1 : 0) - (a.main ? 1 : 0));
+
+      return {
+        miles: miles, segs: segs, intervals: intervals, brackets: brackets, ticks: ticks,
+        start: start, end: end, span: span, axis: axis, cut: cut, marks: marks,
+        cutPct: cut ? pctOf(cut.m.year) : null,
+        badgeY: badgeY, spineY: spineY, height: height, levels: levels
+      };
+    }
+
+    function bodyTimeline(spec, steps, canResolve) {
+      const model = tlxModel(spec, steps);
+      /* A timeline with no dated axis cannot be drawn on one. The tracks and their
+         segments are still listed rather than dropped. */
+      if (!model) {
+        return '<div class="tlx"><ul class="tlx-plain">' + steps.map((step) => '<li>' +
+          (step.role ? '<b>' + escapeStudy(step.role) + '</b> ' : '') +
+          (step.title ? escapeStudy(step.title) + ' ' : '') +
+          diagramCite(step.cite, canResolve) +
+          (step.segments || []).map((sg) => '<span>' + escapeStudy(sg.label) + '</span>').join('') +
+        '</li>').join('') + '</ul></div>';
+      }
+      const miles = model.miles;
+      const last = miles.length - 1;
+
+      /* --- the axis ------------------------------------------------------- */
+      const parts = [];
+      model.intervals.forEach((iv) => {
+        parts.push('<path class="tlx-seg" pathLength="1" d="M' + iv.a.x + ' ' + model.spineY + 'H' + iv.b.x +
+          '" style="--tlx-c:' + iv.colour + ';--tlx-t:' + iv.t.toFixed(2) + 's;--tlx-du:' + iv.dur.toFixed(2) + 's"/>');
+      });
+      /* Ticks are struck over the spine, as the reference draws them: they are the
+         century marks of the long stretch, not a decoration underneath it. */
+      model.ticks.forEach((tk) => {
+        parts.push('<path class="tlx-tick" d="M' + tk.x.toFixed(1) + ' ' + (model.spineY - 12) + 'V' + (model.spineY + 12) +
+          '" style="--tlx-t:' + tk.t.toFixed(2) + 's"/>');
+      });
+      model.brackets.forEach((sg) => {
+        const y = TLX_BRACKET_Y + sg.level * TLX_LEVEL;
+        const x1 = miles[sg.a].x;
+        const x2 = miles[sg.b].x;
+        parts.push('<g class="tlx-br" style="--tlx-c:' + sg.colour + ';--tlx-t:' + sg.t.toFixed(2) + 's">' +
+          '<path class="tlx-br-line" pathLength="1" d="M' + x1 + ' ' + (y + 20) + 'V' + y + 'H' + x2 + 'V' + (y + 20) + '"/>' +
+          '<text class="tlx-bt" x="' + ((x1 + x2) / 2).toFixed(1) + '" y="' + (y - 24) + '">' + escapeStudy(sg.caption) + '</text>' +
+        '</g>');
+      });
+      model.intervals.forEach((iv) => {
+        parts.push('<text class="tlx-dl" x="' + ((iv.a.x + iv.b.x) / 2).toFixed(1) + '" y="' + (model.spineY - 22) +
+          '" style="--tlx-c:' + iv.colour + '">' + escapeStudy(iv.label) + '</text>');
+      });
+      miles.forEach((m, i) => {
+        const isFinal = i === last;
+        const dotR = isFinal ? 18 : 12;
+        parts.push('<g class="tlx-nd' + (isFinal ? ' is-final' : '') + '" tabindex="0" role="button" aria-pressed="false"' +
+          ' data-tlx-i="' + i + '" aria-label="' + escapeStudy(m.aria) + '"' +
+          ' style="--tlx-c:' + m.colour + ';--tlx-t:' + m.t.toFixed(2) + 's">' +
+          (isFinal ? '<circle class="tlx-ping" cx="' + m.x + '" cy="' + model.spineY + '" r="20"/>' : '') +
+          '<circle class="tlx-bd" cx="' + m.x + '" cy="' + model.badgeY + '" r="25"/>' +
+          '<g class="tlx-ico" transform="translate(' + (m.x - 12) + ' ' + (model.badgeY - 12) + ')"><path d="' + TLX_ICONS[m.icon] + '"/></g>' +
+          '<path class="tlx-stem" d="M' + m.x + ' ' + (model.badgeY + 25) + 'V' + (model.spineY - 17) + '"/>' +
+          '<circle class="tlx-foc" cx="' + m.x + '" cy="' + model.spineY + '" r="' + (dotR + 10) + '"/>' +
+          '<circle class="tlx-halo" cx="' + m.x + '" cy="' + model.spineY + '" r="' + (dotR + 5) + '"/>' +
+          '<circle class="tlx-dot" cx="' + m.x + '" cy="' + model.spineY + '" r="' + dotR + '"/>' +
+          '<text class="tlx-yr" x="' + m.x + '" y="' + m.yearY + '">' + escapeStudy(m.label) + '</text>' +
+          m.rows.map((row, k) => '<text class="tlx-tt" x="' + m.x + '" y="' + (m.titleY + k * 30) + '">' + escapeStudy(row) + '</text>').join('') +
+          (m.ref ? '<text class="tlx-rf" x="' + m.x + '" y="' + m.refY + '">' + escapeStudy(m.ref) + '</text>' : '') +
+        '</g>');
+      });
+      const svg = '<svg class="tlx-svg" viewBox="0 0 ' + TLX_W + ' ' + Math.round(model.height) + '"' +
+        ' role="group" aria-label="' + escapeStudy('Timeline from ' + model.axis[0] + ' to ' + model.axis[1] + ': ' + miles.length + ' dated milestones') + '">' +
+        parts.join('') + '</svg>';
+
+      /* --- the legend ------------------------------------------------------ */
+      const legend = '<div class="tlx-legend" role="group" aria-label="Milestones, colour coded">' +
+        miles.map((m, i) => '<button type="button" class="tlx-lg" data-tlx-i="' + i + '" aria-pressed="false"' +
+          ' style="--tlx-c:' + m.colour + ';--tlx-t:' + (m.t + 0.1).toFixed(2) + 's">' +
+          '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="' + TLX_ICONS[m.icon] + '"/></svg>' +
+          '<b>' + escapeStudy(m.label) + '</b><span>' + escapeStudy(m.title) + '</span>' +
+        '</button>').join('') + '</div>';
+
+      /* --- the two tracks the spec compares -------------------------------- */
+      const tracks = '<ul class="tlx-tracks">' + steps.map((step) => {
+        const first = model.segs.find((sg) => sg.step === step);
+        return '<li class="tlx-track"' + (first ? ' style="--tlx-c:' + first.colour + '"' : '') + '>' +
+          '<span class="tlx-track-dot" aria-hidden="true"></span>' +
+          (step.role ? '<span class="tlx-track-role">' + escapeStudy(step.role) + '</span>' : '') +
+          (step.title ? '<b>' + escapeStudy(step.title) + '</b>' : '') +
+        '</li>';
+      }).join('') + '</ul>';
+
+      /* --- the to-scale bar ------------------------------------------------- */
+      const scale = '<div class="tlx-scale">' +
+        '<p class="tlx-scale-head">' +
+          '<span>To scale</span>' +
+          '<span>' + escapeStudy((model.cut ? tlxGroup(model.cut.left) + ' + ' + tlxGroup(model.cut.right) + ' = ' : '') + tlxGroup(model.span) + ' years') + '</span>' +
+          '<span>Milestones above are evenly spaced; this bar is not</span>' +
+        '</p>' +
+        '<div class="tlx-scale-bar" aria-hidden="true" style="--tlx-cut:' + (model.cutPct === null ? 50 : model.cutPct.toFixed(2)) + '%">' +
+          (model.cut
+            ? '<i style="flex:' + model.cut.left + '"></i><i style="flex:' + model.cut.right + '"></i>'
+            : '<i style="flex:' + model.span + '"></i>') +
+          model.marks.map((mk) => '<span class="tlx-scale-mark' + (mk.main ? ' is-cut' : '') +
+            '" style="left:' + mk.pct.toFixed(2) + '%"></span>').join('') +
+          '<span class="tlx-scale-fill"></span>' +
+        '</div>' +
+        '<div class="tlx-scale-axis" aria-hidden="true">' +
+          '<span style="left:0">' + escapeStudy(model.axis[0]) + '</span>' +
+          /* Only the structural cut is named, and only when it is clear of the two
+             end labels: on a 2,300-year axis A.D. 27, 31 and 34 fall within 0.3%
+             of each other, so three labels would stack into one smudge, and a cut
+             at 96.6% would sit on top of the closing date. The mark stays either
+             way, and the head row prints the split as arithmetic. */
+          model.marks.map((mk) => (mk.main && mk.pct > 8 && mk.pct < 92
+            ? '<span style="left:' + mk.pct.toFixed(2) + '%">' + escapeStudy(mk.m.label) + '</span>' : '')).join('') +
+          '<span style="right:0">' + escapeStudy(model.axis[1]) + '</span>' +
+        '</div>' +
+      '</div>';
+
+      /* --- the panel, and one hidden slide per milestone -------------------- */
+      const slide = (m, i) => '<div class="tlx-ph">' +
+          '<span class="tlx-pib" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="' + TLX_ICONS[m.icon] + '"/></svg></span>' +
+          '<div class="tlx-pid">' +
+            '<p class="tlx-pmeta"><span class="tlx-pdate">' + escapeStudy(m.label) + '</span>' +
+              (m.cite ? diagramCite(m.cite, canResolve)
+                : (m.ref ? '<span class="chain-cite is-flat">' + escapeStudy(m.ref) + '</span>' : '')) +
+            '</p>' +
+            '<b class="tlx-ptitle">' + escapeStudy(m.title) + '</b>' +
           '</div>' +
+        '</div>' +
+        m.parts.map((pt) => '<p class="tlx-prow">' +
+          (pt.kicker ? '<span class="tlx-pk">' + escapeStudy(pt.kicker) + '</span>' : '') +
+          '<span class="tlx-pl">' + escapeStudy(pt.label) + '</span></p>').join('') +
+        '<div class="tlx-pn">' +
+          '<button type="button" class="tlx-pbtn" data-tlx-step="-1"' + (i === 0 ? ' disabled' : '') + '>Previous</button>' +
+          '<span class="tlx-pnum">' + (i + 1) + ' OF ' + miles.length + '</span>' +
+          '<button type="button" class="tlx-pbtn" data-tlx-step="1"' + (i === last ? ' disabled' : '') + '>Next</button>' +
         '</div>';
-        t += 0.25;
-        return html;
-      }).join('');
-      return '<div class="tl">' + tracks +
-        (axis.length
-          ? '<div class="tl-axis" aria-hidden="true">' + axis.map((a) => '<span>' + escapeStudy(a) + '</span>').join('') + '</div>'
-          : '') +
+      const slides = miles.map((m, i) => '<div data-tlx-slide="' + i + '">' + slide(m, i) + '</div>').join('');
+
+      return '<div class="tlx" data-tlx>' +
+        '<div class="tlx-plot">' + svg + '</div>' +
+        legend +
+        tracks +
+        scale +
+        '<section class="tlx-panel" aria-live="polite" data-tlx-panel style="--tlx-c:' + miles[0].colour + '">' +
+          slide(miles[0], 0) + '</section>' +
+        '<div class="tlx-src" hidden>' + slides + '</div>' +
       '</div>';
     }
 
@@ -2469,11 +3090,139 @@
       } else start();
 
       toggle.addEventListener('click', () => {
+        // A host that owns the collapse control itself — a flow, whose scene
+        // reader lives inside the panel, so wireStory() has already wired that
+        // button — keeps this shell for the entrance animation only: expanding
+        // the panel replays the rail.
+        if (state.ownsToggle === true) {
+          if (toggle.getAttribute('aria-expanded') === 'true') play();
+          return;
+        }
         const open = toggle.getAttribute('aria-expanded') !== 'false';
         setOpen(!open);
         if (!open) { started = true; play(); }
       });
       replay.addEventListener('click', () => { setOpen(true); started = true; play(); });
+    }
+
+    /* A flow's scenes. Each step opens the course's existing full-screen reader
+       on its own card — `wireStory` builds that reader and exposes the one way
+       in, so nothing here draws a second overlay — and a chain that continues a
+       node from the diagram before it starts its sweep there rather than
+       replaying the beats the reader has just seen. */
+    function wireFlow(figure) {
+      const stack = figure.querySelector('.flow-stack');
+      const steps = Array.from(figure.querySelectorAll('.flow-step'));
+      const openScene = figure.__openStoryScene;
+      if (!stack || !steps.length || typeof openScene !== 'function') return;
+
+      steps.forEach((node) => {
+        const index = Number(node.getAttribute('data-index'));
+        if (!Number.isFinite(index)) return;
+        const marker = node.querySelector('.flow-node');
+        node.addEventListener('click', (event) => {
+          // The citation chip is its own control, exactly as it is on a story card.
+          if (event.target.closest && event.target.closest('.chain-cite')) return;
+          // The reader hands focus back to whatever held it when it opened, so
+          // the step's own marker takes focus first and Escape returns here.
+          if (marker && typeof marker.focus === 'function') marker.focus({ preventScroll: true });
+          openScene(index);
+        });
+      });
+
+      // Where the highlight enters: a percentage of the rail, measured once the
+      // stack has a height, so a later reflow cannot leave it stranded.
+      const enter = Number(stack.getAttribute('data-flow-enter'));
+      const from = Number.isFinite(enter) && enter > 0 ? steps[enter] : null;
+      const marker = from ? from.querySelector('.flow-node') : null;
+      if (from && marker && stack.offsetHeight) {
+        const centre = from.offsetTop + marker.offsetTop + marker.offsetHeight / 2;
+        stack.style.setProperty('--flow-from', ((centre / stack.offsetHeight) * 100).toFixed(1) + '%');
+      }
+    }
+
+    /* The timeline's one selection, in the three places it shows: a node on the
+       axis, a pill in the legend, and the panel's Previous/Next. All three call
+       `select`, so the ringed dot, the pill's state, `aria-pressed` and the
+       panel's words cannot disagree.
+
+       Each milestone's panel is rendered once as a hidden slide and moved into
+       the live region, which keeps one copy of the escaping and lets the citation
+       chips inside it be decorated with the rest of the figure.
+
+       Escape is deliberately not handled here. The full-screen shell listens on
+       the document in the capture phase, so its own arbitration (a reader above
+       the layer keeps the key) runs first and this never sees it. */
+    function wireTimeline(figure) {
+      const root = figure.querySelector('[data-tlx]');
+      if (!root) return;
+      const panel = root.querySelector('[data-tlx-panel]');
+      const nodes = Array.from(root.querySelectorAll('.tlx-nd'));
+      const pills = Array.from(root.querySelectorAll('.tlx-lg'));
+      const slides = Array.from(root.querySelectorAll('[data-tlx-slide]'));
+      if (!panel || !nodes.length || slides.length !== nodes.length) return;
+
+      let current = -1;
+      const select = (index, focus) => {
+        const next = Math.max(0, Math.min(nodes.length - 1, index));
+        const node = nodes[next];
+        if (next !== current) {
+          const slide = slides[next];
+          if (slide) panel.innerHTML = slide.innerHTML;
+          // The panel's own edge takes the selected milestone's colour, which is
+          // the same inline token the axis node and its legend pill carry.
+          const colour = node && node.style ? node.style.getPropertyValue('--tlx-c').trim() : '';
+          if (colour) panel.style.setProperty('--tlx-c', colour);
+          current = next;
+        }
+        nodes.forEach((item, i) => {
+          const on = i === next;
+          item.classList.toggle('is-sel', on);
+          item.setAttribute('aria-pressed', String(on));
+        });
+        pills.forEach((pill, i) => {
+          const on = i === next;
+          pill.classList.toggle('is-sel', on);
+          pill.setAttribute('aria-pressed', String(on));
+        });
+        if (focus && node && typeof node.focus === 'function') node.focus({ preventScroll: true });
+      };
+
+      root.addEventListener('click', (event) => {
+        const hit = event.target && event.target.closest ? event.target.closest('[data-tlx-i]') : null;
+        if (!hit) return;
+        select(Number(hit.getAttribute('data-tlx-i')), false);
+      });
+      panel.addEventListener('click', (event) => {
+        const btn = event.target && event.target.closest ? event.target.closest('[data-tlx-step]') : null;
+        if (!btn || btn.disabled) return;
+        select(current + Number(btn.getAttribute('data-tlx-step')), false);
+      });
+      nodes.forEach((node, i) => {
+        node.addEventListener('keydown', (event) => {
+          const key = event.key;
+          if (key === 'Enter' || key === ' ' || key === 'Spacebar') {
+            event.preventDefault();
+            select(i, false);
+          } else if (key === 'ArrowRight' || key === 'ArrowDown') {
+            event.preventDefault();
+            select(i + 1, true);
+          } else if (key === 'ArrowLeft' || key === 'ArrowUp') {
+            event.preventDefault();
+            select(i - 1, true);
+          } else if (key === 'Home') {
+            event.preventDefault();
+            select(0, true);
+          } else if (key === 'End') {
+            event.preventDefault();
+            select(nodes.length - 1, true);
+          }
+        });
+      });
+
+      // The panel's first slide is already in the markup, so the opening state is
+      // the same whether or not this ran; this only marks the node and the pill.
+      select(0, false);
     }
 
     function storySrc(step) {
@@ -2486,8 +3235,25 @@
     // a layer's source out from under a fade that is still running.
     const STORY_PHOTO_LAYERS = 3;
 
-    function bodyStory(spec, steps, canResolve, start) {
+    function bodyStory(spec, steps, canResolve, start, diagramId) {
       const n = steps.length;
+      const storyTitle = String(spec.title || 'The story');
+      // Where the artwork is cropped. A movement's subject is rarely dead
+      // centre — a figure sits low in the frame and a cross sits high — so the
+      // default lets the crop drift down the story instead of holding one
+      // framing for every picture. A step can declare its own `photoY`.
+      const DEFAULT_PHOTO_Y = ['48%', '47%', '45%'];
+      const photoYFor = (step, i) => {
+        const declared = String(step.photoY || '').trim();
+        if (/^\d{1,3}%$/.test(declared)) return declared;
+        if (n === 1) return '46%';
+        return DEFAULT_PHOTO_Y[Math.round((i * (DEFAULT_PHOTO_Y.length - 1)) / (n - 1))];
+      };
+      // The edge controls and the panel they open need ids that are unique per
+      // diagram: several story figures can sit in one sitting.
+      const slug = escapeStudy(diagramId || 'story');
+      const bridgeId = slug + '-bridge';
+      const helpId = slug + '-keyboard-help';
       const cards = steps.map((step, i) => {
         const src = storySrc(step);
         const photo = src
@@ -2499,9 +3265,11 @@
           : '';
         const num = String(i + 1).padStart(2, '0') + ' / ' + String(n).padStart(2, '0');
         const d = i - start;
-        return '<article class="story-card' + (i === start ? ' is-active' : '') + '" data-index="' + i + '" style="--d:' + d + ';--distance:' + Math.abs(d) + '">' +
+        return '<article class="story-card' + (i === start ? ' is-active' : '') + '" data-index="' + i + '" style="--d:' + d + ';--distance:' + Math.abs(d) + ';--photo-y:' + photoYFor(step, i) + '">' +
           photo +
-          '<div class="story-topline"><span class="story-index">' + num + '</span></div>' +
+          // The label repeats the diagram's title on every card, so it is kept
+          // out of the reading order; the index is the part that moves.
+          '<div class="story-topline"><span class="story-label" aria-hidden="true">' + escapeStudy(storyTitle) + '</span><span class="story-index">' + num + '</span></div>' +
           '<div class="story-content">' +
             medal +
             (step.role ? '<p class="story-kicker">' + escapeStudy(step.role) + '</p>' : '') +
@@ -2514,16 +3282,49 @@
       }).join('');
       const track = steps.map((step, i) => {
         const label = String(step.role || step.title || ('Step ' + (i + 1)));
-        return '<button class="story-step' + (i === start ? ' is-active' : '') + '" type="button" data-index="' + i + '" aria-label="' + escapeStudy(label) + '">' +
+        // The link copy is authored on the step that leaves it: `bridgeAhead` is
+        // what this movement says about the next one, `bridgeShare` is what the
+        // two hold in common. It rides on the step so the panel never invents a
+        // connection the diagram does not make.
+        const ahead = step.bridgeAhead ? ' data-bridge-ahead="' + escapeStudy(step.bridgeAhead) + '"' : '';
+        const share = step.bridgeShare ? ' data-bridge-share="' + escapeStudy(step.bridgeShare) + '"' : '';
+        return '<button class="story-step' + (i === start ? ' is-active' : '') + '" type="button" data-index="' + i + '"' + ahead + share + ' aria-label="' + escapeStudy(label) + '">' +
           '<span class="story-step-dot" aria-hidden="true"></span>' +
           '<span class="story-step-label">' + escapeStudy(label) + '</span>' +
         '</button>';
       }).join('<span class="story-connector" aria-hidden="true"></span>');
       const openTitle = String((steps[start] && steps[start].title) || '');
+      // Paging arrows at the viewport's edges. Each is hidden while there is no
+      // movement that way, and each opens the panel describing the link.
+      const edgeControls =
+        '<button class="story-link story-link--prev" type="button" data-story-link-prev hidden aria-expanded="false" aria-controls="' + bridgeId + '">' +
+          '<span class="story-link-arrow" aria-hidden="true"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M10 3 5 8l5 5"/></svg></span>' +
+          '<span class="story-link-label"></span>' +
+        '</button>' +
+        '<button class="story-link story-link--next" type="button" data-story-link-next hidden aria-expanded="false" aria-controls="' + bridgeId + '">' +
+          '<span class="story-link-arrow" aria-hidden="true"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="m6 3 5 5-5 5"/></svg></span>' +
+          '<span class="story-link-label"></span>' +
+        '</button>';
+      const bridge =
+        '<div class="story-bridge" id="' + bridgeId + '" hidden>' +
+          '<div class="story-bridge-top">' +
+            '<p class="story-bridge-title" data-bridge-title></p>' +
+            '<p class="story-bridge-dir" data-bridge-dir></p>' +
+          '</div>' +
+          '<p class="story-bridge-share" data-bridge-share hidden></p>' +
+          '<p class="story-bridge-text" data-bridge-text hidden></p>' +
+          '<div class="story-bridge-actions">' +
+            '<button type="button" data-bridge-close>Close</button>' +
+            '<button type="button" data-bridge-go></button>' +
+          '</div>' +
+        '</div>';
       return '<div class="story-stage" data-start="' + start + '">' +
-        '<div class="story-viewport" tabindex="0" role="region" aria-roledescription="carousel" aria-label="' + escapeStudy(spec.title || 'Diagram') + '">' +
+        '<div class="story-viewport" tabindex="0" role="region" aria-roledescription="carousel" aria-label="' + escapeStudy(spec.title || 'Diagram') + '" aria-describedby="' + helpId + '">' +
           cards +
+          edgeControls +
+          bridge +
         '</div>' +
+        '<p class="sr-only" id="' + helpId + '">Use the left and right arrow keys to move between story movements.</p>' +
         '<div class="story-controls">' +
           '<button class="story-nav" type="button" data-story-prev aria-label="Previous story movement">' +
             '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M10 3 5 8l5 5"/></svg>' +
@@ -2550,14 +3351,12 @@
           '</div>' +
           '<div class="story-read-veil" aria-hidden="true"></div>' +
           '<button class="story-back" type="button">Back</button>' +
-          '<div class="story-read-panel">' +
-            '<div class="story-read-kicker"></div>' +
-            '<div class="story-read-title"></div>' +
-            '<div class="story-read-rule" aria-hidden="true"></div>' +
-            '<div class="story-read-cite"></div>' +
-            '<div class="story-read-copy"></div>' +
-            '<div class="story-read-detail"></div>' +
-            '<div class="story-read-note"></div>' +
+          '<div class="story-read-frame">' +
+            '<div class="story-read-deck"></div>' +
+            // The study layer under the zoomed card: the movement's own line and
+            // its citation chip, filled per movement by wireStory().
+            '<div class="story-read-band" data-read-band></div>' +
+            '<p class="story-read-note"></p>' +
             '<div class="story-read-progress" role="group" aria-label="Movements in this diagram"></div>' +
             '<div class="story-read-nav">' +
               '<button type="button" data-read-prev>Previous</button>' +
@@ -2586,22 +3385,32 @@
       const reader = figure.querySelector('.story-read');
       const readBg = figure.querySelector('.story-read-bg');
       const readPhotos = Array.from(figure.querySelectorAll('.story-read-photo'));
-      const readKicker = figure.querySelector('.story-read-kicker');
-      const readTitle = figure.querySelector('.story-read-title');
-      const readCite = figure.querySelector('.story-read-cite');
-      const readCopy = figure.querySelector('.story-read-copy');
-      const readDetail = figure.querySelector('.story-read-detail');
+      const deck = reader ? reader.querySelector('.story-read-deck') : null;
+      const readBand = figure.querySelector('[data-read-band]');
       const readNote = figure.querySelector('.story-read-note');
       const readProgress = figure.querySelector('.story-read-progress');
       const readCount = figure.querySelector('.story-read-count');
-      const readPanel = figure.querySelector('.story-read-panel');
       const readPrev = figure.querySelector('[data-read-prev]');
       const readNext = figure.querySelector('[data-read-next]');
       const readBack = figure.querySelector('.story-back');
-      if (!panel || !toggle || !stage || !viewport || cards.length < 2 || !prev || !next || !play || !live || !launch || !reader) return;
+      if (!panel || !toggle || !stage || !viewport || cards.length < 2 || !prev || !next || !play || !live || !launch || !reader || !deck) return;
+
+      // The full screen is the same cards, larger. Clones stay in the reader so
+      // the lesson stage underneath does not move when the overlay opens.
+      const readCards = cards.map((card) => {
+        const clone = card.cloneNode(true);
+        clone.classList.remove('is-active');
+        clone.removeAttribute('aria-current');
+        deck.appendChild(clone);
+        return clone;
+      });
 
       let current = Number(stage.getAttribute('data-start')) || 0;
       if (current < 0 || current >= cards.length) current = 0;
+      // The live region is rewritten only when the movement actually changes:
+      // `render()` also runs on every autoplay beat, and re-announcing the same
+      // sentence would talk over the reader.
+      let liveIndex = current;
       let timer = null;
       let pointerStartX = null;
       let returnFocus = null;
@@ -2625,8 +3434,123 @@
         play.setAttribute('aria-pressed', 'false');
         if (playLabel) playLabel.textContent = 'Play the story';
       };
+      // The handover between two movements. A stage carries an arrow at each
+      // edge; the panel they open names the two movements and, when the diagram
+      // authors it, what the two share and what the step leaving the first one
+      // says about the second. With no authored copy the panel still names the
+      // movements and offers the move — it never invents a connection.
+      const edgePrev = figure.querySelector('[data-story-link-prev]');
+      const edgeNext = figure.querySelector('[data-story-link-next]');
+      const bridge = figure.querySelector('.story-bridge');
+      const bridgeTitle = figure.querySelector('[data-bridge-title]');
+      const bridgeDir = figure.querySelector('[data-bridge-dir]');
+      const bridgeShare = figure.querySelector('[data-bridge-share]');
+      const bridgeText = figure.querySelector('[data-bridge-text]');
+      const bridgeGo = figure.querySelector('[data-bridge-go]');
+      const bridgeClose = figure.querySelector('[data-bridge-close]');
+      // Optional furniture: a story markup without the edge controls still wires.
+      const hasEdges = !!(edgePrev && edgeNext && bridge && bridgeGo);
+      // 0 while the panel is closed, otherwise the direction that opened it.
+      let bridgeDirOpen = 0;
+      let bridgeOpener = null;
+
+      const nameOf = (index) => {
+        const step = steps[index];
+        const label = step && step.querySelector('.story-step-label');
+        return label ? label.textContent : '';
+      };
+      // The link a direction describes: `bridgeAhead` / `bridgeShare` belong to
+      // the step that leaves it, so both directions read the same authored link.
+      const linkFor = (dir) => {
+        const link = dir > 0 ? current : current - 1;
+        const step = steps[link];
+        return {
+          target: dir > 0 ? link + 1 : link,
+          targetName: dir > 0 ? nameOf(link + 1) : nameOf(link),
+          from: nameOf(link),
+          reach: nameOf(link + 1),
+          share: step ? (step.getAttribute('data-bridge-share') || '') : '',
+          // `bridgeAhead` is the forward explanation. There is no authored
+          // backward copy, so looking back shows the link without one rather
+          // than reusing the forward sentence out of turn.
+          ahead: dir > 0 && step ? (step.getAttribute('data-bridge-ahead') || '') : '',
+        };
+      };
+      function onDocumentClick(event) {
+        if (!hasEdges || bridge.hidden) return;
+        const target = event.target;
+        if (!target || !target.closest) return;
+        // Only this stage's own panel and arrows count as inside; a press
+        // anywhere else — including another diagram's edge control — closes it.
+        if (bridge.contains(target) || edgePrev.contains(target) || edgeNext.contains(target)) return;
+        closeBridge(false);
+      }
+      function onBridgeKey(event) {
+        if (!hasEdges || bridge.hidden) return;
+        if (event.key !== 'Escape') return;
+        // The reader owns Escape while it is open (it closes this panel first),
+        // and a layer stacked above owns it while that layer is open.
+        if (!reader.hidden || anotherLayerOwnsEscape()) return;
+        event.preventDefault();
+        event.stopPropagation();
+        closeBridge(true);
+      }
+      const closeBridge = (refocus) => {
+        if (!hasEdges) return;
+        document.removeEventListener('click', onDocumentClick);
+        document.removeEventListener('keydown', onBridgeKey, true);
+        if (bridge.hidden) return;
+        bridge.hidden = true;
+        bridgeDirOpen = 0;
+        edgePrev.setAttribute('aria-expanded', 'false');
+        edgeNext.setAttribute('aria-expanded', 'false');
+        const opener = bridgeOpener;
+        bridgeOpener = null;
+        if (refocus && opener && opener.isConnected) opener.focus();
+      };
+      const openBridge = (dir) => {
+        if (!hasEdges) return;
+        // A second press on the same arrow closes the panel it opened.
+        if (bridgeDirOpen === dir && !bridge.hidden) { closeBridge(true); return; }
+        stopPlayback();
+        const link = linkFor(dir);
+        if (!link.from || !link.reach) return;
+        bridgeTitle.textContent = link.from + ' \u2192 ' + link.reach;
+        bridgeDir.textContent = dir > 0 ? 'Looking ahead' : 'Looking back';
+        bridgeShare.textContent = link.share ? 'Shared thread: ' + link.share : '';
+        bridgeShare.hidden = !link.share;
+        bridgeText.textContent = link.ahead;
+        bridgeText.hidden = !link.ahead;
+        bridgeGo.textContent = 'Go to ' + link.targetName;
+        bridgeGo.setAttribute('data-bridge-target', String(link.target));
+        bridge.hidden = false;
+        bridgeDirOpen = dir;
+        bridgeOpener = dir > 0 ? edgeNext : edgePrev;
+        edgePrev.setAttribute('aria-expanded', String(dir < 0));
+        edgeNext.setAttribute('aria-expanded', String(dir > 0));
+        // The listeners exist only while the panel is open, so they cannot leak
+        // when a sitting is re-rendered.
+        document.addEventListener('click', onDocumentClick);
+        document.addEventListener('keydown', onBridgeKey, true);
+        bridgeGo.focus();
+      };
+      const updateEdges = () => {
+        if (!hasEdges) return;
+        // The panel describes one link; a movement change ends that link.
+        closeBridge(false);
+        edgePrev.hidden = current === 0;
+        edgeNext.hidden = current === cards.length - 1;
+        const prevLabel = edgePrev.querySelector('.story-link-label');
+        const nextLabel = edgeNext.querySelector('.story-link-label');
+        const prevName = nameOf(current - 1) || 'Previous movement';
+        const nextName = nameOf(current + 1) || 'Next movement';
+        if (prevLabel) prevLabel.textContent = prevName;
+        if (nextLabel) nextLabel.textContent = nextName;
+        edgePrev.setAttribute('aria-label', 'Previous movement: ' + prevName);
+        edgeNext.setAttribute('aria-label', 'Next movement: ' + nextName);
+      };
       const render = () => {
-        cards.forEach((card, index) => {
+        const paint = (card, index) => {
           const distance = Math.abs(index - current);
           card.style.setProperty('--d', String(index - current));
           card.style.setProperty('--distance', String(distance));
@@ -2634,15 +3558,25 @@
           card.style.pointerEvents = distance > 1 ? 'none' : 'auto';
           if (index === current) card.setAttribute('aria-current', 'true');
           else card.removeAttribute('aria-current');
-        });
+        };
+        cards.forEach(paint);
+        readCards.forEach(paint);
         steps.forEach((step, index) => {
           step.classList.toggle('is-active', index === current);
           if (index === current) step.setAttribute('aria-current', 'step');
           else step.removeAttribute('aria-current');
         });
+        // A movement that has been visited keeps its mark, so the track carries
+        // the trail of where the reader has already been.
+        if (steps[current]) steps[current].classList.add('seen');
         prev.disabled = current === 0;
         next.disabled = current === cards.length - 1;
-        live.textContent = 'Movement ' + (current + 1) + ' of ' + cards.length + ' \u00b7 ' + titleOf(current);
+        if (current !== liveIndex) {
+          liveIndex = current;
+          const movementTitle = titleOf(current);
+          live.textContent = 'Movement ' + (current + 1) + ' of ' + cards.length + (movementTitle ? ' \u00b7 ' + movementTitle : '');
+        }
+        updateEdges();
       };
       // The artwork is the subject of a movement, so a step change fades the
       // next picture up over the one still on screen. `prime` places the first
@@ -2735,7 +3669,7 @@
               retireTimer = window.setTimeout(() => {
                 layer.removeEventListener('transitionend', done);
                 retireOthers(layer, token);
-              }, 1400);
+              }, 1600);
             });
           });
         };
@@ -2777,45 +3711,41 @@
         });
       };
 
-      const shiftPanel = () => {
-        if (!readPanel) return;
-        window.cancelAnimationFrame(shiftFrame);
-        // Hide the new copy before paint, then fade it in on the next frame.
-        // Waiting and re-adding the animation later shows the words, blanks
-        // them, and only then fades them in.
-        readPanel.classList.remove('is-shifting');
-        readPanel.classList.add('is-preparing');
-        shiftFrame = window.requestAnimationFrame(() => {
-          shiftFrame = 0;
-          if (reader.hidden) return;
-          readPanel.classList.remove('is-preparing');
-          readPanel.classList.add('is-shifting');
-        });
+      // The band under the deck is the reader's study layer: the movement's own
+      // line, in the reference's note treatment, and its citation chip as a real
+      // control. Both are read off the movement's own card, so the band can only
+      // ever show what the diagram says. The content is rebuilt on every change,
+      // and a freshly inserted element runs its entry animation again — no state
+      // class to add, and none left in the CSS that nothing sets.
+      const fillBand = () => {
+        if (!readBand) return;
+        const card = cards[current];
+        const detail = card && card.querySelector('.story-detail');
+        const cite = card && card.querySelector('.chain-cite');
+        if (!detail && !cite) { readBand.replaceChildren(); return; }
+        const inner = document.createElement('div');
+        inner.className = 'story-read-band-inner';
+        if (cite) {
+          const line = document.createElement('p');
+          line.className = 'story-read-band-cite';
+          line.appendChild(cite.cloneNode(true));
+          inner.appendChild(line);
+        }
+        if (detail) {
+          const block = document.createElement('p');
+          block.className = 'story-read-band-detail';
+          block.textContent = detail.textContent;
+          inner.appendChild(block);
+        }
+        readBand.replaceChildren(inner);
       };
-
       const fillRead = () => {
         const card = cards[current];
-        const kicker = card.querySelector('.story-kicker');
-        const title = card.querySelector('.story-title');
-        const cite = card.querySelector('.chain-cite');
-        const text = card.querySelector('.story-text');
-        const detail = card.querySelector('.story-detail');
         const note = figure.querySelector('.chain-note');
         const img = card.querySelector('.story-photo');
-        readKicker.textContent = kicker ? kicker.textContent : '';
-        readKicker.hidden = !kicker;
-        readTitle.textContent = title ? title.textContent : '';
-        readCopy.textContent = text ? text.textContent : '';
-        readCopy.hidden = !text;
-        // The movement's own line, when it has one. The shared diagram note
-        // repeats on every movement, so a step without its own detail simply
-        // does not print one.
-        readDetail.textContent = detail ? detail.textContent : '';
-        readDetail.hidden = !detail;
         readNote.textContent = note ? note.textContent : '';
         readNote.hidden = !note;
-        readCite.replaceChildren();
-        if (cite) readCite.appendChild(cite.cloneNode(true));
+        fillBand();
         const src = img && img.getAttribute('src') ? img.getAttribute('src') : '';
         setPhoto(src, !reader.classList.contains('has-photo'));
         readCount.textContent = (current + 1) + ' of ' + cards.length;
@@ -2838,7 +3768,13 @@
       // handler on the document, so the reader has to stand down while one is
       // open rather than stopping propagation ahead of it.
       const ABOVE_READER = '#infographic-modal, #certificate-panel, #certificate-review-modal';
+      /* A full-screen diagram is a layer the reader can be opened from and above
+         — a citation chip in a comparison column opens a reference row, which is
+         the reader. It therefore joins the list rather than stopping Escape
+         ahead of it, so one press closes exactly one thing: the reader first,
+         then the diagram on the next press. */
       function anotherLayerOwnsEscape() {
+        if (document.querySelector('.chain.is-full')) return true;
         return Array.from(document.querySelectorAll(ABOVE_READER)).some((el) => !el.hidden);
       }
       function onDocumentKey(event) {
@@ -2851,14 +3787,18 @@
         if (close && anotherLayerOwnsEscape()) return;
         event.preventDefault();
         event.stopPropagation();
-        if (close) { closeRead(); return; }
+        if (close) {
+          // The panel belongs to the stage behind the reader. Escape steps back
+          // one layer at a time: the panel first, the reader on the next press.
+          if (hasEdges && !bridge.hidden) { closeBridge(true); return; }
+          closeRead();
+          return;
+        }
         go(current + (event.key === 'ArrowRight' ? 1 : -1), true);
       }
       const clearShiftTimer = () => {
         window.cancelAnimationFrame(shiftFrame);
         shiftFrame = 0;
-        if (!readPanel) return;
-        readPanel.classList.remove('is-shifting', 'is-preparing');
       };
       const closeRead = () => {
         if (reader.hidden) return;
@@ -2889,6 +3829,7 @@
           // the dark ground instead of showing the last one's still.
           readPhotos.forEach((layer) => { layer.classList.remove('is-current'); layer.removeAttribute('src'); });
           readBg.style.backgroundImage = '';
+          stage.inert = false;
           document.documentElement.classList.remove('story-read-open');
           // The reader is about to leave the body, so focus must not be left
           // standing on one of its controls.
@@ -2905,11 +3846,14 @@
       };
       const openRead = () => {
         stopPlayback();
+        // The panel belongs to the stage, and the stage goes inert underneath.
+        closeBridge(false);
         window.clearTimeout(closeTimer);
         // Cancel any fade-out still in flight: this open wins.
         reader.classList.remove('is-closing');
         returnFocus = document.activeElement;
         document.body.appendChild(reader);
+        stage.inert = true;
         reader.hidden = false;
         reader.classList.remove('is-open');
         buildProgress();
@@ -2929,30 +3873,43 @@
         if (manual) stopPlayback();
         current = Math.max(0, Math.min(cards.length - 1, index));
         render();
-        if (!reader.hidden) {
-          fillRead();
-          shiftPanel();
-        }
+        if (!reader.hidden) fillRead();
       };
 
       prev.addEventListener('click', () => go(current - 1, true));
       next.addEventListener('click', () => go(current + 1, true));
       steps.forEach((step) => step.addEventListener('click', () => go(Number(step.getAttribute('data-index')), true)));
+      if (hasEdges) {
+        edgePrev.addEventListener('click', () => openBridge(-1));
+        edgeNext.addEventListener('click', () => openBridge(1));
+        bridgeGo.addEventListener('click', () => {
+          const target = Number(bridgeGo.getAttribute('data-bridge-target'));
+          closeBridge(false);
+          if (!Number.isNaN(target)) go(target, true);
+        });
+        if (bridgeClose) bridgeClose.addEventListener('click', () => closeBridge(true));
+      }
       // A reader that is torn down with the sheet it belongs to must not keep
       // answering keys for a lesson that is no longer on the page.
       reader.disarmStoryReader = () => {
         document.removeEventListener('keydown', onDocumentKey, true);
+        document.removeEventListener('click', onDocumentClick);
+        document.removeEventListener('keydown', onBridgeKey, true);
         window.clearTimeout(closeTimer);
         window.clearTimeout(retireTimer);
         window.cancelAnimationFrame(shiftFrame);
         window.cancelAnimationFrame(openFrame);
-        if (readPanel) readPanel.classList.remove('is-shifting', 'is-preparing');
+        stage.inert = false;
         if (stage.isConnected) stage.appendChild(reader);
       };
       cards.forEach((card, index) => card.addEventListener('click', (event) => {
         if (event.target.closest('.chain-cite')) return;
         if (index !== current) go(index, true);
         else openRead();
+      }));
+      readCards.forEach((card, index) => card.addEventListener('click', (event) => {
+        if (event.target.closest('.chain-cite')) return;
+        if (index !== current) go(index, true);
       }));
       launch.addEventListener('click', openRead);
       readBack.addEventListener('click', closeRead);
@@ -2991,15 +3948,25 @@
         if (Math.abs(delta) > 45) go(current + (delta < 0 ? 1 : -1), true);
       });
       viewport.addEventListener('pointercancel', () => { pointerStartX = null; });
+      deck.addEventListener('pointerdown', (event) => { pointerStartX = event.clientX; });
+      deck.addEventListener('pointerup', (event) => {
+        if (pointerStartX === null) return;
+        const delta = event.clientX - pointerStartX;
+        pointerStartX = null;
+        if (Math.abs(delta) > 45) go(current + (delta < 0 ? 1 : -1), true);
+      });
+      deck.addEventListener('pointercancel', () => { pointerStartX = null; });
       play.addEventListener('click', () => {
         if (timer !== null) { stopPlayback(); return; }
         if (current === cards.length - 1) go(0, false);
         play.setAttribute('aria-pressed', 'true');
         if (playLabel) playLabel.textContent = 'Pause story';
+        // The card transition is 1.15s: a beat has to leave the movement settled
+        // long enough to be read before the next one starts to move.
         timer = window.setInterval(() => {
           if (current >= cards.length - 1) { stopPlayback(); return; }
           go(current + 1, false);
-        }, 2800);
+        }, 3900);
       });
       document.addEventListener('visibilitychange', function onHide() {
         if (!figure.isConnected) { document.removeEventListener('visibilitychange', onHide); return; }
@@ -3010,13 +3977,317 @@
         toggle.setAttribute('aria-expanded', String(open));
         toggle.setAttribute('aria-label', open ? 'Collapse diagram' : 'Expand diagram');
         panel.hidden = !open;
-        if (!open) { stopPlayback(); closeRead(); }
+        if (!open) { stopPlayback(); closeBridge(false); closeRead(); }
       };
       toggle.addEventListener('click', () => {
         const open = toggle.getAttribute('aria-expanded') !== 'false';
         setOpen(!open);
       });
       render();
+
+      // A flow keeps its own stack visible and reuses this reader as its scene
+      // layer, so its renderer needs one way in: open the reader on the step
+      // that was pressed. Additive — nothing else about the reader changes.
+      figure.__openStoryScene = (index) => {
+        if (!Number.isFinite(index) || index < 0 || index >= cards.length) return;
+        go(index, true);
+        openRead();
+      };
+    }
+
+    /* One chain can be split across two diagrams — `s4-4` and `s4-5` are Daniel 4
+       divided at 4:34, and `s4-5` opens on the beats `s4-4` closes with. A step
+       whose own title already appeared in the neighbouring diagram of the same
+       kind is that node carried forward, so both diagrams mark it with the same
+       bead and the later one starts its sweep there rather than replaying what
+       the reader has just seen (docs/flow-map-decisions.md §5.5). The match is
+       structural and reads only `title`; no copy is written. */
+    function flowContinuation(figure, specs, kind) {
+      const out = { shared: new Set(), enter: 0 };
+      const article = figure.closest('#sheet-article');
+      const own = specs[figure.getAttribute('data-diagram')];
+      const ownSteps = (own && Array.isArray(own.steps)) ? own.steps : [];
+      if (!article || !ownSteps.length) return out;
+      const figures = Array.from(article.querySelectorAll('figure[data-diagram]'));
+      const at = figures.indexOf(figure);
+      if (at < 0) return out;
+      // Only a neighbour drawn by the same renderer can be the other half of the
+      // chain: a comparison or a timeline beside this diagram is not a sequence.
+      const neighbourTitles = (dir) => {
+        for (let i = at + dir; i >= 0 && i < figures.length; i += dir) {
+          const spec = specs[figures[i].getAttribute('data-diagram')];
+          if (!spec || (spec.kind || 'chain') !== kind) continue;
+          const steps = Array.isArray(spec.steps) ? spec.steps : [];
+          if (steps.length) return steps.map((step) => String(step.title || '').trim()).filter(Boolean);
+        }
+        return [];
+      };
+      const words = (text) => String(text).toLowerCase().replace(/[^a-z0-9' ]+/g, ' ').split(/\s+/).filter(Boolean);
+      // Function words carry no subject, so they are not evidence either way:
+      // "He lifts his eyes" and "Nebuchadnezzar lifts his eyes to heaven" are the
+      // same beat said twice, and so are the two verbatim titles.
+      const EMPTY_WORDS = new Set(['the', 'a', 'an', 'of', 'to', 'in', 'for', 'by', 'and', 'as', 'at', 'on', 'with',
+        'he', 'she', 'it', 'its', 'his', 'her', 'their', 'them', 'they', 'this', 'that']);
+      const isSameBeat = (mine, other) => {
+        const [short, long] = mine.length <= other.length ? [mine, other] : [other, mine];
+        const subject = short.filter((word) => !EMPTY_WORDS.has(word));
+        const bag = new Set(long);
+        // Two subject words is the floor: a one-word title like "Prologue"
+        // cannot match a neighbour by accident.
+        return subject.length >= 2 && subject.every((word) => bag.has(word));
+      };
+      const near = neighbourTitles(-1).concat(neighbourTitles(1)).map(words);
+      ownSteps.forEach((step, i) => {
+        const mine = words(step.title || '');
+        if (near.some((other) => isSameBeat(mine, other))) out.shared.add(i);
+      });
+      // The sweep enters on the carried-over node — the last beat of the run this
+      // diagram repeats — and only when the run is at the head of the chain.
+      let head = 0;
+      while (head < ownSteps.length && out.shared.has(head)) head += 1;
+      out.enter = head > 0 ? head - 1 : 0;
+      return out;
+    }
+
+    /* ---- Cinematic full screen for table, comparison and timeline ----------
+       The mindmap proved the mechanism (docs/brief-fullscreen-diagram.md): put
+       `position: fixed; inset: 0` on the block itself and the browser does the
+       rest — no reparenting, no second overlay, no second render path. These
+       three kinds are read the same way, so they get the same treatment through
+       one shell rather than three.
+
+       Why these three need it and the chain does not: a chain is a sequence of
+       cards, which reflows into any width. A table is a matrix, a comparison is
+       parallel columns and a timeline is a proportional axis. Narrow them and
+       the row labels wrap, the columns stop lining up and the axis stops being
+       to scale — the three things that carry the meaning. The lesson column is
+       832px wide; the same table at 1,400px is a different diagram.
+
+       The surface follows the reference the redesign was drawn from: a deep
+       gold-on-black field with rays, grain and a vignette, a serif title over a
+       monospace kicker, and the diagram on a lit plate. The shell owns only that
+       frame — the variable contract below — and each renderer owns everything
+       inside it.
+
+       Escape is arbitrated the same way the mindmap's is: this layer registers
+       in `anotherLayerOwnsEscape()` so it closes innermost-first when a reader is
+       also open, and one press closes exactly one thing. */
+    const FULLSCREEN_KINDS = new Set(['table', 'comparison', 'timeline']);
+
+    /* What the layer calls itself. The word is the standard's own name, not a
+       restatement of the title below it. */
+    const FS_KICKER = { table: 'Table', comparison: 'Comparison', timeline: 'Timeline' };
+
+    /* The block's own full-screen control. Same glyph as the mindmap's so the
+       two surfaces read as one idea, sized to sit beside `.chain-toggle`. */
+    function fullscreenControlHtml() {
+      return '<button class="chain-fs" type="button" data-chain-fs aria-pressed="false" aria-label="Full screen" title="Full screen">' +
+        '<svg class="dfx-i-expand" viewBox="0 0 12 12" fill="currentColor" aria-hidden="true" focusable="false">' +
+          '<path d="M1.2 1.2h3.6v1.6H2.8v2H1.2zM7.2 1.2h3.6v3.6H9.2V2.8H7.2zM1.2 7.2h1.6v2h2v1.6H1.2zM9.2 7.2h1.6v3.6H7.2V9.2h2z"/>' +
+        '</svg>' +
+        '<svg class="dfx-i-close" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true" focusable="false">' +
+          '<path d="M2.6 2.6l6.8 6.8M9.4 2.6l-6.8 6.8"/>' +
+        '</svg>' +
+      '</button>';
+    }
+
+    /* What "focusable" means inside the layer, matching mindmap.js's list so the
+       two traps agree about the page. */
+    const FS_FOCUSABLE = 'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
+
+    function wireDiagramFullscreen(figure, kind) {
+      const btn = figure.querySelector('[data-chain-fs]');
+      const toggle = figure.querySelector('.chain-toggle');
+      const panel = figure.querySelector('.chain-body');
+      const title = figure.querySelector('.chain-title-cap');
+      const note = figure.querySelector('.chain-note');
+      const ascii = figure.querySelector('.chain-ascii');
+      if (!btn || !panel) return;
+      if (figure.__diagramFs) return;
+      const root = document.documentElement;
+      const reduce = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : null;
+
+      /* The header and footer are built here rather than rendered into the column:
+         they are only ever on screen in full screen, and a node that exists only
+         to be hidden is one more thing to keep in step. Both are therefore
+         created, not toggled, and removed on exit.
+         They are two elements, not one, because the layer is a three-row grid:
+         the title heads the plate and the note foots it, which is where the
+         reference prints a table's footnote — under the table it qualifies. */
+      let chrome = null;
+      let foot = null;
+      const label = (title && title.textContent.trim()) || 'Diagram';
+
+      function trapFocus(event) {
+        if (event.key !== 'Tab') return;
+        /* The figure's own controls live inside it, so the layer's focusables are
+           the controls plus whatever the renderer offers. `offsetParent` is null
+           for anything display:none, which is how the in-column Replay control
+           and a collapsed panel stay out of the ring. */
+        const items = Array.from(figure.querySelectorAll(FS_FOCUSABLE))
+          .filter((el) => !el.hidden && (el.offsetParent !== null || el === document.activeElement));
+        if (!items.length) return;
+        const first = items[0];
+        const last = items[items.length - 1];
+        const active = document.activeElement;
+        event.preventDefault();
+        if (!figure.contains(active)) { first.focus(); return; }
+        const at = items.indexOf(active);
+        if (at < 0) { (event.shiftKey ? last : first).focus(); return; }
+        const step = event.shiftKey ? -1 : 1;
+        items[(at + step + items.length) % items.length].focus();
+      }
+
+      /* A layer stacked above this one keeps its own Escape. The page's reader
+         (`.story-read`, 220) sits above this layer (180) — a citation chip opens
+         it — and the infographic and certificate panels sit above that. Ordering
+         the list by stacking is what makes one press close one thing. */
+      const ABOVE_LAYER = '.story-read:not([hidden]), #infographic-modal, #certificate-panel, #certificate-review-modal';
+      function layerAbove() {
+        return Array.from(document.querySelectorAll(ABOVE_LAYER)).some((el) => !el.hidden);
+      }
+
+      function onKey(event) {
+        /* The reference panel is a capture-phase listener on this same node, so it
+           runs first and marks the press; a spent press must not also close the
+           layer underneath it. */
+        if (event.__citePanelHandled) return;
+        if (event.key === 'Escape' && figure.classList.contains('is-full')) {
+          /* The reference panel sits above this layer, so it is the innermost
+             thing open and takes the first Escape. This branch is the fallback for
+             a press that reached here unmarked; the test is the *arming* class,
+             not `#sheet-verify`'s `hidden`, because the list is unhidden for every
+             sitting that has references. */
+          if (citePanelOpen()) {
+            event.preventDefault();
+            event.stopPropagation();
+            closeCitePanel();
+            return;
+          }
+          if (layerAbove()) return;
+          event.preventDefault();
+          event.stopPropagation();
+          exit(true);
+          return;
+        }
+        trapFocus(event);
+      }
+
+      function buildChrome() {
+        chrome = document.createElement('div');
+        chrome.className = 'dfx-bar';
+        chrome.innerHTML =
+          '<p class="dfx-eyebrow"><span class="dfx-rule" aria-hidden="true"></span>' +
+            '<span class="dfx-kind">' + escapeStudy(FS_KICKER[kind] || kind) + '</span></p>' +
+          '<h2 class="dfx-title" id="' + figure.getAttribute('data-diagram') + '-fs-title">' + escapeStudy(label) + '</h2>';
+        figure.insertBefore(chrome, figure.firstChild);
+        if (note) {
+          foot = document.createElement('div');
+          foot.className = 'dfx-foot';
+          foot.innerHTML = '<p class="dfx-note">' + escapeStudy(note.textContent.trim()) + '</p>';
+          /* After the plate: `.chain-body` is the row above it in the grid. */
+          figure.appendChild(foot);
+        }
+        if (ascii) ascii.hidden = true;
+        if (toggle) toggle.hidden = true;
+      }
+
+      function dropChrome() {
+        if (chrome && chrome.parentNode) chrome.parentNode.removeChild(chrome);
+        if (foot && foot.parentNode) foot.parentNode.removeChild(foot);
+        chrome = null;
+        foot = null;
+        if (ascii) ascii.hidden = false;
+        if (toggle) toggle.hidden = false;
+      }
+
+      function enter() {
+        if (figure.classList.contains('is-full')) return;
+        if (reduce && reduce.matches) figure.classList.add('is-reduced');
+        buildChrome();
+        figure.__fsOpener = document.activeElement;
+        figure.classList.add('is-full');
+        figure.setAttribute('role', 'dialog');
+        figure.setAttribute('aria-modal', 'true');
+        figure.setAttribute('aria-labelledby', figure.getAttribute('data-diagram') + '-fs-title');
+        btn.setAttribute('aria-pressed', 'true');
+        btn.setAttribute('aria-label', 'Exit full screen');
+        btn.title = 'Exit full screen';
+        root.classList.add('dfx-open');
+        /* A collapsed figure would open an empty layer: expanding is what the
+           full-screen button means, so it is done here rather than refused. */
+        if (toggle && toggle.getAttribute('aria-expanded') === 'false') {
+          toggle.setAttribute('aria-expanded', 'true');
+          toggle.setAttribute('aria-label', 'Collapse diagram');
+          panel.hidden = false;
+          figure.classList.remove('is-visible');
+          void figure.offsetWidth;
+          figure.classList.add('is-visible');
+        }
+        void figure.offsetWidth;
+        /* The floating furniture is hidden by CSS while a layer is open (see
+           `body:has(.chain.is-full)`), so it cannot be pressed — but a hidden
+           control is still focusable. `inert` is what takes it out of the tab
+           order as well as the pointer's reach. The figure's own Replay control
+           is a sibling injected by the renderer and goes the same way; scoping it
+           to the figure's parent avoids reaching into anything else on the page. */
+        document.querySelectorAll('.insight-card, .audio-orb').forEach((el) => {
+          if (!el.hasAttribute('inert')) { el.setAttribute('inert', ''); el.setAttribute('data-dfx-inert', ''); }
+        });
+        const replayBtn = figure.parentNode ? figure.parentNode.querySelector('[data-chain-replay]') : null;
+        if (replayBtn && !replayBtn.hasAttribute('inert')) {
+          replayBtn.setAttribute('inert', '');
+          replayBtn.setAttribute('data-dfx-inert', '');
+        }
+        document.addEventListener('keydown', onKey, true);
+        /* Focus lands on the exit control so one press closes, and a keyboard
+           user is never left behind the layer. */
+        window.requestAnimationFrame(() => { if (figure.classList.contains('is-full')) btn.focus({ preventScroll: true }); });
+      }
+
+      function exit(refocus) {
+        if (!figure.classList.contains('is-full')) return;
+        figure.classList.remove('is-full', 'is-reduced');
+        figure.removeAttribute('role');
+        figure.removeAttribute('aria-modal');
+        figure.removeAttribute('aria-labelledby');
+        btn.setAttribute('aria-pressed', 'false');
+        btn.setAttribute('aria-label', 'Full screen');
+        btn.title = 'Full screen';
+        document.removeEventListener('keydown', onKey, true);
+        dropChrome();
+        /* Only the nodes this layer marked are released, so furniture that was
+           inert for another reason keeps its state. */
+        document.querySelectorAll('[data-dfx-inert]').forEach((el) => {
+          el.removeAttribute('inert');
+          el.removeAttribute('data-dfx-inert');
+        });
+        /* The lock is shared with the mindmap's layer, so it is only released when
+           no other full-screen block is still open — and the reference panel's
+           presentation goes with it, because the panel exists only for as long as
+           a layer does. */
+        if (!document.querySelector('.chain.is-full, .mm.is-full')) {
+          root.classList.remove('dfx-open', 'dfx-cite-open');
+          syncCiteClose();
+        }
+        const opener = figure.__fsOpener;
+        figure.__fsOpener = null;
+        if (refocus && opener && opener.isConnected && typeof opener.focus === 'function') {
+          opener.focus({ preventScroll: true });
+        }
+      }
+
+      btn.addEventListener('click', () => {
+        if (figure.classList.contains('is-full')) exit(true);
+        else enter();
+      });
+      /* A sitting switch replaces #sheet-article's innerHTML, which detaches the
+         figure before anything can call a teardown — measured by the mindmap
+         agent as the way a page stays locked with nothing on screen. The
+         listener is on the button, so a detached figure cannot fire it; the
+         class on <html> is the one thing that would survive, and the renderer
+         clears it before rewriting the article. */
+      figure.__diagramFs = { exit: exit, isFull: () => figure.classList.contains('is-full') };
     }
 
     function renderSheetDiagrams(data) {
@@ -3027,6 +4298,11 @@
         node.remove();
       });
       document.documentElement.classList.remove('story-read-open');
+      /* A sitting switch rewrites #sheet-article's innerHTML, which detaches any
+         figure that was full screen before its own exit() could run. The lock
+         lives on <html>, not on the figure, so it is the one thing that would
+         survive the rewrite with nothing left on screen to release it. */
+      document.documentElement.classList.remove('dfx-open');
       const sheet = data || {};
       // Sittings mid-migration may still carry the single-diagram field.
       const specs = sheet.diagrams || (sheet.diagram ? { legacy: sheet.diagram } : {});
@@ -3036,6 +4312,11 @@
       const refs = referenceIndex(isNaN(sheetIndex) ? 0 : sheetIndex);
       const canResolve = makeCiteResolver(refs);
       article.querySelectorAll('figure[data-diagram]').forEach((figure) => {
+        // The mindmap owns a rAF loop, a ResizeObserver, an IntersectionObserver
+        // and a block-scoped key listener. A sitting switch rebuilds the article,
+        // so the previous mount is torn down before the figure is rewritten.
+        if (figure.__mm && typeof figure.__mm.destroy === 'function') figure.__mm.destroy();
+        figure.__mm = null;
         const id = figure.getAttribute('data-diagram');
         const spec = specs[id];
         if (!spec) return;
@@ -3053,10 +4334,11 @@
         }
 
         let body = '';
-        if (isStory) body = bodyStory(spec, steps, canResolve, storyStart);
+        if (isStory) body = bodyStory(spec, steps, canResolve, storyStart, id);
         else if (kind === 'comparison') body = bodyComparison(spec, steps, canResolve);
         else if (kind === 'table') body = bodyTable(spec, rows);
-        else if (kind === 'flow') body = bodyFlow(spec, steps, canResolve);
+        else if (kind === 'flow') body = bodyFlow(spec, steps, canResolve, id, flowContinuation(figure, specs, kind));
+        else if (kind === 'mindmap') body = bodyMindmap(spec, steps, canResolve);
         else if (kind === 'timeline') body = bodyTimeline(spec, steps, canResolve);
         else body = bodyChain(spec, steps, true, canResolve);
 
@@ -3068,6 +4350,7 @@
         figure.classList.add('chain');
         figure.setAttribute('data-chain', '');
         figure.innerHTML =
+          (FULLSCREEN_KINDS.has(kind) ? fullscreenControlHtml() : '') +
           '<button class="chain-toggle" type="button" aria-expanded="true" aria-controls="' + id + '-body" aria-label="Collapse diagram">' +
             '<svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 5l5 5 5-5"/></svg>' +
           '</button>' +
@@ -3086,7 +4369,29 @@
           replay.setAttribute('data-chain-replay', '');
           replay.textContent = 'Replay animation';
           figure.parentNode.insertBefore(replay, figure.nextSibling);
-          wireFigure({ figure: figure, replay: replay });
+          if (kind === 'flow') {
+            // A flow keeps its stack visible and reuses the story reader as its
+            // scene layer: wireStory() wires the panel and the reader (the panel
+            // it opens contains it), the shared shell supplies the entrance
+            // animation and the Replay control, and wireFlow() opens a step's
+            // scene. The carousel those cards belong to stays hidden.
+            wireStory(figure);
+            wireFigure({ figure: figure, replay: replay, ownsToggle: true });
+            wireFlow(figure);
+          } else {
+            wireFigure({ figure: figure, replay: replay });
+            // The timeline's axis, legend and panel are one selection; the wiring
+            // is its own, and the shell's full-screen layer is added after it.
+            if (kind === 'timeline') wireTimeline(figure);
+            if (FULLSCREEN_KINDS.has(kind)) wireDiagramFullscreen(figure, kind);
+          }
+        }
+        // The mindmap mounts after the shell exists: it reuses the figure's own
+        // Replay control, and its host must already be in the document so the
+        // ResizeObserver and IntersectionObserver have something to measure.
+        if (kind === 'mindmap' && window.MindMap && typeof window.MindMap.create === 'function') {
+          const mmHost = figure.querySelector('.mm');
+          if (mmHost) figure.__mm = window.MindMap.create(mmHost, spec, { cite: diagramCite, canResolve: canResolve });
         }
         if (refs.length) decorateCitations(figure, refs);
       });
@@ -3113,6 +4418,16 @@
         const s = src.textContent.toLowerCase();
         if (s.includes(book) && new RegExp('\\b' + chapter + ':').test(s)) { revealReference(row.id); return; }
       }
+    }
+
+    /* The class that turns the list into a panel is added by the two layers, both
+       of which also remove it on exit. `syncCiteClose` has to follow that, or the
+       Close control would stay on a list that is no longer a panel — so the
+       document's own class changes are watched rather than each layer being asked
+       to remember a callback it was never given. */
+    if (typeof MutationObserver === 'function') {
+      new MutationObserver(() => syncCiteClose())
+        .observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
     }
 
     function renderSheetVerify(index) {
@@ -3155,6 +4470,7 @@
 
       box.hidden = false;
       box.innerHTML =
+        '<button type="button" class="cite-close" data-cite-close hidden>Close references</button>' +
         '<div class="cite-head">' +
           '<p class="cite-kicker">References</p>' +
           '<h3 class="cite-title">Lessons, sources, and quotations</h3>' +
@@ -3162,9 +4478,64 @@
         '<p class="cite-lead">' + escapeVerify(pack.claim) + '</p>' +
         '<p class="cite-count">' + refs.length + ' references. Tap any reference to read the quotation and its check.</p>' +
         '<ol class="cite-list">' + rows + '</ol>';
+      syncCiteClose();
 
       const article = document.getElementById('sheet-article');
       if (article) decorateCitations(article, refs);
+    }
+
+    /* While a full-screen diagram or map is open, a citation chip's reference list
+       is presented as a panel above the layer (see the `.sheet-verify` rule in
+       study.html), and a panel needs a way out. The control is only shown when
+       that panel is the presentation — in the column the list is part of the page,
+       so a Close button there would be noise.
+
+       `citePanelOpen()` reads the arming class rather than the layer's, because
+       the list is always visible: keying the panel on the layer alone raised it
+       over the diagram the instant it opened, burying the chips meant to open it. */
+    function citePanelOpen() {
+      return document.documentElement.classList.contains('dfx-cite-open');
+    }
+
+    function syncCiteClose() {
+      const box = document.getElementById('sheet-verify');
+      if (!box) return;
+      const btn = box.querySelector('[data-cite-close]');
+      if (btn) btn.hidden = !citePanelOpen();
+    }
+
+    function closeCitePanel() {
+      const box = document.getElementById('sheet-verify');
+      document.documentElement.classList.remove('dfx-cite-open');
+      syncCiteClose();
+      /* Focus was on the chip that opened it, which is inside the layer and still
+         on screen, so it is handed back rather than left on a removed node. */
+      const opener = box && box.__citeOpener;
+      if (box) box.__citeOpener = null;
+      if (opener && opener.isConnected && typeof opener.focus === 'function') {
+        opener.focus({ preventScroll: true });
+      }
+    }
+
+    /* The panel claims Escape for itself rather than relying on whichever layer
+       happens to be underneath. It is the topmost layer whenever it is presented
+       (240 against the diagram's 180 and the map's 180), so it is the innermost
+       thing open by definition; a capture-phase listener on the document lets it
+       say so once, and the map beneath it already stands down on the class.
+
+       It marks the event as handled, and that is load-bearing rather than
+       tidiness. Both this and a diagram layer's own handler are capture-phase
+       listeners **on the same node**, and `stopPropagation()` does not stop other
+       listeners on the node it is called from — only propagation to other nodes.
+       So the layer's handler runs afterwards regardless, sees the class already
+       cleared, and closes the layer under the panel: measured, one Escape closed
+       both. The mark is how the later handler learns the press is spent. */
+    function onCitePanelKey(event) {
+      if (event.key !== 'Escape' || !citePanelOpen()) return;
+      event.preventDefault();
+      event.stopPropagation();
+      event.__citePanelHandled = true;
+      closeCitePanel();
     }
 
     // Citation markers jump to the reference list and open that row.
@@ -3172,12 +4543,34 @@
       const row = document.getElementById(id);
       if (!row) return;
       const box = document.getElementById('sheet-verify');
-      if (box) box.hidden = false;
+      if (box) {
+        /* Remember what opened it, so the panel can hand focus back. */
+        if (box.hidden && document.activeElement && document.activeElement.closest
+          && document.activeElement.closest('.chain-cite, .cite-ref')) {
+          box.__citeOpener = document.activeElement;
+        }
+        box.hidden = false;
+      }
       row.querySelectorAll('.cite-details').forEach((d) => { d.open = true; });
       row.classList.add('is-hit');
+      /* Arm the panel only when a layer is open: in the column the list is already
+         on the page and a fixed full-viewport presentation would be wrong. */
+      if (document.documentElement.classList.contains('dfx-open') ||
+        document.documentElement.classList.contains('mm-fullscreen-open')) {
+        document.documentElement.classList.add('dfx-cite-open');
+      }
+      syncCiteClose();
+      /* `scrollIntoView` walks the nearest scrollable ancestor. With a layer open
+         the panel is `position: fixed` with its own overflow, so the row scrolls
+         inside the panel; in the column it scrolls the page as it always did. */
       row.scrollIntoView({ behavior: 'smooth', block: 'center' });
       window.setTimeout(() => row.classList.remove('is-hit'), 1800);
     }
+
+    /* Capture phase, so the panel answers Escape before any layer below it: the
+       diagram's own handler is also capture-phase and is registered later, so it
+       runs after this one and sees the class already cleared. */
+    document.addEventListener('keydown', onCitePanelKey, true);
 
     document.addEventListener('click', (e) => {
       const cite = e.target.closest && e.target.closest('.cite-ref');
@@ -3190,6 +4583,12 @@
       if (chainCite) {
         e.preventDefault();
         resolveCiteLabel(chainCite.getAttribute('data-cite-src'));
+        return;
+      }
+      const citeClose = e.target.closest && e.target.closest('[data-cite-close]');
+      if (citeClose) {
+        e.preventDefault();
+        closeCitePanel();
       }
     });
 

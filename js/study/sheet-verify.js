@@ -267,9 +267,9 @@
         item(
           "scripture",
           "The road to Daniel 4 runs through two earlier confessions the same king had already been forced to make.",
-          "Daniel 2:38, King James Version",
-          "And wheresoever the children of men dwell, the beasts of the field and the fowls of the heaven hath he given into thine hand, and hath made thee ruler over them all. Thou art this head of gold.",
-          "Daniel 2:46–47 records the first confession, that the king's God is a revealer of secrets. It is intellectual awe, and it does not outlast the chapter. The gold head is Babylon, given, not seized. These two rows carry the three confessions the Daniel 4 diagram walks: 2:47 in awe, 3:29 under compulsion, 4:37 in his own decree."
+          "Daniel 2:47, King James Version",
+          "The king answered unto Daniel, and said, Of a truth it is, that your God is a God of gods, and a Lord of kings, and a revealer of secrets, seeing thou couldest reveal this secret.",
+          "Daniel 2:46–47 records the first confession, and 2:47 is where the king's own words name God “a revealer of secrets” — the phrase the Daniel 4 diagram's first movement quotes. It is intellectual awe, and it does not outlast the chapter. The gold head is Babylon, given, not seized. These two rows carry the three confessions the Daniel 4 diagram walks: 2:47 in awe, 3:29 under compulsion, 4:37 in his own decree."
         ),
         item(
           "scripture",

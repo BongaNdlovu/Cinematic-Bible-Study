@@ -187,9 +187,15 @@ async function auditReader(page, figure, sheet) {
     const bg = r.querySelector('.story-read-bg');
     const veil = r.querySelector('.story-read-veil');
     const photo = r.querySelector('.story-read-photo');
-    const panel = r.querySelector('.story-read-panel');
+    const frame = r.querySelector('.story-read-frame');
     const cs = getComputedStyle(bg);
     const vs = getComputedStyle(veil);
+    // The reader's copy lives on the enlarged card clones and in the study band
+    // under the deck. The old `.story-read-kicker/-title/-cite/-copy/-detail`
+    // container was removed by the clone-deck rework; querying it here made
+    // every copy assertion below vacuously pass.
+    const clone = r.querySelector('.story-read-deck .story-card');
+    const pick = (root, sel) => (root && root.querySelector(sel) ? root.querySelector(sel).textContent.trim() : '');
     return {
       hidden: r.hidden,
       opacity: getComputedStyle(r).opacity,
@@ -199,13 +205,16 @@ async function auditReader(page, figure, sheet) {
       layerCount: r.querySelectorAll('.story-read-photo').length,
       photoSrc: photo ? (photo.getAttribute('src') || '') : '',
       veilBackground: vs.backgroundColor + ' | ' + vs.backdropFilter,
-      kicker: (r.querySelector('.story-read-kicker') || {}).textContent,
-      title: (r.querySelector('.story-read-title') || {}).textContent,
-      cite: (r.querySelector('.story-read-cite') || {}).textContent,
-      copy: (r.querySelector('.story-read-copy') || {}).textContent,
+      deckCards: r.querySelectorAll('.story-read-deck .story-card').length,
+      kicker: pick(clone, '.story-kicker'),
+      title: pick(clone, '.story-title'),
+      cite: pick(clone, '.chain-cite'),
+      copy: pick(clone, '.story-text'),
+      detail: pick(r, '.story-read-band-detail'),
+      bandChip: pick(r, '.story-read-band-cite .chain-cite'),
       count: (r.querySelector('.story-read-count') || {}).textContent,
-      panelTop: panel ? Math.round(panel.getBoundingClientRect().top) : null,
-      panelHeight: panel ? Math.round(panel.getBoundingClientRect().height) : null,
+      frameTop: frame ? Math.round(frame.getBoundingClientRect().top) : null,
+      frameHeight: frame ? Math.round(frame.getBoundingClientRect().height) : null,
       viewportHeight: window.innerHeight,
     };
   });
@@ -239,16 +248,31 @@ async function auditReader(page, figure, sheet) {
     out.afterNext = await page.evaluate(() => {
       const r = document.querySelector('body > .story-read');
       const photo = r.querySelector('.story-read-photo');
+      // Read the copy off the now-active clone and the study band, which is
+      // where the reader actually renders it after the clone-deck rework.
+      const active = r.querySelector('.story-read-deck .story-card.is-active');
+      const text = (sel) => {
+        const el = active && active.querySelector(sel);
+        return el ? el.textContent.trim() : '';
+      };
+      const band = r.querySelector('.story-read-band-detail');
       return {
-        title: (r.querySelector('.story-read-title') || {}).textContent,
+        title: text('.story-title'),
+        copy: text('.story-text'),
         count: (r.querySelector('.story-read-count') || {}).textContent,
-        detail: ((r.querySelector('.story-read-detail') || {}).textContent || '').slice(0, 70),
-        detailHidden: !!(r.querySelector('.story-read-detail') || {}).hidden,
+        detail: band ? band.textContent.trim().slice(0, 70) : '',
+        detailShown: !!(band && band.textContent.trim()),
+        bandChip: ((r.querySelector('.story-read-band-cite .chain-cite') || {}).textContent || '').trim(),
+        deckCards: r.querySelectorAll('.story-read-deck .story-card').length,
         pips: r.querySelectorAll('.story-read-pip').length,
         activePip: [...r.querySelectorAll('.story-read-pip')].findIndex((p) => p.classList.contains('is-active')),
         photoSrc: photo ? (photo.getAttribute('src') || '').split('/').pop() : '',
       };
     });
+    // A movement change must actually change what is on screen: the title on the
+    // active clone and the line in the band are the two things that move.
+    out.copyChanged = out.open && out.afterNext && out.open.title !== out.afterNext.title;
+    if (!out.copyChanged) out.problems = (out.problems || []).concat('movement change did not change the reader title');
     out.changed = before !== (out.afterNext && out.afterNext.photoSrc);
     out.screenshot2 = path.basename(await shot(page, `s${sheet}-reader-2`));
     // Arrows are handled once, at the document: one press must move one

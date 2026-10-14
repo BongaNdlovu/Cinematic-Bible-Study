@@ -8,7 +8,21 @@ import vm from "vm";
      the same book/chapter matching the browser does
    - no text was smuggled in that is not in the source artwork */
 
-const KINDS = new Set(["chain", "steps", "comparison", "table", "timeline", "flow"]);
+const KINDS = new Set(["chain", "steps", "comparison", "table", "timeline", "flow", "mindmap"]);
+
+/* The mindmap's structural vocabulary. None of these fields carries prose: the
+   only words a map renders beyond `role`/`title`/`text`/`points[]` are the four
+   connector names, which are the course's own self-check headings. */
+const MM_SIDES = new Set(["L", "R"]);
+const MM_ROUTES = new Set(["spine", "vertical", "under-centre"]);
+const MM_CONNECTORS = new Set(["text", "history", "interpretation", "christ"]);
+/* The vertical band a step may be placed in, as the renderer clamps it: 10%..90%
+   of the world height. The world is 960x660 (it was 1600x900 before the type-size
+   fix), so the band is 66…594. Keep these in step with Y_MIN/Y_MAX in
+   js/study/mindmap.js — a validator that accepts more than the renderer honours
+   lets a spec declare a `y` that is silently re-clamped. */
+const MM_Y_MIN = 66;
+const MM_Y_MAX = 594;
 
 const normalBook = (name) => {
   const s = String(name || "").trim().toLowerCase().replace(/\./g, "");
@@ -93,6 +107,54 @@ for (let s = 0; s <= maxSheet; s++) {
       }
       (st.points || []).forEach((p, pi) => { if (!String(p || "").trim()) problems.push(`${id}: step ${i + 1} empty point ${pi + 1}`); });
     });
+
+    /* The mindmap adds structure only, so every new field is checkable without
+       reading a sentence: a slug, a side, a coordinate inside the world, and two
+       enums whose values are the four connector names. `side`/`y` stay optional —
+       §12 gives the renderer a placement rule for a spec that omits them — but a
+       declared value must be usable.
+
+       Bounds track the renderer's own clamp, which derives from the world height
+       (Y_MIN/Y_MAX = 10%..90% of H). The world was 1600x900 and is now 960x660, so
+       the usable band is 66…594; keeping the old 90…810 here would accept a `y` the
+       renderer silently re-clamps. */
+    if (d.kind === "mindmap") {
+      const declared = new Set();
+      (d.steps || []).forEach((st, i) => {
+        const slug = String(st.id || `step-${i}`);
+        if (!/^[a-z0-9-]+$/.test(slug)) problems.push(`${id}: step ${i + 1} id "${slug}" is not a [a-z0-9-]+ slug`);
+        if (declared.has(slug)) problems.push(`${id}: duplicate step id "${slug}"`);
+        declared.add(slug);
+        if (st.side !== undefined && !MM_SIDES.has(st.side)) problems.push(`${id}: step ${i + 1} side "${st.side}" is not L or R`);
+        if (st.y !== undefined) {
+          const y = Number(st.y);
+          if (!Number.isFinite(y) || y < MM_Y_MIN || y > MM_Y_MAX) problems.push(`${id}: step ${i + 1} y "${st.y}" is outside ${MM_Y_MIN}…${MM_Y_MAX}`);
+        }
+        if (st.link !== undefined && !MM_CONNECTORS.has(String(st.link).toLowerCase())) {
+          problems.push(`${id}: step ${i + 1} link "${st.link}" is not one of text|history|interpretation|christ`);
+        }
+        (st.points || []).forEach((p, pi) => {
+          // The renderer reads `text` only from steps[]; a leaf object would put
+          // copy on the page the claim-unit extractor cannot see, so the plain
+          // string is the only accepted leaf form.
+          if (typeof p !== "string") problems.push(`${id}: step ${i + 1} point ${pi + 1} is not a string`);
+        });
+      });
+      (d.links || []).forEach((link, li) => {
+        const at = `${id}: link ${li + 1}`;
+        const from = String(link && link.from || "");
+        const to = String(link && link.to || "");
+        if (!declared.has(from)) problems.push(`${at} from "${from}" names no declared step id`);
+        if (!declared.has(to)) problems.push(`${at} to "${to}" names no declared step id`);
+        if (from && from === to) problems.push(`${at} links a step to itself`);
+        if (!MM_CONNECTORS.has(String(link && link.kind).toLowerCase())) {
+          problems.push(`${at} kind "${link && link.kind}" is not one of text|history|interpretation|christ`);
+        }
+        if (link && link.route !== undefined && !MM_ROUTES.has(link.route)) {
+          problems.push(`${at} route "${link.route}" is not one of spine|vertical|under-centre`);
+        }
+      });
+    }
   });
 
   const kinds = {};

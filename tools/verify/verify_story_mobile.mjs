@@ -50,7 +50,12 @@ try {
     if (box) box.hidden = true;
   });
   await page.waitForSelector('#sheet-article figure.chain.is-story', { timeout: 20000 });
-  summary.viewport = await page.evaluate(() => ({ w: window.innerWidth, h: window.innerHeight, scrollW: document.documentElement.scrollWidth }));
+  summary.viewport = await page.evaluate(() => ({
+    w: window.innerWidth,
+    h: window.innerHeight,
+    clientW: document.documentElement.clientWidth,
+    scrollW: document.documentElement.scrollWidth,
+  }));
 
   // The artwork story: stage, then the reader.
   const figure = await page.$('#sheet-article figure[data-diagram="s0-3"]');
@@ -64,17 +69,23 @@ try {
   await page.waitForTimeout(1500);
   summary.reader = await page.evaluate(() => {
     const r = document.querySelector('body > .story-read');
-    const panel = r.querySelector('.story-read-panel');
-    const box = panel.getBoundingClientRect();
+    // The reader's content container was renamed when the reader became a
+    // full-screen card deck; `.story-read-panel` no longer exists.
+    const frame = r.querySelector('.story-read-frame');
+    const box = frame.getBoundingClientRect();
+    const clientW = document.documentElement.clientWidth;
     return {
       open: r.classList.contains('is-open'),
-      panel: { left: Math.round(box.left), right: Math.round(box.right), top: Math.round(box.top), bottom: Math.round(box.bottom), height: Math.round(box.height) },
+      frame: { left: Math.round(box.left), right: Math.round(box.right), top: Math.round(box.top), bottom: Math.round(box.bottom), height: Math.round(box.height) },
+      clientW,
       scrollW: document.documentElement.scrollWidth,
-      overflowX: document.documentElement.scrollWidth > window.innerWidth + 1,
-      panelScrollable: panel.scrollHeight > panel.clientHeight + 1,
+      // Chromium's mobile emulation reports window.innerWidth as the device
+      // width plus scrollbar gutter, so clientWidth is the honest comparison.
+      overflowX: document.documentElement.scrollWidth > clientW + 1,
+      frameScrollable: frame.scrollHeight > frame.clientHeight + 1,
       pips: r.querySelectorAll('.story-read-pip').length,
-      detail: (r.querySelector('.story-read-detail').textContent || '').slice(0, 60),
-      title: (r.querySelector('.story-read-title') || {}).textContent,
+      deckCards: r.querySelectorAll('.story-read-deck .story-card').length,
+      title: (r.querySelector('.story-read-deck .story-card.is-active .story-title') || {}).textContent,
     };
   });
   await page.screenshot({ path: path.join(OUT, 'phone-reader.png') });
