@@ -4,6 +4,9 @@ $ErrorActionPreference = "Stop"
 $root = Split-Path -Parent (Split-Path -Parent $MyInvocation.MyCommand.Path)
 $stage = Join-Path $root ".pages-deploy"
 
+node (Join-Path $root "tools\build-shelf-data.mjs")
+if ($LASTEXITCODE -ne 0) { throw "build-shelf-data failed" }
+
 if (Test-Path $stage) { Remove-Item $stage -Recurse -Force }
 New-Item -ItemType Directory -Path $stage | Out-Null
 

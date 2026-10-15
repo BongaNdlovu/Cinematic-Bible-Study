@@ -70,7 +70,8 @@ const SAMPLE = [
   ['Sheet 10 · Daniel 10–12', 'The Final Vision: Sealed Until the Time of the End', 'A messenger, a long war foretold, and a book sealed until the time of the end.', 'Daniel 10:1–12:13', '30 min']
 ].map((a) => ({ epoch: a[0], title: a[1], subtitle: a[2], scripture: a[3], readTime: a[4] }));
 
-const DATA = (window.sheetsData && window.sheetsData.length) ? window.sheetsData.slice() : SAMPLE;
+const SHELF_SRC = window.SHELF_DATA || window.sheetsData;
+const DATA = (SHELF_SRC && SHELF_SRC.length) ? SHELF_SRC.slice() : SAMPLE;
 const N = DATA.length;
 const J = window.BAJourney || null;
 
@@ -736,16 +737,16 @@ function shade2(hex, amt) {
 
 const COVER_ART = window.SHELF_COVERS || [];
 const COVER_IMG = [];
-function loadCoverArt() {
-  for (const [i, src] of Object.entries(COVER_ART)) {
-    const img = new Image();
-    img.decoding = 'async';
-    img.src = src;
-    COVER_IMG[Number(i)] = img;
-  }
+function ensureCoverArt(i) {
+  if (COVER_IMG[i] || !COVER_ART[i]) return;
+  const img = new Image();
+  img.decoding = 'async';
+  img.src = COVER_ART[i];
+  COVER_IMG[i] = img;
+  img.decode().then(() => { img.cxReady = true; }, () => { img.cxReady = true; });
 }
-function artReady(i) { const a = COVER_IMG[i]; return !!(a && a.complete && a.naturalWidth); }
-function artPending(i) { const a = COVER_IMG[i]; return !!(a && !a.complete); }
+function artReady(i) { const a = COVER_IMG[i]; return !!(a && a.cxReady && a.naturalWidth); }
+function artPending(i) { const a = COVER_IMG[i]; return !!(a && !a.cxReady); }
 function rgba(hex, a) {
   const n = parseInt(hex.slice(1), 16);
   return 'rgba(' + (n >> 16) + ',' + ((n >> 8) & 255) + ',' + (n & 255) + ',' + a + ')';
@@ -1858,6 +1859,7 @@ async function startRoom() {
   }
   function* hiSteps(b) {
     const v = b.v, cw = Math.round(b.W * PXC), ch = Math.round(b.H * PXC);
+    ensureCoverArt(v.i);
     const artWait = performance.now() + 8000;
     while (artPending(v.i) && performance.now() < artWait) yield;
     const f = paintFront(v, cw, ch);
@@ -1902,6 +1904,8 @@ async function startRoom() {
   }
   function buildHi(b) {
     if (b.hi) { touchHi(b); return; }
+    ensureCoverArt(b.v.i);
+    if (artPending(b.v.i)) { scheduleHi(b, true); return; }
     const k = hiJobs.findIndex((j) => j.b === b);
     if (k >= 0) hiJobs.splice(k, 1);
     const g = hiSteps(b);
@@ -2525,7 +2529,6 @@ function watchForRefresh() {
   setLoader(0.06, 'Opening the reading room…');
   try {
     await whenShown(body);
-    loadCoverArt();
     await Promise.all([loadFonts(), loadMotifs()]);
     const room = await startRoom();
     body.classList.remove('is-loading');

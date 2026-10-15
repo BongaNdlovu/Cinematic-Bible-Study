@@ -420,7 +420,13 @@
           ${cinematic ? '<a href="' + studyHref + '">Read in the study desk</a><a href="' + galHref + '">View in 3D</a><button type="button" class="cmap-play-route">Play route</button>'
             : '<a class="cmap-enter" href="' + fullHref + '">Enter cinematic map →</a>'}
         </div>`;
+      const wasOpen = dossier.classList.contains("open");
       dossier.classList.add("open");
+      if (wasOpen && !REDUCE) {
+        dossier.classList.remove("is-swapping");
+        void dossier.offsetWidth;
+        dossier.classList.add("is-swapping");
+      }
       dossier.querySelector(".cmap-close").addEventListener("click", () => dossier.classList.remove("open"));
       const playRouteBtn = dossier.querySelector(".cmap-play-route");
       if (playRouteBtn) playRouteBtn.addEventListener("click", () => playRoute(ep));
@@ -983,9 +989,16 @@
       });
     }
     if (btnLegend && legendPanel) {
+      let keyPref = null;
+      try { keyPref = localStorage.getItem("cmap-key-open"); } catch (err) {}
+      if (cinematic && window.innerWidth >= 1200 && keyPref !== "0") {
+        legendPanel.classList.add("is-open");
+        btnLegend.setAttribute("aria-expanded", "true");
+      }
       btnLegend.addEventListener("click", () => {
         const open = legendPanel.classList.toggle("is-open");
         btnLegend.setAttribute("aria-expanded", String(open));
+        try { localStorage.setItem("cmap-key-open", open ? "1" : "0"); } catch (err) {}
       });
     }
 

@@ -180,7 +180,7 @@
   }
 
   function coverStrip(state) {
-    const covers = window.SHELF_COVERS || [];
+    const covers = window.SHELF_COVER_THUMBS || window.SHELF_COVERS || [];
     const doneSet = Array.isArray(state.completedSheets) ? state.completedSheets.map(Number) : [];
     let nextUp = -1;
     for (let i = 0; i < 11; i++) if (doneSet.indexOf(i) < 0) { nextUp = i; break; }
@@ -633,7 +633,7 @@
 
   function paintFan() {
     const host = el("account-fan");
-    const covers = window.SHELF_COVERS || [];
+    const covers = window.SHELF_COVER_THUMBS || window.SHELF_COVERS || [];
     if (!host || !covers.length) return;
     host.innerHTML = [0, 5, 2, 6, 10].filter(function (i) { return covers[i]; }).map(function (i, k) {
       return '<img class="acct-fan-book" style="--k:' + (k - 2) + '" src="' + escapeHub(covers[i]) + '" alt="" decoding="async">';

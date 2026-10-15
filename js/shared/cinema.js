@@ -75,32 +75,27 @@
     items.forEach(function (el) { observer.observe(el); });
   }
 
-  let swapping = false;
   function swap(update, target) {
-    if (reduced || swapping || typeof document.startViewTransition !== "function") {
+    if (target) {
+      update();
+      if (!reduced) {
+        target.classList.remove("cx-swap-enter");
+        void target.offsetWidth;
+        target.classList.add("cx-swap-enter");
+      }
+      return Promise.resolve();
+    }
+    if (reduced || typeof document.startViewTransition !== "function") {
       update();
       return Promise.resolve();
     }
-    const types = target ? ["cx-swap", "cx-swap-scoped"] : ["cx-swap"];
-    if (target) target.style.viewTransitionName = "cx-swap";
-    swapping = true;
     let t;
     try {
-      t = document.startViewTransition({ update: update, types: types });
+      t = document.startViewTransition({ update: update, types: ["cx-swap"] });
     } catch (err) {
-      try {
-        t = document.startViewTransition(update);
-      } catch (err2) {
-        swapping = false;
-        if (target) target.style.viewTransitionName = "";
-        update();
-        return Promise.resolve();
-      }
+      t = document.startViewTransition(update);
     }
-    return t.finished.catch(function () {}).then(function () {
-      swapping = false;
-      if (target) target.style.viewTransitionName = "";
-    });
+    return t.finished.catch(function () {});
   }
 
   const FOOTER_LINKS = [

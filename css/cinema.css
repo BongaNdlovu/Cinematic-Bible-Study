@@ -113,20 +113,8 @@ html:active-view-transition-type(cx-swap)::view-transition-old(root) {
 html:active-view-transition-type(cx-swap)::view-transition-new(root) {
   animation: cx-swap-in 380ms var(--cx-ease) both;
 }
-html:active-view-transition-type(cx-swap-scoped)::view-transition-old(root),
-html:active-view-transition-type(cx-swap-scoped)::view-transition-new(root) {
-  animation: none;
-}
-::view-transition-old(cx-swap) {
-  animation: cx-swap-out 200ms var(--cx-ease-in) both;
-}
-::view-transition-new(cx-swap) {
-  animation: cx-swap-in 380ms var(--cx-ease) both;
-}
-::view-transition-group(cx-swap) {
-  animation-duration: 380ms;
-  animation-timing-function: var(--cx-ease);
-}
+.cx-swap-enter { animation: cx-rise 380ms var(--cx-ease) both; }
+@keyframes cx-rise { from { opacity: 0; transform: translateY(6px); } }
 @keyframes cx-swap-out { to { opacity: 0; filter: blur(3px); } }
 @keyframes cx-swap-in { from { opacity: 0; filter: blur(4px); transform: translateY(6px); } }
 
@@ -261,6 +249,7 @@ a.cx-card:hover, .cx-card.is-interactive:hover { transform: translateY(-2px); bo
   [data-cx-reveal] { opacity: 1; transform: none; filter: none; transition: none; }
   .cx-btn, .cx-btn::after, .cx-card, .cx-field input { transition: none; }
   .cx-shimmer { animation: none; }
+  .cx-swap-enter { animation: none; }
 }
 
 .cx-footer {

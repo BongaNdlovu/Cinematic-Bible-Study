@@ -423,13 +423,16 @@ import * as THREE from 'three';
         if (hallCurrentUrl === url) apply(tex);
       });
     }
-    Object.values(HALL_BACKDROPS).forEach((url) => {
-      if (!url || hallTexCache.has(url)) return;
+    const hallPending = new Set();
+    function prefetchHall(url) {
+      if (!url || hallTexCache.has(url) || hallPending.has(url)) return;
+      hallPending.add(url);
       texLoader.load(url, (tex) => {
         prepHallTex(tex);
         hallTexCache.set(url, tex);
-      });
-    });
+        hallPending.delete(url);
+      }, undefined, () => hallPending.delete(url));
+    }
 
     const galleryFrameGroup = new THREE.Group();
     scene.add(galleryFrameGroup);
@@ -3191,6 +3194,13 @@ import * as THREE from 'three';
       if (window.Insights) window.Insights.track('gallery_view', null, { asset: key });
       const data = ASSET_REGISTRY[key] || ASSET_REGISTRY.head;
       setHallBackdrop(data.hallImg || HALL_BACKDROPS[key] || data.plateImg);
+      setTimeout(() => {
+        const at = artifactOrder.indexOf(key);
+        [artifactOrder[at + 1], artifactOrder[at - 1]].forEach((near) => {
+          const d = near && ASSET_REGISTRY[near];
+          if (d) prefetchHall(d.hallImg || HALL_BACKDROPS[near] || d.plateImg);
+        });
+      }, 1500);
       AudioBus.play('select');
       document.querySelectorAll('.era-cell').forEach((el) => {
         el.classList.toggle('active', el.dataset.asset === key);
@@ -3214,6 +3224,12 @@ import * as THREE from 'three';
       if (pill) pill.textContent = data.pill;
 
       syncDossierNarrative(data);
+      [document.querySelector('.hero-title-group'), document.querySelector('.narrative-dossier')].forEach((node) => {
+        if (!node || reducedMotion) return;
+        node.classList.remove('cx-enter');
+        void node.offsetWidth;
+        node.classList.add('cx-enter');
+      });
 
       syncDossierStudyLink(key);
       syncDossierMapLink(key);
@@ -4065,6 +4081,26 @@ import * as THREE from 'three';
     const scrim = document.getElementById('scrim');
     if (scrim) scrim.addEventListener('click', closeAllPanels);
 
+    const ICONS = {
+      sun: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2.2M12 19.3v2.2M4.6 4.6l1.6 1.6M17.8 17.8l1.6 1.6M2.5 12h2.2M19.3 12h2.2M4.6 19.4l1.6-1.6M17.8 6.2l1.6-1.6"/></svg>',
+      moon: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg>',
+      book: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 6.5C10.3 5 7.8 4.5 4 4.5v14c3.8 0 6.3.5 8 2 1.7-1.5 4.2-2 8-2v-14c-3.8 0-6.3.5-8 2z"/><path d="M12 6.5v14"/></svg>',
+      nodes: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="3.2"/><path d="M12 3.5v2M12 18.5v2M3.5 12h2M18.5 12h2"/></svg>',
+      title: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 6.5V5h14v1.5M12 5v14M9 19h6"/></svg>',
+      muted: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z"/><path d="M16 9.5l5 5M21 9.5l-5 5"/></svg>',
+      sound: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z"/><path d="M15.5 9a4 4 0 0 1 0 6M18 6.5a7.5 7.5 0 0 1 0 11"/></svg>',
+      lab: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h10M18 7h2M4 17h4M12 17h8"/><circle cx="16" cy="7" r="2"/><circle cx="10" cy="17" r="2"/></svg>',
+      menu: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h10"/></svg>'
+    };
+    [['btn-theme-toggle', 'sun'], ['btn-scripture-modal', 'book'], ['btn-nodes-master', 'nodes'], ['btn-titles-toggle', 'title'], ['btn-open-lab', 'lab'], ['btn-menu', 'menu']].forEach(([id, icon]) => {
+      const b = document.getElementById(id);
+      if (b) b.innerHTML = ICONS[icon];
+    });
+    const stageEl = document.getElementById('webgl-container');
+    const hintDone = () => document.body.classList.add('hint-done');
+    if (stageEl) stageEl.addEventListener('pointerdown', hintDone, { once: true });
+    setTimeout(hintDone, 9000);
+
     const btnTheme = document.getElementById('btn-theme-toggle');
     if (btnTheme) {
       btnTheme.addEventListener('click', () => {
@@ -4073,7 +4109,7 @@ import * as THREE from 'three';
         scene.fog.color.set(cool ? 0x05070c : 0x050301);
         hallUniforms.cool.value = cool ? 1 : 0;
         hemiLight.color.set(cool ? 0xc9e0ff : 0xffe8c2);
-        btnTheme.textContent = cool ? '🌙' : '☀️';
+        btnTheme.innerHTML = cool ? ICONS.moon : ICONS.sun;
         btnTheme.classList.toggle('active', cool);
         museumToast(cool ? 'Cool gallery tone' : 'Warm palace tone');
       });
@@ -4086,7 +4122,7 @@ import * as THREE from 'three';
     const btnMute = document.getElementById('btn-mute');
     if (btnMute) {
       btnMute.classList.toggle('active', AudioBus.muted);
-      btnMute.textContent = AudioBus.muted ? '🔇' : '♪';
+      btnMute.innerHTML = AudioBus.muted ? ICONS.muted : ICONS.sound;
       btnMute.title = AudioBus.muted ? 'Unmute gallery sound' : 'Mute gallery sound';
       btnMute.setAttribute('aria-label', AudioBus.muted ? 'Unmute sound' : 'Mute sound');
       btnMute.addEventListener('click', () => {
@@ -4096,7 +4132,7 @@ import * as THREE from 'three';
         // mute control authoritative for both.
         if (window.UiSound) window.UiSound.enabled = !AudioBus.muted;
         btnMute.classList.toggle('active', AudioBus.muted);
-        btnMute.textContent = AudioBus.muted ? '🔇' : '♪';
+        btnMute.innerHTML = AudioBus.muted ? ICONS.muted : ICONS.sound;
         btnMute.title = AudioBus.muted ? 'Unmute gallery sound' : 'Mute gallery sound';
         if (!AudioBus.muted) AudioBus.play('click');
       });

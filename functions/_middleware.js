@@ -1,6 +1,8 @@
 const SUPABASE_URL = "https://ttlrspnfadmxkoyqvofh.supabase.co";
 const SUPABASE_KEY = "sb_publishable_k3fsJ1eGKIcmOxtmaZHbJw_R1qdW_ya";
 
+const STATIC_PREFIXES = ["/assets/", "/js/", "/css/", "/vendor/", "/models/", "/bible/"];
+
 function ipOf(request) {
   return request.headers.get("cf-connecting-ip")
     || request.headers.get("x-real-ip")
@@ -129,6 +131,7 @@ export async function onRequest(context) {
   }
   if (request.method === "OPTIONS" || request.method === "HEAD") return context.next();
   if (path === "/__rate" && request.method === "POST") return rateProxy(context, request);
+  if (STATIC_PREFIXES.some(function (prefix) { return path.startsWith(prefix); })) return context.next();
   const ip = ipOf(request);
   const decision = await allowed(context, ip, path);
   if (decision === "down") return unavailable();

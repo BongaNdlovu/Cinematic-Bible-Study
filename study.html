@@ -28,12 +28,12 @@
 
   <link rel="stylesheet" href="css/terms.css?v=cx1">
   <link rel="stylesheet" href="css/book-reader.css?v=cx1">
-  <link rel="stylesheet" href="css/cinema.css?v=cx1">
+  <link rel="stylesheet" href="css/cinema.css?v=cx2">
   <script src="js/shared/cinema.js"></script>
   <script type="importmap">
   {
     "imports": {
-      "three": "./vendor/three/build/three.module.js",
+      "three": "./vendor/three/build/three.module.min.js",
       "three/addons/": "./vendor/three/examples/jsm/"
     }
   }
@@ -9598,7 +9598,7 @@
           <p class="lesson-infographic-kicker">One-page roadmap</p>
           <figcaption class="lesson-infographic-title" id="lesson-infographic-title">The Unbroken Chain</figcaption>
           <button type="button" class="lesson-infographic-frame" id="btn-infographic-open" aria-label="Open infographic full screen">
-            <img id="lesson-infographic-img" alt="">
+            <img id="lesson-infographic-img" alt="" loading="lazy" decoding="async">
           </button>
           <div class="lesson-infographic-actions">
             <button type="button" class="gold-bible-notice-btn" id="btn-infographic-fullscreen">View full page</button>

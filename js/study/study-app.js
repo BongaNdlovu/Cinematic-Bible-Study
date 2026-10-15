@@ -5848,8 +5848,8 @@
       });
       document.querySelectorAll('.instrument-tabs button').forEach((btn) => {
         btn.addEventListener('click', () => {
-          const panels = document.querySelector('.instrument-panel');
-          if (window.Cinema && panels) window.Cinema.swap(() => showInstrument(btn.dataset.instrument), panels.parentElement);
+          const panel = document.getElementById('panel-' + btn.dataset.instrument);
+          if (window.Cinema && panel) window.Cinema.swap(() => showInstrument(btn.dataset.instrument), panel);
           else showInstrument(btn.dataset.instrument);
         });
       });
