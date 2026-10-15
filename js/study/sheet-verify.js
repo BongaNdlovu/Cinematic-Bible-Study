@@ -554,7 +554,7 @@
         ),
         item(
           "history",
-          "The 2,300-year landing was preached as a public American fact (William Miller, Apology and Defence (1845)). Miller states the 1818 conclusion. Ellen White ties the 2,300 years to the autumn of 1844. Miller printed the range; he expected Christ's return because they took the earth as the sanctuary (Ellen G. White, The Great Controversy, ch. 23 (GC 409.1)).",
+          "The 2,300-year landing was preached as a public American fact (William Miller, Apology and Defence (1845)). Miller states the 1818 conclusion. Miller printed the range; he expected Christ's return because they took the earth as the sanctuary.",
           "William Miller, Wm. Miller’s Apology and Defence (Boston: J. V. Himes, 1845), recounting his 1818 conclusion",
           "I was thus brought, in 1818, at the close of my two years study of the Scriptures, to the solemn conclusion, that in about twenty-five years from that time all the affairs of our present state would be wound up.",
           "1818 plus about twenty-five years, and 1843–4 (William Miller, Apology and Defence (1845)). This sitting keeps his year-day arithmetic and refuses his event (the earth as sanctuary).",
@@ -565,7 +565,7 @@
           "Boston made the preaching a press. Exeter named the tenth day from Matthew 25 and Leviticus 16:29 (Snow, Samuel Sheffield).",
           "Joshua V. Himes, Signs of the Times (Boston); Samuel S. Snow, The True Midnight Cry (22 August 1844) (Snow, Samuel Sheffield); Matthew 25:6, King James Version",
           "And at midnight there was a cry made, Behold, the bridegroom cometh; go ye out to meet him.",
-          "Himes’s first number is dated 20 March 1840 (Signs of the Times, vol. 1, no. 1; the Advent Herald; Internet Archive digitization). Snow preached the seventh-month message at Exeter, N.H., in August 1844 (The Exeter Camp Meeting, Advent Herald, August 21, 1844; Snow, Samuel Sheffield). True Midnight Cry, 22 Aug. 1844, names the tenth day of the seventh month in 1844. Ellen G. White, The Great Controversy, ch. 23 (GC 409.1) records the disappointment. A mistaken event is not a vanished imprint.",
+          "Himes’s first number is dated 20 March 1840 (Signs of the Times, vol. 1, no. 1; the Advent Herald; Internet Archive digitization). Snow preached the seventh-month message at Exeter, N.H., in August 1844 (The Exeter Camp Meeting, Advent Herald, August 21, 1844; Snow, Samuel Sheffield). True Midnight Cry, 22 Aug. 1844, names the tenth day of the seventh month in 1844. A mistaken event is not a vanished imprint.",
           "https://archive.org/details/SignsOfTheTimesOfTheSecondComingChrist1840V1N1-1296"
         )
       ]
@@ -667,7 +667,7 @@
           "The book is sealed till the time of the end. Knowledge increases. Many run to and fro.",
           "Daniel 12:4, King James Version",
           "But thou, O Daniel, shut up the words, and seal the book, even to the time of the end: many shall run to and fro, and knowledge shall be increased.",
-          "This sitting reads unsealing since 1798 (The Great Controversy, p. 356; ABSG 2020 Q1, lesson 13), when the 1,260 actually landed, and 1844 on the 2,300, not as the seal's closing year. The verse is not a gadget verse. The lesson says key teachings remained mysterious until the time of the end (ABSG 2020 Q1, lesson 13)."
+          "This sitting reads unsealing since 1798 (ABSG 2020 Q1, lesson 13), when the 1,260 actually landed, and 1844 on the 2,300, not as the seal's closing year. The verse is not a gadget verse. The lesson says key teachings remained mysterious until the time of the end (ABSG 2020 Q1, lesson 13)."
         ),
         item(
           "scripture",

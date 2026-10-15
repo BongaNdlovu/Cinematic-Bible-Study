@@ -2,9 +2,9 @@
 
 **Audit Date:** 2026-09-20  
 **File Audited:** `js/study/sheets-data.js` (Sitting id: 4) with `sheet-verify.js`, `workbench.js`, `sheet-glossary.js`  
-**Audited Content Hash:** `d8300051ac430827`  
+**Audited Content Hash:** `2abdb802146ca4fc`  
 **Method:** Exhaustive claim-unit audit of finished prose across content, christology, quizzes, studyGuide, guide, verify cards, workbench, and linked glossary entries.  
-**Counts:** ACCURATE: 221 | SOFTEN: 0 | FIX: 0 | N/A: 27 | Total: 248  
+**Counts:** ACCURATE: 231 | SOFTEN: 0 | FIX: 0 | N/A: 27 | Total: 258  
 
 ## 1. Summary of Required Sections & Governing Standards
 
@@ -101,7 +101,7 @@
 | S04-Q0-OPT2 | INTERPRETATION | ACCURATE | Assessment option evaluating historical/biblical positions |
 | S04-Q0-OPT3 | INTERPRETATION | ACCURATE | Assessment option evaluating historical/biblical positions |
 | S04-Q0-EXP | INTERPRETATION | ACCURATE | Grammatical-historical and historicist explanation |
-| S04-Q0-DIA0 | INTERPRETATION | ACCURATE | Pedagogical diagnostic distinguishing true historicism from common errors |
+| S04-Q0-DIA1 | INTERPRETATION | ACCURATE | Pedagogical diagnostic distinguishing true historicism from common errors |
 | S04-Q0-DIA2 | INTERPRETATION | ACCURATE | Pedagogical diagnostic distinguishing true historicism from common errors |
 | S04-Q0-DIA3 | INTERPRETATION | ACCURATE | Pedagogical diagnostic distinguishing true historicism from common errors |
 | S04-Q1-STEM | INTERPRETATION | ACCURATE | Diagnostic assessment stem evaluating prophetic frameworks |
@@ -162,10 +162,13 @@
 | S04-DGM-s4-1-TITLE | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
 | S04-DGM-s4-1-1-ROLE | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
 | S04-DGM-s4-1-1-TITLE | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S04-DGM-s4-1-1-DETAIL | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
 | S04-DGM-s4-1-2-ROLE | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
 | S04-DGM-s4-1-2-TITLE | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S04-DGM-s4-1-2-DETAIL | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
 | S04-DGM-s4-1-3-ROLE | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
 | S04-DGM-s4-1-3-TITLE | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S04-DGM-s4-1-3-DETAIL | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
 | S04-DGM-s4-2-TITLE | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
 | S04-DGM-s4-2-1-ROLE | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
 | S04-DGM-s4-2-1-TITLE | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
@@ -183,12 +186,15 @@
 | S04-DGM-s4-3-1-ROLE | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
 | S04-DGM-s4-3-1-TITLE | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
 | S04-DGM-s4-3-1-TEXT | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S04-DGM-s4-3-1-DETAIL | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
 | S04-DGM-s4-3-2-ROLE | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
 | S04-DGM-s4-3-2-TITLE | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
 | S04-DGM-s4-3-2-TEXT | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S04-DGM-s4-3-2-DETAIL | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
 | S04-DGM-s4-3-3-ROLE | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
 | S04-DGM-s4-3-3-TITLE | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
 | S04-DGM-s4-3-3-TEXT | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S04-DGM-s4-3-3-DETAIL | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
 | S04-DGM-s4-4-TITLE | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
 | S04-DGM-s4-4-1-TITLE | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
 | S04-DGM-s4-4-2-TITLE | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
@@ -238,33 +244,37 @@
 | S04-VRF-4-LESSON | INTERPRETATION | ACCURATE | Historicist synthesis from Scripture interpreting Scripture |
 | S04-VRF-4-QUOTE | TEXT | ACCURATE | Exact KJV Scripture quotation verified in bible/kjv.json |
 | S04-VRF-4-CHECK | PASTORAL | ACCURATE | Empirical reader checkpoint and source verification instruction |
-| S04-VRF-5-LESSON | TEXT | ACCURATE | Textual observation from passage wording |
+| S04-VRF-5-LESSON | INTERPRETATION | ACCURATE | Historicist synthesis from Scripture interpreting Scripture |
 | S04-VRF-5-QUOTE | TEXT | ACCURATE | Exact KJV Scripture quotation verified in bible/kjv.json |
 | S04-VRF-5-CHECK | PASTORAL | ACCURATE | Empirical reader checkpoint and source verification instruction |
 | S04-VRF-6-LESSON | INTERPRETATION | ACCURATE | Historicist synthesis from Scripture interpreting Scripture |
-| S04-VRF-6-QUOTE | HISTORY | ACCURATE | Dated historical primary source quote (verified in translation) |
+| S04-VRF-6-QUOTE | TEXT | ACCURATE | Exact KJV Scripture quotation verified in bible/kjv.json |
 | S04-VRF-6-CHECK | PASTORAL | ACCURATE | Empirical reader checkpoint and source verification instruction |
+| S04-VRF-7-LESSON | INTERPRETATION | ACCURATE | Historicist synthesis from Scripture interpreting Scripture |
+| S04-VRF-7-QUOTE | TEXT | ACCURATE | Exact KJV Scripture quotation verified in bible/kjv.json |
+| S04-VRF-7-CHECK | PASTORAL | ACCURATE | Empirical reader checkpoint and source verification instruction |
+| S04-VRF-8-LESSON | TEXT | ACCURATE | Textual observation from passage wording |
+| S04-VRF-8-QUOTE | TEXT | ACCURATE | Exact KJV Scripture quotation verified in bible/kjv.json |
+| S04-VRF-8-CHECK | PASTORAL | ACCURATE | Empirical reader checkpoint and source verification instruction |
+| S04-VRF-9-LESSON | INTERPRETATION | ACCURATE | Historicist synthesis from Scripture interpreting Scripture |
+| S04-VRF-9-QUOTE | HISTORY | ACCURATE | Dated historical primary source quote (verified in translation) |
+| S04-VRF-9-CHECK | PASTORAL | ACCURATE | Empirical reader checkpoint and source verification instruction |
 | S04-GLS-apocalyptic-SMP | INTERPRETATION | ACCURATE | Historicist vocabulary and prophetic hermeneutic definition |
 | S04-GLS-apocalyptic-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
-| S04-GLS-apocalyptic-PRF | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
-| S04-GLS-babylon-SMP | INTERPRETATION | ACCURATE | Historicist vocabulary and prophetic hermeneutic definition |
+| S04-GLS-babylon-SMP | TEXT | ACCURATE | Biblical lexical definition and textual usage |
 | S04-GLS-babylon-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
-| S04-GLS-babylon-PRF | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
 | S04-GLS-belshazzar-SMP | INTERPRETATION | ACCURATE | Historicist vocabulary and prophetic hermeneutic definition |
 | S04-GLS-belshazzar-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
-| S04-GLS-belshazzar-PRF | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
 | S04-GLS-colossus-SMP | INTERPRETATION | ACCURATE | Historicist vocabulary and prophetic hermeneutic definition |
 | S04-GLS-colossus-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
-| S04-GLS-colossus-PRF | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
 | S04-GLS-daniel-SMP | INTERPRETATION | ACCURATE | Historicist vocabulary and prophetic hermeneutic definition |
 | S04-GLS-daniel-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
-| S04-GLS-daniel-PRF | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
 | S04-GLS-nebuchadnezzar-SMP | INTERPRETATION | ACCURATE | Historicist vocabulary and prophetic hermeneutic definition |
 | S04-GLS-nebuchadnezzar-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
-| S04-GLS-nebuchadnezzar-PRF | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
 | S04-GLS-three-hebrews-SMP | TEXT | ACCURATE | Biblical lexical definition and textual usage |
 | S04-GLS-three-hebrews-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
-| S04-GLS-three-hebrews-PRF | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S04-GLS-time-times-SMP | INTERPRETATION | ACCURATE | Historicist vocabulary and prophetic hermeneutic definition |
+| S04-GLS-time-times-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
 | S04-GLS-year-day-SMP | INTERPRETATION | ACCURATE | Historicist vocabulary and prophetic hermeneutic definition |
 | S04-GLS-year-day-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
 | S04-GLS-year-day-PRF | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |

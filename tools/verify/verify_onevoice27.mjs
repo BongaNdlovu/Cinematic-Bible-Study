@@ -152,7 +152,7 @@ console.log(`[PASS] ${verifiedScriptureQuotes} quoted Scripture clauses verified
 
 // 4. Check forbidden learner-facing brands
 console.log('\n--- Checking Forbidden Learner-Facing Brands ---');
-const brandRegex = /\b(Adventist|Ellen G\.|Uriah Smith|Investigative Judgment|Great Controversy|Early Writings|The Sanctified Life)\b/i;
+const brandRegex = /\b(Adventist|Ellen G\. White|Ellen White|EGW|Uriah Smith|Investigative Judgment|Great Controversy|Prophets and Kings|Desire of Ages|Early Writings|The Sanctified Life)\b/i;
 
 sheetsData.forEach((sheet, sIdx) => {
   const learnerText = [
@@ -202,7 +202,7 @@ for (const m of riberaMatches) {
 }
 
 // Alcazar
-const alcazarMatches = allText.matchAll(/Alc[áa]zar[^\.\n]*?(\d{4})/gi);
+const alcazarMatches = allText.matchAll(/Alc[áa]zar[^.\n)]*?(\d{4})/gi);
 for (const m of alcazarMatches) {
   const yr = m[1];
   if (yr !== '1614' && yr !== '1554' && yr !== '1613') { // 1554 birth, 1613 death

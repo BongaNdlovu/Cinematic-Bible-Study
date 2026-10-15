@@ -2,9 +2,9 @@
 
 **Audit Date:** 2026-09-20  
 **File Audited:** `js/study/sheets-data.js` (Sitting id: 5) with `sheet-verify.js`, `workbench.js`, `sheet-glossary.js`  
-**Audited Content Hash:** `e5194c41824d0dc2`  
+**Audited Content Hash:** `005aa51168590908`  
 **Method:** Exhaustive claim-unit audit of finished prose across content, christology, quizzes, studyGuide, guide, verify cards, workbench, and linked glossary entries.  
-**Counts:** ACCURATE: 237 | SOFTEN: 0 | FIX: 0 | N/A: 39 | Total: 276  
+**Counts:** ACCURATE: 239 | SOFTEN: 0 | FIX: 0 | N/A: 43 | Total: 282  
 
 ## 1. Summary of Required Sections & Governing Standards
 
@@ -61,7 +61,7 @@
 | S05-P-16 | TEXT | ACCURATE | Direct passage exposition verified in KJV text |
 | S05-BQ-01 | TEXT | ACCURATE | Direct KJV Scripture quotation verified against bible/kjv.json |
 | S05-DIA-03 | INTERPRETATION | ACCURATE | Prophetic diagram illustrating imperial succession and chronology |
-| S05-P-17 | PASTORAL | ACCURATE | Personal application tethered to exilic covenant faithfulness |
+| S05-P-17 | TEXT | ACCURATE | Direct passage exposition verified in KJV text |
 | S05-LI-01 | INTERPRETATION | ACCURATE | Biblical case and historical argument |
 | S05-LI-02 | INTERPRETATION | ACCURATE | Biblical case and historical argument |
 | S05-LI-03 | INTERPRETATION | ACCURATE | Biblical case and historical argument |
@@ -105,6 +105,25 @@
 | S05-LI-08 | INTERPRETATION | ACCURATE | Four-level interpretive verification criteria |
 | S05-LI-09 | INTERPRETATION | ACCURATE | Four-level interpretive verification criteria |
 | S05-LI-10 | INTERPRETATION | ACCURATE | Four-level interpretive verification criteria |
+| S05-H-37 | N/A | N/A | Section title / kicker header chrome |
+| S05-H-38 | N/A | N/A | Section title / kicker header chrome |
+| S05-LI-11 | INTERPRETATION | ACCURATE | Biblical case and historical argument |
+| S05-H-39 | N/A | N/A | Section title / kicker header chrome |
+| S05-LI-12 | INTERPRETATION | ACCURATE | Biblical case and historical argument |
+| S05-LI-13 | INTERPRETATION | ACCURATE | Biblical case and historical argument |
+| S05-LI-14 | INTERPRETATION | ACCURATE | Biblical case and historical argument |
+| S05-LI-15 | INTERPRETATION | ACCURATE | Biblical case and historical argument |
+| S05-H-40 | N/A | N/A | Section title / kicker header chrome |
+| S05-LI-16 | INTERPRETATION | ACCURATE | Biblical case and historical argument |
+| S05-LI-17 | INTERPRETATION | ACCURATE | Biblical case and historical argument |
+| S05-LI-18 | INTERPRETATION | ACCURATE | Biblical case and historical argument |
+| S05-LI-19 | INTERPRETATION | ACCURATE | Biblical case and historical argument |
+| S05-LI-20 | INTERPRETATION | ACCURATE | Biblical case and historical argument |
+| S05-LI-21 | INTERPRETATION | ACCURATE | Biblical case and historical argument |
+| S05-LI-22 | INTERPRETATION | ACCURATE | Biblical case and historical argument |
+| S05-LI-23 | INTERPRETATION | ACCURATE | Biblical case and historical argument |
+| S05-LI-24 | INTERPRETATION | ACCURATE | Biblical case and historical argument |
+| S05-LI-25 | INTERPRETATION | ACCURATE | Biblical case and historical argument |
 | S05-CHR-TITLE | N/A | N/A | Christology banner title chrome |
 | S05-CHR-SCRIPTURE | TEXT | ACCURATE | Exact canonical scripture citation: Daniel 5:25–28; Isaiah 45:1–3; John 5:22; 2 Corinthians 5:21; Romans 5:18–19 |
 | S05-CHR-P1 | CHRIST | ACCURATE | Canonical Christological synthesis: Luke 24:27; Dan 9:26; Dan 2:44; redemption and kingdom |
@@ -189,12 +208,15 @@
 | S05-DGM-s5-2-1-ROLE | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
 | S05-DGM-s5-2-1-TITLE | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
 | S05-DGM-s5-2-1-TEXT | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S05-DGM-s5-2-1-DETAIL | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
 | S05-DGM-s5-2-2-ROLE | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
 | S05-DGM-s5-2-2-TITLE | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
 | S05-DGM-s5-2-2-TEXT | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S05-DGM-s5-2-2-DETAIL | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
 | S05-DGM-s5-2-3-ROLE | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
 | S05-DGM-s5-2-3-TITLE | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
 | S05-DGM-s5-2-3-TEXT | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
+| S05-DGM-s5-2-3-DETAIL | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
 | S05-DGM-s5-3-TITLE | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
 | S05-DGM-s5-4-TITLE | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
 | S05-DGM-s5-4-1-ROLE | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
@@ -223,7 +245,6 @@
 | S05-DGM-s5-5-2-P2 | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
 | S05-DGM-s5-5-2-P3 | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
 | S05-DGM-s5-5-2-P4 | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
-| S05-DGM-s5-5-2-P5 | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
 | S05-GD-INTRO-EXP | INTERPRETATION | ACCURATE | Sitting learning goals and historical outline |
 | S05-GD-INTRO-DO-1 | PASTORAL | ACCURATE | Step-by-step reading and verification guidance |
 | S05-GD-INTRO-DO-2 | PASTORAL | ACCURATE | Step-by-step reading and verification guidance |
@@ -233,7 +254,7 @@
 | S05-VRF-0-LESSON | TEXT | ACCURATE | Textual observation from passage wording |
 | S05-VRF-0-QUOTE | TEXT | ACCURATE | Exact KJV Scripture quotation verified in bible/kjv.json |
 | S05-VRF-0-CHECK | PASTORAL | ACCURATE | Empirical reader checkpoint and source verification instruction |
-| S05-VRF-1-LESSON | INTERPRETATION | ACCURATE | Historicist synthesis from Scripture interpreting Scripture |
+| S05-VRF-1-LESSON | TEXT | ACCURATE | Textual observation from passage wording |
 | S05-VRF-1-QUOTE | TEXT | ACCURATE | Exact KJV Scripture quotation verified in bible/kjv.json |
 | S05-VRF-1-CHECK | PASTORAL | ACCURATE | Empirical reader checkpoint and source verification instruction |
 | S05-VRF-2-LESSON | INTERPRETATION | ACCURATE | Historicist synthesis from Scripture interpreting Scripture |
@@ -254,48 +275,33 @@
 | S05-VRF-7-LESSON | HISTORY | ACCURATE | Historical documentation and exilic archaeological evidence |
 | S05-VRF-7-QUOTE | HISTORY | ACCURATE | Dated historical primary source quote (verified in translation) |
 | S05-VRF-7-CHECK | PASTORAL | ACCURATE | Empirical reader checkpoint and source verification instruction |
-| S05-GLS-babylon-SMP | INTERPRETATION | ACCURATE | Historicist vocabulary and prophetic hermeneutic definition |
+| S05-GLS-babylon-SMP | TEXT | ACCURATE | Biblical lexical definition and textual usage |
 | S05-GLS-babylon-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
-| S05-GLS-babylon-PRF | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
 | S05-GLS-belshazzar-SMP | INTERPRETATION | ACCURATE | Historicist vocabulary and prophetic hermeneutic definition |
 | S05-GLS-belshazzar-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
-| S05-GLS-belshazzar-PRF | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
 | S05-GLS-co-regent-SMP | INTERPRETATION | ACCURATE | Historicist vocabulary and prophetic hermeneutic definition |
 | S05-GLS-co-regent-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
-| S05-GLS-co-regent-PRF | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
-| S05-GLS-colossus-SMP | INTERPRETATION | ACCURATE | Historicist vocabulary and prophetic hermeneutic definition |
-| S05-GLS-colossus-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
-| S05-GLS-colossus-PRF | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
 | S05-GLS-cyrus-SMP | INTERPRETATION | ACCURATE | Historicist vocabulary and prophetic hermeneutic definition |
 | S05-GLS-cyrus-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
-| S05-GLS-cyrus-PRF | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
 | S05-GLS-daniel-SMP | INTERPRETATION | ACCURATE | Historicist vocabulary and prophetic hermeneutic definition |
 | S05-GLS-daniel-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
-| S05-GLS-daniel-PRF | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
 | S05-GLS-darius-mede-SMP | INTERPRETATION | ACCURATE | Historicist vocabulary and prophetic hermeneutic definition |
 | S05-GLS-darius-mede-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
-| S05-GLS-darius-mede-PRF | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
 | S05-GLS-historicism-SMP | CHRIST | ACCURATE | Christological definition and canonical significance |
 | S05-GLS-historicism-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
 | S05-GLS-historicism-PRF | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
 | S05-GLS-jerusalem-SMP | INTERPRETATION | ACCURATE | Historicist vocabulary and prophetic hermeneutic definition |
 | S05-GLS-jerusalem-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
-| S05-GLS-jerusalem-PRF | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
 | S05-GLS-mene-SMP | TEXT | ACCURATE | Biblical lexical definition and textual usage |
 | S05-GLS-mene-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
-| S05-GLS-mene-PRF | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
 | S05-GLS-nabonidus-SMP | INTERPRETATION | ACCURATE | Historicist vocabulary and prophetic hermeneutic definition |
 | S05-GLS-nabonidus-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
-| S05-GLS-nabonidus-PRF | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
 | S05-GLS-nebuchadnezzar-SMP | INTERPRETATION | ACCURATE | Historicist vocabulary and prophetic hermeneutic definition |
 | S05-GLS-nebuchadnezzar-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
-| S05-GLS-nebuchadnezzar-PRF | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
 | S05-GLS-sanctuary-SMP | TEXT | ACCURATE | Biblical lexical definition and textual usage |
 | S05-GLS-sanctuary-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
-| S05-GLS-sanctuary-PRF | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
 | S05-GLS-typology-SMP | INTERPRETATION | ACCURATE | Historicist vocabulary and prophetic hermeneutic definition |
 | S05-GLS-typology-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
-| S05-GLS-typology-PRF | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
 
 ## 3. FIX List & Resolution
 

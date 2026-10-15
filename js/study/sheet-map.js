@@ -279,7 +279,7 @@
           "The deadly wound",
           "Daniel 7:25–26; 12:4; Revelation 13:3",
           "assets/study/epochs/deadly-wound.jpg",
-          "General Berthier enters Rome and takes Pius VI captive. The measured supremacy that opened in 538 closes. Revelation 13:3 calls this a deadly wound. Daniel 12:4 says the book is sealed till the time of the end — which this date opens.\n\nThe court of 7:9–14 is not the same moment as the stone of chapter 2. The 2020 lesson places that court after the 1,260 years, and Ellen G. White places the coming to the Ancient of Days at the close of the 2,300 days in 1844. Daniel 7:11 still has great words spoken while the court sits. 7:26–27 then takes the horn’s dominion away. Judgment sits before the stone strikes.\n\nFrom this pin the next sittings can number the sanctuary (8:14) in “the time of the end,” not in 164 B.C."
+          "General Berthier enters Rome and takes Pius VI captive. The measured supremacy that opened in 538 closes. Revelation 13:3 calls this a deadly wound. Daniel 12:4 says the book is sealed till the time of the end — which this date opens.\n\nThe court of 7:9–14 is not the same moment as the stone of chapter 2. The 2020 lesson places that court after the 1,260 years, and the historicist reading places the coming to the Ancient of Days at the close of the 2,300 days in 1844. Daniel 7:11 still has great words spoken while the court sits. 7:26–27 then takes the horn’s dominion away. Judgment sits before the stone strikes.\n\nFrom this pin the next sittings can number the sanctuary (8:14) in “the time of the end,” not in 164 B.C."
         ),
         node(
           "rome",
