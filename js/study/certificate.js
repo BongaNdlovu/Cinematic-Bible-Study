@@ -300,12 +300,12 @@
     ctx.font = "600 68px Newsreader, Georgia, serif";
     ctx.fillText("Certificate of Completion", cx, 328);
     ctx.fillStyle = "#8a6a22";
-    ctx.font = "italic 22px Lora, Georgia, serif";
+    ctx.font = "italic 22px Newsreader, Georgia, serif";
     ctx.fillText("Eleven sittings  ·  A historicist reading of Daniel", cx, 372);
     drawOrnamentRule(ctx, cx, 404, 268);
 
     ctx.fillStyle = "#5a4a32";
-    ctx.font = "italic 26px Lora, Georgia, serif";
+    ctx.font = "italic 26px Newsreader, Georgia, serif";
     ctx.fillText("This certifies that", cx, 458);
 
     const display = name || " ";
@@ -320,7 +320,7 @@
     drawOrnamentRule(ctx, cx, 568, Math.min(420, 80 + ctx.measureText(display).width / 2));
 
     ctx.fillStyle = "#3d3224";
-    ctx.font = "400 26px Lora, Georgia, serif";
+    ctx.font = "400 26px Newsreader, Georgia, serif";
     const body = wrapLines(
       ctx,
       "has completed the eleven sittings of this historicist study of the book of Daniel, walking the text, the map of the kingdoms, and the symbols of the vision.",
@@ -342,7 +342,7 @@
     ctx.font = "600 22px Newsreader, Georgia, serif";
     ctx.fillText("The Shelf of Daniel", CANVAS_W - 268, 994);
     ctx.fillStyle = "#7a684c";
-    ctx.font = "italic 16px Lora, Georgia, serif";
+    ctx.font = "italic 16px Newsreader, Georgia, serif";
     ctx.fillText("Gold to stone  ·  605 B.C. to the end", CANVAS_W - 268, 1024);
 
     ctx.textAlign = "center";

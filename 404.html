@@ -8,9 +8,11 @@
   <meta name="robots" content="noindex">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📜</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;1,500;1,600&family=Inter:wght@400;500;600&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400;1,6..72,500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/site.css">
   <link rel="stylesheet" href="css/terms.css">
+  <link rel="stylesheet" href="css/cinema.css">
+  <script src="js/shared/cinema.js"></script>
   <script src="js/shared/journey.js"></script>
   <script src="js/shared/auth-config.js"></script>
   <script src="vendor/supabase/supabase.js"></script>
@@ -43,14 +45,15 @@
 
   <header class="hero">
     <div class="hero-copy rise">
-      <p class="hero-kicker">Not in the exhibit</p>
-      <h1>This page was not found</h1>
-      <p class="hero-lead">The path you opened is not part of the sitting. Return home, or continue from the study desk, the map, or the gallery.</p>
-      <div class="hero-actions">
+      <p class="hero-kicker" data-cx-reveal style="--cx-i:0">Not in the exhibit</p>
+      <h1 data-cx-reveal style="--cx-i:1">This page was not found</h1>
+      <p class="hero-lead" data-cx-reveal style="--cx-i:2">The path you opened is not part of the sitting. Return home, or continue from the study desk, the map, or the gallery.</p>
+      <div class="hero-actions" data-cx-reveal style="--cx-i:3">
         <a class="btn solid" href="index.html">Return home</a>
         <a class="btn" href="study.html">Open the sitting</a>
       </div>
     </div>
   </header>
+  <footer class="site-footer"></footer>
 </body>
 </html>

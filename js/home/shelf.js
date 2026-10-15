@@ -275,6 +275,7 @@ function fillDossier(i, instant) {
     dossier.classList.remove('sh-swap');
   };
   if (instant) apply();
+  else if (window.Cinema && !window.Cinema.reduced) window.Cinema.swap(apply, dossier.querySelector('.dossier-body') || dossier);
   else { dossier.classList.add('sh-swap'); setTimeout(apply, 240); }
 }
 
@@ -733,8 +734,100 @@ function shade2(hex, amt) {
   return 'rgb(' + r + ',' + g + ',' + b + ')';
 }
 
+const COVER_ART = window.SHELF_COVERS || [];
+const COVER_IMG = [];
+function loadCoverArt() {
+  for (const [i, src] of Object.entries(COVER_ART)) {
+    const img = new Image();
+    img.decoding = 'async';
+    img.src = src;
+    COVER_IMG[Number(i)] = img;
+  }
+}
+function artReady(i) { const a = COVER_IMG[i]; return !!(a && a.complete && a.naturalWidth); }
+function artPending(i) { const a = COVER_IMG[i]; return !!(a && !a.complete); }
+function rgba(hex, a) {
+  const n = parseInt(hex.slice(1), 16);
+  return 'rgba(' + (n >> 16) + ',' + ((n >> 8) & 255) + ',' + (n & 255) + ',' + a + ')';
+}
+
+function frontArtLayout(v, u, h, tw) {
+  const m = mk(1, 1).getContext('2d');
+  const volY = h - 9 * u;
+  const subFont = (sz) => 'italic 500 ' + sz + 'px Newsreader, serif';
+  let sl = v.sub ? fitLines(m, v.sub, subFont, tw, 2, 3.8 * u, 2.8 * u) : { lines: [], size: 0 };
+  if (sl.lines.length === 2) {
+    m.font = subFont(sl.size);
+    if (m.measureText(sl.lines[1]).width < tw * 0.4) {
+      const even = fitLines(m, v.sub, subFont, tw * 0.74, 2, sl.size, 2.8 * u);
+      if (even.lines.length === 2) sl = even;
+    }
+  }
+  const tf = fitLines(m, v.title, (sz) => '400 ' + sz + 'px Newsreader, serif', tw, 3, 8.6 * u, 5.2 * u);
+  const subY = volY - 8.2 * u - (sl.lines.length - 1) * sl.size * 1.22;
+  const titleY = (sl.lines.length ? subY - sl.size * 1.5 : volY - 8.2 * u) - (tf.lines.length - 1) * tf.size * 1.04;
+  return { volY, sl, tf, subY, titleY, pressY: titleY - tf.size * 1.05 };
+}
+
+function paintFrontArt(v, w, h) {
+  const ex = v.ex, seed = 100 + v.i * 17, u = w / 100, art = COVER_IMG[v.i];
+  const L = 8.4 * u, R = w - 4.2 * u, x0 = L + 6 * u, tw = R - x0 - 6 * u;
+  const lay = frontArtLayout(v, u, h, tw);
+  return surface(w, h, {
+    seed,
+    base: (x) => {
+      paintCloth(x, w, h, ex.cloth, seed, { foreEdge: 'right' });
+      const pw = w - L, s = Math.max(pw / art.naturalWidth, h / art.naturalHeight);
+      const dw = art.naturalWidth * s, dh = art.naturalHeight * s;
+      x.drawImage(art, L + (pw - dw) / 2, 0, dw, dh);
+      const vg = x.createRadialGradient(L + pw / 2, h * 0.36, h * 0.18, L + pw / 2, h * 0.36, h * 0.78);
+      vg.addColorStop(0, 'rgba(0,0,0,0)');
+      vg.addColorStop(1, 'rgba(0,0,0,0.42)');
+      x.fillStyle = vg;
+      x.fillRect(L, 0, pw, h);
+      const fade = x.createLinearGradient(0, h * 0.5, 0, h);
+      fade.addColorStop(0, rgba(ex.cloth, 0));
+      fade.addColorStop(0.42, rgba(ex.cloth, 0.86));
+      fade.addColorStop(0.7, rgba(ex.cloth, 0.97));
+      fade.addColorStop(1, rgba(ex.cloth, 1));
+      x.fillStyle = fade;
+      x.fillRect(L, h * 0.5, pw, h * 0.5);
+      if (WEAVE) {
+        x.globalAlpha = 0.08;
+        x.fillStyle = x.createPattern(WEAVE, 'repeat');
+        x.fillRect(L, 0, pw, h);
+        x.globalAlpha = 1;
+      }
+      x.textAlign = 'left'; x.textBaseline = 'alphabetic';
+      x.fillStyle = '#f1e6cc';
+      let y = lay.titleY;
+      x.font = '400 ' + lay.tf.size + 'px Newsreader, serif';
+      lay.tf.lines.forEach((l) => { x.fillText(l, x0, y); y += lay.tf.size * 1.04; });
+      x.fillStyle = 'rgba(232,218,190,0.82)';
+      y = lay.subY;
+      x.font = 'italic 500 ' + lay.sl.size + 'px Newsreader, serif';
+      lay.sl.lines.forEach((l) => { x.fillText(l, x0, y); y += lay.sl.size * 1.22; });
+    },
+    blind: (x) => {
+      x.fillRect(3.4 * u, 0, 1.3 * u, h);
+    },
+    foil: (x) => {
+      x.textAlign = 'left'; x.textBaseline = 'alphabetic';
+      x.font = '600 ' + (2.4 * u) + 'px Cinzel, serif';
+      spaced(x, 0.7 * u);
+      x.fillText('VOLUME ' + v.roman, x0, lay.volY);
+      x.font = '600 ' + (2.2 * u) + 'px Cinzel, serif';
+      spaced(x, 0.6 * u);
+      x.fillText('THE HISTORICIST PRESS', x0, lay.pressY);
+      spaced(x, 0);
+      x.fillRect(x0, lay.volY - 4.6 * u, 10 * u, 0.22 * u);
+    }
+  });
+}
+
 /* ---- Front cover ---- */
 function paintFront(v, w, h) {
+  if (artReady(v.i)) return paintFrontArt(v, w, h);
   const ex = v.ex, seed = 100 + v.i * 17, u = w / 100;
   const L = 8.4 * u, R = w - 4.2 * u;           // hinge on the left
   const cx = (L + R) / 2;
@@ -1765,6 +1858,8 @@ async function startRoom() {
   }
   function* hiSteps(b) {
     const v = b.v, cw = Math.round(b.W * PXC), ch = Math.round(b.H * PXC);
+    const artWait = performance.now() + 8000;
+    while (artPending(v.i) && performance.now() < artWait) yield;
     const f = paintFront(v, cw, ch);
     yield;
     const bk = paintBack(v, Math.round(cw * 0.8), Math.round(ch * 0.8));
@@ -2430,6 +2525,7 @@ function watchForRefresh() {
   setLoader(0.06, 'Opening the reading room…');
   try {
     await whenShown(body);
+    loadCoverArt();
     await Promise.all([loadFonts(), loadMotifs()]);
     const room = await startRoom();
     body.classList.remove('is-loading');

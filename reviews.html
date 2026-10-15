@@ -13,10 +13,12 @@
   <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📜</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Cormorant+Garamond:ital,wght@0,500;1,500;1,600&family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400;1,6..72,500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/site.css?v=31">
   <link rel="stylesheet" href="css/terms.css?v=3">
   <link rel="stylesheet" href="css/notes.css">
+  <link rel="stylesheet" href="css/cinema.css">
+  <script src="js/shared/cinema.js"></script>
   <script src="js/shared/journey.js"></script>
   <script src="js/shared/auth-config.js"></script>
   <script src="vendor/supabase/supabase.js"></script>
@@ -45,12 +47,12 @@
   </nav>
 
   <main class="notes-page">
-    <p class="notes-crumb"><a href="account.html">Account</a> <span aria-hidden="true">/</span> Readers' notes</p>
-    <h1 class="notes-title" id="notes-title">Readers' notes</h1>
+    <p class="notes-crumb" data-cx-reveal style="--cx-i:0"><a href="account.html">Account</a> <span aria-hidden="true">/</span> Readers' notes</p>
+    <h1 class="notes-title" id="notes-title" data-cx-reveal style="--cx-i:1">Readers' notes</h1>
     <p class="notes-count" id="witness-count" hidden></p>
-    <p class="notes-lead">From people who sat the sittings. Every note is read and approved before it appears.</p>
+    <p class="notes-lead" data-cx-reveal style="--cx-i:2">From people who sat the sittings. Every note is read and approved before it appears.</p>
 
-    <section class="witnesses witnesses--page" id="witnesses" aria-labelledby="notes-title">
+    <section class="witnesses witnesses--page" id="witnesses" aria-labelledby="notes-title" data-cx-reveal style="--cx-i:4">
       <div class="witness-queue" id="witness-queue" hidden>
         <h3>Waiting for approval</h3>
         <div id="witness-queue-list"></div>
@@ -80,7 +82,7 @@
         <h2>Leave a note for the next reader</h2>
         <p class="witness-form-lead">One honest sentence is enough — what held, what confused you, what you would tell a friend before sitting 1.</p>
         <p id="witness-signin-hint">Sign in on the <a href="account.html?next=reviews.html">Account</a> page when you are ready to post. The box stays open either way.</p>
-        <form id="witness-form">
+        <form id="witness-form" data-cx-reveal style="--cx-i:3">
           <div class="witness-stars-field">
             <span class="witness-stars-label" id="witness-rating-label">Rating</span>
             <div class="witness-stars-input" id="witness-stars" role="radiogroup" aria-labelledby="witness-rating-label"></div>
@@ -97,9 +99,6 @@
     </section>
   </main>
 
-  <footer class="site-footer">
-    &ldquo;Surely the Lord God will do nothing, but he revealeth his secret unto his servants the prophets.&rdquo;
-    <span>Amos 3:7 (KJV) &bull; The Shelf of Daniel</span>
-  </footer>
+  <footer class="site-footer"></footer>
 </body>
 </html>

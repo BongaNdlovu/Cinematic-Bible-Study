@@ -1,6 +1,6 @@
 (function () {
   var SHOW_MS = 7000;
-  var FADE_MS = 600;
+  var FADE_MS = 560;
   var MIN_REVIEWS = 3;
   var VERSES = [
     { ref: "Daniel 2:20", text: "Daniel answered and said, Blessed be the name of God for ever and ever: for wisdom and might are his:" },

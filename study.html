@@ -19,7 +19,7 @@
   <!-- Editorial & Monospace Typography -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Cinzel:wght@500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400;1,6..72,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400;1,6..72,500&display=swap" rel="stylesheet">
 
   <!-- Tailwind CSS (precompiled with Tailwind CLI from tailwind.study.config.js — run: npx tailwindcss -c tailwind.study.config.js -i css/study-tailwind-src.css -o css/study-tailwind.css --minify) -->
   <link rel="stylesheet" href="css/study-tailwind.css">
@@ -28,6 +28,8 @@
 
   <link rel="stylesheet" href="css/terms.css">
   <link rel="stylesheet" href="css/book-reader.css">
+  <link rel="stylesheet" href="css/cinema.css">
+  <script src="js/shared/cinema.js"></script>
   <script type="importmap">
   {
     "imports": {
@@ -409,7 +411,7 @@
       color: inherit;
     }
     .chain-node.is-centre .chain-title {
-      font-family: 'Playfair Display', Georgia, serif;
+      font-family: "Newsreader", Georgia, serif;
       font-size: 1.22rem;
       letter-spacing: 0.05em;
       text-transform: uppercase;
@@ -838,11 +840,11 @@
     .story-stage .story-title {
       margin: 0 0 15px !important;
       max-width: 100%;
-      font-family: "Playfair Display", Georgia, serif !important;
+      font-family: "Newsreader", Georgia, serif !important;
       font-size: clamp(1.14rem, 2.2vw, 1.48rem) !important;
-      font-weight: 500;
+      font-weight: 400;
       line-height: 1.18;
-      letter-spacing: 0.035em;
+      letter-spacing: -0.015em;
       /* Not uppercased: the same string feeds the reader's zoomed title and the
          live region, where sentence case is what is read out. */
       color: #fff8e9;
@@ -1236,9 +1238,10 @@
     .story-read-deck .story-title {
       margin: 0 0 0.55rem !important;
       max-width: 24rem;
-      font-family: "Playfair Display", Georgia, serif !important;
+      font-family: "Newsreader", Georgia, serif !important;
       font-size: clamp(1.7rem, 2.8vw, 2.35rem) !important;
-      font-weight: 500;
+      font-weight: 400;
+      letter-spacing: -0.015em;
       line-height: 1.12;
       color: #fff8e9;
     }
@@ -1884,7 +1887,7 @@
     .chain.is-visible .cmp-centre { animation: chain-rise 0.6s ease-out var(--t) forwards; }
     .cmp-centre .cmp-role { margin-bottom: 0.4rem; }
     .cmp-centre .cmp-title {
-      font-family: 'Playfair Display', Newsreader, Georgia, serif;
+      font-family: "Newsreader", Georgia, serif;
       font-size: clamp(1.02rem, 0.72rem + 0.7vw, 1.3rem);
     }
     .cmp-stem {
@@ -2750,7 +2753,7 @@
       display: block;
       margin: 10px 0 0 !important;
       padding-bottom: 10px;
-      font-family: "Cormorant Garamond", "EB Garamond", Georgia, serif;
+      font-family: "Newsreader", Georgia, serif;
       font-size: var(--mm-name-fs, 26px) !important;
       line-height: 1.05 !important;
       font-weight: 700;
@@ -2835,7 +2838,7 @@
     }
     .mm .mm-core b {
       display: block;
-      font-family: "Cormorant Garamond", "EB Garamond", Georgia, serif;
+      font-family: "Newsreader", Georgia, serif;
       font-size: var(--mm-core-fs, 20px) !important;
       line-height: 0.98 !important;
       font-weight: 700;
@@ -2979,7 +2982,7 @@
     }
     .mm .mm-sc-title {
       margin: 13px 0 0 !important;
-      font-family: "Cormorant Garamond", "EB Garamond", Georgia, serif;
+      font-family: "Newsreader", Georgia, serif;
       font-size: var(--mm-sc-fs, 58px) !important;
       line-height: 1.05 !important;
       font-weight: 600;
@@ -3042,7 +3045,7 @@
     }
     .mm .mm-lbl b {
       display: block;
-      font-family: "Cormorant Garamond", "EB Garamond", Georgia, serif;
+      font-family: "Newsreader", Georgia, serif;
       font-size: var(--mm-cn-fs, 16px) !important;
       line-height: 1.15 !important;
       font-weight: 600;
@@ -3057,7 +3060,7 @@
       top: 76.2%;
       margin: 0 !important;
       text-align: center;
-      font-family: "Cormorant Garamond", "EB Garamond", Georgia, serif;
+      font-family: "Newsreader", Georgia, serif;
       font-style: italic;
       font-weight: 500;
       /* The prototype's 34px on a 1600px stage, re-based to this world's 960
@@ -6683,7 +6686,7 @@
       margin-bottom: 0.85rem;
     }
     .scripture-text {
-      font-family: Lora, Georgia, serif;
+      font-family: "Newsreader", Georgia, serif;
       font-size: 1.12rem;
       line-height: 2;
       color: #f3ead8;
@@ -6801,7 +6804,7 @@
       margin-bottom: 0.7rem;
     }
     .load-bearing-text {
-      font-family: Lora, Georgia, serif;
+      font-family: "Newsreader", Georgia, serif;
       font-size: 1.05rem;
       line-height: 1.75;
       color: #f3ead8;
@@ -7604,7 +7607,7 @@
     }
     .sitting-guide-card p,
     .sitting-guide-card li {
-      font-family: Lora, Georgia, serif;
+      font-family: "Newsreader", Georgia, serif;
       font-size: 0.98rem;
       line-height: 1.6;
       color: #c4b8a8;
@@ -9694,16 +9697,7 @@
   </div>
 
   <!-- Editorial Footer -->
-  <footer class="relative z-10 border-t border-paper-200 dark:border-paper-900 py-12 px-6 bg-paper-100/40 dark:bg-paper-950 text-center font-sans text-xs text-ink-500 dark:text-paper-500">
-    <div class="max-w-3xl mx-auto space-y-3">
-      <p class="font-serif italic text-base text-ink-700 dark:text-paper-400">
-        "And he said unto me, Unto two thousand and three hundred days; then shall the sanctuary be cleansed." &mdash; Daniel 8:14
-      </p>
-      <p class="font-mono text-[11px] text-ink-400 dark:text-paper-600">
-        The Shelf of Daniel &bull; Historicist Codex &bull; The Year-Day Principle &bull; Prophetic Timeline & Historicist Study
-      </p>
-    </div>
-  </footer>
+  <footer class="site-footer" data-verse="And he said unto me, Unto two thousand and three hundred days; then shall the sanctuary be cleansed." data-cite="Daniel 8:14 · King James Version"></footer>
 
   <!-- Toast Message System -->
   <div id="toast" class="fixed bottom-6 right-6 z-50 px-4 py-3 rounded-lg bg-ink-900 text-paper-50 dark:bg-paper-100 dark:text-ink-900 font-mono text-xs shadow-xl opacity-0 pointer-events-none transition-opacity duration-300">

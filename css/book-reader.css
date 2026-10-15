@@ -18,7 +18,7 @@
   margin-right: auto;
   max-width: none;
   color: var(--br-ink);
-  font-family: Newsreader, Lora, Georgia, serif;
+  font-family: Newsreader, Georgia, serif;
   line-height: 1.5;
   text-align: left;
   clear: both;
@@ -206,7 +206,7 @@
   column-fill: auto;
   overflow-wrap: break-word;
   color: var(--br-ink);
-  font-family: Newsreader, Lora, Georgia, serif;
+  font-family: Newsreader, Georgia, serif;
   font-size: var(--reading-font-size, 1.125rem);
   line-height: 1.62;
   text-align: justify;
