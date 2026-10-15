@@ -799,7 +799,7 @@ html:not(.dfx-open):not(.story-read-open):not(.mm-fullscreen-open) .br-root .br-
   box-shadow: none !important;
 }
 
-.br-root .br-flow :is(.framework-card, .historical-note, .caution-card, .biblical-case, .level-card, .principle-card, .next-sitting-card, .governing-principle, .from-last-sitting, .source-card, .qa-card, .layer-stack, .checkpoint-card) {
+.br-root .br-flow :is(.framework-card, .historical-note, .caution-card, .biblical-case, .level-card, .principle-card, .next-sitting-card, .sheet-christology, .governing-principle, .from-last-sitting, .source-card, .qa-card, .layer-stack, .checkpoint-card) {
   margin: 1em 0 1.3em;
   padding: 0 0 0 1em !important;
   border: 0 !important;
@@ -808,6 +808,14 @@ html:not(.dfx-open):not(.story-read-open):not(.mm-fullscreen-open) .br-root .br-
   box-shadow: none !important;
   box-decoration-break: clone;
   -webkit-box-decoration-break: clone;
+}
+
+.br-root .br-flow .reading-notes {
+  border-top-color: var(--br-hair);
+}
+
+.br-root .br-flow .reading-notes .reading-notes-kicker {
+  color: var(--br-gold-ink) !important;
 }
 
 .br-root .br-flow .lesson-toc {

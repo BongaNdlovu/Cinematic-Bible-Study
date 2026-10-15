@@ -159,10 +159,12 @@ async function verifySitting(client, sitting) {
     const recap = document.getElementById('sheet-recap');
     const quiz = document.getElementById('revision-section') || document.getElementById('quiz-container');
 
+    const nextCard = article && article.querySelector('.next-sitting-card');
     const isOrdered = article && connect && christology && recap && quiz &&
+      article.contains(christology) &&
+      (!nextCard || (christology.compareDocumentPosition(nextCard) & Node.DOCUMENT_POSITION_FOLLOWING)) &&
       (article.compareDocumentPosition(connect) & Node.DOCUMENT_POSITION_FOLLOWING) &&
-      (connect.compareDocumentPosition(christology) & Node.DOCUMENT_POSITION_FOLLOWING) &&
-      (christology.compareDocumentPosition(recap) & Node.DOCUMENT_POSITION_FOLLOWING) &&
+      (connect.compareDocumentPosition(recap) & Node.DOCUMENT_POSITION_FOLLOWING) &&
       (recap.compareDocumentPosition(quiz) & Node.DOCUMENT_POSITION_FOLLOWING);
 
     return {

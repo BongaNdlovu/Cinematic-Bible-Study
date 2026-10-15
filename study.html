@@ -4837,6 +4837,44 @@
       margin: 0 0 0.55rem !important;
     }
 
+    .reading-notes {
+      margin: 3rem 0 1rem;
+      padding-top: 1.25rem;
+      border-top: 1px solid rgba(212, 175, 55, 0.35);
+    }
+    .article-body .reading-notes .reading-notes-kicker {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 10.5px !important;
+      line-height: 1.4;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: #e5b93b !important;
+      margin: 0 0 1rem;
+    }
+    .reading-notes-group + .reading-notes-group {
+      margin-top: 1.1rem;
+    }
+    .article-body .reading-notes .reading-notes-heading {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 11px !important;
+      letter-spacing: 0.06em;
+      font-weight: 600;
+      opacity: 0.75;
+      margin: 0 0 0.35rem !important;
+    }
+    .article-body .reading-notes .reading-notes-list {
+      margin: 0;
+      padding-left: 1.1rem;
+      list-style: disc;
+      font-size: 0.9rem;
+      opacity: 0.85;
+    }
+    .article-body .reading-notes .reading-notes-list li {
+      margin: 0 0 0.2rem;
+      line-height: 1.55;
+    }
+
     /* Gold Card Notice: Read Each Lesson With the Bible on Hand */
     .gold-bible-notice-card {
       position: relative;
@@ -7076,6 +7114,10 @@
       font-family: 'Newsreader', Georgia, serif;
       font-weight: 700;
       letter-spacing: -0.015em;
+      margin-top: 0;
+    }
+    .sheet-christology .christology-body p:last-child {
+      margin-bottom: 0;
     }
     .lesson-connect {
       --role-gold: #e4c56a;
@@ -8240,6 +8282,7 @@
     body.paper-mode .qa-card,
     body.paper-mode .source-card,
     body.paper-mode .checkpoint-card,
+    body.paper-mode .sheet-christology,
     body.white-mode .framework-card,
     body.white-mode .principle-card,
     body.white-mode .next-sitting-card,
@@ -8253,7 +8296,8 @@
     body.white-mode .layer-stack,
     body.white-mode .qa-card,
     body.white-mode .source-card,
-    body.white-mode .checkpoint-card {
+    body.white-mode .checkpoint-card,
+    body.white-mode .sheet-christology {
       background: #fffaf0;
       color: var(--read-fg);
       box-shadow: 0 10px 24px -14px rgba(60, 40, 10, 0.22);
@@ -8271,7 +8315,8 @@
     body.white-mode .layer-stack,
     body.white-mode .qa-card,
     body.white-mode .source-card,
-    body.white-mode .checkpoint-card {
+    body.white-mode .checkpoint-card,
+    body.white-mode .sheet-christology {
       background: #f7f7f7;
       box-shadow: 0 8px 20px -14px rgba(0, 0, 0, 0.14);
     }
@@ -8353,6 +8398,10 @@
     body.white-mode .lesson-toc-kicker {
       color: var(--read-accent);
       text-shadow: none;
+    }
+    body.paper-mode .article-body .reading-notes-kicker,
+    body.white-mode .article-body .reading-notes-kicker {
+      color: var(--read-accent) !important;
     }
 
     /* Print last, so theme colours cannot leave the page in light grey. */
@@ -9586,19 +9635,6 @@
 
     <aside id="sheet-verify" class="sheet-verify" hidden></aside>
     <aside id="sheet-study-path" class="study-path" hidden></aside>
-
-    <!-- Gold Christology Plaque -->
-    <section id="sheet-christology" class="sheet-christology mt-12 pt-7 border-t border-amber-600/40" hidden>
-      <div class="flex flex-wrap items-center justify-between gap-2 mb-3 pb-3 border-b border-amber-600/20 dark:border-amber-500/20">
-        <span class="font-mono text-xs uppercase tracking-widest text-amber-800 dark:text-amber-400 font-bold flex items-center gap-2">
-          <span class="inline-block w-2 h-2 rounded-full bg-amber-600 dark:bg-amber-400"></span>
-          Christology
-        </span>
-        <span class="font-mono text-xs text-ink-600 dark:text-paper-400 italic" id="christology-scripture"></span>
-      </div>
-      <h3 class="font-serif text-2xl sm:text-3xl font-bold text-ink-900 dark:text-paper-50 tracking-tight mb-4" id="christology-title"></h3>
-      <div class="christology-body space-y-4 font-serif text-base sm:text-lg leading-relaxed text-ink-800 dark:text-paper-200" id="christology-body"></div>
-    </section>
 
     <aside id="sheet-recap" class="mt-12 pt-7 border-t border-amber-600/40">
       <p class="font-mono text-[10px] uppercase tracking-widest text-amber-800 dark:text-amber-400 mb-2">End of sheet recap</p>

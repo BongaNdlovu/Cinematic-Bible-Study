@@ -4916,28 +4916,32 @@
       main.classList.add('sheet-enter');
     }
 
-    function renderChristologyPlaque(c) {
-      const section = document.getElementById('sheet-christology');
-      if (!section) return;
-      if (!c) {
-        section.hidden = true;
-        return;
+    function renderChristologyPlaque(articleEl, c) {
+      if (!articleEl || !c) return;
+      const section = document.createElement('section');
+      section.id = 'sheet-christology';
+      section.className = 'sheet-christology';
+      section.innerHTML =
+        '<div class="flex flex-wrap items-center justify-between gap-2 mb-3 pb-3 border-b border-amber-600/20 dark:border-amber-500/20">' +
+          '<span class="font-mono text-xs uppercase tracking-widest text-amber-800 dark:text-amber-400 font-bold flex items-center gap-2">' +
+            '<span class="inline-block w-2 h-2 rounded-full bg-amber-600 dark:bg-amber-400"></span>' +
+            'Christology' +
+          '</span>' +
+          '<span class="font-mono text-xs text-ink-600 dark:text-paper-400 italic" id="christology-scripture"></span>' +
+        '</div>' +
+        '<h3 class="font-serif font-bold text-ink-900 dark:text-paper-50 tracking-tight" id="christology-title"></h3>' +
+        '<div class="christology-body font-serif text-ink-800 dark:text-paper-200" id="christology-body"></div>';
+      section.querySelector('#christology-scripture').textContent = c.scripture || '';
+      section.querySelector('#christology-title').textContent = c.title || '';
+      const bodyEl = section.querySelector('#christology-body');
+      if (Array.isArray(c.body)) {
+        bodyEl.innerHTML = c.body.map((p) => `<p>${p.trim()}</p>`).join('');
+      } else if (typeof c.body === 'string') {
+        bodyEl.innerHTML = c.body.split(/\n\n+/).map((p) => `<p>${p.trim()}</p>`).join('');
       }
-      section.hidden = false;
-      const scriptEl = document.getElementById('christology-scripture');
-      const titleEl = document.getElementById('christology-title');
-      const bodyEl = document.getElementById('christology-body');
-      if (scriptEl) scriptEl.textContent = c.scripture || '';
-      if (titleEl) titleEl.textContent = c.title || '';
-      if (bodyEl) {
-        if (Array.isArray(c.body)) {
-          bodyEl.innerHTML = c.body.map((p) => `<p>${p.trim()}</p>`).join('');
-        } else if (typeof c.body === 'string') {
-          bodyEl.innerHTML = c.body.split(/\n\n+/).map((p) => `<p>${p.trim()}</p>`).join('');
-        } else {
-          bodyEl.innerHTML = '';
-        }
-      }
+      const anchor = articleEl.querySelector('.next-sitting-card') || articleEl.querySelector('.reading-notes');
+      if (anchor) anchor.parentNode.insertBefore(section, anchor);
+      else articleEl.appendChild(section);
     }
 
     const SCROLL_KEY = 'scroll_section';
@@ -5068,13 +5072,13 @@
       if (window.BookReader) window.BookReader.unmount();
       releaseSheetFigures(articleEl);
       articleEl.innerHTML = data.content;
+      renderChristologyPlaque(articleEl, data.christology);
       renderLessonMedia(data);
       renderSheetDiagrams(data);
       renderLessonConnectBar(index);
       renderStudyGuide(data.studyGuide);
       renderFacilitatorStrip(data.facilitator);
       renderSheetVerify(index);
-      renderChristologyPlaque(data.christology);
       if (window.GlossaryIndex) {
         window.GlossaryIndex.linkArticle(document.getElementById('sheet-article'));
       }
