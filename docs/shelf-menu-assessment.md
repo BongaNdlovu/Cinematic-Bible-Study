@@ -236,48 +236,78 @@ unlinted. The harness extracts every inline block and runs oxlint over the set �
 `shelf.html` on first run, and it is verified to exit non-zero on a real error
 rather than passing silently.
 
-## Superseded: the cinematic shelf
+## The shelf is the home page
 
-The flat-CSS `shelf.html` above has been replaced by `the_shelf_of_daniel
-(cinematic).html`, copied at the owner's request (original SHA-256
-`DBAEA7D9…F866BE`). This reverses the "not recommended: the WebGL scene" call
-above. That was a judgement about weight, and the owner chose the look.
+`index.html` is now the cinematic shelf (from `the_shelf_of_daniel
+(cinematic).html`), with the rest of the old home page kept below it. This
+reverses the "not recommended: the WebGL scene" call above: that was a
+judgement about weight, and the owner chose the look and asked for the shelf to
+be the home page.
 
-It was written for this repo: it reads `sheets-data.js` and `BAJourney`, so
-locks and completion match the guide, and it links to `study.html?sheet=N` or
-`account.html?next=…`.
+**Layout, top to bottom:** the site nav; the shelf stage (one screen: nav +
+stage = the viewport); the existing banner with its empire reel, ticker and
+call to action; the map and last-sitting tiles; the Daniel 2:44 verse; "About
+the book" and "Why it matters today"; readers' notes; the footer. The row of
+seven chapter cards is gone, because the eleven volumes replace it.
 
-**Two deliberate departures from a byte-for-byte copy**, each forced by a defect:
+**How it is built** (it is a section of a longer page, not a full-screen takeover):
 
-1. **Import map points at `vendor/three` (r181), not jsDelivr 0.169.** Production's
-   CSP (`_headers`, `vercel.json`) does not allow `cdn.jsdelivr.net` in
-   `script-src`, so the CDN import is blocked there and the page drops to its
-   no-WebGL drawer. Localhost has no CSP, which is why this could not be seen
-   in development. `qa/shelf-menu/csp.mjs` applies the real policy from
-   `_headers`: the vendored build renders with 0 violations, and the CDN build
-   is blocked (a control, so the test can fail). The render is visually the
-   same as 0.169.
-2. **The frame loop is cancelled on `visibilitychange`.** A hidden tab keeps its
-   queued `requestAnimationFrame` callback, and the handler also called `loop()`
-   directly, so every hide/show added one more render loop. Measured with
-   `qa/shelf-menu/loop.mjs` (a model of the browser's rAF pause): the original
-   goes 1 → 1 → 3 → 4 loops over three cycles; patched, it stays at 1.
+- `css/shelf.css` is the shelf's stylesheet with every rule scoped to
+  `.shelf-stage` (178 rules, none unscoped, no `position: fixed` left). The
+  page-level `html, body` rules became the stage block, and the state classes
+  (`is-ready`, `is-open`, `is-drawer`, `no-gl`) live on the stage element.
+  Eight class names collided with `site.css` (`btn`, `grain`, `vignette`,
+  `hero`, `hero-kicker`, `hero-actions`, `swap`, `sr-only`) and were prefixed
+  `sh-`; the `grain` keyframes were renamed.
+- `js/home/shelf.js` is the module, sized from the stage rather than the window
+  (a `ResizeObserver`), with pointer coordinates taken relative to the stage.
+- The embedded 496 KB portrait is now `assets/site/shelf-portrait.jpg`, so it
+  is cacheable and `index.html` is 21 KB, not 646 KB.
+- Three.js comes from `vendor/three` through an import map, because the
+  production CSP does not allow `cdn.jsdelivr.net`.
+- `shelf.html` is a redirect to `index.html` that keeps `?query` and `#volume-N`,
+  so old links and bookmarks work.
 
-Still as authored:
+**Behaviour changed so it can live on a page with other things on it:**
 
-- A 496 KB base64 portrait inline (`window.SHELF_PORTRAIT`). The page is 646 KB.
-- `&preview=full` on every sitting link. It has no effect off localhost (`journey.js:340`).
-- 7 oxlint style findings in its module (shadowing, short-circuit statements,
-  `img.onload`), so `tools/lint-inline-scripts.mjs` exits non-zero. None is a bug.
+- **Scrolling.** The wheel scrolls the page unless a volume is open (then it
+  zooms the book). The canvas is `touch-action: pan-y` until a volume is open.
+- **Keyboard.** Shortcuts (C, M, arrows, 1-5, O, F, S, Esc) work only while the
+  shelf is on screen or holds focus, never while typing in a field or with
+  Ctrl/Cmd/Alt. Enter and Space act on a volume only with focus inside the
+  stage, so Space still scrolls the page.
+- **Render loop.** It runs only while the tab is visible and the stage is on
+  screen, and is cancelled before it restarts (the earlier hide/show leak).
+  Verified: frames stop while the shelf is scrolled away and resume on return.
+- **Fullscreen** fullscreens the stage, not the document.
+- **Sound.** `data-silent` on the stage stops the site's click sound doubling
+  the shelf's own foley.
 
-**Linked from:** the `index.html` top nav ("The Shelf"), the study portal's
-progress card ("Browse the Shelf"), and the Study Syllabus drawer footer. The
-portal's card grid is unchanged and stays the dense progress view.
+**Cost, measured** (local, uncompressed, `qa/shelf-menu/home-weight.mjs`): the
+old home was 35 requests / 3.0 MB; the new one is 48 requests / 5.3 MB. Three.js
+and post-processing are 2.0 MB, lesson data 0.5 MB (new on the home page) and
+the portrait 0.36 MB, offset by 0.55 MB of chapter-card images no longer loaded.
+Compressed this is roughly +0.45 MB. The data and engine load in deferred
+scripts, after the banner and content have painted.
 
-**Verified:** `qa/shelf-menu/cinematic.mjs`, 14/14 checks: loader, 11 volumes,
-catalogue, dossier link, locked-volume routing, zero console errors, no overflow
-at 390px, and all three entry links. `qa/shelf-menu/verify.mjs` tests the old
-flat page and no longer applies.
+**Verified:** `qa/shelf-menu/home.mjs`, 31 checks: ready; nav + stage fill the
+first screen; 11 volumes from the real sheet data; banner, tiles, verse,
+panels, notes and footer present and the cards gone; one `h1`; no horizontal
+overflow; wheel scrolls the page; loop sleeps off screen and wakes; typing in
+the review box does not open the catalogue or mute; C, choose a volume, enter
+the right sheet, wheel zooms with a volume open, Esc puts it back; the banner
+ticker and CTA still work; **computed styles of 14 site elements x 13
+properties are identical to the old home page**; 390px phone; no-WebGL falls
+back to the catalogue with the rest of the page intact; and the production
+CSP gives 0 violations.
+
+Tests that asserted the old structure were updated to the new one:
+`verify_all.mjs` (shelf volumes instead of chapter cards) and
+`verify_scripture.mjs` (the `#shelf-stage` instead of the `full-scroll` id).
+
+**Linked from:** the study portal's progress card ("Browse the Shelf") points
+to `index.html`; the top-nav "The Shelf" entry and the Study Syllabus "Shelf"
+link were removed because Home is the shelf.
 
 ## Review: bugs, leaks, security, performance
 
@@ -295,8 +325,8 @@ flat page and no longer applies.
   `releaseSheetFigures()` runs before the article is replaced. After: 0 nodes,
   0 listeners per pass, no runtime errors; mindmap (78/78), full screen (50/50),
   flow, story reader/layers/mobile and fit suites all pass.
-- **Shelf render loop multiplied across tab switches** (above).
-- **Shelf blocked by production CSP** (above).
+- **Shelf render loop multiplied across tab switches** (fixed; see "The shelf is the home page").
+- **Shelf blocked by production CSP** (fixed by vendoring Three.js; see "The shelf is the home page").
 - **Non-constant-time secret comparison** in `functions/_middleware.js`
   (`/__rate` bearer check). Now `safeEqual()`. `tools/security/run_penetration_audit.mjs`: 20/20.
 - **Mojibake in `study.html`** (116 sequences: em dashes, arrows and emoji
@@ -353,13 +383,14 @@ flat page and no longer applies.
 - About twenty other scripts in `tools/verify/` still default `--base` to a fixed
   port. They accept `--base`, so they work; they were not changed.
 
-## What I would do next, if the shelf is approved
+## Open items
 
-1. Link it from the portal and from the top bar, with a control to switch between
-   the shelf and the card grid, so the at-a-glance progress view survives.
+1. The study portal still shows the card grid, which is the right dense,
+   at-a-glance progress view. Whether it should gain a shelf-style header is a
+   design call, not a defect.
 2. Give the "Study Syllabus" drawer the same type and rule vocabulary so the two
    navigation surfaces read as one site.
-3. Nothing else. The shelf does not need the WebGL scene, a soundtrack, or a
-   page-turn animation to do its job, and each of those would be weight the menu
-   does not earn.
-
+3. `tools/verify/verify_scripture.mjs` fails on "study sources still carry a
+   forbidden label: Ellen G." (also present before the shelf work), and
+   `verify_all.mjs` aborts on it before reaching the home-page step. That is a
+   content-policy decision, so it was left alone.

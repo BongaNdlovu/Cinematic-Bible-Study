@@ -16,9 +16,18 @@
   <meta name="twitter:image" content="https://cinematic-bible-study-daniel.pages.dev/assets/site/hero-main.jpg">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📜</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;1,500;1,600&family=Inter:wght@400;500;600&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Cormorant+Garamond:ital,wght@0,500;1,500;1,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/site.css?v=31">
   <link rel="stylesheet" href="css/terms.css">
+  <link rel="stylesheet" href="css/shelf.css">
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "./vendor/three/build/three.module.js",
+      "three/addons/": "./vendor/three/examples/jsm/"
+    }
+  }
+  </script>
   <script src="js/shared/journey.js"></script>
   <script src="js/shared/auth-config.js"></script>
   <script src="vendor/supabase/supabase.js"></script>
@@ -44,7 +53,6 @@
     <a class="site-brand" href="index.html">THE SCROLL OF DANIEL</a>
     <div class="site-links">
       <a class="active" href="index.html">Home</a>
-      <a href="shelf.html">The Shelf</a>
       <a href="study.html">The Sitting</a>
       <a href="map.html">Map of History</a>
       <a href="gallery.html">3D Symbols</a>
@@ -55,7 +63,133 @@
     </div>
   </nav>
 
-  <div class="dash-shell">
+  <!-- The shelf: the home page's menu. Eleven volumes, one per sitting. -->
+  <section class="shelf-stage is-loading" id="shelf-stage" data-silent aria-label="The Shelf of Daniel: the eleven sittings">
+    <canvas id="gl" tabindex="0" aria-label="A walnut bookshelf holding the volumes of the Shelf of Daniel. Use the catalogue for an accessible list."></canvas>
+
+    <div class="sh-vignette"></div>
+    <div class="sh-grain"></div>
+    <div class="letterbox top"></div>
+    <div class="letterbox bottom"></div>
+
+    <div class="loader" id="loader" role="status" aria-live="polite">
+      <div class="loader-inner">
+        <div class="loader-kicker">Daniel Historicist Press</div>
+        <div class="loader-title">The Shelf of Daniel</div>
+        <div class="loader-bar"><i id="loader-bar"></i></div>
+        <div class="loader-status" id="loader-status">Opening the reading room…</div>
+      </div>
+    </div>
+
+    <nav class="topbar" aria-label="Shelf controls">
+      <span class="brand-mark">
+        <span class="brand-dot"></span>
+        <span class="short">Daniel Historicist Press<span class="long"> · Collector’s Volumes</span></span>
+      </span>
+      <div class="top-controls">
+        <span class="pill progress-pill" id="progress-pill" title="Sittings completed">
+          <span class="progress-dots" id="progress-dots" aria-hidden="true"></span>
+          <span id="progress-text">0 / 11</span>
+        </span>
+        <button class="pill" id="btn-catalogue" type="button" aria-controls="catalogue" aria-expanded="false" title="Catalogue (C)">
+          <span class="k">☰</span><span class="lbl">Catalogue</span>
+        </button>
+        <button class="pill" id="btn-sound" type="button" aria-pressed="true" title="Foley sound (M)">
+          <span class="k" id="sound-icon">♦</span><span class="lbl" id="sound-label">Foley on</span>
+        </button>
+        <button class="pill" id="btn-full" type="button" title="Fullscreen">
+          <span class="k">⤢</span><span class="lbl">Full</span>
+        </button>
+      </div>
+    </nav>
+
+    <div class="sh-hero">
+      <div class="sh-hero-kicker">The Archival Press Edition</div>
+      <h2 class="sh-title">The Shelf <em>of</em> Daniel</h2>
+      <p id="hero-copy">Eleven clothbound sittings of the historicist reading. Take down any volume to study its foil-stamped cover, open the boards, or enter the sitting.</p>
+      <div class="sh-hero-actions">
+        <button class="sh-btn primary" id="btn-continue" type="button"><span id="continue-text">Begin with the Prologue</span><span class="arrow" aria-hidden="true">→</span></button>
+        <button class="sh-btn ghost" id="btn-browse" type="button">Browse catalogue <small>C</small></button>
+      </div>
+      <div class="gl-note">The 3D reading room needs WebGL. The full catalogue is open on the left.</div>
+    </div>
+
+    <div class="spine-tag" id="spine-tag" aria-hidden="true">
+      <div class="tag-box">
+        <span class="tag-meta" id="tag-meta"></span>
+        <span class="tag-title" id="tag-title"></span>
+        <span class="tag-sub" id="tag-sub"></span>
+      </div>
+    </div>
+
+    <div class="hud" id="hud" role="toolbar" aria-label="Inspect the volume">
+      <div class="views">
+        <button class="view-btn shelf-btn" type="button" id="hud-shelf" title="Back to the shelf (Esc)">✕ Shelf</button>
+        <button class="view-btn" type="button" data-view="cover" aria-pressed="true">Cover<kbd>1</kbd></button>
+        <button class="view-btn" type="button" data-view="open" aria-pressed="false">Open<kbd>2</kbd></button>
+        <button class="view-btn" type="button" data-view="spine" aria-pressed="false">Spine<kbd>3</kbd></button>
+        <button class="view-btn" type="button" data-view="back" aria-pressed="false">Back<kbd>4</kbd></button>
+        <button class="view-btn" type="button" data-view="edges" aria-pressed="false">Edges<kbd>5</kbd></button>
+      </div>
+      <span class="hud-hint">Drag to turn · Scroll to lean in · Double-click to open the boards</span>
+    </div>
+
+    <section class="dossier" id="dossier" aria-live="polite" aria-label="Volume details">
+      <div class="dossier-card">
+        <div class="dossier-body">
+          <div class="eyebrow">
+            <span id="d-meta">Vol. 0</span>
+            <span class="badge" id="d-badge">Open sitting</span>
+          </div>
+          <h2 id="d-title"></h2>
+          <p class="d-sub" id="d-sub"></p>
+          <p class="d-deck" id="d-deck"></p>
+          <div class="epigraph" id="d-epigraph"></div>
+          <div class="specs">
+            <div class="spec"><span class="spec-label">Scripture</span><span class="spec-val" id="d-ref"></span></div>
+            <div class="spec"><span class="spec-label">Sitting time</span><span class="spec-val" id="d-time"></span></div>
+            <div class="spec"><span class="spec-label">Horizon</span><span class="spec-val" id="d-horizon"></span></div>
+            <div class="spec"><span class="spec-label">Binding</span><span class="spec-val" id="d-binding"></span></div>
+          </div>
+          <h3 class="section-h">Within this volume</h3>
+          <ol class="contents" id="d-contents"></ol>
+          <div class="journey">
+            <div class="journey-row"><span>Your journey</span><span id="d-journey-text"></span></div>
+            <div class="journey-bar" id="d-journey"></div>
+          </div>
+          <div class="actions">
+            <a class="sh-btn primary" id="d-go" href="study.html"><span id="d-go-text">Enter the sitting</span><span class="arrow" aria-hidden="true">→</span></a>
+            <button class="sh-btn" id="d-open" type="button">Open the boards</button>
+            <button class="sh-btn ghost" id="d-link" type="button" title="Copy a link to this volume">Copy link</button>
+          </div>
+        </div>
+        <div class="d-footer">
+          <button class="pager prev" id="d-prev" type="button"><span>← Previous</span><em id="d-prev-t"></em></button>
+          <span class="d-count" id="d-count">1 / 11</span>
+          <button class="pager next" id="d-next" type="button"><span>Next →</span><em id="d-next-t"></em></button>
+        </div>
+        <div class="keys"><kbd>←</kbd> <kbd>→</kbd> browse · <kbd>1</kbd>–<kbd>5</kbd> views · <kbd>O</kbd> open · <kbd>F</kbd> flip · <kbd>Esc</kbd> back to shelf</div>
+      </div>
+    </section>
+
+    <div class="scrim" id="scrim"></div>
+    <aside class="catalogue" id="catalogue" aria-label="Catalogue of volumes">
+      <div class="cat-head">
+        <div>
+          <div class="cat-kicker">Card Catalogue</div>
+          <h2>Volumes on the shelf</h2>
+        </div>
+        <button class="icon-btn" id="cat-close" type="button" aria-label="Close catalogue">✕</button>
+      </div>
+      <ul class="cat-list" id="cat-list"></ul>
+      <div class="cat-foot" id="cat-foot"></div>
+    </aside>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <a class="sh-scroll-cue" href="#home-more">The map, the book itself, and notes from readers <span aria-hidden="true">↓</span></a>
+  </section>
+
+  <div class="dash-shell" id="home-more">
     <header class="dash-hero">
       <div class="dash-hero-reel" aria-hidden="true">
         <img src="assets/site/hero-main.jpg?v=3" alt="" data-era="0" class="is-active">
@@ -108,37 +242,6 @@
     </header>
 
     <div class="dash-grid">
-      <div class="dash-chapters" id="full-scroll">
-          <a class="dash-card" data-sheet="1" href="study.html?sheet=1">
-            <img src="assets/site/home-ch1.jpg" alt="" onerror="this.src='assets/site/card-text.jpg'">
-            <div class="dash-card-copy"><small>Chapter 1</small><h3>Faith in a foreign land</h3></div>
-          </a>
-          <a class="dash-card dash-card-colossus-wrap" data-sheet="2" href="study.html?sheet=2">
-            <img class="dash-card-colossus" src="assets/site/home-ch2.jpg?v=3" alt="Daniel 2 — head of gold, chest of silver, belly of brass, legs of iron" onerror="this.src='assets/site/hero-colossus.jpg'">
-            <div class="dash-card-copy"><small>Chapter 2</small><h3>Nebuchadnezzar&rsquo;s<br>dream</h3></div>
-          </a>
-          <a class="dash-card" data-sheet="3" href="study.html?sheet=3">
-            <img src="assets/site/home-ch3.jpg" alt="" onerror="this.src='assets/site/card-act-i.jpg'">
-            <div class="dash-card-copy"><small>Chapter 3</small><h3>The fiery furnace</h3></div>
-          </a>
-          <a class="dash-card" data-sheet="4" href="study.html?sheet=4">
-            <img src="assets/site/home-ch4.jpg" alt="" onerror="this.src='assets/site/hall-bg.jpg'">
-            <div class="dash-card-copy"><small>Chapter 4</small><h3>The tree cut down</h3></div>
-          </a>
-          <a class="dash-card" data-sheet="5" href="study.html?sheet=5">
-            <img src="assets/site/home-ch5.jpg?v=3" alt="Belshazzar’s feast — the writing on the wall" onerror="this.src='assets/site/card-act-i.jpg'">
-            <div class="dash-card-copy"><small>Chapter 5</small><h3>Belshazzar’s feast</h3></div>
-          </a>
-          <a class="dash-card" data-sheet="6" href="study.html?sheet=6">
-            <img src="assets/site/home-ch6.jpg" alt="" onerror="this.src='assets/site/bear-painting.jpg'">
-            <div class="dash-card-copy"><small>Chapter 6</small><h3>Delivered from the lions</h3></div>
-          </a>
-          <a class="dash-card" data-sheet="7" data-lock-name="Daniel 7–12" href="study.html?sheet=7">
-            <img src="assets/site/home-ch7.jpg" alt="" onerror="this.src='assets/site/card-act-ii.jpg'">
-            <div class="dash-card-copy"><small>Chapters 7–12</small><h3>Visions of the future</h3></div>
-          </a>
-      </div>
-
       <div class="dash-main">
         <div class="dash-tiles">
           <a class="dash-tile" id="context" href="map.html?year=y605">
@@ -255,5 +358,7 @@
   </footer>
 
   <script src="js/home/dash.js?v=17"></script>
+  <script defer src="js/study/sheets-data.js"></script>
+  <script type="module" src="js/home/shelf.js"></script>
 </body>
 </html>

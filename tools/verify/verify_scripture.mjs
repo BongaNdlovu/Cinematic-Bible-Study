@@ -215,7 +215,7 @@ if (/Bible Artifacts/i.test(home)) fail('homepage still brands Bible Artifacts')
 if (/SDA Historicist Verified/i.test(home)) fail('homepage still carries a denominational verification badge');
 if (!/Begin the sitting|hero-primary/.test(home)) fail('homepage is missing the sitting CTA');
 if (!/The Scroll of Daniel/.test(home)) fail('homepage must be titled as The Scroll of Daniel');
-if (!/full-scroll/.test(home)) fail('homepage is missing the full-scroll offer');
+if (!/id="shelf-stage"/.test(home)) fail('homepage is missing the shelf, the full scroll of sittings');
 
 const journey = fs.readFileSync(path.join(root, 'js/shared/journey.js'), 'utf8');
 if (!journey.includes('canAccessSheet') || !journey.includes('FREE_THROUGH')) {
