@@ -323,8 +323,8 @@ async function run() {
   await sleep(2500);
 
   const brand = await client.eval('document.querySelector("header")?.innerText || ""');
-  console.log('  [study.html] Header contains Scroll:', brand.includes('Scroll of Daniel'));
-  if (!brand.includes('Scroll of Daniel')) throw new Error('Study platform header missing');
+  console.log('  [study.html] Header contains Scroll:', brand.includes('Shelf of Daniel'));
+  if (!brand.includes('Shelf of Daniel')) throw new Error('Study platform header missing');
 
   const sheetTitle = await client.eval('document.getElementById("sheet-title")?.textContent');
   console.log('  [study.html] Initial sheet:', sheetTitle);
@@ -446,8 +446,8 @@ async function run() {
   console.log('  [index.html] Shelf volumes:', cardsCount);
   if (cardsCount < 3) throw new Error(`Expected at least 3 shelf volumes, got ${cardsCount}`);
 
-  const primaryBtn = await client.eval('!!document.getElementById("btn-continue") && (document.querySelector(\'.sh-tab[href="study.html"]\') || {}).getAttribute?.("href")');
-  console.log('  [index.html] Hero primary action + study tab:', primaryBtn);
+  const primaryBtn = await client.eval('!!document.getElementById("btn-continue") && (document.getElementById("d-go") || {}).getAttribute?.("href")');
+  console.log('  [index.html] Hero primary action + study entry link:', primaryBtn);
   if (!primaryBtn || !String(primaryBtn).includes('study.html')) throw new Error('Hero continue button or study link missing');
 
   const fullScrollCard = await client.eval('!!document.getElementById("shelf-stage")');
@@ -459,7 +459,7 @@ async function run() {
   if (tickerCount < 4) throw new Error('Floating menu tabs missing in hero');
 
   const cardLinks = await client.eval(`(() => {
-    const cards = Array.from(document.querySelectorAll('.sh-tab, .act-card a.btn'));
+    const cards = Array.from(document.querySelectorAll('.sh-tab, .act-card a.btn, #d-go'));
     return cards.map(a => a.getAttribute('href'));
   })()`);
   console.log('  [index.html] Card study entry links:', cardLinks);

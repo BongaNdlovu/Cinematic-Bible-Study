@@ -30,6 +30,15 @@ const MOCK = {
 const check = [];
 const ok = (name, pass, detail) => check.push({ name, pass: !!pass, detail: detail || '' });
 
+async function openSittingInPage(page, index) {
+  await page.evaluate((i) => {
+    const drawer = document.getElementById('toc-drawer');
+    if (drawer.classList.contains('-translate-x-full')) window.toggleTocDrawer();
+    document.querySelectorAll('#toc-unit-list button')[i].click();
+    if (!drawer.classList.contains('-translate-x-full')) window.toggleTocDrawer();
+  }, index);
+}
+
 const browser = await chromium.launch();
 try {
   const context = await browser.newContext({ viewport: { width: 1500, height: 950 } });
@@ -54,7 +63,7 @@ try {
     await page.waitForTimeout(1300);
     await page.evaluate(() => { const g = document.getElementById('sitting-guide'); if (g) g.hidden = true; });
     if (sheet !== 0) {
-      await page.evaluate((i) => window.openSittingFromPortal(i), sheet);
+      await openSittingInPage(page, sheet);
       await page.waitForTimeout(1600);
       await page.evaluate(() => {
         const b = document.getElementById('site-error');

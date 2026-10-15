@@ -21,6 +21,15 @@ const MOCK = {
   session: { access_token: 't', refresh_token: 'r', expires_at: 4102444800, token_type: 'bearer' },
 };
 
+async function openSittingInPage(page, index) {
+  await page.evaluate((i) => {
+    const drawer = document.getElementById('toc-drawer');
+    if (drawer.classList.contains('-translate-x-full')) window.toggleTocDrawer();
+    document.querySelectorAll('#toc-unit-list button')[i].click();
+    if (!drawer.classList.contains('-translate-x-full')) window.toggleTocDrawer();
+  }, index);
+}
+
 const browser = await chromium.launch();
 let failures = 0;
 try {
@@ -83,9 +92,9 @@ try {
   if (noPhoto) noPhoto.forEach((c) => console.log(`  card ${c.index}: --photo-y=${c.declared}  photos=${c.photos}`));
 
   // A two-movement story must still get two different crops, not the first two
-  // entries of a three-entry default. Loaded through the portal, since only the
+  // entries of a three-entry default. Loaded through the contents drawer, since only the
   // first sitting is rendered on arrival.
-  await page.evaluate(() => { if (window.openSittingFromPortal) window.openSittingFromPortal(1); });
+  await openSittingInPage(page, 1);
   await page.waitForTimeout(1600);
   const three = await page.evaluate(() => {
     const fig = document.querySelector('#sheet-article figure[data-diagram="s1-1"]');

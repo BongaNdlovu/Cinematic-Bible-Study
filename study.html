@@ -3,16 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>The Scroll of Daniel | Historicist Exilic Study</title>
+  <title>The Shelf of Daniel | Historicist Exilic Study</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📜</text></svg>">
   <meta name="description" content="11 classroom-ready Daniel sittings with primary sources, KJV scripture, interactive proof workbenches, facilitator notes, and printable certificate.">
   <meta property="og:type" content="article">
   <meta property="og:url" content="https://cinematic-bible-study-daniel.pages.dev/study">
-  <meta property="og:title" content="The Scroll of Daniel — The Sitting | Historicist Exegesis">
+  <meta property="og:title" content="The Shelf of Daniel — The Sitting | Historicist Exegesis">
   <meta property="og:description" content="11 classroom-ready Daniel sittings with primary sources, KJV scripture, interactive proof workbenches, facilitator notes, and printable certificate.">
   <meta property="og:image" content="https://cinematic-bible-study-daniel.pages.dev/assets/site/hero-main.jpg">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="The Scroll of Daniel — The Sitting | Historicist Exegesis">
+  <meta name="twitter:title" content="The Shelf of Daniel — The Sitting | Historicist Exegesis">
   <meta name="twitter:description" content="11 classroom-ready Daniel sittings with primary sources, KJV scripture, interactive proof workbenches, facilitator notes, and printable certificate.">
   <meta name="twitter:image" content="https://cinematic-bible-study-daniel.pages.dev/assets/site/hero-main.jpg">
 
@@ -27,7 +27,7 @@
   <!-- Native Web Audio API used for Soft Pomodoro Completion Chime -->
 
   <link rel="stylesheet" href="css/terms.css">
-  <link rel="stylesheet" href="css/shelf.css">
+  <link rel="stylesheet" href="css/book-reader.css">
   <script type="importmap">
   {
     "imports": {
@@ -8410,474 +8410,6 @@
       }
     }
 
-    /* =========================================================================
-       CINEMATIC LESSONS PORTAL / CURRICULUM SYLLABUS
-       ========================================================================= */
-    .sitting-portal-view {
-      position: relative;
-      z-index: 10;
-      width: 100%;
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    .sitting-portal-view .portal-cert-banner {
-      margin: 1.5rem 1.25rem 4rem;
-    }
-    .sitting-portal-view[hidden] {
-      display: none !important;
-    }
-
-    .portal-hero {
-      position: relative;
-      padding: 2.75rem 2rem 2.25rem;
-      margin-bottom: 2.5rem;
-      border-radius: 18px;
-      background: radial-gradient(ellipse at 50% 0%, rgba(212, 175, 55, 0.22), transparent 72%), #14100b;
-      border: 1px solid rgba(212, 175, 55, 0.45);
-      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.65), 0 0 45px rgba(212, 175, 55, 0.15), inset 0 1px 0 rgba(255, 235, 170, 0.3);
-      overflow: hidden;
-    }
-    .portal-hero::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: url('assets/site/hall-bg.jpg') center/cover no-repeat;
-      opacity: 0.12;
-      pointer-events: none;
-    }
-    .portal-hero-content {
-      position: relative;
-      z-index: 2;
-    }
-    .portal-kicker {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.72rem;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: #d4af37;
-      margin: 0 0 0.6rem;
-      font-weight: 700;
-    }
-    .portal-title {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-size: clamp(2rem, 4.5vw, 3.25rem);
-      font-weight: 700;
-      line-height: 1.15;
-      color: #fbf5e8;
-      margin: 0 0 0.85rem;
-      text-shadow: 0 2px 16px rgba(0, 0, 0, 0.7);
-    }
-    .portal-lead {
-      font-family: 'Lora', Georgia, serif;
-      font-size: clamp(0.95rem, 1.8vw, 1.15rem);
-      line-height: 1.65;
-      color: #cbbfae;
-      max-width: 860px;
-      margin: 0 0 1.75rem;
-    }
-
-    /* Codex Mastery Progress Box */
-    .portal-mastery-card {
-      background: rgba(22, 17, 12, 0.92);
-      border: 1px solid rgba(212, 175, 55, 0.38);
-      border-radius: 14px;
-      padding: 1.4rem 1.6rem;
-      backdrop-filter: blur(12px);
-      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
-      margin-bottom: 1.5rem;
-    }
-    .portal-mastery-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
-      margin-bottom: 0.85rem;
-    }
-    .portal-mastery-title-group {
-      display: flex;
-      align-items: center;
-      gap: 0.85rem;
-    }
-    .portal-mastery-icon {
-      font-size: 1.75rem;
-    }
-    .portal-mastery-heading {
-      font-family: 'Newsreader', Georgia, serif;
-      font-size: 1.25rem;
-      font-weight: 600;
-      color: #f7ead0;
-      margin: 0;
-    }
-    .portal-mastery-sub {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.75rem;
-      color: #b5a48e;
-      margin: 0.2rem 0 0;
-      letter-spacing: 0.04em;
-    }
-    .portal-mastery-badge {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 1.35rem;
-      font-weight: 700;
-      color: #d4af37;
-      text-shadow: 0 0 16px rgba(212, 175, 55, 0.4);
-    }
-    .portal-progress-track {
-      height: 10px;
-      background: rgba(8, 6, 4, 0.8);
-      border-radius: 999px;
-      overflow: hidden;
-      border: 1px solid rgba(212, 175, 55, 0.3);
-      margin-bottom: 1.1rem;
-    }
-    .portal-progress-fill {
-      height: 100%;
-      background: linear-gradient(90deg, #996515, #d4af37, #f7e099);
-      border-radius: 999px;
-      transition: width 0.7s cubic-bezier(0.22, 1, 0.36, 1);
-      box-shadow: 0 0 12px rgba(212, 175, 55, 0.5);
-    }
-    .portal-mastery-actions {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 0.75rem;
-    }
-    .portal-btn-primary {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      background: linear-gradient(180deg, #b8860b, #996515);
-      border: 1px solid #ffd700;
-      color: #0b0906;
-      font-family: 'Inter', sans-serif;
-      font-size: 0.85rem;
-      font-weight: 700;
-      padding: 0.65rem 1.35rem;
-      border-radius: 999px;
-      cursor: pointer;
-      box-shadow: 0 4px 18px rgba(212, 175, 55, 0.35);
-      transition: all 0.22s ease;
-      text-decoration: none;
-    }
-    .portal-btn-primary:hover {
-      background: linear-gradient(180deg, #d4af37, #b8860b);
-      transform: translateY(-1px);
-      box-shadow: 0 6px 24px rgba(212, 175, 55, 0.5);
-    }
-    .portal-btn-secondary {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      background: transparent;
-      border: 1px solid rgba(212, 175, 55, 0.35);
-      color: #e5d5be;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.75rem;
-      padding: 0.65rem 1.15rem;
-      border-radius: 999px;
-      cursor: pointer;
-      transition: all 0.2s ease;
-    }
-    .portal-btn-secondary:hover {
-      background: rgba(212, 175, 55, 0.12);
-      border-color: rgba(212, 175, 55, 0.65);
-      color: #ffd700;
-    }
-
-    /* Filter Controls Bar */
-    .portal-filter-bar {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      flex-wrap: wrap;
-      padding-top: 0.5rem;
-    }
-    .portal-filter-label {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.72rem;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: #b5a48e;
-    }
-    .portal-filter-tabs {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-    }
-    .portal-filter-btn {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.72rem;
-      letter-spacing: 0.04em;
-      padding: 0.42rem 0.95rem;
-      border-radius: 999px;
-      border: 1px solid rgba(212, 175, 55, 0.3);
-      background: rgba(12, 10, 8, 0.65);
-      color: #c4b8a8;
-      cursor: pointer;
-      transition: all 0.2s ease;
-    }
-    .portal-filter-btn:hover {
-      border-color: rgba(212, 175, 55, 0.7);
-      color: #f7ead0;
-    }
-    .portal-filter-btn.active {
-      background: #d4af37;
-      border-color: #ffd700;
-      color: #120e0a;
-      font-weight: 700;
-      box-shadow: 0 0 14px rgba(212, 175, 55, 0.4);
-    }
-
-    /* Lessons Grid */
-    .portal-grid-container {
-      margin-top: 2rem;
-    }
-    .portal-lessons-grid {
-      display: grid;
-      /* min(330px, 100%) lets cards shrink on narrow phones instead of
-         forcing the page wider than the screen. */
-      grid-template-columns: repeat(auto-fill, minmax(min(330px, 100%), 1fr));
-      gap: 1.6rem;
-    }
-
-    /* Individual Cinematic Lesson Card */
-    .lesson-portal-card {
-      position: relative;
-      border-radius: 16px;
-      overflow: hidden;
-      background: linear-gradient(180deg, #1b1611 0%, #120f0b 100%);
-      border: 1px solid rgba(212, 175, 55, 0.28);
-      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
-      display: flex;
-      flex-direction: column;
-      transition: all 0.28s cubic-bezier(0.2, 0, 0, 1);
-    }
-    .lesson-portal-card:hover {
-      transform: translateY(-4px);
-      border-color: rgba(212, 175, 55, 0.7);
-      box-shadow: 0 18px 48px rgba(0, 0, 0, 0.7), 0 0 24px rgba(212, 175, 55, 0.2);
-    }
-    .lesson-portal-card.is-completed {
-      border-color: rgba(16, 185, 129, 0.45);
-    }
-    .lesson-portal-card.is-completed:hover {
-      border-color: rgba(16, 185, 129, 0.75);
-      box-shadow: 0 18px 48px rgba(0, 0, 0, 0.7), 0 0 24px rgba(16, 185, 129, 0.2);
-    }
-    .lesson-portal-card.is-locked {
-      opacity: 0.72;
-    }
-    .lesson-portal-card.is-locked:hover {
-      transform: none;
-      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
-    }
-
-    /* Card Image Top */
-    .lesson-portal-media {
-      position: relative;
-      height: 175px;
-      width: 100%;
-      overflow: hidden;
-      background: #090705;
-    }
-    .lesson-portal-media img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.45s ease;
-    }
-    .lesson-portal-card:hover .lesson-portal-media img {
-      transform: scale(1.05);
-    }
-    .lesson-portal-media-overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(180deg, rgba(8,6,4,0.3) 0%, rgba(18,15,11,0.92) 100%);
-    }
-    .lesson-portal-top-bar {
-      position: absolute;
-      top: 12px;
-      left: 12px;
-      right: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 0.5rem;
-      z-index: 2;
-    }
-    .lesson-num-pill {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.68rem;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      padding: 0.25rem 0.6rem;
-      border-radius: 999px;
-      background: rgba(12, 10, 8, 0.85);
-      border: 1px solid rgba(212, 175, 55, 0.5);
-      color: #ffd700;
-      backdrop-filter: blur(6px);
-    }
-    .lesson-status-pill {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.68rem;
-      font-weight: 600;
-      letter-spacing: 0.05em;
-      padding: 0.25rem 0.65rem;
-      border-radius: 999px;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.3rem;
-      backdrop-filter: blur(6px);
-    }
-    .lesson-status-pill.completed {
-      background: rgba(6, 78, 59, 0.88);
-      border: 1px solid #10b981;
-      color: #a7f3d0;
-    }
-    .lesson-status-pill.unlocked {
-      background: rgba(120, 53, 15, 0.88);
-      border: 1px solid #f59e0b;
-      color: #fde68a;
-    }
-    .lesson-status-pill.locked {
-      background: rgba(30, 25, 20, 0.88);
-      border: 1px solid rgba(180, 160, 130, 0.3);
-      color: #b0a494;
-    }
-    .lesson-status-pill.member {
-      background: rgba(67, 20, 7, 0.88);
-      border: 1px solid #ea580c;
-      color: #fed7aa;
-    }
-
-    .lesson-portal-meta-badge {
-      position: absolute;
-      bottom: 10px;
-      left: 12px;
-      z-index: 2;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.68rem;
-      color: #e5d7be;
-      text-shadow: 0 1px 4px rgba(0, 0, 0, 0.9);
-    }
-    .lesson-portal-meta-badge span {
-      background: rgba(0, 0, 0, 0.55);
-      padding: 0.15rem 0.45rem;
-      border-radius: 4px;
-      border: 1px solid rgba(212, 175, 55, 0.25);
-    }
-
-    /* Card Body */
-    .lesson-portal-body {
-      padding: 1.25rem 1.4rem 1.4rem;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-    .lesson-portal-header-group {
-      margin-bottom: 1.25rem;
-    }
-    .lesson-portal-chapter {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.7rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: #d4af37;
-      margin: 0 0 0.4rem;
-      font-weight: 600;
-    }
-    .lesson-portal-title {
-      font-family: 'Newsreader', Georgia, serif;
-      font-size: 1.25rem;
-      font-weight: 700;
-      line-height: 1.3;
-      color: #fbf5e8;
-      margin: 0 0 0.5rem;
-    }
-    .lesson-portal-subtitle {
-      font-family: 'Lora', Georgia, serif;
-      font-size: 0.88rem;
-      line-height: 1.5;
-      color: #b0a494;
-      margin: 0;
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-    }
-
-    /* Card Footer & CTA */
-    .lesson-portal-footer {
-      border-top: 1px solid rgba(212, 175, 55, 0.18);
-      padding-top: 1rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
-    }
-    .lesson-portal-info-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.7rem;
-      color: #9c8e7c;
-    }
-    .lesson-portal-action-btn {
-      width: 100%;
-      text-align: center;
-      padding: 0.65rem 1rem;
-      border-radius: 10px;
-      font-family: 'Inter', sans-serif;
-      font-size: 0.82rem;
-      font-weight: 600;
-      letter-spacing: 0.02em;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      text-decoration: none;
-      display: inline-block;
-      box-sizing: border-box;
-    }
-    .lesson-portal-action-btn.unlocked {
-      background: linear-gradient(180deg, #d4af37, #b8860b);
-      color: #120e0a;
-      border: 1px solid #ffd700;
-      box-shadow: 0 4px 14px rgba(212, 175, 55, 0.3);
-    }
-    .lesson-portal-action-btn.unlocked:hover {
-      background: linear-gradient(180deg, #f7e099, #d4af37);
-      box-shadow: 0 6px 20px rgba(212, 175, 55, 0.5);
-    }
-    .lesson-portal-action-btn.completed {
-      background: rgba(16, 185, 129, 0.15);
-      border: 1px solid #10b981;
-      color: #6ee7b7;
-    }
-    .lesson-portal-action-btn.completed:hover {
-      background: rgba(16, 185, 129, 0.28);
-      color: #a7f3d0;
-    }
-    .lesson-portal-action-btn.member {
-      background: rgba(234, 88, 12, 0.15);
-      border: 1px solid #ea580c;
-      color: #fdba74;
-    }
-    .lesson-portal-action-btn.member:hover {
-      background: rgba(234, 88, 12, 0.28);
-      color: #fed7aa;
-    }
-    .lesson-portal-action-btn.locked {
-      background: rgba(20, 16, 12, 0.6);
-      border: 1px solid rgba(180, 160, 130, 0.2);
-      color: #7d7264;
-      cursor: not-allowed;
-    }
-
     /* Return button inside sitting spine */
     .spine-catalog-btn {
       display: inline-flex;
@@ -8899,55 +8431,6 @@
       background: rgba(212, 175, 55, 0.28);
       border-color: #ffd700;
       color: #ffd700;
-    }
-
-    /* Certificate banner in portal */
-    .portal-cert-banner {
-      margin-top: 3rem;
-      border-radius: 16px;
-      padding: 1.75rem 2rem;
-      background: radial-gradient(ellipse at 50% 0%, rgba(212, 175, 55, 0.28), transparent 70%), #14100b;
-      border: 1px solid #ffd700;
-      box-shadow: 0 16px 48px rgba(212, 175, 55, 0.25);
-    }
-    .portal-cert-content {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1.5rem;
-      flex-wrap: wrap;
-    }
-    .portal-cert-seal {
-      font-size: 2.5rem;
-    }
-    .portal-cert-banner h3 {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-size: 1.35rem;
-      color: #ffd700;
-      margin: 0 0 0.35rem;
-    }
-    .portal-cert-banner p {
-      font-family: 'Lora', Georgia, serif;
-      font-size: 0.95rem;
-      color: #e5d7be;
-      margin: 0;
-      max-width: 680px;
-    }
-    .portal-btn-cert {
-      padding: 0.75rem 1.6rem;
-      background: linear-gradient(180deg, #ffd700, #d4af37);
-      color: #120e0a;
-      font-family: 'Inter', sans-serif;
-      font-weight: 700;
-      font-size: 0.9rem;
-      border-radius: 999px;
-      border: 1px solid #fff;
-      cursor: pointer;
-      box-shadow: 0 4px 20px rgba(212, 175, 55, 0.5);
-    }
-    .portal-btn-cert:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 28px rgba(212, 175, 55, 0.7);
     }
 
     /* ---- Per-card minimize toggles (card-min.js) ---- */
@@ -9615,13 +9098,13 @@
         <div class="h-4 w-px bg-paper-300 dark:bg-paper-800 shrink-0"></div>
 
         <div class="study-brand-title min-w-0">
-          <span class="font-serif text-base sm:text-lg font-bold tracking-tight text-ink-900 dark:text-paper-100">The Scroll of Daniel</span>
+          <span class="font-serif text-base sm:text-lg font-bold tracking-tight text-ink-900 dark:text-paper-100">The Shelf of Daniel</span>
           <span class="font-mono text-[10px] px-1.5 py-0.5 rounded bg-advent-gold/20 text-amber-800 dark:text-amber-300 font-semibold border border-advent-gold/30 shrink-0">HISTORICIST</span>
         </div>
-        <button type="button" id="btn-header-syllabus" onclick="if(window.StudyApp&amp;&amp;window.StudyApp.showLessonsPortal)window.StudyApp.showLessonsPortal();else location.assign('study.html');" class="px-2.5 py-1 rounded border border-amber-600/40 bg-amber-500/10 hover:bg-amber-500/20 text-xs font-mono font-semibold text-amber-800 dark:text-amber-300 flex items-center gap-1.5 shrink-0" title="View all completed and incompleted lessons">
+        <a id="btn-header-syllabus" href="index.html" class="px-2.5 py-1 rounded border border-amber-600/40 bg-amber-500/10 hover:bg-amber-500/20 text-xs font-mono font-semibold text-amber-800 dark:text-amber-300 flex items-center gap-1.5 shrink-0" title="Back to the shelf of all eleven sittings">
           <span>📜</span>
-          <span class="hidden md:inline">All Lessons</span>
-        </button>
+          <span class="hidden sm:inline">The Shelf</span>
+        </a>
         <div class="hidden lg:flex museum-links items-center gap-3 ml-2 pl-3 border-l border-paper-300 dark:border-paper-800 shrink-0">
           <a href="index.html" class="text-ink-500 dark:text-paper-400 hover:text-amber-700 dark:hover:text-amber-300">Home</a>
           <a href="map.html" class="text-ink-500 dark:text-paper-400 hover:text-amber-700 dark:hover:text-amber-300">Map</a>
@@ -9833,157 +9316,9 @@
     </div>
   </aside>
 
-  <!-- =========================================================================
-       CINEMATIC LESSONS PORTAL / SYLLABUS HUB
-       Shown when visiting "The Sitting" tab without an explicit lesson active.
-       Displays completed and incompleted lessons with direct unlocked access.
-       ========================================================================= -->
-  <section id="sitting-portal-view" class="sitting-portal-view" aria-label="Curriculum Sittings Overview" hidden>
-    <section class="shelf-stage is-loading" id="shelf-stage" data-silent data-offset-from=".study-topbar" aria-label="The sittings of Daniel, as a shelf of eleven volumes">
-      <canvas id="gl" tabindex="0" aria-label="A walnut bookshelf holding the volumes of the Shelf of Daniel. Use the catalogue for an accessible list."></canvas>
-
-      <div class="sh-vignette"></div>
-      <div class="sh-grain"></div>
-      <div class="letterbox top"></div>
-      <div class="letterbox bottom"></div>
-
-      <div class="loader" id="loader" role="status" aria-live="polite">
-        <div class="loader-inner">
-          <div class="loader-kicker">Daniel Historicist Press</div>
-          <div class="loader-title">The Shelf of Daniel</div>
-          <div class="loader-bar"><i id="loader-bar"></i></div>
-          <div class="loader-status" id="loader-status">Opening the reading room…</div>
-        </div>
-      </div>
-
-      <nav class="topbar" aria-label="Shelf controls">
-        <span class="brand-mark">
-          <span class="brand-dot"></span>
-          <span class="short">The Scroll of Daniel<span class="long"> · Daniel Historicist Press</span></span>
-        </span>
-        <div class="top-controls">
-          <span class="pill progress-pill" id="progress-pill" title="Sittings completed">
-            <span class="progress-dots" id="progress-dots" aria-hidden="true"></span>
-            <span id="progress-text">0 / 11</span>
-          </span>
-          <button class="pill" id="btn-catalogue" type="button" aria-controls="catalogue" aria-expanded="false" title="Catalogue (C)">
-            <span class="k">☰</span><span class="lbl">Catalogue</span>
-          </button>
-          <button class="pill" id="btn-sound" type="button" aria-pressed="true" title="Foley sound (M)">
-            <span class="k" id="sound-icon">♦</span><span class="lbl" id="sound-label">Foley on</span>
-          </button>
-          <button class="pill" id="btn-full" type="button" title="Fullscreen">
-            <span class="k">⤢</span><span class="lbl">Full</span>
-          </button>
-        </div>
-      </nav>
-
-
-
-      <div class="sh-hero">
-        <div class="sh-hero-kicker">The Archival Press Edition</div>
-        <h2 class="sh-title">The Shelf <em>of</em> Daniel</h2>
-        <p id="hero-copy">Eleven clothbound sittings of the historicist reading. Take down any volume to study its foil-stamped cover, open the boards, or enter the sitting.</p>
-        <div class="sh-hero-actions">
-          <button class="sh-btn primary" id="btn-continue" type="button"><span id="continue-text">Begin with the Prologue</span><span class="arrow" aria-hidden="true">→</span></button>
-          <button class="sh-btn ghost" id="btn-browse" type="button">Browse catalogue <small>C</small></button>
-        </div>
-        <div class="gl-note">The 3D reading room needs WebGL. The full catalogue is open on the left.</div>
-      </div>
-
-      <div class="spine-tag" id="spine-tag" aria-hidden="true">
-        <div class="tag-box">
-          <span class="tag-meta" id="tag-meta"></span>
-          <span class="tag-title" id="tag-title"></span>
-          <span class="tag-sub" id="tag-sub"></span>
-        </div>
-      </div>
-
-      <div class="hud" id="hud" role="toolbar" aria-label="Inspect the volume">
-        <div class="views">
-          <button class="view-btn shelf-btn" type="button" id="hud-shelf" title="Back to the shelf (Esc)">✕ Shelf</button>
-          <button class="view-btn" type="button" data-view="cover" aria-pressed="true">Cover<kbd>1</kbd></button>
-          <button class="view-btn" type="button" data-view="open" aria-pressed="false">Open<kbd>2</kbd></button>
-          <button class="view-btn" type="button" data-view="spine" aria-pressed="false">Spine<kbd>3</kbd></button>
-          <button class="view-btn" type="button" data-view="back" aria-pressed="false">Back<kbd>4</kbd></button>
-          <button class="view-btn" type="button" data-view="edges" aria-pressed="false">Edges<kbd>5</kbd></button>
-        </div>
-        <span class="hud-hint">Drag to turn · Scroll to lean in · Double-click to open the boards</span>
-      </div>
-
-      <section class="dossier" id="dossier" aria-live="polite" aria-label="Volume details">
-        <div class="dossier-card">
-          <div class="dossier-body">
-            <div class="eyebrow">
-              <span id="d-meta">Vol. 0</span>
-              <span class="badge" id="d-badge">Open sitting</span>
-            </div>
-            <h2 id="d-title"></h2>
-            <p class="d-sub" id="d-sub"></p>
-            <p class="d-deck" id="d-deck"></p>
-            <div class="epigraph" id="d-epigraph"></div>
-            <div class="specs">
-              <div class="spec"><span class="spec-label">Scripture</span><span class="spec-val" id="d-ref"></span></div>
-              <div class="spec"><span class="spec-label">Sitting time</span><span class="spec-val" id="d-time"></span></div>
-              <div class="spec"><span class="spec-label">Horizon</span><span class="spec-val" id="d-horizon"></span></div>
-              <div class="spec"><span class="spec-label">Binding</span><span class="spec-val" id="d-binding"></span></div>
-            </div>
-            <h3 class="section-h">Within this volume</h3>
-            <ol class="contents" id="d-contents"></ol>
-            <div class="journey">
-              <div class="journey-row"><span>Your journey</span><span id="d-journey-text"></span></div>
-              <div class="journey-bar" id="d-journey"></div>
-            </div>
-            <div class="actions">
-              <a class="sh-btn primary" id="d-go" href="study.html"><span id="d-go-text">Enter the sitting</span><span class="arrow" aria-hidden="true">→</span></a>
-              <button class="sh-btn" id="d-open" type="button">Open the boards</button>
-              <button class="sh-btn ghost" id="d-link" type="button" title="Copy a link to this volume">Copy link</button>
-            </div>
-          </div>
-          <div class="d-footer">
-            <button class="pager prev" id="d-prev" type="button"><span>← Previous</span><em id="d-prev-t"></em></button>
-            <span class="d-count" id="d-count">1 / 11</span>
-            <button class="pager next" id="d-next" type="button"><span>Next →</span><em id="d-next-t"></em></button>
-          </div>
-          <div class="keys"><kbd>←</kbd> <kbd>→</kbd> browse · <kbd>1</kbd>–<kbd>5</kbd> views · <kbd>O</kbd> open · <kbd>F</kbd> flip · <kbd>Esc</kbd> back to shelf</div>
-        </div>
-      </section>
-
-      <div class="scrim" id="scrim"></div>
-      <aside class="catalogue" id="catalogue" aria-label="Catalogue of volumes">
-        <div class="cat-head">
-          <div>
-            <div class="cat-kicker">Card Catalogue</div>
-            <h2>Volumes on the shelf</h2>
-          </div>
-          <button class="icon-btn" id="cat-close" type="button" aria-label="Close catalogue">✕</button>
-        </div>
-        <ul class="cat-list" id="cat-list"></ul>
-        <div class="cat-foot" id="cat-foot"></div>
-      </aside>
-
-      <div class="toast" id="toast" role="status" aria-live="polite"></div>
-    </section>
-
-    <div id="portal-cert-banner" class="portal-cert-banner" hidden>
-      <div class="portal-cert-content">
-        <span class="portal-cert-seal">🏆</span>
-        <div>
-          <h3>All 11 Sittings Completed</h3>
-          <p>You have mastered the historicist prophetic chain from Babylon to the Judgment. Confirm your name to download your verified certificate of completion.</p>
-        </div>
-        <button type="button" onclick="if(window.StudyCertificate)window.StudyCertificate.open()" class="portal-btn-cert">
-          Download Certificate &rarr;
-        </button>
-      </div>
-    </div>
-  </section>
-
   <div class="sitting-shell">
     <div id="sitting-spine" class="sitting-spine" role="status">
-      <button type="button" id="btn-back-to-portal" class="spine-catalog-btn" title="Return to All Lessons List">
-        &larr; All Lessons
-      </button>
+      <a id="btn-back-to-portal" class="spine-catalog-btn" href="index.html" title="Back to the shelf">&larr; The Shelf</a>
       <span aria-hidden="true">&bull;</span>
       <b id="spine-empire">Gold kingdom</b>
       <span aria-hidden="true">&bull;</span>
@@ -10166,7 +9501,7 @@
           <li><button type="button" data-path="tasks">2 · Questions</button></li>
           <li><button type="button" data-path="next">3 · Next lesson</button></li>
         </ol>
-        <p class="sitting-path-hint" id="sitting-path-hint">Read the excerpt, sources, and Christology plaque. Open the Map and 3D Gallery, then answer the questions.</p>
+        <p class="sitting-path-hint" id="sitting-path-hint">Read the lesson. Three checkpoints sit in the pages, before the final questions.</p>
       </nav>
       <div class="mt-5 flex flex-wrap gap-2 text-xs font-mono">
         <button type="button" id="btn-jump-bible-notice" onclick="const n=document.getElementById('lesson-bible-notice');if(n)n.scrollIntoView({behavior:'smooth',block:'start'})" class="px-3 py-1.5 rounded border border-amber-500/60 bg-amber-500/15 text-amber-800 dark:text-amber-300 font-semibold hover:bg-amber-500/25 transition-colors" title="Jump to Bible on Hand Notice">📖 Bible Notice</button>
@@ -10283,7 +9618,7 @@
         <div class="flex items-center justify-between mb-6">
           <div class="flex items-center space-x-2">
             <span class="w-2.5 h-2.5 rounded-full bg-amber-600 dark:bg-amber-400"></span>
-            <span class="font-mono text-xs uppercase tracking-widest text-ink-600 dark:text-paper-400 font-semibold">
+            <span id="quiz-kicker" class="font-mono text-xs uppercase tracking-widest text-ink-600 dark:text-paper-400 font-semibold">
               Checkpoint &bull; Active Recall
             </span>
           </div>
@@ -10292,10 +9627,10 @@
           </span>
         </div>
 
-        <h3 class="font-serif text-2xl font-bold text-ink-900 dark:text-paper-100 mb-2">
+        <h3 id="quiz-title" class="font-serif text-2xl font-bold text-ink-900 dark:text-paper-100 mb-2">
           Consolidate Prophetic Understanding
         </h3>
-        <p class="font-sans text-sm text-ink-600 dark:text-paper-400 mb-8 leading-relaxed">
+        <p id="quiz-lead" class="font-sans text-sm text-ink-600 dark:text-paper-400 mb-8 leading-relaxed">
           Active recall cements prophetic dates and biblical theology into permanent memory. Test your comprehension before unlocking the next sheet:
         </p>
 
@@ -10329,7 +9664,7 @@
         "And he said unto me, Unto two thousand and three hundred days; then shall the sanctuary be cleansed." &mdash; Daniel 8:14
       </p>
       <p class="font-mono text-[11px] text-ink-400 dark:text-paper-600">
-        The Scroll of Daniel &bull; Historicist Codex &bull; The Year-Day Principle &bull; Prophetic Timeline & Historicist Study
+        The Shelf of Daniel &bull; Historicist Codex &bull; The Year-Day Principle &bull; Prophetic Timeline & Historicist Study
       </p>
     </div>
   </footer>
@@ -10430,9 +9765,9 @@
   <script src="js/study/sheet-glossary.js"></script>
   <script src="js/study/certificate.js"></script>
   <script src="js/study/mindmap.js"></script>
+  <script src="js/study/book-reader.js"></script>
   <script src="js/study/study-app.js"></script>
   <script src="js/study/lesson-player.js"></script>
   <script src="js/study/audio-orb.js"></script>
-  <script type="module" src="js/home/shelf.js"></script>
 </body>
 </html>

@@ -5,12 +5,11 @@ import { ensureServer } from './_server.mjs';
 
 fs.mkdirSync(path.join('qa', 'proofs'), { recursive: true });
 
-async function enterSittingFromShelf(page, index) {
-  await page.evaluate((i) => document.querySelectorAll('#cat-list .cat-item')[i].click(), index);
-  await page.waitForFunction(() => document.getElementById('sitting-portal-view').hidden || document.getElementById('shelf-stage').classList.contains('is-open'), null, { timeout: 60000 });
-  const volumeIsOpen = await page.evaluate(() => !document.getElementById('sitting-portal-view').hidden);
-  if (volumeIsOpen) await page.evaluate(() => document.getElementById('d-go').click());
-  await page.waitForFunction(() => document.getElementById('sitting-portal-view').hidden, null, { timeout: 20000 }).catch(() => {});
+async function dismissGuide(page) {
+  if (await page.locator('#sitting-guide-primary').isVisible().catch(() => false)) {
+    await page.locator('#sitting-guide-primary').click();
+    await page.waitForTimeout(300);
+  }
 }
 
 async function run() {
@@ -26,28 +25,21 @@ async function run() {
   page.on('console', msg => {
     if (msg.type() === 'error') {
       const txt = msg.text();
-      // Ignore normal favicon 404 or cloudflare beacon if offline
       if (!txt.includes('favicon.ico') && !txt.includes('cloudflareinsights')) {
         consoleErrors.push(txt);
       }
     }
   });
+  page.on('pageerror', err => consoleErrors.push(`pageerror: ${err.message}`));
 
   try {
-    console.log('\n=== Step 1: Verifying study.html initial visit presents Lessons Portal ===');
-    await page.goto(`${BASE}/study.html`, { waitUntil: 'networkidle' });
-    await page.waitForTimeout(600);
-
-    const portalVisible = await page.locator('#sitting-portal-view').isVisible();
-    console.log('   Portal visible on initial visit:', portalVisible);
-    if (!portalVisible) throw new Error('Lessons portal was not visible on initial load of study.html');
-
+    console.log('\n=== Step 1: Verifying index.html shows the shelf of eleven volumes ===');
+    await page.goto(`${BASE}/index.html`, { waitUntil: 'networkidle' });
     await page.waitForFunction(() => document.querySelectorAll('#cat-list .cat-item').length > 0, null, { timeout: 30000 });
     const cardsCount = await page.locator('#cat-list .cat-item').count();
     console.log('   Volumes on the shelf:', cardsCount);
     if (cardsCount !== 11) throw new Error(`Expected 11 volumes, got ${cardsCount}`);
 
-    console.log('\n=== Step 2: Verifying Access Control & Lock Status for Guest ===');
     const states = await page.evaluate(() => [...document.querySelectorAll('#cat-list .cat-item')].map((b) => {
       const st = b.querySelector('.cat-state');
       return st.classList.contains('locked') ? 'Locked' : st.classList.contains('done') ? 'Completed' : 'Open';
@@ -56,57 +48,59 @@ async function run() {
     if (states[0] !== 'Open' || states[1] !== 'Open' || states[2] !== 'Open') throw new Error('Sittings 0-2 should be open to a guest');
     if (states.slice(3).some((x) => x !== 'Locked')) throw new Error('Sittings 3-10 should be locked for a guest');
 
-    await page.screenshot({ path: 'qa/proofs/sitting_portal_overview.png', fullPage: false });
-    console.log('   Captured qa/proofs/sitting_portal_overview.png');
-
-    console.log('\n=== Step 3: Verifying Progress on the Shelf ===');
     const progress = (await page.locator('#progress-text').textContent()).trim();
     console.log('   Progress pill:', progress);
     if (progress !== '0 / 11 read') throw new Error(`Expected "0 / 11 read" for a new guest, got "${progress}"`);
 
-    console.log('\n=== Step 4: Verifying Transition from the Shelf into a Sitting ===');
-    await enterSittingFromShelf(page, 0);
-    await page.waitForTimeout(500);
+    const sittingTabs = await page.locator('.sh-tab[href="study.html"]').count();
+    console.log('   "The Sitting" tab links on the shelf:', sittingTabs);
+    if (sittingTabs !== 0) throw new Error('The shelf still has a "The Sitting" tab');
 
-    const portalHidden = await page.locator('#sitting-portal-view').isHidden();
-    const shellVisible = await page.locator('.sitting-shell').isVisible();
-    console.log('   Portal hidden after entering sitting:', portalHidden);
-    console.log('   Sitting shell visible:', shellVisible);
-    if (!portalHidden || !shellVisible) throw new Error('Failed to enter sitting from the shelf');
+    await page.screenshot({ path: 'qa/proofs/shelf_home_overview.png', fullPage: false });
+    console.log('   Captured qa/proofs/shelf_home_overview.png');
 
-    if (await page.locator('#sitting-guide-primary').isVisible().catch(() => false)) {
-      await page.locator('#sitting-guide-primary').click();
-      await page.waitForTimeout(300);
-    }
+    console.log('\n=== Step 2: Verifying study.html with no parameters opens straight into a sitting ===');
+    await page.goto(`${BASE}/study.html`, { waitUntil: 'networkidle' });
+    await page.waitForSelector('.sitting-shell', { state: 'visible', timeout: 30000 });
+    await dismissGuide(page);
+    const bareTitle = (await page.locator('#sheet-title').textContent()).trim();
+    const bareShell = await page.locator('.sitting-shell').isVisible();
+    const embeddedShelf = await page.evaluate(() => !!document.getElementById('shelf-stage') || !!document.getElementById('cat-list'));
+    const overviewNode = await page.evaluate(() => [...document.querySelectorAll('[id]')].some((el) => el.id.endsWith('portal-view')));
+    console.log('   Sitting shell visible:', bareShell, '| title:', bareTitle);
+    console.log('   Shelf overview embedded in the reader:', embeddedShelf, '| overview node in DOM:', overviewNode);
+    if (!bareShell || !bareTitle) throw new Error('study.html without parameters did not open a sitting');
+    if (embeddedShelf || overviewNode) throw new Error('study.html still embeds the shelf overview');
 
-    console.log('\n=== Step 5: Verifying Returning to Portal via Spine Button ===');
-    await page.locator('#btn-back-to-portal').click();
-    await page.waitForTimeout(500);
-    const portalReturnedSpine = await page.locator('#sitting-portal-view').isVisible();
-    console.log('   Returned to portal via spine "← All Lessons":', portalReturnedSpine);
-    if (!portalReturnedSpine) throw new Error('Failed to return to portal via spine button');
-
-    console.log('\n=== Step 6: Verifying Direct Sheet Navigation & Header "All Lessons" ===');
+    console.log('\n=== Step 3: Verifying study.html?sheet=1 opens sitting 1 ===');
     await page.goto(`${BASE}/study.html?sheet=1`, { waitUntil: 'networkidle' });
-    await page.waitForTimeout(500);
+    await page.waitForSelector('#sheet-article[data-sheet-index="1"]', { timeout: 30000 });
+    await dismissGuide(page);
+    const sheetTitle = (await page.locator('#sheet-title').textContent()).trim();
+    console.log('   Sitting 1 title:', sheetTitle);
+    if (!sheetTitle) throw new Error('Sitting 1 opened without a title');
 
-    const directPortalHidden = await page.locator('#sitting-portal-view').isHidden();
-    const directShellVisible = await page.locator('.sitting-shell').isVisible();
-    console.log('   Direct visit study.html?sheet=1 went straight into sitting:', directPortalHidden && directShellVisible);
-    if (!directPortalHidden || !directShellVisible) throw new Error('Direct query parameter did not open sitting directly');
-
-    if (await page.locator('#sitting-guide-primary').isVisible().catch(() => false)) {
-      await page.locator('#sitting-guide-primary').click();
-      await page.waitForTimeout(300);
-    }
-
+    console.log('\n=== Step 4: Verifying the header and spine controls link back to the shelf ===');
+    const headerLink = await page.locator('#btn-header-syllabus').evaluate((el) => ({ tag: el.tagName, href: el.getAttribute('href') }));
+    console.log('   Header shelf control:', headerLink.tag, headerLink.href);
+    if (headerLink.tag !== 'A' || !String(headerLink.href).endsWith('index.html')) throw new Error('Header shelf control is not a link to index.html');
     await page.locator('#btn-header-syllabus').click();
-    await page.waitForTimeout(500);
-    const portalReturnedHeader = await page.locator('#sitting-portal-view').isVisible();
-    console.log('   Returned to portal via header "📜 All Lessons":', portalReturnedHeader);
-    if (!portalReturnedHeader) throw new Error('Failed to return to portal via header button');
+    await page.waitForURL(/\/index\.html$/, { timeout: 30000 });
+    await page.waitForSelector('#shelf-stage', { state: 'attached', timeout: 30000 });
+    console.log('   Header link landed on the shelf:', page.url());
 
-    console.log('\n=== Step 7: Verifying Account Hub Visual Rendering ===');
+    await page.goto(`${BASE}/study.html?sheet=1`, { waitUntil: 'networkidle' });
+    await page.waitForSelector('#sheet-article[data-sheet-index="1"]', { timeout: 30000 });
+    await dismissGuide(page);
+    const spineLink = await page.locator('#btn-back-to-portal').evaluate((el) => ({ tag: el.tagName, href: el.getAttribute('href') }));
+    console.log('   Spine shelf control:', spineLink.tag, spineLink.href);
+    if (spineLink.tag !== 'A' || !String(spineLink.href).endsWith('index.html')) throw new Error('Spine shelf control is not a link to index.html');
+    await page.locator('#btn-back-to-portal').click();
+    await page.waitForURL(/\/index\.html$/, { timeout: 30000 });
+    await page.waitForSelector('#shelf-stage', { state: 'attached', timeout: 30000 });
+    console.log('   Spine link landed on the shelf:', page.url());
+
+    console.log('\n=== Step 5: Verifying Account Hub Visual Rendering ===');
     await page.goto(`${BASE}/account.html`, { waitUntil: 'networkidle' });
     await page.waitForTimeout(500);
     const accountHub = await page.locator('#account-hub').isVisible();
@@ -115,7 +109,7 @@ async function run() {
     await page.screenshot({ path: 'qa/proofs/account_hub_proof.png' });
     console.log('   Captured qa/proofs/account_hub_proof.png');
 
-    console.log('\n=== Step 8: Verifying Insights Hub Visual Rendering ===');
+    console.log('\n=== Step 6: Verifying Insights Hub Visual Rendering ===');
     await page.goto(`${BASE}/insights.html`, { waitUntil: 'networkidle' });
     await page.waitForTimeout(500);
     const insightsMain = await page.locator('.insights-main').isVisible();
@@ -124,7 +118,7 @@ async function run() {
     await page.screenshot({ path: 'qa/proofs/insights_hub_proof.png' });
     console.log('   Captured qa/proofs/insights_hub_proof.png');
 
-    console.log('\n=== Step 9: Verifying Uncaught Console Errors ===');
+    console.log('\n=== Step 7: Verifying Uncaught Console Errors ===');
     console.log('   Uncaught console errors count:', consoleErrors.length);
     if (consoleErrors.length > 0) {
       console.error('   Uncaught errors:', consoleErrors);
@@ -136,7 +130,7 @@ async function run() {
   }
 
   console.log('\n============================================================');
-  console.log('  ALL PORTAL, HUBS, AND ACCESS TESTS PASSED PERFECTLY (0 ERRORS)');
+  console.log('  ALL SHELF, READER, HUBS, AND ACCESS TESTS PASSED (0 ERRORS)');
   console.log('============================================================\n');
 }
 

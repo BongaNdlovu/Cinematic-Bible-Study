@@ -242,7 +242,7 @@ Sanctuary Cleansed (Dan 8:14)</pre>
 
 <div class="next-sitting-card">
   <p class="next-sitting-kicker">Course completion</p>
-  <h4>The Scroll of Daniel is Complete</h4>
+  <h4>The Shelf of Daniel is Complete</h4>
   <p>You have traveled the unbroken prophetic highway from the golden head of Babylon to the resurrection of the dead: the four world empires, the fiery furnace, the tree vision, Belshazzar's feast, the lions' den, the four beasts, the sanctuary cleansed in 1844, the 70 weeks anchored at Calvary, and Michael standing up in royal glory. Stand faithful until the end of the days!</p>
 </div>
 '''

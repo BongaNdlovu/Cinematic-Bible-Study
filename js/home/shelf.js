@@ -1110,7 +1110,7 @@ async function startRoom() {
   const _e = new THREE.Euler(), _q = new Q(), _v = new V3(), _w = new V3();
 
   /* ---- Renderer ---- */
-  const renderer = new THREE.WebGLRenderer({ canvas: glCanvas, antialias: true, powerPreference: 'high-performance' });
+  const renderer = new THREE.WebGLRenderer({ canvas: glCanvas, antialias: !LOWQ, powerPreference: 'high-performance' });
   const DPR = Math.min(window.devicePixelRatio || 1, LOWQ ? 1.5 : 2);
   renderer.setPixelRatio(DPR);
   renderer.setSize(stageW(), stageH(), false);
@@ -1119,6 +1119,7 @@ async function startRoom() {
   renderer.toneMappingExposure = 1.05;
   renderer.shadowMap.enabled = true;
   renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+  renderer.shadowMap.autoUpdate = false;
   const ANISO = Math.min(8, renderer.capabilities.getMaxAnisotropy());
 
   const scene = new THREE.Scene();
@@ -1178,6 +1179,7 @@ async function startRoom() {
   key.shadow.bias = -0.0006;
   key.shadow.normalBias = 0.02;
   scene.add(key, key.target);
+  lamp.shadow.autoUpdate = key.shadow.autoUpdate = false;
   const glint = new THREE.SpotLight('#fff3dc', 0, 26, 0.75, 0.9, 0);
   scene.add(glint, glint.target);
   const rim = new THREE.SpotLight('#ffc98a', 0, 34, 0.7, 0.8, 0);
@@ -1395,7 +1397,7 @@ async function startRoom() {
     const b = {
       i, v, H, T, W, root, pivot, front, back, pages, spineMat, clothMat, paperMat, all,
       x: cx, zc: spineFront - (W / 2 + bulge * T / 2), yawJ: (jr() - 0.5) * 0.02, rollJ: (jr() - 0.5) * 0.008,
-      hover: 0, lean: 0, open: 0, mode: 'shelf', seq: null, hi: null,
+      hover: 0, lean: 0, open: 0, mode: 'shelf', seq: null, hi: null, sig: 0,
       pos: new V3(), quat: new Q()
     };
     shelfPose(b, b.pos, b.quat);
@@ -1452,9 +1454,7 @@ async function startRoom() {
     const half = [[0.32, 0], [0.9, 0.5], [1.9, 1.4], [2.7, 2.6], [3.0, 3.7], [2.85, 4.7], [2.3, 5.5], [2.05, 6.0]];
     for (let k = half.length - 1; k >= 0; k--) prof.push(new THREE.Vector2(half[k][0], -half[k][1]));
     for (let k = 1; k < half.length; k++) prof.push(new THREE.Vector2(half[k][0], half[k][1]));
-    const glassMat = LOWQ
-      ? new THREE.MeshPhysicalMaterial({ color: '#ffffff', roughness: 0.05, transparent: true, opacity: 0.22, envMapIntensity: 2 })
-      : new THREE.MeshPhysicalMaterial({ color: '#fff8ee', roughness: 0.04, transmission: 1, thickness: 0.4, ior: 1.46, envMapIntensity: 1.6 });
+    const glassMat = new THREE.MeshPhysicalMaterial({ color: '#ffffff', roughness: 0.05, transparent: true, opacity: 0.22, envMapIntensity: 2 });
     const glass = new THREE.Mesh(new THREE.LatheGeometry(prof, 48), glassMat);
     glass.position.y = 6.9;
     hg.add(glass);
@@ -1625,6 +1625,7 @@ async function startRoom() {
       light.shadow.camera.near = 0.6;
       light.shadow.camera.far = 95;
       light.shadow.bias = -0.003;
+      light.shadow.autoUpdate = false;
     }
     g.add(light);
     return {
@@ -1756,14 +1757,24 @@ async function startRoom() {
      ================================================================= */
   const HI_CAP = LOWQ ? 3 : 6;
   const hiOrder = [];
-  function buildHi(b) {
-    if (b.hi) { hiOrder.splice(hiOrder.indexOf(b), 1); hiOrder.push(b); return; }
+  const hiJobs = [];
+  function touchHi(b) {
+    const k = hiOrder.indexOf(b);
+    if (k >= 0) hiOrder.splice(k, 1);
+    hiOrder.push(b);
+  }
+  function* hiSteps(b) {
     const v = b.v, cw = Math.round(b.W * PXC), ch = Math.round(b.H * PXC);
     const f = paintFront(v, cw, ch);
+    yield;
     const bk = paintBack(v, Math.round(cw * 0.8), Math.round(ch * 0.8));
+    yield;
     const e1 = paintEndpaper(v, Math.round(cw * 0.8), Math.round(ch * 0.8), 'right', true);
+    yield;
     const e2 = paintEndpaper(v, Math.round(cw * 0.5), Math.round(ch * 0.5), 'left', false);
+    yield;
     const tp = paintTitlePage(v, Math.round(cw * 0.8), Math.round(ch * 0.8));
+    yield;
     const sheen = b.clothMat.sheenColor;
     const mkFoil = (s) => new THREE.MeshPhysicalMaterial({
       map: tex(s.col, true), roughnessMap: tex(s.orm), metalnessMap: tex(s.orm), bumpMap: tex(s.bump), bumpScale: 0.9,
@@ -1776,10 +1787,15 @@ async function startRoom() {
       title: new THREE.MeshStandardMaterial({ map: tex(tp, true), roughness: 0.94 })
     };
     if (!can(b.i)) for (const k of ['front', 'back']) hi[k].color.setScalar(0.62);
+    yield;
+    for (const m of Object.values(hi)) {
+      for (const k of ['map', 'roughnessMap', 'metalnessMap', 'bumpMap']) {
+        if (m[k]) { renderer.initTexture(m[k]); yield; }
+      }
+    }
     b.front.material[4] = hi.front; b.front.material[5] = hi.endF;
     b.back.material[5] = hi.back; b.back.material[4] = hi.endB;
     b.pages.material[4] = hi.title;
-    for (const m of Object.values(hi)) for (const k of ['map', 'roughnessMap', 'bumpMap']) if (m[k]) renderer.initTexture(m[k]);
     b.hi = hi;
     hiOrder.push(b);
     while (hiOrder.length > HI_CAP) {
@@ -1787,6 +1803,36 @@ async function startRoom() {
       if (!old) break;
       hiOrder.splice(hiOrder.indexOf(old), 1);
       dropHi(old);
+    }
+  }
+  function buildHi(b) {
+    if (b.hi) { touchHi(b); return; }
+    const k = hiJobs.findIndex((j) => j.b === b);
+    if (k >= 0) hiJobs.splice(k, 1);
+    const g = hiSteps(b);
+    let r = g.next();
+    while (!r.done) r = g.next();
+  }
+  function scheduleHi(b, urgent) {
+    if (b.hi) { touchHi(b); return; }
+    const k = hiJobs.findIndex((j) => j.b === b);
+    if (k >= 0) {
+      if (urgent && k > 0) hiJobs.unshift(hiJobs.splice(k, 1)[0]);
+      return;
+    }
+    const job = { b, gen: hiSteps(b) };
+    if (urgent) hiJobs.unshift(job); else hiJobs.push(job);
+  }
+  function pumpHi() {
+    if (!hiJobs.length) return;
+    const sq = selected >= 0 ? books[selected].seq : null;
+    const burst = !!sq && sq.type === 'pull' && sq.t < (PULL.A + PULL.B) / 2 && hiJobs[0].b === books[selected];
+    for (let s = 0, n = burst ? 2 : 1; s < n && hiJobs.length; s++) {
+      const job = hiJobs[0];
+      if (job.b.hi) { hiJobs.shift(); continue; }
+      let r;
+      try { r = job.gen.next(); } catch (e) { hiJobs.shift(); console.warn('[shelf] cover build failed', e); continue; }
+      if (r.done) hiJobs.shift();
     }
   }
   function dropHi(b) {
@@ -1800,13 +1846,15 @@ async function startRoom() {
     }
     b.hi = null;
   }
-  const idle = window.requestIdleCallback || ((fn) => setTimeout(fn, 120));
-  function prefetch(i) { if (i < 0 || i >= N || books[i].hi) return; idle(() => { if (!books[i].hi) buildHi(books[i]); }); }
+  function prefetch(i) { if (i < 0 || i >= N || books[i].hi) return; scheduleHi(books[i], false); }
 
   /* =================================================================
      Interaction
      ================================================================= */
   let hovered = -1, focusIdx = -1, lastHoverSound = -1;
+  let lastInput = performance.now();
+  const noteInput = () => { lastInput = performance.now(); };
+  for (const ev of ['pointerdown', 'pointermove', 'wheel', 'keydown']) document.addEventListener(ev, noteInput, { capture: true, passive: true });
   const pointer = new THREE.Vector2(0, 0), pointerS = new THREE.Vector2(0, 0);
   const ray = new THREE.Raycaster();
   let intro = 0;
@@ -1824,11 +1872,12 @@ async function startRoom() {
 
   function pull(i) {
     if (i === selected) return;
+    noteInput();
     if (selected >= 0) sendBack(selected);
     selected = i;
     focusIdx = i;
     const b = books[i];
-    buildHi(b);
+    scheduleHi(b, true);
     prefetch(i + 1); prefetch(i - 1);
     view = 'cover';
     zoom = 1;
@@ -1851,6 +1900,7 @@ async function startRoom() {
   }
   function put() {
     if (selected < 0) return;
+    noteInput();
     sendBack(selected);
     candleRig.gust = 0.8;
     foley('return');
@@ -1917,7 +1967,7 @@ async function startRoom() {
       if (selected < 0) {
         if (h !== hovered) {
           hovered = h;
-          if (h >= 0) { focusIdx = h; if (lastHoverSound !== h) foley('hover'); lastHoverSound = h; prefetch(h); }
+          if (h >= 0) { focusIdx = h; if (lastHoverSound !== h) foley('hover'); lastHoverSound = h; prefetch(h); prefetch(h - 1); prefetch(h + 1); }
         }
       }
       glCanvas.classList.toggle('is-pointer', h >= 0 && h !== selected);
@@ -1981,7 +2031,9 @@ async function startRoom() {
      ================================================================= */
   const ease = {
     io3: (t) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2),
+    out2: (t) => 1 - (1 - t) * (1 - t),
     out3: (t) => 1 - Math.pow(1 - t, 3),
+    out4: (t) => 1 - Math.pow(1 - t, 4),
     sine: (t) => -(Math.cos(Math.PI * t) - 1) / 2
   };
   const P = { a: new V3(), b: new V3(), c: new V3(), q: new Q(), sp: new V3(), sq: new Q() };
@@ -1990,6 +2042,11 @@ async function startRoom() {
     (1 - t) * (1 - t) * a.y + 2 * (1 - t) * t * c.y + t * t * b.y,
     (1 - t) * (1 - t) * a.z + 2 * (1 - t) * t * c.z + t * t * b.z);
   const SPEED = REDUCED ? 3 : 1;
+  const PULL = { A: 0.24, B: 0.8 }, RET = { A: 0.42, B: 0.3 };
+  function poseSig(b) {
+    const p = b.root.position, q = b.root.quaternion;
+    return p.x + p.y + p.z + q.x + q.y + q.z + q.w + b.open;
+  }
 
   function updateBook(b, dt, t) {
     const out = selected >= 0 && books[selected].mode !== 'shelf';
@@ -2002,37 +2059,37 @@ async function startRoom() {
       shelfPose(b, b.pos, b.quat);
     } else if (b.mode === 'present') {
       presentPose(b, P.a, P.q, t);
-      const k = 1 - Math.exp(-7 * dt);
+      const k = 1 - Math.exp(-(dragging ? 28 : 9) * dt);
       b.pos.lerp(P.a, k);
       b.quat.slerp(P.q, k);
     } else if (b.mode === 'seq') {
       const s = b.seq;
       s.t += dt * SPEED;
       if (s.type === 'pull') {
-        const A = 0.46, B = 1.4;
+        const A = PULL.A, B = PULL.B;
         P.sp.copy(s.from.pos); P.sp.z += b.W * 0.82; P.sp.y += 0.6;
         if (s.t < A) {
-          b.pos.lerpVectors(s.from.pos, P.sp, ease.io3(s.t / A));
+          b.pos.lerpVectors(s.from.pos, P.sp, ease.out3(s.t / A));
           b.quat.copy(s.from.quat);
         } else {
-          const k = Math.min(1, (s.t - A) / B), e = ease.io3(k);
+          const k = Math.min(1, (s.t - A) / B), e = ease.out3(k);
           presentPose(b, P.b, P.q, t);
           P.c.lerpVectors(P.sp, P.b, 0.5); P.c.y += 7; P.c.z += 5;
           bez(b.pos, P.sp, P.c, P.b, e);
-          b.quat.slerpQuaternions(s.from.quat, P.q, ease.sine(k));
+          b.quat.slerpQuaternions(s.from.quat, P.q, ease.out3(Math.min(1, k * 1.12)));
           if (k >= 1) { b.mode = 'present'; b.seq = null; }
         }
       } else {
-        const A = 1.0, B = 0.48;
-        const lean0 = b.lean, hov0 = b.hover; b.lean = 0; b.hover = 0;
+        const A = RET.A, B = RET.B;
+        const hov0 = b.hover; b.hover = 0;
         shelfPose(b, P.a, P.sq);
-        b.lean = lean0; b.hover = hov0;
+        b.hover = hov0;
         P.sp.copy(P.a); P.sp.z += b.W * 0.82; P.sp.y += 0.6;
         if (s.t < A) {
-          const k = s.t / A, e = ease.io3(k);
+          const k = s.t / A, e = ease.out3(k);
           P.c.lerpVectors(s.from.pos, P.sp, 0.5); P.c.y += 6; P.c.z += 4;
           bez(b.pos, s.from.pos, P.c, P.sp, e);
-          b.quat.slerpQuaternions(s.from.quat, P.sq, ease.sine(k));
+          b.quat.slerpQuaternions(s.from.quat, P.sq, ease.out3(k));
         } else {
           const k = Math.min(1, (s.t - A) / B);
           b.pos.lerpVectors(P.sp, P.a, ease.out3(k));
@@ -2075,15 +2132,81 @@ async function startRoom() {
   }
 
   let simT = 0;
+  let shadowSettle = 3, shadowTick = 0, keyWasOn = false, introDone = false;
+  let pendingDt = 0, skipToggle = false;
+  function requestShadows(light) {
+    if (!light.castShadow) return;
+    light.shadow.needsUpdate = true;
+    renderer.shadowMap.needsUpdate = true;
+  }
+  const DPR_MIN = Math.min(DPR, 1);
+  let dprCur = DPR, fastWins = 0, lastDprAt = -Infinity, frameN = 0;
+  const frameRing = new Float64Array(60);
+  function setDpr(v) {
+    dprCur = v;
+    renderer.setPixelRatio(dprCur);
+    renderer.setSize(stageW(), stageH(), false);
+    if (composer) { composer.setPixelRatio(dprCur); composer.setSize(stageW(), stageH()); }
+  }
+  function governor(raw) {
+    frameRing[frameN % 60] = raw;
+    frameN++;
+    if (frameN % 60 !== 0 || window.__shelfGovernorOff === true) return;
+    if (intro < introLen || books.some((b) => b.mode === 'seq')) { fastWins = 0; return; }
+    const sorted = Array.from(frameRing).sort((a, b) => a - b);
+    const med = (sorted[29] + sorted[30]) / 2;
+    const now = performance.now();
+    if (med > 0.026 && dprCur > DPR_MIN) {
+      if (now - lastDprAt >= 3000) { lastDprAt = now; setDpr(Math.max(DPR_MIN, dprCur - 0.25)); }
+      fastWins = 0;
+    } else if (med < 0.0185 && dprCur < DPR) {
+      fastWins++;
+      if (fastWins >= 4 && now - lastDprAt >= 3000) { lastDprAt = now; fastWins = 0; setDpr(Math.min(DPR, dprCur + 0.25)); }
+    } else fastWins = 0;
+  }
+  function isIdle() {
+    return intro >= introLen && shadowSettle === 0 && selected < 0 && hiJobs.length === 0 && !document.hidden &&
+      !books.some((b) => b.mode === 'seq') && performance.now() - lastInput > 4000;
+  }
   function loop() {
     if (!running) return;
     rafId = requestAnimationFrame(loop);
-    const dt = Math.min(clock.getDelta(), 0.05);
+    const raw = clock.getDelta();
     if (window.__shelf && window.__shelf.frozen) return;
+    governor(raw);
+    pendingDt += Math.min(raw, 0.05);
+    skipToggle = !skipToggle;
+    if (skipToggle && isIdle()) return;
+    const dt = pendingDt;
+    pendingDt = 0;
     update(dt);
     render();
+    pumpHi();
   }
   function render() { if (composer) composer.render(); else renderer.render(scene, camera); }
+  function booksPoseChanged() {
+    let moving = false;
+    for (const b of books) {
+      const s = poseSig(b);
+      if (Math.abs(s - b.sig) > 1e-4) moving = true;
+      b.sig = s;
+    }
+    return moving;
+  }
+  function refreshShadows(fast, slow) {
+    if (!introDone && intro >= introLen) { introDone = true; shadowSettle = 3; }
+    const busy = fast || slow;
+    if (busy) shadowSettle = 3;
+    const settle = !busy && shadowSettle > 0;
+    if (settle) shadowSettle--;
+    shadowTick++;
+    const lampNow = settle || (busy && shadowTick % (fast ? 1 : 2) === 0);
+    const candleNow = settle || (busy && shadowTick % (fast ? 2 : 4) === 0);
+    if (lampNow) requestShadows(lamp);
+    if (key.visible && (lampNow || !keyWasOn)) requestShadows(key);
+    keyWasOn = key.visible;
+    if (candleNow) requestShadows(candleRig.light);
+  }
   function update(dt) {
     simT += dt;
     const t = simT;
@@ -2109,7 +2232,7 @@ async function startRoom() {
       cam.tLook.x += pointerS.x * k * 0.3; cam.tLook.y += pointerS.y * k * 0.2;
     }
     if (!REDUCED) cam.tPos.y += Math.sin(t * 0.23) * 0.25;
-    const camRate = ip < 1 ? 0.9 : 2.0;
+    const camRate = ip < 1 ? 0.9 : (selected >= 0 ? 3.4 : 2.6);
     cam.pos.x = damp(cam.pos.x, cam.tPos.x, camRate, dt); cam.pos.y = damp(cam.pos.y, cam.tPos.y, camRate, dt); cam.pos.z = damp(cam.pos.z, cam.tPos.z, camRate, dt);
     cam.look.x = damp(cam.look.x, cam.tLook.x, camRate, dt); cam.look.y = damp(cam.look.y, cam.tLook.y, camRate, dt); cam.look.z = damp(cam.look.z, cam.tLook.z, camRate, dt);
     camera.position.copy(cam.pos);
@@ -2117,6 +2240,9 @@ async function startRoom() {
     camera.updateMatrixWorld();
 
     for (const b of books) updateBook(b, dt, t);
+    const moving = booksPoseChanged();
+    const fast = books.some((b) => b.mode === 'seq');
+    const slow = selected >= 0 || moving;
 
     // Lights
     const presenting = selected >= 0;
@@ -2188,6 +2314,7 @@ async function startRoom() {
     glint.intensity = 1.7 * keyLevel;
     rim.intensity = 3.2 * keyLevel;
     key.visible = keyLevel > 0.01; glint.visible = rim.visible = key.visible;
+    refreshShadows(fast, slow);
 
     // Dust
     if (DUST) {
@@ -2222,11 +2349,25 @@ async function startRoom() {
 
   setLoader(1, 'Lighting the lamp…');
   await nextFrame();
+  buildHi(books[continueIndex()]);
+  const warmed = [];
+  scene.traverse((o) => {
+    if (!(o.isMesh || o.isPoints || o.isSprite)) return;
+    warmed.push([o, o.visible, o.frustumCulled]);
+    o.visible = true; o.frustumCulled = false;
+  });
+  for (const on of [true, false]) {
+    key.visible = glint.visible = rim.visible = on;
+    requestShadows(lamp); requestShadows(key); requestShadows(candleRig.light);
+    render();
+  }
+  for (const [o, vis, culled] of warmed) { o.visible = vis; o.frustumCulled = culled; }
+  key.visible = glint.visible = rim.visible = false;
   renderer.compile(scene, camera);
   loop();
 
   api = { pull, put, step, setView: (v) => setView(v), focusStep, focused: () => focusIdx };
-  window.__shelf = { books, camera, scene, renderer, api, state: () => ({ running, stageInView, tabVisible, rafId }), advance(sec) { for (let k = 0; k < sec * 60; k++) update(1 / 60); render(); } };
+  window.__shelf = { books, camera, scene, renderer, api, state: () => ({ running, stageInView, tabVisible, rafId, dpr: dprCur }), advance(sec) { for (let k = 0; k < sec * 60; k++) { update(1 / 60); pumpHi(); } render(); } };
 
   // Warm a few covers in the background
   setTimeout(() => { prefetch(continueIndex()); }, 1800);

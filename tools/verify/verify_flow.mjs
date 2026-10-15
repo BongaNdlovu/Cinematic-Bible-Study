@@ -62,6 +62,15 @@ const shot = async (page, name) => {
   return `${name}.png`;
 };
 
+async function openSittingInPage(page, index) {
+  await page.evaluate((i) => {
+    const drawer = document.getElementById('toc-drawer');
+    if (drawer.classList.contains('-translate-x-full')) window.toggleTocDrawer();
+    document.querySelectorAll('#toc-unit-list button')[i].click();
+    if (!drawer.classList.contains('-translate-x-full')) window.toggleTocDrawer();
+  }, index);
+}
+
 const browser = await chromium.launch();
 try {
   const context = await browser.newContext({ viewport: { width: 1600, height: 950 }, deviceScaleFactor: 1 });
@@ -179,9 +188,7 @@ async function openSheet(page, sheet) {
   await page.waitForTimeout(1200);
   await dismissOverlays(page);
   if (sheet !== 0) {
-    await page.evaluate((index) => {
-      if (window.openSittingFromPortal) window.openSittingFromPortal(index);
-    }, sheet);
+    await openSittingInPage(page, sheet);
     await page.waitForTimeout(1800);
     await dismissOverlays(page);
   }

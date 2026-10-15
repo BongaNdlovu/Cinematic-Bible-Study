@@ -6211,7 +6211,7 @@ then 1844: 2,300-year sanctuary landing (sitting 8)</pre>
 
 <div class="next-sitting-card">
   <p class="next-sitting-kicker">Course completion</p>
-  <h4>The Scroll of Daniel is Complete</h4>
+  <h4>The Shelf of Daniel is Complete</h4>
   <p>You have traveled the unbroken prophetic highway from the golden head of Babylon to the resurrection of the dead: the four world empires, the fiery furnace, the tree vision, Belshazzar's feast, the lions' den, the four beasts, the sanctuary cleansed in 1844, the 70 weeks anchored at Calvary, and Michael standing up in royal glory. Stand faithful until the end of the days!</p>
 </div>
         `,
@@ -6355,7 +6355,7 @@ then 1844: 2,300-year sanctuary landing (sitting 8)</pre>
             do: [
               "Follow Introduction and Main Points I–V plus Practical Application.",
               "Open Map and trace the Tigris River, the march of empires, and Michael standing up.",
-              "Complete checkpoint questions, and review your mastery across the entire Scroll of Daniel."
+              "Complete checkpoint questions, and review your mastery across the entire Shelf of Daniel."
             ]
           },
           end: {

@@ -56,6 +56,15 @@ const leavesOf = (step) => {
   return out;
 };
 
+async function openSittingInPage(page, index) {
+  await page.evaluate((i) => {
+    const drawer = document.getElementById('toc-drawer');
+    if (drawer.classList.contains('-translate-x-full')) window.toggleTocDrawer();
+    document.querySelectorAll('#toc-unit-list button')[i].click();
+    if (!drawer.classList.contains('-translate-x-full')) window.toggleTocDrawer();
+  }, index);
+}
+
 const browser = await chromium.launch();
 try {
   /* - 1. desktop: structure, copy, order, keyboard, themes ---- */
@@ -84,7 +93,7 @@ try {
     return article ? article.getAttribute('data-sheet-index') : null;
   });
   if (sheetIndex !== '2') {
-    await page.evaluate(() => { if (window.openSittingFromPortal) window.openSittingFromPortal(2); });
+    await openSittingInPage(page, 2);
     await page.waitForTimeout(2200);
     await dismissOverlays(page);
   }
@@ -473,10 +482,10 @@ try {
      rebuilt from scratch when the sitting comes back. */
   await page.setViewportSize({ width: 1440, height: 1000 });
   const replaysBefore = await page.evaluate(() => document.querySelectorAll('#sheet-article [data-chain-replay]').length);
-  await page.evaluate(() => window.openSittingFromPortal && window.openSittingFromPortal(1));
+  await openSittingInPage(page, 1);
   await page.waitForTimeout(1800);
   const away = await page.evaluate(() => document.querySelectorAll('#sheet-article .mm').length);
-  await page.evaluate(() => window.openSittingFromPortal && window.openSittingFromPortal(2));
+  await openSittingInPage(page, 2);
   await page.waitForTimeout(2200);
   const back = await page.evaluate(() => {
     const fig = document.querySelector('figure[data-diagram="s2-3"]');
@@ -637,7 +646,7 @@ try {
   await baselinePage.waitForTimeout(600);
   const baselineScroll = await baselinePage.evaluate(() => document.documentElement.scrollWidth);
   await baselinePage.close();
-  /* The page pins its own chrome over this viewport (the "All Lessons" bar, the
+  /* The page pins its own chrome over this viewport (the "The Shelf" bar, the
      sitting survey card and the floating insight card), so the block shot is
      supplemented by the branch that owns the four leaves. */
   await shot(mobilePage, 'figure[data-diagram="s2-3"] .mm-branch[data-mm="not-cleave"]', 'mobile-390-s2-3-branch.png');

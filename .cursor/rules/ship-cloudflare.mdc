@@ -1,0 +1,10 @@
+---
+description: Commit, push, and deploy this site to Cloudflare Pages when asked
+alwaysApply: true
+---
+
+# Ship to Cloudflare
+
+When the user asks to commit, push, deploy, ship, or publish, read and follow `.cursor/skills/ship-cloudflare/SKILL.md` before acting.
+
+Do not commit, push, or deploy unless they asked in that turn. Do not force-push `main` or `master`.

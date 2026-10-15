@@ -293,7 +293,7 @@
     ctx.fillStyle = "#6b4e16";
     ctx.font = "600 15px Inter, sans-serif";
     ctx.letterSpacing = "0.42em";
-    ctx.fillText("THE SCROLL OF DANIEL", cx, 248);
+    ctx.fillText("THE SHELF OF DANIEL", cx, 248);
     ctx.letterSpacing = "0px";
 
     ctx.fillStyle = "#1f160c";
@@ -340,7 +340,7 @@
     ctx.fillText("COURSE", CANVAS_W - 268, 962);
     ctx.fillStyle = "#2a2114";
     ctx.font = "600 22px Newsreader, Georgia, serif";
-    ctx.fillText("The Scroll of Daniel", CANVAS_W - 268, 994);
+    ctx.fillText("The Shelf of Daniel", CANVAS_W - 268, 994);
     ctx.fillStyle = "#7a684c";
     ctx.font = "italic 16px Lora, Georgia, serif";
     ctx.fillText("Gold to stone  ·  605 B.C. to the end", CANVAS_W - 268, 1024);

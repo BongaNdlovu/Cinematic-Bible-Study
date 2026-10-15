@@ -472,8 +472,8 @@
     let sittingPhase = 'study';
     const sittingVisited = { study: true, tasks: false };
     const SITTING_PATH_HINTS = {
-      study: 'Read the excerpt, sources, and Christology plaque. Open the Map and 3D Gallery, then answer the questions.',
-      tasks: 'Answer the questions, then continue to the next lesson.',
+      study: 'Read the lesson. Three checkpoints sit in the pages, before the final questions.',
+      tasks: 'Answer the final questions, then continue to the next lesson.',
       next: 'Advance when you are ready. The same path repeats on the next sheet.'
     };
 
@@ -1829,194 +1829,6 @@
       document.getElementById('toc-mastery-percent').innerText = `${pct}%`;
       document.getElementById('toc-mastery-bar').style.width = `${pct}%`;
       syncCertificateCta();
-    }
-
-    /* =========================================================================
-       4b. CINEMATIC LESSONS PORTAL (COMPLETED & INCOMPLETED LESSONS VIEW)
-       ========================================================================= */
-    const LESSON_PORTAL_ART = [
-      { img: 'assets/site/home-context.jpg', chapter: 'Prologue' },
-      { img: 'assets/site/home-ch1.jpg', chapter: 'Daniel 1' },
-      { img: 'assets/site/home-ch2.jpg', chapter: 'Daniel 2' },
-      { img: 'assets/site/home-ch3.jpg', chapter: 'Daniel 3' },
-      { img: 'assets/site/home-ch4.jpg', chapter: 'Daniel 4' },
-      { img: 'assets/site/home-ch5.jpg', chapter: 'Daniel 5' },
-      { img: 'assets/site/home-ch6.jpg', chapter: 'Daniel 6' },
-      { img: 'assets/site/home-ch7.jpg', chapter: 'Daniel 7' },
-      { img: 'assets/study/epochs/persepolis.jpg', chapter: 'Daniel 8' },
-      { img: 'assets/study/epochs/chronicle-artaxerxes-decree.jpg', chapter: 'Daniel 9' },
-      { img: 'assets/study/epochs/chronicle-sanctuary-1844.jpg', chapter: 'Daniel 10–12' }
-    ];
-
-    let portalActiveFilter = 'all';
-
-    function renderLessonsPortal() {
-      const grid = document.getElementById('portal-lessons-grid');
-      if (!grid) return;
-      grid.innerHTML = '';
-
-      const memberViewer = !!(window.ScrollAuth && typeof window.ScrollAuth.getUser === 'function' && window.ScrollAuth.getUser());
-      const maxOpenIdx = (window.BAJourney && typeof window.BAJourney.maxOpenSheet === 'function') ? window.BAJourney.maxOpenSheet() : 0;
-      const total = sheetsData.length;
-      const doneCount = completedSheets.size;
-      const pct = Math.round((doneCount / total) * 100);
-
-      // Update Header Stats
-      const progressText = document.getElementById('portal-progress-text');
-      if (progressText) progressText.textContent = `${doneCount} of ${total} Sittings Completed`;
-      const progressPct = document.getElementById('portal-progress-pct');
-      if (progressPct) progressPct.textContent = `${pct}%`;
-      const progressFill = document.getElementById('portal-progress-fill');
-      if (progressFill) progressFill.style.width = `${pct}%`;
-
-      const track = progressFill && progressFill.parentElement;
-      if (track) track.setAttribute('aria-valuenow', String(doneCount));
-
-      // Resume CTA button in header
-      const resumeBtn = document.getElementById('portal-btn-resume');
-      if (resumeBtn) {
-        const nextIdx = Math.min(maxOpenIdx, total - 1);
-        resumeBtn.textContent = doneCount > 0 ? `▶ Continue Study (Sitting ${nextIdx})` : `▶ Begin Sitting 0`;
-        resumeBtn.dataset.nextIdx = String(nextIdx);
-      }
-
-      // Counts for filter pills
-      let countCompleted = 0;
-      let countIncomplete = 0;
-      let countUnlocked = 0;
-
-      sheetsData.forEach((_, idx) => {
-        const isDone = completedSheets.has(idx);
-        const locked = !canAccessSheet(idx);
-        if (isDone) countCompleted++;
-        else countIncomplete++;
-        if (!locked) countUnlocked++;
-      });
-
-      const countCompEl = document.getElementById('portal-filter-count-completed');
-      if (countCompEl) countCompEl.textContent = String(countCompleted);
-      const countIncompEl = document.getElementById('portal-filter-count-incomplete');
-      if (countIncompEl) countIncompEl.textContent = String(countIncomplete);
-      const countUnlockEl = document.getElementById('portal-filter-count-unlocked');
-      if (countUnlockEl) countUnlockEl.textContent = String(countUnlocked);
-
-      // Certificate banner
-      const certBanner = document.getElementById('portal-cert-banner');
-      if (certBanner) certBanner.hidden = !hasCompletedCourse();
-
-      sheetsData.forEach((sheet, idx) => {
-        const isDone = completedSheets.has(idx);
-        const locked = !canAccessSheet(idx);
-        const guestWall = locked && !memberViewer;
-        const art = LESSON_PORTAL_ART[idx] || { img: 'assets/study/hero-cinematic.jpg', chapter: `Daniel Sitting ${idx}` };
-
-        // Check filter
-        if (portalActiveFilter === 'completed' && !isDone) return;
-        if (portalActiveFilter === 'incomplete' && isDone) return;
-        if (portalActiveFilter === 'unlocked' && locked) return;
-
-        const card = document.createElement('article');
-        card.className = `lesson-portal-card ${isDone ? 'is-completed' : (locked ? 'is-locked' : 'is-unlocked')}`;
-
-        const statusPill = isDone
-          ? '<span class="lesson-status-pill completed">✓ Completed</span>'
-          : (locked
-            ? (guestWall
-              ? '<span class="lesson-status-pill member">🔑 Sign-in Required</span>'
-              : '<span class="lesson-status-pill locked">🔒 Locked</span>')
-            : '<span class="lesson-status-pill unlocked">🔓 Unlocked</span>');
-
-        let actionHtml = '';
-        if (isDone) {
-          actionHtml = `<button type="button" class="lesson-portal-action-btn completed" data-open="${idx}">Review Sitting &rarr;</button>`;
-        } else if (!locked) {
-          actionHtml = `<button type="button" class="lesson-portal-action-btn unlocked" data-open="${idx}">Enter Sitting &rarr;</button>`;
-        } else if (guestWall) {
-          actionHtml = `<a href="account.html?next=${encodeURIComponent('study.html?sheet=' + idx)}" class="lesson-portal-action-btn member">Sign In to Unlock &rarr;</a>`;
-        } else {
-          actionHtml = `<button type="button" disabled class="lesson-portal-action-btn locked" title="Complete Sitting ${idx - 1} to unlock">Locked &bull; Finish Sitting ${idx - 1}</button>`;
-        }
-
-        const numPadded = idx < 10 ? '0' + idx : String(idx);
-
-        const cleanEpoch = (sheet.epoch || '').replace(/&bull;/g, '•').replace(/&mdash;/g, '—').replace(/&ndash;/g, '–');
-        const cleanScripture = (sheet.scripture ? sheet.scripture.replace(/<[^>]*>/g, '').replace(/&bull;/g, '•').replace(/&mdash;/g, '—') : '');
-
-        card.innerHTML = `
-          <div class="lesson-portal-media">
-            <img src="${art.img}" alt="${escapeStudy(sheet.title)}" loading="lazy" onerror="this.src='assets/study/hero-cinematic.jpg'">
-            <div class="lesson-portal-media-overlay"></div>
-            <div class="lesson-portal-top-bar">
-              <span class="lesson-num-pill">SITTING ${numPadded}</span>
-              ${statusPill}
-            </div>
-            <div class="lesson-portal-meta-badge">
-              <span>${escapeStudy(cleanEpoch)}</span>
-              <span>${escapeStudy(sheet.readTime)}</span>
-            </div>
-          </div>
-          <div class="lesson-portal-body">
-            <div class="lesson-portal-header-group">
-              <p class="lesson-portal-chapter">${escapeStudy(art.chapter)}</p>
-              <h3 class="lesson-portal-title">${escapeStudy(sheet.title)}</h3>
-              <p class="lesson-portal-subtitle">${escapeStudy(sheet.subtitle)}</p>
-            </div>
-            <div class="lesson-portal-footer">
-              <div class="lesson-portal-info-row">
-                <span>📖 ${escapeStudy(cleanScripture)}</span>
-                <span>${isDone ? 'Codex Verified' : (locked ? 'Prerequisite Required' : 'Ready to Begin')}</span>
-              </div>
-              ${actionHtml}
-            </div>
-          </div>
-        `;
-
-        if (!locked || isDone) {
-          card.addEventListener('click', (e) => {
-            if (e.target.closest('a')) return;
-            openSittingFromPortal(idx);
-          });
-        }
-
-        grid.appendChild(card);
-      });
-    }
-
-    function showLessonsPortal() {
-      hideSittingGuide();
-      const portal = document.getElementById('sitting-portal-view');
-      const shell = document.querySelector('.sitting-shell');
-      if (portal) portal.hidden = false;
-      if (shell) shell.style.display = 'none';
-      renderLessonsPortal();
-      try {
-        const u = new URL(location.href);
-        let changed = false;
-        ['sheet', 'id', 'section', 's'].forEach(p => {
-          if (u.searchParams.has(p)) {
-            u.searchParams.delete(p);
-            changed = true;
-          }
-        });
-        if (changed) {
-          const qs = u.searchParams.toString();
-          history.replaceState(null, '', u.pathname + (qs ? '?' + qs : '') + u.hash);
-        }
-      } catch (e) {}
-      window.scrollTo(0, 0);
-    }
-
-    function hideLessonsPortal() {
-      const portal = document.getElementById('sitting-portal-view');
-      const shell = document.querySelector('.sitting-shell');
-      if (portal) portal.hidden = true;
-      if (shell) shell.style.display = '';
-    }
-
-    function openSittingFromPortal(index) {
-      hideLessonsPortal();
-      loadSheet(index);
-      window.scrollTo(0, 0);
     }
 
     /* =========================================================================
@@ -5033,8 +4845,8 @@
 
     async function shareSitting() {
       const url = enrollmentUrl();
-      const title = 'The Scroll of Daniel';
-      const text = 'Join this sitting of the Scroll of Daniel. Open the cover, agree to the terms, and sign in to begin.';
+      const title = 'The Shelf of Daniel';
+      const text = 'Join this sitting of the Shelf of Daniel. Open the cover, agree to the terms, and sign in to begin.';
       let method = 'fallback';
       try {
         if (navigator.share) {
@@ -5165,10 +4977,34 @@
       } catch (e) {}
     }
 
+    function plainText(html) {
+      const holder = document.createElement('div');
+      holder.innerHTML = String(html || '');
+      return holder.textContent.trim();
+    }
+
+    function mountSheetBook(index, data, restore) {
+      if (!window.BookReader) return;
+      window.BookReader.mount(document.getElementById('sheet-article'), {
+        sheetIndex: index,
+        title: data.title,
+        kicker: plainText(data.epoch),
+        restore
+      });
+    }
+
     function placeReader(index, restore) {
-      const hashTarget = location.hash ? document.querySelector(location.hash) : null;
+      let hashTarget = null;
+      try { hashTarget = location.hash ? document.querySelector(location.hash) : null; } catch (e) { hashTarget = null; }
       if (hashTarget) {
-        setTimeout(() => hashTarget.scrollIntoView({ behavior: 'auto', block: 'start' }), 0);
+        setTimeout(() => {
+          const book = window.BookReader;
+          if (book && book.isActive() && book.reveal(hashTarget, { instant: true })) {
+            document.getElementById('sheet-article').scrollIntoView({ behavior: 'auto', block: 'start' });
+            return;
+          }
+          hashTarget.scrollIntoView({ behavior: 'auto', block: 'start' });
+        }, 0);
         return;
       }
       let top = 0;
@@ -5189,11 +5025,7 @@
         denyLockedSitting(index);
         return;
       }
-      const keepPortal = !!(opts && opts.keepPortal);
-      if (!keepPortal) {
-        hideLessonsPortal();
-        rememberSheetUrl(index);
-      }
+      rememberSheetUrl(index);
       currentSheetIndex = index;
       endCardShownForSheet = -1;
       hideSittingGuide();
@@ -5233,6 +5065,7 @@
       // Render Article Content
       const articleEl = document.getElementById('sheet-article');
       articleEl.setAttribute('data-sheet-index', String(index));
+      if (window.BookReader) window.BookReader.unmount();
       releaseSheetFigures(articleEl);
       articleEl.innerHTML = data.content;
       renderLessonMedia(data);
@@ -5287,10 +5120,12 @@
 
       // Render Quizzes
       renderQuiz(data.quizzes);
+      placeCheckpointPlates(data.quizzes);
       syncAdvanceButtons(index);
 
+      mountSheetBook(index, data, !!(opts && opts.restorePlace));
       placeReader(index, !!(opts && opts.restorePlace));
-      const skipIntro = (opts && opts.skipIntro) || keepPortal;
+      const skipIntro = (opts && opts.skipIntro);
       const seen = window.BAJourney && window.BAJourney.hasSeenIntro(index);
       let hasChosenTrack = false;
       try { hasChosenTrack = !!localStorage.getItem('daniel_placement_track_v1'); } catch (e) { hasChosenTrack = true; }
@@ -5321,7 +5156,7 @@
       const wbOk = !window.StudyWorkbench || window.StudyWorkbench.isSheetComplete(currentSheetIndex);
       const qOk = sheetQuizComplete();
       const ok = canAdvancePath();
-      const hint = !wbOk ? 'Complete the active proof workbench above to continue' : (!qOk ? 'Answer every checkpoint question correctly to continue' : '');
+      const hint = !wbOk ? 'Complete the active proof workbench above to continue' : (!qOk ? 'Answer the checkpoints in the lesson and the final questions to continue' : '');
       if (btn) {
         btn.disabled = !ok;
         btn.hidden = false;
@@ -5333,9 +5168,8 @@
 
     function navigateSheet(delta) {
       if (delta > 0 && !canAdvancePath()) {
-        showToast('Every checkpoint question must be answered correctly to continue.');
-        const rev = document.getElementById('workbench-section') || document.getElementById('revision-section');
-        if (rev) rev.scrollIntoView({ behavior: 'smooth' });
+        showToast('Answer the checkpoints in the lesson and the final questions to continue.');
+        revealUnfinished();
         return;
       }
       loadSheet(currentSheetIndex + delta);
@@ -5350,6 +5184,129 @@
     let quizAttemptCounts = {};
     let verifiedQuiz = {};
     let quizPending = {};
+
+    const QUIZ_COPY_DEFAULT = {
+      kicker: 'Checkpoint • Active Recall',
+      title: 'Consolidate Prophetic Understanding',
+      lead: 'Active recall cements prophetic dates and biblical theology into permanent memory. Test your comprehension before unlocking the next sheet:',
+      badgeTail: ' to Advance'
+    };
+
+    function checkpointCountFor(total) {
+      if (total < 2) return 0;
+      const finals = total >= 5 ? 2 : 1;
+      return Math.min(3, total - finals);
+    }
+
+    function spreadIndexes(slotCount, take) {
+      const picked = [];
+      if (slotCount <= 0 || take <= 0) return picked;
+      const n = Math.min(take, slotCount);
+      let prev = -1;
+      for (let k = 1; k <= n; k += 1) {
+        let idx = Math.round((k * (slotCount + 1)) / (n + 1)) - 1;
+        if (idx < 0) idx = 0;
+        if (idx > slotCount - 1) idx = slotCount - 1;
+        if (idx <= prev) idx = prev + 1;
+        picked.push(idx);
+        prev = idx;
+      }
+      return picked;
+    }
+
+    function checkpointAnchors(headers, take) {
+      let slots = headers.slice(1);
+      const intro = headers[0] && /introduction/i.test(headers[0].textContent || '');
+      if (intro && slots.length - 1 >= take) slots = slots.slice(1);
+      return spreadIndexes(slots.length, take).map((i) => slots[i]);
+    }
+
+    function setQuizCopy(copy, count) {
+      const kicker = document.getElementById('quiz-kicker');
+      const title = document.getElementById('quiz-title');
+      const lead = document.getElementById('quiz-lead');
+      const badge = document.getElementById('quiz-badge');
+      if (kicker) kicker.textContent = copy.kicker;
+      if (title) title.textContent = copy.title;
+      if (lead) lead.textContent = copy.lead;
+      if (badge) {
+        badge.textContent = count + ' Question' + (count === 1 ? '' : 's') + copy.badgeTail;
+      }
+    }
+
+    function makeCheckpointPlate(index, total, qIdx) {
+      const plate = document.createElement('section');
+      plate.className = 'checkpoint-plate';
+      plate.setAttribute('aria-label', 'Checkpoint ' + index + ' of ' + total);
+      plate.setAttribute('data-checkpoint', String(index));
+      plate.setAttribute('data-checkpoint-total', String(total));
+      plate.setAttribute('data-checkpoint-q', String(qIdx));
+      const kicker = document.createElement('p');
+      kicker.className = 'checkpoint-kicker';
+      kicker.textContent = 'Checkpoint ' + index + ' of ' + total;
+      const title = document.createElement('h3');
+      title.textContent = 'Before you turn the page';
+      const lead = document.createElement('p');
+      lead.className = 'checkpoint-lead';
+      lead.textContent = 'Answer this from the pages you just read. The final questions come after the lesson.';
+      const slot = document.createElement('div');
+      slot.className = 'checkpoint-slot';
+      plate.appendChild(kicker);
+      plate.appendChild(title);
+      plate.appendChild(lead);
+      plate.appendChild(slot);
+      return plate;
+    }
+
+    function placeCheckpointPlates(quizzes) {
+      const list = Array.isArray(quizzes) ? quizzes : [];
+      setQuizCopy(QUIZ_COPY_DEFAULT, list.length);
+      const article = document.getElementById('sheet-article');
+      if (!article || article.querySelector('.checkpoint-plate')) return;
+      const gates = checkpointCountFor(list.length);
+      const headers = Array.prototype.slice.call(article.querySelectorAll('.part-header'));
+      if (!gates || headers.length < 2) return;
+      const anchors = checkpointAnchors(headers, gates);
+      let placed = 0;
+      anchors.forEach((anchor) => {
+        const card = document.getElementById('q-card-' + placed);
+        if (!card || !anchor || !anchor.parentNode) return;
+        const plate = makeCheckpointPlate(placed + 1, anchors.length, placed);
+        plate.querySelector('.checkpoint-slot').appendChild(card);
+        anchor.parentNode.insertBefore(plate, anchor);
+        placed += 1;
+      });
+      if (!placed) return;
+      const finals = list.length - placed;
+      const word = placed === 1 ? 'checkpoint is' : 'checkpoints are';
+      setQuizCopy({
+        kicker: 'Final questions',
+        title: 'Close the sitting',
+        lead: placed + ' ' + word + ' in the lesson. These last questions finish it.',
+        badgeTail: ' to Finish'
+      }, finals);
+    }
+
+    function markCheckpoint(qIdx, flag) {
+      const plate = document.querySelector('[data-checkpoint-q="' + qIdx + '"]');
+      if (!plate) return;
+      if (flag) plate.setAttribute('data-checkpoint-passed', flag);
+      else plate.removeAttribute('data-checkpoint-passed');
+      plate.classList.remove('is-held');
+      document.dispatchEvent(new CustomEvent('checkpoint:passed'));
+    }
+
+    function revealUnfinished() {
+      const plate = document.querySelector('.checkpoint-plate:not([data-checkpoint-passed])');
+      const book = window.BookReader;
+      const article = document.getElementById('sheet-article');
+      if (plate && book && book.isActive() && book.reveal(plate, { instant: true })) {
+        if (article) article.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        return;
+      }
+      const rev = document.getElementById('revision-section') || document.getElementById('workbench-section');
+      if (rev) rev.scrollIntoView({ behavior: 'smooth' });
+    }
 
     function renderQuiz(quizzes) {
       const container = document.getElementById('quiz-container');
@@ -5476,6 +5433,7 @@
               feedback.classList.remove('hidden');
               feedback.innerHTML = `<strong>Answer checking is available to signed-in members.</strong> Sign in to check your answers, save your progress, and work toward your certificate. <a href="${accountHref}" class="font-semibold underline text-amber-800 dark:text-amber-300">Go to Account</a>`;
             }
+            markCheckpoint(qIdx, 'auth');
             updateNextGate();
             return;
           }
@@ -5491,6 +5449,7 @@
         const isCorrect = !!res.correct;
         const correctIdx = typeof res.correctIdx === 'number' ? res.correctIdx : selectedOptIdx;
         verifiedQuiz[qIdx] = isCorrect;
+        if (isCorrect) markCheckpoint(qIdx, 'true');
 
         if (window.StudyCompetency) {
           window.StudyCompetency.recordQuizAttempt(currentSheetIndex, qIdx, isCorrect);
@@ -5529,6 +5488,7 @@
       });
       const feedback = document.getElementById(`q-${qIdx}-feedback`);
       if (feedback) feedback.classList.add('hidden');
+      markCheckpoint(qIdx, '');
       updateNextGate();
     }
 
@@ -5674,9 +5634,8 @@
 
     function completeAndAdvance() {
       if (!canAdvancePath()) {
-        showToast('Every checkpoint question must be answered correctly to continue.');
-        const rev = document.getElementById('workbench-section') || document.getElementById('revision-section');
-        if (rev) rev.scrollIntoView({ behavior: 'smooth' });
+        showToast('Answer the checkpoints in the lesson and the final questions to continue.');
+        revealUnfinished();
         return;
       }
       const firstTime = !completedSheets.has(currentSheetIndex);
@@ -5707,7 +5666,7 @@
         }
       } else {
         if (!celebrationFor(finishedSheet)) {
-          showToast("Congratulations! You have mastered the entire Historicist Scroll of Daniel!");
+          showToast("Congratulations! You have mastered the entire Historicist Shelf of Daniel!");
         }
         syncCertificateCta();
         openCertificateIfReady();
@@ -5717,6 +5676,11 @@
     /* =========================================================================
        7. KEYBOARD SHORTCUTS & INITIALIZATION
        ========================================================================= */
+    document.addEventListener('bookreader:continue', () => enterSittingPhase('tasks'));
+    document.addEventListener('bookreader:held', () => {
+      showToast('Answer this checkpoint before you turn the page.');
+    });
+
     document.addEventListener('scroll', () => {
       if (sittingGuideMode !== 'end') return;
       const data = sheetsData[currentSheetIndex];
@@ -5907,47 +5871,8 @@
           window.location.href = `map.html?year=${encodeURIComponent(y)}&from=lesson&sheet=${currentSheetIndex}`;
         });
       }
-      let hasExplicitParam = false;
-      try {
-        const uParams = new URLSearchParams(window.location.search);
-        hasExplicitParam = uParams.has('sheet') || uParams.has('id') || uParams.has('section') || uParams.has('s');
-      } catch (e) {}
 
-      loadSheet(resolveStartSheet(), { restorePlace: true, keepPortal: !hasExplicitParam });
-
-      // Wiring for Sitting Tab Lessons Portal
-      const filterTabs = document.getElementById('portal-filter-tabs');
-      if (filterTabs) {
-        filterTabs.addEventListener('click', (e) => {
-          const btn = e.target.closest('button[data-filter]');
-          if (!btn) return;
-          filterTabs.querySelectorAll('button').forEach((b) => b.classList.remove('active'));
-          btn.classList.add('active');
-          portalActiveFilter = btn.dataset.filter;
-          renderLessonsPortal();
-        });
-      }
-      const resumeBtn = document.getElementById('portal-btn-resume');
-      if (resumeBtn) {
-        resumeBtn.addEventListener('click', () => {
-          const idx = Number(resumeBtn.dataset.nextIdx || 0);
-          openSittingFromPortal(idx);
-        });
-      }
-      const backToPortalBtn = document.getElementById('btn-back-to-portal');
-      if (backToPortalBtn) {
-        backToPortalBtn.addEventListener('click', showLessonsPortal);
-      }
-      const headerSyllabusBtn = document.getElementById('btn-header-syllabus');
-      if (headerSyllabusBtn) {
-        headerSyllabusBtn.addEventListener('click', showLessonsPortal);
-      }
-
-      // If user navigated to study.html directly (without specific sitting param),
-      // present the cinematic lessons overview portal first.
-      if (!hasExplicitParam) {
-        showLessonsPortal();
-      }
+      loadSheet(resolveStartSheet(), { restorePlace: true });
       let scrollSaveTimer = null;
       window.addEventListener('scroll', () => {
         if (scrollHold) return;
@@ -6088,9 +6013,6 @@
         renderToc();
         syncHorizonLocks();
         updateNextGate();
-        renderLessonsPortal();
-        const portal = document.getElementById('sitting-portal-view');
-        if (portal && !portal.hidden) return;
         const wanted = resolveStartSheet();
         if (wanted !== currentSheetIndex && canAccessSheet(wanted)) loadSheet(wanted);
       }
@@ -6108,16 +6030,8 @@
         syncHorizonLocks();
         updateNextGate();
         syncCertificateCta();
-        renderLessonsPortal();
       });
     });
-
-    window.StudyApp = {
-      showLessonsPortal,
-      hideLessonsPortal,
-      renderLessonsPortal,
-      openSitting: openSittingFromPortal
-    };
 
     Object.assign(window, {
       applyTheme,
@@ -6139,9 +6053,5 @@
       shareSitting,
       resetQuizQuestion,
       openInfographic,
-      closeInfographic,
-      showLessonsPortal,
-      hideLessonsPortal,
-      renderLessonsPortal,
-      openSittingFromPortal
+      closeInfographic
     });

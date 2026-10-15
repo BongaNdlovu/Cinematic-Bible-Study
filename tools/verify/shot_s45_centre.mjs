@@ -24,6 +24,15 @@ const MOCK = {
   session: { access_token: 't', refresh_token: 'r', expires_at: 4102444800, token_type: 'bearer' },
 };
 
+async function openSittingInPage(page, index) {
+  await page.evaluate((i) => {
+    const drawer = document.getElementById('toc-drawer');
+    if (drawer.classList.contains('-translate-x-full')) window.toggleTocDrawer();
+    document.querySelectorAll('#toc-unit-list button')[i].click();
+    if (!drawer.classList.contains('-translate-x-full')) window.toggleTocDrawer();
+  }, index);
+}
+
 const browser = await chromium.launch();
 try {
   const context = await browser.newContext({ viewport: { width: 1500, height: 1000 } });
@@ -42,7 +51,7 @@ try {
   await page.goto(`${BASE}/study.html?sheet=0&preview=full`, { waitUntil: 'domcontentloaded' });
   await page.waitForTimeout(1300);
   await page.evaluate(() => { const g = document.getElementById('sitting-guide'); if (g) g.hidden = true; });
-  await page.evaluate(() => window.openSittingFromPortal(4));
+  await openSittingInPage(page, 4);
   await page.waitForTimeout(1700);
   await page.evaluate(() => {
     const b = document.getElementById('site-error');

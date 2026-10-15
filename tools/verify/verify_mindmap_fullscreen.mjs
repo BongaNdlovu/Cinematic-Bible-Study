@@ -61,6 +61,15 @@ function check(name, ok, detail) {
 }
 const problems = [];
 
+async function openSittingInPage(page, index) {
+  await page.evaluate((i) => {
+    const drawer = document.getElementById('toc-drawer');
+    if (drawer.classList.contains('-translate-x-full')) window.toggleTocDrawer();
+    document.querySelectorAll('#toc-unit-list button')[i].click();
+    if (!drawer.classList.contains('-translate-x-full')) window.toggleTocDrawer();
+  }, index);
+}
+
 const browser = await chromium.launch();
 try {
   /* ---- 1. 1440x1000: geometry, type, features, keyboard, focus, themes ---- */
@@ -89,7 +98,7 @@ try {
     return article ? article.getAttribute('data-sheet-index') : null;
   });
   if (sheetIndex !== '2') {
-    await page.evaluate(() => { if (window.openSittingFromPortal) window.openSittingFromPortal(2); });
+    await openSittingInPage(page, 2);
     await page.waitForTimeout(2200);
     await dismissOverlays(page);
   }
@@ -489,7 +498,7 @@ try {
   await press(page, opener);
   await page.waitForTimeout(700);
   const beforeSwitch = await page.evaluate((sel) => document.querySelector(sel).classList.contains('is-full'), SEL);
-  await page.evaluate(() => window.openSittingFromPortal && window.openSittingFromPortal(1));
+  await openSittingInPage(page, 1);
   await page.waitForTimeout(1800);
   const switched = await page.evaluate(() => ({
     locked: getComputedStyle(document.documentElement).overflow,
@@ -512,7 +521,7 @@ try {
   const scrolledAfter = await page.evaluate(() => window.scrollY);
   check('the page really scrolls again after that teardown', scrolledAfter > 0, `scrollY ${switched.scrolled} \u2192 ${scrolledAfter}`);
   await page.evaluate(() => { window.scrollTo(0, 0); });
-  await page.evaluate(() => window.openSittingFromPortal && window.openSittingFromPortal(2));
+  await openSittingInPage(page, 2);
   await page.waitForTimeout(2200);
   const remounted = await page.evaluate(() => {
     const mm = document.querySelector('figure[data-diagram="s2-4"] .mm');

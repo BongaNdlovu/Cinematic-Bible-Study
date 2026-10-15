@@ -214,7 +214,7 @@ const home = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
 if (/Bible Artifacts/i.test(home)) fail('homepage still brands Bible Artifacts');
 if (/SDA Historicist Verified/i.test(home)) fail('homepage still carries a denominational verification badge');
 if (!/id="btn-continue"/.test(home)) fail('homepage is missing the sitting CTA (the shelf\'s continue button)');
-if (!/The Scroll of Daniel/.test(home)) fail('homepage must be titled as The Scroll of Daniel');
+if (!/The Shelf of Daniel/.test(home)) fail('homepage must be titled as The Shelf of Daniel');
 if (!/id="shelf-stage"/.test(home)) fail('homepage is missing the shelf, the full scroll of sittings');
 
 const homeJs = fs.readFileSync(path.join(root, 'js/home/home.js'), 'utf8');
