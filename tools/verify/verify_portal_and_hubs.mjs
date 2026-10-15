@@ -5,6 +5,14 @@ import { ensureServer } from './_server.mjs';
 
 fs.mkdirSync(path.join('qa', 'proofs'), { recursive: true });
 
+async function enterSittingFromShelf(page, index) {
+  await page.evaluate((i) => document.querySelectorAll('#cat-list .cat-item')[i].click(), index);
+  await page.waitForFunction(() => document.getElementById('sitting-portal-view').hidden || document.getElementById('shelf-stage').classList.contains('is-open'), null, { timeout: 60000 });
+  const volumeIsOpen = await page.evaluate(() => !document.getElementById('sitting-portal-view').hidden);
+  if (volumeIsOpen) await page.evaluate(() => document.getElementById('d-go').click());
+  await page.waitForFunction(() => document.getElementById('sitting-portal-view').hidden, null, { timeout: 20000 }).catch(() => {});
+}
+
 async function run() {
   const server = await ensureServer({ preferred: 8000, probe: '/index.html' });
   const BASE = server.base;
@@ -34,76 +42,37 @@ async function run() {
     console.log('   Portal visible on initial visit:', portalVisible);
     if (!portalVisible) throw new Error('Lessons portal was not visible on initial load of study.html');
 
-    const cardsCount = await page.locator('.lesson-portal-card').count();
-    console.log('   Total lesson portal cards count:', cardsCount);
-    if (cardsCount !== 11) throw new Error(`Expected 11 portal cards, got ${cardsCount}`);
+    await page.waitForFunction(() => document.querySelectorAll('#cat-list .cat-item').length > 0, null, { timeout: 30000 });
+    const cardsCount = await page.locator('#cat-list .cat-item').count();
+    console.log('   Volumes on the shelf:', cardsCount);
+    if (cardsCount !== 11) throw new Error(`Expected 11 volumes, got ${cardsCount}`);
 
     console.log('\n=== Step 2: Verifying Access Control & Lock Status for Guest ===');
-    // Sitting 0, 1, 2 are free sittings (unlocked for guests)
-    // Sittings 3..10 are member-gated (sign-in required for guests)
-    const card0Pill = await page.locator('.lesson-portal-card').nth(0).locator('.lesson-status-pill').textContent();
-    const card1Pill = await page.locator('.lesson-portal-card').nth(1).locator('.lesson-status-pill').textContent();
-    const card2Pill = await page.locator('.lesson-portal-card').nth(2).locator('.lesson-status-pill').textContent();
-    const card3Pill = await page.locator('.lesson-portal-card').nth(3).locator('.lesson-status-pill').textContent();
-    const card10Pill = await page.locator('.lesson-portal-card').nth(10).locator('.lesson-status-pill').textContent();
-
-    console.log(`   Sitting 0 status: "${card0Pill.trim()}"`);
-    console.log(`   Sitting 1 status: "${card1Pill.trim()}"`);
-    console.log(`   Sitting 2 status: "${card2Pill.trim()}"`);
-    console.log(`   Sitting 3 status: "${card3Pill.trim()}"`);
-    console.log(`   Sitting 10 status: "${card10Pill.trim()}"`);
-
-    if (!card0Pill.includes('Unlocked')) throw new Error('Sitting 0 should be Unlocked');
-    if (!card3Pill.includes('Sign-in Required') && !card3Pill.includes('Locked')) {
-      throw new Error(`Sitting 3 should be locked/sign-in required, got "${card3Pill}"`);
-    }
-
-    const card3Action = page.locator('.lesson-portal-card').nth(3).locator('.lesson-portal-action-btn');
-    const card3ActionText = await card3Action.textContent();
-    console.log(`   Sitting 3 action button: "${card3ActionText.trim()}"`);
-    if (!card3ActionText.includes('Sign In to Unlock') && !card3ActionText.includes('Locked')) {
-      throw new Error('Sitting 3 action button must prompt sign in or lock');
-    }
+    const states = await page.evaluate(() => [...document.querySelectorAll('#cat-list .cat-item')].map((b) => {
+      const st = b.querySelector('.cat-state');
+      return st.classList.contains('locked') ? 'Locked' : st.classList.contains('done') ? 'Completed' : 'Open';
+    }));
+    console.log('   Volume states:', states.join(', '));
+    if (states[0] !== 'Open' || states[1] !== 'Open' || states[2] !== 'Open') throw new Error('Sittings 0-2 should be open to a guest');
+    if (states.slice(3).some((x) => x !== 'Locked')) throw new Error('Sittings 3-10 should be locked for a guest');
 
     await page.screenshot({ path: 'qa/proofs/sitting_portal_overview.png', fullPage: false });
     console.log('   Captured qa/proofs/sitting_portal_overview.png');
 
-    console.log('\n=== Step 3: Verifying Filter Pills Interaction ===');
-    // Test filter: Unlocked
-    await page.locator('button[data-filter="unlocked"]').click();
-    await page.waitForTimeout(300);
-    const unlockedCardsCount = await page.locator('.lesson-portal-card').count();
-    console.log(`   Visible cards under "Unlocked" filter: ${unlockedCardsCount}`);
-    if (unlockedCardsCount !== 3) {
-      throw new Error(`Expected 3 unlocked cards for unsigned guest (Sittings 0, 1, 2), got ${unlockedCardsCount}`);
-    }
+    console.log('\n=== Step 3: Verifying Progress on the Shelf ===');
+    const progress = (await page.locator('#progress-text').textContent()).trim();
+    console.log('   Progress pill:', progress);
+    if (progress !== '0 / 11 read') throw new Error(`Expected "0 / 11 read" for a new guest, got "${progress}"`);
 
-    // Test filter: Incomplete
-    await page.locator('button[data-filter="incomplete"]').click();
-    await page.waitForTimeout(300);
-    const incompleteCardsCount = await page.locator('.lesson-portal-card').count();
-    console.log(`   Visible cards under "Incomplete" filter: ${incompleteCardsCount}`);
-    if (incompleteCardsCount !== 11) {
-      throw new Error(`Expected 11 incomplete cards, got ${incompleteCardsCount}`);
-    }
-
-    // Reset filter: All
-    await page.locator('button[data-filter="all"]').click();
-    await page.waitForTimeout(300);
-    const resetCardsCount = await page.locator('.lesson-portal-card').count();
-    console.log(`   Visible cards under "All Lessons" filter: ${resetCardsCount}`);
-    if (resetCardsCount !== 11) throw new Error(`Expected 11 cards, got ${resetCardsCount}`);
-
-    console.log('\n=== Step 4: Verifying Transition from Portal into Sitting ===');
-    const firstCardAction = page.locator('.lesson-portal-card').first().locator('.lesson-portal-action-btn');
-    await firstCardAction.click();
+    console.log('\n=== Step 4: Verifying Transition from the Shelf into a Sitting ===');
+    await enterSittingFromShelf(page, 0);
     await page.waitForTimeout(500);
 
     const portalHidden = await page.locator('#sitting-portal-view').isHidden();
     const shellVisible = await page.locator('.sitting-shell').isVisible();
     console.log('   Portal hidden after entering sitting:', portalHidden);
     console.log('   Sitting shell visible:', shellVisible);
-    if (!portalHidden || !shellVisible) throw new Error('Failed to enter sitting from portal');
+    if (!portalHidden || !shellVisible) throw new Error('Failed to enter sitting from the shelf');
 
     if (await page.locator('#sitting-guide-primary').isVisible().catch(() => false)) {
       await page.locator('#sitting-guide-primary').click();

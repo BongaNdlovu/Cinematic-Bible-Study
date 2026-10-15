@@ -19,7 +19,7 @@
   <!-- Editorial & Monospace Typography -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Cinzel:wght@500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400;1,6..72,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 
   <!-- Tailwind CSS (precompiled with Tailwind CLI from tailwind.study.config.js — run: npx tailwindcss -c tailwind.study.config.js -i css/study-tailwind-src.css -o css/study-tailwind.css --minify) -->
   <link rel="stylesheet" href="css/study-tailwind.css">
@@ -27,6 +27,15 @@
   <!-- Native Web Audio API used for Soft Pomodoro Completion Chime -->
 
   <link rel="stylesheet" href="css/terms.css">
+  <link rel="stylesheet" href="css/shelf.css">
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "./vendor/three/build/three.module.js",
+      "three/addons/": "./vendor/three/examples/jsm/"
+    }
+  }
+  </script>
 
   <style>
     :root {
@@ -8408,11 +8417,12 @@
       position: relative;
       z-index: 10;
       width: 100%;
-      max-width: 1680px;
-      margin: 0 auto;
-      padding: 2rem 1.25rem 6rem;
-      min-height: calc(100vh - 4.5rem);
+      margin: 0;
+      padding: 0;
       box-sizing: border-box;
+    }
+    .sitting-portal-view .portal-cert-banner {
+      margin: 1.5rem 1.25rem 4rem;
     }
     .sitting-portal-view[hidden] {
       display: none !important;
@@ -9829,61 +9839,132 @@
        Displays completed and incompleted lessons with direct unlocked access.
        ========================================================================= -->
   <section id="sitting-portal-view" class="sitting-portal-view" aria-label="Curriculum Sittings Overview" hidden>
-    <div class="portal-hero">
-      <div class="portal-hero-content">
-        <p class="portal-kicker">HISTORICIST EXEGESIS &bull; 11 EXILIC SITTINGS</p>
-        <h1 class="portal-title">The Sittings of Daniel</h1>
-        <p class="portal-lead">A chronological journey through prophetic history, primary sources, archaeological discoveries, and mathematical year-day proofs. Review completed lessons or start any unlocked sitting below.</p>
-        
-        <!-- Mastery & Progress Overview Card -->
-        <div class="portal-mastery-card">
-          <div class="portal-mastery-header">
-            <div class="portal-mastery-title-group">
-              <span class="portal-mastery-icon">📜</span>
-              <div>
-                <h3 class="portal-mastery-heading">Codex Mastery Progress</h3>
-                <p class="portal-mastery-sub" id="portal-progress-text">0 of 11 Sittings Completed</p>
-              </div>
+    <section class="shelf-stage is-loading" id="shelf-stage" data-silent data-offset-from=".study-topbar" aria-label="The sittings of Daniel, as a shelf of eleven volumes">
+      <canvas id="gl" tabindex="0" aria-label="A walnut bookshelf holding the volumes of the Shelf of Daniel. Use the catalogue for an accessible list."></canvas>
+
+      <div class="sh-vignette"></div>
+      <div class="sh-grain"></div>
+      <div class="letterbox top"></div>
+      <div class="letterbox bottom"></div>
+
+      <div class="loader" id="loader" role="status" aria-live="polite">
+        <div class="loader-inner">
+          <div class="loader-kicker">Daniel Historicist Press</div>
+          <div class="loader-title">The Shelf of Daniel</div>
+          <div class="loader-bar"><i id="loader-bar"></i></div>
+          <div class="loader-status" id="loader-status">Opening the reading room…</div>
+        </div>
+      </div>
+
+      <nav class="topbar" aria-label="Shelf controls">
+        <span class="brand-mark">
+          <span class="brand-dot"></span>
+          <span class="short">The Scroll of Daniel<span class="long"> · Daniel Historicist Press</span></span>
+        </span>
+        <div class="top-controls">
+          <span class="pill progress-pill" id="progress-pill" title="Sittings completed">
+            <span class="progress-dots" id="progress-dots" aria-hidden="true"></span>
+            <span id="progress-text">0 / 11</span>
+          </span>
+          <button class="pill" id="btn-catalogue" type="button" aria-controls="catalogue" aria-expanded="false" title="Catalogue (C)">
+            <span class="k">☰</span><span class="lbl">Catalogue</span>
+          </button>
+          <button class="pill" id="btn-sound" type="button" aria-pressed="true" title="Foley sound (M)">
+            <span class="k" id="sound-icon">♦</span><span class="lbl" id="sound-label">Foley on</span>
+          </button>
+          <button class="pill" id="btn-full" type="button" title="Fullscreen">
+            <span class="k">⤢</span><span class="lbl">Full</span>
+          </button>
+        </div>
+      </nav>
+
+
+
+      <div class="sh-hero">
+        <div class="sh-hero-kicker">The Archival Press Edition</div>
+        <h2 class="sh-title">The Shelf <em>of</em> Daniel</h2>
+        <p id="hero-copy">Eleven clothbound sittings of the historicist reading. Take down any volume to study its foil-stamped cover, open the boards, or enter the sitting.</p>
+        <div class="sh-hero-actions">
+          <button class="sh-btn primary" id="btn-continue" type="button"><span id="continue-text">Begin with the Prologue</span><span class="arrow" aria-hidden="true">→</span></button>
+          <button class="sh-btn ghost" id="btn-browse" type="button">Browse catalogue <small>C</small></button>
+        </div>
+        <div class="gl-note">The 3D reading room needs WebGL. The full catalogue is open on the left.</div>
+      </div>
+
+      <div class="spine-tag" id="spine-tag" aria-hidden="true">
+        <div class="tag-box">
+          <span class="tag-meta" id="tag-meta"></span>
+          <span class="tag-title" id="tag-title"></span>
+          <span class="tag-sub" id="tag-sub"></span>
+        </div>
+      </div>
+
+      <div class="hud" id="hud" role="toolbar" aria-label="Inspect the volume">
+        <div class="views">
+          <button class="view-btn shelf-btn" type="button" id="hud-shelf" title="Back to the shelf (Esc)">✕ Shelf</button>
+          <button class="view-btn" type="button" data-view="cover" aria-pressed="true">Cover<kbd>1</kbd></button>
+          <button class="view-btn" type="button" data-view="open" aria-pressed="false">Open<kbd>2</kbd></button>
+          <button class="view-btn" type="button" data-view="spine" aria-pressed="false">Spine<kbd>3</kbd></button>
+          <button class="view-btn" type="button" data-view="back" aria-pressed="false">Back<kbd>4</kbd></button>
+          <button class="view-btn" type="button" data-view="edges" aria-pressed="false">Edges<kbd>5</kbd></button>
+        </div>
+        <span class="hud-hint">Drag to turn · Scroll to lean in · Double-click to open the boards</span>
+      </div>
+
+      <section class="dossier" id="dossier" aria-live="polite" aria-label="Volume details">
+        <div class="dossier-card">
+          <div class="dossier-body">
+            <div class="eyebrow">
+              <span id="d-meta">Vol. 0</span>
+              <span class="badge" id="d-badge">Open sitting</span>
             </div>
-            <div class="portal-mastery-badge" id="portal-progress-pct">0%</div>
+            <h2 id="d-title"></h2>
+            <p class="d-sub" id="d-sub"></p>
+            <p class="d-deck" id="d-deck"></p>
+            <div class="epigraph" id="d-epigraph"></div>
+            <div class="specs">
+              <div class="spec"><span class="spec-label">Scripture</span><span class="spec-val" id="d-ref"></span></div>
+              <div class="spec"><span class="spec-label">Sitting time</span><span class="spec-val" id="d-time"></span></div>
+              <div class="spec"><span class="spec-label">Horizon</span><span class="spec-val" id="d-horizon"></span></div>
+              <div class="spec"><span class="spec-label">Binding</span><span class="spec-val" id="d-binding"></span></div>
+            </div>
+            <h3 class="section-h">Within this volume</h3>
+            <ol class="contents" id="d-contents"></ol>
+            <div class="journey">
+              <div class="journey-row"><span>Your journey</span><span id="d-journey-text"></span></div>
+              <div class="journey-bar" id="d-journey"></div>
+            </div>
+            <div class="actions">
+              <a class="sh-btn primary" id="d-go" href="study.html"><span id="d-go-text">Enter the sitting</span><span class="arrow" aria-hidden="true">→</span></a>
+              <button class="sh-btn" id="d-open" type="button">Open the boards</button>
+              <button class="sh-btn ghost" id="d-link" type="button" title="Copy a link to this volume">Copy link</button>
+            </div>
           </div>
-          <div class="portal-progress-track" role="progressbar" aria-valuemin="0" aria-valuemax="11" aria-valuenow="0">
-            <div class="portal-progress-fill" id="portal-progress-fill" style="width: 0%;"></div>
+          <div class="d-footer">
+            <button class="pager prev" id="d-prev" type="button"><span>← Previous</span><em id="d-prev-t"></em></button>
+            <span class="d-count" id="d-count">1 / 11</span>
+            <button class="pager next" id="d-next" type="button"><span>Next →</span><em id="d-next-t"></em></button>
           </div>
-          <div class="portal-mastery-actions">
-            <button type="button" id="portal-btn-resume" class="portal-btn-primary">
-              ▶ Continue Study (Sitting 0)
-            </button>
-            <button type="button" onclick="if(window.StudyCompetency)window.StudyCompetency.renderCompetencyRecordModal()" class="portal-btn-secondary">
-              📊 View Competency Record
-            </button>
-            <a href="index.html" class="portal-btn-secondary">
-              Browse the Shelf
-            </a>
-          </div>
+          <div class="keys"><kbd>←</kbd> <kbd>→</kbd> browse · <kbd>1</kbd>–<kbd>5</kbd> views · <kbd>O</kbd> open · <kbd>F</kbd> flip · <kbd>Esc</kbd> back to shelf</div>
         </div>
+      </section>
 
-        <!-- Filter Controls -->
-        <div class="portal-filter-bar">
-          <span class="portal-filter-label">Filter:</span>
-          <div class="portal-filter-tabs" id="portal-filter-tabs">
-            <button type="button" class="portal-filter-btn active" data-filter="all">All Lessons (11)</button>
-            <button type="button" class="portal-filter-btn" data-filter="completed">Completed (<span id="portal-filter-count-completed">0</span>)</button>
-            <button type="button" class="portal-filter-btn" data-filter="incomplete">Incomplete (<span id="portal-filter-count-incomplete">11</span>)</button>
-            <button type="button" class="portal-filter-btn" data-filter="unlocked">Unlocked (<span id="portal-filter-count-unlocked">1</span>)</button>
+      <div class="scrim" id="scrim"></div>
+      <aside class="catalogue" id="catalogue" aria-label="Catalogue of volumes">
+        <div class="cat-head">
+          <div>
+            <div class="cat-kicker">Card Catalogue</div>
+            <h2>Volumes on the shelf</h2>
           </div>
+          <button class="icon-btn" id="cat-close" type="button" aria-label="Close catalogue">✕</button>
         </div>
-      </div>
-    </div>
+        <ul class="cat-list" id="cat-list"></ul>
+        <div class="cat-foot" id="cat-foot"></div>
+      </aside>
 
-    <!-- Lesson Cards Grid -->
-    <div class="portal-grid-container">
-      <div class="portal-lessons-grid" id="portal-lessons-grid">
-        <!-- Rendered dynamically by renderLessonsPortal() -->
-      </div>
-    </div>
+      <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    </section>
 
-    <!-- Certificate Banner (when completed) -->
     <div id="portal-cert-banner" class="portal-cert-banner" hidden>
       <div class="portal-cert-content">
         <span class="portal-cert-seal">🏆</span>
@@ -10352,5 +10433,6 @@
   <script src="js/study/study-app.js"></script>
   <script src="js/study/lesson-player.js"></script>
   <script src="js/study/audio-orb.js"></script>
+  <script type="module" src="js/home/shelf.js"></script>
 </body>
 </html>

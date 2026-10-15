@@ -179,6 +179,14 @@ function stageFrac(clientX, clientY) {
   return { x: (clientX - r.left) / (r.width || 1), y: (clientY - r.top) / (r.height || 1) };
 }
 let stageInView = true;
+(function followHeader() {
+  const sel = body.dataset.offsetFrom;
+  const head = sel ? document.querySelector(sel) : null;
+  if (!head) return;
+  const sync = () => body.style.setProperty("--shelf-nav-h", Math.round(head.getBoundingClientRect().height) + "px");
+  sync();
+  if (window.ResizeObserver) new ResizeObserver(sync).observe(head); else addEventListener("resize", sync);
+})();
 const loaderBar = $('#loader-bar');
 const loaderStatus = $('#loader-status');
 const glCanvas = $('#gl');
@@ -281,11 +289,34 @@ function openDrawer(on) {
   if (on) setTimeout(() => { const c = document.querySelector('.cat-item.current') || document.querySelector('.cat-item'); if (c) c.focus({ preventScroll: true }); }, 350);
 }
 
+function hostSittingOpener() {
+  return typeof window.openSittingFromPortal === 'function' ? window.openSittingFromPortal : null;
+}
+
+function opensInNewTab(e) {
+  return e.ctrlKey || e.metaKey || e.shiftKey || e.button === 1;
+}
+
+function enterSitting(i) {
+  if (!can(i)) {
+    location.href = 'account.html?next=' + encodeURIComponent('study.html?sheet=' + i);
+    return;
+  }
+  setLast(i);
+  const openInPlace = hostSittingOpener();
+  if (openInPlace) {
+    if (api && selected >= 0) api.put();
+    openInPlace(i);
+    return;
+  }
+  location.href = 'study.html?sheet=' + i + '&preview=full';
+}
+
 function select(i) {
   if (i < 0 || i >= N) return;
   openDrawer(false);
   if (!api) { // no WebGL: go straight to the sitting
-    location.href = can(i) ? 'study.html?sheet=' + i + '&preview=full' : 'account.html?next=' + encodeURIComponent('study.html?sheet=' + i);
+    enterSitting(i);
     return;
   }
   api.pull(i);
@@ -302,7 +333,12 @@ function wireUI() {
   $('#d-prev').addEventListener('click', () => api && api.step(-1));
   $('#d-next').addEventListener('click', () => api && api.step(1));
   $('#d-open').addEventListener('click', () => api && api.setView(view === 'open' ? 'cover' : 'open'));
-  $('#d-go').addEventListener('click', () => { if (selected >= 0 && can(selected)) setLast(selected); });
+  $('#d-go').addEventListener('click', (e) => {
+    if (selected < 0) return;
+    if (opensInNewTab(e)) { if (can(selected)) setLast(selected); return; }
+    e.preventDefault();
+    enterSitting(selected);
+  });
   $('#d-link').addEventListener('click', async () => {
     const url = location.href.split('#')[0] + '#volume-' + selected;
     try { await navigator.clipboard.writeText(url); toast('Link copied'); } catch (e) { toast('Copy failed'); }
@@ -2222,11 +2258,37 @@ function fallback(msg) {
   body.classList.remove('is-loading');
 }
 
+function whenShown(el) {
+  return new Promise((resolve) => {
+    if (!window.IntersectionObserver) { resolve(); return; }
+    const io = new IntersectionObserver((entries) => {
+      if (entries.some((en) => en.isIntersecting)) { io.disconnect(); resolve(); }
+    });
+    io.observe(el);
+  });
+}
+
+function watchForRefresh() {
+  let wasShown = true;
+  if (window.IntersectionObserver) {
+    new IntersectionObserver((entries) => {
+      const shown = entries.some((en) => en.isIntersecting);
+      if (shown && !wasShown) buildChrome();
+      wasShown = shown;
+    }).observe(body);
+  }
+  const auth = window.ScrollAuth;
+  if (auth && typeof auth.ready === 'function') auth.ready().then(buildChrome, () => {});
+  if (auth && typeof auth.onChange === 'function') auth.onChange(() => buildChrome());
+}
+
 (async function boot() {
   buildChrome();
   wireUI();
+  watchForRefresh();
   setLoader(0.06, 'Opening the reading room…');
   try {
+    await whenShown(body);
     await Promise.all([loadFonts(), loadMotifs()]);
     const room = await startRoom();
     body.classList.remove('is-loading');

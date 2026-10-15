@@ -248,7 +248,7 @@
     if (reviewsError) {
       list = '<p class="hub-line">Could not load your reviews right now.</p>';
     } else if (!reviews.length) {
-      list = '<p class="hub-line">You have not left a note yet. After a sitting, the home page stars are yours.</p>';
+      list = '<p class="hub-line">You have not left a note yet. After a sitting, leave one on the readers’ notes page.</p>';
     } else {
       list = "<ul>" + reviews.slice(0, 4).map(function (r) {
         const status = r.approved ? "Posted" : (r.rejected ? "Not posted" : "Awaiting review");
@@ -256,7 +256,7 @@
         return "<li><b>" + escapeHub(status) + "</b> · " + escapeHub(text) + (text.length >= 90 ? "…" : "") + "</li>";
       }).join("") + "</ul>";
     }
-    return hubCard("<small>My notes on the home page</small>" + list);
+    return hubCard("<small>My notes</small>" + list + '<a class="hub-link" href="reviews.html">All readers’ notes →</a>');
   }
 
   function adminCard() {
@@ -590,15 +590,27 @@
     finishReturn();
   }
 
+  function paintNotesCount() {
+    const out = el("account-notes-count");
+    const reviews = window.ScrollReviews;
+    if (!out || !reviews || typeof reviews.countApproved !== "function") return;
+    reviews.countApproved().then(function (n) {
+      if (typeof n !== "number") return;
+      out.textContent = n === 0 ? "No notes yet. Be the first to leave one."
+        : (n === 1 ? "1 note" : n + " notes") + " from readers";
+    });
+  }
+
   function boot() {
     if (!el("account-hub")) return;
     readNextFromQuery();
     bind();
     if (window.ScrollAuth && typeof window.ScrollAuth.ready === "function") {
-      window.ScrollAuth.ready().then(afterAuthReady);
+      window.ScrollAuth.ready().then(afterAuthReady).then(paintNotesCount);
       return;
     }
     afterAuthReady();
+    paintNotesCount();
   }
 
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot);
