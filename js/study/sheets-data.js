@@ -1847,11 +1847,13 @@ Iron (strength that remains)  +  Clay (the mixture that will not hold)
         },
         scripture: "Daniel 3:1-30 &bull; Plain of Dura (Daniel 3 prints no year; a possible date is 594 B.C., reconstructed)",
         audio: {
-          src: "assets/study/audio/sitting-03.mp3",
-          kind: "overview",
-          title: "Sitting 3 overview — defiance and deliverance on the Plain of Dura",
-          kicker: "3-minute overview",
-          hint: "A quick orientation before you read. This is not a voiceover of the full sitting."
+          src: "assets/study/audio/sitting-03-readalong.mp3",
+          kind: "readalong",
+          title: "Sitting 3 — listen to the full sitting",
+          kicker: "Read-along · 17 min",
+          hint: "Press play and follow along: the words are highlighted as they are spoken. At each checkpoint you can pause, answer it, and continue from there.",
+          duration: "17 min",
+          cues: "assets/study/audio/sitting-03-readalong.json"
         },
         infographic: {
           src: "assets/study/infographics/sitting-03-roadmap.webp",
@@ -2376,11 +2378,13 @@ THE TRIAL: THE SON BESIDE THEM                            THE CROSS: HE BEARS WH
         },
         scripture: "Daniel 4:1-37 &bull; Babylon",
         audio: {
-          src: "assets/study/audio/sitting-04.mp3",
-          kind: "overview",
-          title: "Sitting 4 overview — pride, humiliation, and the humility of Christ",
-          kicker: "3-minute overview",
-          hint: "A quick orientation before you read. This is not a voiceover of the full sitting."
+          src: "assets/study/audio/sitting-04-readalong.mp3",
+          kind: "readalong",
+          title: "Sitting 4 — listen to the full sitting",
+          kicker: "Read-along · 14 min",
+          hint: "Press play and follow along: the words are highlighted as they are spoken. At each checkpoint you can pause, answer it, and continue from there.",
+          duration: "14 min",
+          cues: "assets/study/audio/sitting-04-readalong.json"
         },
         infographic: {
           src: "assets/study/infographics/sitting-04-roadmap.webp",
@@ -2950,11 +2954,13 @@ Nebuchadnezzar (Daniel 4)                Jesus Christ (Philippians 2)
         },
         scripture: "Daniel 5:1-31 &bull; Babylon, the night the city fell (Daniel 5:30), 12 October 539 B.C.",
         audio: {
-          src: "assets/study/audio/sitting-05.mp3",
-          kind: "overview",
-          title: "Sitting 5 overview — the handwriting on the plaster and the fall of Babylon",
-          kicker: "3-minute overview",
-          hint: "A quick orientation before you read. This is not a voiceover of the full sitting."
+          src: "assets/study/audio/sitting-05-readalong.mp3",
+          kind: "readalong",
+          title: "Sitting 5 — listen to the full sitting",
+          kicker: "Read-along · 16 min",
+          hint: "Press play and follow along: the words are highlighted as they are spoken. At each checkpoint you can pause, answer it, and continue from there.",
+          duration: "16 min",
+          cues: "assets/study/audio/sitting-05-readalong.json"
         },
         infographic: {
           src: "assets/study/infographics/sitting-05-roadmap.webp",
@@ -3572,11 +3578,13 @@ CYRUS THE DELIVERER                       JESUS CHRIST THE REDEEMER
         },
         scripture: "Daniel 6:1-28 &bull; Babylon, c. 539 B.C.",
         audio: {
-          src: "assets/study/audio/sitting-06.mp3",
-          kind: "overview",
-          title: "Sitting 6 overview — the pit of hunger, the open window, and the risen Christ",
-          kicker: "3-minute overview",
-          hint: "A quick orientation before you read. This is not a voiceover of the full sitting."
+          src: "assets/study/audio/sitting-06-readalong.mp3",
+          kind: "readalong",
+          title: "Sitting 6 — listen to the full sitting",
+          kicker: "Read-along · 23 min",
+          hint: "Press play and follow along: the words are highlighted as they are spoken. At each checkpoint you can pause, answer it, and continue from there.",
+          duration: "23 min",
+          cues: "assets/study/audio/sitting-06-readalong.json"
         },
         infographic: {
           src: "assets/study/infographics/sitting-06-roadmap.webp",
@@ -4249,11 +4257,13 @@ DANIEL IN THE LIONS' DEN                 JESUS CHRIST AT CALVARY &amp; THE TOMB
         },
         scripture: "Daniel 7:1-28 &bull; Babylon, c. 553 B.C.",
         audio: {
-          src: "assets/study/audio/sitting-07.mp3",
-          kind: "overview",
-          title: "Sitting 7 overview — the churning sea, the little horn, and the 1,260 years",
-          kicker: "Overview",
-          hint: "A quick orientation before you read. This is not a voiceover of the full sitting."
+          src: "assets/study/audio/sitting-07-readalong.mp3",
+          kind: "readalong",
+          title: "Sitting 7 — listen to the full sitting",
+          kicker: "Read-along · 36 min",
+          hint: "Press play and follow along: the words are highlighted as they are spoken. At each checkpoint you can pause, answer it, and continue from there.",
+          duration: "36 min",
+          cues: "assets/study/audio/sitting-07-readalong.json"
         },
         infographic: {
           src: "assets/study/infographics/sitting-07-roadmap.webp",
@@ -4936,11 +4946,13 @@ SCRIPTURAL CRITERIA:                     HISTORICAL FULFILLMENT:
         },
         scripture: "Daniel 8:1-27 &bull; Shushan (Susa), c. 551 B.C. (some reckonings give 548/547)",
         audio: {
-          src: "assets/study/audio/sitting-08.mp3",
-          kind: "overview",
-          title: "Sitting 8 overview — the ram, the goat, and 2,300 days to sanctuary cleansing",
-          kicker: "Overview",
-          hint: "A quick orientation before you read. This is not a voiceover of the full sitting."
+          src: "assets/study/audio/sitting-08-readalong.mp3",
+          kind: "readalong",
+          title: "Sitting 8 — listen to the full sitting",
+          kicker: "Read-along · 29 min",
+          hint: "Press play and follow along: the words are highlighted as they are spoken. At each checkpoint you can pause, answer it, and continue from there.",
+          duration: "29 min",
+          cues: "assets/study/audio/sitting-08-readalong.json"
         },
         infographic: {
           src: "assets/study/infographics/sitting-08-roadmap.webp",
@@ -5547,11 +5559,13 @@ BIBLICAL REQUIREMENT:            ANTIOCHUS IV EPIPHANES:           HISTORICIST R
         },
         scripture: "Daniel 9:1-27 &bull; Babylon, the realm of the Chaldeans, 538 B.C.",
         audio: {
-          src: "assets/study/audio/sitting-09.mp3",
-          kind: "overview",
-          title: "Sitting 9 overview — the 70 weeks, the cross, and the anchor of 1844",
-          kicker: "Overview",
-          hint: "A quick orientation before you read. This is not a voiceover of the full sitting."
+          src: "assets/study/audio/sitting-09-readalong.mp3",
+          kind: "readalong",
+          title: "Sitting 9 — listen to the full sitting",
+          kicker: "Read-along · 27 min",
+          hint: "Press play and follow along: the words are highlighted as they are spoken. At each checkpoint you can pause, answer it, and continue from there.",
+          duration: "27 min",
+          cues: "assets/study/audio/sitting-09-readalong.json"
         },
         infographic: {
           src: "assets/study/infographics/sitting-09-roadmap.webp",
@@ -6276,11 +6290,13 @@ Restore City                        Messiah               Christ                
         },
         scripture: "Daniel 10:1 - 12:13 &bull; Hiddekel (the Tigris), 536/535 B.C.",
         audio: {
-          src: "assets/study/audio/sitting-10.mp3",
-          kind: "overview",
-          title: "Sitting 10 overview — Michael stands up, the time of trouble, and bodily resurrection",
-          kicker: "Overview",
-          hint: "A quick orientation before you read. This is not a voiceover of the full sitting."
+          src: "assets/study/audio/sitting-10-readalong.mp3",
+          kind: "readalong",
+          title: "Sitting 10 — listen to the full sitting",
+          kicker: "Read-along · 37 min",
+          hint: "Press play and follow along: the words are highlighted as they are spoken. At each checkpoint you can pause, answer it, and continue from there.",
+          duration: "37 min",
+          cues: "assets/study/audio/sitting-10-readalong.json"
         },
         infographic: {
           src: "assets/study/infographics/sitting-10-roadmap.webp",

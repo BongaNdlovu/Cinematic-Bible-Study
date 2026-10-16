@@ -1,4 +1,4 @@
-/* Read-along proof for sittings 0-2: the spoken text is highlighted on the
+/* Read-along proof: the spoken text is highlighted on the
    visible book page, and at a checkpoint the reader can pause, answer, and
    continue from the exact point the narration reached it.
 
@@ -14,7 +14,7 @@ const check = (sheet, name, ok, detail) => {
   if (!ok) failures.push(`sheet ${sheet} ${name}`);
 };
 
-for (const sheet of [0, 1, 2]) {
+for (const sheet of [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]) {
   const page = await (await browser.newContext({ viewport: { width: 1440, height: 900 } })).newPage();
   await page.addInitScript(() => {
     try {
@@ -40,10 +40,10 @@ for (const sheet of [0, 1, 2]) {
   const mid = await page.evaluate(() => {
     const mark = document.querySelector('mark.audio-read');
     if (!mark) return { mark: false };
-    const view = mark.closest('.br-view');
-    const r = mark.getClientRects()[0];
-    const v = view ? view.getBoundingClientRect() : null;
     const word = document.querySelector('mark.audio-word');
+    const view = word && word.closest('.br-view');
+    const r = word && word.getClientRects()[0];
+    const v = view ? view.getBoundingClientRect() : null;
     return {
       mark: true,
       word: word ? word.textContent : null,
@@ -53,7 +53,7 @@ for (const sheet of [0, 1, 2]) {
   });
   check(sheet, 'highlights spoken text', mid.mark, mid);
   check(sheet, 'highlights the word being spoken', !!mid.word);
-  check(sheet, 'spoken text is on the open page', mid.onPage);
+  check(sheet, 'spoken word is on the open page', mid.onPage);
 
   const stops = await page.evaluate(() => window.StudyAudioReader.checkpoints());
   check(sheet, 'checkpoint stops found', stops.length > 0, stops);

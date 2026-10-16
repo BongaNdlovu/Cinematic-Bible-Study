@@ -1,20 +1,20 @@
 """Align a sitting's read-along recording to that sitting's lesson text.
 
-Usage: python align.py <sitting-NN>
-
 Reads sitting-NN-blocks.json (written by extract_blocks.mjs from the live
 study page) and transcript-sitting-NN.json from this folder and writes
 assets/study/audio/sitting-NN-readalong.json — a cue list the study app uses
 to stroke a faint highlighter over exactly the text being spoken.
 """
+import argparse
 import json
 import re
-import sys
 import unicodedata
 from difflib import SequenceMatcher
 from pathlib import Path
 
 HERE = Path(__file__).parent
+MAX_STRAY_RUN_TOKENS = 3
+MIN_STRAY_GAP_TOKENS = 150
 
 WORDMAP = {
     "one": "1", "two": "2", "three": "3", "four": "4", "five": "5", "six": "6",
@@ -75,7 +75,12 @@ class Block:
 
 
 def main():
-    sitting = sys.argv[1] if len(sys.argv) > 1 else "sitting-00"
+    parser = argparse.ArgumentParser(description="Align a sitting's read-along recording to its lesson text.")
+    parser.add_argument("sitting", nargs="?", default="sitting-00", help="for example sitting-07")
+    parser.add_argument("restarts", nargs="*", type=float, metavar="restart-seconds",
+                        help="times where the recording goes back and reads a passage again; each starts a fresh pass over the lesson text")
+    args = parser.parse_args()
+    sitting = args.sitting
     out = HERE.parent.parent / "assets" / "study" / "audio" / f"{sitting}-readalong.json"
     dumped = json.loads((HERE / f"{sitting}-blocks.json").read_text(encoding="utf-8"))
     transcript = json.loads((HERE / f"transcript-{sitting}.json").read_text(encoding="utf-8"))
@@ -102,17 +107,24 @@ def main():
 
     print(f"blocks={len(blocks)} lesson_tokens={len(lesson_seq)} audio_tokens={len(audio_seq)}")
 
-    sm = SequenceMatcher(None, lesson_seq, audio_seq, autojunk=False)
-    opcodes = sm.get_opcodes()
-    matched = sum(j2 - j1 for tag, i1, i2, j1, j2 in opcodes if tag == "equal")
-    print(f"audio token match: {matched}/{len(audio_seq)} = {matched/len(audio_seq):.1%}")
+    restarts = sorted(args.restarts)
+    cuts = [0] + [next((k for k, a in enumerate(audio_toks) if a[1] >= r), len(audio_toks)) for r in restarts] + [len(audio_toks)]
 
     # audio token index -> lesson token index, from equal runs
     audio_to_lesson = {}
-    for tag, i1, i2, j1, j2 in opcodes:
-        if tag == "equal":
+    for a0, a1 in zip(cuts, cuts[1:]):
+        sm = SequenceMatcher(None, lesson_seq, audio_seq[a0:a1], autojunk=False)
+        runs = [(i1, i2, j1, j2) for tag, i1, i2, j1, j2 in sm.get_opcodes() if tag == "equal"]
+        for n, (i1, i2, j1, j2) in enumerate(runs):
+            if i2 - i1 <= MAX_STRAY_RUN_TOKENS:
+                before = i1 - runs[n - 1][1] if n > 0 else i1
+                after = runs[n + 1][0] - i2 if n + 1 < len(runs) else len(lesson_seq) - i2
+                if before > MIN_STRAY_GAP_TOKENS and after > MIN_STRAY_GAP_TOKENS:
+                    continue
             for k in range(j2 - j1):
-                audio_to_lesson[j1 + k] = i1 + k
+                audio_to_lesson[a0 + j1 + k] = i1 + k
+    matched = len(audio_to_lesson)
+    print(f"audio token match: {matched}/{len(audio_seq)} = {matched/len(audio_seq):.1%}")
 
     # One cue per whisper segment: spans = the lesson text its matched tokens hit
     cues = []
