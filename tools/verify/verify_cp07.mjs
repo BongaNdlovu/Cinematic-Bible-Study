@@ -266,20 +266,16 @@ async function run() {
     await client.send('Emulation.setEmulatedMedia', { media: '' });
     console.log('  PASS: CP-07 Check 6 verified.');
 
-    // 7. CP-07 Check 7: index.html at 390px and 1440px — outcome copy and reviews
-    console.log('\n[CP-07 Check 7] index.html outcome copy & reviews...');
+    console.log('\n[CP-07 Check 7] home hero & readers\' notes...');
     await client.send('Page.navigate', { url: `${BASE}/index.html` });
-    await client.waitFor(`window.location.pathname.includes('index.html') && document.querySelector('.dash-hero-outcome') && document.getElementById('witness-list')`);
-    const indexCheck = await client.eval(`(() => {
-      const outcome = document.querySelector('.dash-hero-outcome')?.innerText || '';
-      const listHidden = document.getElementById('witness-list')?.hidden;
-      return { outcome, listHidden };
-    })()`);
-    console.log('  Outcome copy found:', indexCheck.outcome.slice(0, 60) + '...');
-    if (!indexCheck.outcome.includes('year-day') || !indexCheck.outcome.includes('Daniel 2:38') || !indexCheck.outcome.includes('certificate')) {
-      throw new Error('Hero outcome sentence missing or incomplete');
-    }
+    await client.waitFor(`window.location.pathname.includes('index.html') && document.getElementById('btn-continue') && document.getElementById('shelf-notes')`);
+    await client.send('Page.navigate', { url: `${BASE}/reviews.html` });
+    await client.waitFor(`window.location.pathname.includes('reviews.html') && document.getElementById('witness-list')`);
+    await sleep(1500);
+    const indexCheck = await client.eval(`(() => ({ listHidden: document.getElementById('witness-list')?.hidden }))()`);
     if (!indexCheck.listHidden) throw new Error('Empty witness list should be hidden when zero approved reviews');
+    await client.send('Page.navigate', { url: `${BASE}/index.html` });
+    await sleep(800);
     await client.shot('qa/proofs/cp07_index_1440.png');
 
     await client.send('Emulation.setDeviceMetricsOverride', { width: 390, height: 844, deviceScaleFactor: 2, mobile: true });

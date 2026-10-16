@@ -57,7 +57,7 @@
     return {
       agree: "Accept the terms before you sign in.",
       storage: "Your agreement could not be saved on this device. Allow site data, then try again.",
-      unsigned: "Browse freely, or accept the terms and sign in to save cloud progress and certificates.",
+      unsigned: "The Prologue, Daniel 1, and Daniel 2 are open. Sign in for the later sittings, the map, and the 3D arena.",
       generic: "The terms could not be saved. Try again.",
       unavailable: "Sign-in is unavailable on this copy of the site. You can still browse. Cloud save, reviews, and the certificate need sign-in.",
       email: "Enter a valid email address.",
@@ -104,7 +104,7 @@
       if (node) node.disabled = busy;
     });
     const signIn = el("account-signin");
-    if (signIn) signIn.textContent = googleLabel || "Sign in with Google";
+    if (signIn) (signIn.querySelector("[data-label]") || signIn).textContent = googleLabel || "Continue with Google";
   }
 
   function emailOk(value) {
@@ -176,7 +176,24 @@
   }
 
   function hubCard(inner, extraClass) {
-    return '<article class="hub-card' + (extraClass ? " " + extraClass : "") + '">' + inner + "</article>";
+    return '<article class="hub-card cx-card' + (extraClass ? " " + extraClass : "") + '">' + inner + "</article>";
+  }
+
+  function coverStrip(state) {
+    const covers = window.SHELF_COVER_THUMBS || window.SHELF_COVERS || [];
+    const doneSet = Array.isArray(state.completedSheets) ? state.completedSheets.map(Number) : [];
+    let nextUp = -1;
+    for (let i = 0; i < 11; i++) if (doneSet.indexOf(i) < 0) { nextUp = i; break; }
+    let html = "<ol class=\"acct-strip\" aria-label=\"Your eleven volumes\">";
+    for (let i = 0; i < 11; i++) {
+      const done = doneSet.indexOf(i) >= 0;
+      const cls = done ? " is-done" : (i === nextUp ? " is-next" : "");
+      const label = "Volume " + i + (done ? ", finished" : (i === nextUp ? ", up next" : ""));
+      html += "<li class=\"acct-vol" + cls + "\" style=\"--cx-i:" + i + "\"><a href=\"study.html?sheet=" + i + "\" aria-label=\"" + label + "\">" +
+        (covers[i] ? "<img src=\"" + escapeHub(covers[i]) + "\" alt=\"\" loading=\"lazy\" decoding=\"async\">" : "") +
+        "<span class=\"acct-vol-n\">" + i + "</span></a></li>";
+    }
+    return html + "</ol>";
   }
 
   function progressCard(J, state) {
@@ -195,7 +212,7 @@
           '<a class="hub-link" href="' + escapeHub(nextHref) + '">Continue where you left off →</a>'
         : '<p class="hub-line">Open the first sitting to begin the chain.</p>' +
           '<a class="hub-link" href="study.html?sheet=0">Begin the sitting →</a>');
-    return hubCard(body);
+    return hubCard(body + coverStrip(state), "hub-card-progress");
   }
 
   function bookmarkCard() {
@@ -248,7 +265,7 @@
     if (reviewsError) {
       list = '<p class="hub-line">Could not load your reviews right now.</p>';
     } else if (!reviews.length) {
-      list = '<p class="hub-line">You have not left a note yet. After a sitting, the home page stars are yours.</p>';
+      list = '<p class="hub-line">You have not left a note yet. After a sitting, leave one on the readers’ notes page.</p>';
     } else {
       list = "<ul>" + reviews.slice(0, 4).map(function (r) {
         const status = r.approved ? "Posted" : (r.rejected ? "Not posted" : "Awaiting review");
@@ -256,7 +273,7 @@
         return "<li><b>" + escapeHub(status) + "</b> · " + escapeHub(text) + (text.length >= 90 ? "…" : "") + "</li>";
       }).join("") + "</ul>";
     }
-    return hubCard("<small>My notes on the home page</small>" + list);
+    return hubCard("<small>My notes</small>" + list + '<a class="hub-link" href="reviews.html">All readers’ notes →</a>');
   }
 
   function adminCard() {
@@ -279,7 +296,7 @@
     if (!J || typeof J.load !== "function") { host.hidden = true; return; }
     const state = J.load() || {};
     const done = Array.isArray(state.completedSheets) ? state.completedSheets.length : 0;
-    let cards = progressCard(J, { completed: done });
+    let cards = progressCard(J, { completed: done, completedSheets: state.completedSheets || [] });
     cards += bookmarkCard();
     cards += certificateCard();
     const auth = window.ScrollAuth;
@@ -288,6 +305,11 @@
     if (auth && typeof auth.isModerator === "function" && auth.isModerator()) cards += adminCard();
     host.innerHTML = cards;
     host.hidden = false;
+    Array.prototype.forEach.call(host.querySelectorAll(".hub-card"), function (card, i) {
+      card.setAttribute("data-cx-reveal", "");
+      card.style.setProperty("--cx-i", String(i));
+    });
+    if (window.Cinema) window.Cinema.reveal(host);
   }
 
   let hubReviews = null;
@@ -344,6 +366,10 @@
     const settings = el("account-settings");
     const passwordBox = el("account-password-box");
     if (name) name.textContent = inSession ? displayName() : "";
+    const hub = el("account-hub");
+    if (hub) hub.dataset.state = inSession ? "member" : (needsTerms ? "terms" : "signin");
+    const title = el("account-title");
+    if (title) title.textContent = inSession ? "Welcome back" + (displayName() ? ", " + displayName().split(" ")[0] : "") : (needsTerms ? "Your place in the library" : "One step from the shelf");
     if (session) session.hidden = !inSession;
     if (signOut) signOut.hidden = !inSession;
     if (form) form.hidden = !needsTerms;
@@ -365,7 +391,7 @@
       else if (inSession && !needsTerms) lead.textContent = "You are signed in. Settings stay on this page.";
       else if (inSession && needsTerms) lead.textContent = "The terms text changed. Accept once here, then you are done.";
       else if (!needsTerms) lead.textContent = "You accepted the terms. Sign in with email or Google to save cloud progress and certificates.";
-      else lead.textContent = "Browse freely, or accept the terms and sign in to save cloud progress and certificates.";
+      else lead.textContent = "The Prologue, Daniel 1, and Daniel 2 are open. Sign in for the later sittings, the map, and the 3D arena.";
     }
     const err = siteError();
     if (err) setError("auth", err);
@@ -391,9 +417,13 @@
 
   function saveTerms() {
     if (!acceptNow()) return;
-    paint();
-    const email = el("account-email");
-    if (email && el("account-signin-box") && !el("account-signin-box").hidden) email.focus();
+    const focusEmail = function () {
+      const email = el("account-email");
+      if (email && el("account-signin-box") && !el("account-signin-box").hidden) email.focus();
+    };
+    const panel = document.querySelector(".acct-panel");
+    if (window.Cinema && panel) window.Cinema.swap(paint, panel).then(focusEmail);
+    else { paint(); focusEmail(); }
   }
 
   function finishAuthResult(res, kind) {
@@ -590,15 +620,37 @@
     finishReturn();
   }
 
+  function paintNotesCount() {
+    const out = el("account-notes-count");
+    const reviews = window.ScrollReviews;
+    if (!out || !reviews || typeof reviews.countApproved !== "function") return;
+    reviews.countApproved().then(function (n) {
+      if (typeof n !== "number") return;
+      out.textContent = n === 0 ? "No notes yet. Be the first to leave one."
+        : (n === 1 ? "1 note" : n + " notes") + " from readers";
+    });
+  }
+
+  function paintFan() {
+    const host = el("account-fan");
+    const covers = window.SHELF_COVER_THUMBS || window.SHELF_COVERS || [];
+    if (!host || !covers.length) return;
+    host.innerHTML = [0, 5, 2, 6, 10].filter(function (i) { return covers[i]; }).map(function (i, k) {
+      return '<img class="acct-fan-book" style="--k:' + (k - 2) + '" src="' + escapeHub(covers[i]) + '" alt="" decoding="async">';
+    }).join("");
+  }
+
   function boot() {
     if (!el("account-hub")) return;
+    paintFan();
     readNextFromQuery();
     bind();
     if (window.ScrollAuth && typeof window.ScrollAuth.ready === "function") {
-      window.ScrollAuth.ready().then(afterAuthReady);
+      window.ScrollAuth.ready().then(afterAuthReady).then(paintNotesCount);
       return;
     }
     afterAuthReady();
+    paintNotesCount();
   }
 
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot);

@@ -18,7 +18,7 @@
           "The Lord gave Jehoiakim",
           "Daniel 1:1–2; Numbers 14:34; Ezekiel 4:6",
           "assets/study/epochs/jerusalem-siege.jpg",
-          "The sitting opens here, not with a dream. Jehoiakim’s third year is the first dated move of the book: temple vessels leave Zion, and Judah’s royal youth walk east. Verse 1:2 will not let you read that as Babylon’s victory alone. The Lord gave the king into Nebuchadnezzar’s hand, which means every later empire in this scroll also arrives and departs by permission.\n\nThat claim is the hermeneutical hinge. Preterism parks the chain under Antiochus or A.D. 70. Futurism parks the Antichrist in a future week that Daniel never severed from the rest of the line. Historicism, the reading of the Reformers, keeps the four kingdoms as one continuous history from this siege to the stone.\n\nThe year-day rule that will later unlock 70 weeks, 1,260 days, and 2,300 evenings-mornings is already granted in Numbers 14:34 and Ezekiel 4:6. If you can replay that scale from this city, later dates will belong to you instead of to a borrowed chart."
+          "The sitting opens here, not with a dream. Jehoiakim’s third year is the first dated move of the book: temple vessels leave Zion, and Judah’s royal youth walk east. Verse 1:2 will not let you read that as Babylon’s victory alone. The Lord gave the king into Nebuchadnezzar’s hand, which means every later empire in this scroll also arrives and departs by permission.\n\nThat claim is the hermeneutical hinge. Antiochus is Porphyry’s reading of Daniel, which Jerome reports. Alcázar’s 1614 book limits the Apocalypse to Constantine’s overthrow of paganism, not A.D. 70. Futurism here is Ribera’s three and a half years, not a future week severed from the rest of the line. The seven-year week is later dispensationalism. Historicism, the reading of the Reformers, keeps the four kingdoms as one continuous history from this siege to the stone.\n\nThe year-day rule that will later unlock 70 weeks, 1,260 days, and 2,300 evenings-mornings is already granted in Numbers 14:34 and Ezekiel 4:6. If you can replay that scale from this city, later dates will belong to you instead of to a borrowed chart."
         ),
         node(
           "babylon",
@@ -126,7 +126,7 @@
           "The sixty-by-six image",
           "Daniel 3:1–18; Exodus 20:4–5",
           "assets/study/statue-nebuchadnezzar.jpg",
-          "The plain of Dura lies by Babylon. Here Nebuchadnezzar casts an image sixty cubits high and six cubits wide, entirely of gold — no silver, bronze, or iron. The design is a public refusal of Daniel 2. If the statue in the dream had later metals and a stone, this image declares that Babylon will not be replaced.\n\nWhen the orchestra sounds, every official must fall down. Refusal is a furnace. The second commandment forbids the bow, so Shadrach, Meshach, and Abednego can serve the king in civil matters and still stand when the music plays. “Our God is able to deliver us… but if not, we will not serve thy gods” (3:17–18).\n\nDaniel 3:1’s six-and-sixty image, the imperial decree, and worship enforced by death are the pattern Revelation 13 later writes at world scale. Dura is not a children’s story about courage in general. It is the first sitting of forced worship on this scroll."
+          "The plain of Dura lies by Babylon. Here Nebuchadnezzar casts an image sixty cubits high and six cubits wide, entirely of gold — no silver, bronze, or iron. The design is a public refusal of Daniel 2. If the statue in the dream had later metals and a stone, this image declares that Babylon will not be replaced.\n\nWhen the orchestra sounds, every official must fall down. Refusal is a furnace. The second commandment forbids the bow, so Shadrach, Meshach, and Abednego can serve the king in civil matters and still stand when the music plays. “Our God is able to deliver us… but if not, we will not serve thy gods” (3:17–18).\n\nDaniel 3:1’s sixty-by-six image, the imperial decree, and worship enforced by death are the pattern Revelation 13 later writes at world scale. Dura is not a children’s story about courage in general. It is the first sitting of forced worship on this scroll."
         ),
         node(
           "babylon",
@@ -207,7 +207,7 @@
           "Sacrilege against knowledge",
           "Daniel 5:2–4, 18–23",
           "assets/study/babylon-sunset.jpg",
-          "Belshazzar, grandson of Nebuchadnezzar and co-regent with Nabonidus, orders the golden and silver vessels from Yahweh’s temple into the feast. He and his lords drink from them while praising gods of gold, silver, bronze, iron, wood, and stone. What Daniel 1:2 said the Lord had given into the king’s hand is now a toasting cup for idols.\n\nDaniel’s rebuke in 5:18–23 is the hinge from chapter 4. The Most High gave Nebuchadnezzar majesty, humbled him among beasts, and restored him when he lifted his eyes. Belshazzar knew that history and still lifted himself up against the Lord of heaven. Judgment is instantaneous because the sin is against light already given.\n\nDaniel refuses purple and the gold chain. He will read the wall without becoming the feast’s ornament."
+          "Belshazzar, grandson of Nebuchadnezzar and co-regent with Nabonidus, orders the golden and silver vessels from Yahweh’s temple into the feast. He and his lords drink from them while praising gods of gold, silver, bronze, iron, wood, and stone. What Daniel 1:2 said the Lord had given into the king’s hand is now a toasting cup for idols.\n\nDaniel’s rebuke in 5:18–23 is the hinge from chapter 4. The Most High gave Nebuchadnezzar majesty, humbled him among beasts, and restored him when he lifted his eyes. Belshazzar knew that history and still lifted himself up against the Lord of heaven. Judgment is instantaneous because the sin is against light already given.\n\nDaniel declines the gifts (5:17). That night they clothe him with scarlet, put a chain of gold about his neck, and make him the third ruler anyway (5:29)."
         ),
         node(
           "jerusalem",
@@ -279,7 +279,7 @@
           "The deadly wound",
           "Daniel 7:25–26; 12:4; Revelation 13:3",
           "assets/study/epochs/deadly-wound.jpg",
-          "General Berthier enters Rome and takes Pius VI captive. The measured supremacy that opened in 538 closes. Revelation 13:3 calls this a deadly wound. Daniel 12:4 says the book is sealed till the time of the end — which this date opens.\n\nThe court of 7:9–14 is not the same moment as the stone of chapter 2. The 2020 lesson places that court after the 1,260 years, and Ellen G. White places the coming to the Ancient of Days at the close of the 2,300 days in 1844. Daniel 7:11 still has great words spoken while the court sits. 7:26–27 then takes the horn’s dominion away. Judgment sits before the stone strikes.\n\nFrom this pin the next sittings can number the sanctuary (8:14) in “the time of the end,” not in 164 B.C."
+          "General Berthier enters Rome and takes Pius VI captive. The measured supremacy that opened in 538 closes. Revelation 13:3 calls this a deadly wound. Daniel 12:4 says the book is sealed till the time of the end — which this date opens.\n\nThe court of 7:9–14 is not the same moment as the stone of chapter 2. The 2020 lesson places that court after the 1,260 years, and the historicist reading places the coming to the Ancient of Days at the close of the 2,300 days in 1844. Daniel 7:11 still has great words spoken while the court sits. 7:26–27 then takes the horn’s dominion away. Judgment sits before the stone strikes.\n\nFrom this pin the next sittings can number the sanctuary (8:14) in “the time of the end,” not in 164 B.C."
         ),
         node(
           "rome",
@@ -288,7 +288,7 @@
           "Pagan iron, then the diverse horn",
           "Daniel 7:7, 19–25",
           "assets/maps/stops/rome.jpg",
-          "The dreadful beast with iron teeth is the same fourth kingdom as the iron legs: Rome that crushes. Ten horns are the western division after 476. The eleventh horn that follows is seated in this city because that is where the three blocking horns were uprooted and where 1798 is inflicted.\n\nCompanion vision to the metals: winged lion, bear raised on one side (Lydia, Babylon, Egypt as ribs), four-headed leopard, then this beast. Do not drop the heavenly court out of the sequence when you tell the story. Earth is not the last scene of chapter 7."
+          "The dreadful beast with iron teeth is the same fourth kingdom as the iron legs: Rome that crushes. Ten horns are the western division after 476. The eleventh horn that follows is seated in this city, and 1798 is inflicted here. The Vandals fell in North Africa. In 538 Belisarius lifted the Ostrogothic siege of Rome. They retook the city in the 540s and were not fully defeated until about 553. That lifting is not the uprooting.\n\nCompanion vision to the metals: winged lion, bear raised on one side (Lydia, Babylon, Egypt as ribs), four-headed leopard, then this beast. Do not drop the heavenly court out of the sequence when you tell the story. Earth is not the last scene of chapter 7."
         ),
         node(
           "sanctuary-1844",
@@ -315,7 +315,7 @@
           "Ram, goat, and the numbered wait",
           "Daniel 8:2–14, 17–19",
           "assets/maps/stops/susa.jpg",
-          "In the third year of Belshazzar, Daniel is by the Ulai at Susa. A two-horned ram — Medo-Persia named in 8:20 — charges west, north, and south. A goat from the west, not touching the ground, is Greece under Alexander (8:21). The great horn snaps; four appear; from one direction another horn waxes exceeding great toward the south, the east, and the pleasant land.\n\nThat horn magnifies itself against the Prince of the host, takes away the tamid (the continual), and casts down the place of the sanctuary. In historicist reading this is Rome in two forms: pagan Rome crucifies the Prince and destroys the earthly house in A.D. 70; papal Rome substitutes a human daily for Christ’s heavenly priesthood.\n\nThe question “How long?” receives 2,300 evenings-mornings; then the sanctuary shall be nitsdaq — justified, put right. Gabriel twice says the vision is for the time of the end (8:17, 19)."
+          "In the third year of Belshazzar, Daniel is by the Ulai at Susa. A two-horned ram — Medo-Persia named in 8:20 — charges west, north, and south. A goat from the west, not touching the ground, is Greece under Alexander (8:21). The great horn snaps; four appear; from one direction another horn waxes exceeding great toward the south, the east, and the pleasant land.\n\nThat horn magnifies itself against the Prince of the host, takes away the tamid (the continual), and casts down the place of the sanctuary. In historicist reading this is Rome in two forms: pagan Rome crucifies the Prince and destroys the earthly house in A.D. 70; papal Rome substitutes a human daily for Christ’s heavenly priesthood.\n\nThe question “How long?” receives 2,300 evenings-mornings; then the sanctuary shall be nitsdaq — justified, put right. Gabriel says the vision shall be at the time of the end (8:17). Verse 19 names the last end of the indignation and the time appointed."
         ),
         node(
           "gaugamela",
@@ -333,7 +333,7 @@
           "Then shall the sanctuary be put right",
           "Daniel 8:14; Leviticus 16; 7:9–14",
           "assets/study/epochs/sanctuary.jpg",
-          "Gabriel states twice that Daniel 8’s vision reaches to the time of the end (8:17, 19). An ancient local altar cannot exhaust a 2,300-year prophecy. Nitsdaq is a courtroom verb, kin to the books opened in 7:9–10, not a janitorial word for an earthly altar. The antitype is the Day of Atonement work in the heavenly Most Holy Place (Hebrews 8–9) — not this earthly hill, and not a New England field.\n\nDaniel faints because the number has no start date yet (8:27). Chapter 9 will cut seventy weeks from this same line. The people who first lived the landing of that line were in America. The stone that follows has no shaded province: the map’s borders stand for the whole earth."
+          "Gabriel says Daniel 8’s vision shall be at the time of the end (8:17). Verse 19 names the last end of the indignation and the time appointed. An ancient local altar cannot exhaust a 2,300-year prophecy. Nitsdaq is a courtroom verb, kin to the books opened in 7:9–10, not a janitorial word for an earthly altar. The antitype is the Day of Atonement work in the heavenly Most Holy Place (Hebrews 8–9) — not this earthly hill, and not a New England field.\n\nDaniel faints and is sick certain days. He is astonished at the vision, but none understood it (8:27). Chapter 9 will cut seventy weeks from this same line. The people who first lived the landing of that line were in America. The stone that follows has no shaded province: the map’s borders stand for the whole earth."
         ),
         node(
           "jerusalem",
@@ -378,7 +378,7 @@
           "The Great Disappointment",
           "Daniel 8:14, 26–27; Hebrews 8:1–2",
           "assets/maps/stops/oct22-1844.jpg",
-          "Christ does not appear over New England. The arithmetic is not withdrawn. The event is. They had made the earth the sanctuary. Daniel 8:14 names the sanctuary put right — nitsdaq — not a hillside Advent.\n\nHostile papers invent white “ascension robes.” The ordinary record is farmers and tradespeople in ordinary clothes, waiting, then grieving. Daniel himself fainted when the number had no start (8:27). A wrong event is not the same wound as a failed God."
+          "Christ does not appear over New England. The arithmetic is not withdrawn. The event is. They had made the earth the sanctuary. Daniel 8:14 names the sanctuary put right — nitsdaq — not a hillside Advent.\n\nHostile papers invent white “ascension robes.” The ordinary record is farmers and tradespeople in ordinary clothes, waiting, then grieving. Daniel himself fainted and was sick certain days; he was astonished at the vision, but none understood it (8:27). A wrong event is not the same wound as a failed God."
         ),
         node(
           "edson-port-gibson",
@@ -387,7 +387,7 @@
           "The sanctuary is in heaven",
           "Daniel 8:14; 7:9–14; Hebrews 9:23–24",
           "assets/maps/stops/edson-cornfield.jpg",
-          "The morning after, Hiram Edson walks a cornfield near Port Gibson. The memory of that Advent circle is that 8:14’s sanctuary is the heavenly Most Holy Place — the court of chapter 7, the Day of Atonement antitype — not this earth and not this hill in Judah.\n\nThis is the dated account of people who would not throw the number away with the wrong event. It is not a state paper. Trace it back to Hebrews 8–9 and to the verb nitsdaq."
+          "The morning after, Hiram Edson walks a cornfield near Port Gibson. The memory of that company is that 8:14’s sanctuary is the heavenly Most Holy Place — the court of chapter 7, the Day of Atonement antitype — not this earth and not this hill in Judah.\n\nThis is the dated account of people who would not throw the number away with the wrong event. It is not a state paper. Trace it back to Hebrews 8–9 and to the verb nitsdaq."
         ),
         node(
           "washington-nh",
@@ -396,7 +396,7 @@
           "Sabbath in the same year",
           "Daniel 7:25; Exodus 20:8–11",
           "assets/maps/stops/washington-nh.jpg",
-          "Rachel Oakes Preston, a Seventh Day Baptist, presses Advent believers in this meetinghouse on the seventh-day Sabbath in 1844. Frederick Wheeler’s congregation becomes the first Sabbath-keeping company among those Advent believers.\n\nThe stone is not an American denomination. The pin is a dated local fact: the same year the 2,300 days close, a New England church is already asking which law the little horn thought to change (7:25)."
+          "Rachel Oakes Preston, a Seventh Day Baptist, presses the believers in this meetinghouse on the seventh-day Sabbath in 1844. Frederick Wheeler’s congregation becomes the first Sabbath-keeping company among them.\n\nThe stone is not an American denomination. The pin is a dated local fact: the same year the 2,300 days close, a New England church is already asking which law the little horn thought to change (7:25)."
         ),
         node(
           "morse-telegraph",
@@ -486,7 +486,7 @@
           "The man in linen",
           "Daniel 10:4–13; Revelation 1:13–15",
           "assets/study/epochs/resurrection-dawn.jpg",
-          "Daniel has fasted three weeks by the great river Hiddekel. A figure in linen, gold-girded, whose appearance matches the glorified Christ of Revelation 1, stands above the waters. The prince of Persia has resisted twenty-one days; Michael, the great prince, comes to help.\n\nNations move because unseen princes wrestle, not only because kings sign decrees. The metal sequence was never mere geography. It was a war already fought in heaven before it appeared on the map.\n\nThis is where the last sitting begins: not at a new empire, but at the unveiling that the whole scroll has been a conflict over the people whose names will be found written in the book."
+          "Daniel has fasted three weeks by the great river Hiddekel. A figure in linen, gold-girded, whose appearance matches the glorified Christ of Revelation 1, stands above the waters. The prince of Persia has resisted twenty-one days; Michael, one of the chief princes, comes to help (10:13).\n\nNations move because unseen princes wrestle, not only because kings sign decrees.\n\nThis is where the last sitting begins: not at a new empire, but at the unveiling that the whole scroll has been a conflict over the people whose names will be found written in the book."
         ),
         node(
           "alexandria",
@@ -495,7 +495,7 @@
           "Ptolemies, then the long quarrel",
           "Daniel 11:5–15, 40–45",
           "assets/maps/stops/alexandria.jpg",
-          "Chapter 11 names Persia, then Alexander, then the fourfold break. Egypt’s Ptolemies are the King of the South; Syria’s Seleucids the King of the North. Their wars fill the centuries until Rome enters (11:16–22) and the prince of the covenant is cut off — the cross under pagan Rome.\n\nFrom 11:31 the papal form removes the tamid again. From 11:40 the time of the end — opened in 1798 — runs into movements this study still treats as future. Alexandria holds the southern pole of that march so chapter 11 is a map, not a fog of titles."
+          "Chapter 11 names Persia and the realm of Grecia. A mighty king shall stand up, and the kingdom breaks four ways. The mighty king is unnamed. Egypt’s Ptolemies are the King of the South; Syria’s Seleucids the King of the North. Their wars fill the centuries until Rome enters (11:16–22) and the prince of the covenant is cut off — the cross under pagan Rome.\n\nFrom 11:31 the papal form removes the tamid again. From 11:40 the time of the end — opened in 1798 — runs into movements this study still treats as future. Alexandria holds the southern pole of that march so chapter 11 is a map, not a fog of titles."
         ),
         node(
           "rome",

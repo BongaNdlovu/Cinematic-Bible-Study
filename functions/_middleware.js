@@ -1,6 +1,8 @@
 const SUPABASE_URL = "https://ttlrspnfadmxkoyqvofh.supabase.co";
 const SUPABASE_KEY = "sb_publishable_k3fsJ1eGKIcmOxtmaZHbJw_R1qdW_ya";
 
+const STATIC_PREFIXES = ["/assets/", "/js/", "/css/", "/vendor/", "/models/", "/bible/"];
+
 function ipOf(request) {
   return request.headers.get("cf-connecting-ip")
     || request.headers.get("x-real-ip")
@@ -64,10 +66,23 @@ async function allowed(context, ip, path) {
   }
 }
 
+/* Compare without an early exit, so response time does not reveal how many
+   leading characters of the secret a guess got right. */
+function safeEqual(a, b) {
+  const x = String(a);
+  const y = String(b);
+  let diff = x.length ^ y.length;
+  const n = Math.max(x.length, y.length);
+  for (let i = 0; i < n; i += 1) {
+    diff |= (x.charCodeAt(i) || 0) ^ (y.charCodeAt(i) || 0);
+  }
+  return diff === 0;
+}
+
 async function rateProxy(context, request) {
   const secret = context.env && context.env.RATE_GATE_SECRET;
   const header = request.headers.get("authorization") || "";
-  if (!secret || header !== "Bearer " + secret) {
+  if (!secret || !safeEqual(header, "Bearer " + secret)) {
     return new Response("Forbidden", { status: 403 });
   }
   let body = {};
@@ -92,6 +107,11 @@ export async function onRequest(context) {
     path.startsWith("/workers") ||
     path.startsWith("/qa") ||
     path.startsWith("/originals") ||
+    /* Third-party research copies and diagram-migration working files. Neither
+       belongs in a release: the first is copyrighted material gathered for the
+       accuracy audit, the second is build input. */
+    path.startsWith("/_factcheck") ||
+    path.startsWith("/_mig") ||
     path === "/README.md" ||
     path === "/package.json" ||
     path === "/package-lock.json" ||
@@ -100,6 +120,7 @@ export async function onRequest(context) {
     path === "/wrangler.toml" ||
     path === "/start_website.bat" ||
     path === "/middleware.js" ||
+    path === "/__wiring_check.mjs" ||
     path.includes("auth-config.example") ||
     path.includes("auth-config.be73b1b3b81c") ||
     path.includes("auth-config.cfc4671cd63c") ||
@@ -116,6 +137,7 @@ export async function onRequest(context) {
   }
   if (request.method === "OPTIONS" || request.method === "HEAD") return context.next();
   if (path === "/__rate" && request.method === "POST") return rateProxy(context, request);
+  if (STATIC_PREFIXES.some(function (prefix) { return path.startsWith(prefix); })) return context.next();
   const ip = ipOf(request);
   const decision = await allowed(context, ip, path);
   if (decision === "down") return unavailable();

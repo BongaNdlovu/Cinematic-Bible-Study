@@ -236,6 +236,19 @@
     };
   }
 
+  function onboardPanel(sv) {
+    const rows = sv.filter(function (s) { return s.responses && s.responses.kind === "onboarding"; });
+    const daniel = countBy(rows, function (s) { return s.responses.daniel; });
+    const book = countBy(rows, function (s) { return s.responses.book; });
+    const use = countBy(rows, function (s) { return s.responses.use; });
+    const body = rows.length
+      ? '<small style="font-weight:600;display:block;margin-bottom:4px;">Reading Daniel</small>' + barList(daniel) +
+        '<small style="font-weight:600;display:block;margin:8px 0 4px;">Book they love</small>' + barList(book) +
+        '<small style="font-weight:600;display:block;margin:8px 0 4px;">How they will use it</small>' + barList(use)
+      : '<p class="insights-empty">No first-reader answers yet.</p>';
+    return panel("onboard", "First readers", body);
+  }
+
   function render() {
     const grid = document.getElementById('insights-grid');
     if (!grid) return;
@@ -317,13 +330,14 @@
         }).join('') + '</ul>'
       ) +
       panel('profile', 'Learner profile mix',
-        '<small style="font-weight:600;display:block;margin-bottom:4px;">Study mode</small>' +
+        '<small style="font-weight:600;display:block;margin-bottom:4px;">How they will use it</small>' +
         barList(modes) +
-        '<small style="font-weight:600;display:block;margin:8px 0 4px;">Found via</small>' +
+        '<small style="font-weight:600;display:block;margin:8px 0 4px;">Reading Daniel</small>' +
         barList(found) +
-        '<small style="font-weight:600;display:block;margin:8px 0 4px;">Background</small>' +
+        '<small style="font-weight:600;display:block;margin:8px 0 4px;">Book they love</small>' +
         barList(backgrounds)
       ) +
+      onboardPanel(sv) +
       panel('learners', 'Learners',
         '<ul>' +
           '<li>Signed-in learners (all time): <b>' + escapeHtml(learners.total) + '</b></li>' +
@@ -364,6 +378,16 @@
               feedback: s.feedback,
               role: s.role,
               cohort: s.cohort,
+              created_at: s.created_at
+            };
+          }),
+          onboard: (cache.surveys || []).filter(function (s) {
+            return s.responses && s.responses.kind === "onboarding";
+          }).map(function (s) {
+            return {
+              daniel: s.responses.daniel,
+              book: s.responses.book,
+              use: s.responses.use,
               created_at: s.created_at
             };
           }),

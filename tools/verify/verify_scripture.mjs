@@ -213,9 +213,18 @@ if (!html.includes('#next-sheet-btn[hidden]') || !html.includes('guide-spot-puls
 const home = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
 if (/Bible Artifacts/i.test(home)) fail('homepage still brands Bible Artifacts');
 if (/SDA Historicist Verified/i.test(home)) fail('homepage still carries a denominational verification badge');
-if (!/Begin the sitting|hero-primary/.test(home)) fail('homepage is missing the sitting CTA');
-if (!/The Scroll of Daniel/.test(home)) fail('homepage must be titled as The Scroll of Daniel');
-if (!/full-scroll/.test(home)) fail('homepage is missing the full-scroll offer');
+if (!/id="btn-continue"/.test(home)) fail('homepage is missing the sitting CTA (the shelf\'s continue button)');
+if (!/The Shelf of Daniel/.test(home)) fail('homepage must be titled as The Shelf of Daniel');
+if (!/id="shelf-stage"/.test(home)) fail('homepage is missing the shelf, the full scroll of sittings');
+
+const homeJs = fs.readFileSync(path.join(root, 'js/home/home.js'), 'utf8');
+const heroVerses = [...homeJs.matchAll(/ref:\s*("Daniel (\d+):(\d+)"),\s*text:\s*("(?:[^"\\]|\\.)*")/g)];
+if (!heroVerses.length) fail('js/home/home.js carries no hero verses');
+for (const [, ref, chapter, verse, text] of heroVerses) {
+  const expected = (kjv.books.Daniel[chapter] || {})[verse];
+  if (!expected) fail('hero verse ' + JSON.parse(ref) + ' is not in bible/kjv.json');
+  if (JSON.parse(text) !== expected) fail('hero verse ' + JSON.parse(ref) + ' in js/home/home.js differs from bible/kjv.json');
+}
 
 const journey = fs.readFileSync(path.join(root, 'js/shared/journey.js'), 'utf8');
 if (!journey.includes('canAccessSheet') || !journey.includes('FREE_THROUGH')) {

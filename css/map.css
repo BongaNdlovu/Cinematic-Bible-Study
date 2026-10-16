@@ -6,9 +6,9 @@
   --cmap-muted: #c4b8a8;
   --cmap-dim: #8a7b66;
   --cmap-line: rgba(212, 175, 55, 0.22);
-  --cmap-panel: rgba(10, 8, 6, 0.78);
-  --cmap-serif: "Playfair Display", "Cinzel", Georgia, serif;
-  --cmap-quote: "Cormorant Garamond", Georgia, serif;
+  --cmap-panel: linear-gradient(160deg, rgba(34, 26, 17, 0.88), rgba(14, 11, 8, 0.94));
+  --cmap-serif: "Newsreader", Georgia, serif;
+  --cmap-quote: "Newsreader", Georgia, serif;
   --cmap-sans: Inter, system-ui, sans-serif;
 }
 .cmap-root, .cmap-embed, .cmap-page { box-sizing: border-box; }
@@ -274,13 +274,15 @@ html.cmap-html, body.cmap-page {
 .cmap-chrome > * { pointer-events: auto; }
 .cmap-brand {
   display: flex; align-items: center; gap: 10px;
-  font-family: var(--cmap-serif);
+  font-family: var(--cx-label);
   letter-spacing: 0.32em;
   font-size: 11px;
   color: var(--cmap-gold-soft);
 }
 .cmap-brand svg { width: 22px; height: 22px; color: var(--cmap-gold); }
 .cmap-links { display: flex; gap: 6px; flex-wrap: wrap; }
+.cmap-chrome .cmap-links { view-transition-name: cx-nav; }
+.cmap-chrome .cmap-brand { view-transition-name: cx-brand; }
 .cmap-links a, .cmap-icon-btn {
   font-size: 10px;
   font-weight: 500;
@@ -289,17 +291,18 @@ html.cmap-html, body.cmap-page {
   color: #ede2cf;
   padding: 7px 11px;
   border: 1px solid rgba(212, 175, 55, 0.32);
-  border-radius: 4px;
+  border-radius: 999px;
   background: rgba(14, 11, 8, 0.78);
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
-  transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+  transition: transform var(--cx-t1) var(--cx-ease), color var(--cx-t2) var(--cx-ease), border-color var(--cx-t2) var(--cx-ease), background-color var(--cx-t2) var(--cx-ease), box-shadow var(--cx-t2) var(--cx-ease);
 }
 .cmap-links a:hover, .cmap-links a.active, .cmap-icon-btn:hover {
   color: #ffffff;
   border-color: var(--cmap-gold);
   background: rgba(30, 24, 16, 0.92);
+  box-shadow: 0 10px 26px -14px rgba(229, 185, 59, 0.55);
 }
 .cmap-back {
   color: var(--cmap-gold-soft) !important;
@@ -322,6 +325,7 @@ html.cmap-html, body.cmap-page {
   display: flex;
   align-items: center;
   gap: 12px;
+  border-radius: var(--cx-radius);
 }
 .cmap-cartouche-icon {
   width: 52px;
@@ -342,8 +346,9 @@ html.cmap-html, body.cmap-page {
   display: block;
   font-family: var(--cmap-serif);
   font-size: 22px;
-  font-weight: 500;
+  font-weight: 400;
   color: #f7edd4;
+  letter-spacing: -0.015em;
 }
 .cmap-cartouche span {
   display: block;
@@ -372,6 +377,7 @@ html.cmap-html, body.cmap-page {
   color: var(--cmap-muted);
   max-height: calc(100% - 230px);
   overflow-y: auto;
+  border-radius: var(--cx-radius);
 }
 .cmap-legend-title {
   color: var(--cmap-gold);
@@ -424,12 +430,14 @@ html.cmap-html, body.cmap-page {
   transform: translateY(12px);
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.4s ease, transform 0.45s cubic-bezier(.16, 1, .3, 1);
+  transition: opacity var(--cx-t2) var(--cx-ease-in), transform var(--cx-t2) var(--cx-ease-in);
+  border-radius: var(--cx-radius);
 }
 .cmap-dossier.open {
   opacity: 1;
   transform: none;
   pointer-events: auto;
+  transition: opacity var(--cx-t3) var(--cx-ease), transform var(--cx-t3) var(--cx-ease);
 }
 .cmap-dossier .kicker {
   font-size: 10px;
@@ -440,9 +448,10 @@ html.cmap-html, body.cmap-page {
 .cmap-dossier h2 {
   font-family: var(--cmap-serif);
   font-size: 26px;
-  font-weight: 500;
+  font-weight: 400;
   margin: 4px 0 8px;
   color: #f7edd4;
+  letter-spacing: -0.015em;
 }
 .cmap-dossier p {
   font-size: 13.5px;
@@ -475,7 +484,7 @@ html.cmap-html, body.cmap-page {
   color: var(--cmap-gold-soft);
   border: 1px solid var(--cmap-line);
   padding: 8px 12px;
-  border-radius: 4px;
+  border-radius: 999px;
 }
 .cmap-dossier-actions a:hover, .cmap-enter:hover {
   background: rgba(212, 175, 55, 0.12);
@@ -501,6 +510,7 @@ html.cmap-html, body.cmap-page {
   border: 1px solid var(--cmap-line);
   background: var(--cmap-panel);
   backdrop-filter: blur(16px);
+  border-radius: var(--cx-radius);
 }
 .cmap-year-track {
   display: flex;
@@ -582,6 +592,7 @@ html.cmap-html, body.cmap-page {
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--cmap-muted);
+  border-radius: var(--cx-radius);
 }
 .cmap-layers label {
   display: flex;
@@ -649,6 +660,8 @@ html.cmap-html, body.cmap-page {
   font-size: 20px;
   color: #f7edd4;
   text-shadow: 0 4px 16px #000;
+  font-weight: 400;
+  letter-spacing: -0.015em;
 }
 .cmap-medal {
   background: none !important;
@@ -696,7 +709,7 @@ html.cmap-html, body.cmap-page {
   width: 100%;
   padding: 9px 12px;
   border: 1px solid var(--cmap-line);
-  border-radius: 8px;
+  border-radius: var(--cx-radius-sm);
   background: var(--cmap-panel);
   color: var(--cmap-ink);
 }
@@ -704,7 +717,7 @@ html.cmap-html, body.cmap-page {
   margin-top: 4px;
   border: 1px solid var(--cmap-line);
   background: var(--cmap-panel);
-  border-radius: 8px;
+  border-radius: var(--cx-radius-sm);
   overflow: hidden;
 }
 .cmap-search-hits button, .cmap-search-hits p {
@@ -727,7 +740,7 @@ html.cmap-html, body.cmap-page {
 .cmap-play-route {
   border: 1px solid var(--cmap-line);
   padding: 8px 12px;
-  border-radius: 4px;
+  border-radius: 999px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   font-size: 10px;
@@ -804,11 +817,12 @@ html.cmap-html, body.cmap-page {
 }
 .cmap-chapter .copy h1 {
   font-family: var(--cmap-serif);
-  font-weight: 500;
+  font-weight: 400;
   font-size: clamp(32px, 5vw, 64px);
   line-height: 1.05;
   color: #f7edd4;
   text-shadow: 0 8px 28px rgba(0, 0, 0, 0.55);
+  letter-spacing: -0.015em;
 }
 
 @keyframes cmapKen {
@@ -839,10 +853,10 @@ html.cmap-html, body.cmap-page {
 }
 .cmap-overture h1 {
   font-family: var(--cmap-serif);
-  font-weight: 500;
+  font-weight: 400;
   font-size: clamp(36px, 6vw, 78px);
   color: #f7edd4;
-  letter-spacing: 0.06em;
+  letter-spacing: -0.015em;
 }
 .cmap-overture p {
   margin-top: 14px;
@@ -956,6 +970,7 @@ html.cmap-html, body.cmap-page {
   border: 1px solid var(--cmap-line);
   background: var(--cmap-panel);
   backdrop-filter: blur(12px);
+  border-radius: var(--cx-radius-sm);
 }
 .cmap-basemap button {
   padding: 7px 10px;
@@ -963,7 +978,7 @@ html.cmap-html, body.cmap-page {
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--cmap-dim);
-  border-radius: 4px;
+  border-radius: 999px;
 }
 .cmap-basemap button:hover { color: var(--cmap-gold-soft); }
 .cmap-basemap button.active {
@@ -982,6 +997,7 @@ html.cmap-html, body.cmap-page {
   background: var(--cmap-panel);
   backdrop-filter: blur(18px);
   box-shadow: 0 28px 80px rgba(0, 0, 0, 0.55);
+  border-radius: var(--cx-radius);
 }
 .cmap-key-panel[hidden] { display: none; }
 .cmap-key-panel p {
@@ -994,7 +1010,7 @@ html.cmap-html, body.cmap-page {
   width: 100%;
   padding: 10px 12px;
   border: 1px solid var(--cmap-line);
-  border-radius: 6px;
+  border-radius: var(--cx-radius-sm);
   background: rgba(0, 0, 0, 0.35);
   color: var(--cmap-ink);
   margin-bottom: 12px;
@@ -1003,7 +1019,7 @@ html.cmap-html, body.cmap-page {
 .cmap-key-actions button {
   padding: 9px 12px;
   border: 1px solid var(--cmap-line);
-  border-radius: 4px;
+  border-radius: 999px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   font-size: 10px;
@@ -1029,6 +1045,7 @@ html.cmap-html, body.cmap-page {
     right: 10px;
     max-height: 46vh;
     z-index: 2300;
+    animation: cmapPanelIn var(--cx-t3) var(--cx-ease) both;
   }
   .cmap-layers.is-open {
     display: flex;
@@ -1036,6 +1053,7 @@ html.cmap-html, body.cmap-page {
     left: 10px;
     right: auto;
     z-index: 2300;
+    animation: cmapPanelIn var(--cx-t3) var(--cx-ease) both;
   }
   .cmap-panels-toggle {
     display: flex;
@@ -1048,6 +1066,7 @@ html.cmap-html, body.cmap-page {
     border: 1px solid var(--cmap-line);
     background: var(--cmap-panel);
     backdrop-filter: blur(12px);
+    border-radius: var(--cx-radius-sm);
   }
   .cmap-panels-toggle button {
     padding: 7px 10px;
@@ -1055,7 +1074,7 @@ html.cmap-html, body.cmap-page {
     letter-spacing: 0.14em;
     text-transform: uppercase;
     color: var(--cmap-dim);
-    border-radius: 4px;
+    border-radius: 999px;
   }
   .cmap-panels-toggle button:hover { color: var(--cmap-gold-soft); }
   .cmap-panels-toggle button[aria-expanded="true"] {
@@ -1153,3 +1172,109 @@ html.cmap-html, body.cmap-page {
 .leaflet-control-zoom a:hover { background: rgba(26, 22, 16, 0.92); color: #f0e0b8; }
 .leaflet-control-zoom a:last-child { border-bottom: 0; }
 
+.cmap-nav-year, .cmap-play, .cmap-close, .cmap-basemap button, .cmap-panels-toggle button,
+.cmap-key-actions button, .cmap-play-route, .cmap-search-hits button, .cmap-dossier-actions a,
+.cmap-enter, .cmap-year, .cmap-icon-btn {
+  transition: transform var(--cx-t1) var(--cx-ease), color var(--cx-t2) var(--cx-ease), background-color var(--cx-t2) var(--cx-ease), border-color var(--cx-t2) var(--cx-ease), box-shadow var(--cx-t2) var(--cx-ease);
+}
+.cmap-nav-year:hover, .cmap-play:hover, .cmap-basemap button:hover, .cmap-panels-toggle button:hover,
+.cmap-key-actions button:hover, .cmap-play-route:hover, .cmap-dossier-actions a:hover, .cmap-enter:hover,
+.cmap-icon-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 26px -14px rgba(229, 185, 59, 0.55);
+}
+.cmap-links a:active, .cmap-icon-btn:active, .cmap-nav-year:active, .cmap-play:active, .cmap-close:active,
+.cmap-basemap button:active, .cmap-panels-toggle button:active, .cmap-key-actions button:active,
+.cmap-play-route:active, .cmap-search-hits button:active, .cmap-dossier-actions a:active, .cmap-enter:active,
+.cmap-year:active {
+  transform: scale(0.975);
+}
+.cmap-search input:focus, .cmap-key-panel input:focus {
+  outline: none;
+  border-color: var(--cmap-gold);
+  box-shadow: 0 0 0 3px rgba(229, 185, 59, 0.16);
+}
+.leaflet-control-zoom a:focus-visible {
+  outline-offset: -3px;
+}
+@keyframes cmapPanelIn {
+  from { opacity: 0; transform: translateY(10px); filter: blur(4px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cmap-nav-year, .cmap-play, .cmap-close, .cmap-basemap button, .cmap-panels-toggle button,
+  .cmap-key-actions button, .cmap-play-route, .cmap-search-hits button, .cmap-dossier-actions a,
+  .cmap-enter, .cmap-year, .cmap-icon-btn, .cmap-links a { transition: none; }
+  .cmap-legend.is-open, .cmap-layers.is-open { animation: none; }
+}
+
+.cmap-year span {
+  font-family: var(--cx-display);
+  font-size: 15px;
+  letter-spacing: 0;
+  text-transform: none;
+  font-variant-numeric: lining-nums;
+}
+.cmap-year.active span { color: #1a140c; }
+.cmap-year-track { position: relative; scroll-snap-type: x proximity; }
+.cmap-year { scroll-snap-align: center; transition: color var(--cx-t2) var(--cx-ease), background-color var(--cx-t2) var(--cx-ease), border-color var(--cx-t2) var(--cx-ease), transform var(--cx-t1) var(--cx-ease); }
+.cmap-year:not(.active):hover { color: var(--cx-cream); border-color: var(--cx-line); transform: translateY(-2px); }
+.cmap-year img { transition: transform var(--cx-t2) var(--cx-ease), filter var(--cx-t2) var(--cx-ease); }
+.cmap-year:hover img { transform: scale(1.08); }
+
+.cmap-medal img { transition: transform var(--cx-t2) var(--cx-ease), box-shadow var(--cx-t2) var(--cx-ease); }
+.cmap-medal:hover img { transform: scale(1.12); box-shadow: 0 0 0 2px var(--cx-gold), 0 0 22px rgba(229, 185, 59, 0.55), 0 8px 18px rgba(0, 0, 0, 0.6); }
+.cmap-medal:hover { z-index: 1000 !important; }
+.cmap-medal .label { font-family: var(--cx-label); font-weight: 600; letter-spacing: 0.16em; }
+
+.cmap-dossier { scrollbar-width: thin; scrollbar-color: rgba(229, 185, 59, 0.35) transparent; }
+.cmap-dossier.is-swapping > * { animation: cx-rise 420ms var(--cx-ease) both; }
+.cmap-dossier.is-swapping > *:nth-child(3) { animation-delay: 50ms; }
+.cmap-dossier.is-swapping > *:nth-child(n+4) { animation-delay: 100ms; }
+
+@media (min-width: 801px) {
+  .cmap-root .cmap-layers:not(.is-open), .cmap-root .cmap-legend:not(.is-open) { display: none; }
+  .cmap-root .cmap-layers.is-open, .cmap-root .cmap-legend.is-open { animation: cmapPanelIn var(--cx-t3) var(--cx-ease) both; }
+  .cmap-root .cmap-legend { top: 166px; max-height: calc(100vh - 166px - 250px); overflow-y: auto; }
+  .cmap-root .cmap-panels-toggle {
+    display: flex;
+    position: absolute;
+    top: 118px;
+    right: 20px;
+    z-index: 2200;
+    gap: 4px;
+    padding: 4px;
+    border: 1px solid var(--cmap-line);
+    background: var(--cmap-panel);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 999px;
+  }
+  .cmap-root .cmap-panels-toggle button {
+    padding: 7px 14px;
+    font-family: var(--cx-ui);
+    font-size: 10.5px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--cmap-dim);
+    border-radius: 999px;
+    transition: color var(--cx-t2) var(--cx-ease), background-color var(--cx-t2) var(--cx-ease), transform var(--cx-t1) var(--cx-ease);
+  }
+  .cmap-root .cmap-panels-toggle button:hover { color: var(--cmap-gold-soft); }
+  .cmap-root .cmap-panels-toggle button:active { transform: scale(0.975); }
+  .cmap-root .cmap-panels-toggle button[aria-expanded="true"] { color: #1a140c; background: linear-gradient(180deg, #f0d78c, #c9a227); }
+  .cmap-root .cmap-dossier { bottom: 132px; max-height: calc(100vh - 132px - 170px); overflow-y: auto; }
+  .cmap-root .cmap-compass { width: 56px; height: 56px; bottom: 214px; right: 24px; }
+  .cmap-root .cmap-compass svg { width: 56px; height: 56px; }
+  .cmap-root .leaflet-bottom.leaflet-right .leaflet-control-zoom { margin-right: 24px; margin-bottom: 132px; }
+  .cmap-root .cmap-coords { bottom: 140px; }
+}
+@media (max-width: 800px) {
+  .cmap-root .cmap-dossier { bottom: 112px; max-height: 38vh; }
+  .cmap-root .cmap-compass { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cmap-year, .cmap-year img, .cmap-medal img, .cmap-root .cmap-panels-toggle button { transition: none; }
+  .cmap-dossier.is-swapping > *, .cmap-root .cmap-layers.is-open, .cmap-root .cmap-legend.is-open { animation: none; }
+}

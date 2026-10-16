@@ -114,7 +114,7 @@ new_block = f'''      {{
             do: [
               "Follow Introduction and Main Points I–V plus Practical Application.",
               "Open Map and trace the Tigris River, the march of empires, and Michael standing up.",
-              "Complete checkpoint questions, and review your mastery across the entire Scroll of Daniel."
+              "Complete checkpoint questions, and review your mastery across the entire Shelf of Daniel."
             ]
           }},
           end: {{

@@ -1,13 +1,13 @@
 # Architecture
 
-The Scroll of Daniel is four static pages at the repo root. Python `server.py` is the only runtime. There is no bundler. Course-content work lives in [COURSE_IMPROVEMENT_PLAN.md](COURSE_IMPROVEMENT_PLAN.md); this file answers “where does X live?”
+The Shelf of Daniel is four static pages at the repo root. Python `server.py` is the only runtime. There is no bundler. Course-content work lives in [COURSE_IMPROVEMENT_PLAN.md](COURSE_IMPROVEMENT_PLAN.md); this file answers “where does X live?”
 
 ## Pages → scripts
 
 | Page | URL stays at | CSS | Scripts (load order) | Owns |
 |---|---|---|---|---|
 | Cover | `index.html` | `css/site.css` | `js/shared/journey.js` | Entrance, resume CTA, three-act offer |
-| Study desk | `study.html` | `css/map.css` (embedded map) + inline study styles | Tailwind CDN → `js/study/tailwind-config.js` → Tone.js → import map → `js/study/stage.js` (module) → Leaflet → `js/shared/journey.js` → `js/study/scripture.js` → `js/map/map-data.js` → `js/map/map.js` → `js/study/workbench.js` → `js/study/competency.js` → `js/shared/study-sync.js` → `js/shared/quiz-gate.js` → `js/study/sheets-data.js` → `js/study/sheet-map.js` → `js/study/sheet-verify.js` → `js/study/sheet-glossary.js` → `js/study/certificate.js` → `js/study/study-app.js` | 11-sheet sitting, quiz gate, weather, pomodoro, horizon |
+| Study desk | `study.html` | `css/map.css` (embedded map) + `css/book-reader.css` + inline study styles | Tailwind CDN → `js/study/tailwind-config.js` → Tone.js → import map → `js/study/stage.js` (module) → Leaflet → `js/shared/journey.js` → `js/study/scripture.js` → `js/map/map-data.js` → `js/map/map.js` → `js/study/workbench.js` → `js/study/competency.js` → `js/shared/study-sync.js` → `js/shared/quiz-gate.js` → `js/study/sheets-data.js` → `js/study/sheet-map.js` → `js/study/sheet-verify.js` → `js/study/sheet-glossary.js` → `js/study/certificate.js` → `js/study/book-reader.js` → `js/study/study-app.js` | 11-sheet sitting as a page-turning book (text pages, diagram plates), quiz gate, weather, pomodoro, horizon |
 | Map | `map.html` | `vendor/leaflet/leaflet.css`, `css/map.css` | Leaflet → `js/shared/journey.js` → `js/map/map-data.js` → `js/map/map.js` | Chronicle fly, cities, events, routes |
 | 3D gallery | `gallery.html` | `css/app.css` | `js/shared/journey.js` → import map → `js/gallery/app.js` (module) | Artifact registry, orbit, hall |
 
@@ -92,15 +92,15 @@ Run verify scripts from the repo root so `server.py` and document-relative paths
 
 ## Complexity ceiling
 
-`npm run lint` (`oxlint`) fails any function above **55**. That is an initial regression ceiling (max observed + 2), not the long-term target. Ratchet it down as hotspots are split. No `complexity` suppressions.
+`npm run lint` (`oxlint`) fails any function above **55**. That is an initial regression ceiling (highest linted score + 2), not the long-term target. Ratchet it down as hotspots are split. No `complexity` suppressions. `tools/`, `qa/`, `vendor/`, `models/`, and `assets/` are outside that lint run, so a score there does not move the ceiling.
 
 | Score | Function | File:line |
 |---:|---|---|
-| 53 | `selectAsset` | `js/gallery/app.js:2677` |
-| 45 | `run` | `tools/verify/verify_all.mjs:94` |
-| 33 | `loadSheet` | `js/study/study-app.js:1834` |
-| 32 | `renderCompetencyRecordModal` | `js/study/competency.js:215` |
-| 28 | `setEpochInfo` | `js/study/study-app.js:34` |
+| 53 | `selectAsset` | `js/gallery/app.js:3151` |
+| 47 | `start` | `js/map/map.js:1015` |
+| 45 | `mergeCloudWithLocal` | `js/shared/progress-sync.js:132` |
+| 44 | `update` | `js/home/shelf.js:2210` |
+| 43 | `normalize` | `js/shared/journey.js:132` |
 
 ## Progress save and recovery
 

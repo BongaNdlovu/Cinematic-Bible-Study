@@ -321,6 +321,9 @@ export function extractAllUnits() {
           if (step.role) addUnit(`${tag}-${stIdx + 1}-ROLE`, 'diagram', step.role);
           if (step.title) addUnit(`${tag}-${stIdx + 1}-TITLE`, 'diagram', step.title);
           if (step.text) addUnit(`${tag}-${stIdx + 1}-TEXT`, 'diagram', step.text);
+          // The per-movement line the reader shows under the copy. It is
+          // learner-facing prose like the rest of the card, so it is a unit too.
+          if (step.detail) addUnit(`${tag}-${stIdx + 1}-DETAIL`, 'diagram', step.detail);
           (step.points || []).forEach((p, pIdx) => {
             addUnit(`${tag}-${stIdx + 1}-P${pIdx + 1}`, 'diagram', p);
           });

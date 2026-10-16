@@ -323,8 +323,8 @@ async function run() {
   await sleep(2500);
 
   const brand = await client.eval('document.querySelector("header")?.innerText || ""');
-  console.log('  [study.html] Header contains Scroll:', brand.includes('Scroll of Daniel'));
-  if (!brand.includes('Scroll of Daniel')) throw new Error('Study platform header missing');
+  console.log('  [study.html] Header contains Scroll:', brand.includes('Shelf of Daniel'));
+  if (!brand.includes('Shelf of Daniel')) throw new Error('Study platform header missing');
 
   const sheetTitle = await client.eval('document.getElementById("sheet-title")?.textContent');
   console.log('  [study.html] Initial sheet:', sheetTitle);
@@ -434,33 +434,37 @@ async function run() {
 
   console.log('\n=== Step 6: Testing index.html Functionality ===');
   await client.send('Page.navigate', { url: `${SERVER_BASE}/index.html` });
-  await sleep(1000);
+  // The home page is the shelf: its catalogue is built as the page boots.
+  let cardsCount = 0;
+  for (let i = 0; i < 60 && cardsCount < 3; i++) {
+    await sleep(250);
+    cardsCount = await client.eval('document.querySelectorAll("#cat-list .cat-item").length');
+  }
 
   // Test modern index.html curriculum structure
-  console.log('  [index.html] Testing dashboard rail and hero elements...');
-  const cardsCount = await client.eval('document.querySelectorAll(".dash-card, .act-card").length');
-  console.log('  [index.html] Cards count:', cardsCount);
-  if (cardsCount < 3) throw new Error(`Expected at least 3 cards, got ${cardsCount}`);
+  console.log('  [index.html] Testing the shelf and hero elements...');
+  console.log('  [index.html] Shelf volumes:', cardsCount);
+  if (cardsCount < 3) throw new Error(`Expected at least 3 shelf volumes, got ${cardsCount}`);
 
-  const primaryBtn = await client.eval('document.getElementById("hero-cta")?.getAttribute("href") || document.getElementById("hero-primary")?.getAttribute("href")');
-  console.log('  [index.html] Hero primary CTA:', primaryBtn);
-  if (!primaryBtn || !primaryBtn.includes('study.html')) throw new Error('Hero primary CTA link missing or invalid');
+  const primaryBtn = await client.eval('!!document.getElementById("btn-continue") && (document.getElementById("d-go") || {}).getAttribute?.("href")');
+  console.log('  [index.html] Hero primary action + study entry link:', primaryBtn);
+  if (!primaryBtn || !String(primaryBtn).includes('study.html')) throw new Error('Hero continue button or study link missing');
 
-  const fullScrollCard = await client.eval('!!document.getElementById("full-scroll")');
-  console.log('  [index.html] Full scroll card present:', fullScrollCard);
-  if (!fullScrollCard) throw new Error('Full scroll offer card missing from index.html');
+  const fullScrollCard = await client.eval('!!document.getElementById("shelf-stage")');
+  console.log('  [index.html] Shelf (the full scroll of sittings) present:', fullScrollCard);
+  if (!fullScrollCard) throw new Error('The shelf is missing from index.html');
 
-  const tickerCount = await client.eval('document.querySelectorAll(".dash-empire-ticker span:not(.dash-empire-sep)").length');
-  console.log('  [index.html] Empire ticker span count:', tickerCount);
-  if (tickerCount < 4) throw new Error('Empire ticker spans missing in hero');
+  const tickerCount = await client.eval('document.querySelectorAll(".sh-tab:not([hidden])").length');
+  console.log('  [index.html] Floating menu tabs:', tickerCount);
+  if (tickerCount < 4) throw new Error('Floating menu tabs missing in hero');
 
   const cardLinks = await client.eval(`(() => {
-    const cards = Array.from(document.querySelectorAll('.dash-card, .act-card a.btn'));
+    const cards = Array.from(document.querySelectorAll('.sh-tab, .act-card a.btn, #d-go'));
     return cards.map(a => a.getAttribute('href'));
   })()`);
   console.log('  [index.html] Card study entry links:', cardLinks);
-  if (!cardLinks.some(href => href && href.includes('sheet='))) {
-    throw new Error('Cards missing expected entry links to sheet');
+  if (!cardLinks.some(href => href && href.includes('study.html'))) {
+    throw new Error('Home is missing an entry link into the study');
   }
 
   console.log('\n=== Step 7: Testing gallery.html Direct Study Link & Camera Framing ===');

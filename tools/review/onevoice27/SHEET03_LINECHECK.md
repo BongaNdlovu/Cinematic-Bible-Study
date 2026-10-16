@@ -2,9 +2,9 @@
 
 **Audit Date:** 2026-09-20  
 **File Audited:** `js/study/sheets-data.js` (Sitting id: 3) with `sheet-verify.js`, `workbench.js`, `sheet-glossary.js`  
-**Audited Content Hash:** `f297d56114a11104`  
+**Audited Content Hash:** `d6a934048eba0d04`  
 **Method:** Exhaustive claim-unit audit of finished prose across content, christology, quizzes, studyGuide, guide, verify cards, workbench, and linked glossary entries.  
-**Counts:** ACCURATE: 195 | SOFTEN: 0 | FIX: 0 | N/A: 29 | Total: 224  
+**Counts:** ACCURATE: 187 | SOFTEN: 0 | FIX: 0 | N/A: 31 | Total: 218  
 
 ## 1. Summary of Required Sections & Governing Standards
 
@@ -79,7 +79,7 @@
 | S03-H-23 | N/A | N/A | Section title / kicker header chrome |
 | S03-P-21 | CHRIST | ACCURATE | Canonical Christology: Luke 24:27; Dan 9:26; Dan 2:44; Dan 7:13–14 |
 | S03-LI-07 | INTERPRETATION | ACCURATE | Biblical case and historical argument |
-| S03-LI-08 | INTERPRETATION | ACCURATE | Four-level interpretive verification criteria |
+| S03-LI-08 | INTERPRETATION | ACCURATE | Biblical case and historical argument |
 | S03-LI-09 | INTERPRETATION | ACCURATE | Biblical case and historical argument |
 | S03-H-24 | N/A | N/A | Section title / kicker header chrome |
 | S03-P-22 | INTERPRETATION | ACCURATE | Historicist argument grounded in Scripture interpreting Scripture (Dan 2; 7; 8; 9) |
@@ -90,8 +90,11 @@
 | S03-LI-11 | INTERPRETATION | ACCURATE | Four-level interpretive verification criteria |
 | S03-LI-12 | INTERPRETATION | ACCURATE | Four-level interpretive verification criteria |
 | S03-LI-13 | INTERPRETATION | ACCURATE | Four-level interpretive verification criteria |
+| S03-H-27 | N/A | N/A | Section title / kicker header chrome |
+| S03-H-28 | N/A | N/A | Section title / kicker header chrome |
+| S03-LI-14 | INTERPRETATION | ACCURATE | Biblical case and historical argument |
 | S03-CHR-TITLE | N/A | N/A | Christology banner title chrome |
-| S03-CHR-SCRIPTURE | TEXT | ACCURATE | Exact canonical scripture citation: Daniel 3:25; Isaiah 43:2; Isaiah 53:4–10; 2 Corinthians 5:21; Luke 20:18 |
+| S03-CHR-SCRIPTURE | TEXT | ACCURATE | Exact canonical scripture citation: Daniel 3:25; Isaiah 43:2; Isaiah 53:4–10; 2 Corinthians 5:21 |
 | S03-CHR-P1 | CHRIST | ACCURATE | Canonical Christological synthesis: Luke 24:27; Dan 9:26; Dan 2:44; redemption and kingdom |
 | S03-CHR-P2 | CHRIST | ACCURATE | Canonical Christological synthesis: Luke 24:27; Dan 9:26; Dan 2:44; redemption and kingdom |
 | S03-CHR-P3 | CHRIST | ACCURATE | Canonical Christological synthesis: Luke 24:27; Dan 9:26; Dan 2:44; redemption and kingdom |
@@ -219,31 +222,22 @@
 | S03-VRF-6-CHECK | PASTORAL | ACCURATE | Empirical reader checkpoint and source verification instruction |
 | S03-GLS-atonement-SMP | CHRIST | ACCURATE | Christological definition and canonical significance |
 | S03-GLS-atonement-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
-| S03-GLS-atonement-PRF | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
-| S03-GLS-babylon-SMP | INTERPRETATION | ACCURATE | Historicist vocabulary and prophetic hermeneutic definition |
+| S03-GLS-babylon-SMP | TEXT | ACCURATE | Biblical lexical definition and textual usage |
 | S03-GLS-babylon-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
-| S03-GLS-babylon-PRF | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
 | S03-GLS-colossus-SMP | INTERPRETATION | ACCURATE | Historicist vocabulary and prophetic hermeneutic definition |
 | S03-GLS-colossus-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
-| S03-GLS-colossus-PRF | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
 | S03-GLS-cubit-SMP | INTERPRETATION | ACCURATE | Historicist vocabulary and prophetic hermeneutic definition |
 | S03-GLS-cubit-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
-| S03-GLS-cubit-PRF | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
 | S03-GLS-daniel-SMP | INTERPRETATION | ACCURATE | Historicist vocabulary and prophetic hermeneutic definition |
 | S03-GLS-daniel-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
-| S03-GLS-daniel-PRF | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
 | S03-GLS-dura-SMP | INTERPRETATION | ACCURATE | Historicist vocabulary and prophetic hermeneutic definition |
 | S03-GLS-dura-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
-| S03-GLS-dura-PRF | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
 | S03-GLS-nebuchadnezzar-SMP | INTERPRETATION | ACCURATE | Historicist vocabulary and prophetic hermeneutic definition |
 | S03-GLS-nebuchadnezzar-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
-| S03-GLS-nebuchadnezzar-PRF | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
 | S03-GLS-three-hebrews-SMP | TEXT | ACCURATE | Biblical lexical definition and textual usage |
 | S03-GLS-three-hebrews-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
-| S03-GLS-three-hebrews-PRF | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
 | S03-GLS-typology-SMP | INTERPRETATION | ACCURATE | Historicist vocabulary and prophetic hermeneutic definition |
 | S03-GLS-typology-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
-| S03-GLS-typology-PRF | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
 
 ## 3. FIX List & Resolution
 

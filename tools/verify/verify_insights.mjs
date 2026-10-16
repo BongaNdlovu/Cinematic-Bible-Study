@@ -112,8 +112,8 @@ assert(!authJs.includes('clearPendingTerms'), 'auth.js must not wipe a once-agre
 const insightsSrc = fs.readFileSync(path.join(ROOT, 'js/shared/insights.js'), 'utf8');
 assert(insightsSrc.includes('account-hub'), 'insights.js must skip the floating profile card on the Account hub');
 
-const dashJs = fs.readFileSync(path.join(ROOT, 'js/home/dash.js'), 'utf8');
-assert(dashJs.includes('requestSignIn'), 'dash.js must send Home sign-in to the Account hub');
+const homeJs = fs.readFileSync(path.join(ROOT, 'js/home/home.js'), 'utf8');
+assert(homeJs.includes('requestSignIn'), 'home.js must send Home sign-in to the Account hub');
 const reviewsSrc = fs.readFileSync(path.join(ROOT, 'js/shared/reviews.js'), 'utf8');
 assert(reviewsSrc.includes('requestSignIn'), 'reviews.js must send review sign-in to the Account hub');
 console.log('✓ TERMS_VERSION and Account hub terms verified.');

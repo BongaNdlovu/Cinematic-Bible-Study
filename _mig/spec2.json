@@ -3,37 +3,125 @@
     "kind": "steps",
     "title": "The Prophetic Master-Framework (Daniel 2)",
     "steps": [
-      { "role": "Head of Gold", "title": "Babylon", "text": "605 - 539 B.C." },
-      { "role": "Chest & Arms Silver", "title": "Medo-Persia", "text": "539 - 331 B.C." },
-      { "role": "Belly & Thighs Bronze", "title": "Greece", "text": "331 - 168 B.C." },
-      { "role": "Legs of Iron", "title": "Rome", "text": "168 B.C. - A.D. 476" },
-      { "role": "Feet of Iron & Clay", "title": "Divided Europe", "text": "A.D. 476 - Second Advent" },
-      { "role": "The Striking Stone", "title": "Christ's Kingdom", "text": "Supernatural, Universal, Eternal" }
+      {
+        "role": "Head of Gold",
+        "title": "Babylon",
+        "text": "605–539 B.C. (accession year; BRI: 606–539)",
+        "detail": "Verse 38 settles the whole framework by naming the head of the image: \"Thou art this head of gold.\" The dream has already shown the metals and the mixed feet; what verse 38 fixes is which kingdom the head is. If Babylon is the head, the chest, belly, legs, and feet that follow are the next kingdoms in order rather than a set of symbols that can be restarted in any century.",
+        "bridgeShare": "one chain: a named head, then the kingdom after it",
+        "bridgeAhead": "Verse 38 names the head of the image, so the chest and arms that follow are the next kingdom in order rather than a symbol that can be restarted in any century. The record matches the metals: Babylon falls to the Medes and Persians, and the two arms answer the two-handed empire that replaced it."
+      },
+      {
+        "role": "Chest & Arms Silver",
+        "title": "Medo-Persia",
+        "text": "539 - 331 B.C.",
+        "detail": "The silver follows the gold the way the record does: Babylon falls to the Medes and Persians, and the two arms answer the two-handed empire that replaced it.",
+        "bridgeShare": "two kingdoms Daniel 8 names outright, the ram and the goat",
+        "bridgeAhead": "The silver is not left to inference: Daniel 8:20 names the ram as the kings of Media and Persia. The next movement takes the third metal, bronze, and the same chapter names it too — the rough goat, the king of Grecia. That is how the sequence is read without guessing."
+      },
+      {
+        "role": "Belly & Thighs Bronze",
+        "title": "Greece",
+        "text": "331 - 168 B.C.",
+        "detail": "Bronze is the third kingdom, and the vision gives it a breadth of rule the first two did not have. Gabriel names this one outright in Daniel 8:21, which is how the sequence can be read without guessing.",
+        "bridgeShare": "Bronze carries a breadth of rule, and iron breaks what it touches",
+        "bridgeAhead": "Bronze carries a breadth of rule the first two kingdoms did not have. The next movement takes the iron that follows it — a kingdom described by what it does to everything it touches, its two legs standing for an empire that divides in the end into east and west. One year closes the bronze and opens the iron: in 168, at Pydna, Rome ended the monarchy."
+      },
+      {
+        "role": "Legs of Iron",
+        "title": "Rome",
+        "text": "168 B.C. - A.D. 476",
+        "detail": "Iron breaks and subdues, and the fourth kingdom is described by what it does to everything it touches. The legs are two, and the empire they stand for divides in the end into east and west.",
+        "bridgeShare": "one kingdom, still iron, now in a divided dress",
+        "bridgeAhead": "The legs are two, and the empire they stand for divides in the end into east and west. The next movement shows that division inside the image: no fifth metal appears, only iron mixed with miry clay, and Daniel 2:43 says the mixture will not hold. This is the last political state of the iron."
+      },
+      {
+        "role": "Feet of Iron & Clay",
+        "title": "Divided Europe",
+        "text": "A.D. 476 - Second Advent",
+        "detail": "The feet are the only part of the image God's kingdom strikes, and 2:43 says the mixture will not hold. The metals decline in value as they harden: the head is gold and the feet are mud and iron.",
+        "bridgeShare": "a strike at the feet that breaks the whole image",
+        "bridgeAhead": "The feet are the only part of the image God's kingdom strikes, and Daniel 2:43 says the mixture will not hold. The next movement is the Stone: cut out without hands, no human power quarrying it, striking the feet in the days of these kings. It breaks the whole image at once and becomes a mountain that fills the earth — the kingdom does not arrive by the sword."
+      },
+      {
+        "role": "The Striking Stone",
+        "title": "Christ's Kingdom",
+        "text": "Supernatural, Universal, Eternal",
+        "detail": "The stone is cut out without hands, which is the vision's way of saying no human power quarries it. It breaks the whole image at once and then becomes a mountain that fills the earth, so the kingdom it stands for does not arrive by the sword."
+      }
     ]
   },
   "s2-2": {
     "kind": "table",
     "title": "Metallurgic Gradient of Daniel 2",
-    "head": ["Metal", "Specific Gravity", "Value / Splendor", "Hardness / Destructive Force"],
+    "head": [
+      "Metal",
+      "Specific Gravity",
+      "Value / Splendor",
+      "Hardness / Destructive Force"
+    ],
     "rows": [
-      { "cells": ["Gold", "19.3 (Highest)", "Pinnacle", "Soft, Malleable"] },
-      { "cells": ["Silver", "10.5", "High", "Pliable"] },
-      { "cells": ["Bronze", "8.9", "Moderate", "Tough"] },
-      { "cells": ["Iron", "7.8 (Lowest)", "Base", "Crushing, Destructive"] }
+      {
+        "cells": [
+          "Gold",
+          "19.3 (Highest)",
+          "Pinnacle",
+          "Soft, Malleable"
+        ]
+      },
+      {
+        "cells": [
+          "Silver",
+          "10.5",
+          "High",
+          "Pliable"
+        ]
+      },
+      {
+        "cells": [
+          "Bronze",
+          "8.9",
+          "Moderate",
+          "Tough"
+        ]
+      },
+      {
+        "cells": [
+          "Iron",
+          "7.8 (Lowest)",
+          "Base",
+          "Crushing, Destructive"
+        ]
+      }
     ]
   },
   "s2-3": {
-    "kind": "flow",
+    "kind": "mindmap",
     "title": "The Post-Roman Dilemma (Daniel 2:43)",
     "note": "Every attempt to rebuild a single European empire fractures",
+    "links": [
+      {
+        "from": "iron-clay",
+        "to": "not-cleave",
+        "kind": "text"
+      },
+      {
+        "from": "iron-clay",
+        "to": "not-cleave",
+        "kind": "interpretation"
+      }
+    ],
     "steps": [
       {
+        "id": "iron-clay",
         "role": "Iron + Clay",
         "title": "Iron (strength that remains) + Clay (the mixture that will not hold)"
       },
       {
-        "role": "Mechanical Mixture, Not Union",
+        "id": "not-cleave",
+        "role": "Mixture, Not Union",
         "title": "They Shall Not Cleave",
+        "link": "history",
         "points": [
           "Charlemagne (800)",
           "Charles V (1519)",
@@ -44,28 +132,64 @@
     ]
   },
   "s2-4": {
-    "kind": "flow",
+    "kind": "mindmap",
     "title": "The Smiting Stone",
+    "links": [
+      {
+        "from": "cut-out",
+        "to": "strikes",
+        "kind": "text"
+      },
+      {
+        "from": "cut-out",
+        "to": "strikes",
+        "kind": "history"
+      },
+      {
+        "from": "cut-out",
+        "to": "strikes",
+        "kind": "interpretation"
+      },
+      {
+        "from": "strikes",
+        "to": "pulverizes",
+        "kind": "text"
+      },
+      {
+        "from": "pulverizes",
+        "to": "becomes",
+        "kind": "christ"
+      }
+    ],
     "steps": [
       {
+        "id": "cut-out",
         "role": "Cut Out",
         "title": "Cut out without human hands",
+        "y": 198,
         "text": "Divine origin, Supernatural"
       },
       {
+        "id": "strikes",
         "role": "Strikes",
         "title": "Strikes the Statue at the FEET",
         "cite": "Dan. 2:34",
-        "text": "Not during Babylon, Persia, Greece, or Pagan Rome, but during the divided kingdoms after Rome (the feet)"
+        "y": 462,
+        "text": "Not during Babylon, Persia, Greece, or Pagan Rome, but during the divided kingdoms after Rome (the feet)",
+        "link": "interpretation"
       },
       {
+        "id": "pulverizes",
         "role": "Pulverizes",
         "title": "Pulverizes Gold, Silver, Bronze, Iron, & Clay",
+        "y": 220,
         "text": "Becomes like chaff blown away"
       },
       {
+        "id": "becomes",
         "role": "Becomes",
         "title": "Becomes a Mountain Filling the Earth",
+        "y": 455,
         "text": "The Everlasting Kingdom of God"
       }
     ]

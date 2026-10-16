@@ -1,4 +1,4 @@
-# Scroll of Daniel — Course Improvement Plan
+# Shelf of Daniel — Course Improvement Plan
 **From 6.9/10 solid → 9+/10 exceptional. Plan only — no implementation in this document.**
 
 Date: 2026-09-10. Scope: the study course (`study.html` + instruments), the homepage promise (`index.html`), and supporting tooling. The 3D gallery and map are touched only where the course links into them.

@@ -95,17 +95,9 @@
     "Daniel 9",
     "Daniel 10–12"
   ];
-  const ASSEMBLED_NODE_SITTING = {
-    "col-altar": 0,
-    "col-head": 2,
-    "col-chest": 2,
-    "col-thighs": 2,
-    "col-legs": 2,
-    "col-feet": 2
-  };
-
   // Sequential sittings: sittings 0–FREE_THROUGH start open. Completing N
-  // opens N+1 for study sheets, gallery assets, and map pins. Client-side only.
+  // opens N+1. Guests stop at FREE_THROUGH. The map and the 3D arena open
+  // only after sign-in, and then they open as a whole. Client-side only.
   // Teachers can open everything with ?preview=full — signed-in moderators
   // still follow the same lesson path as students.
   const ENABLE_BETA_PREVIEW_DEFAULT = false;
@@ -383,13 +375,9 @@
   }
 
   function canAccessAsset(key) {
-    if (previewAllContent() || allLessonsComplete()) return true;
     const k = key === "altar" ? "assembled" : key;
-    if (k === "assembled") return true;
-    const sitting = sittingForAsset(k);
-    if (sitting < 0) return false;
-    if (sitting === 0) return true;
-    return canAccessSheet(sitting);
+    if (!k) return false;
+    return previewAllContent() || isMember();
   }
 
   function sheetCompleted(index) {
@@ -407,49 +395,34 @@
     return true;
   }
 
-  function sittingForMuseumNode(id, assetKey) {
-    if (id && Object.prototype.hasOwnProperty.call(ASSEMBLED_NODE_SITTING, id)) {
-      return ASSEMBLED_NODE_SITTING[id];
-    }
-    return sittingForAsset(assetKey);
-  }
-
-  function canAccessMuseumNode(id, assetKey) {
-    if (previewAllContent() || allLessonsComplete()) return true;
-    if (id === "col-altar" || assetKey === "assembled" || assetKey === "altar") return true;
-    const sitting = sittingForMuseumNode(id, assetKey);
-    if (sitting < 0) return false;
-    if (sitting === 0) return true;
-    return canAccessSheet(sitting);
-  }
-
-  function openNodeIds() {
-    const open = maxOpenSheet();
-    const ids = {};
-    for (let i = 0; i <= open; i++) {
-      (SITTING_NODES[i] || []).forEach(function (id) { ids[id] = true; });
-      const pack = window.SHEET_MAP && window.SHEET_MAP[i];
-      if (pack && pack.nodes) {
-        pack.nodes.forEach(function (n) { if (n && n.id) ids[n.id] = true; });
-      }
-    }
-    return ids;
+  function canAccessMuseumNode() {
+    return previewAllContent() || isMember();
   }
 
   function canAccessMapNode(id) {
     if (!id) return false;
-    if (previewAllContent() || allLessonsComplete()) return true;
-    return !!openNodeIds()[id];
+    return previewAllContent() || isMember();
   }
 
   function canAccessYear(yearId) {
     if (!yearId) return false;
-    if (previewAllContent() || allLessonsComplete()) return true;
-    const open = maxOpenSheet();
-    for (let i = 0; i <= open; i++) {
-      if ((SITTING_YEARS[i] || []).indexOf(yearId) >= 0) return true;
+    return previewAllContent() || isMember();
+  }
+
+  function requireMember(nextPath) {
+    const next = nextPath || ((location.pathname.split("/").pop() || "index.html") + (location.search || ""));
+    function decide() {
+      if (previewAllContent() || isMember()) return true;
+      if (window.ScrollTerms && typeof window.ScrollTerms.goToAccount === "function") {
+        window.ScrollTerms.goToAccount(next);
+      } else {
+        location.assign("account.html?next=" + encodeURIComponent(next));
+      }
+      return false;
     }
-    return false;
+    const auth = window.ScrollAuth;
+    if (auth && typeof auth.ready === "function") return auth.ready().then(decide, decide);
+    return Promise.resolve(decide());
   }
 
   function markSheetComplete(index) {
@@ -667,6 +640,15 @@
         action: action
       };
     }
+    if (!isMember() && (kind === "asset" || kind === "year" || kind === "node")) {
+      const here = (location.pathname.split("/").pop() || "index.html") + (location.search || "");
+      return {
+        title: "Sign in to open this",
+        body: "The Map of History and the 3D arena open once you are signed in.",
+        href: "account.html?next=" + encodeURIComponent(here),
+        action: "Sign in"
+      };
+    }
     if (kind === "asset") {
       const sitting = sittingForAsset(key);
       const wanted = sitting >= 0 ? sheetLabel(sitting) : "This artifact";
@@ -744,6 +726,7 @@
     allLessonsComplete: allLessonsComplete,
     canAccessMapNode: canAccessMapNode,
     canAccessYear: canAccessYear,
+    requireMember: requireMember,
     previewAllContent: previewAllContent,
     isLocalDevHost: isLocalDevHost,
     maxOpenSheet: maxOpenSheet,

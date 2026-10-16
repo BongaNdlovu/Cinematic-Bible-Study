@@ -27,4 +27,4 @@ The publishable key lives in `js/shared/auth-config.js` (Vercel does not inject 
 
 ## Home-page reviews
 
-Run `tools/supabase-reviews.sql` once in the Supabase SQL editor so the Witnesses band can store moderated testimonies. Moderator sign-in is `fanelesibonge50@gmail.com` in that file and in `moderatorEmails` in `js/shared/auth-config.js`.
+Run `tools/supabase-reviews.sql` once in the Supabase SQL editor so the Witnesses band can store moderated testimonies. Moderators are rows in `public.exhibit_moderators`, which the file creates empty and locked. Add the operator once in the SQL editor (`insert into public.exhibit_moderators (email) values ('you@example.com');`) and do not commit that line. The page never carries the address: `js/shared/auth.js` asks the database through `is_review_moderator()`.

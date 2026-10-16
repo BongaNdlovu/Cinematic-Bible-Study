@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Readers' notes — The Shelf of Daniel</title>
+  <meta name="description" content="Notes from people who sat the sittings of The Shelf of Daniel, approved before they appear.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://cinematic-bible-study-daniel.pages.dev/reviews">
+  <meta property="og:title" content="Readers' notes — The Shelf of Daniel">
+  <meta property="og:description" content="Notes from people who sat the sittings, approved before they appear.">
+  <meta property="og:image" content="https://cinematic-bible-study-daniel.pages.dev/assets/site/hero-main.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📜</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400;1,6..72,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/site.css?v=cx1">
+  <link rel="stylesheet" href="css/terms.css?v=cx1">
+  <link rel="stylesheet" href="css/notes.css?v=cx1">
+  <link rel="stylesheet" href="css/cinema.css?v=cx2">
+  <script src="js/shared/cinema.js"></script>
+  <script src="js/shared/journey.js"></script>
+  <script src="js/shared/auth-config.js"></script>
+  <script src="vendor/supabase/supabase.js"></script>
+  <script src="js/shared/errors.js"></script>
+  <script src="js/shared/ops.js"></script>
+  <script src="js/shared/auth.js"></script>
+  <script src="js/shared/terms.js"></script>
+  <script src="js/shared/insights.js"></script>
+  <script src="js/shared/reviews.js"></script>
+  <script>if (window.BAJourney) window.BAJourney.load();</script>
+</head>
+<body class="site cover cinematic-bg">
+  <div class="vignette" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
+  <nav class="site-nav">
+    <a class="site-brand" href="index.html">THE SHELF OF DANIEL</a>
+    <div class="site-links">
+      <a href="index.html">Home</a>
+      <a href="map.html">Map of History</a>
+      <a href="gallery.html">3D Symbols</a>
+      <a href="#witness-queue" id="admin-reviews-link" hidden>Admin</a>
+      <a href="insights.html" id="admin-insights-link" hidden>Insights</a>
+      <a class="active" href="account.html">Account</a>
+      <span class="auth-slot" data-auth-slot data-auth-variant="nav"></span>
+    </div>
+  </nav>
+
+  <main class="notes-page">
+    <p class="notes-crumb" data-cx-reveal style="--cx-i:0"><a href="account.html">Account</a> <span aria-hidden="true">/</span> Readers' notes</p>
+    <h1 class="notes-title" id="notes-title" data-cx-reveal style="--cx-i:1">Readers' notes</h1>
+    <p class="notes-count" id="witness-count" hidden></p>
+    <p class="notes-lead" data-cx-reveal style="--cx-i:2">From people who sat the sittings. Every note is read and approved before it appears.</p>
+
+    <section class="witnesses witnesses--page" id="witnesses" aria-labelledby="notes-title" data-cx-reveal style="--cx-i:4">
+      <div class="witness-queue" id="witness-queue" hidden>
+        <h3>Waiting for approval</h3>
+        <div id="witness-queue-list"></div>
+      </div>
+      <div class="witness-marquee" id="witness-marquee" hidden>
+        <div class="witness-track" id="witness-list" data-layout="grid" hidden></div>
+      </div>
+      <p class="witness-empty" id="witness-empty" hidden>No notes yet. Sign in after a sitting if you want to leave the first one.</p>
+      <div class="witness-form-card witness-own-review" id="witness-own-review" hidden>
+        <h2>Your note</h2>
+        <p id="witness-own-status" class="witness-own-status"></p>
+        <form id="witness-edit-form">
+          <div class="witness-stars-field">
+            <span class="witness-stars-label" id="witness-edit-rating-label">Rating</span>
+            <div class="witness-stars-input" id="witness-edit-stars" role="radiogroup" aria-labelledby="witness-edit-rating-label"></div>
+            <input type="hidden" id="witness-edit-rating" name="rating" value="5">
+          </div>
+          <label class="sr-only" for="witness-edit-body">Edit your review</label>
+          <textarea id="witness-edit-body" name="body" maxlength="600" minlength="40" required></textarea>
+          <div class="witness-form-actions">
+            <button class="btn solid" type="submit" id="witness-edit-submit">Save changes</button>
+          </div>
+          <p id="witness-edit-status" hidden></p>
+        </form>
+      </div>
+      <div class="witness-form-card" id="witness-new-card">
+        <h2>Leave a note for the next reader</h2>
+        <p class="witness-form-lead">One honest sentence is enough — what held, what confused you, what you would tell a friend before sitting 1.</p>
+        <p id="witness-signin-hint">Sign in on the <a href="account.html?next=reviews.html">Account</a> page when you are ready to post. The box stays open either way.</p>
+        <form id="witness-form" data-cx-reveal style="--cx-i:3">
+          <div class="witness-stars-field">
+            <span class="witness-stars-label" id="witness-rating-label">Rating</span>
+            <div class="witness-stars-input" id="witness-stars" role="radiogroup" aria-labelledby="witness-rating-label"></div>
+            <input type="hidden" id="witness-rating" name="rating" value="5">
+          </div>
+          <label class="sr-only" for="witness-body">Your review</label>
+          <textarea id="witness-body" name="body" maxlength="600" minlength="40" required placeholder="We did sitting 2 after church and finally understood why 457 matters…"></textarea>
+          <div class="witness-form-actions">
+            <button class="btn solid" type="submit" id="witness-submit">Sign in</button>
+          </div>
+          <p id="witness-status" hidden></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer"></footer>
+</body>
+</html>

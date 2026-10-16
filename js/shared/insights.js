@@ -309,20 +309,28 @@
     const style = document.createElement('style');
     style.id = 'insight-card-style';
     style.textContent =
-      '.insight-card{position:fixed;right:1rem;bottom:1rem;z-index:72;width:min(22rem,calc(100vw - 2rem));padding:1rem 1.1rem 1.05rem;border:1px solid rgba(196,162,90,.38);background:#f7f1e4;color:#1c1914;font-family:Inter,system-ui,sans-serif;box-shadow:0 16px 40px rgba(0,0,0,.28)}' +
-      'html.dark .insight-card,body.charcoal-mode .insight-card,body.night-mode .insight-card{background:#1c1914;color:#f3ead8;border-color:rgba(212,175,55,.35)}' +
-      '.insight-card small{display:block;font-size:10px;letter-spacing:.08em;text-transform:uppercase;opacity:.7;margin-bottom:.35rem}' +
-      '.insight-card h3{margin:0 0 .35rem;font-family:Cormorant Garamond,Georgia,serif;font-size:1.15rem}' +
-      '.insight-card p{margin:0 0 .7rem;font-size:13px;line-height:1.45}' +
-      '.insight-card-row{display:flex;flex-wrap:wrap;gap:.4rem;margin:0 0 .7rem}' +
-      '.insight-card button,.insight-card select{font:inherit;font-size:12px}' +
-      '.insight-card-row button,.insight-card .insight-save{border:1px solid rgba(28,25,20,.2);background:transparent;color:inherit;padding:.35rem .65rem;cursor:pointer}' +
-      '.insight-card-row button.is-on,.insight-card .insight-save{background:#1c1914;color:#f7f1e4;border-color:#1c1914}' +
-      'html.dark .insight-card-row button.is-on,html.dark .insight-card .insight-save,body.charcoal-mode .insight-card-row button.is-on,body.charcoal-mode .insight-card .insight-save{background:#e7decc;color:#1c1914;border-color:#e7decc}' +
-      '.insight-card textarea,.insight-card select{width:100%;margin:0 0 .7rem;padding:.4rem .5rem;border:1px solid rgba(28,25,20,.2);background:transparent;color:inherit}' +
-      '.insight-card-actions{display:flex;justify-content:flex-end;gap:.5rem}' +
-      '.insight-card .insight-skip{border:0;background:transparent;color:inherit;opacity:.7;cursor:pointer;padding:.35rem .4rem}' +
-      '.insight-card .insight-card-error{margin:0 0 .7rem;font-size:12px;color:#8a3b12}';
+      '.insight-card{position:fixed;right:1rem;bottom:1rem;z-index:72;width:min(22rem,calc(100vw - 2rem));padding:1.1rem 1.2rem 1.1rem;border:1px solid rgba(229,185,59,.28);border-radius:14px;background:linear-gradient(160deg,rgba(34,26,17,.97),rgba(12,9,6,.98));color:#ece3d0;font-family:Inter,system-ui,sans-serif;box-shadow:0 28px 70px -20px rgba(0,0,0,.85),0 0 0 1px rgba(0,0,0,.4);animation:insight-card-in .56s cubic-bezier(.16,1,.3,1) both}' +
+      '@keyframes insight-card-in{from{opacity:0;transform:translateY(14px);filter:blur(4px)}}' +
+      '.insight-card small{display:block;font-family:Cinzel,Georgia,serif;font-size:10.5px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:#e5b93b;margin-bottom:.45rem}' +
+      '.insight-card h3{margin:0 0 .35rem;font-family:Newsreader,Georgia,serif;font-weight:400;font-size:1.3rem;letter-spacing:-.01em;color:#f1e6cc}' +
+      '.insight-card p{margin:0 0 .8rem;font-size:13px;line-height:1.5;color:#c4b8a8}' +
+      '.insight-card-row{display:flex;flex-wrap:wrap;gap:.4rem;margin:0 0 .8rem}' +
+      '.insight-card button,.insight-card select{font:inherit;font-size:12.5px}' +
+      '.insight-card-row button{border:1px solid rgba(229,185,59,.25);border-radius:999px;background:transparent;color:inherit;padding:.38rem .8rem;cursor:pointer;transition:border-color .32s cubic-bezier(.16,1,.3,1),background-color .32s cubic-bezier(.16,1,.3,1),transform .16s cubic-bezier(.16,1,.3,1)}' +
+      '.insight-card-row button:hover{border-color:#e5b93b}' +
+      '.insight-card-row button.is-on{background:rgba(229,185,59,.16);border-color:#e5b93b;color:#f1e6cc}' +
+      '.insight-card textarea,.insight-card select{width:100%;margin:0 0 .6rem;padding:.55rem .7rem;border:1px solid rgba(229,185,59,.22);border-radius:9px;background:rgba(8,6,4,.6);color:#f1e6cc;transition:border-color .32s cubic-bezier(.16,1,.3,1),box-shadow .32s cubic-bezier(.16,1,.3,1)}' +
+      '.insight-card select option{background:#14100b;color:#f1e6cc}' +
+      '.insight-card textarea:focus,.insight-card select:focus{outline:none;border-color:#e5b93b;box-shadow:0 0 0 3px rgba(229,185,59,.16)}' +
+      '.insight-card-actions{display:flex;justify-content:flex-end;align-items:center;gap:.6rem;margin-top:.2rem}' +
+      '.insight-card .insight-save{min-height:38px;padding:0 1.15rem;border:1px solid #f0cd6a;border-radius:999px;background:linear-gradient(180deg,#f0cd6a,#d9a93a);color:#1c1408;font-weight:600;letter-spacing:.03em;cursor:pointer;transition:transform .16s cubic-bezier(.16,1,.3,1),box-shadow .32s cubic-bezier(.16,1,.3,1)}' +
+      '.insight-card .insight-save:hover{box-shadow:0 10px 26px -12px rgba(229,185,59,.6)}' +
+      '.insight-card button:active{transform:scale(.975)}' +
+      '.insight-card .insight-skip{border:0;background:transparent;color:#c4b8a8;cursor:pointer;padding:.35rem .4rem;transition:color .32s cubic-bezier(.16,1,.3,1)}' +
+      '.insight-card .insight-skip:hover{color:#f1e6cc}' +
+      '.insight-card :focus-visible{outline:2px solid #e5b93b;outline-offset:3px}' +
+      '.insight-card .insight-card-error{margin:0 0 .7rem;font-size:12px;color:#f3c9bd}' +
+      '@media (prefers-reduced-motion:reduce){.insight-card{animation:none}.insight-card *{transition:none!important}}';
     document.head.appendChild(style);
   }
 
@@ -435,8 +443,7 @@
       '</select>' +
       '<select id="insight-background" aria-label="Religious or educational background">' +
         '<option value="">Background</option>' +
-        '<option value="adventist">Seventh-day Adventist</option>' +
-        '<option value="protestant">Other Protestant</option>' +
+        '<option value="protestant">Protestant</option>' +
         '<option value="catholic">Catholic</option>' +
         '<option value="other">Other / none</option>' +
         '<option value="prefer_not">Prefer not to say</option>' +
@@ -484,6 +491,7 @@
   }
 
   function maybeProfile(user) {
+    if (window.Onboard) return;
     if (document.getElementById("account-hub")) return;
     if (!user || optedOut()) return;
     try { if (localStorage.getItem(PROFILE_ASKED) === '1') return; } catch (e) {}

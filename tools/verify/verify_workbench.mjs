@@ -335,8 +335,8 @@ const reviewsCode = fs.readFileSync(path.join('js', 'shared', 'reviews.js'), 'ut
 if (!reviewsCode.includes('exhibit_surveys') || !reviewsCode.includes('classroomUse')) {
   throw new Error('reviews.js does not insert exhibit_surveys with classroomUse.');
 }
-if (!indexHtml.includes('id="witness-list"')) {
-  throw new Error('index.html is missing #witness-list.');
+if (!fs.readFileSync('reviews.html', 'utf8').includes('id="witness-list"')) {
+  throw new Error('reviews.html is missing #witness-list.');
 }
 if (!reviewsCode.includes('list.hidden = true')) {
   throw new Error('reviews.js does not hide the witness list when empty.');

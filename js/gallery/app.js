@@ -423,13 +423,16 @@ import * as THREE from 'three';
         if (hallCurrentUrl === url) apply(tex);
       });
     }
-    Object.values(HALL_BACKDROPS).forEach((url) => {
-      if (!url || hallTexCache.has(url)) return;
+    const hallPending = new Set();
+    function prefetchHall(url) {
+      if (!url || hallTexCache.has(url) || hallPending.has(url)) return;
+      hallPending.add(url);
       texLoader.load(url, (tex) => {
         prepHallTex(tex);
         hallTexCache.set(url, tex);
-      });
-    });
+        hallPending.delete(url);
+      }, undefined, () => hallPending.delete(url));
+    }
 
     const galleryFrameGroup = new THREE.Group();
     scene.add(galleryFrameGroup);
@@ -1045,7 +1048,7 @@ import * as THREE from 'three';
         quote: '“After this I saw in the night visions, and behold a fourth beast, dreadful and terrible, and strong exceedingly; and it had great iron teeth: it devoured and brake in pieces, and stamped the residue with the feet of it: and it was diverse from all the beasts that were before it; and it had ten horns.”',
         quoteRef: 'Daniel 7:7 (KJV)',
         explanation: 'The fourth beast is distinct from all preceding predators, possessing massive iron teeth that correspond to the iron legs of Daniel 2. Its iron teeth portray Imperial Rome crushing Mediterranean nations, while its ten horns represent the barbarian kingdoms that partitioned Western Rome. Among these ten horns emerges a little horn, representing a persecuting religious and political power that uproots three rival kingdoms and exercises authority for 1,260 prophetic years, spanning from AD 538 to 1798.',
-        historical: 'As Imperial Rome collapsed, authority shifted to a Roman church-state power established among the divided western tribes. The Byzantine emperor Justinian issued a decree elevating the Roman bishop, which took practical geopolitical effect in AD 538 after the defeat of the Ostrogoths, the third of three rival Arian tribal kingdoms who held differing theological views on Christ\'s nature. This dominion persisted until French forces arrested the pope in 1798, after which Daniel describes a heavenly courtroom session convening before the final kingdom is given to the saints.',
+        historical: 'As Imperial Rome collapsed, authority shifted to a Roman church-state power established among the divided western tribes. The Byzantine emperor Justinian issued a decree elevating the Roman bishop. The start-year on this chart is A.D. 538: Belisarius lifted the Ostrogothic siege of Rome, and Justinian’s decree could take effect in the city. The Ostrogoths retook Rome in the 540s and were not fully defeated until about 553. This dominion persisted until French forces arrested the pope in 1798, after which Daniel describes a heavenly courtroom session convening before the final kingdom is given to the saints.',
         plateImg: 'assets/study/epochs/papal-rome.jpg',
         plateCaption: 'Iron teeth and the little horn among the ten · Rome',
         thumb: 'assets/site/era-beast.webp',
@@ -1069,7 +1072,7 @@ import * as THREE from 'three';
         quote: '“And he shall speak great words against the most High, and shall wear out the saints of the most High, and think to change times and laws: and they shall be given into his hand until a time and times and the dividing of time.”',
         quoteRef: 'Daniel 7:25 (KJV)',
         explanation: 'Do not memorize 1,260 years first. Build the number. In this style of prophecy a “time” is a year, “times” is two years, and “the dividing of time” is a half year: 1 + 2 + ½ = 3½ years. Revelation writes the same span three ways: a thousand two hundred and threescore days (Revelation 12:6), a time and times and half a time (Revelation 12:14), and forty and two months (Revelation 13:5). Forty-two months of thirty days are 1,260 days. On the year-day scale God appointed in Numbers 14:34 and Ezekiel 4:6, those 1,260 days are 1,260 years. This exhibit is that measured reign — not a fifth metal, and not a three-and-a-half-year man at the end of time.',
-        historical: 'The marks in Daniel 7:24–25 sit among the ten fragments of western Rome: a power diverse from the others, speaking great words, wearing out the saints, intending to change times and laws. The start-year on this chart is A.D. 538: Belisarius lifted the Ostrogothic siege of Rome, and Justinian’s decree could take effect in the city. The Ostrogoths retook Rome in the 540s and were not fully defeated until about 553. The close is 1798, when General Berthier took Pius VI. You may not skip the marks in 7:24–25 and still claim any favorite villain. The 2020 lesson places the court of 7:9–14 after that span. Ellen G. White places the coming to the Ancient of Days in 1844. Daniel 7:11 still has great words spoken while the court sits. The stone of chapter 2 is later.',
+        historical: 'The marks in Daniel 7:24–25 sit among the ten fragments of western Rome: a power diverse from the others, speaking great words, wearing out the saints, intending to change times and laws. The start-year on this chart is A.D. 538: Belisarius lifted the Ostrogothic siege of Rome, and Justinian’s decree could take effect in the city. The Ostrogoths retook Rome in the 540s and were not fully defeated until about 553. The close is 1798, when General Berthier took Pius VI. You may not skip the marks in 7:24–25 and still claim any favorite villain. The 2020 lesson places the court of 7:9–14 after that span. The historicist reading places the coming to the Ancient of Days in 1844. Daniel 7:11 still has great words spoken while the court sits. The stone of chapter 2 is later.',
         plateImg: 'assets/plates/years1260.jpg',
         plateCaption: 'Time, times, and the dividing of time · 538 to 1798',
         thumb: 'assets/site/era-years1260.webp',
@@ -1116,7 +1119,7 @@ import * as THREE from 'three';
         dates: '331–168 BC (Alexander 334–323 BC)',
         quote: '“And as I was considering, behold, an he goat came from the west on the face of the whole earth, and touched not the ground: and the goat had a notable horn between his eyes.”',
         quoteRef: 'Daniel 8:5 (KJV)',
-        explanation: 'The angel Gabriel explains in Daniel 8:21 that the rough he-goat represents the kingdom of Greece, while the prominent horn between its eyes represents its first king, Alexander the Great. The goat moving so swiftly that its feet do not touch the ground signifies Alexander\'s lightning military campaign from Greece to the borders of India. In this vision, the goat charges the Persian ram with furious power, breaking both of its horns and trampling it to the ground.',
+        explanation: 'Daniel 8:21 says the rough goat is the king of Grecia, and the great horn is the first king. Alexander is the historical name of that first king, not a word Gabriel speaks. The goat moving so swiftly that its feet do not touch the ground signifies Alexander\'s lightning military campaign from Greece to the borders of India. In this vision, the goat charges the Persian ram with furious power, breaking both of its horns and trampling it to the ground.',
         historical: 'Beginning at the Granicus River in 334 BC and culminating at the decisive Battle of Gaugamela in 331 BC, Alexander dismantled the Persian Empire in barely three years. This rapid triumph demonstrates why Daniel 2 depicted Greece as resonant bronze and Daniel 7 portrayed it as a four-winged leopard. The prophecy in Daniel 8 explicitly names the historical empires that were previously represented only by symbolic metals and beasts.',
         plateImg: 'assets/plates/goat-charge.jpg',
         plateCaption: 'The notable horn from the west · Alexander',
@@ -1161,16 +1164,16 @@ import * as THREE from 'three';
         eyebrow: 'DANIEL 8 · THE LITTLE HORN',
         title: 'Little Horn of the Goat',
         pill: 'DANIEL 8:9-14, 23-25',
-        dates: '168 BC to 1844',
+        dates: '168 BC (pagan Rome’s rise); cleansing begins 1844; broken without hand at the Second Coming (Daniel 8:25)',
         quote: '“And out of one of them came forth a little horn, which waxed exceeding great, toward the south, and toward the east, and toward the pleasant land.”',
         quoteRef: 'Daniel 8:9 (KJV)',
-        explanation: 'The little horn of Daniel 8 represents the persecuting power of Rome in both its pagan imperial and papal ecclesiastical phases. It grows exceeding great toward the south, east, and the pleasant land of Palestine, usurping the daily priestly ministry, or tamid in Hebrew, of Christ and casting down the truth of His heavenly sanctuary. By the year-day principle of prophetic interpretation, where a symbolic prophetic day represents a literal calendar year, this defiling power continues until the 2,300-day prophecy ends in 1844, when the heavenly sanctuary is cleansed and restored.',
-        historical: 'The angel Gabriel stated twice in Daniel 8 that the vision concerns the time of the end, reaching far beyond the brief second-century BC oppression under the Seleucid king Antiochus IV Epiphanes. While Antiochus desecrated the earthly temple in Jerusalem for three years, this prophetic horn waxes exceeding great and attacks the heavenly priesthood of Christ Himself. The fulfillment spans from Roman imperial authority through the medieval church-state system until the final heavenly cleansing of the sanctuary in 1844.',
+        explanation: 'The little horn of Daniel 8 represents the persecuting power of Rome in both its pagan imperial and papal ecclesiastical phases. It grows exceeding great toward the south, east, and the pleasant land of Palestine, usurping the daily priestly ministry, or tamid in Hebrew, of Christ and casting down the truth of His heavenly sanctuary. By the year-day principle of prophetic interpretation, where a symbolic prophetic day represents a literal calendar year, the 2,300 days end in 1844 when the heavenly cleansing begins.',
+        historical: 'Daniel 8:17 says the vision is at the time of the end. Daniel 8:19 names the last end of the indignation and the time appointed. That reach is far beyond the brief second-century BC oppression under the Seleucid king Antiochus IV Epiphanes. While Antiochus desecrated the earthly temple in Jerusalem for three years, this prophetic horn waxes exceeding great and attacks the heavenly priesthood of Christ Himself. The fulfillment spans from Roman imperial authority through the medieval church-state system to the breaking without hand at the Second Coming (Daniel 8:25). The year 1844 is the start of the cleansing, the judgment that commenced then.',
         plateImg: 'assets/plates/goat-horn.jpg',
         plateCaption: 'A little horn toward the pleasant land',
         thumb: 'assets/site/era-goat_horn.webp',
         related: ['beast', 'goat_broken', 'ancient', 'stone'],
-        takeaway: 'The little horn of Daniel 8 represents the persecuting power of Imperial and papal Rome that magnified itself against Christ’s heavenly sanctuary ministry across centuries until the 2,300 prophetic days ended in 1844.',
+        takeaway: 'The little horn of Daniel 8 represents the persecuting power of Imperial and papal Rome that magnified itself against Christ’s heavenly sanctuary ministry. The 2,300 days end in 1844, when the heavenly cleansing begins. The horn is broken without hand at the Second Coming (Daniel 8:25).',
         filename: 'goat_horn.glb',
         organic: true,
         autoFrame: true,
@@ -1233,7 +1236,7 @@ import * as THREE from 'three';
         eyebrow: 'DANIEL 7 · THE SON OF MAN',
         title: 'One Like the Son of Man',
         pill: 'DANIEL 7:13-14',
-        dates: 'Culmination of the Heavenly Judgment',
+        dates: 'The Daniel 7:13 coming opens the pre-advent judgment in 1844',
         quote: '“I saw in the night visions, and, behold, one like the Son of man came with the clouds of heaven, and came to the Ancient of days, and they brought him near before him.”',
         quoteRef: 'Daniel 7:13 (KJV)',
         explanation: 'In Daniel 7:13, the figure described as the Son of man travels with the clouds of heaven toward the Ancient of Days rather than descending directly to earth. He is ushered into the presence of God to receive universal dominion, glory, and an everlasting kingdom that will never pass away. Jesus adopted this title during His earthly ministry to identify Himself as this divine ruler who receives sovereignty in the heavenly sanctuary before returning to claim His people.',
@@ -1285,7 +1288,7 @@ import * as THREE from 'three';
         quote: '“The same hour was the thing fulfilled upon Nebuchadnezzar: and he was driven from men, and did eat grass as oxen, and his body was wet with the dew of heaven, till his hairs were grown like eagles’ feathers, and his nails like birds’ claws.”',
         quoteRef: 'Daniel 4:33 (KJV)',
         explanation: 'Daniel 4 records that the golden head of the colossus was himself driven from the throne and given a beast’s portion until he learned that the Most High rules. Hair like eagles’ feathers and nails like birds’ claws are the visible sentence: a king who claimed Babylon as his own building is numbered with the oxen. This figure stands beside the ironbound stump. The stump is the reserved throne; the ox-king is the man who must live the sentence.',
-        historical: 'Twelve months after the warning, Nebuchadnezzar boasted on the palace roof and was struck the same hour. For seven years he ate grass as oxen until his understanding returned and he praised the King of heaven. Babylon’s throne was kept for him, then passed in the next generation to Belshazzar, who did not learn the family lesson.',
+        historical: 'Twelve months after the warning, Nebuchadnezzar walked in the palace and boasted there (Daniel 4:29-30) and was struck the same hour. For seven years he ate grass as oxen until his understanding returned and he praised the King of heaven. Babylon’s throne was kept for him, then passed in the next generation to Belshazzar, who did not learn the family lesson.',
         plateImg: 'assets/plates/ox-king.jpg',
         plateCaption: 'Hair like eagles’ feathers, nails like birds’ claws',
         thumb: 'assets/site/era-ox_king.webp',
@@ -1333,7 +1336,7 @@ import * as THREE from 'three';
         quote: '“But thou, O Daniel, shut up the words, and seal the book, even to the time of the end: many shall run to and fro, and knowledge shall be increased.”',
         quoteRef: 'Daniel 12:4 (KJV)',
         explanation: 'The last chapter does not leave the visions open for every generation to invent a new scheme. Daniel is told to shut up the words and seal the book until the time of the end. The angel repeats the charge in 12:9: the words are closed up and sealed. Understanding is promised to the wise when the measured spans actually reach their dates, not when curiosity demands an earlier chart.',
-        historical: 'Daniel 8 and 9 give numbered days that could not be read as finished history until those spans closed in the era beginning at the close of the 1,260 years. The sealed book is why the sitting treats 1798 and 1844 as dates the text itself teaches the reader to wait for, rather than as ornaments hung on the last page.',
+        historical: 'The text gives the day counts and seals them until the time of the end. 1798 and 1844 are the calculated application of those counts, not dates the text itself prints.',
         plateImg: 'assets/plates/sealed.jpg',
         plateCaption: 'Shut up the words, and seal the book',
         thumb: 'assets/site/era-sealed.webp',
@@ -1356,8 +1359,8 @@ import * as THREE from 'three';
         dates: 'After Alexander to the time of the end',
         quote: '“And at the time of the end shall the king of the south push at him: and the king of the north shall come against him like a whirlwind, with chariots, and with horsemen, and with many ships; and he shall enter into the countries, and shall overflow and pass over.”',
         quoteRef: 'Daniel 11:40 (KJV)',
-        explanation: 'Daniel 11 opens after the broken horn of Greece. The king of the south is first the Ptolemaic power in Egypt; the king of the north is first the Seleucid power in Syria. Their wars, marriages, and betrayals fill the chapter as a dated march. At the time of the end the same titles return: the south pushes, the north comes like a whirlwind, and the conflict moves toward the glorious holy mountain before Michael stands up in chapter 12.',
-        historical: 'Ptolemy I held Egypt; Seleucus I held Syria and the lands toward the north. Daniel 11:6 records a failed marriage-alliance between the houses. Later verses track Rome’s rise over the Hellenistic kings, then a continuing northern power that magnifies itself even to the prince of the covenant. The last movement of the chapter is not another named empire in metal, but the last contest that yields to Michael’s standing.',
+        explanation: 'Daniel 11 opens in the first year of Darius the Mede. The south-and-north narrative begins after the horn breaks (Daniel 11:4-5). The king of the south is first the Ptolemaic power in Egypt; the king of the north is first the Seleucid power in Syria. Their wars, marriages, and betrayals fill the chapter as a dated march. At the time of the end the same titles return: the south pushes, the north comes like a whirlwind, and the conflict moves toward the glorious holy mountain before Michael stands up in chapter 12.',
+        historical: 'Ptolemy I held Egypt; Seleucus I held Syria and the lands toward the north. Daniel 11:6 records a failed marriage-alliance between the houses. Later verses track Rome’s rise over the Hellenistic kings. Daniel 11:22 breaks the prince of the covenant. Daniel 11:36 is magnification above every god. The last movement of the chapter is not another named empire in metal, but the last contest that yields to Michael’s standing.',
         plateImg: 'assets/plates/kings.jpg',
         plateCaption: 'The king of the south shall be strong… the king of the north',
         thumb: 'assets/site/era-kings.webp',
@@ -3191,6 +3194,13 @@ import * as THREE from 'three';
       if (window.Insights) window.Insights.track('gallery_view', null, { asset: key });
       const data = ASSET_REGISTRY[key] || ASSET_REGISTRY.head;
       setHallBackdrop(data.hallImg || HALL_BACKDROPS[key] || data.plateImg);
+      setTimeout(() => {
+        const at = artifactOrder.indexOf(key);
+        [artifactOrder[at + 1], artifactOrder[at - 1]].forEach((near) => {
+          const d = near && ASSET_REGISTRY[near];
+          if (d) prefetchHall(d.hallImg || HALL_BACKDROPS[near] || d.plateImg);
+        });
+      }, 1500);
       AudioBus.play('select');
       document.querySelectorAll('.era-cell').forEach((el) => {
         el.classList.toggle('active', el.dataset.asset === key);
@@ -3214,6 +3224,12 @@ import * as THREE from 'three';
       if (pill) pill.textContent = data.pill;
 
       syncDossierNarrative(data);
+      [document.querySelector('.hero-title-group'), document.querySelector('.narrative-dossier')].forEach((node) => {
+        if (!node || reducedMotion) return;
+        node.classList.remove('cx-enter');
+        void node.offsetWidth;
+        node.classList.add('cx-enter');
+      });
 
       syncDossierStudyLink(key);
       syncDossierMapLink(key);
@@ -4065,6 +4081,26 @@ import * as THREE from 'three';
     const scrim = document.getElementById('scrim');
     if (scrim) scrim.addEventListener('click', closeAllPanels);
 
+    const ICONS = {
+      sun: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2.2M12 19.3v2.2M4.6 4.6l1.6 1.6M17.8 17.8l1.6 1.6M2.5 12h2.2M19.3 12h2.2M4.6 19.4l1.6-1.6M17.8 6.2l1.6-1.6"/></svg>',
+      moon: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg>',
+      book: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 6.5C10.3 5 7.8 4.5 4 4.5v14c3.8 0 6.3.5 8 2 1.7-1.5 4.2-2 8-2v-14c-3.8 0-6.3.5-8 2z"/><path d="M12 6.5v14"/></svg>',
+      nodes: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="3.2"/><path d="M12 3.5v2M12 18.5v2M3.5 12h2M18.5 12h2"/></svg>',
+      title: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 6.5V5h14v1.5M12 5v14M9 19h6"/></svg>',
+      muted: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z"/><path d="M16 9.5l5 5M21 9.5l-5 5"/></svg>',
+      sound: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z"/><path d="M15.5 9a4 4 0 0 1 0 6M18 6.5a7.5 7.5 0 0 1 0 11"/></svg>',
+      lab: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h10M18 7h2M4 17h4M12 17h8"/><circle cx="16" cy="7" r="2"/><circle cx="10" cy="17" r="2"/></svg>',
+      menu: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h10"/></svg>'
+    };
+    [['btn-theme-toggle', 'sun'], ['btn-scripture-modal', 'book'], ['btn-nodes-master', 'nodes'], ['btn-titles-toggle', 'title'], ['btn-open-lab', 'lab'], ['btn-menu', 'menu']].forEach(([id, icon]) => {
+      const b = document.getElementById(id);
+      if (b) b.innerHTML = ICONS[icon];
+    });
+    const stageEl = document.getElementById('webgl-container');
+    const hintDone = () => document.body.classList.add('hint-done');
+    if (stageEl) stageEl.addEventListener('pointerdown', hintDone, { once: true });
+    setTimeout(hintDone, 9000);
+
     const btnTheme = document.getElementById('btn-theme-toggle');
     if (btnTheme) {
       btnTheme.addEventListener('click', () => {
@@ -4073,7 +4109,7 @@ import * as THREE from 'three';
         scene.fog.color.set(cool ? 0x05070c : 0x050301);
         hallUniforms.cool.value = cool ? 1 : 0;
         hemiLight.color.set(cool ? 0xc9e0ff : 0xffe8c2);
-        btnTheme.textContent = cool ? '🌙' : '☀️';
+        btnTheme.innerHTML = cool ? ICONS.moon : ICONS.sun;
         btnTheme.classList.toggle('active', cool);
         museumToast(cool ? 'Cool gallery tone' : 'Warm palace tone');
       });
@@ -4086,7 +4122,7 @@ import * as THREE from 'three';
     const btnMute = document.getElementById('btn-mute');
     if (btnMute) {
       btnMute.classList.toggle('active', AudioBus.muted);
-      btnMute.textContent = AudioBus.muted ? '🔇' : '♪';
+      btnMute.innerHTML = AudioBus.muted ? ICONS.muted : ICONS.sound;
       btnMute.title = AudioBus.muted ? 'Unmute gallery sound' : 'Mute gallery sound';
       btnMute.setAttribute('aria-label', AudioBus.muted ? 'Unmute sound' : 'Mute sound');
       btnMute.addEventListener('click', () => {
@@ -4096,7 +4132,7 @@ import * as THREE from 'three';
         // mute control authoritative for both.
         if (window.UiSound) window.UiSound.enabled = !AudioBus.muted;
         btnMute.classList.toggle('active', AudioBus.muted);
-        btnMute.textContent = AudioBus.muted ? '🔇' : '♪';
+        btnMute.innerHTML = AudioBus.muted ? ICONS.muted : ICONS.sound;
         btnMute.title = AudioBus.muted ? 'Unmute gallery sound' : 'Mute gallery sound';
         if (!AudioBus.muted) AudioBus.play('click');
       });

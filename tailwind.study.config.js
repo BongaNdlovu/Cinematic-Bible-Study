@@ -6,8 +6,8 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        serif: ['Newsreader', 'Lora', 'Georgia', 'serif'],
-        bodySerif: ['Lora', 'Georgia', 'serif'],
+        serif: ['Newsreader', 'Georgia', 'serif'],
+        bodySerif: ['Newsreader', 'Georgia', 'serif'],
         sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
         mono: ['JetBrains Mono', 'monospace'],
         vhs: ['VT323', 'JetBrains Mono', 'monospace'],

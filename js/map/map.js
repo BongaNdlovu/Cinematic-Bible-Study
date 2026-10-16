@@ -420,7 +420,13 @@
           ${cinematic ? '<a href="' + studyHref + '">Read in the study desk</a><a href="' + galHref + '">View in 3D</a><button type="button" class="cmap-play-route">Play route</button>'
             : '<a class="cmap-enter" href="' + fullHref + '">Enter cinematic map →</a>'}
         </div>`;
+      const wasOpen = dossier.classList.contains("open");
       dossier.classList.add("open");
+      if (wasOpen && !REDUCE) {
+        dossier.classList.remove("is-swapping");
+        void dossier.offsetWidth;
+        dossier.classList.add("is-swapping");
+      }
       dossier.querySelector(".cmap-close").addEventListener("click", () => dossier.classList.remove("open"));
       const playRouteBtn = dossier.querySelector(".cmap-play-route");
       if (playRouteBtn) playRouteBtn.addEventListener("click", () => playRoute(ep));
@@ -983,9 +989,16 @@
       });
     }
     if (btnLegend && legendPanel) {
+      let keyPref = null;
+      try { keyPref = localStorage.getItem("cmap-key-open"); } catch (err) {}
+      if (cinematic && window.innerWidth >= 1200 && keyPref !== "0") {
+        legendPanel.classList.add("is-open");
+        btnLegend.setAttribute("aria-expanded", "true");
+      }
       btnLegend.addEventListener("click", () => {
         const open = legendPanel.classList.toggle("is-open");
         btnLegend.setAttribute("aria-expanded", String(open));
+        try { localStorage.setItem("cmap-key-open", open ? "1" : "0"); } catch (err) {}
       });
     }
 
@@ -1013,21 +1026,11 @@
     if (window.ResizeObserver) new ResizeObserver(resize).observe(stage);
 
     async function start() {
-      // The Map of History is for members. Guests go to sign-in and return here after.
-      if (cinematic && window.ScrollAuth && typeof window.ScrollAuth.ready === "function") {
-        try { await window.ScrollAuth.ready(); } catch (e) {}
-        const auth = window.ScrollAuth;
-        const guest = !(auth && typeof auth.getUser === "function" && auth.getUser());
-        const bypass = window.BAJourney && typeof window.BAJourney.previewAllContent === "function" && window.BAJourney.previewAllContent();
-        if (guest && !bypass) {
-          const next = "map.html" + (location.search || "");
-          if (window.ScrollTerms && typeof window.ScrollTerms.goToAccount === "function") {
-            window.ScrollTerms.goToAccount(next);
-          } else {
-            location.assign("account.html?next=" + encodeURIComponent(next));
-          }
-          return;
-        }
+      if (cinematic) {
+        const allowed = window.BAJourney && typeof window.BAJourney.requireMember === "function"
+          ? await window.BAJourney.requireMember("map.html" + (location.search || ""))
+          : false;
+        if (!allowed) return;
       }
       if (typeof L === "undefined") {
         loadEl.textContent = "Map library failed to load.";

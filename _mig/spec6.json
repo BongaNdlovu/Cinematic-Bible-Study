@@ -4,22 +4,22 @@
     "title": "The Imperial Transition: Babylon to Medo-Persia (538 B.C.)",
     "steps": [
       {
-        "role": "Gold Head (Babylon)",
+        "role": "Gold Head",
         "title": "Babylon",
         "points": [
           "Autocratic Imperial Whim",
-          "King's word makes and breaks law",
-          "Overthrown October 539 B.C.",
+          "King's word is life-and-death power",
+          "Overthrown 539 B.C.",
           "Nebuchadnezzar / Belshazzar"
         ]
       },
       {
-        "role": "Silver Chest & Arms (Medo-Persia)",
+        "role": "Silver Chest & Arms",
         "title": "Medo-Persia",
         "points": [
           "Unalterable royal law",
           "\"Law of Medes & Persians, which altereth not\"",
-          "120 Satrapies; 3 Presidents (Daniel Chief)",
+          "120 satraps; 3 presidents (Daniel was first)",
           "Darius the Mede / Cyrus the Great"
         ]
       }
@@ -30,17 +30,15 @@
     "title": "The Constitutional Paradigm Shift",
     "steps": [
       {
-        "role": "Babylonian Autocracy",
         "title": "Babylonian Autocracy",
         "points": [
           "Law is the monarch's personal whim",
           "Can execute or spare on impulse",
-          "Nebuchadnezzar: absolute dictator",
+          "Nebuchadnezzar: all people, nations, and languages, trembled and feared before him",
           "Daniel 2-4"
         ]
       },
       {
-        "role": "Medo-Persian Unalterable Law",
         "title": "Medo-Persian Unalterable Law",
         "points": [
           "Law is supreme over the monarch",
@@ -74,7 +72,7 @@
       {
         "cells": [
           "Moral & Civic Character",
-          "\"Faithful in all things\""
+          "he was faithful"
         ]
       }
     ],
@@ -85,17 +83,15 @@
     "title": "The Covenant Posture at the Window (Daniel 6:10)",
     "steps": [
       {
-        "role": "The Imperial Command",
         "title": "The Imperial Command",
         "points": [
-          "\"Ask no petition of any god\"",
-          "30-day suspension of worship",
+          "Ask no petition of any god (Daniel 6:7)",
+          "30-day ban on any petition but the king's",
           "Enforced by penalty of the lions' den",
-          "Attempted usurpation of heaven's throne"
+          "The king stands in God's place for thirty days"
         ]
       },
       {
-        "role": "Daniel's Covenant Posture",
         "title": "Daniel's Covenant Posture",
         "points": [
           "Knelt three times daily in prayer",
@@ -111,7 +107,6 @@
     "title": "The Dual Conflict: The Earthly Pit vs. the Heavenly Court",
     "steps": [
       {
-        "role": "The Earthly Conspiracy",
         "title": "The Earthly Conspiracy",
         "points": [
           "Envious satraps orchestrate trap",
@@ -122,13 +117,12 @@
         ]
       },
       {
-        "role": "The Heavenly Vindication",
         "title": "The Heavenly Vindication",
         "points": [
           "Angel dispatched to shut lions' mouths",
-          "King fasts; dawn brings joyful inquiry",
+          "King fasts; dawn brings a lamentable cry",
           "Daniel lifted out completely unhurt",
-          "Conspirators face swift retributive justice",
+          "The king acts by Persian law; the narrative does not endorse it",
           "Darius publishes God's eternal dominion (Dan. 6:26)"
         ]
       }
@@ -136,39 +130,37 @@
   },
   "s6-6": {
     "kind": "comparison",
-    "title": "The Redemptive Typology: Daniel and Jesus Christ",
+    "title": "Daniel and Jesus Christ",
     "steps": [
       {
-        "role": "Daniel in the Lions' Den",
-        "title": "Daniel",
+        "title": "Daniel in the Lions' Den",
         "points": [
           "Envious rulers plot his destruction",
-          "Sinned against no law; totally innocent",
+          "No fault in his administration; innocent before God",
           "Reluctant ruler seeks to deliver him",
-          "Cast into a dark pit of death",
+          "Cast into the den of lions",
           "Stone placed over mouth of pit (6:17)",
           "Sealed with king's & lords' signets",
-          "Delivered at the break of dawn (6:19)",
+          "The king arose very early (6:19); Daniel taken up (6:23)",
           "Angel sent to close lions' mouths",
           "Emerged alive, unhurt, and victorious",
-          "Conquered the roaring lion (1 Pet 5:8)",
+          "Angel shut the lions' mouths",
           "Universal decree of eternal kingdom"
         ]
       },
       {
-        "role": "Jesus Christ at Calvary & the Tomb",
-        "title": "Jesus Christ",
+        "title": "Jesus Christ at Calvary & the Tomb",
         "points": [
           "Envious chief priests deliver Him to Pilate (Matt 27:18)",
-          "\"I find no fault in this man\" (Luke 23:4; 1 Pet 2:22)",
+          "\"I find no fault in this man\" (Luke 23:4)",
           "Pilate seeks to release Him, but yields to pressure",
           "Crucified and buried in a rock-hewn tomb (Matt 27:60)",
           "Great stone rolled to door of tomb (Matt 27:60)",
           "Tomb sealed by Roman authority with guards (Matt 27:66)",
           "Risen at dawn on the third day (Matt 28:1; Luke 24:1)",
           "Angel descends, rolls stone away (Matt 28:2)",
-          "Broke the bands of death; alive forevermore (Rev 1:18)",
-          "Crushed the ancient serpent; defeated Satan (Heb 2:14)",
+          "Alive for evermore (Rev 1:18)",
+          "Destroy him that had the power of death, that is, the devil (Heb 2:14)",
           "\"All power is given unto me in heaven and in earth\" (Matt 28:18)"
         ]
       }

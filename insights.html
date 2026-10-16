@@ -3,14 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Study insights — The Scroll of Daniel</title>
-  <meta name="description" content="Private learning insights for The Scroll of Daniel: time on task, quiz accuracy, and sitting progress.">
+  <title>Study insights — The Shelf of Daniel</title>
+  <meta name="description" content="Private learning insights for The Shelf of Daniel: time on task, quiz accuracy, and sitting progress.">
   <meta name="robots" content="noindex">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📜</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Cormorant+Garamond:ital,wght@0,500;1,500;1,600&family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/site.css?v=29">
-  <link rel="stylesheet" href="css/terms.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400;1,6..72,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/site.css?v=cx1">
+  <link rel="stylesheet" href="css/terms.css?v=cx1">
   <style>
     .insights-main {
       max-width: 1180px;
@@ -22,22 +23,20 @@
     .insights-kicker {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
+      gap: 0.55rem;
+      font-family: var(--cx-label);
+      font-size: 11px;
+      font-weight: 600;
       letter-spacing: 0.22em;
       text-transform: uppercase;
-      font-size: 10px;
-      font-weight: 700;
-      color: #ffd700;
-      background: rgba(212, 175, 55, 0.12);
-      border: 1px solid rgba(212, 175, 55, 0.35);
-      padding: 4px 12px;
-      border-radius: 999px;
+      color: var(--cx-gold);
       margin: 0 0 12px;
     }
     .insights-main h1 {
-      font-family: "Playfair Display", "Cinzel", Georgia, serif;
+      font-family: var(--cx-display);
       font-size: 2.35rem;
-      font-weight: 700;
+      font-weight: 400;
+      letter-spacing: -0.015em;
       color: #fbf5e8;
       text-shadow: 0 2px 16px rgba(0, 0, 0, 0.85);
       margin: 0 0 8px;
@@ -45,7 +44,7 @@
     }
     .insights-lead {
       color: #d1c5b4;
-      font-family: "Cormorant Garamond", Georgia, serif;
+      font-family: var(--cx-display);
       font-size: 1.15rem;
       line-height: 1.55;
       margin: 0 0 24px;
@@ -54,12 +53,12 @@
     .insights-gate {
       padding: 20px 24px;
       border-radius: 14px;
-      border: 1px solid rgba(212, 175, 55, 0.35);
-      background: linear-gradient(145deg, rgba(28, 22, 16, 0.92), rgba(14, 11, 8, 0.98));
+      border: 1px solid var(--cx-line);
+      background: linear-gradient(160deg, rgba(34, 26, 17, 0.88), rgba(14, 11, 8, 0.94));
       color: #e2d6c1;
       font-size: 15px;
       line-height: 1.6;
-      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
+      box-shadow: var(--cx-shadow);
       margin: 20px 0;
     }
     .insights-gate a {
@@ -90,18 +89,22 @@
       letter-spacing: 0.04em;
       padding: 0.5rem 1rem;
       border-radius: 999px;
-      border: 1px solid rgba(212, 175, 55, 0.35);
+      border: 1px solid var(--cx-line-strong);
       background: rgba(20, 16, 12, 0.65);
       color: #c4b8a8;
       cursor: pointer;
-      transition: all 0.18s ease;
+      transition: transform var(--cx-t1) var(--cx-ease), border-color var(--cx-t2) var(--cx-ease), background-color var(--cx-t2) var(--cx-ease), color var(--cx-t2) var(--cx-ease), box-shadow var(--cx-t2) var(--cx-ease);
       backdrop-filter: blur(8px);
     }
     .insights-toolbar button:hover {
       background: rgba(212, 175, 55, 0.15);
-      border-color: #ffd700;
+      border-color: var(--cx-gold);
       color: #ffd700;
-      transform: translateY(-1px);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px -14px rgba(229, 185, 59, 0.55);
+    }
+    .insights-toolbar button:active {
+      transform: scale(0.975);
     }
     .insights-toolbar button.is-on {
       background: linear-gradient(180deg, rgba(212, 175, 55, 0.28), rgba(212, 175, 55, 0.14));
@@ -115,26 +118,26 @@
       gap: 20px;
     }
     .insights-panel {
-      border: 1px solid rgba(212, 175, 55, 0.32);
-      border-radius: 14px;
-      background: linear-gradient(160deg, rgba(28, 22, 16, 0.88), rgba(12, 10, 8, 0.96));
+      border: 1px solid var(--cx-line);
+      border-radius: var(--cx-radius);
+      background: linear-gradient(160deg, rgba(34, 26, 17, 0.88), rgba(14, 11, 8, 0.94));
       padding: 20px 20px 18px;
-      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 230, 160, 0.12);
+      box-shadow: var(--cx-shadow), inset 0 1px 0 rgba(255, 230, 160, 0.12);
       backdrop-filter: blur(10px);
-      transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: transform var(--cx-t2) var(--cx-ease), border-color var(--cx-t2) var(--cx-ease), box-shadow var(--cx-t2) var(--cx-ease);
     }
     .insights-panel:hover {
       transform: translateY(-2px);
-      border-color: rgba(212, 175, 55, 0.65);
-      box-shadow: 0 16px 48px rgba(0, 0, 0, 0.65), 0 0 18px rgba(212, 175, 55, 0.16);
+      border-color: var(--cx-line-strong);
+      box-shadow: var(--cx-shadow), var(--cx-glow);
     }
     .insights-panel h2 {
-      font-family: "Playfair Display", Georgia, serif;
+      font-family: var(--cx-display);
       font-size: 1.15rem;
-      font-weight: 700;
+      font-weight: 400;
       color: #ffd700;
       margin: 0 0 14px;
-      letter-spacing: 0.05em;
+      letter-spacing: -0.015em;
     }
     .insights-panel .ibar {
       display: grid;
@@ -188,11 +191,12 @@
       color: #fdf5e2;
     }
     .insights-panel small {
-      letter-spacing: 0.14em;
+      font-family: var(--cx-label);
+      letter-spacing: 0.22em;
       text-transform: uppercase;
-      font-size: 10px;
-      font-weight: 700;
-      color: #d4af37;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--cx-gold);
     }
     .insights-empty {
       font-size: 13px;
@@ -205,19 +209,26 @@
       font-size: 11px;
       font-weight: 700;
       letter-spacing: 0.04em;
-      border: 1px solid rgba(212, 175, 55, 0.45);
-      border-radius: 6px;
-      background: rgba(212, 175, 55, 0.1);
-      color: #ffd700;
-      padding: 3px 9px;
+      border: 1px solid var(--cx-line-strong);
+      border-radius: 999px;
+      background: rgba(229, 185, 59, 0.08);
+      color: var(--cx-gold);
+      padding: 4px 12px;
       cursor: pointer;
-      transition: all 0.15s ease;
+      transition: transform var(--cx-t1) var(--cx-ease), border-color var(--cx-t2) var(--cx-ease), background-color var(--cx-t2) var(--cx-ease), color var(--cx-t2) var(--cx-ease), box-shadow var(--cx-t2) var(--cx-ease);
     }
     .insights-csv:hover {
-      background: #ffd700;
+      background: var(--cx-gold);
       color: #120e0a;
-      border-color: #fff;
-      box-shadow: 0 0 10px rgba(212, 175, 55, 0.4);
+      border-color: var(--cx-gold-soft);
+      box-shadow: 0 10px 30px -14px rgba(229, 185, 59, 0.55);
+    }
+    .insights-csv:active {
+      transform: scale(0.975);
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .insights-panel, .insights-toolbar button, .insights-csv { transition: none; }
+      .insights-panel:hover, .insights-toolbar button:hover, .insights-toolbar button:active, .insights-csv:active { transform: none; }
     }
     @media (max-width: 640px) {
       .insights-main { padding: 24px 16px 60px; }
@@ -226,6 +237,8 @@
       .insights-panel .ibar { grid-template-columns: 6.5rem 1fr 2.5rem; }
     }
   </style>
+  <link rel="stylesheet" href="css/cinema.css?v=cx2">
+  <script src="js/shared/cinema.js"></script>
   <script src="js/shared/journey.js"></script>
   <script src="js/shared/auth-config.js"></script>
   <script src="vendor/supabase/supabase.js"></script>
@@ -240,10 +253,9 @@
   <div class="vignette" aria-hidden="true"></div>
   <div class="grain" aria-hidden="true"></div>
   <nav class="site-nav">
-    <a class="site-brand" href="index.html">THE SCROLL OF DANIEL</a>
+    <a class="site-brand" href="index.html">THE SHELF OF DANIEL</a>
     <div class="site-links">
       <a href="index.html">Home</a>
-      <a href="study.html">The Sitting</a>
       <a href="map.html">Map of History</a>
       <a href="gallery.html">3D Symbols</a>
       <a href="insights.html" class="active">Insights</a>
@@ -252,9 +264,9 @@
     </div>
   </nav>
   <main class="insights-main">
-    <p class="insights-kicker">OPERATOR TELEMETRY &bull; EXEGESIS ANALYTICS</p>
-    <h1>Study insights</h1>
-    <p class="insights-lead">Moderator only. Lesson funnel, quiz answers, feedback, and referrals. Nothing here is sold or used for advertising.</p>
+    <p class="insights-kicker" data-cx-reveal style="--cx-i:0">OPERATOR TELEMETRY &bull; EXEGESIS ANALYTICS</p>
+    <h1 data-cx-reveal style="--cx-i:1">Study insights</h1>
+    <p class="insights-lead" data-cx-reveal style="--cx-i:2">Moderator only. Lesson funnel, quiz answers, feedback, and referrals. Nothing here is sold or used for advertising.</p>
     <p class="insights-gate" id="insights-gate">Sign in with the moderator account from the <a href="account.html?next=insights.html">Account</a> page to open this page.</p>
     <div id="insights-app" hidden>
       <div class="insights-toolbar" id="insights-range">
@@ -264,8 +276,9 @@
         <button type="button" data-days="90">90 days</button>
         <button type="button" data-days="0">All</button>
       </div>
-      <div class="insights-grid" id="insights-grid"></div>
+      <div class="insights-grid" id="insights-grid" data-cx-reveal style="--cx-i:3"></div>
     </div>
   </main>
+  <footer class="site-footer"></footer>
 </body>
 </html>

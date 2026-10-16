@@ -171,8 +171,9 @@
     if (marquee) marquee.hidden = false;
     if (empty) empty.hidden = true;
     list.hidden = false;
-    rows.forEach(function (row) { list.appendChild(renderQuote(row)); });
-    rows.forEach(function (row) { list.appendChild(renderQuote(row)); });
+    const loopsAsMarquee = list.dataset.layout !== "grid";
+    const copies = loopsAsMarquee ? 2 : 1;
+    for (let k = 0; k < copies; k++) rows.forEach(function (row) { list.appendChild(renderQuote(row)); });
   }
 
   function paintReviewLoadFail(list, empty) {
@@ -188,8 +189,42 @@
     }
   }
 
+  function fetchApproved(limit) {
+    const c = authClient();
+    if (!c) return Promise.resolve([]);
+    return c.from(TABLE)
+      .select("id, display_name, body, rating, created_at")
+      .eq("approved", true)
+      .eq("rejected", false)
+      .order("created_at", { ascending: false })
+      .limit(limit || 24)
+      .then(function (res) { return res && !res.error && Array.isArray(res.data) ? res.data : []; },
+        function () { return []; });
+  }
+
+  function countApproved() {
+    const c = authClient();
+    if (!c) return Promise.resolve(null);
+    return c.from(TABLE)
+      .select("id", { count: "exact", head: true })
+      .eq("approved", true)
+      .eq("rejected", false)
+      .then(function (res) { return res && !res.error && typeof res.count === "number" ? res.count : null; },
+        function () { return null; });
+  }
+
+  function paintCount() {
+    const el = document.getElementById("witness-count");
+    if (!el) return Promise.resolve();
+    return countApproved().then(function (n) {
+      el.textContent = n ? (n === 1 ? "1 note" : n + " notes") + " from readers" : "";
+      el.hidden = !n;
+    });
+  }
+
   function loadApproved() {
     const list = document.getElementById("witness-list");
+    const limit = list && list.dataset.layout === "grid" ? 60 : 24;
     const marquee = document.getElementById("witness-marquee");
     const empty = document.getElementById("witness-empty");
     if (marquee) marquee.hidden = true;
@@ -206,7 +241,7 @@
       .eq("approved", true)
       .eq("rejected", false)
       .order("created_at", { ascending: false })
-      .limit(24)
+      .limit(limit)
       .then(function (res) {
         if (res && res.error) {
           paintReviewLoadFail(list, empty);
@@ -661,6 +696,7 @@
     syncFormGate();
     syncAdminUi();
     loadApproved();
+    paintCount();
     loadQueue();
     loadOwnReview();
   }
@@ -688,6 +724,8 @@
     submitReview: submitReview,
     updateReview: updateReview,
     loadApproved: loadApproved,
+    fetchApproved: fetchApproved,
+    countApproved: countApproved,
     setReviewFlags: setReviewFlags,
     canEditReview: canEditReview
   };

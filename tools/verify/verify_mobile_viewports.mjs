@@ -58,35 +58,24 @@ try {
     await page.goto("http://127.0.0.1:8123/index.html", { waitUntil: "domcontentloaded" });
     await page.waitForTimeout(500);
 
-    const heroBox = await page.locator(".dash-hero").boundingBox();
-    const kickerBox = await page.locator(".dash-title-kicker").boundingBox();
-    const mainTitleBox = await page.locator(".dash-title-main").boundingBox();
-    const ctaBox = await page.locator("#hero-cta").boundingBox();
-    const signinBox = await page.locator(".dash-top-signin").boundingBox();
+    const heroBox = await page.locator("#shelf-stage").boundingBox();
+    const kickerBox = await page.locator(".sh-hero-kicker").boundingBox();
+    const mainTitleBox = await page.locator(".sh-title").boundingBox();
+    const ctaBox = await page.locator("#btn-continue").boundingBox();
+    const signinBox = await page.locator("#shelf-signin").boundingBox();
 
-    assert(heroBox, "dash-hero must exist");
-    assert(kickerBox, "dash-title-kicker must exist");
-    assert(mainTitleBox, "dash-title-main must exist");
-    assert(ctaBox, "hero-cta must exist");
-    assert(signinBox, "dash-top-signin must exist");
+    assert(heroBox, "shelf stage must exist");
+    assert(kickerBox, "hero kicker must exist");
+    assert(mainTitleBox, "hero title must exist");
+    assert(ctaBox, "continue button must exist");
+    assert(signinBox, "sign-in button must be visible on a phone");
 
-    console.log(`[Home] hero top: ${heroBox.y}, kicker top: ${kickerBox.y}, main top: ${mainTitleBox.y}`);
-    assert(
-      kickerBox.y >= heroBox.y,
-      `Kicker ("THE SCROLL OF") top (${kickerBox.y}) must be inside hero top (${heroBox.y})`
-    );
-    assert(
-      kickerBox.y + kickerBox.height <= heroBox.y + heroBox.height,
-      "Kicker bottom must be inside hero"
-    );
-    assert(
-      mainTitleBox.y >= kickerBox.y,
-      `Main title ("DANIEL") top (${mainTitleBox.y}) must be below kicker (${kickerBox.y})`
-    );
-    assert(
-      ctaBox.y + ctaBox.height <= heroBox.y + heroBox.height + 20,
-      "CTA button must fit within hero bounds"
-    );
+    console.log(`[Home] stage top: ${heroBox.y}, kicker top: ${kickerBox.y}, title top: ${mainTitleBox.y}`);
+    assert(kickerBox.y >= heroBox.y, `Kicker top (${kickerBox.y}) must be inside the stage (${heroBox.y})`);
+    assert(mainTitleBox.y >= kickerBox.y, `Title top (${mainTitleBox.y}) must be below the kicker (${kickerBox.y})`);
+    assert(ctaBox.x >= 0 && ctaBox.x + ctaBox.width <= vp.width, "Continue button must fit the screen width");
+    assert(signinBox.x >= 0 && signinBox.x + signinBox.width <= vp.width, "Sign-in button must fit the screen width");
+    assert(ctaBox.y + ctaBox.height <= heroBox.y + heroBox.height, "Continue button must be inside the stage");
 
     // Verify document width does not overflow viewport width
     const homeScrollWidth = await page.evaluate(() => document.documentElement.scrollWidth);

@@ -2,9 +2,9 @@
 
 **Audit Date:** 2026-09-20  
 **File Audited:** `js/study/sheets-data.js` (Sitting id: 8) with `sheet-verify.js`, `workbench.js`, `sheet-glossary.js`  
-**Audited Content Hash:** `3bbe0d7bd8582441`  
+**Audited Content Hash:** `b91b510a42b4625e`  
 **Method:** Exhaustive claim-unit audit of finished prose across content, christology, quizzes, studyGuide, guide, verify cards, workbench, and linked glossary entries.  
-**Counts:** ACCURATE: 270 | SOFTEN: 1 | FIX: 0 | N/A: 41 | Total: 312  
+**Counts:** ACCURATE: 254 | SOFTEN: 0 | FIX: 0 | N/A: 49 | Total: 303  
 
 ## 1. Summary of Required Sections & Governing Standards
 
@@ -24,7 +24,7 @@
 | S08-NEXT | N/A | N/A | Next sitting transition banner chrome |
 | S08-H-01 | N/A | N/A | Section title / kicker header chrome |
 | S08-P-01 | CHRIST | ACCURATE | Canonical Christology: Luke 24:27; Dan 9:26; Dan 2:44; Dan 7:13–14 |
-| S08-P-02 | HISTORY | SOFTEN | Hedged in-text: explicitly marked as historical reconstruction rather than bare Scripture |
+| S08-P-02 | HISTORY | ACCURATE | Documented historical event, dated primary chronicle, or standard history of interpretation |
 | S08-H-02 | N/A | N/A | Section title / kicker header chrome |
 | S08-H-03 | N/A | N/A | Section title / kicker header chrome |
 | S08-H-04 | N/A | N/A | Section title / kicker header chrome |
@@ -87,8 +87,8 @@
 | S08-BQ-03 | TEXT | ACCURATE | Direct KJV Scripture quotation verified against bible/kjv.json |
 | S08-P-22 | INTERPRETATION | ACCURATE | Historicist argument grounded in Scripture interpreting Scripture (Dan 2; 7; 8; 9) |
 | S08-H-28 | N/A | N/A | Section title / kicker header chrome |
-| S08-P-23 | PASTORAL | ACCURATE | Personal application tethered to exilic covenant faithfulness |
-| S08-P-24 | TEXT | ACCURATE | Direct passage exposition verified in KJV text |
+| S08-P-23 | INTERPRETATION | ACCURATE | Historicist argument grounded in Scripture interpreting Scripture (Dan 2; 7; 8; 9) |
+| S08-P-24 | INTERPRETATION | ACCURATE | Historicist argument grounded in Scripture interpreting Scripture (Dan 2; 7; 8; 9) |
 | S08-H-29 | N/A | N/A | Section title / kicker header chrome |
 | S08-P-25 | INTERPRETATION | ACCURATE | Historicist argument grounded in Scripture interpreting Scripture (Dan 2; 7; 8; 9) |
 | S08-P-26 | INTERPRETATION | ACCURATE | Historicist argument grounded in Scripture interpreting Scripture (Dan 2; 7; 8; 9) |
@@ -97,25 +97,42 @@
 | S08-LI-10 | INTERPRETATION | ACCURATE | Biblical case and historical argument |
 | S08-LI-11 | INTERPRETATION | ACCURATE | Four-level interpretive verification criteria |
 | S08-LI-12 | INTERPRETATION | ACCURATE | Four-level interpretive verification criteria |
-| S08-P-28 | INTERPRETATION | ACCURATE | Historicist argument grounded in Scripture interpreting Scripture (Dan 2; 7; 8; 9) |
 | S08-H-31 | N/A | N/A | Section title / kicker header chrome |
-| S08-P-29 | CHRIST | ACCURATE | Canonical Christology: Luke 24:27; Dan 9:26; Dan 2:44; Dan 7:13–14 |
+| S08-P-28 | CHRIST | ACCURATE | Canonical Christology: Luke 24:27; Dan 9:26; Dan 2:44; Dan 7:13–14 |
 | S08-H-32 | N/A | N/A | Section title / kicker header chrome |
 | S08-H-33 | N/A | N/A | Section title / kicker header chrome |
-| S08-P-30 | PASTORAL | ACCURATE | Personal application tethered to exilic covenant faithfulness |
+| S08-P-29 | PASTORAL | ACCURATE | Personal application tethered to exilic covenant faithfulness |
 | S08-H-34 | N/A | N/A | Section title / kicker header chrome |
-| S08-P-31 | CHRIST | ACCURATE | Canonical Christology: Luke 24:27; Dan 9:26; Dan 2:44; Dan 7:13–14 |
+| S08-P-30 | CHRIST | ACCURATE | Canonical Christology: Luke 24:27; Dan 9:26; Dan 2:44; Dan 7:13–14 |
 | S08-H-35 | N/A | N/A | Section title / kicker header chrome |
-| S08-P-32 | CHRIST | ACCURATE | Canonical Christology: Luke 24:27; Dan 9:26; Dan 2:44; Dan 7:13–14 |
+| S08-P-31 | CHRIST | ACCURATE | Canonical Christology: Luke 24:27; Dan 9:26; Dan 2:44; Dan 7:13–14 |
 | S08-H-36 | N/A | N/A | Section title / kicker header chrome |
-| S08-P-33 | INTERPRETATION | ACCURATE | Historicist argument grounded in Scripture interpreting Scripture (Dan 2; 7; 8; 9) |
+| S08-P-32 | HISTORY | ACCURATE | Documented historical event, dated primary chronicle, or standard history of interpretation |
 | S08-H-37 | N/A | N/A | Section title / kicker header chrome |
-| S08-P-34 | INTERPRETATION | ACCURATE | Historicist argument grounded in Scripture interpreting Scripture (Dan 2; 7; 8; 9) |
+| S08-P-33 | INTERPRETATION | ACCURATE | Historicist argument grounded in Scripture interpreting Scripture (Dan 2; 7; 8; 9) |
 | S08-H-38 | N/A | N/A | Section title / kicker header chrome |
 | S08-LI-13 | INTERPRETATION | ACCURATE | Four-level interpretive verification criteria |
 | S08-LI-14 | INTERPRETATION | ACCURATE | Four-level interpretive verification criteria |
 | S08-LI-15 | INTERPRETATION | ACCURATE | Four-level interpretive verification criteria |
 | S08-LI-16 | INTERPRETATION | ACCURATE | Four-level interpretive verification criteria |
+| S08-H-39 | N/A | N/A | Section title / kicker header chrome |
+| S08-H-40 | N/A | N/A | Section title / kicker header chrome |
+| S08-LI-17 | INTERPRETATION | ACCURATE | Biblical case and historical argument |
+| S08-H-41 | N/A | N/A | Section title / kicker header chrome |
+| S08-LI-18 | INTERPRETATION | ACCURATE | Biblical case and historical argument |
+| S08-H-42 | N/A | N/A | Section title / kicker header chrome |
+| S08-LI-19 | INTERPRETATION | ACCURATE | Biblical case and historical argument |
+| S08-H-43 | N/A | N/A | Section title / kicker header chrome |
+| S08-LI-20 | INTERPRETATION | ACCURATE | Biblical case and historical argument |
+| S08-H-44 | N/A | N/A | Section title / kicker header chrome |
+| S08-LI-21 | INTERPRETATION | ACCURATE | Biblical case and historical argument |
+| S08-H-45 | N/A | N/A | Section title / kicker header chrome |
+| S08-LI-22 | INTERPRETATION | ACCURATE | Biblical case and historical argument |
+| S08-LI-23 | INTERPRETATION | ACCURATE | Biblical case and historical argument |
+| S08-LI-24 | INTERPRETATION | ACCURATE | Biblical case and historical argument |
+| S08-LI-25 | INTERPRETATION | ACCURATE | Biblical case and historical argument |
+| S08-H-46 | N/A | N/A | Section title / kicker header chrome |
+| S08-LI-26 | INTERPRETATION | ACCURATE | Biblical case and historical argument |
 | S08-CHR-TITLE | N/A | N/A | Christology banner title chrome |
 | S08-CHR-SCRIPTURE | TEXT | ACCURATE | Exact canonical scripture citation: Daniel 8:11–14; Hebrews 7:25; 8:1–2; 9:23–26; Leviticus 16:16, 30 |
 | S08-CHR-P1 | CHRIST | ACCURATE | Canonical Christological synthesis: Luke 24:27; Dan 9:26; Dan 2:44; redemption and kingdom |
@@ -224,7 +241,7 @@
 | S08-VRF-5-LESSON | HISTORY | ACCURATE | Historical documentation and exilic archaeological evidence |
 | S08-VRF-5-QUOTE | HISTORY | ACCURATE | Dated historical primary source quote (verified in translation) |
 | S08-VRF-5-CHECK | PASTORAL | ACCURATE | Empirical reader checkpoint and source verification instruction |
-| S08-VRF-6-LESSON | INTERPRETATION | ACCURATE | Historicist synthesis from Scripture interpreting Scripture |
+| S08-VRF-6-LESSON | CHRIST | ACCURATE | Redemptive and Christological fulfillment of passage |
 | S08-VRF-6-QUOTE | HISTORY | ACCURATE | Dated historical primary source quote (verified in translation) |
 | S08-VRF-6-CHECK | PASTORAL | ACCURATE | Empirical reader checkpoint and source verification instruction |
 | S08-VRF-7-LESSON | INTERPRETATION | ACCURATE | Historicist synthesis from Scripture interpreting Scripture |
@@ -232,49 +249,35 @@
 | S08-VRF-7-CHECK | PASTORAL | ACCURATE | Empirical reader checkpoint and source verification instruction |
 | S08-GLS-alexander-SMP | INTERPRETATION | ACCURATE | Historicist vocabulary and prophetic hermeneutic definition |
 | S08-GLS-alexander-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
-| S08-GLS-alexander-PRF | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
 | S08-GLS-antiochus-SMP | INTERPRETATION | ACCURATE | Historicist vocabulary and prophetic hermeneutic definition |
 | S08-GLS-antiochus-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
-| S08-GLS-antiochus-PRF | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
 | S08-GLS-apocalyptic-SMP | INTERPRETATION | ACCURATE | Historicist vocabulary and prophetic hermeneutic definition |
 | S08-GLS-apocalyptic-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
-| S08-GLS-apocalyptic-PRF | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
 | S08-GLS-artaxerxes-SMP | INTERPRETATION | ACCURATE | Historicist vocabulary and prophetic hermeneutic definition |
 | S08-GLS-artaxerxes-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
-| S08-GLS-artaxerxes-PRF | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
 | S08-GLS-atonement-SMP | CHRIST | ACCURATE | Christological definition and canonical significance |
 | S08-GLS-atonement-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
-| S08-GLS-atonement-PRF | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
-| S08-GLS-babylon-SMP | INTERPRETATION | ACCURATE | Historicist vocabulary and prophetic hermeneutic definition |
+| S08-GLS-babylon-SMP | TEXT | ACCURATE | Biblical lexical definition and textual usage |
 | S08-GLS-babylon-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
-| S08-GLS-babylon-PRF | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
 | S08-GLS-belshazzar-SMP | INTERPRETATION | ACCURATE | Historicist vocabulary and prophetic hermeneutic definition |
 | S08-GLS-belshazzar-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
-| S08-GLS-belshazzar-PRF | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
 | S08-GLS-chathak-SMP | TEXT | ACCURATE | Biblical lexical definition and textual usage |
 | S08-GLS-chathak-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
 | S08-GLS-chathak-PRF | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
 | S08-GLS-cyrus-SMP | INTERPRETATION | ACCURATE | Historicist vocabulary and prophetic hermeneutic definition |
 | S08-GLS-cyrus-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
-| S08-GLS-cyrus-PRF | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
 | S08-GLS-daniel-SMP | INTERPRETATION | ACCURATE | Historicist vocabulary and prophetic hermeneutic definition |
 | S08-GLS-daniel-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
-| S08-GLS-daniel-PRF | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
 | S08-GLS-diadochi-SMP | INTERPRETATION | ACCURATE | Historicist vocabulary and prophetic hermeneutic definition |
 | S08-GLS-diadochi-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
-| S08-GLS-diadochi-PRF | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
 | S08-GLS-evening-morning-SMP | INTERPRETATION | ACCURATE | Historicist vocabulary and prophetic hermeneutic definition |
 | S08-GLS-evening-morning-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
-| S08-GLS-evening-morning-PRF | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
 | S08-GLS-ezekiel-SMP | INTERPRETATION | ACCURATE | Historicist vocabulary and prophetic hermeneutic definition |
 | S08-GLS-ezekiel-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
-| S08-GLS-ezekiel-PRF | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
 | S08-GLS-gabriel-SMP | INTERPRETATION | ACCURATE | Historicist vocabulary and prophetic hermeneutic definition |
 | S08-GLS-gabriel-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
-| S08-GLS-gabriel-PRF | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
 | S08-GLS-great-disappointment-SMP | CHRIST | ACCURATE | Christological definition and canonical significance |
 | S08-GLS-great-disappointment-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
-| S08-GLS-great-disappointment-PRF | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
 | S08-GLS-hermeneutics-SMP | INTERPRETATION | ACCURATE | Historicist vocabulary and prophetic hermeneutic definition |
 | S08-GLS-hermeneutics-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
 | S08-GLS-hermeneutics-PRF | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
@@ -283,25 +286,19 @@
 | S08-GLS-historicism-PRF | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
 | S08-GLS-jerusalem-SMP | INTERPRETATION | ACCURATE | Historicist vocabulary and prophetic hermeneutic definition |
 | S08-GLS-jerusalem-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
-| S08-GLS-jerusalem-PRF | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
 | S08-GLS-karaite-SMP | INTERPRETATION | ACCURATE | Historicist vocabulary and prophetic hermeneutic definition |
 | S08-GLS-karaite-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
-| S08-GLS-karaite-PRF | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
 | S08-GLS-little-horn-SMP | TEXT | ACCURATE | Biblical lexical definition and textual usage |
 | S08-GLS-little-horn-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
 | S08-GLS-little-horn-PRF | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
 | S08-GLS-miller-SMP | INTERPRETATION | ACCURATE | Historicist vocabulary and prophetic hermeneutic definition |
 | S08-GLS-miller-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
-| S08-GLS-miller-PRF | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
 | S08-GLS-millerite-SMP | INTERPRETATION | ACCURATE | Historicist vocabulary and prophetic hermeneutic definition |
 | S08-GLS-millerite-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
-| S08-GLS-millerite-PRF | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
 | S08-GLS-most-holy-SMP | CHRIST | ACCURATE | Christological definition and canonical significance |
 | S08-GLS-most-holy-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
-| S08-GLS-most-holy-PRF | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
 | S08-GLS-nitsdaq-SMP | INTERPRETATION | ACCURATE | Historicist vocabulary and prophetic hermeneutic definition |
 | S08-GLS-nitsdaq-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
-| S08-GLS-nitsdaq-PRF | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
 | S08-GLS-papacy-SMP | TEXT | ACCURATE | Biblical lexical definition and textual usage |
 | S08-GLS-papacy-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
 | S08-GLS-papacy-PRF | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
@@ -310,25 +307,19 @@
 | S08-GLS-preterism-PRF | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
 | S08-GLS-rome-SMP | INTERPRETATION | ACCURATE | Historicist vocabulary and prophetic hermeneutic definition |
 | S08-GLS-rome-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
-| S08-GLS-rome-PRF | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
 | S08-GLS-sanctuary-SMP | TEXT | ACCURATE | Biblical lexical definition and textual usage |
 | S08-GLS-sanctuary-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
-| S08-GLS-sanctuary-PRF | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
 | S08-GLS-seventh-month-SMP | CHRIST | ACCURATE | Christological definition and canonical significance |
 | S08-GLS-seventh-month-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
-| S08-GLS-seventh-month-PRF | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
 | S08-GLS-susa-SMP | INTERPRETATION | ACCURATE | Historicist vocabulary and prophetic hermeneutic definition |
 | S08-GLS-susa-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
-| S08-GLS-susa-PRF | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
 | S08-GLS-tamid-SMP | TEXT | ACCURATE | Biblical lexical definition and textual usage |
 | S08-GLS-tamid-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
 | S08-GLS-tamid-PRF | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
 | S08-GLS-typology-SMP | INTERPRETATION | ACCURATE | Historicist vocabulary and prophetic hermeneutic definition |
 | S08-GLS-typology-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
-| S08-GLS-typology-PRF | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
 | S08-GLS-ulai-SMP | INTERPRETATION | ACCURATE | Historicist vocabulary and prophetic hermeneutic definition |
 | S08-GLS-ulai-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
-| S08-GLS-ulai-PRF | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |
 | S08-GLS-year-day-SMP | INTERPRETATION | ACCURATE | Historicist vocabulary and prophetic hermeneutic definition |
 | S08-GLS-year-day-HIS | HISTORY | ACCURATE | Standard historical, exilic, or church history context |
 | S08-GLS-year-day-PRF | INTERPRETATION | ACCURATE | Historicist exegetical synthesis |

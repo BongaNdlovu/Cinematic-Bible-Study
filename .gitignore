@@ -59,3 +59,12 @@ _factcheck/
 # Final GC sentence-audit working set: generated inventory, agent reports,
 # and the fix inbox. Local review scratch, not part of the course.
 tools/review/final-gc/
+
+# Local agent skill installs. Not part of the study site.
+.agents/
+.claude/
+skills-lock.json
+
+# One-off wiring check and a full book-reader QA log.
+__wiring_check.mjs
+qa_book_reader_full.log
