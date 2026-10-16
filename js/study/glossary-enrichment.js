@@ -2,39 +2,51 @@
 (function () {
   window.GLOSSARY_ENRICHMENT = {
   "hermeneutics": {
-    "simple": "The rules you use before you name a king, a horn, or a date — the method that decides whether Daniel is one timeline or a book that ends in the second century B.C. or jumps to a future seven-year crisis.",
-    "history": "Every sitting assumes a hermeneutical choice. Historicism reads Daniel and Revelation as one unbroken chain of real empires from the exile toward Christ’s return. Alcázar’s 1614 book limits the Apocalypse to Constantine’s overthrow of paganism. The Maccabean reading of Daniel is Porphyry’s, which Jerome reports. Ribera’s gap is a future three and a half years. Protestant futurism spread through S. R. Maitland. In 1826 Maitland published a seventy-two-page pamphlet (Prophetic Faith of Our Fathers, vol. 3). The course defends historicism because Daniel’s succession language, parallel visions, and internal date tests (Daniel 9) fit a continuous historical reading when Scripture interprets Scripture.",
+    "simple": "The rules you use to read a text. In this course it means how you decide when Daniel’s prophecies happen.",
+    "history": "Before you name a beast, a horn, or a date, you choose a way of reading. Historicism reads Daniel and Revelation as one unbroken line of real events from the prophet’s day to Christ’s return. Preterism says the prophecies were fulfilled in the past, and futurism says most of them are still ahead, after a long gap. The three readings give very different answers to the same chapters. This course follows historicism because Daniel’s order of kingdoms, its matching visions, and its dated prophecy of the Messiah (Daniel 9) fit a continuous reading when Scripture explains Scripture.",
     "proof": [
-      "Scripture (KJV): Daniel 2:38–40; 7:3–7 — the succession is in the text. Daniel 2:38–40 names the king as gold and then another kingdom, not the later empires. The names are the historicist reading (ABSG 2020 Q1, lesson 1).",
-      "Witness: Hippolytus, Treatise on Christ and Antichrist §28 (c. A.D. 200) — a patristic witness — gold, silver, brass, and iron as Babylon, Persia and Media, Greece, and Rome, one chain.",
-      "Witness: Luis de Alcázar (1614) and Francisco Ribera, Revelation commentary (about 1590) — dated Counter-Reformation alternatives (PFF2 488)."
+      "Scripture (KJV): Daniel 2:38–40; 7:3–7 — the succession is in the text. Daniel 2:38–40 names the first kingdom as the head of gold and then says other kingdoms follow it. The later names come from Daniel 8 and from history.",
+      "Witness: Hippolytus, Treatise on Christ and Antichrist §28 (c. A.D. 200) — gold, silver, brass, and iron as Babylon, Persia and Media, Greece, and Rome, one chain.",
+      "Witness: Luis de Alcázar (1614) and Francisco Ribera, Revelation commentary (about 1590) — dated Counter-Reformation alternatives (Prophetic Faith of Our Fathers, vol. 2)."
     ]
   },
   "historicism": {
-    "simple": "Read Daniel and Revelation as one unbroken timeline of real empires from the prophet’s day through the Christian era to the stone kingdom and the Second Coming.",
-    "history": "Historicism is the reading this course defends: Babylon → Medo-Persia → Greece → Rome → divided Europe → Christ’s kingdom, without parking the book in 164 B.C. or freezing it until a future seven-year crisis. Hippolytus (c. A.D. 200), a patristic witness, already lists Babylon, Persia, Greece, and Rome as one sequence (Hippolytus, Treatise on Christ and Antichrist §28). Newton, in 1733, an eighteenth-century witness, still called Daniel “most distinct in order of time” (Isaac Newton, Observations (1733), Part I, chap. I) and read the four metals as Babylonia, the Persians, the Greeks, and the Romans. Preterism, futurism, and idealism are the opposing views, with dated authors Alcázar (1614) and Ribera (about 1590) (ABSG 2020 Q1, lesson 1).",
+    "simple": "Reading Daniel and Revelation as one unbroken line of real events, from the prophet’s own day through the Christian centuries to the Second Coming.",
+    "history": "This course follows historicism because it takes the text as written. Daniel 2 names Babylon as the head of gold and then says other kingdoms come “after thee,” one after another, until God sets up a kingdom that never ends. The line has no unbiblical gap, it runs unbroken to the Second Coming, and it fits together as one story. Hippolytus of Rome (about A.D. 200) already listed Babylon, Persia, Greece, and Rome as one sequence. John Wycliffe and the main Protestant Reformers later read the same chain through the Christian centuries, and Isaac Newton (1733) called Daniel “most distinct in order of time” and read the four metals as Babylon, Persia, Greece, and Rome. Preterism ends the story in the past, and futurism cuts a gap into the middle of it. Each leaves part of the text without a place.",
     "proof": [
-      "Scripture (KJV): Daniel 2:44 — kingdom set up “in the days of these kings” (the divided feet), not during Babylon alone.",
-      "Witness: Hippolytus, Treatise on Christ and Antichrist §28 — a patristic witness — the golden head through the iron legs as Babylon through Rome.",
-      "Primary: Newton 1733, Part I, Chap. I — an eighteenth-century witness — Daniel “most distinct in order of time” (Gutenberg 16878)."
+      "Scripture (KJV): Daniel 2:38–44 — the head of gold is named, the next kingdoms follow “after thee,” and God’s kingdom comes “in the days of these kings,” at the divided feet.",
+      "Witness: Hippolytus, Treatise on Christ and Antichrist §28 — the golden head through the iron legs as Babylon through Rome.",
+      "Primary: Isaac Newton, Observations upon the Prophecies of Daniel (1733), Part I, chap. I — Daniel “most distinct in order of time” (Gutenberg 16878).",
+      "Witness: the dated alternatives, Alcázar (1614) and Ribera (about 1590) — Prophetic Faith of Our Fathers, vol. 2."
     ]
   },
   "preterism": {
-    "simple": "The claim that most of Daniel (and often Revelation) was already fulfilled in the distant past (ABSG 2020 Q1, lesson 1).",
-    "history": "Porphyry argued Daniel was written after Antiochus; Jerome reports and answers that charge (Jerome, Commentary on Daniel, Prologue). Jesuit Luis de Alcázar (1614, Vestigatio Arcani Sensus in Apocalypsi) systematized a preterist reading that did not extend further than to the overthrow of Paganism by Constantine, and leaves no medieval or modern church on the chain (Preterist Archives, Vestigatio page). That move serves Counter-Reformation polemics: if prophecy ended in antiquity, Rome cannot be on Daniel 7’s horn. This course rejects full preterism because Gabriel places Daniel 8 at “the time of the end” (8:17; cf. 8:19), which Antiochus cannot exhaust, and because Daniel 2:44 requires a kingdom after Rome’s division.",
+    "simple": "The view that most of Daniel, and often Revelation, was fulfilled in the past, soon after it was written. The word comes from a Latin word meaning “past.”",
+    "history": "Two readings end the story in the past. The ancient critic Porphyry said Daniel’s visions ended with the Greek-Syrian king Antiochus IV in the second century B.C. (the Maccabean reading), and Jerome answered that charge. In 1614 the Spanish Jesuit Luis de Alcázar read Revelation as the fall of Jerusalem and the overthrow of pagan Rome. People hold this view because it ties the prophecies to events that can be checked in history. It also arrived when the Reformers were naming the medieval papacy as the little horn: if the prophecies ended in antiquity, that could not be done. This course disagrees for three reasons. Daniel 2 goes on past Greece to Rome, the divided feet, and the Stone. God’s kingdom “shall never be destroyed” (Daniel 2:44), and no second-century kingdom lasted. And Gabriel says the vision of Daniel 8 is “at the time of the end” (Daniel 8:17). A reading that stops in antiquity also leaves the Christian centuries without a place on the prophetic line.",
     "proof": [
       "Witness: Jerome, Commentary on Daniel, Prologue — the Porphyry late-date charge he answers.",
-      "Primary: Alcázar, Vestigatio arcani sensus in Apocalypsi (1614) — the preterist template; the prophecies did not extend further than to the overthrow of Paganism by Constantine (Preterist Archives, Vestigatio page).",
+      "Primary: Alcázar, Vestigatio arcani sensus in Apocalypsi (1614) — the preterist template; the prophecies did not extend further than to the overthrow of paganism by Constantine (Preterist Archives, Vestigatio page).",
+      "Scripture (KJV): Daniel 2:33–35, 44 — the statue goes on past Greece, and God’s kingdom “shall never be destroyed.”",
       "Scripture (KJV): Daniel 8:17; cf. 8:19 — the vision concerns “the time of the end,” not only 164 B.C."
     ]
   },
   "futurism": {
-    "simple": "The claim that Daniel’s hardest numbers jump to a future individual Antichrist after the great gap of the spreading centuries, before a future three and a half years (PFF2 488).",
-    "history": "Patristic readers already expected a future antichrist (Hippolytus, Treatise on Christ and Antichrist §28), a patristic witness. Francisco Ribera’s c. 1590 Revelation commentary made the gap systematic: Antichrist as one man for 3½ literal years (PFF2 487). Protestant adoption followed through S. R. Maitland. In 1826 Maitland published the enquiry on 1260 Years (Prophetic Faith of Our Fathers, vol. 3). Gabriel never writes a two-thousand-year parenthesis into Daniel 9. This sitting names a 16th-century commentary (about 1590) and, separately, the later Protestant shift, not an anonymous “always read it this way.” (PFF2 489).",
+    "simple": "The view that the last part of Daniel, and most of Revelation, belongs to the future: a long gap after Rome, then a short final crisis under one antichrist.",
+    "history": "Some early writers, such as Hippolytus of Rome (about A.D. 200), expected a future antichrist. About 1590 the Spanish Jesuit Francisco Ribera turned that into a full system with a gap and a final three and a half literal years. In the 1800s S. R. Maitland, Edward Irving, and John Nelson Darby spread it among Protestants, and dispensationalism later made the final crisis a seven-year tribulation. People hold it because many Christians expect a final crisis before Christ returns (Daniel 12:1). This course disagrees with the gap, not with the final crisis. No verse prints the gap. In Daniel 2 the iron legs run straight into the feet, which Daniel calls the same kingdom, divided (Daniel 2:41). In Daniel 9 the seventy weeks are given as one block of time (Daniel 9:24), with no pause after the sixty-ninth week.",
     "proof": [
-      "Primary: About 1590 Ribera published a 500page commentary on the Apocalypse (PFF2 489).",
+      "Primary: About 1590 Ribera published a 500-page commentary on the Apocalypse (Prophetic Faith of Our Fathers, vol. 2, 489).",
       "Witness: In 1826 Maitland published a seventy-two-page pamphlet on the 1,260 years (Prophetic Faith of Our Fathers, vol. 3).",
-      "Scripture (KJV): Daniel 9:24–27 — seventy weeks as one decree-to-Messiah structure; gap is interpretive, not lexical."
+      "Scripture (KJV): Daniel 2:41 — the feet are the same fourth kingdom, divided, with “the strength of the iron” still in it.",
+      "Scripture (KJV): Daniel 9:24–27 — seventy weeks given as one block of time; the gap is added to the verse, not found in it."
+    ]
+  },
+  "dispensationalism": {
+    "simple": "A system that has been popular since the 1800s. It divides history into ages and puts a long gap before a future seven-year time of great trouble.",
+    "history": "John Nelson Darby spread it in the 1800s, and the Scofield Reference Bible (1909) made it widely known. It is a form of futurism: it moves the 70th week of Daniel 9 away from the other sixty-nine, more than two thousand years into the future. Daniel 9 never writes that gap. Gabriel gives the seventy weeks as one block of time, and this course reads the 70th week as the week of Christ’s cross, when the Messiah is cut off and the covenant is confirmed (Daniel 9:26–27).",
+    "proof": [
+      "Scripture (KJV): Daniel 9:24–27 — seventy weeks as one block of time, with Messiah cut off “after threescore and two weeks” (9:26) and the covenant confirmed “for one week” (9:27).",
+      "Witness: the Scofield Reference Bible (1909) spread dispensational futurism.",
+      "Scripture (KJV): Daniel 2:41 — the feet are the same fourth kingdom, divided, not a new kingdom that appears after a long wait."
     ]
   },
   "year-day": {
@@ -48,29 +60,92 @@
   },
   "little-horn": {
     "simple": "A smaller horn rising among ten kings, “diverse” from them, that speaks against God, persecutes saints, and targets the sanctuary — read here as the papal church-state phase on Rome’s fragments.",
-    "history": "Daniel 7:24–25: the horn rises after the ten kings, subdues three kings, speaks great words against the Most High, wears out the saints, and reigns “until a time and times and the dividing of time” (3½ prophetic years → 1,260 year-days → A.D. 538–1798 in this chart). Daniel 8’s horn grows out of one of the four horns that replace Alexander’s great horn (8:8–9), toward the pleasant land, and takes away the daily sacrifice — pagan then papal Rome in succession. Antiochus IV is too early and too short for chapter 7’s checklist. Reformers applied the office to Rome; futurism relocated the same language to a future fulfillment (ABSG 2020 Q1, lesson 1).",
+    "history": "Daniel 7:24–25: the horn rises after the ten kings, subdues three kings, speaks great words against the Most High, wears out the saints, and reigns “until a time and times and the dividing of time” (3½ prophetic years → 1,260 year-days → A.D. 538–1798 in this chart). Daniel 8’s horn grows out of one of the four horns that replace Alexander’s great horn (8:8–9), toward the pleasant land, and takes away the daily sacrifice — pagan then papal Rome in succession. Antiochus IV is too early and too short for chapter 7’s checklist. Reformers applied the office to Rome; futurism relocated the same language to a future fulfillment.",
     "proof": [
       "Scripture (KJV): Daniel 7:24–25 — diverse horn, three kings subdued, “a time and times and the dividing of time.”",
       "Scripture (KJV): Daniel 8:9–13 — horn toward the pleasant land; the daily sacrifice taken away (8:11).",
-      "Primary: Newton 1733, Part I, Chap. VII — the eleventh horn and the Church of Rome (Gutenberg 16878)."
+      "Primary: Newton 1733, Part I, Chap. VII — the eleventh horn and the Church of Rome (Gutenberg 16878).",
+      "Source: ABSG 2020 Q1, lesson 1"
     ]
   },
   "tamid": {
     "simple": "Hebrew for the continual daily — the standing, regular priestly service before God, which Daniel 8 shows a horn attempting to replace with a counterfeit.",
-    "history": "On earth the tamid was the regular sacrifice and ministry at the altar. In Daniel 8:11 the horn magnifies itself even to the Prince of the host; the daily sacrifice (the tamid) is taken away, and the place of his sanctuary is cast down — read in this course as an attack on Christ’s continual priesthood (Hebrews 7–10) through a competing earthly mediation. Sitting 10 links this to the papal phase; 508 is not a numeral in Daniel 8. It is the date reached by those who subtract 1290 from 1798 under the daily-as-paganism view (Bible Commentary, Daniel 12:11).",
+    "history": "On earth the tamid was the regular sacrifice and ministry at the altar. In Daniel 8:11 the horn magnifies itself even to the Prince of the host; the daily sacrifice (the tamid) is taken away, and the place of his sanctuary is cast down — read in this course as an attack on Christ’s continual priesthood (Hebrews 7–10) through a competing earthly mediation. Sitting 10 links this to the papal phase; 508 is not a numeral in Daniel 8. It is the date reached by those who subtract 1290 from 1798 under the daily-as-paganism view.",
     "proof": [
       "Scripture (KJV): Daniel 8:11–13 — the daily sacrifice taken away; the place of his sanctuary cast down.",
       "Scripture (KJV): Hebrews 7:24–25 — Christ’s unchangeable priesthood as the New Testament counterpart.",
-      "Sittings 8–10 develop the sanctuary and tamid linkage."
+      "Sittings 8–10 develop the sanctuary and tamid linkage.",
+      "Source: Bible Commentary, Daniel 12:11"
     ]
   },
   "chathak": {
     "simple": "Hebrew chathak, rendered “determined” in the KJV of Daniel 9:24. The word occurs only there in the Hebrew Bible; its root means “cut,” and some historicist readers take the seventy weeks as cut from the longer 2,300-evening-morning span.",
-    "history": "Daniel 8 ends with the 2,300 days (8:14) and none understood it (8:27). The evening-morning pair is KJV 8:26 (ABSG 2020 Q1, lesson 1). Daniel 9 opens with prayer; Gabriel returns with seventy weeks “determined upon thy people and upon thy holy city” (9:24). The course reads them as a first movement cut from the longer 2,300-evening-morning span, so that Messiah’s work can date the sanctuary question. Because the word occurs only once, weigh its meaning by context and root (“cut,” “decree”), not by parallel verses.",
+    "history": "Daniel 8 ends with the 2,300 days (8:14) and none understood it (8:27). The evening-morning pair is KJV 8:26. Daniel 9 opens with prayer; Gabriel returns with seventy weeks “determined upon thy people and upon thy holy city” (9:24). The course reads them as a first movement cut from the longer 2,300-evening-morning span, so that Messiah’s work can date the sanctuary question. Because the word occurs only once, weigh its meaning by context and root (“cut,” “decree”), not by parallel verses.",
     "proof": [
       "Scripture (KJV): Daniel 9:24 — “Seventy weeks are determined upon thy people…” (Hebrew chathak).",
       "Scripture (KJV): Daniel 8:14 — days; 8:27 — none understood it. The parent 2,300 span is the ABSG reading, not KJV wording (ABSG 2020 Q1, lesson 10).",
-      "Lexical: chathak, a word occurring only here in the Bible, at Daniel 9:24 (Bible Commentary, Daniel 9:24)."
+      "Lexical: chathak, a word occurring only here in the Bible, at Daniel 9:24 (Bible Commentary, Daniel 9:24).",
+      "Source: ABSG 2020 Q1, lesson 1"
+    ]
+  },
+  "hapax": {
+    "simple": "A word that appears only once in the Bible (or in a given body of text).",
+    "history": "Chathak in Daniel 9:24 is a word occurring only here in the Bible. That is why the sitting slows down there: there is no second biblical occurrence. You weigh its root meaning (“cut”) and the vision Gabriel said he came to explain.",
+    "proof": [
+      "Source: Bible Commentary, Daniel 9:24"
+    ]
+  },
+  "arian": {
+    "simple": "History: The Heruli, Vandals, and Ostrogoths were Arian powers, Christian kingdoms that denied the Roman church’s teaching that Christ is fully God, not the whole definition of Arian theology.",
+    "history": "The Heruli, Vandals, and Ostrogoths were Arian Germanic powers in the west. Historicists read them as the three horns that stood in the way: the Heruli fell in 493, the Vandals in 534, and the Ostrogoths withdrew from Rome in 538 and were not fully defeated until about 553.",
+    "proof": [
+      "Source: Bible Commentary, Daniel 7:8"
+    ]
+  },
+  "diadochi": {
+    "simple": "Four kingdoms shall stand up out of the nation (Daniel 8:22). History: Alexander’s generals who carved his empire into four after he died.",
+    "history": "Cassander, Lysimachus, Seleucus, and Ptolemy. They are the goat’s four horns in Daniel 8 and the four heads of the leopard in Daniel 7. From one of the four winds, a compass point, not one of the four generals, the little horn of chapter 8 grows.",
+    "proof": [
+      "Source: Bible Commentary, Daniel 8",
+      "Source: Bible Commentary, Daniel 8:9"
+    ]
+  },
+  "atonement": {
+    "simple": "Israel’s yearly day when the high priest entered the Most Holy Place to cleanse the sanctuary from the year’s sins.",
+    "history": "Leviticus 16 is the Old Testament picture behind “then shall the sanctuary be cleansed” (Daniel 8:14). The followers of William Miller, called Millerites, reckoned that the 2,300 years ended on 22 October 1844, the Day of Atonement by one calendar. This course reads the fulfillment as Christ beginning the last part of his work in the heavenly sanctuary, not an event in an earthly temple.",
+    "proof": [
+      "Scripture (KJV): Leviticus 16:16, 30, 33; Daniel 8:14; Hebrews 9:23–24."
+    ]
+  },
+  "counter-reformation": {
+    "simple": "The Catholic Church’s answer to the Protestant Reformation in the 1500s and 1600s, including new readings of prophecy.",
+    "history": "The Reformers had been naming the medieval papacy as the little horn of Daniel 7. Jesuit scholars then wrote two other readings: Ribera’s futurism (about 1590) and Alcázar’s preterism (1614). Each one moves the little horn out of the Christian centuries, so the papacy no longer stands on the prophetic line. The titles and dates of the books are on record.",
+    "proof": [
+      "Source: Prophetic Faith of Our Fathers, vol. 2, 487–489."
+    ]
+  },
+  "trent": {
+    "simple": "A Catholic council (1545–1563) that answered the Reformation.",
+    "history": "The Council of Trent set out the Catholic Church’s reply to the Reformers. The Jesuit readings of prophecy by Ribera (about 1590) and Alcázar (1614) came after it.",
+    "proof": []
+  },
+  "jesuit": {
+    "simple": "A member of the Society of Jesus, a Catholic order founded in 1540 to teach, send missionaries, and defend the Roman church.",
+    "history": "Two Jesuit scholars, Francisco Ribera and Luis de Alcázar, wrote the first full futurist and preterist readings of Revelation. Their books appeared after the Council of Trent, when the Catholic Church was answering the Reformation.",
+    "proof": []
+  },
+  "zeroim": {
+    "simple": "The Hebrew word, rendered “pulse” in the KJV, for the plant food Daniel asked for in his ten-day test (Daniel 1:12).",
+    "history": "Zeroim comes from zera, “seed.” It names foods grown from seed, such as vegetables, grains, and legumes, and it echoes the first diet God gave people (Genesis 1:29). The point is not a modern health diet. Daniel 1:8 says only that the king’s food would defile him. Two likely reasons are that the food had been offered to the empire’s gods, and that it included meat the law of Moses forbids (Leviticus 11). Plants and water avoid both problems.",
+    "proof": [
+      "Scripture (KJV): Daniel 1:8, 12, 15–17; Leviticus 11; 1 Corinthians 10:18–21."
+    ]
+  },
+  "antichrist": {
+    "simple": "A word for a power or person that stands against Christ or in his place (the Greek prefix can mean both). The historicist reading applies it to the church-state power of Daniel 7.",
+    "history": "The word appears only in John’s letters, where John says “even now are there many antichrists” (1 John 2:18). The Reformers applied the idea to a persecuting church-state power in Daniel 7 and Revelation 13. The futurist reading moves it to one person at the end of time. This course follows the Reformers: the horn of Daniel 7 comes up among the divided kingdoms of Rome and rules for 1,260 years, long before the end.",
+    "proof": [
+      "Scripture (KJV): 1 John 2:18, 22; 4:3; 2 John 7 — the only places the word appears."
     ]
   },
   "papacy": {
@@ -82,6 +157,13 @@
       "History: Berthier’s entry into Rome and capture of Pius VI, 1798."
     ]
   },
+  "mene": {
+    "simple": "Aramaic words on the plaster: numbered, weighed, divided (Daniel 5:26–28).",
+    "history": "In Daniel 5 the hand writes MENE, MENE, TEKEL, UPHARSIN: God has numbered Belshazzar’s kingdom and finished it; the king is too light on the scales; the realm is divided between Medes and Persians. Daniel treats it as a royal audit, not a ghost story.",
+    "proof": [
+      "Source: ABSG 2020 Q1, lesson 6"
+    ]
+  },
   "exile": {
     "simple": "The forced displacement of Judah to Babylon under God's judicial sentence across three deportations: 605, 597, and 586 B.C.",
     "history": "Exile was not a chosen journey or a mere accident of war. Daniel 1:2 declares that the Lord handed Jehoiakim over to Nebuchadnezzar. Daniel and the first temple vessels leave in the 605 B.C. levy under Jehoiakim; Ezekiel and ten thousand more go in the 597 B.C. levy under Jehoiachin; the city and Solomon’s temple fall in the 586 B.C. levy under Zedekiah (2 Kings 24–25).",
@@ -91,31 +173,126 @@
       "The first captivity in 605 B.C. (Bible Commentary, Daniel 1)."
     ]
   },
+  "evening-morning": {
+    "simple": "Genesis 1’s name for a full day-unit. KJV 8:14 says days. The vision of the evening and the morning is at 8:26.",
+    "history": "Not half-sacrifices added together. Once Daniel 9 proves the numbered day runs as a year, these 2,300 units are 2,300 years, cut by seventy weeks from the same start.",
+    "proof": [
+      "Source: ABSG 2020 Q1, lesson 1"
+    ]
+  },
+  "vandals": {
+    "simple": "History: A Germanic kingdom in North Africa, broken in A.D. 534.",
+    "history": "Arian sea-power. Justinian’s general Belisarius ended their kingdom. Again: dated history, then the Daniel 7 checklist.",
+    "proof": [
+      "Source: Bible Commentary, Daniel 7"
+    ]
+  },
+  "nebuchadnezzar": {
+    "simple": "History: Neo-Babylonian king (c. 605–562 B.C.), the head of gold (Daniel 2:38), who took Judah’s first captives and later burned Jerusalem (586).",
+    "history": "He dreamed of the statue, built the all-gold image on the plain of Dura, and was driven into the field for seven times (literal years) until he lifted his eyes to heaven. Daniel 2:37–38 says the God of heaven gave him the kingdom.",
+    "proof": [
+      "Source: Bible Commentary, Daniel 2"
+    ]
+  },
   "jehoiakim": {
     "simple": "King of Judah when Daniel opens: Daniel 1:1–2 dates Nebuchadnezzar’s first siege to Jehoiakim’s third year (605 B.C.), when vessels and noble youths were taken.",
-    "history": "Son of Josiah (2 Kings 23:36–24:6). The battle of Carchemish in 605 (Jeremiah 46:2; Bible Commentary, Daniel 1). In 605 the Lord gave him into Nebuchadnezzar’s hand (Daniel 1:2): tribute, temple vessels, and deportees, including Daniel. He kept the throne until he “slept with his fathers” and Jehoiachin succeeded him (2 Kings 24:6). He is not Jehoiachin (597 second levy) and not Zedekiah (586 destruction).",
+    "history": "Son of Josiah (2 Kings 23:36–24:6). The battle of Carchemish in 605 (Jeremiah 46:2). In 605 the Lord gave him into Nebuchadnezzar’s hand (Daniel 1:2): tribute, temple vessels, and deportees, including Daniel. He kept the throne until he “slept with his fathers” and Jehoiachin succeeded him (2 Kings 24:6). He is not Jehoiachin (597 second levy) and not Zedekiah (586 destruction).",
     "proof": [
       "Scripture (KJV): Daniel 1:1–2 — first siege in Jehoiakim’s third year; the Lord gave the king into Nebuchadnezzar’s hand.",
       "Scripture (KJV): 2 Kings 23:36 — Jehoiakim was twenty and five years old when he began to reign; 24:6 — “So Jehoiakim slept with his fathers.”",
-      "Scripture (KJV): Jeremiah 25:1; 46:2 — the fourth year of Jehoiakim (Carchemish), set against Daniel 1:1’s third year (see Sitting 1)."
+      "Scripture (KJV): Jeremiah 25:1; 46:2 — the fourth year of Jehoiakim (Carchemish), set against Daniel 1:1’s third year (see Sitting 1).",
+      "Source: Bible Commentary, Daniel 1"
     ]
   },
   "jehoiachin": {
-    "simple": "History: King of Judah who reigned in Jerusalem three months (2 Kings 24:8), in February/March 597 (Livius, ABC 5), when Babylon deposed him and took a second wave of captives.",
-    "history": "Called Jehoiachin in 2 Kings 24:8–16; also Jeconiah (1 Chronicles 3:16; Jeremiah 24:1) and Coniah (Jeremiah 22:24). He reigned after his father Jehoiakim; this is the second deportation, not Daniel’s 605 opening (Daniel 1:1). Babylonian Chronicle BM 21946 (Livius, ABC 5) records Nebuchadnezzar at “the city of Judah” in his seventh year—keep that year separate from Jehoiakim’s third year in Daniel 1:1.",
+    "simple": "History: King of Judah who reigned in Jerusalem three months (2 Kings 24:8), in February/March 597, when Babylon deposed him and took a second wave of captives.",
+    "history": "Called Jehoiachin in 2 Kings 24:8–16; also Jeconiah (1 Chronicles 3:16; Jeremiah 24:1) and Coniah (Jeremiah 22:24). He reigned after his father Jehoiakim; this is the second deportation, not Daniel’s 605 opening (Daniel 1:1). Babylonian Chronicle BM 21946 records Nebuchadnezzar at “the city of Judah” in his seventh year—keep that year separate from Jehoiakim’s third year in Daniel 1:1.",
     "proof": [
       "Scripture (KJV): 2 Kings 24:8–16 — Jehoiachin carried away captive to Babylon; the second deportation.",
       "Primary: Babylonian Chronicle BM 21946, seventh year — “the city of Judah” (Livius, ABC 5; 597 B.C. in the editor’s note).",
-      "Do not read BM 21946 as Daniel 1:1’s year; 605 and 597 stay separate."
+      "Do not read BM 21946 as Daniel 1:1’s year; 605 and 597 stay separate.",
+      "Source: Livius, ABC 5"
     ]
   },
   "zedekiah": {
-    "simple": "History: Last king of Judah before 586 B.C.; Babylon installed him after Jehoiachin was taken (2 Kings 24:17; Bible Commentary, Daniel 1); his revolt brought the final siege and temple burning (2 Kings 25:9).",
+    "simple": "History: Last king of Judah before 586 B.C.; Babylon installed him after Jehoiachin was taken (2 Kings 24:17); his revolt brought the final siege and temple burning (2 Kings 25:9).",
     "history": "Mattaniah, renamed Zedekiah by Nebuchadnezzar (2 Kings 24:17–20). His rebellion triggered the third campaign: walls broken, Solomon’s temple burned, survivors deported (2 Kings 25; Jeremiah 52). He is not the king of Daniel 1:1 (Jehoiakim, 605) or the king taken in 597 (Jehoiachin).",
     "proof": [
       "Scripture (KJV): 2 Kings 24:17–20 — Mattaniah renamed Zedekiah.",
       "Scripture (KJV): 2 Kings 25; Jeremiah 52 — third siege; the temple burned (586 B.C. in the course’s chart).",
-      "Sitting 1’s three-siege diagram marks the third campaign, under Zedekiah."
+      "Sitting 1’s three-siege diagram marks the third campaign, under Zedekiah.",
+      "Source: Bible Commentary, Daniel 1"
+    ]
+  },
+  "belshazzar": {
+    "simple": "The last king to rule in the city of Babylon (539 B.C.), the eldest son of Nabonidus, who governed there while his father was away.",
+    "history": "For a long time the Greek writers and the Babylonian king lists named only Nabonidus as the last king, so some critics said Belshazzar never lived. Babylonian clay tablets later showed Nabonidus away in Tema (Tayma) in Arabia while his son governed. Belshazzar used the holy cups from the Jerusalem temple at his feast and was killed the night Babylon fell (Daniel 5). Daniel 5 calls Nebuchadnezzar his “father” (Daniel 5:2, 22). In the Bible, “father” and “son” can mean an earlier and a later king of the same line.",
+    "proof": [
+      "Scripture (KJV): Daniel 5:1–4, 22, 30."
+    ]
+  },
+  "nabonidus": {
+    "simple": "The last king of the Babylonian empire, who spent years away from Babylon in Arabia.",
+    "history": "Nabonidus lived in Tema (Tayma), a desert town in Arabia, for about ten years and left his eldest son Belshazzar in charge in Babylon. That is why Belshazzar could offer Daniel only the “third” place in the kingdom (Daniel 5:16): Nabonidus was first, Belshazzar second.",
+    "proof": [
+      "Scripture (KJV): Daniel 5:7, 16, 29 — the offer of the third place in the kingdom."
+    ]
+  },
+  "cyrus": {
+    "simple": "History: Persian king who later permitted the Jews to return (Ezra 1). The night of Babylon’s fall, in 539 B.C. Daniel 5:31 names Darius the Mede as the one who took the kingdom.",
+    "history": "Isaiah 45:1 names him and speaks of open gates. The Cyrus Cylinder: “I gathered all their inhabitants and returned to them their dwellings”. It does not say exiles, and it does not name the Jews. Ezra 1 does that. He is the silver kingdom’s founder, not the bronze.",
+    "proof": [
+      "Source: Bible Commentary, Daniel introduction",
+      "Source: Livius"
+    ]
+  },
+  "darius-mede": {
+    "simple": "The ruler who “took the kingdom” at Babylon’s fall in Daniel 5:31–6:1, about sixty-two years old.",
+    "history": "Still an obscure figure as far as secular history. Proposals: a governor (Ugbaru/Gubaru) with a throne-name; a short-reigning Median colleague of Cyrus; or Cyrus under a Median title. The Commentary discusses Ugbaru and Gubaru and still calls Darius obscure; it does not, on the pages opened, endorse all three as equal. The chapter’s load-bearing test is the unchangeable law against prayer, not a modern personal identification.",
+    "proof": [
+      "Source: Bible Commentary, Daniel 5:31",
+      "Source: Bible Commentary, on the fall"
+    ]
+  },
+  "alexander": {
+    "simple": "History: Macedonian king who smashed Persia (Gaugamela 331 B.C.) and died in 323 B.C. at thirty-two.",
+    "history": "Daniel 8:5, 8, 21–22: the goat’s notable horn. When it is broken, four notable horns come up in its place. His kingdom is the bronze Greece and he is its first king (Daniel 8:21), not the little horn of chapter 7, a later power.",
+    "proof": [
+      "Source: ABSG 2020 Q1, lesson 1"
+    ]
+  },
+  "antiochus": {
+    "simple": "A Greek-Syrian king (175–164 B.C.) who defiled the Jerusalem temple. Preterist readers say Daniel’s little horn is him.",
+    "history": "Antiochus IV Epiphanes ruled the Seleucid kingdom, one of the four Greek kingdoms that followed Alexander. He set up an altar to Zeus in the temple, and in 164 B.C. a Jewish revolt under Judas Maccabeus cleaned the temple and rededicated the altar. Preterist readers say the little horn of Daniel 8 is Antiochus. This course says he does not fit. He was never greater than Persia and Greece, he died in 164 B.C., and Gabriel says the vision is “at the time of the end” (Daniel 8:17). The 2,300 days are also much longer than his three years of defiling the temple, and the word for the sanctuary’s cleansing means to be vindicated, not just washed.",
+    "proof": [
+      "Scripture (KJV): Daniel 8:9, 17, 19, 25 — the horn grows exceeding great, and the vision is “at the time of the end.”"
+    ]
+  },
+  "judas-maccabeus": {
+    "simple": "A Jewish leader who led the revolt against the Greek-Syrian king Antiochus IV and rededicated the temple altar in 164 B.C.",
+    "history": "Jews still remember this rededication at Hanukkah. It was a real event, but this course says it does not fulfill Daniel 8:14. That verse reaches “the time of the end” (Daniel 8:17, 19), and the word for the sanctuary’s cleansing means to be vindicated, not just washed.",
+    "proof": []
+  },
+  "michael": {
+    "simple": "“The great prince who stands for Daniel’s people” (12:1). Michael is Christ.",
+    "history": "He helps against the prince of Persia (10:13, 21). Jude 9 and Revelation 12 show him in conflict with the dragon. “Stand up” in 12:1 is Daniel’s verb for kings assuming power (11:2–4): Christ’s kingly stance for His people, when, on the historicist reading, human probation closes.",
+    "proof": [
+      "Source: ABSG 2020 Q1, lesson 13"
+    ]
+  },
+  "justinian": {
+    "simple": "History: Eastern Roman emperor (527–565) whose laws elevated the bishop of Rome and whose wars broke Arian kingdoms in the west.",
+    "history": "Justinian’s decree is the legal claim that met the city in 538, when Belisarius lifted the Ostrogothic siege of Rome and the 1,260 years begin on this chart. He is not named in Daniel.",
+    "proof": [
+      "Source: Bible Commentary, Daniel 7"
+    ]
+  },
+  "clovis": {
+    "simple": "History: With the conversion of Clovis (496), king of the Franks, the papacy found a strong army.",
+    "history": "The conversion of Clovis (496), not the same pin as 508. A.D. 508 is this chart’s reconstructed civil start for the 1,290 and 1,335 days of Daniel 12:11–12 (year-day scale), landing 1798 and 1843; if the start moves, those landings move. The 1844 date is the 2,300-year landing from the 457 B.C. decree taught in Sitting 9. It is separate from the 508 Clovis pin, not from Sitting 9.",
+    "proof": [
+      "Source: Bible Commentary, on 508",
+      "Source: Bible Commentary"
     ]
   },
   "newton-isaac": {
@@ -128,12 +305,70 @@
       "Compare Newton’s “order of time” with the three-school table in Sitting 0 and ask which reading keeps that order."
     ]
   },
+  "alcazar": {
+    "simple": "A Spanish Jesuit scholar who, in 1614, published the first full preterist reading of Revelation.",
+    "history": "Luis de Alcázar’s book Vestigatio Arcani Sensus in Apocalypsi appeared in 1614. He read Revelation 1–11 as the fall of Jerusalem and the rest as the overthrow of pagan Rome. That leaves no place on the prophetic line for the medieval church, which was the very power the Reformers named in Daniel 7 and Revelation 13.",
+    "proof": [
+      "Primary: Alcázar, Vestigatio arcani sensus in Apocalypsi (1614)."
+    ]
+  },
+  "ribera": {
+    "simple": "A Spanish Jesuit scholar who, about 1590, published the first full futurist reading of Revelation.",
+    "history": "Francisco Ribera taught that the antichrist would be one man ruling for three and a half literal years at the very end, after a long gap. That moved the antichrist out of the Middle Ages. Protestant writers such as S. R. Maitland, Edward Irving, and John Nelson Darby later spread the idea, and the Scofield Reference Bible made it widely known.",
+    "proof": [
+      "Primary: About 1590 Ribera published a 500-page commentary on the Apocalypse (Prophetic Faith of Our Fathers, vol. 2, 489)."
+    ]
+  },
+  "darby": {
+    "simple": "John Nelson Darby (1800–1882), a teacher among the Plymouth Brethren who spread the gap-week reading of Daniel 9.",
+    "history": "Darby taught that history is divided into ages and that the 70th week of Daniel 9 is still in the future. His teaching grew into dispensationalism. Daniel never writes that gap. Naming him shows that the idea has a date and a teacher; it is not simply how the church has always read the book.",
+    "proof": []
+  },
+  "irving": {
+    "simple": "Edward Irving (1792–1834), a Scottish preacher who taught that Christ’s return was near.",
+    "history": "Irving helped spread the futurist reading among Protestants in the early 1800s, alongside S. R. Maitland and John Nelson Darby.",
+    "proof": []
+  },
+  "scofield": {
+    "simple": "C. I. Scofield (1843–1921), an American minister whose study Bible of 1909 made dispensational futurism widely known.",
+    "history": "The Scofield Reference Bible printed teaching notes beside the Bible text, including the gap before the 70th week of Daniel 9 and a seven-year tribulation. Because the notes sat on the same page as the verses, many readers heard the gap as part of the text. Daniel 9 itself does not mention one.",
+    "proof": []
+  },
+  "porphyry": {
+    "simple": "A third-century pagan philosopher who argued that Daniel was written after the events it describes.",
+    "history": "Porphyry said Daniel’s “prophecies” were history written afterward by someone living in the time of Antiochus IV, around 165 B.C. The church father Jerome kept Porphyry’s charge in his own commentary while answering it. Many critics since the 1800s have repeated the late date. If it were right, Daniel 2:28, which says God reveals what shall be in the latter days, would not be real prediction. This course answers by pointing out that the chapters keep going past the second century B.C., to Rome, the divided kingdoms, and the Stone.",
+    "proof": [
+      "Witness: Jerome, Commentary on Daniel, Prologue — the late-date charge he preserves and answers."
+    ]
+  },
+  "babylon": {
+    "simple": "History: Daniel’s first workplace and the city that fell in 539 B.C. The verse names the king as the head of gold, not the word Babylon.",
+    "history": "Daniel 1:2 says its first victory over Judah was given, not seized independently. Chapter 5 is the night the gold ended.",
+    "proof": [
+      "Source: Bible Commentary, Daniel introduction"
+    ]
+  },
+  "jerusalem": {
+    "simple": "Judah’s capital; Temple city; the place Daniel faced when he prayed (6:10).",
+    "history": "First vessels leave in 605; city and Temple fall in 586; return decrees under Persia. In Daniel 8:9 “the pleasant land” is Judah (compare “the glorious land” in Daniel 11:16, 41). The sanctuary put right in 8:14 is not this hill being locally restored in 164 B.C.",
+    "proof": [
+      "Source: Bible Commentary, Daniel 1"
+    ]
+  },
+  "rome": {
+    "simple": "Capital of the iron kingdom; later seat of the church-state this study reads as the little horn.",
+    "history": "Imperial Rome crushes (Daniel 2:40; 7:7). After 476 the west is fragments. 538 (the Ostrogoths abandoning the siege) and 1798 both fall on this city: the start and the wound of the 1,260 years.",
+    "proof": [
+      "Source: Bible Commentary, Daniel 7"
+    ]
+  },
   "carchemish": {
-    "simple": "History: By the river Euphrates in Carchemish, where Nebuchadnezzar beat Egypt in 605 B.C. (Jeremiah 46:2; Bible Commentary, Daniel 1).",
+    "simple": "History: By the river Euphrates in Carchemish, where Nebuchadnezzar beat Egypt in 605 B.C. (Jeremiah 46:2).",
     "history": "Jeremiah 46:2 dates Nebuchadnezzar’s defeat of Pharaoh Necho at Carchemish to Jehoiakim’s fourth year—the same campaign window as Daniel 1:1’s third year of Jehoiakim (605 B.C., accession-year difference). That battle year supports a real first deportation under Jehoiakim, distinct from 597 (Jehoiachin) and 586 (Zedekiah).",
     "proof": [
       "Scripture (KJV): Jeremiah 46:2 — Carchemish in Jehoiakim’s fourth year.",
-      "Scripture (KJV): Daniel 1:1 — third year of Jehoiakim; the third/fourth-year difference is an accession-year question (see Sittings 0–1)."
+      "Scripture (KJV): Daniel 1:1 — third year of Jehoiakim; the third/fourth-year difference is an accession-year question (see Sittings 0–1).",
+      "Source: Bible Commentary, Daniel 1"
     ]
   }
 };
