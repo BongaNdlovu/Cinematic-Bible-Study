@@ -732,6 +732,42 @@ async function liveEventRateAndIdentity() {
   return "nameless event rejected; 60 events stored; the 61st rejected with rate_limit";
 }
 
+/*
+ * Regression for the 2026-10-16 finding: _factcheck/ (third-party research
+ * copies) and _mig/ (diagram build input) reached production because neither
+ * the deploy script excluded them nor the middleware denied them. Both halves
+ * are asserted here, so a future edit to either file re-opens the test.
+ */
+async function deployLeakPaths() {
+  const mustDeny = [
+    "/_factcheck/meta.json",
+    "/_factcheck/uriah_smith_DAR.pdf",
+    "/_mig/index.json",
+    "/_mig/spec2.json",
+    "/__wiring_check.mjs",
+    "/qa_book_reader_full.log"
+  ];
+  for (const p of mustDeny) {
+    const res = await onRequest({
+      request: new Request("https://example.test" + p),
+      env: {},
+      next: () => new Response("SERVED", { status: 200 }),
+      waitUntil: () => {}
+    });
+    if (res.status !== 404) throw new Error(p + " replied HTTP " + res.status + ", expected 404");
+  }
+  const deploy = read("tools/deploy-cloudflare-pages.ps1");
+  for (const name of ["_factcheck", "_mig", "__wiring_check.mjs", "qa_book_reader_full.log"]) {
+    if (!deploy.includes(name)) throw new Error("deploy script no longer excludes " + name);
+  }
+  for (const name of ["_factcheck", "_mig"]) {
+    if (fs.existsSync(path.join(ROOT, ".pages-deploy", name))) {
+      throw new Error(".pages-deploy/" + name + " is staged and would be uploaded");
+    }
+  }
+  return mustDeny.length + " private paths denied; deploy script excludes both directories";
+}
+
 const tests = [
   ["PT-01", "Edge page cap is per address", edgePageCap],
   ["PT-02", "Static reads do not spend the page cap", edgeStaticOutsideCap],
@@ -752,10 +788,11 @@ const tests = [
   ["PT-17", "Anonymous key cannot read private learner data", livePrivateTables],
   ["PT-18", "Anonymous key cannot approve a review or save progress", liveReviewAndSaveDenied],
   ["PT-19", "Survey spam stops at 5 an hour", liveSurveyRate],
-  ["PT-20", "Event spam stops at 60 a minute", liveEventRateAndIdentity]
+  ["PT-20", "Event spam stops at 60 a minute", liveEventRateAndIdentity],
+  ["PT-21", "Research copies and build input are not deployable", deployLeakPaths]
 ];
 
-if (tests.length !== 20) throw new Error("expected 20 tests, found " + tests.length);
+if (tests.length !== 21) throw new Error("expected 21 tests, found " + tests.length);
 
 const results = [];
 for (const [id, title, fn] of tests) {
@@ -775,5 +812,5 @@ results.forEach((result) => {
   console.log(mark + " " + result.id + " " + result.title + " (" + result.ms + "ms)");
   console.log("  " + result.detail);
 });
-console.log(results.length - failed + " passed, " + failed + " failed, 20 tests");
+console.log(results.length - failed + " passed, " + failed + " failed, " + tests.length + " tests");
 process.exit(failed > 0 ? 1 : 0);

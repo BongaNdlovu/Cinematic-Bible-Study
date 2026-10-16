@@ -107,6 +107,11 @@ export async function onRequest(context) {
     path.startsWith("/workers") ||
     path.startsWith("/qa") ||
     path.startsWith("/originals") ||
+    /* Third-party research copies and diagram-migration working files. Neither
+       belongs in a release: the first is copyrighted material gathered for the
+       accuracy audit, the second is build input. */
+    path.startsWith("/_factcheck") ||
+    path.startsWith("/_mig") ||
     path === "/README.md" ||
     path === "/package.json" ||
     path === "/package-lock.json" ||
@@ -115,6 +120,7 @@ export async function onRequest(context) {
     path === "/wrangler.toml" ||
     path === "/start_website.bat" ||
     path === "/middleware.js" ||
+    path === "/__wiring_check.mjs" ||
     path.includes("auth-config.example") ||
     path.includes("auth-config.be73b1b3b81c") ||
     path.includes("auth-config.cfc4671cd63c") ||

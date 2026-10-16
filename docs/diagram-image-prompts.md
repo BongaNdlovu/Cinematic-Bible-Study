@@ -22,13 +22,13 @@ The two `flow` diagrams (s4-4, s4-5) and s10-2 show their pictures only in the f
 ## How to use these
 
 - Paste the **style block** first, then one card's prompt.
-- **Portrait 4:5**, at least 1000 × 1250. The card shows the picture in its top half and fades it to black behind the words, so the subject belongs in the **upper middle**, with a dark, quiet lower third.
+- **Landscape 4:3**, 1600 × 1200. On the page the photo fills the top two-thirds of the card, a window of about 8:7 (356 × 311 px), so the sides of a 4:3 picture are trimmed. Full screen, the window is about 7:5. Keep the subject inside the **middle 80% of the width** and in the **upper middle**. The lower part of the picture fades to black behind the words.
 - Save each file under the name given, in `assets/study/diagrams/`. The site only accepts lowercase letters, digits and hyphens, ending in `.jpg`.
 - No text in the image. The card prints its own title, verse and words.
 
 ### Style block (paste before every prompt)
 
-> Cinematic photorealistic still, like a frame from a reverent historical film. Warm golden-hour or firelight against deep shadow, strong chiaroscuro, rich amber, umber and gold tones, soft atmospheric haze. Historically accurate ancient Near Eastern setting, costume and architecture. Main subject in the upper-middle of the frame; the lower third falls into dark, simple shadow. No gore. No text, letters, numbers, captions, logos or watermarks. Vertical 4:5.
+> Cinematic photorealistic still, like a frame from a reverent historical film. Warm golden-hour or firelight against deep shadow, strong chiaroscuro, rich amber, umber and gold tones, soft atmospheric haze. Historically accurate ancient Near Eastern setting, costume and architecture. Main subject in the upper-middle of the frame; the lower third falls into dark, simple shadow. No gore. No text, letters, numbers, captions, logos or watermarks. Landscape 4:3.
 
 ---
 
