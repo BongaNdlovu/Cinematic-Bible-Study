@@ -17,7 +17,7 @@ Diagram `s6-…` does not exist; sitting 6 has no story diagram, so nothing is d
 
 <!-- grounding: s4-1
   step 1-2 share: "Read 2:47, 3:29, and 4:37 in order: the same man, three confessions, and only the last one costs him his glory." (sheet-verify, Sheet 4 pack)
-  step 1->2 ahead: "The confession costs him nothing and does not outlast the chapter. The same court that hears it will be ordered to worship an image in Daniel 3, and the king who said it will be the one giving the order." (s4-1 step 1 detail)
+  step 1->2 ahead: "The confession costs him nothing, and it does not last. The same court that hears it will be ordered to worship an image in the next chapter, Daniel 3, and the king who said it will be the one giving the order." (s4-1 step 1 detail)
   step 2-3 share: "The words of faith in 3:17–18 are the three Hebrews', not the king's, so 3:28–29 is the confession this row documents" + "3:29 under compulsion" + "4:37 in his own decree" (sheet-verify, Sheet 4 pack); KJV Daniel 3:29 "Therefore I make a decree"
   step 2->3 ahead: "His decree acknowledges a God able to deliver and still leaves the image he set up standing in the plain of Dura." (s4-1 step 2 detail); "only this one ends in praise rather than policy." (s4-1 step 3 detail)
 -->
@@ -56,8 +56,8 @@ Diagram `s6-…` does not exist; sitting 6 has no story diagram, so nothing is d
 - (no bridge: last movement)
 
 <!-- grounding: s5-2
-  step 1-2 share: "1st Ruler: NABONIDUS (King of Babylon, residing in Tema, Arabia)" / "2nd Ruler: BELSHAZZAR (Eldest son, Co-regent ruling inside Babylon)" / "3rd Ruler: DANIEL (Offered the highest vacant post in Dan. 5:16, 29)" (s5-2 diagram); "Nabonidus was first, Belshazzar was second, and the highest administrative office available to Daniel was third." (s5-2 framework card)
-  step 1->2 ahead: "The Nabonidus Chronicle places the king in Tayma while the city is governed in his name, and the Verse Account agrees. That absence is the reason a second man can hold the throne room on the night the writing appears." (s5-2 step 1 detail)
-  step 2-3 share: "This historical co-regency explains why Belshazzar offered to make Daniel the 'third ruler in the kingdom' (Daniel 5:16, 29). Nabonidus was first, Belshazzar was second, and the highest administrative office available to Daniel was third." (s5-2 framework card, "The 'third ruler' precision")
+  step 1-2 share: "1st Ruler" / "Nabonidus" / "King of Babylon, living in Tema (Tayma), Arabia." / "2nd Ruler" / "Belshazzar" / "Eldest son and co-ruler, governing inside Babylon." / "3rd Ruler" / "Daniel" / "Offered the highest vacant post." (s5-2 diagram); "Nabonidus was first, Belshazzar was second, and the highest office left for Daniel was third." (s5-2 content, "The 'third ruler' precision")
+  step 1->2 ahead: "Babylonian records place the king in Tema (Tayma) while the city is governed in his name. That absence is the reason a second man can hold the throne room on the night the writing appears." (s5-2 step 1 detail)
+  step 2-3 share: "It explains why Belshazzar offered to make Daniel the 'third ruler in the kingdom' (Daniel 5:16, 29). Nabonidus was first, Belshazzar was second, and the highest office left for Daniel was third." (s5-2 content, "The 'third ruler' precision")
   step 2->3 ahead: "He offers the third place in the kingdom, not the second, and that is the detail the co-regency explains. In Daniel 5:7 the reward is to be the third ruler, which is what a son ruling under an absent father could actually grant." (s5-2 step 2 detail); "Then was Daniel brought in before the king" (KJV Daniel 5:13) · the sitting's own line is "When Daniel was summoned" (s5-2 content)
 -->

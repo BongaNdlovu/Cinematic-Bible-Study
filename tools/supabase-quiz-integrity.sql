@@ -98,7 +98,7 @@ insert into public.exhibit_quiz_keys (sitting, q_idx, correct_idx, correct_note)
   (9, 3, 3, 'Correct! 483 years starting in the autumn of 457 B.C. reach the autumn of A.D. 27 (accounting for no year zero), when Jesus was baptized and began His ministry.'),
   (9, 4, 1, 'Correct! In the midst of the 70th week (3.5 years after A.D. 27), Christ was crucified in Spring A.D. 31, ending the validity of animal sacrifices forever.'),
   (10, 0, 3, 'Correct! ''Stand up'' is Daniel''s royal verb for assuming kingly power. When Michael stands, high-priestly intercession closes, leading to the time of trouble.'),
-  (10, 1, 1, 'Correct! Daniel 12:2 is the resurrection: many who sleep in the dust shall awake. Daniel 12:13 is rest and a lot, which Smith reads as the judgment decision, not as that waking.'),
+  (10, 1, 1, 'Correct! Daniel 12:2 is the resurrection: many who sleep in the dust shall awake. Daniel 12:13 is rest and an allotted place at the end of the days, not a second verdict.'),
   (10, 2, 0, 'Correct! Daniel 12:1–2 is sequential: Michael stands up (probation closes), trouble comes, the saints in the book are delivered, and the resurrection occurs.'),
   (10, 3, 2, 'Correct! Daniel 12:1 specifies: ''every one that shall be found written in the book.'' Covenant citizenship in Heaven decides eternal destiny.'),
   (10, 4, 0, 'Correct! The last sitting commissions wise teachers: the prophecies unseal at the time of the end to anchor faith and turn many to righteousness.')
