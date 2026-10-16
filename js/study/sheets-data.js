@@ -4260,9 +4260,9 @@ DANIEL IN THE LIONS' DEN                 JESUS CHRIST AT CALVARY &amp; THE TOMB
           src: "assets/study/audio/sitting-07-readalong.mp3",
           kind: "readalong",
           title: "Sitting 7 — listen to the full sitting",
-          kicker: "Read-along · 36 min",
+          kicker: "Read-along · 40 min",
           hint: "Press play and follow along: the words are highlighted as they are spoken. At each checkpoint you can pause, answer it, and continue from there.",
-          duration: "36 min",
+          duration: "40 min",
           cues: "assets/study/audio/sitting-07-readalong.json"
         },
         infographic: {
