@@ -62,8 +62,11 @@ create index if not exists exhibit_events_user_created_idx
 create or replace function public.exhibit_events_rate_gate()
 returns trigger
 language plpgsql
+security definer
+set search_path = public
 as $$
 begin
+  new.created_at := now();
   if coalesce(new.anon_id, '') <> '' then
     if (select count(*) from public.exhibit_events
         where anon_id = new.anon_id

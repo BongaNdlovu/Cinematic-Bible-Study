@@ -5,6 +5,9 @@
 -- Progress: one upsert per 6 seconds per row (10/min).
 -- Reviews: 3 inserts/day per user_id.
 -- Per-IP POST caps are enforced at the site edge, not here (browser posts go to Supabase).
+-- Each gate is security definer: the caller cannot read the rows it is writing, so an
+-- invoker count would always see zero and the cap would never trip. created_at and
+-- updated_at are stamped here so a client cannot hide writes by backdating them.
 
 alter table public.exhibit_surveys
   add column if not exists anon_id text not null default '';
@@ -23,8 +26,11 @@ create index if not exists exhibit_reviews_user_created_idx
 create or replace function public.exhibit_events_rate_gate()
 returns trigger
 language plpgsql
+security definer
+set search_path = public
 as $$
 begin
+  new.created_at := now();
   if coalesce(new.anon_id, '') <> '' then
     if (select count(*) from public.exhibit_events
         where anon_id = new.anon_id
@@ -52,8 +58,11 @@ create trigger exhibit_events_rate_gate
 create or replace function public.exhibit_surveys_rate_gate()
 returns trigger
 language plpgsql
+security definer
+set search_path = public
 as $$
 begin
+  new.created_at := now();
   if coalesce(new.anon_id, '') <> '' then
     if (select count(*) from public.exhibit_surveys
         where anon_id = new.anon_id
@@ -79,8 +88,11 @@ create trigger exhibit_surveys_rate_gate
 create or replace function public.exhibit_progress_rate_gate()
 returns trigger
 language plpgsql
+security definer
+set search_path = public
 as $$
 begin
+  new.updated_at := now();
   if tg_op = 'UPDATE' and old.updated_at is not null
      and old.updated_at > now() - interval '6 seconds' then
     raise exception 'rate_limit';
@@ -97,8 +109,11 @@ create trigger exhibit_progress_rate_gate
 create or replace function public.exhibit_reviews_rate_gate()
 returns trigger
 language plpgsql
+security definer
+set search_path = public
 as $$
 begin
+  new.created_at := now();
   if (select count(*) from public.exhibit_reviews
       where user_id = new.user_id
         and created_at > now() - interval '1 day') >= 3 then

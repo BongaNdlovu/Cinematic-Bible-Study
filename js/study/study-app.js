@@ -5133,9 +5133,13 @@
       const seen = window.BAJourney && window.BAJourney.hasSeenIntro(index);
       let hasChosenTrack = false;
       try { hasChosenTrack = !!localStorage.getItem('daniel_placement_track_v1'); } catch (e) { hasChosenTrack = true; }
-      if (!skipIntro && !seen && hasChosenTrack) {
-        showIntroGuide(index);
-      }
+      const openIntro = function () {
+        if (!skipIntro && !seen && hasChosenTrack) showIntroGuide(index);
+      };
+      const wait = window.Onboard && typeof window.Onboard.gate === 'function'
+        ? window.Onboard.gate()
+        : Promise.resolve();
+      wait.then(openIntro);
     }
 
     function sheetQuizComplete() {
@@ -6011,11 +6015,14 @@
         else if (weatherPreset !== 'off') startWeatherAnimation();
       });
       if (window.StudyCompetency) {
-        if (window.ScrollAuth && typeof window.ScrollAuth.ready === "function") {
-          window.ScrollAuth.ready().then(function () { window.StudyCompetency.initPlacementModal(); });
-        } else {
-          window.StudyCompetency.initPlacementModal();
-        }
+        const openPlacement = function () { window.StudyCompetency.initPlacementModal(); };
+        const afterOnboard = window.Onboard && typeof window.Onboard.gate === "function"
+          ? window.Onboard.gate()
+          : Promise.resolve();
+        const afterAuth = window.ScrollAuth && typeof window.ScrollAuth.ready === "function"
+          ? window.ScrollAuth.ready()
+          : Promise.resolve();
+        Promise.all([afterAuth, afterOnboard]).then(openPlacement);
       }
       function refreshAdminAccess() {
         renderToc();

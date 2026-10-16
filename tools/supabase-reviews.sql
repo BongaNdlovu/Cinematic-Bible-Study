@@ -132,8 +132,11 @@ create index if not exists exhibit_reviews_user_created_idx
 create or replace function public.exhibit_reviews_rate_gate()
 returns trigger
 language plpgsql
+security definer
+set search_path = public
 as $$
 begin
+  new.created_at := now();
   if (select count(*) from public.exhibit_reviews
       where user_id = new.user_id
         and created_at > now() - interval '1 day') >= 3 then

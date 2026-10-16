@@ -1026,21 +1026,11 @@
     if (window.ResizeObserver) new ResizeObserver(resize).observe(stage);
 
     async function start() {
-      // The Map of History is for members. Guests go to sign-in and return here after.
-      if (cinematic && window.ScrollAuth && typeof window.ScrollAuth.ready === "function") {
-        try { await window.ScrollAuth.ready(); } catch (e) {}
-        const auth = window.ScrollAuth;
-        const guest = !(auth && typeof auth.getUser === "function" && auth.getUser());
-        const bypass = window.BAJourney && typeof window.BAJourney.previewAllContent === "function" && window.BAJourney.previewAllContent();
-        if (guest && !bypass) {
-          const next = "map.html" + (location.search || "");
-          if (window.ScrollTerms && typeof window.ScrollTerms.goToAccount === "function") {
-            window.ScrollTerms.goToAccount(next);
-          } else {
-            location.assign("account.html?next=" + encodeURIComponent(next));
-          }
-          return;
-        }
+      if (cinematic) {
+        const allowed = window.BAJourney && typeof window.BAJourney.requireMember === "function"
+          ? await window.BAJourney.requireMember("map.html" + (location.search || ""))
+          : false;
+        if (!allowed) return;
       }
       if (typeof L === "undefined") {
         loadEl.textContent = "Map library failed to load.";

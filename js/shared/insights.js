@@ -491,6 +491,7 @@
   }
 
   function maybeProfile(user) {
+    if (window.Onboard) return;
     if (document.getElementById("account-hub")) return;
     if (!user || optedOut()) return;
     try { if (localStorage.getItem(PROFILE_ASKED) === '1') return; } catch (e) {}

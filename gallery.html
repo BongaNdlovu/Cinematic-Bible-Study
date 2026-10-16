@@ -21,8 +21,9 @@
   <link rel="stylesheet" href="css/app.css?v=cx2">
   <link rel="stylesheet" href="css/terms.css?v=cx1">
   <link rel="stylesheet" href="css/cinema.css?v=cx2">
+  <style>html.member-hold body { visibility: hidden; }</style>
+  <script>document.documentElement.classList.add("member-hold");</script>
   <script src="js/shared/cinema.js"></script>
-  <link rel="preload" href="models/full_body.glb" as="fetch" crossorigin>
   <script src="js/shared/journey.js"></script>
   <script src="js/shared/auth-config.js"></script>
   <script src="vendor/supabase/supabase.js"></script>
@@ -32,28 +33,6 @@
   <script src="js/shared/terms.js"></script>
   <script src="js/shared/insights.js"></script>
   <script src="js/shared/ui-sound.js"></script>
-  <script>
-    // The 3D Symbols gallery is for members. Guests go straight to sign-in and
-    // return here after.
-    (function () {
-      function gate() {
-        var auth = window.ScrollAuth;
-        if (!auth || typeof auth.ready !== "function") { setTimeout(gate, 50); return; }
-        auth.ready().then(function () {
-          if (auth.getUser && auth.getUser()) return;
-          var bypass = window.BAJourney && typeof window.BAJourney.previewAllContent === "function" && window.BAJourney.previewAllContent();
-          if (bypass) return;
-          var next = "gallery.html" + (location.search || "");
-          if (window.ScrollTerms && typeof window.ScrollTerms.goToAccount === "function") {
-            window.ScrollTerms.goToAccount(next);
-          } else {
-            location.assign("account.html?next=" + encodeURIComponent(next));
-          }
-        });
-      }
-      gate();
-    })();
-  </script>
   <script type="importmap">
   {
     "imports": {
@@ -559,6 +538,20 @@
   </div>
 
   <div id="museum-toast"></div>
-  <script type="module" src="js/gallery/app.js"></script>
+  <script type="module">
+    const allowed = window.BAJourney && typeof window.BAJourney.requireMember === "function"
+      ? await window.BAJourney.requireMember("gallery.html" + (location.search || ""))
+      : false;
+    if (allowed) {
+      document.documentElement.classList.remove("member-hold");
+      const preload = document.createElement("link");
+      preload.rel = "preload";
+      preload.href = "models/full_body.glb";
+      preload.as = "fetch";
+      preload.crossOrigin = "anonymous";
+      document.head.appendChild(preload);
+      await import("./js/gallery/app.js");
+    }
+  </script>
 </body>
 </html>

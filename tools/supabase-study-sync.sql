@@ -49,8 +49,11 @@ grant select, insert, update on public.exhibit_study_data to authenticated;
 create or replace function public.exhibit_study_data_rate_gate()
 returns trigger
 language plpgsql
+security definer
+set search_path = public
 as $$
 begin
+  new.updated_at := now();
   if tg_op = 'UPDATE' and old.updated_at is not null
      and old.updated_at > now() - interval '6 seconds' then
     raise exception 'rate_limit';

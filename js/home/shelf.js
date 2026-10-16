@@ -365,6 +365,7 @@ function wireUI() {
   });
 
   document.addEventListener('keydown', (e) => {
+    if (document.body.classList.contains('onboard-open')) return;
     const t = e.target;
     if (t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.tagName === 'SELECT' || t.isContentEditable)) return;
     if (e.ctrlKey || e.metaKey || e.altKey) return;

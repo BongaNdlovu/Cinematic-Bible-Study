@@ -41,7 +41,12 @@
   <script src="js/map/map-data.js"></script>
   <script src="js/map/map.js"></script>
   <script>
-    (function () {
+    (async function () {
+      const next = "map.html" + (location.search || "");
+      const allowed = window.BAJourney && typeof window.BAJourney.requireMember === "function"
+        ? await window.BAJourney.requireMember(next)
+        : false;
+      if (!allowed) return;
       if (window.BAJourney) window.BAJourney.load();
       const params = new URLSearchParams(location.search);
       const year = params.get("year") || params.get("epoch") || params.get("id");
