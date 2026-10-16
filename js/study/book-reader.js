@@ -831,7 +831,7 @@
     var requested = clamp(Math.round(index), 0, s.steps - 1);
     var target = allowedForward(s, s.step, requested);
     if (target !== requested && target === s.step) {
-      holdCheckpoint(s);
+      if (!(options && options.quiet)) holdCheckpoint(s);
       return false;
     }
     var from = s.view.scrollLeft;
@@ -1461,6 +1461,17 @@
     return true;
   }
 
+  function quietly(fn) {
+    var s = session;
+    if (!s) return fn();
+    pauseFlows(s);
+    try {
+      return fn();
+    } finally {
+      resumeFlows(s);
+    }
+  }
+
   function refresh() {
     if (!session) return false;
     repaginate(session);
@@ -1545,6 +1556,7 @@
       return goTo(index, options);
     },
     reveal: reveal,
+    quietly: quietly,
     refresh: refresh,
     state: stateOf
   };

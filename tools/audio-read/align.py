@@ -1,22 +1,17 @@
-"""Align a generated lesson audio transcript to that sitting's lesson text.
+"""Align a sitting's read-along recording to that sitting's lesson text.
 
 Usage: python align.py <sitting-NN>
 
-Reads sitting-NN-meta.json, sitting-NN-content.html and
-transcript-sitting-NN.json from this folder and writes
-assets/study/audio/sitting-NN-overview.json — a cue list the study app uses
+Reads sitting-NN-blocks.json (written by extract_blocks.mjs from the live
+study page) and transcript-sitting-NN.json from this folder and writes
+assets/study/audio/sitting-NN-readalong.json — a cue list the study app uses
 to stroke a faint highlighter over exactly the text being spoken.
-
-Block enumeration and text cooking here MUST mirror the runtime code in
-js/study/study-app.js (cook/normalize + block selector), otherwise char offsets
-drift. Keep the two in sync.
 """
 import json
 import re
 import sys
 import unicodedata
 from difflib import SequenceMatcher
-from html.parser import HTMLParser
 from pathlib import Path
 
 HERE = Path(__file__).parent
@@ -79,76 +74,13 @@ class Block:
         self.toks = toks
 
 
-class DOMNode:
-    def __init__(self, tag, attrs=None):
-        self.tag = tag
-        self.attrs = attrs or {}
-        self.parts = []  # str text or DOMNode, in document order
-
-    def add_text(self, data):
-        if data:
-            if self.parts and isinstance(self.parts[-1], str):
-                self.parts[-1] += data
-            else:
-                self.parts.append(data)
-
-    def add_node(self, node):
-        self.parts.append(node)
-
-    def text(self):
-        out = []
-        for part in self.parts:
-            out.append(part if isinstance(part, str) else part.text())
-        return "".join(out)
-
-
-class TreeBuilder(HTMLParser):
-    BLOCK_TAGS = {"p", "h3", "h4", "blockquote", "li"}
-
-    def __init__(self):
-        super().__init__(convert_charrefs=True)
-        self.root = DOMNode("root")
-        self.stack = [self.root]
-        self.blocks = []  # (tag, class, text) in document order
-
-    def handle_starttag(self, tag, attrs):
-        node = DOMNode(tag, dict(attrs))
-        self.stack[-1].add_node(node)
-        if tag not in ("br", "hr", "img"):
-            self.stack.append(node)
-        parent_classes = " ".join(
-            (n.attrs.get("class") or "") for n in self.stack
-        )
-        in_toc = "lesson-toc" in parent_classes
-        if tag in self.BLOCK_TAGS and not in_toc:
-            self._pending_block = len(self.blocks)
-            self.blocks.append((tag, node.attrs.get("class") or "", node))
-        else:
-            self._pending_block = None
-
-    def handle_endtag(self, tag):
-        for i in range(len(self.stack) - 1, 0, -1):
-            if self.stack[i].tag == tag:
-                del self.stack[i:]
-                break
-
-    def handle_data(self, data):
-        self.stack[-1].add_text(data)
-
-
 def main():
     sitting = sys.argv[1] if len(sys.argv) > 1 else "sitting-00"
-    out = HERE.parent.parent / "assets" / "study" / "audio" / f"{sitting}-overview.json"
-    meta = json.loads((HERE / f"{sitting}-meta.json").read_text(encoding="utf-8"))
-    content_html = (HERE / f"{sitting}-content.html").read_text(encoding="utf-8")
+    out = HERE.parent.parent / "assets" / "study" / "audio" / f"{sitting}-readalong.json"
+    dumped = json.loads((HERE / f"{sitting}-blocks.json").read_text(encoding="utf-8"))
     transcript = json.loads((HERE / f"transcript-{sitting}.json").read_text(encoding="utf-8"))
 
-    parser = TreeBuilder()
-    parser.feed(content_html)
-
-    blocks = [Block("title", meta["title"]), Block("subtitle", meta["subtitle"])]
-    for tag, cls, node in parser.blocks:
-        blocks.append(Block(tag, node.text()))
+    blocks = [Block("block", text) for text in dumped["blocks"]]
 
     lesson_toks = []  # (block_index, token, s, e)
     for bi, b in enumerate(blocks):
@@ -233,6 +165,11 @@ def main():
             "s": round(seg["start"], 2),
             "e": round(seg["end"], 2),
             "h": trimmed,
+            "w": [
+                [round(audio_toks[k][1], 2), bi, s, e]
+                for k in range(j0, j1) if k in audio_to_lesson
+                for bi, _t, s, e in [lesson_toks[audio_to_lesson[k]]]
+            ],
         })
 
     # Stitch only cues that continue the very same sentence split by a breath
@@ -249,14 +186,15 @@ def main():
             ):
                 p["h"][0][2] = c["h"][0][2]
                 p["e"] = c["e"]
+                p["w"].extend(c["w"])
                 continue
         stitched.append(c)
     cues = stitched
 
     data = {
-        "audio": f"{sitting}-overview.m4a",
+        "audio": f"{sitting}-readalong.mp3",
         "duration": transcript["duration"],
-        "version": 1,
+        "version": 2,
         "cues": cues,
     }
     out.write_text(json.dumps(data, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")

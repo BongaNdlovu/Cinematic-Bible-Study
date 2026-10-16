@@ -5222,6 +5222,154 @@
     .lap-mute.is-muted { color: rgba(243, 229, 200, 0.55); }
     body.paper-mode .lap-mute.is-muted,
     body.white-mode .lap-mute.is-muted { color: #8a6414; }
+    body {
+      --read-mark: rgba(251, 191, 36, 0.2);
+      --read-mark-strong: rgba(251, 191, 36, 0.4);
+    }
+    body.night-mode {
+      --read-mark: rgba(251, 191, 36, 0.16);
+      --read-mark-strong: rgba(251, 191, 36, 0.34);
+    }
+    body.paper-mode,
+    body .br-root {
+      --read-mark: rgba(217, 119, 6, 0.2);
+      --read-mark-strong: rgba(217, 119, 6, 0.38);
+    }
+    body.white-mode {
+      --read-mark: rgba(202, 138, 4, 0.26);
+      --read-mark-strong: rgba(202, 138, 4, 0.44);
+    }
+    mark.audio-read {
+      color: inherit;
+      background-color: var(--read-mark);
+      box-shadow: 0 0 0 0.14em var(--read-mark);
+      border-radius: 0.28em;
+      padding: 0.04em 0;
+      -webkit-box-decoration-break: clone;
+      box-decoration-break: clone;
+    }
+    mark.audio-word {
+      color: inherit;
+      background-color: var(--read-mark-strong);
+      box-shadow: 0 0 0 0.12em var(--read-mark-strong);
+      border-radius: 0.22em;
+      padding: 0;
+      -webkit-box-decoration-break: clone;
+      box-decoration-break: clone;
+    }
+    @media (prefers-reduced-motion: no-preference) {
+      mark.audio-read {
+        animation: audio-read-in 0.8s ease;
+      }
+    }
+    @keyframes audio-read-in {
+      from {
+        background-color: var(--read-mark-strong);
+        box-shadow: 0 0 0 0.14em var(--read-mark-strong);
+      }
+      to {
+        background-color: var(--read-mark);
+        box-shadow: 0 0 0 0.14em var(--read-mark);
+      }
+    }
+    .audio-cp {
+      position: fixed;
+      left: 18px;
+      bottom: 24px;
+      z-index: 60;
+      width: min(340px, calc(100vw - 32px));
+      box-sizing: border-box;
+      padding: 0.9rem 1rem 0.95rem;
+      border-radius: 16px;
+      border: 1px solid rgba(212, 175, 55, 0.55);
+      background: linear-gradient(160deg, rgba(34, 27, 14, 0.96) 0%, rgba(12, 10, 6, 0.97) 100%);
+      box-shadow:
+        0 18px 40px -16px rgba(0, 0, 0, 0.8),
+        0 0 26px rgba(212, 175, 55, 0.2),
+        inset 0 1px 0 rgba(255, 246, 219, 0.07);
+      color: #fff6db;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+    .audio-cp[hidden] { display: none !important; }
+    .audio-cp[data-state="held"] {
+      width: auto;
+      max-width: min(300px, calc(100vw - 32px));
+      padding: 0.7rem 0.8rem 0.8rem;
+    }
+    .audio-cp[data-state="held"] .audio-cp-text { display: none; }
+    .audio-cp[data-state="held"] .audio-cp-title {
+      margin-bottom: 0.6rem;
+      font-size: 0.98rem;
+    }
+    @media (prefers-reduced-motion: no-preference) {
+      .audio-cp { animation: audio-cp-in 0.32s ease; }
+    }
+    @keyframes audio-cp-in {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .audio-cp-kicker {
+      margin: 0 0 0.3rem;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 10.5px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: #fbbf24;
+    }
+    .audio-cp-title {
+      margin: 0 0 0.3rem;
+      font-family: "Newsreader", Georgia, serif;
+      font-size: 1.08rem;
+      font-weight: 650;
+      color: #fff6db;
+    }
+    .audio-cp-text {
+      margin: 0 0 0.85rem;
+      font-family: Inter, system-ui, sans-serif;
+      font-size: 0.84rem;
+      line-height: 1.5;
+      color: rgba(243, 229, 200, 0.85);
+    }
+    .audio-cp-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.55rem;
+    }
+    .audio-cp-btn {
+      flex: 1 1 auto;
+      min-height: 40px;
+      padding: 0.5rem 1rem;
+      border-radius: 999px;
+      border: 1px solid rgba(212, 175, 55, 0.55);
+      background: rgba(212, 175, 55, 0.08);
+      color: #fbe7b0;
+      font-family: Inter, system-ui, sans-serif;
+      font-size: 0.85rem;
+      font-weight: 650;
+      cursor: pointer;
+      transition: background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+    .audio-cp-btn:hover {
+      border-color: rgba(251, 191, 36, 0.85);
+      box-shadow: 0 0 14px rgba(251, 191, 36, 0.22);
+    }
+    .audio-cp-btn:focus-visible {
+      outline: 2px solid #fbbf24;
+      outline-offset: 2px;
+    }
+    .audio-cp-btn[hidden] { display: none; }
+    .audio-cp-btn.is-primary,
+    .audio-cp[data-state="held"] .audio-cp-btn {
+      background: linear-gradient(150deg, #f7c948, #d99a1e);
+      border-color: #f7c948;
+      color: #1d1407;
+    }
+    @media (max-width: 480px) {
+      .audio-cp { left: 16px; right: 16px; bottom: 16px; width: auto; }
+      .audio-cp-btn { flex-basis: 100%; }
+    }
     /* Floating audio-reactive orb — lower right, rides above the toast slot */
     .audio-orb {
       position: fixed;
@@ -9699,6 +9847,16 @@
 
   <!-- Editorial Footer -->
   <footer class="site-footer" data-verse="And he said unto me, Unto two thousand and three hundred days; then shall the sanctuary be cleansed." data-cite="Daniel 8:14 · King James Version"></footer>
+
+  <div id="audio-checkpoint" class="audio-cp" role="region" aria-live="polite" aria-labelledby="audio-cp-title" hidden>
+    <p class="audio-cp-kicker" id="audio-cp-kicker">Checkpoint</p>
+    <p class="audio-cp-title" id="audio-cp-title">The reading has reached a checkpoint.</p>
+    <p class="audio-cp-text" id="audio-cp-text"></p>
+    <div class="audio-cp-actions">
+      <button type="button" class="audio-cp-btn is-primary" id="audio-cp-pause">Pause and answer</button>
+      <button type="button" class="audio-cp-btn" id="audio-cp-continue">Keep listening</button>
+    </div>
+  </div>
 
   <!-- Toast Message System -->
   <div id="toast" class="fixed bottom-6 right-6 z-50 px-4 py-3 rounded-lg bg-ink-900 text-paper-50 dark:bg-paper-100 dark:text-ink-900 font-mono text-xs shadow-xl opacity-0 pointer-events-none transition-opacity duration-300">

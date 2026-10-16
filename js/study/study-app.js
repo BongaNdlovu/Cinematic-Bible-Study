@@ -777,11 +777,19 @@
     // lists [blockIndex, charStart, charEnd] ranges over the whitespace-collapsed
     // text of the sheet title, subtitle, and article blocks, stroked with a
     // faint highlighter while they are spoken.
+    const READ_BLOCK_SEL = 'p, h3, h4, blockquote, li';
+    const READ_SKIP_SEL = 'nav.lesson-toc, .checkpoint-plate, .br-bar, .br-foot, .br-switch, .story-read, .story-utility';
+    const READ_FOLLOW_TOP = 72;
+    const READ_FOLLOW_BOTTOM = 96;
+
     const AudioReader = {
       cues: null,
       blocks: [],
       idx: -1,
+      wordIdx: -1,
       marks: [],
+      wordMarks: [],
+      raf: 0,
       gen: 0,
 
       load(src, sheetIndex) {
@@ -792,7 +800,9 @@
             if (gen !== this.gen || currentSheetIndex !== sheetIndex || !Array.isArray(data.cues)) return;
             this.cues = data.cues;
             this.idx = -1;
-            this.collectBlocks();
+            this.blocks = [];
+            const player = document.getElementById('lesson-audio-player');
+            if (player && !player.paused) this.sync(player.currentTime);
           })
           .catch(() => {}); // cues are optional polish; never break playback
       },
@@ -805,12 +815,24 @@
         if (title) els.push(title);
         if (subtitle) els.push(subtitle);
         if (article) {
-          article.querySelectorAll('p, h3, h4, blockquote, li').forEach((el) => {
-            if (el.closest('nav.lesson-toc')) return;
+          article.querySelectorAll(READ_BLOCK_SEL).forEach((el) => {
+            if (el.closest(READ_SKIP_SEL)) return;
+            const outer = el.parentElement && el.parentElement.closest(READ_BLOCK_SEL);
+            if (outer && article.contains(outer)) return;
             els.push(el);
           });
         }
         this.blocks = els;
+      },
+
+      ensureBlocks() {
+        if (this.blocks.length && this.blocks.every((el) => el.isConnected)) return;
+        this.collectBlocks();
+      },
+
+      texts() {
+        this.ensureBlocks();
+        return this.blocks.map((el) => this.cookNodes(el).cooked);
       },
 
       teardown() {
@@ -819,17 +841,38 @@
         this.cues = null;
         this.blocks = [];
         this.idx = -1;
+        AudioCheckpoints.reset();
+      },
+
+      quietly(fn) {
+        const book = window.BookReader;
+        if (book && book.quietly) book.quietly(fn);
+        else fn();
       },
 
       clearMarks() {
-        this.marks.forEach((mark) => {
-          const parent = mark.parentNode;
-          if (!parent) return;
-          while (mark.firstChild) parent.insertBefore(mark.firstChild, mark);
-          parent.removeChild(mark);
-          parent.normalize();
-        });
+        this.clearWord();
+        this.unwrap(this.marks);
         this.marks = [];
+      },
+
+      clearWord() {
+        this.wordIdx = -1;
+        this.unwrap(this.wordMarks);
+        this.wordMarks = [];
+      },
+
+      unwrap(marks) {
+        if (!marks.length) return;
+        this.quietly(() => {
+          marks.forEach((mark) => {
+            const parent = mark.parentNode;
+            if (!parent) return;
+            while (mark.firstChild) parent.insertBefore(mark.firstChild, mark);
+            parent.removeChild(mark);
+            parent.normalize();
+          });
+        });
       },
 
       // Mirrors cook() in tools/audio-read/align.py (NFKD fold + whitespace
@@ -838,7 +881,7 @@
         return ch.normalize('NFKD').replace(/[\u0300-\u036f]/g, '');
       },
 
-      wrapSpan(el, s, e) {
+      cookNodes(el) {
         const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, {
           acceptNode: (node) => (
             node.nodeValue && node.parentElement && !/^(SCRIPT|STYLE)$/.test(node.parentElement.tagName)
@@ -867,7 +910,11 @@
           }
           nodes.push({ node: textNode, start, end: cooked.length, offsets, rawLen: raw.length });
         }
-        nodes.forEach((entry) => {
+        return { cooked, nodes };
+      },
+
+      wrapSpan(el, s, e, cls, into) {
+        this.cookNodes(el).nodes.forEach((entry) => {
           if (entry.end <= s || entry.start >= e) return;
           const is = Math.max(s, entry.start);
           const ie = Math.min(e, entry.end);
@@ -875,36 +922,79 @@
           const rawEnd = ie < entry.end ? entry.offsets[ie - entry.start] : entry.rawLen;
           let target = entry.node;
           if (rawStart > 0) target = target.splitText(rawStart);
-          if (rawEnd < target.nodeValue.length) target.splitText(rawEnd);
+          if (rawEnd - rawStart < target.nodeValue.length) target.splitText(rawEnd - rawStart);
           const mark = document.createElement('mark');
-          mark.className = 'audio-read';
+          mark.className = cls;
           target.parentNode.insertBefore(mark, target);
           mark.appendChild(target);
-          this.marks.push(mark);
+          into.push(mark);
         });
       },
 
       show(cue) {
         this.clearMarks();
+        this.ensureBlocks();
         if (!this.blocks.length) return;
-        let firstEl = null;
-        (cue.h || []).forEach(([bi, s, e]) => {
-          const el = this.blocks[bi];
-          if (!el) return;
-          if (!firstEl) firstEl = el;
-          this.wrapSpan(el, s, e);
+        this.quietly(() => {
+          (cue.h || []).forEach(([bi, s, e]) => {
+            const el = this.blocks[bi];
+            if (el) this.wrapSpan(el, s, e, 'audio-read', this.marks);
+          });
         });
-        this.follow(firstEl);
+        this.follow(this.marks[0]);
       },
 
-      // Nudge the spoken text into view only when it has left the viewport
-      // entirely, so an unhurried reader is never yanked around.
+      showWord(cue, t) {
+        const words = cue && cue.w;
+        let w = -1;
+        if (words) {
+          while (w + 1 < words.length && words[w + 1][0] <= t) w += 1;
+        }
+        if (w === this.wordIdx) return;
+        this.clearWord();
+        this.wordIdx = w;
+        if (w < 0) return;
+        const [, bi, s, e] = words[w];
+        const el = this.blocks[bi];
+        if (!el) return;
+        this.quietly(() => this.wrapSpan(el, s, e, 'audio-word', this.wordMarks));
+        this.follow(this.wordMarks[0]);
+      },
+
+      run() {
+        const player = document.getElementById('lesson-audio-player');
+        if (!player || this.raf) return;
+        const step = () => {
+          if (player.paused || player.ended) {
+            this.raf = 0;
+            return;
+          }
+          this.sync(player.currentTime);
+          this.raf = requestAnimationFrame(step);
+        };
+        this.raf = requestAnimationFrame(step);
+      },
+
+      onBookPage(el) {
+        const view = el.closest('.br-view');
+        if (!view) return true;
+        const rect = el.getClientRects()[0];
+        if (!rect) return true;
+        const v = view.getBoundingClientRect();
+        return rect.left >= v.left - 2 && rect.right <= v.right + 2;
+      },
+
       follow(el) {
         const player = document.getElementById('lesson-audio-player');
         if (!el || (player && player.paused)) return;
+        const book = window.BookReader;
+        if (book && book.isActive() && el.closest('.br-root')) {
+          if (!this.onBookPage(el)) book.reveal(el, { quiet: true });
+          return;
+        }
         const rect = el.getBoundingClientRect();
         const vh = window.innerHeight || document.documentElement.clientHeight;
-        if (rect.bottom < 72 || rect.top > vh - 96) {
+        if (rect.bottom < READ_FOLLOW_TOP || rect.top > vh - READ_FOLLOW_BOTTOM) {
           el.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
       },
@@ -921,7 +1011,10 @@
       },
 
       sync(t) {
-        if (!this.cues || !this.blocks.length) return;
+        if (!this.cues) return;
+        this.ensureBlocks();
+        if (!this.blocks.length) return;
+        AudioCheckpoints.tick(t);
         const prev = this.idx;
         let next;
         if (
@@ -933,10 +1026,176 @@
         } else {
           next = this.findCue(t);
         }
-        if (next === prev) return;
-        this.idx = next;
-        if (next < 0) this.clearMarks();
-        else this.show(this.cues[next]);
+        if (next !== prev) {
+          this.idx = next;
+          if (next < 0) this.clearMarks();
+          else this.show(this.cues[next]);
+        }
+        if (next >= 0) this.showWord(this.cues[next], t);
+      }
+    };
+
+    window.StudyAudioReader = {
+      texts: () => AudioReader.texts(),
+      checkpoints: () => AudioCheckpoints.stops.map((stop) => stop.at)
+    };
+
+    const AudioCheckpoints = {
+      stops: [],
+      plateCount: -1,
+      lastT: null,
+      active: null,
+      state: 'idle',
+
+      el(id) {
+        return document.getElementById(id);
+      },
+
+      reset() {
+        this.stops = [];
+        this.plateCount = -1;
+        this.lastT = null;
+        this.hide();
+      },
+
+      passed(plate) {
+        const flag = plate.getAttribute('data-checkpoint-passed');
+        return flag === 'true' || flag === 'auth';
+      },
+
+      measure() {
+        const plates = Array.prototype.slice.call(document.querySelectorAll('#sheet-article .checkpoint-plate'));
+        if (plates.length === this.plateCount) return;
+        this.plateCount = plates.length;
+        const cues = AudioReader.cues || [];
+        const blocks = AudioReader.blocks;
+        this.stops = [];
+        plates.forEach((plate) => {
+          const anchor = blocks.findIndex((el) => plate.compareDocumentPosition(el) & Node.DOCUMENT_POSITION_FOLLOWING);
+          if (anchor < 0) return;
+          const k = cues.findIndex((cue) => cue.h && cue.h.length && cue.h[0][0] >= anchor);
+          if (k < 0) return;
+          const at = k > 0 ? cues[k - 1].e : cues[k].s;
+          this.stops.push({ plate, at, done: false });
+        });
+        if (this.lastT !== null) {
+          this.stops.forEach((stop) => { stop.done = stop.at <= this.lastT; });
+        }
+      },
+
+      tick(t) {
+        this.measure();
+        const last = this.lastT;
+        this.lastT = t;
+        const player = this.el('lesson-audio-player');
+        if (this.state === 'offer' && this.active && t > this.active.at + 30) this.hide();
+        if (last === null || !player || player.paused) return;
+        if (t < last || t - last > 1.5) {
+          this.stops.forEach((stop) => { stop.done = stop.at <= t; });
+          if (this.state === 'offer') this.hide();
+          return;
+        }
+        const stop = this.stops.find((s) => !s.done && last < s.at && t >= s.at);
+        if (!stop) return;
+        stop.done = true;
+        if (!this.passed(stop.plate)) this.offer(stop);
+      },
+
+      label(stop) {
+        const n = stop.plate.getAttribute('data-checkpoint');
+        const total = stop.plate.getAttribute('data-checkpoint-total');
+        return n && total ? 'Checkpoint ' + n + ' of ' + total : 'Checkpoint';
+      },
+
+      render(title, text, pauseShown, continueLabel) {
+        const box = this.el('audio-checkpoint');
+        if (!box) return;
+        this.el('audio-cp-kicker').textContent = this.label(this.active);
+        this.el('audio-cp-title').textContent = title;
+        this.el('audio-cp-text').textContent = text;
+        this.el('audio-cp-pause').hidden = !pauseShown;
+        this.el('audio-cp-continue').textContent = continueLabel;
+        box.hidden = false;
+        box.setAttribute('data-state', this.state);
+      },
+
+      offer(stop) {
+        this.active = stop;
+        this.state = 'offer';
+        this.render(
+          'The reading has reached a checkpoint.',
+          'Pause to answer it now, or keep listening and come back to it later.',
+          true,
+          'Keep listening'
+        );
+      },
+
+      hold() {
+        const stop = this.active;
+        const player = this.el('lesson-audio-player');
+        if (!stop || !player) return;
+        this.state = 'held';
+        player.pause();
+        this.render(
+          'Paused. Answer the question, then continue.',
+          'Answer the question on the page. When you are done, continue and the reading picks up right here.',
+          false,
+          'Continue listening'
+        );
+        const book = window.BookReader;
+        const article = this.el('sheet-article');
+        if (book && book.isActive() && book.reveal(stop.plate)) {
+          const rect = article ? article.getBoundingClientRect() : null;
+          if (rect && (rect.top < -40 || rect.top > window.innerHeight * 0.5)) {
+            article.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        } else {
+          stop.plate.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      },
+
+      resume() {
+        const stop = this.active;
+        const player = this.el('lesson-audio-player');
+        const wasHeld = this.state === 'held';
+        this.hide();
+        if (!wasHeld || !stop || !player) return;
+        if (player.currentTime > stop.at) player.currentTime = stop.at;
+        this.lastT = player.currentTime;
+        const p = player.play();
+        if (p && p.catch) p.catch(() => {});
+      },
+
+      answered() {
+        if (this.state !== 'held' || !this.active || !this.passed(this.active.plate)) return;
+        this.render(
+          'Checkpoint answered. Continue when ready.',
+          'Well done. Continue when you are ready and the reading picks up where it stopped.',
+          false,
+          'Continue listening'
+        );
+      },
+
+      played() {
+        if (this.state === 'held') this.resume();
+      },
+
+      hide() {
+        this.state = 'idle';
+        this.active = null;
+        const box = this.el('audio-checkpoint');
+        if (box) {
+          box.hidden = true;
+          box.removeAttribute('data-state');
+        }
+      },
+
+      wire() {
+        const pause = this.el('audio-cp-pause');
+        const cont = this.el('audio-cp-continue');
+        if (pause) pause.addEventListener('click', () => this.hold());
+        if (cont) cont.addEventListener('click', () => this.resume());
+        document.addEventListener('checkpoint:passed', () => this.answered());
       }
     };
 
@@ -973,10 +1232,7 @@
             hint.hidden = !hintText;
           }
           player.src = audio.src;
-          // Spoken read-along highlighter is disabled: the spoken-text marks and
-          // their auto-scroll are off. AudioReader.load() is deliberately not
-          // called, so AudioReader never receives cues and sync()/show() no-op.
-          // The orb, player row, and audio element are unaffected.
+          if (audio.cues) AudioReader.load(audio.cues, currentSheetIndex);
         } else {
           audioBox.hidden = true;
         }
@@ -5985,11 +6241,15 @@
       if (audioPlayer && !audioPlayer.dataset.tracked) {
         audioPlayer.dataset.tracked = 'true';
         audioPlayer.addEventListener('play', () => {
+          AudioCheckpoints.played();
+          AudioReader.run();
           if (window.Insights) window.Insights.track('feature_use', currentSheetIndex, { feature: 'audio' });
         });
         audioPlayer.addEventListener('timeupdate', () => {
           AudioReader.sync(audioPlayer.currentTime);
         });
+        audioPlayer.addEventListener('ended', () => AudioCheckpoints.hide());
+        AudioCheckpoints.wire();
       }
       ['lesson-infographic-download', 'infographic-modal-download'].forEach((id) => {
         const link = document.getElementById(id);

@@ -21,12 +21,13 @@
         },
         scripture: "Gabriel is told to make Daniel understand the vision (KJV Daniel 8:16; see also 9:23). How to read that vision is a separate question.",
         audio: {
-          src: "assets/study/audio/sitting-00-overview.mp3",
-          kind: "overview",
+          src: "assets/study/audio/sitting-00-readalong.mp3",
+          kind: "readalong",
           title: "Sitting 0 — listen to the full sitting",
-          kicker: "Overview · 3 min",
-          hint: "Press play and listen through the sitting.",
-          duration: "3 min"
+          kicker: "Read-along · 24 min",
+          hint: "Press play and follow along: the words are highlighted as they are spoken. At each checkpoint you can pause, answer it, and continue from there.",
+          duration: "24 min",
+          cues: "assets/study/audio/sitting-00-readalong.json"
         },
         infographic: {
           src: "assets/study/infographics/sitting-00-roadmap.webp",
@@ -594,12 +595,13 @@ Daniel 9:24–27 ──▶  "Seventy weeks" (70 × 7 = 490 prophetic years)
         },
         scripture: "Daniel 1:1-21 &bull; Babylon, 605 B.C.",
         audio: {
-          src: "assets/study/audio/sitting-01-overview.mp3",
-          kind: "overview",
+          src: "assets/study/audio/sitting-01-readalong.mp3",
+          kind: "readalong",
           title: "Sitting 1 — listen to the full sitting",
-          kicker: "Overview · 3 min",
-          hint: "Press play and listen through the sitting.",
-          duration: "3 min"
+          kicker: "Read-along · 18 min",
+          hint: "Press play and follow along: the words are highlighted as they are spoken. At each checkpoint you can pause, answer it, and continue from there.",
+          duration: "18 min",
+          cues: "assets/study/audio/sitting-01-readalong.json"
         },
         infographic: {
           src: "assets/study/infographics/sitting-01-roadmap.webp",
@@ -1141,12 +1143,13 @@ DANIEL IN BABYLON                         JESUS IN THE WILDERNESS
         },
         scripture: "Daniel 2:1-49 &bull; Babylon, second year of Nebuchadnezzar (Daniel 2:1)",
         audio: {
-          src: "assets/study/audio/sitting-02-overview.mp3",
-          kind: "overview",
+          src: "assets/study/audio/sitting-02-readalong.mp3",
+          kind: "readalong",
           title: "Sitting 2 — listen to the full sitting",
-          kicker: "Overview · 3 min",
-          hint: "Press play and listen through the sitting.",
-          duration: "3 min"
+          kicker: "Read-along · 25 min",
+          hint: "Press play and follow along: the words are highlighted as they are spoken. At each checkpoint you can pause, answer it, and continue from there.",
+          duration: "25 min",
+          cues: "assets/study/audio/sitting-02-readalong.json"
         },
         infographic: {
           src: "assets/study/infographics/sitting-02-roadmap.webp",
