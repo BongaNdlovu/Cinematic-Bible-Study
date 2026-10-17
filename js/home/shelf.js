@@ -2523,7 +2523,50 @@ function watchForRefresh() {
   if (auth && typeof auth.onChange === 'function') auth.onChange(() => buildChrome());
 }
 
+const INVITE_AUTH_WAIT_MS = 4000;
+
+function invitedSitting() {
+  try {
+    const raw = new URLSearchParams(location.search).get('s');
+    const n = raw === null || raw === '' ? NaN : Number(raw);
+    return Number.isInteger(n) && n >= 0 && n < N ? n : -1;
+  } catch (e) {
+    return -1;
+  }
+}
+
+function signedIn() {
+  const auth = window.ScrollAuth;
+  try { return !!(auth && typeof auth.getUser === 'function' && auth.getUser()); } catch (e) { return false; }
+}
+
+function afterDomReady() {
+  return new Promise((resolve) => {
+    const next = () => setTimeout(resolve, 0);
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', next, { once: true });
+    else next();
+  });
+}
+
+async function answerInvite() {
+  const i = invitedSitting();
+  if (i < 0) return;
+  await afterDomReady();
+  try {
+    const u = new URL(location.href);
+    u.searchParams.delete('s');
+    history.replaceState(null, '', u.pathname + u.search + '#volume-' + i);
+  } catch (e) {}
+  const auth = window.ScrollAuth;
+  const ready = auth && typeof auth.ready === 'function' ? Promise.resolve(auth.ready()).catch(() => {}) : Promise.resolve();
+  await Promise.race([ready, new Promise((r) => setTimeout(r, INVITE_AUTH_WAIT_MS))]);
+  if (window.Onboard && typeof window.Onboard.gate === 'function') await window.Onboard.gate();
+  if (can(i) || !signedIn()) enterSitting(i);
+  else location.href = 'study.html?sheet=' + i;
+}
+
 (async function boot() {
+  answerInvite();
   buildChrome();
   wireUI();
   watchForRefresh();

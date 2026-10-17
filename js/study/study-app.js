@@ -5103,27 +5103,27 @@
       const url = enrollmentUrl();
       const title = 'The Shelf of Daniel';
       const text = 'Join this sitting of the Shelf of Daniel. Open the cover, agree to the terms, and sign in to begin.';
-      let method = 'fallback';
-      try {
-        if (navigator.share) {
+      const sent = (method, message) => {
+        if (window.Insights) window.Insights.track('invite_shared', currentSheetIndex, { method: method });
+        showToast(message);
+      };
+      if (navigator.share) {
+        try {
           await navigator.share({ title: title, text: text, url: url });
-          method = 'share';
-          if (window.Insights) window.Insights.track('invite_shared', currentSheetIndex, { method: method });
-          showToast('Invitation ready to send.');
+          sent('share', 'Invitation ready to send.');
           return;
+        } catch (err) {
+          if (err && err.name === 'AbortError') return;
         }
-        if (navigator.clipboard && navigator.clipboard.writeText) {
-          await navigator.clipboard.writeText(url);
-          method = 'clipboard';
-          if (window.Insights) window.Insights.track('invite_shared', currentSheetIndex, { method: method });
-          showToast('Enrollment link copied. Recipients sign in on the cover.');
-          return;
-        }
-      } catch (err) {
-        if (err && err.name === 'AbortError') return;
       }
-      if (window.Insights) window.Insights.track('invite_shared', currentSheetIndex, { method: method });
-      showToast('Share the home page so they can sign in: ' + url);
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        try {
+          await navigator.clipboard.writeText(url);
+          sent('clipboard', 'Enrollment link copied. Recipients sign in on the cover.');
+          return;
+        } catch (err) {}
+      }
+      sent('fallback', 'Share the home page so they can sign in: ' + url);
     }
 
     function renderLessonConnectBar(index) {
