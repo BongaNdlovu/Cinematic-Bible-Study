@@ -1452,6 +1452,29 @@
       0%, 100% { box-shadow: 0 0 0 4px rgba(213, 177, 106, 0.1), 0 0 14px rgba(213, 177, 106, 0.3); }
       50% { box-shadow: 0 0 0 8px rgba(213, 177, 106, 0.05), 0 0 28px rgba(213, 177, 106, 0.55); }
     }
+    @media (prefers-reduced-motion: no-preference) {
+      .story-link-arrow {
+        position: relative;
+        animation: none;
+      }
+      .story-link-arrow::before,
+      .story-link-arrow::after {
+        content: "";
+        position: absolute;
+        inset: -1px;
+        border-radius: 50%;
+        pointer-events: none;
+        animation: link-glow-rest 2.8s ease-in-out infinite;
+      }
+      .story-link-arrow::before { box-shadow: 0 0 0 4px rgba(213, 177, 106, 0.1), 0 0 14px rgba(213, 177, 106, 0.3); }
+      .story-link-arrow::after {
+        box-shadow: 0 0 0 8px rgba(213, 177, 106, 0.05), 0 0 28px rgba(213, 177, 106, 0.55);
+        opacity: 0;
+        animation-name: link-glow-peak;
+      }
+    }
+    @keyframes link-glow-rest { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+    @keyframes link-glow-peak { 0%, 100% { opacity: 0; } 50% { opacity: 1; } }
     /* The link between two movements: which two, what they share, and what the
        step that leaves the first one says about the second. The copy is
        authored per step (`bridgeAhead`, `bridgeShare`); with none of it the
@@ -3193,6 +3216,38 @@
       from { box-shadow: 0 0 50px rgba(220, 178, 87, 0.22), inset 0 0 36px rgba(220, 178, 87, 0.1); }
       to { box-shadow: 0 0 92px rgba(220, 178, 87, 0.46), inset 0 0 52px rgba(220, 178, 87, 0.2); }
     }
+    @media (prefers-reduced-motion: no-preference) {
+      .mm-core {
+        isolation: isolate;
+        box-shadow: none;
+        animation: none;
+      }
+      .mm.is-visible .mm-centre .mm-core {
+        animation: mm-core-in 1.5s var(--d, 0s) cubic-bezier(0.2, 0.8, 0.2, 1) both;
+      }
+      .mm-core::before,
+      .mm-core::after {
+        content: "";
+        position: absolute;
+        inset: -1px;
+        z-index: 0;
+        border: 1px solid transparent;
+        border-radius: 50%;
+        pointer-events: none;
+        animation: mm-core-glow-from 5s ease-in-out infinite alternate;
+      }
+      .mm-core::before { box-shadow: 0 0 50px rgba(220, 178, 87, 0.22), inset 0 0 36px rgba(220, 178, 87, 0.1); }
+      .mm-core::after {
+        box-shadow: 0 0 92px rgba(220, 178, 87, 0.46), inset 0 0 52px rgba(220, 178, 87, 0.2);
+        opacity: 0;
+        animation-name: mm-core-glow-to;
+      }
+      .mm.is-visible .mm-centre .mm-core::before,
+      .mm.is-visible .mm-centre .mm-core::after { animation-delay: calc(var(--d, 0s) + 1.5s); }
+      .mm-core-in { position: relative; z-index: 1; }
+    }
+    @keyframes mm-core-glow-from { from { opacity: 1; } to { opacity: 0; } }
+    @keyframes mm-core-glow-to { from { opacity: 0; } to { opacity: 1; } }
     @keyframes mm-ping { 0% { transform: scale(1); opacity: 0.5; } 100% { transform: scale(2.7); opacity: 0; } }
     @keyframes mm-breathe { from { opacity: 0.3; } to { opacity: 1; } }
     @keyframes mm-letter-in {
@@ -7434,6 +7489,7 @@
       0%, 100% { opacity: 1; transform: scale(1); }
       50% { opacity: 0.45; transform: scale(0.82); }
     }
+    .lesson-connect-share.is-offscreen { animation-play-state: paused; }
     @media (prefers-reduced-motion: reduce) {
       .lesson-connect-share { animation: none; }
       .lesson-connect-orb { animation: none; }
@@ -9956,6 +10012,7 @@
   <script src="js/study/certificate.js"></script>
   <script src="js/study/mindmap.js"></script>
   <script src="js/study/book-reader.js"></script>
+  <script src="js/study/weather-scene.js"></script>
   <script src="js/study/study-app.js"></script>
   <script src="js/study/lesson-player.js"></script>
   <script src="js/study/audio-orb.js"></script>
