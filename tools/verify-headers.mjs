@@ -29,13 +29,22 @@ for (let i = 0; i < lines.length; i++) {
 
   if (!line.startsWith(' ') && !line.startsWith('\t')) {
     // Path definition
-    currentRule = { path: trimmed, headers: {}, lineNum: i + 1 };
+    currentRule = { path: trimmed, headers: {}, detach: [], lineNum: i + 1 };
     rules.push(currentRule);
   } else {
     // Header definition
     if (!currentRule) {
       console.error(`FAIL [Line ${i + 1}]: Header without preceding path rule: "${line}"`);
       process.exit(1);
+    }
+    if (trimmed.startsWith('!')) {
+      const detached = trimmed.slice(1).trim();
+      if (!/^[a-zA-Z0-9\-_]+$/.test(detached)) {
+        console.error(`FAIL [Line ${i + 1}]: Invalid detached header "${detached}"`);
+        process.exit(1);
+      }
+      currentRule.detach.push(detached.toLowerCase());
+      continue;
     }
     const colonIdx = trimmed.indexOf(':');
     if (colonIdx === -1) {
@@ -93,8 +102,9 @@ csp.split(';').forEach(dir => {
 });
 
 assert(cspDirectives['default-src']?.includes("'self'"), "CSP default-src includes 'self'");
-assert(cspDirectives['script-src']?.includes("https://cdn.tailwindcss.com"), "CSP script-src includes Tailwind CDN");
-assert(cspDirectives['script-src']?.includes("https://cdnjs.cloudflare.com"), "CSP script-src includes cdnjs (Tone.js)");
+assert(!cspDirectives['script-src']?.includes("https://cdn.tailwindcss.com"), "CSP script-src no longer allows the unused Tailwind CDN");
+assert(!cspDirectives['script-src']?.includes("https://cdnjs.cloudflare.com"), "CSP script-src no longer allows the unused cdnjs host");
+assert(cspDirectives['script-src']?.includes("'unsafe-inline'"), "CSP script-src keeps 'unsafe-inline' until the inline scripts move out");
 assert(cspDirectives['script-src']?.includes("https://static.cloudflareinsights.com"), "CSP script-src includes static.cloudflareinsights.com");
 
 // Verify OSM tiles
@@ -106,8 +116,12 @@ assert(cspDirectives['connect-src']?.includes("https://server.arcgisonline.com")
 assert(cspDirectives['connect-src']?.includes("https://*.arcgisonline.com"), "CSP connect-src includes *.arcgisonline.com");
 
 // Verify Supabase
-assert(cspDirectives['connect-src']?.includes("https://*.supabase.co"), "CSP connect-src includes https://*.supabase.co");
-assert(cspDirectives['connect-src']?.includes("wss://*.supabase.co"), "CSP connect-src includes wss://*.supabase.co");
+const authConfig = fs.readFileSync(path.join(root, 'js', 'shared', 'auth-config.js'), 'utf8');
+const supabaseHost = (/https:\/\/([a-z0-9-]+\.supabase\.co)/.exec(authConfig) || [])[1];
+assert(supabaseHost, 'js/shared/auth-config.js names the Supabase project host');
+assert(cspDirectives['connect-src']?.includes(`https://${supabaseHost}`), `CSP connect-src includes https://${supabaseHost}`);
+assert(cspDirectives['connect-src']?.includes(`wss://${supabaseHost}`), `CSP connect-src includes wss://${supabaseHost}`);
+assert(!cspDirectives['connect-src']?.some(v => v.includes('*.supabase.co')), 'CSP connect-src no longer allows every Supabase project');
 
 // Verify Cloudflare Insights
 assert(cspDirectives['connect-src']?.includes("https://cloudflareinsights.com"), "CSP connect-src includes cloudflareinsights.com");
@@ -121,21 +135,56 @@ const htmlRule = rules.find(r => r.path === '/*.html');
 assert(htmlRule, 'Rule for "/*.html" exists');
 assert(htmlRule?.headers['cache-control']?.value?.includes('must-revalidate'), 'HTML caching forces must-revalidate (prevents stale client pages)');
 
-// 4. Verify Static Asset Rules (CORS & Immutable Cache)
-['/models/*', '/assets/*', '/vendor/*'].forEach(pathPattern => {
+function effectiveHeaders(urlPath) {
+  const out = new Map();
+  const seen = new Set();
+  for (const rule of rules) {
+    const pattern = new RegExp('^' + rule.path.split('*').map(part => part.replace(/[.+?^${}()|[\]\\]/g, '\\$&')).join('.*') + '$');
+    if (!pattern.test(urlPath)) continue;
+    rule.detach.forEach(name => out.delete(name));
+    for (const [key, h] of Object.entries(rule.headers)) {
+      if (seen.has(key) && out.has(key)) out.set(key, out.get(key) + ', ' + h.value);
+      else out.set(key, h.value);
+      seen.add(key);
+    }
+  }
+  return out;
+}
+
+const IMMUTABLE = 'public, max-age=31536000, immutable';
+const REVALIDATE = 'public, max-age=3600, stale-while-revalidate=86400';
+['/models/*', '/assets/*', '/vendor/*', '/js/*', '/css/*', '/bible/*'].forEach(pathPattern => {
   const rule = rules.find(r => r.path === pathPattern);
   assert(rule, `Rule for "${pathPattern}" exists`);
   assert(rule?.headers['access-control-allow-origin']?.value === '*', `${pathPattern} allows CORS for preview and cross-origin usage`);
-  assert(rule?.headers['cache-control']?.value?.includes('immutable'), `${pathPattern} has immutable long-term caching`);
 });
 
-// 5. Verify Script & Stylesheet Asset Rules (CORS & Caching)
-['/js/*', '/css/*'].forEach(pathPattern => {
+const expectations = [
+  ['/models/full_body.0123456789ab.glb', IMMUTABLE, 'hashed models are immutable'],
+  ['/js/shared/boot.0123456789ab.js', IMMUTABLE, 'hashed scripts are immutable'],
+  ['/css/site.0123456789ab.css', IMMUTABLE, 'hashed stylesheets are immutable'],
+  ['/assets/shelf/covers/vol-00-cf920485.jpg', IMMUTABLE, 'content-hashed shelf covers are immutable'],
+  ['/assets/shelf/covers/thumbs/vol-00-edbaa5a8.webp', IMMUTABLE, 'content-hashed cover thumbnails are immutable'],
+  ['/assets/study/audio/sitting-07-readalong.mp3', REVALIDATE, 'unhashed assets revalidate within an hour'],
+  ['/assets/site/hero-main.jpg', REVALIDATE, 'unhashed site images revalidate within an hour'],
+  ['/vendor/three/build/three.module.min.js', REVALIDATE, 'unhashed vendor files revalidate within an hour'],
+  ['/bible/kjv.json', 'public, max-age=0, must-revalidate', 'Bible data always revalidates'],
+  ['/study.html', 'public, max-age=0, must-revalidate', 'pages always revalidate'],
+  ['/', 'public, max-age=0, must-revalidate', 'the home page always revalidates']
+];
+for (const [urlPath, expected, label] of expectations) {
+  const got = effectiveHeaders(urlPath).get('cache-control');
+  assert(got === expected, `${label}: ${urlPath} -> "${got}"`);
+}
+['/assets/*', '/vendor/*'].forEach(pathPattern => {
   const rule = rules.find(r => r.path === pathPattern);
-  assert(rule, `Rule for "${pathPattern}" exists`);
-  assert(rule?.headers['access-control-allow-origin']?.value === '*', `${pathPattern} allows CORS for preview and cross-origin usage`);
-  assert(rule?.headers['cache-control']?.value?.includes('max-age='), `${pathPattern} has long-term max-age caching`);
+  assert(!rule?.headers['cache-control']?.value?.includes('immutable'), `${pathPattern} is not immutable, because its files change in place`);
 });
+const coversRule = rules.find(r => r.path === '/assets/shelf/covers/*');
+const assetsRule = rules.find(r => r.path === '/assets/*');
+assert(coversRule && coversRule.detach.includes('cache-control'), '/assets/shelf/covers/* detaches the /assets/* Cache-Control before setting its own');
+assert(coversRule && assetsRule && rules.indexOf(coversRule) > rules.indexOf(assetsRule), '/assets/shelf/covers/* comes after /assets/* so its detach applies');
+assert(effectiveHeaders('/assets/shelf/covers/vol-00-cf920485.jpg').get('access-control-allow-origin') === '*', 'shelf covers keep CORS from /assets/*');
 
 if (!passed) {
   console.error('\nVerification FAILED: One or more assertions did not pass.');

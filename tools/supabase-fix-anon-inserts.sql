@@ -22,6 +22,6 @@ drop policy if exists insert_survey on public.exhibit_surveys;
 create policy insert_survey
   on public.exhibit_surveys for insert
   to public
-  with check (auth.uid() = user_id or user_id is null or auth.uid() is null);
+  with check ((auth.uid() is null and user_id is null) or auth.uid() = user_id);
 
 grant insert on public.exhibit_surveys to anon, authenticated, public;

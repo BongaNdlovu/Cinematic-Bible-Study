@@ -494,6 +494,7 @@
   }
 
   let ownReviewId = null;
+  let surveyRetry = null;
 
   function loadOwnReview() {
     const panel = document.getElementById("witness-own-review");
@@ -613,6 +614,34 @@
       setStatus("Sign in to post.", "error");
       return Promise.resolve(false);
     }
+
+    function settleSurvey(survey) {
+      const sent = !!(survey && survey.ok);
+      if (!sent) {
+        surveyRetry = { userId: String(u.id), text: parsed.text };
+        setStatus("The review saved. The survey did not send. Try again.", "error");
+      } else {
+        surveyRetry = null;
+        setStatus("Saved. It will appear after approval.", "ok");
+        const input = document.getElementById("witness-body");
+        if (input) input.value = "";
+        const ratingInput = document.getElementById("witness-rating");
+        mountStarPicker(
+          document.getElementById("witness-stars"),
+          ratingInput,
+          5
+        );
+      }
+      loadQueue();
+      loadOwnReview();
+      return { ok: true, survey: sent };
+    }
+
+    if (surveyRetry && surveyRetry.userId === String(u.id) && surveyRetry.text === parsed.text) {
+      return recordExitSurvey().then(settleSurvey, function () {
+        return settleSurvey({ ok: false });
+      });
+    }
     if (reviewDayCount() >= REVIEW_MAX) {
       setStatus("You can post 3 reviews per day.", "error");
       return Promise.resolve(false);
@@ -630,24 +659,9 @@
         setStatus("Could not save. Try again.", "error");
         return false;
       }
-      return recordExitSurvey().then(function (survey) {
-        bumpReviewDay();
-        if (!survey || !survey.ok) {
-          setStatus("The review saved. The survey did not send. Try again.", "error");
-        } else {
-          setStatus("Saved. It will appear after approval.", "ok");
-        }
-        const input = document.getElementById("witness-body");
-        if (input) input.value = "";
-        const ratingInput = document.getElementById("witness-rating");
-        mountStarPicker(
-          document.getElementById("witness-stars"),
-          ratingInput,
-          5
-        );
-        loadQueue();
-        loadOwnReview();
-        return { ok: true, survey: !!(survey && survey.ok) };
+      bumpReviewDay();
+      return recordExitSurvey().then(settleSurvey, function () {
+        return settleSurvey({ ok: false });
       });
     }).catch(function () {
       setStatus("Could not save. Try again.", "error");

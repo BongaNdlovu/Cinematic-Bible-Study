@@ -1087,7 +1087,7 @@
 
         <!-- Actions -->
         <div class="flex flex-col sm:flex-row items-center justify-between gap-3 pt-4 border-t border-paper-300 dark:border-paper-800">
-          <button type="button" onclick="window.print()" class="w-full sm:w-auto px-4 py-2.5 rounded-lg border border-paper-300 dark:border-paper-700 text-ink-700 dark:text-paper-300 font-mono text-xs hover:bg-paper-200 dark:hover:bg-paper-800 transition-colors flex items-center justify-center gap-1.5">
+          <button type="button" id="dossier-print-btn" class="w-full sm:w-auto px-4 py-2.5 rounded-lg border border-paper-300 dark:border-paper-700 text-ink-700 dark:text-paper-300 font-mono text-xs hover:bg-paper-200 dark:hover:bg-paper-800 transition-colors flex items-center justify-center gap-1.5">
             <span>🖨️ Print / Save Dossier PDF</span>
           </button>
           <button type="button" id="dossier-proceed-btn" class="w-full sm:w-auto px-6 py-2.5 rounded-lg bg-ink-900 dark:bg-paper-100 text-paper-50 dark:text-ink-900 font-sans font-bold text-xs shadow hover:bg-black dark:hover:bg-white transition-colors">
@@ -1099,6 +1099,7 @@
 
     document.body.appendChild(modal);
 
+    modal.querySelector('#dossier-print-btn').addEventListener('click', () => window.print());
     modal.querySelector('#dossier-proceed-btn').addEventListener('click', () => {
       modal.remove();
       if (typeof onProceed === 'function') onProceed();

@@ -82,6 +82,13 @@ begin
   else
     raise exception 'rate_limit';
   end if;
+  if new.user_id is null then
+    if (select count(*) from public.exhibit_events
+        where user_id is null
+          and created_at > now() - interval '1 minute') >= 600 then
+      raise exception 'rate_limit';
+    end if;
+  end if;
   return new;
 end;
 $$;

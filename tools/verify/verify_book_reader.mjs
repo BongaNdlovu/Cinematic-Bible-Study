@@ -935,6 +935,9 @@ async function runOne(browser, sheet, vpName) {
   const tag = `s${sheet}/${vpName}`;
   const vp = VP[vpName];
   const context = await browser.newContext({ viewport: { width: vp.w, height: vp.h } });
+  await context.addInitScript(() => {
+    try { localStorage.setItem('baOnboardV1', '1'); } catch (e) { /* storage disabled */ }
+  });
   const page = await context.newPage();
   const consoleErrors = [];
   const pageErrors = [];

@@ -97,6 +97,24 @@ async function rateProxy(context, request) {
   return new Response(null, { status: 204 });
 }
 
+function extensionlessUrl(url) {
+  const p = url.pathname;
+  if (!p.endsWith(".html")) return null;
+  const target = new URL(url.toString());
+  if (p === "/index.html" || p.endsWith("/index.html")) target.pathname = p.slice(0, -"index.html".length);
+  else target.pathname = p.slice(0, -".html".length);
+  return target;
+}
+
+async function servePage(context, request) {
+  const assets = context.env && context.env.ASSETS;
+  const target = request.method === "GET" ? extensionlessUrl(new URL(request.url)) : null;
+  if (!target || !assets || typeof assets.fetch !== "function") return context.next();
+  const res = await assets.fetch(new Request(target.toString(), request));
+  if (res.status >= 300 && res.status < 400) return context.next();
+  return res;
+}
+
 export async function onRequest(context) {
   const request = context.request;
   const path = new URL(request.url).pathname;
@@ -105,6 +123,7 @@ export async function onRequest(context) {
     path.startsWith("/tools") ||
     path.startsWith("/backups") ||
     path.startsWith("/workers") ||
+    path.startsWith("/functions") ||
     path.startsWith("/qa") ||
     path.startsWith("/originals") ||
     /* Third-party research copies and diagram-migration working files. Neither
@@ -140,10 +159,10 @@ export async function onRequest(context) {
   if (STATIC_PREFIXES.some(function (prefix) { return path.startsWith(prefix); })) return context.next();
   const ip = ipOf(request);
   const decision = await allowed(context, ip, path);
-  if (decision === "down") return unavailable();
   if (decision === "deny") {
     reportEdge(context, path, "cap");
     return denied();
   }
-  return context.next();
+  if (decision === "down" && request.method !== "GET") return unavailable();
+  return servePage(context, request);
 }

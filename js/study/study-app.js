@@ -1387,7 +1387,7 @@
       if (typeof canvas.transferControlToOffscreen === 'function' && typeof Worker === 'function') {
         let worker = null;
         try {
-          worker = new Worker('js/study/weather-scene.js');
+          worker = new Worker(studyAssetPath('weather') || 'js/study/weather-scene.js');
           const offscreen = canvas.transferControlToOffscreen();
           worker.postMessage({ canvas: offscreen }, [offscreen]);
           weatherWorker = worker;
@@ -1396,7 +1396,16 @@
           if (worker) worker.terminate();
         }
       }
-      if (!window.WeatherScene) return false;
+      if (!window.WeatherScene) {
+        if (!studyModuleFailed('weather')) {
+          loadStudyModule('weather').then(() => {
+            if (!weatherRunning || !window.WeatherScene) return;
+            resizeWeatherCanvas();
+            tellWeather({ state: weatherState(), run: true });
+          }, () => {});
+        }
+        return false;
+      }
       weatherScene = window.WeatherScene.create(canvas);
       return true;
     }
@@ -1777,9 +1786,52 @@
       btn.hidden = !hasCompletedCourse();
     }
 
+    const studyModules = new Map();
+
+    function studyModuleFailed(name) {
+      const entry = studyModules.get(name);
+      return !!(entry && entry.failed);
+    }
+
+    function studyAssetPath(name) {
+      const host = document.getElementById('study-chunks');
+      return host ? host.getAttribute('data-' + name) || '' : '';
+    }
+
+    function loadStudyModule(name) {
+      const known = studyModules.get(name);
+      if (known) return known.promise;
+      const entry = { failed: false };
+      const src = studyAssetPath(name);
+      entry.promise = new Promise((resolve, reject) => {
+        if (!src) { reject(new Error('no file for ' + name)); return; }
+        const tag = document.createElement('script');
+        tag.src = src;
+        tag.async = true;
+        tag.addEventListener('load', () => resolve());
+        tag.addEventListener('error', () => {
+          tag.remove();
+          reject(new Error(name + ' failed to load'));
+        });
+        document.head.appendChild(tag);
+      });
+      entry.promise.catch(() => {
+        entry.failed = true;
+        window.setTimeout(() => { if (studyModules.get(name) === entry) studyModules.delete(name); }, 30000);
+      });
+      studyModules.set(name, entry);
+      return entry.promise;
+    }
+
     function openCertificateIfReady() {
-      if (!hasCompletedCourse() || !window.StudyCertificate) return;
-      window.StudyCertificate.open();
+      if (!hasCompletedCourse()) return;
+      if (window.StudyCertificate) {
+        window.StudyCertificate.open();
+        return;
+      }
+      loadStudyModule('certificate').then(() => {
+        if (window.StudyCertificate) window.StudyCertificate.open();
+      }, () => showToast('The certificate could not load. Check your connection and try again.'));
     }
 
     function renderToc() {
@@ -3444,6 +3496,8 @@
         if (!src) {
           photoSeq += 1;
           readPhotos.forEach((layer) => {
+            if (layer.__photoWatch) layer.__photoWatch.abort();
+            layer.__photoWatch = null;
             layer.classList.remove('is-current');
             layer.removeAttribute('src');
             layer.style.transition = '';
@@ -3468,10 +3522,14 @@
           layer.style.transition = 'none';
           layer.classList.remove('is-current');
         }
+        if (layer.__photoWatch) layer.__photoWatch.abort();
+        const watch = new AbortController();
+        layer.__photoWatch = watch;
         let armed = false;
         const reveal = () => {
           if (armed) return;
           armed = true;
+          watch.abort();
           if (token !== photoSeq) {
             layer.style.transition = '';
             refreshHasPhoto();
@@ -3516,18 +3574,19 @@
           });
         };
         layer.addEventListener('error', () => {
+          watch.abort();
           if (token !== photoSeq) return;
           armed = true;
           layer.removeAttribute('src');
           layer.style.transition = '';
           layer.classList.remove('is-current');
           refreshHasPhoto();
-        }, { once: true });
+        }, { once: true, signal: watch.signal });
         layer.setAttribute('src', src);
         refreshHasPhoto();
         if (layer.complete && layer.naturalWidth) reveal();
         else {
-          layer.addEventListener('load', reveal, { once: true });
+          layer.addEventListener('load', reveal, { once: true, signal: watch.signal });
           // A cached frame can report complete before its pixels are ready, and
           // a slow one only becomes ready on load. Either path may arm the fade;
           // the second call is ignored.
@@ -4145,14 +4204,31 @@
        ones are never rendered again, so their mindmap (observers on the body, a
        frame loop) and story reader (a document listener) would otherwise live on
        and keep the whole detached article reachable. */
+    function releaseFigureFullscreen(figure) {
+      const fs = figure.__diagramFs;
+      if (fs && typeof fs.isFull === 'function' && fs.isFull()) fs.exit(false);
+      figure.__diagramFs = null;
+    }
+
+    function releaseFullscreenLeftovers() {
+      if (document.querySelector('.chain.is-full, .mm.is-full')) return;
+      document.documentElement.classList.remove('dfx-open', 'dfx-cite-open');
+      document.querySelectorAll('[data-dfx-inert]').forEach((el) => {
+        el.removeAttribute('inert');
+        el.removeAttribute('data-dfx-inert');
+      });
+    }
+
     function releaseSheetFigures(root) {
       if (!root) return;
       root.querySelectorAll('figure').forEach((figure) => {
+        releaseFigureFullscreen(figure);
         if (figure.__mm && typeof figure.__mm.destroy === 'function') figure.__mm.destroy();
         figure.__mm = null;
         if (typeof figure.__storyRelease === 'function') figure.__storyRelease();
         figure.__storyRelease = null;
       });
+      releaseFullscreenLeftovers();
     }
 
     function renderSheetDiagrams(data) {
@@ -4168,6 +4244,7 @@
          lives on <html>, not on the figure, so it is the one thing that would
          survive the rewrite with nothing left on screen to release it. */
       document.documentElement.classList.remove('dfx-open');
+      releaseFullscreenLeftovers();
       const sheet = data || {};
       // Sittings mid-migration may still carry the single-diagram field.
       const specs = sheet.diagrams || (sheet.diagram ? { legacy: sheet.diagram } : {});
@@ -4180,6 +4257,7 @@
         // The mindmap owns a rAF loop, a ResizeObserver, an IntersectionObserver
         // and a block-scoped key listener. A sitting switch rebuilds the article,
         // so the previous mount is torn down before the figure is rewritten.
+        releaseFigureFullscreen(figure);
         if (figure.__mm && typeof figure.__mm.destroy === 'function') figure.__mm.destroy();
         figure.__mm = null;
         if (typeof figure.__storyRelease === 'function') figure.__storyRelease();
@@ -4693,6 +4771,11 @@
     async function getStrongsData() {
       if (strongsDataCache) return strongsDataCache;
       try {
+        const scripture = window.BAScripture;
+        if (scripture && typeof scripture.loadStrongs === 'function') {
+          strongsDataCache = (await scripture.loadStrongs()) || {};
+          return strongsDataCache;
+        }
         const res = await fetch('bible/strongs-daniel.json');
         if (res.ok) {
           strongsDataCache = await res.json();
@@ -5068,10 +5151,43 @@
       requestAnimationFrame(() => { scrollHold = false; });
     }
 
+    let sheetLoadTicket = 0;
+
+    function sheetDataReady(index) {
+      const row = sheetsData[index];
+      if (!row || typeof row.content !== 'string') return false;
+      const store = window.StudySheets;
+      if (store && typeof store.isReady === 'function') return store.isReady(index);
+      return true;
+    }
+
+    function sheetHasKind(data, kind) {
+      const specs = (data && data.diagrams) || {};
+      return Object.keys(specs).some((id) => specs[id] && specs[id].kind === kind);
+    }
+
+    function sheetNeeds(index) {
+      if (!sheetDataReady(index)) return window.StudySheets.ensure(index);
+      if (!window.MindMap && !studyModuleFailed('mindmap') && sheetHasKind(sheetsData[index], 'mindmap')) {
+        return loadStudyModule('mindmap').catch(() => {});
+      }
+      return null;
+    }
+
     function loadSheet(index, opts) {
       if (index < 0 || index >= sheetsData.length) return;
       if (!canAccessSheet(index)) {
         denyLockedSitting(index);
+        return;
+      }
+      const ticket = ++sheetLoadTicket;
+      const needs = sheetNeeds(index);
+      if (needs) {
+        needs.then(() => {
+          if (ticket === sheetLoadTicket) loadSheet(index, opts);
+        }, () => {
+          if (ticket === sheetLoadTicket) showToast('This sitting could not load. Check your connection and try again.');
+        });
         return;
       }
       rememberSheetUrl(index);
@@ -5185,9 +5301,11 @@
         ? window.Onboard.gate()
         : Promise.resolve();
       Promise.all([wait, bookOpened()]).then(openIntro);
+      if (window.StudySheets && typeof window.StudySheets.prefetchAround === 'function') window.StudySheets.prefetchAround(index);
     }
 
     function sheetQuizComplete() {
+      if (!sheetDataReady(currentSheetIndex)) return false;
       const quizzes = (sheetsData[currentSheetIndex] && sheetsData[currentSheetIndex].quizzes) || [];
       if (!quizzes.length) return true;
       return quizzes.every((q, i) => verifiedQuiz[i] === true);
@@ -5434,7 +5552,7 @@
 
       if (isCorrect) {
         feedback.className = "mt-4 p-4 rounded-lg font-sans text-xs sm:text-sm leading-relaxed border border-emerald-500/50 bg-emerald-50 dark:bg-emerald-950/30 text-emerald-900 dark:text-emerald-200";
-        feedback.innerHTML = `<strong>✓ Historicist Exegesis:</strong> ${questionData.explanation}${note ? `<div class="mt-2.5 pt-2 border-t border-current/20 font-mono text-xs">${note}</div>` : ''}${diagMsg}`;
+        feedback.innerHTML = `<strong>✓ Historicist Exegesis:</strong> ${questionData.explanation}${note ? `<div class="mt-2.5 pt-2 border-t border-current/20 font-mono text-xs">${escapeStudy(note)}</div>` : ''}${diagMsg}`;
         showToast("Correct! Understanding verified.");
       } else {
         feedback.className = "mt-4 p-4 rounded-lg font-sans text-xs sm:text-sm leading-relaxed border border-rose-500/50 bg-rose-50 dark:bg-rose-950/30 text-rose-900 dark:text-rose-200";
@@ -5442,9 +5560,11 @@
           <div><strong>Key Doctrine:</strong> ${questionData.explanation}</div>
           ${diagMsg}
           <div class="mt-3">
-            <button type="button" class="px-3 py-1 rounded bg-rose-700 text-white text-xs font-semibold hover:bg-rose-800 transition-colors" onclick="resetQuizQuestion(${qIdx})">Try Again</button>
+            <button type="button" class="px-3 py-1 rounded bg-rose-700 text-white text-xs font-semibold hover:bg-rose-800 transition-colors" data-quiz-retry>Try Again</button>
           </div>
         `;
+        const retry = feedback.querySelector('[data-quiz-retry]');
+        if (retry) retry.addEventListener('click', () => resetQuizQuestion(qIdx));
         showToast("Review the historicist explanation and try again.");
       }
     }
@@ -5490,17 +5610,27 @@
             updateNextGate();
             return;
           }
-          if (feedback) feedback.classList.add('hidden');
+          const unchecked = cause === 'not_found' || cause === 'bad_input' || cause === 'bad_response';
+          if (feedback) {
+            feedback.className = "mt-4 p-4 rounded-lg font-sans text-xs sm:text-sm leading-relaxed border border-paper-300 dark:border-paper-800 bg-paper-50 dark:bg-paper-900/40 text-ink-700 dark:text-paper-300";
+            feedback.classList.remove('hidden');
+            feedback.textContent = unchecked
+              ? 'This question could not be checked right now. Your pick was not marked right or wrong; please try again later.'
+              : 'The record could not verify that answer. Your pick was not marked right or wrong; check your connection and try again.';
+          }
+          delete answeredQuestions[qIdx];
           if (window.SiteOps && typeof window.SiteOps.report === 'function') {
             window.SiteOps.report('quiz_verify_failed', cause, { q: qIdx, cause: cause });
           }
-          showToast('The record could not verify that answer. Check your connection and try again.');
+          showToast(unchecked
+            ? 'This question could not be checked right now.'
+            : 'The record could not verify that answer. Check your connection and try again.');
           updateNextGate();
           return;
         }
 
         const isCorrect = !!res.correct;
-        const correctIdx = typeof res.correctIdx === 'number' ? res.correctIdx : selectedOptIdx;
+        const correctIdx = typeof res.correctIdx === 'number' ? res.correctIdx : (isCorrect ? selectedOptIdx : -1);
         verifiedQuiz[qIdx] = isCorrect;
         if (isCorrect) markCheckpoint(qIdx, 'true');
 

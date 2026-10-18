@@ -2019,7 +2019,13 @@ async function startRoom() {
      ================================================================= */
   let hovered = -1, focusIdx = -1, lastHoverSound = -1;
   let lastInput = performance.now();
-  const noteInput = () => { lastInput = performance.now(); };
+  function noteInput() {
+    lastInput = performance.now();
+    if (running && !rafId) {
+      clock.getDelta();
+      loop();
+    }
+  }
   for (const ev of ['pointerdown', 'pointermove', 'wheel', 'keydown']) document.addEventListener(ev, noteInput, { capture: true, passive: true });
   const pointer = new THREE.Vector2(0, 0), pointerS = new THREE.Vector2(0, 0);
   const ray = new THREE.Raycaster();
@@ -2299,7 +2305,7 @@ async function startRoom() {
 
   let simT = 0;
   let shadowSettle = 3, shadowTick = 0, keyWasOn = false, introDone = false;
-  let pendingDt = 0, skipToggle = false;
+  let pendingDt = 0;
   function requestShadows(light) {
     if (!light.castShadow) return;
     light.shadow.needsUpdate = true;
@@ -2335,14 +2341,18 @@ async function startRoom() {
       !books.some((b) => b.mode === 'seq') && performance.now() - lastInput > 4000;
   }
   function loop() {
-    if (!running) return;
-    rafId = requestAnimationFrame(loop);
+    if (!running) { rafId = 0; return; }
     const raw = clock.getDelta();
-    if (window.__shelf && window.__shelf.frozen) return;
+    if (window.__shelf && window.__shelf.frozen) {
+      rafId = requestAnimationFrame(loop);
+      return;
+    }
     governor(raw);
+    /* A shelf nobody is touching has nothing new to draw. Park the frame
+       until the next pointer, wheel, or key. noteInput starts it again. */
+    if (isIdle()) { rafId = 0; return; }
+    rafId = requestAnimationFrame(loop);
     pendingDt += Math.min(raw, 0.05);
-    skipToggle = !skipToggle;
-    if (skipToggle && isIdle()) return;
     const dt = pendingDt;
     pendingDt = 0;
     update(dt);

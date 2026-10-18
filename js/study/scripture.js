@@ -365,6 +365,17 @@
     root._baScriptureBound = true;
   }
 
+  let strongsReady = null;
+  function loadStrongs() {
+    if (strongsReady) return strongsReady;
+    strongsReady = fetch("bible/strongs-daniel.json").then((res) => {
+      if (!res.ok) throw new Error("strongs-daniel.json " + res.status);
+      return res.json();
+    });
+    strongsReady.catch(() => { strongsReady = null; });
+    return strongsReady;
+  }
+
   function ensureLoaded() {
     if (ready) return ready;
     ready = Promise.all([
@@ -372,10 +383,7 @@
         if (!res.ok) throw new Error("kjv.json " + res.status);
         return res.json();
       }),
-      fetch("bible/strongs-daniel.json").then((res) => {
-        if (!res.ok) throw new Error("strongs-daniel.json " + res.status);
-        return res.json();
-      }),
+      loadStrongs(),
       fetch("bible/sheet-passages.json").then((res) => {
         if (!res.ok) throw new Error("sheet-passages.json " + res.status);
         return res.json();
@@ -429,6 +437,7 @@
     isHighlighted: isHighlighted,
     verseSet: verseSet,
     findPhrase: findPhrase,
-    whenReady: function () { return ensureLoaded(); }
+    whenReady: function () { return ensureLoaded(); },
+    loadStrongs: loadStrongs
   };
 })();

@@ -120,4 +120,12 @@ assert.strictEqual(/q\.correct|correctIdx\s*=\s*q\.correct/.test(read("qa-e2e/pr
 assert.ok(read("js/study/study-app.js").includes("QuizGate.verify"), "study-app.js grades through QuizGate");
 assert.ok(read("js/study/study-app.js").includes("Answer checking is available to signed-in members."), "signed-out answers point to the Account page");
 
+/* 6. The per-sitting files the page loads are built from sheets-data.js and carry no key either. */
+const { render } = await import("../build_study_sheets.mjs");
+const built = render().files;
+Object.keys(built).forEach((name) => {
+  assert.strictEqual(read("js/study/sheets/" + name), built[name], `js/study/sheets/${name} matches sheets-data.js (run node tools/build_study_sheets.mjs)`);
+  assert.strictEqual(/"correct"\s*:/.test(built[name]), false, `js/study/sheets/${name} ships no correct index`);
+});
+
 console.log("quiz integrity: key scrubbed, server seed complete, RPC grading, fail-closed paths hold");

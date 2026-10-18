@@ -47,13 +47,10 @@ as $$
     select 1
     from auth.users u
     join public.exhibit_moderators m
-      on m.email = lower(btrim(coalesce(
-        u.email,
-        u.raw_user_meta_data ->> 'email',
-        auth.jwt() ->> 'email',
-        ''
-      )))
+      on m.email = lower(btrim(u.email))
     where u.id = auth.uid()
+      and u.email is not null
+      and u.email_confirmed_at is not null
   );
 $$;
 
@@ -122,7 +119,10 @@ create trigger exhibit_reviews_force_pending
 alter table public.exhibit_reviews
   add column if not exists rating smallint check (rating between 1 and 5);
 
-grant select on public.exhibit_reviews to anon, authenticated;
+revoke select on public.exhibit_reviews from anon, public;
+grant select (id, display_name, body, rating, created_at, approved, rejected)
+  on public.exhibit_reviews to anon;
+grant select on public.exhibit_reviews to authenticated;
 grant insert, update on public.exhibit_reviews to authenticated;
 grant execute on function public.is_review_moderator() to authenticated;
 

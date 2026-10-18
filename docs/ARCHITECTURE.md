@@ -96,11 +96,11 @@ Run verify scripts from the repo root so `server.py` and document-relative paths
 
 | Score | Function | File:line |
 |---:|---|---|
-| 53 | `selectAsset` | `js/gallery/app.js:3151` |
-| 47 | `start` | `js/map/map.js:1015` |
-| 45 | `mergeCloudWithLocal` | `js/shared/progress-sync.js:132` |
-| 44 | `update` | `js/home/shelf.js:2210` |
-| 43 | `normalize` | `js/shared/journey.js:132` |
+| 53 | `selectAsset` | `js/gallery/app.js:3172` |
+| 45 | `mount` | `js/map/map.js:165` |
+| 44 | `update` | `js/home/shelf.js:2386` |
+| 43 | `(anonymous)` | `js/home/shelf.js:433` |
+| 43 | `mergeCloudWithLocal` | `js/shared/progress-sync.js:143` |
 
 ## Progress save and recovery
 
@@ -114,6 +114,7 @@ Two Supabase migrations back the newer sync features; both run once in the SQL e
 |---|---|---|
 | `tools/supabase-study-sync.sql` | `exhibit_study_data` — per-sheet notes + bookmarks, newest-timestamp merge | `js/shared/study-sync.js` |
 | `tools/supabase-quiz-integrity.sql` | `exhibit_quiz_keys` + `verify_quiz_answer` RPC — the checkpoint answer key, removed from the client bundle by `tools/audit/scrub_quiz_keys.mjs` | `js/shared/quiz-gate.js` |
+| `tools/supabase-desk.sql` | Operator notices, per-reader read state, and notes to the operator | `js/shared/desk.js` |
 
 Run both SQL files **before** deploying the matching client release: until `verify_quiz_answer` exists, checkpoint questions cannot be graded and the sitting gate stays closed (fail-closed by design, with a `quiz_verify_failed` ops report). Under the localhost QA mock session quiz answers pass in practice mode instead.
 

@@ -190,14 +190,10 @@
       yearId: opts.year || DATA.epochs[0].id,
       polities: null,
       yearGen: 0,
-      kind: "leaflet",
       base: "satellite",
       lmap: null,
-      gmap: null,
       geoLayer: null,
       markerLayer: null,
-      gPolys: [],
-      gMarkers: [],
       glowLayer: null,
       labelTiles: null,
       playing: false,
@@ -219,7 +215,8 @@
     let globeLoading = null;
     let globeFailed = !cinematic || !window.WebGL2RenderingContext;
     let mapCredit = "";
-    let globePending = false;
+    let globeAsk = null;
+    let routeRun = 0;
 
     function sheetPack() {
       if (state.sheetIndex == null || !window.SHEET_MAP) return null;
@@ -483,10 +480,11 @@
     }
 
     async function showGlobe(from) {
-      if (globePending) return false;
-      globePending = true;
+      const ask = { from: from };
+      globeAsk = ask;
       const g = await ensureGlobe();
-      globePending = false;
+      if (globeAsk !== ask) return false;
+      globeAsk = null;
       if (!g) return false;
       if (!from && state.view === "globe") return true;
       const c = from || (state.lmap ? { lat: state.lmap.getCenter().lat, lon: state.lmap.getCenter().lng } : epochFocus(currentEpoch()));
@@ -557,12 +555,6 @@
         const go = animate ? globe.flyTo(lat, lon, globeDistance(z)) : (globe.jumpTo(lat, lon, globeDistance(z)), Promise.resolve());
         return go.then(hideBadge);
       }
-      if (state.kind === "google" && state.gmap) {
-        state.gmap.panTo({ lat: lat, lng: lon });
-        state.gmap.setZoom(z);
-        setTimeout(hideBadge, 900);
-        return Promise.resolve();
-      }
       if (!state.lmap) { hideBadge(); return Promise.resolve(); }
       if (animate && !REDUCE) {
         state.lmap.flyTo([lat, lon], z, { duration: 1.55, easeLinearity: 0.2 });
@@ -590,11 +582,6 @@
         state.lmap.removeLayer(state.routeLayer);
         state.routeLayer = null;
       }
-      if (state.gmap) {
-        state.gmap.data.forEach((f) => state.gmap.data.remove(f));
-        state.gMarkers.forEach((m) => m.setMap(null));
-        state.gMarkers = [];
-      }
     }
 
     function selectPolity(name) {
@@ -611,13 +598,36 @@
       });
     }
 
+    function routeFor(ep) {
+      return (DATA.routes || []).find((r) => r.yearIds.indexOf(ep.id) !== -1) || null;
+    }
+
+    function dropEventParam(keepId) {
+      if (!cinematic || !history.replaceState) return;
+      try {
+        const u = new URL(location.href);
+        const id = u.searchParams.get("event");
+        if (!id || id === keepId) return;
+        u.searchParams.delete("event");
+        history.replaceState(null, "", u.pathname + u.search);
+      } catch (e) {}
+    }
+
+    function closeDossier() {
+      routeRun++;
+      dossier.classList.remove("open");
+    }
+
     function openDossier(d) {
-      if (window.Insights) window.Insights.track('map_pin', state.sheetIndex, { id: (d && (d.id || d.title)) || '' });
-      if (d && d.kind !== "epoch") state.yearGen++;
+      const pin = d.kind !== "epoch" && !d.routeStop;
+      if (window.Insights && pin) window.Insights.track('map_pin', state.sheetIndex, { id: d.id || d.title || '' });
+      if (d.kind !== "epoch") state.yearGen++;
+      dropEventParam(pin ? d.id : null);
       const ep = currentEpoch();
       const studyHref = "study.html?id=" + ep.studySheet;
       const galHref = "gallery.html" + (ep.galleryId ? "?id=" + ep.galleryId : "");
       const fullHref = "map.html?year=" + ep.id;
+      const routeBtn = routeFor(ep) ? '<button type="button" class="cmap-play-route cmap-route-go">Play route</button>' : "";
       dossier.innerHTML = `
         <button class="cmap-close" type="button" aria-label="Close">✕</button>
         <div class="kicker">${d.kicker || ep.kicker}</div>
@@ -630,7 +640,7 @@
         ${d.art ? '<img src="' + d.art + '" alt="">' : ""}
         ${siteExtrasHtml(d)}
         <div class="cmap-dossier-actions">
-          ${cinematic ? '<a href="' + studyHref + '">Read in the study desk</a><a href="' + galHref + '">View in 3D</a><button type="button" class="cmap-play-route">Play route</button>' + (d.lat != null ? '<button type="button" class="cmap-play-route cmap-closeup">Close-up</button>' : "")
+          ${cinematic ? '<a href="' + studyHref + '">Read in the study desk</a><a href="' + galHref + '">View in 3D</a>' + routeBtn + (d.lat != null ? '<button type="button" class="cmap-play-route cmap-closeup">Close-up</button>' : "")
             : '<a class="cmap-enter" href="' + fullHref + '">Enter cinematic map →</a>'}
         </div>`;
       const closeBtn = dossier.querySelector(".cmap-closeup");
@@ -647,8 +657,8 @@
         void dossier.offsetWidth;
         dossier.classList.add("is-swapping");
       }
-      dossier.querySelector(".cmap-close").addEventListener("click", () => dossier.classList.remove("open"));
-      const playRouteBtn = dossier.querySelector(".cmap-play-route");
+      dossier.querySelector(".cmap-close").addEventListener("click", closeDossier);
+      const playRouteBtn = dossier.querySelector(".cmap-route-go");
       if (playRouteBtn) playRouteBtn.addEventListener("click", () => playRoute(ep));
       if (opts.onSelect) opts.onSelect(d, ep);
     }
@@ -688,31 +698,6 @@
       const raw = currentPolities(ep);
       syncGlobe(ep, raw);
       const feats = raw.map(smoothFeature);
-
-      if (state.kind === "google" && state.gmap) {
-        if (state.layers.borders) {
-          state.gmap.data.addGeoJson({ type: "FeatureCollection", features: feats });
-          state.gmap.data.setStyle((feature) => {
-            const name = feature.getProperty("name");
-            const st = fillStyle(DATA.empires[name], opacity);
-            const active = DATA.empires[name] && DATA.empires[name].id === ep.focus;
-            return {
-              fillColor: st.fillColor,
-              fillOpacity: st.fillOpacity,
-              strokeColor: st.color,
-              strokeWeight: active ? 4 : 3,
-              strokeOpacity: 0.95
-            };
-          });
-          state.gmap.data.addListener("click", (ev) => {
-            selectPolity(ev.feature.getProperty("name"));
-          });
-        }
-        if (state.layers.cities) DATA.cities.forEach((c) => addGoogleMarker(c, false, ep));
-        if (state.layers.events) DATA.events.forEach((evn) => addGoogleMarker(evn, true, ep));
-        lessonExtraItems(ep).forEach((item) => addGoogleMarker(item, item.kind !== "city", ep));
-        return;
-      }
 
       if (!state.lmap) return;
       if (state.layers.borders) {
@@ -799,9 +784,12 @@
     }
 
     async function playRoute(ep) {
-      const route = (DATA.routes || []).find((r) => r.yearIds.indexOf(ep.id) !== -1);
+      const route = routeFor(ep);
       if (!route || !state.lmap) return;
+      const run = ++routeRun;
+      const live = () => run === routeRun && state.yearId === ep.id && dossier.classList.contains("open");
       for (let i = 0; i < route.stops.length; i++) {
+        if (!live()) return;
         const stop = route.stops[i];
         if (state.view === "globe" && globe) globe.flyTo(stop.lat, stop.lon, 1.9);
         else state.lmap.flyTo([stop.lat, stop.lon], Math.max(tileZoom(ep), 6), { duration: 1.1 });
@@ -812,7 +800,8 @@
           cite: ep.scripture,
           art: stop.art || ep.art,
           kind: "event",
-          id: ep.event
+          id: ep.event,
+          routeStop: true
         });
         await new Promise((r) => setTimeout(r, REDUCE ? 200 : 1600));
       }
@@ -1040,33 +1029,6 @@
       mk.addTo(state.markerLayer);
     }
 
-    function addGoogleMarker(item, isEvent, ep) {
-      if (!nodeOpen(item.id)) return;
-      const lesson = isLessonId(item.id);
-      const hot = lesson || (isEvent ? item.yearId === ep.id : (item.pulse || []).includes(ep.id));
-      if (isEvent && !hot && !cinematic) return;
-      const kind = isEvent ? (item.kind || "battle") : "city";
-      const mk = new google.maps.Marker({
-        position: { lat: item.lat, lng: item.lon },
-        map: state.gmap,
-        title: item.name,
-        opacity: hot ? 1 : 0.5,
-        zIndex: hot ? 800 : 200,
-        icon: {
-          url: iconSrc(kind),
-          scaledSize: new google.maps.Size(40, 40),
-          anchor: new google.maps.Point(20, 20)
-        }
-      });
-      mk.addListener("click", () => {
-        if (isEvent && item.yearId !== state.yearId && !lesson) {
-          setYear(item.yearId, { animate: true, chapter: cinematic });
-        }
-        openDossier(markerCopy(item, isEvent));
-      });
-      state.gMarkers.push(mk);
-    }
-
     function destroyLeaflet() {
       if (state.lmap) {
         state.lmap.fire("moveend");
@@ -1081,17 +1043,10 @@
       state.footprint = null;
       state.beaconMarker = null;
     }
-    function destroyGoogle() {
-      state.gMarkers.forEach((m) => m.setMap(null));
-      state.gMarkers = [];
-      state.gmap = null;
-    }
 
     function initLeaflet(base) {
-      destroyGoogle();
       destroyLeaflet();
       tiles.innerHTML = "";
-      state.kind = "leaflet";
       state.base = base;
       const ep = currentEpoch();
       state.lmap = L.map(tiles, {
@@ -1260,6 +1215,8 @@
         try {
           const u = new URL(location.href);
           u.searchParams.set("year", ep.id);
+          const evn = DATA.events.find((e) => e.id === u.searchParams.get("event"));
+          if (!evn || evn.yearId !== ep.id) u.searchParams.delete("event");
           if (state.sheetIndex != null) u.searchParams.set("sheet", String(state.sheetIndex));
           history.replaceState(null, "", u.pathname + u.search);
         } catch (e) {}
@@ -1485,7 +1442,9 @@
       });
       DATA.cities.forEach((c) => {
         if (!nodeOpen(c.id)) return;
-        if (c.name.toLowerCase().indexOf(q) !== -1) hits.push({ kind: "city", id: c.id, year: (c.pulse && c.pulse[0]) || state.yearId, label: c.name, lat: c.lat, lon: c.lon });
+        const pulse = c.pulse || [];
+        const year = pulse.includes(state.yearId) ? state.yearId : (pulse[0] || state.yearId);
+        if (c.name.toLowerCase().indexOf(q) !== -1) hits.push({ kind: "city", id: c.id, year: year, label: c.name, lat: c.lat, lon: c.lon });
       });
       DATA.events.forEach((evn) => {
         if (!nodeOpen(evn.id)) return;
@@ -1500,7 +1459,7 @@
       searchHits.hidden = true;
       searchInput.value = "";
       const year = b.dataset.year;
-      if (year) setYear(year, { animate: true, chapter: cinematic });
+      if (year && (b.dataset.kind === "year" || year !== state.yearId)) setYear(year, { animate: true, chapter: cinematic });
       if (b.dataset.lat && state.view === "globe" && globe) globe.flyTo(Number(b.dataset.lat), Number(b.dataset.lon), 2.0);
       else if (b.dataset.lat && state.lmap) state.lmap.flyTo([Number(b.dataset.lat), Number(b.dataset.lon)], 7);
       // A picked hit should open its place panel, not just fly the camera there.
@@ -1540,7 +1499,7 @@
         const t = ev.target;
         const typing = t && (t.tagName === "INPUT" || t.tagName === "TEXTAREA" || t.tagName === "SELECT" || t.isContentEditable);
         if (ev.key === "Escape") {
-          dossier.classList.remove("open");
+          closeDossier();
           return;
         }
         if (typing) return;
@@ -1553,7 +1512,6 @@
 
     function resize() {
       if (state.lmap) state.lmap.invalidateSize();
-      if (state.gmap) google.maps.event.trigger(state.gmap, "resize");
     }
     window.addEventListener("resize", resize);
     if (window.ResizeObserver) new ResizeObserver(resize).observe(stage);
@@ -1656,10 +1614,13 @@
 
     function refreshJourneyLocks() {
       if (!mapReady) return;
-      const params = new URLSearchParams(location.search);
-      let id = parseYearParam(params.get("year")) || state.yearId;
-      if (!yearOpen(id)) id = firstOpenYear();
-      setYear(id, { animate: false, chapter: false, open: false });
+      if (!yearOpen(state.yearId)) {
+        setYear(firstOpenYear(), { animate: false, chapter: false, open: false });
+        return;
+      }
+      const ep = currentEpoch();
+      updateChrome(ep);
+      drawOverlays(ep);
     }
     if (window.ScrollAuth && typeof window.ScrollAuth.onChange === "function") {
       window.ScrollAuth.onChange(refreshJourneyLocks);

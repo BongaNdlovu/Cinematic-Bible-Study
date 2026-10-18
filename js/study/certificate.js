@@ -681,9 +681,10 @@
                 statusEl.className = "text-xs font-semibold text-amber-600 dark:text-amber-400";
                 statusEl.textContent = "The review saved. The survey did not send. Try again.";
               }
+              if (bodyInput) bodyInput.readOnly = true;
               if (submitBtn) {
                 submitBtn.disabled = false;
-                submitBtn.textContent = "Submit Review";
+                submitBtn.textContent = "Send survey again";
               }
               return;
             }

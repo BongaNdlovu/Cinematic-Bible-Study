@@ -20,7 +20,18 @@
   let retryAttempt = 0;
   let applyingMerge = false;
   let isSyncing = false;
+  let pushAfterSync = false;
   let knownRevision = null;
+  const UNSAFE_KEYS = ['__proto__', 'constructor', 'prototype'];
+
+  function plainObject(value) {
+    const out = {};
+    if (!value || typeof value !== 'object' || Array.isArray(value)) return out;
+    Object.keys(value).forEach(function (key) {
+      if (UNSAFE_KEYS.indexOf(key) === -1) out[key] = value[key];
+    });
+    return out;
+  }
 
   function getLastPushAt() {
     let sessionVal = 0;
@@ -159,12 +170,12 @@
 
     // 2. Merge Workbench state
     try {
-      const localWb = JSON.parse(localStorage.getItem('daniel_workbench_v1') || '{}');
-      const remoteWb = (remote && remote.workbench) || {};
+      const localWb = plainObject(JSON.parse(localStorage.getItem('daniel_workbench_v1') || '{}'));
+      const remoteWb = plainObject(remote && remote.workbench);
       const mergedWb = Object.assign({}, remoteWb);
       Object.keys(localWb).forEach(function (sheetId) {
         if (!mergedWb[sheetId]) mergedWb[sheetId] = {};
-        Object.keys(localWb[sheetId] || {}).forEach(function (taskId) {
+        Object.keys(plainObject(localWb[sheetId])).forEach(function (taskId) {
           if (localWb[sheetId][taskId]) {
             if (!(remoteWb[sheetId] && remoteWb[sheetId][taskId])) {
               localHadNew = true;
@@ -178,8 +189,8 @@
 
     // 3. Merge Telemetry
     try {
-      const localTel = JSON.parse(localStorage.getItem('daniel_competency_telemetry_v1') || '{}');
-      const remoteTel = (remote && remote.telemetry) || {};
+      const localTel = plainObject(JSON.parse(localStorage.getItem('daniel_competency_telemetry_v1') || '{}'));
+      const remoteTel = plainObject(remote && remote.telemetry);
       const mergedArtifacts = Array.from(new Set([
         ...(localTel.verifiedArtifacts || []),
         ...(remoteTel.verifiedArtifacts || [])
@@ -227,7 +238,10 @@
       try { return localStorage.getItem(ACCOUNT_KEY) || ''; } catch (e) { return ''; }
     })();
     const switched = !!(prev && uid && prev !== uid);
-    if (switched) clearLocalLearnerProgress();
+    if (switched) {
+      clearLocalLearnerProgress();
+      knownRevision = null;
+    }
     try { if (uid) localStorage.setItem(ACCOUNT_KEY, uid); } catch (e) {}
 
     isSyncing = true;
@@ -236,8 +250,9 @@
       .eq('user_id', u.id)
       .maybeSingle()
       .then(function (res) {
+        if (accountMoved(uid)) return repull();
         if (res && res.error) {
-          isSyncing = false;
+          settleSync();
           const cause = errorCause(res.error);
           if (cause !== 'not_authenticated') {
             reportPullMiss(cause);
@@ -248,7 +263,7 @@
         const remote = res && res.data;
         if (remote && typeof remote.revision === 'number') knownRevision = remote.revision;
         if (localProgressDamaged()) {
-          isSyncing = false;
+          settleSync();
           return null;
         }
         if (!readOutbox()) {
@@ -257,7 +272,7 @@
         if (!remote) {
           // New cloud row: do not carry another account's desk onto this login.
           if (switched) notifyProgressSynced();
-          isSyncing = false;
+          settleSync();
           syncNow();
           return null;
         }
@@ -265,7 +280,7 @@
         if (switched) {
           applyCloudProgress(remote);
           notifyProgressSynced();
-          isSyncing = false;
+          settleSync();
           if (readOutbox()) syncNow();
           return remote;
         }
@@ -278,20 +293,38 @@
           }
         } catch (e) {}
 
-        isSyncing = false;
+        settleSync();
         if (localHadNew || readOutbox()) {
           syncNow();
         }
         return remote;
       })
       .catch(function (err) {
-        isSyncing = false;
+        if (accountMoved(uid)) return repull();
+        settleSync();
         const cause = errorCause(err);
         if (cause !== 'not_authenticated') {
           reportPullMiss(cause);
         }
         return null;
       });
+  }
+
+  function accountMoved(uid) {
+    return accountId(currentUser()) !== uid;
+  }
+
+  function repull() {
+    isSyncing = false;
+    pushAfterSync = false;
+    return currentUser() ? pullAndMerge() : null;
+  }
+
+  function settleSync() {
+    isSyncing = false;
+    if (!pushAfterSync) return;
+    pushAfterSync = false;
+    syncNow();
   }
 
   function noteUnreadable() {
@@ -326,10 +359,11 @@
   }
 
   function taskUnion(remoteWb, localWb) {
-    const merged = Object.assign({}, remoteWb || {});
-    Object.keys(localWb || {}).forEach(function (sheetId) {
+    const merged = plainObject(remoteWb);
+    const local = plainObject(localWb);
+    Object.keys(local).forEach(function (sheetId) {
       if (!merged[sheetId]) merged[sheetId] = {};
-      Object.keys(localWb[sheetId] || {}).forEach(function (taskId) {
+      Object.keys(plainObject(localWb[sheetId])).forEach(function (taskId) {
         if (localWb[sheetId][taskId]) merged[sheetId][taskId] = true;
       });
     });
@@ -343,8 +377,8 @@
   }
 
   function telemetryUnion(localTel, remoteTel) {
-    const local = localTel || {};
-    const remote = remoteTel || {};
+    const local = plainObject(localTel);
+    const remote = plainObject(remoteTel);
     return Object.assign({}, remote, local, {
       verifiedArtifacts: Array.from(new Set([].concat(local.verifiedArtifacts || [], remote.verifiedArtifacts || []))),
       scriptureLookups: Array.from(new Set([].concat(local.scriptureLookups || [], remote.scriptureLookups || []))),
@@ -353,8 +387,8 @@
   }
 
   function mergeConflict(local, remote) {
-    const localJourney = (local && local.journey) || {};
-    const remoteJourney = (remote && remote.journey) || {};
+    const localJourney = plainObject(local && local.journey);
+    const remoteJourney = plainObject(remote && remote.journey);
     const sheets = sheetUnion(localJourney.completedSheets, remoteJourney.completedSheets || (remote && remote.mastery));
     const cohort = keepText(localJourney.cohort || (local && local.cohort), (remote && remote.cohort) || remoteJourney.cohort) || null;
     return {
@@ -586,7 +620,10 @@
       if (!u) clearSaveMiss();
       return Promise.resolve(null);
     }
-    if (isSyncing) return Promise.resolve(null);
+    if (isSyncing) {
+      pushAfterSync = true;
+      return Promise.resolve(null);
+    }
     if (fromTimer) {
       const stored = readOutbox();
       if (!stored) {

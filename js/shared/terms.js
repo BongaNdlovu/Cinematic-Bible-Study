@@ -1,6 +1,10 @@
 (function () {
   const NEXT_KEY = "baTermsNext";
   const HUB = "account.html";
+  const PAGES = [
+    "", "index", "index.html", "study", "study.html", "map", "map.html", "gallery", "gallery.html",
+    "reviews", "reviews.html", "insights", "insights.html", "shelf", "shelf.html"
+  ];
 
   function journey() {
     return window.BAJourney;
@@ -39,12 +43,16 @@
   }
 
   function sameOriginPath(raw) {
-    if (!raw) return null;
+    if (!raw || typeof raw !== "string") return null;
+    if (raw.indexOf("\\") >= 0) return null;
     try {
       const dest = new URL(raw, location.href);
       if (dest.origin !== location.origin) return null;
+      if (dest.protocol !== "http:" && dest.protocol !== "https:") return null;
+      if (dest.pathname.indexOf("//") >= 0 || dest.pathname.indexOf("\\") >= 0) return null;
       const file = (dest.pathname.split("/").pop() || "").split("?")[0];
       if (file === "account.html" || file === "account") return null;
+      if (PAGES.indexOf(file) < 0) return null;
       return dest.pathname + dest.search + dest.hash;
     } catch (e) {
       return null;

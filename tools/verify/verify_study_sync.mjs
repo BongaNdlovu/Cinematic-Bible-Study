@@ -182,6 +182,146 @@ now += 10000;
 await StudySync.pushNow();
 assert.strictEqual(upserts.length, before, "oversized payload is not uploaded");
 assert.strictEqual(store.baStudySyncOutbox, undefined, "oversized payload is not queued");
+global.localStorage.removeItem("baNote-2");
+
+// 8. A stale outbox snapshot never replaces newer local edits.
+StudySync.recordNote(3, "Newest edit.");
+store.baStudySyncOutbox = JSON.stringify({ notes: { "3": { body: "Stale snapshot.", updatedAt: 1 } }, bookmarks: [] });
+now += 10000;
+await StudySync.pushNow();
+assert.strictEqual(upserts[upserts.length - 1].notes["3"].body, "Newest edit.", "push sends current local notes, not the old outbox");
+assert.strictEqual(store.baStudySyncOutbox, undefined, "successful push clears the pending marker");
+
+// 9. Sign out, then a different learner signs in: the first learner's notes must not reach them.
+const flush = () => new Promise((resolve) => setImmediate(resolve));
+let authListener = null;
+global.window.ScrollAuth.onChange = (fn) => { authListener = fn; };
+global.window.ScrollAuth.ready = () => new Promise(() => {});
+StudySync.init();
+assert.ok(authListener, "study sync subscribes to auth changes");
+StudySync.recordNote(5, "Learner one's private note.");
+now += 10000;
+await StudySync.pushNow();
+assert.strictEqual(upserts[upserts.length - 1].notes["5"].body, "Learner one's private note.");
+global.window.ScrollAuth.getUser = () => null;
+authListener(null);
+assert.strictEqual(store.baStudySyncAccountId, "learner-1", "sign-out keeps the device's account marker");
+global.window.ScrollAuth.getUser = () => ({ id: "learner-3" });
+remoteRow.user_id = "learner-3";
+remoteRow.notes = { "8": { body: "Learner three's own note.", updatedAt: now } };
+remoteRow.bookmarks = [];
+const beforeSwitch = upserts.length;
+now += 10000;
+authListener({ id: "learner-3" });
+await flush();
+await flush();
+assert.strictEqual(store["baNote-5"], undefined, "learner one's note is wiped when learner three signs in");
+assert.strictEqual(store["baNote-3"], undefined, "learner one's older note is wiped too");
+assert.strictEqual(store["baNote-8"], "Learner three's own note.", "learner three gets their cloud note");
+assert.ok(
+  upserts.slice(beforeSwitch).every((row) => !row.notes["5"] && !row.notes["3"]),
+  "learner one's notes are never uploaded to learner three's row"
+);
+assert.strictEqual(store.baStudySyncAccountId, "learner-3");
+
+// 10. Signing out and back in as the same learner still merges notes written while signed out.
+global.window.ScrollAuth.getUser = () => null;
+authListener(null);
+global.localStorage.setItem("baNote-9", "Written while signed out.");
+store.baNoteTimes = JSON.stringify(Object.assign(JSON.parse(store.baNoteTimes || "{}"), { "9": now + 500 }));
+global.window.ScrollAuth.getUser = () => ({ id: "learner-3" });
+remoteRow.notes = { "8": { body: "Learner three's own note.", updatedAt: now - 10000 } };
+now += 10000;
+authListener({ id: "learner-3" });
+await flush();
+await flush();
+assert.strictEqual(store["baNote-8"], "Learner three's own note.", "same learner keeps their notes");
+assert.strictEqual(store["baNote-9"], "Written while signed out.", "same learner keeps the signed-out note");
+assert.strictEqual(upserts[upserts.length - 1].user_id, "learner-3");
+assert.strictEqual(upserts[upserts.length - 1].notes["9"].body, "Written while signed out.", "signed-out note merges into the same learner's row");
+
+// 11. A push asked for during a pull runs once the pull settles.
+let releasePull = null;
+const slowSelect = mockClient.from;
+mockClient.from = (table) => {
+  const api = slowSelect(table);
+  api.select = () => ({
+    eq: () => ({
+      maybeSingle: () => new Promise((resolve) => { releasePull = () => resolve({ data: copyRow(), error: null }); })
+    })
+  });
+  return api;
+};
+const pulling = StudySync.pullAndMerge();
+StudySync.recordNote(4, "Typed during the pull.");
+now += 10000;
+const beforeSlow = upserts.length;
+await StudySync.pushNow();
+assert.strictEqual(upserts.length, beforeSlow, "no push while the pull is in flight");
+releasePull();
+await pulling;
+await flush();
+assert.strictEqual(upserts.length, beforeSlow + 1, "the deferred push runs after the pull");
+assert.strictEqual(upserts[upserts.length - 1].notes["4"].body, "Typed during the pull.");
+mockClient.from = slowSelect;
+
+// 12. The push gap survives a reload.
+store.baStudySyncLastPushAt = String(now - 1000);
+new Function(fs.readFileSync(path.join(ROOT, "js/shared/study-sync.js"), "utf8"))();
+const reloaded = global.window.StudySync;
+const beforeReload = upserts.length;
+await reloaded.pushNow();
+assert.strictEqual(upserts.length, beforeReload, "a push right after a reload waits out the stored gap");
+assert.ok(store.baStudySyncOutbox, "the waiting push is marked pending");
+
+// 13. A failed sign-in pull holds every push until a pull succeeds, so the cloud row is never overwritten blind.
+let pullFails = true;
+let selects = 0;
+const workingFrom = mockClient.from;
+mockClient.from = (table) => {
+  const api = workingFrom(table);
+  api.select = () => ({
+    eq: () => ({
+      maybeSingle: () => {
+        selects += 1;
+        return Promise.resolve(pullFails ? { data: null, error: { message: "Failed to fetch" } } : { data: copyRow(), error: null });
+      }
+    })
+  });
+  return api;
+};
+delete store.baStudySyncOutbox;
+store.baStudySyncLastPushAt = "0";
+remoteRow.notes = Object.assign({}, remoteRow.notes, { "6": { body: "Cloud-only note.", updatedAt: now } });
+new Function(fs.readFileSync(path.join(ROOT, "js/shared/study-sync.js"), "utf8"))();
+const offline = global.window.StudySync;
+errors.length = 0;
+const timersBeforePull = timers.length;
+await offline.pullAndMerge();
+assert.ok(errors.some((m) => m.includes("could not be loaded")), "the failed pull is surfaced");
+assert.strictEqual(timers.length, timersBeforePull + 1, "a failed pull arms a pull retry");
+const pullRetry = timers[timersBeforePull];
+offline.recordNote(4, "Edited while the cloud was unreachable.");
+const beforeBlind = upserts.length;
+now += 10000;
+await offline.pushNow();
+await offline.retryNow();
+assert.strictEqual(upserts.length, beforeBlind, "no push before a pull has succeeded");
+assert.ok(store.baStudySyncOutbox, "the local edit stays pending");
+assert.strictEqual(selects, 1, "pushes wait for the pull retry instead of pulling again at once");
+pullFails = false;
+now += 10000;
+await pullRetry.fn();
+await flush();
+await flush();
+assert.strictEqual(selects, 2, "the pull retry runs");
+const healed = upserts[upserts.length - 1];
+assert.strictEqual(upserts.length, beforeBlind + 1, "the pending edit is pushed once the pull succeeds");
+assert.strictEqual(healed.notes["6"].body, "Cloud-only note.", "the cloud-only note survives");
+assert.strictEqual(healed.notes["4"].body, "Edited while the cloud was unreachable.", "the offline edit lands");
+assert.strictEqual(store["baNote-6"], "Cloud-only note.");
+assert.strictEqual(store.baStudySyncOutbox, undefined);
+mockClient.from = workingFrom;
 
 Date.now = realNow;
-console.log("study sync: push, outbox retry, pull-merge, account switch, and size guard hold");
+console.log("study sync: push, outbox retry, pull-merge, account switch, sign-out isolation, deferred push, push gap, failed-pull hold, and size guard hold");

@@ -33,8 +33,14 @@ async function run() {
     console.log('   Account hub element visible:', hubVisible);
     if (!hubVisible) throw new Error('#account-hub not visible');
 
-    const kickerText = await page.locator('.account-kicker').textContent();
-    console.log('   Kicker badge text:', kickerText.trim());
+    const kicker = page.locator('#account-hub .acct-stage .cx-kicker');
+    const kickerText = (await kicker.textContent()).trim();
+    console.log('   Kicker badge text:', kickerText);
+    if (!kickerText || !(await kicker.isVisible())) throw new Error('The account hub kicker is missing or hidden');
+
+    const termsStep = (await page.locator('#terms-form .acct-card-kicker').textContent()).trim();
+    console.log('   Terms card step label:', termsStep);
+    if (termsStep !== 'Step one') throw new Error(`Terms card should be labelled "Step one", got "${termsStep}"`);
 
     const termsVisible = await page.locator('#terms-form').isVisible();
     console.log('   Terms card visible for guest:', termsVisible);

@@ -63,7 +63,7 @@
   }
 
   function countBy(arr, keyFn) {
-    const map = {};
+    const map = Object.create(null);
     arr.forEach(function (item) {
       const k = keyFn(item);
       if (k == null || k === '') return;
@@ -137,7 +137,7 @@
       const d = e.detail || {};
       const s = sittingOf(e);
       const id = 'Sitting ' + s + ' Q' + (Number(d.q) + 1);
-      if (!byQ[id]) byQ[id] = { sitting: s, q: d.q, n: 0, correct: 0, wrong: {} };
+      if (!byQ[id]) byQ[id] = { sitting: s, q: d.q, n: 0, correct: 0, wrong: Object.create(null) };
       byQ[id].n += 1;
       if (d.correct) {
         byQ[id].correct += 1;

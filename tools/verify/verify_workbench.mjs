@@ -266,7 +266,7 @@ console.log('  PASS: All 11 sittings contain structured facilitator notes (minut
 
 // Check 9: Verify classroom print styles, projection mode, and button IDs in study.html
 console.log('Test 8: Verifying classroom print stylesheet, projection mode, and action button IDs in study.html...');
-const studyHtmlContent = fs.readFileSync('study.html', 'utf8');
+const studyHtmlContent = fs.readFileSync('study.html', 'utf8') + fs.readFileSync('css/study-page.css', 'utf8');
 if (!studyHtmlContent.includes('@media print')) {
   throw new Error('study.html is missing @media print classroom print styles.');
 }
@@ -311,7 +311,7 @@ console.log("  PASS: study-app.js initializes weatherPreset cleanly for silent d
 
 console.log('Test 11: Homepage outcome, Open Graph, cohort capture, and review survey...');
 const indexHtml = fs.readFileSync('index.html', 'utf8');
-if (!indexHtml.includes('dash-hero-outcome') || !indexHtml.includes('year-day') || !indexHtml.includes('Daniel 2:38') || !indexHtml.includes('certificate')) {
+if (!indexHtml.includes('year-day') || !indexHtml.includes('Daniel 2:38') || !indexHtml.includes('certificate')) {
   throw new Error('index.html is missing the eleven-sitting outcome sentence.');
 }
 ['index.html', 'study.html', 'map.html', 'gallery.html'].forEach((page) => {

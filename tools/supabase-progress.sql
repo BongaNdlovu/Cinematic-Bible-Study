@@ -67,7 +67,7 @@ drop policy if exists insert_own_survey on public.exhibit_surveys;
 create policy insert_survey
   on public.exhibit_surveys for insert
   to public
-  with check (auth.uid() = user_id or user_id is null or auth.uid() is null);
+  with check ((auth.uid() is null and user_id is null) or auth.uid() = user_id);
 
 drop policy if exists moderator_read_surveys on public.exhibit_surveys;
 create policy moderator_read_surveys
@@ -90,6 +90,44 @@ create index if not exists exhibit_surveys_anon_created_idx
 create index if not exists exhibit_surveys_user_created_idx
   on public.exhibit_surveys (user_id, created_at desc);
 
+alter table public.exhibit_surveys
+  drop constraint if exists exhibit_surveys_feedback_len,
+  drop constraint if exists exhibit_surveys_responses_size,
+  drop constraint if exists exhibit_surveys_anon_id_len,
+  drop constraint if exists exhibit_surveys_role_len,
+  drop constraint if exists exhibit_surveys_cohort_len;
+alter table public.exhibit_surveys
+  add constraint exhibit_surveys_feedback_len
+    check (char_length(feedback) <= 600) not valid,
+  add constraint exhibit_surveys_responses_size
+    check (pg_column_size(responses) <= 2000) not valid,
+  add constraint exhibit_surveys_anon_id_len
+    check (char_length(anon_id) <= 64) not valid,
+  add constraint exhibit_surveys_role_len
+    check (char_length(role) <= 40) not valid,
+  add constraint exhibit_surveys_cohort_len
+    check (char_length(cohort) <= 200) not valid;
+
+do $$
+declare
+  c text;
+begin
+  foreach c in array array[
+    'exhibit_surveys_feedback_len',
+    'exhibit_surveys_responses_size',
+    'exhibit_surveys_anon_id_len',
+    'exhibit_surveys_role_len',
+    'exhibit_surveys_cohort_len'
+  ] loop
+    begin
+      execute format('alter table public.exhibit_surveys validate constraint %I', c);
+    exception when check_violation then
+      null;
+    end;
+  end loop;
+end;
+$$;
+
 create or replace function public.exhibit_surveys_rate_gate()
 returns trigger
 language plpgsql
@@ -108,6 +146,15 @@ begin
     if (select count(*) from public.exhibit_surveys
         where user_id = new.user_id
           and created_at > now() - interval '1 hour') >= 5 then
+      raise exception 'rate_limit';
+    end if;
+  else
+    raise exception 'rate_limit';
+  end if;
+  if new.user_id is null then
+    if (select count(*) from public.exhibit_surveys
+        where user_id is null
+          and created_at > now() - interval '1 minute') >= 20 then
       raise exception 'rate_limit';
     end if;
   end if;

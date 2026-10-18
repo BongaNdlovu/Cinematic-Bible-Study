@@ -80,6 +80,22 @@ async function run() {
     console.log('   Sitting 1 title:', sheetTitle);
     if (!sheetTitle) throw new Error('Sitting 1 opened without a title');
 
+    console.log('\n=== Step 3b: Verifying a reader who answered the first-visit questions is not asked again ===');
+    const firstVisitAsked = await page.locator('#onboard').isVisible().catch(() => false);
+    console.log('   First-visit questions shown to a new guest:', firstVisitAsked);
+    if (!firstVisitAsked) throw new Error('A new guest was not asked the first-visit questions');
+    await page.evaluate(() => {
+      localStorage.setItem('baOnboardV1', '1');
+      localStorage.setItem('baProfileAsked', '1');
+    });
+    await page.reload({ waitUntil: 'networkidle' });
+    await page.waitForSelector('#sheet-article[data-sheet-index="1"]', { timeout: 30000 });
+    await dismissGuide(page);
+    await page.waitForTimeout(500);
+    const askedAgain = await page.locator('#onboard').isVisible().catch(() => false);
+    console.log('   First-visit questions shown after they were answered:', askedAgain);
+    if (askedAgain) throw new Error('The first-visit questions came back after they were answered');
+
     console.log('\n=== Step 4: Verifying the header and spine controls link back to the shelf ===');
     const headerLink = await page.locator('#btn-header-syllabus').evaluate((el) => ({ tag: el.tagName, href: el.getAttribute('href') }));
     console.log('   Header shelf control:', headerLink.tag, headerLink.href);

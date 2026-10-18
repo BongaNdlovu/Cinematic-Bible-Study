@@ -344,7 +344,7 @@
     // The fallback letter sits under the photo; if the plate fails to load it
     // removes itself and the letter shows through.
     var img = item.image
-      ? '<img src="' + esc(item.image) + '" alt="" onerror="this.remove()">'
+      ? '<img src="' + esc(item.image) + '" alt="" data-drop-on-error>'
       : '';
     var aliases = (item.aliases || []).filter(function (a) { return a && String(a).trim(); });
     return (

@@ -46,25 +46,46 @@ function rewrite(pairs) {
   }
 }
 
+function hashName(rel) {
+  const hash = crypto.createHash("sha256").update(fs.readFileSync(path.join(stage, rel))).digest("hex").slice(0, 12);
+  return rel.replace(/(\.[^.]+)$/, "." + hash + "$1");
+}
+
 function apply(prefix, extensions) {
-  const pairs = [];
-  for (const full of filesUnder(prefix, extensions)) {
-    const rel = relPosix(full);
-    if (alreadyHashed(rel)) continue;
-    const hash = crypto.createHash("sha256").update(fs.readFileSync(full)).digest("hex").slice(0, 12);
-    const renamed = rel.replace(/(\.[^.]+)$/, "." + hash + "$1");
-    fs.renameSync(full, path.join(stage, renamed));
-    pairs.push([rel, renamed]);
-    if (prefix === "models") {
-      const base = path.posix.basename(rel);
-      const nextBase = path.posix.basename(renamed);
-      pairs.push(["'" + base + "'", "'" + nextBase + "'"]);
-      pairs.push(['"' + base + '"', '"' + nextBase + '"']);
-    }
+  const textExt = new Set([".html", ".js", ".mjs", ".css"]);
+  let pending = filesUnder(prefix, extensions).map(relPosix).filter((rel) => !alreadyHashed(rel));
+  const refs = new Map();
+  for (const rel of pending) {
+    if (!textExt.has(path.extname(rel).toLowerCase())) { refs.set(rel, []); continue; }
+    const text = fs.readFileSync(path.join(stage, rel), "utf8");
+    refs.set(rel, pending.filter((other) => other !== rel && text.includes(other)));
   }
-  rewrite(pairs);
+  while (pending.length) {
+    const open = new Set(pending);
+    let batch = pending.filter((rel) => !refs.get(rel).some((other) => open.has(other)));
+    if (!batch.length) {
+      console.warn("hash-release-assets: circular references under " + prefix + "/, hashing " + pending.length + " files together");
+      batch = pending;
+    }
+    const pairs = [];
+    for (const rel of batch) {
+      const renamed = hashName(rel);
+      fs.renameSync(path.join(stage, rel), path.join(stage, renamed));
+      pairs.push([rel, renamed]);
+      if (prefix === "models") {
+        const base = path.posix.basename(rel);
+        const nextBase = path.posix.basename(renamed);
+        pairs.push(["'" + base + "'", "'" + nextBase + "'"]);
+        pairs.push(['"' + base + '"', '"' + nextBase + '"']);
+      }
+    }
+    rewrite(pairs);
+    const done = new Set(batch);
+    pending = pending.filter((rel) => !done.has(rel));
+  }
 }
 
 apply("models", [".glb", ".gltf"]);
+apply("css", [".css"]);
 apply("js", [".js", ".mjs"]);
 console.log("hashed release assets in " + stage);

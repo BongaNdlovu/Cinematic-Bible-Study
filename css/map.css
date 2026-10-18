@@ -105,7 +105,6 @@ html.cmap-html, body.cmap-page {
   color: #f6ebc8;
   text-shadow: 0 1px 4px #000, 0 0 8px #000;
 }
-.cmap-pin.is-pulse .pin { animation: cmapPulse 1.8s ease-out infinite; }
 .cmap-pin.is-dim { opacity: 0.42; }
 .cmap-pin.is-dim .label { opacity: 0; }
 .cmap-pin.metal-silver .pin { background: #c5d0dc; }
@@ -222,9 +221,6 @@ html.cmap-html, body.cmap-page {
   pointer-events: none;
   opacity: 0.9;
 }
-.cmap-marker.is-pulse .pin {
-  animation: cmapPulse 1.8s ease-out infinite;
-}
 .cmap-marker.is-dim { opacity: 0.38; }
 .cmap-marker.is-dim .label { opacity: 0; }
 .cmap-marker.is-active .label { opacity: 1; color: #fff7dc; }
@@ -234,9 +230,50 @@ html.cmap-html, body.cmap-page {
 .cmap-marker.metal-gold .pin { background: #d4af37; }
 
 @keyframes cmapPulse {
-  0% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.55); }
-  70% { box-shadow: 0 0 0 14px rgba(212, 175, 55, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0); }
+  0% { transform: scale(1); opacity: 1; }
+  70%, 100% { transform: scale(var(--cmap-pulse-to)); opacity: 0; }
+}
+.cmap-medal.is-pulse::after,
+.cmap-gpin.is-pulse::after,
+.cmap-sat-mark.is-point::after,
+.cmap-gbeacon::after,
+.cmap-lbeacon::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  border-radius: 50%;
+  background: rgba(212, 175, 55, 0.55);
+  pointer-events: none;
+  animation: cmapPulse 1.8s ease-out infinite;
+}
+.cmap-medal.is-pulse::after { --cmap-pulse-to: 1.6364; }
+.cmap-gpin.is-pulse::after { --cmap-pulse-to: 1.8235; }
+.cmap-sat-mark.is-point::after {
+  left: -2px;
+  top: -2px;
+  width: 12px;
+  height: 12px;
+  --cmap-pulse-to: 3.3333;
+}
+.cmap-gbeacon::after, .cmap-lbeacon::after {
+  --cmap-pulse-to: 2.5556;
+  animation-duration: 1.4s;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .cmap-medal.is-pulse img, .cmap-medal.is-pulse:hover img, .cmap-gpin.is-pulse img { box-shadow: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cmap-medal.is-pulse::after,
+  .cmap-gpin.is-pulse::after,
+  .cmap-sat-mark.is-point::after,
+  .cmap-gbeacon::after,
+  .cmap-lbeacon::after { display: none; }
+  .cmap-gbeacon::before, .cmap-lbeacon::before { box-shadow: 0 0 18px rgba(229, 185, 59, 0.8); }
+  .cmap-sat-mark.is-point::before { box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.3), 0 2px 8px rgba(0, 0, 0, 0.7); }
 }
 
 .cmap-vignette, .cmap-grain, .cmap-motes, .cmap-stone-glow {
@@ -687,7 +724,6 @@ html.cmap-html, body.cmap-page {
 }
 .cmap-medal.is-dim { opacity: 0.55; }
 .cmap-medal.is-dim .label { opacity: 0; }
-.cmap-medal.is-pulse img { animation: cmapPulse 1.8s ease-out infinite; }
 .hide-pin-labels .cmap-medal .label { display: none; }
 .leaflet-control-scale {
   margin-left: 22px !important;
@@ -747,7 +783,7 @@ html.cmap-html, body.cmap-page {
   color: var(--cmap-gold-soft);
 }
 .cmap-route {
-  animation: cmapDash 16s linear infinite;
+  animation: cmapDash 16s linear 2;
 }
 @keyframes cmapDash {
   to { stroke-dashoffset: -180; }
@@ -1149,7 +1185,7 @@ html.cmap-html, body.cmap-page {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .cmap-chapter img, .cmap-marker.is-pulse .pin { animation: none !important; }
+  .cmap-chapter img, .cmap-route { animation: none !important; }
   .cmap-dossier, .cmap-chapter, .cmap-overture { transition: none; }
 }
 
@@ -1342,7 +1378,6 @@ html.cmap-html, body.cmap-page {
   text-shadow: 0 1px 4px #000, 0 0 8px #000;
   pointer-events: none;
 }
-.cmap-gpin.is-pulse img { animation: cmapPulse 1.8s ease-out infinite; }
 .cmap-gpin.is-dim { opacity: 0.55; }
 .cmap-gpin.is-dim .label { opacity: 0; }
 .cmap-gpin.is-dim:hover .label { opacity: 1; }
@@ -1354,11 +1389,19 @@ html.cmap-html, body.cmap-page {
 .hide-pin-labels .cmap-gpin .label { display: none; }
 .cmap-gbeacon, .cmap-lbeacon {
   border-radius: 50%;
+}
+.cmap-gbeacon::before, .cmap-lbeacon::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
   background: radial-gradient(circle, #fff6d8 0 30%, #e5b93b 55%, rgba(229, 185, 59, 0) 72%);
-  box-shadow: 0 0 18px rgba(229, 185, 59, 0.8);
-  animation: cmapPulse 1.4s ease-out infinite;
 }
 .cmap-gbeacon {
+  z-index: 0;
   position: absolute;
   left: -9px;
   top: -9px;
@@ -1495,7 +1538,6 @@ html.cmap-html, body.cmap-page {
   .cmap-root.is-globe-view .cmap-cartouche { top: 148px; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .cmap-gpin.is-pulse img, .cmap-gbeacon, .cmap-lbeacon { animation: none; }
   .cmap-globe, .is-globe-view .cmap-globe { transition: none; }
 }
 .cmap-root .cmap-credit { bottom: calc(110px + var(--cmap-scrub-h)); }
@@ -1554,7 +1596,24 @@ html.cmap-html, body.cmap-page {
 }
 .cmap-sat-mark.is-left span { left: auto; right: 14px; }
 .cmap-root .cmap-sat-mark:hover, .cmap-root .cmap-sat-mark:focus-visible { background: #fff1c4; z-index: 3; }
-.cmap-sat-mark.is-point { animation: cmapPulse 1.8s ease-out infinite; }
+.cmap-root .cmap-sat-mark.is-point {
+  background: none;
+  border-color: transparent;
+  box-shadow: none;
+}
+.cmap-sat-mark.is-point::before {
+  content: "";
+  position: absolute;
+  left: -2px;
+  top: -2px;
+  width: 12px;
+  height: 12px;
+  box-sizing: border-box;
+  border-radius: 50%;
+  background: #d4af37;
+  border: 2px solid #fff4d0;
+}
+.cmap-sat-mark.is-point:hover::before { background: #fff1c4; }
 .cmap-sat figcaption {
   display: flex;
   align-items: center;
@@ -1586,7 +1645,4 @@ html.cmap-html, body.cmap-page {
 }
 @media (max-width: 800px) {
   .cmap-sat-frame { height: 160px; }
-}
-@media (prefers-reduced-motion: reduce) {
-  .cmap-sat-mark.is-point { animation: none; }
 }

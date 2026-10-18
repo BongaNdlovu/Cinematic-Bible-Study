@@ -72,6 +72,7 @@ try {
   await context.addInitScript((mock) => {
     try {
       localStorage.setItem('baQaMockSession', JSON.stringify(mock));
+      localStorage.setItem('baOnboardV1', '1');
       const raw = localStorage.getItem('baJourney');
       const j = raw ? JSON.parse(raw) : {};
       j.termsAccepted = true;
@@ -519,7 +520,7 @@ try {
   /* - 2. reduced motion: connectors must be visible ---- */
   const reduceContext = await browser.newContext({ viewport: { width: 1440, height: 1000 }, reducedMotion: 'reduce', deviceScaleFactor: 1 });
   await reduceContext.addInitScript((mock) => {
-    try { localStorage.setItem('baQaMockSession', JSON.stringify(mock)); } catch (e) { /* ignore */ }
+    try { localStorage.setItem('baQaMockSession', JSON.stringify(mock)); localStorage.setItem('baOnboardV1', '1'); } catch (e) { /* ignore */ }
   }, MOCK);
   const reducePage = await reduceContext.newPage();
   reducePage.on('pageerror', (e) => consoleErrors.push('reduce: ' + String(e.message)));
@@ -597,7 +598,7 @@ try {
   /* (f) 390x844: no horizontal overflow, compact outline instead of a stage. */
   const mobileContext = await browser.newContext({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 2 });
   await mobileContext.addInitScript((mock) => {
-    try { localStorage.setItem('baQaMockSession', JSON.stringify(mock)); } catch (e) { /* ignore */ }
+    try { localStorage.setItem('baQaMockSession', JSON.stringify(mock)); localStorage.setItem('baOnboardV1', '1'); } catch (e) { /* ignore */ }
   }, MOCK);
   const mobilePage = await mobileContext.newPage();
   mobilePage.on('pageerror', (e) => consoleErrors.push('mobile: ' + String(e.message)));

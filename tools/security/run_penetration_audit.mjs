@@ -768,6 +768,40 @@ async function deployLeakPaths() {
   return mustDeny.length + " private paths denied; deploy script excludes both directories";
 }
 
+async function liveDeskClosed() {
+  const notices = await api("GET", "/rest/v1/exhibit_notices?select=id,title,body,created_at");
+  if (notices.status !== 200) throw new Error("public notices replied " + notices.status + " " + clip(notices.text));
+  if (/"author_id"\s*:/.test(notices.text) || /"user_id"\s*:/.test(notices.text)) {
+    throw new Error("a public notice included an author");
+  }
+  const author = await api("GET", "/rest/v1/exhibit_notices?select=author_id");
+  if (author.status === 200) throw new Error("anonymous key read notice authors");
+  const help = await api("GET", "/rest/v1/exhibit_help_notes?select=id,subject,body,user_id");
+  const helpWrite = await api("POST", "/rest/v1/exhibit_help_notes", {
+    subject: "pen",
+    body: "This note must not be stored for an anonymous caller."
+  }, { Prefer: "return=minimal" });
+  const publish = await api("POST", "/rest/v1/exhibit_notices", {
+    title: "pen",
+    body: "This notice must not be published by an anonymous caller."
+  }, { Prefer: "return=minimal" });
+  const inbox = await api("POST", "/rest/v1/rpc/exhibit_help_inbox", {});
+  const receipt = await api("POST", "/rest/v1/rpc/exhibit_notice_receipt_set", {
+    p_notice: "00000000-0000-0000-0000-000000000000",
+    p_read: true,
+    p_hidden: false
+  });
+  const receipts = await api("GET", "/rest/v1/exhibit_notice_receipts?select=notice_id,read_at,hidden_at,user_id");
+  const trigger = await api("POST", "/rest/v1/rpc/exhibit_help_before_insert", {});
+  const denied = [author, help, helpWrite, publish, inbox, receipt, receipts, trigger];
+  denied.forEach((res) => {
+    if (res.status === 200 || res.status === 201) throw new Error("anonymous desk call stored or returned data");
+  });
+  const reviewUser = await api("GET", "/rest/v1/exhibit_reviews?select=user_id");
+  if (reviewUser.status === 200) throw new Error("anonymous key read review account ids");
+  return "notices are public text only; help notes, receipts, inbox, and review account ids stay closed";
+}
+
 const tests = [
   ["PT-01", "Edge page cap is per address", edgePageCap],
   ["PT-02", "Static reads do not spend the page cap", edgeStaticOutsideCap],
@@ -789,10 +823,11 @@ const tests = [
   ["PT-18", "Anonymous key cannot approve a review or save progress", liveReviewAndSaveDenied],
   ["PT-19", "Survey spam stops at 5 an hour", liveSurveyRate],
   ["PT-20", "Event spam stops at 60 a minute", liveEventRateAndIdentity],
-  ["PT-21", "Research copies and build input are not deployable", deployLeakPaths]
+  ["PT-21", "Research copies and build input are not deployable", deployLeakPaths],
+  ["PT-22", "Message desk hides authors, help notes, and receipts", liveDeskClosed]
 ];
 
-if (tests.length !== 21) throw new Error("expected 21 tests, found " + tests.length);
+if (tests.length !== 22) throw new Error("expected 22 tests, found " + tests.length);
 
 const results = [];
 for (const [id, title, fn] of tests) {

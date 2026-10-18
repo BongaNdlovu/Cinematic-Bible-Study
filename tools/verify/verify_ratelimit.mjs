@@ -58,8 +58,8 @@ assert(!cf.includes('new Map('), 'Cloudflare middleware must not keep a private 
 assert(cf.includes('idFromName(caller)'), 'Cloudflare must ask the per-IP rate gate');
 assert(cf.includes('AbortSignal.timeout(2000)'), 'Cloudflare must time out the counter');
 assert(cf.includes('limit_unavailable'), 'Cloudflare must record a missing counter');
-assert(cf.includes('status: 503'), 'Cloudflare must refuse the page when the counter does not answer');
-assert(cf.includes('return "down"'), 'Cloudflare must not serve the page when the counter is missing');
+assert(cf.includes('status: 503'), 'Cloudflare must refuse writes and the gate proxy when the counter does not answer');
+assert(cf.includes('return "down"'), 'Cloudflare must report a missing counter as down');
 
 const gate = fs.readFileSync(path.join(ROOT, 'workers/exhibit-rate-gate/src/rate-gate.js'), 'utf8');
 assert(gate.includes('all: [240, 60000]'), 'shared gate must cap HTML and other paths at 240/min');
@@ -79,8 +79,135 @@ assert(!vercel.includes('new Map('), 'Vercel middleware must not keep a private 
 assert(vercel.includes('/__rate'), 'Vercel must ask the Pages rate gate');
 assert(vercel.includes('x-middleware-next'), 'Vercel middleware must continue with x-middleware-next');
 assert(vercel.includes('AbortSignal.timeout(2000)'), 'Vercel must time out the counter');
-assert(vercel.includes('status: 503'), 'Vercel must refuse the page when the counter does not answer');
+assert(vercel.includes('status: 503'), 'Vercel must refuse writes when the counter does not answer');
 assert(vercel.includes('decision === "unavailable"'), 'Vercel must treat a counter miss as unavailable');
+
+const realFetch = globalThis.fetch;
+const edgeReports = [];
+globalThis.fetch = async (url, init) => {
+  edgeReports.push({ url: String(url), body: init && init.body });
+  return new Response(null, { status: 201 });
+};
+const { onRequest } = await import('../../functions/_middleware.js');
+const SITE = 'https://cinematic-bible-study-daniel.pages.dev';
+
+function gateThat(answer) {
+  const calls = [];
+  return {
+    calls,
+    idFromName(ip) { return ip; },
+    get() {
+      return {
+        fetch: async (url, init) => {
+          calls.push(JSON.parse(init.body).path);
+          if (answer === 'throw') throw new Error('The operation was aborted due to timeout');
+          return Response.json({ ok: answer === 'allow' });
+        }
+      };
+    }
+  };
+}
+
+function assetsStub(status) {
+  const calls = [];
+  return {
+    calls,
+    fetch: async (req) => {
+      calls.push(new URL(req.url).pathname + new URL(req.url).search);
+      if (status >= 300 && status < 400) return new Response(null, { status, headers: { location: '/elsewhere' } });
+      return new Response('page body', { status, headers: { 'content-type': 'text/html' } });
+    }
+  };
+}
+
+async function edge(pathAndQuery, { method = 'GET', env = {}, headers = {}, body } = {}) {
+  let nextCalls = 0;
+  const res = await onRequest({
+    request: new Request(SITE + pathAndQuery, { method, headers: { 'cf-connecting-ip': '203.0.113.9', ...headers }, body }),
+    env,
+    next: () => { nextCalls += 1; return new Response('next', { status: 200 }); },
+    waitUntil: () => {}
+  });
+  return { res, nextCalls, text: await res.text() };
+}
+
+{
+  const assets = assetsStub(200);
+  const gateOk = gateThat('allow');
+  const r = await edge('/study.html?sheet=3&from=map', { env: { RATE_GATE: gateOk, ASSETS: assets } });
+  assert.strictEqual(r.res.status, 200, 'an allowed .html page is served');
+  assert.strictEqual(r.text, 'page body', 'an allowed .html page is served from the asset store, not through a redirect');
+  assert.deepStrictEqual(assets.calls, ['/study?sheet=3&from=map'], 'a .html page is fetched by its extensionless name with the query string kept');
+  assert.strictEqual(r.nextCalls, 0, 'a .html page does not fall through to the 308');
+  assert.deepStrictEqual(gateOk.calls, ['/study.html'], 'the gate is asked once per page read');
+}
+{
+  const assets = assetsStub(200);
+  await edge('/index.html', { env: { RATE_GATE: gateThat('allow'), ASSETS: assets } });
+  await edge('/notes/index.html?q=1', { env: { RATE_GATE: gateThat('allow'), ASSETS: assets } });
+  assert.deepStrictEqual(assets.calls, ['/', '/notes/?q=1'], 'index.html maps to its folder');
+}
+{
+  const r = await edge('/study.html', { env: { RATE_GATE: gateThat('allow'), ASSETS: assetsStub(308) } });
+  assert.strictEqual(r.nextCalls, 1, 'when the asset store still redirects, the request falls back to the normal route');
+}
+{
+  const r = await edge('/study', { env: { RATE_GATE: gateThat('allow'), ASSETS: assetsStub(200) } });
+  assert.strictEqual(r.nextCalls, 1, 'an extensionless page goes straight to the normal route');
+}
+{
+  const r = await edge('/study.html', { env: { RATE_GATE: gateThat('allow') } });
+  assert.strictEqual(r.nextCalls, 1, 'without an asset binding the page falls back to the normal route');
+}
+{
+  edgeReports.length = 0;
+  const assets = assetsStub(200);
+  const r = await edge('/study.html', { env: { ASSETS: assets } });
+  assert.strictEqual(r.res.status, 200, 'a GET page is served when the gate binding is missing');
+  assert.strictEqual(assets.calls.length, 1, 'a GET page still skips the redirect when the gate is missing');
+  assert(edgeReports.some((x) => String(x.body).includes('limit_unavailable')), 'a missing gate is still reported');
+}
+{
+  const r = await edge('/map.html', { env: { RATE_GATE: gateThat('throw'), ASSETS: assetsStub(200) } });
+  assert.strictEqual(r.res.status, 200, 'a GET page is served when the gate times out');
+}
+{
+  const r = await edge('/study.html', { method: 'POST', env: { ASSETS: assetsStub(200) }, body: 'x' });
+  assert.strictEqual(r.res.status, 503, 'a non-GET request is refused when the gate binding is missing');
+  const t = await edge('/study.html', { method: 'POST', env: { RATE_GATE: gateThat('throw') }, body: 'x' });
+  assert.strictEqual(t.res.status, 503, 'a non-GET request is refused when the gate times out');
+}
+{
+  const r = await edge('/study.html', { env: { RATE_GATE: gateThat('deny'), ASSETS: assetsStub(200) } });
+  assert.strictEqual(r.res.status, 429, 'a full gate still returns 429 for pages');
+}
+{
+  const secret = 'verify-gate-secret';
+  const r = await edge('/__rate', {
+    method: 'POST',
+    env: { RATE_GATE_SECRET: secret },
+    headers: { authorization: 'Bearer ' + secret, 'content-type': 'application/json' },
+    body: JSON.stringify({ ip: '203.0.113.9', path: '/study.html' })
+  });
+  assert.strictEqual(r.res.status, 503, 'the gate proxy stays strict when the gate is missing');
+}
+{
+  const gateSeen = gateThat('allow');
+  const r = await edge('/js/shared/boot.js', { env: { RATE_GATE: gateSeen, ASSETS: assetsStub(200) } });
+  assert.strictEqual(r.nextCalls, 1, 'static files pass straight through');
+  assert.strictEqual(gateSeen.calls.length, 0, 'static files do not wait on the gate');
+}
+
+const { middleware: vercelMiddleware } = await import('../../middleware.js');
+const savedSecret = process.env.RATE_GATE_SECRET;
+delete process.env.RATE_GATE_SECRET;
+const vercelGet = await vercelMiddleware(new Request(SITE + '/study.html'));
+assert.strictEqual(vercelGet.headers.get('x-middleware-next'), '1', 'Vercel serves a GET page when the gate is unavailable');
+const vercelPost = await vercelMiddleware(new Request(SITE + '/study.html', { method: 'POST', body: 'x' }));
+assert.strictEqual(vercelPost.status, 503, 'Vercel refuses a non-GET request when the gate is unavailable');
+if (savedSecret !== undefined) process.env.RATE_GATE_SECRET = savedSecret;
+globalThis.fetch = realFetch;
+console.log('1b. Edge gate fails open for page reads, stays strict for writes, and serves .html without a redirect.');
 
 const pkg = fs.readFileSync(path.join(ROOT, 'package.json'), 'utf8');
 assert(pkg.includes('verify_ratelimit.mjs'), 'npm test must run verify_ratelimit.mjs');

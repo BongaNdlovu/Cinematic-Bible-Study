@@ -2,7 +2,6 @@ window.MAP_CHRONICLE = {
   bounds: { west: -100, south: 14, east: 74, north: 52 },
   world: { w: 3600, h: 1960 },
   sources: {
-    land: "assets/maps/world-land-110m.json",
     polities: "assets/maps/chronicle-polities.json"
   },
   empires: {

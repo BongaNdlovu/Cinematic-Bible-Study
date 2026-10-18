@@ -53,12 +53,12 @@ export async function middleware(request) {
   if (request.method === "OPTIONS" || request.method === "HEAD") return pass();
   const decision = await askGate(ipOf(request), new URL(request.url).pathname);
   if (decision === "deny") return denied();
-  if (decision === "unavailable") return unavailable();
+  if (decision === "unavailable" && request.method !== "GET") return unavailable();
   return pass();
 }
 
 export default middleware;
 
 export const config = {
-  matcher: ["/((?!_next/|favicon.ico).*)"]
+  matcher: ["/((?!_next/|favicon.ico|assets/|js/|css/|vendor/|models/|bible/).*)"]
 };

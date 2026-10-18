@@ -78,6 +78,7 @@
     }).then(function (res) {
       if (res && res.error) return { ok: false, error: errorCause(res.error) };
       const data = res && res.data;
+      if (data && data.error) return { ok: false, error: String(data.error) };
       if (!data || typeof data.correct !== 'boolean') return { ok: false, error: 'bad_response' };
       return {
         ok: true,

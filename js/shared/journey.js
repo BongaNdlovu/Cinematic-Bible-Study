@@ -121,12 +121,24 @@
     cohort: null
   };
 
-  function normalize(raw) {
-    const next = Object.assign({}, defaults, raw || {});
+  const UNSAFE_KEYS = ["__proto__", "constructor", "prototype"];
+
+  function safeObject(value) {
+    const out = {};
+    if (!value || typeof value !== "object" || Array.isArray(value)) return out;
+    Object.keys(value).forEach(function (key) {
+      if (UNSAFE_KEYS.indexOf(key) === -1) out[key] = value[key];
+    });
+    return out;
+  }
+
+  function normalize(input) {
+    const raw = safeObject(input);
+    const next = Object.assign({}, defaults, raw);
     next.cohort = (raw && typeof raw.cohort === "string" && raw.cohort.trim()) ? raw.cohort.trim().slice(0, 64) : null;
     next.unlocked = Array.isArray(next.unlocked) ? next.unlocked.filter(Boolean) : [];
-    next.station = Object.assign({ s2: null, s7: null }, next.station || {});
-    next.seenIntro = next.seenIntro && typeof next.seenIntro === "object" ? next.seenIntro : {};
+    next.station = Object.assign({ s2: null, s7: null }, safeObject(next.station));
+    next.seenIntro = safeObject(next.seenIntro);
     if (typeof next.pathSheet !== "number" || Number.isNaN(next.pathSheet)) next.pathSheet = -1;
     if (typeof next.sheet !== "number" || Number.isNaN(next.sheet)) next.sheet = 0;
     next.reducedMotion = !!next.reducedMotion;
@@ -153,7 +165,7 @@
       next.termsAccepted = null;
     }
     const byUser = {};
-    const rawMap = raw && raw.termsByUser && typeof raw.termsByUser === "object" ? raw.termsByUser : {};
+    const rawMap = safeObject(raw.termsByUser);
     Object.keys(rawMap).forEach(function (id) {
       const rec = rawMap[id];
       if (!id || !rec || typeof rec !== "object" || Number(rec.version) <= 0) return;
@@ -430,7 +442,8 @@
     if (Number.isNaN(i) || i < 0 || i >= SHEET_COUNT) return load();
     const cur = load();
     const next = (cur.completedSheets || []).concat([i]);
-    const saved = save({ completedSheets: next, pathSheet: i, sheet: clampToAccessible(i + 1) });
+    save({ completedSheets: next, pathSheet: i });
+    const saved = save({ sheet: clampToAccessible(i + 1) });
     try {
       localStorage.setItem("daniel_historicist_mastery", JSON.stringify(saved.completedSheets));
     } catch (e) {}
@@ -574,31 +587,6 @@
     });
   }
 
-  function searchIndex() {
-    const out = [];
-    const map = window.MAP_CHRONICLE;
-    if (map) {
-      (map.epochs || []).forEach((ep) => {
-        if (!canAccessYear(ep.id)) return;
-        out.push({ kind: "epoch", id: ep.id, label: ep.label + " — " + ep.title, href: "map.html?year=" + ep.id });
-      });
-      (map.cities || []).forEach((c) => {
-        if (!canAccessMapNode(c.id)) return;
-        out.push({ kind: "city", id: c.id, label: c.name, href: "map.html?year=" + ((c.pulse && c.pulse[0]) || "y605") + "&event=" + c.id });
-      });
-      (map.events || []).forEach((ev) => {
-        if (!canAccessMapNode(ev.id)) return;
-        out.push({ kind: "event", id: ev.id, label: ev.name, href: "map.html?year=" + ev.yearId + "&event=" + ev.id });
-      });
-    }
-    out.push(
-      { kind: "page", id: "study", label: "Study desk", href: "study.html" },
-      { kind: "page", id: "gallery", label: "3D gallery", href: "gallery.html" },
-      { kind: "page", id: "map", label: "Map of History", href: "map.html" }
-    );
-    return out;
-  }
-
   function getCohort() {
     const cur = load();
     return cur.cohort || "";
@@ -714,7 +702,6 @@
     empireForAsset: empireForAsset,
     yearLabel: yearLabel,
     empireLabel: empireLabel,
-    searchIndex: searchIndex,
     sheetLabel: sheetLabel,
     isAdmin: isAdmin,
     isMember: isMember,

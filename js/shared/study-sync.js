@@ -18,6 +18,7 @@
   const PUSH_GAP_MS = 6000;
   const RETRY_WAITS = [7000, 15000, 30000];
   const MAX_RETRIES = 5;
+  const PULL_WAITS = [5000, 15000, 30000, 60000];
   const MAX_NOTE_CHARS = 50000;
   const MAX_PAYLOAD_BYTES = 400000;
   const MAX_SHEET_ID = 999;
@@ -28,7 +29,40 @@
   let retryTimer = null;
   let retryAttempt = 0;
   let isSyncing = false;
-  let lastPushAt = 0;
+  let pushAfterSync = false;
+  let pulledFor = '';
+  let pullTimer = null;
+  let pullAttempt = 0;
+  let lastPushAt = readLastPushAt();
+
+  function schedulePull() {
+    if (pullTimer) return;
+    const wait = PULL_WAITS[Math.min(pullAttempt, PULL_WAITS.length - 1)];
+    pullAttempt += 1;
+    pullTimer = armRetry(function () {
+      pullTimer = null;
+      pullAndMerge();
+    }, wait);
+  }
+
+  function stopPullRetry() {
+    if (pullTimer) clearTimeout(pullTimer);
+    pullTimer = null;
+    pullAttempt = 0;
+  }
+
+  function readLastPushAt() {
+    try {
+      const n = Number(localStorage.getItem(LAST_PUSH_KEY));
+      return Number.isFinite(n) && n > 0 && n <= Date.now() ? n : 0;
+    } catch (e) {
+      return 0;
+    }
+  }
+
+  function storedAccount() {
+    try { return localStorage.getItem(ACCOUNT_KEY) || ''; } catch (e) { return ''; }
+  }
 
   function authClient() {
     return window.ScrollAuth && typeof window.ScrollAuth.getClient === 'function' && window.ScrollAuth.getClient();
@@ -260,14 +294,13 @@
     try { localStorage.removeItem(NOTE_TIMES_KEY); } catch (e) {}
   }
 
-  function storeOutbox(payload) {
-    try { localStorage.setItem(OUTBOX_KEY, JSON.stringify(payload)); } catch (e) {}
+  function storeOutbox() {
+    try { localStorage.setItem(OUTBOX_KEY, JSON.stringify({ pending: true, at: Date.now() })); } catch (e) {}
   }
 
   function readOutbox() {
     const parsed = readJson(OUTBOX_KEY, null);
-    if (!parsed || typeof parsed !== 'object' || !parsed.notes) return null;
-    return parsed;
+    return !!(parsed && typeof parsed === 'object');
   }
 
   function clearOutbox() {
@@ -305,20 +338,31 @@
       if (!u) clearOutbox();
       return Promise.resolve(null);
     }
+    if (isSyncing) {
+      pushAfterSync = true;
+      return Promise.resolve(null);
+    }
+    const owner = storedAccount();
+    if (owner && owner !== String(u.id)) return Promise.resolve(null);
+    if (pulledFor !== String(u.id)) {
+      storeOutbox();
+      if (pullTimer) return Promise.resolve(null);
+      return pullAndMerge().then(function () { return null; });
+    }
     if (Date.now() - lastPushAt < PUSH_GAP_MS) {
-      const pending = collectPayload();
-      storeOutbox(pending);
+      storeOutbox();
       scheduleRetry();
       return Promise.resolve(null);
     }
-    const payload = readOutbox() || collectPayload();
+    const payload = collectPayload();
     if (JSON.stringify(payload).length > MAX_PAYLOAD_BYTES) {
+      try { localStorage.removeItem(OUTBOX_KEY); } catch (e) {}
       reportSaveMiss('payload_too_large');
       return Promise.resolve(null);
     }
     lastPushAt = Date.now();
     try { localStorage.setItem(LAST_PUSH_KEY, String(lastPushAt)); } catch (e) {}
-    storeOutbox(payload);
+    storeOutbox();
     return c.from(TABLE).upsert({
       user_id: u.id,
       notes: payload.notes,
@@ -331,11 +375,12 @@
           clearOutbox();
           return null;
         }
-        storeOutbox(payload);
+        storeOutbox();
         scheduleRetry();
         reportSaveMiss(cause);
         return null;
       }
+      retryAttempt = 0;
       clearOutbox();
       notifyStudySynced();
       return payload;
@@ -345,7 +390,7 @@
         clearOutbox();
         return null;
       }
-      storeOutbox(payload);
+      storeOutbox();
       scheduleRetry();
       reportSaveMiss(cause);
       return null;
@@ -379,16 +424,23 @@
       .maybeSingle()
       .then(function (res) {
         isSyncing = false;
+        const still = currentUser();
+        if (!still || String(still.id) !== uid) {
+          pushAfterSync = false;
+          return still ? pullAndMerge() : null;
+        }
         if (res && res.error) {
-          const cause = errorCause(res.error);
-          if (cause !== 'not_authenticated') reportPullMiss(cause);
+          pullFailed(errorCause(res.error));
           return null;
         }
+        pulledFor = uid;
+        stopPullRetry();
         const merged = mergePayload(collectPayload(), res && res.data);
         const wroteLocal = applyMerged(merged);
         if (wroteLocal) notifyStudySynced();
-        if (merged.localHadNew || readOutbox()) {
-          pushLocalToRemote();
+        if (merged.localHadNew || readOutbox() || pushAfterSync) {
+          pushAfterSync = false;
+          return pushLocalToRemote().then(function () { return merged; });
         } else {
           clearOutbox();
         }
@@ -396,10 +448,22 @@
       })
       .catch(function (err) {
         isSyncing = false;
-        const cause = errorCause(err);
-        if (cause !== 'not_authenticated') reportPullMiss(cause);
+        const still = currentUser();
+        if (!still || String(still.id) !== uid) {
+          pushAfterSync = false;
+          return still ? pullAndMerge() : null;
+        }
+        pullFailed(errorCause(err));
         return null;
       });
+  }
+
+  function pullFailed(cause) {
+    if (pushAfterSync) storeOutbox();
+    pushAfterSync = false;
+    if (cause === 'not_authenticated') return;
+    reportPullMiss(cause);
+    schedulePull();
   }
 
   function init() {
@@ -413,7 +477,14 @@
         if (u) {
           pullAndMerge();
         } else {
-          try { localStorage.removeItem(ACCOUNT_KEY); } catch (e) {}
+          if (debounceTimer) clearTimeout(debounceTimer);
+          if (retryTimer) clearTimeout(retryTimer);
+          debounceTimer = null;
+          retryTimer = null;
+          retryAttempt = 0;
+          pushAfterSync = false;
+          pulledFor = '';
+          stopPullRetry();
           clearOutbox();
         }
       });

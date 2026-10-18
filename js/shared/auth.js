@@ -11,6 +11,8 @@
   let passwordRecovery = false;
   let moderator = false;
   let moderatorGen = 0;
+  let announced = false;
+  let lastAnnounce = Promise.resolve();
   let readySettled = false;
   let readyResolve = function () {};
   const readyPromise = new Promise(function (resolve) {
@@ -173,15 +175,29 @@
     try { history.replaceState({}, "", url); } catch (e) {}
   }
 
-  function setUser(next, session) {
-    user = next || null;
+  function userId(u) {
+    return u && u.id ? String(u.id) : "";
+  }
+
+  function setUser(next, session, event) {
+    const nextUser = next || null;
+    const changed = !announced || userId(user) !== userId(nextUser) || event === "PASSWORD_RECOVERY";
+    user = nextUser;
     accessToken = session && session.access_token ? session.access_token : "";
+    if (!changed) {
+      if (event === "USER_UPDATED") {
+        persistIdentity(user);
+        renderAll();
+      }
+      return lastAnnounce;
+    }
+    announced = true;
     if (user && window.BAJourney && typeof window.BAJourney.commitPendingTerms === "function") {
       window.BAJourney.commitPendingTerms(user.id);
     }
     persistIdentity(user);
     if (user) clearError();
-    return refreshModerator().then(function () {
+    lastAnnounce = refreshModerator().then(function () {
       listeners.forEach(function (fn) {
         try { fn(user); } catch (err) {}
       });
@@ -190,6 +206,7 @@
         window.ScrollTerms.syncLock();
       }
     });
+    return lastAnnounce;
   }
 
   function redirectTo() {
@@ -455,10 +472,10 @@
             window.SiteErrors.clear();
           }
         }
-        setUser(null, null);
+        setUser(null, null, event);
         return;
       }
-      setUser(session && session.user ? session.user : null, session);
+      setUser(session && session.user ? session.user : null, session, event);
     });
     client.auth.getSession().then(function (res) {
       if (res && res.error) reportError(friendlyAuthError(res.error), "auth");

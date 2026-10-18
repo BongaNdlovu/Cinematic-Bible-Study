@@ -2,6 +2,9 @@
 -- (supabase-insights.sql, supabase-progress.sql, supabase-reviews.sql).
 -- Events: 60 rows/min per anon_id (or per user_id if anon_id is empty).
 -- Surveys: 5/hour per anon_id (or per user_id if anon_id is empty).
+-- Events and surveys with neither anon_id nor user_id are refused. Unsigned rows (user_id null)
+-- also share one cap for the whole project: events 600/min, surveys 20/min, so rotating
+-- anon_id cannot flood either table.
 -- Progress: one upsert per 6 seconds per row (10/min).
 -- Reviews: 3 inserts/day per user_id.
 -- Per-IP POST caps are enforced at the site edge, not here (browser posts go to Supabase).
@@ -46,6 +49,13 @@ begin
   else
     raise exception 'rate_limit';
   end if;
+  if new.user_id is null then
+    if (select count(*) from public.exhibit_events
+        where user_id is null
+          and created_at > now() - interval '1 minute') >= 600 then
+      raise exception 'rate_limit';
+    end if;
+  end if;
   return new;
 end;
 $$;
@@ -73,6 +83,15 @@ begin
     if (select count(*) from public.exhibit_surveys
         where user_id = new.user_id
           and created_at > now() - interval '1 hour') >= 5 then
+      raise exception 'rate_limit';
+    end if;
+  else
+    raise exception 'rate_limit';
+  end if;
+  if new.user_id is null then
+    if (select count(*) from public.exhibit_surveys
+        where user_id is null
+          and created_at > now() - interval '1 minute') >= 20 then
       raise exception 'rate_limit';
     end if;
   end if;

@@ -2,7 +2,7 @@
  *  Mirrors js/study/tailwind-config.js (kept in sync with it). */
 module.exports = {
   darkMode: 'class',
-  content: ['./study.html', './js/**/*.js'],
+  content: ['./study.html', './css/study-page.css', './js/**/*.js'],
   theme: {
     extend: {
       fontFamily: {

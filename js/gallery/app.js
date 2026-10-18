@@ -380,9 +380,25 @@ import * as THREE from 'three';
     window.addEventListener('resize', layoutHall);
 
     const hallTexCache = new Map();
+    const HALL_CACHE_CAP = 4;
     let hallCurrentUrl = '';
     let hallSlot = 0;
     let hallMixTarget = 0;
+    function trimHallCache(url) {
+      const keep = new Set([url, hallCurrentUrl]);
+      const bound = new Set([hallUniforms.mapA.value, hallUniforms.mapB.value, hallDummy]);
+      const spare = [];
+      hallTexCache.forEach((tex, cachedUrl) => {
+        if (keep.has(cachedUrl) || bound.has(tex)) return;
+        spare.push(cachedUrl);
+      });
+      while (hallTexCache.size > HALL_CACHE_CAP && spare.length) {
+        const dropUrl = spare.shift();
+        const tex = hallTexCache.get(dropUrl);
+        hallTexCache.delete(dropUrl);
+        if (tex && tex !== hallDummy && typeof tex.dispose === 'function') tex.dispose();
+      }
+    }
     function prepHallTex(tex) {
       tex.colorSpace = THREE.SRGBColorSpace;
       // Non-power-of-two images cannot be mipmapped cleanly; switch to a plain
@@ -420,6 +436,7 @@ import * as THREE from 'three';
       texLoader.load(url, (tex) => {
         prepHallTex(tex);
         hallTexCache.set(url, tex);
+        trimHallCache(url);
         if (hallCurrentUrl === url) apply(tex);
       });
     }
@@ -430,6 +447,7 @@ import * as THREE from 'three';
       texLoader.load(url, (tex) => {
         prepHallTex(tex);
         hallTexCache.set(url, tex);
+        trimHallCache(url);
         hallPending.delete(url);
       }, undefined, () => hallPending.delete(url));
     }
@@ -3429,6 +3447,23 @@ import * as THREE from 'three';
       gltfLoader.load(url, (gltf) => settle(onLoad, gltf), undefined, (err) => settle(onError, err));
     }
 
+    /* Three's Object3D.clone JSON-serializes userData. A material stored there
+       runs toJSON and writes every texture out as a data URL. Lift those
+       materials off the source for the clone, then put them back. */
+    function cloneExhibit(model) {
+      const held = [];
+      model.traverse((child) => {
+        if (!child.userData || child.userData.origMat == null) return;
+        held.push([child, child.userData.origMat]);
+        delete child.userData.origMat;
+      });
+      try {
+        return model.clone();
+      } finally {
+        held.forEach(([child, mat]) => { child.userData.origMat = mat; });
+      }
+    }
+
     async function loadGLBAsset(key, onLoaded) {
       if (MeshoptDecoder && MeshoptDecoder.ready) {
         try {
@@ -3442,7 +3477,7 @@ import * as THREE from 'three';
       }
       if (loadedGLTFScenes[key]) {
         touchGltf(key);
-        if (onLoaded) onLoaded(loadedGLTFScenes[key].clone());
+        if (onLoaded) onLoaded(cloneExhibit(loadedGLTFScenes[key]));
         return;
       }
       const data = ASSET_REGISTRY[key];
@@ -3502,7 +3537,7 @@ import * as THREE from 'three';
             if (onLoaded) {
               setTimeout(() => {
                 try {
-                  onLoaded(model.clone());
+                  onLoaded(cloneExhibit(model));
                 } catch (e) {
                   if (key === 'assembled') markLoadFailure();
                 }
@@ -3526,7 +3561,7 @@ import * as THREE from 'three';
       if (!fullBodySource) return;
 
       assembledContainer.clear();
-      const fullBody = fullBodySource.clone();
+      const fullBody = cloneExhibit(fullBodySource);
 
       normalizePart(fullBody, 3.55);
 

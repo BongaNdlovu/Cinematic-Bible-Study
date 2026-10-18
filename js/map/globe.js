@@ -83,6 +83,7 @@ const PATCH_COLS = 8;
 const PATCH_ROWS = 6;
 const PATCH_NEAR = 2.5;
 const PATCH_FAR = 2.95;
+const TILE_LANES = 6;
 
 function tileX(lon, z) {
   return ((lon + 180) / 360) * Math.pow(2, z);
@@ -102,13 +103,18 @@ function tileLon(x, z) {
   return (x / Math.pow(2, z)) * 360 - 180;
 }
 
-function loadImage(url) {
+function loadImage(url, live) {
   return new Promise((resolve) => {
     const img = new Image();
+    const done = (ok) => {
+      live.delete(img);
+      resolve(ok ? img : null);
+    };
     img.crossOrigin = "anonymous";
     img.decoding = "async";
-    img.addEventListener("load", () => resolve(img));
-    img.addEventListener("error", () => resolve(null));
+    img.addEventListener("load", () => done(true));
+    img.addEventListener("error", () => done(false));
+    live.set(img, done);
     img.src = url;
   });
 }
@@ -242,22 +248,28 @@ export function create(container, options) {
   const patches = new Map();
   let patchKey = "";
   let patchTimer = 0;
+  let patchFails = 0;
+  let patchRetryAt = 0;
   let featherTex = null;
   let fade = null;
 
   const loader = new THREE.TextureLoader();
   const aniso = Math.min(8, renderer.capabilities.getMaxAnisotropy());
-  function load(name) {
+  function load(name, red) {
     return new Promise((resolve) => {
-      loader.load(base + name, (tex) => { tex.anisotropy = aniso; resolve(tex); }, undefined, () => resolve(null));
+      loader.load(base + name, (tex) => {
+        tex.anisotropy = aniso;
+        if (red) tex.format = THREE.RedFormat;
+        resolve(tex);
+      }, undefined, () => resolve(null));
     });
   }
   const rect = container.getBoundingClientRect();
-  const big = !phone && renderer.capabilities.maxTextureSize >= 4096 && Math.max(rect.width, rect.height) * dpr >= 900;
+  const big = !phone && renderer.capabilities.maxTextureSize >= 4096 && Math.max(rect.width, rect.height) * dpr >= 1600;
   const ready = Promise.all([
     load(big ? "earth-day-4k.webp" : "earth-day-2k.webp"),
-    load("earth-bump-2k.webp"),
-    load("earth-water-2k.webp")
+    load("earth-bump-2k.webp", true),
+    load("earth-water-2k.webp", true)
   ]).then(([day, bump, water]) => {
     if (disposed) {
       [day, bump, water].forEach((t) => t && t.dispose());
@@ -489,33 +501,75 @@ export function create(container, options) {
     }
   }
 
+  function dropPending() {
+    const p = patches.get(patchKey);
+    if (!p || p.mesh) return false;
+    patches.delete(patchKey);
+    p.cancel();
+    return true;
+  }
+
+  function freeCanvas(canvas) {
+    canvas.width = 1;
+    canvas.height = 1;
+  }
+
   async function buildPatch(key, z, x0, y0) {
-    const entry = { mesh: null, used: performance.now() };
+    const live = new Map();
+    const entry = {
+      mesh: null,
+      used: performance.now(),
+      cancel: () => live.forEach((done, img) => {
+        img.src = "";
+        done(false);
+      })
+    };
     patches.set(key, entry);
     const n = Math.pow(2, z);
     const canvas = document.createElement("canvas");
     canvas.width = PATCH_COLS * 256;
     canvas.height = PATCH_ROWS * 256;
     const g = canvas.getContext("2d");
-    const jobs = [];
+    const tiles = [];
     for (let row = 0; row < PATCH_ROWS; row++) {
       for (let col = 0; col < PATCH_COLS; col++) {
-        const tx = (((x0 + col) % n) + n) % n;
-        jobs.push(loadImage(TILE_URL + z + "/" + (y0 + row) + "/" + tx).then((img) => {
-          if (img) g.drawImage(img, col * 256, row * 256);
-          return !!img;
-        }));
+        tiles.push({ col: col, row: row, url: TILE_URL + z + "/" + (y0 + row) + "/" + ((((x0 + col) % n) + n) % n) });
       }
     }
-    const got = await Promise.all(jobs);
-    if (disposed || patches.get(key) !== entry) return;
-    if (got.filter(Boolean).length < jobs.length * 0.5) {
-      patches.delete(key);
+    const allowed = Math.floor(tiles.length * 0.5);
+    let next = 0;
+    let missed = 0;
+    const wanted = () => !disposed && patches.get(key) === entry && missed <= allowed;
+    const lane = async () => {
+      while (next < tiles.length && wanted()) {
+        const t = tiles[next++];
+        const img = await loadImage(t.url, live);
+        if (img) g.drawImage(img, t.col * 256, t.row * 256);
+        else missed++;
+      }
+    };
+    await Promise.all(Array.from({ length: TILE_LANES }, lane));
+    if (disposed || patches.get(key) !== entry) {
+      freeCanvas(canvas);
       return;
     }
+    if (missed > allowed) {
+      freeCanvas(canvas);
+      patches.delete(key);
+      patchKey = "";
+      patchFails++;
+      patchRetryAt = performance.now() + Math.min(60000, 2000 * Math.pow(2, patchFails - 1));
+      schedulePatch();
+      return;
+    }
+    patchFails = 0;
     const tex = new THREE.CanvasTexture(canvas);
     tex.colorSpace = THREE.SRGBColorSpace;
     tex.anisotropy = aniso;
+    tex.onUpdate = () => {
+      tex.onUpdate = null;
+      freeCanvas(canvas);
+    };
     const mat = new THREE.MeshPhongMaterial({
       color: 0xe2e2e2,
       map: tex,
@@ -530,6 +584,7 @@ export function create(container, options) {
     mesh.visible = false;
     entry.mesh = mesh;
     patchGroup.add(mesh);
+    renderer.initTexture(tex);
     evictPatches();
     if (patchKey === key) showPatch(key);
   }
@@ -545,8 +600,14 @@ export function create(container, options) {
     const y0 = clamp(Math.floor((cy - PATCH_ROWS / 2) / 2) * 2, 0, n - PATCH_ROWS);
     const key = z + "/" + x0 + "/" + y0;
     if (key === patchKey) return;
-    patchKey = key;
     const have = patches.get(key);
+    const wait = patchRetryAt - performance.now();
+    if (!have && wait > 0) {
+      patchTimer = setTimeout(updatePatch, wait);
+      return;
+    }
+    dropPending();
+    patchKey = key;
     if (have && have.mesh) showPatch(key);
     else if (!have) buildPatch(key, z, x0, y0);
   }
@@ -830,6 +891,7 @@ export function create(container, options) {
     raf = 0;
     if (patchTimer) clearTimeout(patchTimer);
     patchTimer = 0;
+    if (dropPending()) patchKey = "";
   }
 
   function dispose() {

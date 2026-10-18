@@ -103,13 +103,13 @@ if (highlighted(2, 'Daniel', 2, 1)) fail('Daniel 2:1 is setup, not a highlight')
 if (api.findPhrase("Thou art this head of gold.", "head of gold") < 0) fail('findPhrase missed head of gold');
 if (api.findPhrase("the king\u2019s matter", "the king's matter") < 0) fail('findPhrase must treat curly apostrophes as straight');
 
-const html = fs.readFileSync(path.join(root, 'study.html'), 'utf8');
+const html = fs.readFileSync(path.join(root, 'study.html'), 'utf8') + fs.readFileSync(path.join(root, 'css/study-page.css'), 'utf8');
 const studyApp = fs.readFileSync(path.join(root, 'js/study/study-app.js'), 'utf8');
 const sheetsSrc = fs.readFileSync(path.join(root, 'js/study/sheets-data.js'), 'utf8');
 const studySources = html + studyApp + sheetsSrc;
 if (!html.includes('data-instrument="scripture"')) fail('study.html is missing the Scripture instrument tab');
 if (!html.includes('js/study/scripture.js')) fail('study.html does not load js/study/scripture.js');
-if (!html.includes('js/study/sheets-data.js') || !html.includes('js/study/study-app.js')) {
+if (!html.includes('js/study/sheets/index.js') || !html.includes('js/study/study-app.js')) {
   fail('study.html does not load extracted study scripts');
 }
 if (!studyApp.includes('BAScripture.showSheet')) fail('loadSheet does not ask Scripture to follow the sheet');
