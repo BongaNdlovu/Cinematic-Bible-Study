@@ -73,6 +73,11 @@
             <div class="witness-stars-input" id="witness-edit-stars" role="radiogroup" aria-labelledby="witness-edit-rating-label"></div>
             <input type="hidden" id="witness-edit-rating" name="rating" value="5">
           </div>
+          <div class="witness-name-field">
+            <label for="witness-edit-name">Name shown with your note</label>
+            <input type="text" id="witness-edit-name" name="display_name" maxlength="80" autocomplete="off" placeholder="Student">
+            <p class="witness-name-hint">This is the only name readers see. Leave it blank to post as “Student”.</p>
+          </div>
           <label class="sr-only" for="witness-edit-body">Edit your review</label>
           <textarea id="witness-edit-body" name="body" maxlength="600" minlength="40" required></textarea>
           <div class="witness-form-actions">
@@ -90,6 +95,11 @@
             <span class="witness-stars-label" id="witness-rating-label">Rating</span>
             <div class="witness-stars-input" id="witness-stars" role="radiogroup" aria-labelledby="witness-rating-label"></div>
             <input type="hidden" id="witness-rating" name="rating" value="5">
+          </div>
+          <div class="witness-name-field">
+            <label for="witness-name">Name shown with your note</label>
+            <input type="text" id="witness-name" name="display_name" maxlength="80" autocomplete="off" placeholder="Student">
+            <p class="witness-name-hint">This is the only name readers see. Leave it blank to post as “Student”.</p>
           </div>
           <label class="sr-only" for="witness-body">Your review</label>
           <textarea id="witness-body" name="body" maxlength="600" minlength="40" required placeholder="We did sitting 2 after church and finally understood why 457 matters…"></textarea>

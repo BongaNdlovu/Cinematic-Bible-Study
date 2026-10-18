@@ -524,8 +524,8 @@
         <form id="cert-review-form" class="space-y-3.5">
           <div class="grid grid-cols-2 gap-3">
             <div>
-              <label for="cert-review-name" class="block text-[11px] font-mono font-semibold text-ink-700 dark:text-paper-300 mb-1">Your Name</label>
-              <input type="text" id="cert-review-name" class="w-full px-3 py-1.5 rounded-lg border border-ink-300 dark:border-ink-700 bg-paper-100 dark:bg-paper-800 text-ink-900 dark:text-paper-100 text-xs focus:ring-2 focus:ring-amber-500 outline-none" value="${escapeHtml(studentName || '')}" required maxlength="80">
+              <label for="cert-review-name" class="block text-[11px] font-mono font-semibold text-ink-700 dark:text-paper-300 mb-1">Name shown with your note</label>
+              <input type="text" id="cert-review-name" class="w-full px-3 py-1.5 rounded-lg border border-ink-300 dark:border-ink-700 bg-paper-100 dark:bg-paper-800 text-ink-900 dark:text-paper-100 text-xs focus:ring-2 focus:ring-amber-500 outline-none" value="${escapeHtml(String(studentName || '').trim().split(/\s+/)[0] || '')}" placeholder="Student" maxlength="80">
             </div>
             <div>
               <label for="cert-review-role" class="block text-[11px] font-mono font-semibold text-ink-700 dark:text-paper-300 mb-1">Your Role</label>
@@ -634,7 +634,7 @@
         e.preventDefault();
         const text = bodyInput.value.trim();
         if (text.length < 40) return;
-        const nameVal = (document.getElementById("cert-review-name")?.value || studentName || "").trim();
+        const nameVal = (document.getElementById("cert-review-name")?.value || "").trim();
         const roleVal = document.getElementById("cert-review-role")?.value || "Student";
         const ratingVal = Number(document.getElementById("cert-review-rating")?.value || "5");
         const cohortVal = (document.getElementById("cert-review-cohort")?.value || "").trim();

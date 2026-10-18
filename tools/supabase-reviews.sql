@@ -67,10 +67,43 @@ as $$
 $$;
 
 drop policy if exists read_approved_reviews on public.exhibit_reviews;
-create policy read_approved_reviews
-  on public.exhibit_reviews for select
-  to anon, authenticated
-  using (approved = true and rejected = false);
+
+create or replace function public.exhibit_public_reviews(p_limit integer default 24)
+returns table (
+  id uuid,
+  display_name text,
+  body text,
+  rating smallint,
+  created_at timestamptz
+)
+language sql
+stable
+security definer
+set search_path = public
+as $$
+  select r.id, r.display_name, r.body, r.rating, r.created_at
+  from public.exhibit_reviews r
+  where r.approved = true and r.rejected = false
+  order by r.created_at desc
+  limit least(greatest(coalesce(p_limit, 24), 1), 60);
+$$;
+
+create or replace function public.exhibit_public_review_count()
+returns integer
+language sql
+stable
+security definer
+set search_path = public
+as $$
+  select count(*)::integer
+  from public.exhibit_reviews
+  where approved = true and rejected = false;
+$$;
+
+revoke all on function public.exhibit_public_reviews(integer) from public, anon, authenticated;
+revoke all on function public.exhibit_public_review_count() from public, anon, authenticated;
+grant execute on function public.exhibit_public_reviews(integer) to anon, authenticated;
+grant execute on function public.exhibit_public_review_count() to anon, authenticated;
 
 drop policy if exists read_own_reviews on public.exhibit_reviews;
 create policy read_own_reviews
@@ -132,8 +165,6 @@ alter table public.exhibit_reviews
   add column if not exists rating smallint check (rating between 1 and 5);
 
 revoke select on public.exhibit_reviews from anon, public;
-grant select (id, display_name, body, rating, created_at, approved, rejected)
-  on public.exhibit_reviews to anon;
 grant select on public.exhibit_reviews to authenticated;
 grant insert, update on public.exhibit_reviews to authenticated;
 grant execute on function public.is_review_moderator() to authenticated;

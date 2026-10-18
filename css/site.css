@@ -712,7 +712,8 @@ a:focus:not(:focus-visible) { outline: none; }
 .witness-stars-field {
   margin-bottom: 14px;
 }
-.witness-stars-label {
+.witness-stars-label,
+.witness-name-field label {
   display: block;
   font-size: 10px;
   letter-spacing: 0.12em;
@@ -790,6 +791,28 @@ a:focus:not(:focus-visible) { outline: none; }
 .witness-form-card textarea:focus {
   outline: 1px solid var(--gold);
   border-color: var(--gold);
+}
+.witness-name-field {
+  margin-bottom: 14px;
+}
+.witness-name-field input {
+  width: 100%;
+  background: rgba(8, 7, 5, 0.72);
+  border: 1px solid var(--line);
+  color: var(--ink);
+  font: inherit;
+  font-family: var(--quote);
+  font-size: 18px;
+  padding: 10px 16px;
+}
+.witness-name-field input:focus {
+  outline: 1px solid var(--gold);
+  border-color: var(--gold);
+}
+.witness-form-card .witness-name-hint {
+  margin: 6px 0 0;
+  font-size: 14px;
+  color: var(--dim);
 }
 .witness-form-actions {
   display: flex;

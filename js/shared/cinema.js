@@ -116,6 +116,7 @@
     if (!host || host.classList.contains("cx-footer")) return;
     const verse = host.dataset.verse || "Surely the Lord God will do nothing, but he revealeth his secret unto his servants the prophets.";
     const cite = host.dataset.cite || "Amos 3:7 · King James Version";
+    const rights = host.dataset.rights || "";
     const here = location.pathname.split("/").pop() || "index.html";
     const links = FOOTER_LINKS.map(function (l) {
       const current = here === l[0] || here + ".html" === l[0] || (here === "" && l[0] === "index.html");
@@ -135,6 +136,7 @@
           '<cite class="cx-footer-cite">' + esc(cite) + "</cite></blockquote>" +
         '<ul class="cx-footer-links" aria-label="Site">' + links + "</ul>" +
         '<p class="cx-footer-base"><span>The Shelf of Daniel</span><span>A historicist study of the book of Daniel</span><span>Scripture: King James Version</span></p>' +
+        (rights ? '<p class="cx-footer-rights">' + esc(rights) + "</p>" : "") +
       "</div>";
   }
 

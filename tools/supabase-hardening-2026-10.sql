@@ -8,7 +8,7 @@
 -- role 40, cohort 200. Each check guards new rows at once; it is validated only if every
 -- existing row already passes (see pg_constraint.convalidated).
 -- Moderators: only the confirmed auth email counts, never user metadata or the JWT.
--- Reviews: signed-out readers may select only the columns the public page shows.
+-- Reviews: run supabase-reviews-privacy.sql as well; this file closes the table to signed-out readers.
 -- The same statements live in the setup files (supabase-progress.sql, supabase-insights.sql,
 -- supabase-reviews.sql, supabase-rate-limits.sql, supabase-fix-anon-inserts.sql).
 
@@ -178,8 +178,6 @@ $$;
 grant execute on function public.is_review_moderator() to authenticated;
 
 revoke select on public.exhibit_reviews from anon, public;
-grant select (id, display_name, body, rating, created_at, approved, rejected)
-  on public.exhibit_reviews to anon;
 grant select on public.exhibit_reviews to authenticated;
 
 commit;

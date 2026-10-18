@@ -382,8 +382,16 @@ a.cx-card:hover, .cx-card.is-interactive:hover { transform: translateY(-2px); bo
   color: var(--cx-dim);
 }
 .cx-footer-base span + span::before { content: "·"; margin-right: 18px; color: var(--cx-gold-deep); }
+.cx-footer-rights {
+  margin-top: 12px;
+  text-align: center;
+  font-family: var(--cx-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.08em;
+  color: var(--cx-dim);
+}
 @media (max-width: 560px) {
-  .cx-footer { padding: 56px 18px 28px; }
+  .cx-footer { padding: 56px 18px calc(88px + env(safe-area-inset-bottom)); }
   .cx-footer-links { gap: 2px 18px; }
   .cx-footer-base span + span::before { display: none; }
   .cx-footer-base { flex-direction: column; }

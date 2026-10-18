@@ -39,13 +39,16 @@
   }
 
   function reviewerName() {
-    if (window.ScrollAuth && typeof window.ScrollAuth.displayName === "function") {
-      const name = window.ScrollAuth.displayName();
-      if (name && name.indexOf("@") < 0) return name.slice(0, 80);
-    }
     const u = currentUser();
-    if (u && u.email) return String(u.email).split("@")[0].slice(0, 80);
-    return "Student";
+    const meta = (u && u.user_metadata) || {};
+    const given = String(meta.given_name || "").trim();
+    const full = String(meta.full_name || meta.name || "").trim();
+    const first = given || full.split(/\s+/)[0] || "";
+    return first.indexOf("@") < 0 ? first.slice(0, 40) : "";
+  }
+
+  function publicName(raw) {
+    return String(raw == null ? "" : raw).trim().slice(0, 80) || "Student";
   }
 
   function clampRating(n) {
@@ -189,15 +192,14 @@
     }
   }
 
+  function approvedRows(c, limit) {
+    return c.rpc("exhibit_public_reviews", { p_limit: limit || 24 });
+  }
+
   function fetchApproved(limit) {
     const c = authClient();
     if (!c) return Promise.resolve([]);
-    return c.from(TABLE)
-      .select("id, display_name, body, rating, created_at")
-      .eq("approved", true)
-      .eq("rejected", false)
-      .order("created_at", { ascending: false })
-      .limit(limit || 24)
+    return approvedRows(c, limit)
       .then(function (res) { return res && !res.error && Array.isArray(res.data) ? res.data : []; },
         function () { return []; });
   }
@@ -205,11 +207,8 @@
   function countApproved() {
     const c = authClient();
     if (!c) return Promise.resolve(null);
-    return c.from(TABLE)
-      .select("id", { count: "exact", head: true })
-      .eq("approved", true)
-      .eq("rejected", false)
-      .then(function (res) { return res && !res.error && typeof res.count === "number" ? res.count : null; },
+    return c.rpc("exhibit_public_review_count")
+      .then(function (res) { return res && !res.error && typeof res.data === "number" ? res.data : null; },
         function () { return null; });
   }
 
@@ -236,12 +235,7 @@
       paintReviewLoadFail(list, empty);
       return Promise.resolve();
     }
-    return c.from(TABLE)
-      .select("id, display_name, body, rating, created_at")
-      .eq("approved", true)
-      .eq("rejected", false)
-      .order("created_at", { ascending: false })
-      .limit(limit)
+    return approvedRows(c, limit)
       .then(function (res) {
         if (res && res.error) {
           paintReviewLoadFail(list, empty);
@@ -305,7 +299,7 @@
     return { ok: true, text: text };
   }
 
-  function updateReview(id, raw, rating, statusElId) {
+  function updateReview(id, raw, rating, statusElId, name) {
     const parsed = validateReviewText(raw);
     if (!parsed.ok) {
       setStatus(parsed.message, "error", statusElId);
@@ -325,10 +319,9 @@
       setStatus("Could not save. Try again.", "error", statusElId);
       return Promise.resolve(false);
     }
-    return c.from(TABLE).update({
-      body: parsed.text,
-      rating: stars
-    }).eq("id", id).then(function (res) {
+    const changes = { body: parsed.text, rating: stars };
+    if (name !== undefined) changes.display_name = publicName(name);
+    return c.from(TABLE).update(changes).eq("id", id).then(function (res) {
       if (res && res.error) {
         setStatus("Could not save. Try again.", "error", statusElId);
         return false;
@@ -507,7 +500,7 @@
       return Promise.resolve();
     }
     return authClient().from(TABLE)
-      .select("id, user_id, body, rating, approved, rejected, created_at")
+      .select("id, user_id, display_name, body, rating, approved, rejected, created_at")
       .eq("user_id", currentUser().id)
       .order("created_at", { ascending: false })
       .limit(1)
@@ -535,6 +528,8 @@
         }
         const body = document.getElementById("witness-edit-body");
         if (body) body.value = row.body || "";
+        const nameField = document.getElementById("witness-edit-name");
+        if (nameField) nameField.value = row.display_name || "";
         mountStarPicker(
           document.getElementById("witness-edit-stars"),
           document.getElementById("witness-edit-rating"),
@@ -646,7 +641,7 @@
       setStatus("You can post 3 reviews per day.", "error");
       return Promise.resolve(false);
     }
-    const displayName = (opts.name ? String(opts.name).trim().slice(0, 80) : reviewerName()) || "Student";
+    const displayName = publicName(typeof opts.name === "string" ? opts.name : reviewerName());
     return c.from(TABLE).insert({
       user_id: u.id,
       display_name: displayName,
@@ -676,7 +671,8 @@
       e.preventDefault();
       const input = document.getElementById("witness-body");
       const rating = document.getElementById("witness-rating");
-      submitReview(input && input.value, { rating: rating && rating.value });
+      const name = document.getElementById("witness-name");
+      submitReview(input && input.value, { rating: rating && rating.value, name: name ? name.value : undefined });
     });
   }
 
@@ -688,11 +684,13 @@
       if (!ownReviewId) return;
       const input = document.getElementById("witness-edit-body");
       const rating = document.getElementById("witness-edit-rating");
+      const name = document.getElementById("witness-edit-name");
       updateReview(
         ownReviewId,
         input && input.value,
         rating && rating.value,
-        "witness-edit-status"
+        "witness-edit-status",
+        name ? name.value : undefined
       );
     });
   }
@@ -703,6 +701,12 @@
     const inSession = signedIn();
     if (hint) hint.hidden = inSession;
     if (submit) submit.textContent = inSession ? "Leave a note" : "Sign in to leave a note";
+    const name = document.getElementById("witness-name");
+    if (name && name.dataset.touched !== "1") name.value = inSession ? (name.value || reviewerName()) : "";
+    if (name && !name.dataset.bound) {
+      name.dataset.bound = "1";
+      name.addEventListener("input", function () { name.dataset.touched = "1"; });
+    }
   }
 
   function start() {

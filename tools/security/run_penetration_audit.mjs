@@ -799,6 +799,14 @@ async function liveDeskClosed() {
   });
   const reviewUser = await api("GET", "/rest/v1/exhibit_reviews?select=user_id");
   if (reviewUser.status === 200) throw new Error("anonymous key read review account ids");
+  const publicReviews = await api("POST", "/rest/v1/rpc/exhibit_public_reviews", { p_limit: 60 });
+  if (publicReviews.status !== 200) throw new Error("public review list replied " + publicReviews.status);
+  const publicRows = JSON.parse(publicReviews.text);
+  if (!Array.isArray(publicRows)) throw new Error("public review list was not a list");
+  publicRows.forEach((row) => {
+    const extra = Object.keys(row).filter((k) => !["id", "display_name", "body", "rating", "created_at"].includes(k));
+    if (extra.length) throw new Error("public review list exposed " + extra.join(", "));
+  });
   return "notices are public text only; help notes, receipts, inbox, and review account ids stay closed";
 }
 
