@@ -30,6 +30,8 @@
   <link rel="stylesheet" href="css/book-reader.css?v=cx1">
   <link rel="stylesheet" href="css/cinema.css?v=cx2">
   <link rel="stylesheet" href="css/onboard.css?v=cx3">
+  <link rel="stylesheet" href="css/book-open.css">
+  <script src="js/study/book-open.js"></script>
   <script src="js/shared/cinema.js"></script>
   <script type="importmap">
   {
@@ -9283,6 +9285,25 @@
 </head>
 
 <body class="charcoal-mode bg-paper-950 text-paper-100 font-sans transition-colors duration-200 selection:bg-amber-900 min-h-screen flex flex-col justify-between relative overflow-x-hidden">
+
+  <div id="book-open" aria-hidden="true">
+    <div class="bko-stage">
+      <div class="bko-book">
+        <div class="bko-shadow"></div>
+        <div class="bko-sheet bko-title-page">
+          <div class="bko-type"><span class="bko-epoch"></span><span class="bko-rule"></span><span class="bko-name"></span><span class="bko-ref"></span></div>
+        </div>
+        <div class="bko-sheet bko-leaf bko-leaf-spread" style="--k:2;--z0:1px;--z1:4px"><div class="bko-face bko-front"></div><div class="bko-face bko-back"></div></div>
+        <div class="bko-sheet bko-leaf" style="--k:1;--z0:2px;--z1:3px"><div class="bko-face bko-front"></div><div class="bko-face bko-back"></div></div>
+        <div class="bko-sheet bko-leaf" style="--k:0;--z0:3px;--z1:2px"><div class="bko-face bko-front"></div><div class="bko-face bko-back"></div></div>
+        <div class="bko-sheet bko-cover" style="--z0:4px;--z1:1px">
+          <div class="bko-face bko-front"><div class="bko-art"></div><div class="bko-type bko-cover-type"><span class="bko-press"></span><span class="bko-name"></span><span class="bko-sub"></span><span class="bko-vol"></span></div></div>
+          <div class="bko-face bko-back"></div>
+        </div>
+      </div>
+    </div>
+    <div class="bko-card"><span class="bko-epoch"></span><span class="bko-name"></span></div>
+  </div>
 
   <div class="cinematic-atmosphere" aria-hidden="true">
     <img class="atm-hero" src="assets/study/hero-cinematic.jpg" alt="Atmospheric background - Daniel study hero" aria-hidden="true">

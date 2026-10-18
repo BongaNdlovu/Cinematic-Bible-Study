@@ -5022,6 +5022,10 @@
       return holder.textContent.trim();
     }
 
+    function bookOpened() {
+      return window.BookOpen ? window.BookOpen.finished : Promise.resolve();
+    }
+
     function mountSheetBook(index, data, restore) {
       if (!window.BookReader) return;
       window.BookReader.mount(document.getElementById('sheet-article'), {
@@ -5169,12 +5173,12 @@
       let hasChosenTrack = false;
       try { hasChosenTrack = !!localStorage.getItem('daniel_placement_track_v1'); } catch (e) { hasChosenTrack = true; }
       const openIntro = function () {
-        if (!skipIntro && !seen && hasChosenTrack) showIntroGuide(index);
+        if (!skipIntro && !seen && hasChosenTrack && index === currentSheetIndex) showIntroGuide(index);
       };
       const wait = window.Onboard && typeof window.Onboard.gate === 'function'
         ? window.Onboard.gate()
         : Promise.resolve();
-      wait.then(openIntro);
+      Promise.all([wait, bookOpened()]).then(openIntro);
     }
 
     function sheetQuizComplete() {
@@ -6061,7 +6065,7 @@
         const afterAuth = window.ScrollAuth && typeof window.ScrollAuth.ready === "function"
           ? window.ScrollAuth.ready()
           : Promise.resolve();
-        Promise.all([afterAuth, afterOnboard]).then(openPlacement);
+        Promise.all([afterAuth, afterOnboard, bookOpened()]).then(openPlacement);
       }
       function refreshAdminAccess() {
         renderToc();

@@ -1,0 +1,433 @@
+#book-open {
+  display: none;
+}
+
+html[data-bko] .cx-sweep {
+  display: none;
+}
+
+html[data-bko] #book-open {
+  --pw: min(34vw, 50vh, 400px);
+  --ph: calc(var(--pw) * 1.36);
+  --bko-paper: #f1e7cf;
+  --bko-paper-deep: #e4d6b4;
+  --bko-ink: #2a2017;
+  --bko-ink-soft: #5b4a38;
+  --bko-accent: #7b1d12;
+  --bko-gold: #d4a94a;
+  --bko-turn: cubic-bezier(0.45, 0.05, 0.22, 1);
+  position: fixed;
+  inset: 0;
+  z-index: 2147482000;
+  display: block;
+  overflow: hidden;
+  contain: strict;
+  background: radial-gradient(120% 90% at 50% 45%, #2b1d11 0%, #140d08 55%, #080605 100%);
+  will-change: opacity;
+}
+
+html[data-bko="single"] #book-open {
+  --pw: min(78vw, 56vh, 420px);
+}
+
+#book-open .bko-stage {
+  position: absolute;
+  inset: 0;
+  perspective: 2400px;
+  perspective-origin: 50% 45%;
+  animation: bko-arrive 440ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  will-change: transform, opacity;
+}
+
+#book-open .bko-book {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: calc(var(--pw) * 2);
+  height: var(--ph);
+  margin: calc(var(--ph) * -0.5) 0 0 calc(var(--pw) * -1);
+  transform: translateX(calc(var(--pw) * -0.5));
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+html[data-bko="single"] #book-open .bko-book {
+  width: var(--pw);
+  margin-left: calc(var(--pw) * -0.5);
+  transform: none;
+}
+
+#book-open .bko-shadow {
+  position: absolute;
+  top: 2%;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border-radius: 6px;
+  box-shadow: 0 34px 70px -18px rgba(0, 0, 0, 0.85), 0 10px 24px -8px rgba(0, 0, 0, 0.6);
+  transform: translateZ(-2px) scaleX(0.5);
+  transform-origin: 100% 50%;
+  will-change: transform;
+}
+
+html[data-bko="single"] #book-open .bko-shadow {
+  transform: translateZ(-2px);
+}
+
+#book-open .bko-sheet {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: var(--pw);
+  height: 100%;
+  transform: translateZ(var(--z0, 0px));
+  transform-origin: 0 50%;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+html[data-bko="single"] #book-open .bko-sheet {
+  left: 0;
+}
+
+#book-open .bko-face {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+#book-open .bko-back {
+  transform: rotateY(180deg);
+}
+
+#book-open .bko-cover .bko-front {
+  border-radius: 2px 6px 6px 2px;
+  background:
+    linear-gradient(90deg, rgba(0, 0, 0, 0.5) 0, rgba(255, 255, 255, 0.1) 2.5%, rgba(0, 0, 0, 0.12) 6%, rgba(0, 0, 0, 0) 12%),
+    repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.03) 0 2px, rgba(0, 0, 0, 0.04) 2px 4px),
+    var(--bko-cloth);
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.4), inset 0 0 40px rgba(0, 0, 0, 0.35);
+}
+
+#book-open .bko-cover .bko-front::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(0, 0, 0, 0.55) 0, rgba(255, 255, 255, 0.12) 2.4%, rgba(0, 0, 0, 0.18) 5%, rgba(0, 0, 0, 0) 11%),
+    linear-gradient(180deg, rgba(8, 6, 4, 0) 42%, rgba(8, 6, 4, 0.55) 66%, rgba(8, 6, 4, 0.9) 100%);
+}
+
+#book-open .bko-art {
+  position: absolute;
+  inset: 0;
+  background: var(--bko-art, none) center / cover no-repeat;
+  transition: opacity 220ms ease;
+}
+
+html[data-bko]:not([data-bko-type]) #book-open .bko-art {
+  opacity: 0;
+}
+
+#book-open .bko-cover .bko-back {
+  border-radius: 6px 2px 2px 6px;
+  background:
+    radial-gradient(55% 38% at 28% 26%, var(--bko-m2) 0%, rgba(0, 0, 0, 0) 70%),
+    radial-gradient(48% 44% at 74% 62%, var(--bko-m4) 0%, rgba(0, 0, 0, 0) 72%),
+    radial-gradient(36% 30% at 38% 84%, var(--bko-m3) 0%, rgba(0, 0, 0, 0) 70%),
+    radial-gradient(30% 24% at 80% 18%, var(--bko-m5) 0%, rgba(0, 0, 0, 0) 70%),
+    var(--bko-m1);
+  box-shadow: inset 0 0 0 9px var(--bko-cloth), inset -18px 0 26px -14px rgba(0, 0, 0, 0.55);
+}
+
+#book-open .bko-leaf .bko-face,
+#book-open .bko-title-page {
+  background: var(--bko-paper);
+}
+
+#book-open .bko-leaf .bko-front,
+#book-open .bko-title-page {
+  border-radius: 0 4px 4px 0;
+  box-shadow: inset 22px 0 26px -20px rgba(70, 46, 20, 0.5), inset -1px 0 0 rgba(120, 96, 60, 0.25);
+}
+
+#book-open .bko-leaf .bko-back {
+  border-radius: 4px 0 0 4px;
+  box-shadow: inset -22px 0 26px -20px rgba(70, 46, 20, 0.5), inset 1px 0 0 rgba(120, 96, 60, 0.25);
+}
+
+#book-open .bko-leaf .bko-face::before {
+  content: "";
+  position: absolute;
+  inset: 12% 13% 13% 14%;
+  background: repeating-linear-gradient(180deg, rgba(42, 32, 23, 0.2) 0 2px, rgba(0, 0, 0, 0) 2px 15px);
+}
+
+#book-open .bko-leaf .bko-front::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(40, 24, 10, 0) 0%, rgba(40, 24, 10, 0.45) 100%);
+  opacity: 0;
+  will-change: opacity;
+}
+
+#book-open .bko-type {
+  position: absolute;
+  inset: 14% 12% 12%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: calc(var(--pw) * 0.035);
+  text-align: center;
+  transition: opacity 220ms ease;
+}
+
+html[data-bko]:not([data-bko-type]) #book-open .bko-type {
+  opacity: 0;
+}
+
+#book-open .bko-press::before {
+  content: "The Historicist Press";
+}
+
+#book-open .bko-name::before {
+  content: var(--bko-title);
+}
+
+#book-open .bko-sub::before {
+  content: var(--bko-sub);
+}
+
+#book-open .bko-vol::before {
+  content: "Volume " var(--bko-roman);
+}
+
+#book-open .bko-epoch::before {
+  content: var(--bko-epoch);
+}
+
+#book-open .bko-ref::before {
+  content: var(--bko-ref);
+}
+
+#book-open .bko-cover-type {
+  z-index: 1;
+  inset: auto 9% 7% 12%;
+  align-items: flex-start;
+  justify-content: flex-end;
+  gap: calc(var(--pw) * 0.018);
+  text-align: left;
+}
+
+#book-open .bko-cover .bko-press,
+#book-open .bko-cover .bko-vol {
+  color: rgba(212, 169, 74, 0.8);
+  font: 600 calc(var(--pw) * 0.024) / 1.2 Cinzel, Georgia, serif;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+#book-open .bko-cover .bko-vol {
+  margin-top: calc(var(--pw) * 0.04);
+  color: rgba(212, 169, 74, 0.45);
+}
+
+#book-open .bko-cover .bko-name {
+  color: #eedcae;
+  font: 400 calc(var(--pw) * 0.084) / 1.04 Newsreader, Georgia, serif;
+}
+
+#book-open .bko-cover .bko-sub {
+  color: rgba(226, 204, 150, 0.82);
+  font: italic 500 calc(var(--pw) * 0.034) / 1.25 Newsreader, Georgia, serif;
+}
+
+#book-open .bko-title-page .bko-epoch {
+  color: var(--bko-accent);
+  font: 600 calc(var(--pw) * 0.03) / 1.2 Cinzel, Georgia, serif;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+}
+
+#book-open .bko-title-page .bko-rule {
+  width: 34%;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(160, 123, 42, 0), #a07b2a, rgba(160, 123, 42, 0));
+}
+
+#book-open .bko-title-page .bko-name {
+  color: var(--bko-ink);
+  font: 500 calc(var(--pw) * 0.064) / 1.22 Newsreader, Georgia, serif;
+}
+
+#book-open .bko-title-page .bko-ref {
+  color: var(--bko-ink-soft);
+  font: italic 400 calc(var(--pw) * 0.034) / 1.35 Newsreader, Georgia, serif;
+}
+
+#book-open .bko-card {
+  display: none;
+}
+
+html[data-bko="fade"] #book-open .bko-stage {
+  display: none;
+}
+
+html[data-bko="fade"] #book-open .bko-card {
+  animation: bko-arrive 320ms ease-out both;
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  padding: 0 24px;
+  text-align: center;
+}
+
+#book-open .bko-card .bko-epoch {
+  color: var(--bko-gold);
+  font: 600 12px / 1.2 Cinzel, Georgia, serif;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+}
+
+#book-open .bko-card .bko-name {
+  max-width: 34ch;
+  color: #f1e6cc;
+  font: 500 clamp(22px, 3.2vw, 34px) / 1.2 Newsreader, Georgia, serif;
+}
+
+#book-open.is-opening {
+  animation: bko-out 380ms ease-in 1060ms forwards;
+}
+
+#book-open.is-opening .bko-stage {
+  animation: bko-dive 500ms cubic-bezier(0.4, 0, 0.6, 1) 1000ms forwards;
+}
+
+#book-open.is-opening .bko-book {
+  animation: bko-center 760ms var(--bko-turn) 60ms forwards;
+}
+
+#book-open.is-opening .bko-shadow {
+  animation: bko-shadow 760ms var(--bko-turn) 60ms forwards;
+}
+
+#book-open.is-opening .bko-cover {
+  animation: bko-turn 760ms var(--bko-turn) 60ms forwards;
+}
+
+#book-open.is-opening .bko-leaf {
+  animation: bko-turn 520ms var(--bko-turn) calc(340ms + var(--k) * 100ms) forwards;
+}
+
+#book-open.is-opening .bko-leaf .bko-front::after {
+  animation: bko-shade 520ms linear calc(340ms + var(--k) * 100ms) forwards;
+}
+
+html[data-bko="single"] #book-open.is-opening {
+  animation-delay: 960ms;
+}
+
+html[data-bko="single"] #book-open.is-opening .bko-stage {
+  animation-delay: 900ms;
+}
+
+html[data-bko="single"] #book-open.is-opening .bko-book,
+html[data-bko="single"] #book-open.is-opening .bko-shadow {
+  animation: none;
+}
+
+html[data-bko="single"] #book-open.is-opening .bko-cover {
+  animation-duration: 700ms;
+}
+
+html[data-bko="single"] #book-open .bko-leaf-spread {
+  display: none;
+}
+
+html[data-bko="single"] #book-open.is-opening .bko-leaf {
+  animation-delay: calc(330ms + var(--k) * 120ms);
+}
+
+html[data-bko="single"] #book-open.is-opening .bko-leaf .bko-front::after {
+  animation-delay: calc(330ms + var(--k) * 120ms);
+}
+
+html[data-bko="fade"] #book-open.is-opening {
+  animation: bko-out 320ms ease 120ms forwards;
+}
+
+html[data-bko] #book-open.is-leaving {
+  animation: bko-out 200ms ease-out forwards;
+}
+
+@keyframes bko-arrive {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.94);
+  }
+}
+
+@keyframes bko-out {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes bko-dive {
+  to {
+    transform: scale(1.07);
+  }
+}
+
+@keyframes bko-center {
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes bko-shadow {
+  to {
+    transform: translateZ(-2px) scaleX(1);
+  }
+}
+
+@keyframes bko-turn {
+  from {
+    transform: translateZ(var(--z0, 0px)) rotateY(0deg);
+  }
+  to {
+    transform: translateZ(var(--z1, 0px)) rotateY(-180deg);
+  }
+}
+
+@keyframes bko-shade {
+  50% {
+    opacity: 1;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html[data-bko] #book-open .bko-stage,
+  html[data-bko] #book-open .bko-card {
+    animation: none;
+  }
+
+  html[data-bko] #book-open.is-opening {
+    animation-duration: 320ms !important;
+  }
+
+  html[data-bko] #book-open.is-leaving {
+    animation-duration: 200ms !important;
+  }
+}

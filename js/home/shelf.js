@@ -117,6 +117,7 @@ const VOLS = DATA.map((d, i) => {
 
 /* ---------------- Local memory (last volume entered) ---------------- */
 const LS_LAST = 'daniel-shelf:last';
+const HANDOFF_KEY = 'baBookOpen';
 function getLast() { try { const v = localStorage.getItem(LS_LAST); return v == null ? -1 : Number(v); } catch (e) { return -1; } }
 function setLast(i) { try { localStorage.setItem(LS_LAST, String(i)); } catch (e) {} }
 function doneCount() { let c = 0; for (let i = 0; i < N; i++) if (done(i)) c++; return c; }
@@ -263,7 +264,8 @@ function fillDossier(i, instant) {
     $('#d-binding').textContent = v.ex.binding;
     $('#d-contents').innerHTML = v.ex.pillars.map((p, k) => '<li><b>' + roman(k + 1) + '.</b><span>' + esc(p) + '</span></li>').join('');
     const go = $('#d-go');
-    go.href = ok ? 'study.html?sheet=' + i + '&preview=full' : 'account.html?next=' + encodeURIComponent('study.html?sheet=' + i);
+    go.href = ok ? sittingUrl(i) : 'account.html?next=' + encodeURIComponent('study.html?sheet=' + i);
+    if (ok) warmSitting(i);
     $('#d-go-text').textContent = ok ? (dn ? 'Reopen the sitting' : 'Enter the sitting') : 'Sign in to unlock';
     $('#d-journey').innerHTML = VOLS.map((w) => '<button type="button" data-i="' + w.i + '" class="' +
       (w.i === i ? 'current' : done(w.i) ? 'done' : can(w.i) ? '' : 'locked') + '" title="Vol. ' + esc(w.roman) + ' — ' + esc(w.title) + '" aria-label="Go to volume ' + esc(w.roman) + '"></button>').join('');
@@ -299,6 +301,69 @@ function opensInNewTab(e) {
   return e.ctrlKey || e.metaKey || e.shiftKey || e.button === 1;
 }
 
+function sittingUrl(i) {
+  return 'study.html?sheet=' + i + '&preview=full';
+}
+
+function handOff(i) {
+  const v = VOLS[i];
+  try {
+    sessionStorage.setItem(HANDOFF_KEY, JSON.stringify({
+      sheet: i,
+      t: Date.now(),
+      roman: v.roman,
+      title: v.title,
+      sub: v.sub,
+      art: COVER_ART[i] || '',
+      epoch: v.epoch,
+      scripture: v.scripture,
+      cloth: v.ex.cloth,
+      marble: v.ex.marble
+    }));
+  } catch (e) {}
+}
+
+let warmedSitting = -1;
+let warmedDesk = false;
+
+function warmDesk() {
+  if (warmedDesk) return;
+  warmedDesk = true;
+  const conn = navigator.connection;
+  if (conn && (conn.saveData || /2g/.test(conn.effectiveType || ''))) return;
+  const idle = window.requestIdleCallback || ((fn) => setTimeout(fn, 1200));
+  idle(() => {
+    fetch('study.html', { credentials: 'same-origin' }).then((r) => (r.ok ? r.text() : '')).then((html) => {
+      const seen = new Set();
+      const re = /<(?:script[^>]*\ssrc|link[^>]*rel="stylesheet"[^>]*\shref)="([^"]+)"/g;
+      let m;
+      while ((m = re.exec(html))) {
+        const url = m[1];
+        if (/^(?:[a-z]+:)?\/\//i.test(url) || seen.has(url)) continue;
+        seen.add(url);
+        const link = document.createElement('link');
+        link.rel = 'prefetch';
+        link.href = url;
+        document.head.appendChild(link);
+      }
+    }).catch(() => {});
+  }, { timeout: 4000 });
+}
+
+function warmSitting(i) {
+  if (i === warmedSitting || !can(i)) return;
+  warmedSitting = i;
+  warmDesk();
+  if (!HTMLScriptElement.supports || !HTMLScriptElement.supports('speculationrules')) return;
+  const old = document.getElementById('sitting-prefetch');
+  if (old) old.remove();
+  const rules = document.createElement('script');
+  rules.type = 'speculationrules';
+  rules.id = 'sitting-prefetch';
+  rules.textContent = JSON.stringify({ prefetch: [{ source: 'list', urls: [sittingUrl(i)] }] });
+  document.head.appendChild(rules);
+}
+
 function enterSitting(i) {
   if (!can(i)) {
     location.href = 'account.html?next=' + encodeURIComponent('study.html?sheet=' + i);
@@ -311,7 +376,8 @@ function enterSitting(i) {
     openInPlace(i);
     return;
   }
-  location.href = 'study.html?sheet=' + i + '&preview=full';
+  handOff(i);
+  location.href = sittingUrl(i);
 }
 
 function select(i) {
