@@ -1333,11 +1333,11 @@
     // Atmospheric Focus State — a continuous quiet → storm → sunshine continuum
     let weatherPreset = 'auto'; // visual weather only — no rain/thunder audio
     let currentWeatherType = 'quiet';
-    let weatherAnimId = null;
-    let particles = [];
     let focusAtmosphere = 0;
-    let lightning = 0;
-    let nextStrikeAt = 0;
+    let weatherRunning = false;
+    let weatherScene = null;
+    let weatherWorker = null;
+    const WEATHER_RENDER_SCALE = 0.5;
 
     const weatherMeta = {
       quiet: { name: "Still • Quiet Dusk", icon: "◌", level: "Quiet" },
@@ -1347,44 +1347,8 @@
       off: { name: "Off", icon: "⏸", level: "Off" }
     };
 
-    let activeBolt = null;
-    let strikeX = 0;
-    let strikePulses = [];
-    let splashes = [];
-    let motes = [];
-    let fogBanks = [];
-    let gust = 0;
-    let lastWeatherFrame = 0;
-
     function lerp(a, b, t) {
       return a + (b - a) * Math.max(0, Math.min(1, t));
-    }
-
-    function initWeatherParticles() {
-      const w = window.innerWidth, h = window.innerHeight;
-      // z = depth (0 far, 1 near); most drops are far away, a few streak close to the glass.
-      particles = Array.from({ length: 640 }, () => ({
-        x: Math.random() * (w + 300),
-        y: Math.random() * h,
-        z: Math.pow(Math.random(), 1.7)
-      }));
-      motes = Array.from({ length: 46 }, () => ({
-        x: Math.random() * w,
-        y: Math.random() * h,
-        r: 0.6 + Math.random() * 1.4,
-        vx: -4 + Math.random() * 8,
-        vy: -3 + Math.random() * 4,
-        phase: Math.random() * Math.PI * 2
-      }));
-      fogBanks = Array.from({ length: 9 }, (_, i) => ({
-        x: Math.random() * w,
-        y: h * (0.4 + Math.random() * 0.6),
-        rx: w * (0.28 + Math.random() * 0.3),
-        ry: h * (0.1 + Math.random() * 0.12),
-        speed: 6 + Math.random() * 12,
-        a: 0.6 + Math.random() * 0.4,
-        phase: i * 1.7
-      }));
     }
 
     function focusPhase(progress) {
@@ -1408,267 +1372,72 @@
       return 'sunshine';
     }
 
-    function boltPath(x0, y0, x1, y1, spread, depth, out) {
-      if (depth === 0) { out.push({ x: x1, y: y1 }); return; }
-      const mx = (x0 + x1) / 2 + (Math.random() - 0.5) * spread;
-      const my = (y0 + y1) / 2 + (Math.random() - 0.5) * spread * 0.25;
-      boltPath(x0, y0, mx, my, spread * 0.55, depth - 1, out);
-      boltPath(mx, my, x1, y1, spread * 0.55, depth - 1, out);
+    function lightTheme() {
+      return document.body.classList.contains('paper-mode') || document.body.classList.contains('white-mode');
     }
 
-    function makeBolt(w, h, x0) {
-      const x1 = x0 + (Math.random() - 0.5) * w * 0.22;
-      const y1 = h * (0.55 + Math.random() * 0.35);
-      const main = [{ x: x0, y: -10 }];
-      boltPath(x0, -10, x1, y1, w * 0.1, 7, main);
-      const branches = [];
-      const n = 2 + Math.floor(Math.random() * 3);
-      for (let i = 0; i < n; i++) {
-        const s = main[Math.floor(main.length * (0.15 + Math.random() * 0.55))];
-        const pts = [{ x: s.x, y: s.y }];
-        boltPath(s.x, s.y, s.x + (Math.random() - 0.5) * w * 0.22, s.y + h * (0.08 + Math.random() * 0.18), w * 0.04, 5, pts);
-        branches.push(pts);
-      }
-      return { main, branches };
+    function weatherState() {
+      return { type: currentWeatherType, atmosphere: focusAtmosphere, light: lightTheme() };
     }
 
-    function weatherPalette() {
-      const light = document.body.classList.contains('paper-mode') || document.body.classList.contains('white-mode');
-      return light
-        ? { rain: '62,78,98', fog: '196,200,204', cloud: '44,50,60', flash: '255,255,255', bolt: '255,255,255', glow: '150,180,235', mote: '150,110,40', light: true }
-        : { rain: '188,204,222', fog: '150,158,170', cloud: '6,8,12', flash: '215,228,255', bolt: '240,246,255', glow: '160,195,255', mote: '240,228,201', light: false };
-    }
-
-    function strokePath(ctx, pts) {
-      ctx.beginPath();
-      ctx.moveTo(pts[0].x, pts[0].y);
-      for (let i = 1; i < pts.length; i++) ctx.lineTo(pts[i].x, pts[i].y);
-      ctx.stroke();
-    }
-
-    function drawWeather() {
+    function linkWeather() {
+      if (weatherScene || weatherWorker) return true;
       const canvas = document.getElementById('weather-canvas');
-      if (!canvas) return;
-      const ctx = canvas.getContext('2d');
-      const w = canvas.width, h = canvas.height;
-      ctx.clearRect(0, 0, w, h);
-      if (currentWeatherType === 'off') {
-        document.body.dataset.weather = 'off';
-        weatherAnimId = null;
-        return;
-      }
-
-      const v = focusAtmosphere;
-      const building = currentWeatherType === 'building' ? 1 : Math.max(0, 1 - Math.abs(v - 0.34) / 0.18);
-      const storm = currentWeatherType === 'storm' ? 1 : Math.max(0, 1 - Math.abs(v - 0.58) / 0.28);
-      const sun = currentWeatherType === 'sunshine' ? 1 : Math.max(0, (v - 0.76) / 0.24);
-      const quiet = currentWeatherType === 'quiet' ? 1 : Math.max(0, 1 - v / 0.22);
-      const t = performance.now();
-      const dt = lastWeatherFrame ? Math.min(0.05, (t - lastWeatherFrame) / 1000) : 0.016;
-      lastWeatherFrame = t;
-      const pal = weatherPalette();
-      gust = lerp(gust, (building * 0.45 + storm * 1) * (0.75 + Math.sin(t / 2300) * 0.25), 0.02);
-
-      document.body.dataset.weather = currentWeatherType;
-
-      // Overcast: heavier toward the top of the sky, clearing as the sun comes out.
-      const overcast = (0.05 + building * 0.1 + storm * 0.22) * (1 - sun * 0.8) * (pal.light ? 0.7 : 1);
-      const sky = ctx.createLinearGradient(0, 0, 0, h);
-      sky.addColorStop(0, `rgba(${pal.cloud},${overcast * 1.6})`);
-      sky.addColorStop(0.5, `rgba(${pal.cloud},${overcast * 0.7})`);
-      sky.addColorStop(1, `rgba(${pal.cloud},${overcast * 0.4})`);
-      ctx.fillStyle = sky;
-      ctx.fillRect(0, 0, w, h);
-
-      const cloudA = (0.03 + building * 0.1 + storm * 0.2) * (1 - sun * 0.7);
-      for (let i = 0; i < 10; i++) {
-        const x = ((i * w / 6 + t * (0.006 + i * 0.0009) * (0.5 + gust)) % (w + 700)) - 350;
-        const y = 20 + (i % 5) * 42;
-        const r = 220 + (i % 4) * 90;
-        const g = ctx.createRadialGradient(x, y, 0, x, y, r);
-        g.addColorStop(0, `rgba(${pal.cloud},${cloudA})`);
-        g.addColorStop(1, `rgba(${pal.cloud},0)`);
-        ctx.fillStyle = g;
-        ctx.save(); ctx.translate(x, y); ctx.scale(1.8, 0.6); ctx.translate(-x, -y);
-        ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2); ctx.fill();
-        ctx.restore();
-      }
-
-      // Lightning: a main strike and one dimmer return stroke, lit from the strike point.
-      // Never more than two flashes a second (photosensitivity guideline).
-      const now = t / 1000;
-      if (storm > 0.55) {
-        if (!nextStrikeAt) nextStrikeAt = now + 1.5 + Math.random() * 2.5;
-        if (now >= nextStrikeAt) {
-          strikeX = w * (0.1 + Math.random() * 0.8);
-          strikePulses = [now, now + 0.5 + Math.random() * 0.25];
-          activeBolt = Math.random() < 0.55 ? makeBolt(w, h, strikeX) : null;
-          nextStrikeAt = now + 6 + Math.random() * 9;
-        }
-      } else {
-        nextStrikeAt = 0;
-      }
-      lightning = 0;
-      strikePulses.forEach((p0, i) => {
-        const age = now - p0;
-        if (age >= 0 && age < 0.8) lightning = Math.max(lightning, (i === 0 ? 1 : 0.55) * Math.exp(-age * 9));
-      });
-      if (lightning > 0.01) {
-        const fg = ctx.createRadialGradient(strikeX, 0, 0, strikeX, 0, Math.max(w, h) * 0.95);
-        fg.addColorStop(0, `rgba(${pal.flash},${0.3 * lightning})`);
-        fg.addColorStop(0.45, `rgba(${pal.flash},${0.1 * lightning})`);
-        fg.addColorStop(1, `rgba(${pal.flash},0)`);
-        ctx.fillStyle = fg;
-        ctx.fillRect(0, 0, w, h);
-      }
-      if (activeBolt && lightning > 0.03) {
-        ctx.save();
-        ctx.lineCap = 'round';
-        ctx.lineJoin = 'round';
-        ctx.shadowColor = `rgba(${pal.glow},0.9)`;
-        ctx.shadowBlur = 24;
-        ctx.strokeStyle = `rgba(${pal.glow},${0.35 * lightning})`;
-        ctx.lineWidth = 6;
-        strokePath(ctx, activeBolt.main);
-        ctx.shadowBlur = 10;
-        ctx.strokeStyle = `rgba(${pal.bolt},${lightning})`;
-        ctx.lineWidth = 1.8;
-        strokePath(ctx, activeBolt.main);
-        ctx.lineWidth = 0.9;
-        ctx.strokeStyle = `rgba(${pal.bolt},${0.6 * lightning})`;
-        activeBolt.branches.forEach((b) => strokePath(ctx, b));
-        ctx.restore();
-      } else if (lightning <= 0.03 && strikePulses.length && now > strikePulses[strikePulses.length - 1] + 0.8) {
-        activeBolt = null;
-        strikePulses = [];
-      }
-
-      // Rain: each drop's streak follows its own velocity (wind + fall), so near drops
-      // are long, bright and fast while far drops are short and faint.
-      const rainAmt = Math.min(1, storm + building * 0.25);
-      if (rainAmt > 0.03) {
-        const windX = -50 - 240 * gust;
-        const count = Math.floor(particles.length * rainAmt);
-        ctx.lineCap = 'round';
-        for (let i = 0; i < count; i++) {
-          const p = particles[i];
-          const vy = 900 + 1500 * p.z;
-          const vx = windX * (0.6 + 0.4 * p.z);
-          p.x += vx * dt;
-          p.y += vy * dt;
-          if (p.y > h + 40) {
-            if (p.z > 0.6 && rainAmt > 0.5 && splashes.length < 70) {
-              splashes.push({ x: p.x, y: h - 2 - Math.random() * h * 0.05, r: 0.6, a: 0.45 * p.z });
-            }
-            p.y = -40 - Math.random() * 80;
-            p.x = Math.random() * (w + 300);
-          }
-          if (p.x < -40) p.x += w + 300;
-          const len = (0.016 + 0.012 * p.z) * vy;
-          ctx.strokeStyle = `rgba(${pal.rain},${(0.06 + 0.32 * p.z) * rainAmt * (1 + lightning * 0.8)})`;
-          ctx.lineWidth = 0.5 + 1.3 * p.z;
-          ctx.beginPath();
-          ctx.moveTo(p.x, p.y);
-          ctx.lineTo(p.x - (vx / vy) * len, p.y - len);
-          ctx.stroke();
-        }
-        splashes = splashes.filter((s) => s.a > 0.02);
-        ctx.lineWidth = 0.7;
-        for (const s of splashes) {
-          ctx.strokeStyle = `rgba(${pal.rain},${s.a})`;
-          ctx.beginPath(); ctx.ellipse(s.x, s.y, s.r * 2.4, s.r * 0.7, 0, 0, Math.PI * 2); ctx.stroke();
-          s.r += 24 * dt;
-          s.a *= Math.pow(0.015, dt);
+      if (!canvas) return false;
+      if (typeof canvas.transferControlToOffscreen === 'function' && typeof Worker === 'function') {
+        let worker = null;
+        try {
+          worker = new Worker('js/study/weather-scene.js');
+          const offscreen = canvas.transferControlToOffscreen();
+          worker.postMessage({ canvas: offscreen }, [offscreen]);
+          weatherWorker = worker;
+          return true;
+        } catch (e) {
+          if (worker) worker.terminate();
         }
       }
+      if (!window.WeatherScene) return false;
+      weatherScene = window.WeatherScene.create(canvas);
+      return true;
+    }
 
-      // Mist: slow elliptical fog banks drifting with the wind, plus low ground haze.
-      const fogAmt = quiet * 0.55 + building * 0.9 + storm * 0.7 + sun * 0.12;
-      if (fogAmt > 0.03) {
-        for (const f of fogBanks) {
-          f.x -= (f.speed + 36 * gust) * dt;
-          if (f.x + f.rx < 0) { f.x = w + f.rx; f.y = h * (0.4 + Math.random() * 0.6); }
-          const a = 0.19 * fogAmt * f.a * (0.75 + 0.25 * Math.sin(t / 4200 + f.phase));
-          ctx.save();
-          ctx.translate(f.x, f.y);
-          ctx.scale(1, f.ry / f.rx);
-          const fg = ctx.createRadialGradient(0, 0, 0, 0, 0, f.rx);
-          fg.addColorStop(0, `rgba(${pal.fog},${a})`);
-          fg.addColorStop(0.6, `rgba(${pal.fog},${a * 0.45})`);
-          fg.addColorStop(1, `rgba(${pal.fog},0)`);
-          ctx.fillStyle = fg;
-          ctx.beginPath(); ctx.arc(0, 0, f.rx, 0, Math.PI * 2); ctx.fill();
-          ctx.restore();
-        }
-        const haze = ctx.createLinearGradient(0, h * 0.55, 0, h);
-        haze.addColorStop(0, `rgba(${pal.fog},0)`);
-        haze.addColorStop(1, `rgba(${pal.fog},${0.15 * fogAmt})`);
-        ctx.fillStyle = haze;
-        ctx.fillRect(0, h * 0.55, w, h * 0.45);
+    function tellWeather(msg) {
+      if (!linkWeather()) return;
+      if (weatherWorker) weatherWorker.postMessage(msg);
+      else window.WeatherScene.apply(weatherScene, msg);
+    }
+
+    function markWeather() {
+      if (currentWeatherType !== 'off' && document.body.dataset.weather !== currentWeatherType) {
+        document.body.dataset.weather = currentWeatherType;
       }
-
-      if (sun > 0.04) {
-        ctx.save();
-        ctx.globalCompositeOperation = 'screen';
-        const sx = w * 0.82, sy = h * 0.12;
-        const sg = ctx.createRadialGradient(sx, sy, 0, sx, sy, Math.max(w, h) * 0.55);
-        sg.addColorStop(0, `rgba(255,226,150,${0.28 * sun})`);
-        sg.addColorStop(0.2, `rgba(255,210,120,${0.12 * sun})`);
-        sg.addColorStop(1, 'rgba(255,200,110,0)');
-        ctx.fillStyle = sg; ctx.fillRect(0, 0, w, h);
-        ctx.translate(sx, sy);
-        for (let i = 0; i < 7; i++) {
-          ctx.rotate(0.09);
-          ctx.globalAlpha = 0.035 * sun;
-          ctx.beginPath();
-          ctx.moveTo(0, 0);
-          ctx.lineTo(-90 + i * 28, h);
-          ctx.lineTo(-40 + i * 28, h);
-          ctx.closePath();
-          ctx.fillStyle = '#ffe4a8';
-          ctx.fill();
-        }
-        ctx.restore();
-      }
-
-      const moteAmt = Math.max(quiet, sun * 0.7);
-      if (moteAmt > 0.2) {
-        for (const m of motes) {
-          m.x += (m.vx + Math.sin(t / 3100 + m.phase) * 3) * dt;
-          m.y += (m.vy + Math.cos(t / 2700 + m.phase) * 2) * dt;
-          if (m.x < -5) m.x = w + 5; else if (m.x > w + 5) m.x = -5;
-          if (m.y < -5) m.y = h + 5; else if (m.y > h + 5) m.y = -5;
-          ctx.fillStyle = `rgba(${pal.mote},${0.3 * moteAmt * (0.4 + 0.6 * Math.abs(Math.sin(t / 1900 + m.phase)))})`;
-          ctx.beginPath(); ctx.arc(m.x, m.y, m.r, 0, Math.PI * 2); ctx.fill();
-        }
-      }
-
-      weatherAnimId = requestAnimationFrame(drawWeather);
     }
 
     function resizeWeatherCanvas() {
-      const canvas = document.getElementById('weather-canvas');
-      if (canvas) {
-        // Half resolution: the drifting motes are soft, and CSS stretches the
-        // canvas back to full size — a large CPU/battery save, no visible change.
-        canvas.width = Math.max(320, Math.round(window.innerWidth / 2));
-        canvas.height = Math.max(240, Math.round(window.innerHeight / 2));
-      }
-      initWeatherParticles();
+      tellWeather({
+        size: [
+          Math.max(320, Math.round(window.innerWidth * WEATHER_RENDER_SCALE)),
+          Math.max(240, Math.round(window.innerHeight * WEATHER_RENDER_SCALE)),
+          window.innerWidth,
+          window.innerHeight
+        ]
+      });
     }
 
     function startWeatherAnimation() {
-      if (!weatherAnimId && currentWeatherType !== 'off') {
+      if (!weatherRunning && currentWeatherType !== 'off') {
         resizeWeatherCanvas();
         const canvas = document.getElementById('weather-canvas');
         if (canvas) canvas.classList.remove('opacity-0');
-        weatherAnimId = requestAnimationFrame(drawWeather);
+        weatherRunning = true;
+        markWeather();
+        tellWeather({ state: weatherState(), run: true });
       }
     }
 
     function stopWeatherAnimation() {
-      if (weatherAnimId) cancelAnimationFrame(weatherAnimId);
-      weatherAnimId = null;
+      if (weatherRunning) tellWeather({ run: false });
+      weatherRunning = false;
       const canvas = document.getElementById('weather-canvas');
       if (canvas) canvas.classList.add('opacity-0');
     }
@@ -1677,6 +1446,10 @@
       const progress = (timerDuration - timeRemaining) / timerDuration;
       focusAtmosphere = focusPhase(progress);
       currentWeatherType = weatherPreset === 'off' ? 'off' : (weatherPreset === 'auto' ? deriveWeatherType(focusAtmosphere) : weatherPreset);
+      if (weatherRunning) {
+        markWeather();
+        tellWeather({ state: weatherState() });
+      }
       updateWeatherHUD();
     }
 
@@ -1915,6 +1688,7 @@
       document.body.classList.toggle('bg-white', theme === 'white');
       document.body.classList.toggle('text-ink-900', !isDark);
       document.body.classList.toggle('selection:bg-amber-200', !isDark);
+      if (weatherRunning) tellWeather({ state: weatherState() });
 
       if (themeIcon) {
         themeIcon.innerText = theme === 'charcoal' ? '◑ Chiaroscuro'
@@ -5161,6 +4935,11 @@
       if (shareBtn && !shareBtn.dataset.wired) {
         shareBtn.dataset.wired = 'true';
         shareBtn.addEventListener('click', shareSitting);
+        if ('IntersectionObserver' in window) {
+          new IntersectionObserver((entries) => {
+            entries.forEach((entry) => shareBtn.classList.toggle('is-offscreen', !entry.isIntersecting));
+          }, { rootMargin: '120px 0px' }).observe(shareBtn);
+        }
       }
     }
 
