@@ -4881,8 +4881,8 @@
         : 2;
       const isFree = currentSheetIndex <= freeThrough;
       const text = isFree
-        ? 'Join this sitting of the Shelf of Daniel. Open the cover and agree to the terms to begin. No sign-in needed.'
-        : 'Join this sitting of the Shelf of Daniel. Open the cover, agree to the terms, and sign in to begin.';
+        ? 'Join this sitting of the Shelf of Daniel. Open the link to begin. No sign-in needed.'
+        : 'Join this sitting of the Shelf of Daniel. Agree to the terms and sign in to begin.';
       const sent = (method, message) => {
         if (window.Insights) window.Insights.track('invite_shared', currentSheetIndex, { method: method });
         showToast(message);
