@@ -157,9 +157,21 @@ as $$
     from auth.users u
     join public.exhibit_moderators m
       on m.email = lower(btrim(u.email))
+    join auth.identities i
+      on i.user_id = u.id
+     and i.provider = 'google'
     where u.id = auth.uid()
       and u.email is not null
       and u.email_confirmed_at is not null
+      and (
+        not exists (
+          select 1
+          from auth.mfa_factors f
+          where f.user_id = u.id
+            and f.status = 'verified'
+        )
+        or coalesce(auth.jwt()->>'aal', '') = 'aal2'
+      )
   );
 $$;
 

@@ -35,6 +35,19 @@ const overlap = await Promise.all([
 assert.deepStrictEqual(overlap, [true, true]);
 assert.strictEqual(counted.get("all:10.1.0.1").n, 2, "serialized checks do not lose a count");
 
+const account = new Map();
+for (let i = 0; i < 30; i += 1) {
+  assert.strictEqual(allow(account, "10.8.0.1", "/account", now), true);
+}
+assert.strictEqual(allow(account, "10.8.0.1", "/account.html", now), false, "the account page has a 30-read budget");
+assert.strictEqual(allow(account, "10.8.0.1", "/study.html", now), true, "the account budget does not spend the page budget");
+
+const aging = new Map();
+assert.strictEqual(allow(aging, "10.9.0.1", "/study.html", now), true);
+assert.strictEqual(allow(aging, "10.9.0.1", "/study.html", now + 60001), true);
+assert.strictEqual(aging.get("all:10.9.0.1").n, 1, "an expired counter is dropped before the next page");
+assert.strictEqual(aging.size, 1, "the expired counter is not kept beside the new one");
+
 const gateSource = fs.readFileSync(new URL("../../workers/exhibit-rate-gate/src/index.js", import.meta.url), "utf8");
 assert.ok(gateSource.includes("blockConcurrencyWhile"), "the counter object serializes its update");
 assert.ok(gateSource.includes("await request.json()"), "the counter reads the body before the lock");

@@ -113,11 +113,20 @@
     });
   }
 
-  function reportError(message, kind) {
+  function authOpsReason(err) {
+    const code = String((err && (err.code || err.error || err.name)) || "").toLowerCase();
+    const raw = String((err && (err.message || err.error_description)) || "").toLowerCase();
+    if (code === "invalid_credentials" || code === "invalid_grant" || raw.indexOf("invalid login") >= 0 || raw.indexOf("invalid credentials") >= 0) return "credentials";
+    if (code === "email_not_confirmed" || raw.indexOf("not confirmed") >= 0) return "confirm";
+    if (code === "over_request_rate_limit" || code === "rate_limit" || raw.indexOf("rate limit") >= 0 || raw.indexOf("too many") >= 0) return "rate";
+    return "other";
+  }
+
+  function reportError(message, kind, err) {
     const errorKind = kind || "auth";
     if (window.SiteErrors) window.SiteErrors.show(message, errorKind);
     if (errorKind === "auth" && window.SiteOps && typeof window.SiteOps.report === "function") {
-      window.SiteOps.report("auth_failed", "auth");
+      window.SiteOps.report("auth_failed", authOpsReason(err));
     }
   }
 
@@ -147,7 +156,7 @@
       return "That email already has an account. Sign in, or use Google.";
     }
     if (code === "weak_password" || (/password/i.test(raw) && /weak|least|characters/i.test(raw))) {
-      return "Use a password with at least 8 characters.";
+      return "Use a password with at least 12 characters.";
     }
     if (code === "session" || /session/i.test(raw)) {
       return "Your session ended. Sign in again to continue.";
@@ -164,7 +173,8 @@
     const code = query.get("error") || hash.get("error") || query.get("error_code") || hash.get("error_code");
     const desc = query.get("error_description") || hash.get("error_description");
     if (!code && !desc) return;
-    reportError(friendlyAuthError({ code: code, message: desc || code }), "auth");
+    const source = { code: code, message: desc || code };
+    reportError(friendlyAuthError(source), "auth", source);
     ["error", "error_description", "error_code"].forEach(function (key) {
       query.delete(key);
       hash.delete(key);
@@ -246,7 +256,7 @@
       return { error: new Error("busy") };
     }
     if (!takeAuthSlot()) {
-      reportError("Please wait before signing in again.", "auth");
+      reportError("Please wait before signing in again.", "auth", { code: "rate_limit" });
       return { error: new Error("rate_limit") };
     }
     clearError();
@@ -260,8 +270,8 @@
 
   function finishAuth(res, err) {
     signingIn = false;
-    if (err) reportError(friendlyAuthError(err), "auth");
-    else if (res && res.error) reportError(friendlyAuthError(res.error), "auth");
+    if (err) reportError(friendlyAuthError(err), "auth", err);
+    else if (res && res.error) reportError(friendlyAuthError(res.error), "auth", res.error);
     renderAll();
     if (window.ScrollTerms && typeof window.ScrollTerms.setBusy === "function") {
       window.ScrollTerms.setBusy(false);
@@ -279,7 +289,7 @@
       const redirected = !!(res && res.data && res.data.url && !(res && res.error));
       if (redirected) {
         signingIn = false;
-        if (res && res.error) reportError(friendlyAuthError(res.error), "auth");
+        if (res && res.error) reportError(friendlyAuthError(res.error), "auth", res.error);
         renderAll();
         return res;
       }
@@ -289,12 +299,21 @@
     });
   }
 
+  function captchaOptions(options) {
+    const read = window.BACaptcha && window.BACaptcha.token;
+    const token = typeof read === "function" ? String(read() || "") : "";
+    const next = Object.assign({}, options || {});
+    if (token) next.captchaToken = token;
+    return next;
+  }
+
   function signInEmail(email, password) {
     const blocked = beginAuth();
     if (blocked) return Promise.resolve(blocked);
     return client.auth.signInWithPassword({
       email: String(email || "").trim(),
-      password: String(password || "")
+      password: String(password || ""),
+      options: captchaOptions()
     }).then(function (res) {
       return finishAuth(res);
     }).catch(function (err) {
@@ -308,7 +327,7 @@
     return client.auth.signUp({
       email: String(email || "").trim(),
       password: String(password || ""),
-      options: { emailRedirectTo: redirectTo() }
+      options: captchaOptions({ emailRedirectTo: redirectTo() })
     }).then(function (res) {
       return finishAuth(res);
     }).catch(function (err) {
@@ -319,9 +338,9 @@
   function resetPassword(email) {
     const blocked = beginAuth();
     if (blocked) return Promise.resolve(blocked);
-    return client.auth.resetPasswordForEmail(String(email || "").trim(), {
+    return client.auth.resetPasswordForEmail(String(email || "").trim(), captchaOptions({
       redirectTo: redirectTo()
-    }).then(function (res) {
+    })).then(function (res) {
       return finishAuth(res);
     }).catch(function (err) {
       return finishAuth(null, err);
@@ -335,10 +354,10 @@
     }
     return client.auth.updateUser({ password: String(password || "") }).then(function (res) {
       if (res && !res.error) passwordRecovery = false;
-      if (res && res.error) reportError(friendlyAuthError(res.error), "auth");
+      if (res && res.error) reportError(friendlyAuthError(res.error), "auth", res.error);
       return res;
     }).catch(function (err) {
-      reportError(friendlyAuthError(err), "auth");
+      reportError(friendlyAuthError(err), "auth", err);
       return { error: err };
     });
   }
@@ -361,10 +380,10 @@
     }
     clearError();
     return client.auth.signOut().then(function (res) {
-      if (res && res.error) reportError(friendlyAuthError(res.error), "auth");
+      if (res && res.error) reportError(friendlyAuthError(res.error), "auth", res.error);
       return res;
     }).catch(function (err) {
-      reportError(friendlyAuthError(err), "auth");
+      reportError(friendlyAuthError(err), "auth", err);
       return { error: err };
     });
   }
@@ -478,11 +497,11 @@
       setUser(session && session.user ? session.user : null, session, event);
     });
     client.auth.getSession().then(function (res) {
-      if (res && res.error) reportError(friendlyAuthError(res.error), "auth");
+      if (res && res.error) reportError(friendlyAuthError(res.error), "auth", res.error);
       const session = res && res.data && res.data.session;
       return setUser(session && session.user ? session.user : null, session);
     }).catch(function (err) {
-      reportError(friendlyAuthError(err), "auth");
+      reportError(friendlyAuthError(err), "auth", err);
       return setUser(null, null);
     }).then(function () {
       markReady();

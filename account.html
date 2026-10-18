@@ -32,6 +32,7 @@
   <script src="js/shared/errors.js"></script>
   <script src="js/shared/ops.js"></script>
   <script src="js/shared/auth.js"></script>
+  <script src="js/shared/mfa.js"></script>
   <script src="js/shared/desk.js"></script>
   <script src="js/shared/terms.js"></script>
   <script src="js/shared/insights.js"></script>
@@ -166,10 +167,25 @@
         <div class="acct-form account-password-box" id="account-password-box">
           <label class="cx-field">
             <span>New password</span>
-            <input type="password" id="account-new-password" autocomplete="new-password" minlength="8" placeholder="••••••••">
+            <input type="password" id="account-new-password" autocomplete="new-password" minlength="12" placeholder="••••••••">
           </label>
           <button type="button" id="account-password-save" class="cx-btn">Update password</button>
         </div>
+      </section>
+
+      <section class="acct-card cx-card" id="account-mfa" hidden>
+        <p class="acct-card-kicker">Authenticator</p>
+        <h2 class="acct-card-title">Second step</h2>
+        <p class="account-note" id="account-mfa-note" hidden></p>
+        <p id="account-mfa-secret" hidden></p>
+        <form id="account-mfa-form" class="acct-form" hidden>
+          <label class="cx-field">
+            <span>Code from the app</span>
+            <input id="account-mfa-code" inputmode="numeric" autocomplete="one-time-code" maxlength="6">
+          </label>
+          <button type="submit" class="cx-btn is-solid">Confirm code</button>
+        </form>
+        <button type="button" id="account-mfa-start" class="cx-btn">Add an authenticator app</button>
       </section>
     </section>
   </main>
