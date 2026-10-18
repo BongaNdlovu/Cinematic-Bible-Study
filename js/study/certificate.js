@@ -5,6 +5,9 @@
   const PAGE_H = 595;
   const CANVAS_W = 1684;
   const CANVAS_H = 1190;
+  const ISSUE_WAIT_MS = 8000;
+  const SERIAL_RE = /^SD-[0-9]{4}-[0-9A-F]{8}$/;
+  let issuing = false;
 
   function asciiBytes(text) {
     const out = new Uint8Array(text.length);
@@ -279,7 +282,7 @@
     return size;
   }
 
-  function drawCertificate(name, dated) {
+  function drawCertificate(name, dated, serial) {
     const canvas = document.createElement("canvas");
     canvas.width = CANVAS_W;
     canvas.height = CANVAS_H;
@@ -344,6 +347,11 @@
     ctx.fillStyle = "#7a684c";
     ctx.font = "italic 16px Newsreader, Georgia, serif";
     ctx.fillText("Gold to stone  ·  605 B.C. to the end", CANVAS_W - 268, 1024);
+    if (serial) {
+      ctx.fillStyle = "#6b4e16";
+      ctx.font = "500 14px Inter, sans-serif";
+      ctx.fillText("CERTIFICATE NO.  " + serial, CANVAS_W - 268, 1056);
+    }
 
     ctx.textAlign = "center";
     ctx.fillStyle = "#7a684c";
@@ -465,26 +473,85 @@
     node.input.select();
   }
 
+  function issueNumber(name) {
+    const auth = window.ScrollAuth;
+    const db = auth && auth.getClient && auth.getClient();
+    if (!db || typeof db.rpc !== "function") return Promise.resolve(null);
+    function ask() {
+      return Promise.resolve(db.rpc("issue_exhibit_certificate", { p_name: name })).then((res) => {
+        const row = res && !res.error && Array.isArray(res.data) ? res.data[0] : null;
+        if (row && SERIAL_RE.test(String(row.serial || ""))) return row;
+        const msg = res && res.error && res.error.message ? String(res.error.message) : "";
+        return msg.indexOf("not_finished") >= 0 ? "not_finished" : null;
+      });
+    }
+    const attempt = ask().then((first) => {
+      if (first !== "not_finished") return first;
+      const sync = window.ProgressSync && window.ProgressSync.pushNow;
+      if (typeof sync !== "function") return null;
+      return Promise.resolve(sync()).then(ask).then((again) => (again === "not_finished" ? null : again));
+    }).catch(() => null);
+    const timeout = new Promise((resolve) => setTimeout(() => resolve(null), ISSUE_WAIT_MS));
+    return Promise.race([attempt, timeout]);
+  }
+
+  function setNote(text) {
+    const node = els();
+    if (!node.panel) return;
+    let note = document.getElementById("certificate-note");
+    if (!note) {
+      note = document.createElement("p");
+      note.id = "certificate-note";
+      note.setAttribute("role", "status");
+      const actions = node.download && node.download.parentNode;
+      if (actions && actions.parentNode) actions.parentNode.insertBefore(note, actions);
+      else node.panel.appendChild(note);
+    }
+    note.textContent = text || "";
+    note.hidden = !text;
+  }
+
   function handleDownload() {
-    const name = sanitizeName(els().input && els().input.value);
+    const node = els();
+    const name = sanitizeName(node.input && node.input.value);
     if (!name) {
       syncDownloadEnabled();
       return;
     }
+    if (issuing) return;
+    issuing = true;
     saveName(name);
-    const dated = new Date().toLocaleDateString(undefined, {
-      year: "numeric",
-      month: "long",
-      day: "numeric"
+    setNote("");
+    const label = node.download ? node.download.textContent : "";
+    if (node.download) {
+      node.download.disabled = true;
+      node.download.textContent = "Preparing…";
+    }
+    issueNumber(name).then((issued) => {
+      issuing = false;
+      if (node.download) {
+        node.download.textContent = label;
+        node.download.disabled = false;
+      }
+      const stamp = issued && issued.issued_at ? new Date(issued.issued_at) : new Date();
+      const dated = (Number.isNaN(stamp.getTime()) ? new Date() : stamp).toLocaleDateString(undefined, {
+        year: "numeric",
+        month: "long",
+        day: "numeric"
+      });
+      const canvas = drawCertificate(name, dated, issued ? issued.serial : "");
+      const pdf = buildPdf(jpegBytesFromCanvas(canvas));
+      downloadPdf(pdf, filenameFromName(name));
+      if (window.Insights) window.Insights.track('feature_use', 10, { feature: 'cert_download', numbered: !!issued });
+      if (!issued) {
+        setNote("Your certificate downloaded without a certificate number, because your finished sittings have not reached the server yet. Download again in a minute for a numbered copy.");
+        return;
+      }
+      close();
+      setTimeout(() => {
+        openReviewPrompt(name);
+      }, 600);
     });
-    const canvas = drawCertificate(name, dated);
-    const pdf = buildPdf(jpegBytesFromCanvas(canvas));
-    downloadPdf(pdf, filenameFromName(name));
-    if (window.Insights) window.Insights.track('feature_use', 10, { feature: 'cert_download' });
-    close();
-    setTimeout(() => {
-      openReviewPrompt(name);
-    }, 600);
   }
 
   function escapeHtml(str) {

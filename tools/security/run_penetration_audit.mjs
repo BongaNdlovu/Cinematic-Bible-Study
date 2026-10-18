@@ -805,7 +805,10 @@ async function liveDeskClosed() {
   const seen = await api("POST", "/rest/v1/rpc/exhibit_help_seen", {
     p_note: "00000000-0000-0000-0000-000000000000"
   });
-  const denied = [author, help, helpWrite, publish, inbox, receipt, receipts, trigger, replies, mine, thread, reply, seen];
+  const certificates = await api("GET", "/rest/v1/exhibit_certificates?select=serial,name,user_id");
+  const graduates = await api("POST", "/rest/v1/rpc/exhibit_graduates", {});
+  const issue = await api("POST", "/rest/v1/rpc/issue_exhibit_certificate", { p_name: "pen" });
+  const denied = [author, help, helpWrite, publish, inbox, receipt, receipts, trigger, replies, mine, thread, reply, seen, certificates, graduates, issue];
   denied.forEach((res) => {
     if (res.status === 200 || res.status === 201) throw new Error("anonymous desk call stored or returned data");
   });
