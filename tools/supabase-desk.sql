@@ -303,6 +303,7 @@ declare
   v_owner uuid;
   v_operator boolean := public.is_review_moderator();
   v_body text := btrim(coalesce(p_body, ''));
+  v_limit integer := case when public.is_review_moderator() then 200 else 20 end;
 begin
   if auth.uid() is null or p_note is null then
     raise exception 'not_allowed';
@@ -317,7 +318,7 @@ begin
   if (select count(*) from public.exhibit_help_replies x
       where x.author_id = auth.uid()
         and x.created_at > now() - interval '1 day')
-      >= case when v_operator then 200 else 20 end then
+      >= v_limit then
     raise exception 'rate_limit';
   end if;
   insert into public.exhibit_help_replies (note_id, author_id, from_operator, body)
