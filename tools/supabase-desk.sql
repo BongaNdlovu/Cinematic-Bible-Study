@@ -35,16 +35,34 @@ create table if not exists public.exhibit_help_notes (
   created_at timestamptz not null default now()
 );
 
+alter table public.exhibit_help_notes
+  add column if not exists reader_seen_at timestamptz,
+  add column if not exists operator_seen_at timestamptz;
+
+create table if not exists public.exhibit_help_replies (
+  id uuid primary key default gen_random_uuid(),
+  note_id uuid not null references public.exhibit_help_notes (id) on delete cascade,
+  author_id uuid references auth.users (id) on delete set null,
+  from_operator boolean not null,
+  body text not null check (char_length(btrim(body)) between 1 and 2000),
+  created_at timestamptz not null default now()
+);
+
 create index if not exists exhibit_notices_created_idx
   on public.exhibit_notices (created_at desc);
 create index if not exists exhibit_notice_receipts_user_idx
   on public.exhibit_notice_receipts (user_id);
 create index if not exists exhibit_help_user_created_idx
   on public.exhibit_help_notes (user_id, created_at desc);
+create index if not exists exhibit_help_replies_note_idx
+  on public.exhibit_help_replies (note_id, created_at);
+create index if not exists exhibit_help_replies_author_idx
+  on public.exhibit_help_replies (author_id, created_at desc);
 
 alter table public.exhibit_notices enable row level security;
 alter table public.exhibit_notice_receipts enable row level security;
 alter table public.exhibit_help_notes enable row level security;
+alter table public.exhibit_help_replies enable row level security;
 
 create or replace function public.exhibit_notices_before_insert()
 returns trigger
@@ -176,13 +194,17 @@ begin
 end;
 $$;
 
-create or replace function public.exhibit_help_inbox()
+drop function if exists public.exhibit_help_inbox();
+create function public.exhibit_help_inbox()
 returns table (
   id uuid,
   subject text,
   body text,
   created_at timestamptz,
-  sender_email text
+  sender_email text,
+  last_at timestamptz,
+  replies integer,
+  unread boolean
 )
 language sql
 stable
@@ -190,12 +212,141 @@ security definer
 set search_path = public, auth
 as $$
   select n.id, n.subject, n.body, n.created_at,
-    case when u.email_confirmed_at is not null then u.email else null end
+    case when u.email_confirmed_at is not null then u.email else null end,
+    coalesce(r.last_at, n.created_at),
+    r.total::integer,
+    n.operator_seen_at is null
+      or coalesce(r.last_reader_at, '-infinity'::timestamptz) > n.operator_seen_at
   from public.exhibit_help_notes n
   join auth.users u on u.id = n.user_id
+  cross join lateral (
+    select max(x.created_at) as last_at,
+      count(*) as total,
+      max(x.created_at) filter (where not x.from_operator) as last_reader_at
+    from public.exhibit_help_replies x
+    where x.note_id = n.id
+  ) r
   where public.is_review_moderator()
-  order by n.created_at desc
-  limit 40;
+  order by coalesce(r.last_at, n.created_at) desc
+  limit 60;
+$$;
+
+create or replace function public.exhibit_help_mine()
+returns table (
+  id uuid,
+  subject text,
+  body text,
+  created_at timestamptz,
+  last_at timestamptz,
+  replies integer,
+  unread boolean
+)
+language sql
+stable
+security definer
+set search_path = public, auth
+as $$
+  select n.id, n.subject, n.body, n.created_at,
+    coalesce(r.last_at, n.created_at),
+    r.total::integer,
+    coalesce(r.last_operator_at, '-infinity'::timestamptz)
+      > coalesce(n.reader_seen_at, n.created_at)
+  from public.exhibit_help_notes n
+  cross join lateral (
+    select max(x.created_at) as last_at,
+      count(*) as total,
+      max(x.created_at) filter (where x.from_operator) as last_operator_at
+    from public.exhibit_help_replies x
+    where x.note_id = n.id
+  ) r
+  where auth.uid() is not null
+    and n.user_id = auth.uid()
+  order by coalesce(r.last_at, n.created_at) desc
+  limit 60;
+$$;
+
+create or replace function public.exhibit_help_thread(p_note uuid)
+returns table (
+  id uuid,
+  body text,
+  created_at timestamptz,
+  from_operator boolean
+)
+language sql
+stable
+security definer
+set search_path = public, auth
+as $$
+  with allowed as (
+    select n.id, n.body, n.created_at
+    from public.exhibit_help_notes n
+    where n.id = p_note
+      and auth.uid() is not null
+      and (n.user_id = auth.uid() or public.is_review_moderator())
+  )
+  select a.id, a.body, a.created_at, false from allowed a
+  union all
+  select x.id, x.body, x.created_at, x.from_operator
+  from public.exhibit_help_replies x
+  join allowed a on a.id = x.note_id
+  order by 3, 1
+  limit 200;
+$$;
+
+create or replace function public.exhibit_help_reply(p_note uuid, p_body text)
+returns void
+language plpgsql
+security definer
+set search_path = public, auth
+as $$
+declare
+  v_owner uuid;
+  v_operator boolean := public.is_review_moderator();
+  v_body text := btrim(coalesce(p_body, ''));
+begin
+  if auth.uid() is null or p_note is null then
+    raise exception 'not_allowed';
+  end if;
+  select n.user_id into v_owner from public.exhibit_help_notes n where n.id = p_note;
+  if v_owner is null or (v_owner <> auth.uid() and not v_operator) then
+    raise exception 'not_allowed';
+  end if;
+  if char_length(v_body) not between 1 and 2000 then
+    raise exception 'not_allowed';
+  end if;
+  if (select count(*) from public.exhibit_help_replies x
+      where x.author_id = auth.uid()
+        and x.created_at > now() - interval '1 day')
+      >= case when v_operator then 200 else 20 end then
+    raise exception 'rate_limit';
+  end if;
+  insert into public.exhibit_help_replies (note_id, author_id, from_operator, body)
+  values (p_note, auth.uid(), v_owner <> auth.uid(), v_body);
+  update public.exhibit_help_notes n
+  set reader_seen_at = case when n.user_id = auth.uid() then now() else n.reader_seen_at end,
+      operator_seen_at = case when v_operator then now() else n.operator_seen_at end
+  where n.id = p_note;
+end;
+$$;
+
+create or replace function public.exhibit_help_seen(p_note uuid)
+returns void
+language plpgsql
+security definer
+set search_path = public, auth
+as $$
+declare
+  v_operator boolean := public.is_review_moderator();
+begin
+  if auth.uid() is null or p_note is null then
+    raise exception 'not_allowed';
+  end if;
+  update public.exhibit_help_notes n
+  set reader_seen_at = case when n.user_id = auth.uid() then now() else n.reader_seen_at end,
+      operator_seen_at = case when v_operator then now() else n.operator_seen_at end
+  where n.id = p_note
+    and (n.user_id = auth.uid() or v_operator);
+end;
 $$;
 
 drop policy if exists read_notices on public.exhibit_notices;
@@ -246,12 +397,18 @@ revoke all on public.exhibit_help_notes from public, anon, authenticated;
 grant insert (subject, body) on public.exhibit_help_notes to authenticated;
 grant delete on public.exhibit_help_notes to authenticated;
 
+revoke all on public.exhibit_help_replies from public, anon, authenticated;
+
 revoke all on function public.exhibit_notices_before_insert() from public, anon, authenticated;
 revoke all on function public.exhibit_notices_before_delete() from public, anon, authenticated;
 revoke all on function public.exhibit_help_before_insert() from public, anon, authenticated;
 revoke all on function public.exhibit_help_before_delete() from public, anon, authenticated;
 revoke all on function public.exhibit_notice_receipt_set(uuid, boolean, boolean) from public, anon, authenticated;
 revoke all on function public.exhibit_help_inbox() from public, anon, authenticated;
+revoke all on function public.exhibit_help_mine() from public, anon, authenticated;
+revoke all on function public.exhibit_help_thread(uuid) from public, anon, authenticated;
+revoke all on function public.exhibit_help_reply(uuid, text) from public, anon, authenticated;
+revoke all on function public.exhibit_help_seen(uuid) from public, anon, authenticated;
 -- The signed-in role must be allowed to fire the triggers. These functions
 -- return trigger, so they cannot be called as ordinary API procedures.
 grant execute on function public.exhibit_notices_before_insert() to authenticated;
@@ -260,6 +417,10 @@ grant execute on function public.exhibit_help_before_insert() to authenticated;
 grant execute on function public.exhibit_help_before_delete() to authenticated;
 grant execute on function public.exhibit_notice_receipt_set(uuid, boolean, boolean) to authenticated;
 grant execute on function public.exhibit_help_inbox() to authenticated;
+grant execute on function public.exhibit_help_mine() to authenticated;
+grant execute on function public.exhibit_help_thread(uuid) to authenticated;
+grant execute on function public.exhibit_help_reply(uuid, text) to authenticated;
+grant execute on function public.exhibit_help_seen(uuid) to authenticated;
 
 notify pgrst, 'reload schema';
 
