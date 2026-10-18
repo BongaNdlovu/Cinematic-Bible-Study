@@ -290,7 +290,8 @@ body.cmap-page .desk-root.is-open { z-index: 2400; }
 
 body.onboard-open .desk-root,
 body:has(.mm.is-full) .desk-root,
-body:has(.chain.is-full) .desk-root { display: none !important; }
+body:has(.chain.is-full) .desk-root,
+body:has(.cmap-help:not([hidden])) .desk-root { display: none !important; }
 
 @media (max-width: 640px) {
   .desk-root { left: 10px; }

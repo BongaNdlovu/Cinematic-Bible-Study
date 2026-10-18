@@ -98,7 +98,7 @@ try {
     console.log("zooming in hands over to the map");
 
     for (let i = 0; i < 16 && !(await globeOn(t.page)); i++) {
-      await t.page.evaluate(() => document.querySelector(".leaflet-control-zoom-out").click());
+      await t.page.evaluate(() => document.querySelector(".cmap-zoom [data-zoom=\"-1\"]").click());
       await sleep(450);
     }
     assert.ok(await globeOn(t.page), "zooming the map all the way out did not return to the globe");

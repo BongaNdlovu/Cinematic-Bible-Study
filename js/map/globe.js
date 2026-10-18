@@ -920,6 +920,14 @@ export function create(container, options) {
     container.innerHTML = "";
   }
 
+  function zoomBy(factor) {
+    cancelTween();
+    tgt.dist = clamp(R + (tgt.dist - R) * factor, MIN_DIST, MAX_DIST);
+    if (factor < 1) checkThrough();
+    else if (tgt.dist > THROUGH_DIST + 0.15) through = false;
+    kick();
+  }
+
   function jumpTo(lat, lon, dist) {
     cancelTween();
     cur.lat = tgt.lat = clamp(lat, -75, 75);
@@ -933,6 +941,7 @@ export function create(container, options) {
     ready: ready,
     flyTo: flyTo,
     jumpTo: jumpTo,
+    zoomBy: zoomBy,
     setPins: setPins,
     setBorders: setBorders,
     setRoutes: setRoutes,

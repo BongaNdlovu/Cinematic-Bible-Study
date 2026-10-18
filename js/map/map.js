@@ -7,6 +7,42 @@
 
   const REDUCE = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const BASE_STORE = "baMapBasemap";
+  const SYMBOLS = {
+    head: "Golden Head",
+    chest: "Silver Chest & Arms",
+    thighs: "Bronze Belly & Thighs",
+    legs: "Legs of Iron",
+    feet: "Feet of Iron & Clay",
+    stone: "Stone Cut Without Hands",
+    years1260: "Time, Times & Half a Time"
+  };
+  const HELP_HTML =
+    "<div class='cmap-help-card' tabindex='0'>" +
+      "<div class='cmap-help-head'><h2 id='cmap-help-title'>How to use the map</h2>" +
+      "<button type='button' class='cmap-help-close' aria-label='Close help'>✕</button></div>" +
+      "<h3>Move and zoom</h3><dl>" +
+        "<div><dt>Move around</dt><dd>Drag with the mouse, or with one finger.</dd></div>" +
+        "<div><dt>Zoom in</dt><dd>The <kbd>+</kbd> button, scroll up, pinch outwards, double-click the flat map, or press <kbd>+</kbd>.</dd></div>" +
+        "<div><dt>Zoom out</dt><dd>The <kbd>−</kbd> button, scroll down, pinch inwards, or press <kbd>−</kbd>.</dd></div>" +
+        "<div><dt>Globe and map</dt><dd>Zoom far into the globe and it becomes the satellite map. Zoom all the way out of the map and it becomes the globe again. The Globe button switches straight away.</dd></div>" +
+        "<div><dt>Imagery</dt><dd>Satellite shows the ground as it looks today. Streets shows a plain road map.</dd></div>" +
+      "</dl>" +
+      "<h3>Move through time</h3><dl>" +
+        "<div><dt>Change year</dt><dd>Pick a year on the timeline, use the <kbd>‹</kbd> <kbd>›</kbd> buttons, or press <kbd>←</kbd> <kbd>→</kbd>.</dd></div>" +
+        "<div><dt>Play the chronicle</dt><dd>The <kbd>▶</kbd> button or <kbd>Space</kbd> plays the years in order.</dd></div>" +
+      "</dl>" +
+      "<h3>Places</h3><dl>" +
+        "<div><dt>Open a place</dt><dd>Click or tap a round medal on the map or globe.</dd></div>" +
+        "<div><dt>Close-up</dt><dd>In a place's panel, flies down to an aerial view of the real site.</dd></div>" +
+        "<div><dt>Play route</dt><dd>Follows the march or journey for that year.</dd></div>" +
+        "<div><dt>Search</dt><dd>Type a city, empire or battle in the search box.</dd></div>" +
+        "<div><dt>Layers and Key</dt><dd>Layers shows or hides borders, cities, events, labels and routes. Key explains the icons.</dd></div>" +
+        "<div><dt>Close a panel</dt><dd>The <kbd>✕</kbd> button or <kbd>Esc</kbd>.</dd></div>" +
+      "</dl>" +
+      "<h3>The 3D button</h3>" +
+      "<p>In a place's panel, <strong>Symbol in 3D</strong> opens the 3D gallery of the symbols from Daniel's visions, such as the golden head of Daniel 2. It is not a 3D view of the place. To see the real ground, use <strong>Close-up</strong>.</p>" +
+      "<p class='cmap-help-foot'>Press <kbd>?</kbd> to open this help at any time.</p>" +
+    "</div>";
 
   function epochById(id) {
     return DATA.epochs.find((e) => e.id === id) || DATA.epochs[0];
@@ -272,7 +308,7 @@
       "<div class='cmap-legend-row'><img src='assets/maps/icons/key-sanctuary.jpg' alt=''>Sanctuary</div>" +
       "<div class='cmap-legend-row'><img src='assets/maps/icons/key-wound.jpg' alt=''>Deadly wound</div>");
     const dossier = el("aside", { class: "cmap-dossier", "aria-live": "polite" });
-    const hint = el("div", { class: "cmap-hint" }, "Drag to pan · scroll to zoom · space to play · click a medal");
+    const hint = el("div", { class: "cmap-hint" }, "Drag to move · scroll or pinch to zoom · press ? for all controls");
     const credit = el("div", { class: "cmap-credit" }, "Satellite: Esri World Imagery · Borders: Cliopatria / Seshat");
     const timeline = el("div", { class: "cmap-timeline" });
     const prevBtn = el("button", { class: "cmap-nav-year", type: "button", title: "Previous year", "aria-label": "Previous year" }, "‹");
@@ -364,7 +400,15 @@
     // Small panels shown/hidden from the phone layout (desktop shows both always).
     const panelsToggle = el("div", { class: "cmap-panels-toggle", role: "group", "aria-label": "Map panels" },
       "<button type='button' id='cmap-btn-layers' aria-expanded='false' aria-controls='cmap-layers-panel'>Layers</button>" +
-      "<button type='button' id='cmap-btn-legend' aria-expanded='false' aria-controls='cmap-legend-panel'>Key</button>");
+      "<button type='button' id='cmap-btn-legend' aria-expanded='false' aria-controls='cmap-legend-panel'>Key</button>" +
+      (cinematic ? "<button type='button' id='cmap-btn-help' aria-haspopup='dialog' aria-expanded='false' aria-controls='cmap-help-panel'>Help</button>" : ""));
+    const zoomCtl = el("div", { class: "cmap-zoom", role: "group", "aria-label": "Zoom" },
+      "<button type='button' data-zoom='1' aria-label='Zoom in' title='Zoom in (+)'>+</button>" +
+      "<button type='button' data-zoom='-1' aria-label='Zoom out' title='Zoom out (−)'>−</button>" +
+      (cinematic ? "<button type='button' class='cmap-zoom-help' aria-label='Map help' aria-haspopup='dialog' aria-expanded='false' aria-controls='cmap-help-panel' title='Map help (?)'>?</button>" : ""));
+    const help = cinematic
+      ? el("div", { class: "cmap-help", id: "cmap-help-panel", role: "dialog", "aria-modal": "true", "aria-labelledby": "cmap-help-title", hidden: true }, HELP_HTML)
+      : null;
 
     root.appendChild(stage);
     if (chrome) root.appendChild(chrome);
@@ -386,6 +430,7 @@
     root.appendChild(layers);
     root.appendChild(searchBox);
     root.appendChild(compass);
+    root.appendChild(zoomCtl);
     root.appendChild(coords);
     root.appendChild(flyBadge);
     root.appendChild(dossier);
@@ -394,6 +439,7 @@
       root.appendChild(hint);
       root.appendChild(credit);
       root.appendChild(overture);
+      root.appendChild(help);
     }
     root.appendChild(chapter);
     root.appendChild(loadEl);
@@ -626,6 +672,9 @@
       const ep = currentEpoch();
       const studyHref = "study.html?id=" + ep.studySheet;
       const galHref = "gallery.html" + (ep.galleryId ? "?id=" + ep.galleryId : "");
+      const symbol = SYMBOLS[ep.galleryId] || "";
+      const symbolNote = '<p class="cmap-symbol-note">The 3D gallery shows the symbols from Daniel\'s visions, not this place.' +
+        (d.lat != null ? " To see the real ground, use Close-up." : "") + "</p>";
       const fullHref = "map.html?year=" + ep.id;
       const routeBtn = routeFor(ep) ? '<button type="button" class="cmap-play-route cmap-route-go">Play route</button>' : "";
       dossier.innerHTML = `
@@ -640,9 +689,10 @@
         ${d.art ? '<img src="' + d.art + '" alt="">' : ""}
         ${siteExtrasHtml(d)}
         <div class="cmap-dossier-actions">
-          ${cinematic ? '<a href="' + studyHref + '">Read in the study desk</a><a href="' + galHref + '">View in 3D</a>' + routeBtn + (d.lat != null ? '<button type="button" class="cmap-play-route cmap-closeup">Close-up</button>' : "")
+          ${cinematic ? '<a href="' + studyHref + '">Read in the study desk</a><a href="' + galHref + '" title="Opens the 3D gallery of Daniel\'s symbols">' + (symbol ? "Symbol in 3D: " + symbol : "Symbols in 3D") + "</a>" + routeBtn + (d.lat != null ? '<button type="button" class="cmap-play-route cmap-closeup">Close-up</button>' : "")
             : '<a class="cmap-enter" href="' + fullHref + '">Enter cinematic map →</a>'}
-        </div>`;
+        </div>
+        ${cinematic ? symbolNote : ""}`;
       const closeBtn = dossier.querySelector(".cmap-closeup");
       if (closeBtn) closeBtn.addEventListener("click", () => closeUp(d));
       const satGo = dossier.querySelector(".cmap-sat-go");
@@ -1080,7 +1130,6 @@
       }
       if (state.view === "map") credit.textContent = mapCredit;
       L.control.scale({ position: "bottomleft", imperial: false, maxWidth: 140 }).addTo(state.lmap);
-      L.control.zoom({ position: "bottomright" }).addTo(state.lmap);
       if (cinematic) addRuler(state.lmap);
       state.lmap.on("zoomend", () => {
         showFootprint();
@@ -1494,15 +1543,82 @@
       });
     }
 
+    function zoomStep(dir) {
+      if (state.view === "globe" && globe) {
+        globe.zoomBy(dir > 0 ? 0.7 : 1.4);
+        return;
+      }
+      if (!state.lmap) return;
+      if (dir < 0 && !globeFailed && state.lmap.getZoom() <= state.lmap.getMinZoom()) {
+        const c = state.lmap.getCenter();
+        showGlobe({ lat: c.lat, lon: c.lng });
+        return;
+      }
+      if (dir > 0) state.lmap.zoomIn();
+      else state.lmap.zoomOut();
+    }
+
+    zoomCtl.addEventListener("click", (ev) => {
+      const b = ev.target.closest("[data-zoom]");
+      if (b) zoomStep(Number(b.dataset.zoom));
+    });
+
+    const helpBtns = Array.from(root.querySelectorAll("#cmap-btn-help, .cmap-zoom-help"));
+    let helpReturn = null;
+
+    function helpOpen() {
+      return !!(help && !help.hidden);
+    }
+
+    function openHelp() {
+      if (!help || helpOpen()) return;
+      helpReturn = document.activeElement;
+      help.hidden = false;
+      helpBtns.forEach((b) => b.setAttribute("aria-expanded", "true"));
+      const closeHelpBtn = help.querySelector(".cmap-help-close");
+      if (closeHelpBtn) closeHelpBtn.focus();
+    }
+
+    function closeHelp() {
+      if (!helpOpen()) return;
+      help.hidden = true;
+      helpBtns.forEach((b) => b.setAttribute("aria-expanded", "false"));
+      if (helpReturn && helpReturn.focus) helpReturn.focus();
+      helpReturn = null;
+    }
+
+    if (help) {
+      helpBtns.forEach((b) => b.addEventListener("click", () => (helpOpen() ? closeHelp() : openHelp())));
+      help.addEventListener("click", (ev) => {
+        if (ev.target === help || ev.target.closest(".cmap-help-close")) closeHelp();
+      });
+      help.addEventListener("keydown", (ev) => {
+        if (ev.key !== "Tab") return;
+        const stops = [help.querySelector(".cmap-help-close"), help.querySelector(".cmap-help-card")].filter(Boolean);
+        if (!stops.length) return;
+        ev.preventDefault();
+        const at = stops.indexOf(document.activeElement);
+        stops[(at + (ev.shiftKey ? stops.length - 1 : 1) + stops.length) % stops.length].focus();
+      });
+    }
+
     if (cinematic) {
       window.addEventListener("keydown", (ev) => {
         const t = ev.target;
         const typing = t && (t.tagName === "INPUT" || t.tagName === "TEXTAREA" || t.tagName === "SELECT" || t.isContentEditable);
         if (ev.key === "Escape") {
+          if (helpOpen()) {
+            closeHelp();
+            return;
+          }
           closeDossier();
           return;
         }
-        if (typing) return;
+        if (typing || helpOpen()) return;
+        if (ev.key === "?") { ev.preventDefault(); openHelp(); return; }
+        if (ev.ctrlKey || ev.metaKey || ev.altKey) return;
+        if (ev.key === "+" || ev.key === "=") { ev.preventDefault(); zoomStep(1); return; }
+        if (ev.key === "-" || ev.key === "_") { ev.preventDefault(); zoomStep(-1); return; }
         if (ev.key === "ArrowRight") { ev.preventDefault(); state.playing = false; playBtn.textContent = "▶"; stepYear(1); }
         else if (ev.key === "ArrowLeft") { ev.preventDefault(); state.playing = false; playBtn.textContent = "▶"; stepYear(-1); }
         else if (ev.key === " ") { ev.preventDefault(); playChronicle(); }
