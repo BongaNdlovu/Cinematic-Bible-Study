@@ -48,6 +48,8 @@ assert(index.includes("js/home/shelf.js"), "index.html must load the shelf scene
 const shelf = fs.readFileSync(path.join(ROOT, "js", "home", "shelf.js"), "utf8");
 const portrait = /const SHELF_PORTRAIT = '([^']+)'/.exec(shelf);
 assert(portrait, "shelf.js must name the painting it waits for before the shelf is ready");
+assert(!shelf.includes("o.frustumCulled = false"), "the shelf loader must not turn frustum culling off for the whole scene");
+assert(!shelf.includes("for (const on of [true, false])"), "the shelf loader must not render once with the reading lights on and once with them off");
 eager.set(local(portrait[1]), "shelf painting");
 
 assert(eager.size >= 2, "the home page budget must cover the shelf painting and the social preview at least");
