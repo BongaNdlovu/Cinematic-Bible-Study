@@ -256,6 +256,7 @@
       background:
         radial-gradient(ellipse at 50% 0%, rgba(212, 175, 55, 0.1), transparent 55%),
         rgba(15, 14, 13, 0.55);
+      color: var(--chain-strong);
     }
     .chain {
       margin: 0;
@@ -440,7 +441,7 @@
       font-style: italic;
       font-size: 1rem;
       line-height: 1.5;
-      color: var(--chain-muted);
+      color: var(--chain-strong);
     }
     .chain-link {
       display: flex;
@@ -1672,7 +1673,7 @@
       --cmp-hair: rgba(197, 155, 39, 0.22);      /* the rule between two rows */
       --cmp-tile: rgba(255, 250, 236, 0.035);    /* fill, a shade above the ground */
       --cmp-head: var(--chain-strong, #f7e6bd);  /* the serif italic head */
-      --cmp-ink: var(--chain-muted, #b3a98f);    /* cell text */
+      --cmp-ink: #f4ead8;    /* cell text */
       --cmp-label: var(--chain-gold, #e4c56a);   /* the mono label over a head */
       --cmp-dim: #8a8272;                        /* the row label, off the grid */
       /* The row-label column, and its width is a length, never a percentage:
@@ -2058,7 +2059,7 @@
       line-height: 1.6;
       /* Dim, and it wraps: a three-word label is a label, not a reason to widen
          the column. */
-      color: var(--dfx-dim, #8a8272);
+      color: #e7d7b4;
       white-space: normal;
       overflow-wrap: break-word;
     }
@@ -2125,7 +2126,7 @@
       font-family: Inter, sans-serif;
       font-size: 0.95rem;
       line-height: 1.5;
-      color: color-mix(in srgb, currentColor 88%, var(--dfx-gilt, #dcb257));
+      color: var(--chain-strong, #f6edd8);
     }
     /* The grid owns the outer edge, so its last row of cells drops the line it
        already draws. */
@@ -2271,7 +2272,7 @@
       padding: var(--tbl-cell-pad-y) 0 0;
       font-size: 0.7rem;
       letter-spacing: 0.17em;
-      color: var(--dfx-dim, #8a8272);
+      color: #e7d7b4;
     }
     .chain.is-full .tbl-grid { padding-left: 1.2rem; border-color: var(--dfx-line, rgba(220, 178, 87, 0.26)); }
     .chain.is-full .tbl .tbl-cell + .tbl-cell { border-left-color: rgba(220, 178, 87, 0.14); }
@@ -3807,6 +3808,7 @@
       overflow: hidden;
       isolation: isolate;
       overscroll-behavior: contain;
+      color: var(--dfx-cream, #f4ecd8);
       color-scheme: dark;
       --dfx-ink: #050403;
       --dfx-plate: #0b0907;

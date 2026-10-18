@@ -549,8 +549,11 @@
         if (article) article.scrollIntoView({ behavior: 'smooth', block: 'start' });
       } else if (phase === 'tasks') {
         sittingVisited.tasks = true;
-        const rev = document.getElementById('workbench-section') || document.getElementById('revision-section');
-        if (rev) rev.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        const flow = window.StudyTaskFlow;
+        if (!(flow && typeof flow.open === 'function' && flow.open())) {
+          const rev = document.getElementById('workbench-section') || document.getElementById('revision-section');
+          if (rev) rev.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
       }
       renderSittingPath();
     }
@@ -5260,6 +5263,7 @@
       if (wbContainer && window.StudyWorkbench) {
         window.StudyWorkbench.renderWorkbench(index, wbContainer, () => {
           updateNextGate();
+          document.dispatchEvent(new CustomEvent('quiz:changed', { detail: { workbench: true } }));
         });
       }
 
@@ -5337,8 +5341,14 @@
       if (nextStep) nextStep.disabled = !ok;
     }
 
+    function openTaskFlow() {
+      const flow = window.StudyTaskFlow;
+      return !!(flow && typeof flow.open === 'function' && flow.open());
+    }
+
     function navigateSheet(delta) {
       if (delta > 0 && !canAdvancePath()) {
+        if (openTaskFlow()) return;
         showToast('Answer the checkpoints in the lesson and the final questions to continue.');
         revealUnfinished();
         return;
@@ -5357,10 +5367,10 @@
     let quizPending = {};
 
     const QUIZ_COPY_DEFAULT = {
-      kicker: 'Checkpoint • Active Recall',
-      title: 'Consolidate Prophetic Understanding',
-      lead: 'Active recall cements prophetic dates and biblical theology into permanent memory. Test your comprehension before unlocking the next sheet:',
-      badgeTail: ' to Advance'
+      kicker: 'Questions',
+      title: 'A few questions to close the sitting',
+      lead: 'One at a time. Nothing is timed, and if you miss one you will see why and can try again.',
+      badgeTail: ' to finish'
     };
 
     function checkpointCountFor(total) {
@@ -5416,15 +5426,24 @@
       kicker.className = 'checkpoint-kicker';
       kicker.textContent = 'Checkpoint ' + index + ' of ' + total;
       const title = document.createElement('h3');
-      title.textContent = 'Before you turn the page';
+      title.textContent = 'A question from these pages';
       const lead = document.createElement('p');
       lead.className = 'checkpoint-lead';
-      lead.textContent = 'Answer this from the pages you just read. The final questions come after the lesson.';
+      lead.textContent = 'Answer it on its own when you are ready. Nothing is timed.';
       const slot = document.createElement('div');
       slot.className = 'checkpoint-slot';
+      const start = document.createElement('button');
+      start.type = 'button';
+      start.className = 'checkpoint-start';
+      start.textContent = 'Answer this question';
+      start.addEventListener('click', () => {
+        const flow = window.StudyTaskFlow;
+        if (flow && typeof flow.open === 'function') flow.open();
+      });
       plate.appendChild(kicker);
       plate.appendChild(title);
       plate.appendChild(lead);
+      plate.appendChild(start);
       plate.appendChild(slot);
       return plate;
     }
@@ -5453,8 +5472,8 @@
       setQuizCopy({
         kicker: 'Final questions',
         title: 'Close the sitting',
-        lead: placed + ' ' + word + ' in the lesson. These last questions finish it.',
-        badgeTail: ' to Finish'
+        lead: placed + ' ' + word + ' in the lesson. These last ones finish it, one at a time, with no timer.',
+        badgeTail: ' to finish'
       }, finals);
     }
 
@@ -5489,7 +5508,7 @@
       const badge = document.getElementById('quiz-badge');
       if (badge) {
         const n = (quizzes && quizzes.length) || 0;
-        badge.textContent = n + ' Question' + (n === 1 ? '' : 's') + ' to Advance';
+        badge.textContent = n + ' Question' + (n === 1 ? '' : 's') + ' to finish';
       }
 
       quizzes.forEach((q, qIdx) => {
@@ -5648,6 +5667,7 @@
         }
 
         paintQuizOutcome(qIdx, selectedOptIdx, correctIdx, isCorrect, questionData, res.note);
+        document.dispatchEvent(new CustomEvent('quiz:changed', { detail: { q: qIdx, correct: isCorrect } }));
         updateNextGate();
         if (sheetQuizComplete()) {
           sittingVisited.tasks = true;
@@ -5673,6 +5693,7 @@
       if (feedback) feedback.classList.add('hidden');
       markCheckpoint(qIdx, '');
       updateNextGate();
+      document.dispatchEvent(new CustomEvent('quiz:changed', { detail: { q: qIdx, reset: true } }));
     }
 
     function celebrationFor(sheet) {
@@ -5815,8 +5836,39 @@
       celebrateTimer = window.setTimeout(close, 5600);
     }
 
+    function sittingLabel(index) {
+      return window.BAJourney && typeof window.BAJourney.sheetLabel === 'function'
+        ? window.BAJourney.sheetLabel(index)
+        : 'Sitting ' + index;
+    }
+
+    window.StudyTasks = {
+      snapshot: function () {
+        const data = sheetsData[currentSheetIndex] || {};
+        const quizzes = Array.isArray(data.quizzes) ? data.quizzes : [];
+        const wbNode = document.getElementById('workbench-container');
+        const hasWorkbench = !!(window.StudyWorkbench && wbNode && wbNode.childElementCount);
+        const last = currentSheetIndex >= sheetsData.length - 1;
+        return {
+          sheet: currentSheetIndex,
+          label: sittingLabel(currentSheetIndex),
+          nextLabel: last ? '' : sittingLabel(currentSheetIndex + 1),
+          last: last,
+          ready: sheetDataReady(currentSheetIndex),
+          questions: quizzes.map((q, i) => {
+            const card = document.getElementById('q-card-' + i);
+            return { index: i, done: verifiedQuiz[i] === true, card: card, inLesson: !!(card && card.closest('.checkpoint-plate')) };
+          }),
+          workbench: hasWorkbench ? { node: wbNode, done: window.StudyWorkbench.isSheetComplete(currentSheetIndex) } : null,
+          canAdvance: canAdvancePath()
+        };
+      },
+      advance: function () { completeAndAdvance(); }
+    };
+
     function completeAndAdvance() {
       if (!canAdvancePath()) {
+        if (openTaskFlow()) return;
         showToast('Answer the checkpoints in the lesson and the final questions to continue.');
         revealUnfinished();
         return;

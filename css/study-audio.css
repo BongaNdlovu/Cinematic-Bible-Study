@@ -1,0 +1,324 @@
+#lesson-audio {
+  --lap-ink: #f8efdb;
+  --lap-muted: rgba(244, 232, 206, 0.74);
+  --lap-gold: #efcd74;
+  --lap-glass: rgba(255, 248, 232, 0.08);
+  --lap-glass-strong: rgba(255, 248, 232, 0.15);
+  --lap-edge: rgba(255, 236, 190, 0.22);
+  --lap-edge-strong: rgba(239, 205, 116, 0.6);
+  --lap-shine: rgba(255, 255, 255, 0.24);
+  --lap-panel: linear-gradient(140deg, rgba(255, 246, 222, 0.16), rgba(255, 246, 222, 0.05) 42%, rgba(212, 175, 55, 0.1));
+  --lap-track: rgba(255, 248, 232, 0.14);
+  padding: 0;
+  border: 0;
+  border-radius: 24px;
+  background: none;
+  box-shadow: none;
+}
+body.paper-mode #lesson-audio,
+body.white-mode #lesson-audio {
+  --lap-ink: #2a2014;
+  --lap-muted: #5b4a32;
+  --lap-gold: #8f640c;
+  --lap-glass: rgba(255, 255, 255, 0.55);
+  --lap-glass-strong: rgba(255, 255, 255, 0.85);
+  --lap-edge: rgba(150, 112, 40, 0.26);
+  --lap-edge-strong: rgba(150, 112, 40, 0.6);
+  --lap-shine: rgba(255, 255, 255, 0.95);
+  --lap-panel: linear-gradient(140deg, rgba(255, 255, 255, 0.86), rgba(255, 252, 244, 0.62) 48%, rgba(240, 220, 170, 0.4));
+  --lap-track: rgba(150, 112, 40, 0.18);
+  background: none;
+  border: 0;
+  box-shadow: none;
+}
+
+#lesson-audio .lap-shell {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  gap: 14px;
+  padding: 20px 22px 16px;
+  border-radius: 24px;
+  border: 1px solid var(--lap-edge);
+  background: var(--lap-panel);
+  -webkit-backdrop-filter: blur(32px) saturate(180%);
+  backdrop-filter: blur(32px) saturate(180%);
+  box-shadow:
+    inset 0 1px 0 var(--lap-shine),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.16),
+    0 24px 60px -30px rgba(0, 0, 0, 0.65),
+    0 0 0 1px rgba(212, 175, 55, 0.06);
+  overflow: hidden;
+  color: var(--lap-ink);
+}
+#lesson-audio .lap-shell::before {
+  content: "";
+  position: absolute;
+  inset: -60% 45% 40% -25%;
+  z-index: -1;
+  background: radial-gradient(closest-side, rgba(255, 255, 255, 0.18), transparent);
+  pointer-events: none;
+}
+#lesson-audio .lap-shell::after {
+  content: "";
+  position: absolute;
+  inset: 45% -20% -60% 55%;
+  z-index: -1;
+  background: radial-gradient(closest-side, rgba(239, 205, 116, 0.2), transparent);
+  opacity: 0.6;
+  transition: opacity 0.6s ease;
+  pointer-events: none;
+}
+#lesson-audio .lap-shell.is-playing::after { opacity: 1; }
+
+#lesson-audio .lap-top {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 16px;
+}
+#lesson-audio .lap-meta { min-width: 0; }
+#lesson-audio .lesson-audio-kicker {
+  margin: 0 0 4px;
+  font-family: Inter, system-ui, sans-serif;
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--lap-gold);
+}
+#lesson-audio .lesson-audio-title {
+  margin: 0;
+  font-family: Newsreader, Georgia, serif;
+  font-size: clamp(1.15rem, 1rem + 0.5vw, 1.4rem);
+  font-weight: 500;
+  line-height: 1.25;
+  color: var(--lap-ink);
+}
+#lesson-audio .lesson-audio-hint {
+  margin: 0;
+  font-family: Inter, system-ui, sans-serif;
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: var(--lap-muted);
+}
+
+#lesson-audio .lap-btn {
+  flex: none;
+  display: inline-grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border-radius: 999px;
+  border: 1px solid var(--lap-edge);
+  background: var(--lap-glass);
+  color: var(--lap-ink);
+  cursor: pointer;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  box-shadow: inset 0 1px 0 var(--lap-shine);
+  transition: transform 0.16s ease, background-color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+#lesson-audio .lap-btn:hover { background: var(--lap-glass-strong); border-color: var(--lap-edge-strong); }
+#lesson-audio .lap-btn:active { transform: scale(0.94); }
+#lesson-audio .lap-btn svg { width: 14px; height: 14px; fill: currentColor; }
+
+#lesson-audio .lap-play {
+  width: 58px;
+  height: 58px;
+  border: 1px solid rgba(255, 240, 200, 0.6);
+  background: radial-gradient(circle at 32% 26%, #fff4d2, #f0cd70 42%, #c8922a 100%);
+  color: #23180a;
+  box-shadow:
+    inset 0 1px 1px rgba(255, 255, 255, 0.7),
+    inset 0 -6px 12px rgba(120, 72, 10, 0.25),
+    0 12px 28px -10px rgba(200, 146, 42, 0.8);
+}
+#lesson-audio .lap-play:hover {
+  background: radial-gradient(circle at 32% 26%, #fff8e2, #f4d47e 42%, #cf9a30 100%);
+  border-color: rgba(255, 244, 214, 0.85);
+}
+#lesson-audio .lap-play svg { width: 18px; height: 18px; }
+#lesson-audio .lap-play [data-lap-glyph-play] { transform: translateX(1.5px); }
+#lesson-audio .lap-play.is-playing {
+  box-shadow:
+    inset 0 1px 1px rgba(255, 255, 255, 0.7),
+    inset 0 -6px 12px rgba(120, 72, 10, 0.25),
+    0 0 0 6px rgba(239, 205, 116, 0.14),
+    0 12px 30px -8px rgba(200, 146, 42, 0.9);
+}
+
+#lesson-audio .lap-eq {
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 3px;
+  height: 22px;
+  padding-right: 2px;
+}
+#lesson-audio .lap-eq i {
+  display: block;
+  width: 3px;
+  height: 6px;
+  border-radius: 2px;
+  background: var(--lap-gold);
+  opacity: 0.45;
+  transform-origin: bottom;
+}
+#lesson-audio .lap-shell.is-playing .lap-eq i {
+  opacity: 0.9;
+  animation: lap-eq 1.1s ease-in-out infinite;
+}
+#lesson-audio .lap-shell.is-playing .lap-eq i:nth-child(2) { animation-delay: -0.35s; }
+#lesson-audio .lap-shell.is-playing .lap-eq i:nth-child(3) { animation-delay: -0.7s; }
+#lesson-audio .lap-shell.is-playing .lap-eq i:nth-child(4) { animation-delay: -0.2s; }
+#lesson-audio .lap-shell.is-playing .lap-eq i:nth-child(5) { animation-delay: -0.55s; }
+@keyframes lap-eq {
+  0%, 100% { height: 5px; }
+  50% { height: 20px; }
+}
+
+#lesson-audio .lap-track {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 12px;
+}
+#lesson-audio .lap-time {
+  min-width: 42px;
+  font-family: Inter, system-ui, sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  font-variant-numeric: tabular-nums;
+  color: var(--lap-muted);
+}
+#lesson-audio .lap-time-end { text-align: right; }
+#lesson-audio .lap-seek {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  min-width: 0;
+  height: 22px;
+  margin: 0;
+  background: transparent;
+  cursor: pointer;
+  --lap-fill: 0%;
+}
+#lesson-audio .lap-seek::-webkit-slider-runnable-track {
+  height: 6px;
+  border-radius: 999px;
+  background: linear-gradient(to right, #d39c32 0%, #f3d488 var(--lap-fill), var(--lap-track) var(--lap-fill), var(--lap-track) 100%);
+  box-shadow: inset 0 0 0 1px var(--lap-edge);
+}
+#lesson-audio .lap-seek::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  margin-top: -5px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  background: radial-gradient(circle at 35% 30%, #ffffff, #f6dc94 60%, #d39c32);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35), 0 0 0 4px rgba(239, 205, 116, 0.18);
+  transition: transform 0.16s ease, box-shadow 0.2s ease;
+}
+#lesson-audio .lap-seek:hover::-webkit-slider-thumb,
+#lesson-audio .lap-seek:focus-visible::-webkit-slider-thumb {
+  transform: scale(1.15);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35), 0 0 0 6px rgba(239, 205, 116, 0.26);
+}
+#lesson-audio .lap-seek::-moz-range-track {
+  height: 6px;
+  border-radius: 999px;
+  background: var(--lap-track);
+}
+#lesson-audio .lap-seek::-moz-range-progress {
+  height: 6px;
+  border-radius: 999px;
+  background: linear-gradient(to right, #d39c32, #f3d488);
+}
+#lesson-audio .lap-seek::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  background: radial-gradient(circle at 35% 30%, #ffffff, #f6dc94 60%, #d39c32);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+}
+
+#lesson-audio .lap-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+#lesson-audio .lap-skip {
+  position: relative;
+  width: 44px;
+  height: 44px;
+}
+#lesson-audio .lap-skip svg { width: 22px; height: 22px; }
+#lesson-audio .lap-skip span {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding-top: 2px;
+  font: 600 8.5px/1 Inter, system-ui, sans-serif;
+  pointer-events: none;
+}
+#lesson-audio .lap-rate {
+  min-width: 56px;
+  height: 36px;
+  padding: 0 14px;
+  border-radius: 999px;
+  border: 1px solid var(--lap-edge);
+  background: var(--lap-glass);
+  color: var(--lap-ink);
+  font: 600 13px/1 Inter, system-ui, sans-serif;
+  font-variant-numeric: tabular-nums;
+  cursor: pointer;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  box-shadow: inset 0 1px 0 var(--lap-shine);
+  transition: background-color 0.25s ease, border-color 0.25s ease, transform 0.16s ease;
+}
+#lesson-audio .lap-rate:hover { background: var(--lap-glass-strong); border-color: var(--lap-edge-strong); }
+#lesson-audio .lap-rate:active { transform: scale(0.95); }
+#lesson-audio .lap-rate.is-set { border-color: var(--lap-edge-strong); color: var(--lap-gold); }
+#lesson-audio .lap-mute { margin-left: 6px; }
+#lesson-audio .lap-mute.is-muted { color: var(--lap-muted); }
+#lesson-audio .lap-shell:not(.is-ready) .lap-skip { opacity: 0.55; }
+#lesson-audio button:focus-visible,
+#lesson-audio .lap-seek:focus-visible {
+  outline: 2px solid var(--lap-gold);
+  outline-offset: 3px;
+}
+#lesson-audio .lesson-audio-orb-restore { justify-self: start; margin-top: 10px; }
+
+@media (max-width: 640px) {
+  #lesson-audio .lap-shell { padding: 16px 16px 14px; border-radius: 22px; gap: 12px; }
+  #lesson-audio .lap-top { gap: 12px; }
+  #lesson-audio .lap-play { width: 52px; height: 52px; }
+  #lesson-audio .lap-eq { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  #lesson-audio .lap-shell.is-playing .lap-eq i { animation: none; height: 12px; }
+  #lesson-audio .lap-btn, #lesson-audio .lap-rate, #lesson-audio .lap-seek::-webkit-slider-thumb { transition: none; }
+}
+@media print {
+  #lesson-audio { display: none !important; }
+}
+
+.audio-cp {
+  border-radius: 22px;
+  border: 1px solid rgba(255, 236, 190, 0.28);
+  background:
+    linear-gradient(155deg, rgba(255, 246, 222, 0.16), rgba(255, 246, 222, 0.04) 42%, rgba(18, 14, 8, 0.72));
+  -webkit-backdrop-filter: blur(28px) saturate(170%);
+  backdrop-filter: blur(28px) saturate(170%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.22),
+    0 24px 50px -24px rgba(0, 0, 0, 0.75);
+}
