@@ -49,11 +49,6 @@
     } catch (e) {}
   }
 
-  function isFront() {
-    const here = (location.pathname.split("/").pop() || "index.html").toLowerCase();
-    return here === "" || here === "index.html" || here === "study.html" || here === "study";
-  }
-
   function authReady() {
     const auth = window.ScrollAuth;
     if (auth && typeof auth.ready === "function") return auth.ready();
@@ -84,7 +79,7 @@
   function header(q) {
     const top = field("div");
     top.className = "onboard-top";
-    const kicker = field("p", "Before the shelf");
+    const kicker = field("p", "Before this sitting");
     kicker.className = "onboard-kicker";
     const dots = field("ol");
     dots.className = "onboard-steps";
@@ -289,7 +284,7 @@
       return;
     }
     saving = true;
-    paintNote("Saving your answers.", "Then the shelf opens.", false);
+    paintNote("Saving your answers.", "Then this sitting begins.", false);
     save().then(afterSave);
   }
 
@@ -320,7 +315,7 @@
     }
     if (e.target.closest("[data-retry]") && !saving) {
       saving = true;
-      paintNote("Saving your answers.", "Then the shelf opens.", false);
+      paintNote("Saving your answers.", "Then this sitting begins.", false);
       save().then(afterSave);
     }
   }
@@ -399,8 +394,9 @@
   }
 
   function boot() {
-    if (!isFront() || done()) return;
-    gate();
+    if (!onStudy() || done()) return;
+    const opened = window.BookOpen && window.BookOpen.finished ? window.BookOpen.finished : Promise.resolve();
+    opened.then(function () { if (!done()) gate(); });
   }
 
   window.Onboard = { gate: gate, done: done };

@@ -2630,7 +2630,6 @@ async function answerInvite() {
   const auth = window.ScrollAuth;
   const ready = auth && typeof auth.ready === 'function' ? Promise.resolve(auth.ready()).catch(() => {}) : Promise.resolve();
   await Promise.race([ready, new Promise((r) => setTimeout(r, INVITE_AUTH_WAIT_MS))]);
-  if (window.Onboard && typeof window.Onboard.gate === 'function') await window.Onboard.gate();
   if (can(i) || !signedIn()) enterSitting(i);
   else location.href = 'study.html?sheet=' + i;
 }

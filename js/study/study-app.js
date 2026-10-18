@@ -5301,10 +5301,9 @@
       const openIntro = function () {
         if (!skipIntro && !seen && hasChosenTrack && index === currentSheetIndex) showIntroGuide(index);
       };
-      const wait = window.Onboard && typeof window.Onboard.gate === 'function'
-        ? window.Onboard.gate()
-        : Promise.resolve();
-      Promise.all([wait, bookOpened()]).then(openIntro);
+      bookOpened().then(function () {
+        return window.Onboard && typeof window.Onboard.gate === 'function' ? window.Onboard.gate() : null;
+      }).then(openIntro);
       if (window.StudySheets && typeof window.StudySheets.prefetchAround === 'function') window.StudySheets.prefetchAround(index);
     }
 
@@ -6247,13 +6246,12 @@
       });
       if (window.StudyCompetency) {
         const openPlacement = function () { window.StudyCompetency.initPlacementModal(); };
-        const afterOnboard = window.Onboard && typeof window.Onboard.gate === "function"
-          ? window.Onboard.gate()
-          : Promise.resolve();
         const afterAuth = window.ScrollAuth && typeof window.ScrollAuth.ready === "function"
           ? window.ScrollAuth.ready()
           : Promise.resolve();
-        Promise.all([afterAuth, afterOnboard, bookOpened()]).then(openPlacement);
+        Promise.all([afterAuth, bookOpened()]).then(function () {
+          return window.Onboard && typeof window.Onboard.gate === "function" ? window.Onboard.gate() : null;
+        }).then(openPlacement);
       }
       function refreshAdminAccess() {
         renderToc();
