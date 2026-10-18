@@ -79,6 +79,15 @@ try {
     console.log("globe draws nothing when idle");
 
     await t.page.mouse.move(900, 300);
+    for (let i = 0; i < 3; i++) {
+      await t.page.mouse.wheel(0, -120);
+      await sleep(60);
+    }
+    assert.ok(await waitFor(t.page, () => !!document.querySelector(".cmap-globe").dataset.imagery, 20000), "close satellite imagery never appeared on the globe");
+    assert.ok(await globeOn(t.page), "three wheel steps should not leave the globe");
+    await t.page.screenshot({ path: "qa/proofs/globe_proof_imagery.png" });
+    console.log("zooming close drapes satellite imagery on the globe");
+
     for (let i = 0; i < 40 && (await globeOn(t.page)); i++) {
       await t.page.mouse.wheel(0, -120);
       await sleep(50);
@@ -124,8 +133,11 @@ try {
     await t.page.click(".cmap-search-hits button[data-id='susa']");
     await sleep(1200);
     assert.ok(await t.page.evaluate(() => !!document.querySelector(".cmap-dossier .cmap-artifact")), "artifact card missing");
-    assert.strictEqual(await t.page.evaluate(() => document.querySelectorAll(".cmap-dossier [data-poi]").length), 3);
-    await t.page.click(".cmap-dossier [data-poi='1']");
+    assert.strictEqual(await t.page.evaluate(() => document.querySelectorAll(".cmap-dossier .cmap-pois [data-poi]").length), 3);
+    assert.strictEqual(await t.page.evaluate(() => document.querySelectorAll(".cmap-dossier .cmap-sat-mark").length), 3, "aerial view should pin the three landmarks");
+    assert.ok(await waitFor(t.page, () => Array.from(document.querySelectorAll(".cmap-sat-frame img")).some((i) => i.complete && i.naturalWidth > 0), 15000), "aerial view tiles never loaded");
+    console.log("place panel shows an aerial view with its landmarks");
+    await t.page.click(".cmap-dossier .cmap-pois [data-poi='1']");
     await sleep(3500);
     assert.ok(await t.page.evaluate(() => !!document.querySelector(".cmap-footprint")), "site outline missing at close zoom");
     await t.page.screenshot({ path: "qa/proofs/globe_proof_site.png" });

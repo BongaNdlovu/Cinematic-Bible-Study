@@ -57,6 +57,103 @@ void main() {
   gl_FragColor = vec4(0.62, 0.74, 1.0, 1.0) * i * 1.6;
 }`;
 
+const HAZE_VERT = `
+varying vec3 vNormal;
+varying vec3 vView;
+void main() {
+  vec4 mv = modelViewMatrix * vec4(position, 1.0);
+  vNormal = normalize(normalMatrix * normal);
+  vView = normalize(-mv.xyz);
+  gl_Position = projectionMatrix * mv;
+}`;
+
+const HAZE_FRAG = `
+uniform vec3 sunDir;
+varying vec3 vNormal;
+varying vec3 vView;
+void main() {
+  float rim = pow(1.0 - max(dot(vNormal, vView), 0.0), 2.6);
+  float lit = smoothstep(-0.25, 0.7, dot(vNormal, sunDir));
+  gl_FragColor = vec4(vec3(0.45, 0.66, 1.0) * rim * (0.2 + 0.8 * lit) * 0.85, 1.0);
+}`;
+
+const SUN = new THREE.Vector3(-2.2, 1.6, 3.2);
+const TILE_URL = "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/";
+const PATCH_COLS = 8;
+const PATCH_ROWS = 6;
+const PATCH_NEAR = 2.5;
+const PATCH_FAR = 2.95;
+
+function tileX(lon, z) {
+  return ((lon + 180) / 360) * Math.pow(2, z);
+}
+
+function tileY(lat, z) {
+  const r = clamp(lat, -84, 84) * DEG;
+  return ((1 - Math.log(Math.tan(r) + 1 / Math.cos(r)) / Math.PI) / 2) * Math.pow(2, z);
+}
+
+function tileLat(y, z) {
+  const n = Math.PI - (2 * Math.PI * y) / Math.pow(2, z);
+  return Math.atan(Math.sinh(n)) / DEG;
+}
+
+function tileLon(x, z) {
+  return (x / Math.pow(2, z)) * 360 - 180;
+}
+
+function loadImage(url) {
+  return new Promise((resolve) => {
+    const img = new Image();
+    img.crossOrigin = "anonymous";
+    img.decoding = "async";
+    img.addEventListener("load", () => resolve(img));
+    img.addEventListener("error", () => resolve(null));
+    img.src = url;
+  });
+}
+
+function graticule() {
+  const pos = [];
+  const lift = R * 1.0012;
+  const seg = (a, b) => pos.push(a.x, a.y, a.z, b.x, b.y, b.z);
+  for (let lat = -75; lat <= 75; lat += 15) {
+    for (let lon = -180; lon < 180; lon += 3) seg(toVec(lat, lon, lift), toVec(lat, lon + 3, lift));
+  }
+  for (let lon = -180; lon < 180; lon += 15) {
+    for (let lat = -84; lat < 84; lat += 3) seg(toVec(lat, lon, lift), toVec(lat + 3, lon, lift));
+  }
+  const geo = new THREE.BufferGeometry();
+  geo.setAttribute("position", new THREE.Float32BufferAttribute(pos, 3));
+  const lines = new THREE.LineSegments(geo, new THREE.LineBasicMaterial({ color: 0xd9b75a, transparent: true, opacity: 0.09, depthWrite: false }));
+  lines.renderOrder = 2;
+  return lines;
+}
+
+function subdivide(a, b, c, depth, out) {
+  const ab = a.distanceTo(b);
+  const bc = b.distanceTo(c);
+  const ca = c.distanceTo(a);
+  const longest = Math.max(ab, bc, ca);
+  if (longest <= 2 || depth >= 7) {
+    out.push(a, b, c);
+    return;
+  }
+  if (longest === ab) {
+    const m = a.clone().lerp(b, 0.5);
+    subdivide(a, m, c, depth + 1, out);
+    subdivide(m, b, c, depth + 1, out);
+  } else if (longest === bc) {
+    const m = b.clone().lerp(c, 0.5);
+    subdivide(a, b, m, depth + 1, out);
+    subdivide(a, m, c, depth + 1, out);
+  } else {
+    const m = c.clone().lerp(a, 0.5);
+    subdivide(a, b, m, depth + 1, out);
+    subdivide(m, b, c, depth + 1, out);
+  }
+}
+
 export function create(container, options) {
   const opts = options || {};
   const reduce = !!opts.reduce;
@@ -79,19 +176,37 @@ export function create(container, options) {
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(38, 1, 0.05, 200);
   scene.add(camera);
-  scene.add(new THREE.AmbientLight(0xffffff, 0.5));
-  const sun = new THREE.DirectionalLight(0xfff1dc, 2.7);
-  sun.position.set(-2.2, 1.6, 3.2);
+  scene.add(new THREE.AmbientLight(0xdfe6ff, 0.34));
+  const sun = new THREE.DirectionalLight(0xfff0d8, 3.1);
+  sun.position.set(SUN.x, SUN.y, SUN.z);
   camera.add(sun);
 
-  const segs = phone ? 64 : 96;
+  const segs = phone ? 64 : 128;
   const earthMat = new THREE.MeshPhongMaterial({
     color: 0x0c1a26,
-    specular: new THREE.Color(0x3a4a5c),
-    shininess: 16
+    specular: new THREE.Color(0x5a6f86),
+    shininess: 30
   });
   const earth = new THREE.Mesh(new THREE.SphereGeometry(R, segs, segs), earthMat);
   scene.add(earth);
+
+  const sunView = new THREE.Vector3();
+  const haze = new THREE.Mesh(
+    new THREE.SphereGeometry(R * 1.004, segs, segs),
+    new THREE.ShaderMaterial({
+      vertexShader: HAZE_VERT,
+      fragmentShader: HAZE_FRAG,
+      uniforms: { sunDir: { value: sunView } },
+      blending: THREE.AdditiveBlending,
+      transparent: true,
+      depthWrite: false
+    })
+  );
+  haze.renderOrder = 10;
+  scene.add(haze);
+
+  const grid = graticule();
+  scene.add(grid);
 
   const atmos = new THREE.Mesh(
     new THREE.SphereGeometry(R * 1.12, 64, 64),
@@ -106,19 +221,29 @@ export function create(container, options) {
   );
   scene.add(atmos);
 
-  const starCount = phone ? 700 : 1400;
-  const starPos = new Float32Array(starCount * 3);
-  for (let i = 0; i < starCount; i++) {
-    const v = new THREE.Vector3(Math.random() * 2 - 1, Math.random() * 2 - 1, Math.random() * 2 - 1).normalize().multiplyScalar(60 + Math.random() * 30);
-    starPos.set([v.x, v.y, v.z], i * 3);
-  }
-  const starGeo = new THREE.BufferGeometry();
-  starGeo.setAttribute("position", new THREE.BufferAttribute(starPos, 3));
-  const stars = new THREE.Points(starGeo, new THREE.PointsMaterial({ color: 0xe8dcc0, size: 1.3, sizeAttenuation: false, transparent: true, opacity: 0.7 }));
+  const stars = new THREE.Group();
+  [[phone ? 700 : 1500, 1.1, 0.55, 0xdcd6c8], [phone ? 90 : 180, 2.2, 0.9, 0xfff1cc]].forEach(([count, size, opacity, color]) => {
+    const pos = new Float32Array(count * 3);
+    for (let i = 0; i < count; i++) {
+      const v = new THREE.Vector3(Math.random() * 2 - 1, Math.random() * 2 - 1, Math.random() * 2 - 1).normalize().multiplyScalar(60 + Math.random() * 30);
+      pos.set([v.x, v.y, v.z], i * 3);
+    }
+    const geo = new THREE.BufferGeometry();
+    geo.setAttribute("position", new THREE.BufferAttribute(pos, 3));
+    stars.add(new THREE.Points(geo, new THREE.PointsMaterial({ color: color, size: size, sizeAttenuation: false, transparent: true, opacity: opacity, depthWrite: false })));
+  });
   scene.add(stars);
 
   let borderObj = null;
+  let fillObj = null;
   let routeGroup = null;
+  const patchGroup = new THREE.Group();
+  scene.add(patchGroup);
+  const patches = new Map();
+  let patchKey = "";
+  let patchTimer = 0;
+  let featherTex = null;
+  let fade = null;
 
   const loader = new THREE.TextureLoader();
   const aniso = Math.min(8, renderer.capabilities.getMaxAnisotropy());
@@ -128,7 +253,7 @@ export function create(container, options) {
     });
   }
   const rect = container.getBoundingClientRect();
-  const big = !phone && renderer.capabilities.maxTextureSize >= 4096 && Math.max(rect.width, rect.height) * dpr >= 1600;
+  const big = !phone && renderer.capabilities.maxTextureSize >= 4096 && Math.max(rect.width, rect.height) * dpr >= 900;
   const ready = Promise.all([
     load(big ? "earth-day-4k.webp" : "earth-day-2k.webp"),
     load("earth-bump-2k.webp"),
@@ -254,6 +379,8 @@ export function create(container, options) {
     camera.up.set(0, 1, 0);
     camera.lookAt(0, 0, 0);
     camera.updateMatrixWorld();
+    sunView.set(SUN.x, SUN.y, SUN.z + cur.dist).normalize();
+    patchGroup.visible = cur.dist < PATCH_FAR;
     renderer.render(scene, camera);
     camDir.copy(camera.position).normalize();
     const horizon = R / cur.dist + 0.03;
@@ -264,9 +391,169 @@ export function create(container, options) {
 
   function frame(now) {
     raf = 0;
-    const moving = step(now);
+    const fading = stepFade(now);
+    const moving = step(now) || fading;
     render();
     if (moving || dragging) kick();
+    else schedulePatch();
+  }
+
+  function stepFade(now) {
+    if (!fade) return false;
+    const t = clamp((now - fade.start) / 500, 0, 1);
+    fade.mat.opacity = t;
+    if (t >= 1) fade = null;
+    return true;
+  }
+
+  function feather() {
+    if (featherTex) return featherTex;
+    const n = 128;
+    const c = document.createElement("canvas");
+    c.width = n;
+    c.height = n;
+    const g = c.getContext("2d");
+    const img = g.createImageData(n, n);
+    for (let y = 0; y < n; y++) {
+      for (let x = 0; x < n; x++) {
+        const e = Math.min(x, n - 1 - x, y, n - 1 - y) / (n - 1);
+        const t = clamp(e / 0.16, 0, 1);
+        const a = Math.round(255 * t * t * (3 - 2 * t));
+        const i = (y * n + x) * 4;
+        img.data[i] = a;
+        img.data[i + 1] = a;
+        img.data[i + 2] = a;
+        img.data[i + 3] = 255;
+      }
+    }
+    g.putImageData(img, 0, 0);
+    featherTex = new THREE.CanvasTexture(c);
+    return featherTex;
+  }
+
+  function patchGeometry(z, x0, y0) {
+    const sx = 40;
+    const sy = 30;
+    const pos = [];
+    const nor = [];
+    const uv = [];
+    const idx = [];
+    for (let j = 0; j <= sy; j++) {
+      for (let i = 0; i <= sx; i++) {
+        const v = toVec(tileLat(y0 + (PATCH_ROWS * j) / sy, z), tileLon(x0 + (PATCH_COLS * i) / sx, z), 1);
+        nor.push(v.x, v.y, v.z);
+        pos.push(v.x * R * 1.0015, v.y * R * 1.0015, v.z * R * 1.0015);
+        uv.push(i / sx, 1 - j / sy);
+      }
+    }
+    for (let j = 0; j < sy; j++) {
+      for (let i = 0; i < sx; i++) {
+        const a = j * (sx + 1) + i;
+        idx.push(a, a + sx + 1, a + 1, a + 1, a + sx + 1, a + sx + 2);
+      }
+    }
+    const geo = new THREE.BufferGeometry();
+    geo.setAttribute("position", new THREE.Float32BufferAttribute(pos, 3));
+    geo.setAttribute("normal", new THREE.Float32BufferAttribute(nor, 3));
+    geo.setAttribute("uv", new THREE.Float32BufferAttribute(uv, 2));
+    geo.setIndex(idx);
+    return geo;
+  }
+
+  function showPatch(key) {
+    patches.forEach((p, k) => {
+      if (!p.mesh) return;
+      const on = k === key;
+      if (on && !p.mesh.visible) {
+        p.mesh.material.opacity = reduce ? 1 : 0;
+        if (!reduce) fade = { mat: p.mesh.material, start: performance.now() };
+      }
+      p.mesh.visible = on;
+      if (on) p.used = performance.now();
+    });
+    container.dataset.imagery = key;
+    kick();
+  }
+
+  function evictPatches() {
+    const limit = phone ? 2 : 4;
+    const spare = Array.from(patches.entries()).filter(([k, p]) => p.mesh && k !== patchKey);
+    spare.sort((a, b) => a[1].used - b[1].used);
+    while (spare.length && patches.size > limit) {
+      const [k, p] = spare.shift();
+      patchGroup.remove(p.mesh);
+      p.mesh.geometry.dispose();
+      p.mesh.material.map.dispose();
+      p.mesh.material.dispose();
+      patches.delete(k);
+    }
+  }
+
+  async function buildPatch(key, z, x0, y0) {
+    const entry = { mesh: null, used: performance.now() };
+    patches.set(key, entry);
+    const n = Math.pow(2, z);
+    const canvas = document.createElement("canvas");
+    canvas.width = PATCH_COLS * 256;
+    canvas.height = PATCH_ROWS * 256;
+    const g = canvas.getContext("2d");
+    const jobs = [];
+    for (let row = 0; row < PATCH_ROWS; row++) {
+      for (let col = 0; col < PATCH_COLS; col++) {
+        const tx = (((x0 + col) % n) + n) % n;
+        jobs.push(loadImage(TILE_URL + z + "/" + (y0 + row) + "/" + tx).then((img) => {
+          if (img) g.drawImage(img, col * 256, row * 256);
+          return !!img;
+        }));
+      }
+    }
+    const got = await Promise.all(jobs);
+    if (disposed || patches.get(key) !== entry) return;
+    if (got.filter(Boolean).length < jobs.length * 0.5) {
+      patches.delete(key);
+      return;
+    }
+    const tex = new THREE.CanvasTexture(canvas);
+    tex.colorSpace = THREE.SRGBColorSpace;
+    tex.anisotropy = aniso;
+    const mat = new THREE.MeshPhongMaterial({
+      color: 0xe2e2e2,
+      map: tex,
+      alphaMap: feather(),
+      transparent: true,
+      depthWrite: false,
+      specular: new THREE.Color(0x111111),
+      shininess: 6
+    });
+    const mesh = new THREE.Mesh(patchGeometry(z, x0, y0), mat);
+    mesh.renderOrder = 1;
+    mesh.visible = false;
+    entry.mesh = mesh;
+    patchGroup.add(mesh);
+    evictPatches();
+    if (patchKey === key) showPatch(key);
+  }
+
+  function updatePatch() {
+    patchTimer = 0;
+    if (disposed || !shown || opts.imagery === false || cur.dist > PATCH_NEAR) return;
+    const z = cur.dist < 1.75 ? 7 : 6;
+    const n = Math.pow(2, z);
+    const cx = Math.floor(tileX(cur.lon, z));
+    const cy = Math.floor(tileY(cur.lat, z));
+    const x0 = Math.floor((cx - PATCH_COLS / 2) / 2) * 2;
+    const y0 = clamp(Math.floor((cy - PATCH_ROWS / 2) / 2) * 2, 0, n - PATCH_ROWS);
+    const key = z + "/" + x0 + "/" + y0;
+    if (key === patchKey) return;
+    patchKey = key;
+    const have = patches.get(key);
+    if (have && have.mesh) showPatch(key);
+    else if (!have) buildPatch(key, z, x0, y0);
+  }
+
+  function schedulePatch() {
+    if (patchTimer) clearTimeout(patchTimer);
+    patchTimer = setTimeout(updatePatch, 220);
   }
 
   function flyTo(lat, lon, dist) {
@@ -419,9 +706,46 @@ export function create(container, options) {
     scene.remove(obj);
   }
 
+  function setFills(features) {
+    disposeObj(fillObj);
+    fillObj = null;
+    const pos = [];
+    const col = [];
+    const c = new THREE.Color();
+    features.forEach((f) => {
+      if (!f.fill || !f.fillOpacity) return;
+      c.set(f.fill);
+      f.polys.forEach((poly) => {
+        const rings = poly.map((ring) => {
+          const r = ring.map((p) => new THREE.Vector2(p[0], p[1]));
+          if (r.length > 1 && r[0].equals(r[r.length - 1])) r.pop();
+          return r;
+        });
+        if (!rings[0] || rings[0].length < 3) return;
+        const all = rings.reduce((acc, r) => acc.concat(r), []);
+        const tris = [];
+        THREE.ShapeUtils.triangulateShape(rings[0], rings.slice(1)).forEach((t) => subdivide(all[t[0]], all[t[1]], all[t[2]], 0, tris));
+        tris.forEach((v) => {
+          const p = toVec(v.y, v.x, R * 1.002);
+          pos.push(p.x, p.y, p.z);
+          col.push(c.r, c.g, c.b, f.fillOpacity);
+        });
+      });
+    });
+    if (!pos.length) return;
+    const geo = new THREE.BufferGeometry();
+    geo.setAttribute("position", new THREE.Float32BufferAttribute(pos, 3));
+    geo.setAttribute("color", new THREE.Float32BufferAttribute(col, 4));
+    geo.computeVertexNormals();
+    fillObj = new THREE.Mesh(geo, new THREE.MeshLambertMaterial({ vertexColors: true, transparent: true, depthWrite: false, side: THREE.DoubleSide }));
+    fillObj.renderOrder = 3;
+    scene.add(fillObj);
+  }
+
   function setBorders(features) {
     disposeObj(borderObj);
     borderObj = null;
+    setFills(features || []);
     if (!features || !features.length) { kick(); return; }
     const pos = [];
     const col = [];
@@ -429,7 +753,7 @@ export function create(container, options) {
     features.forEach((f) => {
       c.set(f.color || "#f3d98a");
       const lift = R * (f.active ? 1.0035 : 1.0025);
-      f.rings.forEach((ring) => {
+      f.polys.reduce((acc, p) => acc.concat(p), []).forEach((ring) => {
         for (let i = 0; i < ring.length - 1; i++) {
           const [lon1, lat1] = ring[i];
           const [lon2, lat2] = ring[i + 1];
@@ -448,7 +772,8 @@ export function create(container, options) {
     const geo = new THREE.BufferGeometry();
     geo.setAttribute("position", new THREE.Float32BufferAttribute(pos, 3));
     geo.setAttribute("color", new THREE.Float32BufferAttribute(col, 3));
-    borderObj = new THREE.LineSegments(geo, new THREE.LineBasicMaterial({ vertexColors: true, transparent: true, opacity: 0.9, depthWrite: false }));
+    borderObj = new THREE.LineSegments(geo, new THREE.LineBasicMaterial({ vertexColors: true, transparent: true, opacity: 0.95, depthWrite: false }));
+    borderObj.renderOrder = 4;
     scene.add(borderObj);
     kick();
   }
@@ -479,7 +804,9 @@ export function create(container, options) {
     routes.forEach((stops) => {
       for (let i = 0; i < stops.length - 1; i++) {
         const curve = new THREE.CatmullRomCurve3(arcPoints(stops[i], stops[i + 1]));
-        routeGroup.add(new THREE.Mesh(new THREE.TubeGeometry(curve, 64, 0.0032, 6, false), mat));
+        const tube = new THREE.Mesh(new THREE.TubeGeometry(curve, 64, 0.0032, 6, false), mat);
+        tube.renderOrder = 5;
+        routeGroup.add(tube);
       }
     });
     scene.add(routeGroup);
@@ -501,6 +828,8 @@ export function create(container, options) {
     cancelTween();
     if (raf) cancelAnimationFrame(raf);
     raf = 0;
+    if (patchTimer) clearTimeout(patchTimer);
+    patchTimer = 0;
   }
 
   function dispose() {
@@ -511,14 +840,19 @@ export function create(container, options) {
     document.removeEventListener("visibilitychange", onVisibility);
     container.removeEventListener("wheel", onWheel);
     disposeObj(borderObj);
+    disposeObj(fillObj);
     disposeObj(routeGroup);
+    patches.forEach((p) => { if (p.mesh) p.mesh.material.map.dispose(); });
+    disposeObj(patchGroup);
+    disposeObj(grid);
+    disposeObj(haze);
+    disposeObj(stars);
+    if (featherTex) featherTex.dispose();
     [earthMat.map, earthMat.bumpMap, earthMat.specularMap].forEach((t) => t && t.dispose());
     earth.geometry.dispose();
     earthMat.dispose();
     atmos.geometry.dispose();
     atmos.material.dispose();
-    starGeo.dispose();
-    stars.material.dispose();
     renderer.dispose();
     renderer.forceContextLoss();
     container.innerHTML = "";

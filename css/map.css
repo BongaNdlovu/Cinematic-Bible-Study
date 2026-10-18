@@ -1499,3 +1499,94 @@ html.cmap-html, body.cmap-page {
   .cmap-globe, .is-globe-view .cmap-globe { transition: none; }
 }
 .cmap-root .cmap-credit { bottom: calc(110px + var(--cmap-scrub-h)); }
+
+.cmap-sat { margin: 10px 0 12px; }
+.cmap-sat-frame {
+  position: relative;
+  height: 200px;
+  overflow: hidden;
+  border: 1px solid rgba(212, 175, 55, 0.4);
+  border-radius: var(--cx-radius-sm);
+  background: #0b1822;
+  cursor: zoom-in;
+  box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.45);
+}
+.cmap-sat-frame::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  box-shadow: inset 0 0 0 1px rgba(255, 240, 200, 0.06), inset 0 -40px 50px -30px rgba(0, 0, 0, 0.55);
+}
+.cmap-dossier .cmap-sat-frame img {
+  position: absolute;
+  max-width: none;
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  height: auto;
+  object-fit: fill;
+}
+.cmap-root .cmap-sat-mark {
+  position: absolute;
+  z-index: 2;
+  width: 12px;
+  height: 12px;
+  margin: -6px 0 0 -6px;
+  padding: 0;
+  border-radius: 50%;
+  background: #d4af37;
+  border: 2px solid #fff4d0;
+  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.3), 0 2px 8px rgba(0, 0, 0, 0.7);
+}
+.cmap-sat-mark span {
+  position: absolute;
+  left: 14px;
+  top: -4px;
+  white-space: nowrap;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: #fff6dc;
+  text-shadow: 0 1px 3px #000, 0 0 6px #000;
+  pointer-events: none;
+}
+.cmap-sat-mark.is-left span { left: auto; right: 14px; }
+.cmap-root .cmap-sat-mark:hover, .cmap-root .cmap-sat-mark:focus-visible { background: #fff1c4; z-index: 3; }
+.cmap-sat-mark.is-point { animation: cmapPulse 1.8s ease-out infinite; }
+.cmap-sat figcaption {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 6px;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  color: var(--cmap-dim);
+}
+.cmap-root .cmap-sat-go {
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--cmap-gold-soft);
+}
+.cmap-root .cmap-sat-go:hover { color: #fff; }
+.cmap-gpin.is-pulse::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 54px;
+  height: 54px;
+  margin: -27px 0 0 -27px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(240, 205, 110, 0.35) 0%, rgba(240, 205, 110, 0) 70%);
+  pointer-events: none;
+}
+@media (max-width: 800px) {
+  .cmap-sat-frame { height: 160px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cmap-sat-mark.is-point { animation: none; }
+}

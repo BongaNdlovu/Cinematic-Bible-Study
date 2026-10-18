@@ -150,6 +150,15 @@
     if (z >= 5) return 2.6;
     return 3.0;
   }
+  const SAT_TILE = "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/";
+  function worldPx(lat, lon, z) {
+    const size = 256 * Math.pow(2, z);
+    const r = clamp(lat, -84, 84) * Math.PI / 180;
+    return {
+      x: ((lon + 180) / 360) * size,
+      y: ((1 - Math.log(Math.tan(r) + 1 / Math.cos(r)) / Math.PI) / 2) * size
+    };
+  }
   const GLOBE_SRC = "js/map/globe.js";
   const GLOBE_INTRO = "cmap-globe-intro";
 
@@ -419,14 +428,18 @@
     function syncGlobe(ep, raw) {
       if (!globe) return;
       globe.setPins(globeItems(ep));
+      const opacity = ep.polityOpacity == null ? 1 : ep.polityOpacity;
       const borders = state.layers.borders ? (raw || []).map((f) => {
         const emp = DATA.empires[f.properties.name];
         const g = f.geometry;
-        const polys = g.type === "Polygon" ? [g.coordinates] : g.type === "MultiPolygon" ? g.coordinates : [];
+        const st = fillStyle(emp, opacity);
+        const active = !!(emp && emp.id === ep.focus);
         return {
-          color: (emp && emp.stroke) || "#f3d98a",
-          active: !!(emp && emp.id === ep.focus),
-          rings: polys.reduce((acc, p) => acc.concat(p), [])
+          color: st.color,
+          active: active,
+          fill: st.fillColor,
+          fillOpacity: Math.min(0.24, st.fillOpacity * (active ? 0.5 : 0.32)),
+          polys: g.type === "Polygon" ? [g.coordinates] : g.type === "MultiPolygon" ? g.coordinates : []
         };
       }) : [];
       globe.setBorders(borders);
@@ -481,7 +494,7 @@
       root.classList.add("is-globe-view");
       viewBtn.setAttribute("aria-pressed", "true");
       viewBtn.classList.add("active");
-      credit.textContent = "Globe: NASA Blue Marble · Borders: Cliopatria / Seshat";
+      credit.textContent = "Globe: NASA Blue Marble · Close imagery: Esri · Borders: Cliopatria / Seshat";
       setViewParam("globe");
       g.jumpTo(c.lat, c.lon, 1.6);
       g.show();
@@ -609,6 +622,7 @@
         <button class="cmap-close" type="button" aria-label="Close">✕</button>
         <div class="kicker">${d.kicker || ep.kicker}</div>
         <h2>${d.title}</h2>
+        ${satelliteHtml(d)}
         ${dossierBodyHtml(d.body)}
         <div class="cite">${d.cite || ep.scripture}</div>
         ${ep.approximateYear ? '<p class="cmap-approx">Boundaries for this year are an approximate historicist overlay, not a surveyed frontier.</p>' : ""}
@@ -621,6 +635,10 @@
         </div>`;
       const closeBtn = dossier.querySelector(".cmap-closeup");
       if (closeBtn) closeBtn.addEventListener("click", () => closeUp(d));
+      const satGo = dossier.querySelector(".cmap-sat-go");
+      if (satGo) satGo.addEventListener("click", () => closeUp(d));
+      const satFrame = dossier.querySelector(".cmap-sat-frame");
+      if (satFrame) satFrame.addEventListener("click", (ev) => { if (!ev.target.closest("[data-poi]")) closeUp(d); });
       dossier.querySelectorAll("[data-poi]").forEach((b) => b.addEventListener("click", () => flyToPoi(d, Number(b.dataset.poi))));
       const wasOpen = dossier.classList.contains("open");
       dossier.classList.add("open");
@@ -871,8 +889,59 @@
         lat: item.lat,
         lon: item.lon,
         pois: item.pois,
-        artifact: item.artifact
+        artifact: item.artifact,
+        sat: isEvent ? item.sat : (item.sat || {})
       };
+    }
+
+    function satView(d) {
+      if (!cinematic || d.lat == null || !(d.sat || (d.pois && d.pois.length))) return null;
+      const conf = d.sat || {};
+      if (d.pois && d.pois.length) {
+        const lats = d.pois.map((p) => p.lat);
+        const lons = d.pois.map((p) => p.lon);
+        const lat = (Math.min.apply(null, lats) + Math.max.apply(null, lats)) / 2;
+        const lon = (Math.min.apply(null, lons) + Math.max.apply(null, lons)) / 2;
+        let zoom = 17;
+        while (zoom > 12) {
+          const a = worldPx(Math.max.apply(null, lats), Math.min.apply(null, lons), zoom);
+          const b = worldPx(Math.min.apply(null, lats), Math.max.apply(null, lons), zoom);
+          if (b.x - a.x <= 280 && b.y - a.y <= 150) break;
+          zoom--;
+        }
+        return { lat: lat, lon: lon, zoom: zoom, approx: !!conf.approx };
+      }
+      return { lat: d.lat, lon: d.lon, zoom: conf.zoom || (d.kind === "city" ? 14 : 15), approx: !!conf.approx };
+    }
+
+    function satelliteHtml(d) {
+      const v = satView(d);
+      if (!v) return "";
+      const hi = (window.devicePixelRatio || 1) >= 1.5 && v.zoom < 18;
+      const z = v.zoom + (hi ? 1 : 0);
+      const k = hi ? 0.5 : 1;
+      const n = Math.pow(2, z);
+      const c = worldPx(v.lat, v.lon, z);
+      const halfW = 230 / k;
+      const halfH = 110 / k;
+      let mosaic = "";
+      for (let ty = Math.floor((c.y - halfH) / 256); ty <= Math.floor((c.y + halfH) / 256); ty++) {
+        if (ty < 0 || ty >= n) continue;
+        for (let tx = Math.floor((c.x - halfW) / 256); tx <= Math.floor((c.x + halfW) / 256); tx++) {
+          const wx = ((tx % n) + n) % n;
+          mosaic += "<img src='" + SAT_TILE + z + "/" + ty + "/" + wx + "' alt='' decoding='async' style='left:calc(50% + " + ((tx * 256 - c.x) * k).toFixed(1) + "px);top:calc(50% + " + ((ty * 256 - c.y) * k).toFixed(1) + "px);width:" + 256 * k + "px;height:" + 256 * k + "px'>";
+        }
+      }
+      const marks = (d.pois && d.pois.length ? d.pois : [{ name: d.title, lat: d.lat, lon: d.lon }]).map((p, i) => {
+        const at = worldPx(p.lat, p.lon, z);
+        const dx = (at.x - c.x) * k;
+        const pos = "left:calc(50% + " + dx.toFixed(1) + "px);top:calc(50% + " + ((at.y - c.y) * k).toFixed(1) + "px)";
+        return d.pois && d.pois.length
+          ? "<button type='button' class='cmap-sat-mark" + (dx > 88 ? " is-left" : "") + "' data-poi='" + i + "' style='" + pos + "' title='" + esc(p.desc || p.name) + "'><span>" + esc(p.name) + "</span></button>"
+          : "<span class='cmap-sat-mark is-point' style='" + pos + "'></span>";
+      }).join("");
+      return "<figure class='cmap-sat'><div class='cmap-sat-frame' role='img' aria-label='" + esc("Satellite view of " + d.title) + "'>" + mosaic + marks + "</div>" +
+        "<figcaption><span>" + (v.approx ? "Approximate area" : "From above") + " · Imagery © Esri</span><button type='button' class='cmap-sat-go'>Explore from above →</button></figcaption></figure>";
     }
 
     function esc(s) {
@@ -949,9 +1018,9 @@
     }
 
     function closeUp(d) {
-      const z = d.pois && d.pois.length ? 15 : 8;
-      if (state.view === "globe") showMap({ lat: d.lat, lon: d.lon }, Math.min(z, 7));
-      if (state.lmap) state.lmap.flyTo([d.lat, d.lon], z, { duration: REDUCE ? 0 : 1.2 });
+      const v = satView(d) || { lat: d.lat, lon: d.lon, zoom: 8 };
+      if (state.view === "globe") showMap({ lat: v.lat, lon: v.lon }, Math.min(v.zoom, 7));
+      if (state.lmap) state.lmap.flyTo([v.lat, v.lon], v.zoom, { duration: REDUCE ? 0 : 1.4 });
     }
 
     function addLeafletMarker(item, isEvent, ep) {
