@@ -66,7 +66,7 @@
 
   function artUrl(hand) {
     var a = String(hand.art || '');
-    return /^[\w\/.-]+\.(?:jpe?g|png|webp|avif)$/i.test(a) && a.indexOf('..') < 0 ? a : '';
+    return /^[\w/.-]+\.(?:jpe?g|png|webp|avif)$/i.test(a) && a.indexOf('..') < 0 ? a : '';
   }
 
   function paint(hand) {

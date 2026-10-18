@@ -1403,7 +1403,7 @@
 
     function tellWeather(msg) {
       if (!linkWeather()) return;
-      if (weatherWorker) weatherWorker.postMessage(msg);
+      if (weatherWorker) weatherWorker.postMessage(msg, []);
       else window.WeatherScene.apply(weatherScene, msg);
     }
 
@@ -4876,7 +4876,13 @@
     async function shareSitting() {
       const url = enrollmentUrl();
       const title = 'The Shelf of Daniel';
-      const text = 'Join this sitting of the Shelf of Daniel. Open the cover, agree to the terms, and sign in to begin.';
+      const freeThrough = window.BAJourney && typeof window.BAJourney.FREE_THROUGH === 'number'
+        ? window.BAJourney.FREE_THROUGH
+        : 2;
+      const isFree = currentSheetIndex <= freeThrough;
+      const text = isFree
+        ? 'Join this sitting of the Shelf of Daniel. Open the cover and agree to the terms to begin. No sign-in needed.'
+        : 'Join this sitting of the Shelf of Daniel. Open the cover, agree to the terms, and sign in to begin.';
       const sent = (method, message) => {
         if (window.Insights) window.Insights.track('invite_shared', currentSheetIndex, { method: method });
         showToast(message);
@@ -4893,11 +4899,11 @@
       if (navigator.clipboard && navigator.clipboard.writeText) {
         try {
           await navigator.clipboard.writeText(url);
-          sent('clipboard', 'Enrollment link copied. Recipients sign in on the cover.');
+          sent('clipboard', isFree ? 'Enrollment link copied.' : 'Enrollment link copied. Recipients sign in on the cover.');
           return;
         } catch (err) {}
       }
-      sent('fallback', 'Share the home page so they can sign in: ' + url);
+      sent('fallback', isFree ? 'Share this link: ' + url : 'Share the home page so they can sign in: ' + url);
     }
 
     function renderLessonConnectBar(index) {

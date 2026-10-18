@@ -306,10 +306,10 @@
 
   if (typeof root.document === 'undefined' && typeof root.postMessage === 'function') {
     var scene = null;
-    root.onmessage = function (e) {
+    root.addEventListener('message', function (e) {
       var msg = e.data || {};
       if (msg.canvas) scene = create(msg.canvas);
       if (scene) apply(scene, msg);
-    };
+    });
   }
 })(self);
