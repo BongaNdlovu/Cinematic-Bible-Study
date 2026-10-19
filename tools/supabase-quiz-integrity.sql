@@ -17,6 +17,18 @@ alter table public.exhibit_quiz_keys enable row level security;
 -- The table is readable only through the security-definer function below.
 revoke all on public.exhibit_quiz_keys from anon, authenticated, public;
 
+create table if not exists public.exhibit_quiz_passes (
+  user_id uuid not null references auth.users (id) on delete cascade,
+  sitting smallint not null,
+  q_idx smallint not null,
+  passed_at timestamptz not null default now(),
+  primary key (user_id, sitting, q_idx)
+);
+
+alter table public.exhibit_quiz_passes enable row level security;
+
+revoke all on public.exhibit_quiz_passes from anon, authenticated, public;
+
 create or replace function public.verify_quiz_answer(p_sitting int, p_q_idx int, p_chosen int)
 returns jsonb
 language plpgsql
@@ -25,6 +37,7 @@ set search_path = public
 as $$
 declare
   v_key public.exhibit_quiz_keys;
+  v_correct boolean;
 begin
   if p_chosen is null or p_chosen < 0 or p_chosen > 9
      or p_sitting is null or p_q_idx is null then
@@ -35,10 +48,16 @@ begin
   if not found then
     return jsonb_build_object('correct', false, 'correct_idx', null, 'note', '', 'error', 'not_found');
   end if;
+  v_correct := v_key.correct_idx = p_chosen;
+  if v_correct and auth.uid() is not null then
+    insert into public.exhibit_quiz_passes (user_id, sitting, q_idx)
+    values (auth.uid(), p_sitting, p_q_idx)
+    on conflict do nothing;
+  end if;
   return jsonb_build_object(
-    'correct', (v_key.correct_idx = p_chosen),
+    'correct', v_correct,
     'correct_idx', v_key.correct_idx,
-    'note', case when v_key.correct_idx = p_chosen then v_key.correct_note else '' end
+    'note', case when v_correct then v_key.correct_note else '' end
   );
 end;
 $$;

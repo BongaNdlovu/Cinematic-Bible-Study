@@ -1,0 +1,214 @@
+.sod-consent {
+  --sod-bg: linear-gradient(160deg, rgba(34, 26, 17, 0.98), rgba(12, 9, 6, 0.99));
+  --sod-text: #ece3d0;
+  --sod-muted: #c4b8a8;
+  --sod-gold: #e5b93b;
+  --sod-gold-soft: #f3d48a;
+  --sod-cream: #f1e6cc;
+  --sod-line: rgba(229, 185, 59, 0.3);
+  --sod-line-strong: rgba(229, 185, 59, 0.6);
+  --sod-hover: rgba(229, 185, 59, 0.12);
+  --sod-focus: #e5b93b;
+  position: fixed;
+  left: 0.75rem;
+  right: 0.75rem;
+  bottom: max(0.75rem, env(safe-area-inset-bottom));
+  z-index: 2147483600;
+  max-width: 46rem;
+  max-height: min(70vh, 32rem);
+  margin: 0 auto;
+  overflow: auto;
+  box-sizing: border-box;
+  padding: 1rem 1.1rem 1.05rem;
+  border: 1px solid var(--sod-line);
+  border-radius: 14px;
+  background: var(--sod-bg);
+  color: var(--sod-text);
+  font-family: "Inter", system-ui, -apple-system, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  box-shadow: 0 28px 70px -20px rgba(0, 0, 0, 0.85), 0 0 0 1px rgba(0, 0, 0, 0.4);
+  animation: sod-rise 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@media (prefers-color-scheme: light) {
+  .sod-consent {
+    --sod-bg: linear-gradient(160deg, #fbf7ee, #f1e8d4);
+    --sod-text: #2a2116;
+    --sod-muted: #5a4d3b;
+    --sod-gold: #8c631c;
+    --sod-gold-soft: #8c631c;
+    --sod-cream: #2a2116;
+    --sod-line: rgba(140, 99, 28, 0.35);
+    --sod-line-strong: rgba(140, 99, 28, 0.7);
+    --sod-hover: rgba(140, 99, 28, 0.1);
+    --sod-focus: #8c631c;
+    box-shadow: 0 24px 60px -22px rgba(60, 40, 10, 0.45), 0 0 0 1px rgba(60, 40, 10, 0.08);
+  }
+}
+
+.sod-consent[hidden],
+.sod-consent [hidden] {
+  display: none !important;
+}
+
+.sod-consent-inner {
+  position: relative;
+}
+
+.sod-text {
+  margin: 0 0 0.85rem;
+  padding-right: 1.6rem;
+  color: var(--sod-muted);
+}
+
+.sod-text a {
+  color: var(--sod-gold);
+  text-underline-offset: 3px;
+}
+
+.sod-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.sod-btn {
+  flex: 1 1 8.5rem;
+  min-height: 44px;
+  padding: 0 1rem;
+  border: 1px solid var(--sod-line-strong);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--sod-cream);
+  font: inherit;
+  font-size: 0.86rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  cursor: pointer;
+  transition: background-color 0.32s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.32s cubic-bezier(0.16, 1, 0.3, 1), transform 0.16s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.sod-btn:hover {
+  background: var(--sod-hover);
+  border-color: var(--sod-gold);
+}
+
+.sod-btn:active {
+  transform: scale(0.975);
+}
+
+.sod-close {
+  position: absolute;
+  top: -0.35rem;
+  right: -0.25rem;
+  width: 36px;
+  height: 36px;
+  border: 0;
+  background: transparent;
+  color: var(--sod-muted);
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.sod-close:hover {
+  color: var(--sod-cream);
+}
+
+.sod-settings {
+  display: grid;
+  gap: 0.6rem;
+}
+
+.sod-settings .sod-text {
+  margin-bottom: 0.25rem;
+}
+
+.sod-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  min-height: 44px;
+  padding: 0.4rem 0.75rem;
+  border: 1px solid var(--sod-line);
+  border-radius: 10px;
+}
+
+.sod-label {
+  color: var(--sod-cream);
+  font-size: 0.86rem;
+}
+
+.sod-always {
+  flex: none;
+  color: var(--sod-muted);
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.sod-toggle {
+  cursor: pointer;
+}
+
+.sod-toggle input {
+  flex: none;
+  width: 22px;
+  height: 22px;
+  margin: 0;
+  accent-color: var(--sod-gold);
+  cursor: pointer;
+}
+
+.sod-consent button:focus-visible,
+.sod-consent a:focus-visible,
+.sod-consent input:focus-visible,
+.sod-settings-link:focus-visible {
+  outline: 2px solid var(--sod-focus);
+  outline-offset: 3px;
+}
+
+.sod-settings-link {
+  display: inline-block;
+  margin-top: 0.75rem;
+  padding: 0.35rem 0.5rem;
+  border: 0;
+  background: transparent;
+  color: var(--sod-gold, #e5b93b);
+  font: inherit;
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+
+@keyframes sod-rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+}
+
+@media (max-width: 380px) {
+  .sod-consent {
+    left: 0.5rem;
+    right: 0.5rem;
+    bottom: 0.5rem;
+    padding: 0.85rem 0.85rem 0.9rem;
+  }
+
+  .sod-btn {
+    flex-basis: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sod-consent,
+  .sod-btn {
+    animation: none;
+    transition: none;
+  }
+}

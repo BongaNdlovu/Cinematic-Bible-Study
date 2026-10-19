@@ -67,7 +67,10 @@
       saved: "Saved.",
       mailed: "Check your email for a reset link. It returns you here.",
       confirm: "Check your email to confirm this address, then sign in.",
-      passwordSet: "Password updated."
+      passwordSet: "Password updated.",
+      deleteFail: "Your account could not be deleted right now. Try again, or email shelfofdaniel@gmail.com.",
+      exportFail: "Your data could not be downloaded right now. Try again, or email shelfofdaniel@gmail.com.",
+      deleted: "Your account and its data were deleted. This device has been cleared."
     };
   }
 
@@ -276,6 +279,209 @@
     return hubCard("<small>My notes</small>" + list + '<a class="hub-link" href="reviews.html">All readers’ notes →</a>');
   }
 
+  const SITE_KEYS = [
+    "daniel_certificate_name",
+    "daniel_historicist_mastery",
+    "daniel_workbench_v1",
+    "daniel_capstone_mastery_v1",
+    "daniel_competency_telemetry_v1",
+    "daniel_placement_track_v1",
+    "daniel-shelf:last",
+    "baJourney",
+    "baBookOpen",
+    "baOnboardV1",
+    "baProfileAsked",
+    "baPulseAsked",
+    "baPulsePending",
+    "baStudyBookmarks",
+    "baNoteTimes",
+    "baStudySyncAccountId",
+    "baStudySyncOutbox",
+    "baStudySyncLastPushAt",
+    "baProgressAccountId",
+    "baProgressOutbox",
+    "baLastPushAt",
+    "baDeskReceipts",
+    "baInsightsAnon",
+    "baInsightsSession",
+    "baInsightsQueue",
+    "baFlushWin",
+    "baSurveyTimes",
+    "baRefCode",
+    "baReferredBy",
+    "baReferredSitting",
+    "baOpsQueue",
+    "baReviewDay",
+    "baAuthStarts",
+    "baQaMockSession",
+    "baScriptureStory",
+    "baTermsNext"
+  ];
+  const SITE_KEY_PREFIXES = ["baNote-", "daniel_book_pos_"];
+
+  function isSiteKey(key) {
+    if (SITE_KEYS.indexOf(key) >= 0) return true;
+    return SITE_KEY_PREFIXES.some(function (prefix) { return key.indexOf(prefix) === 0; });
+  }
+
+  function siteStores() {
+    const out = [];
+    ["localStorage", "sessionStorage"].forEach(function (name) {
+      try { if (window[name]) out.push(window[name]); } catch (e) {}
+    });
+    return out;
+  }
+
+  function clearSiteStorage() {
+    siteStores().forEach(function (store) {
+      try {
+        const doomed = [];
+        for (let i = 0; i < store.length; i += 1) {
+          const key = store.key(i);
+          if (key && isSiteKey(key)) doomed.push(key);
+        }
+        doomed.forEach(function (key) { store.removeItem(key); });
+      } catch (e) {}
+    });
+  }
+
+  function dangerCard() {
+    return hubCard(
+      "<small>Delete account</small>" +
+      '<p class="hub-line">Deleting your account permanently removes your sign-in, study progress, study notes and bookmarks, certificate record, reader profile, readers’ notes, messages to the operator, and survey answers. It cannot be undone.</p>' +
+      '<button type="button" class="cx-btn" data-hub-action="download" id="account-download">Download my data (JSON)</button>' +
+      '<form class="acct-danger-form" id="account-delete-form" autocomplete="off">' +
+        '<label class="cx-field"><span>Type DELETE to confirm</span>' +
+        '<input type="text" id="account-delete-confirm" autocomplete="off" spellcheck="false" placeholder="DELETE"></label>' +
+        '<button type="submit" class="cx-btn acct-danger-btn" id="account-delete-go" disabled>Delete my account</button>' +
+      "</form>",
+      "hub-card-danger"
+    );
+  }
+
+  let deleting = false;
+  let downloading = false;
+
+  function hubClient() {
+    const auth = window.ScrollAuth;
+    return (auth && auth.getClient && auth.getClient()) || null;
+  }
+
+  function downloadMyData() {
+    const copy = messages();
+    const auth = window.ScrollAuth;
+    const user = auth && auth.getUser && auth.getUser();
+    const c = hubClient();
+    if (downloading) return;
+    if (!user || !c || typeof c.from !== "function") {
+      setError("auth", copy.exportFail);
+      return;
+    }
+    downloading = true;
+    const tables = ["exhibit_profiles", "exhibit_progress", "exhibit_study_data", "exhibit_reviews"];
+    Promise.all(tables.map(function (table) {
+      return Promise.resolve(c.from(table).select("*").eq("user_id", user.id)).then(function (res) {
+        if (!res || res.error) throw (res && res.error) || new Error(table);
+        return res.data || [];
+      });
+    })).then(function (lists) {
+      const payload = {
+        exported_at: new Date().toISOString(),
+        user_id: user.id,
+        email: user.email || "",
+        exhibit_profiles: lists[0],
+        exhibit_progress: lists[1],
+        exhibit_study_data: lists[2],
+        exhibit_reviews: lists[3]
+      };
+      const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = "shelf-of-daniel-my-data.json";
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
+      setError("", "");
+    }).catch(function () {
+      setError("auth", copy.exportFail);
+    }).then(function () {
+      downloading = false;
+    });
+  }
+
+  function setDeleteBusy(on) {
+    const go = el("account-delete-go");
+    const input = el("account-delete-confirm");
+    const download = el("account-download");
+    if (go) {
+      go.disabled = !!on || !input || String(input.value || "").trim() !== "DELETE";
+      go.textContent = on ? "Deleting…" : "Delete my account";
+    }
+    if (input) input.disabled = !!on;
+    if (download) download.disabled = !!on;
+  }
+
+  function confirmDelete() {
+    const copy = messages();
+    const input = el("account-delete-confirm");
+    if (deleting) return;
+    if (!input || String(input.value || "").trim() !== "DELETE") {
+      setError("auth", "Type DELETE in the box to confirm.");
+      if (input) input.focus();
+      return;
+    }
+    const c = hubClient();
+    if (!c || typeof c.rpc !== "function" || !window.ScrollAuth || typeof window.ScrollAuth.signOut !== "function") {
+      setError("auth", copy.deleteFail);
+      return;
+    }
+    deleting = true;
+    setError("", "");
+    setDeleteBusy(true);
+    const fail = function () {
+      deleting = false;
+      setDeleteBusy(false);
+      setError("auth", copy.deleteFail);
+    };
+    Promise.resolve(c.rpc("exhibit_delete_my_account")).then(function (res) {
+      if (!res || res.error) {
+        fail();
+        return;
+      }
+      clearSiteStorage();
+      Promise.resolve(window.ScrollAuth.signOut()).catch(function () {}).then(function () {
+        deleting = false;
+        if (window.SiteErrors && typeof window.SiteErrors.clear === "function") window.SiteErrors.clear();
+        paint();
+        setError("", "");
+        const lead = el("account-lead");
+        if (lead) lead.textContent = copy.deleted;
+      });
+    }).catch(fail);
+  }
+
+  function bindHub() {
+    const host = el("account-hub-cards");
+    if (!host) return;
+    host.addEventListener("input", function (e) {
+      if (!e.target || e.target.id !== "account-delete-confirm") return;
+      const go = el("account-delete-go");
+      if (go && !deleting) go.disabled = String(e.target.value || "").trim() !== "DELETE";
+    });
+    host.addEventListener("click", function (e) {
+      const target = e.target && e.target.closest ? e.target.closest("[data-hub-action]") : null;
+      if (!target || !host.contains(target)) return;
+      if (target.getAttribute("data-hub-action") === "download") downloadMyData();
+    });
+    host.addEventListener("submit", function (e) {
+      if (!e.target || e.target.id !== "account-delete-form") return;
+      e.preventDefault();
+      confirmDelete();
+    });
+  }
+
   function adminCard() {
     return hubCard(
       "<small>Moderator</small>" +
@@ -302,6 +508,7 @@
     const auth = window.ScrollAuth;
     cards += reviewsCard(hubReviews || [], hubReviewsError);
     cards += syncCard();
+    cards += dangerCard();
     if (auth && typeof auth.isModerator === "function" && auth.isModerator()) cards += adminCard();
     host.innerHTML = cards;
     host.hidden = false;
@@ -645,6 +852,7 @@
     paintFan();
     readNextFromQuery();
     bind();
+    bindHub();
     if (window.ScrollAuth && typeof window.ScrollAuth.ready === "function") {
       window.ScrollAuth.ready().then(afterAuthReady).then(paintNotesCount);
       return;

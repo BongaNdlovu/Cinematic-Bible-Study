@@ -104,7 +104,9 @@
     ["map.html", "Map of History"],
     ["gallery.html", "3D Symbols"],
     ["reviews.html", "Readers' notes"],
-    ["account.html", "Account"]
+    ["account.html", "Account"],
+    ["privacy.html", "Privacy"],
+    ["terms.html", "Terms"]
   ];
 
   function esc(s) {

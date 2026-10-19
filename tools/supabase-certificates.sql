@@ -1,5 +1,5 @@
 -- Certificates and graduates, October 2026. Run once in the Supabase SQL editor
--- after supabase-progress.sql and supabase-insights.sql (paste the whole file).
+-- after supabase-progress.sql, supabase-insights.sql and supabase-quiz-integrity.sql (paste the whole file).
 -- Safe to re-run.
 
 begin;
@@ -36,6 +36,60 @@ as $$
   where s.n between 0 and 10;
 $$;
 
+create or replace function public.exhibit_sittings_passed(p_user uuid)
+returns integer
+language sql
+stable
+security definer
+set search_path = public
+as $$
+  select count(*)::integer
+  from (
+    select k.sitting
+    from public.exhibit_quiz_keys k
+    left join public.exhibit_quiz_passes q
+      on q.user_id = p_user and q.sitting = k.sitting and q.q_idx = k.q_idx
+    group by k.sitting
+    having count(q.q_idx) = count(*)
+  ) s;
+$$;
+
+create table if not exists public.exhibit_migrations (
+  name text primary key,
+  ran_at timestamptz not null default now()
+);
+
+alter table public.exhibit_migrations enable row level security;
+
+revoke all on public.exhibit_migrations from public, anon, authenticated;
+
+do $$
+begin
+  insert into public.exhibit_migrations (name) values ('quiz_passes_backfill')
+  on conflict do nothing;
+  if not found then
+    return;
+  end if;
+  insert into public.exhibit_quiz_passes (user_id, sitting, q_idx)
+  select p.user_id, k.sitting, k.q_idx
+  from public.exhibit_progress p
+  cross join lateral jsonb_array_elements_text(
+    case when jsonb_typeof(p.journey -> 'completedSheets') = 'array'
+      then p.journey -> 'completedSheets'
+      else '[]'::jsonb
+    end
+  ) v
+  join public.exhibit_quiz_keys k
+    on k.sitting = case when v.value ~ '^[0-9]{1,2}$' then v.value::integer end
+  on conflict do nothing;
+  insert into public.exhibit_quiz_passes (user_id, sitting, q_idx)
+  select c.user_id, k.sitting, k.q_idx
+  from (select distinct user_id from public.exhibit_certificates) c
+  cross join public.exhibit_quiz_keys k
+  on conflict do nothing;
+end;
+$$;
+
 create or replace function public.issue_exhibit_certificate(p_name text)
 returns table (
   serial text,
@@ -60,9 +114,7 @@ begin
   if char_length(v_name) not between 1 and 80 then
     raise exception 'bad_name';
   end if;
-  select public.exhibit_sittings_finished(p.journey) into v_finished
-  from public.exhibit_progress p
-  where p.user_id = auth.uid();
+  v_finished := public.exhibit_sittings_passed(auth.uid());
   if coalesce(v_finished, 0) < 11 then
     raise exception 'not_finished';
   end if;
@@ -123,7 +175,7 @@ as $$
   select p.user_id,
     case when u.email_confirmed_at is not null then u.email else null end,
     coalesce(nullif(btrim(c.name), ''), nullif(btrim(p.certificate_name), '')),
-    public.exhibit_sittings_finished(p.journey),
+    public.exhibit_sittings_passed(p.user_id),
     p.updated_at,
     c.serial,
     c.issued_at,
@@ -151,7 +203,7 @@ as $$
       and e.detail ->> 'feature' = 'cert_download'
   ) d
   where public.is_review_moderator()
-    and (public.exhibit_sittings_finished(p.journey) >= 11 or c.serial is not null)
+    and (public.exhibit_sittings_passed(p.user_id) >= 11 or c.serial is not null)
   order by coalesce(c.issued_at, p.updated_at) desc
   limit 2000;
 $$;
@@ -159,6 +211,7 @@ $$;
 revoke all on public.exhibit_certificates from public, anon, authenticated;
 
 revoke all on function public.exhibit_sittings_finished(jsonb) from public, anon, authenticated;
+revoke all on function public.exhibit_sittings_passed(uuid) from public, anon, authenticated;
 revoke all on function public.issue_exhibit_certificate(text) from public, anon, authenticated;
 revoke all on function public.exhibit_graduates() from public, anon, authenticated;
 grant execute on function public.issue_exhibit_certificate(text) to authenticated;
