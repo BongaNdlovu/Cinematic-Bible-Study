@@ -451,7 +451,7 @@
         return;
       }
       clearSiteStorage();
-      Promise.resolve(window.ScrollAuth.signOut()).catch(function () {}).then(function () {
+      Promise.resolve(window.ScrollAuth.signOut({ discard: true })).catch(function () {}).then(function () {
         deleting = false;
         if (window.SiteErrors && typeof window.SiteErrors.clear === "function") window.SiteErrors.clear();
         paint();
@@ -710,8 +710,9 @@
     if (!window.ScrollAuth || typeof window.ScrollAuth.signOut !== "function") return;
     shouldReturn = false;
     setBusy(true);
-    window.ScrollAuth.signOut().then(function () {
+    window.ScrollAuth.signOut().then(function (res) {
       setBusy(false);
+      if (res && res.cancelled) return;
       paint();
     });
   }

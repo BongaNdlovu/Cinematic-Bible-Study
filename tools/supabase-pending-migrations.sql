@@ -516,3 +516,18 @@ grant execute on function public.exhibit_delete_my_account() to authenticated;
 notify pgrst, 'reload schema';
 
 commit;
+
+-- ============================================================================
+-- 5. Survey Read Lock (tools/supabase-survey-read-lock.sql)
+-- Signed-out callers keep insert on exhibit_surveys and lose select.
+-- The moderator two-step rule (tools/supabase-moderator-require-mfa.sql) is not
+-- here on purpose: run it by itself once the operator's authenticator is verified.
+-- ============================================================================
+
+begin;
+
+revoke select on public.exhibit_surveys from anon, public;
+grant select, insert on public.exhibit_surveys to authenticated;
+grant insert on public.exhibit_surveys to anon;
+
+commit;

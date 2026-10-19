@@ -54,9 +54,9 @@
     return '<div class="sod-consent-inner">' +
       '<button type="button" class="sod-close" data-sod-action="close" aria-label="Close without choosing">&times;</button>' +
       '<div class="sod-main">' +
-        '<p class="sod-text" id="sod-text">We use anonymous study analytics and Cloudflare Web Analytics only if you accept. Sign-in, progress and your preferences work either way. Read our <a href="privacy.html">Privacy Policy</a> and <a href="terms.html">Terms</a>.</p>' +
+        '<p class="sod-text" id="sod-text">Which lessons are opened, and how far a reader gets, helps us make the next sitting clearer. The notes are anonymous, nothing is sold, and sign-in, progress and your preferences work either way. <a href="privacy.html">Privacy Policy</a> and <a href="terms.html">Terms</a>.</p>' +
         '<div class="sod-actions">' +
-          '<button type="button" class="sod-btn" data-sod-action="accept">Accept analytics</button>' +
+          '<button type="button" class="sod-btn sod-btn-yes" data-sod-action="accept">Accept</button>' +
           '<button type="button" class="sod-btn" data-sod-action="reject">Reject</button>' +
           '<button type="button" class="sod-btn" data-sod-action="settings" aria-expanded="false" aria-controls="sod-settings">Settings</button>' +
         '</div>' +

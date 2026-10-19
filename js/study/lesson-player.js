@@ -20,6 +20,7 @@
   var rateBtn = host.querySelector('[data-lap-rate]');
   var skipBtns = host.querySelectorAll('[data-lap-skip]');
   var RATE_KEY = 'daniel_audio_rate_v1';
+  var HINT_KEY = 'daniel_audio_play_hint_v1';
   var RATES = [1, 1.25, 1.5, 2, 0.75];
   var rate = 1;
   var scrubbing = false;
@@ -64,7 +65,19 @@
     host.classList.toggle('is-playing', isPlaying);
   }
 
+  var hintDone = false;
+  try { hintDone = localStorage.getItem(HINT_KEY) === 'done'; } catch (e) {}
+  if (!hintDone) playBtn.classList.add('is-beckoning');
+
+  function endHint() {
+    if (hintDone) return;
+    hintDone = true;
+    playBtn.classList.remove('is-beckoning');
+    try { localStorage.setItem(HINT_KEY, 'done'); } catch (e) {}
+  }
+
   playBtn.addEventListener('click', function () {
+    endHint();
     if (player.paused) {
       var p = player.play();
       if (p && p.catch) p.catch(function () {});
@@ -118,7 +131,10 @@
     cur.textContent = fmt(player.currentTime);
     setFill();
   });
-  player.addEventListener('play', function () { setPlayGlyph(true); });
+  player.addEventListener('play', function () {
+    endHint();
+    setPlayGlyph(true);
+  });
   player.addEventListener('pause', function () { setPlayGlyph(false); });
   player.addEventListener('ended', function () { setPlayGlyph(false); });
   player.addEventListener('emptied', function () {
