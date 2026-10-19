@@ -45,6 +45,9 @@ for (const m of index.matchAll(/<link[^>]+rel="stylesheet"[^>]+href="(css\/[^"]+
 }
 
 assert(index.includes("js/home/shelf.js"), "index.html must load the shelf scene");
+const importMapAt = index.indexOf('<script type="importmap">');
+const modulePreloadAt = index.indexOf('rel="modulepreload"');
+assert(importMapAt !== -1 && modulePreloadAt > importMapAt, "modulepreload links must follow the import map, or a cached reload cannot resolve the bare specifier three");
 const shelf = fs.readFileSync(path.join(ROOT, "js", "home", "shelf.js"), "utf8");
 const portrait = /const SHELF_PORTRAIT = '([^']+)'/.exec(shelf);
 assert(portrait, "shelf.js must name the painting it waits for before the shelf is ready");

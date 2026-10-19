@@ -24,12 +24,6 @@
   <link rel="stylesheet" href="css/cinema.css?v=cx2">
   <link rel="stylesheet" href="css/onboard.css?v=cx3">
   <link rel="stylesheet" href="css/desk.css">
-  <link rel="modulepreload" href="vendor/three/build/three.module.min.js">
-  <link rel="modulepreload" href="vendor/three/examples/jsm/postprocessing/EffectComposer.js">
-  <link rel="modulepreload" href="vendor/three/examples/jsm/postprocessing/RenderPass.js">
-  <link rel="modulepreload" href="vendor/three/examples/jsm/postprocessing/UnrealBloomPass.js">
-  <link rel="modulepreload" href="vendor/three/examples/jsm/postprocessing/OutputPass.js">
-  <link rel="modulepreload" href="vendor/three/examples/jsm/postprocessing/ShaderPass.js">
   <script type="importmap">
   {
     "imports": {
@@ -38,6 +32,13 @@
     }
   }
   </script>
+  <!-- After the import map. These files import the bare name "three", and a modulepreload ahead of the map resolves that name before the map exists. A reload from cache then leaves the shelf blank. -->
+  <link rel="modulepreload" href="vendor/three/build/three.module.min.js">
+  <link rel="modulepreload" href="vendor/three/examples/jsm/postprocessing/EffectComposer.js">
+  <link rel="modulepreload" href="vendor/three/examples/jsm/postprocessing/RenderPass.js">
+  <link rel="modulepreload" href="vendor/three/examples/jsm/postprocessing/UnrealBloomPass.js">
+  <link rel="modulepreload" href="vendor/three/examples/jsm/postprocessing/OutputPass.js">
+  <link rel="modulepreload" href="vendor/three/examples/jsm/postprocessing/ShaderPass.js">
   <script src="js/shared/covers.js"></script>
   <script src="js/shared/cinema.js"></script>
   <script src="js/shared/journey.js"></script>
