@@ -25,15 +25,15 @@
   host.setAttribute('role', 'region');
   host.setAttribute('aria-label', 'Lesson audio visualizer');
   host.innerHTML =
-    '<canvas class="audio-orb-canvas" aria-hidden="true"></canvas>' +
-    '<span class="audio-orb-tag" data-orb-tag>STBY</span>' +
+    '<span class="audio-orb-lens"><canvas class="audio-orb-canvas" aria-hidden="true"></canvas></span>' +
+    '<span class="audio-orb-tag" data-orb-tag>Standby</span>' +
     '<div class="audio-orb-controls">' +
-    '  <button type="button" class="audio-orb-btn" data-orb-play aria-label="Play or pause the lesson audio" title="Play / pause">' +
-    '    <svg data-glyph-play viewBox="0 0 12 12"><path d="M2.5 1.2 10.4 6 2.5 10.8z"/></svg>' +
-    '    <svg data-glyph-pause viewBox="0 0 12 12" style="display:none"><path d="M2.2 1.4h2.6v9.2H2.2zM7.2 1.4h2.6v9.2H7.2z"/></svg>' +
+    '  <button type="button" class="audio-orb-btn audio-orb-btn-play" data-orb-play aria-label="Play or pause the lesson audio" title="Play / pause">' +
+    '    <svg data-glyph-play aria-hidden="true" viewBox="0 0 12 12"><path d="M2.5 1.2 10.4 6 2.5 10.8z"/></svg>' +
+    '    <svg data-glyph-pause aria-hidden="true" viewBox="0 0 12 12" style="display:none"><path d="M2.2 1.4h2.6v9.2H2.2zM7.2 1.4h2.6v9.2H7.2z"/></svg>' +
     '  </button>' +
     '  <button type="button" class="audio-orb-btn" data-orb-close aria-label="Switch off the audio visualizer" title="Switch off">' +
-    '    <svg viewBox="0 0 12 12"><path d="M2.2 1 6 4.8 9.8 1 11 2.2 7.2 6 11 9.8 9.8 11 6 7.2 2.2 11 1 9.8 4.8 6 1 2.2z"/></svg>' +
+    '    <svg aria-hidden="true" viewBox="0 0 12 12"><path d="M2.2 1 6 4.8 9.8 1 11 2.2 7.2 6 11 9.8 9.8 11 6 7.2 2.2 11 1 9.8 4.8 6 1 2.2z"/></svg>' +
     '  </button>' +
     '</div>';
   document.body.appendChild(host);
@@ -273,7 +273,7 @@
     playing = isPlaying;
     glyphPlay.style.display = isPlaying ? 'none' : '';
     glyphPause.style.display = isPlaying ? '' : 'none';
-    tag.textContent = isPlaying ? 'LIVE' : 'STBY';
+    tag.textContent = isPlaying ? 'Live' : 'Standby';
     tag.classList.toggle('is-live', isPlaying);
     host.classList.toggle('is-playing', isPlaying);
   }

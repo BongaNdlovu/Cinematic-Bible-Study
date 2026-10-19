@@ -5386,38 +5386,79 @@
     }
     /* Floating audio-reactive orb — lower right, rides above the toast slot */
     .audio-orb {
+      --orb-glass: rgba(30, 24, 14, 0.42);
+      --orb-glass-hi: rgba(255, 244, 214, 0.1);
+      --orb-rim-hi: rgba(255, 250, 235, 0.62);
+      --orb-rim-lo: rgba(255, 236, 190, 0.08);
+      --orb-rim-gold: rgba(251, 191, 36, 0.32);
+      --orb-ink: rgba(250, 238, 212, 0.62);
+      --orb-accent: #fbbf24;
+      --orb-shadow: 0 22px 44px -18px rgba(0, 0, 0, 0.7), 0 6px 14px -8px rgba(0, 0, 0, 0.45);
       position: fixed;
       right: 18px;
       bottom: 92px;
       z-index: 40;
+      isolation: isolate;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 7px;
-      padding: 10px 10px 9px;
-      border-radius: 20px;
-      border: 1px solid rgba(212, 175, 55, 0.42);
-      background: linear-gradient(160deg, rgba(26, 21, 12, 0.9) 0%, rgba(10, 8, 5, 0.94) 100%);
+      gap: 9px;
+      padding: 12px 12px 11px;
+      border-radius: 26px;
+      border: 0;
+      background:
+        radial-gradient(120% 70% at 30% 0%, var(--orb-glass-hi) 0%, transparent 60%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0) 45%),
+        var(--orb-glass);
       box-shadow:
-        0 14px 34px -14px rgba(0, 0, 0, 0.75),
-        0 0 26px rgba(212, 175, 55, 0.16),
-        inset 0 1px 0 rgba(255, 246, 219, 0.07);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      transition: opacity 0.32s ease, transform 0.32s ease;
+        var(--orb-shadow),
+        inset 0 1px 0 rgba(255, 255, 255, 0.16),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.25),
+        inset 0 0 18px rgba(255, 220, 150, 0.05);
+      backdrop-filter: blur(22px) saturate(170%) brightness(1.05);
+      -webkit-backdrop-filter: blur(22px) saturate(170%) brightness(1.05);
+      transition: opacity 0.32s ease, transform 0.32s ease, box-shadow 0.4s ease;
+    }
+    .audio-orb::before,
+    .audio-orb::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      pointer-events: none;
+    }
+    .audio-orb::before {
+      z-index: 2;
+      padding: 1px;
+      background: linear-gradient(150deg, var(--orb-rim-hi) 0%, var(--orb-rim-lo) 32%, var(--orb-rim-lo) 62%, var(--orb-rim-gold) 100%);
+      -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+      -webkit-mask-composite: xor;
+      mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+    }
+    .audio-orb::after {
+      z-index: -1;
+      inset: 1px 1px auto;
+      height: 46%;
+      border-radius: 25px 25px 60% 60% / 25px 25px 30% 30%;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.09) 0%, rgba(255, 255, 255, 0) 100%);
+    }
+    @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+      .audio-orb { --orb-glass: rgba(22, 18, 10, 0.92); }
     }
     .audio-orb[hidden] { display: none !important; }
     .audio-orb {
-      animation: orb-in 0.35s ease;
+      animation: orb-in 0.45s cubic-bezier(0.2, 0.9, 0.25, 1.15);
     }
     @keyframes orb-in {
       from {
         opacity: 0;
-        transform: translateY(10px) scale(0.9);
+        transform: translateY(12px) scale(0.88);
+        filter: blur(4px);
       }
       to {
         opacity: 1;
         transform: translateY(0) scale(1);
+        filter: blur(0);
       }
     }
     /* Dormant stub — a faint ring where the orb lives, for one-click restore */
@@ -5426,37 +5467,45 @@
       right: 22px;
       bottom: 104px;
       z-index: 40;
-      width: 30px;
-      height: 30px;
+      width: 34px;
+      height: 34px;
       padding: 0;
       border-radius: 50%;
-      border: 1px dashed rgba(212, 175, 55, 0.5);
-      background: rgba(212, 175, 55, 0.05);
+      border: 1px solid rgba(255, 244, 214, 0.28);
+      background:
+        radial-gradient(circle at 35% 28%, rgba(255, 255, 255, 0.22) 0%, rgba(255, 255, 255, 0) 45%),
+        rgba(30, 24, 14, 0.4);
+      box-shadow: 0 8px 20px -10px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.18);
+      backdrop-filter: blur(14px) saturate(170%);
+      -webkit-backdrop-filter: blur(14px) saturate(170%);
       cursor: pointer;
       animation: orb-in 0.3s ease;
-      transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.25s cubic-bezier(0.2, 0.9, 0.25, 1.3);
     }
     .audio-orb-stub::after {
       content: "";
       position: absolute;
       inset: 0;
       margin: auto;
-      width: 7px;
-      height: 7px;
+      width: 8px;
+      height: 8px;
       border-radius: 50%;
-      background: rgba(251, 191, 36, 0.55);
-      transition: background 0.2s ease, box-shadow 0.2s ease;
+      background: radial-gradient(circle at 35% 30%, #fff6db 0%, #f7c948 55%, #b45309 100%);
+      box-shadow: 0 0 6px rgba(251, 191, 36, 0.45);
+      transition: box-shadow 0.2s ease, transform 0.2s ease;
     }
     .audio-orb-stub:hover {
-      border-color: rgba(251, 191, 36, 0.9);
-      border-style: solid;
-      background: rgba(212, 175, 55, 0.14);
-      box-shadow: 0 0 14px rgba(251, 191, 36, 0.28);
-      transform: scale(1.1);
+      border-color: rgba(255, 236, 190, 0.55);
+      box-shadow: 0 10px 24px -10px rgba(0, 0, 0, 0.7), 0 0 18px rgba(251, 191, 36, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.24);
+      transform: scale(1.08);
     }
     .audio-orb-stub:hover::after {
-      background: #fbbf24;
-      box-shadow: 0 0 10px rgba(251, 191, 36, 0.7);
+      box-shadow: 0 0 12px rgba(251, 191, 36, 0.8);
+      transform: scale(1.15);
+    }
+    .audio-orb-stub:focus-visible {
+      outline: 2px solid rgba(251, 191, 36, 0.75);
+      outline-offset: 3px;
     }
     .audio-orb-stub[hidden] { display: none !important; }
     .audio-orb.is-hiding {
@@ -5464,65 +5513,170 @@
       transform: translateY(10px) scale(0.9);
     }
     .audio-orb.is-playing {
-      border-color: rgba(251, 191, 36, 0.6);
+      --orb-rim-gold: rgba(251, 191, 36, 0.62);
       box-shadow:
-        0 14px 34px -14px rgba(0, 0, 0, 0.75),
-        0 0 30px rgba(251, 191, 36, 0.24),
-        inset 0 1px 0 rgba(255, 246, 219, 0.09);
+        var(--orb-shadow),
+        0 0 34px -4px rgba(251, 191, 36, 0.28),
+        inset 0 1px 0 rgba(255, 255, 255, 0.18),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.25),
+        inset 0 0 22px rgba(251, 191, 36, 0.08);
+    }
+    .audio-orb-lens {
+      position: relative;
+      display: block;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 50% 60%, rgba(251, 191, 36, 0.07) 0%, rgba(0, 0, 0, 0) 60%),
+        radial-gradient(circle at 50% 50%, rgba(10, 8, 5, 0.55) 0%, rgba(10, 8, 5, 0.25) 100%);
+      box-shadow:
+        inset 0 1px 1px rgba(255, 255, 255, 0.28),
+        inset 0 -8px 14px rgba(0, 0, 0, 0.35),
+        inset 0 0 0 1px rgba(255, 244, 214, 0.1),
+        0 1px 0 rgba(255, 255, 255, 0.06);
+    }
+    .audio-orb-lens::after {
+      content: "";
+      position: absolute;
+      top: 3%;
+      left: 22%;
+      width: 56%;
+      height: 26%;
+      border-radius: 50%;
+      background: radial-gradient(ellipse 60% 70% at 50% 0%, rgba(255, 255, 255, 0.16) 0%, rgba(255, 255, 255, 0) 100%);
+      pointer-events: none;
     }
     .audio-orb-canvas {
       display: block;
       width: 76px;
       height: 76px;
       border-radius: 50%;
-      background:
-        radial-gradient(circle at 50% 34%, rgba(48, 38, 20, 0.55) 0%, rgba(8, 6, 4, 0.92) 74%);
-      border: 1px solid rgba(212, 175, 55, 0.3);
+      background: transparent;
       cursor: pointer;
       outline: none;
     }
-    .audio-orb-canvas:focus-visible {
-      border-color: rgba(251, 191, 36, 0.8);
-      box-shadow: 0 0 0 2px rgba(251, 191, 36, 0.3);
+    .audio-orb-lens:has(.audio-orb-canvas:focus-visible) {
+      box-shadow:
+        inset 0 1px 1px rgba(255, 255, 255, 0.28),
+        inset 0 -8px 14px rgba(0, 0, 0, 0.35),
+        0 0 0 2px rgba(251, 191, 36, 0.55);
     }
     .audio-orb-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 3px 9px 3px 7px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.05);
+      box-shadow: inset 0 0 0 1px rgba(255, 244, 214, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.08);
       font-family: "JetBrains Mono", monospace;
       font-size: 8.5px;
       font-weight: 700;
-      letter-spacing: 0.24em;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: rgba(243, 229, 200, 0.55);
-      transition: color 0.3s ease, text-shadow 0.3s ease;
+      color: var(--orb-ink);
+      transition: color 0.3s ease, background 0.3s ease;
+    }
+    .audio-orb-tag::before {
+      content: "";
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: rgba(250, 238, 212, 0.4);
+      transition: background 0.3s ease, box-shadow 0.3s ease;
     }
     .audio-orb-tag.is-live {
-      color: #fbbf24;
-      text-shadow: 0 0 10px rgba(251, 191, 36, 0.55);
+      color: var(--orb-accent);
+      background: rgba(251, 191, 36, 0.1);
+    }
+    .audio-orb-tag.is-live::before {
+      background: var(--orb-accent);
+      box-shadow: 0 0 8px rgba(251, 191, 36, 0.9);
+      animation: orb-live 1.6s ease-in-out infinite;
+    }
+    @keyframes orb-live {
+      50% { opacity: 0.45; }
     }
     .audio-orb-controls {
       display: flex;
-      gap: 6px;
+      gap: 2px;
+      padding: 2px;
+      border-radius: 999px;
+      background: rgba(0, 0, 0, 0.18);
+      box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.3), inset 0 0 0 1px rgba(255, 244, 214, 0.08), 0 1px 0 rgba(255, 255, 255, 0.06);
     }
     .audio-orb-btn {
       display: grid;
       place-items: center;
-      width: 32px;
-      height: 26px;
-      border-radius: 8px;
-      border: 1px solid rgba(212, 175, 55, 0.38);
-      background: rgba(212, 175, 55, 0.08);
-      color: #fbbf24;
+      width: 36px;
+      height: 28px;
+      padding: 0;
+      border: 0;
+      border-radius: 999px;
+      background: transparent;
+      color: var(--orb-ink);
       cursor: pointer;
-      transition: background 0.2s ease, border-color 0.2s ease, transform 0.1s ease;
+      transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease, transform 0.15s cubic-bezier(0.2, 0.9, 0.25, 1.3);
+    }
+    .audio-orb-btn-play {
+      color: #2a1c05;
+      background: linear-gradient(180deg, #fde68a 0%, #f7c948 48%, #d99a1c 100%);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.65), inset 0 -1px 0 rgba(120, 60, 0, 0.35), 0 2px 8px -2px rgba(251, 191, 36, 0.55);
     }
     .audio-orb-btn:hover {
-      background: rgba(212, 175, 55, 0.2);
-      border-color: rgba(251, 191, 36, 0.65);
+      color: #fff6db;
+      background: rgba(255, 255, 255, 0.1);
     }
-    .audio-orb-btn:active { transform: scale(0.93); }
+    .audio-orb-btn-play:hover {
+      color: #2a1c05;
+      background: linear-gradient(180deg, #fef3c7 0%, #fbd04f 48%, #e3a523 100%);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.75), inset 0 -1px 0 rgba(120, 60, 0, 0.35), 0 3px 12px -2px rgba(251, 191, 36, 0.7);
+    }
+    .audio-orb-btn:active { transform: scale(0.92); }
+    .audio-orb-btn:focus-visible {
+      outline: 2px solid rgba(251, 191, 36, 0.8);
+      outline-offset: 1px;
+    }
     .audio-orb-btn svg {
       width: 11px;
       height: 11px;
       fill: currentColor;
+    }
+    .audio-orb-btn-play svg { width: 12px; height: 12px; }
+    body.paper-mode .audio-orb,
+    body.white-mode .audio-orb {
+      --orb-glass: rgba(255, 252, 244, 0.5);
+      --orb-glass-hi: rgba(255, 255, 255, 0.6);
+      --orb-rim-hi: rgba(255, 255, 255, 0.95);
+      --orb-rim-lo: rgba(255, 255, 255, 0.25);
+      --orb-rim-gold: rgba(180, 120, 20, 0.35);
+      --orb-ink: rgba(70, 50, 20, 0.7);
+      --orb-accent: #9a6a0c;
+      --orb-shadow: 0 20px 40px -18px rgba(80, 55, 15, 0.35), 0 4px 12px -6px rgba(80, 55, 15, 0.2);
+    }
+    body.paper-mode .audio-orb-lens,
+    body.white-mode .audio-orb-lens {
+      background: radial-gradient(circle at 50% 50%, rgba(28, 20, 8, 0.82) 0%, rgba(40, 30, 12, 0.7) 100%);
+    }
+    body.paper-mode .audio-orb-tag,
+    body.white-mode .audio-orb-tag,
+    body.paper-mode .audio-orb-controls,
+    body.white-mode .audio-orb-controls {
+      background: rgba(255, 255, 255, 0.45);
+      box-shadow: inset 0 0 0 1px rgba(150, 110, 40, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    }
+    body.paper-mode .audio-orb-tag::before,
+    body.white-mode .audio-orb-tag::before { background: rgba(70, 50, 20, 0.35); }
+    body.paper-mode .audio-orb-tag.is-live::before,
+    body.white-mode .audio-orb-tag.is-live::before { background: var(--orb-accent); box-shadow: 0 0 6px rgba(200, 140, 20, 0.6); }
+    body.paper-mode .audio-orb-btn:hover,
+    body.white-mode .audio-orb-btn:hover { color: #3a2a0c; background: rgba(255, 255, 255, 0.7); }
+    body.paper-mode .audio-orb-btn-play:hover,
+    body.white-mode .audio-orb-btn-play:hover { color: #2a1c05; }
+    body.paper-mode .audio-orb-stub,
+    body.white-mode .audio-orb-stub {
+      border-color: rgba(150, 110, 40, 0.3);
+      background: radial-gradient(circle at 35% 28%, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0) 50%), rgba(255, 252, 244, 0.55);
+      box-shadow: 0 8px 20px -10px rgba(80, 55, 15, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.9);
     }
     .lesson-audio-orb-restore {
       margin-top: 0.65rem;
@@ -5549,7 +5703,9 @@
       .audio-orb {
         right: 12px;
         bottom: 84px;
-        padding: 8px 8px 7px;
+        padding: 9px 9px 8px;
+        gap: 7px;
+        border-radius: 22px;
       }
       .audio-orb-canvas {
         width: 62px;
@@ -5558,8 +5714,15 @@
     }
     @media (prefers-reduced-motion: reduce) {
       .audio-orb,
-      .audio-orb-tag {
+      .audio-orb-tag,
+      .audio-orb-btn,
+      .audio-orb-stub {
         transition: none;
+      }
+      .audio-orb,
+      .audio-orb-stub,
+      .audio-orb-tag.is-live::before {
+        animation: none;
       }
     }
     .lesson-infographic {
