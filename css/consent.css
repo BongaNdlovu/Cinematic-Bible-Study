@@ -9,6 +9,7 @@
   --sod-line-strong: rgba(229, 185, 59, 0.6);
   --sod-hover: rgba(229, 185, 59, 0.12);
   --sod-focus: #e5b93b;
+  --sod-yes-ink: #1c1408;
   position: fixed;
   left: 0.75rem;
   right: 0.75rem;
@@ -43,6 +44,7 @@
     --sod-line-strong: rgba(140, 99, 28, 0.7);
     --sod-hover: rgba(140, 99, 28, 0.1);
     --sod-focus: #8c631c;
+    --sod-yes-ink: #fbf7ee;
     box-shadow: 0 24px 60px -22px rgba(60, 40, 10, 0.45), 0 0 0 1px rgba(60, 40, 10, 0.08);
   }
 }
@@ -92,6 +94,18 @@
 .sod-btn:hover {
   background: var(--sod-hover);
   border-color: var(--sod-gold);
+}
+
+.sod-btn-yes {
+  background: var(--sod-gold);
+  border-color: var(--sod-gold);
+  color: var(--sod-yes-ink);
+}
+
+.sod-btn-yes:hover {
+  background: var(--sod-gold);
+  border-color: var(--sod-gold);
+  filter: brightness(1.08);
 }
 
 .sod-btn:active {
