@@ -363,7 +363,62 @@
     });
   }
 
-  function signOut() {
+  const PERSONAL_KEYS = [
+    "baStudyBookmarks", "baNoteTimes", "baStudySyncOutbox", "baStudySyncAccountId",
+    "baProgressOutbox", "baProgressAccountId", "baDeskReceipts",
+    "daniel_certificate_name", "daniel_capstone_mastery_v1", "daniel_placement_track_v1"
+  ];
+  const PERSONAL_PREFIXES = ["baNote-", "daniel_book_pos_"];
+
+  function syncModules() {
+    return [window.StudySync, window.ProgressSync].filter(function (m) {
+      return m && typeof m.hasPending === "function" && typeof m.flushNow === "function";
+    });
+  }
+
+  function anyPending(mods) {
+    return mods.some(function (m) { return m.hasPending(); });
+  }
+
+  function flushBeforeSignOut() {
+    const mods = syncModules();
+    if (!anyPending(mods)) return Promise.resolve(true);
+    const pushes = Promise.all(mods.map(function (m) {
+      return Promise.resolve().then(function () { return m.flushNow(); }).catch(function () { return null; });
+    }));
+    const limit = new Promise(function (resolve) { setTimeout(resolve, 6000); });
+    return Promise.race([pushes, limit]).then(function () {
+      if (!anyPending(mods)) return true;
+      return window.confirm("Some of your notes or progress have not reached your account yet. Sign out anyway and remove them from this device?");
+    });
+  }
+
+  function clearPersonalData() {
+    syncModules().forEach(function (m) {
+      if (typeof m.clearLocal === "function") {
+        try { m.clearLocal(); } catch (e) {}
+      }
+    });
+    try {
+      PERSONAL_KEYS.forEach(function (k) { localStorage.removeItem(k); });
+      const doomed = [];
+      for (let i = 0; i < localStorage.length; i++) {
+        const k = localStorage.key(i);
+        if (k && PERSONAL_PREFIXES.some(function (p) { return k.indexOf(p) === 0; })) doomed.push(k);
+      }
+      doomed.forEach(function (k) { localStorage.removeItem(k); });
+    } catch (e) {}
+  }
+
+  function signOut(opts) {
+    const discard = !!(opts && opts.discard);
+    return (discard ? Promise.resolve(true) : flushBeforeSignOut()).then(function (go) {
+      if (!go) return { data: null, error: null, cancelled: true };
+      return finishSignOut();
+    });
+  }
+
+  function finishSignOut() {
     try { localStorage.removeItem("baQaMockSession"); } catch (e) {}
     try { localStorage.removeItem("baProgressOutbox"); } catch (e) {}
     try { localStorage.removeItem("baLastPushAt"); } catch (e) {}
@@ -377,11 +432,13 @@
     if (!client) {
       // QA mock path (no Supabase client) — drop the synthetic user and re-gate.
       setUser(null, null);
+      clearPersonalData();
       return Promise.resolve({ data: null, error: null });
     }
     clearError();
     return client.auth.signOut().then(function (res) {
       if (res && res.error) reportError(friendlyAuthError(res.error), "auth", res.error);
+      else clearPersonalData();
       return res;
     }).catch(function (err) {
       reportError(friendlyAuthError(err), "auth", err);

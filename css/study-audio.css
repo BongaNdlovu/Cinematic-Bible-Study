@@ -148,6 +148,22 @@ body.white-mode #lesson-audio {
     0 0 0 6px rgba(239, 205, 116, 0.14),
     0 12px 30px -8px rgba(200, 146, 42, 0.9);
 }
+#lesson-audio .lap-play.is-beckoning { position: relative; }
+#lesson-audio .lap-play.is-beckoning::before,
+#lesson-audio .lap-play.is-beckoning::after {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  pointer-events: none;
+  animation: lap-beckon 4.8s cubic-bezier(0.22, 0.61, 0.36, 1) 1.4s infinite both;
+}
+#lesson-audio .lap-play.is-beckoning::after { animation-delay: 1.9s; }
+@keyframes lap-beckon {
+  0% { box-shadow: 0 0 0 0 rgba(244, 212, 126, 0.42); }
+  34% { box-shadow: 0 0 0 11px rgba(244, 212, 126, 0); }
+  100% { box-shadow: 0 0 0 11px rgba(244, 212, 126, 0); }
+}
 
 #lesson-audio .lap-eq {
   display: inline-flex;
@@ -306,6 +322,8 @@ body.white-mode #lesson-audio {
 @media (prefers-reduced-motion: reduce) {
   #lesson-audio .lap-shell.is-playing .lap-eq i { animation: none; height: 12px; }
   #lesson-audio .lap-btn, #lesson-audio .lap-rate, #lesson-audio .lap-seek::-webkit-slider-thumb { transition: none; }
+  #lesson-audio .lap-play.is-beckoning::before { animation: none; box-shadow: 0 0 0 4px rgba(244, 212, 126, 0.3); }
+  #lesson-audio .lap-play.is-beckoning::after { animation: none; }
 }
 @media print {
   #lesson-audio { display: none !important; }

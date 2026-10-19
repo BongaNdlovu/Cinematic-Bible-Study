@@ -657,7 +657,10 @@
   function syncNow() {
     if (applyingMerge) return;
     if (debounceTimer) clearTimeout(debounceTimer);
-    debounceTimer = setTimeout(function () { pushLocalToRemote(false); }, PUSH_GAP_MS);
+    debounceTimer = setTimeout(function () {
+      debounceTimer = null;
+      pushLocalToRemote(false);
+    }, PUSH_GAP_MS);
   }
 
   function init() {
@@ -683,8 +686,31 @@
     init();
   }
 
+  function hasPending() {
+    return !!debounceTimer || !!readOutbox();
+  }
+
+  function flushNow() {
+    if (!hasPending()) return Promise.resolve(null);
+    if (debounceTimer) clearTimeout(debounceTimer);
+    debounceTimer = null;
+    const c = authClient();
+    if (!c || !currentUser() || isSyncing) return Promise.resolve(null);
+    return pushFresh(c);
+  }
+
+  function clearLocal() {
+    clearLocalLearnerProgress();
+    knownRevision = null;
+    try { localStorage.removeItem(OUTBOX_KEY); } catch (e) {}
+    try { localStorage.removeItem(ACCOUNT_KEY); } catch (e) {}
+  }
+
   window.ProgressSync = {
     init: init,
+    hasPending: hasPending,
+    flushNow: flushNow,
+    clearLocal: clearLocal,
     pullAndMerge: pullAndMerge,
     syncNow: syncNow,
     pushNow: function () { return pushLocalToRemote(false); },

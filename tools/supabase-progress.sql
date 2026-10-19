@@ -80,7 +80,9 @@ create policy moderator_read_surveys
   );
 
 grant select, insert, update on public.exhibit_progress to authenticated;
-grant select, insert on public.exhibit_surveys to authenticated, anon, public;
+grant select, insert on public.exhibit_surveys to authenticated;
+grant insert on public.exhibit_surveys to anon;
+revoke select on public.exhibit_surveys from anon, public;
 
 alter table public.exhibit_surveys
   add column if not exists anon_id text not null default '';

@@ -501,8 +501,29 @@
     init();
   }
 
+  function hasPending() {
+    return !!debounceTimer || readOutbox();
+  }
+
+  function flushNow() {
+    if (!hasPending()) return Promise.resolve(null);
+    if (debounceTimer) clearTimeout(debounceTimer);
+    debounceTimer = null;
+    lastPushAt = 0;
+    return pushLocalToRemote();
+  }
+
+  function clearLocal() {
+    clearLocalStudyData();
+    clearOutbox();
+    try { localStorage.removeItem(ACCOUNT_KEY); } catch (e) {}
+  }
+
   window.StudySync = {
     init: init,
+    hasPending: hasPending,
+    flushNow: flushNow,
+    clearLocal: clearLocal,
     pullAndMerge: pullAndMerge,
     syncNow: syncNow,
     pushNow: pushLocalToRemote,
