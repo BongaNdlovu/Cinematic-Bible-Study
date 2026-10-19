@@ -181,3 +181,12 @@ insert into public.exhibit_quiz_keys (sitting, q_idx, correct_idx, correct_note)
 on conflict (sitting, q_idx) do update
   set correct_idx = excluded.correct_idx,
       correct_note = excluded.correct_note;
+
+alter table public.exhibit_study_data
+  drop constraint if exists exhibit_study_data_notes_size,
+  drop constraint if exists exhibit_study_data_bookmarks_size;
+alter table public.exhibit_study_data
+  add constraint exhibit_study_data_notes_size
+    check (octet_length(notes::text) <= 1228800) not valid,
+  add constraint exhibit_study_data_bookmarks_size
+    check (octet_length(bookmarks::text) <= 65536) not valid;
