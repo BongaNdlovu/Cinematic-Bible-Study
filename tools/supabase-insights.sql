@@ -83,9 +83,17 @@ begin
     raise exception 'rate_limit';
   end if;
   if new.user_id is null then
+    if pg_column_size(new.detail) > 500 then
+      raise exception 'rate_limit';
+    end if;
     if (select count(*) from public.exhibit_events
         where user_id is null
           and created_at > now() - interval '1 minute') >= 600 then
+      raise exception 'rate_limit';
+    end if;
+    if (select count(*) from public.exhibit_events
+        where user_id is null
+          and created_at > now() - interval '24 hours') >= 20000 then
       raise exception 'rate_limit';
     end if;
   end if;

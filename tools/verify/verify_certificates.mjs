@@ -14,6 +14,10 @@ assert(sql.includes('revoke all on public.exhibit_certificates from public, anon
 assert(!/grant (select|insert|update|delete)[^;]*exhibit_certificates/.test(sql), 'certificates are reached only through the guarded functions');
 assert(sql.includes("raise exception 'not_finished'"), 'a number is issued only after all sittings are saved');
 assert(sql.includes('coalesce(v_finished, 0) < 11'), 'issuing checks eleven finished sittings');
+assert(sql.includes('v_finished := public.exhibit_sittings_passed(auth.uid());'), 'issuing counts server-recorded quiz passes, not the learner-written journey');
+assert(!/exhibit_sittings_finished\(p\.journey\)/.test(sql), 'neither issuing nor the graduates list trusts the learner-written journey');
+assert(sql.includes("values ('quiz_passes_backfill')"), 'the journey backfill runs once, so later self-written progress is never credited');
+assert(sql.includes('revoke all on function public.exhibit_sittings_passed(uuid) from public, anon, authenticated'), 'the pass counter is not an API function');
 assert(sql.includes('where c.user_id = auth.uid() and c.name = v_name'), 'the same name returns the same number');
 assert(sql.includes("v_recent >= 5"), 'certificate numbers are capped per day');
 assert(sql.includes('where public.is_review_moderator()'), 'only a confirmed moderator lists graduates');

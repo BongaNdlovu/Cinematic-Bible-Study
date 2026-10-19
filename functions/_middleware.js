@@ -59,7 +59,8 @@ async function allowed(context, ip, path) {
       signal: AbortSignal.timeout(2000)
     });
     const data = await res.json();
-    return data.ok ? "allow" : "deny";
+    if (data.ok) return "allow";
+    return data.first ? "deny_first" : "deny";
   } catch (e) {
     reportEdge(context, path, "limit_unavailable", Date.now() - started);
     return "down";
@@ -90,10 +91,8 @@ async function rateProxy(context, request) {
   const forwardedPath = String(body.path || "/");
   const decision = await allowed(context, String(body.ip || "0"), forwardedPath);
   if (decision === "down") return unavailable();
-  if (decision === "deny") {
-    reportEdge(context, forwardedPath, "cap");
-    return denied();
-  }
+  if (decision === "deny_first") reportEdge(context, forwardedPath, "cap");
+  if (decision === "deny" || decision === "deny_first") return denied();
   return new Response(null, { status: 204 });
 }
 
@@ -119,7 +118,7 @@ function cspDirective(text) {
 
 async function takeReport(context, request) {
   const decision = await allowed(context, ipOf(request), "/csp-report");
-  if (decision === "deny") return denied();
+  if (decision === "deny" || decision === "deny_first") return denied();
   if (decision !== "allow") return unavailable();
   let text = "";
   try { text = await request.text(); } catch (e) { text = ""; }
@@ -181,10 +180,8 @@ export async function onRequest(context) {
   if (STATIC_PREFIXES.some(function (prefix) { return path.startsWith(prefix); })) return context.next();
   const ip = ipOf(request);
   const decision = await allowed(context, ip, path);
-  if (decision === "deny") {
-    reportEdge(context, path, "cap");
-    return denied();
-  }
+  if (decision === "deny_first") reportEdge(context, path, "cap");
+  if (decision === "deny" || decision === "deny_first") return denied();
   if (decision === "down" && request.method !== "GET") return unavailable();
   return servePage(context, request);
 }

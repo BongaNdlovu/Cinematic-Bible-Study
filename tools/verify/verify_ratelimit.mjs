@@ -200,6 +200,48 @@ async function edge(pathAndQuery, { method = 'GET', env = {}, headers = {}, body
   assert.strictEqual(gateSeen.calls.length, 0, 'static files do not wait on the gate');
 }
 
+function sequencedGate(answers) {
+  let calls = 0;
+  return {
+    idFromName(ip) { return ip; },
+    get() {
+      return {
+        fetch: async () => {
+          const answer = answers[Math.min(calls, answers.length - 1)];
+          calls += 1;
+          return Response.json(answer);
+        }
+      };
+    }
+  };
+}
+const capReports = () => edgeReports.filter((x) => String(x.body).includes('"reason":"cap"')).length;
+const denials = [{ ok: false, first: true }, { ok: false, first: false }, { ok: false, first: false }];
+{
+  edgeReports.length = 0;
+  const pageGate = sequencedGate(denials);
+  for (let i = 0; i < denials.length; i += 1) {
+    const r = await edge('/study.html', { env: { RATE_GATE: pageGate, ASSETS: assetsStub(200) } });
+    assert.strictEqual(r.res.status, 429, 'every denied page read gets 429, not only the first');
+  }
+  assert.strictEqual(capReports(), 1, 'a page read reports the cap once per window, on the first denial');
+}
+{
+  edgeReports.length = 0;
+  const secret = 'verify-gate-secret';
+  const proxyGate = sequencedGate(denials);
+  for (let i = 0; i < denials.length; i += 1) {
+    const r = await edge('/__rate', {
+      method: 'POST',
+      env: { RATE_GATE_SECRET: secret, RATE_GATE: proxyGate },
+      headers: { authorization: 'Bearer ' + secret, 'content-type': 'application/json' },
+      body: JSON.stringify({ ip: '203.0.113.9', path: '/study.html' })
+    });
+    assert.strictEqual(r.res.status, 429, 'every denied gate proxy call gets 429, not only the first');
+  }
+  assert.strictEqual(capReports(), 1, 'the gate proxy reports the cap once per window, on the first denial');
+}
+
 const { middleware: vercelMiddleware } = await import('../../middleware.js');
 const savedSecret = process.env.RATE_GATE_SECRET;
 delete process.env.RATE_GATE_SECRET;

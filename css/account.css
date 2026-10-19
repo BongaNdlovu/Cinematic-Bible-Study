@@ -387,6 +387,14 @@
 }
 @keyframes acct-bar { from { transform: scaleX(0); transform-origin: left; } }
 
+.acct-hub .hub-card-danger { border-color: rgba(190, 70, 60, 0.45); }
+.acct-hub .hub-card-danger:hover { border-color: rgba(214, 90, 78, 0.7); }
+.acct-hub .hub-card-danger .cx-btn { justify-self: start; }
+.acct-danger-form { display: grid; gap: 10px; margin-top: 6px; }
+.acct-danger-btn { border-color: rgba(214, 90, 78, 0.6); color: #f3c4bd; }
+.acct-danger-btn:not([disabled]) { background: rgba(120, 30, 26, 0.55); }
+.acct-danger-btn[disabled] { opacity: 0.5; cursor: not-allowed; }
+
 .acct-strip {
   display: grid;
   grid-template-columns: repeat(11, minmax(0, 1fr));

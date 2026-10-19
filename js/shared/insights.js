@@ -27,6 +27,21 @@
     return false;
   }
 
+  function consented() {
+    return !!(window.SODConsent && SODConsent.has('analytics'));
+  }
+
+  function clearAnalyticsStorage() {
+    try { localStorage.removeItem(QUEUE_KEY); localStorage.removeItem(ANON_KEY); } catch (e) {}
+    try { sessionStorage.removeItem(SESSION_KEY); } catch (e) {}
+  }
+
+  function withdrawAnalytics() {
+    clearAnalyticsStorage();
+    const beacon = document.getElementById('cf-insight-beacon');
+    if (beacon) beacon.remove();
+  }
+
   function setOptOut() {
     try { localStorage.setItem(OPT_KEY, '0'); } catch (e) {}
   }
@@ -42,6 +57,7 @@
   }
 
   function anonId() {
+    if (!consented()) return '';
     try {
       let id = localStorage.getItem(ANON_KEY);
       if (!id) {
@@ -57,6 +73,7 @@
   }
 
   function sessionId() {
+    if (!consented()) return '';
     try {
       let id = sessionStorage.getItem(SESSION_KEY);
       if (!id) {
@@ -87,7 +104,7 @@
   }
 
   function track(event, sitting, detail) {
-    if (!event || optedOut()) return;
+    if (!event || optedOut() || !consented()) return;
     const sit = Number.isInteger(sitting) ? sitting : null;
     const q = readQueue();
     q.push({
@@ -133,7 +150,7 @@
   }
 
   function flush() {
-    if (flushing || optedOut()) return Promise.resolve();
+    if (flushing || optedOut() || !consented()) return Promise.resolve();
     const auth = window.ScrollAuth;
     const client = auth && auth.getClient && auth.getClient();
     const user = auth && auth.getUser && auth.getUser();
@@ -523,7 +540,7 @@
   function injectBeacon() {
     if (isLocalDevHost()) return;
     const token = window.BAAuthConfig && window.BAAuthConfig.cfAnalyticsToken;
-    if (!token || optedOut() || document.getElementById('cf-insight-beacon')) return;
+    if (!token || optedOut() || !consented() || document.getElementById('cf-insight-beacon')) return;
     const s = document.createElement('script');
     s.id = 'cf-insight-beacon';
     s.defer = true;
@@ -538,9 +555,11 @@
       const ref = String(u.searchParams.get('ref') || '').replace(/[^a-zA-Z0-9_-]/g, '').slice(0, 16);
       const sitting = Number(u.searchParams.get('s'));
       if (!ref) return;
-      localStorage.setItem(REF_BY, ref);
-      if (Number.isInteger(sitting) && sitting >= 0 && sitting <= 10) {
-        localStorage.setItem(REF_SIT, String(sitting));
+      if (consented()) {
+        localStorage.setItem(REF_BY, ref);
+        if (Number.isInteger(sitting) && sitting >= 0 && sitting <= 10) {
+          localStorage.setItem(REF_SIT, String(sitting));
+        }
       }
       u.searchParams.delete('ref');
       history.replaceState({}, '', u.pathname + (u.search || '') + u.hash);
@@ -638,6 +657,17 @@
         onUser(window.ScrollAuth.getUser && window.ScrollAuth.getUser());
       });
     }
+  }
+
+  if (typeof window !== 'undefined') {
+    window.addEventListener('sod:consent', function (ev) {
+      if (ev.detail && ev.detail.analytics) {
+        injectBeacon();
+        flush();
+      } else {
+        withdrawAnalytics();
+      }
+    });
   }
 
   if (typeof document !== 'undefined') {

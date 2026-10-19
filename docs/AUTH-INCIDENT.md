@@ -42,5 +42,5 @@ One page for the operator. Do not paste keys, emails, or session tokens into cha
 - Leaked-password rejection says Pro plan and above. It is off.
 - `public.hook_password_verification_attempt` exists and the API roles cannot call it. Auth Hooks says Team or Enterprise is required, so the hook is not enabled. A spread-out guessing run is still outside the per-address cap.
 - The operator identity is Google, with a confirmed email, and no verified authenticator yet. Operator tools now require that Google identity. After an authenticator is verified, those tools also require the second step. Enroll it from the account page after the next deploy. The account page shows the secret as text and clears it after the code is accepted.
-- Captcha is off. Leave it off until a Turnstile site key is in `js/shared/auth-config.js` and the secret is saved only in the Supabase captcha setting. Turn the widget and the server check on together.
+- Captcha is on (Turnstile). The site key is in `js/shared/auth-config.js`. The secret stays only in Supabase, Authentication, Attack Protection.
 - Cloudflare flood notifications were not changed from this session. Add them in the Cloudflare dashboard for this Pages project if they are not already on.

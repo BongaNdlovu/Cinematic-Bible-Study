@@ -42,14 +42,19 @@ function takeBucket(store, ip, name, now) {
   const key = name + ":" + ip;
   let bucket = store.get(key);
   if (!bucket || now - bucket.start >= spec[1]) bucket = { start: now, n: 0 };
-  bucket.n += 1;
   store.set(key, bucket);
-  return bucket.n <= spec[0];
+  if (bucket.n > spec[0]) return { ok: false, first: false };
+  bucket.n += 1;
+  return { ok: bucket.n <= spec[0], first: bucket.n === spec[0] + 1 };
+}
+
+export function decide(store, ip, path, now) {
+  const when = now || Date.now();
+  prune(store, when);
+  if (isStaticPath(path)) return { ok: true, first: false };
+  return takeBucket(store, ip, bucketName(path), when);
 }
 
 export function allow(store, ip, path, now) {
-  const when = now || Date.now();
-  prune(store, when);
-  if (isStaticPath(path)) return true;
-  return takeBucket(store, ip, bucketName(path), when);
+  return decide(store, ip, path, now).ok;
 }

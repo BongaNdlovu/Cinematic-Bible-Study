@@ -106,6 +106,8 @@ assert(!cspDirectives['script-src']?.includes("https://cdn.tailwindcss.com"), "C
 assert(!cspDirectives['script-src']?.includes("https://cdnjs.cloudflare.com"), "CSP script-src no longer allows the unused cdnjs host");
 assert(cspDirectives['script-src']?.includes("'unsafe-inline'"), "CSP script-src keeps 'unsafe-inline' until the inline scripts move out");
 assert(cspDirectives['script-src']?.includes("https://static.cloudflareinsights.com"), "CSP script-src includes static.cloudflareinsights.com");
+assert(cspDirectives['script-src']?.includes("https://challenges.cloudflare.com"), "CSP script-src includes challenges.cloudflare.com for Turnstile");
+assert(cspDirectives['frame-src']?.includes("https://challenges.cloudflare.com"), "CSP frame-src includes challenges.cloudflare.com for Turnstile");
 
 // Verify OSM tiles
 assert(cspDirectives['img-src']?.includes("https://tile.openstreetmap.org"), "CSP img-src includes bare tile.openstreetmap.org");
