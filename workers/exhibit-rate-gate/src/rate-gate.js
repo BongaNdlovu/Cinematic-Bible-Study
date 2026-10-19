@@ -1,5 +1,7 @@
 const WINDOWS = {
-  all: [240, 60000]
+  all: [240, 60000],
+  account: [30, 60000],
+  report: [10, 60000]
 };
 
 const STATIC_PREFIXES = [
@@ -19,6 +21,22 @@ function isStaticPath(path) {
   return false;
 }
 
+function bucketName(path) {
+  const p = String(path || "");
+  if (p === "/csp-report") return "report";
+  if (p === "/account" || p === "/account.html") return "account";
+  return "all";
+}
+
+function prune(store, now) {
+  const stale = [];
+  store.forEach(function (bucket, key) {
+    const spec = WINDOWS[String(key).split(":")[0]];
+    if (!spec || !bucket || now - bucket.start >= spec[1]) stale.push(key);
+  });
+  stale.forEach(function (key) { store.delete(key); });
+}
+
 function takeBucket(store, ip, name, now) {
   const spec = WINDOWS[name];
   const key = name + ":" + ip;
@@ -31,6 +49,7 @@ function takeBucket(store, ip, name, now) {
 
 export function allow(store, ip, path, now) {
   const when = now || Date.now();
+  prune(store, when);
   if (isStaticPath(path)) return true;
-  return takeBucket(store, ip, "all", when);
+  return takeBucket(store, ip, bucketName(path), when);
 }

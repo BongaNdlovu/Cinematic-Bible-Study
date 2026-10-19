@@ -62,7 +62,7 @@
       unavailable: "Sign-in is unavailable on this copy of the site. You can still browse. Cloud save, reviews, and the certificate need sign-in.",
       email: "Enter a valid email address.",
       password: "Enter your password.",
-      weak: "Use a password with at least 8 characters.",
+      weak: "Use a password with at least 12 characters.",
       name: "Enter the name that should appear on the certificate.",
       saved: "Saved.",
       mailed: "Check your email for a reset link. It returns you here.",
@@ -476,7 +476,7 @@
       setError("auth", copy.password);
       return;
     }
-    if (kind === "create" && password.length < 8) {
+    if (kind === "create" && password.length < 12) {
       setError("auth", copy.weak);
       return;
     }
@@ -526,7 +526,7 @@
   function savePassword() {
     const copy = messages();
     const password = el("account-new-password") ? String(el("account-new-password").value || "") : "";
-    if (password.length < 8) {
+    if (password.length < 12) {
       setNote("account-settings-note", copy.weak);
       return;
     }

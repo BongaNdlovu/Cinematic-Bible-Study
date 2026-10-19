@@ -32,6 +32,8 @@
     }
   }
   </script>
+  <!-- Only the core build. The postprocessing files import the bare name "three", and a modulepreload of them is resolved by the preload scanner before the import map on a cached reload, which leaves the shelf blank. -->
+  <link rel="modulepreload" href="vendor/three/build/three.module.min.js">
   <script src="js/shared/covers.js"></script>
   <script src="js/shared/cinema.js"></script>
   <script src="js/shared/journey.js"></script>
@@ -194,7 +196,7 @@
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
   </section>
 
-  <footer class="site-footer"></footer>
+  <footer class="site-footer" data-rights="Created by Fanelesibonge Ndlovu · © 2026 · All rights reserved."></footer>
 
   <script src="js/home/home.js"></script>
   <script defer src="js/home/shelf-data.js"></script>

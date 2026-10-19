@@ -86,4 +86,17 @@ assert(vercelIgnore.includes("docs/"), ".vercelignore must drop docs/");
 assert(vercelIgnore.includes("README.md"), ".vercelignore must drop README.md");
 assert(vercelIgnore.includes("server.py"), ".vercelignore must drop server.py");
 
+const report = await onRequest({
+  request: new Request("https://example.test/csp-report", {
+    method: "POST",
+    body: '{"csp-report":{"blocked-uri":"https://secret.example/token","violated-directive":"script-src"}}'
+  }),
+  env: {},
+  next: () => new Response("SERVED"),
+  waitUntil: () => {}
+});
+const reportText = await report.text();
+assert.strictEqual(report.status, 503, "a CSP report is refused when the counter is down");
+assert.ok(!reportText.includes("secret"), "a refused CSP report does not echo the blocked address");
+
 console.log("Pages and Vercel stages drop operator files; static folders skip the middleware without exposing protected paths");

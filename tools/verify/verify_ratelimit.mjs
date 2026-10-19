@@ -63,6 +63,8 @@ assert(cf.includes('return "down"'), 'Cloudflare must report a missing counter a
 
 const gate = fs.readFileSync(path.join(ROOT, 'workers/exhibit-rate-gate/src/rate-gate.js'), 'utf8');
 assert(gate.includes('all: [240, 60000]'), 'shared gate must cap HTML and other paths at 240/min');
+assert(gate.includes('account: [30, 60000]'), 'shared gate must cap the account page at 30/min');
+assert(gate.includes('function prune'), 'shared gate must drop expired counters');
 assert(gate.includes('"/assets/"'), 'shared gate must skip /assets/');
 assert(gate.includes('"/js/"'), 'shared gate must skip /js/');
 assert(gate.includes('"/css/"'), 'shared gate must skip /css/');

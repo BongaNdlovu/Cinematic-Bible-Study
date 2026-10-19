@@ -106,6 +106,27 @@ function extensionlessUrl(url) {
   return target;
 }
 
+function cspDirective(text) {
+  const raw = String(text || "").slice(0, 2048);
+  let parsed = null;
+  try { parsed = JSON.parse(raw); } catch (e) { return "unparsed"; }
+  const item = Array.isArray(parsed) ? parsed[0] : parsed;
+  const body = item && item["csp-report"] ? item["csp-report"] : (item && item.body ? item.body : item);
+  const name = body && (body["effective-directive"] || body["violated-directive"]);
+  const directive = String(name || "unknown").replace(/[^a-zA-Z0-9-]/g, "").slice(0, 40);
+  return directive || "unknown";
+}
+
+async function takeReport(context, request) {
+  const decision = await allowed(context, ipOf(request), "/csp-report");
+  if (decision === "deny") return denied();
+  if (decision !== "allow") return unavailable();
+  let text = "";
+  try { text = await request.text(); } catch (e) { text = ""; }
+  reportEdge(context, "/csp-report", cspDirective(text));
+  return new Response(null, { status: 204, headers: { "Cache-Control": "no-store" } });
+}
+
 async function servePage(context, request) {
   const assets = context.env && context.env.ASSETS;
   const target = request.method === "GET" ? extensionlessUrl(new URL(request.url)) : null;
@@ -154,6 +175,7 @@ export async function onRequest(context) {
       }
     });
   }
+  if (path === "/csp-report" && request.method === "POST") return takeReport(context, request);
   if (request.method === "OPTIONS" || request.method === "HEAD") return context.next();
   if (path === "/__rate" && request.method === "POST") return rateProxy(context, request);
   if (STATIC_PREFIXES.some(function (prefix) { return path.startsWith(prefix); })) return context.next();

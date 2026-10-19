@@ -793,13 +793,36 @@ async function liveDeskClosed() {
   });
   const receipts = await api("GET", "/rest/v1/exhibit_notice_receipts?select=notice_id,read_at,hidden_at,user_id");
   const trigger = await api("POST", "/rest/v1/rpc/exhibit_help_before_insert", {});
-  const denied = [author, help, helpWrite, publish, inbox, receipt, receipts, trigger];
+  const replies = await api("GET", "/rest/v1/exhibit_help_replies?select=id,note_id,body,author_id");
+  const mine = await api("POST", "/rest/v1/rpc/exhibit_help_mine", {});
+  const thread = await api("POST", "/rest/v1/rpc/exhibit_help_thread", {
+    p_note: "00000000-0000-0000-0000-000000000000"
+  });
+  const reply = await api("POST", "/rest/v1/rpc/exhibit_help_reply", {
+    p_note: "00000000-0000-0000-0000-000000000000",
+    p_body: "This reply must not be stored for an anonymous caller."
+  });
+  const seen = await api("POST", "/rest/v1/rpc/exhibit_help_seen", {
+    p_note: "00000000-0000-0000-0000-000000000000"
+  });
+  const certificates = await api("GET", "/rest/v1/exhibit_certificates?select=serial,name,user_id");
+  const graduates = await api("POST", "/rest/v1/rpc/exhibit_graduates", {});
+  const issue = await api("POST", "/rest/v1/rpc/issue_exhibit_certificate", { p_name: "pen" });
+  const denied = [author, help, helpWrite, publish, inbox, receipt, receipts, trigger, replies, mine, thread, reply, seen, certificates, graduates, issue];
   denied.forEach((res) => {
     if (res.status === 200 || res.status === 201) throw new Error("anonymous desk call stored or returned data");
   });
   const reviewUser = await api("GET", "/rest/v1/exhibit_reviews?select=user_id");
   if (reviewUser.status === 200) throw new Error("anonymous key read review account ids");
-  return "notices are public text only; help notes, receipts, inbox, and review account ids stay closed";
+  const publicReviews = await api("POST", "/rest/v1/rpc/exhibit_public_reviews", { p_limit: 60 });
+  if (publicReviews.status !== 200) throw new Error("public review list replied " + publicReviews.status);
+  const publicRows = JSON.parse(publicReviews.text);
+  if (!Array.isArray(publicRows)) throw new Error("public review list was not a list");
+  publicRows.forEach((row) => {
+    const extra = Object.keys(row).filter((k) => !["id", "display_name", "body", "rating", "created_at"].includes(k));
+    if (extra.length) throw new Error("public review list exposed " + extra.join(", "));
+  });
+  return "notices are public text only; help notes, replies, receipts, inbox, and review account ids stay closed";
 }
 
 const tests = [

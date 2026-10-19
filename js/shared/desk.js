@@ -2,14 +2,22 @@
   const LOCAL_KEY = "baDeskReceipts";
   const TITLE_MAX = 120;
   const BODY_MAX = 2000;
+  const TABS = ["notices", "inbox", "write"];
   let generation = 0;
   let open = false;
   let mounted = false;
   let notices = [];
   let receipts = Object.create(null);
-  let helpNotes = [];
+  let threads = [];
+  let threadId = "";
+  let threadRows = [];
+  let threadState = "";
+  let tab = "notices";
   let returnFocus = null;
   const inflight = Object.create(null);
+  const tabButtons = Object.create(null);
+  const tabPanes = Object.create(null);
+  const tabCounts = Object.create(null);
   let root = null;
   let panel = null;
   let launcher = null;
@@ -19,8 +27,17 @@
   let helpForm = null;
   let publishForm = null;
   let publishSection = null;
-  let inboxSection = null;
+  let inboxGuest = null;
+  let inboxListView = null;
+  let inboxHeading = null;
   let inboxList = null;
+  let threadView = null;
+  let threadBack = null;
+  let threadTitle = null;
+  let threadMeta = null;
+  let threadList = null;
+  let threadClear = null;
+  let replyForm = null;
   let guestLine = null;
   let syncLine = null;
 
@@ -75,11 +92,14 @@
     return String(value || "").replace(/\r\n/g, "\n").trim().slice(0, max);
   }
 
-  function formatWhen(iso) {
+  function formatWhen(iso, withTime) {
     const when = new Date(iso);
     if (Number.isNaN(when.getTime())) return "";
+    const options = withTime
+      ? { month: "short", day: "numeric", hour: "numeric", minute: "2-digit" }
+      : { month: "short", day: "numeric", year: "numeric" };
     try {
-      return new Intl.DateTimeFormat(undefined, { month: "short", day: "numeric", year: "numeric" }).format(when);
+      return new Intl.DateTimeFormat(undefined, options).format(when);
     } catch (e) {
       return "";
     }
@@ -149,6 +169,39 @@
     };
   }
 
+  function cleanThread(row) {
+    if (!row || !isId(row.id)) return null;
+    if (typeof row.subject !== "string" || typeof row.body !== "string") return null;
+    const created = typeof row.created_at === "string" ? row.created_at : "";
+    return {
+      id: row.id,
+      subject: row.subject.slice(0, TITLE_MAX),
+      body: row.body.slice(0, BODY_MAX),
+      created_at: created,
+      last_at: typeof row.last_at === "string" ? row.last_at : created,
+      replies: Number.isFinite(row.replies) && row.replies > 0 ? row.replies : 0,
+      unread: row.unread === true,
+      sender_email: safeEmail(row.sender_email)
+    };
+  }
+
+  function cleanMessage(row) {
+    if (!row || !isId(row.id) || typeof row.body !== "string") return null;
+    return {
+      id: row.id,
+      body: row.body.slice(0, BODY_MAX),
+      created_at: typeof row.created_at === "string" ? row.created_at : "",
+      from_operator: row.from_operator === true
+    };
+  }
+
+  function findThread(id) {
+    for (let i = 0; i < threads.length; i += 1) {
+      if (threads[i].id === id) return threads[i];
+    }
+    return null;
+  }
+
   function shownNotices() {
     const list = [];
     notices.forEach(function (row) {
@@ -168,11 +221,26 @@
     return count;
   }
 
+  function inboxUnread() {
+    let count = 0;
+    threads.forEach(function (row) { if (row.unread) count += 1; });
+    return count;
+  }
+
+  function paintCount(el, count) {
+    if (!el) return;
+    el.hidden = count === 0;
+    el.textContent = count > 9 ? "9+" : String(count);
+  }
+
   function paintBadge() {
     if (!countNode || !launcher) return;
-    const count = unreadCount();
-    countNode.hidden = count === 0;
-    countNode.textContent = count > 9 ? "9+" : String(count);
+    const notes = unreadCount();
+    const inbox = inboxUnread();
+    const count = notes + inbox;
+    paintCount(countNode, count);
+    paintCount(tabCounts.notices, notes);
+    paintCount(tabCounts.inbox, inbox);
     launcher.setAttribute("aria-label", count ? "Messages, " + count + " unread" : "Messages");
   }
 
@@ -222,57 +290,97 @@
 
   function paintRole() {
     const signed = !!userId();
-    const operator = isOperator();
     if (guestLine) guestLine.hidden = signed;
     if (syncLine) syncLine.hidden = signed;
     if (helpForm) helpForm.hidden = !signed;
-    if (publishSection) publishSection.hidden = !operator;
-    if (inboxSection) inboxSection.hidden = !operator;
-    if (!operator) {
-      helpNotes = [];
-      paintInbox();
+    if (publishSection) publishSection.hidden = !isOperator();
+  }
+
+  function paintThreadCard(row, operator) {
+    const card = node("button", row.unread ? "desk-thread is-unread" : "desk-thread");
+    card.type = "button";
+    card.setAttribute("data-desk", "thread");
+    card.setAttribute("data-id", row.id);
+    const top = node("span", "desk-thread-top");
+    const title = node("span", "desk-thread-title");
+    title.textContent = row.subject;
+    top.appendChild(title);
+    if (row.unread) {
+      const fresh = node("span", "desk-new");
+      fresh.textContent = "New";
+      top.appendChild(fresh);
     }
+    card.appendChild(top);
+    const meta = node("span", "desk-when");
+    const parts = [];
+    if (operator) parts.push(row.sender_email || "No confirmed address");
+    parts.push(formatWhen(row.last_at));
+    if (row.replies) parts.push(row.replies === 1 ? "1 reply" : row.replies + " replies");
+    meta.textContent = parts.join(" · ");
+    card.appendChild(meta);
+    const preview = node("span", "desk-preview");
+    preview.textContent = row.body;
+    card.appendChild(preview);
+    return card;
+  }
+
+  function paintMessage(row, operator) {
+    const mine = operator ? row.from_operator : !row.from_operator;
+    const item = node("article", mine ? "desk-msg is-mine" : "desk-msg");
+    const who = node("p", "desk-when");
+    const name = mine ? "You" : (operator ? "Reader" : "The operator");
+    who.textContent = name + " · " + formatWhen(row.created_at, true);
+    item.appendChild(who);
+    const body = node("p", "desk-body");
+    body.textContent = row.body;
+    item.appendChild(body);
+    return item;
+  }
+
+  function paintThread() {
+    const row = findThread(threadId);
+    const operator = isOperator();
+    threadTitle.textContent = row ? row.subject : "Conversation";
+    threadMeta.textContent = row && operator ? (row.sender_email || "No confirmed address") : "";
+    threadMeta.hidden = !threadMeta.textContent;
+    threadClear.hidden = !operator;
+    threadClear.setAttribute("data-id", threadId);
+    threadClear.removeAttribute("data-confirm");
+    threadClear.textContent = "Clear for both sides";
+    threadClear.disabled = !!inflight["help:" + threadId];
+    clear(threadList);
+    if (threadState === "loading") {
+      line(threadList, "desk-empty", "Opening…");
+    } else if (threadState === "error") {
+      line(threadList, "desk-empty", "This conversation could not be opened.");
+    } else {
+      threadRows.forEach(function (msg) { threadList.appendChild(paintMessage(msg, operator)); });
+    }
+    replyForm.hidden = threadState !== "";
   }
 
   function paintInbox() {
     if (!inboxList) return;
-    clear(inboxList);
-    if (!helpNotes.length) {
-      line(inboxList, "desk-empty", "No notes waiting.");
-      return;
+    const signed = !!userId();
+    const operator = isOperator();
+    const showThread = signed && !!threadId;
+    inboxGuest.hidden = signed;
+    inboxListView.hidden = !signed || showThread;
+    threadView.hidden = !showThread;
+    if (showThread) {
+      paintThread();
+    } else {
+      inboxHeading.textContent = operator ? "From readers" : "Your notes and replies";
+      clear(inboxList);
+      if (!threads.length) {
+        line(inboxList, "desk-empty", operator
+          ? "No notes waiting."
+          : "Nothing yet. Notes you send to the operator, and the replies, appear here.");
+      } else {
+        threads.forEach(function (row) { inboxList.appendChild(paintThreadCard(row, operator)); });
+      }
     }
-    helpNotes.forEach(function (row) { inboxList.appendChild(paintHelp(row)); });
-  }
-
-  function paintHelp(row) {
-    const card = node("article", "desk-card");
-    const title = node("h4");
-    title.textContent = row.subject;
-    card.appendChild(title);
-    const when = node("time", "desk-when");
-    when.dateTime = row.created_at;
-    const email = safeEmail(row.sender_email);
-    when.textContent = (email || "No confirmed address") + " · " + formatWhen(row.created_at);
-    card.appendChild(when);
-    const body = node("p", "desk-body");
-    body.textContent = row.body;
-    card.appendChild(body);
-    const actions = node("div", "desk-actions");
-    actions.appendChild(actionButton("Clear", "drop-help", row.id));
-    card.appendChild(actions);
-    return card;
-  }
-
-  function cleanHelp(row) {
-    if (!row || !isId(row.id)) return null;
-    if (typeof row.subject !== "string" || typeof row.body !== "string") return null;
-    return {
-      id: row.id,
-      subject: row.subject.slice(0, TITLE_MAX),
-      body: row.body.slice(0, BODY_MAX),
-      created_at: typeof row.created_at === "string" ? row.created_at : "",
-      sender_email: safeEmail(row.sender_email)
-    };
+    paintBadge();
   }
 
   function adoptGuest() {
@@ -311,27 +419,95 @@
   }
 
   function loadInbox(gen, uid) {
-    if (!isOperator()) {
-      helpNotes = [];
+    if (!uid) {
+      threads = [];
       paintInbox();
       return;
     }
     const db = client();
     if (!db || typeof db.rpc !== "function") return;
-    db.rpc("exhibit_help_inbox").then(function (res) {
-      if (!still(gen, uid) || !isOperator()) return;
+    const operator = isOperator();
+    db.rpc(operator ? "exhibit_help_inbox" : "exhibit_help_mine").then(function (res) {
+      if (!still(gen, uid) || isOperator() !== operator) return;
       const rows = res && !res.error && Array.isArray(res.data) ? res.data : [];
-      helpNotes = [];
+      threads = [];
       rows.forEach(function (row) {
-        const clean = cleanHelp(row);
-        if (clean) helpNotes.push(clean);
+        const clean = cleanThread(row);
+        if (clean) threads.push(clean);
       });
+      if (threadId && !findThread(threadId)) closeThread();
       paintInbox();
     }, function () {
       if (!still(gen, uid)) return;
-      helpNotes = [];
+      threads = [];
       paintInbox();
     });
+  }
+
+  function loadThread(gen, uid, id) {
+    const db = client();
+    if (!db || typeof db.rpc !== "function") {
+      threadState = "error";
+      paintInbox();
+      return;
+    }
+    db.rpc("exhibit_help_thread", { p_note: id }).then(function (res) {
+      if (!still(gen, uid) || threadId !== id) return;
+      if (!res || res.error) {
+        threadState = "error";
+        paintInbox();
+        return;
+      }
+      threadRows = [];
+      (Array.isArray(res.data) ? res.data : []).forEach(function (row) {
+        const clean = cleanMessage(row);
+        if (clean) threadRows.push(clean);
+      });
+      threadState = threadRows.length ? "" : "error";
+      paintInbox();
+      if (threadRows.length) markSeen(gen, uid, id);
+    }, function () {
+      if (!still(gen, uid) || threadId !== id) return;
+      threadState = "error";
+      paintInbox();
+    });
+  }
+
+  function markSeen(gen, uid, id) {
+    const row = findThread(id);
+    if (!row || !row.unread) return;
+    const db = client();
+    if (!db || typeof db.rpc !== "function") return;
+    db.rpc("exhibit_help_seen", { p_note: id }).then(function (res) {
+      if (!still(gen, uid) || !res || res.error) return;
+      const current = findThread(id);
+      if (current) current.unread = false;
+      paintBadge();
+    }, function () {});
+  }
+
+  function openThread(id) {
+    if (!isId(id) || !userId()) return;
+    threadId = id;
+    threadRows = [];
+    threadState = "loading";
+    paintInbox();
+    if (threadBack) threadBack.focus();
+    loadThread(generation, userId(), id);
+  }
+
+  function closeThread() {
+    threadId = "";
+    threadRows = [];
+    threadState = "";
+  }
+
+  function backToList() {
+    const id = threadId;
+    closeThread();
+    paintInbox();
+    const card = isId(id) && inboxList ? inboxList.querySelector('[data-id="' + id + '"]') : null;
+    if (card) card.focus();
   }
 
   function loadNotices(gen, uid) {
@@ -362,7 +538,6 @@
         setStatus("");
         if (!uid) adoptGuest();
         else loadReceipts(gen, uid);
-        loadInbox(gen, uid);
       }, function () {
         if (!still(gen, uid)) return;
         notices = [];
@@ -376,11 +551,13 @@
     const gen = generation;
     const uid = userId();
     receipts = Object.create(null);
-    helpNotes = [];
+    threads = [];
+    closeThread();
     Object.keys(inflight).forEach(function (key) { delete inflight[key]; });
     paintNotices();
     paintInbox();
     loadNotices(gen, uid);
+    loadInbox(gen, uid);
   }
 
   function applyState(id, read, hidden) {
@@ -461,7 +638,9 @@
         setStatus(plainError(res && res.error));
         return;
       }
-      helpNotes = helpNotes.filter(function (row) { return row.id !== id; });
+      threads = threads.filter(function (row) { return row.id !== id; });
+      if (threadId === id) closeThread();
+      setStatus("Cleared for both sides.");
       paintInbox();
     }, function () {
       unlock("help:" + id);
@@ -485,7 +664,19 @@
       closeDesk();
       return;
     }
+    if (act === "tab") {
+      selectTab(btn.getAttribute("data-tab"), false);
+      return;
+    }
+    if (act === "back") {
+      backToList();
+      return;
+    }
     if (!isId(id)) return;
+    if (act === "thread") {
+      openThread(id);
+      return;
+    }
     const state = receipts[id] || { read: false, hidden: false };
     if (act === "read") applyState(id, true, !!state.hidden);
     else if (act === "unread") applyState(id, false, !!state.hidden);
@@ -494,7 +685,7 @@
     } else if (act === "retract") {
       if (confirmOr(btn, "Remove for everyone?")) retractNotice(id);
     } else if (act === "drop-help") {
-      if (confirmOr(btn, "Clear this note?")) dropHelp(id);
+      if (confirmOr(btn, "Clear for both sides?")) dropHelp(id);
     }
   }
 
@@ -527,10 +718,47 @@
         return;
       }
       helpForm.reset();
-      setStatus("The operator has your note.");
+      setStatus("The operator has your note. Replies will appear in your inbox.");
+      closeThread();
+      selectTab("inbox", false);
       loadInbox(gen, uid);
     }, function () {
       unlock("help-send");
+      if (still(gen, uid)) setStatus("That could not be saved.");
+    });
+  }
+
+  function submitReply(event) {
+    event.preventDefault();
+    const id = threadId;
+    if (!userId() || !isId(id)) return;
+    const body = clippedBlock(replyForm.body.value, BODY_MAX);
+    if (!body) {
+      setStatus("Write a reply first.");
+      return;
+    }
+    if (!lock("reply")) return;
+    const db = client();
+    const gen = generation;
+    const uid = userId();
+    if (!db || typeof db.rpc !== "function") {
+      unlock("reply");
+      setStatus("That could not be saved.");
+      return;
+    }
+    db.rpc("exhibit_help_reply", { p_note: id, p_body: body }).then(function (res) {
+      unlock("reply");
+      if (!still(gen, uid)) return;
+      if (!res || res.error) {
+        setStatus(plainError(res && res.error));
+        return;
+      }
+      replyForm.reset();
+      setStatus("Reply sent.");
+      if (threadId === id) loadThread(gen, uid, id);
+      loadInbox(gen, uid);
+    }, function () {
+      unlock("reply");
       if (still(gen, uid)) setStatus("That could not be saved.");
     });
   }
@@ -569,6 +797,30 @@
     });
   }
 
+  function selectTab(name, focus) {
+    if (TABS.indexOf(name) < 0 || !tabButtons[name]) return;
+    tab = name;
+    TABS.forEach(function (key) {
+      const on = key === name;
+      tabButtons[key].setAttribute("aria-selected", on ? "true" : "false");
+      tabButtons[key].tabIndex = on ? 0 : -1;
+      tabPanes[key].hidden = !on;
+    });
+    if (focus) tabButtons[name].focus();
+  }
+
+  function onTabKey(event) {
+    const at = TABS.indexOf(tab);
+    let next = -1;
+    if (event.key === "ArrowRight") next = (at + 1) % TABS.length;
+    else if (event.key === "ArrowLeft") next = (at + TABS.length - 1) % TABS.length;
+    else if (event.key === "Home") next = 0;
+    else if (event.key === "End") next = TABS.length - 1;
+    if (next < 0) return;
+    event.preventDefault();
+    selectTab(TABS[next], true);
+  }
+
   function diagramOpen() {
     return !!document.querySelector(".mm.is-full, .chain.is-full");
   }
@@ -590,8 +842,11 @@
     root.classList.add("is-open");
     panel.hidden = false;
     launcher.setAttribute("aria-expanded", "true");
+    if (inboxUnread() && !unreadCount()) selectTab("inbox", false);
     const closeBtn = panel.querySelector(".desk-close");
     if (closeBtn) closeBtn.focus();
+    const uid = userId();
+    if (uid) loadInbox(generation, uid);
   }
 
   function closeDesk() {
@@ -624,12 +879,93 @@
     return input;
   }
 
+  function buildTab(tabs, name, label) {
+    const btn = node("button", "desk-tab");
+    btn.type = "button";
+    btn.id = "desk-tab-" + name;
+    btn.setAttribute("role", "tab");
+    btn.setAttribute("aria-controls", "desk-pane-" + name);
+    btn.setAttribute("data-desk", "tab");
+    btn.setAttribute("data-tab", name);
+    const text = node("span");
+    text.textContent = label;
+    btn.appendChild(text);
+    if (name !== "write") {
+      const count = node("span", "desk-count");
+      count.hidden = true;
+      btn.appendChild(count);
+      tabCounts[name] = count;
+    }
+    tabs.appendChild(btn);
+    tabButtons[name] = btn;
+  }
+
+  function buildPane(name) {
+    const pane = node("div", "desk-pane");
+    pane.id = "desk-pane-" + name;
+    pane.setAttribute("role", "tabpanel");
+    pane.setAttribute("aria-labelledby", "desk-tab-" + name);
+    tabPanes[name] = pane;
+    return pane;
+  }
+
+  function buildNotices() {
+    const pane = buildPane("notices");
+    const notes = node("section", "desk-section");
+    const heading = node("h3");
+    heading.textContent = "From the operator";
+    notes.appendChild(heading);
+    syncLine = line(notes, "desk-note", "Sign in to keep read and removed notes with your account.");
+    listNode = node("div");
+    notes.appendChild(listNode);
+    pane.appendChild(notes);
+    return pane;
+  }
+
+  function buildInbox() {
+    const pane = buildPane("inbox");
+    inboxGuest = line(pane, "desk-note desk-section", "Sign in to see the notes you sent and the operator's replies.");
+    inboxListView = node("section", "desk-section");
+    inboxHeading = node("h3");
+    inboxListView.appendChild(inboxHeading);
+    inboxList = node("div", "desk-threads");
+    inboxListView.appendChild(inboxList);
+    pane.appendChild(inboxListView);
+
+    threadView = node("section", "desk-section");
+    threadView.hidden = true;
+    threadBack = node("button", "desk-text");
+    threadBack.type = "button";
+    threadBack.setAttribute("data-desk", "back");
+    threadBack.textContent = "← All messages";
+    threadView.appendChild(threadBack);
+    threadTitle = node("h3", "desk-thread-head");
+    threadView.appendChild(threadTitle);
+    threadMeta = line(threadView, "desk-note", "");
+    threadList = node("div", "desk-msgs");
+    threadView.appendChild(threadList);
+    replyForm = node("form", "desk-reply");
+    field(replyForm, "textarea", "body", "Reply", BODY_MAX);
+    const send = node("button", "desk-send");
+    send.type = "submit";
+    send.textContent = "Send reply";
+    replyForm.appendChild(send);
+    replyForm.addEventListener("submit", submitReply);
+    threadView.appendChild(replyForm);
+    const actions = node("div", "desk-actions");
+    threadClear = actionButton("Clear for both sides", "drop-help", "");
+    actions.appendChild(threadClear);
+    threadView.appendChild(actions);
+    pane.appendChild(threadView);
+    return pane;
+  }
+
   function buildHelp() {
     const section = node("section", "desk-section");
     const heading = node("h3");
     heading.textContent = "Write to the operator";
     section.appendChild(heading);
-    guestLine = line(section, "desk-note", "Sign in to send a note. It stays with your account, and the operator sees only your confirmed address.");
+    guestLine = line(section, "desk-note", "Sign in to send a note. Replies come back to your inbox, and the operator sees only your confirmed address.");
     helpForm = node("form");
     field(helpForm, "input", "subject", "Subject", TITLE_MAX);
     field(helpForm, "textarea", "body", "Message", BODY_MAX);
@@ -660,15 +996,11 @@
     return publishSection;
   }
 
-  function buildInbox() {
-    inboxSection = node("section", "desk-section desk-admin");
-    inboxSection.hidden = true;
-    const heading = node("h3");
-    heading.textContent = "Notes to you";
-    inboxSection.appendChild(heading);
-    inboxList = node("div");
-    inboxSection.appendChild(inboxList);
-    return inboxSection;
+  function buildWrite() {
+    const pane = buildPane("write");
+    pane.appendChild(buildHelp());
+    pane.appendChild(buildPublish());
+    return pane;
   }
 
   function build() {
@@ -713,26 +1045,27 @@
     head.appendChild(titles);
     head.appendChild(closeBtn);
     sheet.appendChild(head);
+    const tabs = node("div", "desk-tabs");
+    tabs.setAttribute("role", "tablist");
+    tabs.setAttribute("aria-label", "Messages");
+    buildTab(tabs, "notices", "Notices");
+    buildTab(tabs, "inbox", "Inbox");
+    buildTab(tabs, "write", "Write");
+    tabs.addEventListener("keydown", onTabKey);
+    sheet.appendChild(tabs);
     statusNode = node("p", "desk-status");
     statusNode.setAttribute("role", "status");
     sheet.appendChild(statusNode);
-    const notes = node("section", "desk-section");
-    const notesHeading = node("h3");
-    notesHeading.textContent = "From the operator";
-    notes.appendChild(notesHeading);
-    syncLine = line(notes, "desk-note", "Sign in to keep read and removed notes with your account.");
-    listNode = node("div");
-    notes.appendChild(listNode);
-    sheet.appendChild(notes);
-    sheet.appendChild(buildHelp());
-    sheet.appendChild(buildPublish());
+    sheet.appendChild(buildNotices());
     sheet.appendChild(buildInbox());
+    sheet.appendChild(buildWrite());
     panel.appendChild(backdrop);
     panel.appendChild(sheet);
     root.appendChild(launcher);
     root.appendChild(panel);
     root.addEventListener("click", onPanelClick);
     document.body.appendChild(root);
+    selectTab(tab, false);
   }
 
   function mount() {

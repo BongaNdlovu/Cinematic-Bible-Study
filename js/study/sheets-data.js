@@ -126,7 +126,7 @@
                 cite: "Daniel 1:2",
                 text: "The Lord hands over kings and directs history.",
                 image: "assets/study/diagrams/exile.jpg",
-                alt: "Original AI-created cinematic scene of a lone figure looking across a cold, mountainous wilderness.",
+                alt: "Original cinematic scene of a lone figure looking across a cold, mountainous wilderness.",
                 detail: "Daniel opens in the year the temple vessels are carried to Shinar, and the verse names the actor: “the Lord gave Jehoiakim king of Judah into his hand.” Babylon did not win by weight of arms. The chain does not begin with an empire; it begins with a hand."
 ,
                 "bridgeShare": "the same God who gave the king over and gave His Son",
@@ -138,7 +138,7 @@
                 cite: "Daniel 9:26; Isaiah 53:5–8",
                 text: "The chain is not an end in itself. Both ends meet here, at the cross.",
                 image: "assets/study/diagrams/cross.jpg",
-                alt: "Original AI-created cinematic scene of a wooden cross on a rocky hill at golden dawn.",
+                alt: "Original cinematic scene of a wooden cross on a rocky hill at golden dawn.",
                 detail: "Gabriel dates the cutting off of Messiah inside the seventieth week, and the historicist reading lands it in A.D. 31. Every metal before this point and every divided kingdom after it is measured against this event, which is why the chain cannot be read as a political forecast."
 ,
                 "bridgeShare": "the Messiah cut off and the King who fills the earth",
@@ -150,7 +150,7 @@
                 cite: "Daniel 2:35",
                 text: "The supernatural Stone fills the whole earth.",
                 image: "assets/study/diagrams/glory.jpg",
-                alt: "Original AI-created cinematic scene of a radiant sunrise seen from a stone opening, evoking hope and a coming kingdom.",
+                alt: "Original cinematic scene of a radiant sunrise seen from a stone opening, evoking hope and a coming kingdom.",
                 detail: "The stone is cut without hands and it strikes in the days of the divided kings, not during Babylon or Rome at its height. Daniel 2:44 puts the kingdom in the hands of the God of heaven; verse 35 leaves it filling the whole earth. The line that started with a handed-over king ends with a kingdom no one hands over."
               }
             ],

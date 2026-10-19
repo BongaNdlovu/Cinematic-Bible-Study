@@ -45,9 +45,17 @@ for (const m of index.matchAll(/<link[^>]+rel="stylesheet"[^>]+href="(css\/[^"]+
 }
 
 assert(index.includes("js/home/shelf.js"), "index.html must load the shelf scene");
+const importMapAt = index.indexOf('<script type="importmap">');
+for (const m of index.matchAll(/<link[^>]+rel="modulepreload"[^>]+href="([^"]+)"/g)) {
+  assert(importMapAt !== -1 && m.index > importMapAt, "a modulepreload must follow the import map");
+  const src = fs.readFileSync(local(m[1]), "utf8");
+  assert(!/(?:from|import)\s*\(?\s*['"]three['"]/.test(src), "do not modulepreload " + m[1] + "; it imports the bare specifier three, and a cached reload then cannot draw the shelf");
+}
 const shelf = fs.readFileSync(path.join(ROOT, "js", "home", "shelf.js"), "utf8");
 const portrait = /const SHELF_PORTRAIT = '([^']+)'/.exec(shelf);
 assert(portrait, "shelf.js must name the painting it waits for before the shelf is ready");
+assert(!shelf.includes("o.frustumCulled = false"), "the shelf loader must not turn frustum culling off for the whole scene");
+assert(!shelf.includes("for (const on of [true, false])"), "the shelf loader must not render once with the reading lights on and once with them off");
 eager.set(local(portrait[1]), "shelf painting");
 
 assert(eager.size >= 2, "the home page budget must cover the shelf painting and the social preview at least");

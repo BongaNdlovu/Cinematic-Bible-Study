@@ -453,6 +453,13 @@
 }
 .acct-settings.is-lit, .account-password-box.is-lit { box-shadow: var(--cx-shadow), var(--cx-glow); }
 
+#account-mfa-secret {
+  margin: 0 0 12px;
+  overflow-wrap: anywhere;
+  font-family: var(--cx-mono, ui-monospace, monospace);
+  font-size: 13px;
+  color: var(--cx-gold-soft, #e5b93b);
+}
 .acct-error {
   padding: 14px 18px;
   border-radius: var(--cx-radius-sm);

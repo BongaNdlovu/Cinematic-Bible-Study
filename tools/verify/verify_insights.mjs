@@ -414,6 +414,79 @@ const funnelCalculated = Dashboard.funnelRows();
 assert.strictEqual(funnelCalculated[0].started, 1, 'Sitting 0 starts should be 1');
 assert.strictEqual(funnelCalculated[0].completed, 1, 'Sitting 0 completions should be 1');
 
+const operatorDevice = 'dev-operator';
+Dashboard.setCache({
+  events: [
+    { event: 'sitting_start', sitting: 1, user_id: 'reader-a', created_at: '2026-01-02T00:00:00Z' },
+    { event: 'sitting_start', sitting: 1, user_id: 'reader-a', created_at: '2026-01-02T01:00:00Z' },
+    { event: 'sitting_start', sitting: 1, anon_id: 'guest-1', created_at: '2026-01-02T02:00:00Z' },
+    { event: 'sitting_start', sitting: 1, anon_id: operatorDevice, created_at: '2026-01-02T03:00:00Z' },
+    { event: 'sitting_complete', sitting: 1, user_id: 'usr_abc_123', anon_id: operatorDevice, detail: { seconds: 60 }, created_at: '2026-01-02T04:00:00Z' }
+  ],
+  surveys: [],
+  profiles: [],
+  progress: [{ user_id: 'usr_abc_123', journey: { completedSheets: [1] }, updated_at: '2026-01-02T04:00:00Z' }]
+});
+Dashboard.setHideMine(true);
+let sitting1 = Dashboard.funnelRows()[1];
+assert.strictEqual(sitting1.started, 2, 'a reader who opens a sitting twice counts once, and the operator browser is left out');
+assert.strictEqual(sitting1.opens, 3, 'raw opens still count every open outside the operator');
+assert.strictEqual(sitting1.completed, 0, 'the operator finishing a sitting is left out');
+Dashboard.setHideMine(false);
+sitting1 = Dashboard.funnelRows()[1];
+assert.strictEqual(sitting1.started, 3, 'with the operator included, three people opened sitting 1');
+assert.strictEqual(sitting1.completed, 1, 'with the operator included, one person finished sitting 1');
+
+const renderGrid = { innerHTML: '', querySelectorAll: () => [] };
+const priorGetId = global.document.getElementById;
+global.document.getElementById = (id) => (id === 'insights-grid' ? renderGrid : null);
+Dashboard.setHideMine(true);
+Dashboard.render();
+assert(!renderGrid.innerHTML.includes('()'), 'a zero count must not render as empty brackets');
+assert(/role="cell" class="is-zero">0</.test(renderGrid.innerHTML), 'a zero count renders as 0');
+assert(renderGrid.innerHTML.includes('No quiz answers in this range.'), 'an empty quiz panel says so');
+global.document.getElementById = priorGetId;
+
+const allSittings = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+Dashboard.setCache({
+  events: [{ event: 'feature_use', user_id: 'grad-b', detail: { feature: 'cert_download' }, created_at: '2026-01-03T00:00:00Z' }],
+  surveys: [],
+  profiles: [],
+  graduates: null,
+  progress: [
+    { user_id: 'grad-a', journey: { completedSheets: allSittings }, certificate_name: 'Ada', updated_at: '2026-01-04T00:00:00Z' },
+    { user_id: 'grad-b', journey: { completedSheets: allSittings.concat([3, 3]) }, certificate_name: '', updated_at: '2026-01-05T00:00:00Z' },
+    { user_id: 'padded', journey: { completedSheets: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 9, 9] }, updated_at: '2026-01-05T00:00:00Z' },
+    { user_id: 'usr_abc_123', journey: { completedSheets: allSittings }, updated_at: '2026-01-06T00:00:00Z' }
+  ]
+});
+Dashboard.setHideMine(true);
+let grads = Dashboard.graduateRows();
+assert.deepStrictEqual(grads.map((g) => g.user_id), ['grad-b', 'grad-a'], 'graduates need all eleven distinct sittings, newest first, without the operator');
+assert.strictEqual(grads[0].downloaded_at, '2026-01-03T00:00:00Z', 'a certificate download event is matched to its reader');
+Dashboard.setCache({
+  events: [],
+  surveys: [],
+  profiles: [],
+  progress: [],
+  graduates: [
+    { user_id: 'grad-a', email: 'ada@example.com', certificate_name: 'Ada', sittings: 11, serial: 'SD-2026-0A1B2C3D', issued_at: '2026-01-04T00:00:00Z', certificates: 1, last_active: '2026-01-04T00:00:00Z' },
+    { user_id: 'grad-c', email: null, certificate_name: 'Bad', sittings: 11, serial: '<b>x</b>', certificates: 0 },
+    { user_id: 'usr_abc_123', email: 'op@example.com', certificate_name: 'Op', sittings: 11, serial: 'SD-2026-FFFFFFFF', certificates: 1 }
+  ]
+});
+grads = Dashboard.graduateRows();
+assert.strictEqual(grads.length, 2, 'the operator is left out of the graduate list');
+assert.strictEqual(grads[0].serial, 'SD-2026-0A1B2C3D', 'a well-formed certificate number is kept');
+assert.strictEqual(grads[1].serial, '', 'a malformed certificate number is dropped');
+const gradGrid = { innerHTML: '', querySelectorAll: () => [] };
+global.document.getElementById = (id) => (id === 'insights-grid' ? gradGrid : null);
+Dashboard.render();
+assert(gradGrid.innerHTML.includes('ada@example.com') && gradGrid.innerHTML.includes('SD-2026-0A1B2C3D'), 'the graduates panel lists address and certificate number');
+assert(!gradGrid.innerHTML.includes('<b>x</b>'), 'graduate fields render as text');
+global.document.getElementById = priorGetId;
+Dashboard.setCache({ events: dashEvents, surveys: dashSurveys, profiles: dashProfiles });
+
 // Verify CSV escaping using actual dashboard function
 assert.strictEqual(Dashboard.csvEscape('hello'), 'hello');
 assert.strictEqual(Dashboard.csvEscape('hello, world'), '"hello, world"');

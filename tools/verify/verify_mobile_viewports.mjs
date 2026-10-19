@@ -163,8 +163,13 @@ try {
 
     const bodyText = await page.locator("#terms-form").textContent();
     assert(
-      bodyText.includes("admin@endoftime7.com"),
-      "Terms must include admin@endoftime7.com as the site operator email for deletion requests"
+      bodyText.includes("To ask for deletion, email shelfofdaniel@gmail.com, or sign in, open Messages, and choose Write to the operator."),
+      "Terms must tell readers how to ask the operator for deletion"
+    );
+    const listedEmails = bodyText.match(/[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[a-z]{2,}/g) || [];
+    assert(
+      listedEmails.every((address) => address === "shelfofdaniel@gmail.com"),
+      "Terms must list shelfofdaniel@gmail.com as the only operator email"
     );
     console.log(`✓ Account page copy verified on ${vp.name}`);
 

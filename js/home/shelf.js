@@ -1969,16 +1969,6 @@ async function startRoom() {
       dropHi(old);
     }
   }
-  function buildHi(b) {
-    if (b.hi) { touchHi(b); return; }
-    ensureCoverArt(b.v.i);
-    if (artPending(b.v.i)) { scheduleHi(b, true); return; }
-    const k = hiJobs.findIndex((j) => j.b === b);
-    if (k >= 0) hiJobs.splice(k, 1);
-    const g = hiSteps(b);
-    let r = g.next();
-    while (!r.done) r = g.next();
-  }
   function scheduleHi(b, urgent) {
     if (b.hi) { touchHi(b); return; }
     const k = hiJobs.findIndex((j) => j.b === b);
@@ -2523,24 +2513,28 @@ async function startRoom() {
     updateTag();
   }
 
+  // The shelf at rest hides the reading lights. Compiling that rig, and the
+  // rig with the lights on, before the first picture kept the loader up for
+  // about eight seconds on a cold shader cache. Draw the resting shelf once.
   setLoader(1, 'Lighting the lamp…');
   await nextFrame();
-  buildHi(books[continueIndex()]);
-  const warmed = [];
-  scene.traverse((o) => {
-    if (!(o.isMesh || o.isPoints || o.isSprite)) return;
-    warmed.push([o, o.visible, o.frustumCulled]);
-    o.visible = true; o.frustumCulled = false;
-  });
-  for (const on of [true, false]) {
-    key.visible = glint.visible = rim.visible = on;
-    requestShadows(lamp); requestShadows(key); requestShadows(candleRig.light);
-    render();
-  }
-  for (const [o, vis, culled] of warmed) { o.visible = vis; o.frustumCulled = culled; }
   key.visible = glint.visible = rim.visible = false;
-  renderer.compile(scene, camera);
+  requestShadows(lamp);
+  requestShadows(candleRig.light);
+  render();
   loop();
+  // The pulled-book lights are a second shader variant. Warm them after the
+  // opening move, without holding the loader.
+  setTimeout(() => {
+    const show = [key.visible, glint.visible, rim.visible];
+    key.visible = glint.visible = rim.visible = true;
+    let pending = null;
+    try { pending = renderer.compileAsync(scene, camera); } catch (e) {}
+    key.visible = show[0];
+    glint.visible = show[1];
+    rim.visible = show[2];
+    if (pending && pending.catch) pending.catch(() => {});
+  }, 3600);
 
   api = { pull, put, step, setView: (v) => setView(v), focusStep, focused: () => focusIdx };
   window.__shelf = { books, camera, scene, renderer, api, state: () => ({ running, stageInView, tabVisible, rafId, dpr: dprCur }), advance(sec) { for (let k = 0; k < sec * 60; k++) { update(1 / 60); pumpHi(); } render(); } };
@@ -2636,20 +2630,26 @@ async function answerInvite() {
   const auth = window.ScrollAuth;
   const ready = auth && typeof auth.ready === 'function' ? Promise.resolve(auth.ready()).catch(() => {}) : Promise.resolve();
   await Promise.race([ready, new Promise((r) => setTimeout(r, INVITE_AUTH_WAIT_MS))]);
-  if (window.Onboard && typeof window.Onboard.gate === 'function') await window.Onboard.gate();
   if (can(i) || !signedIn()) enterSitting(i);
   else location.href = 'study.html?sheet=' + i;
 }
 
 (async function boot() {
+  const modulesReady = Promise.all([
+    import('three'),
+    import('three/addons/postprocessing/EffectComposer.js'),
+    import('three/addons/postprocessing/RenderPass.js'),
+    import('three/addons/postprocessing/UnrealBloomPass.js'),
+    import('three/addons/postprocessing/OutputPass.js'),
+    import('three/addons/postprocessing/ShaderPass.js')
+  ]);
   answerInvite();
   buildChrome();
   wireUI();
   watchForRefresh();
   setLoader(0.06, 'Opening the reading room…');
   try {
-    await whenShown(body);
-    await Promise.all([loadFonts(), loadMotifs()]);
+    await Promise.all([whenShown(body), loadFonts(), loadMotifs(), modulesReady]);
     const room = await startRoom();
     body.classList.remove('is-loading');
     body.classList.add('is-ready');

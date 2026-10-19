@@ -475,7 +475,7 @@ Notes:
 .footer::after { transform: scaleX(-1); }
 ```
 
-The target has **no story-level footer**. The source footer text is "Original AI-created artwork · Scripture references shown on each panel", which is specific to that prototype's provenance. **Recommendation: do not port.** If a caption rail is wanted, add it as `.story-footer` with the same rule block, not by repurposing the page footer.
+The target has **no story-level footer**. The source footer text is "Original artwork · Scripture references shown on each panel", which is specific to that prototype's provenance. **Recommendation: do not port.** If a caption rail is wanted, add it as `.story-footer` with the same rule block, not by repurposing the page footer.
 
 ### 3.7 Source-only extras: `.link` / `.bridge` (source lines 191–208)
 

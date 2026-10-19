@@ -20,6 +20,16 @@ assert(!/grant select[\s\S]{0,80}exhibit_help_notes/.test(sql), 'help notes are 
 assert(sql.includes('exhibit_help_inbox()'), 'the operator reads notes through a guarded function');
 assert(sql.includes('email_confirmed_at is not null'), 'only a confirmed address is returned to the operator');
 assert(sql.includes('auth.uid()'), 'receipts and notes are stamped to the signed-in reader');
+assert(sql.includes('revoke all on public.exhibit_help_replies'), 'replies are not a public table');
+assert(!/grant (select|insert|update|delete)[^;]*exhibit_help_replies/.test(sql), 'replies are reached only through the guarded functions');
+assert(sql.includes('(n.user_id = auth.uid() or public.is_review_moderator())'), 'a thread opens only for its writer or a moderator');
+assert(sql.includes('(v_owner <> auth.uid() and not v_operator)'), 'only the writer or a moderator may reply');
+assert(sql.includes('v_limit integer := case when public.is_review_moderator() then 200 else 20 end'), 'replies are capped per day');
+assert(sql.includes('>= v_limit then'), 'the reply cap is checked against the daily limit');
+assert(!/if \(select count\(\*\)[\s\S]{0,200}case when[\s\S]{0,40}then[\s\S]{0,40}end then/.test(sql), 'a CASE inside an IF condition breaks the PL/pgSQL parser');
+assert(sql.includes('note_id uuid not null references public.exhibit_help_notes (id) on delete cascade'), 'clearing a note clears its replies');
+assert(desk.includes('exhibit_help_mine') && desk.includes('exhibit_help_thread') && desk.includes('exhibit_help_reply'), 'the desk inbox uses the guarded functions');
+assert(!desk.includes('from("exhibit_help_replies")'), 'the client must not query the replies table');
 assert(!desk.includes('innerHTML'), 'desk must not assign HTML from message text');
 assert(desk.includes('textContent'), 'desk renders message text as text');
 assert(!desk.includes('author_id'), 'the client must not ask for the notice author');

@@ -302,6 +302,36 @@ body.white-mode .br-root .sheet-diagram .chain-text {
   color: var(--chain-muted);
 }
 
+/* Tables were left on the page's brown ink. On this dark inset that ink
+   disappears, and a light theme's later rule would paint it again. */
+.br-root .sheet-diagram .tbl,
+body.paper-mode .br-root .sheet-diagram .tbl,
+body.white-mode .br-root .sheet-diagram .tbl {
+  --tbl-tile: rgba(255, 250, 236, 0.07);
+  --tbl-grid-line: rgba(197, 155, 39, 0.28);
+  --tbl-panel-line: rgba(197, 155, 39, 0.48);
+}
+.br-root .sheet-diagram .tbl-grid,
+body.paper-mode .br-root .sheet-diagram .tbl-grid,
+body.white-mode .br-root .sheet-diagram .tbl-grid {
+  background: linear-gradient(var(--tbl-tile), rgba(255, 250, 236, 0.02));
+}
+.br-root .sheet-diagram .tbl .tbl-head,
+body.paper-mode .br-root .sheet-diagram .tbl .tbl-head,
+body.white-mode .br-root .sheet-diagram .tbl .tbl-head {
+  color: #f7f1e4;
+}
+.br-root .sheet-diagram .tbl .tbl-cell,
+body.paper-mode .br-root .sheet-diagram .tbl .tbl-cell,
+body.white-mode .br-root .sheet-diagram .tbl .tbl-cell {
+  color: #f6edd8;
+}
+.br-root .sheet-diagram .tbl .tbl-label,
+body.paper-mode .br-root .sheet-diagram .tbl .tbl-label,
+body.white-mode .br-root .sheet-diagram .tbl .tbl-label {
+  color: #e7d7b4;
+}
+
 /* A checkpoint is a page of the lesson: cream stock, dark ink, one question.
    It sits in the book on every theme, and in scroll view as the same card. */
 .checkpoint-plate {

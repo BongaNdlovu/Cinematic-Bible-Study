@@ -147,7 +147,8 @@
 .witnesses--page .witness-form-card:hover {
   border-color: var(--cx-line-strong);
 }
-.witnesses--page .witness-form-card textarea {
+.witnesses--page .witness-form-card textarea,
+.witnesses--page .witness-name-field input {
   font-family: var(--cx-ui);
   font-size: 16px;
   border-radius: var(--cx-radius-sm);
@@ -155,7 +156,8 @@
   background: rgba(8, 6, 4, 0.55);
   transition: border-color var(--cx-t2) var(--cx-ease), box-shadow var(--cx-t2) var(--cx-ease), background-color var(--cx-t2) var(--cx-ease);
 }
-.witnesses--page .witness-form-card textarea:focus {
+.witnesses--page .witness-form-card textarea:focus,
+.witnesses--page .witness-name-field input:focus {
   outline: none;
   border-color: var(--cx-gold);
   background: rgba(8, 6, 4, 0.8);
