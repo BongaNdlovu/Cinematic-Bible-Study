@@ -32,6 +32,7 @@
   <script src="js/shared/errors.js"></script>
   <script src="js/shared/ops.js"></script>
   <script src="js/shared/auth.js"></script>
+  <script src="js/shared/captcha.js"></script>
   <script src="js/shared/mfa.js"></script>
   <script src="js/shared/desk.js"></script>
   <script src="js/shared/terms.js"></script>
@@ -145,6 +146,7 @@
             <span>Password</span>
             <input type="password" id="account-password" autocomplete="current-password" placeholder="••••••••">
           </label>
+          <div id="account-captcha" hidden></div>
           <button type="submit" id="account-email-go" class="cx-btn is-solid">Sign in with email</button>
         </form>
         <div class="acct-email-actions">

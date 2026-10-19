@@ -270,6 +270,7 @@
 
   function finishAuth(res, err) {
     signingIn = false;
+    if (window.BACaptcha && typeof window.BACaptcha.reset === "function") window.BACaptcha.reset();
     if (err) reportError(friendlyAuthError(err), "auth", err);
     else if (res && res.error) reportError(friendlyAuthError(res.error), "auth", res.error);
     renderAll();
