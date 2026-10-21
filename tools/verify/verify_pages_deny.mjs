@@ -5,8 +5,6 @@ import { fileURLToPath } from "url";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..");
 const cf = fs.readFileSync(path.join(ROOT, "tools/deploy-cloudflare-pages.ps1"), "utf8");
-const vercel = fs.readFileSync(path.join(ROOT, "tools/deploy-vercel.ps1"), "utf8");
-const vercelIgnore = fs.readFileSync(path.join(ROOT, ".vercelignore"), "utf8");
 
 assert(cf.includes(" docs"), "Cloudflare stage must exclude the docs folder");
 assert(cf.includes("README.md"), "Cloudflare stage must exclude README.md");
@@ -76,15 +74,11 @@ for (const p of protectedPaths.slice(0, 20)) {
   assert(res.status === 404 && !reached, p + " must be denied by the middleware");
 }
 
-assert(vercel.includes(" docs"), "Vercel stage must exclude the docs folder");
-assert(vercel.includes("README.md"), "Vercel stage must exclude README.md");
-assert(vercel.includes("server.py"), "Vercel stage must exclude server.py");
-assert(vercel.includes(".oxlintrc.json"), "Vercel stage must exclude .oxlintrc.json");
-assert(!/\/XF[^\n]*package\.json/.test(vercel.replace(/\r/g, "")), "Vercel stage must keep package.json");
-
-assert(vercelIgnore.includes("docs/"), ".vercelignore must drop docs/");
-assert(vercelIgnore.includes("README.md"), ".vercelignore must drop README.md");
-assert(vercelIgnore.includes("server.py"), ".vercelignore must drop server.py");
+for (const gone of ["vercel.json", "middleware.js", ".vercelignore", "tools/deploy-vercel.ps1"]) {
+  assert(!fs.existsSync(path.join(ROOT, gone)), gone + " must stay removed: the site deploys only to Cloudflare Pages");
+}
+assert(!fs.readFileSync(path.join(ROOT, "package.json"), "utf8").includes("vercel"), "package.json must not offer a Vercel deploy");
+assert(!fs.readFileSync(path.join(ROOT, "tools/rollback-deploy.mjs"), "utf8").includes("vercel"), "the rollback script must not call Vercel");
 
 const report = await onRequest({
   request: new Request("https://example.test/csp-report", {
@@ -99,4 +93,4 @@ const reportText = await report.text();
 assert.strictEqual(report.status, 503, "a CSP report is refused when the counter is down");
 assert.ok(!reportText.includes("secret"), "a refused CSP report does not echo the blocked address");
 
-console.log("Pages and Vercel stages drop operator files; static folders skip the middleware without exposing protected paths");
+console.log("The Pages stage drops operator files, the Vercel deploy path stays removed, and static folders skip the middleware without exposing protected paths");

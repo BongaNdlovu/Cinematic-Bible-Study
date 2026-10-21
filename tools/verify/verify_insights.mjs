@@ -54,9 +54,6 @@ const headers = fs.readFileSync(path.join(ROOT, '_headers'), 'utf8');
 assert(headers.includes('https://static.cloudflareinsights.com'), '_headers missing static.cloudflareinsights.com in script-src');
 assert(headers.includes('https://cloudflareinsights.com'), '_headers missing cloudflareinsights.com in connect-src');
 
-const vercelJson = fs.readFileSync(path.join(ROOT, 'vercel.json'), 'utf8');
-assert(vercelJson.includes('https://static.cloudflareinsights.com'), 'vercel.json missing static.cloudflareinsights.com');
-assert(vercelJson.includes('https://cloudflareinsights.com'), 'vercel.json missing cloudflareinsights.com');
 console.log('✓ HTML pages, opt-outs, and CSP headers verified.');
 
 // 3. Check terms and journey version

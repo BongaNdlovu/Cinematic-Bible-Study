@@ -1,5 +1,3 @@
-import { execSync } from "node:child_process";
-
 const PROJECT = "cinematic-bible-study-daniel";
 
 function requiredEnv() {
@@ -7,7 +5,7 @@ function requiredEnv() {
   const account = process.env.CLOUDFLARE_ACCOUNT_ID;
   if (token && account) return { token, account };
   console.error("Set CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID to roll back.");
-  console.error("Pages rollback is the Cloudflare API, then `npx vercel rollback`.");
+  console.error("Pages rollback uses the Cloudflare API.");
   console.error("Dashboard: https://developers.cloudflare.com/pages/configuration/rollbacks/");
   process.exit(1);
 }
@@ -42,5 +40,3 @@ if (production.length < 2) {
 const target = production[1];
 await cf(env.account, env.token, "/deployments/" + target.id + "/rollback", "POST");
 console.log("Pages production restored to " + target.id);
-execSync("npx vercel rollback --yes", { stdio: "inherit" });
-console.log("Vercel rollback command finished.");

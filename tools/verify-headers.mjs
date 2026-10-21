@@ -129,9 +129,6 @@ assert(!cspDirectives['connect-src']?.some(v => v.includes('*.supabase.co')), 'C
 assert(cspDirectives['connect-src']?.includes("https://cloudflareinsights.com"), "CSP connect-src includes cloudflareinsights.com");
 assert(cspDirectives['connect-src']?.includes("blob:"), "CSP connect-src includes blob: so GLB textures can load");
 
-const vercelJson = fs.readFileSync(path.join(root, 'vercel.json'), 'utf8');
-assert(vercelJson.includes("connect-src 'self' blob:"), "vercel.json connect-src includes blob:");
-
 // 3. Verify Cache-Control for HTML
 const htmlRule = rules.find(r => r.path === '/*.html');
 assert(htmlRule, 'Rule for "/*.html" exists');
