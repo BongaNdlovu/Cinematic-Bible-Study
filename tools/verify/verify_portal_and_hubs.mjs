@@ -1,7 +1,7 @@
 import { chromium } from 'playwright';
 import fs from 'fs';
 import path from 'path';
-import { ensureServer } from './_server.mjs';
+import { ensureServer, dismissConsent } from './_server.mjs';
 
 fs.mkdirSync(path.join('qa', 'proofs'), { recursive: true });
 
@@ -35,6 +35,7 @@ async function run() {
   try {
     console.log('\n=== Step 1: Verifying index.html shows the shelf of eleven volumes ===');
     await page.goto(`${BASE}/index.html`, { waitUntil: 'networkidle' });
+    await dismissConsent(page);
     await page.waitForFunction(() => document.querySelectorAll('#cat-list .cat-item').length > 0, null, { timeout: 30000 });
     const cardsCount = await page.locator('#cat-list .cat-item').count();
     console.log('   Volumes on the shelf:', cardsCount);

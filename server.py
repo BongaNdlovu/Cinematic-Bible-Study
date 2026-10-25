@@ -8,6 +8,7 @@ import os
 import re
 import sys
 import mimetypes
+import threading
 import webbrowser
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 
@@ -50,6 +51,10 @@ for ext, mime in MIME_TYPES.items():
 
 class NebuchadnezzarHTTPHandler(SimpleHTTPRequestHandler):
     timeout = 10
+    # HTTP/1.1 keep-alive: one thread per held connection instead of one per
+    # request. Every response must now state Content-Length (or close), which
+    # the bodyless branches below already do.
+    protocol_version = "HTTP/1.1"
 
     def guess_type(self, path):
         ext = os.path.splitext(path)[1].lower()
@@ -86,6 +91,7 @@ class NebuchadnezzarHTTPHandler(SimpleHTTPRequestHandler):
         if start > end or start >= size:
             self.send_response(416)
             self.send_header("Content-Range", f"bytes */{size}")
+            self.send_header("Content-Length", "0")
             self.end_headers()
             return None
         try:
@@ -104,6 +110,7 @@ class NebuchadnezzarHTTPHandler(SimpleHTTPRequestHandler):
 
     def do_OPTIONS(self):
         self.send_response(200)
+        self.send_header("Content-Length", "0")
         self.end_headers()
 
     def list_directory(self, path):
@@ -178,6 +185,12 @@ class NebuchadnezzarHTTPServer(ThreadingHTTPServer):
 
 def run_server():
     os.chdir(os.path.dirname(os.path.abspath(__file__)))
+    # Keep-alive holds one thread per connection; 256 KB stacks keep thousands
+    # of idle connections from reserving the default stack size each.
+    try:
+        threading.stack_size(256 * 1024)
+    except (ValueError, RuntimeError):
+        pass
     port = find_open_port(PORT)
     server = NebuchadnezzarHTTPServer((HOST, port), NebuchadnezzarHTTPHandler)
     url = f"http://127.0.0.1:{port}/index.html"

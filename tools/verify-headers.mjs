@@ -104,7 +104,8 @@ csp.split(';').forEach(dir => {
 assert(cspDirectives['default-src']?.includes("'self'"), "CSP default-src includes 'self'");
 assert(!cspDirectives['script-src']?.includes("https://cdn.tailwindcss.com"), "CSP script-src no longer allows the unused Tailwind CDN");
 assert(!cspDirectives['script-src']?.includes("https://cdnjs.cloudflare.com"), "CSP script-src no longer allows the unused cdnjs host");
-assert(cspDirectives['script-src']?.includes("'unsafe-inline'"), "CSP script-src keeps 'unsafe-inline' until the inline scripts move out");
+assert(!cspDirectives['script-src']?.includes("'unsafe-inline'"), "CSP script-src no longer allows arbitrary inline scripts");
+assert(cspDirectives['script-src']?.some(v => /^'sha256-/.test(v)), "CSP script-src carries sha256 hashes for the site's own inline scripts");
 assert(cspDirectives['script-src']?.includes("https://static.cloudflareinsights.com"), "CSP script-src includes static.cloudflareinsights.com");
 assert(cspDirectives['script-src']?.includes("https://challenges.cloudflare.com"), "CSP script-src includes challenges.cloudflare.com for Turnstile");
 assert(cspDirectives['frame-src']?.includes("https://challenges.cloudflare.com"), "CSP frame-src includes challenges.cloudflare.com for Turnstile");

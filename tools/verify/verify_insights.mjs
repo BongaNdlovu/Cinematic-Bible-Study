@@ -59,11 +59,11 @@ console.log('✓ HTML pages, opt-outs, and CSP headers verified.');
 // 3. Check terms and journey version
 console.log('3. Checking terms and journey TERMS_VERSION...');
 const journeyJs = fs.readFileSync(path.join(ROOT, 'js/shared/journey.js'), 'utf8');
-assert(/TERMS_VERSION\s*=\s*5/.test(journeyJs), 'TERMS_VERSION must be 5 in journey.js');
+assert(/TERMS_VERSION\s*=\s*6/.test(journeyJs), 'TERMS_VERSION must be 6 in journey.js');
 
 const accountHtml = fs.readFileSync(path.join(ROOT, 'account.html'), 'utf8');
 assert(accountHtml.includes('id="account-hub"'), 'account.html must be the Account hub');
-assert(accountHtml.includes('What we learn from your study'), 'account.html missing "What we learn from your study" header');
+assert(accountHtml.includes('How your study is kept'), 'account.html missing "How your study is kept" header');
 assert(accountHtml.includes('anonymous until sign-in'), 'account.html must mention anonymous learning until sign-in');
 assert(!accountHtml.includes('You may stop usage analytics'), 'account.html must not promise an analytics off switch');
 assert(!accountHtml.includes('Do Not Track'), 'account.html must not promise a Do Not Track stop');
@@ -193,6 +193,7 @@ global.window = {
   BAAuthConfig: {
     cfAnalyticsToken: 'test-token'
   },
+  SODConsent: { has: () => true },
   addEventListener: (name, fn) => {
     if (!windowListeners[name]) windowListeners[name] = [];
     windowListeners[name].push(fn);
@@ -201,6 +202,7 @@ global.window = {
   innerHeight: 800,
   scrollY: 0
 };
+global.SODConsent = global.window.SODConsent;
 
 global.document = {
   visibilityState: 'visible',

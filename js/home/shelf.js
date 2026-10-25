@@ -354,14 +354,16 @@ function warmSitting(i) {
   if (i === warmedSitting || !can(i)) return;
   warmedSitting = i;
   warmDesk();
-  if (!HTMLScriptElement.supports || !HTMLScriptElement.supports('speculationrules')) return;
+  // Link prefetch rather than a speculation-rules script block: the rules JSON
+  // is built per sitting, and script-src hashes cannot cover dynamic inline
+  // scripts, so a script block here would be refused by the CSP.
   const old = document.getElementById('sitting-prefetch');
   if (old) old.remove();
-  const rules = document.createElement('script');
-  rules.type = 'speculationrules';
-  rules.id = 'sitting-prefetch';
-  rules.textContent = JSON.stringify({ prefetch: [{ source: 'list', urls: [sittingUrl(i)] }] });
-  document.head.appendChild(rules);
+  const link = document.createElement('link');
+  link.id = 'sitting-prefetch';
+  link.rel = 'prefetch';
+  link.href = sittingUrl(i);
+  document.head.appendChild(link);
 }
 
 function enterSitting(i) {
