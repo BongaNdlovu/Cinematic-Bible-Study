@@ -1,6 +1,6 @@
 import assert from "node:assert";
 import { spawn } from "node:child_process";
-import { mkdirSync } from "node:fs";
+import { mkdirSync, statSync } from "node:fs";
 import { chromium } from "playwright";
 
 const PORT = process.env.MAP_PORT || "8013";
@@ -8,6 +8,50 @@ const BASE = `http://127.0.0.1:${PORT}`;
 const LAUNCH = { headless: true, args: ["--use-angle=swiftshader", "--enable-unsafe-swiftshader", "--ignore-gpu-blocklist"] };
 const NOISE = /arcgisonline|openstreetmap|supabase|ERR_|cloudflareinsights|fonts\.g/;
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+const SKY = ["earth-clouds-1k.webp", "earth-night-1k.webp"];
+const CHECKS = [
+  "skip=1 keeps the flat map and loads nothing of the globe",
+  "globe draws nothing when idle",
+  "zooming close drapes satellite imagery on the globe",
+  "zooming in hands over to the map",
+  "zooming the map out returns to the globe",
+  "slider counts the years and snaps to the nearest stop",
+  "place panel shows an aerial view with its landmarks",
+  "site detail opens and flies in",
+  "phone globe loads the small texture and fits the screen",
+  "the sky textures stay small",
+  "globe loads the cloud and night-light textures",
+  "clouds hold still while the globe is idle",
+  "clouds drift only while the globe redraws",
+  "reduce motion keeps the clouds still"
+];
+let passed = 0;
+
+function pass(name) {
+  assert.strictEqual(name, CHECKS[passed], "checks ran out of order");
+  passed++;
+  console.log("PASS " + name);
+}
+
+async function settle(page) {
+  let last = -1;
+  for (let i = 0; i < 40; i++) {
+    const now = await page.evaluate(() => window.__raf);
+    if (now === last) return;
+    last = now;
+    await sleep(750);
+  }
+}
+
+async function drag(page) {
+  await page.mouse.move(640, 420);
+  await page.mouse.down();
+  for (let i = 1; i <= 24; i++) {
+    await page.mouse.move(640 + i * 6, 420);
+    await sleep(40);
+  }
+  await page.mouse.up();
+}
 
 mkdirSync("qa/proofs", { recursive: true });
 
@@ -20,8 +64,8 @@ function countFrames() {
   };
 }
 
-async function open(browser, path, viewport) {
-  const context = await browser.newContext({ viewport: viewport || { width: 1440, height: 900 }, deviceScaleFactor: 1 });
+async function open(browser, path, viewport, extra) {
+  const context = await browser.newContext({ viewport: viewport || { width: 1440, height: 900 }, deviceScaleFactor: 1, ...extra });
   const page = await context.newPage();
   const errors = [];
   const requests = [];
@@ -35,10 +79,10 @@ async function open(browser, path, viewport) {
 
 const globeOn = (page) => page.evaluate(() => document.querySelector(".cmap-root").classList.contains("is-globe-view"));
 
-async function waitFor(page, fn, ms) {
+async function waitFor(page, fn, ms, arg) {
   const end = Date.now() + ms;
   while (Date.now() < end) {
-    if (await page.evaluate(fn)) return true;
+    if (await page.evaluate(fn, arg)) return true;
     await sleep(200);
   }
   return false;
@@ -62,7 +106,7 @@ try {
     assert.deepStrictEqual(t.requests.filter((u) => /globe|three/.test(u)), [], "map view must not load globe code or textures");
     assert.strictEqual(await globeOn(t.page), false);
     assert.deepStrictEqual(t.errors, []);
-    console.log("skip=1 keeps the flat map and loads nothing of the globe");
+    pass("skip=1 keeps the flat map and loads nothing of the globe");
     await t.close();
   }
 
@@ -76,7 +120,7 @@ try {
     const b = await t.page.evaluate(() => window.__raf);
     assert.strictEqual(b - a, 0, "globe kept drawing while idle");
     await t.page.screenshot({ path: "qa/proofs/globe_proof_457.png" });
-    console.log("globe draws nothing when idle");
+    pass("globe draws nothing when idle");
 
     await t.page.mouse.move(900, 300);
     for (let i = 0; i < 3; i++) {
@@ -86,7 +130,7 @@ try {
     assert.ok(await waitFor(t.page, () => !!document.querySelector(".cmap-globe").dataset.imagery, 20000), "close satellite imagery never appeared on the globe");
     assert.ok(await globeOn(t.page), "three wheel steps should not leave the globe");
     await t.page.screenshot({ path: "qa/proofs/globe_proof_imagery.png" });
-    console.log("zooming close drapes satellite imagery on the globe");
+    pass("zooming close drapes satellite imagery on the globe");
 
     for (let i = 0; i < 40 && (await globeOn(t.page)); i++) {
       await t.page.mouse.wheel(0, -120);
@@ -95,15 +139,15 @@ try {
     await sleep(800);
     assert.strictEqual(await globeOn(t.page), false, "zooming in did not hand over to the map");
     assert.ok(!new URL(t.page.url()).searchParams.get("view"), "view=globe left in the URL");
-    console.log("zooming in hands over to the map");
+    pass("zooming in hands over to the map");
 
     for (let i = 0; i < 16 && !(await globeOn(t.page)); i++) {
       await t.page.evaluate(() => document.querySelector(".cmap-zoom [data-zoom=\"-1\"]").click());
       await sleep(450);
     }
     assert.ok(await globeOn(t.page), "zooming the map all the way out did not return to the globe");
-    console.log("zooming the map out returns to the globe");
     assert.deepStrictEqual(t.errors, []);
+    pass("zooming the map out returns to the globe");
     await t.close();
   }
 
@@ -127,7 +171,7 @@ try {
       i.dispatchEvent(new Event("input", { bubbles: true }));
     });
     assert.match(await t.page.evaluate(() => document.querySelector(".cmap-scrub-read span").textContent), /^2,300 of 2,300 years/);
-    console.log("slider counts the years and snaps to the nearest stop");
+    pass("slider counts the years and snaps to the nearest stop");
 
     await t.page.fill(".cmap-search input", "Susa");
     await t.page.click(".cmap-search-hits button[data-id='susa']");
@@ -136,13 +180,13 @@ try {
     assert.strictEqual(await t.page.evaluate(() => document.querySelectorAll(".cmap-dossier .cmap-pois [data-poi]").length), 3);
     assert.strictEqual(await t.page.evaluate(() => document.querySelectorAll(".cmap-dossier .cmap-sat-mark").length), 3, "aerial view should pin the three landmarks");
     assert.ok(await waitFor(t.page, () => Array.from(document.querySelectorAll(".cmap-sat-frame img")).some((i) => i.complete && i.naturalWidth > 0), 15000), "aerial view tiles never loaded");
-    console.log("place panel shows an aerial view with its landmarks");
+    pass("place panel shows an aerial view with its landmarks");
     await t.page.click(".cmap-dossier .cmap-pois [data-poi='1']");
     await sleep(3500);
     assert.ok(await t.page.evaluate(() => !!document.querySelector(".cmap-footprint")), "site outline missing at close zoom");
     await t.page.screenshot({ path: "qa/proofs/globe_proof_site.png" });
-    console.log("site detail opens and flies in");
     assert.deepStrictEqual(t.errors, []);
+    pass("site detail opens and flies in");
     await t.close();
   }
 
@@ -152,12 +196,54 @@ try {
     assert.strictEqual(await t.page.evaluate(() => document.documentElement.scrollWidth), 390, "phone layout scrolls sideways");
     assert.ok(t.requests.some((u) => u.endsWith("earth-day-2k.webp")) && !t.requests.some((u) => u.endsWith("earth-day-4k.webp")), "phone should load the 2k earth only");
     await t.page.screenshot({ path: "qa/proofs/globe_proof_mobile.png" });
-    console.log("phone globe loads the small texture and fits the screen");
     assert.deepStrictEqual(t.errors, []);
+    pass("phone globe loads the small texture and fits the screen");
+    await t.close();
+  }
+
+  {
+    const [clouds, night] = SKY.map((f) => statSync("assets/maps/globe/" + f).size);
+    assert.ok(clouds <= 80000 && night <= 16000, "sky textures over budget: " + clouds + " + " + night + " bytes");
+    pass("the sky textures stay small");
+  }
+
+  {
+    const t = await open(browser, "/map.html?preview=full&view=globe&year=y457");
+    assert.ok(await waitFor(t.page, () => { const d = document.querySelector(".cmap-globe").dataset; return d.clouds !== undefined && d.night === "1"; }, 20000), "clouds or night lights never attached");
+    assert.ok(SKY.every((f) => t.requests.some((u) => u.endsWith(f))), "sky textures were not requested");
+    pass("globe loads the cloud and night-light textures");
+
+    await settle(t.page);
+    const a = await t.page.evaluate(() => ({ raf: window.__raf, drift: document.querySelector(".cmap-globe").dataset.clouds }));
+    await sleep(2000);
+    const b = await t.page.evaluate(() => ({ raf: window.__raf, drift: document.querySelector(".cmap-globe").dataset.clouds }));
+    assert.strictEqual(b.raf - a.raf, 0, "clouds made the idle globe draw");
+    assert.strictEqual(b.drift, a.drift, "clouds moved while idle");
+    pass("clouds hold still while the globe is idle");
+
+    await drag(t.page);
+    assert.ok(await waitFor(t.page, (before) => document.querySelector(".cmap-globe").dataset.clouds !== before, 10000, a.drift), "clouds did not drift while the globe redrew");
+    await t.page.screenshot({ path: "qa/proofs/globe_proof_sky.png" });
+    assert.deepStrictEqual(t.errors, []);
+    pass("clouds drift only while the globe redraws");
+    await t.close();
+  }
+
+  {
+    const t = await open(browser, "/map.html?preview=full&view=globe&year=y457", null, { reducedMotion: "reduce" });
+    assert.ok(await waitFor(t.page, () => document.querySelector(".cmap-globe").dataset.clouds !== undefined, 20000), "clouds never attached with reduced motion");
+    await drag(t.page);
+    await sleep(2500);
+    assert.strictEqual(await t.page.evaluate(() => document.querySelector(".cmap-globe").dataset.clouds), "0.00000", "clouds drifted with reduced motion");
+    assert.deepStrictEqual(t.errors, []);
+    pass("reduce motion keeps the clouds still");
     await t.close();
   }
 
   console.log("globe checks passed");
+} catch (e) {
+  console.log("FAIL " + CHECKS[passed] + " :: " + e.message.split("\n")[0]);
+  process.exitCode = 1;
 } finally {
   if (browser) await browser.close();
   if (server) server.kill();
