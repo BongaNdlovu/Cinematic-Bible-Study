@@ -19,7 +19,7 @@ assert(cf.includes(" workers"), "Cloudflare stage must exclude workers folder");
 assert(cf.includes(" qa-e2e"), "Cloudflare stage must exclude qa-e2e folder");
 assert(cf.includes("start_website.bat"), "Cloudflare stage must exclude start_website.bat");
 
-for (const name of ["skills-lock.json", "tailwind.study.config.js", "three.core.js", "three.module.js", "study-tailwind-src.css", "glossary-enrichment-overrides.json"]) {
+for (const name of ["skills-lock.json", "tailwind.study.config.js", "three.core.js", "three.module.js", "study-tailwind-src.css", "glossary-enrichment-overrides.json", "sheets-data.js"]) {
   assert(cf.includes(" " + name), "Cloudflare stage must exclude " + name);
 }
 assert(/\/XD[^\n]* functions /.test(cf.replace(/\r/g, "")), "Cloudflare stage must not upload the functions source as static files");

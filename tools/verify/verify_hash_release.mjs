@@ -22,9 +22,21 @@ function build(globeSource) {
   put(stage, "css/site.css", "body { background: url(\"../assets/site/hall-bg.jpg\"); }\n");
   put(stage, "css/map.css", ".map { color: red; }\n");
   put(stage, "assets/site/hall-bg.jpg", "jpg-bytes");
+  put(stage, "bible/kjv.json", "{\"books\":{}}");
+  put(stage, "js/study/scripture.js", "fetch(\"bible/kjv.json\");\n");
+  put(stage, "vendor/supabase/supabase.js", "var supabase = 1;\n");
+  put(stage, "vendor/leaflet/leaflet.js", "var L = 1;\n");
+  put(stage, "vendor/leaflet/leaflet.css", ".leaflet-pane { z-index: 400; }\n");
+  put(stage, "vendor/three/build/three.module.min.js", "import './three.core.min.js';\n");
+  put(stage, "vendor/three/build/three.core.min.js", "export {};\n");
   put(stage, "index.html", [
     '<link rel="stylesheet" href="css/site.css?v=cx1">',
     '<link rel="stylesheet" href="css/map.css?v=cx4">',
+    '<link rel="stylesheet" href="vendor/leaflet/leaflet.css">',
+    '<script src="vendor/leaflet/leaflet.js" defer></script>',
+    '<script src="vendor/supabase/supabase.js" defer></script>',
+    '<script src="js/study/scripture.js" defer></script>',
+    '<script type="importmap">{"imports":{"three":"./vendor/three/build/three.module.min.js"}}</script>',
     '<script src="js/shared/boot.js"></script>',
     '<script src="js/map/map.js"></script>',
     ""
@@ -69,6 +81,16 @@ const mapAfter = only(changed, "js/map", /^map\./);
 assert.notStrictEqual(only(changed, "js/map", /^globe\./), globeName, "a changed script gets a new name");
 assert.notStrictEqual(mapAfter, mapName, "a script whose dependency changed gets a new name too, so an immutable cached copy never points at a missing file");
 assert.strictEqual(only(changed, "css", /^site\./), siteCss, "an unchanged stylesheet keeps its name");
+
+const kjvName = only(stage, "bible", /^kjv\./);
+assert.match(kjvName, /^kjv\.[a-f0-9]{12}\.json$/);
+const scripture = fs.readFileSync(path.join(stage, "js", "study", only(stage, "js/study", /^scripture\./)), "utf8");
+assert(scripture.includes("bible/" + kjvName), "a script fetches the hashed name of the Bible data it reads");
+assert.match(html, /vendor\/supabase\/supabase\.[a-f0-9]{12}\.js/, "the Supabase bundle is hashed");
+assert.match(html, /vendor\/leaflet\/leaflet\.[a-f0-9]{12}\.js/, "the Leaflet script is hashed");
+assert.match(html, /vendor\/leaflet\/leaflet\.[a-f0-9]{12}\.css/, "the Leaflet stylesheet is hashed");
+assert(html.includes("./vendor/three/build/three.module.min.js"), "three keeps its name, because three.module.min.js imports ./three.core.min.js by a relative path the hasher cannot rewrite");
+assert(fs.existsSync(path.join(stage, "vendor", "three", "build", "three.core.min.js")), "three.core.min.js keeps its name");
 
 fs.rmSync(stage, { recursive: true, force: true });
 fs.rmSync(changed, { recursive: true, force: true });

@@ -21,35 +21,24 @@
   <link rel="stylesheet" href="css/cinema.css?v=cx2">
   <link rel="stylesheet" href="css/desk.css">
   <script src="js/shared/cinema.js"></script>
-  <script src="js/shared/journey.js"></script>
-  <script src="js/shared/auth-config.js"></script>
-  <script src="vendor/supabase/supabase.js"></script>
-  <script src="js/shared/errors.js"></script>
-  <script src="js/shared/ops.js"></script>
-  <script src="js/shared/auth.js"></script>
-  <script src="js/shared/desk.js"></script>
-  <script src="js/shared/terms.js"></script>
+  <script src="js/shared/journey.js" defer></script>
+  <script src="js/shared/auth-config.js" defer></script>
+  <script src="vendor/supabase/supabase.js" defer></script>
+  <script src="js/shared/errors.js" defer></script>
+  <script src="js/shared/ops.js" defer></script>
+  <script src="js/shared/auth.js" defer></script>
+  <script src="js/shared/desk.js" defer></script>
+  <script src="js/shared/terms.js" defer></script>
   <link rel="stylesheet" href="css/consent.css">
   <script src="js/shared/consent.js"></script>
-  <script src="js/shared/insights.js"></script>
-  <script src="js/shared/reviews.js"></script>
-  <script>if (window.BAJourney) window.BAJourney.load();</script>
+  <script src="js/shared/insights.js" defer></script>
+  <script src="js/shared/reviews.js" defer></script>
+  <script>document.addEventListener("DOMContentLoaded", function () { if (window.BAJourney) window.BAJourney.load(); });</script>
 </head>
 <body class="site cover cinematic-bg">
   <div class="vignette" aria-hidden="true"></div>
   <div class="grain" aria-hidden="true"></div>
-  <nav class="site-nav">
-    <a class="site-brand" href="index.html">THE SHELF OF DANIEL</a>
-    <div class="site-links">
-      <a href="index.html">Home</a>
-      <a href="map.html">Map of History</a>
-      <a href="gallery.html">3D Symbols</a>
-      <a href="#witness-queue" id="admin-reviews-link" hidden>Admin</a>
-      <a href="insights.html" id="admin-insights-link" hidden>Insights</a>
-      <a class="active" href="account.html">Account</a>
-      <span class="auth-slot" data-auth-slot data-auth-variant="nav"></span>
-    </div>
-  </nav>
+  <nav class="site-nav" data-site-nav data-active="account" data-admin-links data-auth-slot-nav></nav>
 
   <main class="notes-page">
     <p class="notes-crumb" data-cx-reveal style="--cx-i:0"><a href="account.html">Account</a> <span aria-hidden="true">/</span> Readers' notes</p>

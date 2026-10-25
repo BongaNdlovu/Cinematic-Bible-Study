@@ -518,8 +518,4 @@
       ]
     }
   ];
-
-  window.sheetMapPack = function (index) {
-    return window.SHEET_MAP[index] || null;
-  };
 })();

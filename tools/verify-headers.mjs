@@ -168,7 +168,10 @@ const expectations = [
   ['/assets/study/audio/sitting-07-readalong.mp3', REVALIDATE, 'unhashed assets revalidate within an hour'],
   ['/assets/site/hero-main.jpg', REVALIDATE, 'unhashed site images revalidate within an hour'],
   ['/vendor/three/build/three.module.min.js', REVALIDATE, 'unhashed vendor files revalidate within an hour'],
-  ['/bible/kjv.json', 'public, max-age=0, must-revalidate', 'Bible data always revalidates'],
+  ['/bible/kjv.0123456789ab.json', IMMUTABLE, 'hashed Bible data is immutable'],
+  ['/vendor/supabase/supabase.0123456789ab.js', IMMUTABLE, 'the hashed Supabase bundle is immutable'],
+  ['/vendor/leaflet/leaflet.0123456789ab.js', IMMUTABLE, 'the hashed Leaflet script is immutable'],
+  ['/vendor/three/build/three.core.min.js', REVALIDATE, 'three keeps its name, so it revalidates within an hour'],
   ['/study.html', 'public, max-age=0, must-revalidate', 'pages always revalidate'],
   ['/', 'public, max-age=0, must-revalidate', 'the home page always revalidates']
 ];

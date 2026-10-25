@@ -109,8 +109,53 @@
     ["terms.html", "Terms"]
   ];
 
+  const NAV_LINKS = [
+    { href: "index.html", label: "Home" },
+    { href: "map.html", label: "Map of History" },
+    { href: "gallery.html", label: "3D Symbols" },
+    { href: "reviews.html#witness-queue", label: "Admin", page: "reviews", adminId: "admin-reviews-link" },
+    { href: "insights.html", label: "Insights", page: "insights", adminId: "admin-insights-link" },
+    { href: "account.html", label: "Account", page: "account" }
+  ];
+
+  const CREST =
+    '<svg class="crest" viewBox="0 0 32 32" fill="none" aria-hidden="true">' +
+      '<path d="M16 2.5L5 7.5v9.5c0 7.8 4.7 15.1 11 16.5 6.3-1.4 11-8.7 11-16.5V7.5L16 2.5z" stroke="currentColor" stroke-width="1.6"/>' +
+      '<path d="M11 15.5l3.5 3.5 6.5-6.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>' +
+    "</svg>";
+
   function esc(s) {
     return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; });
+  }
+
+  function navLink(link, active, withAdmin) {
+    const isActive = !!link.page && link.page === active;
+    if (link.adminId && !isActive && !withAdmin) return "";
+    if (isActive) return '<a class="active" href="' + link.href + '" aria-current="page">' + esc(link.label) + "</a>";
+    if (link.adminId) return '<a href="' + link.href + '" id="' + link.adminId + '" hidden>' + esc(link.label) + "</a>";
+    return '<a href="' + link.href + '">' + esc(link.label) + "</a>";
+  }
+
+  function nav(host) {
+    if (host.dataset.siteNavReady) return;
+    host.dataset.siteNavReady = "1";
+    const active = host.dataset.active || "";
+    const withAdmin = host.hasAttribute("data-admin-links");
+    const links = NAV_LINKS.map(function (l) { return navLink(l, active, withAdmin); }).join("");
+    const slot = host.hasAttribute("data-auth-slot-nav") ? '<span class="auth-slot" data-auth-slot data-auth-variant="nav"></span>' : "";
+    host.innerHTML =
+      '<a class="site-brand" href="index.html">' + (host.hasAttribute("data-crest") ? CREST : "") + "THE SHELF OF DANIEL</a>" +
+      '<div class="site-links">' + links + slot + "</div>";
+  }
+
+  function navs() {
+    document.querySelectorAll("nav[data-site-nav]").forEach(nav);
+  }
+
+  if (document.readyState === "loading" && "MutationObserver" in window) {
+    const watch = new MutationObserver(navs);
+    watch.observe(document.documentElement, { childList: true, subtree: true });
+    document.addEventListener("DOMContentLoaded", function () { watch.disconnect(); }, { once: true });
   }
 
   function footer() {
@@ -144,7 +189,7 @@
 
   window.Cinema = { reveal: reveal, swap: swap, sweep: sweep, reduced: reduced };
 
-  function boot() { footer(); reveal(document); }
+  function boot() { navs(); footer(); reveal(document); }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot);
   else boot();
 })();

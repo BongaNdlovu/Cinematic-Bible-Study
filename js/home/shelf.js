@@ -2333,7 +2333,7 @@ async function startRoom() {
   function governor(raw) {
     frameRing[frameN % 60] = raw;
     frameN++;
-    if (frameN % 60 !== 0 || window.__shelfGovernorOff === true) return;
+    if (frameN % 60 !== 0) return;
     if (intro < introLen || books.some((b) => b.mode === 'seq')) { fastWins = 0; return; }
     const sorted = Array.from(frameRing).sort((a, b) => a - b);
     const med = (sorted[29] + sorted[30]) / 2;

@@ -34,25 +34,25 @@
   </script>
   <!-- Only the core build. The postprocessing files import the bare name "three", and a modulepreload of them is resolved by the preload scanner before the import map on a cached reload, which leaves the shelf blank. -->
   <link rel="modulepreload" href="vendor/three/build/three.module.min.js">
-  <script src="js/shared/covers.js"></script>
+  <script src="js/shared/covers.js" defer></script>
   <script src="js/shared/cinema.js"></script>
-  <script src="js/shared/journey.js"></script>
-  <script src="js/shared/auth-config.js"></script>
-  <script src="vendor/supabase/supabase.js"></script>
-  <script src="js/shared/errors.js"></script>
-  <script src="js/shared/ops.js"></script>
-  <script src="js/shared/auth.js"></script>
-  <script src="js/shared/desk.js"></script>
-  <script src="js/shared/terms.js"></script>
-  <script src="js/shared/reviews.js"></script>
-  <script src="js/shared/progress-sync.js"></script>
+  <script src="js/shared/journey.js" defer></script>
+  <script src="js/shared/auth-config.js" defer></script>
+  <script src="vendor/supabase/supabase.js" defer></script>
+  <script src="js/shared/errors.js" defer></script>
+  <script src="js/shared/ops.js" defer></script>
+  <script src="js/shared/auth.js" defer></script>
+  <script src="js/shared/desk.js" defer></script>
+  <script src="js/shared/terms.js" defer></script>
+  <script src="js/shared/reviews.js" defer></script>
+  <script src="js/shared/progress-sync.js" defer></script>
   <link rel="stylesheet" href="css/consent.css">
   <script src="js/shared/consent.js"></script>
-  <script src="js/shared/insights.js"></script>
-  <script src="js/shared/onboard.js?v=cx3"></script>
-  <script src="js/shared/ui-sound.js"></script>
-  <script src="js/shared/ui-click-sound.js"></script>
-  <script>if (window.BAJourney) window.BAJourney.load();</script>
+  <script src="js/shared/insights.js" defer></script>
+  <script src="js/shared/onboard.js?v=cx3" defer></script>
+  <script src="js/shared/ui-sound.js" defer></script>
+  <script src="js/shared/ui-click-sound.js" defer></script>
+  <script>document.addEventListener("DOMContentLoaded", function () { if (window.BAJourney) window.BAJourney.load(); });</script>
 </head>
 <body class="site home-shelf">
   <!-- The shelf: the home page's menu. Eleven volumes, one per sitting. -->
@@ -200,7 +200,7 @@
 
   <footer class="site-footer" data-rights="Created by Fanelesibonge Ndlovu · © 2026 · All rights reserved."></footer>
 
-  <script src="js/home/home.js"></script>
+  <script src="js/home/home.js" defer></script>
   <script defer src="js/home/shelf-data.js"></script>
   <script type="module" src="js/home/shelf.js"></script>
 </body>

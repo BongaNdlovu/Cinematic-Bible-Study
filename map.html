@@ -39,23 +39,23 @@
 </head>
 <body class="cmap-page">
   <div id="map-root" class="cmap-root"></div>
-  <script src="vendor/leaflet/leaflet.js"></script>
-  <script src="js/shared/journey.js"></script>
-  <script src="js/shared/auth-config.js"></script>
-  <script src="vendor/supabase/supabase.js"></script>
-  <script src="js/shared/errors.js"></script>
-  <script src="js/shared/ops.js"></script>
-  <script src="js/shared/auth.js"></script>
-  <script src="js/shared/desk.js"></script>
-  <script src="js/shared/terms.js"></script>
-  <script src="js/shared/insights.js"></script>
-  <script src="js/shared/ui-sound.js"></script>
-  <script src="js/shared/ui-click-sound.js"></script>
-  <script src="js/study/sheet-map.js"></script>
-  <script src="js/map/map-data.js"></script>
-  <script src="js/map/map.js"></script>
+  <script src="vendor/leaflet/leaflet.js" defer></script>
+  <script src="js/shared/journey.js" defer></script>
+  <script src="js/shared/auth-config.js" defer></script>
+  <script src="vendor/supabase/supabase.js" defer></script>
+  <script src="js/shared/errors.js" defer></script>
+  <script src="js/shared/ops.js" defer></script>
+  <script src="js/shared/auth.js" defer></script>
+  <script src="js/shared/desk.js" defer></script>
+  <script src="js/shared/terms.js" defer></script>
+  <script src="js/shared/insights.js" defer></script>
+  <script src="js/shared/ui-sound.js" defer></script>
+  <script src="js/shared/ui-click-sound.js" defer></script>
+  <script src="js/study/sheet-map.js" defer></script>
+  <script src="js/map/map-data.js" defer></script>
+  <script src="js/map/map.js" defer></script>
   <script>
-    (async function () {
+    document.addEventListener("DOMContentLoaded", async function () {
       const next = "map.html" + (location.search || "");
       const allowed = window.BAJourney && typeof window.BAJourney.requireMember === "function"
         ? await window.BAJourney.requireMember(next)
@@ -71,7 +71,7 @@
         from: params.get("from"),
         sheet: params.get("sheet")
       });
-    })();
+    });
   </script>
 </body>
 </html>

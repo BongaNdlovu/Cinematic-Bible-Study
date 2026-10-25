@@ -96,7 +96,9 @@ assert(!termsJs.includes('This exhibit is closed'), 'terms.js must not say the e
   const c = fs.readFileSync(path.join(ROOT, p), 'utf8');
   const navSrc = p === 'map.html'
     ? fs.readFileSync(path.join(ROOT, 'js/map/map.js'), 'utf8')
-    : c;
+    : c.includes('data-site-nav')
+      ? fs.readFileSync(path.join(ROOT, 'js/shared/cinema.js'), 'utf8')
+      : c;
   assert(navSrc.includes('account.html'), `${p} must link to the Account hub`);
   assert(!c.includes('id="terms-overlay"'), `${p} must not inject a terms overlay`);
 });

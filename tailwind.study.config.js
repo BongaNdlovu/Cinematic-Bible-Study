@@ -1,5 +1,5 @@
 /** Precompiled replacement for the runtime cdn.tailwindcss.com script on study.html.
- *  Mirrors js/study/tailwind-config.js (kept in sync with it). */
+ *  Builds css/study-tailwind.css with: npm run build:tailwind */
 module.exports = {
   darkMode: 'class',
   content: ['./study.html', './css/study-page.css', './js/**/*.js'],

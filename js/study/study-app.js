@@ -577,13 +577,6 @@
       pulseMapYear(st.year, { animate: true });
       setStageCaption(st.label);
       try {
-        const stage = window.StudyStage;
-        if (stage && typeof stage.isMounted === 'function' && stage.isMounted()) {
-          if (st.kind === 'dissolve') await stage.playDissolve(st.from, st.to);
-          else if (st.kind === 'smash') await stage.playSmash();
-          else if (st.kind === 'horn') await stage.playHornGrow();
-          else await stage.show(st.show);
-        }
         if (st.unlock && window.BAJourney) window.BAJourney.unlock(st.unlock);
         if (window.BAJourney) {
           const artifact = stationEndKey(st);
@@ -4807,23 +4800,6 @@
         });
       });
     }
-
-    window.switchDossierTab = function(tabId) {
-      const container = document.getElementById('primary-source-dossier');
-      if (!container) return;
-      container.querySelectorAll('.dossier-tab').forEach(btn => {
-        const isActive = btn.getAttribute('data-dossier-tab') === tabId;
-        btn.className = isActive 
-          ? "dossier-tab px-3 py-1.5 rounded-lg font-mono text-xs font-bold border border-amber-600 bg-amber-600 text-paper-50 transition-all"
-          : "dossier-tab px-3 py-1.5 rounded-lg font-mono text-xs font-bold border border-paper-300 dark:border-paper-700 bg-paper-200/50 dark:bg-paper-800 text-ink-700 dark:text-paper-300 hover:border-amber-600 transition-all";
-      });
-      container.querySelectorAll('.dossier-pane').forEach(pane => {
-        pane.classList.toggle('hidden', pane.getAttribute('data-dossier-pane') !== tabId);
-      });
-      if (window.StudyCompetency) {
-        window.StudyCompetency.recordScriptureLookup(`Primary Source Dossier: ${tabId}`);
-      }
-    };
 
     window.onPlacementConfirmed = function() {
       const seen = window.BAJourney && window.BAJourney.hasSeenIntro(currentSheetIndex);
