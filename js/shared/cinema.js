@@ -128,11 +128,10 @@
     return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; });
   }
 
-  function navLink(link, active, withAdmin) {
+  function navLink(link, active) {
     const isActive = !!link.page && link.page === active;
-    if (link.adminId && !isActive && !withAdmin) return "";
+    if (link.adminId && !isActive) return "";
     if (isActive) return '<a class="active" href="' + link.href + '" aria-current="page">' + esc(link.label) + "</a>";
-    if (link.adminId) return '<a href="' + link.href + '" id="' + link.adminId + '" hidden>' + esc(link.label) + "</a>";
     return '<a href="' + link.href + '">' + esc(link.label) + "</a>";
   }
 
@@ -140,8 +139,7 @@
     if (host.dataset.siteNavReady) return;
     host.dataset.siteNavReady = "1";
     const active = host.dataset.active || "";
-    const withAdmin = host.hasAttribute("data-admin-links");
-    const links = NAV_LINKS.map(function (l) { return navLink(l, active, withAdmin); }).join("");
+    const links = NAV_LINKS.map(function (l) { return navLink(l, active); }).join("");
     const slot = host.hasAttribute("data-auth-slot-nav") ? '<span class="auth-slot" data-auth-slot data-auth-variant="nav"></span>' : "";
     host.innerHTML =
       '<a class="site-brand" href="index.html">' + (host.hasAttribute("data-crest") ? CREST : "") + "THE SHELF OF DANIEL</a>" +

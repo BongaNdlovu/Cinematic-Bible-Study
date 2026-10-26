@@ -85,13 +85,21 @@
     showSecret("");
     showForm(false);
     showStart(false);
-    say("An authenticator app is on for this account. Operator tools require its code.");
+    say("An authenticator app is on for this account.");
   }
 
   function showOffer() {
     showForm(false);
     showStart(true);
-    say("Add an authenticator app. After it is verified, operator tools on this account require the code.");
+    say("Add an authenticator app to this account.");
+  }
+
+  function allowed(db) {
+    return Promise.resolve(db.rpc("exhibit_shows_authenticator")).then(function (res) {
+      return !!(res && !res.error && res.data === true);
+    }, function () {
+      return false;
+    });
   }
 
   function refresh() {
@@ -99,12 +107,17 @@
     const db = client();
     const gen = generation + 1;
     generation = gen;
-    if (!root || !db || !signedIn()) {
-      showRoot(false);
-      return;
-    }
-    showRoot(true);
-    db.auth.mfa.getAuthenticatorAssuranceLevel().then(function (level) {
+    showRoot(false);
+    if (!root || !db || !signedIn()) return;
+    allowed(db).then(function (ok) {
+      if (!ok || !still(gen)) return;
+      showRoot(true);
+      return check(db, gen);
+    });
+  }
+
+  function check(db, gen) {
+    return db.auth.mfa.getAuthenticatorAssuranceLevel().then(function (level) {
       if (!still(gen)) return;
       if (!level || level.error || !level.data) {
         say("The authenticator check could not be read.");

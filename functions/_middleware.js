@@ -141,6 +141,7 @@ export async function onRequest(context) {
   if (
     path.startsWith("/docs") ||
     path.startsWith("/tools") ||
+    path.startsWith("/tests") ||
     path.startsWith("/backups") ||
     path.startsWith("/workers") ||
     path.startsWith("/functions") ||

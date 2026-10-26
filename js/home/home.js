@@ -16,9 +16,20 @@
   function syncAdminTabs() {
     var a = auth();
     var mod = !!(a && typeof a.isModerator === "function" && a.isModerator());
-    ["admin-reviews-link", "admin-insights-link"].forEach(function (id) {
-      var el = document.getElementById(id);
-      if (el) el.hidden = !mod;
+    var tabs = document.querySelector("nav.sh-tabs");
+    [["admin-reviews-link", "reviews.html#witness-queue", "Admin"], ["admin-insights-link", "insights.html", "Insights"]].forEach(function (spec) {
+      var el = document.getElementById(spec[0]);
+      if (!mod) {
+        if (el) el.remove();
+        return;
+      }
+      if (el || !tabs) return;
+      el = document.createElement("a");
+      el.className = "sh-tab";
+      el.id = spec[0];
+      el.href = spec[1];
+      el.textContent = spec[2];
+      tabs.appendChild(el);
     });
   }
 

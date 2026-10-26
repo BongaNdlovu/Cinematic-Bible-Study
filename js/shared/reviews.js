@@ -436,14 +436,46 @@
     return item;
   }
 
+  function syncQueue(admin) {
+    const queue = document.getElementById("witness-queue");
+    const host = document.getElementById("witnesses");
+    if (!admin) {
+      if (queue) queue.remove();
+      return;
+    }
+    if (queue || !host) return;
+    const box = document.createElement("div");
+    box.className = "witness-queue";
+    box.id = "witness-queue";
+    const heading = document.createElement("h3");
+    heading.textContent = "Waiting for approval";
+    const list = document.createElement("div");
+    list.id = "witness-queue-list";
+    box.appendChild(heading);
+    box.appendChild(list);
+    host.insertBefore(box, host.firstChild);
+  }
+
+  function syncNavLink(admin, id, href, label) {
+    const existing = document.getElementById(id);
+    const links = document.querySelector("nav[data-admin-links] .site-links");
+    if (!admin) {
+      if (existing) existing.remove();
+      return;
+    }
+    if (existing || !links) return;
+    const link = document.createElement("a");
+    link.id = id;
+    link.href = href;
+    link.textContent = label;
+    links.insertBefore(link, links.querySelector('a[href="account.html"]') || links.querySelector(".auth-slot"));
+  }
+
   function syncAdminUi() {
     const admin = isModerator();
-    const queue = document.getElementById("witness-queue");
-    const link = document.getElementById("admin-reviews-link");
-    const insightsLink = document.getElementById("admin-insights-link");
-    if (queue) queue.hidden = !admin;
-    if (link) link.hidden = !admin;
-    if (insightsLink) insightsLink.hidden = !admin;
+    syncQueue(admin);
+    syncNavLink(admin, "admin-reviews-link", "reviews.html#witness-queue", "Admin");
+    syncNavLink(admin, "admin-insights-link", "insights.html", "Insights");
     document.body.classList.toggle("is-moderator", admin);
   }
 

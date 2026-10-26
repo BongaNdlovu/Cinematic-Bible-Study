@@ -54,7 +54,7 @@ function routed(p) {
   return !routes.exclude.some((rule) => new RegExp("^" + rule.split("*").map((part) => part.replace(/[.+?^${}()|[\]\\]/g, "\\$&")).join(".*") + "$").test(p));
 }
 const protectedPaths = [
-  "/docs/plan.md", "/tools/supabase-quiz-integrity.sql", "/backups/db.sql", "/workers/exhibit-rate-gate/src/index.js",
+  "/docs/plan.md", "/tools/supabase-quiz-integrity.sql", "/tests/unit/middleware.test.mjs", "/backups/db.sql", "/workers/exhibit-rate-gate/src/index.js",
   "/qa/proofs/x.png", "/originals/a.glb", "/_factcheck/meta.json", "/_mig/index.json", "/functions/_middleware.js",
   "/README.md", "/package.json", "/package-lock.json", "/server.py", "/vercel.json", "/wrangler.toml",
   "/start_website.bat", "/middleware.js", "/__wiring_check.mjs", "/.env", "/.git/config", "/__rate",

@@ -39,8 +39,9 @@ pages.forEach(p => {
 const indexHtml = fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8');
 assert(!indexHtml.includes('data-insight-optout'), 'index.html must not offer an analytics off switch');
 assert(!indexHtml.includes('Stop usage analytics'), 'index.html must not offer an analytics off switch');
-assert(indexHtml.includes('admin-insights-link'), 'index.html must include admin-insights-link');
-assert(indexHtml.includes('insights.html'), 'index.html must link to insights.html');
+assert(!indexHtml.includes('admin-insights-link'), 'index.html must not ship the moderator Insights link to readers');
+assert(!indexHtml.includes('admin-reviews-link'), 'index.html must not ship the moderator Admin link to readers');
+assert(fs.readFileSync(path.join(ROOT, 'js/home/home.js'), 'utf8').includes('"admin-insights-link", "insights.html"'), 'home.js must add the Insights link for moderators');
 
 const studyHtml = fs.readFileSync(path.join(ROOT, 'study.html'), 'utf8');
 assert(studyHtml.includes('js/shared/insights.js'), 'study.html must include insights.js');
