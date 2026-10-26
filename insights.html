@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="css/site.css?v=cx1">
   <link rel="stylesheet" href="css/terms.css?v=cx1">
   <link rel="stylesheet" href="css/insights.css">
+  <link rel="stylesheet" href="css/sid-report.css">
   <link rel="stylesheet" href="css/cinema.css?v=cx2">
   <link rel="stylesheet" href="css/desk.css">
   <script src="vendor/sentry/bundle.tracing.replay.feedback.min.js"></script>
@@ -29,6 +30,7 @@
   <link rel="stylesheet" href="css/consent.css">
   <script src="js/shared/consent.js"></script>
   <script src="js/shared/insights.js" defer></script>
+  <script src="js/insights/sid-report.js" defer></script>
   <script src="js/insights/insights.js" defer></script>
 </head>
 <body class="site cover cinematic-bg">
@@ -51,6 +53,12 @@
         <label class="insights-toggle"><input type="checkbox" id="insights-hide-mine" checked> Leave out my own activity</label>
         <button type="button" class="insights-refresh" id="insights-refresh">Refresh</button>
       </div>
+      <div class="insights-report" role="group" aria-label="Report for the Southern Africa-Indian Ocean Division">
+        <label>From <input type="date" id="sid-from"></label>
+        <label>To <input type="date" id="sid-to"></label>
+        <button type="button" class="insights-refresh" id="sid-build">SID report</button>
+        <span class="insights-report-status" id="sid-status" role="status" aria-live="polite"></span>
+      </div>
       <p class="insights-status" id="insights-status" role="status" aria-live="polite"></p>
       <div id="insights-grid" data-cx-reveal style="--cx-i:3"></div>
       <details class="insights-about">
@@ -67,5 +75,12 @@
     </div>
   </main>
   <footer class="site-footer"></footer>
+  <div id="sid-report" aria-label="SID report preview">
+    <div class="sid-toolbar">
+      <button type="button" class="is-solid" id="sid-print">Print or save as PDF</button>
+      <button type="button" id="sid-close">Close</button>
+    </div>
+    <div id="sid-pages"></div>
+  </div>
 </body>
 </html>

@@ -110,12 +110,16 @@ assert(cspDirectives['script-src']?.includes("https://static.cloudflareinsights.
 assert(cspDirectives['script-src']?.includes("https://challenges.cloudflare.com"), "CSP script-src includes challenges.cloudflare.com for Turnstile");
 assert(cspDirectives['frame-src']?.includes("https://challenges.cloudflare.com"), "CSP frame-src includes challenges.cloudflare.com for Turnstile");
 
+lines.forEach((line, i) => {
+  assert(line.length <= 1950, `_headers line ${i + 1} is ${line.length} characters; Cloudflare Pages drops any line over 2,000, so keep a margin`);
+});
+
 // Verify OSM tiles
 assert(cspDirectives['img-src']?.includes("https://tile.openstreetmap.org"), "CSP img-src includes bare tile.openstreetmap.org");
 assert(cspDirectives['img-src']?.includes("https://*.tile.openstreetmap.org"), "CSP img-src includes *.tile.openstreetmap.org");
 
 // Verify ArcGIS
-assert(cspDirectives['connect-src']?.includes("https://server.arcgisonline.com"), "CSP connect-src includes server.arcgisonline.com");
+assert(cspDirectives['img-src']?.includes("https://*.arcgisonline.com"), "CSP img-src covers server.arcgisonline.com through *.arcgisonline.com");
 assert(cspDirectives['connect-src']?.includes("https://*.arcgisonline.com"), "CSP connect-src includes *.arcgisonline.com");
 
 // Verify Supabase
