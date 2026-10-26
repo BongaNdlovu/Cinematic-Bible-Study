@@ -1,4 +1,7 @@
+import * as Sentry from "@sentry/cloudflare";
+
 const SUPABASE_URL = "https://ttlrspnfadmxkoyqvofh.supabase.co";
+const SENTRY_DSN = "https://fb62126576bb04e73c1be1d851791ab8@o4512321608679424.ingest.de.sentry.io/4512321650557008";
 const SUPABASE_KEY = "sb_publishable_k3fsJ1eGKIcmOxtmaZHbJw_R1qdW_ya";
 
 const STATIC_PREFIXES = ["/assets/", "/js/", "/css/", "/vendor/", "/models/", "/bible/"];
@@ -135,12 +138,13 @@ async function servePage(context, request) {
   return res;
 }
 
-export async function onRequest(context) {
+async function handle(context) {
   const request = context.request;
   const path = new URL(request.url).pathname;
   if (
     path.startsWith("/docs") ||
     path.startsWith("/tools") ||
+    path.startsWith("/tests") ||
     path.startsWith("/backups") ||
     path.startsWith("/workers") ||
     path.startsWith("/functions") ||
@@ -184,4 +188,19 @@ export async function onRequest(context) {
   if (decision === "deny" || decision === "deny_first") return denied();
   if (decision === "down" && request.method !== "GET") return unavailable();
   return servePage(context, request);
+}
+
+const sentryPlugin = Sentry.sentryPagesPlugin(function (context) {
+  const env = context && context.env;
+  return {
+    dsn: (env && env.SENTRY_DSN) || SENTRY_DSN,
+    tracesSampleRate: 1,
+    dataCollection: { userInfo: false }
+  };
+});
+
+export async function onRequest(context) {
+  return sentryPlugin(Object.assign({}, context, {
+    next: function () { return handle(context); }
+  }));
 }

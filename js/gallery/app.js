@@ -2722,6 +2722,7 @@ import * as THREE from 'three';
     }
 
     const _tempVec = new THREE.Vector3();
+    let nodesHiddenSynced = false;
     function syncNodes() {
       if (!nodesSvg || !camera) return;
       const w = window.innerWidth;
@@ -2742,8 +2743,10 @@ import * as THREE from 'three';
           parts.line.style.display = 'none';
           parts.dot1.style.display = 'none';
         });
+        nodesHiddenSynced = true;
         return;
       }
+      nodesHiddenSynced = false;
 
       const isMobile = w <= 768;
       const cardW = isMobile ? Math.min(138, Math.floor(w * 0.36)) : 196;
@@ -3056,13 +3059,6 @@ import * as THREE from 'three';
     function isGltfEvictable(key) {
       return !GLTF_PERMANENT[key] && key !== activeAssetKey && gltfRecentlyShown.indexOf(key) === -1;
     }
-    // QA hook: inspect the model cache (keys + LRU order) without touching internals.
-    window.__gltfCache = {
-      keys: () => Object.keys(loadedGLTFScenes),
-      lru: () => gltfLruOrder.slice(),
-      cap: () => GLTF_LRU_CAP
-    };
-
     function disposeGltfScene(model) {
       model.traverse((child) => {
         if (child.geometry) child.geometry.dispose();
@@ -4069,7 +4065,14 @@ import * as THREE from 'three';
       btnDust.textContent = dustEnabled ? 'Golden Dust: ON' : 'Golden Dust: OFF';
     }
 
+    let resizeQueued = false;
     window.addEventListener('resize', () => {
+      if (resizeQueued) return;
+      resizeQueued = true;
+      requestAnimationFrame(applyResize);
+    });
+    function applyResize() {
+      resizeQueued = false;
       camera.aspect = window.innerWidth / window.innerHeight;
       camera.updateProjectionMatrix();
       renderer.setSize(window.innerWidth, window.innerHeight);
@@ -4081,7 +4084,7 @@ import * as THREE from 'three';
       if (framed?.autoFrame && currentSingleModel) frameLoadedModel(currentSingleModel);
       if (galleryFrameGroup) galleryFrameGroup.visible = !isPortraitStage();
       syncNodes();
-    });
+    }
 
     const btnBrand = document.getElementById('btn-brand-home');
     if (btnBrand) btnBrand.addEventListener('click', () => {
@@ -4282,6 +4285,13 @@ import * as THREE from 'three';
     const clock = new THREE.Clock();
     let frameCount = 0;
     let lastFpsTime = performance.now();
+    const relCam = new THREE.Vector3();
+    const upAxis = new THREE.Vector3(0, 1, 0);
+    const azEl = document.getElementById('diag-azimuth');
+    const elEl = document.getElementById('diag-elevation');
+    const fpsEl = document.getElementById('diag-fps');
+    let lastAzText = '';
+    let lastElText = '';
 
     function animate(now) {
       requestAnimationFrame(animate);
@@ -4330,23 +4340,22 @@ import * as THREE from 'three';
       }
 
       // Live scene diagnostics
-      const relCam = camera.position.clone().sub(controls.target);
-      relCam.applyAxisAngle(new THREE.Vector3(0, 1, 0), -artifactRoot.rotation.y);
+      relCam.copy(camera.position).sub(controls.target);
+      relCam.applyAxisAngle(upAxis, -artifactRoot.rotation.y);
       const azimuthDeg = THREE.MathUtils.radToDeg(Math.atan2(relCam.x, relCam.z));
       const elevLen = relCam.length();
       const elevationDeg = elevLen > 1e-6
         ? THREE.MathUtils.radToDeg(Math.asin(THREE.MathUtils.clamp(relCam.y / elevLen, -1, 1)))
         : 0;
 
-      const azEl = document.getElementById('diag-azimuth');
-      const elEl = document.getElementById('diag-elevation');
-      if (azEl) azEl.textContent = `${azimuthDeg.toFixed(1)}°`;
-      if (elEl) elEl.textContent = `${elevationDeg.toFixed(1)}°`;
+      const azText = `${azimuthDeg.toFixed(1)}°`;
+      const elText = `${elevationDeg.toFixed(1)}°`;
+      if (azEl && azText !== lastAzText) { azEl.textContent = azText; lastAzText = azText; }
+      if (elEl && elText !== lastElText) { elEl.textContent = elText; lastElText = elText; }
 
       frameCount++;
       if (now - lastFpsTime >= 500) {
         const fps = Math.round((frameCount * 1000) / (now - lastFpsTime));
-        const fpsEl = document.getElementById('diag-fps');
         if (fpsEl) fpsEl.textContent = `${fps} FPS`;
         frameCount = 0;
         lastFpsTime = now;
@@ -4360,7 +4369,7 @@ import * as THREE from 'three';
       }
 
       // Sync floating nodes position & dogleg lines
-      syncNodes();
+      if (masterNodesVisible || !nodesHiddenSynced) syncNodes();
     }
 
     // Initialize State: Check URL parameter (?asset=... or ?id=...) or default to 'assembled'

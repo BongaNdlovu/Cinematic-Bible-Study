@@ -104,7 +104,8 @@ csp.split(';').forEach(dir => {
 assert(cspDirectives['default-src']?.includes("'self'"), "CSP default-src includes 'self'");
 assert(!cspDirectives['script-src']?.includes("https://cdn.tailwindcss.com"), "CSP script-src no longer allows the unused Tailwind CDN");
 assert(!cspDirectives['script-src']?.includes("https://cdnjs.cloudflare.com"), "CSP script-src no longer allows the unused cdnjs host");
-assert(cspDirectives['script-src']?.includes("'unsafe-inline'"), "CSP script-src keeps 'unsafe-inline' until the inline scripts move out");
+assert(!cspDirectives['script-src']?.includes("'unsafe-inline'"), "CSP script-src no longer allows arbitrary inline scripts");
+assert(cspDirectives['script-src']?.some(v => /^'sha256-/.test(v)), "CSP script-src carries sha256 hashes for the site's own inline scripts");
 assert(cspDirectives['script-src']?.includes("https://static.cloudflareinsights.com"), "CSP script-src includes static.cloudflareinsights.com");
 assert(cspDirectives['script-src']?.includes("https://challenges.cloudflare.com"), "CSP script-src includes challenges.cloudflare.com for Turnstile");
 assert(cspDirectives['frame-src']?.includes("https://challenges.cloudflare.com"), "CSP frame-src includes challenges.cloudflare.com for Turnstile");
@@ -128,9 +129,6 @@ assert(!cspDirectives['connect-src']?.some(v => v.includes('*.supabase.co')), 'C
 // Verify Cloudflare Insights
 assert(cspDirectives['connect-src']?.includes("https://cloudflareinsights.com"), "CSP connect-src includes cloudflareinsights.com");
 assert(cspDirectives['connect-src']?.includes("blob:"), "CSP connect-src includes blob: so GLB textures can load");
-
-const vercelJson = fs.readFileSync(path.join(root, 'vercel.json'), 'utf8');
-assert(vercelJson.includes("connect-src 'self' blob:"), "vercel.json connect-src includes blob:");
 
 // 3. Verify Cache-Control for HTML
 const htmlRule = rules.find(r => r.path === '/*.html');
@@ -170,7 +168,10 @@ const expectations = [
   ['/assets/study/audio/sitting-07-readalong.mp3', REVALIDATE, 'unhashed assets revalidate within an hour'],
   ['/assets/site/hero-main.jpg', REVALIDATE, 'unhashed site images revalidate within an hour'],
   ['/vendor/three/build/three.module.min.js', REVALIDATE, 'unhashed vendor files revalidate within an hour'],
-  ['/bible/kjv.json', 'public, max-age=0, must-revalidate', 'Bible data always revalidates'],
+  ['/bible/kjv.0123456789ab.json', IMMUTABLE, 'hashed Bible data is immutable'],
+  ['/vendor/supabase/supabase.0123456789ab.js', IMMUTABLE, 'the hashed Supabase bundle is immutable'],
+  ['/vendor/leaflet/leaflet.0123456789ab.js', IMMUTABLE, 'the hashed Leaflet script is immutable'],
+  ['/vendor/three/build/three.core.min.js', REVALIDATE, 'three keeps its name, so it revalidates within an hour'],
   ['/study.html', 'public, max-age=0, must-revalidate', 'pages always revalidate'],
   ['/', 'public, max-age=0, must-revalidate', 'the home page always revalidates']
 ];

@@ -348,7 +348,7 @@
   function dangerCard() {
     return hubCard(
       "<small>Delete account</small>" +
-      '<p class="hub-line">Deleting your account permanently removes your sign-in, study progress, study notes and bookmarks, certificate record, reader profile, readers’ notes, messages to the operator, and survey answers. It cannot be undone.</p>' +
+      '<p class="hub-line">Deleting your account permanently removes your sign-in, study progress, study notes and bookmarks, certificate record, reader profile, readers’ notes, messages to us, and survey answers. It cannot be undone.</p>' +
       '<button type="button" class="cx-btn" data-hub-action="download" id="account-download">Download my data (JSON)</button>' +
       '<form class="acct-danger-form" id="account-delete-form" autocomplete="off">' +
         '<label class="cx-field"><span>Type DELETE to confirm</span>' +

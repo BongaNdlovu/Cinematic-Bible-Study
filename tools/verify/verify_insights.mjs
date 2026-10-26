@@ -39,8 +39,9 @@ pages.forEach(p => {
 const indexHtml = fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8');
 assert(!indexHtml.includes('data-insight-optout'), 'index.html must not offer an analytics off switch');
 assert(!indexHtml.includes('Stop usage analytics'), 'index.html must not offer an analytics off switch');
-assert(indexHtml.includes('admin-insights-link'), 'index.html must include admin-insights-link');
-assert(indexHtml.includes('insights.html'), 'index.html must link to insights.html');
+assert(!indexHtml.includes('admin-insights-link'), 'index.html must not ship the moderator Insights link to readers');
+assert(!indexHtml.includes('admin-reviews-link'), 'index.html must not ship the moderator Admin link to readers');
+assert(fs.readFileSync(path.join(ROOT, 'js/home/home.js'), 'utf8').includes('"admin-insights-link", "insights.html"'), 'home.js must add the Insights link for moderators');
 
 const studyHtml = fs.readFileSync(path.join(ROOT, 'study.html'), 'utf8');
 assert(studyHtml.includes('js/shared/insights.js'), 'study.html must include insights.js');
@@ -54,19 +55,16 @@ const headers = fs.readFileSync(path.join(ROOT, '_headers'), 'utf8');
 assert(headers.includes('https://static.cloudflareinsights.com'), '_headers missing static.cloudflareinsights.com in script-src');
 assert(headers.includes('https://cloudflareinsights.com'), '_headers missing cloudflareinsights.com in connect-src');
 
-const vercelJson = fs.readFileSync(path.join(ROOT, 'vercel.json'), 'utf8');
-assert(vercelJson.includes('https://static.cloudflareinsights.com'), 'vercel.json missing static.cloudflareinsights.com');
-assert(vercelJson.includes('https://cloudflareinsights.com'), 'vercel.json missing cloudflareinsights.com');
 console.log('✓ HTML pages, opt-outs, and CSP headers verified.');
 
 // 3. Check terms and journey version
 console.log('3. Checking terms and journey TERMS_VERSION...');
 const journeyJs = fs.readFileSync(path.join(ROOT, 'js/shared/journey.js'), 'utf8');
-assert(/TERMS_VERSION\s*=\s*5/.test(journeyJs), 'TERMS_VERSION must be 5 in journey.js');
+assert(/TERMS_VERSION\s*=\s*6/.test(journeyJs), 'TERMS_VERSION must be 6 in journey.js');
 
 const accountHtml = fs.readFileSync(path.join(ROOT, 'account.html'), 'utf8');
 assert(accountHtml.includes('id="account-hub"'), 'account.html must be the Account hub');
-assert(accountHtml.includes('What we learn from your study'), 'account.html missing "What we learn from your study" header');
+assert(accountHtml.includes('How your study is kept'), 'account.html missing "How your study is kept" header');
 assert(accountHtml.includes('anonymous until sign-in'), 'account.html must mention anonymous learning until sign-in');
 assert(!accountHtml.includes('You may stop usage analytics'), 'account.html must not promise an analytics off switch');
 assert(!accountHtml.includes('Do Not Track'), 'account.html must not promise a Do Not Track stop');
@@ -99,7 +97,9 @@ assert(!termsJs.includes('This exhibit is closed'), 'terms.js must not say the e
   const c = fs.readFileSync(path.join(ROOT, p), 'utf8');
   const navSrc = p === 'map.html'
     ? fs.readFileSync(path.join(ROOT, 'js/map/map.js'), 'utf8')
-    : c;
+    : c.includes('data-site-nav')
+      ? fs.readFileSync(path.join(ROOT, 'js/shared/cinema.js'), 'utf8')
+      : c;
   assert(navSrc.includes('account.html'), `${p} must link to the Account hub`);
   assert(!c.includes('id="terms-overlay"'), `${p} must not inject a terms overlay`);
 });
@@ -196,6 +196,7 @@ global.window = {
   BAAuthConfig: {
     cfAnalyticsToken: 'test-token'
   },
+  SODConsent: { has: () => true },
   addEventListener: (name, fn) => {
     if (!windowListeners[name]) windowListeners[name] = [];
     windowListeners[name].push(fn);
@@ -204,6 +205,7 @@ global.window = {
   innerHeight: 800,
   scrollY: 0
 };
+global.SODConsent = global.window.SODConsent;
 
 global.document = {
   visibilityState: 'visible',

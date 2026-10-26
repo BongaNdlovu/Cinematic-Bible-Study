@@ -5,18 +5,33 @@ on:
     - cron: "*/15 * * * *"
   workflow_dispatch:
 
+concurrency:
+  group: health
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+  issues: write
+
 jobs:
-  up:
+  smoke:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      GH_TOKEN: ${{ github.token }}
     steps:
-      - name: Site answers
-        run: |
-          code=$(curl -s -o /dev/null -w '%{http_code}' --max-time 20 https://cinematic-bible-study-daniel.pages.dev/ || echo 000)
-          test "$code" = "200"
-      - name: Sign-in service answers
-        run: |
-          code=$(curl -s -o /dev/null -w '%{http_code}' --max-time 20 https://ttlrspnfadmxkoyqvofh.supabase.co/auth/v1/health || echo 000)
-          case "$code" in
-            000|5*) echo "sign-in health returned $code"; exit 1 ;;
-            *) echo "sign-in health returned $code" ;;
-          esac
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: tools
+          filter: blob:none
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Smoke test the live site
+        run: node tools/smoke.mjs
+      - name: Open an alert
+        if: failure()
+        run: node tools/ci/alert.mjs fail "live site health"
+      - name: Close the alert
+        if: success()
+        run: node tools/ci/alert.mjs recover "live site health"

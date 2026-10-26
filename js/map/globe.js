@@ -73,11 +73,33 @@ varying vec3 vNormal;
 varying vec3 vView;
 void main() {
   float rim = pow(1.0 - max(dot(vNormal, vView), 0.0), 2.6);
-  float lit = smoothstep(-0.25, 0.7, dot(vNormal, sunDir));
-  gl_FragColor = vec4(vec3(0.45, 0.66, 1.0) * rim * (0.2 + 0.8 * lit) * 0.85, 1.0);
+  float sun = dot(vNormal, sunDir);
+  float lit = smoothstep(-0.25, 0.7, sun);
+  vec3 tint = mix(vec3(1.0, 0.56, 0.32), vec3(0.45, 0.66, 1.0), smoothstep(-0.05, 0.35, sun));
+  gl_FragColor = vec4(tint * rim * (0.2 + 0.8 * lit) * 0.85, 1.0);
 }`;
 
-const SUN = new THREE.Vector3(-2.2, 1.6, 3.2);
+const EARTH_SHADE = `
+#include <color_fragment>
+float shade = 0.0;
+#ifdef USE_MAP
+  shade = texture2D(cloudMap, vec2(vMapUv.x + cloudShift, vMapUv.y)).g * cloudFade;
+  diffuseColor.rgb *= 1.0 - 0.3 * shade;
+#endif`;
+
+const EARTH_NIGHT = `
+#ifdef USE_EMISSIVEMAP
+  float dusk = 0.0;
+  #if NUM_DIR_LIGHTS > 0
+    dusk = 1.0 - smoothstep(-0.1, 0.3, dot(nonPerturbedNormal, directionalLights[0].direction));
+  #endif
+  totalEmissiveRadiance *= texture2D(emissiveMap, vEmissiveMapUv).r * dusk * (1.0 - 0.7 * shade);
+#endif`;
+
+const SUN = new THREE.Vector3(-0.75, 0.35, 0.56).normalize();
+const CLOUD_DRIFT = 0.000003;
+const CLOUD_NEAR = 2.0;
+const CLOUD_FULL = 3.2;
 const TILE_URL = "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/";
 const PATCH_COLS = 8;
 const PATCH_ROWS = 6;
@@ -182,10 +204,11 @@ export function create(container, options) {
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(38, 1, 0.05, 200);
   scene.add(camera);
-  scene.add(new THREE.AmbientLight(0xdfe6ff, 0.34));
-  const sun = new THREE.DirectionalLight(0xfff0d8, 3.1);
-  sun.position.set(SUN.x, SUN.y, SUN.z);
+  scene.add(new THREE.AmbientLight(0xdfe6ff, 0.22));
+  const sun = new THREE.DirectionalLight(0xfff0d8, 4.2);
+  sun.position.copy(SUN);
   camera.add(sun);
+  camera.add(sun.target);
 
   const segs = phone ? 64 : 128;
   const earthMat = new THREE.MeshPhongMaterial({
@@ -196,7 +219,24 @@ export function create(container, options) {
   const earth = new THREE.Mesh(new THREE.SphereGeometry(R, segs, segs), earthMat);
   scene.add(earth);
 
-  const sunView = new THREE.Vector3();
+  const sky = { cloudMap: { value: null }, cloudShift: { value: 0 }, cloudFade: { value: 1 } };
+  earthMat.onBeforeCompile = (shader) => {
+    Object.assign(shader.uniforms, sky);
+    shader.fragmentShader = shader.fragmentShader
+      .replace("#include <common>", "#include <common>\nuniform sampler2D cloudMap;\nuniform float cloudShift;\nuniform float cloudFade;")
+      .replace("#include <color_fragment>", EARTH_SHADE)
+      .replace("#include <emissivemap_fragment>", EARTH_NIGHT);
+  };
+  const cloudMat = new THREE.MeshLambertMaterial({ color: 0xf4f6fb, transparent: true, opacity: 0.9, depthWrite: false });
+  const clouds = new THREE.Mesh(earth.geometry, cloudMat);
+  clouds.scale.setScalar(1.006);
+  clouds.renderOrder = 1;
+  clouds.visible = false;
+  scene.add(clouds);
+  let drift = 0;
+  let lastFrame = 0;
+
+  const sunView = SUN.clone();
   const haze = new THREE.Mesh(
     new THREE.SphereGeometry(R * 1.004, segs, segs),
     new THREE.ShaderMaterial({
@@ -269,10 +309,12 @@ export function create(container, options) {
   const ready = Promise.all([
     load(big ? "earth-day-4k.webp" : "earth-day-2k.webp"),
     load("earth-bump-2k.webp", true),
-    load("earth-water-2k.webp", true)
-  ]).then(([day, bump, water]) => {
+    load("earth-water-2k.webp", true),
+    load("earth-clouds-1k.webp"),
+    load("earth-night-1k.webp", true)
+  ]).then(([day, bump, water, cloud, night]) => {
     if (disposed) {
-      [day, bump, water].forEach((t) => t && t.dispose());
+      [day, bump, water, cloud, night].forEach((t) => t && t.dispose());
       return false;
     }
     if (day) {
@@ -285,6 +327,19 @@ export function create(container, options) {
       earthMat.bumpScale = 2.2;
     }
     if (water) earthMat.specularMap = water;
+    if (cloud) {
+      cloud.wrapS = THREE.RepeatWrapping;
+      cloudMat.alphaMap = cloud;
+      cloudMat.needsUpdate = true;
+      sky.cloudMap.value = cloud;
+      container.dataset.clouds = drift.toFixed(5);
+    }
+    if (night) {
+      earthMat.emissiveMap = night;
+      earthMat.emissive.set(0xffb46a);
+      earthMat.emissiveIntensity = 1.5;
+      container.dataset.night = "1";
+    }
     earthMat.needsUpdate = true;
     kick();
     return !!day;
@@ -391,7 +446,12 @@ export function create(container, options) {
     camera.up.set(0, 1, 0);
     camera.lookAt(0, 0, 0);
     camera.updateMatrixWorld();
-    sunView.set(SUN.x, SUN.y, SUN.z + cur.dist).normalize();
+    const veil = clamp((cur.dist - CLOUD_NEAR) / (CLOUD_FULL - CLOUD_NEAR), 0, 1);
+    clouds.visible = !!cloudMat.alphaMap && veil > 0;
+    cloudMat.opacity = 0.85 * veil;
+    sky.cloudFade.value = veil;
+    sky.cloudShift.value = drift;
+    if (cloudMat.alphaMap) cloudMat.alphaMap.offset.x = drift;
     patchGroup.visible = cur.dist < PATCH_FAR;
     renderer.render(scene, camera);
     camDir.copy(camera.position).normalize();
@@ -403,11 +463,18 @@ export function create(container, options) {
 
   function frame(now) {
     raf = 0;
+    if (!reduce && lastFrame) drift = (drift + Math.min(now - lastFrame, 50) * CLOUD_DRIFT) % 1;
+    lastFrame = now;
     const fading = stepFade(now);
     const moving = step(now) || fading;
     render();
-    if (moving || dragging) kick();
-    else schedulePatch();
+    if (moving || dragging) {
+      kick();
+      return;
+    }
+    lastFrame = 0;
+    if (cloudMat.alphaMap) container.dataset.clouds = drift.toFixed(5);
+    schedulePatch();
   }
 
   function stepFade(now) {
@@ -910,9 +977,10 @@ export function create(container, options) {
     disposeObj(haze);
     disposeObj(stars);
     if (featherTex) featherTex.dispose();
-    [earthMat.map, earthMat.bumpMap, earthMat.specularMap].forEach((t) => t && t.dispose());
+    [earthMat.map, earthMat.bumpMap, earthMat.specularMap, earthMat.emissiveMap, cloudMat.alphaMap].forEach((t) => t && t.dispose());
     earth.geometry.dispose();
     earthMat.dispose();
+    cloudMat.dispose();
     atmos.geometry.dispose();
     atmos.material.dispose();
     renderer.dispose();

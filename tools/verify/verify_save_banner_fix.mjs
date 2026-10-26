@@ -72,7 +72,13 @@ global.window = {
   }
 };
 
-global.document = { readyState: "loading", addEventListener: () => {} };
+global.document = {
+  readyState: "loading",
+  addEventListener: () => {},
+  // renderAll() runs once sign-out's promise chain settles; keep it harmless.
+  querySelectorAll: () => [],
+  body: null
+};
 global.location = global.window.location;
 
 // Load journey & progress-sync
@@ -194,7 +200,8 @@ errorsShown.length = 0;
 errorsShown.push({ msg: "Your progress did not save. This device will keep trying.", kind: "save" });
 assert.strictEqual(global.window.SiteErrors.current().includes("did not save"), true);
 
-global.window.ScrollAuth.signOut();
+// Sign-out flushes pending syncs before it clears, so it completes asynchronously.
+await global.window.ScrollAuth.signOut();
 assert.strictEqual(localStore.baProgressOutbox, undefined, "signOut must clear baProgressOutbox");
 assert.strictEqual(sessionStore.baLastPushAt, undefined, "signOut must clear baLastPushAt");
 assert.strictEqual(global.window.SiteErrors.current(), "", "signOut must clear save miss error banner");

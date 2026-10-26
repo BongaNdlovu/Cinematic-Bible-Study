@@ -16,7 +16,7 @@
  * Usage: node tools/verify/verify_study_page_load.mjs [--base=http://127.0.0.1:8130]
  */
 import { chromium } from 'playwright';
-import { ensureServer } from './_server.mjs';
+import { ensureServer, dismissConsent } from './_server.mjs';
 
 const server = await ensureServer({ preferred: 8130, probe: '/study.html' });
 const BASE = server.base;
@@ -55,6 +55,7 @@ async function open(sheet, opts = {}) {
   page.on('pageerror', (e) => errors.push(String(e && e.message ? e.message : e)));
   page.on('request', (r) => requests.push(r.url().replace(BASE + '/', '')));
   await page.goto(`${BASE}/study.html?sheet=${sheet}&preview=full`, { waitUntil: 'load', timeout: 60000 });
+  await dismissConsent(page);
   await page.waitForFunction((n) => {
     const a = document.getElementById('sheet-article');
     return a && a.getAttribute('data-sheet-index') === String(n) && a.children.length > 0;

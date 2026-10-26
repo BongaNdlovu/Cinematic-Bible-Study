@@ -751,14 +751,6 @@
     }
     /* The card's own inset ring changes with the active state; this hairline
        stays constant over both, and sits above the ::after dimming wash. */
-    .story-edge {
-      position: absolute;
-      inset: 0;
-      z-index: 3;
-      border-radius: inherit;
-      pointer-events: none;
-      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.035);
-    }
     .story-medal {
       width: 52px;
       height: 52px;
@@ -3651,113 +3643,13 @@
     body.white-mode .chain.is-full .tbl tbody tr:hover { background: rgba(212, 175, 55, 0.045); }
 
     /* ---- timeline: tracks of unequal length ---- */
-    .tl {
-      --tl-label-w: clamp(10rem, 24%, 15rem);
-      --tl-gap: 1rem;
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
-    .tl-track {
-      display: grid;
-      grid-template-columns: minmax(0, var(--tl-label-w)) minmax(0, 1fr);
-      align-items: start;
-      gap: var(--tl-gap);
-      opacity: 0;
-      transform: translateY(8px);
-    }
-    .chain.is-visible .tl-track { animation: chain-rise 0.6s ease-out var(--t) forwards; }
-    .tl-label .chain-title { margin-bottom: 0.3rem; font-size: 1rem; }
-    .tl-label .chain-role { margin-bottom: 0.25rem; }
-    .tl-rail {
-      position: relative;
-      height: 2.1rem;
-      border-radius: 6px;
-      background: rgba(255, 248, 230, 0.04);
-      border: 1px solid rgba(197, 155, 39, 0.2);
-      box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.35);
-    }
     /* The bar is the point of the diagram, so it is the brightest thing on the
        row: a lit leading edge and a soft cast, the way the stage lights its
        active card. */
-    .tl-bar {
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      border-radius: 5px;
-      background: linear-gradient(90deg, rgba(212, 175, 55, 0.34), rgba(212, 175, 55, 0.58));
-      border-left: 2px solid var(--chain-gold, #e4c56a);
-      box-shadow: 0 0 18px rgba(213, 177, 106, 0.18);
-    }
     /* Segments only divide the rail. Their labels are listed beneath it: a segment a
        few years wide is a sliver of the axis and cannot hold text. */
-    .tl-seg {
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      border-right: 1px solid rgba(15, 14, 13, 0.55);
-    }
-    .tl-body {
-      display: flex;
-      flex-direction: column;
-      gap: 0.45rem;
-      min-width: 0;
-    }
-    .tl-notes {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-      display: grid;
-      gap: 0.3rem;
-    }
-    .tl-notes li {
-      position: relative;
-      padding-left: 1.1rem;
-      font-family: Inter, sans-serif;
-      font-size: 0.8rem;
-      line-height: 1.5;
-      color: var(--chain-muted, inherit);
-    }
-    .tl-notes li::before {
-      content: "";
-      position: absolute;
-      left: 0;
-      top: 0.42em;
-      width: 0.55rem;
-      height: 0.55rem;
-      border-radius: 2px;
-      border: 1px solid rgba(228, 197, 106, 0.7);
-      background: rgba(212, 175, 55, 0.35);
-    }
-    .tl-axis {
-      display: flex;
-      justify-content: space-between;
-      margin-left: calc(var(--tl-label-w) + var(--tl-gap));
-      font-family: "JetBrains Mono", monospace;
-      font-size: 0.7rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--chain-muted, inherit);
-      opacity: 0.75;
-    }
-    @media (prefers-reduced-motion: reduce) {
-      .tl-track { opacity: 1 !important; transform: none !important; animation: none !important; }
-    }
-    @media (max-width: 820px) {
-      .tl-track { grid-template-columns: minmax(0, 1fr); gap: 0.5rem; }
-      .tl-axis { margin-left: 0; }
-    }
-    body.paper-mode .tl-rail,
-    body.white-mode .tl-rail { background: rgba(180, 140, 40, 0.08); border-color: rgba(180, 140, 40, 0.3); }
     /* The rail loses its inner shadow in light themes, so the bar loses the
        glow that was balanced against it. */
-    body.paper-mode .tl-bar,
-    body.white-mode .tl-bar {
-      background: linear-gradient(90deg, rgba(180, 140, 40, 0.34), rgba(180, 140, 40, 0.58));
-      box-shadow: none;
-    }
-    body.paper-mode .tl-seg,
-    body.white-mode .tl-seg { color: #3a2c10; }
 
     /* ======================================================================
        DIAGRAM STANDARDS — the shared cinematic full-screen layer
@@ -4166,14 +4058,6 @@
         radial-gradient(ellipse at 0% 0%, rgba(212, 175, 55, 0.1), transparent 46%),
         rgba(15, 14, 13, 0.55);
     }
-    .study-path-kicker {
-      font-family: "JetBrains Mono", monospace;
-      font-size: 10px;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: #c9a227;
-      margin-bottom: 0.55rem;
-    }
     .study-path .sitting-path-hint {
       margin: 0 0 1.2rem;
       max-width: 68ch;
@@ -4237,20 +4121,6 @@
     }
 
     /* Scanlines & VHS Tracking Noise Overlay */
-    .vhs-scanlines {
-      background: linear-gradient(
-        rgba(18, 16, 16, 0) 50%, 
-        rgba(0, 0, 0, 0.35) 50%
-      );
-      background-size: 100% 4px;
-      pointer-events: none;
-    }
-
-    .vhs-noise {
-      background-image: radial-gradient(rgba(255,255,255,0.08) 1px, transparent 0);
-      background-size: 3px 3px;
-      pointer-events: none;
-    }
 
     /* Option click transitions */
     .quiz-option {
@@ -4389,16 +4259,6 @@
     body.charcoal-mode.flashlight-active.beam-ready #flashlight-cursor { opacity: 1; }
 
     /* Strong's Hebrew Tooltip Styles */
-    .first-principles {
-      margin: 2.1rem 0 2rem;
-      padding: 1.05rem 0 0;
-      border: 0;
-      border-top: 1px solid rgba(197, 155, 39, 0.45);
-      border-radius: 0;
-      background: transparent;
-      word-break: break-word;
-      overflow-wrap: break-word;
-    }
     .first-principles-kicker {
       font-family: "JetBrains Mono", monospace;
       font-size: 10px;
@@ -4407,25 +4267,6 @@
       color: #c9a227;
       margin: 0 0 0.55rem;
     }
-    .first-principles h4 {
-      font-family: Newsreader, Georgia, serif;
-      font-size: 1.15rem;
-      margin: 0.85rem 0 0.4rem;
-      color: inherit;
-    }
-    .first-principles h4:first-of-type { margin-top: 0.15rem; }
-    .first-principles ol,
-    .first-principles ul {
-      margin: 0.4rem 0 0.2rem 1.15rem;
-      padding: 0;
-    }
-    .first-principles li { margin: 0.45rem 0; }
-    body.paper-mode .first-principles,
-    body.white-mode .first-principles {
-      background: transparent;
-      border-top-color: rgba(138, 100, 20, 0.5);
-    }
-    body.white-mode .first-principles { border-top-color: rgba(0, 0, 0, 0.12); }
 
     .from-last-sitting {
       margin: 0 0 1.5rem;
@@ -4730,7 +4571,7 @@
     .level-card:hover, .historical-note:hover, .caution-card:hover, .framework-card:hover, .source-card:hover, .principle-card:hover, .biblical-case:hover, .layer-stack:hover {
       box-shadow: 0 14px 38px -8px rgba(0, 0, 0, 0.85);
     }
-    .level-kicker, .historical-note-kicker, .caution-card-kicker, .framework-card-kicker, .source-card-kicker, .principle-card-kicker, .next-sitting-kicker, .checkpoint-kicker, .biblical-case-kicker, .layer-stack-kicker {
+    .level-kicker, .historical-note-kicker, .caution-card-kicker, .framework-card-kicker, .principle-card-kicker, .next-sitting-kicker, .checkpoint-kicker, .biblical-case-kicker, .layer-stack-kicker {
       display: inline-flex;
       align-items: center;
       gap: 0.45rem;
@@ -5916,30 +5757,10 @@
       border: 1px dashed rgba(212, 175, 55, 0.45);
       background: rgba(212, 175, 55, 0.05);
     }
-    .source-card-kicker { color: #e5b93b; }
 
     .qa-card {
       border: 1px solid rgba(212, 175, 55, 0.35);
       background: linear-gradient(135deg, rgba(26, 23, 19, 0.8) 0%, rgba(16, 14, 12, 0.92) 100%);
-    }
-    .qa-question {
-      margin: 0 0 0.55rem;
-      font-weight: 600;
-      color: #faf6eb;
-    }
-    .qa-answer {
-      margin: 0;
-      font-size: 0.98rem;
-      line-height: 1.65;
-    }
-    .qa-answer-label {
-      font-family: "JetBrains Mono", monospace;
-      font-size: 9.5px;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: #34d399;
-      margin-right: 0.45rem;
-      font-weight: 700;
     }
 
     .checkpoint-card {
@@ -6024,27 +5845,6 @@
       border: 1px solid rgba(212, 175, 55, 0.35);
       box-shadow: 0 10px 28px -6px rgba(0, 0, 0, 0.65);
     }
-    .comparison-table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 0.9rem;
-      line-height: 1.55;
-    }
-    .comparison-table th, .comparison-table td {
-      border: 1px solid rgba(212, 175, 55, 0.25);
-      padding: 0.75rem 0.95rem;
-      text-align: left;
-      vertical-align: top;
-    }
-    .comparison-table th {
-      font-family: "JetBrains Mono", monospace;
-      font-size: 10px;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      background: rgba(212, 175, 55, 0.16);
-      color: #fbbf24;
-      font-weight: 700;
-    }
 
     /* Prophecy Diagrams: The Astronomical Obsidian Matrix */
     .prophecy-diagram {
@@ -6088,25 +5888,6 @@
       border-color: #e5dec9;
       color: #1c1917;
       box-shadow: 0 4px 18px rgba(0, 0, 0, 0.05);
-    }
-
-    .glossary-plate {
-      margin: 1.4rem 0 1.6rem;
-    }
-    .glossary-plate img {
-      width: 100%;
-      max-width: 520px;
-      height: auto;
-      border-radius: 10px;
-      border: 1px solid rgba(197, 155, 39, 0.35);
-      display: block;
-    }
-    .glossary-plate figcaption {
-      font-family: Inter, sans-serif;
-      font-size: 0.78rem;
-      line-height: 1.45;
-      margin-top: 0.45rem;
-      opacity: 0.8;
     }
     .term-gloss {
       border-bottom: 1.5px dotted #d97706;
@@ -6225,9 +6006,6 @@
     }
 
     /* Beta Preview Banner */
-    .beta-preview-banner {
-      animation: fadeIn 0.3s ease;
-    }
 
     #flashlight-cursor::before {
       content: '';
@@ -6369,9 +6147,7 @@
     body.white-mode .load-bearing-sitting,
     body.white-mode .load-bearing-plain,
     body.white-mode .load-bearing-links li { color: #525252; }
-    body.paper-mode .study-path-kicker,
     body.paper-mode .study-path h4,
-    body.white-mode .study-path-kicker,
     body.white-mode .study-path h4,
     body.paper-mode .map-enter-full,
     body.white-mode .map-enter-full { color: #8a6a14; }
@@ -6429,9 +6205,6 @@
       border-color: rgba(160, 122, 42, 0.28);
     }
     body.paper-mode .horizon-arrow,
-    body.paper-mode .sitting-hud span,
-    body.paper-mode .sitting-hud button,
-    body.paper-mode .sitting-map-chip,
     body.paper-mode .step-rail button,
     body.paper-mode .scripture-actions button,
     body.paper-mode .strong-close {
@@ -6480,9 +6253,6 @@
       border-color: #e5e5e5 !important;
     }
     body.white-mode .horizon-arrow,
-    body.white-mode .sitting-hud span,
-    body.white-mode .sitting-hud button,
-    body.white-mode .sitting-map-chip,
     body.white-mode .step-rail button,
     body.white-mode .scripture-actions button,
     body.white-mode .strong-close {
@@ -6684,11 +6454,6 @@
       object-fit: cover;
       border-radius: 12px;
     }
-    .history-map-wrap {
-      display: grid;
-      grid-template-columns: 1.45fr 0.85fr;
-      gap: 14px;
-    }
     .map-enter-full {
       display: inline-flex;
       align-items: center;
@@ -6704,30 +6469,6 @@
       background: rgba(201,162,39,0.08);
     }
     .map-enter-full:hover { background: rgba(201,162,39,0.16); }
-    .history-map {
-      position: relative;
-      border-radius: 12px;
-      overflow: hidden;
-      min-height: 280px;
-      background: #0b0a09;
-    }
-    .history-map img.map-terrain {
-      width: 100%; height: 100%; object-fit: cover; min-height: 280px;
-      filter: saturate(0.85) contrast(1.05);
-    }
-    .history-map svg {
-      position: absolute; inset: 0; width: 100%; height: 100%;
-    }
-    .empire-region { fill: rgba(201,162,39,0.12); stroke: rgba(232,212,138,0.55); stroke-width: 1.5; cursor: pointer; transition: fill .2s; }
-    .empire-region:hover, .empire-region.active { fill: rgba(201,162,39,0.38); stroke: #f0e0b8; }
-    .map-label {
-      font-family: Inter, sans-serif;
-      font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase;
-      fill: #f6ebc8; pointer-events: none;
-      paint-order: stroke fill;
-      stroke: rgba(0,0,0,0.65);
-      stroke-width: 3px;
-    }
     .insight-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -6942,7 +6683,7 @@
     }
     @media (max-width: 800px) {
       .instrument-tabs { grid-template-columns: 1fr 1fr; }
-      .epoch-stage, .history-map-wrap, .insight-grid, .context-plate { grid-template-columns: 1fr; }
+      .epoch-stage, .insight-grid, .context-plate { grid-template-columns: 1fr; }
       .context-plate img { width: 100%; height: 160px; }
       .epoch-line-track { margin: 0 8px; }
       .epoch-dot-year { font-size: 8px; }
@@ -7319,48 +7060,8 @@
       color: #7c4a0f;
       background: rgba(245, 158, 11, 0.1);
     }
-    .header-read-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.3rem;
-      padding: 0.28rem 0.6rem;
-      border-radius: 8px;
-      border: 1px solid rgba(197, 155, 39, 0.38);
-      background: transparent;
-      color: inherit;
-      font-family: "JetBrains Mono", monospace;
-      font-size: 11px;
-      line-height: 1.2;
-      cursor: pointer;
-      white-space: nowrap;
-    }
-    .header-read-btn:hover { border-color: #d97706; }
     .auth-slot:empty { display: none; }
-    .study-tools .auth-signed-in,
-    .access-panel .auth-signed-in {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      min-width: 0;
-    }
-    .study-tools .auth-name,
-    .access-panel .auth-name {
-      font-family: "JetBrains Mono", monospace;
-      font-size: 10px;
-      max-width: 120px;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
     .access-panel .auth-slot { flex: 1 1 100%; }
-    .header-read-btn.is-on {
-      background: rgba(245, 158, 11, 0.18);
-      border-color: #d97706;
-      color: #fde68a;
-    }
-    body:not(.charcoal-mode) .header-read-btn[data-need="charcoal"] {
-      opacity: 0.72;
-    }
     @media (max-width: 1100px) {
       .header-competency-pill { max-width: 100%; flex: 1 1 220px; }
     }
@@ -7818,14 +7519,6 @@
       border-radius: 999px;
       padding: 4px 10px;
     }
-    .sitting-map-wrap.is-expanded .cmap-embed .cmap-dossier {
-      display: block;
-      left: 16px;
-      width: min(440px, 46vw);
-      bottom: 72px;
-      max-height: 58%;
-      z-index: 40;
-    }
     .step-rail {
       display: flex;
       flex-wrap: wrap;
@@ -8023,7 +7716,6 @@
     #btn-download-certificate[hidden] { display: none !important; }
     /* --- SID Classroom Print Styles --- */
     @media print {
-      .site-header,
       .study-topbar,
       header,
       .cinematic-atmosphere,
@@ -8044,10 +7736,7 @@
       #competency-record-modal,
       #dossier-modal,
       #certificate-review-modal,
-      .pomo-wrap,
-      .unveil,
       .glow-drift,
-      .shafts,
       .vignette,
       footer,
       button,
@@ -8122,7 +7811,6 @@
     }
     body.projection-mode #weather-canvas,
     body.projection-mode .cinematic-atmosphere,
-    body.projection-mode .shafts,
     body.projection-mode .glow-drift,
     body.projection-mode .vignette,
     body.projection-mode #btn-atmosphere-toggle {
@@ -8141,9 +7829,6 @@
       #access-open-btn.is-guide-spot {
         animation: none !important;
         box-shadow: 0 0 0 3px #c59b27;
-      }
-      .guide-spot-pulse {
-        animation: none !important;
       }
       #weather-canvas {
         display: none !important;
@@ -8390,16 +8075,6 @@
     body.white-mode textarea::placeholder {
       color: #78716c;
       opacity: 1;
-    }
-    body.paper-mode .header-read-btn,
-    body.white-mode .header-read-btn {
-      color: var(--read-fg);
-      border-color: var(--read-border);
-    }
-    body.paper-mode .header-read-btn.is-on,
-    body.white-mode .header-read-btn.is-on {
-      color: var(--read-accent);
-      background: rgba(201, 162, 39, 0.12);
     }
     body.charcoal-mode .workbench-card,
     body.night-mode .workbench-card,
@@ -8719,16 +8394,10 @@
     body.white-mode .insight-card h4,
     body.paper-mode .insight-card p,
     body.white-mode .insight-card p,
-    body.paper-mode .comparison-table th,
-    body.white-mode .comparison-table th,
-    body.paper-mode .comparison-table td,
-    body.white-mode .comparison-table td,
     body.paper-mode .map-enter-full,
     body.white-mode .map-enter-full,
     body.paper-mode .sheet-map-list .cite,
     body.white-mode .sheet-map-list .cite,
-    body.paper-mode .qa-question,
-    body.white-mode .qa-question,
     body.paper-mode .next-sitting-card h4,
     body.white-mode .next-sitting-card h4 {
       color: var(--read-fg);

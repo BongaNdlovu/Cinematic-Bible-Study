@@ -5,8 +5,6 @@ import { fileURLToPath } from "url";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..");
 const cf = fs.readFileSync(path.join(ROOT, "tools/deploy-cloudflare-pages.ps1"), "utf8");
-const vercel = fs.readFileSync(path.join(ROOT, "tools/deploy-vercel.ps1"), "utf8");
-const vercelIgnore = fs.readFileSync(path.join(ROOT, ".vercelignore"), "utf8");
 
 assert(cf.includes(" docs"), "Cloudflare stage must exclude the docs folder");
 assert(cf.includes("README.md"), "Cloudflare stage must exclude README.md");
@@ -21,7 +19,7 @@ assert(cf.includes(" workers"), "Cloudflare stage must exclude workers folder");
 assert(cf.includes(" qa-e2e"), "Cloudflare stage must exclude qa-e2e folder");
 assert(cf.includes("start_website.bat"), "Cloudflare stage must exclude start_website.bat");
 
-for (const name of ["skills-lock.json", "tailwind.study.config.js", "three.core.js", "three.module.js", "study-tailwind-src.css", "glossary-enrichment-overrides.json"]) {
+for (const name of ["skills-lock.json", "tailwind.study.config.js", "three.core.js", "three.module.js", "study-tailwind-src.css", "glossary-enrichment-overrides.json", "sheets-data.js"]) {
   assert(cf.includes(" " + name), "Cloudflare stage must exclude " + name);
 }
 assert(/\/XD[^\n]* functions /.test(cf.replace(/\r/g, "")), "Cloudflare stage must not upload the functions source as static files");
@@ -56,7 +54,7 @@ function routed(p) {
   return !routes.exclude.some((rule) => new RegExp("^" + rule.split("*").map((part) => part.replace(/[.+?^${}()|[\]\\]/g, "\\$&")).join(".*") + "$").test(p));
 }
 const protectedPaths = [
-  "/docs/plan.md", "/tools/supabase-quiz-integrity.sql", "/backups/db.sql", "/workers/exhibit-rate-gate/src/index.js",
+  "/docs/plan.md", "/tools/supabase-quiz-integrity.sql", "/tests/unit/middleware.test.mjs", "/backups/db.sql", "/workers/exhibit-rate-gate/src/index.js",
   "/qa/proofs/x.png", "/originals/a.glb", "/_factcheck/meta.json", "/_mig/index.json", "/functions/_middleware.js",
   "/README.md", "/package.json", "/package-lock.json", "/server.py", "/vercel.json", "/wrangler.toml",
   "/start_website.bat", "/middleware.js", "/__wiring_check.mjs", "/.env", "/.git/config", "/__rate",
@@ -76,15 +74,11 @@ for (const p of protectedPaths.slice(0, 20)) {
   assert(res.status === 404 && !reached, p + " must be denied by the middleware");
 }
 
-assert(vercel.includes(" docs"), "Vercel stage must exclude the docs folder");
-assert(vercel.includes("README.md"), "Vercel stage must exclude README.md");
-assert(vercel.includes("server.py"), "Vercel stage must exclude server.py");
-assert(vercel.includes(".oxlintrc.json"), "Vercel stage must exclude .oxlintrc.json");
-assert(!/\/XF[^\n]*package\.json/.test(vercel.replace(/\r/g, "")), "Vercel stage must keep package.json");
-
-assert(vercelIgnore.includes("docs/"), ".vercelignore must drop docs/");
-assert(vercelIgnore.includes("README.md"), ".vercelignore must drop README.md");
-assert(vercelIgnore.includes("server.py"), ".vercelignore must drop server.py");
+for (const gone of ["vercel.json", "middleware.js", ".vercelignore", "tools/deploy-vercel.ps1"]) {
+  assert(!fs.existsSync(path.join(ROOT, gone)), gone + " must stay removed: the site deploys only to Cloudflare Pages");
+}
+assert(!fs.readFileSync(path.join(ROOT, "package.json"), "utf8").includes("vercel"), "package.json must not offer a Vercel deploy");
+assert(!fs.readFileSync(path.join(ROOT, "tools/rollback-deploy.mjs"), "utf8").includes("vercel"), "the rollback script must not call Vercel");
 
 const report = await onRequest({
   request: new Request("https://example.test/csp-report", {
@@ -99,4 +93,4 @@ const reportText = await report.text();
 assert.strictEqual(report.status, 503, "a CSP report is refused when the counter is down");
 assert.ok(!reportText.includes("secret"), "a refused CSP report does not echo the blocked address");
 
-console.log("Pages and Vercel stages drop operator files; static folders skip the middleware without exposing protected paths");
+console.log("The Pages stage drops operator files, the Vercel deploy path stays removed, and static folders skip the middleware without exposing protected paths");

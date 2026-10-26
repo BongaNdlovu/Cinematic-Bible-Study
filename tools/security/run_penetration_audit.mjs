@@ -90,8 +90,10 @@ function browser() {
     document,
     history: global.history,
     navigator: global.navigator,
-    addEventListener() {}
+    addEventListener() {},
+    SODConsent: { has() { return true; } }
   };
+  global.SODConsent = global.window.SODConsent;
   return { storage, location, document };
 }
 
