@@ -827,7 +827,114 @@
     });
   }
 
+  function quarterBounds(now) {
+    const d = now || new Date();
+    const q = Math.floor(d.getUTCMonth() / 3);
+    const start = new Date(Date.UTC(d.getUTCFullYear(), q * 3 - 3, 1));
+    const end = new Date(Date.UTC(d.getUTCFullYear(), q * 3, 0));
+    return { from: start.toISOString().slice(0, 10), to: end.toISOString().slice(0, 10) };
+  }
+
+  function reportStatus(text) {
+    const el = byId('sid-status');
+    if (el) el.textContent = text || '';
+  }
+
+  function loadRange(fromIso, toIso) {
+    const c = client();
+    const capped = [];
+    function between(q) {
+      return q.gte('created_at', fromIso).lt('created_at', toIso);
+    }
+    return Promise.all([
+      fetchAll(function () {
+        return between(c.from('exhibit_events')
+          .select('event,sitting,sheet,detail,user_id,anon_id,session_id,created_at')
+          .not('event', 'in', PROBES))
+          .order('created_at', { ascending: false });
+      }, EVENT_CAP, 'events', capped),
+      fetchAll(function () {
+        return between(c.from('exhibit_surveys').select('rating,responses,created_at,user_id,anon_id'))
+          .order('created_at', { ascending: false });
+      }, ROW_CAP, 'surveys', capped),
+      fetchAll(function () {
+        return between(c.from('exhibit_profiles').select('user_id,study_mode,found_via,created_at'))
+          .order('created_at', { ascending: false });
+      }, ROW_CAP, 'profiles', capped),
+      typeof c.rpc === 'function'
+        ? Promise.resolve(c.rpc('exhibit_graduates')).then(function (r) {
+          return r && !r.error && Array.isArray(r.data) ? r.data : null;
+        }, function () { return null; })
+        : null
+    ]).then(function (rows) {
+      return { events: rows[0], surveys: rows[1], profiles: rows[2], graduates: rows[3], capped: capped };
+    });
+  }
+
+  function ownActivity(rows) {
+    const ids = myIds();
+    const anons = Object.create(null);
+    if (ids.anon) anons[ids.anon] = true;
+    (rows || []).forEach(function (e) {
+      if (ids.user && e.user_id === ids.user && e.anon_id) anons[e.anon_id] = true;
+    });
+    return function (row) {
+      return !!((ids.user && row.user_id === ids.user) || (row.anon_id && anons[row.anon_id]));
+    };
+  }
+
+  function closeReport() {
+    const pages = byId('sid-pages');
+    document.body.classList.remove('sid-open');
+    if (pages) pages.innerHTML = '';
+  }
+
+  function buildReport() {
+    const fromField = byId('sid-from');
+    const toField = byId('sid-to');
+    const from = fromField ? fromField.value : '';
+    const to = toField ? toField.value : '';
+    if (!client() || !isMod() || !window.SidReport) {
+      reportStatus('Sign in as a moderator to build the report.');
+      return Promise.resolve();
+    }
+    if (!from || !to || from > to) {
+      reportStatus('Pick a start date on or before the end date.');
+      return Promise.resolve();
+    }
+    const fromIso = from + 'T00:00:00.000Z';
+    const toIso = new Date(Date.parse(to + 'T00:00:00.000Z') + 86400000).toISOString();
+    reportStatus('Building the report…');
+    return loadRange(fromIso, toIso).then(function (data) {
+      const guestCutoff = new Date(Date.now() - 90 * 86400000).toISOString();
+      const figures = window.SidReport.build(data, { from: fromIso, to: toIso, guestCutoff: guestCutoff, exclude: ownActivity(data.events) });
+      const pages = byId('sid-pages');
+      if (!pages) return;
+      pages.innerHTML = window.SidReport.render(figures);
+      document.body.classList.add('sid-open');
+      window.scrollTo(0, 0);
+      reportStatus('');
+    }).catch(function () {
+      reportStatus('Could not load the data for the report. Try again.');
+    });
+  }
+
+  function bootReport() {
+    const fromField = byId('sid-from');
+    const toField = byId('sid-to');
+    const bounds = quarterBounds();
+    if (fromField && !fromField.value) fromField.value = bounds.from;
+    if (toField && !toField.value) toField.value = bounds.to;
+    const go = byId('sid-build');
+    if (go) go.addEventListener('click', buildReport);
+    const print = byId('sid-print');
+    if (print) print.addEventListener('click', function () { window.print(); });
+    const close = byId('sid-close');
+    if (close) close.addEventListener('click', closeReport);
+  }
+
   function boot() {
+    bootReport();
     const range = byId('insights-range');
     if (range) {
       range.addEventListener('click', function (e) {
@@ -872,7 +979,9 @@
     setDays: function (d) { days = d; },
     setHideMine: function (v) { hideMine = !!v; },
     setCache: function (c) { cache = c; },
-    getCache: function () { return cache; }
+    getCache: function () { return cache; },
+    quarterBounds: quarterBounds,
+    buildReport: buildReport
   };
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
