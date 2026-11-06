@@ -1,7 +1,7 @@
 import { chromium } from 'playwright';
 import fs from 'fs';
 import path from 'path';
-import { ensureServer } from './_server.mjs';
+import { ensureServer, dismissConsent } from './_server.mjs';
 
 fs.mkdirSync(path.join('qa', 'proofs'), { recursive: true });
 
@@ -15,23 +15,29 @@ async function run() {
   const page = await context.newPage();
 
   const consoleErrors = [];
+  const VENDOR_NOISE = [
+    'favicon.ico',
+    'cloudflareinsights',
+    // Cloudflare's Turnstile widget logs its own debug lines and probes data:
+    // URLs inside its iframe; the violations it prints come from its own
+    // frame policy, not from this site.
+    'font-size:0;color:transparent',
+    "Connecting to 'data:,'",
+    'Fetch API cannot load data:,'
+  ];
   page.on('console', msg => {
-    if (msg.type() !== 'error') return;
-    const txt = msg.text();
-    if (txt.includes('favicon.ico') || txt.includes('cloudflareinsights')) return;
-    /* Cloudflare Turnstile (the sign-in human check) emits deliberate styled
-       decoy console messages ("%c...") and probes by fetching a 'data:' URL,
-       which this site's strict connect-src CSP rightly blocks. Both families
-       originate in the third-party widget, not site code — skip them. */
-    if (txt.startsWith('%c')) return;
-    if (txt.includes("'data:,'") || txt.includes('load data:,')) return;
-    if (txt.includes('challenges.cloudflare.com')) return;
-    consoleErrors.push(txt);
+    if (msg.type() === 'error') {
+      const txt = msg.text();
+      if (!VENDOR_NOISE.some((n) => txt.includes(n))) {
+        consoleErrors.push(txt);
+      }
+    }
   });
 
   try {
     console.log('\n=== E2E Step 1: Visiting account.html as guest ===');
     await page.goto(`${BASE}/account.html`, { waitUntil: 'networkidle' });
+    await dismissConsent(page);
     await page.waitForTimeout(500);
 
     const hubVisible = await page.locator('#account-hub').isVisible();

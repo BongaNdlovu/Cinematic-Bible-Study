@@ -27,6 +27,7 @@
   let helpForm = null;
   let publishForm = null;
   let publishSection = null;
+  let writePane = null;
   let inboxGuest = null;
   let inboxListView = null;
   let inboxHeading = null;
@@ -298,7 +299,7 @@
     clear(listNode);
     const rows = shownNotices();
     if (!rows.length) {
-      line(listNode, "desk-empty", "No notes from the operator yet.");
+      line(listNode, "desk-empty", "No notes from us yet.");
     } else {
       rows.forEach(function (row) { listNode.appendChild(paintCard(row)); });
     }
@@ -311,7 +312,13 @@
     if (guestLine) guestLine.hidden = signed;
     if (syncLine) syncLine.hidden = signed;
     if (helpForm) helpForm.hidden = !signed;
-    if (publishSection) publishSection.hidden = !isOperator();
+    const operator = isOperator();
+    if (operator && !publishSection && writePane) writePane.appendChild(buildPublish());
+    if (!operator && publishSection) {
+      publishSection.remove();
+      publishSection = null;
+      publishForm = null;
+    }
   }
 
   function paintThreadCard(row, operator) {
@@ -346,7 +353,7 @@
     const mine = operator ? row.from_operator : !row.from_operator;
     const item = node("article", mine ? "desk-msg is-mine" : "desk-msg");
     const who = node("p", "desk-when");
-    const name = mine ? "You" : (operator ? "Reader" : "The operator");
+    const name = mine ? "You" : (operator ? "Reader" : "The Shelf of Daniel");
     who.textContent = name + " · " + formatWhen(row.created_at, true);
     item.appendChild(who);
     const body = node("p", "desk-body");
@@ -393,7 +400,7 @@
       if (!threads.length) {
         line(inboxList, "desk-empty", operator
           ? "No notes waiting."
-          : "Nothing yet. Notes you send to the operator, and the replies, appear here.");
+          : "Nothing yet. Notes you send to us, and our replies, appear here.");
       } else {
         threads.forEach(function (row) { inboxList.appendChild(paintThreadCard(row, operator)); });
       }
@@ -713,7 +720,7 @@
   function submitHelp(event) {
     event.preventDefault();
     if (!userId()) {
-      setStatus("Sign in to write to the operator.");
+      setStatus("Sign in to write to us.");
       return;
     }
     const subject = clippedLine(helpForm.subject.value, TITLE_MAX);
@@ -742,7 +749,7 @@
         return;
       }
       helpForm.reset();
-      setStatus("The operator has your note. Replies will appear in your inbox.");
+      setStatus("We have your note. Replies will appear in your inbox.");
       closeThread();
       selectTab("inbox", false);
       loadInbox(gen, uid);
@@ -794,7 +801,7 @@
 
   function submitNotice(event) {
     event.preventDefault();
-    if (!isOperator()) return;
+    if (!isOperator() || !publishForm) return;
     const title = clippedLine(publishForm.title.value, TITLE_MAX);
     const body = clippedBlock(publishForm.body.value, BODY_MAX);
     if (!title || !body) {
@@ -820,7 +827,7 @@
         setStatus(plainError(res && res.error));
         return;
       }
-      publishForm.reset();
+      if (publishForm) publishForm.reset();
       setStatus("Published to every reader.");
       loadNotices(gen, uid);
     }, function () {
@@ -946,7 +953,7 @@
     const pane = buildPane("notices");
     const notes = node("section", "desk-section");
     const heading = node("h3");
-    heading.textContent = "From the operator";
+    heading.textContent = "From The Shelf of Daniel";
     notes.appendChild(heading);
     syncLine = line(notes, "desk-note", "Sign in to keep read and removed notes with your account.");
     listNode = node("div");
@@ -957,7 +964,7 @@
 
   function buildInbox() {
     const pane = buildPane("inbox");
-    inboxGuest = line(pane, "desk-note desk-section", "Sign in to see the notes you sent and the operator's replies.");
+    inboxGuest = line(pane, "desk-note desk-section", "Sign in to see the notes you sent and our replies.");
     inboxListView = node("section", "desk-section");
     inboxHeading = node("h3");
     inboxListView.appendChild(inboxHeading);
@@ -997,15 +1004,15 @@
   function buildHelp() {
     const section = node("section", "desk-section");
     const heading = node("h3");
-    heading.textContent = "Write to the operator";
+    heading.textContent = "Write to us";
     section.appendChild(heading);
-    guestLine = line(section, "desk-note", "Sign in to send a note. Replies come back to your inbox, and the operator sees only your confirmed address.");
+    guestLine = line(section, "desk-note", "Sign in to send a note. Replies come back to your inbox, and we see only your confirmed address.");
     helpForm = node("form");
     field(helpForm, "input", "subject", "Subject", TITLE_MAX);
     field(helpForm, "textarea", "body", "Message", BODY_MAX);
     const send = node("button", "desk-send");
     send.type = "submit";
-    send.textContent = "Send to the operator";
+    send.textContent = "Send to us";
     helpForm.appendChild(send);
     helpSend = send;
     helpForm.addEventListener("submit", submitHelp);
@@ -1015,7 +1022,6 @@
 
   function buildPublish() {
     publishSection = node("section", "desk-section desk-admin");
-    publishSection.hidden = true;
     const heading = node("h3");
     heading.textContent = "Publish to every reader";
     publishSection.appendChild(heading);
@@ -1033,10 +1039,9 @@
   }
 
   function buildWrite() {
-    const pane = buildPane("write");
-    pane.appendChild(buildHelp());
-    pane.appendChild(buildPublish());
-    return pane;
+    writePane = buildPane("write");
+    writePane.appendChild(buildHelp());
+    return writePane;
   }
 
   function build() {

@@ -23,7 +23,7 @@ This exhibit is static HTML. Do not install `@supabase/ssr` or add `page.tsx` / 
      - `http://127.0.0.1:8003/**`
      - `https://cinematic-bible-study-daniel.pages.dev/**`
 
-The publishable key lives in `js/shared/auth-config.js` (Vercel does not inject `.env.local` into this static host). Sessions persist in the browser so a returning student should not have to sign in again.
+The publishable key lives in `js/shared/auth-config.js` (the static host does not inject `.env.local`). Sessions persist in the browser so a returning student should not have to sign in again.
 
 ## Home-page reviews
 

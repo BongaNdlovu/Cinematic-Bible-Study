@@ -354,14 +354,16 @@ function warmSitting(i) {
   if (i === warmedSitting || !can(i)) return;
   warmedSitting = i;
   warmDesk();
-  if (!HTMLScriptElement.supports || !HTMLScriptElement.supports('speculationrules')) return;
+  // Link prefetch rather than a speculation-rules script block: the rules JSON
+  // is built per sitting, and script-src hashes cannot cover dynamic inline
+  // scripts, so a script block here would be refused by the CSP.
   const old = document.getElementById('sitting-prefetch');
   if (old) old.remove();
-  const rules = document.createElement('script');
-  rules.type = 'speculationrules';
-  rules.id = 'sitting-prefetch';
-  rules.textContent = JSON.stringify({ prefetch: [{ source: 'list', urls: [sittingUrl(i)] }] });
-  document.head.appendChild(rules);
+  const link = document.createElement('link');
+  link.id = 'sitting-prefetch';
+  link.rel = 'prefetch';
+  link.href = sittingUrl(i);
+  document.head.appendChild(link);
 }
 
 function enterSitting(i) {
@@ -1961,6 +1963,10 @@ async function startRoom() {
     b.back.material[5] = hi.back; b.back.material[4] = hi.endB;
     b.pages.material[4] = hi.title;
     b.hi = hi;
+    if (!hiWarmed) {
+      hiWarmed = true;
+      warmPulledLights();
+    }
     hiOrder.push(b);
     while (hiOrder.length > HI_CAP) {
       const old = hiOrder.find((o) => o.i !== selected && o.mode === 'shelf');
@@ -1968,6 +1974,20 @@ async function startRoom() {
       hiOrder.splice(hiOrder.indexOf(old), 1);
       dropHi(old);
     }
+  }
+  let hiWarmed = false;
+  function warmPulledLights() {
+    const show = [key.visible, glint.visible, rim.visible];
+    const target = renderer.getRenderTarget();
+    key.visible = glint.visible = rim.visible = true;
+    if (composer) renderer.setRenderTarget(composer.readBuffer);
+    let pending = null;
+    try { pending = renderer.compileAsync(scene, camera); } catch (e) {}
+    renderer.setRenderTarget(target);
+    key.visible = show[0];
+    glint.visible = show[1];
+    rim.visible = show[2];
+    if (pending && pending.catch) pending.catch(() => {});
   }
   function scheduleHi(b, urgent) {
     if (b.hi) { touchHi(b); return; }
@@ -2313,7 +2333,7 @@ async function startRoom() {
   function governor(raw) {
     frameRing[frameN % 60] = raw;
     frameN++;
-    if (frameN % 60 !== 0 || window.__shelfGovernorOff === true) return;
+    if (frameN % 60 !== 0) return;
     if (intro < introLen || books.some((b) => b.mode === 'seq')) { fastWins = 0; return; }
     const sorted = Array.from(frameRing).sort((a, b) => a - b);
     const med = (sorted[29] + sorted[30]) / 2;
@@ -2525,16 +2545,7 @@ async function startRoom() {
   loop();
   // The pulled-book lights are a second shader variant. Warm them after the
   // opening move, without holding the loader.
-  setTimeout(() => {
-    const show = [key.visible, glint.visible, rim.visible];
-    key.visible = glint.visible = rim.visible = true;
-    let pending = null;
-    try { pending = renderer.compileAsync(scene, camera); } catch (e) {}
-    key.visible = show[0];
-    glint.visible = show[1];
-    rim.visible = show[2];
-    if (pending && pending.catch) pending.catch(() => {});
-  }, 3600);
+  setTimeout(warmPulledLights, 3600);
 
   api = { pull, put, step, setView: (v) => setView(v), focusStep, focused: () => focusIdx };
   window.__shelf = { books, camera, scene, renderer, api, state: () => ({ running, stageInView, tabVisible, rafId, dpr: dprCur }), advance(sec) { for (let k = 0; k < sec * 60; k++) { update(1 / 60); pumpHi(); } render(); } };

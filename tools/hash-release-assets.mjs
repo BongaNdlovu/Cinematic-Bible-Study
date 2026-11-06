@@ -86,6 +86,9 @@ function apply(prefix, extensions) {
 }
 
 apply("models", [".glb", ".gltf"]);
+apply("bible", [".json"]);
+apply("vendor/supabase", [".js"]);
+apply("vendor/leaflet", [".js", ".css"]);
 apply("css", [".css"]);
 apply("js", [".js", ".mjs"]);
 console.log("hashed release assets in " + stage);

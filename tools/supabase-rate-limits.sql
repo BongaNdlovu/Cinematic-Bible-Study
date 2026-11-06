@@ -7,7 +7,8 @@
 -- anon_id cannot flood either table.
 -- Progress: one upsert per 6 seconds per row (10/min).
 -- Reviews: 3 inserts/day per user_id.
--- Per-IP POST caps are enforced at the site edge, not here (browser posts go to Supabase).
+-- Browser writes go straight to Supabase and never pass the site edge, so these triggers are the only caps on them.
+-- Profiles, review edits and quiz checks are capped in supabase-rate-limits-gaps.sql.
 -- Each gate is security definer: the caller cannot read the rows it is writing, so an
 -- invoker count would always see zero and the cap would never trip. created_at and
 -- updated_at are stamped here so a client cannot hide writes by backdating them.

@@ -7,7 +7,7 @@ The Shelf of Daniel is four static pages at the repo root. Python `server.py` is
 | Page | URL stays at | CSS | Scripts (load order) | Owns |
 |---|---|---|---|---|
 | Cover | `index.html` | `css/site.css` | `js/shared/journey.js` | Entrance, resume CTA, three-act offer |
-| Study desk | `study.html` | `css/map.css` (embedded map) + `css/book-reader.css` + inline study styles | Tailwind CDN → `js/study/tailwind-config.js` → Tone.js → import map → `js/study/stage.js` (module) → Leaflet → `js/shared/journey.js` → `js/study/scripture.js` → `js/map/map-data.js` → `js/map/map.js` → `js/study/workbench.js` → `js/study/competency.js` → `js/shared/study-sync.js` → `js/shared/quiz-gate.js` → `js/study/sheets-data.js` → `js/study/sheet-map.js` → `js/study/sheet-verify.js` → `js/study/sheet-glossary.js` → `js/study/certificate.js` → `js/study/book-reader.js` → `js/study/study-app.js` | 11-sheet sitting as a page-turning book (text pages, diagram plates), quiz gate, weather, pomodoro, horizon |
+| Study desk | `study.html` | `css/study-tailwind.css` (built by `npm run build:tailwind`) + `css/study-page.css` + `css/book-reader.css` + shared `terms`/`cinema`/`onboard`/`desk`/`consent` sheets | `js/study/book-open.js` and `js/shared/consent.js` run in the head; everything else is `defer`red at the end of `<body>`: `js/shared/cinema.js` → `journey.js` → `auth-config.js` → `vendor/supabase/supabase.js` → shared auth/desk/sync scripts → `js/study/scripture.js` → `js/map/map-data.js` → `js/study/workbench.js` → `js/study/competency.js` → `js/study/sheets/index.js` (loads `js/study/sheets/sheet-N.js` on demand) → `js/study/sheet-map.js` → `js/study/sheet-verify.js` → glossary scripts → `js/study/book-reader.js` → `js/study/study-app.js` → lesson/task/audio scripts | 11-sheet sitting as a page-turning book (text pages, diagram plates), quiz gate, weather, pomodoro, horizon |
 | Map | `map.html` | `vendor/leaflet/leaflet.css`, `css/map.css` | Leaflet → `js/shared/journey.js` → `js/map/map-data.js` → `js/map/map.js` | Chronicle fly, cities, events, routes |
 | 3D gallery | `gallery.html` | `css/app.css` | `js/shared/journey.js` → import map → `js/gallery/app.js` (module) | Artifact registry, orbit, hall |
 
@@ -19,8 +19,7 @@ Deep links that must keep working: `study.html?sheet=N` / `?id=…`, `gallery.ht
 |---|---|
 | Access gate (`FREE_THROUGH`, `canAccessSheet`, `previewFull`) | `js/shared/journey.js` |
 | Artifact database (`ASSET_REGISTRY`, hall, `yearForAsset`) | `js/gallery/app.js` |
-| Three.js study stage / idle models | `js/study/stage.js` |
-| Curriculum (`sheetsData`) + horizon epochs (`timelineEpochs`) | `js/study/sheets-data.js` |
+| Curriculum (`sheetsData`) + horizon epochs (`timelineEpochs`) | authored in `js/study/sheets-data.js` (not served); `tools/build_study_sheets.mjs` splits it into the `js/study/sheets/sheet-N.js` files the page loads |
 | Quiz, weather, pomodoro, chrome, `LEGACY_ID_MAP` | `js/study/study-app.js` |
 | Quiz grading (server-side; the client ships no answer key) | `js/shared/quiz-gate.js` + `tools/supabase-quiz-integrity.sql` |
 | Scripture dock (KJV + Strong’s + sheet passages) | `js/study/scripture.js` + `bible/*.json` |
@@ -63,8 +62,7 @@ On `study.html`, after `DOMContentLoaded`:
 1. `journey.js` restores sheet / theme / preview (`?preview=full` unlocks gated sheets).
 2. `sheetsData[index]` paints the article; `BAScripture.showSheet(index)` loads `bible/sheet-passages.json` highlights against `bible/kjv.json`.
 3. Horizon cards drive `timelineEpochs` and call the embedded map (`map-data.js` / `map.js`) with `STUDY_EPOCH_TO_YEAR`.
-4. `StudyStage` (`js/study/stage.js`) shows the idle GLB for that sheet (`models/*.glb` via the root import map `./vendor/three/...`).
-5. Gallery and map links use `study.html?id=` / `map.html?year=` so the same `baJourney` record can resume on another page.
+4. Gallery and map links use `study.html?id=` / `map.html?year=` so the same `baJourney` record can resume on another page.
 
 Fetch paths are **document-relative** (pages stay at repo root): `bible/*.json`, `assets/maps/chronicle-polities.json`, `models/…`. Moving a `.js` file does not change those URLs.
 
@@ -72,7 +70,7 @@ Fetch paths are **document-relative** (pages stay at repo root): `bible/*.json`,
 
 | If you are adding… | Put it here |
 |---|---|
-| A sitting / quiz / studyGuide | `js/study/sheets-data.js` (`sheetsData`) |
+| A sitting / quiz / studyGuide | `js/study/sheets-data.js` (`sheetsData`), then `node tools/build_study_sheets.mjs` |
 | A Strong’s teaching line | `bible/strongs-daniel.json` |
 | Sheet verse highlights | `bible/sheet-passages.json` |
 | A map city / event / year | `js/map/map-data.js` |
@@ -131,7 +129,7 @@ Google sign-in goes from the browser straight to Supabase. The page's 5-starts-p
 
 New passwords and password changes must be at least 12 characters. That floor is the Auth setting, confirmed on 18 Oct 2026. An existing shorter password can still sign in. Leaked-password rejection is shown as Pro and above, so it is off. The password-attempt hook function is in the database and granted only to `supabase_auth_admin`; Auth Hooks lists it as Team or Enterprise, so it is not enabled. Operator privilege requires a confirmed Google identity. A second factor is required only after a verified authenticator already exists. What to do in an incident is `docs/AUTH-INCIDENT.md`.
 
-The database backup screen on 26 Sep 2026 said this project is on the Free plan, which does not include project backups. Scheduled backups would be daily, around midnight in the project region, and the Pro plan keeps up to 7 days. Point-in-time recovery is a Pro add-on that starts at $100 a month. The recovery point for progress rows is the export taken at `2026-09-26T22:54:04Z`, saved as `backups/exhibit-progress-2026-09-26T225404Z.json` (4 rows). That folder is not committed because the rows contain learner names and email addresses. `node tools/restore-exhibit-progress.mjs <snapshot>` writes `backups/restore-exhibit-progress.sql`, which rolls back until the last line is changed to `commit`. Run the table SQL in `tools/` first if the table itself is gone. Recovery time for the site is a Cloudflare Pages rollback plus `npx vercel rollback`. No production restore was run.
+The database backup screen on 26 Sep 2026 said this project is on the Free plan, which does not include project backups. Scheduled backups would be daily, around midnight in the project region, and the Pro plan keeps up to 7 days. Point-in-time recovery is a Pro add-on that starts at $100 a month. The recovery point for progress rows is the export taken at `2026-09-26T22:54:04Z`, saved as `backups/exhibit-progress-2026-09-26T225404Z.json` (4 rows). That folder is not committed because the rows contain learner names and email addresses. `node tools/restore-exhibit-progress.mjs <snapshot>` writes `backups/restore-exhibit-progress.sql`, which rolls back until the last line is changed to `commit`. Run the table SQL in `tools/` first if the table itself is gone. Recovery time for the site is a Cloudflare Pages rollback. No production restore was run.
 
 A page read is still served when the counter is missing or times out. A non-GET request, including the gate proxy and a CSP report, gets 503 in that case. `limit_unavailable` is still recorded. Ordinary pages share 240 reads a minute. `/account` and `/account.html` share 30. `/csp-report` has 10. Static files under `/assets/`, `/js/`, `/css/`, `/vendor/`, `/models/`, and `/bible/` do not spend a counter. An expired counter is deleted on the next check for that address, so a one-time visitor does not leave a stored window behind. What to do when sign-in looks like an attack is in `docs/AUTH-INCIDENT.md`.
 

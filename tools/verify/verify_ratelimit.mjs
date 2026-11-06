@@ -75,15 +75,6 @@ assert(gate.includes('isStaticPath'), 'shared gate must skip static prefixes bef
 assert(!gate.includes('models: [60, 60000]'), 'shared gate must not cap /models at 60/min');
 assert(!gate.includes('bible: [30, 60000]'), 'shared gate must not cap /bible at 30/min');
 
-const vercel = fs.readFileSync(path.join(ROOT, 'middleware.js'), 'utf8');
-assert(vercel.includes('status: 429'), 'Vercel middleware must return 429');
-assert(!vercel.includes('new Map('), 'Vercel middleware must not keep a private counter');
-assert(vercel.includes('/__rate'), 'Vercel must ask the Pages rate gate');
-assert(vercel.includes('x-middleware-next'), 'Vercel middleware must continue with x-middleware-next');
-assert(vercel.includes('AbortSignal.timeout(2000)'), 'Vercel must time out the counter');
-assert(vercel.includes('status: 503'), 'Vercel must refuse writes when the counter does not answer');
-assert(vercel.includes('decision === "unavailable"'), 'Vercel must treat a counter miss as unavailable');
-
 const realFetch = globalThis.fetch;
 const edgeReports = [];
 globalThis.fetch = async (url, init) => {
@@ -242,14 +233,6 @@ const denials = [{ ok: false, first: true }, { ok: false, first: false }, { ok: 
   assert.strictEqual(capReports(), 1, 'the gate proxy reports the cap once per window, on the first denial');
 }
 
-const { middleware: vercelMiddleware } = await import('../../middleware.js');
-const savedSecret = process.env.RATE_GATE_SECRET;
-delete process.env.RATE_GATE_SECRET;
-const vercelGet = await vercelMiddleware(new Request(SITE + '/study.html'));
-assert.strictEqual(vercelGet.headers.get('x-middleware-next'), '1', 'Vercel serves a GET page when the gate is unavailable');
-const vercelPost = await vercelMiddleware(new Request(SITE + '/study.html', { method: 'POST', body: 'x' }));
-assert.strictEqual(vercelPost.status, 503, 'Vercel refuses a non-GET request when the gate is unavailable');
-if (savedSecret !== undefined) process.env.RATE_GATE_SECRET = savedSecret;
 globalThis.fetch = realFetch;
 console.log('1b. Edge gate fails open for page reads, stays strict for writes, and serves .html without a redirect.');
 

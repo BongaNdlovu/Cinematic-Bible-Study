@@ -72,3 +72,17 @@ export async function ensureServer({ preferred = 8000, probe = '/index.html', ti
     `Pass --base=http://127.0.0.1:<port> to use one you started.\n${log.trim().slice(-600)}`
   );
 }
+
+/*
+ * Accept the cookie-and-storage consent dialog if it is showing. Fresh
+ * browser contexts see the dialog on their first page, and it intercepts
+ * every click until a choice is made; the choice then persists for the
+ * whole context, so one call per context's first page is enough.
+ */
+export async function dismissConsent(page) {
+  const dialog = page.locator('#sod-consent');
+  if (await dialog.isVisible().catch(() => false)) {
+    await page.locator('button[data-sod-action="accept"]').click();
+    await dialog.waitFor({ state: 'hidden', timeout: 5000 }).catch(() => {});
+  }
+}
