@@ -19,6 +19,13 @@ async function run() {
 
   const browser = await chromium.launch({ headless: true });
   const context = await browser.newContext({ viewport: { width: 1440, height: 900 } });
+  /* This test covers the shelf, reader and hubs — not the consent dialog.
+     Pre-seed a consent record so the modal never intercepts page clicks. */
+  await context.addInitScript(() => {
+    try {
+      localStorage.setItem('sodConsent', JSON.stringify({ analytics: false, ts: Date.now(), v: 1 }));
+    } catch (e) {}
+  });
   const page = await context.newPage();
 
   const consoleErrors = [];

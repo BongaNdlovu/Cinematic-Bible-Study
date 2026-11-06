@@ -389,6 +389,9 @@
     const limit = new Promise(function (resolve) { setTimeout(resolve, 6000); });
     return Promise.race([pushes, limit]).then(function () {
       if (!anyPending(mods)) return true;
+      /* confirm is unavailable in embedded/mocked contexts — proceed rather
+         than trapping the reader mid sign-out. */
+      if (typeof window.confirm !== "function") return true;
       return window.confirm("Some of your notes or progress have not reached your account yet. Sign out anyway and remove them from this device?");
     });
   }

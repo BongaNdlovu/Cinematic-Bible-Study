@@ -37,6 +37,9 @@
 
   function errorCause(error) {
     if (!error) return 'error';
+    try {
+      if (typeof navigator !== 'undefined' && navigator.onLine === false) return 'offline';
+    } catch (e) {}
     const message = error.message ? String(error.message) : (typeof error === 'string' ? error : '');
     const code = error.code ? String(error.code) : '';
     if (message.indexOf('PGRST202') !== -1 || message.indexOf('Could not find the function') !== -1) {
@@ -45,6 +48,13 @@
     if (message.indexOf('JWT') !== -1 || message.indexOf('unauthorized') !== -1 ||
         message.indexOf('not_authenticated') !== -1 || code === '401' || code === 'PGRST301') {
       return 'not_authenticated';
+    }
+    if (code === '429' || message.indexOf('429') !== -1 ||
+        message.indexOf('rate limit') !== -1 || message.indexOf('Too Many Requests') !== -1) {
+      return 'rate_limit';
+    }
+    if (code === '403' || code === '42501' || message.indexOf('row-level security') !== -1) {
+      return 'forbidden';
     }
     if (message.indexOf('AbortError') !== -1 || message.indexOf('TimeoutError') !== -1 ||
         message.indexOf('aborted') !== -1 || error.name === 'AbortError' || error.name === 'TimeoutError') {

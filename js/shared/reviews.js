@@ -4,6 +4,10 @@
   const MAX = 600;
   const REVIEW_DAY = "baReviewDay";
   const REVIEW_MAX = 3;
+  /* In-flight locks: one write at a time per surface, so a double-click can
+     never post twice and no two flag updates race the reload. */
+  let submitBusy = false;
+  let flagBusy = false;
 
   function reviewDayCount() {
     const day = new Date().toISOString().slice(0, 10);
@@ -263,12 +267,30 @@
     el.textContent = message || "";
   }
 
-  function setReviewFlags(id, approved, rejected) {
+  /* Classify a failed write so the message names the recovery instead of a
+     bare "try again". Drafts are never cleared on failure, so nothing is lost
+     while the reader recovers. `fallback` keeps each surface's original copy. */
+  function saveFailureMessage(err, fallback) {
+    const kind = window.SiteNet && typeof window.SiteNet.classify === "function"
+      ? window.SiteNet.classify(err)
+      : "client";
+    if (kind === "offline") return "You are offline. Your note is kept on this page — try again once the connection returns.";
+    if (kind === "rate") return "Notes are arriving a little too quickly. Wait a short while, then try again.";
+    if (kind === "auth") return "Your session ended. Sign in again — your note is kept on this page.";
+    if (kind === "forbidden") return "Posting is not available on this membership right now.";
+    if (kind === "server") return "The exhibit's service hiccuped. Try again in a minute.";
+    return fallback || "Could not save. Try again.";
+  }
+
+  function setReviewFlags(id, approved, rejected, lockButtons) {
     const c = authClient();
     if (!c || !id) {
       queueStatus(QUEUE_SAVE_FAIL);
       return Promise.resolve(false);
     }
+    if (flagBusy) return Promise.resolve(false);
+    flagBusy = true;
+    (lockButtons || []).forEach(function (b) { if (b) b.disabled = true; });
     queueStatus("");
     return c.from(TABLE).update({
       approved: !!approved,
@@ -276,15 +298,19 @@
       approved_at: approved ? new Date().toISOString() : null
     }).eq("id", id).then(function (res) {
       if (res && res.error) {
-        queueStatus(QUEUE_SAVE_FAIL);
+        queueStatus(saveFailureMessage(res.error, QUEUE_SAVE_FAIL));
         return false;
       }
       loadApproved();
       loadQueue();
       return true;
-    }).catch(function () {
-      queueStatus(QUEUE_SAVE_FAIL);
+    }).catch(function (err) {
+      queueStatus(saveFailureMessage(err, QUEUE_SAVE_FAIL));
       return false;
+    }).then(function (out) {
+      flagBusy = false;
+      (lockButtons || []).forEach(function (b) { if (b) b.disabled = false; });
+      return out;
     });
   }
 
@@ -319,11 +345,13 @@
       setStatus("Could not save. Try again.", "error", statusElId);
       return Promise.resolve(false);
     }
+    if (submitBusy) return Promise.resolve(false);
+    submitBusy = true;
     const changes = { body: parsed.text, rating: stars };
     if (name !== undefined) changes.display_name = publicName(name);
     return c.from(TABLE).update(changes).eq("id", id).then(function (res) {
       if (res && res.error) {
-        setStatus("Could not save. Try again.", "error", statusElId);
+        setStatus(saveFailureMessage(res.error), "error", statusElId);
         return false;
       }
       setStatus("Saved. It will appear after approval.", "ok", statusElId);
@@ -331,9 +359,12 @@
       loadQueue();
       loadOwnReview();
       return true;
-    }).catch(function () {
-      setStatus("Could not save. Try again.", "error", statusElId);
+    }).catch(function (err) {
+      setStatus(saveFailureMessage(err), "error", statusElId);
       return false;
+    }).then(function (out) {
+      submitBusy = false;
+      return out;
     });
   }
 
@@ -413,12 +444,12 @@
     approve.type = "button";
     approve.className = "btn solid";
     approve.textContent = "Approve";
-    approve.addEventListener("click", function () { setReviewFlags(row.id, true, false); });
+    approve.addEventListener("click", function () { setReviewFlags(row.id, true, false, [approve, hide]); });
     const hide = document.createElement("button");
     hide.type = "button";
     hide.className = "btn";
     hide.textContent = "Hide";
-    hide.addEventListener("click", function () { setReviewFlags(row.id, false, true); });
+    hide.addEventListener("click", function () { setReviewFlags(row.id, false, true, [approve, hide]); });
     actions.appendChild(approve);
     actions.appendChild(hide);
     if (canEditReview(row)) {
@@ -535,10 +566,21 @@
           document.getElementById("witness-edit-rating"),
           row.rating || 5
         );
-      }).catch(function () {
+      }).catch(function (err) {
+        /* A network failure is not "no note yet" — inviting a fresh note here
+           would invite a duplicate. Keep both surfaces hidden, say so, and
+           re-check automatically when the connection returns. */
         panel.hidden = true;
-        if (newCard) newCard.hidden = false;
+        if (newCard) newCard.hidden = true;
         ownReviewId = null;
+        const kind = window.SiteNet && typeof window.SiteNet.classify === "function"
+          ? window.SiteNet.classify(err)
+          : "client";
+        if (kind !== "offline" && kind !== "network" && kind !== "timeout" && kind !== "server") {
+          if (newCard) newCard.hidden = false;
+          return;
+        }
+        setStatus("Your note could not be checked just now. It is safe on the record — trying again shortly.", "error");
       });
   }
 
@@ -641,6 +683,8 @@
       setStatus("You can post 3 reviews per day.", "error");
       return Promise.resolve(false);
     }
+    if (submitBusy) return Promise.resolve(false);
+    submitBusy = true;
     const displayName = publicName(typeof opts.name === "string" ? opts.name : reviewerName());
     return c.from(TABLE).insert({
       user_id: u.id,
@@ -651,16 +695,19 @@
       rejected: false
     }).then(function (res) {
       if (res && res.error) {
-        setStatus("Could not save. Try again.", "error");
+        setStatus(saveFailureMessage(res.error), "error");
         return false;
       }
       bumpReviewDay();
       return recordExitSurvey().then(settleSurvey, function () {
         return settleSurvey({ ok: false });
       });
-    }).catch(function () {
-      setStatus("Could not save. Try again.", "error");
+    }).catch(function (err) {
+      setStatus(saveFailureMessage(err), "error");
       return false;
+    }).then(function (out) {
+      submitBusy = false;
+      return out;
     });
   }
 
@@ -672,7 +719,20 @@
       const input = document.getElementById("witness-body");
       const rating = document.getElementById("witness-rating");
       const name = document.getElementById("witness-name");
-      submitReview(input && input.value, { rating: rating && rating.value, name: name ? name.value : undefined });
+      const submit = document.getElementById("witness-submit");
+      if (submit) {
+        submit.disabled = true;
+        submit.textContent = "Sending\u2026";
+      }
+      const done = function () {
+        if (submit) {
+          submit.disabled = false;
+          syncFormGate();
+        }
+      };
+      Promise.resolve(
+        submitReview(input && input.value, { rating: rating && rating.value, name: name ? name.value : undefined })
+      ).then(done, done);
     });
   }
 
@@ -685,13 +745,27 @@
       const input = document.getElementById("witness-edit-body");
       const rating = document.getElementById("witness-edit-rating");
       const name = document.getElementById("witness-edit-name");
-      updateReview(
-        ownReviewId,
-        input && input.value,
-        rating && rating.value,
-        "witness-edit-status",
-        name ? name.value : undefined
-      );
+      const save = form.querySelector('button[type="submit"], .btn.solid');
+      if (save) {
+        save.disabled = true;
+        save.dataset.label = save.textContent;
+        save.textContent = "Saving\u2026";
+      }
+      const done = function () {
+        if (save) {
+          save.disabled = false;
+          save.textContent = save.dataset.label || "Save";
+        }
+      };
+      Promise.resolve(
+        updateReview(
+          ownReviewId,
+          input && input.value,
+          rating && rating.value,
+          "witness-edit-status",
+          name ? name.value : undefined
+        )
+      ).then(done, done);
     });
   }
 
@@ -736,6 +810,10 @@
         loadOwnReview();
       });
     }
+    /* A failed own-note check resolves itself on reconnect. */
+    window.addEventListener("online", function () {
+      if (signedIn()) loadOwnReview();
+    });
   }
 
   window.ScrollReviews = {

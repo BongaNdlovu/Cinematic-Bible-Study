@@ -40,6 +40,24 @@
   let replyForm = null;
   let guestLine = null;
   let syncLine = null;
+  let replySend = null;
+  let helpSend = null;
+  let publishSend = null;
+
+  /* Mirror an in-flight lock onto its submit button, so a send that is in the
+     air reads as disabled instead of silently eating repeat clicks. */
+  function setSendBusy(key, on) {
+    const btn = key === "help-send" ? helpSend : key === "reply" ? replySend : key === "notice-send" ? publishSend : null;
+    if (!btn) return;
+    if (on) {
+      btn.dataset.label = btn.textContent;
+      btn.disabled = true;
+      btn.textContent = "Sending\u2026";
+    } else {
+      btn.disabled = false;
+      btn.textContent = btn.dataset.label || btn.textContent;
+    }
+  }
 
   function client() {
     return window.ScrollAuth && window.ScrollAuth.getClient && window.ScrollAuth.getClient();
@@ -553,7 +571,10 @@
     receipts = Object.create(null);
     threads = [];
     closeThread();
-    Object.keys(inflight).forEach(function (key) { delete inflight[key]; });
+    Object.keys(inflight).forEach(function (key) {
+      setSendBusy(key, false);
+      delete inflight[key];
+    });
     paintNotices();
     paintInbox();
     loadNotices(gen, uid);
@@ -702,16 +723,19 @@
       return;
     }
     if (!lock("help-send")) return;
+    setSendBusy("help-send", true);
     const db = client();
     const gen = generation;
     const uid = userId();
     if (!db || typeof db.from !== "function") {
       unlock("help-send");
+      setSendBusy("help-send", false);
       setStatus("That could not be saved.");
       return;
     }
     db.from("exhibit_help_notes").insert({ subject: subject, body: body }).then(function (res) {
       unlock("help-send");
+      setSendBusy("help-send", false);
       if (!still(gen, uid)) return;
       if (!res || res.error) {
         setStatus(plainError(res && res.error));
@@ -724,6 +748,7 @@
       loadInbox(gen, uid);
     }, function () {
       unlock("help-send");
+      setSendBusy("help-send", false);
       if (still(gen, uid)) setStatus("That could not be saved.");
     });
   }
@@ -738,16 +763,19 @@
       return;
     }
     if (!lock("reply")) return;
+    setSendBusy("reply", true);
     const db = client();
     const gen = generation;
     const uid = userId();
     if (!db || typeof db.rpc !== "function") {
       unlock("reply");
+      setSendBusy("reply", false);
       setStatus("That could not be saved.");
       return;
     }
     db.rpc("exhibit_help_reply", { p_note: id, p_body: body }).then(function (res) {
       unlock("reply");
+      setSendBusy("reply", false);
       if (!still(gen, uid)) return;
       if (!res || res.error) {
         setStatus(plainError(res && res.error));
@@ -759,6 +787,7 @@
       loadInbox(gen, uid);
     }, function () {
       unlock("reply");
+      setSendBusy("reply", false);
       if (still(gen, uid)) setStatus("That could not be saved.");
     });
   }
@@ -773,16 +802,19 @@
       return;
     }
     if (!lock("notice-send")) return;
+    setSendBusy("notice-send", true);
     const db = client();
     const gen = generation;
     const uid = userId();
     if (!db || typeof db.from !== "function") {
       unlock("notice-send");
+      setSendBusy("notice-send", false);
       setStatus("That could not be saved.");
       return;
     }
     db.from("exhibit_notices").insert({ title: title, body: body }).then(function (res) {
       unlock("notice-send");
+      setSendBusy("notice-send", false);
       if (!still(gen, uid)) return;
       if (!res || res.error) {
         setStatus(plainError(res && res.error));
@@ -793,6 +825,7 @@
       loadNotices(gen, uid);
     }, function () {
       unlock("notice-send");
+      setSendBusy("notice-send", false);
       if (still(gen, uid)) setStatus("That could not be saved.");
     });
   }
@@ -950,6 +983,7 @@
     send.type = "submit";
     send.textContent = "Send reply";
     replyForm.appendChild(send);
+    replySend = send;
     replyForm.addEventListener("submit", submitReply);
     threadView.appendChild(replyForm);
     const actions = node("div", "desk-actions");
@@ -973,6 +1007,7 @@
     send.type = "submit";
     send.textContent = "Send to the operator";
     helpForm.appendChild(send);
+    helpSend = send;
     helpForm.addEventListener("submit", submitHelp);
     section.appendChild(helpForm);
     return section;
@@ -991,6 +1026,7 @@
     send.type = "submit";
     send.textContent = "Publish";
     publishForm.appendChild(send);
+    publishSend = send;
     publishForm.addEventListener("submit", submitNotice);
     publishSection.appendChild(publishForm);
     return publishSection;

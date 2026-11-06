@@ -438,7 +438,18 @@
     };
   }
 
+  let previewTimer = 0;
   function refreshPreview() {
+    /* The preview re-encodes a full 1684x1190 canvas — debounce so typing to
+       the end of a long name does not re-render per keystroke. */
+    if (previewTimer) clearTimeout(previewTimer);
+    previewTimer = setTimeout(function () {
+      previewTimer = 0;
+      refreshPreviewNow();
+    }, 180);
+  }
+
+  function refreshPreviewNow() {
     const node = els();
     if (!node.preview) return;
     const name = sanitizeName(node.input && node.input.value) || "Your name";

@@ -267,6 +267,9 @@
     let list;
     if (reviewsError) {
       list = '<p class="hub-line">Could not load your reviews right now.</p>';
+    } else if (reviews === null) {
+      /* Still loading — never flash "no notes yet" before the query answers. */
+      list = '<p class="hub-line" aria-busy="true">Checking your notes\u2026</p>';
     } else if (!reviews.length) {
       list = '<p class="hub-line">You have not left a note yet. After a sitting, leave one on the readers’ notes page.</p>';
     } else {
@@ -378,6 +381,19 @@
       return;
     }
     downloading = true;
+    const btn = el("account-download");
+    if (btn) {
+      btn.disabled = true;
+      btn.dataset.label = btn.textContent;
+      btn.textContent = "Preparing\u2026";
+    }
+    const restore = function () {
+      downloading = false;
+      if (btn) {
+        btn.disabled = false;
+        btn.textContent = btn.dataset.label || "Download my data (JSON)";
+      }
+    };
     const tables = ["exhibit_profiles", "exhibit_progress", "exhibit_study_data", "exhibit_reviews"];
     Promise.all(tables.map(function (table) {
       return Promise.resolve(c.from(table).select("*").eq("user_id", user.id)).then(function (res) {
@@ -404,11 +420,16 @@
       link.remove();
       setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
       setError("", "");
-    }).catch(function () {
-      setError("auth", copy.exportFail);
-    }).then(function () {
-      downloading = false;
-    });
+    }).catch(function (err) {
+      if (navigator.onLine === false) {
+        setError("auth", "You are offline. Your data is safe \u2014 try the download again once the connection returns.");
+      } else {
+        const kind = window.SiteNet && typeof window.SiteNet.classify === "function" ? window.SiteNet.classify(err) : "client";
+        setError("auth", kind === "server"
+          ? "The exhibit\u2019s service hiccuped. Try the download again in a minute, or email the operator."
+          : copy.exportFail);
+      }
+    }).then(restore);
   }
 
   function setDeleteBusy(on) {
@@ -506,7 +527,9 @@
     cards += bookmarkCard();
     cards += certificateCard();
     const auth = window.ScrollAuth;
-    cards += reviewsCard(hubReviews || [], hubReviewsError);
+    /* hubReviews === null means the query is still in flight; [] means it
+       answered and there is genuinely nothing there. */
+    cards += reviewsCard(hubReviewsError ? [] : (hubReviews === null ? null : (hubReviews || [])), hubReviewsError);
     cards += syncCard();
     cards += dangerCard();
     if (auth && typeof auth.isModerator === "function" && auth.isModerator()) cards += adminCard();

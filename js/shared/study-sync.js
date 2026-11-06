@@ -296,6 +296,15 @@
 
   function storeOutbox() {
     try { localStorage.setItem(OUTBOX_KEY, JSON.stringify({ pending: true, at: Date.now() })); } catch (e) {}
+    notePending(true);
+  }
+
+  /* Reflect the outbox on the shared pending-sync chip so a reader can see
+     which notes are still only on this device. */
+  function notePending(pending) {
+    if (window.SiteErrors && typeof window.SiteErrors.setPendingSource === 'function') {
+      window.SiteErrors.setPendingSource('study', pending);
+    }
   }
 
   function readOutbox() {
@@ -305,6 +314,7 @@
 
   function clearOutbox() {
     try { localStorage.removeItem(OUTBOX_KEY); } catch (e) {}
+    notePending(false);
     if (window.SiteErrors && typeof window.SiteErrors.current === 'function') {
       const cur = window.SiteErrors.current();
       if (cur === SAVE_MISS || cur === PULL_MISS) window.SiteErrors.clear();
@@ -467,6 +477,8 @@
   }
 
   function init() {
+    /* An outbox can outlive the page (failed save last visit) — surface it. */
+    notePending(readOutbox());
     if (window.ScrollAuth && typeof window.ScrollAuth.ready === 'function') {
       window.ScrollAuth.ready().then(function () {
         if (currentUser()) pullAndMerge();

@@ -28,6 +28,7 @@
   <script src="js/shared/journey.js"></script>
   <script src="js/shared/auth-config.js"></script>
   <script src="vendor/supabase/supabase.js"></script>
+  <script src="js/shared/net.js"></script>
   <script src="js/shared/errors.js"></script>
   <script src="js/shared/ops.js"></script>
   <script src="js/shared/auth.js"></script>
@@ -543,11 +544,36 @@
 
   <div id="museum-toast"></div>
   <script type="module">
-    const allowed = window.BAJourney && typeof window.BAJourney.requireMember === "function"
-      ? await window.BAJourney.requireMember("gallery.html" + (location.search || ""))
-      : false;
+    /* Watchdog: if the membership check hangs (dead network, stuck auth),
+       never leave the page invisible. Surface an actionable state instead. */
+    const holdTimer = setTimeout(function () {
+      if (!document.documentElement.classList.contains("member-hold")) return;
+      document.documentElement.classList.remove("member-hold");
+      if (window.SiteErrors && typeof window.SiteErrors.show === "function") {
+        const msg = (navigator.onLine === false)
+          ? "You are offline \u2014 the gallery needs a connection to verify membership."
+          : "The gallery is taking longer than usual to open. ";
+        window.SiteErrors.show(msg + "If it does not open, check your connection or refresh.", "page");
+      }
+    }, 10000);
+
+    let allowed = false;
+    try {
+      allowed = window.BAJourney && typeof window.BAJourney.requireMember === "function"
+        ? await window.BAJourney.requireMember("gallery.html" + (location.search || ""))
+        : false;
+    } catch (err) {
+      allowed = false;
+    }
+    clearTimeout(holdTimer);
     if (allowed) {
       document.documentElement.classList.remove("member-hold");
+      /* If the watchdog already showed its "slow" banner, retire it now. */
+      if (window.SiteErrors && typeof window.SiteErrors.current === "function" &&
+          typeof window.SiteErrors.clear === "function" &&
+          window.SiteErrors.current().indexOf("taking longer than usual") !== -1) {
+        window.SiteErrors.clear();
+      }
       const preload = document.createElement("link");
       preload.rel = "preload";
       preload.href = "models/full_body.glb";

@@ -91,7 +91,7 @@ assert.strictEqual(res.ok, false, "network failure fails closed");
 
 rpcReply = { error: { code: "42501", message: "permission denied for function verify_quiz_answer" } };
 res = await QuizGate.verify(0, 0, 1);
-assert.deepStrictEqual(res, { ok: false, error: "error" }, "a permission-denied reply for a signed-in member is reported as a fault");
+assert.deepStrictEqual(res, { ok: false, error: "forbidden" }, "a permission-denied reply fails closed and surfaces the forbidden class (dedicated membership panel; the answer is never graded)");
 
 currentUser = null;
 const callsBefore = rpcCalls.length;

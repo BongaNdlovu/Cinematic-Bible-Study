@@ -28,7 +28,7 @@
   }
 
   function consented() {
-    return !!(window.SODConsent && SODConsent.has('analytics'));
+    return !!(window.SODConsent && typeof window.SODConsent.has === 'function' && window.SODConsent.has('analytics'));
   }
 
   function clearAnalyticsStorage() {

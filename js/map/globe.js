@@ -103,10 +103,18 @@ function tileLon(x, z) {
   return (x / Math.pow(2, z)) * 360 - 180;
 }
 
+/* Per-tile timeout: a tile that never settles must not stall its lane forever,
+   otherwise the Promise.all below never resolves and the failure backoff
+   (patchFails) can never fire. 12s matches the hard-timeout budget used
+   elsewhere on the site. */
+const TILE_TIMEOUT_MS = 12000;
+
 function loadImage(url, live) {
   return new Promise((resolve) => {
     const img = new Image();
+    let timer = 0;
     const done = (ok) => {
+      if (timer) { clearTimeout(timer); timer = 0; }
       live.delete(img);
       resolve(ok ? img : null);
     };
@@ -116,6 +124,10 @@ function loadImage(url, live) {
     img.addEventListener("error", () => done(false));
     live.set(img, done);
     img.src = url;
+    timer = setTimeout(() => {
+      img.src = ""; // release the in-flight request
+      done(false);
+    }, TILE_TIMEOUT_MS);
   });
 }
 

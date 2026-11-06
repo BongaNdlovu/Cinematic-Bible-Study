@@ -72,7 +72,7 @@ global.window = {
   }
 };
 
-global.document = { readyState: "loading", addEventListener: () => {} };
+global.document = { readyState: "loading", addEventListener: () => {}, querySelectorAll: () => [] };
 global.location = global.window.location;
 
 // Load journey & progress-sync
@@ -194,7 +194,9 @@ errorsShown.length = 0;
 errorsShown.push({ msg: "Your progress did not save. This device will keep trying.", kind: "save" });
 assert.strictEqual(global.window.SiteErrors.current().includes("did not save"), true);
 
-global.window.ScrollAuth.signOut();
+// signOut flushes unsynced notes before wiping them (see flushBeforeSignOut),
+// so it resolves asynchronously — await it, then assert the wipe happened.
+await global.window.ScrollAuth.signOut();
 assert.strictEqual(localStore.baProgressOutbox, undefined, "signOut must clear baProgressOutbox");
 assert.strictEqual(sessionStore.baLastPushAt, undefined, "signOut must clear baLastPushAt");
 assert.strictEqual(global.window.SiteErrors.current(), "", "signOut must clear save miss error banner");

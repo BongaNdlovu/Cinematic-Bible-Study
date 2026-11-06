@@ -24,7 +24,18 @@ function unavailable() {
   });
 }
 
+/* When the gate is down, every page view would otherwise write a telemetry
+   row to Supabase — an unbounded insert storm on the free tier. Rate the
+   reporting itself: at most one row per minute per isolate. */
+const EDGE_REPORT_GAP_MS = 60000;
+let lastEdgeReportAt = 0;
+
 function reportEdge(context, path, reason, elapsed) {
+  const now = Date.now();
+  if (reason === "limit_unavailable") {
+    if (now - lastEdgeReportAt < EDGE_REPORT_GAP_MS) return;
+    lastEdgeReportAt = now;
+  }
   const job = fetch(SUPABASE_URL + "/rest/v1/exhibit_events", {
     method: "POST",
     headers: {

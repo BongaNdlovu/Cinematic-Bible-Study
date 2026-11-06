@@ -729,10 +729,8 @@ import * as THREE from 'three';
     let altarModel = null;
     let altarVisible = true;
 
-    const gltfLoader = new GLTFLoader();
-    if (typeof MeshoptDecoder !== 'undefined') {
-      gltfLoader.setMeshoptDecoder(MeshoptDecoder);
-    }
+    /* GLB loads build their own GLTFLoader per request inside loadGLB() so a
+       timeout can abort that download via its own LoadingManager. */
 
     const loadProgress = { totalAssets: 2, loadedCount: 0, label: 'Initializing…', failed: false };
     let approachStarted = false;
@@ -3433,18 +3431,33 @@ import * as THREE from 'three';
     }
 
     // --- GLB ASSET LOADER ---
-    // Timeout wrapper: a hung request must count as a failure or the loading overlay never clears
-    function loadGLB(url, onLoad, onError, timeoutMs = 45000) {
+    // Each load gets its own manager so a timeout can genuinely abort the
+    // in-flight download (LoadingManager.abortController), not just stop
+    // waiting on it. onSlow fires once past 4s for progressive feedback.
+    function loadGLB(url, onLoad, onError, timeoutMs = 45000, onSlow) {
+      const manager = new THREE.LoadingManager();
+      const loader = new GLTFLoader(manager);
+      if (typeof MeshoptDecoder !== 'undefined') {
+        loader.setMeshoptDecoder(MeshoptDecoder);
+      }
       let settled = false;
+      let slowTimer = 0;
       let timer = 0;
       const settle = (fn, arg) => {
         if (settled) return;
         settled = true;
         clearTimeout(timer);
+        if (slowTimer) clearTimeout(slowTimer);
         fn(arg);
       };
-      timer = setTimeout(() => settle(onError, new Error('GLB load timed out: ' + url)), timeoutMs);
-      gltfLoader.load(url, (gltf) => settle(onLoad, gltf), undefined, (err) => settle(onError, err));
+      if (typeof onSlow === 'function') {
+        slowTimer = setTimeout(() => { if (!settled) onSlow(); }, 4000);
+      }
+      timer = setTimeout(() => {
+        try { manager.abortController.abort(); } catch (e) { /* already settled */ }
+        settle(onError, new Error('GLB load timed out: ' + url));
+      }, timeoutMs);
+      loader.load(url, (gltf) => settle(onLoad, gltf), undefined, (err) => settle(onError, err));
     }
 
     /* Three's Object3D.clone JSON-serializes userData. A material stored there
@@ -3546,6 +3559,16 @@ import * as THREE from 'three';
           },
           () => {
             tryLoad(idx + 1);
+          },
+          45000,
+          () => {
+            /* Progressive feedback while a model is still arriving. */
+            if (key === 'assembled' || key === 'head') {
+              const status = document.getElementById('loading-status');
+              if (status) status.textContent = 'Still assembling — this can take a little longer\u2026';
+            } else {
+              museumToast(`Still fetching ${data.title}\u2026`);
+            }
           }
         );
       }
@@ -4283,7 +4306,23 @@ import * as THREE from 'three';
     let frameCount = 0;
     let lastFpsTime = performance.now();
 
+    /* Hidden-tab gating: browsers throttle rAF in background tabs, but the loop
+       still wakes for every throttle tick — stop it outright and restart on
+       return, flushing the clock so the first frame back has no dt spike. */
+    let rafPaused = false;
+    document.addEventListener('visibilitychange', () => {
+      if (!document.hidden && rafPaused) {
+        rafPaused = false;
+        clock.getDelta();
+        requestAnimationFrame(animate);
+      }
+    });
+
     function animate(now) {
+      if (document.hidden) {
+        rafPaused = true;
+        return;
+      }
       requestAnimationFrame(animate);
       const dt = clock.getDelta();
       const elapsed = clock.getElapsedTime();

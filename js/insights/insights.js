@@ -408,7 +408,29 @@
       tr.hidden = !hit;
       if (hit) shown += 1;
     });
-    if (count) count.textContent = q ? shown + ' of ' + rows.length + ' shown' : plural(rows.length, 'graduate', 'graduates');
+    if (count) {
+      if (q && rows.length && !shown) {
+        /* Filtered-empty state: name it and offer the one-click clear. */
+        count.innerHTML = '';
+        count.appendChild(document.createTextNode('No graduates match \u201c' + gradQuery.trim() + '\u201d \u00b7 '));
+        const clear = document.createElement('button');
+        clear.type = 'button';
+        clear.className = 'igrad-clear';
+        clear.textContent = 'Clear search';
+        clear.addEventListener('click', function () {
+          gradQuery = '';
+          const box = grid.querySelector('#insights-grad-search');
+          if (box) {
+            box.value = '';
+            box.focus();
+          }
+          filterGraduates(grid);
+        });
+        count.appendChild(clear);
+      } else {
+        count.textContent = q ? shown + ' of ' + rows.length + ' shown' : plural(rows.length, 'graduate', 'graduates');
+      }
+    }
   }
 
   function scoreOf(p) {
@@ -748,8 +770,9 @@
   function fetchAll(build, cap, label, capped) {
     const rows = [];
     function next(from) {
-      return Promise.resolve(build().range(from, from + PAGE - 1)).then(function (r) {
-        if (!r || r.error) throw new Error((r && r.error && r.error.message) || 'load_failed');
+      const q = Promise.resolve(build().range(from, from + PAGE - 1));
+      return q.then(function (r) {
+        if (!r || r.error) throw (r && r.error) || new Error('load_failed');
         const data = Array.isArray(r.data) ? r.data : [];
         Array.prototype.push.apply(rows, data);
         if (data.length < PAGE) return rows;
@@ -763,6 +786,16 @@
     return next(0);
   }
 
+  /* Wire the builder's optional abortSignal so a superseded load stops pulling
+     pages instead of fanning out to the cap in the background. */
+  function withSignal(q, signal) {
+    if (signal && typeof q.abortSignal === 'function') return q.abortSignal(signal);
+    return q;
+  }
+
+  let loadAbort = null;
+  let loadSlowTimer = 0;
+
   function load() {
     const c = client();
     const gate = byId('insights-gate');
@@ -775,12 +808,24 @@
     if (gate) gate.hidden = true;
     if (app) app.hidden = false;
 
+    /* Supersede any in-flight load first: its pages stop, its render is
+       already blocked by the generation guard below. */
+    if (loadAbort) { try { loadAbort.abort(); } catch (e) {} }
+    if (loadSlowTimer) { clearTimeout(loadSlowTimer); loadSlowTimer = 0; }
+    const ctrl = ('AbortController' in window) ? new AbortController() : null;
+    loadAbort = ctrl;
+    const signal = ctrl ? ctrl.signal : null;
+
     const gen = ++loadGen;
     const cut = sinceIso();
     const capped = [];
     const grid = byId('insights-grid');
     if (grid && grid.setAttribute) grid.setAttribute('aria-busy', 'true');
-    paintStatus('Loading…');
+    paintStatus('Loading\u2026');
+    loadSlowTimer = setTimeout(function () {
+      loadSlowTimer = 0;
+      if (gen === loadGen) paintStatus('Still loading \u2014 this range pulls a lot of records\u2026');
+    }, 4000);
 
     function since(q) {
       return cut ? q.gte('created_at', cut) : q;
@@ -789,22 +834,22 @@
     return Promise.resolve().then(function () {
       return Promise.all([
         fetchAll(function () {
-          return since(c.from('exhibit_events')
+          return withSignal(since(c.from('exhibit_events')
             .select('event,sitting,sheet,detail,user_id,anon_id,session_id,created_at')
             .not('event', 'in', PROBES))
-            .order('created_at', { ascending: false });
+            .order('created_at', { ascending: false }), signal);
         }, EVENT_CAP, 'events', capped),
         fetchAll(function () {
-          return since(c.from('exhibit_surveys').select('rating,feedback,responses,created_at,role,cohort,user_id,anon_id'))
-            .order('created_at', { ascending: false });
+          return withSignal(since(c.from('exhibit_surveys').select('rating,feedback,responses,created_at,role,cohort,user_id,anon_id'))
+            .order('created_at', { ascending: false }), signal);
         }, ROW_CAP, 'surveys', capped),
         fetchAll(function () {
-          return since(c.from('exhibit_profiles').select('user_id,study_mode,background,found_via,referred_by,referred_from_sitting,ref_code,created_at'))
-            .order('created_at', { ascending: false });
+          return withSignal(since(c.from('exhibit_profiles').select('user_id,study_mode,background,found_via,referred_by,referred_from_sitting,ref_code,created_at'))
+            .order('created_at', { ascending: false }), signal);
         }, ROW_CAP, 'profiles', capped),
         fetchAll(function () {
-          return c.from('exhibit_progress').select('user_id,journey,certificate_name,cohort,updated_at')
-            .order('updated_at', { ascending: false });
+          return withSignal(c.from('exhibit_progress').select('user_id,journey,certificate_name,cohort,updated_at')
+            .order('updated_at', { ascending: false }), signal);
         }, ROW_CAP, 'learner records', capped),
         typeof c.rpc === 'function'
           ? Promise.resolve(c.rpc('exhibit_graduates')).then(function (r) {
@@ -814,14 +859,34 @@
       ]);
     }).then(function (rows) {
       if (gen !== loadGen) return;
+      if (loadSlowTimer) { clearTimeout(loadSlowTimer); loadSlowTimer = 0; }
+      if (loadAbort === ctrl) loadAbort = null;
       cache = { events: rows[0], surveys: rows[1], profiles: rows[2], progress: rows[3], graduates: rows[4], capped: capped, loadedAt: new Date() };
       if (grid && grid.removeAttribute) grid.removeAttribute('aria-busy');
       render();
-    }).catch(function () {
+    }).catch(function (err) {
       if (gen !== loadGen) return;
+      if (loadSlowTimer) { clearTimeout(loadSlowTimer); loadSlowTimer = 0; }
+      if (loadAbort === ctrl) loadAbort = null;
+      /* Abort here means a newer load superseded this one; its gen check above
+         already covers that, so anything reaching this line is a real error. */
+      const kind = window.SiteNet && typeof window.SiteNet.classify === 'function'
+        ? window.SiteNet.classify(err)
+        : 'client';
+      const detail = {
+        offline: 'You are offline \u2014 insights need a connection.',
+        auth: 'Your session ended. Sign in again, then press Refresh.',
+        forbidden: 'Moderator access is not available on this membership.',
+        rate: 'The record is being asked a little too quickly. Wait a few seconds, then press Refresh.',
+        timeout: 'The record took too long to answer. Check your connection and press Refresh.',
+        server: 'The exhibit\u2019s service hiccuped. Try again in a minute.'
+      }[kind];
+      const message = detail || 'Could not load insights. Check your connection and press Refresh.';
       if (grid) {
         if (grid.removeAttribute) grid.removeAttribute('aria-busy');
-        grid.innerHTML = '<p class="insights-empty insights-error" id="insights-load-error" role="alert">Could not load insights. Check your connection and press Refresh.</p>';
+        /* Every class above is static copy, so writing it as markup is safe. */
+        grid.innerHTML = '<p class="insights-empty insights-error" id="insights-load-error" role="alert">' +
+          escapeHtml(message) + '</p>';
       }
       paintStatus('Load failed');
     });

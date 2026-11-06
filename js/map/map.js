@@ -135,13 +135,20 @@
     const alts = url.endsWith(".geojson")
       ? [url, url.replace(/\.geojson$/i, ".json")]
       : [url, url.replace(/\.json$/i, ".geojson")];
-    let last = "missing";
+    let lastErr = null;
     for (const u of alts) {
-      const r = await fetch(u);
-      if (r.ok) return r.json();
-      last = r.status;
+      try {
+        /* SiteNet throws on non-2xx and on timeout — either way, fall through
+           to the next alternate, and keep the last error for classification. */
+        return await window.SiteNet.request(u, {
+          timeoutMs: 10000,
+          onSlow: () => { const loadEl = document.getElementById("cmap-load"); if (loadEl) loadEl.textContent = "Still unrolling the chronique\u2026"; }
+        }).then((r) => r.json());
+      } catch (err) {
+        lastErr = err;
+      }
     }
-    throw new Error(last);
+    throw lastErr || new Error("missing");
   }
   function savedBase() {
     try { return localStorage.getItem(BASE_STORE) || "satellite"; } catch (e) { return "satellite"; }
@@ -1674,7 +1681,29 @@
       try {
         state.polities = await loadJson(DATA.sources.polities);
       } catch (err) {
-        loadEl.textContent = "Could not load map geography.";
+        /* Actionable failure state: name the class, offer one-click retry. */
+        const kind = window.SiteNet && typeof window.SiteNet.classify === "function"
+          ? window.SiteNet.classify(err)
+          : "network";
+        loadEl.textContent = kind === "offline"
+          ? "You are offline \u2014 the chronique needs a connection."
+          : kind === "timeout" || kind === "network"
+            ? "The chronique is taking too long to arrive."
+            : "Could not load map geography.";
+        const retry = el("button", {
+          class: "cmap-retry",
+          type: "button",
+          style: { marginTop: "10px", padding: "6px 14px", borderRadius: "999px", cursor: "pointer",
+                   border: "1px solid rgba(212,175,55,0.5)", background: "rgba(24,18,12,0.95)",
+                   color: "#f0e0b8", font: "inherit", fontSize: "12.5px" }
+        }, "Try again");
+        retry.addEventListener("click", () => {
+          retry.remove();
+          loadEl.textContent = "Unrolling the chronique\u2026";
+          start();
+        });
+        loadEl.appendChild(document.createElement("br"));
+        loadEl.appendChild(retry);
         console.error(err);
         return;
       }

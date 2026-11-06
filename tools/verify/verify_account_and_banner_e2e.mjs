@@ -16,12 +16,17 @@ async function run() {
 
   const consoleErrors = [];
   page.on('console', msg => {
-    if (msg.type() === 'error') {
-      const txt = msg.text();
-      if (!txt.includes('favicon.ico') && !txt.includes('cloudflareinsights')) {
-        consoleErrors.push(txt);
-      }
-    }
+    if (msg.type() !== 'error') return;
+    const txt = msg.text();
+    if (txt.includes('favicon.ico') || txt.includes('cloudflareinsights')) return;
+    /* Cloudflare Turnstile (the sign-in human check) emits deliberate styled
+       decoy console messages ("%c...") and probes by fetching a 'data:' URL,
+       which this site's strict connect-src CSP rightly blocks. Both families
+       originate in the third-party widget, not site code — skip them. */
+    if (txt.startsWith('%c')) return;
+    if (txt.includes("'data:,'") || txt.includes('load data:,')) return;
+    if (txt.includes('challenges.cloudflare.com')) return;
+    consoleErrors.push(txt);
   });
 
   try {

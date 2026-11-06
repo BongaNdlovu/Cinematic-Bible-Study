@@ -1,5 +1,19 @@
     // Sequential sittings: access is owned by BAJourney.canAccessSheet.
 
+    /* Timeout-aware fetch for this page's own assets (cues, concordance).
+       Uses SiteNet when present; degrades to a plain fetch that still cannot
+       hang forever. */
+    function netRequest(url, opts) {
+      if (window.SiteNet && typeof window.SiteNet.request === 'function') {
+        return window.SiteNet.request(url, opts);
+      }
+      const ctrl = ('AbortController' in window) ? new AbortController() : null;
+      const timer = ctrl ? setTimeout(function () { ctrl.abort(); }, 10000) : 0;
+      return fetch(url, { signal: ctrl ? ctrl.signal : undefined })['finally'](function () {
+        if (timer) clearTimeout(timer);
+      });
+    }
+
     // Guests get the free sittings only; their lock copy invites them to sign in.
     function memberLockText(fallback) {
       const guest = !(window.ScrollAuth && typeof window.ScrollAuth.getUser === 'function' && window.ScrollAuth.getUser());
@@ -797,8 +811,7 @@
 
       load(src, sheetIndex) {
         const gen = this.gen;
-        fetch(src)
-          .then((r) => (r.ok ? r.json() : Promise.reject(new Error(String(r.status)))))
+        netRequest(src).then((r) => (r.ok ? r.json() : Promise.reject(new Error(String(r.status)))))
           .then((data) => {
             if (gen !== this.gen || currentSheetIndex !== sheetIndex || !Array.isArray(data.cues)) return;
             this.cues = data.cues;
@@ -1671,11 +1684,14 @@
       }
     } catch (e) {}
 
+    let toastTimer = 0;
     function showToast(msg) {
       const toast = document.getElementById('toast');
       toast.innerText = msg;
       toast.classList.remove('opacity-0', 'pointer-events-none');
-      setTimeout(() => {
+      if (toastTimer) clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => {
+        toastTimer = 0;
         toast.classList.add('opacity-0', 'pointer-events-none');
       }, 2500);
     }
@@ -4772,20 +4788,31 @@
 
     let strongsDataCache = null;
     async function getStrongsData() {
+      /* A failed load must not be cached as "empty" for the session — the next
+         tap retries, and the interim feedback below covers the wait. */
       if (strongsDataCache) return strongsDataCache;
       try {
         const scripture = window.BAScripture;
         if (scripture && typeof scripture.loadStrongs === 'function') {
-          strongsDataCache = (await scripture.loadStrongs()) || {};
-          return strongsDataCache;
-        }
-        const res = await fetch('bible/strongs-daniel.json');
-        if (res.ok) {
-          strongsDataCache = await res.json();
-          return strongsDataCache;
+          const viaScripture = await scripture.loadStrongs();
+          if (viaScripture && Object.keys(viaScripture).length) {
+            strongsDataCache = viaScripture;
+            return strongsDataCache;
+          }
+        } else {
+          const res = await netRequest('bible/strongs-daniel.json', {
+            onSlow: () => { showToast('Still opening the concordance\u2026'); }
+          });
+          if (res.ok) {
+            const parsed = await res.json();
+            if (parsed && Object.keys(parsed).length) {
+              strongsDataCache = parsed;
+              return strongsDataCache;
+            }
+          }
         }
       } catch (e) {}
-      return {};
+      return null;
     }
 
     function wireStrongsTooltips() {
@@ -4798,8 +4825,13 @@
           if (!lemmaId) return;
 
           const data = await getStrongsData();
-          const entry = data[lemmaId];
-          if (!entry) return;
+          const entry = data ? data[lemmaId] : null;
+          if (!entry) {
+            if (data === null) {
+              showToast("The concordance could not be opened just now. Check your connection and tap the word again.");
+            }
+            return;
+          }
           if (window.StudyCompetency) {
             window.StudyCompetency.recordScriptureLookup(`Strong's ${lemmaId} (${entry.translit || entry.lemma || ''})`);
           }
@@ -5156,6 +5188,29 @@
 
     let sheetLoadTicket = 0;
 
+    /* Slim indeterminate bar shown while a sitting's chunk loads, so a switch
+       never reads as "nothing happened". Cleared before the article paints. */
+    let sheetLoadingBar = null;
+    function showSheetLoading(on) {
+      if (on) {
+        if (!sheetLoadingBar && document.body) {
+          const style = document.createElement('style');
+          style.textContent = '@keyframes sheet-loading-slide{0%{transform:translateX(-120%)}100%{transform:translateX(300%)}}';
+          document.head.appendChild(style);
+          sheetLoadingBar = document.createElement('div');
+          sheetLoadingBar.id = 'sheet-loading-bar';
+          sheetLoadingBar.style.cssText = 'position:fixed;top:0;left:0;right:0;height:3px;z-index:80;pointer-events:none;overflow:hidden;background:rgba(212,175,55,0.12);';
+          const inner = document.createElement('div');
+          inner.style.cssText = 'height:100%;width:38%;border-radius:999px;background:linear-gradient(90deg,rgba(212,175,55,0),rgba(212,175,55,0.9),rgba(212,175,55,0));animation:sheet-loading-slide 1.1s linear infinite;';
+          sheetLoadingBar.appendChild(inner);
+          document.body.appendChild(sheetLoadingBar);
+        }
+        if (sheetLoadingBar) sheetLoadingBar.hidden = false;
+      } else if (sheetLoadingBar) {
+        sheetLoadingBar.hidden = true;
+      }
+    }
+
     function sheetDataReady(index) {
       const row = sheetsData[index];
       if (!row || typeof row.content !== 'string') return false;
@@ -5186,13 +5241,23 @@
       const ticket = ++sheetLoadTicket;
       const needs = sheetNeeds(index);
       if (needs) {
+        showSheetLoading(true);
+        const slowTimer = setTimeout(() => {
+          if (ticket === sheetLoadTicket) showToast('Still opening this sitting\u2026');
+        }, 4000);
         needs.then(() => {
+          clearTimeout(slowTimer);
           if (ticket === sheetLoadTicket) loadSheet(index, opts);
         }, () => {
-          if (ticket === sheetLoadTicket) showToast('This sitting could not load. Check your connection and try again.');
+          clearTimeout(slowTimer);
+          if (ticket === sheetLoadTicket) {
+            showSheetLoading(false);
+            showToast('This sitting could not load. Check your connection and try again.');
+          }
         });
         return;
       }
+      showSheetLoading(false);
       rememberSheetUrl(index);
       currentSheetIndex = index;
       endCardShownForSheet = -1;
@@ -5596,7 +5661,10 @@
       quizPending[qIdx] = true;
       questionData.options.forEach((_, optIdx) => {
         const btn = document.getElementById(`q-${qIdx}-opt-${optIdx}`);
-        if (btn) btn.disabled = true;
+        if (btn) {
+          btn.disabled = true;
+          btn.style.borderColor = '';
+        }
       });
       if (feedback) {
         feedback.className = "mt-4 p-4 rounded-lg font-sans text-xs sm:text-sm leading-relaxed border border-paper-300 dark:border-paper-800 bg-paper-50 dark:bg-paper-900/40 text-ink-700 dark:text-paper-300";
@@ -5617,24 +5685,55 @@
             const btn = document.getElementById(`q-${qIdx}-opt-${optIdx}`);
             if (btn) btn.disabled = false;
           });
+          /* Keep the reader's pick visible while they recover from an
+             environment problem (signed-out, offline, pacing) — re-tapping
+             re-verifies without losing their place. */
+          const keepPick = cause === 'not_authenticated' || cause === 'offline' ||
+            cause === 'rate_limit' || cause === 'timeout' || cause === 'forbidden';
+          if (keepPick) {
+            const picked = document.getElementById(`q-${qIdx}-opt-${selectedOptIdx}`);
+            if (picked) picked.style.borderColor = 'rgba(180, 140, 60, 0.9)';
+          }
+          const feedbackPanel = function (tone, html) {
+            if (!feedback) return;
+            feedback.className = tone === 'amber'
+              ? "mt-4 p-4 rounded-lg font-sans text-xs sm:text-sm leading-relaxed border border-amber-600/40 bg-amber-50 dark:bg-amber-950/30 text-ink-800 dark:text-paper-200"
+              : "mt-4 p-4 rounded-lg font-sans text-xs sm:text-sm leading-relaxed border border-paper-300 dark:border-paper-800 bg-paper-50 dark:bg-paper-900/40 text-ink-700 dark:text-paper-300";
+            feedback.classList.remove('hidden');
+            feedback.innerHTML = html;
+          };
           if (cause === 'not_authenticated') {
             const accountHref = 'account.html?next=' + encodeURIComponent(location.pathname + location.search);
-            if (feedback) {
-              feedback.className = "mt-4 p-4 rounded-lg font-sans text-xs sm:text-sm leading-relaxed border border-amber-600/40 bg-amber-50 dark:bg-amber-950/30 text-ink-800 dark:text-paper-200";
-              feedback.classList.remove('hidden');
-              feedback.innerHTML = `<strong>Answer checking is available to signed-in members.</strong> Sign in to check your answers, save your progress, and work toward your certificate. <a href="${accountHref}" class="font-semibold underline text-amber-800 dark:text-amber-300">Go to Account</a>`;
-            }
+            feedbackPanel('amber', `<strong>Answer checking is available to signed-in members.</strong> Sign in to check your answers, save your progress, and work toward your certificate — your pick stays marked on this page. <a href="${accountHref}" class="font-semibold underline text-amber-800 dark:text-amber-300">Go to Account</a>`);
             markCheckpoint(qIdx, 'auth');
+            updateNextGate();
+            return;
+          }
+          if (cause === 'offline') {
+            feedbackPanel('amber', '<strong>You are offline.</strong> The record can\u2019t verify answers without a connection. Your pick is kept \u2014 tap your answer again once you are back online.');
+            updateNextGate();
+            return;
+          }
+          if (cause === 'rate_limit') {
+            feedbackPanel('plain', 'The record is being asked a little too quickly. Wait a few seconds, then tap your answer again.');
+            updateNextGate();
+            return;
+          }
+          if (cause === 'forbidden') {
+            feedbackPanel('amber', '<strong>Answer checking is not available on this membership.</strong> You can keep reading \u2014 your progress is saved on this device. <a href="account.html" class="font-semibold underline text-amber-800 dark:text-amber-300">Review membership</a>');
+            updateNextGate();
+            return;
+          }
+          if (cause === 'timeout') {
+            feedbackPanel('plain', 'The record took too long to answer. Check your connection, then tap your answer again.');
             updateNextGate();
             return;
           }
           const unchecked = cause === 'not_found' || cause === 'bad_input' || cause === 'bad_response';
           if (feedback) {
-            feedback.className = "mt-4 p-4 rounded-lg font-sans text-xs sm:text-sm leading-relaxed border border-paper-300 dark:border-paper-800 bg-paper-50 dark:bg-paper-900/40 text-ink-700 dark:text-paper-300";
-            feedback.classList.remove('hidden');
-            feedback.textContent = unchecked
+            feedbackPanel('plain', unchecked
               ? 'This question could not be checked right now. Your pick was not marked right or wrong; please try again later.'
-              : 'The record could not verify that answer. Your pick was not marked right or wrong; check your connection and try again.';
+              : 'The record could not verify that answer. Your pick was not marked right or wrong; check your connection and try again.');
           }
           delete answeredQuestions[qIdx];
           if (window.SiteOps && typeof window.SiteOps.report === 'function') {
@@ -5685,6 +5784,7 @@
         const btn = document.getElementById(`q-${qIdx}-opt-${optIdx}`);
         if (btn) {
           btn.disabled = false;
+          btn.style.borderColor = '';
           btn.className = "quiz-option w-full p-3.5 sm:p-4 rounded-lg border border-paper-300 dark:border-paper-800 hover:border-ink-900 dark:hover:border-paper-200 bg-paper-100/50 dark:bg-paper-900/40 text-left text-xs sm:text-sm text-ink-800 dark:text-paper-200 flex items-start space-x-3";
         }
       });

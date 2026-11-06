@@ -91,6 +91,54 @@
   border: 1px solid rgba(240, 224, 184, 0.28);
 }
 
+/* Pending-sync chip — outbox writes still on this device. */
+.site-sync-chip {
+  position: fixed;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 5008;
+  max-width: calc(100% - 24px);
+  padding: 8px 16px;
+  border: 1px solid rgba(212, 175, 55, 0.5);
+  background: rgba(24, 18, 12, 0.95);
+  color: #f0e0b8;
+  font-family: Inter, system-ui, sans-serif;
+  font-size: 12.5px;
+  line-height: 1.4;
+  border-radius: 999px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  box-sizing: border-box;
+}
+.site-sync-chip::before {
+  content: "";
+  width: 9px;
+  height: 9px;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  background: rgba(212, 175, 55, 0.9);
+  animation: site-sync-pulse 1.6s ease-in-out infinite;
+}
+.site-sync-chip[data-pending="offline"]::before {
+  animation: none;
+  background: rgba(212, 175, 55, 0.45);
+}
+.site-sync-chip[hidden] { display: none !important; }
+@keyframes site-sync-pulse {
+  0%, 100% { opacity: 0.35; transform: scale(0.8); }
+  50% { opacity: 1; transform: scale(1.1); }
+}
+
+/* Swapped-in plate for any <img> whose asset failed (see errors.js). */
+img.is-img-fallback {
+  object-fit: contain;
+  background: #191209;
+}
+
 .auth-inline-error {
   display: block;
   margin-top: 6px;
