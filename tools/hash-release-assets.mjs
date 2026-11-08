@@ -58,7 +58,7 @@ function apply(prefix, extensions) {
   for (const rel of pending) {
     if (!textExt.has(path.extname(rel).toLowerCase())) { refs.set(rel, []); continue; }
     const text = fs.readFileSync(path.join(stage, rel), "utf8");
-    refs.set(rel, pending.filter((other) => other !== rel && text.includes(other)));
+    refs.set(rel, pending.filter((other) => other !== rel && (text.includes(other) || (prefix === "vendor/three/build" && text.includes("./" + path.posix.basename(other))))));
   }
   while (pending.length) {
     const open = new Set(pending);
@@ -78,6 +78,14 @@ function apply(prefix, extensions) {
         pairs.push(["'" + base + "'", "'" + nextBase + "'"]);
         pairs.push(['"' + base + '"', '"' + nextBase + '"']);
       }
+      if (prefix === "vendor/three/build") {
+        /* three.module.min.js pulls in its sibling through the relative
+           specifier "./three.core.min.js", which never contains the staged
+           path, so the relative form gets its own pair. */
+        const base = path.posix.basename(rel);
+        const nextBase = path.posix.basename(renamed);
+        pairs.push(["./" + base, "./" + nextBase]);
+      }
     }
     rewrite(pairs);
     const done = new Set(batch);
@@ -89,6 +97,8 @@ apply("models", [".glb", ".gltf"]);
 apply("bible", [".json"]);
 apply("vendor/supabase", [".js"]);
 apply("vendor/leaflet", [".js", ".css"]);
+apply("vendor/three/build", [".js"]);
+apply("vendor/sentry", [".js"]);
 apply("css", [".css"]);
 apply("js", [".js", ".mjs"]);
 console.log("hashed release assets in " + stage);

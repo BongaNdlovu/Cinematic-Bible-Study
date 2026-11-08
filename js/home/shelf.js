@@ -1,7 +1,8 @@
 /* The Shelf of Daniel: the home page's reading room.
    A WebGL bookshelf of the eleven sittings, mounted into #shelf-stage on
-   index.html. Data comes from js/study/sheets-data.js and progress from
-   BAJourney, so locks and completion always match the study desk. */
+   index.html. Data comes from js/home/shelf-data.js (built by
+   tools/build-shelf-data.mjs) and progress from BAJourney, so locks and
+   completion always match the study desk. */
 
 const $ = (s) => document.querySelector(s);
 const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;

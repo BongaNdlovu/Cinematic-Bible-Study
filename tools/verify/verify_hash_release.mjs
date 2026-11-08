@@ -1,4 +1,5 @@
 import assert from "assert";
+import crypto from "crypto";
 import fs from "fs";
 import os from "os";
 import path from "path";
@@ -27,16 +28,19 @@ function build(globeSource) {
   put(stage, "vendor/supabase/supabase.js", "var supabase = 1;\n");
   put(stage, "vendor/leaflet/leaflet.js", "var L = 1;\n");
   put(stage, "vendor/leaflet/leaflet.css", ".leaflet-pane { z-index: 400; }\n");
-  put(stage, "vendor/three/build/three.module.min.js", "import './three.core.min.js';\n");
+  put(stage, "vendor/three/build/three.module.min.js", "import\"./three.core.min.js\";\nexport const three = 1;\n");
   put(stage, "vendor/three/build/three.core.min.js", "export {};\n");
+  put(stage, "vendor/sentry/bundle.tracing.replay.feedback.min.js", "var Sentry = 1;\n");
   put(stage, "index.html", [
     '<link rel="stylesheet" href="css/site.css?v=cx1">',
     '<link rel="stylesheet" href="css/map.css?v=cx4">',
     '<link rel="stylesheet" href="vendor/leaflet/leaflet.css">',
     '<script src="vendor/leaflet/leaflet.js" defer></script>',
     '<script src="vendor/supabase/supabase.js" defer></script>',
+    '<script src="vendor/sentry/bundle.tracing.replay.feedback.min.js"></script>',
     '<script src="js/study/scripture.js" defer></script>',
     '<script type="importmap">{"imports":{"three":"./vendor/three/build/three.module.min.js"}}</script>',
+    '<link rel="modulepreload" href="vendor/three/build/three.module.min.js">',
     '<script src="js/shared/boot.js"></script>',
     '<script src="js/map/map.js"></script>',
     ""
@@ -89,8 +93,16 @@ assert(scripture.includes("bible/" + kjvName), "a script fetches the hashed name
 assert.match(html, /vendor\/supabase\/supabase\.[a-f0-9]{12}\.js/, "the Supabase bundle is hashed");
 assert.match(html, /vendor\/leaflet\/leaflet\.[a-f0-9]{12}\.js/, "the Leaflet script is hashed");
 assert.match(html, /vendor\/leaflet\/leaflet\.[a-f0-9]{12}\.css/, "the Leaflet stylesheet is hashed");
-assert(html.includes("./vendor/three/build/three.module.min.js"), "three keeps its name, because three.module.min.js imports ./three.core.min.js by a relative path the hasher cannot rewrite");
-assert(fs.existsSync(path.join(stage, "vendor", "three", "build", "three.core.min.js")), "three.core.min.js keeps its name");
+const moduleName = only(stage, "vendor/three/build", /^three\.module\.min\./);
+assert.match(moduleName, /^three\.module\.min\.[a-f0-9]{12}\.js$/, "the three module build is hashed");
+const coreName = only(stage, "vendor/three/build", /^three\.core\.min\./);
+assert.match(coreName, /^three\.core\.min\.[a-f0-9]{12}\.js$/, "the three core build is hashed");
+assert(html.includes("./vendor/three/build/" + moduleName), "the import map points at the hashed three module");
+assert(html.includes('href="vendor/three/build/' + moduleName + '"'), "the modulepreload points at the hashed three module");
+assert(fs.readFileSync(path.join(stage, "vendor", "three", "build", moduleName), "utf8").includes('import"./' + coreName + '";'), "the module's relative import is rewritten to the hashed core");
+assert.strictEqual(moduleName.split(".")[3], crypto.createHash("sha256").update(fs.readFileSync(path.join(stage, "vendor", "three", "build", moduleName))).digest("hex").slice(0, 12), "the three module is hashed after its import is rewritten");
+assert.match(html, /vendor\/sentry\/bundle\.tracing\.replay\.feedback\.min\.[a-f0-9]{12}\.js/, "the Sentry bundle is hashed");
+assert.strictEqual(only(changed, "vendor/three/build", /^three\.module\.min\./), moduleName, "an unchanged three build keeps its name");
 
 fs.rmSync(stage, { recursive: true, force: true });
 fs.rmSync(changed, { recursive: true, force: true });

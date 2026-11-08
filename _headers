@@ -37,6 +37,17 @@
   ! Cache-Control
   Cache-Control: public, max-age=31536000, immutable
 
+# The three build files and the Sentry bundle are content-hashed at deploy
+# time (tools/hash-release-assets.mjs), so they can be immutable. The three
+# addons under /vendor/three/examples/ are not hashed and stay on /vendor/*.
+/vendor/three/build/*
+  ! Cache-Control
+  Cache-Control: public, max-age=31536000, immutable
+
+/vendor/sentry/*
+  ! Cache-Control
+  Cache-Control: public, max-age=31536000, immutable
+
 /bible/*
   Access-Control-Allow-Origin: *
   Cache-Control: public, max-age=31536000, immutable

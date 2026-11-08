@@ -171,11 +171,13 @@ const expectations = [
   ['/assets/shelf/covers/thumbs/vol-00-edbaa5a8.webp', IMMUTABLE, 'content-hashed cover thumbnails are immutable'],
   ['/assets/study/audio/sitting-07-readalong.mp3', REVALIDATE, 'unhashed assets revalidate within an hour'],
   ['/assets/site/hero-main.jpg', REVALIDATE, 'unhashed site images revalidate within an hour'],
-  ['/vendor/three/build/three.module.min.js', REVALIDATE, 'unhashed vendor files revalidate within an hour'],
+  ['/vendor/three/examples/jsm/loaders/GLTFLoader.js', REVALIDATE, 'unhashed vendor files revalidate within an hour'],
   ['/bible/kjv.0123456789ab.json', IMMUTABLE, 'hashed Bible data is immutable'],
   ['/vendor/supabase/supabase.0123456789ab.js', IMMUTABLE, 'the hashed Supabase bundle is immutable'],
   ['/vendor/leaflet/leaflet.0123456789ab.js', IMMUTABLE, 'the hashed Leaflet script is immutable'],
-  ['/vendor/three/build/three.core.min.js', REVALIDATE, 'three keeps its name, so it revalidates within an hour'],
+  ['/vendor/three/build/three.module.min.0123456789ab.js', IMMUTABLE, 'the hashed three module build is immutable'],
+  ['/vendor/three/build/three.core.min.0123456789ab.js', IMMUTABLE, 'the hashed three core build is immutable'],
+  ['/vendor/sentry/bundle.tracing.replay.feedback.min.0123456789ab.js', IMMUTABLE, 'the hashed Sentry bundle is immutable'],
   ['/study.html', 'public, max-age=0, must-revalidate', 'pages always revalidate'],
   ['/', 'public, max-age=0, must-revalidate', 'the home page always revalidates']
 ];
