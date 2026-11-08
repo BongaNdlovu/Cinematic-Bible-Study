@@ -181,6 +181,7 @@
       return;
     }
     busy = true;
+    let confirmed = false;
     db.auth.mfa.verify({ factorId: factorId, challengeId: challengeId, code: code }).then(function (res) {
       if (!res || res.error) {
         say("That code was not accepted.");
@@ -188,6 +189,7 @@
           if (next && next.data && next.data.id) challengeId = next.data.id;
         });
       }
+      confirmed = true;
       if (field) field.value = "";
       showSecret("");
       say("The authenticator app is confirmed.");
@@ -196,7 +198,7 @@
       say("That code was not accepted.");
     }).then(function () {
       busy = false;
-      refresh();
+      if (confirmed) refresh();
     });
   }
 

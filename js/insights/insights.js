@@ -653,9 +653,9 @@
         '</dl>' +
         (learners.cohorts.length ? sub('Cohorts') + barList(learners.cohorts) : '')) +
       panel('profile', 'Learner profile mix',
-        sub('How they will use it') + barList(countBy(profs, function (p) { return p.study_mode; })) +
-        sub('Reading Daniel') + barList(countBy(profs, function (p) { return p.found_via; })) +
-        sub('Book they love') + barList(countBy(profs, function (p) { return p.background; }))) +
+        sub('How they study') + barList(countBy(profs, function (p) { return p.study_mode; })) +
+        sub('How they found the site') + barList(countBy(profs, function (p) { return p.found_via; })) +
+        sub('Background') + barList(countBy(profs, function (p) { return p.background; }))) +
       panel('onboard', 'First readers', onboardHtml(sv)) +
       panel('referral', 'Referrals & invites',
         '<p class="insights-stat"><b>' + num(signups) + '</b><span> referral sign-ups</span></p>' +

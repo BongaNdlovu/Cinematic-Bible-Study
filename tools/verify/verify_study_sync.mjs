@@ -112,12 +112,13 @@ assert.strictEqual(upserts[0].notes["3"].body, "Head of gold is Neo-Babylon.");
 assert.strictEqual(upserts[0].bookmarks.length, 0);
 assert.ok(store.baStudySyncOutbox === undefined, "successful push clears the outbox");
 
-// 2. Bookmarks ride in the same row (stored as given; merge dedupes).
+// 2. Bookmarks ride in the same row, stored as given locally; the push merges
+//    with the cloud row first, so the written row is the deduped, sorted union.
 StudySync.recordBookmarks([3, 1, 3]);
 assert.deepStrictEqual(JSON.parse(store.baStudyBookmarks), [3, 1, 3]);
 now += 10000;
 await StudySync.pushNow();
-assert.deepStrictEqual(upserts[upserts.length - 1].bookmarks, [3, 1, 3]);
+assert.deepStrictEqual(upserts[upserts.length - 1].bookmarks, [1, 3], "push writes the merged bookmark union");
 
 // 3. A failed push stays queued and retries out of the outbox.
 StudySync.recordNote(3, "Updated note.");
@@ -242,12 +243,16 @@ assert.strictEqual(upserts[upserts.length - 1].notes["9"].body, "Written while s
 
 // 11. A push asked for during a pull runs once the pull settles.
 let releasePull = null;
+let holdSelect = true; // the pull is in flight; once it is released, later reads (the deferred push reads before it writes) resolve normally
 const slowSelect = mockClient.from;
 mockClient.from = (table) => {
   const api = slowSelect(table);
   api.select = () => ({
     eq: () => ({
-      maybeSingle: () => new Promise((resolve) => { releasePull = () => resolve({ data: copyRow(), error: null }); })
+      maybeSingle: () => {
+        if (!holdSelect) return Promise.resolve({ data: copyRow(), error: null });
+        return new Promise((resolve) => { releasePull = () => { holdSelect = false; resolve({ data: copyRow(), error: null }); }; });
+      }
     })
   });
   return api;
@@ -314,7 +319,7 @@ now += 10000;
 await pullRetry.fn();
 await flush();
 await flush();
-assert.strictEqual(selects, 2, "the pull retry runs");
+assert.strictEqual(selects, 3, "the pull retry runs, then the healed push reads the cloud row before it writes");
 const healed = upserts[upserts.length - 1];
 assert.strictEqual(upserts.length, beforeBlind + 1, "the pending edit is pushed once the pull succeeds");
 assert.strictEqual(healed.notes["6"].body, "Cloud-only note.", "the cloud-only note survives");

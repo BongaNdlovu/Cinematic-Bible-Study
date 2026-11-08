@@ -28,7 +28,8 @@ async function cf(account, token, pathname, method) {
 const env = requiredEnv();
 const listed = await cf(env.account, env.token, "/deployments");
 const production = (Array.isArray(listed) ? listed : []).filter(function (item) {
-  return item && item.environment === "production" && item.id;
+  return item && item.environment === "production" && item.id
+    && item.latest_stage && item.latest_stage.status === "success";
 });
 production.sort(function (a, b) {
   return new Date(b.created_on || 0) - new Date(a.created_on || 0);

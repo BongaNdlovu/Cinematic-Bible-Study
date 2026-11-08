@@ -141,6 +141,7 @@
     if (code === "429" || /rate.?limit/i.test(code)) return "rate";
     if (code === "PGRST301" || /jwt.*(expired|invalid)/i.test(code + " " + (err.message || ""))) return "auth";
     const msg = String(err.message || err);
+    if (err.name === "TimeoutError" || /TimeoutError|timed out/i.test(msg)) return "timeout";
     if (/failed to fetch|load failed|networkerror|abort/i.test(msg)) {
       return navigator.onLine === false ? "offline" : "network";
     }

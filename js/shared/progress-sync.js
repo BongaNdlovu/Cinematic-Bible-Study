@@ -285,7 +285,9 @@
           return remote;
         }
 
+        applyingMerge = true;
         const localHadNew = mergeCloudWithLocal(remote);
+        applyingMerge = false;
 
         try {
           if (typeof window !== "undefined") {

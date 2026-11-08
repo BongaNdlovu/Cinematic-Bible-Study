@@ -365,13 +365,21 @@
     root._baScriptureBound = true;
   }
 
+  function getJson(path) {
+    const name = path.split("/").pop();
+    const request = window.SiteNet ? window.SiteNet.request(path) : fetch(path);
+    return request.then((res) => {
+      if (!res.ok) throw new Error(name + " " + res.status);
+      return res.json();
+    }, (err) => {
+      throw new Error(name + " " + (err.kind || err.message));
+    });
+  }
+
   let strongsReady = null;
   function loadStrongs() {
     if (strongsReady) return strongsReady;
-    strongsReady = fetch("bible/strongs-daniel.json").then((res) => {
-      if (!res.ok) throw new Error("strongs-daniel.json " + res.status);
-      return res.json();
-    });
+    strongsReady = getJson("bible/strongs-daniel.json");
     strongsReady.catch(() => { strongsReady = null; });
     return strongsReady;
   }
@@ -379,15 +387,9 @@
   function ensureLoaded() {
     if (ready) return ready;
     ready = Promise.all([
-      fetch("bible/kjv.json").then((res) => {
-        if (!res.ok) throw new Error("kjv.json " + res.status);
-        return res.json();
-      }),
+      getJson("bible/kjv.json"),
       loadStrongs(),
-      fetch("bible/sheet-passages.json").then((res) => {
-        if (!res.ok) throw new Error("sheet-passages.json " + res.status);
-        return res.json();
-      })
+      getJson("bible/sheet-passages.json")
     ]).then((bundle) => {
       books = (bundle[0] && bundle[0].books) || {};
       strongs = bundle[1] || {};
@@ -397,6 +399,7 @@
         loadError = "Daniel 2:38 is missing.";
       }
     }).catch((err) => {
+      ready = null;
       loadError = err && err.message ? err.message : String(err);
     });
     return ready;

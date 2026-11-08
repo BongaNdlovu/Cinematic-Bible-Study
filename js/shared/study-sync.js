@@ -373,11 +373,16 @@
     lastPushAt = Date.now();
     try { localStorage.setItem(LAST_PUSH_KEY, String(lastPushAt)); } catch (e) {}
     storeOutbox();
-    return c.from(TABLE).upsert({
-      user_id: u.id,
-      notes: payload.notes,
-      bookmarks: payload.bookmarks,
-      updated_at: new Date().toISOString()
+    return c.from(TABLE).select('notes, bookmarks').eq('user_id', u.id).maybeSingle().then(function (res) {
+      if (res && res.error) return res;
+      const merged = mergePayload(payload, res && res.data);
+      if (applyMerged(merged)) notifyStudySynced();
+      return c.from(TABLE).upsert({
+        user_id: u.id,
+        notes: merged.notes,
+        bookmarks: merged.bookmarks,
+        updated_at: new Date().toISOString()
+      });
     }).then(function (res) {
       if (res && res.error) {
         const cause = errorCause(res.error);

@@ -188,6 +188,7 @@
       if (!(img instanceof HTMLImageElement)) return;
       if (img.dataset.imgFallback) return;
       if (img.hasAttribute("data-no-fallback")) return;
+      if (img.classList.contains("leaflet-tile")) return;
       if (!img.getAttribute("src")) return;
       img.dataset.imgFallback = "1";
       img.classList.add("is-img-fallback");
