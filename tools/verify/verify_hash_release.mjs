@@ -14,6 +14,11 @@ function put(stage, rel, text) {
   fs.writeFileSync(full, text);
 }
 
+const IMPORT_MAP = '{"imports":{"three":"./vendor/three/build/three.module.min.js"}}';
+function cspHash(body) {
+  return "'sha256-" + crypto.createHash("sha256").update(body, "utf8").digest("base64") + "'";
+}
+
 function build(globeSource) {
   const stage = fs.mkdtempSync(path.join(os.tmpdir(), "hash-release-"));
   put(stage, "models/altar.glb", "glb-bytes");
@@ -31,6 +36,7 @@ function build(globeSource) {
   put(stage, "vendor/three/build/three.module.min.js", "import\"./three.core.min.js\";\nexport const three = 1;\n");
   put(stage, "vendor/three/build/three.core.min.js", "export {};\n");
   put(stage, "vendor/sentry/bundle.tracing.replay.feedback.min.js", "var Sentry = 1;\n");
+  put(stage, "_headers", "/*\n  Content-Security-Policy: default-src 'self'; script-src 'self' " + cspHash(IMPORT_MAP) + "; style-src 'self'\n");
   put(stage, "index.html", [
     '<link rel="stylesheet" href="css/site.css?v=cx1">',
     '<link rel="stylesheet" href="css/map.css?v=cx4">',
@@ -39,7 +45,7 @@ function build(globeSource) {
     '<script src="vendor/supabase/supabase.js" defer></script>',
     '<script src="vendor/sentry/bundle.tracing.replay.feedback.min.js"></script>',
     '<script src="js/study/scripture.js" defer></script>',
-    '<script type="importmap">{"imports":{"three":"./vendor/three/build/three.module.min.js"}}</script>',
+    '<script type="importmap">' + IMPORT_MAP + '</script>',
     '<link rel="modulepreload" href="vendor/three/build/three.module.min.js">',
     '<script src="js/shared/boot.js"></script>',
     '<script src="js/map/map.js"></script>',
@@ -93,6 +99,9 @@ assert(scripture.includes("bible/" + kjvName), "a script fetches the hashed name
 assert.match(html, /vendor\/supabase\/supabase\.[a-f0-9]{12}\.js/, "the Supabase bundle is hashed");
 assert.match(html, /vendor\/leaflet\/leaflet\.[a-f0-9]{12}\.js/, "the Leaflet script is hashed");
 assert.match(html, /vendor\/leaflet\/leaflet\.[a-f0-9]{12}\.css/, "the Leaflet stylesheet is hashed");
+const stagedMap = html.match(/<script type="importmap">([\s\S]*?)<\/script>/)[1];
+assert.notStrictEqual(stagedMap, IMPORT_MAP, "the import map is rewritten to the hashed three module");
+assert(fs.readFileSync(path.join(stage, "_headers"), "utf8").includes(cspHash(stagedMap)), "the CSP in _headers allows the rewritten import map, or the browser blocks it and three never loads");
 const moduleName = only(stage, "vendor/three/build", /^three\.module\.min\./);
 assert.match(moduleName, /^three\.module\.min\.[a-f0-9]{12}\.js$/, "the three module build is hashed");
 const coreName = only(stage, "vendor/three/build", /^three\.core\.min\./);

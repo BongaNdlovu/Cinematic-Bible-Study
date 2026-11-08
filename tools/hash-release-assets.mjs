@@ -93,6 +93,49 @@ function apply(prefix, extensions) {
   }
 }
 
+const CSP_SCRIPT_TYPES = new Set(["", "text/javascript", "application/javascript", "module", "module/javascript", "importmap"]);
+
+function cspHash(body) {
+  return "'sha256-" + crypto.createHash("sha256").update(body.replace(/\r\n?/g, "\n"), "utf8").digest("base64") + "'";
+}
+
+function inlineScriptHashes() {
+  const byPage = new Map();
+  for (const page of fs.readdirSync(stage).filter((f) => f.endsWith(".html"))) {
+    const src = fs.readFileSync(path.join(stage, page), "utf8");
+    const hashes = [];
+    for (const m of src.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/g)) {
+      if (/\bsrc\s*=/.test(m[1])) continue;
+      const type = (m[1].match(/type\s*=\s*["']?([^"'\s>]+)/) || [])[1] || "";
+      if (!CSP_SCRIPT_TYPES.has(type.toLowerCase())) continue;
+      hashes.push(cspHash(m[2]));
+    }
+    byPage.set(page, hashes);
+  }
+  return byPage;
+}
+
+function allowRewrittenInlineScripts(before) {
+  const headersPath = path.join(stage, "_headers");
+  if (!fs.existsSync(headersPath)) return;
+  const added = new Set();
+  for (const [page, hashes] of inlineScriptHashes()) {
+    const old = before.get(page) || [];
+    if (old.length !== hashes.length) throw new Error("inline script count changed while hashing " + page);
+    hashes.forEach((h, i) => { if (h !== old[i]) added.add(h); });
+  }
+  if (!added.size) return;
+  const headers = fs.readFileSync(headersPath, "utf8");
+  const next = headers.replace(/(Content-Security-Policy:[^\r\n]*?script-src [^;\r\n]*)/, (directive) => {
+    const missing = [...added].filter((h) => !directive.includes(h));
+    return missing.length ? directive + " " + missing.join(" ") : directive;
+  });
+  if (next === headers) throw new Error("could not add rewritten inline script hashes to _headers");
+  fs.writeFileSync(headersPath, next);
+  console.log("allowed " + added.size + " rewritten inline script hash(es) in _headers");
+}
+
+const inlineBefore = inlineScriptHashes();
 apply("models", [".glb", ".gltf"]);
 apply("bible", [".json"]);
 apply("vendor/supabase", [".js"]);
@@ -101,4 +144,5 @@ apply("vendor/three/build", [".js"]);
 apply("vendor/sentry", [".js"]);
 apply("css", [".css"]);
 apply("js", [".js", ".mjs"]);
+allowRewrittenInlineScripts(inlineBefore);
 console.log("hashed release assets in " + stage);
