@@ -101,7 +101,15 @@ assert.match(html, /vendor\/leaflet\/leaflet\.[a-f0-9]{12}\.js/, "the Leaflet sc
 assert.match(html, /vendor\/leaflet\/leaflet\.[a-f0-9]{12}\.css/, "the Leaflet stylesheet is hashed");
 const stagedMap = html.match(/<script type="importmap">([\s\S]*?)<\/script>/)[1];
 assert.notStrictEqual(stagedMap, IMPORT_MAP, "the import map is rewritten to the hashed three module");
-assert(fs.readFileSync(path.join(stage, "_headers"), "utf8").includes(cspHash(stagedMap)), "the CSP in _headers allows the rewritten import map, or the browser blocks it and three never loads");
+const stagedHeaders = fs.readFileSync(path.join(stage, "_headers"), "utf8");
+assert(stagedHeaders.includes(cspHash(stagedMap)), "the CSP in _headers allows the rewritten import map, or the browser blocks it and three never loads");
+assert(!stagedHeaders.includes(cspHash(IMPORT_MAP)), "the stale import map hash is swapped out, so the CSP line does not grow past Cloudflare's 2000-character limit");
+const longStage = fs.mkdtempSync(path.join(os.tmpdir(), "hash-release-long-"));
+put(longStage, "_headers", "/*\n  Content-Security-Policy: script-src 'self' " + "x".repeat(2000) + "\n");
+put(longStage, "index.html", "<p>no scripts</p>\n");
+const longRun = spawnSync(process.execPath, [path.join(ROOT, "tools", "hash-release-assets.mjs"), longStage], { encoding: "utf8" });
+assert.notStrictEqual(longRun.status, 0, "a _headers value over 2000 characters fails the release instead of shipping a page with no CSP");
+fs.rmSync(longStage, { recursive: true, force: true });
 const moduleName = only(stage, "vendor/three/build", /^three\.module\.min\./);
 assert.match(moduleName, /^three\.module\.min\.[a-f0-9]{12}\.js$/, "the three module build is hashed");
 const coreName = only(stage, "vendor/three/build", /^three\.core\.min\./);

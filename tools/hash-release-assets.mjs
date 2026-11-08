@@ -118,21 +118,40 @@ function inlineScriptHashes() {
 function allowRewrittenInlineScripts(before) {
   const headersPath = path.join(stage, "_headers");
   if (!fs.existsSync(headersPath)) return;
-  const added = new Set();
-  for (const [page, hashes] of inlineScriptHashes()) {
+  const after = inlineScriptHashes();
+  const swaps = new Map();
+  const stillUsed = new Set();
+  for (const [page, hashes] of after) {
     const old = before.get(page) || [];
     if (old.length !== hashes.length) throw new Error("inline script count changed while hashing " + page);
-    hashes.forEach((h, i) => { if (h !== old[i]) added.add(h); });
+    hashes.forEach((h, i) => {
+      stillUsed.add(h);
+      if (h !== old[i]) swaps.set(old[i], h);
+    });
   }
-  if (!added.size) return;
   const headers = fs.readFileSync(headersPath, "utf8");
-  const next = headers.replace(/(Content-Security-Policy:[^\r\n]*?script-src [^;\r\n]*)/, (directive) => {
-    const missing = [...added].filter((h) => !directive.includes(h));
-    return missing.length ? directive + " " + missing.join(" ") : directive;
-  });
-  if (next === headers) throw new Error("could not add rewritten inline script hashes to _headers");
-  fs.writeFileSync(headersPath, next);
-  console.log("allowed " + added.size + " rewritten inline script hash(es) in _headers");
+  let next = headers;
+  if (swaps.size) {
+    next = headers.replace(/(Content-Security-Policy:[^\r\n]*?script-src )([^;\r\n]*)/, (whole, head, sources) => {
+      const list = sources.trim().split(/\s+/);
+      const out = [];
+      for (const src of list) {
+        const replacement = swaps.get(src);
+        if (!replacement) { out.push(src); continue; }
+        if (stillUsed.has(src)) out.push(src);
+        out.push(replacement);
+      }
+      for (const h of swaps.values()) if (!out.includes(h)) out.push(h);
+      return head + [...new Set(out)].join(" ");
+    });
+    if (next === headers) throw new Error("could not add rewritten inline script hashes to _headers");
+    fs.writeFileSync(headersPath, next);
+    console.log("swapped " + swaps.size + " rewritten inline script hash(es) in _headers");
+  }
+  for (const line of next.split(/\r?\n/)) {
+    const value = line.slice(line.indexOf(":") + 1).trim();
+    if (line.includes(":") && value.length > 2000) throw new Error("a _headers value is " + value.length + " characters; Cloudflare Pages drops values over 2000, so the header would vanish: " + line.trim().slice(0, 60));
+  }
 }
 
 const inlineBefore = inlineScriptHashes();
