@@ -45,25 +45,28 @@ assert.deepStrictEqual(unminified, [], "no shipped page or script may load the u
 
 const routes = JSON.parse(fs.readFileSync(path.join(ROOT, "_routes.json"), "utf8"));
 assert.strictEqual(routes.version, 1, "_routes.json must be version 1");
-assert.deepStrictEqual(routes.include, ["/*"], "_routes.json must route every path through the middleware by default");
+assert(!routes.include.includes("/*"), "_routes.json must serve pages as static files, so page views never spend the Functions request quota");
 assert(routes.include.length + routes.exclude.length <= 100, "_routes.json must stay within the 100 rule limit");
-for (const folder of ["/assets/*", "/js/*", "/css/*", "/vendor/*", "/models/*", "/bible/*"]) {
-  assert(routes.exclude.includes(folder), "_routes.json must skip the middleware for " + folder);
+function matches(rules, p) {
+  return rules.some((rule) => new RegExp("^" + rule.split("*").map((part) => part.replace(/[.+?^${}()|[\]\\]/g, "\\$&")).join(".*") + "$").test(p));
 }
 function routed(p) {
-  return !routes.exclude.some((rule) => new RegExp("^" + rule.split("*").map((part) => part.replace(/[.+?^${}()|[\]\\]/g, "\\$&")).join(".*") + "$").test(p));
+  return matches(routes.include, p) && !matches(routes.exclude, p);
 }
 const protectedPaths = [
   "/docs/plan.md", "/tools/supabase-quiz-integrity.sql", "/tests/unit/middleware.test.mjs", "/backups/db.sql", "/workers/exhibit-rate-gate/src/index.js",
   "/qa/proofs/x.png", "/originals/a.glb", "/_factcheck/meta.json", "/_mig/index.json", "/functions/_middleware.js",
   "/README.md", "/package.json", "/package-lock.json", "/server.py", "/vercel.json", "/wrangler.toml",
-  "/start_website.bat", "/middleware.js", "/__wiring_check.mjs", "/.env", "/.git/config", "/__rate",
-  "/study.html", "/map.html", "/"
+  "/start_website.bat", "/middleware.js", "/__wiring_check.mjs", "/.env", "/.git/config"
 ];
 for (const p of protectedPaths) assert(routed(p), "_routes.json must keep " + p + " behind the middleware");
+for (const p of ["/__rate", "/csp-report"]) assert(routed(p), "_routes.json must send " + p + " to the middleware");
+for (const p of ["/", "/study.html", "/study", "/map.html", "/account.html", "/404.html", "/assets/a.jpg", "/js/shared/auth.js", "/css/site.css", "/vendor/v.js", "/models/m.glb", "/bible/kjv.json"]) {
+  assert(!routed(p), "_routes.json must serve " + p + " without invoking Functions");
+}
 
 const { onRequest } = await import("../../functions/_middleware.js");
-for (const p of protectedPaths.slice(0, 20)) {
+for (const p of protectedPaths) {
   let reached = false;
   const res = await onRequest({
     request: new Request("https://example.test" + p),

@@ -1,6 +1,6 @@
 const WINDOWS = {
   all: [240, 60000],
-  account: [30, 60000],
+  account: [120, 60000],
   report: [10, 60000]
 };
 

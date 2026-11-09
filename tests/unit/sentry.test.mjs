@@ -55,3 +55,12 @@ test("the privacy page names Sentry and still promises no session replay", () =>
   assert.match(html, /never records your screen or replays your session/);
   assert.match(html, /We do not record your screen and we do not replay your sessions/);
 });
+
+for (const rel of ["../../functions/_middleware.js", "../../workers/exhibit-rate-gate/src/index.js"]) {
+  test(`${rel.replace("../../", "")} traces one request in ten`, () => {
+    const src = fs.readFileSync(new URL(rel, import.meta.url), "utf8");
+    const rates = [...src.matchAll(/tracesSampleRate:\s*([\d.]+)/g)].map((m) => Number(m[1]));
+    assert.ok(rates.length > 0);
+    assert.deepEqual(rates.filter((r) => r !== 0.1), []);
+  });
+}

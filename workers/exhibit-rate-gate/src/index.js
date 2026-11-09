@@ -6,7 +6,7 @@ const SENTRY_DSN = "https://fb62126576bb04e73c1be1d851791ab8@o4512321608679424.i
 function sentryOptions(env) {
   return {
     dsn: (env && env.SENTRY_DSN) || SENTRY_DSN,
-    tracesSampleRate: 1,
+    tracesSampleRate: 0.1,
     dataCollection: { userInfo: false }
   };
 }

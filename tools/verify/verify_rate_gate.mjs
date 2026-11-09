@@ -36,10 +36,10 @@ assert.deepStrictEqual(overlap, [true, true]);
 assert.strictEqual(counted.get("all:10.1.0.1").n, 2, "serialized checks do not lose a count");
 
 const account = new Map();
-for (let i = 0; i < 30; i += 1) {
+for (let i = 0; i < 120; i += 1) {
   assert.strictEqual(allow(account, "10.8.0.1", "/account", now), true);
 }
-assert.strictEqual(allow(account, "10.8.0.1", "/account.html", now), false, "the account page has a 30-read budget");
+assert.strictEqual(allow(account, "10.8.0.1", "/account.html", now), false, "the account page has a 120-read budget");
 assert.strictEqual(allow(account, "10.8.0.1", "/study.html", now), true, "the account budget does not spend the page budget");
 
 const aging = new Map();

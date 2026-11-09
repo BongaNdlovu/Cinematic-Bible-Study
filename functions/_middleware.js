@@ -205,7 +205,7 @@ const sentryPlugin = Sentry.sentryPagesPlugin(function (context) {
   const env = context && context.env;
   return {
     dsn: (env && env.SENTRY_DSN) || SENTRY_DSN,
-    tracesSampleRate: 1,
+    tracesSampleRate: 0.1,
     dataCollection: { userInfo: false }
   };
 });

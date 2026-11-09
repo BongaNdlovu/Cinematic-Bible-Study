@@ -1,13 +1,28 @@
 {
   "version": 1,
-  "include": ["/*"],
-  "exclude": [
-    "/assets/*",
-    "/js/*",
-    "/css/*",
-    "/vendor/*",
-    "/models/*",
-    "/bible/*",
-    "/favicon.ico"
-  ]
+  "include": [
+    "/csp-report",
+    "/__rate",
+    "/docs/*",
+    "/tools/*",
+    "/tests/*",
+    "/backups/*",
+    "/workers/*",
+    "/functions/*",
+    "/qa/*",
+    "/originals/*",
+    "/_factcheck/*",
+    "/_mig/*",
+    "/README.md",
+    "/package.json",
+    "/package-lock.json",
+    "/server.py",
+    "/vercel.json",
+    "/wrangler.toml",
+    "/start_website.bat",
+    "/middleware.js",
+    "/__wiring_check.mjs",
+    "/.*"
+  ],
+  "exclude": []
 }

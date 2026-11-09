@@ -28,7 +28,7 @@ test("pages allow 240 a minute, then deny and flag only the first denial", () =>
 
 test("account and report paths have tighter budgets", () => {
   const store = new Map();
-  assert.equal(spend(store, "2.2.2.2", "/account", 30, NOW).ok, true);
+  assert.equal(spend(store, "2.2.2.2", "/account", 120, NOW).ok, true);
   assert.equal(decide(store, "2.2.2.2", "/account.html", NOW).ok, false);
   assert.equal(spend(store, "2.2.2.2", "/csp-report", 10, NOW).ok, true);
   assert.equal(decide(store, "2.2.2.2", "/csp-report", NOW).ok, false);
