@@ -248,6 +248,10 @@
     if (mergedBookmarks.some(function (n) { return localMarks.indexOf(n) === -1; })) {
       remoteHadNew = true;
     }
+    const remoteMarks = ((remote && Array.isArray(remote.bookmarks)) ? remote.bookmarks : []).map(sanitizeSheetId);
+    if (localMarks.some(function (n) { return remoteMarks.indexOf(n) === -1; })) {
+      localHadNew = true;
+    }
 
     return {
       notes: mergedNotes,

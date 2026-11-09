@@ -19,6 +19,9 @@ if ($LASTEXITCODE -ge 8) { throw "robocopy failed with exit code $LASTEXITCODE" 
 if (Test-Path (Join-Path $stage "models\originals")) {
   Remove-Item (Join-Path $stage "models\originals") -Recurse -Force
 }
+if (Test-Path (Join-Path $stage "assets\_glb_preview")) {
+  Remove-Item (Join-Path $stage "assets\_glb_preview") -Recurse -Force
+}
 
 # Explicit cleanup guarantee: remove any dotfiles, example configs, or sensitive root artifacts
 Get-ChildItem -Path $stage -Force | Where-Object { $_.Name -like ".*" } | Remove-Item -Recurse -Force
@@ -30,7 +33,7 @@ foreach ($leak in @("_factcheck", "_mig", "__wiring_check.mjs", "qa_book_reader_
   $p = Join-Path $stage $leak
   if (Test-Path $p) { Remove-Item $p -Recurse -Force }
 }
-$leaksLeft = @("_factcheck", "_mig", "__wiring_check.mjs", "qa_book_reader_full.log") |
+$leaksLeft = @("_factcheck", "_mig", "__wiring_check.mjs", "qa_book_reader_full.log", "assets\_glb_preview") |
   Where-Object { Test-Path (Join-Path $stage $_) }
 if ($leaksLeft) { throw ("deploy bundle still contains: " + ($leaksLeft -join ", ")) }
 

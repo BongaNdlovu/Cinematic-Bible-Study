@@ -1103,7 +1103,7 @@
     modal.querySelector('#dossier-proceed-btn').addEventListener('click', () => {
       modal.remove();
       if (typeof onProceed === 'function') onProceed();
-      else if (window.loadSheet) window.loadSheet(3);
+      else if (window.navigateSheet) window.navigateSheet(1);
     });
   }
 

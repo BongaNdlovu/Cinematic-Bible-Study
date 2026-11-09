@@ -149,6 +149,16 @@
     return true;
   }
 
+  function releaseSurveySlot() {
+    let times = [];
+    try {
+      times = JSON.parse(localStorage.getItem(SURVEY_WIN) || '[]');
+    } catch (e) { return; }
+    if (!Array.isArray(times) || !times.length) return;
+    times.pop();
+    try { localStorage.setItem(SURVEY_WIN, JSON.stringify(times)); } catch (e) {}
+  }
+
   function flush() {
     if (flushing || optedOut() || !consented()) return Promise.resolve();
     const auth = window.ScrollAuth;
@@ -288,9 +298,13 @@
       feedback: '',
       responses: {}
     }, row)).then(function (res) {
-      if (res && res.error) return { ok: false, reason: 'error' };
+      if (res && res.error) {
+        releaseSurveySlot();
+        return { ok: false, reason: 'error' };
+      }
       return { ok: true };
     }).catch(function () {
+      releaseSurveySlot();
       return { ok: false, reason: 'error' };
     });
   }

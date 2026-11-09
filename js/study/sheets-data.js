@@ -1073,15 +1073,15 @@ DANIEL IN BABYLON                         JESUS IN THE WILDERNESS
               why: "Exile is sovereign judgment, not Marduk's independent victory. If you miss who gave Jehoiakim to Babylon, chapter 1 reads as a story of skill instead of a covenant narrative about the Lord who still shepherds a remnant in a foreign court."
             },
             {
-              do: "Study the three-siege diagram. Label 605, 597, and 586 with what happened in each campaign.",
+              do: "Read Daniel 1:3–8. List what Daniel accepted (the language, the literature, the new name, the royal post), then mark where he drew the line in 1:8.",
               why: "Daniel 1:8 is the hinge of the chapter: he purposed in his heart that he would not defile himself. Daniel 1:8 does not say the king's food was unclean. It says he would not be defiled by it. Note where the line falls. It falls at the table, not at the language, the literature, or the government job. Civic skill is permitted, and 1:17 shows God blessing it. Worship and the food laws still belong to God in Babylon, and no empire can take them by decree."
             },
             {
-              do: "Compare the names diagram with Daniel 1:7. What did Babylon take (the roll) and what did Daniel keep (worship)?",
+              do: "Read Daniel 1:11–16 beside Genesis 1:29 and Leviticus 17:10–14. What did the ten-day test of pulse and water put on trial?",
               why: "Zeroim is the Hebrew word for food grown from seed, and it points back to the diet God gave people at creation (Genesis 1:29). The ten-day test is not a fad diet and the chapter does not present it as one. It is a test of whether God can be trusted with a body. One possible reason the king's food would defile him is that it was meat not properly drained of blood, which the law forbids (Leviticus 17:10-14). Another is that it had been offered to Babylon's gods. Either way, plants and water avoid both problems at once. The point is the stand, not the menu."
             },
             {
-              do: "Read Daniel 1:8, 12–17 beside Leviticus 11 and Genesis 1:29. Note: purpose → obedience → wisdom.",
+              do: "Read Daniel 1:17–20. Write one sentence that answers both errors: that holiness makes a person useless, and that excellence is worth a compromise.",
               why: "God gave them knowledge and skill, and 1:17 says so plainly. Two errors are corrected at once here. The first is that holiness makes a person useless to the world: it did not, because these four served the empire at the highest level. The second is that excellence is worth a compromise: it was not, because they never paid that price and still outclassed every other adviser. Write the sentence out until it guards both halves, because most of us are tempted by one error or the other."
             },
           ],

@@ -45,4 +45,8 @@ for (const page of ['index.html', 'study.html', 'map.html', 'gallery.html', 'acc
   assert(html.includes('js/shared/desk.js'), page + ' loads the desk');
 }
 
+const notFound = read('404.html');
+const baseAt = notFound.indexOf('<base href="/">');
+assert(baseAt !== -1 && baseAt < notFound.indexOf('href="css/'), '404.html resolves its links from the site root, so a nested dead URL still gets styles and working buttons');
+
 console.log('desk: operator notices and reader notes stay on the guarded path');

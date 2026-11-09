@@ -527,8 +527,16 @@
       global: {
         fetch: function (input, requestInit) {
           const next = requestInit ? Object.assign({}, requestInit) : {};
-          if (!next.signal) next.signal = AbortSignal.timeout(8000);
-          return fetch(input, next);
+          if (next.signal) return fetch(input, next);
+          if (typeof AbortSignal !== "undefined" && typeof AbortSignal.timeout === "function") {
+            next.signal = AbortSignal.timeout(8000);
+            return fetch(input, next);
+          }
+          if (typeof AbortController !== "function") return fetch(input, next);
+          const ctrl = new AbortController();
+          const timer = setTimeout(function () { ctrl.abort(); }, 8000);
+          next.signal = ctrl.signal;
+          return fetch(input, next).finally(function () { clearTimeout(timer); });
         }
       },
       auth: {

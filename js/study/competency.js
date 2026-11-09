@@ -40,7 +40,7 @@
 
   function getTrack() {
     try {
-      return localStorage.getItem(TRACK_KEY) || 'foundations';
+      return localStorage.getItem(TRACK_KEY) === 'scholarly' ? 'scholarly' : 'foundations';
     } catch (e) {
       return 'foundations';
     }

@@ -341,9 +341,18 @@ assert.strictEqual(Insights.optedOut(), false, 'optedOut() must stay false');
 
 const surveyOk = await Insights.insertSurvey({ responses: { kind: 'profile' } });
 assert.strictEqual(surveyOk.ok, true, 'insertSurvey must report success');
+const surveySlotsUsed = () => JSON.parse(global.localStorage.getItem('baSurveyTimes') || '[]').length;
+const slotsBeforeFail = surveySlotsUsed();
 failWrites = true;
 const surveyFail = await Insights.insertSurvey({ responses: { kind: 'profile' } });
 assert.strictEqual(surveyFail.ok, false, 'insertSurvey must report a failed write');
+assert.strictEqual(surveySlotsUsed(), slotsBeforeFail, 'a refused survey gives its rate-limit slot back');
+const realGetClient = global.window.ScrollAuth.getClient;
+global.window.ScrollAuth.getClient = () => ({ from: () => ({ insert: () => Promise.reject(new Error('network')) }) });
+const surveyLost = await Insights.insertSurvey({ responses: { kind: 'profile' } });
+assert.strictEqual(surveyLost.ok, false, 'insertSurvey must report a lost write');
+assert.strictEqual(surveySlotsUsed(), slotsBeforeFail, 'a survey that never reached the server gives its rate-limit slot back');
+global.window.ScrollAuth.getClient = realGetClient;
 currentUser = { id: 'usr_abc_123' };
 const profileFail = await Insights.upsertProfile({ study_mode: 'alone' });
 assert.strictEqual(profileFail.ok, false, 'upsertProfile must report a failed write');
@@ -567,6 +576,7 @@ assert(reviewsJs.includes('res && res.error'), 'reviews.js must check approve/hi
 const liveJs = fs.readFileSync(path.join(ROOT, 'tools/verify/verify_progress_live.mjs'), 'utf8');
 assert(liveJs.includes('process.exit(1)'), 'live progress check must fail when env is missing');
 assert(!liveJs.includes('process.exit(0)'), 'live progress check must not skip with a passing exit');
+assert(/a\.click\(\);\s*setTimeout\(function \(\) \{ URL\.revokeObjectURL\(a\.href\); \}, 1000\);/.test(dashCode), 'the CSV export keeps its link alive until the download starts');
 
 console.log('✓ All 6 check phases passed successfully!');
 process.exit(0);

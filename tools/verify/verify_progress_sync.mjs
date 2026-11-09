@@ -248,6 +248,26 @@ assert.strictEqual(global.window.ProgressSync.retryPending(), true);
 await global.window.ProgressSync.retryNow();
 assert.ok(calls.length > guarded, "the timer retry is not dropped by the 6-second guard");
 
+store.baJourney = JSON.stringify({ completedSheets: [], sheet: 0, pathSheet: -1, unlocked: [] });
+store.daniel_historicist_mastery = "[]";
+errors.length = 0;
+pullReply = {
+  data: {
+    revision: 9,
+    journey: { completedSheets: [0, 1, 2, 3, 4, 5, 6], sheet: 7, pathSheet: 6, unlocked: ["persia"] },
+    mastery: [0, 1, 2, 3, 4, 5, 6],
+    workbench: {},
+    telemetry: {}
+  },
+  error: null
+};
+await global.window.ProgressSync.pullAndMerge();
+const restored = JSON.parse(store.baJourney);
+assert.strictEqual(restored.sheet, 7, "a new device resumes at the cloud sitting");
+assert.strictEqual(restored.pathSheet, 6, "a new device keeps the cloud path position");
+assert.deepStrictEqual(restored.unlocked, ["persia"], "a new device keeps the cloud unlocks");
+pullReply = { data: null, error: null };
+
 store.baJourney = "{";
 const before = store.baJourney;
 global.window.BAJourney.save({ sheet: 3 });

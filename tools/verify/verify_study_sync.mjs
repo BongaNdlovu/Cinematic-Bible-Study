@@ -328,5 +328,10 @@ assert.strictEqual(store["baNote-6"], "Cloud-only note.");
 assert.strictEqual(store.baStudySyncOutbox, undefined);
 mockClient.from = workingFrom;
 
+const guestMarks = StudySync.mergePayload({ notes: {}, bookmarks: [3, 5] }, { notes: {}, bookmarks: [5] });
+assert.strictEqual(guestMarks.localHadNew, true, "a bookmark only this device has is pushed to the cloud");
+const sameMarks = StudySync.mergePayload({ notes: {}, bookmarks: [5] }, { notes: {}, bookmarks: [5] });
+assert.strictEqual(sameMarks.localHadNew, false, "matching bookmarks do not force a push");
+
 Date.now = realNow;
 console.log("study sync: push, outbox retry, pull-merge, account switch, sign-out isolation, deferred push, push gap, failed-pull hold, and size guard hold");

@@ -23,4 +23,10 @@ assert(!map.includes('L.control.zoom('), 'one zoom control serves both the globe
 assert(/zoomBy:\s*zoomBy/.test(globe), 'the globe can be zoomed by the buttons');
 assert(css.includes('.cmap-root:has(.cmap-dossier.open) .cmap-zoom { display: none; }'), 'on a phone the zoom buttons step aside for a place panel');
 
+const gallery = read('js/gallery/app.js');
+assert(gallery.includes("if (e.key !== 't' && e.key !== 'T') return;") && gallery.includes('if (e.ctrlKey || e.metaKey || e.altKey) return;'), 'the tour key ignores modifier chords');
+assert(/!!\(e\.target && e\.target\.isContentEditable\);\s*if \(typing\) return;\s*startArtifactTour\(\);/.test(gallery), 'typing a t in a field does not start the tour');
+assert(gallery.includes('if (tourRunning) return;') && gallery.includes("tourRunning = false; museumToast('Tour complete');"), 'only one guided tour runs at a time');
+assert(gallery.includes('if (/^(localhost|127\\.0\\.0\\.1|\\[::1\\])$/.test(window.location.hostname)) window.__galleryCamera = camera;') && !/^\s*window\.__galleryCamera = camera;/m.test(gallery), 'the gallery camera debug handle exists only on local hosts');
+
 console.log('map help: zoom buttons, help panel, and an honest 3D label');

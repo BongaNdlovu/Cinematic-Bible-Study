@@ -161,9 +161,25 @@
       }
 
       const mergedCohort = localJourney.cohort || remote.cohort || remoteJourney.cohort || null;
+      const localSheet = typeof localJourney.sheet === 'number' ? localJourney.sheet : 0;
+      const remoteSheet = typeof remoteJourney.sheet === 'number' ? remoteJourney.sheet : 0;
+      const localPath = typeof localJourney.pathSheet === 'number' ? localJourney.pathSheet : -1;
+      const remotePath = typeof remoteJourney.pathSheet === 'number' ? remoteJourney.pathSheet : -1;
+      const localUnlocked = Array.isArray(localJourney.unlocked) ? localJourney.unlocked : [];
+      const remoteUnlocked = Array.isArray(remoteJourney.unlocked) ? remoteJourney.unlocked : [];
+      const unionUnlocked = Array.from(new Set(localUnlocked.concat(remoteUnlocked).filter(Boolean)));
+      const localPlaceAhead = localSheet > remoteSheet || localPath > remotePath;
+      const localUnlockedNew = localUnlocked.some(function (u) { return remoteUnlocked.indexOf(u) === -1; });
+      if (localPlaceAhead || localUnlockedNew) localHadNew = true;
 
       if (window.BAJourney && typeof window.BAJourney.save === 'function') {
-        window.BAJourney.save({ completedSheets: unionSheets, cohort: mergedCohort });
+        window.BAJourney.save({
+          completedSheets: unionSheets,
+          cohort: mergedCohort,
+          sheet: Math.max(localSheet, remoteSheet),
+          pathSheet: Math.max(localPath, remotePath),
+          unlocked: unionUnlocked
+        });
       }
       localStorage.setItem('daniel_historicist_mastery', JSON.stringify(unionSheets));
     } catch (e) {}

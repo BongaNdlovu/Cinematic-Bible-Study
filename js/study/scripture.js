@@ -53,7 +53,7 @@
 
   function passageForSheet(index) {
     const key = String(index);
-    return sheets[key] || sheets["0"] || null;
+    return sheets[key] || null;
   }
 
   function isHighlighted(sheetIndex, book, chapter, verse) {

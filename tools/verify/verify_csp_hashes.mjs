@@ -64,7 +64,7 @@ if (idx === -1) {
 }
 
 if (write) {
-  const kept = directives[idx].split(/\s+/).filter((t) => t !== "'unsafe-inline'");
+  const kept = directives[idx].split(/\s+/).filter((t) => t !== "'unsafe-inline'" && !t.startsWith("'sha256-"));
   directives[idx] = [...new Set([...kept, ...required])].join(' ');
   const next = csp.line.slice(0, csp.line.indexOf(':') + 1) + ' ' + directives.join('; ');
   content = content.replace(csp.line, next);
@@ -86,6 +86,12 @@ const missing = required.filter((h) => !tokens.includes(h));
 if (missing.length) {
   console.error('FAIL: ' + missing.length + ' inline script hash(es) missing from script-src.');
   console.error('Regenerate with: node tools/verify/verify_csp_hashes.mjs --write');
+  ok = false;
+}
+const stale = tokens.filter((t) => t.startsWith("'sha256-") && !required.includes(t));
+if (stale.length) {
+  console.error('FAIL: ' + stale.length + ' script-src hash(es) match no inline script in the served pages.');
+  console.error('Prune them with: node tools/verify/verify_csp_hashes.mjs --write');
   ok = false;
 }
 if (!tokens.includes("'self'")) {

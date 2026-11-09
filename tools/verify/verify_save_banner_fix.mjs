@@ -351,6 +351,30 @@ await TabBSync.pushNow();
 assert.strictEqual(global.window.SiteErrors.current(), "", "Successful save must clear previous PULL_MISS error banner");
 console.log("✓ Successful save cleared previous PULL_MISS error banner");
 
+console.log("\nTest 14: Auth requests still time out without AbortSignal.timeout");
+{
+  const realSignal = globalThis.AbortSignal;
+  const realFetch = globalThis.fetch;
+  let clientOptions = null;
+  let sentInit = null;
+  globalThis.AbortSignal = function AbortSignal() {};
+  globalThis.fetch = (input, init) => { sentInit = init; return Promise.resolve({ ok: true }); };
+  global.window.BAAuthConfig = { url: "https://db.example.test", publishableKey: "pk" };
+  global.window.supabase = {
+    createClient: (url, key, opts) => {
+      clientOptions = opts;
+      return { auth: { onAuthStateChange: () => {}, getSession: () => Promise.resolve({ data: { session: null } }) } };
+    }
+  };
+  new Function(fs.readFileSync(path.join(ROOT, "js/shared/auth.js"), "utf8"))();
+  assert.ok(clientOptions && clientOptions.global && typeof clientOptions.global.fetch === "function", "auth.js must hand Supabase a fetch override");
+  await clientOptions.global.fetch("https://db.example.test/rest/v1/x", {});
+  assert.ok(sentInit && sentInit.signal, "a request still gets a timeout signal when AbortSignal.timeout is missing");
+  globalThis.AbortSignal = realSignal;
+  globalThis.fetch = realFetch;
+}
+console.log("✓ Auth requests keep an 8 s timeout on browsers without AbortSignal.timeout");
+
 console.log("\n========================================================");
 console.log("  ALL PROGRESS SAVE & ERROR BANNER CHECKS PASSED!");
 console.log("========================================================\n");

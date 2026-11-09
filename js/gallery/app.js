@@ -108,7 +108,7 @@ import * as THREE from 'three';
 
     const camera = new THREE.PerspectiveCamera(34, window.innerWidth / window.innerHeight, 0.02, 200);
     camera.position.set(7.2, 5.4, 21.5);
-    window.__galleryCamera = camera;
+    if (/^(localhost|127\.0\.0\.1|\[::1\])$/.test(window.location.hostname)) window.__galleryCamera = camera;
 
     const renderer = new THREE.WebGLRenderer({ antialias: !lowPower, alpha: false, powerPreference: 'high-performance' });
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, lowPower ? 1.25 : 2));
@@ -3929,11 +3929,14 @@ import * as THREE from 'three';
         if (b) handleNodeClick(b.dataset.node);
       });
     }
+    let tourRunning = false;
     function startArtifactTour() {
+      if (tourRunning) return;
+      tourRunning = true;
       let i = 0;
       const order = openArtifactKeys().filter((k) => k !== 'altar');
       const step = () => {
-        if (i >= order.length) { museumToast('Tour complete'); return; }
+        if (i >= order.length) { tourRunning = false; museumToast('Tour complete'); return; }
         selectAsset(order[i]);
         i += 1;
         setTimeout(step, reducedMotion ? 400 : 2800);
@@ -3942,7 +3945,12 @@ import * as THREE from 'three';
       step();
     }
     window.addEventListener('keydown', (e) => {
-      if (e.key === 't' || e.key === 'T') startArtifactTour();
+      if (e.key !== 't' && e.key !== 'T') return;
+      if (e.ctrlKey || e.metaKey || e.altKey) return;
+      const tag = (e.target && e.target.tagName) || '';
+      const typing = tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT' || !!(e.target && e.target.isContentEditable);
+      if (typing) return;
+      startArtifactTour();
     });
 
     // Study Lab Drawer toggle

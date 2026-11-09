@@ -24,6 +24,8 @@ const deploy = fs.readFileSync(path.join(ROOT, "tools", "deploy-cloudflare-pages
 const minifyAt = deploy.indexOf("minify-release-css.mjs");
 const hashAt = deploy.indexOf("hash-release-assets.mjs");
 assert(minifyAt !== -1 && hashAt !== -1 && minifyAt < hashAt, "the deploy minifies stylesheets before it hashes their names");
+assert(deploy.includes('Remove-Item (Join-Path $stage "assets\\_glb_preview") -Recurse -Force'), "the deploy drops the GLB preview textures robocopy cannot exclude by path");
+assert(/\$leaksLeft = @\([^)]*"assets\\_glb_preview"/.test(deploy), "the deploy aborts when the GLB preview textures survive");
 
 fs.rmSync(stage, { recursive: true, force: true });
 console.log("release stylesheets minify with the same rules, before their names are hashed");

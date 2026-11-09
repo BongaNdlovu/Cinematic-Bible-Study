@@ -36,4 +36,24 @@ assert(player.includes('player.defaultPlaybackRate = rate'), 'speed survives a c
 assert(audioCss.includes('backdrop-filter: blur(32px) saturate(180%)'), 'the player is glass');
 assert(audioCss.includes('body.paper-mode #lesson-audio') && audioCss.includes('body.white-mode #lesson-audio'), 'the player has a light-theme glass');
 
+const workbench = read('js/study/workbench.js');
+const scripture = read('js/study/scripture.js');
+assert(workbench.includes('else if (window.navigateSheet) window.navigateSheet(1);') && !workbench.includes('window.loadSheet('), 'the dossier Continue button uses a navigator the study app exports');
+assert(app.includes('if (firstTime) offerCapstone(finishedSheet);'), 'finishing a sitting can open the capstone');
+assert(/function offerCapstone\(finishedSheet\) \{\s*if \(finishedSheet !== 2\) return;/.test(app), 'the capstone follows Sitting 2 only');
+assert(app.includes('wb.getCapstoneData()) return;'), 'a saved capstone is not offered again');
+assert(/Object\.assign\(window, \{[^}]*\bshowToast\b[^}]*\}\);/.test(app), 'competency toasts reach the study toast');
+assert(scripture.includes('return sheets[key] || null;'), 'an unmapped sitting shows the no-passage message instead of sitting 0');
+{
+  const store = {};
+  const ls = { getItem: (k) => (k in store ? store[k] : null), setItem: (k, v) => { store[k] = String(v); }, removeItem: (k) => { delete store[k]; } };
+  const win = { localStorage: ls };
+  const doc = { body: { classList: { toggle() {} } }, getElementById: () => null, addEventListener() {}, querySelector: () => null };
+  new Function('window', 'document', 'localStorage', read('js/study/competency.js'))(win, doc, ls);
+  store.daniel_placement_track_v1 = '<img src=x onerror=alert(1)>';
+  assert.strictEqual(win.StudyCompetency.getTrack(), 'foundations', 'a hand-edited track never reaches the record as HTML');
+  store.daniel_placement_track_v1 = 'scholarly';
+  assert.strictEqual(win.StudyCompetency.getTrack(), 'scholarly', 'the scholarly track still reads back');
+}
+
 console.log('task flow: start screen, one question at a time, done screen; glass audio player');

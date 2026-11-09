@@ -5941,6 +5941,16 @@
       advance: function () { completeAndAdvance(); }
     };
 
+    function offerCapstone(finishedSheet) {
+      if (finishedSheet !== 2) return;
+      const wb = window.StudyWorkbench;
+      if (!wb || typeof wb.renderCapstoneModal !== 'function') return;
+      if (typeof wb.getCapstoneData === 'function' && wb.getCapstoneData()) return;
+      wb.renderCapstoneModal(function () {
+        if (currentSheetIndex !== 3) loadSheet(3);
+      });
+    }
+
     function completeAndAdvance() {
       if (!canAdvancePath()) {
         if (openTaskFlow()) return;
@@ -5968,6 +5978,7 @@
         }
       }
       if (firstTime) showSittingCelebration(finishedSheet);
+      if (firstTime) offerCapstone(finishedSheet);
 
       if (currentSheetIndex < sheetsData.length - 1) {
         loadSheet(currentSheetIndex + 1);
@@ -6373,5 +6384,6 @@
       shareSitting,
       resetQuizQuestion,
       openInfographic,
-      closeInfographic
+      closeInfographic,
+      showToast
     });
