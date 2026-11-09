@@ -620,7 +620,7 @@
       if (resetMode) lead.textContent = "Set a new password to finish signing in.";
       else if (inSession && !needsTerms) lead.textContent = "You are signed in. Settings stay on this page.";
       else if (inSession && needsTerms) lead.textContent = "The terms text changed. Accept once here, then you are done.";
-      else if (!needsTerms) lead.textContent = "You accepted the terms. Sign in with email or Google to save cloud progress and certificates.";
+      else if (!needsTerms) lead.textContent = "You accepted the terms. Sign in with Google (recommended) or email to save cloud progress and certificates.";
       else lead.textContent = "The Prologue, Daniel 1, and Daniel 2 are open. Sign in for the later sittings, the map, and the 3D arena.";
     }
     const err = siteError();
