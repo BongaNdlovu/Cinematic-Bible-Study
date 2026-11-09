@@ -288,7 +288,6 @@
       const redirected = !!(res && res.data && res.data.url && !(res && res.error));
       if (redirected) {
         signingIn = false;
-        if (res && res.error) reportError(friendlyAuthError(res.error), "auth", res.error);
         renderAll();
         return res;
       }
@@ -441,7 +440,6 @@
 
   function renderAll() {
     document.querySelectorAll("[data-auth-slot]").forEach(renderSlot);
-    if (document.body) document.body.classList.toggle("is-admin", isModerator());
   }
 
   function init() {
@@ -513,7 +511,6 @@
 
   window.ScrollAuth = {
     signIn: signIn,
-    signInGoogle: signIn,
     signOut: signOut,
     getUser: getUser,
     getClient: getClient,
@@ -522,10 +519,7 @@
     isAdmin: isModerator,
     ready: function () { return readyPromise; },
     onChange: onChange,
-    renderAll: renderAll,
-    isConfigured: configured,
-    isSigningIn: function () { return signingIn; },
-    takeAuthSlot: takeAuthSlot
+    isConfigured: configured
   };
 
   init();

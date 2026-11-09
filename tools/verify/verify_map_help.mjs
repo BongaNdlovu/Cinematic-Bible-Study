@@ -22,6 +22,9 @@ assert(map.includes("data-zoom='1'") && map.includes("data-zoom='-1'"), 'zoom bu
 assert(!map.includes('L.control.zoom('), 'one zoom control serves both the globe and the map');
 assert(/zoomBy:\s*zoomBy/.test(globe), 'the globe can be zoomed by the buttons');
 assert(css.includes('.cmap-root:has(.cmap-dossier.open) .cmap-zoom { display: none; }'), 'on a phone the zoom buttons step aside for a place panel');
+assert(map.includes('onSlow: () => { const loadEl = document.querySelector(".cmap-load");'), 'the slow-loading note finds the loading line by its class');
+assert(!map.includes('getElementById("cmap-load")'), 'the slow-loading note is not looked up by an id no element has');
+assert(map.includes('const loadEl = el("div", { class: "cmap-load" }'), 'the loading line is created with the class the slow-loading note looks up');
 
 const gallery = read('js/gallery/app.js');
 assert(gallery.includes("if (e.key !== 't' && e.key !== 'T') return;") && gallery.includes('if (e.ctrlKey || e.metaKey || e.altKey) return;'), 'the tour key ignores modifier chords');

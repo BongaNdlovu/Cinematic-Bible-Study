@@ -142,7 +142,7 @@
            to the next alternate, and keep the last error for classification. */
         return await window.SiteNet.request(u, {
           timeoutMs: 10000,
-          onSlow: () => { const loadEl = document.getElementById("cmap-load"); if (loadEl) loadEl.textContent = "Still unrolling the chronique\u2026"; }
+          onSlow: () => { const loadEl = document.querySelector(".cmap-load"); if (loadEl) loadEl.textContent = "Still unrolling the chronique\u2026"; }
         }).then((r) => r.json());
       } catch (err) {
         lastErr = err;

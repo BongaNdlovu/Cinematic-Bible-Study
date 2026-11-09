@@ -442,8 +442,6 @@
       if (empireEl) empireEl.textContent = window.BAJourney ? window.BAJourney.empireLabel(emp) : emp;
       if (sheetEl) sheetEl.textContent = index + ' of 11';
       if (yearEl) yearEl.textContent = window.BAJourney ? window.BAJourney.yearLabel(year) : year;
-      const chip = document.getElementById('btn-map-chip');
-      if (chip) chip.textContent = (window.BAJourney ? window.BAJourney.yearLabel(year) : year);
 
       const compText = SHEET_COMPETENCIES[index] || "Historicist Exegesis";
       const headerPill = document.getElementById('header-competency-pill');
@@ -476,11 +474,6 @@
         }
       }
       if (window.BAJourney) window.BAJourney.save({ year: yearId });
-    }
-
-    function setStageCaption(text) {
-      const el = document.getElementById('sitting-stage-caption');
-      if (el) el.textContent = text || 'Stage';
     }
 
     let sittingPhase = 'study';
@@ -589,7 +582,6 @@
       sittingYearOverride = st.year;
       updateSpine(currentSheetIndex, st.year, st.empire);
       pulseMapYear(st.year, { animate: true });
-      setStageCaption(st.label);
       try {
         if (st.unlock && window.BAJourney) window.BAJourney.unlock(st.unlock);
         if (window.BAJourney) {
