@@ -2359,9 +2359,7 @@ async function startRoom() {
       return;
     }
     governor(raw);
-    /* A shelf nobody is touching has nothing new to draw. Park the frame
-       until the next pointer, wheel, or key. noteInput starts it again. */
-    if (isIdle()) { rafId = 0; return; }
+    if (REDUCED && isIdle()) { rafId = 0; return; }
     rafId = requestAnimationFrame(loop);
     pendingDt += Math.min(raw, 0.05);
     const dt = pendingDt;
