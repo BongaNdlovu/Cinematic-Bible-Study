@@ -54,14 +54,12 @@ as $$
     where u.id = auth.uid()
       and u.email is not null
       and u.email_confirmed_at is not null
-      and (
-        not exists (
-          select 1
-          from auth.mfa_factors f
-          where f.user_id = u.id
-            and f.status = 'verified'
-        )
-        or coalesce(auth.jwt()->>'aal', '') = 'aal2'
+      and coalesce(auth.jwt()->>'aal', '') = 'aal2'
+      and exists (
+        select 1
+        from auth.mfa_factors f
+        where f.user_id = u.id
+          and f.status = 'verified'
       )
   );
 $$;

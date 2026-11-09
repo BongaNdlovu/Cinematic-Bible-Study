@@ -76,8 +76,9 @@ assert(accountHtml.includes('js/shared/account.js'), 'account.html must load the
 assert(accountHtml.includes('id="account-accept"'), 'account.html must keep Accept on the terms card');
 assert(accountHtml.includes('id="account-signin"'), 'account.html must keep Google sign-in on the hub');
 assert(accountHtml.includes('id="account-error"'), 'account.html must keep a visible hub error box');
-assert(accountHtml.includes('id="account-email"'), 'account.html must offer email sign-in');
-assert(accountHtml.includes('id="account-password"'), 'account.html must offer a password field');
+assert(!accountHtml.includes('id="account-email"'), 'account.html must not offer email sign-in');
+assert(!accountHtml.includes('type="password"'), 'account.html must not offer a password field');
+assert(!accountHtml.includes('captcha.js'), 'account.html must not load the email captcha');
 assert(accountHtml.includes('id="account-settings"'), 'account.html must keep centralized settings');
 assert(accountHtml.includes('id="account-cert-name"'), 'account.html must keep the certificate name in settings');
 assert(!accountHtml.includes('data-insight-optout'), 'account.html must not keep analytics opt-out in settings');
@@ -106,9 +107,16 @@ assert(!termsJs.includes('This exhibit is closed'), 'terms.js must not say the e
 
 const authJs = fs.readFileSync(path.join(ROOT, 'js/shared/auth.js'), 'utf8');
 assert(authJs.includes('account.html'), 'auth.js must return Google OAuth to the Account hub');
-assert(authJs.includes('signInWithPassword'), 'auth.js must support email-and-password sign-in');
-assert(authJs.includes('signUp'), 'auth.js must support email account creation');
-assert(authJs.includes('resetPasswordForEmail'), 'auth.js must support password reset');
+assert(authJs.includes("provider: \"google\""), 'auth.js must sign in with Google');
+['supabase-reviews.sql', 'supabase-auth-guard.sql', 'supabase-hardening-2026-10.sql', 'supabase-moderator-require-mfa.sql'].forEach((f) => {
+  const s = fs.readFileSync(path.join(ROOT, 'tools', f), 'utf8');
+  const body = s.slice(s.indexOf('function public.is_review_moderator()'));
+  const fn = body.slice(0, body.indexOf('$$;'));
+  assert(fn.includes("= 'aal2'") && !/not exists \(\s*select 1\s*from auth\.mfa_factors/.test(fn), `${f}: is_review_moderator must always require a verified authenticator and an aal2 session`);
+});
+assert(!authJs.includes('signInWithPassword'), 'auth.js must not offer email-and-password sign-in');
+assert(!authJs.includes('client.auth.signUp('), 'auth.js must not create email accounts');
+assert(!authJs.includes('resetPasswordForEmail'), 'auth.js must not send password-reset email');
 assert(!authJs.includes('auth-sign-out'), 'auth.js must not draw a Sign out button on other pages');
 assert(!authJs.includes('clearPendingTerms'), 'auth.js must not wipe a once-agreed terms record on sign-out');
 const insightsSrc = fs.readFileSync(path.join(ROOT, 'js/shared/insights.js'), 'utf8');

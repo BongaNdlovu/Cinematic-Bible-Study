@@ -8,7 +8,6 @@
   let user = null;
   let accessToken = "";
   let signingIn = false;
-  let passwordRecovery = false;
   let moderator = false;
   let moderatorGen = 0;
   let announced = false;
@@ -191,7 +190,7 @@
 
   function setUser(next, session, event) {
     const nextUser = next || null;
-    const changed = !announced || userId(user) !== userId(nextUser) || event === "PASSWORD_RECOVERY";
+    const changed = !announced || userId(user) !== userId(nextUser);
     user = nextUser;
     accessToken = session && session.access_token ? session.access_token : "";
     if (!changed) {
@@ -270,7 +269,6 @@
 
   function finishAuth(res, err) {
     signingIn = false;
-    if (window.BACaptcha && typeof window.BACaptcha.reset === "function") window.BACaptcha.reset();
     if (err) reportError(friendlyAuthError(err), "auth", err);
     else if (res && res.error) reportError(friendlyAuthError(res.error), "auth", res.error);
     renderAll();
@@ -297,69 +295,6 @@
       return finishAuth(res);
     }).catch(function (err) {
       return finishAuth(null, err);
-    });
-  }
-
-  function captchaOptions(options) {
-    const read = window.BACaptcha && window.BACaptcha.token;
-    const token = typeof read === "function" ? String(read() || "") : "";
-    const next = Object.assign({}, options || {});
-    if (token) next.captchaToken = token;
-    return next;
-  }
-
-  function signInEmail(email, password) {
-    const blocked = beginAuth();
-    if (blocked) return Promise.resolve(blocked);
-    return client.auth.signInWithPassword({
-      email: String(email || "").trim(),
-      password: String(password || ""),
-      options: captchaOptions()
-    }).then(function (res) {
-      return finishAuth(res);
-    }).catch(function (err) {
-      return finishAuth(null, err);
-    });
-  }
-
-  function signUpEmail(email, password) {
-    const blocked = beginAuth();
-    if (blocked) return Promise.resolve(blocked);
-    return client.auth.signUp({
-      email: String(email || "").trim(),
-      password: String(password || ""),
-      options: captchaOptions({ emailRedirectTo: redirectTo() })
-    }).then(function (res) {
-      return finishAuth(res);
-    }).catch(function (err) {
-      return finishAuth(null, err);
-    });
-  }
-
-  function resetPassword(email) {
-    const blocked = beginAuth();
-    if (blocked) return Promise.resolve(blocked);
-    return client.auth.resetPasswordForEmail(String(email || "").trim(), captchaOptions({
-      redirectTo: redirectTo()
-    })).then(function (res) {
-      return finishAuth(res);
-    }).catch(function (err) {
-      return finishAuth(null, err);
-    });
-  }
-
-  function updatePassword(password) {
-    if (!configured() || !client) {
-      reportError("Sign-in is unavailable on this copy of the site.", "auth");
-      return Promise.resolve({ error: new Error("not configured") });
-    }
-    return client.auth.updateUser({ password: String(password || "") }).then(function (res) {
-      if (res && !res.error) passwordRecovery = false;
-      if (res && res.error) reportError(friendlyAuthError(res.error), "auth", res.error);
-      return res;
-    }).catch(function (err) {
-      reportError(friendlyAuthError(err), "auth", err);
-      return { error: err };
     });
   }
 
@@ -548,9 +483,7 @@
       }
     });
     client.auth.onAuthStateChange(function (event, session) {
-      if (event === "PASSWORD_RECOVERY") passwordRecovery = true;
       if (event === "SIGNED_OUT") {
-        passwordRecovery = false;
         try { localStorage.removeItem("baProgressOutbox"); } catch (e) {}
         try { localStorage.removeItem("baLastPushAt"); } catch (e) {}
         try { sessionStorage.removeItem("baLastPushAt"); } catch (e) {}
@@ -581,11 +514,6 @@
   window.ScrollAuth = {
     signIn: signIn,
     signInGoogle: signIn,
-    signInEmail: signInEmail,
-    signUpEmail: signUpEmail,
-    resetPassword: resetPassword,
-    updatePassword: updatePassword,
-    isPasswordRecovery: function () { return passwordRecovery; },
     signOut: signOut,
     getUser: getUser,
     getClient: getClient,
