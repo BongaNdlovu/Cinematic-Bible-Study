@@ -47,7 +47,7 @@
     <section class="acct-stage">
       <p class="cx-kicker">Your privacy</p>
       <h1 class="cx-title acct-title">Privacy policy</h1>
-      <p class="cx-lead acct-lead">What we collect, why we collect it, who helps us run the site, how long we keep it, and how you can change or delete it. Effective 19 October 2026.</p>
+      <p class="cx-lead acct-lead">What we collect, why we collect it, who helps us run the site, how long we keep it, and how you can change or delete it. Effective 9 November 2026.</p>
     </section>
 
     <section class="acct-panel">
@@ -71,7 +71,7 @@
             <li>We do not record your screen and we do not replay your sessions.</li>
             <li>We send no marketing email.</li>
             <li>We do not sell your information.</li>
-            <li>Your email address is used only to sign you in, to confirm your account, and to reset your password.</li>
+            <li>Your email address is used only to identify your account and to answer you when you write to us.</li>
           </ul>
         </div>
       </article>
@@ -97,7 +97,7 @@
         <h2 class="acct-card-title">What we collect when you sign in</h2>
         <div class="pp-text terms-scroll">
           <ul>
-            <li><strong>Account details:</strong> your email address and a password stored only as a scrambled (hashed) value. If you sign in with Google, we receive your name, email address, and a Google account ID.</li>
+            <li><strong>Account details:</strong> you sign in with Google, and we receive your name, email address, and a Google account ID. We never see your Google password. If you made an account with an email and password before 9 November 2026, we also keep that password as a scrambled (hashed) value until the account is deleted.</li>
             <li><strong>Authenticator app:</strong> if an authenticator app was added to your account, its setup and factor record are kept by Supabase.</li>
             <li><strong>Study progress:</strong> the sittings you have finished, your answers to quiz questions, your workbench entries, your mastery marks, and competency records, so you can continue on another device.</li>
             <li><strong>Notes and bookmarks:</strong> the notes you write on each sheet, with the time you last changed them, and the sheets you bookmark.</li>
@@ -107,7 +107,6 @@
             <li><strong>Reviews:</strong> the display name, text, and star rating you post. Approved reviews are shown publicly.</li>
             <li><strong>Messages:</strong> what you send to the operator, and the operator's replies.</li>
             <li><strong>Surveys and events:</strong> your survey answers and study events, linked to your account.</li>
-            <li><strong>Sign-in safety:</strong> a count of failed password attempts over a short window, to slow down guessing.</li>
             <li><strong>Terms:</strong> the version of the terms you accepted and when you accepted them.</li>
           </ul>
         </div>
@@ -125,7 +124,7 @@
               <tr><th>Purpose</th><th>Information used</th><th>Lawful basis</th></tr>
             </thead>
             <tbody>
-              <tr><td>Sign you in and keep your account secure</td><td>Email, password hash, Google account ID, authenticator factor, failed-attempt count</td><td>Contract (the account you asked for); legitimate interests (account security)</td></tr>
+              <tr><td>Sign you in and keep your account secure</td><td>Email, Google account ID, authenticator factor</td><td>Contract (the account you asked for); legitimate interests (account security)</td></tr>
               <tr><td>Save your progress, notes, and bookmarks</td><td>Progress, quiz answers, workbench, notes, bookmarks</td><td>Contract</td></tr>
               <tr><td>Issue and check your certificate</td><td>Certificate name, serial number, issue date</td><td>Contract</td></tr>
               <tr><td>Improve the lessons from study events</td><td>Study events, sitting, page, anonymous ID or account ID</td><td>Consent, given through the cookie banner or Cookie settings. Nothing is recorded until you accept, and you can withdraw at any time.</td></tr>
@@ -135,7 +134,6 @@
               <tr><td>Answer your messages to the operator</td><td>Subject, message, replies</td><td>Contract (answering your request); legitimate interests</td></tr>
               <tr><td>Find and fix errors on the site</td><td>The error message, the page and line where it happened, browser and device type, IP address, and, for one page load in ten, how long the page took to load</td><td>Legitimate interests (keeping the site working)</td></tr>
               <tr><td>Stop abuse and flooding</td><td>IP address at the hosting layer, request counts, technical reports</td><td>Legitimate interests (protecting the service)</td></tr>
-              <tr><td>Check that a person, not a bot, is signing in</td><td>Browser check data from Cloudflare Turnstile</td><td>Legitimate interests (protecting sign-in)</td></tr>
               <tr><td>Count page views</td><td>Aggregate page views through Cloudflare Web Analytics</td><td>Consent, given through the cookie banner or Cookie settings. The counter is not loaded until you accept.</td></tr>
               <tr><td>Show fonts and map tiles</td><td>IP address and browser details sent to Google, Esri, and OpenStreetMap</td><td>Legitimate interests (displaying the site and its maps)</td></tr>
             </tbody>
@@ -158,9 +156,9 @@
               <tr><th>Service</th><th>What it receives</th><th>Why</th><th>Privacy policy</th></tr>
             </thead>
             <tbody>
-              <tr><td>Supabase (database, sign-in, and account emails)</td><td>Everything stored in our database, your sign-in details, the confirmation and password-reset emails it sends for us, and connection data such as your IP address</td><td>Hosts the database and the sign-in service</td><td><a href="https://supabase.com/privacy" target="_blank" rel="noopener">supabase.com/privacy</a></td></tr>
+              <tr><td>Supabase (database and sign-in)</td><td>Everything stored in our database, your sign-in details, and connection data such as your IP address</td><td>Hosts the database and the sign-in service</td><td><a href="https://supabase.com/privacy" target="_blank" rel="noopener">supabase.com/privacy</a></td></tr>
               <tr><td>Google (sign-in with Google, and Google Fonts)</td><td>When you choose Google sign-in, the sign-in exchange with your Google account. For fonts, your IP address and browser details whenever a page loads</td><td>Sign-in, and typography</td><td><a href="https://policies.google.com/privacy" target="_blank" rel="noopener">policies.google.com/privacy</a></td></tr>
-              <tr><td>Cloudflare (hosting, rate limiting, Turnstile, Web Analytics)</td><td>IP address and request details for each page; short-lived rate-limit counts; browser check data at sign-in; aggregate page views</td><td>Hosting, protection against abuse, the human check at sign-in, and page-view counts</td><td><a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener">cloudflare.com/privacypolicy</a></td></tr>
+              <tr><td>Cloudflare (hosting, rate limiting, Web Analytics)</td><td>IP address and request details for each page; short-lived rate-limit counts; aggregate page views</td><td>Hosting, protection against abuse, and page-view counts</td><td><a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener">cloudflare.com/privacypolicy</a></td></tr>
               <tr><td>OpenStreetMap (street map tiles)</td><td>IP address and browser details when street map tiles load</td><td>Shows the street map</td><td><a href="https://wiki.osmfoundation.org/wiki/Privacy_Policy" target="_blank" rel="noopener">wiki.osmfoundation.org/wiki/Privacy_Policy</a></td></tr>
               <tr><td>Esri (ArcGIS satellite and label tiles)</td><td>IP address and browser details when satellite or label tiles load</td><td>Shows the satellite map and labels</td><td><a href="https://www.esri.com/en-us/privacy/overview" target="_blank" rel="noopener">esri.com/en-us/privacy/overview</a></td></tr>
               <tr><td>Sentry (error monitoring)</td><td>Error reports from the page: the error message, the page and line, browser and device type, and IP address; timing for one page load in ten. If you have allowed analytics, a feedback button also sends any note you choose to write. It never records your screen or replays your session.</td><td>Finds and fixes errors on the site</td><td><a href="https://sentry.io/privacy/" target="_blank" rel="noopener">sentry.io/privacy</a></td></tr>
@@ -291,8 +289,8 @@
         <p class="acct-card-kicker">Security</p>
         <h2 class="acct-card-title">How we protect your information</h2>
         <div class="pp-text terms-scroll">
-          <p>The site is served over HTTPS only, with a content security policy that limits which services each page may contact. Database access is limited by row-level security rules, so most records can be read only by their owner. Passwords are stored as scrambled values. We limit how often data can be written, check for abuse at the edge of the network, and use a human check at sign-in.</p>
-          <p>No system is perfectly secure. Use a strong password and keep it private. If we learn of a breach that affects your information, we will tell you and the regulator as the law requires.</p>
+          <p>The site is served over HTTPS only, with a content security policy that limits which services each page may contact. Database access is limited by row-level security rules, so most records can be read only by their owner. Sign-in goes through Google, so we never handle your Google password. We limit how often data can be written and check for abuse at the edge of the network.</p>
+          <p>No system is perfectly secure. Keep your Google account protected with a strong password and two-step verification. If we learn of a breach that affects your information, we will tell you and the regulator as the law requires.</p>
         </div>
       </article>
 
@@ -309,7 +307,7 @@
         <h2 class="acct-card-title">Questions about privacy</h2>
         <div class="pp-text terms-scroll">
           <p>Fanelesibonge Ndlovu, operator. <a href="mailto:shelfofdaniel@gmail.com">shelfofdaniel@gmail.com</a></p>
-          <p>Effective date: 19 October 2026.</p>
+          <p>Effective date: 9 November 2026.</p>
         </div>
         <div class="acct-actions">
           <a class="cx-btn" href="terms.html">Terms of use</a>
