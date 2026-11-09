@@ -11,8 +11,8 @@ if (Test-Path $stage) { Remove-Item $stage -Recurse -Force }
 New-Item -ItemType Directory -Path $stage | Out-Null
 
 robocopy $root $stage /MIR `
-  /XD .git node_modules .vercel qa .img2threejs .chrome_verify_tmp .pages-deploy .kilo originals assets\_glb_preview tools tests docs backups workers qa-e2e .github .vscode .wrangler __pycache__ _factcheck _mig functions `
-  /XF .* *.bak *.pyc *.pyo .env* README.md package.json package-lock.json server.py .oxlintrc.json vercel.json wrangler.toml start_website.bat .gitignore .vercelignore auth-config.example.js *.example.js *.example.*.js middleware.js __wiring_check.mjs qa_book_reader_full.log skills-lock.json tailwind.study.config.js study-tailwind-src.css glossary-enrichment-overrides.json three.core.js three.module.js sheets-data.js `
+  /XD .git node_modules .vercel qa .img2threejs .chrome_verify_tmp .pages-deploy .kilo originals assets\_glb_preview tools tests docs backups workers qa-e2e .github .vscode .wrangler __pycache__ _factcheck _mig functions fix-plan `
+  /XF .* *.bak *.pyc *.pyo .env* README.md FIX-PLAN.md package.json package-lock.json server.py .oxlintrc.json vercel.json wrangler.toml start_website.bat .gitignore .vercelignore auth-config.example.js *.example.js *.example.*.js middleware.js __wiring_check.mjs qa_book_reader_full.log skills-lock.json tailwind.study.config.js study-tailwind-src.css glossary-enrichment-overrides.json three.core.js three.module.js sheets-data.js `
   /NFL /NDL /NJH /NJS /nc /ns /np | Out-Null
 if ($LASTEXITCODE -ge 8) { throw "robocopy failed with exit code $LASTEXITCODE" }
 
@@ -33,7 +33,7 @@ foreach ($leak in @("_factcheck", "_mig", "__wiring_check.mjs", "qa_book_reader_
   $p = Join-Path $stage $leak
   if (Test-Path $p) { Remove-Item $p -Recurse -Force }
 }
-$leaksLeft = @("_factcheck", "_mig", "__wiring_check.mjs", "qa_book_reader_full.log", "assets\_glb_preview") |
+$leaksLeft = @("_factcheck", "_mig", "__wiring_check.mjs", "qa_book_reader_full.log", "assets\_glb_preview", "fix-plan", "FIX-PLAN.md") |
   Where-Object { Test-Path (Join-Path $stage $_) }
 if ($leaksLeft) { throw ("deploy bundle still contains: " + ($leaksLeft -join ", ")) }
 
