@@ -85,6 +85,7 @@ assert(rootH['x-content-type-options']?.value === 'nosniff', 'X-Content-Type-Opt
 assert(rootH['x-frame-options']?.value === 'deny' || rootH['x-frame-options']?.value === 'DENY', 'X-Frame-Options is DENY');
 assert(rootH['referrer-policy']?.value === 'strict-origin-when-cross-origin', 'Referrer-Policy is strict-origin-when-cross-origin');
 assert(rootH['strict-transport-security']?.value?.includes('max-age=31536000'), 'Strict-Transport-Security is enabled');
+assert(rootH['cross-origin-opener-policy']?.value === 'same-origin-allow-popups', 'Cross-Origin-Opener-Policy is same-origin-allow-popups');
 assert(!rootH['access-control-allow-origin'], 'Access-Control-Allow-Origin is NOT restricted on "/*" (avoids breaking preview deployments)');
 
 // 2. Verify CSP on `/*`
@@ -129,6 +130,12 @@ assert(supabaseHost, 'js/shared/auth-config.js names the Supabase project host')
 assert(cspDirectives['connect-src']?.includes(`https://${supabaseHost}`), `CSP connect-src includes https://${supabaseHost}`);
 assert(cspDirectives['connect-src']?.includes(`wss://${supabaseHost}`), `CSP connect-src includes wss://${supabaseHost}`);
 assert(!cspDirectives['connect-src']?.some(v => v.includes('*.supabase.co')), 'CSP connect-src no longer allows every Supabase project');
+
+const sentryConfig = fs.readFileSync(path.join(root, 'js', 'shared', 'sentry.js'), 'utf8');
+const sentryHost = (/@([a-z0-9]+\.ingest\.[a-z0-9.]*sentry\.io)\//.exec(sentryConfig) || [])[1];
+assert(sentryHost, 'js/shared/sentry.js names the Sentry project ingest host');
+assert(cspDirectives['connect-src']?.includes(`https://${sentryHost}`), `CSP connect-src includes https://${sentryHost}`);
+assert(!cspDirectives['connect-src']?.some(v => v.includes('*.ingest.')), 'CSP connect-src no longer allows every Sentry project');
 
 // Verify Cloudflare Insights
 assert(cspDirectives['connect-src']?.includes("https://cloudflareinsights.com"), "CSP connect-src includes cloudflareinsights.com");

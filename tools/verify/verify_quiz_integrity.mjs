@@ -35,6 +35,14 @@ assert.ok(sql.includes("revoke all on public.exhibit_quiz_passes from anon, auth
 assert.ok(/if v_correct and auth\.uid\(\) is not null then\s+insert into public\.exhibit_quiz_passes/.test(sql), "a correct graded answer is recorded as a pass");
 const pending = read("tools/supabase-pending-migrations.sql");
 assert.ok(pending.includes("insert into public.exhibit_quiz_passes"), "re-running the pending bundle keeps recording passes");
+["tools/supabase-rate-limits-gaps.sql", "tools/supabase-quiz-integrity.sql", "tools/supabase-pending-migrations.sql"].forEach((rel) => {
+  const src = read(rel);
+  const start = src.indexOf("create or replace function public.verify_quiz_answer(");
+  assert.ok(start >= 0, `${rel} defines verify_quiz_answer`);
+  const body = src.slice(start, src.indexOf("$$;", start));
+  assert.ok(body.includes("'correct_idx', case when v_correct then v_key.correct_idx end,"), `${rel}: verify_quiz_answer returns correct_idx only for a correct pick`);
+  assert.strictEqual(/'correct_idx',s*v_key.correct_idxs*[,)]/.test(src), false, `${rel}: verify_quiz_answer must not return correct_idx whatever was picked`);
+});
 const seed = new Set();
 const tuple = /\((\d+),\s*(\d+),\s*(\d+),\s*'/g;
 let m;
@@ -76,10 +84,10 @@ let res = await QuizGate.verify(4, 2, 2);
 assert.deepStrictEqual(rpcCalls[0], { name: "verify_quiz_answer", args: { p_sitting: 4, p_q_idx: 2, p_chosen: 2 } }, "RPC args map to sitting/question/choice");
 assert.deepStrictEqual(res, { ok: true, correct: true, correctIdx: 2, note: "Correct! Server note." }, "a correct answer returns the server note");
 
-rpcReply = { data: { correct: false, correct_idx: 1, note: "" }, error: null };
+rpcReply = { data: { correct: false, correct_idx: null, note: "" }, error: null };
 res = await QuizGate.verify(0, 0, 3);
 assert.strictEqual(res.correct, false, "a wrong answer is graded false");
-assert.strictEqual(res.correctIdx, 1, "the server reveals the right option only after a pick");
+assert.strictEqual(res.correctIdx, null, "a wrong pick does not reveal which option is right");
 
 rpcReply = { error: { message: "Could not find the function public.verify_quiz_answer" } };
 res = await QuizGate.verify(0, 0, 1);

@@ -1,4 +1,5 @@
 import assert from "assert";
+import http from "http";
 import path from "path";
 import { spawn } from "child_process";
 import { fileURLToPath } from "url";
@@ -40,6 +41,18 @@ try {
   const statuses = responses.map((res) => res.status);
   assert.ok(statuses.every((status) => status === 200), "statuses " + statuses.join(",") + "\n" + log);
   console.log("40 overlapping local study reads returned 200");
+  const foreign = await new Promise((resolve, reject) => {
+    const req = http.request({ host: "127.0.0.1", port: port, path: "/study.html", agent: false, headers: { Host: "evil.example:" + port } }, (res) => {
+      let body = "";
+      res.on("data", (chunk) => { body += chunk.toString(); });
+      res.on("end", () => resolve({ status: res.statusCode, body: body }));
+    });
+    req.on("error", reject);
+    req.end();
+  });
+  assert.strictEqual(foreign.status, 403, "a request with a foreign Host header must be refused\n" + log);
+  assert.ok(!/<html[\s>][\s\S]*<script/i.test(foreign.body), "a refused request must not carry the page");
+  console.log("A request with a foreign Host header is refused with 403");
 } finally {
   child.kill();
 }

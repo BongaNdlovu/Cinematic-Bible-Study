@@ -35,10 +35,42 @@ assert(sql.includes("interval '1 day') >= 3"), 'SQL reviews cap 3/day');
 assert(sql.includes('add column if not exists anon_id'), 'SQL adds survey anon_id');
 
 const insightsSql = fs.readFileSync(path.join(ROOT, 'tools/supabase-insights.sql'), 'utf8');
+
+function signedInBlock(src, file, gateName) {
+  const start = src.indexOf('create or replace function public.' + gateName + '()');
+  assert(start >= 0, file + ' must define ' + gateName);
+  const body = src.slice(start, src.indexOf('$$;', start));
+  const open = body.indexOf('if new.user_id is not null then');
+  const anon = body.indexOf("if coalesce(new.anon_id, '') <> '' then");
+  assert(anon >= 0, file + ' ' + gateName + ' must keep the anon_id check');
+  assert(open >= 0 && open < anon, file + ' ' + gateName + ' must cap signed-in rows per user before the anon_id check');
+  const block = body.slice(open, body.indexOf('end if;', open));
+  assert(block.includes('return new;'), file + ' ' + gateName + ' signed-in block must return before the anon_id check');
+  return block;
+}
+
+function assertEventsUserCap(src, file) {
+  const block = signedInBlock(src, file, 'exhibit_events_rate_gate');
+  assert(block.includes("perform public.exhibit_take_slot('event_min', 60, interval '1 minute');"), file + ' events gate must cap a signed-in user at 60/min whatever anon_id is sent');
+  assert(block.includes("perform public.exhibit_take_slot('event_day', 2000, interval '1 day');"), file + ' events gate must cap a signed-in user at 2000/day whatever anon_id is sent');
+}
+
+function assertSurveysUserCap(src, file) {
+  const block = signedInBlock(src, file, 'exhibit_surveys_rate_gate');
+  assert(block.includes("perform public.exhibit_take_slot('survey', 5, interval '1 hour');"), file + ' surveys gate must cap a signed-in user at 5/hour whatever anon_id is sent');
+}
+
+const hardeningSql = fs.readFileSync(path.join(ROOT, 'tools/supabase-hardening-2026-10.sql'), 'utf8');
+assertEventsUserCap(hardeningSql, 'supabase-hardening-2026-10.sql');
+assertSurveysUserCap(hardeningSql, 'supabase-hardening-2026-10.sql');
+assertEventsUserCap(sql, 'supabase-rate-limits.sql');
+assertSurveysUserCap(sql, 'supabase-rate-limits.sql');
+assertEventsUserCap(insightsSql, 'supabase-insights.sql');
 assert(insightsSql.includes('exhibit_events_rate_gate'), 'insights setup must include events write cap');
 assert(insightsSql.includes("interval '1 minute') >= 60"), 'insights setup events cap 60/min');
 
 const progressSql = fs.readFileSync(path.join(ROOT, 'tools/supabase-progress.sql'), 'utf8');
+assertSurveysUserCap(progressSql, 'supabase-progress.sql');
 assert(progressSql.includes('exhibit_surveys_rate_gate'), 'progress setup must include surveys write cap');
 assert(progressSql.includes('exhibit_progress_rate_gate'), 'progress setup must include progress write cap');
 assert(progressSql.includes("interval '1 hour') >= 5"), 'progress setup surveys cap 5/hour');

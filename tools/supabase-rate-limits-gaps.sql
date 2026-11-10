@@ -115,7 +115,7 @@ begin
   end if;
   return jsonb_build_object(
     'correct', v_correct,
-    'correct_idx', v_key.correct_idx,
+    'correct_idx', case when v_correct then v_key.correct_idx end,
     'note', case when v_correct then v_key.correct_note else '' end
   );
 end;

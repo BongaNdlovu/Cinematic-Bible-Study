@@ -67,6 +67,25 @@ test("when the gate is down, reads still load and writes are refused", async () 
   assert.equal(unbound.status, 503);
 });
 
+test("a HEAD request to a page is counted by the gate", async () => {
+  const res = await onRequest(context("/study", { method: "HEAD", verdict: { ok: false, first: false } }));
+  assert.equal(res.status, 429);
+  assert.equal(res.headers.get("Retry-After"), "60");
+});
+
+test("OPTIONS requests skip the gate", async () => {
+  const res = await onRequest(context("/study", { method: "OPTIONS", verdict: { ok: false, first: false } }));
+  assert.equal(res.status, 200);
+  assert.equal(await res.text(), "next");
+});
+
+test("when the gate is down, a HEAD request still loads", async () => {
+  const thrown = await onRequest(context("/study", { method: "HEAD", verdict: "throw" }));
+  assert.equal(thrown.status, 200);
+  const unbound = await onRequest(context("/study", { method: "HEAD", verdict: "missing" }));
+  assert.equal(unbound.status, 200);
+});
+
 test("allowed .html pages are served without a redirect", async () => {
   const res = await onRequest(context("/study.html"));
   assert.equal(await res.text(), "asset:/study");

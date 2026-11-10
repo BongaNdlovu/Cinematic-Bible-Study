@@ -149,6 +149,10 @@ async function servePage(context, request) {
   return res;
 }
 
+function isRead(request) {
+  return request.method === "GET" || request.method === "HEAD";
+}
+
 async function handle(context) {
   const request = context.request;
   const path = new URL(request.url).pathname;
@@ -190,14 +194,14 @@ async function handle(context) {
     });
   }
   if (path === "/csp-report" && request.method === "POST") return takeReport(context, request);
-  if (request.method === "OPTIONS" || request.method === "HEAD") return context.next();
+  if (request.method === "OPTIONS") return context.next();
   if (path === "/__rate" && request.method === "POST") return rateProxy(context, request);
   if (STATIC_PREFIXES.some(function (prefix) { return path.startsWith(prefix); })) return context.next();
   const ip = ipOf(request);
   const decision = await allowed(context, ip, path);
   if (decision === "deny_first") reportEdge(context, path, "cap");
   if (decision === "deny" || decision === "deny_first") return denied();
-  if (decision === "down" && request.method !== "GET") return unavailable();
+  if (decision === "down" && !isRead(request)) return unavailable();
   return servePage(context, request);
 }
 

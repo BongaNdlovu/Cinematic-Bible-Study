@@ -69,8 +69,15 @@ class NebuchadnezzarHTTPHandler(SimpleHTTPRequestHandler):
         self.send_header("Accept-Ranges", "bytes")
         super().end_headers()
 
+    def is_local_host_header(self):
+        port = str(self.server.server_address[1])
+        return self.headers.get("Host", "").lower() in ("127.0.0.1:" + port, "localhost:" + port)
+
     def send_head(self):
         """Serve byte ranges for large media so <audio>/<video> can seek."""
+        if not self.is_local_host_header():
+            self.send_error(403, "Host not allowed")
+            return None
         range_header = self.headers.get("Range")
         if not range_header:
             return super().send_head()

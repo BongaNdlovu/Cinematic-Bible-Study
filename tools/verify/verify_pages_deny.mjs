@@ -96,4 +96,14 @@ const reportText = await report.text();
 assert.strictEqual(report.status, 503, "a CSP report is refused when the counter is down");
 assert.ok(!reportText.includes("secret"), "a refused CSP report does not echo the blocked address");
 
+const workflowDir = path.join(ROOT, ".github/workflows");
+for (const name of fs.readdirSync(workflowDir).filter((entry) => /\.ya?ml$/.test(entry))) {
+  const usesLines = fs.readFileSync(path.join(workflowDir, name), "utf8").split(/\r?\n/).filter((line) => /^\s*(-\s+)?uses:/.test(line));
+  for (const line of usesLines) {
+    assert(/uses:\s+[\w.\/-]+@[0-9a-f]{40}(\s+#.*)?$/.test(line), name + " must pin every action to a full commit: " + line.trim());
+  }
+}
+const deployJob = (/\n  deploy:\n([\s\S]*?)(?=\n  \S|$)/.exec(fs.readFileSync(path.join(workflowDir, "ci.yml"), "utf8").replace(/\r/g, "")) || ["", ""])[1];
+assert(/^    environment: production$/m.test(deployJob), "the deploy job in ci.yml must declare environment: production");
+
 console.log("The Pages stage drops operator files, the Vercel deploy path stays removed, and static folders skip the middleware without exposing protected paths");

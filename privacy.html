@@ -132,7 +132,7 @@
               <tr><td>Optional profile answers</td><td>Study mode, background, how you found the site</td><td>Explicit consent, because background is sensitive information (see below)</td></tr>
               <tr><td>Show and moderate reviews</td><td>Display name, text, rating</td><td>Consent (you post them); legitimate interests (moderation)</td></tr>
               <tr><td>Answer your messages to the operator</td><td>Subject, message, replies</td><td>Contract (answering your request); legitimate interests</td></tr>
-              <tr><td>Find and fix errors on the site</td><td>The error message, the page and line where it happened, browser and device type, IP address, and, for one page load in ten, how long the page took to load</td><td>Legitimate interests (keeping the site working)</td></tr>
+              <tr><td>Find and fix errors on the site</td><td>The error message, the page and line where it happened, browser and device type, IP address, and, for one page load in ten, how long the page took to load. An error report stored by the site also carries a visit ID, or your account ID if you are signed in</td><td>Legitimate interests (keeping the site working)</td></tr>
               <tr><td>Stop abuse and flooding</td><td>IP address at the hosting layer, request counts, technical reports</td><td>Legitimate interests (protecting the service)</td></tr>
               <tr><td>Count page views</td><td>Aggregate page views through Cloudflare Web Analytics</td><td>Consent, given through the cookie banner or Cookie settings. The counter is not loaded until you accept.</td></tr>
               <tr><td>Show fonts and map tiles</td><td>IP address and browser details sent to Google, Esri, and OpenStreetMap</td><td>Legitimate interests (displaying the site and its maps)</td></tr>
@@ -187,7 +187,7 @@
             </thead>
             <tbody>
               <tr><td>sb-ttlrspnfadmxkoyqvofh-auth-token</td><td>Your signed-in session, kept by Supabase</td></tr>
-              <tr><td>baInsightsAnon, baInsightsSession, baInsightsQueue, baFlushWin, baSurveyTimes, baOpsQueue</td><td>Anonymous ID, visit ID, study events waiting to be sent, and limits on how often events and surveys are sent</td></tr>
+              <tr><td>baInsightsAnon, baInsightsSession, baInsightsQueue, baFlushWin, baSurveyTimes, baOpsQueue, baOpsAnon</td><td>Anonymous ID, visit ID, study events waiting to be sent, limits on how often events and surveys are sent, and a visit-only ID attached to error reports, removed when the tab closes</td></tr>
               <tr><td>baInsightsOptOut</td><td>Legacy analytics setting</td></tr>
               <tr><td>baPulseAsked, baPulsePending, baProfileAsked</td><td>Which optional questions you have already answered or skipped</td></tr>
               <tr><td>baRefCode, baReferredBy, baReferredSitting</td><td>Your referral code, and the referral you arrived by</td></tr>

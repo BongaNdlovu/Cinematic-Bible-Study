@@ -8,6 +8,7 @@
   let user = null;
   let accessToken = "";
   let signingIn = false;
+  let sessionEnded = false;
   let moderator = false;
   let moderatorGen = 0;
   let announced = false;
@@ -347,6 +348,20 @@
     } catch (e) {}
   }
 
+  function forgetStoredSession() {
+    const key = client && client.auth && client.auth.storageKey;
+    if (!key) return;
+    try { localStorage.removeItem(key); } catch (e) {}
+    try { localStorage.removeItem(key + "-user"); } catch (e) {}
+  }
+
+  function endLocalSession() {
+    sessionEnded = true;
+    forgetStoredSession();
+    setUser(null, null);
+    clearPersonalData();
+  }
+
   function signOut(opts) {
     const discard = !!(opts && opts.discard);
     return (discard ? Promise.resolve(true) : flushBeforeSignOut()).then(function (go) {
@@ -374,11 +389,16 @@
     }
     clearError();
     return client.auth.signOut().then(function (res) {
-      if (res && res.error) reportError(friendlyAuthError(res.error), "auth", res.error);
-      else clearPersonalData();
+      if (res && res.error) {
+        reportError(friendlyAuthError(res.error), "auth", res.error);
+        endLocalSession();
+        return res;
+      }
+      clearPersonalData();
       return res;
     }).catch(function (err) {
       reportError(friendlyAuthError(err), "auth", err);
+      endLocalSession();
       return { error: err };
     });
   }
@@ -481,6 +501,7 @@
       }
     });
     client.auth.onAuthStateChange(function (event, session) {
+      if (sessionEnded && session) return;
       if (event === "SIGNED_OUT") {
         try { localStorage.removeItem("baProgressOutbox"); } catch (e) {}
         try { localStorage.removeItem("baLastPushAt"); } catch (e) {}

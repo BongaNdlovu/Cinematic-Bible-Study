@@ -4,15 +4,24 @@
   const MAX_QUEUE = 20;
   let flushing = false;
 
+  function hasAnalyticsConsent() {
+    return !!(window.SODConsent && typeof window.SODConsent.has === "function" && window.SODConsent.has("analytics"));
+  }
+
+  function newId() {
+    if (typeof crypto !== "undefined" && crypto.randomUUID) return crypto.randomUUID();
+    return "a_" + Date.now().toString(36);
+  }
+
   function anonId() {
+    const consented = hasAnalyticsConsent();
+    const key = consented ? "baInsightsAnon" : "baOpsAnon";
     try {
-      let id = localStorage.getItem("baInsightsAnon");
-      if (!id) {
-        id = (typeof crypto !== "undefined" && crypto.randomUUID)
-          ? crypto.randomUUID()
-          : "a_" + Date.now().toString(36);
-        localStorage.setItem("baInsightsAnon", id);
-      }
+      const store = consented ? localStorage : sessionStorage;
+      const existing = store.getItem(key);
+      if (existing) return existing;
+      const id = newId();
+      store.setItem(key, id);
       return id;
     } catch (e) {
       return "edge-rate-limit";

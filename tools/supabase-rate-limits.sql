@@ -35,6 +35,11 @@ set search_path = public
 as $$
 begin
   new.created_at := now();
+  if new.user_id is not null then
+    perform public.exhibit_take_slot('event_min', 60, interval '1 minute');
+    perform public.exhibit_take_slot('event_day', 2000, interval '1 day');
+    return new;
+  end if;
   if coalesce(new.anon_id, '') <> '' then
     if (select count(*) from public.exhibit_events
         where anon_id = new.anon_id
@@ -82,6 +87,10 @@ set search_path = public
 as $$
 begin
   new.created_at := now();
+  if new.user_id is not null then
+    perform public.exhibit_take_slot('survey', 5, interval '1 hour');
+    return new;
+  end if;
   if coalesce(new.anon_id, '') <> '' then
     if (select count(*) from public.exhibit_surveys
         where anon_id = new.anon_id
