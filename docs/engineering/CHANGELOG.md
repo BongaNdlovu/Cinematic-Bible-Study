@@ -14,6 +14,22 @@ Entry template:
 
 ---
 
+## 2026-11-12 — Free full-database backups
+
+**Why:** The project is on the Supabase Free plan, which has no automatic backups. The only backup tool copied `exhibit_progress`, one of the 18 tables, and the last copy in `backups/` was from 26 September 2026. Upgrading to Pro is not affordable right now.
+
+**What changed**
+
+- New `.github/workflows/db-backup.yml`: every Sunday at 03:00 UTC, or by hand, it runs `pg_dump` on the `public` schema and on the rows of `auth.users` and `auth.identities`. It encrypts the result with AES-256 and keeps it 90 days as an Actions artifact. A failed run opens a `ci-alert` issue. It needs two new repository secrets, `SUPABASE_DB_URL` and `BACKUP_PASSPHRASE`.
+- New `tools/export-all-tables.sql`: a hand-run SQL editor export of every `public` table plus `auth.users` and `auth.identities`, as one JSON snapshot.
+- Tested: the SQL on a local PGlite database, and the encrypt and decrypt round trip with `gpg`. Not checked: a real workflow run and `pg_dump` against the live database.
+
+**Handbook updated:** 03, 04, 07.
+
+**Status:** not committed. The workflow does nothing useful until the two secrets are added.
+
+---
+
 ## 2026-11-12 — Known issues fixed
 
 **Why:** The handbook's "Known issues" list held six problems confirmed from the state-machine review. Five were fixed; the sixth turned out to be correct behaviour and is now documented as such.

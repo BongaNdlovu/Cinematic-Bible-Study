@@ -1,0 +1,70 @@
+name: db-backup
+
+on:
+  schedule:
+    - cron: "0 3 * * 0"
+  workflow_dispatch:
+
+concurrency:
+  group: db-backup
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  backup:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      GH_TOKEN: ${{ github.token }}
+      SUPABASE_DB_URL: ${{ secrets.SUPABASE_DB_URL }}
+      BACKUP_PASSPHRASE: ${{ secrets.BACKUP_PASSPHRASE }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          sparse-checkout: tools
+          filter: blob:none
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: "22"
+      - name: Check the secrets are set
+        run: |
+          test -n "$SUPABASE_DB_URL" || { echo "SUPABASE_DB_URL secret is missing"; exit 1; }
+          test -n "$BACKUP_PASSPHRASE" || { echo "BACKUP_PASSPHRASE secret is missing"; exit 1; }
+      - name: Install the Postgres 17 client
+        run: |
+          sudo apt-get update -q
+          sudo apt-get install -yq postgresql-common
+          sudo /usr/share/postgresql-common/pgdg/apt.postgresql.org.sh -y
+          sudo apt-get install -yq postgresql-client-17
+      - name: Dump the database
+        run: |
+          set -euo pipefail
+          mkdir -p dump
+          PG_DUMP=/usr/lib/postgresql/17/bin/pg_dump
+          "$PG_DUMP" "$SUPABASE_DB_URL" --schema=public --format=custom --no-owner --no-privileges --file=dump/public.dump
+          "$PG_DUMP" "$SUPABASE_DB_URL" --data-only --table=auth.users --table=auth.identities --format=custom --file=dump/auth-users.dump
+          ls -l dump
+      - name: Encrypt the dump
+        run: |
+          set -euo pipefail
+          STAMP=$(date -u +%Y-%m-%dT%H%M%SZ)
+          echo "STAMP=$STAMP" >> "$GITHUB_ENV"
+          tar -czf backup.tar.gz dump
+          printf '%s' "$BACKUP_PASSPHRASE" | gpg --batch --yes --pinentry-mode loopback --passphrase-fd 0 \
+            --symmetric --cipher-algo AES256 --output "db-backup-$STAMP.tar.gz.gpg" backup.tar.gz
+          shred -u backup.tar.gz dump/*
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: db-backup-${{ env.STAMP }}
+          path: db-backup-${{ env.STAMP }}.tar.gz.gpg
+          retention-days: 90
+          if-no-files-found: error
+      - name: Open an alert
+        if: failure()
+        run: node tools/ci/alert.mjs fail "database backup"
+      - name: Close the alert
+        if: success()
+        run: node tools/ci/alert.mjs recover "database backup"

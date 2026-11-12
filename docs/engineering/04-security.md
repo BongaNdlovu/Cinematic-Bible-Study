@@ -21,6 +21,7 @@ The browser is not trusted. Pages are public files, and the browser talks to Sup
 | Consent | Collecting analytics without permission | `js/shared/consent.js` |
 | Local server checks | DNS rebinding and path tricks on a developer machine | `server.py` |
 | CI hygiene | Tampered actions; over-broad tokens | `.github/workflows/*.yml` |
+| Encrypted backups | Anyone reading user data from a backup in this public repository | `.github/workflows/db-backup.yml` encrypts each dump with `BACKUP_PASSPHRASE` (AES-256) before upload. See [Database backups](07-develop-test-release.md#database-backups). |
 
 ## Response headers (`_headers`, all paths)
 

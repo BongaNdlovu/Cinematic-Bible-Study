@@ -26,7 +26,7 @@ The site has no build step for its pages. The files in the repository root and i
 ├── start_website.bat      Windows launcher for server.py
 ├── wrangler.toml          Cloudflare Pages settings and Durable Object binding
 ├── package.json           npm scripts and dev dependencies
-└── .github/workflows/     CI (ci.yml) and the 15-minute live health check (health.yml)
+└── .github/workflows/     CI (ci.yml), the 15-minute live health check (health.yml) and the weekly database backup (db-backup.yml)
 ```
 
 Folders that are **never deployed**. `tools/deploy-cloudflare-pages.ps1` leaves them out and refuses to ship if some of them slip in; the middleware also answers 404 for most of these paths: `docs/`, `tools/`, `tests/`, `functions/` (its source), `workers/`, `backups/`, `qa/`, `qa-e2e/`, `fix-plan/`, `_mig/`, `_factcheck/`, `models/originals/`, `assets/_glb_preview/`, and every dotfile.
@@ -92,6 +92,7 @@ The deploy script refuses to ship if any of these are in the bundle.
 | `tools/ci/alert.mjs` | Opens or closes a GitHub issue when the live site fails or recovers |
 | `tools/rollback-deploy.mjs` | `npm run rollback` |
 | `tools/restore-exhibit-progress.mjs`, `tools/export-exhibit-progress.sql` | Progress backup and restore |
+| `tools/export-all-tables.sql` | Hand-run copy of every `public` table plus `auth.users` and `auth.identities` |
 | `tools/compress/` | Meshopt and WebP pipeline for 3D models (`npm run compress*`) |
 | `tools/audit/`, `tools/review/`, `tools/diagrams/`, `tools/audio-read/`, `tools/perf/` | One-off inspection, editorial review, diagram, audio and performance helpers |
 | `tools/build_sheet*_html.py`, `tools/patch_sheet*_data.py`, `tools/sheet*_generated.html` | Older content-building scripts and their output |

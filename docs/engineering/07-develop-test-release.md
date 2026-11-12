@@ -65,6 +65,8 @@ On a push to `master` only, after **test** passes:
 
 `.github/workflows/health.yml` runs the smoke test every 15 minutes, with the same alert and recovery issues.
 
+`.github/workflows/db-backup.yml` backs up the database every week. See [Database backups](#database-backups).
+
 > **A push to `master` deploys to production.** Work on a branch until the change is ready.
 
 ## Deploying
@@ -87,7 +89,64 @@ On a push to `master` only, after **test** passes:
 - Migrations are SQL files in `tools/supabase-*.sql`. They are run **by hand** in the Supabase SQL editor. Nothing applies them automatically.
 - Run a migration **before** deploying the client that depends on it. For example, the answer check fails closed until `verify_quiz_answer` exists.
 - Never rename `save_exhibit_progress(bigint, jsonb)`. A breaking change ships as a new function, together with the client that uses it.
-- Backups: the project is on the Supabase Free plan, which has no automatic backups (per `docs/ARCHITECTURE.md`, 26 September 2026). `tools/export-exhibit-progress.sql` and `tools/restore-exhibit-progress.mjs` export and restore progress rows.
+- Backups: the project is on the Supabase Free plan, which has no automatic backups (per `docs/ARCHITECTURE.md`, 26 September 2026). So the repo makes its own. See [Database backups](#database-backups).
+
+## Database backups
+
+There are two ways, and both cost nothing.
+
+| Way | Covers | How often | Where the copy goes |
+|---|---|---|---|
+| `.github/workflows/db-backup.yml` | Every table, function and row-level security policy in `public`, plus the rows of `auth.users` and `auth.identities` | Every Sunday at 03:00 UTC, or by hand from the Actions tab | An encrypted GitHub Actions artifact, kept 90 days |
+| `tools/export-all-tables.sql` | The rows of every table in `public`, plus `auth.users` and `auth.identities` | By hand | A JSON file you save yourself |
+
+**Why `auth.users` is included.** Every saved row points at a user id. A new project would give the same Google account a new id, so restoring the data without the old user rows would leave it pointing at nobody.
+
+**Why the workflow encrypts.** The repository is public. Artifacts of a public repository can be downloaded by any signed-in GitHub user, so the dump is encrypted with AES-256 before upload, and the unencrypted files are shredded on the runner.
+
+### Setting up the weekly backup (once)
+
+1. In Supabase, open **Connect** and copy the **Session pooler** connection string. The runner has no IPv6, so the direct connection does not work there. Put your database password into it.
+2. In GitHub, open **Settings → Secrets and variables → Actions** and add two secrets:
+   - `SUPABASE_DB_URL`: the connection string from step 1.
+   - `BACKUP_PASSPHRASE`: a long passphrase. Store it in your password manager. Without it the backups cannot be opened.
+3. Open **Actions → db-backup → Run workflow** once, and check that the run is green and has an artifact.
+
+A failed run opens a `ci-alert` issue, as the health check does (`tools/ci/alert.mjs`).
+
+### Making a copy by hand
+
+1. Open the Supabase SQL editor and run `tools/export-all-tables.sql`. It defines a temporary function in `pg_temp`, so nothing is left in the database.
+2. Save the `snapshot` cell as `backups/all-tables-<UTC time>.json`. The `backups/` folder is in `.gitignore`. The file holds user emails, so keep it off shared drives.
+
+Not checked: whether the SQL editor can show the whole snapshot once `exhibit_events` grows large. If it cuts off, use the weekly backup.
+
+### Restoring
+
+From the weekly backup (needs the Postgres 17 client, `pg_restore`):
+
+```bash
+gpg --decrypt db-backup-<time>.tar.gz.gpg | tar -xzf -
+pg_restore --dbname "<connection string>" --no-owner --no-privileges dump/auth-users.dump
+pg_restore --dbname "<connection string>" --no-owner --no-privileges dump/public.dump
+```
+
+Restore the user rows first, because the `public` tables refer to them.
+
+From a hand-made snapshot, one table at a time in the SQL editor:
+
+```sql
+insert into public.exhibit_progress
+select * from jsonb_populate_recordset(null::public.exhibit_progress, '<the table''s JSON array>'::jsonb);
+```
+
+`tools/restore-exhibit-progress.mjs` still builds a restore script for progress rows only, from the older `tools/export-exhibit-progress.sql` snapshot.
+
+### What was tested (12 November 2026)
+
+- `tools/export-all-tables.sql` ran on a local PGlite database (Postgres in Node). It exported every `public` table, including an empty one, and `auth.users` and `auth.identities`. It skipped views and other `auth` tables. Text with quotes, `<`, `>` and `&` came back unchanged, and `jsonb_populate_recordset` turned the JSON back into the same row.
+- The encryption command from the workflow was run locally with `gpg`. Decrypting with the right passphrase gave back the file. A wrong passphrase failed (exit code 2).
+- Not checked: the workflow itself has not run yet, because it needs the two secrets. The `pg_dump` commands have not been run against the live database.
 
 ## Checklist for every change
 
