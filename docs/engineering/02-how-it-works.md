@@ -134,6 +134,8 @@ Consent is stored in `sodConsent` (`js/shared/consent.js`). If a visitor has not
 | Registered and began | Those accounts whose saved progress (`exhibit_progress.journey`) shows at least one completed sitting, counted by `exhibit_sittings_finished()` |
 | Share of the target | "Registered and began" divided by 500 |
 
+**The 700 counter on the dashboard.** The first tile on the Study insights page, "Toward 700", shows the same "registered and began" count for all time (from `2000-01-01`, so every account counts), as `N / 700`. Its detail line gives the share of 700 and of the 500 SID target. The constants are `COUNTER_TARGET` and `SID_TARGET` in `js/insights/insights.js`. If the function is missing or refuses, the tile shows "verified count not available".
+
 These figures do not depend on the cookie banner, unlike the event-based figures. "Began" is read when the report is built, so it can rise after the period ends. Counts under 5 are withheld, as for every figure in the report. If the function is missing or refuses, the page says "Registration figures are not available for this report."
 
 ## 9. Running it locally

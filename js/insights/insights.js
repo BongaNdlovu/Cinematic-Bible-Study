@@ -8,7 +8,10 @@
   let hideMine = true;
   let loadGen = 0;
   let gradQuery = '';
-  let cache = { events: [], surveys: [], profiles: [], progress: [], graduates: null, capped: [] };
+  let cache = { events: [], surveys: [], profiles: [], progress: [], graduates: null, participation: null, capped: [] };
+  const ALL_TIME_FROM = '2000-01-01T00:00:00.000Z';
+  const COUNTER_TARGET = 700;
+  const SID_TARGET = 500;
 
   function client() {
     return window.ScrollAuth && window.ScrollAuth.getClient && window.ScrollAuth.getClient();
@@ -474,6 +477,17 @@
       '</section>';
   }
 
+  function targetTile(participation) {
+    const began = participation ? Number(participation.began) : NaN;
+    const isKnown = Number.isFinite(began) && began >= 0;
+    if (!isKnown) {
+      return tile('Toward ' + num(COUNTER_TARGET), '—', 'verified count not available');
+    }
+    const detail = pct(began, COUNTER_TARGET) + '% of ' + num(COUNTER_TARGET) + ' · ' +
+      pct(began, SID_TARGET) + '% of the ' + num(SID_TARGET) + ' SID target · registered and began, all time';
+    return tile('Toward ' + num(COUNTER_TARGET), num(began) + ' / ' + num(COUNTER_TARGET), detail);
+  }
+
   function tile(label, value, detail) {
     return '<div class="insights-tile">' +
       '<p class="insights-tile-label">' + escapeHtml(label) + '</p>' +
@@ -601,6 +615,7 @@
 
     grid.innerHTML =
       '<div class="insights-tiles">' +
+        targetTile(cache.participation) +
         tile('Opened a sitting', num(openedAny), 'people in this range') +
         tile('Finished a sitting', num(finishedAny), openedAny ? pct(finishedAny, openedAny) + '% of those who opened one' : 'people in this range') +
         tile('Right first time', quizN ? pct(quizRight, quizN) + '%' : '—', quizN ? plural(quizN, 'first answer', 'first answers') : 'no quiz answers yet') +
@@ -855,13 +870,19 @@
           ? Promise.resolve(c.rpc('exhibit_graduates')).then(function (r) {
             return r && !r.error && Array.isArray(r.data) ? r.data : null;
           }, function () { return null; })
+          : null,
+        typeof c.rpc === 'function'
+          ? Promise.resolve(c.rpc('exhibit_participation', { p_from: ALL_TIME_FROM, p_to: new Date(Date.now() + 86400000).toISOString() })).then(function (r) {
+            const row = r && !r.error && Array.isArray(r.data) ? r.data[0] : null;
+            return row || null;
+          }, function () { return null; })
           : null
       ]);
     }).then(function (rows) {
       if (gen !== loadGen) return;
       if (loadSlowTimer) { clearTimeout(loadSlowTimer); loadSlowTimer = 0; }
       if (loadAbort === ctrl) loadAbort = null;
-      cache = { events: rows[0], surveys: rows[1], profiles: rows[2], progress: rows[3], graduates: rows[4], capped: capped, loadedAt: new Date() };
+      cache = { events: rows[0], surveys: rows[1], profiles: rows[2], progress: rows[3], graduates: rows[4], participation: rows[5], capped: capped, loadedAt: new Date() };
       if (grid && grid.removeAttribute) grid.removeAttribute('aria-busy');
       render();
     }).catch(function (err) {
@@ -1060,6 +1081,7 @@
     quizRows: quizRows,
     timeAndDepthRows: timeAndDepthRows,
     graduateRows: graduateRows,
+    targetTile: targetTile,
     csvEscape: csvEscape,
     downloadCsv: downloadCsv,
     render: render,

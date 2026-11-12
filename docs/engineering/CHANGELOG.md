@@ -14,6 +14,23 @@ Entry template:
 
 ---
 
+## 2026-11-12 — 700 counter on the Study insights page
+
+**Why:** You want one verified number to watch: how many people have registered and begun the study, against a goal of 700.
+
+**What changed**
+
+- `js/insights/insights.js`: `load()` also calls `exhibit_participation()` for all time. A new first tile, "Toward 700", shows `began / 700` and the share of 700 and of the 500 SID target (`targetTile()`, `COUNTER_TARGET = 700`, `SID_TARGET = 500`).
+- `tools/verify/verify_insights.mjs`: checks the tile's text, the missing and malformed cases, that the all-time count is loaded, and that the tile is rendered first. Two mutations were caught: changing the target to 600, and removing the tile from the page.
+- Tested: `npx oxlint` exit 0; `npm run test:unit` 73 of 73; `npm test` exit 0; `npm run test:security` 22 of 22.
+- Not checked: the tile on the live site while signed in as a moderator.
+
+**Handbook updated:** 02.
+
+**Status:** committed and pushed to `master`; CI deploys it.
+
+---
+
 ## 2026-11-12 — Project target in the SID report
 
 **Why:** The proposal to the Southern Africa-Indian Ocean Division measures success as 500 people who register and begin the study within 12 months. The report could not show that: it had no count of new accounts, its "started a sitting" figure mixed in guests, and its event figures count only readers who accepted analytics.

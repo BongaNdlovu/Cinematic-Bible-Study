@@ -586,5 +586,17 @@ assert(liveJs.includes('process.exit(1)'), 'live progress check must fail when e
 assert(!liveJs.includes('process.exit(0)'), 'live progress check must not skip with a passing exit');
 assert(/a\.click\(\);\s*setTimeout\(function \(\) \{ URL\.revokeObjectURL\(a\.href\); \}, 1000\);/.test(dashCode), 'the CSV export keeps its link alive until the download starts');
 
+const counter = Dashboard.targetTile({ registered: 410, began: 350 });
+assert(counter.includes('Toward 700'), 'the counter tile names the 700 target');
+assert(counter.includes('350 / 700'), 'the counter shows registered-and-began out of 700');
+assert(counter.includes('50% of 700'), 'the counter shows the share of 700');
+assert(counter.includes('70% of the 500 SID target'), 'the counter shows the share of the 500 SID target');
+const counterMissing = Dashboard.targetTile(null);
+assert(counterMissing.includes('verified count not available'), 'a missing count says so');
+const counterBroken = Dashboard.targetTile({ registered: 1, began: 'x' });
+assert(counterBroken.includes('verified count not available'), 'a malformed count is not shown');
+assert(/c\.rpc\('exhibit_participation', \{ p_from: ALL_TIME_FROM/.test(dashCode), 'the dashboard loads the all-time verified count');
+assert(/'<div class="insights-tiles">' \+\s*targetTile\(cache\.participation\) \+/.test(dashCode), 'the counter is the first dashboard tile');
+
 console.log('✓ All 6 check phases passed successfully!');
 process.exit(0);
