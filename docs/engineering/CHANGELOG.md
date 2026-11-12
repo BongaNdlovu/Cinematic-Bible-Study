@@ -14,6 +14,26 @@ Entry template:
 
 ---
 
+## 2026-11-12 — Project target in the SID report
+
+**Why:** The proposal to the Southern Africa-Indian Ocean Division measures success as 500 people who register and begin the study within 12 months. The report could not show that: it had no count of new accounts, its "started a sitting" figure mixed in guests, and its event figures count only readers who accepted analytics.
+
+**What changed**
+
+- New `tools/supabase-participation.sql`: `exhibit_participation(p_from, p_to)`, a moderator-only `security definer` function. It returns accounts created in the period and how many of them have at least one completed sitting saved. Moderator accounts are left out.
+- `js/insights/insights.js`: `loadRange()` calls it with the report's period.
+- `js/insights/sid-report.js`: a "Project target" block on the Summary page (accounts registered, registered and began, share of the 500 target), and a line on the "How these figures are counted" page. `PARTICIPATION_TARGET = 500`.
+- `tools/verify/verify_sid_report.mjs`: checks the three figures, that counts under 5 are withheld, and that a missing or malformed result says the figures are not available. Two mutations were caught: removing the block, and changing the target to 600.
+- Tested: `npx oxlint` exit 0; `npm run test:unit` 73 of 73; `npm test` exit 0 (the SID report still fits six A4 pages); `npm run test:security` 22 of 22.
+- `tools/supabase-participation.sql` was run in the live SQL editor on 12 November 2026 ("Success. No rows returned"). A read-only check then showed: `security_definer` true, `anon` cannot execute, `authenticated` can, and a call from a non-moderator session returned error `42501`.
+- Not checked: a real moderator building the report on the live site.
+
+**Handbook updated:** 02, 04.
+
+**Status:** committed and pushed to `master`; CI deploys it.
+
+---
+
 ## 2026-11-12 — Keep the Supabase project awake
 
 **Why:** Supabase pauses Free projects after 1 week of inactivity (`https://supabase.com/pricing`, read 12 November 2026). A pause takes sign-in and saving offline. Moving off Supabase is planned in `docs/MIGRATION-PLAN-CLOUDFLARE.md`, but that is large work; this stops the pausing now.

@@ -5,6 +5,7 @@
   const FIRST_READ = ['First time', 'Read it before', 'I teach it'];
   const USES = ['Personal study', 'With others', 'Teaching or leading', 'Exploring'];
   const FEATURES = { infographic: 'Infographics', weather: 'Scene weather', theme: 'Reading themes', cert_download: 'Certificate downloads' };
+  const PARTICIPATION_TARGET = 500;
   const TOO_FEW = 'too few to report';
   const UNDER = 'fewer than ' + MIN;
 
@@ -235,6 +236,11 @@
     const surveys = pick(data.surveys);
     const profiles = pick(data.profiles);
     const graduates = Array.isArray(data.graduates) ? pick(data.graduates) : null;
+    const rawParticipation = data.participation;
+    const hasParticipation = !!rawParticipation && Number.isFinite(Number(rawParticipation.registered)) && Number.isFinite(Number(rawParticipation.began));
+    const participation = hasParticipation
+      ? { registered: Number(rawParticipation.registered), began: Number(rawParticipation.began), target: PARTICIPATION_TARGET }
+      : null;
     const funnel = funnelFigures(events);
     const quiz = quizFigures(events);
     const starts = function (e) { return e.event === 'sitting_start'; };
@@ -250,6 +256,7 @@
       preparedAt: o.preparedAt || new Date().toISOString(),
       sample: !!o.sample,
       incomplete: notes,
+      participation: participation,
       reach: {
         readers: uniqueActors(events, starts),
         welcome: profiles.filter(function (p) { return FIRST_READ.indexOf(p.found_via) >= 0 || USES.indexOf(p.study_mode) >= 0; }).length,
@@ -304,6 +311,19 @@
     }).join('') + '</tbody></table><p class="sid-note">Based on ' + esc(count(t.total)) + ' readers who answered.</p>';
   }
 
+  function participationHtml(p) {
+    if (!p) {
+      return '<p class="sid-note">Registration figures are not available for this report.</p>';
+    }
+    const beganLabel = 'registered and began the study (completed at least one sitting), against a target of ' + num(p.target);
+    return '<h3>Project target</h3>' +
+      '<div class="sid-tiles sid-tiles-small">' +
+      tile(count(p.registered), 'accounts registered in this period') +
+      tile(count(p.began), beganLabel) +
+      tile(share(p.began, p.target), 'of the ' + num(p.target) + ' target reached') +
+      '</div>';
+  }
+
   function render(f) {
     const period = day(f.from) + ' to ' + day(new Date(new Date(f.to).getTime() - 86400000).toISOString());
     const watermark = f.sample ? '<p class="sid-sample">Sample data: these are not real figures.</p>' : '';
@@ -327,6 +347,7 @@
       tile(f.completion.certificates == null ? 'not available' : count(f.completion.certificates), 'readers given a numbered certificate') +
       tile(share(f.quiz.correct, f.quiz.answers), 'quiz answers right first time') +
       '</div>' +
+      participationHtml(f.participation) +
       (f.highlights.length ? '<h3>What stands out</h3><ul class="sid-list">' + f.highlights.map(function (h) { return '<li>' + esc(h) + '</li>'; }).join('') + '</ul>' : '') +
       (f.incomplete.length ? f.incomplete.map(function (n) { return '<p class="sid-warn">' + esc(n) + '</p>'; }).join('') : ''));
 
@@ -375,6 +396,7 @@
     const method = page(6, 'How these figures are counted', watermark +
       '<ul class="sid-list">' +
       '<li>Study activity is recorded only for readers who allow anonymous study analytics in the cookie banner. Readers who decline are not counted, so every study figure is a lower bound.</li>' +
+      '<li>The project-target figures do not depend on the cookie banner. "Registered" counts accounts created in the period. "Began" counts those accounts whose saved progress shows at least one completed sitting when the report is built, so it can rise after the period ends. Moderator accounts are left out.</li>' +
       '<li>A person is a signed-in account, or a browser for guests. Someone who reads on two devices without signing in counts twice.</li>' +
       '<li>Started and completed count each person once per sitting, however many times they return.</li>' +
       '<li>Quiz figures use each reader\'s first answer to each question. Only signed-in readers can check answers.</li>' +

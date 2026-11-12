@@ -124,7 +124,17 @@ Consent is stored in `sodConsent` (`js/shared/consent.js`). If a visitor has not
 | Message desk (operator notices, help notes, replies) | `js/shared/desk.js` | `exhibit_notices`, `exhibit_notice_receipts`, `exhibit_help_notes`, `exhibit_help_replies` |
 | Certificates | `js/study/certificate.js` (loaded on demand from `study.html`) | `exhibit_certificates`, `issue_exhibit_certificate()` |
 | Account deletion | `js/shared/account.js` | `exhibit_delete_my_account()` |
-| Insights dashboard and printable report | `js/insights/insights.js`, `js/insights/sid-report.js` | Moderator-only read policies on events, surveys and profiles |
+| Insights dashboard and printable report | `js/insights/insights.js`, `js/insights/sid-report.js` | Moderator-only read policies on events, surveys and profiles; `exhibit_graduates()`; `exhibit_participation(from, to)` for the project target |
+
+**The project target in the SID report.** The proposal to the Southern Africa-Indian Ocean Division sets a target of 500 people who register and begin the study within 12 months (`PARTICIPATION_TARGET` in `js/insights/sid-report.js`). The report's Summary page shows three figures for the chosen period, from `exhibit_participation(from, to)` in `tools/supabase-participation.sql`:
+
+| Figure | How it is counted |
+|---|---|
+| Accounts registered | Rows in `auth.users` created in the period, leaving out moderator accounts |
+| Registered and began | Those accounts whose saved progress (`exhibit_progress.journey`) shows at least one completed sitting, counted by `exhibit_sittings_finished()` |
+| Share of the target | "Registered and began" divided by 500 |
+
+These figures do not depend on the cookie banner, unlike the event-based figures. "Began" is read when the report is built, so it can rise after the period ends. Counts under 5 are withheld, as for every figure in the report. If the function is missing or refuses, the page says "Registration figures are not available for this report."
 
 ## 9. Running it locally
 

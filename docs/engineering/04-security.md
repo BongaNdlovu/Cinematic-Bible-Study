@@ -70,7 +70,7 @@ If the gate cannot be reached, a page read is still served. A non-GET request, `
 | Role | How it is granted | Checks |
 |---|---|---|
 | Member | Any Google sign-in through Supabase Auth | `auth.uid()` in row-level security |
-| Moderator | A row in `exhibit_moderators`, a table no client role can read | `is_review_moderator()` requires a Google identity **and** an `aal2` session, meaning the authenticator app was used. Confirmed in the live database on 12 November 2026. |
+| Moderator | A row in `exhibit_moderators`, a table no client role can read | `is_review_moderator()` requires a Google identity **and** an `aal2` session, meaning the authenticator app was used. Confirmed in the live database on 12 November 2026. `exhibit_participation()` (`tools/supabase-participation.sql`) checks it first and raises error `42501` for anyone else. It returns two counts only, never ids or emails. |
 
 The client-side role checks (`ScrollAuth.isModerator()`, `journey.js` `isAdmin()`) only decide what the interface shows. Every moderator action is checked again in the database.
 

@@ -930,9 +930,15 @@
         ? Promise.resolve(c.rpc('exhibit_graduates')).then(function (r) {
           return r && !r.error && Array.isArray(r.data) ? r.data : null;
         }, function () { return null; })
+        : null,
+      typeof c.rpc === 'function'
+        ? Promise.resolve(c.rpc('exhibit_participation', { p_from: fromIso, p_to: toIso })).then(function (r) {
+          const row = r && !r.error && Array.isArray(r.data) ? r.data[0] : null;
+          return row || null;
+        }, function () { return null; })
         : null
     ]).then(function (rows) {
-      return { events: rows[0], surveys: rows[1], profiles: rows[2], graduates: rows[3], capped: capped };
+      return { events: rows[0], surveys: rows[1], profiles: rows[2], graduates: rows[3], participation: rows[4], capped: capped };
     });
   }
 

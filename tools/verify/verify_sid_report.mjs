@@ -33,7 +33,8 @@ function sampleScript() {
   }
   events.push({ event: 'referral_signup', user_id: 'r0', detail: {}, created_at: at() });
   const graduates = Array.from({ length: 23 }, (_, i) => ({ user_id: 'g' + i, issued_at: at() }));
-  const figures = window.SidReport.build({ events, surveys, profiles, graduates }, { from: FROM, to: TO, sample: true, preparedAt: '2026-10-26T09:00:00.000Z' });
+  const participation = { registered: 312, began: 241 };
+  const figures = window.SidReport.build({ events, surveys, profiles, graduates, participation }, { from: FROM, to: TO, sample: true, preparedAt: '2026-10-26T09:00:00.000Z' });
   document.getElementById('sid-pages').innerHTML = window.SidReport.render(figures);
   document.body.classList.add('sid-open');
   return document.querySelectorAll('.sid-page').length;
@@ -56,6 +57,28 @@ async function run() {
       build: !!document.getElementById('sid-build')
     }));
     assert.deepEqual(controls, { from: true, to: true, build: true }, 'the Insights page has the report controls');
+
+    const target = await page.evaluate(() => {
+      const opts = { from: '2026-01-01T00:00:00.000Z', to: '2027-01-01T00:00:00.000Z' };
+      const text = (participation) => {
+        const html = window.SidReport.render(window.SidReport.build({ participation }, opts));
+        const box = document.createElement('div');
+        box.innerHTML = html;
+        return box.querySelector('.sid-page:nth-of-type(2)').textContent;
+      };
+      return {
+        full: text({ registered: 312, began: 241 }),
+        few: text({ registered: 3, began: 2 }),
+        none: text(null),
+        broken: text({ registered: 'x', began: 1 })
+      };
+    });
+    assert.ok(target.full.includes('312accounts registered in this period'), 'the summary shows accounts registered');
+    assert.ok(target.full.includes('241registered and began the study'), 'the summary shows registered readers who began');
+    assert.ok(target.full.includes('48%of the 500 target reached'), 'the summary shows progress toward the 500 target');
+    assert.ok(target.few.includes('fewer than 5accounts registered'), 'small registration counts are withheld');
+    assert.ok(target.none.includes('Registration figures are not available'), 'a missing participation figure says so');
+    assert.ok(target.broken.includes('Registration figures are not available'), 'a malformed participation figure is not shown');
 
     const pages = await page.evaluate(sampleScript);
     assert.equal(pages, 6, 'the report has six pages');
