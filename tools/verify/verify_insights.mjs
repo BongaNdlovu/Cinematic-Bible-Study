@@ -680,6 +680,14 @@ const participationSql = fs.readFileSync(path.join(ROOT, 'tools/supabase-partici
 assert(/filter \(where public\.exhibit_sittings_passed\(u\.id\) >= 1\)/.test(participationSql), '"began" counts server-checked quiz passes');
 assert(!/journey/.test(participationSql), '"began" does not trust browser-written progress');
 assert(/if not public\.is_review_moderator\(\) then\s*raise exception/.test(participationSql), 'the participation function refuses non-moderators first');
+const pruneSql = fs.readFileSync(path.join(ROOT, 'tools/supabase-prune-test-rows.sql'), 'utf8');
+const pruneDeletes = pruneSql.split('delete from').slice(1);
+assert.strictEqual(pruneDeletes.length, 2, 'the test-row clean-up has exactly two deletes');
+pruneDeletes.forEach((d) => assert(/^\s*public\.exhibit_(events|surveys)\s+where user_id is null\s+and \(/.test(d), 'every test-row delete is limited to rows with no account'));
+assert(/event = 'pen_probe' and \(anon_id like 'pen-%'/.test(pruneSql), 'audit events are matched by both their event name and their pen- id');
+assert(/anon_id like 'pen-%' and responses ->> 'kind' = 'pen'/.test(pruneSql), 'audit surveys are matched by both their pen- id and their pen kind');
+assert(/revoke all on function public\.exhibit_prune_test_rows\(\) from public, anon, authenticated;/.test(pruneSql), 'no client role can run the clean-up');
+assert(/cron\.schedule\('exhibit-prune-test-rows', '23 \* \* \* \*'/.test(pruneSql), 'the clean-up runs every hour');
 
 console.log('✓ All 6 check phases passed successfully!');
 process.exit(0);

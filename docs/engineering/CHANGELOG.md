@@ -14,6 +14,23 @@ Entry template:
 
 ---
 
+## 2026-11-13 — Clean up rows left by the live tests
+
+**Why:** `npm run test:security` (PT-19, PT-20) and `tools/verify/verify_live_inserts.mjs` write real rows to the live database to prove the spam limits there. They have to write to prove it, but the rows stayed. A read-only count on 13 November 2026 found 1,328 test events and 117 test surveys, out of 8,917 events and 138 surveys. The dashboard already hid the test events (`PROBES`), and the test surveys had no rating, so no figure was wrong, but the data was cluttered.
+
+**What changed**
+
+- New `tools/supabase-prune-test-rows.sql`: `exhibit_prune_test_rows()` deletes only rows with no account and both test markers (see chapter 04), and returns how many it deleted. A `pg_cron` job runs it every hour at minute 23. No client role can run it.
+- `tools/verify/verify_insights.mjs`: checks that both deletes are limited to rows with no account, that each test row is matched by two markers, that clients cannot run it, and the schedule. Two mutations were caught.
+- Tested on a local PGlite database: it deleted the 4 test events and 2 test surveys in the sample, and kept every real, signed-in or half-matching row.
+- Live check before any delete: no `pen` survey or `pen_probe` event falls outside the rules.
+
+**Handbook updated:** 04, 07.
+
+**Status:** committed and pushed to `master`. The SQL has **not** been run in the live database yet: it permanently deletes 1,328 events and 117 surveys, so it waits for your go-ahead.
+
+---
+
 ## 2026-11-13 — Count study activity from 19 October 2026
 
 **Why:** The SID report counted every event since launch. Before 19 October 2026 events were recorded without analytics consent, and the busiest days match development and test runs: 385 starts on 24 September, 398 on 30 September, 1,470 starts by 134 browsers on 14 October (read-only query on the live database, 13 November 2026). So "607 people started a sitting" was mostly test traffic, and the report's own line "count only readers who allowed anonymous study analytics" was untrue for those dates.
