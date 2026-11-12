@@ -14,6 +14,26 @@ Entry template:
 
 ---
 
+## 2026-11-12 — Known issues fixed
+
+**Why:** The handbook's "Known issues" list held six problems confirmed from the state-machine review. Five were fixed; the sixth turned out to be correct behaviour and is now documented as such.
+
+**What changed**
+
+- Question dialog: the "still loading" screen now checks every half second and moves on to the questions by itself. Its text says so (`js/study/task-flow.js`).
+- Message desk: action buttons check the lock key their action really uses (`retract:<id>`, `help:<id>`), so retract and clear buttons stay disabled while their request runs. A conversation that no longer exists says so, and a failed load offers a "Try again" button (`js/shared/desk.js`).
+- Notes sync: a failing pull stops after 8 retries instead of retrying every minute forever. Reconnecting or signing in starts it again (`js/shared/study-sync.js`).
+- Gallery tour: pressing `T` again or `Esc`, or picking any artifact, stops the guided tour. A tour step that arrives during a transition waits instead of being skipped (`js/gallery/app.js`).
+- `Insights.readingTimer()` no longer returns a value that was always 0 (`js/shared/insights.js`).
+- Not changed: the notes sync recording its last push time when a push starts. That timestamp only spaces attempts apart, so this is correct.
+- New tests: 2 more in `tests/unit/state-fixes.test.mjs`; both fail on the previous code. `tools/verify/verify_map_help.mjs` now checks that pressing `T` again stops the tour and that picking an artifact stops it. It used to check for the old "ignore a second `T`" line.
+
+**Handbook updated:** 01, 02, 05, 06, 07, CHANGELOG.
+
+**Status:** shipped in the commit that adds this entry, pushed to `master` on 12 November 2026 for the CI deploy. The deploy result is in that commit's CI run.
+
+---
+
 ## 2026-11-12 — Four state bugs from the state-machine review
 
 **Why:** A read-only review (`docs/implicit-state-machines.md`) was checked against the code. Four of its findings were confirmed as real bugs; one of them was a gap in the morning's own-note fix.
@@ -28,7 +48,7 @@ Entry template:
 
 **Handbook updated:** 01 (known issues), 06 (map, UI rules), CHANGELOG.
 
-**Status:** shipped in the commit that adds this entry, pushed to `master` on 12 November 2026 for the CI deploy. The deploy result is in that commit's CI run.
+**Status:** committed as `27d9499`, deployed through CI and smoke-tested on 12 November 2026.
 
 ---
 

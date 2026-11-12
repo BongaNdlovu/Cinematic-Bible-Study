@@ -270,7 +270,6 @@
     }
 
     checkScrollDepth();
-    return activeTimerSeconds;
   }
 
   function activeSeconds() {

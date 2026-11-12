@@ -100,6 +100,7 @@ How syncing works:
 
 - **On sign-in**, the cloud copy is pulled and merged with the device copy. Progress takes the union of completed work. For notes, the newer edit wins for each sitting, and bookmarks are combined.
 - **On a change**, a push waits briefly (6 seconds after the last one), then sends. If it fails, the change is kept in an outbox (`baProgressOutbox`, `baStudySyncOutbox`) and retried with growing waits.
+- **Failed pulls** of notes are retried up to 8 times (5 s, 15 s, 30 s, then every 60 s). Reconnecting or signing in starts the retries again.
 - **Progress conflicts**: each save carries the revision it was based on. If the cloud has moved on, the server returns the newer row. The client merges the two and saves again.
 - **Account switch on one device**: the previous account's unsent changes are put aside under `baProgressStash:<account>` and `baStudySyncStash:<account>`, and the device is cleared for the new account. When the original owner signs in again, the put-aside changes are merged back and saved to their account (added 12 November 2026).
 

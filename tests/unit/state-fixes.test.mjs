@@ -166,3 +166,80 @@ test("the own-note check stops promising a retry once its retries run out", asyn
   assert.doesNotMatch(status.textContent, /trying again shortly/);
   assert.equal(byId("witness-new-card").hidden, true, "the new-note card stays hidden");
 });
+
+test("desk action buttons check the same lock key their action takes", () => {
+  const desk = read("js/shared/desk.js");
+  const code = [
+    desk.slice(desk.indexOf("const LOCK_PREFIX = {"), desk.indexOf(String.fromCharCode(10), desk.indexOf("const LOCK_PREFIX = {"))),
+    extractBlock(desk, "function lockKeyFor(act, id)"),
+    "({ lockKeyFor });"
+  ].join("\n");
+  const { lockKeyFor } = vm.runInNewContext(code);
+  const id = "8d7c2a1e-0000-4000-8000-000000000001";
+  assert.ok(desk.includes('lock("retract:" + id)'));
+  assert.ok(desk.includes('lock("help:" + id)'));
+  assert.ok(desk.includes("const held = lock(id);"));
+  assert.equal(lockKeyFor("retract", id), "retract:" + id);
+  assert.equal(lockKeyFor("drop-help", id), "help:" + id);
+  assert.equal(lockKeyFor("hide", id), id);
+  assert.equal(lockKeyFor("read", id), id);
+});
+
+test("a failing notes pull stops retrying after its cap and restarts on reconnect", async () => {
+  const timers = [];
+  const listeners = {};
+  let pulls = 0;
+  const client = {
+    from: () => ({
+      select: () => ({
+        eq: () => ({
+          maybeSingle: () => {
+            pulls += 1;
+            return Promise.resolve({ data: null, error: { message: "upstream", status: 503 } });
+          }
+        })
+      })
+    })
+  };
+  const store = {};
+  const context = {
+    console, JSON, Math, Date, Number, String, Array, Object, Promise, Error, Set, Map,
+    setTimeout: (fn, ms) => { timers.push({ fn, ms }); return timers.length; },
+    clearTimeout: () => {},
+    localStorage: {
+      getItem: (k) => (k in store ? store[k] : null),
+      setItem: (k, v) => { store[k] = String(v); },
+      removeItem: (k) => { delete store[k]; },
+      get length() { return Object.keys(store).length; },
+      key: (i) => Object.keys(store)[i] ?? null
+    },
+    addEventListener: (name, fn) => { listeners[name] = fn; },
+    dispatchEvent() {},
+    CustomEvent: function CustomEvent() {},
+    document: { readyState: "complete", addEventListener() {} },
+    ScrollAuth: { getClient: () => client, getUser: () => ({ id: "reader-1" }) }
+  };
+  context.window = context;
+  vm.runInNewContext(read("js/shared/study-sync.js"), vm.createContext(context));
+  const settle = () => new Promise((resolve) => setImmediate(resolve));
+  await context.StudySync.pullAndMerge();
+  await settle();
+  for (let round = 0; round < 30; round += 1) {
+    const next = timers.find((t) => !t.used);
+    if (!next) break;
+    next.used = true;
+    next.fn();
+    await settle();
+    await settle();
+  }
+  assert.equal(pulls, 9, "one pull plus 8 retries, then it stops");
+  assert.equal(timers.filter((t) => !t.used).length, 0, "no retry is left scheduled");
+  listeners.online();
+  const debounce = timers.find((t) => !t.used);
+  assert.ok(debounce, "reconnecting schedules a sync");
+  debounce.used = true;
+  debounce.fn();
+  await settle();
+  await settle();
+  assert.equal(pulls, 10, "reconnecting pulls again");
+});

@@ -14,6 +14,7 @@
   const RETRY_WAITS = [7000, 15000, 30000];
   const MAX_RETRIES = 5;
   const PULL_WAITS = [5000, 15000, 30000, 60000];
+  const MAX_PULL_RETRIES = 8;
   const MAX_NOTE_CHARS = 50000;
   const MAX_PAYLOAD_BYTES = 400000;
   const MAX_SHEET_ID = 999;
@@ -31,7 +32,7 @@
   let lastPushAt = readLastPushAt();
 
   function schedulePull() {
-    if (pullTimer) return;
+    if (pullTimer || pullAttempt >= MAX_PULL_RETRIES) return;
     const wait = PULL_WAITS[Math.min(pullAttempt, PULL_WAITS.length - 1)];
     pullAttempt += 1;
     pullTimer = armRetry(function () {
@@ -521,6 +522,7 @@
     if (window.ScrollAuth && typeof window.ScrollAuth.onChange === 'function') {
       window.ScrollAuth.onChange(function (u) {
         if (u) {
+          stopPullRetry();
           pullAndMerge();
         } else {
           if (debounceTimer) clearTimeout(debounceTimer);
@@ -538,7 +540,10 @@
   }
 
   if (typeof window !== 'undefined') {
-    window.addEventListener('online', syncNow);
+    window.addEventListener('online', function () {
+      if (!pullTimer) pullAttempt = 0;
+      syncNow();
+    });
   }
 
   if (document.readyState === 'loading') {

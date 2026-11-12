@@ -29,7 +29,8 @@ assert(map.includes('const loadEl = el("div", { class: "cmap-load" }'), 'the loa
 const gallery = read('js/gallery/app.js');
 assert(gallery.includes("if (e.key !== 't' && e.key !== 'T') return;") && gallery.includes('if (e.ctrlKey || e.metaKey || e.altKey) return;'), 'the tour key ignores modifier chords');
 assert(/!!\(e\.target && e\.target\.isContentEditable\);\s*if \(typing\) return;\s*startArtifactTour\(\);/.test(gallery), 'typing a t in a field does not start the tour');
-assert(gallery.includes('if (tourRunning) return;') && gallery.includes("tourRunning = false; museumToast('Tour complete');"), 'only one guided tour runs at a time');
+assert(/if \(tourRunning\) \{\s*stopArtifactTour\(true\);\s*return;\s*\}/.test(gallery) && gallery.includes("tourRunning = false; museumToast('Tour complete');"), 'only one guided tour runs at a time, and pressing T again stops it');
+assert(gallery.includes('if (!tourRunning) return;') && gallery.includes('if (tourRunning && !opts.fromTour) stopArtifactTour(true);'), 'a stopped tour takes no more steps, and picking an artifact stops the tour');
 assert(gallery.includes('if (/^(localhost|127\\.0\\.0\\.1|\\[::1\\])$/.test(window.location.hostname)) window.__galleryCamera = camera;') && !/^\s*window\.__galleryCamera = camera;/m.test(gallery), 'the gallery camera debug handle exists only on local hosts');
 
 console.log('map help: zoom buttons, help panel, and an honest 3D label');

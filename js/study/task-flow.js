@@ -3,6 +3,7 @@
 
   const KEYS = 'abcdefgh';
   const LEAVE_MS = 460;
+  const WAIT_POLL_MS = 500;
   const reduce = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : null;
 
   let root = null;
@@ -17,6 +18,7 @@
   let at = 0;
   let screen = 'closed';
   let closeGen = 0;
+  let waitTimer = 0;
   let returnFocus = null;
   let launcher = null;
   let launchStatus = null;
@@ -277,15 +279,47 @@
     });
   }
 
+  function stopWaiting() {
+    if (waitTimer) clearInterval(waitTimer);
+    waitTimer = 0;
+  }
+
+  function hasWork(s) {
+    return !!(s && s.ready && (planSteps(s).length || s.canAdvance));
+  }
+
+  function routeFrom(s) {
+    stopWaiting();
+    steps = planSteps(s);
+    at = 0;
+    if (!s.ready) showWaiting();
+    else if (!steps.length && s.canAdvance) showDone(s);
+    else if (!steps.length) showWaiting();
+    else showIntro(s);
+  }
+
+  function watchForQuestions() {
+    if (waitTimer) return;
+    waitTimer = setInterval(() => {
+      if (screen !== 'waiting') {
+        stopWaiting();
+        return;
+      }
+      const s = snap();
+      if (hasWork(s)) routeFrom(s);
+    }, WAIT_POLL_MS);
+  }
+
   function showWaiting() {
     screen = 'waiting';
+    watchForQuestions();
     foot.hidden = true;
     swap(() => {
       const card = el('section', 'tf-intro');
       const h = el('h2', 'tf-title', 'The questions are still loading');
       h.id = 'tf-heading';
       card.appendChild(h);
-      card.appendChild(el('p', 'tf-lead', 'Give it a moment, then try again.'));
+      card.appendChild(el('p', 'tf-lead', 'This will continue by itself as soon as they are ready.'));
       const actions = el('div', 'tf-actions');
       const ok = el('button', 'tf-primary', 'Close');
       ok.type = 'button';
@@ -339,21 +373,17 @@
       root.classList.remove('is-leaving', 'is-intro', 'is-done', 'is-answered');
     }
     if (!wasLeaving || !returnFocus) returnFocus = document.activeElement;
-    steps = planSteps(s);
-    at = 0;
     root.hidden = false;
     document.addEventListener('keydown', onKey, true);
     document.documentElement.classList.add('tf-open');
     requestAnimationFrame(() => root.classList.add('is-open'));
-    if (!s.ready) showWaiting();
-    else if (!steps.length && s.canAdvance) showDone(s);
-    else if (!steps.length) showWaiting();
-    else showIntro(s);
+    routeFrom(s);
     return true;
   }
 
   function close(after) {
     if (!root || screen === 'closed') return;
+    stopWaiting();
     screen = 'closed';
     document.removeEventListener('keydown', onKey, true);
     root.classList.remove('is-open');

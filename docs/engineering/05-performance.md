@@ -73,7 +73,7 @@ It also updates the CSP hashes of any inline script whose text changed. `tools/v
 | Study events | Batches of 10, a flush every 10 s, at most 12 requests and 60 rows a minute per tab. Failed batches give back their row budget. |
 | Surveys | 5 an hour per device |
 | Operational reports | Batches of 10 from a queue of 20, a flush every 10 s |
-| Progress and notes sync | A push waits 6 s after the last change. Retries back off (progress: 7, 12 and 24 s waits, up to 8 tries; notes: 7, 15 and 30 s waits, up to 5 tries). |
+| Progress and notes sync | A push waits 6 s after the last change. Retries back off (progress: 7, 12 and 24 s waits, up to 8 tries; notes: 7, 15 and 30 s waits, up to 5 tries). A failing notes pull retries at most 8 times. |
 | Error tracing (Sentry) | 10% of page loads |
 
 ## 6. Motion and battery

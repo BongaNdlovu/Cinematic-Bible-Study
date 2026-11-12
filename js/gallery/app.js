@@ -382,6 +382,7 @@ import * as THREE from 'three';
     const hallTexCache = new Map();
     const HALL_CACHE_CAP = 4;
     const TOUCH_DBLCLICK_ECHO_MS = 500;
+    const TOUR_BUSY_RETRY_MS = 300;
     let hallCurrentUrl = '';
     let hallSlot = 0;
     let hallMixTarget = 0;
@@ -3176,6 +3177,7 @@ import * as THREE from 'three';
     }
 
     function selectAsset(key, opts = {}) {
+      if (tourRunning && !opts.fromTour) stopArtifactTour(true);
       if (key === 'altar') key = 'assembled';
       if (!Object.prototype.hasOwnProperty.call(ASSET_REGISTRY, key)) return;
       if (!assetOpen(key)) {
@@ -3197,7 +3199,7 @@ import * as THREE from 'three';
           trans.classList.add('active', 'out');
         }
         setTimeout(() => {
-          selectAsset(key, { instant: true, keepAngle: opts.keepAngle || userHasAimed });
+          selectAsset(key, { instant: true, keepAngle: opts.keepAngle || userHasAimed, fromTour: opts.fromTour });
           if (trans && !reducedMotion) {
             trans.classList.remove('glitch', 'out');
             trans.classList.add('in');
@@ -3957,18 +3959,34 @@ import * as THREE from 'three';
       });
     }
     let tourRunning = false;
+    let tourTimer = 0;
+    function stopArtifactTour(announce) {
+      if (!tourRunning) return;
+      tourRunning = false;
+      clearTimeout(tourTimer);
+      tourTimer = 0;
+      if (announce) museumToast('Tour stopped');
+    }
     function startArtifactTour() {
-      if (tourRunning) return;
+      if (tourRunning) {
+        stopArtifactTour(true);
+        return;
+      }
       tourRunning = true;
       let i = 0;
       const order = openArtifactKeys().filter((k) => k !== 'altar');
       const step = () => {
+        if (!tourRunning) return;
         if (i >= order.length) { tourRunning = false; museumToast('Tour complete'); return; }
-        selectAsset(order[i]);
+        if (selectAsset._busy) {
+          tourTimer = setTimeout(step, TOUR_BUSY_RETRY_MS);
+          return;
+        }
+        selectAsset(order[i], { fromTour: true });
         i += 1;
-        setTimeout(step, reducedMotion ? 400 : 2800);
+        tourTimer = setTimeout(step, reducedMotion ? 400 : 2800);
       };
-      museumToast('Guided artifact tour');
+      museumToast('Guided artifact tour · press T or Esc to stop');
       step();
     }
     window.addEventListener('keydown', (e) => {
@@ -4298,6 +4316,7 @@ import * as THREE from 'three';
       const tag = (e.target && e.target.tagName) || '';
       const typing = tag === 'INPUT' || tag === 'TEXTAREA';
       if (e.key === 'Escape') {
+        stopArtifactTour(true);
         closeAllPanels();
         return;
       }

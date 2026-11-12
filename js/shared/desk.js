@@ -266,13 +266,19 @@
     launcher.setAttribute("aria-label", count ? "Messages, " + count + " unread" : "Messages");
   }
 
+  const LOCK_PREFIX = { retract: "retract:", "drop-help": "help:" };
+
+  function lockKeyFor(act, id) {
+    return (LOCK_PREFIX[act] || "") + id;
+  }
+
   function actionButton(label, act, id) {
     const btn = node("button", "desk-text");
     btn.type = "button";
     btn.textContent = label;
     btn.setAttribute("data-desk", act);
     btn.setAttribute("data-id", id);
-    if (inflight[id]) btn.disabled = true;
+    if (inflight[lockKeyFor(act, id)]) btn.disabled = true;
     return btn;
   }
 
@@ -375,12 +381,15 @@
     threadClear.setAttribute("data-id", threadId);
     threadClear.removeAttribute("data-confirm");
     threadClear.textContent = "Clear for both sides";
-    threadClear.disabled = !!inflight["help:" + threadId];
+    threadClear.disabled = !!inflight[lockKeyFor("drop-help", threadId)];
     clear(threadList);
     if (threadState === "loading") {
       line(threadList, "desk-empty", "Opening…");
+    } else if (threadState === "gone") {
+      line(threadList, "desk-empty", "This conversation is no longer available.");
     } else if (threadState === "error") {
       line(threadList, "desk-empty", "This conversation could not be opened.");
+      threadList.appendChild(actionButton("Try again", "retry-thread", threadId));
     } else {
       threadRows.forEach(function (msg) { threadList.appendChild(paintMessage(msg, operator)); });
     }
@@ -491,7 +500,7 @@
         const clean = cleanMessage(row);
         if (clean) threadRows.push(clean);
       });
-      threadState = threadRows.length ? "" : "error";
+      threadState = threadRows.length ? "" : "gone";
       paintInbox();
       if (threadRows.length) markSeen(gen, uid, id);
     }, function () {
@@ -735,7 +744,7 @@
       return;
     }
     if (!isId(id)) return;
-    if (act === "thread") {
+    if (act === "thread" || act === "retry-thread") {
       openThread(id);
       return;
     }

@@ -49,8 +49,9 @@ The site credits Fanelesibonge Ndlovu as its creator (`index.html` footer).
 ## Current state (12 November 2026)
 
 - The audit fixes of 12 November 2026 are live: commit `f9db265` passed CI and was deployed and smoke-tested that day. See [`docs/FIX-REPORT-2026-11-12.md`](../FIX-REPORT-2026-11-12.md).
-- Four further state fixes (see [CHANGELOG.md](CHANGELOG.md)) were pushed to `master` for deployment the same day.
-- Lint is clean. The main suite passes, 71 of 71 unit tests pass, and 22 of 22 security audit checks pass (all run 12 November 2026, including the state fixes).
+- Four further state fixes went live the same day (commit `27d9499`, CI deploy and smoke test passed).
+- The known-issue fixes (see [CHANGELOG.md](CHANGELOG.md)) were pushed to `master` for deployment the same day.
+- Lint is clean. The main suite passes, 73 of 73 unit tests pass, and 22 of 22 security audit checks pass (all run 12 November 2026, including the state fixes).
 - In the live database, all 18 tables in the `public` schema have row-level security switched on (read-only query, 12 November 2026).
 
 ### Open questions
@@ -61,15 +62,10 @@ The site credits Fanelesibonge Ndlovu as its creator (`index.html` footer).
 | No code in this repo calls the `/__rate` proxy. The smoke test only checks that it refuses callers without the secret. Who is meant to call it? | Not checked |
 | A comment pass found that the `inert` attributes set when a diagram goes full screen (`js/study/study-app.js`, `wireDiagramFullscreen`) may be redundant, because CSS already hides those elements. | Not checked |
 
-### Known issues, confirmed but not yet fixed
+### Known issues
 
-These come from `docs/implicit-state-machines.md`, a read-only review of the site's hidden state machines. Each one below was checked against the code on 12 November 2026. That document lists many more design observations; only those named here were confirmed as bugs.
+None open. The issues confirmed from `docs/implicit-state-machines.md` on 12 November 2026 were fixed the same day (see [CHANGELOG.md](CHANGELOG.md)).
 
-| Issue | Where |
-|---|---|
-| The question dialog's "still loading" screen offers only Close; it never moves on by itself when the questions arrive. | `showWaiting()` in `js/study/task-flow.js` |
-| Desk action buttons check `inflight[id]`, but retract and help-drop lock under `retract:<id>` and `help:<id>`, so those buttons are not disabled while their request runs. | `actionButton()` in `js/shared/desk.js` |
-| An empty conversation thread is shown as "could not be opened", with no retry. | `loadThread()` in `js/shared/desk.js` |
-| The notes sync retries a failed pull forever (no cap). Its push records the time before the request is sent. | `schedulePull()`, `pushLocalToRemote()` in `js/shared/study-sync.js` |
-| The gallery's guided tour cannot be cancelled once started. | `tourRunning` in `js/gallery/app.js` |
-| `Insights.readingTimer()` always returns 0. Harmless today: its only caller ignores the result. | `js/shared/insights.js` |
+That document also lists many design observations, such as one state kept in several places or yes/no flags standing in for named states. They are not bugs, but they are useful when refactoring.
+
+**Not a bug, by design:** the notes sync records `baStudySyncLastPushAt` when a push **starts**, not when it succeeds. The value only spaces push attempts 6 seconds apart (`pushLocalToRemote()` in `js/shared/study-sync.js`), so recording attempts is correct.
