@@ -1367,11 +1367,23 @@
       return lerp(0.78, 1.0, (progress - 0.62) / 0.38);
     }
 
+    const WEATHER_BANDS = [
+      { below: 0.2, type: 'quiet', label: 'Still', step: 'quiet' },
+      { below: 0.42, type: 'building', label: 'Building', step: 'quiet' },
+      { below: 0.72, type: 'storm', label: 'Storm', step: 'storm' },
+      { below: 0.78, type: 'storm', label: 'Breaking', step: 'storm' },
+      { below: Infinity, type: 'sunshine', label: 'Sun', step: 'sun' }
+    ];
+
+    function weatherBand(v) {
+      for (const band of WEATHER_BANDS) {
+        if (v < band.below) return band;
+      }
+      return WEATHER_BANDS[WEATHER_BANDS.length - 1];
+    }
+
     function deriveWeatherType(v) {
-      if (v < 0.2) return 'quiet';
-      if (v < 0.42) return 'building';
-      if (v < 0.78) return 'storm';
-      return 'sunshine';
+      return weatherBand(v).type;
     }
 
     function lightTheme() {
@@ -1472,7 +1484,8 @@
       const levelEl = document.getElementById('focus-atmosphere-level');
       const fillEl = document.getElementById('focus-atmosphere-fill');
 
-      const phaseLabel = focusAtmosphere < 0.22 ? 'Still' : focusAtmosphere < 0.43 ? 'Building' : focusAtmosphere < 0.72 ? 'Storm' : focusAtmosphere < 0.9 ? 'Breaking' : 'Sun';
+      const band = weatherBand(focusAtmosphere);
+      const phaseLabel = band.label;
       if (statusEl) statusEl.innerText = weatherPreset === 'auto' ? `${phaseLabel} • ${meta.name.split(' • ')[1] || meta.name}` : meta.name;
       if (headerIcon) headerIcon.innerText = meta.icon;
       if (phaseEl) phaseEl.innerText = weatherPreset === 'auto' ? `Auto: ${phaseLabel}` : meta.level;
@@ -1483,8 +1496,7 @@
         if (!el) return;
         el.classList.remove('bg-amber-500/20','text-amber-900','dark:text-amber-200','ring-1','ring-amber-400');
       });
-      const activeId = focusAtmosphere < 0.34 ? 'focus-phase-quiet' : focusAtmosphere < 0.78 ? 'focus-phase-storm' : 'focus-phase-sun';
-      const active = document.getElementById(activeId);
+      const active = document.getElementById(`focus-phase-${band.step}`);
       if (active) active.classList.add('bg-amber-500/20','text-amber-900','dark:text-amber-200','ring-1','ring-amber-400');
 
     }

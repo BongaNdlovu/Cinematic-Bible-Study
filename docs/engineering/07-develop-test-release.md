@@ -49,7 +49,7 @@ The server binds `127.0.0.1`. It starts at port 8000, or at `PORT` if that is se
 | Live smoke | `tools/smoke.mjs` | After every deploy, and every 15 minutes |
 | Production walkthrough | `qa-e2e/production-audit.mjs` (see the root `README.md`) | No |
 
-**Results on 12 November 2026:** lint clean, `npm test` passes, 68 of 68 unit tests pass, and 22 of 22 security checks pass.
+**Results on 12 November 2026:** lint clean, `npm test` passes, 71 of 71 unit tests pass, and 22 of 22 security checks pass.
 
 ## Continuous integration (`.github/workflows/ci.yml`)
 

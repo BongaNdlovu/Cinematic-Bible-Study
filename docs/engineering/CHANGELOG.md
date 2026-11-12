@@ -14,6 +14,24 @@ Entry template:
 
 ---
 
+## 2026-11-12 — Four state bugs from the state-machine review
+
+**Why:** A read-only review (`docs/implicit-state-machines.md`) was checked against the code. Four of its findings were confirmed as real bugs; one of them was a gap in the morning's own-note fix.
+
+**What changed**
+
+- Message desk: each in-flight lock now carries an owner token. A late reply from before a refresh can no longer release a newer request's lock or re-enable its button (`js/shared/desk.js`).
+- Focus weather: one band table (`WEATHER_BANDS`) now gives the weather type, the label and the highlighted step. Before, three different threshold sets could disagree, for example "Building" over a storm (`js/study/study-app.js`).
+- Map playback: one `stopPlayback()` is used everywhere. Picking a year, a search result or another year's event, scrubbing, the arrows and the arrow keys now stop the chronicle, so it no longer jumps past the reader's choice (`js/map/map.js`).
+- Readers' notes: when the 4 automatic re-checks of a reader's own note run out, the message now says to reload, instead of promising another try. Coming back online restarts the checks once, instead of running a second check alongside the timer (`js/shared/reviews.js`).
+- New tests: `tests/unit/state-fixes.test.mjs` (3 tests; each fails on the previous code).
+
+**Handbook updated:** 01 (known issues), 06 (map, UI rules), CHANGELOG.
+
+**Status:** shipped in the commit that adds this entry, pushed to `master` on 12 November 2026 for the CI deploy. The deploy result is in that commit's CI run.
+
+---
+
 ## 2026-11-12 — Audit fixes and the engineering handbook
 
 **Why:** The November audit listed 36 findings. 29 were real problems; the other 7 were not bugs or were deliberate designs. A developer handbook was also requested, to be kept current with every change.
@@ -35,4 +53,4 @@ Entry template:
 
 **Handbook updated:** all chapters (first version).
 
-**Status:** written and tested locally. Not yet committed or deployed.
+**Status:** committed as `f9db265`, deployed through CI and smoke-tested on 12 November 2026.

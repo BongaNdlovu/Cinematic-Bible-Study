@@ -334,6 +334,7 @@
           }
           return;
         }
+        stopPlayback();
         setYear(ep.id, { animate: true, chapter: cinematic });
       });
       track.appendChild(b);
@@ -593,6 +594,7 @@
       }
       const isOtherYear = isEvent && item.yearId !== state.yearId && !isLessonId(item.id);
       if (isOtherYear) {
+        stopPlayback();
         setYear(item.yearId, { animate: true, chapter: cinematic, open: false });
         openDossier(markerCopy(item, isEvent), { keepYearFlight: true });
         return;
@@ -1432,8 +1434,7 @@
 
     scrubInput.addEventListener("input", () => {
       scrubbing = true;
-      state.playing = false;
-      playBtn.textContent = "▶";
+      stopPlayback();
       scrubPreview(Number(scrubInput.value));
     });
     scrubInput.addEventListener("change", () => {
@@ -1463,15 +1464,14 @@
       });
     }
 
-    prevBtn.addEventListener("click", () => { state.playing = false; playBtn.textContent = "▶"; stepYear(-1); });
-    nextBtn.addEventListener("click", () => { state.playing = false; playBtn.textContent = "▶"; stepYear(1); });
+    prevBtn.addEventListener("click", () => { stopPlayback(); stepYear(-1); });
+    nextBtn.addEventListener("click", () => { stopPlayback(); stepYear(1); });
 
     let playRun = 0;
 
     async function playChronicle() {
       if (state.playing) {
-        state.playing = false;
-        playBtn.textContent = "▶";
+        stopPlayback();
         return;
       }
       state.playing = true;
@@ -1492,9 +1492,15 @@
           await new Promise((r) => setTimeout(r, REDUCE ? 200 : 2600));
         }
       }
+      stopPlayback();
+    }
+
+    function stopPlayback() {
       state.playing = false;
+      playRun += 1;
       playBtn.textContent = "▶";
     }
+
     playBtn.addEventListener("click", () => playChronicle());
 
     layers.addEventListener("change", (ev) => {
@@ -1539,7 +1545,10 @@
       searchHits.hidden = true;
       searchInput.value = "";
       const year = b.dataset.year;
-      if (year && (b.dataset.kind === "year" || year !== state.yearId)) setYear(year, { animate: true, chapter: cinematic });
+      if (year && (b.dataset.kind === "year" || year !== state.yearId)) {
+        stopPlayback();
+        setYear(year, { animate: true, chapter: cinematic });
+      }
       if (b.dataset.lat && state.view === "globe" && globe) globe.flyTo(Number(b.dataset.lat), Number(b.dataset.lon), 2.0);
       else if (b.dataset.lat && state.lmap) state.lmap.flyTo([Number(b.dataset.lat), Number(b.dataset.lon)], 7);
       // A picked hit should open its place panel, not just fly the camera there.
@@ -1650,8 +1659,8 @@
         if (ev.ctrlKey || ev.metaKey || ev.altKey) return;
         if (ev.key === "+" || ev.key === "=") { ev.preventDefault(); zoomStep(1); return; }
         if (ev.key === "-" || ev.key === "_") { ev.preventDefault(); zoomStep(-1); return; }
-        if (ev.key === "ArrowRight") { ev.preventDefault(); state.playing = false; playBtn.textContent = "▶"; stepYear(1); }
-        else if (ev.key === "ArrowLeft") { ev.preventDefault(); state.playing = false; playBtn.textContent = "▶"; stepYear(-1); }
+        if (ev.key === "ArrowRight") { ev.preventDefault(); stopPlayback(); stepYear(1); }
+        else if (ev.key === "ArrowLeft") { ev.preventDefault(); stopPlayback(); stepYear(-1); }
         else if (ev.key === " ") { ev.preventDefault(); playChronicle(); }
       });
       window.setTimeout(() => hint.classList.add("is-gone"), 5200);

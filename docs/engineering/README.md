@@ -2,7 +2,7 @@
 
 This handbook is the single place a developer or senior engineer reads to understand the site: what it is for, how it works, how the code is laid out, how it is secured, how it stays fast, and how its interface is built.
 
-**Last verified against the code:** 12 November 2026 (working tree on `master` at `b443854` plus the uncommitted fixes in [CHANGELOG.md](CHANGELOG.md)).
+**Last verified against the code:** 12 November 2026 (`master` at `f9db265`, plus any uncommitted changes listed at the top of [CHANGELOG.md](CHANGELOG.md)).
 
 ## Reading order
 

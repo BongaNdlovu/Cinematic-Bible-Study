@@ -45,8 +45,6 @@
   let helpSend = null;
   let publishSend = null;
 
-  /* Mirror an in-flight lock onto its submit button, so a send that is in the
-     air reads as disabled instead of silently eating repeat clicks. */
   function setSendBusy(key, on) {
     const btn = key === "help-send" ? helpSend : key === "reply" ? replySend : key === "notice-send" ? publishSend : null;
     if (!btn) return;
@@ -142,14 +140,19 @@
     statusNode.textContent = message || "";
   }
 
+  let lockSeq = 0;
+
   function lock(key) {
-    if (inflight[key]) return false;
-    inflight[key] = true;
-    return true;
+    if (inflight[key]) return 0;
+    lockSeq += 1;
+    inflight[key] = lockSeq;
+    return lockSeq;
   }
 
-  function unlock(key) {
+  function unlock(key, token) {
+    if (!token || inflight[key] !== token) return;
     delete inflight[key];
+    setSendBusy(key, false);
   }
 
   function readLocal() {
@@ -589,7 +592,9 @@
   }
 
   function applyState(id, read, hidden) {
-    if (!isId(id) || !lock(id)) return;
+    if (!isId(id)) return;
+    const held = lock(id);
+    if (!held) return;
     const gen = generation;
     const uid = userId();
     if (!uid) {
@@ -598,20 +603,20 @@
       local[id] = { read: !!read, hidden: !!hidden };
       writeLocal(local);
       receipts[id] = local[id];
-      unlock(id);
+      unlock(id, held);
       paintNotices();
       return;
     }
     const db = client();
     if (!db || typeof db.rpc !== "function") {
-      unlock(id);
+      unlock(id, held);
       disarmConfirms();
       setStatus("That could not be saved.");
       return;
     }
     db.rpc("exhibit_notice_receipt_set", { p_notice: id, p_read: !!read, p_hidden: !!hidden })
       .then(function (res) {
-        unlock(id);
+        unlock(id, held);
         if (!still(gen, uid)) return;
         if (!res || res.error) {
           disarmConfirms();
@@ -622,7 +627,7 @@
         setStatus(hidden ? "Removed from your desk." : "");
         paintNotices();
       }, function () {
-        unlock(id);
+        unlock(id, held);
         if (!still(gen, uid)) return;
         disarmConfirms();
         setStatus("That could not be saved.");
@@ -630,18 +635,20 @@
   }
 
   function retractNotice(id) {
-    if (!isOperator() || !isId(id) || !lock("retract:" + id)) return;
+    if (!isOperator() || !isId(id)) return;
+    const held = lock("retract:" + id);
+    if (!held) return;
     const db = client();
     const gen = generation;
     const uid = userId();
     if (!db || typeof db.from !== "function") {
-      unlock("retract:" + id);
+      unlock("retract:" + id, held);
       disarmConfirms();
       setStatus("That could not be saved.");
       return;
     }
     db.from("exhibit_notices").delete().eq("id", id).then(function (res) {
-      unlock("retract:" + id);
+      unlock("retract:" + id, held);
       if (!still(gen, uid)) return;
       if (!res || res.error) {
         disarmConfirms();
@@ -652,7 +659,7 @@
       setStatus("Removed for every reader.");
       paintNotices();
     }, function () {
-      unlock("retract:" + id);
+      unlock("retract:" + id, held);
       if (!still(gen, uid)) return;
       disarmConfirms();
       setStatus("That could not be saved.");
@@ -660,18 +667,20 @@
   }
 
   function dropHelp(id) {
-    if (!isOperator() || !isId(id) || !lock("help:" + id)) return;
+    if (!isOperator() || !isId(id)) return;
+    const held = lock("help:" + id);
+    if (!held) return;
     const db = client();
     const gen = generation;
     const uid = userId();
     if (!db || typeof db.from !== "function") {
-      unlock("help:" + id);
+      unlock("help:" + id, held);
       disarmConfirms();
       setStatus("That could not be saved.");
       return;
     }
     db.from("exhibit_help_notes").delete().eq("id", id).then(function (res) {
-      unlock("help:" + id);
+      unlock("help:" + id, held);
       if (!still(gen, uid)) return;
       if (!res || res.error) {
         disarmConfirms();
@@ -683,7 +692,7 @@
       setStatus("Cleared for both sides.");
       paintInbox();
     }, function () {
-      unlock("help:" + id);
+      unlock("help:" + id, held);
       if (!still(gen, uid)) return;
       disarmConfirms();
       setStatus("That could not be saved.");
@@ -754,20 +763,19 @@
       setStatus("Add a subject and a message.");
       return;
     }
-    if (!lock("help-send")) return;
+    const held = lock("help-send");
+    if (!held) return;
     setSendBusy("help-send", true);
     const db = client();
     const gen = generation;
     const uid = userId();
     if (!db || typeof db.from !== "function") {
-      unlock("help-send");
-      setSendBusy("help-send", false);
+      unlock("help-send", held);
       setStatus("That could not be saved.");
       return;
     }
     db.from("exhibit_help_notes").insert({ subject: subject, body: body }).then(function (res) {
-      unlock("help-send");
-      setSendBusy("help-send", false);
+      unlock("help-send", held);
       if (!still(gen, uid)) return;
       if (!res || res.error) {
         setStatus(plainError(res && res.error));
@@ -779,8 +787,7 @@
       selectTab("inbox", false);
       loadInbox(gen, uid);
     }, function () {
-      unlock("help-send");
-      setSendBusy("help-send", false);
+      unlock("help-send", held);
       if (still(gen, uid)) setStatus("That could not be saved.");
     });
   }
@@ -794,20 +801,19 @@
       setStatus("Write a reply first.");
       return;
     }
-    if (!lock("reply")) return;
+    const held = lock("reply");
+    if (!held) return;
     setSendBusy("reply", true);
     const db = client();
     const gen = generation;
     const uid = userId();
     if (!db || typeof db.rpc !== "function") {
-      unlock("reply");
-      setSendBusy("reply", false);
+      unlock("reply", held);
       setStatus("That could not be saved.");
       return;
     }
     db.rpc("exhibit_help_reply", { p_note: id, p_body: body }).then(function (res) {
-      unlock("reply");
-      setSendBusy("reply", false);
+      unlock("reply", held);
       if (!still(gen, uid)) return;
       if (!res || res.error) {
         setStatus(plainError(res && res.error));
@@ -818,8 +824,7 @@
       if (threadId === id) loadThread(gen, uid, id);
       loadInbox(gen, uid);
     }, function () {
-      unlock("reply");
-      setSendBusy("reply", false);
+      unlock("reply", held);
       if (still(gen, uid)) setStatus("That could not be saved.");
     });
   }
@@ -833,20 +838,19 @@
       setStatus("Add a title and a message.");
       return;
     }
-    if (!lock("notice-send")) return;
+    const held = lock("notice-send");
+    if (!held) return;
     setSendBusy("notice-send", true);
     const db = client();
     const gen = generation;
     const uid = userId();
     if (!db || typeof db.from !== "function") {
-      unlock("notice-send");
-      setSendBusy("notice-send", false);
+      unlock("notice-send", held);
       setStatus("That could not be saved.");
       return;
     }
     db.from("exhibit_notices").insert({ title: title, body: body }).then(function (res) {
-      unlock("notice-send");
-      setSendBusy("notice-send", false);
+      unlock("notice-send", held);
       if (!still(gen, uid)) return;
       if (!res || res.error) {
         setStatus(plainError(res && res.error));
@@ -856,8 +860,7 @@
       setStatus("Published to every reader.");
       loadNotices(gen, uid);
     }, function () {
-      unlock("notice-send");
-      setSendBusy("notice-send", false);
+      unlock("notice-send", held);
       if (still(gen, uid)) setStatus("That could not be saved.");
     });
   }

@@ -563,13 +563,22 @@
   const OWN_REVIEW_WAITS = [10000, 20000, 40000, 60000];
 
   function scheduleOwnReviewRetry() {
-    if (ownReviewRetry || ownReviewAttempts >= OWN_REVIEW_WAITS.length) return;
+    if (ownReviewRetry) return true;
+    if (ownReviewAttempts >= OWN_REVIEW_WAITS.length) return false;
     const wait = OWN_REVIEW_WAITS[ownReviewAttempts];
     ownReviewAttempts += 1;
     ownReviewRetry = setTimeout(function () {
       ownReviewRetry = null;
       if (signedIn()) loadOwnReview();
     }, wait);
+    return true;
+  }
+
+  function recheckOwnReviewOnReconnect() {
+    if (ownReviewRetry) clearTimeout(ownReviewRetry);
+    ownReviewRetry = null;
+    ownReviewAttempts = 0;
+    if (signedIn()) loadOwnReview();
   }
 
   function loadOwnReview() {
@@ -635,8 +644,13 @@
           setStatus("Your note could not be checked just now. Reload the page to try again before writing a new one.", "error");
           return;
         }
+        const retriesOnReconnect = kind === "offline";
+        const willRetry = retriesOnReconnect || scheduleOwnReviewRetry();
+        if (!willRetry) {
+          setStatus("Your note could not be checked just now. Reload the page to try again before writing a new one.", "error");
+          return;
+        }
         setStatus("Your note could not be checked just now. It is safe on the record — trying again shortly.", "error");
-        if (kind !== "offline") scheduleOwnReviewRetry();
       });
   }
 
@@ -866,10 +880,7 @@
         loadOwnReview();
       });
     }
-    /* A failed own-note check resolves itself on reconnect. */
-    window.addEventListener("online", function () {
-      if (signedIn()) loadOwnReview();
-    });
+    window.addEventListener("online", recheckOwnReviewOnReconnect);
   }
 
   window.ScrollReviews = {
