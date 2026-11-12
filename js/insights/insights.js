@@ -10,6 +10,8 @@
   let gradQuery = '';
   let cache = { events: [], surveys: [], profiles: [], progress: [], graduates: null, participation: null, capped: [] };
   const ALL_TIME_FROM = '2000-01-01T00:00:00.000Z';
+  const ACTIVITY_COUNT_FROM = '2026-10-19T00:00:00.000Z';
+  let countFrom = ACTIVITY_COUNT_FROM;
   const COUNTER_TARGET = 700;
   const SID_TARGET = 500;
 
@@ -34,6 +36,17 @@
     const cut = sinceIso();
     if (!cut) return true;
     return String(iso || '') >= cut;
+  }
+
+  function activityCut() {
+    const cut = sinceIso();
+    const isRangeLater = !!cut && cut > countFrom;
+    return isRangeLater ? cut : countFrom;
+  }
+
+  function isCountFromApplied() {
+    const cut = sinceIso();
+    return !cut || cut < countFrom;
   }
 
   function escapeHtml(value) {
@@ -130,12 +143,17 @@
     return (rows || []).filter(function (r) { return inRange(r.created_at) && !(mine && mine(r)); });
   }
 
+  function keepActivity(rows) {
+    const cut = activityCut();
+    return keep(rows).filter(function (r) { return String(r.created_at || '') >= cut; });
+  }
+
   function events() {
-    return keep(cache.events);
+    return keepActivity(cache.events);
   }
 
   function surveys() {
-    return keep(cache.surveys);
+    return keepActivity(cache.surveys);
   }
 
   function profiles() {
@@ -770,6 +788,7 @@
       return;
     }
     const parts = [num(events().length) + ' events in range'];
+    if (isCountFromApplied()) parts.push('study activity counted from 19 October 2026, when analytics consent began');
     if (cache.loadedAt) {
       try {
         parts.push('updated ' + new Intl.DateTimeFormat(undefined, { hour: 'numeric', minute: '2-digit' }).format(cache.loadedAt));
@@ -868,20 +887,26 @@
       if (gen === loadGen) paintStatus('Still loading \u2014 this range pulls a lot of records\u2026');
     }, 4000);
 
+    const activityFrom = activityCut();
+
     function since(q) {
       return cut ? q.gte('created_at', cut) : q;
+    }
+
+    function sinceActivity(q) {
+      return q.gte('created_at', activityFrom);
     }
 
     return Promise.resolve().then(function () {
       return Promise.all([
         fetchAll(function () {
-          return withSignal(since(c.from('exhibit_events')
+          return withSignal(sinceActivity(c.from('exhibit_events')
             .select('event,sitting,sheet,detail,user_id,anon_id,session_id,created_at')
             .not('event', 'in', PROBES))
             .order('created_at', { ascending: false }), signal);
         }, EVENT_CAP, 'events', capped),
         fetchAll(function () {
-          return withSignal(since(c.from('exhibit_surveys').select('rating,feedback,responses,created_at,role,cohort,user_id,anon_id'))
+          return withSignal(sinceActivity(c.from('exhibit_surveys').select('rating,feedback,responses,created_at,role,cohort,user_id,anon_id'))
             .order('created_at', { ascending: false }), signal);
         }, ROW_CAP, 'surveys', capped),
         fetchAll(function () {
@@ -955,18 +980,23 @@
   function loadRange(fromIso, toIso) {
     const c = client();
     const capped = [];
+    const isFromBeforeCount = fromIso < countFrom;
+    const activityFrom = isFromBeforeCount ? countFrom : fromIso;
     function between(q) {
       return q.gte('created_at', fromIso).lt('created_at', toIso);
     }
+    function betweenActivity(q) {
+      return q.gte('created_at', activityFrom).lt('created_at', toIso);
+    }
     return Promise.all([
       fetchAll(function () {
-        return between(c.from('exhibit_events')
+        return betweenActivity(c.from('exhibit_events')
           .select('event,sitting,sheet,detail,user_id,anon_id,session_id,created_at')
           .not('event', 'in', PROBES))
           .order('created_at', { ascending: false });
       }, EVENT_CAP, 'events', capped),
       fetchAll(function () {
-        return between(c.from('exhibit_surveys').select('rating,responses,created_at,user_id,anon_id'))
+        return betweenActivity(c.from('exhibit_surveys').select('rating,responses,created_at,user_id,anon_id'))
           .order('created_at', { ascending: false });
       }, ROW_CAP, 'surveys', capped),
       fetchAll(function () {
@@ -1039,7 +1069,7 @@
     return loadRange(fromIso, toIso).then(function (data) {
       if (gen !== reportGen) return;
       const guestCutoff = new Date(Date.now() - 90 * 86400000).toISOString();
-      const figures = window.SidReport.build(data, { from: fromIso, to: toIso, guestCutoff: guestCutoff, exclude: ownActivity(data.events) });
+      const figures = window.SidReport.build(data, { from: fromIso, to: toIso, guestCutoff: guestCutoff, countFrom: countFrom, exclude: ownActivity(data.events) });
       const pages = byId('sid-pages');
       if (!pages) return;
       pages.innerHTML = window.SidReport.render(figures);
@@ -1113,6 +1143,8 @@
     render: render,
     load: load,
     setDays: function (d) { days = d; },
+    setCountFrom: function (iso) { countFrom = String(iso || ACTIVITY_COUNT_FROM); },
+    loadRange: loadRange,
     setHideMine: function (v) { hideMine = !!v; },
     setCache: function (c) { cache = c; },
     getCache: function () { return cache; },

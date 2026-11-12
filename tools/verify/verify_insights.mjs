@@ -414,6 +414,7 @@ assert(typeof Dashboard.timeAndDepthRows === 'function', 'Dashboard.timeAndDepth
 assert(typeof Dashboard.funnelRows === 'function', 'Dashboard.funnelRows must be a function');
 assert(typeof Dashboard.csvEscape === 'function', 'Dashboard.csvEscape must be a function');
 
+Dashboard.setCountFrom('2000-01-01T00:00:00.000Z');
 Dashboard.setDays(0); // All time
 Dashboard.setCache({ events: dashEvents, surveys: dashSurveys, profiles: dashProfiles });
 
@@ -617,6 +618,52 @@ const liveJs = fs.readFileSync(path.join(ROOT, 'tools/verify/verify_progress_liv
 assert(liveJs.includes('process.exit(1)'), 'live progress check must fail when env is missing');
 assert(!liveJs.includes('process.exit(0)'), 'live progress check must not skip with a passing exit');
 assert(/a\.click\(\);\s*setTimeout\(function \(\) \{ URL\.revokeObjectURL\(a\.href\); \}, 1000\);/.test(dashCode), 'the CSV export keeps its link alive until the download starts');
+
+Dashboard.setCountFrom();
+Dashboard.setDays(0);
+Dashboard.setHideMine(false);
+Dashboard.setCache({
+  events: [
+    { event: 'sitting_start', sitting: 1, anon_id: 'test-run', created_at: '2026-10-14T10:00:00Z' },
+    { event: 'sitting_complete', sitting: 1, anon_id: 'test-run', created_at: '2026-10-14T10:05:00Z' },
+    { event: 'sitting_start', sitting: 1, anon_id: 'edge-reader', created_at: '2026-10-19T00:00:00.000Z' },
+    { event: 'sitting_start', sitting: 1, anon_id: 'reader', created_at: '2026-10-20T10:00:00Z' }
+  ],
+  surveys: [
+    { rating: 5, created_at: '2026-10-01T00:00:00Z' },
+    { rating: 4, created_at: '2026-10-21T00:00:00Z' }
+  ],
+  profiles: []
+});
+const floored = Dashboard.funnelRows();
+assert.strictEqual(floored[1].started, 2, 'sitting starts before 19 October 2026 are not counted');
+assert.strictEqual(floored[1].completed, 0, 'sitting completions before 19 October 2026 are not counted');
+
+const queried = [];
+const recordingClient = {
+  from: (table) => {
+    const q = {
+      select: () => q,
+      not: () => q,
+      order: () => q,
+      gte: (col, value) => { queried.push(table + ' >= ' + value); return q; },
+      lt: () => q,
+      range: () => Promise.resolve({ data: [], error: null })
+    };
+    return q;
+  },
+  rpc: () => Promise.resolve({ data: null, error: null })
+};
+const savedClient = global.window.ScrollAuth.getClient;
+global.window.ScrollAuth.getClient = () => recordingClient;
+await Dashboard.loadRange('2026-01-01T00:00:00.000Z', '2026-11-14T00:00:00.000Z');
+assert(queried.includes('exhibit_events >= 2026-10-19T00:00:00.000Z'), 'the report loads events from 19 October 2026 at the earliest');
+assert(queried.includes('exhibit_surveys >= 2026-10-19T00:00:00.000Z'), 'the report loads ratings from 19 October 2026 at the earliest');
+assert(queried.includes('exhibit_profiles >= 2026-01-01T00:00:00.000Z'), 'the report still loads welcome answers for the whole period');
+queried.length = 0;
+await Dashboard.loadRange('2026-11-01T00:00:00.000Z', '2026-11-14T00:00:00.000Z');
+assert(queried.includes('exhibit_events >= 2026-11-01T00:00:00.000Z'), 'a period starting after 19 October 2026 keeps its own start');
+global.window.ScrollAuth.getClient = savedClient;
 
 const counter = Dashboard.targetTile({ registered: 410, began: 350 });
 assert(counter.includes('Toward 700'), 'the counter tile names the 700 target');

@@ -73,6 +73,24 @@ async function run() {
         broken: text({ registered: 'x', began: 1 })
       };
     });
+    const floor = await page.evaluate(() => {
+      const opts = { from: '2026-01-01T00:00:00.000Z', to: '2026-11-14T00:00:00.000Z', countFrom: '2026-10-19T00:00:00.000Z', guestCutoff: '2026-08-15T00:00:00.000Z' };
+      const events = [];
+      for (let i = 0; i < 9; i++) events.push({ event: 'sitting_start', anon_id: 'test' + i, sitting: 0, detail: {}, created_at: '2026-10-14T10:00:00Z' });
+      for (let i = 0; i < 6; i++) events.push({ event: 'sitting_start', anon_id: 'reader' + i, sitting: 0, detail: {}, created_at: '2026-10-25T10:00:00Z' });
+      const surveys = [{ rating: 5, created_at: '2026-10-02T00:00:00Z' }];
+      const profiles = [{ user_id: 'p1', found_via: 'First time', created_at: '2026-02-01T00:00:00Z' }];
+      const late = window.SidReport.build({ events, surveys, profiles }, { ...opts, from: '2026-11-01T00:00:00.000Z' });
+      const f = window.SidReport.build({ events, surveys, profiles }, opts);
+      return { readers: f.reach.readers, surveys: f.feedback.overall.n, profiles: f.readers.firstRead.total, notes: f.incomplete, lateNotes: late.incomplete };
+    });
+    assert.equal(floor.readers, 6, 'starts before 19 October 2026 are left out of the report');
+    assert.equal(floor.surveys, 0, 'ratings before 19 October 2026 are left out of the report');
+    assert.equal(floor.profiles, 1, 'welcome answers keep the whole period');
+    assert.ok(floor.notes.some((n) => n.includes('count from 19 October 2026')), 'the report says why it counts from 19 October 2026');
+    assert.ok(!floor.notes.some((n) => n.includes('kept for 90 days')), 'the guest-deletion warning is not shown when the cut-off is later');
+    assert.ok(!floor.lateNotes.some((n) => n.includes('count from 19 October 2026')), 'a period after the cut-off has no cut-off note');
+
     assert.ok(target.full.includes('312accounts registered in this period'), 'the summary shows accounts registered');
     assert.ok(target.full.includes('241registered and began the study'), 'the summary shows registered readers who began');
     assert.ok(target.full.includes('48%of the 500 target reached'), 'the summary shows progress toward the 500 target');

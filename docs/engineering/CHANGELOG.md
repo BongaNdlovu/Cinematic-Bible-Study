@@ -14,6 +14,24 @@ Entry template:
 
 ---
 
+## 2026-11-13 — Count study activity from 19 October 2026
+
+**Why:** The SID report counted every event since launch. Before 19 October 2026 events were recorded without analytics consent, and the busiest days match development and test runs: 385 starts on 24 September, 398 on 30 September, 1,470 starts by 134 browsers on 14 October (read-only query on the live database, 13 November 2026). So "607 people started a sitting" was mostly test traffic, and the report's own line "count only readers who allowed anonymous study analytics" was untrue for those dates.
+
+**What changed**
+
+- `js/insights/insights.js`: `ACTIVITY_COUNT_FROM = '2026-10-19T00:00:00.000Z'`. The dashboard loads and counts events and ratings from that date at the earliest (`activityCut()`, `keepActivity()`); "All time" included. `loadRange()` does the same for the SID report and passes `countFrom` to it. The status line says "study activity counted from 19 October 2026, when analytics consent began". Test hooks `setCountFrom` and `loadRange` added.
+- `js/insights/sid-report.js`: events and ratings are filtered from `countFrom`. A note explains the cut when the period starts earlier. The 90-day guest-deletion note only shows when it still matters. The method page has a line on the cut.
+- Not cut: welcome answers, saved progress, certificates, the project-target figures. No rows were deleted.
+- Tests: `verify_insights.mjs` checks the in-memory cut, and that report queries start at 19 October for events and ratings but not for profiles. `verify_sid_report.mjs` checks the cut, the notes, and that profiles keep the whole period. Four mutations were caught (no cut in the report, no cut in the report query, no cut on the dashboard, an earlier date).
+- Tested: `npx oxlint` exit 0; `npm run test:unit` 73 of 73; `npm test` exit 0; `npm run test:security` 22 of 22.
+
+**Handbook updated:** 02.
+
+**Status:** committed and pushed to `master`; CI deploys it.
+
+---
+
 ## 2026-11-13 — Clearer Study insights gate
 
 **Why:** A moderator signed in with Google but without the authenticator step was told to "Sign in", although they were signed in. Seen on the live site on 13 November 2026 (session `aal1`).

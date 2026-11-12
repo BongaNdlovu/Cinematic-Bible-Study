@@ -138,6 +138,8 @@ Consent is stored in `sodConsent` (`js/shared/consent.js`). If a visitor has not
 
 **The 700 counter on the dashboard.** The first tile on the Study insights page, "Toward 700", shows the same "registered and began" count for all time (from `2000-01-01`, so every account counts), as `N / 700`. Its detail line gives the share of 700 and of the 500 SID target. The constants are `COUNTER_TARGET` and `SID_TARGET` in `js/insights/insights.js`. If the function is missing or refuses, the tile shows "verified count not available".
 
+**Study activity counts from 19 October 2026.** The analytics consent check arrived on that day (commit `debdd6e`). Earlier rows in `exhibit_events` and `exhibit_surveys` were recorded without consent, and their spikes match development and test days (for example 1,470 sitting starts by 134 browsers on 14 October 2026, from a read-only query on 13 November 2026). So the dashboard and the SID report never count events or ratings before `ACTIVITY_COUNT_FROM` (`2026-10-19T00:00:00.000Z` in `js/insights/insights.js`), even for "All time" or an earlier report period. Welcome answers (`exhibit_profiles`), saved progress, certificates and the project-target figures are not cut. The report adds a note when the cut applies, and the dashboard status line says "study activity counted from 19 October 2026". The rows are kept in the database; nothing was deleted.
+
 These figures do not depend on the cookie banner, unlike the event-based figures. "Began" is read when the report is built, so it can rise after the period ends. Counts under 5 are withheld, as for every figure in the report. If the function is missing or refuses, the page says "Registration figures are not available for this report."
 
 ## 9. Running it locally

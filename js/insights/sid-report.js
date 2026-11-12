@@ -228,12 +228,19 @@
     const from = String(o.from || '');
     const to = String(o.to || '');
     const exclude = typeof o.exclude === 'function' ? o.exclude : function () { return false; };
-    const pick = function (rows) {
-      const inside = within(from, to);
-      return (rows || []).filter(function (r) { return r && inside(r) && !exclude(r); });
+    const countFrom = String(o.countFrom || '');
+    const isCountFromApplied = !!countFrom && from < countFrom;
+    const activityFrom = isCountFromApplied ? countFrom : from;
+    const pickFrom = function (start) {
+      const inside = within(start, to);
+      return function (rows) {
+        return (rows || []).filter(function (r) { return r && inside(r) && !exclude(r); });
+      };
     };
-    const events = pick(data.events);
-    const surveys = pick(data.surveys);
+    const pick = pickFrom(from);
+    const pickActivity = pickFrom(activityFrom);
+    const events = pickActivity(data.events);
+    const surveys = pickActivity(data.surveys);
     const profiles = pick(data.profiles);
     const graduates = Array.isArray(data.graduates) ? pick(data.graduates) : null;
     const rawParticipation = data.participation;
@@ -247,7 +254,10 @@
     const notes = (Array.isArray(data.capped) ? data.capped : []).map(function (c) {
       return 'The dashboard reached its row limit for ' + c + ', so some figures may be low.';
     });
-    if (o.guestCutoff && from < String(o.guestCutoff)) {
+    if (isCountFromApplied) {
+      notes.push('Study activity, ratings and quiz figures count from ' + day(countFrom) + ', when the cookie banner began asking readers for analytics consent. Earlier records were made without that consent and include test visits, so they are left out.');
+    }
+    if (o.guestCutoff && activityFrom < String(o.guestCutoff)) {
       notes.push('Activity by guests (readers not signed in) is kept for 90 days, so guest activity before ' + day(o.guestCutoff) + ' has already been deleted and is missing from this report.');
     }
     return {
@@ -396,6 +406,7 @@
     const method = page(6, 'How these figures are counted', watermark +
       '<ul class="sid-list">' +
       '<li>Study activity is recorded only for readers who allow anonymous study analytics in the cookie banner. Readers who decline are not counted, so every study figure is a lower bound.</li>' +
+      '<li>Study activity, ratings and quiz figures start no earlier than 19 October 2026, the day the cookie banner began asking for consent. Records before then include test visits and are left out.</li>' +
       '<li>The project-target figures do not depend on the cookie banner. "Registered" counts accounts created in the period. "Began" counts those accounts that have answered every checkpoint question of at least one sitting correctly. Each answer is checked and recorded by the server, so it cannot be claimed from the reader\'s own browser. It is counted when the report is built, so it can rise after the period ends. Moderator accounts are left out.</li>' +
       '<li>A person is a signed-in account, or a browser for guests. Someone who reads on two devices without signing in counts twice.</li>' +
       '<li>Started and completed count each person once per sitting, however many times they return.</li>' +
