@@ -484,7 +484,7 @@
       return tile('Toward ' + num(COUNTER_TARGET), '—', 'verified count not available');
     }
     const detail = pct(began, COUNTER_TARGET) + '% of ' + num(COUNTER_TARGET) + ' · ' +
-      pct(began, SID_TARGET) + '% of the ' + num(SID_TARGET) + ' SID target · registered and began, all time';
+      pct(began, SID_TARGET) + '% of the ' + num(SID_TARGET) + ' SID target · registered and passed a sitting\'s checkpoints, all time';
     return tile('Toward ' + num(COUNTER_TARGET), num(began) + ' / ' + num(COUNTER_TARGET), detail);
   }
 

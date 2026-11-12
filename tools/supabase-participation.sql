@@ -19,9 +19,8 @@ begin
   return query
   select
     count(*)::integer,
-    count(*) filter (where public.exhibit_sittings_finished(p.journey) >= 1)::integer
+    count(*) filter (where public.exhibit_sittings_passed(u.id) >= 1)::integer
   from auth.users u
-  left join public.exhibit_progress p on p.user_id = u.id
   where u.created_at >= p_from
     and u.created_at < p_to
     and not exists (

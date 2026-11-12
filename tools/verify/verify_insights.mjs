@@ -597,6 +597,10 @@ const counterBroken = Dashboard.targetTile({ registered: 1, began: 'x' });
 assert(counterBroken.includes('verified count not available'), 'a malformed count is not shown');
 assert(/c\.rpc\('exhibit_participation', \{ p_from: ALL_TIME_FROM/.test(dashCode), 'the dashboard loads the all-time verified count');
 assert(/'<div class="insights-tiles">' \+\s*targetTile\(cache\.participation\) \+/.test(dashCode), 'the counter is the first dashboard tile');
+const participationSql = fs.readFileSync(path.join(ROOT, 'tools/supabase-participation.sql'), 'utf8');
+assert(/filter \(where public\.exhibit_sittings_passed\(u\.id\) >= 1\)/.test(participationSql), '"began" counts server-checked quiz passes');
+assert(!/journey/.test(participationSql), '"began" does not trust browser-written progress');
+assert(/if not public\.is_review_moderator\(\) then\s*raise exception/.test(participationSql), 'the participation function refuses non-moderators first');
 
 console.log('✓ All 6 check phases passed successfully!');
 process.exit(0);

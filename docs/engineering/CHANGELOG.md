@@ -14,6 +14,25 @@ Entry template:
 
 ---
 
+## 2026-11-12 — Count "began" from server-checked quiz answers
+
+**Why:** "Began" counted sittings marked complete in saved progress, which the browser writes. A script with a Google account could fake that and inflate the 500 and 700 figures.
+
+**What changed**
+
+- `tools/supabase-participation.sql`: "began" is now `exhibit_sittings_passed(u.id) >= 1`, meaning every checkpoint question of at least one sitting was answered correctly through `verify_quiz_answer()`. It no longer reads `exhibit_progress`.
+- `js/insights/sid-report.js` and `js/insights/insights.js`: the labels and the "How these figures are counted" line say so.
+- `tools/verify/verify_insights.mjs`: checks that the SQL counts quiz passes, never reads `journey`, and refuses non-moderators first. A mutation back to the old rule was caught.
+- Tested: `npx oxlint` exit 0; `npm run test:unit` 73 of 73; `npm test` exit 0; `npm run test:security` 22 of 22.
+- Run in the live database on 12 November 2026 ("Success. No rows returned"). A read-only check then showed: one `exhibit_participation` function, using `exhibit_sittings_passed` and not `journey`; `security definer`; `anon` cannot run it and `authenticated` can; a non-moderator call returns `42501`; `is_review_moderator()` still requires `aal2`; all 11 sittings have questions. Live counts, leaving out moderators: 4 accounts registered, 0 began under the old rule and 0 under the new one.
+- Not checked: the dashboard and report while signed in as a moderator.
+
+**Handbook updated:** 02.
+
+**Status:** committed and pushed to `master`; CI deploys it.
+
+---
+
 ## 2026-11-12 — 700 counter on the Study insights page
 
 **Why:** You want one verified number to watch: how many people have registered and begun the study, against a goal of 700.

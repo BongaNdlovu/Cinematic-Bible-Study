@@ -315,7 +315,7 @@
     if (!p) {
       return '<p class="sid-note">Registration figures are not available for this report.</p>';
     }
-    const beganLabel = 'registered and began the study (completed at least one sitting), against a target of ' + num(p.target);
+    const beganLabel = 'registered and began the study (passed every checkpoint question of at least one sitting), against a target of ' + num(p.target);
     return '<h3>Project target</h3>' +
       '<div class="sid-tiles sid-tiles-small">' +
       tile(count(p.registered), 'accounts registered in this period') +
@@ -396,7 +396,7 @@
     const method = page(6, 'How these figures are counted', watermark +
       '<ul class="sid-list">' +
       '<li>Study activity is recorded only for readers who allow anonymous study analytics in the cookie banner. Readers who decline are not counted, so every study figure is a lower bound.</li>' +
-      '<li>The project-target figures do not depend on the cookie banner. "Registered" counts accounts created in the period. "Began" counts those accounts whose saved progress shows at least one completed sitting when the report is built, so it can rise after the period ends. Moderator accounts are left out.</li>' +
+      '<li>The project-target figures do not depend on the cookie banner. "Registered" counts accounts created in the period. "Began" counts those accounts that have answered every checkpoint question of at least one sitting correctly. Each answer is checked and recorded by the server, so it cannot be claimed from the reader\'s own browser. It is counted when the report is built, so it can rise after the period ends. Moderator accounts are left out.</li>' +
       '<li>A person is a signed-in account, or a browser for guests. Someone who reads on two devices without signing in counts twice.</li>' +
       '<li>Started and completed count each person once per sitting, however many times they return.</li>' +
       '<li>Quiz figures use each reader\'s first answer to each question. Only signed-in readers can check answers.</li>' +
