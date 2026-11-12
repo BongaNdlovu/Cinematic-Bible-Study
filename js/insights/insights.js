@@ -811,15 +811,41 @@
   let loadAbort = null;
   let loadSlowTimer = 0;
 
+  const GATE_SIGN_IN = 'Sign in with the moderator account from the <a href="account.html?next=insights.html">Account</a> page to open this page.';
+  const GATE_SECOND_STEP = 'You are signed in. Enter the code from your authenticator app on the <a href="account.html?next=insights.html">Account</a> page to open this page.';
+  let gateGen = 0;
+
+  function needsSecondStep(c) {
+    const mfa = c && c.auth && c.auth.mfa;
+    const user = window.ScrollAuth && window.ScrollAuth.getUser && window.ScrollAuth.getUser();
+    if (!user || !mfa || typeof mfa.getAuthenticatorAssuranceLevel !== 'function') return Promise.resolve(false);
+    return Promise.resolve(mfa.getAuthenticatorAssuranceLevel()).then(function (res) {
+      const level = res && !res.error ? res.data : null;
+      if (!level) return false;
+      return level.nextLevel === 'aal2' && level.currentLevel !== 'aal2';
+    }, function () { return false; });
+  }
+
+  function explainGate(c, gate) {
+    const gen = ++gateGen;
+    gate.innerHTML = GATE_SIGN_IN;
+    return needsSecondStep(c).then(function (isSecondStep) {
+      if (gen !== gateGen || !isSecondStep) return;
+      gate.innerHTML = GATE_SECOND_STEP;
+    });
+  }
+
   function load() {
     const c = client();
     const gate = byId('insights-gate');
     const app = byId('insights-app');
     if (!c || !isMod()) {
-      if (gate) gate.hidden = false;
       if (app) app.hidden = true;
-      return;
+      if (!gate) return;
+      gate.hidden = false;
+      return explainGate(c, gate);
     }
+    gateGen++;
     if (gate) gate.hidden = true;
     if (app) app.hidden = false;
 

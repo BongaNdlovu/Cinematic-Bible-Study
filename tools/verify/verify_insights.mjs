@@ -530,6 +530,38 @@ global.document.getElementById = (id) => {
   if (id === 'insights-app') return insightsApp;
   return previousGetId ? previousGetId(id) : null;
 };
+const gateAuth = { ...global.window.ScrollAuth };
+const levelClient = (currentLevel, nextLevel) => ({
+  auth: { mfa: { getAuthenticatorAssuranceLevel: () => Promise.resolve({ data: { currentLevel, nextLevel }, error: null }) } }
+});
+global.window.ScrollAuth.isModerator = () => false;
+
+global.window.ScrollAuth.getUser = () => ({ id: 'mod-1' });
+global.window.ScrollAuth.getClient = () => levelClient('aal1', 'aal2');
+insightsGate.innerHTML = '';
+await Dashboard.load();
+assert.strictEqual(insightsGate.hidden, false, 'the gate shows for a session without moderator access');
+assert(insightsGate.innerHTML.includes('Enter the code from your authenticator app'), 'a signed-in session missing the authenticator step is told to enter its code');
+
+global.window.ScrollAuth.getClient = () => levelClient('aal2', 'aal2');
+await Dashboard.load();
+assert(insightsGate.innerHTML.startsWith('Sign in with the moderator account'), 'a session that already passed the authenticator is not told to enter a code');
+
+global.window.ScrollAuth.getClient = () => levelClient('aal1', 'aal1');
+await Dashboard.load();
+assert(insightsGate.innerHTML.startsWith('Sign in with the moderator account'), 'a signed-in reader with no authenticator keeps the plain sign-in message');
+
+global.window.ScrollAuth.getUser = () => null;
+global.window.ScrollAuth.getClient = () => levelClient('aal1', 'aal2');
+await Dashboard.load();
+assert(insightsGate.innerHTML.startsWith('Sign in with the moderator account'), 'a signed-out visitor keeps the sign-in message');
+
+global.window.ScrollAuth.getUser = () => ({ id: 'mod-1' });
+global.window.ScrollAuth.getClient = () => ({ auth: { mfa: { getAuthenticatorAssuranceLevel: () => Promise.reject(new Error('down')) } } });
+await Dashboard.load();
+assert(insightsGate.innerHTML.startsWith('Sign in with the moderator account'), 'a failed level check keeps the sign-in message');
+Object.assign(global.window.ScrollAuth, gateAuth);
+
 global.window.ScrollAuth.isModerator = () => true;
 global.window.ScrollAuth.getClient = () => ({
   from: () => ({

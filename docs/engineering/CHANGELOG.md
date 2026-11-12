@@ -14,6 +14,22 @@ Entry template:
 
 ---
 
+## 2026-11-13 — Clearer Study insights gate
+
+**Why:** A moderator signed in with Google but without the authenticator step was told to "Sign in", although they were signed in. Seen on the live site on 13 November 2026 (session `aal1`).
+
+**What changed**
+
+- `js/insights/insights.js`: when the page is gated, `explainGate()` asks Supabase for the session's assurance level. If the account has an authenticator but the session has not used it (`nextLevel` `aal2`, `currentLevel` not `aal2`), the gate says "You are signed in. Enter the code from your authenticator app on the Account page to open this page." Otherwise it keeps the sign-in message. A late answer from an older check cannot overwrite a newer one (`gateGen`).
+- `tools/verify/verify_insights.mjs`: five gate cases (second step needed, already `aal2`, no authenticator, signed out, failed check). Two mutations were caught.
+- Tested: `npx oxlint` exit 0; `npm run test:unit` 73 of 73; `npm test` exit 0; `npm run test:security` 22 of 22.
+
+**Handbook updated:** 06.
+
+**Status:** committed and pushed to `master`; CI deploys it.
+
+---
+
 ## 2026-11-12 — Count "began" from server-checked quiz answers
 
 **Why:** "Began" counted sittings marked complete in saved progress, which the browser writes. A script with a Google account could fake that and inflate the 500 and 700 figures.
