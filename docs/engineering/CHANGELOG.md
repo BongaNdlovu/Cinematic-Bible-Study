@@ -22,11 +22,11 @@ Entry template:
 
 - New `.github/workflows/db-backup.yml`: every Sunday at 03:00 UTC, or by hand, it runs `pg_dump` on the `public` schema and on the rows of `auth.users` and `auth.identities`. It encrypts the result with AES-256 and keeps it 90 days as an Actions artifact. A failed run opens a `ci-alert` issue. It needs two new repository secrets, `SUPABASE_DB_URL` and `BACKUP_PASSPHRASE`.
 - New `tools/export-all-tables.sql`: a hand-run SQL editor export of every `public` table plus `auth.users` and `auth.identities`, as one JSON snapshot.
-- Tested: the SQL on a local PGlite database, and the encrypt and decrypt round trip with `gpg`. Not checked: a real workflow run and `pg_dump` against the live database.
+- Tested: the SQL on a local PGlite database, the encrypt and decrypt round trip with `gpg`, and the export function in the live SQL editor (20 tables, row counts only). Not checked: a real workflow run and `pg_dump` against the live database.
 
 **Handbook updated:** 03, 04, 07.
 
-**Status:** not committed. The workflow does nothing useful until the two secrets are added.
+**Status:** committed on branch `add-db-backups`, not merged. The workflow can only be run once it is on `master` and the two secrets are added.
 
 ---
 

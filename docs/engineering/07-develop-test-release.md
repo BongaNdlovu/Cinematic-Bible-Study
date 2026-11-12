@@ -119,7 +119,7 @@ A failed run opens a `ci-alert` issue, as the health check does (`tools/ci/alert
 1. Open the Supabase SQL editor and run `tools/export-all-tables.sql`. It defines a temporary function in `pg_temp`, so nothing is left in the database.
 2. Save the `snapshot` cell as `backups/all-tables-<UTC time>.json`. The `backups/` folder is in `.gitignore`. The file holds user emails, so keep it off shared drives.
 
-Not checked: whether the SQL editor can show the whole snapshot once `exhibit_events` grows large. If it cuts off, use the weekly backup.
+On 12 November 2026 the snapshot was about 2.8 million characters. Not checked: whether the SQL editor lets you copy a cell that large in full. If the saved file does not end with `}`, it was cut off; use the weekly backup instead.
 
 ### Restoring
 
@@ -146,6 +146,7 @@ select * from jsonb_populate_recordset(null::public.exhibit_progress, '<the tabl
 
 - `tools/export-all-tables.sql` ran on a local PGlite database (Postgres in Node). It exported every `public` table, including an empty one, and `auth.users` and `auth.identities`. It skipped views and other `auth` tables. Text with quotes, `<`, `>` and `&` came back unchanged, and `jsonb_populate_recordset` turned the JSON back into the same row.
 - The encryption command from the workflow was run locally with `gpg`. Decrypting with the right passphrase gave back the file. A wrong passphrase failed (exit code 2).
+- The function in `tools/export-all-tables.sql` ran in the live SQL editor, with a final query that showed only row counts, not the data. It exported 20 tables: all 18 in `public`, plus `auth.users` (5 rows) and `auth.identities` (5 rows). The largest table was `exhibit_events` (8,600 rows). The whole snapshot was 2,814,727 characters.
 - Not checked: the workflow itself has not run yet, because it needs the two secrets. The `pg_dump` commands have not been run against the live database.
 
 ## Checklist for every change
