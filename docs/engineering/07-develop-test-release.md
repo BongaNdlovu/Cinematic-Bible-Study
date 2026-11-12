@@ -65,6 +65,10 @@ On a push to `master` only, after **test** passes:
 
 `.github/workflows/health.yml` runs the smoke test every 15 minutes, with the same alert and recovery issues.
 
+**Keep-alive.** The smoke test ends with one real database read: it calls the public function `exhibit_public_review_count` through the Supabase REST API with the publishable key, and expects a number back. Supabase pauses Free projects "after 1 week of inactivity" (`https://supabase.com/pricing`, read 12 November 2026), so a read every 15 minutes is meant to keep the project awake. Not checked: exactly which activity Supabase counts. The sign-in health URL alone may not touch the database, so it was not relied on.
+
+**Watch for:** GitHub turns off scheduled workflows in a public repository "when no repository activity has occurred in 60 days" (GitHub docs, "Disabling and enabling a workflow", read 12 November 2026). If the repo has no commits for 60 days, `health.yml` and `db-backup.yml` stop, and so does the keep-alive. Turn them back on from the Actions tab.
+
 `.github/workflows/db-backup.yml` backs up the database every week. See [Database backups](#database-backups).
 
 > **A push to `master` deploys to production.** Work on a branch until the change is ready.

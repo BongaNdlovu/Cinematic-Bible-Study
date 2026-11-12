@@ -1,5 +1,8 @@
 const SITE = String(process.argv[2] || process.env.SMOKE_BASE || 'https://cinematic-bible-study-daniel.pages.dev').replace(/\/$/, '');
-const AUTH_HEALTH = 'https://ttlrspnfadmxkoyqvofh.supabase.co/auth/v1/health';
+const SUPABASE_URL = 'https://ttlrspnfadmxkoyqvofh.supabase.co';
+const SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_k3fsJ1eGKIcmOxtmaZHbJw_R1qdW_ya';
+const AUTH_HEALTH = SUPABASE_URL + '/auth/v1/health';
+const DB_READ = SUPABASE_URL + '/rest/v1/rpc/exhibit_public_review_count';
 const PAGES = ['/', '/study', '/account', '/reviews', '/map', '/gallery', '/privacy', '/terms'];
 const PRIVATE = ['/docs/ARCHITECTURE.md', '/tests/unit/middleware.test.mjs', '/.git/config', '/wrangler.toml', '/server.py', '/tools/deploy-cloudflare-pages.ps1', '/functions/_middleware.js'];
 const HEADERS = {
@@ -54,6 +57,15 @@ record(rate.status === 403, 'rate proxy refuses callers without the secret', `HT
 
 const auth = await hit(AUTH_HEALTH);
 record(auth.status > 0 && auth.status < 500, 'sign-in service answers', `HTTP ${auth.status}`);
+
+const dbRead = await hit(DB_READ, {
+  method: 'POST',
+  headers: { apikey: SUPABASE_PUBLISHABLE_KEY, 'Content-Type': 'application/json' },
+  body: '{}'
+});
+const dbBody = dbRead.status === 200 ? (await dbRead.text()).trim() : '';
+const isCount = /^\d+$/.test(dbBody);
+record(dbRead.status === 200 && isCount, 'database answers a read', `HTTP ${dbRead.status}`);
 
 const failed = results.filter((r) => !r.ok);
 console.log(`\nsmoke ${SITE}: ${results.length - failed.length}/${results.length} passed`);

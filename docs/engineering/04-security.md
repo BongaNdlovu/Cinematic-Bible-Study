@@ -156,4 +156,4 @@ Function permissions checked live: guests (`anon`) **can** call `exhibit_public_
 |---|---|
 | `npm run test:security` | 22 attack-style checks (penetration audit) against the code and mocked services |
 | `npm test` | Includes CSP hashes and policy, private-path routing, rate limiting, quiz integrity and the desk privacy checks |
-| `node tools/smoke.mjs` | The live headers, the private paths and the `/__rate` refusal |
+| `node tools/smoke.mjs` | The live headers, the private paths, the `/__rate` refusal, and one public database read (the keep-alive) |

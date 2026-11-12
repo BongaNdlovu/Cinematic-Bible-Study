@@ -14,6 +14,23 @@ Entry template:
 
 ---
 
+## 2026-11-12 — Keep the Supabase project awake
+
+**Why:** Supabase pauses Free projects after 1 week of inactivity (`https://supabase.com/pricing`, read 12 November 2026). A pause takes sign-in and saving offline. Moving off Supabase is planned in `docs/MIGRATION-PLAN-CLOUDFLARE.md`, but that is large work; this stops the pausing now.
+
+**What changed**
+
+- `tools/smoke.mjs` now makes one real database read: `POST /rest/v1/rpc/exhibit_public_review_count` with the publishable key (the same public key as `functions/_middleware.js`). It passes only on `HTTP 200` with a number in the body. The smoke test runs every 15 minutes (`health.yml`) and after each deploy (`ci.yml`).
+- New `docs/MIGRATION-PLAN-CLOUDFLARE.md`: a plan only, for moving off Supabase onto Cloudflare. Nothing in it was carried out.
+- Tested: `node tools/smoke.mjs` against the live site, 22 of 22 passed, including "database answers a read (HTTP 200)". `npx oxlint` exit 0.
+- Not checked: exactly which activity Supabase counts against pausing.
+
+**Handbook updated:** 04, 07.
+
+**Status:** committed and pushed to `master`.
+
+---
+
 ## 2026-11-12 — Free full-database backups
 
 **Why:** The project is on the Supabase Free plan, which has no automatic backups. The only backup tool copied `exhibit_progress`, one of the 18 tables, and the last copy in `backups/` was from 26 September 2026. Upgrading to Pro is not affordable right now.
@@ -26,7 +43,7 @@ Entry template:
 
 **Handbook updated:** 03, 04, 07.
 
-**Status:** committed on branch `add-db-backups`, not merged. The workflow can only be run once it is on `master` and the two secrets are added.
+**Status:** merged and pushed to `master`. The workflow is active but does nothing useful until the two secrets are added.
 
 ---
 
