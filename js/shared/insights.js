@@ -27,6 +27,12 @@
     return false;
   }
 
+  function storedInt(raw) {
+    if (raw == null || String(raw).trim() === '') return null;
+    const n = Number(raw);
+    return Number.isInteger(n) ? n : null;
+  }
+
   function consented() {
     return !!(window.SODConsent && typeof window.SODConsent.has === 'function' && window.SODConsent.has('analytics'));
   }
@@ -120,42 +126,73 @@
     writeQueue(q);
   }
 
+  function readFlushWindow() {
+    let w = { posts: [], rows: [] };
+    try { w = JSON.parse(sessionStorage.getItem(FLUSH_WIN) || '{}') || {}; } catch (e) {}
+    return {
+      posts: Array.isArray(w.posts) ? w.posts : [],
+      rows: Array.isArray(w.rows) ? w.rows : []
+    };
+  }
+
   function takeFlushSlot(want) {
     const now = Date.now();
-    let w = { posts: [], rows: [] };
-    try { w = JSON.parse(sessionStorage.getItem(FLUSH_WIN) || '{}'); } catch (e) {}
-    const posts = (w.posts || []).filter(function (t) { return now - t < 60000; });
-    const rows = (w.rows || []).filter(function (t) { return now - t < 60000; });
-    if (posts.length >= POSTS_PER_MIN) return 0;
+    const w = readFlushWindow();
+    const posts = w.posts.filter(function (t) { return now - t < 60000; });
+    const rows = w.rows.filter(function (t) { return now - t < 60000; });
+    if (posts.length >= POSTS_PER_MIN) return { n: 0, at: now };
     const n = Math.min(want, BATCH, ROWS_PER_MIN - rows.length);
-    if (n <= 0) return 0;
+    if (n <= 0) return { n: 0, at: now };
     posts.push(now);
     for (let i = 0; i < n; i++) rows.push(now);
     try { sessionStorage.setItem(FLUSH_WIN, JSON.stringify({ posts: posts, rows: rows })); } catch (e) {}
-    return n;
+    return { n: n, at: now };
+  }
+
+  function refundFlushRows(at, n) {
+    const w = readFlushWindow();
+    let left = n;
+    const rows = [];
+    for (let i = 0; i < w.rows.length; i++) {
+      const isRefund = left > 0 && w.rows[i] === at;
+      if (isRefund) {
+        left--;
+        continue;
+      }
+      rows.push(w.rows[i]);
+    }
+    try { sessionStorage.setItem(FLUSH_WIN, JSON.stringify({ posts: w.posts, rows: rows })); } catch (e) {}
+  }
+
+  function readSurveyTimes() {
+    try {
+      const times = JSON.parse(localStorage.getItem(SURVEY_WIN) || '[]');
+      return Array.isArray(times) ? times : [];
+    } catch (e) {
+      return [];
+    }
+  }
+
+  function claimSurveySlot() {
+    const now = Date.now();
+    const times = readSurveyTimes().filter(function (t) { return now - t < 3600000; });
+    if (times.length >= SURVEY_PER_HOUR) return null;
+    let stamp = now;
+    while (times.indexOf(stamp) >= 0) stamp++;
+    times.push(stamp);
+    try { localStorage.setItem(SURVEY_WIN, JSON.stringify(times)); } catch (e) {}
+    return stamp;
   }
 
   function takeSurveySlot() {
-    const now = Date.now();
-    let times = [];
-    try {
-      times = JSON.parse(localStorage.getItem(SURVEY_WIN) || '[]');
-      if (!Array.isArray(times)) times = [];
-    } catch (e) { times = []; }
-    times = times.filter(function (t) { return now - t < 3600000; });
-    if (times.length >= SURVEY_PER_HOUR) return false;
-    times.push(now);
-    try { localStorage.setItem(SURVEY_WIN, JSON.stringify(times)); } catch (e) {}
-    return true;
+    return claimSurveySlot() !== null;
   }
 
-  function releaseSurveySlot() {
-    let times = [];
-    try {
-      times = JSON.parse(localStorage.getItem(SURVEY_WIN) || '[]');
-    } catch (e) { return; }
-    if (!Array.isArray(times) || !times.length) return;
-    times.pop();
+  function releaseSurveySlot(stamp) {
+    const times = readSurveyTimes();
+    const at = times.indexOf(stamp);
+    if (at < 0) return;
+    times.splice(at, 1);
     try { localStorage.setItem(SURVEY_WIN, JSON.stringify(times)); } catch (e) {}
   }
 
@@ -166,15 +203,21 @@
     const user = auth && auth.getUser && auth.getUser();
     const queued = readQueue();
     if (!client || !queued.length) return Promise.resolve();
-    const n = takeFlushSlot(Math.min(BATCH, queued.length));
-    if (!n) return Promise.resolve();
-    const batch = queued.slice(0, n);
+    const slot = takeFlushSlot(Math.min(BATCH, queued.length));
+    if (!slot.n) return Promise.resolve();
+    const batch = queued.slice(0, slot.n);
     flushing = true;
     return client.from(TABLE).insert(batch.map(function (row) {
       return Object.assign({ user_id: user ? user.id : null }, row);
     })).then(function (res) {
-      if (!res.error) writeQueue(readQueue().slice(batch.length));
-    }).catch(function () {}).then(function () {
+      if (res && !res.error) {
+        writeQueue(readQueue().slice(batch.length));
+        return;
+      }
+      refundFlushRows(slot.at, slot.n);
+    }).catch(function () {
+      refundFlushRows(slot.at, slot.n);
+    }).then(function () {
       flushing = false;
     });
   }
@@ -289,7 +332,8 @@
   function insertSurvey(row) {
     const pair = clientAndUser();
     if (!pair.client) return Promise.resolve({ ok: false, reason: 'no_client' });
-    if (!takeSurveySlot()) return Promise.resolve({ ok: false, reason: 'rate_limit' });
+    const stamp = claimSurveySlot();
+    if (stamp === null) return Promise.resolve({ ok: false, reason: 'rate_limit' });
     return pair.client.from('exhibit_surveys').insert(Object.assign({
       user_id: pair.user ? pair.user.id : null,
       anon_id: anonId(),
@@ -299,12 +343,12 @@
       responses: {}
     }, row)).then(function (res) {
       if (res && res.error) {
-        releaseSurveySlot();
+        releaseSurveySlot(stamp);
         return { ok: false, reason: 'error' };
       }
       return { ok: true };
     }).catch(function () {
-      releaseSurveySlot();
+      releaseSurveySlot(stamp);
       return { ok: false, reason: 'error' };
     });
   }
@@ -448,8 +492,8 @@
 
   function maybePulse(currentSheet) {
     let pending = null;
-    try { pending = Number(sessionStorage.getItem(PULSE_PENDING)); } catch (e) {}
-    if (!Number.isInteger(pending)) return;
+    try { pending = storedInt(sessionStorage.getItem(PULSE_PENDING)); } catch (e) {}
+    if (pending === null) return;
     if (Number.isInteger(currentSheet) && pending === currentSheet) return;
     showPulse(pending);
   }
@@ -567,12 +611,14 @@
     try {
       const u = new URL(location.href);
       const ref = String(u.searchParams.get('ref') || '').replace(/[^a-zA-Z0-9_-]/g, '').slice(0, 16);
-      const sitting = Number(u.searchParams.get('s'));
+      const sitting = storedInt(u.searchParams.get('s'));
       if (!ref) return;
       if (consented()) {
         localStorage.setItem(REF_BY, ref);
-        if (Number.isInteger(sitting) && sitting >= 0 && sitting <= 10) {
+        if (sitting !== null && sitting >= 0 && sitting <= 10) {
           localStorage.setItem(REF_SIT, String(sitting));
+        } else {
+          localStorage.removeItem(REF_SIT);
         }
       }
       u.searchParams.delete('ref');
@@ -618,16 +664,15 @@
     let sitting = null;
     try {
       ref = localStorage.getItem(REF_BY) || '';
-      const n = Number(localStorage.getItem(REF_SIT));
-      if (Number.isInteger(n)) sitting = n;
+      sitting = storedInt(localStorage.getItem(REF_SIT));
     } catch (e) {}
     if (!ref || ref === currentRefCode()) return;
     if (row && row.referred_by) return;
     const fields = { referred_by: ref };
-    if (Number.isInteger(sitting)) fields.referred_from_sitting = sitting;
+    if (sitting !== null) fields.referred_from_sitting = sitting;
     upsertProfile(fields);
     track('referral_signup', sitting, { ref: ref });
-    try { localStorage.removeItem(REF_BY); } catch (e) {}
+    try { localStorage.removeItem(REF_BY); localStorage.removeItem(REF_SIT); } catch (e) {}
     flush();
   }
 

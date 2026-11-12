@@ -75,7 +75,7 @@
 
     const done = function () {
       clearTimers();
-      if (external && typeof external.removeEventListener === "function" && !external.aborted) {
+      if (external && typeof external.removeEventListener === "function") {
         external.removeEventListener("abort", forward);
       }
     };

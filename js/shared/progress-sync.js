@@ -1,8 +1,3 @@
-/**
- * progress-sync.js
- * Supabase signed-in progress synchronization.
- * Merges journey, mastery, workbench verification, and cohort metadata with cloud state (pullAndMerge and atomic upsert).
- */
 (function () {
   'use strict';
 
@@ -10,6 +5,7 @@
   const ACCOUNT_KEY = 'baProgressAccountId';
   const OUTBOX_KEY = 'baProgressOutbox';
   const LAST_PUSH_KEY = 'baLastPushAt';
+  const STASH_PREFIX = 'baProgressStash:';
   const PUSH_GAP_MS = 6000;
   const SAVE_MISS = 'Your progress did not save. This device will keep trying.';
   const PULL_MISS = 'Your saved progress could not be loaded from the cloud. This device still has what it stored here.';
@@ -79,6 +75,31 @@
         window.dispatchEvent(new CustomEvent('ba-progress-synced'));
       }
     } catch (e) {}
+  }
+
+  function stashUnsentFor(ownerId) {
+    const stored = readOutbox();
+    if (!ownerId || !stored) return;
+    const payload = collectPayload() || stored.payload;
+    try { localStorage.setItem(STASH_PREFIX + ownerId, JSON.stringify(payload)); } catch (e) {}
+  }
+
+  function takeStashFor(ownerId) {
+    let stash = null;
+    try { stash = JSON.parse(localStorage.getItem(STASH_PREFIX + ownerId) || 'null'); } catch (e) { stash = null; }
+    const isStash = !!(stash && typeof stash === 'object' && !Array.isArray(stash));
+    if (!isStash) return null;
+    return stash;
+  }
+
+  function restoreStashFor(ownerId) {
+    const stash = takeStashFor(ownerId);
+    if (!stash) return false;
+    applyingMerge = true;
+    mergeCloudWithLocal(stash);
+    applyingMerge = false;
+    try { localStorage.removeItem(STASH_PREFIX + ownerId); } catch (e) {}
+    return true;
   }
 
   function clearLocalLearnerProgress() {
@@ -255,6 +276,11 @@
     })();
     const switched = !!(prev && uid && prev !== uid);
     if (switched) {
+      stashUnsentFor(prev);
+      if (retryTimer) clearTimeout(retryTimer);
+      retryTimer = null;
+      retryAttempt = 0;
+      clearSaveMiss();
       clearLocalLearnerProgress();
       knownRevision = null;
     }
@@ -286,7 +312,7 @@
           clearSaveMiss();
         }
         if (!remote) {
-          // New cloud row: do not carry another account's desk onto this login.
+          restoreStashFor(uid);
           if (switched) notifyProgressSynced();
           settleSync();
           syncNow();
@@ -295,15 +321,18 @@
 
         if (switched) {
           applyCloudProgress(remote);
+          const restoredOnSwitch = restoreStashFor(uid);
           notifyProgressSynced();
           settleSync();
-          if (readOutbox()) syncNow();
+          if (restoredOnSwitch || readOutbox()) syncNow();
           return remote;
         }
 
         applyingMerge = true;
-        const localHadNew = mergeCloudWithLocal(remote);
+        const mergedRemote = mergeCloudWithLocal(remote);
         applyingMerge = false;
+        const restored = restoreStashFor(uid);
+        const localHadNew = mergedRemote || restored;
 
         try {
           if (typeof window !== "undefined") {

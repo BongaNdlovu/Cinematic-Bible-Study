@@ -177,6 +177,7 @@
       if (!head && card.classList.contains("cardmin-clip")) head = card;
       if (!head) continue;
       if (head !== card) head.setAttribute("data-cardmin-head", "1");
+      card.querySelectorAll(":scope > .cardmin-btn").forEach(function (stale) { stale.remove(); });
       btn = document.createElement("button");
       btn.type = "button";
       btn.className = "cardmin-btn";

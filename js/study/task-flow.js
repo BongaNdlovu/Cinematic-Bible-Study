@@ -16,6 +16,7 @@
   let steps = [];
   let at = 0;
   let screen = 'closed';
+  let closeGen = 0;
   let returnFocus = null;
   let launcher = null;
   let launchStatus = null;
@@ -330,7 +331,14 @@
     if (!s) return false;
     if (!root) build();
     if (screen !== 'closed') return true;
-    returnFocus = document.activeElement;
+    const wasLeaving = root.classList.contains('is-leaving');
+    closeGen++;
+    if (wasLeaving) {
+      restoreAll();
+      stage.innerHTML = '';
+      root.classList.remove('is-leaving', 'is-intro', 'is-done', 'is-answered');
+    }
+    if (!wasLeaving || !returnFocus) returnFocus = document.activeElement;
     steps = planSteps(s);
     at = 0;
     root.hidden = false;
@@ -350,7 +358,9 @@
     document.removeEventListener('keydown', onKey, true);
     root.classList.remove('is-open');
     root.classList.add('is-leaving');
+    const gen = ++closeGen;
     const finish = () => {
+      if (gen !== closeGen || screen !== 'closed') return;
       restoreAll();
       stage.innerHTML = '';
       root.hidden = true;

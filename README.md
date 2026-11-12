@@ -27,7 +27,7 @@ Before committing JS, run `npm run lint`. CI runs the same command on every push
 
 ## Layout
 
-See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) for page-to-JS mapping and data flow.
+Start with the [engineering handbook](docs/engineering/README.md): purpose, how it works, project structure, security, performance, UI, and how to develop, test and release. Every change updates it and adds a line to [docs/engineering/CHANGELOG.md](docs/engineering/CHANGELOG.md). [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) keeps the older detailed tables.
 
 | Path | Purpose |
 |---|---|

@@ -381,6 +381,7 @@ import * as THREE from 'three';
 
     const hallTexCache = new Map();
     const HALL_CACHE_CAP = 4;
+    const TOUCH_DBLCLICK_ECHO_MS = 500;
     let hallCurrentUrl = '';
     let hallSlot = 0;
     let hallMixTarget = 0;
@@ -438,6 +439,10 @@ import * as THREE from 'three';
         hallTexCache.set(url, tex);
         trimHallCache(url);
         if (hallCurrentUrl === url) apply(tex);
+      }, undefined, () => {
+        if (hallCurrentUrl !== url) return;
+        hallCurrentUrl = '';
+        window.__hallUrl = '';
       });
     }
     const hallPending = new Set();
@@ -518,8 +523,11 @@ import * as THREE from 'three';
       const factor = ev.deltaY > 0 ? Math.pow(1.12, steps) : Math.pow(0.88, steps);
       dollyByFactor(factor, ev.clientX, ev.clientY);
     }, { passive: false, capture: true });
+    let lastTouchInspectAt = -Infinity;
     renderer.domElement.addEventListener('dblclick', (ev) => {
       ev.preventDefault();
+      const isTouchEcho = performance.now() - lastTouchInspectAt < TOUCH_DBLCLICK_ECHO_MS;
+      if (isTouchEcho) return;
       inspectAtPointer(ev.clientX, ev.clientY);
     });
     renderer.domElement.addEventListener('pointerup', (ev) => {
@@ -531,6 +539,7 @@ import * as THREE from 'three';
       const dbl = now - lastTap.t < 320 && Math.abs(ev.clientX - lastTap.x) + Math.abs(ev.clientY - lastTap.y) < 18;
       lastTap = { t: now, x: ev.clientX, y: ev.clientY };
       if (dbl && ev.pointerType !== 'mouse') {
+        lastTouchInspectAt = now;
         inspectAtPointer(ev.clientX, ev.clientY);
         return;
       }
@@ -3059,6 +3068,9 @@ import * as THREE from 'three';
     }
     function disposeGltfScene(model) {
       model.traverse((child) => {
+        if (child.userData && child.userData.origMat && typeof child.userData.origMat.dispose === 'function') {
+          child.userData.origMat.dispose();
+        }
         if (child.geometry) child.geometry.dispose();
         if (child.material) {
           const mats = Array.isArray(child.material) ? child.material : [child.material];
@@ -3365,6 +3377,7 @@ import * as THREE from 'three';
 
       loadGLBAsset(key, (sceneObj) => {
         if (key !== activeAssetKey) return;
+        releaseExhibitMaterials(singleModelContainer);
         singleModelContainer.clear();
         currentSingleModel = sceneObj;
         normalizePart(currentSingleModel, data.targetHeight || 2.35);
@@ -3579,6 +3592,7 @@ import * as THREE from 'three';
       const fullBodySource = loadedGLTFScenes['assembled'] || loadedGLTFScenes['full_body'];
       if (!fullBodySource) return;
 
+      releaseExhibitMaterials(assembledContainer);
       assembledContainer.clear();
       const fullBody = cloneExhibit(fullBodySource);
 
@@ -3707,10 +3721,23 @@ import * as THREE from 'three';
     }
     function replaceMeshMaterial(child, nextMat) {
       const prev = child.material;
-      if (prev && prev !== child.userData.origMat && prev !== nextMat) {
+      const ownsPrev = !!child.userData.ownsMaterial;
+      if (ownsPrev && prev && prev !== child.userData.origMat && prev !== nextMat) {
         disposeMaterial(prev);
       }
       child.material = nextMat;
+      child.userData.ownsMaterial = true;
+    }
+    function releaseExhibitMaterials(rootObj) {
+      if (!rootObj) return;
+      rootObj.traverse((child) => {
+        if (!child.isMesh || !child.userData) return;
+        const orig = child.userData.origMat;
+        if (child.userData.ownsMaterial && child.material !== orig) disposeMaterial(child.material);
+        if (orig) disposeMaterial(orig);
+        delete child.userData.origMat;
+        delete child.userData.ownsMaterial;
+      });
     }
     function applyStudyModeToMeshes(rootObj) {
       if (!rootObj) return;

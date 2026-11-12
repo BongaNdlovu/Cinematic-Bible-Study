@@ -605,6 +605,7 @@
     const db = client();
     if (!db || typeof db.rpc !== "function") {
       unlock(id);
+      disarmConfirms();
       setStatus("That could not be saved.");
       return;
     }
@@ -613,6 +614,7 @@
         unlock(id);
         if (!still(gen, uid)) return;
         if (!res || res.error) {
+          disarmConfirms();
           setStatus(plainError(res && res.error));
           return;
         }
@@ -621,7 +623,9 @@
         paintNotices();
       }, function () {
         unlock(id);
-        if (still(gen, uid)) setStatus("That could not be saved.");
+        if (!still(gen, uid)) return;
+        disarmConfirms();
+        setStatus("That could not be saved.");
       });
   }
 
@@ -632,12 +636,15 @@
     const uid = userId();
     if (!db || typeof db.from !== "function") {
       unlock("retract:" + id);
+      disarmConfirms();
+      setStatus("That could not be saved.");
       return;
     }
     db.from("exhibit_notices").delete().eq("id", id).then(function (res) {
       unlock("retract:" + id);
       if (!still(gen, uid)) return;
       if (!res || res.error) {
+        disarmConfirms();
         setStatus(plainError(res && res.error));
         return;
       }
@@ -646,7 +653,9 @@
       paintNotices();
     }, function () {
       unlock("retract:" + id);
-      if (still(gen, uid)) setStatus("That could not be saved.");
+      if (!still(gen, uid)) return;
+      disarmConfirms();
+      setStatus("That could not be saved.");
     });
   }
 
@@ -657,12 +666,15 @@
     const uid = userId();
     if (!db || typeof db.from !== "function") {
       unlock("help:" + id);
+      disarmConfirms();
+      setStatus("That could not be saved.");
       return;
     }
     db.from("exhibit_help_notes").delete().eq("id", id).then(function (res) {
       unlock("help:" + id);
       if (!still(gen, uid)) return;
       if (!res || res.error) {
+        disarmConfirms();
         setStatus(plainError(res && res.error));
         return;
       }
@@ -672,15 +684,28 @@
       paintInbox();
     }, function () {
       unlock("help:" + id);
-      if (still(gen, uid)) setStatus("That could not be saved.");
+      if (!still(gen, uid)) return;
+      disarmConfirms();
+      setStatus("That could not be saved.");
     });
   }
 
   function confirmOr(btn, prompt) {
     if (btn.getAttribute("data-confirm") === "yes") return true;
     btn.setAttribute("data-confirm", "yes");
+    btn.setAttribute("data-label", btn.textContent);
     btn.textContent = prompt;
     return false;
+  }
+
+  function disarmConfirms() {
+    if (!root) return;
+    root.querySelectorAll('[data-confirm="yes"]').forEach(function (btn) {
+      btn.removeAttribute("data-confirm");
+      const label = btn.getAttribute("data-label");
+      if (label) btn.textContent = label;
+      btn.removeAttribute("data-label");
+    });
   }
 
   function onPanelClick(event) {
@@ -867,10 +892,7 @@
 
   function onKey(event) {
     if (!open || event.key !== "Escape") return;
-    if (diagramOpen()) {
-      closeDesk();
-      return;
-    }
+    if (diagramOpen()) return;
     event.preventDefault();
     closeDesk();
   }

@@ -9,8 +9,15 @@
   let submitBusy = false;
   let flagBusy = false;
 
+  function localDay() {
+    const now = new Date();
+    const month = String(now.getMonth() + 1).padStart(2, "0");
+    const date = String(now.getDate()).padStart(2, "0");
+    return now.getFullYear() + "-" + month + "-" + date;
+  }
+
   function reviewDayCount() {
-    const day = new Date().toISOString().slice(0, 10);
+    const day = localDay();
     try {
       const s = JSON.parse(localStorage.getItem(REVIEW_DAY) || "{}");
       return s.d === day ? (s.n || 0) : 0;
@@ -20,7 +27,7 @@
   }
 
   function bumpReviewDay() {
-    const day = new Date().toISOString().slice(0, 10);
+    const day = localDay();
     try {
       localStorage.setItem(REVIEW_DAY, JSON.stringify({ d: day, n: reviewDayCount() + 1 }));
     } catch (e) {}
@@ -551,6 +558,19 @@
 
   let ownReviewId = null;
   let surveyRetry = null;
+  let ownReviewRetry = null;
+  let ownReviewAttempts = 0;
+  const OWN_REVIEW_WAITS = [10000, 20000, 40000, 60000];
+
+  function scheduleOwnReviewRetry() {
+    if (ownReviewRetry || ownReviewAttempts >= OWN_REVIEW_WAITS.length) return;
+    const wait = OWN_REVIEW_WAITS[ownReviewAttempts];
+    ownReviewAttempts += 1;
+    ownReviewRetry = setTimeout(function () {
+      ownReviewRetry = null;
+      if (signedIn()) loadOwnReview();
+    }, wait);
+  }
 
   function loadOwnReview() {
     const panel = document.getElementById("witness-own-review");
@@ -569,6 +589,11 @@
       .limit(1)
       .maybeSingle()
       .then(function (res) {
+        if (res && res.error) throw res.error;
+        ownReviewAttempts = 0;
+        const formStatus = document.getElementById("witness-status");
+        const isOwnCheckNotice = !!(formStatus && (formStatus.textContent || "").startsWith("Your note could not be checked"));
+        if (isOwnCheckNotice) setStatus("");
         const row = res && res.data;
         if (!row || !canEditReview(row)) {
           panel.hidden = true;
@@ -599,20 +624,19 @@
           row.rating || 5
         );
       }).catch(function (err) {
-        /* A network failure is not "no note yet" — inviting a fresh note here
-           would invite a duplicate. Keep both surfaces hidden, say so, and
-           re-check automatically when the connection returns. */
         panel.hidden = true;
         if (newCard) newCard.hidden = true;
         ownReviewId = null;
         const kind = window.SiteNet && typeof window.SiteNet.classify === "function"
           ? window.SiteNet.classify(err)
           : "client";
-        if (kind !== "offline" && kind !== "network" && kind !== "timeout" && kind !== "server") {
-          if (newCard) newCard.hidden = false;
+        const isTransient = kind === "offline" || kind === "network" || kind === "timeout" || kind === "server" || kind === "rate";
+        if (!isTransient) {
+          setStatus("Your note could not be checked just now. Reload the page to try again before writing a new one.", "error");
           return;
         }
         setStatus("Your note could not be checked just now. It is safe on the record — trying again shortly.", "error");
+        if (kind !== "offline") scheduleOwnReviewRetry();
       });
   }
 

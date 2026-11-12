@@ -1328,6 +1328,7 @@
     let timerDuration = 5 * 60; // default 5 minutes
     let timeRemaining = 5 * 60;
     let timerInterval = null;
+    let timerEndsAt = 0;
     let isTimerRunning = false;
     const RING_CIRCUMFERENCE = 427.26;
 
@@ -1553,18 +1554,25 @@
 
       startWeatherAnimation();
 
-      timerInterval = setInterval(() => {
-        if (timeRemaining > 0) {
-          timeRemaining--;
-          updateTimerDisplay();
-        } else {
-          completePomodoroSession();
-        }
-      }, 1000);
+      if (timeRemaining <= 0) timeRemaining = timerDuration;
+      timerEndsAt = Date.now() + timeRemaining * 1000;
+      timerInterval = setInterval(tickPomodoro, 1000);
       showToast("Exilic Study Focus Timer Started");
     }
 
+    function tickPomodoro() {
+      if (!isTimerRunning) return;
+      timeRemaining = Math.max(0, Math.ceil((timerEndsAt - Date.now()) / 1000));
+      updateTimerDisplay();
+      if (timeRemaining === 0) completePomodoroSession();
+    }
+
+    document.addEventListener('visibilitychange', () => {
+      if (document.visibilityState === 'visible') tickPomodoro();
+    });
+
     function pausePomodoro() {
+      if (isTimerRunning) timeRemaining = Math.max(0, Math.ceil((timerEndsAt - Date.now()) / 1000));
       isTimerRunning = false;
       clearInterval(timerInterval);
       const ping = document.getElementById('pomo-ping');
@@ -1590,6 +1598,7 @@
     function setPomodoroDuration(minutes) {
       timerDuration = minutes * 60;
       timeRemaining = timerDuration;
+      if (isTimerRunning) timerEndsAt = Date.now() + timerDuration * 1000;
       updateTimerDisplay();
       updateAutoWeather();
     }
@@ -2949,6 +2958,14 @@
       '</div>';
     }
 
+    function replayControlFor(figure) {
+      for (let node = figure ? figure.nextElementSibling : null; node; node = node.nextElementSibling) {
+        if (node.matches('figure.chain')) return null;
+        if (node.matches('[data-chain-replay]')) return node;
+      }
+      return null;
+    }
+
     function wireFigure(state) {
       // Shared shell: caption, collapse control, entrance animation, replay.
       // `figure` carries data-chain itself, so it is passed in rather than
@@ -2956,7 +2973,7 @@
       const figure = state.figure;
       const panel = figure.querySelector('.chain-body');
       const toggle = figure.querySelector('.chain-toggle');
-      const replay = state.replay || figure.parentNode.querySelector('[data-chain-replay]');
+      const replay = state.replay || replayControlFor(figure);
       if (!figure || !panel || !toggle || !replay) return;
 
       const reduce = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : null;
@@ -4138,16 +4155,10 @@
           figure.classList.add('is-visible');
         }
         void figure.offsetWidth;
-        /* The floating furniture is hidden by CSS while a layer is open (see
-           `body:has(.chain.is-full)`), so it cannot be pressed — but a hidden
-           control is still focusable. `inert` is what takes it out of the tab
-           order as well as the pointer's reach. The figure's own Replay control
-           is a sibling injected by the renderer and goes the same way; scoping it
-           to the figure's parent avoids reaching into anything else on the page. */
         document.querySelectorAll('.insight-card, .audio-orb').forEach((el) => {
           if (!el.hasAttribute('inert')) { el.setAttribute('inert', ''); el.setAttribute('data-dfx-inert', ''); }
         });
-        const replayBtn = figure.parentNode ? figure.parentNode.querySelector('[data-chain-replay]') : null;
+        const replayBtn = replayControlFor(figure);
         if (replayBtn && !replayBtn.hasAttribute('inert')) {
           replayBtn.setAttribute('inert', '');
           replayBtn.setAttribute('data-dfx-inert', '');
@@ -5287,7 +5298,8 @@
       // Start sheet competency telemetry timer and record sheet passage
       if (window.StudyCompetency) {
         window.StudyCompetency.startSheetTimer(index);
-        const pass = (data && data.scripture) || `Sheet ${index}`;
+        const scriptureRef = document.getElementById('sheet-scripture-ref');
+        const pass = (scriptureRef && scriptureRef.textContent.trim()) || `Sheet ${index}`;
         window.StudyCompetency.recordScriptureLookup(pass);
       }
 
@@ -5641,11 +5653,16 @@
       }
 
       const gate = window.QuizGate && typeof window.QuizGate.verify === 'function' ? window.QuizGate : null;
+      const askedSheet = currentSheetIndex;
+      const askedTicket = sheetLoadTicket;
+      const askedAnswers = verifiedQuiz;
       const call = gate
-        ? gate.verify(currentSheetIndex, qIdx, selectedOptIdx)
+        ? gate.verify(askedSheet, qIdx, selectedOptIdx)
         : Promise.resolve({ ok: false, error: 'not_authenticated' });
 
       call.then(function (res) {
+        const isStale = askedTicket !== sheetLoadTicket || askedSheet !== currentSheetIndex || askedAnswers !== verifiedQuiz;
+        if (isStale) return;
         quizPending[qIdx] = false;
         if (!res || !res.ok) {
           const cause = (res && res.error) || 'error';

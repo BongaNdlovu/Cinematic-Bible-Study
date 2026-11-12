@@ -1474,15 +1474,15 @@
     /* ── observers and lifecycle ───────────────────────────────────────── */
 
     function observe() {
-      /* The figure's own Replay control is reused (C19), so the block needs no
-         third pill for the most common action. renderSheetDiagrams inserts one
-         button per figure, immediately after it: take that one, not the first
-         one in the article, which belongs to an earlier diagram. */
       const figure = host.closest ? host.closest('figure.chain') : null;
-      const sibling = figure ? figure.nextElementSibling : null;
-      replayEl = sibling && sibling.matches && sibling.matches('[data-chain-replay]')
-        ? sibling
-        : (figure && figure.parentNode ? figure.parentNode.querySelector('[data-chain-replay]') : null);
+      replayEl = null;
+      for (let node = figure ? figure.nextElementSibling : null; node; node = node.nextElementSibling) {
+        if (node.matches('figure.chain')) break;
+        if (node.matches('[data-chain-replay]')) {
+          replayEl = node;
+          break;
+        }
+      }
       if (replayEl) replayEl.addEventListener('click', onReplay);
 
       observers = [];

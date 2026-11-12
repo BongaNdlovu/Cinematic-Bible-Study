@@ -99,6 +99,7 @@
 
   function schedule() {
     clearTimeout(timer);
+    finishFade();
     if (stopped()) return;
     timer = setTimeout(advance, SHOW_MS);
   }
@@ -113,11 +114,21 @@
     }
     card.classList.add("is-fading");
     timer = setTimeout(function () {
-      idx = (idx + 1) % items.length;
-      render(items[idx]);
-      card.classList.remove("is-fading");
+      finishFade();
       schedule();
     }, FADE_MS);
+  }
+
+  function finishFade() {
+    if (!card || !card.classList.contains("is-fading")) return;
+    idx = (idx + 1) % items.length;
+    render(items[idx]);
+    card.classList.remove("is-fading");
+  }
+
+  function holdNote() {
+    hovering = true;
+    schedule();
   }
 
   function useReviews(rows) {
@@ -156,9 +167,9 @@
     render(items[idx]);
     card.hidden = false;
 
-    card.addEventListener("mouseenter", function () { hovering = true; clearTimeout(timer); });
+    card.addEventListener("mouseenter", holdNote);
     card.addEventListener("mouseleave", function () { hovering = false; schedule(); });
-    card.addEventListener("focusin", function () { hovering = true; clearTimeout(timer); });
+    card.addEventListener("focusin", holdNote);
     card.addEventListener("focusout", function () { hovering = false; schedule(); });
     document.addEventListener("visibilitychange", schedule);
     if (pauseBtn) pauseBtn.addEventListener("click", function () { setPaused(!userPaused); });

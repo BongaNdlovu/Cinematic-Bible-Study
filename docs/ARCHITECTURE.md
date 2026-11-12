@@ -1,6 +1,8 @@
 # Architecture
 
-The Shelf of Daniel is four static pages at the repo root. Python `server.py` is the only runtime. There is no bundler. Course-content work lives in [COURSE_IMPROVEMENT_PLAN.md](COURSE_IMPROVEMENT_PLAN.md); this file answers “where does X live?”
+> **Start with the [engineering handbook](engineering/README.md).** It is the maintained description of the whole site. This file is kept for its detailed tables. Where the two disagree, the handbook wins. Some statements here are older: the site now has 11 pages, a Cloudflare Pages Functions middleware, and a rate-limit Worker, and moderators need an authenticator app.
+
+The pages are static files at the repo root. Locally, Python `server.py` serves them. There is no bundler. Course-content work lives in [COURSE_IMPROVEMENT_PLAN.md](COURSE_IMPROVEMENT_PLAN.md); this file answers “where does X live?”
 
 ## Pages → scripts
 

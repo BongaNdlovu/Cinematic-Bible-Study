@@ -1,10 +1,4 @@
-/**
- * study-sync.js
- * Supabase signed-in sync for per-sheet study notes (frozen keys baNote-*) and
- * bookmarks (frozen key baStudyBookmarks). Pull-and-merge on sign-in, debounced
- * pushes with an outbox — the same contract as progress-sync.js, minus the
- * revision conflicts (per-sheet newest-timestamp wins, bookmarks union).
- */
+/* baNote-* and baStudyBookmarks are frozen storage keys. */
 (function () {
   'use strict';
 
@@ -15,6 +9,7 @@
   const ACCOUNT_KEY = 'baStudySyncAccountId';
   const OUTBOX_KEY = 'baStudySyncOutbox';
   const LAST_PUSH_KEY = 'baStudySyncLastPushAt';
+  const STASH_PREFIX = 'baStudySyncStash:';
   const PUSH_GAP_MS = 6000;
   const RETRY_WAITS = [7000, 15000, 30000];
   const MAX_RETRIES = 5;
@@ -290,6 +285,22 @@
     return wrote;
   }
 
+  function stashUnsentFor(accountId) {
+    if (!accountId || !readOutbox()) return;
+    writeJson(STASH_PREFIX + accountId, collectPayload());
+  }
+
+  function takeStashFor(accountId) {
+    const stash = readJson(STASH_PREFIX + accountId, null);
+    const isStash = !!(stash && typeof stash === 'object' && stash.notes && typeof stash.notes === 'object');
+    if (!isStash) return null;
+    return stash;
+  }
+
+  function dropStashFor(accountId) {
+    try { localStorage.removeItem(STASH_PREFIX + accountId); } catch (e) {}
+  }
+
   function clearLocalStudyData() {
     noteSheets().forEach(function (id) {
       try { localStorage.removeItem(NOTE_PREFIX + id); } catch (e) {}
@@ -433,7 +444,11 @@
     let prev = '';
     try { prev = localStorage.getItem(ACCOUNT_KEY) || ''; } catch (e) {}
     const switched = !!(prev && prev !== uid);
-    if (switched) clearLocalStudyData();
+    if (switched) {
+      stashUnsentFor(prev);
+      clearLocalStudyData();
+      clearOutbox();
+    }
     try { localStorage.setItem(ACCOUNT_KEY, uid); } catch (e) {}
 
     isSyncing = true;
@@ -454,8 +469,18 @@
         }
         pulledFor = uid;
         stopPullRetry();
-        const merged = mergePayload(collectPayload(), res && res.data);
+        const stash = takeStashFor(uid);
+        let local = collectPayload();
+        if (stash) {
+          const restored = mergePayload(local, stash);
+          local = { notes: restored.notes, bookmarks: restored.bookmarks };
+        }
+        const merged = mergePayload(local, res && res.data);
         const wroteLocal = applyMerged(merged);
+        if (stash) {
+          dropStashFor(uid);
+          storeOutbox();
+        }
         if (wroteLocal) notifyStudySynced();
         if (merged.localHadNew || readOutbox() || pushAfterSync) {
           pushAfterSync = false;

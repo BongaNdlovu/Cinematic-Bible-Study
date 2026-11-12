@@ -16,8 +16,11 @@
     analytics = false;
   }
 
-  var integrations = [window.Sentry.browserTracingIntegration()];
-  if (analytics) {
+  var integrations = [];
+  if (typeof window.Sentry.browserTracingIntegration === "function") {
+    integrations.push(window.Sentry.browserTracingIntegration());
+  }
+  if (analytics && typeof window.Sentry.feedbackIntegration === "function") {
     integrations.push(window.Sentry.feedbackIntegration({ colorScheme: "system", showName: false, showEmail: false }));
   }
 

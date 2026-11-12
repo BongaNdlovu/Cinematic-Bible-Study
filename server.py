@@ -12,8 +12,22 @@ import threading
 import webbrowser
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 
-PORT = int(os.environ.get("PORT", "8000"))
+DEFAULT_PORT = 8000
+PORT_ATTEMPTS = 10
 HOST = "127.0.0.1"
+
+
+def read_port():
+    raw = os.environ.get("PORT", "").strip()
+    if not raw:
+        return DEFAULT_PORT
+    if not raw.isdigit() or not 1 <= int(raw) <= 65535:
+        print(f"PORT={raw!r} is not a port number; using {DEFAULT_PORT}.")
+        return DEFAULT_PORT
+    return int(raw)
+
+
+PORT = read_port()
 
 ALLOWED_EXTENSIONS = {
     ".html", ".css", ".js", ".mjs", ".json", ".geojson", ".map",
@@ -62,8 +76,17 @@ class NebuchadnezzarHTTPHandler(SimpleHTTPRequestHandler):
             return MIME_TYPES[ext]
         return super().guess_type(path)
 
+    def allowed_origin(self):
+        port = str(self.server.server_address[1])
+        local_origins = ("http://127.0.0.1:" + port, "http://localhost:" + port)
+        origin = self.headers.get("Origin", "")
+        if origin in local_origins:
+            return origin
+        return local_origins[0]
+
     def end_headers(self):
-        self.send_header("Access-Control-Allow-Origin", "http://127.0.0.1:" + str(self.server.server_address[1]))
+        self.send_header("Access-Control-Allow-Origin", self.allowed_origin())
+        self.send_header("Vary", "Origin")
         self.send_header("Access-Control-Allow-Methods", "GET, HEAD, OPTIONS")
         self.send_header("Cache-Control", "no-cache")
         self.send_header("Accept-Ranges", "bytes")
@@ -177,13 +200,16 @@ class NebuchadnezzarHTTPHandler(SimpleHTTPRequestHandler):
         sys.stdout.flush()
 
 
-def find_open_port(starting_port=8000, max_attempts=10):
+def find_open_port(starting_port=DEFAULT_PORT, max_attempts=PORT_ATTEMPTS):
     import socket
-    for p in range(starting_port, starting_port + max_attempts):
+    for p in range(starting_port, min(starting_port + max_attempts, 65536)):
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-            if s.connect_ex((HOST, p)) != 0:
-                return p
-    return starting_port
+            try:
+                s.bind((HOST, p))
+            except OSError:
+                continue
+            return p
+    return None
 
 
 class NebuchadnezzarHTTPServer(ThreadingHTTPServer):
@@ -199,7 +225,15 @@ def run_server():
     except (ValueError, RuntimeError):
         pass
     port = find_open_port(PORT)
-    server = NebuchadnezzarHTTPServer((HOST, port), NebuchadnezzarHTTPHandler)
+    if port is None:
+        last = min(PORT + PORT_ATTEMPTS, 65536) - 1
+        print(f"Ports {PORT}-{last} are all in use. Close the other server, or set PORT to a free port, and try again.")
+        sys.exit(1)
+    try:
+        server = NebuchadnezzarHTTPServer((HOST, port), NebuchadnezzarHTTPHandler)
+    except OSError as err:
+        print(f"Could not start the server on port {port}: {err.strerror or err}. Set PORT to a free port and try again.")
+        sys.exit(1)
     url = f"http://127.0.0.1:{port}/index.html"
 
     print("=" * 66)

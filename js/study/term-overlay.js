@@ -13,7 +13,7 @@
   var overlay = null;
   var lastTrigger = null;
   var historyPushed = false;
-  var suppressPopstate = false;
+  var closingNode = null;
   var backPending = false;
 
   var CSS = [
@@ -414,7 +414,8 @@
 
   function open(payload, trigger) {
     ensureCss();
-    if (overlay) close(true);
+    if (overlay && backPending) teardown();
+    else if (overlay) close(true);
     lastTrigger = trigger || (document.activeElement && document.activeElement.closest ? document.activeElement : null) || null;
 
     var sides;
@@ -481,16 +482,22 @@
   }
 
   function onPopstate() {
-    if (suppressPopstate) { suppressPopstate = false; historyPushed = false; return; }
-    if (overlay) { historyPushed = false; backPending = false; teardown(); }
+    var isReopened = !!(overlay && backPending && closingNode && overlay !== closingNode);
+    closingNode = null;
+    backPending = false;
+    historyPushed = false;
+    if (isReopened) {
+      try { history.pushState({ termPage: true }, '', location.href); historyPushed = true; } catch (e) {}
+      return;
+    }
+    if (overlay) teardown();
   }
 
   function close(fromHistory) {
     if (!overlay || backPending) return;
     if (historyPushed && !fromHistory) {
-      // Route through history so the browser Back press and the button behave
-      // the same way; popstate performs the actual teardown.
       backPending = true;
+      closingNode = overlay;
       history.back();
       return;
     }

@@ -61,12 +61,32 @@
     saveTelemetry(tel);
   }
 
+  const PASSAGE_ENTITIES = { '&bull;': '•', '&amp;': '&', '&nbsp;': ' ', '&ndash;': '–', '&mdash;': '—' };
+
+  function plainPassage(passage) {
+    return String(passage == null ? '' : passage)
+      .replace(/<[^>]*>/g, '')
+      .replace(/&[a-z]+;/g, (entity) => PASSAGE_ENTITIES[entity] || entity)
+      .replace(/\s+/g, ' ')
+      .trim();
+  }
+
+  function uniquePassages(list) {
+    const seen = [];
+    for (const item of Array.isArray(list) ? list : []) {
+      const plain = plainPassage(item);
+      if (!plain || seen.includes(plain)) continue;
+      seen.push(plain);
+    }
+    return seen;
+  }
+
   function recordScriptureLookup(passage) {
     const tel = getTelemetry();
-    if (!tel.scriptureLookups) tel.scriptureLookups = [];
-    if (!tel.scriptureLookups.includes(passage)) {
-      tel.scriptureLookups.push(passage);
-    }
+    const lookups = uniquePassages(tel.scriptureLookups);
+    const plain = plainPassage(passage);
+    if (plain && !lookups.includes(plain)) lookups.push(plain);
+    tel.scriptureLookups = lookups;
     saveTelemetry(tel);
   }
 
@@ -130,7 +150,7 @@
       (typeof window.ScrollAuth.isAdmin === "function" && window.ScrollAuth.isAdmin())
       || (typeof window.ScrollAuth.isModerator === "function" && window.ScrollAuth.isModerator())
     ));
-    const hasChosen = localStorage.getItem(TRACK_KEY);
+    const hasChosen = readStoredText(TRACK_KEY, null);
     if (admin && !forceOpen) {
       const existing = document.getElementById("placement-modal");
       if (existing) existing.remove();
@@ -223,18 +243,40 @@
     });
   }
 
+  function readStoredText(key, fallback) {
+    try {
+      const raw = localStorage.getItem(key);
+      return raw == null ? fallback : raw;
+    } catch (e) {
+      return fallback;
+    }
+  }
+
+  function readStoredJson(key, fallback, unreadable) {
+    const raw = readStoredText(key, null);
+    if (raw == null || raw === '') return fallback;
+    try {
+      return JSON.parse(raw);
+    } catch (e) {
+      unreadable.push(key);
+      return undefined;
+    }
+  }
+
   function exportProgress() {
+    const unreadable = [];
     const payload = {
-      baJourney: JSON.parse(localStorage.getItem('baJourney') || '{}'),
-      daniel_historicist_mastery: JSON.parse(localStorage.getItem('daniel_historicist_mastery') || '[]'),
-      daniel_competency_telemetry_v1: JSON.parse(localStorage.getItem('daniel_competency_telemetry_v1') || '{}'),
-      daniel_workbench_v1: JSON.parse(localStorage.getItem('daniel_workbench_v1') || '{}'),
-      daniel_capstone_mastery_v1: JSON.parse(localStorage.getItem('daniel_capstone_mastery_v1') || 'null'),
-      daniel_certificate_name: localStorage.getItem('daniel_certificate_name') || '',
-      daniel_placement_track_v1: localStorage.getItem('daniel_placement_track_v1') || 'foundations',
+      baJourney: readStoredJson('baJourney', {}, unreadable),
+      daniel_historicist_mastery: readStoredJson('daniel_historicist_mastery', [], unreadable),
+      daniel_competency_telemetry_v1: readStoredJson('daniel_competency_telemetry_v1', {}, unreadable),
+      daniel_workbench_v1: readStoredJson('daniel_workbench_v1', {}, unreadable),
+      daniel_capstone_mastery_v1: readStoredJson('daniel_capstone_mastery_v1', null, unreadable),
+      daniel_certificate_name: readStoredText('daniel_certificate_name', '') || '',
+      daniel_placement_track_v1: readStoredText('daniel_placement_track_v1', '') || 'foundations',
       exportedAt: new Date().toISOString(),
       version: 1
     };
+    if (unreadable.length) payload.unreadable = unreadable;
     const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
@@ -244,6 +286,9 @@
     a.click();
     a.remove();
     setTimeout(() => URL.revokeObjectURL(url), 1000);
+    if (unreadable.length && window.SiteErrors && typeof window.SiteErrors.show === 'function') {
+      window.SiteErrors.show('Your backup was saved, but some progress on this device could not be read and was left out.', 'storage');
+    }
   }
 
   function importProgress(file) {
@@ -309,7 +354,7 @@
     const tel = getTelemetry();
     const track = getTrack();
     const verifiedCount = (tel.verifiedArtifacts || []).length;
-    const lookupsCount = (tel.scriptureLookups || []).length;
+    const lookupsCount = uniquePassages(tel.scriptureLookups).length;
 
     // Calculate total time
     let totalSec = 0;

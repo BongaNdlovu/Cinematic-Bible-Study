@@ -6,6 +6,7 @@
   }
 
   const REDUCE = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const FLIGHT_FALLBACK_MS = 2_600;
   const BASE_STORE = "baMapBasemap";
   const SYMBOLS = {
     head: "Golden Head",
@@ -233,6 +234,7 @@
       yearId: opts.year || DATA.epochs[0].id,
       polities: null,
       yearGen: 0,
+      flightGen: 0,
       base: "satellite",
       lmap: null,
       geoLayer: null,
@@ -589,8 +591,11 @@
         }
         return;
       }
-      if (isEvent && item.yearId !== state.yearId && !isLessonId(item.id)) {
+      const isOtherYear = isEvent && item.yearId !== state.yearId && !isLessonId(item.id);
+      if (isOtherYear) {
         setYear(item.yearId, { animate: true, chapter: cinematic, open: false });
+        openDossier(markerCopy(item, isEvent), { keepYearFlight: true });
+        return;
       }
       openDossier(markerCopy(item, isEvent));
     }
@@ -610,8 +615,26 @@
       }
       if (!state.lmap) { hideBadge(); return Promise.resolve(); }
       if (animate && !REDUCE) {
-        state.lmap.flyTo([lat, lon], z, { duration: 1.55, easeLinearity: 0.2 });
-        return new Promise((resolve) => state.lmap.once("moveend", () => { hideBadge(); resolve(); }));
+        const flight = ++state.flightGen;
+        const map = state.lmap;
+        map.flyTo([lat, lon], z, { duration: 1.55, easeLinearity: 0.2 });
+        return new Promise((resolve) => {
+          let fallback = 0;
+          const settle = () => {
+            map.off("moveend", onEnd);
+            clearTimeout(fallback);
+            if (flight === state.flightGen) hideBadge();
+            resolve();
+          };
+          const onEnd = () => {
+            const isSuperseded = flight !== state.flightGen;
+            const center = map.getCenter();
+            const isArrived = Math.abs(center.lat - lat) < 0.01 && Math.abs(center.lng - lon) < 0.01 && map.getZoom() === z;
+            if (isSuperseded || isArrived) settle();
+          };
+          map.on("moveend", onEnd);
+          fallback = setTimeout(settle, FLIGHT_FALLBACK_MS);
+        });
       }
       state.lmap.setView([lat, lon], z, { animate: false });
       hideBadge();
@@ -671,10 +694,11 @@
       dossier.classList.remove("open");
     }
 
-    function openDossier(d) {
+    function openDossier(d, dossierOpts) {
       const pin = d.kind !== "epoch" && !d.routeStop;
+      const keepYearFlight = !!(dossierOpts && dossierOpts.keepYearFlight);
       if (window.Insights && pin) window.Insights.track('map_pin', state.sheetIndex, { id: d.id || d.title || '' });
-      if (d.kind !== "epoch") state.yearGen++;
+      if (d.kind !== "epoch" && !keepYearFlight) state.yearGen++;
       dropEventParam(pin ? d.id : null);
       const ep = currentEpoch();
       const studyHref = "study.html?id=" + ep.studySheet;

@@ -949,9 +949,20 @@
   }
 
   function closeReport() {
+    reportGen++;
+    setBuilding(false);
     const pages = byId('sid-pages');
     document.body.classList.remove('sid-open');
     if (pages) pages.innerHTML = '';
+  }
+
+  let reportGen = 0;
+
+  function setBuilding(on) {
+    const go = byId('sid-build');
+    if (!go) return;
+    go.disabled = on;
+    go.setAttribute('aria-busy', on ? 'true' : 'false');
   }
 
   function buildReport() {
@@ -969,8 +980,11 @@
     }
     const fromIso = from + 'T00:00:00.000Z';
     const toIso = new Date(Date.parse(to + 'T00:00:00.000Z') + 86400000).toISOString();
+    const gen = ++reportGen;
     reportStatus('Building the report…');
+    setBuilding(true);
     return loadRange(fromIso, toIso).then(function (data) {
+      if (gen !== reportGen) return;
       const guestCutoff = new Date(Date.now() - 90 * 86400000).toISOString();
       const figures = window.SidReport.build(data, { from: fromIso, to: toIso, guestCutoff: guestCutoff, exclude: ownActivity(data.events) });
       const pages = byId('sid-pages');
@@ -980,7 +994,10 @@
       window.scrollTo(0, 0);
       reportStatus('');
     }).catch(function () {
+      if (gen !== reportGen) return;
       reportStatus('Could not load the data for the report. Try again.');
+    }).then(function () {
+      if (gen === reportGen) setBuilding(false);
     });
   }
 
