@@ -27,7 +27,9 @@ Entry template:
 
 **Handbook updated:** 04, 07.
 
-**Status:** committed and pushed to `master`. The SQL has **not** been run in the live database yet: it permanently deletes 1,328 events and 117 surveys, so it waits for your go-ahead.
+- Run in the live database on 13 November 2026, with the owner's go-ahead. Supabase showed its "destructive operations" warning, which was confirmed. The cron job was created (job id 2). The first run returned `deleted_events=1328 ; deleted_surveys=117`, the same as the count beforehand. A read-only check afterwards: 0 test events and 0 test surveys left; 7,591 events and 21 surveys in total (2 new events arrived between the counts); job `exhibit-prune-test-rows`, `23 * * * *`, active; neither `anon` nor `authenticated` can run the function; 22 people started a sitting since 19 October 2026, the same as before.
+
+**Status:** committed, pushed to `master`, and run in the live database.
 
 ---
 
