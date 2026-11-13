@@ -101,8 +101,9 @@ async function post() {
   const all = new Set([...Object.keys(B), ...Object.keys(cur)]);
   const changedNow = [...all].filter(f => B[f] !== cur[f]).sort();
   check('S1', `exactly these files changed: ${E.changed.join(', ')}`, JSON.stringify(changedNow) === JSON.stringify(E.changed), `changed/added/removed now: ${changedNow.join(', ') || '(none)'}`);
-  const missing = Object.keys(B).filter(f => !(f in cur)), added = Object.keys(cur).filter(f => !(f in B));
-  check('S2', 'no file was added or deleted', !missing.length && !added.length, `missing: ${missing.join(', ') || '-'}; added: ${added.join(', ') || '-'}`);
+  const declaredNew = new Set(C.generated || []);
+  const missing = Object.keys(B).filter(f => !(f in cur)), added = Object.keys(cur).filter(f => !(f in B) && !declaredNew.has(f));
+  check('S2', 'no file was added or deleted, apart from the declared new generated files', !missing.length && !added.length, `missing: ${missing.join(', ') || '-'}; added: ${added.join(', ') || '-'}`);
   for (const f of E.changed) check(`X-${f}`, `${f} is byte-identical to the dry-run result (${(A[f] || 'deleted').slice(0, 12)}…)`, cur[f] === A[f], `got ${(cur[f] || 'missing').slice(0, 12)}…`);
   const others = Object.keys(B).filter(f => !E.changed.includes(f));
   const drift = others.filter(f => cur[f] !== B[f]);

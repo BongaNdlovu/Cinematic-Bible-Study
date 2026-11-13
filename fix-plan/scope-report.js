@@ -33,6 +33,8 @@ console.log('1. SCOPE (the only files the plan may change)');
 for (const [tier, files] of [['edited', C.edited], ['generated', C.generated || []]]) {
   for (const f of files) {
     const t = read(f);
+    const isNewGenerated = tier === 'generated' && E && !(f in E.baselineManifest);
+    if (t === null && isNewGenerated) { console.log(`  [${tier}] ${f}: not there yet; a NEW file the generate step creates`); continue; }
     if (t === null) { issues.push(`${f} does not exist`); console.log(`  [${tier}] ${f}: MISSING`); continue; }
     const h = L.sha(fs.readFileSync(path.join(root, f)));
     const state = !E ? 'no expected.json' : h === E.baselineManifest[f] ? 'matches the planned BASELINE' : h === E.afterManifest[f] ? 'matches the planned RESULT' : 'matches NEITHER baseline nor result';

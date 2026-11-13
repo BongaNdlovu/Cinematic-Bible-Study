@@ -14,6 +14,29 @@ Entry template:
 
 ---
 
+## 2026-11-13 — Guest human check (Turnstile)
+
+**Why:** You asked for real bot protection. Any script with the public key could write guest study events and surveys; only rate limits stood in the way. Turnstile only protects anything when a server checks it.
+
+**What changed** (gated plan `FIX-PLAN.md`; `gate.js pre` RESULT: PASS 39/39, `apply.js` applied 26 edits to 16 files, 4 new files, `gate.js post` RESULT: PASS 57/57)
+
+- New `js/shared/human-pass.js`, loaded on all 8 pages after `ops.js`. Guest flushes in `js/shared/insights.js` and `js/shared/ops.js`, and guest surveys, wait for a pass.
+- `functions/_middleware.js`: new `/__human-pass` route; `_routes.json` routes it.
+- New `tools/supabase-human-pass.sql` (pass table, key table, grant and check functions) and `tools/supabase-human-pass-enforce.sql` (two triggers).
+- `_headers`: Turnstile allowed again in `script-src` and `frame-src`, because it is now used. `tools/verify-headers.mjs` requires it.
+- `js/shared/auth-config.js`: new site key `0x4AAAAAAF_kupAyw6i2kALC` (a new Turnstile widget made today). This one-line change was made after the gate, outside the plan.
+- `privacy.html`: Turnstile named under Cloudflare; new `baHumanPass:<ID>` session key listed.
+- `tools/security/run_penetration_audit.mjs`: PT-19 and PT-20 now expect `human_check`; new PT-23.
+- New `tests/unit/human-pass.test.mjs` (17 tests). The gate caught all 15 planned mutations and all 24 tampers.
+- Tested: `npx oxlint` exit 0; `npm run test:unit` 101 of 101; `npm test` exit 0, including "csp policy: 7 pages load under the _headers policy with nothing blocked".
+- Live database, 13 November 2026: `tools/supabase-human-pass.sql` run ("Success. No rows returned"). Read-only check: both tables exist with row-level security on; `anon` cannot read either; `anon` can call the grant, `authenticated` cannot; no enforcement triggers yet.
+
+**Handbook updated:** 03, 04, 07.
+
+**Status:** committed and pushed; deployed by CI. Enforcement (`tools/supabase-human-pass-enforce.sql`) is switched on only after a live guest visit is seen to get a pass.
+
+---
+
 ## 2026-11-13 — Stricter popup isolation and no unused Turnstile host
 
 **Why:** Two gaps from `docs/SECURITY-ASSESSMENT-OWASP.md` (G4, G5) that needed your decision; you chose to apply both.

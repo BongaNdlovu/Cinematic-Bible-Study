@@ -196,6 +196,14 @@
     try { localStorage.setItem(SURVEY_WIN, JSON.stringify(times)); } catch (e) {}
   }
 
+  function withHumanPass(user, send) {
+    const pass = window.HumanPass;
+    if (user || !pass || typeof pass.ready !== 'function') return Promise.resolve(send());
+    return pass.ready().then(function (isHuman) {
+      return isHuman ? send() : { error: { message: 'human_check' } };
+    });
+  }
+
   function flush() {
     if (flushing || optedOut() || !consented()) return Promise.resolve();
     const auth = window.ScrollAuth;
@@ -207,9 +215,11 @@
     if (!slot.n) return Promise.resolve();
     const batch = queued.slice(0, slot.n);
     flushing = true;
-    return client.from(TABLE).insert(batch.map(function (row) {
-      return Object.assign({ user_id: user ? user.id : null }, row);
-    })).then(function (res) {
+    return withHumanPass(user, function () {
+      return client.from(TABLE).insert(batch.map(function (row) {
+        return Object.assign({ user_id: user ? user.id : null }, row);
+      }));
+    }).then(function (res) {
       if (res && !res.error) {
         writeQueue(readQueue().slice(batch.length));
         return;
@@ -333,14 +343,16 @@
     if (!pair.client) return Promise.resolve({ ok: false, reason: 'no_client' });
     const stamp = claimSurveySlot();
     if (stamp === null) return Promise.resolve({ ok: false, reason: 'rate_limit' });
-    return pair.client.from('exhibit_surveys').insert(Object.assign({
-      user_id: pair.user ? pair.user.id : null,
-      anon_id: anonId(),
-      cohort: '',
-      role: 'Student',
-      feedback: '',
-      responses: {}
-    }, row)).then(function (res) {
+    return withHumanPass(pair.user, function () {
+      return pair.client.from('exhibit_surveys').insert(Object.assign({
+        user_id: pair.user ? pair.user.id : null,
+        anon_id: anonId(),
+        cohort: '',
+        role: 'Student',
+        feedback: '',
+        responses: {}
+      }, row));
+    }).then(function (res) {
       if (res && res.error) {
         releaseSurveySlot(stamp);
         return { ok: false, reason: 'error' };

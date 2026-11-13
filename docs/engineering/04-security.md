@@ -17,6 +17,7 @@ The browser is not trusted. Pages are public files, and the browser talks to Sup
 | Row-level security | Reading or changing someone else's data | `tools/supabase-*.sql`, switched on for every table (live check) |
 | Server-side answer checking | Skipping sittings by reading the answer key | `verify_quiz_answer`, `exhibit_quiz_keys` |
 | Database write limits | Spam and runaway clients | `exhibit_*_rate_gate` triggers, `exhibit_take_slot`, row-size checks |
+| Guest human check | Scripts writing fake guest activity | Turnstile, `/__human-pass`, `exhibit_require_human_pass()` triggers |
 | Data retention | Keeping anonymous data longer than needed | `exhibit_prune_anon()` on a `pg_cron` schedule |
 | Consent | Collecting analytics without permission | `js/shared/consent.js` |
 | Local server checks | DNS rebinding and path tricks on a developer machine | `server.py` |
@@ -37,7 +38,30 @@ The browser is not trusted. Pages are public files, and the browser talks to Sup
 
 `style-src` allows `'unsafe-inline'`, because the pages use inline `style` attributes. Scripts do not get `'unsafe-inline'`.
 
-`js/shared/auth-config.js` holds a `turnstileSiteKey`, but no code in `js/` reads it. On 13 November 2026 the CSP stopped allowing `challenges.cloudflare.com` (scripts and frames), so an unused third-party host can no longer load (OWASP third-party JavaScript guidance). Adding Turnstile later means adding that host back to `script-src` and `frame-src` and updating `tools/verify-headers.mjs`.
+The CSP allows `https://challenges.cloudflare.com` in `script-src` and `frame-src` for the guest human check (Turnstile), and nothing else from that host. See [Guest human check](#guest-human-check).
+
+## Guest human check
+
+Guests write study events, error reports and survey answers straight to Supabase with the public key. Since 13 November 2026 the database only accepts those rows from a guest ID that holds a live **human pass**. Members are not affected.
+
+| Step | Where | What happens |
+|---|---|---|
+| 1 | `js/shared/human-pass.js` | When a guest first has something to save, the page loads Cloudflare Turnstile (site key `turnstileSiteKey` in `js/shared/auth-config.js`, action `guest-pass`, managed mode, shown only if a click is needed). |
+| 2 | `functions/_middleware.js` (`/__human-pass`) | Rate-limited by the edge gate. Checks the token with Cloudflare `siteverify` using `TURNSTILE_SECRET`; the action and hostname must match. Accepts at most 2 well-formed guest IDs, never `edge-rate-limit`. |
+| 3 | `exhibit_grant_human_pass()` (`tools/supabase-human-pass.sql`) | Grants a 12-hour pass only when the caller sends `HUMAN_PASS_KEY`, whose sha256 hash is in `exhibit_edge_keys`. |
+| 4 | `exhibit_require_human_pass()` triggers (`tools/supabase-human-pass-enforce.sql`) | Before insert on `exhibit_events` and `exhibit_surveys`: a row with no account needs a live pass, or it is refused with `human_check`. The edge's own `rate_limited` reports are the one exception. |
+
+`insights.js` and `ops.js` keep a refused batch and try again later, as for any failed insert. No client role can read `exhibit_human_passes` or `exhibit_edge_keys`. The secrets live only in Cloudflare (`TURNSTILE_SECRET`, `HUMAN_PASS_KEY`) and as a hash in the database.
+
+**Turning it off:** `drop trigger exhibit_events_human_pass on public.exhibit_events; drop trigger exhibit_surveys_human_pass on public.exhibit_surveys;`
+
+**Changing the key:** set a new `HUMAN_PASS_KEY` in Cloudflare, redeploy, and store its hash in the SQL editor:
+
+```sql
+insert into public.exhibit_edge_keys (name, key_hash)
+values ('human_pass', encode(extensions.digest('<the key>', 'sha256'), 'hex'))
+on conflict (name) do update set key_hash = excluded.key_hash;
+```
 
 `Cross-Origin-Opener-Policy` is `same-origin` (OWASP HTTP headers cheat sheet), not `same-origin-allow-popups`. Sign-in is a full-page redirect to Google, not a popup, and no code in `js/` calls `window.open`.
 
@@ -162,6 +186,7 @@ Function permissions checked live: guests (`anon`) **can** call `exhibit_public_
 
 | Command | What it proves |
 |---|---|
-| `npm run test:security` | 22 attack-style checks (penetration audit) against the code and mocked services |
+| `npm run test:security` | 23 attack-style checks (penetration audit) against the code, mocked services and the live database. PT-19 and PT-20 prove guest writes without a human pass are refused; PT-23 proves a pass cannot be granted without the edge key |
+| `tests/unit/human-pass.test.mjs` | 17 tests: the edge route, the SQL rules, the browser module, and that guest writes wait for a pass |
 | `npm test` | Includes CSP hashes and policy, private-path routing, rate limiting, quiz integrity and the desk privacy checks |
 | `node tools/smoke.mjs` | The live headers, the private paths, the `/__rate` refusal, and one public database read (the keep-alive) |

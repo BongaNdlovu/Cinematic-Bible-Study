@@ -1,571 +1,392 @@
+const PAGES = ['404.html', 'account.html', 'gallery.html', 'index.html', 'insights.html', 'map.html', 'reviews.html', 'study.html'];
+
+const pageEdits = PAGES.map((file) => ({
+  id: 'E-page ' + file,
+  fixes: ['F3'],
+  why: 'loads the guest human-check module on every page that can write guest events or surveys',
+  protectedBy: [],
+  file,
+  find: '  <script src="js/shared/ops.js" defer></script>\n',
+  replace: '  <script src="js/shared/ops.js" defer></script>\n  <script src="js/shared/human-pass.js" defer></script>\n',
+}));
+
 module.exports = [
- {
-  "id": "E1.1 tools/supabase-hardening-2026-10.sql",
-  "fixes": [
-   "F1"
-  ],
-  "why": "a signed-in row with a fresh anon_id skipped the per-user cap; signed-in rows now take a per-user slot first",
-  "protectedBy": [
-   "MU1",
-   "MU2"
-  ],
-  "file": "tools/supabase-hardening-2026-10.sql",
-  "find": "begin\n  new.created_at := now();\n  if coalesce(new.anon_id, '') <> '' then\n    if (select count(*) from public.exhibit_events",
-  "replace": "begin\n  new.created_at := now();\n  if new.user_id is not null then\n    perform public.exhibit_take_slot('event_min', 60, interval '1 minute');\n    perform public.exhibit_take_slot('event_day', 2000, interval '1 day');\n    return new;\n  end if;\n  if coalesce(new.anon_id, '') <> '' then\n    if (select count(*) from public.exhibit_events"
- },
- {
-  "id": "E1.2 tools/supabase-hardening-2026-10.sql",
-  "fixes": [
-   "F1"
-  ],
-  "why": "a signed-in row with a fresh anon_id skipped the per-user cap; signed-in rows now take a per-user slot first",
-  "protectedBy": [
-   "MU1",
-   "MU2"
-  ],
-  "file": "tools/supabase-hardening-2026-10.sql",
-  "find": "begin\n  new.created_at := now();\n  if coalesce(new.anon_id, '') <> '' then\n    if (select count(*) from public.exhibit_surveys",
-  "replace": "begin\n  new.created_at := now();\n  if new.user_id is not null then\n    perform public.exhibit_take_slot('survey', 5, interval '1 hour');\n    return new;\n  end if;\n  if coalesce(new.anon_id, '') <> '' then\n    if (select count(*) from public.exhibit_surveys"
- },
- {
-  "id": "E2.1 tools/supabase-rate-limits.sql",
-  "fixes": [
-   "F1"
-  ],
-  "why": "a signed-in row with a fresh anon_id skipped the per-user cap; signed-in rows now take a per-user slot first (older copy, so a re-run cannot undo the fix)",
-  "protectedBy": [
-   "MU1",
-   "MU2"
-  ],
-  "file": "tools/supabase-rate-limits.sql",
-  "find": "begin\n  new.created_at := now();\n  if coalesce(new.anon_id, '') <> '' then\n    if (select count(*) from public.exhibit_events",
-  "replace": "begin\n  new.created_at := now();\n  if new.user_id is not null then\n    perform public.exhibit_take_slot('event_min', 60, interval '1 minute');\n    perform public.exhibit_take_slot('event_day', 2000, interval '1 day');\n    return new;\n  end if;\n  if coalesce(new.anon_id, '') <> '' then\n    if (select count(*) from public.exhibit_events"
- },
- {
-  "id": "E2.2 tools/supabase-rate-limits.sql",
-  "fixes": [
-   "F1"
-  ],
-  "why": "a signed-in row with a fresh anon_id skipped the per-user cap; signed-in rows now take a per-user slot first (older copy, so a re-run cannot undo the fix)",
-  "protectedBy": [
-   "MU1",
-   "MU2"
-  ],
-  "file": "tools/supabase-rate-limits.sql",
-  "find": "begin\n  new.created_at := now();\n  if coalesce(new.anon_id, '') <> '' then\n    if (select count(*) from public.exhibit_surveys",
-  "replace": "begin\n  new.created_at := now();\n  if new.user_id is not null then\n    perform public.exhibit_take_slot('survey', 5, interval '1 hour');\n    return new;\n  end if;\n  if coalesce(new.anon_id, '') <> '' then\n    if (select count(*) from public.exhibit_surveys"
- },
- {
-  "id": "E3.1 tools/supabase-insights.sql",
-  "fixes": [
-   "F1"
-  ],
-  "why": "a signed-in row with a fresh anon_id skipped the per-user cap; signed-in rows now take a per-user slot first (older copy of the events gate)",
-  "protectedBy": [
-   "MU1"
-  ],
-  "file": "tools/supabase-insights.sql",
-  "find": "  new.created_at := now();\n  if coalesce(new.anon_id, '') <> '' then",
-  "replace": "  new.created_at := now();\n  if new.user_id is not null then\n    perform public.exhibit_take_slot('event_min', 60, interval '1 minute');\n    perform public.exhibit_take_slot('event_day', 2000, interval '1 day');\n    return new;\n  end if;\n  if coalesce(new.anon_id, '') <> '' then"
- },
- {
-  "id": "E4.1 tools/supabase-progress.sql",
-  "fixes": [
-   "F1"
-  ],
-  "why": "a signed-in row with a fresh anon_id skipped the per-user cap; signed-in rows now take a per-user slot first (older copy of the surveys gate)",
-  "protectedBy": [
-   "MU2"
-  ],
-  "file": "tools/supabase-progress.sql",
-  "find": "  new.created_at := now();\n  if coalesce(new.anon_id, '') <> '' then",
-  "replace": "  new.created_at := now();\n  if new.user_id is not null then\n    perform public.exhibit_take_slot('survey', 5, interval '1 hour');\n    return new;\n  end if;\n  if coalesce(new.anon_id, '') <> '' then"
- },
- {
-  "id": "E5.1 tools/verify/verify_ratelimit.mjs",
-  "fixes": [
-   "F1"
-  ],
-  "why": "checks that every copy of both gates caps signed-in rows per user before the anon_id branch",
-  "protectedBy": [
-   "MU1",
-   "MU2"
-  ],
-  "file": "tools/verify/verify_ratelimit.mjs",
-  "find": "const insightsSql = fs.readFileSync(path.join(ROOT, 'tools/supabase-insights.sql'), 'utf8');\nassert(insightsSql.includes('exhibit_events_rate_gate'), 'insights setup must include events write cap');",
-  "replace": "const insightsSql = fs.readFileSync(path.join(ROOT, 'tools/supabase-insights.sql'), 'utf8');\n\nfunction signedInBlock(src, file, gateName) {\n  const start = src.indexOf('create or replace function public.' + gateName + '()');\n  assert(start >= 0, file + ' must define ' + gateName);\n  const body = src.slice(start, src.indexOf('$$;', start));\n  const open = body.indexOf('if new.user_id is not null then');\n  const anon = body.indexOf(\"if coalesce(new.anon_id, '') <> '' then\");\n  assert(anon >= 0, file + ' ' + gateName + ' must keep the anon_id check');\n  assert(open >= 0 && open < anon, file + ' ' + gateName + ' must cap signed-in rows per user before the anon_id check');\n  const block = body.slice(open, body.indexOf('end if;', open));\n  assert(block.includes('return new;'), file + ' ' + gateName + ' signed-in block must return before the anon_id check');\n  return block;\n}\n\nfunction assertEventsUserCap(src, file) {\n  const block = signedInBlock(src, file, 'exhibit_events_rate_gate');\n  assert(block.includes(\"perform public.exhibit_take_slot('event_min', 60, interval '1 minute');\"), file + ' events gate must cap a signed-in user at 60/min whatever anon_id is sent');\n  assert(block.includes(\"perform public.exhibit_take_slot('event_day', 2000, interval '1 day');\"), file + ' events gate must cap a signed-in user at 2000/day whatever anon_id is sent');\n}\n\nfunction assertSurveysUserCap(src, file) {\n  const block = signedInBlock(src, file, 'exhibit_surveys_rate_gate');\n  assert(block.includes(\"perform public.exhibit_take_slot('survey', 5, interval '1 hour');\"), file + ' surveys gate must cap a signed-in user at 5/hour whatever anon_id is sent');\n}\n\nconst hardeningSql = fs.readFileSync(path.join(ROOT, 'tools/supabase-hardening-2026-10.sql'), 'utf8');\nassertEventsUserCap(hardeningSql, 'supabase-hardening-2026-10.sql');\nassertSurveysUserCap(hardeningSql, 'supabase-hardening-2026-10.sql');\nassertEventsUserCap(sql, 'supabase-rate-limits.sql');\nassertSurveysUserCap(sql, 'supabase-rate-limits.sql');\nassertEventsUserCap(insightsSql, 'supabase-insights.sql');\nassert(insightsSql.includes('exhibit_events_rate_gate'), 'insights setup must include events write cap');"
- },
- {
-  "id": "E5.2 tools/verify/verify_ratelimit.mjs",
-  "fixes": [
-   "F1"
-  ],
-  "why": "checks that every copy of both gates caps signed-in rows per user before the anon_id branch",
-  "protectedBy": [
-   "MU1",
-   "MU2"
-  ],
-  "file": "tools/verify/verify_ratelimit.mjs",
-  "find": "const progressSql = fs.readFileSync(path.join(ROOT, 'tools/supabase-progress.sql'), 'utf8');\nassert(progressSql.includes('exhibit_surveys_rate_gate'), 'progress setup must include surveys write cap');",
-  "replace": "const progressSql = fs.readFileSync(path.join(ROOT, 'tools/supabase-progress.sql'), 'utf8');\nassertSurveysUserCap(progressSql, 'supabase-progress.sql');\nassert(progressSql.includes('exhibit_surveys_rate_gate'), 'progress setup must include surveys write cap');"
- },
- {
-  "id": "E6.1 tools/supabase-rate-limits-gaps.sql",
-  "fixes": [
-   "F2"
-  ],
-  "why": "verify_quiz_answer returned the answer key on a wrong pick; it now returns correct_idx only for a correct pick",
-  "protectedBy": [
-   "MU3"
-  ],
-  "file": "tools/supabase-rate-limits-gaps.sql",
-  "find": "    'correct', v_correct,\n    'correct_idx', v_key.correct_idx,\n    'note', case when v_correct then v_key.correct_note else '' end",
-  "replace": "    'correct', v_correct,\n    'correct_idx', case when v_correct then v_key.correct_idx end,\n    'note', case when v_correct then v_key.correct_note else '' end"
- },
- {
-  "id": "E7.1 tools/supabase-quiz-integrity.sql",
-  "fixes": [
-   "F2"
-  ],
-  "why": "verify_quiz_answer returned the answer key on a wrong pick; it now returns correct_idx only for a correct pick (older copy)",
-  "protectedBy": [
-   "MU3"
-  ],
-  "file": "tools/supabase-quiz-integrity.sql",
-  "find": "    'correct', v_correct,\n    'correct_idx', v_key.correct_idx,\n    'note', case when v_correct then v_key.correct_note else '' end",
-  "replace": "    'correct', v_correct,\n    'correct_idx', case when v_correct then v_key.correct_idx end,\n    'note', case when v_correct then v_key.correct_note else '' end"
- },
- {
-  "id": "E8.1 tools/supabase-pending-migrations.sql",
-  "fixes": [
-   "F2"
-  ],
-  "why": "verify_quiz_answer returned the answer key on a wrong pick; it now returns correct_idx only for a correct pick (older copy)",
-  "protectedBy": [
-   "MU3"
-  ],
-  "file": "tools/supabase-pending-migrations.sql",
-  "find": "    'correct', v_correct,\n    'correct_idx', v_key.correct_idx,\n    'note', case when v_correct then v_key.correct_note else '' end",
-  "replace": "    'correct', v_correct,\n    'correct_idx', case when v_correct then v_key.correct_idx end,\n    'note', case when v_correct then v_key.correct_note else '' end"
- },
- {
-  "id": "E9.1 tools/verify/verify_quiz_integrity.mjs",
-  "fixes": [
-   "F2"
-  ],
-  "why": "checks all three SQL copies and models a wrong-pick reply with no key",
-  "protectedBy": [
-   "MU3"
-  ],
-  "file": "tools/verify/verify_quiz_integrity.mjs",
-  "find": "assert.ok(pending.includes(\"insert into public.exhibit_quiz_passes\"), \"re-running the pending bundle keeps recording passes\");\nconst seed = new Set();",
-  "replace": "assert.ok(pending.includes(\"insert into public.exhibit_quiz_passes\"), \"re-running the pending bundle keeps recording passes\");\n[\"tools/supabase-rate-limits-gaps.sql\", \"tools/supabase-quiz-integrity.sql\", \"tools/supabase-pending-migrations.sql\"].forEach((rel) => {\n  const src = read(rel);\n  const start = src.indexOf(\"create or replace function public.verify_quiz_answer(\");\n  assert.ok(start >= 0, `${rel} defines verify_quiz_answer`);\n  const body = src.slice(start, src.indexOf(\"$$;\", start));\n  assert.ok(body.includes(\"'correct_idx', case when v_correct then v_key.correct_idx end,\"), `${rel}: verify_quiz_answer returns correct_idx only for a correct pick`);\n  assert.strictEqual(/'correct_idx',s*v_key.correct_idxs*[,)]/.test(src), false, `${rel}: verify_quiz_answer must not return correct_idx whatever was picked`);\n});\nconst seed = new Set();"
- },
- {
-  "id": "E9.2 tools/verify/verify_quiz_integrity.mjs",
-  "fixes": [
-   "F2"
-  ],
-  "why": "checks all three SQL copies and models a wrong-pick reply with no key",
-  "protectedBy": [
-   "MU3"
-  ],
-  "file": "tools/verify/verify_quiz_integrity.mjs",
-  "find": "\nrpcReply = { data: { correct: false, correct_idx: 1, note: \"\" }, error: null };\nres = await QuizGate.verify(0, 0, 3);",
-  "replace": "\nrpcReply = { data: { correct: false, correct_idx: null, note: \"\" }, error: null };\nres = await QuizGate.verify(0, 0, 3);"
- },
- {
-  "id": "E9.3 tools/verify/verify_quiz_integrity.mjs",
-  "fixes": [
-   "F2"
-  ],
-  "why": "checks all three SQL copies and models a wrong-pick reply with no key",
-  "protectedBy": [
-   "MU3"
-  ],
-  "file": "tools/verify/verify_quiz_integrity.mjs",
-  "find": "assert.strictEqual(res.correct, false, \"a wrong answer is graded false\");\nassert.strictEqual(res.correctIdx, 1, \"the server reveals the right option only after a pick\");\n",
-  "replace": "assert.strictEqual(res.correct, false, \"a wrong answer is graded false\");\nassert.strictEqual(res.correctIdx, null, \"a wrong pick does not reveal which option is right\");\n"
- },
- {
-  "id": "E10.1 js/shared/ops.js",
-  "fixes": [
-   "F3"
-  ],
-  "why": "error reports recreated the analytics ID without consent; without consent they now use a visit-only sessionStorage ID",
-  "protectedBy": [
-   "MU4"
-  ],
-  "file": "js/shared/ops.js",
-  "find": "\n  function anonId() {",
-  "replace": "\n  function hasAnalyticsConsent() {\n    return !!(window.SODConsent && typeof window.SODConsent.has === \"function\" && window.SODConsent.has(\"analytics\"));\n  }\n\n  function newId() {\n    if (typeof crypto !== \"undefined\" && crypto.randomUUID) return crypto.randomUUID();\n    return \"a_\" + Date.now().toString(36);\n  }\n\n  function anonId() {"
- },
- {
-  "id": "E10.2 js/shared/ops.js",
-  "fixes": [
-   "F3"
-  ],
-  "why": "error reports recreated the analytics ID without consent; without consent they now use a visit-only sessionStorage ID",
-  "protectedBy": [
-   "MU4"
-  ],
-  "file": "js/shared/ops.js",
-  "find": "  function anonId() {\n    try {",
-  "replace": "  function anonId() {\n    const consented = hasAnalyticsConsent();\n    const key = consented ? \"baInsightsAnon\" : \"baOpsAnon\";\n    try {"
- },
- {
-  "id": "E10.3 js/shared/ops.js",
-  "fixes": [
-   "F3"
-  ],
-  "why": "error reports recreated the analytics ID without consent; without consent they now use a visit-only sessionStorage ID",
-  "protectedBy": [
-   "MU4"
-  ],
-  "file": "js/shared/ops.js",
-  "find": "    try {\n      let id = localStorage.getItem(\"baInsightsAnon\");\n      if (!id) {\n        id = (typeof crypto !== \"undefined\" && crypto.randomUUID)\n          ? crypto.randomUUID()\n          : \"a_\" + Date.now().toString(36);\n        localStorage.setItem(\"baInsightsAnon\", id);\n      }\n      return id;",
-  "replace": "    try {\n      const store = consented ? localStorage : sessionStorage;\n      const existing = store.getItem(key);\n      if (existing) return existing;\n      const id = newId();\n      store.setItem(key, id);\n      return id;"
- },
- {
-  "id": "E11.1 privacy.html",
-  "fixes": [
-   "F3"
-  ],
-  "why": "the privacy page names the new visit-only key and the ID an error report carries",
-  "protectedBy": [
-   "MU5"
-  ],
-  "file": "privacy.html",
-  "find": "              <tr><td>Answer your messages to the operator</td><td>Subject, message, replies</td><td>Contract (answering your request); legitimate interests</td></tr>\n              <tr><td>Find and fix errors on the site</td><td>The error message, the page and line where it happened, browser and device type, IP address, and, for one page load in ten, how long the page took to load</td><td>Legitimate interests (keeping the site working)</td></tr>\n              <tr><td>Stop abuse and flooding</td><td>IP address at the hosting layer, request counts, technical reports</td><td>Legitimate interests (protecting the service)</td></tr>",
-  "replace": "              <tr><td>Answer your messages to the operator</td><td>Subject, message, replies</td><td>Contract (answering your request); legitimate interests</td></tr>\n              <tr><td>Find and fix errors on the site</td><td>The error message, the page and line where it happened, browser and device type, IP address, and, for one page load in ten, how long the page took to load. An error report stored by the site also carries a visit ID, or your account ID if you are signed in</td><td>Legitimate interests (keeping the site working)</td></tr>\n              <tr><td>Stop abuse and flooding</td><td>IP address at the hosting layer, request counts, technical reports</td><td>Legitimate interests (protecting the service)</td></tr>"
- },
- {
-  "id": "E11.2 privacy.html",
-  "fixes": [
-   "F3"
-  ],
-  "why": "the privacy page names the new visit-only key and the ID an error report carries",
-  "protectedBy": [
-   "MU5"
-  ],
-  "file": "privacy.html",
-  "find": "              <tr><td>sb-ttlrspnfadmxkoyqvofh-auth-token</td><td>Your signed-in session, kept by Supabase</td></tr>\n              <tr><td>baInsightsAnon, baInsightsSession, baInsightsQueue, baFlushWin, baSurveyTimes, baOpsQueue</td><td>Anonymous ID, visit ID, study events waiting to be sent, and limits on how often events and surveys are sent</td></tr>\n              <tr><td>baInsightsOptOut</td><td>Legacy analytics setting</td></tr>",
-  "replace": "              <tr><td>sb-ttlrspnfadmxkoyqvofh-auth-token</td><td>Your signed-in session, kept by Supabase</td></tr>\n              <tr><td>baInsightsAnon, baInsightsSession, baInsightsQueue, baFlushWin, baSurveyTimes, baOpsQueue, baOpsAnon</td><td>Anonymous ID, visit ID, study events waiting to be sent, limits on how often events and surveys are sent, and a visit-only ID attached to error reports, removed when the tab closes</td></tr>\n              <tr><td>baInsightsOptOut</td><td>Legacy analytics setting</td></tr>"
- },
- {
-  "id": "E12.1 tests/unit/sentry.test.mjs",
-  "fixes": [
-   "F3"
-  ],
-  "why": "tests the consent behaviour of ops.js and the privacy wording",
-  "protectedBy": [
-   "MU4",
-   "MU5"
-  ],
-  "file": "tests/unit/sentry.test.mjs",
-  "find": "\nfor (const rel of [\"../../functions/_middleware.js\", \"../../workers/exhibit-rate-gate/src/index.js\"]) {",
-  "replace": "\nconst OPS_SRC = fs.readFileSync(new URL(\"../../js/shared/ops.js\", import.meta.url), \"utf8\");\n\nfunction memoryStore(seed) {\n  const data = Object.assign({}, seed);\n  return {\n    data,\n    getItem: (k) => (k in data ? data[k] : null),\n    setItem: (k, v) => { data[k] = String(v); },\n    removeItem: (k) => { delete data[k]; }\n  };\n}\n\nasync function reportError(consent, localSeed) {\n  const rows = [];\n  const client = { from: () => ({ insert: (batch) => { rows.push(...batch); return Promise.resolve({ error: null }); } }) };\n  const localStorage = memoryStore(localSeed);\n  const sessionStorage = memoryStore();\n  const window = {\n    addEventListener: () => {},\n    ScrollAuth: { getClient: () => client, getUser: () => null },\n    SODConsent: { has: (kind) => consent && kind === \"analytics\" }\n  };\n  vm.runInNewContext(OPS_SRC, {\n    window,\n    localStorage,\n    sessionStorage,\n    location: { pathname: \"/study.html\" },\n    crypto: { randomUUID: () => \"11111111-2222-4333-8444-555555555555\" },\n    setInterval: () => 0\n  });\n  window.SiteOps.report(\"save_failed\", \"timeout\");\n  await window.SiteOps.flush();\n  await new Promise((resolve) => setImmediate(resolve));\n  return { rows, local: localStorage.data, session: sessionStorage.data };\n}\n\ntest(\"without analytics consent an error report never creates baInsightsAnon and carries a visit-only baOpsAnon ID\", async () => {\n  const out = await reportError(false);\n  assert.equal(out.rows.length, 1);\n  assert.ok(!(\"baInsightsAnon\" in out.local));\n  assert.equal(out.session.baOpsAnon, \"11111111-2222-4333-8444-555555555555\");\n  assert.equal(out.rows[0].anon_id, out.session.baOpsAnon);\n  assert.ok(out.rows[0].anon_id.length <= 64);\n});\n\ntest(\"without analytics consent an error report does not read a leftover baInsightsAnon\", async () => {\n  const out = await reportError(false, { baInsightsAnon: \"left-over-id\" });\n  assert.equal(out.rows.length, 1);\n  assert.notEqual(out.rows[0].anon_id, \"left-over-id\");\n  assert.equal(out.rows[0].anon_id, out.session.baOpsAnon);\n});\n\ntest(\"with analytics consent an error report uses baInsightsAnon and sets no baOpsAnon\", async () => {\n  const kept = await reportError(true, { baInsightsAnon: \"existing-analytics-id\" });\n  assert.equal(kept.rows[0].anon_id, \"existing-analytics-id\");\n  assert.ok(!(\"baOpsAnon\" in kept.session));\n  const fresh = await reportError(true);\n  assert.equal(fresh.local.baInsightsAnon, \"11111111-2222-4333-8444-555555555555\");\n  assert.equal(fresh.rows[0].anon_id, fresh.local.baInsightsAnon);\n  assert.ok(!(\"baOpsAnon\" in fresh.session));\n});\n\ntest(\"the privacy page lists the visit-only error report ID\", () => {\n  const html = fs.readFileSync(new URL(\"../../privacy.html\", import.meta.url), \"utf8\");\n  assert.match(html, /baOpsQueue, baOpsAnon<\\/td>/);\n  assert.match(html, /a visit-only ID attached to error reports, removed when the tab closes/);\n  assert.match(html, /An error report stored by the site also carries a visit ID, or your account ID if you are signed in/);\n});\n\nfor (const rel of [\"../../functions/_middleware.js\", \"../../workers/exhibit-rate-gate/src/index.js\"]) {"
- },
- {
-  "id": "E13.1 server.py",
-  "fixes": [
-   "F4"
-  ],
-  "why": "the dev server answered any Host header; it now refuses a Host that is not its own loopback address",
-  "protectedBy": [
-   "MU6"
-  ],
-  "file": "server.py",
-  "find": "\n    def send_head(self):",
-  "replace": "\n    def is_local_host_header(self):\n        port = str(self.server.server_address[1])\n        return self.headers.get(\"Host\", \"\").lower() in (\"127.0.0.1:\" + port, \"localhost:\" + port)\n\n    def send_head(self):"
- },
- {
-  "id": "E13.2 server.py",
-  "fixes": [
-   "F4"
-  ],
-  "why": "the dev server answered any Host header; it now refuses a Host that is not its own loopback address",
-  "protectedBy": [
-   "MU6"
-  ],
-  "file": "server.py",
-  "find": "        \"\"\"Serve byte ranges for large media so <audio>/<video> can seek.\"\"\"\n        range_header = self.headers.get(\"Range\")",
-  "replace": "        \"\"\"Serve byte ranges for large media so <audio>/<video> can seek.\"\"\"\n        if not self.is_local_host_header():\n            self.send_error(403, \"Host not allowed\")\n            return None\n        range_header = self.headers.get(\"Range\")"
- },
- {
-  "id": "E14.1 tools/verify/verify_load.mjs",
-  "fixes": [
-   "F4"
-  ],
-  "why": "checks that a foreign Host header gets 403",
-  "protectedBy": [
-   "MU6"
-  ],
-  "file": "tools/verify/verify_load.mjs",
-  "find": "import assert from \"assert\";\nimport path from \"path\";",
-  "replace": "import assert from \"assert\";\nimport http from \"http\";\nimport path from \"path\";"
- },
- {
-  "id": "E14.2 tools/verify/verify_load.mjs",
-  "fixes": [
-   "F4"
-  ],
-  "why": "checks that a foreign Host header gets 403",
-  "protectedBy": [
-   "MU6"
-  ],
-  "file": "tools/verify/verify_load.mjs",
-  "find": "  console.log(\"40 overlapping local study reads returned 200\");\n} finally {",
-  "replace": "  console.log(\"40 overlapping local study reads returned 200\");\n  const foreign = await new Promise((resolve, reject) => {\n    const req = http.request({ host: \"127.0.0.1\", port: port, path: \"/study.html\", agent: false, headers: { Host: \"evil.example:\" + port } }, (res) => {\n      let body = \"\";\n      res.on(\"data\", (chunk) => { body += chunk.toString(); });\n      res.on(\"end\", () => resolve({ status: res.statusCode, body: body }));\n    });\n    req.on(\"error\", reject);\n    req.end();\n  });\n  assert.strictEqual(foreign.status, 403, \"a request with a foreign Host header must be refused\\n\" + log);\n  assert.ok(!/<html[\\s>][\\s\\S]*<script/i.test(foreign.body), \"a refused request must not carry the page\");\n  console.log(\"A request with a foreign Host header is refused with 403\");\n} finally {"
- },
- {
-  "id": "E15.1 functions/_middleware.js",
-  "fixes": [
-   "F5"
-  ],
-  "why": "HEAD requests skipped the rate gate; only OPTIONS skips it now, and HEAD still loads when the gate is down",
-  "protectedBy": [
-   "MU7",
-   "MU8"
-  ],
-  "file": "functions/_middleware.js",
-  "find": "\nasync function handle(context) {",
-  "replace": "\nfunction isRead(request) {\n  return request.method === \"GET\" || request.method === \"HEAD\";\n}\n\nasync function handle(context) {"
- },
- {
-  "id": "E15.2 functions/_middleware.js",
-  "fixes": [
-   "F5"
-  ],
-  "why": "HEAD requests skipped the rate gate; only OPTIONS skips it now, and HEAD still loads when the gate is down",
-  "protectedBy": [
-   "MU7",
-   "MU8"
-  ],
-  "file": "functions/_middleware.js",
-  "find": "  if (path === \"/csp-report\" && request.method === \"POST\") return takeReport(context, request);\n  if (request.method === \"OPTIONS\" || request.method === \"HEAD\") return context.next();\n  if (path === \"/__rate\" && request.method === \"POST\") return rateProxy(context, request);",
-  "replace": "  if (path === \"/csp-report\" && request.method === \"POST\") return takeReport(context, request);\n  if (request.method === \"OPTIONS\") return context.next();\n  if (path === \"/__rate\" && request.method === \"POST\") return rateProxy(context, request);"
- },
- {
-  "id": "E15.3 functions/_middleware.js",
-  "fixes": [
-   "F5"
-  ],
-  "why": "HEAD requests skipped the rate gate; only OPTIONS skips it now, and HEAD still loads when the gate is down",
-  "protectedBy": [
-   "MU7",
-   "MU8"
-  ],
-  "file": "functions/_middleware.js",
-  "find": "  if (decision === \"deny\" || decision === \"deny_first\") return denied();\n  if (decision === \"down\" && request.method !== \"GET\") return unavailable();\n  return servePage(context, request);",
-  "replace": "  if (decision === \"deny\" || decision === \"deny_first\") return denied();\n  if (decision === \"down\" && !isRead(request)) return unavailable();\n  return servePage(context, request);"
- },
- {
-  "id": "E16.1 tests/unit/middleware.test.mjs",
-  "fixes": [
-   "F5"
-  ],
-  "why": "tests HEAD counting, the OPTIONS bypass and HEAD when the gate is down",
-  "protectedBy": [
-   "MU7",
-   "MU8"
-  ],
-  "file": "tests/unit/middleware.test.mjs",
-  "find": "\ntest(\"allowed .html pages are served without a redirect\", async () => {",
-  "replace": "\ntest(\"a HEAD request to a page is counted by the gate\", async () => {\n  const res = await onRequest(context(\"/study\", { method: \"HEAD\", verdict: { ok: false, first: false } }));\n  assert.equal(res.status, 429);\n  assert.equal(res.headers.get(\"Retry-After\"), \"60\");\n});\n\ntest(\"OPTIONS requests skip the gate\", async () => {\n  const res = await onRequest(context(\"/study\", { method: \"OPTIONS\", verdict: { ok: false, first: false } }));\n  assert.equal(res.status, 200);\n  assert.equal(await res.text(), \"next\");\n});\n\ntest(\"when the gate is down, a HEAD request still loads\", async () => {\n  const thrown = await onRequest(context(\"/study\", { method: \"HEAD\", verdict: \"throw\" }));\n  assert.equal(thrown.status, 200);\n  const unbound = await onRequest(context(\"/study\", { method: \"HEAD\", verdict: \"missing\" }));\n  assert.equal(unbound.status, 200);\n});\n\ntest(\"allowed .html pages are served without a redirect\", async () => {"
- },
- {
-  "id": "E17.1 _headers",
-  "fixes": [
-   "F6"
-  ],
-  "why": "connect-src allowed every Sentry project and no COOP header was sent; it now names the one project host and sets COOP",
-  "protectedBy": [
-   "MU9",
-   "MU10"
-  ],
-  "file": "_headers",
-  "find": "  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload\n  Content-Security-Policy: default-src 'self'; script-src 'self' 'wasm-unsafe-eval' https://static.cloudflareinsights.com https://challenges.cloudflare.com 'sha256-E+aslqeud2eI1AxDzL4z/9Ov6zN9Ey+Sh7T5l4FSIkU=' 'sha256-ubcWAwNhdVeBfiRtLCSZVQ4g28MLL98xiQn5MsM8j8w=' 'sha256-/1QaprhjwN9kNwJKPf6Qw6O8O2f+syHifIpg/SJytdc=' 'sha256-JFIeDuj5EjAu2b8xcO7xFcxrQskGD1L6L50UmZiPwrY=' 'sha256-qDijm4ZMNArSFBE4jRo07Lzj4qXQokVve4ODLNv6134=' 'sha256-ZJUtJPcmPfGj7n53X0puoa050LmqMu7Gd/2KE+bQJak=' 'sha256-xibdK9otoj51oMcQYdeItJwnN+IWaqnyoZgwXIOLV3M=' 'sha256-kcQdYQ3/pccQdahZjufezkFwqTxdGZLXJcku8kxnJzY='; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: https://tile.openstreetmap.org https://*.tile.openstreetmap.org https://*.arcgisonline.com https://*.ggpht.com https://*.googleusercontent.com; connect-src 'self' blob: https://ttlrspnfadmxkoyqvofh.supabase.co wss://ttlrspnfadmxkoyqvofh.supabase.co https://fonts.googleapis.com https://fonts.gstatic.com https://*.arcgisonline.com https://tile.openstreetmap.org https://*.tile.openstreetmap.org https://cloudflareinsights.com https://static.cloudflareinsights.com https://*.ingest.de.sentry.io; worker-src 'self' blob:; media-src 'self' blob:; frame-src https://challenges.cloudflare.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests; report-uri /csp-report\n",
-  "replace": "  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload\n  Cross-Origin-Opener-Policy: same-origin-allow-popups\n  Content-Security-Policy: default-src 'self'; script-src 'self' 'wasm-unsafe-eval' https://static.cloudflareinsights.com https://challenges.cloudflare.com 'sha256-E+aslqeud2eI1AxDzL4z/9Ov6zN9Ey+Sh7T5l4FSIkU=' 'sha256-ubcWAwNhdVeBfiRtLCSZVQ4g28MLL98xiQn5MsM8j8w=' 'sha256-/1QaprhjwN9kNwJKPf6Qw6O8O2f+syHifIpg/SJytdc=' 'sha256-JFIeDuj5EjAu2b8xcO7xFcxrQskGD1L6L50UmZiPwrY=' 'sha256-qDijm4ZMNArSFBE4jRo07Lzj4qXQokVve4ODLNv6134=' 'sha256-ZJUtJPcmPfGj7n53X0puoa050LmqMu7Gd/2KE+bQJak=' 'sha256-xibdK9otoj51oMcQYdeItJwnN+IWaqnyoZgwXIOLV3M=' 'sha256-kcQdYQ3/pccQdahZjufezkFwqTxdGZLXJcku8kxnJzY='; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: https://tile.openstreetmap.org https://*.tile.openstreetmap.org https://*.arcgisonline.com https://*.ggpht.com https://*.googleusercontent.com; connect-src 'self' blob: https://ttlrspnfadmxkoyqvofh.supabase.co wss://ttlrspnfadmxkoyqvofh.supabase.co https://fonts.googleapis.com https://fonts.gstatic.com https://*.arcgisonline.com https://tile.openstreetmap.org https://*.tile.openstreetmap.org https://cloudflareinsights.com https://static.cloudflareinsights.com https://o4512321608679424.ingest.de.sentry.io; worker-src 'self' blob:; media-src 'self' blob:; frame-src https://challenges.cloudflare.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests; report-uri /csp-report\n"
- },
- {
-  "id": "E18.1 tools/verify-headers.mjs",
-  "fixes": [
-   "F6"
-  ],
-  "why": "checks the COOP header and the exact Sentry host",
-  "protectedBy": [
-   "MU9",
-   "MU10"
-  ],
-  "file": "tools/verify-headers.mjs",
-  "find": "assert(rootH['strict-transport-security']?.value?.includes('max-age=31536000'), 'Strict-Transport-Security is enabled');\nassert(!rootH['access-control-allow-origin'], 'Access-Control-Allow-Origin is NOT restricted on \"/*\" (avoids breaking preview deployments)');",
-  "replace": "assert(rootH['strict-transport-security']?.value?.includes('max-age=31536000'), 'Strict-Transport-Security is enabled');\nassert(rootH['cross-origin-opener-policy']?.value === 'same-origin-allow-popups', 'Cross-Origin-Opener-Policy is same-origin-allow-popups');\nassert(!rootH['access-control-allow-origin'], 'Access-Control-Allow-Origin is NOT restricted on \"/*\" (avoids breaking preview deployments)');"
- },
- {
-  "id": "E18.2 tools/verify-headers.mjs",
-  "fixes": [
-   "F6"
-  ],
-  "why": "checks the COOP header and the exact Sentry host",
-  "protectedBy": [
-   "MU9",
-   "MU10"
-  ],
-  "file": "tools/verify-headers.mjs",
-  "find": "\n// Verify Cloudflare Insights",
-  "replace": "\nconst sentryConfig = fs.readFileSync(path.join(root, 'js', 'shared', 'sentry.js'), 'utf8');\nconst sentryHost = (/@([a-z0-9]+\\.ingest\\.[a-z0-9.]*sentry\\.io)\\//.exec(sentryConfig) || [])[1];\nassert(sentryHost, 'js/shared/sentry.js names the Sentry project ingest host');\nassert(cspDirectives['connect-src']?.includes(`https://${sentryHost}`), `CSP connect-src includes https://${sentryHost}`);\nassert(!cspDirectives['connect-src']?.some(v => v.includes('*.ingest.')), 'CSP connect-src no longer allows every Sentry project');\n\n// Verify Cloudflare Insights"
- },
- {
-  "id": "E19.1 .github/workflows/ci.yml",
-  "fixes": [
-   "F7"
-  ],
-  "why": "actions were pinned by tag and the deploy job had no environment; they are pinned by commit and the job declares production",
-  "protectedBy": [
-   "MU11",
-   "MU12"
-  ],
-  "file": ".github/workflows/ci.yml",
-  "find": "    timeout-minutes: 30\n    steps:\n      - uses: actions/checkout@v4\n      - uses: actions/setup-node@v4\n        with:\n          node-version: \"22\"",
-  "replace": "    timeout-minutes: 30\n    steps:\n      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4\n      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4\n        with:\n          node-version: \"22\""
- },
- {
-  "id": "E19.2 .github/workflows/ci.yml",
-  "fixes": [
-   "F7"
-  ],
-  "why": "actions were pinned by tag and the deploy job had no environment; they are pinned by commit and the job declares production",
-  "protectedBy": [
-   "MU11",
-   "MU12"
-  ],
-  "file": ".github/workflows/ci.yml",
-  "find": "          cache: npm\n      - uses: actions/setup-python@v5\n        with:",
-  "replace": "          cache: npm\n      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5\n        with:"
- },
- {
-  "id": "E19.3 .github/workflows/ci.yml",
-  "fixes": [
-   "F7"
-  ],
-  "why": "actions were pinned by tag and the deploy job had no environment; they are pinned by commit and the job declares production",
-  "protectedBy": [
-   "MU11",
-   "MU12"
-  ],
-  "file": ".github/workflows/ci.yml",
-  "find": "    runs-on: windows-latest\n    timeout-minutes: 40",
-  "replace": "    runs-on: windows-latest\n    environment: production\n    timeout-minutes: 40"
- },
- {
-  "id": "E19.4 .github/workflows/ci.yml",
-  "fixes": [
-   "F7"
-  ],
-  "why": "actions were pinned by tag and the deploy job had no environment; they are pinned by commit and the job declares production",
-  "protectedBy": [
-   "MU11",
-   "MU12"
-  ],
-  "file": ".github/workflows/ci.yml",
-  "find": "      npm_config_yes: \"true\"\n    steps:\n      - uses: actions/checkout@v4\n      - uses: actions/setup-node@v4\n        with:\n          node-version: \"22\"",
-  "replace": "      npm_config_yes: \"true\"\n    steps:\n      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4\n      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4\n        with:\n          node-version: \"22\""
- },
- {
-  "id": "E19.5 .github/workflows/ci.yml",
-  "fixes": [
-   "F7"
-  ],
-  "why": "actions were pinned by tag and the deploy job had no environment; they are pinned by commit and the job declares production",
-  "protectedBy": [
-   "MU11",
-   "MU12"
-  ],
-  "file": ".github/workflows/ci.yml",
-  "find": "    timeout-minutes: 10\n    steps:\n      - uses: actions/checkout@v4\n        with:\n          sparse-checkout: tools",
-  "replace": "    timeout-minutes: 10\n    steps:\n      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4\n        with:\n          sparse-checkout: tools"
- },
- {
-  "id": "E19.6 .github/workflows/ci.yml",
-  "fixes": [
-   "F7"
-  ],
-  "why": "actions were pinned by tag and the deploy job had no environment; they are pinned by commit and the job declares production",
-  "protectedBy": [
-   "MU11",
-   "MU12"
-  ],
-  "file": ".github/workflows/ci.yml",
-  "find": "          sparse-checkout: tools\n          filter: blob:none\n      - uses: actions/setup-node@v4\n        with:\n          node-version: \"22\"",
-  "replace": "          sparse-checkout: tools\n          filter: blob:none\n      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4\n        with:\n          node-version: \"22\""
- },
- {
-  "id": "E19.7 .github/workflows/ci.yml",
-  "fixes": [
-   "F7"
-  ],
-  "why": "actions were pinned by tag and the deploy job had no environment; they are pinned by commit and the job declares production",
-  "protectedBy": [
-   "MU11",
-   "MU12"
-  ],
-  "file": ".github/workflows/ci.yml",
-  "find": "      GH_TOKEN: ${{ github.token }}\n    steps:\n      - uses: actions/checkout@v4\n        with:\n          sparse-checkout: tools/ci",
-  "replace": "      GH_TOKEN: ${{ github.token }}\n    steps:\n      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4\n        with:\n          sparse-checkout: tools/ci"
- },
- {
-  "id": "E19.8 .github/workflows/ci.yml",
-  "fixes": [
-   "F7"
-  ],
-  "why": "actions were pinned by tag and the deploy job had no environment; they are pinned by commit and the job declares production",
-  "protectedBy": [
-   "MU11",
-   "MU12"
-  ],
-  "file": ".github/workflows/ci.yml",
-  "find": "          sparse-checkout: tools/ci\n          filter: blob:none\n      - uses: actions/setup-node@v4\n        with:\n          node-version: \"22\"",
-  "replace": "          sparse-checkout: tools/ci\n          filter: blob:none\n      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4\n        with:\n          node-version: \"22\""
- },
- {
-  "id": "E20.1 .github/workflows/health.yml",
-  "fixes": [
-   "F7"
-  ],
-  "why": "actions were pinned by tag; they are pinned by commit",
-  "protectedBy": [
-   "MU12"
-  ],
-  "file": ".github/workflows/health.yml",
-  "find": "    steps:\n      - uses: actions/checkout@v4\n        with:",
-  "replace": "    steps:\n      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4\n        with:"
- },
- {
-  "id": "E20.2 .github/workflows/health.yml",
-  "fixes": [
-   "F7"
-  ],
-  "why": "actions were pinned by tag; they are pinned by commit",
-  "protectedBy": [
-   "MU12"
-  ],
-  "file": ".github/workflows/health.yml",
-  "find": "          filter: blob:none\n      - uses: actions/setup-node@v4\n        with:",
-  "replace": "          filter: blob:none\n      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4\n        with:"
- },
- {
-  "id": "E21.1 tools/verify/verify_pages_deny.mjs",
-  "fixes": [
-   "F7"
-  ],
-  "why": "checks that every action is pinned to a full commit and the deploy job declares production",
-  "protectedBy": [
-   "MU11",
-   "MU12"
-  ],
-  "file": "tools/verify/verify_pages_deny.mjs",
-  "find": "\nconsole.log(\"The Pages stage drops operator files, the Vercel deploy path stays removed, and static folders skip the middleware without exposing protected paths\");",
-  "replace": "\nconst workflowDir = path.join(ROOT, \".github/workflows\");\nfor (const name of fs.readdirSync(workflowDir).filter((entry) => /\\.ya?ml$/.test(entry))) {\n  const usesLines = fs.readFileSync(path.join(workflowDir, name), \"utf8\").split(/\\r?\\n/).filter((line) => /^\\s*(-\\s+)?uses:/.test(line));\n  for (const line of usesLines) {\n    assert(/uses:\\s+[\\w.\\/-]+@[0-9a-f]{40}(\\s+#.*)?$/.test(line), name + \" must pin every action to a full commit: \" + line.trim());\n  }\n}\nconst deployJob = (/\\n  deploy:\\n([\\s\\S]*?)(?=\\n  \\S|$)/.exec(fs.readFileSync(path.join(workflowDir, \"ci.yml\"), \"utf8\").replace(/\\r/g, \"\")) || [\"\", \"\"])[1];\nassert(/^    environment: production$/m.test(deployJob), \"the deploy job in ci.yml must declare environment: production\");\n\nconsole.log(\"The Pages stage drops operator files, the Vercel deploy path stays removed, and static folders skip the middleware without exposing protected paths\");"
- }
+  {
+    id: 'E1 edge pass route',
+    fixes: ['F2'],
+    why: 'adds /__human-pass: rate-limited, verifies the Turnstile token with siteverify (action and hostname must match), then asks the database to grant a 12-hour pass for at most two guest ids',
+    protectedBy: ['M1', 'M2', 'M3', 'M4'],
+    file: 'functions/_middleware.js',
+    find: 'async function servePage(context, request) {\n',
+    replace: `const TURNSTILE_VERIFY = "https://challenges.cloudflare.com/turnstile/v0/siteverify";
+const PASS_ACTION = "guest-pass";
+const GUEST_ID = /^[A-Za-z0-9_-]{8,64}$/;
+const NO_STORE = { "Cache-Control": "no-store" };
+
+function passIds(raw) {
+  const list = Array.isArray(raw) ? raw : [];
+  const ids = [];
+  for (const value of list) {
+    const id = typeof value === "string" ? value : "";
+    if (!GUEST_ID.test(id) || id === "edge-rate-limit") continue;
+    if (ids.indexOf(id) >= 0) continue;
+    ids.push(id);
+  }
+  return ids.slice(0, 2);
+}
+
+async function verifyTurnstile(secret, token, ip) {
+  const form = new FormData();
+  form.append("secret", secret);
+  form.append("response", token);
+  form.append("remoteip", ip);
+  try {
+    const res = await fetch(TURNSTILE_VERIFY, { method: "POST", body: form, signal: AbortSignal.timeout(5000) });
+    return await res.json();
+  } catch (e) {
+    return null;
+  }
+}
+
+async function humanPass(context, request) {
+  const env = context.env || {};
+  const secret = env.TURNSTILE_SECRET;
+  const key = env.HUMAN_PASS_KEY;
+  if (!secret || !key) return new Response("Not configured", { status: 503, headers: NO_STORE });
+  const ip = ipOf(request);
+  const decision = await allowed(context, ip, "/__human-pass");
+  if (decision === "deny" || decision === "deny_first") return denied();
+  if (decision !== "allow") return unavailable();
+  let body = {};
+  try { body = await request.json(); } catch (e) { body = {}; }
+  const token = body && typeof body.token === "string" ? body.token.slice(0, 2048) : "";
+  const ids = passIds(body && body.ids);
+  if (!token || !ids.length) return new Response("Bad Request", { status: 400, headers: NO_STORE });
+  const check = await verifyTurnstile(secret, token, ip);
+  const host = new URL(request.url).hostname;
+  const isHuman = !!(check && check.success === true && check.action === PASS_ACTION && check.hostname === host);
+  if (!isHuman) return new Response("Forbidden", { status: 403, headers: NO_STORE });
+  let grant = null;
+  try {
+    grant = await fetch(SUPABASE_URL + "/rest/v1/rpc/exhibit_grant_human_pass", {
+      method: "POST",
+      headers: { apikey: SUPABASE_KEY, Authorization: "Bearer " + SUPABASE_KEY, "Content-Type": "application/json" },
+      body: JSON.stringify({ p_anon_ids: ids, p_key: key }),
+      signal: AbortSignal.timeout(5000)
+    });
+  } catch (e) {
+    grant = null;
+  }
+  if (!grant || !grant.ok) return new Response("Bad Gateway", { status: 502, headers: NO_STORE });
+  const until = await grant.json();
+  return Response.json({ ok: true, until: until }, { headers: NO_STORE });
+}
+
+async function servePage(context, request) {
+`,
+  },
+  {
+    id: 'E2 route the pass path',
+    fixes: ['F2'],
+    why: 'sends POST /__human-pass to the new handler',
+    protectedBy: ['M1'],
+    file: 'functions/_middleware.js',
+    find: '  if (path === "/__rate" && request.method === "POST") return rateProxy(context, request);\n',
+    replace: '  if (path === "/__rate" && request.method === "POST") return rateProxy(context, request);\n  if (path === "/__human-pass" && request.method === "POST") return humanPass(context, request);\n',
+  },
+  {
+    id: 'E3 _routes.json',
+    fixes: ['F2'],
+    why: 'Pages only runs the function for listed paths; static pages stay function-free',
+    protectedBy: ['M5'],
+    file: '_routes.json',
+    find: '    "/__rate",\n',
+    replace: '    "/__rate",\n    "/__human-pass",\n',
+  },
+  {
+    id: 'E4 CSP allows Turnstile again',
+    fixes: ['F3'],
+    why: 'the widget script and its frame come from challenges.cloudflare.com; now actually used',
+    protectedBy: ['M6'],
+    file: '_headers',
+    find: "https://static.cloudflareinsights.com 'sha256",
+    replace: "https://static.cloudflareinsights.com https://challenges.cloudflare.com 'sha256",
+  },
+  {
+    id: 'E5 CSP frame-src',
+    fixes: ['F3'],
+    why: 'the Turnstile challenge renders in a frame from challenges.cloudflare.com, the only frame the site uses',
+    protectedBy: ['M6'],
+    file: '_headers',
+    find: "frame-src 'none';",
+    replace: 'frame-src https://challenges.cloudflare.com;',
+  },
+  {
+    id: 'E6 header test: Turnstile script',
+    fixes: ['F3'],
+    why: 'the header check now requires the Turnstile host, because the site uses it',
+    protectedBy: [],
+    file: 'tools/verify-headers.mjs',
+    find: 'assert(!cspDirectives[\'script-src\']?.includes("https://challenges.cloudflare.com"), "CSP script-src does not allow the unused Turnstile host");',
+    replace: 'assert(cspDirectives[\'script-src\']?.includes("https://challenges.cloudflare.com"), "CSP script-src allows challenges.cloudflare.com for the guest human check (Turnstile)");',
+  },
+  {
+    id: 'E7 header test: Turnstile frame',
+    fixes: ['F3'],
+    why: 'frame-src must be exactly the Turnstile host',
+    protectedBy: [],
+    file: 'tools/verify-headers.mjs',
+    find: 'assert(cspDirectives[\'frame-src\']?.length === 1 && cspDirectives[\'frame-src\'][0] === "\'none\'", "CSP frame-src is \'none\': the site embeds no frames");',
+    replace: 'assert(cspDirectives[\'frame-src\']?.length === 1 && cspDirectives[\'frame-src\'][0] === "https://challenges.cloudflare.com", "CSP frame-src allows only the Turnstile challenge frame");',
+  },
+  {
+    id: 'E8 insights: wait for a pass',
+    fixes: ['F3'],
+    why: 'a guest flush first obtains a human pass; members and pages without the module carry on as before, and the database stays the judge',
+    protectedBy: [],
+    file: 'js/shared/insights.js',
+    find: '  function flush() {\n    if (flushing || optedOut() || !consented()) return Promise.resolve();\n',
+    replace: `  function withHumanPass(user, send) {
+    const pass = window.HumanPass;
+    if (user || !pass || typeof pass.ready !== 'function') return Promise.resolve(send());
+    return pass.ready().then(function (isHuman) {
+      return isHuman ? send() : { error: { message: 'human_check' } };
+    });
+  }
+
+  function flush() {
+    if (flushing || optedOut() || !consented()) return Promise.resolve();
+`,
+  },
+  {
+    id: 'E9 insights: flush through the pass',
+    fixes: ['F3'],
+    why: 'without a pass the batch is kept and its flush slots refunded, exactly as for any failed insert',
+    protectedBy: [],
+    file: 'js/shared/insights.js',
+    find: `    return client.from(TABLE).insert(batch.map(function (row) {
+      return Object.assign({ user_id: user ? user.id : null }, row);
+    })).then(function (res) {`,
+    replace: `    return withHumanPass(user, function () {
+      return client.from(TABLE).insert(batch.map(function (row) {
+        return Object.assign({ user_id: user ? user.id : null }, row);
+      }));
+    }).then(function (res) {`,
+  },
+  {
+    id: 'E10 insights: surveys through the pass',
+    fixes: ['F3'],
+    why: 'guest surveys also need a pass; a refusal releases the survey slot like any failed insert',
+    protectedBy: [],
+    file: 'js/shared/insights.js',
+    find: `    return pair.client.from('exhibit_surveys').insert(Object.assign({
+      user_id: pair.user ? pair.user.id : null,
+      anon_id: anonId(),
+      cohort: '',
+      role: 'Student',
+      feedback: '',
+      responses: {}
+    }, row)).then(function (res) {`,
+    replace: `    return withHumanPass(pair.user, function () {
+      return pair.client.from('exhibit_surveys').insert(Object.assign({
+        user_id: pair.user ? pair.user.id : null,
+        anon_id: anonId(),
+        cohort: '',
+        role: 'Student',
+        feedback: '',
+        responses: {}
+      }, row));
+    }).then(function (res) {`,
+  },
+  {
+    id: 'E11 ops: flush through the pass',
+    fixes: ['F3'],
+    why: 'guest error reports also need a pass; the queue is kept when there is none',
+    protectedBy: [],
+    file: 'js/shared/ops.js',
+    find: `    return client.from(TABLE).insert(batch.map(function (row) {
+      return {
+        event: row.event,
+        anon_id: anonId(),
+        page: row.page,
+        detail: { reason: row.reason, ms: row.ms, cause: row.cause },
+        user_id: user ? user.id : null
+      };
+    })).then(function (res) {`,
+    replace: `    const pass = window.HumanPass;
+    const send = function () {
+      return client.from(TABLE).insert(batch.map(function (row) {
+        return {
+          event: row.event,
+          anon_id: anonId(),
+          page: row.page,
+          detail: { reason: row.reason, ms: row.ms, cause: row.cause },
+          user_id: user ? user.id : null
+        };
+      }));
+    };
+    const sent = user || !pass || typeof pass.ready !== "function"
+      ? Promise.resolve(send())
+      : pass.ready().then(function (isHuman) { return isHuman ? send() : { error: { message: "human_check" } }; });
+    return sent.then(function (res) {`,
+  },
+  {
+    id: 'E12 ops: share the guest id',
+    fixes: ['F3'],
+    why: 'the human-check module needs the error-report guest id to cover it with the same pass',
+    protectedBy: ['M7'],
+    file: 'js/shared/ops.js',
+    find: '  window.SiteOps = { report: report, flush: flush };\n',
+    replace: '  window.SiteOps = { report: report, flush: flush, anonId: anonId };\n',
+  },
+  ...pageEdits,
+  {
+    id: 'E13 privacy: Cloudflare row',
+    fixes: ['F4'],
+    why: 'Turnstile is a Cloudflare service that processes visitor data for the human check',
+    protectedBy: [],
+    file: 'privacy.html',
+    find: '<tr><td>Cloudflare (hosting, rate limiting, Web Analytics)</td><td>IP address and request details for each page; short-lived rate-limit counts; aggregate page views</td><td>Hosting, protection against abuse, and page-view counts</td>',
+    replace: '<tr><td>Cloudflare (hosting, rate limiting, Web Analytics, Turnstile)</td><td>IP address and request details for each page; short-lived rate-limit counts; aggregate page views; for guests, the browser signals Turnstile uses to tell people from automated scripts</td><td>Hosting, protection against abuse, page-view counts, and a human check before a guest\'s study activity is stored</td>',
+  },
+  {
+    id: 'E14 privacy: storage row',
+    fixes: ['F4'],
+    why: 'lists the new session-only key',
+    protectedBy: [],
+    file: 'privacy.html',
+    find: '              <tr><td>baInsightsOptOut</td><td>Legacy analytics setting</td></tr>\n',
+    replace: '              <tr><td>baHumanPass:&lt;ID&gt;</td><td>When a guest\'s human check expires (about 12 hours), removed when the tab closes</td></tr>\n              <tr><td>baInsightsOptOut</td><td>Legacy analytics setting</td></tr>\n',
+  },
+  {
+    id: 'E15 audit PT-19 survey',
+    fixes: ['F5'],
+    why: 'guest surveys without a pass are now refused outright; the live check proves that and no longer stores five rows',
+    protectedBy: [],
+    file: 'tools/security/run_penetration_audit.mjs',
+    find: `async function liveSurveyRate() {
+  const anonId = "pen-" + crypto.randomUUID().replace(/-/g, "").slice(0, 24);
+  let stored = 0;
+  let rejected = null;
+  for (let i = 0; i < 6; i += 1) {
+    const res = await api("POST", "/rest/v1/exhibit_surveys", {
+      user_id: null,
+      anon_id: anonId,
+      cohort: "",
+      role: "Student",
+      feedback: "pen",
+      responses: { kind: "pen" },
+      created_at: "2000-01-01T00:00:00.000Z"
+    }, { Prefer: "return=minimal" });
+    if (res.status === 200 || res.status === 201) stored += 1;
+    else {
+      rejected = res;
+      break;
+    }
+  }
+  if (stored !== 5 || !rejected) throw new Error("survey spam stored " + stored + " rows");
+  if (!rejected.text.includes("rate_limit")) throw new Error("sixth survey replied " + rejected.status + " " + clip(rejected.text));
+  return "5 surveys stored, the 6th rejected with rate_limit";
+}`,
+    replace: `async function liveSurveyRate() {
+  const anonId = "pen-" + crypto.randomUUID().replace(/-/g, "").slice(0, 24);
+  const res = await api("POST", "/rest/v1/exhibit_surveys", {
+    user_id: null,
+    anon_id: anonId,
+    cohort: "",
+    role: "Student",
+    feedback: "pen",
+    responses: { kind: "pen" }
+  }, { Prefer: "return=minimal" });
+  if (res.status === 200 || res.status === 201) throw new Error("a guest survey without a human pass was stored");
+  if (!res.text.includes("human_check")) throw new Error("guest survey replied " + res.status + " " + clip(res.text));
+  return "guest survey without a human pass rejected with human_check";
+}`,
+  },
+  {
+    id: 'E16 audit PT-20 events',
+    fixes: ['F5'],
+    why: 'guest events without a pass are now refused outright; the live check proves that and no longer stores sixty rows',
+    protectedBy: [],
+    file: 'tools/security/run_penetration_audit.mjs',
+    find: `  const anonId = "pen-" + crypto.randomUUID().replace(/-/g, "").slice(0, 24);
+  let stored = 0;
+  let rejected = null;
+  for (let i = 0; i < 61; i += 1) {
+    const res = await api("POST", "/rest/v1/exhibit_events", {
+      event: "pen_probe",
+      page: "pen",
+      anon_id: anonId,
+      session_id: "pen",
+      detail: {},
+      created_at: "2000-01-01T00:00:00.000Z"
+    }, { Prefer: "return=minimal" });
+    if (res.status === 200 || res.status === 201) stored += 1;
+    else {
+      rejected = res;
+      break;
+    }
+  }
+  if (stored !== 60 || !rejected) throw new Error("event spam stored " + stored + " rows");
+  if (!rejected.text.includes("rate_limit")) throw new Error("61st event replied " + rejected.status + " " + clip(rejected.text));
+  return "nameless event rejected; 60 events stored; the 61st rejected with rate_limit";
+}`,
+    replace: `  const anonId = "pen-" + crypto.randomUUID().replace(/-/g, "").slice(0, 24);
+  const res = await api("POST", "/rest/v1/exhibit_events", {
+    event: "pen_probe",
+    page: "pen",
+    anon_id: anonId,
+    session_id: "pen",
+    detail: {}
+  }, { Prefer: "return=minimal" });
+  if (res.status === 200 || res.status === 201) throw new Error("a guest event without a human pass was stored");
+  if (!res.text.includes("human_check")) throw new Error("guest event replied " + res.status + " " + clip(res.text));
+  return "nameless event rejected; guest event without a human pass rejected with human_check";
+}
+
+async function liveHumanPassGrantClosed() {
+  const res = await api("POST", "/rest/v1/rpc/exhibit_grant_human_pass", {
+    p_anon_ids: ["pen-" + crypto.randomUUID().replace(/-/g, "").slice(0, 24)],
+    p_key: "not-the-edge-key"
+  });
+  if (res.status === 200 || res.status === 201 || res.status === 204) throw new Error("a human pass was granted without the edge key");
+  if (!res.text.includes("not allowed") && res.status !== 401 && res.status !== 403) throw new Error("pass grant replied " + res.status + " " + clip(res.text));
+  return "pass grant without the edge key refused (" + res.status + ")";
+}`,
+  },
+  {
+    id: 'E17 audit PT-20 nameless',
+    fixes: ['F5'],
+    why: 'the human-pass trigger fires before the rate gate, so a nameless guest event is now refused with human_check',
+    protectedBy: [],
+    file: 'tools/security/run_penetration_audit.mjs',
+    find: `  if (!nameless.text.includes("rate_limit")) {
+    throw new Error("nameless event replied " + nameless.status + " " + clip(nameless.text));
+  }`,
+    replace: `  if (!nameless.text.includes("rate_limit") && !nameless.text.includes("human_check")) {
+    throw new Error("nameless event replied " + nameless.status + " " + clip(nameless.text));
+  }`,
+  },
+  {
+    id: 'E18 audit list',
+    fixes: ['F5'],
+    why: 'renames PT-19 and PT-20 and adds PT-23',
+    protectedBy: [],
+    file: 'tools/security/run_penetration_audit.mjs',
+    find: `  ["PT-19", "Survey spam stops at 5 an hour", liveSurveyRate],
+  ["PT-20", "Event spam stops at 60 a minute", liveEventRateAndIdentity],
+  ["PT-21", "Research copies and build input are not deployable", deployLeakPaths],
+  ["PT-22", "Message desk hides authors, help notes, and receipts", liveDeskClosed]
+];
+
+if (tests.length !== 22) throw new Error("expected 22 tests, found " + tests.length);`,
+    replace: `  ["PT-19", "Guest surveys need a human pass", liveSurveyRate],
+  ["PT-20", "Guest events need an identity and a human pass", liveEventRateAndIdentity],
+  ["PT-21", "Research copies and build input are not deployable", deployLeakPaths],
+  ["PT-22", "Message desk hides authors, help notes, and receipts", liveDeskClosed],
+  ["PT-23", "A human pass cannot be granted without the edge key", liveHumanPassGrantClosed]
+];
+
+if (tests.length !== 23) throw new Error("expected 23 tests, found " + tests.length);`,
+  },
 ];

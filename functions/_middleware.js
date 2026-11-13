@@ -140,6 +140,70 @@ async function takeReport(context, request) {
   return new Response(null, { status: 204, headers: { "Cache-Control": "no-store" } });
 }
 
+const TURNSTILE_VERIFY = "https://challenges.cloudflare.com/turnstile/v0/siteverify";
+const PASS_ACTION = "guest-pass";
+const GUEST_ID = /^[A-Za-z0-9_-]{8,64}$/;
+const NO_STORE = { "Cache-Control": "no-store" };
+
+function passIds(raw) {
+  const list = Array.isArray(raw) ? raw : [];
+  const ids = [];
+  for (const value of list) {
+    const id = typeof value === "string" ? value : "";
+    if (!GUEST_ID.test(id) || id === "edge-rate-limit") continue;
+    if (ids.indexOf(id) >= 0) continue;
+    ids.push(id);
+  }
+  return ids.slice(0, 2);
+}
+
+async function verifyTurnstile(secret, token, ip) {
+  const form = new FormData();
+  form.append("secret", secret);
+  form.append("response", token);
+  form.append("remoteip", ip);
+  try {
+    const res = await fetch(TURNSTILE_VERIFY, { method: "POST", body: form, signal: AbortSignal.timeout(5000) });
+    return await res.json();
+  } catch (e) {
+    return null;
+  }
+}
+
+async function humanPass(context, request) {
+  const env = context.env || {};
+  const secret = env.TURNSTILE_SECRET;
+  const key = env.HUMAN_PASS_KEY;
+  if (!secret || !key) return new Response("Not configured", { status: 503, headers: NO_STORE });
+  const ip = ipOf(request);
+  const decision = await allowed(context, ip, "/__human-pass");
+  if (decision === "deny" || decision === "deny_first") return denied();
+  if (decision !== "allow") return unavailable();
+  let body = {};
+  try { body = await request.json(); } catch (e) { body = {}; }
+  const token = body && typeof body.token === "string" ? body.token.slice(0, 2048) : "";
+  const ids = passIds(body && body.ids);
+  if (!token || !ids.length) return new Response("Bad Request", { status: 400, headers: NO_STORE });
+  const check = await verifyTurnstile(secret, token, ip);
+  const host = new URL(request.url).hostname;
+  const isHuman = !!(check && check.success === true && check.action === PASS_ACTION && check.hostname === host);
+  if (!isHuman) return new Response("Forbidden", { status: 403, headers: NO_STORE });
+  let grant = null;
+  try {
+    grant = await fetch(SUPABASE_URL + "/rest/v1/rpc/exhibit_grant_human_pass", {
+      method: "POST",
+      headers: { apikey: SUPABASE_KEY, Authorization: "Bearer " + SUPABASE_KEY, "Content-Type": "application/json" },
+      body: JSON.stringify({ p_anon_ids: ids, p_key: key }),
+      signal: AbortSignal.timeout(5000)
+    });
+  } catch (e) {
+    grant = null;
+  }
+  if (!grant || !grant.ok) return new Response("Bad Gateway", { status: 502, headers: NO_STORE });
+  const until = await grant.json();
+  return Response.json({ ok: true, until: until }, { headers: NO_STORE });
+}
+
 async function servePage(context, request) {
   const assets = context.env && context.env.ASSETS;
   const target = request.method === "GET" ? extensionlessUrl(new URL(request.url)) : null;
@@ -196,6 +260,7 @@ async function handle(context) {
   if (path === "/csp-report" && request.method === "POST") return takeReport(context, request);
   if (request.method === "OPTIONS") return context.next();
   if (path === "/__rate" && request.method === "POST") return rateProxy(context, request);
+  if (path === "/__human-pass" && request.method === "POST") return humanPass(context, request);
   if (STATIC_PREFIXES.some(function (prefix) { return path.startsWith(prefix); })) return context.next();
   const ip = ipOf(request);
   const decision = await allowed(context, ip, path);

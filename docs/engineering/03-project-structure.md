@@ -48,7 +48,7 @@ Every page loads `cinema.css`, `terms.css` and `consent.css`. All except `privac
 | `privacy.html`, `terms.html` | Sentry, `cinema.js`, `consent.js` only | `site.css`, `account.css` |
 | `404.html` | Shared base only | `site.css` |
 
-**Shared base** (most pages): Sentry, `cinema.js`, `journey.js`, `auth-config.js`, Supabase, `net.js`, `errors.js`, `ops.js`, `auth.js`, `desk.js`, `terms.js`, `consent.js`, all under `js/shared/`.
+**Shared base** (most pages): Sentry, `cinema.js`, `journey.js`, `auth-config.js`, Supabase, `net.js`, `errors.js`, `ops.js`, `human-pass.js`, `auth.js`, `desk.js`, `terms.js`, `consent.js`, all under `js/shared/`.
 
 To check the current list, run:
 
@@ -60,7 +60,7 @@ grep -oE '<script[^>]+src="[^"]+"' study.html
 
 | Folder | What lives there | Main files |
 |---|---|---|
-| `js/shared/` | Code used by many pages: sign-in, access rules, sync, analytics, errors, network, consent, terms, desk, reviews, account | `journey.js`, `auth.js`, `progress-sync.js`, `study-sync.js`, `quiz-gate.js`, `insights.js`, `ops.js`, `net.js`, `errors.js`, `consent.js`, `desk.js`, `reviews.js`, `account.js`, `mfa.js`, `sentry.js` |
+| `js/shared/` | Code used by many pages: sign-in, access rules, sync, analytics, errors, network, consent, terms, desk, reviews, account | `journey.js`, `auth.js`, `progress-sync.js`, `study-sync.js`, `quiz-gate.js`, `insights.js`, `ops.js`, `human-pass.js` (guest Turnstile pass), `net.js`, `errors.js`, `consent.js`, `desk.js`, `reviews.js`, `account.js`, `mfa.js`, `sentry.js` |
 | `js/study/` | The study desk | `study-app.js` (the page controller), `book-reader.js`, `mindmap.js`, `task-flow.js`, `term-overlay.js`, `workbench.js`, `competency.js`, `certificate.js`, `scripture.js` |
 | `js/study/sheets/` | The 11 sittings, one file each, plus `index.js` (the list and the on-demand loader). **Generated** from `js/study/sheets-data.js` by `node tools/build_study_sheets.mjs`. | `index.js`, `sheet-0.js` … `sheet-10.js` |
 | `js/map/` | The map | `map.js` (engine), `map-data.js` (kingdoms, cities, events, routes), `globe.js` (3D globe view) |

@@ -65,15 +65,22 @@
     if (!client || !queued.length) return Promise.resolve();
     flushing = true;
     const batch = queued.slice(0, 10);
-    return client.from(TABLE).insert(batch.map(function (row) {
-      return {
-        event: row.event,
-        anon_id: anonId(),
-        page: row.page,
-        detail: { reason: row.reason, ms: row.ms, cause: row.cause },
-        user_id: user ? user.id : null
-      };
-    })).then(function (res) {
+    const pass = window.HumanPass;
+    const send = function () {
+      return client.from(TABLE).insert(batch.map(function (row) {
+        return {
+          event: row.event,
+          anon_id: anonId(),
+          page: row.page,
+          detail: { reason: row.reason, ms: row.ms, cause: row.cause },
+          user_id: user ? user.id : null
+        };
+      }));
+    };
+    const sent = user || !pass || typeof pass.ready !== "function"
+      ? Promise.resolve(send())
+      : pass.ready().then(function (isHuman) { return isHuman ? send() : { error: { message: "human_check" } }; });
+    return sent.then(function (res) {
       if (res && !res.error) writeQueue(readQueue().slice(batch.length));
     }).catch(function () {}).then(function () {
       flushing = false;
@@ -85,5 +92,5 @@
     setInterval(flush, 10000);
   }
 
-  window.SiteOps = { report: report, flush: flush };
+  window.SiteOps = { report: report, flush: flush, anonId: anonId };
 })();

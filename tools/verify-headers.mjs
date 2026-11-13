@@ -108,8 +108,8 @@ assert(!cspDirectives['script-src']?.includes("https://cdnjs.cloudflare.com"), "
 assert(!cspDirectives['script-src']?.includes("'unsafe-inline'"), "CSP script-src no longer allows arbitrary inline scripts");
 assert(cspDirectives['script-src']?.some(v => /^'sha256-/.test(v)), "CSP script-src carries sha256 hashes for the site's own inline scripts");
 assert(cspDirectives['script-src']?.includes("https://static.cloudflareinsights.com"), "CSP script-src includes static.cloudflareinsights.com");
-assert(!cspDirectives['script-src']?.includes("https://challenges.cloudflare.com"), "CSP script-src does not allow the unused Turnstile host");
-assert(cspDirectives['frame-src']?.length === 1 && cspDirectives['frame-src'][0] === "'none'", "CSP frame-src is 'none': the site embeds no frames");
+assert(cspDirectives['script-src']?.includes("https://challenges.cloudflare.com"), "CSP script-src allows challenges.cloudflare.com for the guest human check (Turnstile)");
+assert(cspDirectives['frame-src']?.length === 1 && cspDirectives['frame-src'][0] === "https://challenges.cloudflare.com", "CSP frame-src allows only the Turnstile challenge frame");
 
 lines.forEach((line, i) => {
   assert(line.length <= 1950, `_headers line ${i + 1} is ${line.length} characters; Cloudflare Pages drops any line over 2,000, so keep a margin`);

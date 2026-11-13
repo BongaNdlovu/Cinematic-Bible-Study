@@ -675,27 +675,17 @@ async function liveReviewAndSaveDenied() {
 
 async function liveSurveyRate() {
   const anonId = "pen-" + crypto.randomUUID().replace(/-/g, "").slice(0, 24);
-  let stored = 0;
-  let rejected = null;
-  for (let i = 0; i < 6; i += 1) {
-    const res = await api("POST", "/rest/v1/exhibit_surveys", {
-      user_id: null,
-      anon_id: anonId,
-      cohort: "",
-      role: "Student",
-      feedback: "pen",
-      responses: { kind: "pen" },
-      created_at: "2000-01-01T00:00:00.000Z"
-    }, { Prefer: "return=minimal" });
-    if (res.status === 200 || res.status === 201) stored += 1;
-    else {
-      rejected = res;
-      break;
-    }
-  }
-  if (stored !== 5 || !rejected) throw new Error("survey spam stored " + stored + " rows");
-  if (!rejected.text.includes("rate_limit")) throw new Error("sixth survey replied " + rejected.status + " " + clip(rejected.text));
-  return "5 surveys stored, the 6th rejected with rate_limit";
+  const res = await api("POST", "/rest/v1/exhibit_surveys", {
+    user_id: null,
+    anon_id: anonId,
+    cohort: "",
+    role: "Student",
+    feedback: "pen",
+    responses: { kind: "pen" }
+  }, { Prefer: "return=minimal" });
+  if (res.status === 200 || res.status === 201) throw new Error("a guest survey without a human pass was stored");
+  if (!res.text.includes("human_check")) throw new Error("guest survey replied " + res.status + " " + clip(res.text));
+  return "guest survey without a human pass rejected with human_check";
 }
 
 async function liveEventRateAndIdentity() {
@@ -708,30 +698,30 @@ async function liveEventRateAndIdentity() {
     detail: {}
   }, { Prefer: "return=minimal" });
   if (nameless.status === 200 || nameless.status === 201) throw new Error("an event with no identity was stored");
-  if (!nameless.text.includes("rate_limit")) {
+  if (!nameless.text.includes("rate_limit") && !nameless.text.includes("human_check")) {
     throw new Error("nameless event replied " + nameless.status + " " + clip(nameless.text));
   }
   const anonId = "pen-" + crypto.randomUUID().replace(/-/g, "").slice(0, 24);
-  let stored = 0;
-  let rejected = null;
-  for (let i = 0; i < 61; i += 1) {
-    const res = await api("POST", "/rest/v1/exhibit_events", {
-      event: "pen_probe",
-      page: "pen",
-      anon_id: anonId,
-      session_id: "pen",
-      detail: {},
-      created_at: "2000-01-01T00:00:00.000Z"
-    }, { Prefer: "return=minimal" });
-    if (res.status === 200 || res.status === 201) stored += 1;
-    else {
-      rejected = res;
-      break;
-    }
-  }
-  if (stored !== 60 || !rejected) throw new Error("event spam stored " + stored + " rows");
-  if (!rejected.text.includes("rate_limit")) throw new Error("61st event replied " + rejected.status + " " + clip(rejected.text));
-  return "nameless event rejected; 60 events stored; the 61st rejected with rate_limit";
+  const res = await api("POST", "/rest/v1/exhibit_events", {
+    event: "pen_probe",
+    page: "pen",
+    anon_id: anonId,
+    session_id: "pen",
+    detail: {}
+  }, { Prefer: "return=minimal" });
+  if (res.status === 200 || res.status === 201) throw new Error("a guest event without a human pass was stored");
+  if (!res.text.includes("human_check")) throw new Error("guest event replied " + res.status + " " + clip(res.text));
+  return "nameless event rejected; guest event without a human pass rejected with human_check";
+}
+
+async function liveHumanPassGrantClosed() {
+  const res = await api("POST", "/rest/v1/rpc/exhibit_grant_human_pass", {
+    p_anon_ids: ["pen-" + crypto.randomUUID().replace(/-/g, "").slice(0, 24)],
+    p_key: "not-the-edge-key"
+  });
+  if (res.status === 200 || res.status === 201 || res.status === 204) throw new Error("a human pass was granted without the edge key");
+  if (!res.text.includes("not allowed") && res.status !== 401 && res.status !== 403) throw new Error("pass grant replied " + res.status + " " + clip(res.text));
+  return "pass grant without the edge key refused (" + res.status + ")";
 }
 
 /*
@@ -846,13 +836,14 @@ const tests = [
   ["PT-16", "Anonymous key cannot grade a quiz", liveQuizRpcDenied],
   ["PT-17", "Anonymous key cannot read private learner data", livePrivateTables],
   ["PT-18", "Anonymous key cannot approve a review or save progress", liveReviewAndSaveDenied],
-  ["PT-19", "Survey spam stops at 5 an hour", liveSurveyRate],
-  ["PT-20", "Event spam stops at 60 a minute", liveEventRateAndIdentity],
+  ["PT-19", "Guest surveys need a human pass", liveSurveyRate],
+  ["PT-20", "Guest events need an identity and a human pass", liveEventRateAndIdentity],
   ["PT-21", "Research copies and build input are not deployable", deployLeakPaths],
-  ["PT-22", "Message desk hides authors, help notes, and receipts", liveDeskClosed]
+  ["PT-22", "Message desk hides authors, help notes, and receipts", liveDeskClosed],
+  ["PT-23", "A human pass cannot be granted without the edge key", liveHumanPassGrantClosed]
 ];
 
-if (tests.length !== 22) throw new Error("expected 22 tests, found " + tests.length);
+if (tests.length !== 23) throw new Error("expected 23 tests, found " + tests.length);
 
 const results = [];
 for (const [id, title, fn] of tests) {

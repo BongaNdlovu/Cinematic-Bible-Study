@@ -3,6 +3,7 @@
   "include": [
     "/csp-report",
     "/__rate",
+    "/__human-pass",
     "/docs/*",
     "/tools/*",
     "/tests/*",

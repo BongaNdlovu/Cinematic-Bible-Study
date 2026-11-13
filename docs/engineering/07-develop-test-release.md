@@ -23,7 +23,7 @@ The server binds `127.0.0.1`. It starts at port 8000, or at `PORT` if that is se
 | `npm run lint` | `oxlint` over the code. CI fails on any error. The complexity ceiling is 55 per function (see `docs/ARCHITECTURE.md`). |
 | `npm run test:unit` | `node --test "tests/unit/*.test.mjs"`: fast unit tests, no browser |
 | `npm test` | The regression suite: 24 `tools/verify/verify_*.mjs` scripts plus `tools/verify-headers.mjs`. Some start `server.py` and drive Chromium through Playwright. |
-| `npm run test:security` | 22 penetration-style checks (`tools/security/run_penetration_audit.mjs`). PT-19 and PT-20 write real rows to the live database to prove the spam limits (5 surveys and 60 events per run). `exhibit_prune_test_rows()` deletes them within the hour. |
+| `npm run test:security` | 23 penetration-style checks (`tools/security/run_penetration_audit.mjs`). Since 13 November 2026 PT-19 and PT-20 prove that guest writes without a human pass are refused, so they no longer leave rows behind; `exhibit_prune_test_rows()` still clears any that appear. |
 | `npm run smoke` | Smoke test of the live site (`tools/smoke.mjs`) |
 | `npm run build:tailwind` | Rebuild `css/study-tailwind.css` |
 | `npm run compress`, `compress:beasts`, `compress:daniel8`, `compress:visions`, `compress:daniel11` | Rebuild compressed 3D models from `models/originals/` |
