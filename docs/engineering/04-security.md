@@ -27,17 +27,19 @@ The browser is not trusted. Pages are public files, and the browser talks to Sup
 
 | Header | Value |
 |---|---|
-| `Content-Security-Policy` | `default-src 'self'`. Scripts come from `'self'`, a fixed list of `sha256-` hashes for the inline scripts, Cloudflare Insights and `challenges.cloudflare.com`, plus `'wasm-unsafe-eval'` for WebAssembly (the Meshopt model decoder). `connect-src` lists only Supabase (https and wss), Sentry, Cloudflare Insights, the map tile hosts and Google Fonts. `object-src 'none'`, `frame-ancestors 'none'`, `base-uri 'self'`, `form-action 'self'`, `upgrade-insecure-requests`, `report-uri /csp-report`. |
+| `Content-Security-Policy` | `default-src 'self'`. Scripts come from `'self'`, a fixed list of `sha256-` hashes for the inline scripts and Cloudflare Insights, plus `'wasm-unsafe-eval'` for WebAssembly (the Meshopt model decoder). `connect-src` lists only Supabase (https and wss), Sentry, Cloudflare Insights, the map tile hosts and Google Fonts. `object-src 'none'`, `frame-src 'none'` (the site embeds no frames), `frame-ancestors 'none'`, `base-uri 'self'`, `form-action 'self'`, `upgrade-insecure-requests`, `report-uri /csp-report`. |
 | `X-Frame-Options` | `DENY` |
 | `X-Content-Type-Options` | `nosniff` |
 | `Referrer-Policy` | `strict-origin-when-cross-origin` |
 | `Permissions-Policy` | `camera=(), microphone=(), geolocation=()` |
 | `Strict-Transport-Security` | `max-age=31536000; includeSubDomains; preload` |
-| `Cross-Origin-Opener-Policy` | `same-origin-allow-popups` |
+| `Cross-Origin-Opener-Policy` | `same-origin` |
 
 `style-src` allows `'unsafe-inline'`, because the pages use inline `style` attributes. Scripts do not get `'unsafe-inline'`.
 
-`js/shared/auth-config.js` holds a `turnstileSiteKey`, and the CSP allows `challenges.cloudflare.com` and a Turnstile frame. No code in `js/` reads that key today, so Turnstile is configured but not used by the site's own scripts.
+`js/shared/auth-config.js` holds a `turnstileSiteKey`, but no code in `js/` reads it. On 13 November 2026 the CSP stopped allowing `challenges.cloudflare.com` (scripts and frames), so an unused third-party host can no longer load (OWASP third-party JavaScript guidance). Adding Turnstile later means adding that host back to `script-src` and `frame-src` and updating `tools/verify-headers.mjs`.
+
+`Cross-Origin-Opener-Policy` is `same-origin` (OWASP HTTP headers cheat sheet), not `same-origin-allow-popups`. Sign-in is a full-page redirect to Google, not a popup, and no code in `js/` calls `window.open`.
 
 **Inline scripts:** each inline `<script>` must match a hash in the CSP. `tools/verify/verify_csp_hashes.mjs` (part of `npm test`) fails if a hash is missing or no longer used. `tools/verify/verify_csp_policy.mjs` loads 7 pages under the real policy and fails on any blocked resource.
 

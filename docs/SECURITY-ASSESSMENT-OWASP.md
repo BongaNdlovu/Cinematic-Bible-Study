@@ -11,8 +11,8 @@ The site is in good shape for its kind: a static site with Supabase (database an
 | Result | Count |
 |---|---|
 | Meets the guidance | 23 points |
-| Gaps fixed in this change | 4 |
-| Gaps left open, with a reason | 7 |
+| Gaps fixed | 6 (4 at first, 2 more after your decision) |
+| Gaps left open, with a reason | 5 |
 | Not checked | 6 |
 
 The one **medium** gap left open is that sign-in tokens are kept in `localStorage`. OWASP says not to do this. The strict script policy makes it much harder to exploit, and the real fix needs a server-side session (Phase 2 of `docs/MIGRATION-PLAN-CLOUDFLARE.md`).
@@ -52,8 +52,8 @@ The one **medium** gap left open is that sign-in tokens are kept in `localStorag
 | G1 | **Medium** | Sign-in tokens (access and refresh) are stored in `localStorage` | `Session_Management_Cheat_Sheet.md:201`; `HTML5_Security_Cheat_Sheet.md:53` | Supabase's browser client stores them there; an `HttpOnly` cookie needs a server-side session | Keep the strict script CSP (it is the main defence). Move to server-side sessions in Phase 2 of `docs/MIGRATION-PLAN-CLOUDFLARE.md` |
 | G2 | Low | `style-src` allows `'unsafe-inline'` | `Content_Security_Policy_Cheat_Sheet.md` | Inline styles are used across pages | Move inline styles to classes over time |
 | G3 | Low | CSP reports use only `report-uri` | `Content_Security_Policy_Cheat_Sheet.md:106` | Works in current browsers | Add `report-to` with a `Reporting-Endpoints` header when convenient |
-| G4 | Low | `Cross-Origin-Opener-Policy` is `same-origin-allow-popups`; OWASP recommends `same-origin` | `HTTP_Headers_Cheat_Sheet.md:160-163` | A deliberate setting, pinned by `tools/verify-headers.mjs:88`. No `window.open` was found in `js/` | Your decision: switch to `same-origin` and update the test |
-| G5 | Low | The CSP allows Cloudflare Turnstile (`challenges.cloudflare.com`), but no site code uses it | Third-Party JavaScript | Kept on purpose for future bot checks, and pinned by `tools/verify-headers.mjs:111-112` | Your decision: remove it until it is used, or add Turnstile to sign-up |
+| G4 | — | **Fixed on 13 November 2026, see F5.** `Cross-Origin-Opener-Policy` was `same-origin-allow-popups` | `HTTP_Headers_Cheat_Sheet.md:160-163` | — | — |
+| G5 | — | **Fixed on 13 November 2026, see F6.** The CSP allowed Cloudflare Turnstile, which no site code uses | Third-Party JavaScript | — | — |
 | G6 | Info | Every response, including HTML pages, has `Access-Control-Allow-Origin: *` | `HTTP_Headers_Cheat_Sheet.md:143-148` | `_headers` sets it only for static folders; the HTML responses get it from the host. Not checked whether Pages lets `_headers` remove it | Low risk: the pages are public and no cookies are used |
 | G7 | Info | The `site_notices` table is readable with the public key (it returned an empty list) | Database Security | Its origin is an open question in `docs/engineering/01-overview.md` | Drop the table or revoke `select`, once confirmed unused |
 
@@ -66,7 +66,10 @@ The one **medium** gap left open is that sign-in tokens are kept in `localStorag
 | F3 | Package install scripts could run during `npm ci` | `NPM_Security_Cheat_Sheet.md:46-51` | New `.npmrc` with `ignore-scripts=true`. Only `fsevents` (Mac-only, optional) has an install script, and `package.json` has no lifecycle scripts |
 | F4 | One moderate advisory in a build-time package (`postcss-selector-parser` 6.1.4, via `tailwindcss`; GHSA-rj75-hqrm-r3gf) | `NPM_Security_Cheat_Sheet.md` (audit) | `npm audit fix`: 6.1.6. `npm audit` now reports 0 vulnerabilities |
 
-`tests/unit/supply-chain.test.mjs` (11 tests) keeps F1 to F3 and the SHA pinning in place. Four mutations were caught: a checkout without `persist-credentials: false`, an action pinned to a tag, an empty `.npmrc`, and Dependabot without a cooldown.
+| F5 | `Cross-Origin-Opener-Policy` allowed popups to keep a link to the page | `HTTP_Headers_Cheat_Sheet.md:160-163` | Now `same-origin` in `_headers`. Sign-in is a full-page redirect, and no code calls `window.open`. Done on 13 November 2026, at your decision |
+| F6 | The CSP allowed an unused third-party host (`challenges.cloudflare.com`, Turnstile) for scripts and frames | Third-Party JavaScript | Removed from `script-src`; `frame-src` is now `'none'`. Done on 13 November 2026, at your decision |
+
+`tools/verify-headers.mjs` checks F5 and F6; putting either old value back fails it. `tests/unit/supply-chain.test.mjs` (11 tests) keeps F1 to F3 and the SHA pinning in place. Four mutations were caught: a checkout without `persist-credentials: false`, an action pinned to a tag, an empty `.npmrc`, and Dependabot without a cooldown.
 
 ## 5. Live checks (read-only, 13 November 2026)
 

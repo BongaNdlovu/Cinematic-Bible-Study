@@ -14,6 +14,23 @@ Entry template:
 
 ---
 
+## 2026-11-13 — Stricter popup isolation and no unused Turnstile host
+
+**Why:** Two gaps from `docs/SECURITY-ASSESSMENT-OWASP.md` (G4, G5) that needed your decision; you chose to apply both.
+
+**What changed**
+
+- `_headers`: `Cross-Origin-Opener-Policy: same-origin` (was `same-origin-allow-popups`). The CSP no longer allows `https://challenges.cloudflare.com`: removed from `script-src`, and `frame-src` is now `'none'`.
+- `tools/verify-headers.mjs`: checks the new values. Two mutations were caught (old COOP value; Turnstile back in `frame-src`).
+- `docs/SECURITY-ASSESSMENT-OWASP.md`: G4 and G5 marked fixed (F5, F6).
+- Tested: `npx oxlint` exit 0; `npm run test:unit` 84 of 84; `npm test` exit 0, including "csp policy: 7 pages load under the _headers policy with nothing blocked".
+
+**Handbook updated:** 04.
+
+**Status:** committed and pushed to `master`; CI deploys it.
+
+---
+
 ## 2026-11-13 — OWASP security assessment and supply-chain fixes
 
 **Why:** You asked for the site to be assessed against the OWASP Cheat Sheet Series, and for clear gaps to be fixed.

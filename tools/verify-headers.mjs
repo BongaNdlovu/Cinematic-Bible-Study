@@ -85,7 +85,7 @@ assert(rootH['x-content-type-options']?.value === 'nosniff', 'X-Content-Type-Opt
 assert(rootH['x-frame-options']?.value === 'deny' || rootH['x-frame-options']?.value === 'DENY', 'X-Frame-Options is DENY');
 assert(rootH['referrer-policy']?.value === 'strict-origin-when-cross-origin', 'Referrer-Policy is strict-origin-when-cross-origin');
 assert(rootH['strict-transport-security']?.value?.includes('max-age=31536000'), 'Strict-Transport-Security is enabled');
-assert(rootH['cross-origin-opener-policy']?.value === 'same-origin-allow-popups', 'Cross-Origin-Opener-Policy is same-origin-allow-popups');
+assert(rootH['cross-origin-opener-policy']?.value === 'same-origin', 'Cross-Origin-Opener-Policy is same-origin (OWASP HTTP headers cheat sheet)');
 assert(!rootH['access-control-allow-origin'], 'Access-Control-Allow-Origin is NOT restricted on "/*" (avoids breaking preview deployments)');
 
 // 2. Verify CSP on `/*`
@@ -108,8 +108,8 @@ assert(!cspDirectives['script-src']?.includes("https://cdnjs.cloudflare.com"), "
 assert(!cspDirectives['script-src']?.includes("'unsafe-inline'"), "CSP script-src no longer allows arbitrary inline scripts");
 assert(cspDirectives['script-src']?.some(v => /^'sha256-/.test(v)), "CSP script-src carries sha256 hashes for the site's own inline scripts");
 assert(cspDirectives['script-src']?.includes("https://static.cloudflareinsights.com"), "CSP script-src includes static.cloudflareinsights.com");
-assert(cspDirectives['script-src']?.includes("https://challenges.cloudflare.com"), "CSP script-src includes challenges.cloudflare.com for Turnstile");
-assert(cspDirectives['frame-src']?.includes("https://challenges.cloudflare.com"), "CSP frame-src includes challenges.cloudflare.com for Turnstile");
+assert(!cspDirectives['script-src']?.includes("https://challenges.cloudflare.com"), "CSP script-src does not allow the unused Turnstile host");
+assert(cspDirectives['frame-src']?.length === 1 && cspDirectives['frame-src'][0] === "'none'", "CSP frame-src is 'none': the site embeds no frames");
 
 lines.forEach((line, i) => {
   assert(line.length <= 1950, `_headers line ${i + 1} is ${line.length} characters; Cloudflare Pages drops any line over 2,000, so keep a margin`);
