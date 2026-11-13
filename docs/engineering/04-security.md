@@ -1,6 +1,6 @@
 # 4. Security
 
-**Last verified:** 12 November 2026. The live database facts below come from read-only queries run on that date. Everything else comes from the repository.
+**Last verified:** 13 November 2026 (Privacy and consent section). The live database facts below come from read-only queries run on 12 November 2026. Everything else comes from the repository.
 
 ## The model in one paragraph
 
@@ -155,6 +155,8 @@ Function permissions checked live: guests (`anon`) **can** call `exhibit_public_
 - Analytics events, surveys and the Cloudflare beacon run only after the visitor allows analytics (`sodConsent`). Do-Not-Track or Global Privacy Control records analytics as declined when no choice has been made yet.
 - Operational error reports (`js/shared/ops.js`) and Sentry run without analytics consent, on the legal basis of **legitimate interests (keeping the site working)**, as stated in `privacy.html`. This is a deliberate decision. Without consent, ops reports use a visit-only ID that is deleted when the tab closes. Sentry stores no replays.
 - `privacy.html` lists every storage key the site writes. Update it whenever a key is added.
+- The right to object in `privacy.html` covers legitimate-interest uses only. Study events are consent-based, so readers stop them by withdrawing consent (13 November 2026).
+- Google Fonts load from `fonts.googleapis.com` on every page before any consent choice, on the basis of legitimate interests. This is disclosed but not yet changed. Self-hosting the fonts would remove it.
 
 ## Secrets
 

@@ -14,6 +14,25 @@ Entry template:
 
 ---
 
+## 2026-11-13 — Legal pages match the code
+
+**Why:** A check of the site against a launch legal checklist found three sentences in the terms and privacy policy that no longer matched the code.
+
+**What changed:**
+
+- `terms.html`, "Your account": dropped the advice to choose and change a password. Sign-in is Google only, so the text now asks readers to keep their Google account secure.
+- `terms.html`, "Third-party services": the human check is described as running before a guest's study activity is saved, not "at sign-in". This matches `js/shared/human-pass.js`.
+- `privacy.html`, "Your rights": objection now names legitimate-interest uses (error reports, abuse protection). Study events rely on consent (the lawful-basis table), so the text points to Cookie settings to withdraw it.
+- Not changed: the terms effective date and `TERMS_VERSION` (6, `js/shared/journey.js`). These are corrections, not new obligations, so readers are not asked to accept again.
+
+**Open from the same check (not done):** Google Fonts load from Google before consent; no written breach procedure; no third-party licence notices file; processor agreements not checked.
+
+**Handbook updated:** 04 Security.
+
+**Status:** not committed, not deployed.
+
+---
+
 ## 2026-11-13 — Guest human check (Turnstile)
 
 **Why:** You asked for real bot protection. Any script with the public key could write guest study events and surveys; only rate limits stood in the way. Turnstile only protects anything when a server checks it.
