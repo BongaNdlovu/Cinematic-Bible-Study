@@ -31,9 +31,14 @@ Entry template:
 - Tested: `npx oxlint` exit 0; `npm run test:unit` 101 of 101; `npm test` exit 0, including "csp policy: 7 pages load under the _headers policy with nothing blocked".
 - Live database, 13 November 2026: `tools/supabase-human-pass.sql` run ("Success. No rows returned"). Read-only check: both tables exist with row-level security on; `anon` cannot read either; `anon` can call the grant, `authenticated` cannot; no enforcement triggers yet.
 
+- You stored the hash of `HUMAN_PASS_KEY` in `exhibit_edge_keys` (read-only check: 1 key, 64-character hash). Deployed as `a92ae2d` (CI: test, deploy, smoke success). Live: `/__human-pass` answered 403 to a fake token (so both Cloudflare secrets are set) and 400 to no token.
+- A real guest visit in a private window got a pass (12 hours) and its `sitting_start`, `onboarding` and `scroll_depth` events were stored under the same guest id. Turnstile passed without showing a widget. A headless test browser was held at the challenge, as expected.
+- You ran `tools/supabase-human-pass-enforce.sql`. Read-only check: `exhibit_events_human_pass` and `exhibit_surveys_human_pass` exist and are enabled, next to the rate-gate triggers.
+- `npm run test:security`: 23 passed, 0 failed, including PT-19, PT-20 and PT-23. Afterwards, 0 `pen` events, 0 `pen` surveys and 0 `pen` passes in the database.
+
 **Handbook updated:** 03, 04, 07.
 
-**Status:** committed and pushed; deployed by CI. Enforcement (`tools/supabase-human-pass-enforce.sql`) is switched on only after a live guest visit is seen to get a pass.
+**Status:** committed, pushed, deployed, and enforced in the live database.
 
 ---
 

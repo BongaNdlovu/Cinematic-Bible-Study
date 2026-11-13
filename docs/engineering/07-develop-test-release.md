@@ -49,7 +49,7 @@ The server binds `127.0.0.1`. It starts at port 8000, or at `PORT` if that is se
 | Live smoke | `tools/smoke.mjs` | After every deploy, and every 15 minutes |
 | Production walkthrough | `qa-e2e/production-audit.mjs` (see the root `README.md`) | No |
 
-**Results on 12 November 2026:** lint clean, `npm test` passes, 73 of 73 unit tests pass, and 22 of 22 security checks pass. **On 13 November 2026**, after a clean `npm ci` with `ignore-scripts=true`: lint clean, `npm test` passes, 84 of 84 unit tests pass (11 new supply-chain tests). The security checks were not re-run, because they write test rows to the live database.
+**Results on 12 November 2026:** lint clean, `npm test` passes, 73 of 73 unit tests pass, and 22 of 22 security checks pass. **On 13 November 2026**, after a clean `npm ci` with `ignore-scripts=true`: lint clean, `npm test` passes, 84 of 84 unit tests pass (11 new supply-chain tests). The security checks were not re-run then. **Later on 13 November 2026**, with the guest human check enforced: 101 of 101 unit tests, and `npm run test:security` 23 of 23, writing no rows to the live database.
 
 ## Continuous integration (`.github/workflows/ci.yml`)
 
