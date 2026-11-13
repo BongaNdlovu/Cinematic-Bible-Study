@@ -150,6 +150,11 @@ Function permissions checked live: guests (`anon`) **can** call `exhibit_public_
 - Every third-party GitHub Action is pinned to a full commit hash.
 - The default token is `contents: read`. Only the alert job may write issues.
 - Production deploys run only on pushes to `master`, after lint and every test suite pass, and inside the `production` environment.
+- Every `actions/checkout` sets `persist-credentials: false`, so the token is not left in the runner's git config. No job runs git commands (OWASP GitHub Actions cheat sheet).
+- `.github/dependabot.yml` proposes weekly updates for actions and npm packages, each held back 7 days after release (`cooldown`), so a freshly compromised release is not picked up at once.
+- `.npmrc` sets `ignore-scripts=true`, so `npm ci` runs no package install scripts. On 13 November 2026 only `fsevents` (Mac-only, optional) had one, and `package.json` has no lifecycle scripts.
+- `tests/unit/supply-chain.test.mjs` checks all of the above, plus that no workflow uses `pull_request_target`, `workflow_run` or `issue_comment`.
+- The full OWASP review, with open gaps and their reasons, is `docs/SECURITY-ASSESSMENT-OWASP.md` (13 November 2026).
 
 ## Security tests
 

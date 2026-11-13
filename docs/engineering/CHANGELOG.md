@@ -14,6 +14,26 @@ Entry template:
 
 ---
 
+## 2026-11-13 — OWASP security assessment and supply-chain fixes
+
+**Why:** You asked for the site to be assessed against the OWASP Cheat Sheet Series, and for clear gaps to be fixed.
+
+**What changed**
+
+- New `docs/SECURITY-ASSESSMENT-OWASP.md`: 23 points that meet the guidance, 4 gaps fixed, 7 left open with reasons (one medium: sign-in tokens in `localStorage`), and 6 things not checked. Live checks were read-only.
+- `.github/workflows/ci.yml`, `db-backup.yml`, `health.yml`: `persist-credentials: false` on all 6 checkouts.
+- New `.github/dependabot.yml`: weekly updates for actions and npm, 7-day cooldown.
+- New `.npmrc`: `ignore-scripts=true`.
+- `package-lock.json`: `npm audit fix` moved `postcss-selector-parser` from 6.1.4 to 6.1.6 (moderate advisory GHSA-rj75-hqrm-r3gf, build-time only) and dropped `cssesc`. `npm audit`: 0 vulnerabilities.
+- New `tests/unit/supply-chain.test.mjs` (11 tests). Four mutations were caught.
+- Tested: clean `npm ci`; `npx oxlint` exit 0; `npm run test:unit` 84 of 84; `npm test` exit 0. `npm run test:security` was not re-run (it writes to the live database).
+
+**Handbook updated:** 03, 04, 07.
+
+**Status:** committed and pushed to `master`; CI deploys it.
+
+---
+
 ## 2026-11-13 — Clean up rows left by the live tests
 
 **Why:** `npm run test:security` (PT-19, PT-20) and `tools/verify/verify_live_inserts.mjs` write real rows to the live database to prove the spam limits there. They have to write to prove it, but the rows stayed. A read-only count on 13 November 2026 found 1,328 test events and 117 test surveys, out of 8,917 events and 138 surveys. The dashboard already hid the test events (`PROBES`), and the test surveys had no rating, so no figure was wrong, but the data was cluttered.
