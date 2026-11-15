@@ -14,6 +14,26 @@ Entry template:
 
 ---
 
+## 2026-11-15 — Sign-in required from the first sitting
+
+**Why:** You asked that the study need a sign-in from the start. Until now guests could read the Prologue, Daniel 1 and Daniel 2 without an account.
+
+**What changed:**
+
+- `js/study/study-app.js`: new `gateStudyForMembers()` runs first. It hides the page, waits for the session (`requireMember()`), and sends a guest to `account.html?next=study.html…`. A member sees the page as soon as the session is known. The share text no longer says "No sign-in needed".
+- `js/shared/journey.js`: `FREE_THROUGH` is now `0`, so a new member starts with the Prologue and opens each later sitting by completing the one before. A guest's lock message for any sitting now asks them to sign in. `maxOpenSheet()` still answers 0 for a guest; this lets the study page draw the Prologue while the session is restored, instead of refusing a member who is not yet known.
+- `js/home/shelf.js`: `can()` returns false for a guest (unless `previewAllContent()`), so all eleven volumes show as locked and lead to the account page. The 3D room now waits for `ScrollAuth.ready()` before it is built, so a member's open books are not drawn dimmed.
+- Copy: `account.html` (lead, terms summary, "Signing in" section), `js/shared/account.js` (lead for signed-out readers), `terms.html` ("Signing in" replaces "The free sittings and sign-in"), `privacy.html` (the "without an account" card), `study.html` (access panel line).
+- Tests: `tools/verify/verify_insights.mjs` now expects the new account wording. `tools/verify/verify_portal_and_hubs.mjs` checks that a guest sees every volume locked and is redirected with `next` kept, then signs in with the local QA session and checks that only the Prologue is open, and that Daniel 1 opens once the Prologue is complete.
+- Not changed: `TERMS_VERSION` (6) and the effective dates. You chose not to ask readers to accept the terms again.
+- Not checked: scripts outside `npm test` that open `study.html` as a guest (for example `verify_cp07.mjs`, `verify_lesson_connectors.mjs`, `verify_story_reader.mjs`) will now be redirected and need a `baQaMockSession` before they are run again.
+
+**Handbook updated:** 01 Overview, 02 How it works, 04 Security, 06 UI, 07 Develop, test, release.
+
+**Status:** committed; CI deploys it on push to `master`.
+
+---
+
 ## 2026-11-13 — Legal pages match the code
 
 **Why:** A check of the site against a launch legal checklist found three sentences in the terms and privacy policy that no longer matched the code.

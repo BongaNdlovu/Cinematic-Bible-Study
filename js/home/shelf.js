@@ -76,7 +76,14 @@ const DATA = (SHELF_SRC && SHELF_SRC.length) ? SHELF_SRC.slice() : SAMPLE;
 const N = DATA.length;
 const J = window.BAJourney || null;
 
-function can(i) { try { return J && J.canAccessSheet ? !!J.canAccessSheet(i) : true; } catch (e) { return true; } }
+// Every volume needs a sign-in (15 November 2026): a guest's volumes show as locked and lead to the Account page.
+function can(i) {
+  try {
+    if (J && typeof J.previewAllContent === 'function' && J.previewAllContent()) return true;
+    if (!signedIn()) return false;
+    return J && J.canAccessSheet ? !!J.canAccessSheet(i) : true;
+  } catch (e) { return true; }
+}
 function done(i) { try { return J && J.sheetCompleted ? !!J.sheetCompleted(i) : false; } catch (e) { return false; } }
 function clean(t) {
   return String(t == null ? '' : t)
@@ -2659,7 +2666,11 @@ async function answerInvite() {
   watchForRefresh();
   setLoader(0.06, 'Opening the reading room…');
   try {
-    await Promise.all([whenShown(body), loadFonts(), loadMotifs(), modulesReady]);
+    // Locked books are dimmed when the room is built, so know who is signed in first.
+    const authKnown = window.ScrollAuth && typeof window.ScrollAuth.ready === 'function'
+      ? Promise.resolve(window.ScrollAuth.ready()).catch(() => {})
+      : Promise.resolve();
+    await Promise.all([whenShown(body), loadFonts(), loadMotifs(), modulesReady, authKnown]);
     const room = await startRoom();
     body.classList.remove('is-loading');
     body.classList.add('is-ready');

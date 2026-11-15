@@ -53,8 +53,7 @@ async function run() {
       return st.classList.contains('locked') ? 'Locked' : st.classList.contains('done') ? 'Completed' : 'Open';
     }));
     console.log('   Volume states:', states.join(', '));
-    if (states[0] !== 'Open' || states[1] !== 'Open' || states[2] !== 'Open') throw new Error('Sittings 0-2 should be open to a guest');
-    if (states.slice(3).some((x) => x !== 'Locked')) throw new Error('Sittings 3-10 should be locked for a guest');
+    if (states.some((x) => x !== 'Locked')) throw new Error('Every sitting should be locked for a guest (the study needs a sign-in)');
 
     const progress = (await page.locator('#progress-text').textContent()).trim();
     console.log('   Progress pill:', progress);
@@ -66,6 +65,33 @@ async function run() {
 
     await page.screenshot({ path: 'qa/proofs/shelf_home_overview.png', fullPage: false });
     console.log('   Captured qa/proofs/shelf_home_overview.png');
+
+    console.log('\n=== Step 1b: Verifying a guest who opens the study is sent to sign in, and comes back ===');
+    for (const target of ['study.html', 'study.html?sheet=0']) {
+      await page.goto(`${BASE}/${target}`, { waitUntil: 'domcontentloaded' });
+      await page.waitForURL(/\/account\.html\?next=/, { timeout: 30000 });
+      const next = new URL(page.url()).searchParams.get('next');
+      console.log(`   Guest opening ${target} landed on:`, page.url());
+      if (String(next || '').replace(/^\//, '') !== target) throw new Error(`Guest sign-in redirect lost the destination: expected next=${target}, got ${next}`);
+    }
+
+    console.log('\n=== Step 1c: Signing in (local QA session) opens the Prologue only ===');
+    await page.evaluate(() => {
+      localStorage.setItem('baQaMockSession', JSON.stringify({ user: { id: '00000000-0000-4000-8000-00000000qa01', email: 'qa@example.test', user_metadata: { full_name: 'QA Reader' } } }));
+    });
+    await page.goto(`${BASE}/index.html`, { waitUntil: 'networkidle' });
+    await page.waitForFunction(() => document.querySelectorAll('#cat-list .cat-item').length > 0, null, { timeout: 30000 });
+    await page.waitForFunction(() => {
+      const st = document.querySelector('#cat-list .cat-item .cat-state');
+      return st && !st.classList.contains('locked');
+    }, null, { timeout: 30000 });
+    const memberStates = await page.evaluate(() => [...document.querySelectorAll('#cat-list .cat-item')].map((b) => {
+      const st = b.querySelector('.cat-state');
+      return st.classList.contains('locked') ? 'Locked' : st.classList.contains('done') ? 'Completed' : 'Open';
+    }));
+    console.log('   Volume states for a new member:', memberStates.join(', '));
+    if (memberStates[0] !== 'Open') throw new Error('The Prologue should be open to a signed-in member');
+    if (memberStates.slice(1).some((x) => x !== 'Locked')) throw new Error('Sittings 1-10 should stay locked until the Prologue is complete');
 
     console.log('\n=== Step 2: Verifying study.html with no parameters opens straight into a sitting ===');
     await page.goto(`${BASE}/study.html`, { waitUntil: 'networkidle' });
@@ -80,7 +106,12 @@ async function run() {
     if (!bareShell || !bareTitle) throw new Error('study.html without parameters did not open a sitting');
     if (embeddedShelf || overviewNode) throw new Error('study.html still embeds the shelf overview');
 
-    console.log('\n=== Step 3: Verifying study.html?sheet=1 opens sitting 1 ===');
+    console.log('\n=== Step 3: Verifying study.html?sheet=1 opens sitting 1 once the Prologue is complete ===');
+    await page.evaluate(() => {
+      const j = JSON.parse(localStorage.getItem('baJourney') || '{}');
+      j.completedSheets = [0];
+      localStorage.setItem('baJourney', JSON.stringify(j));
+    });
     await page.goto(`${BASE}/study.html?sheet=1`, { waitUntil: 'networkidle' });
     await page.waitForSelector('#sheet-article[data-sheet-index="1"]', { timeout: 30000 });
     await dismissGuide(page);
@@ -90,8 +121,8 @@ async function run() {
 
     console.log('\n=== Step 3b: Verifying a reader who answered the first-visit questions is not asked again ===');
     const firstVisitAsked = await page.locator('#onboard').isVisible().catch(() => false);
-    console.log('   First-visit questions shown to a new guest:', firstVisitAsked);
-    if (!firstVisitAsked) throw new Error('A new guest was not asked the first-visit questions');
+    console.log('   First-visit questions shown to a new reader:', firstVisitAsked);
+    if (!firstVisitAsked) throw new Error('A new reader was not asked the first-visit questions');
     await page.evaluate(() => {
       localStorage.setItem('baOnboardV1', '1');
       localStorage.setItem('baProfileAsked', '1');

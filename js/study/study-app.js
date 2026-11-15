@@ -14,7 +14,28 @@
       });
     }
 
-    // Guests get the free sittings only; their lock copy invites them to sign in.
+    // Every sitting needs a sign-in (15 November 2026). A guest is sent to the
+    // Account page and returns here afterwards. The page stays hidden until the
+    // session is known, so a guest does not see the lesson flash first.
+    (function gateStudyForMembers() {
+      const J = window.BAJourney;
+      if (!J || typeof J.requireMember !== 'function') return;
+      const root = document.documentElement;
+      try { root.style.visibility = 'hidden'; } catch (e) {}
+      const reveal = function () { try { root.style.visibility = ''; } catch (e) {} };
+      let gate;
+      try {
+        gate = J.requireMember('study.html' + (location.search || '') + (location.hash || ''));
+      } catch (e) {
+        reveal();
+        return;
+      }
+      Promise.resolve(gate).then(function (allowed) {
+        if (allowed) reveal();
+      }, reveal);
+    })();
+
+    // A guest only sees this copy for an instant before the sign-in redirect.
     function memberLockText(fallback) {
       const guest = !(window.ScrollAuth && typeof window.ScrollAuth.getUser === 'function' && window.ScrollAuth.getUser());
       return guest ? 'Members only — sign in to continue' : fallback;
@@ -1871,7 +1892,7 @@
         const isDone = completedSheets.has(idx);
 
         const locked = !canAccessSheet(idx);
-        // Guests get the free sittings; their locked rows are sign-in doors.
+        // A guest's rows are sign-in doors (the page also sends guests to sign in).
         const guestWall = locked && !memberViewer;
         const btn = document.createElement('button');
         btn.type = 'button';
@@ -4985,13 +5006,7 @@
     async function shareSitting() {
       const url = enrollmentUrl();
       const title = 'The Shelf of Daniel';
-      const freeThrough = window.BAJourney && typeof window.BAJourney.FREE_THROUGH === 'number'
-        ? window.BAJourney.FREE_THROUGH
-        : 2;
-      const isFree = currentSheetIndex <= freeThrough;
-      const text = isFree
-        ? 'Join this sitting of the Shelf of Daniel. Open the link to begin. No sign-in needed.'
-        : 'Join this sitting of the Shelf of Daniel. Agree to the terms and sign in to begin.';
+      const text = 'Join this sitting of the Shelf of Daniel. Agree to the terms and sign in to begin.';
       const sent = (method, message) => {
         if (window.Insights) window.Insights.track('invite_shared', currentSheetIndex, { method: method });
         showToast(message);

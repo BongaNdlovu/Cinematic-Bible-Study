@@ -1,6 +1,6 @@
 # 1. Overview
 
-**Last verified:** 12 November 2026
+**Last verified:** 15 November 2026
 
 ## What the site is for
 
@@ -17,8 +17,8 @@ The site credits Fanelesibonge Ndlovu as its creator (`index.html` footer).
 
 | Visitor | What they can do |
 |---|---|
-| Guest (not signed in) | Read sittings 0, 1 and 2 (`FREE_THROUGH = 2` in `js/shared/journey.js`), browse the home shelf, the privacy page and the terms. Progress stays on the device. |
-| Member (signed in with Google) | Every sitting, opened in order as each earlier sitting is completed. Also the map, the gallery, cloud-saved progress, notes and bookmarks, certificates, and posting readers' notes. |
+| Guest (not signed in) | Browse the home shelf (every volume shows as locked), read the readers' notes, the privacy page and the terms. **No sitting opens without a sign-in** (since 15 November 2026): opening the study sends a guest to the account page. |
+| Member (signed in with Google) | Every sitting, starting with the Prologue (`FREE_THROUGH = 0` in `js/shared/journey.js`) and opened in order as each earlier sitting is completed. Also the map, the gallery, cloud-saved progress, notes and bookmarks, certificates, and posting readers' notes. |
 | Moderator | Everything a member can do, plus approving readers' notes, reading the study insights dashboard (`insights.html`), and previewing locked sittings. Moderator rights need a confirmed Google identity and an authenticator app (see [Security](04-security.md)). |
 
 ## Where it runs
@@ -36,7 +36,7 @@ The site credits Fanelesibonge Ndlovu as its creator (`index.html` footer).
 | Page | File | Who can open it |
 |---|---|---|
 | Home (the shelf) | `index.html` | Everyone |
-| Study desk | `study.html` | Everyone; sittings past 2 need a member |
+| Study desk | `study.html` | Members (guests are sent to the account page) |
 | Map of History | `map.html` | Members (guests are sent to the account page) |
 | 3D gallery | `gallery.html` | Members (guests are sent to the account page) |
 | Account | `account.html` | Everyone; the hub needs a member |

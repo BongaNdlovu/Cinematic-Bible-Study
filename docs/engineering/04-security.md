@@ -1,6 +1,6 @@
 # 4. Security
 
-**Last verified:** 13 November 2026 (Privacy and consent section). The live database facts below come from read-only queries run on 12 November 2026. Everything else comes from the repository.
+**Last verified:** 15 November 2026 (Sign-in and roles section), 13 November 2026 (Privacy and consent section). The live database facts below come from read-only queries run on 12 November 2026. Everything else comes from the repository.
 
 ## The model in one paragraph
 
@@ -97,6 +97,8 @@ If the gate cannot be reached, a page read is still served. A non-GET request, `
 |---|---|---|
 | Member | Any Google sign-in through Supabase Auth | `auth.uid()` in row-level security |
 | Moderator | A row in `exhibit_moderators`, a table no client role can read | `is_review_moderator()` requires a Google identity **and** an `aal2` session, meaning the authenticator app was used. Confirmed in the live database on 12 November 2026. `exhibit_participation()` (`tools/supabase-participation.sql`) checks it first and raises error `42501` for anyone else. It returns two counts only, never ids or emails. |
+
+**Guests (since 15 November 2026)** reach no sitting: `study.html`, `map.html` and `gallery.html` all call `requireMember()` and send a guest to the account page. This is an interface rule. The lesson text ships as static files (`js/study/sheets/`), so it is not secret; answer checking, progress, notes and certificates stay protected by the database as before.
 
 The client-side role checks (`ScrollAuth.isModerator()`, `journey.js` `isAdmin()`) only decide what the interface shows. Every moderator action is checked again in the database.
 

@@ -1,6 +1,6 @@
 # 7. Develop, test, release
 
-**Last verified:** 12 November 2026
+**Last verified:** 15 November 2026
 
 ## Running the site locally
 
@@ -50,6 +50,8 @@ The server binds `127.0.0.1`. It starts at port 8000, or at `PORT` if that is se
 | Production walkthrough | `qa-e2e/production-audit.mjs` (see the root `README.md`) | No |
 
 **Results on 12 November 2026:** lint clean, `npm test` passes, 73 of 73 unit tests pass, and 22 of 22 security checks pass. **On 13 November 2026**, after a clean `npm ci` with `ignore-scripts=true`: lint clean, `npm test` passes, 84 of 84 unit tests pass (11 new supply-chain tests). The security checks were not re-run then. **Later on 13 November 2026**, with the guest human check enforced: 101 of 101 unit tests, and `npm run test:security` 23 of 23, writing no rows to the live database.
+
+**On 15 November 2026** (sign-in required for every sitting), run in a sandbox with no outside network: lint clean; `verify_portal_and_hubs.mjs` passes every step when the sandbox's `ERR_TUNNEL_CONNECTION_FAILED` console lines are ignored. `verify_portal_and_hubs.mjs`, `verify_account_and_banner_e2e.mjs`, `verify_csp_policy.mjs` and unit test 20 (`human-pass.test.mjs`) fail there on untouched `master` too, because they need outside hosts. Every other `npm test` script passes. CI on GitHub is the full check. `verify_portal_and_hubs.mjs` now checks that a guest sees every volume locked and is redirected with `next` kept, then signs in with `baQaMockSession` and checks that only the Prologue is open.
 
 ## Continuous integration (`.github/workflows/ci.yml`)
 

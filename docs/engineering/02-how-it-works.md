@@ -1,6 +1,6 @@
 # 2. How it works
 
-**Last verified:** 12 November 2026
+**Last verified:** 15 November 2026
 
 This chapter follows a visitor through the system: a request reaching the site, a page starting up, and the data being saved.
 
@@ -64,7 +64,9 @@ The exact list per page is in [Project structure](03-project-structure.md#pages-
 | Rule | Code |
 |---|---|
 | A member is anyone signed in | `isMember()` |
-| Guests can open sittings 0 to 2 | `FREE_THROUGH = 2`, `maxOpenSheet()` |
+| Guests open no sitting. `study.html` sends them to `account.html?next=…` once the session is known | `gateStudyForMembers()` at the top of `js/study/study-app.js` → `requireMember()` |
+| A new member starts with sitting 0 (the Prologue) | `FREE_THROUGH = 0`, `maxOpenSheet()` |
+| The home shelf shows every volume locked to a guest | `can()` in `js/home/shelf.js` |
 | A member opens the next sitting by completing the one before | `maxOpenSheet()` walks the completed set |
 | Map and gallery need a member | `requireMember()`, `canAccessMuseumNode()`, `canAccessYear()` |
 | Moderators may preview every sitting | `previewAllContent()` → `isAdmin()` |

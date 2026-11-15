@@ -68,8 +68,9 @@ assert(accountHtml.includes('How your study is kept'), 'account.html missing "Ho
 assert(accountHtml.includes('anonymous until sign-in'), 'account.html must mention anonymous learning until sign-in');
 assert(!accountHtml.includes('You may stop usage analytics'), 'account.html must not promise an analytics off switch');
 assert(!accountHtml.includes('Do Not Track'), 'account.html must not promise a Do Not Track stop');
-assert(/Prologue, Daniel 1,? and Daniel 2 without an account/.test(accountHtml), 'account.html must say the free sittings open without an account');
-assert(/Sign in to unlock the later sittings, the Map of History, the 3D arena/.test(accountHtml), 'account.html must say sign-in unlocks the later sittings, the map, and the 3D arena');
+assert(accountHtml.includes('The study needs an account.'), 'account.html must say the study needs an account');
+assert(!accountHtml.includes('Prologue, Daniel 1'), 'account.html must not promise free sittings');
+assert(/Sign in to open the sittings, the Map of History, the 3D arena/.test(accountHtml), 'account.html must say sign-in opens the sittings, the map, and the 3D arena');
 assert(!accountHtml.includes('You may browse the study, map, and gallery without an account'), 'account.html must not promise the map and gallery without an account');
 assert(!accountHtml.includes('This exhibit is closed'), 'account.html must not say the exhibit is closed');
 assert(accountHtml.includes('js/shared/account.js'), 'account.html must load the hub script');

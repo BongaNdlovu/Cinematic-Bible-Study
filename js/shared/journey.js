@@ -41,7 +41,9 @@
 
   const SHEET_COUNT = 11;
   const TERMS_VERSION = 6;
-  const FREE_THROUGH = 2;
+  // Members start with sitting 0 open. Guests get no sittings: study.html
+  // sends them to sign in first (15 November 2026). See requireMember().
+  const FREE_THROUGH = 0;
   const TEMP_REVIEW_UNLOCK = false;
   const SITTING_ASSETS = [
     ["assembled"],
@@ -95,9 +97,11 @@
     "Daniel 9",
     "Daniel 10–12"
   ];
-  // Sequential sittings: sittings 0–FREE_THROUGH start open. Completing N
-  // opens N+1. Guests stop at FREE_THROUGH. The map and the 3D arena open
-  // only after sign-in, and then they open as a whole. Client-side only.
+  // Sequential sittings: sitting 0 starts open for a member. Completing N
+  // opens N+1. Guests open nothing: the study page, the map and the 3D arena
+  // all need a sign-in (study.html gates itself through requireMember()).
+  // maxOpenSheet() still answers 0 for a guest so the page can draw the
+  // Prologue while the session is restored. Client-side only.
   // Teachers can open everything with ?preview=full — signed-in moderators
   // still follow the same lesson path as students.
   const ENABLE_BETA_PREVIEW_DEFAULT = false;
@@ -316,8 +320,8 @@
     return false;
   }
 
-  // Members are signed-in visitors. Guests keep the free sittings only;
-  // everything past FREE_THROUGH asks them to sign in.
+  // Members are signed-in visitors. Guests are asked to sign in before any
+  // sitting opens.
   function isMember() {
     try {
       const auth = window.ScrollAuth;
@@ -352,7 +356,7 @@
 
   function maxOpenSheet() {
     if (previewAllContent()) return SHEET_COUNT - 1;
-    // Guests never pass the free sittings, no matter how far they read.
+    // Guests never pass sitting 0 (and the study page sends them to sign in).
     if (!isMember()) return FREE_THROUGH;
     const done = completedSet();
     let open = FREE_THROUGH;
@@ -613,10 +617,10 @@
     const action = resumeLabel();
     if (kind === "sheet") {
       const wanted = sheetLabel(key);
-      if (!isMember() && Number(key) > FREE_THROUGH) {
+      if (!isMember()) {
         return {
           title: wanted + " is for members",
-          body: "The first sittings are free. Sign in to open this one and keep the chain going.",
+          body: "The study is for signed-in readers. Sign in to begin with the Prologue and keep the chain going.",
           href: "account.html?next=" + encodeURIComponent("study.html?sheet=" + key),
           action: "Sign in"
         };
