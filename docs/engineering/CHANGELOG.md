@@ -25,6 +25,7 @@ Entry template:
 - `js/home/shelf.js`: `can()` returns false for a guest (unless `previewAllContent()`), so all eleven volumes show as locked and lead to the account page. The 3D room now waits for `ScrollAuth.ready()` before it is built, so a member's open books are not drawn dimmed.
 - Copy: `account.html` (lead, terms summary, "Signing in" section), `js/shared/account.js` (lead for signed-out readers), `terms.html` ("Signing in" replaces "The free sittings and sign-in"), `privacy.html` (the "without an account" card), `study.html` (access panel line).
 - Tests: `tools/verify/verify_insights.mjs` now expects the new account wording. `tools/verify/verify_portal_and_hubs.mjs` checks that a guest sees every volume locked and is redirected with `next` kept, then signs in with the local QA session and checks that only the Prologue is open, and that Daniel 1 opens once the Prologue is complete.
+- `tests/unit/human-pass.test.mjs`: the test pass expired at a fixed time (14 November 2026 02:00), so unit test 20 failed on every run after that and the CI `test` job, which the deploy job needs, could not pass. The expiry is now two hours after the test starts.
 - Not changed: `TERMS_VERSION` (6) and the effective dates. You chose not to ask readers to accept the terms again.
 - Not checked: scripts outside `npm test` that open `study.html` as a guest (for example `verify_cp07.mjs`, `verify_lesson_connectors.mjs`, `verify_story_reader.mjs`) will now be redirected and need a `baQaMockSession` before they are run again.
 

@@ -77,7 +77,7 @@ async function run() {
 
     console.log('\n=== Step 1c: Signing in (local QA session) opens the Prologue only ===');
     await page.evaluate(() => {
-      localStorage.setItem('baQaMockSession', JSON.stringify({ user: { id: '00000000-0000-4000-8000-00000000qa01', email: 'qa@example.test', user_metadata: { full_name: 'QA Reader' } } }));
+      localStorage.setItem('baQaMockSession', JSON.stringify({ user: { id: '00000000-0000-4000-8000-0000000000a1', email: 'qa@example.test', user_metadata: { full_name: 'QA Reader' } } }));
     });
     await page.goto(`${BASE}/index.html`, { waitUntil: 'networkidle' });
     await page.waitForFunction(() => document.querySelectorAll('#cat-list .cat-item').length > 0, null, { timeout: 30000 });

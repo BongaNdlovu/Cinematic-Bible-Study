@@ -144,6 +144,9 @@ test("guest rows need a live pass; signed-in rows and edge reports do not", () =
   }
 });
 
+// The pass must still be valid when the test runs. A fixed date expired on 14 November 2026 and broke CI.
+const PASS_UNTIL = new Date(Date.now() + 2 * 60 * 60 * 1000).toISOString();
+
 function loadPassModule(state) {
   const store = new Map();
   const appended = [];
@@ -160,7 +163,7 @@ function loadPassModule(state) {
     window: win,
     document: { head: { appendChild: (n) => appended.push(n) }, body: { appendChild: (n) => appended.push(n) }, createElement: () => ({ style: {}, parentNode: null }) },
     sessionStorage: { getItem: (k) => (store.has(k) ? store.get(k) : null), setItem: (k, v) => store.set(k, String(v)) },
-    fetch: async (url, init) => { state.posted.push({ url, body: JSON.parse(init.body) }); return { ok: state.grantOk, json: async () => ({ ok: true, until: "2026-11-14T02:00:00Z" }) }; },
+    fetch: async (url, init) => { state.posted.push({ url, body: JSON.parse(init.body) }); return { ok: state.grantOk, json: async () => ({ ok: true, until: PASS_UNTIL }) }; },
     setTimeout, clearTimeout, Date, Number, Promise, JSON, String
   };
   vm.runInNewContext(fs.readFileSync(new URL("../../js/shared/human-pass.js", import.meta.url), "utf8"), sandbox);
@@ -174,7 +177,7 @@ test("a guest solves Turnstile once and the pass covers both guest ids", async (
   assert.equal(state.rendered.action, "guest-pass");
   assert.equal(state.rendered.appearance, "interaction-only");
   assert.deepEqual(state.posted, [{ url: "/__human-pass", body: { token: "tok-xyz", ids: ["insights-id-1", "ops-id-0001"] } }]);
-  assert.equal(store.get("baHumanPass:insights-id-1"), String(Date.parse("2026-11-14T02:00:00Z")));
+  assert.equal(store.get("baHumanPass:insights-id-1"), String(Date.parse(PASS_UNTIL)));
   state.posted.length = 0;
   assert.equal(await HumanPass.ready(), true);
   assert.equal(state.posted.length, 0, "a valid pass is reused, not asked for again");
