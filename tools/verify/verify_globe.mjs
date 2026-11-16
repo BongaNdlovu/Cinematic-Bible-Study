@@ -245,7 +245,9 @@ try {
     pass("clouds hold still while the globe is idle");
 
     await drag(t.page);
-    assert.ok(await waitFor(t.page, (before) => document.querySelector(".cmap-globe").dataset.clouds !== before, 10000, a.drift), "clouds did not drift while the globe redrew");
+    const rested = await settle(t.page);
+    const after = await t.page.evaluate(() => document.querySelector(".cmap-globe").dataset.clouds);
+    assert.notStrictEqual(after, a.drift, "clouds did not drift while the globe redrew " + JSON.stringify({ rested, before: a.drift, after }));
     await t.page.screenshot({ path: "qa/proofs/globe_proof_sky.png" });
     assert.deepStrictEqual(t.errors, []);
     pass("clouds drift only while the globe redraws");

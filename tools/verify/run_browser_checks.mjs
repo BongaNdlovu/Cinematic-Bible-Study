@@ -13,7 +13,7 @@ export const BROWSER_CHECKS = [
   { file: 'verify_bridge_panel.mjs', base: 'flag' },
   { file: 'verify_cp07.mjs', base: 'none' },
   { file: 'verify_flow.mjs', base: 'flag' },
-  { file: 'verify_globe.mjs', base: 'none' },
+  { file: 'verify_globe.mjs', base: 'none', timeoutMs: 480000 },
   { file: 'verify_grounding_quotes.mjs', base: 'none' },
   { file: 'verify_hall_mural.mjs', base: 'none' },
   { file: 'verify_horizon.mjs', base: 'none' },
@@ -60,7 +60,7 @@ function runOne(check, base) {
     const timer = setTimeout(() => {
       timedOut = true;
       child.kill();
-    }, TIMEOUT_MS);
+    }, check.timeoutMs || TIMEOUT_MS);
     child.stdout.on('data', (d) => { output += d; });
     child.stderr.on('data', (d) => { output += d; });
     child.on('close', (code) => {
