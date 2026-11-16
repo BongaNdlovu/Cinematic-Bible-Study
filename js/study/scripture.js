@@ -25,13 +25,7 @@
     } catch (e) {}
   }
 
-  function escapeHtml(value) {
-    return String(value == null ? "" : value)
-      .replace(/&/g, "&amp;")
-      .replace(/</g, "&lt;")
-      .replace(/>/g, "&gt;")
-      .replace(/"/g, "&quot;");
-  }
+  function escapeHtml(value) { return window.SiteCore.escapeHtml(value); }
 
   function verseSet(highlights) {
     const set = {};

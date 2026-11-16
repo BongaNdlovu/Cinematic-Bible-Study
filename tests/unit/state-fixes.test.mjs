@@ -145,7 +145,9 @@ test("the own-note check stops promising a retry once its retries run out", asyn
     ScrollAuth: { getClient: () => client, getUser: () => user, isModerator: () => false }
   };
   context.window = context;
-  vm.runInNewContext(read("js/shared/reviews.js"), vm.createContext(context));
+  const reviewsContext = vm.createContext(context);
+  vm.runInContext(read("js/shared/core.js"), reviewsContext);
+  vm.runInContext(read("js/shared/reviews.js"), reviewsContext);
   const settle = () => new Promise((resolve) => setImmediate(resolve));
   await settle();
   await settle();
@@ -220,7 +222,9 @@ test("a failing notes pull stops retrying after its cap and restarts on reconnec
     ScrollAuth: { getClient: () => client, getUser: () => ({ id: "reader-1" }) }
   };
   context.window = context;
-  vm.runInNewContext(read("js/shared/study-sync.js"), vm.createContext(context));
+  const syncContext = vm.createContext(context);
+  vm.runInContext(read("js/shared/core.js"), syncContext);
+  vm.runInContext(read("js/shared/study-sync.js"), syncContext);
   const settle = () => new Promise((resolve) => setImmediate(resolve));
   await context.StudySync.pullAndMerge();
   await settle();

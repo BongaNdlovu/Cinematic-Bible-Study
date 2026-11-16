@@ -426,22 +426,7 @@
     return tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT' || target.isContentEditable;
   }
 
-  function trap(event) {
-    const items = Array.prototype.filter.call(
-      root.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'),
-      (n) => !n.disabled && n.offsetParent !== null
-    );
-    if (!items.length) return;
-    const first = items[0];
-    const last = items[items.length - 1];
-    if (event.shiftKey && document.activeElement === first) {
-      event.preventDefault();
-      last.focus();
-    } else if (!event.shiftKey && document.activeElement === last) {
-      event.preventDefault();
-      first.focus();
-    }
-  }
+  function trap(event) { window.SiteCore.trapFocus(root, event); }
 
   function onKey(event) {
     if (event.key === 'Tab') {

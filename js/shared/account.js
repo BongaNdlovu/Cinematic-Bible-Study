@@ -17,9 +17,7 @@
     return window.BAJourney;
   }
 
-  function signedIn() {
-    return !!(window.ScrollAuth && window.ScrollAuth.getUser && window.ScrollAuth.getUser());
-  }
+  function signedIn() { return window.SiteCore.signedIn(); }
 
   function hasAgreed() {
     return !!(terms() && terms().hasAgreed && terms().hasAgreed());
@@ -134,11 +132,7 @@
 
   const BOOKMARKS_KEY = "baStudyBookmarks";
 
-  function escapeHub(value) {
-    return String(value == null ? "" : value)
-      .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
-      .replace(/"/g, "&quot;").replace(/'/g, "&#39;");
-  }
+  function escapeHub(value) { return window.SiteCore.escapeHtml(value); }
 
   function readBookmarks() {
     try {

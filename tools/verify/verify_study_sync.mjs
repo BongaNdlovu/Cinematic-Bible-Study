@@ -95,6 +95,7 @@ global.window = {
 global.document = { readyState: "loading", addEventListener: () => {} };
 global.location = global.window.location;
 
+new Function(fs.readFileSync(path.join(ROOT, "js/shared/core.js"), "utf8"))();
 new Function(fs.readFileSync(path.join(ROOT, "js/shared/study-sync.js"), "utf8"))();
 const StudySync = global.window.StudySync;
 
@@ -272,6 +273,7 @@ mockClient.from = slowSelect;
 
 // 12. The push gap survives a reload.
 store.baStudySyncLastPushAt = String(now - 1000);
+new Function(fs.readFileSync(path.join(ROOT, "js/shared/core.js"), "utf8"))();
 new Function(fs.readFileSync(path.join(ROOT, "js/shared/study-sync.js"), "utf8"))();
 const reloaded = global.window.StudySync;
 const beforeReload = upserts.length;
@@ -298,6 +300,7 @@ mockClient.from = (table) => {
 delete store.baStudySyncOutbox;
 store.baStudySyncLastPushAt = "0";
 remoteRow.notes = Object.assign({}, remoteRow.notes, { "6": { body: "Cloud-only note.", updatedAt: now } });
+new Function(fs.readFileSync(path.join(ROOT, "js/shared/core.js"), "utf8"))();
 new Function(fs.readFileSync(path.join(ROOT, "js/shared/study-sync.js"), "utf8"))();
 const offline = global.window.StudySync;
 errors.length = 0;

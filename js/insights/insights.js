@@ -15,9 +15,7 @@
   const COUNTER_TARGET = 700;
   const SID_TARGET = 500;
 
-  function client() {
-    return window.ScrollAuth && window.ScrollAuth.getClient && window.ScrollAuth.getClient();
-  }
+  function client() { return window.SiteCore.authClient(); }
 
   function isMod() {
     return !!(window.ScrollAuth && window.ScrollAuth.isModerator && window.ScrollAuth.isModerator());
@@ -49,14 +47,7 @@
     return !cut || cut < countFrom;
   }
 
-  function escapeHtml(value) {
-    return String(value == null ? '' : value)
-      .replace(/&/g, "&amp;")
-      .replace(/</g, "&lt;")
-      .replace(/>/g, "&gt;")
-      .replace(/"/g, "&quot;")
-      .replace(/'/g, "&#39;");
-  }
+  function escapeHtml(value) { return window.SiteCore.escapeHtml(value); }
 
   function csvEscape(v) {
     let s = String(v == null ? '' : v);

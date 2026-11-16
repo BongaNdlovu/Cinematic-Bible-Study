@@ -79,6 +79,7 @@ const sandbox = {
   localStorage: { getItem() { return null; }, setItem() {} }
 };
 vm.createContext(sandbox);
+vm.runInContext(fs.readFileSync(path.join(root, 'js/shared/core.js'), 'utf8'), sandbox);
 vm.runInContext(fs.readFileSync(path.join(root, 'js/study/scripture.js'), 'utf8'), sandbox);
 const api = sandbox.window.BAScripture;
 if (!api) fail('BAScripture did not attach');

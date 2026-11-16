@@ -9,14 +9,7 @@
   const TOO_FEW = 'too few to report';
   const UNDER = 'fewer than ' + MIN;
 
-  function esc(value) {
-    return String(value == null ? '' : value)
-      .replace(/&/g, '&amp;')
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;')
-      .replace(/"/g, '&quot;')
-      .replace(/'/g, '&#39;');
-  }
+  function esc(value) { return root.SiteCore.escapeHtml(value); }
 
   function num(n) {
     try {

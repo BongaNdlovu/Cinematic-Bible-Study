@@ -319,13 +319,7 @@
     document.head.appendChild(tag);
   }
 
-  function esc(s) {
-    return String(s == null ? '' : s)
-      .replace(/&/g, '&amp;')
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;')
-      .replace(/"/g, '&quot;');
-  }
+  function esc(s) { return window.SiteCore.escapeHtml(s); }
 
   function kindLabel(kind) {
     if (kind === 'person') return 'Person';
@@ -465,15 +459,7 @@
     if (e.key === 'Escape') { e.stopPropagation(); close(); }
   }
 
-  function trapFocus(e) {
-    if (e.key !== 'Tab' || !overlay) return;
-    var focusables = overlay.querySelectorAll('button, [href], input, [tabindex]:not([tabindex="-1"])');
-    if (!focusables.length) return;
-    var first = focusables[0];
-    var last = focusables[focusables.length - 1];
-    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
-    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
-  }
+  function trapFocus(e) { window.SiteCore.trapFocus(overlay, e); }
 
   function onPopstate() {
     var isReopened = !!(overlay && backPending && closingNode && overlay !== closingNode);

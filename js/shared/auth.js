@@ -29,14 +29,7 @@
     return !!(cfg.url && cfg.publishableKey && window.supabase && typeof window.supabase.createClient === "function");
   }
 
-  function isLocalDevHost() {
-    try {
-      const h = location.hostname;
-      return h === "localhost" || h === "127.0.0.1" || h === "[::1]";
-    } catch (e) {
-      return false;
-    }
-  }
+  function isLocalDevHost() { return window.SiteCore.isLocalDevHost(); }
 
   /** Playwright QA only: localStorage.baQaMockSession = JSON { user, session? }. Ignored off localhost. */
   function readQaMock() {

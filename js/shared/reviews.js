@@ -33,13 +33,9 @@
     } catch (e) {}
   }
 
-  function authClient() {
-    return window.ScrollAuth && window.ScrollAuth.getClient && window.ScrollAuth.getClient();
-  }
+  function authClient() { return window.SiteCore.authClient(); }
 
-  function currentUser() {
-    return window.ScrollAuth && window.ScrollAuth.getUser && window.ScrollAuth.getUser();
-  }
+  function currentUser() { return window.SiteCore.currentUser(); }
 
   function signedIn() {
     return !!currentUser();

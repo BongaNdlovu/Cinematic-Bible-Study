@@ -98,7 +98,9 @@ function sandbox(extra) {
     location: { href: "https://example.test/study.html", pathname: "/study.html", search: "", hash: "" }
   }, extra);
   ctx.window = ctx;
-  return vm.createContext(ctx);
+  const context = vm.createContext(ctx);
+  vm.runInContext(read("js/shared/core.js"), context);
+  return context;
 }
 
 const settle = () => new Promise((resolve) => setImmediate(resolve));

@@ -8,32 +8,21 @@
 (function () {
   'use strict';
 
-  function isLocalDevHost() {
-    try {
-      const h = location.hostname;
-      return h === 'localhost' || h === '127.0.0.1' || h === '[::1]';
-    } catch (e) {
-      return false;
-    }
-  }
+  function isLocalDevHost() { return window.SiteCore.isLocalDevHost(); }
 
   function hasQaMockSession() {
     if (!isLocalDevHost()) return false;
     try { return !!localStorage.getItem('baQaMockSession'); } catch (e) { return false; }
   }
 
-  function authClient() {
-    return window.ScrollAuth && typeof window.ScrollAuth.getClient === 'function' && window.ScrollAuth.getClient();
-  }
+  function authClient() { return window.SiteCore.authClient(); }
 
   function authReady() {
     const auth = window.ScrollAuth;
     return auth && typeof auth.ready === 'function' ? auth.ready() : Promise.resolve();
   }
 
-  function signedIn() {
-    return !!(window.ScrollAuth && typeof window.ScrollAuth.getUser === 'function' && window.ScrollAuth.getUser());
-  }
+  function signedIn() { return window.SiteCore.signedIn(); }
 
   function errorCause(error) {
     if (!error) return 'error';

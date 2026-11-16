@@ -58,13 +58,9 @@
     }
   }
 
-  function client() {
-    return window.ScrollAuth && window.ScrollAuth.getClient && window.ScrollAuth.getClient();
-  }
+  function client() { return window.SiteCore.authClient(); }
 
-  function currentUser() {
-    return window.ScrollAuth && window.ScrollAuth.getUser && window.ScrollAuth.getUser();
-  }
+  function currentUser() { return window.SiteCore.currentUser(); }
 
   function userId() {
     const user = currentUser();

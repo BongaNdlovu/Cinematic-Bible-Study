@@ -255,7 +255,7 @@
       const points = timelineEpochs.map((ep, i) => {
         const at = n <= 1 ? 0 : i / (n - 1);
         const open = epochAccessible(i);
-        const year = String(ep.year).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        const year = window.SiteCore.escapeHtml(ep.year);
         return '<button type="button" class="epoch-dot' + (i === currentEpochIndex ? ' is-active' : '') + (open ? '' : ' is-locked') +
           '" data-epoch="' + i + '" style="--i:' + at + '" aria-pressed="' + (i === currentEpochIndex ? 'true' : 'false') + '"' +
           (open ? '' : ' disabled aria-disabled="true" title="' + memberLockText('Locked — finish the open sitting first') + '"') + '>' +
@@ -1939,21 +1939,9 @@
       syncCertificateCta();
     }
 
-    function escapeStudy(value) {
-      return String(value == null ? "" : value)
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;");
-    }
+    function escapeStudy(value) { return window.SiteCore.escapeHtml(value); }
 
-    function escapeVerify(text) {
-      return String(text || '')
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;');
-    }
+    function escapeVerify(text) { return window.SiteCore.escapeHtml(text); }
 
     function verifyKindLabel(kind) {
       if (kind === 'history') return 'Historical source';

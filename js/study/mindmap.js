@@ -56,10 +56,6 @@
      never the viewport. */
   const COMPACT_WIDTH = 720;
   const IDLE_MS = 3800;                     // idle time before the HUD fades
-  /* The full-screen view's focus trap needs to know what "focusable" means
-     here. Every control the block builds is a real <button>, so this is the
-     whole list; the host itself carries tabindex so it can fall back. */
-  const FOCUSABLE = 'button:not([disabled]), [href], [tabindex]:not([tabindex="-1"])';
   const DIP = ky(160);                      // how far a cross-centre curve dips
   const Y_MIN = ky(90), Y_MAX = ky(810);    // the range a spec's `y` may take
 
@@ -85,11 +81,7 @@
      spec field behind them. */
   const CONNECTORS = { text: 'TEXT', history: 'HISTORY', interpretation: 'INTERPRETATION', christ: 'CHRIST' };
 
-  function esc(value) {
-    return String(value == null ? '' : value).replace(/[&<>"']/g, (c) => (
-      { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]
-    ));
-  }
+  function esc(value) { return window.SiteCore.escapeHtml(value); }
 
   function svgEl(name, attrs) {
     const node = document.createElementNS(NS, name);
@@ -1120,26 +1112,7 @@
        does the rest. Stacking: 180, below the story reader (220), above the
        insight cards (~72). */
 
-    function focusables() {
-      return Array.from(host.querySelectorAll(FOCUSABLE)).filter((el) => !el.hidden);
-    }
-
-    /* Options: the block's controls. The trap is what makes "the focus never
-       escapes to the page behind" true rather than hopeful. */
-    function trapFocus(event) {
-      if (event.key !== 'Tab') return;
-      const items = focusables();
-      if (!items.length) return;
-      const first = items[0];
-      const last = items[items.length - 1];
-      const active = document.activeElement;
-      event.preventDefault();
-      if (!host.contains(active)) { first.focus(); return; }
-      const at = items.indexOf(active);
-      if (at < 0) { (event.shiftKey ? last : first).focus(); return; }
-      const step = event.shiftKey ? -1 : 1;
-      items[(at + step + items.length) % items.length].focus();
-    }
+    function trapFocus(event) { window.SiteCore.trapFocus(host, event); }
 
     /* The page behind must not scroll while the view is open. The reader locks
        the same way, so this only ever removes the class it added: if a reader

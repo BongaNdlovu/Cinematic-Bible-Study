@@ -95,6 +95,7 @@ global.window = {
   addEventListener: () => {}
 };
 
+new Function(fs.readFileSync(path.join(ROOT, "js/shared/core.js"), "utf8"))();
 new Function(fs.readFileSync(path.join(ROOT, "js/shared/reviews.js"), "utf8"))();
 
 await global.window.ScrollReviews.loadApproved();

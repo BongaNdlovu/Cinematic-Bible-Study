@@ -153,13 +153,9 @@
     } catch (e) {}
   }
 
-  function authClient() {
-    return window.ScrollAuth && typeof window.ScrollAuth.getClient === 'function' && window.ScrollAuth.getClient();
-  }
+  function authClient() { return window.SiteCore.authClient(); }
 
-  function currentUser() {
-    return window.ScrollAuth && typeof window.ScrollAuth.getUser === 'function' && window.ScrollAuth.getUser();
-  }
+  function currentUser() { return window.SiteCore.currentUser(); }
 
   function mergeCloudWithLocal(remote) {
     let localHadNew = false;

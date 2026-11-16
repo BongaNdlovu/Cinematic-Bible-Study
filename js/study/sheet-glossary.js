@@ -363,13 +363,7 @@
       IMG + "glossary-carchemish.webp")
   ];
 
-  function escapeHtml(s) {
-    return String(s == null ? "" : s)
-      .replace(/&/g, "&amp;")
-      .replace(/</g, "&lt;")
-      .replace(/>/g, "&gt;")
-      .replace(/"/g, "&quot;");
-  }
+  function escapeHtml(s) { return window.SiteCore.escapeHtml(s); }
 
   function byId(id) {
     var list = window.SHEET_GLOSSARY || [];

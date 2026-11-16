@@ -13,10 +13,7 @@
     return cfg && typeof cfg.turnstileSiteKey === "string" ? cfg.turnstileSiteKey : "";
   }
 
-  function signedIn() {
-    const auth = window.ScrollAuth;
-    return !!(auth && typeof auth.getUser === "function" && auth.getUser());
-  }
+  function signedIn() { return window.SiteCore.signedIn(); }
 
   function guestIds() {
     const ids = [];
