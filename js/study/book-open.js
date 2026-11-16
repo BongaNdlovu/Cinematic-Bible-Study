@@ -15,6 +15,7 @@
   };
 
   var root = document.documentElement;
+  var painted = [];
   var settle;
   var finished = new Promise(function (resolve) {
     settle = resolve;
@@ -73,23 +74,23 @@
     var m = Array.isArray(hand.marble) ? hand.marble : [];
     var art = artUrl(hand);
     var vars = [
-      '--bko-cloth:' + cssColor(hand.cloth, '#3a2e1f'),
-      '--bko-m1:' + cssColor(m[0], '#1d1610'),
-      '--bko-m2:' + cssColor(m[1], '#7a3b26'),
-      '--bko-m3:' + cssColor(m[2], '#c9a35a'),
-      '--bko-m4:' + cssColor(m[3], '#2c4a52'),
-      '--bko-m5:' + cssColor(m[4], '#e6d6b0'),
-      '--bko-roman:' + cssString(hand.roman),
-      '--bko-title:' + cssString(hand.title),
-      '--bko-sub:' + cssString(hand.sub),
-      '--bko-epoch:' + cssString(hand.epoch),
-      '--bko-ref:' + cssString(hand.scripture)
+      ['--bko-cloth', cssColor(hand.cloth, '#3a2e1f')],
+      ['--bko-m1', cssColor(m[0], '#1d1610')],
+      ['--bko-m2', cssColor(m[1], '#7a3b26')],
+      ['--bko-m3', cssColor(m[2], '#c9a35a')],
+      ['--bko-m4', cssColor(m[3], '#2c4a52')],
+      ['--bko-m5', cssColor(m[4], '#e6d6b0')],
+      ['--bko-roman', cssString(hand.roman)],
+      ['--bko-title', cssString(hand.title)],
+      ['--bko-sub', cssString(hand.sub)],
+      ['--bko-epoch', cssString(hand.epoch)],
+      ['--bko-ref', cssString(hand.scripture)]
     ];
-    if (art) vars.push('--bko-art:url(' + cssString(new URL(art, document.baseURI).href) + ')');
-    var style = document.createElement('style');
-    style.id = 'book-open-vars';
-    style.textContent = '#book-open{' + vars.join(';') + '}';
-    document.head.appendChild(style);
+    if (art) vars.push(['--bko-art', 'url(' + cssString(new URL(art, document.baseURI).href) + ')']);
+    vars.forEach(function (pair) {
+      root.style.setProperty(pair[0], pair[1]);
+      painted.push(pair[0]);
+    });
   }
 
   function typeReady() {
@@ -152,8 +153,8 @@
     document.removeEventListener('animationend', onArrive, true);
     var node = el || document.getElementById('book-open');
     if (node && node.parentNode) node.parentNode.removeChild(node);
-    var style = document.getElementById('book-open-vars');
-    if (style && style.parentNode) style.parentNode.removeChild(style);
+    painted.forEach(function (name) { root.style.removeProperty(name); });
+    painted = [];
     root.removeAttribute('data-bko');
     root.removeAttribute('data-bko-type');
     settle();

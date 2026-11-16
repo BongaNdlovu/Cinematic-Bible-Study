@@ -240,3 +240,5 @@
     body.white-mode .insight-card,
     body.white-mode .scripture-scroll,
     body.white-mode .context-plate { background: #f7f7f7; }
+@keyframes sheet-loading-slide{0%{transform:translateX(-120%)}
+100%{transform:translateX(300%)}}
