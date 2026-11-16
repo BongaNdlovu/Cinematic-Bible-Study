@@ -4,7 +4,7 @@ import vm from "vm";
 /* Replaces the `diagrams` block for one sitting with the current spec file.
    Used after a spec is revised post-merge; the merge script is insert-only. */
 
-const PATH = "js/study/sheets-data.js";
+const PATH = "js/content/sheets-data.js";
 const sheetNo = Number(process.argv[2]);
 if (Number.isNaN(sheetNo)) { console.error("usage: _respec.mjs <sheetNo>"); process.exit(1); }
 

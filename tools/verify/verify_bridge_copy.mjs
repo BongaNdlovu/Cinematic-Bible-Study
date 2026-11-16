@@ -25,7 +25,7 @@ const onlyWired = args.includes('--wired');
 
 /* Everything learner-facing in the course, flattened for substring tests. */
 function loadCourseCopy() {
-  const raw = fs.readFileSync('js/study/sheets-data.js', 'utf8').replace(/\r\n/g, '\n');
+  const raw = fs.readFileSync('js/content/sheets-data.js', 'utf8').replace(/\r\n/g, '\n');
   const part = raw.slice(raw.indexOf('const sheetsData'), raw.indexOf('const timelineEpochs'));
   const ctx = {};
   vm.createContext(ctx);
@@ -39,7 +39,7 @@ function loadCourseCopy() {
   ctx.sheetsData.forEach((s) => { walk(s); });
   const vctx = { window: {} };
   vm.createContext(vctx);
-  vm.runInContext(fs.readFileSync('js/study/sheet-verify.js', 'utf8'), vctx);
+  vm.runInContext(fs.readFileSync('js/content/sheet-verify.js', 'utf8'), vctx);
   walk(vctx.window.SHEET_VERIFY);
   return strings;
 }
@@ -99,7 +99,7 @@ if (!onlyWired) {
 
 if (!onlyDrafts) {
   /* The wired copy, once it exists: every story step's two fields. */
-  const raw = fs.readFileSync('js/study/sheets-data.js', 'utf8').replace(/\r\n/g, '\n');
+  const raw = fs.readFileSync('js/content/sheets-data.js', 'utf8').replace(/\r\n/g, '\n');
   const part = raw.slice(raw.indexOf('const sheetsData'), raw.indexOf('const timelineEpochs'));
   const ctx = {};
   vm.createContext(ctx);

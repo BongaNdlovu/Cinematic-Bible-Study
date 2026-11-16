@@ -83,7 +83,7 @@ for (let sheet = 0; sheet <= 10; sheet += 1) {
     mmDrawn: document.querySelectorAll('#sheet-article .mm svg, #sheet-article .mm canvas').length,
     book: !!(window.BookReader && window.BookReader.isActive && window.BookReader.isActive())
   }));
-  const sheetFiles = requests.filter((u) => /js\/study\/sheets\/sheet-\d+\.js/.test(u)).map((u) => Number(/sheet-(\d+)\.js/.exec(u)[1]));
+  const sheetFiles = requests.filter((u) => /js\/content\/sheets\/sheet-\d+\.js/.test(u)).map((u) => Number(/sheet-(\d+)\.js/.exec(u)[1]));
   check(`sitting ${sheet} renders its article, diagrams and quiz`, state.title && state.figures > 0 && state.drawn === state.figures && state.quiz > 0, state);
   check(`sitting ${sheet} mounts the read-along orb`, state.orb && state.reader);
   check(`sitting ${sheet} loads only itself and its neighbours`, sheetFiles.includes(sheet) && sheetFiles.every((n) => Math.abs(n - sheet) <= 1), sheetFiles);

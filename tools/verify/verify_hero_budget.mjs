@@ -62,9 +62,9 @@ eager.set(local(portrait[1]), "shelf painting");
 assert(eager.size >= 2, "the home page budget must cover the shelf painting and the social preview at least");
 for (const [file, label] of eager) checkSize(file, MAX, label);
 
-assert(pageLoads("index.html", "js/shared/covers.js"), "index.html must load the cover list");
+assert(pageLoads("index.html", "js/content/covers.js"), "index.html must load the cover list");
 const sandbox = { window: {} };
-vm.runInNewContext(fs.readFileSync(path.join(ROOT, "js/shared/covers.js"), "utf8"), sandbox);
+vm.runInNewContext(fs.readFileSync(path.join(ROOT, "js/content/covers.js"), "utf8"), sandbox);
 const covers = sandbox.window.SHELF_COVERS || [];
 const thumbs = sandbox.window.SHELF_COVER_THUMBS || [];
 assert.strictEqual(covers.length, 11, "the shelf must list eleven cover paintings");

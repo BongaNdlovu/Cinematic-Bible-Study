@@ -60,7 +60,7 @@ function parseSourceRefs(source) {
 
 const sv = { window: {} };
 vm.createContext(sv);
-vm.runInContext(fs.readFileSync("js/study/sheet-verify.js", "utf8"), sv);
+vm.runInContext(fs.readFileSync("js/content/sheet-verify.js", "utf8"), sv);
 const packs = sv.window.SHEET_VERIFY;
 
 let totalSpecs = 0, totalProblems = 0;

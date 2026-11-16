@@ -1,4 +1,4 @@
-import '/js/shared/covers.js';
+import '/js/content/covers.js';
 import '/js/shared/journey.js';
 import '/js/shared/auth-config.js';
 import '/js/shared/net.js';

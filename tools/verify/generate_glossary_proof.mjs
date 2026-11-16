@@ -30,7 +30,7 @@ const lines = [
   '# Glossary — full proof index',
   '',
   `**Generated:** ${new Date().toISOString().slice(0, 10)}`,
-  '**Source:** `js/study/sheet-glossary.js` + `glossary-enrichment.js` merged at runtime',
+  '**Source:** `js/content/sheet-glossary.js` + `glossary-enrichment.js` merged at runtime',
   '',
   'Each row is one desk entry. **Sittings** lists where the term is linked in lesson text (data-term or auto-link).',
   'Regenerate: `node tools/verify/build_glossary_enrichment.mjs && node tools/verify/generate_glossary_proof.mjs`',

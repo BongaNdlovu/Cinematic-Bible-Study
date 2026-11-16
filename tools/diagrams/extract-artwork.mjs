@@ -1,7 +1,7 @@
 import fs from "fs";
 import vm from "vm";
 
-const src = fs.readFileSync("js/study/sheets-data.js", "utf8");
+const src = fs.readFileSync("js/content/sheets-data.js", "utf8");
 const part = src.slice(src.indexOf("const sheetsData"), src.indexOf("const timelineEpochs"));
 const c = {};
 vm.createContext(c);

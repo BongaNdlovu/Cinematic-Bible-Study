@@ -2,7 +2,7 @@
  * scrub_quiz_keys.mjs
  * One-time integrity migration for the checkpoint quizzes (audit item: the
  * answer key shipped as plaintext "correct" indices plus "Correct!"-marked
- * diagnostics in js/study/sheets-data.js).
+ * diagnostics in js/content/sheets-data.js).
  *
  *  1. Loads sheets-data.js in a sandbox and extracts (sitting, q_idx, correct_idx,
  *     correct_note) for every quiz.
@@ -24,7 +24,7 @@ import vm from "vm";
 import { fileURLToPath } from "url";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..");
-const DATA_FILE = path.join(ROOT, "js/study/sheets-data.js");
+const DATA_FILE = path.join(ROOT, "js/content/sheets-data.js");
 const SQL_FILE = path.join(ROOT, "tools/supabase-quiz-integrity.sql");
 
 function loadSheetsData(source) {
@@ -118,7 +118,7 @@ const seedRows = quizzes.map((q) =>
 );
 
 const sql = `-- Checkpoint quiz integrity. Run once in the Supabase SQL editor.
--- Moves the quiz answer key out of the client bundle: js/study/sheets-data.js
+-- Moves the quiz answer key out of the client bundle: js/content/sheets-data.js
 -- no longer carries "correct" indices (tools/audit/scrub_quiz_keys.mjs). This
 -- file is the server half — deploy BEFORE the client release that includes
 -- js/pages/study/quiz-gate.js, otherwise checkpoint questions cannot be graded.

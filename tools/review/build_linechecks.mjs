@@ -246,7 +246,7 @@ for (let sIdx = 0; sIdx <= 10; sIdx++) {
 
   let md = `# Sitting ${sIdx} Line-Check: ${title}\n\n`;
   md += `**Audit Date:** 2026-09-20  \n`;
-  md += `**File Audited:** \`js/study/sheets-data.js\` (Sitting id: ${sIdx}) with \`sheet-verify.js\`, \`workbench.js\`, \`sheet-glossary.js\`  \n`;
+  md += `**File Audited:** \`js/content/sheets-data.js\` (Sitting id: ${sIdx}) with \`sheet-verify.js\`, \`workbench.js\`, \`sheet-glossary.js\`  \n`;
   md += `**Audited Content Hash:** \`${hash}\`  \n`;
   md += `**Method:** Exhaustive claim-unit audit of finished prose across content, christology, quizzes, studyGuide, guide, verify cards, workbench, and linked glossary entries.  \n`;
   md += `**Counts:** ACCURATE: ${counts.ACCURATE} | SOFTEN: ${counts.SOFTEN} | FIX: ${counts.FIX} | N/A: ${counts.NA} | Total: ${counts.total}  \n\n`;

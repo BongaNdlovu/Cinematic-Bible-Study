@@ -1,10 +1,10 @@
 /*
- * Split js/study/sheets-data.js into the files study.html loads.
+ * Split js/content/sheets-data.js into the files study.html loads.
  *
  * sheets-data.js stays the one file every authoring tool edits. The page no
- * longer loads it whole: it loads js/study/sheets/index.js (the eleven
+ * longer loads it whole: it loads js/content/sheets/index.js (the eleven
  * sittings' titles and the horizon epochs) and fetches one sitting at a time
- * from js/study/sheets/sheet-N.js. Run this after any change to
+ * from js/content/sheets/sheet-N.js. Run this after any change to
  * sheets-data.js; tools/verify/verify_quiz_integrity.mjs fails while the two
  * disagree.
  *
@@ -15,8 +15,8 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const SOURCE = path.join(ROOT, 'js/study/sheets-data.js');
-const OUT_DIR = path.join(ROOT, 'js/study/sheets');
+const SOURCE = path.join(ROOT, 'js/content/sheets-data.js');
+const OUT_DIR = path.join(ROOT, 'js/content/sheets');
 const INDEX_FIELDS = ['id', 'epoch', 'readTime', 'allocatedMinutes', 'scripture', 'title', 'subtitle'];
 const EOL = '\r\n';
 
@@ -36,7 +36,7 @@ function pick(sheet) {
 }
 
 export function sheetPath(index) {
-  return 'js/study/sheets/sheet-' + index + '.js';
+  return 'js/content/sheets/sheet-' + index + '.js';
 }
 
 export function render() {
@@ -168,13 +168,13 @@ function main() {
   });
   if (check) {
     if (stale.length) {
-      console.error('js/study/sheets is out of date with sheets-data.js: ' + stale.join(', ') + '\nRun: node tools/build_study_sheets.mjs');
+      console.error('js/content/sheets is out of date with sheets-data.js: ' + stale.join(', ') + '\nRun: node tools/build_study_sheets.mjs');
       process.exit(1);
     }
-    console.log('js/study/sheets matches sheets-data.js (' + count + ' sittings)');
+    console.log('js/content/sheets matches sheets-data.js (' + count + ' sittings)');
     return;
   }
-  console.log(stale.length ? 'wrote ' + stale.join(', ') : 'js/study/sheets already up to date');
+  console.log(stale.length ? 'wrote ' + stale.join(', ') : 'js/content/sheets already up to date');
 }
 
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) main();

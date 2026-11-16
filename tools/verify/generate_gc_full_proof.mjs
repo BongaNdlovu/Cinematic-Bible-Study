@@ -101,7 +101,7 @@ const indexLines = [
   '# GC full-course sentence proof (generated)',
   '',
   `**Generated:** ${new Date().toISOString().slice(0, 10)}`,
-  '**Source:** live `js/study/sheets-data.js` + verify + glossary + workbench via `extract_claim_units.mjs`',
+  '**Source:** live `js/content/sheets-data.js` + verify + glossary + workbench via `extract_claim_units.mjs`',
   '',
   '| Sitting | Units | File |',
   '|---------|-------|------|',
@@ -150,7 +150,7 @@ indexLines.push('');
 indexLines.push('## Glossary enrichment');
 indexLines.push('');
 indexLines.push('Regenerate fuller “In plain words / Deeper record / Proof & sources” cards:');
-indexLines.push('`node tools/verify/build_glossary_enrichment.mjs` (edit `js/study/glossary-enrichment-overrides.json` first).');
+indexLines.push('`node tools/verify/build_glossary_enrichment.mjs` (edit `js/content/glossary-enrichment-overrides.json` first).');
 
 fs.writeFileSync(path.join(root, 'tools/review/GC_SUBMISSION_FULL_COURSE_INDEX.md'), indexLines.join('\n'), 'utf8');
 

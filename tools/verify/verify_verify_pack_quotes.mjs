@@ -32,7 +32,7 @@ const corpus = hay.join(' ');
 
 const ctx = { window: {} };
 vm.createContext(ctx);
-vm.runInContext(fs.readFileSync('js/study/sheet-verify.js', 'utf8'), ctx);
+vm.runInContext(fs.readFileSync('js/content/sheet-verify.js', 'utf8'), ctx);
 const packs = ctx.window.SHEET_VERIFY || [];
 
 let checked = 0;

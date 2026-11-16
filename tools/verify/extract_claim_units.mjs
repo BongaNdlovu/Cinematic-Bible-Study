@@ -27,7 +27,7 @@ function cleanText(html) {
 }
 
 // 1. Load sheetsData
-const sheetsSrc = fs.readFileSync(path.join(root, 'js/study/sheets-data.js'), 'utf8');
+const sheetsSrc = fs.readFileSync(path.join(root, 'js/content/sheets-data.js'), 'utf8');
 const sittingPart = sheetsSrc.slice(sheetsSrc.indexOf('const sheetsData'), sheetsSrc.indexOf('const timelineEpochs'));
 const sCtx = {};
 vm.createContext(sCtx);
@@ -35,17 +35,17 @@ vm.runInContext(sittingPart + '\nthis.sheetsData = sheetsData;', sCtx);
 const sheetsData = sCtx.sheetsData;
 
 // 2. Load SHEET_VERIFY
-const verifySrc = fs.readFileSync(path.join(root, 'js/study/sheet-verify.js'), 'utf8');
+const verifySrc = fs.readFileSync(path.join(root, 'js/content/sheet-verify.js'), 'utf8');
 const vCtx = { window: {} };
 vm.createContext(vCtx);
 vm.runInContext(verifySrc, vCtx);
 const sheetVerify = vCtx.window.SHEET_VERIFY || [];
 
 // 3. Load SHEET_GLOSSARY (+ optional enrichment patch)
-const glossSrc = fs.readFileSync(path.join(root, 'js/study/sheet-glossary.js'), 'utf8');
+const glossSrc = fs.readFileSync(path.join(root, 'js/content/sheet-glossary.js'), 'utf8');
 const gCtx = { window: {} };
 vm.createContext(gCtx);
-const enrichJs = path.join(root, 'js/study/glossary-enrichment.js');
+const enrichJs = path.join(root, 'js/content/glossary-enrichment.js');
 if (fs.existsSync(enrichJs)) {
   vm.runInContext(fs.readFileSync(enrichJs, 'utf8'), gCtx);
 }

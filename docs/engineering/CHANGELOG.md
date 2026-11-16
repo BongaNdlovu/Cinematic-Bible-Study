@@ -14,6 +14,22 @@ Entry template:
 
 ---
 
+## 2026-11-16 — Architecture plan, step 5.4: lesson data in `js/content/`
+
+**Why:** content editors and engineers worked in the same folders, and the map page loaded data from the study page's folder.
+
+**What changed:**
+
+- Into `js/content/`: `sheets-data.js`, the generated `sheets/` folder, `sheet-map.js`, `sheet-verify.js`, `sheet-glossary.js`, `glossary-enrichment.js`, `glossary-enrichment-overrides.json` (all from `js/study/`), `map-data.js` (from `js/map/`), `shelf-data.js` (from `js/home/`) and `covers.js` (from `js/shared/`). 21 files.
+- The build tools (`build_study_sheets.mjs`, `build-shelf-data.mjs`, `build_glossary_enrichment.mjs`) write to the new paths, and `.gitattributes` marks the new `sheets/` folder as generated.
+- **Bug in the move script, caught here:** a folder prefix followed by a letter (`js/study/sheets/sheet-0.js`) did not match, so eight files kept the old folder, among them `study.html`'s `data-sheet-*` attributes, the study entry and `tools/build_study_sheets.mjs`. They were rewritten with a second pass, and the script was fixed. A new check that every `js/` and `css/` path named in the pages, code and tests exists on disk found only synthetic test names afterwards.
+
+**Handbook updated:** 03 (`js/content/`, `js/map/`, `js/home/`), and paths in 02, 05 and 07.
+
+**Checked here:** on Windows: lint exits 0, `npm run test:unit` passes 180 of 180, every `npm test` script passes. `npm run test:browser` passed 29 of 30: `verify_study_page_load.mjs` matched the sitting files with an escaped pattern (`js\/study\/sheets\/`) that no path search finds. With that pattern updated, it passes alone, and the other 29 had passed in the same run.
+
+**Status:** on branch `arch/phase-5-layout`, not deployed.
+
 ## 2026-11-16 — Architecture plan, step 5.3: page-only scripts out of `js/shared/`
 
 **Why:** "shared" should mean loaded by two or more pages, so the folder tells you how far a change reaches. Three files there served one page each.

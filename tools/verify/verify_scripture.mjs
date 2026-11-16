@@ -107,11 +107,11 @@ if (api.findPhrase("the king\u2019s matter", "the king's matter") < 0) fail('fin
 
 const html = fs.readFileSync(path.join(root, 'study.html'), 'utf8') + fs.readdirSync(path.join(root, 'css/study')).sort().map((n) => fs.readFileSync(path.join(root, 'css/study', n), 'utf8')).join('\n');
 const studyApp = studyPageSource();
-const sheetsSrc = fs.readFileSync(path.join(root, 'js/study/sheets-data.js'), 'utf8');
+const sheetsSrc = fs.readFileSync(path.join(root, 'js/content/sheets-data.js'), 'utf8');
 const studySources = html + studyApp + sheetsSrc;
 if (!html.includes('data-instrument="scripture"')) fail('study.html is missing the Scripture instrument tab');
 if (!pageLoads('study.html', 'js/study/scripture.js')) fail('study.html does not load js/study/scripture.js');
-if (!pageLoads('study.html', 'js/study/sheets/index.js') || !pageLoads('study.html', 'js/study/study-app.js')) {
+if (!pageLoads('study.html', 'js/content/sheets/index.js') || !pageLoads('study.html', 'js/study/study-app.js')) {
   fail('study.html does not load extracted study scripts');
 }
 if (!studyApp.includes('BAScripture.showSheet')) fail('loadSheet does not ask Scripture to follow the sheet');

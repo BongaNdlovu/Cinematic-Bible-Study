@@ -210,7 +210,7 @@ const FORBIDDEN = /Adventist|Ellen G\.|Uriah Smith|Investigative Judgment|Great 
 const filesToScan = [
   'js/study/workbench.js',
   'js/study/workbench-rubric.js',
-  'js/study/sheets-data.js',
+  'js/content/sheets-data.js',
   'js/study/competency.js',
   'js/study/certificate.js',
   'js/shared/journey.js',
@@ -242,7 +242,7 @@ console.log('  PASS: 0 forbidden brand violations across all scanned files.');
 
 // Check 8: Verify facilitator notes in sheets-data.js
 console.log('Test 7: Verifying facilitator notes across all 11 sittings in sheets-data.js...');
-const sheetsDataCode = fs.readFileSync(path.join('js/study/sheets-data.js'), 'utf8');
+const sheetsDataCode = fs.readFileSync(path.join('js/content/sheets-data.js'), 'utf8');
 vm.runInContext(sheetsDataCode, context);
 const sheetsData = sandbox.window.sheetsData;
 

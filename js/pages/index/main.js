@@ -1,4 +1,4 @@
-import '/js/shared/covers.js';
+import '/js/content/covers.js';
 import '/js/shared/journey.js';
 import '/js/shared/auth-config.js';
 import '/js/shared/net.js';
@@ -16,5 +16,5 @@ import '/js/shared/onboard.js?v=cx3';
 import '/js/shared/ui-sound.js';
 import '/js/shared/ui-click-sound.js';
 import '/js/home/home.js';
-import '/js/home/shelf-data.js';
+import '/js/content/shelf-data.js';
 import '/js/home/shelf.js';

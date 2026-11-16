@@ -28,7 +28,7 @@ if (dispatch) {
 }
 
 // ---- 2. what the data actually uses ---------------------------------------
-const raw = fs.readFileSync('js/study/sheets-data.js', 'utf8').replace(/\r\n/g, '\n');
+const raw = fs.readFileSync('js/content/sheets-data.js', 'utf8').replace(/\r\n/g, '\n');
 const part = raw.slice(raw.indexOf('const sheetsData'), raw.indexOf('const timelineEpochs'));
 const ctx = {};
 vm.createContext(ctx);

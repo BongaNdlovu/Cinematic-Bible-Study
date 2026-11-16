@@ -36,7 +36,7 @@ covered before the review may be called complete. Track coverage yourself:
 
 The text of record is the live data, not your memory of it. For sitting `N`:
 
-1. [`js/study/sheets-data.js`](../js/study/sheets-data.js) — find the object with `id: N` in the
+1. [`js/content/sheets-data.js`](../js/content/sheets-data.js) — find the object with `id: N` in the
    `sheetsData` array, then work through every field:
    - `content` — the article HTML. Every `<p>` **and every `<div class="first-principles">` box**
      (each has a `first-principles-kicker`; use it as the box's name in your report).
@@ -46,7 +46,7 @@ The text of record is the live data, not your memory of it. For sitting `N`:
      `help` / `value` cards (`claim` and `why`), and the `ask` questions.
    - `guide.intro.do` — the intro checklist items shown before the article.
    - `path` — if a sitting ever carries one, review it the same way.
-2. [`js/study/sheet-verify.js`](../js/study/sheet-verify.js) — `window.SHEET_VERIFY[N]`. Each item has
+2. [`js/content/sheet-verify.js`](../js/content/sheet-verify.js) — `window.SHEET_VERIFY[N]`. Each item has
    a `lesson` (the claim line), a `kind` (`scripture` or `commentary`), a `source`, a `quote`, a
    `check`, and sometimes an `href`.
    Verify the quotes against the cited source (follow the `href` when there is one). A verify card is
@@ -54,7 +54,7 @@ The text of record is the live data, not your memory of it. For sitting `N`:
 3. [`js/study/workbench.js`](../js/study/workbench.js) — **only sittings 0, 1, and 2 have workbenches**
    (`renderSheet0Workbench` … `renderSheet2Workbench`). The matching tasks (schools matrix, name grid,
    civic/defilement sorts) embed claims in their statements and their "correct" answers.
-4. [`js/study/sheet-glossary.js`](../js/study/sheet-glossary.js) — the entries whose term or alias is
+4. [`js/content/sheet-glossary.js`](../js/content/sheet-glossary.js) — the entries whose term or alias is
    actually used in that sitting's article (the article auto-links them). Both the `simple` and the
    `history` prose of each used entry are in scope.
 

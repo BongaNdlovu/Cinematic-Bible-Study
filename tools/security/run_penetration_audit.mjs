@@ -345,7 +345,7 @@ async function edgeHiddenPaths() {
 
 function quizBundleHasNoKey() {
   browser();
-  loadScript("js/study/sheets-data.js");
+  loadScript("js/content/sheets-data.js");
   const sheets = global.window.sheetsData;
   if (!Array.isArray(sheets) || sheets.length !== 11) throw new Error("eleven sittings did not load");
   let total = 0;

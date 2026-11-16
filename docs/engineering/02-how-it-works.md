@@ -83,7 +83,7 @@ These checks decide what the interface offers. The real protection is in the dat
 
 ## 5. Reading a sitting and answering questions
 
-1. `js/study/sheets/index.js` holds the list of 11 sittings and loads each sitting's text (`js/study/sheets/sheet-N.js`) only when it is opened.
+1. `js/content/sheets/index.js` holds the list of 11 sittings and loads each sitting's text (`js/content/sheets/sheet-N.js`) only when it is opened.
 2. `js/study/study-app.js` draws the sitting, its diagrams and its questions. `js/study/book-reader.js` lays the sitting out as turning pages.
 3. An answer is sent to the database function `verify_quiz_answer` (`js/pages/study/quiz-gate.js`). **The answer key never reaches the browser.** It lives in `exhibit_quiz_keys`, which no client role can read. Guests cannot call the function; they are told to sign in.
 4. A reply that comes back after the reader has moved to another sitting is ignored (fix of 12 November 2026).

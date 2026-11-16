@@ -20,7 +20,7 @@ The server binds `127.0.0.1`. It starts at port 8000, or at `PORT` if that is se
 
 | Script | What it does |
 |---|---|
-| `npm run lint` | `oxlint` over the code. CI fails on any error. The complexity ceiling is 55 per function, set in `.oxlintrc.json`. The unused-variable rule applies to every file. Since 16 November 2026, `no-undef` is on for `js/**` with the browser environment, so a name no file defines fails lint. The three names other scripts set on `window` and read bare are declared in `globals`: `sheetsData`, `timelineEpochs` (both from `js/study/sheets/index.js`) and Leaflet's `L`. Its override for the study files was removed on 16 November 2026 (plan step 4.5): they are ES modules now, so lint sees what each file exports and imports. `.cursor/skills/complexity-ceiling/SKILL.md` says how to change the complexity ceiling. |
+| `npm run lint` | `oxlint` over the code. CI fails on any error. The complexity ceiling is 55 per function, set in `.oxlintrc.json`. The unused-variable rule applies to every file. Since 16 November 2026, `no-undef` is on for `js/**` with the browser environment, so a name no file defines fails lint. The three names other scripts set on `window` and read bare are declared in `globals`: `sheetsData`, `timelineEpochs` (both from `js/content/sheets/index.js`) and Leaflet's `L`. Its override for the study files was removed on 16 November 2026 (plan step 4.5): they are ES modules now, so lint sees what each file exports and imports. `.cursor/skills/complexity-ceiling/SKILL.md` says how to change the complexity ceiling. |
 | `npm run test:unit` | `node --test "tests/unit/*.test.mjs"`: fast unit tests, no browser |
 | `npm test` | The regression suite: 24 `tools/verify/verify_*.mjs` scripts plus `tools/verify-headers.mjs`. Some start `server.py` and drive Chromium through Playwright. It ends with three guards: `node tools/build_study_sheets.mjs --check` and `node tools/verify/build_glossary_enrichment.mjs --check` (fail when a generated file is older than its source) and `tools/verify/verify_wiring.mjs` (fails when a `verify_*.mjs` file is not run anywhere). |
 | `npm run test:browser` | `tools/verify/run_browser_checks.mjs`: starts one site server and runs the 29 browser checks that pass today (see [Browser checks](#browser-checks)). Add `--include-quarantined` to run the one known-failing check too, or `--only=verify_x.mjs,verify_y.mjs` to run named ones. |
@@ -35,12 +35,12 @@ The server binds `127.0.0.1`. It starts at port 8000, or at `PORT` if that is se
 
 | Edit | Then run |
 |---|---|
-| `js/study/sheets-data.js` | `node tools/build_study_sheets.mjs` (writes `js/study/sheets/`) |
+| `js/content/sheets-data.js` | `node tools/build_study_sheets.mjs` (writes `js/content/sheets/`) |
 | `css/study-tailwind-src.css` or `tailwind.study.config.js` | `npm run build:tailwind` |
 | Shelf content | `node tools/build-shelf-data.mjs` (the deploy runs it too) |
-| `js/study/glossary-enrichment-overrides.json` | `node tools/verify/build_glossary_enrichment.mjs` |
+| `js/content/glossary-enrichment-overrides.json` | `node tools/verify/build_glossary_enrichment.mjs` |
 
-`npm test` checks the first and last rows with `--check`: it fails, and names the rebuild command, when `js/study/sheets/` or `js/study/glossary-enrichment.js` no longer matches its source. The glossary check ignores Windows line endings. The sheet files are always written with CRLF (`.gitattributes`), so that check compares them as they are.
+`npm test` checks the first and last rows with `--check`: it fails, and names the rebuild command, when `js/content/sheets/` or `js/content/glossary-enrichment.js` no longer matches its source. The glossary check ignores Windows line endings. The sheet files are always written with CRLF (`.gitattributes`), so that check compares them as they are.
 
 ## Tests
 

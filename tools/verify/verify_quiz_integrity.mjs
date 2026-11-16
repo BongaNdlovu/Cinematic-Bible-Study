@@ -9,7 +9,7 @@ const read = (rel) => fs.readFileSync(path.join(ROOT, rel), "utf8");
 
 /* 1. The shipped curriculum carries no answer key. */
 global.window = {};
-new Function(read("js/study/sheets-data.js"))();
+new Function(read("js/content/sheets-data.js"))();
 const sheetsData = global.window.sheetsData;
 assert.ok(Array.isArray(sheetsData) && sheetsData.length === 11, "eleven sittings load");
 
@@ -138,8 +138,8 @@ assert.ok(studyPageSource().includes("Answer checking is available to signed-in 
 const { render } = await import("../build_study_sheets.mjs");
 const built = render().files;
 Object.keys(built).forEach((name) => {
-  assert.strictEqual(read("js/study/sheets/" + name), built[name], `js/study/sheets/${name} matches sheets-data.js (run node tools/build_study_sheets.mjs)`);
-  assert.strictEqual(/"correct"\s*:/.test(built[name]), false, `js/study/sheets/${name} ships no correct index`);
+  assert.strictEqual(read("js/content/sheets/" + name), built[name], `js/content/sheets/${name} matches sheets-data.js (run node tools/build_study_sheets.mjs)`);
+  assert.strictEqual(/"correct"\s*:/.test(built[name]), false, `js/content/sheets/${name} ships no correct index`);
 });
 
 console.log("quiz integrity: key scrubbed, server seed complete, RPC grading, fail-closed paths hold");

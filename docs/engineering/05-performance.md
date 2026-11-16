@@ -48,7 +48,7 @@ JavaScript and HTML are **not** minified. Their comments ship to readers as writ
 
 | What | When it loads | Code |
 |---|---|---|
-| A sitting's full text | When that sitting is opened | `js/study/sheets/index.js` |
+| A sitting's full text | When that sitting is opened | `js/content/sheets/index.js` |
 | The certificate maker | When it is first used | `study.html` (`data-certificate`) |
 | The 3D globe on the map | When the globe view is opened | `GLOBE_SRC` in `js/map/map.js` |
 | Article images | Lazily (`loading="lazy"`) | `study-app.js`, `loadSheet` |
