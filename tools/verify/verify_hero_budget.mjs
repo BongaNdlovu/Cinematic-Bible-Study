@@ -52,7 +52,7 @@ for (const m of index.matchAll(/<link[^>]+rel="modulepreload"[^>]+href="([^"]+)"
   const src = fs.readFileSync(local(m[1]), "utf8");
   assert(!/(?:from|import)\s*\(?\s*['"]three['"]/.test(src), "do not modulepreload " + m[1] + "; it imports the bare specifier three, and a cached reload then cannot draw the shelf");
 }
-const shelf = fs.readFileSync(path.join(ROOT, "js", "home", "shelf.js"), "utf8");
+const shelf = fs.readFileSync(path.join(ROOT, "js/home/shelf.js"), "utf8");
 const portrait = /const SHELF_PORTRAIT = '([^']+)'/.exec(shelf);
 assert(portrait, "shelf.js must name the painting it waits for before the shelf is ready");
 assert(!shelf.includes("o.frustumCulled = false"), "the shelf loader must not turn frustum culling off for the whole scene");
@@ -64,7 +64,7 @@ for (const [file, label] of eager) checkSize(file, MAX, label);
 
 assert(pageLoads("index.html", "js/shared/covers.js"), "index.html must load the cover list");
 const sandbox = { window: {} };
-vm.runInNewContext(fs.readFileSync(path.join(ROOT, "js", "shared", "covers.js"), "utf8"), sandbox);
+vm.runInNewContext(fs.readFileSync(path.join(ROOT, "js/shared/covers.js"), "utf8"), sandbox);
 const covers = sandbox.window.SHELF_COVERS || [];
 const thumbs = sandbox.window.SHELF_COVER_THUMBS || [];
 assert.strictEqual(covers.length, 11, "the shelf must list eleven cover paintings");

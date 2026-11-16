@@ -4,7 +4,7 @@ import fs from "node:fs";
 import vm from "node:vm";
 import * as acorn from "acorn";
 
-const src = fs.readFileSync(new URL("../../js/shared/account.js", import.meta.url), "utf8");
+const src = fs.readFileSync(new URL("../../js/pages/account/account.js", import.meta.url), "utf8");
 const WANTED = new Set(["SITE_KEYS", "SITE_KEY_PREFIXES", "OWN_STASH_PREFIXES", "isSiteKey", "siteStores", "ownStashKeys", "clearSiteStorage"]);
 
 function pickDeclarations() {

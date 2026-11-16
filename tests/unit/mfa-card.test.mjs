@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 import fs from "node:fs";
 import vm from "node:vm";
 
-const SRC = fs.readFileSync(new URL("../../js/shared/mfa.js", import.meta.url), "utf8");
+const SRC = fs.readFileSync(new URL("../../js/pages/account/mfa.js", import.meta.url), "utf8");
 const CORE = fs.readFileSync(new URL("../../js/shared/core.js", import.meta.url), "utf8");
 
 function el(hidden) {

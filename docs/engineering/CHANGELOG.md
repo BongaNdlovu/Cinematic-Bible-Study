@@ -14,6 +14,22 @@ Entry template:
 
 ---
 
+## 2026-11-16 — Architecture plan, step 5.3: page-only scripts out of `js/shared/`
+
+**Why:** "shared" should mean loaded by two or more pages, so the folder tells you how far a change reaches. Three files there served one page each.
+
+**What changed:**
+
+- `js/shared/account.js` and `js/shared/mfa.js` → `js/pages/account/`; `js/shared/quiz-gate.js` → `js/pages/study/`. References rewritten by the same one-pass script as 5.2.
+- Before the move, four test and tool files that named paths as separate segments (`path.join(root, 'js', 'shared', 'journey.js')`) were changed to one path string (`'js/shared/journey.js'`), so a path search finds them: `tools/verify-headers.mjs`, `tools/verify/_server.mjs`, `verify_hero_budget.mjs`, `verify_workbench.mjs`. (`tools/measure_baseline.mjs` matched the search but lists two folders, not a path, and was left alone.)
+- Every other file in `js/shared/` is loaded by two or more pages (counted from what each page's tags and entry load).
+
+**Handbook updated:** 03 (`js/shared/`), and paths in 02, 04 and 06.
+
+**Checked here:** on Windows: lint exits 0, `npm run test:unit` passes 180 of 180, every `npm test` script passes, and `npm run test:browser` passes 30 of 30.
+
+**Status:** on branch `arch/phase-5-layout`, not deployed.
+
 ## 2026-11-16 — Architecture plan, step 5.2: names that said the wrong thing
 
 **Why:** two files were called `insights.js` (reader analytics and the moderator dashboard), so searches and error reports landed on the wrong one, and several names did not say what the file does.

@@ -77,7 +77,7 @@ These checks decide what the interface offers. The real protection is in the dat
 ## 4. Signing in
 
 - Sign-in is Google only, through Supabase Auth (`signInWithOAuth({ provider: "google" })` in `js/shared/auth.js`).
-- Moderators must also pass an authenticator-app check. In the live database, `is_review_moderator()` needs a Google identity **and** an `aal2` session (checked 12 November 2026). The enrolment and challenge screens are in `js/shared/mfa.js`.
+- Moderators must also pass an authenticator-app check. In the live database, `is_review_moderator()` needs a Google identity **and** an `aal2` session (checked 12 November 2026). The enrolment and challenge screens are in `js/pages/account/mfa.js`.
 - Signing out first tries to send any unsaved notes and progress, waiting up to 6 seconds. If something is still unsent, it asks before removing it from the device (`flushBeforeSignOut()` in `js/shared/auth.js`).
 - For local tests only, `localStorage.baQaMockSession` can stand in for a signed-in user. It is ignored on any host other than localhost.
 
@@ -85,7 +85,7 @@ These checks decide what the interface offers. The real protection is in the dat
 
 1. `js/study/sheets/index.js` holds the list of 11 sittings and loads each sitting's text (`js/study/sheets/sheet-N.js`) only when it is opened.
 2. `js/study/study-app.js` draws the sitting, its diagrams and its questions. `js/study/book-reader.js` lays the sitting out as turning pages.
-3. An answer is sent to the database function `verify_quiz_answer` (`js/shared/quiz-gate.js`). **The answer key never reaches the browser.** It lives in `exhibit_quiz_keys`, which no client role can read. Guests cannot call the function; they are told to sign in.
+3. An answer is sent to the database function `verify_quiz_answer` (`js/pages/study/quiz-gate.js`). **The answer key never reaches the browser.** It lives in `exhibit_quiz_keys`, which no client role can read. Guests cannot call the function; they are told to sign in.
 4. A reply that comes back after the reader has moved to another sitting is ignored (fix of 12 November 2026).
 5. When every question is right, the next sitting opens. `js/study/task-flow.js` offers the questions as a step-by-step dialog.
 
@@ -125,7 +125,7 @@ Consent is stored in `sodConsent` (`js/shared/consent.js`). If a visitor has not
 | Readers' notes (reviews) with moderation | `js/shared/reviews.js` | `exhibit_reviews`, `exhibit_public_reviews()` for public reading |
 | Message desk (operator notices, help notes, replies) | `js/shared/desk.js` | `exhibit_notices`, `exhibit_notice_receipts`, `exhibit_help_notes`, `exhibit_help_replies` |
 | Certificates | `js/study/certificate.js` (loaded on demand from `study.html`) | `exhibit_certificates`, `issue_exhibit_certificate()` |
-| Account deletion | `js/shared/account.js` | `exhibit_delete_my_account()` |
+| Account deletion | `js/pages/account/account.js` | `exhibit_delete_my_account()` |
 | Insights dashboard and printable report | `js/pages/dashboard/dashboard.js`, `js/pages/dashboard/sid-report.js` | Moderator-only read policies on events, surveys and profiles; `exhibit_graduates()`; `exhibit_participation(from, to)` for the project target |
 
 **The project target in the SID report.** The proposal to the Southern Africa-Indian Ocean Division sets a target of 500 people who register and begin the study within 12 months (`PARTICIPATION_TARGET` in `js/pages/dashboard/sid-report.js`). The report's Summary page shows three figures for the chosen period, from `exhibit_participation(from, to)` in `tools/supabase-participation.sql`:

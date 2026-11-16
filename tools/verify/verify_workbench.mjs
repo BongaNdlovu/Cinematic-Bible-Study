@@ -65,8 +65,8 @@ sandbox.window.document = sandbox.document;
 const context = vm.createContext(sandbox);
 
 // 1. Load workbench.js
-const workbenchCode = fs.readFileSync(path.join('js', 'study', 'workbench.js'), 'utf8');
-vm.runInContext(fs.readFileSync(path.join('js', 'study', 'workbench-rubric.js'), 'utf8'), context);
+const workbenchCode = fs.readFileSync(path.join('js/study/workbench.js'), 'utf8');
+vm.runInContext(fs.readFileSync(path.join('js/study/workbench-rubric.js'), 'utf8'), context);
 vm.runInContext(workbenchCode, context);
 
 const StudyWorkbench = sandbox.window.StudyWorkbench;
@@ -242,7 +242,7 @@ console.log('  PASS: 0 forbidden brand violations across all scanned files.');
 
 // Check 8: Verify facilitator notes in sheets-data.js
 console.log('Test 7: Verifying facilitator notes across all 11 sittings in sheets-data.js...');
-const sheetsDataCode = fs.readFileSync(path.join('js', 'study', 'sheets-data.js'), 'utf8');
+const sheetsDataCode = fs.readFileSync(path.join('js/study/sheets-data.js'), 'utf8');
 vm.runInContext(sheetsDataCode, context);
 const sheetsData = sandbox.window.sheetsData;
 
@@ -332,15 +332,15 @@ if (!indexHtml.includes('year-day') || !indexHtml.includes('Daniel 2:38') || !in
     throw new Error(page + ' og:image is not the production hero URL.');
   }
 });
-const journeyCode = fs.readFileSync(path.join('js', 'shared', 'journey.js'), 'utf8');
+const journeyCode = fs.readFileSync(path.join('js/shared/journey.js'), 'utf8');
 if (!journeyCode.includes('get("cohort")') || !journeyCode.includes('getCohort')) {
   throw new Error('journey.js does not capture ?cohort= or expose getCohort.');
 }
-const certCode = fs.readFileSync(path.join('js', 'study', 'certificate.js'), 'utf8');
+const certCode = fs.readFileSync(path.join('js/study/certificate.js'), 'utf8');
 if (!certCode.includes('openReviewPrompt') || !certCode.includes('cert-review-class') || !certCode.includes('classroomUse')) {
   throw new Error('certificate.js is missing the post-PDF review + classroom-use survey.');
 }
-const reviewsCode = fs.readFileSync(path.join('js', 'shared', 'reviews.js'), 'utf8');
+const reviewsCode = fs.readFileSync(path.join('js/shared/reviews.js'), 'utf8');
 if (!reviewsCode.includes('exhibit_surveys') || !reviewsCode.includes('classroomUse')) {
   throw new Error('reviews.js does not insert exhibit_surveys with classroomUse.');
 }
@@ -350,10 +350,10 @@ if (!fs.readFileSync('reviews.html', 'utf8').includes('id="witness-list"')) {
 if (!reviewsCode.includes('list.hidden = true')) {
   throw new Error('reviews.js does not hide the witness list when empty.');
 }
-if (!fs.existsSync(path.join('js', 'shared', 'progress-sync.js'))) {
+if (!fs.existsSync(path.join('js/shared/progress-sync.js'))) {
   throw new Error('js/shared/progress-sync.js is missing.');
 }
-const syncCode = fs.readFileSync(path.join('js', 'shared', 'progress-sync.js'), 'utf8');
+const syncCode = fs.readFileSync(path.join('js/shared/progress-sync.js'), 'utf8');
 if (!syncCode.includes('exhibit_progress') || !syncCode.includes('pullAndMerge') || !syncCode.includes('save_exhibit_progress')) {
   throw new Error('progress-sync.js is missing the merge or the revision-checked save of exhibit_progress.');
 }

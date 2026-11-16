@@ -99,7 +99,7 @@ export const QA_MOCK = {
 };
 
 export function termsVersion() {
-  const src = fs.readFileSync(path.join(repoRoot, 'js', 'shared', 'journey.js'), 'utf8');
+  const src = fs.readFileSync(path.join(repoRoot, 'js/shared/journey.js'), 'utf8');
   const hit = /const TERMS_VERSION = (\d+);/.exec(src);
   if (!hit) throw new Error('TERMS_VERSION not found in js/shared/journey.js');
   return Number(hit[1]);

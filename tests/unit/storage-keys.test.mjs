@@ -109,14 +109,14 @@ test("the keys cleared on sign-out match PERSONAL_KEYS and PERSONAL_PREFIXES in 
 });
 
 test("the keys cleared on account deletion match SITE_KEYS and SITE_KEY_PREFIXES in account.js", () => {
-  const account = read("js/shared/account.js");
+  const account = read("js/pages/account/account.js");
   const actual = [...listIn(account, "SITE_KEYS"), ...listIn(account, "SITE_KEY_PREFIXES")].sort();
   const expected = STORAGE_KEYS.filter((e) => e.deleteAccount).map((e) => e.key).sort();
   assert.deepEqual(actual, expected);
 });
 
 test("the stash prefixes cleared for the deleted account match OWN_STASH_PREFIXES in account.js", () => {
-  const actual = listIn(read("js/shared/account.js"), "OWN_STASH_PREFIXES").sort();
+  const actual = listIn(read("js/pages/account/account.js"), "OWN_STASH_PREFIXES").sort();
   const expected = STORAGE_KEYS.filter((e) => e.deleteOwnAccount).map((e) => e.key).sort();
   assert.deepEqual(actual, expected);
 });

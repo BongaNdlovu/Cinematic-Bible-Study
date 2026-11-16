@@ -10,7 +10,7 @@ import '/js/shared/desk.js';
 import '/js/shared/terms.js';
 import '/js/shared/progress-sync.js';
 import '/js/shared/study-sync.js';
-import '/js/shared/quiz-gate.js';
+import '/js/pages/study/quiz-gate.js';
 import '/js/shared/analytics.js';
 import '/js/shared/onboard.js?v=cx3';
 import '/js/shared/ui-sound.js';

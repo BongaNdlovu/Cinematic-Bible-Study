@@ -121,7 +121,7 @@ const sql = `-- Checkpoint quiz integrity. Run once in the Supabase SQL editor.
 -- Moves the quiz answer key out of the client bundle: js/study/sheets-data.js
 -- no longer carries "correct" indices (tools/audit/scrub_quiz_keys.mjs). This
 -- file is the server half — deploy BEFORE the client release that includes
--- js/shared/quiz-gate.js, otherwise checkpoint questions cannot be graded.
+-- js/pages/study/quiz-gate.js, otherwise checkpoint questions cannot be graded.
 
 create table if not exists public.exhibit_quiz_keys (
   sitting smallint not null,

@@ -152,7 +152,7 @@ Function permissions checked live: guests (`anon`) **can** call `exhibit_public_
 - `exhibit_prune_test_rows()` (`tools/supabase-prune-test-rows.sql`) runs on `pg_cron` every hour at minute 23. It deletes the rows the live tests leave behind, and nothing else. A row must have no account **and** both test markers: an event named `pen_probe` with an id starting `pen-` (or no id), a survey with an id starting `pen-` and kind `pen`, or rows from `tools/verify/verify_live_inserts.mjs` (id `live-insert-probe`). No client role can run it. `tools/verify/verify_insights.mjs` checks these rules.
 - Members can delete their account from the account page (`exhibit_delete_my_account()`).
 - Signing out removes the personal keys listed in `PERSONAL_KEYS` and `PERSONAL_PREFIXES` in `js/shared/auth.js`. It warns first if anything is unsent.
-- Changes put aside after an account switch (`baProgressStash:<account>`, `baStudySyncStash:<account>`) stay on the device until their owner signs in again. Deleting an account removes that account's own two stash keys from the device, through `clearSiteStorage(userId)` in `js/shared/account.js`; other accounts' stashes are left alone. They are listed in `privacy.html`.
+- Changes put aside after an account switch (`baProgressStash:<account>`, `baStudySyncStash:<account>`) stay on the device until their owner signs in again. Deleting an account removes that account's own two stash keys from the device, through `clearSiteStorage(userId)` in `js/pages/account/account.js`; other accounts' stashes are left alone. They are listed in `privacy.html`.
 
 ## Privacy and consent
 

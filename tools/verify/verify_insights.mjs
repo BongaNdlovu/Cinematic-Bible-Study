@@ -74,7 +74,7 @@ assert(!accountHtml.includes('Prologue, Daniel 1'), 'account.html must not promi
 assert(/Sign in to open the sittings, the Map of History, the 3D arena/.test(accountHtml), 'account.html must say sign-in opens the sittings, the map, and the 3D arena');
 assert(!accountHtml.includes('You may browse the study, map, and gallery without an account'), 'account.html must not promise the map and gallery without an account');
 assert(!accountHtml.includes('This exhibit is closed'), 'account.html must not say the exhibit is closed');
-assert(pageLoads('account.html', 'js/shared/account.js'), 'account.html must load the hub script');
+assert(pageLoads('account.html', 'js/pages/account/account.js'), 'account.html must load the hub script');
 assert(accountHtml.includes('id="account-accept"'), 'account.html must keep Accept on the terms card');
 assert(accountHtml.includes('id="account-signin"'), 'account.html must keep Google sign-in on the hub');
 assert(accountHtml.includes('id="account-error"'), 'account.html must keep a visible hub error box');

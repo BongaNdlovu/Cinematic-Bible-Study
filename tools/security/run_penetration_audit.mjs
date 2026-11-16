@@ -373,7 +373,7 @@ async function quizFailsClosed() {
     getClient: () => null
   };
   global.localStorage.setItem("baQaMockSession", JSON.stringify({ user: { id: "qa" } }));
-  loadScript("js/shared/quiz-gate.js");
+  loadScript("js/pages/study/quiz-gate.js");
   const signedOut = await global.window.QuizGate.verify(10, 1, 1);
   if (calls.length !== 0) throw new Error("a signed-out visitor called the grading function");
   if (!signedOut || signedOut.ok !== false || signedOut.error !== "not_authenticated") {
