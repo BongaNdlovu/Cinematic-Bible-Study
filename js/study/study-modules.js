@@ -1,26 +1,28 @@
-    function hasCompletedCourse() {
+import { completedSheets, showToast } from '/js/study/study-app.js';
+
+    export function hasCompletedCourse() {
       return sheetsData.every((_, i) => completedSheets.has(i));
     }
 
-    function syncCertificateCta() {
+    export function syncCertificateCta() {
       const btn = document.getElementById('btn-download-certificate');
       if (!btn) return;
       btn.hidden = !hasCompletedCourse();
     }
 
-    const studyModules = new Map();
+    export const studyModules = new Map();
 
-    function studyModuleFailed(name) {
+    export function studyModuleFailed(name) {
       const entry = studyModules.get(name);
       return !!(entry && entry.failed);
     }
 
-    function studyAssetPath(name) {
+    export function studyAssetPath(name) {
       const host = document.getElementById('study-chunks');
       return host ? host.getAttribute('data-' + name) || '' : '';
     }
 
-    function loadStudyModule(name) {
+    export function loadStudyModule(name) {
       const known = studyModules.get(name);
       if (known) return known.promise;
       const entry = { failed: false };
@@ -45,7 +47,7 @@
       return entry.promise;
     }
 
-    function openCertificateIfReady() {
+    export function openCertificateIfReady() {
       if (!hasCompletedCourse()) return;
       if (window.StudyCertificate) {
         window.StudyCertificate.open();

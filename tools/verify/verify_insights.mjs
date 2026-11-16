@@ -1,5 +1,5 @@
 import fs from 'fs';
-import { studyPageSource } from './_sources.mjs';
+import { studyPageSource, pageLoads } from './_sources.mjs';
 import path from 'path';
 import assert from 'assert';
 import { fileURLToPath } from 'url';
@@ -35,7 +35,7 @@ console.log('2. Checking HTML files & CSP headers...');
 const pages = ['index.html', 'study.html', 'gallery.html', 'map.html', 'insights.html', 'account.html'];
 pages.forEach(p => {
   const c = fs.readFileSync(path.join(ROOT, p), 'utf8');
-  assert(c.includes('js/shared/insights.js'), `${p} must include js/shared/insights.js`);
+  assert(c.length > 0 && pageLoads(p, 'js/shared/insights.js'), `${p} must include js/shared/insights.js`);
 });
 const indexHtml = fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8');
 assert(!indexHtml.includes('data-insight-optout'), 'index.html must not offer an analytics off switch');
@@ -45,7 +45,7 @@ assert(!indexHtml.includes('admin-reviews-link'), 'index.html must not ship the 
 assert(fs.readFileSync(path.join(ROOT, 'js/home/home.js'), 'utf8').includes('"admin-insights-link", "insights.html"'), 'home.js must add the Insights link for moderators');
 
 const studyHtml = fs.readFileSync(path.join(ROOT, 'study.html'), 'utf8');
-assert(studyHtml.includes('js/shared/insights.js'), 'study.html must include insights.js');
+assert(studyHtml.length > 0 && pageLoads('study.html', 'js/shared/insights.js'), 'study.html must include insights.js');
 
 const compJs = fs.readFileSync(path.join(ROOT, 'js/study/competency.js'), 'utf8');
 assert(!compJs.includes('data-insight-optout'), 'competency.js must not offer an analytics off switch');
@@ -74,7 +74,7 @@ assert(!accountHtml.includes('Prologue, Daniel 1'), 'account.html must not promi
 assert(/Sign in to open the sittings, the Map of History, the 3D arena/.test(accountHtml), 'account.html must say sign-in opens the sittings, the map, and the 3D arena');
 assert(!accountHtml.includes('You may browse the study, map, and gallery without an account'), 'account.html must not promise the map and gallery without an account');
 assert(!accountHtml.includes('This exhibit is closed'), 'account.html must not say the exhibit is closed');
-assert(accountHtml.includes('js/shared/account.js'), 'account.html must load the hub script');
+assert(pageLoads('account.html', 'js/shared/account.js'), 'account.html must load the hub script');
 assert(accountHtml.includes('id="account-accept"'), 'account.html must keep Accept on the terms card');
 assert(accountHtml.includes('id="account-signin"'), 'account.html must keep Google sign-in on the hub');
 assert(accountHtml.includes('id="account-error"'), 'account.html must keep a visible hub error box');

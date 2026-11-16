@@ -1,4 +1,8 @@
-    function syncHorizonLocks() {
+import { canAccessSheet, currentSheetIndex, denyLockedSitting, epochAccessible, loadSheet, memberLockText, sheetBelongsToEpoch, timelineToSheetMap } from '/js/study/study-app.js';
+
+    export let currentEpochIndex = 0;
+
+    export function syncHorizonLocks() {
       document.querySelectorAll('.horizon-card').forEach((card) => {
         const idx = Number(card.dataset.epoch);
         const open = epochAccessible(idx);
@@ -20,13 +24,13 @@
       syncEpochLine(currentEpochIndex);
     }
 
-    function stepHorizon(delta) {
+    export function stepHorizon(delta) {
       let idx = currentEpochIndex + delta;
       while (idx >= 0 && idx < timelineEpochs.length && !epochAccessible(idx)) idx += delta;
       if (idx >= 0 && idx < timelineEpochs.length && idx !== currentEpochIndex) setEpochInfo(idx);
     }
 
-    function setEpochInfo(epochIdx, opts) {
+    export function setEpochInfo(epochIdx, opts) {
       if (epochIdx < 0 || epochIdx >= timelineEpochs.length) return;
       const fromSheet = opts && opts.fromSheet;
       if (!fromSheet && !epochAccessible(epochIdx)) {
@@ -86,20 +90,20 @@
       }
     }
 
-    function epochShortTitle(epoch) {
+    export function epochShortTitle(epoch) {
       const mark = ' — ';
       const i = epoch.title.indexOf(mark);
       return i >= 0 ? epoch.title.slice(i + mark.length) : epoch.title;
     }
 
-    function hideHorizonFloat() {
+    export function hideHorizonFloat() {
       const float = document.getElementById('horizon-float');
       if (!float) return;
       float.classList.remove('is-on');
       float.hidden = true;
     }
 
-    function showHorizonFloat(idx, card) {
+    export function showHorizonFloat(idx, card) {
       if (window.matchMedia && window.matchMedia('(hover: none)').matches) return;
       const float = document.getElementById('horizon-float');
       const rail = document.querySelector('.horizon-rail');
@@ -121,7 +125,7 @@
       requestAnimationFrame(() => float.classList.add('is-on'));
     }
 
-    function buildHorizonCards() {
+    export function buildHorizonCards() {
       const track = document.getElementById('horizon-track');
       if (!track) return;
       track.innerHTML = timelineEpochs.map((ep, i) =>
@@ -162,7 +166,7 @@
       buildEpochLine();
     }
 
-    function buildEpochLine() {
+    export function buildEpochLine() {
       const line = document.getElementById('epoch-line');
       if (!line || !timelineEpochs.length) return;
       const n = timelineEpochs.length;
@@ -191,7 +195,7 @@
       syncEpochLine(currentEpochIndex);
     }
 
-    function syncEpochLine(epochIdx) {
+    export function syncEpochLine(epochIdx) {
       const line = document.getElementById('epoch-line');
       if (!line || !timelineEpochs.length) return;
       const n = timelineEpochs.length;
@@ -208,7 +212,7 @@
       });
     }
 
-    function updateFocusNote(epoch) {
+    export function updateFocusNote(epoch) {
       const noteEl = document.getElementById('pioneer-micro-note');
       if (noteEl && epoch.pioneerNote) noteEl.innerText = epoch.pioneerNote;
     }

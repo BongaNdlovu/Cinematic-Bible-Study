@@ -1,4 +1,14 @@
-    const MAP_EMPIRES = {
+import { journeyState, spineEmpireForSheet, updateSpine } from '/js/study/spine.js';
+import { STUDY_EPOCH_TO_YEAR, canAdvancePath, completeAndAdvance, currentSheetIndex, pulseMapYear, sheetToTimelineMap, sittingVisited } from '/js/study/study-app.js';
+
+    export let sittingPhase = 'study';
+    export let sittingEmpireOverride = null;
+    export let sittingBusy = false;
+    export let sittingYearOverride = null;
+
+    export function setSittingYearOverride(value) { sittingYearOverride = value; }
+
+    export const MAP_EMPIRES = {
       babylon: {
         name: "Babylon — Head of Gold",
         beast: "Daniel 7: a lion with eagle’s wings, later given a man’s heart (Daniel 4).",
@@ -42,7 +52,7 @@
       }
     };
 
-    const SHEET_CONTEXT = [
+    export const SHEET_CONTEXT = [
       { img: "assets/study/epochs/jerusalem-siege.jpg", title: "The prophetic blueprint", body: "Daniel opens in exile, but the Lord gave Jehoiakim into Nebuchadnezzar's hand (Daniel 1:2). Prophecy is God's historical roadmap — an unbroken chain pointing to Jesus Christ.", source: "Daniel 1:2; Daniel 9:26; Daniel 2:44; Luke 24:27.", exegesis: "Historicism keeps Babylon → Persia → Greece → Rome → divided Europe → Christ's kingdom as one chain. Preterism and futurism break that chain. Christ is the redemptive center: sovereignty in exile, sacrifice at the cross, Stone-King at the end." },
       { img: "assets/study/epochs/exile-court.jpg", title: "The exilic crucible", body: "Ashpenaz's school was assimilation: language, literature, and new names. Daniel drew the line at the king's table — idol table-fellowship and Levitical defilement. Daniel 1:8 names no effect on the mind.", source: "Daniel 1:8; Genesis 1:29; Leviticus 11. The ten-day test of zeroim.", exegesis: "Civic competence is not covenant surrender. Consecration at the table preceded revelation — and foreshadows Christ's faithful obedience in the wilderness." },
       { img: "assets/study/statue-nebuchadnezzar.jpg", title: "The metallic colossus", body: "Babylon's magicians confessed bankruptcy; Daniel prayed, and God revealed the master-framework of world history — from the head of gold to the stone that fills the earth.", source: "Daniel 2:28, 38–44. Babylonian Chronicle BM 21946.", exegesis: "One unbroken chain: Babylon → Medo-Persia → Greece → Rome → divided Europe → Christ's kingdom. The stone strikes the feet in the days of these kings. The blow comes from God, and no human hand cuts the stone." },
@@ -56,7 +66,7 @@
       { img: "assets/study/epochs/resurrection-dawn.jpg", title: "Michael stands in royal majesty", body: "Daniel 10–12 forms one undivided vision by the Tigris. When Michael stands up, human probation closes, a time of trouble follows, those written in the book are delivered, and those sleeping in the dust awake in bodily resurrection.", source: "Daniel 10:5–6, 13; 11:22, 31; 12:1–3, 13; Hebrews 7:25; John 5:28–29.", exegesis: "Michael's standing up ('amad) follows Daniel 11's kingly grammar: Christ stands for His people. Hebrews 7:25 is His intercession in this age, until that standing. Deliverance belongs to all found in the Book; God promises Daniel rest and resurrection in his lot." }
     ];
 
-    const SHEET_INSIGHTS = [
+    export const SHEET_INSIGHTS = [
       { genre: "Prologue — three of the main hermeneutical roads, idealism left aside; year-day scale tested in Daniel 9; Christ as redemptive center.", section: "Daniel 1:2; Numbers 14:34; Ezekiel 4:6; Daniel 2:38–44; Daniel 9:24–27; Luke 24:27.", theme: "Unbroken historicist chain; Messiah cut off; Stone-King; why historicism matters today." },
       { genre: "Exilic crucible — sovereign judgment, identity under renaming, consecration at the table, Christ as faithful Son.", section: "Daniel 1 — three sieges, Ashpenaz's school, the royal table, 605 B.C.", theme: "Civic cooperation vs. covenant surrender; zeroim and the ten-day test; redemptive typology of Jesus in the wilderness." },
       { genre: "Master-framework vision — historicist chain, metallurgic gradient, divided feet, Stone-King.", section: "Daniel 2 — impasse of human wisdom, four empires, iron and clay, stone without hands.", theme: "Thou art this head of gold; they shall not cleave; Christ pulverizes and fills the earth." },
@@ -70,7 +80,7 @@
       { genre: "Tigris theophany, geopolitical march, and resurrection hope — unseen warfare, Daniel 11 succession, close of probation, time of trouble, and waking from the dust.", section: "Daniel 10:1 – 12:13 — Tigris River, c. 536 B.C.; Hebrews 7:25; John 5:28–29; Revelation 22:11.", theme: "The Man in linen; Michael the Prince; Persian and Greek march; 'amad royal stance; literal bodily resurrection; rest in thy lot." }
     ];
 
-    const S2_STATIONS = [
+    export const S2_STATIONS = [
       { id: 'gold', kind: 'dissolve', from: 'head', to: 'lion', year: 'y605', unlock: 'gold', empire: 'gold', label: 'Head → winged lion' },
       { id: 'silver', kind: 'dissolve', from: 'chest', to: 'bear', year: 'y539', unlock: 'silver', empire: 'silver', label: 'Chest → bear' },
       { id: 'bronze', kind: 'dissolve', from: 'thighs', to: 'leopard', year: 'y331', unlock: 'bronze', empire: 'bronze', label: 'Bronze → leopard' },
@@ -79,7 +89,7 @@
       { id: 'stone', kind: 'smash', year: 'y1844', unlock: 'stone', empire: 'stone', label: 'Stone strikes the feet' }
     ];
 
-    const S7_STATIONS = [
+    export const S7_STATIONS = [
       { id: 'lion', kind: 'idle', show: 'lion', year: 'y605', empire: 'gold', label: 'Winged lion' },
       { id: 'bear', kind: 'idle', show: 'bear', year: 'y539', empire: 'silver', label: 'Lopsided bear' },
       { id: 'leopard', kind: 'idle', show: 'leopard', year: 'y331', empire: 'bronze', label: 'Four-headed leopard' },
@@ -88,24 +98,24 @@
       { id: 'years1260', kind: 'idle', show: 'years1260', year: 'y538', empire: 'iron', label: '1,260 years' }
     ];
 
-    const SITTING_PATH_HINTS = {
+    export const SITTING_PATH_HINTS = {
       study: 'Read the lesson. Three checkpoints sit in the pages, before the final questions.',
       tasks: 'Answer the final questions, then continue to the next lesson.',
       next: 'Advance when you are ready. The same path repeats on the next sheet.'
     };
 
-    function lessonMapPack(index) {
+    export function lessonMapPack(index) {
       return (window.SHEET_MAP && window.SHEET_MAP[index]) || null;
     }
 
-    function mapBodyHtml(text) {
+    export function mapBodyHtml(text) {
       if (!text) return '';
       const t = String(text);
       if (/<[a-z][\s\S]*>/i.test(t)) return t;
       return t.split(/\n\n+/).map((p) => '<p>' + p.replace(/\n/g, '<br>') + '</p>').join('');
     }
 
-    function renderSittingPath() {
+    export function renderSittingPath() {
       const hint = document.getElementById('sitting-path-hint');
       if (hint) hint.textContent = SITTING_PATH_HINTS[sittingPhase] || SITTING_PATH_HINTS.study;
       document.querySelectorAll('#sitting-path-steps [data-path]').forEach((btn) => {
@@ -116,14 +126,14 @@
       });
     }
 
-    function resetSittingPath() {
+    export function resetSittingPath() {
       sittingPhase = 'study';
       sittingVisited.study = true;
       sittingVisited.tasks = false;
       renderSittingPath();
     }
 
-    function renderSheetMapPanel(index) {
+    export function renderSheetMapPanel(index) {
       const host = document.getElementById('sheet-map-list');
       const pack = lessonMapPack(index);
       if (!host) return;
@@ -148,7 +158,7 @@
       });
     }
 
-    function applySittingMap(index) {
+    export function applySittingMap(index) {
       const pack = lessonMapPack(index);
       if (pack) {
         const art = (pack.nodes && pack.nodes[0] && pack.nodes[0].art) || '';
@@ -157,7 +167,7 @@
       renderSheetMapPanel(index);
     }
 
-    function enterSittingPhase(phase) {
+    export function enterSittingPhase(phase) {
       if (phase === 'next') {
         sittingPhase = 'next';
         renderSittingPath();
@@ -181,18 +191,18 @@
       renderSittingPath();
     }
 
-    function expandSittingMap() {}
+    export function expandSittingMap() {}
 
-    function collapseSittingInsets() {}
+    export function collapseSittingInsets() {}
 
-    function stationEndKey(st) {
+    export function stationEndKey(st) {
       if (!st) return null;
       if (st.kind === 'dissolve') return st.to;
       if (st.kind === 'smash') return 'stone';
       return st.show || 'head';
     }
 
-    async function playStation(act, st) {
+    export async function playStation(act, st) {
       if (!st || sittingBusy) return;
       sittingBusy = true;
       sittingEmpireOverride = st.empire;
@@ -213,13 +223,13 @@
       }
     }
 
-    function highlightStation(id) {
+    export function highlightStation(id) {
       document.querySelectorAll('#sheet-article [data-station]').forEach((el) => {
         el.classList.toggle('is-current', el.getAttribute('data-station') === id);
       });
     }
 
-    function markDoneStations(act, currentId) {
+    export function markDoneStations(act, currentId) {
       const list = act === 's2' ? S2_STATIONS : S7_STATIONS;
       const idx = list.findIndex((s) => s.id === currentId);
       document.querySelectorAll('#sheet-article [data-station]').forEach((el) => {
@@ -229,7 +239,7 @@
       });
     }
 
-    function injectStepRail(act, stations) {
+    export function injectStepRail(act, stations) {
       const article = document.getElementById('sheet-article');
       if (!article) return;
       const old = article.querySelector('.step-rail');
@@ -263,7 +273,7 @@
       });
     }
 
-    function refreshRailLabel(act, stations, rail) {
+    export function refreshRailLabel(act, stations, rail) {
       const j = journeyState();
       const id = (j.station && j.station[act]) || (act === 's7' ? 'leopard' : stations[0].id);
       const st = stations.find((s) => s.id === id) || stations[0];
@@ -273,7 +283,7 @@
       markDoneStations(act, st.id);
     }
 
-    function wireArticleStations(act, stations) {
+    export function wireArticleStations(act, stations) {
       const article = document.getElementById('sheet-article');
       if (!article) return;
       injectStepRail(act, stations);
@@ -285,7 +295,7 @@
       });
     }
 
-    async function restoreSheetStage(index) {
+    export async function restoreSheetStage(index) {
       const j = journeyState();
       sittingYearOverride = null;
       sittingEmpireOverride = null;
@@ -321,7 +331,7 @@
       updateSpine(index, sittingYearOverride || yearId, sittingEmpireOverride || spineEmpireForSheet(index, j.unlocked));
     }
 
-    function fillMapFacts(title, beast, span, insight, art, yearId) {
+    export function fillMapFacts(title, beast, span, insight, art, yearId) {
       const n = document.getElementById('map-name');
       const b = document.getElementById('map-beast');
       const s = document.getElementById('map-span');
@@ -338,7 +348,7 @@
       }
     }
 
-    function selectEmpire(id) {
+    export function selectEmpire(id) {
       const emp = MAP_EMPIRES[id];
       if (!emp) return;
       const yearId = emp.yearId || STUDY_EPOCH_TO_YEAR[emp.epoch] || 'y605';

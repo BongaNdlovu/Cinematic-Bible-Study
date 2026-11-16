@@ -1,4 +1,7 @@
-    function toggleTocDrawer() {
+import { syncCertificateCta } from '/js/study/study-modules.js';
+import { canAccessSheet, completedSheets, currentSheetIndex, loadSheet, memberLockText } from '/js/study/study-app.js';
+
+    export function toggleTocDrawer() {
       const drawer = document.getElementById('toc-drawer');
       const overlay = document.getElementById('toc-overlay');
       const isOpen = !drawer.classList.contains('-translate-x-full');
@@ -13,7 +16,7 @@
       }
     }
 
-    function renderToc() {
+    export function renderToc() {
       const list = document.getElementById('toc-unit-list');
       list.innerHTML = '';
 

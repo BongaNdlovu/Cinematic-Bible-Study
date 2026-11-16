@@ -1,4 +1,7 @@
-    function stopLessonAudio() {
+import { closeInfographic } from '/js/study/instruments.js';
+import { currentSheetIndex, netRequest } from '/js/study/study-app.js';
+
+    export function stopLessonAudio() {
       const player = document.getElementById('lesson-audio-player');
       if (!player) return;
       player.pause();
@@ -10,15 +13,15 @@
     // lists [blockIndex, charStart, charEnd] ranges over the whitespace-collapsed
     // text of the sheet title, subtitle, and article blocks, stroked with a
     // faint highlighter while they are spoken.
-    const READ_BLOCK_SEL = 'p, h3, h4, blockquote, li';
+    export const READ_BLOCK_SEL = 'p, h3, h4, blockquote, li';
 
-    const READ_SKIP_SEL = 'nav.lesson-toc, .checkpoint-plate, .br-bar, .br-foot, .br-switch, .story-read, .story-utility';
+    export const READ_SKIP_SEL = 'nav.lesson-toc, .checkpoint-plate, .br-bar, .br-foot, .br-switch, .story-read, .story-utility';
 
-    const READ_FOLLOW_TOP = 72;
+    export const READ_FOLLOW_TOP = 72;
 
-    const READ_FOLLOW_BOTTOM = 96;
+    export const READ_FOLLOW_BOTTOM = 96;
 
-    const AudioReader = {
+    export const AudioReader = {
       cues: null,
       blocks: [],
       idx: -1,
@@ -270,7 +273,7 @@
       }
     };
 
-    const AudioCheckpoints = {
+    export const AudioCheckpoints = {
       stops: [],
       plateCount: -1,
       lastT: null,
@@ -429,7 +432,7 @@
       }
     };
 
-    function renderLessonMedia(data) {
+    export function renderLessonMedia(data) {
       const box = document.getElementById('lesson-media');
       const audioBox = document.getElementById('lesson-audio');
       const figure = document.getElementById('sitting-roadmap');

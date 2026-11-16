@@ -1,8 +1,11 @@
-    function journeyState() {
+import { sittingEmpireOverride, sittingYearOverride } from '/js/study/sitting-map.js';
+import { STUDY_EPOCH_TO_YEAR, sheetToTimelineMap } from '/js/study/study-app.js';
+
+    export function journeyState() {
       return window.BAJourney ? window.BAJourney.load() : { unlocked: [], station: {}, pathSheet: -1, sheet: 0, year: 'y605' };
     }
 
-    function spineEmpireForSheet(index, unlocked) {
+    export function spineEmpireForSheet(index, unlocked) {
       if (index <= 4) return 'gold';
       if (index <= 6) return 'silver';
       if (index === 7) return 'iron';
@@ -11,7 +14,7 @@
       return 'stone';
     }
 
-    const SHEET_COMPETENCIES = [
+    export const SHEET_COMPETENCIES = [
       "The Prophetic Blueprint — Christ at the Center of the Chain",
       "Distinguishing Civic Service from Covenant Defilement",
       "Defending the Contiguous Chain of Four Empires",
@@ -25,7 +28,7 @@
       "Standing Prepared as the Sealed Book Unlocks"
     ];
 
-    function updateSpine(index, yearId, empireId) {
+    export function updateSpine(index, yearId, empireId) {
       const emp = empireId || sittingEmpireOverride || spineEmpireForSheet(index, journeyState().unlocked);
       const year = yearId || sittingYearOverride || STUDY_EPOCH_TO_YEAR[sheetToTimelineMap[index] || 0] || 'y605';
       const empireEl = document.getElementById('spine-empire');

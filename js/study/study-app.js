@@ -1,9 +1,35 @@
+import { diagramCite, makeCiteResolver } from '/js/study/diagrams/cite.js';
+import { bodyChain } from '/js/study/diagrams/chain.js';
+import { bodyComparison } from '/js/study/diagrams/comparison.js';
+import { bodyTable } from '/js/study/diagrams/table.js';
+import { bodyFlow, flowContinuation, wireFlow } from '/js/study/diagrams/flow.js';
+import { bodyTimeline, wireTimeline } from '/js/study/diagrams/timeline.js';
+import { FULLSCREEN_KINDS, fullscreenControlHtml, releaseFigureFullscreen, releaseFullscreenLeftovers, wireDiagramFullscreen } from '/js/study/diagrams/fullscreen.js';
+import { bodyStory, wireStory } from '/js/study/story.js';
+import { pausePomodoro, resetPomodoro, resizeWeatherCanvas, setPomodoroDuration, setWeatherPreset, startPomodoro, startWeatherAnimation, stopWeatherAnimation, tickPomodoro, togglePomodoroDrawer, updateAutoWeather, updateTimerDisplay, weatherPreset } from '/js/study/focus-timer.js';
+import { AudioCheckpoints, AudioReader, renderLessonMedia } from '/js/study/read-along.js';
+import { adjustFontSize, applyFontSize, applyTheme, currentThemeIdx, cycleTheme, fontAuto, fontSizes, setCurrentFontIdx, setCurrentThemeIdx, setFontAuto, themes } from '/js/study/reading-settings.js';
+import { closeCitePanel, decorateCitations, escapeStudy, onCitePanelKey, referenceIndex, renderSheetVerify, resolveCiteLabel, revealReference, syncCiteClose } from '/js/study/references.js';
+import { celebrationFor, placeCheckpointPlates, renderQuiz, resetQuizQuestion, revealUnfinished, showSittingCelebration, sittingLabel, verifiedQuiz } from '/js/study/quiz.js';
+import { buildHorizonCards, currentEpochIndex, setEpochInfo, syncHorizonLocks } from '/js/study/horizon.js';
+import { S2_STATIONS, S7_STATIONS, applySittingMap, collapseSittingInsets, enterSittingPhase, expandSittingMap, lessonMapPack, playStation, refreshRailLabel, renderSheetMapPanel, resetSittingPath, restoreSheetStage, selectEmpire, setSittingYearOverride } from '/js/study/sitting-map.js';
+import { activateGuideTarget, finishIntroGuide, hideSittingGuide, layoutEndSpotlight, setEndCardShownForSheet, showIntroGuide, sittingGuideMode, syncAdvanceButtons } from '/js/study/sitting-guide.js';
+import { renderChristologyPlaque, renderLessonConnectBar, shareSitting } from '/js/study/lesson-connect.js';
+import { renderToc, toggleTocDrawer } from '/js/study/toc.js';
+import { wireStrongsTooltips } from '/js/study/strongs.js';
+import { renderFacilitatorStrip, renderStudyGuide } from '/js/study/study-guide.js';
+import { rememberSheetUrl, writeScrollPlace } from '/js/study/scroll-place.js';
+import { bookOpened, mountSheetBook, placeReader, scrollHold } from '/js/study/sheet-book.js';
+import { closeArtifactModal, closeInfographic, openArtifactModal, openInfographic, renderSheetInstruments } from '/js/study/instruments.js';
+import { journeyState, spineEmpireForSheet, updateSpine } from '/js/study/spine.js';
+import { loadStudyModule, openCertificateIfReady, studyModuleFailed, syncCertificateCta } from '/js/study/study-modules.js';
+
     // Sequential sittings: access is owned by BAJourney.canAccessSheet.
 
     /* Timeout-aware fetch for this page's own assets (cues, concordance).
        Uses SiteNet when present; degrades to a plain fetch that still cannot
        hang forever. */
-    function netRequest(url, opts) {
+    export function netRequest(url, opts) {
       if (window.SiteNet && typeof window.SiteNet.request === 'function') {
         return window.SiteNet.request(url, opts);
       }
@@ -36,12 +62,12 @@
     })();
 
     // A guest only sees this copy for an instant before the sign-in redirect.
-    function memberLockText(fallback) {
+    export function memberLockText(fallback) {
       const guest = !(window.ScrollAuth && typeof window.ScrollAuth.getUser === 'function' && window.ScrollAuth.getUser());
       return guest ? 'Members only — sign in to continue' : fallback;
     }
 
-    const sheetToTimelineMap = {
+    export const sheetToTimelineMap = {
       0: 0,
       1: 0,
       2: 0,
@@ -55,7 +81,7 @@
       10: 7
     };
 
-    const timelineToSheetMap = {
+    export const timelineToSheetMap = {
       0: 0,
       1: 5,
       2: 9,
@@ -66,20 +92,19 @@
       7: 10
     };
 
-    let currentEpochIndex = 0;
 
-    function sheetBelongsToEpoch(sheetIdx, epochIdx) {
+    export function sheetBelongsToEpoch(sheetIdx, epochIdx) {
       if (sheetToTimelineMap[sheetIdx] === epochIdx) return true;
       return timelineToSheetMap[epochIdx] === sheetIdx;
     }
 
-    function epochAccessible(epochIdx) {
+    export function epochAccessible(epochIdx) {
       const target = timelineToSheetMap[epochIdx];
       if (typeof target !== 'number') return true;
       return canAccessSheet(target);
     }
 
-    function showInstrument(id) {
+    export function showInstrument(id) {
       document.querySelectorAll('.instrument-tabs button').forEach((b) => b.classList.toggle('active', b.dataset.instrument === id));
       document.querySelectorAll('.instrument-panel').forEach((p) => p.classList.toggle('active', p.id === 'panel-' + id));
       if (id === 'map') {
@@ -99,59 +124,41 @@
       }
     }
 
-    function openLessonScripture() {
+    export function openLessonScripture() {
       showInstrument('scripture');
       const panel = document.getElementById('panel-scripture');
       if (panel) panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
-    const STUDY_EPOCH_TO_YEAR = (window.MAP_CHRONICLE && window.MAP_CHRONICLE.studyEpochIds) ||
+    export const STUDY_EPOCH_TO_YEAR = (window.MAP_CHRONICLE && window.MAP_CHRONICLE.studyEpochIds) ||
       ['y605', 'y539', 'y457', 'y31', 'y538', 'y1798', 'y1844', 'y12'];
     if (window.BAJourney) window.BAJourney.load();
 
-    let sittingBusy = false;
-    let sittingYearOverride = null;
-    let sittingEmpireOverride = null;
 
-    function pulseMapYear(yearId, opts) {
-      sittingYearOverride = yearId;
+    export function pulseMapYear(yearId, opts) {
+      setSittingYearOverride(yearId);
       if (window.BAJourney) window.BAJourney.save({ year: yearId });
     }
 
-    let sittingPhase = 'study';
-    const sittingVisited = { study: true, tasks: false };
+    export const sittingVisited = { study: true, tasks: false };
 
     window.StudyAudioReader = {
       texts: () => AudioReader.texts(),
       checkpoints: () => AudioCheckpoints.stops.map((stop) => stop.at)
     };
 
-    let timerDuration = 5 * 60;
-    let timeRemaining = 5 * 60;
-    let timerInterval = null;
-    let timerEndsAt = 0;
-    let isTimerRunning = false;
 
     // Atmospheric Focus State — a continuous quiet → storm → sunshine continuum
-    let weatherPreset = 'auto'; // visual weather only — no rain/thunder audio
-    let currentWeatherType = 'quiet';
-    let focusAtmosphere = 0;
-    let weatherRunning = false;
-    let weatherScene = null;
-    let weatherWorker = null;
 
     document.addEventListener('visibilitychange', () => {
       if (document.visibilityState === 'visible') tickPomodoro();
     });
 
-    let currentSheetIndex = 0;
-    let completedSheets = new Set();
-    let currentThemeIdx = 0;
-    let currentFontIdx = 1;
+    export let currentSheetIndex = 0;
+    export let completedSheets = new Set();
     // Auto mode: the reading size follows the screen until the learner picks
     // one with A-/A+. Legacy saves that match the old default are treated as
     // auto; deliberate non-default choices keep working untouched.
-    let fontAuto = true;
 
     try {
       if (window.BAJourney) {
@@ -166,20 +173,20 @@
       const manualFont = localStorage.getItem('daniel_font_manual_v1') === '1';
       const legacyChosen = savedFont !== null && parseInt(savedFont, 10) !== 1;
       if (manualFont || legacyChosen) {
-        fontAuto = false;
-        if (savedFont !== null) currentFontIdx = Math.max(0, Math.min(fontSizes.length - 1, parseInt(savedFont, 10) || 1));
+        setFontAuto(false);
+        if (savedFont !== null) setCurrentFontIdx(Math.max(0, Math.min(fontSizes.length - 1, parseInt(savedFont, 10) || 1)));
         if (legacyChosen && !manualFont) localStorage.setItem('daniel_font_manual_v1', '1');
       }
       const savedThemeName = localStorage.getItem('daniel_theme_name_v1');
       if (savedThemeName === 'white' || savedThemeName === 'night') {
-        currentThemeIdx = themes.indexOf(savedThemeName);
+        setCurrentThemeIdx(themes.indexOf(savedThemeName));
       } else {
-        currentThemeIdx = 0;
+        setCurrentThemeIdx(0);
       }
     } catch (e) {}
 
-    let toastTimer = 0;
-    function showToast(msg) {
+    export let toastTimer = 0;
+    export function showToast(msg) {
       const toast = document.getElementById('toast');
       toast.innerText = msg;
       toast.classList.remove('opacity-0', 'pointer-events-none');
@@ -190,7 +197,7 @@
       }, 2500);
     }
 
-    let fontResizeTimer = null;
+    export let fontResizeTimer = null;
     window.addEventListener('resize', () => {
       if (!fontAuto) return;
       clearTimeout(fontResizeTimer);
@@ -200,11 +207,11 @@
     /* Mindmap: the steps around a centre node. js/study/mindmap.js renders into
        this host and owns the frame loop, observers and listeners, so it is
        destroyed with the figure. */
-    function bodyMindmap(spec) {
+    export function bodyMindmap(spec) {
       return '<div class="mm" data-mm-host></div>';
     }
 
-    function replayControlFor(figure) {
+    export function replayControlFor(figure) {
       for (let node = figure ? figure.nextElementSibling : null; node; node = node.nextElementSibling) {
         if (node.matches('figure.chain')) return null;
         if (node.matches('[data-chain-replay]')) return node;
@@ -212,7 +219,7 @@
       return null;
     }
 
-    function wireFigure(state) {
+    export function wireFigure(state) {
       // Shared shell: caption, collapse control, entrance animation, replay.
       // `figure` carries data-chain itself, so it is passed in rather than
       // queried for — querySelector only searches descendants.
@@ -266,7 +273,7 @@
       replay.addEventListener('click', () => { setOpen(true); started = true; play(); });
     }
 
-    function releaseSheetFigures(root) {
+    export function releaseSheetFigures(root) {
       if (!root) return;
       root.querySelectorAll('figure').forEach((figure) => {
         releaseFigureFullscreen(figure);
@@ -278,7 +285,7 @@
       releaseFullscreenLeftovers();
     }
 
-    function renderSheetDiagrams(data) {
+    export function renderSheetDiagrams(data) {
       document.querySelectorAll('body > .story-read').forEach((node) => {
         // Unhook the reader before it leaves the page: its key listener is
         // attached to the document, not to the node.
@@ -422,7 +429,7 @@
       }
     });
 
-    function canAccessSheet(index) {
+    export function canAccessSheet(index) {
       if (window.BAJourney && typeof window.BAJourney.previewAllContent === 'function' && window.BAJourney.previewAllContent()) return true;
       if (window.BAJourney && typeof window.BAJourney.canAccessSheet === 'function') {
         return window.BAJourney.canAccessSheet(index);
@@ -430,7 +437,7 @@
       return Number(index) === 0;
     }
 
-    function denyLockedSitting(index) {
+    export function denyLockedSitting(index) {
       if (window.BAJourney && typeof window.BAJourney.announceLock === 'function') {
         const target = (index == null || Number.isNaN(Number(index)))
           ? (window.BAJourney.maxOpenSheet() + 1)
@@ -445,10 +452,7 @@
       showToast('Finish ' + label + ' to open the next sitting.');
     }
 
-    let sittingGuideMode = null;
-    let endCardShownForSheet = -1;
 
-    let strongsDataCache = null;
 
     window.onPlacementConfirmed = function() {
       const seen = window.BAJourney && window.BAJourney.hasSeenIntro(currentSheetIndex);
@@ -480,7 +484,7 @@
       }
     });
 
-    function playSheetEnter() {
+    export function playSheetEnter() {
       const main = document.querySelector('.sitting-main');
       if (!main) return;
       main.classList.remove('sheet-enter');
@@ -488,15 +492,14 @@
       main.classList.add('sheet-enter');
     }
 
-    const SCROLL_KEY = 'scroll_section';
-    let scrollHold = false;
+    export const SCROLL_KEY = 'scroll_section';
 
-    let sheetLoadTicket = 0;
+    export let sheetLoadTicket = 0;
 
     /* Slim indeterminate bar shown while a sitting's chunk loads, so a switch
        never reads as "nothing happened". Cleared before the article paints. */
-    let sheetLoadingBar = null;
-    function showSheetLoading(on) {
+    export let sheetLoadingBar = null;
+    export function showSheetLoading(on) {
       if (on) {
         if (!sheetLoadingBar && document.body) {
           sheetLoadingBar = document.createElement('div');
@@ -513,7 +516,7 @@
       }
     }
 
-    function sheetDataReady(index) {
+    export function sheetDataReady(index) {
       const row = sheetsData[index];
       if (!row || typeof row.content !== 'string') return false;
       const store = window.StudySheets;
@@ -521,12 +524,12 @@
       return true;
     }
 
-    function sheetHasKind(data, kind) {
+    export function sheetHasKind(data, kind) {
       const specs = (data && data.diagrams) || {};
       return Object.keys(specs).some((id) => specs[id] && specs[id].kind === kind);
     }
 
-    function sheetNeeds(index) {
+    export function sheetNeeds(index) {
       if (!sheetDataReady(index)) return window.StudySheets.ensure(index);
       if (!window.MindMap && !studyModuleFailed('mindmap') && sheetHasKind(sheetsData[index], 'mindmap')) {
         return loadStudyModule('mindmap').catch(() => {});
@@ -534,7 +537,7 @@
       return null;
     }
 
-    function loadSheet(index, opts) {
+    export function loadSheet(index, opts) {
       if (index < 0 || index >= sheetsData.length) return;
       if (!canAccessSheet(index)) {
         denyLockedSitting(index);
@@ -562,7 +565,7 @@
       showSheetLoading(false);
       rememberSheetUrl(index);
       currentSheetIndex = index;
-      endCardShownForSheet = -1;
+      setEndCardShownForSheet(-1);
       hideSittingGuide();
       try {
         localStorage.setItem('daniel_historicist_sheet', index);
@@ -668,14 +671,14 @@
       if (window.StudySheets && typeof window.StudySheets.prefetchAround === 'function') window.StudySheets.prefetchAround(index);
     }
 
-    function sheetQuizComplete() {
+    export function sheetQuizComplete() {
       if (!sheetDataReady(currentSheetIndex)) return false;
       const quizzes = (sheetsData[currentSheetIndex] && sheetsData[currentSheetIndex].quizzes) || [];
       if (!quizzes.length) return true;
       return quizzes.every((q, i) => verifiedQuiz[i] === true);
     }
 
-    function canAdvancePath() {
+    export function canAdvancePath() {
       if (window.BAJourney && typeof window.BAJourney.isAdmin === "function" && window.BAJourney.isAdmin()) {
         return true;
       }
@@ -686,7 +689,7 @@
       return sheetQuizComplete();
     }
 
-    function updateNextGate() {
+    export function updateNextGate() {
       const btn = document.getElementById('next-sheet-btn');
       const wbOk = !window.StudyWorkbench || window.StudyWorkbench.isSheetComplete(currentSheetIndex);
       const qOk = sheetQuizComplete();
@@ -701,12 +704,12 @@
       if (nextStep) nextStep.disabled = !ok;
     }
 
-    function openTaskFlow() {
+    export function openTaskFlow() {
       const flow = window.StudyTaskFlow;
       return !!(flow && typeof flow.open === 'function' && flow.open());
     }
 
-    function navigateSheet(delta) {
+    export function navigateSheet(delta) {
       if (delta > 0 && !canAdvancePath()) {
         if (openTaskFlow()) return;
         showToast('Answer the checkpoints in the lesson and the final questions to continue.');
@@ -721,12 +724,7 @@
        Answers are graded server-side by QuizGate (verify_quiz_answer RPC);
        the client bundle carries no answer key.
        ========================================================================= */
-    let answeredQuestions = {};
-    let quizAttemptCounts = {};
-    let verifiedQuiz = {};
-    let quizPending = {};
 
-    let celebrateTimer = 0;
 
     window.StudyTasks = {
       snapshot: function () {
@@ -752,7 +750,7 @@
       advance: function () { completeAndAdvance(); }
     };
 
-    function offerCapstone(finishedSheet) {
+    export function offerCapstone(finishedSheet) {
       if (finishedSheet !== 2) return;
       const wb = window.StudyWorkbench;
       if (!wb || typeof wb.renderCapstoneModal !== 'function') return;
@@ -762,7 +760,7 @@
       });
     }
 
-    function completeAndAdvance() {
+    export function completeAndAdvance() {
       if (!canAdvancePath()) {
         if (openTaskFlow()) return;
         showToast('Answer the checkpoints in the lesson and the final questions to continue.');
@@ -840,7 +838,7 @@
       }
     });
 
-    const LEGACY_ID_MAP = {
+    export const LEGACY_ID_MAP = {
       assembled: 2, head: 2, chest: 5, thighs: 8, legs: 7, feet: 7, stone: 10,
       lion: 7, bear: 7, leopard: 7, beast: 7, horn: 7, years1260: 7,
       ram: 8, goat: 8, goat_broken: 8, goat_horn: 8,
@@ -848,7 +846,7 @@
       decree: 9, kings: 10, michael: 10, sealed: 10
     };
 
-    function clampStartSheet(index) {
+    export function clampStartSheet(index) {
       if (window.BAJourney && typeof window.BAJourney.previewAllContent === 'function' && window.BAJourney.previewAllContent()) return index;
       if (window.BAJourney && typeof window.BAJourney.clampToAccessible === 'function') {
         return window.BAJourney.clampToAccessible(index);
@@ -856,7 +854,7 @@
       return canAccessSheet(index) ? index : 0;
     }
 
-    function resolveStartSheet() {
+    export function resolveStartSheet() {
       try {
         const params = new URLSearchParams(location.search);
         let raw = params.get('id') || params.get('section') || params.get('sheet') || params.get('s');

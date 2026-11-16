@@ -1,4 +1,6 @@
-    const LESSON_CONNECT_TABLE = [
+import { currentSheetIndex, showToast } from '/js/study/study-app.js';
+
+    export const LESSON_CONNECT_TABLE = [
       { mapYear: 'y605', galleryAssets: ['assembled'] },
       { mapYear: 'y605', galleryAssets: ['lion'] },
       { mapYear: 'y605', galleryAssets: ['head', 'chest', 'thighs', 'legs', 'feet', 'stone'] },
@@ -12,7 +14,7 @@
       { mapYear: 'y12', galleryAssets: ['kings', 'michael', 'sealed'] }
     ];
 
-    const LESSON_CONNECT_COPY = [
+    export const LESSON_CONNECT_COPY = [
       {
         kicker: 'The siege is the door of the book',
         lead: 'Daniel opens at 605 B.C. Walk Jerusalem into Babylon on the map, then stand before the whole image — the statue this book will take apart sitting by sitting.',
@@ -81,7 +83,7 @@
       }
     ];
 
-    function sittingConnectConfig(index) {
+    export function sittingConnectConfig(index) {
       const fromJourney = window.BAJourney && window.BAJourney.SITTING_ASSETS;
       const assets = fromJourney && fromJourney[index]
         ? fromJourney[index].slice()
@@ -90,7 +92,7 @@
       return { mapYear: mapYear, galleryAssets: assets, galleryAsset: assets[0] || 'assembled' };
     }
 
-    function enrollmentUrl() {
+    export function enrollmentUrl() {
       if (window.Insights && typeof window.Insights.inviteUrl === 'function') {
         return window.Insights.inviteUrl(currentSheetIndex);
       }
@@ -103,7 +105,7 @@
       }
     }
 
-    async function shareSitting() {
+    export async function shareSitting() {
       const url = enrollmentUrl();
       const title = 'The Shelf of Daniel';
       const text = 'Join this sitting of the Shelf of Daniel. Agree to the terms and sign in to begin.';
@@ -130,7 +132,7 @@
       sent('fallback', isFree ? 'Share this link: ' + url : 'Share the home page so they can sign in: ' + url);
     }
 
-    function renderLessonConnectBar(index) {
+    export function renderLessonConnectBar(index) {
       const bar = document.getElementById('lesson-connect');
       if (!bar) return;
       if (!bar.dataset.tracked) {
@@ -173,7 +175,7 @@
       }
     }
 
-    function renderChristologyPlaque(articleEl, c) {
+    export function renderChristologyPlaque(articleEl, c) {
       if (!articleEl || !c) return;
       const section = document.createElement('section');
       section.id = 'sheet-christology';

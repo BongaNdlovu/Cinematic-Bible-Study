@@ -1,8 +1,10 @@
+import { escapeStudy } from '/js/study/references.js';
+
     // The study-path card carries one thing only: the questions to sit with.
     // The trace / christ / now / help / value blocks were removed by request;
     // their helpers above remain unused rather than deleted, so nothing else
     // that referenced them can break.
-    function renderStudyGuide(guide) {
+    export function renderStudyGuide(guide) {
       const box = document.getElementById("sheet-study-path");
       if (!box) return;
       const asked = guide && Array.isArray(guide.ask) ? guide.ask.filter((q) => q && String(q).trim()) : [];
@@ -23,7 +25,7 @@
         '<ol class="study-ask-list">' + items + "</ol>";
     }
 
-    function renderFacilitatorStrip(fac) {
+    export function renderFacilitatorStrip(fac) {
       const box = document.getElementById("facilitator-strip");
       if (!box) return;
       const urlParams = new URLSearchParams(window.location.search);

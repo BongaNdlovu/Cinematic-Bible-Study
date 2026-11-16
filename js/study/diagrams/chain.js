@@ -1,4 +1,7 @@
-    function nodeHtml(step, isCentre, t, canResolve) {
+import { diagramCite } from '/js/study/diagrams/cite.js';
+import { escapeStudy } from '/js/study/references.js';
+
+    export function nodeHtml(step, isCentre, t, canResolve) {
       return '<article class="chain-node' + (isCentre ? ' is-centre' : '') + '" style="--t:' + t.toFixed(2) + 's">' +
         (isCentre
           ? '<div class="chain-medal" aria-hidden="true">' +
@@ -15,7 +18,7 @@
       '</article>';
     }
 
-    function bodyChain(spec, steps, withCentre, canResolve) {
+    export function bodyChain(spec, steps, withCentre, canResolve) {
       const mid = withCentre ? steps.findIndex((s) => s.centre) : -1;
       let t = 0.1;
       const parts = [];

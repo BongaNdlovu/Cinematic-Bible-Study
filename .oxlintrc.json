@@ -23,13 +23,5 @@
     "consistent-function-scoping": "off",
     "unicorn/no-array-sort": "off",
     "no-unused-vars": ["error", { "caughtErrors": "none", "args": "none" }]
-  },
-  "overrides": [
-    {
-      "files": ["js/study/diagrams/**", "js/study/study-app.js", "js/study/story.js", "js/study/focus-timer.js", "js/study/read-along.js", "js/study/reading-settings.js", "js/study/references.js", "js/study/quiz.js", "js/study/horizon.js", "js/study/sitting-map.js", "js/study/sitting-guide.js", "js/study/lesson-connect.js", "js/study/toc.js", "js/study/strongs.js", "js/study/study-guide.js", "js/study/scroll-place.js", "js/study/sheet-book.js", "js/study/instruments.js", "js/study/spine.js", "js/study/study-modules.js"],
-      "rules": {
-        "no-unused-vars": "off"
-      }
-    }
-  ]
+  }
 }
