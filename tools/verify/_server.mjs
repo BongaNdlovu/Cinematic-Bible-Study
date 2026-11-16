@@ -139,3 +139,18 @@ export function chromePath() {
   const bundled = chromium.executablePath();
   return bundled && fs.existsSync(bundled) ? bundled : null;
 }
+
+export async function cdpTargets(port, timeoutMs = 30000) {
+  const deadline = Date.now() + timeoutMs;
+  let last = null;
+  while (Date.now() < deadline) {
+    try {
+      const targets = await (await fetch('http://127.0.0.1:' + port + '/json')).json();
+      if (targets.some((t) => t.type === 'page' && t.webSocketDebuggerUrl)) return targets;
+    } catch (err) {
+      last = err;
+    }
+    await new Promise((r) => setTimeout(r, 250));
+  }
+  throw new Error('Chrome did not open its debugging port ' + port + ' within ' + timeoutMs + ' ms' + (last ? ': ' + last.message : ''));
+}

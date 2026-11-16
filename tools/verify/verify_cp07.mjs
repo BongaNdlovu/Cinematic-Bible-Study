@@ -1,7 +1,7 @@
 import { spawn } from 'child_process';
 import fs from 'fs';
 import path from 'path';
-import { signedInScript, chromePath } from './_server.mjs';
+import { signedInScript, chromePath, cdpTargets } from './_server.mjs';
 import net from 'net';
 
 fs.mkdirSync(path.join('qa', 'proofs'), { recursive: true });
@@ -86,7 +86,7 @@ async function run() {
   console.log('=== Running CP-07 Browser Proof Test Suite ===');
   const SERVER_PORT = await getFreePort();
   const CHROME_PORT = await getFreePort();
-  const BASE = `http://127.0.0.1:${SERVER_PORT}`;
+  const BASE = process.env.BASE || `http://127.0.0.1:${SERVER_PORT}`;
 
   let server = spawn('python', ['server.py', '--no-browser'], {
     env: { ...process.env, PORT: String(SERVER_PORT) },
@@ -110,8 +110,7 @@ async function run() {
     '--window-size=1440,900'
   ]);
 
-  await sleep(1600);
-  const targets = await (await fetch(`http://127.0.0.1:${CHROME_PORT}/json`)).json();
+  const targets = await cdpTargets(CHROME_PORT);
   const page = targets.find((t) => t.type === 'page') || targets[0];
   const client = new CDPClient(page.webSocketDebuggerUrl);
   await client.send('Page.enable');

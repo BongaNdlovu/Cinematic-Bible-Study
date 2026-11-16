@@ -1,14 +1,14 @@
 import { spawn } from 'child_process';
 import fs from 'fs';
 import path from 'path';
-import { signedInScript, chromePath } from './_server.mjs';
+import { signedInScript, chromePath, cdpTargets } from './_server.mjs';
 
 fs.mkdirSync(path.join('qa', 'proofs'), { recursive: true });
 
 const CHROME_PATH = chromePath();
 
 const SERVER_PORT = 8013;
-const SERVER_BASE = `http://127.0.0.1:${SERVER_PORT}`;
+const SERVER_BASE = process.env.BASE || `http://127.0.0.1:${SERVER_PORT}`;
 
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -496,12 +496,9 @@ async function run() {
     'about:blank'
   ]);
 
-  await sleep(1500);
-
   let client;
   try {
-    const listRes = await fetch('http://127.0.0.1:9223/json');
-    const targets = await listRes.json();
+    const targets = await cdpTargets(9223);
     const pageTarget = targets.find(t => t.type === 'page' && !t.url.startsWith('chrome-extension://')) || targets[0];
     if (!pageTarget || !pageTarget.webSocketDebuggerUrl) {
       throw new Error('Chrome target not found');

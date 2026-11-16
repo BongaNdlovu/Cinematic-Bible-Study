@@ -14,6 +14,18 @@ Entry template:
 
 ---
 
+## 2026-11-16 — Browser checks hardened for CI
+
+**Why:** On GitHub's Linux runner, 22 of 29 browser checks passed. The failures were timing: scripts gave their own server 6 s to start, slept a fixed 1.6 s before talking to Chrome, and waited 12.5 s for a 3D model or 15 s for globe pins under software rendering. One check (`verify_mindmap_fullscreen`) raced a 1.8 s highlight.
+
+**What changed:** `run_browser_checks.mjs` passes its server to every script as `BASE` and prints 30 lines of a failure. `_server.mjs` gains `cdpTargets()`. Eight Chrome-driven scripts use `BASE` when given and `cdpTargets()` instead of a fixed sleep. Longer limits that cost nothing when the page is fast: `verify_hall_mural` 40 s per artifact, `verify_globe` 45 s for pins, `verify_horizon` polls the hover card for up to 5 s. `verify_mindmap_fullscreen` records the reference row when it is marked.
+
+**Handbook updated:** 07.
+
+**Checked here:** on Windows, the eight changed scripts through the runner: 7 of 8 at first; `verify_globe` then failed twice more and passed after two stray local `server.py` processes from earlier runs were stopped, so the failures are put down to those processes. Not checked: why a stray server made the globe fail. Not checked yet: the Linux CI run.
+
+**Status:** on branch `arch/phase-0-safety-net`, pushed.
+
 ## 2026-11-16 — Architecture plan, Phase 0: browser checks repaired
 
 **Why:** Phase 0 left 10 browser checks quarantined. The first CI run on GitHub then showed 3 of the 20 in-CI checks failing on Linux. "Fix all the problems" was the request.

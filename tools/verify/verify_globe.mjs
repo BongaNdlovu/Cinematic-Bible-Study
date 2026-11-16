@@ -4,7 +4,7 @@ import { mkdirSync, statSync } from "node:fs";
 import { chromium } from "playwright";
 
 const PORT = process.env.MAP_PORT || "8013";
-const BASE = `http://127.0.0.1:${PORT}`;
+const BASE = process.env.BASE || `http://127.0.0.1:${PORT}`;
 const LAUNCH = { headless: true, args: ["--use-angle=swiftshader", "--enable-unsafe-swiftshader", "--ignore-gpu-blocklist"] };
 const NOISE = /arcgisonline|openstreetmap|supabase|ERR_|cloudflareinsights|fonts\.g/;
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
@@ -121,7 +121,7 @@ try {
 
   {
     const t = await open(browser, "/map.html?preview=full&view=globe&year=y457");
-    const pinsShown = await waitFor(t.page, () => document.querySelectorAll(".cmap-gpin:not(.is-hidden)").length > 0, 15000);
+    const pinsShown = await waitFor(t.page, () => document.querySelectorAll(".cmap-gpin:not(.is-hidden)").length > 0, 45000);
     if (!pinsShown) assert.fail("globe pins never appeared " + JSON.stringify({ gl: await glInfo(t.page), errors: t.errors }));
     assert.ok(await globeOn(t.page), "view=globe did not open the globe");
     await sleep(3000);
@@ -202,7 +202,7 @@ try {
 
   {
     const t = await open(browser, "/map.html?preview=full&view=globe&year=y331", { width: 390, height: 844 });
-    assert.ok(await waitFor(t.page, () => document.querySelectorAll(".cmap-gpin:not(.is-hidden)").length > 0, 15000), "phone globe pins never appeared");
+    assert.ok(await waitFor(t.page, () => document.querySelectorAll(".cmap-gpin:not(.is-hidden)").length > 0, 45000), "phone globe pins never appeared");
     assert.strictEqual(await t.page.evaluate(() => document.documentElement.scrollWidth), 390, "phone layout scrolls sideways");
     assert.ok(t.requests.some((u) => u.endsWith("earth-day-2k.webp")) && !t.requests.some((u) => u.endsWith("earth-day-4k.webp")), "phone should load the 2k earth only");
     await t.page.screenshot({ path: "qa/proofs/globe_proof_mobile.png" });

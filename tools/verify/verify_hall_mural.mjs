@@ -1,14 +1,14 @@
 import { spawn } from "child_process";
 import fs from "fs";
 import path from "path";
-import { chromePath } from "./_server.mjs";
+import { chromePath, cdpTargets } from "./_server.mjs";
 
 fs.mkdirSync(path.join("qa", "proofs"), { recursive: true });
 
 const CHROME_PATH = chromePath();
 
 const PORT = "8017";
-const BASE = `http://127.0.0.1:${PORT}`;
+const BASE = process.env.BASE || `http://127.0.0.1:${PORT}`;
 const DEBUG_PORT = 9346;
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
@@ -108,8 +108,7 @@ try {
     "--window-size=1440,900",
     "about:blank",
   ]);
-  await sleep(1800);
-  const targets = await (await fetch(`http://127.0.0.1:${DEBUG_PORT}/json`)).json();
+  const targets = await cdpTargets(DEBUG_PORT);
   const page = targets.find((t) => t.type === "page") || targets[0];
   const client = new CDPClient(page.webSocketDebuggerUrl);
   await client.send("Page.enable");
@@ -142,7 +141,7 @@ try {
   const seen = [];
   for (const s of ASSETS) {
     let hit = null;
-    for (let i = 0; i < 50; i++) {
+    for (let i = 0; i < 160; i++) {
       const info = await client.eval(`(() => {
         const btn = document.querySelector('.artifact-card-item[data-asset="${s.id}"]');
         if (!btn) return { ok: false };

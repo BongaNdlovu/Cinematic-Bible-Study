@@ -53,7 +53,7 @@ function argsFor(check, base) {
 function runOne(check, base) {
   return new Promise((resolve) => {
     const started = Date.now();
-    const child = spawn(process.execPath, [path.join('tools', 'verify', check.file), ...argsFor(check, base)], { cwd: root, stdio: ['ignore', 'pipe', 'pipe'] });
+    const child = spawn(process.execPath, [path.join('tools', 'verify', check.file), ...argsFor(check, base)], { cwd: root, env: { ...process.env, BASE: base }, stdio: ['ignore', 'pipe', 'pipe'] });
     let output = '';
     let timedOut = false;
     const timer = setTimeout(() => {
@@ -65,7 +65,7 @@ function runOne(check, base) {
     child.on('close', (code) => {
       clearTimeout(timer);
       const status = timedOut ? 'TIMEOUT' : code === 0 ? 'PASS' : 'FAIL';
-      resolve({ file: check.file, status, seconds: Math.round((Date.now() - started) / 1000), tail: output.trim().split('\n').slice(-6).join('\n') });
+      resolve({ file: check.file, status, seconds: Math.round((Date.now() - started) / 1000), tail: output.trim().split('\n').slice(-30).join('\n') });
     });
   });
 }

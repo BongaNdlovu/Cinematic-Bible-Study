@@ -1,14 +1,14 @@
 import { spawn } from "child_process";
 import fs from "fs";
 import path from "path";
-import { signedInScript, chromePath } from "./_server.mjs";
+import { signedInScript, chromePath, cdpTargets } from "./_server.mjs";
 
 fs.mkdirSync(path.join("qa", "proofs"), { recursive: true });
 
 const CHROME_PATH = chromePath();
 
 const PORT = process.env.MAP_PORT || "8012";
-const BASE = `http://127.0.0.1:${PORT}`;
+const BASE = process.env.BASE || `http://127.0.0.1:${PORT}`;
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
 class CDPClient {
@@ -96,8 +96,7 @@ try {
     "--window-size=1440,900",
     "about:blank",
   ]);
-  await sleep(1600);
-  const targets = await (await fetch("http://127.0.0.1:9336/json")).json();
+  const targets = await cdpTargets(9336);
   const page = targets.find((t) => t.type === "page") || targets[0];
   const client = new CDPClient(page.webSocketDebuggerUrl);
   await client.send("Page.enable");
