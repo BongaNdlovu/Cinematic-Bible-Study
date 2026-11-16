@@ -140,9 +140,15 @@ try {
     if (hover.on) break;
   }
   console.log('hover', hover);
-  if (!hover.on) throw new Error('hover float did not open');
-  if (hover.year !== '457 B.C.') throw new Error('hover showed wrong year');
-  await client.shot('qa/proofs/horizon_proof_hover.png');
+  const noHover = await client.eval(`window.matchMedia('(hover: none)').matches`);
+  if (noHover) {
+    if (hover.on || !hover.hidden) throw new Error('hover float opened on a device without hover');
+    console.log('this browser reports no hover, so the float correctly stays hidden');
+  } else {
+    if (!hover.on) throw new Error('hover float did not open');
+    if (hover.year !== '457 B.C.') throw new Error('hover showed wrong year');
+    await client.shot('qa/proofs/horizon_proof_hover.png');
+  }
 
   await client.eval(`setEpochInfo(2)`);
   await sleep(400);
