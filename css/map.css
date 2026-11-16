@@ -78,38 +78,6 @@ html.cmap-html, body.cmap-page {
   color: #f0e0b8 !important;
   border: 1px solid rgba(212, 175, 55, 0.28) !important;
 }
-.cmap-pin {
-  background: none !important;
-  border: 0 !important;
-}
-.cmap-pin .pin {
-  display: block;
-  width: 12px; height: 12px;
-  border-radius: 50%;
-  background: #d4af37;
-  border: 1.5px solid #fff4d0;
-  box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.18), 0 0 16px rgba(212, 175, 55, 0.55);
-}
-.cmap-pin.event .pin {
-  border-radius: 1px;
-  transform: rotate(45deg);
-  background: #f2c14e;
-}
-.cmap-pin .label {
-  position: absolute;
-  left: 16px; top: -6px;
-  white-space: nowrap;
-  font-size: 11px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: #f6ebc8;
-  text-shadow: 0 1px 4px #000, 0 0 8px #000;
-}
-.cmap-pin.is-dim { opacity: 0.42; }
-.cmap-pin.is-dim .label { opacity: 0; }
-.cmap-pin.metal-silver .pin { background: #c5d0dc; }
-.cmap-pin.metal-bronze .pin { background: #c4843a; }
-.cmap-pin.metal-iron .pin { background: #8a93a0; }
 .leaflet-tooltip.cmap-tip {
   background: rgba(10, 8, 6, 0.9);
   color: #f6ebc8;
@@ -121,47 +89,6 @@ html.cmap-html, body.cmap-page {
   box-shadow: none;
 }
 .cmap-stage.is-panning { cursor: grabbing; }
-.cmap-world {
-  position: absolute;
-  left: 0; top: 0;
-  transform-origin: 0 0;
-  will-change: transform;
-}
-.cmap-svg {
-  display: block;
-  overflow: visible;
-}
-.cmap-land {
-  fill: #e4d2a6;
-  stroke: rgba(122, 92, 48, 0.35);
-  stroke-width: 0.9;
-}
-.cmap-graticule {
-  fill: none;
-  stroke: rgba(232, 214, 170, 0.07);
-  stroke-width: 0.6;
-}
-.cmap-polity {
-  stroke-width: 1.4;
-  cursor: pointer;
-  transition: fill 0.45s ease, stroke 0.45s ease, opacity 0.6s ease;
-}
-.cmap-polity:hover, .cmap-polity.is-hot {
-  filter: brightness(1.18);
-}
-.cmap-polity.is-active {
-  stroke-width: 2.4;
-  filter: brightness(1.22) drop-shadow(0 0 10px rgba(240, 208, 120, 0.55));
-}
-.cmap-sea-label {
-  fill: rgba(186, 214, 230, 0.38);
-  font-family: var(--cmap-quote);
-  font-style: italic;
-  font-size: 22px;
-  letter-spacing: 0.28em;
-  text-transform: uppercase;
-  pointer-events: none;
-}
 .cmap-stone-glow {
   z-index: 7;
   pointer-events: none;
@@ -180,54 +107,6 @@ html.cmap-html, body.cmap-page {
 .cmap-embed.is-stone-world .cmap-stage {
   box-shadow: inset 0 0 0 1px rgba(247, 228, 168, 0.45);
 }
-
-.cmap-markers { position: absolute; inset: 0; pointer-events: none; }
-.cmap-marker {
-  position: absolute;
-  pointer-events: auto;
-  transform: translate(-50%, -50%) scale(var(--marker-scale, 1));
-  transform-origin: center center;
-  cursor: pointer;
-  z-index: 2;
-}
-.cmap-marker .pin {
-  width: 12px; height: 12px;
-  border-radius: 50%;
-  background: var(--cmap-gold);
-  border: 1.5px solid #fff4d0;
-  box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.18), 0 0 16px rgba(212, 175, 55, 0.55);
-}
-.cmap-marker.event .pin {
-  width: 0; height: 0;
-  border: 0;
-  background: none;
-  box-shadow: none;
-  width: 11px; height: 11px;
-  transform: rotate(45deg);
-  border-radius: 1px;
-  background: #f2c14e;
-  border: 1px solid #fff4d0;
-  box-shadow: 0 0 16px rgba(242, 193, 78, 0.6);
-}
-.cmap-marker .label {
-  position: absolute;
-  left: 14px; top: -7px;
-  white-space: nowrap;
-  font-size: 11px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: #f6ebc8;
-  text-shadow: 0 1px 4px #000, 0 0 8px #000;
-  pointer-events: none;
-  opacity: 0.9;
-}
-.cmap-marker.is-dim { opacity: 0.38; }
-.cmap-marker.is-dim .label { opacity: 0; }
-.cmap-marker.is-active .label { opacity: 1; color: #fff7dc; }
-.cmap-marker.metal-silver .pin { background: #c5d0dc; }
-.cmap-marker.metal-bronze .pin { background: #c4843a; }
-.cmap-marker.metal-iron .pin { background: #8a93a0; }
-.cmap-marker.metal-gold .pin { background: #d4af37; }
 
 @keyframes cmapPulse {
   0% { transform: scale(1); opacity: 1; }
@@ -276,7 +155,7 @@ html.cmap-html, body.cmap-page {
   .cmap-sat-mark.is-point::before { box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.3), 0 2px 8px rgba(0, 0, 0, 0.7); }
 }
 
-.cmap-vignette, .cmap-grain, .cmap-motes, .cmap-stone-glow {
+.cmap-vignette, .cmap-grain, .cmap-stone-glow {
   position: absolute; inset: 0; pointer-events: none;
 }
 .cmap-vignette {
@@ -291,10 +170,7 @@ html.cmap-html, body.cmap-page {
   mix-blend-mode: overlay;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
-.cmap-chrome, .cmap-hud, .cmap-chapter, .cmap-overture, .cmap-tooltip, .cmap-load,
-.cmap-cartouche, .cmap-legend, .cmap-dossier, .cmap-timeline, .cmap-hint, .cmap-credit,
-.cmap-basemap, .cmap-key-panel, .cmap-enter-overlay, .cmap-layers, .cmap-compass,
-.cmap-coords, .cmap-fly-badge, .cmap-play, .cmap-search {
+.cmap-chrome, .cmap-chapter, .cmap-overture, .cmap-load, .cmap-cartouche, .cmap-legend, .cmap-dossier, .cmap-timeline, .cmap-hint, .cmap-credit, .cmap-basemap, .cmap-enter-overlay, .cmap-layers, .cmap-compass, .cmap-coords, .cmap-fly-badge, .cmap-play, .cmap-search {
   z-index: 2200;
 }
 
@@ -320,7 +196,7 @@ html.cmap-html, body.cmap-page {
 .cmap-links { display: flex; gap: 6px; flex-wrap: wrap; }
 .cmap-chrome .cmap-links { view-transition-name: cx-nav; }
 .cmap-chrome .cmap-brand { view-transition-name: cx-brand; }
-.cmap-links a, .cmap-icon-btn {
+.cmap-links a {
   font-size: 10px;
   font-weight: 500;
   letter-spacing: 0.18em;
@@ -335,7 +211,7 @@ html.cmap-html, body.cmap-page {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
   transition: transform var(--cx-t1) var(--cx-ease), color var(--cx-t2) var(--cx-ease), border-color var(--cx-t2) var(--cx-ease), background-color var(--cx-t2) var(--cx-ease), box-shadow var(--cx-t2) var(--cx-ease);
 }
-.cmap-links a:hover, .cmap-links a.active, .cmap-icon-btn:hover {
+.cmap-links a:hover, .cmap-links a.active {
   color: #ffffff;
   border-color: var(--cmap-gold);
   background: rgba(30, 24, 16, 0.92);
@@ -902,23 +778,6 @@ html.cmap-html, body.cmap-page {
   color: var(--cmap-muted);
 }
 
-.cmap-tooltip {
-  position: absolute;
-  z-index: 20;
-  padding: 6px 10px;
-  font-size: 11px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: #f6ebc8;
-  background: rgba(10, 8, 6, 0.88);
-  border: 1px solid var(--cmap-line);
-  pointer-events: none;
-  opacity: 0;
-  transform: translate(-50%, -140%);
-  white-space: nowrap;
-}
-.cmap-tooltip.show { opacity: 1; }
-
 .cmap-load {
   position: absolute;
   inset: 0;
@@ -979,11 +838,6 @@ html.cmap-html, body.cmap-page {
   letter-spacing: 0.08em;
 }
 .cmap-embed .cmap-chapter { opacity: 0 !important; }
-
-.cmap-enter-full {
-  display: inline-flex;
-  margin-top: 4px;
-}
 .cmap-enter-overlay {
   position: absolute;
   top: 12px;
@@ -1022,50 +876,6 @@ html.cmap-html, body.cmap-page {
   background: linear-gradient(180deg, #f0d78c, #c9a227);
 }
 .cmap-legend { top: 118px; }
-.cmap-key-panel {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  width: min(420px, calc(100% - 32px));
-  padding: 22px 22px 18px;
-  border: 1px solid var(--cmap-line);
-  background: var(--cmap-panel);
-  backdrop-filter: blur(18px);
-  box-shadow: 0 28px 80px rgba(0, 0, 0, 0.55);
-  border-radius: var(--cx-radius);
-}
-.cmap-key-panel[hidden] { display: none; }
-.cmap-key-panel p {
-  font-size: 14px;
-  line-height: 1.5;
-  color: #ddd3bc;
-  margin-bottom: 12px;
-}
-.cmap-key-panel input {
-  width: 100%;
-  padding: 10px 12px;
-  border: 1px solid var(--cmap-line);
-  border-radius: var(--cx-radius-sm);
-  background: rgba(0, 0, 0, 0.35);
-  color: var(--cmap-ink);
-  margin-bottom: 12px;
-}
-.cmap-key-actions { display: flex; gap: 8px; flex-wrap: wrap; }
-.cmap-key-actions button {
-  padding: 9px 12px;
-  border: 1px solid var(--cmap-line);
-  border-radius: 999px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  font-size: 10px;
-  color: var(--cmap-gold-soft);
-}
-.cmap-key-actions .go {
-  color: #1a140c;
-  background: linear-gradient(180deg, #f0d78c, #c9a227);
-  border-color: transparent;
-}
 
 /* Panels toggle exists only for the phone layout; desktop shows both panels always.
    Must stay ABOVE the max-width media query so the mobile display:flex wins. */
@@ -1208,24 +1018,17 @@ html.cmap-html, body.cmap-page {
 .leaflet-control-zoom a:hover { background: rgba(26, 22, 16, 0.92); color: #f0e0b8; }
 .leaflet-control-zoom a:last-child { border-bottom: 0; }
 
-.cmap-nav-year, .cmap-play, .cmap-close, .cmap-basemap button, .cmap-panels-toggle button,
-.cmap-key-actions button, .cmap-play-route, .cmap-search-hits button, .cmap-dossier-actions a,
-.cmap-enter, .cmap-year, .cmap-icon-btn {
+.cmap-nav-year, .cmap-play, .cmap-close, .cmap-basemap button, .cmap-panels-toggle button, .cmap-play-route, .cmap-search-hits button, .cmap-dossier-actions a, .cmap-enter, .cmap-year {
   transition: transform var(--cx-t1) var(--cx-ease), color var(--cx-t2) var(--cx-ease), background-color var(--cx-t2) var(--cx-ease), border-color var(--cx-t2) var(--cx-ease), box-shadow var(--cx-t2) var(--cx-ease);
 }
-.cmap-nav-year:hover, .cmap-play:hover, .cmap-basemap button:hover, .cmap-panels-toggle button:hover,
-.cmap-key-actions button:hover, .cmap-play-route:hover, .cmap-dossier-actions a:hover, .cmap-enter:hover,
-.cmap-icon-btn:hover {
+.cmap-nav-year:hover, .cmap-play:hover, .cmap-basemap button:hover, .cmap-panels-toggle button:hover, .cmap-play-route:hover, .cmap-dossier-actions a:hover, .cmap-enter:hover {
   transform: translateY(-2px);
   box-shadow: 0 10px 26px -14px rgba(229, 185, 59, 0.55);
 }
-.cmap-links a:active, .cmap-icon-btn:active, .cmap-nav-year:active, .cmap-play:active, .cmap-close:active,
-.cmap-basemap button:active, .cmap-panels-toggle button:active, .cmap-key-actions button:active,
-.cmap-play-route:active, .cmap-search-hits button:active, .cmap-dossier-actions a:active, .cmap-enter:active,
-.cmap-year:active {
+.cmap-links a:active, .cmap-nav-year:active, .cmap-play:active, .cmap-close:active, .cmap-basemap button:active, .cmap-panels-toggle button:active, .cmap-play-route:active, .cmap-search-hits button:active, .cmap-dossier-actions a:active, .cmap-enter:active, .cmap-year:active {
   transform: scale(0.975);
 }
-.cmap-search input:focus, .cmap-key-panel input:focus {
+.cmap-search input:focus {
   outline: none;
   border-color: var(--cmap-gold);
   box-shadow: 0 0 0 3px rgba(229, 185, 59, 0.16);
@@ -1238,9 +1041,7 @@ html.cmap-html, body.cmap-page {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .cmap-nav-year, .cmap-play, .cmap-close, .cmap-basemap button, .cmap-panels-toggle button,
-  .cmap-key-actions button, .cmap-play-route, .cmap-search-hits button, .cmap-dossier-actions a,
-  .cmap-enter, .cmap-year, .cmap-icon-btn, .cmap-links a { transition: none; }
+  .cmap-nav-year, .cmap-play, .cmap-close, .cmap-basemap button, .cmap-panels-toggle button, .cmap-play-route, .cmap-search-hits button, .cmap-dossier-actions a, .cmap-enter, .cmap-year, .cmap-links a { transition: none; }
   .cmap-legend.is-open, .cmap-layers.is-open { animation: none; }
 }
 
