@@ -79,7 +79,7 @@ vm.createContext(gCtx);
 vm.runInContext(glossSrc, gCtx);
 const sheetGlossary = gCtx.window.SHEET_GLOSSARY || [];
 
-const wbSrc = fs.readFileSync(path.join(root, 'js/study/workbench.js'), 'utf8');
+const wbSrc = fs.readFileSync(path.join(root, 'js/pages/study/workbench.js'), 'utf8');
 
 // Verify scripture quotes in SHEET_VERIFY
 let verifiedScriptureQuotes = 0;

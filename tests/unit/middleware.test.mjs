@@ -37,14 +37,14 @@ function context(path, { method = "GET", verdict = { ok: true, first: false }, s
 }
 
 test("private paths answer 404 without touching the gate", async () => {
-  for (const path of ["/docs/archive/2026-09-10-ARCHITECTURE.md", "/tools/x.mjs", "/tests/unit/x.test.mjs", "/.git/config", "/wrangler.toml", "/server.py", "/js/shared/auth-config.example.js"]) {
+  for (const path of ["/docs/archive/2026-09-10-ARCHITECTURE.md", "/tools/x.mjs", "/tests/unit/x.test.mjs", "/.git/config", "/wrangler.toml", "/server.py", "/js/core/auth-config.example.js"]) {
     const res = await onRequest(context(path, { verdict: "throw" }));
     assert.equal(res.status, 404, path);
   }
 });
 
 test("static folders skip the gate", async () => {
-  const res = await onRequest(context("/js/shared/auth.js", { verdict: { ok: false, first: false } }));
+  const res = await onRequest(context("/js/core/auth.js", { verdict: { ok: false, first: false } }));
   assert.equal(await res.text(), "next");
 });
 

@@ -33,10 +33,10 @@ Start with the [engineering handbook](docs/engineering/README.md): purpose, how 
 |---|---|
 | `index.html` `study.html` `map.html` `gallery.html` | URL entry points (stay at repo root) |
 | `css/` | `site.css` (cover), `app.css` (gallery), `map.css` (map + study embed) |
-| `js/shared/journey.js` | Cross-page resume and access gate (localStorage) |
-| `js/gallery/gallery.js` | 3D gallery engine and artifact registry |
-| `js/map/` | Map engine (`map.js`) and chronicle data (`map-data.js`) |
-| `js/study/` | Stage, Scripture dock, workbench, competency |
+| `js/core/journey.js` | Cross-page resume and access gate (localStorage) |
+| `js/pages/gallery/gallery.js` | 3D gallery engine and artifact registry |
+| `js/pages/map/` | Map engine (`map.js`) and chronicle data (`map-data.js`) |
+| `js/pages/study/` | Stage, Scripture dock, workbench, competency |
 | `bible/` | KJV Daniel, Strong’s subset, sheet passages (data corpus) |
 | `assets/` `models/` `vendor/` | Plates, GLBs, vendored Three.js + Leaflet |
 | `docs/` | Architecture, audit, course-improvement plan |
@@ -46,7 +46,7 @@ Start with the [engineering handbook](docs/engineering/README.md): purpose, how 
 ## Controls
 
 - Map of History (`map.html`): drag to pan, scroll to zoom, click a kingdom or city, `←` `→` to change year, space to play, search box, Then/Now slider, Routes layer
-- Shared journey state (`js/shared/journey.js`) remembers the last epoch, study sheet, and artifact across pages
+- Shared journey state (`js/core/journey.js`) remembers the last epoch, study sheet, and artifact across pages
 - Drag to orbit, scroll to zoom, click floating nodes to focus
 - Left rail / header arrows switch artifacts
 - Study Lab: render modes, torches, dust, brightness, camera presets

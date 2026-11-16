@@ -151,7 +151,7 @@ const tests = {
     return rows;
   },
   async 6() {
-    const staticRun = await burst(['/assets/site/hall-bg.jpg', '/css/cinema.css', '/vendor/supabase/supabase.js', '/assets/site/era-head.webp', '/assets/maps/chronicle-map-605.jpg', '/vendor/leaflet/leaflet.js'], 300, 30);
+    const staticRun = await burst(['/assets/site/hall-bg.jpg', '/css/core/cinema.css', '/vendor/supabase/supabase.js', '/assets/site/era-head.webp', '/assets/maps/chronicle-map-605.jpg', '/vendor/leaflet/leaflet.js'], 300, 30);
     const pageRun = await burst(['/', '/study.html', '/account.html', '/reviews.html'], 80, 10);
     return { staticFiles: staticRun, pages: pageRun };
   }

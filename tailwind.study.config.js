@@ -1,8 +1,8 @@
 /** Precompiled replacement for the runtime cdn.tailwindcss.com script on study.html.
- *  Builds css/study-tailwind.css with: npm run build:tailwind */
+ *  Builds css/pages/study/study-tailwind.css with: npm run build:tailwind */
 module.exports = {
   darkMode: 'class',
-  content: ['./study.html', './css/study/*.css', './js/**/*.js'],
+  content: ['./study.html', './css/pages/study/parts/*.css', './js/**/*.js'],
   theme: {
     extend: {
       fontFamily: {

@@ -48,5 +48,5 @@ The handbook is only useful if it matches the code. Every change to the site upd
 
 - Plain English, short sentences, one idea per paragraph.
 - Tables for anything with more than three parallel items.
-- Name files as repo-relative paths in backticks, for example `js/shared/auth.js`.
+- Name files as repo-relative paths in backticks, for example `js/core/auth.js`.
 - Record decisions together with their reason, so a later reader does not "fix" them by mistake.

@@ -78,7 +78,7 @@ global.window.ScrollAuth = {
     }
   })
 };
-new Function(read("js/shared/core.js"))();
+new Function(read("js/core/core.js"))();
 new Function(read("js/pages/study/quiz-gate.js"))();
 const QuizGate = global.window.QuizGate;
 

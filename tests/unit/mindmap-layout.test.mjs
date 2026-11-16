@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 import fs from "node:fs";
 import vm from "node:vm";
 
-const src = fs.readFileSync(new URL("../../js/study/mindmap-layout.js", import.meta.url), "utf8");
+const src = fs.readFileSync(new URL("../../js/pages/study/mindmap-layout.js", import.meta.url), "utf8");
 const sandbox = { window: {} };
 vm.runInNewContext(src, sandbox);
 const L = sandbox.window.MindMapLayout;

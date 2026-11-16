@@ -61,7 +61,7 @@ const protectedPaths = [
 ];
 for (const p of protectedPaths) assert(routed(p), "_routes.json must keep " + p + " behind the middleware");
 for (const p of ["/__rate", "/csp-report"]) assert(routed(p), "_routes.json must send " + p + " to the middleware");
-for (const p of ["/", "/study.html", "/study", "/map.html", "/account.html", "/404.html", "/assets/a.jpg", "/js/shared/auth.js", "/css/site.css", "/vendor/v.js", "/models/m.glb", "/bible/kjv.json"]) {
+for (const p of ["/", "/study.html", "/study", "/map.html", "/account.html", "/404.html", "/assets/a.jpg", "/js/core/auth.js", "/css/core/site.css", "/vendor/v.js", "/models/m.glb", "/bible/kjv.json"]) {
   assert(!routed(p), "_routes.json must serve " + p + " without invoking Functions");
 }
 

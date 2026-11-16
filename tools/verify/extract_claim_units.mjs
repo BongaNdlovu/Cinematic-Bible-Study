@@ -106,7 +106,7 @@ function getLinkedGlossary(content) {
 }
 
 // 4. Load workbench.js and validate synchronization
-const wbSrc = fs.readFileSync(path.join(root, 'js/study/workbench.js'), 'utf8');
+const wbSrc = fs.readFileSync(path.join(root, 'js/pages/study/workbench.js'), 'utf8');
 const normWb = wbSrc.replace(/\s+/g, ' ');
 
 function assertInWorkbench(phrase, label) {
@@ -122,7 +122,7 @@ function assertInWorkbench(phrase, label) {
   for (const part of parts) {
     const sample = part.slice(0, Math.min(part.length, 40));
     if (!normWb.includes(sample)) {
-      throw new Error(`Workbench synchronization error for ${label}: "${sample}" not found in js/study/workbench.js`);
+      throw new Error(`Workbench synchronization error for ${label}: "${sample}" not found in js/pages/study/workbench.js`);
     }
   }
 }
@@ -176,7 +176,7 @@ const WORKBENCH_DATA = {
   }
 };
 
-// Validate all workbench definitions are synchronized with js/study/workbench.js
+// Validate all workbench definitions are synchronized with js/pages/study/workbench.js
 for (const [sId, wb] of Object.entries(WORKBENCH_DATA)) {
   assertInWorkbench(wb.intro, `S${sId} intro`);
   if (wb.items) wb.items.forEach((it, idx) => assertInWorkbench(it, `S${sId} item ${idx}`));

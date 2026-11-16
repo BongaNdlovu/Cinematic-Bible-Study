@@ -88,7 +88,7 @@ for (let sheet = 0; sheet <= 10; sheet += 1) {
   check(`sitting ${sheet} mounts the read-along orb`, state.orb && state.reader);
   check(`sitting ${sheet} loads only itself and its neighbours`, sheetFiles.includes(sheet) && sheetFiles.every((n) => Math.abs(n - sheet) <= 1), sheetFiles);
   check(`sitting ${sheet} does not load sheets-data.js`, !requests.some((u) => u.includes('sheets-data.js')));
-  check(`sitting ${sheet} fetches the mindmap module only when it draws one`, requests.some((u) => u.includes('js/study/mindmap.js')) === state.mm > 0, { mm: state.mm });
+  check(`sitting ${sheet} fetches the mindmap module only when it draws one`, requests.some((u) => u.includes('js/pages/study/mindmap.js')) === state.mm > 0, { mm: state.mm });
   if (state.mm) check(`sitting ${sheet} mindmaps are drawn`, state.mmDrawn > 0, state);
   check(`sitting ${sheet} has no console or page errors`, errors.length === 0, errors.slice(0, 3));
   await context.close();
@@ -274,7 +274,7 @@ for (let sheet = 0; sheet <= 10; sheet += 1) {
     return document.body.dataset.weather;
   });
   check('a weather preset button applies', weather === 'storm', weather);
-  const certBefore = requests.some((u) => u.includes('js/study/certificate.js'));
+  const certBefore = requests.some((u) => u.includes('js/pages/study/certificate.js'));
   check('the certificate module is not loaded up front', !certBefore);
   const cert = await page.evaluate(async () => {
     const btn = document.getElementById('btn-download-certificate');
@@ -299,7 +299,7 @@ for (let sheet = 0; sheet <= 10; sheet += 1) {
     settle: 2500
   });
   const scene = await page.evaluate(() => ({ api: !!window.WeatherScene, weather: document.body.dataset.weather || '' }));
-  check('without OffscreenCanvas the weather scene loads on the main thread', scene.api && requests.some((u) => u.includes('js/study/weather-scene.js')), scene);
+  check('without OffscreenCanvas the weather scene loads on the main thread', scene.api && requests.some((u) => u.includes('js/pages/study/weather-scene.js')), scene);
   check('the main-thread weather fallback raises no errors', errors.length === 0, errors.slice(0, 3));
   await context.close();
 }

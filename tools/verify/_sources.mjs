@@ -31,7 +31,7 @@ export function pageLoads(page, rel) {
 }
 
 export function studyPageScripts() {
-  return pageScripts('study.html').filter((rel) => rel.startsWith('js/study/'));
+  return pageScripts('study.html').filter((rel) => rel.startsWith('js/pages/study/'));
 }
 
 export function studyPageSource() {

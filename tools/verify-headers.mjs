@@ -124,16 +124,16 @@ assert(cspDirectives['img-src']?.includes("https://*.arcgisonline.com"), "CSP im
 assert(cspDirectives['connect-src']?.includes("https://*.arcgisonline.com"), "CSP connect-src includes *.arcgisonline.com");
 
 // Verify Supabase
-const authConfig = fs.readFileSync(path.join(root, 'js/shared/auth-config.js'), 'utf8');
+const authConfig = fs.readFileSync(path.join(root, 'js/core/auth-config.js'), 'utf8');
 const supabaseHost = (/https:\/\/([a-z0-9-]+\.supabase\.co)/.exec(authConfig) || [])[1];
-assert(supabaseHost, 'js/shared/auth-config.js names the Supabase project host');
+assert(supabaseHost, 'js/core/auth-config.js names the Supabase project host');
 assert(cspDirectives['connect-src']?.includes(`https://${supabaseHost}`), `CSP connect-src includes https://${supabaseHost}`);
 assert(cspDirectives['connect-src']?.includes(`wss://${supabaseHost}`), `CSP connect-src includes wss://${supabaseHost}`);
 assert(!cspDirectives['connect-src']?.some(v => v.includes('*.supabase.co')), 'CSP connect-src no longer allows every Supabase project');
 
-const sentryConfig = fs.readFileSync(path.join(root, 'js/shared/sentry.js'), 'utf8');
+const sentryConfig = fs.readFileSync(path.join(root, 'js/core/sentry.js'), 'utf8');
 const sentryHost = (/@([a-z0-9]+\.ingest\.[a-z0-9.]*sentry\.io)\//.exec(sentryConfig) || [])[1];
-assert(sentryHost, 'js/shared/sentry.js names the Sentry project ingest host');
+assert(sentryHost, 'js/core/sentry.js names the Sentry project ingest host');
 assert(cspDirectives['connect-src']?.includes(`https://${sentryHost}`), `CSP connect-src includes https://${sentryHost}`);
 assert(!cspDirectives['connect-src']?.some(v => v.includes('*.ingest.')), 'CSP connect-src no longer allows every Sentry project');
 

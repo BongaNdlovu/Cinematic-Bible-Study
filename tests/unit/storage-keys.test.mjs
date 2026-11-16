@@ -102,7 +102,7 @@ test("every key in tools/storage-keys.mjs is still used by the code", () => {
 });
 
 test("the keys cleared on sign-out match PERSONAL_KEYS and PERSONAL_PREFIXES in auth.js", () => {
-  const auth = read("js/shared/auth.js");
+  const auth = read("js/core/auth.js");
   const actual = [...listIn(auth, "PERSONAL_KEYS"), ...listIn(auth, "PERSONAL_PREFIXES")].sort();
   const expected = STORAGE_KEYS.filter((e) => e.signOut).map((e) => e.key).sort();
   assert.deepEqual(actual, expected);
@@ -128,7 +128,7 @@ test("the privacy page names every key a reader's browser can hold", () => {
 });
 
 test("the Supabase session key on the privacy page uses the project in auth-config.js", () => {
-  const config = read("js/shared/auth-config.js");
+  const config = read("js/core/auth-config.js");
   const ref = /https:\/\/([a-z0-9]+)\.supabase\.co/.exec(config);
   assert.ok(ref, "Supabase URL not found in auth-config.js");
   assert.ok(read("privacy.html").includes("sb-" + ref[1] + "-auth-token"));

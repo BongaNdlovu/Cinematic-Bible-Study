@@ -5,7 +5,7 @@ import vm from "node:vm";
 
 const SRC = fs.readFileSync(new URL("../../js/pages/dashboard/sid-report.js", import.meta.url), "utf8");
 const box = { Intl, Date, Math, Number, String, Object, Array };
-vm.runInNewContext(fs.readFileSync(new URL("../../js/shared/core.js", import.meta.url), "utf8"), box);
+vm.runInNewContext(fs.readFileSync(new URL("../../js/core/core.js", import.meta.url), "utf8"), box);
 vm.runInNewContext(SRC, box);
 const { build, render, count, share, MIN } = box.window ? box.window.SidReport : box.SidReport;
 

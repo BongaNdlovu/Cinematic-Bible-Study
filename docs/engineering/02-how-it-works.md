@@ -48,25 +48,25 @@ Keeping pages out of `_routes.json` is a deliberate choice, enforced by `tools/v
 
 Every page except `privacy.html`, `terms.html` and `shelf.html` loads the same shared base. The order is roughly as below; it varies slightly per page (for example, `map.html` loads `consent.js` and Leaflet before `journey.js`).
 
-1. `vendor/sentry/…` and `js/shared/sentry.js`: error reporting. This is switched off on `localhost`, `127.0.0.1`, `[::1]` and `*.localhost`. Every other host reports.
-2. `js/shared/cinema.js`: page-transition effects. These are skipped under reduced motion.
-3. `js/shared/journey.js`: the cross-page memory and the access rules.
-4. `js/shared/auth-config.js` and `vendor/supabase/supabase.js`, then `js/shared/net.js`, `errors.js`, `ops.js`, `auth.js`: the Supabase client, network error handling, the error banner, and sign-in.
-5. `js/shared/desk.js`, `terms.js`, `consent.js`: the message desk, the terms gate, and the cookie and analytics consent banner.
-6. Then the page's own scripts. For example, the study desk adds `progress-sync.js`, `study-sync.js`, `quiz-gate.js`, and the `js/study/*` modules ending with `study-app.js`.
+1. `vendor/sentry/…` and `js/core/sentry.js`: error reporting. This is switched off on `localhost`, `127.0.0.1`, `[::1]` and `*.localhost`. Every other host reports.
+2. `js/core/cinema.js`: page-transition effects. These are skipped under reduced motion.
+3. `js/core/journey.js`: the cross-page memory and the access rules.
+4. `js/core/auth-config.js` and `vendor/supabase/supabase.js`, then `js/core/net.js`, `errors.js`, `ops.js`, `auth.js`: the Supabase client, network error handling, the error banner, and sign-in.
+5. `js/features/desk.js`, `terms.js`, `consent.js`: the message desk, the terms gate, and the cookie and analytics consent banner.
+6. Then the page's own scripts. For example, the study desk adds `progress-sync.js`, `study-sync.js`, `quiz-gate.js`, and the `js/pages/study/*` modules ending with `study-app.js`.
 
 The exact list per page is in [Project structure](03-project-structure.md#pages-and-their-scripts).
 
 ## 3. Who may see what
 
-`js/shared/journey.js` holds the access rules.
+`js/core/journey.js` holds the access rules.
 
 | Rule | Code |
 |---|---|
 | A member is anyone signed in | `isMember()` |
-| Guests open no sitting. `study.html` sends them to `account.html?next=…` once the session is known | `gateStudyForMembers()` at the top of `js/study/study-app.js` → `requireMember()` |
+| Guests open no sitting. `study.html` sends them to `account.html?next=…` once the session is known | `gateStudyForMembers()` at the top of `js/pages/study/study-app.js` → `requireMember()` |
 | A new member starts with sitting 0 (the Prologue) | `FREE_THROUGH = 0`, `maxOpenSheet()` |
-| The home shelf shows every volume locked to a guest | `can()` in `js/home/shelf.js` |
+| The home shelf shows every volume locked to a guest | `can()` in `js/pages/index/shelf.js` |
 | A member opens the next sitting by completing the one before | `maxOpenSheet()` walks the completed set |
 | Map and gallery need a member | `requireMember()`, `canAccessMuseumNode()`, `canAccessYear()` |
 | Moderators may preview every sitting | `previewAllContent()` → `isAdmin()` |
@@ -76,18 +76,18 @@ These checks decide what the interface offers. The real protection is in the dat
 
 ## 4. Signing in
 
-- Sign-in is Google only, through Supabase Auth (`signInWithOAuth({ provider: "google" })` in `js/shared/auth.js`).
+- Sign-in is Google only, through Supabase Auth (`signInWithOAuth({ provider: "google" })` in `js/core/auth.js`).
 - Moderators must also pass an authenticator-app check. In the live database, `is_review_moderator()` needs a Google identity **and** an `aal2` session (checked 12 November 2026). The enrolment and challenge screens are in `js/pages/account/mfa.js`.
-- Signing out first tries to send any unsaved notes and progress, waiting up to 6 seconds. If something is still unsent, it asks before removing it from the device (`flushBeforeSignOut()` in `js/shared/auth.js`).
+- Signing out first tries to send any unsaved notes and progress, waiting up to 6 seconds. If something is still unsent, it asks before removing it from the device (`flushBeforeSignOut()` in `js/core/auth.js`).
 - For local tests only, `localStorage.baQaMockSession` can stand in for a signed-in user. It is ignored on any host other than localhost.
 
 ## 5. Reading a sitting and answering questions
 
 1. `js/content/sheets/index.js` holds the list of 11 sittings and loads each sitting's text (`js/content/sheets/sheet-N.js`) only when it is opened.
-2. `js/study/study-app.js` draws the sitting, its diagrams and its questions. `js/study/book-reader.js` lays the sitting out as turning pages.
+2. `js/pages/study/study-app.js` draws the sitting, its diagrams and its questions. `js/pages/study/book-reader.js` lays the sitting out as turning pages.
 3. An answer is sent to the database function `verify_quiz_answer` (`js/pages/study/quiz-gate.js`). **The answer key never reaches the browser.** It lives in `exhibit_quiz_keys`, which no client role can read. Guests cannot call the function; they are told to sign in.
 4. A reply that comes back after the reader has moved to another sitting is ignored (fix of 12 November 2026).
-5. When every question is right, the next sitting opens. `js/study/task-flow.js` offers the questions as a step-by-step dialog.
+5. When every question is right, the next sitting opens. `js/pages/study/task-flow.js` offers the questions as a step-by-step dialog.
 
 ## 6. Saving progress, notes and bookmarks
 
@@ -95,8 +95,8 @@ The device is always the first copy. The cloud copy is kept in step with it.
 
 | What | On the device | In the cloud | Module |
 |---|---|---|---|
-| Sitting progress, mastery, workbench, competency, certificate name | `baJourney`, `daniel_*` keys | `exhibit_progress`, saved through `save_exhibit_progress(expected_revision, payload)` | `js/shared/progress-sync.js` |
-| Notes and bookmarks | `baNote-<n>`, `baNoteTimes`, `baStudyBookmarks` | `exhibit_study_data` | `js/shared/study-sync.js` |
+| Sitting progress, mastery, workbench, competency, certificate name | `baJourney`, `daniel_*` keys | `exhibit_progress`, saved through `save_exhibit_progress(expected_revision, payload)` | `js/features/progress-sync.js` |
+| Notes and bookmarks | `baNote-<n>`, `baNoteTimes`, `baStudyBookmarks` | `exhibit_study_data` | `js/features/study-sync.js` |
 
 How syncing works:
 
@@ -110,21 +110,21 @@ How syncing works:
 
 | Stream | When it runs | Where it goes | Limits |
 |---|---|---|---|
-| Study events (`js/shared/analytics.js`) | Only with analytics consent | `exhibit_events` | Batches of up to 10, a flush every 10 s, at most 12 requests and 60 rows a minute per tab |
+| Study events (`js/features/analytics.js`) | Only with analytics consent | `exhibit_events` | Batches of up to 10, a flush every 10 s, at most 12 requests and 60 rows a minute per tab |
 | Short surveys (sitting pulse, profile) | Only with analytics consent | `exhibit_surveys`, `exhibit_profiles` | 5 surveys an hour per device |
 | Cloudflare Web Analytics beacon | Only with analytics consent | Cloudflare | — |
-| Operational reports (`js/shared/ops.js`: failed saves, failed answer checks) | Always (legitimate interest, stated in `privacy.html`) | `exhibit_events` | Queue of 20, a flush every 10 s. Without consent, a visit-only ID that is deleted when the tab closes |
+| Operational reports (`js/core/ops.js`: failed saves, failed answer checks) | Always (legitimate interest, stated in `privacy.html`) | `exhibit_events` | Queue of 20, a flush every 10 s. Without consent, a visit-only ID that is deleted when the tab closes |
 | Browser errors (Sentry) | Any host except local ones | Sentry | 10% of page loads traced, no session replays. The feedback button appears only with analytics consent |
 
-Consent is stored in `sodConsent` (`js/shared/consent.js`). If a visitor has not chosen yet and their browser sends Do-Not-Track or Global Privacy Control, analytics is recorded as declined.
+Consent is stored in `sodConsent` (`js/core/consent.js`). If a visitor has not chosen yet and their browser sends Do-Not-Track or Global Privacy Control, analytics is recorded as declined.
 
 ## 8. Other account features
 
 | Feature | Client | Database |
 |---|---|---|
-| Readers' notes (reviews) with moderation | `js/shared/reviews.js` | `exhibit_reviews`, `exhibit_public_reviews()` for public reading |
-| Message desk (operator notices, help notes, replies) | `js/shared/desk.js` | `exhibit_notices`, `exhibit_notice_receipts`, `exhibit_help_notes`, `exhibit_help_replies` |
-| Certificates | `js/study/certificate.js` (loaded on demand from `study.html`) | `exhibit_certificates`, `issue_exhibit_certificate()` |
+| Readers' notes (reviews) with moderation | `js/features/reviews.js` | `exhibit_reviews`, `exhibit_public_reviews()` for public reading |
+| Message desk (operator notices, help notes, replies) | `js/features/desk.js` | `exhibit_notices`, `exhibit_notice_receipts`, `exhibit_help_notes`, `exhibit_help_replies` |
+| Certificates | `js/pages/study/certificate.js` (loaded on demand from `study.html`) | `exhibit_certificates`, `issue_exhibit_certificate()` |
 | Account deletion | `js/pages/account/account.js` | `exhibit_delete_my_account()` |
 | Insights dashboard and printable report | `js/pages/dashboard/dashboard.js`, `js/pages/dashboard/sid-report.js` | Moderator-only read policies on events, surveys and profiles; `exhibit_graduates()`; `exhibit_participation(from, to)` for the project target |
 

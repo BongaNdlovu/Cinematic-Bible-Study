@@ -19,7 +19,7 @@ const MM_CONNECTORS = new Set(["text", "history", "interpretation", "christ"]);
 /* The vertical band a step may be placed in, as the renderer clamps it: 10%..90%
    of the world height. The world is 960x660 (it was 1600x900 before the type-size
    fix), so the band is 66…594. Keep these in step with Y_MIN/Y_MAX in
-   js/study/mindmap.js — a validator that accepts more than the renderer honours
+   js/pages/study/mindmap.js — a validator that accepts more than the renderer honours
    lets a spec declare a `y` that is silently re-clamped. */
 const MM_Y_MIN = 66;
 const MM_Y_MAX = 594;

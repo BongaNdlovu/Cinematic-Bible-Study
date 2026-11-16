@@ -1160,14 +1160,14 @@ DANIEL IN BABYLON                         JESUS IN THE WILDERNESS
         },
         title: "The Metallic Colossus: The Historicist Blueprint of History and the Sovereign Triumph of Christ",
         subtitle: "From the impasse of human wisdom to the stone that fills the earth — God's unbroken chain of empires and Christ's everlasting kingdom.",
-        /* `kind: "mindmap"` (js/study/mindmap.js) re-projects the same `steps[]`
+        /* `kind: "mindmap"` (js/pages/study/mindmap.js) re-projects the same `steps[]`
            around a centre node. The extra fields are structural only — no new
            learner-facing prose, so tools/verify/extract_claim_units.mjs keeps
            harvesting every word from the fields it already reads:
              steps[].id     slug; the node's data-mm key. Defaults to step-<i>.
              steps[].side   "L" | "R"; defaults to the first half on the left.
              steps[].y      world y of the head node. The world is 960x660
-                            (js/study/mindmap.js), so the usable band is
+                            (js/pages/study/mindmap.js), so the usable band is
                             66…594 and its centre — where an omitted `y`
                             lands — is 330. It was 1600x900 / 90…810 / 450
                             before the world was shrunk for legibility; s2-4's

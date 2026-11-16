@@ -4,7 +4,7 @@
 
 Step 3.3 of the architecture plan: take stock before reducing. Nothing was changed. Every `!important` forces the next rule that wants to win to use one too, so the aim is to remove the root rules first and the rest after.
 
-**How it was counted:** every declaration marked `!important` in `css/study/*.css`, sorted by where it sits (its media query) and what it targets (its selector). The plan's figure of 299 counted lines with `!important` in the old `css/study-page.css`. Counted as declarations there are 314, because some lines hold more than one.
+**How it was counted:** every declaration marked `!important` in `css/pages/study/parts/*.css`, sorted by where it sits (its media query) and what it targets (its selector). The plan's figure of 299 counted lines with `!important` in the old `css/study-page.css`. Counted as declarations there are 314, because some lines hold more than one.
 
 | Group | Declarations | Why it is there |
 |---|---|---|
@@ -12,7 +12,7 @@ Step 3.3 of the architecture plan: take stock before reducing. Nothing was chang
 | Reduced motion (`@media (prefers-reduced-motion: reduce)`) | 37 | Turns animation and transitions off whatever else set them. Usually kept. |
 | Theme overrides (`paper-mode`, `white-mode`, `charcoal-mode`, `night-mode`, `html.dark`) | 78 | Each theme fights the default colours. A theme built on CSS custom properties would need none of these. |
 | Full-screen diagrams (`.is-full`, `dfx-`) | 7 | The full-screen shell fights the in-page layout. |
-| The two root rules | 2 | `.article-body p` (`font-size`, `css/study/01-article.css`) and `.article-body h4` (`font-size`, `css/study/10-desk.css`). |
+| The two root rules | 2 | `.article-body p` (`font-size`, `css/pages/study/parts/01-article.css`) and `.article-body h4` (`font-size`, `css/pages/study/parts/10-desk.css`). |
 | Everything else | 129 | See below. |
 
 **Everything else, by property:** `font-size` 48, `margin` 27, `line-height` 18, `display` 12, `font-family` 5, `color` 5, others 14. By file: `04-story.css` 45, `07-mindmap.css` 33, `11-lesson-blocks.css` 12, `12-bible-and-player.css` 9, `20-themes-and-projection.css` 8, `19-sitting-page.css` 7, `21-timeline.css` 7, and 8 in three other files.

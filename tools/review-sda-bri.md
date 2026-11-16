@@ -51,7 +51,7 @@ The text of record is the live data, not your memory of it. For sitting `N`:
    `check`, and sometimes an `href`.
    Verify the quotes against the cited source (follow the `href` when there is one). A verify card is
    itself a claim: if its quotation is wrong or its `check` overstates, that is a finding.
-3. [`js/study/workbench.js`](../js/study/workbench.js) — **only sittings 0, 1, and 2 have workbenches**
+3. [`js/pages/study/workbench.js`](../js/pages/study/workbench.js) — **only sittings 0, 1, and 2 have workbenches**
    (`renderSheet0Workbench` … `renderSheet2Workbench`). The matching tasks (schools matrix, name grid,
    civic/defilement sorts) embed claims in their statements and their "correct" answers.
 4. [`js/content/sheet-glossary.js`](../js/content/sheet-glossary.js) — the entries whose term or alias is
@@ -118,8 +118,8 @@ Assign exactly one verdict per sentence / paragraph / quiz stem / homework `do` 
 4. **Jesuits are named as authors of readings, not as cartoon villains.** Ribera and Alcázar are cited
    as dated sources of futurist/preterist readings. No unsourced motive claims ("designed to deceive,"
    "to save the papacy"), no mockery. The dates and the titles are the argument.
-5. **Do not flip `TEMP_REVIEW_UNLOCK`.** It is currently `true` in `js/study/study-app.js` and
-   `js/shared/journey.js`. Leave it exactly as you found it; a review pass never changes the flag.
+5. **Do not flip `TEMP_REVIEW_UNLOCK`.** It is currently `true` in `js/pages/study/study-app.js` and
+   `js/core/journey.js`. Leave it exactly as you found it; a review pass never changes the flag.
 6. **Do not invent quotes.** Every quotation you accept in a verify card, and every quotation you put
    in your report, must match its cited source. If you cannot verify a quote, write "could not
    verify" — never reconstruct from memory.

@@ -80,8 +80,8 @@ const sandbox = {
   localStorage: { getItem() { return null; }, setItem() {} }
 };
 vm.createContext(sandbox);
-vm.runInContext(fs.readFileSync(path.join(root, 'js/shared/core.js'), 'utf8'), sandbox);
-vm.runInContext(fs.readFileSync(path.join(root, 'js/study/scripture.js'), 'utf8'), sandbox);
+vm.runInContext(fs.readFileSync(path.join(root, 'js/core/core.js'), 'utf8'), sandbox);
+vm.runInContext(fs.readFileSync(path.join(root, 'js/pages/study/scripture.js'), 'utf8'), sandbox);
 const api = sandbox.window.BAScripture;
 if (!api) fail('BAScripture did not attach');
 
@@ -105,13 +105,13 @@ if (highlighted(2, 'Daniel', 2, 1)) fail('Daniel 2:1 is setup, not a highlight')
 if (api.findPhrase("Thou art this head of gold.", "head of gold") < 0) fail('findPhrase missed head of gold');
 if (api.findPhrase("the king\u2019s matter", "the king's matter") < 0) fail('findPhrase must treat curly apostrophes as straight');
 
-const html = fs.readFileSync(path.join(root, 'study.html'), 'utf8') + fs.readdirSync(path.join(root, 'css/study')).sort().map((n) => fs.readFileSync(path.join(root, 'css/study', n), 'utf8')).join('\n');
+const html = fs.readFileSync(path.join(root, 'study.html'), 'utf8') + fs.readdirSync(path.join(root, 'css/pages/study/parts')).sort().map((n) => fs.readFileSync(path.join(root, 'css/pages/study/parts', n), 'utf8')).join('\n');
 const studyApp = studyPageSource();
 const sheetsSrc = fs.readFileSync(path.join(root, 'js/content/sheets-data.js'), 'utf8');
 const studySources = html + studyApp + sheetsSrc;
 if (!html.includes('data-instrument="scripture"')) fail('study.html is missing the Scripture instrument tab');
-if (!pageLoads('study.html', 'js/study/scripture.js')) fail('study.html does not load js/study/scripture.js');
-if (!pageLoads('study.html', 'js/content/sheets/index.js') || !pageLoads('study.html', 'js/study/study-app.js')) {
+if (!pageLoads('study.html', 'js/pages/study/scripture.js')) fail('study.html does not load js/pages/study/scripture.js');
+if (!pageLoads('study.html', 'js/content/sheets/index.js') || !pageLoads('study.html', 'js/pages/study/study-app.js')) {
   fail('study.html does not load extracted study scripts');
 }
 if (!studyApp.includes('BAScripture.showSheet')) fail('loadSheet does not ask Scripture to follow the sheet');
@@ -219,16 +219,16 @@ if (!/id="btn-continue"/.test(home)) fail('homepage is missing the sitting CTA (
 if (!/The Shelf of Daniel/.test(home)) fail('homepage must be titled as The Shelf of Daniel');
 if (!/id="shelf-stage"/.test(home)) fail('homepage is missing the shelf, the full scroll of sittings');
 
-const homeJs = fs.readFileSync(path.join(root, 'js/home/home.js'), 'utf8');
+const homeJs = fs.readFileSync(path.join(root, 'js/pages/index/home.js'), 'utf8');
 const heroVerses = [...homeJs.matchAll(/ref:\s*("Daniel (\d+):(\d+)"),\s*text:\s*("(?:[^"\\]|\\.)*")/g)];
-if (!heroVerses.length) fail('js/home/home.js carries no hero verses');
+if (!heroVerses.length) fail('js/pages/index/home.js carries no hero verses');
 for (const [, ref, chapter, verse, text] of heroVerses) {
   const expected = (kjv.books.Daniel[chapter] || {})[verse];
   if (!expected) fail('hero verse ' + JSON.parse(ref) + ' is not in bible/kjv.json');
-  if (JSON.parse(text) !== expected) fail('hero verse ' + JSON.parse(ref) + ' in js/home/home.js differs from bible/kjv.json');
+  if (JSON.parse(text) !== expected) fail('hero verse ' + JSON.parse(ref) + ' in js/pages/index/home.js differs from bible/kjv.json');
 }
 
-const journey = fs.readFileSync(path.join(root, 'js/shared/journey.js'), 'utf8');
+const journey = fs.readFileSync(path.join(root, 'js/core/journey.js'), 'utf8');
 if (!journey.includes('canAccessSheet') || !journey.includes('FREE_THROUGH')) {
   fail('journey.js is missing the free-sheet access policy');
 }

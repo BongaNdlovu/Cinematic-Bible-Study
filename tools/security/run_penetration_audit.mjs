@@ -16,7 +16,7 @@ function read(rel) {
 }
 
 function authConfig() {
-  const src = read("js/shared/auth-config.js");
+  const src = read("js/core/auth-config.js");
   const url = (src.match(/url:\s*"([^"]+)"/) || [])[1];
   const key = (src.match(/publishableKey:\s*"([^"]+)"/) || [])[1];
   if (!url || !key) throw new Error("auth-config.js has no publishable project url");
@@ -181,7 +181,7 @@ async function edgeStaticOutsideCap() {
   const gate = new ExhibitRateGate(memoryState());
   for (let i = 0; i < 240; i += 1) await gateCheck(gate, "203.0.113.20", "/study.html");
   const bible = await gateCheck(gate, "203.0.113.20", "/bible/kjv.json");
-  const script = await gateCheck(gate, "203.0.113.20", "/js/shared/auth.js");
+  const script = await gateCheck(gate, "203.0.113.20", "/js/core/auth.js");
   const model = await gateCheck(gate, "203.0.113.20", "/models/full_body.glb");
   const overflow = await gateCheck(gate, "203.0.113.20", "/index.html");
   if (!bible || !script || !model) throw new Error("a full page budget blocked scripture, script, or model reads");
@@ -424,7 +424,7 @@ async function authCapRedirectAndErrors() {
       };
     }
   };
-  loadScript("js/shared/auth.js");
+  loadScript("js/core/auth.js");
   const visible = shown.join(" ");
   if (/eyJ|secret@example\.com|evil\.example/i.test(visible)) throw new Error("the sign-in error showed the raw callback");
   if (!visible.includes("Sign-in failed")) throw new Error("a callback error produced no visitor-facing message");
@@ -457,7 +457,7 @@ async function clientEventSpamCap() {
       }
     })
   };
-  loadScript("js/shared/analytics.js");
+  loadScript("js/features/analytics.js");
   const queued = Array.from({ length: 100 }, () => ({
     event: "pen",
     sitting: null,
@@ -488,7 +488,7 @@ async function clientSurveySpamAndError() {
       }
     })
   };
-  loadScript("js/shared/analytics.js");
+  loadScript("js/features/analytics.js");
   const fault = await global.window.Insights.insertSurvey({ feedback: "probe" });
   if (!fault || fault.ok !== false || fault.reason !== "error") throw new Error("a survey fault was not closed");
   if (/secret@example|allotted place/i.test(JSON.stringify(fault))) throw new Error("the survey fault returned database text");

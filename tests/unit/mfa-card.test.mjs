@@ -4,7 +4,7 @@ import fs from "node:fs";
 import vm from "node:vm";
 
 const SRC = fs.readFileSync(new URL("../../js/pages/account/mfa.js", import.meta.url), "utf8");
-const CORE = fs.readFileSync(new URL("../../js/shared/core.js", import.meta.url), "utf8");
+const CORE = fs.readFileSync(new URL("../../js/core/core.js", import.meta.url), "utf8");
 
 function el(hidden) {
   return { hidden, textContent: "", value: "", addEventListener() {}, focus() {} };
@@ -131,7 +131,7 @@ test("loading saved progress does not queue a cloud save when nothing changed", 
   };
   const localStorage = memoryStorage({ daniel_historicist_mastery: "[1]", daniel_workbench_v1: "{}", daniel_competency_telemetry_v1: "{}", baProgressAccountId: "u1" });
   vm.runInNewContext(CORE, { window });
-  vm.runInNewContext(read("js/shared/progress-sync.js"), { window, localStorage, sessionStorage: memoryStorage(), document: { readyState: "complete" }, ...idleTimers });
+  vm.runInNewContext(read("js/features/progress-sync.js"), { window, localStorage, sessionStorage: memoryStorage(), document: { readyState: "complete" }, ...idleTimers });
   await window.ProgressSync.pullAndMerge();
   assert.equal(window.ProgressSync.hasPending(), false);
 });
@@ -146,7 +146,7 @@ test("a notes save keeps a newer note another device saved since the last load",
   };
   const window = { addEventListener() {}, ScrollAuth: { getClient: () => db, getUser: () => ({ id: "u1" }), ready: () => new Promise(() => {}), onChange() {} } };
   vm.runInNewContext(CORE, { window });
-  vm.runInNewContext(read("js/shared/study-sync.js"), { window, localStorage: memoryStorage(), document: { readyState: "complete" }, ...idleTimers });
+  vm.runInNewContext(read("js/features/study-sync.js"), { window, localStorage: memoryStorage(), document: { readyState: "complete" }, ...idleTimers });
   await window.StudySync.pullAndMerge();
   server = { notes: { "3": { body: "B", updatedAt: 5 } }, bookmarks: [] };
   window.StudySync.recordNote(5, "mine");
@@ -158,7 +158,7 @@ const bible = { ok: true, status: 200, json: () => Promise.resolve({ books: { Da
 
 function scripture(window, fetch) {
   vm.runInNewContext(CORE, { window });
-  vm.runInNewContext(read("js/study/scripture.js"), { window, fetch, localStorage: memoryStorage() });
+  vm.runInNewContext(read("js/pages/study/scripture.js"), { window, fetch, localStorage: memoryStorage() });
   return window.BAScripture;
 }
 
@@ -186,7 +186,7 @@ test("the learner profile charts are labelled with the question each one counts"
 
 test("a timed-out Supabase request is classified as a timeout", () => {
   const window = {};
-  vm.runInNewContext(read("js/shared/net.js"), { window, navigator: { onLine: true } });
+  vm.runInNewContext(read("js/core/net.js"), { window, navigator: { onLine: true } });
   assert.equal(window.SiteNet.classify({ message: "TimeoutError: signal timed out", code: "" }), "timeout");
 });
 
@@ -198,7 +198,7 @@ test("a failed map tile keeps its own source instead of the image plate", () => 
     hasAttribute() { return false; }
   }
   const document = { readyState: "complete", body: null, addEventListener: (type, fn, capture) => { if (type === "error" && capture) onImageError = fn; } };
-  vm.runInNewContext(read("js/shared/errors.js"), { window: { addEventListener() {} }, document, navigator: { onLine: true }, HTMLImageElement });
+  vm.runInNewContext(read("js/core/errors.js"), { window: { addEventListener() {} }, document, navigator: { onLine: true }, HTMLImageElement });
   const tile = new HTMLImageElement("leaflet-tile");
   onImageError({ target: tile });
   assert.equal(tile.src, "tile.png");

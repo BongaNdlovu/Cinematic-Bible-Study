@@ -30,11 +30,11 @@ It also updates the CSP hashes of any inline script whose text changed. `tools/v
 
 A file is hashed only after the files it references, so its name changes when they do. Files that reference each other in a cycle (the gallery's ES modules import `app.js` and `app.js` imports them) cannot be ordered, so they are hashed together, and since 16 November 2026 each one's hash also covers the text of every file in that batch. Without that, a change to one module would leave the others' names unchanged while their contents (the new import names) changed, and a browser holding the old copy under the one-year `immutable` cache would ask for files that no longer exist. `verify_hash_release.mjs` checks that a change anywhere in a cycle renames the whole cycle.
 
-ES module imports between site files use root paths (`'/js/gallery/tour.js'`): the tool rewrites references by their full path, so it would miss `./tour.js`.
+ES module imports between site files use root paths (`'/js/pages/gallery/tour.js'`): the tool rewrites references by their full path, so it would miss `./tour.js`.
 
 ### CSS minification at deploy
 
-`tools/minify-release-css.mjs` (PostCSS) minifies every stylesheet in the bundle, including those in subfolders such as `css/study/` (since 16 November 2026), which also removes CSS comments. `tools/verify/verify_css_minify.mjs` tests it, including that the study parts shrink by at least a quarter in total.
+`tools/minify-release-css.mjs` (PostCSS) minifies every stylesheet in the bundle, including those in subfolders such as `css/pages/study/parts/` (since 16 November 2026), which also removes CSS comments. `tools/verify/verify_css_minify.mjs` tests it, including that the study parts shrink by at least a quarter in total.
 
 **The study page loads 23 study stylesheets instead of one** (since 16 November 2026). This follows the decision to keep no build step at deploy: each part is fingerprinted and cached for a year like every other asset. Not measured: the effect on the study page's first paint.
 
@@ -50,19 +50,19 @@ JavaScript and HTML are **not** minified. Their comments ship to readers as writ
 |---|---|---|
 | A sitting's full text | When that sitting is opened | `js/content/sheets/index.js` |
 | The certificate maker | When it is first used | `study.html` (`data-certificate`) |
-| The 3D globe on the map | When the globe view is opened | `GLOBE_SRC` in `js/map/map.js` |
+| The 3D globe on the map | When the globe view is opened | `GLOBE_SRC` in `js/pages/map/map.js` |
 | Article images | Lazily (`loading="lazy"`) | `study-app.js`, `loadSheet` |
-| Gallery hall backgrounds | Prefetched, then cached | `prefetchHall` and `setHallBackdrop` in `js/gallery/gallery.js` |
+| Gallery hall backgrounds | Prefetched, then cached | `prefetchHall` and `setHallBackdrop` in `js/pages/gallery/gallery.js` |
 
 ## 3. 3D scenes
 
 | Technique | Detail | Code |
 |---|---|---|
 | Compressed models | Meshopt geometry and WebP textures, built by `npm run compress*` from sources in `models/originals/` (not committed) | `tools/compress/` |
-| Model cache | Least-recently-used, 6 models at most. The statue (`assembled` / `full_body`) is always kept; the 3 most recently shown are never evicted. Evicted models are freed from the GPU. | `GLTF_LRU_CAP`, `evictGltfs`, `disposeGltfScene` in `js/gallery/gallery.js` |
-| Material copies | Copies made for the gold, clay, wireframe and lighting looks are released when a model is removed. Shared originals are left alone. | `releaseExhibitMaterials` in `js/gallery/gallery.js` (added 12 November 2026) |
+| Model cache | Least-recently-used, 6 models at most. The statue (`assembled` / `full_body`) is always kept; the 3 most recently shown are never evicted. Evicted models are freed from the GPU. | `GLTF_LRU_CAP`, `evictGltfs`, `disposeGltfScene` in `js/pages/gallery/gallery.js` |
+| Material copies | Copies made for the gold, clay, wireframe and lighting looks are released when a model is removed. Shared originals are left alone. | `releaseExhibitMaterials` in `js/pages/gallery/gallery.js` (added 12 November 2026) |
 | Hall textures | Up to 4 cached | `HALL_CACHE_CAP` |
-| Download timeouts | A model download that hangs is cancelled through the loading manager's abort signal | The GLB load helper in `js/gallery/gallery.js` (`manager.abortController.abort()`) |
+| Download timeouts | A model download that hangs is cancelled through the loading manager's abort signal | The GLB load helper in `js/pages/gallery/gallery.js` (`manager.abortController.abort()`) |
 
 ## 4. Size budgets (enforced by tests)
 
@@ -87,7 +87,7 @@ JavaScript and HTML are **not** minified. Their comments ship to readers as writ
 ## 6. Motion and battery
 
 - `prefers-reduced-motion` is honoured in 17 stylesheets, and in the scripts that animate: `cinema.js`, `study-app.js`, `map.js`, the gallery and the home shelf.
-- The home notes carousel stops while hovered, focused, paused or when the tab is hidden (`stopped()` in `js/home/home.js`).
+- The home notes carousel stops while hovered, focused, paused or when the tab is hidden (`stopped()` in `js/pages/index/home.js`).
 - The focus timer counts wall-clock time, so background-tab throttling cannot slow it (12 November 2026).
 
 ## 7. Local server

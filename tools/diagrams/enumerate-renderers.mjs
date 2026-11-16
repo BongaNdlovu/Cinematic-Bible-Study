@@ -13,7 +13,7 @@
 import fs from 'fs';
 import vm from 'vm';
 
-const appSrc = fs.readFileSync('js/study/study-app.js', 'utf8');
+const appSrc = fs.readFileSync('js/pages/study/study-app.js', 'utf8');
 
 // ---- 1. what the dispatcher implements -------------------------------------
 const dispatch = appSrc.match(/let body = '';([\s\S]*?)figure\.classList\.add\('chain'\)/);
@@ -48,7 +48,7 @@ sheets.forEach((s) => {
 const path = (kind) => {
   if (kind === 'chain' || kind === 'steps') return 'bodyStory -> .story-card carousel (+ reader)';
   const hit = implemented.find((i) => i.kind === kind);
-  return hit ? `${hit.fn} -> ${kind === 'mindmap' ? 'block (js/study/mindmap.js)' : 'static block'}` : 'bodyChain (fallback) -> static block';
+  return hit ? `${hit.fn} -> ${kind === 'mindmap' ? 'block (js/pages/study/mindmap.js)' : 'static block'}` : 'bodyChain (fallback) -> static block';
 };
 
 console.log('=== A. the seven registered kinds ===\n');

@@ -166,8 +166,8 @@ function loadPassModule(state) {
     fetch: async (url, init) => { state.posted.push({ url, body: JSON.parse(init.body) }); return { ok: state.grantOk, json: async () => ({ ok: true, until: PASS_UNTIL }) }; },
     setTimeout, clearTimeout, Date, Number, Promise, JSON, String
   };
-  vm.runInNewContext(fs.readFileSync(new URL("../../js/shared/core.js", import.meta.url), "utf8"), sandbox);
-  vm.runInNewContext(fs.readFileSync(new URL("../../js/shared/human-pass.js", import.meta.url), "utf8"), sandbox);
+  vm.runInNewContext(fs.readFileSync(new URL("../../js/core/core.js", import.meta.url), "utf8"), sandbox);
+  vm.runInNewContext(fs.readFileSync(new URL("../../js/core/human-pass.js", import.meta.url), "utf8"), sandbox);
   return { HumanPass: win.HumanPass, store };
 }
 
@@ -226,7 +226,7 @@ function pageSandbox({ user, passReady }) {
   if (passReady !== undefined) ctx.HumanPass = { ready: () => Promise.resolve(passReady) };
   ctx.window = ctx;
   const context = vm.createContext(ctx);
-  vm.runInContext(readSource("js/shared/core.js"), context);
+  vm.runInContext(readSource("js/core/core.js"), context);
   return { ctx: context, inserts };
 }
 
@@ -235,7 +235,7 @@ const readSource = (rel) => fs.readFileSync(new URL("../../" + rel, import.meta.
 
 test("a guest error report waits for the human pass and is kept when there is none", async () => {
   const refused = pageSandbox({ user: null, passReady: false });
-  vm.runInContext(readSource("js/shared/ops.js"), refused.ctx);
+  vm.runInContext(readSource("js/core/ops.js"), refused.ctx);
   refused.ctx.SiteOps.report("save_failed", "network");
   await settle(); await settle();
   assert.equal(refused.inserts.length, 0);
@@ -244,7 +244,7 @@ test("a guest error report waits for the human pass and is kept when there is no
   assert.ok(refused.ctx.SiteOps.anonId().length >= 8);
 
   const passed = pageSandbox({ user: null, passReady: true });
-  vm.runInContext(readSource("js/shared/ops.js"), passed.ctx);
+  vm.runInContext(readSource("js/core/ops.js"), passed.ctx);
   passed.ctx.SiteOps.report("save_failed", "network");
   await settle(); await settle();
   assert.equal(passed.inserts.length, 1);
@@ -252,21 +252,21 @@ test("a guest error report waits for the human pass and is kept when there is no
 
 test("a member's error report is sent at once, without the human check", async () => {
   const member = pageSandbox({ user: { id: "u1" }, passReady: false });
-  vm.runInContext(readSource("js/shared/ops.js"), member.ctx);
+  vm.runInContext(readSource("js/core/ops.js"), member.ctx);
   member.ctx.SiteOps.report("save_failed", "network");
   assert.equal(member.inserts.length, 1);
 });
 
 test("a guest survey without a human pass is not sent and frees its slot", async () => {
   const refused = pageSandbox({ user: null, passReady: false });
-  vm.runInContext(readSource("js/shared/analytics.js"), refused.ctx);
+  vm.runInContext(readSource("js/features/analytics.js"), refused.ctx);
   const result = await refused.ctx.Insights.insertSurvey({ rating: 4 });
   assert.equal(result.ok, false);
   assert.equal(refused.inserts.length, 0);
   assert.deepEqual(JSON.parse(refused.ctx.localStorage.getItem("baSurveyTimes") || "[]"), []);
 
   const passed = pageSandbox({ user: null, passReady: true });
-  vm.runInContext(readSource("js/shared/analytics.js"), passed.ctx);
+  vm.runInContext(readSource("js/features/analytics.js"), passed.ctx);
   const sent = await passed.ctx.Insights.insertSurvey({ rating: 4 });
   assert.equal(sent.ok, true);
   assert.equal(passed.inserts.length, 1);

@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { clean, split, cap, num, roman, shade, shade2, rgba, rng, wrapLines, fitLines } from "../../js/home/shelf-helpers.js";
+import { clean, split, cap, num, roman, shade, shade2, rgba, rng, wrapLines, fitLines } from "../../js/pages/index/shelf-helpers.js";
 
 const fakeCtx = () => ({ font: "10px", measureText(t) { return { width: t.length * parseInt(this.font, 10) / 2 }; } });
 

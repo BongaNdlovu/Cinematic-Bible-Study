@@ -35,19 +35,19 @@ console.log('2. Checking HTML files & CSP headers...');
 const pages = ['index.html', 'study.html', 'gallery.html', 'map.html', 'insights.html', 'account.html'];
 pages.forEach(p => {
   const c = fs.readFileSync(path.join(ROOT, p), 'utf8');
-  assert(c.length > 0 && pageLoads(p, 'js/shared/analytics.js'), `${p} must include js/shared/analytics.js`);
+  assert(c.length > 0 && pageLoads(p, 'js/features/analytics.js'), `${p} must include js/features/analytics.js`);
 });
 const indexHtml = fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8');
 assert(!indexHtml.includes('data-insight-optout'), 'index.html must not offer an analytics off switch');
 assert(!indexHtml.includes('Stop usage analytics'), 'index.html must not offer an analytics off switch');
 assert(!indexHtml.includes('admin-insights-link'), 'index.html must not ship the moderator Insights link to readers');
 assert(!indexHtml.includes('admin-reviews-link'), 'index.html must not ship the moderator Admin link to readers');
-assert(fs.readFileSync(path.join(ROOT, 'js/home/home.js'), 'utf8').includes('"admin-insights-link", "insights.html"'), 'home.js must add the Insights link for moderators');
+assert(fs.readFileSync(path.join(ROOT, 'js/pages/index/home.js'), 'utf8').includes('"admin-insights-link", "insights.html"'), 'home.js must add the Insights link for moderators');
 
 const studyHtml = fs.readFileSync(path.join(ROOT, 'study.html'), 'utf8');
-assert(studyHtml.length > 0 && pageLoads('study.html', 'js/shared/analytics.js'), 'study.html must include insights.js');
+assert(studyHtml.length > 0 && pageLoads('study.html', 'js/features/analytics.js'), 'study.html must include insights.js');
 
-const compJs = fs.readFileSync(path.join(ROOT, 'js/study/competency.js'), 'utf8');
+const compJs = fs.readFileSync(path.join(ROOT, 'js/pages/study/competency.js'), 'utf8');
 assert(!compJs.includes('data-insight-optout'), 'competency.js must not offer an analytics off switch');
 assert(!compJs.includes('Stop usage analytics'), 'competency.js must not offer an analytics off switch');
 
@@ -60,7 +60,7 @@ console.log('✓ HTML pages, opt-outs, and CSP headers verified.');
 
 // 3. Check terms and journey version
 console.log('3. Checking terms and journey TERMS_VERSION...');
-const journeyJs = fs.readFileSync(path.join(ROOT, 'js/shared/journey.js'), 'utf8');
+const journeyJs = fs.readFileSync(path.join(ROOT, 'js/core/journey.js'), 'utf8');
 assert(/TERMS_VERSION\s*=\s*6/.test(journeyJs), 'TERMS_VERSION must be 6 in journey.js');
 
 const accountHtml = fs.readFileSync(path.join(ROOT, 'account.html'), 'utf8');
@@ -88,7 +88,7 @@ assert(!accountHtml.includes('id="account-study-mode"'), 'account.html must not 
 assert(accountHtml.includes('id="account-signout"'), 'account.html must keep sign-out on the hub');
 assert(!accountHtml.includes('id="terms-agree"'), 'account.html must not keep a terms checkbox');
 
-const termsJs = fs.readFileSync(path.join(ROOT, 'js/shared/terms.js'), 'utf8');
+const termsJs = fs.readFileSync(path.join(ROOT, 'js/core/terms.js'), 'utf8');
 assert(termsJs.includes('goToAccount'), 'terms.js must send visitors to the Account hub');
 assert(termsJs.includes('account.html'), 'terms.js must route through account.html');
 assert(termsJs.includes('baTermsNext'), 'terms.js must keep the baTermsNext return key');
@@ -99,15 +99,15 @@ assert(!termsJs.includes('This exhibit is closed'), 'terms.js must not say the e
 ['index.html', 'study.html', 'gallery.html', 'map.html', 'insights.html', '404.html'].forEach((p) => {
   const c = fs.readFileSync(path.join(ROOT, p), 'utf8');
   const navSrc = p === 'map.html'
-    ? fs.readFileSync(path.join(ROOT, 'js/map/map.js'), 'utf8')
+    ? fs.readFileSync(path.join(ROOT, 'js/pages/map/map.js'), 'utf8')
     : c.includes('data-site-nav')
-      ? fs.readFileSync(path.join(ROOT, 'js/shared/cinema.js'), 'utf8')
+      ? fs.readFileSync(path.join(ROOT, 'js/core/cinema.js'), 'utf8')
       : c;
   assert(navSrc.includes('account.html'), `${p} must link to the Account hub`);
   assert(!c.includes('id="terms-overlay"'), `${p} must not inject a terms overlay`);
 });
 
-const authJs = fs.readFileSync(path.join(ROOT, 'js/shared/auth.js'), 'utf8');
+const authJs = fs.readFileSync(path.join(ROOT, 'js/core/auth.js'), 'utf8');
 assert(authJs.includes('account.html'), 'auth.js must return Google OAuth to the Account hub');
 assert(authJs.includes("provider: \"google\""), 'auth.js must sign in with Google');
 ['supabase-reviews.sql', 'supabase-auth-guard.sql', 'supabase-hardening-2026-10.sql', 'supabase-moderator-require-mfa.sql'].forEach((f) => {
@@ -121,22 +121,22 @@ assert(!authJs.includes('client.auth.signUp('), 'auth.js must not create email a
 assert(!authJs.includes('resetPasswordForEmail'), 'auth.js must not send password-reset email');
 assert(!authJs.includes('auth-sign-out'), 'auth.js must not draw a Sign out button on other pages');
 assert(!authJs.includes('clearPendingTerms'), 'auth.js must not wipe a once-agreed terms record on sign-out');
-const insightsSrc = fs.readFileSync(path.join(ROOT, 'js/shared/analytics.js'), 'utf8');
+const insightsSrc = fs.readFileSync(path.join(ROOT, 'js/features/analytics.js'), 'utf8');
 assert(insightsSrc.includes('account-hub'), 'insights.js must skip the floating profile card on the Account hub');
 
-const homeJs = fs.readFileSync(path.join(ROOT, 'js/home/home.js'), 'utf8');
+const homeJs = fs.readFileSync(path.join(ROOT, 'js/pages/index/home.js'), 'utf8');
 assert(homeJs.includes('requestSignIn'), 'home.js must send Home sign-in to the Account hub');
-const reviewsSrc = fs.readFileSync(path.join(ROOT, 'js/shared/reviews.js'), 'utf8');
+const reviewsSrc = fs.readFileSync(path.join(ROOT, 'js/features/reviews.js'), 'utf8');
 assert(reviewsSrc.includes('requestSignIn'), 'reviews.js must send review sign-in to the Account hub');
 console.log('✓ TERMS_VERSION and Account hub terms verified.');
 
 console.log('3b. Checking public config does not ship operator identity or a Maps key paste...');
-const authCfg = fs.readFileSync(path.join(ROOT, 'js/shared/auth-config.js'), 'utf8');
+const authCfg = fs.readFileSync(path.join(ROOT, 'js/core/auth-config.js'), 'utf8');
 assert(!authCfg.includes('moderatorEmails'), 'auth-config.js must not ship a moderator email list');
 assert(!/@gmail\.com/i.test(authCfg), 'auth-config.js must not include a Gmail address');
 assert(authJs.includes('is_review_moderator'), 'auth.js must ask the server who is a moderator');
 assert(!authJs.includes('moderatorEmails'), 'auth.js must not compare against a public email list');
-const mapJs = fs.readFileSync(path.join(ROOT, 'js/map/map.js'), 'utf8');
+const mapJs = fs.readFileSync(path.join(ROOT, 'js/pages/map/map.js'), 'utf8');
 assert(!mapJs.includes('Paste your Google Maps API key'), 'map.js must not ask visitors to paste a Maps API key');
 assert(!mapJs.includes("data-base='google'"), 'map.js must not show a Google basemap button');
 assert(mapJs.includes("data-base='satellite'"), 'map.js must keep Satellite');
@@ -144,7 +144,7 @@ assert(mapJs.includes("data-base='streets'"), 'map.js must keep Streets');
 console.log('✓ Public config and map chrome stay visitor-safe.');
 
 // 4. Test Insights tracker logic
-console.log('4. Testing js/shared/analytics.js tracker logic...');
+console.log('4. Testing js/features/analytics.js tracker logic...');
 
 // Mock browser globals
 const localStorageStore = {};
@@ -265,7 +265,7 @@ try {
 } catch (e) {}
 
 // Load insights.js in this sandbox
-const insightsCode = fs.readFileSync(path.join(ROOT, 'js/shared/analytics.js'), 'utf8');
+const insightsCode = fs.readFileSync(path.join(ROOT, 'js/features/analytics.js'), 'utf8');
 const runTracker = new Function(insightsCode);
 runTracker();
 
@@ -406,7 +406,7 @@ const dashProfiles = [
 
 // Load insights.js dashboard in sandbox
 const dashCode = fs.readFileSync(path.join(ROOT, 'js/pages/dashboard/dashboard.js'), 'utf8');
-new Function(fs.readFileSync(path.join(ROOT, 'js/shared/core.js'), 'utf8'))();
+new Function(fs.readFileSync(path.join(ROOT, 'js/core/core.js'), 'utf8'))();
 new Function(fs.readFileSync(path.join(ROOT, 'js/pages/dashboard/dashboard-format.js'), 'utf8'))();
 const runDash = new Function(dashCode);
 runDash();
@@ -600,12 +600,12 @@ assert(studyAppJs.includes("readingTimer("), 'study-app must call readingTimer')
 assert(studyAppJs.includes("baReferredSitting"), 'study-app must support baReferredSitting in resolveStartSheet');
 assert(studyAppJs.includes("maybePulse()"), 'study-app must show the last-sitting pulse without advancing');
 
-const workbenchJs = fs.readFileSync(path.join(ROOT, 'js/study/workbench.js'), 'utf8');
+const workbenchJs = fs.readFileSync(path.join(ROOT, 'js/pages/study/workbench.js'), 'utf8');
 assert(workbenchJs.includes("track('workbench_task'"), 'workbench missing workbench_task track');
 assert(workbenchJs.includes("pass: true"), 'workbench missing pass: true track');
 assert(workbenchJs.includes("pass: false"), 'workbench missing pass: false track');
 
-const certJs = fs.readFileSync(path.join(ROOT, 'js/study/certificate.js'), 'utf8');
+const certJs = fs.readFileSync(path.join(ROOT, 'js/pages/study/certificate.js'), 'utf8');
 assert(certJs.includes("track('feature_use'"), 'certificate missing feature_use track');
 assert(certJs.includes("cert-review-nps"), 'certificate missing NPS select');
 assert(certJs.includes("cert-review-changed"), 'certificate missing changed textarea');
@@ -613,7 +613,7 @@ assert(certJs.includes('Could not save. Try again.'), 'certificate must show a s
 assert(!certJs.includes('Thank you! Your feedback has been recorded.'), 'certificate must not thank the learner after a failed save');
 assert(certJs.includes('res.ok === false'), 'certificate must treat a false submitReview result as a failure');
 
-const reviewsJs = fs.readFileSync(path.join(ROOT, 'js/shared/reviews.js'), 'utf8');
+const reviewsJs = fs.readFileSync(path.join(ROOT, 'js/features/reviews.js'), 'utf8');
 assert(!reviewsJs.includes('SEED_REVIEWS'), 'reviews.js must not keep seed witnesses');
 assert(reviewsJs.includes('Could not load reviews.'), 'reviews.js must say when witnesses failed to load');
 assert(reviewsJs.includes('res && res.error'), 'reviews.js must check approve/hide errors');

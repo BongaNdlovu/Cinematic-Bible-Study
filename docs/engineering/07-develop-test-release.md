@@ -26,7 +26,7 @@ The server binds `127.0.0.1`. It starts at port 8000, or at `PORT` if that is se
 | `npm run test:browser` | `tools/verify/run_browser_checks.mjs`: starts one site server and runs the 29 browser checks that pass today (see [Browser checks](#browser-checks)). Add `--include-quarantined` to run the one known-failing check too, or `--only=verify_x.mjs,verify_y.mjs` to run named ones. |
 | `npm run test:security` | 23 penetration-style checks (`tools/security/run_penetration_audit.mjs`). Since 13 November 2026 PT-19 and PT-20 prove that guest writes without a human pass are refused, so they no longer leave rows behind; `exhibit_prune_test_rows()` still clears any that appear. |
 | `npm run smoke` | Smoke test of the live site (`tools/smoke.mjs`) |
-| `npm run build:tailwind` | Rebuild `css/study-tailwind.css` |
+| `npm run build:tailwind` | Rebuild `css/pages/study/study-tailwind.css` |
 | `npm run compress`, `compress:beasts`, `compress:daniel8`, `compress:visions`, `compress:daniel11` | Rebuild compressed 3D models from `models/originals/` |
 | `npm run deploy:pages` | Run the deploy script by hand |
 | `npm run rollback` | Restore the previous successful production deployment |
@@ -36,7 +36,7 @@ The server binds `127.0.0.1`. It starts at port 8000, or at `PORT` if that is se
 | Edit | Then run |
 |---|---|
 | `js/content/sheets-data.js` | `node tools/build_study_sheets.mjs` (writes `js/content/sheets/`) |
-| `css/study-tailwind-src.css` or `tailwind.study.config.js` | `npm run build:tailwind` |
+| `css/pages/study/study-tailwind-src.css` or `tailwind.study.config.js` | `npm run build:tailwind` |
 | Shelf content | `node tools/build-shelf-data.mjs` (the deploy runs it too) |
 | `js/content/glossary-enrichment-overrides.json` | `node tools/verify/build_glossary_enrichment.mjs` |
 
@@ -81,7 +81,7 @@ Thirty-four `tools/verify/verify_*.mjs` files were not part of `npm test` before
 | Checkpoints hold the book until answered (commit `788ab13`) | `verify_book_reader` | Count checkpoint plates as plates, pass the checkpoints before walking the book, and a new check (M2.0) that an unanswered checkpoint holds the book |
 | Some scripts only looked for Chrome in Windows folders | `verify_hall_mural`, `verify_horizon`, and the other Chrome-driven scripts | `chromePath()` in `tools/verify/_server.mjs`: `CHROME_PATH`, then an installed Chrome, then Playwright's Chromium |
 
-`run_browser_checks.mjs` starts one site server and passes its address to every script as `BASE` (and as `--base` where a script takes it), so no script depends on its own fixed port. A failing script's last 30 lines are printed. The shared pieces live in `tools/verify/_server.mjs`: `cdpTargets()` (waits up to 30 s for Chrome's debugging port instead of a fixed sleep), `signedInScript()` (test sign-in, consent, onboarding and terms, with `TERMS_VERSION` read from `js/shared/journey.js` so it cannot go stale), `QA_MOCK`, and `chromePath()`.
+`run_browser_checks.mjs` starts one site server and passes its address to every script as `BASE` (and as `--base` where a script takes it), so no script depends on its own fixed port. A failing script's last 30 lines are printed. The shared pieces live in `tools/verify/_server.mjs`: `cdpTargets()` (waits up to 30 s for Chrome's debugging port instead of a fixed sleep), `signedInScript()` (test sign-in, consent, onboarding and terms, with `TERMS_VERSION` read from `js/core/journey.js` so it cannot go stale), `QA_MOCK`, and `chromePath()`.
 
 **Still quarantined: `verify_book_reader`.** Its structural problems are fixed, and the new checkpoint check passes on every sitting. What still fails are timing and geometry checks: a step read in the middle of a turn (M2.3), the wheel throttle (M3.7), the mode after a resize (M2.7), the step count after a font-size change (M3.10), and a view height 2 px off its rule (M2.8). A separate walk with a short pause between turns reached the last step of sitting 0 on a phone, so the reader itself works. Not checked: each of those assertions one by one.
 

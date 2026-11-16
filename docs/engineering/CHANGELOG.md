@@ -14,6 +14,25 @@ Entry template:
 
 ---
 
+## 2026-11-16 — Architecture plan, step 5.1: the target folder layout
+
+**Why:** a file's folder should say how far a change to it reaches, so any file can be found from the feature's name.
+
+**What changed:**
+
+- **JS.** `js/shared/` was split into `js/core/` (13 files every page needs to start: `core.js`, `sentry.js`, `cinema.js`, `consent.js`, `journey.js`, `auth-config.js` and its example, `auth.js`, `net.js`, `errors.js`, `ops.js`, `human-pass.js`, `terms.js`) and `js/features/` (9 reader-facing features used by two or more pages: `desk.js`, `desk-rows.js`, `analytics.js`, `reviews.js`, `progress-sync.js`, `study-sync.js`, `onboard.js`, `ui-sound.js`, `ui-click-sound.js`). `js/study/`, `js/gallery/`, `js/map/` and `js/home/` moved under `js/pages/` as `study/`, `gallery/`, `map/` and `index/`, next to each page's entry.
+- **CSS mirrors JS.** `css/core/` (`cinema`, `consent`, `terms-gate`, `site`), `css/features/` (`desk`, `insight-card`, `reviews`, `onboard`, `account`), and `css/pages/<page>/`. The 23 numbered study parts are in `css/pages/study/parts/`, so `tests/unit/study-css.test.mjs` can still check that folder against `study.html`'s links.
+- 125 files moved by the same one-pass script. Every file in `js/core/`, `js/features/`, `css/core/` and `css/features/` is loaded by two or more pages (the one exception is `auth-config.example.js`, a template no page loads).
+- **Relative image paths.** `css/core/site.css` points at `../../assets/site/hall-bg.jpg` now. The script's first pass also rewrote seven `url(%23n)` fragment references inside inline SVG data URIs, which would have broken the noise filters; they were restored, and a check that every relative `url()` in `css/` resolves to a file found none missing.
+- **Tests that named paths in other ways:** `tests/unit/sentry.test.mjs` built `js/shared/${name}` in a template string, `verify_css_minify.mjs` filtered on the folder name `study`, and `study-css.test.mjs` matched `css\/study\/` in a regular expression. Each now uses the new paths.
+- `gallery.html`'s inline script names the gallery module, so its CSP hash was regenerated again.
+
+**Handbook updated:** 03 (top level, pages and their scripts, the layout rule, inside `js/pages/`, where new work goes), and paths across 02, 04, 05, 06 and 07.
+
+**Checked here:** on Windows: lint exits 0, `npm run test:unit` passes 180 of 180 (after the `sentry.test.mjs` path fix; before it, that file failed to load), every `npm test` script passes (after the CSP hash update and the `verify_css_minify.mjs` fix), and `npm run test:browser` passes 30 of 30. A check that every `js/` and `css/` path named in the pages, code and tests exists on disk found only synthetic test names.
+
+**Status:** on branch `arch/phase-5-layout`, not deployed.
+
 ## 2026-11-16 — Architecture plan, step 5.4: lesson data in `js/content/`
 
 **Why:** content editors and engineers worked in the same folders, and the map page loaded data from the study page's folder.

@@ -9,7 +9,7 @@ const ROOT = path.resolve(__dirname, '../..');
 
 console.log('--- RUNNING RATE LIMIT VERIFICATION ---');
 
-const insights = fs.readFileSync(path.join(ROOT, 'js/shared/analytics.js'), 'utf8');
+const insights = fs.readFileSync(path.join(ROOT, 'js/features/analytics.js'), 'utf8');
 assert(insights.includes('const BATCH = 10'), 'insights flush batch must be 10');
 assert(insights.includes('const FLUSH_MS = 10000'), 'insights flush interval must be 10000');
 assert(insights.includes('const POSTS_PER_MIN = 12'), 'insights must cap 12 posts/min');
@@ -19,10 +19,10 @@ assert(insights.includes('takeFlushSlot'), 'insights must gate flushes');
 assert(insights.includes('takeSurveySlot'), 'insights must gate surveys');
 assert(insights.includes('anon_id: anonId()'), 'survey insert must send anon_id');
 
-const progress = fs.readFileSync(path.join(ROOT, 'js/shared/progress-sync.js'), 'utf8');
+const progress = fs.readFileSync(path.join(ROOT, 'js/features/progress-sync.js'), 'utf8');
 assert(progress.includes('const PUSH_GAP_MS = 6000'), 'progress upsert gap must be 6s (10/min)');
 
-const reviews = fs.readFileSync(path.join(ROOT, 'js/shared/reviews.js'), 'utf8');
+const reviews = fs.readFileSync(path.join(ROOT, 'js/features/reviews.js'), 'utf8');
 assert(reviews.includes('const REVIEW_MAX = 3'), 'reviews must cap 3/day');
 assert(reviews.includes('takeSurveySlot'), 'review survey insert must use survey slot');
 assert(reviews.includes('anon_id:'), 'review survey insert must send anon_id');
@@ -79,7 +79,7 @@ const reviewsSql = fs.readFileSync(path.join(ROOT, 'tools/supabase-reviews.sql')
 assert(reviewsSql.includes('exhibit_reviews_rate_gate'), 'reviews setup must include reviews write cap');
 assert(reviewsSql.includes("interval '1 day') >= 3"), 'reviews setup reviews cap 3/day');
 
-const auth = fs.readFileSync(path.join(ROOT, 'js/shared/auth.js'), 'utf8');
+const auth = fs.readFileSync(path.join(ROOT, 'js/core/auth.js'), 'utf8');
 assert(auth.includes('const AUTH_PER_HOUR = 5'), 'auth must cap 5 Google sign-in starts/hour');
 assert(auth.includes('takeAuthSlot'), 'auth must gate signIn');
 assert(auth.includes('rate_limit'), 'auth must return rate_limit when capped');
