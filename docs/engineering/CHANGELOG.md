@@ -5,6 +5,15 @@ Newest first. Every change to the site adds an entry here, in the same change. E
 Entry template:
 
 ```
+## YYYY-MM-DD — short title
+**Why:** one or two sentences.
+**What changed:** bullet list, with file paths.
+**Handbook updated:** chapter numbers.
+**Status:** committed / deployed / not yet deployed.
+```
+
+---
+
 ## 2026-11-16 — Deleting an account clears its own parked changes
 
 **Why:** the user decided that deleting an account should also remove that account's own stash keys from the device. Before, `baProgressStash:<id>` and `baStudySyncStash:<id>` for the deleted account stayed behind, waiting for an owner who no longer exists.
@@ -21,15 +30,6 @@ Entry template:
 **Checked here:** on `arch/phase-0-safety-net`, on Windows: lint exits 0, `npm run test:unit` passes 115 of 115, every `npm test` script passes, and `npm run test:browser` passes 29 of 29.
 
 **Status:** committed on `arch/phase-0-safety-net`, merged upward. Not deployed.
-
-## YYYY-MM-DD — short title
-**Why:** one or two sentences.
-**What changed:** bullet list, with file paths.
-**Handbook updated:** chapter numbers.
-**Status:** committed / deployed / not yet deployed.
-```
-
----
 
 ## 2026-11-16 — Architecture plan, Phase 2: dead code and old papers
 
