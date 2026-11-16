@@ -295,10 +295,16 @@ async function verifyMapReturn(client) {
   // Verify actual return navigation to study.html?sheet=7#sheet-article and scroll positioning
   console.log('Testing return navigation to study.html?sheet=7#sheet-article and scroll positioning...');
   await client.send('Page.navigate', { url: `${SERVER_BASE}/study.html?sheet=7#sheet-article` });
-  for (let waited = 0; waited < 30000; waited += 250) {
+  let lastTop = null;
+  let steady = 0;
+  for (let waited = 0; waited < 30000 && steady < 4; waited += 250) {
     await sleep(250);
-    const settled = await client.eval('window.scrollY > 0').catch(() => false);
-    if (settled) break;
+    const top = await client.eval(`(() => {
+      const el = document.getElementById('sheet-article');
+      return window.scrollY > 0 && el ? Math.round(el.getBoundingClientRect().top) : null;
+    })()`).catch(() => null);
+    steady = top !== null && top === lastTop ? steady + 1 : 0;
+    lastTop = top;
   }
   const returnScrollCheck = await client.eval(`(() => {
     const el = document.getElementById('sheet-article');
