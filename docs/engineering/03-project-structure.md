@@ -60,7 +60,7 @@ grep -oE '<script[^>]+src="[^"]+"' study.html
 
 | Folder | What lives there | Main files |
 |---|---|---|
-| `js/shared/` | Code used by many pages: sign-in, access rules, sync, analytics, errors, network, consent, terms, desk, reviews, account | `journey.js`, `auth.js`, `progress-sync.js`, `study-sync.js`, `quiz-gate.js`, `insights.js`, `ops.js`, `human-pass.js` (guest Turnstile pass), `net.js`, `errors.js`, `consent.js`, `desk.js`, `reviews.js`, `account.js`, `mfa.js`, `sentry.js` |
+| `js/shared/` | Code used by many pages. `core.js` loads first on every page (before `cinema.js`; on `study.html` before `book-open.js`) and holds the one copy of each small helper: `escapeHtml`, `isLocalDevHost`, `currentUser`, `signedIn`, `authClient` and the focus trap (`window.SiteCore`). Also: sign-in, access rules, sync, analytics, errors, network, consent, terms, desk, reviews, account | `journey.js`, `auth.js`, `progress-sync.js`, `study-sync.js`, `quiz-gate.js`, `insights.js`, `ops.js`, `human-pass.js` (guest Turnstile pass), `net.js`, `errors.js`, `consent.js`, `desk.js`, `reviews.js`, `account.js`, `mfa.js`, `sentry.js` |
 | `js/study/` | The study desk | `study-app.js` (the page controller), `book-reader.js`, `mindmap.js`, `task-flow.js`, `term-overlay.js`, `workbench.js`, `competency.js`, `certificate.js`, `scripture.js` |
 | `js/study/sheets/` | The 11 sittings, one file each, plus `index.js` (the list and the on-demand loader). **Generated** from `js/study/sheets-data.js` by `node tools/build_study_sheets.mjs`. | `index.js`, `sheet-0.js` … `sheet-10.js` |
 | `js/map/` | The map | `map.js` (engine), `map-data.js` (kingdoms, cities, events, routes), `globe.js` (3D globe view) |
@@ -88,6 +88,7 @@ The deploy script refuses to ship if any of these are in the bundle.
 | `tools/build_study_sheets.mjs`, `tools/build-shelf-data.mjs` | Generate the per-sitting files and the shelf data |
 | `tools/supabase-*.sql` | Database migrations, run by hand in the Supabase SQL editor |
 | `tools/verify/` | The regression suite behind `npm test`, plus screenshot helpers. `run_browser_checks.mjs` runs the browser checks (`npm run test:browser`), `verify_wiring.mjs` fails when a `verify_*.mjs` file is run nowhere, and `verify_equivalence.mjs` proves that a move changed no code or CSS rule |
+| `tools/storage-keys.mjs` | The list of every browser storage key, with which ones sign-out and account deletion clear. `tests/unit/storage-keys.test.mjs` checks it against the code, `privacy.html`, `PERSONAL_KEYS` and `SITE_KEYS` |
 | `tools/measure_baseline.mjs` | Prints file sizes, function lengths and duplicate function names (see [the architecture baseline](architecture-baseline.md)) |
 | `tools/security/run_penetration_audit.mjs` | `npm run test:security` |
 | `tools/smoke.mjs` | Live-site smoke test (CI after each deploy, and every 15 minutes) |
@@ -107,7 +108,7 @@ The deploy script refuses to ship if any of these are in the bundle.
 | A Strong's line or verse highlights | `bible/strongs-daniel.json`, `bible/sheet-passages.json` |
 | A map year, city, event or route | `js/map/map-data.js` |
 | A 3D artifact | `models/*.glb` (compressed with `tools/compress/`), plus `ASSET_REGISTRY` in `js/gallery/app.js`, plus a plate and thumbnail under `assets/` |
-| Code shared by pages | `js/shared/`, then add the `<script>` tag to each page that needs it |
+| Code shared by pages | `js/shared/`, then add the `<script>` tag to each page that needs it. A small helper used by two or more files (escaping, sign-in reads, focus handling) goes in `js/shared/core.js`; local copies call it, they do not repeat its body |
 | A database change | A new `tools/supabase-<topic>.sql`, run in Supabase **before** deploying the client that needs it |
-| A new storage key | Add it to the storage table in `privacy.html`, and to `PERSONAL_KEYS` in `js/shared/auth.js` if sign-out must clear it |
+| A new storage key | Add it to `tools/storage-keys.mjs` and to the storage table in `privacy.html`; also to `PERSONAL_KEYS` in `js/shared/auth.js` if sign-out must clear it, and to `SITE_KEYS` in `js/shared/account.js` if account deletion must clear it. `npm run test:unit` fails until all of them agree |
 | A test | `tests/unit/*.test.mjs` (fast, `node:test`) or `tools/verify/verify_*.mjs` (browser and integration, then add it to the `test` script in `package.json`) |
