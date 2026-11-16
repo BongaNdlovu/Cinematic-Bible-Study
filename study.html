@@ -16,15 +16,12 @@
   <meta name="twitter:description" content="11 classroom-ready Daniel sittings with primary sources, KJV scripture, interactive proof workbenches, facilitator notes, and printable certificate.">
   <meta name="twitter:image" content="https://cinematic-bible-study-daniel.pages.dev/assets/site/hero-main.jpg">
 
-  <!-- Editorial & Monospace Typography -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400;1,6..72,500&display=swap" rel="stylesheet">
 
-  <!-- Tailwind CSS (precompiled with Tailwind CLI from tailwind.study.config.js — run: npx tailwindcss -c tailwind.study.config.js -i css/study-tailwind-src.css -o css/study-tailwind.css --minify) -->
   <link rel="stylesheet" href="css/study-tailwind.css?v=cx1">
 
-  <!-- Native Web Audio API used for Soft Pomodoro Completion Chime -->
 
   <link rel="stylesheet" href="css/terms.css?v=cx1">
   <link rel="stylesheet" href="css/book-reader.css?v=cx1">
@@ -79,7 +76,6 @@
     <img class="atm-statue" fetchpriority="low" decoding="async" src="assets/study/statue-nebuchadnezzar.jpg" alt="Atmospheric background - Statue of Nebuchadnezzar" aria-hidden="true">
   </div>
 
-  <!-- Atmospheric Focus Layer: moving weather canvas -->
   <canvas id="weather-canvas" class="weather-canvas opacity-0"></canvas>
 
   <div id="sitting-guide" class="sitting-guide" hidden role="dialog" aria-modal="true" aria-labelledby="sitting-guide-title">
@@ -123,16 +119,13 @@
     </div>
   </div>
 
-  <!-- Top Progress Bar -->
   <div class="fixed top-0 left-0 right-0 z-50 h-1 bg-paper-200 dark:bg-paper-900">
     <div id="progress-bar" class="h-full bg-ink-900 dark:bg-paper-100 w-0 transition-all duration-300"></div>
   </div>
 
-  <!-- Primary Sticky Navigation Header -->
   <header class="study-topbar sticky top-0 z-40 bg-paper-50/95 dark:bg-paper-950/95 backdrop-blur-md border-b border-paper-200 dark:border-paper-900">
     <div class="study-topbar-inner">
       
-      <!-- Brand & Table of Contents Toggle -->
       <div class="study-brand">
         <button data-action="toc" class="p-2 -ml-2 rounded hover:bg-paper-200/70 dark:hover:bg-paper-900 text-ink-800 dark:text-paper-200 transition-colors flex items-center space-x-2 text-sm font-medium shrink-0" aria-label="Open Syllabus">
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -159,7 +152,6 @@
         </div>
       </div>
 
-      <!-- Controls: Competency, atmosphere, type, theme -->
       <div class="study-tools">
         <span class="auth-slot" data-auth-slot data-auth-variant="study"></span>
         <span id="header-competency-pill" class="header-competency-pill" title="Current learning competency">
@@ -167,7 +159,6 @@
           <span id="header-competency-text">Verifying the Prophetic Year-Day Metric</span>
         </span>
 
-        <!-- Consolidated Desk Atmosphere Drawer Trigger -->
         <button data-action="atmosphere" id="btn-atmosphere-toggle" class="flex items-center space-x-1.5 px-2.5 py-1 rounded-md border border-amber-600/40 bg-amber-500/10 text-amber-900 dark:text-amber-300 font-mono text-xs hover:bg-amber-500/20 transition-colors" title="Desk Atmosphere: Weather and Timer">
           <span class="relative flex h-2 w-2">
             <span id="pomo-ping" class="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-500 opacity-75 hidden"></span>
@@ -178,18 +169,15 @@
           <span id="pomo-header-time" class="text-[11px] opacity-80">05:00</span>
         </button>
 
-        <!-- Font Size Adjuster -->
         <div class="flex items-center border border-paper-300 dark:border-paper-800 rounded bg-paper-100/60 dark:bg-paper-900/60 overflow-hidden text-xs font-mono">
           <button data-action="font" data-arg="-1" class="px-2 py-1 hover:bg-paper-200 dark:hover:bg-paper-800 text-ink-700 dark:text-paper-300" title="Decrease font size">A-</button>
           <span id="font-size-indicator" class="px-1.5 py-1 text-[10px] text-ink-500 dark:text-paper-400 border-l border-r border-paper-300 dark:border-paper-800 select-none">100%</span>
           <button data-action="font" data-arg="1" class="px-2 py-1 hover:bg-paper-200 dark:hover:bg-paper-800 text-ink-700 dark:text-paper-300" title="Increase font size">A+</button>
         </div>
 
-        <!-- Print & Progress Buttons -->
         <button type="button" id="btn-progress-header" class="px-2 py-1 rounded border border-paper-300 dark:border-paper-800 hover:border-amber-600 text-xs font-mono text-ink-700 dark:text-paper-300" title="My Progress & Export">📊 Progress</button>
         <button id="btn-print-header" class="px-2 py-1 rounded border border-paper-300 dark:border-paper-800 hover:border-amber-600 text-xs font-mono text-ink-700 dark:text-paper-300" title="Print Current Sitting">🖨️ Print</button>
 
-        <!-- Theme Mode Cycler -->
         <button data-action="theme" id="theme-btn" class="p-1.5 rounded hover:bg-paper-200/60 dark:hover:bg-paper-900 text-xs font-mono text-ink-700 dark:text-paper-300" title="Toggle Theme">
           <span id="theme-icon">◑ Chiaroscuro</span>
         </button>
@@ -197,7 +185,6 @@
     </div>
   </header>
 
-  <!-- Slide-down / Expandable Desk Atmosphere & Reconstruction Dock -->
   <aside id="pomo-dock" class="fixed top-16 right-3 sm:right-8 z-40 w-84 sm:w-96 bg-paper-50/95 dark:bg-paper-900/95 backdrop-blur-xl border border-amber-500/30 dark:border-amber-400/20 rounded-2xl shadow-2xl p-4 sm:p-5 transform transition-all duration-300 translate-y-[-120%] opacity-0 pointer-events-none">
     <div class="flex items-center justify-between pb-2.5 border-b border-paper-200 dark:border-paper-800 mb-3">
       <div class="flex items-center space-x-2">
@@ -209,7 +196,6 @@
       </div>
     </div>
 
-    <!-- Focus Atmosphere Selector -->
     <div class="mb-3 p-2 rounded-xl bg-paper-100/60 dark:bg-paper-950/60 border border-paper-200 dark:border-paper-800">
       <div class="flex items-center justify-between text-[10px] font-mono mb-1.5">
         <span class="text-ink-500 dark:text-paper-400 uppercase tracking-wider">Atmospheric Weather</span>
@@ -230,7 +216,6 @@
       <button data-action="weather" data-arg="off" id="weather-btn-off" class="mt-2 w-full bg-transparent border-0 p-1 text-[9px] font-mono uppercase tracking-wider text-ink-500 dark:text-paper-500 hover:text-amber-400">Atmosphere off</button>
     </div>
 
-    <!-- Timer Countdown and Controls with Circular Progress Ring -->
     <div class="text-center py-1">
       <div class="relative w-36 h-36 mx-auto my-1 flex items-center justify-center">
         <svg class="w-full h-full" viewBox="0 0 160 160">
@@ -261,7 +246,6 @@
         </button>
       </div>
 
-      <!-- Presets -->
       <div class="flex items-center justify-center gap-1.5 font-mono text-[11px] text-ink-600 dark:text-paper-400 mb-3">
         <span class="mr-1">Presets:</span>
         <button data-action="pomodoro-minutes" data-arg="3" class="px-2 py-0.5 rounded bg-paper-200 dark:bg-paper-800 hover:bg-amber-500/20">3m</button>
@@ -271,7 +255,6 @@
       </div>
     </div>
 
-    <!-- Focus Session Live Progress & Atmospheric Focus Compass -->
     <div class="pt-3 border-t border-paper-200 dark:border-paper-800 space-y-3 font-mono text-xs">
       <div class="flex items-center justify-between text-[11px] text-ink-600 dark:text-paper-400">
         <span id="pomo-status-sub" class="truncate font-sans text-xs">Awaiting Focus Session...</span>
@@ -280,7 +263,6 @@
         <div id="pomo-progress-line" class="h-full bg-amber-600 dark:bg-amber-400 w-0 transition-all duration-300"></div>
       </div>
 
-      <!-- Atmospheric Focus Meter -->
       <div class="pt-1">
         <div class="flex items-center justify-between text-[10px] text-ink-500 dark:text-paper-400 mb-1.5 uppercase tracking-wider">
           <span>Attention Weather:</span>
@@ -297,7 +279,6 @@
         </p>
       </div>
 
-      <!-- Telemetry & Diagnostic Placement Actions -->
       <div class="pt-2 border-t border-paper-200 dark:border-paper-800 flex items-center justify-between text-xs">
         <button type="button" data-action="placement" class="text-[11px] font-mono text-ink-600 dark:text-paper-400 hover:text-amber-600 underline">
           Learning Track
@@ -307,7 +288,6 @@
         </button>
       </div>
 
-      <!-- Archaeological Inspection Trigger -->
       <div class="pt-1 flex items-center justify-between">
         <span class="text-[10px] text-ink-500">Historical Context:</span>
         <button type="button" data-action="artifact-open" class="text-[11px] text-amber-800 dark:text-amber-300 hover:underline flex items-center gap-1 font-sans">
@@ -317,7 +297,6 @@
     </div>
   </aside>
 
-  <!-- Table of Contents Slide-Out Drawer -->
   <div id="toc-overlay" data-action="toc" class="fixed inset-0 bg-black/40 backdrop-blur-sm z-50 opacity-0 pointer-events-none transition-opacity duration-300"></div>
   <aside id="toc-drawer" class="fixed top-0 left-0 bottom-0 w-80 sm:w-96 bg-paper-50 dark:bg-paper-950 z-50 shadow-2xl border-r border-paper-200 dark:border-paper-900 transform -translate-x-full transition-transform duration-300 ease-out flex flex-col">
     <div class="p-6 border-b border-paper-200 dark:border-paper-900 flex items-center justify-between">
@@ -328,12 +307,10 @@
       <button data-action="toc" class="p-2 rounded hover:bg-paper-200 dark:hover:bg-paper-900 text-ink-600 dark:text-paper-400">✕</button>
     </div>
 
-    <!-- Syllabus Unit List -->
     <div class="flex-1 overflow-y-auto p-4 space-y-1" id="toc-unit-list">
       <!-- Injected by JavaScript renderToc() -->
     </div>
 
-    <!-- Footer Stats -->
     <div class="p-5 border-t border-paper-200 dark:border-paper-900 bg-paper-100/50 dark:bg-paper-900/40">
       <div class="flex items-center justify-between text-xs font-mono text-ink-600 dark:text-paper-400 mb-2">
         <span>Codex Mastery</span>
@@ -377,7 +354,6 @@
     <div class="sitting-layout">
   <main class="sitting-main relative z-10 py-6 sm:py-10">
     
-    <!-- Bible on Hand Required: Gold Card Notice (Top of Each Lesson) -->
     <aside id="lesson-bible-notice" class="gold-bible-notice-card" role="region" aria-label="Bible study notice for this lesson">
       <div class="gold-bible-notice-header">
         <div class="gold-bible-notice-kicker">
@@ -406,7 +382,6 @@
       </div>
     </aside>
 
-    <!-- Prophetic Horizon Interactive Bar -->
     <div class="horizon-panel mb-10 p-5 rounded-2xl bg-paper-100/80 dark:bg-paper-900/60 border border-paper-300/80 dark:border-paper-800 shadow-sm backdrop-blur-xs">
       <div class="flex items-center justify-between mb-3 text-xs font-mono">
         <div class="flex items-center space-x-2">
@@ -416,7 +391,6 @@
         <span id="active-epoch-tag" class="px-2 py-0.5 rounded bg-amber-500/20 text-amber-800 dark:text-amber-300 font-bold">605 B.C.</span>
       </div>
 
-      <!-- Interactive Milestone Rails -->
       <div class="horizon-rail" role="region" aria-label="Prophetic horizon years">
         <button type="button" class="horizon-arrow" id="horizon-prev" aria-label="Previous year">‹</button>
         <div class="horizon-track" id="horizon-track" tabindex="0"></div>
@@ -432,7 +406,6 @@
         </div>
       </div>
 
-      <!-- Active Milestone Description -->
       <div class="epoch-banner p-3 rounded-lg bg-paper-50 dark:bg-paper-950/70 border border-paper-200 dark:border-paper-800 text-xs">
         <div id="epoch-banner-title" class="font-serif font-bold text-ink-900 dark:text-paper-100 mb-1">
           605 B.C. — Nebuchadnezzar's First Siege of Jerusalem
@@ -525,7 +498,6 @@
       </div>
     </section>
 
-    <!-- Chapter Metadata Header -->
     <div class="mb-10 pb-8 border-b border-paper-200 dark:border-paper-900">
       <div class="flex flex-wrap items-center gap-3 text-xs font-mono text-ink-500 dark:text-paper-400 mb-3">
         <span id="sheet-epoch-tag" class="uppercase tracking-widest text-amber-700 dark:text-amber-400 font-semibold">UNIT 00</span>
@@ -561,7 +533,6 @@
       <aside id="glossary-panel" hidden class="mt-3 p-4 rounded-lg border border-amber-600/30 bg-paper-100/90 dark:bg-paper-950/80 text-sm text-ink-700 dark:text-paper-300"></aside>
     </div>
 
-    <!-- Classroom Facilitator Strip (?teach=1 or Codex toggle) -->
     <div id="facilitator-strip" class="facilitator-strip" hidden></div>
 
     <aside id="lesson-media" class="lesson-media" hidden>
@@ -620,12 +591,10 @@
       </figure>
     </aside>
 
-    <!-- Dynamic Story Sheet Content (Medium Editorial Format) -->
     <article id="sheet-article" class="article-body font-bodySerif text-ink-800 dark:text-paper-200 transition-all duration-150">
       <!-- Injected by JavaScript loadSheet() -->
     </article>
 
-    <!-- Connective Lesson Bar (Map and 3D Gallery) -->
     <section id="lesson-connect" class="lesson-connect my-8 text-ink-800 dark:text-paper-200">
       <div class="lesson-connect-copy">
         <span id="lesson-connect-kicker" class="lesson-connect-kicker">The siege is the door of the book</span>
@@ -657,12 +626,10 @@
       <p class="text-sm text-ink-700 dark:text-paper-300" id="recap-body"></p>
     </aside>
  
-    <!-- Interactive Proof Workbench (Active Learning Gate) -->
     <section id="workbench-section" class="mt-12">
       <div id="workbench-container"></div>
     </section>
 
-    <!-- Revision & Interactive Knowledge Checkpoint -->
     <section id="revision-section" class="mt-16 pt-12 border-t-2 border-dashed border-paper-300 dark:border-paper-800">
       <div class="bg-paper-100/90 dark:bg-paper-900/60 rounded-xl p-6 sm:p-8 border border-paper-300/80 dark:border-paper-800 shadow-sm backdrop-blur-xs">
         
@@ -685,12 +652,10 @@
           Active recall cements prophetic dates and biblical theology into permanent memory. Test your comprehension before unlocking the next sheet:
         </p>
 
-        <!-- Quiz Container -->
         <div id="quiz-container" class="space-y-8 font-sans">
           <!-- Dynamically injected quiz questions -->
         </div>
 
-        <!-- Sheet Action Buttons -->
         <div class="mt-10 pt-6 border-t border-paper-300 dark:border-paper-800 flex flex-col sm:flex-row items-center justify-between gap-4">
           <button type="button" data-action="sheet-prev" id="prev-sheet-btn" class="w-full sm:w-auto px-5 py-3 rounded-lg border border-paper-300 dark:border-paper-700 text-ink-700 dark:text-paper-300 font-mono text-xs tracking-wider uppercase hover:bg-paper-200 dark:hover:bg-paper-800 transition-colors">
             &larr; Previous Sheet
@@ -708,7 +673,6 @@
     </div>
   </div>
 
-  <!-- Editorial Footer -->
   <footer class="site-footer" data-verse="And he said unto me, Unto two thousand and three hundred days; then shall the sanctuary be cleansed." data-cite="Daniel 8:14 · King James Version"></footer>
 
   <div id="audio-checkpoint" class="audio-cp" role="region" aria-live="polite" aria-labelledby="audio-cp-title" hidden>
@@ -721,7 +685,6 @@
     </div>
   </div>
 
-  <!-- Toast Message System -->
   <div id="toast" class="fixed bottom-6 right-6 z-50 px-4 py-3 rounded-lg bg-ink-900 text-paper-50 dark:bg-paper-100 dark:text-ink-900 font-mono text-xs shadow-xl opacity-0 pointer-events-none transition-opacity duration-300">
     Message
   </div>
@@ -739,10 +702,8 @@
     </div>
   </div>
 
-  <!-- High-Resolution Archaeological Artifact Modal (Babylon Civil Twilight) -->
   <div id="artifact-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/80 backdrop-blur-md opacity-0 pointer-events-none transition-opacity duration-300">
     <div class="bg-paper-50 dark:bg-paper-950 border border-paper-300 dark:border-paper-800 rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden flex flex-col shadow-2xl">
-      <!-- Modal Header -->
       <div class="p-4 sm:p-5 border-b border-paper-200 dark:border-paper-800 flex items-center justify-between">
         <div class="flex items-center space-x-2">
           <span class="text-lg">🏛️</span>
@@ -754,7 +715,6 @@
         <button type="button" data-action="artifact-close" class="p-1.5 rounded-lg hover:bg-paper-200 dark:hover:bg-paper-800 text-ink-600 dark:text-paper-400 font-mono text-xs">✕ Close</button>
       </div>
 
-      <!-- Image Display -->
       <div class="relative flex-1 overflow-auto bg-black flex items-center justify-center min-h-[300px]">
         <img 
           id="artifact-modal-img"
@@ -779,7 +739,6 @@
         </button>
       </div>
 
-      <!-- Archaeological Commentary -->
       <div class="p-4 sm:p-6 border-t border-paper-200 dark:border-paper-800 bg-paper-100/60 dark:bg-paper-900/40 text-xs text-ink-700 dark:text-paper-300 space-y-2">
         <p class="font-serif italic text-sm text-ink-900 dark:text-paper-100">
           "I placed wild bulls and ferocious dragons in the gateways, and thus adorned them with luxurious splendor so that all mankind might gaze on them in wonder." &mdash; East India House Inscription of Nebuchadnezzar II

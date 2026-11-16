@@ -9,7 +9,6 @@ const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const COARSE = matchMedia('(pointer: coarse)').matches;
 const LOWQ = COARSE || (navigator.hardwareConcurrency || 8) <= 4;
 
-/* ---------------- Archive data ---------------- */
 const ARCHIVE_EXTRAS = [
   { horizon: 'Hermeneutic Method', binding: 'Umber Buckram · Octavo', epigraph: 'LEX PROPHETICA · QUATUOR SENSUS',
     pillars: ['Fourfold inquiry: Text, History, Interpretation, and Christological center', 'Distinguishing explicit prophetic symbols from later interpretive scaffolding', 'Why the continuous historical timeline anchors apocalyptic reading'],
@@ -123,7 +122,6 @@ const VOLS = DATA.map((d, i) => {
   };
 });
 
-/* ---------------- Local memory (last volume entered) ---------------- */
 const LS_LAST = 'daniel-shelf:last';
 const HANDOFF_KEY = 'baBookOpen';
 function getLast() { try { const v = localStorage.getItem(LS_LAST); return v == null ? -1 : Number(v); } catch (e) { return -1; } }
@@ -136,7 +134,6 @@ function continueIndex() {
   return 0;
 }
 
-/* ---------------- Foley ---------------- */
 let soundOn = true;
 let actx = null;
 function foley(type) {
@@ -175,7 +172,6 @@ function foley(type) {
   } catch (e) {}
 }
 
-/* ---------------- DOM refs ---------------- */
 /* The shelf is a section of the home page, so its state classes (is-open,
    is-drawer, is-ready ...) live on the stage element, not on <body>, and
    everything is sized from the stage rather than the window. */
@@ -216,9 +212,6 @@ function toast(msg) {
   toastTimer = setTimeout(() => t.classList.remove('show'), 1800);
 }
 
-/* =====================================================================
-   UI (works with or without WebGL)
-   ===================================================================== */
 let selected = -1;
 let view = 'cover';
 let api = null; // set once the 3D room is live
@@ -471,9 +464,6 @@ function wireUI() {
   });
 }
 
-/* =====================================================================
-   Canvas texture painting (cloth, foil, paper, marbling, wood)
-   ===================================================================== */
 const mk = (w, h) => { const c = document.createElement('canvas'); c.width = Math.max(1, Math.round(w)); c.height = Math.max(1, Math.round(h)); return c; };
 function rng(seed) { let s = (seed >>> 0) || 1; return () => ((s = (Math.imul(s, 1664525) + 1013904223) >>> 0) / 4294967296); }
 function tint(src, color, blur) {
@@ -721,7 +711,6 @@ async function loadMotifs() {
   await Promise.all(jobs);
 }
 
-/* ---- Spine ---- */
 const BANDS = [0.13, 0.25, 0.70, 0.82];
 function paintSpine(v, w, h) {
   const ex = v.ex, seed = 900 + v.i * 31;
@@ -903,7 +892,6 @@ function paintFrontArt(v, w, h) {
   });
 }
 
-/* ---- Front cover ---- */
 function paintFront(v, w, h) {
   if (artReady(v.i)) return paintFrontArt(v, w, h);
   const ex = v.ex, seed = 100 + v.i * 17, u = w / 100;
@@ -983,7 +971,6 @@ function paintFront(v, w, h) {
   });
 }
 
-/* ---- Back cover (hinge on the right) ---- */
 function paintBack(v, w, h) {
   const ex = v.ex, seed = 300 + v.i * 13, u = w / 100;
   const L = 4.2 * u, R = w - 8.4 * u, cx = (L + R) / 2;
@@ -1029,7 +1016,6 @@ function paintBack(v, w, h) {
   });
 }
 
-/* ---- Marbled endpapers ---- */
 function marble(w, h, seed, pal) {
   const r = rng(seed);
   const a = mk(w, h), x = a.getContext('2d');
@@ -1116,7 +1102,6 @@ function paintEndpaper(v, w, h, hinge, plate) {
   return c;
 }
 
-/* ---- Letterpress title page ---- */
 function paintTitlePage(v, w, h) {
   const ex = v.ex, u = w / 100, seed = 700 + v.i;
   const c = mk(w, h), x = c.getContext('2d'), r = rng(seed);
@@ -1169,7 +1154,6 @@ function paintTitlePage(v, w, h) {
   return c;
 }
 
-/* ---- Page edges ---- */
 function paintEdge(w, h, horizontal, gilt) {
   const c = mk(w, h), x = c.getContext('2d'), r = rng(gilt ? 41 : 43);
   x.fillStyle = gilt ? '#d9ae55' : '#e8dcc0';
@@ -1188,7 +1172,6 @@ function paintEdge(w, h, horizontal, gilt) {
   return c;
 }
 
-/* ---- Wood ---- */
 function paintWood(w, h, o) {
   const c = mk(w, h), x = c.getContext('2d'), r = rng(o.seed || 1);
   x.fillStyle = o.base;
@@ -1226,7 +1209,6 @@ function paintWood(w, h, o) {
   return c;
 }
 
-/* ---- Small helper textures ---- */
 function dotTexture() {
   const c = mk(64, 64), x = c.getContext('2d');
   const g = x.createRadialGradient(32, 32, 0, 32, 32, 32);
@@ -1264,9 +1246,6 @@ function paintFlatSpine(w, h, color, title, sub, seed) {
   });
 }
 
-/* =====================================================================
-   3D reading room
-   ===================================================================== */
 async function startRoom() {
   const THREE = await import('three');
   const { EffectComposer } = await import('three/addons/postprocessing/EffectComposer.js');
@@ -1280,7 +1259,6 @@ async function startRoom() {
   const damp = THREE.MathUtils.damp;
   const _e = new THREE.Euler(), _q = new Q(), _v = new V3(), _w = new V3();
 
-  /* ---- Renderer ---- */
   const renderer = new THREE.WebGLRenderer({ canvas: glCanvas, antialias: !LOWQ, powerPreference: 'high-performance' });
   const DPR = Math.min(window.devicePixelRatio || 1, LOWQ ? 1.5 : 2);
   renderer.setPixelRatio(DPR);
@@ -1306,7 +1284,6 @@ async function startRoom() {
     return t;
   };
 
-  /* ---- Environment for reflections (warm study, mostly dark) ---- */
   {
     const env = new THREE.Scene();
     env.background = new THREE.Color('#0a0705');
@@ -1328,7 +1305,6 @@ async function startRoom() {
   WEAVE = makeWeave();
   const weaveTex = tex(WEAVE, false, [10, 14]);
 
-  /* ---- Lights ---- */
   const hemi = new THREE.HemisphereLight('#6a5238', '#0b0806', 0.5);
   scene.add(hemi);
   const lamp = new THREE.SpotLight('#ffe0b6', 0, 0, 0.5, 0.95, 0);
@@ -1356,7 +1332,6 @@ async function startRoom() {
   const rim = new THREE.SpotLight('#ffc98a', 0, 34, 0.7, 0.8, 0);
   scene.add(rim, rim.target);
 
-  /* ---- Bookcase ---- */
   setLoader(0.26, 'Laying the walnut…');
   await nextFrame();
   const woodA = paintWood(1024, 256, { base: '#2c1b10', dark: '#120904', light: '#5a3a22', seed: 11 });
@@ -1387,7 +1362,6 @@ async function startRoom() {
   addBox(CASE_W, 5, 1.6, woodMat, 0, 51, 0.5);
   addBox(CASE_W, 30, 2, woodMat, 0, -22, 0.5, false);                  // cabinet below
 
-  /* ---- The painting behind the books ---- */
   let picLight = null;
   if (SHELF_PORTRAIT) {
     const img = new Image();
@@ -1468,7 +1442,6 @@ async function startRoom() {
     }
   }
 
-  /* ---- Books ---- */
   const PXS = LOWQ ? 44 : 62;          // spine px per cm
   const PXC = LOWQ ? 40 : 64;          // cover px per cm
   const foreTex = tex(paintEdge(64, 512, false, false), true);
@@ -1578,7 +1551,6 @@ async function startRoom() {
     if (i % 2 === 1) await nextFrame();
   }
 
-  /* ---- Props: bookend, reference books, hourglass ---- */
   {
     const shape = new THREE.Shape();
     shape.moveTo(-6, 0); shape.lineTo(6, 0); shape.lineTo(6, 11.5);
@@ -1639,7 +1611,6 @@ async function startRoom() {
     window.__sand = { sandTop, sandBot };
   }
 
-  /* ---- A lit candle on the shelf ---- */
   const candleRig = (() => {
     const g = new THREE.Group();
     g.position.set(-booksW / 2 - 9.5, 0, -7.5);
@@ -1806,7 +1777,6 @@ async function startRoom() {
     };
   })();
 
-  /* ---- Dust in the lamp light ---- */
   const DUST = REDUCED ? 0 : LOWQ ? 160 : 320;
   const dustGeo = new THREE.BufferGeometry();
   const dPos = new Float32Array(DUST * 3), dCol = new Float32Array(DUST * 3), dVel = new Float32Array(DUST * 3);
@@ -1819,7 +1789,6 @@ async function startRoom() {
   const dust = new THREE.Points(dustGeo, new THREE.PointsMaterial({ size: 0.16, map: tex(dotTexture(), true), vertexColors: true, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending }));
   scene.add(dust);
 
-  /* ---- Post ---- */
   let composer = null, shimmer = null;
   if (!LOWQ) {
     composer = new EffectComposer(renderer);
@@ -1851,9 +1820,6 @@ async function startRoom() {
     composer.addPass(new OutputPass());
   }
 
-  /* =================================================================
-     Poses & camera
-     ================================================================= */
   const VIEWS = {
     cover: { yaw: 0.24, pitch: 0.05, open: 0 },
     open: { yaw: -0.06, pitch: 0.08, open: 1 },
@@ -1923,9 +1889,6 @@ async function startRoom() {
     outLook.set(outPos.x, 14.5, -10);
   }
 
-  /* =================================================================
-     Hi-res covers (built on demand, kept in a small cache)
-     ================================================================= */
   const HI_CAP = LOWQ ? 3 : 6;
   const hiOrder = [];
   const hiJobs = [];
@@ -2032,9 +1995,6 @@ async function startRoom() {
   }
   function prefetch(i) { if (i < 0 || i >= N || books[i].hi) return; scheduleHi(books[i], false); }
 
-  /* =================================================================
-     Interaction
-     ================================================================= */
   let hovered = -1, focusIdx = -1, lastHoverSound = -1;
   let lastInput = performance.now();
   function noteInput() {
@@ -2194,7 +2154,6 @@ async function startRoom() {
   if (window.ResizeObserver) new ResizeObserver(onResize).observe(body); else addEventListener('resize', onResize);
   onResize();
 
-  /* ---- Floating tag over the hovered spine ---- */
   const tagMeta = $('#tag-meta'), tagTitle = $('#tag-title'), tagSub = $('#tag-sub');
   let tagFor = -1;
   function hideTag() { tag.classList.remove('visible'); body.classList.remove('is-hovering'); tagFor = -1; }
@@ -2216,9 +2175,6 @@ async function startRoom() {
     tag.style.top = ((1 - _w.y) / 2) * stageH() + 'px';
   }
 
-  /* =================================================================
-     Animation
-     ================================================================= */
   const ease = {
     io3: (t) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2),
     out2: (t) => 1 - (1 - t) * (1 - t),
@@ -2567,9 +2523,6 @@ async function startRoom() {
   };
 }
 
-/* =====================================================================
-   Boot
-   ===================================================================== */
 async function loadFonts() {
   const specs = ['600 48px Cinzel', '500 48px Cinzel', '400 48px Newsreader', 'italic 400 48px Newsreader', 'italic 500 48px Newsreader', '500 24px "JetBrains Mono"'];
   try {

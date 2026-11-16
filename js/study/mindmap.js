@@ -1,87 +1,31 @@
-/*
- * MindMap — the cinematic mindmap renderer for the study lesson.
- *
- * A port of the standalone prototype ("The Three Interpretive Schools") into an
- * inline lesson figure, specified by docs/spec-flow-mindmap.md and scoped by
- * docs/flow-map-decisions.md. The prototype *is* its page; this is a block
- * inside a ~830 px lesson column under four themes, so the port keeps the design
- * and drops the parts that only make sense full-screen.
- *
- * Public surface (classic script, like the rest of js/study/):
- *
- *   window.MindMap.create(hostElement, spec, opts) -> { destroy, resize, refresh }
- *
- *   opts.cite        diagramCite(label, canResolve) from study-app.js, so a
- *                    node's `cite` renders as the same audited chip every other
- *                    diagram uses. Without it the reference prints flat.
- *   opts.canResolve  the sitting's reference resolver, passed straight through.
- *
- * One closure per figure, no module state (C15): renderSheet() rebuilds the
- * article on every sitting switch, so destroy() removes the DOM, cancels every
- * timer and animation frame, and disconnects every observer.
- *
- * Where this departs from the prototype, and why (collision numbers are §10 of
- * docs/spec-flow-mindmap.md):
- *
- *   C1  the stage is scaled to the *block*; innerWidth/innerHeight are never
- *       read. The world is 960×660 rather than the prototype's 1600×900 — the
- *       scale is what sets the reader's type size, and 1600 rendered this
- *       column's body text at 8 px (see the constants below).
- *   C2  no body.idle, no page-level overflow change; the HUD fade is local.
- *   C3  vignette and grain are re-parented inside the block; the 51vh curtains
- *       and the full-screen titlecard are dropped, not shrunk.
- *   C4  theming is pure CSS (a dark inset in all four themes, the .story-stage
- *       precedent). Nothing re-renders on a theme change; --chain-gold is never
- *       overloaded — the block carries its own --mm-ac / --mm-ac-rgb tokens.
- *   C5  .mm-text / .mm-name carry !important resets scoped to .mm.
- *   C6  no <ul> inside the map; leaves are sibling cards.
- *   C7  factory + destroy(), wired from renderSheetDiagrams.
- *   C9  the cite chip is a sibling of the node button, never inside it.
- *   C10 keydown is bound on the host and claims arrows, Enter/Space and Escape
- *       only. 1/2/3, L, C, Q, F and R are not claimed and never were.
- *   C11 "compact" is host.clientWidth < 720, driven by a ResizeObserver.
- *   C12 the map is visible and static by default and only *arms* its entrance
- *       when .mm.is-visible is added, so a JS failure cannot hide the content.
- *       Under reduced motion .mm-link and .mm-seg keep stroke-dasharray:none /
- *       stroke-dashoffset:0 — the prototype leaves them at offset 1, invisible.
- *   C14 every word is HTML text built from a spec field by direct interpolation.
- *   C19 two controls live in the block (Play/Stop, Overview); Replay is the
- *       figure's existing .chain-replay button, reused rather than duplicated.
- *   C20 focus is a selected state: the first tap selects, the second opens, and
- *       the same state is driven by keyboard focus.
- *   C21 no sentence is assembled in this file. The only strings rendered here
- *       that are not a spec field used verbatim are the four connector words
- *       (TEXT / HISTORY / INTERPRETATION / CHRIST — the course's own self-check
- *       headings, i.e. vocabulary) and control labels.
- */
+/* MindMap: the mindmap figure inside a study lesson (a classic script, like the
+   rest of js/study/).
+     window.MindMap.create(host, spec, opts) -> { destroy, resize, refresh }
+     opts.cite diagramCite() from study-app.js, so a node's `cite` renders as
+     the shared chip; without it the reference prints flat.
+     opts.canResolve the sitting's reference resolver, passed through.
+   renderSheet() rebuilds the article on every sitting switch, so destroy() must
+   remove the DOM, timers, frames and observers.
+   Keyboard: the host claims arrows, Enter/Space and Escape only. Every word
+   rendered comes from a spec field, except the four connector words and control
+   labels. */
 (function () {
   'use strict';
 
-  /* ── the world ──────────────────────────────────────────────────────────
-     The block is a lesson figure in a ≤846 px column and `fit()` scales this
-     entire world to the block, so a type size declared in world px reaches the
-     reader at `size × blockWidth / W`. The prototype's world was 1600×900:
-     in an 846 px column that is a scale of 0.527, which rendered its 15.5 px
-     leaf text at 8.2 px — measured, not feared
-     (tools/verify/verify_mindmap_legibility.mjs). Shrinking the world is what
-     makes the words bigger, so the world is now 960×660 (16:11 — exactly the
-     shape the block's own `aspect-ratio` gives it, so nothing is letterboxed)
-     and the same column lands at ~0.88: 15.5 px world text reads at ~13.6 px,
-     and every non-compact column (C11: block ≥ 722 px) clears 11.5 px.
-
-     Everything below is derived from W and H. Anything the prototype sized
-     against its own 1600×900 — every arrowhead, scene position and chain dot —
-     is re-based through KX (a width) or KY (a height), so a future resize is
-     one edit and nothing here is a stray literal. */
+  /* fit() scales this world to the block, so world type reaches the reader at
+     size × blockWidth / W.
+     An 846 px column gives about 0.88: 15.5 px text reads at about 13.6 px.
+     Everything below derives from W and H; 1600×900 design units are converted
+     through KX and KY. */
   const NS = 'http://www.w3.org/2000/svg';
   const W = 960, H = 660;
   const KX = W / 1600, KY = H / 900;
-  const kx = (v) => v * KX;                 // prototype width/size → world
-  const ky = (v) => v * KY;                 // prototype y → world y
-  const Y = ky(520);                        // §2.3, every scene's chain line
-  /* The head card and the leaf card widths are declared in study.html
-     (.mm-head .mm-card / .mm-leaf .mm-card); the link endpoints below are
-     derived from them, so both must move together. */
+  const kx = (v) => v * KX;                 // 1600-wide design units → world
+  const ky = (v) => v * KY;                 // 900-tall design units → world y
+  const Y = ky(520);                        // every scene's chain line
+  /* The head and leaf card widths are declared in css/study-page.css (.mm-head
+     .mm-card / .mm-leaf .mm-card); the link endpoints below depend on them, so
+     both must move together. */
   const HW = 160, LW = 195;
   const GAP = 16;                           // between a card and its neighbour
   const EDGE = 12;                          // world margin outside the leaf columns
@@ -89,11 +33,8 @@
      type is fitted to it (coreFit), so a long diagram title shrinks rather than
      pushing the fan columns off the world. */
   const CORE_D = 160;
-  /* P is the prototype's placement table (§1.2), re-derived from the world
-     instead of transcribed. The circle sits at the world's centre and the four
-     columns step inward from its two outer edges — EDGE is the margin the leaf
-     cards keep from the canvas, and what is left between the head cards and the
-     circle is the run the centre's own spokes are drawn on. */
+  /* The circle sits at the world's centre; the leaf and head columns step
+     inward from each edge by EDGE, LW, GAP and HW. */
   const P = {
     cx: W / 2,
     cy: H / 2,
@@ -107,23 +48,22 @@
   };
   const ARROW = arrowhead(kx(11), kx(5.5));
   const SC_ARROW = arrowhead(kx(14), kx(6.5));
-  /* The scene chain, laid out on the prototype's own 120…1480 measure. */
+  /* The scene chain spans 120 to 1480 design units. */
   const CHAIN_X0 = kx(120), CHAIN_SPAN = kx(1360);
-  /* Head and leaf pitch per side (§1.2; the placement rule of §11 step 5). */
+  /* Head and leaf pitch per side. */
   const SPACING_L = ky(150), SPACING_R = ky(136);
-  /* C11: measured on the block. A viewport query calls a ~830 px column "not
-     compact" on a 1400 px screen and renders 15.5 px leaf text at 8 px. */
+  /* Below this block width the map becomes an outline. Measured on the block,
+     never the viewport. */
   const COMPACT_WIDTH = 720;
-  const IDLE_MS = 3800;                     // C2
+  const IDLE_MS = 3800;                     // idle time before the HUD fades
   /* The full-screen view's focus trap needs to know what "focusable" means
      here. Every control the block builds is a real <button>, so this is the
      whole list; the host itself carries tabindex so it can fall back. */
   const FOCUSABLE = 'button:not([disabled]), [href], [tabindex]:not([tabindex="-1"])';
-  const DIP = ky(160);                      // §2.3, the under-centre Bézier
-  const Y_MIN = ky(90), Y_MAX = ky(810);    // the authored `y` range (§12)
+  const DIP = ky(160);                      // how far a cross-centre curve dips
+  const Y_MIN = ky(90), Y_MAX = ky(810);    // the range a spec's `y` may take
 
-  /* The prototype's arrowheads are triangles pointing along +x with their tip
-     at the origin, drawn at 11 px and 14 px on a 1600 px world. */
+  /* Arrowheads point along +x with the tip at the origin. */
   function arrowhead(len, half) {
     return 'M0 0L' + (-len).toFixed(2) + ' ' + (-half).toFixed(2) + 'L' +
       (-len * 0.68).toFixed(2) + ' 0L' + (-len).toFixed(2) + ' ' + half.toFixed(2) + 'Z';
@@ -132,10 +72,8 @@
     '<path d="M4.2 1.6 8.6 6l-4.4 4.4" fill="none" stroke="currentColor" stroke-width="1.5" ' +
     'stroke-linecap="round" stroke-linejoin="round"/></svg>';
 
-  /* The prototype's three school accents, plus the course's sage green (already
-     in study.html for quiz feedback) so a four-step spine never repeats one.
-     Block-local tokens (C18): --chain-gold stays untouched for .chain-cite and
-     .chain-title. */
+  /* Four step accents, so a four-step spine never repeats one. They are
+     block-local, leaving --chain-gold to .chain-cite and .chain-title. */
   const ACCENTS = [
     { hex: '#dcb257', rgb: '220,178,87' },
     { hex: '#86a6c4', rgb: '134,166,196' },
@@ -143,10 +81,8 @@
     { hex: '#9ccf8f', rgb: '156,207,143' }
   ];
 
-  /* The connector vocabulary is the course's own: every sitting closes with a
-     self-check card headed TEXT / HISTORY / INTERPRETATION / CHRIST. Those four
-     words are navigational vocabulary rather than prose, which is why they are
-     the one thing this file may render without a spec field behind it (C21). */
+  /* The four self-check headings are the only words this file renders without a
+     spec field behind them. */
   const CONNECTORS = { text: 'TEXT', history: 'HISTORY', interpretation: 'INTERPRETATION', christ: 'CHRIST' };
 
   function esc(value) {
@@ -163,15 +99,10 @@
 
   function connectorWord(kind) { return CONNECTORS[String(kind || '').toLowerCase()] || ''; }
 
-  /* ── layout ────────────────────────────────────────────────────────────
-     The steps are the nodes and each step's leaves are its `text` followed by
-     its `points[]`, in the authored order (§12.2). Nothing is split,
-     re-parented or invented: s2-3 stays two nodes, with the four historical
-     instances owned by step 2. A declared `side`/`y` is honoured; otherwise
-     §11 step 5 places the first half of the list on the left and the rest on
-     the right, at the prototype's own 150 px / 136 px pitch measured against
-     its 900 px world and so re-based to H, both centred on the world's own
-     centre (`P.cy`, which is now 330 rather than 450). */
+  /* Each step is a node; its leaves are its `text` then its `points[]`, in
+     authored order. Nothing is split or invented.
+     A declared `side`/`y` wins; otherwise the first half goes left and the rest
+     right, centred on P.cy. */
   function place(steps) {
     const half = Math.ceil(steps.length / 2);
     const items = steps.map((step, i) => {
@@ -207,18 +138,15 @@
       const texts = [];
       if (item.step.text) texts.push(String(item.step.text));
       (item.step.points || []).forEach((point) => {
-        /* The object form of a leaf ({text, lead, terms, cite}) is deliberately
-           not implemented: no migrated spec uses it, and reading `.text` would
-           put copy on the page that extract_claim_units.mjs cannot see
-           (C13/C21). A non-string leaf is skipped, never stringified. */
+        /* The object form of a leaf is not supported: extract_claim_units.mjs
+           could not see its copy. A non-string leaf is skipped, never
+           stringified. */
         if (typeof point === 'string' && point.trim()) texts.push(point);
       });
       const pitch = item.side === 'L' ? SPACING_L : SPACING_R;
       const m = texts.length;
       item.leaves = texts.map((text, li) => {
-        /* §1.3's fan, generalised to be centred on its head: for three leaves
-           this is the prototype's `(li - 1) * step` exactly, and a lone leaf
-           sits level with its head instead of a full step above it. */
+        /* The fan is centred on its head, so a lone leaf sits level with it. */
         const off = (li - (m - 1) / 2) * pitch;
         return { text, y: Math.max(ky(60), Math.min(ky(860), item.y + (item.up ? -off : off))) };
       });
@@ -252,13 +180,10 @@
     return result.out.length ? result.out : [words.join(' ')];
   }
 
-  /* The centre circle holds the diagram's own title. It is one fixed diameter
-     (CORE_D) whatever the label's shape — the fan columns are placed from it —
-     and the type is fitted to the longest line instead, so a long title shrinks
-     rather than pushing the map off the canvas. 0.52 em per character is the
-     measured advance of the loaded serif at 700 weight (0.51 for the shipped
-     "The Post-Roman"), and 0.84·d is the circle's inner box for 12 px of
-     padding. No word is changed, added or lost. */
+  /* The circle has one diameter (CORE_D), and the title's type is fitted to it,
+     so a long title shrinks instead of pushing the map off the canvas.
+     0.52 em per character is the loaded serif's advance at weight 700; 0.84·d
+     is the inner box after 12 px padding. */
   function coreFit(label) {
     const raw = String(label || '').trim();
     if (!raw) return { lines: [], d: CORE_D, fs: 20 };
@@ -280,25 +205,19 @@
     return { lines, d: CORE_D, fs };
   }
 
-  /* The scene title is per-letter (prototype `.sc-title` at 150 px on a 1600 px
-     stage). Fitted to 0.78·W — the prototype's own 1250 px measure, and 0.10·W
-     inside the 0.88·W the scene head actually lays out in, so a long diagram
-     title cannot run off it or break mid-word. Never below 0.025·W, where it
-     stops being a title. 0.55 em per character is the measured advance of the
-     loaded serif at 600 weight, rounded up. */
+  /* The scene title is fitted to 0.78·W so it cannot run off the scene head or
+     break mid-word, and never drops below 0.025·W.
+     0.55 em per character is the loaded serif's advance at weight 600, rounded
+     up. */
   function titleFit(title) {
     const len = String(title || '').length || 1;
     return Math.max(kx(40), Math.min(kx(150), Math.floor((W * 0.78) / (0.55 * len))));
   }
 
-  /* How many lines the browser will need for `label` at `fs`: greedy word
-     wrapping against the card's measure, which is what `text-wrap: wrap` does.
-     0.58 em per character is the measured advance of the loaded serif at 700
-     weight — the prototype's 0.42 estimate under-counted it by a third, which
-     is why names wrapped to four lines. Estimating from the character count
-     alone still under-counts, because a line rarely fills to its last
-     character: a three-line estimate that renders as four is a card that
-     collides with the next head. */
+  /* Lines the browser will need for `label` at `fs`, by greedy word wrap
+     against the card's measure.
+     0.58 em per character is the serif's advance at weight 700. Underestimating
+     makes a card collide with the next head. */
   function nameLines(label, fs) {
     const measure = HW - 30;
     const per = 0.58 * fs;
@@ -335,10 +254,8 @@
     const byId = new Map(model.map((item) => [item.id, item]));
     const title = String(spec.title || '');
 
-    /* Cross-links come from spec.links[], each naming two declared step ids. Two
-       steps on the same side keep the authored order (solid, "spine"); two on
-       opposite sides are a relation across it (dashed, "under-centre"), the
-       prototype's own cross-link route. A declared `route` overrides. */
+    /* Cross-links come from spec.links[]. Same side: solid, in authored order.
+       Opposite sides: dashed, under the centre. A declared `route` wins. */
     const links = (Array.isArray(spec.links) ? spec.links : []).map((link, i) => {
       const from = byId.get(String((link && link.from) || ''));
       const to = byId.get(String((link && link.to) || ''));
@@ -376,7 +293,7 @@
     const scenes = [];
     const cross = [];
     const dom = {};
-    let pointerKind = 'mouse';                 // C20: a tap selects, a click opens
+    let pointerKind = 'mouse';                 // a tap selects, a click opens
     let replayEl = null;
     let observers = null;
 
@@ -406,9 +323,8 @@
       return '<span class="chain-cite is-flat">' + esc(label) + '</span>';
     }
 
-    /* C17: @media print hides `button` and forces #sheet-article to #111, so a
-       dark-ground block prints as a black rectangle with no control. The same
-       steps are laid out as an auditable list instead. */
+    /* Print hides buttons and darkens #sheet-article, so the map prints as a
+       plain list of its steps instead. */
     function printListHtml() {
       return '<div class="mm-print"><ol class="mm-print-list">' + model.map((item) => {
         const step = item.step;
@@ -452,8 +368,8 @@
           (step.title ? '<span class="mm-name">' + esc(step.title) + '</span>' : '') +
           '<span class="mm-go" aria-hidden="true">' + CHEVRON + '</span>' +
         '</button>' +
-        /* C9: the audited cite chip is a sibling of the button, never inside it,
-           so a cartesian click cannot nest one control in another. */
+        /* The cite chip is a sibling of the button, never inside it, so no
+           control nests in another. */
         (item.cite ? '<span class="mm-cite">' + citeChip(item.cite) + '</span>' : '') +
       '</div>';
     }
@@ -468,18 +384,10 @@
       '</div>';
     }
 
-    /* The film for one node. The prototype's scenes are hand-authored content
-       (badge, origin, marker, chain). A migrated flow spec declares none, so the
-       scene is built from the node's own audited fields and nothing else: role
-       as the kicker, title as the per-letter display line, the audited cite chip
-       as the badge, the leaves as the horizontal chain on the world's own chain
-       line (`Y`, the prototype's 520 re-based to H), and the diagram's own note
-       as the caption.
-
-       A scene is a 1600×900 film played inside a 16:11 block, so its positions
-       are re-derived (CHAIN_X0/CHAIN_SPAN across, `Y` down) while its type is
-       re-based through KX: that keeps every label the size it already reads at
-       on screen while the map's own text grows. */
+    /* A node's film is built only from its own fields: role as kicker, title as
+       the per-letter line, cite chip as badge, leaves as the chain, the
+       diagram's note as caption.
+       Positions use CHAIN_X0/CHAIN_SPAN and Y; type goes through KX. */
     function sceneHtml(item) {
       const step = item.step;
       const leaves = item.leaves;
@@ -578,13 +486,8 @@
           '</button>' +
           '<span class="mm-sep" aria-hidden="true"></span>' +
           '<button type="button" class="mm-btn mm-overview">Overview</button>' +
-          /* The full-screen control is the block's third affordance. The brief's
-             budget is three, and the figure's own Replay control is the third
-             only in the sense that it is shared (C19) — this is the control the
-             block itself adds. It is a child of the bar so it is a `.mm-btn`
-             like its siblings and takes the block's palette, and the bar's own
-             selector filters it out (`.mm-hud .mm-btn:not([data-mm-fs])`), so
-             the two controls the bar was built to hold stay exactly two. */
+          /* The full-screen control lives in the bar, so it takes the bar's
+             palette. The bar's own selector excludes it (`:not([data-mm-fs])`). */
           '<button type="button" class="mm-btn mm-fs" data-mm-fs aria-pressed="false" ' +
             'aria-label="Full screen">' +
             '<svg class="mm-i mm-i-expand" viewBox="0 0 12 12" aria-hidden="true" focusable="false">' +
@@ -613,9 +516,8 @@
       scenes.length = 0;
       cross.length = 0;
 
-      /* Centre → head, with the prototype's travelling light. The spoke leaves
-         the *rendered* circle (state.coreRadius, which coreFit sized) rather
-         than a constant, so a fitted label never has a line running through it. */
+      /* The spoke leaves the rendered circle (state.coreRadius), so a fitted
+         label never has a line through it. */
       model.forEach((item, i) => {
         const left = item.side === 'L';
         const x1 = left ? P.cx - state.coreRadius + 2 : P.cx + state.coreRadius - 2;
@@ -683,9 +585,8 @@
         });
       });
 
-      /* Step → step. Same side: the authored order, drawn as a bracket beside
-         the two cards. Across the centre: the prototype's Bézier dipping below
-         the head line. */
+      /* Step → step. Same side: a bracket beside the two cards. Across the
+         centre: a curve dipping below the head line. */
       links.forEach((link, i) => {
         const delay = lastHead + 0.5 + i * 0.25;
         const path = svgEl('path', {
@@ -726,10 +627,8 @@
         wrap.style.setProperty('--d', (item.headDelay + 1.15).toFixed(2) + 's');
         wrap.innerHTML = '<span class="mm-label" data-mm-kind="' + esc(item.fan) + '">' + esc(CONNECTORS[item.fan]) + '</span>';
         wrap.style.left = item.lx + 'px';
-        /* Above the fan, in the leaf column: the only band in that column that
-           is empty whatever the leaf cards measure. This is the pre-measure
-           estimate — layoutFans() places it against the rendered cards, which
-           in a world this narrow wrap to more lines than the prototype's did. */
+        /* Pre-measure estimate; layoutFans() places it against the rendered
+           cards. */
         wrap.style.top = (Math.min.apply(null, item.leaves.map((leaf) => leaf.y)) - ky(90)) + 'px';
         dom.world.appendChild(wrap);
         item.fanEl = wrap;
@@ -763,11 +662,9 @@
         if (entry.link.route === 'under-centre') {
           const x1 = a.hx;
           const x2 = b.hx;
-          /* §2.3: the Bézier dips 160 px below the head line, re-based to H. Two
-             schools level with each other would otherwise leave the line grazing
-             the centre node, so the dip deepens until the curve's lowest point —
-             which is 0.75 of the control-point offset, the curve being symmetric
-             — clears the circle by 50 px. */
+          /* The curve dips DIP below the head line, deeper if needed so its
+             lowest point (0.75 of the control offset) clears the circle by 50
+             px. */
           const coreBottom = P.cy + state.coreRadius;
           const dip = Math.max(DIP, ((coreBottom + ky(50)) - (yA + yB) / 2) / 0.75);
           entry.path.setAttribute('d', 'M' + x1 + ' ' + yA + 'C' + x1 + ' ' + (yA + dip) + ' ' +
@@ -807,13 +704,10 @@
       });
     }
 
-    /* The fan's connector word sits directly above the topmost leaf card, set
-       flush to the leaf column's outer edge. Which band that is depends on how
-       many lines the leaf text wrapped to, and a narrower world wraps it to more
-       of them, so the offset is measured from the rendered card instead of
-       assumed; the flush edge is what keeps a wide word — INTERPRETATION is the
-       longest one the vocabulary has — from running under the head cards, where
-       the spine's own rail label sits. */
+    /* The connector word sits above the topmost leaf card, flush to the
+       column's outer edge, measured from the rendered card.
+       The flush edge keeps a long word (INTERPRETATION) from running under the
+       head cards. */
     function layoutFans() {
       if (state.compact) return;
       model.forEach((item) => {
@@ -830,18 +724,15 @@
       });
     }
 
-    /* C1: the scale is measured on the block. Never innerWidth/innerHeight. */
+    /* The scale is measured on the block, never innerWidth/innerHeight. */
     function fit() {
       const w = host.clientWidth;
       const h = host.clientHeight;
       state.width = w;
       state.height = h;
-      /* C11's threshold is a *column* measurement: below 720 px the block is too
-         narrow for the stage, so the outline takes over. Full screen is never
-         that block — a viewport narrower than the world is exactly the case the
-         layer's own `width: min(100%, 100vh * 16/11)` box reports honestly — so
-         the classification is left where it was when the view opened and only
-         the geometry below follows the new box. */
+      /* Compact is a column measurement. In full screen the classification
+         stays as it was when the view opened; only the geometry follows the new
+         box. */
       if (!state.full) {
         const compact = w > 0 && w < COMPACT_WIDTH;
         if (compact !== state.compact) {
@@ -876,8 +767,8 @@
     function openScene(index, auto) {
       if (state.compact || !scenes[index]) return;
       if (!auto) stopTour();
-      /* §8.4's focus gap: remember where the film was opened from, so closing it
-         can hand focus back instead of dropping it on <body>. */
+      /* Remember where the film was opened from, so closing it hands focus back
+         instead of dropping it on <body>. */
       if (!auto) {
         state.opener = host.contains(document.activeElement) ? document.activeElement : null;
       }
@@ -900,8 +791,7 @@
       announce(index);
       updateHud();
       if (!auto && !state.reduced) {
-        /* Closes the prototype's focus gap: focus follows the film, and Escape
-           then works from inside the block. */
+        /* Focus follows the film, so Escape works from inside the block. */
         const target = entry.el.querySelector('.chain-cite') || entry.el;
         if (target && target.focus) target.focus({ preventScroll: true });
       }
@@ -947,8 +837,8 @@
       updateHud();
     }
 
-    /* Play/Stop: the prototype's tour, paced to the length of each node's own
-       film and started once the entrance has settled. */
+    /* Play/Stop tour: each node's film plays for its own length, starting after
+       the entrance settles. */
     function startTour() {
       if (state.compact || state.inScene) {
         if (state.inScene) closeScene(true);
@@ -1058,8 +948,8 @@
 
     /* ── wiring ─────────────────────────────────────────────────────────── */
 
-    /* C20: focus is a selected state, not a hover state. One code path serves
-       the mouse, the keyboard and the touch screen. */
+    /* Focus is a selected state, not a hover state: one code path for mouse,
+       keyboard and touch. */
     function setFocus(id) {
       state.focus = id || '';
       if (state.compact) return;
@@ -1134,15 +1024,9 @@
         openScene(index);
         return;
       }
-      /* A citation chip belongs to the page, not to the block: it opens the
-         sitting's reference row, which lives in the lesson at z-index 10 while
-         this layer is at 180 — so on a full screen the row would open *under* an
-         opaque map and be unreachable. The stacking is the brief's ladder (the
-         map is below the reader and above the lesson), so the layer is the thing
-         that gives way: the block returns the page, and the row the reader asked
-         for is scrolled into view by study-app.js's own handler, which runs
-         after this one. The film stays open, so a second Escape is not needed to
-         get back to it. */
+      /* A cite chip's reference row sits below this layer (z-index 10 vs 180),
+         so full screen exits first. study-app.js's handler, which runs after
+         this one, scrolls the row into view. The film stays open. */
       if (state.full && target.closest && target.closest('.chain-cite')) {
         exitFull(true);
         return;
@@ -1152,11 +1036,8 @@
         return;
       }
       if (state.inScene) { closeScene(); return; }
-      /* Full screen: a press on the stage's own ground leaves it, the same way a
-         press on the ground closes a film. "The ground" is everything inside the
-         block that is not chrome and not a node — measured off the world's
-         wrapper rather than off the viewport, so no control can be a dead zone
-         and none of them counts as ground. */
+      /* In full screen, a press on the stage's ground (anything that is not
+         chrome or a node) exits, as a press on the ground closes a film. */
       if (state.full) {
         const wrapper = dom.world ? dom.world.parentNode : null;
         if (wrapper && target.closest && wrapper.contains(target) && !target.closest('[data-mm-open]')) {
@@ -1174,12 +1055,9 @@
          arbitrates with anotherLayerOwnsEscape() from its own capture-phase
          listener, which runs before this one; the modals below run their own. */
       if (document.querySelector('.story-read:not([hidden])')) return;
-      /* The reference list is presented as a panel above everything while a block
-         is full screen (study.html, `html.dfx-cite-open`). It sits at 240, above
-         this map's 180, and owns Escape while it is up: a citation chip opened
-         from a full-screen diagram or map puts a reference in front of the
-         reader, and closing the map behind it would take the reference away with
-         it. One Escape closes the panel, the next the map. */
+      /* While a block is full screen, the reference panel (html.dfx-cite-open,
+         z-index 240) sits above the map (180) and owns Escape: one Escape
+         closes the panel, the next the map. */
       if (document.documentElement.classList.contains('dfx-cite-open')) return;
       const modal = document.querySelector('#infographic-modal, #certificate-review-modal, #certificate-panel');
       if (modal && !modal.hidden) return;
@@ -1234,26 +1112,13 @@
       }
     }
 
-    /* ── full screen ────────────────────────────────────────────────────────
-       The map was drawn as a page and ported into a column, where `fit()`
-       scales its 960x660 world down to ~0.81 and renders the 15.5 px leaf text
-       at ~12.6 px. Full screen is the surface it was designed for: at
-       1440x1000 the frame is 1440x990, `min(w/W, h/H)` resolves to 1.5, and the
-       same words read at 23.25 px.
-
-       The mechanism is `position: fixed; inset: 0` on the host, not the
-       Fullscreen API: it escapes ancestor overflow exactly as `.story-read`
-       does, needs no user gesture, and behaves the same in every engine. The
-       host becomes the full-viewport layer and the `.mm-viewport` inside it the
-       world's own 16:11 box, centred — so the block's box is the *only* thing
-       that changes: no reparenting, no second overlay, no second render path,
-       and nothing caches the block size, so `fit()` (which already runs from
-       the host's ResizeObserver) does the rest. The Fullscreen API would be an
-       enhancement on top; it is deliberately not used, because it would hand
-       Escape to the browser and take it away from the arbitration below.
-
-       Stacking: 180, below the story reader (220) and above the insight cards
-       (~72) — see the comment on `.mm.is-full` in study.html. */
+    /* Full screen uses `position: fixed; inset: 0` on the host, not the
+       Fullscreen API. It escapes ancestor overflow, needs no user gesture and
+       keeps Escape in the film → map order below; the API would give Escape to
+       the browser.
+       Only the host's box changes, so fit() (run by the host's ResizeObserver)
+       does the rest. Stacking: 180, below the story reader (220), above the
+       insight cards (~72). */
 
     function focusables() {
       return Array.from(host.querySelectorAll(FOCUSABLE)).filter((el) => !el.hidden);
@@ -1293,12 +1158,9 @@
       if (host.scrollLeft) host.scrollLeft = 0;
     }
 
-    /* A sitting switch replaces #sheet-article's innerHTML, which detaches the
-       block *before* anything can call destroy() on it — measured: the figure
-       the API was mounted on is gone by the time renderSheetDiagrams() looks for
-       it, so destroy() never runs and the page would stay locked with nothing on
-       screen to release it. A detached node reports it through the observer that
-       was watching the whole time, and the undo is the same one destroy() does. */
+    /* A sitting switch replaces #sheet-article's innerHTML before destroy() can
+       run, which would leave the page locked. The observer sees the detach and
+       runs the same undo as destroy(). */
     function onTreeChange() {
       if (!state.full || host.isConnected) return;
       state.full = false;
@@ -1527,8 +1389,8 @@
          call is a detached node: focus goes back to the rebuilt exit control
          instead of to nothing. */
       if (state.full) state.fsOpener = dom.fs;
-      /* C12: reduced motion shows the map synchronously; a re-render of an
-         already-revealed block keeps it revealed. */
+      /* Under reduced motion the map shows at once; a re-render of a revealed
+         block stays revealed. */
       if (state.reduced || state.visible) {
         if (state.reduced) host.classList.add('is-visible');
         else play();
@@ -1582,9 +1444,8 @@
     fit();
     observe();
 
-    /* C12: with reduced motion there is nothing to wait for, so the block is
-       revealed synchronously and the loop never starts. Otherwise the map is
-       revealed when it first comes into view. */
+    /* Under reduced motion the block is revealed at once and the loop never
+       starts. Otherwise it is revealed when it first scrolls into view. */
     if (state.reduced) {
       state.visible = true;
       host.classList.add('is-visible');

@@ -131,7 +131,6 @@
     }
   }
 
-  /* ---------------- Account hub ---------------- */
 
   const BOOKMARKS_KEY = "baStudyBookmarks";
 

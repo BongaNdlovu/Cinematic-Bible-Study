@@ -1,14 +1,8 @@
-/* SiteNet — the one gateway for app-driven fetches.
- *
- * Every request gets an explicit lifecycle instead of boolean flags:
- *   slow     → onSlow fires once past `slowMs` (default 4000) for "taking longer than usual"
- *   timeout  → aborted past `timeoutMs` (default 10000); classified, never spins forever
- *   offline  → fails immediately when navigator.onLine is false
- *   cancelled→ caller's own signal aborted (not an error worth showing)
- * Failures throw a SiteNetError with .kind, .status and .retryAfter so callers can
- * branch on the class (rate / auth / forbidden / server / client / network / timeout)
- * instead of parsing message strings. See classify() and message().
- */
+/* SiteNet: the one gateway for app fetches. A request ends as ok, slow (onSlow
+   past slowMs, default 4000), timeout (past timeoutMs, default 10000), offline
+   or cancelled.
+   Failures throw SiteNetError with .kind, .status and .retryAfter, so callers
+   branch on the kind, not the message. See classify() and message(). */
 (function () {
   const SLOW_MS = 4000;
   const TIMEOUT_MS = 10000;

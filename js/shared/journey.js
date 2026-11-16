@@ -41,8 +41,8 @@
 
   const SHEET_COUNT = 11;
   const TERMS_VERSION = 6;
-  // Members start with sitting 0 open. Guests get no sittings: study.html
-  // sends them to sign in first (15 November 2026). See requireMember().
+  // Members start with sitting 0 open. Guests get no sittings: the study page
+  // sends them to sign in first. See requireMember().
   const FREE_THROUGH = 0;
   const TEMP_REVIEW_UNLOCK = false;
   const SITTING_ASSETS = [

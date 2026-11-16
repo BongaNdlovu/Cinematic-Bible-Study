@@ -1,14 +1,8 @@
-/*
- * Term Overlay — the full-page card reader.
- *
- * Clicking a dotted gold term (glossary entry) or a Strong's word used to
- * spawn a small popover anchored to the word. Any ancestor with overflow
- * (the prophecy-diagram <pre>, scroll panes) clipped it to pieces. This
- * module replaces that popover with a dedicated page-level view: the lesson
- * stays behind a darkened, blurred veil, the card sits on the left, the
- * information on the right, and a Back button (plus Esc, the veil, and the
- * browser's own Back) returns to the reading position.
- */
+/* Term Overlay: the full-page card reader for glossary terms and Strong's
+   words. A page-level view, because ancestors with overflow (diagram <pre>,
+   scroll panes) clip a popover.
+   Back, Esc, the veil and the browser's Back all return to the reading
+   position. */
 (function () {
   var overlay = null;
   var lastTrigger = null;

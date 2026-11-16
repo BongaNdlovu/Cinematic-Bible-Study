@@ -14,6 +14,29 @@ Entry template:
 
 ---
 
+## 2026-11-16 — Comment bloat removed
+
+**Why:** The comment bloat assessment found 160 KB of comments, 78% of it in three files. Much of it was build history, agent notes and essays, and seven comments were already wrong. JavaScript and HTML comments ship to every reader.
+
+**What changed:**
+
+- Dead code removed: the empty `ensureStudyMap()` and its two calls (`js/study/study-app.js`), and the `.mm.is-compact .mm .mm-text` rule, which could never match (`css/study-page.css`).
+- 159 comments deleted: 83 section banners, 41 label comments in `study.html` and 1 in `index.html`, 31 lines in `js/study/study-app.js` that restated the code (including the wrong "538 A.D. & 1844" note), 2 history notes in `css/study-page.css`, and 1 dated line in `js/shared/journey.js`.
+- 111 comments cut to the rule they hold: 46 in `js/study/mindmap.js`, 39 in `css/study-page.css`, 18 in `js/study/study-app.js`, and one file header each in `net.js`, `ui-sound.js`, `ui-click-sound.js`, `audio-orb.js`, `card-min.js`, `term-overlay.js`, `book-reader.js` and `journey.js`. Spec codes (C1–C21, §), prototype and agent notes are gone.
+- Fixed: the contradicting scale figure in `mindmap.js` (now 0.88 throughout), three comments that pointed to `study.html` for styles in `css/study-page.css`, and the comment for a chime that no longer exists (`study.html`).
+- 19 files changed in all.
+- Result: 1,168 comments down to 1,009, and 159.6 KB down to 108.3 KB. Comments of 400+ characters: 63 down to 4; the longest is now 675 characters (was 3,246). The site's own JS is 26 KB smaller raw and 7.7 KB smaller after Brotli; the study page's scripts are 7.3 KB smaller after Brotli.
+
+**Checked here:** every changed JS file parses to the same syntax tree as before. Every CSS file has the same rules and declarations, apart from the one dead rule. Every HTML page is identical once comments are removed, with byte-identical inline scripts. `verify_csp_hashes.mjs` passes (8 hashes), `oxlint` reports 0 warnings and 0 errors before and after, `lint-inline-scripts.mjs` and `verify_css_minify.mjs` pass. No verifier in `tools/verify/` reads any removed text. `npm test` and the Playwright suites were not run (they need the full repo and a browser).
+
+**Not done:** `studyMap` in `js/study/study-app.js` is set to `null` and never reassigned, so the three `if (studyMap)` branches are also dead. They were left for a separate change.
+
+**Handbook updated:** 05 Performance (JS and HTML ship unminified, with their comments), 06 UI (full-screen mechanism, layer order, comment rule).
+
+**Status:** not committed, not deployed.
+
+---
+
 ## 2026-11-15 — Theological audit fixes (lesson text)
 
 **Why:** `docs/THEOLOGICAL-AUDIT-2026-11-15.md` flagged 22 items. Each was checked against the lesson source. All 22 were real problems and all were fixed; three of the audit's supporting details were wrong (recorded at the end of the audit file). Most were contradictions between two parts of the course, quiz feedback that answered the wrong option, or broken card markup.
