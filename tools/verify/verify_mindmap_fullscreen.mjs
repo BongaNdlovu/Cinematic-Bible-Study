@@ -289,11 +289,19 @@ try {
     film.cite.isButton && film.cite.onScreen && !film.cite.nested,
     `${film.cite.tag} "${film.cite.text}" on-screen=${film.cite.onScreen} nested-in-card=${film.cite.nested}`);
 
+  await page.evaluate(() => {
+    window.__citeHit = null;
+    new MutationObserver((records) => {
+      for (const r of records) {
+        if (r.target.classList && r.target.classList.contains('is-hit')) window.__citeHit = r.target;
+      }
+    }).observe(document.getElementById('sheet-verify'), { attributes: true, attributeFilter: ['class'], subtree: true });
+  });
   await press(page, `${SEL} .mm-scene.is-active .chain-cite`);
   /* study-app.js scrolls the row into view smoothly; the assertion is on where
      it lands, so the scroll is given time to settle. */
   await page.waitForFunction(() => {
-    const row = document.querySelector('#sheet-verify .cite-row.is-hit');
+    const row = window.__citeHit;
     if (!row) return false;
     const r = row.getBoundingClientRect();
     return r.top >= 0 && r.bottom <= window.innerHeight;
@@ -302,13 +310,13 @@ try {
   const cite = await page.evaluate((sel) => {
     const mm = document.querySelector(sel);
     const verify = document.getElementById('sheet-verify');
-    const row = verify.querySelector('.cite-row.is-hit');
+    const row = window.__citeHit;
     const r = row ? row.getBoundingClientRect() : null;
     const x = r ? Math.round(r.left + Math.min(r.width, 200) / 2) : 0;
     const y = r ? Math.round(r.top + 30) : 0;
     const top = r ? document.elementFromPoint(x, y) : null;
     return {
-      hits: verify.querySelectorAll('.cite-row.is-hit').length,
+      hits: row ? 1 : 0,
       openRows: verify.querySelectorAll('.cite-row .cite-details[open]').length,
       verifyHidden: verify.hidden,
       rowRect: r ? [Math.round(r.left), Math.round(r.top), Math.round(r.width), Math.round(r.height)].join('/') : null,
@@ -540,7 +548,7 @@ try {
   /* ---- 2. reduced motion: full screen adds no animation ---- */
   const reduceContext = await browser.newContext({ viewport: { width: 1440, height: 1000 }, reducedMotion: 'reduce', deviceScaleFactor: 1 });
   await reduceContext.addInitScript((mock) => {
-    try { localStorage.setItem('baQaMockSession', JSON.stringify(mock)); localStorage.setItem('baOnboardV1', '1'); localStorage.setItem('sodConsent', JSON.stringify({ analytics: false, ts: 1, v: 1 })); } catch (e) { /* ignore */ }
+    try { localStorage.setItem('baQaMockSession', JSON.stringify(mock)); localStorage.setItem('baOnboardV1', '1'); localStorage.setItem('sodConsent', JSON.stringify({ analytics: false, ts: 1, v: 1 })); } catch (e) {}
   }, MOCK);
   await reduceContext.addInitScript({ content: signedInScript({ bookView: 'scroll' }) });
   const reducePage = await reduceContext.newPage();
@@ -576,7 +584,7 @@ try {
   /* ---- 3. 1440x800: the height trap (max-height bound below ~831px) ---- */
   const shortContext = await browser.newContext({ viewport: { width: 1440, height: 800 }, deviceScaleFactor: 1 });
   await shortContext.addInitScript((mock) => {
-    try { localStorage.setItem('baQaMockSession', JSON.stringify(mock)); localStorage.setItem('baOnboardV1', '1'); localStorage.setItem('sodConsent', JSON.stringify({ analytics: false, ts: 1, v: 1 })); } catch (e) { /* ignore */ }
+    try { localStorage.setItem('baQaMockSession', JSON.stringify(mock)); localStorage.setItem('baOnboardV1', '1'); localStorage.setItem('sodConsent', JSON.stringify({ analytics: false, ts: 1, v: 1 })); } catch (e) {}
   }, MOCK);
   await shortContext.addInitScript({ content: signedInScript({ bookView: 'scroll' }) });
   const shortPage = await shortContext.newPage();
@@ -609,7 +617,7 @@ try {
   /* ---- 4. 390x844: the outline is the right presentation, not a broken layer */
   const mobileContext = await browser.newContext({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 2 });
   await mobileContext.addInitScript((mock) => {
-    try { localStorage.setItem('baQaMockSession', JSON.stringify(mock)); localStorage.setItem('baOnboardV1', '1'); localStorage.setItem('sodConsent', JSON.stringify({ analytics: false, ts: 1, v: 1 })); } catch (e) { /* ignore */ }
+    try { localStorage.setItem('baQaMockSession', JSON.stringify(mock)); localStorage.setItem('baOnboardV1', '1'); localStorage.setItem('sodConsent', JSON.stringify({ analytics: false, ts: 1, v: 1 })); } catch (e) {}
   }, MOCK);
   await mobileContext.addInitScript({ content: signedInScript({ bookView: 'scroll' }) });
   const mobilePage = await mobileContext.newPage();

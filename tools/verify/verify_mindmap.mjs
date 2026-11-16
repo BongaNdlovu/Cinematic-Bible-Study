@@ -523,7 +523,7 @@ try {
   /* - 2. reduced motion: connectors must be visible ---- */
   const reduceContext = await browser.newContext({ viewport: { width: 1440, height: 1000 }, reducedMotion: 'reduce', deviceScaleFactor: 1 });
   await reduceContext.addInitScript((mock) => {
-    try { localStorage.setItem('baQaMockSession', JSON.stringify(mock)); localStorage.setItem('baOnboardV1', '1'); localStorage.setItem('sodConsent', JSON.stringify({ analytics: false, ts: 1, v: 1 })); } catch (e) { /* ignore */ }
+    try { localStorage.setItem('baQaMockSession', JSON.stringify(mock)); localStorage.setItem('baOnboardV1', '1'); localStorage.setItem('sodConsent', JSON.stringify({ analytics: false, ts: 1, v: 1 })); } catch (e) {}
   }, MOCK);
   await reduceContext.addInitScript({ content: signedInScript({ bookView: 'scroll' }) });
   const reducePage = await reduceContext.newPage();
@@ -602,7 +602,7 @@ try {
   /* (f) 390x844: no horizontal overflow, compact outline instead of a stage. */
   const mobileContext = await browser.newContext({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 2 });
   await mobileContext.addInitScript((mock) => {
-    try { localStorage.setItem('baQaMockSession', JSON.stringify(mock)); localStorage.setItem('baOnboardV1', '1'); localStorage.setItem('sodConsent', JSON.stringify({ analytics: false, ts: 1, v: 1 })); } catch (e) { /* ignore */ }
+    try { localStorage.setItem('baQaMockSession', JSON.stringify(mock)); localStorage.setItem('baOnboardV1', '1'); localStorage.setItem('sodConsent', JSON.stringify({ analytics: false, ts: 1, v: 1 })); } catch (e) {}
   }, MOCK);
   await mobileContext.addInitScript({ content: signedInScript({ bookView: 'scroll' }) });
   const mobilePage = await mobileContext.newPage();
