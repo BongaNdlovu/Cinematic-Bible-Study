@@ -15,6 +15,7 @@ This handbook is the single place a developer or senior engineer reads to unders
 | 5 | [Performance](05-performance.md) | Caching, loading, 3D memory, and the budgets tests enforce |
 | 6 | [User interface](06-ui.md) | Pages, shared components, themes, motion, and accessibility |
 | 7 | [Develop, test, release](07-develop-test-release.md) | Running locally, the test suites, CI, deploys, and the database |
+| — | [`!important` inventory](important-inventory.md) | Where the 314 `!important` declarations in the study stylesheets are, and why |
 | — | [Architecture baseline](architecture-baseline.md) | The measured sizes the architecture plan is compared against |
 | — | [Changelog](CHANGELOG.md) | What changed, when, and which chapters it touched |
 

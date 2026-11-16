@@ -14,7 +14,7 @@ The site has no build step for its pages. The files in the repository root and i
 ├── functions/             Cloudflare Pages Functions: _middleware.js
 ├── workers/               exhibit-rate-gate Worker (Durable Object rate counters)
 ├── js/                    Browser code (classic scripts plus one ES module for the gallery)
-├── css/                   Stylesheets (study-tailwind.css is generated)
+├── css/                   Stylesheets (study-tailwind.css is generated); css/study/ holds the study page's 23 parts
 ├── assets/                Images: hall, maps, plates, shelf covers, site, study, thumbs
 ├── bible/                 KJV Daniel, Strong's subset, sitting passage highlights (JSON)
 ├── models/                3D models (.glb, Meshopt-compressed)
@@ -40,7 +40,7 @@ Every page loads `cinema.css`, `terms.css` and `consent.css`. All except `privac
 | Page | Page-specific scripts (after the shared base) | Page stylesheets |
 |---|---|---|
 | `index.html` | `covers.js`, `reviews.js`, `progress-sync.js`, `insights.js`, `onboard.js`, `ui-sound.js`, `ui-click-sound.js`, `js/home/home.js`, `shelf-data.js`, `shelf.js` | `site.css`, `shelf.css`, `onboard.css` |
-| `study.html` | `book-open.js` (in the head), `progress-sync.js`, `study-sync.js`, `quiz-gate.js`, `insights.js`, `onboard.js`, sounds, `reviews.js`, then `js/study/`: `scripture.js`, `workbench.js`, `competency.js`, `sheets/index.js`, `sheet-map.js`, `sheet-verify.js`, `term-overlay.js`, `card-min.js`, `glossary-enrichment.js`, `sheet-glossary.js`, `book-reader.js`, `study-app.js`, `lesson-player.js`, `task-flow.js`, `audio-orb.js`, `page-actions.js`. `certificate.js` and the per-sitting text load on demand. | `study-tailwind.css`, `study-page.css`, `book-reader.css`, `book-open.css`, `task-flow.css`, `study-audio.css`, `onboard.css` |
+| `study.html` | `book-open.js` (in the head), `progress-sync.js`, `study-sync.js`, `quiz-gate.js`, `insights.js`, `onboard.js`, sounds, `reviews.js`, then `js/study/`: `scripture.js`, `workbench.js`, `competency.js`, `sheets/index.js`, `sheet-map.js`, `sheet-verify.js`, `term-overlay.js`, `card-min.js`, `glossary-enrichment.js`, `sheet-glossary.js`, `book-reader.js`, `study-app.js`, `lesson-player.js`, `task-flow.js`, `audio-orb.js`, `page-actions.js`. `certificate.js` and the per-sitting text load on demand. | `study-tailwind.css`, the 23 parts in `css/study/`, `insight-card.css`, `book-reader.css`, `book-open.css`, `task-flow.css`, `study-audio.css`, `onboard.css` |
 | `map.html` | `vendor/leaflet`, `insights.js`, sounds, `js/study/sheet-map.js`, `js/map/map-data.js`, `js/map/map.js` (which loads `js/map/globe.js` on demand) | `map.css` |
 | `gallery.html` | `insights.js`, `ui-sound.js`, then `js/gallery/app.js` as an ES module (three.js through an import map) | `app.css` |
 | `account.html` | `covers.js`, `mfa.js`, `insights.js`, `progress-sync.js`, `study-sync.js`, `reviews.js`, `account.js` | `site.css`, `notes.css`, `account.css` |
@@ -74,6 +74,8 @@ grep -oE '<script[^>]+src="[^"]+"' study.html
 | File | Role |
 |---|---|
 | `js/study/sheets-data.js` | Source of all sitting content. Edit this, then rebuild `js/study/sheets/`. |
+| `css/study/NN-name.css` | The study page's styles, one file per feature (story, mind map, flow, audio, horizon, themes and so on). `study.html` links them in number order, and the number order is the cascade order: a later file wins a tie. Parts 01–21 were cut from the old `css/study-page.css` at rule boundaries, so joined they hold the same rules in the same order (checked with `tools/verify/verify_equivalence.mjs`). 22 and 23 came from styles that scripts used to inject. `tests/unit/study-css.test.mjs` keeps the links and the folder in step. |
+| `css/insight-card.css` | The reader prompt cards (sitting pulse, profile), linked last on the seven pages that load `js/shared/insights.js` |
 | `css/study-tailwind-src.css`, `tailwind.study.config.js` | Source for `css/study-tailwind.css` (`npm run build:tailwind`) |
 | `js/study/glossary-enrichment-overrides.json` | Input for `js/study/glossary-enrichment.js` (`tools/verify/build_glossary_enrichment.mjs`) |
 | `vendor/three/build/three.core.js`, `three.module.js` | Unminified three.js; the site serves the `.min.js` files |

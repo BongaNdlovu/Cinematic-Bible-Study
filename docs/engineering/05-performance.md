@@ -30,7 +30,9 @@ It also updates the CSP hashes of any inline script whose text changed. `tools/v
 
 ### CSS minification at deploy
 
-`tools/minify-release-css.mjs` (PostCSS) minifies every stylesheet in the bundle, which also removes CSS comments. `tools/verify/verify_css_minify.mjs` tests it.
+`tools/minify-release-css.mjs` (PostCSS) minifies every stylesheet in the bundle, including those in subfolders such as `css/study/` (since 16 November 2026), which also removes CSS comments. `tools/verify/verify_css_minify.mjs` tests it, including that the study parts shrink by at least a quarter in total.
+
+**The study page loads 23 study stylesheets instead of one** (since 16 November 2026). This follows the decision to keep no build step at deploy: each part is fingerprinted and cached for a year like every other asset. Not measured: the effect on the study page's first paint.
 
 JavaScript and HTML are **not** minified. Their comments ship to readers as written: the 12 November bundle's `study-app.4c181f2f6b9d.js` still held 351 comments. Keep comments short for that reason (see [UI rules](06-ui.md#ui-rules-worth-keeping)).
 
