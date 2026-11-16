@@ -125,11 +125,11 @@ import { currentSheetIndex, showToast } from '/js/study/study-app.js';
       if (navigator.clipboard && navigator.clipboard.writeText) {
         try {
           await navigator.clipboard.writeText(url);
-          sent('clipboard', isFree ? 'Enrollment link copied.' : 'Enrollment link copied. Recipients sign in on the cover.');
+          sent('clipboard', 'Enrollment link copied. Recipients sign in on the cover.');
           return;
         } catch (err) {}
       }
-      sent('fallback', isFree ? 'Share this link: ' + url : 'Share the home page so they can sign in: ' + url);
+      sent('fallback', 'Share the home page so they can sign in: ' + url);
     }
 
     export function renderLessonConnectBar(index) {

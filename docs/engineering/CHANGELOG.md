@@ -14,6 +14,22 @@ Entry template:
 
 ---
 
+## 2026-11-16 — Sharing a sitting no longer throws; lint now catches undefined names
+
+**Why:** `js/study/lesson-connect.js` read `isFree`, which no file defines since every sitting began to need a sign-in (`acd563e`). When the browser has no share sheet, "Share this sitting" threw a `ReferenceError` instead of copying the link or showing it. Found while turning the study files into modules.
+
+**What changed:**
+
+- `shareSitting` uses the sign-in wording in both branches ("Enrollment link copied. Recipients sign in on the cover." and "Share the home page so they can sign in: …"), which is what `isFree` false would have chosen.
+- `.oxlintrc.json`: `no-undef` is on for `js/**/*.js`, with the browser environment and three declared globals (`sheetsData`, `timelineEpochs`, `L`). Across `js/`, those three and `isFree` were the only names it reported.
+- With the old `lesson-connect.js` put back, lint fails with `'isFree' is not defined`; with the fix, it passes.
+
+**Handbook updated:** 07 (lint).
+
+**Checked here:** on Windows: lint exits 0, `npm run test:unit` passes 180 of 180, every `npm test` script passes, and `npm run test:browser` passes 30 of 30. No browser check covers the share fallback (not checked in a browser).
+
+**Status:** on branch `arch/phase-4b-modules`, not deployed.
+
 ## 2026-11-16 — Architecture plan, step 4.5: every page loads one ES module entry
 
 **Why:** pages listed up to 70 `<script>` tags, and the study page's files shared about 280 names through the global scope, so a missing or reordered tag broke the page and lint could not see which file used what.
