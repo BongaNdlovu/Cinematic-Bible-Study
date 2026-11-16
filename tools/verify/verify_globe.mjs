@@ -34,10 +34,13 @@ function pass(name) {
 }
 
 async function settle(page) {
+  await page.waitForLoadState('networkidle', { timeout: 30000 }).catch(() => {});
   let last = -1;
-  for (let i = 0; i < 40; i++) {
+  let quiet = 0;
+  for (let i = 0; i < 60; i++) {
     const now = await page.evaluate(() => window.__raf);
-    if (now === last) return true;
+    quiet = now === last ? quiet + 1 : 0;
+    if (quiet >= 3) return true;
     last = now;
     await sleep(750);
   }
@@ -126,6 +129,7 @@ try {
     if (!pinsShown) assert.fail("globe pins never appeared " + JSON.stringify({ gl: await glInfo(t.page), errors: t.errors }));
     assert.ok(await globeOn(t.page), "view=globe did not open the globe");
     await sleep(3000);
+    await settle(t.page);
     const a = await t.page.evaluate(() => window.__raf);
     await sleep(2000);
     const b = await t.page.evaluate(() => window.__raf);
