@@ -282,7 +282,7 @@
 Numbers 14:34  ──▶  40 spy-days in Canaan  = 40 years of wandering
                     "Each day for a year..."
 -----------------------------------------------------------------------------
-Ezekiel 4:6    ──▶  Ezekiel lies on his side for 40 prophetic days
+Ezekiel 4:4–6  ──▶  Ezekiel lies 390 days for Israel, then 40 for Judah
                     "I have appointed thee each day for a year."
 -----------------------------------------------------------------------------
 Daniel 9:24–27 ──▶  "Seventy weeks" (70 × 7 = 490 prophetic years)
@@ -395,7 +395,7 @@ Daniel 9:24–27 ──▶  "Seventy weeks" (70 × 7 = 490 prophetic years)
     <ul class="reading-notes-list">
       <li>Bible Commentary vol. 4, Daniel 1; Prophetic Faith of Our Fathers, vol. 1, PFF1 36</li>
       <li>ABSG 2020 Q1, lesson 1</li>
-      <li>Smith dates the siege to 606 B.C.</li>
+      <li>Smith dates the siege to 606 B.C.; later scholarship corrects this to 605 B.C., the date this course uses (Bible Commentary vol. 4, Daniel 1:1).</li>
     </ul>
   </div>
   <div class="reading-notes-group">
@@ -998,7 +998,7 @@ DANIEL IN BABYLON                         JESUS IN THE WILDERNESS
               "Misconception: Daniel willingly mastered Chaldean learning and served as a high civil counselor, without adopting the heathen elements. The wisdom of the Chaldeans was allied with idolatry and pagan practices.",
               "Misconception: Daniel 1:8 shows Daniel purposed not to defile himself physically or spiritually through compromising actions.",
               "",
-              "Misconception: No violence is recorded. Daniel 6:10 has him praying after the decree was signed, so the chapter is not a picture of civil obedience to that law."
+              "Misconception: Daniel 1 shows no strike and no resistance movement. He took the training, served the king, and stood before him (Daniel 1:5, 19). He refused only the food that would defile him (1:8), and he asked permission for that (1:8, 12)."
             ]
           },
           {
@@ -1062,7 +1062,7 @@ DANIEL IN BABYLON                         JESUS IN THE WILDERNESS
               "",
               "Misconception: Daniel's steadfastness points to human need of grace; willpower cannot atone for sin without Christ's righteous life and sacrifice.",
               "Misconception: Hebrews 4:15 affirms Christ was tempted in all points as we are, yet without sin; Daniel experienced genuine pressure at court.",
-              "Misconception: Christ's answer ties to Israel's wilderness, not to Daniel's table."
+              "Misconception: Daniel 1 is more than a record of old food rules. Daniel's refusal of the king's table is a small picture of Christ, who refused Satan's bread and lived by every word of God (Matthew 4:4). The stand is the lesson, and Christ is where it leads."
             ]
           }
         ],
@@ -1078,7 +1078,7 @@ DANIEL IN BABYLON                         JESUS IN THE WILDERNESS
             },
             {
               do: "Read Daniel 1:11–16 beside Genesis 1:29 and Leviticus 17:10–14. What did the ten-day test of pulse and water put on trial?",
-              why: "Zeroim is the Hebrew word for food grown from seed, and it points back to the diet God gave people at creation (Genesis 1:29). The ten-day test is not a fad diet and the chapter does not present it as one. It is a test of whether God can be trusted with a body. One possible reason the king's food would defile him is that it was meat not properly drained of blood, which the law forbids (Leviticus 17:10-14). Another is that it had been offered to Babylon's gods. Either way, plants and water avoid both problems at once. The point is the stand, not the menu."
+              why: "Zeroim is the Hebrew word for food grown from seed, and it points back to the diet God gave people at creation (Genesis 1:29). The ten-day test is not a fad diet and the chapter does not present it as one. It is a test of whether God can be trusted with a body. One possible reason the king's food would defile him is that it was meat not properly drained of blood, which the law forbids (Leviticus 17:10-14). Another is that it had been offered to Babylon's gods. Either way, plants and water avoid both problems at once. The stand and the menu go together: loyalty to God is the reason, and the food God first gave (Genesis 1:29) is how Daniel kept it."
             },
             {
               do: "Read Daniel 1:17–20. Write one sentence that answers both errors: that holiness makes a person useless, and that excellence is worth a compromise.",
@@ -1513,7 +1513,7 @@ Iron        7.8 (Lowest)        Base                Crushing, Destructive</pre>
   <ul>
     <li>Daniel 2:41: <em>"…the kingdom shall be divided; but there shall be in it of the strength of the iron, forasmuch as thou sawest the iron mixed with miry clay."</em> Daniel 2:42: <em>"…so the kingdom shall be partly strong, and partly broken."</em> Daniel 2:43: <em>"they shall mingle themselves with the seed of men: but they shall not cleave one to another, even as iron is not mixed with clay."</em> No fifth metal appears: the feet are part iron and part potters’ clay (Daniel 2:41).</li>
     <li>Read historically, the feet are divided Europe after Rome. Verse 41 says the divided kingdom still has <em>"the strength of the iron"</em> in it, so the iron is Rome's hardness still alive in the kingdoms that grew out of it. The clay stands for the peoples of divided Western Europe, mixed in as the empire broke up: the feet stand in the lands the iron legs ruled, and the chapter calls this half of the kingdom <em>"partly broken"</em> while the iron half stays strong (Daniel 2:42). Verse 43 says they <em>"shall mingle themselves with the seed of men,"</em> and "seed of men" means human offspring, so the mingling points to marriages. This reading takes it as royal intermarriage between ruling houses, made to join kingdoms together, and it does not hold (Daniel 2:43). Daniel 11 uses the same motif: a royal marriage made to seal an agreement does not stand (Daniel 11:6, 17).</li>
-    <li>Some historicists take the clay as religious power allied with the state. That reading has to lean on Revelation 17, where a woman rides a beast with ten horns (17:3, 12–13, 16–17); Revelation 18:4 then calls God’s people out of her. A reader holds that view by carrying the picture back into Daniel’s clay: the woman is the religious power, the beast is the state that carries her, and the mixture of iron and clay is read as their union in the last days. This sitting does not build on that, because Daniel 2 itself explains the feet in political terms: <em>"the kingdom shall be divided"</em> (2:41), <em>"the seed of men"</em> (2:43), and <em>"these kings"</em> (2:44).</li>
+    <li>Many historicist readers also apply the iron and clay to religious power joined with the state. One comment in the Bible Commentary calls it <em>"the mingling of churchcraft and statecraft"</em> (Bible Commentary vol. 4, 1168). Revelation 17 fills out the same picture: a woman rides a beast with ten horns (17:3, 12–13, 16–17), and Revelation 18:4 calls God’s people out of her. This sitting gives the political reading first, because Daniel 2 itself explains the feet in political terms: <em>"the kingdom shall be divided"</em> (2:41), <em>"the seed of men"</em> (2:43), and <em>"these kings"</em> (2:44). The church-and-state application stands alongside that reading for the last days. It does not replace it.</li>
   </ul>
 </div>
 
@@ -1985,11 +1985,11 @@ Iron (strength that remains)  +  Clay (the mixture that will not hold)
                 ]
               },
               {
-                "role": "The Cross: Christ bears our sins in our place (Isaiah 53:6; 2 Corinthians 5:21)",
-                "title": "The Cross",
+                "role": "Keep separate: the cross is where sin is borne (Isaiah 53:6; 2 Corinthians 5:21)",
+                "title": "The Cross, not the furnace",
                 "points": [
-                  "At the cross, Christ faced alone the judgment our sins deserve",
-                  "Frees believers from eternal death"
+                  "The furnace shows the Son's presence, not His atonement (Daniel 3:25)",
+                  "At the cross, Christ bore the judgment our sins deserve"
                 ]
               }
             ]
@@ -2151,10 +2151,10 @@ The Faithful Remnant  Three Hebrews obey Decalogue         Saints keep God's com
                                     │
        ┌────────────────────────────┴────────────────────────────┐
        ▼                                                         ▼
-THE TRIAL: THE SON BESIDE THEM                            THE CROSS: HE BEARS WHAT WE OWE
-• Ropes burned away; men unbound                           • Christ entered the consuming fire
-• Bodies, clothes, hair unharmed                             of divine wrath for our sins
-• The Son of God walks beside them                         • Liberates believers from eternal death</pre>
+THE TRIAL: THE SON BESIDE THEM                            KEEP SEPARATE: THE CROSS
+• Ropes burned away; men unbound                           • The furnace shows presence,
+• Bodies, clothes, hair unharmed                             not atonement (Daniel 3:25)
+• The Son of God walks beside them                         • Atonement: Isaiah 53; 2 Cor 5:21</pre>
 </figure>
 
 <div class="biblical-case">
@@ -2720,18 +2720,17 @@ He blesses the Most High → he acknowledges God's everlasting dominion</pre>
 
 <blockquote class="scripture-quote">"Now I Nebuchadnezzar praise and extol and honour the King of heaven, all whose works are truth, and his ways judgment: and those that walk in pride he is able to abase." — Daniel 4:37 (KJV)</blockquote>
 
-<div class="level-card level-christ">
-  <p class="level-kicker">CHRIST</p>
-
-<p>In plain words: pride took the king down, and lifting his eyes to God brought him back, because the Most High rules.</p>
-
 <div class="level-card level-interpretation">
   <p class="level-kicker">INTERPRETATION</p>
   <p>Daniel 4 answers one question: who is the source of a kingdom, a career, or a life? The chapter makes the answer one sentence and repeats it three times (Daniel 4:17, 25, 32). The Most High rules.</p>
-  <p>The king learned it in this order. Heaven warned him before it judged him. A full year passed between Daniel 4:27 and the boast of Daniel 4:30, so the warning was real and the patience was real. Then he said "I have built," and the sentence fell: he lost his reason and lived like an ox. Notice where his reason came back. Not when the seven years ended, but when he lifted his eyes to heaven (Daniel 4:34). The order is turn, and then restore.</p>
+  <p>The king learned it in this order. Heaven warned him before it judged him. A full year passed between Daniel 4:27 and the boast of Daniel 4:30, so the warning was real and the patience was real. Then he said "I have built," and the sentence fell: he lost his reason and lived like an ox. Notice how his reason came back. "At the end of the days" he lifted his eyes to heaven, and then his understanding returned (Daniel 4:34). The appointed time ran its course, and the king looked up. The order is turn, and then restore.</p>
   <p>The tree dream shows it step by step. The tree is the king (Daniel 4:22). It is cut down because pride cannot be left in charge. The stump is left with a band of iron and brass, and Daniel 4:26 explains that band: his kingdom would be sure to him again. So the judgment was not the end of him. It was the limit set on him. A stump is a thing still rooted.</p>
   <p>That is why the chapter ends with the king praising God instead of complaining. He was not owed his throne. He was given it, and then given it again. The bottom line is the same for an empire and for one person: what you build is held on loan, and the loan is called in when you treat it as your own.</p>
+  <p>In plain words: pride took the king down, and lifting his eyes to God brought him back, because the Most High rules.</p>
 </div>
+
+<div class="level-card level-christ">
+  <p class="level-kicker">CHRIST</p>
   <p>The king himself says that his understanding returned when he lifted his eyes to heaven and praised the Most High (Daniel 4:34–37). Philippians 2:6–8, from the apostle Paul's letter to the church at Philippi, shows Christ's humility as the opposite of the king's boast.</p>
 </div>
 
@@ -2808,7 +2807,7 @@ Nebuchadnezzar (Daniel 4)                Jesus Christ (Philippians 2)
             "diagnostics": [
               "",
               "Misconception: Daniel 4:31–33 records the sentence and the humiliation. The boast is not ignored, and the rule does not continue without interruption.",
-              "Misconception: The chapter says the king's boast has no consequence; Daniel 4:31–33 records the sentence and humiliation.",
+              "Misconception: The tree is the king himself, not Babylon alone: \"It is thou, O king\" (Daniel 4:22). And he was restored: \"I was established in my kingdom\" (Daniel 4:36).",
               "Misconception: The seven times are the king's own season (Daniel 4:32). Daniel 4:34–37 records his restoration, not a 2,520-year period."
             ]
           },
@@ -2898,7 +2897,7 @@ Nebuchadnezzar (Daniel 4)                Jesus Christ (Philippians 2)
           ],
           christ: {
             claim: "Nebuchadnezzar exalted himself; Christ emptied Himself. Philippians 2 is the antidote to Daniel 4:30.",
-            why: "The king's understanding returned when he lifted his eyes and praised the Most High (Daniel 4:34). Notice that he was not restored by his own effort or by the passage of seven years. He was restored when he stopped claiming what he had been given. Philippians 2:6-8 shows the opposite movement in Christ, who had every right to hold on and chose instead to empty himself, and the Father highly exalted him. Daniel 4:37 says God is able to abase those who walk in pride. The Son is the one who chose the low place and was raised."
+            why: "The king's understanding returned when he lifted his eyes and praised the Most High (Daniel 4:34). Notice that he was not restored by his own effort. At the end of the appointed days he lifted his eyes and stopped claiming what he had been given, and then he was restored. Philippians 2:6-8 shows the opposite movement in Christ, who had every right to hold on and chose instead to empty himself, and the Father highly exalted him. Daniel 4:37 says God is able to abase those who walk in pride. The Son is the one who chose the low place and was raised."
           },
           now: {
             claim: "Social feeds and career ladders still reward the boast of Daniel 4:30. This chapter is a diagnostic for headlines, speeches, and your own mouth.",
@@ -3037,7 +3036,7 @@ Nebuchadnezzar (Daniel 4)                Jesus Christ (Philippians 2)
             "title": "The Wall of Audit (Daniel 5:25-28)",
             "head": [
               "Inscription",
-              "Aramaic verb",
+              "Daniel's reading",
               "Divine Verb Interpretation"
             ],
             "rows": [
@@ -3464,7 +3463,7 @@ CYRUS THE DELIVERER                       JESUS CHRIST THE REDEEMER
             "diagnostics": [
               "Misconception: The vessels were sacred instruments of sanctuary worship; TEKEL constituted a forensic moral judgment against the king himself.",
               "",
-              "Misconception: Tekel is a verb meaning weighed. The inspired interpretation is forensic: Belshazzar's moral character failed God's balance.",
+              "Misconception: TEKEL does sound like shekel, a weight, but Daniel reads it as a verdict: \"Thou art weighed in the balances\" (Daniel 5:27). What is weighed is the king, not Babylon's tax income.",
               "Misconception: Daniel 5:27 explicitly charges Belshazzar with arrogant defiance and moral bankruptcy: 'thou art weighed... and art found wanting.'"
             ]
           },
@@ -3513,7 +3512,7 @@ CYRUS THE DELIVERER                       JESUS CHRIST THE REDEEMER
             },
             {
               do: "Study the wall-of-audit diagram. Write one verb beside each word: numbered, weighed, divided.",
-              why: "MENE, TEKEL, and PERES are three Aramaic verbs: numbered, weighed, and divided. Read them as a sequence rather than as three separate riddles. A kingdom is counted, then measured against God's standard, then handed to another power. Every kingdom in the book meets the same three verbs eventually, and Babylon meets all three in a single night. The words are a verdict already reached, announced late, which is why Daniel does not treat them as a prediction."
+              why: "MENE, TEKEL, and PERES look like names of weights (a mina, a shekel, half-pieces), but Daniel reads each one as a verb: numbered, weighed, and divided (Daniel 5:26–28). Read them as a sequence rather than as three separate riddles. A kingdom is counted, then measured against God's standard, then handed to another power. Every kingdom in the book meets the same three verbs eventually, and Babylon meets all three in a single night. The words are a verdict already reached, announced late, which is why Daniel does not treat them as a prediction."
             },
             {
               do: "Read Daniel 5:30–31 beside Isaiah 44:27 and 45:1–3. Note who was named, the dried deep, and the two leaved gates.",
@@ -3576,7 +3575,7 @@ CYRUS THE DELIVERER                       JESUS CHRIST THE REDEEMER
             "What is the difference between genuine religious freedom and political defiance?"
           ]
         },
-        scripture: "Daniel 6:1-28 &bull; Babylon, c. 539 B.C.",
+        scripture: "Daniel 6:1-28 &bull; Babylon, c. 538 B.C.",
         audio: {
           src: "assets/study/audio/sitting-06-readalong.mp3",
           kind: "readalong",
@@ -4937,7 +4936,7 @@ SCRIPTURAL CRITERIA:                     HISTORICAL FULFILLMENT:
           talkingPoints: [
             "The vision of Daniel 8 shifts to sanctuary animals: the Ram (Medo-Persia, Dan 8:20) and the He-Goat (Greece, Dan 8:21).",
             "The great horn broken (Alexander the Great) and the four notable horns, the four generals who divided his empire.",
-            "Daniel 8:14 and the Hebrew nitsdaq: 2,300 days; then shall the sanctuary be cleansed. There is no consensus on the best (Richard M. Davidson, JATS 7/1 (1996))."
+            "Daniel 8:14 and the Hebrew nitsdaq: 2,300 days; then shall the sanctuary be cleansed. Translators differ on the best English word; Davidson shows that nitsdaq joins cleansing, restoring, and vindicating (Richard M. Davidson, JATS 7/1 (1996))."
           ],
           askClass: [
             "Why does the text explicitly interpret the ram and goat by name in Daniel 8:20–21?",
@@ -5167,7 +5166,7 @@ SYMBOL IN PROPHECY:           INTERPRETATION:          HISTORICAL REALITY:
   <li>The little horn waxed <strong>exceeding great</strong> (Daniel 8:9).</li>
 </ul>
 
-<p>On the historicist reading, which this course follows, this little horn is <strong>Rome in both of its successive historical phases: Pagan and Papal</strong>. It is the same power as the little horn of Daniel 7, seen from another side: Daniel 7 followed its papal phase for 1,260 years, and Daniel 8 adds the pagan phase before it. The horn comes out of one of the four Greek kingdoms (Daniel 8:9, "out of one of them"). Rome began in the west, but it grew by taking over the Greek kingdoms one by one, so this reading says the horn grows "out of" the Greek world. The pleasant land is Judea. This reading calls the horn Rome because it grows greater than Persia and Greece, and because its reach matches the directions in the verse: south into Egypt (30 B.C.), east into Syria (64 B.C.), and into Judea (63 B.C.). First that is the empire that crucified Jesus and burned the temple. Then it is the church power that sets itself against Christ's ministry in heaven by hiding the truth about it (the next point explains how).</p>
+<p>On the historicist reading, which this course follows, this little horn is <strong>Rome in both of its successive historical phases: Pagan and Papal</strong>. It is the same power as the little horn of Daniel 7, seen from another side: Daniel 7 followed its papal phase for 1,260 years, and Daniel 8 adds the pagan phase before it. Daniel 8:9 says it comes "out of one of them." In Hebrew the word for "them" is masculine, which points back to the four winds of verse 8, not to the horns (Bible Commentary, Daniel 8:9). So the verse gives a direction, one of the four points of the compass, and Rome came from the west. Verse 23 gives the time: "in the latter time of their kingdom," as the Greek kingdoms were ending. The pleasant land is Judea. This reading calls the horn Rome because it grows greater than Persia and Greece, and because its reach matches the directions in the verse: south into Egypt (30 B.C.), east into Syria (64 B.C.), and into Judea (63 B.C.). First that is the empire that crucified Jesus and burned the temple. Then it is the church power that sets itself against Christ's ministry in heaven by hiding the truth about it (the next point explains how).</p>
 
 <div class="framework-card">
   <p class="framework-card-kicker">The two phases of Rome in Daniel 8</p>
@@ -5283,18 +5282,17 @@ BIBLICAL REQUIREMENT:            ANTIOCHUS IV EPIPHANES:           HISTORICIST R
   </ul>
 </div>
 
-<div class="level-card level-christ">
-  <p class="level-kicker">CHRIST</p>
-
-<p>In plain words: the little horn attacks the sanctuary for 2,300 days, and then the sanctuary is put right.</p>
-
 <div class="level-card level-interpretation">
   <p class="level-kicker">INTERPRETATION</p>
   <p>Daniel 8 answers a question no one asks out loud in the chapter: how long will the attack on God's sanctuary last? The answer given is "unto two thousand and three hundred days; then shall the sanctuary be cleansed" (Daniel 8:14).</p>
   <p>Notice where the attack lands. The little horn does not content itself with land or treasure. It grows toward the pleasant land, takes away the daily sacrifice, and casts down the place of the sanctuary (Daniel 8:9-11). The regular ministry of the sanctuary is the target. That is why the answer is measured in sanctuary time, and why it ends with the sanctuary put right.</p>
   <p>Two steps make this reading work, and this course states both plainly. First, the span is given in days with no starting point, and Daniel says he did not understand it (Daniel 8:27). Second, in Daniel 9 Gabriel returns and tells him to consider the vision (Daniel 9:23), then gives the seventy weeks as a period "cut off," and supplies a starting decree (Daniel 9:24-25). If those weeks are cut from the 2,300, both begin together, and this reading takes the starting decree to be the decree of Artaxerxes in 457 B.C. (Ezra 7). On the year-day scale the 2,300 days are 2,300 years, which is why the count reaches 1844.</p>
   <p>The bottom line is what "cleansed" means. The Hebrew verb is nitsdaq, and it is the language of a court rather than a bucket: to be vindicated, to be put right. So the last word of this chapter is not that a building was scrubbed. It is that God's name, his sanctuary, and his people are cleared of the horn's charges. Anyone who has ever been accused has a stake in that word.</p>
+  <p>In plain words: the little horn attacks the sanctuary for 2,300 days, and then the sanctuary is put right.</p>
 </div>
+
+<div class="level-card level-christ">
+  <p class="level-kicker">CHRIST</p>
   <p>The Day of Atonement work of 1844 is Christ's final priestly ministry, not a repetition of the cross. At Calvary, Jesus offered the once-for-all, all-sufficient sacrifice for human sin (Hebrews 9:26). The earthly Day of Atonement shows the order: first the sacrifice, then the priest carries the blood into the sanctuary. Christ made the one sacrifice on Calvary, and now, as our Great High Priest, he appears in the presence of God for us (Hebrews 9:24) to vindicate His people and cleanse the sanctuary. Look by faith into the Most Holy Place, the inner room that the Day of Atonement entered, where Christ ever lives to intercede for you.</p>
 </div>
 
@@ -5461,7 +5459,7 @@ BIBLICAL REQUIREMENT:            ANTIOCHUS IV EPIPHANES:           HISTORICIST R
             "diagnostics": [
               "",
               "Misconception: The horn waxes 'exceeding great' beyond Greece, attacks Christ, and spans to the time of the end.",
-              "Misconception: The horn comes forth out of one of them (Daniel 8:9), after the four horns, not from the Persian ram that Greece had already trampled.",
+              "Misconception: The horn comes from one of the four winds, a point of the compass (Daniel 8:8–9), after the four horns have arisen. It is not the Persian ram, which Greece had already trampled.",
               "Misconception: Horns in Daniel represent kings and ruling powers (Dan 8:21–22); this power attacks the sanctuary and truth itself."
             ]
           },
@@ -5498,7 +5496,7 @@ BIBLICAL REQUIREMENT:            ANTIOCHUS IV EPIPHANES:           HISTORICIST R
             },
             {
               do: "Read Daniel 8:17 through 8:19 and 8:27 in Scripture. Write what Gabriel says about the time of the end and note Daniel's reaction when no one could explain the vision.",
-              why: "Daniel 8:17 says the vision is at the time of the end. Daniel 8:19 names the last end of the indignation and the time appointed. That horizon cannot be exhausted by a second-century crisis. Daniel 8:27 records that Daniel fainted and was sick certain days, and that he was astonished at the vision, but none understood it. The vision has named the attack and given the length of the wait, but without a starting date the number floats unattached to any calendar. If you stop at Antiochus in 167–164, you cut the longest number in the book short and leave nothing for modern history. Cannot be limited only to the duration of the actions of the little horn. If you keep Gabriel's time horizon and Daniel's sickness, you see why chapter 9 must supply the decree that anchors the count."
+              why: "Daniel 8:17 says the vision is at the time of the end. Daniel 8:19 names the last end of the indignation and the time appointed. That horizon cannot be exhausted by a second-century crisis. Daniel 8:27 records that Daniel fainted and was sick certain days, and that he was astonished at the vision, but none understood it. The vision has named the attack and given the length of the wait, but without a starting date the number floats unattached to any calendar. If you stop at Antiochus in 167–164, you cut the longest number in the book short and leave nothing for modern history. The 2,300 days are longer than the little horn's own actions, and they reach to the time of the end. If you keep Gabriel's time horizon and Daniel's sickness, you see why chapter 9 must supply the decree that anchors the count."
             }
           ],
           christ: {
@@ -6089,7 +6087,7 @@ Restore City                        Messiah               Christ                
     <h4 class="reading-notes-heading">Introduction · Daniel's Penitential Prayer and Gabriel's Return</h4>
     <ul class="reading-notes-list">
       <li>ABSG 2020 Q1, lesson 10</li>
-      <li>ABSG 2020 Q1, lesson 10 (gives 539 B.C.)</li>
+      <li>ABSG 2020 Q1, lesson 10 (gives 539 B.C., the year Babylon fell; this course counts Darius’s first full year, 538 B.C., as Sitting 6 explains)</li>
     </ul>
   </div>
   <div class="reading-notes-group">
@@ -6445,7 +6443,7 @@ Restore City                        Messiah               Christ                
 
 <p>In the third year of Cyrus king of Persia (536/535 B.C.), a revelation was given to Daniel, whose name was called Belteshazzar (Daniel 10:1). The decree of Cyrus had already permitted the exiles to return to Jerusalem (Ezra 1:1–4), yet only a small remnant had returned, and there was fierce local opposition to the rebuilding of the temple (Ezra 4:1–5). Deeply burdened for the future of his people and the holy city, the aged prophet entered a three-week partial fast, eating no pleasant bread, meat, or wine, nor anointing himself at all for three full weeks (Daniel 10:2–3).</p>
 
-<p>On the twenty-fourth day of the first month (Nisan) (Esther 3:7), as Daniel stood beside the great river Hiddekel (the ancient name for the Tigris), he lifted up his eyes and looked upon an awe-inspiring celestial vision.</p>
+<p>On the twenty-fourth day of the first month (Nisan, the name Esther 3:7 gives the first month), as Daniel stood beside the great river Hiddekel (the ancient name for the Tigris), he lifted up his eyes and looked upon an awe-inspiring celestial vision.</p>
 
 <div class="framework-card">
   <p class="framework-card-kicker">Structural Unity: Chapters 10, 11, and 12 Form One Single Vision</p>
@@ -6465,9 +6463,9 @@ Restore City                        Messiah               Christ                
 │  • Fasting by the Tigris      • Three kings, then Xerxes       • Michael Stands Up           │
 │  • The Man in Linen           • Alexander &amp; 4 Diadochi         • Time of Trouble             │
 │  • Unseen Spiritual Warfare   • King of North vs South         • Deliverance in the Book     │
-│  • Prince of Persia resisted  • Rome: Prince of Covenant cut   • Deliverance in the Book     │
-│  • Michael comes to help      • Papal phase removes tamid      • Bodily Resurrection (12:2)  │
-│                               • Time of the End (1798)         • Rest and Lot (12:13)        │
+│  • Prince of Persia resisted  • Rome: Prince of Covenant cut   • Bodily Resurrection (12:2)  │
+│  • Michael comes to help      • Papal phase removes tamid      • Rest and Lot (12:13)        │
+│                               • Time of the End (1798)                                       │
 └──────────────────────────────────────────────────────────────────────────────────────────────┘</pre>
 </figure>
 
@@ -6604,7 +6602,7 @@ Michael stands up ('amad: kingly stance, Dan 11:2–4)
   <p class="framework-card-kicker">The Numbered Spans of Daniel 12: The 1,290 and 1,335 Days</p>
   <p>In Daniel 12:11–12, two final prophetic spans are revealed from the time the <em>tamid</em> is taken away and the abomination of desolation is set up:</p>
   <blockquote class="scripture-quote">"And from the time that the daily sacrifice shall be taken away, and the abomination that maketh desolate set up, there shall be a thousand two hundred and ninety days. Blessed is he that waiteth, and cometh to the thousand three hundred and five and thirty days." — Daniel 12:11–12 (KJV)</blockquote>
-  <p>This sitting applies the year-day principle to these periods (Numbers 14:34; Ezekiel 4:6), reading the 1,290 and 1,335 days as solar years. The verses measure from one pair of events: the taking away of the daily, and the setting up of the abomination that makes desolate (Daniel 12:11). Here is how this sitting gets a year out of that. On this reading the daily is Christ’s continual priesthood, which Sitting 8 set out, and the power that took it away is the Roman church acting with the arm of the state. That arrangement took shape in the West when a Frankish king put his power behind the Roman church, so this timeline starts the count when that support was in place: <strong>A.D. 508</strong>, a chosen marker and not a year Daniel prints. The arithmetic shows why it has to be 508 and not 496 or 507: only 508 plus 1,290 lands on 1798, the year the popes lost their civil rule, and 508 plus 1,335 lands on 1843, the year of waiting before 1844. Clovis’s baptism is often dated 496, which is the king’s own adoption of the faith, and the battle of Vouillé is 507, a battlefield victory. Both belong to the same story and both moved the same cause forward, but this count does not start from either one. It starts when that backing was in place, and the two events of Daniel 12:11 are what the count measures from.</p>
+  <p>This sitting applies the year-day principle to these periods (Numbers 14:34; Ezekiel 4:6), reading the 1,290 and 1,335 days as solar years. The verses measure from one pair of events: the taking away of the daily, and the setting up of the abomination that makes desolate (Daniel 12:11). Here is how this sitting gets a year out of that. On this reading the daily is Christ’s continual priesthood, which Sitting 8 set out, and the power that took it away is the Roman church acting with the arm of the state. That arrangement took shape in the West when a Frankish king put his power behind the Roman church, so this timeline starts the count when that support was in place: <strong>A.D. 508</strong>, a chosen marker and not a year Daniel prints. Two things are dated to 508. Clovis finished his war against the Arian Visigoths that began at Vouillé in 507, and at Tours he received the title of consul from the emperor Anastasius (Gregory of Tours, History of the Franks 2.38). The Catholic church in the West now had a strong Catholic king and his army behind it. Clovis’s baptism is often dated 496, and the battle of Vouillé is 507. Both belong to the same story, but this count starts in 508, when that backing was in place. From 508, 1,290 years reach 1798, the year the popes lost their civil rule, and 1,335 years reach 1843, the year of waiting before 1844.</p>
   <ul class="list-disc pl-5 my-2 space-y-1">
     <li><strong>1,290 prophetic days (solar years):</strong> A.D. 508 + 1,290 years = A.D. 1798, the year Berthier took the pope and the “time of the end” begins (Daniel 12:4).</li>
     <li><strong>1,335 prophetic days (solar years):</strong> A.D. 508 + 1,335 years = A.D. 1843, the waiting year of the great second-advent awakening, immediately before the 2,300 evenings-mornings land in 1844 (sitting 8).</li>
@@ -6727,7 +6725,7 @@ then 1844: 2,300-year sanctuary landing (sitting 8)</pre>
             ],
             "explanation": "Daniel uses 'stand up' for kings assuming power (Dan 11:2–4). Hebrews 7:25 is His intercession in this age, until Michael stands; Daniel 12:1 is that standing, when human probation closes. Then trouble, deliverance for those in the book, then resurrection (12:2).",
             "diagnostics": [
-              "Misconception: Cyrus's decree is Daniel 12:1. Ezra 1:1 is Cyrus's first year; 536 is the usual figure for the third year in Daniel 10:1. Daniel 12:1 stands at the culmination of the prophetic march at the end of human history.",
+              "Misconception: Daniel 12:1 is not Cyrus's decree. Ezra 1:1 is Cyrus's first year; 536 is the usual figure for the third year in Daniel 10:1. Daniel 12:1 stands at the culmination of the prophetic march at the end of human history.",
               "Misconception: Augustus ruled at the rise of the Roman Empire; Daniel 12:1 occurs at the climax of history, followed by the bodily resurrection.",
               "Misconception: Michael is 'the great prince which standeth for the children of thy people'—the divine Captain and Redeemer, not an angelic rebel.",
               ""
@@ -6760,7 +6758,7 @@ then 1844: 2,300-year sanctuary landing (sitting 8)</pre>
             "explanation": "Daniel 12:1–2 is sequential: standing up (human probation closes), trouble, deliverance, resurrection.",
             "diagnostics": [
               "",
-              "Misconception: Michael starts His intercession only when trouble begins. Hebrews 7:25 intercession runs in this age until He stands (Dan 12:1); then probation closes and trouble follows.",
+              "Misconception: Michael does not wait for the trouble to begin His intercession. He intercedes now (Hebrews 7:25) until He stands up (Daniel 12:1); then probation closes and the trouble follows.",
               "Misconception: 'A time of trouble such as never was' is the climactic historical crisis of earth's final conflict, not merely a subjective mood.",
               "Misconception: Verse 2 immediately follows with the glorious promise of bodily resurrection to everlasting life, not its cancellation."
             ]
@@ -6905,7 +6903,7 @@ then 1844: 2,300-year sanctuary landing (sitting 8)</pre>
       {
         year: "538 A.D.",
         title: "538 A.D. — Commencing the 1,260 Years of Papal Supremacy",
-        desc: "In 538 the Ostrogothic siege of Rome is lifted. Justinian's decree establishes the Bishop of Rome as the head of all churches. Christ ministers daily in the Holy Place.",
+        desc: "In 538 the Ostrogothic siege of Rome is lifted, and Justinian's decree of 533, naming the Bishop of Rome head of all the churches, can take effect. Through all of it, Christ's own daily ministry in the heavenly Holy Place goes on (Hebrews 8:1–2).",
         pioneerNote: "Daniel 7:8, 24–25: a little horn uproots three and thinks to change times and laws. After the Heruli (493) and the Vandals (534), and once the Ostrogoths withdrew from Rome in 538 (not fully defeated until about 553), a church-state power sits among the ten.",
         image: "assets/study/horizon/y538.jpg",
         history: "After the Heruli fell in 493 and the Vandals in 534, and once the Ostrogoths withdrew from Rome in 538, Justinian’s ecclesiastical decree can take effect on this chart. They were not fully defeated until about 553. A church-state power sits among the ten horns.",

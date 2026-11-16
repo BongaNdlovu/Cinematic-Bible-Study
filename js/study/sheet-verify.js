@@ -16,10 +16,10 @@
         ),
         item(
           "scripture",
-          "Jeremiah 25:1 dates the word to Jehoiakim's fourth year, which is Nebuchadnezzar's first; Daniel 1:1 dates the siege to Jehoiakim's third year, Nebuchadnezzar's accession year.",
+          "Jeremiah 25:1 dates the word to Jehoiakim's fourth year, which is Nebuchadnezzar's first; Daniel 1:1 dates the siege to Jehoiakim's third year, the same year counted another way.",
           "Jeremiah 25:1, King James Version",
           "The word that came to Jeremiah concerning all the people of Judah in the fourth year of Jehoiakim the son of Josiah king of Judah, that was the first year of Nebuchadrezzar king of Babylon;",
-          "Jehoiakim's third year (Daniel 1:1) is Nebuchadnezzar's accession year, 605 B.C.; his fourth year (Jeremiah 25:1) is Nebuchadnezzar's first. The years are consecutive, not the same. Do not move the book to 586 to 'fix' the verse."
+          "Daniel 1:1's third year and Jeremiah 25:1's fourth year are the same year, 605 B.C., counted two ways. Daniel counts Jehoiakim's reign the Babylonian way, without his accession year; Jeremiah counts it the Judean way, with it (Bible Commentary vol. 4, Daniel 1:1). Do not move the book to 586 to 'fix' the verse."
         ),
         item(
           "scripture",
@@ -709,7 +709,7 @@
           "Daniel 12:11–12 names two spans from the time the daily is taken away and the abomination is set up.",
           "Daniel 12:11–12, King James Version",
           "And from the time that the daily sacrifice shall be taken away, and the abomination that maketh desolate set up, there shall be a thousand two hundred and ninety days. Blessed is he that waiteth, and cometh to the thousand three hundred and five and thirty days.",
-          "The English supplies “sacrifice” in italics in some printings; the Hebrew is ha-tamid. The verse gives the counts, not A.D. 508. The sitting’s 508 start is a reconstructed civil pin on the year-day scale (Numbers 14:34; Ezekiel 4:6). The 2020 lesson's event for 508 is Clovis's conversion (ABSG 2020 Q1, lesson 13), separable from Clovis ~496 and Vouillé ~507. 508 + 1,290 = 1798; 508 + 1,335 = 1843. If the start moves, the landings move."
+          "The English supplies “sacrifice” in italics in some printings; the Hebrew is ha-tamid. The verse gives the counts, not A.D. 508. The sitting’s 508 start is a reconstructed civil pin on the year-day scale (Numbers 14:34; Ezekiel 4:6). The 2020 lesson ties 508 to Clovis's conversion (ABSG 2020 Q1, lesson 13); his baptism is traditionally dated 496, and some historians date it later. What is firmly dated to 508 is the end of his war on the Arian Visigoths (begun at Vouillé, 507) and the consular title from Anastasius (Gregory of Tours, History of the Franks 2.38). 508 + 1,290 = 1798; 508 + 1,335 = 1843. If the start moves, the landings move."
         )
       ]
     }

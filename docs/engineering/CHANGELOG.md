@@ -14,6 +14,28 @@ Entry template:
 
 ---
 
+## 2026-11-15 — Theological audit fixes (lesson text)
+
+**Why:** `docs/THEOLOGICAL-AUDIT-2026-11-15.md` flagged 22 items. Each was checked against the lesson source. All 22 were real problems and all were fixed; three of the audit's supporting details were wrong (recorded at the end of the audit file). Most were contradictions between two parts of the course, quiz feedback that answered the wrong option, or broken card markup.
+
+**What changed:**
+
+- `js/study/sheets-data.js` (the source every sitting is built from): Sittings 0, 1, 2, 3, 4, 5, 6, 8, 9, 10 and the 538 A.D. horizon card. Seven quiz feedback lines were rewritten (Sitting 1 Q1 and Q5, Sitting 4 Q1, Sitting 5 Q3, Sitting 8 Q4, Sitting 10 Q1 and Q3). Answer slots and the answer key are unchanged.
+- `js/study/sheets/index.js` and `sheet-0.js` to `sheet-10.js` (not 7): rebuilt with `node tools/build_study_sheets.mjs`. `--check` passes.
+- Sittings 4 and 8: the INTERPRETATION card was nested inside the CHRIST card. Both are now separate cards, interpretation first, as in the other sittings.
+- `js/study/sheet-glossary.js`, `js/study/glossary-enrichment-overrides.json`: Alcázar, Jehoiakim's third and fourth year, zeroim, dispensationalism, Clovis and 508, tamid, little horn. Also removed the "History: " label from 41 short glossary definitions, where it showed to readers.
+- `js/study/glossary-enrichment.js`: rebuilt with `node tools/verify/build_glossary_enrichment.mjs`.
+- `js/study/sheet-verify.js`, `js/study/sheet-map.js`, `js/study/workbench.js`: the same corrections where they repeat.
+- Not changed: `tools/supabase-quiz-integrity.sql`. No answer index moved, so the database key needs no migration.
+
+**Checked here:** `build_study_sheets.mjs --check` passes. All 55 quizzes keep one blank feedback slot and aligned options. No level card is nested. No forbidden brand names in the edited files. Changed files parse. `npm test` was not run (the full repo was not available here).
+
+**Handbook updated:** none. This changes lesson wording only, not pages, files, security, performance, UI components, or tooling.
+
+**Status:** committed, pushed to `master`, and deployed to Cloudflare Pages.
+
+---
+
 ## 2026-11-15 — Sign-in required from the first sitting
 
 **Why:** You asked that the study need a sign-in from the start. Until now guests could read the Prologue, Daniel 1 and Daniel 2 without an account.

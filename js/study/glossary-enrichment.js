@@ -60,7 +60,7 @@
   },
   "little-horn": {
     "simple": "A smaller horn rising among ten kings, “diverse” from them, that speaks against God, persecutes saints, and targets the sanctuary — read here as the papal church-state phase on Rome’s fragments.",
-    "history": "Daniel 7:24–25: the horn rises after the ten kings, subdues three kings, speaks great words against the Most High, wears out the saints, and reigns “until a time and times and the dividing of time” (3½ prophetic years → 1,260 year-days → A.D. 538–1798 in this chart). Daniel 8’s horn grows out of one of the four horns that replace Alexander’s great horn (8:8–9), toward the pleasant land, and takes away the daily sacrifice — pagan then papal Rome in succession. Antiochus IV is too early and too short for chapter 7’s checklist. Reformers applied the office to Rome; futurism relocated the same language to a future fulfillment.",
+    "history": "Daniel 7:24–25: the horn rises after the ten kings, subdues three kings, speaks great words against the Most High, wears out the saints, and reigns “until a time and times and the dividing of time” (3½ prophetic years → 1,260 year-days → A.D. 538–1798 in this chart). Daniel 8’s horn comes from one of the four winds, a point of the compass, after four horns replace Alexander’s great horn (8:8–9), toward the pleasant land, and takes away the daily sacrifice — pagan then papal Rome in succession. Antiochus IV is too early and too short for chapter 7’s checklist. Reformers applied the office to Rome; futurism relocated the same language to a future fulfillment.",
     "proof": [
       "Scripture (KJV): Daniel 7:24–25 — diverse horn, three kings subdued, “a time and times and the dividing of time.”",
       "Scripture (KJV): Daniel 8:9–13 — horn toward the pleasant land; the daily sacrifice taken away (8:11).",
@@ -70,7 +70,7 @@
   },
   "tamid": {
     "simple": "Hebrew for the continual daily — the standing, regular priestly service before God, which Daniel 8 shows a horn attempting to replace with a counterfeit.",
-    "history": "On earth the tamid was the regular sacrifice and ministry at the altar. In Daniel 8:11 the horn magnifies itself even to the Prince of the host; the daily sacrifice (the tamid) is taken away, and the place of his sanctuary is cast down — read in this course as an attack on Christ’s continual priesthood (Hebrews 7–10) through a competing earthly mediation. Sitting 10 links this to the papal phase; 508 is not a numeral in Daniel 8. It is the date reached by those who subtract 1290 from 1798 under the daily-as-paganism view.",
+    "history": "On earth the tamid was the regular sacrifice and ministry at the altar. In Daniel 8:11 the horn magnifies itself even to the Prince of the host; the daily sacrifice (the tamid) is taken away, and the place of his sanctuary is cast down — read in this course as an attack on Christ’s continual priesthood (Hebrews 7–10) through a competing earthly mediation. Sitting 10 links this to the papal phase. A.D. 508 is not a numeral in Daniel 8 or 12. Earlier historicist expositors reached it by counting 1,290 years back from 1798 while reading the daily as paganism; this course keeps the same 508–1798 and 508–1843 spans but reads the daily as Christ’s priesthood (Sitting 10).",
     "proof": [
       "Scripture (KJV): Daniel 8:11–13 — the daily sacrifice taken away; the place of his sanctuary cast down.",
       "Scripture (KJV): Hebrews 7:24–25 — Christ’s unchangeable priesthood as the New Testament counterpart.",
@@ -96,7 +96,7 @@
     ]
   },
   "arian": {
-    "simple": "History: The Heruli, Vandals, and Ostrogoths were Arian powers, Christian kingdoms that denied the Roman church’s teaching that Christ is fully God, not the whole definition of Arian theology.",
+    "simple": "The Heruli, Vandals, and Ostrogoths were Arian powers, Christian kingdoms that denied the Roman church’s teaching that Christ is fully God, not the whole definition of Arian theology.",
     "history": "The Heruli, Vandals, and Ostrogoths were Arian Germanic powers in the west. Historicists read them as the three horns that stood in the way: the Heruli fell in 493, the Vandals in 534, and the Ostrogoths withdrew from Rome in 538 and were not fully defeated until about 553.",
     "proof": [
       "Source: Bible Commentary, Daniel 7:8"
@@ -136,7 +136,7 @@
   },
   "zeroim": {
     "simple": "The Hebrew word, rendered “pulse” in the KJV, for the plant food Daniel asked for in his ten-day test (Daniel 1:12).",
-    "history": "Zeroim comes from zera, “seed.” It names foods grown from seed, such as vegetables, grains, and legumes, and it echoes the first diet God gave people (Genesis 1:29). The point is not a modern health diet. Daniel 1:8 says only that the king’s food would defile him. Two likely reasons are that the food had been offered to the empire’s gods, and that it included meat the law of Moses forbids (Leviticus 11). Plants and water avoid both problems.",
+    "history": "Zeroim comes from zera, “seed.” It names foods grown from seed, such as vegetables, grains, and legumes, and it echoes the first diet God gave people (Genesis 1:29). Loyalty to God is the reason, and that first diet is how Daniel kept it; this is not a modern fad diet. Daniel 1:8 says only that the king’s food would defile him. Two likely reasons are that the food had been offered to the empire’s gods, and that it included meat the law of Moses forbids (Leviticus 11). Plants and water avoid both problems.",
     "proof": [
       "Scripture (KJV): Daniel 1:8, 12, 15–17; Leviticus 11; 1 Corinthians 10:18–21."
     ]
@@ -181,14 +181,14 @@
     ]
   },
   "vandals": {
-    "simple": "History: A Germanic kingdom in North Africa, broken in A.D. 534.",
+    "simple": "A Germanic kingdom in North Africa, broken in A.D. 534.",
     "history": "Arian sea-power. Justinian’s general Belisarius ended their kingdom. Again: dated history, then the Daniel 7 checklist.",
     "proof": [
       "Source: Bible Commentary, Daniel 7"
     ]
   },
   "nebuchadnezzar": {
-    "simple": "History: Neo-Babylonian king (c. 605–562 B.C.), the head of gold (Daniel 2:38), who took Judah’s first captives and later burned Jerusalem (586).",
+    "simple": "Neo-Babylonian king (c. 605–562 B.C.), the head of gold (Daniel 2:38), who took Judah’s first captives and later burned Jerusalem (586).",
     "history": "He dreamed of the statue, built the all-gold image on the plain of Dura, and was driven into the field for seven times (literal years) until he lifted his eyes to heaven. Daniel 2:37–38 says the God of heaven gave him the kingdom.",
     "proof": [
       "Source: Bible Commentary, Daniel 2"
@@ -205,7 +205,7 @@
     ]
   },
   "jehoiachin": {
-    "simple": "History: King of Judah who reigned in Jerusalem three months (2 Kings 24:8), in February/March 597, when Babylon deposed him and took a second wave of captives.",
+    "simple": "King of Judah who reigned in Jerusalem three months (2 Kings 24:8), in February/March 597, when Babylon deposed him and took a second wave of captives.",
     "history": "Called Jehoiachin in 2 Kings 24:8–16; also Jeconiah (1 Chronicles 3:16; Jeremiah 24:1) and Coniah (Jeremiah 22:24). He reigned after his father Jehoiakim; this is the second deportation, not Daniel’s 605 opening (Daniel 1:1). Babylonian Chronicle BM 21946 records Nebuchadnezzar at “the city of Judah” in his seventh year—keep that year separate from Jehoiakim’s third year in Daniel 1:1.",
     "proof": [
       "Scripture (KJV): 2 Kings 24:8–16 — Jehoiachin carried away captive to Babylon; the second deportation.",
@@ -215,7 +215,7 @@
     ]
   },
   "zedekiah": {
-    "simple": "History: Last king of Judah before 586 B.C.; Babylon installed him after Jehoiachin was taken (2 Kings 24:17); his revolt brought the final siege and temple burning (2 Kings 25:9).",
+    "simple": "Last king of Judah before 586 B.C.; Babylon installed him after Jehoiachin was taken (2 Kings 24:17); his revolt brought the final siege and temple burning (2 Kings 25:9).",
     "history": "Mattaniah, renamed Zedekiah by Nebuchadnezzar (2 Kings 24:17–20). His rebellion triggered the third campaign: walls broken, Solomon’s temple burned, survivors deported (2 Kings 25; Jeremiah 52). He is not the king of Daniel 1:1 (Jehoiakim, 605) or the king taken in 597 (Jehoiachin).",
     "proof": [
       "Scripture (KJV): 2 Kings 24:17–20 — Mattaniah renamed Zedekiah.",
@@ -239,7 +239,7 @@
     ]
   },
   "cyrus": {
-    "simple": "History: Persian king who later permitted the Jews to return (Ezra 1). The night of Babylon’s fall, in 539 B.C. Daniel 5:31 names Darius the Mede as the one who took the kingdom.",
+    "simple": "Persian king who later permitted the Jews to return (Ezra 1). The night of Babylon’s fall, in 539 B.C. Daniel 5:31 names Darius the Mede as the one who took the kingdom.",
     "history": "Isaiah 45:1 names him and speaks of open gates. The Cyrus Cylinder: “I gathered all their inhabitants and returned to them their dwellings”. It does not say exiles, and it does not name the Jews. Ezra 1 does that. He is the silver kingdom’s founder, not the bronze.",
     "proof": [
       "Source: Bible Commentary, Daniel introduction",
@@ -255,7 +255,7 @@
     ]
   },
   "alexander": {
-    "simple": "History: Macedonian king who smashed Persia (Gaugamela 331 B.C.) and died in 323 B.C. at thirty-two.",
+    "simple": "Macedonian king who smashed Persia (Gaugamela 331 B.C.) and died in 323 B.C. at thirty-two.",
     "history": "Daniel 8:5, 8, 21–22: the goat’s notable horn. When it is broken, four notable horns come up in its place. His kingdom is the bronze Greece and he is its first king (Daniel 8:21), not the little horn of chapter 7, a later power.",
     "proof": [
       "Source: ABSG 2020 Q1, lesson 1"
@@ -281,22 +281,22 @@
     ]
   },
   "justinian": {
-    "simple": "History: Eastern Roman emperor (527–565) whose laws elevated the bishop of Rome and whose wars broke Arian kingdoms in the west.",
+    "simple": "Eastern Roman emperor (527–565) whose laws elevated the bishop of Rome and whose wars broke Arian kingdoms in the west.",
     "history": "Justinian’s decree is the legal claim that met the city in 538, when Belisarius lifted the Ostrogothic siege of Rome and the 1,260 years begin on this chart. He is not named in Daniel.",
     "proof": [
       "Source: Bible Commentary, Daniel 7"
     ]
   },
   "clovis": {
-    "simple": "History: With the conversion of Clovis (496), king of the Franks, the papacy found a strong army.",
-    "history": "The conversion of Clovis (496), not the same pin as 508. A.D. 508 is this chart’s reconstructed civil start for the 1,290 and 1,335 days of Daniel 12:11–12 (year-day scale), landing 1798 and 1843; if the start moves, those landings move. The 1844 date is the 2,300-year landing from the 457 B.C. decree taught in Sitting 9. It is separate from the 508 Clovis pin, not from Sitting 9.",
+    "simple": "King of the Franks. Through Clovis the papacy found a strong Catholic army in the West.",
+    "history": "Clovis’s baptism is traditionally dated 496, though some historians date it as late as 508. This course’s 508 marker rests on what is firmly dated to that year: the end of his war on the Arian Visigoths and the consular title he received from the emperor Anastasius at Tours (Gregory of Tours, History of the Franks 2.38). A.D. 508 is this chart’s reconstructed civil start for the 1,290 and 1,335 days of Daniel 12:11–12 (year-day scale), landing 1798 and 1843; if the start moves, those landings move. The 1844 date is the 2,300-year landing from the 457 B.C. decree taught in Sitting 9. It is separate from the 508 Clovis pin, not from Sitting 9.",
     "proof": [
       "Source: Bible Commentary, on 508",
       "Source: Bible Commentary"
     ]
   },
   "newton-isaac": {
-    "simple": "History: English natural philosopher and mathematician who also wrote a formal commentary on Daniel and Revelation, published in 1733 as Observations upon the Prophecies of Daniel, and the Apocalypse of St. John.",
+    "simple": "English natural philosopher and mathematician who also wrote a formal commentary on Daniel and Revelation, published in 1733 as Observations upon the Prophecies of Daniel, and the Apocalypse of St. John.",
     "history": "Newton’s words: he did not treat Daniel as a sealed riddle, a paraphrase of “easiest to be understood” (Isaac Newton, Observations (1733), Part I, chap. I). In Part I, Chapter I he wrote that Daniel is “most distinct in order of time, and easiest to be understood,” and that “in those things which relate to the last times, he must be made the key to the rest” (Isaac Newton, Observations (1733), Part I, chap. I). That is historicism in one sentence: a dated sequence of real kingdoms read in order. In Part I, Chapter III he reads Daniel 2’s metals as Babylonia, the Persians, the Greeks, and the Romans in historical succession; in Chapter VII, on the eleventh horn, he applies the horn to the Church of Rome and its Bishop, his reading (Isaac Newton, Observations (1733), Part I, chap. VII). This course cites Newton as an eighteenth-century witness to the continuous chain, not as an infallible guide on every horn detail—test each claim against Scripture.",
     "proof": [
       "Primary: Sir Isaac Newton, Observations upon the Prophecies of Daniel (London, 1733), Part I, Chap. I — “Daniel is most distinct in order of time, and easiest to be understood” (Gutenberg 16878, the witness copy).",
@@ -342,7 +342,7 @@
     ]
   },
   "babylon": {
-    "simple": "History: Daniel’s first workplace and the city that fell in 539 B.C. The verse names the king as the head of gold, not the word Babylon.",
+    "simple": "Daniel’s first workplace and the city that fell in 539 B.C. The verse names the king as the head of gold, not the word Babylon.",
     "history": "Daniel 1:2 says its first victory over Judah was given, not seized independently. Chapter 5 is the night the gold ended.",
     "proof": [
       "Source: Bible Commentary, Daniel introduction"
@@ -363,8 +363,8 @@
     ]
   },
   "carchemish": {
-    "simple": "History: By the river Euphrates in Carchemish, where Nebuchadnezzar beat Egypt in 605 B.C. (Jeremiah 46:2).",
-    "history": "Jeremiah 46:2 dates Nebuchadnezzar’s defeat of Pharaoh Necho at Carchemish to Jehoiakim’s fourth year—the same campaign window as Daniel 1:1’s third year of Jehoiakim (605 B.C., accession-year difference). That battle year supports a real first deportation under Jehoiakim, distinct from 597 (Jehoiachin) and 586 (Zedekiah).",
+    "simple": "By the river Euphrates in Carchemish, where Nebuchadnezzar beat Egypt in 605 B.C. (Jeremiah 46:2).",
+    "history": "Jeremiah 46:2 dates Nebuchadnezzar’s defeat of Pharaoh Necho at Carchemish to Jehoiakim’s fourth year—the same year as Daniel 1:1’s third year of Jehoiakim (605 B.C.), counted with the accession year rather than without it. That battle year supports a real first deportation under Jehoiakim, distinct from 597 (Jehoiachin) and 586 (Zedekiah).",
     "proof": [
       "Scripture (KJV): Jeremiah 46:2 — Carchemish in Jehoiakim’s fourth year.",
       "Scripture (KJV): Daniel 1:1 — third year of Jehoiakim; the third/fourth-year difference is an accession-year question (see Sittings 0–1).",
