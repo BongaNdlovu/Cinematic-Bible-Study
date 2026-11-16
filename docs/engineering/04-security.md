@@ -14,7 +14,7 @@ The browser is not trusted. Pages are public files, and the browser talks to Sup
 | Private-path wall | Downloading source, tools, docs or config from the live site | `functions/_middleware.js`, `_routes.json`, deploy exclusions |
 | Edge rate limits | Flooding `/csp-report` and `/__rate` | `functions/_middleware.js` and `workers/exhibit-rate-gate/` |
 | Sign-in | Account takeover; moderator abuse | Supabase Auth (Google only), authenticator app for moderators |
-| Row-level security | Reading or changing someone else's data | `tools/supabase-*.sql`, switched on for every table (live check) |
+| Row-level security | Reading or changing someone else's data | `db/migrations/*.sql`, switched on for every table (live check) |
 | Server-side answer checking | Skipping sittings by reading the answer key | `verify_quiz_answer`, `exhibit_quiz_keys` |
 | Database write limits | Spam and runaway clients | `exhibit_*_rate_gate` triggers, `exhibit_take_slot`, row-size checks |
 | Guest human check | Scripts writing fake guest activity | Turnstile, `/__human-pass`, `exhibit_require_human_pass()` triggers |
@@ -48,8 +48,8 @@ Guests write study events, error reports and survey answers straight to Supabase
 |---|---|---|
 | 1 | `js/core/human-pass.js` | When a guest first has something to save, the page loads Cloudflare Turnstile (site key `turnstileSiteKey` in `js/core/auth-config.js`, action `guest-pass`, managed mode, shown only if a click is needed). |
 | 2 | `functions/_middleware.js` (`/__human-pass`) | Rate-limited by the edge gate. Checks the token with Cloudflare `siteverify` using `TURNSTILE_SECRET`; the action and hostname must match. Accepts at most 2 well-formed guest IDs, never `edge-rate-limit`. |
-| 3 | `exhibit_grant_human_pass()` (`tools/supabase-human-pass.sql`) | Grants a 12-hour pass only when the caller sends `HUMAN_PASS_KEY`, whose sha256 hash is in `exhibit_edge_keys`. |
-| 4 | `exhibit_require_human_pass()` triggers (`tools/supabase-human-pass-enforce.sql`) | Before insert on `exhibit_events` and `exhibit_surveys`: a row with no account needs a live pass, or it is refused with `human_check`. The edge's own `rate_limited` reports are the one exception. |
+| 3 | `exhibit_grant_human_pass()` (`db/migrations/026-human-pass.sql`) | Grants a 12-hour pass only when the caller sends `HUMAN_PASS_KEY`, whose sha256 hash is in `exhibit_edge_keys`. |
+| 4 | `exhibit_require_human_pass()` triggers (`db/migrations/027-human-pass-enforce.sql`) | Before insert on `exhibit_events` and `exhibit_surveys`: a row with no account needs a live pass, or it is refused with `human_check`. The edge's own `rate_limited` reports are the one exception. |
 
 `analytics.js` and `ops.js` keep a refused batch and try again later, as for any failed insert. No client role can read `exhibit_human_passes` or `exhibit_edge_keys`. The secrets live only in Cloudflare (`TURNSTILE_SECRET`, `HUMAN_PASS_KEY`) and as a hash in the database.
 
@@ -96,7 +96,7 @@ If the gate cannot be reached, a page read is still served. A non-GET request, `
 | Role | How it is granted | Checks |
 |---|---|---|
 | Member | Any Google sign-in through Supabase Auth | `auth.uid()` in row-level security |
-| Moderator | A row in `exhibit_moderators`, a table no client role can read | `is_review_moderator()` requires a Google identity **and** an `aal2` session, meaning the authenticator app was used. Confirmed in the live database on 12 November 2026. `exhibit_participation()` (`tools/supabase-participation.sql`) checks it first and raises error `42501` for anyone else. It returns two counts only, never ids or emails. |
+| Moderator | A row in `exhibit_moderators`, a table no client role can read | `is_review_moderator()` requires a Google identity **and** an `aal2` session, meaning the authenticator app was used. Confirmed in the live database on 12 November 2026. `exhibit_participation()` (`db/migrations/024-participation.sql`) checks it first and raises error `42501` for anyone else. It returns two counts only, never ids or emails. |
 
 **Guests (since 15 November 2026)** reach no sitting: `study.html`, `map.html` and `gallery.html` all call `requireMember()` and send a guest to the account page. This is an interface rule. The lesson text ships as static files (`js/content/sheets/`), so it is not secret; answer checking, progress, notes and certificates stay protected by the database as before.
 
@@ -142,14 +142,14 @@ Function permissions checked live: guests (`anon`) **can** call `exhibit_public_
 | Limit | Where |
 |---|---|
 | Insert rate gates on events, surveys, progress, reviews, study data and profiles | `exhibit_*_rate_gate` triggers |
-| Per-user slot counters: profile 30 an hour, review edits 20 a day, quiz checks 60 a minute | `exhibit_take_slot` in `tools/supabase-rate-limits-gaps.sql` |
-| Row sizes: progress JSON 64 KB in total, certificate name 120 characters, cohort 200 characters, notes 1.2 MB | `tools/supabase-row-size-limits.sql` |
+| Per-user slot counters: profile 30 an hour, review edits 20 a day, quiz checks 60 a minute | `exhibit_take_slot` in `db/migrations/022-rate-limits-gaps.sql` |
+| Row sizes: progress JSON 64 KB in total, certificate name 120 characters, cohort 200 characters, notes 1.2 MB | `db/migrations/018-row-size-limits.sql` |
 | Client-side pacing (courtesy, not security): 12 event posts and 60 rows a minute, 5 surveys an hour | `js/features/analytics.js` |
 
 ## Data retention and deletion
 
 - `exhibit_prune_anon()` runs on `pg_cron`. It deletes anonymous events older than 90 days, keeps at most the newest 200,000 anonymous events, deletes `rate_limited` events older than 7 days, and deletes anonymous surveys older than 180 days.
-- `exhibit_prune_test_rows()` (`tools/supabase-prune-test-rows.sql`) runs on `pg_cron` every hour at minute 23. It deletes the rows the live tests leave behind, and nothing else. A row must have no account **and** both test markers: an event named `pen_probe` with an id starting `pen-` (or no id), a survey with an id starting `pen-` and kind `pen`, or rows from `tools/verify/verify_live_inserts.mjs` (id `live-insert-probe`). No client role can run it. `tools/verify/verify_insights.mjs` checks these rules.
+- `exhibit_prune_test_rows()` (`db/migrations/025-prune-test-rows.sql`) runs on `pg_cron` every hour at minute 23. It deletes the rows the live tests leave behind, and nothing else. A row must have no account **and** both test markers: an event named `pen_probe` with an id starting `pen-` (or no id), a survey with an id starting `pen-` and kind `pen`, or rows from `tools/verify/verify_live_inserts.mjs` (id `live-insert-probe`). No client role can run it. `tools/verify/verify_insights.mjs` checks these rules.
 - Members can delete their account from the account page (`exhibit_delete_my_account()`).
 - Signing out removes the personal keys listed in `PERSONAL_KEYS` and `PERSONAL_PREFIXES` in `js/core/auth.js`. It warns first if anything is unsent.
 - Changes put aside after an account switch (`baProgressStash:<account>`, `baStudySyncStash:<account>`) stay on the device until their owner signs in again. Deleting an account removes that account's own two stash keys from the device, through `clearSiteStorage(userId)` in `js/pages/account/account.js`; other accounts' stashes are left alone. They are listed in `privacy.html`.

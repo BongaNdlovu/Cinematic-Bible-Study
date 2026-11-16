@@ -1,7 +1,7 @@
 -- Account deletion, October 2026. Run once in the Supabase SQL editor (paste the whole file),
--- after the setup files it depends on: supabase-progress.sql, supabase-insights.sql,
--- supabase-reviews.sql, supabase-certificates.sql, supabase-quiz-integrity.sql,
--- supabase-study-sync.sql, supabase-desk.sql and supabase-auth-guard.sql.
+-- after the setup files it depends on: db/migrations/002-progress.sql, db/migrations/003-insights.sql,
+-- db/migrations/001-reviews.sql, db/migrations/016-certificates.sql, db/migrations/010-quiz-integrity.sql,
+-- db/migrations/009-study-sync.sql, db/migrations/012-desk.sql and db/migrations/014-auth-guard.sql.
 -- Safe to re-run. One transaction: if any statement fails, nothing changes.
 -- exhibit_delete_my_account() removes the signed-in caller's own rows, then the auth user.
 -- Cascading tables (certificates, progress, study data, profile, reviews, quiz passes,

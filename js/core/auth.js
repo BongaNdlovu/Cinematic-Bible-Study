@@ -2,7 +2,7 @@
   const cfg = window.BAAuthConfig || {};
   const listeners = [];
   // Who is a moderator is decided by the database (is_review_moderator(), see
-  // tools/supabase-reviews.sql), which also enforces it on every moderator read.
+  // db/migrations/001-reviews.sql), which also enforces it on every moderator read.
   // The client only asks, so no operator address ships in public JavaScript.
   let client = null;
   let user = null;

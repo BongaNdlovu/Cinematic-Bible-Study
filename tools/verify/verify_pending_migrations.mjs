@@ -38,7 +38,7 @@ async function verify() {
     console.log('\nSUCCESS: All pending Supabase migrations are fully deployed!');
   } else {
     console.log('\nNOTICE: One or more pending migrations have not been applied to Supabase yet.');
-    console.log('Run tools/supabase-pending-migrations.sql in the Supabase SQL editor:');
+    console.log('Run db/migrations/011-pending-migrations.sql in the Supabase SQL editor:');
     console.log('https://supabase.com/dashboard/project/ttlrspnfadmxkoyqvofh/sql/new');
   }
 }

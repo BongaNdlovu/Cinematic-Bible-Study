@@ -10,9 +10,9 @@ const ROOT = path.resolve(__dirname, '../..');
 
 console.log('--- RUNNING USER INSIGHT TRACKING VERIFICATION ---');
 
-// 1. Check tools/supabase-insights.sql
-console.log('1. Checking tools/supabase-insights.sql...');
-const sqlContent = fs.readFileSync(path.join(ROOT, 'tools/supabase-insights.sql'), 'utf8');
+// 1. Check db/migrations/003-insights.sql
+console.log('1. Checking db/migrations/003-insights.sql...');
+const sqlContent = fs.readFileSync(path.join(ROOT, 'db/migrations/003-insights.sql'), 'utf8');
 assert(sqlContent.includes('create table if not exists public.exhibit_events'), 'Missing exhibit_events table');
 assert(sqlContent.includes('user_id uuid references auth.users (id)'), 'user_id must be nullable in exhibit_events');
 assert(!sqlContent.includes('user_id uuid not null references auth.users (id)'), 'user_id must not be marked not null in exhibit_events');
@@ -110,8 +110,8 @@ assert(!termsJs.includes('This exhibit is closed'), 'terms.js must not say the e
 const authJs = fs.readFileSync(path.join(ROOT, 'js/core/auth.js'), 'utf8');
 assert(authJs.includes('account.html'), 'auth.js must return Google OAuth to the Account hub');
 assert(authJs.includes("provider: \"google\""), 'auth.js must sign in with Google');
-['supabase-reviews.sql', 'supabase-auth-guard.sql', 'supabase-hardening-2026-10.sql', 'supabase-moderator-require-mfa.sql'].forEach((f) => {
-  const s = fs.readFileSync(path.join(ROOT, 'tools', f), 'utf8');
+['db/migrations/001-reviews.sql', 'db/migrations/014-auth-guard.sql', 'db/migrations/013-hardening-2026-10.sql', 'db/migrations/020-moderator-require-mfa.sql'].forEach((f) => {
+  const s = fs.readFileSync(path.join(ROOT, f), 'utf8');
   const body = s.slice(s.indexOf('function public.is_review_moderator()'));
   const fn = body.slice(0, body.indexOf('$$;'));
   assert(fn.includes("= 'aal2'") && !/not exists \(\s*select 1\s*from auth\.mfa_factors/.test(fn), `${f}: is_review_moderator must always require a verified authenticator and an aal2 session`);
@@ -680,11 +680,11 @@ const counterBroken = Dashboard.targetTile({ registered: 1, began: 'x' });
 assert(counterBroken.includes('verified count not available'), 'a malformed count is not shown');
 assert(/c\.rpc\('exhibit_participation', \{ p_from: ALL_TIME_FROM/.test(dashCode), 'the dashboard loads the all-time verified count');
 assert(/'<div class="insights-tiles">' \+\s*targetTile\(cache\.participation\) \+/.test(dashCode), 'the counter is the first dashboard tile');
-const participationSql = fs.readFileSync(path.join(ROOT, 'tools/supabase-participation.sql'), 'utf8');
+const participationSql = fs.readFileSync(path.join(ROOT, 'db/migrations/024-participation.sql'), 'utf8');
 assert(/filter \(where public\.exhibit_sittings_passed\(u\.id\) >= 1\)/.test(participationSql), '"began" counts server-checked quiz passes');
 assert(!/journey/.test(participationSql), '"began" does not trust browser-written progress');
 assert(/if not public\.is_review_moderator\(\) then\s*raise exception/.test(participationSql), 'the participation function refuses non-moderators first');
-const pruneSql = fs.readFileSync(path.join(ROOT, 'tools/supabase-prune-test-rows.sql'), 'utf8');
+const pruneSql = fs.readFileSync(path.join(ROOT, 'db/migrations/025-prune-test-rows.sql'), 'utf8');
 const pruneDeletes = pruneSql.split('delete from').slice(1);
 assert.strictEqual(pruneDeletes.length, 2, 'the test-row clean-up has exactly two deletes');
 pruneDeletes.forEach((d) => assert(/^\s*public\.exhibit_(events|surveys)\s+where user_id is null\s+and \(/.test(d), 'every test-row delete is limited to rows with no account'));

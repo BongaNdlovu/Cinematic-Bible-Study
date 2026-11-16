@@ -14,6 +14,23 @@ Entry template:
 
 ---
 
+## 2026-11-16 — Architecture plan, step 5.6: numbered database migrations
+
+**Why:** 27 `tools/supabase-*.sql` files had no order in their names, are run by hand, and the order mattered. Only memory held it.
+
+**What changed:**
+
+- The 27 files moved to `db/migrations/` as `001-reviews.sql` … `027-human-pass-enforce.sql`. The order is the date git first saw each file; ties within a commit follow what the files say about each other. `db/migrations/README.md` lists every file with its old name, its first date and the reasons for the ties.
+- **Which have run in production: not checked.** This session had no production database access. The README says so and names `tools/verify/verify_pending_migrations.mjs` as the check to run.
+- **`db/` is never deployed.** Moving the SQL out of `tools/` would otherwise have published it: `tools/deploy-cloudflare-pages.ps1` now leaves out `db`, `_routes.json` routes `/db/*` through the middleware, and `functions/_middleware.js` answers 404 for paths under `/db/`. `verify_pages_deny.mjs` caught the missing route; `tests/unit/middleware.test.mjs` now asks for a migration file and expects 404. That test fails with the new middleware line removed and passes with it.
+- References inside the SQL files and the tests that named the files by basename (`verify_insights.mjs`, `verify_workbench.mjs`) use the new paths.
+
+**Handbook updated:** 03 (top level, never-deployed folders, `db/migrations/`, where a database change goes), 04 (row-level security source), 07 (migrations).
+
+**Checked here:** on Windows: lint exits 0, `npm run test:unit` passes 180 of 180, every `npm test` script passes (after adding `/db/*` to `_routes.json`), and `npm run test:browser` passes 30 of 30.
+
+**Status:** on branch `arch/phase-5-layout`, not deployed.
+
 ## 2026-11-16 — Architecture plan, step 5.1: the target folder layout
 
 **Why:** a file's folder should say how far a change to it reaches, so any file can be found from the feature's name.

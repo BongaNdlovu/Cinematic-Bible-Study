@@ -223,6 +223,7 @@ async function handle(context) {
   if (
     path.startsWith("/docs") ||
     path.startsWith("/tools") ||
+    path.startsWith("/db/") ||
     path.startsWith("/tests") ||
     path.startsWith("/backups") ||
     path.startsWith("/workers") ||

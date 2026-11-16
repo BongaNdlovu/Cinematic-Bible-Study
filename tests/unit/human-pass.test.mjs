@@ -123,8 +123,8 @@ test("the pass route is routed to the function and allows Turnstile in the CSP",
   assert.match(csp, /frame-src https:\/\/challenges\.cloudflare\.com;/);
 });
 
-const SQL = fs.readFileSync(new URL("../../tools/supabase-human-pass.sql", import.meta.url), "utf8").replace(/\r\n/g, "\n");
-const ENFORCE = fs.readFileSync(new URL("../../tools/supabase-human-pass-enforce.sql", import.meta.url), "utf8").replace(/\r\n/g, "\n");
+const SQL = fs.readFileSync(new URL("../../db/migrations/026-human-pass.sql", import.meta.url), "utf8").replace(/\r\n/g, "\n");
+const ENFORCE = fs.readFileSync(new URL("../../db/migrations/027-human-pass-enforce.sql", import.meta.url), "utf8").replace(/\r\n/g, "\n");
 
 test("the database only grants passes with the right key, and clients cannot read passes or keys", () => {
   assert.match(SQL, /encode\(extensions\.digest\(p_key, 'sha256'\), 'hex'\) <> v_hash then\n\s+raise exception 'not allowed'/);

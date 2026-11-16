@@ -306,7 +306,7 @@ async function edgeRateProxyClosed() {
 
 async function edgeHiddenPaths() {
   const blocked = [
-    "/tools/supabase-quiz-integrity.sql",
+    "/db/migrations/010-quiz-integrity.sql",
     "/package.json",
     "/server.py",
     "/.env",
@@ -570,8 +570,8 @@ async function devServerTraversal() {
       "/server.py",
       "/.env",
       "/.git/config",
-      "/tools/supabase-quiz-integrity.sql",
-      "/js/shared/../../tools/supabase-quiz-integrity.sql",
+      "/db/migrations/010-quiz-integrity.sql",
+      "/js/shared/../../db/migrations/010-quiz-integrity.sql",
       "/js/%2e%2e/%2e%2e/server.py",
       "/tools/"
     ];

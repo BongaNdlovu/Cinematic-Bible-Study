@@ -8,9 +8,9 @@
 -- role 40, cohort 200. Each check guards new rows at once; it is validated only if every
 -- existing row already passes (see pg_constraint.convalidated).
 -- Moderators: only the confirmed auth email counts, never user metadata or the JWT.
--- Reviews: run supabase-reviews-privacy.sql as well; this file closes the table to signed-out readers.
--- The same statements live in the setup files (supabase-progress.sql, supabase-insights.sql,
--- supabase-reviews.sql, supabase-rate-limits.sql, supabase-fix-anon-inserts.sql).
+-- Reviews: run db/migrations/015-reviews-privacy.sql as well; this file closes the table to signed-out readers.
+-- The same statements live in the setup files (db/migrations/002-progress.sql, db/migrations/003-insights.sql,
+-- db/migrations/001-reviews.sql, db/migrations/005-rate-limits.sql, db/migrations/004-fix-anon-inserts.sql).
 
 begin;
 

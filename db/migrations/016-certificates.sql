@@ -1,5 +1,5 @@
 -- Certificates and graduates, October 2026. Run once in the Supabase SQL editor
--- after supabase-progress.sql, supabase-insights.sql and supabase-quiz-integrity.sql (paste the whole file).
+-- after db/migrations/002-progress.sql, db/migrations/003-insights.sql and db/migrations/010-quiz-integrity.sql (paste the whole file).
 -- Safe to re-run.
 
 begin;

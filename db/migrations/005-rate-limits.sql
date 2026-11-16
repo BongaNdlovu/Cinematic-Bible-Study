@@ -1,5 +1,5 @@
 -- Server write caps. Same statements live in the matching setup files
--- (supabase-insights.sql, supabase-progress.sql, supabase-reviews.sql).
+-- (db/migrations/003-insights.sql, db/migrations/002-progress.sql, db/migrations/001-reviews.sql).
 -- Events: 60 rows/min per anon_id (or per user_id if anon_id is empty).
 -- Surveys: 5/hour per anon_id (or per user_id if anon_id is empty).
 -- Events and surveys with neither anon_id nor user_id are refused. Unsigned rows (user_id null)
@@ -8,7 +8,7 @@
 -- Progress: one upsert per 6 seconds per row (10/min).
 -- Reviews: 3 inserts/day per user_id.
 -- Browser writes go straight to Supabase and never pass the site edge, so these triggers are the only caps on them.
--- Profiles, review edits and quiz checks are capped in supabase-rate-limits-gaps.sql.
+-- Profiles, review edits and quiz checks are capped in db/migrations/022-rate-limits-gaps.sql.
 -- Each gate is security definer: the caller cannot read the rows it is writing, so an
 -- invoker count would always see zero and the cap would never trip. created_at and
 -- updated_at are stamped here so a client cannot hide writes by backdating them.

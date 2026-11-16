@@ -335,7 +335,7 @@
 
   function graduatesHtml(rows) {
     const ready = Array.isArray(cache.graduates);
-    const setup = ready ? '' : note('Email addresses and certificate numbers appear here after tools/supabase-certificates.sql is run in Supabase. Until then this list comes from saved progress, and downloads are only matched within the time range above.');
+    const setup = ready ? '' : note('Email addresses and certificate numbers appear here after db/migrations/016-certificates.sql is run in Supabase. Until then this list comes from saved progress, and downloads are only matched within the time range above.');
     if (!rows.length) return '<p class="insights-empty">No one has finished all ' + SITTINGS + ' sittings yet.</p>' + setup;
     return '<div class="igrad-tools">' +
         '<label class="igrad-search"><span class="sr-only">Search graduates</span>' +

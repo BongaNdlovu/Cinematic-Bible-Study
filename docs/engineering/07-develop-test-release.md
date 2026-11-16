@@ -145,7 +145,7 @@ On a push to `master` only, after **test** passes:
 
 ## Database changes
 
-- Migrations are SQL files in `tools/supabase-*.sql`. They are run **by hand** in the Supabase SQL editor. Nothing applies them automatically.
+- Migrations are SQL files in `db/migrations/`, numbered in the order to run them (since 16 November 2026). They are run **by hand** in the Supabase SQL editor. Nothing applies them automatically. `db/migrations/README.md` lists the order and its evidence; which have run in production is not checked there yet.
 - Run a migration **before** deploying the client that depends on it. For example, the answer check fails closed until `verify_quiz_answer` exists.
 - Never rename `save_exhibit_progress(bigint, jsonb)`. A breaking change ships as a new function, together with the client that uses it.
 - Backups: the project is on the Supabase Free plan, which has no automatic backups (per `docs/archive/2026-09-10-ARCHITECTURE.md`, 26 September 2026). So the repo makes its own. See [Database backups](#database-backups).

@@ -29,14 +29,14 @@ sheetsData.forEach((sheet, sitting) => {
 assert.strictEqual(total, 55, "all 55 checkpoint quizzes are present");
 
 /* 2. The answer key lives in the server migration, covering every quiz. */
-const sql = read("tools/supabase-quiz-integrity.sql");
+const sql = read("db/migrations/010-quiz-integrity.sql");
 assert.ok(sql.includes("create table if not exists public.exhibit_quiz_keys"), "migration creates the key table");
 assert.ok(sql.includes("security definer"), "grading RPC runs as the definer");
 assert.ok(sql.includes("revoke all on public.exhibit_quiz_passes from anon, authenticated, public;"), "learners cannot write their own quiz passes");
 assert.ok(/if v_correct and auth\.uid\(\) is not null then\s+insert into public\.exhibit_quiz_passes/.test(sql), "a correct graded answer is recorded as a pass");
-const pending = read("tools/supabase-pending-migrations.sql");
+const pending = read("db/migrations/011-pending-migrations.sql");
 assert.ok(pending.includes("insert into public.exhibit_quiz_passes"), "re-running the pending bundle keeps recording passes");
-["tools/supabase-rate-limits-gaps.sql", "tools/supabase-quiz-integrity.sql", "tools/supabase-pending-migrations.sql"].forEach((rel) => {
+["db/migrations/022-rate-limits-gaps.sql", "db/migrations/010-quiz-integrity.sql", "db/migrations/011-pending-migrations.sql"].forEach((rel) => {
   const src = read(rel);
   const start = src.indexOf("create or replace function public.verify_quiz_answer(");
   assert.ok(start >= 0, `${rel} defines verify_quiz_answer`);

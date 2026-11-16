@@ -20,7 +20,8 @@ The site has no build step for its pages. The files in the repository root and i
 ├── models/                3D models (.glb, Meshopt-compressed)
 ├── vendor/                Pinned third-party code: three, leaflet, supabase, sentry
 ├── tests/unit/            node:test unit tests (npm run test:unit)
-├── tools/                 Build, verify, deploy, SQL, audit and content scripts
+├── tools/                 Build, verify, deploy, audit and content scripts, plus hand-run SQL exports
+├── db/migrations/         Database migrations, numbered in run order (never deployed)
 ├── _mig/                  Diagram source: specN.json (authored specs) and sheetN.json (extracted artwork). tools/diagrams/ merges them into sheets-data.js; verify_flow.mjs reads them. Never deployed.
 ├── docs/                  engineering/ (this handbook) and archive/ (dated older papers)
 ├── server.py              Local static server
@@ -31,7 +32,7 @@ The site has no build step for its pages. The files in the repository root and i
 └── .github/               workflows/: CI (ci.yml), the 15-minute live health check (health.yml) and the weekly database backup (db-backup.yml); dependabot.yml: weekly update proposals
 ```
 
-Folders that are **never deployed**. `tools/deploy-cloudflare-pages.ps1` leaves them out and refuses to ship if some of them slip in; the middleware also answers 404 for most of these paths: `docs/`, `tools/`, `tests/`, `functions/` (its source), `workers/`, `backups/`, `qa/`, `qa-e2e/`, `fix-plan/`, `_mig/`, `_factcheck/`, `models/originals/`, `assets/_glb_preview/`, and every dotfile.
+Folders that are **never deployed**. `tools/deploy-cloudflare-pages.ps1` leaves them out and refuses to ship if some of them slip in; the middleware also answers 404 for most of these paths: `docs/`, `tools/`, `db/`, `tests/`, `functions/` (its source), `workers/`, `backups/`, `qa/`, `qa-e2e/`, `fix-plan/`, `_mig/`, `_factcheck/`, `models/originals/`, `assets/_glb_preview/`, and every dotfile.
 
 ## Pages and their scripts
 
@@ -106,7 +107,7 @@ The deploy script refuses to ship if any of these are in the bundle.
 | `tools/deploy-cloudflare-pages.ps1` | Build and deploy the production bundle |
 | `tools/hash-release-assets.mjs`, `tools/minify-release-css.mjs` | Fingerprint file names and minify CSS during the deploy |
 | `tools/build_study_sheets.mjs`, `tools/build-shelf-data.mjs` | Generate the per-sitting files and the shelf data |
-| `tools/supabase-*.sql` | Database migrations, run by hand in the Supabase SQL editor |
+| `db/migrations/NNN-name.sql` | Database migrations, numbered in run order (plan step 5.6), run by hand in the Supabase SQL editor. `db/migrations/README.md` says how the order was set and which have run in production (not checked yet). `db/` is never deployed: the deploy script leaves it out and the middleware answers 404 for `/db/` |
 | `tools/verify/` | The regression suite behind `npm test`, plus screenshot helpers. `run_browser_checks.mjs` runs the browser checks (`npm run test:browser`), `verify_wiring.mjs` fails when a `verify_*.mjs` file is run nowhere, and `verify_equivalence.mjs` proves that a move changed no code or CSS rule |
 | `tools/storage-keys.mjs` | The list of every browser storage key, with which ones sign-out and account deletion clear, and (`deleteOwnAccount`) the two stash prefixes cleared only for the deleted account's own id. `tests/unit/storage-keys.test.mjs` checks it against the code, `privacy.html`, `PERSONAL_KEYS` and `SITE_KEYS` |
 | `tools/measure_baseline.mjs` | Prints file sizes, function lengths and duplicate function names (see [the architecture baseline](architecture-baseline.md)) |
@@ -131,7 +132,7 @@ The deploy script refuses to ship if any of these are in the bundle.
 | A study-page feature | Its own ES module in `js/pages/study/` (or `js/pages/study/diagrams/` for a renderer). `export` what other files use and `import` what it needs, by root path (`'/js/pages/study/references.js'`). Then add an `import` for it at the top of `js/pages/study/study-app.js`, in the order of the others. `study-app.js` is the only study file the page entry imports, so every other study module finishes loading before `study-app.js` runs its start-up code. A feature file therefore holds only declarations, and nothing in it may read another file's names at load. A variable that two files assign lives in one of them, with a small setter (`setCurrentThemeIdx`) for the other, because a module cannot assign an imported name. Tests that check the study page's code read every script it loads through `tools/verify/_sources.mjs`, which follows the entry's imports |
 | A script for a page | An `import` line in that page's `js/pages/<page>/main.js`, not a `<script>` tag. Only a script that must run before the page is parsed (like `core.js`) gets a tag |
 | Code shared by pages | `js/features/` for a reader-facing feature used by two or more pages, `js/core/` for infrastructure every page needs; then an `import` in each page's entry. A file used by one page goes in `js/pages/<page>/`. A small helper used by two or more files (escaping, sign-in reads, focus handling) goes in `js/core/core.js`; local copies call it, they do not repeat its body |
-| A database change | A new `tools/supabase-<topic>.sql`, run in Supabase **before** deploying the client that needs it |
+| A database change | The next number in `db/migrations/` (`028-<topic>.sql`), run in Supabase **before** deploying the client that needs it, then recorded as applied in `db/migrations/README.md` |
 | A new storage key | Add it to `tools/storage-keys.mjs` and to the storage table in `privacy.html`; also to `PERSONAL_KEYS` in `js/core/auth.js` if sign-out must clear it, and to `SITE_KEYS` in `js/pages/account/account.js` if account deletion must clear it. `npm run test:unit` fails until all of them agree |
 | A pure helper (maths, layout, text fitting, formatting) | A helper file next to its feature, outside the feature's closure: for a classic script it sets one `window.<Name>` object and the feature reads it with `const { … } = window.<Name>;`; for an ES module it uses `export`. Give it a unit test in `tests/unit/`. Import between ES modules with a root path (`'/js/pages/index/shelf-helpers.js'`), because `tools/hash-release-assets.mjs` rewrites references by their full path and would miss `./shelf-helpers.js` |
 | A test | `tests/unit/*.test.mjs` (fast, `node:test`) or `tools/verify/verify_*.mjs` (browser and integration, then add it to the `test` script in `package.json`) |

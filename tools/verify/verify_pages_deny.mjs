@@ -54,7 +54,7 @@ function routed(p) {
   return matches(routes.include, p) && !matches(routes.exclude, p);
 }
 const protectedPaths = [
-  "/docs/plan.md", "/tools/supabase-quiz-integrity.sql", "/tests/unit/middleware.test.mjs", "/backups/db.sql", "/workers/exhibit-rate-gate/src/index.js",
+  "/docs/plan.md", "/tools/deploy-cloudflare-pages.ps1", "/db/migrations/010-quiz-integrity.sql", "/tests/unit/middleware.test.mjs", "/backups/db.sql", "/workers/exhibit-rate-gate/src/index.js",
   "/qa/proofs/x.png", "/originals/a.glb", "/_factcheck/meta.json", "/_mig/index.json", "/functions/_middleware.js",
   "/README.md", "/package.json", "/package-lock.json", "/server.py", "/vercel.json", "/wrangler.toml",
   "/start_website.bat", "/middleware.js", "/__wiring_check.mjs", "/.env", "/.git/config"

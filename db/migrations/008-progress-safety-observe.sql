@@ -1,6 +1,6 @@
 -- Observe the undo, then put it back. Run this whole script once.
 -- It must end in rollback. Do not remove the rollback line.
--- Run this only after the UP section of supabase-progress-safety.sql.
+-- Run this only after the UP section of db/migrations/007-progress-safety.sql.
 
 begin;
 

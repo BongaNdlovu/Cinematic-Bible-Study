@@ -27,4 +27,4 @@ The publishable key lives in `js/core/auth-config.js` (the static host does not 
 
 ## Home-page reviews
 
-Run `tools/supabase-reviews.sql` once in the Supabase SQL editor so the Witnesses band can store moderated testimonies. Moderators are rows in `public.exhibit_moderators`, which the file creates empty and locked. Add the operator once in the SQL editor (`insert into public.exhibit_moderators (email) values ('you@example.com');`) and do not commit that line. The page never carries the address: `js/core/auth.js` asks the database through `is_review_moderator()`.
+Run `db/migrations/001-reviews.sql` once in the Supabase SQL editor so the Witnesses band can store moderated testimonies. Moderators are rows in `public.exhibit_moderators`, which the file creates empty and locked. Add the operator once in the SQL editor (`insert into public.exhibit_moderators (email) values ('you@example.com');`) and do not commit that line. The page never carries the address: `js/core/auth.js` asks the database through `is_review_moderator()`.

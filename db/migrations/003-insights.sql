@@ -1,4 +1,4 @@
--- Study insight events and learner profiles. Run once in the Supabase SQL editor, after supabase-reviews.sql
+-- Study insight events and learner profiles. Run once in the Supabase SQL editor, after db/migrations/001-reviews.sql
 -- (it uses public.is_review_moderator()).
 
 create table if not exists public.exhibit_events (

@@ -1,7 +1,7 @@
 /**
  * quiz-gate.js
  * Server-verified checkpoint answers. The answer key never ships in the client:
- * every pick is graded by the verify_quiz_answer RPC (see tools/supabase-quiz-integrity.sql).
+ * every pick is graded by the verify_quiz_answer RPC (see db/migrations/010-quiz-integrity.sql).
  * Under the localhost QA mock session (localStorage.baQaMockSession, see auth.js)
  * there is no Supabase client, so answers pass in practice mode.
  */

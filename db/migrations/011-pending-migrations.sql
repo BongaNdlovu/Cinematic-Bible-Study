@@ -6,7 +6,7 @@
 -- ============================================================================
 
 -- ============================================================================
--- 1. Study Notes & Bookmarks Sync (tools/supabase-study-sync.sql)
+-- 1. Study Notes & Bookmarks Sync (db/migrations/009-study-sync.sql)
 -- Enables signed-in cloud sync of per-sheet study notes (baNote-*) and
 -- bookmarks (baStudyBookmarks).
 -- ============================================================================
@@ -76,7 +76,7 @@ create trigger exhibit_study_data_rate_gate
 
 
 -- ============================================================================
--- 2. Checkpoint Quiz Integrity (tools/supabase-quiz-integrity.sql)
+-- 2. Checkpoint Quiz Integrity (db/migrations/010-quiz-integrity.sql)
 -- Stores checkpoint quiz keys on the server and provides verify_quiz_answer RPC.
 -- ============================================================================
 
@@ -211,7 +211,7 @@ alter table public.exhibit_study_data
     check (octet_length(bookmarks::text) <= 65536) not valid;
 
 -- ============================================================================
--- 3. Certificates From Server-Recorded Quiz Passes (tools/supabase-certificates.sql)
+-- 3. Certificates From Server-Recorded Quiz Passes (db/migrations/016-certificates.sql)
 -- Issues certificates and lists graduates from exhibit_quiz_passes instead of the
 -- browser-saved journey, and backfills passes once for existing readers. Run after section 2.
 -- ============================================================================
@@ -436,7 +436,7 @@ notify pgrst, 'reload schema';
 commit;
 
 -- ============================================================================
--- 4. Account Deletion (tools/supabase-account-deletion.sql)
+-- 4. Account Deletion (db/migrations/019-account-deletion.sql)
 -- Lets a signed-in reader delete their account and every row tied to it through
 -- exhibit_delete_my_account(). Run after sections 1 to 3 and the setup files above.
 -- ============================================================================
@@ -518,9 +518,9 @@ notify pgrst, 'reload schema';
 commit;
 
 -- ============================================================================
--- 5. Survey Read Lock (tools/supabase-survey-read-lock.sql)
+-- 5. Survey Read Lock (db/migrations/021-survey-read-lock.sql)
 -- Signed-out callers keep insert on exhibit_surveys and lose select.
--- The moderator two-step rule (tools/supabase-moderator-require-mfa.sql) is not
+-- The moderator two-step rule (db/migrations/020-moderator-require-mfa.sql) is not
 -- here on purpose: run it by itself once the operator's authenticator is verified.
 -- ============================================================================
 

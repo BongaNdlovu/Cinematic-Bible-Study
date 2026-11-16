@@ -1,4 +1,4 @@
--- Write caps for the paths supabase-rate-limits.sql left open, October 2026. Run once in the Supabase SQL editor
+-- Write caps for the paths db/migrations/005-rate-limits.sql left open, October 2026. Run once in the Supabase SQL editor
 -- (paste the whole file). Safe to re-run. One transaction: if any statement fails, nothing changes.
 
 begin;

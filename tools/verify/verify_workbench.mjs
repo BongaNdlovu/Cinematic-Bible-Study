@@ -289,7 +289,7 @@ console.log('  PASS: study.html contains print stylesheet, projection styles, an
 
 // Check 10: Verify supabase-progress.sql schema completeness
 console.log('Test 9: Verifying supabase-progress.sql table schema & RLS policies...');
-const sqlContent = fs.readFileSync(path.join('tools', 'supabase-progress.sql'), 'utf8');
+const sqlContent = fs.readFileSync('db/migrations/002-progress.sql', 'utf8');
 if (!sqlContent.includes('create table if not exists public.exhibit_progress')) {
   throw new Error('supabase-progress.sql missing exhibit_progress table definition.');
 }

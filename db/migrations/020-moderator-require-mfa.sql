@@ -2,7 +2,7 @@
 -- Run only AFTER the operator account has a verified authenticator (Account page, two-step sign-in).
 -- Run it earlier and the operator tools lock out until one is added.
 -- It removes the password-only fallback: every moderator call needs a Google identity and an aal2 session.
--- supabase-reviews.sql, supabase-auth-guard.sql and supabase-hardening-2026-10.sql define the same strict check.
+-- db/migrations/001-reviews.sql, db/migrations/014-auth-guard.sql and db/migrations/013-hardening-2026-10.sql define the same strict check.
 
 begin;
 

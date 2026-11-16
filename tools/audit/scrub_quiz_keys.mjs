@@ -6,7 +6,7 @@
  *
  *  1. Loads sheets-data.js in a sandbox and extracts (sitting, q_idx, correct_idx,
  *     correct_note) for every quiz.
- *  2. Generates tools/supabase-quiz-integrity.sql: the exhibit_quiz_keys table,
+ *  2. Generates db/migrations/010-quiz-integrity.sql: the exhibit_quiz_keys table,
  *     the verify_quiz_answer security-definer RPC, and one seeded row per quiz.
  *  3. Rewrites sheets-data.js: drops every "correct" line and blanks the
  *     diagnostics entry that used to sit at the correct index (that string is
@@ -25,7 +25,7 @@ import { fileURLToPath } from "url";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..");
 const DATA_FILE = path.join(ROOT, "js/content/sheets-data.js");
-const SQL_FILE = path.join(ROOT, "tools/supabase-quiz-integrity.sql");
+const SQL_FILE = path.join(ROOT, "db/migrations/010-quiz-integrity.sql");
 
 function loadSheetsData(source) {
   const sandbox = { window: {} };

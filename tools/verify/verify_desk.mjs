@@ -7,7 +7,7 @@ import { pageLoads } from './_sources.mjs';
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const read = (rel) => fs.readFileSync(path.join(root, rel), 'utf8');
 
-const sql = read('tools/supabase-desk.sql');
+const sql = read('db/migrations/012-desk.sql');
 const desk = read('js/features/desk.js');
 
 assert(sql.includes('public.is_review_moderator()'), 'desk SQL must use the confirmed-moderator check');

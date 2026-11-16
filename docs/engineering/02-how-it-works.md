@@ -128,7 +128,7 @@ Consent is stored in `sodConsent` (`js/core/consent.js`). If a visitor has not c
 | Account deletion | `js/pages/account/account.js` | `exhibit_delete_my_account()` |
 | Insights dashboard and printable report | `js/pages/dashboard/dashboard.js`, `js/pages/dashboard/sid-report.js` | Moderator-only read policies on events, surveys and profiles; `exhibit_graduates()`; `exhibit_participation(from, to)` for the project target |
 
-**The project target in the SID report.** The proposal to the Southern Africa-Indian Ocean Division sets a target of 500 people who register and begin the study within 12 months (`PARTICIPATION_TARGET` in `js/pages/dashboard/sid-report.js`). The report's Summary page shows three figures for the chosen period, from `exhibit_participation(from, to)` in `tools/supabase-participation.sql`:
+**The project target in the SID report.** The proposal to the Southern Africa-Indian Ocean Division sets a target of 500 people who register and begin the study within 12 months (`PARTICIPATION_TARGET` in `js/pages/dashboard/sid-report.js`). The report's Summary page shows three figures for the chosen period, from `exhibit_participation(from, to)` in `db/migrations/024-participation.sql`:
 
 | Figure | How it is counted |
 |---|---|
