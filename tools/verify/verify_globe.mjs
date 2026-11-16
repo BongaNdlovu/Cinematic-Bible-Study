@@ -38,7 +38,10 @@ async function settle(page) {
   let last = -1;
   let quiet = 0;
   for (let i = 0; i < 60; i++) {
-    const now = await page.evaluate(() => window.__raf);
+    const now = await page.evaluate(() => {
+      const globe = document.querySelector(".cmap-globe");
+      return window.__raf + "|" + (globe ? globe.dataset.clouds : "");
+    });
     quiet = now === last ? quiet + 1 : 0;
     if (quiet >= 3) return true;
     last = now;

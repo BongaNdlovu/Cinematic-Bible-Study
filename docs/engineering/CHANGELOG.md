@@ -22,7 +22,7 @@ Entry template:
 
 | Check | Failure on GitHub | Change |
 |---|---|---|
-| `verify_globe.mjs` | Clouds did not drift within 10 s of a drag; close satellite imagery never appeared; then, on the next run, a proof screenshot timed out after 30 s | Waits until the globe stops drawing before comparing the cloud offset. Waits up to 60 s (was 20 s) for each imagery patch, because each further zoom drops a half-loaded patch and starts a new one. Proof screenshots get 90 s and, if they still time out, are logged and skipped: they are pictures for people, not assertions |
+| `verify_globe.mjs` | Clouds did not drift within 10 s of a drag; close satellite imagery never appeared; then, on the next run, a proof screenshot timed out after 30 s | Waits until the globe stops drawing before comparing the cloud offset. Waits up to 60 s (was 20 s) for each imagery patch, because each further zoom drops a half-loaded patch and starts a new one. Proof screenshots get 90 s and, if they still time out, are logged and skipped: they are pictures for people, not assertions. `settle()` waits until both the frame count and the cloud offset stop changing, because on a slow runner a frame already scheduled can still move the clouds after the count stops (the third GitHub run failed "clouds moved while idle" that way) |
 | `verify_horizon.mjs` | "Greek factors still share a plate" | Waits for the gallery's timeline and for the plate to change after each click, instead of fixed sleeps of 3.5 s and 1.2 s |
 | `verify_lesson_connectors.mjs` | `study.html` had not scrolled to `#sheet-article` after 2.5 s | Waits up to 30 s for the scroll |
 | `verify_hall_mural.mjs`, `verify_mobile_viewports.mjs` | Killed at the 240 s limit | 480 s limit, as for the globe |
