@@ -14,6 +14,33 @@ Entry template:
 
 ---
 
+## 2026-11-16 — Architecture plan, step 4.3: pure helpers out of the one-function files
+
+**Why:** code inside one large closure can only be tested through a browser. Pure helpers outside it get fast unit tests.
+
+**What changed:**
+
+| Feature | New helper file | Moved | Unit test |
+|---|---|---|---|
+| Map | `js/map/map-math.js` (`window.MapMath`) | 13 functions: distance, ring smoothing, tile zoom, year labels and periods, world pixels | `tests/unit/map-math.test.mjs` |
+| Mind map | `js/study/mindmap-layout.js` (`window.MindMapLayout`) | 8 functions (`place`, `splitLines`, `coreFit`, `titleFit`, `nameLines`, `nameFit`, `arrowhead`, `connectorWord`) and the 17 world constants they read | `tests/unit/mindmap-layout.test.mjs` |
+| Home shelf | `js/home/shelf-helpers.js` (ES module exports) | 11 functions: text cleaning, Roman numerals, colours, seeded random, line wrapping and fitting | `tests/unit/shelf-helpers.test.mjs` |
+| Dashboard | `js/insights/insights-format.js` (`window.InsightsFormat`) | 9 functions: CSV escaping, numbers, percentages, durations, counts, dates, scores, quarter bounds | `tests/unit/insights-format.test.mjs` |
+| Desk | `js/shared/desk-rows.js` (`window.DeskRows`) | 9 functions (row checks, clipping, dates, errors, email) and `TITLE_MAX`, `BODY_MAX` | `tests/unit/desk-reader-rubric.test.mjs` |
+| Book reader | `js/study/book-reader-helpers.js` (`window.BookReaderHelpers`) | `clamp`, `classTokens`, `deckPx` | same file |
+| Workbench | `js/study/workbench-rubric.js` (`window.WorkbenchRubric`) | `evaluateCapstoneRubric` | same file |
+
+- Each classic helper file loads just before its feature: `map.html`, `study.html`, `insights.html`, and for `desk-rows.js` the eight pages that load `desk.js`. The mind-map layout loads with the page, because `mindmap.js` itself is fetched on demand. `shelf.js` imports its helpers with the root path `/js/home/shelf-helpers.js`; a staged run of `tools/hash-release-assets.mjs` rewrote that import to the hashed name.
+- **How the moves were proved:** `tools/verify/verify_moved_functions.mjs` (new) compares the syntax tree of each named function or constant in the old file in git with the new file. All 73 declarations matched (13, 25, 11, 9, 11, 3 and 1). Its own test is `tests/unit/moved-functions.test.mjs`; it is listed in `NOT_IN_CI` in `verify_wiring.mjs` because it takes files on the command line.
+- `verify_insights.mjs` and `verify_workbench.mjs` now load the helper file before the feature they test.
+- Comments that described moved functions were dropped from the old files rather than left pointing at nothing.
+
+**Handbook updated:** 03 (`js/` by folder, pages and their scripts, where a pure helper goes), 07 (scripts not in CI).
+
+**Checked here:** on Windows, after the move: lint exits 0, `npm run test:unit` passes 176 of 176, every `npm test` script passes, and `npm run test:browser` passes 30 of 30. A first browser run caught a real fault: `mindmap.js` still read `KX`, which had moved, so the study page threw `KX is not defined`. It now reads `KX` from `window.MindMapLayout`, and a `no-undef` lint pass over the 14 changed files found no other missing name.
+
+**Status:** on branch `arch/phase-4-scripts`, not deployed.
+
 ## 2026-11-16 — Architecture plan, Phase 4 (steps 4.1 and 4.2): study-app.js split
 
 **Why:** `js/study/study-app.js` held 6,273 lines and nearly every study-page feature in one scope.

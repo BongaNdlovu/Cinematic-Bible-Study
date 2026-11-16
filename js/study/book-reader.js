@@ -1,5 +1,6 @@
 (function () {
   'use strict';
+  const { clamp, classTokens, deckPx } = window.BookReaderHelpers;
 
   var VIEW_KEY = 'daniel_book_view';
   var POS_KEY = 'daniel_book_pos_';
@@ -39,9 +40,6 @@
     return node;
   }
 
-  function clamp(v, lo, hi) {
-    return Math.min(hi, Math.max(lo, v));
-  }
 
   function isWhitespace(node) {
     return node.nodeType === 3 && !/\S/.test(node.nodeValue);
@@ -58,9 +56,6 @@
     });
   }
 
-  function classTokens(value) {
-    return String(value || '').split(/\s+/).filter(Boolean);
-  }
 
   function reducedMotion() {
     return !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
@@ -723,10 +718,6 @@
     paintDeck(s);
   }
 
-  function deckPx(count, total) {
-    if (count <= 0 || total <= 0) return '0px';
-    return Math.max(2, Math.round((count / total) * 10)) + 'px';
-  }
 
   function paintDeck(s) {
     var total = Math.max(0, s.steps - 1);

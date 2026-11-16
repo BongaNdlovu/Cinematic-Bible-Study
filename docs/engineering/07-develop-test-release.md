@@ -95,6 +95,7 @@ Four files are not in CI on purpose. `verify_wiring.mjs` lists them in `NOT_IN_C
 | `verify_load_live.mjs` | Loads the live production site. |
 | `verify_pending_migrations.mjs` | Needs access to the production database. |
 | `verify_equivalence.mjs` | Compares two versions given on the command line. Covered by `tests/unit/equivalence.test.mjs`. |
+| `verify_moved_functions.mjs` | Checks that named functions and constants have the same syntax tree after a move between files (`--before`, `--after`, `--names`). Covered by `tests/unit/moved-functions.test.mjs`. |
 
 `verify_live_inserts.mjs` was deleted on 16 November 2026. It posted a guest event and a guest survey to the production database and expected 201. Guest writes now need a human check, so production answers 400 `human_check`. When it was run that day, both inserts were rejected, so nothing was written.
 

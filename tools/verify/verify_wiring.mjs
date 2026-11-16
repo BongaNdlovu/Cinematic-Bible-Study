@@ -11,6 +11,7 @@ const NOT_IN_CI = {
   'verify_load_live.mjs': 'loads the live production site, so it must not run on every pull request',
   'verify_pending_migrations.mjs': 'needs access to the production database',
   'verify_equivalence.mjs': 'compares two versions given on the command line; covered by tests/unit/equivalence.test.mjs',
+  'verify_moved_functions.mjs': 'compares declarations across files given on the command line; covered by tests/unit/moved-functions.test.mjs',
 };
 
 const problems = [];

@@ -407,6 +407,7 @@ const dashProfiles = [
 // Load insights.js dashboard in sandbox
 const dashCode = fs.readFileSync(path.join(ROOT, 'js/insights/insights.js'), 'utf8');
 new Function(fs.readFileSync(path.join(ROOT, 'js/shared/core.js'), 'utf8'))();
+new Function(fs.readFileSync(path.join(ROOT, 'js/insights/insights-format.js'), 'utf8'))();
 const runDash = new Function(dashCode);
 runDash();
 

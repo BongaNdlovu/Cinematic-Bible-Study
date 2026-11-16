@@ -66,6 +66,7 @@ const context = vm.createContext(sandbox);
 
 // 1. Load workbench.js
 const workbenchCode = fs.readFileSync(path.join('js', 'study', 'workbench.js'), 'utf8');
+vm.runInContext(fs.readFileSync(path.join('js', 'study', 'workbench-rubric.js'), 'utf8'), context);
 vm.runInContext(workbenchCode, context);
 
 const StudyWorkbench = sandbox.window.StudyWorkbench;
@@ -208,6 +209,7 @@ const FORBIDDEN = /Adventist|Ellen G\.|Uriah Smith|Investigative Judgment|Great 
 
 const filesToScan = [
   'js/study/workbench.js',
+  'js/study/workbench-rubric.js',
   'js/study/sheets-data.js',
   'js/study/competency.js',
   'js/study/certificate.js',
