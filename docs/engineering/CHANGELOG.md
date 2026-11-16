@@ -14,6 +14,32 @@ Entry template:
 
 ---
 
+## 2026-11-16 — Architecture plan, Phase 2: dead code and old papers
+
+**Why:** Code that cannot run, rules that cannot match, and old papers beside the handbook all send a reader down false paths.
+
+**What changed:**
+
+- **2.1** `js/study/study-app.js`: `studyMap` was set to `null` and never assigned. It is removed, with its three branches (in the epoch change, `pulseMapYear()` and `selectEmpire()`).
+- **2.2** 378 CSS rules deleted: 291 in `css/site.css` (mostly the old home page: `dash-*`, `hero-*`, `reel-*`), 48 in `css/terms.css` (the old email sign-in and terms overlay) and 39 in `css/map.css`. 27 selector lists lost only their dead selectors (13, 5 and 9). A rule went only if every selector in it named a class found in no page, script, vendor file or JSON file, **and** browser CSS coverage never used it. Coverage covered 13 pages, signed in and out, at 1440 and 390 px, and all four study themes. As a control, the same run marked 57 of 523, 24 of 113 and 195 of 380 rules as used. Vendor and state classes (`leaflet-`, `gm-`, `is-`, `has-`) were kept even when unreferenced, because libraries and state code build them at run time. The files shrank from 2,373 to 954 lines (`site.css`), 724 to 411 (`terms.css`) and 1,782 to 1,582 (`map.css`).
+- **2.3** The 33 legacy sitting scripts moved to `tools/legacy/` (the user chose moving over deleting). The `patch_sheet*` scripts now find the repository root one level higher.
+- **2.4** `FIX-PLAN.md` and `fix-plan/` removed, and their lint ignore with them. **`_mig/` was removed and then restored.** The plan called it finished work, but it is the diagram source: `tools/diagrams/merge-specs.mjs` builds the diagrams in `sheets-data.js` from `_mig/specN.json`, and `verify_flow.mjs` reads it. The reference search before the removal had its output cut short and missed these. CI caught it (`verify_flow`: no such file `_mig/spec4.json`). `validate-specs` reports 46 specs and no problems after the restore.
+- **2.5** The 27 loose papers in `docs/` moved to `docs/archive/`. Each is named with the date it was written: the date in its old name, or else its first commit. References in the handbook, tests and tools are updated. Past changelog entries keep the old paths, because they record where the files were. `verify_rate_gate.mjs` now checks the account budget in chapter 04's table, not in the archived paper; with the table changed to 30 it fails. The Cursor complexity skill no longer asks for the archived paper to be updated.
+
+**How 2.2 was checked visually:** screenshots of 10 pages, before and after, signed in and out, at two widths, with animation off and canvases hidden. 25 of 40 pairs were pixel-identical. Every other difference was traced:
+- The gallery differed in one run and was identical in the next (3D timing).
+- The map's 30–80 px difference and a privacy-page difference also show when the old version is compared with itself.
+- The phone home page, signed in, differed in the rotating readers' note (`#shelf-notes-text`) and was identical when captured again.
+- 9 full-page screenshots failed on both sides; not investigated further.
+
+**Handbook updated:** 03 (`tools/legacy/`, `docs/archive/`, `_mig/`), 07 (complexity ceiling source), README (where old papers live).
+
+**Checked here:** on the Phase 2 branch, on Windows: `npm run lint` exits 0, `npm run test:unit` passes 130 of 130, every `npm test` script passes, and `npm run test:browser` passes 29 of 29.
+
+**Not checked:** the Linux CI run for this branch; the nine failed full-page screenshots.
+
+**Status:** on branch `arch/phase-2-cleanup`, not deployed.
+
 ## 2026-11-16 — Architecture plan, Phase 1: one copy of each shared helper
 
 **Why:** Small helpers had been copied from file to file and had drifted apart. There were 14 HTML escapers, and 8 of them did not escape `'`. There were 4 local-host checks (they decide when the local test sign-in is honoured), 3 different focus traps, and the sign-in reads were copied into 10 files. A fix to one copy never reached the others.
