@@ -23,5 +23,13 @@
     "consistent-function-scoping": "off",
     "unicorn/no-array-sort": "off",
     "no-unused-vars": ["error", { "caughtErrors": "none", "args": "none" }]
-  }
+  },
+  "overrides": [
+    {
+      "files": ["js/study/diagrams/**"],
+      "rules": {
+        "no-unused-vars": "off"
+      }
+    }
+  ]
 }
