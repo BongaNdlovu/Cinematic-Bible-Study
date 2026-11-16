@@ -1,0 +1,572 @@
+/* Return button inside sitting spine */
+    .spine-catalog-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      background: rgba(212, 175, 55, 0.12);
+      border: 1px solid rgba(212, 175, 55, 0.35);
+      color: #f7ead0;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 0.22rem 0.65rem;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: all 0.18s ease;
+      text-decoration: none;
+    }
+    .spine-catalog-btn:hover {
+      background: rgba(212, 175, 55, 0.28);
+      border-color: #ffd700;
+      color: #ffd700;
+    }
+
+    .cardmin-target { position: relative; padding-right: 2.85rem; }
+    .cardmin-btn {
+      position: absolute;
+      top: 0.65rem;
+      right: 0.6rem;
+      z-index: 6;
+      width: 1.45rem;
+      height: 1.45rem;
+      display: inline-grid;
+      place-items: center;
+      padding: 0;
+      border-radius: 9999px;
+      border: 1px solid rgba(228, 197, 106, 0.75);
+      color: #f6edd8;
+      background: rgba(12, 10, 8, 0.82);
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.28);
+      cursor: pointer;
+    }
+    .cardmin-compact { padding-right: 2.15rem; }
+    .cardmin-compact .cardmin-btn {
+      top: 0.3rem;
+      right: 0.3rem;
+      width: 1.25rem;
+      height: 1.25rem;
+      box-shadow: none;
+    }
+    .cardmin-btn:hover,
+    .cardmin-btn:focus-visible { background: rgba(28, 22, 12, 0.94); }
+    .cardmin-btn svg { width: 0.55rem; height: 0.55rem; display: block; transition: transform 0.18s ease; }
+    .cardmin-compact .cardmin-btn svg { width: 0.48rem; height: 0.48rem; }
+    .cardmin-target.is-card-min .cardmin-btn svg { transform: rotate(-180deg); }
+    .cardmin-target.is-card-min { display: block; padding-bottom: 0.45rem; cursor: pointer; }
+    .cardmin-clip.is-card-min { max-height: 3.4rem; overflow: hidden; }
+    .cardmin-target [data-cardmin-hidden] { display: none !important; }
+    body.paper-mode .cardmin-btn,
+    body.white-mode .cardmin-btn {
+      color: #1c1917;
+      background: rgba(255, 252, 246, 0.96);
+      border-color: rgba(90, 60, 10, 0.5);
+    }
+    @media print {
+      .cardmin-btn { display: none !important; }
+    }
+    /* TIMELINE STANDARD (.tlx-*): a dark plate in every theme; in the
+       full-screen layer its own frame and padding are dropped. SVG type is in
+       viewBox units, so one geometry serves the column and the plate; the
+       wrapper pans rather than shrinking below legibility. Text read at length
+       (legend, tracks, bar, panel) is HTML. */
+    .tlx {
+      --tlx-serif: var(--dfx-serif, 'Newsreader', Georgia, 'Times New Roman', serif);
+      --tlx-mono: var(--dfx-mono, "JetBrains Mono", ui-monospace, Consolas, monospace);
+      --tlx-sans: Inter, system-ui, 'Segoe UI', Arial, sans-serif;
+      --tlx-cream: #f4ecd8;
+      --tlx-ash: #c8c0ad;
+      --tlx-dim: #8a8272;
+      --tlx-gilt: #dcb257;
+      --tlx-gold2: #f2d797;
+      --tlx-line: rgba(220, 178, 87, 0.26);
+      position: relative;
+      margin: 0;
+      padding: clamp(0.7rem, 1.6vw, 1.4rem) clamp(0.75rem, 1.8vw, 1.5rem) clamp(0.8rem, 1.6vw, 1.3rem);
+      border: 1px solid var(--tlx-line);
+      border-radius: 16px;
+      background:
+        radial-gradient(ellipse 72% 120% at 50% 0%, rgba(152, 110, 38, 0.20), transparent 70%),
+        linear-gradient(#0c0a07, #080706);
+      box-shadow: inset 0 1px 0 rgba(242, 215, 151, 0.06);
+      color: var(--tlx-ash);
+      overflow: hidden;
+    }
+    .chain.is-full .tlx {
+      padding: 0;
+      border: 0;
+      border-radius: 0;
+      background: none;
+      box-shadow: none;
+      overflow: visible;
+    }
+
+    .tlx-plot {
+      overflow-x: auto;
+      overflow-y: hidden;
+      overscroll-behavior-x: contain;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(220, 178, 87, 0.35) transparent;
+    }
+    /* The SVG is never wider than the plate: `viewBox` does the scaling, so the
+       axis shrinks with the column instead of running past it. Its type is in
+       viewBox units, and the narrow blocks at the foot of this section trade the
+       prose lines for a legible year once the plate is too small to hold both. */
+    .tlx-svg {
+      display: block;
+      width: 100%;
+      max-width: 100%;
+      height: auto;
+    }
+
+    /* Type is in viewBox units: the whole axis scales with the plate. */
+    .tlx-yr {
+      font-family: var(--tlx-serif);
+      font-size: 54px;
+      font-weight: 600;
+      fill: var(--tlx-c, var(--tlx-gilt));
+      text-anchor: middle;
+    }
+    .tlx-tt {
+      font-family: var(--tlx-sans);
+      font-size: 26px;
+      font-weight: 500;
+      fill: var(--tlx-cream);
+      text-anchor: middle;
+      letter-spacing: 0.01em;
+    }
+    .tlx-rf {
+      font-family: var(--tlx-mono);
+      font-size: 20px;
+      font-weight: 500;
+      fill: var(--tlx-dim);
+      text-anchor: middle;
+      letter-spacing: 0.06em;
+    }
+    .tlx-bt {
+      font-family: var(--tlx-mono);
+      font-size: 20px;
+      font-weight: 500;
+      fill: var(--tlx-c, var(--tlx-gold2));
+      text-anchor: middle;
+      /* Tracking is part of the caption's width, and the model budgets the
+         caption against the span it labels: 0.12em is what lets a segment's own
+         name fit the span between its two milestones rather than being clipped. */
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    .tlx-dl {
+      font-family: var(--tlx-mono);
+      font-size: 19px;
+      font-weight: 500;
+      fill: var(--tlx-c, var(--tlx-ash));
+      text-anchor: middle;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      opacity: 0.85;
+    }
+    .tlx-seg {
+      fill: none;
+      stroke: var(--tlx-c, var(--tlx-gilt));
+      stroke-width: 2.4;
+      stroke-dasharray: 1;
+      stroke-dashoffset: 0;
+      filter: drop-shadow(0 0 8px var(--tlx-c, var(--tlx-gilt)));
+    }
+    .tlx-tick { fill: none; stroke: #5fc4b0; stroke-width: 1.1; opacity: 0.45; }
+    .tlx-br-line {
+      fill: none;
+      stroke: var(--tlx-c, var(--tlx-gold2));
+      stroke-width: 1.3;
+      stroke-dasharray: 1;
+      stroke-dashoffset: 0;
+      opacity: 0.8;
+    }
+
+    .tlx-nd { cursor: pointer; }
+    .tlx-nd:focus { outline: none; }
+    .tlx-nd:focus-visible { outline: 2px solid var(--tlx-gold2); outline-offset: 4px; }
+    .tlx-dot {
+      fill: #0a0907;
+      stroke: var(--tlx-c, var(--tlx-gilt));
+      stroke-width: 2.4;
+      transform-box: fill-box;
+      transform-origin: center;
+      transition: stroke 0.4s ease, stroke-width 0.4s ease;
+    }
+    .tlx-nd.is-final .tlx-dot { fill: var(--tlx-c); filter: drop-shadow(0 0 18px var(--tlx-c)); }
+    .tlx-foc,
+    .tlx-halo {
+      fill: none;
+      opacity: 0;
+      transition: opacity 0.35s ease;
+    }
+    .tlx-foc { stroke: var(--tlx-gold2); stroke-width: 1.6; }
+    .tlx-halo { stroke: #fff8ea; stroke-width: 2.4; }
+    .tlx-nd.is-sel .tlx-halo { opacity: 0.95; }
+    .tlx-nd.is-sel .tlx-dot { stroke: #fff8ea; stroke-width: 3.4; }
+    .tlx-nd.is-sel .tlx-yr { fill: #fff8ea; }
+    .tlx-nd:focus .tlx-foc,
+    .tlx-nd:focus-visible .tlx-foc { opacity: 0.9; }
+    .tlx-nd:hover .tlx-dot { stroke: #fff8ea; }
+    .tlx-ping {
+      fill: none;
+      stroke: var(--tlx-c, var(--tlx-gilt));
+      stroke-width: 1.4;
+      opacity: 0;
+      transform-box: fill-box;
+      transform-origin: center;
+    }
+    .tlx-bd {
+      fill: #0a0907;
+      stroke: var(--tlx-c, var(--tlx-gilt));
+      stroke-width: 1.8;
+      filter: drop-shadow(0 0 9px var(--tlx-c, var(--tlx-gilt)));
+    }
+    .tlx-nd.is-sel .tlx-bd { stroke-width: 2.8; }
+    .tlx-ico path {
+      fill: none;
+      stroke: var(--tlx-c, var(--tlx-gold2));
+      stroke-width: 1.9;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .tlx-stem {
+      fill: none;
+      stroke: var(--tlx-c, var(--tlx-gilt));
+      stroke-width: 1.3;
+      stroke-dasharray: 3 4;
+      opacity: 0.55;
+    }
+    .tlx-plain { margin: 0; padding-left: 1.1rem; font-size: 0.85rem; line-height: 1.6; }
+    .tlx-plain span { display: block; color: var(--tlx-dim); }
+
+    /* ---- the entrance ----------------------------------------------------- *
+       The base state of every part is its end state, so a reader who asked for no
+       motion sees the finished diagram; the animations below only ever play from
+       `.chain.is-visible`, which is the figure's own trigger, and the reduced
+       motion block at the foot of this section removes them outright. */
+    .chain.is-visible .tlx-seg { animation: tlx-draw var(--tlx-du, 0.8s) var(--tlx-t, 0s) linear both; }
+    .chain.is-visible .tlx-br-line { animation: tlx-draw 1.1s var(--tlx-t, 0s) ease-out both; }
+    .chain.is-visible .tlx-bt,
+    .chain.is-visible .tlx-dl { animation: tlx-fade 1s var(--tlx-t, 0s) ease-out both; }
+    .chain.is-visible .tlx-tick { animation: tlx-fade 0.7s var(--tlx-t, 0s) ease-out both; }
+    .chain.is-visible .tlx-nd { animation: tlx-pop 0.85s var(--tlx-t, 0s) cubic-bezier(0.2, 0.9, 0.2, 1.1) both; }
+    .chain.is-visible .tlx-dot { animation: tlx-dot 0.8s var(--tlx-t, 0s) cubic-bezier(0.2, 0.9, 0.2, 1.2) both; }
+    .chain.is-visible .tlx-nd.is-final .tlx-ping { animation: tlx-ping 3.4s calc(var(--tlx-t, 0s) + 0.6s) ease-out infinite; }
+    .chain.is-visible .tlx-lg { animation: tlx-rise 0.6s var(--tlx-t, 0s) both; }
+    .chain.is-visible .tlx-scale-fill { animation: tlx-fill 1.5s 0.45s cubic-bezier(0.3, 0.8, 0.3, 1) both; }
+
+    @keyframes tlx-draw { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+    @keyframes tlx-fade { from { opacity: 0; } }
+    @keyframes tlx-pop { from { opacity: 0; transform: translateY(16px); } }
+    @keyframes tlx-dot {
+      0% { opacity: 0; transform: scale(0); }
+      60% { transform: scale(1.3); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+    @keyframes tlx-ping { 0% { opacity: 0.6; transform: scale(1); } 100% { opacity: 0; transform: scale(3.4); } }
+    @keyframes tlx-rise { from { opacity: 0; transform: translateY(10px); } }
+    @keyframes tlx-fill { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+
+    .tlx-legend { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.9rem; }
+    .tlx-lg {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.42rem 0.8rem 0.42rem 0.55rem;
+      border: 1px solid var(--tlx-c, var(--tlx-gilt));
+      border-radius: 99px;
+      background: rgba(255, 255, 255, 0.03);
+      color: var(--tlx-ash);
+      font-family: var(--tlx-sans);
+      font-size: 0.76rem;
+      line-height: 1.25;
+      text-align: left;
+      cursor: pointer;
+      transition: background 0.28s ease, border-color 0.28s ease, color 0.28s ease;
+    }
+    .tlx-lg svg {
+      flex: none;
+      width: 18px;
+      height: 18px;
+      fill: none;
+      stroke: var(--tlx-c, var(--tlx-gilt));
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .tlx-lg b { color: var(--tlx-c, var(--tlx-gold2)); font-weight: 600; letter-spacing: 0.02em; }
+    .tlx-lg span { color: var(--tlx-ash); }
+    .tlx-lg:hover { background: rgba(255, 255, 255, 0.1); color: var(--tlx-cream); }
+    .tlx-lg.is-sel { background: rgba(255, 255, 255, 0.16); color: var(--tlx-cream); }
+    .tlx-lg.is-sel b { color: #fff8ea; }
+    .tlx-lg:focus-visible { outline: 2px solid var(--tlx-gold2); outline-offset: 2px; }
+
+    .tlx-tracks {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.3rem 1.2rem;
+      margin: 0.7rem 0 0;
+      padding: 0;
+      list-style: none;
+    }
+    .tlx-track {
+      display: flex;
+      align-items: baseline;
+      gap: 0.45rem;
+      min-width: 0;
+      font-family: var(--tlx-sans);
+      font-size: 0.74rem;
+      color: var(--tlx-dim);
+    }
+    .tlx-track-dot {
+      flex: none;
+      align-self: center;
+      width: 0.5rem;
+      height: 0.5rem;
+      border-radius: 50%;
+      background: var(--tlx-c, var(--tlx-gilt));
+      box-shadow: 0 0 10px var(--tlx-c, var(--tlx-gilt));
+    }
+    .tlx-track-role {
+      font-family: var(--tlx-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--tlx-dim);
+    }
+    .tlx-track b { color: var(--tlx-cream); font-weight: 500; }
+
+    /* One line at the width of the plate: the label, the split as arithmetic, and
+       the sentence that says the axis above is not drawn to this scale. */
+    .tlx-scale { margin-top: 0.6rem; }
+    .tlx-scale-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.1rem 0.9rem;
+      margin: 0 0 0.35rem;
+      font-family: var(--tlx-mono);
+      font-size: 0.56rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--tlx-dim);
+    }
+    .tlx-scale-head span:nth-child(1) { color: var(--tlx-dim); }
+    .tlx-scale-head span:nth-child(2) { color: var(--tlx-cream); }
+    .tlx-scale-head span:nth-child(3) {
+      flex: 1 1 auto;
+      text-align: right;
+      text-transform: none;
+      letter-spacing: 0.03em;
+      font-size: 0.66rem;
+      color: var(--tlx-ash);
+    }
+    .tlx-scale-bar {
+      position: relative;
+      display: flex;
+      height: 12px;
+      border: 1px solid var(--tlx-line);
+      border-radius: 99px;
+      overflow: hidden;
+    }
+    .tlx-scale-bar i { display: block; background: rgba(183, 154, 240, 0.30); }
+    .tlx-scale-bar i + i { background: rgba(95, 196, 176, 0.22); }
+    .tlx-scale-mark { position: absolute; top: 0; bottom: 0; width: 1px; background: rgba(5, 4, 3, 0.6); }
+    .tlx-scale-mark.is-cut { width: 2px; background: #050403; }
+    .tlx-scale-fill {
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 100%;
+      transform-origin: left center;
+      /* The purple break sits on the bar's own cut, so the two parts of the span
+         are tinted where they actually divide. */
+      background: linear-gradient(90deg, #7db3e8, #b79af0 var(--tlx-cut, 21%), #5fc4b0);
+      box-shadow: 0 0 16px rgba(183, 154, 240, 0.45);
+      pointer-events: none;
+    }
+    .tlx-scale-axis {
+      position: relative;
+      height: 1.05rem;
+      margin-top: 0.4rem;
+      font-family: var(--tlx-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.08em;
+      color: var(--tlx-dim);
+    }
+    .tlx-scale-axis span {
+      position: absolute;
+      top: 0;
+      transform: translateX(-50%);
+      white-space: nowrap;
+    }
+    .tlx-scale-axis span:first-child { transform: none; }
+    .tlx-scale-axis span:last-child { transform: none; }
+
+    .tlx-panel {
+      position: relative;
+      margin-top: 0.7rem;
+      padding: 0.85rem 1rem 0.8rem;
+      border: 1px solid var(--tlx-line);
+      border-left: 4px solid var(--tlx-c, var(--tlx-line));
+      border-radius: 14px;
+      background: linear-gradient(160deg, rgba(220, 178, 87, 0.09), rgba(16, 13, 10, 0.94) 58%);
+      box-shadow: inset 0 1px 0 rgba(242, 215, 151, 0.07);
+      transition: border-color 0.5s ease;
+    }
+    .tlx-ph { display: flex; align-items: center; gap: 0.7rem; }
+    .tlx-pib {
+      flex: none;
+      display: grid;
+      place-items: center;
+      width: 38px;
+      height: 38px;
+      border: 2px solid var(--tlx-c, var(--tlx-gilt));
+      border-radius: 50%;
+      background: radial-gradient(circle at 50% 28%, rgba(255, 255, 255, 0.10), rgba(255, 255, 255, 0.02) 72%);
+      box-shadow: 0 0 26px rgba(255, 255, 255, 0.10);
+    }
+    .tlx-pib svg {
+      width: 20px;
+      height: 20px;
+      fill: none;
+      stroke: var(--tlx-c, var(--tlx-gold2));
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .tlx-pid { min-width: 0; }
+    .tlx-pmeta { display: flex; flex-wrap: wrap; align-items: center; gap: 0.3rem 0.55rem; margin: 0; }
+    /* One scoped override of the shell's chip: inside this row the chip is an
+       inline label, so its own bottom margin would push the serif title off the
+       optical centre of the icon beside it. */
+    .tlx-pmeta .chain-cite { margin: 0; }
+    .tlx-pdate {
+      font-family: var(--tlx-mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--tlx-dim);
+    }
+    .tlx-ptitle {
+      display: block;
+      margin-top: 0.2rem;
+      font-family: var(--tlx-serif);
+      font-weight: 600;
+      font-size: 1.25rem;
+      line-height: 1.15;
+      color: var(--tlx-cream);
+    }
+    /* The kicker rides in front of its own segment rather than above it: two
+       stacked lines per segment is what pushed the plate past one screen. */
+    .tlx-prow {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: 0.1rem 0.5rem;
+      margin: 0.55rem 0 0;
+    }
+    .tlx-pk {
+      /* The kicker is a label, not a column: on a phone it shrinks and wraps
+         inside its row rather than pushing its segment line past the panel. */
+      flex: 0 1 auto;
+      min-width: 0;
+      font-family: var(--tlx-mono);
+      font-size: 0.58rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--tlx-c, var(--tlx-gilt));
+      opacity: 0.9;
+    }
+    .tlx-pl {
+      max-width: 78ch;
+      font-family: var(--tlx-sans);
+      font-size: 0.9rem;
+      line-height: 1.55;
+      color: var(--tlx-ash);
+    }
+    .tlx-pn { display: flex; align-items: center; justify-content: space-between; gap: 0.6rem; margin-top: 0.7rem; }
+    .tlx-pbtn {
+      padding: 0.4rem 0.9rem;
+      border: 1px solid var(--tlx-c, var(--tlx-line));
+      border-radius: 99px;
+      background: none;
+      color: var(--tlx-cream);
+      font-family: var(--tlx-mono);
+      font-size: 0.66rem;
+      letter-spacing: 0.08em;
+      cursor: pointer;
+      transition: background 0.25s ease, border-color 0.25s ease;
+    }
+    .tlx-pbtn:hover:not(:disabled) { background: rgba(255, 255, 255, 0.1); }
+    .tlx-pbtn:disabled { opacity: 0.28; cursor: default; }
+    .tlx-pbtn:focus-visible { outline: 2px solid var(--tlx-gold2); outline-offset: 2px; }
+    .tlx-pnum { font-family: var(--tlx-mono); font-size: 0.64rem; letter-spacing: 0.16em; color: var(--tlx-dim); }
+
+    /* These are labels, not prose: `.article-body p` and `ul` spacing and the
+       !important font-size are restated here. */
+    .tlx p,
+    .tlx ul,
+    .tlx li { margin: 0; }
+    /* `.article-body ul:not(.lesson-toc-list)` is a two-class, one-element
+       selector, and the light themes colour `li` and `p` for a paper ground.
+       Both roles are matched element-for-element here, or a near-black label
+       would be printed on this block's dark plate. */
+    .tlx ul.tlx-tracks { margin: 0.7rem 0 0; padding: 0; }
+    .tlx li.tlx-track { color: var(--tlx-dim); }
+    .tlx p.tlx-scale-head { color: var(--tlx-dim); }
+    .tlx .tlx-scale-head {
+      margin: 0 0 0.35rem;
+      font-size: 0.6rem !important;
+      line-height: 1.5;
+    }
+    .tlx .tlx-scale-head span:nth-child(3) { font-size: 0.66rem !important; }
+    .tlx .tlx-pmeta { margin: 0; font-size: 0.62rem !important; line-height: 1.4; }
+    .tlx .tlx-prow { margin: 0.55rem 0 0; font-size: 0.9rem !important; line-height: 1.5; }
+    .tlx .tlx-pk { font-size: 0.58rem !important; }
+    .tlx .tlx-pl { font-size: 0.9rem !important; }
+    .tlx .tlx-track { margin: 0; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .chain.is-visible .tlx-seg,
+      .chain.is-visible .tlx-br-line,
+      .chain.is-visible .tlx-bt,
+      .chain.is-visible .tlx-dl,
+      .chain.is-visible .tlx-tick,
+      .chain.is-visible .tlx-nd,
+      .chain.is-visible .tlx-dot,
+      .chain.is-visible .tlx-lg,
+      .chain.is-visible .tlx-nd.is-final .tlx-ping,
+      .chain.is-visible .tlx-scale-fill { animation: none !important; }
+      .tlx-dot,
+      .tlx-foc,
+      .tlx-halo,
+      .tlx-pbtn,
+      .tlx-lg { transition: none !important; }
+    }
+    /* Below 720px the axis keeps its shape and years (scaled up) but drops the
+       prose lines, which already show in the legend, track chips and panel. */
+    @media (max-width: 720px) {
+      .tlx { padding: 0.7rem 0.65rem 0.9rem; border-radius: 12px; }
+      .tlx-yr { font-size: 64px; }
+      .tlx-tt { font-size: 30px; }
+      .tlx-dl { font-size: 24px; }
+      .tlx-scale-head { letter-spacing: 0.1em; }
+    }
+    @media (max-width: 560px) {
+      .tlx-yr { font-size: 78px; }
+      .tlx-rf,
+      .tlx-bt { display: none; }
+    }
+    @media (max-width: 440px) {
+      .tlx-yr { font-size: 92px; }
+      .tlx-tt,
+      .tlx-dl { display: none; }
+    }
+    /* The plate is a lit surface, so in the light themes it keeps its own dark
+       ground and restores every text role explicitly. */
+    body.paper-mode .tlx,
+    body.white-mode .tlx { color: #c8c0ad; }

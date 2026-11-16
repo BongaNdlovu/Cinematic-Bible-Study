@@ -2180,7 +2180,7 @@
         parts.push(nodeHtml(step, i === mid, t, canResolve));
       });
       // More than three cards form a grid (.chain-flow.is-dense in
-      // css/study-page.css):
+      // css/study/03-chain.css):
       // two columns for four cards, three columns otherwise, read left to right.
       const dense = steps.length > 3;
       const flowClass = 'chain-flow' + (dense ? ' is-dense' : '');
@@ -5028,9 +5028,6 @@
     function showSheetLoading(on) {
       if (on) {
         if (!sheetLoadingBar && document.body) {
-          const style = document.createElement('style');
-          style.textContent = '@keyframes sheet-loading-slide{0%{transform:translateX(-120%)}100%{transform:translateX(300%)}}';
-          document.head.appendChild(style);
           sheetLoadingBar = document.createElement('div');
           sheetLoadingBar.id = 'sheet-loading-bar';
           sheetLoadingBar.style.cssText = 'position:fixed;top:0;left:0;right:0;height:3px;z-index:80;pointer-events:none;overflow:hidden;background:rgba(212,175,55,0.12);';
@@ -5735,18 +5732,6 @@
       const prev = document.getElementById('sitting-celebrate');
       if (prev) prev.remove();
       if (celebrateTimer) window.clearTimeout(celebrateTimer);
-      if (!document.getElementById('sitting-celebrate-style')) {
-        const style = document.createElement('style');
-        style.id = 'sitting-celebrate-style';
-        style.textContent =
-          '#sitting-celebrate{position:fixed;left:50%;top:18%;transform:translateX(-50%);z-index:241;width:min(22rem,calc(100vw - 2rem));padding:1.05rem 1.15rem 1rem;border:1px solid rgba(196,162,90,.5);background:#f7f1e4;color:#1c1914;font-family:Inter,system-ui,sans-serif;box-shadow:0 18px 44px rgba(0,0,0,.32);text-align:center}' +
-          'html.dark #sitting-celebrate,body.charcoal-mode #sitting-celebrate,body.night-mode #sitting-celebrate{background:#1c1914;color:#f3ead8;border-color:rgba(212,175,55,.4)}' +
-          '#sitting-celebrate small{display:block;font-size:10px;letter-spacing:.1em;text-transform:uppercase;opacity:.68;margin-bottom:.4rem}' +
-          '#sitting-celebrate h3{margin:0 0 .4rem;font-family:Newsreader,Georgia,serif;font-size:1.35rem;font-weight:600}' +
-          '#sitting-celebrate p{margin:0 0 .85rem;font-size:.92rem;line-height:1.45}' +
-          '#sitting-celebrate button{border:1px solid rgba(196,162,90,.45);background:transparent;color:inherit;padding:.35rem .8rem;font-size:.8rem;cursor:pointer}';
-        document.head.appendChild(style);
-      }
       const label = window.BAJourney && typeof window.BAJourney.sheetLabel === 'function'
         ? window.BAJourney.sheetLabel(sheet)
         : ('Sitting ' + sheet);

@@ -17,6 +17,7 @@ export const BROWSER_CHECKS = [
   { file: 'verify_grounding_quotes.mjs', base: 'none' },
   { file: 'verify_hall_mural.mjs', base: 'none' },
   { file: 'verify_horizon.mjs', base: 'none' },
+  { file: 'verify_insight_cards.mjs', base: 'flag' },
   { file: 'verify_lesson_connectors.mjs', base: 'none' },
   { file: 'verify_map.mjs', base: 'none' },
   { file: 'verify_medal_art.mjs', base: 'none' },

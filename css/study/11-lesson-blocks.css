@@ -1,0 +1,425 @@
+/* Table of Contents: Illuminated Scriptorium Index */
+    .lesson-toc {
+      position: relative;
+      margin: 2rem 0 2.75rem;
+      padding: 1.35rem 1.6rem;
+      border: 1px solid rgba(212, 175, 55, 0.4);
+      border-radius: 14px;
+      background: linear-gradient(145deg, rgba(28, 24, 18, 0.92) 0%, rgba(14, 12, 10, 0.98) 100%);
+      box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.8), 0 0 1px 1px rgba(212, 175, 55, 0.25), inset 0 1px 0 rgba(255, 235, 175, 0.15);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+    .lesson-toc-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 10.5px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: #e5b93b;
+      margin: 0 0 0.95rem;
+      text-shadow: 0 0 12px rgba(229, 185, 59, 0.35);
+    }
+    .lesson-toc-kicker::before {
+      content: "✦";
+      font-size: 10px;
+      color: #fbbf24;
+    }
+    .lesson-toc-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.75rem 1.75rem;
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+    .lesson-toc-list li {
+      position: relative;
+      padding-left: 1.35rem;
+      transition: transform 0.15s ease;
+    }
+    .lesson-toc-list li:hover {
+      transform: translateX(3px);
+    }
+    .lesson-toc-list li::before {
+      content: "›";
+      position: absolute;
+      left: 0;
+      top: -2px;
+      font-size: 1.2rem;
+      color: #d4a017;
+      font-weight: 700;
+    }
+    .lesson-toc-list a {
+      color: #ede5d5;
+      text-decoration: none;
+      border-bottom: 1px dotted rgba(212, 175, 55, 0.4);
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      display: inline;
+    }
+    .lesson-toc-list a:hover {
+      color: #fbbf24;
+      border-bottom: 1px solid #fbbf24;
+      text-shadow: 0 0 12px rgba(251, 191, 36, 0.4);
+    }
+    @media (max-width: 640px) {
+      .lesson-toc-list { grid-template-columns: 1fr; gap: 0.65rem; }
+    }
+    body.paper-mode .lesson-toc {
+      background: rgba(255, 252, 245, 0.92);
+      border-color: rgba(180, 130, 30, 0.45);
+      box-shadow: 0 10px 30px -6px rgba(100, 80, 50, 0.15);
+    }
+    body.paper-mode .lesson-toc-list a { color: #3f3421; }
+    body.white-mode .lesson-toc {
+      background: #ffffff;
+      border-color: #e2d7c0;
+      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.06);
+    }
+    body.white-mode .lesson-toc-list a { color: #1c1917; }
+
+    /* Governing Principle: The Imperial Keystone */
+    .governing-principle {
+      position: relative;
+      margin: 2.25rem 0 2.75rem;
+      padding: 1.35rem 1.75rem;
+      border-left: 4.5px solid #e5b93b;
+      background: linear-gradient(135deg, rgba(34, 28, 20, 0.92) 0%, rgba(18, 15, 12, 0.98) 100%);
+      border-radius: 0 14px 14px 0;
+      box-shadow: 0 14px 36px -10px rgba(0, 0, 0, 0.75), 0 0 1px 1px rgba(212, 175, 55, 0.25), inset 0 1px 0 rgba(255, 235, 175, 0.12);
+    }
+    .governing-principle-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: #fbbf24;
+      margin: 0 0 0.65rem;
+      text-shadow: 0 0 10px rgba(251, 191, 36, 0.3);
+    }
+    .governing-principle-kicker::before {
+      content: "◈";
+      color: #fbbf24;
+    }
+    .governing-principle p {
+      font-family: 'Newsreader', Georgia, serif;
+      font-size: 1.16rem !important;
+      line-height: 1.8;
+      color: #faf6eb;
+      margin: 0 !important;
+    }
+    body.paper-mode .governing-principle {
+      background: rgba(253, 248, 237, 0.95);
+      border-left-color: #9a7217;
+    }
+    body.paper-mode .governing-principle p { color: #2d2618; }
+    body.white-mode .governing-principle {
+      background: #faf8f2;
+      border-left-color: #c9a227;
+      border: 1px solid #ebdcc0;
+      border-left-width: 4.5px;
+    }
+    body.white-mode .governing-principle p { color: #1c1917; }
+
+    /* Exilic Chronicle Bridge: From Last Sitting */
+    .from-last-sitting {
+      position: relative;
+      margin: 1.75rem 0 2.25rem;
+      padding: 1.15rem 1.5rem;
+      border-left: 3.5px solid #d4a017;
+      background: linear-gradient(135deg, rgba(28, 24, 18, 0.8) 0%, rgba(16, 14, 12, 0.9) 100%);
+      border-radius: 0 12px 12px 0;
+      font-size: 1.02rem;
+      line-height: 1.75;
+      color: #e4dacf;
+      box-shadow: 0 8px 24px -6px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 235, 175, 0.08);
+      word-break: break-word;
+      overflow-wrap: break-word;
+    }
+    .from-last-sitting-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #e5b93b;
+      margin: 0 0 0.5rem;
+      font-weight: 700;
+      display: block;
+    }
+    .from-last-sitting-kicker::before {
+      content: "↩";
+      color: #e5b93b;
+      margin-right: 0.35rem;
+    }
+    .from-last-sitting p {
+      margin: 0 !important;
+      font-family: 'Newsreader', Georgia, serif;
+      font-size: 1.05rem !important;
+      line-height: 1.75;
+    }
+
+    /* Cinematic Act Headers: Part Headers */
+    .part-header {
+      position: relative;
+      margin: 4rem 0 2rem;
+      padding-top: 2.25rem;
+      border-top: none;
+    }
+    .part-header::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1.5px;
+      background: linear-gradient(90deg, transparent 0%, rgba(212, 175, 55, 0.25) 15%, rgba(245, 205, 95, 0.85) 50%, rgba(212, 175, 55, 0.25) 85%, transparent 100%);
+      box-shadow: 0 0 10px rgba(245, 205, 95, 0.45);
+    }
+    .part-header:first-of-type {
+      margin-top: 1.75rem;
+      padding-top: 0;
+    }
+    .part-header:first-of-type::before {
+      display: none;
+    }
+    .part-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 10.5px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: #e5b93b;
+      margin: 0 0 0.65rem;
+      padding: 0.2rem 0.75rem;
+      border-radius: 999px;
+      background: rgba(212, 175, 55, 0.1);
+      border: 1px solid rgba(212, 175, 55, 0.35);
+      box-shadow: 0 0 14px rgba(212, 175, 55, 0.18);
+    }
+    .part-kicker::before {
+      content: "";
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: #e5b93b;
+      box-shadow: 0 0 6px #e5b93b;
+    }
+    .part-header h3 {
+      font-family: 'Newsreader', Georgia, serif;
+      font-size: 1.95rem !important;
+      font-weight: 700;
+      line-height: 1.25;
+      letter-spacing: -0.02em;
+      margin: 0 0 0.55rem !important;
+      color: #faf6eb;
+      text-shadow: 0 2px 16px rgba(0, 0, 0, 0.7);
+    }
+    body.paper-mode .part-header h3,
+    body.white-mode .part-header h3 {
+      color: #1c1917;
+      text-shadow: none;
+    }
+    .part-subtitle {
+      font-family: 'Newsreader', Georgia, serif;
+      font-size: 1.05rem;
+      line-height: 1.55;
+      color: #d1c4a5;
+      margin: 0;
+      font-style: italic;
+    }
+    body.paper-mode .part-subtitle,
+    body.white-mode .part-subtitle {
+      color: #57534e;
+    }
+
+    /* Artifact & Framework Cards Ecosystem */
+    .level-card, .historical-note, .caution-card, .framework-card, .source-card, .qa-card, .principle-card, .next-sitting-card, .checkpoint-card, .biblical-case, .layer-stack {
+      position: relative;
+      margin: 2rem 0;
+      padding: 1.35rem 1.6rem;
+      border-radius: 12px;
+      word-break: break-word;
+      overflow-wrap: break-word;
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease;
+      box-shadow: 0 10px 30px -8px rgba(0, 0, 0, 0.7);
+    }
+    .level-card:hover, .historical-note:hover, .caution-card:hover, .framework-card:hover, .source-card:hover, .principle-card:hover, .biblical-case:hover, .layer-stack:hover {
+      box-shadow: 0 14px 38px -8px rgba(0, 0, 0, 0.85);
+    }
+    .level-kicker, .historical-note-kicker, .caution-card-kicker, .framework-card-kicker, .principle-card-kicker, .next-sitting-kicker, .checkpoint-kicker, .biblical-case-kicker, .layer-stack-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-weight: 700;
+      margin: 0 0 0.75rem;
+    }
+
+    /* Framework Card: Analytical Exilic Study Plaque */
+    .framework-card {
+      border: 1px solid rgba(212, 175, 55, 0.38);
+      background: linear-gradient(135deg, rgba(28, 24, 19, 0.88) 0%, rgba(16, 14, 11, 0.96) 100%);
+      box-shadow: 0 12px 32px -8px rgba(0, 0, 0, 0.75), 0 0 1px 1px rgba(212, 175, 55, 0.2), inset 0 1px 0 rgba(255, 235, 175, 0.1);
+    }
+    .framework-card:hover {
+      border-color: rgba(212, 175, 55, 0.55);
+      box-shadow: 0 16px 40px -8px rgba(0, 0, 0, 0.85), 0 0 16px rgba(212, 175, 55, 0.22);
+    }
+    .framework-card-kicker { color: #e5b93b; }
+    .framework-card-kicker::before { content: "▪"; color: #e5b93b; }
+
+    /* Level Cards */
+    .level-text {
+      border-left: 4px solid #3b82f6;
+      border-top: 1px solid rgba(59, 130, 246, 0.2);
+      border-right: 1px solid rgba(59, 130, 246, 0.2);
+      border-bottom: 1px solid rgba(59, 130, 246, 0.2);
+      background: linear-gradient(135deg, rgba(30, 58, 138, 0.2) 0%, rgba(15, 23, 42, 0.9) 100%);
+    }
+    .level-text .level-kicker { color: #60a5fa; }
+    .level-text .level-kicker::before { content: "📜"; font-size: 10px; }
+
+    .level-history {
+      border-left: 4px solid #94a3b8;
+      border-top: 1px solid rgba(148, 163, 184, 0.2);
+      border-right: 1px solid rgba(148, 163, 184, 0.2);
+      border-bottom: 1px solid rgba(148, 163, 184, 0.2);
+      background: linear-gradient(135deg, rgba(51, 65, 85, 0.25) 0%, rgba(15, 23, 42, 0.9) 100%);
+    }
+    .level-history .level-kicker { color: #cbd5e1; }
+    .level-history .level-kicker::before { content: "🏛"; font-size: 10px; }
+
+    .level-interpretation {
+      border-left: 4px solid #f59e0b;
+      border-top: 1px solid rgba(245, 158, 11, 0.25);
+      border-right: 1px solid rgba(245, 158, 11, 0.25);
+      border-bottom: 1px solid rgba(245, 158, 11, 0.25);
+      background: linear-gradient(135deg, rgba(120, 53, 15, 0.25) 0%, rgba(20, 16, 12, 0.9) 100%);
+    }
+    .level-interpretation .level-kicker { color: #fbbf24; }
+    .level-interpretation .level-kicker::before { content: "🧭"; font-size: 10px; }
+
+    /* Christological Sanctuary Plaque */
+    .level-christ {
+      border-left: 4.5px solid #10b981;
+      border-top: 1px solid rgba(16, 185, 129, 0.3);
+      border-right: 1px solid rgba(16, 185, 129, 0.3);
+      border-bottom: 1px solid rgba(16, 185, 129, 0.3);
+      background: linear-gradient(135deg, rgba(6, 78, 59, 0.3) 0%, rgba(10, 26, 20, 0.94) 100%);
+      box-shadow: 0 12px 34px -8px rgba(6, 78, 59, 0.45), 0 0 1px 1px rgba(16, 185, 129, 0.3), inset 0 1px 0 rgba(167, 243, 208, 0.18);
+    }
+    .level-christ .level-kicker { color: #34d399; }
+    .level-christ .level-kicker::before { content: "✝"; font-size: 11px; color: #34d399; }
+
+    /* Historical Note Tablet */
+    .historical-note {
+      border-left: 4px solid #a8a29e;
+      border-top: 1px solid rgba(168, 162, 158, 0.22);
+      border-right: 1px solid rgba(168, 162, 158, 0.22);
+      border-bottom: 1px solid rgba(168, 162, 158, 0.22);
+      background: linear-gradient(135deg, rgba(41, 37, 36, 0.8) 0%, rgba(24, 22, 20, 0.94) 100%);
+      box-shadow: 0 10px 28px -8px rgba(0, 0, 0, 0.65), inset 0 1px 0 rgba(231, 229, 228, 0.08);
+    }
+    .historical-note-kicker { color: #d6d3d1; }
+    .historical-note-kicker::before { content: "📜"; font-size: 10px; }
+
+    /* Caution & Sentinel Card */
+    .caution-card {
+      border-left: 4.5px solid #ef4444;
+      border-top: 1px solid rgba(239, 68, 68, 0.3);
+      border-right: 1px solid rgba(239, 68, 68, 0.3);
+      border-bottom: 1px solid rgba(239, 68, 68, 0.3);
+      background: linear-gradient(135deg, rgba(127, 29, 29, 0.3) 0%, rgba(26, 16, 16, 0.94) 100%);
+      box-shadow: 0 10px 30px -8px rgba(220, 38, 38, 0.35);
+    }
+    .caution-card-kicker { color: #f87171; }
+    .caution-card-kicker::before { content: "⚠"; font-size: 10px; color: #f87171; }
+
+    /* Principle Card: Imperial Gold Decree */
+    .principle-card {
+      border: 2px solid rgba(212, 175, 55, 0.65);
+      background: linear-gradient(135deg, rgba(38, 32, 22, 0.94) 0%, rgba(20, 17, 13, 0.98) 100%);
+      box-shadow: 0 16px 42px -10px rgba(0, 0, 0, 0.85), 0 0 20px rgba(212, 175, 55, 0.22), inset 0 1px 0 rgba(255, 235, 175, 0.16);
+    }
+    .principle-card-kicker { color: #fbbf24; }
+    .principle-card-kicker::before { content: "🏛"; font-size: 10px; }
+
+    /* Next Sitting Card: The Cosmic Horizon Portal */
+    .next-sitting-card {
+      border-left: 5px solid #e5b93b;
+      border-top: 1px solid rgba(212, 175, 55, 0.35);
+      border-right: 1px solid rgba(212, 175, 55, 0.35);
+      border-bottom: 1px solid rgba(212, 175, 55, 0.35);
+      background: linear-gradient(135deg, rgba(38, 31, 20, 0.92) 0%, rgba(18, 15, 12, 0.98) 100%);
+      box-shadow: 0 18px 46px -10px rgba(0, 0, 0, 0.9), 0 0 22px rgba(212, 175, 55, 0.28), inset 0 1px 0 rgba(255, 235, 175, 0.15);
+      border-radius: 0 14px 14px 0;
+    }
+    .next-sitting-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 22px 52px -8px rgba(0, 0, 0, 0.95), 0 0 30px rgba(212, 175, 55, 0.4);
+    }
+    .next-sitting-kicker { color: #fbbf24; }
+    .next-sitting-kicker::before { content: "➔"; color: #fbbf24; font-size: 11px; }
+    .next-sitting-card h4 {
+      font-family: 'Newsreader', Georgia, serif;
+      font-size: 1.4rem !important;
+      font-weight: 700;
+      color: #faf6eb;
+      margin: 0 0 0.55rem !important;
+    }
+
+    .reading-notes {
+      margin: 3rem 0 1rem;
+      padding-top: 1.25rem;
+      border-top: 1px solid rgba(212, 175, 55, 0.35);
+    }
+    .article-body .reading-notes .reading-notes-kicker {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 10.5px !important;
+      line-height: 1.4;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: #e5b93b !important;
+      margin: 0 0 1rem;
+    }
+    .reading-notes-group + .reading-notes-group {
+      margin-top: 1.1rem;
+    }
+    .article-body .reading-notes .reading-notes-heading {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 11px !important;
+      letter-spacing: 0.06em;
+      font-weight: 600;
+      opacity: 0.75;
+      margin: 0 0 0.35rem !important;
+    }
+    .article-body .reading-notes .reading-notes-list {
+      margin: 0;
+      padding-left: 1.1rem;
+      list-style: disc;
+      font-size: 0.9rem;
+      opacity: 0.85;
+    }
+    .article-body .reading-notes .reading-notes-list li {
+      margin: 0 0 0.2rem;
+      line-height: 1.55;
+    }

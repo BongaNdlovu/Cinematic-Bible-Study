@@ -1,0 +1,1037 @@
+/* Story stage: chain and steps diagrams. A dark inset in every theme. */
+    .story-stage {
+      --chain-gold: #d5b16a;
+      --chain-strong: #f2d797;
+      --chain-muted: #b9ad94;
+      --story-ink: #f6efdf;
+      --muted-2: #807663;
+      /* Native controls and scrollbars inside the stage stay dark. This is
+         scoped here, never on :root, or paper and white themes would inherit
+         dark form chrome on a light page. */
+      color-scheme: dark;
+      margin-top: 0.4rem;
+      padding: 0.85rem 0.45rem 1rem;
+      border-radius: 18px;
+      color: var(--story-ink);
+      background:
+        radial-gradient(ellipse at 50% 0%, rgba(190, 139, 53, 0.16), transparent 18rem),
+        #080807;
+    }
+    .story-viewport {
+      --card-width: min(356px, 78%);
+      position: relative;
+      height: 492px;
+      width: 100%;
+      margin: 0 auto;
+      perspective: 1500px;
+      /* Keeps the cards' z-index ladder inside the viewport instead of letting
+         it compete with page-level stacking. */
+      isolation: isolate;
+      overflow: hidden;
+      touch-action: pan-y;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .story-viewport:focus-visible {
+      outline: 2px solid var(--chain-strong);
+      outline-offset: 4px;
+    }
+    /* Every control in the story block answers the keyboard the same way. The
+       card's own citation chip is included, because it is the one control in
+       the block that opens a reference rather than moving the story. */
+    .story-nav:focus-visible,
+    .story-step:focus-visible,
+    .story-play:focus-visible,
+    .story-fullscreen:focus-visible,
+    .story-back:focus-visible,
+    .story-read-pip:focus-visible,
+    .story-read-nav button:focus-visible,
+    .story-stage .chain-cite:focus-visible {
+      outline: 2px solid var(--chain-strong);
+      outline-offset: 4px;
+    }
+    .story-card {
+      --d: 0;
+      --distance: 0;
+      position: absolute;
+      top: 7px;
+      bottom: 13px;
+      left: 50%;
+      width: var(--card-width);
+      margin-left: calc(var(--card-width) / -2);
+      display: flex;
+      flex-direction: column;
+      border-radius: 22px;
+      overflow: hidden;
+      border: 1px solid rgba(213, 177, 106, 0.34);
+      background: #0e0d0a;
+      color: var(--story-ink);
+      box-shadow: 0 28px 66px rgba(0, 0, 0, 0.4), inset 0 0 0 1px rgba(255, 255, 255, 0.018);
+      transform: translateX(calc(var(--d) * 64%)) rotateY(calc(var(--d) * -10deg)) scale(calc(1 - var(--distance) * 0.055));
+      transform-origin: 50% 50%;
+      opacity: calc(1 - var(--distance) * 0.22);
+      z-index: calc(10 - var(--distance));
+      /* Slow enough that the eye can follow a card across the stage instead of
+         finding it already arrived. */
+      transition:
+        transform 1.15s cubic-bezier(0.22, 0.61, 0.24, 1),
+        opacity 0.9s cubic-bezier(0.4, 0, 0.2, 1),
+        border-color 0.9s ease,
+        box-shadow 0.9s ease;
+      cursor: pointer;
+    }
+    /* Dimming a neighbour with a wash beats filtering it: a filter forces the
+       whole card — artwork included — to repaint on every frame of the slide. */
+    .story-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      pointer-events: none;
+      background: rgba(4, 4, 6, 0.42);
+      opacity: 1;
+      transition: opacity 0.9s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .story-card.is-active::after { opacity: 0; }
+    .story-card.is-active {
+      border-color: rgba(242, 215, 151, 0.92);
+      box-shadow: 0 30px 76px rgba(0, 0, 0, 0.48), 0 0 32px rgba(213, 177, 106, 0.08), inset 0 0 0 1px rgba(242, 215, 151, 0.2);
+    }
+    .story-photo {
+      position: absolute;
+      inset: 0 0 auto;
+      width: 100%;
+      height: 66%;
+      display: block;
+      object-fit: cover;
+      /* The vertical focus of the crop is per movement, so a wide or tall
+         diagram can be framed without three hard-coded card classes. */
+      object-position: center var(--photo-y, 46%);
+      /* The card is the click target; an image must not eat the drag. */
+      pointer-events: none;
+    }
+    .story-wash {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient(180deg, rgba(4, 5, 8, 0.06) 0%, transparent 33%, rgba(9, 8, 6, 0.15) 49%, #0e0c08 73%, #0e0c08 100%);
+    }
+    .story-topline {
+      position: absolute;
+      top: 18px;
+      left: 20px;
+      right: 20px;
+      z-index: 1;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #f4e5c4;
+      text-shadow: 0 2px 12px #000;
+    }
+    .story-topline > .story-label { color: #f4e5c4; }
+    .story-index { color: var(--chain-strong); }
+    .story-content {
+      position: absolute;
+      z-index: 1;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      top: 42%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      /* `safe` keeps the copy bottom-anchored while it fits; a plain flex-end
+         would push overflow off the top edge, out of scroll reach. */
+      justify-content: safe flex-end;
+      max-height: none;
+      overflow: auto;
+      padding: 20px 24px 28px;
+      text-align: center;
+      background: linear-gradient(180deg, rgba(14, 12, 8, 0) 0%, rgba(14, 12, 8, 0.9) 23%, #0e0c08 47%, #0e0c08 100%);
+    }
+    .story-card:not(:has(.story-photo)) .story-content {
+      top: 2.2rem;
+      justify-content: center;
+      background:
+        radial-gradient(ellipse at 50% 28%, rgba(190, 139, 53, 0.18), transparent 13rem),
+        #0e0d0a;
+    }
+    /* The card's own inset ring changes with the active state; this hairline
+       stays constant over both, and sits above the ::after dimming wash. */
+    .story-medal {
+      width: 52px;
+      height: 52px;
+      margin: 0 auto 0.7rem;
+      color: var(--chain-gold);
+    }
+    .story-medal svg { width: 100%; height: 100%; display: block; }
+    .story-stage .story-kicker {
+      margin: 0 0 9px !important;
+      font-family: Inter, "Segoe UI", sans-serif;
+      font-size: 0.6rem !important;
+      line-height: 1.4 !important;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--chain-gold);
+    }
+    /* Neighbour cards recede, the active card comes forward. A transition runs
+       in both directions, so leaving a card fades out as the next one fades in.
+       A one-shot animation only played on the way in, and it started from
+       invisible, which left a blank card in the middle of the handoff. */
+    .story-card .story-content > * {
+      opacity: 0.72;
+      transform: translateY(6px);
+      transition:
+        opacity 0.85s cubic-bezier(0.4, 0, 0.2, 1),
+        transform 0.85s cubic-bezier(0.22, 0.61, 0.24, 1);
+    }
+    .story-card.is-active .story-content > * {
+      opacity: 1;
+      transform: none;
+      transition-delay: calc(0.05s + var(--copy-i, 0) * 0.045s);
+    }
+    .story-content > :nth-child(1) { --copy-i: 0; }
+    .story-content > :nth-child(2) { --copy-i: 1; }
+    .story-content > :nth-child(3) { --copy-i: 2; }
+    .story-content > :nth-child(4) { --copy-i: 3; }
+    .story-content > :nth-child(5) { --copy-i: 4; }
+    .story-stage .story-title {
+      margin: 0 0 15px !important;
+      max-width: 100%;
+      font-family: "Newsreader", Georgia, serif !important;
+      font-size: clamp(1.14rem, 2.2vw, 1.48rem) !important;
+      font-weight: 400;
+      line-height: 1.18;
+      letter-spacing: -0.015em;
+      /* Not uppercased: the same string feeds the reader's zoomed title and the
+         live region, where sentence case is what is read out. */
+      color: #fff8e9;
+      text-wrap: balance;
+    }
+    /* No colour here. A `.story-stage .chain-cite` declaration at this depth
+       ties `.chain-cite.is-flat` on specificity and, sitting later, would
+       repaint an unresolvable reference gold — the only cue that separates a
+       live chip from a flat printed label. The base rule carries the colour. */
+    .story-stage .story-text {
+      max-width: 275px;
+      margin: 14px auto 0 !important;
+      font-family: Newsreader, Georgia, serif;
+      font-style: italic;
+      font-size: 1.06rem !important;
+      line-height: 1.42 !important;
+      color: #d1c5ad;
+      text-wrap: balance;
+    }
+    /* The movement's own line. The stage card is a poster, so the detail there
+       is a caption: small, quiet, and never competing with the title. */
+    .story-stage .story-detail {
+      max-width: 18.5rem;
+      margin: 0.7rem 0 0 !important;
+      font-family: Inter, "Segoe UI", sans-serif;
+      font-size: 0.78rem !important;
+      line-height: 1.5 !important;
+      color: #a89c85;
+      text-wrap: pretty;
+      /* A hook, not the whole note. The poster card cannot hold the full line
+         at this geometry, so the stage clamps it. `flex: none` is what makes
+         the clamp decide the height: as a flex item the block is otherwise
+         squeezed into whatever space is left over, which lands mid-line and
+         never reaches the ellipsis. The reader keeps the complete text on the
+         enlarged clone. */
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 4;
+      line-clamp: 4;
+      overflow: hidden;
+      flex: none;
+    }
+    /* Four lines is the copy-only card's budget: the whole lower half of that
+       card is text. A card with artwork also has to carry the citation chip and
+       the italic line in the same box, and two lines is what fits there — with
+       four, the block overflows by 34px and the clamped lines, ellipsis
+       included, fall below the fold, which is exactly the undiscoverable scroll
+       the clamp exists to remove. */
+    .story-stage .story-card:has(.story-photo) .story-detail {
+      -webkit-line-clamp: 2;
+      line-clamp: 2;
+    }
+    .story-card:not(.is-active) .story-detail { opacity: 0.6; }
+    .story-controls {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      /* Capped so the track does not stretch the full stage width. */
+      width: min(700px, 100%);
+      margin: 17px auto 0;
+    }
+    .story-nav {
+      flex: 0 0 43px;
+      display: grid;
+      place-items: center;
+      width: 43px;
+      height: 43px;
+      border-radius: 999px;
+      border: 1px solid rgba(213, 177, 106, 0.58);
+      background: rgba(213, 177, 106, 0.025);
+      color: var(--chain-strong);
+      cursor: pointer;
+      transition: background 0.2s, border-color 0.2s, opacity 0.2s, transform 0.2s;
+    }
+    .story-nav:hover:not(:disabled) {
+      background: rgba(213, 177, 106, 0.14);
+      border-color: var(--chain-strong);
+      transform: translateY(-1px);
+    }
+    .story-nav:disabled { opacity: 0.28; cursor: default; }
+    .story-nav svg { width: 17px; height: 17px; display: block; margin: 0 auto; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+    .story-track {
+      flex: 1 1 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      /* No gap: .story-connector already spaces the steps. */
+      gap: 0;
+      min-width: 0;
+      overflow-x: auto;
+      padding-bottom: 0.15rem;
+    }
+    .story-connector {
+      flex: 1;
+      min-width: 14px;
+      max-width: 84px;
+      height: 1px;
+      background: linear-gradient(90deg, rgba(213, 177, 106, 0.48), rgba(213, 177, 106, 0.16));
+    }
+    .story-step {
+      flex: 0 0 auto;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 9px;
+      min-width: 0;
+      max-width: 11rem;
+      padding: 8px 9px;
+      border: 0;
+      background: transparent;
+      color: var(--muted-2);
+      cursor: pointer;
+      transition: color 0.25s;
+    }
+    .story-step-dot {
+      flex: none;
+      width: 0.5rem;
+      height: 0.5rem;
+      border-radius: 50%;
+      border: 1px solid var(--chain-gold);
+      background: transparent;
+      transition: background 0.25s, box-shadow 0.25s, transform 0.25s;
+    }
+    .story-step.is-active { color: var(--chain-strong); }
+    .story-step.is-active .story-step-dot {
+      background: var(--chain-strong);
+      box-shadow: 0 0 0 4px rgba(213, 177, 106, 0.1), 0 0 14px rgba(213, 177, 106, 0.35);
+      transform: scale(1.05);
+    }
+    /* A cumulative trail: a movement that has been read keeps a dimmer dot.
+       Background only, so it needs no theme-restore entry. */
+    .story-step.seen:not(.story-step.is-active) .story-step-dot {
+      background: rgba(213, 177, 106, 0.45);
+    }
+    .story-step-label {
+      font-family: Inter, "Segoe UI", sans-serif;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      line-height: 1;
+      text-align: left;
+      text-transform: uppercase;
+      max-width: 9rem;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .story-utility {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.65rem;
+      min-height: 36px;
+      margin-top: 11px;
+      text-align: center;
+    }
+    .story-actions {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.55rem;
+    }
+    .story-stage .story-live {
+      margin: 0 !important;
+      font-family: "JetBrains Mono", monospace !important;
+      font-size: 0.61rem !important;
+      line-height: 1.45 !important;
+      letter-spacing: 0.06em;
+      color: var(--chain-muted);
+    }
+    .story-play {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 0.55em 0.95em;
+      border-radius: 999px;
+      border: 1px solid rgba(213, 177, 106, 0.45);
+      background: transparent;
+      color: var(--chain-gold);
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.72rem;
+      cursor: pointer;
+    }
+    .story-play:hover { color: var(--chain-strong); }
+    .story-play svg { width: 12px; height: 12px; fill: currentColor; }
+    .story-play .story-icon-pause { display: none; }
+    .story-play[aria-pressed="true"] .story-icon-play { display: none; }
+    .story-play[aria-pressed="true"] .story-icon-pause { display: block; }
+    .story-fullscreen {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.55em 0.95em;
+      border-radius: 999px;
+      border: 1px solid rgba(242, 215, 151, 0.7);
+      background: rgba(213, 177, 106, 0.12);
+      color: #f2d797;
+      font-family: Inter, "Segoe UI", sans-serif;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+    /* The reader is moved to <body> on open, so the stage's custom properties
+       no longer reach it; they are redeclared here. */
+    .story-read {
+      --chain-gold: #d5b16a;
+      --chain-strong: #f2d797;
+      --chain-muted: #b9ad94;
+      --story-ink: #f6efdf;
+      --muted-2: #807663;
+      position: fixed;
+      inset: 0;
+      z-index: 220;
+      display: grid;
+      place-items: center;
+      /* The bottom pad clears the home indicator / gesture bar as well. */
+      padding: 4.75rem 1.25rem calc(1.5rem + env(safe-area-inset-bottom, 0px));
+      color: var(--story-ink, #f6efdf);
+      opacity: 0;
+      transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .story-read[hidden] { display: none; }
+    /* Opening and closing are fades, not cuts: the class is added a frame after
+       the element is shown, and removed before it is hidden again. While the
+       fade-out runs the overlay is on its way out, so it stops taking clicks
+       at once rather than swallowing taps for the length of the fade. */
+    .story-read:not(.is-open) { pointer-events: none; }
+    .story-read.is-open { opacity: 1; }
+    /* The artwork is the subject here, so it is barely blurred: the blur only
+       softens the plane enough for type to sit on it, and the scrim does the
+       legibility work the old 28px pass was doing. The crossfading photographs
+       are their own layers; this one is the dark ground they settle onto. */
+    .story-read-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 50% 26%, rgba(190, 139, 53, 0.2), transparent 30rem),
+        #080807;
+      transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    /* One layer per movement, stacked. The newest movement fades up over the
+       last, so a step change is a crossfade rather than a background swap. */
+    .story-read-photos {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
+    .story-read-photo {
+      position: absolute;
+      /* Over-sized so the blur's soft edge never shows at the frame border. */
+      inset: -6%;
+      object-fit: cover;
+      object-position: center 46%;
+      z-index: var(--photo-z, 0);
+      opacity: 0;
+      filter: blur(9px) saturate(1.1) brightness(0.86);
+      transform: scale(1.08);
+      will-change: opacity, transform;
+      transition:
+        opacity 1.45s cubic-bezier(0.4, 0, 0.2, 1),
+        transform 8s cubic-bezier(0.16, 0.62, 0.28, 1);
+    }
+    .story-read-photo.is-current {
+      opacity: 1;
+      transform: scale(1.005) translate3d(0, -0.6%, 0);
+    }
+    /* Two scrims: a soft vertical wash so the copy sits on its own ground, and
+       a vignette that keeps the eye centred with the corners held down. The
+       artwork stays readable at the edges; the middle is where the type lives. */
+    .story-read-veil {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 48% 62% at 50% 46%, rgba(6, 6, 7, 0.18) 0%, rgba(6, 6, 7, 0.42) 42%, rgba(6, 6, 7, 0.78) 100%),
+        linear-gradient(180deg, rgba(6, 6, 7, 0.55) 0%, rgba(6, 6, 7, 0.08) 28%, rgba(6, 6, 7, 0.2) 70%, rgba(6, 6, 7, 0.72) 100%);
+    }
+    /* No artwork behind a movement: the overlay falls back to a night sky and
+       the panel keeps a darker ground of its own. */
+    .story-read:not(.has-photo) .story-read-veil {
+      background:
+        radial-gradient(ellipse 70% 60% at 50% 34%, rgba(190, 139, 53, 0.12), transparent 60%),
+        radial-gradient(ellipse 90% 80% at 50% 50%, rgba(8, 8, 7, 0.82) 0%, rgba(8, 8, 7, 0.94) 100%);
+    }
+    .story-back {
+      position: absolute;
+      top: 1.05rem;
+      left: 1.05rem;
+      z-index: 3;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.55em 0.95em;
+      border-radius: 999px;
+      border: 1px solid rgba(213, 177, 106, 0.55);
+      background: rgba(8, 8, 7, 0.45);
+      color: #f2d797;
+      font-family: Inter, "Segoe UI", sans-serif;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+    .story-read-frame {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: min(1120px, 100%);
+      max-height: calc(100vh - 5.75rem);
+      overflow: auto;
+      opacity: 0;
+      transform: translateY(16px);
+      transition:
+        opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.06s,
+        transform 0.95s cubic-bezier(0.22, 0.61, 0.24, 1) 0.06s;
+    }
+    .story-read.is-open .story-read-frame {
+      opacity: 1;
+      transform: none;
+    }
+    /* The full screen is the stage, enlarged. The whole card fades — picture
+       and words together — so a step is one dissolve instead of a text swap
+       over a background that changes on its own. */
+    .story-read-deck {
+      --card-width: min(600px, 62vw);
+      position: relative;
+      width: 100%;
+      height: min(64vh, 760px);
+      margin: 0 auto;
+      perspective: 1600px;
+      overflow: hidden;
+      flex: 0 0 auto;
+      touch-action: pan-y;
+    }
+    .story-read-deck .story-card {
+      top: 0;
+      bottom: 0;
+      opacity: calc(1 - var(--distance) * 0.48);
+      transform: translateX(calc(var(--d) * 54%)) rotateY(calc(var(--d) * -7deg)) scale(calc(1 - var(--distance) * 0.06));
+      transition:
+        transform 1.05s cubic-bezier(0.22, 0.61, 0.24, 1),
+        opacity 0.85s cubic-bezier(0.4, 0, 0.2, 1),
+        border-color 0.85s ease,
+        box-shadow 0.85s ease;
+    }
+    .story-read-deck .story-card.is-active {
+      /* Come forward quickly so the card underneath is covered before its
+         words and the new words can be read at the same time. */
+      transition:
+        transform 1.05s cubic-bezier(0.22, 0.61, 0.24, 1),
+        opacity 0.45s cubic-bezier(0.4, 0, 0.2, 1),
+        border-color 0.85s ease,
+        box-shadow 0.85s ease;
+    }
+    .story-read-deck .story-card::after {
+      background: rgba(4, 4, 6, 0.34);
+      transition: opacity 0.85s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    /* The picture may dissolve. The sentences may not: two paragraphs on top
+       of each other is not a fade. Side cards keep a title; the lines come
+       in only once this card is the one in front. */
+    .story-read-deck .story-card .story-content > * {
+      opacity: 1;
+      transform: none;
+      transition: opacity 0.28s ease;
+    }
+    .story-read-deck .story-card:not(.is-active) .story-text,
+    .story-read-deck .story-card:not(.is-active) .story-detail,
+    .story-read-deck .story-card:not(.is-active) .chain-cite {
+      opacity: 0;
+    }
+    .story-read-deck .story-card.is-active .story-text,
+    .story-read-deck .story-card.is-active .story-detail,
+    .story-read-deck .story-card.is-active .chain-cite {
+      opacity: 1;
+      transition: opacity 0.55s ease 0.22s;
+    }
+    .story-read-deck .story-medal { width: 72px; height: 72px; }
+    .story-read-deck .story-kicker {
+      margin: 0 0 0.4rem !important;
+      font-size: 0.78rem !important;
+    }
+    .story-read-deck .story-title {
+      margin: 0 0 0.55rem !important;
+      max-width: 24rem;
+      font-family: "Newsreader", Georgia, serif !important;
+      font-size: clamp(1.7rem, 2.8vw, 2.35rem) !important;
+      font-weight: 400;
+      letter-spacing: -0.015em;
+      line-height: 1.12;
+      color: #fff8e9;
+    }
+    .story-read-deck .story-text {
+      max-width: 26rem;
+      margin: 0.85rem 0 0 !important;
+      font-size: 1.22rem !important;
+      line-height: 1.45 !important;
+      color: #f0e6d4;
+    }
+    .story-read-deck .story-detail {
+      max-width: 28rem;
+      margin: 0.85rem 0 0 !important;
+      font-size: 0.95rem !important;
+      line-height: 1.55 !important;
+      color: #cfc2a8;
+    }
+    .story-read-deck .chain-cite { color: #f2d797; }
+    .story-read-note {
+      max-width: 34rem;
+      margin: 1.6rem auto 0;
+      color: #cfc2a8;
+      font-family: Newsreader, Georgia, serif;
+      font-size: 1.08rem;
+      line-height: 1.6;
+      text-shadow: 0 1px 18px rgba(0, 0, 0, 0.6);
+    }
+    /* Where the reader is, as a rail: a movement count is easier to place than
+       a number in a corner. */
+    .story-read-progress {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.45rem;
+      margin-top: 1.5rem;
+    }
+    .story-read-progress[hidden] { display: none; }
+    .story-read-pip {
+      width: 1.75rem;
+      height: 3px;
+      border: 0;
+      padding: 0;
+      border-radius: 2px;
+      background: rgba(242, 215, 151, 0.34);
+      box-shadow: 0 1px 6px rgba(0, 0, 0, 0.5);
+      cursor: pointer;
+      transition: background 0.55s ease, width 0.55s ease, box-shadow 0.55s ease;
+    }
+    .story-read-pip:hover { background: rgba(242, 215, 151, 0.6); }
+    .story-read-pip.is-active {
+      width: 2.8rem;
+      background: #f6e6bd;
+      box-shadow: 0 0 14px rgba(242, 215, 151, 0.5);
+    }
+    .story-read-nav {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.75rem;
+      margin-top: 1.6rem;
+    }
+    .story-read-nav button {
+      padding: 0.5em 0.9em;
+      border-radius: 999px;
+      border: 1px solid rgba(213, 177, 106, 0.45);
+      background: rgba(8, 8, 7, 0.35);
+      color: #d5b16a;
+      font-family: Inter, "Segoe UI", sans-serif;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.45s ease, border-color 0.45s ease, color 0.45s ease;
+    }
+    .story-read-nav button:hover:not(:disabled) {
+      background: rgba(213, 177, 106, 0.16);
+      border-color: rgba(242, 215, 151, 0.8);
+      color: #f2d797;
+    }
+    .story-read-nav button:disabled { opacity: 0.35; cursor: default; }
+    .story-read-count {
+      margin: 0 !important;
+      color: #b9ad94;
+      font-family: "JetBrains Mono", monospace !important;
+      font-size: 0.68rem !important;
+      line-height: 1 !important;
+      letter-spacing: 0.08em;
+    }
+    .story-read-hint {
+      margin: 0.9rem 0 0 !important;
+      color: #a79d87;
+      font-family: Inter, "Segoe UI", sans-serif !important;
+      font-size: 0.66rem !important;
+      line-height: 1.4 !important;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-shadow: 0 1px 10px rgba(0, 0, 0, 0.8);
+    }
+    /* The study layer under the deck: the movement's own line, in the
+       reference's note treatment (a left gold rule, a tinted ground, a size
+       below the copy it comments on), and the movement's citation chip as a
+       real control. wireStory() rebuilds it per movement, so the entry
+       animation re-runs on every change with no state class to toggle. */
+    .story-read-band {
+      width: min(700px, 100%);
+      margin: 1.4rem auto 0;
+      text-align: left;
+    }
+    .story-read-band:empty { display: none; }
+    .story-read-band-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.75rem;
+      animation: storyBandIn 0.6s cubic-bezier(0.22, 0.61, 0.24, 1) both;
+    }
+    @keyframes storyBandIn {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: none; }
+    }
+    .story-read-band-cite { margin: 0; }
+    .story-read-band-cite .chain-cite { margin: 0; color: #f2d797; }
+    .story-read-band-detail {
+      margin: 0;
+      padding: 12px 16px;
+      border-left: 2px solid var(--chain-gold);
+      background: rgba(213, 177, 106, 0.07);
+      color: #e6d9bd;
+      font-family: Inter, "Segoe UI", sans-serif;
+      font-size: 0.98rem;
+      line-height: 1.6;
+      text-wrap: pretty;
+      text-shadow: 0 1px 18px rgba(0, 0, 0, 0.55);
+    }
+    /* The movement's line has one home in the reader: the band. The card keeps
+       the cinematic zoom rather than printing the same sentence twice. */
+    .story-read-deck .story-detail { display: none; }
+    /* Directional edge controls: the handover between one movement and the
+       next, pinned to the middle of the viewport's left and right edges. The
+       round arrow carries the pulse; the small label under it names the
+       movement it reaches. Both are hidden when there is no neighbour that
+       way, so the stage never offers a move it cannot make.
+       (`story-edge` is taken: it is the card's own hairline ring.) */
+    .story-link {
+      position: absolute;
+      top: 50%;
+      z-index: 25;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      padding: 0;
+      border: 0;
+      background: none;
+      color: var(--chain-strong);
+      cursor: pointer;
+      transform: translateY(-50%);
+    }
+    /* The label pill is wider than the arrow, so the column is inset by half
+       the difference: the pill's outer edge lands on the viewport edge instead
+       of being clipped by the viewport's overflow. */
+    .story-link--prev { left: 13px; }
+    .story-link--next { right: 13px; }
+    /* The [hidden] attribute is a UA rule; the display above would outrank it. */
+    .story-link[hidden],
+    .story-bridge[hidden] { display: none; }
+    .story-link-arrow {
+      width: 44px;
+      height: 44px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: rgba(14, 12, 8, 0.93);
+      border: 1px solid var(--chain-strong);
+      animation: linkPulse 2.8s ease-in-out infinite;
+      transition: background 0.2s;
+    }
+    .story-link-arrow svg {
+      width: 20px;
+      height: 20px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .story-link:hover .story-link-arrow,
+    .story-link[aria-expanded="true"] .story-link-arrow { background: rgba(213, 177, 106, 0.28); }
+    .story-link:focus-visible { outline: 2px solid var(--chain-strong); outline-offset: 6px; border-radius: 14px; }
+    .story-link-label {
+      max-width: 70px;
+      padding: 4px 7px;
+      border-radius: 8px;
+      background: rgba(8, 8, 7, 0.88);
+      border: 1px solid rgba(213, 177, 106, 0.35);
+      font-family: Inter, "Segoe UI", sans-serif;
+      font-size: 0.5rem;
+      font-weight: 600;
+      line-height: 1.25;
+      letter-spacing: 0.1em;
+      text-align: center;
+      text-transform: uppercase;
+      color: var(--chain-gold);
+    }
+    @keyframes linkPulse {
+      0%, 100% { box-shadow: 0 0 0 4px rgba(213, 177, 106, 0.1), 0 0 14px rgba(213, 177, 106, 0.3); }
+      50% { box-shadow: 0 0 0 8px rgba(213, 177, 106, 0.05), 0 0 28px rgba(213, 177, 106, 0.55); }
+    }
+    @media (prefers-reduced-motion: no-preference) {
+      .story-link-arrow {
+        position: relative;
+        animation: none;
+      }
+      .story-link-arrow::before,
+      .story-link-arrow::after {
+        content: "";
+        position: absolute;
+        inset: -1px;
+        border-radius: 50%;
+        pointer-events: none;
+        animation: link-glow-rest 2.8s ease-in-out infinite;
+      }
+      .story-link-arrow::before { box-shadow: 0 0 0 4px rgba(213, 177, 106, 0.1), 0 0 14px rgba(213, 177, 106, 0.3); }
+      .story-link-arrow::after {
+        box-shadow: 0 0 0 8px rgba(213, 177, 106, 0.05), 0 0 28px rgba(213, 177, 106, 0.55);
+        opacity: 0;
+        animation-name: link-glow-peak;
+      }
+    }
+    @keyframes link-glow-rest { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+    @keyframes link-glow-peak { 0%, 100% { opacity: 0; } 50% { opacity: 1; } }
+    /* The link between two movements: which two, what they share, and what the
+       step that leaves the first one says about the second. The copy is
+       authored per step (`bridgeAhead`, `bridgeShare`); with none of it the
+       panel still names the two movements and offers the move. */
+    .story-bridge {
+      position: absolute;
+      left: 50%;
+      bottom: 14px;
+      z-index: 30;
+      width: min(440px, calc(100% - 20px));
+      transform: translateX(-50%);
+      padding: 16px 18px 14px;
+      border-radius: 16px;
+      background: rgba(10, 9, 6, 0.97);
+      border: 1px solid var(--chain-strong);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7), 0 0 30px rgba(213, 177, 106, 0.15);
+      text-align: left;
+    }
+    .story-bridge-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+    }
+    .story-bridge-title {
+      margin: 0;
+      color: var(--chain-strong);
+      font-family: Inter, "Segoe UI", sans-serif;
+      font-size: 0.66rem;
+      font-weight: 600;
+      line-height: 1.3;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+    .story-bridge-dir {
+      flex: none;
+      margin: 0;
+      color: var(--muted-2);
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.58rem;
+      font-weight: 500;
+      line-height: 1;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .story-bridge-share {
+      margin: 10px 0 0;
+      color: var(--chain-gold);
+      font-family: Newsreader, Georgia, serif;
+      font-size: 0.98rem;
+      font-style: italic;
+      font-weight: 500;
+      line-height: 1.35;
+    }
+    .story-bridge-text {
+      margin: 8px 0 0;
+      color: #d9ceb7;
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+    .story-bridge-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+      margin-top: 12px;
+    }
+    .story-bridge-actions button {
+      padding: 0.5em 0.9em;
+      border-radius: 999px;
+      border: 1px solid rgba(213, 177, 106, 0.45);
+      background: rgba(8, 8, 7, 0.35);
+      color: var(--chain-gold);
+      font-family: Inter, "Segoe UI", sans-serif;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.45s ease, border-color 0.45s ease, color 0.45s ease;
+    }
+    .story-bridge-actions button:hover {
+      background: rgba(213, 177, 106, 0.16);
+      border-color: rgba(242, 215, 151, 0.8);
+      color: var(--chain-strong);
+    }
+    .story-bridge-actions [data-bridge-close] { color: var(--chain-muted); }
+    .story-bridge-actions button:focus-visible { outline: 2px solid var(--chain-strong); outline-offset: 4px; }
+    /* Tailwind's compiled sheet does not carry `sr-only`, so the utility the
+       reference uses for the keyboard help is declared here. */
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      margin: -1px;
+      padding: 0;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      clip-path: inset(50%);
+      white-space: nowrap;
+      border: 0;
+    }
+    /* The pulse and the band's entry are decoration; a visitor who has asked
+       for less motion gets them still. */
+    @media (prefers-reduced-motion: reduce) {
+      .story-link-arrow { animation: none; }
+      .story-read-band-inner { animation: none; }
+    }
+    @media (max-width: 620px) {
+      .story-link-arrow { width: 38px; height: 38px; }
+      /* (52 - 38) / 2: the narrower pill needs a smaller inset. */
+      .story-link--prev { left: 7px; }
+      .story-link--next { right: 7px; }
+      .story-link-label { max-width: 52px; font-size: 0.45rem; }
+      .story-bridge { padding: 13px 14px 11px; }
+      .story-read-band { margin-top: 1rem; }
+      .story-read-band-detail { padding: 10px 13px; font-size: 0.92rem; }
+    }
+    /* Two things the block-level focus ring misses: the study band's cloned
+       cite chip, and the step pills, whose scrolling track clips an outside
+       ring, so their ring is drawn inside. */
+    .story-read .chain-cite:focus-visible {
+      outline: 2px solid var(--chain-strong);
+      outline-offset: 4px;
+    }
+    .story-step:focus-visible { outline-offset: -2px; }
+    html.story-read-open,
+    html.story-read-open body { overflow: hidden; }
+    @media (max-width: 620px) {
+      .story-viewport { height: 454px; --card-width: min(330px, 81%); }
+      /* The card is a touch narrower on a phone, so it fans out further and
+         turns less, and the copy block starts a little higher. */
+      .story-card {
+        top: 5px;
+        bottom: 9px;
+        border-radius: 19px;
+        transform: translateX(calc(var(--d) * 67%)) rotateY(calc(var(--d) * -7deg)) scale(calc(1 - var(--distance) * 0.055));
+      }
+      .story-photo { height: 64%; }
+      .story-topline { top: 15px; left: 15px; right: 15px; font-size: 0.55rem; }
+      .story-content { top: 41%; padding: 17px 18px 22px; }
+      /* The base rules carry !important, so these overrides must too or they
+         would never take effect. */
+      .story-stage .story-kicker { margin-bottom: 7px !important; font-size: 0.56rem !important; }
+      .story-stage .story-title { font-size: 1.16rem !important; margin-bottom: 12px !important; }
+      .story-stage .story-text { margin-top: 12px !important; font-size: 1rem !important; }
+      .story-controls { gap: 7px; margin-top: 12px; }
+      .story-nav { flex-basis: 37px; width: 37px; height: 37px; }
+      .story-step { gap: 6px; padding: 8px 5px; max-width: 7.5rem; }
+      .story-step-label { font-size: 0.59rem; letter-spacing: 0.07em; max-width: 5.6rem; }
+      .story-step-dot { width: 7px; height: 7px; }
+      .story-connector { min-width: 10px; }
+      .story-utility { margin-top: 5px; gap: 7px; flex-wrap: wrap; }
+      .story-stage .story-live { font-size: 0.57rem !important; }
+      .story-read { padding-top: 4.2rem; }
+      /* The panel padding is a desktop measure; at phone widths it would take a
+         quarter of the screen from the text column. */
+      .story-read-deck { height: min(52vh, 480px); --card-width: min(300px, 76vw); }
+      .story-read-deck .story-title { font-size: 1.4rem !important; }
+      .story-read-note { margin-top: 0.6rem; }
+      .story-read-hint { display: none; }
+    }
+    @media (max-width: 360px) {
+      .story-viewport { height: 438px; --card-width: 82%; }
+      .story-step-label { font-size: 0.53rem; }
+      .story-step { padding-inline: 3px; }
+      .story-stage .story-text { font-size: 0.95rem !important; }
+      .story-stage .story-title { font-size: 1.05rem !important; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .story-card { transition: opacity 0.3s ease; }
+      .story-card::after { transition: none; }
+      .story-card .story-content > * { transition: none; transform: none; opacity: 1; }
+      .story-read { transition: none; }
+      .story-read-frame { transition: none; opacity: 1; transform: none; }
+      .story-read-deck .story-card { transition: opacity 0.3s ease; }
+      /* Artwork still changes, it just does not drift or zoom. */
+      .story-read-photo { transition: opacity 0.3s ease; transform: none; }
+      .story-read-photo.is-current { transform: none; }
+    }
+
+    /* Kept in the DOM as the original plain-text artwork, visually hidden so it
+       survives for search and copy, and hidden from assistive tech because the
+       cards already convey the same content. */
+    .chain-ascii {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      margin: -1px;
+      padding: 0;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+      clip-path: inset(50%);
+      white-space: pre;
+      border: 0;
+    }
+    .chain-note {
+      margin: 0.9rem 0 0;
+      font-family: Inter, sans-serif;
+      font-size: 0.84rem;
+      line-height: 1.6;
+      color: var(--chain-muted, inherit);
+    }

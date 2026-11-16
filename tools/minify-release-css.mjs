@@ -47,9 +47,9 @@ function minify(text, name) {
 }
 
 let saved = 0;
-for (const name of fs.readdirSync(path.join(stage, "css"))) {
-  if (!name.endsWith(".css")) continue;
-  const full = path.join(stage, "css", name);
+for (const name of fs.readdirSync(path.join(stage, "css"), { recursive: true })) {
+  if (!String(name).endsWith(".css")) continue;
+  const full = path.join(stage, "css", String(name));
   const text = fs.readFileSync(full, "utf8");
   const out = minify(text, name);
   saved += text.length - out.length;

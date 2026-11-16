@@ -1,0 +1,754 @@
+/* --- SID Classroom Print Styles --- */
+    @media print {
+      .study-topbar,
+      header,
+      .cinematic-atmosphere,
+      #weather-canvas,
+      #pomo-dock,
+      #toc-drawer,
+      #toc-overlay,
+      .study-instruments,
+      .horizon-panel,
+      #lesson-connect,
+      .lesson-audio,
+      #infographic-modal,
+      .museum-links,
+      #sitting-spine,
+      #sitting-guide,
+      #capstone-modal,
+      #placement-modal,
+      #competency-record-modal,
+      #dossier-modal,
+      #certificate-review-modal,
+      .glow-drift,
+      .vignette,
+      footer,
+      button,
+      .auth-slot,
+      .instrument-tabs,
+      #btn-atmosphere-toggle,
+      #theme-btn {
+        display: none !important;
+      }
+
+      body, html {
+        background: #ffffff !important;
+        color: #111111 !important;
+        font-size: 11pt !important;
+        line-height: 1.5 !important;
+      }
+
+      .sitting-shell, .sitting-layout, .sitting-main {
+        max-width: 100% !important;
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+
+      #sheet-article {
+        display: block !important;
+        color: #111 !important;
+      }
+
+      #facilitator-strip:not(:empty):not([hidden]) {
+        display: block !important;
+        border: 2px solid #333 !important;
+        background: #f9f9f9 !important;
+        color: #111 !important;
+        padding: 12pt !important;
+        margin-bottom: 16pt !important;
+        page-break-inside: avoid;
+      }
+      #facilitator-strip:empty,
+      #facilitator-strip[hidden] {
+        display: none !important;
+      }
+
+      #workbench-section, .workbench-card, .task-box {
+        display: block !important;
+        border: 1px solid #666 !important;
+        background: #fafafa !important;
+        color: #111 !important;
+        page-break-inside: avoid;
+        margin-bottom: 16pt !important;
+      }
+
+      #revision-section {
+        display: block !important;
+        border-top: 1px solid #333 !important;
+        page-break-inside: avoid;
+      }
+    }
+
+    /* --- Classroom Projection Mode (?project=1) --- */
+    body.projection-mode {
+      font-size: 18px;
+    }
+    body.projection-mode .article-body {
+      font-size: 22px;
+      line-height: 1.85;
+      max-width: 960px;
+    }
+    body.projection-mode .article-body h2,
+    body.projection-mode .article-body h3 {
+      font-size: 32px;
+    }
+    body.projection-mode #weather-canvas,
+    body.projection-mode .cinematic-atmosphere,
+    body.projection-mode .glow-drift,
+    body.projection-mode .vignette,
+    body.projection-mode #btn-atmosphere-toggle {
+      display: none !important;
+    }
+
+    /* --- Stronger Reduced Motion --- */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+      }
+      .sitting-guide, .access-panel { backdrop-filter: none; }
+      #next-sheet-btn.is-guide-spot,
+      #access-open-btn.is-guide-spot {
+        animation: none !important;
+        box-shadow: 0 0 0 3px #c59b27;
+      }
+      #weather-canvas {
+        display: none !important;
+      }
+    }
+
+    /* --- Mobile Study Desk Optimization (~390px) --- */
+    @media (max-width: 480px) {
+      .study-topbar {
+        position: relative !important;
+      }
+      .study-topbar-inner {
+        flex-wrap: wrap;
+        gap: 6px;
+        padding: 6px 10px;
+      }
+      .study-tools {
+        width: 100%;
+        justify-content: space-between;
+        overflow-x: auto;
+      }
+      .header-competency-pill {
+        display: none !important;
+      }
+      .sitting-main {
+        padding-top: 12px !important;
+      }
+      .workbench-card {
+        padding: 12px !important;
+      }
+      .workbench-card > .flex {
+        flex-wrap: wrap;
+        align-items: flex-start;
+        gap: 8px;
+      }
+      .workbench-card .grid {
+        grid-template-columns: 1fr !important;
+      }
+      .workbench-card input,
+      .workbench-card select,
+      .workbench-card textarea {
+        width: 100% !important;
+      }
+      .task-box {
+        padding: 12px !important;
+      }
+    }
+    /* Readable ink for every study theme */
+    body.charcoal-mode,
+    body.night-mode {
+      --read-fg: #eee9df;
+      --read-muted: #d2c7b0;
+      --read-strong: #fff6dd;
+      --read-accent: #fbbf24;
+      --read-panel: rgba(18, 16, 14, 0.92);
+      --read-border: rgba(201, 162, 39, 0.34);
+      --read-input-bg: #161410;
+      --read-input-fg: #eee9df;
+    }
+    body.paper-mode {
+      --read-fg: #1c1917;
+      --read-muted: #44403c;
+      --read-strong: #111111;
+      --read-accent: #7a5610;
+      --read-panel: #fffdf6;
+      --read-border: rgba(120, 90, 40, 0.32);
+      --read-input-bg: #fffdf8;
+      --read-input-fg: #1c1917;
+    }
+    body.white-mode {
+      --read-fg: #171717;
+      --read-muted: #3f3f46;
+      --read-strong: #0a0a0a;
+      --read-accent: #713f12;
+      --read-panel: #ffffff;
+      --read-border: rgba(0, 0, 0, 0.16);
+      --read-input-bg: #ffffff;
+      --read-input-fg: #171717;
+    }
+    body.night-mode header,
+    body.night-mode .study-topbar,
+    body.night-mode #pomo-dock,
+    body.night-mode #toc-drawer,
+    body.night-mode footer {
+      background: rgba(10, 10, 12, 0.96) !important;
+      border-color: rgba(201, 162, 39, 0.28) !important;
+      color: var(--read-fg);
+    }
+    body.night-mode .sitting-spine,
+    body.night-mode .horizon-panel,
+    body.night-mode .study-instruments,
+    body.night-mode .study-path,
+    body.night-mode .sheet-verify,
+    body.night-mode .sitting-path {
+      background: rgba(12, 12, 16, 0.88);
+      border-color: var(--read-border);
+      color: var(--read-fg);
+    }
+    body.charcoal-mode .article-body,
+    body.night-mode .article-body,
+    body.paper-mode .article-body,
+    body.white-mode .article-body,
+    body.charcoal-mode .article-body p,
+    body.night-mode .article-body p,
+    body.paper-mode .article-body p,
+    body.white-mode .article-body p,
+    body.charcoal-mode .article-body li,
+    body.night-mode .article-body li,
+    body.paper-mode .article-body li,
+    body.white-mode .article-body li {
+      color: var(--read-fg) !important;
+    }
+    body.charcoal-mode .article-body h3,
+    body.charcoal-mode .article-body h4,
+    body.night-mode .article-body h3,
+    body.night-mode .article-body h4,
+    body.paper-mode .article-body h3,
+    body.paper-mode .article-body h4,
+    body.white-mode .article-body h3,
+    body.white-mode .article-body h4,
+    body.charcoal-mode .article-body strong,
+    body.night-mode .article-body strong,
+    body.paper-mode .article-body strong,
+    body.white-mode .article-body strong {
+      color: var(--read-strong) !important;
+    }
+    /* The story stage stays a dark gold inset in paper and white themes. The
+       detail line is a <p> inside .article-body, so it needs the restore as
+       much as the title and copy do: without it the body colour wins and the
+       text turns near-black on a fixed #080807 stage. */
+    body.paper-mode .story-stage .story-title,
+    body.white-mode .story-stage .story-title,
+    body.paper-mode .story-stage .story-text,
+    body.white-mode .story-stage .story-text {
+      color: #f6efdf !important;
+    }
+    body.paper-mode .story-stage .story-detail,
+    body.white-mode .story-stage .story-detail {
+      color: #a89c85 !important;
+    }
+    body.paper-mode .story-stage .story-kicker,
+    body.white-mode .story-stage .story-kicker,
+    body.paper-mode .story-stage .story-index,
+    body.white-mode .story-stage .story-index,
+    body.paper-mode .story-stage .story-label,
+    body.white-mode .story-stage .story-label,
+    body.paper-mode .story-stage .chain-cite,
+    body.white-mode .story-stage .chain-cite,
+    body.paper-mode .story-stage .story-nav,
+    body.white-mode .story-stage .story-nav,
+    body.paper-mode .story-stage .story-play,
+    body.white-mode .story-stage .story-play,
+    body.paper-mode .story-stage .story-step.is-active,
+    body.white-mode .story-stage .story-step.is-active {
+      color: #d5b16a !important;
+    }
+    body.paper-mode .story-stage .story-live,
+    body.white-mode .story-stage .story-live,
+    body.paper-mode .story-stage .story-step,
+    body.white-mode .story-stage .story-step,
+    body.paper-mode .story-read-count,
+    body.white-mode .story-read-count {
+      color: #b9ad94 !important;
+    }
+    body.paper-mode .story-read-note,
+    body.white-mode .story-read-note {
+      color: #cfc2a8 !important;
+    }
+    body.paper-mode .story-read-hint,
+    body.white-mode .story-read-hint {
+      color: #a79d87 !important;
+    }
+    body.paper-mode .story-fullscreen,
+    body.white-mode .story-fullscreen,
+    body.paper-mode .story-back,
+    body.white-mode .story-back,
+    body.paper-mode .story-read-nav button,
+    body.white-mode .story-read-nav button {
+      color: #f2d797 !important;
+    }
+    body.charcoal-mode .article-body em,
+    body.night-mode .article-body em,
+    body.paper-mode .article-body em,
+    body.white-mode .article-body em,
+    body.charcoal-mode .part-subtitle,
+    body.night-mode .part-subtitle,
+    body.paper-mode .part-subtitle,
+    body.white-mode .part-subtitle {
+      color: var(--read-muted);
+    }
+    body.paper-mode .part-header h3,
+    body.white-mode .part-header h3 {
+      color: var(--read-strong);
+      text-shadow: none;
+    }
+    body.charcoal-mode .part-header h3,
+    body.night-mode .part-header h3 {
+      color: var(--read-strong);
+    }
+    body.paper-mode .sitting-spine,
+    body.white-mode .sitting-spine,
+    body.paper-mode .sitting-spine b,
+    body.white-mode .sitting-spine b,
+    body.paper-mode .step-rail button,
+    body.white-mode .step-rail button,
+    body.paper-mode .step-rail strong,
+    body.white-mode .step-rail strong {
+      color: var(--read-fg);
+    }
+    body.paper-mode .sitting-spine,
+    body.white-mode .sitting-spine,
+    body.paper-mode .step-rail button,
+    body.white-mode .step-rail button {
+      background: var(--read-panel);
+      border-color: var(--read-border);
+    }
+    body.charcoal-mode input,
+    body.charcoal-mode textarea,
+    body.charcoal-mode select,
+    body.night-mode input,
+    body.night-mode textarea,
+    body.night-mode select,
+    body.paper-mode input,
+    body.paper-mode textarea,
+    body.paper-mode select,
+    body.white-mode input,
+    body.white-mode textarea,
+    body.white-mode select {
+      color: var(--read-input-fg) !important;
+      background-color: var(--read-input-bg) !important;
+      border-color: var(--read-border);
+      caret-color: var(--read-input-fg);
+    }
+    body.charcoal-mode input::placeholder,
+    body.charcoal-mode textarea::placeholder,
+    body.night-mode input::placeholder,
+    body.night-mode textarea::placeholder {
+      color: #b7aa94;
+      opacity: 1;
+    }
+    body.paper-mode input::placeholder,
+    body.paper-mode textarea::placeholder,
+    body.white-mode input::placeholder,
+    body.white-mode textarea::placeholder {
+      color: #78716c;
+      opacity: 1;
+    }
+    body.charcoal-mode .workbench-card,
+    body.night-mode .workbench-card,
+    body.paper-mode .workbench-card,
+    body.white-mode .workbench-card,
+    body.charcoal-mode .task-box,
+    body.night-mode .task-box,
+    body.paper-mode .task-box,
+    body.white-mode .task-box {
+      color: var(--read-fg);
+    }
+    body.paper-mode .quiz-option,
+    body.white-mode .quiz-option {
+      color: var(--read-fg);
+      background: var(--read-panel);
+      border-color: var(--read-border);
+    }
+    body.paper-mode .cite-kicker,
+    body.white-mode .cite-kicker,
+    body.paper-mode .cite-open,
+    body.white-mode .cite-open {
+      color: var(--read-accent);
+    }
+    body.paper-mode .cite-open:hover,
+    body.white-mode .cite-open:hover {
+      color: var(--read-strong);
+    }
+    body.paper-mode .cite-summary:hover,
+    body.white-mode .cite-summary:hover {
+      background: rgba(138, 100, 20, 0.06);
+    }
+    body.paper-mode .cite-ref,
+    body.white-mode .cite-ref {
+      background: rgba(180, 140, 40, 0.16);
+    }
+    body.paper-mode .cite-ref:hover,
+    body.white-mode .cite-ref:hover,
+    body.paper-mode .cite-ref:focus-visible,
+    body.white-mode .cite-ref:focus-visible {
+      background: rgba(180, 140, 40, 0.3);
+      color: #4a3410;
+    }
+    body.paper-mode .sitting-guide-card,
+    body.white-mode .sitting-guide-card,
+    body.paper-mode .access-panel,
+    body.white-mode .access-panel {
+      background: var(--read-panel);
+      color: var(--read-fg);
+      border-color: var(--read-border);
+    }
+    body.paper-mode .sitting-guide-card p,
+    body.paper-mode .sitting-guide-card li,
+    body.white-mode .sitting-guide-card p,
+    body.white-mode .sitting-guide-card li {
+      color: var(--read-muted);
+    }
+    body.paper-mode .sitting-guide-card small,
+    body.white-mode .sitting-guide-card small {
+      color: var(--read-accent);
+    }
+    body.charcoal-mode,
+    body.paper-mode,
+    body.white-mode,
+    body.night-mode {
+      transition: none !important;
+    }
+    body.charcoal-mode {
+      background-color: #151412 !important;
+      color: #eee9df !important;
+    }
+    body.paper-mode {
+      background-color: #f3ebda !important;
+      color: #1c1917 !important;
+    }
+    body.white-mode {
+      background-color: #ffffff !important;
+      color: #171717 !important;
+    }
+    body.night-mode {
+      background-color: #0a0a0c !important;
+      color: #eee9df !important;
+    }
+    body.charcoal-mode .lesson-toc-list a,
+    body.night-mode .lesson-toc-list a,
+    body.paper-mode .lesson-toc-list a,
+    body.white-mode .lesson-toc-list a,
+    body.charcoal-mode .article-body a,
+    body.night-mode .article-body a,
+    body.paper-mode .article-body a,
+    body.white-mode .article-body a {
+      color: var(--read-fg) !important;
+    }
+    body.charcoal-mode .lesson-toc-list a:hover,
+    body.night-mode .lesson-toc-list a:hover,
+    body.paper-mode .lesson-toc-list a:hover,
+    body.white-mode .lesson-toc-list a:hover {
+      color: var(--read-accent) !important;
+    }
+    body.paper-mode .governing-principle p,
+    body.white-mode .governing-principle p {
+      color: var(--read-fg) !important;
+    }
+    body.paper-mode .instrument-tabs button,
+    body.white-mode .instrument-tabs button {
+      color: var(--read-fg) !important;
+    }
+    body.paper-mode .instrument-tabs button.active,
+    body.white-mode .instrument-tabs button.active {
+      color: var(--read-accent) !important;
+    }
+    body.charcoal-mode .instrument-tabs button,
+    body.night-mode .instrument-tabs button {
+      color: var(--read-muted) !important;
+    }
+    body.charcoal-mode .instrument-tabs button.active,
+    body.night-mode .instrument-tabs button.active {
+      color: var(--read-accent) !important;
+    }
+
+    @media (max-width: 640px) {
+      .sitting-guide {
+        align-items: stretch;
+        padding: 12px;
+      }
+      .sitting-guide-card {
+        width: 100%;
+        margin-top: auto;
+        padding: 22px 18px 18px;
+      }
+      .sitting-guide.is-end { align-items: flex-start; }
+      .sitting-guide.is-end .sitting-guide-card { margin-top: 0; }
+    }
+    @media (max-width: 960px) {
+      :root { --study-sticky-top: 7.25rem; }
+    }
+
+    /* Dark themes: ink greys were written for paper. Lift them so they stay readable. */
+    html.dark .text-ink-400,
+    html.dark .text-ink-500,
+    html.dark .text-ink-600,
+    html.dark .text-ink-700 {
+      color: #e7decc !important;
+    }
+
+    /* Role colors stay readable after the shared light-theme text rules. */
+    body.paper-mode .sheet-verify,
+    body.paper-mode .study-path,
+    body.white-mode .sheet-verify,
+    body.white-mode .study-path,
+    body.paper-mode .lesson-connect,
+    body.white-mode .lesson-connect {
+      --role-gold: #8a6414;
+      --role-anchor: #6e5420;
+      --role-archive: #3d6274;
+      --role-guard: #3d6b45;
+      --role-invite: #8a5428;
+      --role-reader: #6a5088;
+    }
+    body.paper-mode .study-path h3,
+    body.white-mode .study-path h3 {
+      color: #1c1917;
+    }
+    body.paper-mode .cite-check b,
+    body.white-mode .cite-check b { color: var(--role-guard); }
+    body.paper-mode .lesson-connect,
+    body.white-mode .lesson-connect {
+      background: rgba(255, 250, 236, 0.92);
+      box-shadow: none;
+      color: #1c1917;
+    }
+    body.white-mode .lesson-connect { background: #ffffff; }
+    body.paper-mode .lesson-connect-lead,
+    body.white-mode .lesson-connect-lead { color: #1c1917; }
+    body.paper-mode .lesson-connect-map,
+    body.white-mode .lesson-connect-map {
+      color: #1d4557;
+      border-color: rgba(61, 98, 116, 0.55);
+      background: linear-gradient(135deg, rgba(61, 98, 116, 0.18), rgba(61, 98, 116, 0.08));
+    }
+    body.paper-mode .lesson-connect-gallery,
+    body.white-mode .lesson-connect-gallery {
+      color: #63491a;
+      border-color: rgba(138, 100, 20, 0.55);
+      background: linear-gradient(135deg, rgba(196, 152, 46, 0.26), rgba(138, 100, 20, 0.12));
+    }
+    /* Keep the invite the loudest button in light themes too. */
+    body.paper-mode .lesson-connect-share,
+    body.white-mode .lesson-connect-share {
+      color: #3a2408;
+      border-color: rgba(160, 116, 32, 0.75);
+      background: linear-gradient(135deg, #f7d68f 0%, #e0ab4c 48%, #c98d2c 100%);
+      box-shadow: 0 12px 28px -18px rgba(160, 116, 32, 0.9), inset 0 1px 0 rgba(255, 255, 255, 0.55);
+    }
+    body.paper-mode .lesson-connect-share:hover,
+    body.paper-mode .lesson-connect-share:focus-visible,
+    body.white-mode .lesson-connect-share:hover,
+    body.white-mode .lesson-connect-share:focus-visible {
+      background: linear-gradient(135deg, #ffe4ac 0%, #ecba5c 48%, #d2982f 100%);
+      box-shadow: 0 18px 38px -18px rgba(160, 116, 32, 1), 0 0 24px -6px rgba(224, 171, 76, 0.7);
+    }
+    body.paper-mode .lesson-connect-share .lesson-connect-orb,
+    body.white-mode .lesson-connect-share .lesson-connect-orb {
+      background: #a8281a;
+      box-shadow: 0 0 9px rgba(168, 40, 26, 0.85);
+    }
+
+    /* Light themes: article cards keep dark fills while paragraph ink is forced dark.
+       Instrument type set later in this file is cream, and it sits on the cream
+       panels above. Restate both here so paper and white stay readable. */
+    body.paper-mode .framework-card,
+    body.paper-mode .principle-card,
+    body.paper-mode .next-sitting-card,
+    body.paper-mode .caution-card,
+    body.paper-mode .historical-note,
+    body.paper-mode .level-text,
+    body.paper-mode .level-history,
+    body.paper-mode .level-interpretation,
+    body.paper-mode .level-christ,
+    body.paper-mode .biblical-case,
+    body.paper-mode .layer-stack,
+    body.paper-mode .qa-card,
+    body.paper-mode .source-card,
+    body.paper-mode .checkpoint-card,
+    body.paper-mode .sheet-christology,
+    body.white-mode .framework-card,
+    body.white-mode .principle-card,
+    body.white-mode .next-sitting-card,
+    body.white-mode .caution-card,
+    body.white-mode .historical-note,
+    body.white-mode .level-text,
+    body.white-mode .level-history,
+    body.white-mode .level-interpretation,
+    body.white-mode .level-christ,
+    body.white-mode .biblical-case,
+    body.white-mode .layer-stack,
+    body.white-mode .qa-card,
+    body.white-mode .source-card,
+    body.white-mode .checkpoint-card,
+    body.white-mode .sheet-christology {
+      background: #fffaf0;
+      color: var(--read-fg);
+      box-shadow: 0 10px 24px -14px rgba(60, 40, 10, 0.22);
+    }
+    body.white-mode .framework-card,
+    body.white-mode .principle-card,
+    body.white-mode .next-sitting-card,
+    body.white-mode .caution-card,
+    body.white-mode .historical-note,
+    body.white-mode .level-text,
+    body.white-mode .level-history,
+    body.white-mode .level-interpretation,
+    body.white-mode .level-christ,
+    body.white-mode .biblical-case,
+    body.white-mode .layer-stack,
+    body.white-mode .qa-card,
+    body.white-mode .source-card,
+    body.white-mode .checkpoint-card,
+    body.white-mode .sheet-christology {
+      background: #f7f7f7;
+      box-shadow: 0 8px 20px -14px rgba(0, 0, 0, 0.14);
+    }
+    body.paper-mode .scripture-meta strong,
+    body.white-mode .scripture-meta strong,
+    body.paper-mode .sitting-path-kicker,
+    body.white-mode .sitting-path-kicker,
+    body.paper-mode .scripture-chapter h4,
+    body.white-mode .scripture-chapter h4,
+    body.paper-mode .scripture-text,
+    body.white-mode .scripture-text,
+    body.paper-mode .scripture-empty,
+    body.white-mode .scripture-empty,
+    body.paper-mode .scripture-lang,
+    body.white-mode .scripture-lang,
+    body.paper-mode .verse-num,
+    body.white-mode .verse-num,
+    body.paper-mode .strong-hint,
+    body.white-mode .strong-hint,
+    body.paper-mode .strong-id,
+    body.white-mode .strong-id,
+    body.paper-mode .strong-dock h4,
+    body.white-mode .strong-dock h4,
+    body.paper-mode .strong-dock h4 i,
+    body.white-mode .strong-dock h4 i,
+    body.paper-mode .strong-gloss,
+    body.white-mode .strong-gloss,
+    body.paper-mode .strong-why,
+    body.white-mode .strong-why,
+    body.paper-mode .strong-derivation,
+    body.white-mode .strong-derivation,
+    body.paper-mode .strong-hits,
+    body.white-mode .strong-hits,
+    body.paper-mode .strong-other,
+    body.white-mode .strong-other,
+    body.paper-mode .strong-hits strong,
+    body.white-mode .strong-hits strong,
+    body.paper-mode .strong-other strong,
+    body.white-mode .strong-other strong,
+    body.paper-mode .load-bearing h4,
+    body.white-mode .load-bearing h4,
+    body.paper-mode .load-bearing-text,
+    body.white-mode .load-bearing-text,
+    body.paper-mode .load-bearing-connects,
+    body.white-mode .load-bearing-connects,
+    body.paper-mode .load-bearing-sitting,
+    body.white-mode .load-bearing-sitting,
+    body.paper-mode .load-bearing-plain,
+    body.white-mode .load-bearing-plain,
+    body.paper-mode .load-bearing-links li,
+    body.white-mode .load-bearing-links li,
+    body.paper-mode .load-bearing-links b,
+    body.white-mode .load-bearing-links b,
+    body.paper-mode .epoch-facts .fact p,
+    body.white-mode .epoch-facts .fact p,
+    body.paper-mode .epoch-facts .fact span,
+    body.white-mode .epoch-facts .fact span,
+    body.paper-mode .insight-card h4,
+    body.white-mode .insight-card h4,
+    body.paper-mode .insight-card p,
+    body.white-mode .insight-card p,
+    body.paper-mode .map-enter-full,
+    body.white-mode .map-enter-full,
+    body.paper-mode .sheet-map-list .cite,
+    body.white-mode .sheet-map-list .cite,
+    body.paper-mode .next-sitting-card h4,
+    body.white-mode .next-sitting-card h4 {
+      color: var(--read-fg);
+    }
+    body.paper-mode .part-kicker,
+    body.white-mode .part-kicker,
+    body.paper-mode .lesson-toc-kicker,
+    body.white-mode .lesson-toc-kicker {
+      color: var(--read-accent);
+      text-shadow: none;
+    }
+    body.paper-mode .article-body .reading-notes-kicker,
+    body.white-mode .article-body .reading-notes-kicker {
+      color: var(--read-accent) !important;
+    }
+
+    /* Print last, so theme colours cannot leave the page in light grey. */
+    @media print {
+      html,
+      body,
+      body.charcoal-mode,
+      body.paper-mode,
+      body.white-mode,
+      body.night-mode {
+        background: #ffffff !important;
+        background-image: none !important;
+        color: #161616 !important;
+      }
+      body.charcoal-mode::before,
+      body.paper-mode::before,
+      body.white-mode::before,
+      body.night-mode::before {
+        display: none !important;
+      }
+      #sheet-article,
+      #sheet-article *,
+      #sheet-verify,
+      #sheet-verify *,
+      #sheet-study-path,
+      #sheet-study-path *,
+      #sheet-christology,
+      #sheet-christology *,
+      #facilitator-strip,
+      #facilitator-strip *,
+      #workbench-section,
+      #workbench-section *,
+      #revision-section,
+      #revision-section *,
+      .sitting-main,
+      .sitting-main *:not(img):not(svg):not(canvas) {
+        color: #161616 !important;
+        -webkit-text-fill-color: #161616 !important;
+        background: #ffffff !important;
+        background-image: none !important;
+        text-shadow: none !important;
+        box-shadow: none !important;
+        filter: none !important;
+      }
+      #sheet-article,
+      #sheet-verify,
+      #sheet-study-path,
+      #sheet-christology,
+      #facilitator-strip,
+      #workbench-section,
+      .workbench-card,
+      .task-box,
+      .sitting-main {
+        background: #ffffff !important;
+      }
+    }

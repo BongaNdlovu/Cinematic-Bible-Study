@@ -31,6 +31,31 @@ Entry template:
 
 **Status:** committed on `arch/phase-0-safety-net`, merged upward. Not deployed.
 
+## 2026-11-16 — Architecture plan, Phase 3: the study stylesheets
+
+**Why:** `css/study-page.css` held 8,775 lines for some twenty features, and four scripts injected more CSS at run time, where a search of `css/` could not find it.
+
+**What changed:**
+
+- **3.1** `css/study-page.css` is cut at rule boundaries into 21 files in `css/study/` (`01-article.css` … `21-timeline.css`), linked by `study.html` in number order. Features were interleaved in the old file (chain-diagram rules, for example, appear in five places), so the cut keeps file order rather than gathering each feature into one file: moving rules across each other could change the cascade. Each file is named for what dominates it. `tools/verify/verify_equivalence.mjs` shows the 21 files, joined in link order, have the same rule list as the old file in git. `tools/minify-release-css.mjs` now walks subfolders. Without that, the parts would have shipped unminified. `verify_css_minify.mjs`, `verify_scripture.mjs`, `verify_workbench.mjs` and the Tailwind content list read the new folder. `tests/unit/study-css.test.mjs` (new) keeps `study.html`'s links in step with the folder.
+- **Bug fixed on the way (separate commit):** the reader prompt cards (sitting pulse, profile) and the study page's Insights tab both use the class `insight-card`. Once a prompt had shown, its injected rules turned the tab's three cards into 352 px fixed boxes stacked at the top of the screen; this was seen in a browser before the fix. The prompt rules now match only `body > .insight-card`, with `:where()` so their specificity is unchanged. `tools/verify/verify_insight_cards.mjs` (new, in CI) fails on the old code and passes now.
+- **3.2** No script creates a `<style>` element any more:
+  - The prompt card styles are now `css/insight-card.css`.
+  - The sitting celebration is `css/study/22-celebrate.css`, and the term page is `css/study/23-term-page.css`.
+  - The loading bar's keyframes are in `18-scripture-and-loading.css`.
+  - Each new file is linked last in the head, where the injected tags used to land, and every moved selector is scoped to its own feature.
+  - `js/study/book-open.js` sets its per-sitting values as custom properties on `<html>` and removes them when the animation ends.
+  - A before/after browser check matched the eight book-open values (including escaped quotes), their removal afterwards, 16 computed properties on three term-page elements, and the prompt card, its title and its save button.
+- **3.3** `docs/engineering/important-inventory.md` and `tools/count_important.mjs`: the 314 `!important` declarations grouped by cause. Nothing was reduced.
+
+**Handbook updated:** 03 (`css/study/`, `css/insight-card.css`), 05 (minification of subfolders, the number of stylesheets), 06 (no injected styles, scoped shared class names, `!important`), README (inventory), new `important-inventory.md`.
+
+**Checked here:** on the Phase 3 branch after 3.2, on Windows: lint exits 0, `npm run test:unit` passes 132 of 132, every `npm test` script passes, and `npm run test:browser` passed 29 of 30. The one failure was the idle-globe check, a test race fixed on the Phase 0 branch. That fix passed 3 of 3 afterwards and is merged here.
+
+**Not checked:** the effect of 23 stylesheets on the study page's first paint; the sitting celebration's styles in a browser (no check opens it); the Linux CI run for this branch.
+
+**Status:** on branch `arch/phase-3-css`, not deployed.
+
 ## 2026-11-16 — Architecture plan, Phase 2: dead code and old papers
 
 **Why:** Code that cannot run, rules that cannot match, and old papers beside the handbook all send a reader down false paths.

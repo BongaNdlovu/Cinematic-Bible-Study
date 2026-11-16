@@ -1,0 +1,65 @@
+:root {
+      --reading-font-size: 1.125rem;
+    }
+
+    body {
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+    }
+
+    .article-body {
+      font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
+    }
+
+    .article-body p {
+      margin-bottom: 1.85rem;
+      line-height: 1.9;
+      font-size: var(--reading-font-size, 1.125rem) !important;
+      letter-spacing: -0.003em;
+      transition: font-size 0.15s ease-out;
+    }
+
+    .article-body strong {
+      font-weight: 600;
+      color: #fce7b0;
+      letter-spacing: -0.01em;
+    }
+    body.paper-mode .article-body strong,
+    body.white-mode .article-body strong {
+      color: #292524;
+    }
+
+    .article-body em {
+      font-style: italic;
+      color: #f3e5c8;
+    }
+    body.paper-mode .article-body em,
+    body.white-mode .article-body em {
+      color: #44403c;
+    }
+
+    .article-body ul:not(.lesson-toc-list),
+    .article-body ol:not(.lesson-toc-list) {
+      margin: 1.25rem 0 1.75rem 1.5rem;
+      padding: 0;
+    }
+
+    .article-body li {
+      margin-bottom: 0.65rem;
+      line-height: 1.75;
+    }
+
+    .sheet-verify {
+      --role-gold: #e4c56a;
+      --role-archive: #9ec4d4;
+      --role-guard: #9dca96;
+      --role-reader: #cbb6e4;
+      margin: 2.75rem 0 1.75rem;
+      padding: 1.45rem 1.35rem 1.35rem;
+      border: 1px solid rgba(197, 155, 39, 0.38);
+      border-radius: 16px;
+      background:
+        radial-gradient(ellipse at 0% 0%, rgba(212, 175, 55, 0.08), transparent 42%),
+        rgba(15, 14, 13, 0.55);
+    }

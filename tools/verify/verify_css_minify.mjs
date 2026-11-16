@@ -12,13 +12,18 @@ fs.cpSync(path.join(ROOT, "css"), path.join(stage, "css"), { recursive: true });
 const run = spawnSync(process.execPath, [path.join(ROOT, "tools", "minify-release-css.mjs"), stage], { encoding: "utf8" });
 assert.strictEqual(run.status, 0, run.stderr);
 
-for (const name of fs.readdirSync(path.join(ROOT, "css")).filter((n) => n.endsWith(".css"))) {
+const sheets = fs.readdirSync(path.join(ROOT, "css"), { recursive: true }).map(String).filter((n) => n.endsWith(".css"));
+for (const name of sheets) {
   const before = fs.statSync(path.join(ROOT, "css", name)).size;
   const after = fs.readFileSync(path.join(stage, "css", name), "utf8");
   assert(after.length <= before, name + " must not grow when minified");
   assert(!after.includes("/*"), name + " keeps no comments once minified");
 }
-assert(fs.statSync(path.join(stage, "css", "study-page.css")).size < fs.statSync(path.join(ROOT, "css", "study-page.css")).size * 0.75, "study-page.css shrinks by at least a quarter");
+const studyParts = sheets.filter((n) => path.dirname(n) === "study");
+assert(studyParts.length > 1, "css/study/ holds the study page stylesheets");
+const studyBefore = studyParts.reduce((sum, n) => sum + fs.statSync(path.join(ROOT, "css", n)).size, 0);
+const studyAfter = studyParts.reduce((sum, n) => sum + fs.statSync(path.join(stage, "css", n)).size, 0);
+assert(studyAfter < studyBefore * 0.75, "the study page stylesheets shrink by at least a quarter in total");
 
 const deploy = fs.readFileSync(path.join(ROOT, "tools", "deploy-cloudflare-pages.ps1"), "utf8");
 const minifyAt = deploy.indexOf("minify-release-css.mjs");

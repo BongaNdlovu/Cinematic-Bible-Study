@@ -1,0 +1,510 @@
+.lesson-infographic {
+      position: relative;
+      padding: 0.85rem;
+      border-radius: 16px;
+      border: 1px solid rgba(212, 175, 55, 0.55);
+      background:
+        radial-gradient(ellipse at 50% 0%, rgba(255, 214, 102, 0.16), transparent 55%),
+        linear-gradient(180deg, rgba(42, 34, 18, 0.55) 0%, rgba(16, 13, 9, 0.88) 100%);
+      box-shadow:
+        0 0 28px rgba(212, 175, 55, 0.22),
+        0 0 56px rgba(212, 175, 55, 0.1),
+        0 18px 40px -16px rgba(0, 0, 0, 0.7);
+    }
+    .lesson-infographic::before {
+      content: "";
+      position: absolute;
+      inset: -10px;
+      border-radius: 22px;
+      background: radial-gradient(ellipse at 50% 40%, rgba(255, 214, 102, 0.18), transparent 68%);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .lesson-infographic-inner {
+      position: relative;
+      z-index: 1;
+    }
+    .lesson-infographic-kicker {
+      margin: 0 0 0.3rem;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 10.5px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: #fbbf24;
+    }
+    .lesson-infographic-title {
+      margin: 0 0 0.75rem;
+      font-family: "Newsreader", Georgia, serif;
+      font-size: 1.2rem;
+      font-weight: 650;
+      color: #fff6db;
+    }
+    .lesson-infographic-frame {
+      display: block;
+      width: 100%;
+      margin: 0;
+      padding: 0.35rem;
+      border-radius: 12px;
+      background: rgba(255, 248, 225, 0.96);
+      box-shadow: 0 0 22px rgba(255, 214, 102, 0.28), inset 0 0 18px rgba(212, 175, 55, 0.12);
+      cursor: zoom-in;
+    }
+    .lesson-infographic-frame img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+      image-rendering: auto;
+    }
+    .lesson-infographic-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-top: 0.85rem;
+    }
+    .lesson-infographic-actions .gold-bible-notice-btn {
+      border: 1px solid rgba(255, 235, 175, 0.4);
+    }
+    body.paper-mode .lesson-audio,
+    body.white-mode .lesson-audio,
+    body.paper-mode .lesson-infographic,
+    body.white-mode .lesson-infographic {
+      background: linear-gradient(180deg, #fffdf6 0%, #f6edd8 100%);
+      border-color: rgba(184, 134, 11, 0.45);
+      box-shadow: 0 0 24px rgba(212, 175, 55, 0.18), 0 12px 28px -16px rgba(120, 85, 25, 0.25);
+    }
+    body.paper-mode .lesson-audio-title,
+    body.white-mode .lesson-audio-title,
+    body.paper-mode .lesson-infographic-title,
+    body.white-mode .lesson-infographic-title {
+      color: #3f2d08;
+    }
+    body.paper-mode .lesson-audio-kicker,
+    body.white-mode .lesson-audio-kicker,
+    body.paper-mode .lesson-infographic-kicker,
+    body.white-mode .lesson-infographic-kicker {
+      color: #9a7217;
+    }
+    .infographic-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.25rem;
+      background: rgba(8, 7, 5, 0.86);
+      backdrop-filter: blur(8px);
+    }
+    .infographic-modal[hidden] { display: none; }
+    .infographic-modal-card {
+      position: relative;
+      width: min(1760px, calc(100vw - 2rem));
+      max-height: calc(100vh - 2.5rem);
+      overflow: auto;
+      padding: 0;
+      border-radius: 16px;
+      background: radial-gradient(ellipse at 50% 0%, rgba(255, 214, 102, 0.16), transparent 50%), #14110c;
+      border: 1px solid rgba(212, 175, 55, 0.5);
+      box-shadow: 0 0 40px rgba(212, 175, 55, 0.28), 0 24px 60px rgba(0, 0, 0, 0.55);
+    }
+    /* The Close/Download bar sticks to the top of the scrolling card so the
+       modal can always be left, even after scrolling a tall plate on a phone. */
+    .infographic-modal-bar {
+      position: sticky;
+      top: 0;
+      z-index: 2;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.7rem;
+      padding: 0.9rem;
+      background: #14110c;
+      border-bottom: 1px solid rgba(212, 175, 55, 0.4);
+      border-radius: 15px 15px 0 0;
+    }
+    .infographic-modal-bar p {
+      margin: 0;
+      font-family: "Newsreader", Georgia, serif;
+      color: #fff6db;
+      font-size: 1.05rem;
+    }
+    .infographic-modal-card img {
+      display: block;
+      width: calc(100% - 1.8rem);
+      max-width: 1672px;
+      height: auto;
+      margin: 0.9rem auto;
+      border-radius: 10px;
+      background: #fff8e6;
+      box-shadow: 0 0 28px rgba(255, 214, 102, 0.22);
+      image-rendering: auto;
+    }
+    body.infographic-open { overflow: hidden; }
+    @media (prefers-reduced-motion: reduce) {
+      .lesson-infographic::before { display: none; }
+    }
+
+    @media (max-width: 640px) {
+      .gold-bible-notice-card {
+        padding: 1.1rem 1.15rem;
+        margin-bottom: 1.5rem;
+      }
+      .gold-bible-notice-title {
+        font-size: 1.25rem !important;
+      }
+      .gold-bible-notice-text {
+        font-size: 0.95rem !important;
+      }
+      .gold-bible-notice-actions {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .gold-bible-notice-btn {
+        justify-content: center;
+      }
+    }
+
+    /* Biblical Case Card */
+    .biblical-case {
+      border-left: 4px solid #14b8a6;
+      border-top: 1px solid rgba(20, 184, 166, 0.25);
+      border-right: 1px solid rgba(20, 184, 166, 0.25);
+      border-bottom: 1px solid rgba(20, 184, 166, 0.25);
+      background: linear-gradient(135deg, rgba(19, 78, 74, 0.25) 0%, rgba(12, 24, 24, 0.92) 100%);
+      box-shadow: 0 10px 28px -8px rgba(20, 184, 166, 0.25);
+    }
+    .biblical-case-kicker { color: #2dd4bf; }
+    .biblical-case-kicker::before { content: "📖"; font-size: 10px; }
+
+    .layer-stack {
+      border: 1px dashed rgba(245, 158, 11, 0.55);
+      background: linear-gradient(135deg, rgba(120, 53, 15, 0.18) 0%, rgba(20, 16, 12, 0.92) 100%);
+    }
+    .layer-stack-kicker { color: #f59e0b; }
+
+    .source-card {
+      border: 1px dashed rgba(212, 175, 55, 0.45);
+      background: rgba(212, 175, 55, 0.05);
+    }
+
+    .qa-card {
+      border: 1px solid rgba(212, 175, 55, 0.35);
+      background: linear-gradient(135deg, rgba(26, 23, 19, 0.8) 0%, rgba(16, 14, 12, 0.92) 100%);
+    }
+
+    .checkpoint-card {
+      border-left: 4px solid #e5b93b;
+      background: rgba(212, 175, 55, 0.08);
+    }
+    .checkpoint-kicker { color: #e5b93b; }
+
+    /* Card Interior List Spacing */
+    .framework-card ul, .framework-card ol,
+    .historical-note ul, .historical-note ol,
+    .principle-card ul, .principle-card ol,
+    .level-card ul, .level-card ol {
+      margin: 0.75rem 0 0.5rem 1.4rem;
+      padding: 0;
+    }
+    .framework-card li, .historical-note li, .principle-card li, .level-card li {
+      margin-bottom: 0.75rem;
+      line-height: 1.75;
+    }
+    .framework-card li:last-child, .historical-note li:last-child, .principle-card li:last-child, .level-card li:last-child {
+      margin-bottom: 0;
+    }
+
+    /* Scripture & Pull Quotes: Typographic Sacred Citations */
+    .scripture-quote {
+      position: relative;
+      font-family: 'Newsreader', Georgia, serif;
+      font-style: italic;
+      font-size: 1.15rem;
+      margin: 2.25rem 0;
+      padding: 1.15rem 1.6rem 1.15rem 1.85rem;
+      border-left: 4px solid #d4a017;
+      background: linear-gradient(135deg, rgba(32, 27, 20, 0.7) 0%, rgba(18, 15, 12, 0.88) 100%);
+      border-radius: 0 12px 12px 0;
+      line-height: 1.75;
+      color: #f7f0e1;
+      box-shadow: 0 10px 28px -6px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 235, 175, 0.1);
+    }
+    body.paper-mode .scripture-quote {
+      background: rgba(245, 238, 222, 0.7);
+      border-left-color: #9a7217;
+      color: #292524;
+    }
+    body.white-mode .scripture-quote {
+      background: #faf7f0;
+      border-left-color: #c9a227;
+      color: #1c1917;
+    }
+
+    .pull-quote {
+      position: relative;
+      font-family: 'Newsreader', Georgia, serif;
+      font-style: italic;
+      font-size: calc(var(--reading-font-size, 1.125rem) * 1.35) !important;
+      line-height: 1.65;
+      border-left: 4.5px solid #e5b93b;
+      padding: 1.35rem 1.85rem;
+      margin: 3rem 0;
+      background: linear-gradient(135deg, rgba(36, 30, 22, 0.75) 0%, rgba(18, 15, 12, 0.92) 100%);
+      border-radius: 0 14px 14px 0;
+      color: #faf5e8;
+      box-shadow: 0 14px 36px -8px rgba(0, 0, 0, 0.75), 0 0 18px rgba(212, 175, 55, 0.2);
+      transition: font-size 0.15s ease-out;
+    }
+    body.paper-mode .pull-quote {
+      background: rgba(250, 242, 226, 0.85);
+      border-left-color: #9a7217;
+      color: #1c1917;
+    }
+    body.white-mode .pull-quote {
+      background: #fbf9f4;
+      border-left-color: #c9a227;
+      color: #1c1917;
+    }
+
+    /* Comparison Table Styling */
+    .comparison-table-wrap {
+      overflow-x: auto;
+      margin: 1.75rem 0;
+      border-radius: 10px;
+      border: 1px solid rgba(212, 175, 55, 0.35);
+      box-shadow: 0 10px 28px -6px rgba(0, 0, 0, 0.65);
+    }
+
+    /* Prophecy Diagrams: The Astronomical Obsidian Matrix */
+    .prophecy-diagram {
+      position: relative;
+      font-family: "JetBrains Mono", "Consolas", monospace;
+      font-size: 0.74rem;
+      line-height: 1.6;
+      overflow-x: auto;
+      margin: 2.5rem 0;
+      padding: 1.5rem 1.6rem;
+      border: 1px solid rgba(212, 175, 55, 0.4);
+      border-radius: 14px;
+      background: linear-gradient(180deg, #0d0c0a 0%, #050504 100%);
+      color: #eee7d7;
+      white-space: pre;
+      word-break: normal;
+      box-shadow: 0 16px 42px -10px rgba(0, 0, 0, 0.95), inset 0 0 40px rgba(0, 0, 0, 0.85), 0 0 1px 1px rgba(212, 175, 55, 0.25);
+    }
+    .prophecy-diagram::-webkit-scrollbar {
+      height: 8px;
+    }
+    .prophecy-diagram::-webkit-scrollbar-track {
+      background: rgba(18, 16, 14, 0.8);
+      border-radius: 4px;
+    }
+    .prophecy-diagram::-webkit-scrollbar-thumb {
+      background: rgba(212, 175, 55, 0.4);
+      border-radius: 4px;
+    }
+    .prophecy-diagram::-webkit-scrollbar-thumb:hover {
+      background: rgba(212, 175, 55, 0.75);
+    }
+    body.paper-mode .prophecy-diagram {
+      background: #f7f2e8;
+      border-color: rgba(180, 130, 30, 0.45);
+      color: #292524;
+      box-shadow: 0 8px 24px rgba(100, 80, 50, 0.12);
+    }
+    body.white-mode .prophecy-diagram {
+      background: #faf8f5;
+      border-color: #e5dec9;
+      color: #1c1917;
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.05);
+    }
+    .term-gloss {
+      border-bottom: 1.5px dotted #d97706;
+      cursor: pointer;
+      color: inherit;
+      position: relative;
+      background: none;
+      padding: 0 1px;
+      font: inherit;
+      border-top: 0;
+      border-left: 0;
+      border-right: 0;
+      border-radius: 2px;
+    }
+    .term-gloss:hover, .term-gloss:focus {
+      border-bottom-style: solid;
+      background-color: rgba(245, 158, 11, 0.15);
+      outline: none;
+    }
+    #glossary-panel:not([hidden]) {
+      max-height: min(70vh, 820px);
+      overflow: auto;
+    }
+    .glossary-index h3 {
+      font-family: Newsreader, Georgia, serif;
+      font-size: 1.45rem;
+      margin: 0 0 0.4rem;
+    }
+    .glossary-kicker {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #c9a227;
+      margin: 0 0 0.25rem;
+    }
+    .glossary-lead { margin: 0 0 0.9rem; line-height: 1.5; }
+    .glossary-tools { display: flex; flex-direction: column; gap: 0.55rem; margin-bottom: 0.9rem; }
+    .glossary-tools input[type="search"] {
+      width: 100%;
+      border: 1px solid rgba(197, 155, 39, 0.35);
+      border-radius: 8px;
+      padding: 0.45rem 0.65rem;
+      background: rgba(12, 10, 8, 0.25);
+      color: inherit;
+    }
+    body.paper-mode .glossary-tools input,
+    body.white-mode .glossary-tools input {
+      background: #fff;
+    }
+    .glossary-filters { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+    .glossary-filters button {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 10px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      border: 1px solid rgba(197, 155, 39, 0.35);
+      border-radius: 999px;
+      padding: 0.3rem 0.65rem;
+      background: transparent;
+      color: inherit;
+      cursor: pointer;
+    }
+    .glossary-filters button.is-on {
+      background: #b45309;
+      color: #fff7ed;
+      border-color: #b45309;
+    }
+    .glossary-grid { display: flex; flex-direction: column; gap: 0.75rem; }
+    .glossary-card {
+      display: flex;
+      gap: 0.75rem;
+      border: 1px solid rgba(197, 155, 39, 0.28);
+      border-radius: 10px;
+      padding: 0.7rem 0.8rem;
+      background: rgba(12, 10, 8, 0.22);
+    }
+    .glossary-card.is-focus { border-color: #d97706; box-shadow: 0 0 0 2px rgba(217, 119, 6, 0.25); }
+    .glossary-card h4 {
+      font-family: Newsreader, Georgia, serif;
+      font-size: 1.05rem;
+      margin: 0.15rem 0 0.35rem;
+    }
+    .glossary-card-kind {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #c9a227;
+      margin: 0;
+    }
+    .glossary-card-hist { opacity: 0.86; margin-top: 0.4rem; }
+    .glossary-card-plate img {
+      width: 72px;
+      height: 96px;
+      object-fit: cover;
+      border-radius: 6px;
+      display: block;
+    }
+    body.paper-mode .glossary-card,
+    body.white-mode .glossary-card { background: rgba(255, 250, 236, 0.7); }
+    body.white-mode .glossary-card { background: #fafafa; }
+    .strongs-gloss {
+      border-bottom: 1.5px dotted #d97706;
+      cursor: pointer;
+      color: inherit;
+      position: relative;
+      transition: background-color 0.15s ease, border-color 0.15s ease;
+      padding: 0 2px;
+      border-radius: 2px;
+    }
+    .strongs-gloss:hover, .strongs-gloss:focus {
+      border-bottom-style: solid;
+      background-color: rgba(245, 158, 11, 0.15);
+      outline: none;
+    }
+
+    /* Beta Preview Banner */
+
+    #flashlight-cursor::before {
+      content: '';
+      position: absolute;
+      left: 7px;
+      top: 1px;
+      width: 20px;
+      height: 15px;
+      border-radius: 4px 4px 7px 7px;
+      background: linear-gradient(180deg, #f8f3e7, #b5ad9a);
+      box-shadow: inset 0 0 0 1px rgba(0,0,0,0.45), 0 0 12px rgba(255,238,194,0.4);
+    }
+
+    #flashlight-cursor::after {
+      content: '';
+      position: absolute;
+      left: 10px;
+      top: 13px;
+      width: 14px;
+      height: 38px;
+      border-radius: 5px 5px 8px 8px;
+      background: linear-gradient(90deg, #2c2a26, #57524a 42%, #1d1c19);
+      box-shadow: inset -2px 0 0 rgba(255,255,255,0.08);
+    }
+
+    @media (pointer: coarse) {
+      #flashlight-overlay, #flashlight-cursor { display: none; }
+      body.charcoal-mode { cursor: auto; }
+    }
+
+    .cinematic-atmosphere {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      overflow: hidden;
+      opacity: 0.16;
+    }
+    .cinematic-atmosphere img { position: absolute; max-width: none; }
+    .cinematic-atmosphere .atm-hero {
+      inset: 0; width: 100%; height: 100%; object-fit: cover;
+      filter: saturate(0.8) contrast(1.05);
+    }
+    .cinematic-atmosphere .atm-statue {
+      left: -6%; top: 10%; height: 92%; width: auto;
+      -webkit-mask-image: linear-gradient(to right, #000 46%, transparent 100%);
+      mask-image: linear-gradient(to right, #000 46%, transparent 100%);
+    }
+    .cinematic-atmosphere .atm-city {
+      right: 0; top: 0; width: 46%; height: 52%; object-fit: cover;
+      -webkit-mask-image: linear-gradient(to left, #000 38%, transparent 100%), linear-gradient(to bottom, #000 50%, transparent 100%);
+      -webkit-mask-composite: source-in;
+      mask-image: linear-gradient(to left, #000 38%, transparent 100%), linear-gradient(to bottom, #000 50%, transparent 100%);
+      mask-composite: intersect;
+      opacity: 0.65;
+    }
+    body:not(.charcoal-mode) .cinematic-atmosphere { opacity: 0.04; }
+    body.charcoal-mode .cinematic-atmosphere { opacity: 0.11; }
+    .museum-links a {
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+    .artifact-thumb { opacity: 0.7; flex-shrink: 0; }
+    .artifact-thumb.ring-2 { opacity: 1; }
+
+    body[data-weather="storm"] .cinematic-atmosphere { filter: brightness(0.62) saturate(0.75) contrast(1.08); }
+    body[data-weather="building"] .cinematic-atmosphere { filter: brightness(0.78) contrast(1.12) saturate(0.85); }
+    body[data-weather="sunshine"] .cinematic-atmosphere { filter: brightness(1.18) saturate(1.2); }
+    body[data-weather="quiet"] .cinematic-atmosphere { filter: brightness(0.9) saturate(0.7); }

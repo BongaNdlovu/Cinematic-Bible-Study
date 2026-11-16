@@ -1,0 +1,252 @@
+.dfx-bar {
+      position: relative;
+      z-index: 2;
+      max-width: var(--dfx-max);
+      width: 100%;
+      margin: 0 auto;
+      padding: clamp(1.1rem, 2.6vh, 2rem) clamp(1.1rem, 3vw, 2.6rem) 0.9rem;
+      text-align: left;
+      animation: dfx-rise 0.62s 0.06s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+    }
+    .dfx-eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      margin: 0 0 0.55rem;
+      font-family: var(--dfx-mono);
+      font-size: clamp(0.6rem, 0.78vw, 0.7rem);
+      font-weight: 500;
+      letter-spacing: 0.34em;
+      text-transform: uppercase;
+      color: var(--dfx-gilt);
+      opacity: 0.92;
+    }
+    .dfx-rule {
+      width: clamp(18px, 3vw, 46px);
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--dfx-gilt));
+      flex: none;
+    }
+    /* The reference sets its subject in a large serif over the gold — the title
+       is the one thing on the layer that is not a label. */
+    .dfx-title {
+      margin: 0;
+      font-family: var(--dfx-serif);
+      font-weight: 600;
+      font-size: clamp(1.5rem, 3.3vw, 2.5rem);
+      line-height: 1.08;
+      letter-spacing: -0.01em;
+      color: var(--dfx-cream);
+      text-wrap: balance;
+      text-shadow: 0 0 46px rgba(220, 178, 87, 0.22);
+    }
+    /* The diagram's own note, printed UNDER the plate. The reference puts its
+       footnote there, and it is the right place for it: the note qualifies the
+       diagram, so it belongs after the thing it qualifies, not before it. It is a
+       third grid row rather than part of `.dfx-bar` so it can sit at the foot
+       while the title sits at the head. */
+    .dfx-foot {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      max-width: var(--dfx-max);
+      margin: 0 auto;
+      padding: 0.7rem clamp(1.1rem, 3vw, 2.6rem) clamp(0.9rem, 2.4vh, 1.6rem);
+      animation: dfx-rise 0.62s 0.1s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+    }
+    .dfx-note {
+      margin: 0;
+      max-width: 92ch;
+      font-family: Inter, sans-serif;
+      font-size: clamp(0.75rem, 0.95vw, 0.86rem);
+      line-height: 1.5;
+      color: var(--dfx-ash);
+      opacity: 0.88;
+    }
+    /* A hairline separates the note from the plate, the way the reference rules
+       its footnote off from the table above it. */
+    .dfx-foot::before {
+      content: "";
+      display: block;
+      width: 100%;
+      height: 1px;
+      margin-bottom: 0.7rem;
+      background: linear-gradient(90deg, var(--dfx-line), transparent 78%);
+    }
+
+    /* The chrome carries the title and the note, so the column's own caption and
+       trailing note are stood down — printing the title twice on one layer is the
+       first thing the eye catches. `.chain-ascii` is the hidden plain-text
+       artwork and stays hidden. */
+    .chain.is-full > .chain-title-cap,
+    .chain.is-full > .chain-note { display: none; }
+    /* While a layer is open the page is scroll-locked, so revealReference()
+       cannot scroll to the reference list. The list becomes a panel above the
+       layer instead (above 240, so it also outranks the story reader).
+       It is armed by the dfx-cite-open class, which only revealReference()
+       sets; keying it on the layer alone would cover the diagram's chips as
+       soon as it opened. */
+    html.dfx-cite-open .sheet-verify:not([hidden]) {
+      position: fixed;
+      inset: 0;
+      z-index: 240;
+      margin: 0;
+      padding: clamp(1.1rem, 3vh, 2.2rem) clamp(1.1rem, 4vw, 3rem) 0;
+      border: 0;
+      border-radius: 0;
+      overflow: auto;
+      overscroll-behavior: contain;
+      background:
+        radial-gradient(ellipse 62% 40% at 50% 0%, rgba(152, 110, 38, 0.22), transparent 72%),
+        linear-gradient(#0b0907, #050403);
+      color-scheme: dark;
+      animation: dfx-in 0.34s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(220, 178, 87, 0.4) transparent;
+    }
+    html.dfx-cite-open .sheet-verify:not([hidden]) .cite-title { color: #f4ecd8; }
+    html.dfx-cite-open .sheet-verify:not([hidden]) .cite-claim { color: #ddd3bc; }
+    /* Every text role is stated here because inherited colours fall below
+       readable contrast on this dark panel in paper and white themes.
+       !important beats the body-scoped light-theme rules. */
+    html.dfx-cite-open .sheet-verify:not([hidden]) .cite-lead,
+    html.dfx-cite-open .sheet-verify:not([hidden]) .cite-count,
+    html.dfx-cite-open .sheet-verify:not([hidden]) .cite-source,
+    html.dfx-cite-open .sheet-verify:not([hidden]) .cite-check,
+    html.dfx-cite-open .sheet-verify:not([hidden]) .cite-quote,
+    html.dfx-cite-open .sheet-verify:not([hidden]) .cite-main,
+    html.dfx-cite-open .sheet-verify:not([hidden]) .cite-row { color: #cfc7b4 !important; }
+    html.dfx-cite-open .sheet-verify:not([hidden]) .cite-quote,
+    html.dfx-cite-open .sheet-verify:not([hidden]) .cite-claim { color: #e6dcc4 !important; }
+    html.dfx-cite-open .sheet-verify:not([hidden]) .cite-kind,
+    html.dfx-cite-open .sheet-verify:not([hidden]) .cite-num,
+    html.dfx-cite-open .sheet-verify:not([hidden]) .cite-check b { color: #e4c56a !important; }
+    html.dfx-cite-open .sheet-verify:not([hidden]) .cite-open { color: #f2d797 !important; }
+    html.dfx-cite-open .sheet-verify:not([hidden]) .cite-summary { border-bottom-color: rgba(220, 178, 87, 0.22); }
+    html.dfx-cite-open .sheet-verify:not([hidden]) .cite-summary:hover { background: rgba(255, 240, 200, 0.05); }
+    .cite-close {
+      position: absolute;
+      top: clamp(0.8rem, 2.4vh, 1.6rem);
+      right: clamp(1.1rem, 4vw, 3rem);
+      z-index: 1;
+      padding: 0.5rem 1rem;
+      border: 1px solid rgba(220, 178, 87, 0.42);
+      border-radius: 99px;
+      background: rgba(20, 16, 11, 0.86);
+      color: #f2d797;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.2s ease, border-color 0.2s ease;
+    }
+    .cite-close:hover { background: rgba(220, 178, 87, 0.16); border-color: #f2d797; }
+    .cite-close:focus-visible { outline: 2px solid #f2d797; outline-offset: 3px; }
+    @media (prefers-reduced-motion: reduce) {
+      html.dfx-cite-open .sheet-verify:not([hidden]) { animation: none !important; }
+    }
+    .chain.is-full .chain-body {
+      position: relative;
+      z-index: 1;
+      display: block;
+      width: 100%;
+      max-width: var(--dfx-max);
+      height: auto;
+      min-height: 0;
+      margin: 0 auto;
+      padding: 0 clamp(1.1rem, 3vw, 2.6rem) clamp(1.2rem, 3vh, 2.2rem);
+      overflow: auto;
+      overscroll-behavior: contain;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(220, 178, 87, 0.4) transparent;
+      place-self: stretch;
+      justify-self: center;
+      /* The content is what is read; `safe` keeps its first line on screen when
+         the plate is taller than the layer, which `center` would not. */
+      align-content: safe var(--dfx-align);
+      justify-items: stretch;
+    }
+    .chain.is-full .chain-body::-webkit-scrollbar { width: 10px; height: 10px; }
+    .chain.is-full .chain-body::-webkit-scrollbar-thumb {
+      background: rgba(220, 178, 87, 0.32);
+      border-radius: 99px;
+    }
+    .chain.is-full .chain-body::-webkit-scrollbar-track { background: transparent; }
+
+    /* Blur the lesson behind the layer rather than merely dimming it, so the
+       diagram is unambiguously the thing in front. */
+    html.dfx-open:not(.story-read-open),
+    html.dfx-open:not(.story-read-open) body { overflow: hidden; }
+    body:has(.chain.is-full) .insight-card,
+    body:has(.chain.is-full) .audio-orb { display: none !important; }
+    /* The fixed scroll-progress bar would draw across the plate, and it tracks
+       a frozen scroll position, so it is hidden. It has no id, so its utility
+       classes are matched. */
+    body:has(.chain.is-full) > div.fixed.top-0.h-1 { display: none !important; }
+    /* A figure beside this one keeps its Replay control, which would sit over the
+       layer; the control belongs to the column, so it is hidden with it. */
+    body:has(.chain.is-full) [data-chain-replay] { visibility: hidden; }
+
+    @keyframes dfx-in {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @keyframes dfx-rise {
+      from { opacity: 0; transform: translateY(14px); filter: blur(6px); }
+      to { opacity: 1; transform: none; filter: none; }
+    }
+    @keyframes dfx-rays {
+      to { background-position: 50% -40%, 0 0; transform: rotate(360deg); }
+    }
+    /* The entrance on the plate's own children is the renderer's business; this
+       only guarantees the layer itself never animates for a user who asked it
+       not to. */
+    @media (prefers-reduced-motion: reduce) {
+      .chain.is-full,
+      .chain.is-full::after,
+      .dfx-bar { animation: none !important; }
+    }
+    /* Below the width at which a matrix stops being readable the plate takes the
+       whole layer, the title tightens, and the table falls back to the stacked
+       row layout the column already uses. Nothing is removed, only re-flowed. */
+    @media (max-width: 720px) {
+      .dfx-bar { padding: 0.9rem 0.9rem 0.6rem; }
+      .chain.is-full .chain-body { padding: 0 0.9rem 1.1rem; }
+      .dfx-title { font-size: 1.35rem; }
+    }
+    /* A short viewport (a laptop in landscape) would otherwise spend a third of
+       the layer on chrome. The title tightens and the note is clamped to two
+       lines rather than hidden: it is the diagram's own qualification, and the
+       table with a note is the one that needs it most. */
+    @media (max-height: 620px) {
+      .dfx-bar { padding-top: 0.8rem; }
+      .dfx-title { font-size: clamp(1.2rem, 2.4vw, 1.7rem); }
+      .dfx-foot { padding-bottom: 0.7rem; }
+      .dfx-note {
+        font-size: 0.72rem;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+    }
+
+    /* Light themes keep the layer dark, as the mindmap's full screen does: the
+       plate is a lit surface, and a paper-white diagram on a dark field is the
+       whole point. Every text role is restored explicitly because the light-theme
+       body colour would otherwise win on this ground. */
+    body.paper-mode .chain.is-full,
+    body.white-mode .chain.is-full {
+      background:
+        radial-gradient(ellipse 62% 46% at 50% 18%, rgba(152, 110, 38, 0.30), transparent 72%),
+        radial-gradient(ellipse 108% 58% at 50% 118%, rgba(96, 62, 18, 0.42), transparent 66%),
+        linear-gradient(#0b0907, #040302);
+      color: var(--dfx-cream);
+    }
+    body.paper-mode .chain.is-full .dfx-title,
+    body.white-mode .chain.is-full .dfx-title { color: var(--dfx-cream) !important; }
+    body.paper-mode .chain.is-full .dfx-note,
+    body.white-mode .chain.is-full .dfx-note { color: var(--dfx-ash) !important; }
+    body.paper-mode .chain.is-full .dfx-eyebrow,
+    body.white-mode .chain.is-full .dfx-eyebrow { color: var(--dfx-gilt) !important; }
