@@ -158,11 +158,6 @@
 
       updateFocusNote(epoch);
 
-      if (studyMap) {
-        const yearId = STUDY_EPOCH_TO_YEAR[epochIdx] || 'y605';
-        studyMap.setYear(yearId, { animate: true, chapter: false, open: false });
-      }
-
       if (!fromSheet && !sheetBelongsToEpoch(currentSheetIndex, epochIdx)) {
         const target = timelineToSheetMap[epochIdx];
         if (typeof target === 'number') {
@@ -397,7 +392,6 @@
       if (panel) panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
-    let studyMap = null;
     const STUDY_EPOCH_TO_YEAR = (window.MAP_CHRONICLE && window.MAP_CHRONICLE.studyEpochIds) ||
       ['y605', 'y539', 'y457', 'y31', 'y538', 'y1798', 'y1844', 'y12'];
     if (window.BAJourney) window.BAJourney.load();
@@ -478,17 +472,6 @@
 
     function pulseMapYear(yearId, opts) {
       sittingYearOverride = yearId;
-      if (studyMap && yearId) {
-        if (studyMap.setSheet) {
-          studyMap.setSheet(currentSheetIndex, Object.assign({
-            animate: true,
-            focusId: null,
-            year: yearId
-          }, opts || {}));
-        } else {
-          studyMap.setYear(yearId, Object.assign({ animate: true, chapter: false, open: false }, opts || {}));
-        }
-      }
       if (window.BAJourney) window.BAJourney.save({ year: yearId });
     }
 
@@ -742,7 +725,6 @@
       if (!emp) return;
       const yearId = emp.yearId || STUDY_EPOCH_TO_YEAR[emp.epoch] || 'y605';
       fillMapFacts(emp.name, emp.beast, emp.span, emp.insight, emp.image, yearId);
-      if (studyMap) studyMap.setYear(yearId, { animate: true, chapter: false, open: false });
     }
 
     function bibleNoticeChapters(index) {
