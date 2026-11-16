@@ -88,7 +88,7 @@ The deploy script refuses to ship if any of these are in the bundle.
 | `tools/build_study_sheets.mjs`, `tools/build-shelf-data.mjs` | Generate the per-sitting files and the shelf data |
 | `tools/supabase-*.sql` | Database migrations, run by hand in the Supabase SQL editor |
 | `tools/verify/` | The regression suite behind `npm test`, plus screenshot helpers. `run_browser_checks.mjs` runs the browser checks (`npm run test:browser`), `verify_wiring.mjs` fails when a `verify_*.mjs` file is run nowhere, and `verify_equivalence.mjs` proves that a move changed no code or CSS rule |
-| `tools/storage-keys.mjs` | The list of every browser storage key, with which ones sign-out and account deletion clear. `tests/unit/storage-keys.test.mjs` checks it against the code, `privacy.html`, `PERSONAL_KEYS` and `SITE_KEYS` |
+| `tools/storage-keys.mjs` | The list of every browser storage key, with which ones sign-out and account deletion clear, and (`deleteOwnAccount`) the two stash prefixes cleared only for the deleted account's own id. `tests/unit/storage-keys.test.mjs` checks it against the code, `privacy.html`, `PERSONAL_KEYS` and `SITE_KEYS` |
 | `tools/measure_baseline.mjs` | Prints file sizes, function lengths and duplicate function names (see [the architecture baseline](architecture-baseline.md)) |
 | `tools/security/run_penetration_audit.mjs` | `npm run test:security` |
 | `tools/smoke.mjs` | Live-site smoke test (CI after each deploy, and every 15 minutes) |
