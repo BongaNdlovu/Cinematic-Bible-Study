@@ -90,7 +90,7 @@ function clean(t) {
     .replace(/&quot;/g, '"').replace(/&#39;/g, "'").replace(/&nbsp;/g, ' ').replace(/&hellip;/g, '…')
     .replace(/<[^>]*>/g, '');
 }
-function esc(t) { return String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
+function esc(t) { return window.SiteCore.escapeHtml(t); }
 function split(t) { t = clean(t); const a = t.indexOf(':'); return a > 0 ? [t.slice(0, a).trim(), t.slice(a + 1).trim()] : [t.trim(), '']; }
 function cap(t) { return clean(t).toLowerCase().replace(/(^|[\s·])(\w)/g, (m, a, b) => a + b.toUpperCase()); }
 function num(t) { const m = /sheet\s*0*(\d+)/i.exec(clean(t)); return m ? Number(m[1]) : 0; }
@@ -2575,10 +2575,7 @@ function invitedSitting() {
   }
 }
 
-function signedIn() {
-  const auth = window.ScrollAuth;
-  try { return !!(auth && typeof auth.getUser === 'function' && auth.getUser()); } catch (e) { return false; }
-}
+function signedIn() { return window.SiteCore.signedIn(); }
 
 function afterDomReady() {
   return new Promise((resolve) => {

@@ -6,13 +6,9 @@
   let busy = false;
   let generation = 0;
 
-  function client() {
-    return window.ScrollAuth && window.ScrollAuth.getClient && window.ScrollAuth.getClient();
-  }
+  function client() { return window.SiteCore.authClient(); }
 
-  function signedIn() {
-    return window.ScrollAuth && window.ScrollAuth.getUser && window.ScrollAuth.getUser();
-  }
+  function signedIn() { return window.SiteCore.signedIn(); }
 
   function node(id) {
     return document.getElementById(id);

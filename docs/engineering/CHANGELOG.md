@@ -23,6 +23,7 @@ Entry template:
 - `js/shared/account.js`: `confirmDelete` reads the signed-in user's id before deletion and passes it to `clearSiteStorage(userId)`, which now also removes `baProgressStash:<id>` and `baStudySyncStash:<id>`. Other accounts' stashes are left alone. With no id, no stash key is removed.
 - `tests/unit/account-delete-storage.test.mjs` (new): runs the real storage-clearing functions from `account.js` against fake storage. It fails 2 of 3 on the old code and passes 3 of 3 now.
 - `privacy.html`: the storage table says deletion removes your own set-aside changes and keeps other accounts'.
+- From `arch/phase-1-shared-helpers` up: `tools/storage-keys.mjs` marks the two stash prefixes `deleteOwnAccount`, and `tests/unit/storage-keys.test.mjs` checks that they match `OWN_STASH_PREFIXES` in `account.js`. Chapter 04's open question on this is replaced by the decision.
 
 **Handbook updated:** 04 (personal data on the device).
 
@@ -30,6 +31,30 @@ Entry template:
 
 **Status:** committed on `arch/phase-0-safety-net`, merged upward. Not deployed.
 
+## 2026-11-16 — Architecture plan, Phase 1: one copy of each shared helper
+
+**Why:** Small helpers had been copied from file to file and had drifted apart. There were 14 HTML escapers, and 8 of them did not escape `'`. There were 4 local-host checks (they decide when the local test sign-in is honoured), 3 different focus traps, and the sign-in reads were copied into 10 files. A fix to one copy never reached the others.
+
+**What changed:**
+
+- `js/shared/core.js` (new): `escapeHtml`, `isLocalDevHost`, `currentUser`, `signedIn`, `authClient`, `focusableIn` and `trapFocus` on `window.SiteCore`. It loads first, without `defer`, on every page except the `shelf.html` redirect. It reads `ScrollAuth` when called, not when loaded, because `journey.js` and `human-pass.js` load before `auth.js`. That load order is why the plan's "put it in `auth.js`" was not followed.
+- 32 local copies in 21 files now call `window.SiteCore` and keep their names, so no call site changed: 13 escapers, 5 `signedIn`, 4 `currentUser`, 7 client getters and 3 `isLocalDevHost`. The inline escape at `study-app.js:258` calls `SiteCore.escapeHtml` directly.
+- `js/shared/insights.js`: its local-host check also counted `*.local` hosts for analytics. It is now `analyticsOffHost()`: the shared check plus `*.local`, as before.
+- One focus trap for `task-flow.js`, `term-overlay.js` and `mindmap.js`. **Behaviour change:** the three now agree. Tab wraps at the first and last visible control, and focus that has left the dialog is brought back. The mind map now includes form fields, and controls inside hidden panels are skipped.
+- `tools/storage-keys.mjs` (new) lists 61 storage keys and prefixes, with which ones sign-out and account deletion clear. `tests/unit/storage-keys.test.mjs` checks it against the code, `privacy.html`, `PERSONAL_KEYS` and `SITE_KEYS`. **Decision:** the plan asked for constants in the code instead of typed strings. A mistyped constant is `undefined`, and `localStorage.getItem(undefined)` silently uses the key `"undefined"`, so constants alone would not catch the typo the plan worries about. The test does: a mistyped key fails it and names the file. The 212 storage calls were left as they are.
+- `privacy.html`: seven keys the site already stored were missing from the storage table (three read-aloud settings, `daniel-shelf:last`, `scroll_section`, `cmap-key-open`, `cmap-globe-intro`). They are added to the preferences row, and the effective date is now 16 November 2026.
+- Tests that load browser files in a Node sandbox now load `core.js` first, as a page does: `tests/unit/audit-fixes`, `human-pass`, `mfa-card`, `sentry`, `sid-report`, `state-fixes`, and `tools/verify/verify_insights.mjs`.
+- `tests/unit/core.test.mjs` (12 tests) and `tests/unit/storage-keys.test.mjs` (6 tests).
+
+**Handbook updated:** 03 (`core.js`, `tools/storage-keys.mjs`, where new work goes), 04 (one copy of each check, the storage-key test, an open question), 06 (focus trap).
+
+**Also in this change (test scripts only):** `tools/verify/verify_mindmap_fullscreen.mjs` checked the reference row for its `is-hit` mark, which `study-app.js` removes after 1.8 s (line 4406). Under load the check ran later than that and failed 2 of 50 assertions. It now records the row the moment it is marked. A comment audit removed six comments that only restated empty `catch` blocks in `verify_book_reader.mjs`, `verify_mindmap.mjs` and `verify_mindmap_fullscreen.mjs`.
+
+**Checked here:** `npm run lint` exits 0. `npm run test:unit` passes 130 of 130 (18 new). Every script in `npm test` passes, run one at a time. `npm run test:browser` on Windows: 28 of 29; the one failure (`verify_mindmap_fullscreen`, the timing race above) then passed 50 of 50 assertions three times in a row after the fix. Each new guard was made to fail on purpose: a mistyped `'daniel_historicist_mastry'` in `competency.js` failed the storage-key test and named the file, and removing `baDeskReceipts` from `PERSONAL_KEYS` failed it too.
+
+**Not checked:** a full `npm run test:browser` run after the timing fix; CI on GitHub for this branch; a screen-reader pass of the new focus trap.
+
+**Status:** on branch `arch/phase-1-shared-helpers`, not deployed.
 ## 2026-11-16 — Browser checks hardened for CI
 
 **Why:** On GitHub's Linux runner, 22 of 29 browser checks passed. The failures were timing: scripts gave their own server 6 s to start, slept a fixed 1.6 s before talking to Chrome, and waited 12.5 s for a 3D model or 15 s for globe pins under software rendering. One check (`verify_mindmap_fullscreen`) raced a 1.8 s highlight.

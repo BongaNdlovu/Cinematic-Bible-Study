@@ -597,17 +597,16 @@
     showProfile();
   }
 
-  function isLocalDevHost() {
+  function analyticsOffHost() {
     try {
-      const h = location.hostname;
-      return h === 'localhost' || h === '127.0.0.1' || h === '::1' || h.endsWith('.local');
+      return window.SiteCore.isLocalDevHost() || location.hostname.endsWith('.local');
     } catch (err) {
       return false;
     }
   }
 
   function injectBeacon() {
-    if (isLocalDevHost()) return;
+    if (analyticsOffHost()) return;
     const token = window.BAAuthConfig && window.BAAuthConfig.cfAnalyticsToken;
     if (!token || optedOut() || !consented() || document.getElementById('cf-insight-beacon')) return;
     const s = document.createElement('script');

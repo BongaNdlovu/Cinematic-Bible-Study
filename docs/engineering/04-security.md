@@ -1,6 +1,6 @@
 # 4. Security
 
-**Last verified:** 16 November 2026 (account deletion and device storage), 15 November 2026 (Sign-in and roles section), 13 November 2026 (Privacy and consent section). The live database facts below come from read-only queries run on 12 November 2026. Everything else comes from the repository.
+**Last verified:** 16 November 2026 (Privacy and consent section, account deletion and device storage, and the helper notes under Sign-in and roles), 15 November 2026 (Sign-in and roles section). The live database facts below come from read-only queries run on 12 November 2026. Everything else comes from the repository.
 
 ## The model in one paragraph
 
@@ -100,6 +100,8 @@ If the gate cannot be reached, a page read is still served. A non-GET request, `
 
 **Guests (since 15 November 2026)** reach no sitting: `study.html`, `map.html` and `gallery.html` all call `requireMember()` and send a guest to the account page. This is an interface rule. The lesson text ships as static files (`js/study/sheets/`), so it is not secret; answer checking, progress, notes and certificates stay protected by the database as before.
 
+**One copy of each check (16 November 2026).** `js/shared/core.js` holds the only `isLocalDevHost()` (true for `localhost`, `127.0.0.1` and `[::1]` only; it decides when the local test sign-in `baQaMockSession` is honoured) and the only `escapeHtml()` (escapes `& < > " '`). Before, there were 4 local-host checks (the one in `js/shared/insights.js` used a different rule) and 14 escapers (13 functions and one inline in `study-app.js`). Eight of the 14 left `'` unescaped, and the inline one also left `"` unescaped. Every old copy now calls `window.SiteCore`. Analytics stay off on a wider set of hosts: `js/shared/insights.js` `analyticsOffHost()` is the local-host check plus any `*.local` host, as before.
+
 The client-side role checks (`ScrollAuth.isModerator()`, `journey.js` `isAdmin()`) only decide what the interface shows. Every moderator action is checked again in the database.
 
 ## Row-level security (live database, 12 November 2026)
@@ -156,7 +158,8 @@ Function permissions checked live: guests (`anon`) **can** call `exhibit_public_
 
 - Analytics events, surveys and the Cloudflare beacon run only after the visitor allows analytics (`sodConsent`). Do-Not-Track or Global Privacy Control records analytics as declined when no choice has been made yet.
 - Operational error reports (`js/shared/ops.js`) and Sentry run without analytics consent, on the legal basis of **legitimate interests (keeping the site working)**, as stated in `privacy.html`. This is a deliberate decision. Without consent, ops reports use a visit-only ID that is deleted when the tab closes. Sentry stores no replays.
-- `privacy.html` lists every storage key the site writes. Update it whenever a key is added.
+- `privacy.html` lists every storage key the site writes. `tools/storage-keys.mjs` is the single list, and `tests/unit/storage-keys.test.mjs` fails when the code uses a key that is not on it (a typo shows up here), when `privacy.html`, `PERSONAL_KEYS` (sign-out) or `SITE_KEYS` (account deletion) disagree with it, or when a key on it is no longer used. On 16 November 2026 the test found seven keys missing from `privacy.html` (`daniel_audio_orb_v1`, `daniel_audio_rate_v1`, `daniel_audio_play_hint_v1`, `daniel-shelf:last`, `scroll_section`, `cmap-key-open`, `cmap-globe-intro`). They are display and position preferences; they were added to the preferences row and the policy's effective date moved to 16 November 2026.
+- **Decided (16 November 2026):** deleting an account clears only that account's own stash keys, not other accounts' (see the stash line above).
 - The right to object in `privacy.html` covers legitimate-interest uses only. Study events are consent-based, so readers stop them by withdrawing consent (13 November 2026).
 - Google Fonts load from `fonts.googleapis.com` on every page before any consent choice, on the basis of legitimate interests. This is disclosed but not yet changed. Self-hosting the fonts would remove it.
 

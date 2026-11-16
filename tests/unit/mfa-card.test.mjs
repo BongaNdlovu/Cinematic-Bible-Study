@@ -4,6 +4,7 @@ import fs from "node:fs";
 import vm from "node:vm";
 
 const SRC = fs.readFileSync(new URL("../../js/shared/mfa.js", import.meta.url), "utf8");
+const CORE = fs.readFileSync(new URL("../../js/shared/core.js", import.meta.url), "utf8");
 
 function el(hidden) {
   return { hidden, textContent: "", value: "", addEventListener() {}, focus() {} };
@@ -32,7 +33,9 @@ async function mount({ rpc, user = { id: "u1" }, factors = [] }) {
     ScrollAuth: { getClient: () => db, getUser: () => user, onChange() {}, ready: () => Promise.resolve() }
   };
   const document = { readyState: "complete", getElementById: (id) => nodes[id] || null, addEventListener() {} };
-  vm.runInNewContext(SRC, { window, document, Promise });
+  const box = { window, document, Promise };
+  vm.runInNewContext(CORE, box);
+  vm.runInNewContext(SRC, box);
   await new Promise((r) => setTimeout(r, 20));
   return { nodes, calls, shown: nodes["account-mfa"].hidden === false, note: nodes["account-mfa-note"].textContent };
 }
@@ -105,7 +108,9 @@ test("a wrong authenticator code during setup keeps the code form open", async (
   };
   const window = { ScrollAuth: { getClient: () => db, getUser: () => ({ id: "u1" }), onChange() {}, ready: () => Promise.resolve() } };
   const document = { readyState: "complete", getElementById: (id) => nodes[id] || null, addEventListener() {} };
-  vm.runInNewContext(SRC, { window, document, Promise });
+  const box = { window, document, Promise };
+  vm.runInNewContext(CORE, box);
+  vm.runInNewContext(SRC, box);
   await settle();
   handlers["account-mfa-start:click"]();
   await settle();
@@ -125,6 +130,7 @@ test("loading saved progress does not queue a cloud save when nothing changed", 
     BAJourney: { load: () => ({ completedSheets: [1] }), save: () => { window.ProgressSync.syncNow(); return {}; } }
   };
   const localStorage = memoryStorage({ daniel_historicist_mastery: "[1]", daniel_workbench_v1: "{}", daniel_competency_telemetry_v1: "{}", baProgressAccountId: "u1" });
+  vm.runInNewContext(CORE, { window });
   vm.runInNewContext(read("js/shared/progress-sync.js"), { window, localStorage, sessionStorage: memoryStorage(), document: { readyState: "complete" }, ...idleTimers });
   await window.ProgressSync.pullAndMerge();
   assert.equal(window.ProgressSync.hasPending(), false);
@@ -139,6 +145,7 @@ test("a notes save keeps a newer note another device saved since the last load",
     })
   };
   const window = { addEventListener() {}, ScrollAuth: { getClient: () => db, getUser: () => ({ id: "u1" }), ready: () => new Promise(() => {}), onChange() {} } };
+  vm.runInNewContext(CORE, { window });
   vm.runInNewContext(read("js/shared/study-sync.js"), { window, localStorage: memoryStorage(), document: { readyState: "complete" }, ...idleTimers });
   await window.StudySync.pullAndMerge();
   server = { notes: { "3": { body: "B", updatedAt: 5 } }, bookmarks: [] };
@@ -150,6 +157,7 @@ test("a notes save keeps a newer note another device saved since the last load",
 const bible = { ok: true, status: 200, json: () => Promise.resolve({ books: { Daniel: { "2": { "38": "Thou art this head of gold." } } } }) };
 
 function scripture(window, fetch) {
+  vm.runInNewContext(CORE, { window });
   vm.runInNewContext(read("js/study/scripture.js"), { window, fetch, localStorage: memoryStorage() });
   return window.BAScripture;
 }

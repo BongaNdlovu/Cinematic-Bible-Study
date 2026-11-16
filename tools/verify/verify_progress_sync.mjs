@@ -111,7 +111,9 @@ global.window = {
 global.document = { readyState: "loading", addEventListener: () => {} };
 global.location = global.window.location;
 
+new Function(fs.readFileSync(path.join(ROOT, "js/shared/core.js"), "utf8"))();
 new Function(fs.readFileSync(path.join(ROOT, "js/shared/journey.js"), "utf8"))();
+new Function(fs.readFileSync(path.join(ROOT, "js/shared/core.js"), "utf8"))();
 new Function(fs.readFileSync(path.join(ROOT, "js/shared/progress-sync.js"), "utf8"))();
 
 const ProgressSync = global.window.ProgressSync;

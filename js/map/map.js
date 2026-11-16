@@ -1016,9 +1016,7 @@
         "<figcaption><span>" + (v.approx ? "Approximate area" : "From above") + " · Imagery © Esri</span><button type='button' class='cmap-sat-go'>Explore from above →</button></figcaption></figure>";
     }
 
-    function esc(s) {
-      return String(s == null ? "" : s).replace(/[&<>"']/g, (ch) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "\"": "&quot;", "'": "&#39;" })[ch]);
-    }
+    function esc(s) { return window.SiteCore.escapeHtml(s); }
 
     function siteExtrasHtml(d) {
       if (!cinematic || d.lat == null) return "";

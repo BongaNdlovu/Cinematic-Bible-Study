@@ -166,6 +166,7 @@ function loadPassModule(state) {
     fetch: async (url, init) => { state.posted.push({ url, body: JSON.parse(init.body) }); return { ok: state.grantOk, json: async () => ({ ok: true, until: PASS_UNTIL }) }; },
     setTimeout, clearTimeout, Date, Number, Promise, JSON, String
   };
+  vm.runInNewContext(fs.readFileSync(new URL("../../js/shared/core.js", import.meta.url), "utf8"), sandbox);
   vm.runInNewContext(fs.readFileSync(new URL("../../js/shared/human-pass.js", import.meta.url), "utf8"), sandbox);
   return { HumanPass: win.HumanPass, store };
 }
@@ -224,7 +225,9 @@ function pageSandbox({ user, passReady }) {
   };
   if (passReady !== undefined) ctx.HumanPass = { ready: () => Promise.resolve(passReady) };
   ctx.window = ctx;
-  return { ctx: vm.createContext(ctx), inserts };
+  const context = vm.createContext(ctx);
+  vm.runInContext(readSource("js/shared/core.js"), context);
+  return { ctx: context, inserts };
 }
 
 const settle = () => new Promise((resolve) => setImmediate(resolve));

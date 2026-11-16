@@ -124,9 +124,7 @@
       '<path d="M11 15.5l3.5 3.5 6.5-6.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>' +
     "</svg>";
 
-  function esc(s) {
-    return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; });
-  }
+  function esc(s) { return window.SiteCore.escapeHtml(s); }
 
   function navLink(link, active) {
     const isActive = !!link.page && link.page === active;

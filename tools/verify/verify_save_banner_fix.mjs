@@ -82,7 +82,9 @@ global.document = {
 global.location = global.window.location;
 
 // Load journey & progress-sync
+new Function(fs.readFileSync(path.join(ROOT, "js/shared/core.js"), "utf8"))();
 new Function(fs.readFileSync(path.join(ROOT, "js/shared/journey.js"), "utf8"))();
+new Function(fs.readFileSync(path.join(ROOT, "js/shared/core.js"), "utf8"))();
 new Function(fs.readFileSync(path.join(ROOT, "js/shared/progress-sync.js"), "utf8"))();
 
 const ProgressSync = global.window.ProgressSync;
@@ -177,6 +179,7 @@ console.log("\nTest 6: sessionStorage baLastPushAt preservation across navigatio
 simulatedTime = 2_000_000;
 sessionStore.baLastPushAt = String(simulatedTime);
 // Fresh page load (progress-sync re-evaluates):
+new Function(fs.readFileSync(path.join(ROOT, "js/shared/core.js"), "utf8"))();
 new Function(fs.readFileSync(path.join(ROOT, "js/shared/progress-sync.js"), "utf8"))();
 const NavigatedSync = global.window.ProgressSync;
 // 2 seconds later (within 6 second window):
@@ -193,6 +196,7 @@ localStore.baProgressOutbox = "test-outbox";
 sessionStore.baLastPushAt = "12345";
 
 // Load actual auth.js
+new Function(fs.readFileSync(path.join(ROOT, "js/shared/core.js"), "utf8"))();
 new Function(fs.readFileSync(path.join(ROOT, "js/shared/auth.js"), "utf8"))();
 
 // Now simulate active save miss error banner
@@ -268,6 +272,7 @@ delete sessionStore.baLastPushAt;
 global.document.readyState = "loading";
 global.window.ScrollAuth.getClient = () => mockClient;
 global.window.ScrollAuth.getUser = () => ({ id: "learner-101" });
+new Function(fs.readFileSync(path.join(ROOT, "js/shared/core.js"), "utf8"))();
 new Function(fs.readFileSync(path.join(ROOT, "js/shared/progress-sync.js"), "utf8"))();
 const TabBSync = global.window.ProgressSync;
 // 2 seconds later in Tab B (inside 6s window):
@@ -366,6 +371,7 @@ console.log("\nTest 14: Auth requests still time out without AbortSignal.timeout
       return { auth: { onAuthStateChange: () => {}, getSession: () => Promise.resolve({ data: { session: null } }) } };
     }
   };
+  new Function(fs.readFileSync(path.join(ROOT, "js/shared/core.js"), "utf8"))();
   new Function(fs.readFileSync(path.join(ROOT, "js/shared/auth.js"), "utf8"))();
   assert.ok(clientOptions && clientOptions.global && typeof clientOptions.global.fetch === "function", "auth.js must hand Supabase a fetch override");
   await clientOptions.global.fetch("https://db.example.test/rest/v1/x", {});

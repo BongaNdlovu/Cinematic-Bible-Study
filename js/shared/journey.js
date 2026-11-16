@@ -331,14 +331,7 @@
     }
   }
 
-  function isLocalDevHost() {
-    try {
-      const h = location.hostname;
-      return h === "localhost" || h === "127.0.0.1" || h === "[::1]";
-    } catch (e) {
-      return false;
-    }
-  }
+  function isLocalDevHost() { return window.SiteCore.isLocalDevHost(); }
 
   function previewAllContent() {
     // Hard unlock for local emergency review only (never ship with this true).

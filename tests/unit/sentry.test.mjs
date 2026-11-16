@@ -135,7 +135,7 @@ for (const rel of ["../../functions/_middleware.js", "../../workers/exhibit-rate
 }
 
 const SHARED = (name) => fs.readFileSync(new URL(`../../js/shared/${name}`, import.meta.url), "utf8");
-const SIGN_OUT_SCRIPTS = ["journey.js", "auth.js", "progress-sync.js", "study-sync.js"].map(SHARED);
+const SIGN_OUT_SCRIPTS = ["core.js", "journey.js", "auth.js", "progress-sync.js", "study-sync.js"].map(SHARED);
 const SESSION_KEY = "sb-test-auth-token";
 const LEARNER = { id: "learner-1", email: "reader@example.org" };
 const CLOUD_ROW = {
