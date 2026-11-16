@@ -1,0 +1,247 @@
+/* Paper = warm parchment. White = actual white. */
+    body.paper-mode,
+    body.white-mode {
+      color: #171717 !important;
+    }
+    body.paper-mode .instrument-tabs button,
+    body.white-mode .instrument-tabs button { color: #525252; }
+    body.paper-mode .instrument-tabs button.active,
+    body.white-mode .instrument-tabs button.active {
+      color: #8a6a14;
+      background: rgba(201, 162, 39, 0.12);
+    }
+    body.paper-mode .epoch-facts .fact b,
+    body.white-mode .epoch-facts .fact b,
+    body.paper-mode .sitting-spine,
+    body.white-mode .sitting-spine { color: #8a6a14; }
+    body.paper-mode .sitting-spine b,
+    body.white-mode .sitting-spine b,
+    body.paper-mode .step-rail strong,
+    body.white-mode .step-rail strong { color: #3f3f46; }
+    body.paper-mode .epoch-facts .fact p,
+    body.paper-mode .epoch-facts .fact span,
+    body.white-mode .epoch-facts .fact p,
+    body.white-mode .epoch-facts .fact span,
+    body.paper-mode .study-path p,
+    body.paper-mode .study-path li,
+    body.white-mode .study-path p,
+    body.white-mode .study-path li { color: #3f3f46; }
+    body.paper-mode .insight-card h4,
+    body.white-mode .insight-card h4,
+    body.paper-mode .study-path h3,
+    body.white-mode .study-path h3,
+    body.paper-mode .scripture-chapter h4,
+    body.paper-mode .scripture-text,
+    body.paper-mode .load-bearing h4,
+    body.paper-mode .load-bearing-text,
+    body.white-mode .scripture-chapter h4,
+    body.white-mode .scripture-text,
+    body.white-mode .load-bearing h4,
+    body.white-mode .load-bearing-text,
+    body.paper-mode .strong-hits strong,
+    body.paper-mode .strong-other strong,
+    body.paper-mode .strong-dock h4,
+    body.white-mode .strong-hits strong,
+    body.white-mode .strong-other strong,
+    body.white-mode .strong-dock h4 { color: #171717; }
+    body.paper-mode .insight-card p,
+    body.white-mode .insight-card p,
+    body.paper-mode .scripture-empty,
+    body.paper-mode .strong-hint,
+    body.paper-mode .strong-gloss,
+    body.paper-mode .strong-why,
+    body.paper-mode .strong-derivation,
+    body.paper-mode .strong-hits,
+    body.paper-mode .strong-other,
+    body.paper-mode .load-bearing-connects,
+    body.paper-mode .load-bearing-sitting,
+    body.paper-mode .load-bearing-plain,
+    body.paper-mode .load-bearing-links li,
+    body.white-mode .scripture-empty,
+    body.white-mode .strong-hint,
+    body.white-mode .strong-gloss,
+    body.white-mode .strong-why,
+    body.white-mode .strong-derivation,
+    body.white-mode .strong-hits,
+    body.white-mode .strong-other,
+    body.white-mode .load-bearing-connects,
+    body.white-mode .load-bearing-sitting,
+    body.white-mode .load-bearing-plain,
+    body.white-mode .load-bearing-links li { color: #525252; }
+    body.paper-mode .study-path h4,
+    body.white-mode .study-path h4,
+    body.paper-mode .map-enter-full,
+    body.white-mode .map-enter-full { color: #8a6a14; }
+    body.paper-mode .scripture-toggle.is-on,
+    body.white-mode .scripture-toggle.is-on {
+      color: #8a6a14;
+      background: rgba(201, 162, 39, 0.16);
+    }
+    body.paper-mode .weather-canvas:not(.opacity-0),
+    body.white-mode .weather-canvas:not(.opacity-0) {
+      mix-blend-mode: normal;
+      opacity: 0.75;
+    }
+
+    body.paper-mode {
+      background:
+        radial-gradient(ellipse at 50% 0%, rgba(255,250,236,0.95), transparent 46%),
+        repeating-linear-gradient(0deg, rgba(92,68,32,0.028) 0, rgba(92,68,32,0.028) 1px, transparent 1px, transparent 5px),
+        linear-gradient(180deg, #F7F1E4 0%, #F3EBDA 42%, #EDE4D0 100%) !important;
+    }
+    body.paper-mode::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0.22;
+      mix-blend-mode: multiply;
+      background-image:
+        radial-gradient(rgba(92,68,32,0.14) 0.55px, transparent 0.85px),
+        radial-gradient(rgba(160,130,70,0.08) 0.7px, transparent 1px);
+      background-size: 6px 6px, 11px 11px;
+      background-position: 0 0, 3px 5px;
+    }
+    body.paper-mode header,
+    body.paper-mode #pomo-dock,
+    body.paper-mode #toc-drawer,
+    body.paper-mode footer {
+      background: rgba(247, 241, 228, 0.94) !important;
+      border-color: rgba(160, 122, 42, 0.28) !important;
+    }
+    body.paper-mode .sitting-spine,
+    body.paper-mode .study-instruments,
+    body.paper-mode .study-path,
+    body.paper-mode .sheet-verify,
+    body.paper-mode .sitting-path {
+      background: rgba(247, 241, 228, 0.86);
+      border-color: rgba(160, 122, 42, 0.38);
+    }
+    body.paper-mode .epoch-facts .fact,
+    body.paper-mode .insight-card,
+    body.paper-mode .strong-dock,
+    body.paper-mode .load-bearing {
+      background: rgba(255, 250, 236, 0.78);
+      border-color: rgba(160, 122, 42, 0.28);
+    }
+    body.paper-mode .horizon-arrow,
+    body.paper-mode .step-rail button,
+    body.paper-mode .scripture-actions button,
+    body.paper-mode .strong-close {
+      background: rgba(247, 241, 228, 0.94);
+      color: #8a6a14;
+      border-color: rgba(160, 122, 42, 0.42);
+    }
+    body.paper-mode .map-enter-full { background: rgba(201, 162, 39, 0.1); }
+    body.paper-mode .sheet-map-list details,
+    body.white-mode .sheet-map-list details {
+      background: rgba(255, 250, 236, 0.7);
+    }
+    body.white-mode .sheet-map-list details { background: #fafafa; }
+
+    body.white-mode {
+      background: #ffffff !important;
+      background-color: #ffffff !important;
+      transition: none !important;
+      color: #171717 !important;
+    }
+    body.white-mode::before { display: none; }
+    body.white-mode header,
+    body.white-mode #pomo-dock,
+    body.white-mode #toc-drawer,
+    body.white-mode footer {
+      background: #ffffff !important;
+      border-color: #e5e5e5 !important;
+    }
+    body.white-mode .sitting-spine,
+    body.white-mode .study-instruments,
+    body.white-mode .study-path,
+    body.white-mode .sheet-verify,
+    body.white-mode .sitting-path {
+      background: #ffffff;
+      border-color: #e5e5e5;
+    }
+    body.white-mode .epoch-facts .fact,
+    body.white-mode .insight-card,
+    body.white-mode .strong-dock,
+    body.white-mode .load-bearing {
+      background: #fafafa;
+      border-color: #e5e5e5;
+    }
+    body.white-mode .horizon-panel {
+      background: #ffffff !important;
+      border-color: #e5e5e5 !important;
+    }
+    body.white-mode .horizon-arrow,
+    body.white-mode .step-rail button,
+    body.white-mode .scripture-actions button,
+    body.white-mode .strong-close {
+      background: #ffffff;
+      color: #404040;
+      border-color: #d4d4d4;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+    }
+    body.white-mode .horizon-arrow:hover:not(:disabled) {
+      background: #f5f5f5;
+      border-color: #a3a3a3;
+    }
+    body.white-mode .map-enter-full {
+      background: #f5f5f5;
+      color: #404040;
+    }
+    body.white-mode .instrument-tabs { border-bottom-color: #e5e5e5; }
+    body.white-mode .horizon-card {
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.08);
+    }
+    body.white-mode .bg-paper-50,
+    body.white-mode .bg-paper-50\/95,
+    body.white-mode .bg-paper-100,
+    body.white-mode .bg-paper-100\/40,
+    body.white-mode .bg-paper-100\/60,
+    body.white-mode .bg-paper-100\/80,
+    body.white-mode .bg-paper-100\/90 {
+      background-color: #ffffff !important;
+    }
+    body.white-mode .bg-paper-200,
+    body.white-mode .bg-paper-200\/35,
+    body.white-mode .bg-paper-200\/60 {
+      background-color: #f5f5f5 !important;
+    }
+    body.white-mode .border-paper-200,
+    body.white-mode .border-paper-200\/80,
+    body.white-mode .border-paper-300,
+    body.white-mode .border-paper-300\/80 {
+      border-color: #e5e5e5 !important;
+    }
+
+    .study-instruments {
+      margin: 0 0 2.5rem;
+      border: 1px solid rgba(201,162,39,0.28);
+      border-radius: 16px;
+      overflow: hidden;
+      background: rgba(18,16,14,0.55);
+      backdrop-filter: blur(12px);
+    }
+    .instrument-tabs {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      border-bottom: 1px solid rgba(201,162,39,0.22);
+    }
+    .instrument-tabs button {
+      padding: 12px 8px;
+      font-family: Inter, sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #b5aa9d;
+      border-right: 1px solid rgba(201,162,39,0.12);
+    }
+    .instrument-tabs button:last-child { border-right: 0; }
+    .instrument-tabs button.active {
+      color: #e8d48a;
+      background: rgba(201,162,39,0.12);
+      box-shadow: inset 0 -2px 0 #c9a227;
+    }
+    .instrument-panel { display: none; padding: 18px 16px 20px; }
+    .instrument-panel.active { display: block; }

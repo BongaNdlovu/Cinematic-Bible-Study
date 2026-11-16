@@ -1,0 +1,558 @@
+/* Comparison: a matrix spec (`rows`) is a real <table>; other specs stay
+       parallel columns. Both share one style.
+       `.article-body p` and `h4` set font-size with !important (the text-size
+       control), so anything this standard sizes is a <span>, never a p or h4. */
+    .cmp {
+      --cmp-edge: rgba(197, 155, 39, 0.34);      /* the panels' edge */
+      --cmp-rule: rgba(197, 155, 39, 0.14);      /* the rule between two columns */
+      --cmp-hair: rgba(197, 155, 39, 0.22);      /* the rule between two rows */
+      --cmp-tile: rgba(255, 250, 236, 0.035);    /* fill, a shade above the ground */
+      --cmp-head: var(--chain-strong, #f7e6bd);  /* the serif italic head */
+      --cmp-ink: #f4ead8;    /* cell text */
+      --cmp-label: var(--chain-gold, #e4c56a);   /* the mono label over a head */
+      --cmp-dim: #8a8272;                        /* the row label, off the grid */
+      /* A length, never a percentage: a percentage inside clamp() on a
+         table-layout: fixed cell does not resolve and falls back to auto. */
+      --cmp-label-w: clamp(6.5rem, 3rem + 5vw, 9rem);
+      --cmp-serif: Newsreader, Georgia, serif;
+      --cmp-mono: "JetBrains Mono", ui-monospace, Consolas, monospace;
+    }
+    /* A column's role, and a column's identity: the one large thing on the plate. */
+    .cmp-role {
+      display: block;
+      margin: 0 0 0.5rem;
+      font-family: var(--cmp-mono);
+      font-size: 0.62rem;
+      font-weight: 500;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      line-height: 1.5;
+      color: var(--cmp-label);
+      opacity: 0.8;
+    }
+    .cmp-title {
+      display: block;
+      margin: 0;
+      font-family: var(--cmp-serif);
+      font-style: italic;
+      font-weight: 500;
+      font-size: clamp(1.1rem, 0.7rem + 0.9vw, 1.45rem);
+      line-height: 1.18;
+      letter-spacing: 0;
+      color: var(--cmp-head);
+      text-wrap: pretty;
+    }
+    .cmp-head > .chain-cite,
+    .cmp-centre > .chain-cite,
+    .cmp-matrix thead .chain-cite { margin: 0.65rem 0 0; }
+
+    /* --- (A) the matrix ------------------------------------------------------ */
+    /* The wrapper is where a sideways scroll would live if a head ever could not
+       wrap; today the columns wrap instead and it measures exactly the plate. */
+    .cmp-matrix-wrap {
+      min-width: 0;
+      max-width: 100%;
+    }
+    .cmp-matrix {
+      width: 100%;
+      border-collapse: collapse;
+      table-layout: fixed;
+      font-family: Inter, sans-serif;
+    }
+    .cmp-matrix th,
+    .cmp-matrix td {
+      min-width: 0;
+      overflow-wrap: break-word;
+      text-align: left;
+      /* The row label is top-aligned with the first line of its row, however much
+         either side wraps: aligning the first baselines is exactly that. */
+      vertical-align: baseline;
+      opacity: 0;
+      transform: translateY(6px);
+    }
+    /* The head row arrives on the figure's own `--t:0.1s`; every body row carries
+       its own, so eleven rows rise as one movement rather than as a queue. */
+    .chain.is-visible .cmp-matrix .cmp-headrow > *,
+    .chain.is-visible .cmp-matrix tbody tr > * {
+      animation: chain-rise 0.55s ease-out var(--t, 0s) forwards;
+    }
+    /* The head row is not part of the ruled body: each head floats over its own
+       column with air beneath it. */
+    .cmp-matrix .cmp-corner {
+      width: var(--cmp-label-w);
+      padding: 0;
+      border: 0;
+      background: none;
+    }
+    .cmp-matrix thead th { padding: 0 0.95rem 1.15rem; }
+    .cmp-matrix tbody th,
+    .cmp-matrix tbody td { padding-top: 0.85rem; padding-bottom: 0.85rem; }
+    .cmp-matrix tbody .cmp-rowhead {
+      padding-right: 0.95rem;
+      padding-left: 0;
+      border: 0;
+      background: none;
+      font-family: var(--cmp-mono);
+      font-size: 0.63rem;
+      font-weight: 500;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      line-height: 1.5;
+      color: var(--cmp-dim);
+    }
+    /* The panels. Adjacent cells' 1px edges collapse into one shared edge, so a
+       run of columns reads as a single ruled grid rather than a stack of boxes. */
+    .cmp-matrix tbody td {
+      padding-right: 0.95rem;
+      padding-left: 0.95rem;
+      border: 1px solid var(--cmp-edge);
+      border-top: 0;
+      border-bottom-color: var(--cmp-hair);
+      background: var(--cmp-tile);
+      font-size: 0.9rem;
+      line-height: 1.5;
+      color: var(--cmp-ink);
+      text-wrap: pretty;
+    }
+    /* The head's own rule closes the top of every panel and the last row closes
+       the bottom, so the ruled body has four edges and no doubled line. */
+    .cmp-matrix tbody tr:first-child td { border-top: 1px solid var(--cmp-edge); }
+    .cmp-matrix tbody tr:last-child td { border-bottom: 1px solid var(--cmp-edge); }
+
+    /* --- (B) parallel columns ------------------------------------------------ */
+    .cmp-grid {
+      display: grid;
+      grid-template-columns: repeat(var(--cmp-cols, 2), minmax(0, 1fr));
+      align-items: stretch;
+      row-gap: 1.15rem;
+    }
+    /* A head is over its column, outside the ruled body — the same place the
+       matrix puts its heads. */
+    .cmp-head {
+      grid-row: 1;
+      min-width: 0;
+      padding: 0 1.3rem;
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    .chain.is-visible .cmp-head { animation: chain-rise 0.6s ease-out var(--t) forwards; }
+    /* The panels are one ruled band under the heads. Each draws its own right
+       edge and the first draws the left, so neighbours butt on one shared line
+       rather than doubling it. */
+    .cmp-col {
+      grid-row: 2;
+      min-width: 0;
+      padding: 1.05rem 1.3rem 1.15rem;
+      border-top: 1px solid var(--cmp-edge);
+      border-right: 1px solid var(--cmp-edge);
+      border-bottom: 1px solid var(--cmp-edge);
+      background: linear-gradient(var(--cmp-tile), rgba(255, 250, 236, 0.012));
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    .cmp-col.is-first { border-left: 1px solid var(--cmp-edge); }
+    .chain.is-visible .cmp-col { animation: chain-rise 0.6s ease-out var(--t) forwards; }
+    .cmp-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+    }
+    .cmp-list li {
+      position: relative;
+      padding-left: 1.05rem;
+      font-family: Inter, sans-serif;
+      font-size: 0.9rem;
+      line-height: 1.5;
+      color: var(--cmp-ink);
+      text-wrap: pretty;
+    }
+    .cmp-list li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.58em;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--cmp-label);
+      opacity: 0.7;
+    }
+    /* A comparison that branches from one labelled node: the node, a stem, then
+       the columns. */
+    .cmp-centre {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      max-width: 34rem;
+      margin: 0 auto;
+      padding: 1.05rem 1.3rem 1.15rem;
+      border: 1px solid var(--cmp-edge);
+      background:
+        radial-gradient(ellipse at 50% 0%, rgba(212, 175, 55, 0.14), transparent 62%),
+        var(--cmp-tile);
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    .chain.is-visible .cmp-centre { animation: chain-rise 0.6s ease-out var(--t) forwards; }
+    .cmp-centre .cmp-role { margin-bottom: 0.4rem; }
+    .cmp-centre .cmp-title {
+      font-family: "Newsreader", Georgia, serif;
+      font-size: clamp(1.02rem, 0.72rem + 0.7vw, 1.3rem);
+    }
+    .cmp-stem {
+      width: 1px;
+      height: 1.6rem;
+      margin: 0 auto;
+      background: linear-gradient(180deg, rgba(228, 197, 106, 0.75), rgba(212, 175, 55, 0.12));
+    }
+
+    /* --dfx-max and --dfx-align are read on the layer, so this block reaches
+       its layer with :has(). `safe center` centres a short matrix and
+       top-aligns a tall one so it scrolls. */
+    .chain.is-full:has(.cmp-matrix) {
+      --dfx-max: 1560px;
+      --dfx-align: center;
+    }
+    .chain.is-full:has(.cmp-grid) { --dfx-align: center; }
+    /* The layer is dark in every theme, so the palette is the plate's again: the
+       light themes' values would otherwise put dark ink on a dark ground. */
+    .chain.is-full .cmp,
+    body.paper-mode .chain.is-full .cmp,
+    body.white-mode .chain.is-full .cmp {
+      --cmp-edge: var(--dfx-line);
+      --cmp-rule: rgba(220, 178, 87, 0.16);
+      --cmp-hair: rgba(220, 178, 87, 0.16);
+      --cmp-tile: rgba(255, 250, 236, 0.028);
+      --cmp-head: var(--dfx-cream);
+      --cmp-ink: var(--dfx-cream);
+      --cmp-label: var(--dfx-gilt);
+      --cmp-dim: var(--dfx-dim);
+      --cmp-serif: var(--dfx-serif);
+      --cmp-mono: var(--dfx-mono);
+    }
+    .chain.is-full .cmp-title { font-size: clamp(1.35rem, 0.6rem + 1.35vw, 1.9rem); }
+    .chain.is-full .cmp-role { font-size: 0.68rem; }
+    .chain.is-full .cmp-head > .chain-cite,
+    .chain.is-full .cmp-centre > .chain-cite,
+    .chain.is-full .cmp-matrix thead .chain-cite { margin-top: 0.8rem; }
+    .chain.is-full .cmp-matrix { min-height: calc(100dvh - 22rem); }
+    .chain.is-full .cmp-matrix .cmp-corner { width: clamp(8.5rem, 13vw, 13rem); }
+    .chain.is-full .cmp-matrix thead th { padding: 0 1.4rem 1.9rem; }
+    .chain.is-full .cmp-matrix tbody th,
+    .chain.is-full .cmp-matrix tbody td { padding-top: 1.25rem; padding-bottom: 1.25rem; }
+    .chain.is-full .cmp-matrix tbody .cmp-rowhead {
+      padding-right: 1.3rem;
+      font-size: 0.68rem;
+    }
+    .chain.is-full .cmp-matrix tbody td {
+      padding-right: 1.4rem;
+      padding-left: 1.4rem;
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+    .chain.is-full .cmp-head { padding: 0 1.4rem; }
+    .chain.is-full .cmp-col { padding: 1.25rem 1.4rem 1.35rem; }
+    .chain.is-full .cmp-list li { font-size: 0.95rem; line-height: 1.55; }
+
+    /* Narrow: the parallel columns stack, and a matrix stops being a matrix.
+       Nothing is dropped — the matrix captions each value from `data-label`, the
+       column it came from, which is the contract the table's stacked layout uses
+       too. */
+    @media (max-width: 820px) {
+      .cmp-grid { grid-template-columns: minmax(0, 1fr); }
+      /* `order` puts each head back beside its own panel: without it a one-column
+         grid would print every head, then every panel. */
+      .cmp-head,
+      .cmp-col { grid-row: auto; }
+      .cmp-head {
+        order: calc(var(--cmp-i, 0) * 2);
+        padding: 0 0.15rem;
+      }
+      .cmp-col {
+        order: calc(var(--cmp-i, 0) * 2 + 1);
+        border-left: 1px solid var(--cmp-edge);
+      }
+    }
+    @media (max-width: 600px) {
+      .cmp-matrix { display: block; table-layout: auto; }
+      /* The head row stays in the accessibility tree — a table without its
+         `th[scope=col]` is not a table — but it is not printed twice: the caption
+         over each value is the cell's own `data-label`. */
+      /* The head row is hidden, not moved off screen: an off-screen head still
+         overflows a 390px page. Each value is captioned from `data-label`
+         instead. */
+      .cmp-matrix thead { display: none; }
+      .cmp-matrix tbody,
+      .cmp-matrix tbody tr,
+      .cmp-matrix tbody th,
+      .cmp-matrix tbody td { display: block; width: 100%; }
+      .cmp-matrix tbody tr { padding: 0.9rem 0 1rem; border-bottom: 1px solid var(--cmp-hair); }
+      .cmp-matrix tbody tr:last-child { border-bottom: 0; }
+      .cmp-matrix tbody .cmp-rowhead { padding: 0 0 0.55rem; font-size: 0.66rem; }
+      .cmp-matrix tbody td,
+      .cmp-matrix tbody tr:first-child td,
+      .cmp-matrix tbody tr:last-child td {
+        padding: 0 0 0.4rem;
+        border: 0;
+        background: none;
+      }
+      .cmp-matrix tbody td::before {
+        content: attr(data-label);
+        display: block;
+        padding-bottom: 0.1rem;
+        font-family: var(--cmp-mono);
+        font-size: 0.62rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--cmp-label);
+      }
+    }
+    /* The entrance is the figure's own (`is-visible`); a visitor who asked for
+       less motion gets the end state. */
+    @media (prefers-reduced-motion: reduce) {
+      .cmp-centre,
+      .cmp-stem,
+      .cmp-head,
+      .cmp-col,
+      .cmp-matrix th,
+      .cmp-matrix td {
+        opacity: 1 !important;
+        transform: none !important;
+        animation: none !important;
+      }
+    }
+    /* Table: monospace row labels on the page ground, serif italic column
+       heads, and bordered panels per column; no zebra stripes.
+       Each row is `.tbl-label` plus `.tbl-grid`, a td holding the row's values
+       as a grid on repeat(var(--tbl-cols), minmax(0, 1fr)), so heads stay over
+       their cells at any wrap. The grid must be the cell: the HTML parser moves
+       any non-table child of tr out of the table. */
+    .tbl {
+      --tbl-label-w: clamp(8.6rem, 18vw, 11.5rem); /* air the label column gets */
+      --tbl-cell-pad-y: 1.1rem; /* one vertical padding, so the label's first line
+                                   and its row's first line agree */
+      --tbl-cell-pad-x: 1.3rem;
+      --tbl-tile: rgba(255, 250, 236, 0.035); /* the panels' fill */
+      --tbl-grid-line: rgba(197, 155, 39, 0.22); /* the hairline between cells */
+      --tbl-panel-line: rgba(197, 155, 39, 0.34); /* the panel's own edge */
+      width: 100%;
+      border-collapse: collapse;
+      table-layout: fixed; /* fixed label column, equal data columns */
+      font-family: Inter, sans-serif;
+    }
+    .tbl-wrap { overflow-x: clip; }
+    /* `width` stays on every label cell, head row included: with table-layout:
+       fixed the first row sizes the columns. */
+    .tbl .tbl-label {
+      width: var(--tbl-label-w);
+      border: 0;
+      background: none;
+      text-align: left;
+      vertical-align: top;
+      font-family: var(--dfx-mono, "JetBrains Mono", monospace);
+      font-size: 0.66rem;
+      font-weight: 500;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      line-height: 1.6;
+      /* Dim, and it wraps: a three-word label is a label, not a reason to widen
+         the column. */
+      color: #e7d7b4;
+      white-space: normal;
+      overflow-wrap: break-word;
+    }
+    /* `padding-top` is the same `--tbl-cell-pad-y` the cells use, which is what
+       puts the label's first line level with the first line of the row it
+       introduces instead of floating in the middle of the row. */
+    .tbl tbody .tbl-label { padding: var(--tbl-cell-pad-y) 0 0; }
+    /* The head row's label cell is empty: it is the row axis's own cell and
+       nothing else, and it is given no height so it can never set the head row's
+       height — the serif heads do that. */
+    .tbl thead .tbl-label { padding: 0; line-height: 0; }
+    /* One grid per row, so a row's height is its tallest cell. Table row
+       stretching would make one row much taller than its neighbours. */
+    .tbl-grid {
+      display: grid;
+      grid-template-columns: repeat(var(--tbl-cols, 1), minmax(0, 1fr));
+      align-items: start;
+      padding: 0 0 0 1.1rem;
+      border: 1px solid var(--tbl-panel-line);
+      background: linear-gradient(var(--tbl-tile), rgba(255, 250, 236, 0.012));
+      vertical-align: top;
+    }
+    /* Head and cell share one measure so a long cell wraps inside its column
+       instead of widening it. */
+    .tbl .tbl-head,
+    .tbl .tbl-cell {
+      min-width: 0;
+      overflow-wrap: break-word;
+      text-wrap: pretty;
+      text-align: left;
+      vertical-align: top;
+    }
+    /* The column heads: serif, italic, cream, left-aligned over their column and
+       given room beneath them — the head is the one thing on the plate allowed to
+       be large. */
+    .tbl .tbl-head {
+      padding: 0 1.05rem 1.15rem;
+      font-family: var(--dfx-serif, 'Newsreader', Georgia, serif);
+      font-style: italic;
+      font-weight: 500;
+      font-size: clamp(1.1rem, 0.9rem + 0.62vw, 1.6rem);
+      line-height: 1.2;
+      letter-spacing: 0;
+      text-transform: none;
+      color: var(--dfx-cream, var(--chain-strong, #f7e6bd));
+    }
+    /* The head row is drawn at the top of the same ruled body it belongs to: no
+       panel of its own, only the line under it, so the columns run from the heads
+       down through every row unbroken. */
+    .tbl-grid.is-head {
+      padding-top: 0.3rem;
+      border: 0;
+      border-bottom: 1px solid var(--tbl-panel-line);
+      background: none;
+    }
+    .tbl .tbl-cell {
+      display: block;
+      padding: var(--tbl-cell-pad-y) var(--tbl-cell-pad-x);
+      border-bottom: 1px solid var(--tbl-grid-line);
+      font-family: Inter, sans-serif;
+      font-size: 0.95rem;
+      line-height: 1.5;
+      color: var(--chain-strong, #f6edd8);
+    }
+    /* The grid owns the outer edge, so its last row of cells drops the line it
+       already draws. */
+    .tbl tbody tr:last-child .tbl-cell { border-bottom: 0; }
+    /* One column of air between two panels is the grid's 1px edge; this is the
+       edge between neighbours, so adjacent columns butt and read as one grid. */
+    .tbl .tbl-cell + .tbl-cell { border-left: 1px solid rgba(197, 155, 39, 0.12); }
+    /* The reference's single quiet interaction: the whole row — label and panels
+       — warms at once. Kept behind `:has()` so a browser without it keeps the
+       plain hover it had before rather than a half-lit row. */
+    .tbl tbody tr { transition: background 0.45s ease; }
+    .tbl tbody tr:hover .tbl-grid { background: rgba(212, 175, 55, 0.045); }
+    @supports selector(:has(*)) {
+      .tbl tbody tr:hover { background: rgba(212, 175, 55, 0.045); }
+      .tbl tbody tr:hover .tbl-grid { background: none; }
+    }
+    /* Phones: each row becomes a block with labelled values, not a sideways
+       scroll. The label heads the stacked row instead of sitting in a column,
+       and the values are captioned from `data-label`. */
+    @media (max-width: 600px) {
+      .tbl { table-layout: auto; }
+      .tbl thead { display: none; }
+      .tbl-wrap { overflow-x: visible; }
+      .tbl tbody,
+      .tbl tr { display: block; }
+      .tbl tr {
+        padding: 0.7rem 0 0.9rem;
+        border-bottom: 1px solid var(--tbl-grid-line);
+      }
+      .tbl tbody tr:last-child { border-bottom: 0; }
+      /* `tbody` in the selector, not decoration: the 820px block below also
+         targets `.tbl .tbl-label`, and both are one class plus the label, so the
+         later block would otherwise win on the phone it was never meant for. */
+      .tbl tbody .tbl-label {
+        display: block;
+        width: auto;
+        padding: 0 0 0.4rem;
+        font-size: 0.7rem;
+        color: #c9a227;
+      }
+      .tbl-grid {
+        display: block;
+        border: 0;
+        background: none;
+      }
+      .tbl .tbl-grid .tbl-cell {
+        padding: 0.15rem 0;
+        border-bottom: 0;
+      }
+      .tbl .tbl-cell + .tbl-cell { border-left: 0; }
+      /* An authored empty cell is empty here too: no panel, no orphan caption. */
+      .tbl .tbl-cell:empty { display: none; }
+      /* The stacking contract: the head of the column this value came from. */
+      .tbl .tbl-cell::before {
+        content: attr(data-label);
+        display: block;
+        font-family: var(--dfx-mono, "JetBrains Mono", monospace);
+        font-size: 0.7rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: #c9a227;
+      }
+    }
+    /* Print: the panels are ink. Drop the fills and the edge, and let the ruled
+       body print as a ruled body. */
+    @media print {
+      .tbl-wrap { overflow: visible !important; }
+      .tbl-grid { background: none !important; border: 0 !important; }
+      .tbl-grid.is-head { border-bottom: 1px solid #bbb !important; }
+      .tbl .tbl-cell,
+      .tbl .tbl-head { border-color: #bbb !important; color: #111 !important; }
+    }
+
+    /* ---- table, full screen -------------------------------------------------
+       Full screen is the surface a matrix is drawn for: the plate is wide enough
+       for the widest head (s9-3, five columns at 1400px), the label column stays
+       the narrow gutter it is in the reference (≈170px at 1440px), and the data
+       columns take everything else. */
+    .chain.is-full .tbl {
+      --tbl-label-w: clamp(8.6rem, 12vw, 11rem);
+      --tbl-cell-pad-y: 1.25rem;
+      --tbl-cell-pad-x: 1.4rem;
+    }
+    /* --dfx-max is read by the layer's children (.chain-body, .dfx-bar), so it
+       must be set on the layer, reached here with :has(). Set on .tbl it would
+       only inherit downward. */
+    .chain.is-full:has(.tbl) { --dfx-max: 1400px; }
+    /* Do not set --dfx-align here: the shell reads it as `align-content: safe
+       var(--dfx-align)`, which is invalid for center and resolves to normal.
+       Centring uses auto margins below. */
+    /* Rows keep their natural height. The small floor is on the cell, not the
+       table: a table given spare height spreads it over rows unevenly. */
+    .chain.is-full .chain-body > .tbl-wrap {
+      width: 100%;
+      max-width: none;
+    }
+    /* Auto margins centre the table in the plate and fall back to the top when
+       it is taller, so the layer scrolls. */
+    .chain.is-full:has(.tbl) > .chain-body {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+    }
+    .chain.is-full:has(.tbl) .chain-body > .tbl-wrap {
+      margin-top: auto;
+      margin-bottom: auto;
+    }
+    .chain.is-full .tbl .tbl-head {
+      padding: 0 1.15rem clamp(1.15rem, 2.2vh, 1.5rem);
+      font-size: clamp(1.3rem, 0.6rem + 1.15vw, 1.8rem);
+    }
+    .chain.is-full .tbl-grid.is-head { padding-top: 0.5rem; }
+    .chain.is-full .tbl .tbl-cell {
+      min-height: clamp(3.9rem, 7.2vh, 5.5rem);
+      padding: var(--tbl-cell-pad-y) var(--tbl-cell-pad-x);
+      border-bottom-color: var(--dfx-line, rgba(220, 178, 87, 0.26));
+      font-size: 0.95rem;
+      line-height: 1.55;
+    }
+    .chain.is-full .tbl .tbl-label {
+      padding: var(--tbl-cell-pad-y) 0 0;
+      font-size: 0.7rem;
+      letter-spacing: 0.17em;
+      color: #e7d7b4;
+    }
+    .chain.is-full .tbl-grid { padding-left: 1.2rem; border-color: var(--dfx-line, rgba(220, 178, 87, 0.26)); }
+    .chain.is-full .tbl .tbl-cell + .tbl-cell { border-left-color: rgba(220, 178, 87, 0.14); }
+    /* The grid's own edge closes the body, so the last row of cells drops the
+       hairline here too. */
+    .chain.is-full .tbl tbody tr:last-child .tbl-cell { border-bottom: 0; }
+    .chain.is-full .tbl tbody tr:hover { background: rgba(212, 175, 55, 0.05); }

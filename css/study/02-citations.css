@@ -1,0 +1,194 @@
+.cite-head { margin: 0 0 0.7rem; }
+    .cite-kicker {
+      display: block;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #c9a227;
+      margin: 0 0 0.5rem;
+    }
+    .cite-title {
+      font-family: Newsreader, Georgia, serif;
+      font-size: 1.45rem;
+      line-height: 1.25;
+      color: inherit;
+      margin: 0;
+    }
+    .cite-claim {
+      font-family: Newsreader, Georgia, serif;
+      font-size: 1.06rem;
+      line-height: 1.5;
+      color: inherit;
+      margin: 0;
+    }
+    .cite-lead {
+      font-size: 0.98rem;
+      line-height: 1.65;
+      margin: 0 0 0.55rem;
+      color: var(--read-fg, inherit);
+    }
+    .cite-count {
+      font-family: Inter, sans-serif;
+      font-size: 0.86rem;
+      line-height: 1.55;
+      color: var(--read-muted, inherit);
+      margin: 0 0 1.2rem;
+    }
+    /* One row per reference: kind, claim, source. Detail opens on demand. */
+    .cite-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      border-top: 1px solid rgba(197, 155, 39, 0.22);
+    }
+    .cite-row {
+      --cite: var(--role-gold);
+      border-bottom: 1px solid rgba(197, 155, 39, 0.22);
+      transition: background 0.25s ease;
+    }
+    .cite-row-scripture { --cite: var(--role-gold); }
+    .cite-row-history,
+    .cite-row-inscription { --cite: var(--role-archive); }
+    .cite-row-commentary { --cite: var(--role-reader); }
+    .cite-details { margin: 0; }
+    .cite-summary {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.85rem;
+      padding: 0.9rem 0.35rem 0.9rem 0.15rem;
+      cursor: pointer;
+      list-style: none;
+      transition: background 0.22s ease;
+    }
+    .cite-summary::-webkit-details-marker { display: none; }
+    .cite-summary:hover { background: rgba(255, 240, 200, 0.035); }
+    .cite-summary:focus-visible {
+      outline: 2px solid var(--cite);
+      outline-offset: 2px;
+      border-radius: 8px;
+    }
+    .cite-num {
+      flex: none;
+      display: grid;
+      place-items: center;
+      width: 1.6rem;
+      height: 1.6rem;
+      margin-top: 0.1rem;
+      border-radius: 50%;
+      border: 1px solid color-mix(in srgb, var(--cite) 55%, transparent);
+      background: color-mix(in srgb, var(--cite) 12%, transparent);
+      font-family: "JetBrains Mono", monospace;
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--cite);
+    }
+    .cite-main { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 0.3rem; }
+    .cite-kind {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 9.5px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--cite);
+    }
+    .cite-source {
+      font-family: Inter, sans-serif;
+      font-size: 0.84rem;
+      line-height: 1.5;
+      color: var(--read-muted, inherit);
+      opacity: 0.9;
+    }
+    .cite-body {
+      padding: 0.15rem 0.35rem 1.1rem 3.05rem;
+    }
+    .cite-quote {
+      margin: 0;
+      padding: 0.15rem 0 0.15rem 1rem;
+      border-left: 3px solid var(--cite);
+      font-family: Newsreader, Georgia, serif;
+      font-style: italic;
+      font-size: 1.02rem;
+      line-height: 1.7;
+      color: var(--read-fg, inherit);
+    }
+    .cite-check {
+      font-family: Inter, sans-serif;
+      font-size: 0.88rem;
+      line-height: 1.6;
+      margin: 0.85rem 0 0;
+      color: var(--read-muted, inherit);
+    }
+    .cite-check b {
+      display: inline-block;
+      margin-right: 0.4rem;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: var(--role-guard);
+    }
+    .cite-actions { margin: 0.85rem 0 0; }
+    .cite-open {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.78rem;
+      letter-spacing: 0.04em;
+      color: #d4af37;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+    .cite-open:hover { color: #f3e0a0; }
+    /* Target feedback when a prose citation jumps here. */
+    .cite-row.is-hit {
+      background: color-mix(in srgb, var(--cite) 14%, transparent);
+      box-shadow: inset 3px 0 0 var(--cite);
+    }
+    /* Inline citation marker in the lesson prose. */
+    .cite-ref {
+      display: inline;
+      margin: 0;
+      padding: 0.05em 0.34em;
+      border: 0;
+      border-radius: 999px;
+      background: rgba(212, 175, 55, 0.14);
+      font: inherit;
+      font-size: 0.94em;
+      color: inherit;
+      cursor: pointer;
+      text-decoration: none;
+      text-underline-offset: 2px;
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+    .cite-ref:hover,
+    .cite-ref:focus-visible {
+      background: rgba(212, 175, 55, 0.3);
+      color: #f7e7b6;
+      outline: none;
+    }
+    .cite-ref:focus-visible { box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.6); }
+    body.charcoal-mode .sheet-verify,
+    body.paper-mode .sheet-verify,
+    body.white-mode .sheet-verify {
+      background: transparent;
+      border-color: inherit;
+    }
+    body.paper-mode .sheet-verify,
+    body.white-mode .sheet-verify {
+      background: transparent;
+    }
+    body.white-mode .sheet-verify { background: transparent; }
+
+    .sheet-diagram {
+      --chain-gold: #e4c56a;
+      --chain-strong: #f7e6bd;
+      --chain-muted: #b3a98f;
+      position: relative;
+      margin: 2.75rem 0 0;
+      padding: 1.9rem 1.5rem 1.7rem;
+      border: 1px solid rgba(197, 155, 39, 0.38);
+      border-radius: 16px;
+      background:
+        radial-gradient(ellipse at 50% 0%, rgba(212, 175, 55, 0.1), transparent 55%),
+        rgba(15, 14, 13, 0.55);
+      color: var(--chain-strong);
+    }

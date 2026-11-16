@@ -2180,7 +2180,7 @@
         parts.push(nodeHtml(step, i === mid, t, canResolve));
       });
       // More than three cards form a grid (.chain-flow.is-dense in
-      // css/study-page.css):
+      // css/study/03-chain.css):
       // two columns for four cards, three columns otherwise, read left to right.
       const dense = steps.length > 3;
       const flowClass = 'chain-flow' + (dense ? ' is-dense' : '');

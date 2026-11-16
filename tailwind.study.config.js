@@ -2,7 +2,7 @@
  *  Builds css/study-tailwind.css with: npm run build:tailwind */
 module.exports = {
   darkMode: 'class',
-  content: ['./study.html', './css/study-page.css', './js/**/*.js'],
+  content: ['./study.html', './css/study/*.css', './js/**/*.js'],
   theme: {
     extend: {
       fontFamily: {

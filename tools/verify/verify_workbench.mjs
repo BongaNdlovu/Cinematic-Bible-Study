@@ -266,7 +266,7 @@ console.log('  PASS: All 11 sittings contain structured facilitator notes (minut
 
 // Check 9: Verify classroom print styles, projection mode, and button IDs in study.html
 console.log('Test 8: Verifying classroom print stylesheet, projection mode, and action button IDs in study.html...');
-const studyHtmlContent = fs.readFileSync('study.html', 'utf8') + fs.readFileSync('css/study-page.css', 'utf8');
+const studyHtmlContent = fs.readFileSync('study.html', 'utf8') + fs.readdirSync('css/study').sort().map((n) => fs.readFileSync(path.join('css/study', n), 'utf8')).join('\n');
 if (!studyHtmlContent.includes('@media print')) {
   throw new Error('study.html is missing @media print classroom print styles.');
 }

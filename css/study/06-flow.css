@@ -1,0 +1,266 @@
+/* Vertical flow: one rail with step markers, a highlight that runs it on
+       entrance and on Replay, and each step opening the full-screen reader. The
+       carousel the reader is built from stays hidden; only .story-read shows. */
+    .flow-stack {
+      --flow-gutter: 2rem;         /* room beside the cards for the rail */
+      --flow-rail-x: 0.85rem;      /* rail centre, from the stack's left edge */
+      --flow-pulse: 4.5rem;        /* length of the travelling highlight */
+      --flow-rail: rgba(213, 177, 106, 0.4);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      /* No flex gap: `.flow-connector` is the air between two steps, and the
+         segment it draws has to span exactly that air to reach the rail above
+         and below it. */
+      gap: 0;
+      padding-left: var(--flow-gutter);
+    }
+    .flow-rail {
+      position: absolute;
+      left: calc(var(--flow-rail-x) - 1px);
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      pointer-events: none;
+      background: linear-gradient(180deg,
+        rgba(213, 177, 106, 0.06),
+        var(--flow-rail) 10%,
+        var(--flow-rail) 90%,
+        rgba(213, 177, 106, 0.06));
+    }
+    .flow-rail-pulse {
+      position: absolute;
+      left: 0;
+      top: var(--flow-from, 0%);
+      width: 100%;
+      height: var(--flow-pulse);
+      background: linear-gradient(180deg, transparent, var(--chain-strong, #f7e6bd) 48%, transparent);
+    }
+    .chain.is-visible .flow-rail-pulse {
+      animation: flow-travel var(--flow-travel, 2s) cubic-bezier(0.42, 0, 0.58, 1) 0.15s forwards;
+    }
+    @keyframes flow-travel {
+      0% { top: var(--flow-from, calc(-1 * var(--flow-pulse))); opacity: 0; }
+      12% { opacity: 1; }
+      86% { opacity: 1; }
+      100% { top: calc(100% - var(--flow-pulse)); opacity: 0; }
+    }
+    .flow-step {
+      position: relative;
+      padding: 0.95rem 1.9rem 1rem 1.25rem;
+      border: 1px solid rgba(197, 155, 39, 0.28);
+      border-left: 3px solid var(--chain-gold, #e4c56a);
+      border-radius: 12px;
+      background:
+        linear-gradient(90deg, rgba(212, 175, 55, 0.09), transparent 40%),
+        rgba(255, 248, 230, 0.035);
+      box-shadow: inset 0 1px 0 rgba(242, 215, 151, 0.07);
+      opacity: 0;
+      transform: translateY(8px);
+      cursor: pointer;
+      transition: box-shadow 0.18s ease;
+    }
+    /* The whole card is the pointer target for the scene it opens. The ring is
+       a box-shadow rather than a border colour so it reads the same in the
+       paper and white themes, whose restore rules repaint the border. */
+    .flow-step:hover,
+    .flow-step:focus-within {
+      box-shadow: inset 0 1px 0 rgba(242, 215, 151, 0.07), 0 0 0 1px rgba(228, 197, 106, 0.4);
+    }
+    .chain.is-visible .flow-step { animation: chain-rise 0.6s ease-out var(--t) forwards; }
+    /* The step marker: the bead on the rail, and the keyboard and screen-reader
+       way into the step's scene (the card around it is the pointer target). */
+    .flow-node {
+      position: absolute;
+      left: calc(var(--flow-rail-x) - var(--flow-gutter) - 0.8rem);
+      top: 0.68rem;
+      display: grid;
+      place-items: center;
+      width: 1.6rem;
+      height: 1.6rem;
+      padding: 0;
+      border: 0;
+      border-radius: 50%;
+      background: transparent;
+      color: var(--chain-gold, #e4c56a);
+      cursor: pointer;
+    }
+    .flow-node:focus-visible { outline: 2px solid var(--chain-gold, #e4c56a); outline-offset: 2px; }
+    .flow-node-dot {
+      width: 0.62rem;
+      height: 0.62rem;
+      border-radius: 50%;
+      background: currentColor;
+      box-shadow: 0 0 0 3px rgba(213, 177, 106, 0.14);
+    }
+    .chain.is-visible .flow-node-dot { animation: flow-lit 0.75s ease-out var(--t, 0s) both; }
+    @keyframes flow-lit {
+      0% { box-shadow: 0 0 0 3px rgba(213, 177, 106, 0.14); }
+      38% { box-shadow: 0 0 0 7px rgba(242, 215, 151, 0.22), 0 0 16px rgba(242, 215, 151, 0.55); }
+      100% { box-shadow: 0 0 0 3px rgba(213, 177, 106, 0.14); }
+    }
+    /* Beats that carry a chain into the next diagram wear the same bead in
+       both. The ring is a pseudo-element because the sweep animates the bead's
+       own box-shadow with fill: both, which would override a declaration. */
+    .flow-step.is-shared .flow-node-dot { position: relative; }
+    .flow-step.is-shared .flow-node-dot::after {
+      content: "";
+      position: absolute;
+      inset: -0.28rem;
+      border: 1.5px solid currentColor;
+      border-radius: 50%;
+      opacity: 0.6;
+    }
+    .flow-step.is-centre .flow-node-dot { width: 0.82rem; height: 0.82rem; }
+    .flow-step.is-centre {
+      border-color: rgba(228, 197, 106, 0.55);
+      box-shadow: inset 0 1px 0 rgba(242, 215, 151, 0.07), 0 0 0 1px rgba(228, 197, 106, 0.18);
+    }
+    .flow-step.is-centre .story-medal { margin-left: 0; }
+    /* The pointer affordance for the scene a step opens. An icon, never copy:
+       the step's own title is the marker's accessible name. */
+    .flow-scene-mark {
+      position: absolute;
+      top: 1rem;
+      right: 0.7rem;
+      width: 14px;
+      height: 14px;
+      color: var(--chain-gold, #e4c56a);
+      opacity: 0.4;
+      pointer-events: none;
+      transition: opacity 0.18s ease;
+    }
+    .flow-scene-mark svg { width: 100%; height: 100%; display: block; }
+    .flow-step:hover .flow-scene-mark,
+    .flow-step:focus-within .flow-scene-mark { opacity: 0.9; }
+    .flow-content { min-width: 0; }
+    /* The carousel a flow's reader is built from is in the markup and has to stay
+       out of the layout: the whole stack is the point, and a visible carousel
+       would show one step at a time. */
+    .flow-scenes[hidden] { display: none; }
+    .flow-connector {
+      position: relative;
+      height: 1.05rem;
+      flex: 0 0 auto;
+    }
+    /* The connector is a segment of the rail, drawn in as the highlight reaches
+       it. The rail itself is continuous underneath, so nothing is severed if a
+       segment is still on its way in. */
+    .flow-connector-line {
+      position: absolute;
+      left: calc(var(--flow-rail-x) - var(--flow-gutter) - 1px);
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(180deg, var(--flow-rail), var(--chain-strong, #f7e6bd));
+      transform: scaleY(0);
+      transform-origin: 50% 0;
+    }
+    .chain.is-visible .flow-connector-line { animation: flow-draw 0.45s ease-out var(--t, 0s) forwards; }
+    @keyframes flow-draw { to { transform: scaleY(1); } }
+    .flow-connector-tip {
+      position: absolute;
+      left: calc(var(--flow-rail-x) - var(--flow-gutter) - 4px);
+      top: 50%;
+      width: 6px;
+      height: 6px;
+      margin-top: -3px;
+      border-right: 1.5px solid rgba(228, 197, 106, 0.8);
+      border-bottom: 1.5px solid rgba(228, 197, 106, 0.8);
+      transform: rotate(45deg);
+      opacity: 0;
+    }
+    .chain.is-visible .flow-connector-tip { animation: flow-tip 0.3s ease-out calc(var(--t, 0s) + 0.3s) forwards; }
+    @keyframes flow-tip { to { opacity: 1; } }
+    /* A step's lexical note hangs beside it, dashed, with the not-yet state
+       under it as a hollow counter-node, so neither reads as the next step.
+       Colours come from `.article-body p`, which sets them with !important. */
+    .flow-step.has-aside {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(11rem, 0.66fr);
+      column-gap: 1.1rem;
+      align-items: start;
+    }
+    .flow-aside {
+      min-width: 0;
+      padding: 0.7rem 0.85rem 0.75rem;
+      border: 1px dashed rgba(213, 177, 106, 0.55);
+      border-radius: 10px;
+      background: rgba(213, 177, 106, 0.05);
+      opacity: 0;
+      transform: translateY(6px);
+    }
+    .chain.is-visible .flow-aside { animation: chain-rise 0.6s ease-out var(--t, 0s) forwards; }
+    .flow-note {
+      margin: 0;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.72rem;
+      line-height: 1.5;
+      letter-spacing: 0.04em;
+    }
+    .flow-counter {
+      position: relative;
+      margin: 0.6rem 0 0;
+      padding: 0.6rem 0 0 1.15rem;
+      border-top: 1px dashed rgba(213, 177, 106, 0.4);
+      font-family: 'Newsreader', Georgia, serif;
+      font-style: italic;
+      font-size: 0.92rem;
+      line-height: 1.45;
+    }
+    .flow-counter::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.78rem;
+      width: 0.62rem;
+      height: 0.62rem;
+      border: 1px dashed rgba(213, 177, 106, 0.75);
+      border-radius: 50%;
+    }
+    .flow-points {
+      list-style: none;
+      margin: 0.7rem 0 0;
+      padding: 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem 0.9rem;
+    }
+    .flow-points li {
+      position: relative;
+      padding-left: 0.95rem;
+      font-family: Inter, sans-serif;
+      font-size: 0.86rem;
+      line-height: 1.55;
+      color: var(--chain-muted, inherit);
+    }
+    .flow-points li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.55em;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--chain-gold, #e4c56a);
+      opacity: 0.75;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      /* Nothing here is motion any more: every step, every connector segment and
+         the side-note are simply present, and the highlight — which exists only
+         to travel — is parked where the sweep would have entered. */
+      .flow-step,
+      .flow-node-dot,
+      .flow-connector-line,
+      .flow-aside { opacity: 1 !important; transform: none !important; animation: none !important; }
+      .flow-connector-tip { opacity: 1 !important; animation: none !important; }
+      .flow-rail-pulse { animation: none !important; }
+    }
+    @media (max-width: 820px) {
+      .flow-step.has-aside { grid-template-columns: minmax(0, 1fr); }
+      .flow-aside { margin-top: 0.85rem; }
+    }
+    @media (max-width: 620px) {
+      .flow-stack { --flow-gutter: 1.5rem; --flow-rail-x: 0.7rem; }
+      .flow-step { padding-right: 1.7rem; }
+    }

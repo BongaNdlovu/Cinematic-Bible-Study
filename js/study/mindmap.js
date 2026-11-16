@@ -23,7 +23,7 @@
   const kx = (v) => v * KX;                 // 1600-wide design units → world
   const ky = (v) => v * KY;                 // 900-tall design units → world y
   const Y = ky(520);                        // every scene's chain line
-  /* The head and leaf card widths are declared in css/study-page.css (.mm-head
+  /* The head and leaf card widths are declared in css/study/07-mindmap.css (.mm-head
      .mm-card / .mm-leaf .mm-card); the link endpoints below depend on them, so
      both must move together. */
   const HW = 160, LW = 195;
