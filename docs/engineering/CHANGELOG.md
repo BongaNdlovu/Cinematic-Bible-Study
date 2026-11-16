@@ -22,6 +22,8 @@ Entry template:
 
 **Handbook updated:** 07.
 
+**Second CI round:** 26 of 29 passed on Linux. `verify_hall_mural` launched Chrome with `--use-angle=d3d11`, a Windows-only graphics backend, so the gallery had no WebGL on Linux; `_server.mjs` now has `webglFlags()` (Direct3D on Windows, SwiftShader elsewhere). `verify_horizon` failed because the Linux browser reports `(hover: none)`, and `showHorizonFloat()` in `js/study/study-app.js` deliberately shows no hover card on such devices; the check now expects the card to open where hover exists and to stay hidden where it does not. `verify_globe` now scrolls up to three times before giving up on close satellite imagery, and reports the globe's state if it still fails. On Windows these three passed 3 of 3 afterwards; not checked yet on Linux.
+
 **Checked here:** on Windows, the eight changed scripts through the runner: 7 of 8 at first; `verify_globe` then failed twice more and passed after two stray local `server.py` processes from earlier runs were stopped, so the failures are put down to those processes. Not checked: why a stray server made the globe fail. Not checked yet: the Linux CI run.
 
 **Status:** on branch `arch/phase-0-safety-net`, pushed.
