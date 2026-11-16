@@ -27,7 +27,6 @@
 
     /* What "focusable" means inside the layer, matching mindmap.js's list so the
        two traps agree about the page. */
-    const FS_FOCUSABLE = 'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
 
     function wireDiagramFullscreen(figure, kind) {
       const btn = figure.querySelector('[data-chain-fs]');
@@ -48,25 +47,7 @@
       let foot = null;
       const label = (title && title.textContent.trim()) || 'Diagram';
 
-      function trapFocus(event) {
-        if (event.key !== 'Tab') return;
-        /* The figure's own controls live inside it, so the layer's focusables are
-           the controls plus whatever the renderer offers. `offsetParent` is null
-           for anything display:none, which is how the in-column Replay control
-           and a collapsed panel stay out of the ring. */
-        const items = Array.from(figure.querySelectorAll(FS_FOCUSABLE))
-          .filter((el) => !el.hidden && (el.offsetParent !== null || el === document.activeElement));
-        if (!items.length) return;
-        const first = items[0];
-        const last = items[items.length - 1];
-        const active = document.activeElement;
-        event.preventDefault();
-        if (!figure.contains(active)) { first.focus(); return; }
-        const at = items.indexOf(active);
-        if (at < 0) { (event.shiftKey ? last : first).focus(); return; }
-        const step = event.shiftKey ? -1 : 1;
-        items[(at + step + items.length) % items.length].focus();
-      }
+      function trapFocus(event) { window.SiteCore.trapFocus(figure, event); }
 
       /* A layer stacked above this one keeps its own Escape. The page's reader
          (`.story-read`, 220) sits above this layer (180) — a citation chip opens
