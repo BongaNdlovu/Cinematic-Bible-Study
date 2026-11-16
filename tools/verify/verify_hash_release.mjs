@@ -123,4 +123,21 @@ assert.strictEqual(only(changed, "vendor/three/build", /^three\.module\.min\./),
 
 fs.rmSync(stage, { recursive: true, force: true });
 fs.rmSync(changed, { recursive: true, force: true });
-console.log("staged models, stylesheets and scripts get new filenames, in dependency order");
+function cycleNames(leafBody) {
+  const cycle = fs.mkdtempSync(path.join(os.tmpdir(), "hash-cycle-"));
+  put(cycle, "js/gallery/app.js", "import { leaf } from '/js/gallery/leaf.js';\nexport const app = leaf;\n");
+  put(cycle, "js/gallery/leaf.js", "import { app } from '/js/gallery/app.js';\nexport const leaf = " + leafBody + ";\n");
+  const run = spawnSync(process.execPath, [path.join(ROOT, "tools", "hash-release-assets.mjs"), cycle], { encoding: "utf8" });
+  assert.strictEqual(run.status, 0, run.stderr);
+  const names = fs.readdirSync(path.join(cycle, "js", "gallery")).sort();
+  fs.rmSync(cycle, { recursive: true, force: true });
+  return names;
+}
+const cycleA = cycleNames("1");
+const cycleB = cycleNames("2");
+const appA = cycleA.find((n) => n.startsWith("app."));
+const appB = cycleB.find((n) => n.startsWith("app."));
+assert.notStrictEqual(appA, appB, "a module in an import cycle gets a new name when another module in the cycle changes");
+assert.deepStrictEqual(cycleNames("1"), cycleA, "an unchanged import cycle keeps its names");
+
+console.log("staged models, stylesheets and scripts get new filenames, in dependency order; a change anywhere in an import cycle renames the whole cycle");

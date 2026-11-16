@@ -14,6 +14,25 @@ Entry template:
 
 ---
 
+## 2026-11-16 — Architecture plan, step 4.4 finished: the rest of the gallery split
+
+**Why:** the first part of 4.4 left the model cache, tour, study looks and panels in `js/gallery/app.js`, because they share variables with the scene.
+
+**What changed:**
+
+- Eight new modules in `js/gallery/`: `tour.js`, `study-looks.js`, `model-cache.js`, `hall-backdrop.js`, `model-loader.js`, `panels.js`, `dossier.js`, `explode.js`. Each took its functions together with the `let` variables only it assigns. `app.js` keeps the rest and is now 2,083 lines (from 2,654).
+- **How the moves are safe:** an ES module can read another module's `let` (the binding is live) but not assign it. A script over the syntax tree chose each group so that nothing outside it assigns the group's variables and the group assigns nothing outside it, and found no assignment to any imported name afterwards. The new modules import what they read from `app.js` (`export` was added to 27 declarations there), so the modules form an import cycle. Nothing in the split-out files runs at load time, so the order of loading does not change behaviour.
+- The camera helpers stay in `app.js`: twelve places there assign `cameraTween`.
+- `tools/verify/verify_moved_functions.mjs` shows all 46 moved declarations have the same syntax trees. A first attempt failed it: the move script also stripped indentation inside multi-line template strings, which changes the strings. The script was fixed and the moves redone.
+- **Cache fix, `tools/hash-release-assets.mjs`:** files in an import cycle were hashed from their own text only, so a change to one would have left the others' names unchanged though their contents changed. Under the one-year `immutable` cache, a returning browser could then load an old `app.js` that imports files no longer on the server. Each file in a cycle now gets a hash that also covers the whole cycle. `verify_hash_release.mjs` has a new check, which fails on the old tool and passes now.
+- `tools/verify/verify_map_help.mjs` reads every gallery module, because the tour code it checks is now in `tour.js`.
+
+**Handbook updated:** 03 (`js/gallery/`), 05 (fingerprinting of import cycles, root import paths).
+
+**Checked here:** on Windows: lint exits 0, `npm run test:unit` passes 180 of 180, every `npm test` script passes, and `npm run test:browser` passes 30 of 30, which includes the gallery checks (`verify_hall_mural.mjs`, `verify_horizon.mjs`, `verify_photo_y.mjs`). A staged hash run renamed all 11 gallery modules and rewrote every import between them.
+
+**Status:** on branch `arch/phase-4b-modules`, not deployed.
+
 ## 2026-11-16 — Deleting an account clears its own parked changes
 
 **Why:** the user decided that deleting an account should also remove that account's own stash keys from the device. Before, `baProgressStash:<id>` and `baStudySyncStash:<id>` for the deleted account stayed behind, waiting for an owner who no longer exists.

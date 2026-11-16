@@ -1,18 +1,24 @@
 import * as THREE from 'three';
     import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
-    import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
     import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
-    import { MeshoptDecoder } from 'three/addons/libs/meshopt_decoder.module.js';
     import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
     import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
     import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
     import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
-    import { ASSET_REGISTRY, getNodeDataForAsset, MAP_YEAR_FOR_ASSET, artifactOrder } from '/js/gallery/artifact-registry.js';
+    import { ASSET_REGISTRY, getNodeDataForAsset, artifactOrder } from '/js/gallery/artifact-registry.js';
     import { createStoneReliefCanvas, HALL_BACKDROPS, WALL_FRAMES, createCelestialHaloTexture, ICONS } from '/js/gallery/hall-art.js';
+    import { tourRunning, stopArtifactTour, startArtifactTour } from '/js/gallery/tour.js';
+    import { releaseExhibitMaterials, applyStudyModeToMeshes, setStudyMode } from '/js/gallery/study-looks.js';
+    import { rememberShownKey } from '/js/gallery/model-cache.js';
+    import { hallMixTarget, setHallBackdrop, prefetchHall, layoutHall } from '/js/gallery/hall-backdrop.js';
+    import { updateTriangleReadout, loadGLB, cloneExhibit, loadGLBAsset } from '/js/gallery/model-loader.js';
+    import { buildEraTimeline, closeAllPanels, openScriptureModal, openAboutModal, setNavActive, filterArtifacts, titlesHiddenStored, applyTitlesHidden } from '/js/gallery/panels.js';
+    import { explodeAmount, setExplode } from '/js/gallery/explode.js';
+    import { syncDossierStudyLink, syncDossierMapLink, syncDossierNarrative } from '/js/gallery/dossier.js';
 
-    const MODELS_PREFIX = 'models/';
+    export const MODELS_PREFIX = 'models/';
     const journeyBoot = window.BAJourney ? window.BAJourney.load() : null;
-    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    export const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
       || !!(journeyBoot && journeyBoot.reducedMotion);
     const coarsePointer = window.matchMedia('(pointer: coarse)').matches;
     const lowPower = window.innerWidth < 768 || coarsePointer || (navigator.hardwareConcurrency || 8) <= 4;
@@ -21,16 +27,16 @@ import * as THREE from 'three';
     const fromLesson = urlParams.get('from') === 'lesson';
     const lessonSheetRaw = urlParams.get('sheet');
     const isValidSheet = (s) => s !== null && s !== undefined && /^\d+$/.test(String(s).trim()) && Number(s) >= 0 && Number(s) <= 10;
-    const lessonSheetSafe = (fromLesson && isValidSheet(lessonSheetRaw))
+    export const lessonSheetSafe = (fromLesson && isValidSheet(lessonSheetRaw))
       ? (window.BAJourney && typeof window.BAJourney.clampToAccessible === 'function'
         ? String(window.BAJourney.clampToAccessible(Number(lessonSheetRaw)))
         : String(lessonSheetRaw).trim())
       : null;
-    const lessonReturnHref = lessonSheetSafe
+    export const lessonReturnHref = lessonSheetSafe
       ? `study.html?sheet=${encodeURIComponent(lessonSheetSafe)}#sheet-article`
       : null;
 
-    const AudioBus = {
+    export const AudioBus = {
       ctx: null,
       muted: true,
       unlocked: false,
@@ -112,7 +118,7 @@ import * as THREE from 'three';
     camera.position.set(7.2, 5.4, 21.5);
     if (/^(localhost|127\.0\.0\.1|\[::1\])$/.test(window.location.hostname)) window.__galleryCamera = camera;
 
-    const renderer = new THREE.WebGLRenderer({ antialias: !lowPower, alpha: false, powerPreference: 'high-performance' });
+    export const renderer = new THREE.WebGLRenderer({ antialias: !lowPower, alpha: false, powerPreference: 'high-performance' });
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, lowPower ? 1.25 : 2));
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.shadowMap.enabled = true;
@@ -178,11 +184,11 @@ import * as THREE from 'three';
     reliefWall.position.set(0, 2.5, -1.0);
     scene.add(reliefWall);
 
-    const texLoader = new THREE.TextureLoader();
+    export const texLoader = new THREE.TextureLoader();
 
-    const hallDummy = new THREE.DataTexture(new Uint8Array([6, 4, 3, 255]), 1, 1);
+    export const hallDummy = new THREE.DataTexture(new Uint8Array([6, 4, 3, 255]), 1, 1);
     hallDummy.needsUpdate = true;
-    const hallUniforms = THREE.UniformsUtils.merge([
+    export const hallUniforms = THREE.UniformsUtils.merge([
       THREE.UniformsLib.fog,
       {
         mapA: { value: hallDummy },
@@ -234,98 +240,18 @@ import * as THREE from 'three';
       toneMapped: true,
       depthWrite: true
     });
-    const hallMesh = new THREE.Mesh(new THREE.PlaneGeometry(44, 24.75), hallMat);
+    export const hallMesh = new THREE.Mesh(new THREE.PlaneGeometry(44, 24.75), hallMat);
     hallMesh.renderOrder = -2;
     hallMesh.frustumCulled = false;
     scene.add(hallMesh);
-    function layoutHall() {
-      const portrait = window.innerHeight > window.innerWidth * 1.05;
-      hallMesh.position.set(0, portrait ? 4.6 : 3.7, portrait ? -17.4 : -14.2);
-      hallMesh.scale.setScalar(portrait ? 0.78 : 1);
-      hallUniforms.darken.value = portrait ? 0.40 : 0.52;
-      hallUniforms.vig.value = portrait ? 0.82 : 0.64;
-    }
     layoutHall();
     window.addEventListener('resize', layoutHall);
 
-    const hallTexCache = new Map();
-    const HALL_CACHE_CAP = 4;
+    export const hallTexCache = new Map();
+    export const HALL_CACHE_CAP = 4;
     const TOUCH_DBLCLICK_ECHO_MS = 500;
-    const TOUR_BUSY_RETRY_MS = 300;
-    let hallCurrentUrl = '';
-    let hallSlot = 0;
-    let hallMixTarget = 0;
-    function trimHallCache(url) {
-      const keep = new Set([url, hallCurrentUrl]);
-      const bound = new Set([hallUniforms.mapA.value, hallUniforms.mapB.value, hallDummy]);
-      const spare = [];
-      hallTexCache.forEach((tex, cachedUrl) => {
-        if (keep.has(cachedUrl) || bound.has(tex)) return;
-        spare.push(cachedUrl);
-      });
-      while (hallTexCache.size > HALL_CACHE_CAP && spare.length) {
-        const dropUrl = spare.shift();
-        const tex = hallTexCache.get(dropUrl);
-        hallTexCache.delete(dropUrl);
-        if (tex && tex !== hallDummy && typeof tex.dispose === 'function') tex.dispose();
-      }
-    }
-    function prepHallTex(tex) {
-      tex.colorSpace = THREE.SRGBColorSpace;
-      // Non-power-of-two images cannot be mipmapped cleanly; switch to a plain
-      // linear filter so WebGL stops logging GL_INVALID_ENUM for these backdrops.
-      const pot = (n) => (n & (n - 1)) === 0;
-      if (!pot(tex.image?.width || 0) || !pot(tex.image?.height || 0)) {
-        tex.minFilter = THREE.LinearFilter;
-        tex.generateMipmaps = false;
-      } else {
-        tex.minFilter = THREE.LINEAR_MIPMAP_LINEAR;
-      }
-      tex.anisotropy = Math.min(4, renderer.capabilities.getMaxAnisotropy());
-      tex.needsUpdate = true;
-      return tex;
-    }
-    function setHallBackdrop(url) {
-      if (!url || url === hallCurrentUrl) return;
-      hallCurrentUrl = url;
-      window.__hallUrl = url;
-      const apply = (tex) => {
-        if (hallSlot === 0) {
-          hallUniforms.mapB.value = tex;
-          hallMixTarget = 1;
-          hallSlot = 1;
-        } else {
-          hallUniforms.mapA.value = tex;
-          hallMixTarget = 0;
-          hallSlot = 0;
-        }
-      };
-      if (hallTexCache.has(url)) {
-        apply(hallTexCache.get(url));
-        return;
-      }
-      texLoader.load(url, (tex) => {
-        prepHallTex(tex);
-        hallTexCache.set(url, tex);
-        trimHallCache(url);
-        if (hallCurrentUrl === url) apply(tex);
-      }, undefined, () => {
-        if (hallCurrentUrl !== url) return;
-        hallCurrentUrl = '';
-        window.__hallUrl = '';
-      });
-    }
-    const hallPending = new Set();
-    function prefetchHall(url) {
-      if (!url || hallTexCache.has(url) || hallPending.has(url)) return;
-      hallPending.add(url);
-      texLoader.load(url, (tex) => {
-        prepHallTex(tex);
-        hallTexCache.set(url, tex);
-        trimHallCache(url);
-        hallPending.delete(url);
-      }, undefined, () => hallPending.delete(url));
-    }
+    export const TOUR_BUSY_RETRY_MS = 300;
+    export const hallPending = new Set();
 
     const galleryFrameGroup = new THREE.Group();
     scene.add(galleryFrameGroup);
@@ -477,7 +403,7 @@ import * as THREE from 'three';
     }
 
     // Chiaroscuro: one hard key from the side, near-black fill, so half the figure falls into shadow.
-    function applyChiaroscuroRig(on) {
+    export function applyChiaroscuroRig(on) {
       ambientLight.intensity = on ? 0.08 : 0.35;
       hemiLight.intensity = on ? 0.14 : 0.55;
       galleryKeySpot.intensity = on ? 70 : 30;
@@ -557,13 +483,13 @@ import * as THREE from 'three';
     artifactRoot.position.y = -0.3;
     scene.add(artifactRoot);
 
-    const singleModelContainer = new THREE.Group();
+    export const singleModelContainer = new THREE.Group();
     artifactRoot.add(singleModelContainer);
 
-    const assembledContainer = new THREE.Group();
+    export const assembledContainer = new THREE.Group();
     artifactRoot.add(assembledContainer);
 
-    const altarPlatformGroup = new THREE.Group();
+    export const altarPlatformGroup = new THREE.Group();
     artifactRoot.add(altarPlatformGroup);
     let altarModel = null;
     let altarVisible = true;
@@ -571,7 +497,7 @@ import * as THREE from 'three';
     /* GLB loads build their own GLTFLoader per request inside loadGLB() so a
        timeout can abort that download via its own LoadingManager. */
 
-    const loadProgress = { totalAssets: 2, loadedCount: 0, label: 'Initializing…', failed: false };
+    export const loadProgress = { totalAssets: 2, loadedCount: 0, label: 'Initializing…', failed: false };
     let approachStarted = false;
     function beginHallApproach() {
       if (approachStarted) return;
@@ -620,7 +546,7 @@ import * as THREE from 'three';
       if (overlay) overlay.classList.add('hidden');
       beginHallApproach();
     }
-    function updateLoadingUI() {
+    export function updateLoadingUI() {
       const pct = Math.min(100, Math.round((loadProgress.loadedCount / loadProgress.totalAssets) * 100));
       const fill = document.getElementById('loading-bar-fill');
       const text = document.getElementById('loading-pct');
@@ -649,51 +575,8 @@ import * as THREE from 'three';
     let masterNodesVisible = true;
     let soloFocusNodeId = null;
 
-    function buildEraTimeline() {
-      const track = document.getElementById('era-track');
-      if (!track) return;
-      const cells = [
-        { asset: 'assembled', label: 'COLOSSUS', date: 'Dan 2:31–45', img: 'assets/site/era-assembled.webp' },
-        { asset: 'head', label: 'GOLD', date: '605–539 BC', img: 'assets/site/era-head.webp' },
-        { asset: 'chest', label: 'SILVER', date: '539–331 BC', img: 'assets/site/era-chest.webp' },
-        { asset: 'thighs', label: 'BRONZE', date: '331–168 BC', img: 'assets/site/era-thighs.webp' },
-        { asset: 'legs', label: 'IRON', date: '168 BC–476 AD', img: 'assets/site/era-legs.webp' },
-        { asset: 'feet', label: 'IRON & CLAY', date: 'Divided era', img: 'assets/site/era-feet.webp' },
-        { asset: 'stone', label: 'THE STONE', date: 'Dan 2:34', img: 'assets/site/era-stone.webp' },
-        { asset: 'lion', label: 'WINGED LION', date: 'Dan 7:4', img: 'assets/site/era-lion.webp' },
-        { asset: 'bear', label: 'THE BEAR', date: 'Dan 7:5', img: 'assets/site/era-bear.webp' },
-        { asset: 'leopard', label: 'LEOPARD', date: 'Dan 7:6', img: 'assets/site/era-leopard.webp' },
-        { asset: 'beast', label: 'FOURTH BEAST', date: 'Dan 7:7', img: 'assets/site/era-beast.webp' },
-        { asset: 'years1260', label: '1,260 YEARS', date: 'Dan 7:25', img: 'assets/site/era-years1260.webp' },
-        { asset: 'ram', label: 'THE RAM', date: 'Dan 8:3', img: 'assets/site/era-ram.webp' },
-        { asset: 'goat', label: 'THE GOAT', date: 'Dan 8:5', img: 'assets/site/era-goat.webp' },
-        { asset: 'goat_broken', label: 'BROKEN HORN', date: 'Dan 8:8', img: 'assets/site/era-goat_broken.webp' },
-        { asset: 'goat_horn', label: 'LITTLE HORN', date: 'Dan 8:9', img: 'assets/site/era-goat_horn.webp' },
-        { asset: 'dura', label: 'DURA', date: 'Dan 3:1', img: 'assets/site/era-dura.webp' },
-        { asset: 'stump', label: 'THE STUMP', date: 'Dan 4:15', img: 'assets/site/era-stump.webp' },
-        { asset: 'ox_king', label: 'OX-KING', date: 'Dan 4:33', img: 'assets/site/era-ox_king.webp' },
-        { asset: 'ancient', label: 'ANCIENT OF DAYS', date: 'Dan 7:9', img: 'assets/site/era-ancient.webp' },
-        { asset: 'son', label: 'SON OF MAN', date: 'Dan 7:13', img: 'assets/site/era-son.webp' },
-        { asset: 'decree', label: 'THE DECREE', date: '457 BC', img: 'assets/site/era-decree.webp' },
-        { asset: 'kings', label: 'NORTH & SOUTH', date: 'Dan 11:5', img: 'assets/site/era-kings.webp' },
-        { asset: 'michael', label: 'MICHAEL', date: 'Dan 12:1', img: 'assets/site/era-michael.webp' },
-        { asset: 'sealed', label: 'SEALED BOOK', date: 'Dan 12:4', img: 'assets/site/era-sealed.webp' }
-      ];
-      const html = cells.map((c) => `
-        <button class="era-cell" type="button" data-asset="${c.asset}">
-          <img src="${c.img}" alt="">
-          <span class="era-meta"><b>${c.label}</b><span>${c.date}</span></span>
-        </button>`).join('');
-      track.innerHTML = html + html;
-      track.querySelectorAll('.era-cell').forEach((btn) => {
-        btn.addEventListener('click', () => {
-          AudioBus.play('select');
-          selectAsset(btn.dataset.asset);
-        });
-      });
-    }
 
-    function museumToast(msg) {
+    export function museumToast(msg) {
       const el = document.getElementById('museum-toast');
       if (!el) return;
       el.textContent = msg;
@@ -702,62 +585,11 @@ import * as THREE from 'three';
       museumToast._t = setTimeout(() => el.classList.remove('show'), 2400);
     }
 
-    function closeAllPanels() {
-      document.body.classList.remove('rail-open', 'narrative-open', 'modal-open');
-      const lab = document.getElementById('study-lab-drawer');
-      if (lab) lab.classList.remove('open');
-      document.querySelectorAll('.exhibit-modal.open').forEach((m) => m.classList.remove('open'));
-    }
 
-    function openModal(id) {
-      closeAllPanels();
-      const modal = document.getElementById(id);
-      if (!modal) return;
-      modal.classList.add('open');
-      document.body.classList.add('modal-open');
-    }
 
-    function openScriptureModal() {
-      const data = ASSET_REGISTRY[activeAssetKey] || ASSET_REGISTRY.assembled;
-      const body = document.getElementById('scripture-modal-body');
-      const ref = document.getElementById('scripture-modal-ref');
-      if (body) body.textContent = data.quote;
-      if (ref) ref.textContent = data.quoteRef;
-      openModal('scripture-modal');
-    }
 
-    function openAboutModal() {
-      openModal('about-modal');
-    }
 
-    function setNavActive(name) {
-      document.querySelectorAll('.nav-item').forEach((el) => {
-        el.classList.toggle('active', el.dataset.nav === name);
-      });
-    }
 
-    function filterArtifacts(query) {
-      const q = (query || '').trim().toLowerCase();
-      let visible = 0;
-      document.querySelectorAll('.artifact-card-item').forEach((card) => {
-        const hay = `${card.textContent} ${card.dataset.asset}`.toLowerCase();
-        const show = !q || hay.includes(q);
-        card.style.display = show ? '' : 'none';
-        if (show) visible += 1;
-      });
-      const list = document.getElementById('artifact-cards-list');
-      if (list) {
-        let empty = document.getElementById('artifact-search-empty');
-        if (!empty) {
-          empty = document.createElement('p');
-          empty.id = 'artifact-search-empty';
-          empty.className = 'artifact-search-empty';
-          empty.textContent = 'No artifacts match that search.';
-          list.appendChild(empty);
-        }
-        empty.hidden = !(q && visible === 0);
-      }
-    }
 
     // Build DOM elements for museum nodes
     const nodesContainer = document.getElementById('museum-nodes-container');
@@ -849,24 +681,8 @@ import * as THREE from 'three';
       });
     }
 
-    const TITLES_HIDE_KEY = 'gallery_hide_titles';
-    const btnTitlesToggle = document.getElementById('btn-titles-toggle');
-    function titlesHiddenStored() {
-      try { return localStorage.getItem(TITLES_HIDE_KEY) === '1'; } catch (e) { return false; }
-    }
-    function applyTitlesHidden(hidden, persist) {
-      document.body.classList.toggle('titles-hidden', hidden);
-      if (persist) {
-        try { localStorage.setItem(TITLES_HIDE_KEY, hidden ? '1' : '0'); } catch (e) {}
-      }
-      if (btnTitlesToggle) {
-        btnTitlesToggle.classList.toggle('active', !hidden);
-        btnTitlesToggle.setAttribute('aria-pressed', hidden ? 'true' : 'false');
-        const label = hidden ? 'Show artifact title' : 'Hide artifact title';
-        btnTitlesToggle.title = label;
-        btnTitlesToggle.setAttribute('aria-label', label);
-      }
-    }
+    export const TITLES_HIDE_KEY = 'gallery_hide_titles';
+    export const btnTitlesToggle = document.getElementById('btn-titles-toggle');
     applyTitlesHidden(titlesHiddenStored() || document.body.classList.contains('titles-hidden'), false);
     if (btnTitlesToggle) {
       btnTitlesToggle.addEventListener('click', () => {
@@ -1208,116 +1024,14 @@ import * as THREE from 'three';
       return c;
     }
 
-    let activeAssetKey = 'assembled';
+    export let activeAssetKey = 'assembled';
     let currentSingleModel = null;
-    const loadedGLTFScenes = {};
-    // Models are big (4.5-9.5 MB decoded), so only a handful stay cached.
-    // The boot pair (colossus + its 'full_body' alias) is permanent; everything
-    // else is least-recently-used. Evicted models reload from the browser cache.
-    const GLTF_LRU_CAP = 6;
-    const GLTF_PERMANENT = { assembled: true, full_body: true };
-    const gltfLruOrder = [];
-    const gltfRecentlyShown = [];
-    function rememberShownKey(key) {
-      const i = gltfRecentlyShown.indexOf(key);
-      if (i >= 0) gltfRecentlyShown.splice(i, 1);
-      gltfRecentlyShown.push(key);
-      if (gltfRecentlyShown.length > 3) gltfRecentlyShown.shift();
-    }
-    function isGltfEvictable(key) {
-      return !GLTF_PERMANENT[key] && key !== activeAssetKey && gltfRecentlyShown.indexOf(key) === -1;
-    }
-    function disposeGltfScene(model) {
-      model.traverse((child) => {
-        if (child.userData && child.userData.origMat && typeof child.userData.origMat.dispose === 'function') {
-          child.userData.origMat.dispose();
-        }
-        if (child.geometry) child.geometry.dispose();
-        if (child.material) {
-          const mats = Array.isArray(child.material) ? child.material : [child.material];
-          mats.forEach((m) => {
-            Object.values(m).forEach((value) => {
-              if (value && value.isTexture) value.dispose();
-            });
-            m.dispose();
-          });
-        }
-      });
-    }
-    function touchGltf(key) {
-      const i = gltfLruOrder.indexOf(key);
-      if (i >= 0) gltfLruOrder.splice(i, 1);
-      gltfLruOrder.push(key);
-    }
-    function evictGltfs() {
-      const cap = Math.max(GLTF_LRU_CAP - Object.keys(GLTF_PERMANENT).length, 2);
-      let oldest = gltfLruOrder.find(isGltfEvictable);
-      while (gltfLruOrder.filter((k) => !GLTF_PERMANENT[k]).length > cap && oldest) {
-        disposeGltfScene(loadedGLTFScenes[oldest]);
-        delete loadedGLTFScenes[oldest];
-        const i = gltfLruOrder.indexOf(oldest);
-        if (i >= 0) gltfLruOrder.splice(i, 1);
-        oldest = gltfLruOrder.find(isGltfEvictable);
-      }
-    }
-    let explodeAmount = 0;
+    export const loadedGLTFScenes = {};
     let pedestalVisible = false;
 
-    function syncDossierStudyLink(key) {
-      const narStudyLink = document.getElementById('nar-study-link');
-      if (!narStudyLink) return;
-      const J = window.BAJourney;
-      const sitting = J && typeof J.sittingForAsset === 'function' ? J.sittingForAsset(key) : -1;
-      if (sitting >= 0 && J && typeof J.canAccessSheet === 'function' && !J.canAccessSheet(sitting)) {
-        narStudyLink.hidden = true;
-        return;
-      }
-      narStudyLink.hidden = false;
-      if (lessonReturnHref) {
-        narStudyLink.href = lessonReturnHref;
-        narStudyLink.innerHTML = '<span>📖</span> ← Back to this lesson';
-      } else {
-        narStudyLink.href = `study.html?id=${key}`;
-        narStudyLink.innerHTML = '<span>📖</span> Open Full Study Desk &amp; Quiz →';
-      }
-    }
 
 
-    function syncDossierMapLink(key) {
-      const narMapLink = document.getElementById('nar-map-link');
-      if (!narMapLink) return;
-      const y = MAP_YEAR_FOR_ASSET[key] || 'y605';
-      const lessonQuery = lessonSheetSafe
-        ? `&from=lesson&sheet=${encodeURIComponent(lessonSheetSafe)}`
-        : '';
-      narMapLink.href = `map.html?year=${y}${lessonQuery}`;
-      const mapTopLink = document.getElementById('gallery-map-link');
-      if (mapTopLink && lessonSheetSafe) {
-        mapTopLink.href = `map.html?year=${y}&from=lesson&sheet=${encodeURIComponent(lessonSheetSafe)}`;
-      }
-      if (window.BAJourney) window.BAJourney.save({ artifact: key, year: y });
-    }
 
-    function syncDossierNarrative(data) {
-      // Update Right Narrative Column
-      const quote = document.getElementById('nar-scripture-quote');
-      const ref = document.getElementById('nar-scripture-ref');
-      const exp = document.getElementById('nar-explanation');
-      const hist = document.getElementById('nar-historical');
-      const plate = document.getElementById('nar-plate-img');
-      const take = document.getElementById('nar-takeaway');
-      if (quote) quote.textContent = data.quote;
-      if (ref) ref.textContent = data.quoteRef;
-      if (exp) exp.textContent = data.explanation;
-      if (hist) hist.textContent = data.historical;
-      if (plate && data.plateImg) {
-        plate.src = data.plateImg;
-        plate.alt = data.plateCaption || data.title;
-      }
-      const plateCap = document.getElementById('nar-plate-caption');
-      if (plateCap) plateCap.textContent = data.plateCaption || '';
-      if (take) take.textContent = data.takeaway;
-    }
 
     function assetOpen(key) {
       const k = key === 'altar' ? 'assembled' : key;
@@ -1327,7 +1041,7 @@ import * as THREE from 'three';
       return k === 'assembled';
     }
 
-    function selectAsset(key, opts = {}) {
+    export function selectAsset(key, opts = {}) {
       if (tourRunning && !opts.fromTour) stopArtifactTour(true);
       if (key === 'altar') key = 'assembled';
       if (!Object.prototype.hasOwnProperty.call(ASSET_REGISTRY, key)) return;
@@ -1568,174 +1282,10 @@ import * as THREE from 'three';
       });
     }
 
-    function countTriangles(root) {
-      let n = 0;
-      if (!root) return n;
-      root.traverse((child) => {
-        if (!child.isMesh || !child.geometry) return;
-        const idx = child.geometry.index;
-        const pos = child.geometry.attributes.position;
-        if (idx) n += idx.count / 3;
-        else if (pos) n += pos.count / 3;
-      });
-      return n;
-    }
 
-    function updateTriangleReadout() {
-      const el = document.getElementById('dossier-geometry');
-      if (!el) return;
-      let n = 0;
-      if (assembledContainer.visible) n += countTriangles(assembledContainer);
-      if (singleModelContainer.visible) n += countTriangles(singleModelContainer);
-      if (altarPlatformGroup.visible) n += countTriangles(altarPlatformGroup);
-      const label = n >= 1e6 ? `${(n / 1e6).toFixed(2)}M` : n >= 1000 ? `${(n / 1000).toFixed(0)}K` : String(Math.round(n));
-      el.textContent = `${label} Triangles`;
-    }
 
-    // --- GLB ASSET LOADER ---
-    // Each load gets its own manager so a timeout can genuinely abort the
-    // in-flight download (LoadingManager.abortController), not just stop
-    // waiting on it. onSlow fires once past 4s for progressive feedback.
-    function loadGLB(url, onLoad, onError, timeoutMs = 45000, onSlow) {
-      const manager = new THREE.LoadingManager();
-      const loader = new GLTFLoader(manager);
-      if (typeof MeshoptDecoder !== 'undefined') {
-        loader.setMeshoptDecoder(MeshoptDecoder);
-      }
-      let settled = false;
-      let slowTimer = 0;
-      let timer = 0;
-      const settle = (fn, arg) => {
-        if (settled) return;
-        settled = true;
-        clearTimeout(timer);
-        if (slowTimer) clearTimeout(slowTimer);
-        fn(arg);
-      };
-      if (typeof onSlow === 'function') {
-        slowTimer = setTimeout(() => { if (!settled) onSlow(); }, 4000);
-      }
-      timer = setTimeout(() => {
-        try { manager.abortController.abort(); } catch (e) { /* already settled */ }
-        settle(onError, new Error('GLB load timed out: ' + url));
-      }, timeoutMs);
-      loader.load(url, (gltf) => settle(onLoad, gltf), undefined, (err) => settle(onError, err));
-    }
 
-    /* Three's Object3D.clone JSON-serializes userData. A material stored there
-       runs toJSON and writes every texture out as a data URL. Lift those
-       materials off the source for the clone, then put them back. */
-    function cloneExhibit(model) {
-      const held = [];
-      model.traverse((child) => {
-        if (!child.userData || child.userData.origMat == null) return;
-        held.push([child, child.userData.origMat]);
-        delete child.userData.origMat;
-      });
-      try {
-        return model.clone();
-      } finally {
-        held.forEach(([child, mat]) => { child.userData.origMat = mat; });
-      }
-    }
 
-    async function loadGLBAsset(key, onLoaded) {
-      if (MeshoptDecoder && MeshoptDecoder.ready) {
-        try {
-          await Promise.race([
-            MeshoptDecoder.ready,
-            new Promise((_, reject) => setTimeout(() => reject(new Error('meshopt-timeout')), 8000))
-          ]);
-        } catch {
-          /* decoder may still decode; failure is reported by the GLB loader */
-        }
-      }
-      if (loadedGLTFScenes[key]) {
-        touchGltf(key);
-        if (onLoaded) onLoaded(cloneExhibit(loadedGLTFScenes[key]));
-        return;
-      }
-      const data = ASSET_REGISTRY[key];
-      if (!data || !data.filename) return;
-
-      const candidatePaths = [
-        MODELS_PREFIX + data.filename
-      ];
-
-      function markLoadFailure() {
-        if (key === 'assembled' || key === 'head') {
-          loadProgress.failed = true;
-          loadProgress.loadedCount++;
-          loadProgress.label = 'Hero model failed to load';
-          const errEl = document.getElementById('loading-error');
-          if (errEl) {
-            errEl.textContent = `Could not load models/${data.filename}. The altar may still appear — use Continue to enter the gallery.`;
-            errEl.classList.add('visible');
-          }
-          updateLoadingUI();
-        } else {
-          museumToast(`Could not load ${data.title}`);
-        }
-      }
-
-      function tryLoad(idx) {
-        if (idx >= candidatePaths.length) {
-          markLoadFailure();
-          return;
-        }
-        loadGLB(
-          candidatePaths[idx],
-          (gltf) => {
-            const model = gltf.scene;
-            model.traverse((child) => {
-              if (child.isMesh) {
-                child.castShadow = true;
-                child.receiveShadow = true;
-                if (child.material) {
-                  child.userData.origMat = child.material.clone();
-                  child.material.envMapIntensity = 1.45;
-                  child.material.needsUpdate = true;
-                }
-              }
-            });
-            loadedGLTFScenes[key] = model;
-            if (key === 'assembled') loadedGLTFScenes['full_body'] = model;
-            touchGltf(key);
-            if (key === 'assembled') touchGltf('full_body');
-            evictGltfs();
-            if (!loadProgress.heroAssetCounted) {
-              loadProgress.heroAssetCounted = true;
-              loadProgress.loadedCount++;
-              loadProgress.label = `${data.title} mounted`;
-              updateLoadingUI();
-            }
-            if (onLoaded) {
-              setTimeout(() => {
-                try {
-                  onLoaded(cloneExhibit(model));
-                } catch (e) {
-                  if (key === 'assembled') markLoadFailure();
-                }
-              }, 0);
-            }
-          },
-          () => {
-            tryLoad(idx + 1);
-          },
-          45000,
-          () => {
-            /* Progressive feedback while a model is still arriving. */
-            if (key === 'assembled' || key === 'head') {
-              const status = document.getElementById('loading-status');
-              if (status) status.textContent = 'Still assembling — this can take a little longer\u2026';
-            } else {
-              museumToast(`Still fetching ${data.title}\u2026`);
-            }
-          }
-        );
-      }
-      tryLoad(0);
-    }
 
     // --- ASSEMBLED PROPHETIC COLOSSUS BUILDER ---
     let assembledBuilt = false;
@@ -1861,86 +1411,8 @@ import * as THREE from 'three';
     );
 
 
-    // --- STUDY RENDER MODES ---
-    let activeStudyMode = 'gold';
     applyChiaroscuroRig(false);
-    function disposeMaterial(mat) {
-      if (!mat) return;
-      if (Array.isArray(mat)) {
-        mat.forEach(disposeMaterial);
-        return;
-      }
-      if (typeof mat.dispose === 'function') mat.dispose();
-    }
-    function replaceMeshMaterial(child, nextMat) {
-      const prev = child.material;
-      const ownsPrev = !!child.userData.ownsMaterial;
-      if (ownsPrev && prev && prev !== child.userData.origMat && prev !== nextMat) {
-        disposeMaterial(prev);
-      }
-      child.material = nextMat;
-      child.userData.ownsMaterial = true;
-    }
-    function releaseExhibitMaterials(rootObj) {
-      if (!rootObj) return;
-      rootObj.traverse((child) => {
-        if (!child.isMesh || !child.userData) return;
-        const orig = child.userData.origMat;
-        if (child.userData.ownsMaterial && child.material !== orig) disposeMaterial(child.material);
-        if (orig) disposeMaterial(orig);
-        delete child.userData.origMat;
-        delete child.userData.ownsMaterial;
-      });
-    }
-    function applyStudyModeToMeshes(rootObj) {
-      if (!rootObj) return;
-      rootObj.traverse((child) => {
-        if (!child.isMesh) return;
-        let orig = child.userData && child.userData.origMat;
-        if (!orig || typeof orig.clone !== 'function') {
-          if (child.material && typeof child.material.clone === 'function') {
-            orig = child.userData.origMat = child.material.clone();
-          }
-        }
-        if (activeStudyMode === 'gold') {
-          if (orig && typeof orig.clone === 'function') {
-            const mat = orig.clone();
-            mat.wireframe = false;
-            mat.envMapIntensity = 1.45;
-            mat.needsUpdate = true;
-            replaceMeshMaterial(child, mat);
-          }
-        } else if (activeStudyMode === 'clay') {
-          replaceMeshMaterial(child, new THREE.MeshStandardMaterial({
-            color: 0xa89c8a, roughness: 0.9, metalness: 0.0,
-            wireframe: false, envMapIntensity: 0.3
-          }));
-        } else if (activeStudyMode === 'wireframe') {
-          replaceMeshMaterial(child, new THREE.MeshStandardMaterial({
-            color: 0xffd678, emissive: 0x3d2706,
-            roughness: 0.4, metalness: 0.3, wireframe: true
-          }));
-        } else if (activeStudyMode === 'lighting') {
-          if (orig && typeof orig.clone === 'function') {
-            const mat = orig.clone();
-            mat.wireframe = false;
-            if ('envMapIntensity' in mat) mat.envMapIntensity = 0.6;
-            mat.needsUpdate = true;
-            replaceMeshMaterial(child, mat);
-          }
-        }
-      });
-    }
 
-    function setStudyMode(mode) {
-      activeStudyMode = mode;
-      applyChiaroscuroRig(mode === 'lighting');
-      document.querySelectorAll('[data-mode]').forEach(b => b.classList.toggle('active', b.dataset.mode === mode));
-      if (assembledContainer.visible) applyStudyModeToMeshes(assembledContainer);
-      if (singleModelContainer.visible) applyStudyModeToMeshes(singleModelContainer);
-      museumToast(`Render Mode: ${mode === 'lighting' ? 'CHIAROSCURO' : mode.toUpperCase()}`);
-      if (window.Insights) window.Insights.track('gallery_mode', null, { mode: mode });
-    }
     document.querySelectorAll('[data-mode]').forEach(b => {
       b.addEventListener('click', () => setStudyMode(b.dataset.mode));
     });
@@ -2045,7 +1517,7 @@ import * as THREE from 'three';
       });
     });
 
-    function openArtifactKeys() {
+    export function openArtifactKeys() {
       return artifactOrder.filter(assetOpen);
     }
     function stepArtifact(dir) {
@@ -2107,37 +1579,6 @@ import * as THREE from 'three';
         if (b) handleNodeClick(b.dataset.node);
       });
     }
-    let tourRunning = false;
-    let tourTimer = 0;
-    function stopArtifactTour(announce) {
-      if (!tourRunning) return;
-      tourRunning = false;
-      clearTimeout(tourTimer);
-      tourTimer = 0;
-      if (announce) museumToast('Tour stopped');
-    }
-    function startArtifactTour() {
-      if (tourRunning) {
-        stopArtifactTour(true);
-        return;
-      }
-      tourRunning = true;
-      let i = 0;
-      const order = openArtifactKeys().filter((k) => k !== 'altar');
-      const step = () => {
-        if (!tourRunning) return;
-        if (i >= order.length) { tourRunning = false; museumToast('Tour complete'); return; }
-        if (selectAsset._busy) {
-          tourTimer = setTimeout(step, TOUR_BUSY_RETRY_MS);
-          return;
-        }
-        selectAsset(order[i], { fromTour: true });
-        i += 1;
-        tourTimer = setTimeout(step, reducedMotion ? 400 : 2800);
-      };
-      museumToast('Guided artifact tour · press T or Esc to stop');
-      step();
-    }
     window.addEventListener('keydown', (e) => {
       if (e.key !== 't' && e.key !== 'T') return;
       if (e.ctrlKey || e.metaKey || e.altKey) return;
@@ -2158,18 +1599,6 @@ import * as THREE from 'three';
       btnCloseLab.addEventListener('click', () => labDrawer.classList.remove('open'));
     }
 
-    function setExplode(pct) {
-      explodeAmount = Math.max(0, Math.min(1, pct / 100));
-      const slider = document.getElementById('explode-slider');
-      const label = document.getElementById('explode-val');
-      const toggle = document.getElementById('btn-explode-toggle');
-      if (slider && Number(slider.value) !== pct) slider.value = String(pct);
-      if (label) label.textContent = pct <= 0 ? '0% (Assembled)' : `${pct}% lift`;
-      if (toggle) {
-        toggle.classList.toggle('active', pct > 0);
-        toggle.textContent = pct > 0 ? 'Lift from Altar: ON' : 'Lift from Altar';
-      }
-    }
     const explodeSlider = document.getElementById('explode-slider');
     if (explodeSlider) {
       explodeSlider.addEventListener('input', (e) => {
