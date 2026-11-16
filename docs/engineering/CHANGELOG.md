@@ -5,6 +5,23 @@ Newest first. Every change to the site adds an entry here, in the same change. E
 Entry template:
 
 ```
+## 2026-11-16 — Deleting an account clears its own parked changes
+
+**Why:** the user decided that deleting an account should also remove that account's own stash keys from the device. Before, `baProgressStash:<id>` and `baStudySyncStash:<id>` for the deleted account stayed behind, waiting for an owner who no longer exists.
+
+**What changed:**
+
+- `js/shared/account.js`: `confirmDelete` reads the signed-in user's id before deletion and passes it to `clearSiteStorage(userId)`, which now also removes `baProgressStash:<id>` and `baStudySyncStash:<id>`. Other accounts' stashes are left alone. With no id, no stash key is removed.
+- `tests/unit/account-delete-storage.test.mjs` (new): runs the real storage-clearing functions from `account.js` against fake storage. It fails 2 of 3 on the old code and passes 3 of 3 now.
+- `privacy.html`: the storage table says deletion removes your own set-aside changes and keeps other accounts'.
+- From `arch/phase-1-shared-helpers` up: `tools/storage-keys.mjs` marks the two stash prefixes `deleteOwnAccount`, and `tests/unit/storage-keys.test.mjs` checks that they match `OWN_STASH_PREFIXES` in `account.js`. Chapter 04's open question on this is replaced by the decision.
+
+**Handbook updated:** 04 (personal data on the device).
+
+**Checked here:** on `arch/phase-0-safety-net`, on Windows: lint exits 0, `npm run test:unit` passes 115 of 115, every `npm test` script passes, and `npm run test:browser` passes 29 of 29.
+
+**Status:** committed on `arch/phase-0-safety-net`, merged upward. Not deployed.
+
 ## YYYY-MM-DD — short title
 **Why:** one or two sentences.
 **What changed:** bullet list, with file paths.

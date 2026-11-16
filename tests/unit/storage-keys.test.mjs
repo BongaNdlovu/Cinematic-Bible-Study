@@ -113,6 +113,12 @@ test("the keys cleared on account deletion match SITE_KEYS and SITE_KEY_PREFIXES
   assert.deepEqual(actual, expected);
 });
 
+test("the stash prefixes cleared for the deleted account match OWN_STASH_PREFIXES in account.js", () => {
+  const actual = listIn(read("js/shared/account.js"), "OWN_STASH_PREFIXES").sort();
+  const expected = STORAGE_KEYS.filter((e) => e.deleteOwnAccount).map((e) => e.key).sort();
+  assert.deepEqual(actual, expected);
+});
+
 test("the privacy page names every key a reader's browser can hold", () => {
   const privacy = read("privacy.html").replace(/&lt;/g, "<").replace(/&gt;/g, ">");
   const missing = STORAGE_KEYS.filter((e) => !e.localhostOnly && !privacy.includes(e.key)).map((e) => e.key);
