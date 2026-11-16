@@ -14,6 +14,24 @@ Entry template:
 
 ---
 
+## 2026-11-16 — Architecture plan, step 4.4: the gallery's data out of app.js
+
+**Why:** `js/gallery/app.js` held 4,516 lines. About 1,700 of them were artifact data that no gallery state touches.
+
+**What changed:**
+
+- `js/gallery/artifact-registry.js` (new, 1,687 lines): `ASSET_REGISTRY`, `MUSEUM_NODES_DATA`, `nodeUnlocked`, `getNodeDataForAsset`, `MAP_YEAR_FOR_ASSET` and `artifactOrder`.
+- `js/gallery/hall-art.js` (new, 190 lines): `HALL_BACKDROPS`, `WALL_FRAMES`, `createStoneReliefCanvas`, `createCelestialHaloTexture` and `ICONS`.
+- `app.js` (now 2,654 lines) imports both with root paths. A staged run of `tools/hash-release-assets.mjs` rewrote both imports to the hashed names.
+- `tools/verify/verify_moved_functions.mjs` shows all 11 moved declarations have the same syntax trees.
+- **Not split:** the scene, the model cache, the tour and the study looks. Their functions read and assign the 37 top-level `let` declarations in `app.js` (counted by `grep -c "^    let "`). An ES module cannot assign another module's `let`, so moving them needs a shared state object, which is a code change, not a move. Left for a later step.
+
+**Handbook updated:** 03 (`js/gallery/`, where a 3D artifact goes).
+
+**Checked here:** on Windows: lint exits 0, `npm run test:unit` passes 176 of 176, every `npm test` script passes, and `npm run test:browser` passes 30 of 30. No gallery screenshot was compared by hand (not checked).
+
+**Status:** on branch `arch/phase-4-scripts`, not deployed.
+
 ## 2026-11-16 — Architecture plan, step 4.3: pure helpers out of the one-function files
 
 **Why:** code inside one large closure can only be tested through a browser. Pure helpers outside it get fast unit tests.
