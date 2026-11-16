@@ -15,7 +15,7 @@ The site is in good shape for its kind: a static site with Supabase (database an
 | Gaps left open, with a reason | 5 |
 | Not checked | 6 |
 
-The one **medium** gap left open is that sign-in tokens are kept in `localStorage`. OWASP says not to do this. The strict script policy makes it much harder to exploit, and the real fix needs a server-side session (Phase 2 of `docs/MIGRATION-PLAN-CLOUDFLARE.md`).
+The one **medium** gap left open is that sign-in tokens are kept in `localStorage`. OWASP says not to do this. The strict script policy makes it much harder to exploit, and the real fix needs a server-side session (Phase 2 of `docs/archive/2026-11-12-MIGRATION-PLAN-CLOUDFLARE.md`).
 
 ## 2. Meets the guidance
 
@@ -49,7 +49,7 @@ The one **medium** gap left open is that sign-in tokens are kept in `localStorag
 
 | # | Severity | Gap | Cheat sheet | Why it is open | Recommendation |
 |---|---|---|---|---|---|
-| G1 | **Medium** | Sign-in tokens (access and refresh) are stored in `localStorage` | `Session_Management_Cheat_Sheet.md:201`; `HTML5_Security_Cheat_Sheet.md:53` | Supabase's browser client stores them there; an `HttpOnly` cookie needs a server-side session | Keep the strict script CSP (it is the main defence). Move to server-side sessions in Phase 2 of `docs/MIGRATION-PLAN-CLOUDFLARE.md` |
+| G1 | **Medium** | Sign-in tokens (access and refresh) are stored in `localStorage` | `Session_Management_Cheat_Sheet.md:201`; `HTML5_Security_Cheat_Sheet.md:53` | Supabase's browser client stores them there; an `HttpOnly` cookie needs a server-side session | Keep the strict script CSP (it is the main defence). Move to server-side sessions in Phase 2 of `docs/archive/2026-11-12-MIGRATION-PLAN-CLOUDFLARE.md` |
 | G2 | Low | `style-src` allows `'unsafe-inline'` | `Content_Security_Policy_Cheat_Sheet.md` | Inline styles are used across pages | Move inline styles to classes over time |
 | G3 | Low | CSP reports use only `report-uri` | `Content_Security_Policy_Cheat_Sheet.md:106` | Works in current browsers | Add `report-to` with a `Reporting-Endpoints` header when convenient |
 | G4 | — | **Fixed on 13 November 2026, see F5.** `Cross-Origin-Opener-Policy` was `same-origin-allow-popups` | `HTTP_Headers_Cheat_Sheet.md:160-163` | — | — |

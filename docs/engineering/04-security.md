@@ -85,7 +85,7 @@ on conflict (name) do update set key_hash = excluded.key_hash;
 | `all` | Any other non-static path | 240 a minute |
 | (none) | `/assets/`, `/js/`, `/css/`, `/vendor/`, `/models/`, `/bible/` | Not counted |
 
-**What actually uses the gate today:** only `/csp-report` and the `/__rate` proxy. Page paths are deliberately left out of `_routes.json`, so page views never invoke Functions and never spend the Functions quota. `tools/verify/verify_pages_deny.mjs` enforces this. As a result, the `account` and `all` buckets, and the middleware's page-serving branch (`servePage`), are not used for pages today. Supabase's own Auth rate limits protect sign-in (see `docs/ARCHITECTURE.md` for the configured values).
+**What actually uses the gate today:** only `/csp-report` and the `/__rate` proxy. Page paths are deliberately left out of `_routes.json`, so page views never invoke Functions and never spend the Functions quota. `tools/verify/verify_pages_deny.mjs` enforces this. As a result, the `account` and `all` buckets, and the middleware's page-serving branch (`servePage`), are not used for pages today. Supabase's own Auth rate limits protect sign-in (see `docs/archive/2026-09-10-ARCHITECTURE.md` for the configured values).
 
 If the gate cannot be reached, a page read is still served. A non-GET request, `/csp-report` included, gets `503`. Gate outages are reported to `exhibit_events` as `limit_unavailable`, at most once a minute per isolate.
 
@@ -187,7 +187,7 @@ Function permissions checked live: guests (`anon`) **can** call `exhibit_public_
 - `.github/dependabot.yml` proposes weekly updates for actions and npm packages, each held back 7 days after release (`cooldown`), so a freshly compromised release is not picked up at once.
 - `.npmrc` sets `ignore-scripts=true`, so `npm ci` runs no package install scripts. On 13 November 2026 only `fsevents` (Mac-only, optional) had one, and `package.json` has no lifecycle scripts.
 - `tests/unit/supply-chain.test.mjs` checks all of the above, plus that no workflow uses `pull_request_target`, `workflow_run` or `issue_comment`.
-- The full OWASP review, with open gaps and their reasons, is `docs/SECURITY-ASSESSMENT-OWASP.md` (13 November 2026).
+- The full OWASP review, with open gaps and their reasons, is `docs/archive/2026-11-13-SECURITY-ASSESSMENT-OWASP.md` (13 November 2026).
 
 ## Security tests
 

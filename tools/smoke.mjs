@@ -4,7 +4,7 @@ const SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_k3fsJ1eGKIcmOxtmaZHbJw_R1qdW_ya
 const AUTH_HEALTH = SUPABASE_URL + '/auth/v1/health';
 const DB_READ = SUPABASE_URL + '/rest/v1/rpc/exhibit_public_review_count';
 const PAGES = ['/', '/study', '/account', '/reviews', '/map', '/gallery', '/privacy', '/terms'];
-const PRIVATE = ['/docs/ARCHITECTURE.md', '/tests/unit/middleware.test.mjs', '/.git/config', '/wrangler.toml', '/server.py', '/tools/deploy-cloudflare-pages.ps1', '/functions/_middleware.js'];
+const PRIVATE = ['/docs/archive/2026-09-10-ARCHITECTURE.md', '/tests/unit/middleware.test.mjs', '/.git/config', '/wrangler.toml', '/server.py', '/tools/deploy-cloudflare-pages.ps1', '/functions/_middleware.js'];
 const HEADERS = {
   'content-security-policy': /default-src 'self'/,
   'x-content-type-options': /^nosniff$/,

@@ -29,10 +29,10 @@ Split the function into focused functions. Do not raise 55. Do not suppress the 
 
 1. From the repo root, run `node .cursor/skills/complexity-ceiling/scripts/rank.mjs`.
 2. Set the maximum to the new highest linted score plus 2.
-3. Update the table in `docs/ARCHITECTURE.md` and the ceiling sentence in `README.md`.
+3. Update the ceiling sentence in `README.md` and the `npm run lint` row in `docs/engineering/07-develop-test-release.md`.
 4. `npm run lint` must finish with no errors.
 
-Last measured linted top scores are in `docs/ARCHITECTURE.md`. If that table and `.oxlintrc.json` disagree, re-measure. The config number is what CI enforces.
+Step 1 prints the current top scores; `docs/archive/2026-09-10-ARCHITECTURE.md` keeps an older table as history only. The config number is what CI enforces.
 
 ## Do not import
 

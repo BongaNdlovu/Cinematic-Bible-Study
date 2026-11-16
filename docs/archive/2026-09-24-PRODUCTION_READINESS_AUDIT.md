@@ -154,7 +154,7 @@ Within the current static + rate-limit stack, implementing (2) cleanly was judge
 | **LOW** | `insights.html`, `404.html` | Missing meta description / robots. | Added description + `noindex`. | **Fixed** |
 | **LOW** | Quiz data pattern | All 55 quizzes use `correct: 0` (correct option always first). Content answers are right; pattern is cheatable. | Documented; not shuffled (would need seeded UI shuffle). | **Open** |
 | **INFO** | Gate strength | CF/Vercel middleware rate-limits only; static files publicly fetchable. | Documented; recommend Access/JWT edge if assets must be secret. | **Noted** |
-| **INFO** | `docs/PROJECT_AUDIT_REPORT.md` | Prior audit describes deleted monolith (`server.js`, `assets-data.js`, CDN Three.js, etc.). | Do not trust; superseded by this report. | **Noted** |
+| **INFO** | `docs/archive/2026-09-08-PROJECT_AUDIT_REPORT.md` | Prior audit describes deleted monolith (`server.js`, `assets-data.js`, CDN Three.js, etc.). | Do not trust; superseded by this report. | **Noted** |
 | **INFO** | Lint / `npm test` | `oxlint` clean; header/insights/ratelimit verify PASS before and after. | — | **Pass** |
 | **INFO** | Asset paths | Tracked GLBs + study audio/infographics/epochs + HTML refs — **0 missing** on Linux case-sensitive FS. | — | **Pass** |
 
@@ -175,7 +175,7 @@ Artifacts:
 - Bundle: `/workspace/audit-prod/audit-production-readiness.bundle`  
 - Patch: `/workspace/audit-prod/production-fixes.patch`  
 - This report + screenshots under `/workspace/audit-prod/evidence/`  
-- In-repo copy: `docs/PRODUCTION_READINESS_AUDIT_2026-09-24.md`
+- In-repo copy: `docs/archive/2026-09-24-PRODUCTION_READINESS_AUDIT.md`
 
 Windows (PowerShell), from a clone of the repo:
 

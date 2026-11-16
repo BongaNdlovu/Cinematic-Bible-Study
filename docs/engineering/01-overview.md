@@ -48,7 +48,7 @@ The site credits Fanelesibonge Ndlovu as its creator (`index.html` footer).
 
 ## Current state (12 November 2026)
 
-- The audit fixes of 12 November 2026 are live: commit `f9db265` passed CI and was deployed and smoke-tested that day. See [`docs/FIX-REPORT-2026-11-12.md`](../FIX-REPORT-2026-11-12.md).
+- The audit fixes of 12 November 2026 are live: commit `f9db265` passed CI and was deployed and smoke-tested that day. See [`docs/archive/2026-11-12-FIX-REPORT.md`](../archive/2026-11-12-FIX-REPORT.md).
 - Four further state fixes went live the same day (commit `27d9499`, CI deploy and smoke test passed).
 - The known-issue fixes (see [CHANGELOG.md](CHANGELOG.md)) were pushed to `master` for deployment the same day.
 - Lint is clean. The main suite passes, 73 of 73 unit tests pass, and 22 of 22 security audit checks pass (all run 12 November 2026, including the state fixes).
@@ -64,7 +64,7 @@ The site credits Fanelesibonge Ndlovu as its creator (`index.html` footer).
 
 ### Known issues
 
-None open. The issues confirmed from `docs/implicit-state-machines.md` on 12 November 2026 were fixed the same day (see [CHANGELOG.md](CHANGELOG.md)).
+None open. The issues confirmed from `docs/archive/2026-11-12-implicit-state-machines.md` on 12 November 2026 were fixed the same day (see [CHANGELOG.md](CHANGELOG.md)).
 
 That document also lists many design observations, such as one state kept in several places or yes/no flags standing in for named states. They are not bugs, but they are useful when refactoring.
 

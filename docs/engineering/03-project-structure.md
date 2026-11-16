@@ -21,7 +21,7 @@ The site has no build step for its pages. The files in the repository root and i
 ├── vendor/                Pinned third-party code: three, leaflet, supabase, sentry
 ├── tests/unit/            node:test unit tests (npm run test:unit)
 ├── tools/                 Build, verify, deploy, SQL, audit and content scripts
-├── docs/                  Documentation (this handbook lives in docs/engineering/)
+├── docs/                  engineering/ (this handbook) and archive/ (dated older papers)
 ├── server.py              Local static server
 ├── start_website.bat      Windows launcher for server.py
 ├── wrangler.toml          Cloudflare Pages settings and Durable Object binding

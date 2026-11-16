@@ -2,7 +2,7 @@
 
 > **Start with the [engineering handbook](engineering/README.md).** It is the maintained description of the whole site. This file is kept for its detailed tables. Where the two disagree, the handbook wins. Some statements here are older: the site now has 11 pages, a Cloudflare Pages Functions middleware, and a rate-limit Worker, and moderators need an authenticator app.
 
-The pages are static files at the repo root. Locally, Python `server.py` serves them. There is no bundler. Course-content work lives in [COURSE_IMPROVEMENT_PLAN.md](COURSE_IMPROVEMENT_PLAN.md); this file answers “where does X live?”
+The pages are static files at the repo root. Locally, Python `server.py` serves them. There is no bundler. Course-content work lives in [2026-09-10-COURSE_IMPROVEMENT_PLAN.md](2026-09-10-COURSE_IMPROVEMENT_PLAN.md); this file answers “where does X live?”
 
 ## Pages → scripts
 
@@ -77,7 +77,7 @@ Fetch paths are **document-relative** (pages stay at repo root): `bible/*.json`,
 | Sheet verse highlights | `bible/sheet-passages.json` |
 | A map city / event / year | `js/map/map-data.js` |
 | A 3D artifact | `models/*.glb` + `js/gallery/app.js` (`ASSET_REGISTRY`) + plate/thumb under `assets/` |
-| Course sequencing / gates | [COURSE_IMPROVEMENT_PLAN.md](COURSE_IMPROVEMENT_PLAN.md) — do not mix that work into a move PR |
+| Course sequencing / gates | [2026-09-10-COURSE_IMPROVEMENT_PLAN.md](2026-09-10-COURSE_IMPROVEMENT_PLAN.md) — do not mix that work into a move PR |
 
 ## Tools and QA
 
@@ -129,11 +129,11 @@ Google sign-in goes from the browser straight to Supabase. The page's 5-starts-p
 | Emails sent | 2 / hour |
 | SMS sent | 30 / hour |
 
-New passwords and password changes must be at least 12 characters. That floor is the Auth setting, confirmed on 18 Oct 2026. An existing shorter password can still sign in. Leaked-password rejection is shown as Pro and above, so it is off. The password-attempt hook function is in the database and granted only to `supabase_auth_admin`; Auth Hooks lists it as Team or Enterprise, so it is not enabled. Operator privilege requires a confirmed Google identity. A second factor is required only after a verified authenticator already exists. What to do in an incident is `docs/AUTH-INCIDENT.md`.
+New passwords and password changes must be at least 12 characters. That floor is the Auth setting, confirmed on 18 Oct 2026. An existing shorter password can still sign in. Leaked-password rejection is shown as Pro and above, so it is off. The password-attempt hook function is in the database and granted only to `supabase_auth_admin`; Auth Hooks lists it as Team or Enterprise, so it is not enabled. Operator privilege requires a confirmed Google identity. A second factor is required only after a verified authenticator already exists. What to do in an incident is `docs/archive/2026-10-18-AUTH-INCIDENT.md`.
 
 The database backup screen on 26 Sep 2026 said this project is on the Free plan, which does not include project backups. Scheduled backups would be daily, around midnight in the project region, and the Pro plan keeps up to 7 days. Point-in-time recovery is a Pro add-on that starts at $100 a month. The recovery point for progress rows is the export taken at `2026-09-26T22:54:04Z`, saved as `backups/exhibit-progress-2026-09-26T225404Z.json` (4 rows). That folder is not committed because the rows contain learner names and email addresses. `node tools/restore-exhibit-progress.mjs <snapshot>` writes `backups/restore-exhibit-progress.sql`, which rolls back until the last line is changed to `commit`. Run the table SQL in `tools/` first if the table itself is gone. Recovery time for the site is a Cloudflare Pages rollback. No production restore was run.
 
-A page read is still served when the counter is missing or times out. A non-GET request, including the gate proxy and a CSP report, gets 503 in that case. `limit_unavailable` is still recorded. Ordinary pages share 240 reads a minute. `/account` and `/account.html` share 120. `/csp-report` has 10. Static files under `/assets/`, `/js/`, `/css/`, `/vendor/`, `/models/`, and `/bible/` do not spend a counter. An expired counter is deleted on the next check for that address, so a one-time visitor does not leave a stored window behind. What to do when sign-in looks like an attack is in `docs/AUTH-INCIDENT.md`.
+A page read is still served when the counter is missing or times out. A non-GET request, including the gate proxy and a CSP report, gets 503 in that case. `limit_unavailable` is still recorded. Ordinary pages share 240 reads a minute. `/account` and `/account.html` share 120. `/csp-report` has 10. Static files under `/assets/`, `/js/`, `/css/`, `/vendor/`, `/models/`, and `/bible/` do not spend a counter. An expired counter is deleted on the next check for that address, so a one-time visitor does not leave a stored window behind. What to do when sign-in looks like an attack is in `docs/archive/2026-10-18-AUTH-INCIDENT.md`.
 
 ## Offline runtime
 

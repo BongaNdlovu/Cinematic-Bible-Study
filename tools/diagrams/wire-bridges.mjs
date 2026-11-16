@@ -20,7 +20,7 @@ import vm from 'vm';
 
 const CHECK = process.argv.includes('--check');
 const DATA = 'js/study/sheets-data.js';
-const DRAFTS = ['docs/batch-sheets-0-2.md', 'docs/batch-sheets-4-6.md', 'docs/batch-sheets-9-10.md'];
+const DRAFTS = ['docs/archive/2026-10-14-batch-sheets-0-2.md', 'docs/archive/2026-10-14-batch-sheets-4-6.md', 'docs/archive/2026-10-14-batch-sheets-9-10.md'];
 
 function parse(js) {
   const part = js.slice(js.indexOf('const sheetsData'), js.indexOf('const timelineEpochs'));

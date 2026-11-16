@@ -6,7 +6,7 @@ Copy everything below this line into the agent/developer work order.
 
 ## Mission
 
-Reorganize this repository so that a new developer can answer "where does X live?" in under a minute, and give the codebase its first automated cyclomatic-complexity ceiling. This is a structural refactor: **no behavior changes, no content changes, no URL changes.** Course-content work is governed separately by `COURSE_IMPROVEMENT_PLAN.md` — this refactor is its prerequisite.
+Reorganize this repository so that a new developer can answer "where does X live?" in under a minute, and give the codebase its first automated cyclomatic-complexity ceiling. This is a structural refactor: **no behavior changes, no content changes, no URL changes.** Course-content work is governed separately by `2026-09-10-COURSE_IMPROVEMENT_PLAN.md` — this refactor is its prerequisite.
 
 ## Hard constraints (do not break any of these)
 
@@ -41,7 +41,7 @@ Reorganize this repository so that a new developer can answer "where does X live
                         sheets-data.js (extracted sheetsData + EPOCHS literals)
 /bible/                 kjv.json  strongs-daniel.json  sheet-passages.json   (data corpus — unchanged)
 /assets/  /models/  /vendor/                                             (unchanged)
-/docs/                  README-linked: PROJECT_AUDIT_REPORT.md  COURSE_IMPROVEMENT_PLAN.md
+/docs/                  README-linked: 2026-09-08-PROJECT_AUDIT_REPORT.md  2026-09-10-COURSE_IMPROVEMENT_PLAN.md
 /qa/                    proofs/  reports/        (gitignored — regenerable artifacts)
 /tools/
   compress/             compress_*.mjs
@@ -59,11 +59,11 @@ Reorganize this repository so that a new developer can answer "where does X live
    - Relative paths between tools and pages in `tools/*.mjs` (`file://`/`http://127.0.0.1:8000` targets), and the `npm run` script paths in `package.json`.
    - Cross-page hrefs in JS (`journey.js` `resumeHref`, gallery/map/study cross-links, `LEGACY_ID_MAP` targets).
 3. Delete `study.js`, `study-data.js`, `study.css` only after `grep -rn "study-data\|study\.js\|study\.css" --include="*.html" --include="*.js"` shows zero live references; otherwise archive under `/legacy/` with a README line explaining what they were.
-4. Update `README.md` (site map + layout table) and add `docs/ARCHITECTURE.md`: one page — page-to-JS mapping, data flow (`journey.js` → localStorage), how instruments connect, where new content goes.
+4. Update `README.md` (site map + layout table) and add `docs/archive/2026-09-10-ARCHITECTURE.md`: one page — page-to-JS mapping, data flow (`journey.js` → localStorage), how instruments connect, where new content goes.
 
 ## Workstream B — Inline-script extraction (PR 2: still no logic changes)
 
-1. Extract each inline `<script>` block in `study.html` into `js/study/` files, **preserving execution order** as one `<script>` per former block (or one module fed the same globals). `sheetsData` + `EPOCHS` data literals go to `js/study/sheets-data.js` (plain script defining globals, loaded before the app script — this is the seam `COURSE_IMPROVEMENT_PLAN.md` Phase 0 builds on).
+1. Extract each inline `<script>` block in `study.html` into `js/study/` files, **preserving execution order** as one `<script>` per former block (or one module fed the same globals). `sheetsData` + `EPOCHS` data literals go to `js/study/sheets-data.js` (plain script defining globals, loaded before the app script — this is the seam `2026-09-10-COURSE_IMPROVEMENT_PLAN.md` Phase 0 builds on).
 2. `journey.js` must load before any consumer; verify the existing `DOMContentLoaded` init still runs after DOM construction (external classic scripts at the same body position preserve this).
 3. This is the riskiest PR. It must be verified by the full `tools/verify/` suite plus manual click-through before it can merge.
 
@@ -91,7 +91,7 @@ Stacked, in order: **PR 1** file moves + reference fixes + docs (diff should be 
 ## Acceptance criteria
 
 - [ ] Root contains only: 4 HTML pages, server.py, start_website.bat, package.json, README.md, dotfiles.
-- [ ] A newcomer can open `docs/ARCHITECTURE.md` and locate any behavior (gate logic, weather engine, map data, artifact DB) by file path in under a minute.
+- [ ] A newcomer can open `docs/archive/2026-09-10-ARCHITECTURE.md` and locate any behavior (gate logic, weather engine, map data, artifact DB) by file path in under a minute.
 - [ ] All deep links and localStorage keys work; `?preview=full` still unlocks.
 - [ ] `npm run lint` fails any function above the ceiling; CI runs it on every push.
 - [ ] Complexity ceiling documented with the top-5 table; zero suppressions in the codebase.
@@ -99,4 +99,4 @@ Stacked, in order: **PR 1** file moves + reference fixes + docs (diff should be 
 
 ## Out of scope
 
-Course content, assessment artifacts, Codex drawers, gate redesign (`COURSE_IMPROVEMENT_PLAN.md` Phases 0–6), model re-compression, backend/server endpoints, renaming localStorage keys.
+Course content, assessment artifacts, Codex drawers, gate redesign (`2026-09-10-COURSE_IMPROVEMENT_PLAN.md` Phases 0–6), model re-compression, backend/server endpoints, renaming localStorage keys.
