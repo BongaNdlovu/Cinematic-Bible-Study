@@ -37,10 +37,11 @@ async function settle(page) {
   let last = -1;
   for (let i = 0; i < 40; i++) {
     const now = await page.evaluate(() => window.__raf);
-    if (now === last) return;
+    if (now === last) return true;
     last = now;
     await sleep(750);
   }
+  return false;
 }
 
 async function drag(page) {
@@ -231,11 +232,11 @@ try {
     assert.ok(SKY.every((f) => t.requests.some((u) => u.endsWith(f))), "sky textures were not requested");
     pass("globe loads the cloud and night-light textures");
 
-    await settle(t.page);
+    const settled = await settle(t.page);
     const a = await t.page.evaluate(() => ({ raf: window.__raf, drift: document.querySelector(".cmap-globe").dataset.clouds }));
     await sleep(2000);
     const b = await t.page.evaluate(() => ({ raf: window.__raf, drift: document.querySelector(".cmap-globe").dataset.clouds }));
-    assert.strictEqual(b.raf - a.raf, 0, "clouds made the idle globe draw");
+    assert.strictEqual(b.raf - a.raf, 0, "clouds made the idle globe draw " + JSON.stringify({ settled, a, b }));
     assert.strictEqual(b.drift, a.drift, "clouds moved while idle");
     pass("clouds hold still while the globe is idle");
 
