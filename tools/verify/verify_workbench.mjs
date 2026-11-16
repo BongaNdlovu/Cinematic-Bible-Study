@@ -296,8 +296,14 @@ if (!sqlContent.includes('create table if not exists public.exhibit_surveys')) {
 if (!sqlContent.includes('cohort text default') || !sqlContent.includes('role text default')) {
   throw new Error('supabase-progress.sql exhibit_surveys table missing cohort or role columns.');
 }
-if (!sqlContent.includes('grant select, insert on public.exhibit_surveys to authenticated, anon')) {
-  throw new Error('supabase-progress.sql missing anon survey insert grant.');
+if (!sqlContent.includes('grant select, insert on public.exhibit_surveys to authenticated;')) {
+  throw new Error('supabase-progress.sql missing the signed-in survey insert grant.');
+}
+if (!sqlContent.includes('grant insert on public.exhibit_surveys to anon;')) {
+  throw new Error('supabase-progress.sql missing the anon survey insert grant.');
+}
+if (!sqlContent.includes('revoke select on public.exhibit_surveys from anon, public;')) {
+  throw new Error('supabase-progress.sql no longer stops anon and public from reading surveys.');
 }
 console.log('  PASS: supabase-progress.sql contains complete exhibit_progress and exhibit_surveys schemas.');
 
@@ -345,8 +351,8 @@ if (!fs.existsSync(path.join('js', 'shared', 'progress-sync.js'))) {
   throw new Error('js/shared/progress-sync.js is missing.');
 }
 const syncCode = fs.readFileSync(path.join('js', 'shared', 'progress-sync.js'), 'utf8');
-if (!syncCode.includes('exhibit_progress') || !syncCode.includes('pullAndMerge') || !syncCode.includes('upsert')) {
-  throw new Error('progress-sync.js is missing merge/upsert of exhibit_progress.');
+if (!syncCode.includes('exhibit_progress') || !syncCode.includes('pullAndMerge') || !syncCode.includes('save_exhibit_progress')) {
+  throw new Error('progress-sync.js is missing the merge or the revision-checked save of exhibit_progress.');
 }
 console.log('  PASS: Outcome sentence, OG tags, cohort, survey, hidden empty reviews, and progress-sync are present.');
 

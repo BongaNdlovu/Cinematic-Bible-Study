@@ -15,6 +15,7 @@
 import fs from 'fs';
 import path from 'path';
 import { chromium } from 'playwright';
+import { signedInScript } from './_server.mjs';
 
 const args = Object.fromEntries(
   process.argv.slice(2).map((a) => {
@@ -77,6 +78,8 @@ try {
   await context.addInitScript((mock) => {
     try {
       localStorage.setItem('baQaMockSession', JSON.stringify(mock));
+      localStorage.setItem('baOnboardV1', '1');
+      localStorage.setItem('sodConsent', JSON.stringify({ analytics: false, ts: 1, v: 1 }));
       const raw = localStorage.getItem('baJourney');
       const j = raw ? JSON.parse(raw) : {};
       j.termsAccepted = true;
@@ -88,6 +91,7 @@ try {
     } catch (e) { /* storage disabled */ }
   }, MOCK);
 
+  await context.addInitScript({ content: signedInScript({ bookView: 'scroll' }) });
   const page = await context.newPage();
   const consoleErrors = [];
   page.on('pageerror', (e) => consoleErrors.push(String(e.message)));
@@ -108,6 +112,8 @@ try {
   await rmContext.addInitScript((mock) => {
     try {
       localStorage.setItem('baQaMockSession', JSON.stringify(mock));
+      localStorage.setItem('baOnboardV1', '1');
+      localStorage.setItem('sodConsent', JSON.stringify({ analytics: false, ts: 1, v: 1 }));
       const raw = localStorage.getItem('baJourney');
       const j = raw ? JSON.parse(raw) : {};
       j.termsAccepted = true;
@@ -116,6 +122,7 @@ try {
       localStorage.setItem('baJourney', JSON.stringify(j));
     } catch (e) { /* storage disabled */ }
   }, MOCK);
+  await rmContext.addInitScript({ content: signedInScript({ bookView: 'scroll' }) });
   const rmPage = await rmContext.newPage();
   rmPage.on('pageerror', (e) => consoleErrors.push(String(e.message)));
   rmPage.on('console', (m) => { if (m.type() === 'error') consoleErrors.push(m.text()); });
@@ -132,6 +139,8 @@ try {
   await mobileContext.addInitScript((mock) => {
     try {
       localStorage.setItem('baQaMockSession', JSON.stringify(mock));
+      localStorage.setItem('baOnboardV1', '1');
+      localStorage.setItem('sodConsent', JSON.stringify({ analytics: false, ts: 1, v: 1 }));
       const raw = localStorage.getItem('baJourney');
       const j = raw ? JSON.parse(raw) : {};
       j.termsAccepted = true;
@@ -140,6 +149,7 @@ try {
       localStorage.setItem('baJourney', JSON.stringify(j));
     } catch (e) { /* storage disabled */ }
   }, MOCK);
+  await mobileContext.addInitScript({ content: signedInScript({ bookView: 'scroll' }) });
   const mobilePage = await mobileContext.newPage();
   mobilePage.on('pageerror', (e) => consoleErrors.push(String(e.message)));
   mobilePage.on('console', (m) => { if (m.type() === 'error') consoleErrors.push(m.text()); });

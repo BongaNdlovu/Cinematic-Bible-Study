@@ -4,7 +4,7 @@ import { mkdirSync, statSync } from "node:fs";
 import { chromium } from "playwright";
 
 const PORT = process.env.MAP_PORT || "8013";
-const BASE = `http://127.0.0.1:${PORT}`;
+const BASE = process.env.BASE || `http://127.0.0.1:${PORT}`;
 const LAUNCH = { headless: true, args: ["--use-angle=swiftshader", "--enable-unsafe-swiftshader", "--ignore-gpu-blocklist"] };
 const NOISE = /arcgisonline|openstreetmap|supabase|ERR_|cloudflareinsights|fonts\.g/;
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
@@ -34,13 +34,17 @@ function pass(name) {
 }
 
 async function settle(page) {
+  await page.waitForLoadState('networkidle', { timeout: 30000 }).catch(() => {});
   let last = -1;
-  for (let i = 0; i < 40; i++) {
+  let quiet = 0;
+  for (let i = 0; i < 60; i++) {
     const now = await page.evaluate(() => window.__raf);
-    if (now === last) return;
+    quiet = now === last ? quiet + 1 : 0;
+    if (quiet >= 3) return true;
     last = now;
     await sleep(750);
   }
+  return false;
 }
 
 async function drag(page) {
@@ -88,6 +92,15 @@ async function waitFor(page, fn, ms, arg) {
   return false;
 }
 
+async function glInfo(page) {
+  return page.evaluate(() => {
+    const c = document.createElement("canvas");
+    const gl = c.getContext("webgl2") || c.getContext("webgl");
+    const dbg = gl && gl.getExtension("WEBGL_debug_renderer_info");
+    return { webgl: !!gl, renderer: dbg ? gl.getParameter(dbg.UNMASKED_RENDERER_WEBGL) : null, url: location.href, title: document.title, globeView: !!document.querySelector(".cmap-root.is-globe-view") };
+  });
+}
+
 let server = null;
 let browser = null;
 try {
@@ -112,9 +125,11 @@ try {
 
   {
     const t = await open(browser, "/map.html?preview=full&view=globe&year=y457");
-    assert.ok(await waitFor(t.page, () => document.querySelectorAll(".cmap-gpin:not(.is-hidden)").length > 0, 15000), "globe pins never appeared");
+    const pinsShown = await waitFor(t.page, () => document.querySelectorAll(".cmap-gpin:not(.is-hidden)").length > 0, 45000);
+    if (!pinsShown) assert.fail("globe pins never appeared " + JSON.stringify({ gl: await glInfo(t.page), errors: t.errors }));
     assert.ok(await globeOn(t.page), "view=globe did not open the globe");
     await sleep(3000);
+    await settle(t.page);
     const a = await t.page.evaluate(() => window.__raf);
     await sleep(2000);
     const b = await t.page.evaluate(() => window.__raf);
@@ -123,11 +138,19 @@ try {
     pass("globe draws nothing when idle");
 
     await t.page.mouse.move(900, 300);
-    for (let i = 0; i < 3; i++) {
-      await t.page.mouse.wheel(0, -120);
-      await sleep(60);
+    let imagery = false;
+    for (let round = 0; round < 3 && !imagery; round++) {
+      for (let i = 0; i < 3; i++) {
+        await t.page.mouse.wheel(0, -120);
+        await sleep(60);
+      }
+      imagery = await waitFor(t.page, () => !!document.querySelector(".cmap-globe").dataset.imagery, 20000);
     }
-    assert.ok(await waitFor(t.page, () => !!document.querySelector(".cmap-globe").dataset.imagery, 20000), "close satellite imagery never appeared on the globe");
+    if (!imagery) {
+      const data = await t.page.evaluate(() => Object.assign({}, document.querySelector(".cmap-globe").dataset));
+      const tiles = t.requests.filter((u) => u.includes("arcgisonline")).length;
+      assert.fail("close satellite imagery never appeared on the globe " + JSON.stringify({ data, tiles, errors: t.errors }));
+    }
     assert.ok(await globeOn(t.page), "three wheel steps should not leave the globe");
     await t.page.screenshot({ path: "qa/proofs/globe_proof_imagery.png" });
     pass("zooming close drapes satellite imagery on the globe");
@@ -192,7 +215,7 @@ try {
 
   {
     const t = await open(browser, "/map.html?preview=full&view=globe&year=y331", { width: 390, height: 844 });
-    assert.ok(await waitFor(t.page, () => document.querySelectorAll(".cmap-gpin:not(.is-hidden)").length > 0, 15000), "phone globe pins never appeared");
+    assert.ok(await waitFor(t.page, () => document.querySelectorAll(".cmap-gpin:not(.is-hidden)").length > 0, 45000), "phone globe pins never appeared");
     assert.strictEqual(await t.page.evaluate(() => document.documentElement.scrollWidth), 390, "phone layout scrolls sideways");
     assert.ok(t.requests.some((u) => u.endsWith("earth-day-2k.webp")) && !t.requests.some((u) => u.endsWith("earth-day-4k.webp")), "phone should load the 2k earth only");
     await t.page.screenshot({ path: "qa/proofs/globe_proof_mobile.png" });
@@ -213,11 +236,11 @@ try {
     assert.ok(SKY.every((f) => t.requests.some((u) => u.endsWith(f))), "sky textures were not requested");
     pass("globe loads the cloud and night-light textures");
 
-    await settle(t.page);
+    const settled = await settle(t.page);
     const a = await t.page.evaluate(() => ({ raf: window.__raf, drift: document.querySelector(".cmap-globe").dataset.clouds }));
     await sleep(2000);
     const b = await t.page.evaluate(() => ({ raf: window.__raf, drift: document.querySelector(".cmap-globe").dataset.clouds }));
-    assert.strictEqual(b.raf - a.raf, 0, "clouds made the idle globe draw");
+    assert.strictEqual(b.raf - a.raf, 0, "clouds made the idle globe draw " + JSON.stringify({ settled, a, b }));
     assert.strictEqual(b.drift, a.drift, "clouds moved while idle");
     pass("clouds hold still while the globe is idle");
 

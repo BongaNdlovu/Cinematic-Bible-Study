@@ -1,23 +1,14 @@
 import { spawn } from 'child_process';
 import fs from 'fs';
 import path from 'path';
+import { signedInScript, chromePath, cdpTargets } from './_server.mjs';
 
 fs.mkdirSync(path.join('qa', 'proofs'), { recursive: true });
 
-const CHROME_PATH = [
-  process.env.CHROME_PATH,
-  'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe',
-  'C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe',
-  process.env.LOCALAPPDATA ? path.join(process.env.LOCALAPPDATA, 'Google', 'Chrome', 'Application', 'chrome.exe') : null,
-  '/usr/bin/google-chrome',
-  '/usr/bin/google-chrome-stable',
-  '/usr/bin/chromium-browser',
-  '/usr/bin/chromium',
-  '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
-].find((p) => p && fs.existsSync(p));
+const CHROME_PATH = chromePath();
 
 const SERVER_PORT = 8013;
-const SERVER_BASE = `http://127.0.0.1:${SERVER_PORT}`;
+const SERVER_BASE = process.env.BASE || `http://127.0.0.1:${SERVER_PORT}`;
 
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -505,12 +496,9 @@ async function run() {
     'about:blank'
   ]);
 
-  await sleep(1500);
-
   let client;
   try {
-    const listRes = await fetch('http://127.0.0.1:9223/json');
-    const targets = await listRes.json();
+    const targets = await cdpTargets(9223);
     const pageTarget = targets.find(t => t.type === 'page' && !t.url.startsWith('chrome-extension://')) || targets[0];
     if (!pageTarget || !pageTarget.webSocketDebuggerUrl) {
       throw new Error('Chrome target not found');
@@ -518,6 +506,7 @@ async function run() {
 
     client = new CDPClient(pageTarget.webSocketDebuggerUrl);
     await client.send('Page.enable');
+    await client.send('Page.addScriptToEvaluateOnNewDocument', { source: signedInScript() });
     await client.send('Runtime.enable');
     await client.send('Page.addScriptToEvaluateOnNewDocument', {
       source: `

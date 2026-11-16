@@ -1350,14 +1350,10 @@
     if (window.ResizeObserver) {
       var ro = new ResizeObserver(schedule);
       ro.observe(s.article);
-      /* A plate page is sized to its content: layout() measures `natural`
-         once, and the view grows to it (up to the cap). Figures, canvases and
-         images inside a plate often reach full size *after* that measure — an
-         image decodes, a replay draws its stage — and none of that changes the
-         article's own box, so the observer above stays quiet and the plate
-         would keep a stale, too-short page. Watching the plate children is
-         what lets flowSchedule() re-measure them. observe() is idempotent, so
-         layout() may re-observe the same children on every pass. */
+      /* Plate content (images, canvases, replays) often reaches full size after
+         layout() measures it, without changing the article's box.
+         Observing the plate children lets flowSchedule() re-measure them.
+         observe() is idempotent. */
       s.contentRO = new ResizeObserver(function () {
         if (session === s) flowSchedule(s);
       });

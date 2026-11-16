@@ -1,10 +1,8 @@
-/* Per-card minimize toggles for the study desk.
-   Adds a collapse button to every card in the lesson article and in each
-   instrument tab (timeline facts, map facts, context, insights, Strong's,
-   workbench, verify). Quoted verses, the chapter reading, load-bearing
-   verse cards, the opening sitting dialog, the Bible-on-hand notice, the
-   timeline caption, and quiz questions stay open. Other cards collapse to
-   their title line. That state survives re-renders in this session. */
+/* Adds a minimize toggle to every card in the lesson and the instrument tabs; a
+   minimized card collapses to its title for the session.
+   Quoted verses, the chapter reading, load-bearing verse cards, the opening
+   dialog, the Bible-on-hand notice, the timeline caption and quiz questions
+   stay open. */
 (function () {
   var STORE_KEY = "baCardMinState";
 

@@ -131,7 +131,6 @@
     }
   }
 
-  /* ---------------- Account hub ---------------- */
 
   const BOOKMARKS_KEY = "baStudyBookmarks";
 
@@ -306,13 +305,21 @@
     return out;
   }
 
-  function clearSiteStorage() {
+  const OWN_STASH_PREFIXES = ["baProgressStash:", "baStudySyncStash:"];
+
+  function ownStashKeys(userId) {
+    if (!userId) return [];
+    return OWN_STASH_PREFIXES.map(function (prefix) { return prefix + userId; });
+  }
+
+  function clearSiteStorage(userId) {
+    const ownStashes = ownStashKeys(userId);
     siteStores().forEach(function (store) {
       try {
         const doomed = [];
         for (let i = 0; i < store.length; i += 1) {
           const key = store.key(i);
-          if (key && isSiteKey(key)) doomed.push(key);
+          if (key && (isSiteKey(key) || ownStashes.indexOf(key) >= 0)) doomed.push(key);
         }
         doomed.forEach(function (key) { store.removeItem(key); });
       } catch (e) {}
@@ -430,6 +437,8 @@
       return;
     }
     deleting = true;
+    const deletedUser = window.ScrollAuth && typeof window.ScrollAuth.getUser === "function" ? window.ScrollAuth.getUser() : null;
+    const deletedId = deletedUser && deletedUser.id ? String(deletedUser.id) : "";
     setError("", "");
     setDeleteBusy(true);
     const fail = function () {
@@ -442,7 +451,7 @@
         fail();
         return;
       }
-      clearSiteStorage();
+      clearSiteStorage(deletedId);
       Promise.resolve(window.ScrollAuth.signOut({ discard: true })).catch(function () {}).then(function () {
         deleting = false;
         if (window.SiteErrors && typeof window.SiteErrors.clear === "function") window.SiteErrors.clear();

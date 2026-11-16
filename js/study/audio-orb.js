@@ -1,10 +1,7 @@
-/* Floating audio-reactive orb (lower right, visible throughout the lesson).
-   A small HUD ball wired to the lesson audio via Web Audio: the core breathes
-   with the bass, radial spokes trace the spectrum, and twin arcs orbit while
-   sound plays. Includes its own play/pause + hide controls; the hide choice
-   persists. The canvas only consumes frequency data — if the AudioContext can
-   never start (no user gesture), the lesson audio stays untouched and the orb
-   falls back to an idle standby animation. */
+/* Audio-reactive orb for the lesson audio, with its own play/pause and hide
+   controls; the hide choice persists.
+   It only reads frequency data: if the AudioContext never starts, the lesson
+   audio is untouched and the orb idles. */
 (function () {
   'use strict';
 
@@ -19,7 +16,6 @@
   var reduceMotion = false;
   try { reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) {}
 
-  /* ---- Build the widget ---------------------------------------------- */
   var host = document.createElement('div');
   host.className = 'audio-orb';
   host.setAttribute('role', 'region');
@@ -70,7 +66,6 @@
   stub.setAttribute('title', 'Show visualizer');
   document.body.appendChild(stub);
 
-  /* ---- Web Audio graph (created only once, only while running) -------- */
   var actx = null;
   var analyser = null;
   var freq = null;
@@ -106,7 +101,6 @@
     }
   }
 
-  /* ---- Render loop ----------------------------------------------------- */
   var SPOKES = 40;
   var spokeSm = Array.from({ length: SPOKES }, function () { return 0; });
   var playing = false;
@@ -268,7 +262,6 @@
     frame(performance.now());
   }, 500);
 
-  /* ---- State + preference wiring -------------------------------------- */
   function setPlayingUI(isPlaying) {
     playing = isPlaying;
     glyphPlay.style.display = isPlaying ? 'none' : '';

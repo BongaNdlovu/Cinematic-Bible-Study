@@ -1,21 +1,12 @@
 import { spawn } from 'child_process';
 import fs from 'fs';
 import path from 'path';
+import { chromePath } from './_server.mjs';
 import net from 'net';
 
 fs.mkdirSync(path.join('qa', 'proofs'), { recursive: true });
 
-const CHROME_PATH = [
-  process.env.CHROME_PATH,
-  'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe',
-  'C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe',
-  process.env.LOCALAPPDATA ? path.join(process.env.LOCALAPPDATA, 'Google', 'Chrome', 'Application', 'chrome.exe') : null,
-  '/usr/bin/google-chrome',
-  '/usr/bin/google-chrome-stable',
-  '/usr/bin/chromium-browser',
-  '/usr/bin/chromium',
-  '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
-].find((p) => p && fs.existsSync(p));
+const CHROME_PATH = chromePath();
 
 async function getFreePort() {
   return new Promise((resolve) => {

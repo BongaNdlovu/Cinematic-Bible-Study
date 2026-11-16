@@ -1,19 +1,15 @@
 import { spawn } from 'child_process';
 import fs from 'fs';
 import path from 'path';
+import { signedInScript, chromePath, cdpTargets } from './_server.mjs';
 
 fs.mkdirSync(path.join('qa', 'proofs'), { recursive: true });
 
-const CHROME_PATH = [
-  process.env.CHROME_PATH,
-  'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe',
-  'C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe',
-  process.env.LOCALAPPDATA ? path.join(process.env.LOCALAPPDATA, 'Google', 'Chrome', 'Application', 'chrome.exe') : null,
-].find((p) => p && fs.existsSync(p));
+const CHROME_PATH = chromePath();
 
 const PORT = process.env.PORT || 8014;
 const DEBUG_PORT = process.env.DEBUG_PORT || 9344;
-const BASE = `http://127.0.0.1:${PORT}`;
+const BASE = process.env.BASE || `http://127.0.0.1:${PORT}`;
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
 class CDPClient {
@@ -64,6 +60,17 @@ class CDPClient {
   close() { this.ws.close(); }
 }
 
+async function setTheme(client, name) {
+  const ok = await client.eval(`(() => {
+    for (let i = 0; i < 4; i += 1) {
+      if (document.body.classList.contains('${name}-mode')) return true;
+      document.getElementById('theme-btn').click();
+    }
+    return document.body.classList.contains('${name}-mode');
+  })()`);
+  if (!ok) throw new Error('the theme button never reached the ' + name + ' theme');
+}
+
 let server = null;
 let chrome = null;
 try {
@@ -84,18 +91,18 @@ try {
     '--autoplay-policy=no-user-gesture-required',
     '--window-size=1440,900', 'about:blank'
   ]);
-  await sleep(1600);
-  const targets = await (await fetch(`http://127.0.0.1:${DEBUG_PORT}/json`)).json();
+  const targets = await cdpTargets(DEBUG_PORT);
   const page = targets.find((t) => t.type === 'page') || targets[0];
   const client = new CDPClient(page.webSocketDebuggerUrl);
   await client.send('Page.enable');
+  await client.send('Page.addScriptToEvaluateOnNewDocument', { source: signedInScript() });
   await client.send('Runtime.enable');
   await client.send('Emulation.setDeviceMetricsOverride', { width: 1440, height: 900, deviceScaleFactor: 1, mobile: false });
 
   await client.send('Page.navigate', { url: `${BASE}/study.html` });
   await sleep(2400);
   await client.eval(`localStorage.removeItem('daniel_theme_v1')`);
-  await client.eval(`applyTheme(2, true)`);
+  await setTheme(client, 'white');
   await sleep(400);
 
   const white = await client.eval(`(() => {
@@ -128,7 +135,7 @@ try {
   }
   await client.shot('qa/proofs/theme_proof_white.png');
 
-  await client.eval(`applyTheme(1, true)`);
+  await setTheme(client, 'paper');
   await sleep(300);
   const paper = await client.eval(`({
     dark: document.documentElement.classList.contains('dark'),
@@ -138,7 +145,7 @@ try {
   console.log('paper theme', paper);
   await client.shot('qa/proofs/theme_proof_paper.png');
 
-  await client.eval(`applyTheme(0, true)`);
+  await setTheme(client, 'charcoal');
   await sleep(300);
   const charcoal = await client.eval(`({
     dark: document.documentElement.classList.contains('dark'),
@@ -148,20 +155,9 @@ try {
   console.log('charcoal', charcoal);
   if (!charcoal.charcoal) throw new Error('charcoal theme lost charcoal-mode');
 
-  await client.eval(`applyTheme(2, true); togglePomodoroDrawer();`);
-  await sleep(400);
-  const weather = await client.eval(`(async () => {
-    setWeatherPreset('storm', true);
-    return {
-      preset: typeof weatherPreset !== 'undefined' ? weatherPreset : null,
-      canvas: !!document.getElementById('weather-canvas')
-    };
-  })()`);
-  console.log('weather visual check', weather);
-  await client.shot('qa/proofs/theme_proof_white_storm.png');
 
   await client.send('Emulation.setDeviceMetricsOverride', { width: 390, height: 844, deviceScaleFactor: 2, mobile: true });
-  await client.eval(`applyTheme(2, true)`);
+  await setTheme(client, 'white');
   await sleep(500);
   await client.shot('qa/proofs/theme_proof_white_mobile.png');
 

@@ -1,14 +1,7 @@
-/* Delegated UI click sound for the lesson and map interfaces.
- *
- * A single capture-phase listener on the document rather than per-element
- * handlers: the lessons render buttons, tabs, and cards dynamically, so
- * delegation keeps every present and future control covered.
- *
- * Deliberately exempt, so the sound never competes with content:
- *   - the lesson audio player (play/pause/seek/mute)
- *   - quiz answers (a sound on every option would be noise, not feedback)
- *   - anything marked data-silent
- */
+/* One capture-phase listener plays the UI click for every control, including
+   ones rendered later.
+   Exempt: the lesson audio player, quiz answers and anything marked
+   data-silent. */
 (function () {
   if (!window.UiSound) return;
 

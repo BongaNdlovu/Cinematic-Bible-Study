@@ -1,6 +1,6 @@
 # 5. Performance
 
-**Last verified:** 12 November 2026
+**Last verified:** 16 November 2026
 
 This chapter covers what keeps the site fast: caching, how files load, how the 3D scenes manage memory, and the size budgets that tests enforce.
 
@@ -30,7 +30,9 @@ It also updates the CSP hashes of any inline script whose text changed. `tools/v
 
 ### CSS minification at deploy
 
-`tools/minify-release-css.mjs` (PostCSS) minifies every stylesheet in the bundle. `tools/verify/verify_css_minify.mjs` tests it.
+`tools/minify-release-css.mjs` (PostCSS) minifies every stylesheet in the bundle, which also removes CSS comments. `tools/verify/verify_css_minify.mjs` tests it.
+
+JavaScript and HTML are **not** minified. Their comments ship to readers as written: the 12 November bundle's `study-app.4c181f2f6b9d.js` still held 351 comments. Keep comments short for that reason (see [UI rules](06-ui.md#ui-rules-worth-keeping)).
 
 ## 2. Loading
 

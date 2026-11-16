@@ -1,16 +1,8 @@
-/* Shared interface sound bus.
- *
- * Plays the sampled UI sounds used across the lessons, the map, and the
- * 3D gallery. Distinct from AudioBus in js/gallery/app.js, which synthesizes
- * tones with oscillators; this one plays real files.
- *
- * Browser autoplay policy: nothing can play until the user has interacted with
- * the page, so playback is armed on the first pointerdown/keydown and every
- * play() before that is dropped silently. Playback never throws and never
- * blocks an interaction.
- *
- * Mute/opt-out is stored under baUiSound and shared across every page.
- */
+/* Plays the sampled UI sounds (AudioBus in js/gallery/app.js synthesizes its
+   own).
+   Autoplay policy: playback arms on the first pointerdown/keydown, and earlier
+   play() calls are dropped. It never throws. Mute is stored under baUiSound for
+   every page. */
 (function () {
   var KEY = "baUiSound";
   var SOUNDS = {

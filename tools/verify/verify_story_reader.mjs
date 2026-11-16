@@ -53,6 +53,7 @@ try {
     try {
       localStorage.setItem('baQaMockSession', JSON.stringify(mock));
       localStorage.setItem('baOnboardV1', '1');
+      localStorage.setItem('sodConsent', JSON.stringify({ analytics: false, ts: 1, v: 1 }));
       const raw = localStorage.getItem('baJourney');
       const j = raw ? JSON.parse(raw) : {};
       j.termsAccepted = true;

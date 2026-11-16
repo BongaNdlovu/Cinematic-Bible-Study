@@ -64,6 +64,17 @@ const body =
   '  window.GLOSSARY_ENRICHMENT = ' +
   JSON.stringify(enrichment, null, 2) +
   ';\n})();\n';
+const checkOnly = process.argv.includes('--check');
+if (checkOnly) {
+  const current = fs.existsSync(outPath) ? fs.readFileSync(outPath, 'utf8').replace(/\r\n/g, '\n') : null;
+  if (current !== body) {
+    console.error('js/study/glossary-enrichment.js is out of date with glossary-enrichment-overrides.json.\nRun: node tools/verify/build_glossary_enrichment.mjs');
+    process.exit(1);
+  }
+  console.log('js/study/glossary-enrichment.js matches its overrides (' + Object.keys(enrichment).length + ' entries)');
+  process.exit(0);
+}
+
 fs.writeFileSync(outPath, body, 'utf8');
 
 const count = Object.keys(enrichment).length;

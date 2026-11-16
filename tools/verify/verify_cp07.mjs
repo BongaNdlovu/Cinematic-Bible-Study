@@ -1,16 +1,12 @@
 import { spawn } from 'child_process';
 import fs from 'fs';
 import path from 'path';
+import { signedInScript, chromePath, cdpTargets } from './_server.mjs';
 import net from 'net';
 
 fs.mkdirSync(path.join('qa', 'proofs'), { recursive: true });
 
-const CHROME_PATH = [
-  process.env.CHROME_PATH,
-  'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe',
-  'C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe',
-  process.env.LOCALAPPDATA ? path.join(process.env.LOCALAPPDATA, 'Google', 'Chrome', 'Application', 'chrome.exe') : null,
-].find((p) => p && fs.existsSync(p));
+const CHROME_PATH = chromePath();
 
 if (!CHROME_PATH) {
   console.error('Chrome executable not found');
@@ -90,7 +86,7 @@ async function run() {
   console.log('=== Running CP-07 Browser Proof Test Suite ===');
   const SERVER_PORT = await getFreePort();
   const CHROME_PORT = await getFreePort();
-  const BASE = `http://127.0.0.1:${SERVER_PORT}`;
+  const BASE = process.env.BASE || `http://127.0.0.1:${SERVER_PORT}`;
 
   let server = spawn('python', ['server.py', '--no-browser'], {
     env: { ...process.env, PORT: String(SERVER_PORT) },
@@ -114,11 +110,11 @@ async function run() {
     '--window-size=1440,900'
   ]);
 
-  await sleep(1600);
-  const targets = await (await fetch(`http://127.0.0.1:${CHROME_PORT}/json`)).json();
+  const targets = await cdpTargets(CHROME_PORT);
   const page = targets.find((t) => t.type === 'page') || targets[0];
   const client = new CDPClient(page.webSocketDebuggerUrl);
   await client.send('Page.enable');
+  await client.send('Page.addScriptToEvaluateOnNewDocument', { source: signedInScript() });
   await client.send('Runtime.enable');
 
   async function dismissSittingGuide() {

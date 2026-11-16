@@ -1,6 +1,6 @@
 # 7. Develop, test, release
 
-**Last verified:** 15 November 2026
+**Last verified:** 16 November 2026
 
 ## Running the site locally
 
@@ -22,7 +22,8 @@ The server binds `127.0.0.1`. It starts at port 8000, or at `PORT` if that is se
 |---|---|
 | `npm run lint` | `oxlint` over the code. CI fails on any error. The complexity ceiling is 55 per function (see `docs/ARCHITECTURE.md`). |
 | `npm run test:unit` | `node --test "tests/unit/*.test.mjs"`: fast unit tests, no browser |
-| `npm test` | The regression suite: 24 `tools/verify/verify_*.mjs` scripts plus `tools/verify-headers.mjs`. Some start `server.py` and drive Chromium through Playwright. |
+| `npm test` | The regression suite: 24 `tools/verify/verify_*.mjs` scripts plus `tools/verify-headers.mjs`. Some start `server.py` and drive Chromium through Playwright. It ends with three guards: `node tools/build_study_sheets.mjs --check` and `node tools/verify/build_glossary_enrichment.mjs --check` (fail when a generated file is older than its source) and `tools/verify/verify_wiring.mjs` (fails when a `verify_*.mjs` file is not run anywhere). |
+| `npm run test:browser` | `tools/verify/run_browser_checks.mjs`: starts one site server and runs the 29 browser checks that pass today (see [Browser checks](#browser-checks)). Add `--include-quarantined` to run the one known-failing check too, or `--only=verify_x.mjs,verify_y.mjs` to run named ones. |
 | `npm run test:security` | 23 penetration-style checks (`tools/security/run_penetration_audit.mjs`). Since 13 November 2026 PT-19 and PT-20 prove that guest writes without a human pass are refused, so they no longer leave rows behind; `exhibit_prune_test_rows()` still clears any that appear. |
 | `npm run smoke` | Smoke test of the live site (`tools/smoke.mjs`) |
 | `npm run build:tailwind` | Rebuild `css/study-tailwind.css` |
@@ -39,12 +40,15 @@ The server binds `127.0.0.1`. It starts at port 8000, or at `PORT` if that is se
 | Shelf content | `node tools/build-shelf-data.mjs` (the deploy runs it too) |
 | `js/study/glossary-enrichment-overrides.json` | `node tools/verify/build_glossary_enrichment.mjs` |
 
+`npm test` checks the first and last rows with `--check`: it fails, and names the rebuild command, when `js/study/sheets/` or `js/study/glossary-enrichment.js` no longer matches its source. The glossary check ignores Windows line endings. The sheet files are always written with CRLF (`.gitattributes`), so that check compares them as they are.
+
 ## Tests
 
 | Suite | Where | Runs in CI |
 |---|---|---|
 | Unit | `tests/unit/`: middleware, rate gate, Sentry config, MFA card, report pages, and the 12 November audit fixes | Yes |
 | Regression | `tools/verify/` (headers, CSP, insights, rate limits, both syncs, quiz integrity, reviews, desk, certificates, task flow, map help, moderator UI, report pages, hashing, CSS minify, page deny list, image budgets, load) | Yes |
+| Browser | `tools/verify/run_browser_checks.mjs`: mind map, story reader, flows, map, globe, horizon, theme, mobile layout and others (29 checks) | Yes, as its own job, `test-browser` |
 | Security | `tools/security/run_penetration_audit.mjs` | No. Run it before security-related changes. |
 | Live smoke | `tools/smoke.mjs` | After every deploy, and every 15 minutes |
 | Production walkthrough | `qa-e2e/production-audit.mjs` (see the root `README.md`) | No |
@@ -53,17 +57,65 @@ The server binds `127.0.0.1`. It starts at port 8000, or at `PORT` if that is se
 
 **On 15 November 2026** (sign-in required for every sitting), run in a sandbox with no outside network: lint clean; `verify_portal_and_hubs.mjs` passes every step when the sandbox's `ERR_TUNNEL_CONNECTION_FAILED` console lines are ignored. `verify_portal_and_hubs.mjs` and `verify_account_and_banner_e2e.mjs` fail there on untouched `master` too, only because the sandbox blocks Google Fonts and Supabase (`ERR_TUNNEL_CONNECTION_FAILED` console lines). `verify_csp_policy.mjs` fails there because it fetches a tile from `server.arcgisonline.com`. Every other `npm test` script passes. Unit test 20 in `tests/unit/human-pass.test.mjs` was failing **everywhere**, CI included: it gave the human pass a fixed expiry of 14 November 2026 02:00, so from then on the pass counted as expired. It now expires two hours after the test starts, and the unit tests pass 101 of 101. While it failed, the `test` job failed, so no push could deploy. CI on GitHub is the full check. `verify_portal_and_hubs.mjs` now checks that a guest sees every volume locked and is redirected with `next` kept, then signs in with `baQaMockSession` and checks that only the Prologue is open.
 
+### Browser checks
+
+Thirty-four `tools/verify/verify_*.mjs` files were not part of `npm test` before 16 November 2026. Three of them do not belong in a CI run (see the last table). One, `verify_live_inserts`, was obsolete and is deleted (see below). The other 30 now run through `run_browser_checks.mjs`:
+
+| State | Scripts | What it means |
+|---|---|---|
+| In CI (29) | every other browser script, listed in `BROWSER_CHECKS` in `tools/verify/run_browser_checks.mjs` | Run by `npm run test:browser` and by the `test-browser` CI job |
+| Quarantined (1) | `verify_book_reader` | Fails today. Kept in `QUARANTINED`, with its reason. Not run in CI. |
+
+**Why they failed, and what fixed them.** On the first run, 14 of 31 passed. Every failure that was traced came from a script that had fallen behind a deliberate change to the site, not from a site bug:
+
+| Change on the site | Scripts it broke | Fix in the script |
+|---|---|---|
+| A cookie dialog and an onboarding dialog block clicks on a fresh browser | the story scripts, `verify_readalong`, the mind map scripts, `verify_flow`, `verify_book_reader` | Set `sodConsent` (reject) and `baOnboardV1` before the first page loads |
+| Every sitting and the map need a sign-in | `verify_map`, `verify_medal_art`, `verify_theme`, `verify_lesson_connectors`, `verify_cp07`, `verify_book_reader` | Sign in as the local test user before the first page loads |
+| The lesson is read as a page-turning book, so a figure on another page sits off screen | `verify_mindmap`, `verify_mindmap_fullscreen`, `verify_flow` | Run in the reader's scroll view (`daniel_book_view = scroll`), which readers can choose too. The book itself is tested by `verify_book_reader`. |
+| `applyTheme()` is no longer a global | `verify_theme` | Press the real theme button until the wanted theme shows |
+| The medal "Ostrogoths driven from Rome" was renamed "Siege of Rome lifted" (commit `6d7dfb0`) | `verify_medal_art` | Look for the new name |
+| The terms now say readers delete their own account, with email as the fallback (commit `6028a20`) | `verify_mobile_viewports` | Check the two current sentences |
+| Survey grants were split into separate lines, and progress saves through `rpc('save_exhibit_progress')` | `verify_workbench` | Check the current lines |
+| The page loads and mounts the book reader itself | `verify_book_reader` | Stop injecting a second copy; unmount the page's book before the test mounts its own |
+| Checkpoints hold the book until answered (commit `788ab13`) | `verify_book_reader` | Count checkpoint plates as plates, pass the checkpoints before walking the book, and a new check (M2.0) that an unanswered checkpoint holds the book |
+| Some scripts only looked for Chrome in Windows folders | `verify_hall_mural`, `verify_horizon`, and the other Chrome-driven scripts | `chromePath()` in `tools/verify/_server.mjs`: `CHROME_PATH`, then an installed Chrome, then Playwright's Chromium |
+
+`run_browser_checks.mjs` starts one site server and passes its address to every script as `BASE` (and as `--base` where a script takes it), so no script depends on its own fixed port. A failing script's last 30 lines are printed. The shared pieces live in `tools/verify/_server.mjs`: `cdpTargets()` (waits up to 30 s for Chrome's debugging port instead of a fixed sleep), `signedInScript()` (test sign-in, consent, onboarding and terms, with `TERMS_VERSION` read from `js/shared/journey.js` so it cannot go stale), `QA_MOCK`, and `chromePath()`.
+
+**Still quarantined: `verify_book_reader`.** Its structural problems are fixed, and the new checkpoint check passes on every sitting. What still fails are timing and geometry checks: a step read in the middle of a turn (M2.3), the wheel throttle (M3.7), the mode after a resize (M2.7), the step count after a font-size change (M3.10), and a view height 2 px off its rule (M2.8). A separate walk with a short pause between turns reached the last step of sitting 0 on a phone, so the reader itself works. Not checked: each of those assertions one by one.
+
+**`verify_globe` on Linux.** It passes on Windows. In the first CI run on GitHub it failed with "globe pins never appeared". It now prints WebGL support, the renderer and page errors when that happens. Not checked yet: the cause. **Watch for:** `verify_mindmap_fullscreen` failed 2 of its 50 assertions once in a full run on 16 November 2026 and passed alone straight after, so it may be timing-sensitive. `verify_horizon` and `verify_lesson_connectors` failed on Windows when driven by Playwright's Chromium instead of the installed Chrome; not checked why.
+
+Four files are not in CI on purpose. `verify_wiring.mjs` lists them in `NOT_IN_CI`, each with its reason:
+
+| Script | Why it is not in CI |
+|---|---|
+| `verify_all.mjs` | Drives Chrome by hand over the whole site. Kept for manual runs. |
+| `verify_load_live.mjs` | Loads the live production site. |
+| `verify_pending_migrations.mjs` | Needs access to the production database. |
+| `verify_equivalence.mjs` | Compares two versions given on the command line. Covered by `tests/unit/equivalence.test.mjs`. |
+
+`verify_live_inserts.mjs` was deleted on 16 November 2026. It posted a guest event and a guest survey to the production database and expected 201. Guest writes now need a human check, so production answers 400 `human_check`. When it was run that day, both inserts were rejected, so nothing was written.
+
+### Proving that a move changed nothing
+
+`node tools/verify/verify_equivalence.mjs --before <folder|git:REV> --after <folder|git:REV>` compares code, not text. JavaScript is parsed with `acorn` and compared statement by statement, so comments, spacing and quote style do not count. CSS is parsed with `postcss` and compared as an ordered list of rules and declarations, so a reordered rule counts as a difference, because order is the cascade. Options: `--files a.js,b.css` to compare named files; `--before-files a.css --after-files x.css,y.css` to compare one file with the joined content of several (for a split); `--git-dir` to name the repository for `git:` sources. It exits 1 and names the first differing statement and line when anything differs. Use it for every step of Phases 3 to 5 of the architecture plan.
+
+`node tools/measure_baseline.mjs` prints the size and function-length figures that those steps are compared against. The figures taken on 16 November 2026 are in [the architecture baseline](architecture-baseline.md).
+
 ## Continuous integration (`.github/workflows/ci.yml`)
 
 On every push and pull request:
 
 1. **test** (Ubuntu, Node 22, Python 3.12): `npm ci`, lint, unit tests, installing Chromium, then `npm test`.
+2. **test-browser** (Ubuntu, Node 22, Python 3.12): `npm ci`, installing Chromium, then `npm run test:browser`. Not checked: a run of this job on GitHub. It is also not a condition of **deploy** yet; make **deploy** wait for it once it has passed there.
 
 On a push to `master` only, after **test** passes:
 
-2. **deploy** (Windows, `production` environment): runs `tools/deploy-cloudflare-pages.ps1` with the Cloudflare secrets.
-3. **smoke**: waits 30 s, then runs `tools/smoke.mjs` against the live site.
-4. **alert**: opens a GitHub issue ("Alert: … is failing") if any step failed, and closes it when the site recovers (`tools/ci/alert.mjs`).
+3. **deploy** (Windows, `production` environment): runs `tools/deploy-cloudflare-pages.ps1` with the Cloudflare secrets.
+4. **smoke**: waits 30 s, then runs `tools/smoke.mjs` against the live site.
+5. **alert**: opens a GitHub issue ("Alert: … is failing") if any step failed, and closes it when the site recovers (`tools/ci/alert.mjs`).
 
 `.github/workflows/health.yml` runs the smoke test every 15 minutes, with the same alert and recovery issues.
 

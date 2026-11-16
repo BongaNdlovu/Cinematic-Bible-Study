@@ -622,7 +622,6 @@ body.site-locked > *:not(#terms-overlay):not(#site-error-banner):not(#auth-error
   .account-hub-cards { grid-template-columns: 1fr; }
 }
 
-/* ---------- Account hub cards ---------- */
 .account-hub-cards {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));

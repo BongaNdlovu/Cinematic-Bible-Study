@@ -1,19 +1,15 @@
 import { spawn } from 'child_process';
 import fs from 'fs';
 import path from 'path';
+import { chromePath, cdpTargets } from './_server.mjs';
 
 fs.mkdirSync(path.join('qa', 'proofs'), { recursive: true });
 
-const CHROME_PATH = [
-  process.env.CHROME_PATH,
-  'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe',
-  'C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe',
-  process.env.LOCALAPPDATA ? path.join(process.env.LOCALAPPDATA, 'Google', 'Chrome', 'Application', 'chrome.exe') : null,
-].find((p) => p && fs.existsSync(p));
+const CHROME_PATH = chromePath();
 
 const PORT = process.env.PORT || 8013;
 const DEBUG_PORT = process.env.DEBUG_PORT || 9343;
-const BASE = `http://127.0.0.1:${PORT}`;
+const BASE = process.env.BASE || `http://127.0.0.1:${PORT}`;
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
 class CDPClient {
@@ -82,8 +78,7 @@ try {
     '--headless=new', `--remote-debugging-port=${DEBUG_PORT}`, '--disable-gpu', '--no-sandbox',
     '--window-size=1440,900', 'about:blank'
   ]);
-  await sleep(1600);
-  const targets = await (await fetch(`http://127.0.0.1:${DEBUG_PORT}/json`)).json();
+  const targets = await cdpTargets(DEBUG_PORT);
   const page = targets.find((t) => t.type === 'page') || targets[0];
   const client = new CDPClient(page.webSocketDebuggerUrl);
   await client.send('Page.enable');
@@ -132,18 +127,28 @@ try {
     const card = document.getElementById('t-node-2');
     card.dispatchEvent(new MouseEvent('mouseenter', { bubbles: true }));
   })()`);
-  await sleep(400);
-  const hover = await client.eval(`({
+  let hover = null;
+  for (let i = 0; i < 25; i += 1) {
+    await sleep(200);
+    hover = await client.eval(`({
     on: document.getElementById('horizon-float')?.classList.contains('is-on'),
     hidden: document.getElementById('horizon-float')?.hidden,
     year: document.getElementById('horizon-float-year')?.textContent,
     title: document.getElementById('horizon-float-title')?.textContent,
     src: document.getElementById('horizon-float-img')?.getAttribute('src')
   })`);
+    if (hover.on) break;
+  }
   console.log('hover', hover);
-  if (!hover.on) throw new Error('hover float did not open');
-  if (hover.year !== '457 B.C.') throw new Error('hover showed wrong year');
-  await client.shot('qa/proofs/horizon_proof_hover.png');
+  const noHover = await client.eval(`window.matchMedia('(hover: none)').matches`);
+  if (noHover) {
+    if (hover.on || !hover.hidden) throw new Error('hover float opened on a device without hover');
+    console.log('this browser reports no hover, so the float correctly stays hidden');
+  } else {
+    if (!hover.on) throw new Error('hover float did not open');
+    if (hover.year !== '457 B.C.') throw new Error('hover showed wrong year');
+    await client.shot('qa/proofs/horizon_proof_hover.png');
+  }
 
   await client.eval(`setEpochInfo(2)`);
   await sleep(400);
