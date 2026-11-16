@@ -23,7 +23,7 @@ The server binds `127.0.0.1`. It starts at port 8000, or at `PORT` if that is se
 | `npm run lint` | `oxlint` over the code. CI fails on any error. The complexity ceiling is 55 per function (see `docs/ARCHITECTURE.md`). |
 | `npm run test:unit` | `node --test "tests/unit/*.test.mjs"`: fast unit tests, no browser |
 | `npm test` | The regression suite: 24 `tools/verify/verify_*.mjs` scripts plus `tools/verify-headers.mjs`. Some start `server.py` and drive Chromium through Playwright. It ends with three guards: `node tools/build_study_sheets.mjs --check` and `node tools/verify/build_glossary_enrichment.mjs --check` (fail when a generated file is older than its source) and `tools/verify/verify_wiring.mjs` (fails when a `verify_*.mjs` file is not run anywhere). |
-| `npm run test:browser` | `tools/verify/run_browser_checks.mjs`: starts one site server and runs the 20 browser checks that pass today (see [Browser checks](#browser-checks)). Add `--include-quarantined` to run the 10 known-failing ones too, or `--only=verify_x.mjs,verify_y.mjs` to run named ones. |
+| `npm run test:browser` | `tools/verify/run_browser_checks.mjs`: starts one site server and runs the 29 browser checks that pass today (see [Browser checks](#browser-checks)). Add `--include-quarantined` to run the one known-failing check too, or `--only=verify_x.mjs,verify_y.mjs` to run named ones. |
 | `npm run test:security` | 23 penetration-style checks (`tools/security/run_penetration_audit.mjs`). Since 13 November 2026 PT-19 and PT-20 prove that guest writes without a human pass are refused, so they no longer leave rows behind; `exhibit_prune_test_rows()` still clears any that appear. |
 | `npm run smoke` | Smoke test of the live site (`tools/smoke.mjs`) |
 | `npm run build:tailwind` | Rebuild `css/study-tailwind.css` |
@@ -48,7 +48,7 @@ The server binds `127.0.0.1`. It starts at port 8000, or at `PORT` if that is se
 |---|---|---|
 | Unit | `tests/unit/`: middleware, rate gate, Sentry config, MFA card, report pages, and the 12 November audit fixes | Yes |
 | Regression | `tools/verify/` (headers, CSP, insights, rate limits, both syncs, quiz integrity, reviews, desk, certificates, task flow, map help, moderator UI, report pages, hashing, CSS minify, page deny list, image budgets, load) | Yes |
-| Browser | `tools/verify/run_browser_checks.mjs`: mind map, story reader, book reader, flows, map, horizon, mobile layout and others (20 checks) | Yes, as its own job, `test-browser` |
+| Browser | `tools/verify/run_browser_checks.mjs`: mind map, story reader, flows, map, globe, horizon, theme, mobile layout and others (29 checks) | Yes, as its own job, `test-browser` |
 | Security | `tools/security/run_penetration_audit.mjs` | No. Run it before security-related changes. |
 | Live smoke | `tools/smoke.mjs` | After every deploy, and every 15 minutes |
 | Production walkthrough | `qa-e2e/production-audit.mjs` (see the root `README.md`) | No |
@@ -59,39 +59,44 @@ The server binds `127.0.0.1`. It starts at port 8000, or at `PORT` if that is se
 
 ### Browser checks
 
-Thirty-four `tools/verify/verify_*.mjs` files were not part of `npm test`. Three of them do not belong in a CI run: `verify_all`, `verify_load_live` and `verify_pending_migrations`. The other 31 were run once each on 16 November 2026, on a Windows machine with the local working tree, through `run_browser_checks.mjs`. One of the 31, `verify_live_inserts`, turned out to be obsolete and was taken out of the list. The other 30 gave this result:
+Thirty-four `tools/verify/verify_*.mjs` files were not part of `npm test` before 16 November 2026. Three of them do not belong in a CI run (see the last table). One, `verify_live_inserts`, was obsolete and is deleted (see below). The other 30 now run through `run_browser_checks.mjs`:
 
 | State | Scripts | What it means |
 |---|---|---|
-| Pass (20) | `verify_bridge_copy`, `verify_bridge_panel`, `verify_globe`, `verify_grounding_quotes`, `verify_hall_mural`, `verify_horizon`, `verify_mindmap_fullscreen_fit`, `verify_mindmap_legibility`, `verify_onevoice27`, `verify_photo_y`, `verify_readalong`, `verify_scripture`, `verify_sitting4_fixes`, `verify_story_layers`, `verify_story_mobile`, `verify_story_reader`, `verify_story_themes`, `verify_study_page_load`, `verify_verify_pack_quotes`, `verify_workbench` | Run by `npm run test:browser` and by the `test-browser` CI job |
-| Quarantined (10) | listed below | Fail today. Kept in `QUARANTINED` in `tools/verify/run_browser_checks.mjs`, each with its reason. They do not run in CI. |
+| In CI (29) | every other browser script, listed in `BROWSER_CHECKS` in `tools/verify/run_browser_checks.mjs` | Run by `npm run test:browser` and by the `test-browser` CI job |
+| Quarantined (1) | `verify_book_reader` | Fails today. Kept in `QUARANTINED`, with its reason. Not run in CI. |
 
-Six of the 20 passes needed a fix to the script, not to the site. The site now asks for cookie consent and shows an onboarding dialog, which blocked clicks. `verify_readalong`, `verify_story_layers`, `verify_story_mobile`, `verify_story_reader` and `verify_story_themes` now set `sodConsent` (reject) before the first page loads, and `verify_story_layers`, `verify_story_mobile` and `verify_story_themes` also set `baOnboardV1`. `verify_book_reader`, `verify_flow`, `verify_mindmap` and `verify_mindmap_fullscreen` got the same lines but still fail for other reasons (see the quarantine table). `verify_workbench` had two stale assertions. It expected the survey grant line `to authenticated, anon` (the file now has separate lines for `authenticated` and `anon`), and it looked for `upsert` in `js/shared/progress-sync.js`, which now saves through `rpc('save_exhibit_progress')`. It now checks the current lines.
+**Why they failed, and what fixed them.** On the first run, 14 of 31 passed. Every failure that was traced came from a script that had fallen behind a deliberate change to the site, not from a site bug:
 
-| Quarantined script | Failure seen on 16 November 2026 |
-|---|---|
-| `verify_book_reader` | Times out after 240 s. Assertions M2.8 (plate steps) and M3.1 (next button) fail. |
-| `verify_cp07` | Check 5 fails: classroom projection mode never appears at `study.html?project=1`. |
-| `verify_flow` | Fails. Cause not investigated. |
-| `verify_lesson_connectors` | Sitting 0 reports an empty list of sitting-path steps. Cause not investigated. |
-| `verify_map` | Uncaught page error in its first evaluate (`verify_map.mjs:139`). Cause not investigated. |
-| `verify_medal_art` | The map has no medal named "Ostrogoths driven from Rome" in the year it checks. |
-| `verify_mindmap` | 2 of 78 assertions fail, including 390x844 "the block stays inside the viewport". |
-| `verify_mindmap_fullscreen` | The press on the `s2-4` full-screen control lands on another element. |
-| `verify_mobile_viewports` | An assertion fails (expected true, got false). Cause not investigated. |
-| `verify_theme` | Uncaught page error in its first evaluate (`verify_theme.mjs:98`). Cause not investigated. |
+| Change on the site | Scripts it broke | Fix in the script |
+|---|---|---|
+| A cookie dialog and an onboarding dialog block clicks on a fresh browser | the story scripts, `verify_readalong`, the mind map scripts, `verify_flow`, `verify_book_reader` | Set `sodConsent` (reject) and `baOnboardV1` before the first page loads |
+| Every sitting and the map need a sign-in | `verify_map`, `verify_medal_art`, `verify_theme`, `verify_lesson_connectors`, `verify_cp07`, `verify_book_reader` | Sign in as the local test user before the first page loads |
+| The lesson is read as a page-turning book, so a figure on another page sits off screen | `verify_mindmap`, `verify_mindmap_fullscreen`, `verify_flow` | Run in the reader's scroll view (`daniel_book_view = scroll`), which readers can choose too. The book itself is tested by `verify_book_reader`. |
+| `applyTheme()` is no longer a global | `verify_theme` | Press the real theme button until the wanted theme shows |
+| The medal "Ostrogoths driven from Rome" was renamed "Siege of Rome lifted" (commit `6d7dfb0`) | `verify_medal_art` | Look for the new name |
+| The terms now say readers delete their own account, with email as the fallback (commit `6028a20`) | `verify_mobile_viewports` | Check the two current sentences |
+| Survey grants were split into separate lines, and progress saves through `rpc('save_exhibit_progress')` | `verify_workbench` | Check the current lines |
+| The page loads and mounts the book reader itself | `verify_book_reader` | Stop injecting a second copy; unmount the page's book before the test mounts its own |
+| Checkpoints hold the book until answered (commit `788ab13`) | `verify_book_reader` | Count checkpoint plates as plates, pass the checkpoints before walking the book, and a new check (M2.0) that an unanswered checkpoint holds the book |
+| Some scripts only looked for Chrome in Windows folders | `verify_hall_mural`, `verify_horizon`, and the other Chrome-driven scripts | `chromePath()` in `tools/verify/_server.mjs`: `CHROME_PATH`, then an installed Chrome, then Playwright's Chromium |
 
-Not checked: whether any of the ten fail on a clean checkout of `master`. The run included uncommitted local edits to `js/study/mindmap.js`, `js/study/book-reader.js`, `js/study/study-app.js` and `css/study-page.css`.
+The shared pieces live in `tools/verify/_server.mjs`: `signedInScript()` (test sign-in, consent, onboarding and terms, with `TERMS_VERSION` read from `js/shared/journey.js` so it cannot go stale), `QA_MOCK`, and `chromePath()`.
 
-Five other files are not in CI on purpose. `verify_wiring.mjs` lists them in `NOT_IN_CI`, each with its reason:
+**Still quarantined: `verify_book_reader`.** Its structural problems are fixed, and the new checkpoint check passes on every sitting. What still fails are timing and geometry checks: a step read in the middle of a turn (M2.3), the wheel throttle (M3.7), the mode after a resize (M2.7), the step count after a font-size change (M3.10), and a view height 2 px off its rule (M2.8). A separate walk with a short pause between turns reached the last step of sitting 0 on a phone, so the reader itself works. Not checked: each of those assertions one by one.
+
+**`verify_globe` on Linux.** It passes on Windows. In the first CI run on GitHub it failed with "globe pins never appeared". It now prints WebGL support, the renderer and page errors when that happens. Not checked yet: the cause. **Watch for:** `verify_mindmap_fullscreen` failed 2 of its 50 assertions once in a full run on 16 November 2026 and passed alone straight after, so it may be timing-sensitive. `verify_horizon` and `verify_lesson_connectors` failed on Windows when driven by Playwright's Chromium instead of the installed Chrome; not checked why.
+
+Four files are not in CI on purpose. `verify_wiring.mjs` lists them in `NOT_IN_CI`, each with its reason:
 
 | Script | Why it is not in CI |
 |---|---|
 | `verify_all.mjs` | Drives Chrome by hand over the whole site. Kept for manual runs. |
 | `verify_load_live.mjs` | Loads the live production site. |
 | `verify_pending_migrations.mjs` | Needs access to the production database. |
-| `verify_live_inserts.mjs` | Obsolete. It posts to the production database and expects 201. Guest writes now need a human check, so production answers 400 `human_check` (both inserts were rejected when it was run on 16 November 2026, so nothing was written). Candidate for deletion. |
 | `verify_equivalence.mjs` | Compares two versions given on the command line. Covered by `tests/unit/equivalence.test.mjs`. |
+
+`verify_live_inserts.mjs` was deleted on 16 November 2026. It posted a guest event and a guest survey to the production database and expected 201. Guest writes now need a human check, so production answers 400 `human_check`. When it was run that day, both inserts were rejected, so nothing was written.
 
 ### Proving that a move changed nothing
 

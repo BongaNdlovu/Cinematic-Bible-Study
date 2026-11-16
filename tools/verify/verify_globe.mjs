@@ -88,6 +88,15 @@ async function waitFor(page, fn, ms, arg) {
   return false;
 }
 
+async function glInfo(page) {
+  return page.evaluate(() => {
+    const c = document.createElement("canvas");
+    const gl = c.getContext("webgl2") || c.getContext("webgl");
+    const dbg = gl && gl.getExtension("WEBGL_debug_renderer_info");
+    return { webgl: !!gl, renderer: dbg ? gl.getParameter(dbg.UNMASKED_RENDERER_WEBGL) : null, url: location.href, title: document.title, globeView: !!document.querySelector(".cmap-root.is-globe-view") };
+  });
+}
+
 let server = null;
 let browser = null;
 try {
@@ -112,7 +121,8 @@ try {
 
   {
     const t = await open(browser, "/map.html?preview=full&view=globe&year=y457");
-    assert.ok(await waitFor(t.page, () => document.querySelectorAll(".cmap-gpin:not(.is-hidden)").length > 0, 15000), "globe pins never appeared");
+    const pinsShown = await waitFor(t.page, () => document.querySelectorAll(".cmap-gpin:not(.is-hidden)").length > 0, 15000);
+    if (!pinsShown) assert.fail("globe pins never appeared " + JSON.stringify({ gl: await glInfo(t.page), errors: t.errors }));
     assert.ok(await globeOn(t.page), "view=globe did not open the globe");
     await sleep(3000);
     const a = await t.page.evaluate(() => window.__raf);

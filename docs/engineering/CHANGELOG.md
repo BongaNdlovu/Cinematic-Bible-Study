@@ -14,6 +14,27 @@ Entry template:
 
 ---
 
+## 2026-11-16 — Architecture plan, Phase 0: browser checks repaired
+
+**Why:** Phase 0 left 10 browser checks quarantined. The first CI run on GitHub then showed 3 of the 20 in-CI checks failing on Linux. "Fix all the problems" was the request.
+
+**What changed:**
+
+- `tools/verify/_server.mjs`: new `signedInScript()` (the local test sign-in, consent, onboarding and terms in one place, with `TERMS_VERSION` read from `js/shared/journey.js`), `QA_MOCK` and `chromePath()` (`CHROME_PATH`, then an installed Chrome on Windows, Linux or Mac, then Playwright's Chromium). Eight Chrome-driven scripts now use `chromePath()` instead of their own Windows-only list.
+- Nine quarantined checks fixed in the scripts, each because the site had changed on purpose: `verify_cp07`, `verify_flow`, `verify_lesson_connectors`, `verify_map`, `verify_medal_art`, `verify_mindmap`, `verify_mindmap_fullscreen`, `verify_mobile_viewports`, `verify_theme`. The table in chapter 07 gives the change and the fix for each.
+- `verify_book_reader`: no longer injects a second copy of the reader, counts checkpoint plates, passes checkpoints before walking the book, ignores buttons inside hidden panels, and has a new check (M2.0) that an unanswered checkpoint holds the book. It stays quarantined for its timing and geometry checks.
+- `verify_globe`: prints WebGL support, the renderer and page errors when the globe pins do not appear.
+- `tools/verify/verify_live_inserts.mjs` deleted (obsolete, and it posted to the production database).
+- `run_browser_checks.mjs`: 29 checks in CI, 1 quarantined.
+
+**Handbook updated:** 07 (browser checks rewritten).
+
+**Checked here:** `npm run test:browser` on Windows: 26 of 29 in one full run; the 3 that failed there (`verify_horizon`, `verify_lesson_connectors`, `verify_mindmap_fullscreen`) then passed 3 of 3. The first two had failed because a bug in the first `chromePath()` (single backslashes in the Windows paths) sent them to Playwright's Chromium instead of the installed Chrome; that is fixed. Every other check on the list passed in the full run.
+
+**Not checked:** a CI run with these changes; `verify_mindmap_fullscreen` failed 2 of 50 assertions once under the full run and passed alone, so it may be timing-sensitive; why `verify_horizon` and `verify_lesson_connectors` fail under Playwright's Chromium on Windows.
+
+**Status:** on branch `arch/phase-0-safety-net`, pushed, not deployed.
+
 ## 2026-11-16 — Architecture plan, Phase 0: the safety net
 
 **Why:** The architecture improvement plan starts with checks, so every later move can be proved safe. 34 `tools/verify/verify_*.mjs` files were not run by anything, and a stale generated file would ship without a failing test. No site code changed in this step.

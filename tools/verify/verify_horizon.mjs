@@ -1,15 +1,11 @@
 import { spawn } from 'child_process';
 import fs from 'fs';
 import path from 'path';
+import { chromePath } from './_server.mjs';
 
 fs.mkdirSync(path.join('qa', 'proofs'), { recursive: true });
 
-const CHROME_PATH = [
-  process.env.CHROME_PATH,
-  'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe',
-  'C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe',
-  process.env.LOCALAPPDATA ? path.join(process.env.LOCALAPPDATA, 'Google', 'Chrome', 'Application', 'chrome.exe') : null,
-].find((p) => p && fs.existsSync(p));
+const CHROME_PATH = chromePath();
 
 const PORT = process.env.PORT || 8013;
 const DEBUG_PORT = process.env.DEBUG_PORT || 9343;

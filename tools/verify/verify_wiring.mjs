@@ -8,7 +8,6 @@ const root = path.resolve(here, '../..');
 
 const NOT_IN_CI = {
   'verify_all.mjs': 'drives Chrome by hand over the whole site; kept for manual runs',
-  'verify_live_inserts.mjs': 'obsolete: posts to the production database and expects 201, but guest writes now need a human check (400 human_check)',
   'verify_load_live.mjs': 'loads the live production site, so it must not run on every pull request',
   'verify_pending_migrations.mjs': 'needs access to the production database',
   'verify_equivalence.mjs': 'compares two versions given on the command line; covered by tests/unit/equivalence.test.mjs',

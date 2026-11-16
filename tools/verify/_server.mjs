@@ -13,6 +13,10 @@
  */
 import { spawn } from 'child_process';
 import http from 'http';
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import { chromium } from 'playwright';
 
 function healthy(base, probe) {
   return new Promise((resolve) => {
@@ -85,4 +89,53 @@ export async function dismissConsent(page) {
     await page.locator('button[data-sod-action="accept"]').click();
     await dialog.waitFor({ state: 'hidden', timeout: 5000 }).catch(() => {});
   }
+}
+
+const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
+
+export const QA_MOCK = {
+  user: { id: 'qa-mock-user-001', email: 'qa.auditor@example.com', user_metadata: { full_name: 'QA Auditor', name: 'QA Auditor' } },
+  session: { access_token: 'qa-mock-access-token', refresh_token: 'qa-mock-refresh-token', expires_at: 4102444800, token_type: 'bearer' },
+};
+
+export function termsVersion() {
+  const src = fs.readFileSync(path.join(repoRoot, 'js', 'shared', 'journey.js'), 'utf8');
+  const hit = /const TERMS_VERSION = (\d+);/.exec(src);
+  if (!hit) throw new Error('TERMS_VERSION not found in js/shared/journey.js');
+  return Number(hit[1]);
+}
+
+export function signedInScript({ completedSheets = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10], bookView = null } = {}) {
+  const p = { mock: QA_MOCK, terms: termsVersion(), done: completedSheets, view: bookView };
+  return '(() => { const p = ' + JSON.stringify(p) + ';' +
+    ' try {' +
+    " localStorage.setItem('baQaMockSession', JSON.stringify(p.mock));" +
+    " localStorage.setItem('baOnboardV1', '1');" +
+    " localStorage.setItem('sodConsent', JSON.stringify({ analytics: false, ts: 1, v: 1 }));" +
+    " const raw = localStorage.getItem('baJourney');" +
+    ' const j = raw ? JSON.parse(raw) : {};' +
+    ' j.termsByUser = Object.assign({}, j.termsByUser, { [p.mock.user.id]: { version: p.terms, at: 1 } });' +
+    ' j.completedSheets = p.done;' +
+    " localStorage.setItem('baJourney', JSON.stringify(j));" +
+    " if (p.view) localStorage.setItem('daniel_book_view', p.view);" +
+    ' } catch (e) {} })();';
+}
+
+const INSTALLED_CHROME = [
+  'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe',
+  'C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe',
+  process.env.LOCALAPPDATA ? path.join(process.env.LOCALAPPDATA, 'Google', 'Chrome', 'Application', 'chrome.exe') : null,
+  '/usr/bin/google-chrome',
+  '/usr/bin/google-chrome-stable',
+  '/usr/bin/chromium-browser',
+  '/usr/bin/chromium',
+  '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
+];
+
+export function chromePath() {
+  if (process.env.CHROME_PATH && fs.existsSync(process.env.CHROME_PATH)) return process.env.CHROME_PATH;
+  const installed = INSTALLED_CHROME.find((p) => p && fs.existsSync(p));
+  if (installed) return installed;
+  const bundled = chromium.executablePath();
+  return bundled && fs.existsSync(bundled) ? bundled : null;
 }

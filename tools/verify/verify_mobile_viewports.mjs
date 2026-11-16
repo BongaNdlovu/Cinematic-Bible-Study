@@ -163,8 +163,9 @@ try {
 
     const bodyText = await page.locator("#terms-form").textContent();
     assert(
-      bodyText.includes("To ask for deletion, email shelfofdaniel@gmail.com, or sign in, open Messages, and choose Write to the operator."),
-      "Terms must tell readers how to ask the operator for deletion"
+      bodyText.includes("sign in, open the Account page, and choose Delete account.") &&
+        bodyText.includes("If you cannot sign in, email shelfofdaniel@gmail.com and we will delete it for you."),
+      "Terms must tell readers how to delete their account, and whom to email when they cannot sign in"
     );
     const listedEmails = bodyText.match(/[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[a-z]{2,}/g) || [];
     assert(

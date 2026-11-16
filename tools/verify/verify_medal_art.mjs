@@ -1,20 +1,11 @@
 import { spawn } from "child_process";
 import fs from "fs";
 import path from "path";
+import { signedInScript, chromePath } from "./_server.mjs";
 
 fs.mkdirSync(path.join("qa", "proofs"), { recursive: true });
 
-const CHROME_PATH = [
-  process.env.CHROME_PATH,
-  "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
-  "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe",
-  process.env.LOCALAPPDATA
-    ? path.join(process.env.LOCALAPPDATA, "Google", "Chrome", "Application", "chrome.exe")
-    : null,
-  "/usr/bin/google-chrome",
-  "/usr/bin/chromium-browser",
-  "/usr/bin/chromium",
-].find((p) => p && fs.existsSync(p));
+const CHROME_PATH = chromePath();
 
 const PORT = process.env.MAP_PORT || "8013";
 const BASE = `http://127.0.0.1:${PORT}`;
@@ -74,7 +65,7 @@ const CHECKS = [
   { year: "y605", names: ["Babylon", "Jerusalem", "Siege of Jerusalem"] },
   { year: "y539", names: ["Babylon", "Persepolis", "Sardis", "Fall of Babylon"] },
   { year: "y168", names: ["Rome", "Carthage", "Pydna", "Athens"] },
-  { year: "y538", names: ["Rome", "Constantinople", "Ostrogoths driven from Rome"] },
+  { year: "y538", names: ["Rome", "Constantinople", "Siege of Rome lifted"] },
 ];
 
 let server = null;
@@ -110,6 +101,7 @@ try {
   const page = targets.find((t) => t.type === "page") || targets[0];
   const client = new CDPClient(page.webSocketDebuggerUrl);
   await client.send("Page.enable");
+  await client.send("Page.addScriptToEvaluateOnNewDocument", { source: signedInScript() });
   await client.send("Runtime.enable");
   await client.send("Emulation.setDeviceMetricsOverride", {
     width: 1440,
@@ -141,7 +133,7 @@ try {
       console.log("click", name, hit);
       if (!hit || !hit.ok) throw new Error("missing medal " + name + " " + JSON.stringify(hit));
       if (!hit.src) throw new Error("no image for " + name);
-      if (hit.title && !hit.title.toLowerCase().includes(name.split(" ")[0].toLowerCase()) && name !== "Ostrogoths driven from Rome") {
+      if (hit.title && !hit.title.toLowerCase().includes(name.split(" ")[0].toLowerCase()) && name !== "Siege of Rome lifted") {
         console.warn("title mismatch", name, hit.title);
       }
       const prev = seen.find((s) => s.src === hit.src && s.name !== name);

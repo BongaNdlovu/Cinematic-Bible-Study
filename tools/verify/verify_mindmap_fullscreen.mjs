@@ -38,6 +38,7 @@
 import fs from 'fs';
 import path from 'path';
 import { chromium } from 'playwright';
+import { signedInScript } from './_server.mjs';
 
 const args = Object.fromEntries(
   process.argv.slice(2).map((a) => {
@@ -87,6 +88,7 @@ try {
       localStorage.setItem('baJourney', JSON.stringify(j));
     } catch (e) { /* storage disabled */ }
   }, MOCK);
+  await context.addInitScript({ content: signedInScript({ bookView: 'scroll' }) });
   const page = await context.newPage();
   const consoleErrors = [];
   page.on('pageerror', (e) => consoleErrors.push(String(e.message)));
@@ -540,6 +542,7 @@ try {
   await reduceContext.addInitScript((mock) => {
     try { localStorage.setItem('baQaMockSession', JSON.stringify(mock)); localStorage.setItem('baOnboardV1', '1'); localStorage.setItem('sodConsent', JSON.stringify({ analytics: false, ts: 1, v: 1 })); } catch (e) { /* ignore */ }
   }, MOCK);
+  await reduceContext.addInitScript({ content: signedInScript({ bookView: 'scroll' }) });
   const reducePage = await reduceContext.newPage();
   reducePage.on('pageerror', (e) => consoleErrors.push('reduce: ' + String(e.message)));
   await reducePage.goto(`${BASE}/study.html?sheet=2&preview=full`, { waitUntil: 'domcontentloaded' });
@@ -575,6 +578,7 @@ try {
   await shortContext.addInitScript((mock) => {
     try { localStorage.setItem('baQaMockSession', JSON.stringify(mock)); localStorage.setItem('baOnboardV1', '1'); localStorage.setItem('sodConsent', JSON.stringify({ analytics: false, ts: 1, v: 1 })); } catch (e) { /* ignore */ }
   }, MOCK);
+  await shortContext.addInitScript({ content: signedInScript({ bookView: 'scroll' }) });
   const shortPage = await shortContext.newPage();
   shortPage.on('pageerror', (e) => consoleErrors.push('short: ' + String(e.message)));
   await shortPage.goto(`${BASE}/study.html?sheet=2&preview=full`, { waitUntil: 'domcontentloaded' });
@@ -607,6 +611,7 @@ try {
   await mobileContext.addInitScript((mock) => {
     try { localStorage.setItem('baQaMockSession', JSON.stringify(mock)); localStorage.setItem('baOnboardV1', '1'); localStorage.setItem('sodConsent', JSON.stringify({ analytics: false, ts: 1, v: 1 })); } catch (e) { /* ignore */ }
   }, MOCK);
+  await mobileContext.addInitScript({ content: signedInScript({ bookView: 'scroll' }) });
   const mobilePage = await mobileContext.newPage();
   mobilePage.on('pageerror', (e) => consoleErrors.push('mobile: ' + String(e.message)));
   await mobilePage.goto(`${BASE}/study.html?sheet=2&preview=full`, { waitUntil: 'domcontentloaded' });

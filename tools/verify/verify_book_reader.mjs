@@ -1,12 +1,11 @@
 import { chromium } from 'playwright';
+import { signedInScript } from './_server.mjs';
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
 const __filename = fileURLToPath(import.meta.url);
 const ROOT = path.resolve(path.dirname(__filename), '../..');
-const JS_PATH = path.join(ROOT, 'js/study/book-reader.js');
-const CSS_PATH = path.join(ROOT, 'css/book-reader.css');
 const OUT_DIR = path.join(ROOT, 'qa/proofs/book');
 
 const argv = Object.fromEntries(process.argv.slice(2).map((a) => {
@@ -143,9 +142,9 @@ async function m1(page, tag, sheet) {
     window.__preHTML = a.innerHTML;
     window.__preSW = document.documentElement.scrollWidth;
     window.__figCount = a.querySelectorAll('figure[data-diagram]').length;
-    window.__expPlates = window.__orig.filter((n) => n.nodeType === 1 && (n.matches('figure[data-diagram], figure.lesson-infographic') || n.querySelector('figure[data-diagram]'))).length;
+    window.__expPlates = window.__orig.filter((n) => n.nodeType === 1 && (n.matches('figure[data-diagram], figure.lesson-infographic, .checkpoint-plate') || n.querySelector('figure[data-diagram], .checkpoint-plate'))).length;
     window.__expReplay = window.__orig.filter((n, i) => {
-      if (n.nodeType !== 1 || !(n.matches('figure[data-diagram], figure.lesson-infographic') || n.querySelector('figure[data-diagram]'))) return false;
+      if (n.nodeType !== 1 || !(n.matches('figure[data-diagram], figure.lesson-infographic, .checkpoint-plate') || n.querySelector('figure[data-diagram], .checkpoint-plate'))) return false;
       let j = i + 1;
       while (j < window.__orig.length && window.__orig[j].nodeType === 3 && !/\S/.test(window.__orig[j].nodeValue)) j += 1;
       return j < window.__orig.length && window.__orig[j].nodeType === 1 && window.__orig[j].matches('[data-chain-replay]');
@@ -246,7 +245,32 @@ async function m1(page, tag, sheet) {
   }, sheet);
 }
 
+async function passCheckpoints(page) {
+  await page.evaluate(() => {
+    document.querySelectorAll('[data-checkpoint]').forEach((plate) => plate.setAttribute('data-checkpoint-passed', 'true'));
+    document.dispatchEvent(new CustomEvent('checkpoint:passed'));
+  });
+}
+
+async function checkGate(page, tag) {
+  const gate = await page.evaluate(() => {
+    const plates = document.querySelectorAll('[data-checkpoint]');
+    if (!plates.length) return null;
+    plates.forEach((plate) => plate.removeAttribute('data-checkpoint-passed'));
+    window.BookReader.goTo(0, { instant: true });
+    const total = window.BookReader.state().steps;
+    window.BookReader.goTo(total - 1, { instant: true });
+    const held = window.BookReader.state().step;
+    return { held, total };
+  });
+  if (!gate) return;
+  check(tag, 'M2.0 an unanswered checkpoint holds the book before the last step', gate.held < gate.total - 1, `held at ${gate.held} of ${gate.total}`);
+  await page.evaluate(() => window.BookReader.goTo(0, { instant: true }));
+}
+
 async function m2(page, tag, vpName, sheet) {
+  await checkGate(page, tag);
+  await passCheckpoints(page);
   await page.evaluate(() => {
     window.__end = 0;
     window.__turns = 0;
@@ -455,6 +479,7 @@ async function m2(page, tag, vpName, sheet) {
 }
 
 async function m3(page, tag, vpName, sheet) {
+  await passCheckpoints(page);
   await page.evaluate(() => { window.BookReader.goTo(0, { instant: true }); });
   await page.evaluate(() => { const r = document.querySelector('.br-root'); r.scrollIntoView({ block: 'center' }); });
   await page.waitForTimeout(200);
@@ -853,7 +878,7 @@ async function m5(page, tag, vpName, sheet) {
   const a11y = await page.evaluate(() => {
     const book = document.querySelector('.br-book');
     const root = document.querySelector('.br-root');
-    const buttons = Array.from(document.querySelectorAll('.br-root button'));
+    const buttons = Array.from(document.querySelectorAll('.br-root button')).filter((b) => !b.closest('[hidden]'));
     const unnamed = buttons.filter((b) => !((b.getAttribute('aria-label') || '').trim() || (b.textContent || '').trim() || b.title)).length;
     const marks = Array.from(document.querySelectorAll('.br-mark')).every((m) => m.getAttribute('aria-label'));
     const pos = document.querySelector('.br-pos');
@@ -938,6 +963,7 @@ async function runOne(browser, sheet, vpName) {
   await context.addInitScript(() => {
     try { localStorage.setItem('baOnboardV1', '1'); localStorage.setItem('sodConsent', JSON.stringify({ analytics: false, ts: 1, v: 1 })); } catch (e) { /* storage disabled */ }
   });
+  await context.addInitScript({ content: signedInScript() });
   const page = await context.newPage();
   const consoleErrors = [];
   const pageErrors = [];
@@ -958,8 +984,8 @@ async function runOne(browser, sheet, vpName) {
     const skip = await page.$('#sitting-guide-skip');
     if (skip && (await skip.isVisible())) await skip.click();
     await page.evaluate(() => { document.documentElement.style.scrollBehavior = 'auto'; });
-    await page.addStyleTag({ path: CSS_PATH });
-    await page.addScriptTag({ path: JS_PATH });
+    await page.waitForFunction(() => !!window.BookReader, null, { timeout: 20000 });
+    await page.evaluate(() => { if (window.BookReader.isActive()) window.BookReader.unmount(); });
     if (MILESTONE >= 1) {
       await m1(page, tag, sheet);
     }

@@ -1,16 +1,12 @@
 import { spawn } from 'child_process';
 import fs from 'fs';
 import path from 'path';
+import { signedInScript, chromePath } from './_server.mjs';
 import net from 'net';
 
 fs.mkdirSync(path.join('qa', 'proofs'), { recursive: true });
 
-const CHROME_PATH = [
-  process.env.CHROME_PATH,
-  'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe',
-  'C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe',
-  process.env.LOCALAPPDATA ? path.join(process.env.LOCALAPPDATA, 'Google', 'Chrome', 'Application', 'chrome.exe') : null,
-].find((p) => p && fs.existsSync(p));
+const CHROME_PATH = chromePath();
 
 if (!CHROME_PATH) {
   console.error('Chrome executable not found');
@@ -119,6 +115,7 @@ async function run() {
   const page = targets.find((t) => t.type === 'page') || targets[0];
   const client = new CDPClient(page.webSocketDebuggerUrl);
   await client.send('Page.enable');
+  await client.send('Page.addScriptToEvaluateOnNewDocument', { source: signedInScript() });
   await client.send('Runtime.enable');
 
   async function dismissSittingGuide() {

@@ -11,12 +11,20 @@ const TIMEOUT_MS = 240000;
 export const BROWSER_CHECKS = [
   { file: 'verify_bridge_copy.mjs', base: 'none' },
   { file: 'verify_bridge_panel.mjs', base: 'flag' },
+  { file: 'verify_cp07.mjs', base: 'none' },
+  { file: 'verify_flow.mjs', base: 'flag' },
   { file: 'verify_globe.mjs', base: 'none' },
   { file: 'verify_grounding_quotes.mjs', base: 'none' },
   { file: 'verify_hall_mural.mjs', base: 'none' },
   { file: 'verify_horizon.mjs', base: 'none' },
+  { file: 'verify_lesson_connectors.mjs', base: 'none' },
+  { file: 'verify_map.mjs', base: 'none' },
+  { file: 'verify_medal_art.mjs', base: 'none' },
+  { file: 'verify_mindmap.mjs', base: 'flag' },
+  { file: 'verify_mindmap_fullscreen.mjs', base: 'flag' },
   { file: 'verify_mindmap_fullscreen_fit.mjs', base: 'flag' },
   { file: 'verify_mindmap_legibility.mjs', base: 'flag' },
+  { file: 'verify_mobile_viewports.mjs', base: 'none' },
   { file: 'verify_onevoice27.mjs', base: 'none' },
   { file: 'verify_photo_y.mjs', base: 'flag' },
   { file: 'verify_readalong.mjs', base: 'positional' },
@@ -27,21 +35,13 @@ export const BROWSER_CHECKS = [
   { file: 'verify_story_reader.mjs', base: 'flag' },
   { file: 'verify_story_themes.mjs', base: 'flag' },
   { file: 'verify_study_page_load.mjs', base: 'flag' },
+  { file: 'verify_theme.mjs', base: 'none' },
   { file: 'verify_verify_pack_quotes.mjs', base: 'none' },
   { file: 'verify_workbench.mjs', base: 'none' },
 ];
 
 export const QUARANTINED = [
-  { file: 'verify_book_reader.mjs', base: 'flag', reason: "times out after 240 s; assertions M2.8 (plate steps) and M3.1 (next button) fail" },
-  { file: 'verify_cp07.mjs', base: 'none', reason: "Check 5 fails: classroom projection mode never appears at study.html?project=1" },
-  { file: 'verify_flow.mjs', base: 'flag', reason: "fails; cause not investigated" },
-  { file: 'verify_lesson_connectors.mjs', base: 'none', reason: "Sitting 0 reports an empty sitting-path steps list; cause not investigated" },
-  { file: 'verify_map.mjs', base: 'none', reason: "throws an uncaught page error in its first evaluate (verify_map.mjs:139); cause not investigated" },
-  { file: 'verify_medal_art.mjs', base: 'none', reason: "the map has no medal named 'Ostrogoths driven from Rome' in the year it checks" },
-  { file: 'verify_mindmap.mjs', base: 'flag', reason: "2 of 78 assertions fail, including 390x844 'the block stays inside the viewport'" },
-  { file: 'verify_mindmap_fullscreen.mjs', base: 'flag', reason: "the press on the s2-4 full-screen control lands on another element (P.)" },
-  { file: 'verify_mobile_viewports.mjs', base: 'none', reason: "an assertion fails (expected true, got false); cause not investigated" },
-  { file: 'verify_theme.mjs', base: 'none', reason: "throws an uncaught page error in its first evaluate (verify_theme.mjs:98); cause not investigated" },
+  { file: 'verify_book_reader.mjs', base: 'flag', reason: "timing and geometry checks fail: mid-turn step reads (M2.3), wheel throttle (M3.7), resize mode (M2.7), font-size steps (M3.10), 2px view height (M2.8); the reader itself reaches the last step" },
 ];
 
 function argsFor(check, base) {
