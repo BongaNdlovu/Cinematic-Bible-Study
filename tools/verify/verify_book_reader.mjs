@@ -936,7 +936,7 @@ async function runOne(browser, sheet, vpName) {
   const vp = VP[vpName];
   const context = await browser.newContext({ viewport: { width: vp.w, height: vp.h } });
   await context.addInitScript(() => {
-    try { localStorage.setItem('baOnboardV1', '1'); } catch (e) { /* storage disabled */ }
+    try { localStorage.setItem('baOnboardV1', '1'); localStorage.setItem('sodConsent', JSON.stringify({ analytics: false, ts: 1, v: 1 })); } catch (e) { /* storage disabled */ }
   });
   const page = await context.newPage();
   const consoleErrors = [];

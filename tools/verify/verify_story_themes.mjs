@@ -57,6 +57,8 @@ try {
   await context.addInitScript((mock) => {
     try {
       localStorage.setItem('baQaMockSession', JSON.stringify(mock));
+      localStorage.setItem('baOnboardV1', '1');
+      localStorage.setItem('sodConsent', JSON.stringify({ analytics: false, ts: 1, v: 1 }));
       const j = JSON.parse(localStorage.getItem('baJourney') || '{}');
       j.termsAccepted = true;
       j.termsByUser = Object.assign({}, j.termsByUser, { 'qa-mock-user-001': 5 });

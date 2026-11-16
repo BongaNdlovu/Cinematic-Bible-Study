@@ -14,6 +14,31 @@ Entry template:
 
 ---
 
+## 2026-11-16 — Architecture plan, Phase 0: the safety net
+
+**Why:** The architecture improvement plan starts with checks, so every later move can be proved safe. 34 `tools/verify/verify_*.mjs` files were not run by anything, and a stale generated file would ship without a failing test. No site code changed in this step.
+
+**What changed:**
+
+- `package.json`: `npm test` now ends with `node tools/build_study_sheets.mjs --check`, `node tools/verify/build_glossary_enrichment.mjs --check` and `node tools/verify/verify_wiring.mjs`. New script `npm run test:browser`. New dev dependency `acorn` (^8.19.0, lockfile updated, no install scripts), used to parse JavaScript.
+- `tools/verify/build_glossary_enrichment.mjs`: new `--check` mode. It compares the committed `js/study/glossary-enrichment.js` with what the overrides would produce, ignoring Windows line endings.
+- `tools/verify/verify_wiring.mjs` (new): fails when a `verify_*.mjs` file is neither run by a script nor listed with a reason.
+- `tools/verify/run_browser_checks.mjs` (new): starts one site server and runs 20 browser checks. 10 known-failing checks are kept in a `QUARANTINED` list with the reason for each; `--include-quarantined` runs them.
+- `.github/workflows/ci.yml`: new `test-browser` job. **deploy** does not wait for it yet.
+- `tools/verify/verify_equivalence.mjs` (new), with `tests/unit/equivalence.test.mjs` (11 tests): compares two folders or git revisions by JavaScript syntax tree and by CSS rule list.
+- `tools/measure_baseline.mjs` (new) and `docs/engineering/architecture-baseline.md` (new): file sizes, function lengths and duplicate function names, taken today.
+- Browser scripts fixed because the site now shows a cookie dialog and an onboarding dialog: `verify_readalong`, `verify_story_layers`, `verify_story_mobile`, `verify_story_reader`, `verify_story_themes` (they pass now). `verify_book_reader`, `verify_flow`, `verify_mindmap` and `verify_mindmap_fullscreen` got the same lines and still fail for other reasons.
+- `tools/verify/verify_workbench.mjs`: two stale assertions updated (the survey grant lines in `tools/supabase-progress.sql`, and the `save_exhibit_progress` call in `js/shared/progress-sync.js`).
+- `verify_live_inserts.mjs` is obsolete (it expects production to accept a guest insert; production now answers 400 `human_check`). It is listed as not run in CI and not deleted.
+
+**Handbook updated:** 07 (scripts, tests, browser checks, CI, the equivalence check), 03 (new files in `tools/`), README (index), new `architecture-baseline.md`.
+
+**Checked here:** `npm run lint` exits 0. `npm run test:unit` passes 112 of 112 (101 before, 11 new). `npm test` passes, including the three new guards. `npm run test:browser` passes 20 of 20. Each new guard was shown to fail on purpose and pass again: an unwired file, a file in both lists, and a changed generated file. `verify_equivalence.mjs` found a real difference between `git:HEAD` and the working tree in `css/study-page.css`.
+
+**Not checked:** the `test-browser` job on GitHub (Linux); whether the 10 quarantined checks fail on a clean `master` (the run included uncommitted local edits); the screenshot set in the baseline.
+
+**Status:** on branch `arch/phase-0-safety-net`, not committed, not deployed.
+
 ## 2026-11-16 — Comment bloat removed
 
 **Why:** The comment bloat assessment found 160 KB of comments, 78% of it in three files. Much of it was build history, agent notes and essays, and seven comments were already wrong. JavaScript and HTML comments ship to every reader.

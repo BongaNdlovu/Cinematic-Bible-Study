@@ -19,6 +19,7 @@ for (const sheet of [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]) {
   await page.addInitScript(() => {
     try {
       localStorage.setItem('baOnboardV1', '1');
+      localStorage.setItem('sodConsent', JSON.stringify({ analytics: false, ts: 1, v: 1 }));
     } catch (e) {}
   });
   const errors = [];

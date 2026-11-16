@@ -78,6 +78,7 @@ try {
     try {
       localStorage.setItem('baQaMockSession', JSON.stringify(mock));
       localStorage.setItem('baOnboardV1', '1');
+      localStorage.setItem('sodConsent', JSON.stringify({ analytics: false, ts: 1, v: 1 }));
       const raw = localStorage.getItem('baJourney');
       const j = raw ? JSON.parse(raw) : {};
       j.termsAccepted = true;
@@ -537,7 +538,7 @@ try {
   /* ---- 2. reduced motion: full screen adds no animation ---- */
   const reduceContext = await browser.newContext({ viewport: { width: 1440, height: 1000 }, reducedMotion: 'reduce', deviceScaleFactor: 1 });
   await reduceContext.addInitScript((mock) => {
-    try { localStorage.setItem('baQaMockSession', JSON.stringify(mock)); localStorage.setItem('baOnboardV1', '1'); } catch (e) { /* ignore */ }
+    try { localStorage.setItem('baQaMockSession', JSON.stringify(mock)); localStorage.setItem('baOnboardV1', '1'); localStorage.setItem('sodConsent', JSON.stringify({ analytics: false, ts: 1, v: 1 })); } catch (e) { /* ignore */ }
   }, MOCK);
   const reducePage = await reduceContext.newPage();
   reducePage.on('pageerror', (e) => consoleErrors.push('reduce: ' + String(e.message)));
@@ -572,7 +573,7 @@ try {
   /* ---- 3. 1440x800: the height trap (max-height bound below ~831px) ---- */
   const shortContext = await browser.newContext({ viewport: { width: 1440, height: 800 }, deviceScaleFactor: 1 });
   await shortContext.addInitScript((mock) => {
-    try { localStorage.setItem('baQaMockSession', JSON.stringify(mock)); localStorage.setItem('baOnboardV1', '1'); } catch (e) { /* ignore */ }
+    try { localStorage.setItem('baQaMockSession', JSON.stringify(mock)); localStorage.setItem('baOnboardV1', '1'); localStorage.setItem('sodConsent', JSON.stringify({ analytics: false, ts: 1, v: 1 })); } catch (e) { /* ignore */ }
   }, MOCK);
   const shortPage = await shortContext.newPage();
   shortPage.on('pageerror', (e) => consoleErrors.push('short: ' + String(e.message)));
@@ -604,7 +605,7 @@ try {
   /* ---- 4. 390x844: the outline is the right presentation, not a broken layer */
   const mobileContext = await browser.newContext({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 2 });
   await mobileContext.addInitScript((mock) => {
-    try { localStorage.setItem('baQaMockSession', JSON.stringify(mock)); localStorage.setItem('baOnboardV1', '1'); } catch (e) { /* ignore */ }
+    try { localStorage.setItem('baQaMockSession', JSON.stringify(mock)); localStorage.setItem('baOnboardV1', '1'); localStorage.setItem('sodConsent', JSON.stringify({ analytics: false, ts: 1, v: 1 })); } catch (e) { /* ignore */ }
   }, MOCK);
   const mobilePage = await mobileContext.newPage();
   mobilePage.on('pageerror', (e) => consoleErrors.push('mobile: ' + String(e.message)));

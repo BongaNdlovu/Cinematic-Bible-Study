@@ -15,6 +15,7 @@ This handbook is the single place a developer or senior engineer reads to unders
 | 5 | [Performance](05-performance.md) | Caching, loading, 3D memory, and the budgets tests enforce |
 | 6 | [User interface](06-ui.md) | Pages, shared components, themes, motion, and accessibility |
 | 7 | [Develop, test, release](07-develop-test-release.md) | Running locally, the test suites, CI, deploys, and the database |
+| — | [Architecture baseline](architecture-baseline.md) | The measured sizes the architecture plan is compared against |
 | — | [Changelog](CHANGELOG.md) | What changed, when, and which chapters it touched |
 
 Older documents in `docs/` (audits, fix plans, specs) are history. When they disagree with this handbook, the handbook wins. [`docs/ARCHITECTURE.md`](../ARCHITECTURE.md) is kept for its detailed tables; its own introduction points here.

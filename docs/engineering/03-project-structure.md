@@ -1,6 +1,6 @@
 # 3. Project structure
 
-**Last verified:** 12 November 2026
+**Last verified:** 16 November 2026
 
 The site has no build step for its pages. The files in the repository root and in `js/`, `css/`, `assets/`, `bible/`, `models/` and `vendor/` are what browsers download. The deploy script copies them into a clean folder, then minifies the CSS and fingerprints the file names (see [Develop, test, release](07-develop-test-release.md#deploying)).
 
@@ -87,7 +87,8 @@ The deploy script refuses to ship if any of these are in the bundle.
 | `tools/hash-release-assets.mjs`, `tools/minify-release-css.mjs` | Fingerprint file names and minify CSS during the deploy |
 | `tools/build_study_sheets.mjs`, `tools/build-shelf-data.mjs` | Generate the per-sitting files and the shelf data |
 | `tools/supabase-*.sql` | Database migrations, run by hand in the Supabase SQL editor |
-| `tools/verify/` | The regression suite behind `npm test`, plus screenshot helpers |
+| `tools/verify/` | The regression suite behind `npm test`, plus screenshot helpers. `run_browser_checks.mjs` runs the browser checks (`npm run test:browser`), `verify_wiring.mjs` fails when a `verify_*.mjs` file is run nowhere, and `verify_equivalence.mjs` proves that a move changed no code or CSS rule |
+| `tools/measure_baseline.mjs` | Prints file sizes, function lengths and duplicate function names (see [the architecture baseline](architecture-baseline.md)) |
 | `tools/security/run_penetration_audit.mjs` | `npm run test:security` |
 | `tools/smoke.mjs` | Live-site smoke test (CI after each deploy, and every 15 minutes) |
 | `tools/ci/alert.mjs` | Opens or closes a GitHub issue when the live site fails or recovers |
