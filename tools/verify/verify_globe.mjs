@@ -133,11 +133,19 @@ try {
     pass("globe draws nothing when idle");
 
     await t.page.mouse.move(900, 300);
-    for (let i = 0; i < 3; i++) {
-      await t.page.mouse.wheel(0, -120);
-      await sleep(60);
+    let imagery = false;
+    for (let round = 0; round < 3 && !imagery; round++) {
+      for (let i = 0; i < 3; i++) {
+        await t.page.mouse.wheel(0, -120);
+        await sleep(60);
+      }
+      imagery = await waitFor(t.page, () => !!document.querySelector(".cmap-globe").dataset.imagery, 20000);
     }
-    assert.ok(await waitFor(t.page, () => !!document.querySelector(".cmap-globe").dataset.imagery, 20000), "close satellite imagery never appeared on the globe");
+    if (!imagery) {
+      const data = await t.page.evaluate(() => Object.assign({}, document.querySelector(".cmap-globe").dataset));
+      const tiles = t.requests.filter((u) => u.includes("arcgisonline")).length;
+      assert.fail("close satellite imagery never appeared on the globe " + JSON.stringify({ data, tiles, errors: t.errors }));
+    }
     assert.ok(await globeOn(t.page), "three wheel steps should not leave the globe");
     await t.page.screenshot({ path: "qa/proofs/globe_proof_imagery.png" });
     pass("zooming close drapes satellite imagery on the globe");

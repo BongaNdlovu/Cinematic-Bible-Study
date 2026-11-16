@@ -1,7 +1,7 @@
 import { spawn } from "child_process";
 import fs from "fs";
 import path from "path";
-import { chromePath, cdpTargets } from "./_server.mjs";
+import { chromePath, cdpTargets, webglFlags } from "./_server.mjs";
 
 fs.mkdirSync(path.join("qa", "proofs"), { recursive: true });
 
@@ -103,7 +103,7 @@ try {
     `--remote-debugging-port=${DEBUG_PORT}`,
     "--ignore-gpu-blocklist",
     "--enable-webgl",
-    "--use-angle=d3d11",
+    ...webglFlags(),
     "--no-sandbox",
     "--window-size=1440,900",
     "about:blank",

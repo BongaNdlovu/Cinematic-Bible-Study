@@ -154,3 +154,8 @@ export async function cdpTargets(port, timeoutMs = 30000) {
   }
   throw new Error('Chrome did not open its debugging port ' + port + ' within ' + timeoutMs + ' ms' + (last ? ': ' + last.message : ''));
 }
+
+export function webglFlags() {
+  if (process.platform === 'win32') return ['--use-angle=d3d11'];
+  return ['--use-angle=swiftshader', '--enable-unsafe-swiftshader'];
+}
