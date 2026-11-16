@@ -144,7 +144,7 @@ try {
         await t.page.mouse.wheel(0, -120);
         await sleep(60);
       }
-      imagery = await waitFor(t.page, () => !!document.querySelector(".cmap-globe").dataset.imagery, 20000);
+      imagery = await waitFor(t.page, () => !!document.querySelector(".cmap-globe").dataset.imagery, 60000);
     }
     if (!imagery) {
       const data = await t.page.evaluate(() => Object.assign({}, document.querySelector(".cmap-globe").dataset));

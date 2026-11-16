@@ -14,6 +14,27 @@ Entry template:
 
 ---
 
+## 2026-11-16 — Browser checks made reliable on GitHub's runners
+
+**Why:** after the merge to `master`, the `test-browser` job failed on GitHub with the same five checks on two runs (25 of 30), while all 30 pass on Windows. GitHub's runners draw WebGL in software and are slower, and the five checks used fixed waits.
+
+**What changed:**
+
+| Check | Failure on GitHub | Change |
+|---|---|---|
+| `verify_globe.mjs` | Clouds did not drift within 10 s of a drag; close satellite imagery never appeared | Waits until the globe stops drawing before comparing the cloud offset. Waits up to 60 s (was 20 s) for each imagery patch, because each further zoom drops a half-loaded patch and starts a new one |
+| `verify_horizon.mjs` | "Greek factors still share a plate" | Waits for the gallery's timeline and for the plate to change after each click, instead of fixed sleeps of 3.5 s and 1.2 s |
+| `verify_lesson_connectors.mjs` | `study.html` had not scrolled to `#sheet-article` after 2.5 s | Waits up to 30 s for the scroll |
+| `verify_hall_mural.mjs`, `verify_mobile_viewports.mjs` | Killed at the 240 s limit | 480 s limit, as for the globe |
+
+- `tools/verify/run_browser_checks.mjs` takes a per-check `timeoutMs`. The `test-browser` job limit in `.github/workflows/ci.yml` is now 60 minutes (was 45).
+
+**Handbook updated:** 07 (browser checks).
+
+**Checked here:** on Windows, the three changed checks pass (`verify_globe.mjs`, `verify_horizon.mjs`, `verify_lesson_connectors.mjs`). The run on GitHub is the real test; see the next entry.
+
+**Status:** on branch `ci/browser-gate`.
+
 ## 2026-11-16 — Deleting an account clears its own parked changes
 
 **Why:** the user decided that deleting an account should also remove that account's own stash keys from the device. Before, `baProgressStash:<id>` and `baStudySyncStash:<id>` for the deleted account stayed behind, waiting for an owner who no longer exists.
