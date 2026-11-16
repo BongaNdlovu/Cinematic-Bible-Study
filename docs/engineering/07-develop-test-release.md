@@ -20,7 +20,7 @@ The server binds `127.0.0.1`. It starts at port 8000, or at `PORT` if that is se
 
 | Script | What it does |
 |---|---|
-| `npm run lint` | `oxlint` over the code. CI fails on any error. The complexity ceiling is 55 per function, set in `.oxlintrc.json`; `.cursor/skills/complexity-ceiling/SKILL.md` says how to change it. |
+| `npm run lint` | `oxlint` over the code. CI fails on any error. The complexity ceiling is 55 per function, set in `.oxlintrc.json`. The unused-variable rule is **off** for `js/study/study-app.js`, `js/study/diagrams/` and the study feature files split out of it (listed under `overrides`): they still share globals across files, so lint sees a function used only in another file as unused. This ends with the move to ES modules (plan step 4.5), when each file exports what it shares; `.cursor/skills/complexity-ceiling/SKILL.md` says how to change it. |
 | `npm run test:unit` | `node --test "tests/unit/*.test.mjs"`: fast unit tests, no browser |
 | `npm test` | The regression suite: 24 `tools/verify/verify_*.mjs` scripts plus `tools/verify-headers.mjs`. Some start `server.py` and drive Chromium through Playwright. It ends with three guards: `node tools/build_study_sheets.mjs --check` and `node tools/verify/build_glossary_enrichment.mjs --check` (fail when a generated file is older than its source) and `tools/verify/verify_wiring.mjs` (fails when a `verify_*.mjs` file is not run anywhere). |
 | `npm run test:browser` | `tools/verify/run_browser_checks.mjs`: starts one site server and runs the 29 browser checks that pass today (see [Browser checks](#browser-checks)). Add `--include-quarantined` to run the one known-failing check too, or `--only=verify_x.mjs,verify_y.mjs` to run named ones. |

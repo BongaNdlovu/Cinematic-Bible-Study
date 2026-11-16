@@ -14,6 +14,29 @@ Entry template:
 
 ---
 
+## 2026-11-16 — Architecture plan, Phase 4 (steps 4.1 and 4.2): study-app.js split
+
+**Why:** `js/study/study-app.js` held 6,273 lines and nearly every study-page feature in one scope.
+
+**What changed:**
+
+- **4.1** The diagram renderers moved to `js/study/diagrams/`: `cite.js`, `chain.js`, `comparison.js`, `table.js`, `flow.js`, `timeline.js` and `fullscreen.js`.
+- **4.2** Eighteen features moved to their own files in `js/study/`: `story.js`, `quiz.js`, `read-along.js`, `focus-timer.js`, `reading-settings.js`, `references.js`, `horizon.js`, `sitting-map.js`, `sitting-guide.js`, `lesson-connect.js`, `toc.js`, `strongs.js`, `study-guide.js`, `scroll-place.js`, `sheet-book.js`, `instruments.js`, `spine.js` and `study-modules.js`. The largest is `story.js` at 784 lines.
+- `study-app.js` is now 1,198 lines: the controller holds state, start-up and `loadSheet`. The start-up block alone is 271 lines, so the plan's target of about 800 is not yet met.
+- **How the moves were done:** `study-app.js` declares everything at the top level of a classic script, so its functions were already page globals and still are. Only function declarations, and constants whose values read nothing from `study-app.js`, were moved; nothing runs earlier than before. The new files load before `study-app.js`. For each of the three moves, the top-level statements before and after have the same syntax trees, and those left in `study-app.js` keep their order.
+- The full-screen diagram shell had a fourth focus trap, missed in Phase 1. It now uses `SiteCore.trapFocus` (separate commit).
+- Tests that searched `study-app.js`'s text now search every `js/study` script `study.html` loads, through `tools/verify/_sources.mjs`. The storage-key test resolves constants across files and includes files not yet committed.
+- **Lint:** the unused-variable rule is off for these files until step 4.5, because functions shared across files look unused to lint. Recorded in chapter 07.
+- Test-only: a mind-map check retried a scroll that raced the sitting load's own scroll reset. It failed 1 of 7 runs, and the same check on the code before the move passed 3 of 3, so the race was not ruled out as new.
+
+**Handbook updated:** 03 (`js/study/`, `js/study/diagrams/`, where a study feature goes), 07 (lint override).
+
+**Checked here:** after each move, on Windows: lint exits 0, `npm run test:unit` passes 132 of 132, every `npm test` script passes, and `npm run test:browser` passes 30 of 30. The one exception was the mind-map race above, after the first batch.
+
+**Not done in this phase:** 4.3 (pulling pure helpers out of the one-function files), 4.4 (splitting `js/gallery/app.js`), 4.5 (ES modules).
+
+**Status:** on branch `arch/phase-4-scripts`, not deployed.
+
 ## 2026-11-16 — Architecture plan, Phase 3: the study stylesheets
 
 **Why:** `css/study-page.css` held 8,775 lines for some twenty features, and four scripts injected more CSS at run time, where a search of `css/` could not find it.
