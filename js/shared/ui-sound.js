@@ -1,4 +1,4 @@
-/* Plays the sampled UI sounds (AudioBus in js/gallery/app.js synthesizes its
+/* Plays the sampled UI sounds (AudioBus in js/gallery/gallery.js synthesizes its
    own).
    Autoplay policy: playback arms on the first pointerdown/keydown, and earlier
    play() calls are dropped. It never throws. Mute is stored under baUiSound for

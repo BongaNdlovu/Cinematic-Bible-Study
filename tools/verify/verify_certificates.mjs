@@ -8,7 +8,7 @@ const read = (rel) => fs.readFileSync(path.join(root, rel), 'utf8');
 
 const sql = read('tools/supabase-certificates.sql');
 const cert = read('js/study/certificate.js');
-const dash = read('js/insights/insights.js');
+const dash = read('js/pages/dashboard/dashboard.js');
 
 assert(sql.includes('revoke all on public.exhibit_certificates from public, anon, authenticated'), 'certificates are not a public table');
 assert(!/grant (select|insert|update|delete)[^;]*exhibit_certificates/.test(sql), 'certificates are reached only through the guarded functions');

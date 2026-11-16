@@ -1,4 +1,4 @@
-import { museumToast, openArtifactKeys, selectAsset, TOUR_BUSY_RETRY_MS, reducedMotion } from '/js/gallery/app.js';
+import { museumToast, openArtifactKeys, selectAsset, TOUR_BUSY_RETRY_MS, reducedMotion } from '/js/gallery/gallery.js';
 
 export let tourRunning = false;
 

@@ -259,14 +259,14 @@ test("a member's error report is sent at once, without the human check", async (
 
 test("a guest survey without a human pass is not sent and frees its slot", async () => {
   const refused = pageSandbox({ user: null, passReady: false });
-  vm.runInContext(readSource("js/shared/insights.js"), refused.ctx);
+  vm.runInContext(readSource("js/shared/analytics.js"), refused.ctx);
   const result = await refused.ctx.Insights.insertSurvey({ rating: 4 });
   assert.equal(result.ok, false);
   assert.equal(refused.inserts.length, 0);
   assert.deepEqual(JSON.parse(refused.ctx.localStorage.getItem("baSurveyTimes") || "[]"), []);
 
   const passed = pageSandbox({ user: null, passReady: true });
-  vm.runInContext(readSource("js/shared/insights.js"), passed.ctx);
+  vm.runInContext(readSource("js/shared/analytics.js"), passed.ctx);
   const sent = await passed.ctx.Insights.insertSurvey({ rating: 4 });
   assert.equal(sent.ok, true);
   assert.equal(passed.inserts.length, 1);

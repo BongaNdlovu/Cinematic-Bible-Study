@@ -9,7 +9,7 @@ const ROOT = path.resolve(__dirname, '../..');
 
 console.log('--- RUNNING RATE LIMIT VERIFICATION ---');
 
-const insights = fs.readFileSync(path.join(ROOT, 'js/shared/insights.js'), 'utf8');
+const insights = fs.readFileSync(path.join(ROOT, 'js/shared/analytics.js'), 'utf8');
 assert(insights.includes('const BATCH = 10'), 'insights flush batch must be 10');
 assert(insights.includes('const FLUSH_MS = 10000'), 'insights flush interval must be 10000');
 assert(insights.includes('const POSTS_PER_MIN = 12'), 'insights must cap 12 posts/min');

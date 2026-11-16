@@ -1,4 +1,4 @@
-import { activeAssetKey, loadedGLTFScenes } from '/js/gallery/app.js';
+import { activeAssetKey, loadedGLTFScenes } from '/js/gallery/gallery.js';
 
 // Models are big (4.5-9.5 MB decoded), so only a handful stay cached.
 // The boot pair (colossus + its 'full_body' alias) is permanent; everything

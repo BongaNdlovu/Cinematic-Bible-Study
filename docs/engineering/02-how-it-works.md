@@ -110,7 +110,7 @@ How syncing works:
 
 | Stream | When it runs | Where it goes | Limits |
 |---|---|---|---|
-| Study events (`js/shared/insights.js`) | Only with analytics consent | `exhibit_events` | Batches of up to 10, a flush every 10 s, at most 12 requests and 60 rows a minute per tab |
+| Study events (`js/shared/analytics.js`) | Only with analytics consent | `exhibit_events` | Batches of up to 10, a flush every 10 s, at most 12 requests and 60 rows a minute per tab |
 | Short surveys (sitting pulse, profile) | Only with analytics consent | `exhibit_surveys`, `exhibit_profiles` | 5 surveys an hour per device |
 | Cloudflare Web Analytics beacon | Only with analytics consent | Cloudflare | — |
 | Operational reports (`js/shared/ops.js`: failed saves, failed answer checks) | Always (legitimate interest, stated in `privacy.html`) | `exhibit_events` | Queue of 20, a flush every 10 s. Without consent, a visit-only ID that is deleted when the tab closes |
@@ -126,9 +126,9 @@ Consent is stored in `sodConsent` (`js/shared/consent.js`). If a visitor has not
 | Message desk (operator notices, help notes, replies) | `js/shared/desk.js` | `exhibit_notices`, `exhibit_notice_receipts`, `exhibit_help_notes`, `exhibit_help_replies` |
 | Certificates | `js/study/certificate.js` (loaded on demand from `study.html`) | `exhibit_certificates`, `issue_exhibit_certificate()` |
 | Account deletion | `js/shared/account.js` | `exhibit_delete_my_account()` |
-| Insights dashboard and printable report | `js/insights/insights.js`, `js/insights/sid-report.js` | Moderator-only read policies on events, surveys and profiles; `exhibit_graduates()`; `exhibit_participation(from, to)` for the project target |
+| Insights dashboard and printable report | `js/pages/dashboard/dashboard.js`, `js/pages/dashboard/sid-report.js` | Moderator-only read policies on events, surveys and profiles; `exhibit_graduates()`; `exhibit_participation(from, to)` for the project target |
 
-**The project target in the SID report.** The proposal to the Southern Africa-Indian Ocean Division sets a target of 500 people who register and begin the study within 12 months (`PARTICIPATION_TARGET` in `js/insights/sid-report.js`). The report's Summary page shows three figures for the chosen period, from `exhibit_participation(from, to)` in `tools/supabase-participation.sql`:
+**The project target in the SID report.** The proposal to the Southern Africa-Indian Ocean Division sets a target of 500 people who register and begin the study within 12 months (`PARTICIPATION_TARGET` in `js/pages/dashboard/sid-report.js`). The report's Summary page shows three figures for the chosen period, from `exhibit_participation(from, to)` in `tools/supabase-participation.sql`:
 
 | Figure | How it is counted |
 |---|---|
@@ -138,9 +138,9 @@ Consent is stored in `sodConsent` (`js/shared/consent.js`). If a visitor has not
 **Why "began" uses quiz passes, not saved progress.** Saved progress is written by the browser, so a script with a Google account could mark sittings complete. `exhibit_quiz_passes` is written only by `verify_quiz_answer()` when an answer is right, and no client role can write to it. A script would have to answer real questions, and checks are capped at 60 a minute per user. That raises the bar a lot, but does not make faking impossible.
 | Share of the target | "Registered and began" divided by 500 |
 
-**The 700 counter on the dashboard.** The first tile on the Study insights page, "Toward 700", shows the same "registered and began" count for all time (from `2000-01-01`, so every account counts), as `N / 700`. Its detail line gives the share of 700 and of the 500 SID target. The constants are `COUNTER_TARGET` and `SID_TARGET` in `js/insights/insights.js`. If the function is missing or refuses, the tile shows "verified count not available".
+**The 700 counter on the dashboard.** The first tile on the Study insights page, "Toward 700", shows the same "registered and began" count for all time (from `2000-01-01`, so every account counts), as `N / 700`. Its detail line gives the share of 700 and of the 500 SID target. The constants are `COUNTER_TARGET` and `SID_TARGET` in `js/pages/dashboard/dashboard.js`. If the function is missing or refuses, the tile shows "verified count not available".
 
-**Study activity counts from 19 October 2026.** The analytics consent check arrived on that day (commit `debdd6e`). Earlier rows in `exhibit_events` and `exhibit_surveys` were recorded without consent, and their spikes match development and test days (for example 1,470 sitting starts by 134 browsers on 14 October 2026, from a read-only query on 13 November 2026). So the dashboard and the SID report never count events or ratings before `ACTIVITY_COUNT_FROM` (`2026-10-19T00:00:00.000Z` in `js/insights/insights.js`), even for "All time" or an earlier report period. Welcome answers (`exhibit_profiles`), saved progress, certificates and the project-target figures are not cut. The report adds a note when the cut applies, and the dashboard status line says "study activity counted from 19 October 2026". The rows are kept in the database; nothing was deleted.
+**Study activity counts from 19 October 2026.** The analytics consent check arrived on that day (commit `debdd6e`). Earlier rows in `exhibit_events` and `exhibit_surveys` were recorded without consent, and their spikes match development and test days (for example 1,470 sitting starts by 134 browsers on 14 October 2026, from a read-only query on 13 November 2026). So the dashboard and the SID report never count events or ratings before `ACTIVITY_COUNT_FROM` (`2026-10-19T00:00:00.000Z` in `js/pages/dashboard/dashboard.js`), even for "All time" or an earlier report period. Welcome answers (`exhibit_profiles`), saved progress, certificates and the project-target figures are not cut. The report adds a note when the cut applies, and the dashboard status line says "study activity counted from 19 October 2026". The rows are kept in the database; nothing was deleted.
 
 These figures do not depend on the cookie banner, unlike the event-based figures. "Began" is read when the report is built, so it can rise after the period ends. Counts under 5 are withheld, as for every figure in the report. If the function is missing or refuses, the page says "Registration figures are not available for this report."
 

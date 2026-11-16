@@ -10,7 +10,7 @@ import '/js/shared/mfa.js';
 import '/js/shared/desk-rows.js';
 import '/js/shared/desk.js';
 import '/js/shared/terms.js';
-import '/js/shared/insights.js';
+import '/js/shared/analytics.js';
 import '/js/shared/progress-sync.js';
 import '/js/shared/study-sync.js';
 import '/js/shared/reviews.js';

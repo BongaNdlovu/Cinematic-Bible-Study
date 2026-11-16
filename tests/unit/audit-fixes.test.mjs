@@ -108,7 +108,7 @@ const settle = () => new Promise((resolve) => setImmediate(resolve));
 test("no pending pulse means no 'Sitting 0' card", () => {
   const document = fakeDocument();
   const ctx = sandbox({ document, localStorage: memoryStorage(), sessionStorage: memoryStorage() });
-  vm.runInContext(read("js/shared/insights.js"), ctx);
+  vm.runInContext(read("js/shared/analytics.js"), ctx);
   ctx.Insights.maybePulse(3);
   assert.equal(document.byId.has("insight-pulse"), false);
   assert.equal(ctx.localStorage.getItem("baPulseAsked"), null);
@@ -117,7 +117,7 @@ test("no pending pulse means no 'Sitting 0' card", () => {
 test("a real pending pulse for sitting 0 still shows", () => {
   const document = fakeDocument();
   const ctx = sandbox({ document, localStorage: memoryStorage(), sessionStorage: memoryStorage({ baPulsePending: "0" }) });
-  vm.runInContext(read("js/shared/insights.js"), ctx);
+  vm.runInContext(read("js/shared/analytics.js"), ctx);
   ctx.Insights.maybePulse(3);
   assert.equal(document.byId.has("insight-pulse"), true);
   assert.match(document.byId.get("insight-pulse").innerHTML, /Sitting 0 /);
@@ -132,7 +132,7 @@ test("an invite link without a sitting stores no sitting 0", () => {
     SODConsent: { has: (kind) => kind === "analytics" },
     location: { href: "https://example.test/index.html?ref=abc123", pathname: "/index.html", search: "?ref=abc123", hash: "" }
   });
-  vm.runInContext(read("js/shared/insights.js"), ctx);
+  vm.runInContext(read("js/shared/analytics.js"), ctx);
   document.listeners.DOMContentLoaded.forEach((fn) => fn());
   assert.equal(ctx.localStorage.getItem("baReferredBy"), "abc123");
   assert.equal(ctx.localStorage.getItem("baReferredSitting"), null);
@@ -153,7 +153,7 @@ test("a failed survey frees its own slot, not another insert's", async () => {
   });
   let clock = 5_000_000;
   ctx.Date = class extends Date { static now() { return clock; } };
-  vm.runInContext(read("js/shared/insights.js"), ctx);
+  vm.runInContext(read("js/shared/analytics.js"), ctx);
   const first = ctx.Insights.insertSurvey({ rating: 3 });
   clock += 1_000;
   const second = ctx.Insights.insertSurvey({ rating: 4 });

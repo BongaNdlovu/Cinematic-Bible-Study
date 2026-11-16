@@ -34,7 +34,7 @@ Start with the [engineering handbook](docs/engineering/README.md): purpose, how 
 | `index.html` `study.html` `map.html` `gallery.html` | URL entry points (stay at repo root) |
 | `css/` | `site.css` (cover), `app.css` (gallery), `map.css` (map + study embed) |
 | `js/shared/journey.js` | Cross-page resume and access gate (localStorage) |
-| `js/gallery/app.js` | 3D gallery engine and artifact registry |
+| `js/gallery/gallery.js` | 3D gallery engine and artifact registry |
 | `js/map/` | Map engine (`map.js`) and chronicle data (`map-data.js`) |
 | `js/study/` | Stage, Scripture dock, workbench, competency |
 | `bible/` | KJV Daniel, Strong’s subset, sheet passages (data corpus) |

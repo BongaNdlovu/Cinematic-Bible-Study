@@ -1,5 +1,5 @@
 import { MAP_YEAR_FOR_ASSET } from '/js/gallery/artifact-registry.js';
-import { lessonReturnHref, lessonSheetSafe } from '/js/gallery/app.js';
+import { lessonReturnHref, lessonSheetSafe } from '/js/gallery/gallery.js';
 
 export function syncDossierStudyLink(key) {
   const narStudyLink = document.getElementById('nar-study-link');

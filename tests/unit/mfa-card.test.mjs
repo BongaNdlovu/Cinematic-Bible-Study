@@ -180,7 +180,7 @@ test("scripture files load through the site network gateway", async () => {
 
 test("the learner profile charts are labelled with the question each one counts", () => {
   const pairs = {};
-  for (const m of read("js/insights/insights.js").matchAll(/sub\('([^']+)'\) \+ barList\(countBy\(profs, function \(p\) \{ return p\.(\w+); \}\)\)/g)) pairs[m[2]] = m[1];
+  for (const m of read("js/pages/dashboard/dashboard.js").matchAll(/sub\('([^']+)'\) \+ barList\(countBy\(profs, function \(p\) \{ return p\.(\w+); \}\)\)/g)) pairs[m[2]] = m[1];
   assert.deepEqual(pairs, { study_mode: "How they study", found_via: "How they found the site", background: "Background" });
 });
 

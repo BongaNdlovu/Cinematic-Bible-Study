@@ -8,7 +8,7 @@ import '/js/shared/auth.js';
 import '/js/shared/desk-rows.js';
 import '/js/shared/desk.js';
 import '/js/shared/terms.js';
-import '/js/shared/insights.js';
+import '/js/shared/analytics.js';
 import '/js/shared/ui-sound.js';
 import '/js/shared/ui-click-sound.js';
 import '/js/study/sheet-map.js';

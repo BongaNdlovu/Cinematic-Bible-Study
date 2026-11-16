@@ -35,7 +35,7 @@ console.log('2. Checking HTML files & CSP headers...');
 const pages = ['index.html', 'study.html', 'gallery.html', 'map.html', 'insights.html', 'account.html'];
 pages.forEach(p => {
   const c = fs.readFileSync(path.join(ROOT, p), 'utf8');
-  assert(c.length > 0 && pageLoads(p, 'js/shared/insights.js'), `${p} must include js/shared/insights.js`);
+  assert(c.length > 0 && pageLoads(p, 'js/shared/analytics.js'), `${p} must include js/shared/analytics.js`);
 });
 const indexHtml = fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8');
 assert(!indexHtml.includes('data-insight-optout'), 'index.html must not offer an analytics off switch');
@@ -45,7 +45,7 @@ assert(!indexHtml.includes('admin-reviews-link'), 'index.html must not ship the 
 assert(fs.readFileSync(path.join(ROOT, 'js/home/home.js'), 'utf8').includes('"admin-insights-link", "insights.html"'), 'home.js must add the Insights link for moderators');
 
 const studyHtml = fs.readFileSync(path.join(ROOT, 'study.html'), 'utf8');
-assert(studyHtml.length > 0 && pageLoads('study.html', 'js/shared/insights.js'), 'study.html must include insights.js');
+assert(studyHtml.length > 0 && pageLoads('study.html', 'js/shared/analytics.js'), 'study.html must include insights.js');
 
 const compJs = fs.readFileSync(path.join(ROOT, 'js/study/competency.js'), 'utf8');
 assert(!compJs.includes('data-insight-optout'), 'competency.js must not offer an analytics off switch');
@@ -121,7 +121,7 @@ assert(!authJs.includes('client.auth.signUp('), 'auth.js must not create email a
 assert(!authJs.includes('resetPasswordForEmail'), 'auth.js must not send password-reset email');
 assert(!authJs.includes('auth-sign-out'), 'auth.js must not draw a Sign out button on other pages');
 assert(!authJs.includes('clearPendingTerms'), 'auth.js must not wipe a once-agreed terms record on sign-out');
-const insightsSrc = fs.readFileSync(path.join(ROOT, 'js/shared/insights.js'), 'utf8');
+const insightsSrc = fs.readFileSync(path.join(ROOT, 'js/shared/analytics.js'), 'utf8');
 assert(insightsSrc.includes('account-hub'), 'insights.js must skip the floating profile card on the Account hub');
 
 const homeJs = fs.readFileSync(path.join(ROOT, 'js/home/home.js'), 'utf8');
@@ -144,7 +144,7 @@ assert(mapJs.includes("data-base='streets'"), 'map.js must keep Streets');
 console.log('✓ Public config and map chrome stay visitor-safe.');
 
 // 4. Test Insights tracker logic
-console.log('4. Testing js/shared/insights.js tracker logic...');
+console.log('4. Testing js/shared/analytics.js tracker logic...');
 
 // Mock browser globals
 const localStorageStore = {};
@@ -265,7 +265,7 @@ try {
 } catch (e) {}
 
 // Load insights.js in this sandbox
-const insightsCode = fs.readFileSync(path.join(ROOT, 'js/shared/insights.js'), 'utf8');
+const insightsCode = fs.readFileSync(path.join(ROOT, 'js/shared/analytics.js'), 'utf8');
 const runTracker = new Function(insightsCode);
 runTracker();
 
@@ -372,8 +372,8 @@ assert.strictEqual(profileOk.ok, true, 'upsertProfile must report success');
 
 console.log('✓ Tracker queueing, anonymous/signed-in flushing, readingTimer, scroll depth, and opt-out verified.');
 
-// 5. Test Dashboard Calculations with the actual js/insights/insights.js code
-console.log('5. Testing js/insights/insights.js calculations directly...');
+// 5. Test Dashboard Calculations with the actual js/pages/dashboard/dashboard.js code
+console.log('5. Testing js/pages/dashboard/dashboard.js calculations directly...');
 const dashEvents = [
   { event: 'sitting_start', sitting: 0, sheet: 0, created_at: '2026-01-01T00:00:00Z' },
   { event: 'sitting_complete', sitting: 0, sheet: 0, detail: { seconds: 120 }, created_at: '2026-01-01T00:05:00Z' },
@@ -405,9 +405,9 @@ const dashProfiles = [
 ];
 
 // Load insights.js dashboard in sandbox
-const dashCode = fs.readFileSync(path.join(ROOT, 'js/insights/insights.js'), 'utf8');
+const dashCode = fs.readFileSync(path.join(ROOT, 'js/pages/dashboard/dashboard.js'), 'utf8');
 new Function(fs.readFileSync(path.join(ROOT, 'js/shared/core.js'), 'utf8'))();
-new Function(fs.readFileSync(path.join(ROOT, 'js/insights/insights-format.js'), 'utf8'))();
+new Function(fs.readFileSync(path.join(ROOT, 'js/pages/dashboard/dashboard-format.js'), 'utf8'))();
 const runDash = new Function(dashCode);
 runDash();
 

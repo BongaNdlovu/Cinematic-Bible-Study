@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import { applyChiaroscuroRig, assembledContainer, singleModelContainer, museumToast } from '/js/gallery/app.js';
+import { applyChiaroscuroRig, assembledContainer, singleModelContainer, museumToast } from '/js/gallery/gallery.js';
 
 // --- STUDY RENDER MODES ---
 export let activeStudyMode = 'gold';

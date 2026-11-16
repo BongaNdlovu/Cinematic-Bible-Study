@@ -457,7 +457,7 @@ async function clientEventSpamCap() {
       }
     })
   };
-  loadScript("js/shared/insights.js");
+  loadScript("js/shared/analytics.js");
   const queued = Array.from({ length: 100 }, () => ({
     event: "pen",
     sitting: null,
@@ -488,7 +488,7 @@ async function clientSurveySpamAndError() {
       }
     })
   };
-  loadScript("js/shared/insights.js");
+  loadScript("js/shared/analytics.js");
   const fault = await global.window.Insights.insertSurvey({ feedback: "probe" });
   if (!fault || fault.ok !== false || fault.reason !== "error") throw new Error("a survey fault was not closed");
   if (/secret@example|allotted place/i.test(JSON.stringify(fault))) throw new Error("the survey fault returned database text");
@@ -504,7 +504,7 @@ function storedXssAndCsv() {
   const grid = { innerHTML: "", querySelectorAll() { return []; } };
   global.document.getElementById = (id) => (id === "insights-grid" ? grid : null);
   global.window.document = global.document;
-  loadScript("js/insights/insights.js");
+  loadScript("js/pages/dashboard/dashboard.js");
   const stamp = new Date().toISOString();
   global.window.InsightsDashboard.setCache({
     events: [],

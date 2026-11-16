@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 import fs from "node:fs";
 import vm from "node:vm";
 
-const src = fs.readFileSync(new URL("../../js/insights/insights-format.js", import.meta.url), "utf8");
+const src = fs.readFileSync(new URL("../../js/pages/dashboard/dashboard-format.js", import.meta.url), "utf8");
 const sandbox = { window: {}, Intl, Date, Number, String, Math, Object };
 vm.runInNewContext(src, sandbox);
 const F = sandbox.window.InsightsFormat;

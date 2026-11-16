@@ -1,5 +1,5 @@
 import { ASSET_REGISTRY } from '/js/gallery/artifact-registry.js';
-import { AudioBus, selectAsset, activeAssetKey, TITLES_HIDE_KEY, btnTitlesToggle } from '/js/gallery/app.js';
+import { AudioBus, selectAsset, activeAssetKey, TITLES_HIDE_KEY, btnTitlesToggle } from '/js/gallery/gallery.js';
 
 export function buildEraTimeline() {
   const track = document.getElementById('era-track');

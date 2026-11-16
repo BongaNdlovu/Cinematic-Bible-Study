@@ -3,7 +3,7 @@ import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { MeshoptDecoder } from 'three/addons/libs/meshopt_decoder.module.js';
 import { touchGltf, evictGltfs } from '/js/gallery/model-cache.js';
 import { ASSET_REGISTRY } from '/js/gallery/artifact-registry.js';
-import { assembledContainer, singleModelContainer, altarPlatformGroup, loadedGLTFScenes, MODELS_PREFIX, loadProgress, updateLoadingUI, museumToast } from '/js/gallery/app.js';
+import { assembledContainer, singleModelContainer, altarPlatformGroup, loadedGLTFScenes, MODELS_PREFIX, loadProgress, updateLoadingUI, museumToast } from '/js/gallery/gallery.js';
 
 export function countTriangles(root) {
   let n = 0;

@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import { hallUniforms, hallDummy, hallTexCache, HALL_CACHE_CAP, renderer, texLoader, hallPending, hallMesh } from '/js/gallery/app.js';
+import { hallUniforms, hallDummy, hallTexCache, HALL_CACHE_CAP, renderer, texLoader, hallPending, hallMesh } from '/js/gallery/gallery.js';
 
 export function layoutHall() {
   const portrait = window.innerHeight > window.innerWidth * 1.05;

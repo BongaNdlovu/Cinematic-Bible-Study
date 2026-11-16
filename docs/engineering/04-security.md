@@ -51,7 +51,7 @@ Guests write study events, error reports and survey answers straight to Supabase
 | 3 | `exhibit_grant_human_pass()` (`tools/supabase-human-pass.sql`) | Grants a 12-hour pass only when the caller sends `HUMAN_PASS_KEY`, whose sha256 hash is in `exhibit_edge_keys`. |
 | 4 | `exhibit_require_human_pass()` triggers (`tools/supabase-human-pass-enforce.sql`) | Before insert on `exhibit_events` and `exhibit_surveys`: a row with no account needs a live pass, or it is refused with `human_check`. The edge's own `rate_limited` reports are the one exception. |
 
-`insights.js` and `ops.js` keep a refused batch and try again later, as for any failed insert. No client role can read `exhibit_human_passes` or `exhibit_edge_keys`. The secrets live only in Cloudflare (`TURNSTILE_SECRET`, `HUMAN_PASS_KEY`) and as a hash in the database.
+`analytics.js` and `ops.js` keep a refused batch and try again later, as for any failed insert. No client role can read `exhibit_human_passes` or `exhibit_edge_keys`. The secrets live only in Cloudflare (`TURNSTILE_SECRET`, `HUMAN_PASS_KEY`) and as a hash in the database.
 
 **Turning it off:** `drop trigger exhibit_events_human_pass on public.exhibit_events; drop trigger exhibit_surveys_human_pass on public.exhibit_surveys;`
 
@@ -100,7 +100,7 @@ If the gate cannot be reached, a page read is still served. A non-GET request, `
 
 **Guests (since 15 November 2026)** reach no sitting: `study.html`, `map.html` and `gallery.html` all call `requireMember()` and send a guest to the account page. This is an interface rule. The lesson text ships as static files (`js/study/sheets/`), so it is not secret; answer checking, progress, notes and certificates stay protected by the database as before.
 
-**One copy of each check (16 November 2026).** `js/shared/core.js` holds the only `isLocalDevHost()` (true for `localhost`, `127.0.0.1` and `[::1]` only; it decides when the local test sign-in `baQaMockSession` is honoured) and the only `escapeHtml()` (escapes `& < > " '`). Before, there were 4 local-host checks (the one in `js/shared/insights.js` used a different rule) and 14 escapers (13 functions and one inline in `study-app.js`). Eight of the 14 left `'` unescaped, and the inline one also left `"` unescaped. Every old copy now calls `window.SiteCore`. Analytics stay off on a wider set of hosts: `js/shared/insights.js` `analyticsOffHost()` is the local-host check plus any `*.local` host, as before.
+**One copy of each check (16 November 2026).** `js/shared/core.js` holds the only `isLocalDevHost()` (true for `localhost`, `127.0.0.1` and `[::1]` only; it decides when the local test sign-in `baQaMockSession` is honoured) and the only `escapeHtml()` (escapes `& < > " '`). Before, there were 4 local-host checks (the one in `js/shared/analytics.js` used a different rule) and 14 escapers (13 functions and one inline in `study-app.js`). Eight of the 14 left `'` unescaped, and the inline one also left `"` unescaped. Every old copy now calls `window.SiteCore`. Analytics stay off on a wider set of hosts: `js/shared/analytics.js` `analyticsOffHost()` is the local-host check plus any `*.local` host, as before.
 
 The client-side role checks (`ScrollAuth.isModerator()`, `journey.js` `isAdmin()`) only decide what the interface shows. Every moderator action is checked again in the database.
 
@@ -144,7 +144,7 @@ Function permissions checked live: guests (`anon`) **can** call `exhibit_public_
 | Insert rate gates on events, surveys, progress, reviews, study data and profiles | `exhibit_*_rate_gate` triggers |
 | Per-user slot counters: profile 30 an hour, review edits 20 a day, quiz checks 60 a minute | `exhibit_take_slot` in `tools/supabase-rate-limits-gaps.sql` |
 | Row sizes: progress JSON 64 KB in total, certificate name 120 characters, cohort 200 characters, notes 1.2 MB | `tools/supabase-row-size-limits.sql` |
-| Client-side pacing (courtesy, not security): 12 event posts and 60 rows a minute, 5 surveys an hour | `js/shared/insights.js` |
+| Client-side pacing (courtesy, not security): 12 event posts and 60 rows a minute, 5 surveys an hour | `js/shared/analytics.js` |
 
 ## Data retention and deletion
 

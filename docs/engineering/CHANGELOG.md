@@ -14,6 +14,37 @@ Entry template:
 
 ---
 
+## 2026-11-16 — Architecture plan, step 5.2: names that said the wrong thing
+
+**Why:** two files were called `insights.js` (reader analytics and the moderator dashboard), so searches and error reports landed on the wrong one, and several names did not say what the file does.
+
+**What changed:**
+
+| Old | New |
+|---|---|
+| `js/shared/insights.js` | `js/shared/analytics.js` |
+| `js/insights/insights.js` | `js/pages/dashboard/dashboard.js` |
+| `js/insights/insights-format.js` | `js/pages/dashboard/dashboard-format.js` |
+| `js/insights/sid-report.js` | `js/pages/dashboard/sid-report.js` |
+| `js/pages/insights/main.js` | `js/pages/dashboard/main.js` |
+| `js/gallery/app.js` | `js/gallery/gallery.js` |
+| `css/app.css` | `css/gallery.css` |
+| `css/notes.css` | `css/reviews.css` |
+| `css/terms.css` | `css/terms-gate.css` |
+| `css/insights.css` | `css/dashboard.css` |
+| `tests/unit/insights-format.test.mjs` | `tests/unit/dashboard-format.test.mjs` |
+
+- **How:** a script did the `git mv` and rewrote every reference to each full path, in one pass so no path was rewritten twice, across the pages, code, tests, tools and current docs. It skips history: `docs/archive/`, proof notes under `tools/review/`, this changelog and `architecture-baseline.md`, and the synthetic file names inside `verify_hash_release.mjs`. A search afterwards for each old file name split into path segments (`'js', 'insights', …`) found none.
+- `gallery.html`'s inline script names the gallery module, so its CSP hash in `_headers` was regenerated (`verify_csp_hashes.mjs --write`).
+- Global names are unchanged (`window.Insights`, `window.InsightsDashboard`, `window.InsightsFormat`): renaming them would touch every caller for no gain in findability.
+- The page `insights.html` keeps its URL; its code folder is now `js/pages/dashboard/`, as the plan names it.
+
+**Handbook updated:** 03 (pages and their scripts, `js/` by folder, the rename list), 04, 06 (file names).
+
+**Checked here:** on Windows: lint exits 0, `npm run test:unit` passes 180 of 180, every `npm test` script passes (after the CSP hash update), and `npm run test:browser` passes 30 of 30.
+
+**Status:** on branch `arch/phase-5-layout`, not deployed.
+
 ## 2026-11-16 — Sharing a sitting no longer throws; lint now catches undefined names
 
 **Why:** `js/study/lesson-connect.js` read `isFree`, which no file defines since every sitting began to need a sign-in (`acd563e`). When the browser has no share sheet, "Share this sitting" threw a `ReferenceError` instead of copying the link or showing it. Found while turning the study files into modules.
