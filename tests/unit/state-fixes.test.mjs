@@ -1,4 +1,5 @@
 import test from "node:test";
+import { studyPageSource } from "../../tools/verify/_sources.mjs";
 import assert from "node:assert/strict";
 import fs from "node:fs";
 import vm from "node:vm";
@@ -51,7 +52,7 @@ test("a stale desk reply cannot release the lock of a newer request", () => {
 });
 
 test("the weather label, type and highlighted step always come from the same band", () => {
-  const app = read("js/study/study-app.js");
+  const app = studyPageSource();
   assert.equal(/focusAtmosphere < 0\.\d/.test(app), false, "no second threshold set may remain");
   const code = [
     extractStatement(app, "const WEATHER_BANDS = ["),

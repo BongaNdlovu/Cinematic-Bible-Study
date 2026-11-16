@@ -1,4 +1,5 @@
 import fs from 'fs';
+import { studyPageSource } from './_sources.mjs';
 import path from 'path';
 import vm from 'vm';
 import { fileURLToPath } from 'url';
@@ -105,7 +106,7 @@ if (api.findPhrase("Thou art this head of gold.", "head of gold") < 0) fail('fin
 if (api.findPhrase("the king\u2019s matter", "the king's matter") < 0) fail('findPhrase must treat curly apostrophes as straight');
 
 const html = fs.readFileSync(path.join(root, 'study.html'), 'utf8') + fs.readdirSync(path.join(root, 'css/study')).sort().map((n) => fs.readFileSync(path.join(root, 'css/study', n), 'utf8')).join('\n');
-const studyApp = fs.readFileSync(path.join(root, 'js/study/study-app.js'), 'utf8');
+const studyApp = studyPageSource();
 const sheetsSrc = fs.readFileSync(path.join(root, 'js/study/sheets-data.js'), 'utf8');
 const studySources = html + studyApp + sheetsSrc;
 if (!html.includes('data-instrument="scripture"')) fail('study.html is missing the Scripture instrument tab');

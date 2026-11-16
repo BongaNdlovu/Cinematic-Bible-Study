@@ -31,6 +31,74 @@ Entry template:
 
 **Status:** committed on `arch/phase-0-safety-net`, merged upward. Not deployed.
 
+## 2026-11-16 — Architecture plan, step 4.4: the gallery's data out of app.js
+
+**Why:** `js/gallery/app.js` held 4,516 lines. About 1,700 of them were artifact data that no gallery state touches.
+
+**What changed:**
+
+- `js/gallery/artifact-registry.js` (new, 1,687 lines): `ASSET_REGISTRY`, `MUSEUM_NODES_DATA`, `nodeUnlocked`, `getNodeDataForAsset`, `MAP_YEAR_FOR_ASSET` and `artifactOrder`.
+- `js/gallery/hall-art.js` (new, 190 lines): `HALL_BACKDROPS`, `WALL_FRAMES`, `createStoneReliefCanvas`, `createCelestialHaloTexture` and `ICONS`.
+- `app.js` (now 2,654 lines) imports both with root paths. A staged run of `tools/hash-release-assets.mjs` rewrote both imports to the hashed names.
+- `tools/verify/verify_moved_functions.mjs` shows all 11 moved declarations have the same syntax trees.
+- **Not split:** the scene, the model cache, the tour and the study looks. Their functions read and assign the 37 top-level `let` declarations in `app.js` (counted by `grep -c "^    let "`). An ES module cannot assign another module's `let`, so moving them needs a shared state object, which is a code change, not a move. Left for a later step.
+
+**Handbook updated:** 03 (`js/gallery/`, where a 3D artifact goes).
+
+**Checked here:** on Windows: lint exits 0, `npm run test:unit` passes 176 of 176, every `npm test` script passes, and `npm run test:browser` passes 30 of 30. No gallery screenshot was compared by hand (not checked).
+
+**Status:** on branch `arch/phase-4-scripts`, not deployed.
+
+## 2026-11-16 — Architecture plan, step 4.3: pure helpers out of the one-function files
+
+**Why:** code inside one large closure can only be tested through a browser. Pure helpers outside it get fast unit tests.
+
+**What changed:**
+
+| Feature | New helper file | Moved | Unit test |
+|---|---|---|---|
+| Map | `js/map/map-math.js` (`window.MapMath`) | 13 functions: distance, ring smoothing, tile zoom, year labels and periods, world pixels | `tests/unit/map-math.test.mjs` |
+| Mind map | `js/study/mindmap-layout.js` (`window.MindMapLayout`) | 8 functions (`place`, `splitLines`, `coreFit`, `titleFit`, `nameLines`, `nameFit`, `arrowhead`, `connectorWord`) and the 17 world constants they read | `tests/unit/mindmap-layout.test.mjs` |
+| Home shelf | `js/home/shelf-helpers.js` (ES module exports) | 11 functions: text cleaning, Roman numerals, colours, seeded random, line wrapping and fitting | `tests/unit/shelf-helpers.test.mjs` |
+| Dashboard | `js/insights/insights-format.js` (`window.InsightsFormat`) | 9 functions: CSV escaping, numbers, percentages, durations, counts, dates, scores, quarter bounds | `tests/unit/insights-format.test.mjs` |
+| Desk | `js/shared/desk-rows.js` (`window.DeskRows`) | 9 functions (row checks, clipping, dates, errors, email) and `TITLE_MAX`, `BODY_MAX` | `tests/unit/desk-reader-rubric.test.mjs` |
+| Book reader | `js/study/book-reader-helpers.js` (`window.BookReaderHelpers`) | `clamp`, `classTokens`, `deckPx` | same file |
+| Workbench | `js/study/workbench-rubric.js` (`window.WorkbenchRubric`) | `evaluateCapstoneRubric` | same file |
+
+- Each classic helper file loads just before its feature: `map.html`, `study.html`, `insights.html`, and for `desk-rows.js` the eight pages that load `desk.js`. The mind-map layout loads with the page, because `mindmap.js` itself is fetched on demand. `shelf.js` imports its helpers with the root path `/js/home/shelf-helpers.js`; a staged run of `tools/hash-release-assets.mjs` rewrote that import to the hashed name.
+- **How the moves were proved:** `tools/verify/verify_moved_functions.mjs` (new) compares the syntax tree of each named function or constant in the old file in git with the new file. All 73 declarations matched (13, 25, 11, 9, 11, 3 and 1). Its own test is `tests/unit/moved-functions.test.mjs`; it is listed in `NOT_IN_CI` in `verify_wiring.mjs` because it takes files on the command line.
+- `verify_insights.mjs` and `verify_workbench.mjs` now load the helper file before the feature they test.
+- Comments that described moved functions were dropped from the old files rather than left pointing at nothing.
+
+**Handbook updated:** 03 (`js/` by folder, pages and their scripts, where a pure helper goes), 07 (scripts not in CI).
+
+**Checked here:** on Windows, after the move: lint exits 0, `npm run test:unit` passes 176 of 176, every `npm test` script passes, and `npm run test:browser` passes 30 of 30. A first browser run caught a real fault: `mindmap.js` still read `KX`, which had moved, so the study page threw `KX is not defined`. It now reads `KX` from `window.MindMapLayout`, and a `no-undef` lint pass over the 14 changed files found no other missing name.
+
+**Status:** on branch `arch/phase-4-scripts`, not deployed.
+
+## 2026-11-16 — Architecture plan, Phase 4 (steps 4.1 and 4.2): study-app.js split
+
+**Why:** `js/study/study-app.js` held 6,273 lines and nearly every study-page feature in one scope.
+
+**What changed:**
+
+- **4.1** The diagram renderers moved to `js/study/diagrams/`: `cite.js`, `chain.js`, `comparison.js`, `table.js`, `flow.js`, `timeline.js` and `fullscreen.js`.
+- **4.2** Eighteen features moved to their own files in `js/study/`: `story.js`, `quiz.js`, `read-along.js`, `focus-timer.js`, `reading-settings.js`, `references.js`, `horizon.js`, `sitting-map.js`, `sitting-guide.js`, `lesson-connect.js`, `toc.js`, `strongs.js`, `study-guide.js`, `scroll-place.js`, `sheet-book.js`, `instruments.js`, `spine.js` and `study-modules.js`. The largest is `story.js` at 784 lines.
+- `study-app.js` is now 1,198 lines: the controller holds state, start-up and `loadSheet`. The start-up block alone is 271 lines, so the plan's target of about 800 is not yet met.
+- **How the moves were done:** `study-app.js` declares everything at the top level of a classic script, so its functions were already page globals and still are. Only function declarations, and constants whose values read nothing from `study-app.js`, were moved; nothing runs earlier than before. The new files load before `study-app.js`. For each of the three moves, the top-level statements before and after have the same syntax trees, and those left in `study-app.js` keep their order.
+- The full-screen diagram shell had a fourth focus trap, missed in Phase 1. It now uses `SiteCore.trapFocus` (separate commit).
+- Tests that searched `study-app.js`'s text now search every `js/study` script `study.html` loads, through `tools/verify/_sources.mjs`. The storage-key test resolves constants across files and includes files not yet committed.
+- **Lint:** the unused-variable rule is off for these files until step 4.5, because functions shared across files look unused to lint. Recorded in chapter 07.
+- Test-only: a mind-map check retried a scroll that raced the sitting load's own scroll reset. It failed 1 of 7 runs, and the same check on the code before the move passed 3 of 3, so the race was not ruled out as new.
+
+**Handbook updated:** 03 (`js/study/`, `js/study/diagrams/`, where a study feature goes), 07 (lint override).
+
+**Checked here:** after each move, on Windows: lint exits 0, `npm run test:unit` passes 132 of 132, every `npm test` script passes, and `npm run test:browser` passes 30 of 30. The one exception was the mind-map race above, after the first batch.
+
+**Not done in this phase:** 4.3 (pulling pure helpers out of the one-function files), 4.4 (splitting `js/gallery/app.js`), 4.5 (ES modules).
+
+**Status:** on branch `arch/phase-4-scripts`, not deployed.
+
 ## 2026-11-16 — Architecture plan, Phase 3: the study stylesheets
 
 **Why:** `css/study-page.css` held 8,775 lines for some twenty features, and four scripts injected more CSS at run time, where a search of `css/` could not find it.

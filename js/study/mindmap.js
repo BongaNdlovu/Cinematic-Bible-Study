@@ -12,58 +12,24 @@
 (function () {
   'use strict';
 
+  const { W, H, KX, kx, ky, EDGE, CORE_D, P, CONNECTORS, arrowhead, connectorWord, place, coreFit, titleFit, nameFit } = window.MindMapLayout;
   /* fit() scales this world to the block, so world type reaches the reader at
      size × blockWidth / W.
      An 846 px column gives about 0.88: 15.5 px text reads at about 13.6 px.
      Everything below derives from W and H; 1600×900 design units are converted
      through KX and KY. */
   const NS = 'http://www.w3.org/2000/svg';
-  const W = 960, H = 660;
-  const KX = W / 1600, KY = H / 900;
-  const kx = (v) => v * KX;                 // 1600-wide design units → world
-  const ky = (v) => v * KY;                 // 900-tall design units → world y
   const Y = ky(520);                        // every scene's chain line
-  /* The head and leaf card widths are declared in css/study/07-mindmap.css (.mm-head
-     .mm-card / .mm-leaf .mm-card); the link endpoints below depend on them, so
-     both must move together. */
-  const HW = 160, LW = 195;
-  const GAP = 16;                           // between a card and its neighbour
-  const EDGE = 12;                          // world margin outside the leaf columns
-  /* The centre circle. One diameter for a one-, two- or three-line label: the
-     type is fitted to it (coreFit), so a long diagram title shrinks rather than
-     pushing the fan columns off the world. */
-  const CORE_D = 160;
-  /* The circle sits at the world's centre; the leaf and head columns step
-     inward from each edge by EDGE, LW, GAP and HW. */
-  const P = {
-    cx: W / 2,
-    cy: H / 2,
-    cr: CORE_D / 2,
-    hw: HW,
-    lw: LW,
-    lxL: EDGE + LW / 2,
-    lxR: W - EDGE - LW / 2,
-    hxL: EDGE + LW + GAP + HW / 2,
-    hxR: W - EDGE - LW - GAP - HW / 2
-  };
   const ARROW = arrowhead(kx(11), kx(5.5));
   const SC_ARROW = arrowhead(kx(14), kx(6.5));
   /* The scene chain spans 120 to 1480 design units. */
   const CHAIN_X0 = kx(120), CHAIN_SPAN = kx(1360);
-  /* Head and leaf pitch per side. */
-  const SPACING_L = ky(150), SPACING_R = ky(136);
   /* Below this block width the map becomes an outline. Measured on the block,
      never the viewport. */
   const COMPACT_WIDTH = 720;
   const IDLE_MS = 3800;                     // idle time before the HUD fades
   const DIP = ky(160);                      // how far a cross-centre curve dips
-  const Y_MIN = ky(90), Y_MAX = ky(810);    // the range a spec's `y` may take
 
-  /* Arrowheads point along +x with the tip at the origin. */
-  function arrowhead(len, half) {
-    return 'M0 0L' + (-len).toFixed(2) + ' ' + (-half).toFixed(2) + 'L' +
-      (-len * 0.68).toFixed(2) + ' 0L' + (-len).toFixed(2) + ' ' + half.toFixed(2) + 'Z';
-  }
   const CHEVRON = '<svg viewBox="0 0 12 12" aria-hidden="true" focusable="false">' +
     '<path d="M4.2 1.6 8.6 6l-4.4 4.4" fill="none" stroke="currentColor" stroke-width="1.5" ' +
     'stroke-linecap="round" stroke-linejoin="round"/></svg>';
@@ -77,10 +43,6 @@
     { hex: '#9ccf8f', rgb: '156,207,143' }
   ];
 
-  /* The four self-check headings are the only words this file renders without a
-     spec field behind them. */
-  const CONNECTORS = { text: 'TEXT', history: 'HISTORY', interpretation: 'INTERPRETATION', christ: 'CHRIST' };
-
   function esc(value) { return window.SiteCore.escapeHtml(value); }
 
   function svgEl(name, attrs) {
@@ -89,150 +51,6 @@
     return node;
   }
 
-  function connectorWord(kind) { return CONNECTORS[String(kind || '').toLowerCase()] || ''; }
-
-  /* Each step is a node; its leaves are its `text` then its `points[]`, in
-     authored order. Nothing is split or invented.
-     A declared `side`/`y` wins; otherwise the first half goes left and the rest
-     right, centred on P.cy. */
-  function place(steps) {
-    const half = Math.ceil(steps.length / 2);
-    const items = steps.map((step, i) => {
-      const id = String(step.id || ('step-' + i)).toLowerCase()
-        .replace(/[^a-z0-9-]+/g, '-').replace(/^-+|-+$/g, '');
-      return {
-        step,
-        i,
-        id: id || ('step-' + i),
-        side: step.side === 'L' || step.side === 'R' ? step.side : (i < half ? 'L' : 'R'),
-        cite: step.cite ? String(step.cite) : '',
-        fan: CONNECTORS[String(step.link || '').toLowerCase()] ? String(step.link).toLowerCase() : '',
-        hero: !!step.hero,
-        up: !!step.up,
-        leaves: []
-      };
-    });
-
-    ['L', 'R'].forEach((side) => {
-      const group = items.filter((item) => item.side === side);
-      const m = group.length;
-      group.forEach((item, j) => {
-        const fallback = P.cy + (j - (m - 1) / 2) * (side === 'L' ? SPACING_L : SPACING_R);
-        const declared = Number(item.step.y);
-        const y = Number.isFinite(declared) ? declared : fallback;
-        item.y = Math.max(Y_MIN, Math.min(Y_MAX, y));
-        item.hx = side === 'L' ? P.hxL : P.hxR;
-        item.lx = side === 'L' ? P.lxL : P.lxR;
-      });
-    });
-
-    items.forEach((item) => {
-      const texts = [];
-      if (item.step.text) texts.push(String(item.step.text));
-      (item.step.points || []).forEach((point) => {
-        /* The object form of a leaf is not supported: extract_claim_units.mjs
-           could not see its copy. A non-string leaf is skipped, never
-           stringified. */
-        if (typeof point === 'string' && point.trim()) texts.push(point);
-      });
-      const pitch = item.side === 'L' ? SPACING_L : SPACING_R;
-      const m = texts.length;
-      item.leaves = texts.map((text, li) => {
-        /* The fan is centred on its head, so a lone leaf sits level with it. */
-        const off = (li - (m - 1) / 2) * pitch;
-        return { text, y: Math.max(ky(60), Math.min(ky(860), item.y + (item.up ? -off : off))) };
-      });
-    });
-
-    return items;
-  }
-
-  /* A balanced line split that minimises the longest line, so "The Smiting
-     Stone" breaks as "The Smiting" / "Stone" rather than "The" / "Smiting Stone". */
-  function splitLines(words, maxLines) {
-    const n = words.length;
-    if (n <= 1) return [words.join(' ')];
-    const memo = new Map();
-    const width = (i, j) => words.slice(i, j).join(' ').length;
-    function solve(i, lines) {
-      if (i >= n) return { cost: 0, out: [] };
-      if (lines === 0) return { cost: Infinity, out: [] };
-      const key = i + ':' + lines;
-      if (memo.has(key)) return memo.get(key);
-      let best = { cost: Infinity, out: [] };
-      for (let j = i + 1; j <= n; j++) {
-        const rest = solve(j, lines - 1);
-        const cost = Math.max(width(i, j), rest.cost);
-        if (cost < best.cost) best = { cost, out: [words.slice(i, j).join(' ')].concat(rest.out) };
-      }
-      memo.set(key, best);
-      return best;
-    }
-    const result = solve(0, maxLines);
-    return result.out.length ? result.out : [words.join(' ')];
-  }
-
-  /* The circle has one diameter (CORE_D), and the title's type is fitted to it,
-     so a long title shrinks instead of pushing the map off the canvas.
-     0.52 em per character is the loaded serif's advance at weight 700; 0.84·d
-     is the inner box after 12 px padding. */
-  function coreFit(label) {
-    const raw = String(label || '').trim();
-    if (!raw) return { lines: [], d: CORE_D, fs: 20 };
-    /* Keep a parenthesised gloss on one line: "(Daniel 2:43)" is one token. */
-    const words = [];
-    let buffer = '';
-    raw.split(/\s+/).forEach((word) => {
-      buffer = buffer ? buffer + ' ' + word : word;
-      const open = (buffer.match(/\(/g) || []).length;
-      const close = (buffer.match(/\)/g) || []).length;
-      if (open <= close) { words.push(buffer); buffer = ''; }
-    });
-    if (buffer) words.push(buffer);
-    const total = words.join(' ').length;
-    const maxLines = total <= 12 ? 1 : (total <= 24 ? 2 : 3);
-    const lines = splitLines(words, maxLines);
-    const longest = lines.reduce((m, line) => Math.max(m, line.length), 1);
-    const fs = Math.max(13, Math.min(30, Math.floor((CORE_D * 0.84) / (0.52 * longest))));
-    return { lines, d: CORE_D, fs };
-  }
-
-  /* The scene title is fitted to 0.78·W so it cannot run off the scene head or
-     break mid-word, and never drops below 0.025·W.
-     0.55 em per character is the loaded serif's advance at weight 600, rounded
-     up. */
-  function titleFit(title) {
-    const len = String(title || '').length || 1;
-    return Math.max(kx(40), Math.min(kx(150), Math.floor((W * 0.78) / (0.55 * len))));
-  }
-
-  /* Lines the browser will need for `label` at `fs`, by greedy word wrap
-     against the card's measure.
-     0.58 em per character is the serif's advance at weight 700. Underestimating
-     makes a card collide with the next head. */
-  function nameLines(label, fs) {
-    const measure = HW - 30;
-    const per = 0.58 * fs;
-    let lines = 1;
-    let used = 0;
-    String(label || '').split(/\s+/).forEach((word, i) => {
-      const w = word.length * per;
-      if (i === 0) { used = w; return; }
-      if (used + per + w <= measure) used += per + w;
-      else { lines += 1; used = w; }
-    });
-    return lines;
-  }
-
-  /* The largest size at which the name still fits the card in three lines, so
-     the size follows the words instead of the card overflowing. Nothing is
-     truncated: the full title stays in the DOM at any size. */
-  function nameFit(label) {
-    for (let fs = 30; fs > 15; fs -= 1) {
-      if (nameLines(label, fs) <= 3) return fs;
-    }
-    return 15;
-  }
 
   function create(host, spec, opts) {
     if (!host || !spec) return null;

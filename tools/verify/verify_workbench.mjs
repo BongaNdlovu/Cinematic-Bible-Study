@@ -1,4 +1,5 @@
 import fs from 'fs';
+import { studyPageSource } from './_sources.mjs';
 import path from 'path';
 import vm from 'vm';
 
@@ -65,6 +66,7 @@ const context = vm.createContext(sandbox);
 
 // 1. Load workbench.js
 const workbenchCode = fs.readFileSync(path.join('js', 'study', 'workbench.js'), 'utf8');
+vm.runInContext(fs.readFileSync(path.join('js', 'study', 'workbench-rubric.js'), 'utf8'), context);
 vm.runInContext(workbenchCode, context);
 
 const StudyWorkbench = sandbox.window.StudyWorkbench;
@@ -207,6 +209,7 @@ const FORBIDDEN = /Adventist|Ellen G\.|Uriah Smith|Investigative Judgment|Great 
 
 const filesToScan = [
   'js/study/workbench.js',
+  'js/study/workbench-rubric.js',
   'js/study/sheets-data.js',
   'js/study/competency.js',
   'js/study/certificate.js',
@@ -309,7 +312,7 @@ console.log('  PASS: supabase-progress.sql contains complete exhibit_progress an
 
 // Check 11: Verify study-app.js default weatherPreset keeps the desk silent (auto or off)
 console.log('Test 10: Verifying default weatherPreset in study-app.js keeps desk silent...');
-const studyAppCode = fs.readFileSync(path.join('js', 'study', 'study-app.js'), 'utf8');
+const studyAppCode = studyPageSource();
 if (!/let\s+weatherPreset\s*=\s*['"](?:auto|off)['"]/i.test(studyAppCode)) {
   throw new Error("study-app.js does not declare weatherPreset initialized to 'auto' or 'off'.");
 }

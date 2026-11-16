@@ -41,11 +41,11 @@ Every page loads `cinema.css`, `terms.css` and `consent.css`. All except `privac
 |---|---|---|
 | `index.html` | `covers.js`, `reviews.js`, `progress-sync.js`, `insights.js`, `onboard.js`, `ui-sound.js`, `ui-click-sound.js`, `js/home/home.js`, `shelf-data.js`, `shelf.js` | `site.css`, `shelf.css`, `onboard.css` |
 | `study.html` | `book-open.js` (in the head), `progress-sync.js`, `study-sync.js`, `quiz-gate.js`, `insights.js`, `onboard.js`, sounds, `reviews.js`, then `js/study/`: `scripture.js`, `workbench.js`, `competency.js`, `sheets/index.js`, `sheet-map.js`, `sheet-verify.js`, `term-overlay.js`, `card-min.js`, `glossary-enrichment.js`, `sheet-glossary.js`, `book-reader.js`, `study-app.js`, `lesson-player.js`, `task-flow.js`, `audio-orb.js`, `page-actions.js`. `certificate.js` and the per-sitting text load on demand. | `study-tailwind.css`, the 23 parts in `css/study/`, `insight-card.css`, `book-reader.css`, `book-open.css`, `task-flow.css`, `study-audio.css`, `onboard.css` |
-| `map.html` | `vendor/leaflet`, `insights.js`, sounds, `js/study/sheet-map.js`, `js/map/map-data.js`, `js/map/map.js` (which loads `js/map/globe.js` on demand) | `map.css` |
+| `map.html` | `vendor/leaflet`, `insights.js`, sounds, `js/study/sheet-map.js`, `js/map/map-data.js`, `js/map/map-math.js`, `js/map/map.js` (which loads `js/map/globe.js` on demand) | `map.css` |
 | `gallery.html` | `insights.js`, `ui-sound.js`, then `js/gallery/app.js` as an ES module (three.js through an import map) | `app.css` |
 | `account.html` | `covers.js`, `mfa.js`, `insights.js`, `progress-sync.js`, `study-sync.js`, `reviews.js`, `account.js` | `site.css`, `notes.css`, `account.css` |
 | `reviews.html` | `insights.js`, `reviews.js` | `site.css`, `notes.css` |
-| `insights.html` | `insights.js`, `js/insights/sid-report.js`, `js/insights/insights.js` | `site.css`, `insights.css`, `sid-report.css` |
+| `insights.html` | `insights.js`, `js/insights/sid-report.js`, `js/insights/insights-format.js`, `js/insights/insights.js` | `site.css`, `insights.css`, `sid-report.css` |
 | `privacy.html`, `terms.html` | Sentry, `cinema.js`, `consent.js` only | `site.css`, `account.css` |
 | `404.html` | Shared base only | `site.css` |
 
@@ -61,13 +61,14 @@ grep -oE '<script[^>]+src="[^"]+"' study.html
 
 | Folder | What lives there | Main files |
 |---|---|---|
-| `js/shared/` | Code used by many pages. `core.js` loads first on every page (before `cinema.js`; on `study.html` before `book-open.js`) and holds the one copy of each small helper: `escapeHtml`, `isLocalDevHost`, `currentUser`, `signedIn`, `authClient` and the focus trap (`window.SiteCore`). Also: sign-in, access rules, sync, analytics, errors, network, consent, terms, desk, reviews, account | `journey.js`, `auth.js`, `progress-sync.js`, `study-sync.js`, `quiz-gate.js`, `insights.js`, `ops.js`, `human-pass.js` (guest Turnstile pass), `net.js`, `errors.js`, `consent.js`, `desk.js`, `reviews.js`, `account.js`, `mfa.js`, `sentry.js` |
-| `js/study/` | The study desk | `study-app.js` (the page controller), `book-reader.js`, `mindmap.js`, `task-flow.js`, `term-overlay.js`, `workbench.js`, `competency.js`, `certificate.js`, `scripture.js` |
+| `js/shared/` | Code used by many pages. `core.js` loads first on every page (before `cinema.js`; on `study.html` before `book-open.js`) and holds the one copy of each small helper: `escapeHtml`, `isLocalDevHost`, `currentUser`, `signedIn`, `authClient` and the focus trap (`window.SiteCore`). Also: sign-in, access rules, sync, analytics, errors, network, consent, terms, desk, reviews, account | `journey.js`, `auth.js`, `progress-sync.js`, `study-sync.js`, `quiz-gate.js`, `insights.js`, `ops.js`, `human-pass.js` (guest Turnstile pass), `net.js`, `errors.js`, `consent.js`, `desk.js` (with `desk-rows.js`, its row checks and text clipping, loaded just before it), `reviews.js`, `account.js`, `mfa.js`, `sentry.js` |
+| `js/study/` | The study desk | `study-app.js` (the page controller: state, start-up and `loadSheet`), and the features moved out of it on 16 November 2026: `story.js`, `quiz.js`, `read-along.js`, `focus-timer.js`, `reading-settings.js`, `references.js`, `horizon.js`, `sitting-map.js`, `sitting-guide.js`, `lesson-connect.js`, `toc.js`, `strongs.js`, `study-guide.js`, `scroll-place.js`, `sheet-book.js`, `instruments.js`, `spine.js`, `study-modules.js`. Also `book-reader.js` (helpers in `book-reader-helpers.js`), `mindmap.js` (layout maths and text fitting in `mindmap-layout.js`), `task-flow.js`, `term-overlay.js`, `workbench.js` (the capstone rubric in `workbench-rubric.js`), `competency.js`, `certificate.js`, `scripture.js` |
+| `js/study/diagrams/` | The diagram renderers: `cite.js`, `chain.js`, `comparison.js`, `table.js`, `flow.js`, `timeline.js`, and the full-screen shell `fullscreen.js` |
 | `js/study/sheets/` | The 11 sittings, one file each, plus `index.js` (the list and the on-demand loader). **Generated** from `js/study/sheets-data.js` by `node tools/build_study_sheets.mjs`. | `index.js`, `sheet-0.js` … `sheet-10.js` |
-| `js/map/` | The map | `map.js` (engine), `map-data.js` (kingdoms, cities, events, routes), `globe.js` (3D globe view) |
-| `js/gallery/` | The 3D gallery | `app.js` (scene, artifact registry `ASSET_REGISTRY`, model cache) |
-| `js/home/` | The home shelf | `shelf.js` (3D shelf), `shelf-data.js` (generated by `tools/build-shelf-data.mjs`), `home.js` |
-| `js/insights/` | The moderator dashboard | `insights.js`, `sid-report.js` |
+| `js/map/` | The map | `map.js` (engine), `map-math.js` (distance, smoothing, tile and year maths, loaded just before `map.js`), `map-data.js` (kingdoms, cities, events, routes), `globe.js` (3D globe view) |
+| `js/gallery/` | The 3D gallery (ES modules) | `app.js` (scene, model cache, tour, study looks), `artifact-registry.js` (`ASSET_REGISTRY`, the museum notes `MUSEUM_NODES_DATA`, `getNodeDataForAsset`, the artifact order and map years), `hall-art.js` (the hall backdrops, wall frames, relief and halo textures, toolbar icons) |
+| `js/home/` | The home shelf | `shelf.js` (3D shelf, an ES module), `shelf-helpers.js` (text cleaning, numerals, colours, line fitting; imported by `shelf.js`), `shelf-data.js` (generated by `tools/build-shelf-data.mjs`), `home.js` |
+| `js/insights/` | The moderator dashboard | `insights.js`, `insights-format.js` (number, date, CSV and quarter helpers, loaded just before it), `sid-report.js` |
 
 ## Source files that are not served
 
@@ -110,8 +111,10 @@ The deploy script refuses to ship if any of these are in the bundle.
 | Sitting text, questions or a study guide | `js/study/sheets-data.js`, then `node tools/build_study_sheets.mjs`. Answer keys go in the database (`exhibit_quiz_keys`), never in the client. |
 | A Strong's line or verse highlights | `bible/strongs-daniel.json`, `bible/sheet-passages.json` |
 | A map year, city, event or route | `js/map/map-data.js` |
-| A 3D artifact | `models/*.glb` (compressed with `tools/compress/`), plus `ASSET_REGISTRY` in `js/gallery/app.js`, plus a plate and thumbnail under `assets/` |
+| A 3D artifact | `models/*.glb` (compressed with `tools/compress/`), plus `ASSET_REGISTRY` in `js/gallery/artifact-registry.js`, plus a plate and thumbnail under `assets/` |
+| A study-page feature | Its own file in `js/study/` (or `js/study/diagrams/` for a renderer), linked in `study.html` before `study-app.js`. These are still classic scripts that share the page's global scope, so a file must not run code at load that reads a name from `study-app.js`; only declarations go in it. Tests that check the study page's code read every script it loads through `tools/verify/_sources.mjs`, not one file |
 | Code shared by pages | `js/shared/`, then add the `<script>` tag to each page that needs it. A small helper used by two or more files (escaping, sign-in reads, focus handling) goes in `js/shared/core.js`; local copies call it, they do not repeat its body |
 | A database change | A new `tools/supabase-<topic>.sql`, run in Supabase **before** deploying the client that needs it |
 | A new storage key | Add it to `tools/storage-keys.mjs` and to the storage table in `privacy.html`; also to `PERSONAL_KEYS` in `js/shared/auth.js` if sign-out must clear it, and to `SITE_KEYS` in `js/shared/account.js` if account deletion must clear it. `npm run test:unit` fails until all of them agree |
+| A pure helper (maths, layout, text fitting, formatting) | A helper file next to its feature, outside the feature's closure: for a classic script it sets one `window.<Name>` object and the feature reads it with `const { … } = window.<Name>;`; for an ES module it uses `export`. Give it a unit test in `tests/unit/`. Import between ES modules with a root path (`'/js/home/shelf-helpers.js'`), because `tools/hash-release-assets.mjs` rewrites references by their full path and would miss `./shelf-helpers.js` |
 | A test | `tests/unit/*.test.mjs` (fast, `node:test`) or `tools/verify/verify_*.mjs` (browser and integration, then add it to the `test` script in `package.json`) |

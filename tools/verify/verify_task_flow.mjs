@@ -1,4 +1,5 @@
 import fs from 'fs';
+import { studyPageSource } from './_sources.mjs';
 import path from 'path';
 import assert from 'assert';
 import { fileURLToPath } from 'url';
@@ -7,7 +8,7 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..')
 const read = (rel) => fs.readFileSync(path.join(root, rel), 'utf8');
 
 const html = read('study.html');
-const app = read('js/study/study-app.js');
+const app = studyPageSource();
 const flow = read('js/study/task-flow.js');
 const flowCss = read('css/task-flow.css');
 const player = read('js/study/lesson-player.js');

@@ -14,7 +14,7 @@ const STORAGE_OBJECT = /(local|session)Storage|\bstore\b|\bstorage\b/i;
 const KEY_SHAPE = /^(ba[A-Z][A-Za-z0-9]*[-:]?|daniel[_-][A-Za-z0-9_:-]+)$/;
 
 function sourceFiles() {
-  return execFileSync("git", ["ls-files", "js"], { cwd: root, encoding: "utf8" })
+  return execFileSync("git", ["ls-files", "--cached", "--others", "--exclude-standard", "js"], { cwd: root, encoding: "utf8" })
     .split("\n")
     .filter((f) => f.endsWith(".js") && !f.includes("/vendor/") && !f.endsWith(".min.js"));
 }
@@ -60,10 +60,12 @@ function keysInCode() {
     if (!found.has(key)) found.set(key, new Set());
     found.get(key).add(file);
   };
-  for (const file of sourceFiles()) {
-    const text = read(file);
-    const ast = parse(text);
-    const consts = stringConsts(ast);
+  const parsed = sourceFiles().map((file) => ({ file, text: read(file) }));
+  for (const p of parsed) p.ast = parse(p.text);
+  const shared = new Map();
+  for (const p of parsed) for (const [k, v] of stringConsts(p.ast)) if (!shared.has(k)) shared.set(k, v);
+  for (const { file, text, ast } of parsed) {
+    const consts = new Map([...shared, ...stringConsts(ast)]);
     walk(ast, (n) => {
       const isCall = n.type === "CallExpression" && n.callee.type === "MemberExpression" && !n.callee.computed;
       if (isCall && STORAGE_METHODS.has(n.callee.property.name) && STORAGE_OBJECT.test(text.slice(n.callee.object.start, n.callee.object.end))) {
