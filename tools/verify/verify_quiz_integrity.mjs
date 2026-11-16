@@ -1,4 +1,5 @@
 import assert from "assert";
+import { studyPageSource } from './_sources.mjs';
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
@@ -128,10 +129,10 @@ res = await QuizGate.verify(0, 0, 1);
 assert.deepStrictEqual(res, { ok: false, error: "not_authenticated" }, "signed-out visitors fail closed");
 
 /* 5. No consumer reads a plaintext key anymore. */
-assert.strictEqual(/\b(q|quiz|questionData)\.correct\b/.test(read("js/study/study-app.js")), false, "study-app.js never reads q.correct");
+assert.strictEqual(/\b(q|quiz|questionData)\.correct\b/.test(studyPageSource()), false, "the study page scripts never read q.correct");
 assert.strictEqual(/q\.correct|correctIdx\s*=\s*q\.correct/.test(read("qa-e2e/production-audit.mjs")), false, "the e2e audit no longer reads the key");
-assert.ok(read("js/study/study-app.js").includes("QuizGate.verify"), "study-app.js grades through QuizGate");
-assert.ok(read("js/study/study-app.js").includes("Answer checking is available to signed-in members."), "signed-out answers point to the Account page");
+assert.ok(studyPageSource().includes("QuizGate.verify"), "the study page grades through QuizGate");
+assert.ok(studyPageSource().includes("Answer checking is available to signed-in members."), "signed-out answers point to the Account page");
 
 /* 6. The per-sitting files the page loads are built from sheets-data.js and carry no key either. */
 const { render } = await import("../build_study_sheets.mjs");

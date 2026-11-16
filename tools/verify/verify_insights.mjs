@@ -1,4 +1,5 @@
 import fs from 'fs';
+import { studyPageSource } from './_sources.mjs';
 import path from 'path';
 import assert from 'assert';
 import { fileURLToPath } from 'url';
@@ -584,7 +585,7 @@ console.log('✓ Real dashboard analytics & CSV escaping formulas verified.');
 
 // 6. Test Instrumentation in study-app, workbench, certificate
 console.log('6. Checking instrumentation points in study-app, workbench, certificate...');
-const studyAppJs = fs.readFileSync(path.join(ROOT, 'js/study/study-app.js'), 'utf8');
+const studyAppJs = studyPageSource();
 assert(studyAppJs.includes("track('sitting_start'"), 'study-app missing sitting_start track');
 assert(studyAppJs.includes("track('path_step'"), 'study-app missing path_step track');
 assert(studyAppJs.includes("track('quiz_answer'"), 'study-app missing quiz_answer track');

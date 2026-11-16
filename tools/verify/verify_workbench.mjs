@@ -1,4 +1,5 @@
 import fs from 'fs';
+import { studyPageSource } from './_sources.mjs';
 import path from 'path';
 import vm from 'vm';
 
@@ -309,7 +310,7 @@ console.log('  PASS: supabase-progress.sql contains complete exhibit_progress an
 
 // Check 11: Verify study-app.js default weatherPreset keeps the desk silent (auto or off)
 console.log('Test 10: Verifying default weatherPreset in study-app.js keeps desk silent...');
-const studyAppCode = fs.readFileSync(path.join('js', 'study', 'study-app.js'), 'utf8');
+const studyAppCode = studyPageSource();
 if (!/let\s+weatherPreset\s*=\s*['"](?:auto|off)['"]/i.test(studyAppCode)) {
   throw new Error("study-app.js does not declare weatherPreset initialized to 'auto' or 'off'.");
 }

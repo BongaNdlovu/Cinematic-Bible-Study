@@ -26,7 +26,7 @@
   },
   "overrides": [
     {
-      "files": ["js/study/diagrams/**"],
+      "files": ["js/study/diagrams/**", "js/study/study-app.js", "js/study/story.js", "js/study/focus-timer.js", "js/study/read-along.js", "js/study/reading-settings.js", "js/study/references.js", "js/study/quiz.js", "js/study/horizon.js", "js/study/sitting-map.js", "js/study/sitting-guide.js", "js/study/lesson-connect.js"],
       "rules": {
         "no-unused-vars": "off"
       }

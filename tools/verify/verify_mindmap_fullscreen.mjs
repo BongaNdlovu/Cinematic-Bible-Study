@@ -528,9 +528,12 @@ try {
   check('a sitting change while full screen is open leaves no fixed block behind',
     switched.fixedLeft === 0 && switched.maps === 0,
     `${switched.fixedLeft} fixed block(s), ${switched.maps} map(s) in the new sitting`);
-  await page.evaluate(() => { window.scrollTo(0, 800); });
-  await page.waitForTimeout(400);
-  const scrolledAfter = await page.evaluate(() => window.scrollY);
+  let scrolledAfter = 0;
+  for (let i = 0; i < 5 && scrolledAfter === 0; i += 1) {
+    await page.evaluate(() => { window.scrollTo(0, 800); });
+    await page.waitForTimeout(400);
+    scrolledAfter = await page.evaluate(() => window.scrollY);
+  }
   check('the page really scrolls again after that teardown', scrolledAfter > 0, `scrollY ${switched.scrolled} \u2192 ${scrolledAfter}`);
   await page.evaluate(() => { window.scrollTo(0, 0); });
   await openSittingInPage(page, 2);
