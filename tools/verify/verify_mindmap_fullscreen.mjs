@@ -3,7 +3,7 @@
  * two migrated sitting-2 diagrams, s2-3 (a fan) and s2-4 (a spine).
  *
  * The claim under test is the brief's acceptance table
- * (docs/brief-fullscreen-diagram.md): the whole diagram, at a size where every
+ * (docs/archive/2026-10-14-brief-fullscreen-diagram.md): the whole diagram, at a size where every
  * label reads, with nothing disabled. So every row is measured, never inferred:
  *
  *   the map          host box == viewport, box is 16:11, world scale >= 1.0 at

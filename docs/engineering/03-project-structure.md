@@ -21,7 +21,8 @@ The site has no build step for its pages. The files in the repository root and i
 ├── vendor/                Pinned third-party code: three, leaflet, supabase, sentry
 ├── tests/unit/            node:test unit tests (npm run test:unit)
 ├── tools/                 Build, verify, deploy, SQL, audit and content scripts
-├── docs/                  Documentation (this handbook lives in docs/engineering/)
+├── _mig/                  Diagram source: specN.json (authored specs) and sheetN.json (extracted artwork). tools/diagrams/ merges them into sheets-data.js; verify_flow.mjs reads them. Never deployed.
+├── docs/                  engineering/ (this handbook) and archive/ (dated older papers)
 ├── server.py              Local static server
 ├── start_website.bat      Windows launcher for server.py
 ├── wrangler.toml          Cloudflare Pages settings and Durable Object binding
@@ -98,7 +99,7 @@ The deploy script refuses to ship if any of these are in the bundle.
 | `tools/export-all-tables.sql` | Hand-run copy of every `public` table plus `auth.users` and `auth.identities` |
 | `tools/compress/` | Meshopt and WebP pipeline for 3D models (`npm run compress*`) |
 | `tools/audit/`, `tools/review/`, `tools/diagrams/`, `tools/audio-read/`, `tools/perf/` | One-off inspection, editorial review, diagram, audio and performance helpers |
-| `tools/build_sheet*_html.py`, `tools/patch_sheet*_data.py`, `tools/sheet*_generated.html` | Older content-building scripts and their output |
+| `tools/legacy/` | The 33 older content-building scripts and their output (`build_sheet*_html.py`, `patch_sheet*_data.py`, `sheet*_generated.html`), moved here on 16 November 2026 so they are not mistaken for `tools/build_study_sheets.mjs`. The `patch_sheet*` scripts were adjusted to find the repository root one level higher. Not run since. |
 
 ## Where new work goes
 

@@ -20,7 +20,7 @@ The server binds `127.0.0.1`. It starts at port 8000, or at `PORT` if that is se
 
 | Script | What it does |
 |---|---|
-| `npm run lint` | `oxlint` over the code. CI fails on any error. The complexity ceiling is 55 per function (see `docs/ARCHITECTURE.md`). |
+| `npm run lint` | `oxlint` over the code. CI fails on any error. The complexity ceiling is 55 per function, set in `.oxlintrc.json`; `.cursor/skills/complexity-ceiling/SKILL.md` says how to change it. |
 | `npm run test:unit` | `node --test "tests/unit/*.test.mjs"`: fast unit tests, no browser |
 | `npm test` | The regression suite: 24 `tools/verify/verify_*.mjs` scripts plus `tools/verify-headers.mjs`. Some start `server.py` and drive Chromium through Playwright. It ends with three guards: `node tools/build_study_sheets.mjs --check` and `node tools/verify/build_glossary_enrichment.mjs --check` (fail when a generated file is older than its source) and `tools/verify/verify_wiring.mjs` (fails when a `verify_*.mjs` file is not run anywhere). |
 | `npm run test:browser` | `tools/verify/run_browser_checks.mjs`: starts one site server and runs the 29 browser checks that pass today (see [Browser checks](#browser-checks)). Add `--include-quarantined` to run the one known-failing check too, or `--only=verify_x.mjs,verify_y.mjs` to run named ones. |
@@ -147,7 +147,7 @@ On a push to `master` only, after **test** passes:
 - Migrations are SQL files in `tools/supabase-*.sql`. They are run **by hand** in the Supabase SQL editor. Nothing applies them automatically.
 - Run a migration **before** deploying the client that depends on it. For example, the answer check fails closed until `verify_quiz_answer` exists.
 - Never rename `save_exhibit_progress(bigint, jsonb)`. A breaking change ships as a new function, together with the client that uses it.
-- Backups: the project is on the Supabase Free plan, which has no automatic backups (per `docs/ARCHITECTURE.md`, 26 September 2026). So the repo makes its own. See [Database backups](#database-backups).
+- Backups: the project is on the Supabase Free plan, which has no automatic backups (per `docs/archive/2026-09-10-ARCHITECTURE.md`, 26 September 2026). So the repo makes its own. See [Database backups](#database-backups).
 
 ## Database backups
 

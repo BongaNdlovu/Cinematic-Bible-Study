@@ -18,7 +18,7 @@ import fs from 'fs';
 import path from 'path';
 import vm from 'vm';
 
-const DRAFTS = ['docs/batch-sheets-0-2.md', 'docs/batch-sheets-4-6.md', 'docs/batch-sheets-9-10.md'];
+const DRAFTS = ['docs/archive/2026-10-14-batch-sheets-0-2.md', 'docs/archive/2026-10-14-batch-sheets-4-6.md', 'docs/archive/2026-10-14-batch-sheets-9-10.md'];
 const args = process.argv.slice(2);
 const onlyDrafts = args.includes('--drafts');
 const onlyWired = args.includes('--wired');

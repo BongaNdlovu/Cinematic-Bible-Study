@@ -41,9 +41,9 @@ for (let i = 0; i < 120; i += 1) {
 }
 assert.strictEqual(allow(account, "10.8.0.1", "/account.html", now), false, "the account page has a 120-read budget");
 assert.strictEqual(allow(account, "10.8.0.1", "/study.html", now), true, "the account budget does not spend the page budget");
-const architecture = fs.readFileSync(new URL("../../docs/ARCHITECTURE.md", import.meta.url), "utf8");
-assert.ok(architecture.includes("`/account` and `/account.html` share 120."), "the architecture notes state the account budget the gate enforces");
-assert.ok(!architecture.includes("`/account` and `/account.html` share 30."), "the architecture notes no longer state the old account budget");
+const handbook = fs.readFileSync(new URL("../../docs/engineering/04-security.md", import.meta.url), "utf8");
+assert.ok(handbook.includes("| `account` | `/account`, `/account.html` | 120 a minute |"), "the security chapter states the account budget the gate enforces");
+assert.ok(!/\| `account` \|[^\n]*\| 30 a minute \|/.test(handbook), "the security chapter no longer states the old account budget");
 
 const aging = new Map();
 assert.strictEqual(allow(aging, "10.9.0.1", "/study.html", now), true);

@@ -2,7 +2,7 @@
 import re
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parent.parent
+ROOT = Path(__file__).resolve().parent.parent.parent
 html = (ROOT / "tools" / "sheet9_generated.html").read_text(encoding="utf-8")
 data_path = ROOT / "js" / "study" / "sheets-data.js"
 text = data_path.read_text(encoding="utf-8")

@@ -16,7 +16,7 @@
 import fs from 'fs';
 import vm from 'vm';
 
-const DRAFTS = ['docs/batch-sheets-0-2.md', 'docs/batch-sheets-4-6.md', 'docs/batch-sheets-9-10.md'];
+const DRAFTS = ['docs/archive/2026-10-14-batch-sheets-0-2.md', 'docs/archive/2026-10-14-batch-sheets-4-6.md', 'docs/archive/2026-10-14-batch-sheets-9-10.md'];
 
 /*
  * Fold everything that carries no meaning for a substring match: markup, quote

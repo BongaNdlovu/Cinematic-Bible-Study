@@ -350,7 +350,7 @@ async function auditFlow(page, flow) {
 
   // (f) s10-2's lexical side-note and its counter-node, with the sitting's own
   // two labels. The `'amad` note is step 1's own `text`; the counter-node label
-  // is quoted in docs/flow-map-decisions.md §6.5.
+  // is quoted in docs/archive/2026-10-14-flow-map-decisions.md §6.5.
   if (flow.id === 's10-2') {
     row.aside = await figure.evaluate((fig) => {
       const aside = [...fig.querySelectorAll('.flow-aside')];

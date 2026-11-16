@@ -18,7 +18,7 @@ This handbook is the single place a developer or senior engineer reads to unders
 | — | [Architecture baseline](architecture-baseline.md) | The measured sizes the architecture plan is compared against |
 | — | [Changelog](CHANGELOG.md) | What changed, when, and which chapters it touched |
 
-Older documents in `docs/` (audits, fix plans, specs) are history. When they disagree with this handbook, the handbook wins. [`docs/ARCHITECTURE.md`](../ARCHITECTURE.md) is kept for its detailed tables; its own introduction points here.
+Older documents (audits, fix plans, specs) are history and live in `docs/archive/`, each named with the date it was written (the date in its old name, or the date it was first committed). `docs/` holds only `engineering/` and `archive/`. When they disagree with this handbook, the handbook wins. [`docs/archive/2026-09-10-ARCHITECTURE.md`](../archive/2026-09-10-ARCHITECTURE.md) is kept for its detailed tables; its own introduction points here.
 
 ## Keeping this handbook current
 
