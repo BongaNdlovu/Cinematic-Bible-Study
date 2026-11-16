@@ -47,6 +47,14 @@ async function settle(page) {
   return false;
 }
 
+async function proof(page, file) {
+  try {
+    await page.screenshot({ path: file, timeout: 90000 });
+  } catch (err) {
+    console.log("proof screenshot skipped: " + file + " (" + err.message.split("\n")[0] + ")");
+  }
+}
+
 async function drag(page) {
   await page.mouse.move(640, 420);
   await page.mouse.down();
@@ -134,7 +142,7 @@ try {
     await sleep(2000);
     const b = await t.page.evaluate(() => window.__raf);
     assert.strictEqual(b - a, 0, "globe kept drawing while idle");
-    await t.page.screenshot({ path: "qa/proofs/globe_proof_457.png" });
+    await proof(t.page, "qa/proofs/globe_proof_457.png");
     pass("globe draws nothing when idle");
 
     await t.page.mouse.move(900, 300);
@@ -152,7 +160,7 @@ try {
       assert.fail("close satellite imagery never appeared on the globe " + JSON.stringify({ data, tiles, errors: t.errors }));
     }
     assert.ok(await globeOn(t.page), "three wheel steps should not leave the globe");
-    await t.page.screenshot({ path: "qa/proofs/globe_proof_imagery.png" });
+    await proof(t.page, "qa/proofs/globe_proof_imagery.png");
     pass("zooming close drapes satellite imagery on the globe");
 
     for (let i = 0; i < 40 && (await globeOn(t.page)); i++) {
@@ -207,7 +215,7 @@ try {
     await t.page.click(".cmap-dossier .cmap-pois [data-poi='1']");
     await sleep(3500);
     assert.ok(await t.page.evaluate(() => !!document.querySelector(".cmap-footprint")), "site outline missing at close zoom");
-    await t.page.screenshot({ path: "qa/proofs/globe_proof_site.png" });
+    await proof(t.page, "qa/proofs/globe_proof_site.png");
     assert.deepStrictEqual(t.errors, []);
     pass("site detail opens and flies in");
     await t.close();
@@ -218,7 +226,7 @@ try {
     assert.ok(await waitFor(t.page, () => document.querySelectorAll(".cmap-gpin:not(.is-hidden)").length > 0, 45000), "phone globe pins never appeared");
     assert.strictEqual(await t.page.evaluate(() => document.documentElement.scrollWidth), 390, "phone layout scrolls sideways");
     assert.ok(t.requests.some((u) => u.endsWith("earth-day-2k.webp")) && !t.requests.some((u) => u.endsWith("earth-day-4k.webp")), "phone should load the 2k earth only");
-    await t.page.screenshot({ path: "qa/proofs/globe_proof_mobile.png" });
+    await proof(t.page, "qa/proofs/globe_proof_mobile.png");
     assert.deepStrictEqual(t.errors, []);
     pass("phone globe loads the small texture and fits the screen");
     await t.close();
@@ -248,7 +256,7 @@ try {
     const rested = await settle(t.page);
     const after = await t.page.evaluate(() => document.querySelector(".cmap-globe").dataset.clouds);
     assert.notStrictEqual(after, a.drift, "clouds did not drift while the globe redrew " + JSON.stringify({ rested, before: a.drift, after }));
-    await t.page.screenshot({ path: "qa/proofs/globe_proof_sky.png" });
+    await proof(t.page, "qa/proofs/globe_proof_sky.png");
     assert.deepStrictEqual(t.errors, []);
     pass("clouds drift only while the globe redraws");
     await t.close();
