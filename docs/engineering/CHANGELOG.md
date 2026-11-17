@@ -24,7 +24,7 @@ Entry template:
 
 **Handbook updated:** none (test only).
 
-**Checked here:** `verify_globe.mjs` passed 3 of 3 runs alone on Windows with the first change, and GitHub runs 44079693040 and 44079681549 passed both jobs. With all three changes it passes 3 of 3 runs alone on Windows. On GitHub, 9 of the next 10 runs passed; the tenth (44087163845) stopped `verify_globe.mjs` at its 480 s limit, so that limit is now 720 s.
+**Checked here:** `verify_globe.mjs` passed 3 of 3 runs alone on Windows with the first change, and GitHub runs 44079693040 and 44079681549 passed both jobs. With all three changes it passes 3 of 3 runs alone on Windows. On GitHub, 9 of the next 10 runs passed; the tenth (44087163845) stopped `verify_globe.mjs` at its 480 s limit, so that limit is now 720 s. A later push run (44092423642) failed "zooming the map out returns to the globe": the check stopped clicking zoom-out after 16 tries (about 7 s), before the map had handed back to the globe. It now keeps clicking for up to 60 tries (extra clicks at the smallest zoom do nothing), and the zoom-in hand-over just before it waits up to 20 s instead of a fixed 0.8 s.
 
 **Status:** on branch `fix/globe-settle`, then merged into the stacked split branches.
 ## 2026-11-17 — `map.js` split under 800 lines

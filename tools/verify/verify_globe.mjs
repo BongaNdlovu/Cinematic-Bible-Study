@@ -181,12 +181,12 @@ try {
       await t.page.mouse.wheel(0, -120);
       await sleep(50);
     }
-    await sleep(800);
+    for (let i = 0; i < 40 && (await globeOn(t.page)); i++) await sleep(500);
     assert.strictEqual(await globeOn(t.page), false, "zooming in did not hand over to the map");
     assert.ok(!new URL(t.page.url()).searchParams.get("view"), "view=globe left in the URL");
     pass("zooming in hands over to the map");
 
-    for (let i = 0; i < 16 && !(await globeOn(t.page)); i++) {
+    for (let i = 0; i < 60 && !(await globeOn(t.page)); i++) {
       await t.page.evaluate(() => document.querySelector(".cmap-zoom [data-zoom=\"-1\"]").click());
       await sleep(450);
     }
