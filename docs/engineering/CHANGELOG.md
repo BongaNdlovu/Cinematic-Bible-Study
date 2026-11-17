@@ -14,6 +14,23 @@ Entry template:
 
 ---
 
+## 2026-11-17 — Architecture plan, step 6.1: file and function size limits
+
+**Why:** a file grows a line at a time and no single change looks like bloat. A limit that fails lint stops it at the moment it happens.
+
+**What changed:** `.oxlintrc.json` turns on `max-lines` (800, counting every line) and `max-lines-per-function` (100). Files that already break them are listed by name in two `overrides`, so lint passes today:
+
+- Over 800 lines (14): `js/content/sheets-data.js`, `js/features/desk.js`, `js/features/reviews.js`, `js/pages/dashboard/dashboard.js`, `js/pages/gallery/artifact-registry.js`, `js/pages/gallery/gallery.js`, `js/pages/index/shelf.js`, `js/pages/map/globe.js`, `js/pages/map/map.js`, `js/pages/study/book-reader.js`, `certificate.js`, `mindmap.js`, `study-app.js`, `workbench.js` (all three in `js/pages/study/`).
+- A function over 100 lines (19 files): `progress-sync.js`, `reviews.js`, `dashboard.js`, `gallery.js`, `hall-art.js`, `shelf.js`, `globe.js`, `map.js`, and in the study page `book-reader.js`, `certificate.js`, `competency.js`, `diagrams/fullscreen.js`, `diagrams/timeline.js`, `mindmap.js`, `quiz.js`, `story.js`, `study-app.js`, `weather-scene.js`, `workbench.js`.
+
+`sheets-data.js` and `artifact-registry.js` are data, not logic; splitting them is a content decision, so their exceptions may stay.
+
+**Handbook updated:** 07 (lint).
+
+**Checked here:** lint exits 0. A new 801-line file in `js/pages/map/` failed lint with `max-lines` and was removed. `npm run test:unit` and every `npm test` script pass.
+
+**Status:** on branch `arch/phase-6-lock`, not deployed.
+
 ## 2026-11-17 — Architecture plan, step 6.2: complexity ceiling 55 → 52
 
 **Why:** a ceiling of 55 lets one function hold dozens of branches, where untested paths hide. The plan lowers it in steps, each leaving lint passing.
