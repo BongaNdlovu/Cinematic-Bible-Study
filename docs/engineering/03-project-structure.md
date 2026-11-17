@@ -84,7 +84,7 @@ Since 16 November 2026 (plan step 5.1), a file's folder says how far it reaches.
 | `js/pages/map/` | `map.js` (engine), `map-math.js` (distance, smoothing, tile and year maths), `globe.js` (3D globe view, loaded on demand) |
 | `js/pages/index/` | `shelf.js` (3D shelf, an ES module), `shelf-helpers.js`, `home.js` |
 | `js/pages/account/` | `account.js`, `mfa.js` (moved from `js/shared/` in step 5.3) |
-| `js/pages/dashboard/` | `dashboard.js`, `dashboard-format.js` (number, date, CSV and quarter helpers), `sid-report.js` |
+| `js/pages/dashboard/` | `dashboard.js` (loading, rendering, filters, the moderator API), `dashboard-data.js` (the figures' state behind getters and setters, the data accessors and the row and HTML builders), `dashboard-format.js` (number, date, CSV and quarter helpers), `sid-report.js` |
 | `js/content/sheets/` | The 11 sittings, one file each, plus `index.js` (the list and the on-demand loader). **Generated** from `js/content/sheets-data.js` by `node tools/build_study_sheets.mjs` |
 
 ## Source files that are not served

@@ -408,6 +408,8 @@ const dashProfiles = [
 const dashCode = fs.readFileSync(path.join(ROOT, 'js/pages/dashboard/dashboard.js'), 'utf8');
 new Function(fs.readFileSync(path.join(ROOT, 'js/core/core.js'), 'utf8'))();
 new Function(fs.readFileSync(path.join(ROOT, 'js/pages/dashboard/dashboard-format.js'), 'utf8'))();
+new Function(fs.readFileSync(path.join(ROOT, 'js/pages/dashboard/dashboard-data.js'), 'utf8'))();
+const dashAll = dashCode + '\n' + fs.readFileSync(path.join(ROOT, 'js/pages/dashboard/dashboard-data.js'), 'utf8');
 const runDash = new Function(dashCode);
 runDash();
 
@@ -621,7 +623,7 @@ assert(reviewsJs.includes('res && res.error'), 'reviews.js must check approve/hi
 const liveJs = fs.readFileSync(path.join(ROOT, 'tools/verify/verify_progress_live.mjs'), 'utf8');
 assert(liveJs.includes('process.exit(1)'), 'live progress check must fail when env is missing');
 assert(!liveJs.includes('process.exit(0)'), 'live progress check must not skip with a passing exit');
-assert(/a\.click\(\);\s*setTimeout\(function \(\) \{ URL\.revokeObjectURL\(a\.href\); \}, 1000\);/.test(dashCode), 'the CSV export keeps its link alive until the download starts');
+assert(/a\.click\(\);\s*setTimeout\(function \(\) \{ URL\.revokeObjectURL\(a\.href\); \}, 1000\);/.test(dashAll), 'the CSV export keeps its link alive until the download starts');
 
 Dashboard.setCountFrom();
 Dashboard.setDays(0);
@@ -678,8 +680,8 @@ const counterMissing = Dashboard.targetTile(null);
 assert(counterMissing.includes('verified count not available'), 'a missing count says so');
 const counterBroken = Dashboard.targetTile({ registered: 1, began: 'x' });
 assert(counterBroken.includes('verified count not available'), 'a malformed count is not shown');
-assert(/c\.rpc\('exhibit_participation', \{ p_from: ALL_TIME_FROM/.test(dashCode), 'the dashboard loads the all-time verified count');
-assert(/'<div class="insights-tiles">' \+\s*targetTile\(cache\.participation\) \+/.test(dashCode), 'the counter is the first dashboard tile');
+assert(/c\.rpc\('exhibit_participation', \{ p_from: ALL_TIME_FROM/.test(dashAll), 'the dashboard loads the all-time verified count');
+assert(/'<div class="insights-tiles">' \+\s*targetTile\(getCache\(\)\.participation\) \+/.test(dashAll), 'the counter is the first dashboard tile');
 const participationSql = fs.readFileSync(path.join(ROOT, 'db/migrations/024-participation.sql'), 'utf8');
 assert(/filter \(where public\.exhibit_sittings_passed\(u\.id\) >= 1\)/.test(participationSql), '"began" counts server-checked quiz passes');
 assert(!/journey/.test(participationSql), '"began" does not trust browser-written progress');

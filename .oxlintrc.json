@@ -31,7 +31,6 @@
       "files": [
         "js/content/sheets-data.js",
         "js/features/desk.js",
-        "js/pages/dashboard/dashboard.js",
         "js/pages/gallery/artifact-registry.js",
         "js/pages/gallery/gallery.js",
         "js/pages/index/shelf.js",

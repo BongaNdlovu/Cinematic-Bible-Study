@@ -14,6 +14,23 @@ Entry template:
 
 ---
 
+## 2026-11-17 — `dashboard.js` split: the data layer moves out
+
+**Why:** `js/pages/dashboard/dashboard.js` held 1,092 lines, on the size-exception list.
+
+**What changed:**
+
+- `js/pages/dashboard/dashboard-data.js` (new, `window.DashboardData`, 611 lines): the four pieces of state the figures depend on (`cache`, `days`, `hideMine`, `countFrom`) and the 60 declarations that read only them, constants or each other: the data accessors, the row builders (funnel, quiz, time and depth, learners, graduates), the HTML builders, CSV export and the loading helpers. `dashboard.js` is now 500 lines: loading, rendering, the filters and the moderator API.
+- **The one code change:** a classic script can only hand names out once, so the four moved variables are reached through getters and setters (`getCache`/`setCache` and so on). 13 references in `dashboard.js` changed: 9 assignments (`cache = …` to `setCache(…)`) and 4 reads (`cache.graduates` to `getCache().graduates`). Everything else moved unchanged: `verify_moved_functions.mjs` shows all 60 declarations have the same syntax trees.
+- The page entry imports `dashboard-data.js` just before `dashboard.js`. `verify_insights.mjs` loads it the same way, and its three source-text checks read both files (one now looks for `getCache().participation`).
+- `.oxlintrc.json`: `dashboard.js` left the file-size list (10 left).
+
+**Handbook updated:** 03 (`js/pages/dashboard/`), 07 (lint).
+
+**Checked here:** lint exits 0, `npm run test:unit` passes 188 of 188, every `npm test` script passes (including `verify_insights.mjs`, which runs the dashboard's row builders on sample data). BROWSER
+
+**Status:** on branch `arch/split-large`, not deployed.
+
 ## 2026-11-17 — `workbench.js` split in three, under 800 lines
 
 **Why:** `js/pages/study/workbench.js` held 1,092 lines, on the size-exception list.
