@@ -14,6 +14,38 @@ Entry template:
 
 ---
 
+## 2026-11-17 — Two files under 800 lines, and out of the size exceptions
+
+**Why:** the `max-lines` exceptions in `.oxlintrc.json` come out one by one as files are split. `certificate.js` (811 lines) and `reviews.js` (892) were the nearest to the limit.
+
+**What changed:**
+
+- `js/pages/study/certificate-pdf.js` (new, `window.CertificatePdf`): the PDF writer (`asciiBytes`, `concatBytes`, `jpegBytesFromCanvas`, `buildPdf`) and the page and canvas sizes. `certificate.js` is now 742 lines and reads `CANVAS_W`, `CANVAS_H`, `jpegBytesFromCanvas` and `buildPdf` from it. `certificate.js` still loads on demand; the small PDF file loads with the study page through its entry, so it is there first. New unit test `tests/unit/certificate-pdf.test.mjs`: the PDF has one 842 × 595 page with the 1684 × 1190 JPEG embedded unchanged.
+- `js/features/review-helpers.js` (new, `window.ReviewHelpers`): 11 helpers (the daily review count, names, ratings and stars, dates, star pickers, text validation, save error wording) and the constants `MIN`, `MAX` and `REVIEW_DAY`. `reviews.js` is now 787 lines. The four page entries that load `reviews.js` import the helpers just before it, and `state-fixes.test.mjs` and `verify_reviews.mjs` load them before running `reviews.js`.
+- `tools/verify/verify_moved_functions.mjs`: all 8 and 14 moved declarations have the same syntax trees.
+- `.oxlintrc.json`: both files left the `max-lines` list (12 left). Both still have a function over 100 lines, so they stay on that list.
+
+**Handbook updated:** 03 (`js/features/`, `js/pages/study/`), 07 (lint).
+
+**Checked here:** lint exits 0, `npm run test:unit` passes 188 of 188, every `npm test` script passes, and `npm run test:browser` passes 30 of 30.
+
+**Status:** on branch `arch/followup-size`, not deployed.
+
+## 2026-11-17 — Complexity ceiling 52 → 50
+
+**Why:** the next step down from 52 needed `mergeCloudWithLocal` split, the one function at 52.
+
+**What changed:**
+
+- `js/features/progress-sync.js`: `mergeCloudWithLocal` held four independent `try` blocks, one per store, each setting `localHadNew`. Each block moved unchanged into its own function, which returns whether the local side had something new: `mergeJourneyFromCloud`, `mergeWorkbenchFromCloud`, `mergeTelemetryFromCloud`, `mergeCertificateNameFromCloud`. `mergeCloudWithLocal` calls all four in the old order, with no short-circuit, so every store is still merged. A check over the syntax trees confirms each new function holds its old `try` block unchanged. The four numbered comments that labelled the blocks were dropped; the function names say the same.
+- `.oxlintrc.json`: `complexity` is 50. Lint passes at 50; at 45 it would fail on `mount` (49, `js/pages/map/map.js`), `selectAsset` (49, `gallery.js`) and `start` (46).
+
+**Handbook updated:** 07 (lint).
+
+**Checked here:** lint exits 0 at 50, `npm run test:unit` passes, every `npm test` script passes, and `npm run test:browser` passes 30 of 30 (run on this change together with the next entry).
+
+**Status:** on branch `arch/followup-size`, not deployed.
+
 ## 2026-11-17 — The horizon check waits for the gallery's transition before clicking
 
 **Why:** `verify_horizon.mjs` clicked the next artifact as soon as the plate changed. The gallery ignores a click while its 180 ms change of artifact is still running (`selectAsset._busy`), so the click could be lost and the check then read the old plate. It failed this way once, locally, on 17 November 2026.

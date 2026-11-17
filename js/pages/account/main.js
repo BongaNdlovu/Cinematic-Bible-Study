@@ -13,5 +13,6 @@ import '/js/core/terms.js';
 import '/js/features/analytics.js';
 import '/js/features/progress-sync.js';
 import '/js/features/study-sync.js';
+import '/js/features/review-helpers.js';
 import '/js/features/reviews.js';
 import '/js/pages/account/account.js';

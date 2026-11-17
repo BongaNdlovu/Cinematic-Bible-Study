@@ -9,6 +9,7 @@ import '/js/core/auth.js';
 import '/js/features/desk-rows.js';
 import '/js/features/desk.js';
 import '/js/core/terms.js';
+import '/js/features/review-helpers.js';
 import '/js/features/reviews.js';
 import '/js/features/progress-sync.js';
 import '/js/features/analytics.js';

@@ -9,4 +9,5 @@ import '/js/features/desk-rows.js';
 import '/js/features/desk.js';
 import '/js/core/terms.js';
 import '/js/features/analytics.js';
+import '/js/features/review-helpers.js';
 import '/js/features/reviews.js';

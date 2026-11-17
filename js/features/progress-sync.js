@@ -157,106 +157,121 @@
 
   function currentUser() { return window.SiteCore.currentUser(); }
 
+  function mergeJourneyFromCloud(remote) {
+    let localHadNew = false;
+      try {
+        const localJourney = window.BAJourney && typeof window.BAJourney.load === 'function'
+          ? window.BAJourney.load()
+          : JSON.parse(localStorage.getItem('baJourney') || '{}');
+        const localSheets = Array.isArray(localJourney.completedSheets) ? localJourney.completedSheets : [];
+        const remoteJourney = (remote && remote.journey) || {};
+        const remoteSheets = Array.isArray(remoteJourney.completedSheets)
+          ? remoteJourney.completedSheets
+          : (Array.isArray(remote && remote.mastery) ? remote.mastery : []);
+        
+        const unionSheets = Array.from(new Set([...localSheets, ...remoteSheets])).map(Number).filter(n => !Number.isNaN(n) && n >= 0 && n <= 10);
+        
+        if (localSheets.some(function (n) { return !remoteSheets.map(Number).includes(Number(n)); })) {
+          localHadNew = true;
+        }
+  
+        const mergedCohort = localJourney.cohort || remote.cohort || remoteJourney.cohort || null;
+        const localSheet = typeof localJourney.sheet === 'number' ? localJourney.sheet : 0;
+        const remoteSheet = typeof remoteJourney.sheet === 'number' ? remoteJourney.sheet : 0;
+        const localPath = typeof localJourney.pathSheet === 'number' ? localJourney.pathSheet : -1;
+        const remotePath = typeof remoteJourney.pathSheet === 'number' ? remoteJourney.pathSheet : -1;
+        const localUnlocked = Array.isArray(localJourney.unlocked) ? localJourney.unlocked : [];
+        const remoteUnlocked = Array.isArray(remoteJourney.unlocked) ? remoteJourney.unlocked : [];
+        const unionUnlocked = Array.from(new Set(localUnlocked.concat(remoteUnlocked).filter(Boolean)));
+        const localPlaceAhead = localSheet > remoteSheet || localPath > remotePath;
+        const localUnlockedNew = localUnlocked.some(function (u) { return remoteUnlocked.indexOf(u) === -1; });
+        if (localPlaceAhead || localUnlockedNew) localHadNew = true;
+  
+        if (window.BAJourney && typeof window.BAJourney.save === 'function') {
+          window.BAJourney.save({
+            completedSheets: unionSheets,
+            cohort: mergedCohort,
+            sheet: Math.max(localSheet, remoteSheet),
+            pathSheet: Math.max(localPath, remotePath),
+            unlocked: unionUnlocked
+          });
+        }
+        localStorage.setItem('daniel_historicist_mastery', JSON.stringify(unionSheets));
+      } catch (e) {}
+    return localHadNew;
+  }
+
+  function mergeWorkbenchFromCloud(remote) {
+    let localHadNew = false;
+      try {
+        const localWb = plainObject(JSON.parse(localStorage.getItem('daniel_workbench_v1') || '{}'));
+        const remoteWb = plainObject(remote && remote.workbench);
+        const mergedWb = Object.assign({}, remoteWb);
+        Object.keys(localWb).forEach(function (sheetId) {
+          if (!mergedWb[sheetId]) mergedWb[sheetId] = {};
+          Object.keys(plainObject(localWb[sheetId])).forEach(function (taskId) {
+            if (localWb[sheetId][taskId]) {
+              if (!(remoteWb[sheetId] && remoteWb[sheetId][taskId])) {
+                localHadNew = true;
+              }
+              mergedWb[sheetId][taskId] = true;
+            }
+          });
+        });
+        localStorage.setItem('daniel_workbench_v1', JSON.stringify(mergedWb));
+      } catch (e) {}
+    return localHadNew;
+  }
+
+  function mergeTelemetryFromCloud(remote) {
+    let localHadNew = false;
+      try {
+        const localTel = plainObject(JSON.parse(localStorage.getItem('daniel_competency_telemetry_v1') || '{}'));
+        const remoteTel = plainObject(remote && remote.telemetry);
+        const mergedArtifacts = Array.from(new Set([
+          ...(localTel.verifiedArtifacts || []),
+          ...(remoteTel.verifiedArtifacts || [])
+        ]));
+        if ((localTel.verifiedArtifacts || []).some(function (a) { return !(remoteTel.verifiedArtifacts || []).includes(a); })) {
+          localHadNew = true;
+        }
+        const mergedLookups = Array.from(new Set([
+          ...(localTel.scriptureLookups || []),
+          ...(remoteTel.scriptureLookups || [])
+        ]));
+        if ((localTel.scriptureLookups || []).some(function (l) { return !(remoteTel.scriptureLookups || []).includes(l); })) {
+          localHadNew = true;
+        }
+        const mergedTel = Object.assign({}, remoteTel, localTel, {
+          verifiedArtifacts: mergedArtifacts,
+          scriptureLookups: mergedLookups,
+          capstone: localTel.capstone || remoteTel.capstone || null
+        });
+        if (localTel.capstone && !remoteTel.capstone) localHadNew = true;
+        localStorage.setItem('daniel_competency_telemetry_v1', JSON.stringify(mergedTel));
+      } catch (e) {}
+    return localHadNew;
+  }
+
+  function mergeCertificateNameFromCloud(remote) {
+    let localHadNew = false;
+      try {
+        const localCertName = localStorage.getItem('daniel_certificate_name') || '';
+        if (localCertName && remote && !remote.certificate_name) {
+          localHadNew = true;
+        } else if (!localCertName && remote && remote.certificate_name) {
+          localStorage.setItem('daniel_certificate_name', remote.certificate_name);
+        }
+      } catch (e) {}
+    return localHadNew;
+  }
+
   function mergeCloudWithLocal(remote) {
     let localHadNew = false;
-
-    // 1. Merge completedSheets in baJourney
-    try {
-      const localJourney = window.BAJourney && typeof window.BAJourney.load === 'function'
-        ? window.BAJourney.load()
-        : JSON.parse(localStorage.getItem('baJourney') || '{}');
-      const localSheets = Array.isArray(localJourney.completedSheets) ? localJourney.completedSheets : [];
-      const remoteJourney = (remote && remote.journey) || {};
-      const remoteSheets = Array.isArray(remoteJourney.completedSheets)
-        ? remoteJourney.completedSheets
-        : (Array.isArray(remote && remote.mastery) ? remote.mastery : []);
-      
-      const unionSheets = Array.from(new Set([...localSheets, ...remoteSheets])).map(Number).filter(n => !Number.isNaN(n) && n >= 0 && n <= 10);
-      
-      if (localSheets.some(function (n) { return !remoteSheets.map(Number).includes(Number(n)); })) {
-        localHadNew = true;
-      }
-
-      const mergedCohort = localJourney.cohort || remote.cohort || remoteJourney.cohort || null;
-      const localSheet = typeof localJourney.sheet === 'number' ? localJourney.sheet : 0;
-      const remoteSheet = typeof remoteJourney.sheet === 'number' ? remoteJourney.sheet : 0;
-      const localPath = typeof localJourney.pathSheet === 'number' ? localJourney.pathSheet : -1;
-      const remotePath = typeof remoteJourney.pathSheet === 'number' ? remoteJourney.pathSheet : -1;
-      const localUnlocked = Array.isArray(localJourney.unlocked) ? localJourney.unlocked : [];
-      const remoteUnlocked = Array.isArray(remoteJourney.unlocked) ? remoteJourney.unlocked : [];
-      const unionUnlocked = Array.from(new Set(localUnlocked.concat(remoteUnlocked).filter(Boolean)));
-      const localPlaceAhead = localSheet > remoteSheet || localPath > remotePath;
-      const localUnlockedNew = localUnlocked.some(function (u) { return remoteUnlocked.indexOf(u) === -1; });
-      if (localPlaceAhead || localUnlockedNew) localHadNew = true;
-
-      if (window.BAJourney && typeof window.BAJourney.save === 'function') {
-        window.BAJourney.save({
-          completedSheets: unionSheets,
-          cohort: mergedCohort,
-          sheet: Math.max(localSheet, remoteSheet),
-          pathSheet: Math.max(localPath, remotePath),
-          unlocked: unionUnlocked
-        });
-      }
-      localStorage.setItem('daniel_historicist_mastery', JSON.stringify(unionSheets));
-    } catch (e) {}
-
-    // 2. Merge Workbench state
-    try {
-      const localWb = plainObject(JSON.parse(localStorage.getItem('daniel_workbench_v1') || '{}'));
-      const remoteWb = plainObject(remote && remote.workbench);
-      const mergedWb = Object.assign({}, remoteWb);
-      Object.keys(localWb).forEach(function (sheetId) {
-        if (!mergedWb[sheetId]) mergedWb[sheetId] = {};
-        Object.keys(plainObject(localWb[sheetId])).forEach(function (taskId) {
-          if (localWb[sheetId][taskId]) {
-            if (!(remoteWb[sheetId] && remoteWb[sheetId][taskId])) {
-              localHadNew = true;
-            }
-            mergedWb[sheetId][taskId] = true;
-          }
-        });
-      });
-      localStorage.setItem('daniel_workbench_v1', JSON.stringify(mergedWb));
-    } catch (e) {}
-
-    // 3. Merge Telemetry
-    try {
-      const localTel = plainObject(JSON.parse(localStorage.getItem('daniel_competency_telemetry_v1') || '{}'));
-      const remoteTel = plainObject(remote && remote.telemetry);
-      const mergedArtifacts = Array.from(new Set([
-        ...(localTel.verifiedArtifacts || []),
-        ...(remoteTel.verifiedArtifacts || [])
-      ]));
-      if ((localTel.verifiedArtifacts || []).some(function (a) { return !(remoteTel.verifiedArtifacts || []).includes(a); })) {
-        localHadNew = true;
-      }
-      const mergedLookups = Array.from(new Set([
-        ...(localTel.scriptureLookups || []),
-        ...(remoteTel.scriptureLookups || [])
-      ]));
-      if ((localTel.scriptureLookups || []).some(function (l) { return !(remoteTel.scriptureLookups || []).includes(l); })) {
-        localHadNew = true;
-      }
-      const mergedTel = Object.assign({}, remoteTel, localTel, {
-        verifiedArtifacts: mergedArtifacts,
-        scriptureLookups: mergedLookups,
-        capstone: localTel.capstone || remoteTel.capstone || null
-      });
-      if (localTel.capstone && !remoteTel.capstone) localHadNew = true;
-      localStorage.setItem('daniel_competency_telemetry_v1', JSON.stringify(mergedTel));
-    } catch (e) {}
-
-    // 4. Merge Certificate Name
-    try {
-      const localCertName = localStorage.getItem('daniel_certificate_name') || '';
-      if (localCertName && remote && !remote.certificate_name) {
-        localHadNew = true;
-      } else if (!localCertName && remote && remote.certificate_name) {
-        localStorage.setItem('daniel_certificate_name', remote.certificate_name);
-      }
-    } catch (e) {}
-
+    if (mergeJourneyFromCloud(remote)) localHadNew = true;
+    if (mergeWorkbenchFromCloud(remote)) localHadNew = true;
+    if (mergeTelemetryFromCloud(remote)) localHadNew = true;
+    if (mergeCertificateNameFromCloud(remote)) localHadNew = true;
     return localHadNew;
   }
 
