@@ -81,7 +81,7 @@ Thirty-four `tools/verify/verify_*.mjs` files were not part of `npm test` before
 | Checkpoints hold the book until answered (commit `788ab13`) | `verify_book_reader` | Count checkpoint plates as plates, pass the checkpoints before walking the book, and a new check (M2.0) that an unanswered checkpoint holds the book |
 | Some scripts only looked for Chrome in Windows folders | `verify_hall_mural`, `verify_horizon`, and the other Chrome-driven scripts | `chromePath()` in `tools/verify/_server.mjs`: `CHROME_PATH`, then an installed Chrome, then Playwright's Chromium |
 
-`run_browser_checks.mjs` starts one site server and passes its address to every script as `BASE` (and as `--base` where a script takes it), so no script depends on its own fixed port. A failing script's last 30 lines are printed. The shared pieces live in `tools/verify/_server.mjs`: `cdpTargets()` (waits up to 30 s for Chrome's debugging port instead of a fixed sleep), `signedInScript()` (test sign-in, consent, onboarding and terms, with `TERMS_VERSION` read from `js/shared/journey.js` so it cannot go stale), `QA_MOCK`, and `chromePath()`.
+`run_browser_checks.mjs` starts one site server and passes its address to every script as `BASE` (and as `--base` where a script takes it), so no script depends on its own fixed port. A failing script's last 30 lines are printed. Each script gets 240 s, except `verify_globe.mjs`, `verify_hall_mural.mjs` and `verify_mobile_viewports.mjs`, which get 480 s (`timeoutMs` in `BROWSER_CHECKS`): on GitHub's runners, which draw WebGL in software, they took more than 240 s on 16 November 2026. The `test-browser` job's own limit is 60 minutes. The shared pieces live in `tools/verify/_server.mjs`: `cdpTargets()` (waits up to 30 s for Chrome's debugging port instead of a fixed sleep), `signedInScript()` (test sign-in, consent, onboarding and terms, with `TERMS_VERSION` read from `js/shared/journey.js` so it cannot go stale), `QA_MOCK`, and `chromePath()`.
 
 **Still quarantined: `verify_book_reader`.** Its structural problems are fixed, and the new checkpoint check passes on every sitting. What still fails are timing and geometry checks: a step read in the middle of a turn (M2.3), the wheel throttle (M3.7), the mode after a resize (M2.7), the step count after a font-size change (M3.10), and a view height 2 px off its rule (M2.8). A separate walk with a short pause between turns reached the last step of sitting 0 on a phone, so the reader itself works. Not checked: each of those assertions one by one.
 
@@ -110,7 +110,7 @@ Four files are not in CI on purpose. `verify_wiring.mjs` lists them in `NOT_IN_C
 On every push and pull request:
 
 1. **test** (Ubuntu, Node 22, Python 3.12): `npm ci`, lint, unit tests, installing Chromium, then `npm test`.
-2. **test-browser** (Ubuntu, Node 22, Python 3.12): `npm ci`, installing Chromium, then `npm run test:browser`. Not checked: a run of this job on GitHub. It is also not a condition of **deploy** yet; make **deploy** wait for it once it has passed there.
+2. **test-browser** (Ubuntu, Node 22, Python 3.12): `npm ci`, installing Chromium, then `npm run test:browser`. It passed on GitHub on 17 November 2026 (run 43970504324), after the timing fixes in the changelog. Since then **deploy** waits for it as well as for **test** (`needs: [test, test-browser]`), so a push to `master` deploys only when the browser checks pass.
 
 On a push to `master` only, after **test** passes:
 
