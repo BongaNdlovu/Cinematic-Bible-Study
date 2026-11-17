@@ -40,9 +40,9 @@ async function settle(page) {
   for (let i = 0; i < 60; i++) {
     const now = await page.evaluate(() => {
       const globe = document.querySelector(".cmap-globe");
-      return window.__raf + "|" + (globe ? globe.dataset.clouds : "");
+      return window.__rafPending.size ? null : window.__raf + "|" + (globe ? globe.dataset.clouds : "");
     });
-    quiet = now === last ? quiet + 1 : 0;
+    quiet = now !== null && now === last ? quiet + 1 : 0;
     if (quiet >= 3) return true;
     last = now;
     await sleep(750);
@@ -72,10 +72,21 @@ mkdirSync("qa/proofs", { recursive: true });
 
 function countFrames() {
   window.__raf = 0;
+  window.__rafPending = new Set();
   const orig = window.requestAnimationFrame.bind(window);
+  const origCancel = window.cancelAnimationFrame.bind(window);
   window.requestAnimationFrame = (cb) => {
     window.__raf++;
-    return orig(cb);
+    const id = orig((t) => {
+      window.__rafPending.delete(id);
+      cb(t);
+    });
+    window.__rafPending.add(id);
+    return id;
+  };
+  window.cancelAnimationFrame = (id) => {
+    window.__rafPending.delete(id);
+    return origCancel(id);
   };
 }
 
