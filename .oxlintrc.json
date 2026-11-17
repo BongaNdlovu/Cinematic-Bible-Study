@@ -34,7 +34,6 @@
         "js/pages/gallery/artifact-registry.js",
         "js/pages/gallery/gallery.js",
         "js/pages/index/shelf.js",
-        "js/pages/map/globe.js",
         "js/pages/map/map.js",
         "js/pages/study/book-reader.js",
         "js/pages/study/study-app.js"

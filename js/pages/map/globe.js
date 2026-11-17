@@ -1,198 +1,8 @@
 import * as THREE from "three";
-
-const R = 1;
-const MIN_DIST = 1.3;
-const MAX_DIST = 4.4;
-const THROUGH_DIST = 1.42;
-const DEG = Math.PI / 180;
-
-export function toVec(lat, lon, r) {
-  const phi = (90 - lat) * DEG;
-  const theta = (lon + 180) * DEG;
-  return new THREE.Vector3(
-    -r * Math.sin(phi) * Math.cos(theta),
-    r * Math.cos(phi),
-    r * Math.sin(phi) * Math.sin(theta)
-  );
-}
-
-function wrapLon(lon) {
-  return ((lon + 540) % 360) - 180;
-}
-
-function clamp(v, a, b) {
-  return Math.max(a, Math.min(b, v));
-}
-
-function ease(t) {
-  return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
-}
-
-function angleBetween(a, b) {
-  const va = toVec(a.lat, a.lon, 1);
-  const vb = toVec(b.lat, b.lon, 1);
-  return Math.acos(clamp(va.dot(vb), -1, 1)) / DEG;
-}
-
-export function webglAvailable() {
-  try {
-    const c = document.createElement("canvas");
-    return !!(window.WebGL2RenderingContext && c.getContext("webgl2"));
-  } catch (e) {
-    return false;
-  }
-}
-
-const ATMOS_VERT = `
-varying vec3 vNormal;
-void main() {
-  vNormal = normalize(normalMatrix * normal);
-  gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-}`;
-
-const ATMOS_FRAG = `
-varying vec3 vNormal;
-void main() {
-  float i = pow(clamp(0.74 - dot(vNormal, vec3(0.0, 0.0, 1.0)), 0.0, 1.0), 3.0);
-  gl_FragColor = vec4(0.62, 0.74, 1.0, 1.0) * i * 1.6;
-}`;
-
-const HAZE_VERT = `
-varying vec3 vNormal;
-varying vec3 vView;
-void main() {
-  vec4 mv = modelViewMatrix * vec4(position, 1.0);
-  vNormal = normalize(normalMatrix * normal);
-  vView = normalize(-mv.xyz);
-  gl_Position = projectionMatrix * mv;
-}`;
-
-const HAZE_FRAG = `
-uniform vec3 sunDir;
-varying vec3 vNormal;
-varying vec3 vView;
-void main() {
-  float rim = pow(1.0 - max(dot(vNormal, vView), 0.0), 2.6);
-  float sun = dot(vNormal, sunDir);
-  float lit = smoothstep(-0.25, 0.7, sun);
-  vec3 tint = mix(vec3(1.0, 0.56, 0.32), vec3(0.45, 0.66, 1.0), smoothstep(-0.05, 0.35, sun));
-  gl_FragColor = vec4(tint * rim * (0.2 + 0.8 * lit) * 0.85, 1.0);
-}`;
-
-const EARTH_SHADE = `
-#include <color_fragment>
-float shade = 0.0;
-#ifdef USE_MAP
-  shade = texture2D(cloudMap, vec2(vMapUv.x + cloudShift, vMapUv.y)).g * cloudFade;
-  diffuseColor.rgb *= 1.0 - 0.3 * shade;
-#endif`;
-
-const EARTH_NIGHT = `
-#ifdef USE_EMISSIVEMAP
-  float dusk = 0.0;
-  #if NUM_DIR_LIGHTS > 0
-    dusk = 1.0 - smoothstep(-0.1, 0.3, dot(nonPerturbedNormal, directionalLights[0].direction));
-  #endif
-  totalEmissiveRadiance *= texture2D(emissiveMap, vEmissiveMapUv).r * dusk * (1.0 - 0.7 * shade);
-#endif`;
-
-const SUN = new THREE.Vector3(-0.75, 0.35, 0.56).normalize();
-const CLOUD_DRIFT = 0.000003;
-const CLOUD_NEAR = 2.0;
-const CLOUD_FULL = 3.2;
-const TILE_URL = "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/";
-const PATCH_COLS = 8;
-const PATCH_ROWS = 6;
-const PATCH_NEAR = 2.5;
-const PATCH_FAR = 2.95;
-const TILE_LANES = 6;
-
-function tileX(lon, z) {
-  return ((lon + 180) / 360) * Math.pow(2, z);
-}
-
-function tileY(lat, z) {
-  const r = clamp(lat, -84, 84) * DEG;
-  return ((1 - Math.log(Math.tan(r) + 1 / Math.cos(r)) / Math.PI) / 2) * Math.pow(2, z);
-}
-
-function tileLat(y, z) {
-  const n = Math.PI - (2 * Math.PI * y) / Math.pow(2, z);
-  return Math.atan(Math.sinh(n)) / DEG;
-}
-
-function tileLon(x, z) {
-  return (x / Math.pow(2, z)) * 360 - 180;
-}
-
-/* Per-tile timeout: a tile that never settles must not stall its lane forever,
-   otherwise the Promise.all below never resolves and the failure backoff
-   (patchFails) can never fire. 12s matches the hard-timeout budget used
-   elsewhere on the site. */
-const TILE_TIMEOUT_MS = 12000;
-
-function loadImage(url, live) {
-  return new Promise((resolve) => {
-    const img = new Image();
-    let timer = 0;
-    const done = (ok) => {
-      if (timer) { clearTimeout(timer); timer = 0; }
-      live.delete(img);
-      resolve(ok ? img : null);
-    };
-    img.crossOrigin = "anonymous";
-    img.decoding = "async";
-    img.addEventListener("load", () => done(true));
-    img.addEventListener("error", () => done(false));
-    live.set(img, done);
-    img.src = url;
-    timer = setTimeout(() => {
-      img.src = ""; // release the in-flight request
-      done(false);
-    }, TILE_TIMEOUT_MS);
-  });
-}
-
-function graticule() {
-  const pos = [];
-  const lift = R * 1.0012;
-  const seg = (a, b) => pos.push(a.x, a.y, a.z, b.x, b.y, b.z);
-  for (let lat = -75; lat <= 75; lat += 15) {
-    for (let lon = -180; lon < 180; lon += 3) seg(toVec(lat, lon, lift), toVec(lat, lon + 3, lift));
-  }
-  for (let lon = -180; lon < 180; lon += 15) {
-    for (let lat = -84; lat < 84; lat += 3) seg(toVec(lat, lon, lift), toVec(lat + 3, lon, lift));
-  }
-  const geo = new THREE.BufferGeometry();
-  geo.setAttribute("position", new THREE.Float32BufferAttribute(pos, 3));
-  const lines = new THREE.LineSegments(geo, new THREE.LineBasicMaterial({ color: 0xd9b75a, transparent: true, opacity: 0.09, depthWrite: false }));
-  lines.renderOrder = 2;
-  return lines;
-}
-
-function subdivide(a, b, c, depth, out) {
-  const ab = a.distanceTo(b);
-  const bc = b.distanceTo(c);
-  const ca = c.distanceTo(a);
-  const longest = Math.max(ab, bc, ca);
-  if (longest <= 2 || depth >= 7) {
-    out.push(a, b, c);
-    return;
-  }
-  if (longest === ab) {
-    const m = a.clone().lerp(b, 0.5);
-    subdivide(a, m, c, depth + 1, out);
-    subdivide(m, b, c, depth + 1, out);
-  } else if (longest === bc) {
-    const m = b.clone().lerp(c, 0.5);
-    subdivide(a, b, m, depth + 1, out);
-    subdivide(a, m, c, depth + 1, out);
-  } else {
-    const m = c.clone().lerp(a, 0.5);
-    subdivide(a, b, m, depth + 1, out);
-    subdivide(m, b, c, depth + 1, out);
-  }
-}
+import { R, MIN_DIST, MAX_DIST, THROUGH_DIST, DEG, toVec, wrapLon, clamp, ease, angleBetween, CLOUD_DRIFT, CLOUD_NEAR, CLOUD_FULL, TILE_URL, PATCH_COLS, PATCH_ROWS, PATCH_NEAR, PATCH_FAR, TILE_LANES, tileX, tileY, loadImage, subdivide } from '/js/pages/map/globe-math.js';
+import { buildGlobeBase, buildGlobeSky } from '/js/pages/map/globe-scene.js';
+import { freeCanvas, patchGeometry } from '/js/pages/map/globe-patch-geometry.js';
+export { toVec, webglAvailable } from '/js/pages/map/globe-math.js';
 
 export function create(container, options) {
   const opts = options || {};
@@ -201,96 +11,11 @@ export function create(container, options) {
   const dpr = window.devicePixelRatio || 1;
   const base = opts.textureBase || "assets/maps/globe/";
 
-  const renderer = new THREE.WebGLRenderer({ antialias: dpr <= 1.5, alpha: true, powerPreference: "high-performance" });
-  renderer.setPixelRatio(Math.min(dpr, phone ? 1.5 : 2));
-  renderer.toneMapping = THREE.ACESFilmicToneMapping;
-  renderer.toneMappingExposure = 1.05;
-  renderer.setClearColor(0x000000, 0);
-  renderer.domElement.className = "cmap-globe-canvas";
-  container.appendChild(renderer.domElement);
-
-  const pinLayer = document.createElement("div");
-  pinLayer.className = "cmap-globe-pins";
-  container.appendChild(pinLayer);
-
-  const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(38, 1, 0.05, 200);
-  scene.add(camera);
-  scene.add(new THREE.AmbientLight(0xdfe6ff, 0.22));
-  const sun = new THREE.DirectionalLight(0xfff0d8, 4.2);
-  sun.position.copy(SUN);
-  camera.add(sun);
-  camera.add(sun.target);
-
-  const segs = phone ? 64 : 128;
-  const earthMat = new THREE.MeshPhongMaterial({
-    color: 0x0c1a26,
-    specular: new THREE.Color(0x5a6f86),
-    shininess: 30
-  });
-  const earth = new THREE.Mesh(new THREE.SphereGeometry(R, segs, segs), earthMat);
-  scene.add(earth);
-
-  const sky = { cloudMap: { value: null }, cloudShift: { value: 0 }, cloudFade: { value: 1 } };
-  earthMat.onBeforeCompile = (shader) => {
-    Object.assign(shader.uniforms, sky);
-    shader.fragmentShader = shader.fragmentShader
-      .replace("#include <common>", "#include <common>\nuniform sampler2D cloudMap;\nuniform float cloudShift;\nuniform float cloudFade;")
-      .replace("#include <color_fragment>", EARTH_SHADE)
-      .replace("#include <emissivemap_fragment>", EARTH_NIGHT);
-  };
-  const cloudMat = new THREE.MeshLambertMaterial({ color: 0xf4f6fb, transparent: true, opacity: 0.9, depthWrite: false });
-  const clouds = new THREE.Mesh(earth.geometry, cloudMat);
-  clouds.scale.setScalar(1.006);
-  clouds.renderOrder = 1;
-  clouds.visible = false;
-  scene.add(clouds);
+  const { renderer, pinLayer, scene, camera, segs, earthMat, earth, sky, cloudMat, clouds } = buildGlobeBase({ container, dpr, phone });
   let drift = 0;
   let lastFrame = 0;
 
-  const sunView = SUN.clone();
-  const haze = new THREE.Mesh(
-    new THREE.SphereGeometry(R * 1.004, segs, segs),
-    new THREE.ShaderMaterial({
-      vertexShader: HAZE_VERT,
-      fragmentShader: HAZE_FRAG,
-      uniforms: { sunDir: { value: sunView } },
-      blending: THREE.AdditiveBlending,
-      transparent: true,
-      depthWrite: false
-    })
-  );
-  haze.renderOrder = 10;
-  scene.add(haze);
-
-  const grid = graticule();
-  scene.add(grid);
-
-  const atmos = new THREE.Mesh(
-    new THREE.SphereGeometry(R * 1.12, 64, 64),
-    new THREE.ShaderMaterial({
-      vertexShader: ATMOS_VERT,
-      fragmentShader: ATMOS_FRAG,
-      side: THREE.BackSide,
-      blending: THREE.AdditiveBlending,
-      transparent: true,
-      depthWrite: false
-    })
-  );
-  scene.add(atmos);
-
-  const stars = new THREE.Group();
-  [[phone ? 700 : 1500, 1.1, 0.55, 0xdcd6c8], [phone ? 90 : 180, 2.2, 0.9, 0xfff1cc]].forEach(([count, size, opacity, color]) => {
-    const pos = new Float32Array(count * 3);
-    for (let i = 0; i < count; i++) {
-      const v = new THREE.Vector3(Math.random() * 2 - 1, Math.random() * 2 - 1, Math.random() * 2 - 1).normalize().multiplyScalar(60 + Math.random() * 30);
-      pos.set([v.x, v.y, v.z], i * 3);
-    }
-    const geo = new THREE.BufferGeometry();
-    geo.setAttribute("position", new THREE.BufferAttribute(pos, 3));
-    stars.add(new THREE.Points(geo, new THREE.PointsMaterial({ color: color, size: size, sizeAttenuation: false, transparent: true, opacity: opacity, depthWrite: false })));
-  });
-  scene.add(stars);
+  const { haze, grid, atmos, stars } = buildGlobeSky({ phone, scene, segs });
 
   let borderObj = null;
   let fillObj = null;
@@ -522,34 +247,6 @@ export function create(container, options) {
     return featherTex;
   }
 
-  function patchGeometry(z, x0, y0) {
-    const sx = 40;
-    const sy = 30;
-    const pos = [];
-    const nor = [];
-    const uv = [];
-    const idx = [];
-    for (let j = 0; j <= sy; j++) {
-      for (let i = 0; i <= sx; i++) {
-        const v = toVec(tileLat(y0 + (PATCH_ROWS * j) / sy, z), tileLon(x0 + (PATCH_COLS * i) / sx, z), 1);
-        nor.push(v.x, v.y, v.z);
-        pos.push(v.x * R * 1.0015, v.y * R * 1.0015, v.z * R * 1.0015);
-        uv.push(i / sx, 1 - j / sy);
-      }
-    }
-    for (let j = 0; j < sy; j++) {
-      for (let i = 0; i < sx; i++) {
-        const a = j * (sx + 1) + i;
-        idx.push(a, a + sx + 1, a + 1, a + 1, a + sx + 1, a + sx + 2);
-      }
-    }
-    const geo = new THREE.BufferGeometry();
-    geo.setAttribute("position", new THREE.Float32BufferAttribute(pos, 3));
-    geo.setAttribute("normal", new THREE.Float32BufferAttribute(nor, 3));
-    geo.setAttribute("uv", new THREE.Float32BufferAttribute(uv, 2));
-    geo.setIndex(idx);
-    return geo;
-  }
 
   function showPatch(key) {
     patches.forEach((p, k) => {
@@ -588,10 +285,6 @@ export function create(container, options) {
     return true;
   }
 
-  function freeCanvas(canvas) {
-    canvas.width = 1;
-    canvas.height = 1;
-  }
 
   async function buildPatch(key, z, x0, y0) {
     const live = new Map();
