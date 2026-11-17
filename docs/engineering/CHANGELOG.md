@@ -14,6 +14,17 @@ Entry template:
 
 ---
 
+## 2026-11-17 — The horizon check waits for the gallery's transition before clicking
+
+**Why:** `verify_horizon.mjs` clicked the next artifact as soon as the plate changed. The gallery ignores a click while its 180 ms change of artifact is still running (`selectAsset._busy`), so the click could be lost and the check then read the old plate. It failed this way once, locally, on 17 November 2026.
+
+**What changed:** before each click the check waits until the stage transition is no longer active, then clicks and waits up to 2 s for the plate to change, trying again up to ten times.
+
+**Handbook updated:** none (test-only).
+
+**Checked here:** `verify_horizon.mjs` passes 3 of 3 runs alone on Windows.
+
+**Status:** on branch `ci/browser-gate`.
 ## 2026-11-17 — Architecture plan, step 6.4: pull-request template
 
 **Why:** it puts the layout rules in front of every change, including changes made by AI agents.
