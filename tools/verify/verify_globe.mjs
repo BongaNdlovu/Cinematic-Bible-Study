@@ -208,7 +208,7 @@ try {
     assert.match(read, /^483 of 2,300 years · The seventieth week/);
     assert.ok(await t.page.evaluate(() => !!document.querySelector(".cmap-lbeacon")), "slider beacon missing");
     await t.page.evaluate(() => document.querySelector(".cmap-scrub input").dispatchEvent(new Event("change", { bubbles: true })));
-    await sleep(2500);
+    await waitFor(t.page, () => new URL(location.href).searchParams.get("year") === "y31", 20000);
     assert.strictEqual(new URL(t.page.url()).searchParams.get("year"), "y31", "slider did not snap to the nearest year");
     await t.page.evaluate(() => {
       const i = document.querySelector(".cmap-scrub input");
@@ -220,15 +220,13 @@ try {
 
     await t.page.fill(".cmap-search input", "Susa");
     await t.page.click(".cmap-search-hits button[data-id='susa']");
-    await sleep(1200);
-    assert.ok(await t.page.evaluate(() => !!document.querySelector(".cmap-dossier .cmap-artifact")), "artifact card missing");
+    assert.ok(await waitFor(t.page, () => !!document.querySelector(".cmap-dossier .cmap-artifact") && document.querySelectorAll(".cmap-dossier .cmap-sat-mark").length === 3, 20000), "artifact card missing");
     assert.strictEqual(await t.page.evaluate(() => document.querySelectorAll(".cmap-dossier .cmap-pois [data-poi]").length), 3);
     assert.strictEqual(await t.page.evaluate(() => document.querySelectorAll(".cmap-dossier .cmap-sat-mark").length), 3, "aerial view should pin the three landmarks");
     assert.ok(await waitFor(t.page, () => Array.from(document.querySelectorAll(".cmap-sat-frame img")).some((i) => i.complete && i.naturalWidth > 0), 15000), "aerial view tiles never loaded");
     pass("place panel shows an aerial view with its landmarks");
     await t.page.click(".cmap-dossier .cmap-pois [data-poi='1']");
-    await sleep(3500);
-    assert.ok(await t.page.evaluate(() => !!document.querySelector(".cmap-footprint")), "site outline missing at close zoom");
+    assert.ok(await waitFor(t.page, () => !!document.querySelector(".cmap-footprint"), 30000), "site outline missing at close zoom");
     await proof(t.page, "qa/proofs/globe_proof_site.png");
     assert.deepStrictEqual(t.errors, []);
     pass("site detail opens and flies in");
