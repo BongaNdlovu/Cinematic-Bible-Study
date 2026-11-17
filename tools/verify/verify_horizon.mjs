@@ -49,6 +49,15 @@ class CDPClient {
     if (res.exceptionDetails) throw new Error(JSON.stringify(res.exceptionDetails));
     return res.result?.value;
   }
+  async waitFor(expression, timeoutMs = 30000) {
+    const end = Date.now() + timeoutMs;
+    for (;;) {
+      const value = await this.eval(expression).catch(() => null);
+      if (value) return value;
+      if (Date.now() > end) throw new Error('timed out waiting for ' + expression);
+      await sleep(250);
+    }
+  }
   async shot(outPath) {
     const res = await this.send('Page.captureScreenshot', { format: 'png' });
     fs.writeFileSync(outPath, Buffer.from(res.data, 'base64'));
@@ -189,20 +198,21 @@ try {
 
   await client.send('Emulation.setDeviceMetricsOverride', { width: 1440, height: 900, deviceScaleFactor: 1, mobile: false });
   await client.send('Page.navigate', { url: `${BASE}/gallery.html?asset=goat&preview=full` });
-  await sleep(3500);
-  const goatPlate = await client.eval(`document.getElementById('nar-plate-img')?.getAttribute('src')`);
-  await client.eval(`document.querySelector('.timeline-item[data-asset="leopard"]')?.click()`);
-  await sleep(1200);
-  const leopardPlate = await client.eval(`document.getElementById('nar-plate-img')?.getAttribute('src')`);
-  await client.eval(`document.querySelector('.timeline-item[data-asset="goat_broken"]')?.click()`);
-  await sleep(1200);
-  const brokenPlate = await client.eval(`document.getElementById('nar-plate-img')?.getAttribute('src')`);
-  const thighsPlate = await client.eval(`(() => {
-    document.querySelector('.timeline-item[data-asset="thighs"]')?.click();
-    return null;
-  })()`);
-  await sleep(900);
-  const thighsSrc = await client.eval(`document.getElementById('nar-plate-img')?.getAttribute('src')`);
+  const plateSrc = `document.getElementById('nar-plate-img')?.getAttribute('src')`;
+  const goatPlate = await client.waitFor(`document.querySelector('.timeline-item[data-asset="leopard"]') && ${plateSrc}`, 60000);
+  const changed = (previous) => `(() => { const s = ${plateSrc}; return s && s !== ${JSON.stringify(previous)} ? s : null; })()`;
+  const pick = async (asset, previous) => {
+    for (let attempt = 0; attempt < 10; attempt++) {
+      await client.waitFor(`!document.getElementById('stage-transition')?.classList.contains('active')`, 10000).catch(() => null);
+      await client.eval(`document.querySelector('.timeline-item[data-asset="${asset}"]')?.click()`);
+      const src = await client.waitFor(changed(previous), 2000).catch(() => null);
+      if (src) return src;
+    }
+    return client.eval(plateSrc);
+  };
+  const leopardPlate = await pick('leopard', goatPlate);
+  const brokenPlate = await pick('goat_broken', leopardPlate);
+  const thighsSrc = await pick('thighs', brokenPlate);
   const greek = { goatPlate, leopardPlate, brokenPlate, thighsSrc };
   console.log('greek plates in UI', greek);
   if ([goatPlate, leopardPlate, brokenPlate, thighsSrc].some((s) => !s)) throw new Error('missing greek plate src ' + JSON.stringify(greek));

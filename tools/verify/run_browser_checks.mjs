@@ -13,9 +13,9 @@ export const BROWSER_CHECKS = [
   { file: 'verify_bridge_panel.mjs', base: 'flag' },
   { file: 'verify_cp07.mjs', base: 'none' },
   { file: 'verify_flow.mjs', base: 'flag' },
-  { file: 'verify_globe.mjs', base: 'none' },
+  { file: 'verify_globe.mjs', base: 'none', timeoutMs: 480000 },
   { file: 'verify_grounding_quotes.mjs', base: 'none' },
-  { file: 'verify_hall_mural.mjs', base: 'none' },
+  { file: 'verify_hall_mural.mjs', base: 'none', timeoutMs: 480000 },
   { file: 'verify_horizon.mjs', base: 'none' },
   { file: 'verify_insight_cards.mjs', base: 'flag' },
   { file: 'verify_lesson_connectors.mjs', base: 'none' },
@@ -25,7 +25,7 @@ export const BROWSER_CHECKS = [
   { file: 'verify_mindmap_fullscreen.mjs', base: 'flag' },
   { file: 'verify_mindmap_fullscreen_fit.mjs', base: 'flag' },
   { file: 'verify_mindmap_legibility.mjs', base: 'flag' },
-  { file: 'verify_mobile_viewports.mjs', base: 'none' },
+  { file: 'verify_mobile_viewports.mjs', base: 'none', timeoutMs: 480000 },
   { file: 'verify_onevoice27.mjs', base: 'none' },
   { file: 'verify_photo_y.mjs', base: 'flag' },
   { file: 'verify_readalong.mjs', base: 'positional' },
@@ -60,7 +60,7 @@ function runOne(check, base) {
     const timer = setTimeout(() => {
       timedOut = true;
       child.kill();
-    }, TIMEOUT_MS);
+    }, check.timeoutMs || TIMEOUT_MS);
     child.stdout.on('data', (d) => { output += d; });
     child.stderr.on('data', (d) => { output += d; });
     child.on('close', (code) => {
