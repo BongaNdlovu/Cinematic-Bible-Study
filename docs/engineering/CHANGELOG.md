@@ -14,6 +14,18 @@ Entry template:
 
 ---
 
+## 2026-11-17 — Architecture plan, step 5.5: one word, "sitting"
+
+**Why:** five words named one lesson, so a search for one missed the others.
+
+**What changed:** `docs/engineering/README.md` has a **Words** table. It names *sitting* as the word for new names, code and docs, records the counts of the other words, and lists what must never be renamed (storage keys, the `?sheet=` URL parameter, database names, fields in `js/content/sheets-data.js`), because saved progress and old links depend on them. No code was renamed in this step: renaming working code only for the word would risk those names for no reader-visible gain.
+
+**Handbook updated:** README (Words).
+
+**Checked here:** the counts in the table come from `git grep -ciw` on 17 November 2026. No code changed, so no test was run for this entry.
+
+**Status:** on branch `arch/phase-5-layout`, not deployed.
+
 ## 2026-11-17 — Deploy waits for the browser checks
 
 **Why:** the user decided that **deploy** should wait for **test-browser** once it passed on GitHub. It did, on run 43970504324 (both `test` and `test-browser` green).
