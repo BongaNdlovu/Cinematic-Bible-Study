@@ -14,6 +14,26 @@ Entry template:
 
 ---
 
+## 2026-11-17 — `mindmap.js` split under 800 lines
+
+**Why:** `js/pages/study/mindmap.js` held 1,254 lines, on the size-exception list.
+
+**How a factory is split:** `create(host, spec, opts)` makes one mind map, and every mind map on the page gets its own copy of everything inside it. So its inner functions cannot move to the top of a file: they would then share one copy of the state across every mind map. Instead, a group of them moves, unchanged, into a `make(deps)` function in a new file. `create` calls it with the values the group uses and gets the group's functions back. A script checks the conditions before anything moves: the group assigns nothing outside itself; it reads no variable that is reassigned later (a value passed in `deps` would go stale); nothing in `create` uses the group before its dependencies exist.
+
+**What changed:**
+
+- `js/pages/study/mindmap-render.js` (new, `window.MindMapRender`, 694 lines): the HTML builders, `build`, the layouts, `fit`, the scenes, the guided tour, the animation loop and the light pulses (22 functions), returned by `make()`. Also the file-level constants they share with `mindmap.js` (`NS`, `Y`, `ARROW`, `ACCENTS`, `esc`, `svgEl` and so on), which never change and are handed back. `mindmap.js` is now 574 lines: `create`, its state, the input handlers, full screen, observers and `destroy`.
+- `create` calls `window.MindMapRender.make({ … })` with 19 values (the instance's state objects, its `host` and `spec`, and five of its own functions) and gets 10 functions back.
+- `verify_moved_functions.mjs`: the 22 moved functions, the 13 moved constants and the 29 functions left in `mindmap.js` all have the same syntax trees as before.
+- `mindmap.js` still loads on demand; `mindmap-render.js` loads with the study page through its entry, next to `mindmap-layout.js`.
+- `.oxlintrc.json`: `mindmap.js` left the file-size list (9 left). `mindmap-render.js` joined the function-size list: `make()` holds the same code that already made `create` too long.
+
+**Handbook updated:** 03 (`js/pages/study/`, how to split a factory), 07 (lint).
+
+**Checked here:** lint exits 0, `npm run test:unit` passes 188 of 188, every `npm test` script passes, and `npm run test:browser` passes 30 of 30 (including the four mind-map checks: layout, legibility, full screen and full-screen fit).
+
+**Status:** on branch `split/mindmap`, not deployed.
+
 ## 2026-11-17 — `dashboard.js` split: the data layer moves out
 
 **Why:** `js/pages/dashboard/dashboard.js` held 1,092 lines, on the size-exception list.

@@ -34,6 +34,7 @@ import '/js/content/sheet-glossary.js';
 import '/js/pages/study/book-reader-helpers.js';
 import '/js/pages/study/book-reader.js';
 import '/js/pages/study/mindmap-layout.js';
+import '/js/pages/study/mindmap-render.js';
 import '/js/pages/study/certificate-pdf.js';
 import '/js/pages/study/study-app.js';
 import '/js/pages/study/lesson-player.js';
