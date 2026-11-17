@@ -11,4 +11,5 @@ import '/js/core/terms.js';
 import '/js/features/analytics.js';
 import '/js/pages/dashboard/sid-report.js';
 import '/js/pages/dashboard/dashboard-format.js';
+import '/js/pages/dashboard/dashboard-data.js';
 import '/js/pages/dashboard/dashboard.js';

@@ -27,6 +27,66 @@ Entry template:
 **Checked here:** `verify_globe.mjs` passed 3 of 3 runs alone on Windows with the first change, and GitHub runs 44079693040 and 44079681549 passed both jobs. With all three changes it passes 3 of 3 runs alone on Windows. On GitHub, 9 of the next 10 runs passed; the tenth (44087163845) stopped `verify_globe.mjs` at its 480 s limit, so that limit is now 720 s. A later push run (44092423642) failed "zooming the map out returns to the globe": the check stopped clicking zoom-out after 16 tries (about 7 s), before the map had handed back to the globe. It now keeps clicking for up to 60 tries (extra clicks at the smallest zoom do nothing), and the zoom-in hand-over just before it waits up to 20 s instead of a fixed 0.8 s.
 
 **Status:** on branch `fix/globe-settle`, then merged into the stacked split branches.
+## 2026-11-17 — `dashboard.js` split: the data layer moves out
+
+**Why:** `js/pages/dashboard/dashboard.js` held 1,092 lines, on the size-exception list.
+
+**What changed:**
+
+- `js/pages/dashboard/dashboard-data.js` (new, `window.DashboardData`, 611 lines): the four pieces of state the figures depend on (`cache`, `days`, `hideMine`, `countFrom`) and the 60 declarations that read only them, constants or each other: the data accessors, the row builders (funnel, quiz, time and depth, learners, graduates), the HTML builders, CSV export and the loading helpers. `dashboard.js` is now 500 lines: loading, rendering, the filters and the moderator API.
+- **The one code change:** a classic script can only hand names out once, so the four moved variables are reached through getters and setters (`getCache`/`setCache` and so on). 13 references in `dashboard.js` changed: 9 assignments (`cache = …` to `setCache(…)`) and 4 reads (`cache.graduates` to `getCache().graduates`). Everything else moved unchanged: `verify_moved_functions.mjs` shows all 60 declarations have the same syntax trees.
+- The page entry imports `dashboard-data.js` just before `dashboard.js`. `verify_insights.mjs` loads it the same way, and its three source-text checks read both files (one now looks for `getCache().participation`).
+- `.oxlintrc.json`: `dashboard.js` left the file-size list (10 left).
+
+**Handbook updated:** 03 (`js/pages/dashboard/`), 07 (lint).
+
+**Checked here:** lint exits 0, `npm run test:unit` passes 188 of 188, every `npm test` script passes (including `verify_insights.mjs`, which runs the dashboard's row builders on sample data). `npm run test:browser` passed 30 of 30 on the commit after the dashboard split, which includes this change. (A run on the workbench commit alone also passed 30 of 30, but the dashboard files were being edited during it.)
+
+**Status:** on branch `arch/split-large`, not deployed.
+
+## 2026-11-17 — `workbench.js` split in three, under 800 lines
+
+**Why:** `js/pages/study/workbench.js` held 1,092 lines, on the size-exception list.
+
+**What changed:**
+
+| File | Lines | Holds |
+|---|---|---|
+| `js/pages/study/workbench-store.js` (new, `window.WorkbenchStore`) | 176 | The two storage keys, `SITTING_TASKS`, and loading, saving and checking task and capstone state |
+| `js/pages/study/workbench-sittings.js` (new, `window.WorkbenchSittings`) | 535 | The three sitting-specific workbenches (`renderSheet0Workbench`, `renderSheet1Workbench`, `renderSheet2Workbench`) |
+| `js/pages/study/workbench.js` | 407 | The generic workbench, the capstone, the dossier, and the `window.StudyWorkbench` API |
+
+- A script listed every declaration in the closure that never assigns a variable another part changes; all 15 qualified. `verify_moved_functions.mjs` shows all 15 have the same syntax trees after the split. The study entry imports the store and the sittings file just before `workbench.js`; `verify_workbench.mjs` loads them the same way.
+- Tests that read `workbench.js`'s text for lesson wording or analytics calls (`extract_claim_units.mjs`, `verify_insights.mjs`) now read all three files.
+- `.oxlintrc.json`: `workbench.js` left the file-size list (11 left). `workbench-sittings.js` joined the function-size list, because the three long functions it now holds were already on it under `workbench.js`.
+
+**Handbook updated:** 03 (`js/pages/study/`), 07 (lint).
+
+**Checked here:** lint exits 0, `npm run test:unit` passes 188 of 188, every `npm test` script passes. `npm run test:browser` passed 30 of 30 on the commit after the dashboard split, which includes this change. (A run on the workbench commit alone also passed 30 of 30, but the dashboard files were being edited during it.)
+
+**Status:** on branch `arch/split-large`, not deployed.
+
+## 2026-11-17 — Complexity ceiling 50 → 44
+
+**Why:** the map's `mount` and the gallery's `selectAsset` (both 49) held the ceiling at 50, and the map's `start` (46) was next.
+
+**What changed:** three blocks moved, unchanged, into their own functions, each called from the same place under the same condition:
+
+| From | Block | New function |
+|---|---|---|
+| `mount` (`js/pages/map/map.js`) | The cinematic page header and its back link (`if (cinematic) { … }`) | `cinematicChrome()`, which returns the header; `mount` now reads `if (cinematic) chrome = cinematicChrome();` |
+| `selectAsset` (`js/pages/gallery/gallery.js`) | Turning off auto-orbit and moving the camera to the artifact's preset view | `flyToPreset(data, opts)` |
+| `start` (`js/pages/map/map.js`) | The failure message and "Try again" button when the map geography does not load | `showLoadFailure(err)`; the `return` that followed stays in `start` |
+
+A check over the syntax trees confirms each new function holds the old statements unchanged. The transition block in `selectAsset` and the sign-in check in `start` were left in place, because they `return` from their function.
+
+`.oxlintrc.json`: `complexity` is 44. At 42 lint would fail on `selectAsset` (43) and two inner functions of `js/pages/index/shelf.js` (43 and 44).
+
+**Handbook updated:** 07 (lint).
+
+**Checked here:** lint exits 0 at 44, `npm run test:unit` passes 188 of 188, every `npm test` script passes, and `npm run test:browser` passes 30 of 30.
+
+**Status:** on branch `arch/split-large`, not deployed.
 
 ## 2026-11-17 — Two files under 800 lines, and out of the size exceptions
 

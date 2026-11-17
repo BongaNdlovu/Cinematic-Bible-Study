@@ -1064,6 +1064,32 @@ import * as THREE from 'three';
       if (pill) pill.textContent = data.pill;
     }
 
+    function flyToPreset(data, opts) {
+      autoSpin = false;
+      const spinBtn = document.getElementById('btn-spin');
+      if (spinBtn) {
+        spinBtn.classList.remove('active');
+        spinBtn.textContent = 'Auto Orbit: OFF';
+      }
+      const b360 = document.getElementById('btn-museum-360');
+      if (b360) b360.classList.remove('active');
+      const isPortrait = isPortraitStage() || window.innerWidth <= 768;
+      const targetCam = isPortrait
+        ? new THREE.Vector3(0, data.camPos[1], Math.max(data.camPos[2] * 1.12, 6.2))
+        : new THREE.Vector3(...data.camPos);
+      const targetLook = isPortrait
+        ? new THREE.Vector3(0, data.lookAt[1], data.lookAt[2])
+        : new THREE.Vector3(...data.lookAt);
+      if (opts.instant) {
+        camera.position.copy(targetCam);
+        controls.target.copy(targetLook);
+        controls.update();
+        cameraTween = null;
+      } else {
+        tweenCamera(targetCam, targetLook, 1100);
+      }
+    }
+
     export function selectAsset(key, opts = {}) {
       if (tourRunning && !opts.fromTour) stopArtifactTour(true);
       if (key === 'altar') key = 'assembled';
@@ -1182,31 +1208,7 @@ import * as THREE from 'three';
         const b360Plaque = document.getElementById('btn-museum-360');
         if (b360Plaque) b360Plaque.classList.remove('active');
       }
-      if (data.camPos && data.lookAt && !opts.skipCamera && !data.autoFrame && !keepAngle) {
-        autoSpin = false;
-        const spinBtn = document.getElementById('btn-spin');
-        if (spinBtn) {
-          spinBtn.classList.remove('active');
-          spinBtn.textContent = 'Auto Orbit: OFF';
-        }
-        const b360 = document.getElementById('btn-museum-360');
-        if (b360) b360.classList.remove('active');
-        const isPortrait = isPortraitStage() || window.innerWidth <= 768;
-        const targetCam = isPortrait
-          ? new THREE.Vector3(0, data.camPos[1], Math.max(data.camPos[2] * 1.12, 6.2))
-          : new THREE.Vector3(...data.camPos);
-        const targetLook = isPortrait
-          ? new THREE.Vector3(0, data.lookAt[1], data.lookAt[2])
-          : new THREE.Vector3(...data.lookAt);
-        if (opts.instant) {
-          camera.position.copy(targetCam);
-          controls.target.copy(targetLook);
-          controls.update();
-          cameraTween = null;
-        } else {
-          tweenCamera(targetCam, targetLook, 1100);
-        }
-      }
+      if (data.camPos && data.lookAt && !opts.skipCamera && !data.autoFrame && !keepAngle) flyToPreset(data, opts);
 
       const stillStage = document.getElementById('still-stage');
       const stillImg = document.getElementById('still-stage-img');
