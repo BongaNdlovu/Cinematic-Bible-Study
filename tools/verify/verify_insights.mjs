@@ -99,7 +99,7 @@ assert(!termsJs.includes('This exhibit is closed'), 'terms.js must not say the e
 ['index.html', 'study.html', 'gallery.html', 'map.html', 'insights.html', '404.html'].forEach((p) => {
   const c = fs.readFileSync(path.join(ROOT, p), 'utf8');
   const navSrc = p === 'map.html'
-    ? fs.readFileSync(path.join(ROOT, 'js/pages/map/map.js'), 'utf8')
+    ? ['map.js', 'map-render.js', 'map-dom.js', 'map-header.js'].map((f) => fs.readFileSync(path.join(ROOT, 'js/pages/map', f), 'utf8')).join(String.fromCharCode(10))
     : c.includes('data-site-nav')
       ? fs.readFileSync(path.join(ROOT, 'js/core/cinema.js'), 'utf8')
       : c;
@@ -136,7 +136,7 @@ assert(!authCfg.includes('moderatorEmails'), 'auth-config.js must not ship a mod
 assert(!/@gmail\.com/i.test(authCfg), 'auth-config.js must not include a Gmail address');
 assert(authJs.includes('is_review_moderator'), 'auth.js must ask the server who is a moderator');
 assert(!authJs.includes('moderatorEmails'), 'auth.js must not compare against a public email list');
-const mapJs = fs.readFileSync(path.join(ROOT, 'js/pages/map/map.js'), 'utf8');
+const mapJs = ['map.js', 'map-render.js', 'map-dom.js', 'map-header.js'].map((f) => fs.readFileSync(path.join(ROOT, 'js/pages/map', f), 'utf8')).join(String.fromCharCode(10));
 assert(!mapJs.includes('Paste your Google Maps API key'), 'map.js must not ask visitors to paste a Maps API key');
 assert(!mapJs.includes("data-base='google'"), 'map.js must not show a Google basemap button');
 assert(mapJs.includes("data-base='satellite'"), 'map.js must keep Satellite');

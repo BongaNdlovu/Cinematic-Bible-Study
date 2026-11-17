@@ -14,4 +14,7 @@ import '/js/features/ui-click-sound.js';
 import '/js/content/sheet-map.js';
 import '/js/content/map-data.js';
 import '/js/pages/map/map-math.js';
+import '/js/pages/map/map-render.js';
+import '/js/pages/map/map-dom.js';
+import '/js/pages/map/map-header.js';
 import '/js/pages/map/map.js';

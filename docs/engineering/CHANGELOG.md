@@ -14,6 +14,31 @@ Entry template:
 
 ---
 
+## 2026-11-17 — `map.js` split under 800 lines
+
+**Why:** `js/pages/map/map.js` held 1,738 lines, on the size-exception list. Almost all of it was `mount`, which builds one map per call.
+
+**What changed:**
+
+| File | Lines | Holds |
+|---|---|---|
+| `js/pages/map/map-render.js` (new, `window.MapRender`) | 729 | 43 of `mount`'s functions (overlays, routes, markers, the place panel, satellite views, chapters, the year scrubber, layer and basemap switching), returned by `make(deps)`; and the file-level constants and helpers they share with `map.js` (`REDUCE`, `BASE_STORE`, `SAT_TILE`, `SYMBOLS`, `el`, `epochById`, `epochFocus`, `iconSrc`) |
+| `js/pages/map/map-dom.js` (new, `window.MapDom`) | 257 | The help text, `loadJson`, `parseYearParam`, `savedBase`, and three runs of `mount`'s set-up statements: `buildMapDom` (stage, panels, timeline, scrubber, basemap buttons), `buildMapChrome` (attaching them to the page, zoom and help controls) and `wireMapControls` (keyboard, help and resize wiring) |
+| `js/pages/map/map-header.js` (new, `window.MapHeader`) | 44 | `cinematicChrome`, the page header with its back link |
+| `js/pages/map/map.js` | 779 | `mount`'s state, the globe and Leaflet hand-over, playback, `start` and the rest of the functions that change shared variables |
+
+- **What could move, and why the rest could not.** A function moved only if it assigns nothing outside itself and reads no variable that is reassigned (such as `globe`, `scrubbing`, `playRun`); 25 functions fail that and stay. A run of set-up statements moved only if it declares no function, has no `return`, assigns nothing outside itself, and no function it creates reads a variable that is reassigned later; one candidate run failed that (its handlers read `globe`) and stayed. The check for that last case was added to the tool during this step, and the globe blocks in the previous step were re-checked with it and pass.
+- **Proof.** `verify_moved_functions.mjs`: the 43 moved functions, the 8 moved constants and helpers, the 4 file-level helpers, `cinematicChrome` and the 35 functions left in `map.js` have the same syntax trees as before. Each of the three blocks matches the original statements exactly (37, 22 and 4 statements).
+- **Fixes on the way:** `cinematicChrome` declares its own local `chrome`, which the first version of the check took for `mount`'s `chrome`; the check now ignores names a function declares in its own body.
+- The map entry imports `map-render.js`, `map-dom.js` and `map-header.js` (in that order) just before `map.js`. `verify_map_help.mjs` and `verify_insights.mjs` read all four files for the map's wording.
+- `.oxlintrc.json`: `map.js` left the file-size list (7 left); `map-render.js` joined the function-size list, because `make()` holds code that already made `mount` too long.
+
+**Handbook updated:** 03 (`js/pages/map/`), 07 (lint).
+
+**Checked here:** lint exits 0, `npm run test:unit` passes 188 of 188, every `npm test` script passes, and `npm run test:browser` passes 30 of 30 (including `verify_map.mjs`, `verify_globe.mjs`, `verify_map_help` through `npm test`, and the mobile layouts).
+
+**Status:** on branch `split/map`, not deployed.
+
 ## 2026-11-17 — `globe.js` split under 800 lines
 
 **Why:** `js/pages/map/globe.js` held 1,036 lines, on the size-exception list.
