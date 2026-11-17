@@ -200,9 +200,15 @@ try {
   await client.send('Page.navigate', { url: `${BASE}/gallery.html?asset=goat&preview=full` });
   const plateSrc = `document.getElementById('nar-plate-img')?.getAttribute('src')`;
   const goatPlate = await client.waitFor(`document.querySelector('.timeline-item[data-asset="leopard"]') && ${plateSrc}`, 60000);
+  const changed = (previous) => `(() => { const s = ${plateSrc}; return s && s !== ${JSON.stringify(previous)} ? s : null; })()`;
   const pick = async (asset, previous) => {
-    await client.eval(`document.querySelector('.timeline-item[data-asset="${asset}"]')?.click()`);
-    return client.waitFor(`(() => { const s = ${plateSrc}; return s && s !== ${JSON.stringify(previous)} ? s : null; })()`, 20000).catch(() => client.eval(plateSrc));
+    for (let attempt = 0; attempt < 10; attempt++) {
+      await client.waitFor(`!document.getElementById('stage-transition')?.classList.contains('active')`, 10000).catch(() => null);
+      await client.eval(`document.querySelector('.timeline-item[data-asset="${asset}"]')?.click()`);
+      const src = await client.waitFor(changed(previous), 2000).catch(() => null);
+      if (src) return src;
+    }
+    return client.eval(plateSrc);
   };
   const leopardPlate = await pick('leopard', goatPlate);
   const brokenPlate = await pick('goat_broken', leopardPlate);
