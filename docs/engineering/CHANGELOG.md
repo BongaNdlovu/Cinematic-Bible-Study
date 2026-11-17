@@ -20,9 +20,11 @@ Entry template:
 
 **What changed:** `tools/verify/verify_globe.mjs` now tracks each requested frame until it runs or is cancelled (`window.__rafPending`), and `settle()` counts the globe as settled only when no frame is pending and the frame count and cloud offset have held for three readings. The globe code is unchanged: this was a gap in the test. If the globe really kept drawing while idle, a frame would always be pending, `settle()` would never report quiet, and the idle checks would still fail.
 
+**Also:** a second flaky step in the same check, "site outline missing at close zoom" (run 44080146982, pull-request run of `arch/split-large`; the push run of the same commit passed), looked for the outline after a fixed 3.5 s sleep following the fly-in. It now waits up to 30 s for the outline to appear. Two other fixed sleeps followed by assertions in the same file (2.5 s before the year snap, 1.2 s before the place card) now wait for their condition too.
+
 **Handbook updated:** none (test only).
 
-**Checked here:** `verify_globe.mjs` passes 3 of 3 runs alone on Windows. The run on GitHub is the real test.
+**Checked here:** `verify_globe.mjs` passed 3 of 3 runs alone on Windows with the first change, and GitHub runs 44079693040 and 44079681549 passed both jobs. With all three changes it passes 3 of 3 runs alone on Windows.
 
 **Status:** on branch `fix/globe-settle`, then merged into the stacked split branches.
 ## 2026-11-17 — `dashboard.js` split: the data layer moves out
