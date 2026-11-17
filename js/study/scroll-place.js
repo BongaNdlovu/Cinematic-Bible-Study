@@ -1,4 +1,6 @@
-    function readScrollPlace() {
+import { SCROLL_KEY } from '/js/study/study-app.js';
+
+    export function readScrollPlace() {
       try {
         const raw = JSON.parse(localStorage.getItem(SCROLL_KEY) || 'null');
         const sheet = raw && Number(raw.sheet);
@@ -10,7 +12,7 @@
       }
     }
 
-    function writeScrollPlace(sheet, top) {
+    export function writeScrollPlace(sheet, top) {
       try {
         localStorage.setItem(SCROLL_KEY, JSON.stringify({
           sheet: sheet,
@@ -19,7 +21,7 @@
       } catch (e) {}
     }
 
-    function rememberSheetUrl(index) {
+    export function rememberSheetUrl(index) {
       try {
         const params = new URLSearchParams(location.search);
         params.delete('id');

@@ -28,6 +28,10 @@ This chapter covers what keeps the site fast: caching, how files load, how the 3
 
 It also updates the CSP hashes of any inline script whose text changed. `tools/verify/verify_hash_release.mjs` tests it.
 
+A file is hashed only after the files it references, so its name changes when they do. Files that reference each other in a cycle (the gallery's ES modules import `app.js` and `app.js` imports them) cannot be ordered, so they are hashed together, and since 16 November 2026 each one's hash also covers the text of every file in that batch. Without that, a change to one module would leave the others' names unchanged while their contents (the new import names) changed, and a browser holding the old copy under the one-year `immutable` cache would ask for files that no longer exist. `verify_hash_release.mjs` checks that a change anywhere in a cycle renames the whole cycle.
+
+ES module imports between site files use root paths (`'/js/gallery/tour.js'`): the tool rewrites references by their full path, so it would miss `./tour.js`.
+
 ### CSS minification at deploy
 
 `tools/minify-release-css.mjs` (PostCSS) minifies every stylesheet in the bundle, including those in subfolders such as `css/study/` (since 16 November 2026), which also removes CSS comments. `tools/verify/verify_css_minify.mjs` tests it, including that the study parts shrink by at least a quarter in total.

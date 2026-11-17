@@ -1,10 +1,12 @@
+import { escapeStudy } from '/js/study/references.js';
+
     /* Each row is two cells: the row label, and one `td` holding the row's data
        cells as a grid on the shared column template, so heads line up at any
        wrap.
        The grid must be a cell: the HTML parser moves any non-table child of
        `tr` out of the table. thead/th[scope] semantics and the `data-label`
        contract stay. */
-    function bodyTable(spec, rows) {
+    export function bodyTable(spec, rows) {
       const head = spec.head || [];
       const cols = Math.max(1, head.length - 1);
       const body = rows;

@@ -1,24 +1,27 @@
+import { diagramCite } from '/js/study/diagrams/cite.js';
+import { escapeStudy } from '/js/study/references.js';
+
     /* Timeline: milestones are dates the spec already prints (an axis end, or a
        year in a track's `role` or a segment's `label`).
        Years are astronomical (457 B.C. is -456). Milestones sit on an even
        beat, because A.D. 27, 31 and 34 would share one dot on a 2,300-year
        axis; `.tlx-scale` shows the true proportions. No copy is authored here. */
-    const TLX_W = 1600;
+    export const TLX_W = 1600;
 
-    const TLX_EDGE = 150;
+    export const TLX_EDGE = 150;
 
-    const TLX_LEVEL = 48;
+    export const TLX_LEVEL = 48;
 
-    const TLX_BRACKET_Y = 66;
+    export const TLX_BRACKET_Y = 66;
 
-    const TLX_PALETTE = ['#7db3e8', '#f2c75a', '#e8695d', '#b79af0', '#5fc4b0'];
+    export const TLX_PALETTE = ['#7db3e8', '#f2c75a', '#e8695d', '#b79af0', '#5fc4b0'];
 
-    const TLX_FINAL = '#fff1c9';
+    export const TLX_FINAL = '#fff1c9';
 
-    const TLX_GILT = '#dcb257';
+    export const TLX_GILT = '#dcb257';
 
     /* The reference's own icon set, on its 24-unit grid. */
-    const TLX_ICONS = {
+    export const TLX_ICONS = {
       scroll: 'M6 3h9l4 4v14H6ZM15 3v4h4M9 12h7M9 16h7',
       drop: 'M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11Z',
       cross: 'M12 3v18M6.5 9h11',
@@ -29,7 +32,7 @@
     };
 
     /* Which badge a milestone wears is read off the milestone's own words. */
-    const TLX_ICON_RULES = [
+    export const TLX_ICON_RULES = [
       [/decree|restore|rebuild|command|edict/i, 'scroll'],
       [/baptis|anoint|messiah|spirit/i, 'drop'],
       [/cross|cut off|midst|death/i, 'cross'],
@@ -39,18 +42,18 @@
       [/prophec|unseal|vision|seal/i, 'scroll']
     ];
 
-    const TLX_YEAR_RX = /(\d[\d,]*)\s*(B\.C\.|A\.D\.)|(B\.C\.|A\.D\.)\s*(\d[\d,]*)/g;
+    export const TLX_YEAR_RX = /(\d[\d,]*)\s*(B\.C\.|A\.D\.)|(B\.C\.|A\.D\.)\s*(\d[\d,]*)/g;
 
-    const TLX_BREAK_RX = /\s*:\s+|\s*(?:→|—|–)\s*|\s*;\s*/;
+    export const TLX_BREAK_RX = /\s*:\s+|\s*(?:→|—|–)\s*|\s*;\s*/;
 
-    const TLX_JOIN_RX = /^(?:to|and|then|until|til)\b[\s:,]*/i;
+    export const TLX_JOIN_RX = /^(?:to|and|then|until|til)\b[\s:,]*/i;
 
-    const TLX_TAIL_RX = /\s+(?:to|and|then|until|til)$/i;
+    export const TLX_TAIL_RX = /\s+(?:to|and|then|until|til)$/i;
 
     /* Every dated token in a string, in order. `year` is the astronomical year —
        457 B.C. is -456 — which is what makes a span between two dates
        subtractable, so a milestone needs no position table. */
-    function tlxYears(text) {
+    export function tlxYears(text) {
       const src = String(text == null ? '' : text);
       const out = [];
       TLX_YEAR_RX.lastIndex = 0;
@@ -69,15 +72,15 @@
     /* A label's clauses. Only a separator that introduces one splits, so
        "2,300 Years (Daniel 8:14)" survives whole while "483 Years: 457 B.C. …"
        reads as "483 Years". */
-    function tlxClauses(label) {
+    export function tlxClauses(label) {
       return String(label == null ? '' : label).split(TLX_BREAK_RX).map((s) => s.trim()).filter(Boolean);
     }
 
-    function tlxGroup(n) {
+    export function tlxGroup(n) {
       return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
     }
 
-    function tlxClip(text, max) {
+    export function tlxClip(text, max) {
       const s = String(text == null ? '' : text).trim();
       if (s.length <= max) return s;
       const cut = s.slice(0, max);
@@ -89,9 +92,9 @@
        characters, so it reads as two rows instead of running under its
        neighbours. The panel below prints the segment in full, so clipping the
        last row loses nothing. */
-    const TLX_DANGLE_RX = /\s+(?:&|and|or|to|of|the|in|for|a|an)$/i;
+    export const TLX_DANGLE_RX = /\s+(?:&|and|or|to|of|the|in|for|a|an)$/i;
 
-    function tlxWrap(text, perLine, lines) {
+    export function tlxWrap(text, perLine, lines) {
       const words = String(text == null ? '' : text).split(/\s+/).filter(Boolean);
       const rows = [];
       let row = '';
@@ -121,7 +124,7 @@
        to the next date or the next clause, with a joining "to" trimmed off either
        end — "457 B.C. Decree to Restore City to A.D. 27" reads "Decree to
        Restore City". */
-    function tlxPhrase(label, year) {
+    export function tlxPhrase(label, year) {
       const src = String(label == null ? '' : label);
       const tokens = tlxYears(src);
       const hit = tokens.find((t) => t.year === year);
@@ -134,7 +137,7 @@
     /* The badge is read off the milestone's own name first, and only then off the
        segments it sits between: a label that says "457 B.C. Decree" must not put
        a scroll on the baptism three beats later. */
-    function tlxIcon(title, labels) {
+    export function tlxIcon(title, labels) {
       const first = String(title == null ? '' : title);
       for (const rule of TLX_ICON_RULES) if (rule[0].test(first)) return rule[1];
       const rest = String(labels == null ? '' : labels);
@@ -145,7 +148,7 @@
     /* The spec read into the shape an axis needs: the milestones in date order
        with the slot each is drawn in, the segments with the slots they span, and
        the intervals between the milestones. */
-    function tlxModel(spec, steps) {
+    export function tlxModel(spec, steps) {
       const axis = (Array.isArray(spec.axis) ? spec.axis : []).map((a) => String(a == null ? '' : a));
       const ends = axis.map((a) => tlxYears(a)[0] || null);
       if (!ends[0] || !ends[1]) return null;
@@ -355,7 +358,7 @@
       };
     }
 
-    function bodyTimeline(spec, steps, canResolve) {
+    export function bodyTimeline(spec, steps, canResolve) {
       const model = tlxModel(spec, steps);
       /* A timeline with no dated axis cannot be drawn on one. The tracks and their
          segments are still listed rather than dropped. */
@@ -500,7 +503,7 @@
        hidden slide and moved into the live region.
        Escape is not handled here: the full-screen shell takes it first, in the
        capture phase. */
-    function wireTimeline(figure) {
+    export function wireTimeline(figure) {
       const root = figure.querySelector('[data-tlx]');
       if (!root) return;
       const panel = root.querySelector('[data-tlx-panel]');

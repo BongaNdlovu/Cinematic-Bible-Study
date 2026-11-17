@@ -1,25 +1,25 @@
-    function escapeStudy(value) { return window.SiteCore.escapeHtml(value); }
+    export function escapeStudy(value) { return window.SiteCore.escapeHtml(value); }
 
-    function escapeVerify(text) { return window.SiteCore.escapeHtml(text); }
+    export function escapeVerify(text) { return window.SiteCore.escapeHtml(text); }
 
-    function verifyKindLabel(kind) {
+    export function verifyKindLabel(kind) {
       if (kind === 'history') return 'Historical source';
       if (kind === 'inscription') return 'Inscription / chronicle';
       if (kind === 'commentary') return 'Dated reader';
       return 'Scripture';
     }
 
-    function verifyKindClass(kind) {
+    export function verifyKindClass(kind) {
       if (kind === 'history' || kind === 'inscription' || kind === 'commentary' || kind === 'scripture') return kind;
       return 'scripture';
     }
 
-    function verifyOpenHref(href) {
+    export function verifyOpenHref(href) {
       const s = String(href || '');
       return /^https:\/\//i.test(s) ? s : '';
     }
 
-    function autoScriptureHref(it) {
+    export function autoScriptureHref(it) {
       if (it.kind !== 'scripture') return '';
       const head = String(it.source || '').split(',')[0].trim();
       if (!/\d/.test(head)) return '';
@@ -31,7 +31,7 @@
        slots.
        Verses are read from the digits after each colon, not by splitting on
        commas: "Daniel 7:8, 24" is one reference with two verses. */
-    function normalBook(name) {
+    export function normalBook(name) {
       const s = String(name || '').trim().toLowerCase().replace(/\./g, '');
       // Diagrams and prose abbreviate book names ("Dan 1:12", "Rev 13:5")
       // while the reference list spells them out, so both sides normalise
@@ -54,7 +54,7 @@
       return collapsed;
     }
 
-    function parseSourceRefs(source) {
+    export function parseSourceRefs(source) {
       const body = String(source || '').split(/,\s*King James Version/i)[0];
       const slots = [];
       const ranges = [];
@@ -92,7 +92,7 @@
       return { slots: slots, ranges: ranges };
     }
 
-    function referenceIndex(sheetIndex) {
+    export function referenceIndex(sheetIndex) {
       const pack = window.SHEET_VERIFY && window.SHEET_VERIFY[sheetIndex];
       if (!pack || !pack.items) return [];
       return pack.items.map((it, i) => {
@@ -116,7 +116,7 @@
     // Resolve a book/chapter/verse printed in the prose to the reference that
     // documents it. A verse inside a documented span counts, so "9:24–27"
     // resolves to a reference held for "9:24–25".
-    function findRefForVerse(bySlot, ranges, book, chapter, verse) {
+    export function findRefForVerse(bySlot, ranges, book, chapter, verse) {
       const exact = bySlot.get(book + ' ' + chapter + ':' + verse);
       if (exact) return exact;
       for (let i = 0; i < ranges.length; i++) {
@@ -127,7 +127,7 @@
     }
 
     // Wrap "(Daniel 1:2)" style citations in the prose so they jump to the list.
-    function decorateCitations(root, refs) {
+    export function decorateCitations(root, refs) {
       if (!root || !refs.length) return 0;
       const bySlot = new Map();
       const spans = [];
@@ -188,7 +188,7 @@
     }
 
     // A diagram's citation opens the same reference row the prose markers use.
-    function resolveCiteLabel(label) {
+    export function resolveCiteLabel(label) {
       const box = document.getElementById('sheet-verify');
       if (!box) return;
       const text = String(label || '');
@@ -210,7 +210,7 @@
       }
     }
 
-    function renderSheetVerify(index) {
+    export function renderSheetVerify(index) {
       const box = document.getElementById('sheet-verify');
       const pack = window.SHEET_VERIFY && window.SHEET_VERIFY[index];
       if (!box) return;
@@ -268,18 +268,18 @@
        Close control; in the column it is part of the page and needs none.
        citePanelOpen() reads the arming class, not the layer's, so the panel
        does not cover the chips that open it. */
-    function citePanelOpen() {
+    export function citePanelOpen() {
       return document.documentElement.classList.contains('dfx-cite-open');
     }
 
-    function syncCiteClose() {
+    export function syncCiteClose() {
       const box = document.getElementById('sheet-verify');
       if (!box) return;
       const btn = box.querySelector('[data-cite-close]');
       if (btn) btn.hidden = !citePanelOpen();
     }
 
-    function closeCitePanel() {
+    export function closeCitePanel() {
       const box = document.getElementById('sheet-verify');
       document.documentElement.classList.remove('dfx-cite-open');
       syncCiteClose();
@@ -296,7 +296,7 @@
        matters: this and the layer's handler are capture listeners on the same
        node, and stopPropagation() does not stop listeners on that node, so
        without it one Escape closes both. */
-    function onCitePanelKey(event) {
+    export function onCitePanelKey(event) {
       if (event.key !== 'Escape' || !citePanelOpen()) return;
       event.preventDefault();
       event.stopPropagation();
@@ -305,7 +305,7 @@
     }
 
     // Citation markers jump to the reference list and open that row.
-    function revealReference(id) {
+    export function revealReference(id) {
       const row = document.getElementById(id);
       if (!row) return;
       const box = document.getElementById('sheet-verify');

@@ -1,15 +1,19 @@
+import { diagramCite } from '/js/study/diagrams/cite.js';
+import { bodyStory, storySrc } from '/js/study/story.js';
+import { escapeStudy } from '/js/study/references.js';
+
     /* A flow keeps its steps stacked in order, with a rail and a travelling
        highlight on entrance and on Replay; a step opens the full-screen reader
        as its scene.
        `continuation` marks steps already shown in the neighbouring diagram of
        the same kind, and the beat the sweep enters on. */
-    const FLOW_ASIDES = {
+    export const FLOW_ASIDES = {
       /* The one label a flow prints that is not a step field: the state Daniel
          12:1 has not yet reached, in the sitting's own words. */
       's10-2': { step: 0, counter: 'Hebrews 7:25 is the ministry of this age' }
     };
 
-    function bodyFlow(spec, steps, canResolve, diagramId, continuation) {
+    export function bodyFlow(spec, steps, canResolve, diagramId, continuation) {
       const aside = FLOW_ASIDES[diagramId] || null;
       const shared = (continuation && continuation.shared) || new Set();
       const last = steps.length - 1;
@@ -81,7 +85,7 @@
        in, so nothing here draws a second overlay — and a chain that continues a
        node from the diagram before it starts its sweep there rather than
        replaying the beats the reader has just seen. */
-    function wireFlow(figure) {
+    export function wireFlow(figure) {
       const stack = figure.querySelector('.flow-stack');
       const steps = Array.from(figure.querySelectorAll('.flow-step'));
       const openScene = figure.__openStoryScene;
@@ -116,7 +120,7 @@
        4:34). A step whose title appeared in the neighbouring diagram of the
        same kind gets the same bead, and the later sweep starts there. The match
        reads only `title`. */
-    function flowContinuation(figure, specs, kind) {
+    export function flowContinuation(figure, specs, kind) {
       const out = { shared: new Set(), enter: 0 };
       const article = figure.closest('#sheet-article');
       const own = specs[figure.getAttribute('data-diagram')];

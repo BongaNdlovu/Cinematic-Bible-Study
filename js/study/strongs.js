@@ -1,4 +1,8 @@
-    async function getStrongsData() {
+import { netRequest, showToast } from '/js/study/study-app.js';
+
+    export let strongsDataCache = null;
+
+    export async function getStrongsData() {
       /* A failed load must not be cached as "empty" for the session — the next
          tap retries, and the interim feedback below covers the wait. */
       if (strongsDataCache) return strongsDataCache;
@@ -26,7 +30,7 @@
       return null;
     }
 
-    function wireStrongsTooltips() {
+    export function wireStrongsTooltips() {
       document.querySelectorAll('.strongs-gloss').forEach((el) => {
         if (el.dataset.wired) return;
         el.dataset.wired = 'true';

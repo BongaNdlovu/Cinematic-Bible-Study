@@ -7,6 +7,7 @@ const browser = await chromium.launch();
 try {
   const context = await browser.newContext({ viewport: { width: 1440, height: 900 } });
   await context.addInitScript({ content: signedInScript() });
+  await context.addInitScript({ content: "try { sessionStorage.setItem('baPulsePending', '1'); } catch (e) {}" });
   const page = await context.newPage();
   await page.goto(server.base + '/study.html?sheet=0&preview=full', { waitUntil: 'load', timeout: 60000 });
   await page.waitForFunction(() => !!document.querySelector('.insight-card:not(article)'), null, { timeout: 20000 });

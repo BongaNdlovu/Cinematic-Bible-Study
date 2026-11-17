@@ -1,0 +1,17 @@
+import '/js/shared/covers.js';
+import '/js/shared/journey.js';
+import '/js/shared/auth-config.js';
+import '/js/shared/net.js';
+import '/js/shared/errors.js';
+import '/js/shared/ops.js';
+import '/js/shared/human-pass.js';
+import '/js/shared/auth.js';
+import '/js/shared/mfa.js';
+import '/js/shared/desk-rows.js';
+import '/js/shared/desk.js';
+import '/js/shared/terms.js';
+import '/js/shared/insights.js';
+import '/js/shared/progress-sync.js';
+import '/js/shared/study-sync.js';
+import '/js/shared/reviews.js';
+import '/js/shared/account.js';

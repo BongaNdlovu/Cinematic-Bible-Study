@@ -1,6 +1,6 @@
 # 3. Project structure
 
-**Last verified:** 16 November 2026
+**Last verified:** 16 November 2026 
 
 The site has no build step for its pages. The files in the repository root and in `js/`, `css/`, `assets/`, `bible/`, `models/` and `vendor/` are what browsers download. The deploy script copies them into a clean folder, then minifies the CSS and fingerprints the file names (see [Develop, test, release](07-develop-test-release.md#deploying)).
 
@@ -37,6 +37,10 @@ Folders that are **never deployed**. `tools/deploy-cloudflare-pages.ps1` leaves 
 
 Every page loads `cinema.css`, `terms.css` and `consent.css`. All except `privacy.html` and `terms.html` also load `desk.css`.
 
+**How scripts load (since 16 November 2026, plan step 4.5).** Each page has one ES module entry, `js/pages/<page>/main.js`, which imports the page's scripts in the order the page used to list them. Only these stay as classic `<script>` tags, because they must run before the rest: vendor files (Sentry, Supabase, Leaflet), `js/shared/sentry.js`, `js/shared/core.js`, `js/shared/cinema.js`, `js/shared/consent.js` and, on the study page, `js/study/book-open.js`. `privacy.html` and `terms.html` load only those, so they have no entry. Most imported scripts still publish one `window.<Name>` object, as before; the study page's own files share names through `import` and `export` (see `js/study/` below). The tables below list what each page loads, whether through a tag or its entry.
+
+**One behaviour change from the entry.** Classic `defer` scripts let promise callbacks run between scripts; a module graph runs all its files first. So on `index.html` and `study.html`, `insights.js` now sees that `onboard.js` has loaded before it decides whether to show its own profile card, and skips it, as its code intends (`if (window.Onboard) return;`). Before, that check ran too early, and a signed-in reader without a profile could get both the onboarding questions and the profile card.
+
 | Page | Page-specific scripts (after the shared base) | Page stylesheets |
 |---|---|---|
 | `index.html` | `covers.js`, `reviews.js`, `progress-sync.js`, `insights.js`, `onboard.js`, `ui-sound.js`, `ui-click-sound.js`, `js/home/home.js`, `shelf-data.js`, `shelf.js` | `site.css`, `shelf.css`, `onboard.css` |
@@ -51,10 +55,10 @@ Every page loads `cinema.css`, `terms.css` and `consent.css`. All except `privac
 
 **Shared base** (most pages): Sentry, `cinema.js`, `journey.js`, `auth-config.js`, Supabase, `net.js`, `errors.js`, `ops.js`, `human-pass.js`, `auth.js`, `desk.js`, `terms.js`, `consent.js`, all under `js/shared/`.
 
-To check the current list, run:
+To check the current list, run (it follows each entry's imports):
 
 ```bash
-grep -oE '<script[^>]+src="[^"]+"' study.html
+node -e "import('./tools/verify/_sources.mjs').then((m) => console.log(m.pageScripts('study.html').join('\n')))"
 ```
 
 ## `js/` by folder
@@ -62,11 +66,12 @@ grep -oE '<script[^>]+src="[^"]+"' study.html
 | Folder | What lives there | Main files |
 |---|---|---|
 | `js/shared/` | Code used by many pages. `core.js` loads first on every page (before `cinema.js`; on `study.html` before `book-open.js`) and holds the one copy of each small helper: `escapeHtml`, `isLocalDevHost`, `currentUser`, `signedIn`, `authClient` and the focus trap (`window.SiteCore`). Also: sign-in, access rules, sync, analytics, errors, network, consent, terms, desk, reviews, account | `journey.js`, `auth.js`, `progress-sync.js`, `study-sync.js`, `quiz-gate.js`, `insights.js`, `ops.js`, `human-pass.js` (guest Turnstile pass), `net.js`, `errors.js`, `consent.js`, `desk.js` (with `desk-rows.js`, its row checks and text clipping, loaded just before it), `reviews.js`, `account.js`, `mfa.js`, `sentry.js` |
-| `js/study/` | The study desk | `study-app.js` (the page controller: state, start-up and `loadSheet`), and the features moved out of it on 16 November 2026: `story.js`, `quiz.js`, `read-along.js`, `focus-timer.js`, `reading-settings.js`, `references.js`, `horizon.js`, `sitting-map.js`, `sitting-guide.js`, `lesson-connect.js`, `toc.js`, `strongs.js`, `study-guide.js`, `scroll-place.js`, `sheet-book.js`, `instruments.js`, `spine.js`, `study-modules.js`. Also `book-reader.js` (helpers in `book-reader-helpers.js`), `mindmap.js` (layout maths and text fitting in `mindmap-layout.js`), `task-flow.js`, `term-overlay.js`, `workbench.js` (the capstone rubric in `workbench-rubric.js`), `competency.js`, `certificate.js`, `scripture.js` |
+| `js/study/` | The study desk. The 26 files split out of `study-app.js` (here and in `diagrams/`) are ES modules that share names through `import`/`export`; the rest still publish one `window` object each | `study-app.js` (the page controller: state, start-up and `loadSheet`), and the features moved out of it on 16 November 2026: `story.js`, `quiz.js`, `read-along.js`, `focus-timer.js`, `reading-settings.js`, `references.js`, `horizon.js`, `sitting-map.js`, `sitting-guide.js`, `lesson-connect.js`, `toc.js`, `strongs.js`, `study-guide.js`, `scroll-place.js`, `sheet-book.js`, `instruments.js`, `spine.js`, `study-modules.js`. Also `book-reader.js` (helpers in `book-reader-helpers.js`), `mindmap.js` (layout maths and text fitting in `mindmap-layout.js`), `task-flow.js`, `term-overlay.js`, `workbench.js` (the capstone rubric in `workbench-rubric.js`), `competency.js`, `certificate.js`, `scripture.js` |
 | `js/study/diagrams/` | The diagram renderers: `cite.js`, `chain.js`, `comparison.js`, `table.js`, `flow.js`, `timeline.js`, and the full-screen shell `fullscreen.js` |
 | `js/study/sheets/` | The 11 sittings, one file each, plus `index.js` (the list and the on-demand loader). **Generated** from `js/study/sheets-data.js` by `node tools/build_study_sheets.mjs`. | `index.js`, `sheet-0.js` … `sheet-10.js` |
 | `js/map/` | The map | `map.js` (engine), `map-math.js` (distance, smoothing, tile and year maths, loaded just before `map.js`), `map-data.js` (kingdoms, cities, events, routes), `globe.js` (3D globe view) |
-| `js/gallery/` | The 3D gallery (ES modules) | `app.js` (scene, model cache, tour, study looks), `artifact-registry.js` (`ASSET_REGISTRY`, the museum notes `MUSEUM_NODES_DATA`, `getNodeDataForAsset`, the artifact order and map years), `hall-art.js` (the hall backdrops, wall frames, relief and halo textures, toolbar icons) |
+| `js/pages/` | One ES module entry per page: `index`, `study`, `map`, `account`, `insights`, `reviews`, `gallery`, `404`. Each `main.js` imports that page's scripts in order. `js/pages/study/main.js` also sets `window.showToast` and `window.navigateSheet`, which `competency.js` and `workbench.js` call, and on local hosts only exposes a few study functions to the browser tests (`loadSheet`, `showInstrument`, `applyTheme`, `toggleTocDrawer`, `setEpochInfo`, `setWeatherPreset`, `togglePomodoroDrawer`), as `window.__galleryCamera` already does for the gallery |
+| `js/gallery/` | The 3D gallery (ES modules) | `app.js` (the scene, camera, lighting, input and start-up; 2,083 lines). Split out on 16 November 2026: `artifact-registry.js` (`ASSET_REGISTRY`, `MUSEUM_NODES_DATA`, `getNodeDataForAsset`, artifact order), `hall-art.js` (backdrop list, wall frames, relief and halo textures, icons), `hall-backdrop.js` (switching and caching the hall backdrop), `model-loader.js` (loading and cloning `.glb` exhibits), `model-cache.js` (which loaded models to keep), `tour.js` (the guided tour), `study-looks.js` (the gold and study material modes), `panels.js` (era timeline, modals, search, title toggle), `dossier.js` (study and map links in the side panel), `explode.js` (the lift slider). These read a few names exported by `app.js`, and `app.js` imports them back, so the modules import each other in a cycle. That is safe here because the split-out files only declare things: nothing in them runs at load time. Nothing assigns to an imported name (checked with a script over the syntax tree) |
 | `js/home/` | The home shelf | `shelf.js` (3D shelf, an ES module), `shelf-helpers.js` (text cleaning, numerals, colours, line fitting; imported by `shelf.js`), `shelf-data.js` (generated by `tools/build-shelf-data.mjs`), `home.js` |
 | `js/insights/` | The moderator dashboard | `insights.js`, `insights-format.js` (number, date, CSV and quarter helpers, loaded just before it), `sid-report.js` |
 
@@ -112,7 +117,8 @@ The deploy script refuses to ship if any of these are in the bundle.
 | A Strong's line or verse highlights | `bible/strongs-daniel.json`, `bible/sheet-passages.json` |
 | A map year, city, event or route | `js/map/map-data.js` |
 | A 3D artifact | `models/*.glb` (compressed with `tools/compress/`), plus `ASSET_REGISTRY` in `js/gallery/artifact-registry.js`, plus a plate and thumbnail under `assets/` |
-| A study-page feature | Its own file in `js/study/` (or `js/study/diagrams/` for a renderer), linked in `study.html` before `study-app.js`. These are still classic scripts that share the page's global scope, so a file must not run code at load that reads a name from `study-app.js`; only declarations go in it. Tests that check the study page's code read every script it loads through `tools/verify/_sources.mjs`, not one file |
+| A study-page feature | Its own ES module in `js/study/` (or `js/study/diagrams/` for a renderer). `export` what other files use and `import` what it needs, by root path (`'/js/study/references.js'`). Then add an `import` for it at the top of `js/study/study-app.js`, in the order of the others. `study-app.js` is the only study file the page entry imports, so every other study module finishes loading before `study-app.js` runs its start-up code. A feature file therefore holds only declarations, and nothing in it may read another file's names at load. A variable that two files assign lives in one of them, with a small setter (`setCurrentThemeIdx`) for the other, because a module cannot assign an imported name. Tests that check the study page's code read every script it loads through `tools/verify/_sources.mjs`, which follows the entry's imports |
+| A script for a page | An `import` line in that page's `js/pages/<page>/main.js`, not a `<script>` tag. Only a script that must run before the page is parsed (like `core.js`) gets a tag |
 | Code shared by pages | `js/shared/`, then add the `<script>` tag to each page that needs it. A small helper used by two or more files (escaping, sign-in reads, focus handling) goes in `js/shared/core.js`; local copies call it, they do not repeat its body |
 | A database change | A new `tools/supabase-<topic>.sql`, run in Supabase **before** deploying the client that needs it |
 | A new storage key | Add it to `tools/storage-keys.mjs` and to the storage table in `privacy.html`; also to `PERSONAL_KEYS` in `js/shared/auth.js` if sign-out must clear it, and to `SITE_KEYS` in `js/shared/account.js` if account deletion must clear it. `npm run test:unit` fails until all of them agree |

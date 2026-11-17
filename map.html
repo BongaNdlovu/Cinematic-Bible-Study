@@ -44,24 +44,8 @@
 <body class="cmap-page">
   <div id="map-root" class="cmap-root"></div>
   <script src="vendor/leaflet/leaflet.js" defer></script>
-  <script src="js/shared/journey.js" defer></script>
-  <script src="js/shared/auth-config.js" defer></script>
   <script src="vendor/supabase/supabase.js" defer></script>
-  <script src="js/shared/net.js" defer></script>
-  <script src="js/shared/errors.js" defer></script>
-  <script src="js/shared/ops.js" defer></script>
-  <script src="js/shared/human-pass.js" defer></script>
-  <script src="js/shared/auth.js" defer></script>
-  <script src="js/shared/desk-rows.js" defer></script>
-  <script src="js/shared/desk.js" defer></script>
-  <script src="js/shared/terms.js" defer></script>
-  <script src="js/shared/insights.js" defer></script>
-  <script src="js/shared/ui-sound.js" defer></script>
-  <script src="js/shared/ui-click-sound.js" defer></script>
-  <script src="js/study/sheet-map.js" defer></script>
-  <script src="js/map/map-data.js" defer></script>
-  <script src="js/map/map-math.js" defer></script>
-  <script src="js/map/map.js" defer></script>
+  <script type="module" src="js/pages/map/main.js"></script>
   <script>
     document.addEventListener("DOMContentLoaded", async function () {
       const next = "map.html" + (location.search || "");

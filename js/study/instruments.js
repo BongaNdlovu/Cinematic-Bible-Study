@@ -1,4 +1,7 @@
-    function bibleNoticeChapters(index) {
+import { SHEET_CONTEXT, SHEET_INSIGHTS } from '/js/study/sitting-map.js';
+import { currentSheetIndex } from '/js/study/study-app.js';
+
+    export function bibleNoticeChapters(index) {
       const passage = window.BAScripture && window.BAScripture.passageForSheet(index);
       const sections = (passage && passage.sections) || [];
       if (!sections.length) return '';
@@ -9,14 +12,14 @@
       return first.book + ' Chapters ' + first.chapter + '–' + last.chapter;
     }
 
-    function closeInfographic() {
+    export function closeInfographic() {
       const modal = document.getElementById('infographic-modal');
       if (!modal) return;
       modal.hidden = true;
       document.body.classList.remove('infographic-open');
     }
 
-    function openInfographic() {
+    export function openInfographic() {
       const modal = document.getElementById('infographic-modal');
       const img = document.getElementById('infographic-modal-img');
       if (!modal || !img) return;
@@ -31,14 +34,14 @@
       if (window.Insights) window.Insights.track('feature_use', currentSheetIndex, { feature: 'infographic' });
     }
 
-    function renderBibleNotice(index) {
+    export function renderBibleNotice(index) {
       const badge = document.getElementById('bible-notice-chapters');
       if (!badge) return;
       const label = bibleNoticeChapters(index);
       if (label) badge.textContent = label;
     }
 
-    function renderSheetInstruments(index) {
+    export function renderSheetInstruments(index) {
       const ctx = SHEET_CONTEXT[index] || SHEET_CONTEXT[0];
       const ins = SHEET_INSIGHTS[index] || SHEET_INSIGHTS[0];
       document.getElementById('context-img').src = ctx.img;
@@ -52,12 +55,12 @@
       if (window.BAScripture) window.BAScripture.showSheet(index).then(() => renderBibleNotice(index));
     }
 
-    function openArtifactModal() {
+    export function openArtifactModal() {
       const modal = document.getElementById('artifact-modal');
       modal.classList.remove('opacity-0', 'pointer-events-none');
     }
 
-    function closeArtifactModal() {
+    export function closeArtifactModal() {
       const modal = document.getElementById('artifact-modal');
       modal.classList.add('opacity-0', 'pointer-events-none');
     }

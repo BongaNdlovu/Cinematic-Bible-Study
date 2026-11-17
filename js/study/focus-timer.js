@@ -1,8 +1,23 @@
-    const RING_CIRCUMFERENCE = 427.26;
+import { loadStudyModule, studyAssetPath, studyModuleFailed } from '/js/study/study-modules.js';
+import { currentSheetIndex, showToast } from '/js/study/study-app.js';
 
-    const WEATHER_RENDER_SCALE = 0.5;
+    export let weatherWorker = null;
+    export let weatherScene = null;
+    export let weatherRunning = false;
+    export let weatherPreset = 'auto'; // visual weather only — no rain/thunder audio
+    export let timerInterval = null;
+    export let timerEndsAt = 0;
+    export let timerDuration = 5 * 60;
+    export let timeRemaining = 5 * 60;
+    export let isTimerRunning = false;
+    export let focusAtmosphere = 0;
+    export let currentWeatherType = 'quiet';
 
-    const weatherMeta = {
+    export const RING_CIRCUMFERENCE = 427.26;
+
+    export const WEATHER_RENDER_SCALE = 0.5;
+
+    export const weatherMeta = {
       quiet: { name: "Still • Quiet Dusk", icon: "◌", level: "Quiet" },
       building: { name: "Building • Rising Wind", icon: "☁", level: "Building" },
       storm: { name: "Storm • Rain & Thunder", icon: "⛈", level: "Storm" },
@@ -10,11 +25,11 @@
       off: { name: "Off", icon: "⏸", level: "Off" }
     };
 
-    function lerp(a, b, t) {
+    export function lerp(a, b, t) {
       return a + (b - a) * Math.max(0, Math.min(1, t));
     }
 
-    function focusPhase(progress) {
+    export function focusPhase(progress) {
       if (weatherPreset !== 'auto') {
         return weatherPreset === 'storm' ? 0.58
           : weatherPreset === 'sunshine' ? 0.96
@@ -28,7 +43,7 @@
       return lerp(0.78, 1.0, (progress - 0.62) / 0.38);
     }
 
-    const WEATHER_BANDS = [
+    export const WEATHER_BANDS = [
       { below: 0.2, type: 'quiet', label: 'Still', step: 'quiet' },
       { below: 0.42, type: 'building', label: 'Building', step: 'quiet' },
       { below: 0.72, type: 'storm', label: 'Storm', step: 'storm' },
@@ -36,26 +51,26 @@
       { below: Infinity, type: 'sunshine', label: 'Sun', step: 'sun' }
     ];
 
-    function weatherBand(v) {
+    export function weatherBand(v) {
       for (const band of WEATHER_BANDS) {
         if (v < band.below) return band;
       }
       return WEATHER_BANDS[WEATHER_BANDS.length - 1];
     }
 
-    function deriveWeatherType(v) {
+    export function deriveWeatherType(v) {
       return weatherBand(v).type;
     }
 
-    function lightTheme() {
+    export function lightTheme() {
       return document.body.classList.contains('paper-mode') || document.body.classList.contains('white-mode');
     }
 
-    function weatherState() {
+    export function weatherState() {
       return { type: currentWeatherType, atmosphere: focusAtmosphere, light: lightTheme() };
     }
 
-    function linkWeather() {
+    export function linkWeather() {
       if (weatherScene || weatherWorker) return true;
       const canvas = document.getElementById('weather-canvas');
       if (!canvas) return false;
@@ -85,19 +100,19 @@
       return true;
     }
 
-    function tellWeather(msg) {
+    export function tellWeather(msg) {
       if (!linkWeather()) return;
       if (weatherWorker) weatherWorker.postMessage(msg, []);
       else window.WeatherScene.apply(weatherScene, msg);
     }
 
-    function markWeather() {
+    export function markWeather() {
       if (currentWeatherType !== 'off' && document.body.dataset.weather !== currentWeatherType) {
         document.body.dataset.weather = currentWeatherType;
       }
     }
 
-    function resizeWeatherCanvas() {
+    export function resizeWeatherCanvas() {
       tellWeather({
         size: [
           Math.max(320, Math.round(window.innerWidth * WEATHER_RENDER_SCALE)),
@@ -108,7 +123,7 @@
       });
     }
 
-    function startWeatherAnimation() {
+    export function startWeatherAnimation() {
       if (!weatherRunning && currentWeatherType !== 'off') {
         resizeWeatherCanvas();
         const canvas = document.getElementById('weather-canvas');
@@ -119,14 +134,14 @@
       }
     }
 
-    function stopWeatherAnimation() {
+    export function stopWeatherAnimation() {
       if (weatherRunning) tellWeather({ run: false });
       weatherRunning = false;
       const canvas = document.getElementById('weather-canvas');
       if (canvas) canvas.classList.add('opacity-0');
     }
 
-    function updateAutoWeather() {
+    export function updateAutoWeather() {
       const progress = (timerDuration - timeRemaining) / timerDuration;
       focusAtmosphere = focusPhase(progress);
       currentWeatherType = weatherPreset === 'off' ? 'off' : (weatherPreset === 'auto' ? deriveWeatherType(focusAtmosphere) : weatherPreset);
@@ -137,7 +152,7 @@
       updateWeatherHUD();
     }
 
-    function updateWeatherHUD() {
+    export function updateWeatherHUD() {
       const meta = weatherMeta[currentWeatherType] || weatherMeta.quiet;
       const statusEl = document.getElementById('pomo-weather-status');
       const headerIcon = document.getElementById('pomo-header-icon');
@@ -162,7 +177,7 @@
 
     }
 
-    function setWeatherPreset(preset, silent) {
+    export function setWeatherPreset(preset, silent) {
       const prefersReduced =
         window.matchMedia('(prefers-reduced-motion: reduce)').matches ||
         (window.BAJourney && typeof window.BAJourney.prefersReducedMotion === 'function' && window.BAJourney.prefersReducedMotion());
@@ -190,7 +205,7 @@
       }
     }
 
-    function updateTimerDisplay() {
+    export function updateTimerDisplay() {
       const mins = Math.floor(timeRemaining / 60);
       const secs = timeRemaining % 60;
       const str = `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
@@ -215,7 +230,7 @@
       }
     }
 
-    function startPomodoro() {
+    export function startPomodoro() {
       if (isTimerRunning) return;
       isTimerRunning = true;
       const ping = document.getElementById('pomo-ping');
@@ -233,14 +248,14 @@
       showToast("Exilic Study Focus Timer Started");
     }
 
-    function tickPomodoro() {
+    export function tickPomodoro() {
       if (!isTimerRunning) return;
       timeRemaining = Math.max(0, Math.ceil((timerEndsAt - Date.now()) / 1000));
       updateTimerDisplay();
       if (timeRemaining === 0) completePomodoroSession();
     }
 
-    function pausePomodoro() {
+    export function pausePomodoro() {
       if (isTimerRunning) timeRemaining = Math.max(0, Math.ceil((timerEndsAt - Date.now()) / 1000));
       isTimerRunning = false;
       clearInterval(timerInterval);
@@ -254,7 +269,7 @@
       showToast("Focus Timer Paused");
     }
 
-    function resetPomodoro() {
+    export function resetPomodoro() {
       pausePomodoro();
       timeRemaining = timerDuration;
       updateTimerDisplay();
@@ -264,7 +279,7 @@
       showToast("Focus Timer Reset");
     }
 
-    function setPomodoroDuration(minutes) {
+    export function setPomodoroDuration(minutes) {
       timerDuration = minutes * 60;
       timeRemaining = timerDuration;
       if (isTimerRunning) timerEndsAt = Date.now() + timerDuration * 1000;
@@ -272,7 +287,7 @@
       updateAutoWeather();
     }
 
-    function completePomodoroSession() {
+    export function completePomodoroSession() {
       pausePomodoro();
       const sub = document.getElementById('pomo-status-sub');
       if (sub) sub.innerText = "✓ Study Session Completed! The study path is complete.";
@@ -282,7 +297,7 @@
       showToast("Study Session Complete! Review the quiz checkpoint.");
     }
 
-    function togglePomodoroDrawer() {
+    export function togglePomodoroDrawer() {
       const dock = document.getElementById('pomo-dock');
       if (!dock) return;
       const isClosed = dock.classList.contains('pointer-events-none');

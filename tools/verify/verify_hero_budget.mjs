@@ -4,6 +4,7 @@ import fs from "fs";
 import path from "path";
 import vm from "vm";
 import { fileURLToPath } from "url";
+import { pageLoads } from "./_sources.mjs";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..");
 const SITE = path.join(ROOT, "assets", "site");
@@ -44,7 +45,7 @@ for (const m of index.matchAll(/<link[^>]+rel="stylesheet"[^>]+href="(css\/[^"]+
   }
 }
 
-assert(index.includes("js/home/shelf.js"), "index.html must load the shelf scene");
+assert(pageLoads("index.html", "js/home/shelf.js"), "index.html must load the shelf scene");
 const importMapAt = index.indexOf('<script type="importmap">');
 for (const m of index.matchAll(/<link[^>]+rel="modulepreload"[^>]+href="([^"]+)"/g)) {
   assert(importMapAt !== -1 && m.index > importMapAt, "a modulepreload must follow the import map");
@@ -61,7 +62,7 @@ eager.set(local(portrait[1]), "shelf painting");
 assert(eager.size >= 2, "the home page budget must cover the shelf painting and the social preview at least");
 for (const [file, label] of eager) checkSize(file, MAX, label);
 
-assert(index.includes("js/shared/covers.js"), "index.html must load the cover list");
+assert(pageLoads("index.html", "js/shared/covers.js"), "index.html must load the cover list");
 const sandbox = { window: {} };
 vm.runInNewContext(fs.readFileSync(path.join(ROOT, "js", "shared", "covers.js"), "utf8"), sandbox);
 const covers = sandbox.window.SHELF_COVERS || [];

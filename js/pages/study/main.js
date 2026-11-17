@@ -1,0 +1,50 @@
+import '/js/shared/journey.js';
+import '/js/shared/auth-config.js';
+import '/js/shared/net.js';
+import '/js/shared/errors.js';
+import '/js/shared/ops.js';
+import '/js/shared/human-pass.js';
+import '/js/shared/auth.js';
+import '/js/shared/desk-rows.js';
+import '/js/shared/desk.js';
+import '/js/shared/terms.js';
+import '/js/shared/progress-sync.js';
+import '/js/shared/study-sync.js';
+import '/js/shared/quiz-gate.js';
+import '/js/shared/insights.js';
+import '/js/shared/onboard.js?v=cx3';
+import '/js/shared/ui-sound.js';
+import '/js/shared/ui-click-sound.js';
+import '/js/shared/reviews.js';
+import '/js/study/scripture.js';
+import '/js/map/map-data.js';
+import '/js/study/workbench-rubric.js';
+import '/js/study/workbench.js';
+import '/js/study/competency.js';
+import '/js/study/sheets/index.js';
+import '/js/study/sheet-map.js';
+import '/js/study/sheet-verify.js';
+import '/js/study/term-overlay.js';
+import '/js/study/card-min.js';
+import '/js/study/glossary-enrichment.js';
+import '/js/study/sheet-glossary.js';
+import '/js/study/book-reader-helpers.js';
+import '/js/study/book-reader.js';
+import '/js/study/mindmap-layout.js';
+import '/js/study/study-app.js';
+import '/js/study/lesson-player.js';
+import '/js/study/task-flow.js';
+import '/js/study/audio-orb.js';
+import '/js/study/page-actions.js';
+
+import { showToast, navigateSheet, loadSheet, showInstrument } from '/js/study/study-app.js';
+import { applyTheme } from '/js/study/reading-settings.js';
+import { toggleTocDrawer } from '/js/study/toc.js';
+import { setEpochInfo } from '/js/study/horizon.js';
+import { setWeatherPreset, togglePomodoroDrawer } from '/js/study/focus-timer.js';
+
+window.showToast = showToast;
+window.navigateSheet = navigateSheet;
+if (window.SiteCore && window.SiteCore.isLocalDevHost()) {
+  Object.assign(window, { loadSheet, showInstrument, applyTheme, toggleTocDrawer, setEpochInfo, setWeatherPreset, togglePomodoroDrawer });
+}

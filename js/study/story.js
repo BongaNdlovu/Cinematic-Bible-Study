@@ -1,4 +1,7 @@
-    function storySrc(step) {
+import { diagramCite } from '/js/study/diagrams/cite.js';
+import { escapeStudy } from '/js/study/references.js';
+
+    export function storySrc(step) {
       const src = String(step && step.image || '');
       return /^assets\/study\/diagrams\/[a-z0-9-]+\.jpg$/.test(src) ? src : '';
     }
@@ -6,9 +9,9 @@
     // How many artwork layers the reader keeps. One behind the other is enough
     // for a single step change; a third keeps a fast run of steps from snapping
     // a layer's source out from under a fade that is still running.
-    const STORY_PHOTO_LAYERS = 3;
+    export const STORY_PHOTO_LAYERS = 3;
 
-    function bodyStory(spec, steps, canResolve, start, diagramId) {
+    export function bodyStory(spec, steps, canResolve, start, diagramId) {
       const n = steps.length;
       const storyTitle = String(spec.title || 'The story');
       // Where the artwork is cropped. A movement's subject is rarely dead
@@ -142,7 +145,7 @@
       '</div>';
     }
 
-    function wireStory(figure) {
+    export function wireStory(figure) {
       const panel = figure.querySelector('.chain-body');
       const toggle = figure.querySelector('.chain-toggle');
       const stage = figure.querySelector('.story-stage');

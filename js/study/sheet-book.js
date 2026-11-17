@@ -1,14 +1,18 @@
-    function plainText(html) {
+import { readScrollPlace, writeScrollPlace } from '/js/study/scroll-place.js';
+
+    export let scrollHold = false;
+
+    export function plainText(html) {
       const holder = document.createElement('div');
       holder.innerHTML = String(html || '');
       return holder.textContent.trim();
     }
 
-    function bookOpened() {
+    export function bookOpened() {
       return window.BookOpen ? window.BookOpen.finished : Promise.resolve();
     }
 
-    function mountSheetBook(index, data, restore) {
+    export function mountSheetBook(index, data, restore) {
       if (!window.BookReader) return;
       window.BookReader.mount(document.getElementById('sheet-article'), {
         sheetIndex: index,
@@ -18,7 +22,7 @@
       });
     }
 
-    function placeReader(index, restore) {
+    export function placeReader(index, restore) {
       let hashTarget = null;
       try { hashTarget = location.hash ? document.querySelector(location.hash) : null; } catch (e) { hashTarget = null; }
       if (hashTarget) {

@@ -1,3 +1,5 @@
+import { escapeStudy, normalBook } from '/js/study/references.js';
+
     /* Chain diagram: cards joined by arrows that draw in, the middle node as a
        medalled centre. The entrance plays on scroll into view, can be replayed,
        and is skipped under prefers-reduced-motion. */
@@ -13,7 +15,7 @@
        labels like "Daniel 4", or a book this sitting never documents — are
        printed as plain text instead, so nothing is lost and nothing is a dead
        control. `canResolve` is supplied by the renderer for the current sitting. */
-    function diagramCite(label, canResolve) {
+    export function diagramCite(label, canResolve) {
       const text = String(label || '');
       if (!text) return '';
       if (canResolve && !canResolve(text)) {
@@ -23,7 +25,7 @@
     }
 
     // Does this printed reference correspond to a reference row for the sitting?
-    function makeCiteResolver(refs) {
+    export function makeCiteResolver(refs) {
       const bySlot = new Map();
       const spans = [];
       refs.forEach((r) => {

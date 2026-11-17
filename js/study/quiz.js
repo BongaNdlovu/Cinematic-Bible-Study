@@ -1,17 +1,28 @@
-    const QUIZ_COPY_DEFAULT = {
+import { escapeStudy } from '/js/study/references.js';
+import { renderSittingPath } from '/js/study/sitting-map.js';
+import { maybeShowEndGuide } from '/js/study/sitting-guide.js';
+import { currentSheetIndex, sheetLoadTicket, sheetQuizComplete, showToast, sittingVisited, updateNextGate } from '/js/study/study-app.js';
+
+    export let verifiedQuiz = {};
+    export let quizPending = {};
+    export let quizAttemptCounts = {};
+    export let celebrateTimer = 0;
+    export let answeredQuestions = {};
+
+    export const QUIZ_COPY_DEFAULT = {
       kicker: 'Questions',
       title: 'A few questions to close the sitting',
       lead: 'One at a time. Nothing is timed, and if you miss one you will see why and can try again.',
       badgeTail: ' to finish'
     };
 
-    function checkpointCountFor(total) {
+    export function checkpointCountFor(total) {
       if (total < 2) return 0;
       const finals = total >= 5 ? 2 : 1;
       return Math.min(3, total - finals);
     }
 
-    function spreadIndexes(slotCount, take) {
+    export function spreadIndexes(slotCount, take) {
       const picked = [];
       if (slotCount <= 0 || take <= 0) return picked;
       const n = Math.min(take, slotCount);
@@ -27,14 +38,14 @@
       return picked;
     }
 
-    function checkpointAnchors(headers, take) {
+    export function checkpointAnchors(headers, take) {
       let slots = headers.slice(1);
       const intro = headers[0] && /introduction/i.test(headers[0].textContent || '');
       if (intro && slots.length - 1 >= take) slots = slots.slice(1);
       return spreadIndexes(slots.length, take).map((i) => slots[i]);
     }
 
-    function setQuizCopy(copy, count) {
+    export function setQuizCopy(copy, count) {
       const kicker = document.getElementById('quiz-kicker');
       const title = document.getElementById('quiz-title');
       const lead = document.getElementById('quiz-lead');
@@ -47,7 +58,7 @@
       }
     }
 
-    function makeCheckpointPlate(index, total, qIdx) {
+    export function makeCheckpointPlate(index, total, qIdx) {
       const plate = document.createElement('section');
       plate.className = 'checkpoint-plate';
       plate.setAttribute('aria-label', 'Checkpoint ' + index + ' of ' + total);
@@ -80,7 +91,7 @@
       return plate;
     }
 
-    function placeCheckpointPlates(quizzes) {
+    export function placeCheckpointPlates(quizzes) {
       const list = Array.isArray(quizzes) ? quizzes : [];
       setQuizCopy(QUIZ_COPY_DEFAULT, list.length);
       const article = document.getElementById('sheet-article');
@@ -109,7 +120,7 @@
       }, finals);
     }
 
-    function markCheckpoint(qIdx, flag) {
+    export function markCheckpoint(qIdx, flag) {
       const plate = document.querySelector('[data-checkpoint-q="' + qIdx + '"]');
       if (!plate) return;
       if (flag) plate.setAttribute('data-checkpoint-passed', flag);
@@ -118,7 +129,7 @@
       document.dispatchEvent(new CustomEvent('checkpoint:passed'));
     }
 
-    function revealUnfinished() {
+    export function revealUnfinished() {
       const plate = document.querySelector('.checkpoint-plate:not([data-checkpoint-passed])');
       const book = window.BookReader;
       const article = document.getElementById('sheet-article');
@@ -130,7 +141,7 @@
       if (rev) rev.scrollIntoView({ behavior: 'smooth' });
     }
 
-    function renderQuiz(quizzes) {
+    export function renderQuiz(quizzes) {
       const container = document.getElementById('quiz-container');
       container.innerHTML = '';
       answeredQuestions = {};
@@ -179,7 +190,7 @@
       });
     }
 
-    function paintQuizOutcome(qIdx, selectedOptIdx, correctIdx, isCorrect, questionData, note) {
+    export function paintQuizOutcome(qIdx, selectedOptIdx, correctIdx, isCorrect, questionData, note) {
       const feedback = document.getElementById(`q-${qIdx}-feedback`);
 
       questionData.options.forEach((_, optIdx) => {
@@ -220,7 +231,7 @@
       }
     }
 
-    function handleQuizAnswer(qIdx, selectedOptIdx, questionData) {
+    export function handleQuizAnswer(qIdx, selectedOptIdx, questionData) {
       if (verifiedQuiz[qIdx] !== undefined || quizPending[qIdx]) return;
       answeredQuestions[qIdx] = selectedOptIdx;
       const attempt = (quizAttemptCounts[qIdx] = (quizAttemptCounts[qIdx] || 0) + 1);
@@ -348,7 +359,7 @@
       });
     }
 
-    function resetQuizQuestion(qIdx) {
+    export function resetQuizQuestion(qIdx) {
       delete answeredQuestions[qIdx];
       delete verifiedQuiz[qIdx];
       const data = sheetsData[currentSheetIndex];
@@ -368,7 +379,7 @@
       document.dispatchEvent(new CustomEvent('quiz:changed', { detail: { q: qIdx, reset: true } }));
     }
 
-    function celebrationFor(sheet) {
+    export function celebrationFor(sheet) {
       if (sheet === 0) {
         return {
           title: 'The first sitting is yours.',
@@ -390,7 +401,7 @@
       return null;
     }
 
-    function burstConfetti() {
+    export function burstConfetti() {
       if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
       const old = document.getElementById('sitting-confetti');
       if (old) old.remove();
@@ -466,7 +477,7 @@
       requestAnimationFrame(frame);
     }
 
-    function showSittingCelebration(sheet) {
+    export function showSittingCelebration(sheet) {
       const spec = celebrationFor(sheet);
       if (!spec) return;
       burstConfetti();
@@ -494,7 +505,7 @@
       celebrateTimer = window.setTimeout(close, 5600);
     }
 
-    function sittingLabel(index) {
+    export function sittingLabel(index) {
       return window.BAJourney && typeof window.BAJourney.sheetLabel === 'function'
         ? window.BAJourney.sheetLabel(index)
         : 'Sitting ' + index;

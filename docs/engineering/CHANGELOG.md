@@ -58,6 +58,63 @@ Entry template:
 **Checked here:** on Windows, the three changed checks pass (`verify_globe.mjs`, `verify_horizon.mjs`, `verify_lesson_connectors.mjs`). On GitHub, the first version of these fixes passed 29 of 30; the one failure was the globe's screenshot timeout, fixed after it. The final run on GitHub is in the next entry.
 
 **Status:** on branch `ci/browser-gate`.
+## 2026-11-16 — Sharing a sitting no longer throws; lint now catches undefined names
+
+**Why:** `js/study/lesson-connect.js` read `isFree`, which no file defines since every sitting began to need a sign-in (`acd563e`). When the browser has no share sheet, "Share this sitting" threw a `ReferenceError` instead of copying the link or showing it. Found while turning the study files into modules.
+
+**What changed:**
+
+- `shareSitting` uses the sign-in wording in both branches ("Enrollment link copied. Recipients sign in on the cover." and "Share the home page so they can sign in: …"), which is what `isFree` false would have chosen.
+- `.oxlintrc.json`: `no-undef` is on for `js/**/*.js`, with the browser environment and three declared globals (`sheetsData`, `timelineEpochs`, `L`). Across `js/`, those three and `isFree` were the only names it reported.
+- With the old `lesson-connect.js` put back, lint fails with `'isFree' is not defined`; with the fix, it passes.
+
+**Handbook updated:** 07 (lint).
+
+**Checked here:** on Windows: lint exits 0, `npm run test:unit` passes 180 of 180, every `npm test` script passes, and `npm run test:browser` passes 30 of 30. No browser check covers the share fallback (not checked in a browser).
+
+**Status:** on branch `arch/phase-4b-modules`, not deployed.
+
+## 2026-11-16 — Architecture plan, step 4.5: every page loads one ES module entry
+
+**Why:** pages listed up to 70 `<script>` tags, and the study page's files shared about 280 names through the global scope, so a missing or reordered tag broke the page and lint could not see which file used what.
+
+**What changed:**
+
+- **Entries.** `js/pages/<page>/main.js` for `index`, `study`, `map`, `account`, `insights`, `reviews`, `gallery` and `404`. Each imports, in the old order, every deferred `js/` script the page used to tag (20, 38, 17, 17, 14, 12, 12 and 10 imports). The page now has one `<script type="module">` in their place. Vendor files and the scripts that must run before parsing ends (`sentry.js`, `core.js`, `cinema.js`, `consent.js`, `book-open.js`) keep their tags. For every page, the set of `js/` files loaded is the same as before (compared with `tools/verify/_sources.mjs`, which now follows imports).
+- **Study modules.** The 26 files split out of `study-app.js` became ES modules: `export` on each top-level declaration and `import` lines for what each file reads from the others. `tools/verify/verify_moved_functions.mjs` shows all 280 declarations have the same syntax trees as before.
+- **State that crossed files.** A module cannot assign a name it imports. 28 `let` variables declared in `study-app.js` were assigned in another file. 23 had one writer and moved to it, unchanged (same check, 28 of 28 including the five below). Five were assigned in two files, so the other file now calls a setter: `setCurrentThemeIdx`, `setCurrentFontIdx`, `setFontAuto` (in `reading-settings.js`), `setSittingYearOverride` (`sitting-map.js`) and `setEndCardShownForSheet` (`sitting-guide.js`). Six assignments in `study-app.js` changed to setter calls; that is the only code change in this step that is not a move.
+- **Load order.** `study-app.js` is the only study module the entry imports, and it imports the others in their old order, so every one finishes loading before `study-app.js` runs its start-up code. A check over the syntax trees found that the 25 other files hold only declarations, and that none of their initial values reads another file's names.
+- **Strict mode.** Modules run in strict mode. The 73 imported scripts parse as strict code, and none has a function declared inside a block or a top-level `this`.
+- **Globals kept.** `competency.js` and `workbench.js` call `window.showToast` and `window.navigateSheet`, which existed only because `study-app.js` was a classic script. The study entry now sets those two explicitly. Seven more study functions are put on `window` for the browser tests, on local hosts only.
+- **Lint.** The `no-unused-vars` override for the study files is removed from `.oxlintrc.json`. Lint passes with no override.
+- **Behaviour change:** on pages that load `onboard.js` (`index.html`, `study.html`), `insights.js` no longer shows its own profile card next to the onboarding questions. Its code always meant to skip it there; a classic-script timing gap had let it through. `verify_insight_cards.mjs` now shows the sitting pulse card instead, which tests the same thing (prompt card styles do not leak onto the Insights tab).
+- **Tests.** `tools/verify/_sources.mjs` gains `pageScripts(page)` and `pageLoads(page, file)`, which follow module imports. `verify_desk`, `verify_insights`, `verify_scripture`, `verify_task_flow` and `verify_hero_budget` use `pageLoads` instead of searching the page HTML for a script path.
+- **Found, not changed here:** `js/study/lesson-connect.js` reads `isFree`, which no file defines since the sign-in change (`acd563e`). Sharing a sitting by copying the link throws a `ReferenceError`. Fixed in the next commit.
+
+**Handbook updated:** 03 (how scripts load, `js/pages/`, `js/study/`, where a study feature or page script goes), 07 (lint override removed).
+
+**Checked here:** on Windows: lint exits 0 with no override, `npm run test:unit` passes 180 of 180, every `npm test` script passes, and `npm run test:browser` passes 30 of 30. The first full browser run failed `verify_insight_cards.mjs` (the behaviour change above); it fails 2 of 2 alone before the test change and passes after.
+
+**Status:** on branch `arch/phase-4b-modules`, not deployed.
+
+## 2026-11-16 — Architecture plan, step 4.4 finished: the rest of the gallery split
+
+**Why:** the first part of 4.4 left the model cache, tour, study looks and panels in `js/gallery/app.js`, because they share variables with the scene.
+
+**What changed:**
+
+- Eight new modules in `js/gallery/`: `tour.js`, `study-looks.js`, `model-cache.js`, `hall-backdrop.js`, `model-loader.js`, `panels.js`, `dossier.js`, `explode.js`. Each took its functions together with the `let` variables only it assigns. `app.js` keeps the rest and is now 2,083 lines (from 2,654).
+- **How the moves are safe:** an ES module can read another module's `let` (the binding is live) but not assign it. A script over the syntax tree chose each group so that nothing outside it assigns the group's variables and the group assigns nothing outside it, and found no assignment to any imported name afterwards. The new modules import what they read from `app.js` (`export` was added to 27 declarations there), so the modules form an import cycle. Nothing in the split-out files runs at load time, so the order of loading does not change behaviour.
+- The camera helpers stay in `app.js`: twelve places there assign `cameraTween`.
+- `tools/verify/verify_moved_functions.mjs` shows all 46 moved declarations have the same syntax trees. A first attempt failed it: the move script also stripped indentation inside multi-line template strings, which changes the strings. The script was fixed and the moves redone.
+- **Cache fix, `tools/hash-release-assets.mjs`:** files in an import cycle were hashed from their own text only, so a change to one would have left the others' names unchanged though their contents changed. Under the one-year `immutable` cache, a returning browser could then load an old `app.js` that imports files no longer on the server. Each file in a cycle now gets a hash that also covers the whole cycle. `verify_hash_release.mjs` has a new check, which fails on the old tool and passes now.
+- `tools/verify/verify_map_help.mjs` reads every gallery module, because the tour code it checks is now in `tour.js`.
+
+**Handbook updated:** 03 (`js/gallery/`), 05 (fingerprinting of import cycles, root import paths).
+
+**Checked here:** on Windows: lint exits 0, `npm run test:unit` passes 180 of 180, every `npm test` script passes, and `npm run test:browser` passes 30 of 30, which includes the gallery checks (`verify_hall_mural.mjs`, `verify_horizon.mjs`, `verify_photo_y.mjs`). A staged hash run renamed all 11 gallery modules and rewrote every import between them.
+
+**Status:** on branch `arch/phase-4b-modules`, not deployed.
 
 ## 2026-11-16 — Deleting an account clears its own parked changes
 

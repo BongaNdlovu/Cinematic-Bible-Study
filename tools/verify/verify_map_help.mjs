@@ -26,7 +26,7 @@ assert(map.includes('onSlow: () => { const loadEl = document.querySelector(".cma
 assert(!map.includes('getElementById("cmap-load")'), 'the slow-loading note is not looked up by an id no element has');
 assert(map.includes('const loadEl = el("div", { class: "cmap-load" }'), 'the loading line is created with the class the slow-loading note looks up');
 
-const gallery = read('js/gallery/app.js');
+const gallery = fs.readdirSync(path.join(root, 'js/gallery')).filter((f) => f.endsWith('.js')).sort().map((f) => read('js/gallery/' + f)).join('\n');
 assert(gallery.includes("if (e.key !== 't' && e.key !== 'T') return;") && gallery.includes('if (e.ctrlKey || e.metaKey || e.altKey) return;'), 'the tour key ignores modifier chords');
 assert(/!!\(e\.target && e\.target\.isContentEditable\);\s*if \(typing\) return;\s*startArtifactTour\(\);/.test(gallery), 'typing a t in a field does not start the tour');
 assert(/if \(tourRunning\) \{\s*stopArtifactTour\(true\);\s*return;\s*\}/.test(gallery) && gallery.includes("tourRunning = false; museumToast('Tour complete');"), 'only one guided tour runs at a time, and pressing T again stops it');

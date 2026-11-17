@@ -1,9 +1,12 @@
+import { diagramCite } from '/js/study/diagrams/cite.js';
+import { escapeStudy } from '/js/study/references.js';
+
     /* A comparison whose sides have equal points about the same things carries
        `rows` and renders as a real table; otherwise its sides stay parallel
        bullets.
        Cells are `points[]` verbatim. The row label is the only text this
        renderer adds. */
-    function bodyComparison(spec, steps, canResolve) {
+    export function bodyComparison(spec, steps, canResolve) {
       const rows = Array.isArray(spec.rows) ? spec.rows : [];
       // A matrix only where the labels cover every side exactly. Anything else is
       // the parallel shape, which is what the data is when the counts disagree.

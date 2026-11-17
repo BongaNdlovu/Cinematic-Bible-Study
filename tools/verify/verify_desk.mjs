@@ -2,6 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import assert from 'assert';
 import { fileURLToPath } from 'url';
+import { pageLoads } from './_sources.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const read = (rel) => fs.readFileSync(path.join(root, rel), 'utf8');
@@ -42,7 +43,7 @@ assert(!desk.includes('mailto:'), 'the desk must not open a mail link');
 for (const page of ['index.html', 'study.html', 'map.html', 'gallery.html', 'account.html', 'reviews.html', 'insights.html', '404.html']) {
   const html = read(page);
   assert(html.includes('css/desk.css'), page + ' links the desk styles');
-  assert(html.includes('js/shared/desk.js'), page + ' loads the desk');
+  assert(pageLoads(page, 'js/shared/desk.js'), page + ' loads the desk');
 }
 
 const notFound = read('404.html');

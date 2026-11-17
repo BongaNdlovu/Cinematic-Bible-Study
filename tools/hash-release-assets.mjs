@@ -46,8 +46,16 @@ function rewrite(pairs) {
   }
 }
 
-function hashName(rel) {
-  const hash = crypto.createHash("sha256").update(fs.readFileSync(path.join(stage, rel))).digest("hex").slice(0, 12);
+function cycleDigest(batch) {
+  const digest = crypto.createHash("sha256");
+  for (const rel of batch.slice().sort()) digest.update(rel).update(fs.readFileSync(path.join(stage, rel)));
+  return digest.digest("hex");
+}
+
+function hashName(rel, salt) {
+  const digest = crypto.createHash("sha256").update(fs.readFileSync(path.join(stage, rel)));
+  if (salt) digest.update(salt);
+  const hash = digest.digest("hex").slice(0, 12);
   return rel.replace(/(\.[^.]+)$/, "." + hash + "$1");
 }
 
@@ -67,9 +75,11 @@ function apply(prefix, extensions) {
       console.warn("hash-release-assets: circular references under " + prefix + "/, hashing " + pending.length + " files together");
       batch = pending;
     }
+    const circular = batch === pending && batch.some((rel) => refs.get(rel).some((other) => open.has(other)));
+    const salt = circular ? cycleDigest(batch) : "";
     const pairs = [];
     for (const rel of batch) {
-      const renamed = hashName(rel);
+      const renamed = hashName(rel, salt);
       fs.renameSync(path.join(stage, rel), path.join(stage, renamed));
       pairs.push([rel, renamed]);
       if (prefix === "models") {

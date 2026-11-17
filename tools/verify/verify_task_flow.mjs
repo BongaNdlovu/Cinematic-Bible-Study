@@ -1,5 +1,5 @@
 import fs from 'fs';
-import { studyPageSource } from './_sources.mjs';
+import { studyPageSource, pageLoads } from './_sources.mjs';
 import path from 'path';
 import assert from 'assert';
 import { fileURLToPath } from 'url';
@@ -14,7 +14,7 @@ const flowCss = read('css/task-flow.css');
 const player = read('js/study/lesson-player.js');
 const audioCss = read('css/study-audio.css');
 
-assert(html.includes('js/study/task-flow.js') && html.includes('css/task-flow.css'), 'the study page loads the task flow');
+assert(pageLoads('study.html', 'js/study/task-flow.js') && html.includes('css/task-flow.css'), 'the study page loads the task flow');
 assert(html.includes('css/study-audio.css'), 'the study page loads the audio player styles');
 assert(app.includes('window.StudyTasks = {'), 'the study app exposes what is done to the flow');
 assert(app.includes("new CustomEvent('quiz:changed'"), 'answers and retries tell the flow');

@@ -1,14 +1,21 @@
-    function clearGuideSpotlight() {
+import { currentSheetIndex, sheetQuizComplete, updateNextGate } from '/js/study/study-app.js';
+
+    export let sittingGuideMode = null;
+    export let endCardShownForSheet = -1;
+
+    export function setEndCardShownForSheet(value) { endCardShownForSheet = value; }
+
+    export function clearGuideSpotlight() {
       document.querySelectorAll('.is-guide-spot').forEach((el) => el.classList.remove('is-guide-spot'));
     }
 
-    function syncSittingOverlay() {
+    export function syncSittingOverlay() {
       const guide = document.getElementById('sitting-guide');
       const open = guide && !guide.hidden;
       document.body.classList.toggle('is-sitting-overlay', !!open);
     }
 
-    function hideSittingGuide() {
+    export function hideSittingGuide() {
       const box = document.getElementById('sitting-guide');
       if (!box) return;
       box.hidden = true;
@@ -19,7 +26,7 @@
       syncSittingOverlay();
     }
 
-    function showIntroGuide(index) {
+    export function showIntroGuide(index) {
       const data = sheetsData[index];
       const guide = data && data.guide && data.guide.intro;
       const box = document.getElementById('sitting-guide');
@@ -45,7 +52,7 @@
       if (primary) primary.focus();
     }
 
-    function layoutEndSpotlight(target) {
+    export function layoutEndSpotlight(target) {
       const box = document.getElementById('sitting-guide');
       if (!box || !target || target.hidden) return;
       let r = target.getBoundingClientRect();
@@ -68,7 +75,7 @@
       box.style.alignItems = cy > (window.innerHeight * 0.42) ? 'flex-start' : 'flex-end';
     }
 
-    function scheduleEndSpotlight(target) {
+    export function scheduleEndSpotlight(target) {
       const run = () => layoutEndSpotlight(target);
       run();
       requestAnimationFrame(() => {
@@ -80,7 +87,7 @@
       setTimeout(run, 480);
     }
 
-    function showEndGuide(index) {
+    export function showEndGuide(index) {
       const data = sheetsData[index];
       const guide = data && data.guide && data.guide.end;
       const box = document.getElementById('sitting-guide');
@@ -104,19 +111,19 @@
       }
     }
 
-    function maybeShowEndGuide() {
+    export function maybeShowEndGuide() {
       if (!sheetQuizComplete()) return;
       if (endCardShownForSheet === currentSheetIndex) return;
       if (sittingGuideMode === 'intro') return;
       showEndGuide(currentSheetIndex);
     }
 
-    function finishIntroGuide() {
+    export function finishIntroGuide() {
       if (window.BAJourney) window.BAJourney.markIntroSeen(currentSheetIndex);
       hideSittingGuide();
     }
 
-    function activateGuideTarget() {
+    export function activateGuideTarget() {
       const data = sheetsData[currentSheetIndex];
       const spotId = (data && data.guide && data.guide.end && data.guide.end.spotlight) || 'next-sheet-btn';
       hideSittingGuide();
@@ -124,7 +131,7 @@
       if (target && !target.hidden && !target.disabled) target.click();
     }
 
-    function syncAdvanceButtons(index) {
+    export function syncAdvanceButtons(index) {
       const prevBtn = document.getElementById('prev-sheet-btn');
       const nextBtn = document.getElementById('next-sheet-btn');
       const nextBtnText = document.getElementById('next-btn-text');

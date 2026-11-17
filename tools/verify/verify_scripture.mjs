@@ -1,5 +1,5 @@
 import fs from 'fs';
-import { studyPageSource } from './_sources.mjs';
+import { studyPageSource, pageLoads } from './_sources.mjs';
 import path from 'path';
 import vm from 'vm';
 import { fileURLToPath } from 'url';
@@ -110,8 +110,8 @@ const studyApp = studyPageSource();
 const sheetsSrc = fs.readFileSync(path.join(root, 'js/study/sheets-data.js'), 'utf8');
 const studySources = html + studyApp + sheetsSrc;
 if (!html.includes('data-instrument="scripture"')) fail('study.html is missing the Scripture instrument tab');
-if (!html.includes('js/study/scripture.js')) fail('study.html does not load js/study/scripture.js');
-if (!html.includes('js/study/sheets/index.js') || !html.includes('js/study/study-app.js')) {
+if (!pageLoads('study.html', 'js/study/scripture.js')) fail('study.html does not load js/study/scripture.js');
+if (!pageLoads('study.html', 'js/study/sheets/index.js') || !pageLoads('study.html', 'js/study/study-app.js')) {
   fail('study.html does not load extracted study scripts');
 }
 if (!studyApp.includes('BAScripture.showSheet')) fail('loadSheet does not ask Scripture to follow the sheet');

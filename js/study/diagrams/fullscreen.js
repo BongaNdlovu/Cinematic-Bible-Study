@@ -1,3 +1,6 @@
+import { citePanelOpen, closeCitePanel, escapeStudy, syncCiteClose } from '/js/study/references.js';
+import { replayControlFor } from '/js/study/study-app.js';
+
     /* Full screen for table, comparison and timeline: one shell puts `position:
        fixed; inset: 0` on the block, with no reparenting and no second render
        path.
@@ -6,15 +9,15 @@
        the frame and variables; each renderer owns its content.
        Escape: the layer registers in anotherLayerOwnsEscape(), so one press
        closes the innermost layer. */
-    const FULLSCREEN_KINDS = new Set(['table', 'comparison', 'timeline']);
+    export const FULLSCREEN_KINDS = new Set(['table', 'comparison', 'timeline']);
 
     /* What the layer calls itself. The word is the standard's own name, not a
        restatement of the title below it. */
-    const FS_KICKER = { table: 'Table', comparison: 'Comparison', timeline: 'Timeline' };
+    export const FS_KICKER = { table: 'Table', comparison: 'Comparison', timeline: 'Timeline' };
 
     /* The block's own full-screen control. Same glyph as the mindmap's so the
        two surfaces read as one idea, sized to sit beside `.chain-toggle`. */
-    function fullscreenControlHtml() {
+    export function fullscreenControlHtml() {
       return '<button class="chain-fs" type="button" data-chain-fs aria-pressed="false" aria-label="Full screen" title="Full screen">' +
         '<svg class="dfx-i-expand" viewBox="0 0 12 12" fill="currentColor" aria-hidden="true" focusable="false">' +
           '<path d="M1.2 1.2h3.6v1.6H2.8v2H1.2zM7.2 1.2h3.6v3.6H9.2V2.8H7.2zM1.2 7.2h1.6v2h2v1.6H1.2zM9.2 7.2h1.6v3.6H7.2V9.2h2z"/>' +
@@ -28,7 +31,7 @@
     /* What "focusable" means inside the layer, matching mindmap.js's list so the
        two traps agree about the page. */
 
-    function wireDiagramFullscreen(figure, kind) {
+    export function wireDiagramFullscreen(figure, kind) {
       const btn = figure.querySelector('[data-chain-fs]');
       const toggle = figure.querySelector('.chain-toggle');
       const panel = figure.querySelector('.chain-body');
@@ -197,13 +200,13 @@
        ones are never rendered again, so their mindmap (observers on the body, a
        frame loop) and story reader (a document listener) would otherwise live on
        and keep the whole detached article reachable. */
-    function releaseFigureFullscreen(figure) {
+    export function releaseFigureFullscreen(figure) {
       const fs = figure.__diagramFs;
       if (fs && typeof fs.isFull === 'function' && fs.isFull()) fs.exit(false);
       figure.__diagramFs = null;
     }
 
-    function releaseFullscreenLeftovers() {
+    export function releaseFullscreenLeftovers() {
       if (document.querySelector('.chain.is-full, .mm.is-full')) return;
       document.documentElement.classList.remove('dfx-open', 'dfx-cite-open');
       document.querySelectorAll('[data-dfx-inert]').forEach((el) => {

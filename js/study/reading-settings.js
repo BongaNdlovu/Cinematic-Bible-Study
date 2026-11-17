@@ -1,6 +1,17 @@
-    const themes = ['charcoal', 'paper', 'white', 'night'];
+import { tellWeather, weatherRunning, weatherState } from '/js/study/focus-timer.js';
+import { currentSheetIndex, showToast } from '/js/study/study-app.js';
 
-    const fontSizes = [
+    export let fontAuto = true;
+    export let currentThemeIdx = 0;
+    export let currentFontIdx = 1;
+
+    export function setCurrentThemeIdx(value) { currentThemeIdx = value; }
+    export function setCurrentFontIdx(value) { currentFontIdx = value; }
+    export function setFontAuto(value) { fontAuto = value; }
+
+    export const themes = ['charcoal', 'paper', 'white', 'night'];
+
+    export const fontSizes = [
       { label: "85%", size: "0.95rem" },
       { label: "100%", size: "1.125rem" },
       { label: "115%", size: "1.28rem" },
@@ -8,13 +19,13 @@
       { label: "150%", size: "1.65rem" }
     ];
 
-    function autoFontIndexFor(width) {
+    export function autoFontIndexFor(width) {
       if (width >= 1900) return 3; // 130% on large monitors
       if (width >= 1366) return 2; // 115% on laptops and up
       return 1;                    // 100% on tablets and phones
     }
 
-    function applyTheme(idx, silent) {
+    export function applyTheme(idx, silent) {
       currentThemeIdx = ((idx % themes.length) + themes.length) % themes.length;
       const theme = themes[currentThemeIdx];
       const html = document.documentElement;
@@ -53,11 +64,11 @@
       }
     }
 
-    function cycleTheme() {
+    export function cycleTheme() {
       applyTheme(currentThemeIdx + 1);
     }
 
-    function applyFontSize() {
+    export function applyFontSize() {
       if (fontAuto) {
         currentFontIdx = autoFontIndexFor(window.innerWidth);
       }
@@ -78,7 +89,7 @@
       }
     }
 
-    function adjustFontSize(delta) {
+    export function adjustFontSize(delta) {
       fontAuto = false;
       try {
         localStorage.setItem('daniel_font_manual_v1', '1');
