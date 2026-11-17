@@ -14,6 +14,31 @@ Entry template:
 
 ---
 
+## 2026-11-17 — `globe.js` split under 800 lines
+
+**Why:** `js/pages/map/globe.js` held 1,036 lines, on the size-exception list.
+
+**What changed:**
+
+| File | Lines | Holds |
+|---|---|---|
+| `js/pages/map/globe-math.js` (new) | 208 | Every file-level declaration that was not `create`: sizes and distances, shaders, tile maths, `toVec`, `webglAvailable`, `loadImage`, `graticule`, `subdivide` (35 declarations) |
+| `js/pages/map/globe-scene.js` (new) | 100 | `buildGlobeBase` (renderer, pin layer, scene, camera, sun, earth and clouds) and `buildGlobeSky` (haze, grid, atmosphere, stars) |
+| `js/pages/map/globe-patch-geometry.js` (new) | 36 | `patchGeometry` and `freeCanvas`, which read only module-level helpers |
+| `js/pages/map/globe.js` | 729 | `create` and the rest of the globe |
+
+- `create` makes one globe per call, and most of its inner functions change shared variables, so they stay. Two runs of set-up statements moved as whole blocks into functions called at the same spot, with the same inputs, returning the objects they made, so they still run in the same order. A check over the syntax trees confirms that putting each block back where its call is gives the original 132 statements of `create`. The first attempt failed that check: moving the first block added an import line and shifted the line numbers the second move used. It was redone from the saved file.
+- `verify_moved_functions.mjs`: the 35 moved declarations, `patchGeometry`, `freeCanvas` and the 36 functions left in `globe.js` all have the same syntax trees.
+- `globe.js` still exports `toVec` and `webglAvailable` (re-exported from `globe-math.js`), because `map.js` calls `webglAvailable` on the loaded module.
+- A staged run of `tools/hash-release-assets.mjs` rewrote all three new imports to hashed names.
+- `.oxlintrc.json`: `globe.js` left the file-size list (8 left).
+
+**Handbook updated:** 03 (`js/pages/map/`), 07 (lint).
+
+**Checked here:** lint exits 0, `npm run test:unit` passes 188 of 188, every `npm test` script passes, and `npm run test:browser` passes 30 of 30 (including `verify_globe.mjs` and `verify_map.mjs`).
+
+**Status:** on branch `split/globe`, not deployed.
+
 ## 2026-11-17 — `mindmap.js` split under 800 lines
 
 **Why:** `js/pages/study/mindmap.js` held 1,254 lines, on the size-exception list.
