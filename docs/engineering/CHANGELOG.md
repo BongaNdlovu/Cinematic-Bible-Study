@@ -14,6 +14,21 @@ Entry template:
 
 ---
 
+## 2026-11-17 — Architecture plan, step 6.2: complexity ceiling 55 → 52
+
+**Why:** a ceiling of 55 lets one function hold dozens of branches, where untested paths hide. The plan lowers it in steps, each leaving lint passing.
+
+**What changed:**
+
+- `js/pages/gallery/gallery.js`: `selectAsset` was the only site function above 52 (it was 55). Two blocks that write no shared state moved out unchanged into `markActiveCards(key)` (the era cells, the rail cards and scrolling the active card into view) and `paintHeroChrome(data)` (the eyebrow, title and scripture pill). A check over the syntax trees confirms that putting the two bodies back where their calls are gives exactly the old `selectAsset` body. Two comments that labelled those blocks were dropped; the function names say the same.
+- `.oxlintrc.json`: `complexity` is 52. The highest left in site code is `mergeCloudWithLocal` (52, `js/features/progress-sync.js`), so the next step down needs it split first.
+
+**Handbook updated:** 07 (lint).
+
+**Checked here:** lint exits 0 at 52 (and at 52 fails with the old `selectAsset`, complexity 55), `npm run test:unit` and every `npm test` script pass. The browser suite ran once on the final Phase 6 state; see the step 6.4 entry.
+
+**Status:** on branch `arch/phase-6-lock`, not deployed.
+
 ## 2026-11-17 — Architecture plan, step 5.5: one word, "sitting"
 
 **Why:** five words named one lesson, so a search for one missed the others.

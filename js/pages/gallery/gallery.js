@@ -1041,6 +1041,29 @@ import * as THREE from 'three';
       return k === 'assembled';
     }
 
+    function markActiveCards(key) {
+      document.querySelectorAll('.era-cell').forEach((el) => {
+        el.classList.toggle('active', el.dataset.asset === key);
+      });
+
+      document.querySelectorAll('.artifact-card-item').forEach(el => {
+        el.classList.toggle('active', el.dataset.asset === key);
+      });
+      const activeCard = document.querySelector('.artifact-card-item.active');
+      if (activeCard && typeof activeCard.scrollIntoView === 'function') {
+        activeCard.scrollIntoView({ block: 'nearest', behavior: reducedMotion ? 'auto' : 'smooth' });
+      }
+    }
+
+    function paintHeroChrome(data) {
+      const eyebrow = document.getElementById('hero-eyebrow');
+      const title = document.getElementById('hero-main-title');
+      const pill = document.getElementById('hero-scripture-pill');
+      if (eyebrow) eyebrow.textContent = data.eyebrow;
+      if (title) title.textContent = data.title;
+      if (pill) pill.textContent = data.pill;
+    }
+
     export function selectAsset(key, opts = {}) {
       if (tourRunning && !opts.fromTour) stopArtifactTour(true);
       if (key === 'altar') key = 'assembled';
@@ -1093,26 +1116,9 @@ import * as THREE from 'three';
         });
       }, 1500);
       AudioBus.play('select');
-      document.querySelectorAll('.era-cell').forEach((el) => {
-        el.classList.toggle('active', el.dataset.asset === key);
-      });
+      markActiveCards(key);
 
-      // Update Left Rail active state
-      document.querySelectorAll('.artifact-card-item').forEach(el => {
-        el.classList.toggle('active', el.dataset.asset === key);
-      });
-      const activeCard = document.querySelector('.artifact-card-item.active');
-      if (activeCard && typeof activeCard.scrollIntoView === 'function') {
-        activeCard.scrollIntoView({ block: 'nearest', behavior: reducedMotion ? 'auto' : 'smooth' });
-      }
-
-      // Update Top Chrome
-      const eyebrow = document.getElementById('hero-eyebrow');
-      const title = document.getElementById('hero-main-title');
-      const pill = document.getElementById('hero-scripture-pill');
-      if (eyebrow) eyebrow.textContent = data.eyebrow;
-      if (title) title.textContent = data.title;
-      if (pill) pill.textContent = data.pill;
+      paintHeroChrome(data);
 
       syncDossierNarrative(data);
       [document.querySelector('.hero-title-group'), document.querySelector('.narrative-dossier')].forEach((node) => {
