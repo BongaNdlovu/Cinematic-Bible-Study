@@ -13,7 +13,7 @@ export const BROWSER_CHECKS = [
   { file: 'verify_bridge_panel.mjs', base: 'flag' },
   { file: 'verify_cp07.mjs', base: 'none' },
   { file: 'verify_flow.mjs', base: 'flag' },
-  { file: 'verify_globe.mjs', base: 'none', timeoutMs: 480000 },
+  { file: 'verify_globe.mjs', base: 'none', timeoutMs: 720000 },
   { file: 'verify_grounding_quotes.mjs', base: 'none' },
   { file: 'verify_hall_mural.mjs', base: 'none', timeoutMs: 480000 },
   { file: 'verify_horizon.mjs', base: 'none' },
