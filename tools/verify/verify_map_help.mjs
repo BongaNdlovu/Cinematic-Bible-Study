@@ -6,7 +6,7 @@ import { fileURLToPath } from 'url';
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const read = (rel) => fs.readFileSync(path.join(root, rel), 'utf8');
 
-const map = read('js/pages/map/map.js');
+const map = ['map.js', 'map-render.js', 'map-dom.js', 'map-header.js'].map((f) => read('js/pages/map/' + f)).join(String.fromCharCode(10));
 const globe = read('js/pages/map/globe.js');
 const css = read('css/pages/map/map.css');
 
