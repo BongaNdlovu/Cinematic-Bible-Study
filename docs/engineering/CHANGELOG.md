@@ -14,6 +14,21 @@ Entry template:
 
 ---
 
+## 2026-11-17 — Complexity ceiling 52 → 50
+
+**Why:** the next step down from 52 needed `mergeCloudWithLocal` split, the one function at 52.
+
+**What changed:**
+
+- `js/features/progress-sync.js`: `mergeCloudWithLocal` held four independent `try` blocks, one per store, each setting `localHadNew`. Each block moved unchanged into its own function, which returns whether the local side had something new: `mergeJourneyFromCloud`, `mergeWorkbenchFromCloud`, `mergeTelemetryFromCloud`, `mergeCertificateNameFromCloud`. `mergeCloudWithLocal` calls all four in the old order, with no short-circuit, so every store is still merged. A check over the syntax trees confirms each new function holds its old `try` block unchanged. The four numbered comments that labelled the blocks were dropped; the function names say the same.
+- `.oxlintrc.json`: `complexity` is 50. Lint passes at 50; at 45 it would fail on `mount` (49, `js/pages/map/map.js`), `selectAsset` (49, `gallery.js`) and `start` (46).
+
+**Handbook updated:** 07 (lint).
+
+**Checked here:** lint exits 0 at 50, `npm run test:unit` passes, every `npm test` script passes, and `npm run test:browser` passes 30 of 30 (run on this change together with the next entry).
+
+**Status:** on branch `arch/followup-size`, not deployed.
+
 ## 2026-11-17 — The horizon check waits for the gallery's transition before clicking
 
 **Why:** `verify_horizon.mjs` clicked the next artifact as soon as the plate changed. The gallery ignores a click while its 180 ms change of artifact is still running (`selectAsset._busy`), so the click could be lost and the check then read the old plate. It failed this way once, locally, on 17 November 2026.

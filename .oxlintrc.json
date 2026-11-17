@@ -18,7 +18,7 @@
     "assets/**"
   ],
   "rules": {
-    "complexity": ["error", 52],
+    "complexity": ["error", 50],
     "no-underscore-dangle": "off",
     "consistent-function-scoping": "off",
     "unicorn/no-array-sort": "off",
