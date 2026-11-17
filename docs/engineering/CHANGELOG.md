@@ -27,7 +27,7 @@ Entry template:
 
 **Handbook updated:** 03 (`js/pages/dashboard/`), 07 (lint).
 
-**Checked here:** lint exits 0, `npm run test:unit` passes 188 of 188, every `npm test` script passes (including `verify_insights.mjs`, which runs the dashboard's row builders on sample data). BROWSER
+**Checked here:** lint exits 0, `npm run test:unit` passes 188 of 188, every `npm test` script passes (including `verify_insights.mjs`, which runs the dashboard's row builders on sample data). `npm run test:browser` passed 30 of 30 on the commit after the dashboard split, which includes this change. (A run on the workbench commit alone also passed 30 of 30, but the dashboard files were being edited during it.)
 
 **Status:** on branch `arch/split-large`, not deployed.
 
@@ -49,7 +49,7 @@ Entry template:
 
 **Handbook updated:** 03 (`js/pages/study/`), 07 (lint).
 
-**Checked here:** lint exits 0, `npm run test:unit` passes 188 of 188, every `npm test` script passes. BROWSER
+**Checked here:** lint exits 0, `npm run test:unit` passes 188 of 188, every `npm test` script passes. `npm run test:browser` passed 30 of 30 on the commit after the dashboard split, which includes this change. (A run on the workbench commit alone also passed 30 of 30, but the dashboard files were being edited during it.)
 
 **Status:** on branch `arch/split-large`, not deployed.
 
