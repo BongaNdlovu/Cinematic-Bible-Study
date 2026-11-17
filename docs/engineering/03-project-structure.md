@@ -29,7 +29,7 @@ The site has no build step for its pages. The files in the repository root and i
 ├── wrangler.toml          Cloudflare Pages settings and Durable Object binding
 ├── package.json           npm scripts and dev dependencies
 ├── .npmrc                 ignore-scripts=true: npm runs no package install scripts
-└── .github/               workflows/: CI (ci.yml), the 15-minute live health check (health.yml) and the weekly database backup (db-backup.yml); dependabot.yml: weekly update proposals
+└── .github/               workflows/: CI (ci.yml), the 15-minute live health check (health.yml) and the weekly database backup (db-backup.yml); dependabot.yml: weekly update proposals; pull_request_template.md: the where-things-go checklist
 ```
 
 Folders that are **never deployed**. `tools/deploy-cloudflare-pages.ps1` leaves them out and refuses to ship if some of them slip in; the middleware also answers 404 for most of these paths: `docs/`, `tools/`, `db/`, `tests/`, `functions/` (its source), `workers/`, `backups/`, `qa/`, `qa-e2e/`, `fix-plan/`, `_mig/`, `_factcheck/`, `models/originals/`, `assets/_glb_preview/`, and every dotfile.

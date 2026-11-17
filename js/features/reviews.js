@@ -37,9 +37,7 @@
 
   function currentUser() { return window.SiteCore.currentUser(); }
 
-  function signedIn() {
-    return !!currentUser();
-  }
+  function signedIn() { return window.SiteCore.signedIn(); }
 
   function isModerator() {
     return !!(window.ScrollAuth && window.ScrollAuth.isModerator && window.ScrollAuth.isModerator());

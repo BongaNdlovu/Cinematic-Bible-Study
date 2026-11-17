@@ -25,6 +25,67 @@ Entry template:
 **Checked here:** `verify_horizon.mjs` passes 3 of 3 runs alone on Windows.
 
 **Status:** on branch `ci/browser-gate`.
+## 2026-11-17 — Architecture plan, step 6.4: pull-request template
+
+**Why:** it puts the layout rules in front of every change, including changes made by AI agents.
+
+**What changed:** `.github/pull_request_template.md` (new) asks for the feature name (using *sitting*), the files touched and why each sits in its folder, page scripts as entry imports, database changes as the next numbered migration, the four test commands, proof for moves, and the changelog and handbook updates.
+
+**Handbook updated:** 03 (top level).
+
+**Checked here:** lint exits 0, `npm run test:unit` passes 185 of 185, every `npm test` script passes. The browser suite on the final Phase 6 state passed 29 of 30: `verify_horizon.mjs` sent a gallery click while the previous selection was still in its 180 ms transition, which the gallery ignores by design. That is a race in the test, fixed in the next entry.
+
+**Status:** on branch `arch/phase-6-lock`, not deployed.
+
+## 2026-11-17 — Architecture plan, step 6.3: a structure test
+
+**Why:** the problems Phases 1, 3 and 5 fixed (copied helpers, injected styles, misplaced files) come back unless a test stops them.
+
+**What changed:**
+
+- `tests/unit/structure.test.mjs` (new, in `npm run test:unit`, five checks): a function named like a `core.js` helper must call `SiteCore` rather than repeat its body; every file in `js/core/`, `js/features/`, `css/core/` and `css/features/` is loaded by two or more pages (counted from each page's tags, entry imports and stylesheet links; `auth-config.example.js` exempt); no page loads a file from another page's folder; a page with an entry folder loads exactly one module entry; no script creates a `<style>` element or writes a style block.
+- The plan's fourth rule, "no typed storage key outside the key list", is already enforced by `tests/unit/storage-keys.test.mjs`, so it is not repeated.
+- **Found by the new test:** `js/features/reviews.js` had its own `signedIn()` that repeated `core.js`'s body (`!!currentUser()`), missed in Phase 1. It now calls `window.SiteCore.signedIn()`. Both read `SiteCore.currentUser()`, so the result is the same.
+- With a throwaway `js/features/zz-probe.js` that creates a `<style>` element, two checks failed (the style rule and the two-page rule); without it, all five pass.
+
+**Handbook updated:** 07 (test kinds).
+
+**Checked here:** lint exits 0, `npm run test:unit` passes 185 of 185, every `npm test` script passes.
+
+**Status:** on branch `arch/phase-6-lock`, not deployed.
+
+## 2026-11-17 — Architecture plan, step 6.1: file and function size limits
+
+**Why:** a file grows a line at a time and no single change looks like bloat. A limit that fails lint stops it at the moment it happens.
+
+**What changed:** `.oxlintrc.json` turns on `max-lines` (800, counting every line) and `max-lines-per-function` (100). Files that already break them are listed by name in two `overrides`, so lint passes today:
+
+- Over 800 lines (14): `js/content/sheets-data.js`, `js/features/desk.js`, `js/features/reviews.js`, `js/pages/dashboard/dashboard.js`, `js/pages/gallery/artifact-registry.js`, `js/pages/gallery/gallery.js`, `js/pages/index/shelf.js`, `js/pages/map/globe.js`, `js/pages/map/map.js`, `js/pages/study/book-reader.js`, `certificate.js`, `mindmap.js`, `study-app.js`, `workbench.js` (all three in `js/pages/study/`).
+- A function over 100 lines (19 files): `progress-sync.js`, `reviews.js`, `dashboard.js`, `gallery.js`, `hall-art.js`, `shelf.js`, `globe.js`, `map.js`, and in the study page `book-reader.js`, `certificate.js`, `competency.js`, `diagrams/fullscreen.js`, `diagrams/timeline.js`, `mindmap.js`, `quiz.js`, `story.js`, `study-app.js`, `weather-scene.js`, `workbench.js`.
+
+`sheets-data.js` and `artifact-registry.js` are data, not logic; splitting them is a content decision, so their exceptions may stay.
+
+**Handbook updated:** 07 (lint).
+
+**Checked here:** lint exits 0. A new 801-line file in `js/pages/map/` failed lint with `max-lines` and was removed. `npm run test:unit` and every `npm test` script pass.
+
+**Status:** on branch `arch/phase-6-lock`, not deployed.
+
+## 2026-11-17 — Architecture plan, step 6.2: complexity ceiling 55 → 52
+
+**Why:** a ceiling of 55 lets one function hold dozens of branches, where untested paths hide. The plan lowers it in steps, each leaving lint passing.
+
+**What changed:**
+
+- `js/pages/gallery/gallery.js`: `selectAsset` was the only site function above 52 (it was 55). Two blocks that write no shared state moved out unchanged into `markActiveCards(key)` (the era cells, the rail cards and scrolling the active card into view) and `paintHeroChrome(data)` (the eyebrow, title and scripture pill). A check over the syntax trees confirms that putting the two bodies back where their calls are gives exactly the old `selectAsset` body. Two comments that labelled those blocks were dropped; the function names say the same.
+- `.oxlintrc.json`: `complexity` is 52. The highest left in site code is `mergeCloudWithLocal` (52, `js/features/progress-sync.js`), so the next step down needs it split first.
+
+**Handbook updated:** 07 (lint).
+
+**Checked here:** lint exits 0 at 52 (and at 52 fails with the old `selectAsset`, complexity 55), `npm run test:unit` and every `npm test` script pass. The browser suite ran once on the final Phase 6 state; see the step 6.4 entry.
+
+**Status:** on branch `arch/phase-6-lock`, not deployed.
+
 ## 2026-11-17 — Architecture plan, step 5.5: one word, "sitting"
 
 **Why:** five words named one lesson, so a search for one missed the others.

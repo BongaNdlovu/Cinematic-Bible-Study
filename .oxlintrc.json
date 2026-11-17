@@ -18,13 +18,58 @@
     "assets/**"
   ],
   "rules": {
-    "complexity": ["error", 55],
+    "complexity": ["error", 52],
     "no-underscore-dangle": "off",
     "consistent-function-scoping": "off",
     "unicorn/no-array-sort": "off",
-    "no-unused-vars": ["error", { "caughtErrors": "none", "args": "none" }]
+    "no-unused-vars": ["error", { "caughtErrors": "none", "args": "none" }],
+    "max-lines": ["error", { "max": 800, "skipBlankLines": false, "skipComments": false }],
+    "max-lines-per-function": ["error", { "max": 100 }]
   },
   "overrides": [
+    {
+      "files": [
+        "js/content/sheets-data.js",
+        "js/features/desk.js",
+        "js/features/reviews.js",
+        "js/pages/dashboard/dashboard.js",
+        "js/pages/gallery/artifact-registry.js",
+        "js/pages/gallery/gallery.js",
+        "js/pages/index/shelf.js",
+        "js/pages/map/globe.js",
+        "js/pages/map/map.js",
+        "js/pages/study/book-reader.js",
+        "js/pages/study/certificate.js",
+        "js/pages/study/mindmap.js",
+        "js/pages/study/study-app.js",
+        "js/pages/study/workbench.js"
+      ],
+      "rules": { "max-lines": "off" }
+    },
+    {
+      "files": [
+        "js/features/progress-sync.js",
+        "js/features/reviews.js",
+        "js/pages/dashboard/dashboard.js",
+        "js/pages/gallery/gallery.js",
+        "js/pages/gallery/hall-art.js",
+        "js/pages/index/shelf.js",
+        "js/pages/map/globe.js",
+        "js/pages/map/map.js",
+        "js/pages/study/book-reader.js",
+        "js/pages/study/certificate.js",
+        "js/pages/study/competency.js",
+        "js/pages/study/diagrams/fullscreen.js",
+        "js/pages/study/diagrams/timeline.js",
+        "js/pages/study/mindmap.js",
+        "js/pages/study/quiz.js",
+        "js/pages/study/story.js",
+        "js/pages/study/study-app.js",
+        "js/pages/study/weather-scene.js",
+        "js/pages/study/workbench.js"
+      ],
+      "rules": { "max-lines-per-function": "off" }
+    },
     {
       "files": ["js/**/*.js"],
       "env": {
