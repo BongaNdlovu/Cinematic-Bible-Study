@@ -14,6 +14,20 @@ Entry template:
 
 ---
 
+## 2026-11-17 — The globe check waits for frames that are still queued
+
+**Why:** on GitHub, `verify_globe.mjs` failed once with "clouds moved while idle" (run 44071867103, the pull-request run of `split/globe`; the push run of the same commit passed). The frame count had not moved, yet the cloud offset had. The globe only changes that offset inside a frame. So a frame requested before the first reading was still queued: the slow headless runner held it back for more than the 2.25 s `settle()` waited, then it ran, moved the clouds one step and requested no more.
+
+**What changed:** `tools/verify/verify_globe.mjs` now tracks each requested frame until it runs or is cancelled (`window.__rafPending`), and `settle()` counts the globe as settled only when no frame is pending and the frame count and cloud offset have held for three readings. The globe code is unchanged: this was a gap in the test. If the globe really kept drawing while idle, a frame would always be pending, `settle()` would never report quiet, and the idle checks would still fail.
+
+**Also:** a second flaky step in the same check, "site outline missing at close zoom" (run 44080146982, pull-request run of `arch/split-large`; the push run of the same commit passed), looked for the outline after a fixed 3.5 s sleep following the fly-in. It now waits up to 30 s for the outline to appear. Two other fixed sleeps followed by assertions in the same file (2.5 s before the year snap, 1.2 s before the place card) now wait for their condition too.
+
+**Handbook updated:** none (test only).
+
+**Checked here:** `verify_globe.mjs` passed 3 of 3 runs alone on Windows with the first change, and GitHub runs 44079693040 and 44079681549 passed both jobs. With all three changes it passes 3 of 3 runs alone on Windows. On GitHub, 9 of the next 10 runs passed; the tenth (44087163845) stopped `verify_globe.mjs` at its 480 s limit, so that limit is now 720 s. A later push run (44092423642) failed "zooming the map out returns to the globe": the check stopped clicking zoom-out after 16 tries (about 7 s), before the map had handed back to the globe. It now keeps clicking for up to 60 tries (extra clicks at the smallest zoom do nothing), and the zoom-in hand-over just before it waits up to 20 s instead of a fixed 0.8 s.
+
+**Status:** on branch `fix/globe-settle`, then merged into the stacked split branches.
+
 ## 2026-11-17 — Two files under 800 lines, and out of the size exceptions
 
 **Why:** the `max-lines` exceptions in `.oxlintrc.json` come out one by one as files are split. `certificate.js` (811 lines) and `reviews.js` (892) were the nearest to the limit.
