@@ -106,7 +106,7 @@ function getLinkedGlossary(content) {
 }
 
 // 4. Load workbench.js and validate synchronization
-const wbSrc = fs.readFileSync(path.join(root, 'js/pages/study/workbench.js'), 'utf8');
+const wbSrc = ['workbench.js', 'workbench-store.js', 'workbench-sittings.js'].map((f) => fs.readFileSync(path.join(root, 'js/pages/study', f), 'utf8')).join('\n');
 const normWb = wbSrc.replace(/\s+/g, ' ');
 
 function assertInWorkbench(phrase, label) {

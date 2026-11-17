@@ -39,8 +39,7 @@
         "js/pages/map/map.js",
         "js/pages/study/book-reader.js",
         "js/pages/study/mindmap.js",
-        "js/pages/study/study-app.js",
-        "js/pages/study/workbench.js"
+        "js/pages/study/study-app.js"
       ],
       "rules": { "max-lines": "off" }
     },
@@ -64,6 +63,7 @@
         "js/pages/study/story.js",
         "js/pages/study/study-app.js",
         "js/pages/study/weather-scene.js",
+        "js/pages/study/workbench-sittings.js",
         "js/pages/study/workbench.js"
       ],
       "rules": { "max-lines-per-function": "off" }

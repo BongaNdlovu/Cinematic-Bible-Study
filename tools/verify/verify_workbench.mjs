@@ -67,6 +67,8 @@ const context = vm.createContext(sandbox);
 // 1. Load workbench.js
 const workbenchCode = fs.readFileSync(path.join('js/pages/study/workbench.js'), 'utf8');
 vm.runInContext(fs.readFileSync(path.join('js/pages/study/workbench-rubric.js'), 'utf8'), context);
+vm.runInContext(fs.readFileSync(path.join('js/pages/study/workbench-store.js'), 'utf8'), context);
+vm.runInContext(fs.readFileSync(path.join('js/pages/study/workbench-sittings.js'), 'utf8'), context);
 vm.runInContext(workbenchCode, context);
 
 const StudyWorkbench = sandbox.window.StudyWorkbench;
@@ -210,6 +212,8 @@ const FORBIDDEN = /Adventist|Ellen G\.|Uriah Smith|Investigative Judgment|Great 
 const filesToScan = [
   'js/pages/study/workbench.js',
   'js/pages/study/workbench-rubric.js',
+  'js/pages/study/workbench-store.js',
+  'js/pages/study/workbench-sittings.js',
   'js/content/sheets-data.js',
   'js/pages/study/competency.js',
   'js/pages/study/certificate.js',

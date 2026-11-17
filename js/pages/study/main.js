@@ -20,6 +20,8 @@ import '/js/features/reviews.js';
 import '/js/pages/study/scripture.js';
 import '/js/content/map-data.js';
 import '/js/pages/study/workbench-rubric.js';
+import '/js/pages/study/workbench-store.js';
+import '/js/pages/study/workbench-sittings.js';
 import '/js/pages/study/workbench.js';
 import '/js/pages/study/competency.js';
 import '/js/content/sheets/index.js';

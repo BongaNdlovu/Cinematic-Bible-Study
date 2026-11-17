@@ -600,7 +600,7 @@ assert(studyAppJs.includes("readingTimer("), 'study-app must call readingTimer')
 assert(studyAppJs.includes("baReferredSitting"), 'study-app must support baReferredSitting in resolveStartSheet');
 assert(studyAppJs.includes("maybePulse()"), 'study-app must show the last-sitting pulse without advancing');
 
-const workbenchJs = fs.readFileSync(path.join(ROOT, 'js/pages/study/workbench.js'), 'utf8');
+const workbenchJs = ['workbench.js', 'workbench-store.js', 'workbench-sittings.js'].map((f) => fs.readFileSync(path.join(ROOT, 'js/pages/study', f), 'utf8')).join(' ');
 assert(workbenchJs.includes("track('workbench_task'"), 'workbench missing workbench_task track');
 assert(workbenchJs.includes("pass: true"), 'workbench missing pass: true track');
 assert(workbenchJs.includes("pass: false"), 'workbench missing pass: false track');

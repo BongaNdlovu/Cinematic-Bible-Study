@@ -14,6 +14,28 @@ Entry template:
 
 ---
 
+## 2026-11-17 — `workbench.js` split in three, under 800 lines
+
+**Why:** `js/pages/study/workbench.js` held 1,092 lines, on the size-exception list.
+
+**What changed:**
+
+| File | Lines | Holds |
+|---|---|---|
+| `js/pages/study/workbench-store.js` (new, `window.WorkbenchStore`) | 176 | The two storage keys, `SITTING_TASKS`, and loading, saving and checking task and capstone state |
+| `js/pages/study/workbench-sittings.js` (new, `window.WorkbenchSittings`) | 535 | The three sitting-specific workbenches (`renderSheet0Workbench`, `renderSheet1Workbench`, `renderSheet2Workbench`) |
+| `js/pages/study/workbench.js` | 407 | The generic workbench, the capstone, the dossier, and the `window.StudyWorkbench` API |
+
+- A script listed every declaration in the closure that never assigns a variable another part changes; all 15 qualified. `verify_moved_functions.mjs` shows all 15 have the same syntax trees after the split. The study entry imports the store and the sittings file just before `workbench.js`; `verify_workbench.mjs` loads them the same way.
+- Tests that read `workbench.js`'s text for lesson wording or analytics calls (`extract_claim_units.mjs`, `verify_insights.mjs`) now read all three files.
+- `.oxlintrc.json`: `workbench.js` left the file-size list (11 left). `workbench-sittings.js` joined the function-size list, because the three long functions it now holds were already on it under `workbench.js`.
+
+**Handbook updated:** 03 (`js/pages/study/`), 07 (lint).
+
+**Checked here:** lint exits 0, `npm run test:unit` passes 188 of 188, every `npm test` script passes. BROWSER
+
+**Status:** on branch `arch/split-large`, not deployed.
+
 ## 2026-11-17 — Complexity ceiling 50 → 44
 
 **Why:** the map's `mount` and the gallery's `selectAsset` (both 49) held the ceiling at 50, and the map's `start` (46) was next.
