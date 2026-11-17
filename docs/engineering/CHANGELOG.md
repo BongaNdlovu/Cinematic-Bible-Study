@@ -14,6 +14,17 @@ Entry template:
 
 ---
 
+## 2026-11-17 — The globe check waits for frames that are still queued
+
+**Why:** on GitHub, `verify_globe.mjs` failed once with "clouds moved while idle" (run 44071867103, the pull-request run of `split/globe`; the push run of the same commit passed). The frame count had not moved, yet the cloud offset had. The globe only changes that offset inside a frame. So a frame requested before the first reading was still queued: the slow headless runner held it back for more than the 2.25 s `settle()` waited, then it ran, moved the clouds one step and requested no more.
+
+**What changed:** `tools/verify/verify_globe.mjs` now tracks each requested frame until it runs or is cancelled (`window.__rafPending`), and `settle()` counts the globe as settled only when no frame is pending and the frame count and cloud offset have held for three readings. The globe code is unchanged: this was a gap in the test. If the globe really kept drawing while idle, a frame would always be pending, `settle()` would never report quiet, and the idle checks would still fail.
+
+**Handbook updated:** none (test only).
+
+**Checked here:** `verify_globe.mjs` passes 3 of 3 runs alone on Windows. The run on GitHub is the real test.
+
+**Status:** on branch `fix/globe-settle`, then merged into the stacked split branches.
 ## 2026-11-17 — `map.js` split under 800 lines
 
 **Why:** `js/pages/map/map.js` held 1,738 lines, on the size-exception list. Almost all of it was `mount`, which builds one map per call.
