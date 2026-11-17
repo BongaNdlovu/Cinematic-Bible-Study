@@ -148,6 +148,7 @@ test("the own-note check stops promising a retry once its retries run out", asyn
   context.window = context;
   const reviewsContext = vm.createContext(context);
   vm.runInContext(read("js/core/core.js"), reviewsContext);
+  vm.runInContext(read("js/features/review-helpers.js"), reviewsContext);
   vm.runInContext(read("js/features/reviews.js"), reviewsContext);
   const settle = () => new Promise((resolve) => setImmediate(resolve));
   await settle();
