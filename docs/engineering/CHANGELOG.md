@@ -24,7 +24,7 @@ Entry template:
 
 **Handbook updated:** none (test only).
 
-**Checked here:** `verify_globe.mjs` passed 3 of 3 runs alone on Windows with the first change, and GitHub runs 44079693040 and 44079681549 passed both jobs. With all three changes it passes 3 of 3 runs alone on Windows.
+**Checked here:** `verify_globe.mjs` passed 3 of 3 runs alone on Windows with the first change, and GitHub runs 44079693040 and 44079681549 passed both jobs. With all three changes it passes 3 of 3 runs alone on Windows. On GitHub, 9 of the next 10 runs passed; the tenth (44087163845) stopped `verify_globe.mjs` at its 480 s limit, so that limit is now 720 s.
 
 **Status:** on branch `fix/globe-settle`, then merged into the stacked split branches.
 ## 2026-11-17 — `dashboard.js` split: the data layer moves out
