@@ -21,6 +21,13 @@ This handbook is the single place a developer or senior engineer reads to unders
 
 Older documents (audits, fix plans, specs) are history and live in `docs/archive/`, each named with the date it was written (the date in its old name, or the date it was first committed). `docs/` holds only `engineering/` and `archive/`. When they disagree with this handbook, the handbook wins. [`docs/archive/2026-09-10-ARCHITECTURE.md`](../archive/2026-09-10-ARCHITECTURE.md) is kept for its detailed tables; its own introduction points here.
 
+## Words
+
+| Word | Use it for | Notes |
+|---|---|---|
+| **sitting** | One of the 11 lessons, as readers see them ("Sitting 3") | Use it in every new name, file, function, comment and doc (plan step 5.5, decided 16 November 2026). Older code also says *sheet*, *lesson*, *exhibit* and *volume* for the same thing; on 17 November 2026, lines containing each word in `js/`, `css/` and the pages numbered 564 (*sheet*), 760 (*sitting*), 513 (*lesson*), 31 (*exhibit*) and 23 (*volume*), counted with `git grep -ciw`. Rename old code only when you are changing it anyway. **Never rename** a browser storage key (`daniel_historicist_sheet`, `baNote-…`; the full list is `tools/storage-keys.mjs`), a URL parameter (`?sheet=`), a database table or column, or a field in `js/content/sheets-data.js`: readers' saved progress and old links depend on those names. |
+| **core**, **feature**, **content**, **page** | The four kinds of code folder | See [the layout rule](03-project-structure.md#the-layout-rule) |
+
 ## Keeping this handbook current
 
 The handbook is only useful if it matches the code. Every change to the site updates it **in the same change**, not later.
@@ -48,5 +55,5 @@ The handbook is only useful if it matches the code. Every change to the site upd
 
 - Plain English, short sentences, one idea per paragraph.
 - Tables for anything with more than three parallel items.
-- Name files as repo-relative paths in backticks, for example `js/shared/auth.js`.
+- Name files as repo-relative paths in backticks, for example `js/core/auth.js`.
 - Record decisions together with their reason, so a later reader does not "fix" them by mistake.

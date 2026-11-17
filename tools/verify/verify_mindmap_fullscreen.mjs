@@ -1,5 +1,5 @@
 /*
- * Full-screen verification for the mindmap renderer (js/study/mindmap.js) on the
+ * Full-screen verification for the mindmap renderer (js/pages/study/mindmap.js) on the
  * two migrated sitting-2 diagrams, s2-3 (a fan) and s2-4 (a spine).
  *
  * The claim under test is the brief's acceptance table

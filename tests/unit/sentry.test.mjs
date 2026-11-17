@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 import fs from "node:fs";
 import vm from "node:vm";
 
-const SRC = fs.readFileSync(new URL("../../js/shared/sentry.js", import.meta.url), "utf8");
+const SRC = fs.readFileSync(new URL("../../js/core/sentry.js", import.meta.url), "utf8");
 
 function boot(hostname, consent) {
   const calls = { init: null, integrations: [] };
@@ -56,7 +56,7 @@ test("the privacy page names Sentry and still promises no session replay", () =>
   assert.match(html, /We do not record your screen and we do not replay your sessions/);
 });
 
-const OPS_SRC = fs.readFileSync(new URL("../../js/shared/ops.js", import.meta.url), "utf8");
+const OPS_SRC = fs.readFileSync(new URL("../../js/core/ops.js", import.meta.url), "utf8");
 
 function memoryStore(seed) {
   const data = Object.assign({}, seed);
@@ -134,8 +134,8 @@ for (const rel of ["../../functions/_middleware.js", "../../workers/exhibit-rate
   });
 }
 
-const SHARED = (name) => fs.readFileSync(new URL(`../../js/shared/${name}`, import.meta.url), "utf8");
-const SIGN_OUT_SCRIPTS = ["core.js", "journey.js", "auth.js", "progress-sync.js", "study-sync.js"].map(SHARED);
+const READ = (rel) => fs.readFileSync(new URL("../../" + rel, import.meta.url), "utf8");
+const SIGN_OUT_SCRIPTS = ["js/core/core.js", "js/core/journey.js", "js/core/auth.js", "js/features/progress-sync.js", "js/features/study-sync.js"].map(READ);
 const SESSION_KEY = "sb-test-auth-token";
 const LEARNER = { id: "learner-1", email: "reader@example.org" };
 const CLOUD_ROW = {

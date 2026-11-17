@@ -1,0 +1,171 @@
+-- Server write caps. Same statements live in the matching setup files
+-- (db/migrations/003-insights.sql, db/migrations/002-progress.sql, db/migrations/001-reviews.sql).
+-- Events: 60 rows/min per anon_id (or per user_id if anon_id is empty).
+-- Surveys: 5/hour per anon_id (or per user_id if anon_id is empty).
+-- Events and surveys with neither anon_id nor user_id are refused. Unsigned rows (user_id null)
+-- also share one cap for the whole project: events 600/min, surveys 20/min, so rotating
+-- anon_id cannot flood either table.
+-- Progress: one upsert per 6 seconds per row (10/min).
+-- Reviews: 3 inserts/day per user_id.
+-- Browser writes go straight to Supabase and never pass the site edge, so these triggers are the only caps on them.
+-- Profiles, review edits and quiz checks are capped in db/migrations/022-rate-limits-gaps.sql.
+-- Each gate is security definer: the caller cannot read the rows it is writing, so an
+-- invoker count would always see zero and the cap would never trip. created_at and
+-- updated_at are stamped here so a client cannot hide writes by backdating them.
+
+alter table public.exhibit_surveys
+  add column if not exists anon_id text not null default '';
+
+create index if not exists exhibit_events_anon_created_idx
+  on public.exhibit_events (anon_id, created_at desc);
+create index if not exists exhibit_events_user_created_idx
+  on public.exhibit_events (user_id, created_at desc);
+create index if not exists exhibit_surveys_anon_created_idx
+  on public.exhibit_surveys (anon_id, created_at desc);
+create index if not exists exhibit_surveys_user_created_idx
+  on public.exhibit_surveys (user_id, created_at desc);
+create index if not exists exhibit_reviews_user_created_idx
+  on public.exhibit_reviews (user_id, created_at desc);
+
+create or replace function public.exhibit_events_rate_gate()
+returns trigger
+language plpgsql
+security definer
+set search_path = public
+as $$
+begin
+  new.created_at := now();
+  if new.user_id is not null then
+    perform public.exhibit_take_slot('event_min', 60, interval '1 minute');
+    perform public.exhibit_take_slot('event_day', 2000, interval '1 day');
+    return new;
+  end if;
+  if coalesce(new.anon_id, '') <> '' then
+    if (select count(*) from public.exhibit_events
+        where anon_id = new.anon_id
+          and created_at > now() - interval '1 minute') >= 60 then
+      raise exception 'rate_limit';
+    end if;
+  elsif new.user_id is not null then
+    if (select count(*) from public.exhibit_events
+        where user_id = new.user_id
+          and created_at > now() - interval '1 minute') >= 60 then
+      raise exception 'rate_limit';
+    end if;
+  else
+    raise exception 'rate_limit';
+  end if;
+  if new.user_id is null then
+    if pg_column_size(new.detail) > 500 then
+      raise exception 'rate_limit';
+    end if;
+    if (select count(*) from public.exhibit_events
+        where user_id is null
+          and created_at > now() - interval '1 minute') >= 600 then
+      raise exception 'rate_limit';
+    end if;
+    if (select count(*) from public.exhibit_events
+        where user_id is null
+          and created_at > now() - interval '24 hours') >= 20000 then
+      raise exception 'rate_limit';
+    end if;
+  end if;
+  return new;
+end;
+$$;
+
+drop trigger if exists exhibit_events_rate_gate on public.exhibit_events;
+create trigger exhibit_events_rate_gate
+  before insert on public.exhibit_events
+  for each row execute procedure public.exhibit_events_rate_gate();
+
+create or replace function public.exhibit_surveys_rate_gate()
+returns trigger
+language plpgsql
+security definer
+set search_path = public
+as $$
+begin
+  new.created_at := now();
+  if new.user_id is not null then
+    perform public.exhibit_take_slot('survey', 5, interval '1 hour');
+    return new;
+  end if;
+  if coalesce(new.anon_id, '') <> '' then
+    if (select count(*) from public.exhibit_surveys
+        where anon_id = new.anon_id
+          and created_at > now() - interval '1 hour') >= 5 then
+      raise exception 'rate_limit';
+    end if;
+  elsif new.user_id is not null then
+    if (select count(*) from public.exhibit_surveys
+        where user_id = new.user_id
+          and created_at > now() - interval '1 hour') >= 5 then
+      raise exception 'rate_limit';
+    end if;
+  else
+    raise exception 'rate_limit';
+  end if;
+  if new.user_id is null then
+    if (select count(*) from public.exhibit_surveys
+        where user_id is null
+          and created_at > now() - interval '1 minute') >= 20 then
+      raise exception 'rate_limit';
+    end if;
+    if (select count(*) from public.exhibit_surveys
+        where user_id is null
+          and created_at > now() - interval '24 hours') >= 200 then
+      raise exception 'rate_limit';
+    end if;
+  end if;
+  return new;
+end;
+$$;
+
+drop trigger if exists exhibit_surveys_rate_gate on public.exhibit_surveys;
+create trigger exhibit_surveys_rate_gate
+  before insert on public.exhibit_surveys
+  for each row execute procedure public.exhibit_surveys_rate_gate();
+
+create or replace function public.exhibit_progress_rate_gate()
+returns trigger
+language plpgsql
+security definer
+set search_path = public
+as $$
+begin
+  new.updated_at := now();
+  if tg_op = 'UPDATE' and old.updated_at is not null
+     and old.updated_at > now() - interval '6 seconds' then
+    raise exception 'rate_limit';
+  end if;
+  return new;
+end;
+$$;
+
+drop trigger if exists exhibit_progress_rate_gate on public.exhibit_progress;
+create trigger exhibit_progress_rate_gate
+  before update on public.exhibit_progress
+  for each row execute procedure public.exhibit_progress_rate_gate();
+
+create or replace function public.exhibit_reviews_rate_gate()
+returns trigger
+language plpgsql
+security definer
+set search_path = public
+as $$
+begin
+  new.created_at := now();
+  if (select count(*) from public.exhibit_reviews
+      where user_id = new.user_id
+        and created_at > now() - interval '1 day') >= 3 then
+    raise exception 'rate_limit';
+  end if;
+  return new;
+end;
+$$;
+
+drop trigger if exists exhibit_reviews_rate_gate on public.exhibit_reviews;
+create trigger exhibit_reviews_rate_gate
+  before insert on public.exhibit_reviews
+  for each row execute procedure public.exhibit_reviews_rate_gate();

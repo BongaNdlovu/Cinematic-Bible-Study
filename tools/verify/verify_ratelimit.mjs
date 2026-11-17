@@ -9,7 +9,7 @@ const ROOT = path.resolve(__dirname, '../..');
 
 console.log('--- RUNNING RATE LIMIT VERIFICATION ---');
 
-const insights = fs.readFileSync(path.join(ROOT, 'js/shared/insights.js'), 'utf8');
+const insights = fs.readFileSync(path.join(ROOT, 'js/features/analytics.js'), 'utf8');
 assert(insights.includes('const BATCH = 10'), 'insights flush batch must be 10');
 assert(insights.includes('const FLUSH_MS = 10000'), 'insights flush interval must be 10000');
 assert(insights.includes('const POSTS_PER_MIN = 12'), 'insights must cap 12 posts/min');
@@ -19,22 +19,22 @@ assert(insights.includes('takeFlushSlot'), 'insights must gate flushes');
 assert(insights.includes('takeSurveySlot'), 'insights must gate surveys');
 assert(insights.includes('anon_id: anonId()'), 'survey insert must send anon_id');
 
-const progress = fs.readFileSync(path.join(ROOT, 'js/shared/progress-sync.js'), 'utf8');
+const progress = fs.readFileSync(path.join(ROOT, 'js/features/progress-sync.js'), 'utf8');
 assert(progress.includes('const PUSH_GAP_MS = 6000'), 'progress upsert gap must be 6s (10/min)');
 
-const reviews = fs.readFileSync(path.join(ROOT, 'js/shared/reviews.js'), 'utf8');
+const reviews = fs.readFileSync(path.join(ROOT, 'js/features/reviews.js'), 'utf8');
 assert(reviews.includes('const REVIEW_MAX = 3'), 'reviews must cap 3/day');
 assert(reviews.includes('takeSurveySlot'), 'review survey insert must use survey slot');
 assert(reviews.includes('anon_id:'), 'review survey insert must send anon_id');
 
-const sql = fs.readFileSync(path.join(ROOT, 'tools/supabase-rate-limits.sql'), 'utf8');
+const sql = fs.readFileSync(path.join(ROOT, 'db/migrations/005-rate-limits.sql'), 'utf8');
 assert(sql.includes("interval '1 minute') >= 60"), 'SQL events cap 60/min');
 assert(sql.includes("interval '1 hour') >= 5"), 'SQL surveys cap 5/hour');
 assert(sql.includes("interval '6 seconds'"), 'SQL progress cap 6 seconds');
 assert(sql.includes("interval '1 day') >= 3"), 'SQL reviews cap 3/day');
 assert(sql.includes('add column if not exists anon_id'), 'SQL adds survey anon_id');
 
-const insightsSql = fs.readFileSync(path.join(ROOT, 'tools/supabase-insights.sql'), 'utf8');
+const insightsSql = fs.readFileSync(path.join(ROOT, 'db/migrations/003-insights.sql'), 'utf8');
 
 function signedInBlock(src, file, gateName) {
   const start = src.indexOf('create or replace function public.' + gateName + '()');
@@ -60,7 +60,7 @@ function assertSurveysUserCap(src, file) {
   assert(block.includes("perform public.exhibit_take_slot('survey', 5, interval '1 hour');"), file + ' surveys gate must cap a signed-in user at 5/hour whatever anon_id is sent');
 }
 
-const hardeningSql = fs.readFileSync(path.join(ROOT, 'tools/supabase-hardening-2026-10.sql'), 'utf8');
+const hardeningSql = fs.readFileSync(path.join(ROOT, 'db/migrations/013-hardening-2026-10.sql'), 'utf8');
 assertEventsUserCap(hardeningSql, 'supabase-hardening-2026-10.sql');
 assertSurveysUserCap(hardeningSql, 'supabase-hardening-2026-10.sql');
 assertEventsUserCap(sql, 'supabase-rate-limits.sql');
@@ -69,17 +69,17 @@ assertEventsUserCap(insightsSql, 'supabase-insights.sql');
 assert(insightsSql.includes('exhibit_events_rate_gate'), 'insights setup must include events write cap');
 assert(insightsSql.includes("interval '1 minute') >= 60"), 'insights setup events cap 60/min');
 
-const progressSql = fs.readFileSync(path.join(ROOT, 'tools/supabase-progress.sql'), 'utf8');
+const progressSql = fs.readFileSync(path.join(ROOT, 'db/migrations/002-progress.sql'), 'utf8');
 assertSurveysUserCap(progressSql, 'supabase-progress.sql');
 assert(progressSql.includes('exhibit_surveys_rate_gate'), 'progress setup must include surveys write cap');
 assert(progressSql.includes('exhibit_progress_rate_gate'), 'progress setup must include progress write cap');
 assert(progressSql.includes("interval '1 hour') >= 5"), 'progress setup surveys cap 5/hour');
 
-const reviewsSql = fs.readFileSync(path.join(ROOT, 'tools/supabase-reviews.sql'), 'utf8');
+const reviewsSql = fs.readFileSync(path.join(ROOT, 'db/migrations/001-reviews.sql'), 'utf8');
 assert(reviewsSql.includes('exhibit_reviews_rate_gate'), 'reviews setup must include reviews write cap');
 assert(reviewsSql.includes("interval '1 day') >= 3"), 'reviews setup reviews cap 3/day');
 
-const auth = fs.readFileSync(path.join(ROOT, 'js/shared/auth.js'), 'utf8');
+const auth = fs.readFileSync(path.join(ROOT, 'js/core/auth.js'), 'utf8');
 assert(auth.includes('const AUTH_PER_HOUR = 5'), 'auth must cap 5 Google sign-in starts/hour');
 assert(auth.includes('takeAuthSlot'), 'auth must gate signIn');
 assert(auth.includes('rate_limit'), 'auth must return rate_limit when capped');

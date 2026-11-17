@@ -7,7 +7,7 @@ import fs from "fs";
    so a syntax slip cannot reach the file: the script reparses the result with
    `vm` and refuses to write unless all 11 sittings still load. CRLF preserved. */
 
-const PATH = "js/study/sheets-data.js";
+const PATH = "js/content/sheets-data.js";
 const raw = fs.readFileSync(PATH, "utf8");
 let lf = raw.replace(/\r\n/g, "\n");
 

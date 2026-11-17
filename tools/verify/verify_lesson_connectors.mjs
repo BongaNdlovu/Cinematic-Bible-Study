@@ -74,7 +74,7 @@ class CDPClient {
 
 async function verifyChristologyData() {
   console.log('=== Checking sheetsData Christology Content ===');
-  const sheetsFile = fs.readFileSync('js/study/sheets-data.js', 'utf8');
+  const sheetsFile = fs.readFileSync('js/content/sheets-data.js', 'utf8');
   const vm = await import('vm');
   const sheets = vm.runInNewContext(sheetsFile + '\nsheetsData;', {});
   if (!Array.isArray(sheets) || sheets.length !== 11) {

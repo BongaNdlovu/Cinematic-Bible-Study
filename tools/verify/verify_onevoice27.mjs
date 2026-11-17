@@ -60,26 +60,26 @@ for (const [book, chs] of Object.entries(kjv.books)) {
 const allKjvText = kjvCorpus.map((c) => c.text).join(' ');
 
 // Load sheetsData, SHEET_VERIFY, SHEET_GLOSSARY
-const sheetsSrc = fs.readFileSync(path.join(root, 'js/study/sheets-data.js'), 'utf8');
+const sheetsSrc = fs.readFileSync(path.join(root, 'js/content/sheets-data.js'), 'utf8');
 const sittingPart = sheetsSrc.slice(sheetsSrc.indexOf('const sheetsData'), sheetsSrc.indexOf('const timelineEpochs'));
 const sCtx = {};
 vm.createContext(sCtx);
 vm.runInContext(sittingPart + '\nthis.sheetsData = sheetsData;', sCtx);
 const sheetsData = sCtx.sheetsData;
 
-const verifySrc = fs.readFileSync(path.join(root, 'js/study/sheet-verify.js'), 'utf8');
+const verifySrc = fs.readFileSync(path.join(root, 'js/content/sheet-verify.js'), 'utf8');
 const vCtx = { window: {} };
 vm.createContext(vCtx);
 vm.runInContext(verifySrc, vCtx);
 const sheetVerify = vCtx.window.SHEET_VERIFY || [];
 
-const glossSrc = fs.readFileSync(path.join(root, 'js/study/sheet-glossary.js'), 'utf8');
+const glossSrc = fs.readFileSync(path.join(root, 'js/content/sheet-glossary.js'), 'utf8');
 const gCtx = { window: {} };
 vm.createContext(gCtx);
 vm.runInContext(glossSrc, gCtx);
 const sheetGlossary = gCtx.window.SHEET_GLOSSARY || [];
 
-const wbSrc = fs.readFileSync(path.join(root, 'js/study/workbench.js'), 'utf8');
+const wbSrc = fs.readFileSync(path.join(root, 'js/pages/study/workbench.js'), 'utf8');
 
 // Verify scripture quotes in SHEET_VERIFY
 let verifiedScriptureQuotes = 0;

@@ -26,7 +26,7 @@ function extractStatement(source, startMarker) {
 }
 
 test("a stale desk reply cannot release the lock of a newer request", () => {
-  const desk = read("js/shared/desk.js");
+  const desk = read("js/features/desk.js");
   const code = [
     "const inflight = Object.create(null);",
     "const busy = [];",
@@ -147,8 +147,8 @@ test("the own-note check stops promising a retry once its retries run out", asyn
   };
   context.window = context;
   const reviewsContext = vm.createContext(context);
-  vm.runInContext(read("js/shared/core.js"), reviewsContext);
-  vm.runInContext(read("js/shared/reviews.js"), reviewsContext);
+  vm.runInContext(read("js/core/core.js"), reviewsContext);
+  vm.runInContext(read("js/features/reviews.js"), reviewsContext);
   const settle = () => new Promise((resolve) => setImmediate(resolve));
   await settle();
   await settle();
@@ -171,7 +171,7 @@ test("the own-note check stops promising a retry once its retries run out", asyn
 });
 
 test("desk action buttons check the same lock key their action takes", () => {
-  const desk = read("js/shared/desk.js");
+  const desk = read("js/features/desk.js");
   const code = [
     desk.slice(desk.indexOf("const LOCK_PREFIX = {"), desk.indexOf(String.fromCharCode(10), desk.indexOf("const LOCK_PREFIX = {"))),
     extractBlock(desk, "function lockKeyFor(act, id)"),
@@ -224,8 +224,8 @@ test("a failing notes pull stops retrying after its cap and restarts on reconnec
   };
   context.window = context;
   const syncContext = vm.createContext(context);
-  vm.runInContext(read("js/shared/core.js"), syncContext);
-  vm.runInContext(read("js/shared/study-sync.js"), syncContext);
+  vm.runInContext(read("js/core/core.js"), syncContext);
+  vm.runInContext(read("js/features/study-sync.js"), syncContext);
   const settle = () => new Promise((resolve) => setImmediate(resolve));
   await context.StudySync.pullAndMerge();
   await settle();

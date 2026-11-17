@@ -7,8 +7,8 @@ import { pageLoads } from './_sources.mjs';
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const read = (rel) => fs.readFileSync(path.join(root, rel), 'utf8');
 
-const sql = read('tools/supabase-desk.sql');
-const desk = read('js/shared/desk.js');
+const sql = read('db/migrations/012-desk.sql');
+const desk = read('js/features/desk.js');
 
 assert(sql.includes('public.is_review_moderator()'), 'desk SQL must use the confirmed-moderator check');
 assert(sql.includes('set search_path = public, auth'), 'desk SQL functions must pin search_path');
@@ -42,8 +42,8 @@ assert(!desk.includes('mailto:'), 'the desk must not open a mail link');
 
 for (const page of ['index.html', 'study.html', 'map.html', 'gallery.html', 'account.html', 'reviews.html', 'insights.html', '404.html']) {
   const html = read(page);
-  assert(html.includes('css/desk.css'), page + ' links the desk styles');
-  assert(pageLoads(page, 'js/shared/desk.js'), page + ' loads the desk');
+  assert(html.includes('css/features/desk.css'), page + ' links the desk styles');
+  assert(pageLoads(page, 'js/features/desk.js'), page + ' loads the desk');
 }
 
 const notFound = read('404.html');

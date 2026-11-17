@@ -19,7 +19,7 @@ import fs from 'fs';
 import vm from 'vm';
 
 const CHECK = process.argv.includes('--check');
-const DATA = 'js/study/sheets-data.js';
+const DATA = 'js/content/sheets-data.js';
 const DRAFTS = ['docs/archive/2026-10-14-batch-sheets-0-2.md', 'docs/archive/2026-10-14-batch-sheets-4-6.md', 'docs/archive/2026-10-14-batch-sheets-9-10.md'];
 
 function parse(js) {

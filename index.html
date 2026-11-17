@@ -18,12 +18,12 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400;1,6..72,500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/site.css?v=cx1">
-  <link rel="stylesheet" href="css/terms.css?v=cx1">
-  <link rel="stylesheet" href="css/shelf.css?v=cx1">
-  <link rel="stylesheet" href="css/cinema.css?v=cx2">
-  <link rel="stylesheet" href="css/onboard.css?v=cx3">
-  <link rel="stylesheet" href="css/desk.css">
+  <link rel="stylesheet" href="css/core/site.css?v=cx1">
+  <link rel="stylesheet" href="css/core/terms-gate.css?v=cx1">
+  <link rel="stylesheet" href="css/pages/index/shelf.css?v=cx1">
+  <link rel="stylesheet" href="css/core/cinema.css?v=cx2">
+  <link rel="stylesheet" href="css/features/onboard.css?v=cx3">
+  <link rel="stylesheet" href="css/features/desk.css">
   <script type="importmap">
   {
     "imports": {
@@ -35,13 +35,13 @@
   <!-- Only the core build. The postprocessing files import the bare name "three", and a modulepreload of them is resolved by the preload scanner before the import map on a cached reload, which leaves the shelf blank. -->
   <link rel="modulepreload" href="vendor/three/build/three.module.min.js">
   <script src="vendor/sentry/bundle.tracing.replay.feedback.min.js" defer></script>
-  <script src="js/shared/sentry.js" defer></script>
-  <script src="js/shared/core.js"></script>
-  <script src="js/shared/cinema.js"></script>
+  <script src="js/core/sentry.js" defer></script>
+  <script src="js/core/core.js"></script>
+  <script src="js/core/cinema.js"></script>
   <script src="vendor/supabase/supabase.js" defer></script>
-  <link rel="stylesheet" href="css/consent.css">
-  <link rel="stylesheet" href="css/insight-card.css">
-  <script src="js/shared/consent.js"></script>
+  <link rel="stylesheet" href="css/core/consent.css">
+  <link rel="stylesheet" href="css/features/insight-card.css">
+  <script src="js/core/consent.js"></script>
   <script>document.addEventListener("DOMContentLoaded", function () { if (window.BAJourney) window.BAJourney.load(); });</script>
 </head>
 <body class="site home-shelf">

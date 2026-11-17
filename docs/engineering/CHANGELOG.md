@@ -25,6 +25,17 @@ Entry template:
 **Checked here:** `verify_horizon.mjs` passes 3 of 3 runs alone on Windows.
 
 **Status:** on branch `ci/browser-gate`.
+## 2026-11-17 — Architecture plan, step 5.5: one word, "sitting"
+
+**Why:** five words named one lesson, so a search for one missed the others.
+
+**What changed:** `docs/engineering/README.md` has a **Words** table. It names *sitting* as the word for new names, code and docs, records the counts of the other words, and lists what must never be renamed (storage keys, the `?sheet=` URL parameter, database names, fields in `js/content/sheets-data.js`), because saved progress and old links depend on them. No code was renamed in this step: renaming working code only for the word would risk those names for no reader-visible gain.
+
+**Handbook updated:** README (Words).
+
+**Checked here:** the counts in the table come from `git grep -ciw` on 17 November 2026. No code changed, so no test was run for this entry.
+
+**Status:** on branch `arch/phase-5-layout`, not deployed.
 
 ## 2026-11-17 — Deploy waits for the browser checks
 
@@ -58,6 +69,105 @@ Entry template:
 **Checked here:** on Windows, the three changed checks pass (`verify_globe.mjs`, `verify_horizon.mjs`, `verify_lesson_connectors.mjs`). On GitHub, the first version of these fixes passed 29 of 30; the one failure was the globe's screenshot timeout, fixed after it. The final run on GitHub is in the next entry.
 
 **Status:** on branch `ci/browser-gate`.
+## 2026-11-16 — Architecture plan, step 5.6: numbered database migrations
+
+**Why:** 27 `tools/supabase-*.sql` files had no order in their names, are run by hand, and the order mattered. Only memory held it.
+
+**What changed:**
+
+- The 27 files moved to `db/migrations/` as `001-reviews.sql` … `027-human-pass-enforce.sql`. The order is the date git first saw each file; ties within a commit follow what the files say about each other. `db/migrations/README.md` lists every file with its old name, its first date and the reasons for the ties.
+- **Which have run in production: not checked.** This session had no production database access. The README says so and names `tools/verify/verify_pending_migrations.mjs` as the check to run.
+- **`db/` is never deployed.** Moving the SQL out of `tools/` would otherwise have published it: `tools/deploy-cloudflare-pages.ps1` now leaves out `db`, `_routes.json` routes `/db/*` through the middleware, and `functions/_middleware.js` answers 404 for paths under `/db/`. `verify_pages_deny.mjs` caught the missing route; `tests/unit/middleware.test.mjs` now asks for a migration file and expects 404. That test fails with the new middleware line removed and passes with it.
+- References inside the SQL files and the tests that named the files by basename (`verify_insights.mjs`, `verify_workbench.mjs`) use the new paths.
+
+**Handbook updated:** 03 (top level, never-deployed folders, `db/migrations/`, where a database change goes), 04 (row-level security source), 07 (migrations).
+
+**Checked here:** on Windows: lint exits 0, `npm run test:unit` passes 180 of 180, every `npm test` script passes (after adding `/db/*` to `_routes.json`), and `npm run test:browser` passes 30 of 30.
+
+**Status:** on branch `arch/phase-5-layout`, not deployed.
+
+## 2026-11-16 — Architecture plan, step 5.1: the target folder layout
+
+**Why:** a file's folder should say how far a change to it reaches, so any file can be found from the feature's name.
+
+**What changed:**
+
+- **JS.** `js/shared/` was split into `js/core/` (13 files every page needs to start: `core.js`, `sentry.js`, `cinema.js`, `consent.js`, `journey.js`, `auth-config.js` and its example, `auth.js`, `net.js`, `errors.js`, `ops.js`, `human-pass.js`, `terms.js`) and `js/features/` (9 reader-facing features used by two or more pages: `desk.js`, `desk-rows.js`, `analytics.js`, `reviews.js`, `progress-sync.js`, `study-sync.js`, `onboard.js`, `ui-sound.js`, `ui-click-sound.js`). `js/study/`, `js/gallery/`, `js/map/` and `js/home/` moved under `js/pages/` as `study/`, `gallery/`, `map/` and `index/`, next to each page's entry.
+- **CSS mirrors JS.** `css/core/` (`cinema`, `consent`, `terms-gate`, `site`), `css/features/` (`desk`, `insight-card`, `reviews`, `onboard`, `account`), and `css/pages/<page>/`. The 23 numbered study parts are in `css/pages/study/parts/`, so `tests/unit/study-css.test.mjs` can still check that folder against `study.html`'s links.
+- 125 files moved by the same one-pass script. Every file in `js/core/`, `js/features/`, `css/core/` and `css/features/` is loaded by two or more pages (the one exception is `auth-config.example.js`, a template no page loads).
+- **Relative image paths.** `css/core/site.css` points at `../../assets/site/hall-bg.jpg` now. The script's first pass also rewrote seven `url(%23n)` fragment references inside inline SVG data URIs, which would have broken the noise filters; they were restored, and a check that every relative `url()` in `css/` resolves to a file found none missing.
+- **Tests that named paths in other ways:** `tests/unit/sentry.test.mjs` built `js/shared/${name}` in a template string, `verify_css_minify.mjs` filtered on the folder name `study`, and `study-css.test.mjs` matched `css\/study\/` in a regular expression. Each now uses the new paths.
+- `gallery.html`'s inline script names the gallery module, so its CSP hash was regenerated again.
+
+**Handbook updated:** 03 (top level, pages and their scripts, the layout rule, inside `js/pages/`, where new work goes), and paths across 02, 04, 05, 06 and 07.
+
+**Checked here:** on Windows: lint exits 0, `npm run test:unit` passes 180 of 180 (after the `sentry.test.mjs` path fix; before it, that file failed to load), every `npm test` script passes (after the CSP hash update and the `verify_css_minify.mjs` fix), and `npm run test:browser` passes 30 of 30. A check that every `js/` and `css/` path named in the pages, code and tests exists on disk found only synthetic test names.
+
+**Status:** on branch `arch/phase-5-layout`, not deployed.
+
+## 2026-11-16 — Architecture plan, step 5.4: lesson data in `js/content/`
+
+**Why:** content editors and engineers worked in the same folders, and the map page loaded data from the study page's folder.
+
+**What changed:**
+
+- Into `js/content/`: `sheets-data.js`, the generated `sheets/` folder, `sheet-map.js`, `sheet-verify.js`, `sheet-glossary.js`, `glossary-enrichment.js`, `glossary-enrichment-overrides.json` (all from `js/study/`), `map-data.js` (from `js/map/`), `shelf-data.js` (from `js/home/`) and `covers.js` (from `js/shared/`). 21 files.
+- The build tools (`build_study_sheets.mjs`, `build-shelf-data.mjs`, `build_glossary_enrichment.mjs`) write to the new paths, and `.gitattributes` marks the new `sheets/` folder as generated.
+- **Bug in the move script, caught here:** a folder prefix followed by a letter (`js/study/sheets/sheet-0.js`) did not match, so eight files kept the old folder, among them `study.html`'s `data-sheet-*` attributes, the study entry and `tools/build_study_sheets.mjs`. They were rewritten with a second pass, and the script was fixed. A new check that every `js/` and `css/` path named in the pages, code and tests exists on disk found only synthetic test names afterwards.
+
+**Handbook updated:** 03 (`js/content/`, `js/map/`, `js/home/`), and paths in 02, 05 and 07.
+
+**Checked here:** on Windows: lint exits 0, `npm run test:unit` passes 180 of 180, every `npm test` script passes. `npm run test:browser` passed 29 of 30: `verify_study_page_load.mjs` matched the sitting files with an escaped pattern (`js\/study\/sheets\/`) that no path search finds. With that pattern updated, it passes alone, and the other 29 had passed in the same run.
+
+**Status:** on branch `arch/phase-5-layout`, not deployed.
+
+## 2026-11-16 — Architecture plan, step 5.3: page-only scripts out of `js/shared/`
+
+**Why:** "shared" should mean loaded by two or more pages, so the folder tells you how far a change reaches. Three files there served one page each.
+
+**What changed:**
+
+- `js/shared/account.js` and `js/shared/mfa.js` → `js/pages/account/`; `js/shared/quiz-gate.js` → `js/pages/study/`. References rewritten by the same one-pass script as 5.2.
+- Before the move, four test and tool files that named paths as separate segments (`path.join(root, 'js', 'shared', 'journey.js')`) were changed to one path string (`'js/shared/journey.js'`), so a path search finds them: `tools/verify-headers.mjs`, `tools/verify/_server.mjs`, `verify_hero_budget.mjs`, `verify_workbench.mjs`. (`tools/measure_baseline.mjs` matched the search but lists two folders, not a path, and was left alone.)
+- Every other file in `js/shared/` is loaded by two or more pages (counted from what each page's tags and entry load).
+
+**Handbook updated:** 03 (`js/shared/`), and paths in 02, 04 and 06.
+
+**Checked here:** on Windows: lint exits 0, `npm run test:unit` passes 180 of 180, every `npm test` script passes, and `npm run test:browser` passes 30 of 30.
+
+**Status:** on branch `arch/phase-5-layout`, not deployed.
+
+## 2026-11-16 — Architecture plan, step 5.2: names that said the wrong thing
+
+**Why:** two files were called `insights.js` (reader analytics and the moderator dashboard), so searches and error reports landed on the wrong one, and several names did not say what the file does.
+
+**What changed:**
+
+| Old | New |
+|---|---|
+| `js/shared/insights.js` | `js/shared/analytics.js` |
+| `js/insights/insights.js` | `js/pages/dashboard/dashboard.js` |
+| `js/insights/insights-format.js` | `js/pages/dashboard/dashboard-format.js` |
+| `js/insights/sid-report.js` | `js/pages/dashboard/sid-report.js` |
+| `js/pages/insights/main.js` | `js/pages/dashboard/main.js` |
+| `js/gallery/app.js` | `js/gallery/gallery.js` |
+| `css/app.css` | `css/gallery.css` |
+| `css/notes.css` | `css/reviews.css` |
+| `css/terms.css` | `css/terms-gate.css` |
+| `css/insights.css` | `css/dashboard.css` |
+| `tests/unit/insights-format.test.mjs` | `tests/unit/dashboard-format.test.mjs` |
+
+- **How:** a script did the `git mv` and rewrote every reference to each full path, in one pass so no path was rewritten twice, across the pages, code, tests, tools and current docs. It skips history: `docs/archive/`, proof notes under `tools/review/`, this changelog and `architecture-baseline.md`, and the synthetic file names inside `verify_hash_release.mjs`. A search afterwards for each old file name split into path segments (`'js', 'insights', …`) found none.
+- `gallery.html`'s inline script names the gallery module, so its CSP hash in `_headers` was regenerated (`verify_csp_hashes.mjs --write`).
+- Global names are unchanged (`window.Insights`, `window.InsightsDashboard`, `window.InsightsFormat`): renaming them would touch every caller for no gain in findability.
+- The page `insights.html` keeps its URL; its code folder is now `js/pages/dashboard/`, as the plan names it.
+
+**Handbook updated:** 03 (pages and their scripts, `js/` by folder, the rename list), 04, 06 (file names).
+
+**Checked here:** on Windows: lint exits 0, `npm run test:unit` passes 180 of 180, every `npm test` script passes (after the CSP hash update), and `npm run test:browser` passes 30 of 30.
+
+**Status:** on branch `arch/phase-5-layout`, not deployed.
+
 ## 2026-11-16 — Sharing a sitting no longer throws; lint now catches undefined names
 
 **Why:** `js/study/lesson-connect.js` read `isFree`, which no file defines since every sitting began to need a sign-in (`acd563e`). When the browser has no share sheet, "Share this sitting" threw a `ReferenceError` instead of copying the link or showing it. Found while turning the study files into modules.

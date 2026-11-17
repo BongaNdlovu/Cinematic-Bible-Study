@@ -20,13 +20,13 @@ The server binds `127.0.0.1`. It starts at port 8000, or at `PORT` if that is se
 
 | Script | What it does |
 |---|---|
-| `npm run lint` | `oxlint` over the code. CI fails on any error. The complexity ceiling is 55 per function, set in `.oxlintrc.json`. The unused-variable rule applies to every file. Since 16 November 2026, `no-undef` is on for `js/**` with the browser environment, so a name no file defines fails lint. The three names other scripts set on `window` and read bare are declared in `globals`: `sheetsData`, `timelineEpochs` (both from `js/study/sheets/index.js`) and Leaflet's `L`. Its override for the study files was removed on 16 November 2026 (plan step 4.5): they are ES modules now, so lint sees what each file exports and imports. `.cursor/skills/complexity-ceiling/SKILL.md` says how to change the complexity ceiling. |
+| `npm run lint` | `oxlint` over the code. CI fails on any error. The complexity ceiling is 55 per function, set in `.oxlintrc.json`. The unused-variable rule applies to every file. Since 16 November 2026, `no-undef` is on for `js/**` with the browser environment, so a name no file defines fails lint. The three names other scripts set on `window` and read bare are declared in `globals`: `sheetsData`, `timelineEpochs` (both from `js/content/sheets/index.js`) and Leaflet's `L`. Its override for the study files was removed on 16 November 2026 (plan step 4.5): they are ES modules now, so lint sees what each file exports and imports. `.cursor/skills/complexity-ceiling/SKILL.md` says how to change the complexity ceiling. |
 | `npm run test:unit` | `node --test "tests/unit/*.test.mjs"`: fast unit tests, no browser |
 | `npm test` | The regression suite: 24 `tools/verify/verify_*.mjs` scripts plus `tools/verify-headers.mjs`. Some start `server.py` and drive Chromium through Playwright. It ends with three guards: `node tools/build_study_sheets.mjs --check` and `node tools/verify/build_glossary_enrichment.mjs --check` (fail when a generated file is older than its source) and `tools/verify/verify_wiring.mjs` (fails when a `verify_*.mjs` file is not run anywhere). |
 | `npm run test:browser` | `tools/verify/run_browser_checks.mjs`: starts one site server and runs the 29 browser checks that pass today (see [Browser checks](#browser-checks)). Add `--include-quarantined` to run the one known-failing check too, or `--only=verify_x.mjs,verify_y.mjs` to run named ones. |
 | `npm run test:security` | 23 penetration-style checks (`tools/security/run_penetration_audit.mjs`). Since 13 November 2026 PT-19 and PT-20 prove that guest writes without a human pass are refused, so they no longer leave rows behind; `exhibit_prune_test_rows()` still clears any that appear. |
 | `npm run smoke` | Smoke test of the live site (`tools/smoke.mjs`) |
-| `npm run build:tailwind` | Rebuild `css/study-tailwind.css` |
+| `npm run build:tailwind` | Rebuild `css/pages/study/study-tailwind.css` |
 | `npm run compress`, `compress:beasts`, `compress:daniel8`, `compress:visions`, `compress:daniel11` | Rebuild compressed 3D models from `models/originals/` |
 | `npm run deploy:pages` | Run the deploy script by hand |
 | `npm run rollback` | Restore the previous successful production deployment |
@@ -35,12 +35,12 @@ The server binds `127.0.0.1`. It starts at port 8000, or at `PORT` if that is se
 
 | Edit | Then run |
 |---|---|
-| `js/study/sheets-data.js` | `node tools/build_study_sheets.mjs` (writes `js/study/sheets/`) |
-| `css/study-tailwind-src.css` or `tailwind.study.config.js` | `npm run build:tailwind` |
+| `js/content/sheets-data.js` | `node tools/build_study_sheets.mjs` (writes `js/content/sheets/`) |
+| `css/pages/study/study-tailwind-src.css` or `tailwind.study.config.js` | `npm run build:tailwind` |
 | Shelf content | `node tools/build-shelf-data.mjs` (the deploy runs it too) |
-| `js/study/glossary-enrichment-overrides.json` | `node tools/verify/build_glossary_enrichment.mjs` |
+| `js/content/glossary-enrichment-overrides.json` | `node tools/verify/build_glossary_enrichment.mjs` |
 
-`npm test` checks the first and last rows with `--check`: it fails, and names the rebuild command, when `js/study/sheets/` or `js/study/glossary-enrichment.js` no longer matches its source. The glossary check ignores Windows line endings. The sheet files are always written with CRLF (`.gitattributes`), so that check compares them as they are.
+`npm test` checks the first and last rows with `--check`: it fails, and names the rebuild command, when `js/content/sheets/` or `js/content/glossary-enrichment.js` no longer matches its source. The glossary check ignores Windows line endings. The sheet files are always written with CRLF (`.gitattributes`), so that check compares them as they are.
 
 ## Tests
 
@@ -81,7 +81,7 @@ Thirty-four `tools/verify/verify_*.mjs` files were not part of `npm test` before
 | Checkpoints hold the book until answered (commit `788ab13`) | `verify_book_reader` | Count checkpoint plates as plates, pass the checkpoints before walking the book, and a new check (M2.0) that an unanswered checkpoint holds the book |
 | Some scripts only looked for Chrome in Windows folders | `verify_hall_mural`, `verify_horizon`, and the other Chrome-driven scripts | `chromePath()` in `tools/verify/_server.mjs`: `CHROME_PATH`, then an installed Chrome, then Playwright's Chromium |
 
-`run_browser_checks.mjs` starts one site server and passes its address to every script as `BASE` (and as `--base` where a script takes it), so no script depends on its own fixed port. A failing script's last 30 lines are printed. Each script gets 240 s, except `verify_globe.mjs`, `verify_hall_mural.mjs` and `verify_mobile_viewports.mjs`, which get 480 s (`timeoutMs` in `BROWSER_CHECKS`): on GitHub's runners, which draw WebGL in software, they took more than 240 s on 16 November 2026. The `test-browser` job's own limit is 60 minutes. The shared pieces live in `tools/verify/_server.mjs`: `cdpTargets()` (waits up to 30 s for Chrome's debugging port instead of a fixed sleep), `signedInScript()` (test sign-in, consent, onboarding and terms, with `TERMS_VERSION` read from `js/shared/journey.js` so it cannot go stale), `QA_MOCK`, and `chromePath()`.
+`run_browser_checks.mjs` starts one site server and passes its address to every script as `BASE` (and as `--base` where a script takes it), so no script depends on its own fixed port. A failing script's last 30 lines are printed. Each script gets 240 s, except `verify_globe.mjs`, `verify_hall_mural.mjs` and `verify_mobile_viewports.mjs`, which get 480 s (`timeoutMs` in `BROWSER_CHECKS`): on GitHub's runners, which draw WebGL in software, they took more than 240 s on 16 November 2026. The `test-browser` job's own limit is 60 minutes. The shared pieces live in `tools/verify/_server.mjs`: `cdpTargets()` (waits up to 30 s for Chrome's debugging port instead of a fixed sleep), `signedInScript()` (test sign-in, consent, onboarding and terms, with `TERMS_VERSION` read from `js/core/journey.js` so it cannot go stale), `QA_MOCK`, and `chromePath()`.
 
 **Still quarantined: `verify_book_reader`.** Its structural problems are fixed, and the new checkpoint check passes on every sitting. What still fails are timing and geometry checks: a step read in the middle of a turn (M2.3), the wheel throttle (M3.7), the mode after a resize (M2.7), the step count after a font-size change (M3.10), and a view height 2 px off its rule (M2.8). A separate walk with a short pause between turns reached the last step of sitting 0 on a phone, so the reader itself works. Not checked: each of those assertions one by one.
 
@@ -145,7 +145,7 @@ On a push to `master` only, after **test** passes:
 
 ## Database changes
 
-- Migrations are SQL files in `tools/supabase-*.sql`. They are run **by hand** in the Supabase SQL editor. Nothing applies them automatically.
+- Migrations are SQL files in `db/migrations/`, numbered in the order to run them (since 16 November 2026). They are run **by hand** in the Supabase SQL editor. Nothing applies them automatically. `db/migrations/README.md` lists the order and its evidence; which have run in production is not checked there yet.
 - Run a migration **before** deploying the client that depends on it. For example, the answer check fails closed until `verify_quiz_answer` exists.
 - Never rename `save_exhibit_progress(bigint, jsonb)`. A breaking change ships as a new function, together with the client that uses it.
 - Backups: the project is on the Supabase Free plan, which has no automatic backups (per `docs/archive/2026-09-10-ARCHITECTURE.md`, 26 September 2026). So the repo makes its own. See [Database backups](#database-backups).

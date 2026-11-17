@@ -9,13 +9,13 @@ const read = (rel) => fs.readFileSync(path.join(root, rel), 'utf8');
 
 const html = read('study.html');
 const app = studyPageSource();
-const flow = read('js/study/task-flow.js');
-const flowCss = read('css/task-flow.css');
-const player = read('js/study/lesson-player.js');
-const audioCss = read('css/study-audio.css');
+const flow = read('js/pages/study/task-flow.js');
+const flowCss = read('css/pages/study/task-flow.css');
+const player = read('js/pages/study/lesson-player.js');
+const audioCss = read('css/pages/study/study-audio.css');
 
-assert(pageLoads('study.html', 'js/study/task-flow.js') && html.includes('css/task-flow.css'), 'the study page loads the task flow');
-assert(html.includes('css/study-audio.css'), 'the study page loads the audio player styles');
+assert(pageLoads('study.html', 'js/pages/study/task-flow.js') && html.includes('css/pages/study/task-flow.css'), 'the study page loads the task flow');
+assert(html.includes('css/pages/study/study-audio.css'), 'the study page loads the audio player styles');
 assert(app.includes('window.StudyTasks = {'), 'the study app exposes what is done to the flow');
 assert(app.includes("new CustomEvent('quiz:changed'"), 'answers and retries tell the flow');
 assert((app.match(/openTaskFlow\(\)/g) || []).length >= 2, 'next sitting opens the flow when work is unfinished');
@@ -37,8 +37,8 @@ assert(player.includes('player.defaultPlaybackRate = rate'), 'speed survives a c
 assert(audioCss.includes('backdrop-filter: blur(32px) saturate(180%)'), 'the player is glass');
 assert(audioCss.includes('body.paper-mode #lesson-audio') && audioCss.includes('body.white-mode #lesson-audio'), 'the player has a light-theme glass');
 
-const workbench = read('js/study/workbench.js');
-const scripture = read('js/study/scripture.js');
+const workbench = read('js/pages/study/workbench.js');
+const scripture = read('js/pages/study/scripture.js');
 assert(workbench.includes('else if (window.navigateSheet) window.navigateSheet(1);') && !workbench.includes('window.loadSheet('), 'the dossier Continue button uses a navigator the study app exports');
 assert(app.includes('if (firstTime) offerCapstone(finishedSheet);'), 'finishing a sitting can open the capstone');
 assert(/function offerCapstone\(finishedSheet\) \{\s*if \(finishedSheet !== 2\) return;/.test(app), 'the capstone follows Sitting 2 only');
@@ -50,7 +50,7 @@ assert(scripture.includes('return sheets[key] || null;'), 'an unmapped sitting s
   const ls = { getItem: (k) => (k in store ? store[k] : null), setItem: (k, v) => { store[k] = String(v); }, removeItem: (k) => { delete store[k]; } };
   const win = { localStorage: ls };
   const doc = { body: { classList: { toggle() {} } }, getElementById: () => null, addEventListener() {}, querySelector: () => null };
-  new Function('window', 'document', 'localStorage', read('js/study/competency.js'))(win, doc, ls);
+  new Function('window', 'document', 'localStorage', read('js/pages/study/competency.js'))(win, doc, ls);
   store.daniel_placement_track_v1 = '<img src=x onerror=alert(1)>';
   assert.strictEqual(win.StudyCompetency.getTrack(), 'foundations', 'a hand-edited track never reaches the record as HTML');
   store.daniel_placement_track_v1 = 'scholarly';

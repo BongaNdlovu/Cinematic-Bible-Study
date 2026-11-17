@@ -54,14 +54,14 @@ function routed(p) {
   return matches(routes.include, p) && !matches(routes.exclude, p);
 }
 const protectedPaths = [
-  "/docs/plan.md", "/tools/supabase-quiz-integrity.sql", "/tests/unit/middleware.test.mjs", "/backups/db.sql", "/workers/exhibit-rate-gate/src/index.js",
+  "/docs/plan.md", "/tools/deploy-cloudflare-pages.ps1", "/db/migrations/010-quiz-integrity.sql", "/tests/unit/middleware.test.mjs", "/backups/db.sql", "/workers/exhibit-rate-gate/src/index.js",
   "/qa/proofs/x.png", "/originals/a.glb", "/_factcheck/meta.json", "/_mig/index.json", "/functions/_middleware.js",
   "/README.md", "/package.json", "/package-lock.json", "/server.py", "/vercel.json", "/wrangler.toml",
   "/start_website.bat", "/middleware.js", "/__wiring_check.mjs", "/.env", "/.git/config"
 ];
 for (const p of protectedPaths) assert(routed(p), "_routes.json must keep " + p + " behind the middleware");
 for (const p of ["/__rate", "/csp-report"]) assert(routed(p), "_routes.json must send " + p + " to the middleware");
-for (const p of ["/", "/study.html", "/study", "/map.html", "/account.html", "/404.html", "/assets/a.jpg", "/js/shared/auth.js", "/css/site.css", "/vendor/v.js", "/models/m.glb", "/bible/kjv.json"]) {
+for (const p of ["/", "/study.html", "/study", "/map.html", "/account.html", "/404.html", "/assets/a.jpg", "/js/core/auth.js", "/css/core/site.css", "/vendor/v.js", "/models/m.glb", "/bible/kjv.json"]) {
   assert(!routed(p), "_routes.json must serve " + p + " without invoking Functions");
 }
 

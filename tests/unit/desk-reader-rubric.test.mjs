@@ -8,9 +8,9 @@ const load = (rel, name) => {
   vm.runInNewContext(fs.readFileSync(new URL("../../" + rel, import.meta.url), "utf8"), sandbox);
   return sandbox.window[name];
 };
-const D = load("js/shared/desk-rows.js", "DeskRows");
-const B = load("js/study/book-reader-helpers.js", "BookReaderHelpers");
-const W = load("js/study/workbench-rubric.js", "WorkbenchRubric");
+const D = load("js/features/desk-rows.js", "DeskRows");
+const B = load("js/pages/study/book-reader-helpers.js", "BookReaderHelpers");
+const W = load("js/pages/study/workbench-rubric.js", "WorkbenchRubric");
 const ID = "123e4567-e89b-42d3-a456-426614174000";
 const plain = (v) => JSON.parse(JSON.stringify(v));
 

@@ -6,6 +6,7 @@
     "/__human-pass",
     "/docs/*",
     "/tools/*",
+    "/db/*",
     "/tests/*",
     "/backups/*",
     "/workers/*",

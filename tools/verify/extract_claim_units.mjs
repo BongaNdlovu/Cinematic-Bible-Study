@@ -27,7 +27,7 @@ function cleanText(html) {
 }
 
 // 1. Load sheetsData
-const sheetsSrc = fs.readFileSync(path.join(root, 'js/study/sheets-data.js'), 'utf8');
+const sheetsSrc = fs.readFileSync(path.join(root, 'js/content/sheets-data.js'), 'utf8');
 const sittingPart = sheetsSrc.slice(sheetsSrc.indexOf('const sheetsData'), sheetsSrc.indexOf('const timelineEpochs'));
 const sCtx = {};
 vm.createContext(sCtx);
@@ -35,17 +35,17 @@ vm.runInContext(sittingPart + '\nthis.sheetsData = sheetsData;', sCtx);
 const sheetsData = sCtx.sheetsData;
 
 // 2. Load SHEET_VERIFY
-const verifySrc = fs.readFileSync(path.join(root, 'js/study/sheet-verify.js'), 'utf8');
+const verifySrc = fs.readFileSync(path.join(root, 'js/content/sheet-verify.js'), 'utf8');
 const vCtx = { window: {} };
 vm.createContext(vCtx);
 vm.runInContext(verifySrc, vCtx);
 const sheetVerify = vCtx.window.SHEET_VERIFY || [];
 
 // 3. Load SHEET_GLOSSARY (+ optional enrichment patch)
-const glossSrc = fs.readFileSync(path.join(root, 'js/study/sheet-glossary.js'), 'utf8');
+const glossSrc = fs.readFileSync(path.join(root, 'js/content/sheet-glossary.js'), 'utf8');
 const gCtx = { window: {} };
 vm.createContext(gCtx);
-const enrichJs = path.join(root, 'js/study/glossary-enrichment.js');
+const enrichJs = path.join(root, 'js/content/glossary-enrichment.js');
 if (fs.existsSync(enrichJs)) {
   vm.runInContext(fs.readFileSync(enrichJs, 'utf8'), gCtx);
 }
@@ -106,7 +106,7 @@ function getLinkedGlossary(content) {
 }
 
 // 4. Load workbench.js and validate synchronization
-const wbSrc = fs.readFileSync(path.join(root, 'js/study/workbench.js'), 'utf8');
+const wbSrc = fs.readFileSync(path.join(root, 'js/pages/study/workbench.js'), 'utf8');
 const normWb = wbSrc.replace(/\s+/g, ' ');
 
 function assertInWorkbench(phrase, label) {
@@ -122,7 +122,7 @@ function assertInWorkbench(phrase, label) {
   for (const part of parts) {
     const sample = part.slice(0, Math.min(part.length, 40));
     if (!normWb.includes(sample)) {
-      throw new Error(`Workbench synchronization error for ${label}: "${sample}" not found in js/study/workbench.js`);
+      throw new Error(`Workbench synchronization error for ${label}: "${sample}" not found in js/pages/study/workbench.js`);
     }
   }
 }
@@ -176,7 +176,7 @@ const WORKBENCH_DATA = {
   }
 };
 
-// Validate all workbench definitions are synchronized with js/study/workbench.js
+// Validate all workbench definitions are synchronized with js/pages/study/workbench.js
 for (const [sId, wb] of Object.entries(WORKBENCH_DATA)) {
   assertInWorkbench(wb.intro, `S${sId} intro`);
   if (wb.items) wb.items.forEach((it, idx) => assertInWorkbench(it, `S${sId} item ${idx}`));

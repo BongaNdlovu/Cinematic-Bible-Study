@@ -1,5 +1,5 @@
 /*
- * Snapshots each sitting's live `diagrams` block from js/study/sheets-data.js
+ * Snapshots each sitting's live `diagrams` block from js/content/sheets-data.js
  * back into _mig/specN.json.
  *
  * The specs are upstream authoring files, but the live data has been hand-edited
@@ -15,7 +15,7 @@ import fs from 'fs';
 import vm from 'vm';
 
 const CHECK = process.argv.includes('--check');
-const src = fs.readFileSync('js/study/sheets-data.js', 'utf8').replace(/\r\n/g, '\n');
+const src = fs.readFileSync('js/content/sheets-data.js', 'utf8').replace(/\r\n/g, '\n');
 const part = src.slice(src.indexOf('const sheetsData'), src.indexOf('const timelineEpochs'));
 const ctx = {};
 vm.createContext(ctx);

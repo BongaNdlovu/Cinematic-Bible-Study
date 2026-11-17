@@ -1,0 +1,14 @@
+import '/js/core/journey.js';
+import '/js/core/auth-config.js';
+import '/js/core/net.js';
+import '/js/core/errors.js';
+import '/js/core/ops.js';
+import '/js/core/human-pass.js';
+import '/js/core/auth.js';
+import '/js/features/desk-rows.js';
+import '/js/features/desk.js';
+import '/js/core/terms.js';
+import '/js/features/analytics.js';
+import '/js/pages/dashboard/sid-report.js';
+import '/js/pages/dashboard/dashboard-format.js';
+import '/js/pages/dashboard/dashboard.js';

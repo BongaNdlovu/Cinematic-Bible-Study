@@ -19,8 +19,8 @@ for (const name of sheets) {
   assert(after.length <= before, name + " must not grow when minified");
   assert(!after.includes("/*"), name + " keeps no comments once minified");
 }
-const studyParts = sheets.filter((n) => path.dirname(n) === "study");
-assert(studyParts.length > 1, "css/study/ holds the study page stylesheets");
+const studyParts = sheets.filter((n) => path.dirname(n).split(path.sep).join("/") === "pages/study/parts");
+assert(studyParts.length > 1, "css/pages/study/parts/ holds the study page stylesheets");
 const studyBefore = studyParts.reduce((sum, n) => sum + fs.statSync(path.join(ROOT, "css", n)).size, 0);
 const studyAfter = studyParts.reduce((sum, n) => sum + fs.statSync(path.join(stage, "css", n)).size, 0);
 assert(studyAfter < studyBefore * 0.75, "the study page stylesheets shrink by at least a quarter in total");

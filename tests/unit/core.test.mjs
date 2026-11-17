@@ -6,7 +6,7 @@ import vm from "node:vm";
 import { fileURLToPath } from "node:url";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..");
-const source = fs.readFileSync(path.join(root, "js/shared/core.js"), "utf8");
+const source = fs.readFileSync(path.join(root, "js/core/core.js"), "utf8");
 
 function load({ hostname = "endoftimeacademy.com", auth, active = null } = {}) {
   const window = {};

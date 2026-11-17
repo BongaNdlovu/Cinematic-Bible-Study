@@ -1,5 +1,5 @@
 /*
- * Verification harness for the mindmap renderer (js/study/mindmap.js) on the two
+ * Verification harness for the mindmap renderer (js/pages/study/mindmap.js) on the two
  * migrated sitting-2 diagrams, s2-3 (a fan) and s2-4 (a spine).
  *
  * What a unit test cannot see, and this does:

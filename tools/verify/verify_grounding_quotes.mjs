@@ -51,7 +51,7 @@ function loose(s) {
 }
 
 function loadCourseStrings() {
-  const raw = fs.readFileSync('js/study/sheets-data.js', 'utf8').replace(/\r\n/g, '\n');
+  const raw = fs.readFileSync('js/content/sheets-data.js', 'utf8').replace(/\r\n/g, '\n');
   const part = raw.slice(raw.indexOf('const sheetsData'), raw.indexOf('const timelineEpochs'));
   const ctx = {};
   vm.createContext(ctx);
@@ -65,7 +65,7 @@ function loadCourseStrings() {
   ctx.sheetsData.forEach(walk);
   const vctx = { window: {} };
   vm.createContext(vctx);
-  vm.runInContext(fs.readFileSync('js/study/sheet-verify.js', 'utf8'), vctx);
+  vm.runInContext(fs.readFileSync('js/content/sheet-verify.js', 'utf8'), vctx);
   walk(vctx.window.SHEET_VERIFY);
   return out.map(plain);
 }

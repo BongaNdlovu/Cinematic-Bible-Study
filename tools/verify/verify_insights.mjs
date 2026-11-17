@@ -10,9 +10,9 @@ const ROOT = path.resolve(__dirname, '../..');
 
 console.log('--- RUNNING USER INSIGHT TRACKING VERIFICATION ---');
 
-// 1. Check tools/supabase-insights.sql
-console.log('1. Checking tools/supabase-insights.sql...');
-const sqlContent = fs.readFileSync(path.join(ROOT, 'tools/supabase-insights.sql'), 'utf8');
+// 1. Check db/migrations/003-insights.sql
+console.log('1. Checking db/migrations/003-insights.sql...');
+const sqlContent = fs.readFileSync(path.join(ROOT, 'db/migrations/003-insights.sql'), 'utf8');
 assert(sqlContent.includes('create table if not exists public.exhibit_events'), 'Missing exhibit_events table');
 assert(sqlContent.includes('user_id uuid references auth.users (id)'), 'user_id must be nullable in exhibit_events');
 assert(!sqlContent.includes('user_id uuid not null references auth.users (id)'), 'user_id must not be marked not null in exhibit_events');
@@ -35,19 +35,19 @@ console.log('2. Checking HTML files & CSP headers...');
 const pages = ['index.html', 'study.html', 'gallery.html', 'map.html', 'insights.html', 'account.html'];
 pages.forEach(p => {
   const c = fs.readFileSync(path.join(ROOT, p), 'utf8');
-  assert(c.length > 0 && pageLoads(p, 'js/shared/insights.js'), `${p} must include js/shared/insights.js`);
+  assert(c.length > 0 && pageLoads(p, 'js/features/analytics.js'), `${p} must include js/features/analytics.js`);
 });
 const indexHtml = fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8');
 assert(!indexHtml.includes('data-insight-optout'), 'index.html must not offer an analytics off switch');
 assert(!indexHtml.includes('Stop usage analytics'), 'index.html must not offer an analytics off switch');
 assert(!indexHtml.includes('admin-insights-link'), 'index.html must not ship the moderator Insights link to readers');
 assert(!indexHtml.includes('admin-reviews-link'), 'index.html must not ship the moderator Admin link to readers');
-assert(fs.readFileSync(path.join(ROOT, 'js/home/home.js'), 'utf8').includes('"admin-insights-link", "insights.html"'), 'home.js must add the Insights link for moderators');
+assert(fs.readFileSync(path.join(ROOT, 'js/pages/index/home.js'), 'utf8').includes('"admin-insights-link", "insights.html"'), 'home.js must add the Insights link for moderators');
 
 const studyHtml = fs.readFileSync(path.join(ROOT, 'study.html'), 'utf8');
-assert(studyHtml.length > 0 && pageLoads('study.html', 'js/shared/insights.js'), 'study.html must include insights.js');
+assert(studyHtml.length > 0 && pageLoads('study.html', 'js/features/analytics.js'), 'study.html must include insights.js');
 
-const compJs = fs.readFileSync(path.join(ROOT, 'js/study/competency.js'), 'utf8');
+const compJs = fs.readFileSync(path.join(ROOT, 'js/pages/study/competency.js'), 'utf8');
 assert(!compJs.includes('data-insight-optout'), 'competency.js must not offer an analytics off switch');
 assert(!compJs.includes('Stop usage analytics'), 'competency.js must not offer an analytics off switch');
 
@@ -60,7 +60,7 @@ console.log('✓ HTML pages, opt-outs, and CSP headers verified.');
 
 // 3. Check terms and journey version
 console.log('3. Checking terms and journey TERMS_VERSION...');
-const journeyJs = fs.readFileSync(path.join(ROOT, 'js/shared/journey.js'), 'utf8');
+const journeyJs = fs.readFileSync(path.join(ROOT, 'js/core/journey.js'), 'utf8');
 assert(/TERMS_VERSION\s*=\s*6/.test(journeyJs), 'TERMS_VERSION must be 6 in journey.js');
 
 const accountHtml = fs.readFileSync(path.join(ROOT, 'account.html'), 'utf8');
@@ -74,7 +74,7 @@ assert(!accountHtml.includes('Prologue, Daniel 1'), 'account.html must not promi
 assert(/Sign in to open the sittings, the Map of History, the 3D arena/.test(accountHtml), 'account.html must say sign-in opens the sittings, the map, and the 3D arena');
 assert(!accountHtml.includes('You may browse the study, map, and gallery without an account'), 'account.html must not promise the map and gallery without an account');
 assert(!accountHtml.includes('This exhibit is closed'), 'account.html must not say the exhibit is closed');
-assert(pageLoads('account.html', 'js/shared/account.js'), 'account.html must load the hub script');
+assert(pageLoads('account.html', 'js/pages/account/account.js'), 'account.html must load the hub script');
 assert(accountHtml.includes('id="account-accept"'), 'account.html must keep Accept on the terms card');
 assert(accountHtml.includes('id="account-signin"'), 'account.html must keep Google sign-in on the hub');
 assert(accountHtml.includes('id="account-error"'), 'account.html must keep a visible hub error box');
@@ -88,7 +88,7 @@ assert(!accountHtml.includes('id="account-study-mode"'), 'account.html must not 
 assert(accountHtml.includes('id="account-signout"'), 'account.html must keep sign-out on the hub');
 assert(!accountHtml.includes('id="terms-agree"'), 'account.html must not keep a terms checkbox');
 
-const termsJs = fs.readFileSync(path.join(ROOT, 'js/shared/terms.js'), 'utf8');
+const termsJs = fs.readFileSync(path.join(ROOT, 'js/core/terms.js'), 'utf8');
 assert(termsJs.includes('goToAccount'), 'terms.js must send visitors to the Account hub');
 assert(termsJs.includes('account.html'), 'terms.js must route through account.html');
 assert(termsJs.includes('baTermsNext'), 'terms.js must keep the baTermsNext return key');
@@ -99,19 +99,19 @@ assert(!termsJs.includes('This exhibit is closed'), 'terms.js must not say the e
 ['index.html', 'study.html', 'gallery.html', 'map.html', 'insights.html', '404.html'].forEach((p) => {
   const c = fs.readFileSync(path.join(ROOT, p), 'utf8');
   const navSrc = p === 'map.html'
-    ? fs.readFileSync(path.join(ROOT, 'js/map/map.js'), 'utf8')
+    ? fs.readFileSync(path.join(ROOT, 'js/pages/map/map.js'), 'utf8')
     : c.includes('data-site-nav')
-      ? fs.readFileSync(path.join(ROOT, 'js/shared/cinema.js'), 'utf8')
+      ? fs.readFileSync(path.join(ROOT, 'js/core/cinema.js'), 'utf8')
       : c;
   assert(navSrc.includes('account.html'), `${p} must link to the Account hub`);
   assert(!c.includes('id="terms-overlay"'), `${p} must not inject a terms overlay`);
 });
 
-const authJs = fs.readFileSync(path.join(ROOT, 'js/shared/auth.js'), 'utf8');
+const authJs = fs.readFileSync(path.join(ROOT, 'js/core/auth.js'), 'utf8');
 assert(authJs.includes('account.html'), 'auth.js must return Google OAuth to the Account hub');
 assert(authJs.includes("provider: \"google\""), 'auth.js must sign in with Google');
-['supabase-reviews.sql', 'supabase-auth-guard.sql', 'supabase-hardening-2026-10.sql', 'supabase-moderator-require-mfa.sql'].forEach((f) => {
-  const s = fs.readFileSync(path.join(ROOT, 'tools', f), 'utf8');
+['db/migrations/001-reviews.sql', 'db/migrations/014-auth-guard.sql', 'db/migrations/013-hardening-2026-10.sql', 'db/migrations/020-moderator-require-mfa.sql'].forEach((f) => {
+  const s = fs.readFileSync(path.join(ROOT, f), 'utf8');
   const body = s.slice(s.indexOf('function public.is_review_moderator()'));
   const fn = body.slice(0, body.indexOf('$$;'));
   assert(fn.includes("= 'aal2'") && !/not exists \(\s*select 1\s*from auth\.mfa_factors/.test(fn), `${f}: is_review_moderator must always require a verified authenticator and an aal2 session`);
@@ -121,22 +121,22 @@ assert(!authJs.includes('client.auth.signUp('), 'auth.js must not create email a
 assert(!authJs.includes('resetPasswordForEmail'), 'auth.js must not send password-reset email');
 assert(!authJs.includes('auth-sign-out'), 'auth.js must not draw a Sign out button on other pages');
 assert(!authJs.includes('clearPendingTerms'), 'auth.js must not wipe a once-agreed terms record on sign-out');
-const insightsSrc = fs.readFileSync(path.join(ROOT, 'js/shared/insights.js'), 'utf8');
+const insightsSrc = fs.readFileSync(path.join(ROOT, 'js/features/analytics.js'), 'utf8');
 assert(insightsSrc.includes('account-hub'), 'insights.js must skip the floating profile card on the Account hub');
 
-const homeJs = fs.readFileSync(path.join(ROOT, 'js/home/home.js'), 'utf8');
+const homeJs = fs.readFileSync(path.join(ROOT, 'js/pages/index/home.js'), 'utf8');
 assert(homeJs.includes('requestSignIn'), 'home.js must send Home sign-in to the Account hub');
-const reviewsSrc = fs.readFileSync(path.join(ROOT, 'js/shared/reviews.js'), 'utf8');
+const reviewsSrc = fs.readFileSync(path.join(ROOT, 'js/features/reviews.js'), 'utf8');
 assert(reviewsSrc.includes('requestSignIn'), 'reviews.js must send review sign-in to the Account hub');
 console.log('✓ TERMS_VERSION and Account hub terms verified.');
 
 console.log('3b. Checking public config does not ship operator identity or a Maps key paste...');
-const authCfg = fs.readFileSync(path.join(ROOT, 'js/shared/auth-config.js'), 'utf8');
+const authCfg = fs.readFileSync(path.join(ROOT, 'js/core/auth-config.js'), 'utf8');
 assert(!authCfg.includes('moderatorEmails'), 'auth-config.js must not ship a moderator email list');
 assert(!/@gmail\.com/i.test(authCfg), 'auth-config.js must not include a Gmail address');
 assert(authJs.includes('is_review_moderator'), 'auth.js must ask the server who is a moderator');
 assert(!authJs.includes('moderatorEmails'), 'auth.js must not compare against a public email list');
-const mapJs = fs.readFileSync(path.join(ROOT, 'js/map/map.js'), 'utf8');
+const mapJs = fs.readFileSync(path.join(ROOT, 'js/pages/map/map.js'), 'utf8');
 assert(!mapJs.includes('Paste your Google Maps API key'), 'map.js must not ask visitors to paste a Maps API key');
 assert(!mapJs.includes("data-base='google'"), 'map.js must not show a Google basemap button');
 assert(mapJs.includes("data-base='satellite'"), 'map.js must keep Satellite');
@@ -144,7 +144,7 @@ assert(mapJs.includes("data-base='streets'"), 'map.js must keep Streets');
 console.log('✓ Public config and map chrome stay visitor-safe.');
 
 // 4. Test Insights tracker logic
-console.log('4. Testing js/shared/insights.js tracker logic...');
+console.log('4. Testing js/features/analytics.js tracker logic...');
 
 // Mock browser globals
 const localStorageStore = {};
@@ -265,7 +265,7 @@ try {
 } catch (e) {}
 
 // Load insights.js in this sandbox
-const insightsCode = fs.readFileSync(path.join(ROOT, 'js/shared/insights.js'), 'utf8');
+const insightsCode = fs.readFileSync(path.join(ROOT, 'js/features/analytics.js'), 'utf8');
 const runTracker = new Function(insightsCode);
 runTracker();
 
@@ -372,8 +372,8 @@ assert.strictEqual(profileOk.ok, true, 'upsertProfile must report success');
 
 console.log('✓ Tracker queueing, anonymous/signed-in flushing, readingTimer, scroll depth, and opt-out verified.');
 
-// 5. Test Dashboard Calculations with the actual js/insights/insights.js code
-console.log('5. Testing js/insights/insights.js calculations directly...');
+// 5. Test Dashboard Calculations with the actual js/pages/dashboard/dashboard.js code
+console.log('5. Testing js/pages/dashboard/dashboard.js calculations directly...');
 const dashEvents = [
   { event: 'sitting_start', sitting: 0, sheet: 0, created_at: '2026-01-01T00:00:00Z' },
   { event: 'sitting_complete', sitting: 0, sheet: 0, detail: { seconds: 120 }, created_at: '2026-01-01T00:05:00Z' },
@@ -405,9 +405,9 @@ const dashProfiles = [
 ];
 
 // Load insights.js dashboard in sandbox
-const dashCode = fs.readFileSync(path.join(ROOT, 'js/insights/insights.js'), 'utf8');
-new Function(fs.readFileSync(path.join(ROOT, 'js/shared/core.js'), 'utf8'))();
-new Function(fs.readFileSync(path.join(ROOT, 'js/insights/insights-format.js'), 'utf8'))();
+const dashCode = fs.readFileSync(path.join(ROOT, 'js/pages/dashboard/dashboard.js'), 'utf8');
+new Function(fs.readFileSync(path.join(ROOT, 'js/core/core.js'), 'utf8'))();
+new Function(fs.readFileSync(path.join(ROOT, 'js/pages/dashboard/dashboard-format.js'), 'utf8'))();
 const runDash = new Function(dashCode);
 runDash();
 
@@ -600,12 +600,12 @@ assert(studyAppJs.includes("readingTimer("), 'study-app must call readingTimer')
 assert(studyAppJs.includes("baReferredSitting"), 'study-app must support baReferredSitting in resolveStartSheet');
 assert(studyAppJs.includes("maybePulse()"), 'study-app must show the last-sitting pulse without advancing');
 
-const workbenchJs = fs.readFileSync(path.join(ROOT, 'js/study/workbench.js'), 'utf8');
+const workbenchJs = fs.readFileSync(path.join(ROOT, 'js/pages/study/workbench.js'), 'utf8');
 assert(workbenchJs.includes("track('workbench_task'"), 'workbench missing workbench_task track');
 assert(workbenchJs.includes("pass: true"), 'workbench missing pass: true track');
 assert(workbenchJs.includes("pass: false"), 'workbench missing pass: false track');
 
-const certJs = fs.readFileSync(path.join(ROOT, 'js/study/certificate.js'), 'utf8');
+const certJs = fs.readFileSync(path.join(ROOT, 'js/pages/study/certificate.js'), 'utf8');
 assert(certJs.includes("track('feature_use'"), 'certificate missing feature_use track');
 assert(certJs.includes("cert-review-nps"), 'certificate missing NPS select');
 assert(certJs.includes("cert-review-changed"), 'certificate missing changed textarea');
@@ -613,7 +613,7 @@ assert(certJs.includes('Could not save. Try again.'), 'certificate must show a s
 assert(!certJs.includes('Thank you! Your feedback has been recorded.'), 'certificate must not thank the learner after a failed save');
 assert(certJs.includes('res.ok === false'), 'certificate must treat a false submitReview result as a failure');
 
-const reviewsJs = fs.readFileSync(path.join(ROOT, 'js/shared/reviews.js'), 'utf8');
+const reviewsJs = fs.readFileSync(path.join(ROOT, 'js/features/reviews.js'), 'utf8');
 assert(!reviewsJs.includes('SEED_REVIEWS'), 'reviews.js must not keep seed witnesses');
 assert(reviewsJs.includes('Could not load reviews.'), 'reviews.js must say when witnesses failed to load');
 assert(reviewsJs.includes('res && res.error'), 'reviews.js must check approve/hide errors');
@@ -680,11 +680,11 @@ const counterBroken = Dashboard.targetTile({ registered: 1, began: 'x' });
 assert(counterBroken.includes('verified count not available'), 'a malformed count is not shown');
 assert(/c\.rpc\('exhibit_participation', \{ p_from: ALL_TIME_FROM/.test(dashCode), 'the dashboard loads the all-time verified count');
 assert(/'<div class="insights-tiles">' \+\s*targetTile\(cache\.participation\) \+/.test(dashCode), 'the counter is the first dashboard tile');
-const participationSql = fs.readFileSync(path.join(ROOT, 'tools/supabase-participation.sql'), 'utf8');
+const participationSql = fs.readFileSync(path.join(ROOT, 'db/migrations/024-participation.sql'), 'utf8');
 assert(/filter \(where public\.exhibit_sittings_passed\(u\.id\) >= 1\)/.test(participationSql), '"began" counts server-checked quiz passes');
 assert(!/journey/.test(participationSql), '"began" does not trust browser-written progress');
 assert(/if not public\.is_review_moderator\(\) then\s*raise exception/.test(participationSql), 'the participation function refuses non-moderators first');
-const pruneSql = fs.readFileSync(path.join(ROOT, 'tools/supabase-prune-test-rows.sql'), 'utf8');
+const pruneSql = fs.readFileSync(path.join(ROOT, 'db/migrations/025-prune-test-rows.sql'), 'utf8');
 const pruneDeletes = pruneSql.split('delete from').slice(1);
 assert.strictEqual(pruneDeletes.length, 2, 'the test-row clean-up has exactly two deletes');
 pruneDeletes.forEach((d) => assert(/^\s*public\.exhibit_(events|surveys)\s+where user_id is null\s+and \(/.test(d), 'every test-row delete is limited to rows with no account'));

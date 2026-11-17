@@ -1,12 +1,12 @@
 import fs from 'node:fs';
 import postcss from 'postcss';
-const files = fs.readdirSync('css/study').filter((n) => n.endsWith('.css')).sort();
+const files = fs.readdirSync('css/pages/study/parts').filter((n) => n.endsWith('.css')).sort();
 const groups = { 'print (@media print)': 0, 'reduced motion (@media prefers-reduced-motion)': 0, 'theme override (paper, white, charcoal, night, dark)': 0, 'full-screen diagram (.is-full, dfx-)': 0, 'article base (.article-body p / h4 font-size)': 0, 'other': 0 };
 const otherProps = {};
 const otherFiles = {};
 let total = 0;
 for (const f of files) {
-  postcss.parse(fs.readFileSync('css/study/' + f, 'utf8')).walkDecls((d) => {
+  postcss.parse(fs.readFileSync('css/pages/study/parts/' + f, 'utf8')).walkDecls((d) => {
     if (!d.important) return;
     total += 1;
     const ctx = [];

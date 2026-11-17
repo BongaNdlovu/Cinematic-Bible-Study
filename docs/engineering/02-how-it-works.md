@@ -48,25 +48,25 @@ Keeping pages out of `_routes.json` is a deliberate choice, enforced by `tools/v
 
 Every page except `privacy.html`, `terms.html` and `shelf.html` loads the same shared base. The order is roughly as below; it varies slightly per page (for example, `map.html` loads `consent.js` and Leaflet before `journey.js`).
 
-1. `vendor/sentry/…` and `js/shared/sentry.js`: error reporting. This is switched off on `localhost`, `127.0.0.1`, `[::1]` and `*.localhost`. Every other host reports.
-2. `js/shared/cinema.js`: page-transition effects. These are skipped under reduced motion.
-3. `js/shared/journey.js`: the cross-page memory and the access rules.
-4. `js/shared/auth-config.js` and `vendor/supabase/supabase.js`, then `js/shared/net.js`, `errors.js`, `ops.js`, `auth.js`: the Supabase client, network error handling, the error banner, and sign-in.
-5. `js/shared/desk.js`, `terms.js`, `consent.js`: the message desk, the terms gate, and the cookie and analytics consent banner.
-6. Then the page's own scripts. For example, the study desk adds `progress-sync.js`, `study-sync.js`, `quiz-gate.js`, and the `js/study/*` modules ending with `study-app.js`.
+1. `vendor/sentry/…` and `js/core/sentry.js`: error reporting. This is switched off on `localhost`, `127.0.0.1`, `[::1]` and `*.localhost`. Every other host reports.
+2. `js/core/cinema.js`: page-transition effects. These are skipped under reduced motion.
+3. `js/core/journey.js`: the cross-page memory and the access rules.
+4. `js/core/auth-config.js` and `vendor/supabase/supabase.js`, then `js/core/net.js`, `errors.js`, `ops.js`, `auth.js`: the Supabase client, network error handling, the error banner, and sign-in.
+5. `js/features/desk.js`, `terms.js`, `consent.js`: the message desk, the terms gate, and the cookie and analytics consent banner.
+6. Then the page's own scripts. For example, the study desk adds `progress-sync.js`, `study-sync.js`, `quiz-gate.js`, and the `js/pages/study/*` modules ending with `study-app.js`.
 
 The exact list per page is in [Project structure](03-project-structure.md#pages-and-their-scripts).
 
 ## 3. Who may see what
 
-`js/shared/journey.js` holds the access rules.
+`js/core/journey.js` holds the access rules.
 
 | Rule | Code |
 |---|---|
 | A member is anyone signed in | `isMember()` |
-| Guests open no sitting. `study.html` sends them to `account.html?next=…` once the session is known | `gateStudyForMembers()` at the top of `js/study/study-app.js` → `requireMember()` |
+| Guests open no sitting. `study.html` sends them to `account.html?next=…` once the session is known | `gateStudyForMembers()` at the top of `js/pages/study/study-app.js` → `requireMember()` |
 | A new member starts with sitting 0 (the Prologue) | `FREE_THROUGH = 0`, `maxOpenSheet()` |
-| The home shelf shows every volume locked to a guest | `can()` in `js/home/shelf.js` |
+| The home shelf shows every volume locked to a guest | `can()` in `js/pages/index/shelf.js` |
 | A member opens the next sitting by completing the one before | `maxOpenSheet()` walks the completed set |
 | Map and gallery need a member | `requireMember()`, `canAccessMuseumNode()`, `canAccessYear()` |
 | Moderators may preview every sitting | `previewAllContent()` → `isAdmin()` |
@@ -76,18 +76,18 @@ These checks decide what the interface offers. The real protection is in the dat
 
 ## 4. Signing in
 
-- Sign-in is Google only, through Supabase Auth (`signInWithOAuth({ provider: "google" })` in `js/shared/auth.js`).
-- Moderators must also pass an authenticator-app check. In the live database, `is_review_moderator()` needs a Google identity **and** an `aal2` session (checked 12 November 2026). The enrolment and challenge screens are in `js/shared/mfa.js`.
-- Signing out first tries to send any unsaved notes and progress, waiting up to 6 seconds. If something is still unsent, it asks before removing it from the device (`flushBeforeSignOut()` in `js/shared/auth.js`).
+- Sign-in is Google only, through Supabase Auth (`signInWithOAuth({ provider: "google" })` in `js/core/auth.js`).
+- Moderators must also pass an authenticator-app check. In the live database, `is_review_moderator()` needs a Google identity **and** an `aal2` session (checked 12 November 2026). The enrolment and challenge screens are in `js/pages/account/mfa.js`.
+- Signing out first tries to send any unsaved notes and progress, waiting up to 6 seconds. If something is still unsent, it asks before removing it from the device (`flushBeforeSignOut()` in `js/core/auth.js`).
 - For local tests only, `localStorage.baQaMockSession` can stand in for a signed-in user. It is ignored on any host other than localhost.
 
 ## 5. Reading a sitting and answering questions
 
-1. `js/study/sheets/index.js` holds the list of 11 sittings and loads each sitting's text (`js/study/sheets/sheet-N.js`) only when it is opened.
-2. `js/study/study-app.js` draws the sitting, its diagrams and its questions. `js/study/book-reader.js` lays the sitting out as turning pages.
-3. An answer is sent to the database function `verify_quiz_answer` (`js/shared/quiz-gate.js`). **The answer key never reaches the browser.** It lives in `exhibit_quiz_keys`, which no client role can read. Guests cannot call the function; they are told to sign in.
+1. `js/content/sheets/index.js` holds the list of 11 sittings and loads each sitting's text (`js/content/sheets/sheet-N.js`) only when it is opened.
+2. `js/pages/study/study-app.js` draws the sitting, its diagrams and its questions. `js/pages/study/book-reader.js` lays the sitting out as turning pages.
+3. An answer is sent to the database function `verify_quiz_answer` (`js/pages/study/quiz-gate.js`). **The answer key never reaches the browser.** It lives in `exhibit_quiz_keys`, which no client role can read. Guests cannot call the function; they are told to sign in.
 4. A reply that comes back after the reader has moved to another sitting is ignored (fix of 12 November 2026).
-5. When every question is right, the next sitting opens. `js/study/task-flow.js` offers the questions as a step-by-step dialog.
+5. When every question is right, the next sitting opens. `js/pages/study/task-flow.js` offers the questions as a step-by-step dialog.
 
 ## 6. Saving progress, notes and bookmarks
 
@@ -95,8 +95,8 @@ The device is always the first copy. The cloud copy is kept in step with it.
 
 | What | On the device | In the cloud | Module |
 |---|---|---|---|
-| Sitting progress, mastery, workbench, competency, certificate name | `baJourney`, `daniel_*` keys | `exhibit_progress`, saved through `save_exhibit_progress(expected_revision, payload)` | `js/shared/progress-sync.js` |
-| Notes and bookmarks | `baNote-<n>`, `baNoteTimes`, `baStudyBookmarks` | `exhibit_study_data` | `js/shared/study-sync.js` |
+| Sitting progress, mastery, workbench, competency, certificate name | `baJourney`, `daniel_*` keys | `exhibit_progress`, saved through `save_exhibit_progress(expected_revision, payload)` | `js/features/progress-sync.js` |
+| Notes and bookmarks | `baNote-<n>`, `baNoteTimes`, `baStudyBookmarks` | `exhibit_study_data` | `js/features/study-sync.js` |
 
 How syncing works:
 
@@ -110,25 +110,25 @@ How syncing works:
 
 | Stream | When it runs | Where it goes | Limits |
 |---|---|---|---|
-| Study events (`js/shared/insights.js`) | Only with analytics consent | `exhibit_events` | Batches of up to 10, a flush every 10 s, at most 12 requests and 60 rows a minute per tab |
+| Study events (`js/features/analytics.js`) | Only with analytics consent | `exhibit_events` | Batches of up to 10, a flush every 10 s, at most 12 requests and 60 rows a minute per tab |
 | Short surveys (sitting pulse, profile) | Only with analytics consent | `exhibit_surveys`, `exhibit_profiles` | 5 surveys an hour per device |
 | Cloudflare Web Analytics beacon | Only with analytics consent | Cloudflare | — |
-| Operational reports (`js/shared/ops.js`: failed saves, failed answer checks) | Always (legitimate interest, stated in `privacy.html`) | `exhibit_events` | Queue of 20, a flush every 10 s. Without consent, a visit-only ID that is deleted when the tab closes |
+| Operational reports (`js/core/ops.js`: failed saves, failed answer checks) | Always (legitimate interest, stated in `privacy.html`) | `exhibit_events` | Queue of 20, a flush every 10 s. Without consent, a visit-only ID that is deleted when the tab closes |
 | Browser errors (Sentry) | Any host except local ones | Sentry | 10% of page loads traced, no session replays. The feedback button appears only with analytics consent |
 
-Consent is stored in `sodConsent` (`js/shared/consent.js`). If a visitor has not chosen yet and their browser sends Do-Not-Track or Global Privacy Control, analytics is recorded as declined.
+Consent is stored in `sodConsent` (`js/core/consent.js`). If a visitor has not chosen yet and their browser sends Do-Not-Track or Global Privacy Control, analytics is recorded as declined.
 
 ## 8. Other account features
 
 | Feature | Client | Database |
 |---|---|---|
-| Readers' notes (reviews) with moderation | `js/shared/reviews.js` | `exhibit_reviews`, `exhibit_public_reviews()` for public reading |
-| Message desk (operator notices, help notes, replies) | `js/shared/desk.js` | `exhibit_notices`, `exhibit_notice_receipts`, `exhibit_help_notes`, `exhibit_help_replies` |
-| Certificates | `js/study/certificate.js` (loaded on demand from `study.html`) | `exhibit_certificates`, `issue_exhibit_certificate()` |
-| Account deletion | `js/shared/account.js` | `exhibit_delete_my_account()` |
-| Insights dashboard and printable report | `js/insights/insights.js`, `js/insights/sid-report.js` | Moderator-only read policies on events, surveys and profiles; `exhibit_graduates()`; `exhibit_participation(from, to)` for the project target |
+| Readers' notes (reviews) with moderation | `js/features/reviews.js` | `exhibit_reviews`, `exhibit_public_reviews()` for public reading |
+| Message desk (operator notices, help notes, replies) | `js/features/desk.js` | `exhibit_notices`, `exhibit_notice_receipts`, `exhibit_help_notes`, `exhibit_help_replies` |
+| Certificates | `js/pages/study/certificate.js` (loaded on demand from `study.html`) | `exhibit_certificates`, `issue_exhibit_certificate()` |
+| Account deletion | `js/pages/account/account.js` | `exhibit_delete_my_account()` |
+| Insights dashboard and printable report | `js/pages/dashboard/dashboard.js`, `js/pages/dashboard/sid-report.js` | Moderator-only read policies on events, surveys and profiles; `exhibit_graduates()`; `exhibit_participation(from, to)` for the project target |
 
-**The project target in the SID report.** The proposal to the Southern Africa-Indian Ocean Division sets a target of 500 people who register and begin the study within 12 months (`PARTICIPATION_TARGET` in `js/insights/sid-report.js`). The report's Summary page shows three figures for the chosen period, from `exhibit_participation(from, to)` in `tools/supabase-participation.sql`:
+**The project target in the SID report.** The proposal to the Southern Africa-Indian Ocean Division sets a target of 500 people who register and begin the study within 12 months (`PARTICIPATION_TARGET` in `js/pages/dashboard/sid-report.js`). The report's Summary page shows three figures for the chosen period, from `exhibit_participation(from, to)` in `db/migrations/024-participation.sql`:
 
 | Figure | How it is counted |
 |---|---|
@@ -138,9 +138,9 @@ Consent is stored in `sodConsent` (`js/shared/consent.js`). If a visitor has not
 **Why "began" uses quiz passes, not saved progress.** Saved progress is written by the browser, so a script with a Google account could mark sittings complete. `exhibit_quiz_passes` is written only by `verify_quiz_answer()` when an answer is right, and no client role can write to it. A script would have to answer real questions, and checks are capped at 60 a minute per user. That raises the bar a lot, but does not make faking impossible.
 | Share of the target | "Registered and began" divided by 500 |
 
-**The 700 counter on the dashboard.** The first tile on the Study insights page, "Toward 700", shows the same "registered and began" count for all time (from `2000-01-01`, so every account counts), as `N / 700`. Its detail line gives the share of 700 and of the 500 SID target. The constants are `COUNTER_TARGET` and `SID_TARGET` in `js/insights/insights.js`. If the function is missing or refuses, the tile shows "verified count not available".
+**The 700 counter on the dashboard.** The first tile on the Study insights page, "Toward 700", shows the same "registered and began" count for all time (from `2000-01-01`, so every account counts), as `N / 700`. Its detail line gives the share of 700 and of the 500 SID target. The constants are `COUNTER_TARGET` and `SID_TARGET` in `js/pages/dashboard/dashboard.js`. If the function is missing or refuses, the tile shows "verified count not available".
 
-**Study activity counts from 19 October 2026.** The analytics consent check arrived on that day (commit `debdd6e`). Earlier rows in `exhibit_events` and `exhibit_surveys` were recorded without consent, and their spikes match development and test days (for example 1,470 sitting starts by 134 browsers on 14 October 2026, from a read-only query on 13 November 2026). So the dashboard and the SID report never count events or ratings before `ACTIVITY_COUNT_FROM` (`2026-10-19T00:00:00.000Z` in `js/insights/insights.js`), even for "All time" or an earlier report period. Welcome answers (`exhibit_profiles`), saved progress, certificates and the project-target figures are not cut. The report adds a note when the cut applies, and the dashboard status line says "study activity counted from 19 October 2026". The rows are kept in the database; nothing was deleted.
+**Study activity counts from 19 October 2026.** The analytics consent check arrived on that day (commit `debdd6e`). Earlier rows in `exhibit_events` and `exhibit_surveys` were recorded without consent, and their spikes match development and test days (for example 1,470 sitting starts by 134 browsers on 14 October 2026, from a read-only query on 13 November 2026). So the dashboard and the SID report never count events or ratings before `ACTIVITY_COUNT_FROM` (`2026-10-19T00:00:00.000Z` in `js/pages/dashboard/dashboard.js`), even for "All time" or an earlier report period. Welcome answers (`exhibit_profiles`), saved progress, certificates and the project-target figures are not cut. The report adds a note when the cut applies, and the dashboard status line says "study activity counted from 19 October 2026". The rows are kept in the database; nothing was deleted.
 
 These figures do not depend on the cookie banner, unlike the event-based figures. "Began" is read when the report is built, so it can rise after the period ends. Counts under 5 are withheld, as for every figure in the report. If the function is missing or refuses, the page says "Registration figures are not available for this report."
 

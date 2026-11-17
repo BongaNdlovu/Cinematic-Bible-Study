@@ -18,7 +18,7 @@ The site credits Fanelesibonge Ndlovu as its creator (`index.html` footer).
 | Visitor | What they can do |
 |---|---|
 | Guest (not signed in) | Browse the home shelf (every volume shows as locked), read the readers' notes, the privacy page and the terms. **No sitting opens without a sign-in** (since 15 November 2026): opening the study sends a guest to the account page. |
-| Member (signed in with Google) | Every sitting, starting with the Prologue (`FREE_THROUGH = 0` in `js/shared/journey.js`) and opened in order as each earlier sitting is completed. Also the map, the gallery, cloud-saved progress, notes and bookmarks, certificates, and posting readers' notes. |
+| Member (signed in with Google) | Every sitting, starting with the Prologue (`FREE_THROUGH = 0` in `js/core/journey.js`) and opened in order as each earlier sitting is completed. Also the map, the gallery, cloud-saved progress, notes and bookmarks, certificates, and posting readers' notes. |
 | Moderator | Everything a member can do, plus approving readers' notes, reading the study insights dashboard (`insights.html`), and previewing locked sittings. Moderator rights need a confirmed Google identity and an authenticator app (see [Security](04-security.md)). |
 
 ## Where it runs
@@ -60,7 +60,7 @@ The site credits Fanelesibonge Ndlovu as its creator (`index.html` footer).
 |---|---|
 | The live database has a `site_notices` table that no code in this repo uses. Where did it come from, and is it still needed? | Not checked |
 | No code in this repo calls the `/__rate` proxy. The smoke test only checks that it refuses callers without the secret. Who is meant to call it? | Not checked |
-| A comment pass found that the `inert` attributes set when a diagram goes full screen (`js/study/study-app.js`, `wireDiagramFullscreen`) may be redundant, because CSS already hides those elements. | Not checked |
+| A comment pass found that the `inert` attributes set when a diagram goes full screen (`js/pages/study/study-app.js`, `wireDiagramFullscreen`) may be redundant, because CSS already hides those elements. | Not checked |
 
 ### Known issues
 
@@ -68,4 +68,4 @@ None open. The issues confirmed from `docs/archive/2026-11-12-implicit-state-mac
 
 That document also lists many design observations, such as one state kept in several places or yes/no flags standing in for named states. They are not bugs, but they are useful when refactoring.
 
-**Not a bug, by design:** the notes sync records `baStudySyncLastPushAt` when a push **starts**, not when it succeeds. The value only spaces push attempts 6 seconds apart (`pushLocalToRemote()` in `js/shared/study-sync.js`), so recording attempts is correct.
+**Not a bug, by design:** the notes sync records `baStudySyncLastPushAt` when a push **starts**, not when it succeeds. The value only spaces push attempts 6 seconds apart (`pushLocalToRemote()` in `js/features/study-sync.js`), so recording attempts is correct.

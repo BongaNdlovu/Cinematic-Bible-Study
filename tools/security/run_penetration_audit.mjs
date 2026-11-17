@@ -16,7 +16,7 @@ function read(rel) {
 }
 
 function authConfig() {
-  const src = read("js/shared/auth-config.js");
+  const src = read("js/core/auth-config.js");
   const url = (src.match(/url:\s*"([^"]+)"/) || [])[1];
   const key = (src.match(/publishableKey:\s*"([^"]+)"/) || [])[1];
   if (!url || !key) throw new Error("auth-config.js has no publishable project url");
@@ -181,7 +181,7 @@ async function edgeStaticOutsideCap() {
   const gate = new ExhibitRateGate(memoryState());
   for (let i = 0; i < 240; i += 1) await gateCheck(gate, "203.0.113.20", "/study.html");
   const bible = await gateCheck(gate, "203.0.113.20", "/bible/kjv.json");
-  const script = await gateCheck(gate, "203.0.113.20", "/js/shared/auth.js");
+  const script = await gateCheck(gate, "203.0.113.20", "/js/core/auth.js");
   const model = await gateCheck(gate, "203.0.113.20", "/models/full_body.glb");
   const overflow = await gateCheck(gate, "203.0.113.20", "/index.html");
   if (!bible || !script || !model) throw new Error("a full page budget blocked scripture, script, or model reads");
@@ -306,7 +306,7 @@ async function edgeRateProxyClosed() {
 
 async function edgeHiddenPaths() {
   const blocked = [
-    "/tools/supabase-quiz-integrity.sql",
+    "/db/migrations/010-quiz-integrity.sql",
     "/package.json",
     "/server.py",
     "/.env",
@@ -345,7 +345,7 @@ async function edgeHiddenPaths() {
 
 function quizBundleHasNoKey() {
   browser();
-  loadScript("js/study/sheets-data.js");
+  loadScript("js/content/sheets-data.js");
   const sheets = global.window.sheetsData;
   if (!Array.isArray(sheets) || sheets.length !== 11) throw new Error("eleven sittings did not load");
   let total = 0;
@@ -373,7 +373,7 @@ async function quizFailsClosed() {
     getClient: () => null
   };
   global.localStorage.setItem("baQaMockSession", JSON.stringify({ user: { id: "qa" } }));
-  loadScript("js/shared/quiz-gate.js");
+  loadScript("js/pages/study/quiz-gate.js");
   const signedOut = await global.window.QuizGate.verify(10, 1, 1);
   if (calls.length !== 0) throw new Error("a signed-out visitor called the grading function");
   if (!signedOut || signedOut.ok !== false || signedOut.error !== "not_authenticated") {
@@ -424,7 +424,7 @@ async function authCapRedirectAndErrors() {
       };
     }
   };
-  loadScript("js/shared/auth.js");
+  loadScript("js/core/auth.js");
   const visible = shown.join(" ");
   if (/eyJ|secret@example\.com|evil\.example/i.test(visible)) throw new Error("the sign-in error showed the raw callback");
   if (!visible.includes("Sign-in failed")) throw new Error("a callback error produced no visitor-facing message");
@@ -457,7 +457,7 @@ async function clientEventSpamCap() {
       }
     })
   };
-  loadScript("js/shared/insights.js");
+  loadScript("js/features/analytics.js");
   const queued = Array.from({ length: 100 }, () => ({
     event: "pen",
     sitting: null,
@@ -488,7 +488,7 @@ async function clientSurveySpamAndError() {
       }
     })
   };
-  loadScript("js/shared/insights.js");
+  loadScript("js/features/analytics.js");
   const fault = await global.window.Insights.insertSurvey({ feedback: "probe" });
   if (!fault || fault.ok !== false || fault.reason !== "error") throw new Error("a survey fault was not closed");
   if (/secret@example|allotted place/i.test(JSON.stringify(fault))) throw new Error("the survey fault returned database text");
@@ -504,7 +504,7 @@ function storedXssAndCsv() {
   const grid = { innerHTML: "", querySelectorAll() { return []; } };
   global.document.getElementById = (id) => (id === "insights-grid" ? grid : null);
   global.window.document = global.document;
-  loadScript("js/insights/insights.js");
+  loadScript("js/pages/dashboard/dashboard.js");
   const stamp = new Date().toISOString();
   global.window.InsightsDashboard.setCache({
     events: [],
@@ -570,8 +570,8 @@ async function devServerTraversal() {
       "/server.py",
       "/.env",
       "/.git/config",
-      "/tools/supabase-quiz-integrity.sql",
-      "/js/shared/../../tools/supabase-quiz-integrity.sql",
+      "/db/migrations/010-quiz-integrity.sql",
+      "/js/shared/../../db/migrations/010-quiz-integrity.sql",
       "/js/%2e%2e/%2e%2e/server.py",
       "/tools/"
     ];
