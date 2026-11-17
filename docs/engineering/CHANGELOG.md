@@ -14,6 +14,18 @@ Entry template:
 
 ---
 
+## 2026-11-17 — Architecture plan, step 6.4: pull-request template
+
+**Why:** it puts the layout rules in front of every change, including changes made by AI agents.
+
+**What changed:** `.github/pull_request_template.md` (new) asks for the feature name (using *sitting*), the files touched and why each sits in its folder, page scripts as entry imports, database changes as the next numbered migration, the four test commands, proof for moves, and the changelog and handbook updates.
+
+**Handbook updated:** 03 (top level).
+
+**Checked here:** lint exits 0, `npm run test:unit` passes 185 of 185, every `npm test` script passes. The browser suite on the final Phase 6 state passed 29 of 30: `verify_horizon.mjs` sent a gallery click while the previous selection was still in its 180 ms transition, which the gallery ignores by design. That is a race in the test, fixed in the next entry.
+
+**Status:** on branch `arch/phase-6-lock`, not deployed.
+
 ## 2026-11-17 — Architecture plan, step 6.3: a structure test
 
 **Why:** the problems Phases 1, 3 and 5 fixed (copied helpers, injected styles, misplaced files) come back unless a test stops them.
