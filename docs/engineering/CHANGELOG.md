@@ -14,6 +14,23 @@ Entry template:
 
 ---
 
+## 2026-11-17 — Architecture plan, step 6.3: a structure test
+
+**Why:** the problems Phases 1, 3 and 5 fixed (copied helpers, injected styles, misplaced files) come back unless a test stops them.
+
+**What changed:**
+
+- `tests/unit/structure.test.mjs` (new, in `npm run test:unit`, five checks): a function named like a `core.js` helper must call `SiteCore` rather than repeat its body; every file in `js/core/`, `js/features/`, `css/core/` and `css/features/` is loaded by two or more pages (counted from each page's tags, entry imports and stylesheet links; `auth-config.example.js` exempt); no page loads a file from another page's folder; a page with an entry folder loads exactly one module entry; no script creates a `<style>` element or writes a style block.
+- The plan's fourth rule, "no typed storage key outside the key list", is already enforced by `tests/unit/storage-keys.test.mjs`, so it is not repeated.
+- **Found by the new test:** `js/features/reviews.js` had its own `signedIn()` that repeated `core.js`'s body (`!!currentUser()`), missed in Phase 1. It now calls `window.SiteCore.signedIn()`. Both read `SiteCore.currentUser()`, so the result is the same.
+- With a throwaway `js/features/zz-probe.js` that creates a `<style>` element, two checks failed (the style rule and the two-page rule); without it, all five pass.
+
+**Handbook updated:** 07 (test kinds).
+
+**Checked here:** lint exits 0, `npm run test:unit` passes 185 of 185, every `npm test` script passes.
+
+**Status:** on branch `arch/phase-6-lock`, not deployed.
+
 ## 2026-11-17 — Architecture plan, step 6.1: file and function size limits
 
 **Why:** a file grows a line at a time and no single change looks like bloat. A limit that fails lint stops it at the moment it happens.

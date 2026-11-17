@@ -46,6 +46,7 @@ The server binds `127.0.0.1`. It starts at port 8000, or at `PORT` if that is se
 
 | Suite | Where | Runs in CI |
 |---|---|---|
+| Structure | `tests/unit/structure.test.mjs` (since 17 November 2026, plan step 6.3), part of `npm run test:unit`. It fails when: a function named like a `js/core/core.js` helper does not call `SiteCore`; a file in `js/core/`, `js/features/`, `css/core/` or `css/features/` is loaded by fewer than two pages (`auth-config.example.js` is exempt); a page loads a file from another page's folder; a page with an entry folder does not load exactly one module entry; a script creates a `<style>` element. Storage keys are checked by `tests/unit/storage-keys.test.mjs`, which fails when the code uses a key `tools/storage-keys.mjs` does not list | Yes |
 | Unit | `tests/unit/`: middleware, rate gate, Sentry config, MFA card, report pages, and the 12 November audit fixes | Yes |
 | Regression | `tools/verify/` (headers, CSP, insights, rate limits, both syncs, quiz integrity, reviews, desk, certificates, task flow, map help, moderator UI, report pages, hashing, CSS minify, page deny list, image budgets, load) | Yes |
 | Browser | `tools/verify/run_browser_checks.mjs`: mind map, story reader, flows, map, globe, horizon, theme, mobile layout and others (29 checks) | Yes, as its own job, `test-browser` |
