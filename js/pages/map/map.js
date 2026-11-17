@@ -120,6 +120,37 @@
   function mount(root, options) {
     const opts = options || {};
     const cinematic = opts.mode !== "embed";
+    function cinematicChrome() {
+      let chrome = null;
+      const urlParams = (typeof location !== "undefined" && location.search) ? new URLSearchParams(location.search) : new URLSearchParams();
+      const fromLesson = (opts && opts.from === "lesson") || urlParams.get("from") === "lesson";
+      const sheetParam = (opts && opts.sheet !== undefined && opts.sheet !== null) ? opts.sheet : urlParams.get("sheet");
+      const isValidSheet = (s) => s !== null && s !== undefined && /^\d+$/.test(String(s).trim()) && Number(s) >= 0 && Number(s) <= 10;
+      const sheetSafe = (fromLesson && isValidSheet(sheetParam)) ? String(clampSheetIndex(sheetParam)) : null;
+      const backHref = sheetSafe ? `study.html?sheet=${encodeURIComponent(sheetSafe)}#sheet-article` : "study.html";
+      // The " desk" tail is hidden on narrow screens so every nav pill fits without a swipe.
+      const backLabel = sheetSafe ? "← Back to this lesson" : "← Study<span class=\"cmap-back-tail\"> desk</span>";
+      const galleryHref = sheetSafe ? `gallery.html?from=lesson&sheet=${encodeURIComponent(sheetSafe)}` : "gallery.html";
+
+      chrome = el("header", { class: "cmap-chrome" });
+      chrome.innerHTML = `
+        <a class="cmap-brand" href="index.html">
+          <svg viewBox="0 0 32 32" fill="none" aria-hidden="true">
+            <path d="M16 2.5L5 7.5v9.5c0 7.8 4.7 15.1 11 16.5 6.3-1.4 11-8.7 11-16.5V7.5L16 2.5z" stroke="currentColor" stroke-width="1.6"/>
+            <path d="M11 15.5l3.5 3.5 6.5-6.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          BIBLE ARTIFACTS
+        </a>
+        <nav class="cmap-links">
+          <a class="cmap-back" href="${backHref}">${backLabel}</a>
+          <a href="index.html">Home</a>
+          <a href="${galleryHref}">3D Gallery</a>
+          <a class="active" href="map.html">Map</a>
+          <a href="account.html">Account</a>
+        </nav>`;
+      return chrome;
+    }
+
     function yearOpen(id) {
       if (!cinematic || !id) return true;
       if (!window.BAJourney || typeof window.BAJourney.canAccessYear !== "function") return true;
@@ -289,34 +320,7 @@
     const flyBadge = el("div", { class: "cmap-fly-badge", hidden: true }, "<img alt=''><span></span>");
 
     let chrome = null;
-    if (cinematic) {
-      const urlParams = (typeof location !== "undefined" && location.search) ? new URLSearchParams(location.search) : new URLSearchParams();
-      const fromLesson = (opts && opts.from === "lesson") || urlParams.get("from") === "lesson";
-      const sheetParam = (opts && opts.sheet !== undefined && opts.sheet !== null) ? opts.sheet : urlParams.get("sheet");
-      const isValidSheet = (s) => s !== null && s !== undefined && /^\d+$/.test(String(s).trim()) && Number(s) >= 0 && Number(s) <= 10;
-      const sheetSafe = (fromLesson && isValidSheet(sheetParam)) ? String(clampSheetIndex(sheetParam)) : null;
-      const backHref = sheetSafe ? `study.html?sheet=${encodeURIComponent(sheetSafe)}#sheet-article` : "study.html";
-      // The " desk" tail is hidden on narrow screens so every nav pill fits without a swipe.
-      const backLabel = sheetSafe ? "← Back to this lesson" : "← Study<span class=\"cmap-back-tail\"> desk</span>";
-      const galleryHref = sheetSafe ? `gallery.html?from=lesson&sheet=${encodeURIComponent(sheetSafe)}` : "gallery.html";
-
-      chrome = el("header", { class: "cmap-chrome" });
-      chrome.innerHTML = `
-        <a class="cmap-brand" href="index.html">
-          <svg viewBox="0 0 32 32" fill="none" aria-hidden="true">
-            <path d="M16 2.5L5 7.5v9.5c0 7.8 4.7 15.1 11 16.5 6.3-1.4 11-8.7 11-16.5V7.5L16 2.5z" stroke="currentColor" stroke-width="1.6"/>
-            <path d="M11 15.5l3.5 3.5 6.5-6.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-          BIBLE ARTIFACTS
-        </a>
-        <nav class="cmap-links">
-          <a class="cmap-back" href="${backHref}">${backLabel}</a>
-          <a href="index.html">Home</a>
-          <a href="${galleryHref}">3D Gallery</a>
-          <a class="active" href="map.html">Map</a>
-          <a href="account.html">Account</a>
-        </nav>`;
-    }
+    if (cinematic) chrome = cinematicChrome();
 
     // Small panels shown/hidden from the phone layout (desktop shows both always).
     const panelsToggle = el("div", { class: "cmap-panels-toggle", role: "group", "aria-label": "Map panels" },
@@ -1609,6 +1613,32 @@
       if (landed && state.view === "globe") showMap(f, tileZoom(ep));
     }
 
+    function showLoadFailure(err) {
+      const kind = window.SiteNet && typeof window.SiteNet.classify === "function"
+        ? window.SiteNet.classify(err)
+        : "network";
+      loadEl.textContent = kind === "offline"
+        ? "You are offline \u2014 the chronique needs a connection."
+        : kind === "timeout" || kind === "network"
+          ? "The chronique is taking too long to arrive."
+          : "Could not load map geography.";
+      const retry = el("button", {
+        class: "cmap-retry",
+        type: "button",
+        style: { marginTop: "10px", padding: "6px 14px", borderRadius: "999px", cursor: "pointer",
+                 border: "1px solid rgba(212,175,55,0.5)", background: "rgba(24,18,12,0.95)",
+                 color: "#f0e0b8", font: "inherit", fontSize: "12.5px" }
+      }, "Try again");
+      retry.addEventListener("click", () => {
+        retry.remove();
+        loadEl.textContent = "Unrolling the chronique\u2026";
+        start();
+      });
+      loadEl.appendChild(document.createElement("br"));
+      loadEl.appendChild(retry);
+      console.error(err);
+    }
+
     async function start() {
       if (cinematic) {
         const allowed = window.BAJourney && typeof window.BAJourney.requireMember === "function"
@@ -1624,29 +1654,7 @@
         state.polities = await loadJson(DATA.sources.polities);
       } catch (err) {
         /* Actionable failure state: name the class, offer one-click retry. */
-        const kind = window.SiteNet && typeof window.SiteNet.classify === "function"
-          ? window.SiteNet.classify(err)
-          : "network";
-        loadEl.textContent = kind === "offline"
-          ? "You are offline \u2014 the chronique needs a connection."
-          : kind === "timeout" || kind === "network"
-            ? "The chronique is taking too long to arrive."
-            : "Could not load map geography.";
-        const retry = el("button", {
-          class: "cmap-retry",
-          type: "button",
-          style: { marginTop: "10px", padding: "6px 14px", borderRadius: "999px", cursor: "pointer",
-                   border: "1px solid rgba(212,175,55,0.5)", background: "rgba(24,18,12,0.95)",
-                   color: "#f0e0b8", font: "inherit", fontSize: "12.5px" }
-        }, "Try again");
-        retry.addEventListener("click", () => {
-          retry.remove();
-          loadEl.textContent = "Unrolling the chronique\u2026";
-          start();
-        });
-        loadEl.appendChild(document.createElement("br"));
-        loadEl.appendChild(retry);
-        console.error(err);
+        showLoadFailure(err);
         return;
       }
       const params = new URLSearchParams(location.search);

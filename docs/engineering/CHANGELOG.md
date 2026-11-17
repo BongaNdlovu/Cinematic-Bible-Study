@@ -14,6 +14,28 @@ Entry template:
 
 ---
 
+## 2026-11-17 — Complexity ceiling 50 → 44
+
+**Why:** the map's `mount` and the gallery's `selectAsset` (both 49) held the ceiling at 50, and the map's `start` (46) was next.
+
+**What changed:** three blocks moved, unchanged, into their own functions, each called from the same place under the same condition:
+
+| From | Block | New function |
+|---|---|---|
+| `mount` (`js/pages/map/map.js`) | The cinematic page header and its back link (`if (cinematic) { … }`) | `cinematicChrome()`, which returns the header; `mount` now reads `if (cinematic) chrome = cinematicChrome();` |
+| `selectAsset` (`js/pages/gallery/gallery.js`) | Turning off auto-orbit and moving the camera to the artifact's preset view | `flyToPreset(data, opts)` |
+| `start` (`js/pages/map/map.js`) | The failure message and "Try again" button when the map geography does not load | `showLoadFailure(err)`; the `return` that followed stays in `start` |
+
+A check over the syntax trees confirms each new function holds the old statements unchanged. The transition block in `selectAsset` and the sign-in check in `start` were left in place, because they `return` from their function.
+
+`.oxlintrc.json`: `complexity` is 44. At 42 lint would fail on `selectAsset` (43) and two inner functions of `js/pages/index/shelf.js` (43 and 44).
+
+**Handbook updated:** 07 (lint).
+
+**Checked here:** lint exits 0 at 44, `npm run test:unit` passes 188 of 188, every `npm test` script passes, and `npm run test:browser` passes 30 of 30.
+
+**Status:** on branch `arch/split-large`, not deployed.
+
 ## 2026-11-17 — Two files under 800 lines, and out of the size exceptions
 
 **Why:** the `max-lines` exceptions in `.oxlintrc.json` come out one by one as files are split. `certificate.js` (811 lines) and `reviews.js` (892) were the nearest to the limit.
