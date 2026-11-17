@@ -14,6 +14,18 @@ Entry template:
 
 ---
 
+## 2026-11-17 — Deploy waits for the browser checks
+
+**Why:** the user decided that **deploy** should wait for **test-browser** once it passed on GitHub. It did, on run 43970504324 (both `test` and `test-browser` green).
+
+**What changed:** `.github/workflows/ci.yml`: the `deploy` job has `needs: [test, test-browser]` (was `needs: test`). The `alert` job already lists its own needs and is unchanged.
+
+**Handbook updated:** 07 (CI).
+
+**Checked here:** run 43970504324 on GitHub passed both jobs. The new `needs` line has not run on `master` yet (not checked); a push to `master` is the first that will use it.
+
+**Status:** on branch `ci/browser-gate`.
+
 ## 2026-11-16 — Browser checks made reliable on GitHub's runners
 
 **Why:** after the merge to `master`, the `test-browser` job failed on GitHub with the same five checks on two runs (25 of 30), while all 30 pass on Windows. GitHub's runners draw WebGL in software and are slower, and the five checks used fixed waits.

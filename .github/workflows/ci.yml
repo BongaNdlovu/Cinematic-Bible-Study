@@ -58,7 +58,7 @@ jobs:
         run: npm run test:browser
 
   deploy:
-    needs: test
+    needs: [test, test-browser]
     if: github.event_name == 'push' && github.ref == 'refs/heads/master'
     runs-on: windows-latest
     environment: production

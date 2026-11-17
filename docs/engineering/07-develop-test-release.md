@@ -110,7 +110,7 @@ Four files are not in CI on purpose. `verify_wiring.mjs` lists them in `NOT_IN_C
 On every push and pull request:
 
 1. **test** (Ubuntu, Node 22, Python 3.12): `npm ci`, lint, unit tests, installing Chromium, then `npm test`.
-2. **test-browser** (Ubuntu, Node 22, Python 3.12): `npm ci`, installing Chromium, then `npm run test:browser`. Not checked: a run of this job on GitHub. It is also not a condition of **deploy** yet; make **deploy** wait for it once it has passed there.
+2. **test-browser** (Ubuntu, Node 22, Python 3.12): `npm ci`, installing Chromium, then `npm run test:browser`. It passed on GitHub on 17 November 2026 (run 43970504324), after the timing fixes in the changelog. Since then **deploy** waits for it as well as for **test** (`needs: [test, test-browser]`), so a push to `master` deploys only when the browser checks pass.
 
 On a push to `master` only, after **test** passes:
 
