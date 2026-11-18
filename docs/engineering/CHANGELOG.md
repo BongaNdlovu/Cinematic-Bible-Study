@@ -27,7 +27,7 @@ Entry template:
 
 **Checked here:** after a reload the dashboard shows the new Site URL and 3 redirect URLs. Supabase's public `/auth/v1/settings` lists `google` as the only enabled provider. `cinematic-bible-study-daniel.vercel.app` answers `503` with `X-Vercel-Error: DEPLOYMENT_PAUSED`. `redirectTo()` in `js/core/auth.js` returns the account page on the page's own host, which `https://cinematic-bible-study-daniel.pages.dev/**` covers. A real Google sign-in on production after the change was not tried.
 
-**Status:** live in Supabase. This handbook entry is committed on branch `docs/supabase-auth-urls`, not yet merged.
+**Status:** live in Supabase. This handbook entry is merged to master in PR #40.
 
 ## 2026-11-18 — Reading-progress meter on every sitting
 
