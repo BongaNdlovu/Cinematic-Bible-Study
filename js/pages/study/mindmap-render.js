@@ -40,8 +40,12 @@
     return node;
   }
 
+  let glowSeq = 0;
+
   function make(deps) {
     const { caf, cam, canResolve, citeFn, clearTimers, cross, dom, host, later, links, model, pulses, raf, scenes, spec, state, title, updateFull, wireBlock } = deps;
+    glowSeq += 1;
+    const glowId = 'mm-glow-' + glowSeq + '-';
 
     function citeChip(label) {
       if (!label) return '';
@@ -181,7 +185,7 @@
         headHtml(item) + item.leaves.map((leaf, k) => leafHtml(item, leaf, k)).join('') +
       '</div>').join('');
 
-      const defs = ACCENTS.map((a, i) => '<radialGradient id="mm-glow-' + i + '">' +
+      const defs = ACCENTS.map((a, i) => '<radialGradient id="' + glowId + i + '">' +
         '<stop offset="0" stop-color="' + a.hex + '" stop-opacity=".95"/>' +
         '<stop offset=".35" stop-color="' + a.hex + '" stop-opacity=".5"/>' +
         '<stop offset="1" stop-color="' + a.hex + '" stop-opacity="0"/></radialGradient>').join('');
@@ -300,7 +304,7 @@
 
         /* The light runs on the main spoke only; a scene's chain has its own. */
         const g = svgEl('g', { class: 'mm-pulse', 'data-mm': item.id });
-        g.innerHTML = '<g class="mm-pin" opacity="0"><circle r="' + kx(12).toFixed(1) + '" fill="url(#mm-glow-' + (i % ACCENTS.length) + ')"/>' +
+        g.innerHTML = '<g class="mm-pin" opacity="0"><circle r="' + kx(12).toFixed(1) + '" fill="url(#' + glowId + (i % ACCENTS.length) + ')"/>' +
           '<circle class="mm-pc" r="' + kx(2.4).toFixed(2) + '"/></g>';
         dom.pulses.appendChild(g);
         pulses.push({

@@ -200,7 +200,10 @@ async function humanPass(context, request) {
     grant = null;
   }
   if (!grant || !grant.ok) return new Response("Bad Gateway", { status: 502, headers: NO_STORE });
-  const until = await grant.json();
+  let until = null;
+  try { until = await grant.json(); } catch (e) {
+    return new Response("Bad Gateway", { status: 502, headers: NO_STORE });
+  }
   return Response.json({ ok: true, until: until }, { headers: NO_STORE });
 }
 

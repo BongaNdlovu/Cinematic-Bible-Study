@@ -1230,6 +1230,10 @@ async function startRoom() {
     if (repeat) { t.wrapS = t.wrapT = THREE.RepeatWrapping; t.repeat.set(repeat[0], repeat[1]); }
     return t;
   };
+  const ormPair = (canvas) => {
+    const t = tex(canvas);
+    return { roughnessMap: t, metalnessMap: t };
+  };
 
   {
     const env = new THREE.Scene();
@@ -1426,7 +1430,7 @@ async function startRoom() {
     const sw = Math.round(T * PXS * 1.15), sh = Math.round(H * PXS);
     const sp = paintSpine(v, sw, sh);
     const spineMat = new THREE.MeshPhysicalMaterial({
-      map: tex(sp.col, true), roughnessMap: tex(sp.orm), metalnessMap: tex(sp.orm), bumpMap: tex(sp.bump), bumpScale: 0.9,
+      map: tex(sp.col, true), ...ormPair(sp.orm), bumpMap: tex(sp.bump), bumpScale: 0.9,
       roughness: 1, metalness: 1, sheen: 0.3, sheenRoughness: 0.75, sheenColor
     });
     if (locked) { spineMat.color.setScalar(0.62); clothMat.color.multiplyScalar(0.62); }
@@ -1521,7 +1525,7 @@ async function startRoom() {
       const [w, h, d] = dims[k];
       const s = paintFlatSpine(Math.round(w * 26), Math.round(h * 26), L[0], L[1], L[2], L[3]);
       const leather = new THREE.MeshPhysicalMaterial({ color: L[0], roughness: 0.62, sheen: 0.3, sheenColor: new THREE.Color('#a08060'), bumpMap: weaveTex, bumpScale: 0.25 });
-      const sm = new THREE.MeshPhysicalMaterial({ map: tex(s.col, true), roughnessMap: tex(s.orm), metalnessMap: tex(s.orm), bumpMap: tex(s.bump), bumpScale: 0.7, roughness: 1, metalness: 1 });
+      const sm = new THREE.MeshPhysicalMaterial({ map: tex(s.col, true), ...ormPair(s.orm), bumpMap: tex(s.bump), bumpScale: 0.7, roughness: 1, metalness: 1 });
       const m = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), [foreMat, foreMat, leather, leather, sm, foreMat]);
       m.position.set(sx + w / 2 + (k ? 1.2 : 0), y + h / 2, -d / 2 - 0.8 - k * 1.1);
       m.rotation.y = k ? -0.045 : 0.025;
@@ -1861,7 +1865,7 @@ async function startRoom() {
     yield;
     const sheen = b.clothMat.sheenColor;
     const mkFoil = (s) => new THREE.MeshPhysicalMaterial({
-      map: tex(s.col, true), roughnessMap: tex(s.orm), metalnessMap: tex(s.orm), bumpMap: tex(s.bump), bumpScale: 0.9,
+      map: tex(s.col, true), ...ormPair(s.orm), bumpMap: tex(s.bump), bumpScale: 0.9,
       roughness: 1, metalness: 1, sheen: 0.3, sheenRoughness: 0.75, sheenColor: sheen
     });
     const hi = {

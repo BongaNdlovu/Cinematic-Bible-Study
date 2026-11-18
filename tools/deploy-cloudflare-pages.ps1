@@ -37,7 +37,7 @@ $leaksLeft = @("_factcheck", "_mig", "__wiring_check.mjs", "qa_book_reader_full.
   Where-Object { Test-Path (Join-Path $stage $_) }
 if ($leaksLeft) { throw ("deploy bundle still contains: " + ($leaksLeft -join ", ")) }
 
-$devLeft = @("skills-lock.json", "tailwind.study.config.js", "functions", "css\study-tailwind-src.css", "js\study\glossary-enrichment-overrides.json", "vendor\three\build\three.core.js", "vendor\three\build\three.module.js", "js\study\sheets-data.js") |
+$devLeft = @("skills-lock.json", "tailwind.study.config.js", "functions", "css\pages\study\study-tailwind-src.css", "js\content\glossary-enrichment-overrides.json", "vendor\three\build\three.core.js", "vendor\three\build\three.module.js", "js\content\sheets-data.js") |
   Where-Object { Test-Path (Join-Path $stage $_) }
 if ($devLeft) { throw ("deploy bundle still contains dev-only files: " + ($devLeft -join ", ")) }
 $runtimeMissing = @("_headers", "_routes.json", "vendor\three\build\three.module.min.js", "vendor\three\build\three.core.min.js") |

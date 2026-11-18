@@ -92,7 +92,10 @@
       ? (pulseScores.reduce(function (s, n) { return s + n; }, 0) / pulseScores.length).toFixed(1)
       : '—';
     const exits = sv.filter(function (s) { return s.responses && (s.responses.kind === 'exit' || s.responses.nps != null); });
-    const npsVals = exits.map(function (s) { return Number(s.responses.nps); }).filter(function (n) { return Number.isFinite(n) && n >= 0 && n <= 10; });
+    const npsVals = exits.filter(function (s) {
+      const raw = s.responses.nps;
+      return raw !== null && raw !== undefined && raw !== '';
+    }).map(function (s) { return Number(s.responses.nps); }).filter(function (n) { return Number.isFinite(n) && n >= 0 && n <= 10; });
     const promoters = npsVals.filter(function (n) { return n >= 9; }).length;
     const detractors = npsVals.filter(function (n) { return n <= 6; }).length;
     const nps = npsVals.length ? Math.round(((promoters - detractors) / npsVals.length) * 100) : null;

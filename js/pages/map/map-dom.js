@@ -56,13 +56,12 @@
     let lastErr = null;
     for (const u of alts) {
       try {
-        /* SiteNet throws on non-2xx and on timeout — either way, fall through
-           to the next alternate, and keep the last error for classification. */
         return await window.SiteNet.request(u, {
           timeoutMs: 10000,
           onSlow: () => { const loadEl = document.querySelector(".cmap-load"); if (loadEl) loadEl.textContent = "Still unrolling the chronique\u2026"; }
         }).then((r) => r.json());
       } catch (err) {
+        if (Number(err && err.status) !== 404) throw err;
         lastErr = err;
       }
     }

@@ -189,8 +189,8 @@
          z-index 240) sits above the map (180) and owns Escape: one Escape
          closes the panel, the next the map. */
       if (document.documentElement.classList.contains('dfx-cite-open')) return;
-      const modal = document.querySelector('#infographic-modal, #certificate-review-modal, #certificate-panel');
-      if (modal && !modal.hidden) return;
+      const modals = document.querySelectorAll('#infographic-modal, #certificate-review-modal, #certificate-panel');
+      if ([...modals].some((modal) => !modal.hidden)) return;
 
       const key = event.key;
       if (key === 'Escape') {

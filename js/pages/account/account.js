@@ -675,10 +675,24 @@
     setNote("account-settings-note", copy.saved);
   }
 
+  function secondStepPending() {
+    const db = window.SiteCore.authClient();
+    const mfa = db && db.auth && db.auth.mfa;
+    if (!mfa || typeof mfa.getAuthenticatorAssuranceLevel !== "function") return Promise.resolve(false);
+    return Promise.resolve(mfa.getAuthenticatorAssuranceLevel()).then(function (res) {
+      const level = res && !res.error ? res.data : null;
+      return !!(level && level.nextLevel === "aal2" && level.currentLevel !== "aal2");
+    }, function () { return false; });
+  }
+
   function finishReturn() {
     if (!shouldReturn || !signedIn()) return;
     if (!hasAgreed()) return;
-    if (terms() && typeof terms().continueIfReady === "function") terms().continueIfReady();
+    if (!terms() || typeof terms().continueIfReady !== "function") return;
+    secondStepPending().then(function (pending) {
+      if (pending || !shouldReturn || !signedIn()) return;
+      terms().continueIfReady();
+    });
   }
 
   function readNextFromQuery() {

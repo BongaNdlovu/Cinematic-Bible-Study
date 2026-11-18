@@ -1,6 +1,6 @@
 # 5. Performance
 
-**Last verified:** 16 November 2026
+**Last verified:** 19 November 2026 (the globe row and Shelf book maps), 16 November 2026
 
 This chapter covers what keeps the site fast: caching, how files load, how the 3D scenes manage memory, and the size budgets that tests enforce.
 
@@ -50,7 +50,7 @@ JavaScript and HTML are **not** minified. Their comments ship to readers as writ
 |---|---|---|
 | A sitting's full text | When that sitting is opened | `js/content/sheets/index.js` |
 | The certificate maker | When it is first used | `study.html` (`data-certificate`) |
-| The 3D globe on the map | When the globe view is opened | `GLOBE_SRC` in `js/pages/map/map.js` |
+| The 3D globe on the map | When the globe view is opened, and for the short globe intro once per browser session unless reduced motion is on (checked 19 November 2026: `map.js` keeps `cmap-globe-intro` in `sessionStorage`) | `GLOBE_SRC` in `js/pages/map/map.js` |
 | Article images | Lazily (`loading="lazy"`) | `study-app.js`, `loadSheet` |
 | Gallery hall backgrounds | Prefetched, then cached | `prefetchHall` and `setHallBackdrop` in `js/pages/gallery/gallery.js` |
 
@@ -62,6 +62,7 @@ JavaScript and HTML are **not** minified. Their comments ship to readers as writ
 | Model cache | Least-recently-used, 6 models at most. The statue (`assembled` / `full_body`) is always kept; the 3 most recently shown are never evicted. Evicted models are freed from the GPU. | `GLTF_LRU_CAP`, `evictGltfs`, `disposeGltfScene` in `js/pages/gallery/gallery.js` |
 | Material copies | Copies made for the gold, clay, wireframe and lighting looks are released when a model is removed. Shared originals are left alone. | `releaseExhibitMaterials` in `js/pages/gallery/gallery.js` (added 12 November 2026) |
 | Hall textures | Up to 4 cached | `HALL_CACHE_CAP` |
+| Shelf book maps | One texture serves as both the roughness and the metalness map of a spine, flat spine or foil cover (`ormPair()` in `js/pages/index/shelf.js`). Before 19 November 2026 each was uploaded twice. The GPU saving was not measured | `ormPair()` |
 | Download timeouts | A model download that hangs is cancelled through the loading manager's abort signal | The GLB load helper in `js/pages/gallery/gallery.js` (`manager.abortController.abort()`) |
 
 ## 4. Size budgets (enforced by tests)

@@ -146,7 +146,7 @@
           /* `.mm` is the mindmap block. Its nodes are role=button, which the
              `button` exclusion below does not catch, and a citation button
              nested inside a node is not reachable or meaningful. */
-          if (el.closest('blockquote, nav.lesson-toc, .cite-ref, .mm, a, button')) return NodeFilter.FILTER_REJECT;
+          if (el.closest('blockquote, nav.lesson-toc, .cite-ref, .mm, a, button, svg, [hidden], .chain-ascii')) return NodeFilter.FILTER_REJECT;
           return /\d:\d/.test(node.nodeValue || '') ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
         }
       });

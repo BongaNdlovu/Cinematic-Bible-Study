@@ -190,11 +190,17 @@ import { currentSheetIndex, sheetLoadTicket, sheetQuizComplete, showToast, sitti
       });
     }
 
-    export function paintQuizOutcome(qIdx, selectedOptIdx, correctIdx, isCorrect, questionData, note) {
-      const feedback = document.getElementById(`q-${qIdx}-feedback`);
+    function quizNode(card, id) {
+      const inCard = card ? card.querySelector('#' + id) : null;
+      return inCard || document.getElementById(id);
+    }
+
+    export function paintQuizOutcome(qIdx, selectedOptIdx, correctIdx, isCorrect, questionData, note, card) {
+      const feedback = quizNode(card, `q-${qIdx}-feedback`);
 
       questionData.options.forEach((_, optIdx) => {
-        const btn = document.getElementById(`q-${qIdx}-opt-${optIdx}`);
+        const btn = quizNode(card, `q-${qIdx}-opt-${optIdx}`);
+        if (!btn) return;
         btn.disabled = true;
         if (optIdx === correctIdx) {
           btn.classList.remove('bg-paper-100/50', 'dark:bg-paper-900/40', 'border-paper-300', 'dark:border-paper-800');
@@ -207,8 +213,9 @@ import { currentSheetIndex, sheetLoadTicket, sheetQuizComplete, showToast, sitti
         }
       });
 
+      if (!feedback) return;
       feedback.classList.remove('hidden');
-      const diagMsg = (!isCorrect && questionData.diagnostics && questionData.diagnostics[selectedOptIdx])
+      const diagMsg =(!isCorrect && questionData.diagnostics && questionData.diagnostics[selectedOptIdx])
         ? `<div class="mt-2.5 pt-2 border-t border-current/20 font-mono text-xs"><strong>Diagnostic Analysis:</strong> ${questionData.diagnostics[selectedOptIdx]}</div>`
         : '';
 
@@ -236,6 +243,7 @@ import { currentSheetIndex, sheetLoadTicket, sheetQuizComplete, showToast, sitti
       answeredQuestions[qIdx] = selectedOptIdx;
       const attempt = (quizAttemptCounts[qIdx] = (quizAttemptCounts[qIdx] || 0) + 1);
       const feedback = document.getElementById(`q-${qIdx}-feedback`);
+      const card = document.getElementById(`q-card-${qIdx}`);
 
       quizPending[qIdx] = true;
       questionData.options.forEach((_, optIdx) => {
@@ -266,7 +274,7 @@ import { currentSheetIndex, sheetLoadTicket, sheetQuizComplete, showToast, sitti
         if (!res || !res.ok) {
           const cause = (res && res.error) || 'error';
           questionData.options.forEach((_, optIdx) => {
-            const btn = document.getElementById(`q-${qIdx}-opt-${optIdx}`);
+            const btn = quizNode(card, `q-${qIdx}-opt-${optIdx}`);
             if (btn) btn.disabled = false;
           });
           /* Keep the reader's pick visible while they recover from an
@@ -275,7 +283,7 @@ import { currentSheetIndex, sheetLoadTicket, sheetQuizComplete, showToast, sitti
           const keepPick = cause === 'not_authenticated' || cause === 'offline' ||
             cause === 'rate_limit' || cause === 'timeout' || cause === 'forbidden';
           if (keepPick) {
-            const picked = document.getElementById(`q-${qIdx}-opt-${selectedOptIdx}`);
+            const picked = quizNode(card, `q-${qIdx}-opt-${selectedOptIdx}`);
             if (picked) picked.style.borderColor = 'rgba(180, 140, 60, 0.9)';
           }
           const feedbackPanel = function (tone, html) {
@@ -348,7 +356,7 @@ import { currentSheetIndex, sheetLoadTicket, sheetQuizComplete, showToast, sitti
           });
         }
 
-        paintQuizOutcome(qIdx, selectedOptIdx, correctIdx, isCorrect, questionData, res.note);
+        paintQuizOutcome(qIdx, selectedOptIdx, correctIdx, isCorrect, questionData, res.note, card);
         document.dispatchEvent(new CustomEvent('quiz:changed', { detail: { q: qIdx, correct: isCorrect } }));
         updateNextGate();
         if (sheetQuizComplete()) {
@@ -356,6 +364,14 @@ import { currentSheetIndex, sheetLoadTicket, sheetQuizComplete, showToast, sitti
           renderSittingPath();
         }
         maybeShowEndGuide();
+      }).catch(function () {
+        quizPending[qIdx] = false;
+        questionData.options.forEach((_, optIdx) => {
+          const btn = quizNode(card, `q-${qIdx}-opt-${optIdx}`);
+          if (btn) btn.disabled = false;
+        });
+        const panel = quizNode(card, `q-${qIdx}-feedback`);
+        if (panel) panel.innerHTML = 'The record could not check this answer. Tap your answer to try again.';
       });
     }
 

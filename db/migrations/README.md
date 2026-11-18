@@ -15,6 +15,8 @@ The files used to be `tools/supabase-*.sql`, with no order in their names. On 16
 
 **Not checked.** This list was written without access to the production database. `tools/verify/verify_pending_migrations.mjs` checks the live database for the objects these files create; run it with production access, then record the result here with its date.
 
+`028-drop-duplicate-events-index.sql` ran in production on 19 November 2026, from the Supabase SQL editor. Before it, `exhibit_events_user_idx` and `exhibit_events_user_created_idx` had the same definition (checked with `pg_indexes`). After it, `exhibit_events` has 5 indexes, `exhibit_events_user_idx` is gone, and `exhibit_events_user_created_idx` remains.
+
 | File | Was | First in git |
 |---|---|---|
 | `001-reviews.sql` | `tools/supabase-reviews.sql` | 2026-09-15 |
@@ -44,3 +46,4 @@ The files used to be `tools/supabase-*.sql`, with no order in their names. On 16
 | `025-prune-test-rows.sql` | `tools/supabase-prune-test-rows.sql` | 2026-11-13 |
 | `026-human-pass.sql` | `tools/supabase-human-pass.sql` | 2026-11-13 |
 | `027-human-pass-enforce.sql` | `tools/supabase-human-pass-enforce.sql` | 2026-11-13 |
+| `028-drop-duplicate-events-index.sql` | new | 2026-11-19 |

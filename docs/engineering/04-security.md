@@ -1,6 +1,6 @@
 # 4. Security
 
-**Last verified:** 18 November 2026 (Supabase Auth settings under Sign-in and roles, the Security tests table, and the Secrets section with its exposure check), 16 November 2026 (Privacy and consent section, account deletion and device storage, and the helper notes under Sign-in and roles), 15 November 2026 (Sign-in and roles section). The live database facts below come from read-only queries run on 12 November 2026. Everything else comes from the repository.
+**Last verified:** 19 November 2026 (the CSP row, Moderator second step, Local server, sign-out keys), 18 November 2026 (Supabase Auth settings under Sign-in and roles, the Security tests table, and the Secrets section with its exposure check), 16 November 2026 (Privacy and consent section, account deletion and device storage, and the helper notes under Sign-in and roles), 15 November 2026 (Sign-in and roles section). The live database facts below come from read-only queries run on 12 November 2026. Everything else comes from the repository.
 
 ## The model in one paragraph
 
@@ -28,7 +28,7 @@ The browser is not trusted. Pages are public files, and the browser talks to Sup
 
 | Header | Value |
 |---|---|
-| `Content-Security-Policy` | `default-src 'self'`. Scripts come from `'self'`, a fixed list of `sha256-` hashes for the inline scripts and Cloudflare Insights, plus `'wasm-unsafe-eval'` for WebAssembly (the Meshopt model decoder). `connect-src` lists only Supabase (https and wss), Sentry, Cloudflare Insights, the map tile hosts and Google Fonts. `object-src 'none'`, `frame-src 'none'` (the site embeds no frames), `frame-ancestors 'none'`, `base-uri 'self'`, `form-action 'self'`, `upgrade-insecure-requests`, `report-uri /csp-report`. |
+| `Content-Security-Policy` | `default-src 'self'`. Scripts come from `'self'`, a fixed list of `sha256-` hashes for the inline scripts and Cloudflare Insights, plus `'wasm-unsafe-eval'` for WebAssembly (the Meshopt model decoder). `connect-src` lists only Supabase (https and wss), Sentry, Cloudflare Insights, the map tile hosts and Google Fonts. `object-src 'none'`, `frame-src https://challenges.cloudflare.com` (only the Turnstile frame for the guest human check), `frame-ancestors 'none'`, `base-uri 'self'`, `form-action 'self'`, `upgrade-insecure-requests`, `report-uri /csp-report`. |
 | `X-Frame-Options` | `DENY` |
 | `X-Content-Type-Options` | `nosniff` |
 | `Referrer-Policy` | `strict-origin-when-cross-origin` |
@@ -98,6 +98,8 @@ If the gate cannot be reached, a page read is still served. A non-GET request, `
 | Member | Any Google sign-in through Supabase Auth | `auth.uid()` in row-level security |
 | Moderator | A row in `exhibit_moderators`, a table no client role can read | `is_review_moderator()` requires a Google identity **and** an `aal2` session, meaning the authenticator app was used. Confirmed in the live database on 12 November 2026. `exhibit_participation()` (`db/migrations/024-participation.sql`) checks it first and raises error `42501` for anyone else. It returns two counts only, never ids or emails. |
 
+**Moderator second step.** A moderator who arrives at `account.html?next=insights.html` with only a first-step (`aal1`) session stays on the account page until the authenticator code is entered. `finishReturn()` in `js/pages/account/account.js` asks Supabase for the assurance level and returns to Insights only when no second step is pending. When the code is verified, Supabase reports `MFA_CHALLENGE_VERIFIED` for the same user; `setUser()` in `js/core/auth.js` then re-checks `is_review_moderator()` and tells every listener, so the moderator tools appear without a reload. Before 19 November 2026 the page went straight back to Insights, and moderator status stayed off until a reload.
+
 **Supabase Auth settings (checked in the dashboard on 18 November 2026).** These live in Supabase, not in the repository, so a change there must be recorded here.
 
 | Setting | Value | Why |
@@ -162,7 +164,7 @@ Function permissions checked live: guests (`anon`) **can** call `exhibit_public_
 - `exhibit_prune_anon()` runs on `pg_cron`. It deletes anonymous events older than 90 days, keeps at most the newest 200,000 anonymous events, deletes `rate_limited` events older than 7 days, and deletes anonymous surveys older than 180 days.
 - `exhibit_prune_test_rows()` (`db/migrations/025-prune-test-rows.sql`) runs on `pg_cron` every hour at minute 23. It deletes the rows the live tests leave behind, and nothing else. A row must have no account **and** both test markers: an event named `pen_probe` with an id starting `pen-` (or no id), a survey with an id starting `pen-` and kind `pen`, or rows from `tools/verify/verify_live_inserts.mjs` (id `live-insert-probe`). No client role can run it. `tools/verify/verify_insights.mjs` checks these rules.
 - Members can delete their account from the account page (`exhibit_delete_my_account()`).
-- Signing out removes the personal keys listed in `PERSONAL_KEYS` and `PERSONAL_PREFIXES` in `js/core/auth.js`. It warns first if anything is unsent.
+- Signing out removes the personal keys listed in `PERSONAL_KEYS` and `PERSONAL_PREFIXES` in `js/core/auth.js`. It warns first if anything is unsent. Since 19 November 2026 that includes `baRefCode`, the reader's own invite code, so the next account on the device does not reuse it.
 - Changes put aside after an account switch (`baProgressStash:<account>`, `baStudySyncStash:<account>`) stay on the device until their owner signs in again. Deleting an account removes that account's own two stash keys from the device, through `clearSiteStorage(userId)` in `js/pages/account/account.js`; other accounts' stashes are left alone. They are listed in `privacy.html`.
 
 ## Privacy and consent
@@ -208,6 +210,7 @@ None of the three services has a card that a flood of traffic could charge. If o
 - Answers only if the `Host` header is `127.0.0.1:<port>` or `localhost:<port>`, which blocks DNS rebinding.
 - Serves an allow-list of file extensions and refuses dotfiles and directory traversal.
 - CORS allows only the two local origins.
+- Each request starts with no byte range left over. Before 19 November 2026 a `HEAD` request with `Range` on a kept-alive connection made the next plain `GET` send only the range's bytes and then stall. `tests/unit/audit-fixes-2026-11-19.test.mjs` sends that pair.
 
 ## CI hygiene
 

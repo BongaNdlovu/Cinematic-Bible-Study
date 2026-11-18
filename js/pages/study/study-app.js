@@ -179,7 +179,7 @@ import { loadStudyModule, openCertificateIfReady, studyModuleFailed, syncCertifi
         if (legacyChosen && !manualFont) localStorage.setItem('daniel_font_manual_v1', '1');
       }
       const savedThemeName = localStorage.getItem('daniel_theme_name_v1');
-      if (savedThemeName === 'white' || savedThemeName === 'night') {
+      if (themes.indexOf(savedThemeName) > 0) {
         setCurrentThemeIdx(themes.indexOf(savedThemeName));
       } else {
         setCurrentThemeIdx(0);
