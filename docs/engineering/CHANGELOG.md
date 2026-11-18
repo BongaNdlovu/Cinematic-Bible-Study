@@ -24,9 +24,9 @@ Entry template:
 
 **Handbook updated:** 04 (Secrets).
 
-**Checked here:** 112 live URLs (about 2.3 MB) and every tracked file and commit searched for secret-key patterns, with no match. 20 private paths on the live site all answer `404`. Both Supabase organisations are on the Free Plan (dashboard). The Cloudflare and Sentry plans were not checked.
+**Checked here:** 112 live URLs (about 2.3 MB) and every tracked file and commit searched for secret-key patterns, with no match. 20 private paths on the live site all answer `404`. In the dashboards: both Supabase organisations are on the Free Plan. Cloudflare has one subscription, Workers Free, active. Sentry is on the Developer plan with no payment method on file and $0.00 additional spend.
 
-**Status:** committed on branch `docs/secrets-exposure-check`, not yet merged.
+**Status:** merged to master in PR #42.
 
 ## 2026-11-18 — Fixes from the 18 November bug review: meter guard and three security checks
 

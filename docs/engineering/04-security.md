@@ -196,9 +196,11 @@ A check against a common failure in AI-built apps: secret keys in the JavaScript
 | Repository | `git grep` over every tracked file, and `git log --all -p` over every commit, for the same patterns | No match. No JWT anywhere. No `.env` file was ever committed |
 | Local `.env.local` | Variable names read, values not | `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` only, both public. No code reads the file |
 | Private paths | 20 paths on the live site: `/.env`, `/.env.local`, `/.env.production`, `/.git/config`, `/.git/HEAD`, `/package.json`, `/server.py`, `/wrangler.toml`, `/vercel.json`, an example config, `/functions/`, `/tools/`, `/db/`, `/docs/`, `/.github/`, `/qa/`, `/backups/`, `/workers/`, and two `../` forms | All `404`. Bodies checked: "Not Found", or the site's 404 page |
-| Spending | Supabase dashboard | Both Supabase organisations are on the Free Plan |
+| Spending: Supabase | Dashboard, organisation list | Both Supabase organisations are on the Free Plan |
+| Spending: Cloudflare | Dashboard, Billing → Subscriptions and Workers plans | One subscription: Workers Free, active. The free plan stops at 100,000 Workers requests a day instead of charging. 101 were used on the day of the check. The rate gate's Durable Object (`ExhibitRateGate`, SQLite storage) runs on this plan |
+| Spending: Sentry | Settings → Subscription | Developer plan, no payment method on file, $0.00 additional spend. This period: 2 of 5,000 errors and about 11,000 of 5,000,000 spans. The code sends 10% of traces (`tracesSampleRate: 0.1`) and no session replays |
 
-Not checked: the Cloudflare and Sentry plans and their limits.
+None of the three services has a card that a flood of traffic could charge. If one is ever upgraded to a paid plan, set a hard spending limit there and update this table.
 
 ## Local server (`server.py`)
 
