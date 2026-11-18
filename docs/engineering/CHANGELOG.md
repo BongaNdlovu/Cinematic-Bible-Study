@@ -14,6 +14,25 @@ Entry template:
 
 ---
 
+## 2026-11-18 — Fixes from the 18 November bug review: meter guard and three security checks
+
+**Why:** a review of PRs #34 to #40 (`qa/reports/bug-review-2026-11-18.md`, not tracked in git) found two low-risk problems, and checking it found one more.
+
+- The reading-progress meter checked only for `#read-meter`, not its fill, percentage and label. With one of them missing, every update threw `Cannot read properties of null (reading 'style')`. This was shown by serving `study.html` without the fill.
+- The security audit's PT-09, PT-10 and PT-13 failed before testing anything. They load browser files in Node without `js/core/core.js`, so `window.SiteCore` was undefined. PT-13 also lacked `dashboard-format.js` and `dashboard-data.js`. All three already failed on `f4ba423` (PR #33), so these PRs did not cause them. CI does not run the audit, so nobody saw it. The review's suggested fix (only the two dashboard files) was tried and was not enough. PT-13 then failed on `escapeHtml`, which needs `core.js`.
+
+**What changed:**
+
+- `js/pages/study/read-meter.js`: one `hasMeter` check (the meter and all three parts) now guards both `wire()` and `queueReadMeter()`.
+- `tools/security/run_penetration_audit.mjs`: PT-09 and PT-10 load `js/core/core.js` first. PT-13 loads `core.js`, then `dashboard-format.js`, `dashboard-data.js` and `dashboard.js` in the order `js/pages/dashboard/main.js` imports them.
+- `tools/verify/verify_read_meter.mjs`: a new check serves `study.html` without the meter's fill and expects no page errors.
+
+**Handbook updated:** 04 (Security tests table), 06 (Reading-progress meter decisions), 07 (Tests table, Security row).
+
+**Tested:** `npx oxlint` exit 0. `npm run test:unit` 188 of 188. `npm test` exit 0. `npm run test:security` 23 of 23 (20 of 23 before). `verify_read_meter.mjs` 76 of 76 checks. The new check fails with the old guard put back (mutation test) and passes with the fix. The full `npm run test:browser` was not run locally.
+
+**Status:** merged to master in PR #41.
+
 ## 2026-11-18 — Supabase sign-in returns only to the live site
 
 **Why:** a check against password reset poisoning (a reset or sign-in link built from an address an attacker controls). The site has no passwords, so the reset form of the attack does not apply. But Supabase's Site URL and two redirect URLs still pointed at the old Vercel deployment. That deployment is paused, so the name is still ours today. If the Vercel project were deleted, someone else could claim the name and receive sign-in tokens.
