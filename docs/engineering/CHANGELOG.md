@@ -14,6 +14,24 @@ Entry template:
 
 ---
 
+## 2026-11-18 — Reading-progress meter on every sitting
+
+**Why:** the site owner asked for readers to see how far through a sitting they are, as a bar and a percentage that rise as they go down and fall as they go back up, while reading or listening. The old 4px bar at the top of the page showed only the sitting number out of 11.
+
+**What changed:**
+
+- `js/pages/study/read-meter.js` (new): works out the percentage and draws it, at most once per frame. While reading it counts page scroll down to the end of `main.sitting-main`, book page turns (one book height each), and answered questions and the proof task (one screen height each, from `window.StudyTasks.snapshot()`). While the lesson audio plays it shows the audio position and "N min listen". It updates on scroll, resize, `bookreader:*`, `quiz:changed`, `checkpoint:passed`, the audio player's events, and a `ResizeObserver` on the sitting.
+- `css/pages/study/parts/24-read-meter.css` (new): the bar (solid striped fill over a dotted track, both `currentColor`), the percentage and the label; a single row on screens up to 640px; no fill animation under reduced motion.
+- `study.html`: the meter markup at the end of `#sitting-spine`, the new stylesheet link, and the old fixed `#progress-bar` removed.
+- `js/pages/study/study-app.js`: `loadSheet` calls `setReadMeterTime(data.readTime)` instead of setting the old bar's width.
+- `css/pages/study/parts/09-diagram-fullscreen.css`: removed the rule that hid the old fixed bar behind a full-screen diagram; the bar no longer exists.
+- `tools/verify/verify_read_meter.mjs` (new), added to `BROWSER_CHECKS` in `tools/verify/run_browser_checks.mjs`.
+
+**Handbook updated:** 01 (sittings bullet), 03 (`js/pages/study/`, CSS parts now 24), 06 (study desk table, new "Reading-progress meter" section, accessibility), 07 (browser check count 31). 02 checked and not changed: the meter saves nothing and sends no request.
+
+**Checked here:** `verify_read_meter.mjs` passes on all 11 sittings in book view (0% at the top, rising with scrolling down and falling with scrolling up, a page turn forward raises it and back lowers it, under 100% while 6 tasks are unanswered, no page errors), in scroll view, while the audio plays (50% at the audio's half-way point, "24 min listen" on sitting 0), and on a 375px phone with no sideways scroll. On this branch, rebased on `master` at `208ba5c`: lint exits 0, `npm run test:unit` passes 188 of 188, every `npm test` script passes, and `npm run test:browser` passes 31 of 31.
+
+**Status:** on branch `feat/read-meter`; deploys when merged to `master`.
 ## 2026-11-17 — The globe check waits for frames that are still queued
 
 **Why:** on GitHub, `verify_globe.mjs` failed once with "clouds moved while idle" (run 44071867103, the pull-request run of `split/globe`; the push run of the same commit passed). The frame count had not moved, yet the cloud offset had. The globe only changes that offset inside a frame. So a frame requested before the first reading was still queued: the slow headless runner held it back for more than the 2.25 s `settle()` waited, then it ran, moved the clouds one step and requested no more.

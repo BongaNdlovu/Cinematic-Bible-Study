@@ -1,6 +1,6 @@
 # 7. Develop, test, release
 
-**Last verified:** 16 November 2026 
+**Last verified:** 18 November 2026
 
 ## Running the site locally
 
@@ -23,7 +23,7 @@ The server binds `127.0.0.1`. It starts at port 8000, or at `PORT` if that is se
 | `npm run lint` | `oxlint` over the code. CI fails on any error. The complexity ceiling is 44 per function, set in `.oxlintrc.json` (55 until 17 November 2026, then 52, 50 and 44; plan step 6.2 lowers it a step at a time, and each step must leave lint passing). The highest today are an inner function of `js/pages/index/shelf.js` at 44, and `selectAsset` (`gallery.js`) and another `shelf.js` function at 43. Since 17 November 2026 (plan step 6.1), a file may hold at most 800 lines (`max-lines`) and a function at most 100 (`max-lines-per-function`). The files that were already larger are listed by name as exceptions in the `overrides` of `.oxlintrc.json`: 7 for file size and 22 for function size; the changelog records each file as it leaves the list. Remove a file from its list when it is split; a new file or function over the limit fails lint. The unused-variable rule applies to every file. Since 16 November 2026, `no-undef` is on for `js/**` with the browser environment, so a name no file defines fails lint. The three names other scripts set on `window` and read bare are declared in `globals`: `sheetsData`, `timelineEpochs` (both from `js/content/sheets/index.js`) and Leaflet's `L`. Its override for the study files was removed on 16 November 2026 (plan step 4.5): they are ES modules now, so lint sees what each file exports and imports. `.cursor/skills/complexity-ceiling/SKILL.md` says how to change the complexity ceiling. |
 | `npm run test:unit` | `node --test "tests/unit/*.test.mjs"`: fast unit tests, no browser |
 | `npm test` | The regression suite: 24 `tools/verify/verify_*.mjs` scripts plus `tools/verify-headers.mjs`. Some start `server.py` and drive Chromium through Playwright. It ends with three guards: `node tools/build_study_sheets.mjs --check` and `node tools/verify/build_glossary_enrichment.mjs --check` (fail when a generated file is older than its source) and `tools/verify/verify_wiring.mjs` (fails when a `verify_*.mjs` file is not run anywhere). |
-| `npm run test:browser` | `tools/verify/run_browser_checks.mjs`: starts one site server and runs the 29 browser checks that pass today (see [Browser checks](#browser-checks)). Add `--include-quarantined` to run the one known-failing check too, or `--only=verify_x.mjs,verify_y.mjs` to run named ones. |
+| `npm run test:browser` | `tools/verify/run_browser_checks.mjs`: starts one site server and runs the 31 browser checks that pass today (see [Browser checks](#browser-checks)). Add `--include-quarantined` to run the one known-failing check too, or `--only=verify_x.mjs,verify_y.mjs` to run named ones. |
 | `npm run test:security` | 23 penetration-style checks (`tools/security/run_penetration_audit.mjs`). Since 13 November 2026 PT-19 and PT-20 prove that guest writes without a human pass are refused, so they no longer leave rows behind; `exhibit_prune_test_rows()` still clears any that appear. |
 | `npm run smoke` | Smoke test of the live site (`tools/smoke.mjs`) |
 | `npm run build:tailwind` | Rebuild `css/pages/study/study-tailwind.css` |
@@ -49,7 +49,7 @@ The server binds `127.0.0.1`. It starts at port 8000, or at `PORT` if that is se
 | Structure | `tests/unit/structure.test.mjs` (since 17 November 2026, plan step 6.3), part of `npm run test:unit`. It fails when: a function named like a `js/core/core.js` helper does not call `SiteCore`; a file in `js/core/`, `js/features/`, `css/core/` or `css/features/` is loaded by fewer than two pages (`auth-config.example.js` is exempt); a page loads a file from another page's folder; a page with an entry folder does not load exactly one module entry; a script creates a `<style>` element. Storage keys are checked by `tests/unit/storage-keys.test.mjs`, which fails when the code uses a key `tools/storage-keys.mjs` does not list | Yes |
 | Unit | `tests/unit/`: middleware, rate gate, Sentry config, MFA card, report pages, and the 12 November audit fixes | Yes |
 | Regression | `tools/verify/` (headers, CSP, insights, rate limits, both syncs, quiz integrity, reviews, desk, certificates, task flow, map help, moderator UI, report pages, hashing, CSS minify, page deny list, image budgets, load) | Yes |
-| Browser | `tools/verify/run_browser_checks.mjs`: mind map, story reader, flows, map, globe, horizon, theme, mobile layout and others (29 checks) | Yes, as its own job, `test-browser` |
+| Browser | `tools/verify/run_browser_checks.mjs`: mind map, story reader, flows, map, globe, horizon, theme, mobile layout, the reading-progress meter and others (31 checks) | Yes, as its own job, `test-browser` |
 | Security | `tools/security/run_penetration_audit.mjs` | No. Run it before security-related changes. |
 | Live smoke | `tools/smoke.mjs` | After every deploy, and every 15 minutes |
 | Production walkthrough | `qa-e2e/production-audit.mjs` (see the root `README.md`) | No |
@@ -64,7 +64,7 @@ Thirty-four `tools/verify/verify_*.mjs` files were not part of `npm test` before
 
 | State | Scripts | What it means |
 |---|---|---|
-| In CI (29) | every other browser script, listed in `BROWSER_CHECKS` in `tools/verify/run_browser_checks.mjs` | Run by `npm run test:browser` and by the `test-browser` CI job |
+| In CI (31) | every other browser script, listed in `BROWSER_CHECKS` in `tools/verify/run_browser_checks.mjs` | Run by `npm run test:browser` and by the `test-browser` CI job |
 | Quarantined (1) | `verify_book_reader` | Fails today. Kept in `QUARANTINED`, with its reason. Not run in CI. |
 
 **Why they failed, and what fixed them.** On the first run, 14 of 31 passed. Every failure that was traced came from a script that had fallen behind a deliberate change to the site, not from a site bug:

@@ -1,12 +1,12 @@
 # 1. Overview
 
-**Last verified:** 15 November 2026
+**Last verified:** 18 November 2026
 
 ## What the site is for
 
 The Shelf of Daniel is a guided study of the Bible book of Daniel. It reads the book in the historicist tradition, with the teaching centred on Jesus Christ. It combines four things:
 
-- a written course of 11 **sittings** (lessons 0 to 10), read like a book with checkpoint questions;
+- a written course of 11 **sittings** (lessons 0 to 10), read like a book with checkpoint questions and a progress meter that shows how far through the sitting the reader is;
 - an interactive **Map of History** that follows the kingdoms Daniel describes, year by year;
 - a **3D gallery** of the statue from Daniel 2 (gold head, silver chest, bronze thighs, iron legs, feet of iron and clay) and the visions of the later chapters;
 - **account features**: saved progress, notes and bookmarks, certificates, readers' notes (reviews), and a message desk.
