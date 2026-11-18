@@ -1,6 +1,6 @@
 # 4. Security
 
-**Last verified:** 18 November 2026 (Supabase Auth settings under Sign-in and roles, and the Security tests table), 16 November 2026 (Privacy and consent section, account deletion and device storage, and the helper notes under Sign-in and roles), 15 November 2026 (Sign-in and roles section). The live database facts below come from read-only queries run on 12 November 2026. Everything else comes from the repository.
+**Last verified:** 18 November 2026 (Supabase Auth settings under Sign-in and roles, the Security tests table, and the Secrets section with its exposure check), 16 November 2026 (Privacy and consent section, account deletion and device storage, and the helper notes under Sign-in and roles), 15 November 2026 (Sign-in and roles section). The live database facts below come from read-only queries run on 12 November 2026. Everything else comes from the repository.
 
 ## The model in one paragraph
 
@@ -179,8 +179,26 @@ Function permissions checked live: guests (`anon`) **can** call `exhibit_public_
 | Secret | Lives in | Used by |
 |---|---|---|
 | `RATE_GATE_SECRET` | Cloudflare Pages environment | `/__rate` |
+| `TURNSTILE_SECRET`, `HUMAN_PASS_KEY` | Cloudflare Pages environment (`context.env` in `functions/_middleware.js`) | `/__human-pass`. Without either, it answers `503` |
 | `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID` | GitHub Actions secrets, `production` environment | The deploy job |
-| Supabase publishable key, Sentry DSNs | In the code, **on purpose** | Both are designed to be public |
+| `SUPABASE_DB_URL`, `BACKUP_PASSPHRASE` | GitHub Actions secrets | `.github/workflows/db-backup.yml`. It stops if either is missing |
+| Supabase publishable key, Turnstile site key, Sentry DSNs | In the code, **on purpose** | All three are designed to be public |
+
+No browser code calls a paid API (OpenAI, Stripe, Resend and the like), so no paid key has to reach the browser. The site has no build step, so no build tool can copy a `.env` value into the shipped files. `.env*` is git-ignored and the deploy script leaves it out.
+
+### Secret exposure check (18 November 2026)
+
+A check against a common failure in AI-built apps: secret keys in the JavaScript every visitor downloads, `/.env` reachable on the live site, and paid keys with no spending limit.
+
+| Check | How | Result |
+|---|---|---|
+| Live files | Fetched 112 URLs (about 2.3 MB) from 11 pages and every script they import. Searched for Stripe, OpenAI, Anthropic, Resend, AWS, GitHub, Supabase secret and service-role keys, private keys, JWTs, and `secret`/`api_key`/`access_token` assignments | No match. The only keys found are the three public ones in the table above |
+| Repository | `git grep` over every tracked file, and `git log --all -p` over every commit, for the same patterns | No match. No JWT anywhere. No `.env` file was ever committed |
+| Local `.env.local` | Variable names read, values not | `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` only, both public. No code reads the file |
+| Private paths | 20 paths on the live site: `/.env`, `/.env.local`, `/.env.production`, `/.git/config`, `/.git/HEAD`, `/package.json`, `/server.py`, `/wrangler.toml`, `/vercel.json`, an example config, `/functions/`, `/tools/`, `/db/`, `/docs/`, `/.github/`, `/qa/`, `/backups/`, `/workers/`, and two `../` forms | All `404`. Bodies checked: "Not Found", or the site's 404 page |
+| Spending | Supabase dashboard | Both Supabase organisations are on the Free Plan |
+
+Not checked: the Cloudflare and Sentry plans and their limits.
 
 ## Local server (`server.py`)
 

@@ -14,6 +14,20 @@ Entry template:
 
 ---
 
+## 2026-11-18 — Secret exposure check recorded
+
+**Why:** a check against a common failure in AI-built apps: secret keys shipped in browser JavaScript, `/.env` reachable on the live site, and paid keys with no spending limit. The site has none of the three. This entry records the evidence, and completes a Secrets table that was missing four secrets.
+
+**What changed (handbook only; no code or settings changed):**
+
+- `docs/engineering/04-security.md`, Secrets: added `TURNSTILE_SECRET` and `HUMAN_PASS_KEY` (Cloudflare Pages environment), `SUPABASE_DB_URL` and `BACKUP_PASSPHRASE` (GitHub Actions secrets for `db-backup.yml`), and the Turnstile site key as a public value. New "Secret exposure check (18 November 2026)" table.
+
+**Handbook updated:** 04 (Secrets).
+
+**Checked here:** 112 live URLs (about 2.3 MB) and every tracked file and commit searched for secret-key patterns, with no match. 20 private paths on the live site all answer `404`. Both Supabase organisations are on the Free Plan (dashboard). The Cloudflare and Sentry plans were not checked.
+
+**Status:** committed on branch `docs/secrets-exposure-check`, not yet merged.
+
 ## 2026-11-18 — Fixes from the 18 November bug review: meter guard and three security checks
 
 **Why:** a review of PRs #34 to #40 (`qa/reports/bug-review-2026-11-18.md`, not tracked in git) found two low-risk problems, and checking it found one more.
