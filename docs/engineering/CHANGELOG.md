@@ -14,6 +14,21 @@ Entry template:
 
 ---
 
+## 2026-11-18 — Supabase sign-in returns only to the live site
+
+**Why:** a check against password reset poisoning (a reset or sign-in link built from an address an attacker controls). The site has no passwords, so the reset form of the attack does not apply. But Supabase's Site URL and two redirect URLs still pointed at the old Vercel deployment. That deployment is paused, so the name is still ours today. If the Vercel project were deleted, someone else could claim the name and receive sign-in tokens.
+
+**What changed (Supabase dashboard, Authentication → URL Configuration; no code changed):**
+
+- Site URL: `https://cinematic-bible-study-daniel.vercel.app` → `https://cinematic-bible-study-daniel.pages.dev`.
+- Redirect URLs: removed `https://cinematic-bible-study-daniel.vercel.app` and `https://cinematic-bible-study-daniel.vercel.app/**`. Kept `https://cinematic-bible-study-daniel.pages.dev/**`, `http://127.0.0.1:8000` and `http://127.0.0.1:8000/**`.
+
+**Handbook updated:** 04 (new "Supabase Auth settings" table under Sign-in and roles).
+
+**Checked here:** after a reload the dashboard shows the new Site URL and 3 redirect URLs. Supabase's public `/auth/v1/settings` lists `google` as the only enabled provider. `cinematic-bible-study-daniel.vercel.app` answers `503` with `X-Vercel-Error: DEPLOYMENT_PAUSED`. `redirectTo()` in `js/core/auth.js` returns the account page on the page's own host, which `https://cinematic-bible-study-daniel.pages.dev/**` covers. A real Google sign-in on production after the change was not tried.
+
+**Status:** live in Supabase. This handbook entry is on branch `docs/supabase-auth-urls`, not committed.
+
 ## 2026-11-18 — Reading-progress meter on every sitting
 
 **Why:** the site owner asked for readers to see how far through a sitting they are, as a bar and a percentage that rise as they go down and fall as they go back up, while reading or listening. The old 4px bar at the top of the page showed only the sitting number out of 11.

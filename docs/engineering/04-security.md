@@ -1,6 +1,6 @@
 # 4. Security
 
-**Last verified:** 16 November 2026 (Privacy and consent section, account deletion and device storage, and the helper notes under Sign-in and roles), 15 November 2026 (Sign-in and roles section). The live database facts below come from read-only queries run on 12 November 2026. Everything else comes from the repository.
+**Last verified:** 18 November 2026 (Supabase Auth settings under Sign-in and roles), 16 November 2026 (Privacy and consent section, account deletion and device storage, and the helper notes under Sign-in and roles), 15 November 2026 (Sign-in and roles section). The live database facts below come from read-only queries run on 12 November 2026. Everything else comes from the repository.
 
 ## The model in one paragraph
 
@@ -97,6 +97,17 @@ If the gate cannot be reached, a page read is still served. A non-GET request, `
 |---|---|---|
 | Member | Any Google sign-in through Supabase Auth | `auth.uid()` in row-level security |
 | Moderator | A row in `exhibit_moderators`, a table no client role can read | `is_review_moderator()` requires a Google identity **and** an `aal2` session, meaning the authenticator app was used. Confirmed in the live database on 12 November 2026. `exhibit_participation()` (`db/migrations/024-participation.sql`) checks it first and raises error `42501` for anyone else. It returns two counts only, never ids or emails. |
+
+**Supabase Auth settings (checked in the dashboard on 18 November 2026).** These live in Supabase, not in the repository, so a change there must be recorded here.
+
+| Setting | Value | Why |
+|---|---|---|
+| Sign-in providers | Google only. Email, phone, SAML, Web3 and every other provider are off. | No passwords exist, so there is no password reset to attack. Supabase's public `/auth/v1/settings` also reports `google` as the only enabled provider. |
+| Site URL | `https://cinematic-bible-study-daniel.pages.dev` | Supabase sends a sign-in here when its return address is not on the list below. Until 18 November 2026 it was the old `cinematic-bible-study-daniel.vercel.app`, which answers `503 DEPLOYMENT_PAUSED`. |
+| Redirect URLs | `https://cinematic-bible-study-daniel.pages.dev/**`, `http://127.0.0.1:8000`, `http://127.0.0.1:8000/**` | Sign-in may return only to these. `js/core/auth.js` `redirectTo()` builds the return address from the page's own address (the account page), never from a request header. The two `vercel.app` entries were removed on 18 November 2026: if that Vercel project were ever deleted, someone else could claim the name and receive sign-in tokens. The local entries are for real Google sign-in during local testing; the browser checks use the test sign-in instead. |
+| Sign-ups, email confirmation | On | Members join through Google. |
+| Anonymous sign-ins, manual identity linking | Off | |
+| Bot protection | Cloudflare Turnstile on the auth endpoints | |
 
 **Guests (since 15 November 2026)** reach no sitting: `study.html`, `map.html` and `gallery.html` all call `requireMember()` and send a guest to the account page. This is an interface rule. The lesson text ships as static files (`js/content/sheets/`), so it is not secret; answer checking, progress, notes and certificates stay protected by the database as before.
 
