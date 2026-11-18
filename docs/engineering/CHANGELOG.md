@@ -31,7 +31,7 @@ Entry template:
 
 **Tested:** `npx oxlint` exit 0. `npm run test:unit` 188 of 188. `npm test` exit 0. `npm run test:security` 23 of 23 (20 of 23 before). `verify_read_meter.mjs` 76 of 76 checks. The new check fails with the old guard put back (mutation test) and passes with the fix. The full `npm run test:browser` was not run locally.
 
-**Status:** committed on branch `fix/review-findings`, not yet merged or deployed.
+**Status:** merged to master in PR #41.
 
 ## 2026-11-18 — Supabase sign-in returns only to the live site
 
