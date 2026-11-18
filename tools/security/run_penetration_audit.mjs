@@ -373,6 +373,7 @@ async function quizFailsClosed() {
     getClient: () => null
   };
   global.localStorage.setItem("baQaMockSession", JSON.stringify({ user: { id: "qa" } }));
+  loadScript("js/core/core.js");
   loadScript("js/pages/study/quiz-gate.js");
   const signedOut = await global.window.QuizGate.verify(10, 1, 1);
   if (calls.length !== 0) throw new Error("a signed-out visitor called the grading function");
@@ -424,6 +425,7 @@ async function authCapRedirectAndErrors() {
       };
     }
   };
+  loadScript("js/core/core.js");
   loadScript("js/core/auth.js");
   const visible = shown.join(" ");
   if (/eyJ|secret@example\.com|evil\.example/i.test(visible)) throw new Error("the sign-in error showed the raw callback");
@@ -504,6 +506,9 @@ function storedXssAndCsv() {
   const grid = { innerHTML: "", querySelectorAll() { return []; } };
   global.document.getElementById = (id) => (id === "insights-grid" ? grid : null);
   global.window.document = global.document;
+  loadScript("js/core/core.js");
+  loadScript("js/pages/dashboard/dashboard-format.js");
+  loadScript("js/pages/dashboard/dashboard-data.js");
   loadScript("js/pages/dashboard/dashboard.js");
   const stamp = new Date().toISOString();
   global.window.InsightsDashboard.setCache({

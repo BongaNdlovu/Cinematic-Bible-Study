@@ -13,9 +13,16 @@ function check(name, ok, detail) {
 
 const browser = await chromium.launch({ headless: true, args: ['--autoplay-policy=no-user-gesture-required'] });
 
-async function open(sheet, { view = 'book', viewport = { width: 1440, height: 900 } } = {}) {
+async function open(sheet, { view = 'book', viewport = { width: 1440, height: 900 }, strip = '' } = {}) {
   const context = await browser.newContext({ viewport });
   await context.addInitScript(signedInScript({ bookView: view }));
+  if (strip) {
+    await context.route('**/study.html*', async (route) => {
+      const response = await route.fetch();
+      const body = (await response.text()).replace(strip, '');
+      await route.fulfill({ response, body });
+    });
+  }
   const page = await context.newPage();
   const errors = [];
   page.on('pageerror', (e) => errors.push(String(e && e.message ? e.message : e)));
@@ -158,6 +165,18 @@ for (let sheet = 0; sheet <= 10; sheet += 1) {
   const { context, page } = await open(0);
   const old = await page.evaluate(() => !!document.getElementById('progress-bar'));
   check('the old course-position bar is gone', !old);
+  await context.close();
+}
+
+{
+  const strip = '<span class="read-meter-fill"></span>';
+  const { context, page, errors } = await open(0, { strip });
+  const state = await page.evaluate(() => ({
+    fill: !!document.querySelector('#read-meter .read-meter-fill'),
+    meter: !!document.getElementById('read-meter'),
+  }));
+  await scrollTo(page, 0.5);
+  check('a meter missing one of its parts stays still and raises no page errors', state.meter && !state.fill && errors.length === 0, { state, errors: errors.slice(0, 3) });
   await context.close();
 }
 

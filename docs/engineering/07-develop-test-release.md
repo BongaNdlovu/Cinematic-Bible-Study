@@ -50,7 +50,7 @@ The server binds `127.0.0.1`. It starts at port 8000, or at `PORT` if that is se
 | Unit | `tests/unit/`: middleware, rate gate, Sentry config, MFA card, report pages, and the 12 November audit fixes | Yes |
 | Regression | `tools/verify/` (headers, CSP, insights, rate limits, both syncs, quiz integrity, reviews, desk, certificates, task flow, map help, moderator UI, report pages, hashing, CSS minify, page deny list, image budgets, load) | Yes |
 | Browser | `tools/verify/run_browser_checks.mjs`: mind map, story reader, flows, map, globe, horizon, theme, mobile layout, the reading-progress meter and others (31 checks) | Yes, as its own job, `test-browser` |
-| Security | `tools/security/run_penetration_audit.mjs` | No. Run it before security-related changes. |
+| Security | `tools/security/run_penetration_audit.mjs` | No. Run it before security-related changes. Because CI does not run it, PT-09, PT-10 and PT-13 failed unnoticed until 18 November 2026 (see the changelog). |
 | Live smoke | `tools/smoke.mjs` | After every deploy, and every 15 minutes |
 | Production walkthrough | `qa-e2e/production-audit.mjs` (see the root `README.md`) | No |
 

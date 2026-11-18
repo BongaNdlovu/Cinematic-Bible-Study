@@ -1,6 +1,6 @@
 # 4. Security
 
-**Last verified:** 18 November 2026 (Supabase Auth settings under Sign-in and roles), 16 November 2026 (Privacy and consent section, account deletion and device storage, and the helper notes under Sign-in and roles), 15 November 2026 (Sign-in and roles section). The live database facts below come from read-only queries run on 12 November 2026. Everything else comes from the repository.
+**Last verified:** 18 November 2026 (Supabase Auth settings under Sign-in and roles, and the Security tests table), 16 November 2026 (Privacy and consent section, account deletion and device storage, and the helper notes under Sign-in and roles), 15 November 2026 (Sign-in and roles section). The live database facts below come from read-only queries run on 12 November 2026. Everything else comes from the repository.
 
 ## The model in one paragraph
 
@@ -204,7 +204,7 @@ Function permissions checked live: guests (`anon`) **can** call `exhibit_public_
 
 | Command | What it proves |
 |---|---|
-| `npm run test:security` | 23 attack-style checks (penetration audit) against the code, mocked services and the live database. PT-19 and PT-20 prove guest writes without a human pass are refused; PT-23 proves a pass cannot be granted without the edge key |
+| `npm run test:security` | 23 attack-style checks (penetration audit) against the code, mocked services and the live database. PT-19 and PT-20 prove guest writes without a human pass are refused; PT-23 proves a pass cannot be granted without the edge key. Each check loads the browser files it tests in Node, so it must also load the files they read at start-up: `js/core/core.js` (`window.SiteCore`) for PT-09, PT-10 and PT-13, and `dashboard-format.js` and `dashboard-data.js` for PT-13. Until 18 November 2026 those loads were missing, and the three checks failed before testing anything. |
 | `tests/unit/human-pass.test.mjs` | 17 tests: the edge route, the SQL rules, the browser module, and that guest writes wait for a pass |
 | `npm test` | Includes CSP hashes and policy, private-path routing, rate limiting, quiz integrity and the desk privacy checks |
 | `node tools/smoke.mjs` | The live headers, the private paths, the `/__rate` refusal, and one public database read (the keep-alive) |

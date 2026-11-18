@@ -16,6 +16,8 @@ const labelText = meter && meter.querySelector('.read-meter-label');
 
 const player = document.getElementById('lesson-audio-player');
 
+const hasMeter = !!(meter && fill && pctText && labelText);
+
 let readLabel = '';
 
 let frame = 0;
@@ -96,7 +98,7 @@ function paint() {
 }
 
 export function queueReadMeter() {
-  if (!meter || frame) return;
+  if (!hasMeter || frame) return;
   frame = requestAnimationFrame(paint);
 }
 
@@ -111,7 +113,7 @@ export function setReadMeterTime(readTime) {
 }
 
 function wire() {
-  if (!meter || !fill || !pctText || !labelText) return;
+  if (!hasMeter) return;
   window.addEventListener('scroll', queueReadMeter, { passive: true });
   window.addEventListener('resize', queueReadMeter);
   PAGE_EVENTS.forEach((name) => document.addEventListener(name, queueTasks));
