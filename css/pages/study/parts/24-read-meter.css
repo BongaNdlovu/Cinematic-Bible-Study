@@ -1,0 +1,59 @@
+.read-meter {
+  margin-left: auto;
+  display: grid;
+  gap: 0.3rem;
+  justify-items: start;
+  line-height: 1;
+  color: inherit;
+}
+.read-meter-row {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+.read-meter-track {
+  position: relative;
+  width: 8rem;
+  height: 0.7rem;
+  overflow: hidden;
+}
+.read-meter-track::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(currentColor 0.7px, transparent 0.9px);
+  background-size: 3px 3px;
+  opacity: 0.45;
+}
+.read-meter-fill {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(180deg, currentColor 0 2px, transparent 2px 3px);
+  transform: scaleX(0);
+  transform-origin: left center;
+}
+.read-meter.is-listening .read-meter-fill {
+  transition: transform 0.3s linear;
+}
+.read-meter-pct {
+  min-width: 4ch;
+  font-variant-numeric: tabular-nums;
+}
+.read-meter-label {
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  opacity: 0.75;
+}
+@media (max-width: 640px) {
+  .read-meter {
+    flex: 1 1 100%;
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+  }
+  .read-meter-row { flex: 1 1 auto; }
+  .read-meter-track { flex: 1 1 auto; width: auto; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .read-meter.is-listening .read-meter-fill { transition: none; }
+}

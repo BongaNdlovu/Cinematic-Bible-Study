@@ -70,6 +70,7 @@
   <link rel="stylesheet" href="css/features/insight-card.css">
   <link rel="stylesheet" href="css/pages/study/parts/22-celebrate.css">
   <link rel="stylesheet" href="css/pages/study/parts/23-term-page.css">
+  <link rel="stylesheet" href="css/pages/study/parts/24-read-meter.css">
   <script src="js/core/consent.js"></script>
 </head>
 
@@ -141,10 +142,6 @@
         <button type="button" id="certificate-cancel" class="px-4 py-2.5 rounded border border-amber-600/40 text-amber-200 font-sans text-sm">Cancel</button>
       </div>
     </div>
-  </div>
-
-  <div class="fixed top-0 left-0 right-0 z-50 h-1 bg-paper-200 dark:bg-paper-900">
-    <div id="progress-bar" class="h-full bg-ink-900 dark:bg-paper-100 w-0 transition-all duration-300"></div>
   </div>
 
   <header class="study-topbar sticky top-0 z-40 bg-paper-50/95 dark:bg-paper-950/95 backdrop-blur-md border-b border-paper-200 dark:border-paper-900">
@@ -374,6 +371,10 @@
       <span id="spine-year">605 BC</span>
       <span aria-hidden="true">&bull;</span>
       <span id="spine-competency" class="text-amber-700 dark:text-amber-400 font-semibold">Verifying the Prophetic Year-Day Metric</span>
+      <div id="read-meter" class="read-meter" role="progressbar" aria-label="Progress through this sitting" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+        <span class="read-meter-row" aria-hidden="true"><span class="read-meter-track"><span class="read-meter-fill"></span></span><span class="read-meter-pct">0%</span></span>
+        <span class="read-meter-label" aria-hidden="true"></span>
+      </div>
     </div>
     <div class="sitting-layout">
   <main class="sitting-main relative z-10 py-6 sm:py-10">

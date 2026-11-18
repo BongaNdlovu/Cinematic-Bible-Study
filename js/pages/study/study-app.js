@@ -22,6 +22,7 @@ import { rememberSheetUrl, writeScrollPlace } from '/js/pages/study/scroll-place
 import { bookOpened, mountSheetBook, placeReader, scrollHold } from '/js/pages/study/sheet-book.js';
 import { closeArtifactModal, closeInfographic, openArtifactModal, openInfographic, renderSheetInstruments } from '/js/pages/study/instruments.js';
 import { journeyState, spineEmpireForSheet, updateSpine } from '/js/pages/study/spine.js';
+import { setReadMeterTime } from '/js/pages/study/read-meter.js';
 import { loadStudyModule, openCertificateIfReady, studyModuleFailed, syncCertificateCta } from '/js/pages/study/study-modules.js';
 
     // Sequential sittings: access is owned by BAJourney.canAccessSheet.
@@ -587,8 +588,7 @@ import { loadStudyModule, openCertificateIfReady, studyModuleFailed, syncCertifi
       const epochIndex = sheetToTimelineMap[index] !== undefined ? sheetToTimelineMap[index] : 0;
       if (!fromEpoch) setEpochInfo(epochIndex, { fromSheet: true });
 
-      const overallProgress = ((index + 1) / sheetsData.length) * 100;
-      document.getElementById('progress-bar').style.width = `${overallProgress}%`;
+      setReadMeterTime(data.readTime);
 
       document.getElementById('sheet-epoch-tag').innerHTML = data.epoch;
       document.getElementById('sheet-read-time').innerText = data.readTime;

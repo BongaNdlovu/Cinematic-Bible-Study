@@ -180,10 +180,6 @@
     html.dfx-open:not(.story-read-open) body { overflow: hidden; }
     body:has(.chain.is-full) .insight-card,
     body:has(.chain.is-full) .audio-orb { display: none !important; }
-    /* The fixed scroll-progress bar would draw across the plate, and it tracks
-       a frozen scroll position, so it is hidden. It has no id, so its utility
-       classes are matched. */
-    body:has(.chain.is-full) > div.fixed.top-0.h-1 { display: none !important; }
     /* A figure beside this one keeps its Replay control, which would sit over the
        layer; the control belongs to the column, so it is hidden with it. */
     body:has(.chain.is-full) [data-chain-replay] { visibility: hidden; }
