@@ -55,7 +55,7 @@ New checks: `tests/unit/audit-fixes-2026-11-19.test.mjs` (9 tests), one more tes
 
 **Tested:** `npx oxlint` exit 0. `npm run test:unit` 198 of 198. `npm test` exit 0. `npm run test:browser` 32 of 32. Mutation tests: with each fixed file put back to master, its own test failed (for all 9 files covered by unit tests, and 8 of the 13 browser checks; the quiz check reproduced the original `Cannot set properties of null (setting 'disabled')`). Not covered by an automated test: B-02, B-10, B-13 and B-36. Their code paths were read but not run.
 
-**Status:** committed on branch `fix/audit-confirmed-bugs`.
+**Status:** merged to master in PR #43.
 
 ## 2026-11-18 — Secret exposure check recorded
 
