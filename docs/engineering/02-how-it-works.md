@@ -1,6 +1,6 @@
 # 2. How it works
 
-**Last verified:** 15 November 2026
+**Last verified:** 19 November 2026 (How syncing works, the Certificates row), 15 November 2026
 
 This chapter follows a visitor through the system: a request reaching the site, a page starting up, and the data being saved.
 
@@ -104,7 +104,9 @@ How syncing works:
 - **On a change**, a push waits briefly (6 seconds after the last one), then sends. If it fails, the change is kept in an outbox (`baProgressOutbox`, `baStudySyncOutbox`) and retried with growing waits.
 - **Failed pulls** of notes are retried up to 8 times (5 s, 15 s, 30 s, then every 60 s). Reconnecting or signing in starts the retries again.
 - **Progress conflicts**: each save carries the revision it was based on. If the cloud has moved on, the server returns the newer row. The client merges the two and saves again.
-- **Account switch on one device**: the previous account's unsent changes are put aside under `baProgressStash:<account>` and `baStudySyncStash:<account>`, and the device is cleared for the new account. When the original owner signs in again, the put-aside changes are merged back and saved to their account (added 12 November 2026).
+- **Account switch on one device**: the previous account's unsent changes are put aside under `baProgressStash:<account>` and `baStudySyncStash:<account>`, and the device is cleared for the new account. When the original owner signs in again, the put-aside changes are merged back and saved to their account (added 12 November 2026). Since 19 November 2026 the new account's map unlocks and intro flags also come from its cloud row, and writing them pushes nothing back over that row.
+- **A notes push** reads the cloud row first, then merges the device copy as it is when the read returns, so a note typed during the read is kept and uploaded. If the signed-in account changed during the read, the push stops and writes nothing (since 19 November 2026).
+- **Signing out while a pull is running**: both syncs put the unsent change in their outbox instead of dropping it, so the sign-out warning still sees it (since 19 November 2026).
 
 ## 7. Analytics, surveys and error reports
 
@@ -124,7 +126,7 @@ Consent is stored in `sodConsent` (`js/core/consent.js`). If a visitor has not c
 |---|---|---|
 | Readers' notes (reviews) with moderation | `js/features/reviews.js` | `exhibit_reviews`, `exhibit_public_reviews()` for public reading |
 | Message desk (operator notices, help notes, replies) | `js/features/desk.js` | `exhibit_notices`, `exhibit_notice_receipts`, `exhibit_help_notes`, `exhibit_help_replies` |
-| Certificates | `js/pages/study/certificate.js` (loaded on demand from `study.html`) | `exhibit_certificates`, `issue_exhibit_certificate()` |
+| Certificates | `js/pages/study/certificate.js` (loaded on demand from `study.html`). If the number is refused because the last save has not reached the server, it sends pending saves at once (`ProgressSync.flushNow()`) and asks again. Closing the panel while it waits downloads nothing (since 19 November 2026) | `exhibit_certificates`, `issue_exhibit_certificate()` |
 | Account deletion | `js/pages/account/account.js` | `exhibit_delete_my_account()` |
 | Insights dashboard and printable report | `js/pages/dashboard/dashboard.js`, `js/pages/dashboard/sid-report.js` | Moderator-only read policies on events, surveys and profiles; `exhibit_graduates()`; `exhibit_participation(from, to)` for the project target |
 

@@ -100,7 +100,8 @@ export async function loadGLBAsset(key, onLoaded) {
   ];
 
   function markLoadFailure() {
-    if (key === 'assembled' || key === 'head') {
+    if (!loadProgress.heroAssetCounted) {
+      loadProgress.heroAssetCounted = true;
       loadProgress.failed = true;
       loadProgress.loadedCount++;
       loadProgress.label = 'Hero model failed to load';

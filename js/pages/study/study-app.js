@@ -1003,7 +1003,16 @@ import { loadStudyModule, openCertificateIfReady, studyModuleFailed, syncCertifi
         });
       }
 
-      loadSheet(resolveStartSheet(), { restorePlace: true });
+      let bootSheet = null;
+      const bootStudy = () => {
+        if (bootSheet !== null) return;
+        bootSheet = resolveStartSheet();
+        loadSheet(bootSheet, { restorePlace: true });
+      };
+      const authWaits = !!(window.ScrollAuth && typeof window.ScrollAuth.ready === 'function') &&
+        !(typeof window.ScrollAuth.getUser === 'function' && window.ScrollAuth.getUser());
+      if (authWaits) window.ScrollAuth.ready().then(bootStudy, bootStudy);
+      else bootStudy();
       let scrollSaveTimer = null;
       window.addEventListener('scroll', () => {
         if (scrollHold) return;
@@ -1150,6 +1159,9 @@ import { loadStudyModule, openCertificateIfReady, studyModuleFailed, syncCertifi
         renderToc();
         syncHorizonLocks();
         updateNextGate();
+        if (bootSheet === null) return;
+        if (bootSheet >= 0 && currentSheetIndex !== bootSheet) return;
+        bootSheet = -1;
         const wanted = resolveStartSheet();
         if (wanted !== currentSheetIndex && canAccessSheet(wanted)) loadSheet(wanted);
       }

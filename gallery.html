@@ -560,8 +560,8 @@
     } catch (err) {
       allowed = false;
     }
-    clearTimeout(holdTimer);
     if (allowed) {
+      clearTimeout(holdTimer);
       document.documentElement.classList.remove("member-hold");
       /* If the watchdog already showed its "slow" banner, retire it now. */
       if (window.SiteErrors && typeof window.SiteErrors.current === "function" &&
