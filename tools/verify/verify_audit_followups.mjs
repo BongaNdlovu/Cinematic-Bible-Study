@@ -561,35 +561,6 @@ if (typeof ${classId} !== 'undefined' && ${classId}.prototype && ${classId}.prot
 
 {
   await relaunch();
-  const context = await browser.newContext({ viewport: { width: 1440, height: 900 } });
-  await context.addInitScript(signedInScript());
-  const page = await context.newPage();
-  await page.goto(`${BASE}/gallery.html`, { waitUntil: 'load', timeout: 60000 });
-  await dismissConsent(page);
-  await page.waitForFunction(() => !!document.querySelector('.artifact-card-item.active'), null, { timeout: 60000 });
-  const title = await page.evaluate(() => document.getElementById('hero-main-title').textContent);
-  const labClosed = () => page.evaluate(() => !document.getElementById('study-lab-drawer').classList.contains('open'));
-  await page.keyboard.press('Control+f');
-  await page.keyboard.press('Control+l');
-  await page.keyboard.press('Meta+1');
-  await page.keyboard.press('Alt+ArrowRight');
-  await page.waitForTimeout(400);
-  const untouched = await page.evaluate((t) => ({
-    searchFocused: document.activeElement === document.getElementById('search-input'),
-    lab: document.getElementById('study-lab-drawer').classList.contains('open'),
-    title: document.getElementById('hero-main-title').textContent
-  }), title);
-  check('gallery: Ctrl+F, Ctrl+L, Meta+1 and Alt+ArrowRight are left to the browser', !untouched.searchFocused && !untouched.lab && untouched.title === title, untouched);
-  await page.keyboard.press('/');
-  await page.waitForTimeout(200);
-  const slash = await page.evaluate(() => document.activeElement === document.getElementById('search-input'));
-  check('gallery: the bare / shortcut still focuses search, proving the guard is not a blanket', slash, { slash });
-  check('the lab drawer stays closed through the shortcut run', await labClosed(), null);
-  await context.close();
-}
-
-{
-  await relaunch();
   const context = await browser.newContext({ viewport: { width: 1440, height: 900 }, reducedMotion: 'reduce' });
   await context.addInitScript(signedInScript());
   const lionRequests = [];
@@ -597,12 +568,19 @@ if (typeof ${classId} !== 'undefined' && ${classId}.prototype && ${classId}.prot
   let releaseLion = null;
   const lionInFlight = new Promise((res) => { markInFlight = res; });
   const lionGate = new Promise((res) => { releaseLion = res; });
-  const page = await context.newPage();
-  const errors = [];
-  page.on('pageerror', (e) => errors.push(String(e.message || e)));
-  page.on('request', (req) => {
-    const p = new URL(req.url()).pathname;
-    if (/\/models\/lion.*\.glb$/.test(p)) lionRequests.push(p);
+  await context.route(/\/vendor\/three\/examples\/jsm\/environments\/RoomEnvironment\.js/, async (route) => {
+    const res = await route.fetch();
+    const body = (await res.text()) + `;
+      const _envDispose = RoomEnvironment.prototype.dispose;
+      RoomEnvironment.prototype.dispose = function () { window.__envDisposes = (window.__envDisposes || 0) + 1; return _envDispose.call(this); };`;
+    await route.fulfill({ response: res, body, headers: Object.assign({}, res.headers(), { 'content-length': String(Buffer.byteLength(body)) }) });
+  });
+  await context.route(/\/vendor\/three\/build\/three\.module(\.[a-f0-9]{12})?\.min\.js/, async (route) => {
+    const res = await route.fetch();
+    const src = await res.text();
+    const alias = /([A-Za-z_$][A-Za-z0-9_$]*)\s+as\s+PMREMGenerator\b/.exec(src);
+    const body = src + (alias ? THREE_DISPOSE_SPY(alias[1]) : '');
+    await route.fulfill({ response: res, body, headers: Object.assign({}, res.headers(), { 'content-length': String(Buffer.byteLength(body)) }) });
   });
   await context.route(/\/vendor\/three\/examples\/jsm\/loaders\/GLTFLoader\.js/, async (route) => {
     const res = await route.fetch();
@@ -619,9 +597,47 @@ if (typeof ${classId} !== 'undefined' && ${classId}.prototype && ${classId}.prot
     await lionGate;
     await route.continue();
   });
+  const page = await context.newPage();
+  const errors = [];
+  page.on('pageerror', (e) => errors.push(String(e.message || e)));
+  page.on('request', (req) => {
+    const p = new URL(req.url()).pathname;
+    if (/\/models\/lion.*\.glb$/.test(p)) lionRequests.push(p);
+  });
   await page.goto(`${BASE}/gallery.html`, { waitUntil: 'load', timeout: 60000 });
   await dismissConsent(page);
-  await page.waitForFunction(() => !!document.querySelector('.artifact-card-item.active'), null, { timeout: 60000 });
+  await page.waitForFunction(() => {
+    const el = document.getElementById('hero-main-title');
+    return !!(window.__galleryCamera && el && el.textContent && el.textContent.trim() !== 'COMPLETE COLOSSUS');
+  }, null, { timeout: 60000 });
+
+  await page.waitForFunction(() => (window.__envDisposes || 0) >= 1 && (window.__pmremDisposes || 0) >= 1, null, { timeout: 60000 }).catch(() => {});
+  const disp = await page.evaluate(() => ({ env: window.__envDisposes || 0, pmrem: window.__pmremDisposes || 0 }));
+  check('B-18: the environment map and PMREM generator are disposed at startup', disp.env >= 1 && disp.pmrem >= 1, { ...disp, errors: errors.slice(0, 2) });
+
+  const title = await page.evaluate(() => document.getElementById('hero-main-title').textContent);
+  const labClosed = () => page.evaluate(() => !document.getElementById('study-lab-drawer').classList.contains('open'));
+  await page.keyboard.press('Control+f');
+  await page.keyboard.press('Control+l');
+  await page.keyboard.press('Meta+1');
+  await page.keyboard.press('Alt+ArrowRight');
+  await page.waitForTimeout(400);
+  const untouched = await page.evaluate(() => ({
+    searchFocused: document.activeElement === document.getElementById('search-input'),
+    lab: document.getElementById('study-lab-drawer').classList.contains('open'),
+    title: document.getElementById('hero-main-title').textContent
+  }));
+  check('gallery: Ctrl+F, Ctrl+L, Meta+1 and Alt+ArrowRight are left to the browser', !untouched.searchFocused && !untouched.lab && untouched.title === title, { ...untouched, expected: title });
+  await page.keyboard.press('/');
+  await page.waitForTimeout(200);
+  const slash = await page.evaluate(() => {
+    const ok = document.activeElement === document.getElementById('search-input');
+    if (document.activeElement && document.activeElement.blur) document.activeElement.blur();
+    return ok;
+  });
+  check('gallery: the bare / shortcut still focuses search, proving the guard is not a blanket', slash, { slash });
+  check('the lab drawer stays closed through the shortcut run', await labClosed(), null);
+
   await page.waitForSelector('.artifact-card-item[data-asset="lion"]', { timeout: 15000 });
   const lionDone = page.waitForResponse((res) => /\/models\/lion.*\.glb$/.test(new URL(res.url()).pathname), { timeout: 30000 });
   await page.click('.artifact-card-item[data-asset="lion"]');
@@ -643,41 +659,15 @@ if (typeof ${classId} !== 'undefined' && ${classId}.prototype && ${classId}.prot
 
 {
   await relaunch();
-  const context = await browser.newContext({ viewport: { width: 1440, height: 900 } });
-  await context.addInitScript(signedInScript());
-  await context.route(/\/vendor\/three\/examples\/jsm\/environments\/RoomEnvironment\.js/, async (route) => {
-    const res = await route.fetch();
-    const body = (await res.text()) + `;
-      const _envDispose = RoomEnvironment.prototype.dispose;
-      RoomEnvironment.prototype.dispose = function () { window.__envDisposes = (window.__envDisposes || 0) + 1; return _envDispose.call(this); };`;
-    await route.fulfill({ response: res, body, headers: Object.assign({}, res.headers(), { 'content-length': String(Buffer.byteLength(body)) }) });
-  });
-  await context.route(/\/vendor\/three\/build\/three\.module(\.[a-f0-9]{12})?\.min\.js/, async (route) => {
-    const res = await route.fetch();
-    const src = await res.text();
-    const alias = /([A-Za-z_$][A-Za-z0-9_$]*)\s+as\s+PMREMGenerator\b/.exec(src);
-    const body = src + (alias ? THREE_DISPOSE_SPY(alias[1]) : '');
-    await route.fulfill({ response: res, body, headers: Object.assign({}, res.headers(), { 'content-length': String(Buffer.byteLength(body)) }) });
-  });
-  const page = await context.newPage();
-  const errors = [];
-  page.on('pageerror', (e) => errors.push(String(e.message || e)));
-  await page.goto(`${BASE}/gallery.html`, { waitUntil: 'load', timeout: 60000 });
-  await dismissConsent(page);
-  await page.waitForFunction(() => (window.__envDisposes || 0) >= 1 && (window.__pmremDisposes || 0) >= 1, null, { timeout: 60000 }).catch(() => {});
-  const r = await page.evaluate(() => ({ env: window.__envDisposes || 0, pmrem: window.__pmremDisposes || 0 }));
-  check('B-18: the environment map and PMREM generator are disposed at startup', r.env >= 1 && r.pmrem >= 1, { ...r, errors: errors.slice(0, 2) });
-  await context.close();
-}
-
-{
-  await relaunch();
   const context = await browser.newContext({ viewport: { width: 390, height: 844 }, hasTouch: true });
   await context.addInitScript(signedInScript());
   const page = await context.newPage();
   await page.goto(`${BASE}/gallery.html`, { waitUntil: 'load', timeout: 60000 });
   await dismissConsent(page);
-  await page.waitForFunction(() => !!document.querySelector('.artifact-card-item.active') && !!document.querySelector('canvas'), null, { timeout: 60000 });
+  await page.waitForFunction(() => {
+    const el = document.getElementById('hero-main-title');
+    return !!(window.__galleryCamera && document.querySelector('canvas') && el && el.textContent && el.textContent.trim() !== 'COMPLETE COLOSSUS');
+  }, null, { timeout: 60000 });
   const title = await page.evaluate(() => document.getElementById('hero-main-title').textContent);
   const taps = await page.evaluate(async () => {
     const canvas = document.querySelector('canvas');
@@ -702,21 +692,23 @@ if (typeof ${classId} !== 'undefined' && ${classId}.prototype && ${classId}.prot
 
 {
   await relaunch();
-  const context = await browser.newContext({ viewport: { width: 1440, height: 900 } });
+  const context = await browser.newContext({ viewport: { width: 1440, height: 900 }, reducedMotion: 'reduce' });
   const page = await context.newPage();
   const errors = [];
   page.on('pageerror', (e) => errors.push(String(e.message || e)));
   await page.goto(`${BASE}/index.html`, { waitUntil: 'load', timeout: 60000 });
   await dismissConsent(page);
   await page.waitForFunction(() => window.__shelf && window.__shelf.books && window.__shelf.books.length === 11, null, { timeout: 90000 });
-  await page.waitForTimeout(1500);
   const p05 = await page.evaluate(() => {
     const b = window.__shelf.books[0];
     return { orm: !!b.spineMat.roughnessMap, same: b.spineMat.roughnessMap === b.spineMat.metalnessMap };
   });
   check('P-05: the shelf spine uses one shared ORM texture for roughness and metalness', p05.orm && p05.same, p05);
 
-  await page.evaluate(() => window.__shelf.api.pull(0));
+  await page.evaluate(() => {
+    window.__shelf.api.pull(0);
+    window.__shelf.advance(1);
+  });
   await page.waitForFunction(() => !!window.__shelf.books[0].hi, null, { timeout: 30000 });
   const locked = await page.evaluate(() => {
     const b = window.__shelf.books[0];
@@ -772,18 +764,7 @@ if (typeof ${classId} !== 'undefined' && ${classId}.prototype && ${classId}.prot
   });
   check('B-23: a right-click never pulls a volume', pulls.wasOpen === pulls.rightClick, pulls);
   check('B-23: a two-finger touch without a drag never pulls a volume', pulls.wasOpen === pulls.pinch, pulls);
-  check('the shelf run raises no page errors', errors.length === 0, errors.slice(0, 3));
-  await context.close();
-}
 
-{
-  await relaunch();
-  const context = await browser.newContext({ viewport: { width: 1440, height: 900 }, reducedMotion: 'reduce' });
-  const page = await context.newPage();
-  await page.goto(`${BASE}/index.html`, { waitUntil: 'load', timeout: 60000 });
-  await dismissConsent(page);
-  await page.waitForFunction(() => window.__shelf && window.__shelf.books && window.__shelf.books.length === 11, null, { timeout: 90000 });
-  await page.waitForTimeout(2200);
   await page.evaluate(() => window.__shelf.advance(2));
   await page.waitForFunction(() => window.__shelf.state().rafId === 0, null, { timeout: 90000 });
   await page.evaluate(() => {
@@ -796,6 +777,7 @@ if (typeof ${classId} !== 'undefined' && ${classId}.prototype && ${classId}.prot
   await page.waitForTimeout(800);
   const renders = await page.evaluate(() => window.__renders);
   check('B-23: a viewport resize while the reduced-motion shelf is idle redraws once', renders >= 1, { renders });
+  check('the shelf run raises no page errors', errors.length === 0, errors.slice(0, 3));
   await context.close();
 }
 
