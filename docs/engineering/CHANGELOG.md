@@ -22,9 +22,9 @@ Entry template:
 
 **Handbook updated:** 03, 05, 07.
 
-**Tested so far:** `npx oxlint` exit 0; `npm run test:unit` 207 of 207; the browser suite 34 of 34 on a staged copy with merged stylesheets; `verify_audit_group3.mjs` 5 of 5 on that copy, and its main check failed with the old files. Not run yet: `npm test` and the full 35-check browser suite on this branch after merging master.
+**Tested so far:** `npx oxlint` exit 0; `npm run test:unit` 207 of 207; the browser suite 34 of 34 on a staged copy with merged stylesheets; `verify_audit_group3.mjs` 5 of 5 on that copy, and its main check failed with the old files. After merging master into the branch: `npm test` exit 0 and `npm run test:browser` 35 of 35.
 
-**Status:** committed on branch `perf/audit-group3`, not merged or deployed.
+**Status:** merged to master in PR #46.
 
 ## 2026-11-19 — Audit group 2: broken behaviour
 
