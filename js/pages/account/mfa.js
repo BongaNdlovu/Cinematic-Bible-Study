@@ -205,11 +205,12 @@
     const start = node("account-mfa-start");
     if (form) form.addEventListener("submit", onSubmit);
     if (start) start.addEventListener("click", onStart);
-    if (window.ScrollAuth && typeof window.ScrollAuth.onChange === "function") {
-      window.ScrollAuth.onChange(refresh);
-    }
+    const follow = function () {
+      refresh();
+      if (window.ScrollAuth && typeof window.ScrollAuth.onChange === "function") window.ScrollAuth.onChange(refresh);
+    };
     if (window.ScrollAuth && typeof window.ScrollAuth.ready === "function") {
-      window.ScrollAuth.ready().then(refresh, refresh);
+      window.ScrollAuth.ready().then(follow, follow);
     }
   }
 

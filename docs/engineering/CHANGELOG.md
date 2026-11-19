@@ -14,6 +14,18 @@ Entry template:
 
 ---
 
+## 2026-11-19 — Audit group 3: performance
+
+**Why:** the third follow-up group from the 19 November audit. The owner chose to merge stylesheets at deploy, which reverses the earlier "no build step" decision for CSS.
+
+**What changed:** see the table in `docs/engineering/05-performance.md` (stylesheet merging, Scripture and cue files loaded when needed, no map data on the study page, lazy horizon images, glossary linking in one walk, start-up queries once, book reader and mind-map observers, audio orb suspend, globe intro on slow links, two animations on `transform`). New files: `tools/merge-release-css.mjs` (run by `tools/deploy-cloudflare-pages.ps1` before minifying), `tests/unit/merge-release-css.test.mjs` (4 tests), `tools/verify/verify_audit_group3.mjs` (5 checks).
+
+**Handbook updated:** 03, 05, 07.
+
+**Tested so far:** `npx oxlint` exit 0; `npm run test:unit` 207 of 207; the browser suite 34 of 34 on a staged copy with merged stylesheets; `verify_audit_group3.mjs` 5 of 5 on that copy, and its main check failed with the old files. After merging master into the branch: `npm test` exit 0 and `npm run test:browser` 35 of 35.
+
+**Status:** merged to master in PR #46.
+
 ## 2026-11-19 — Audit group 2: broken behaviour
 
 **Why:** the second follow-up group from the 19 November audit. Each finding was checked before fixing. Findings that did not hold are not changed:

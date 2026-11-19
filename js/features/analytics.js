@@ -687,12 +687,10 @@
       maybeProfile(user);
       ensureOwnCode(user);
     }
-    if (window.ScrollAuth && typeof window.ScrollAuth.onChange === 'function') {
-      window.ScrollAuth.onChange(onUser);
-    }
     if (window.ScrollAuth && typeof window.ScrollAuth.ready === 'function') {
       window.ScrollAuth.ready().then(function () {
         onUser(window.ScrollAuth.getUser && window.ScrollAuth.getUser());
+        if (typeof window.ScrollAuth.onChange === 'function') window.ScrollAuth.onChange(onUser);
       });
     }
   }

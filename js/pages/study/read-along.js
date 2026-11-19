@@ -31,8 +31,17 @@ import { currentSheetIndex, netRequest } from '/js/pages/study/study-app.js';
       raf: 0,
       gen: 0,
 
+      pendingCues: null,
+
       load(src, sheetIndex) {
-        const gen = this.gen;
+        this.pendingCues = { src: src, sheetIndex: sheetIndex, gen: this.gen };
+      },
+
+      fetchPendingCues() {
+        const pending = this.pendingCues;
+        if (!pending || pending.gen !== this.gen) return;
+        this.pendingCues = null;
+        const { src, sheetIndex, gen } = pending;
         netRequest(src).then((r) => (r.ok ? r.json() : Promise.reject(new Error(String(r.status)))))
           .then((data) => {
             if (gen !== this.gen || currentSheetIndex !== sheetIndex || !Array.isArray(data.cues)) return;
@@ -75,6 +84,7 @@ import { currentSheetIndex, netRequest } from '/js/pages/study/study-app.js';
 
       teardown() {
         this.gen++;
+        this.pendingCues = null;
         this.clearMarks();
         this.cues = null;
         this.blocks = [];
@@ -200,6 +210,7 @@ import { currentSheetIndex, netRequest } from '/js/pages/study/study-app.js';
       },
 
       run() {
+        this.fetchPendingCues();
         const player = document.getElementById('lesson-audio-player');
         if (!player || this.raf) return;
         const step = () => {

@@ -1081,13 +1081,16 @@
     window.addEventListener("pageshow", function (event) {
       if (event.persisted) refresh();
     });
-    if (window.ScrollAuth && typeof window.ScrollAuth.onChange === "function") {
-      window.ScrollAuth.onChange(function () { refresh(); });
-    }
-    if (window.ScrollAuth && typeof window.ScrollAuth.ready === "function") {
-      window.ScrollAuth.ready().then(refresh, refresh);
-    } else {
+    const follow = function () {
       refresh();
+      if (window.ScrollAuth && typeof window.ScrollAuth.onChange === "function") {
+        window.ScrollAuth.onChange(function () { refresh(); });
+      }
+    };
+    if (window.ScrollAuth && typeof window.ScrollAuth.ready === "function") {
+      window.ScrollAuth.ready().then(follow, follow);
+    } else {
+      follow();
     }
   }
 

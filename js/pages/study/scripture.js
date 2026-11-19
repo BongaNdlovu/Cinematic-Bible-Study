@@ -381,12 +381,45 @@
     return strongsReady;
   }
 
+  let passagesReady = null;
+
+  function loadPassages() {
+    if (passagesReady) return passagesReady;
+    passagesReady = getJson("bible/sheet-passages.json").then((data) => {
+      sheets = data || {};
+      return sheets;
+    });
+    passagesReady.catch(() => { passagesReady = null; });
+    return passagesReady;
+  }
+
+  function panelShown() {
+    return !!(root && root.getClientRects().length);
+  }
+
+  let shownWatch = null;
+
+  function paintWhenShown() {
+    if (panelShown()) return ensureLoaded().then(paint);
+    if (!shownWatch && root && 'IntersectionObserver' in window) {
+      shownWatch = new IntersectionObserver((entries) => {
+        if (!entries.some((entry) => entry.isIntersecting)) return;
+        shownWatch.disconnect();
+        shownWatch = null;
+        ensureLoaded().then(paint);
+      });
+      shownWatch.observe(root);
+    }
+    if (!shownWatch) return ensureLoaded().then(paint);
+    return loadPassages();
+  }
+
   function ensureLoaded() {
     if (ready) return ready;
     ready = Promise.all([
       getJson("bible/kjv.json"),
       loadStrongs(),
-      getJson("bible/sheet-passages.json")
+      loadPassages()
     ]).then((bundle) => {
       books = (bundle[0] && bundle[0].books) || {};
       strongs = bundle[1] || {};
@@ -407,7 +440,7 @@
     storyMode = loadStoryPref();
     if (!root) return ensureLoaded();
     bindRoot();
-    return ensureLoaded().then(paint);
+    return paintWhenShown();
   }
 
   function showSheet(index) {
@@ -415,7 +448,7 @@
     currentSheet = Number.isNaN(next) ? 0 : next;
     openStrongId = "";
     if (!root) return ensureLoaded();
-    return ensureLoaded().then(paint);
+    return paintWhenShown();
   }
 
   function setStoryMode(on) {

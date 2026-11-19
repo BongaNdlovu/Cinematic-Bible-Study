@@ -672,7 +672,9 @@
       let seen = false;
       try { seen = sessionStorage.getItem(GLOBE_INTRO) === "1"; } catch (e) {}
       const fresh = ["year", "epoch", "id", "event", "sheet", "from", "view"].every((k) => !params.get(k));
-      const intro = !globeFailed && !want && fresh && !seen && !opts.skipOverture && !REDUCE;
+      const conn = navigator.connection || {};
+      const lowData = conn.saveData === true || /(^|-)(2g|3g)$/.test(String(conn.effectiveType || ""));
+      const intro = !globeFailed && !want && fresh && !seen && !opts.skipOverture && !REDUCE && !lowData;
       const ready = (want || intro) ? ensureGlobe().then((g) => (g ? g.ready : false)) : Promise.resolve(false);
       return { want: want, intro: intro, ready: ready };
     }
