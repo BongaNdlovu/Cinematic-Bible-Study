@@ -2469,11 +2469,16 @@ async function startRoom() {
       if (lockShade === b.lockTint) continue;
       b.spineMat.color.setScalar(lockShade);
       b.clothMat.color.multiplyScalar(lockShade / b.lockTint);
+      if (b.hi) {
+        b.hi.front.color.setScalar(lockShade);
+        b.hi.back.color.setScalar(lockShade);
+      }
       b.lockTint = lockShade;
     }
     noteInput();
   }
   api = { pull, put, step, setView: (v) => setView(v), focusStep, focused: () => focusIdx, syncAccess };
+  syncAccess();
   window.__shelf = { books, camera, scene, renderer, api, state: () => ({ running, stageInView, tabVisible, rafId, dpr: dprCur }), advance(sec) { for (let k = 0; k < sec * 60; k++) { update(1 / 60); pumpHi(); } render(); } };
 
   // Warm a few covers in the background
@@ -2522,12 +2527,14 @@ function watchForRefresh() {
       wasShown = shown;
     }).observe(body);
   }
-  const auth = window.ScrollAuth;
-  if (auth && typeof auth.ready === 'function') auth.ready().then(buildChrome, () => {});
-  if (auth && typeof auth.onChange === 'function') auth.onChange(() => {
+  const refreshAccess = () => {
     buildChrome();
     if (api) api.syncAccess();
-  });
+  };
+  const auth = window.ScrollAuth;
+  if (auth && typeof auth.ready === 'function') auth.ready().then(refreshAccess, () => {});
+  if (auth && typeof auth.onChange === 'function') auth.onChange(refreshAccess);
+  window.addEventListener('ba-progress-synced', refreshAccess);
 }
 
 const INVITE_AUTH_WAIT_MS = 4000;

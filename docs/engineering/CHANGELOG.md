@@ -14,6 +14,26 @@ Entry template:
 
 ---
 
+## 2026-11-19 — Audit follow-ups: lazy weather, Strong's scroll, shelf highlight re-tint, task-flow close flush, NPS filter, animation polish, and a regression suite for all of it
+
+**Why:** the 19 November audit follow-up pass confirmed four open gaps (P-09 weather running from page load, B-30 Strong's scroll reset, B-23 shelf highlight left out of the lock re-tint, B-25 close flush during the leave animation plus B-13 blank NPS answers) and two animation improvements (P-09 follow-up in Section 1), with no automated regression coverage for most of them.
+
+**What changed:**
+
+- **P-09** — the weather worker is no longer created on page load. `weatherShouldRun()` in `js/pages/study/focus-timer.js` gates the start on the Atmosphere drawer being open or the focus timer running; boot no longer calls `resizeWeatherCanvas()` and the `resize`/`visibilitychange` handlers in `js/pages/study/study-app.js` only start the weather through that gate. Pausing the timer with the drawer closed stops the weather. `tools/verify/verify_study_page_load.mjs` now asserts the lazy main-thread fallback instead of an eager load.
+- **B-30** — `paint(keepPlace)` in `js/pages/study/scripture.js` saves `.scripture-scroll.scrollTop` before rebuilding the panel and restores it after, so opening and closing a Strong's word card no longer jumps the scroll to the top.
+- **B-23** — `syncAccess()` in `js/pages/index/shelf.js` now re-tints each volume's highlighted front and back foils (`b.hi`) alongside the spine and cloth, runs once after `api` is constructed, and the refresh wires `auth.ready()`, `auth.onChange` and `ba-progress-synced` through one `refreshAccess`.
+- **B-25** — `js/pages/study/task-flow.js` tracks the pending close in `leaveTimer`; `closeNow()` (called from `loadSheet` in `study-app.js`) flushes a close that is mid-animation, so a sitting switch never leaves the dialog half-closed.
+- **B-13** — `js/pages/dashboard/dashboard.js` excludes whitespace-only strings and booleans from the NPS scores.
+- **Animation** — `lap-beckon` pauses offscreen via an `IntersectionObserver` in `js/pages/study/lesson-player.js` plus an `animation-play-state: paused` rule in `css/pages/study/study-audio.css`; `acct-pulse` moved from a `box-shadow` repaint on the link to a GPU-composited `opacity` crossfade on `.acct-vol.is-next::after` in `css/features/account.css`, with the `prefers-reduced-motion` selector fixed to also cover it.
+- **Tests** — new `tests/unit/audit-coverage-2026-11-19.test.mjs` (7 vm-sandbox unit tests: sign-out flag, B-10, B-02, B-13, B-36, B-32 scale math, B-18 `keepHallTex`) and new `tools/verify/verify_audit_followups.mjs` (48 browser assertions over 5 page groups: study, account, map, gallery, shelf), wired into `run_browser_checks.mjs` with a 6-minute budget.
+
+**Checked here (mutation gate):** reverting each fix makes its new check fail — the sign-out flag and B-10/B-02/B-13/B-36/B-32/B-18 mutations each fail their unit test; the B-30, B-27, B-17 (`loadingGlb`), B-19, and B-23 (`b.hi`) reverts fail their browser checks (B-30 shows `afterOpen: 0`, B-27 exits the fullscreen mind map under `#infographic-modal`, B-17 triggers 2 `GLTFLoader.load` calls, B-19 switches exhibits on portrait tap, B-23 leaves `hiFront: 0.62`); removing the `weatherShouldRun()` gate crashes the browser suite. With the fixes restored: lint clean, 214 of 214 unit tests, `npm test` exit 0, and all 48 follow-up assertions pass via `run_browser_checks.mjs`.
+
+**Handbook updated:** 05, 06, 07.
+
+**Status:** not yet deployed.
+
 ## 2026-11-19 — Live first-paint check after merging stylesheets
 
 **Why:** the local test of audit group 3 showed a slower first paint with merged stylesheets, possibly because Chrome's throttling applies to each request separately. The live site is the fair test.

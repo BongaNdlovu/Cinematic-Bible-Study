@@ -298,8 +298,13 @@ for (let sheet = 0; sheet <= 10; sheet += 1) {
     },
     settle: 2500
   });
+  const before = await page.evaluate(() => ({ api: !!window.WeatherScene, requested: false }));
+  before.requested = requests.some((u) => u.includes('js/pages/study/weather-scene.js'));
+  check('weather stays unloaded before the Atmosphere drawer opens', !before.api && !before.requested, before);
+  await page.click('[data-action="atmosphere"]');
+  await page.waitForFunction(() => !!window.WeatherScene, null, { timeout: 10000 });
   const scene = await page.evaluate(() => ({ api: !!window.WeatherScene, weather: document.body.dataset.weather || '' }));
-  check('without OffscreenCanvas the weather scene loads on the main thread', scene.api && requests.some((u) => u.includes('js/pages/study/weather-scene.js')), scene);
+  check('without OffscreenCanvas the weather scene loads on the main thread when opened', scene.api && requests.some((u) => u.includes('js/pages/study/weather-scene.js')), scene);
   check('the main-thread weather fallback raises no errors', errors.length === 0, errors.slice(0, 3));
   await context.close();
 }

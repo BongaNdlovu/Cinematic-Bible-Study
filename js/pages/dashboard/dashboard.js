@@ -94,7 +94,7 @@
     const exits = sv.filter(function (s) { return s.responses && (s.responses.kind === 'exit' || s.responses.nps != null); });
     const npsVals = exits.filter(function (s) {
       const raw = s.responses.nps;
-      return raw !== null && raw !== undefined && raw !== '';
+      return typeof raw !== 'boolean' && raw !== null && raw !== undefined && String(raw).trim() !== '';
     }).map(function (s) { return Number(s.responses.nps); }).filter(function (n) { return Number.isFinite(n) && n >= 0 && n <= 10; });
     const promoters = npsVals.filter(function (n) { return n >= 9; }).length;
     const detractors = npsVals.filter(function (n) { return n <= 6; }).length;

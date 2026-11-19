@@ -123,8 +123,17 @@ import { currentSheetIndex, showToast } from '/js/pages/study/study-app.js';
       });
     }
 
+    export function isPomodoroDrawerOpen() {
+      const dock = document.getElementById('pomo-dock');
+      return !!(dock && !dock.classList.contains('pointer-events-none'));
+    }
+
+    export function weatherShouldRun() {
+      return !document.hidden && weatherPreset !== 'off' && (isPomodoroDrawerOpen() || isTimerRunning);
+    }
+
     export function startWeatherAnimation() {
-      if (!weatherRunning && currentWeatherType !== 'off') {
+      if (!weatherRunning && currentWeatherType !== 'off' && !document.hidden) {
         resizeWeatherCanvas();
         const canvas = document.getElementById('weather-canvas');
         if (canvas) canvas.classList.remove('opacity-0');
@@ -184,9 +193,6 @@ import { currentSheetIndex, showToast } from '/js/pages/study/study-app.js';
       if (prefersReduced && preset !== 'off') {
         preset = 'off';
       }
-      if (document.hidden && preset !== 'off') {
-        stopWeatherAnimation();
-      }
       weatherPreset = preset;
       ['auto', 'quiet', 'building', 'storm', 'sunshine', 'off'].forEach(id => {
         const btn = document.getElementById(`weather-btn-${id}`);
@@ -199,8 +205,8 @@ import { currentSheetIndex, showToast } from '/js/pages/study/study-app.js';
           : "weather-pill py-1 rounded bg-paper-200/60 dark:bg-paper-800 text-ink-700 dark:text-paper-300 hover:bg-amber-500/10 transition-all";
       });
       updateAutoWeather();
-      if (preset === 'off') stopWeatherAnimation();
-      else startWeatherAnimation();
+      if (preset === 'off' || document.hidden) stopWeatherAnimation();
+      else if (!silent || weatherShouldRun()) startWeatherAnimation();
       if (!silent) {
         showToast(`Focus atmosphere: ${weatherMeta[currentWeatherType]?.name || preset}`);
         if (window.Insights) window.Insights.track('feature_use', currentSheetIndex, { feature: 'weather', preset: preset });
@@ -261,6 +267,7 @@ import { currentSheetIndex, showToast } from '/js/pages/study/study-app.js';
       if (isTimerRunning) timeRemaining = Math.max(0, Math.ceil((timerEndsAt - Date.now()) / 1000));
       isTimerRunning = false;
       clearInterval(timerInterval);
+      if (!isPomodoroDrawerOpen()) stopWeatherAnimation();
       const ping = document.getElementById('pomo-ping');
       const dot = document.getElementById('pomo-dot');
       const sub = document.getElementById('pomo-status-sub');

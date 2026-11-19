@@ -307,9 +307,16 @@
 
   function paint(keepPlace) {
     if (!root) return;
+    const prevBox = keepPlace ? root.querySelector(".scripture-scroll") : null;
+    const prevTop = prevBox ? prevBox.scrollTop : null;
     root.innerHTML = renderSheetHtml(currentSheet);
     applyStoryClass();
-    if (!keepPlace) requestAnimationFrame(scrollFocusIntoPanel);
+    if (prevTop !== null) {
+      const nextBox = root.querySelector(".scripture-scroll");
+      if (nextBox) nextBox.scrollTop = prevTop;
+    } else if (!keepPlace) {
+      requestAnimationFrame(scrollFocusIntoPanel);
+    }
   }
 
   function emitStation(station) {
