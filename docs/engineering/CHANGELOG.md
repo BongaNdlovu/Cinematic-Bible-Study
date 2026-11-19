@@ -14,6 +14,18 @@ Entry template:
 
 ---
 
+## 2026-11-19 — Live first-paint check after merging stylesheets
+
+**Why:** the local test of audit group 3 showed a slower first paint with merged stylesheets, possibly because Chrome's throttling applies to each request separately. The live site is the fair test.
+
+**What changed (handbook only; no code changed):** `docs/engineering/05-performance.md` records the live measurement.
+
+**Checked here:** the live home page, on a phone with 4× CPU slowdown and the cache off, over the real network, 5 runs each. Median first paint was 904 ms before the deploy, with 9 stylesheet requests. After it, the medians were 880 ms and 872 ms in two runs, with 3 stylesheet requests. The live study page links 4 stylesheets (36 before), and `css/bundles/study-2.*.css` is 254,812 bytes.
+
+**Handbook updated:** 05.
+
+**Status:** merged to master in PR #47.
+
 ## 2026-11-19 — Audit group 3: performance
 
 **Why:** the third follow-up group from the 19 November audit. The owner chose to merge stylesheets at deploy, which reverses the earlier "no build step" decision for CSS.
