@@ -32,7 +32,7 @@ Entry template:
 
 **Handbook updated:** 05, 06, 07.
 
-**Status:** not yet deployed.
+**Status:** merged to master in PR #48.
 
 ## 2026-11-19 — Live first-paint check after merging stylesheets
 
