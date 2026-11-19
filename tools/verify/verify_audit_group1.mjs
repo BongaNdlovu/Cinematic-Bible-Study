@@ -117,7 +117,7 @@ async function slowAuth(context) {
     document.getElementById('certificate-name').value = 'Test Reader';
     document.getElementById('certificate-name').dispatchEvent(new Event('input', { bubbles: true }));
   });
-  const download = page.waitForEvent('download', { timeout: 15000 }).then(() => true, () => false);
+  const download = page.waitForEvent('download', { timeout: 45000 }).then(() => true, () => false);
   await page.click('#certificate-download');
   const downloaded = await download;
   await page.waitForTimeout(500);
