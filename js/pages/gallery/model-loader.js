@@ -76,6 +76,21 @@ export function cloneExhibit(model) {
   }
 }
 
+const loadingGlb = new Map();
+
+function prepareModel(model) {
+  model.traverse((child) => {
+    if (!child.isMesh) return;
+    child.castShadow = true;
+    child.receiveShadow = true;
+    if (!child.material) return;
+    child.userData.origMat = child.material.clone();
+    child.material.envMapIntensity = 1.45;
+    child.material.needsUpdate = true;
+  });
+  return model;
+}
+
 export async function loadGLBAsset(key, onLoaded) {
   if (MeshoptDecoder && MeshoptDecoder.ready) {
     try {
@@ -94,12 +109,19 @@ export async function loadGLBAsset(key, onLoaded) {
   }
   const data = ASSET_REGISTRY[key];
   if (!data || !data.filename) return;
+  if (loadingGlb.has(key)) {
+    if (onLoaded) loadingGlb.get(key).push(onLoaded);
+    return;
+  }
+  const waiting = onLoaded ? [onLoaded] : [];
+  loadingGlb.set(key, waiting);
 
   const candidatePaths = [
     MODELS_PREFIX + data.filename
   ];
 
   function markLoadFailure() {
+    loadingGlb.delete(key);
     if (!loadProgress.heroAssetCounted) {
       loadProgress.heroAssetCounted = true;
       loadProgress.failed = true;
@@ -124,18 +146,8 @@ export async function loadGLBAsset(key, onLoaded) {
     loadGLB(
       candidatePaths[idx],
       (gltf) => {
-        const model = gltf.scene;
-        model.traverse((child) => {
-          if (child.isMesh) {
-            child.castShadow = true;
-            child.receiveShadow = true;
-            if (child.material) {
-              child.userData.origMat = child.material.clone();
-              child.material.envMapIntensity = 1.45;
-              child.material.needsUpdate = true;
-            }
-          }
-        });
+        const model = prepareModel(gltf.scene);
+        loadingGlb.delete(key);
         loadedGLTFScenes[key] = model;
         if (key === 'assembled') loadedGLTFScenes['full_body'] = model;
         touchGltf(key);
@@ -147,15 +159,15 @@ export async function loadGLBAsset(key, onLoaded) {
           loadProgress.label = `${data.title} mounted`;
           updateLoadingUI();
         }
-        if (onLoaded) {
+        waiting.forEach((done) => {
           setTimeout(() => {
             try {
-              onLoaded(cloneExhibit(model));
+              done(cloneExhibit(model));
             } catch (e) {
               if (key === 'assembled') markLoadFailure();
             }
           }, 0);
-        }
+        });
       },
       () => {
         tryLoad(idx + 1);

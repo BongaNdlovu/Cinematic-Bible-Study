@@ -61,7 +61,9 @@ JavaScript and HTML are **not** minified. Their comments ship to readers as writ
 | Compressed models | Meshopt geometry and WebP textures, built by `npm run compress*` from sources in `models/originals/` (not committed) | `tools/compress/` |
 | Model cache | Least-recently-used, 6 models at most. The statue (`assembled` / `full_body`) is always kept; the 3 most recently shown are never evicted. Evicted models are freed from the GPU. | `GLTF_LRU_CAP`, `evictGltfs`, `disposeGltfScene` in `js/pages/gallery/gallery.js` |
 | Material copies | Copies made for the gold, clay, wireframe and lighting looks are released when a model is removed. Shared originals are left alone. | `releaseExhibitMaterials` in `js/pages/gallery/gallery.js` (added 12 November 2026) |
-| Hall textures | Up to 4 cached | `HALL_CACHE_CAP` |
+| Hall textures | Up to 4 cached. Since 19 November 2026 a second download of the same image is freed instead of replacing the cached texture | `HALL_CACHE_CAP`, `keepHallTex()` in `js/pages/gallery/hall-backdrop.js` |
+| Model downloads in flight | A model asked for again while it is still downloading waits for that download instead of starting another (`loadingGlb` in `js/pages/gallery/model-loader.js`, 19 November 2026). Not covered by a test: the gallery's switch lock kept the browser check from reaching the second request | `loadingGlb` |
+| Gallery environment map | The `PMREMGenerator` and `RoomEnvironment` used once at start-up are freed right after | `js/pages/gallery/gallery.js` |
 | Shelf book maps | One texture serves as both the roughness and the metalness map of a spine, flat spine or foil cover (`ormPair()` in `js/pages/index/shelf.js`). Before 19 November 2026 each was uploaded twice. The GPU saving was not measured | `ormPair()` |
 | Download timeouts | A model download that hangs is cancelled through the loading manager's abort signal | The GLB load helper in `js/pages/gallery/gallery.js` (`manager.abortController.abort()`) |
 

@@ -1490,7 +1490,7 @@ async function startRoom() {
     shelfX += T + GAP;
     const spineFront = -0.5 - jr() * 0.9;
     const b = {
-      i, v, H, T, W, root, pivot, front, back, pages, spineMat, clothMat, paperMat, all,
+      i, v, H, T, W, root, pivot, front, back, pages, spineMat, clothMat, paperMat, all, lockTint: locked ? 0.62 : 1,
       x: cx, zc: spineFront - (W / 2 + bulge * T / 2), yawJ: (jr() - 0.5) * 0.02, rollJ: (jr() - 0.5) * 0.008,
       hover: 0, lean: 0, open: 0, mode: 'shelf', seq: null, hi: null, sig: 0,
       pos: new V3(), quat: new Q()
@@ -2029,13 +2029,14 @@ async function startRoom() {
   }
 
   glCanvas.addEventListener('pointerdown', (e) => {
+    if (e.pointerType === 'mouse' && e.button !== 0) return;
     touches.set(e.pointerId, { x: e.clientX, y: e.clientY });
     if (touches.size === 2) {
       const [a, b] = [...touches.values()];
       pinch0 = Math.hypot(a.x - b.x, a.y - b.y); zoom0 = zoom;
     }
     downAt = { x: e.clientX, y: e.clientY };
-    moved = false;
+    moved = touches.size > 1;
     if (selected >= 0) {
       dragging = true;
       orbit.vy = orbit.vp = 0;
@@ -2209,6 +2210,8 @@ async function startRoom() {
   cam.look.copy(cam.tLook).add(new V3(0, -3, 0));
   let running = true;
   let rafId = 0;
+  const redrawIfIdle = () => { if (running && !rafId) render(); };
+  if (window.ResizeObserver) new ResizeObserver(redrawIfIdle).observe(body); else addEventListener('resize', redrawIfIdle);
   let tabVisible = !document.hidden;
   /* One place decides whether the loop runs: tab visible AND stage on screen.
      A hidden tab keeps its queued frame callback, so it is cancelled before the
@@ -2460,7 +2463,17 @@ async function startRoom() {
   // opening move, without holding the loader.
   setTimeout(warmPulledLights, 3600);
 
-  api = { pull, put, step, setView: (v) => setView(v), focusStep, focused: () => focusIdx };
+  function syncAccess() {
+    for (const b of books) {
+      const lockShade = can(b.i) ? 1 : 0.62;
+      if (lockShade === b.lockTint) continue;
+      b.spineMat.color.setScalar(lockShade);
+      b.clothMat.color.multiplyScalar(lockShade / b.lockTint);
+      b.lockTint = lockShade;
+    }
+    noteInput();
+  }
+  api = { pull, put, step, setView: (v) => setView(v), focusStep, focused: () => focusIdx, syncAccess };
   window.__shelf = { books, camera, scene, renderer, api, state: () => ({ running, stageInView, tabVisible, rafId, dpr: dprCur }), advance(sec) { for (let k = 0; k < sec * 60; k++) { update(1 / 60); pumpHi(); } render(); } };
 
   // Warm a few covers in the background
@@ -2511,7 +2524,10 @@ function watchForRefresh() {
   }
   const auth = window.ScrollAuth;
   if (auth && typeof auth.ready === 'function') auth.ready().then(buildChrome, () => {});
-  if (auth && typeof auth.onChange === 'function') auth.onChange(() => buildChrome());
+  if (auth && typeof auth.onChange === 'function') auth.onChange(() => {
+    buildChrome();
+    if (api) api.syncAccess();
+  });
 }
 
 const INVITE_AUTH_WAIT_MS = 4000;

@@ -722,7 +722,7 @@
     const signIn = el("account-signin");
     const signOut = el("account-signout");
     const cert = el("account-cert-save");
-    if (accept) accept.addEventListener("click", saveTerms);
+    if (accept && !form) accept.addEventListener("click", saveTerms);
     if (signIn) signIn.addEventListener("click", startGoogle);
     if (signOut) signOut.addEventListener("click", startSignOut);
     if (cert) cert.addEventListener("click", saveCertName);

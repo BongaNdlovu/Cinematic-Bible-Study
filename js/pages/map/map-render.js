@@ -262,13 +262,7 @@
           }
         }).addTo(state.lmap);
         state.geoLayer = L.geoJSON({ type: "FeatureCollection", features: feats }, {
-          style: (feature) => {
-            const st = fillStyle(DATA.empires[feature.properties.name], opacity);
-            const active = DATA.empires[feature.properties.name] && DATA.empires[feature.properties.name].id === ep.focus;
-            st.weight = active ? 3.2 : 2.2;
-            st.className = "cmap-border";
-            return st;
-          },
+          style: (feature) => borderStyle(feature, ep, opacity),
           onEachFeature: (feature, layer) => {
             const name = feature.properties.name;
             layer.bindTooltip(name, { className: "cmap-tip", sticky: true });
@@ -304,15 +298,29 @@
       });
     }
 
+    function borderStyle(feature, ep, opacity) {
+      const emp = DATA.empires[feature.properties.name];
+      const st = fillStyle(emp, opacity);
+      st.weight = emp && emp.id === ep.focus ? 3.2 : 2.2;
+      st.className = "cmap-border";
+      return st;
+    }
+
     function applyOverlayOpacity() {
       const o = state.overlayOpacity;
-      if (state.geoLayer) state.geoLayer.setStyle((feature) => {
+      if (state.geoLayer) {
         const ep = currentEpoch();
-        const st = fillStyle(DATA.empires[feature.properties.name], ep.polityOpacity);
-        st.fillOpacity *= o;
-        st.opacity *= o;
-        return st;
-      });
+        state.geoLayer.setStyle((feature) => {
+          const st = borderStyle(feature, ep, ep.polityOpacity);
+          st.fillOpacity *= o;
+          st.opacity *= o;
+          return st;
+        });
+        state.geoLayer.eachLayer((layer) => {
+          const path = layer.getElement && layer.getElement();
+          if (path) path.style.pointerEvents = o > 0 ? '' : 'none';
+        });
+      }
       if (state.glowLayer) state.glowLayer.setStyle({ opacity: 0.55 * o });
       if (state.routeLayer) {
         state.routeLayer.eachLayer((layer) => {
@@ -722,7 +730,7 @@
       console.error(err);
     }
 
-    return { addRuler, applyOverlayOpacity, applySheet, clearSiteLayers, currentEpoch, currentPolities, destroyLeaflet, drawOverlays, findMapItem, globeItems, markBase, markerCopy, nearestOpenEpoch, openDossier, openEpochDossier, pickItem, resize, routeFor, scrubPreview, scrubRead, setBasemap, setViewParam, showChapter, showFootprint, showLoadFailure, stepYear, yearIndex };
+    return { addRuler, applyOverlayOpacity, applySheet, clearSiteLayers, currentEpoch, currentPolities, destroyLeaflet, drawOverlays, findMapItem, globeItems, markBase, markerCopy, nearestOpenEpoch, openDossier, openEpochDossier, pickItem, resize, routeFor, scrubPreview, scrubRead, selectPolity, setBasemap, setViewParam, showChapter, showFootprint, showLoadFailure, stepYear, yearIndex };
   }
 
   window.MapRender = Object.freeze({ REDUCE, BASE_STORE, SYMBOLS, epochById, iconSrc, el, epochFocus, SAT_TILE, make });

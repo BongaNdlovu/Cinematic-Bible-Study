@@ -564,6 +564,8 @@ import { loadStudyModule, openCertificateIfReady, studyModuleFailed, syncCertifi
         return;
       }
       showSheetLoading(false);
+      const flow = window.StudyTaskFlow;
+      if (flow && typeof flow.closeNow === 'function' && flow.isOpen()) flow.closeNow();
       rememberSheetUrl(index);
       currentSheetIndex = index;
       setEndCardShownForSheet(-1);

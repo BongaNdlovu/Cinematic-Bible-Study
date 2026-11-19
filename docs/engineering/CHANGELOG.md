@@ -14,6 +14,46 @@ Entry template:
 
 ---
 
+## 2026-11-19 — Audit group 2: broken behaviour
+
+**Why:** the second follow-up group from the 19 November audit. Each finding was checked before fixing. Findings that did not hold are not changed:
+
+- B-20: three.js already handles a lost WebGL context.
+- B-34 (5): the three-column comparison grid does not overflow at 900 px.
+- B-37 (3): setting `img.src = ""` does not send a request.
+
+**What changed:**
+
+| Finding | Fix | File |
+|---|---|---|
+| B-29 Diagram citation chips opened the first row in a chapter, not the row holding the verse; focus did not return | Match by verse first (`rowForVerse()`), then by chapter; save the opener whenever the panel is not open | `js/pages/study/references.js` |
+| B-30 Clicking a Strong's word jumped the Scripture panel | Repaint without the scroll-to-focus step; return focus to the word on close | `js/pages/study/scripture.js` |
+| B-25 Task-flow and guide timers ran after they were stale | `closeNow()` on a sitting switch; a cancelled 180 ms swap; each swap restores moved cards; the end spotlight checks the guide is still open | `js/pages/study/task-flow.js`, `study-app.js`, `sitting-guide.js` |
+| B-24 A mind-map file that defined nothing froze the page | A module load fails unless its object exists | `js/pages/study/study-modules.js` |
+| B-32 Weather drew at the wrong scale; the Off button lost its classes | Draw in window coordinates with one `setTransform` per frame; leave the Off button's classes | `js/pages/study/weather-scene.js`, `focus-timer.js` |
+| B-34 Light themes: dark timeline text on its dark plate, an opaque access-panel backdrop; projection paragraphs not enlarged | `:where(:not(.tlx *))` (no added specificity, so the story stage's own colours still win); the backdrop rule removed; `--reading-font-size: 22px` in projection mode | `css/pages/study/parts/20-themes-and-projection.css` |
+| B-19 Taps on a phone hit hidden gallery frames | Skip the frame raycast while the frames are hidden | `js/pages/gallery/gallery.js` |
+| B-18 Start-up GPU objects and duplicate hall textures not freed | Free `PMREMGenerator` and `RoomEnvironment`; keep the first copy of a hall texture and free the second | `js/pages/gallery/gallery.js`, `hall-backdrop.js` |
+| B-17 The same model could download twice at once | One shared download per model | `js/pages/gallery/model-loader.js` |
+| B-23 Shelf: stale 3D lock tint after sign-in; black canvas after resize with reduced motion; right-click and second-finger mix-ups | `syncAccess()`; a redraw on resize when the loop is idle; the main mouse button only; a second finger is never a tap | `js/pages/index/shelf.js` |
+| B-37 Map: the active border lost its weight; hidden overlays took clicks; search skipped empires and did not close | One `borderStyle()`; no pointer events at 0 opacity; empires in search; Escape and outside clicks close it | `js/pages/map/map-render.js`, `map.js` |
+| A failed sign-out ignored every later sign-in in the tab | `SIGNED_IN` clears the flag | `js/core/auth.js` |
+| A cancelled request showed the generic error | The empty cancel message is kept | `js/core/net.js` |
+| Accept on the account page saved twice | Only the form submit saves | `js/pages/account/account.js` |
+| The dev server served files with no extension | Refused | `server.py` |
+| Gallery shortcuts took over Ctrl, Cmd and Alt keys | Modified keys are ignored | `js/pages/gallery/gallery.js` |
+
+New checks: `tools/verify/verify_audit_group2.mjs` (7 checks, in `run_browser_checks.mjs`) and one more test in `tests/unit/audit-fixes-2026-11-19.test.mjs`. Not covered by an automated test:
+
+- B-17: the gallery's switch lock kept a browser check from reaching a second download.
+- B-18, B-19, B-23, B-25, B-30, B-32, the sign-out flag, the account double save, and the gallery shortcuts. Their code paths were read but not run.
+
+**Handbook updated:** 04 (Local server, a failed sign-out), 05 (hall textures, model downloads, environment map), 06 (eleven rows in the audit-fixes table), 07 (34 browser checks).
+
+**Tested:** `npx oxlint` exit 0. `npm run test:unit` 203 of 203. `npm test` exit 0. `npm run test:browser` 34 of 34, on the second run. The first run found that the theme fix had dimmed the story stage (`verify_story_themes.mjs`); it was fixed with `:where()`. Mutation test: with the group 2 files put back, 6 of the 7 browser checks failed. The seventh is the mind-map module check: with the old loader the page froze and that run stopped, which reproduces B-24. The unit test failed against the old `server.py`.
+
+**Status:** merged to master in PR #45.
+
 ## 2026-11-19 — Audit group 1: data loss and stuck pages
 
 **Why:** the first of three follow-up groups from the 19 November audit. These six findings could lose a reader's work or leave a page stuck. Each was confirmed before fixing: B-03, earlier rated only a timing race, was reproduced with a 1.5-second sign-in.
