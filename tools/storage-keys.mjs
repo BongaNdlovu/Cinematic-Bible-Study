@@ -12,7 +12,7 @@ export const STORAGE_KEYS = [
   { key: 'baPulseAsked', deleteAccount: true },
   { key: 'baPulsePending', deleteAccount: true },
   { key: 'baProfileAsked', deleteAccount: true },
-  { key: 'baRefCode', deleteAccount: true },
+  { key: 'baRefCode', signOut: true, deleteAccount: true },
   { key: 'baReferredBy', deleteAccount: true },
   { key: 'baReferredSitting', deleteAccount: true },
   { key: 'baAuthStarts', deleteAccount: true },

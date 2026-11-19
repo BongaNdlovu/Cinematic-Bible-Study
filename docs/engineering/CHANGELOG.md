@@ -14,6 +14,49 @@ Entry template:
 
 ---
 
+## 2026-11-19 — Fixes for the bugs confirmed in the 19 November audit
+
+**Why:** an outside bug and performance audit listed 106 findings. Each one used here was checked against the code, a local server or a browser in this change. Only the confirmed ones are fixed. Findings that were wrong (the `/study` cache header, the glossary page behind fullscreen diagrams) or only a timing race (sitting links reset to 0) are left alone.
+
+**What changed:**
+
+| Finding | Fix | File |
+|---|---|---|
+| B-07 Local server sent only a range's bytes on the next request | Each request starts with no range left over | `server.py` |
+| B-08 CI closed an open alert when the browser tests failed | `alert` also waits for `test-browser` | `.github/workflows/ci.yml` |
+| Deploy guard checked three paths from before the folder move | Paths updated to `css/pages/study/` and `js/content/` | `tools/deploy-cloudflare-pages.ps1` |
+| A grant reply that was not JSON crashed the human-pass route | Answers `502` with `no-store` | `functions/_middleware.js` |
+| B-01 An account switch pushed empty map unlocks over the new account's cloud row | The switch saves quietly; `unlocked`, `seenIntro` and `station` come from the cloud; a save conflict merges them; `clearLocal()` cancels pending timers | `js/features/progress-sync.js` |
+| B-02 A moderator was sent back to Insights before the authenticator step | `finishReturn()` waits while a second step is pending | `js/pages/account/account.js` |
+| B-10 Moderator status stayed off after the authenticator step | `MFA_CHALLENGE_VERIFIED` re-checks it and tells listeners | `js/core/auth.js` |
+| B-14 The invite code stayed on the device after sign-out | `baRefCode` added to the sign-out keys | `js/core/auth.js`, `tools/storage-keys.mjs` |
+| B-13 Reviews without a score counted as 0 in the NPS | Empty scores are left out | `js/pages/dashboard/dashboard.js` |
+| B-05 Going Back while an answer was checked lost the result | The result is painted into the question's own card; a failed check re-enables the options | `js/pages/study/quiz.js` |
+| B-28 Glossary terms were used up inside hidden diagram text | The glossary and citation walkers skip `svg`, `[hidden]` and `.chain-ascii` | `js/content/sheet-glossary.js`, `js/pages/study/references.js` |
+| B-33 Card minimise always said expanded | The card's own button is updated | `js/pages/study/card-min.js` |
+| B-27 Escape could close a mind map behind an open panel | All three panels are checked | `js/pages/study/mindmap.js` |
+| B-31 Sitting 2's two mind maps shared gradient ids | Ids are numbered per map | `js/pages/study/mindmap-render.js` |
+| The `paper` theme was not restored | Any saved theme name is restored | `js/pages/study/study-app.js` |
+| B-04 The gallery's import map came after its module script | Moved above it (the text, and so its CSP hash, is unchanged) | `gallery.html` |
+| B-15 Undefined filter constant, and 0 counted as a power of two | `THREE.LinearMipmapLinearFilter`; `n > 0` | `js/pages/gallery/hall-backdrop.js` |
+| B-22 A later rule stopped vertical swipes over the shelf | The extra `touch-action: none` removed; the open-book rule still sets it | `css/pages/index/shelf.css` |
+| B-35 The Siege of Jerusalem pin was 191 km east | Longitude set to Jerusalem's, 35.229 | `js/content/map-data.js` |
+| B-36 Every map data error fell back to the other file name | Falls back only on `404` | `js/pages/map/map-dom.js` |
+| P-05 The shelf uploaded each roughness/metalness map twice | One texture for both (`ormPair()`) | `js/pages/index/shelf.js` |
+| Duplicate database index | `028-drop-duplicate-events-index.sql` | `db/migrations/` |
+
+New checks: `tests/unit/audit-fixes-2026-11-19.test.mjs` (9 tests), one more test in `tests/unit/human-pass.test.mjs`, and `tools/verify/verify_study_audit_fixes.mjs` (13 checks, now in `run_browser_checks.mjs`).
+
+**Not done:** P-06, a smaller Sentry bundle. Sentry publishes no 11.9.0 bundle with tracing and feedback but without replay (the CDN answered `403`). The tracing-only bundle (157,227 bytes against 291,648) would drop the feedback widget, so the bundle is unchanged.
+
+**Database:** migration 028 ran in production on 19 November 2026 (see `db/migrations/README.md`). The site does not depend on it.
+
+**Handbook updated:** 04 (CSP row, Moderator second step, Local server, sign-out keys), 05 (globe row, Shelf book maps), 06 (theme restore, a table of the study fixes), 07 (browser check count, the alert job). 03 needed no change: the new files follow its folder patterns.
+
+**Tested:** `npx oxlint` exit 0. `npm run test:unit` 198 of 198. `npm test` exit 0. `npm run test:browser` 32 of 32. Mutation tests: with each fixed file put back to master, its own test failed (for all 9 files covered by unit tests, and 8 of the 13 browser checks; the quiz check reproduced the original `Cannot set properties of null (setting 'disabled')`). Not covered by an automated test: B-02, B-10, B-13 and B-36. Their code paths were read but not run.
+
+**Status:** merged to master in PR #43.
+
 ## 2026-11-18 — Secret exposure check recorded
 
 **Why:** a check against a common failure in AI-built apps: secret keys shipped in browser JavaScript, `/.env` reachable on the live site, and paid keys with no spending limit. The site has none of the three. This entry records the evidence, and completes a Secrets table that was missing four secrets.

@@ -108,7 +108,7 @@ jobs:
         run: node tools/smoke.mjs
 
   alert:
-    needs: [test, deploy, smoke]
+    needs: [test, test-browser, deploy, smoke]
     if: always() && github.event_name == 'push' && github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
     timeout-minutes: 5

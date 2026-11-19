@@ -35,12 +35,12 @@ export function prepHallTex(tex) {
   tex.colorSpace = THREE.SRGBColorSpace;
   // Non-power-of-two images cannot be mipmapped cleanly; switch to a plain
   // linear filter so WebGL stops logging GL_INVALID_ENUM for these backdrops.
-  const pot = (n) => (n & (n - 1)) === 0;
+  const pot = (n) => n > 0 && (n & (n - 1)) === 0;
   if (!pot(tex.image?.width || 0) || !pot(tex.image?.height || 0)) {
     tex.minFilter = THREE.LinearFilter;
     tex.generateMipmaps = false;
   } else {
-    tex.minFilter = THREE.LINEAR_MIPMAP_LINEAR;
+    tex.minFilter = THREE.LinearMipmapLinearFilter;
   }
   tex.anisotropy = Math.min(4, renderer.capabilities.getMaxAnisotropy());
   tex.needsUpdate = true;

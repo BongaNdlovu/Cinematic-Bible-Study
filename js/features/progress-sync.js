@@ -102,17 +102,15 @@
     return true;
   }
 
+  function saveJourneyQuietly(patch) {
+    if (!window.BAJourney || typeof window.BAJourney.save !== 'function') return;
+    const was = applyingMerge;
+    applyingMerge = true;
+    try { window.BAJourney.save(patch); } catch (e) {} finally { applyingMerge = was; }
+  }
+
   function clearLocalLearnerProgress() {
-    try {
-      if (window.BAJourney && typeof window.BAJourney.save === 'function') {
-        window.BAJourney.save({
-          completedSheets: [],
-          pathSheet: -1,
-          sheet: 0,
-          unlocked: []
-        });
-      }
-    } catch (e) {}
+    saveJourneyQuietly({ completedSheets: [], pathSheet: -1, sheet: 0, unlocked: [] });
     try { localStorage.setItem('daniel_historicist_mastery', '[]'); } catch (e) {}
     try { localStorage.setItem('daniel_workbench_v1', '{}'); } catch (e) {}
     try { localStorage.setItem('daniel_competency_telemetry_v1', '{}'); } catch (e) {}
@@ -127,17 +125,17 @@
     const cleanSheets = Array.from(new Set(remoteSheets.map(Number))).filter(function (n) {
       return !Number.isNaN(n) && n >= 0 && n <= 10;
     });
-    try {
-      if (window.BAJourney && typeof window.BAJourney.save === 'function') {
-        window.BAJourney.save({
-          completedSheets: cleanSheets,
-          cohort: remote.cohort || remoteJourney.cohort || null,
-          sheet: typeof remoteJourney.sheet === 'number' ? remoteJourney.sheet : 0,
-          pathSheet: typeof remoteJourney.pathSheet === 'number' ? remoteJourney.pathSheet : -1
-        });
-      }
-      localStorage.setItem('daniel_historicist_mastery', JSON.stringify(cleanSheets));
-    } catch (e) {}
+    const patch = {
+      completedSheets: cleanSheets,
+      cohort: remote.cohort || remoteJourney.cohort || null,
+      sheet: typeof remoteJourney.sheet === 'number' ? remoteJourney.sheet : 0,
+      pathSheet: typeof remoteJourney.pathSheet === 'number' ? remoteJourney.pathSheet : -1,
+      unlocked: Array.isArray(remoteJourney.unlocked) ? remoteJourney.unlocked : [],
+      seenIntro: plainObject(remoteJourney.seenIntro),
+      station: plainObject(remoteJourney.station)
+    };
+    saveJourneyQuietly(patch);
+    try { localStorage.setItem('daniel_historicist_mastery', JSON.stringify(cleanSheets)); } catch (e) {}
     try {
       localStorage.setItem('daniel_workbench_v1', JSON.stringify((remote && remote.workbench) || {}));
     } catch (e) {}
@@ -449,8 +447,11 @@
     const remoteJourney = plainObject(remote && remote.journey);
     const sheets = sheetUnion(localJourney.completedSheets, remoteJourney.completedSheets || (remote && remote.mastery));
     const cohort = keepText(localJourney.cohort || (local && local.cohort), (remote && remote.cohort) || remoteJourney.cohort) || null;
+    const unlocked = Array.from(new Set([].concat(remoteJourney.unlocked || [], localJourney.unlocked || [])));
+    const seenIntro = Object.assign({}, plainObject(remoteJourney.seenIntro), plainObject(localJourney.seenIntro));
+    const station = Object.assign({}, plainObject(remoteJourney.station), plainObject(localJourney.station));
     return {
-      journey: Object.assign({}, remoteJourney, localJourney, { completedSheets: sheets, cohort: cohort }),
+      journey: Object.assign({}, remoteJourney, localJourney, { completedSheets: sheets, cohort: cohort, unlocked: unlocked, seenIntro: seenIntro, station: station }),
       mastery: sheets,
       workbench: taskUnion(remote && remote.workbench, local && local.workbench),
       telemetry: telemetryUnion(local && local.telemetry, remote && remote.telemetry),
@@ -772,6 +773,10 @@
   }
 
   function clearLocal() {
+    if (debounceTimer) clearTimeout(debounceTimer);
+    debounceTimer = null;
+    if (retryTimer) clearTimeout(retryTimer);
+    retryTimer = null;
     clearLocalLearnerProgress();
     knownRevision = null;
     try { localStorage.removeItem(OUTBOX_KEY); } catch (e) {}

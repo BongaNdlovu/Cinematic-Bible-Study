@@ -130,7 +130,7 @@
       }
     }
     card.classList.toggle("is-card-min", !!minimize);
-    var btn = head.querySelector(".cardmin-btn");
+    var btn = card.querySelector(":scope > .cardmin-btn");
     var text = headTextOf(head);
     if (btn) setLabel(btn, !!minimize, text);
     if (persist !== false) {

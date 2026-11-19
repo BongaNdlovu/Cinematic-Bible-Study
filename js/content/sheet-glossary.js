@@ -395,7 +395,7 @@
     if (!el || !el.closest) return true;
     /* `.mm` is the mindmap block: its labels sit inside role=button nodes, and
        a glossary button injected there would nest a button in a button. */
-    return !!el.closest("script, style, button, a, .mm, .term-gloss, .strongs-gloss, .term-popover, .strongs-popover, .first-principles-kicker, figcaption, .glossary-index");
+    return !!el.closest("script, style, button, a, svg, [hidden], .chain-ascii, .mm, .term-gloss, .strongs-gloss, .term-popover, .strongs-popover, .first-principles-kicker, figcaption, .glossary-index");
   }
 
   function wordBoundaryOk(text, start, end, needle) {

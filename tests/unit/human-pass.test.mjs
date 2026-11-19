@@ -15,6 +15,7 @@ globalThis.fetch = async (url, init) => {
   }
   if (target.includes("/rest/v1/rpc/exhibit_grant_human_pass")) {
     calls.push({ kind: "grant", body: JSON.parse(init.body), apikey: init.headers.apikey });
+    if (grantStatus === "garbled") return new Response("<html>upstream page</html>", { status: 200 });
     if (grantStatus !== 200) return new Response("no", { status: grantStatus });
     return Response.json("2026-11-14T02:00:00+00:00");
   }
@@ -111,6 +112,16 @@ test("a database refusal is reported as 502", async () => {
   grantStatus = 401;
   const res = await onRequest(passRequest({ token: "t", ids: GOOD_IDS }));
   assert.equal(res.status, 502);
+  grantStatus = 200;
+});
+
+test("a grant answer that is not JSON is reported as 502, not a crash", async () => {
+  calls.length = 0;
+  verdict = { success: true, action: "guest-pass", hostname: "site.test" };
+  grantStatus = "garbled";
+  const res = await onRequest(passRequest({ token: "t", ids: GOOD_IDS }));
+  assert.equal(res.status, 502);
+  assert.equal(res.headers.get("Cache-Control"), "no-store");
   grantStatus = 200;
 });
 

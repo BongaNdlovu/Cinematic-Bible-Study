@@ -192,6 +192,7 @@
         persistIdentity(user);
         renderAll();
       }
+      if (event === "MFA_CHALLENGE_VERIFIED") lastAnnounce = announceUser();
       return lastAnnounce;
     }
     announced = true;
@@ -200,7 +201,12 @@
     }
     persistIdentity(user);
     if (user) clearError();
-    lastAnnounce = refreshModerator().then(function () {
+    lastAnnounce = announceUser();
+    return lastAnnounce;
+  }
+
+  function announceUser() {
+    return refreshModerator().then(function () {
       listeners.forEach(function (fn) {
         try { fn(user); } catch (err) {}
       });
@@ -209,7 +215,6 @@
         window.ScrollTerms.syncLock();
       }
     });
-    return lastAnnounce;
   }
 
   function redirectTo() {
@@ -294,7 +299,8 @@
   const PERSONAL_KEYS = [
     "baStudyBookmarks", "baNoteTimes", "baStudySyncOutbox", "baStudySyncAccountId",
     "baProgressOutbox", "baProgressAccountId", "baDeskReceipts",
-    "daniel_certificate_name", "daniel_capstone_mastery_v1", "daniel_placement_track_v1"
+    "daniel_certificate_name", "daniel_capstone_mastery_v1", "daniel_placement_track_v1",
+    "baRefCode"
   ];
   const PERSONAL_PREFIXES = ["baNote-", "daniel_book_pos_"];
 

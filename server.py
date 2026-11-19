@@ -98,6 +98,7 @@ class NebuchadnezzarHTTPHandler(SimpleHTTPRequestHandler):
 
     def send_head(self):
         """Serve byte ranges for large media so <audio>/<video> can seek."""
+        self._range_remaining = None
         if not self.is_local_host_header():
             self.send_error(403, "Host not allowed")
             return None
