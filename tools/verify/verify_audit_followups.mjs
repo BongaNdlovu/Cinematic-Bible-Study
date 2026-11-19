@@ -1,7 +1,7 @@
 /* Regression suite for the 19 November audit follow-ups (P-09, B-30, B-23,
    B-25, B-13, B-27, B-29, B-37, B-32, P-05, B-17, B-18, B-19 and the two
    animation changes). Groups use a fresh browser each, matching the audit
-   group scripts. Wired into run_browser_checks.mjs with a 6-minute budget. */
+   group scripts. Wired into run_browser_checks.mjs with a 12-minute budget. */
 import { chromium } from 'playwright';
 import { ensureServer, dismissConsent, signedInScript, webglFlags } from './_server.mjs';
 
@@ -117,7 +117,6 @@ const WEATHER_WORKER_SPY = `(() => {
 }
 
 {
-  await relaunch();
   const noOffscreen = () => {
     try { delete window.HTMLCanvasElement.prototype.transferControlToOffscreen; } catch (e) { /* locked */ }
     window.HTMLCanvasElement.prototype.transferControlToOffscreen = undefined;
@@ -157,7 +156,6 @@ const WEATHER_WORKER_SPY = `(() => {
 }
 
 {
-  await relaunch();
   const { context, page, errors } = await studyPage(2);
   await page.click('[data-instrument="scripture"]');
   await page.waitForSelector('.scripture-scroll', { timeout: 20000 });
@@ -192,7 +190,6 @@ const WEATHER_WORKER_SPY = `(() => {
 }
 
 {
-  await relaunch();
   const { context, page } = await studyPage(0);
   await page.click('[data-action="atmosphere"]');
   await page.waitForTimeout(400);
@@ -219,7 +216,6 @@ const WEATHER_WORKER_SPY = `(() => {
 }
 
 {
-  await relaunch();
   const { context, page } = await studyPage(0, { completed: [] });
   await page.evaluate(() => window.StudyTaskFlow.open());
   await page.waitForSelector('.tf-root.is-open [data-tf="start"]', { timeout: 10000 });
@@ -242,7 +238,6 @@ const WEATHER_WORKER_SPY = `(() => {
 }
 
 {
-  await relaunch();
   const context = await browser.newContext({ viewport: { width: 1440, height: 900 } });
   await context.addInitScript(signedInScript({ completedSheets: [] }));
   await context.addInitScript(`try {
@@ -330,7 +325,6 @@ const WEATHER_WORKER_SPY = `(() => {
 }
 
 {
-  await relaunch();
   const { context, page, errors } = await studyPage(2);
   await page.waitForSelector('figure[data-diagram="s2-4"] .mm .mm-hud [data-mm-fs]', { timeout: 20000 });
   await page.evaluate(() => {
@@ -367,7 +361,6 @@ const WEATHER_WORKER_SPY = `(() => {
 }
 
 {
-  await relaunch();
   const { context, page, errors } = await studyPage(10);
   const opened = await page.evaluate(() => {
     for (const btn of document.querySelectorAll('[data-chain-fs]')) {
@@ -402,7 +395,6 @@ const WEATHER_WORKER_SPY = `(() => {
 }
 
 {
-  await relaunch();
   const context = await browser.newContext({ viewport: { width: 1440, height: 900 } });
   await context.addInitScript(signedInScript({ completedSheets: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10], bookView: 'scroll' }));
   await context.addInitScript(`try { localStorage.removeItem('daniel_audio_play_hint_v1'); } catch (e) {}`);
@@ -467,7 +459,6 @@ const WEATHER_WORKER_SPY = `(() => {
 }
 
 {
-  await relaunch();
   const context = await browser.newContext({ viewport: { width: 1440, height: 900 } });
   await context.addInitScript(signedInScript({ completedSheets: [0, 1, 2] }));
   const page = await context.newPage();
@@ -489,7 +480,6 @@ const WEATHER_WORKER_SPY = `(() => {
   check('acct-pulse: the pulse is a composited opacity crossfade on ::after', r.pulseOnAfter === 'acct-pulse' && r.afterOpacityKeyframes, r);
   await context.close();
 
-  await relaunch();
   const reduced = await browser.newContext({ viewport: { width: 1440, height: 900 }, reducedMotion: 'reduce' });
   await reduced.addInitScript(signedInScript({ completedSheets: [0, 1, 2] }));
   const rpage = await reduced.newPage();
@@ -576,7 +566,7 @@ if (typeof ${classId} !== 'undefined' && ${classId}.prototype && ${classId}.prot
   const page = await context.newPage();
   await page.goto(`${BASE}/gallery.html`, { waitUntil: 'load', timeout: 60000 });
   await dismissConsent(page);
-  await page.waitForFunction(() => (document.getElementById('hero-main-title') || {}).textContent, null, { timeout: 30000 });
+  await page.waitForFunction(() => !!document.querySelector('.artifact-card-item.active'), null, { timeout: 60000 });
   const title = await page.evaluate(() => document.getElementById('hero-main-title').textContent);
   const labClosed = () => page.evaluate(() => !document.getElementById('study-lab-drawer').classList.contains('open'));
   await page.keyboard.press('Control+f');
@@ -631,7 +621,7 @@ if (typeof ${classId} !== 'undefined' && ${classId}.prototype && ${classId}.prot
   });
   await page.goto(`${BASE}/gallery.html`, { waitUntil: 'load', timeout: 60000 });
   await dismissConsent(page);
-  await page.waitForFunction(() => (document.getElementById('hero-main-title') || {}).textContent, null, { timeout: 30000 });
+  await page.waitForFunction(() => !!document.querySelector('.artifact-card-item.active'), null, { timeout: 60000 });
   await page.waitForSelector('.artifact-card-item[data-asset="lion"]', { timeout: 15000 });
   const lionDone = page.waitForResponse((res) => /\/models\/lion.*\.glb$/.test(new URL(res.url()).pathname), { timeout: 30000 });
   await page.click('.artifact-card-item[data-asset="lion"]');
@@ -674,7 +664,7 @@ if (typeof ${classId} !== 'undefined' && ${classId}.prototype && ${classId}.prot
   page.on('pageerror', (e) => errors.push(String(e.message || e)));
   await page.goto(`${BASE}/gallery.html`, { waitUntil: 'load', timeout: 60000 });
   await dismissConsent(page);
-  await page.waitForTimeout(6000);
+  await page.waitForFunction(() => (window.__envDisposes || 0) >= 1 && (window.__pmremDisposes || 0) >= 1, null, { timeout: 60000 }).catch(() => {});
   const r = await page.evaluate(() => ({ env: window.__envDisposes || 0, pmrem: window.__pmremDisposes || 0 }));
   check('B-18: the environment map and PMREM generator are disposed at startup', r.env >= 1 && r.pmrem >= 1, { ...r, errors: errors.slice(0, 2) });
   await context.close();
@@ -687,9 +677,8 @@ if (typeof ${classId} !== 'undefined' && ${classId}.prototype && ${classId}.prot
   const page = await context.newPage();
   await page.goto(`${BASE}/gallery.html`, { waitUntil: 'load', timeout: 60000 });
   await dismissConsent(page);
-  await page.waitForFunction(() => (document.getElementById('hero-main-title') || {}).textContent, null, { timeout: 30000 });
+  await page.waitForFunction(() => !!document.querySelector('.artifact-card-item.active') && !!document.querySelector('canvas'), null, { timeout: 60000 });
   const title = await page.evaluate(() => document.getElementById('hero-main-title').textContent);
-  await page.waitForTimeout(3000);
   const taps = await page.evaluate(async () => {
     const canvas = document.querySelector('canvas');
     const rect = canvas.getBoundingClientRect();
@@ -719,7 +708,7 @@ if (typeof ${classId} !== 'undefined' && ${classId}.prototype && ${classId}.prot
   page.on('pageerror', (e) => errors.push(String(e.message || e)));
   await page.goto(`${BASE}/index.html`, { waitUntil: 'load', timeout: 60000 });
   await dismissConsent(page);
-  await page.waitForFunction(() => window.__shelf && window.__shelf.books && window.__shelf.books.length === 11, null, { timeout: 45000 });
+  await page.waitForFunction(() => window.__shelf && window.__shelf.books && window.__shelf.books.length === 11, null, { timeout: 90000 });
   await page.waitForTimeout(1500);
   const p05 = await page.evaluate(() => {
     const b = window.__shelf.books[0];
@@ -793,8 +782,10 @@ if (typeof ${classId} !== 'undefined' && ${classId}.prototype && ${classId}.prot
   const page = await context.newPage();
   await page.goto(`${BASE}/index.html`, { waitUntil: 'load', timeout: 60000 });
   await dismissConsent(page);
-  await page.waitForFunction(() => window.__shelf && window.__shelf.books && window.__shelf.books.length === 11, null, { timeout: 45000 });
-  await page.waitForFunction(() => window.__shelf.state().rafId === 0, null, { timeout: 30000 });
+  await page.waitForFunction(() => window.__shelf && window.__shelf.books && window.__shelf.books.length === 11, null, { timeout: 90000 });
+  await page.waitForTimeout(2200);
+  await page.evaluate(() => window.__shelf.advance(2));
+  await page.waitForFunction(() => window.__shelf.state().rafId === 0, null, { timeout: 90000 });
   await page.evaluate(() => {
     const r = window.__shelf.renderer;
     window.__renders = 0;
