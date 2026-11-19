@@ -429,7 +429,7 @@
     }
     const attempt = ask().then((first) => {
       if (first !== "not_finished") return first;
-      const sync = window.ProgressSync && window.ProgressSync.pushNow;
+      const sync = window.ProgressSync && (window.ProgressSync.flushNow || window.ProgressSync.pushNow);
       if (typeof sync !== "function") return null;
       return Promise.resolve(sync()).then(ask).then((again) => (again === "not_finished" ? null : again));
     }).catch(() => null);
@@ -475,6 +475,7 @@
         node.download.textContent = label;
         node.download.disabled = false;
       }
+      if (node.panel && node.panel.hidden) return;
       const stamp = issued && issued.issued_at ? new Date(issued.issued_at) : new Date();
       const dated = (Number.isNaN(stamp.getTime()) ? new Date() : stamp).toLocaleDateString(undefined, {
         year: "numeric",

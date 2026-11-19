@@ -362,6 +362,7 @@
     }
     if (isSyncing) {
       pushAfterSync = true;
+      storeOutbox();
       return Promise.resolve(null);
     }
     const owner = storedAccount();
@@ -385,9 +386,12 @@
     lastPushAt = Date.now();
     try { localStorage.setItem(LAST_PUSH_KEY, String(lastPushAt)); } catch (e) {}
     storeOutbox();
+    const uid = String(u.id);
+    const moved = function () { const now = currentUser(); return !now || String(now.id) !== uid; };
     return c.from(TABLE).select('notes, bookmarks').eq('user_id', u.id).maybeSingle().then(function (res) {
       if (res && res.error) return res;
-      const merged = mergePayload(payload, res && res.data);
+      if (moved()) return { moved: true };
+      const merged = mergePayload(collectPayload(), res && res.data);
       if (applyMerged(merged)) notifyStudySynced();
       return c.from(TABLE).upsert({
         user_id: u.id,
@@ -396,6 +400,7 @@
         updated_at: new Date().toISOString()
       });
     }).then(function (res) {
+      if (res && res.moved) return null;
       if (res && res.error) {
         const cause = errorCause(res.error);
         if (cause === 'not_authenticated') {

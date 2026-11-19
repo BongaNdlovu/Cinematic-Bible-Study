@@ -14,6 +14,31 @@ Entry template:
 
 ---
 
+## 2026-11-19 — Audit group 1: data loss and stuck pages
+
+**Why:** the first of three follow-up groups from the 19 November audit. These six findings could lose a reader's work or leave a page stuck. Each was confirmed before fixing: B-03, earlier rated only a timing race, was reproduced with a 1.5-second sign-in.
+
+**What changed:**
+
+| Finding | Fix | File |
+|---|---|---|
+| B-11 A note typed while a notes push read the cloud was overwritten on the device; a push finishing after an account switch wrote the old account's notes | The push merges the device copy as it is when the read returns, and stops if the signed-in account changed | `js/features/study-sync.js` |
+| B-12 Signing out while a pull ran dropped unsaved notes or progress without the warning | Both `flushNow()` paths put the change in the outbox, so the warning sees it | `js/features/study-sync.js`, `js/features/progress-sync.js` |
+| B-26 A certificate asked for within 6 s of the last save came out without a number; closing the panel while waiting still downloaded | The retry sends pending saves at once (`flushNow()`); a closed panel downloads nothing | `js/pages/study/certificate.js` |
+| B-16 `?asset=lion` stuck the gallery loader at 50% when that model failed | Any first exhibit's failure is counted once | `js/pages/gallery/model-loader.js` |
+| B-21 A membership check that threw left the gallery invisible | The watchdog is cleared only when access is allowed | `gallery.html`, `_headers` (CSP hash regenerated with `verify_csp_hashes.mjs --write`) |
+| B-03 A link such as `?sheet=5` opened sitting 0 when sign-in finished after the page started | The first sitting loads once sign-in has settled, and the sign-in listener waits for that first load | `js/pages/study/study-app.js` |
+
+Three comments that only described the code were removed from `js/features/progress-sync.js` (the no-comments rule), which also keeps it under the 800-line limit.
+
+New checks: `tests/unit/audit-group1-sync.test.mjs` (4 tests) and `tools/verify/verify_audit_group1.mjs` (6 checks, in `run_browser_checks.mjs`).
+
+**Handbook updated:** 02 (How syncing works, the Certificates row), 06 (three rows in the audit-fixes table), 07 (33 browser checks).
+
+**Tested:** `npx oxlint` exit 0. `npm run test:unit` 202 of 202. `npm test` exit 0. `npm run test:browser` 33 of 33. Mutation tests: with the changed files put back to master, all 4 unit tests failed, and 5 of the 6 browser checks failed. The one that still passed only checks that the slow sign-in run raises no page errors.
+
+**Status:** merged to master in PR #44.
+
 ## 2026-11-19 — Fixes for the bugs confirmed in the 19 November audit
 
 **Why:** an outside bug and performance audit listed 106 findings. Each one used here was checked against the code, a local server or a browser in this change. Only the confirmed ones are fixed. Findings that were wrong (the `/study` cache header, the glossary page behind fullscreen diagrams) or only a timing race (sitting links reset to 0) are left alone.

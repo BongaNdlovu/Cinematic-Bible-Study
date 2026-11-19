@@ -488,8 +488,6 @@
     notePending(true);
   }
 
-  /* Reflect the outbox on the shared pending-sync chip so a reader can see
-     which writes are still only on this device. */
   function notePending(pending) {
     if (window.SiteErrors && typeof window.SiteErrors.setPendingSource === 'function') {
       window.SiteErrors.setPendingSource('progress', pending);
@@ -733,7 +731,6 @@
   }
 
   function init() {
-    /* An outbox can outlive the page (failed save last visit) — surface it. */
     notePending(!!readOutbox());
     if (window.ScrollAuth && typeof window.ScrollAuth.ready === 'function') {
       window.ScrollAuth.ready().then(function () {
@@ -742,7 +739,6 @@
     }
     if (window.ScrollAuth && typeof window.ScrollAuth.onChange === 'function') {
       window.ScrollAuth.onChange(function (u) {
-        /* Sign-out wipes the outbox directly (auth.js), so re-read it. */
         notePending(!!readOutbox());
         if (u) pullAndMerge();
       });
@@ -768,8 +764,11 @@
     if (debounceTimer) clearTimeout(debounceTimer);
     debounceTimer = null;
     const c = authClient();
-    if (!c || !currentUser() || isSyncing) return Promise.resolve(null);
-    return pushFresh(c);
+    if (!c || !currentUser()) return Promise.resolve(null);
+    if (!isSyncing) return pushFresh(c);
+    const payload = collectPayload();
+    if (payload) storeOutbox(payload, knownRevision);
+    return Promise.resolve(null);
   }
 
   function clearLocal() {
