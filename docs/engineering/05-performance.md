@@ -1,6 +1,6 @@
 # 5. Performance
 
-**Last verified:** 19 November 2026 (the globe row and Shelf book maps), 16 November 2026
+**Last verified:** 19 November 2026 (the globe row, Shelf book maps, stylesheet merging and the audit performance table), 16 November 2026
 
 This chapter covers what keeps the site fast: caching, how files load, how the 3D scenes manage memory, and the size budgets that tests enforce.
 
@@ -36,7 +36,37 @@ ES module imports between site files use root paths (`'/js/pages/gallery/tour.js
 
 `tools/minify-release-css.mjs` (PostCSS) minifies every stylesheet in the bundle, including those in subfolders such as `css/pages/study/parts/` (since 16 November 2026), which also removes CSS comments. `tools/verify/verify_css_minify.mjs` tests it, including that the study parts shrink by at least a quarter in total.
 
-**The study page loads 23 study stylesheets instead of one** (since 16 November 2026). This follows the decision to keep no build step at deploy: each part is fingerprinted and cached for a year like every other asset. Not measured: the effect on the study page's first paint.
+**Stylesheets are merged at deploy** (since 19 November 2026). The source keeps one file per study feature. On 19 November 2026 the deploy began merging each page's unbroken runs of stylesheet links (`tools/merge-release-css.mjs`), which reverses the earlier "no build step" decision for CSS only, at the owner's request after the 19 November audit. On a staged copy, 89 links on 11 pages became 15 files; the study page's 35 local stylesheet links became 3. The measured effect is in the table below.
+
+| Change (19 November 2026) | What it saves | Where |
+|---|---|---|
+| Merged stylesheets | 32 fewer stylesheet requests on the study page | `tools/merge-release-css.mjs` |
+| No map data on the study page | `js/content/map-data.js` is no longer imported there; its 8-epoch list was identical to the fallback in `study-app.js` | `js/pages/study/main.js` |
+| Bible text and Strong's load when the Scripture panel is shown | `bible/kjv.json` (85,987 bytes) and `bible/strongs-daniel.json` (182,983 bytes) wait for the panel; `bible/sheet-passages.json` still loads at once for the chapter badge | `js/pages/study/scripture.js` |
+| Audio cue files load on the first Play | One cue file per sitting | `js/pages/study/read-along.js` |
+| Lazy images | The 8 horizon cards use `loading="lazy"`. The 3 atmosphere images were tried and put back to eager: on a throttled phone, lazy loading made the largest paint 0.8 s later (7.57 s against 6.73 s) | `js/pages/study/horizon.js` |
+| Glossary linking walks the text once | Same output on all 11 sittings (compared in a browser); 255 ms instead of 3,650 ms summed over the sittings, desktop, no throttling | `js/content/sheet-glossary.js` |
+| Start-up queries run once | Desk, dashboard, authenticator card, analytics and reviews subscribe to sign-in changes only after their first run | `desk.js`, `dashboard.js`, `mfa.js`, `analytics.js`, `reviews.js` |
+| Book reader re-paginates only on typography changes | Class changes on `<html>`/`<body>` from dialogs no longer re-paginate | `js/pages/study/book-reader.js` |
+| Mind maps | The page-wide observer runs only in full screen; a map that turns compact stops its animation loop | `mindmap.js`, `mindmap-render.js` |
+| Audio orb | The audio context is suspended 1.6 s after a pause or the end | `js/pages/study/audio-orb.js` |
+| Map globe intro | Skipped when the browser asks to save data or reports a 2G or 3G connection | `js/pages/map/map.js` |
+| Animations | The audio equaliser and the connect-button sheen animate `transform` instead of `height` and `left` | `study-audio.css`, `19-sitting-page.css` |
+
+**Measured on 19 November 2026** with `tools`-style Playwright runs on one machine, against minified copies served locally: a 390 px phone with 4× CPU slowdown and Slow 4G (1.6 Mbps, 150 ms), and a 1440 px desktop with no throttling. "Before" is the code after audit group 2; "after" adds this change.
+
+| Page | Measure | Before | After |
+|---|---|---|---|
+| Study, sitting 7, phone | Requests | 136 | 100 |
+| Study, sitting 7, phone | Load | 33.5 s | 28.9 s |
+| Study, sitting 7, phone | Total blocking time | 18.4 s | 10.4 s |
+| Study, sitting 7, phone | Longest task | 9.6 s | 4.0 s |
+| Study, sitting 7, desktop | Load | 8.9 s | 6.5 s |
+| Study, sitting 0, desktop | Load | 21.9 s | 1.4 s |
+
+First paint on the phone came out slower with merged stylesheets in this local test: 3.1–3.3 s without merging against 3.7–3.9 s with it on the study page, and 1.33 s against 1.62 s on the home page (both with eager atmosphere images). Chrome's network throttling may apply its bandwidth limit to each request separately, which would favour many small files, so this was not taken as the real effect. Before the deploy, the live home page (9 stylesheet requests, real network, phone with 4× CPU slowdown) had a median first paint of 904 ms over 5 runs. Not measured yet: the same figure after the deploy.
+
+Not changed, with reasons: the three infinite `box-shadow` pulses (`invite-breathe`, `lap-beckon`, `acct-pulse`) repaint small elements and would need a visual redesign; `flow-travel` runs once per diagram, not in a loop; P-09 (weather running from page load) was not confirmed; P-06 (smaller Sentry bundle) and P-11 (`defer` on core scripts) were left out by decision.
 
 JavaScript and HTML are **not** minified. Their comments ship to readers as written: the 12 November bundle's `study-app.4c181f2f6b9d.js` still held 351 comments. Keep comments short for that reason (see [UI rules](06-ui.md#ui-rules-worth-keeping)).
 

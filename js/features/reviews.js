@@ -756,18 +756,21 @@
     if (!document.getElementById("witnesses")) return;
     bindForm();
     bindOwnForm();
-    if (window.ScrollAuth && typeof window.ScrollAuth.ready === "function") {
-      window.ScrollAuth.ready().then(start);
-    } else {
+    const follow = function () {
       start();
-    }
-    if (window.ScrollAuth && typeof window.ScrollAuth.onChange === "function") {
-      window.ScrollAuth.onChange(function () {
-        syncFormGate();
-        syncAdminUi();
-        loadQueue();
-        loadOwnReview();
-      });
+      if (window.ScrollAuth && typeof window.ScrollAuth.onChange === "function") {
+        window.ScrollAuth.onChange(function () {
+          syncFormGate();
+          syncAdminUi();
+          loadQueue();
+          loadOwnReview();
+        });
+      }
+    };
+    if (window.ScrollAuth && typeof window.ScrollAuth.ready === "function") {
+      window.ScrollAuth.ready().then(follow);
+    } else {
+      follow();
     }
     window.addEventListener("online", recheckOwnReviewOnReconnect);
   }

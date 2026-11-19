@@ -272,8 +272,18 @@
     /* A sitting switch replaces #sheet-article's innerHTML before destroy() can
        run, which would leave the page locked. The observer sees the detach and
        runs the same undo as destroy(). */
+    let treeWatch = null;
+
+    function watchTree(on) {
+      if (!('MutationObserver' in window)) return;
+      if (!treeWatch) treeWatch = new MutationObserver(onTreeChange);
+      if (on) treeWatch.observe(document.body, { childList: true, subtree: true });
+      else treeWatch.disconnect();
+    }
+
     function onTreeChange() {
       if (!state.full || host.isConnected) return;
+      watchTree(false);
       state.full = false;
       host.classList.remove('is-full');
       document.documentElement.classList.remove('mm-fullscreen-open');
@@ -290,6 +300,7 @@
     function enterFull() {
       if (state.compact || state.full) return;
       state.full = true;
+      watchTree(true);
       state.fsOpener = document.activeElement;
       /* The host becomes the whole of what is on screen. `role` and
          `aria-label` are restored from what the block had — the label is the
@@ -320,6 +331,7 @@
     function exitFull(refocus) {
       if (!state.full) return;
       state.full = false;
+      watchTree(false);
       host.classList.remove('is-full');
       /* The overlay scrolls the block to bring a film's control into view. The
          class already un-makes the block a scroll container, but the offsets it
@@ -467,11 +479,6 @@
         ro.observe(host);
         observers.push(ro);
       }
-      if ('MutationObserver' in window) {
-        const mo = new MutationObserver(onTreeChange);
-        mo.observe(document.body, { childList: true, subtree: true });
-        observers.push(mo);
-      }
       if ('IntersectionObserver' in window) {
         const io = new IntersectionObserver((entries) => {
           const hit = entries.some((entry) => entry.isIntersecting);
@@ -519,6 +526,7 @@
          node on top of it. `state.full` is cleared before the deferred fitters
          can run, so each of them sees the guard and does nothing. */
       state.full = false;
+      watchTree(false);
       state.fsOpener = null;
       host.classList.remove('is-full');
       host.setAttribute('role', state.hostRole || 'group');

@@ -468,6 +468,7 @@
         if (compact !== state.compact) {
           state.compact = compact;
           host.classList.toggle('is-compact', compact);
+          if (compact) stopLoop();
         }
       }
       if (!dom.stage) return;

@@ -286,11 +286,18 @@
     setPlayingUI(true);
     wake();
   });
+  function restAudio() {
+    setTimeout(function () {
+      if (player.paused && actx && actx.state === 'running') actx.suspend();
+    }, 1600);
+  }
   player.addEventListener('pause', function () {
     setPlayingUI(false);
     settleUntil = performance.now() + 1400;
     wake();
+    restAudio();
   });
+  player.addEventListener('ended', restAudio);
   player.addEventListener('emptied', function () {
     setPlayingUI(false);
     bassSm = 0;

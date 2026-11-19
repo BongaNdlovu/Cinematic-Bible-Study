@@ -358,9 +358,9 @@ body.paper-mode .epoch-facts .fact:nth-child(2) b,
       animation: invite-orb 1.9s ease-in-out infinite;
     }
     @keyframes connect-sheen {
-      0% { left: -60%; opacity: 0; }
+      0% { transform: translateX(0); opacity: 0; }
       12% { opacity: 1; }
-      100% { left: 118%; opacity: 0; }
+      100% { transform: translateX(395.56%); opacity: 0; }
     }
     @keyframes invite-breathe {
       0%, 100% {

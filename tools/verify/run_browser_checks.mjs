@@ -32,6 +32,7 @@ export const BROWSER_CHECKS = [
   { file: 'verify_study_audit_fixes.mjs', base: 'flag' },
   { file: 'verify_audit_group1.mjs', base: 'flag' },
   { file: 'verify_audit_group2.mjs', base: 'flag' },
+  { file: 'verify_audit_group3.mjs', base: 'flag' },
   { file: 'verify_readalong.mjs', base: 'positional' },
   { file: 'verify_scripture.mjs', base: 'none' },
   { file: 'verify_sitting4_fixes.mjs', base: 'flag' },

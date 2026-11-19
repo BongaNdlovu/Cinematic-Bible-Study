@@ -471,10 +471,10 @@
     const again = byId('insights-refresh');
     if (again) again.addEventListener('click', function () { load(); });
     if (window.ScrollAuth && typeof window.ScrollAuth.ready === 'function') {
-      window.ScrollAuth.ready().then(load);
-    }
-    if (window.ScrollAuth && typeof window.ScrollAuth.onChange === 'function') {
-      window.ScrollAuth.onChange(load);
+      window.ScrollAuth.ready().then(function () {
+        load();
+        if (typeof window.ScrollAuth.onChange === 'function') window.ScrollAuth.onChange(load);
+      });
     }
   }
 

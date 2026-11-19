@@ -133,7 +133,7 @@ import { canAccessSheet, currentSheetIndex, denyLockedSitting, epochAccessible, 
         (epochAccessible(i) ? '' : ' is-locked') +
         '" id="t-node-' + i + '" data-epoch="' + i + '" aria-pressed="' + (i === 0 ? 'true' : 'false') + '"' +
         (epochAccessible(i) ? '' : ' disabled aria-disabled="true" title="' + memberLockText('Locked — finish the open sitting first') + '"') + '>' +
-        '<img src="' + ep.image + '" alt="' + ep.year + '">' +
+        '<img src="' + ep.image + '" alt="' + ep.year + '" loading="lazy" decoding="async">' +
         '<span class="horizon-card-veil"></span>' +
         '<span class="horizon-card-year">' + ep.year + '</span>' +
         '</button>'

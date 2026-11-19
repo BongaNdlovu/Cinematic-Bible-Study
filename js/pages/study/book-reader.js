@@ -1324,7 +1324,13 @@
       }
     }
     if (window.MutationObserver) {
-      var attrs = new MutationObserver(schedule);
+      var lastLook = typeLook();
+      var attrs = new MutationObserver(function () {
+        var look = typeLook();
+        if (look === lastLook) return;
+        lastLook = look;
+        schedule();
+      });
       attrs.observe(document.documentElement, { attributes: true, attributeFilter: ['style', 'class', 'data-theme'] });
       attrs.observe(document.body, { attributes: true, attributeFilter: ['class'] });
       s.stops.push(function () {
@@ -1361,6 +1367,17 @@
       });
     }
     watchFlows(s);
+  }
+
+  function typeClasses(target) {
+    return String(target.className || '').split(/\s+/).filter(function (c) {
+      return /mode$|theme|font|projection|dark|light/.test(c);
+    }).sort().join(' ');
+  }
+
+  function typeLook() {
+    var html = document.documentElement;
+    return [html.getAttribute('style') || '', html.getAttribute('data-theme') || '', typeClasses(html), typeClasses(document.body)].join('|');
   }
 
   function clearSwitches(article) {

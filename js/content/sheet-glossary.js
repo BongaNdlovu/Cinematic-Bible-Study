@@ -433,22 +433,25 @@
     });
     jobs.sort(function (a, b) { return b.name.length - a.name.length; });
 
+    var nodes = [];
+    var walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+      acceptNode: function (node) {
+        if (!node.nodeValue || !node.nodeValue.trim()) return NodeFilter.FILTER_REJECT;
+        if (skipParent(node.parentElement)) return NodeFilter.FILTER_REJECT;
+        return NodeFilter.FILTER_ACCEPT;
+      }
+    });
+    while (walker.nextNode()) nodes.push(walker.currentNode);
+
     var used = {};
     jobs.forEach(function (job) {
       if (used[job.id]) return;
-      var walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
-        acceptNode: function (node) {
-          if (!node.nodeValue || !node.nodeValue.trim()) return NodeFilter.FILTER_REJECT;
-          if (skipParent(node.parentElement)) return NodeFilter.FILTER_REJECT;
-          return NodeFilter.FILTER_ACCEPT;
-        }
-      });
-      while (walker.nextNode()) {
-        var node = walker.currentNode;
+      for (var i = 0; i < nodes.length; i++) {
+        var node = nodes[i];
         var at = findMatch(node.nodeValue, job.name);
         if (at < 0) continue;
         var mid = node.splitText(at);
-        mid.splitText(job.name.length);
+        var after = mid.splitText(job.name.length);
         var mark = document.createElement("button");
         mark.type = "button";
         mark.className = "term-gloss";
@@ -456,6 +459,7 @@
         mark.setAttribute("aria-label", "Glossary: " + job.name);
         mark.textContent = mid.nodeValue;
         mid.parentNode.replaceChild(mark, mid);
+        nodes.splice(i, 1, node, after);
         used[job.id] = true;
         break;
       }

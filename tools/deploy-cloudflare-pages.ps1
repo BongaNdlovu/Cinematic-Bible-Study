@@ -46,6 +46,8 @@ if ($runtimeMissing) { throw ("deploy bundle is missing: " + ($runtimeMissing -j
 $dotLeft = Get-ChildItem -Path $stage -Recurse -Force | Where-Object { $_.Name -like ".*" }
 if ($dotLeft) { throw ("deploy bundle still contains dotfiles: " + (($dotLeft | ForEach-Object { $_.FullName.Substring($stage.Length + 1) }) -join ", ")) }
 
+node (Join-Path $root "tools\merge-release-css.mjs") $stage
+if ($LASTEXITCODE -ne 0) { throw "merge-release-css failed" }
 node (Join-Path $root "tools\minify-release-css.mjs") $stage
 if ($LASTEXITCODE -ne 0) { throw "minify-release-css failed" }
 

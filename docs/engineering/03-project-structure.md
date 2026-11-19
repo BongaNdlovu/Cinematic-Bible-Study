@@ -2,7 +2,7 @@
 
 **Last verified:** 18 November 2026
 
-The site has no build step for its pages. The files in the repository root and in `js/`, `css/`, `assets/`, `bible/`, `models/` and `vendor/` are what browsers download. The deploy script copies them into a clean folder, then minifies the CSS and fingerprints the file names (see [Develop, test, release](07-develop-test-release.md#deploying)).
+The site has no build step for its pages. The files in the repository root and in `js/`, `css/`, `assets/`, `bible/`, `models/` and `vendor/` are what browsers download. The deploy script copies them into a clean folder, merges each page's unbroken runs of stylesheet links into one file (since 19 November 2026), then minifies the CSS and fingerprints the file names (see [Develop, test, release](07-develop-test-release.md#deploying)).
 
 ## Top level
 

@@ -18,7 +18,6 @@ import '/js/features/ui-click-sound.js';
 import '/js/features/review-helpers.js';
 import '/js/features/reviews.js';
 import '/js/pages/study/scripture.js';
-import '/js/content/map-data.js';
 import '/js/pages/study/workbench-rubric.js';
 import '/js/pages/study/workbench-store.js';
 import '/js/pages/study/workbench-sittings.js';
