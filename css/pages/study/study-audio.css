@@ -159,6 +159,8 @@ body.white-mode #lesson-audio {
   animation: lap-beckon 4.8s cubic-bezier(0.22, 0.61, 0.36, 1) 1.4s infinite both;
 }
 #lesson-audio .lap-play.is-beckoning::after { animation-delay: 1.9s; }
+#lesson-audio .lap-play.is-beckoning.is-offscreen::before,
+#lesson-audio .lap-play.is-beckoning.is-offscreen::after { animation-play-state: paused; }
 @keyframes lap-beckon {
   0% { box-shadow: 0 0 0 0 rgba(244, 212, 126, 0.42); }
   34% { box-shadow: 0 0 0 11px rgba(244, 212, 126, 0); }

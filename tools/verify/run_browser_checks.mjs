@@ -33,6 +33,7 @@ export const BROWSER_CHECKS = [
   { file: 'verify_audit_group1.mjs', base: 'flag' },
   { file: 'verify_audit_group2.mjs', base: 'flag' },
   { file: 'verify_audit_group3.mjs', base: 'flag' },
+  { file: 'verify_audit_followups.mjs', base: 'flag', timeoutMs: 360000 },
   { file: 'verify_readalong.mjs', base: 'positional' },
   { file: 'verify_scripture.mjs', base: 'none' },
   { file: 'verify_sitting4_fixes.mjs', base: 'flag' },

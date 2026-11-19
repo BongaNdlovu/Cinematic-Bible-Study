@@ -6,7 +6,7 @@ import { bodyFlow, flowContinuation, wireFlow } from '/js/pages/study/diagrams/f
 import { bodyTimeline, wireTimeline } from '/js/pages/study/diagrams/timeline.js';
 import { FULLSCREEN_KINDS, fullscreenControlHtml, releaseFigureFullscreen, releaseFullscreenLeftovers, wireDiagramFullscreen } from '/js/pages/study/diagrams/fullscreen.js';
 import { bodyStory, wireStory } from '/js/pages/study/story.js';
-import { pausePomodoro, resetPomodoro, resizeWeatherCanvas, setPomodoroDuration, setWeatherPreset, startPomodoro, startWeatherAnimation, stopWeatherAnimation, tickPomodoro, togglePomodoroDrawer, updateAutoWeather, updateTimerDisplay, weatherPreset } from '/js/pages/study/focus-timer.js';
+import { pausePomodoro, resetPomodoro, resizeWeatherCanvas, setPomodoroDuration, setWeatherPreset, startPomodoro, startWeatherAnimation, stopWeatherAnimation, tickPomodoro, togglePomodoroDrawer, updateAutoWeather, updateTimerDisplay, weatherRunning, weatherShouldRun } from '/js/pages/study/focus-timer.js';
 import { AudioCheckpoints, AudioReader, renderLessonMedia } from '/js/pages/study/read-along.js';
 import { adjustFontSize, applyFontSize, applyTheme, currentThemeIdx, cycleTheme, fontAuto, fontSizes, setCurrentFontIdx, setCurrentThemeIdx, setFontAuto, themes } from '/js/pages/study/reading-settings.js';
 import { closeCitePanel, decorateCitations, escapeStudy, onCitePanelKey, referenceIndex, renderSheetVerify, resolveCiteLabel, revealReference, syncCiteClose } from '/js/pages/study/references.js';
@@ -565,7 +565,7 @@ import { loadStudyModule, openCertificateIfReady, studyModuleFailed, syncCertifi
       }
       showSheetLoading(false);
       const flow = window.StudyTaskFlow;
-      if (flow && typeof flow.closeNow === 'function' && flow.isOpen()) flow.closeNow();
+      if (flow && typeof flow.closeNow === 'function') flow.closeNow();
       rememberSheetUrl(index);
       currentSheetIndex = index;
       setEndCardShownForSheet(-1);
@@ -958,12 +958,11 @@ import { loadStudyModule, openCertificateIfReady, studyModuleFailed, syncCertifi
       syncCertificateCta();
       applyFontSize();
       applyTheme(currentThemeIdx, true);
-      resizeWeatherCanvas();
       updateAutoWeather();
       setWeatherPreset('auto', true);
       updateTimerDisplay();
       window.addEventListener('resize', () => {
-        resizeWeatherCanvas();
+        if (weatherRunning) resizeWeatherCanvas();
         if (sittingGuideMode === 'end') {
           const data = sheetsData[currentSheetIndex];
           const spotId = (data && data.guide && data.guide.end && data.guide.end.spotlight) || 'next-sheet-btn';
@@ -1146,7 +1145,7 @@ import { loadStudyModule, openCertificateIfReady, studyModuleFailed, syncCertifi
       }
       document.addEventListener('visibilitychange', () => {
         if (document.hidden) stopWeatherAnimation();
-        else if (weatherPreset !== 'off') startWeatherAnimation();
+        else if (weatherShouldRun()) startWeatherAnimation();
       });
       if (window.StudyCompetency) {
         const openPlacement = function () { window.StudyCompetency.initPlacementModal(); };

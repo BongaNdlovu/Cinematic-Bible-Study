@@ -126,6 +126,7 @@
   }
 
   let swapTimer = 0;
+  let leaveTimer = 0;
 
   function swap(render) {
     if (swapTimer) clearTimeout(swapTimer);
@@ -371,6 +372,8 @@
     if (!s) return false;
     if (!root) build();
     if (screen !== 'closed') return true;
+    if (leaveTimer) clearTimeout(leaveTimer);
+    leaveTimer = 0;
     const wasLeaving = root.classList.contains('is-leaving');
     closeGen++;
     if (wasLeaving) {
@@ -388,9 +391,11 @@
   }
 
   function close(after, now) {
-    if (!root || screen === 'closed') return;
+    if (!root || (screen === 'closed' && (!now || root.hidden))) return;
     if (swapTimer) clearTimeout(swapTimer);
     swapTimer = 0;
+    if (leaveTimer) clearTimeout(leaveTimer);
+    leaveTimer = 0;
     stopWaiting();
     screen = 'closed';
     document.removeEventListener('keydown', onKey, true);
@@ -398,6 +403,7 @@
     root.classList.add('is-leaving');
     const gen = ++closeGen;
     const finish = () => {
+      leaveTimer = 0;
       if (gen !== closeGen || screen !== 'closed') return;
       restoreAll();
       stage.innerHTML = '';
@@ -411,7 +417,7 @@
       returnFocus = null;
     };
     if (now || still()) finish();
-    else setTimeout(finish, LEAVE_MS);
+    else leaveTimer = setTimeout(finish, LEAVE_MS);
   }
 
   function onClick(event) {

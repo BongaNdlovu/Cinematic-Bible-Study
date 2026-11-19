@@ -66,13 +66,28 @@
   }
 
   var hintDone = false;
+  var hintObserver = null;
   try { hintDone = localStorage.getItem(HINT_KEY) === 'done'; } catch (e) {}
-  if (!hintDone) playBtn.classList.add('is-beckoning');
+  if (!hintDone) {
+    playBtn.classList.add('is-beckoning');
+    if ('IntersectionObserver' in window) {
+      hintObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          playBtn.classList.toggle('is-offscreen', !entry.isIntersecting);
+        });
+      }, { rootMargin: '120px 0px' });
+      hintObserver.observe(playBtn);
+    }
+  }
 
   function endHint() {
     if (hintDone) return;
     hintDone = true;
-    playBtn.classList.remove('is-beckoning');
+    playBtn.classList.remove('is-beckoning', 'is-offscreen');
+    if (hintObserver) {
+      hintObserver.disconnect();
+      hintObserver = null;
+    }
     try { localStorage.setItem(HINT_KEY, 'done'); } catch (e) {}
   }
 
