@@ -10,9 +10,14 @@ function check(name, ok, detail) {
   if (!ok) failures += 1;
 }
 
-const browser = await chromium.launch({ headless: true, args: ['--use-angle=swiftshader', '--enable-unsafe-swiftshader'] });
+let browser = null;
+async function relaunch() {
+  if (browser) await browser.close().catch(() => {});
+  browser = await chromium.launch({ headless: true });
+}
 
 async function study(sheet, { theme = 'charcoal', query = '', setup = null } = {}) {
+  await relaunch();
   const context = await browser.newContext({ viewport: { width: 1440, height: 900 } });
   await context.addInitScript(signedInScript({ bookView: 'scroll' }));
   await context.addInitScript((t) => localStorage.setItem('daniel_theme_name_v1', t), theme);
@@ -118,6 +123,7 @@ check('every diagram citation chip opens a reference row that holds its verse', 
 }
 
 {
+  await relaunch();
   const context = await browser.newContext({ viewport: { width: 1440, height: 900 } });
   await context.addInitScript(signedInScript());
   const page = await context.newPage();
