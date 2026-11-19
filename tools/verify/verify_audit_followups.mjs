@@ -9,15 +9,18 @@ const server = await ensureServer({ preferred: 8149, probe: '/study.html' });
 const BASE = server.base;
 
 let failures = 0;
+const failedLines = [];
 function check(name, ok, detail) {
-  console.log(`${ok ? 'PASS' : 'FAIL'}  ${name}${detail ? '   ' + (typeof detail === 'string' ? detail : JSON.stringify(detail)) : ''}`);
-  if (!ok) failures += 1;
+  const line = `${ok ? 'PASS' : 'FAIL'}  ${name}${detail ? '   ' + (typeof detail === 'string' ? detail : JSON.stringify(detail)) : ''}`;
+  console.log(line);
+  if (!ok) { failures += 1; failedLines.push(line); }
 }
 
 let browser = null;
-async function relaunch(extraArgs = []) {
+async function relaunch({ webgl = false, extraArgs = [] } = {}) {
   if (browser) await browser.close().catch(() => {});
-  browser = await chromium.launch({ headless: true, args: [...webglFlags(), ...extraArgs] });
+  const args = webgl ? [...webglFlags(), ...extraArgs] : [...extraArgs];
+  browser = await chromium.launch({ headless: true, args });
 }
 
 async function studyPage(sheet, { completed = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10], initScripts = [], viewport } = {}) {
@@ -141,9 +144,8 @@ const WEATHER_WORKER_SPY = `(() => {
   const { context, page } = await studyPage(0, { initScripts: [noOffscreen] });
   await page.click('[data-action="atmosphere"]');
   await page.waitForFunction(() => !!window.WeatherScene, null, { timeout: 15000 });
-  await page.waitForTimeout(600);
   const a = await page.evaluate(() => window.__paint.clear);
-  await page.waitForTimeout(600);
+  await page.waitForFunction((prev) => window.__paint.clear > prev, a, { timeout: 10000 }).catch(() => {});
   const b = await page.evaluate(() => window.__paint.clear);
   check('P-09: the main-thread fallback draws weather frames while the drawer is open', b > a, { first: a, second: b });
   await page.click('#pomo-dock [data-action="atmosphere"]');
@@ -294,6 +296,7 @@ const WEATHER_WORKER_SPY = `(() => {
   });
   check('B-25: closing the end spotlight stops the deferred spotlight updates from stealing the scroll', end.shown && end.scrollY < 60, end);
 
+  await page.evaluate(() => window.StudySheets && window.StudySheets.ensure(1));
   const flush = await page.evaluate(() => {
     window.StudyTaskFlow.open();
     const open = window.StudyTaskFlow.isOpen();
@@ -395,38 +398,46 @@ const WEATHER_WORKER_SPY = `(() => {
 }
 
 {
-  const context = await browser.newContext({ viewport: { width: 1440, height: 900 } });
-  await context.addInitScript(signedInScript({ completedSheets: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10], bookView: 'scroll' }));
-  await context.addInitScript(`try { localStorage.removeItem('daniel_audio_play_hint_v1'); } catch (e) {}`);
-  const page = await context.newPage();
-  await page.goto(`${BASE}/study.html?sheet=0&preview=full`, { waitUntil: 'load', timeout: 60000 });
-  await dismissConsent(page);
+  const { context, page } = await studyPage(0, {
+    initScripts: [`try { localStorage.removeItem('daniel_audio_play_hint_v1'); } catch (e) {}`]
+  });
   await page.waitForSelector('[data-lap-play]', { timeout: 20000 });
-  const r = await page.evaluate(async () => {
+  await page.evaluate(() => {
     const btn = document.querySelector('[data-lap-play]');
     const section = document.getElementById('lesson-audio');
     if (section) section.hidden = false;
     btn.classList.add('is-beckoning');
-    await new Promise((res) => setTimeout(res, 300));
-    const style = (sel) => getComputedStyle(btn, sel);
     btn.scrollIntoView({ block: 'center' });
-    await new Promise((res) => setTimeout(res, 400));
-    const onscreen = {
-      off: btn.classList.contains('is-offscreen'),
-      before: style('::before').animationPlayState,
-      after: style('::after').animationPlayState
-    };
-    window.scrollTo(0, document.body.scrollHeight);
-    await new Promise((res) => setTimeout(res, 400));
-    const offscreen = {
-      off: btn.classList.contains('is-offscreen'),
-      before: style('::before').animationPlayState,
-      after: style('::after').animationPlayState
-    };
-    return { onscreen, offscreen };
   });
-  check('lap-beckon: the hint rings run while the play button is on screen', !r.onscreen.off && r.onscreen.before === 'running' && r.onscreen.after === 'running', r.onscreen);
-  check('lap-beckon: the hint rings pause while the play button is scrolled offscreen', r.offscreen.off && r.offscreen.before === 'paused' && r.offscreen.after === 'paused', r.offscreen);
+  await page.waitForFunction(() => {
+    const btn = document.querySelector('[data-lap-play]');
+    return !!(btn && !btn.classList.contains('is-offscreen'));
+  }, null, { timeout: 10000 }).catch(() => {});
+  const onscreen = await page.evaluate(() => {
+    const btn = document.querySelector('[data-lap-play]');
+    const style = (sel) => getComputedStyle(btn, sel);
+    return {
+      off: btn.classList.contains('is-offscreen'),
+      before: style('::before').animationPlayState,
+      after: style('::after').animationPlayState
+    };
+  });
+  await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
+  await page.waitForFunction(() => {
+    const btn = document.querySelector('[data-lap-play]');
+    return !!(btn && btn.classList.contains('is-offscreen'));
+  }, null, { timeout: 10000 }).catch(() => {});
+  const offscreen = await page.evaluate(() => {
+    const btn = document.querySelector('[data-lap-play]');
+    const style = (sel) => getComputedStyle(btn, sel);
+    return {
+      off: btn.classList.contains('is-offscreen'),
+      before: style('::before').animationPlayState,
+      after: style('::after').animationPlayState
+    };
+  });
+  check('lap-beckon: the hint rings run while the play button is on screen', !onscreen.off && onscreen.before === 'running' && onscreen.after === 'running', onscreen);
+  check('lap-beckon: the hint rings pause while the play button is scrolled offscreen', offscreen.off && offscreen.before === 'paused' && offscreen.after === 'paused', offscreen);
   await context.close();
 }
 
@@ -560,7 +571,7 @@ if (typeof ${classId} !== 'undefined' && ${classId}.prototype && ${classId}.prot
 }`;
 
 {
-  await relaunch();
+  await relaunch({ webgl: true });
   const context = await browser.newContext({ viewport: { width: 1440, height: 900 }, reducedMotion: 'reduce' });
   await context.addInitScript(signedInScript());
   const lionRequests = [];
@@ -658,7 +669,7 @@ if (typeof ${classId} !== 'undefined' && ${classId}.prototype && ${classId}.prot
 }
 
 {
-  await relaunch();
+  await relaunch({ webgl: true });
   const context = await browser.newContext({ viewport: { width: 390, height: 844 }, hasTouch: true });
   await context.addInitScript(signedInScript());
   const page = await context.newPage();
@@ -691,7 +702,7 @@ if (typeof ${classId} !== 'undefined' && ${classId}.prototype && ${classId}.prot
 /* ---------- Group 5: shelf (P-05, B-23) ---------- */
 
 {
-  await relaunch();
+  await relaunch({ webgl: true });
   const context = await browser.newContext({ viewport: { width: 1440, height: 900 }, reducedMotion: 'reduce' });
   const page = await context.newPage();
   const errors = [];
@@ -774,7 +785,7 @@ if (typeof ${classId} !== 'undefined' && ${classId}.prototype && ${classId}.prot
     r.render = (...a) => { window.__renders += 1; return orig(...a); };
   });
   await page.setViewportSize({ width: 1280, height: 860 });
-  await page.waitForTimeout(800);
+  await page.waitForFunction(() => window.__renders >= 1, null, { timeout: 15000 }).catch(() => {});
   const renders = await page.evaluate(() => window.__renders);
   check('B-23: a viewport resize while the reduced-motion shelf is idle redraws once', renders >= 1, { renders });
   check('the shelf run raises no page errors', errors.length === 0, errors.slice(0, 3));
@@ -783,5 +794,6 @@ if (typeof ${classId} !== 'undefined' && ${classId}.prototype && ${classId}.prot
 
 await browser.close();
 server.stop();
+if (failedLines.length) console.log('\nFAILED CHECKS:\n' + failedLines.join('\n'));
 console.log(failures ? `\n${failures} check(s) failed` : '\nall audit follow-up checks passed');
 process.exit(failures ? 1 : 0);
