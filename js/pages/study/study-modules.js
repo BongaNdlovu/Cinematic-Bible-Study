@@ -22,6 +22,8 @@ import { completedSheets, showToast } from '/js/pages/study/study-app.js';
       return host ? host.getAttribute('data-' + name) || '' : '';
     }
 
+    const MODULE_GLOBALS = { mindmap: 'MindMap', certificate: 'StudyCertificate', weather: 'WeatherScene' };
+
     export function loadStudyModule(name) {
       const known = studyModules.get(name);
       if (known) return known.promise;
@@ -32,7 +34,11 @@ import { completedSheets, showToast } from '/js/pages/study/study-app.js';
         const tag = document.createElement('script');
         tag.src = src;
         tag.async = true;
-        tag.addEventListener('load', () => resolve());
+        tag.addEventListener('load', () => {
+          const needed = MODULE_GLOBALS[name];
+          if (needed && !window[needed]) reject(new Error(name + ' loaded without ' + needed));
+          else resolve();
+        });
         tag.addEventListener('error', () => {
           tag.remove();
           reject(new Error(name + ' failed to load'));

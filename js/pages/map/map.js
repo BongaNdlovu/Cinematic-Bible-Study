@@ -92,7 +92,7 @@
     }
 
     const { stage, tiles, globeHost, stone, loadEl, chapter, overture, cartouche, legend, dossier, hint, credit, timeline, prevBtn, nextBtn, track, playBtn, scrubPath, scrubMax, scrub, scrubInput, bases } = window.MapDom.buildMapDom({ cinematic, globeFailed, root, setYear, stopPlayback, yearOpen });
-    const { addRuler, applyOverlayOpacity, applySheet, clearSiteLayers, currentEpoch, currentPolities, destroyLeaflet, drawOverlays, findMapItem, globeItems, markBase, markerCopy, nearestOpenEpoch, openDossier, openEpochDossier, pickItem, resize, routeFor, scrubPreview, scrubRead, setBasemap, setViewParam, showChapter, showFootprint, showLoadFailure, stepYear, yearIndex } = window.MapRender.make({ bases, chapter, cinematic, clampSheetIndex, closeDossier, dossier, dossierBodyHtml, esc, initLeaflet, isLessonId, lessonOverlay, loadEl, nodeOpen, opts, playRoute, root, scrub, scrubPath, setBeacon, setYear, sheetPack, showMap, start, state, stopPlayback, syncGlobe, yearOpen });
+    const { addRuler, applyOverlayOpacity, applySheet, clearSiteLayers, currentEpoch, currentPolities, destroyLeaflet, drawOverlays, findMapItem, globeItems, markBase, markerCopy, nearestOpenEpoch, openDossier, openEpochDossier, pickItem, resize, routeFor, scrubPreview, scrubRead, selectPolity, setBasemap, setViewParam, showChapter, showFootprint, showLoadFailure, stepYear, yearIndex } = window.MapRender.make({ bases, chapter, cinematic, clampSheetIndex, closeDossier, dossier, dossierBodyHtml, esc, initLeaflet, isLessonId, lessonOverlay, loadEl, nodeOpen, opts, playRoute, root, scrub, scrubPath, setBeacon, setYear, sheetPack, showMap, start, state, stopPlayback, syncGlobe, yearOpen });
     const viewBtn = bases.querySelector(".cmap-view-btn");
     if (globeFailed) viewBtn.remove();
     const layers = el("div", { class: "cmap-layers", id: "cmap-layers-panel" },
@@ -559,7 +559,11 @@
         if (!nodeOpen(evn.id)) return;
         if (evn.name.toLowerCase().indexOf(q) !== -1) hits.push({ kind: "event", id: evn.id, year: evn.yearId, label: evn.name, lat: evn.lat, lon: evn.lon });
       });
-      searchHits.innerHTML = hits.slice(0, 8).map((h) => "<button type='button' data-kind='" + h.kind + "' data-id='" + h.id + "' data-year='" + (h.year || h.id) + "' data-lat='" + (h.lat || "") + "' data-lon='" + (h.lon || "") + "'>" + h.label + "</button>").join("") || "<p>No matches</p>";
+      Object.keys(DATA.empires).forEach((key) => {
+        const emp = DATA.empires[key];
+        if ((key + " " + (emp.name || "")).toLowerCase().indexOf(q) !== -1) hits.push({ kind: "empire", id: key, label: emp.name || key });
+      });
+      searchHits.innerHTML = hits.slice(0, 8).map((h) => "<button type='button' data-kind='" + h.kind + "' data-id='" + h.id + "' data-year='" + (h.year || h.id) + "' data-lat='" + (h.lat == null ? "" : h.lat) + "' data-lon='" + (h.lon == null ? "" : h.lon) + "'>" + h.label + "</button>").join("") || "<p>No matches</p>";
       searchHits.hidden = false;
     });
     searchHits.addEventListener("click", (ev) => {
@@ -567,6 +571,10 @@
       if (!b) return;
       searchHits.hidden = true;
       searchInput.value = "";
+      if (b.dataset.kind === "empire") {
+        selectPolity(b.dataset.id);
+        return;
+      }
       const year = b.dataset.year;
       if (year && (b.dataset.kind === "year" || year !== state.yearId)) {
         stopPlayback();
@@ -580,6 +588,13 @@
       if (kind === "city") item = DATA.cities.find((c) => c.id === b.dataset.id);
       else if (kind === "event") item = DATA.events.find((e) => e.id === b.dataset.id);
       if (item) openDossier(markerCopy(item, kind === "event"));
+    });
+
+    searchInput.addEventListener("keydown", (ev) => {
+      if (ev.key === "Escape") searchHits.hidden = true;
+    });
+    document.addEventListener("pointerdown", (ev) => {
+      if (!searchBox.contains(ev.target)) searchHits.hidden = true;
     });
 
     const layersPanel = root.querySelector("#cmap-layers-panel");

@@ -54,6 +54,8 @@
     var splashes = [];
     var gust = 0;
     var lastFrame = 0;
+    var viewW = 0;
+    var viewH = 0;
 
     function seed(w, h) {
       particles = Array.from({ length: 640 }, function () {
@@ -87,7 +89,8 @@
     }
 
     function draw() {
-      var w = canvas.width, h = canvas.height;
+      var w = viewW || canvas.width, h = viewH || canvas.height;
+      ctx.setTransform(canvas.width / w, 0, 0, canvas.height / h, 0, 0);
       ctx.clearRect(0, 0, w, h);
       if (state.type === 'off') {
         frameId = null;
@@ -275,9 +278,11 @@
     }
 
     return {
-      resize: function (width, height, viewW, viewH) {
+      resize: function (width, height, nextViewW, nextViewH) {
         canvas.width = width;
         canvas.height = height;
+        viewW = nextViewW || width;
+        viewH = nextViewH || height;
         seed(viewW, viewH);
       },
       setState: function (next) {

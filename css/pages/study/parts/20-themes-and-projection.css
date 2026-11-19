@@ -85,6 +85,7 @@
       font-size: 18px;
     }
     body.projection-mode .article-body {
+      --reading-font-size: 22px;
       font-size: 22px;
       line-height: 1.85;
       max-width: 960px;
@@ -217,12 +218,12 @@
     body.white-mode .article-body,
     body.charcoal-mode .article-body p,
     body.night-mode .article-body p,
-    body.paper-mode .article-body p,
-    body.white-mode .article-body p,
+    body.paper-mode .article-body p:where(:not(.tlx *)),
+    body.white-mode .article-body p:where(:not(.tlx *)),
     body.charcoal-mode .article-body li,
     body.night-mode .article-body li,
-    body.paper-mode .article-body li,
-    body.white-mode .article-body li {
+    body.paper-mode .article-body li:where(:not(.tlx *)),
+    body.white-mode .article-body li:where(:not(.tlx *)) {
       color: var(--read-fg) !important;
     }
     body.charcoal-mode .article-body h3,
@@ -402,9 +403,7 @@
       color: #4a3410;
     }
     body.paper-mode .sitting-guide-card,
-    body.white-mode .sitting-guide-card,
-    body.paper-mode .access-panel,
-    body.white-mode .access-panel {
+    body.white-mode .sitting-guide-card {
       background: var(--read-panel);
       color: var(--read-fg);
       border-color: var(--read-border);

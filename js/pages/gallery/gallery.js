@@ -132,7 +132,10 @@ import * as THREE from 'three';
 
     // Dynamic Room Environment map for rich metallic sheen
     const pmrem = new THREE.PMREMGenerator(renderer);
-    scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
+    const roomEnv = new RoomEnvironment();
+    scene.environment = pmrem.fromScene(roomEnv, 0.04).texture;
+    roomEnv.dispose();
+    pmrem.dispose();
     scene.environmentIntensity = 0.38;
 
     const controls = new OrbitControls(camera, renderer.domElement);
@@ -320,7 +323,7 @@ import * as THREE from 'three';
       framePointer.x = ((ev.clientX - rect.left) / rect.width) * 2 - 1;
       framePointer.y = -((ev.clientY - rect.top) / rect.height) * 2 + 1;
       frameRaycaster.setFromCamera(framePointer, camera);
-      const frameHits = frameRaycaster.intersectObjects(galleryFrameGroup.children, true);
+      const frameHits = galleryFrameGroup.visible ? frameRaycaster.intersectObjects(galleryFrameGroup.children, true) : [];
       if (frameHits.length) {
         let obj = frameHits[0].object;
         while (obj && !obj.userData.asset) obj = obj.parent;
@@ -1896,6 +1899,7 @@ import * as THREE from 'three';
         return;
       }
       if (typing) return;
+      if (e.ctrlKey || e.metaKey || e.altKey) return;
       if (e.key === '/' ) {
         e.preventDefault();
         if (searchInput) searchInput.focus();

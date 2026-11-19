@@ -167,7 +167,7 @@ class NebuchadnezzarHTTPHandler(SimpleHTTPRequestHandler):
                 return os.path.join(root, "__forbidden__")
             if os.path.isfile(full_abs):
                 ext = os.path.splitext(full_abs)[1].lower()
-                if ext and ext not in ALLOWED_EXTENSIONS:
+                if ext not in ALLOWED_EXTENSIONS:
                     return os.path.join(root, "__forbidden__")
             return full_abs
         except (ValueError, OSError):

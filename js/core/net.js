@@ -158,7 +158,7 @@
 
   function message(errOrKind) {
     const kind = typeof errOrKind === "string" ? errOrKind : classify(errOrKind);
-    return COPY[kind] || COPY.client;
+    return Object.prototype.hasOwnProperty.call(COPY, kind) ? COPY[kind] : COPY.client;
   }
 
   window.SiteNet = {

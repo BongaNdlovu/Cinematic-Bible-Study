@@ -100,6 +100,8 @@ If the gate cannot be reached, a page read is still served. A non-GET request, `
 
 **Moderator second step.** A moderator who arrives at `account.html?next=insights.html` with only a first-step (`aal1`) session stays on the account page until the authenticator code is entered. `finishReturn()` in `js/pages/account/account.js` asks Supabase for the assurance level and returns to Insights only when no second step is pending. When the code is verified, Supabase reports `MFA_CHALLENGE_VERIFIED` for the same user; `setUser()` in `js/core/auth.js` then re-checks `is_review_moderator()` and tells every listener, so the moderator tools appear without a reload. Before 19 November 2026 the page went straight back to Insights, and moderator status stayed off until a reload.
 
+**After a failed sign-out** the tab ignores session events from the old session (`sessionEnded`). A `SIGNED_IN` event now clears that flag, because sign-out also removed the stored session, so such an event can only come from a new sign-in (for example in another tab). Before 19 November 2026 the tab ignored every later sign-in until a reload.
+
 **Supabase Auth settings (checked in the dashboard on 18 November 2026).** These live in Supabase, not in the repository, so a change there must be recorded here.
 
 | Setting | Value | Why |
@@ -210,6 +212,7 @@ None of the three services has a card that a flood of traffic could charge. If o
 - Answers only if the `Host` header is `127.0.0.1:<port>` or `localhost:<port>`, which blocks DNS rebinding.
 - Serves an allow-list of file extensions and refuses dotfiles and directory traversal.
 - CORS allows only the two local origins.
+- Files with no extension are refused, the same as unknown extensions (19 November 2026; before, `/_headers` was served locally).
 - Each request starts with no byte range left over. Before 19 November 2026 a `HEAD` request with `Range` on a kept-alive connection made the next plain `GET` send only the range's bytes and then stall. `tests/unit/audit-fixes-2026-11-19.test.mjs` sends that pair.
 
 ## CI hygiene

@@ -500,7 +500,8 @@
       }
     });
     client.auth.onAuthStateChange(function (event, session) {
-      if (sessionEnded && session) return;
+      if (sessionEnded && session && event !== "SIGNED_IN") return;
+      if (event === "SIGNED_IN") sessionEnded = false;
       if (event === "SIGNED_OUT") {
         try { localStorage.removeItem("baProgressOutbox"); } catch (e) {}
         try { localStorage.removeItem("baLastPushAt"); } catch (e) {}

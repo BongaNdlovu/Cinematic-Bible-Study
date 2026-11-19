@@ -125,8 +125,14 @@
     fill.style.width = (total ? Math.round((done / total) * 100) : 100) + '%';
   }
 
+  let swapTimer = 0;
+
   function swap(render) {
+    if (swapTimer) clearTimeout(swapTimer);
+    swapTimer = 0;
     const paint = () => {
+      swapTimer = 0;
+      restoreAll();
       stage.innerHTML = '';
       render();
       stage.classList.remove('is-leaving');
@@ -138,7 +144,7 @@
       return;
     }
     stage.classList.add('is-leaving');
-    setTimeout(paint, 180);
+    swapTimer = setTimeout(paint, 180);
   }
 
   function focusFirst(selector) {
@@ -381,8 +387,10 @@
     return true;
   }
 
-  function close(after) {
+  function close(after, now) {
     if (!root || screen === 'closed') return;
+    if (swapTimer) clearTimeout(swapTimer);
+    swapTimer = 0;
     stopWaiting();
     screen = 'closed';
     document.removeEventListener('keydown', onKey, true);
@@ -402,7 +410,7 @@
       else if (returnFocus && typeof returnFocus.focus === 'function' && document.contains(returnFocus)) returnFocus.focus({ preventScroll: true });
       returnFocus = null;
     };
-    if (still()) finish();
+    if (now || still()) finish();
     else setTimeout(finish, LEAVE_MS);
   }
 
@@ -530,6 +538,7 @@
   window.StudyTaskFlow = {
     open: open,
     close: function () { close(); },
+    closeNow: function () { close(null, true); },
     isOpen: function () { return screen !== 'closed'; }
   };
 })();

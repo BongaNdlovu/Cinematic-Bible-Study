@@ -54,7 +54,7 @@ import { currentSheetIndex, sheetQuizComplete, updateNextGate } from '/js/pages/
 
     export function layoutEndSpotlight(target) {
       const box = document.getElementById('sitting-guide');
-      if (!box || !target || target.hidden) return;
+      if (!box || box.hidden || sittingGuideMode !== 'end' || !target || target.hidden) return;
       let r = target.getBoundingClientRect();
       if (r.bottom < 80 || r.top > window.innerHeight - 40) {
         target.scrollIntoView({ behavior: 'auto', block: 'center' });

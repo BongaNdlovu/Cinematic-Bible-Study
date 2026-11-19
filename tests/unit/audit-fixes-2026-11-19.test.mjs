@@ -82,6 +82,17 @@ test("a GET after a HEAD with Range on the same connection gets the whole file",
   assert.equal(declared, fs.statSync(new URL("../../" + path.slice(1), import.meta.url)).size);
 });
 
+test("the dev server refuses a file that has no extension", async (t) => {
+  const port = await freePort();
+  const { child, ready } = startDevServer(port);
+  t.after(() => child.kill());
+  await ready;
+  const res = await fetch("http://127.0.0.1:" + port + "/_headers");
+  assert.notEqual(res.status, 200);
+  const body = await res.text();
+  assert.ok(!body.includes("Content-Security-Policy"), "the headers file must not be served");
+});
+
 test("the master alert waits for the browser tests too", () => {
   const ci = read(".github/workflows/ci.yml");
   const alert = ci.slice(ci.indexOf("\n  alert:"));

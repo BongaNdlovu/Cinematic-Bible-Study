@@ -187,6 +187,18 @@
       return made;
     }
 
+    function rowForVerse(rows, book, chapter, verse) {
+      const bySlot = new Map();
+      const spans = [];
+      for (const row of rows) {
+        const src = row.querySelector('.cite-source');
+        const parsed = parseSourceRefs(src ? src.textContent : '');
+        parsed.slots.forEach((s) => { if (!bySlot.has(s)) bySlot.set(s, row); });
+        parsed.ranges.forEach((rg) => spans.push({ book: rg.book, chapter: rg.chapter, lo: rg.lo, hi: rg.hi, ref: row }));
+      }
+      return findRefForVerse(bySlot, spans, book, chapter, verse);
+    }
+
     // A diagram's citation opens the same reference row the prose markers use.
     export function resolveCiteLabel(label) {
       const box = document.getElementById('sheet-verify');
@@ -201,7 +213,10 @@
       const book = normalBook(beforeColon.replace(/\s*\d+\s*$/, '').trim());
       const chapter = (beforeColon.match(/(\d+)\s*$/) || [])[1];
       if (!book || !chapter) return;
+      const verse = Number((text.slice(colon + 1).match(/^\s*(\d+)/) || [])[1]);
       const rows = box.querySelectorAll('.cite-row');
+      const exact = verse ? rowForVerse(rows, book, chapter, verse) : null;
+      if (exact) { revealReference(exact.id); return; }
       for (const row of rows) {
         const src = row.querySelector('.cite-source');
         if (!src) continue;
@@ -311,7 +326,7 @@
       const box = document.getElementById('sheet-verify');
       if (box) {
         /* Remember what opened it, so the panel can hand focus back. */
-        if (box.hidden && document.activeElement && document.activeElement.closest
+        if (!citePanelOpen() && document.activeElement && document.activeElement.closest
           && document.activeElement.closest('.chain-cite, .cite-ref')) {
           box.__citeOpener = document.activeElement;
         }

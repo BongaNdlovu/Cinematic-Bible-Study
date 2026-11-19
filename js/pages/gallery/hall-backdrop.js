@@ -66,10 +66,8 @@ export function setHallBackdrop(url) {
     apply(hallTexCache.get(url));
     return;
   }
-  texLoader.load(url, (tex) => {
-    prepHallTex(tex);
-    hallTexCache.set(url, tex);
-    trimHallCache(url);
+  texLoader.load(url, (loaded) => {
+    const tex = keepHallTex(url, loaded);
     if (hallCurrentUrl === url) apply(tex);
   }, undefined, () => {
     if (hallCurrentUrl !== url) return;
@@ -78,13 +76,23 @@ export function setHallBackdrop(url) {
   });
 }
 
+function keepHallTex(url, loaded) {
+  const cached = hallTexCache.get(url);
+  if (cached) {
+    loaded.dispose();
+    return cached;
+  }
+  prepHallTex(loaded);
+  hallTexCache.set(url, loaded);
+  trimHallCache(url);
+  return loaded;
+}
+
 export function prefetchHall(url) {
   if (!url || hallTexCache.has(url) || hallPending.has(url)) return;
   hallPending.add(url);
-  texLoader.load(url, (tex) => {
-    prepHallTex(tex);
-    hallTexCache.set(url, tex);
-    trimHallCache(url);
+  texLoader.load(url, (loaded) => {
+    keepHallTex(url, loaded);
     hallPending.delete(url);
   }, undefined, () => hallPending.delete(url));
 }

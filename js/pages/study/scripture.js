@@ -305,11 +305,11 @@
     root.classList.toggle("is-story", storyMode);
   }
 
-  function paint() {
+  function paint(keepPlace) {
     if (!root) return;
     root.innerHTML = renderSheetHtml(currentSheet);
     applyStoryClass();
-    requestAnimationFrame(scrollFocusIntoPanel);
+    if (!keepPlace) requestAnimationFrame(scrollFocusIntoPanel);
   }
 
   function emitStation(station) {
@@ -323,8 +323,11 @@
   function onRootClick(ev) {
     const closer = ev.target.closest("[data-strong-close]");
     if (closer) {
+      const was = openStrongId;
       openStrongId = "";
-      paint();
+      paint(true);
+      const back = was ? root.querySelector('.strong-mark[data-strong="' + was + '"]') : null;
+      if (back) back.focus({ preventScroll: true });
       return;
     }
     const storyBtn = ev.target.closest("[data-story]");
@@ -343,7 +346,7 @@
     if (mark) {
       ev.stopPropagation();
       openStrongId = mark.getAttribute("data-strong") || "";
-      paint();
+      paint(true);
       const dock = root.querySelector("#strong-dock");
       if (dock && dock.scrollIntoView) dock.scrollIntoView({ behavior: "smooth", block: "nearest" });
       if (mark.getAttribute("data-station")) emitStation(mark.getAttribute("data-station"));

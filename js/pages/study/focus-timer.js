@@ -192,6 +192,8 @@ import { currentSheetIndex, showToast } from '/js/pages/study/study-app.js';
         const btn = document.getElementById(`weather-btn-${id}`);
         if (!btn) return;
         const active = id === preset;
+        btn.setAttribute('aria-pressed', String(active));
+        if (id === 'off') { btn.classList.toggle('text-amber-600', active); return; }
         btn.className = active
           ? "weather-pill py-1 rounded bg-amber-500/20 border border-amber-500/40 text-amber-900 dark:text-amber-200 font-semibold transition-all"
           : "weather-pill py-1 rounded bg-paper-200/60 dark:bg-paper-800 text-ink-700 dark:text-paper-300 hover:bg-amber-500/10 transition-all";
