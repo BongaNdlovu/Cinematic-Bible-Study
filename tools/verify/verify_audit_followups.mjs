@@ -289,8 +289,8 @@ const WEATHER_WORKER_SPY = `(() => {
     const shown = !!(guide && !guide.hidden && guide.classList.contains('is-end'));
     if (!shown) return { shown, plates: [...document.querySelectorAll('.checkpoint-plate')].map((p) => p.getAttribute('data-checkpoint-passed')) };
     await new Promise((res) => setTimeout(res, 120));
-    window.scrollTo(0, 0);
     guide.hidden = true;
+    window.scrollTo({ top: 0, behavior: 'instant' });
     await new Promise((res) => setTimeout(res, 700));
     return { shown, scrollY: window.scrollY };
   });
