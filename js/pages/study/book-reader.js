@@ -199,7 +199,8 @@
       openT: 0,
       wheelAt: 0,
       swipeAt: 0,
-      drag: null
+      drag: null,
+      pin: null
     };
   }
 
@@ -457,6 +458,22 @@
     });
   }
 
+  function blockSpan(node, it, mo, col, gap, spread, fallback) {
+    if (it.type !== 'text') return { step: fallback, endStep: fallback };
+    var rects = node.getClientRects();
+    if (!rects.length) return { step: fallback, endStep: fallback };
+    var fr = it.box.getBoundingClientRect();
+    var c = Math.max(0, Math.floor((rects[0].left - fr.left - mo + 1) / (col + gap)));
+    var maxRight = rects[0].right;
+    for (var i = 1; i < rects.length; i += 1) {
+      if (rects[i].width > 0 && rects[i].right > maxRight) maxRight = rects[i].right;
+    }
+    var cEnd = Math.max(c, Math.floor((maxRight - fr.left - mo - 1) / (col + gap)));
+    var step = it.start + Math.min(it.steps - 1, Math.floor(c / spread));
+    var endStep = it.start + Math.min(it.steps - 1, Math.floor(cEnd / spread));
+    return { step: step, endStep: Math.max(step, endStep) };
+  }
+
   function layout(s) {
     if (!s.root.getClientRects().length) return false;
     var iw = window.innerWidth;
@@ -536,17 +553,9 @@
         var raw = node.getAttribute('data-br-i');
         var idx = raw !== null && !isNaN(Number(raw)) ? Number(raw) : prevIdx;
         prevIdx = idx;
-        var step = prevStep;
-        if (it.type === 'text') {
-          var rects = node.getClientRects();
-          if (rects.length) {
-            var fr = it.box.getBoundingClientRect();
-            var c = Math.max(0, Math.floor((rects[0].left - fr.left - mo + 1) / (col + gap)));
-            step = it.start + Math.min(it.steps - 1, Math.floor(c / spread));
-          }
-        }
-        prevStep = step;
-        blocks.push({ idx: idx, node: node, item: it, step: step });
+        var span = blockSpan(node, it, mo, col, gap, spread, prevStep);
+        prevStep = span.step;
+        blocks.push({ idx: idx, node: node, item: it, step: span.step, endStep: span.endStep });
       });
     });
     s.blocks = blocks;
@@ -727,14 +736,20 @@
     s.paper.style.setProperty('--br-past', deckPx(s.step, total));
   }
 
-  function stepOfIdx(s, idx) {
+  function blockOfIdx(s, idx) {
     for (var i = 0; i < s.blocks.length; i += 1) {
-      if (s.blocks[i].idx === idx) return s.blocks[i].step;
+      if (s.blocks[i].idx === idx) return s.blocks[i];
     }
-    return -1;
+    return null;
+  }
+
+  function stepOfIdx(s, idx) {
+    var b = blockOfIdx(s, idx);
+    return b ? b.step : -1;
   }
 
   function currentAnchor(s) {
+    if (s.pin) return s.pin.idx;
     var r = s.stepInfo[s.step];
     return r ? r.anchor : null;
   }
@@ -829,6 +844,7 @@
     var to = target * s.Vw;
     var moved = target !== s.step;
     var instant = !!(options && options.instant) || reducedMotion() || Math.abs(to - from) < 1;
+    s.pin = null;
     s.step = target;
     updateChrome(s);
     if (instant) {
@@ -944,8 +960,16 @@
     if (session !== s) return;
     stopAnim(s);
     s.book.classList.remove('is-turning');
-    var prior = s.stepInfo[s.step];
-    var anchor = prior ? prior.anchor : null;
+    if (!s.pin) {
+      var prior = s.stepInfo[s.step];
+      var anchor = prior ? prior.anchor : null;
+      if (anchor !== null) {
+        var oldBlock = blockOfIdx(s, anchor);
+        var oldSpan = oldBlock ? Math.max(1, oldBlock.endStep - oldBlock.step + 1) : 1;
+        var oldOffset = oldBlock ? clamp(s.step - oldBlock.step, 0, oldSpan - 1) : 0;
+        s.pin = { idx: anchor, span: oldSpan, offset: oldOffset };
+      }
+    }
     var ok = false;
     var changed = false;
     pauseFlows(s);
@@ -953,9 +977,13 @@
       ok = layout(s);
       if (ok) {
         var target = s.step;
-        if (anchor !== null) {
-          var found = stepOfIdx(s, anchor);
-          if (found >= 0) target = found;
+        if (s.pin) {
+          var nb = blockOfIdx(s, s.pin.idx);
+          if (nb) {
+            var newSpan = Math.max(1, nb.endStep - nb.step + 1);
+            var off = s.pin.span === newSpan ? s.pin.offset : Math.min(newSpan - 1, Math.floor((s.pin.offset / s.pin.span) * newSpan));
+            target = nb.step + off;
+          }
         }
         target = clamp(target, 0, s.steps - 1);
         changed = target !== s.step;
@@ -1345,7 +1373,14 @@
       });
     }
     if (window.ResizeObserver) {
-      var ro = new ResizeObserver(schedule);
+      var lastArticleW = Math.round(s.article.clientWidth);
+      var ro = new ResizeObserver(function () {
+        var w = Math.round(s.article.clientWidth);
+        if (w === lastArticleW) return;
+        lastArticleW = w;
+        if (w > 0) s.articleWidth = w;
+        schedule();
+      });
       ro.observe(s.article);
       /* Plate content (images, canvases, replays) often reaches full size after
          layout() measures it, without changing the article's box.

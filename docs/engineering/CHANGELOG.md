@@ -14,6 +14,23 @@ Entry template:
 
 ---
 
+## 2026-11-21 — Book reader fixes, un-quarantined book-reader suite, and shelf mid-upload cover tint
+
+**Why:** resolving the post-19-November audit leftovers uncovered four genuine book-reader bugs alongside stale waits/assertions in the quarantined `verify_book_reader.mjs` suite, plus a ~10-frame race window in `shelf.js` if `syncAccess()` fires while a volume's high-res textures are uploading.
+
+**What changed:**
+
+- **Book reader layout & anchor preservation (`js/pages/study/book-reader.js`)** — gated `s.article`'s `ResizeObserver` to width changes only (keeping `s.articleWidth` current without re-paginating mid-turn during 300 ms `.br-view` height transitions); added `blockSpan()` and `blockOfIdx()` so `repaginate()` tracks each block's start-to-end step span and preserves the reader's step offset inside multi-page cards; added transient sticky resize pin `s.pin` (cleared on explicit navigation in `goTo()`) so chained layout passes and viewport round-trips no longer drift back to page 0.
+- **Book reader font transition (`css/pages/study/book-reader.css`)** — added `transition: none;` on `.br-root .br-flow p` so font-size changes apply immediately inside book mode before `repaginate()` measures columns (scroll view keeps the smooth transition).
+- **3D bookshelf mid-upload cover tint (`js/pages/index/shelf.js`)** — moved the cover tinting in `pumpHi` from before the ~10-frame `yield` texture-upload loop to immediately before `b.hi = hi` using `b.lockTint`, closing the race with `syncAccess()`.
+- **Book-reader test repair & CI promotion (`tools/verify/verify_book_reader.mjs`, `tools/verify/run_browser_checks.mjs`)** — removed unnecessary SwiftShader flags, added buffered parallel runners (2–3 CPU-aware workers), added condition-based settles (`settleViewHeight`, `waitForMode`, FIFO `settleCards` for `card-min.js`), kept `.mm` mind maps awake during `M1.6`, picked non-plate steps for `M3.5`/`M3.7`, fired `M3.7` rapid double-wheel synchronously inside the 400 ms window, closed `StudyTaskFlow` after `M3.8`, chose block-start midpoints in `M3.9`, restored `origFont` in `M3.10`, and moved `verify_book_reader.mjs` out of `QUARANTINED` into `BROWSER_CHECKS` (`timeoutMs: 720000`; `QUARANTINED = []`).
+
+**Checked here:** `npm run lint` clean; `npm run test:unit` 214 of 214; `node tools/verify/verify_wiring.mjs` and `node tools/verify/verify_css_minify.mjs` exit 0; `node tools/verify/run_browser_checks.mjs --only=verify_book_reader.mjs` `[PASS]` (398 s, all 11 sittings on desktop and phone); `node tools/verify/run_browser_checks.mjs --only=verify_audit_followups.mjs` `[PASS]` (75 s).
+
+**Handbook updated:** 07.
+
+**Status:** ready for PR and CI deploy.
+
 ## 2026-11-19 — Audit follow-ups: lazy weather, Strong's scroll, shelf highlight re-tint, task-flow close flush, NPS filter, animation polish, and a regression suite for all of it
 
 **Why:** the 19 November audit follow-up pass confirmed four open gaps (P-09 weather running from page load, B-30 Strong's scroll reset, B-23 shelf highlight left out of the lock re-tint, B-25 close flush during the leave animation plus B-13 blank NPS answers) and two animation improvements (P-09 follow-up in Section 1), with no automated regression coverage for most of them.

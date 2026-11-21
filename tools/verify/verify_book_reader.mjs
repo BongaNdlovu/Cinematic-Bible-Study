@@ -1,6 +1,7 @@
 import { chromium } from 'playwright';
 import { signedInScript } from './_server.mjs';
 import fs from 'fs';
+import os from 'os';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
@@ -21,21 +22,83 @@ const VP = { desktop: { w: 1440, h: 900 }, mobile: { w: 390, h: 844 } };
 
 let passes = 0;
 let failures = 0;
+const jobLogs = new Map();
 
 function check(tag, name, ok, detail) {
   if (ok) passes += 1;
   else failures += 1;
-  console.log(`${ok ? 'PASS' : 'FAIL'} [${tag}] ${name}${detail ? ` -- ${detail}` : ''}`);
+  const line = `${ok ? 'PASS' : 'FAIL'} [${tag}] ${name}${detail ? ` -- ${detail}` : ''}`;
+  const buf = jobLogs.get(tag);
+  if (buf) buf.push(line);
+  else console.log(line);
   return ok;
 }
 
 function info(tag, text) {
-  console.log(`INFO [${tag}] ${text}`);
+  const line = `INFO [${tag}] ${text}`;
+  const buf = jobLogs.get(tag);
+  if (buf) buf.push(line);
+  else console.log(line);
 }
 
 async function settle(page) {
   await page.waitForFunction(() => !document.querySelector('.br-book.is-turning'), null, { polling: 20, timeout: 8000 });
   await page.waitForTimeout(30);
+}
+
+async function settleViewHeight(page) {
+  await page.waitForFunction(() => {
+    const v = document.querySelector('.br-view');
+    const h = parseFloat(v && v.style.height);
+    return !Number.isNaN(h) && Math.abs(v.clientHeight - h) <= 0.5;
+  }, null, { polling: 30, timeout: 3000 }).catch(() => {});
+}
+
+async function settleCards(page) {
+  await page.evaluate(() => new Promise((r) => setTimeout(() => requestAnimationFrame(() => requestAnimationFrame(r)), 180)));
+}
+
+async function waitForMode(page, expMode, expWidth) {
+  const expFont = expWidth >= 1900 ? '1.45rem' : expWidth >= 1366 ? '1.28rem' : '1.125rem';
+  await page.waitForFunction(({ m, f }) => {
+    return !!(window.BookReader && window.BookReader.state().mode === m
+      && document.documentElement.style.getPropertyValue('--reading-font-size').trim() === f);
+  }, { m: expMode, f: expFont }, { polling: 30, timeout: 4000 }).catch(() => {});
+  await page.waitForTimeout(450);
+  await settleViewHeight(page);
+}
+
+async function findTextStep(page, needConsecutive = 1) {
+  return page.evaluate((need) => {
+    const v = document.querySelector('.br-view');
+    const tr = document.querySelector('.br-track').getBoundingClientRect();
+    const total = window.BookReader.state().steps;
+    const isText = Array(total).fill(false);
+    document.querySelectorAll('.br-track > .br-item').forEach((it) => {
+      if (it.classList.contains('is-plate')) return;
+      const ir = it.getBoundingClientRect();
+      const s0 = Math.round((ir.left - tr.left) / v.clientWidth);
+      const n = Math.round(ir.width / v.clientWidth);
+      for (let k = 0; k < n; k += 1) {
+        if (s0 + k >= 0 && s0 + k < total) isText[s0 + k] = true;
+      }
+    });
+    const okAt = (s) => {
+      if (s + need >= total) return false;
+      for (let k = 0; k < need; k += 1) {
+        if (!isText[s + k]) return false;
+      }
+      return true;
+    };
+    for (let s = 1; s < total; s += 1) {
+      if (okAt(s)) return s;
+    }
+    if (need >= 2 && okAt(0)) return 0;
+    for (let s = 1; s < total; s += 1) {
+      if (isText[s]) return s;
+    }
+    return 1;
+  }, needConsecutive);
 }
 
 async function geom(page) {
@@ -138,6 +201,7 @@ async function m1(page, tag, sheet) {
     const a = document.getElementById('sheet-article');
     a.querySelectorAll('figure[data-diagram]').forEach((f) => { f.__mark = true; });
     a.querySelectorAll('p').forEach((p) => { p.__mark = true; });
+    a.querySelectorAll('.mm').forEach((m) => m.dispatchEvent(new PointerEvent('pointermove')));
     window.__orig = Array.from(a.childNodes);
     window.__preHTML = a.innerHTML;
     window.__preSW = document.documentElement.scrollWidth;
@@ -208,9 +272,11 @@ async function m1(page, tag, sheet) {
   const bk = await page.evaluate(() => ({ root: !!document.querySelector('#sheet-article > .br-root'), sw: !!document.querySelector('.br-switch'), active: window.BookReader.isActive(), view: window.BookReader.view() }));
   check(tag, 'M1.5 setView(book) mounts again and removes switch', bk.root && !bk.sw && bk.active && bk.view === 'book');
 
+  await page.evaluate(() => { window.BookReader.unmount(); });
+  await settleCards(page);
   const un = await page.evaluate(() => {
-    window.BookReader.unmount();
     const a = document.getElementById('sheet-article');
+    a.querySelectorAll('.mm').forEach((m) => m.dispatchEvent(new PointerEvent('pointermove')));
     const same = a.innerHTML === window.__preHTML;
     let firstDiff = -1;
     if (!same) {
@@ -306,25 +372,78 @@ async function m2(page, tag, vpName, sheet) {
   let plateSeen = 0;
   let docFails = 0;
   const totalSteps = (await page.evaluate(() => window.BookReader.state().steps));
-  for (let i = 0; i < totalSteps; i += 1) {
-    if (i > 0) {
-      const moved = await page.evaluate(() => window.BookReader.next());
-      if (!moved) { walkOk = false; walkDetail = `next() refused at ${i}`; break; }
-      await settle(page);
+  const fastStart = totalSteps > 6 ? 4 : totalSteps;
+  const fastEnd = totalSteps - 1;
+  try {
+    for (let i = 0; i < totalSteps; i += 1) {
+      if (i === fastStart && fastStart < fastEnd) {
+        await page.emulateMedia({ reducedMotion: 'reduce' });
+        const mid = await page.evaluate(({ start, end }) => {
+          const v = document.querySelector('.br-view');
+          const tr = document.querySelector('.br-track');
+          let pSeen = 0;
+          let pFails = 0;
+          let dFails = 0;
+          for (let k = start; k < end; k += 1) {
+            if (!window.BookReader.next()) return { walkOk: false, walkDetail: `next() refused at ${k}`, pSeen, pFails, dFails };
+            const st = window.BookReader.state();
+            if (st.step !== k || Math.abs(v.scrollLeft - k * v.clientWidth) > 1) {
+              return { walkOk: false, walkDetail: `step ${k}: step=${st.step} scrollLeft=${v.scrollLeft} expected=${k * v.clientWidth}`, pSeen, pFails, dFails };
+            }
+            const trRect = tr.getBoundingClientRect();
+            const items = Array.from(document.querySelectorAll('.br-track > .br-item'));
+            const cur = items.find((it) => {
+              const ir = it.getBoundingClientRect();
+              const s0 = Math.round((ir.left - trRect.left) / v.clientWidth);
+              const n = Math.round(ir.width / v.clientWidth);
+              return st.step >= s0 && st.step < s0 + n;
+            });
+            if (cur && cur.classList.contains('is-plate')) {
+              pSeen += 1;
+              const fig = cur.querySelector('figure[data-diagram]');
+              if (fig) {
+                const fb = fig.getBoundingClientRect();
+                const vr = v.getBoundingClientRect();
+                if (!(fb.left >= vr.left - 1 && fb.right <= vr.right + 1)) pFails += 1;
+              }
+            }
+            if (document.documentElement.scrollWidth > Math.max(innerWidth, window.__preSW || 0) + 1) dFails += 1;
+          }
+          return { walkOk: true, walkDetail: '', pSeen, pFails, dFails };
+        }, { start: fastStart, end: fastEnd });
+        plateSeen += mid.pSeen;
+        plateFails += mid.pFails;
+        docFails += mid.dFails;
+        if (!mid.walkOk) {
+          walkOk = false;
+          walkDetail = mid.walkDetail;
+          break;
+        }
+        await page.emulateMedia({ reducedMotion: 'no-preference' });
+        i = fastEnd - 1;
+        continue;
+      }
+      if (i > 0) {
+        const moved = await page.evaluate(() => window.BookReader.next());
+        if (!moved) { walkOk = false; walkDetail = `next() refused at ${i}`; break; }
+        await settle(page);
+      }
+      const gg = await geom(page);
+      if (gg.step !== i || Math.abs(gg.scrollLeft - i * gg.Vw) > 1) {
+        walkOk = false;
+        walkDetail = `step ${i}: step=${gg.step} scrollLeft=${gg.scrollLeft} expected=${i * gg.Vw}`;
+        break;
+      }
+      const it = await currentItem(page);
+      if (it.plate) {
+        plateSeen += 1;
+        if (it.figOk === false) plateFails += 1;
+      }
+      const docOk = await page.evaluate(() => document.documentElement.scrollWidth <= Math.max(innerWidth, window.__preSW || 0) + 1);
+      if (!docOk) docFails += 1;
     }
-    const gg = await geom(page);
-    if (gg.step !== i || Math.abs(gg.scrollLeft - i * gg.Vw) > 1) {
-      walkOk = false;
-      walkDetail = `step ${i}: step=${gg.step} scrollLeft=${gg.scrollLeft} expected=${i * gg.Vw}`;
-      break;
-    }
-    const it = await currentItem(page);
-    if (it.plate) {
-      plateSeen += 1;
-      if (it.figOk === false) plateFails += 1;
-    }
-    const docOk = await page.evaluate(() => document.documentElement.scrollWidth <= Math.max(innerWidth, window.__preSW || 0) + 1);
-    if (!docOk) docFails += 1;
+  } finally {
+    await page.emulateMedia({ reducedMotion: 'no-preference' });
   }
   check(tag, 'M2.3 walking next() lands every step on step*Vw (within 1px)', walkOk, walkDetail);
   check(tag, 'M2.3 plate figures fit the view horizontally', plateFails === 0, `plates=${plateSeen} fails=${plateFails}`);
@@ -333,6 +452,12 @@ async function m2(page, tag, vpName, sheet) {
   check(tag, 'M2.4 bookreader:end fired once at the last step', endState.step === endState.steps - 1 && endState.end === 1, `end=${endState.end} step=${endState.step}/${endState.steps}`);
   const again = await page.evaluate(() => window.BookReader.next());
   check(tag, 'M2.4 next() at the last step does nothing', again === false);
+  const stayedAtEnd = await page.evaluate(() => {
+    window.BookReader.refresh();
+    const st = window.BookReader.state();
+    return { step: st.step, steps: st.steps };
+  });
+  check(tag, 'M2.4 refresh() at the last step keeps the reader at the last step', stayedAtEnd.step === stayedAtEnd.steps - 1, `step=${stayedAtEnd.step}/${stayedAtEnd.steps}`);
 
   const rev = await page.evaluate(() => {
     const target = document.querySelector('#sheet-article [id="part-ii"]') || document.querySelectorAll('#sheet-article .part-header')[1];
@@ -383,14 +508,15 @@ async function m2(page, tag, vpName, sheet) {
   const cur = await geom(page);
   const anchorBefore = await anchorIdx(page);
   const other = vpName === 'desktop' ? VP.mobile : VP.desktop;
+  const otherExpMode = Math.min(other.w - 32, 1180) >= 860 ? 'spread' : 'single';
   await page.setViewportSize({ width: other.w, height: other.h });
-  await page.waitForTimeout(700);
+  await waitForMode(page, otherExpMode, other.w);
   const g1 = await geom(page);
   const vis1 = anchorBefore >= 0 ? await visibleIdx(page, anchorBefore) : { ok: true };
   check(tag, 'M2.7 resize flips the mode', g1.mode === g1.expMode && g1.mode !== cur.mode, `from=${cur.mode} to=${g1.mode}`);
   check(tag, 'M2.7 resize keeps the anchor block visible', vis1.ok === true, `anchor=${anchorBefore}`);
   await page.setViewportSize({ width: VP[vpName].w, height: VP[vpName].h });
-  await page.waitForTimeout(700);
+  await waitForMode(page, cur.mode, VP[vpName].w);
   const g2 = await geom(page);
   const vis2 = anchorBefore >= 0 ? await visibleIdx(page, anchorBefore) : { ok: true };
   check(tag, 'M2.7 resize back restores the mode and the anchor', g2.mode === cur.mode && vis2.ok === true, `mode=${g2.mode}`);
@@ -409,7 +535,7 @@ async function m2(page, tag, vpName, sheet) {
       return Math.round((it.getBoundingClientRect().left - tr.left) / v.clientWidth);
     }, pi);
     await page.evaluate((s) => { window.BookReader.goTo(s, { instant: true }); }, start);
-    await page.waitForTimeout(380);
+    await settleViewHeight(page);
     const gp = await geom(page);
     const it = await currentItem(page);
     plateChecked += 1;
@@ -419,7 +545,7 @@ async function m2(page, tag, vpName, sheet) {
   }
   check(tag, 'M2.8 plate steps grow the view up to 2.4*Vh and scroll beyond that', plateChecked > 0 && heightFails === 0, `plates=${plateChecked} fails=${heightFails}`);
   await page.evaluate(() => { window.BookReader.goTo(0, { instant: true }); });
-  await page.waitForTimeout(400);
+  await settleViewHeight(page);
   const gt = await geom(page);
   check(tag, 'M2.8 text steps return the view to Vh', gt.Vh === gt.expVh, `Vh=${gt.Vh} expected=${gt.expVh}`);
 
@@ -507,25 +633,30 @@ async function m3(page, tag, vpName, sheet) {
   await page.keyboard.press('ArrowLeft');
   await settle(page);
   check(tag, 'M3.2 ArrowLeft turns back', (await geom(page)).step === 0);
-  await page.keyboard.press('End');
-  await settle(page);
-  const last = (await geom(page));
-  check(tag, 'M3.2 End goes to the last step', last.step === last.steps - 1, `step=${last.step}`);
-  await page.keyboard.press('Home');
-  await settle(page);
-  check(tag, 'M3.2 Home goes to the first step', (await geom(page)).step === 0);
-  await page.keyboard.press('PageDown');
-  await settle(page);
-  check(tag, 'M3.2 PageDown turns forward', (await geom(page)).step === 1);
-  await page.keyboard.press('PageUp');
-  await settle(page);
-  check(tag, 'M3.2 PageUp turns back', (await geom(page)).step === 0);
-  await page.keyboard.press('Space');
-  await settle(page);
-  check(tag, 'M3.2 Space turns forward', (await geom(page)).step === 1);
-  await page.keyboard.press('Shift+Space');
-  await settle(page);
-  check(tag, 'M3.2 Shift+Space turns back', (await geom(page)).step === 0);
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  try {
+    await page.keyboard.press('End');
+    await settle(page);
+    const last = (await geom(page));
+    check(tag, 'M3.2 End goes to the last step', last.step === last.steps - 1, `step=${last.step}`);
+    await page.keyboard.press('Home');
+    await settle(page);
+    check(tag, 'M3.2 Home goes to the first step', (await geom(page)).step === 0);
+    await page.keyboard.press('PageDown');
+    await settle(page);
+    check(tag, 'M3.2 PageDown turns forward', (await geom(page)).step === 1);
+    await page.keyboard.press('PageUp');
+    await settle(page);
+    check(tag, 'M3.2 PageUp turns back', (await geom(page)).step === 0);
+    await page.keyboard.press('Space');
+    await settle(page);
+    check(tag, 'M3.2 Space turns forward', (await geom(page)).step === 1);
+    await page.keyboard.press('Shift+Space');
+    await settle(page);
+    check(tag, 'M3.2 Shift+Space turns back', (await geom(page)).step === 0);
+  } finally {
+    await page.emulateMedia({ reducedMotion: 'no-preference' });
+  }
 
   await page.evaluate(() => { if (document.activeElement) document.activeElement.blur(); document.querySelector('.br-root').scrollIntoView({ block: 'center' }); });
   await page.waitForTimeout(120);
@@ -576,8 +707,10 @@ async function m3(page, tag, vpName, sheet) {
     info(tag, 'M3.4 skipped: no plate on this sheet');
   }
 
-  await page.evaluate(() => { window.BookReader.goTo(2, { instant: true }); });
+  const textStep = await findTextStep(page, 2);
+  await page.evaluate((s) => { window.BookReader.goTo(s, { instant: true }); }, textStep);
   await settle(page);
+  await settleViewHeight(page);
   await page.evaluate(() => { document.querySelector('.br-root').scrollIntoView({ block: 'center' }); });
   await page.waitForTimeout(150);
   const edge = await page.evaluate(() => {
@@ -641,26 +774,31 @@ async function m3(page, tag, vpName, sheet) {
   await settle(page);
   check(tag, 'M3.6 a mostly vertical gesture does not turn', (await geom(page)).step === beforeSwipe);
 
+  const wheelStep = await findTextStep(page, 2);
+  await page.evaluate((s) => { window.BookReader.goTo(s, { instant: true }); }, wheelStep);
+  await settle(page);
+  await settleViewHeight(page);
   const pz = await page.evaluate(() => {
+    document.querySelector('.br-root').scrollIntoView({ block: 'center' });
     const p = document.querySelector('.br-paper').getBoundingClientRect();
     return { x: p.left + p.width / 2, y: p.top + p.height / 2 };
   });
-  await page.mouse.move(pz.x, pz.y);
+  await page.waitForTimeout(450);
   const wheelStart = (await geom(page)).step;
-  await page.mouse.wheel(160, 0);
-  await page.waitForTimeout(260);
+  await page.evaluate(() => {
+    const v = document.querySelector('.br-view');
+    const fire = () => v.dispatchEvent(new WheelEvent('wheel', { deltaX: 160, deltaY: 0, bubbles: true, cancelable: true }));
+    fire();
+    fire();
+  });
   await settle(page);
   const wheelOne = (await geom(page)).step;
-  await page.mouse.wheel(160, 0);
-  await page.waitForTimeout(120);
-  await settle(page);
-  const wheelThrottled = (await geom(page)).step;
   await page.waitForTimeout(450);
+  await page.mouse.move(pz.x, pz.y);
   await page.mouse.wheel(160, 0);
-  await page.waitForTimeout(260);
   await settle(page);
   const wheelTwo = (await geom(page)).step;
-  check(tag, 'M3.7 horizontal wheel turns once, then is throttled', wheelOne === wheelStart + 1 && wheelThrottled === wheelOne, `${wheelStart}->${wheelOne}->${wheelThrottled}`);
+  check(tag, 'M3.7 horizontal wheel turns once, then is throttled', wheelOne === wheelStart + 1, `${wheelStart}->${wheelOne}`);
   check(tag, 'M3.7 horizontal wheel turns again after the 400ms throttle', wheelTwo === wheelOne + 1, `two=${wheelTwo}`);
 
   await page.evaluate(() => {
@@ -669,6 +807,7 @@ async function m3(page, tag, vpName, sheet) {
     document.addEventListener('bookreader:continue', (e) => { window.__cont += 1; window.__contDetail = e.detail; });
     window.BookReader.goTo(window.BookReader.state().steps - 1, { instant: true });
   });
+  await settleViewHeight(page);
   await page.waitForTimeout(120);
   const lastLabel = await page.evaluate(() => {
     const b = document.querySelector('.br-next');
@@ -678,14 +817,44 @@ async function m3(page, tag, vpName, sheet) {
   await page.click('.br-next');
   await page.waitForTimeout(150);
   const contInfo = await page.evaluate(() => ({ n: window.__cont, step: window.BookReader.state().step, steps: window.BookReader.state().steps, end: window.__end }));
+  await page.evaluate(() => {
+    if (window.StudyTaskFlow && typeof window.StudyTaskFlow.closeNow === 'function') window.StudyTaskFlow.closeNow();
+  });
   check(tag, 'M3.8 pressing Continue dispatches bookreader:continue and does not turn', contInfo.n === 1 && contInfo.step === contInfo.steps - 1, JSON.stringify(contInfo));
   check(tag, 'M3.8 bookreader:end fired at the last step', contInfo.end >= 1);
   await page.evaluate(() => { window.BookReader.goTo(0, { instant: true }); });
+  await settleViewHeight(page);
   await page.waitForTimeout(100);
   const firstLabel = await page.evaluate(() => { const b = document.querySelector('.br-next'); return { label: b.getAttribute('aria-label'), text: b.textContent.trim() }; });
   check(tag, 'M3.8 other steps keep the Next page button', firstLabel.label === 'Next page' && firstLabel.text === '', JSON.stringify(firstLabel));
 
-  const mid = Math.max(1, Math.floor((await geom(page)).steps / 2));
+  const mid = await page.evaluate(() => {
+    const v = document.querySelector('.br-view');
+    const tr = document.querySelector('.br-track').getBoundingClientRect();
+    const steps = window.BookReader.state().steps;
+    const ideal = Math.max(1, Math.floor(steps / 2));
+    const starts = new Set();
+    document.querySelectorAll('.br-track > .br-item').forEach((it) => {
+      if (it.classList.contains('is-plate')) {
+        const ir = it.getBoundingClientRect();
+        starts.add(Math.round((ir.left - tr.left) / v.clientWidth));
+        return;
+      }
+      it.querySelectorAll('.br-flow > [data-br-i]').forEach((n) => {
+        const rects = n.getClientRects();
+        if (rects.length) starts.add(Math.floor((rects[0].left - tr.left + 1) / v.clientWidth));
+      });
+    });
+    let best = ideal;
+    let bestDist = Infinity;
+    starts.forEach((s) => {
+      if (s >= 1 && s < steps) {
+        const d = Math.abs(s - ideal);
+        if (d < bestDist) { bestDist = d; best = s; }
+      }
+    });
+    return best;
+  });
   await page.evaluate((m) => { window.BookReader.goTo(m, { instant: true }); }, mid);
   await page.waitForTimeout(120);
   const saved = await page.evaluate((sh) => localStorage.getItem('daniel_book_pos_' + sh), sheet);
@@ -729,16 +898,19 @@ async function m3(page, tag, vpName, sheet) {
       const r = n.getBoundingClientRect();
       return r.left >= vr.left - 1 && r.left < vr.right - 1 && r.bottom > vr.top && r.top < vr.bottom;
     }).map((n) => Number(n.getAttribute('data-br-i')));
-    return { steps: window.BookReader.state().steps, anchor: idxs[0] };
+    return { steps: window.BookReader.state().steps, anchor: idxs[0], origFont: document.documentElement.style.getPropertyValue('--reading-font-size') };
   });
   await page.evaluate(() => { document.documentElement.style.setProperty('--reading-font-size', '1.5rem'); });
-  await page.waitForTimeout(500);
+  await page.waitForFunction((n) => window.BookReader.state().steps > n, fsBefore.steps, { polling: 30, timeout: 3000 }).catch(() => {});
   const bigger = await geom(page);
   const anchorBig = await visibleIdx(page, fsBefore.anchor);
   check(tag, 'M3.10 larger --reading-font-size repaginates to more steps', bigger.steps > fsBefore.steps, `steps ${fsBefore.steps} -> ${bigger.steps}`);
   check(tag, 'M3.10 the anchor block stays visible after re-pagination', anchorBig.ok === true, `anchor=${fsBefore.anchor}`);
-  await page.evaluate(() => { document.documentElement.style.removeProperty('--reading-font-size'); });
-  await page.waitForTimeout(500);
+  await page.evaluate((orig) => {
+    if (orig) document.documentElement.style.setProperty('--reading-font-size', orig);
+    else document.documentElement.style.removeProperty('--reading-font-size');
+  }, fsBefore.origFont);
+  await page.waitForFunction((n) => window.BookReader.state().steps === n, fsBefore.steps, { polling: 30, timeout: 3000 }).catch(() => {});
   check(tag, 'M3.10 restoring the font size restores the steps', (await geom(page)).steps === fsBefore.steps, `steps=${(await geom(page)).steps}`);
 
   const cardBtn = await page.evaluate(() => {
@@ -792,7 +964,7 @@ async function m4(page, tag, vpName, sheet) {
       list.forEach((c) => document.body.classList.remove(c));
       document.body.classList.add(t);
     }, th);
-    await page.waitForTimeout(450);
+    await page.waitForTimeout(60);
     const c = await page.evaluate(() => {
       const p = document.querySelector('.br-flow p');
       const paper = document.querySelector('.br-paper');
@@ -958,6 +1130,7 @@ async function m5(page, tag, vpName, sheet) {
 
 async function runOne(browser, sheet, vpName) {
   const tag = `s${sheet}/${vpName}`;
+  jobLogs.set(tag, []);
   const vp = VP[vpName];
   const context = await browser.newContext({ viewport: { width: vp.w, height: vp.h } });
   await context.addInitScript(() => {
@@ -979,13 +1152,16 @@ async function runOne(browser, sheet, vpName) {
       const a = document.getElementById('sheet-article');
       return a && a.children.length > 0;
     }, null, { timeout: 60000 });
-    await page.waitForFunction(() => document.querySelectorAll('figure[data-diagram] > *').length > 0, null, { timeout: 20000 }).catch(() => {});
-    await page.waitForTimeout(2500);
+    await page.waitForFunction(() => document.querySelectorAll('figure[data-diagram]').length === 0 || document.querySelectorAll('figure[data-diagram] > *').length > 0, null, { timeout: 20000 }).catch(() => {});
+    await page.waitForFunction(() => !!(window.BookReader && window.BookReader.isActive()), null, { timeout: 20000 });
+    await page.evaluate(() => (document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve())).catch(() => {});
+    await page.waitForTimeout(300);
     const skip = await page.$('#sitting-guide-skip');
     if (skip && (await skip.isVisible())) await skip.click();
     await page.evaluate(() => { document.documentElement.style.scrollBehavior = 'auto'; });
     await page.waitForFunction(() => !!window.BookReader, null, { timeout: 20000 });
     await page.evaluate(() => { if (window.BookReader.isActive()) window.BookReader.unmount(); });
+    await settleCards(page);
     if (MILESTONE >= 1) {
       await m1(page, tag, sheet);
     }
@@ -1006,15 +1182,32 @@ async function runOne(browser, sheet, vpName) {
     check(tag, 'run completes without an exception', false, String(err && err.stack ? err.stack : err).slice(0, 600));
   } finally {
     await context.close();
+    const lines = jobLogs.get(tag) || [];
+    jobLogs.delete(tag);
+    if (lines.length) console.log(lines.join('\n'));
   }
 }
 
-const browser = await chromium.launch({ headless: true, args: ['--use-angle=swiftshader', '--enable-unsafe-swiftshader', '--ignore-gpu-blocklist'] });
+const jobs = [];
 for (const sheet of SHEETS) {
   for (const vpName of VIEWPORTS) {
-    await runOne(browser, sheet, vpName);
+    jobs.push({ sheet, vpName });
   }
 }
-await browser.close();
+const defaultJobs = Math.min(3, Math.max(2, (os.availableParallelism ? os.availableParallelism() : os.cpus().length) - 1));
+const CONCURRENCY = Math.max(1, Math.min(jobs.length, Number(argv.jobs || (SHOTS ? 1 : defaultJobs))));
+let cursor = 0;
+await Promise.all(Array.from({ length: CONCURRENCY }, async () => {
+  const browser = await chromium.launch({ headless: true });
+  try {
+    while (cursor < jobs.length) {
+      const job = jobs[cursor];
+      cursor += 1;
+      await runOne(browser, job.sheet, job.vpName);
+    }
+  } finally {
+    await browser.close();
+  }
+}));
 console.log(`\nSUMMARY milestone<=${MILESTONE}: ${passes} passed, ${failures} failed`);
 process.exit(failures ? 1 : 0);
