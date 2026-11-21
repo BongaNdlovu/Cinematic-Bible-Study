@@ -9,6 +9,7 @@ const root = path.resolve(here, '../..');
 const TIMEOUT_MS = 240000;
 
 export const BROWSER_CHECKS = [
+  { file: 'verify_book_reader.mjs', base: 'flag', timeoutMs: 720000 },
   { file: 'verify_bridge_copy.mjs', base: 'none' },
   { file: 'verify_bridge_panel.mjs', base: 'flag' },
   { file: 'verify_cp07.mjs', base: 'none' },
@@ -47,9 +48,7 @@ export const BROWSER_CHECKS = [
   { file: 'verify_workbench.mjs', base: 'none' },
 ];
 
-export const QUARANTINED = [
-  { file: 'verify_book_reader.mjs', base: 'flag', reason: "timing and geometry checks fail: mid-turn step reads (M2.3), wheel throttle (M3.7), resize mode (M2.7), font-size steps (M3.10), 2px view height (M2.8); the reader itself reaches the last step" },
-];
+export const QUARANTINED = [];
 
 function argsFor(check, base) {
   if (check.base === 'flag') return ['--base=' + base];

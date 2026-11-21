@@ -768,6 +768,7 @@ html:not(.dfx-open):not(.story-read-open):not(.mm-fullscreen-open) .br-root .br-
   margin: 0 0 0.85em !important;
   font-size: var(--reading-font-size, 1.125rem) !important;
   line-height: 1.62 !important;
+  transition: none;
   orphans: 2;
   widows: 2;
 }

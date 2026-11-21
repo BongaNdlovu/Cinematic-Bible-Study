@@ -1874,13 +1874,13 @@ async function startRoom() {
       endB: new THREE.MeshStandardMaterial({ map: tex(e2, true), roughness: 0.82 }),
       title: new THREE.MeshStandardMaterial({ map: tex(tp, true), roughness: 0.94 })
     };
-    if (!can(b.i)) for (const k of ['front', 'back']) hi[k].color.setScalar(0.62);
     yield;
     for (const m of Object.values(hi)) {
       for (const k of ['map', 'roughnessMap', 'metalnessMap', 'bumpMap']) {
         if (m[k]) { renderer.initTexture(m[k]); yield; }
       }
     }
+    for (const k of ['front', 'back']) hi[k].color.setScalar(b.lockTint);
     b.front.material[4] = hi.front; b.front.material[5] = hi.endF;
     b.back.material[5] = hi.back; b.back.material[4] = hi.endB;
     b.pages.material[4] = hi.title;

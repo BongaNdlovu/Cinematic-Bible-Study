@@ -32,7 +32,11 @@ async function slowAuth(context) {
   page.on('pageerror', (e) => errors.push(String(e.message || e)));
   await page.goto(`${BASE}/study.html?sheet=5`, { waitUntil: 'load', timeout: 60000 });
   await dismissConsent(page);
-  await page.waitForTimeout(5000);
+  await page.waitForFunction(() => {
+    const a = document.getElementById('sheet-article');
+    return !!(window.ScrollAuth && window.ScrollAuth.getUser() && a && a.getAttribute('data-sheet-index') != null);
+  }, null, { timeout: 20000 }).catch(() => {});
+  await page.waitForTimeout(800);
   const r = await page.evaluate(() => ({
     shown: document.getElementById('sheet-article') && document.getElementById('sheet-article').getAttribute('data-sheet-index'),
     url: new URLSearchParams(location.search).get('sheet'),
