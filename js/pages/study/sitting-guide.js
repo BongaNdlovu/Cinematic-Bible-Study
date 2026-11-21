@@ -57,11 +57,11 @@ import { currentSheetIndex, sheetQuizComplete, updateNextGate } from '/js/pages/
       if (!box || box.hidden || sittingGuideMode !== 'end' || !target || target.hidden) return;
       let r = target.getBoundingClientRect();
       if (r.bottom < 80 || r.top > window.innerHeight - 40) {
-        target.scrollIntoView({ behavior: 'auto', block: 'center' });
+        target.scrollIntoView({ behavior: 'instant', block: 'center' });
         r = target.getBoundingClientRect();
         if (r.bottom < 80 || r.top > window.innerHeight - 40) {
           const top = window.scrollY + r.top - (window.innerHeight / 2) + (r.height / 2);
-          window.scrollTo(0, Math.max(0, top));
+          window.scrollTo({ top: Math.max(0, top), behavior: 'instant' });
           r = target.getBoundingClientRect();
         }
       }
