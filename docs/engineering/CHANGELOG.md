@@ -14,6 +14,22 @@ Entry template:
 
 ---
 
+## 2026-11-22 — Study-page checks in `verify_audit_group1.mjs` stop waiting for outside fonts
+
+**Why:** the first `master` run after PR #53 (run `44961050648`) failed 36 of 37 browser checks, so nothing deployed. `verify_audit_group1.mjs` timed out after 60 s at line 98, waiting for the `load` event of `study.html?sheet=10&preview=full`. The script passed 3 of 3 runs locally. Locally, the page's `load` came 1.8 to 6.4 s after navigation in 7 probes, and it waits for 7 requests to Google Fonts. A stalled outside request on the runner is the likely cause. Not checked: which request was open in CI, because the log does not record it.
+
+**What changed:**
+
+- `tools/verify/verify_audit_group1.mjs`: the two `study.html` navigations (lines 33 and 98) wait for `domcontentloaded` instead of `load`. Each is already followed by a wait for `#sheet-article` to show the expected sheet, so the checks still prove the page works. The two `gallery.html` navigations keep `load`, because their fixed sleeps time a watchdog that starts from the page load.
+
+**Checked here:** `node tools/verify/verify_audit_group1.mjs` passed every check in 2 of 2 runs after the change.
+
+**Handbook updated:** 07.
+
+**Status:** committed on `fix/ci-study-load-wait`; not yet deployed.
+
+---
+
 ## 2026-11-21 — Book reader fixes, un-quarantined book-reader suite, and shelf mid-upload cover tint
 
 **Why:** resolving the post-19-November audit leftovers uncovered four genuine book-reader bugs alongside stale waits/assertions in the quarantined `verify_book_reader.mjs` suite, plus a ~10-frame race window in `shelf.js` if `syncAccess()` fires while a volume's high-res textures are uploading.
@@ -31,7 +47,7 @@ Entry template:
 
 **Handbook updated:** 07.
 
-**Status:** ready for PR and CI deploy.
+**Status:** merged to `master` on 21 November 2026 (PR #53, `a52d02f`). Not deployed: the `master` run failed one browser check (see the 22 November entry).
 
 ## 2026-11-19 — Audit follow-ups: lazy weather, Strong's scroll, shelf highlight re-tint, task-flow close flush, NPS filter, animation polish, and a regression suite for all of it
 
