@@ -26,7 +26,7 @@ Entry template:
 
 **Handbook updated:** 07.
 
-**Status:** committed on `fix/ci-study-load-wait`; not yet deployed.
+**Status:** deployed on 22 November 2026. PR #55 merged to `master` as `7384ae8`; run `45000654344` passed `test`, `test-browser`, deploy and smoke by 08:38 UTC, and alert issue #54 closed.
 
 ---
 
@@ -47,7 +47,7 @@ Entry template:
 
 **Handbook updated:** 07.
 
-**Status:** merged to `master` on 21 November 2026 (PR #53, `a52d02f`). Not deployed: the `master` run failed one browser check (see the 22 November entry).
+**Status:** merged to `master` on 21 November 2026 (PR #53, `a52d02f`). Its own `master` run failed one browser check (see the 22 November entry). Deployed on 22 November 2026 together with PR #55, in run `45000654344`.
 
 ## 2026-11-19 — Audit follow-ups: lazy weather, Strong's scroll, shelf highlight re-tint, task-flow close flush, NPS filter, animation polish, and a regression suite for all of it
 
