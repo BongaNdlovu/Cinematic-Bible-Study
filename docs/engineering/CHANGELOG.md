@@ -14,6 +14,24 @@ Entry template:
 
 ---
 
+## 2026-11-22 — Browser-check runner prints every failing line
+
+**Why:** the `master` run for PR #56 (run `45059507042`, a docs-only change) failed because `verify_book_reader.mjs` failed 1 of 2,056 checks. `run_browser_checks.mjs` printed only the script's last 30 lines, which were all `PASS`, so the failing check could not be identified. CI kept no artifacts. The script passed 3 of 3 times locally (2,056 of 2,056 each) and in both PR #56 runs, so it was not reproduced.
+
+**What changed:**
+
+- `tools/verify/run_browser_checks.mjs`: new `summarizeOutput()`. For a failing script, the runner also prints up to 40 `FAIL` lines from before the last 30 lines.
+- `tests/unit/browser-check-output.test.mjs`: 4 new tests for `summarizeOutput()`.
+- No change to `verify_book_reader.mjs`: the failing check is not known, so it was not changed.
+
+**Checked here:** `npm run test:unit` 218 of 218; `node tools/verify/verify_wiring.mjs` exit 0; `node tools/verify/verify_book_reader.mjs` 3 of 3 runs, 2,056 of 2,056 checks each.
+
+**Handbook updated:** 07.
+
+**Status:** not yet deployed.
+
+---
+
 ## 2026-11-22 — Study-page checks in `verify_audit_group1.mjs` stop waiting for outside fonts
 
 **Why:** the first `master` run after PR #53 (run `44961050648`) failed 36 of 37 browser checks, so nothing deployed. `verify_audit_group1.mjs` timed out after 60 s at line 98, waiting for the `load` event of `study.html?sheet=10&preview=full`. The script passed 3 of 3 runs locally. Locally, the page's `load` came 1.8 to 6.4 s after navigation in 7 probes, and it waits for 7 requests to Google Fonts. A stalled outside request on the runner is the likely cause. Not checked: which request was open in CI, because the log does not record it.
