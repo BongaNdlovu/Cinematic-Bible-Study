@@ -30,7 +30,7 @@ async function slowAuth(context) {
   const page = await context.newPage();
   const errors = [];
   page.on('pageerror', (e) => errors.push(String(e.message || e)));
-  await page.goto(`${BASE}/study.html?sheet=5`, { waitUntil: 'load', timeout: 60000 });
+  await page.goto(`${BASE}/study.html?sheet=5`, { waitUntil: 'domcontentloaded', timeout: 60000 });
   await dismissConsent(page);
   await page.waitForFunction(() => {
     const a = document.getElementById('sheet-article');
@@ -95,7 +95,7 @@ async function slowAuth(context) {
   const context = await browser.newContext({ viewport: { width: 1440, height: 900 }, acceptDownloads: true });
   await context.addInitScript(signedInScript({ bookView: 'scroll' }));
   const page = await context.newPage();
-  await page.goto(`${BASE}/study.html?sheet=10&preview=full`, { waitUntil: 'load', timeout: 60000 });
+  await page.goto(`${BASE}/study.html?sheet=10&preview=full`, { waitUntil: 'domcontentloaded', timeout: 60000 });
   await dismissConsent(page);
   await page.waitForFunction(() => {
     const a = document.getElementById('sheet-article');
