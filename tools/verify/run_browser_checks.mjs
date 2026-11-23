@@ -7,6 +7,16 @@ import { ensureServer } from './_server.mjs';
 const here = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(here, '../..');
 const TIMEOUT_MS = 240000;
+const TAIL_LINES = 30;
+const MAX_FAIL_LINES = 40;
+const isFailLine = (line) => /^\s*FAIL\b/.test(line);
+
+export function summarizeOutput(output) {
+  const lines = output.trim().split('\n');
+  const tailStart = Math.max(0, lines.length - TAIL_LINES);
+  const earlierFails = lines.slice(0, tailStart).filter(isFailLine).slice(0, MAX_FAIL_LINES);
+  return { failLines: earlierFails, tail: lines.slice(tailStart).join('\n') };
+}
 
 export const BROWSER_CHECKS = [
   { file: 'verify_book_reader.mjs', base: 'flag', timeoutMs: 720000 },
@@ -71,7 +81,7 @@ function runOne(check, base) {
     child.on('close', (code) => {
       clearTimeout(timer);
       const status = timedOut ? 'TIMEOUT' : code === 0 ? 'PASS' : 'FAIL';
-      resolve({ file: check.file, status, seconds: Math.round((Date.now() - started) / 1000), tail: output.trim().split('\n').slice(-30).join('\n') });
+      resolve({ file: check.file, status, seconds: Math.round((Date.now() - started) / 1000), ...summarizeOutput(output) });
     });
   });
 }
@@ -99,7 +109,9 @@ async function main() {
       const result = await runOne(check, server.base);
       results.push(result);
       console.log('[' + result.status + '] ' + result.file + ' (' + result.seconds + 's)');
-      if (result.status !== 'PASS') console.log(result.tail.split('\n').map((l) => '    ' + l).join('\n'));
+      if (result.status === 'PASS') continue;
+      if (result.failLines.length) console.log(['    FAIL lines before the last ' + TAIL_LINES + ':', ...result.failLines].map((l) => '    ' + l.trim()).join('\n'));
+      console.log(result.tail.split('\n').map((l) => '    ' + l).join('\n'));
     }
   } finally {
     server.stop();
